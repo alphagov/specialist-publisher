@@ -1,17 +1,11 @@
 development:
-  sessions:
-    default:
-      hosts:
-        - localhost
-      database: govuk_content_development
-      persist_in_safe_mode: true
-      autocreate_indexes: true
+  host: localhost
+  database: govuk_content_production
+  persist_in_safe_mode: true
+  autocreate_indexes: true
 
 test:
-  sessions:
-    default:
-      hosts:
-        - localhost
-      # Don't want this interfering with a concurrent Panopticon test run
-      database: govuk_content_specialist_publisher_test
-      autocreate_indexes: true
+  host: localhost
+  # Don't want this interfering with a concurrent Panopticon test run
+  database: govuk_content_specialist_publisher_test
+  autocreate_indexes: true

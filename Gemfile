@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'rails', '4.0.2'
+gem 'rails', '3.2.16'
 
 gem 'exception_notification', '2.6.1'
 gem 'aws-ses', :require => 'aws/ses'
@@ -8,10 +8,16 @@ gem 'unicorn'
 
 gem 'gds-sso', '9.2.1'
 
-gem 'mongoid', github: 'mongoid/mongoid'
+gem 'mongoid', '2.5.2'
+
+if ENV['CONTENT_MODELS_DEV']
+  gem 'govuk_content_models', :path => '../govuk_content_models'
+else
+  gem "govuk_content_models"
+end
 
 group :assets do
-  gem 'sass-rails', '~> 4.0.0'
+  gem 'sass-rails', '3.2.6'
   gem 'uglifier', '>= 1.3.0'
 end
 
