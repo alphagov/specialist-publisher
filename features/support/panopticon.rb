@@ -1,4 +1,4 @@
-class MockPanopticon
+class FakePanopticon
   def create_artefact!(attributes = {})
     artefact = Artefact.new(attributes)
 
@@ -12,5 +12,5 @@ class MockPanopticon
 end
 
 def stub_out_panopticon
-  GdsApi::Panopticon.stub('new' => MockPanopticon.new)
+  GdsApi::Panopticon.stub('new' => FakePanopticon.new)
 end
