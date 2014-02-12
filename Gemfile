@@ -10,10 +10,12 @@ gem 'gds-sso', '9.2.1'
 
 gem 'mongoid', '2.5.2'
 
+gem 'generic_form_builder', '0.4.5'
+
 if ENV['CONTENT_MODELS_DEV']
   gem 'govuk_content_models', :path => '../govuk_content_models'
 else
-  gem "govuk_content_models"
+  gem "govuk_content_models", '6.4.0'
 end
 
 group :assets do
@@ -25,6 +27,7 @@ gem 'debugger', group: [:development, :test]
 
 group :test do
   gem 'cucumber-rails', '1.4.0', require: false
+  gem 'launchy'
   gem 'rspec-rails', '2.14.1'
   gem 'factory_girl', '4.3.0'
   gem 'database_cleaner', '1.2.0'
