@@ -4,7 +4,7 @@ class SpecialistDocument
 
   ATTRIBUTES = [:id, :title, :summary, :body, :state, :updated_at]
 
-  def initialize(attributes)
+  def initialize(attributes = nil)
     attributes ||= {}
 
     ATTRIBUTES.each do |attribute|
