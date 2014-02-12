@@ -16,7 +16,7 @@ class SpecialistDocumentRegistry
     SpecialistDocument.new(id: id, title: edition.title, summary: edition.summary, state: edition.state)
   end
 
-  def self.store(document)
+  def self.store!(document)
     new(document).store!
   end
 
@@ -31,6 +31,24 @@ class SpecialistDocumentRegistry
     end
 
     update_edition
+  rescue GdsApi::HTTPErrorResponse => e
+    if e.code == 422
+      errors = e.error_details['errors'].with_indifferent_access
+      errors[:title] = errors.delete(:name)
+      document.errors = errors
+      raise InvalidDocumentError.new("Can't store an invalid document", document)
+    else
+      raise e
+    end
+  end
+
+  class InvalidDocumentError < Exception
+    def initialize(message, document)
+      super(message)
+      @document = document
+    end
+
+    attr_reader :document
   end
 
 protected

@@ -7,17 +7,16 @@ class SpecialistDocumentsController < ApplicationController
   def edit; end
 
   def create
-    if document.valid?
-      SpecialistDocumentRegistry.store(document)
-      redirect_to specialist_documents_path
-    else
-      render :new
-    end
+    SpecialistDocumentRegistry.store!(document)
+    redirect_to specialist_documents_path
+  rescue SpecialistDocumentRegistry::InvalidDocumentError => e
+    @document = e.document
+    render :new
   end
 
   def update
     if document.valid?
-      SpecialistDocumentRegistry.store(document)
+      SpecialistDocumentRegistry.store!(document)
       redirect_to specialist_documents_path
     else
       render :edit

@@ -10,9 +10,12 @@ class SpecialistDocument
     ATTRIBUTES.each do |attribute|
       send("#{attribute}=", attributes[attribute])
     end
+
+    @errors = Hash.new({})
   end
 
   attr_accessor *ATTRIBUTES
+  attr_accessor :errors
 
   def slug
     "cma-cases/#{slug_from_title}"
@@ -23,11 +26,7 @@ class SpecialistDocument
   end
 
   def valid?
-    true
-  end
-
-  def errors
-    Hash.new({})
+    errors.empty?
   end
 
   def persisted?

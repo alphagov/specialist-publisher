@@ -1,7 +1,13 @@
 class MockPanopticon
   def create_artefact!(attributes = {})
-    artefact = Artefact.create!(attributes)
-    {'id' => artefact.id}
+    artefact = Artefact.new(attributes)
+
+    if artefact.valid?
+      artefact.save!
+      return {'id' => artefact.id}
+    else
+      raise GdsApi::HTTPErrorResponse.new(422, 'errors' => artefact.errors.messages)
+    end
   end
 end
 

@@ -11,3 +11,11 @@ end
 def check_cma_case_exists_with(attributes)
   assert SpecialistDocumentEdition.exists?(conditions: attributes)
 end
+
+def check_for_missing_title_error
+  page.should have_content("Title can't be blank")
+end
+
+def check_cma_case_does_not_exist_with(attributes)
+  refute SpecialistDocumentEdition.exists?(conditions: attributes)
+end
