@@ -7,23 +7,22 @@ class SpecialistDocumentsController < ApplicationController
   def edit; end
 
   def create
+    store_document_and_redirect(fallback_action: 'new')
+  end
+
+  def update
+    store_document_and_redirect(fallback_action: 'edit')
+  end
+
+protected
+
+  def store_document_and_redirect(fallback_action: 'index')
     SpecialistDocumentRegistry.store!(document)
     redirect_to specialist_documents_path
   rescue SpecialistDocumentRegistry::InvalidDocumentError => e
     @document = e.document
-    render :new
+    render fallback_action
   end
-
-  def update
-    if document.valid?
-      SpecialistDocumentRegistry.store!(document)
-      redirect_to specialist_documents_path
-    else
-      render :edit
-    end
-  end
-
-protected
 
   def document
     @document ||= if params[:id]
