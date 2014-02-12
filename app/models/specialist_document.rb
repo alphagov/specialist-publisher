@@ -2,7 +2,7 @@ class SpecialistDocument
   include ActiveModel::Conversion
   extend ActiveModel::Naming
 
-  ATTRIBUTES = [:id, :title, :summary, :body, :state]
+  ATTRIBUTES = [:id, :title, :summary, :body, :state, :updated_at]
 
   def initialize(attributes)
     attributes ||= {}

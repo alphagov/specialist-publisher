@@ -19,3 +19,7 @@ end
 def check_cma_case_does_not_exist_with(attributes)
   refute SpecialistDocumentEdition.exists?(conditions: attributes)
 end
+
+def check_for_cma_cases(*titles)
+  page.should have_content(Regexp.new(titles.join('.+')))
+end

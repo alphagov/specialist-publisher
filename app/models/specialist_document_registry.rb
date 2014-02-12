@@ -2,10 +2,16 @@ require "gds_api/panopticon"
 
 class SpecialistDocumentRegistry
 
+  def self.all
+    Artefact.where(kind: 'specialist-document').desc(:updated_at).map do |artefact|
+      self.fetch(artefact.id)
+    end
+  end
+
   def self.fetch(id, version: nil)
     return nil unless Artefact.find(id)
 
-    editions = SpecialistDocumentEdition.where(panopticon_id: panopticon_id).order(:created_at)
+    editions = SpecialistDocumentEdition.where(panopticon_id: id).order(:created_at)
 
     edition = if version
       editions.where(version_number: version).last
@@ -13,7 +19,7 @@ class SpecialistDocumentRegistry
       editions.last
     end
 
-    SpecialistDocument.new(id: id, title: edition.title, summary: edition.summary, state: edition.state)
+    SpecialistDocument.new(id: id, title: edition.title, summary: edition.summary, state: edition.state, updated_at: edition.updated_at)
   end
 
   def self.store!(document)

@@ -14,3 +14,7 @@ Feature: Creating and editing a CMA case
     When I create a CMA case without one of the required fields
     Then I should see an error message about a missing field
     And the CMA case should not have been created
+
+  Scenario: Can view a list of all cases in the publisher
+    Given two CMA cases exist
+    Then the CMA cases should be in the publisher case index in the correct order

@@ -6,30 +6,18 @@
   </div>
   <div class="col-md-9">
     <ul class="document-list">
-      <li class="document">
-        <a href="#" class="document-title">My document about salmon fishing</a>
-        <ul class="metadata">
-          <li>updated 7 days ago</li>
-          <li>draft</li>
-          <li class="actions"><a href="#edit">edit</a></li>
-        </ul>
-      </li>
-      <li class="document">
-        <a href="#" class="document-title">My document about salmon fishing</a>
-        <ul class="metadata">
-          <li>updated 7 days ago</li>
-          <li><span class="published">published</span></li>
-          <li class="actions"><a href="#edit">edit</a></li>
-        </ul>
-      </li>
-      <li class="document">
-        <a href="#" class="document-title">My document about salmon fishing</a>
-        <ul class="metadata">
-          <li>updated 7 days ago</li>
-          <li><span class="published">published</span> with new draft</li>
-          <li class="actions"><a href="#edit">edit</a></li>
-        </ul>
-      </li>
+      <% documents.each do |document| %>
+        <li class="document">
+          <%= link_to document.title, edit_specialist_document_path(document.id), class: 'document-title' %>
+          <ul class="metadata">
+            <li>updated 7 days ago</li>
+            <li>draft</li>
+            <li class="actions">
+              <%= link_to 'edit', edit_specialist_document_path(document.id) %>
+            </li>
+          </ul>
+        </li>
+      <% end %>
     </ul>
   </div>
 </div>

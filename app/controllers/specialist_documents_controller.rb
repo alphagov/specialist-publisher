@@ -33,4 +33,9 @@ protected
   end
   helper_method :document
 
+  def documents
+    @documents ||= SpecialistDocumentRegistry.all
+  end
+  helper_method :documents
+
 end

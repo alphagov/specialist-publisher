@@ -30,6 +30,17 @@ def create_cma_case(fields)
   save_document
 end
 
+Given(/^two CMA cases exist$/) do
+  stub_out_panopticon
+
+  2.times do |index|
+    doc = SpecialistDocument.new(title: "Specialist Document #{index+1}")
+    SpecialistDocumentRegistry.store!(doc)
+
+    Timecop.travel(10.minutes.from_now)
+  end
+end
+
 Then(/^the CMA case should exist$/) do
   check_cma_case_exists_with(@cma_fields)
 end
@@ -40,4 +51,10 @@ end
 
 Then(/^the CMA case should not have been created$/) do
   check_cma_case_does_not_exist_with(@cma_fields)
+end
+
+Then(/^the CMA cases should be in the publisher case index in the correct order$/) do
+  visit specialist_documents_path
+
+  check_for_cma_cases("Specialist Document 2", "Specialist Document 1")
 end
