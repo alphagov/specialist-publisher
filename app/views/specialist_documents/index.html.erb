@@ -1,1 +1,35 @@
-<%= link_to "New document", new_specialist_document_path %>
+<h1 class="page-header">Your documents</h1>
+
+<div class="row">
+  <div class="sidebar col-md-3">
+    <%= link_to "New document", new_specialist_document_path %>
+  </div>
+  <div class="col-md-9">
+    <ul class="document-list">
+      <li class="document">
+        <a href="#" class="document-title">My document about salmon fishing</a>
+        <ul class="metadata">
+          <li>updated 7 days ago</li>
+          <li>draft</li>
+          <li class="actions"><a href="#edit">edit</a></li>
+        </ul>
+      </li>
+      <li class="document">
+        <a href="#" class="document-title">My document about salmon fishing</a>
+        <ul class="metadata">
+          <li>updated 7 days ago</li>
+          <li><span class="published">published</span></li>
+          <li class="actions"><a href="#edit">edit</a></li>
+        </ul>
+      </li>
+      <li class="document">
+        <a href="#" class="document-title">My document about salmon fishing</a>
+        <ul class="metadata">
+          <li>updated 7 days ago</li>
+          <li><span class="published">published</span> with new draft</li>
+          <li class="actions"><a href="#edit">edit</a></li>
+        </ul>
+      </li>
+    </ul>
+  </div>
+</div>

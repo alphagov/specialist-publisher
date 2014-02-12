@@ -1,0 +1,31 @@
+.navbar {
+  border-radius: 0;
+}
+
+.document-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+
+  .document {
+    border-bottom: 1px solid #999;
+    padding: 10px 0;
+  }
+  .document-title {
+    font-size: 19px;
+    display: block;
+  }
+  .metadata {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+
+    li {
+      display: inline-block;
+      width: 180px;
+    }
+    .published {
+      font-weight: bold;
+    }
+  }
+}
