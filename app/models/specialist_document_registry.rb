@@ -8,13 +8,13 @@ class SpecialistDocumentRegistry
     end.compact
   end
 
-  def self.fetch(id, version: nil)
+  def self.fetch(id, version_number: nil)
     return nil unless Artefact.find(id)
 
     editions = SpecialistDocumentEdition.where(panopticon_id: id).order(:created_at)
 
-    edition = if version
-      editions.where(version_number: version).last
+    edition = if version_number
+      editions.where(version_number: version_number).last
     else
       editions.last
     end
@@ -26,6 +26,15 @@ class SpecialistDocumentRegistry
 
   def self.store!(document)
     new(document).store!
+  end
+
+  def self.publish!(document)
+    raise InvalidDocumentError.new("Can't publish a non-existant document", document) if document.id.nil?
+    latest_edition = SpecialistDocumentEdition.where(panopticon_id: document.id).last
+
+    unless latest_edition.published?
+      latest_edition.emergency_publish
+    end
   end
 
   def initialize(document)

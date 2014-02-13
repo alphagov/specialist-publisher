@@ -8,6 +8,10 @@ def save_document
   click_on "Save as draft"
 end
 
+def publish_document
+  click_on "Save and publish"
+end
+
 def check_cma_case_exists_with(attributes)
   assert SpecialistDocumentEdition.exists?(conditions: attributes)
 end
@@ -22,4 +26,9 @@ end
 
 def check_for_cma_cases(*titles)
   page.should have_content(Regexp.new(titles.join('.+')))
+end
+
+def go_to_edit_page_for_most_recent_case
+  artefact = Artefact.where(kind: 'specialist-document').last
+  visit edit_specialist_document_path(artefact.id)
 end

@@ -16,6 +16,7 @@ class SpecialistDocumentsController < ApplicationController
 
   def update
     SpecialistDocumentRegistry.store!(document)
+    SpecialistDocumentRegistry.publish!(document) if params.has_key?('publish')
     redirect_to specialist_documents_path
   rescue SpecialistDocumentRegistry::InvalidDocumentError => e
     @document = e.document

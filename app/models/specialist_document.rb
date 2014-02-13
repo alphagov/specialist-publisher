@@ -26,7 +26,7 @@ class SpecialistDocument
   end
 
   def persisted?
-    false
+    id.present?
   end
 
 protected

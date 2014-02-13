@@ -31,9 +31,16 @@ def create_cma_case(fields)
 end
 
 Given(/^two CMA cases exist$/) do
-  stub_out_panopticon
+  create_cases(2)
+end
 
-  2.times do |index|
+Given(/^a CMA case exists in draft$/) do
+  create_cases(1)
+end
+
+def create_cases(number_of_cases)
+  stub_out_panopticon
+  number_of_cases.times do |index|
     doc = SpecialistDocument.new(title: "Specialist Document #{index+1}")
     SpecialistDocumentRegistry.store!(doc)
 
