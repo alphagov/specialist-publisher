@@ -8,13 +8,13 @@ class SpecialistDocumentRegistry
     end.compact
   end
 
-  def self.fetch(id, version: nil)
+  def self.fetch(id, version_number: nil)
     return nil unless Artefact.find(id)
 
     editions = SpecialistDocumentEdition.where(panopticon_id: id).order(:created_at)
 
-    edition = if version
-      editions.where(version_number: version).last
+    edition = if version_number
+      editions.where(version_number: version_number).last
     else
       editions.last
     end

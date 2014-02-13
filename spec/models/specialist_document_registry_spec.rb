@@ -31,7 +31,7 @@ describe SpecialistDocumentRegistry do
     end
 
     it "loads a particular edition if version is specified" do
-      SpecialistDocumentRegistry.fetch(@artefact.id, version: 2).title.should == @edition_2.title
+      SpecialistDocumentRegistry.fetch(@artefact.id, version_number: 2).title.should == @edition_2.title
     end
   end
 
