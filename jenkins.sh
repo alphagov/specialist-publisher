@@ -30,7 +30,7 @@ function error_handler {
 trap "error_handler ${LINENO}" ERR
 github_status "$REPO_NAME" pending "is running on Jenkins"
 
-bundle install --path "${HOME}/bundles/${JOB_NAME}" --deployment
+bundle install --path "${HOME}/bundles/${JOB_NAME}" --deployment --without development
 RAILS_ENV=test bundle exec cucumber && bundle exec rspec spec/
 
 export EXIT_STATUS=$?
