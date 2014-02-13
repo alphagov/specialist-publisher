@@ -5,7 +5,7 @@ class SpecialistDocumentRegistry
   def self.all
     Artefact.where(kind: 'specialist-document').desc(:updated_at).map do |artefact|
       self.fetch(artefact.id)
-    end
+    end.compact
   end
 
   def self.fetch(id, version: nil)
@@ -19,7 +19,9 @@ class SpecialistDocumentRegistry
       editions.last
     end
 
-    SpecialistDocument.new(id: id, title: edition.title, summary: edition.summary, state: edition.state, updated_at: edition.updated_at)
+    return nil if edition.nil?
+
+    SpecialistDocument.new(id: id, title: edition.title, summary: edition.summary, updated_at: edition.updated_at)
   end
 
   def self.store!(document)
@@ -83,8 +85,12 @@ protected
 
     if latest_edition.nil?
       SpecialistDocumentEdition.new(panopticon_id: document.id, state: 'draft')
-    elsif document.published?
-      SpecialistDocumentEdition.new(panopticon_id: document.id, state: 'draft', version_number: (latest_edition.version_number + 1))
+    else
+      if latest_edition.published?
+        SpecialistDocumentEdition.new(panopticon_id: document.id, state: 'draft', version_number: (latest_edition.version_number + 1))
+      else
+        latest_edition
+      end
     end
   end
 

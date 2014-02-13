@@ -2,7 +2,7 @@ class SpecialistDocument
   include ActiveModel::Conversion
   extend ActiveModel::Naming
 
-  ATTRIBUTES = [:id, :title, :summary, :body, :state, :updated_at]
+  ATTRIBUTES = [:id, :title, :summary, :body, :updated_at]
 
   def initialize(attributes = nil)
     attributes ||= {}
@@ -19,10 +19,6 @@ class SpecialistDocument
 
   def slug
     "cma-cases/#{slug_from_title}"
-  end
-
-  def published?
-    state == 'published'
   end
 
   def valid?
