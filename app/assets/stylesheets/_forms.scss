@@ -1,0 +1,14 @@
+form {
+  margin-bottom: 60px;
+
+  label {
+    display: block;
+  }
+  input, textarea {
+    width: 100%;
+  }
+  .short-textarea {
+    height: 50px;
+  }
+}
+

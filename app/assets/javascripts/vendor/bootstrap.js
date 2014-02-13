@@ -1,0 +1,12 @@
+//= require vendor/bootstrap/affix
+//= require vendor/bootstrap/alert
+//= require vendor/bootstrap/button
+//= require vendor/bootstrap/carousel
+//= require vendor/bootstrap/collapse
+//= require vendor/bootstrap/dropdown
+//= require vendor/bootstrap/tab
+//= require vendor/bootstrap/transition
+//= require vendor/bootstrap/scrollspy
+//= require vendor/bootstrap/modal
+//= require vendor/bootstrap/tooltip
+//= require vendor/bootstrap/popover

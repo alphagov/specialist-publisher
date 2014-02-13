@@ -1,0 +1,173 @@
+<div class="govspeak-help">
+<h3>Writing style</h3>
+<p>For style, see the <a href="https://www.gov.uk/designprinciples/styleguide">style guide</a></p>
+
+<h2>Formatting help</h2>
+
+<h3><a data-toggle="collapse" data-target="#govspeak-headings">Headings</a></h3>
+<div class="collapse" id="govspeak-headings">
+  <pre>## Top level heading - H2
+### Second level heading - H3
+#### Third level heading - H4
+
+Don't use a single # - this is H1 and is for the title only</pre>
+</div>
+
+<h3><a data-toggle="collapse" data-target="#govspeak-links">Links</a></h3>
+<div class="collapse" id="govspeak-links" style="height: auto;">
+  <p>
+    All documents created in the publisher - policies, publications, news, speeches, detailed guides etc -
+    should be linked to using absolute admin paths or full public URLs:
+  </p>
+  <pre>[an admin path](/government/admin/policies/12345)
+[a public URL](https://www.gov.uk/government/policies/example-policy)</pre>
+
+  <p>All content created under an organisation tab - collection pages, topics, organisations, people, roles etc - should be linked to using the full, public URLs:</p>
+  <pre>[link text](https://www.gov.uk/government/topics/climate-change)</pre>
+
+  <p>For external websites, use the full URL including http://:</p>
+  <pre>[link text](http://www.example.com)</pre>
+  <p>The link will display with an external link symbol.</p>
+
+  <h4>Linking to paragraphs</h4>
+  <p>
+    If you want to link to specific paragraphs within a document, you need to mark the paragraph as linkable
+    by placing an anchor tag <strong>below</strong> the paragraph:
+  </p>
+<pre>Stocks of some fish species are very low. For example, stocks of European Eel have declined by about 95% over the last 30 years.
+{:#eel-decline}
+</pre>
+
+  <p>The paragraph can then be linked to from the same document:</p>
+  <pre>[Sample link text](#eel-decline)</pre>
+
+  <p>or from another document:</p>
+  <pre>[Sample link text](https://www.gov.uk/government/policies/managing-freshwater-fisheries#eel-decline)</pre>
+</div>
+
+<h3><a data-toggle="collapse" data-target="#govspeak-bullets">Bullets</a></h3>
+<div class="collapse" id="govspeak-bullets" style="height: 0px;">
+  <pre>* item 1
+* item 2
+  * sub-item
+  * another sub-item
+(to indent, add 2 spaces)</pre>
+</div>
+
+<h3><a data-toggle="collapse" data-target="#govspeak-numbered-list">Numbered list</a></h3>
+<div class="collapse" id="govspeak-numbered-list" style="height: 0px;">
+  <pre>1. item 1
+2. item 2
+3. item 3
+  * sub-item
+  * another sub-item
+(to indent, add 2 spaces)</pre>
+</div>
+
+<h3><a data-toggle="collapse" data-target="#govspeak-images">Images</a></h3>
+<div class="collapse" id="govspeak-images">
+  <p>First upload your image(s), then:</p>
+  <pre>!!<em>n</em></pre>
+  <p>e.g. for the first image:</p>
+  <pre>!!1</pre>
+</div>
+
+<h3><a data-toggle="collapse" data-target="#govspeak-video-links">Video links</a></h3>
+<div class="collapse" id="govspeak-video-links" style="height: 0px;">
+  <p>Use the title of the video and the URL of the YouTube page that shows the video for watching. Don’t use the embed code or the 'Share this video' URL:</p>
+  <pre>[title of video](youtube-video-url)</pre>
+  <p>Only YouTube videos will work at present:</p>
+  <pre>[The Queen's Diamond Jubilee Concert](http://www.youtube.com/watch?v=OXHPWmnycno)</pre>
+  <p>The title text does not show. The video will display in an embedded media player automatically.</p>
+</div>
+
+
+<h3><a data-toggle="collapse" data-target="#govspeak-tables">Tables</a></h3>
+<div class="collapse" id="govspeak-tables">
+  <p>Tables can be inserted by splitting your content into cells:</p>
+  <pre>| name | colour |
+|--------|-------|
+| apple | green |
+| banana | yellow |</pre>
+
+<p>You can also use a shorthand version of the markdown, which will produce exactly the same output:</p>
+  <pre>name | colour
+-|-
+apple | green
+banana | yellow</pre>
+</div>
+
+<h3><a data-toggle="collapse" data-target="#govspeak-charts">Charts</a></h3>
+<div class="collapse" id="govspeak-charts">
+  <p>Numeric data can be shown as a simple bar chart. Grouped bars are used for multiple columns.</p>
+  <pre>Department   | Short Speeches | Long Speeches
+-|-|-
+Department 1 | 6              | 6
+Department 2 | 6              | 8
+Department 3 | 18             | 2
+{barchart}</pre>
+  <p>Stacked bars can be created. The final column is used to display the total.</p>
+  <pre>Department | Short Speeches | Long Speeches | Total
+-|-|-|-
+Dept 1     | 6              | 6             | 12
+Dept 2     | 6              | 8             | 14
+Dept 3     | 18             | 2             | 20
+{barchart stacked}</pre>
+  <p>Large graphs can be displayed compactly to save space.</p>
+  <pre>Department   | Short Speeches | Long Speeches
+-|-|-
+Department 1 | 6              | 6
+Department 2 | 6              | 8
+Department 3 | 18             | 2
+Department 4 | 5              | 4
+Department 4 | 7              | 7
+Department 6 | 11             | 1
+{barchart compact}</pre>
+  <p>If you include negative values, you must indicate this.</p>
+  <pre>Department   | Change in Number of Buildings
+-|-
+Department 1 | -12
+Department 1 | 3
+Department 1 | -4
+Department 1 | 2
+{barchart negative}</pre>
+  <p>All effects can be combined.</p>
+</div>
+
+<h3><a data-toggle="collapse" data-target="#govspeak-cta">Call to action</a></h3>
+<div class="collapse" id="govspeak-cta" style="height: 0px;">
+  <pre>$CTA
+[Use the trade tariff tool to find commodity codes.](https://www.gov.uk/trade-tariff)
+$CTA</pre>
+</div>
+
+<h3><a data-toggle="collapse" data-target="#govspeak-acronyms">Acronyms</a></h3>
+<div class="collapse" id="govspeak-acronyms">
+  <pre>*[DWP]: Department for Work and Pensions</pre>
+</div>
+
+<h3><a data-toggle="collapse" data-target="#govspeak-blockquotes">Blockquotes</a></h3>
+<div class="collapse" id="govspeak-blockquotes" style="height: 0px;">
+  <pre>As the Prime Minister said:
+
+&gt; Rule, Britannia, rule the waves.
+&gt;
+&gt; Britons never shall be slaves.</pre>
+  <p>The &gt; in the line space is important. If you leave it out you will get 2 separate quotes, not 1 running quote.</p>
+</div>
+
+<h3><a data-toggle="collapse" data-target="#govspeak-addresses">Addresses</a></h3>
+<div class="collapse" id="govspeak-addresses" style="height: 0px;">
+  <pre>$A
+Address
+Only
+Here
+$A</pre>
+
+  <p>You can also embed contact information:</p>
+  <pre>[Contact:<em>n</em>]</pre>
+  <p>(n is the ID of the contact you want to embed.)</p>
+  <p>You can find the ID on the list of contacts for an <a href="/government/admin/organisations">organisation</a> or <a href="/government/admin/worldwide_organisations">worldwide organisation</a> or you can type '[Contact: ' and then type a keyword to find your contact (if it exists).</p>
+  <p>If it doesn't exist you will have to add it (see your ‘Publishing explained’ guidance). </p>
+</div>
+</div>
