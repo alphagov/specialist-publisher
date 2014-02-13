@@ -31,7 +31,7 @@ trap "error_handler ${LINENO}" ERR
 github_status "$REPO_NAME" pending "is running on Jenkins"
 
 bundle install --path "${HOME}/bundles/${JOB_NAME}" --deployment
-RAILS_ENV=test bundle exec rake test
+RAILS_ENV=test bundle exec cucumber && bundle exec rspec spec/
 
 export EXIT_STATUS=$?
 
