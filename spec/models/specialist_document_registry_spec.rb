@@ -7,10 +7,10 @@ describe SpecialistDocumentRegistry do
       irrelevant_artefact = FactoryGirl.create(:artefact, kind: 'publication', slug: 'government/whatever', owning_app: 'whitehall')
       FactoryGirl.create(:specialist_document_edition, panopticon_id: irrelevant_artefact.id)
 
-      relevant_artefact_1 = FactoryGirl.create(:specialist_document_artefact, updated_at: 2.days.ago)
-      relevant_artefact_2 = FactoryGirl.create(:specialist_document_artefact, updated_at: 1.day.ago)
-      @edition_1 = FactoryGirl.create(:specialist_document_edition, panopticon_id: relevant_artefact_1.id)
-      @edition_2 = FactoryGirl.create(:specialist_document_edition, panopticon_id: relevant_artefact_2.id)
+      @edition_1, @edition_2 = [2, 1].map do |days_ago|
+        artefact = FactoryGirl.create(:specialist_document_artefact, updated_at: days_ago.days.ago)
+        FactoryGirl.create(:specialist_document_edition, panopticon_id: artefact.id)
+      end
     end
 
     it "returns documents for all relevant artefacts by date updated desc" do
@@ -21,9 +21,9 @@ describe SpecialistDocumentRegistry do
   describe ".fetch(id, version: nil)" do
     before do
       @artefact = FactoryGirl.create(:specialist_document_artefact)
-      FactoryGirl.create(:specialist_document_edition, panopticon_id: @artefact.id)
-      @edition_2 = FactoryGirl.create(:specialist_document_edition, panopticon_id: @artefact.id, version_number: 2)
-      @edition_3 = FactoryGirl.create(:specialist_document_edition, panopticon_id: @artefact.id, version_number: 3)
+      @edition_1, @edition_2, @edition_3 = 1.upto(3).map do |i|
+        FactoryGirl.create(:specialist_document_edition, panopticon_id: @artefact.id, version_number: i)
+      end
     end
 
     it "returns the document loaded from the latest edition if no version given" do
