@@ -28,6 +28,15 @@ class SpecialistDocumentRegistry
     new(document).store!
   end
 
+  def self.publish!(document)
+    raise InvalidDocumentError.new("Can't publish a non-existant document", document) if document.id.nil?
+    latest_edition = SpecialistDocumentEdition.where(panopticon_id: document.id).last
+
+    unless latest_edition.published?
+      latest_edition.emergency_publish
+    end
+  end
+
   def initialize(document)
     @document = document
   end

@@ -35,13 +35,13 @@ describe SpecialistDocumentRegistry do
     end
   end
 
-  describe ".store!(document)" do
+  context "when the document doesn't exist" do
     before do
       @document = SpecialistDocument.new(title: "Example document about oil reserves")
       stub_out_panopticon
     end
 
-    context "when the document doesn't exist" do
+    describe ".store!(document)" do
       it "creates an artefact and an edition at version 1" do
         SpecialistDocumentRegistry.store!(@document)
 
@@ -55,13 +55,22 @@ describe SpecialistDocumentRegistry do
       end
     end
 
-    context "when the document exists in draft" do
-      before do
-        artefact = FactoryGirl.create(:specialist_document_artefact)
-        @document.id = artefact.id
-        @draft_edition = FactoryGirl.create(:specialist_document_edition, panopticon_id: artefact.id)
+    describe ".publish!(document)" do
+      it "raises an InvalidDocumentError" do
+        expect { SpecialistDocumentRegistry.publish!(@document) }.to raise_error(SpecialistDocumentRegistry::InvalidDocumentError)
       end
+    end
+  end
 
+  context "when the document exists in draft" do
+    before do
+      @document = SpecialistDocument.new(title: "Example document about oil reserves")
+      artefact = FactoryGirl.create(:specialist_document_artefact)
+      @document.id = artefact.id
+      @draft_edition = FactoryGirl.create(:specialist_document_edition, panopticon_id: artefact.id, state: 'draft')
+    end
+
+    describe ".store!(document)" do
       it "updates the draft edition and keeps the same version number" do
         original_edition_version = @draft_edition.version_number
 
@@ -73,13 +82,24 @@ describe SpecialistDocumentRegistry do
       end
     end
 
-    context "when the document exists and is published" do
-      before do
-        artefact = FactoryGirl.create(:specialist_document_artefact, state: 'live')
-        @document.id = artefact.id
-        @published_edition = FactoryGirl.create(:specialist_document_edition, panopticon_id: artefact.id, state: 'published')
+    describe ".publish!(document)" do
+      it "transitions the draft edition to published" do
+        SpecialistDocumentRegistry.publish!(@document)
+        @draft_edition.reload
+        @draft_edition.state.should == 'published'
       end
+    end
+  end
 
+  context "when the document exists and is published" do
+    before do
+      @document = SpecialistDocument.new(title: "Example document about oil reserves")
+      artefact = FactoryGirl.create(:specialist_document_artefact, state: 'live')
+      @document.id = artefact.id
+      @published_edition = FactoryGirl.create(:specialist_document_edition, panopticon_id: artefact.id, state: 'published')
+    end
+
+    describe ".store!(document)" do
       it "creates a new edition in draft with an incremented version number" do
         original_edition_title = @published_edition.title
         original_edition_version = @published_edition.version_number
@@ -97,6 +117,15 @@ describe SpecialistDocumentRegistry do
 
         new_edition.title.should == @document.title
         new_edition.version_number.should == @published_edition.version_number + 1
+      end
+    end
+
+    describe ".publish!(document)" do
+      it "does nothing" do
+        SpecialistDocumentRegistry.publish!(@document)
+
+        editions = SpecialistDocumentEdition.where(panopticon_id: @document.id)
+        editions.count.should == 1
       end
     end
   end
