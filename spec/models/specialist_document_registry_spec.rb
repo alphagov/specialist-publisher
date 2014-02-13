@@ -18,7 +18,7 @@ describe SpecialistDocumentRegistry do
     end
   end
 
-  describe ".fetch(id, version: nil)" do
+  describe ".fetch" do
     before do
       @artefact = FactoryGirl.create(:specialist_document_artefact)
       @edition_1, @edition_2, @edition_3 = 1.upto(3).map do |i|
@@ -26,11 +26,11 @@ describe SpecialistDocumentRegistry do
       end
     end
 
-    it "returns the document loaded from the latest edition if no version given" do
+    it "loads the latest edition by default" do
       SpecialistDocumentRegistry.fetch(@artefact.id).title.should == @edition_3.title
     end
 
-    it "returns the document loaded from the requested edition if a version is given" do
+    it "loads a particular edition if version is specified" do
       SpecialistDocumentRegistry.fetch(@artefact.id, version: 2).title.should == @edition_2.title
     end
   end
