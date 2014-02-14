@@ -3,6 +3,12 @@
     <%= f.text_field :title %>
     <%= f.text_area :summary, class: 'short-textarea' %>
     <%= f.text_area :body %>
+    <%= f.text_field :opened_date, placeholder: '2012-04-23' %>
+    <%= f.text_field :closed_date, placeholder: '2013-10-19' %>
+    <%= f.select :case_type, document.case_type_options %>
+    <%= f.select :case_state, document.case_state_options %>
+    <%= f.select :market_sector, document.market_sector_options %>
+    <%= f.select :outcome_type, document.outcome_type_options %>
 
     <button name='draft'>Save as draft</button>
     <button name='publish'>Save and publish</button>

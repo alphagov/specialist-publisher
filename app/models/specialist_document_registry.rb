@@ -21,7 +21,19 @@ class SpecialistDocumentRegistry
 
     return nil if edition.nil?
 
-    SpecialistDocument.new(id: id, title: edition.title, summary: edition.summary, updated_at: edition.updated_at)
+    SpecialistDocument.new(
+      id: id,
+      title: edition.title,
+      summary: edition.summary,
+      body: edition.body,
+      opened_date: edition.opened_date,
+      closed_date: edition.closed_date,
+      case_type: edition.case_type,
+      case_state: edition.case_state,
+      market_sector: edition.market_sector,
+      outcome_type: edition.outcome_type,
+      updated_at: edition.updated_at
+    )
   end
 
   def self.store!(document)
@@ -84,6 +96,12 @@ protected
     draft.title = document.title
     draft.summary = document.summary
     draft.body = document.body
+    draft.opened_date = document.opened_date
+    draft.closed_date = document.closed_date
+    draft.case_type = document.case_type
+    draft.case_state = document.case_state
+    draft.market_sector = document.market_sector
+    draft.outcome_type = document.outcome_type
 
     draft.save!
   end
