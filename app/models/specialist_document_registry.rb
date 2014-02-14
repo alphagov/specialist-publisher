@@ -72,10 +72,9 @@ class SpecialistDocumentRegistry
     artefact = Artefact.find(document.id)
     latest_edition = SpecialistDocumentEdition.where(panopticon_id: document.id).last
 
-
     latest_edition.emergency_publish unless latest_edition.published?
 
-    update_artefact unless artefact.live?
+    update_artefact('live') unless artefact.live?
   end
 
   class InvalidDocumentError < Exception
@@ -110,8 +109,8 @@ protected
     panopticon_api.create_artefact!(name: document.title, slug: document.slug, kind: 'specialist-document', owning_app: 'specialist-publisher')
   end
 
-  def update_artefact
-    panopticon_api.put_artefact!(document.id, name: document.title, slug: document.slug, kind: 'specialist-document', owning_app: 'specialist-publisher')
+  def update_artefact(state)
+    panopticon_api.put_artefact!(document.id, name: document.title, slug: document.slug, kind: 'specialist-document', owning_app: 'specialist-publisher', state: state)
   end
 
   def panopticon_api
