@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 
 gem 'rails', '3.2.16'
 
-gem 'exception_notification', '2.6.1'
+gem "airbrake", "3.1.15"
 gem 'unicorn'
 
 gem 'gds-sso', '9.2.1'
