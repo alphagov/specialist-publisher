@@ -9,7 +9,7 @@ gem 'gds-sso', '9.2.1'
 
 gem 'mongoid', '2.5.2'
 
-gem 'generic_form_builder', '0.7.0'
+gem 'generic_form_builder', '0.7.1'
 
 if ENV['CONTENT_MODELS_DEV']
   gem 'govuk_content_models', :path => '../govuk_content_models'
