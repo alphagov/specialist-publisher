@@ -30,11 +30,8 @@ class SpecialistDocumentRegistry
 
   def self.publish!(document)
     raise InvalidDocumentError.new("Can't publish a non-existant document", document) if document.id.nil?
-    latest_edition = SpecialistDocumentEdition.where(panopticon_id: document.id).last
 
-    unless latest_edition.published?
-      latest_edition.emergency_publish
-    end
+    new(document).publish!
   end
 
   def initialize(document)
@@ -57,6 +54,16 @@ class SpecialistDocumentRegistry
     else
       raise e
     end
+  end
+
+  def publish!
+    artefact = Artefact.find(document.id)
+    latest_edition = SpecialistDocumentEdition.where(panopticon_id: document.id).last
+
+
+    latest_edition.emergency_publish unless latest_edition.published?
+
+    update_artefact unless artefact.live?
   end
 
   class InvalidDocumentError < Exception
@@ -83,6 +90,10 @@ protected
 
   def create_artefact
     panopticon_api.create_artefact!(name: document.title, slug: document.slug, kind: 'specialist-document', owning_app: 'specialist-publisher')
+  end
+
+  def update_artefact
+    panopticon_api.put_artefact!(document.id, name: document.title, slug: document.slug, kind: 'specialist-document', owning_app: 'specialist-publisher')
   end
 
   def panopticon_api
