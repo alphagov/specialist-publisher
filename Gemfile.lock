@@ -31,11 +31,6 @@ GEM
       multi_json (~> 1.0)
     addressable (2.3.5)
     arel (3.0.3)
-    aws-ses (0.5.0)
-      builder
-      mail (> 2.2.5)
-      mime-types
-      xml-simple
     bson (1.9.2)
     bson_ext (1.9.2)
       bson (~> 1.9.2)
@@ -224,7 +219,6 @@ GEM
       raindrops (~> 0.7)
     warden (1.2.3)
       rack (>= 1.0)
-    xml-simple (1.1.3)
     xpath (2.0.0)
       nokogiri (~> 1.3)
 
@@ -232,7 +226,6 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  aws-ses
   cucumber-rails (= 1.4.0)
   database_cleaner (= 1.2.0)
   debugger
