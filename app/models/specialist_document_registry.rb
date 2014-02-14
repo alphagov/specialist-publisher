@@ -115,7 +115,7 @@ protected
   end
 
   def panopticon_api
-    @panopticon_api ||= GdsApi::Panopticon.new(Plek.current.find("panopticon"), CONTENT_API_CREDENTIALS)
+    @panopticon_api ||= GdsApi::Panopticon.new(Plek.current.find("panopticon"), PANOPTICON_API_CREDENTIALS)
   end
 
   def find_or_create_draft

@@ -1,3 +1,3 @@
-CONTENT_API_CREDENTIALS = {
+PANOPTICON_API_CREDENTIALS = {
   bearer_token: "overwritten on deploy"
 }
