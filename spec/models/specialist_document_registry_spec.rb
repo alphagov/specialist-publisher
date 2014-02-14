@@ -68,6 +68,7 @@ describe SpecialistDocumentRegistry do
       artefact = FactoryGirl.create(:specialist_document_artefact)
       @document.id = artefact.id
       @draft_edition = FactoryGirl.create(:specialist_document_edition, panopticon_id: artefact.id, state: 'draft')
+      stub_out_panopticon
     end
 
     describe ".store!(document)" do
@@ -87,6 +88,11 @@ describe SpecialistDocumentRegistry do
         SpecialistDocumentRegistry.publish!(@document)
         @draft_edition.reload
         @draft_edition.state.should == 'published'
+      end
+
+      it "notifies panopticon of the update" do
+        FakePanopticon.any_instance.should_receive(:put_artefact!).with(@document.id, anything)
+        SpecialistDocumentRegistry.publish!(@document)
       end
     end
   end
