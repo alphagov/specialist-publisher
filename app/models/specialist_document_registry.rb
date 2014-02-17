@@ -1,17 +1,17 @@
 require "gds_api/panopticon"
 
-class SpecialistDocumentRegistry
+class SpecialistDocumentRegistry < Struct.new(:artefacts, :specialist_document_editions, :panopticon_api)
 
-  def self.all
-    Artefact.where(kind: 'specialist-document').desc(:updated_at).map do |artefact|
-      self.fetch(artefact.id)
+  def all
+    artefacts.where(kind: 'specialist-document').desc(:updated_at).map do |artefact|
+      fetch(artefact.id)
     end.compact
   end
 
-  def self.fetch(id, version_number: nil)
-    return nil unless Artefact.find(id)
+  def fetch(id, version_number: nil)
+    return nil unless artefacts.find(id)
 
-    editions = SpecialistDocumentEdition.where(panopticon_id: id).order(:created_at)
+    editions = specialist_document_editions.where(panopticon_id: id).order(:created_at)
 
     edition = if version_number
       editions.where(version_number: version_number).last
@@ -36,45 +36,34 @@ class SpecialistDocumentRegistry
     )
   end
 
-  def self.store!(document)
-    new(document).store!
-  end
-
-  def self.publish!(document)
-    raise InvalidDocumentError.new("Can't publish a non-existant document", document) if document.id.nil?
-
-    new(document).publish!
-  end
-
-  def initialize(document)
-    @document = document
-  end
-
-  def store!
+  def store!(document)
     unless document.id
-      response = create_artefact
+      response = create_artefact(document)
       document.id = response['id']
     end
 
-    update_edition
+    update_edition(document)
   rescue GdsApi::HTTPErrorResponse => e
     if e.code == 422
       errors = e.error_details['errors'].with_indifferent_access
+      Rails.logger.info(errors)
       errors[:title] = errors.delete(:name)
       document.errors = errors
-      raise InvalidDocumentError.new("Can't store an invalid document", document)
+      raise InvalidDocumentError.new("Can't store an invalid document #{errors}", document)
     else
       raise e
     end
   end
 
-  def publish!
-    artefact = Artefact.find(document.id)
-    latest_edition = SpecialistDocumentEdition.where(panopticon_id: document.id).last
+  def publish!(document)
+    raise InvalidDocumentError.new("Can't publish a non-existant document", document) if document.id.nil?
+
+    artefact = artefacts.find(document.id)
+    latest_edition = specialist_document_editions.where(panopticon_id: document.id).last
 
     latest_edition.emergency_publish unless latest_edition.published?
 
-    update_artefact('live') unless artefact.live?
+    update_artefact(document, 'live') unless artefact.live?
   end
 
   class InvalidDocumentError < Exception
@@ -88,10 +77,8 @@ class SpecialistDocumentRegistry
 
 protected
 
-  attr_reader :document
-
-  def update_edition
-    draft = find_or_create_draft
+  def update_edition(document)
+    draft = find_or_create_draft(document)
     draft.title = document.title
     draft.summary = document.summary
     draft.body = document.body
@@ -105,26 +92,22 @@ protected
     draft.save!
   end
 
-  def create_artefact
+  def create_artefact(document)
     panopticon_api.create_artefact!(name: document.title, slug: document.slug, kind: 'specialist-document', owning_app: 'specialist-publisher')
   end
 
-  def update_artefact(state)
-    panopticon_api.put_artefact!(document.id, name: document.title, slug: document.slug, kind: 'specialist-document', owning_app: 'specialist-publisher', state: state)
+  def update_artefact(document, artefact_state)
+    panopticon_api.put_artefact!(document.id, name: document.title, slug: document.slug, kind: 'specialist-document', owning_app: 'specialist-publisher', state: artefact_state)
   end
 
-  def panopticon_api
-    @panopticon_api ||= GdsApi::Panopticon.new(Plek.current.find("panopticon"), PANOPTICON_API_CREDENTIALS)
-  end
-
-  def find_or_create_draft
-    latest_edition = SpecialistDocumentEdition.where(panopticon_id: document.id).order(:created_at).last
+  def find_or_create_draft(document)
+    latest_edition = specialist_document_editions.where(panopticon_id: document.id).order(:created_at).last
 
     if latest_edition.nil?
-      SpecialistDocumentEdition.new(panopticon_id: document.id, state: 'draft')
+      specialist_document_editions.new(panopticon_id: document.id, state: 'draft')
     else
       if latest_edition.published?
-        SpecialistDocumentEdition.new(panopticon_id: document.id, state: 'draft', version_number: (latest_edition.version_number + 1))
+        specialist_document_editions.new(panopticon_id: document.id, state: 'draft', version_number: (latest_edition.version_number + 1))
       else
         latest_edition
       end

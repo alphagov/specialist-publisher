@@ -2,7 +2,15 @@ require 'spec_helper'
 
 describe SpecialistDocumentRegistry do
 
-  describe ".all" do
+  let(:panopticon) do
+    FakePanopticon.new
+  end
+
+  let(:specialist_document_registry) do
+    SpecialistDocumentRegistry.new(Artefact, SpecialistDocumentEdition, panopticon)
+  end
+
+  describe "#all" do
     before do
       irrelevant_artefact = FactoryGirl.create(:artefact, kind: 'publication', slug: 'government/whatever', owning_app: 'whitehall')
       FactoryGirl.create(:specialist_document_edition, panopticon_id: irrelevant_artefact.id)
@@ -14,11 +22,11 @@ describe SpecialistDocumentRegistry do
     end
 
     it "returns documents for all relevant artefacts by date updated desc" do
-      SpecialistDocumentRegistry.all.map(&:title).should == [@edition_2, @edition_1].map(&:title)
+      specialist_document_registry.all.map(&:title).should == [@edition_2, @edition_1].map(&:title)
     end
   end
 
-  describe ".fetch" do
+  describe "#fetch" do
     before do
       @artefact = FactoryGirl.create(:specialist_document_artefact)
       @edition_1, @edition_2, @edition_3 = 1.upto(3).map do |i|
@@ -27,23 +35,22 @@ describe SpecialistDocumentRegistry do
     end
 
     it "loads the latest edition by default" do
-      SpecialistDocumentRegistry.fetch(@artefact.id).title.should == @edition_3.title
+      specialist_document_registry.fetch(@artefact.id).title.should == @edition_3.title
     end
 
     it "loads a particular edition if version is specified" do
-      SpecialistDocumentRegistry.fetch(@artefact.id, version_number: 2).title.should == @edition_2.title
+      specialist_document_registry.fetch(@artefact.id, version_number: 2).title.should == @edition_2.title
     end
   end
 
   context "when the document doesn't exist" do
     before do
       @document = SpecialistDocument.new(title: "Example document about oil reserves")
-      stub_out_panopticon
     end
 
-    describe ".store!(document)" do
+    describe "#store!(document)" do
       it "creates an artefact and an edition at version 1" do
-        SpecialistDocumentRegistry.store!(@document)
+        specialist_document_registry.store!(@document)
 
         artefact = Artefact.last
         editions = SpecialistDocumentEdition.where(panopticon_id: artefact.id)
@@ -55,9 +62,9 @@ describe SpecialistDocumentRegistry do
       end
     end
 
-    describe ".publish!(document)" do
+    describe "#publish!(document)" do
       it "raises an InvalidDocumentError" do
-        expect { SpecialistDocumentRegistry.publish!(@document) }.to raise_error(SpecialistDocumentRegistry::InvalidDocumentError)
+        expect { specialist_document_registry.publish!(@document) }.to raise_error(SpecialistDocumentRegistry::InvalidDocumentError)
       end
     end
   end
@@ -68,14 +75,13 @@ describe SpecialistDocumentRegistry do
       artefact = FactoryGirl.create(:specialist_document_artefact)
       @document.id = artefact.id
       @draft_edition = FactoryGirl.create(:specialist_document_edition, panopticon_id: artefact.id, state: 'draft')
-      stub_out_panopticon
     end
 
-    describe ".store!(document)" do
+    describe "#store!(document)" do
       it "updates the draft edition and keeps the same version number" do
         original_edition_version = @draft_edition.version_number
 
-        SpecialistDocumentRegistry.store!(@document)
+        specialist_document_registry.store!(@document)
         @draft_edition.reload
 
         @draft_edition.title.should == @document.title
@@ -83,16 +89,16 @@ describe SpecialistDocumentRegistry do
       end
     end
 
-    describe ".publish!(document)" do
+    describe "#publish!(document)" do
       it "transitions the draft edition to published" do
-        SpecialistDocumentRegistry.publish!(@document)
+        specialist_document_registry.publish!(@document)
         @draft_edition.reload
         @draft_edition.state.should == 'published'
       end
 
       it "notifies panopticon of the update" do
-        FakePanopticon.any_instance.should_receive(:put_artefact!).with(@document.id, anything)
-        SpecialistDocumentRegistry.publish!(@document)
+        panopticon.should_receive(:put_artefact!).with(@document.id, anything)
+        specialist_document_registry.publish!(@document)
       end
     end
   end
@@ -105,12 +111,12 @@ describe SpecialistDocumentRegistry do
       @published_edition = FactoryGirl.create(:specialist_document_edition, panopticon_id: artefact.id, state: 'published')
     end
 
-    describe ".store!(document)" do
+    describe "#store!(document)" do
       it "creates a new edition in draft with an incremented version number" do
         original_edition_title = @published_edition.title
         original_edition_version = @published_edition.version_number
 
-        SpecialistDocumentRegistry.store!(@document)
+        specialist_document_registry.store!(@document)
 
         editions = SpecialistDocumentEdition.where(panopticon_id: @document.id)
         editions.count.should == 2
@@ -126,9 +132,9 @@ describe SpecialistDocumentRegistry do
       end
     end
 
-    describe ".publish!(document)" do
+    describe "#publish!(document)" do
       it "does nothing" do
-        SpecialistDocumentRegistry.publish!(@document)
+        specialist_document_registry.publish!(@document)
 
         editions = SpecialistDocumentEdition.where(panopticon_id: @document.id)
         editions.count.should == 1

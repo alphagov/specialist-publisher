@@ -42,7 +42,7 @@ def create_cases(number_of_cases)
   stub_out_panopticon
   number_of_cases.times do |index|
     doc = SpecialistDocument.new(title: "Specialist Document #{index+1}")
-    SpecialistDocumentRegistry.store!(doc)
+    SpecialistPublisherWiring.get(:specialist_document_registry).store!(doc)
 
     Timecop.travel(10.minutes.from_now)
   end
