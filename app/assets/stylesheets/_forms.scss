@@ -10,5 +10,21 @@ form {
   .short-textarea {
     height: 50px;
   }
+
+  .errors {
+    list-style: none;
+    display: block;
+    margin-left: -15px;
+    padding-left: 11px;
+    border-left: 4px solid $mellow-red;
+
+    .error {
+      color: $mellow-red;
+    }
+    li {
+      padding-top: 3px;
+      padding-bottom: 2px;
+    }
+  }
 }
 
