@@ -11,6 +11,16 @@ form {
     height: 50px;
   }
 
+  .error-list {
+    h2 {
+      font-weight: bold;
+      font-size: 16px;
+      margin: 0;
+      padding: 3px 0 2px;
+    }
+    margin-bottom: 25px;
+  }
+
   .errors {
     list-style: none;
     display: block;
