@@ -1,6 +1,6 @@
 development:
   host: localhost
-  database: govuk_content_production
+  database: govuk_content_development
   persist_in_safe_mode: true
   autocreate_indexes: true
 
