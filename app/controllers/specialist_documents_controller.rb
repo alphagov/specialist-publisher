@@ -7,7 +7,7 @@ class SpecialistDocumentsController < ApplicationController
   def edit; end
 
   def create
-    SpecialistDocumentRegistry.store!(document)
+    specialist_document_registry.store!(document)
     redirect_to specialist_documents_path
   rescue SpecialistDocumentRegistry::InvalidDocumentError => e
     @document = e.document
@@ -15,8 +15,8 @@ class SpecialistDocumentsController < ApplicationController
   end
 
   def update
-    SpecialistDocumentRegistry.store!(document)
-    SpecialistDocumentRegistry.publish!(document) if params.has_key?('publish')
+    specialist_document_registry.store!(document)
+    specialist_document_registry.publish!(document) if params.has_key?('publish')
     redirect_to specialist_documents_path
   rescue SpecialistDocumentRegistry::InvalidDocumentError => e
     @document = e.document
@@ -28,7 +28,7 @@ protected
   def document
     @document ||= begin
       if params[:id]
-        current_document = SpecialistDocumentRegistry.fetch(params[:id])
+        current_document = specialist_document_registry.fetch(params[:id])
 
         if current_document && params[:specialist_document]
           SpecialistDocument.new(params[:specialist_document].merge(id: current_document.id))
@@ -43,7 +43,7 @@ protected
   helper_method :document
 
   def documents
-    @documents ||= SpecialistDocumentRegistry.all
+    @documents ||= specialist_document_registry.all
   end
   helper_method :documents
 
