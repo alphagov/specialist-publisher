@@ -87,6 +87,18 @@ describe SpecialistDocumentRegistry do
         @draft_edition.title.should == @document.title
         @draft_edition.version_number.should == original_edition_version
       end
+
+      context "an invalid document" do
+        it "raises an InvalidDocumentError" do
+          original_edition_version = @draft_edition.version_number
+
+          @document.title = ""
+          expect { specialist_document_registry.store!(@document) }.to raise_error { |error|
+            expect(error).to be_a SpecialistDocumentRegistry::InvalidDocumentError
+            expect(error.document.errors).to have_key(:title)
+          }
+        end
+      end
     end
 
     describe "#publish!(document)" do

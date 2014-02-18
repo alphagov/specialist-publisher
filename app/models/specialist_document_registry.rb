@@ -89,7 +89,10 @@ protected
     draft.market_sector = document.market_sector
     draft.outcome_type = document.outcome_type
 
-    draft.save!
+    if ! draft.save
+      document.errors = draft.errors
+      raise InvalidDocumentError.new("Invalid document", document)
+    end
   end
 
   def create_artefact(document)
