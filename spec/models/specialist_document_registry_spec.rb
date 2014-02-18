@@ -142,4 +142,24 @@ describe SpecialistDocumentRegistry do
     end
   end
 
+  context "slug already taken" do
+    before do
+      @slug = "cma-cases/whatever"
+      existing_artefact = FactoryGirl.create(:specialist_document_artefact, slug: @slug)
+    end
+
+    let(:document) do
+      OpenStruct.new(slug: @slug, title: "title", panopticon_id: nil, id: nil)
+    end
+
+    describe "#store!" do
+      it "reports an error" do
+        expect { specialist_document_registry.store!(document) }.to raise_error { |error|
+          expect(error).to be_a SpecialistDocumentRegistry::InvalidDocumentError
+          expect(error.document.errors).to have_key(:slug)
+          expect(error.document.errors[:slug].join).to match(/already taken/)
+        }
+      end
+    end
+  end
 end
