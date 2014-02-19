@@ -55,7 +55,12 @@ describe SpecialistDocumentRegistry do
         artefact = Artefact.last
         editions = SpecialistDocumentEdition.where(panopticon_id: artefact.id)
 
+        artefact.slug.should == @document.slug
         artefact.name.should == @document.title
+        artefact.owning_app.should == "specialist-publisher"
+        artefact.rendering_app.should == "specialist-frontend"
+        artefact.state.should == "draft"
+
         editions.count.should == 1
         editions.first.title.should == @document.title
         editions.first.version_number.should == 1

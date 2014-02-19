@@ -96,11 +96,22 @@ protected
   end
 
   def create_artefact(document)
-    panopticon_api.create_artefact!(name: document.title, slug: document.slug, kind: 'specialist-document', owning_app: 'specialist-publisher')
+    panopticon_api.create_artefact!(artefact_attributes_for(document))
   end
 
-  def update_artefact(document, artefact_state)
-    panopticon_api.put_artefact!(document.id, name: document.title, slug: document.slug, kind: 'specialist-document', owning_app: 'specialist-publisher', state: artefact_state)
+  def update_artefact(document, state)
+    panopticon_api.put_artefact!(document.id, artefact_attributes_for(document, state))
+  end
+
+  def artefact_attributes_for(document, state = 'draft')
+    {
+      name: document.title,
+      slug: document.slug,
+      kind: 'specialist-document',
+      owning_app: 'specialist-publisher',
+      rendering_app: 'specialist-frontend',
+      state: state
+    }
   end
 
   def find_or_create_draft(document)
