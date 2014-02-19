@@ -9,7 +9,7 @@ gem 'gds-sso', '9.2.1'
 
 gem 'mongoid', '2.5.2'
 
-gem 'generic_form_builder', git: 'https://github.com/alphagov/generic_form_builder', ref: '827d941b0ea0285a48daadb7573de1381a3829b5'
+gem 'generic_form_builder', '0.8.0'
 
 if ENV['CONTENT_MODELS_DEV']
   gem 'govuk_content_models', :path => '../govuk_content_models'
