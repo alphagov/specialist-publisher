@@ -59,6 +59,7 @@ describe SpecialistDocumentRegistry do
         artefact.name.should == @document.title
         artefact.owning_app.should == "specialist-publisher"
         artefact.rendering_app.should == "specialist-frontend"
+        artefact.paths.should == ["/#{@document.slug}"]
         artefact.state.should == "draft"
 
         editions.count.should == 1

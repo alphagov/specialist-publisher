@@ -110,6 +110,7 @@ protected
       kind: 'specialist-document',
       owning_app: 'specialist-publisher',
       rendering_app: 'specialist-frontend',
+      paths: ["/#{document.slug}"],
       state: state
     }
   end
