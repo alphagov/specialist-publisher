@@ -21,13 +21,27 @@ When(/^I create a CMA case without one of the required fields$/) do
   create_cma_case(@cma_fields)
 end
 
-def create_cma_case(fields)
+When(/^I publish a new CMA case$/) do
+  @cma_fields = {
+    title: 'Example CMA Case',
+    summary: 'Nullam quis risus eget urna mollis ornare vel eu leo.',
+    body: ('Praesent commodo cursus magna, vel scelerisque nisl consectetur et.' * 10)
+  }
+
+  create_cma_case(@cma_fields, publish: true)
+end
+
+def create_cma_case(fields, publish: false)
   stub_out_panopticon
 
   visit new_specialist_document_path
   fill_in_cma_fields(fields)
 
-  save_document
+  if publish
+    publish_document
+  else
+    save_document
+  end
 end
 
 Given(/^two CMA cases exist$/) do

@@ -14,3 +14,7 @@ Feature: Creating and editing a CMA case
     Given a CMA case exists in draft
     When I publish the CMA case
     Then the CMA case should be published
+
+  Scenario: can create a new CMA case and publish immediately
+    When I publish a new CMA case
+    Then the CMA case should be published
