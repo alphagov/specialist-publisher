@@ -1,3 +1,24 @@
+# TODO: put these methods in a module or separate object
+
+def create_cma_case(fields, publish: false)
+  stub_out_panopticon
+
+  visit new_specialist_document_path
+  fill_in_cma_fields(fields)
+
+  if publish
+    publish_document
+  else
+    save_document
+  end
+end
+
+def edit_cma_case(fields)
+  go_to_edit_page_for_most_recent_case
+  fill_in_cma_fields(fields)
+  save_document
+end
+
 def fill_in_cma_fields(fields)
   fields.slice(:title, :summary, :body, :opened_date).each do |field, text|
     fill_in field.to_s.humanize, with: text
@@ -20,6 +41,11 @@ def check_for_missing_title_error
   page.should have_content("Title can't be blank")
 end
 
+def check_for_new_title
+  visit specialist_documents_path
+  page.should have_content('Edited Example CMA Case')
+end
+
 def check_cma_case_does_not_exist_with(attributes)
   refute SpecialistDocumentEdition.exists?(conditions: attributes)
 end
@@ -29,6 +55,8 @@ def check_for_cma_cases(*titles)
 end
 
 def go_to_edit_page_for_most_recent_case
-  artefact = Artefact.where(kind: 'specialist-document').last
-  visit edit_specialist_document_path(artefact.id)
+  registry = SpecialistPublisherWiring.get(:specialist_document_registry)
+  document = registry.all.last
+
+  visit edit_specialist_document_path(document.id)
 end

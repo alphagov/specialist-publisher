@@ -1,27 +1,10 @@
 class FakePanopticon
   def put_artefact!(id, attributes = {})
-    artefact = Artefact.find(id)
-    attributes.each do |key, value|
-      artefact.send("#{key}=", value)
-    end
-
-    if artefact.valid?
-      artefact.save!
-      return nil
-    else
-      raise GdsApi::HTTPErrorResponse.new(422, 'errors' => artefact.errors.messages)
-    end
+    nil
   end
 
   def create_artefact!(attributes = {})
-    artefact = Artefact.new(attributes)
-
-    if artefact.valid?
-      artefact.save!
-      return {'id' => artefact.id}
-    else
-      raise GdsApi::HTTPErrorResponse.new(422, 'errors' => artefact.errors.messages)
-    end
+    {"id" => "random-panopticon-id-#{SecureRandom.hex}"}
   end
 end
 

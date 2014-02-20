@@ -11,7 +11,7 @@ Feature: Publishing a CMA case
     Then the CMA case should be in draft
 
   Scenario: can publish a draft CMA case
-    Given a CMA case exists in draft
+    Given a draft CMA case exists
     When I publish the CMA case
     Then the CMA case should be published
 

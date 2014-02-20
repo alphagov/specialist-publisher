@@ -1,44 +1,86 @@
+require "forwardable"
+
 class SpecialistDocument
   include ActiveModel::Conversion
   extend ActiveModel::Naming
+  extend Forwardable
 
-  ATTRIBUTES = [
-    :id,
-    :title,
-    :summary,
-    :body,
-    :opened_date,
-    :closed_date,
-    :case_type,
-    :case_state,
-    :market_sector,
-    :outcome_type,
-    :updated_at,
-  ]
-
-  def initialize(attributes = nil)
-    attributes ||= {}
-
-    ATTRIBUTES.each do |attribute|
-      send("#{attribute}=", attributes[attribute])
-    end
-
-    @errors = Hash.new({})
+  def self.edition_attributes
+    [
+      :title,
+      :summary,
+      :body,
+      :opened_date,
+      :closed_date,
+      :case_type,
+      :case_state,
+      :market_sector,
+      :outcome_type,
+      :updated_at,
+    ]
   end
 
-  attr_accessor *ATTRIBUTES
-  attr_accessor :errors
+  def_delegators :latest_edition, *edition_attributes
+
+  attr_reader :id, :editions
+
+  def initialize(id, editions)
+    @id = id
+    @editions = editions.sort_by(&:version_number)
+  end
+
+  # TODO: Remove factory methods
+  def self.create(params)
+    editions = [new_edition(params.merge(version_number: 1))]
+    new(SecureRandom.uuid, editions)
+  end
+
+  def self.new_edition(params)
+    edition_params = {version_number: 1}.merge(params).merge(state: 'draft')
+    SpecialistDocumentEdition.new(edition_params)
+  end
+
+  def update(params)
+    if latest_edition.published?
+      editions.push(new_edition(params))
+    else
+      latest_edition.assign_attributes(params)
+    end
+
+    self
+  end
 
   def slug
     "cma-cases/#{slug_from_title}"
   end
 
   def valid?
-    errors.empty?
+    latest_edition.valid?
   end
 
+  def published?
+    editions.any?(&:published?)
+  end
+
+  def draft?
+    latest_edition.draft?
+  end
+
+  def errors
+    latest_edition.errors.messages
+  end
+
+  def add_error(field, message)
+    latest_edition.add_error(field, message)
+  end
+
+  def latest_edition
+    @editions.last
+  end
+
+  # TODO: remove this persistence concern
   def persisted?
-    id.present?
+    updated_at.present?
   end
 
   def case_type_options
@@ -113,5 +155,13 @@ protected
 
   def slug_from_title
     title.downcase.gsub(/\W/, '-')
+  end
+
+  def new_edition(params)
+    self.class.new_edition(params.merge(version_number: current_version_number + 1))
+  end
+
+  def current_version_number
+    latest_edition.version_number
   end
 end
