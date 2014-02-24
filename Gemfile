@@ -14,7 +14,7 @@ gem 'generic_form_builder', '0.8.0'
 if ENV['CONTENT_MODELS_DEV']
   gem 'govuk_content_models', :path => '../govuk_content_models'
 else
-  gem "govuk_content_models", '6.4.0'
+  gem "govuk_content_models", '7.2.1'
 end
 
 group :assets do

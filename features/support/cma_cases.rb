@@ -1,6 +1,6 @@
 def fill_in_cma_fields(fields)
-  fields.slice(:title, :summary, :body).each do |field, text|
-    fill_in field.to_s.titlecase, with: text
+  fields.slice(:title, :summary, :body, :opened_date).each do |field, text|
+    fill_in field.to_s.humanize, with: text
   end
 end
 

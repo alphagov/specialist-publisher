@@ -6,7 +6,7 @@
         <ul class="errors">
           <% document.errors.each do |field, errors| %>
             <% if errors %>
-              <li><%= field.to_s.humanize %> <%= errors.join(' and ')  %></li>
+              <li><%= field.to_s.humanize %> <%= [*errors].join(' and ')  %></li>
             <% end %>
           <% end %>
         </ul>
