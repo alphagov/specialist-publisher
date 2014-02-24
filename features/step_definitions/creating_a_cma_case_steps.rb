@@ -6,7 +6,8 @@ When(/^I create a CMA case$/) do
   @cma_fields = {
     title: 'Example CMA Case',
     summary: 'Nullam quis risus eget urna mollis ornare vel eu leo.',
-    body: ('Praesent commodo cursus magna, vel scelerisque nisl consectetur et.' * 10)
+    body: ('Praesent commodo cursus magna, vel scelerisque nisl consectetur et.' * 10),
+    opened_date: '2014-01-01'
   }
 
   create_cma_case(@cma_fields)
@@ -15,7 +16,8 @@ end
 When(/^I create a CMA case without one of the required fields$/) do
   @cma_fields = {
     summary: 'Nullam quis risus eget urna mollis ornare vel eu leo.',
-    body: ('Praesent commodo cursus magna, vel scelerisque nisl consectetur et.' * 10)
+    body: ('Praesent commodo cursus magna, vel scelerisque nisl consectetur et.' * 10),
+    opened_date: '2014-01-01'
   }
 
   create_cma_case(@cma_fields)
@@ -25,7 +27,8 @@ When(/^I publish a new CMA case$/) do
   @cma_fields = {
     title: 'Example CMA Case',
     summary: 'Nullam quis risus eget urna mollis ornare vel eu leo.',
-    body: ('Praesent commodo cursus magna, vel scelerisque nisl consectetur et.' * 10)
+    body: ('Praesent commodo cursus magna, vel scelerisque nisl consectetur et.' * 10),
+    opened_date: '2014-01-01'
   }
 
   create_cma_case(@cma_fields, publish: true)
@@ -55,7 +58,12 @@ end
 def create_cases(number_of_cases)
   stub_out_panopticon
   number_of_cases.times do |index|
-    doc = SpecialistDocument.new(title: "Specialist Document #{index+1}")
+    doc = SpecialistDocument.new(
+      title: "Specialist Document #{index+1}",
+      summary: "summary",
+      body: "body",
+      opened_date: Time.zone.parse("2014-01-01")
+    )
     SpecialistPublisherWiring.get(:specialist_document_registry).store!(doc)
 
     Timecop.travel(10.minutes.from_now)
