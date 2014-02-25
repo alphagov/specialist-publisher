@@ -89,7 +89,7 @@ GEM
       htmlentities (~> 4)
       kramdown (~> 0.13.3)
       sanitize (~> 2.0.3)
-    govuk_content_models (7.2.1)
+    govuk_content_models (7.3.1)
       bson_ext
       differ
       gds-api-adapters
@@ -237,7 +237,7 @@ DEPENDENCIES
   factory_girl (= 4.3.0)
   gds-sso (= 9.2.1)
   generic_form_builder (= 0.8.0)
-  govuk_content_models (= 7.2.1)
+  govuk_content_models (= 7.3.1)
   govuk_frontend_toolkit (= 0.43.0)
   launchy
   mongoid (= 2.5.2)
