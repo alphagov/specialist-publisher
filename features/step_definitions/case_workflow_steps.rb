@@ -1,6 +1,6 @@
 Then(/^the CMA case should be in draft$/) do
   expect(
-    SpecialistPublisherWiring.get(:specialist_document_registry).all.last
+    specialist_document_registry.all.last
   ).to be_draft
 end
 
@@ -11,6 +11,6 @@ end
 
 Then(/^the CMA case should be published$/) do
   expect(
-    SpecialistPublisherWiring.get(:specialist_document_registry).all.last
+    specialist_document_registry.all.last
   ).to be_published
 end

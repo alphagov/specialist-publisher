@@ -37,7 +37,7 @@ protected
           current_document
         end
       else
-        SpecialistDocument.create(params.fetch(:specialist_document, {}))
+        specialist_document_builder.call(params.fetch(:specialist_document, {}))
       end
     end
   end

@@ -54,7 +54,8 @@ end
 def create_cases(number_of_cases, state: 'draft')
   stub_out_panopticon
   number_of_cases.times do |index|
-    doc = SpecialistDocument.create(
+
+    doc = specialist_document_builder.call(
       title: "Specialist Document #{index+1}",
       summary: "summary",
       body: "body",
@@ -65,7 +66,7 @@ def create_cases(number_of_cases, state: 'draft')
       state: state,
     )
 
-    SpecialistPublisherWiring.get(:specialist_document_registry).store!(doc)
+    specialist_document_registry.store!(doc)
 
     Timecop.travel(10.minutes.from_now)
   end

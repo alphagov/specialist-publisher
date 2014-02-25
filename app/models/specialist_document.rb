@@ -24,20 +24,10 @@ class SpecialistDocument
 
   attr_reader :id, :editions
 
-  def initialize(id, editions)
+  def initialize(edition_factory, id, editions)
+    @edition_factory = edition_factory
     @id = id
     @editions = editions.sort_by(&:version_number)
-  end
-
-  # TODO: Remove factory methods
-  def self.create(params)
-    editions = [new_edition(params.merge(version_number: 1))]
-    new(SecureRandom.uuid, editions)
-  end
-
-  def self.new_edition(params)
-    edition_params = {version_number: 1}.merge(params).merge(state: 'draft')
-    SpecialistDocumentEdition.new(edition_params)
   end
 
   def update(params)
@@ -75,7 +65,7 @@ class SpecialistDocument
   end
 
   def latest_edition
-    @editions.last
+    @editions.last || create_first_edition
   end
 
   # TODO: remove this persistence concern
@@ -153,12 +143,26 @@ class SpecialistDocument
 
 protected
 
+  attr_reader :edition_factory
+
   def slug_from_title
     title.downcase.gsub(/\W/, '-')
   end
 
-  def new_edition(params)
-    self.class.new_edition(params.merge(version_number: current_version_number + 1))
+  def new_edition_defaults
+    {
+      state: "draft",
+    }
+  end
+
+  def create_first_edition
+    edition_factory.call(new_edition_defaults.merge(version_number: 1)).tap { |e|
+      editions.push(e)
+    }
+  end
+
+  def new_edition(params = {})
+    edition_factory.call(params.merge(version_number: current_version_number + 1))
   end
 
   def current_version_number
