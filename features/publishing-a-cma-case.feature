@@ -1,4 +1,4 @@
-Feature: Creating and editing a CMA case
+Feature: Publishing a CMA case
   As a CMA editor
   I want to create a new case in draft
   So that I can prepare the info for publication
@@ -11,7 +11,7 @@ Feature: Creating and editing a CMA case
     Then the CMA case should be in draft
 
   Scenario: can publish a draft CMA case
-    Given a CMA case exists in draft
+    Given a draft CMA case exists
     When I publish the CMA case
     Then the CMA case should be published
 

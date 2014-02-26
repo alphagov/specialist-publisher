@@ -34,36 +34,37 @@ When(/^I publish a new CMA case$/) do
   create_cma_case(@cma_fields, publish: true)
 end
 
-def create_cma_case(fields, publish: false)
-  stub_out_panopticon
+When(/^I edit a CMA case$/) do
+  @new_title = 'Edited Example CMA Case'
+  edit_cma_case(title: @new_title)
+end
 
-  visit new_specialist_document_path
-  fill_in_cma_fields(fields)
-
-  if publish
-    publish_document
-  else
-    save_document
-  end
+Then(/^the CMA case should have been updated$/) do
+  check_for_new_title
 end
 
 Given(/^two CMA cases exist$/) do
   create_cases(2)
 end
 
-Given(/^a CMA case exists in draft$/) do
+Given(/^a draft CMA case exists$/) do
   create_cases(1)
 end
 
-def create_cases(number_of_cases)
+def create_cases(number_of_cases, state: 'draft')
   stub_out_panopticon
   number_of_cases.times do |index|
-    doc = SpecialistDocument.new(
+    doc = SpecialistDocument.create(
       title: "Specialist Document #{index+1}",
       summary: "summary",
       body: "body",
-      opened_date: Time.zone.parse("2014-01-01")
+      opened_date: Time.zone.parse("2014-01-01"),
+      market_sector: 'agriculture-environment-and-natural-resources',
+      case_state: 'open',
+      case_type: 'ca98',
+      state: state,
     )
+
     SpecialistPublisherWiring.get(:specialist_document_registry).store!(doc)
 
     Timecop.travel(10.minutes.from_now)

@@ -7,9 +7,8 @@ FactoryGirl.define do
 end
 
 FactoryGirl.define do
-  factory :specialist_document_artefact, parent: :artefact do
-    sequence(:slug) { |n| "example-finder/artefact-#{n}"}
-    kind 'specialist-document'
-    owning_app 'specialist-document-publisher'
+  factory :panopticon_mapping do
+    sequence(:document_id) { |n| "some-uuid-#{n}"}
+    sequence(:panopticon_id) { |n| "some-panopticon-id-#{n}"}
   end
 end

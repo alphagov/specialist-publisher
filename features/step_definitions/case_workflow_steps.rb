@@ -1,5 +1,7 @@
 Then(/^the CMA case should be in draft$/) do
-  assert SpecialistDocumentEdition.last.draft?
+  expect(
+    SpecialistPublisherWiring.get(:specialist_document_registry).all.last
+  ).to be_draft
 end
 
 When(/^I publish the CMA case$/) do
@@ -8,5 +10,7 @@ When(/^I publish the CMA case$/) do
 end
 
 Then(/^the CMA case should be published$/) do
-  assert SpecialistDocumentEdition.last.published?
+  expect(
+    SpecialistPublisherWiring.get(:specialist_document_registry).all.last
+  ).to be_published
 end

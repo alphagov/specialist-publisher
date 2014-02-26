@@ -3,68 +3,142 @@ require 'spec_helper'
 describe SpecialistDocumentRegistry do
 
   let(:panopticon) do
-    FakePanopticon.new
+    double(:panopticon_api, create_artefact!: {'id' => panopticon_id}, put_artefact!: nil)
   end
 
+  let(:panopticon_id) { 'example-panopticon-id' }
+
   let(:specialist_document_registry) do
-    SpecialistDocumentRegistry.new(Artefact, SpecialistDocumentEdition, panopticon)
+    SpecialistDocumentRegistry.new(PanopticonMapping, SpecialistDocumentEdition, panopticon, document_factory)
   end
+
+  let(:document_factory) { double(:document_factory, call: document) }
+
+  let(:document_id) { "document-id" }
+
+  let(:document) {
+    SpecialistDocument.new(document_id, editions)
+  }
+
+  let(:editions) { [new_draft_edition] }
+
+  let(:new_draft_edition) {
+    double(
+      :new_draft_edition,
+      :title => "Example document about oil reserves",
+      :"document_id=" => nil,
+      :changed? => true,
+      :save => true,
+      :published? => false,
+      :draft? => true,
+      :errors => {},
+      :add_error => nil,
+      :emergency_publish => nil,
+      :version_number => 2,
+    )
+  }
+
+  let(:published_edition) {
+    double(
+      :published_edition,
+      :title => "Example document about oil reserves",
+      :"document_id=" => nil,
+      :changed? => false,
+      :save => nil,
+      :published? => true,
+      :draft? => false,
+      :version_number => 1,
+    )
+  }
 
   describe "#all" do
     before do
-      irrelevant_artefact = FactoryGirl.create(:artefact, kind: 'publication', slug: 'government/whatever', owning_app: 'whitehall')
-      FactoryGirl.create(:specialist_document_edition, panopticon_id: irrelevant_artefact.id)
+      @edition_1, @edition_2 = [2, 1].map do |n|
+        edition = FactoryGirl.create(:specialist_document_edition,
+                            document_id: "document-id-#{n}",
+                            updated_at: n.days.ago)
 
-      @edition_1, @edition_2 = [2, 1].map do |days_ago|
-        artefact = FactoryGirl.create(:specialist_document_artefact, updated_at: days_ago.days.ago)
-        FactoryGirl.create(:specialist_document_edition, panopticon_id: artefact.id)
+        allow(document_factory).to receive(:call)
+          .with("document-id-#{n}", [edition])
+          .and_return(SpecialistDocument.new("document-id-#{n}", [edition]))
+
+        edition
       end
     end
 
-    it "returns documents for all relevant artefacts by date updated desc" do
+    it "returns all documents by date updated desc" do
       specialist_document_registry.all.map(&:title).should == [@edition_2, @edition_1].map(&:title)
     end
   end
 
   describe "#fetch" do
+    let(:editions_proxy) { double(:editions_proxy, to_a: editions) }
+    let(:editions)       { [ published_edition ] }
+
     before do
-      @artefact = FactoryGirl.create(:specialist_document_artefact)
-      @edition_1, @edition_2, @edition_3 = 1.upto(3).map do |i|
-        FactoryGirl.create(:specialist_document_edition, panopticon_id: @artefact.id, version_number: i)
+      allow(SpecialistDocument).to receive(:new).and_return(document)
+      allow(SpecialistDocumentEdition).to receive(:where)
+        .with(document_id: document_id)
+        .and_return(editions_proxy)
+    end
+
+    it "populates the document with all editions for that document id" do
+      specialist_document_registry.fetch(document_id)
+
+      expect(document_factory).to have_received(:call).with(document_id, editions)
+    end
+
+    it "returns the document" do
+      expect(specialist_document_registry.fetch(document_id)).to eq(document)
+    end
+
+    context "when there are no editions" do
+      before do
+       allow(SpecialistDocumentEdition).to receive(:where)
+        .with(document_id: document_id)
+        .and_return([])
       end
-    end
 
-    it "loads the latest edition by default" do
-      specialist_document_registry.fetch(@artefact.id).title.should == @edition_3.title
-    end
-
-    it "loads a particular edition if version is specified" do
-      specialist_document_registry.fetch(@artefact.id, version_number: 2).title.should == @edition_2.title
+      it "returns nil" do
+        expect(specialist_document_registry.fetch(document_id)).to be(nil)
+      end
     end
   end
 
-  context "when the document doesn't exist" do
+  context "when the document is new" do
     before do
-      @document = SpecialistDocument.new(title: "Example document about oil reserves")
+      @document = SpecialistDocument.new(document_id, [new_draft_edition])
     end
 
     describe "#store!(document)" do
-      it "creates an artefact and an edition at version 1" do
+      it "creates an artefact with the required extra information" do
+        panopticon.should_receive(:create_artefact!).with(
+          hash_including(
+            owning_app: 'specialist-publisher',
+            rendering_app: 'specialist-frontend',
+            paths: ["/#{@document.slug}"],
+          )
+        )
+
+        specialist_document_registry.store!(@document)
+      end
+
+      it "creates a draft artefact" do
+        panopticon.should_receive(:create_artefact!).with(
+          hash_including(
+            slug: @document.slug,
+            name: @document.title,
+            state: 'draft',
+          )
+        )
+
+        specialist_document_registry.store!(@document)
+      end
+
+      it "stores a mapping of document id to panopticon id" do
         specialist_document_registry.store!(@document)
 
-        artefact = Artefact.last
-        editions = SpecialistDocumentEdition.where(panopticon_id: artefact.id)
-
-        artefact.slug.should == @document.slug
-        artefact.name.should == @document.title
-        artefact.owning_app.should == "specialist-publisher"
-        artefact.rendering_app.should == "specialist-frontend"
-        artefact.paths.should == ["/#{@document.slug}"]
-        artefact.state.should == "draft"
-
-        editions.count.should == 1
-        editions.first.title.should == @document.title
-        editions.first.version_number.should == 1
+        assert PanopticonMapping.exists?(conditions: {document_id: @document.id, panopticon_id: panopticon_id})
       end
     end
 
@@ -75,47 +149,55 @@ describe SpecialistDocumentRegistry do
     end
   end
 
-  context "when the document exists in draft" do
+describe "#store!(document)" do
+  context "with an invalid document" do
     before do
-      @document = SpecialistDocument.new(title: "Example document about oil reserves")
-      artefact = FactoryGirl.create(:specialist_document_artefact)
-      @document.id = artefact.id
-      @draft_edition = FactoryGirl.create(:specialist_document_edition, panopticon_id: artefact.id, state: 'draft')
+      allow(new_draft_edition).to receive(:save).and_return(false)
     end
 
-    describe "#store!(document)" do
-      it "updates the draft edition and keeps the same version number" do
-        original_edition_version = @draft_edition.version_number
+    it "returns false" do
+      expect(specialist_document_registry.store!(document)).to be false
+    end
+  end
 
-        specialist_document_registry.store!(@document)
-        @draft_edition.reload
+  context "with a valid document" do
+    before do
+      allow(document).to receive(:save).and_return(true)
+    end
 
-        @draft_edition.title.should == @document.title
-        @draft_edition.version_number.should == original_edition_version
-      end
+    let(:latest_edition) { new_draft_edition }
+    let(:previous_edition) { published_edition }
 
-      context "an invalid document" do
-        it "raises an InvalidDocumentError" do
-          original_edition_version = @draft_edition.version_number
+    let(:editions) { [previous_edition, latest_edition] }
 
-          @document.title = ""
-          expect { specialist_document_registry.store!(@document) }.to raise_error { |error|
-            expect(error).to be_a SpecialistDocumentRegistry::InvalidDocumentError
-            expect(error.document.errors).to have_key(:title)
-          }
-        end
-      end
+    it "returns true" do
+      expect(specialist_document_registry.store!(document)).to be true
+    end
+
+    it "only saves the latest edition" do
+      specialist_document_registry.store!(document)
+
+      expect(latest_edition).to have_received(:save)
+      expect(previous_edition).not_to have_received(:save)
+    end
+  end
+end
+
+  context "when the document exists in draft" do
+    before do
+      draft_edition = FactoryGirl.create(:specialist_document_edition, document_id: document_id, state: 'draft')
+      @document = SpecialistDocument.new('12345', [draft_edition])
+      @mapping = FactoryGirl.create(:panopticon_mapping, document_id: @document.id)
     end
 
     describe "#publish!(document)" do
-      it "transitions the draft edition to published" do
+      it "the document becomes published" do
         specialist_document_registry.publish!(@document)
-        @draft_edition.reload
-        @draft_edition.state.should == 'published'
+        @document.should be_published
       end
 
       it "notifies panopticon of the update" do
-        panopticon.should_receive(:put_artefact!).with(@document.id, anything)
+        panopticon.should_receive(:put_artefact!).with(@mapping.panopticon_id, anything)
         specialist_document_registry.publish!(@document)
       end
     end
@@ -123,60 +205,34 @@ describe SpecialistDocumentRegistry do
 
   context "when the document exists and is published" do
     before do
-      @document = SpecialistDocument.new(title: "Example document about oil reserves")
-      artefact = FactoryGirl.create(:specialist_document_artefact, state: 'live')
-      @document.id = artefact.id
-      @published_edition = FactoryGirl.create(:specialist_document_edition, panopticon_id: artefact.id, state: 'published')
-    end
-
-    describe "#store!(document)" do
-      it "creates a new edition in draft with an incremented version number" do
-        original_edition_title = @published_edition.title
-        original_edition_version = @published_edition.version_number
-
-        specialist_document_registry.store!(@document)
-
-        editions = SpecialistDocumentEdition.where(panopticon_id: @document.id)
-        editions.count.should == 2
-        new_edition = editions.last
-
-        @published_edition.reload
-
-        @published_edition.title.should == original_edition_title
-        @published_edition.version_number.should == original_edition_version
-
-        new_edition.title.should == @document.title
-        new_edition.version_number.should == @published_edition.version_number + 1
-      end
+      @document = SpecialistDocument.new('12345', [published_edition])
+      @mapping = FactoryGirl.create(:panopticon_mapping, document_id: @document.id)
     end
 
     describe "#publish!(document)" do
-      it "does nothing" do
+      it "does not notify panopticon of the update" do
+        panopticon.should_not_receive(:put_artefact!)
         specialist_document_registry.publish!(@document)
-
-        editions = SpecialistDocumentEdition.where(panopticon_id: @document.id)
-        editions.count.should == 1
       end
     end
   end
 
-  context "slug already taken" do
+  context "when panopticon raises an exception, eg duplicate slug" do
     before do
-      @slug = "cma-cases/whatever"
-      existing_artefact = FactoryGirl.create(:specialist_document_artefact, slug: @slug)
-    end
-
-    let(:document) do
-      OpenStruct.new(slug: @slug, title: "title", panopticon_id: nil, id: nil)
+      exception = GdsApi::HTTPErrorResponse.new(422, 'errors' => {slug: ['already taken']})
+      allow(panopticon).to receive(:create_artefact!).and_raise(exception)
     end
 
     describe "#store!" do
-      it "reports an error" do
-        expect { specialist_document_registry.store!(document) }.to raise_error { |error|
-          expect(error).to be_a SpecialistDocumentRegistry::InvalidDocumentError
-          expect(error.document.errors).to have_key(:slug)
-          expect(error.document.errors[:slug].join).to match(/already taken/)
-        }
+      let(:editions) { [new_draft_edition] }
+
+      it "sets error messages on the document" do
+        new_draft_edition.should_receive(:add_error).with(:slug, include('already taken'))
+        specialist_document_registry.store!(document)
+      end
+
+      it "returns false" do
+        specialist_document_registry.store!(document).should == false
       end
     end
   end

@@ -18,3 +18,8 @@ Feature: Creating and editing a CMA case
   Scenario: Can view a list of all cases in the publisher
     Given two CMA cases exist
     Then the CMA cases should be in the publisher case index in the correct order
+
+  Scenario: Edit a draft CMA case
+    Given a draft CMA case exists
+    When I edit a CMA case
+    Then the CMA case should have been updated
