@@ -93,3 +93,7 @@ end
 Then(/^I should be returned to the list of documents$/) do
   check_currently_on_publisher_index_page
 end
+
+Then(/^I see the case body preview$/) do
+  check_for_cma_case_body_preview
+end

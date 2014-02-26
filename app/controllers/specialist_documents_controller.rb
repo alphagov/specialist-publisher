@@ -1,3 +1,5 @@
+require "govspeak"
+
 class SpecialistDocumentsController < ApplicationController
 
   def index; end
@@ -7,24 +9,44 @@ class SpecialistDocumentsController < ApplicationController
   def edit; end
 
   def create
-    if store(document, publish: params.has_key?('publish'))
-      redirect_to specialist_documents_path
+    if preview_requested?
+      display_preview
     else
-      @document = document
-      render :new
+      store_or_redirect(:new)
     end
   end
 
   def update
+    if preview_requested?
+      display_preview
+    else
+      store_or_redirect(:edit)
+    end
+  end
+
+  def preview
+    render json: { preview_html: generate_preview }
+  end
+
+protected
+
+  def preview_requested?
+    params.has_key?(:preview)
+  end
+
+  def display_preview
+    @preview = generate_preview
+    render :edit
+  end
+
+  def store_or_redirect(action_name)
     if store(document, publish: params.has_key?('publish'))
       redirect_to specialist_documents_path
     else
       @document = document
-      render :edit
+      render action_name
     end
   end
-
-protected
 
   def document
     @document ||= begin
@@ -54,5 +76,9 @@ protected
       specialist_document_repository.publish!(document)
     end
     stored_ok
+  end
+
+  def generate_preview
+    Govspeak::Document.new(document.body).to_html
   end
 end
