@@ -2,10 +2,12 @@ require 'spec_helper'
 
 describe SpecialistDocument do
   subject(:doc) {
-    SpecialistDocument.new(document_id, editions)
+    SpecialistDocument.new(edition_factory, document_id, editions)
   }
 
   let(:document_id)         { "a-document-id" }
+  let(:edition_factory)     { double(:edition_factory, call: new_edition) }
+  let(:new_edition)         { double(:new_edition, published?: false, assign_attributes: nil) }
 
   let(:draft_edition)       {
     double(:draft_edition,
@@ -24,6 +26,22 @@ describe SpecialistDocument do
       version_number: 1,
     )
   }
+
+  context "document is new, with no previous editions" do
+    let(:editions) { [] }
+    let(:attrs)    { { title: "Test title" } }
+
+    describe "#udpate" do
+      it "creates the first edition" do
+        doc.update(attrs)
+
+        expect(edition_factory).to have_received(:call).with(
+          version_number: 1,
+          state: "draft",
+        )
+      end
+    end
+  end
 
   context "with one draft edition" do
     let(:editions) { [ draft_edition ] }
@@ -57,20 +75,15 @@ describe SpecialistDocument do
 
     describe "#update(params)" do
       let(:params) { {title: "It is a new title"} }
-      let(:new_edition) { double }
-
-      before do
-        SpecialistDocumentEdition.stub(:new).and_return(new_edition)
-      end
 
       it "builds a new edition with the new params" do
         doc.update(params)
-        expect(SpecialistDocumentEdition).to have_received(:new).with(hash_including(params))
+        expect(edition_factory).to have_received(:call).with(hash_including(params))
       end
 
       it "builds a new edition with an incremented version number" do
         doc.update(params)
-        expect(SpecialistDocumentEdition).to have_received(:new).with(hash_including(version_number: 2))
+        expect(edition_factory).to have_received(:call).with(hash_including(version_number: 2))
       end
 
       it "presents the new edition as the latest" do

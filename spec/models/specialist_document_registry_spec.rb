@@ -17,9 +17,10 @@ describe SpecialistDocumentRegistry do
   let(:document_id) { "document-id" }
 
   let(:document) {
-    SpecialistDocument.new(document_id, editions)
+    SpecialistDocument.new(edition_factory, document_id, editions)
   }
 
+  let(:edition_factory) { double(:edition_factory) }
   let(:editions) { [new_draft_edition] }
 
   let(:new_draft_edition) {
@@ -60,7 +61,7 @@ describe SpecialistDocumentRegistry do
 
         allow(document_factory).to receive(:call)
           .with("document-id-#{n}", [edition])
-          .and_return(SpecialistDocument.new("document-id-#{n}", [edition]))
+          .and_return(SpecialistDocument.new(edition_factory, "document-id-#{n}", [edition]))
 
         edition
       end
@@ -107,7 +108,7 @@ describe SpecialistDocumentRegistry do
 
   context "when the document is new" do
     before do
-      @document = SpecialistDocument.new(document_id, [new_draft_edition])
+      @document = SpecialistDocument.new(edition_factory, document_id, [new_draft_edition])
     end
 
     describe "#store!(document)" do
@@ -186,7 +187,7 @@ end
   context "when the document exists in draft" do
     before do
       draft_edition = FactoryGirl.create(:specialist_document_edition, document_id: document_id, state: 'draft')
-      @document = SpecialistDocument.new('12345', [draft_edition])
+      @document = SpecialistDocument.new(edition_factory, '12345', [draft_edition])
       @mapping = FactoryGirl.create(:panopticon_mapping, document_id: @document.id)
     end
 
@@ -205,7 +206,7 @@ end
 
   context "when the document exists and is published" do
     before do
-      @document = SpecialistDocument.new('12345', [published_edition])
+      @document = SpecialistDocument.new(edition_factory, '12345', [published_edition])
       @mapping = FactoryGirl.create(:panopticon_mapping, document_id: @document.id)
     end
 

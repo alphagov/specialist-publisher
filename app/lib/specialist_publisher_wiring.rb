@@ -7,8 +7,22 @@ SpecialistPublisherWiring = DependencyContainer.new do
   define_singleton(:panopticon_api) do
     GdsApi::Panopticon.new(Plek.current.find("panopticon"), PANOPTICON_API_CREDENTIALS)
   end
-  define_singleton(:specialist_document_factory) { SpecialistDocument.method(:new) }
+
+  define_singleton(:specialist_document_factory) {
+    ->(*args) {
+      SpecialistDocument.new(get(:edition_factory), *args)
+    }
+  }
+
   define_singleton(:specialist_document_registry) do
     build_with_dependencies(SpecialistDocumentRegistry)
   end
+
+  define_singleton(:id_generator) { SecureRandom.method(:uuid) }
+
+  define_singleton(:edition_factory) { SpecialistDocumentEdition.method(:new) }
+
+  define_factory(:specialist_document_builder) {
+    build_with_dependencies(SpecialistDocumentBuilder)
+  }
 end
