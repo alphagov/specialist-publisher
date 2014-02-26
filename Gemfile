@@ -24,6 +24,8 @@ group :assets do
 end
 
 gem 'debugger', group: [:development, :test]
+gem 'pry', group: [:development, :test]
+gem 'awesome_print', group: [:development, :test]
 
 group :test do
   gem 'cucumber-rails', '1.4.0', require: false
