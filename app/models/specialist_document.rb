@@ -40,10 +40,6 @@ class SpecialistDocument
     self
   end
 
-  def slug
-    "cma-cases/#{slug_from_title}"
-  end
-
   def valid?
     latest_edition.valid?
   end
@@ -145,10 +141,6 @@ class SpecialistDocument
 protected
 
   attr_reader :edition_factory
-
-  def slug_from_title
-    title.downcase.gsub(/\W/, '-')
-  end
 
   def new_edition_defaults
     {
