@@ -2,14 +2,12 @@ require 'spec_helper'
 
 describe SpecialistDocumentRepository do
 
-  let(:panopticon) do
-    double(:panopticon_api, create_artefact!: {'id' => panopticon_id}, put_artefact!: nil)
+  let(:panopticon_api) do
+    double(:panopticon_api)
   end
 
-  let(:panopticon_id) { 'example-panopticon-id' }
-
   let(:specialist_document_repository) do
-    SpecialistDocumentRepository.new(PanopticonMapping, SpecialistDocumentEdition, panopticon, document_factory)
+    SpecialistDocumentRepository.new(PanopticonMapping, SpecialistDocumentEdition, panopticon_api, document_factory)
   end
 
   let(:document_factory) { double(:document_factory, call: document) }
@@ -109,12 +107,17 @@ describe SpecialistDocumentRepository do
   context "when the document is new" do
     before do
       @document = SpecialistDocument.new(edition_factory, document_id, [new_draft_edition])
+      @panopticon_id = 'some-panopticon-id'
+      allow(panopticon_api).to receive(:create_artefact!).and_return('id' => @panopticon_id)
     end
 
     describe "#store!(document)" do
-      it "creates an artefact with the required extra information" do
-        panopticon.should_receive(:create_artefact!).with(
+      it "creates a draft artefact" do
+        panopticon_api.should_receive(:create_artefact!).with(
           hash_including(
+            slug: @document.slug,
+            name: @document.title,
+            state: 'draft',
             owning_app: 'specialist-publisher',
             rendering_app: 'specialist-frontend',
             paths: ["/#{@document.slug}"],
@@ -124,22 +127,11 @@ describe SpecialistDocumentRepository do
         specialist_document_repository.store!(@document)
       end
 
-      it "creates a draft artefact" do
-        panopticon.should_receive(:create_artefact!).with(
-          hash_including(
-            slug: @document.slug,
-            name: @document.title,
-            state: 'draft',
-          )
-        )
-
-        specialist_document_repository.store!(@document)
-      end
-
       it "stores a mapping of document id to panopticon id" do
         specialist_document_repository.store!(@document)
 
-        assert PanopticonMapping.exists?(conditions: {document_id: @document.id, panopticon_id: panopticon_id})
+        mapping = PanopticonMapping.where(document_id: @document.id).last
+        expect(mapping.panopticon_id).to eq(@panopticon_id)
       end
     end
 
@@ -163,8 +155,10 @@ describe "#store!(document)" do
 
   context "with a valid document" do
     before do
-      allow(document).to receive(:save).and_return(true)
+      allow(panopticon_api).to receive(:create_artefact!).and_return({'id' => panopticon_id})
     end
+
+    let(:panopticon_id) { 'some-panopticon-id' }
 
     let(:latest_edition) { new_draft_edition }
     let(:previous_edition) { published_edition }
@@ -189,6 +183,7 @@ end
       draft_edition = FactoryGirl.create(:specialist_document_edition, document_id: document_id, state: 'draft')
       @document = SpecialistDocument.new(edition_factory, '12345', [draft_edition])
       @mapping = FactoryGirl.create(:panopticon_mapping, document_id: @document.id)
+      allow(panopticon_api).to receive(:put_artefact!)
     end
 
     describe "#publish!(document)" do
@@ -198,8 +193,8 @@ end
       end
 
       it "notifies panopticon of the update" do
-        panopticon.should_receive(:put_artefact!).with(@mapping.panopticon_id, anything)
         specialist_document_repository.publish!(@document)
+        expect(panopticon_api).to have_received(:put_artefact!).with(@mapping.panopticon_id, anything)
       end
     end
   end
@@ -221,7 +216,7 @@ end
   context "when panopticon raises an exception, eg duplicate slug" do
     before do
       exception = GdsApi::HTTPErrorResponse.new(422, 'errors' => {slug: ['already taken']})
-      allow(panopticon).to receive(:create_artefact!).and_raise(exception)
+      allow(panopticon_api).to receive(:create_artefact!).and_raise(exception)
     end
 
     describe "#store!" do
