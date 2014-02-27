@@ -14,8 +14,8 @@ SpecialistPublisherWiring = DependencyContainer.new do
     }
   }
 
-  define_singleton(:specialist_document_registry) do
-    build_with_dependencies(SpecialistDocumentRegistry)
+  define_singleton(:specialist_document_repository) do
+    build_with_dependencies(SpecialistDocumentRepository)
   end
 
   define_singleton(:id_generator) { SecureRandom.method(:uuid) }
