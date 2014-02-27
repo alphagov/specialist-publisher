@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe SpecialistDocumentRegistry do
+describe SpecialistDocumentRepository do
 
   let(:panopticon) do
     double(:panopticon_api, create_artefact!: {'id' => panopticon_id}, put_artefact!: nil)
@@ -8,8 +8,8 @@ describe SpecialistDocumentRegistry do
 
   let(:panopticon_id) { 'example-panopticon-id' }
 
-  let(:specialist_document_registry) do
-    SpecialistDocumentRegistry.new(PanopticonMapping, SpecialistDocumentEdition, panopticon, document_factory)
+  let(:specialist_document_repository) do
+    SpecialistDocumentRepository.new(PanopticonMapping, SpecialistDocumentEdition, panopticon, document_factory)
   end
 
   let(:document_factory) { double(:document_factory, call: document) }
@@ -68,7 +68,7 @@ describe SpecialistDocumentRegistry do
     end
 
     it "returns all documents by date updated desc" do
-      specialist_document_registry.all.map(&:title).should == [@edition_2, @edition_1].map(&:title)
+      specialist_document_repository.all.map(&:title).should == [@edition_2, @edition_1].map(&:title)
     end
   end
 
@@ -84,13 +84,13 @@ describe SpecialistDocumentRegistry do
     end
 
     it "populates the document with all editions for that document id" do
-      specialist_document_registry.fetch(document_id)
+      specialist_document_repository.fetch(document_id)
 
       expect(document_factory).to have_received(:call).with(document_id, editions)
     end
 
     it "returns the document" do
-      expect(specialist_document_registry.fetch(document_id)).to eq(document)
+      expect(specialist_document_repository.fetch(document_id)).to eq(document)
     end
 
     context "when there are no editions" do
@@ -101,7 +101,7 @@ describe SpecialistDocumentRegistry do
       end
 
       it "returns nil" do
-        expect(specialist_document_registry.fetch(document_id)).to be(nil)
+        expect(specialist_document_repository.fetch(document_id)).to be(nil)
       end
     end
   end
@@ -121,7 +121,7 @@ describe SpecialistDocumentRegistry do
           )
         )
 
-        specialist_document_registry.store!(@document)
+        specialist_document_repository.store!(@document)
       end
 
       it "creates a draft artefact" do
@@ -133,11 +133,11 @@ describe SpecialistDocumentRegistry do
           )
         )
 
-        specialist_document_registry.store!(@document)
+        specialist_document_repository.store!(@document)
       end
 
       it "stores a mapping of document id to panopticon id" do
-        specialist_document_registry.store!(@document)
+        specialist_document_repository.store!(@document)
 
         assert PanopticonMapping.exists?(conditions: {document_id: @document.id, panopticon_id: panopticon_id})
       end
@@ -145,7 +145,7 @@ describe SpecialistDocumentRegistry do
 
     describe "#publish!(document)" do
       it "raises an InvalidDocumentError" do
-        expect { specialist_document_registry.publish!(@document) }.to raise_error(SpecialistDocumentRegistry::InvalidDocumentError)
+        expect { specialist_document_repository.publish!(@document) }.to raise_error(SpecialistDocumentRepository::InvalidDocumentError)
       end
     end
   end
@@ -157,7 +157,7 @@ describe "#store!(document)" do
     end
 
     it "returns false" do
-      expect(specialist_document_registry.store!(document)).to be false
+      expect(specialist_document_repository.store!(document)).to be false
     end
   end
 
@@ -172,11 +172,11 @@ describe "#store!(document)" do
     let(:editions) { [previous_edition, latest_edition] }
 
     it "returns true" do
-      expect(specialist_document_registry.store!(document)).to be true
+      expect(specialist_document_repository.store!(document)).to be true
     end
 
     it "only saves the latest edition" do
-      specialist_document_registry.store!(document)
+      specialist_document_repository.store!(document)
 
       expect(latest_edition).to have_received(:save)
       expect(previous_edition).not_to have_received(:save)
@@ -193,13 +193,13 @@ end
 
     describe "#publish!(document)" do
       it "the document becomes published" do
-        specialist_document_registry.publish!(@document)
+        specialist_document_repository.publish!(@document)
         @document.should be_published
       end
 
       it "notifies panopticon of the update" do
         panopticon.should_receive(:put_artefact!).with(@mapping.panopticon_id, anything)
-        specialist_document_registry.publish!(@document)
+        specialist_document_repository.publish!(@document)
       end
     end
   end
@@ -213,7 +213,7 @@ end
     describe "#publish!(document)" do
       it "does not notify panopticon of the update" do
         panopticon.should_not_receive(:put_artefact!)
-        specialist_document_registry.publish!(@document)
+        specialist_document_repository.publish!(@document)
       end
     end
   end
@@ -229,11 +229,11 @@ end
 
       it "sets error messages on the document" do
         new_draft_edition.should_receive(:add_error).with(:slug, include('already taken'))
-        specialist_document_registry.store!(document)
+        specialist_document_repository.store!(document)
       end
 
       it "returns false" do
-        specialist_document_registry.store!(document).should == false
+        specialist_document_repository.store!(document).should == false
       end
     end
   end

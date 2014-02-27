@@ -29,7 +29,7 @@ protected
   def document
     @document ||= begin
       if params[:id]
-        current_document = specialist_document_registry.fetch(params[:id])
+        current_document = specialist_document_repository.fetch(params[:id])
 
         if current_document && params[:specialist_document]
           current_document.update(params[:specialist_document])
@@ -44,13 +44,13 @@ protected
   helper_method :document
 
   def documents
-    @documents ||= specialist_document_registry.all
+    @documents ||= specialist_document_repository.all
   end
   helper_method :documents
 
   def store(document, publish: false)
-    specialist_document_registry.store!(document).tap {
-      specialist_document_registry.publish!(document) if publish
+    specialist_document_repository.store!(document).tap {
+      specialist_document_repository.publish!(document) if publish
     }
   end
 end

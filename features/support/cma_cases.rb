@@ -55,7 +55,7 @@ def check_for_cma_cases(*titles)
 end
 
 def go_to_edit_page_for_most_recent_case
-  registry = SpecialistPublisherWiring.get(:specialist_document_registry)
+  registry = SpecialistPublisherWiring.get(:specialist_document_repository)
   document = registry.all.last
 
   visit edit_specialist_document_path(document.id)

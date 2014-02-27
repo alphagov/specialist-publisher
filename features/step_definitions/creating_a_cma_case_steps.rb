@@ -66,7 +66,7 @@ def create_cases(number_of_cases, state: 'draft')
       state: state,
     )
 
-    specialist_document_registry.store!(doc)
+    specialist_document_repository.store!(doc)
 
     Timecop.travel(10.minutes.from_now)
   end

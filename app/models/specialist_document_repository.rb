@@ -1,6 +1,6 @@
 require "gds_api/panopticon"
 
-class SpecialistDocumentRegistry
+class SpecialistDocumentRepository
 
   def initialize(panopticon_mappings, specialist_document_editions, panopticon_api, specialist_document_factory)
     @panopticon_mappings = panopticon_mappings
