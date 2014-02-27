@@ -155,41 +155,41 @@ describe SpecialistDocumentRepository do
     end
   end
 
-describe "#store!(document)" do
-  context "with an invalid document" do
-    before do
-      allow(new_draft_edition).to receive(:save).and_return(false)
+  describe "#store!(document)" do
+    context "with an invalid document" do
+      before do
+        allow(new_draft_edition).to receive(:save).and_return(false)
+      end
+
+      it "returns false" do
+        expect(specialist_document_repository.store!(document)).to be false
+      end
     end
 
-    it "returns false" do
-      expect(specialist_document_repository.store!(document)).to be false
+    context "with a valid document" do
+      before do
+        allow(panopticon_api).to receive(:create_artefact!).and_return({'id' => panopticon_id})
+      end
+
+      let(:panopticon_id) { 'some-panopticon-id' }
+
+      let(:latest_edition) { new_draft_edition }
+      let(:previous_edition) { published_edition }
+
+      let(:editions) { [previous_edition, latest_edition] }
+
+      it "returns true" do
+        expect(specialist_document_repository.store!(document)).to be true
+      end
+
+      it "only saves the latest edition" do
+        specialist_document_repository.store!(document)
+
+        expect(latest_edition).to have_received(:save)
+        expect(previous_edition).not_to have_received(:save)
+      end
     end
   end
-
-  context "with a valid document" do
-    before do
-      allow(panopticon_api).to receive(:create_artefact!).and_return({'id' => panopticon_id})
-    end
-
-    let(:panopticon_id) { 'some-panopticon-id' }
-
-    let(:latest_edition) { new_draft_edition }
-    let(:previous_edition) { published_edition }
-
-    let(:editions) { [previous_edition, latest_edition] }
-
-    it "returns true" do
-      expect(specialist_document_repository.store!(document)).to be true
-    end
-
-    it "only saves the latest edition" do
-      specialist_document_repository.store!(document)
-
-      expect(latest_edition).to have_received(:save)
-      expect(previous_edition).not_to have_received(:save)
-    end
-  end
-end
 
   context "when the document exists in draft" do
     before do
