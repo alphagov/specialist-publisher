@@ -2,11 +2,16 @@ require "gds_api/panopticon"
 
 class SpecialistDocumentRepository
 
-  def initialize(panopticon_mappings, specialist_document_editions, panopticon_api, specialist_document_factory)
+  def initialize(panopticon_mappings,
+    specialist_document_editions,
+    panopticon_api,
+    specialist_document_factory,
+    slug_generator)
     @panopticon_mappings = panopticon_mappings
     @specialist_document_editions = specialist_document_editions
     @panopticon_api = panopticon_api
     @document_factory = specialist_document_factory
+    @slug_generator = slug_generator
   end
 
   def all
@@ -35,7 +40,11 @@ class SpecialistDocumentRepository
     if edition.save
       unless panopticon_mappings.exists?(conditions: {document_id: document.id})
         response = create_artefact(document)
-        panopticon_mappings.create!(panopticon_id: response['id'], document_id: document.id)
+        panopticon_mappings.create!(
+          document_id: document.id,
+          panopticon_id: response['id'],
+          slug: response['slug']
+        )
       end
 
       true
@@ -93,13 +102,15 @@ private
   end
 
   def artefact_attributes_for(document, state = 'draft')
+    slug = @slug_generator.generate_slug(document)
+
     {
       name: document.title,
-      slug: document.slug,
+      slug: slug,
       kind: 'specialist-document',
       owning_app: 'specialist-publisher',
       rendering_app: 'specialist-frontend',
-      paths: ["/#{document.slug}"],
+      paths: ["/#{slug}"],
       state: state
     }
   end
