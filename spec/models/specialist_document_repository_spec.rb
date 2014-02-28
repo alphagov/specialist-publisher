@@ -31,7 +31,6 @@ describe SpecialistDocumentRepository do
       :published? => false,
       :draft? => true,
       :errors => {},
-      :add_error => nil,
       :emergency_publish => nil,
       :version_number => 2,
     )
@@ -223,8 +222,8 @@ end
       let(:editions) { [new_draft_edition] }
 
       it "sets error messages on the document" do
-        new_draft_edition.should_receive(:add_error).with(:slug, include('already taken'))
         specialist_document_repository.store!(document)
+        expect(new_draft_edition.errors[:slug]).to include('already taken')
       end
 
       it "returns false" do
