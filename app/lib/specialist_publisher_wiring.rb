@@ -1,10 +1,5 @@
 require 'dependency_container'
-require 'artefact'
-require 'panopticon_mapping'
-require 'specialist_document'
-require 'specialist_document_repository'
 require 'securerandom'
-require 'specialist_document_edition'
 require 'builders/specialist_document_builder'
 
 SpecialistPublisherWiring = DependencyContainer.new do
