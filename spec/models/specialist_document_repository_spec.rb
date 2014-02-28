@@ -207,7 +207,7 @@ end
 
     describe "#publish!(document)" do
       it "does not notify panopticon of the update" do
-        panopticon.should_not_receive(:put_artefact!)
+        panopticon_api.should_not_receive(:put_artefact!)
         specialist_document_repository.publish!(@document)
       end
     end
