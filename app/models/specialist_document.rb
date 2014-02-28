@@ -61,7 +61,7 @@ class SpecialistDocument
   end
 
   def add_error(field, message)
-    latest_edition.add_error(field, message)
+    latest_edition.errors[field] << message
   end
 
   def latest_edition
