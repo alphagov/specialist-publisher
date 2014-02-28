@@ -1,6 +1,7 @@
 require 'dependency_container'
 require 'securerandom'
 require 'builders/specialist_document_builder'
+require 'gds_api/panopticon'
 
 SpecialistPublisherWiring = DependencyContainer.new do
   define_instance(:specialist_document_editions) { SpecialistDocumentEdition }
