@@ -88,7 +88,11 @@ protected
   end
 
   def new_edition(params = {})
-    edition_factory.call(params.merge(version_number: current_version_number + 1))
+    edition_params = params
+      .merge(new_edition_defaults)
+      .merge(version_number: current_version_number + 1)
+
+    edition_factory.call(edition_params)
   end
 
   def current_version_number
