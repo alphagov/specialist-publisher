@@ -5,7 +5,6 @@ def create_cma_case(fields, publish: false)
 
   visit new_specialist_document_path
   fill_in_cma_fields(fields)
-  generate_preview
 
   if publish
     publish_document
@@ -17,8 +16,6 @@ end
 def edit_cma_case(fields, publish: false)
   go_to_edit_page_for_most_recent_case
   fill_in_cma_fields(fields)
-
-  generate_preview
 
   if publish
     publish_document
@@ -73,6 +70,11 @@ def go_to_edit_page_for_most_recent_case
   visit edit_specialist_document_path(document.id)
 end
 
+def make_changes_without_saving(fields)
+  go_to_edit_page_for_most_recent_case
+  fill_in_cma_fields(fields)
+end
+
 def generate_preview
   click_button("Preview")
 end
@@ -80,6 +82,6 @@ end
 def check_for_cma_case_body_preview
   expect(current_path).to match(%r{/specialist-documents/[0-9a-f-]+})
   within('.preview') do
-    expect(page).to have_css('p', text: 'body')
+    expect(page).to have_css('p', text: 'Body for preview')
   end
 end

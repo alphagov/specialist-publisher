@@ -6,7 +6,6 @@ Feature: Creating and editing a CMA case
   Background:
     Given I am logged in as a CMA editor
 
-  @javascript
   Scenario: Create a new CMA case
     When I create a CMA case
     Then the CMA case should exist
@@ -21,8 +20,13 @@ Feature: Creating and editing a CMA case
     Given two CMA cases exist
     Then the CMA cases should be in the publisher case index in the correct order
 
-  @javascript
   Scenario: Edit a draft CMA case
     Given a draft CMA case exists
     When I edit a CMA case
     Then the CMA case should have been updated
+
+  @javascript
+  Scenario: Previewing a draft CMA case
+    Given a draft CMA case exists
+    When I make changes and preview the CMA case
+    Then I see the case body preview
