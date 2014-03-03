@@ -28,3 +28,16 @@ end
 Then(/^I should see the editing form again with an error about the missing title$/) do
   check_for_missing_title_error
 end
+
+When(/^then I edit it and republish$/) do
+  @amended_document_attributes = {summary: "New summary", title: "My title"}
+  edit_cma_case(@amended_document_attributes, publish: true)
+end
+
+Then(/^the amended CMA case should be published$/) do
+  last_case = specialist_document_repository.all.last
+  @amended_document_attributes.each do |attribute, expected_value|
+    expect(last_case.send(attribute)).to eq expected_value
+  end
+  expect(last_case).to be_published
+end

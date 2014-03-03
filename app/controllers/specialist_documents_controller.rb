@@ -49,8 +49,10 @@ protected
   helper_method :documents
 
   def store(document, publish: false)
-    if specialist_document_repository.store!(document)
-      specialist_document_repository.publish!(document) if publish
+    stored_ok = specialist_document_repository.store!(document)
+    if stored_ok && publish
+      specialist_document_repository.publish!(document)
     end
+    stored_ok
   end
 end
