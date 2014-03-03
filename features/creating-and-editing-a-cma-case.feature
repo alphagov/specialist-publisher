@@ -9,6 +9,7 @@ Feature: Creating and editing a CMA case
   Scenario: Create a new CMA case
     When I create a CMA case
     Then the CMA case should exist
+    And I should be returned to the list of documents
 
   Scenario: Cannot create a CMA case without entering required fields
     When I create a CMA case without one of the required fields

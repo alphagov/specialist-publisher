@@ -14,10 +14,16 @@ Feature: Publishing a CMA case
     Given a draft CMA case exists
     When I publish the CMA case
     Then the CMA case should be published
+    And I should be returned to the list of documents
 
   Scenario: can create a new CMA case and publish immediately
     When I publish a new CMA case
     Then the CMA case should be published
+
+  Scenario: immediately republish a published case
+    When I publish a new CMA case
+    And then I edit it and republish
+    Then the amended CMA case should be published
 
   Scenario: validation errors on publishing
     When I attempt to publish a new CMA case without a title
