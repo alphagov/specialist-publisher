@@ -6,8 +6,11 @@ describe SpecialistDocumentRepository do
     double(:panopticon_api)
   end
 
+  let(:generated_slug) { "my-slug" }
+  let(:slug_generator) { double("slug generator", generate_slug: generated_slug) }
+
   let(:specialist_document_repository) do
-    SpecialistDocumentRepository.new(PanopticonMapping, SpecialistDocumentEdition, panopticon_api, document_factory)
+    SpecialistDocumentRepository.new(PanopticonMapping, SpecialistDocumentEdition, panopticon_api, document_factory, slug_generator)
   end
 
   let(:document_factory) { double(:document_factory, call: document) }
@@ -26,6 +29,7 @@ describe SpecialistDocumentRepository do
       :new_draft_edition,
       :title => "Example document about oil reserves",
       :"document_id=" => nil,
+      :"slug=" => nil,
       :changed? => true,
       :save => true,
       :published? => false,
@@ -107,30 +111,41 @@ describe SpecialistDocumentRepository do
     before do
       @document = SpecialistDocument.new(edition_factory, document_id, [new_draft_edition])
       @panopticon_id = 'some-panopticon-id'
-      allow(panopticon_api).to receive(:create_artefact!).and_return('id' => @panopticon_id)
+      @panopticon_response = {
+        'id' => @panopticon_id,
+        'slug' => generated_slug
+      }
+      allow(panopticon_api).to receive(:create_artefact!).and_return(@panopticon_response)
     end
 
     describe "#store!(document)" do
+      it "generates a slug using the slug generator" do
+        expect(slug_generator).to receive(:generate_slug).with(@document)
+
+        specialist_document_repository.store!(@document)
+      end
+
       it "creates a draft artefact" do
         panopticon_api.should_receive(:create_artefact!).with(
           hash_including(
-            slug: @document.slug,
+            slug: generated_slug,
             name: @document.title,
             state: 'draft',
             owning_app: 'specialist-publisher',
             rendering_app: 'specialist-frontend',
-            paths: ["/#{@document.slug}"],
+            paths: ["/#{generated_slug}"],
           )
         )
 
         specialist_document_repository.store!(@document)
       end
 
-      it "stores a mapping of document id to panopticon id" do
+      it "stores a mapping of document id to panopticon id and slug" do
         specialist_document_repository.store!(@document)
 
         mapping = PanopticonMapping.where(document_id: @document.id).last
         expect(mapping.panopticon_id).to eq(@panopticon_id)
+        expect(mapping.slug).to eq(generated_slug)
       end
     end
 
@@ -141,41 +156,48 @@ describe SpecialistDocumentRepository do
     end
   end
 
-describe "#store!(document)" do
-  context "with an invalid document" do
-    before do
-      allow(new_draft_edition).to receive(:save).and_return(false)
+  describe "#store!(document)" do
+    context "with an invalid document" do
+      before do
+        allow(new_draft_edition).to receive(:save).and_return(false)
+      end
+
+      it "returns false" do
+        expect(specialist_document_repository.store!(document)).to be false
+      end
     end
 
-    it "returns false" do
-      expect(specialist_document_repository.store!(document)).to be false
+    context "with a valid document" do
+      before do
+        allow(panopticon_api).to receive(:create_artefact!).and_return({'id' => panopticon_id})
+      end
+
+      let(:panopticon_id) { 'some-panopticon-id' }
+
+      let(:latest_edition) { new_draft_edition }
+      let(:previous_edition) { published_edition }
+
+      let(:editions) { [previous_edition, latest_edition] }
+
+      it "returns true" do
+        expect(specialist_document_repository.store!(document)).to be true
+      end
+
+      it "assigns the document_id and slug to the edition" do
+        specialist_document_repository.store!(document)
+
+        expect(latest_edition).to have_received(:document_id=).with(document_id)
+        expect(latest_edition).to have_received(:slug=).with(generated_slug)
+      end
+
+      it "only saves the latest edition" do
+        specialist_document_repository.store!(document)
+
+        expect(latest_edition).to have_received(:save)
+        expect(previous_edition).not_to have_received(:save)
+      end
     end
   end
-
-  context "with a valid document" do
-    before do
-      allow(panopticon_api).to receive(:create_artefact!).and_return({'id' => panopticon_id})
-    end
-
-    let(:panopticon_id) { 'some-panopticon-id' }
-
-    let(:latest_edition) { new_draft_edition }
-    let(:previous_edition) { published_edition }
-
-    let(:editions) { [previous_edition, latest_edition] }
-
-    it "returns true" do
-      expect(specialist_document_repository.store!(document)).to be true
-    end
-
-    it "only saves the latest edition" do
-      specialist_document_repository.store!(document)
-
-      expect(latest_edition).to have_received(:save)
-      expect(previous_edition).not_to have_received(:save)
-    end
-  end
-end
 
   context "when the document exists in draft" do
     before do

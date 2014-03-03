@@ -4,4 +4,5 @@ class PanopticonMapping
 
   field :document_id, type: String
   field :panopticon_id, type: String
+  field :slug, type: String
 end

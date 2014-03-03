@@ -28,4 +28,6 @@ SpecialistPublisherWiring = DependencyContainer.new do
   define_factory(:specialist_document_builder) {
     build_with_dependencies(SpecialistDocumentBuilder)
   }
+
+  define_instance(:slug_generator) { SlugGenerator }
 end
