@@ -77,11 +77,12 @@ protected
   def new_edition_defaults
     {
       state: "draft",
+      version_number: 1
     }
   end
 
   def create_first_edition
-    edition_factory.call(new_edition_defaults.merge(version_number: 1)).tap { |e|
+    edition_factory.call(new_edition_defaults).tap { |e|
       editions.push(e)
     }
   end
