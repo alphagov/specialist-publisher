@@ -35,4 +35,5 @@ group :test do
   gem 'factory_girl', '4.3.0'
   gem 'database_cleaner', '1.2.0'
   gem 'timecop'
+  gem 'poltergeist', '1.5.0'
 end
