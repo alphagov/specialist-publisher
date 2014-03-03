@@ -33,13 +33,15 @@ class SpecialistDocumentRepository
   end
 
   def store!(document)
+    artefact_attributes = artefact_attributes_for(document)
     edition = document.latest_edition
 
     edition.document_id = document.id
+    edition.slug = artefact_attributes[:slug]
 
     if edition.save
       unless panopticon_mappings.exists?(conditions: {document_id: document.id})
-        response = create_artefact(document)
+        response = create_artefact(artefact_attributes)
         panopticon_mappings.create!(
           document_id: document.id,
           panopticon_id: response['id'],
@@ -93,8 +95,8 @@ private
 
   attr_reader :panopticon_mappings, :specialist_document_editions, :panopticon_api, :document_factory
 
-  def create_artefact(document)
-    panopticon_api.create_artefact!(artefact_attributes_for(document))
+  def create_artefact(artefact_attributes)
+    panopticon_api.create_artefact!(artefact_attributes)
   end
 
   def notify_panopticon_of_publish(panopticon_id, document)

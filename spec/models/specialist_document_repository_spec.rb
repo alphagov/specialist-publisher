@@ -29,6 +29,7 @@ describe SpecialistDocumentRepository do
       :new_draft_edition,
       :title => "Example document about oil reserves",
       :"document_id=" => nil,
+      :"slug=" => nil,
       :changed? => true,
       :save => true,
       :published? => false,
@@ -180,6 +181,13 @@ describe SpecialistDocumentRepository do
 
       it "returns true" do
         expect(specialist_document_repository.store!(document)).to be true
+      end
+
+      it "assigns the document_id and slug to the edition" do
+        specialist_document_repository.store!(document)
+
+        expect(latest_edition).to have_received(:document_id=).with(document_id)
+        expect(latest_edition).to have_received(:slug=).with(generated_slug)
       end
 
       it "only saves the latest edition" do
