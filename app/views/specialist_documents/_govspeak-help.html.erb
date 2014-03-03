@@ -64,23 +64,6 @@ Don't use a single # - this is H1 and is for the title only</pre>
 (to indent, add 2 spaces)</pre>
 </div>
 
-<h3><a data-toggle="collapse" data-target="#govspeak-images">Images</a></h3>
-<div class="collapse" id="govspeak-images">
-  <p>First upload your image(s), then:</p>
-  <pre>!!<em>n</em></pre>
-  <p>e.g. for the first image:</p>
-  <pre>!!1</pre>
-</div>
-
-<h3><a data-toggle="collapse" data-target="#govspeak-video-links">Video links</a></h3>
-<div class="collapse" id="govspeak-video-links" style="height: 0px;">
-  <p>Use the title of the video and the URL of the YouTube page that shows the video for watching. Don’t use the embed code or the 'Share this video' URL:</p>
-  <pre>[title of video](youtube-video-url)</pre>
-  <p>Only YouTube videos will work at present:</p>
-  <pre>[The Queen's Diamond Jubilee Concert](http://www.youtube.com/watch?v=OXHPWmnycno)</pre>
-  <p>The title text does not show. The video will display in an embedded media player automatically.</p>
-</div>
-
 
 <h3><a data-toggle="collapse" data-target="#govspeak-tables">Tables</a></h3>
 <div class="collapse" id="govspeak-tables">
@@ -95,43 +78,6 @@ Don't use a single # - this is H1 and is for the title only</pre>
 -|-
 apple | green
 banana | yellow</pre>
-</div>
-
-<h3><a data-toggle="collapse" data-target="#govspeak-charts">Charts</a></h3>
-<div class="collapse" id="govspeak-charts">
-  <p>Numeric data can be shown as a simple bar chart. Grouped bars are used for multiple columns.</p>
-  <pre>Department   | Short Speeches | Long Speeches
--|-|-
-Department 1 | 6              | 6
-Department 2 | 6              | 8
-Department 3 | 18             | 2
-{barchart}</pre>
-  <p>Stacked bars can be created. The final column is used to display the total.</p>
-  <pre>Department | Short Speeches | Long Speeches | Total
--|-|-|-
-Dept 1     | 6              | 6             | 12
-Dept 2     | 6              | 8             | 14
-Dept 3     | 18             | 2             | 20
-{barchart stacked}</pre>
-  <p>Large graphs can be displayed compactly to save space.</p>
-  <pre>Department   | Short Speeches | Long Speeches
--|-|-
-Department 1 | 6              | 6
-Department 2 | 6              | 8
-Department 3 | 18             | 2
-Department 4 | 5              | 4
-Department 4 | 7              | 7
-Department 6 | 11             | 1
-{barchart compact}</pre>
-  <p>If you include negative values, you must indicate this.</p>
-  <pre>Department   | Change in Number of Buildings
--|-
-Department 1 | -12
-Department 1 | 3
-Department 1 | -4
-Department 1 | 2
-{barchart negative}</pre>
-  <p>All effects can be combined.</p>
 </div>
 
 <h3><a data-toggle="collapse" data-target="#govspeak-cta">Call to action</a></h3>
