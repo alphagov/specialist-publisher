@@ -49,8 +49,8 @@ protected
   helper_method :documents
 
   def store(document, publish: false)
-    specialist_document_repository.store!(document).tap {
+    if specialist_document_repository.store!(document)
       specialist_document_repository.publish!(document) if publish
-    }
+    end
   end
 end
