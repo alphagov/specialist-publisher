@@ -16,6 +16,7 @@ end
 def edit_cma_case(fields, publish: false)
   go_to_edit_page_for_most_recent_case
   fill_in_cma_fields(fields)
+
   if publish
     publish_document
   else
@@ -67,4 +68,20 @@ def go_to_edit_page_for_most_recent_case
   document = registry.all.last
 
   visit edit_specialist_document_path(document.id)
+end
+
+def make_changes_without_saving(fields)
+  go_to_edit_page_for_most_recent_case
+  fill_in_cma_fields(fields)
+end
+
+def generate_preview
+  click_button("Preview")
+end
+
+def check_for_cma_case_body_preview
+  expect(current_path).to match(%r{/specialist-documents/[0-9a-f-]+})
+  within('.preview') do
+    expect(page).to have_css('p', text: 'Body for preview')
+  end
 end

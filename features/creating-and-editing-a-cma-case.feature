@@ -24,3 +24,9 @@ Feature: Creating and editing a CMA case
     Given a draft CMA case exists
     When I edit a CMA case
     Then the CMA case should have been updated
+
+  @javascript
+  Scenario: Previewing a draft CMA case
+    Given a draft CMA case exists
+    When I make changes and preview the CMA case
+    Then I see the case body preview
