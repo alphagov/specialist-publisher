@@ -32,7 +32,7 @@ class SpecialistDocument
 
   def update(params)
     if latest_edition.published?
-      editions.push(new_edition(params))
+      editions.push(new_draft(params))
     else
       latest_edition.assign_attributes(params)
     end
@@ -77,17 +77,22 @@ protected
   def new_edition_defaults
     {
       state: "draft",
+      version_number: 1
     }
   end
 
   def create_first_edition
-    edition_factory.call(new_edition_defaults.merge(version_number: 1)).tap { |e|
+    edition_factory.call(new_edition_defaults).tap { |e|
       editions.push(e)
     }
   end
 
-  def new_edition(params = {})
-    edition_factory.call(params.merge(version_number: current_version_number + 1))
+  def new_draft(params = {})
+    edition_params = params
+      .merge(new_edition_defaults)
+      .merge(version_number: current_version_number + 1)
+
+    edition_factory.call(edition_params)
   end
 
   def current_version_number

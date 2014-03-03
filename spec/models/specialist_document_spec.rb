@@ -86,6 +86,11 @@ describe SpecialistDocument do
         expect(edition_factory).to have_received(:call).with(hash_including(version_number: 2))
       end
 
+      it "builds a new edition in the 'draft' state" do
+        doc.update(params)
+        expect(edition_factory).to have_received(:call).with(hash_including(state: 'draft'))
+      end
+
       it "presents the new edition as the latest" do
         doc.update(params)
         expect(doc.latest_edition).to eq(new_edition)
