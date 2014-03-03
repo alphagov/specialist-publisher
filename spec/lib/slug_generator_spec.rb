@@ -16,4 +16,12 @@ describe SlugGenerator do
 
     expect(generated_slug).to eq("cma-cases/test-document-1")
   end
+
+  it "removes non-word-character—hyphens from the end of the slug" do
+    document = double("document", title: 'Test Document ')
+
+    generated_slug = SlugGenerator.generate_slug(document)
+
+    expect(generated_slug).to eq("cma-cases/test-document")
+  end
 end
