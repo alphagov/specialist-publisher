@@ -40,18 +40,21 @@ describe SpecialistDocumentRepository do
     )
   }
 
-  let(:published_edition) {
+  def build_published_edition(version: 1)
     double(
       :published_edition,
-      :title => "Example document about oil reserves",
+      :title => "Example document about oil reserves #{version}",
       :"document_id=" => nil,
       :changed? => false,
       :save => nil,
+      :archive => nil,
       :published? => true,
       :draft? => false,
-      :version_number => 1,
+      :version_number => version,
     )
-  }
+  end
+
+  let(:published_edition) { build_published_edition }
 
   describe "#all" do
     before do
@@ -222,11 +225,19 @@ describe SpecialistDocumentRepository do
 
   context "when the document exists and is published" do
     before do
-      @document = SpecialistDocument.new(edition_factory, '12345', [published_edition])
+      @latest_published_edition = build_published_edition(version: 2)
+
+      @document = SpecialistDocument.new(edition_factory, '12345', [published_edition, @latest_published_edition])
       @mapping = FactoryGirl.create(:panopticon_mapping, document_id: @document.id)
     end
 
     describe "#publish!(document)" do
+      it "archives old editions" do
+        specialist_document_repository.publish!(@document)
+        expect(published_edition).to have_received(:archive)
+        expect(@latest_published_edition).not_to have_received(:archive)
+      end
+
       it "does not notify panopticon of the update" do
         panopticon_api.should_not_receive(:put_artefact!)
         specialist_document_repository.publish!(@document)
