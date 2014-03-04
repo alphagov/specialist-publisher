@@ -65,6 +65,10 @@ class SpecialistDocument
     @editions.last || create_first_edition
   end
 
+  def previous_editions
+    @editions[0...-1]
+  end
+
   # TODO: remove this persistence concern
   def persisted?
     updated_at.present?

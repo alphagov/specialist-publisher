@@ -80,6 +80,8 @@ class SpecialistDocumentRepository
     latest_edition.emergency_publish unless latest_edition.published?
 
     notify_panopticon_of_publish(mapping.panopticon_id, document) unless document_previously_published
+
+    document.previous_editions.each(&:archive)
   end
 
   class InvalidDocumentError < Exception
