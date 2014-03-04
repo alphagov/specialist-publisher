@@ -6,6 +6,7 @@ gem "airbrake", "3.1.15"
 gem 'unicorn'
 
 gem 'gds-sso', '9.2.1'
+gem 'plek', '1.7.0'
 
 gem 'mongoid', '2.5.2'
 
