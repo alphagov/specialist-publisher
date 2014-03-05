@@ -4,7 +4,6 @@
     <title>Specialist publisher</title>
 
     <%= stylesheet_link_tag    "application", media: "all" %>
-    <%= javascript_include_tag "application" %>
     <%= csrf_meta_tags %>
   </head>
 
@@ -36,6 +35,7 @@
 
     </div><!-- /.container -->
 
+    <%= javascript_include_tag "application" %>
     <script>
       $(document).ready(function() {
         <%= yield :document_ready %>
