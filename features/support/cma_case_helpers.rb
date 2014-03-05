@@ -64,8 +64,8 @@ module CmaCaseHelpers
   end
 
   def go_to_edit_page_for_most_recent_case
-    # TODO: testing antipattern, relies on datastore co-incidence
     registry = SpecialistPublisherWiring.get(:specialist_document_repository)
+    # TODO: testing antipattern, relies on datastore co-incidence
     document = registry.all.last
 
     visit edit_specialist_document_path(document.id)

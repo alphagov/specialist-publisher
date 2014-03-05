@@ -24,6 +24,7 @@ SpecialistPublisherWiring = DependencyContainer.new do
   define_singleton(:id_generator) { SecureRandom.method(:uuid) }
 
   define_singleton(:edition_factory) { SpecialistDocumentEdition.method(:new) }
+  define_singleton(:attachment_factory) { Attachment.method(:new) }
 
   define_factory(:specialist_document_builder) {
     build_with_dependencies(SpecialistDocumentBuilder)

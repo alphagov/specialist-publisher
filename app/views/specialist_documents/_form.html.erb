@@ -36,6 +36,8 @@
     <%= f.select :market_sector, FinderSchema.market_sector_options %>
     <%= f.select :outcome_type, FinderSchema.outcome_type_options, include_blank: true %>
 
+    <%= link_to "Add attachment", new_specialist_document_attachment_path(document) %>
+
     <button name='draft'>Save as draft</button>
     <button name='publish'>Save and publish</button>
   <% end %>

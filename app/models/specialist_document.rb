@@ -1,4 +1,6 @@
 require "forwardable"
+require "active_model/conversion"
+require "active_model/naming"
 
 class SpecialistDocument
   include ActiveModel::Conversion
@@ -30,6 +32,10 @@ class SpecialistDocument
     @edition_factory = edition_factory
     @id = id
     @editions = editions.sort_by(&:version_number)
+  end
+
+  def to_param
+    self.id
   end
 
   def update(params)
@@ -80,6 +86,14 @@ class SpecialistDocument
   # TODO: remove this persistence concern
   def persisted?
     updated_at.present?
+  end
+
+  def add_attachment(attributes)
+    latest_edition.build_attachment(attributes)
+  end
+
+  def attachments
+    latest_edition.attachments
   end
 
 protected
