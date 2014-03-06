@@ -36,5 +36,10 @@ form {
       padding-bottom: 2px;
     }
   }
+
+  .preview {
+    border: 1px solid $border-colour;
+    padding: $gutter-half;
+  }
 }
 
