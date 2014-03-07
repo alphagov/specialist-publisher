@@ -42,7 +42,15 @@
     <button name='publish'>Save and publish</button>
   <% end %>
 </div>
+
 <div class="col-md-4">
+
+  <ul class="attachments">
+    <% document.attachments.each do |attachment| %>
+      <li class="attachment"><span class="title"><%= attachment.title %></span> <span class="snippet"><%= attachment.snippet %></span></li>
+    <% end %>
+  </ul>
+
   <%= render partial: 'govspeak-help' %>
 </div>
 

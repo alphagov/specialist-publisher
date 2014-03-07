@@ -93,7 +93,7 @@ class SpecialistDocument
   end
 
   def attachments
-    latest_edition.attachments
+    latest_edition.attachments.to_a
   end
 
 protected

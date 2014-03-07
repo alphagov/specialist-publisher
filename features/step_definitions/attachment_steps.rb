@@ -16,9 +16,10 @@ Then(/^I see the attachment on the case with its example markdown embed code$/) 
 end
 
 When(/^I copy\+paste the embed code into the body of the case$/) do
-  pending # express the regexp above with the code you wish you had
+  copy_embed_code_for_attachment_and_paste_into_body("My attachment")
 end
 
 Then(/^I can see a link to the file with the title in the document preview$/) do
-  pending # express the regexp above with the code you wish you had
+  generate_preview
+  check_preview_contains_attachment_link("My attachment")
 end

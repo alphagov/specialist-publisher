@@ -15,6 +15,17 @@ describe SpecialistDocument do
   let(:new_edition)         { double(:new_edition, published?: false, assign_attributes: nil) }
   let(:attachments)         { double(:attachments) }
 
+  let(:edition_messages)    {
+    {
+      build_attachment: nil,
+      assign_attributes: nil,
+      version_number: 1,
+      attachments: attachments_proxy,
+    }
+  }
+
+  let(:attachments_proxy) { double(:attachments_proxy, to_a: attachments) }
+
   let(:draft_edition)       {
     double(:draft_edition,
       edition_messages.merge(
@@ -32,15 +43,6 @@ describe SpecialistDocument do
         slug: published_slug,
       )
     )
-  }
-
-  let(:edition_messages)    {
-    {
-      build_attachment: nil,
-      assign_attributes: nil,
-      version_number: 1,
-      attachments: attachments,
-    }
   }
 
   context "document is new, with no previous editions" do

@@ -8,6 +8,7 @@ $LOAD_PATH << File.dirname(__FILE__)
 # files.
 
 require 'cucumber/rails'
+require 'webmock/cucumber'
 
 require 'capybara/poltergeist'
 Capybara.javascript_driver = :poltergeist

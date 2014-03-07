@@ -2,6 +2,7 @@ require 'dependency_container'
 require 'securerandom'
 require 'builders/specialist_document_builder'
 require 'gds_api/panopticon'
+require "specialist_document_attachment_processor"
 
 SpecialistPublisherWiring = DependencyContainer.new do
   define_instance(:specialist_document_editions) { SpecialistDocumentEdition }
@@ -31,4 +32,12 @@ SpecialistPublisherWiring = DependencyContainer.new do
   }
 
   define_instance(:slug_generator) { SlugGenerator }
+
+  define_singleton(:specialist_document_renderer) {
+    ->(document) {
+      Govspeak::Document.new(
+        SpecialistDocumentAttachmentProcessor.new(document).body
+      ).to_html
+    }
+  }
 end

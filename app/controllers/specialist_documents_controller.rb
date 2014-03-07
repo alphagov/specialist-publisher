@@ -80,6 +80,6 @@ protected
   end
 
   def generate_preview
-    Govspeak::Document.new(document.body).to_html
+    specialist_document_renderer.call(document)
   end
 end
