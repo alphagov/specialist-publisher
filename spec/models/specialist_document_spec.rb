@@ -66,17 +66,6 @@ describe SpecialistDocument do
     it "is not published" do
       expect(doc).not_to be_published
     end
-
-    describe "#update(params)" do
-      it "updates the draft edition" do
-        doc.update(title: "It is a new title")
-        expect(draft_edition).to have_received(:assign_attributes).with(
-          hash_including(
-            title: "It is a new title",
-          )
-        )
-      end
-    end
   end
 
   context "with one published edition" do
@@ -88,34 +77,6 @@ describe SpecialistDocument do
 
     it "is not in draft" do
       expect(doc).not_to be_draft
-    end
-
-    describe "#update(params)" do
-      let(:params) { {title: "It is a new title"} }
-
-      it "builds a new edition with the new params" do
-        doc.update(params)
-        expect(edition_factory).to have_received(:call).with(hash_including(params))
-      end
-
-      it "builds a new edition with an incremented version number" do
-        doc.update(params)
-        expect(edition_factory).to have_received(:call).with(hash_including(version_number: 2))
-      end
-
-      it "builds a new edition in the 'draft' state" do
-        doc.update(params)
-        expect(edition_factory).to have_received(:call).with(hash_including(state: 'draft'))
-      end
-
-      it "presents the new edition as the latest" do
-        doc.update(params)
-        expect(doc.latest_edition).to eq(new_edition)
-      end
-
-      it "returns self" do
-        expect(doc.update(params)).to eq(doc)
-      end
     end
   end
 
@@ -130,32 +91,64 @@ describe SpecialistDocument do
 
   describe "#update" do
     context "before the document is published" do
-      let(:editions)  { [draft_edition] }
+      context "with an existing draft edition" do
+        let(:editions)  { [draft_edition] }
 
-      context "when providing a title" do
-        let(:new_title) { double(:new_title) }
-        let(:slug)      { double(:slug) }
+        context "when providing a title" do
+          let(:new_title) { double(:new_title) }
+          let(:slug)      { double(:slug) }
 
-        it "generates a slug" do
-          doc.update(title: new_title)
+          it "generates a slug" do
+            doc.update(title: new_title)
 
-          expect(slug_generator).to have_received(:call).with(new_title)
-        end
+            expect(slug_generator).to have_received(:call).with(new_title)
+          end
 
-        it "assigns the slug to the draft edition" do
-          doc.update(title: new_title)
+          it "assigns the title and slug to the draft edition" do
+            doc.update(title: new_title)
 
-          expect(draft_edition).to have_received(:assign_attributes)
-            .with(hash_including(
-              title: new_title,
-              slug: slug,
-            ))
+            expect(draft_edition).to have_received(:assign_attributes)
+              .with(hash_including(
+                title: new_title,
+                slug: slug,
+              ))
+          end
         end
       end
     end
 
     context "when the document is published" do
       let(:editions) { [published_edition] }
+
+      let(:params) { {title: "It is a new title"} }
+
+      it "builds a new edition with the new params" do
+        doc.update(params)
+
+        expect(edition_factory).to have_received(:call).with(hash_including(params))
+      end
+
+      it "builds a new edition with an incremented version number" do
+        doc.update(params)
+
+        expect(edition_factory).to have_received(:call).with(hash_including(version_number: 2))
+      end
+
+      it "builds a new edition in the 'draft' state" do
+        doc.update(params)
+
+        expect(edition_factory).to have_received(:call).with(hash_including(state: 'draft'))
+      end
+
+      it "presents the new edition as the latest" do
+        doc.update(params)
+
+        expect(doc.latest_edition).to eq(new_edition)
+      end
+
+      it "returns self" do
+        expect(doc.update(params)).to eq(doc)
+      end
 
       context "when providing a title" do
         let(:new_title) { double(:new_title) }
@@ -171,6 +164,6 @@ describe SpecialistDocument do
           )
         end
       end
-   end
+    end
   end
 end
