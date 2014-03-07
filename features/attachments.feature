@@ -12,8 +12,3 @@ Feature: Attachments
     Then I see the attachment on the case with its example markdown embed code
     When I copy+paste the embed code into the body of the case
     Then I can see a link to the file with the title in the document preview
-
-  Scenario: CMA editor can add attachment to an existing case
-    Given a CMA case exists which already has an attachment
-    When I add another attachment to it
-    Then the case has both the new and existing attachments
