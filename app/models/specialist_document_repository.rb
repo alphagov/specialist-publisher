@@ -75,7 +75,7 @@ class SpecialistDocumentRepository
     document_previously_published = document.published?
 
     latest_edition = document.latest_edition
-    latest_edition.emergency_publish unless latest_edition.published?
+    latest_edition.publish unless latest_edition.published?
 
     notify_panopticon_of_publish(mapping.panopticon_id, document) unless document_previously_published
 

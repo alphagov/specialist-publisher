@@ -35,7 +35,7 @@ describe SpecialistDocumentRepository do
       :published? => false,
       :draft? => true,
       :errors => {},
-      :emergency_publish => nil,
+      :publish => nil,
       :version_number => 2,
     )
   }
