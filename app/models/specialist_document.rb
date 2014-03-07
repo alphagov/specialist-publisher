@@ -8,6 +8,7 @@ class SpecialistDocument
   def self.edition_attributes
     [
       :title,
+      :slug,
       :summary,
       :body,
       :opened_date,
@@ -24,13 +25,20 @@ class SpecialistDocument
 
   attr_reader :id, :editions
 
-  def initialize(edition_factory, id, editions)
+  def initialize(slug_generator, edition_factory, id, editions)
+    @slug_generator = slug_generator
     @edition_factory = edition_factory
     @id = id
     @editions = editions.sort_by(&:version_number)
   end
 
   def update(params)
+    if never_published? && params.fetch(:title, false)
+      params = params.merge(
+        slug: slug_generator.call(params.fetch(:title))
+      )
+    end
+
     if latest_edition.published?
       editions.push(new_draft(params))
     else
@@ -76,7 +84,11 @@ class SpecialistDocument
 
 protected
 
-  attr_reader :edition_factory
+  attr_reader :slug_generator, :edition_factory
+
+  def never_published?
+    !published?
+  end
 
   def new_edition_defaults
     {
@@ -94,7 +106,10 @@ protected
   def new_draft(params = {})
     edition_params = params
       .merge(new_edition_defaults)
-      .merge(version_number: current_version_number + 1)
+      .merge(
+        version_number: current_version_number + 1,
+        slug: slug,
+      )
 
     edition_factory.call(edition_params)
   end

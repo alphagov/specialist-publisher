@@ -13,7 +13,7 @@ SpecialistPublisherWiring = DependencyContainer.new do
 
   define_singleton(:specialist_document_factory) {
     ->(*args) {
-      SpecialistDocument.new(get(:edition_factory), *args)
+      SpecialistDocument.new(get(:slug_generator), get(:edition_factory), *args)
     }
   }
 

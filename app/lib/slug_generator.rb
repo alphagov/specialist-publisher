@@ -1,10 +1,10 @@
 class SlugGenerator
-  def self.generate_slug(document)
-    document_slug = document.title
+  def self.call(title)
+    slug = title
       .downcase
       .gsub(/[^a-zA-Z0-9]+/, '-')
       .gsub(/-+$/, '')
 
-    "cma-cases/#{document_slug}"
+    "cma-cases/#{slug}"
   end
 end

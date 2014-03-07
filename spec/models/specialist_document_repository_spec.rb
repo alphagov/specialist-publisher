@@ -6,11 +6,8 @@ describe SpecialistDocumentRepository do
     double(:panopticon_api)
   end
 
-  let(:generated_slug) { "my-slug" }
-  let(:slug_generator) { double("slug generator", generate_slug: generated_slug) }
-
   let(:specialist_document_repository) do
-    SpecialistDocumentRepository.new(PanopticonMapping, SpecialistDocumentEdition, panopticon_api, document_factory, slug_generator)
+    SpecialistDocumentRepository.new(PanopticonMapping, SpecialistDocumentEdition, panopticon_api, document_factory)
   end
 
   let(:document_factory) { double(:document_factory, call: document) }
@@ -18,8 +15,10 @@ describe SpecialistDocumentRepository do
   let(:document_id) { "document-id" }
 
   let(:document) {
-    SpecialistDocument.new(edition_factory, document_id, editions)
+    SpecialistDocument.new(slug_generator, edition_factory, document_id, editions)
   }
+
+  let(:slug_generator) { double(:slug_generator) }
 
   let(:edition_factory) { double(:edition_factory) }
   let(:editions) { [new_draft_edition] }
@@ -28,6 +27,7 @@ describe SpecialistDocumentRepository do
     double(
       :new_draft_edition,
       :title => "Example document about oil reserves",
+      :slug => "example-document-about-oil-reserves",
       :"document_id=" => nil,
       :"slug=" => nil,
       :changed? => true,
@@ -54,6 +54,10 @@ describe SpecialistDocumentRepository do
     )
   end
 
+  def build_specialist_document(*args)
+    SpecialistDocument.new(slug_generator, edition_factory, *args)
+  end
+
   let(:published_edition) { build_published_edition }
 
   describe "#all" do
@@ -65,7 +69,7 @@ describe SpecialistDocumentRepository do
 
         allow(document_factory).to receive(:call)
           .with("document-id-#{n}", [edition])
-          .and_return(SpecialistDocument.new(edition_factory, "document-id-#{n}", [edition]))
+          .and_return(build_specialist_document("document-id-#{n}", [edition]))
 
         edition
       end
@@ -112,31 +116,25 @@ describe SpecialistDocumentRepository do
 
   context "when the document is new" do
     before do
-      @document = SpecialistDocument.new(edition_factory, document_id, [new_draft_edition])
+      @document = build_specialist_document(document_id, [new_draft_edition])
       @panopticon_id = 'some-panopticon-id'
       @panopticon_response = {
         'id' => @panopticon_id,
-        'slug' => generated_slug
+        'slug' => @document.slug,
       }
       allow(panopticon_api).to receive(:create_artefact!).and_return(@panopticon_response)
     end
 
     describe "#store!(document)" do
-      it "generates a slug using the slug generator" do
-        expect(slug_generator).to receive(:generate_slug).with(@document)
-
-        specialist_document_repository.store!(@document)
-      end
-
       it "creates a draft artefact" do
         panopticon_api.should_receive(:create_artefact!).with(
           hash_including(
-            slug: generated_slug,
+            slug: @document.slug,
             name: @document.title,
             state: 'draft',
             owning_app: 'specialist-publisher',
             rendering_app: 'specialist-frontend',
-            paths: ["/#{generated_slug}"],
+            paths: ["/#{@document.slug}"],
           )
         )
 
@@ -148,7 +146,7 @@ describe SpecialistDocumentRepository do
 
         mapping = PanopticonMapping.where(document_id: @document.id).last
         expect(mapping.panopticon_id).to eq(@panopticon_id)
-        expect(mapping.slug).to eq(generated_slug)
+        expect(mapping.slug).to eq(@document.slug)
       end
     end
 
@@ -186,11 +184,10 @@ describe SpecialistDocumentRepository do
         expect(specialist_document_repository.store!(document)).to be true
       end
 
-      it "assigns the document_id and slug to the edition" do
+      it "assigns the document_id edition" do
         specialist_document_repository.store!(document)
 
         expect(latest_edition).to have_received(:document_id=).with(document_id)
-        expect(latest_edition).to have_received(:slug=).with(generated_slug)
       end
 
       it "only saves the latest edition" do
@@ -205,7 +202,7 @@ describe SpecialistDocumentRepository do
   context "when the document exists in draft" do
     before do
       draft_edition = FactoryGirl.create(:specialist_document_edition, document_id: document_id, state: 'draft')
-      @document = SpecialistDocument.new(edition_factory, '12345', [draft_edition])
+      @document = build_specialist_document('12345', [draft_edition])
       @mapping = FactoryGirl.create(:panopticon_mapping, document_id: @document.id)
       allow(panopticon_api).to receive(:put_artefact!)
     end
@@ -227,7 +224,7 @@ describe SpecialistDocumentRepository do
     before do
       @latest_published_edition = build_published_edition(version: 2)
 
-      @document = SpecialistDocument.new(edition_factory, '12345', [published_edition, @latest_published_edition])
+      @document = build_specialist_document('12345', [published_edition, @latest_published_edition])
       @mapping = FactoryGirl.create(:panopticon_mapping, document_id: @document.id)
     end
 

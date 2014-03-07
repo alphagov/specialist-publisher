@@ -1,27 +1,31 @@
 require 'spec_helper'
 
 describe SlugGenerator do
-  it "generates a slug based on the title of a document" do
-    document = double("document", title: "My document")
+  let(:title) { "My document" }
 
-    generated_slug = SlugGenerator.generate_slug(document)
+  it "generates a slug based on the title of a document" do
+    generated_slug = SlugGenerator.call(title)
 
     expect(generated_slug).to eq("cma-cases/my-document")
   end
 
-  it "replaces all non-word characters with a single hyphen" do
-    document = double("document", title: 'Test_ &/Document"1')
+  context "when title contains non-word characters" do
+    let(:title) { %{Test_ &/Document"1} }
 
-    generated_slug = SlugGenerator.generate_slug(document)
+    it "replaces all non-word characters with a single hyphen" do
+      generated_slug = SlugGenerator.call(title)
 
-    expect(generated_slug).to eq("cma-cases/test-document-1")
+      expect(generated_slug).to eq("cma-cases/test-document-1")
+    end
   end
 
-  it "removes non-word-character—hyphens from the end of the slug" do
-    document = double("document", title: 'Test Document ')
+  context "when title has non-word characters at the end" do
+    let(:title) { "Test Document " }
 
-    generated_slug = SlugGenerator.generate_slug(document)
+    it "removes non-word-character—hyphens from the end of the slug" do
+      generated_slug = SlugGenerator.call(title)
 
-    expect(generated_slug).to eq("cma-cases/test-document")
+      expect(generated_slug).to eq("cma-cases/test-document")
+    end
   end
 end

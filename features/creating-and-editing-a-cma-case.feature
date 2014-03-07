@@ -25,6 +25,12 @@ Feature: Creating and editing a CMA case
     When I edit a CMA case
     Then the CMA case should have been updated
 
+  Scenario: Change the title of a previously published document
+    Given a published CMA case exists
+    When I change the CMA case title and re-publish
+    Then the title has been updated
+    And the URL slug remains unchanged
+
   @javascript
   Scenario: Previewing a draft CMA case
     Given a draft CMA case exists
