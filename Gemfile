@@ -37,4 +37,5 @@ group :test do
   gem 'database_cleaner', '1.2.0'
   gem 'timecop'
   gem 'poltergeist', '1.5.0'
+  gem 'webmock', '~> 1.17.4'
 end

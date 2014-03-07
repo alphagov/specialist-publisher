@@ -9,9 +9,14 @@ $LOAD_PATH << File.dirname(__FILE__)
 
 require 'cucumber/rails'
 require 'webmock/cucumber'
+WebMock.disable_net_connect!
 
 require 'capybara/poltergeist'
 Capybara.javascript_driver = :poltergeist
+
+Before('@javascript') do
+  WebMock.disable_net_connect!(:allow_localhost => true)
+end
 
 # Capybara defaults to CSS3 selectors rather than XPath.
 # If you'd prefer to use XPath, just uncomment this line and adjust any
