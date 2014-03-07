@@ -71,5 +71,9 @@ require "features/support/cma_case_helpers"
 
 World(CmaCaseHelpers)
 World(DependencyContainerMethods)
+
 require 'cma_case_helpers'
+require 'attachment_helpers'
+
 World(CmaCaseHelpers)
+World(AttachmentHelpers)
