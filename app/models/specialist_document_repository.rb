@@ -5,13 +5,11 @@ class SpecialistDocumentRepository
   def initialize(panopticon_mappings,
     specialist_document_editions,
     panopticon_api,
-    specialist_document_factory,
-    slug_generator)
+    specialist_document_factory)
     @panopticon_mappings = panopticon_mappings
     @specialist_document_editions = specialist_document_editions
     @panopticon_api = panopticon_api
     @document_factory = specialist_document_factory
-    @slug_generator = slug_generator
   end
 
   def all
@@ -45,7 +43,7 @@ class SpecialistDocumentRepository
         panopticon_mappings.create!(
           document_id: document.id,
           panopticon_id: response['id'],
-          slug: response['slug']
+          slug: edition.slug,
         )
       end
 
@@ -106,15 +104,13 @@ private
   end
 
   def artefact_attributes_for(document, state = 'draft')
-    slug = @slug_generator.generate_slug(document)
-
     {
       name: document.title,
-      slug: slug,
+      slug: document.slug,
       kind: 'specialist-document',
       owning_app: 'specialist-publisher',
       rendering_app: 'specialist-frontend',
-      paths: ["/#{slug}"],
+      paths: ["/#{document.slug}"],
       state: state
     }
   end

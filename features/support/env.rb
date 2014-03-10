@@ -65,4 +65,7 @@ module DependencyContainerMethods
   SpecialistPublisherWiring.inject_into(self)
 end
 
+require "features/support/cma_case_helpers"
+
+World(CmaCaseHelpers)
 World(DependencyContainerMethods)

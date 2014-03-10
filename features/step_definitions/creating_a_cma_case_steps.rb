@@ -105,3 +105,28 @@ end
 Then(/^I see the case body preview$/) do
   check_for_cma_case_body_preview
 end
+
+Given(/^a published CMA case exists$/) do
+  @cma_fields = {
+    title: "Original CMA case title",
+    summary: "Nullam quis risus eget urna mollis ornare vel eu leo.",
+    body: ("Praesent commodo cursus magna, vel scelerisque nisl consectetur et." * 10),
+    opened_date: "2014-01-01",
+  }
+
+  @expected_slug = "original-cma-case-title"
+
+  create_cma_case(@cma_fields, publish: true)
+end
+
+When(/^I change the CMA case title and re-publish$/) do
+  update_title_and_republish(to: "Updated CMA case title")
+end
+
+Then(/^the title has been updated$/) do
+  check_for_cma_cases(@updated_title)
+end
+
+Then(/^the URL slug remains unchanged$/) do
+  check_for_unchanged_slug(@expected_slug)
+end
