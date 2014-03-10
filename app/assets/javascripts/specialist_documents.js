@@ -18,7 +18,7 @@
 
     function getPreview(){
       return $.ajax({
-        url: '/specialist-documents/preview',
+        url: args.url,
         context: document.body,
         data: {
           'specialist_document' : {

@@ -6,6 +6,7 @@ Feature: Attachments
   Background:
     Given I am logged in as a CMA editor
 
+  @javascript
   Scenario: CMA editor can add attachment to case
     Given there is an existing draft case
     When I attach a file and give it a title
