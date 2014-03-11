@@ -40,4 +40,6 @@ SpecialistPublisherWiring = DependencyContainer.new do
       ).to_html
     }
   }
+
+  define_singleton(:specialist_document_publication_observers) { [] }
 end

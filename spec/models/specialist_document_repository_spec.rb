@@ -8,8 +8,17 @@ describe SpecialistDocumentRepository do
 
   let(:panopticon_mappings) { PanopticonMapping }
 
+  let(:publication_observers) { [publication_observer] }
+  let(:publication_observer)  { double(:publication_observer, call: nil) }
+
   let(:specialist_document_repository) do
-    SpecialistDocumentRepository.new(panopticon_mappings, SpecialistDocumentEdition, panopticon_api, document_factory)
+    SpecialistDocumentRepository.new(
+      panopticon_mappings,
+      SpecialistDocumentEdition,
+      panopticon_api,
+      document_factory,
+      publication_observers,
+    )
   end
 
   let(:document_factory) { double(:document_factory, call: document) }
@@ -242,6 +251,12 @@ describe SpecialistDocumentRepository do
         .and_return([panopticon_mapping])
 
       allow(panopticon_api).to receive(:put_artefact!)
+    end
+
+    it "notifies the observers" do
+      specialist_document_repository.publish!(doc)
+
+      expect(publication_observer).to have_received(:call).with(doc)
     end
 
     context "when has no mapping" do
