@@ -196,4 +196,22 @@ describe SpecialistDocument do
       expect(doc.attachments).to eq(attachments)
     end
   end
+
+  describe "#previous_editions" do
+    context "with two editions" do
+      let(:editions) { [ published_edition, draft_edition ] }
+
+      it "returns an array including the first edition" do
+        expect(doc.previous_editions).to eq([published_edition])
+      end
+    end
+
+    context "with one edition" do
+      let(:editions) { [draft_edition] }
+
+      it "returns an empty array" do
+        expect(doc.previous_editions).to be_empty
+      end
+    end
+  end
 end
