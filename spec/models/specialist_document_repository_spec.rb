@@ -6,8 +6,10 @@ describe SpecialistDocumentRepository do
     double(:panopticon_api)
   end
 
+  let(:panopticon_mappings) { PanopticonMapping }
+
   let(:specialist_document_repository) do
-    SpecialistDocumentRepository.new(PanopticonMapping, SpecialistDocumentEdition, panopticon_api, document_factory)
+    SpecialistDocumentRepository.new(panopticon_mappings, SpecialistDocumentEdition, panopticon_api, document_factory)
   end
 
   let(:document_factory) { double(:document_factory, call: document) }
@@ -149,12 +151,6 @@ describe SpecialistDocumentRepository do
         expect(mapping.slug).to eq(@document.slug)
       end
     end
-
-    describe "#publish!(document)" do
-      it "raises an InvalidDocumentError" do
-        expect { specialist_document_repository.publish!(@document) }.to raise_error(SpecialistDocumentRepository::InvalidDocumentError)
-      end
-    end
   end
 
   describe "#store!(document)" do
@@ -199,49 +195,6 @@ describe SpecialistDocumentRepository do
     end
   end
 
-  context "when the document exists in draft" do
-    before do
-      draft_edition = FactoryGirl.create(:specialist_document_edition, document_id: document_id, state: 'draft')
-      @document = build_specialist_document('12345', [draft_edition])
-      @mapping = FactoryGirl.create(:panopticon_mapping, document_id: @document.id)
-      allow(panopticon_api).to receive(:put_artefact!)
-    end
-
-    describe "#publish!(document)" do
-      it "the document becomes published" do
-        specialist_document_repository.publish!(@document)
-        @document.should be_published
-      end
-
-      it "notifies panopticon of the update" do
-        specialist_document_repository.publish!(@document)
-        expect(panopticon_api).to have_received(:put_artefact!).with(@mapping.panopticon_id, anything)
-      end
-    end
-  end
-
-  context "when the document exists and is published" do
-    before do
-      @latest_published_edition = build_published_edition(version: 2)
-
-      @document = build_specialist_document('12345', [published_edition, @latest_published_edition])
-      @mapping = FactoryGirl.create(:panopticon_mapping, document_id: @document.id)
-    end
-
-    describe "#publish!(document)" do
-      it "archives old editions" do
-        specialist_document_repository.publish!(@document)
-        expect(published_edition).to have_received(:archive)
-        expect(@latest_published_edition).not_to have_received(:archive)
-      end
-
-      it "does not notify panopticon of the update" do
-        panopticon_api.should_not_receive(:put_artefact!)
-        specialist_document_repository.publish!(@document)
-      end
-    end
-  end
-
   context "when panopticon raises an exception, eg duplicate slug" do
     before do
       exception = GdsApi::HTTPErrorResponse.new(422, 'errors' => {slug: ['already taken']})
@@ -261,4 +214,107 @@ describe SpecialistDocumentRepository do
       end
     end
   end
+
+  describe "#publish" do
+    let(:document_title)        { double(:document_title) }
+    let(:document_slug)         { double(:document_slug) }
+    let(:document_id)           { double(:document_id) }
+    let(:panopticon_id)         { double(:panopticon_id) }
+
+    let(:panopticon_mapping) {
+      double(:panopticon_mapping, panopticon_id: panopticon_id)
+    }
+
+    let(:doc) {
+      double(:doc,
+        id: document_id,
+        published?: false,
+        previous_editions: [],
+        latest_edition: new_draft_edition,
+        title: document_title,
+        slug: document_slug,
+      )
+    }
+
+    before do
+      allow(panopticon_mappings).to receive(:where)
+        .with(document_id: document_id)
+        .and_return([panopticon_mapping])
+
+      allow(panopticon_api).to receive(:put_artefact!)
+    end
+
+    context "when has no mapping" do
+      before do
+        allow(panopticon_mappings).to receive(:where)
+          .with(document_id: document_id)
+          .and_return([])
+      end
+
+      it "raises an InvalidDocumentError" do
+        expect { specialist_document_repository.publish!(doc) }
+          .to raise_error(SpecialistDocumentRepository::InvalidDocumentError)
+      end
+    end
+
+    context "when the document exists and is published" do
+      let(:doc) {
+        double(:doc,
+          id: document_id,
+          published?: true,
+          previous_editions: [published_edition],
+          latest_edition: latest_published_edition,
+        )
+      }
+
+      let(:latest_published_edition) { build_published_edition(version: 2) }
+
+      describe "#publish!(document)" do
+        it "archives old editions" do
+          specialist_document_repository.publish!(doc)
+
+          expect(published_edition).to have_received(:archive)
+          expect(latest_published_edition).not_to have_received(:archive)
+        end
+
+        it "does not notify panopticon of the update" do
+          specialist_document_repository.publish!(doc)
+
+          expect(panopticon_api).not_to receive(:put_artefact!)
+        end
+      end
+    end
+
+    context "when the document exists in draft" do
+      let(:doc) {
+        double(:doc,
+          id: document_id,
+          published?: false,
+          previous_editions: [],
+          latest_edition: new_draft_edition,
+          title: document_title,
+          slug: document_slug,
+        )
+      }
+
+      describe "#publish!(document)" do
+        it "the document becomes published" do
+          specialist_document_repository.publish!(doc)
+
+          expect(new_draft_edition).to have_received(:publish)
+        end
+
+        it "notifies panopticon of the update" do
+          specialist_document_repository.publish!(doc)
+
+          expect(panopticon_api).to have_received(:put_artefact!)
+            .with(panopticon_mapping.panopticon_id, hash_including(
+              name: document_title,
+              slug: document_slug,
+            ))
+        end
+      end
+    end
+  end
+
 end

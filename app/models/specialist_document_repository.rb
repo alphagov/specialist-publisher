@@ -6,10 +6,12 @@ class SpecialistDocumentRepository
     specialist_document_editions,
     panopticon_api,
     specialist_document_factory)
+    # specialist_document_publication_observers)
     @panopticon_mappings = panopticon_mappings
     @specialist_document_editions = specialist_document_editions
     @panopticon_api = panopticon_api
     @document_factory = specialist_document_factory
+    # @publication_observers = specialist_document_publication_observers
   end
 
   def all
