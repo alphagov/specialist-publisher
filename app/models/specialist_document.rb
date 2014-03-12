@@ -38,6 +38,17 @@ class SpecialistDocument
     self.id
   end
 
+  def attributes
+    latest_edition.attributes
+      .symbolize_keys
+      .select { |k, v|
+        self.class.edition_attributes.include?(k)
+      }
+      .merge(
+        id: id,
+      )
+  end
+
   def update(params)
     if never_published? && params.fetch(:title, false)
       params = params.merge(

@@ -1,4 +1,5 @@
 require "support/fast_spec_helper"
+require "active_support/core_ext/hash"
 
 require "specialist_document"
 
@@ -212,6 +213,52 @@ describe SpecialistDocument do
       it "returns an empty array" do
         expect(doc.previous_editions).to be_empty
       end
+    end
+  end
+
+  describe "#attributes" do
+    let(:relevant_document_attrs) {
+      {
+        "title" => "document_title",
+      }
+    }
+
+    let(:undesirable_edtion_attrs) {
+      {
+        "junk_key" => "junk_value",
+      }
+    }
+
+    let(:edition) {
+      double(:edition,
+        edition_messages.merge(
+          attributes: relevant_document_attrs.merge(undesirable_edtion_attrs)
+        )
+      )
+    }
+
+    let(:editions) { [published_edition, edition] }
+
+    it "symbolizes the keys" do
+      expect(doc.attributes.keys.map(&:class).uniq).to eq([Symbol])
+    end
+
+    it "returns attributes with junk removed" do
+      expect(doc.attributes).not_to include(
+        undesirable_edtion_attrs.symbolize_keys
+      )
+    end
+
+    it "returns the latest edition's attributes" do
+      expect(doc.attributes).to include(
+        relevant_document_attrs.symbolize_keys
+      )
+    end
+
+    it "returns a has including the document's id" do
+      expect(doc.attributes).to include(
+        id: document_id,
+      )
     end
   end
 end
