@@ -3,6 +3,9 @@ require 'securerandom'
 require 'builders/specialist_document_builder'
 require 'gds_api/panopticon'
 require "specialist_document_attachment_processor"
+require "specialist_document_database_exporter"
+require "rendered_specialist_document"
+require "specialist_document_govspeak_to_html_renderer"
 
 SpecialistPublisherWiring = DependencyContainer.new do
   define_instance(:specialist_document_editions) { SpecialistDocumentEdition }
@@ -33,13 +36,57 @@ SpecialistPublisherWiring = DependencyContainer.new do
 
   define_instance(:slug_generator) { SlugGenerator }
 
-  define_singleton(:specialist_document_renderer) {
-    ->(document) {
-      Govspeak::Document.new(
-        SpecialistDocumentAttachmentProcessor.new(document).body
-      ).to_html
+  define_instance(:specialist_document_attachment_processor) {
+    SpecialistDocumentAttachmentProcessor.method(:new)
+  }
+
+  define_instance(:govspeak_document_factory) {
+    Govspeak::Document.method(:new)
+  }
+
+  define_instance(:govspeak_html_converter) {
+    ->(string) {
+      get(:govspeak_document_factory).call(string).to_html
     }
   }
 
-  define_singleton(:specialist_document_publication_observers) { [] }
+  define_instance(:specialist_document_govspeak_to_html_renderer) {
+    ->(doc) {
+      SpecialistDocumentGovspeakToHTMLRenderer.new(
+        get(:govspeak_html_converter),
+        doc,
+      )
+    }
+  }
+
+  define_instance(:specialist_document_render_pipeline) {
+    [
+      get(:specialist_document_attachment_processor),
+      get(:specialist_document_govspeak_to_html_renderer),
+    ]
+  }
+
+  define_instance(:specialist_document_renderer) {
+    ->(doc) {
+      get(:specialist_document_render_pipeline).reduce(doc) { |doc, next_renderer|
+        next_renderer.call(doc)
+      }
+    }
+  }
+
+  define_singleton(:specialist_document_publication_observers) {
+    [
+      get(:specialist_document_database_exporter),
+    ]
+  }
+
+  define_instance(:specialist_document_database_exporter) {
+    ->(doc) {
+      SpecialistDocumentDatabaseExporter.new(
+        RenderedSpecialistDocument,
+        get(:specialist_document_renderer),
+        doc,
+      ).call
+    }
+  }
 end

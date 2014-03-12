@@ -104,4 +104,17 @@ module CmaCaseHelpers
 
     expect(page).to have_css(".slug span", text: expected_slug)
   end
+
+  def check_cma_case_is_published(title)
+    published_cma_case = RenderedSpecialistDocument.where(title: title).first
+
+    expect(published_cma_case).not_to be_nil
+
+    check_rendered_document_contains_html(published_cma_case)
+  end
+
+  def check_rendered_document_contains_html(document)
+    parsed_body = Nokogiri::HTML::Document.parse(document.body)
+    expect(parsed_body).to have_css("p")
+  end
 end

@@ -80,6 +80,6 @@ protected
   end
 
   def generate_preview
-    specialist_document_renderer.call(document)
+    specialist_document_renderer.call(document).body
   end
 end

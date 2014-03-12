@@ -48,7 +48,14 @@ Given(/^two CMA cases exist$/) do
 end
 
 Given(/^a draft CMA case exists$/) do
-  create_cases(1)
+  @cma_fields = {
+    title: 'Example CMA Case',
+    summary: 'Nullam quis risus eget urna mollis ornare vel eu leo.',
+    body: "## Header\n" + ("\n* Praesent commodo cursus magna, vel scelerisque nisl consectetur et." * 10),
+    opened_date: '2014-01-01'
+  }
+
+  create_cma_case(@cma_fields, publish: false)
 end
 
 def create_cases(number_of_cases, state: 'draft')
