@@ -11,8 +11,9 @@ describe SpecialistDocumentDatabaseExporter do
     )
   }
 
-  let(:active_record) { double(:active_record, create!: nil) }
+  let(:active_record) { double(:active_record, create_or_update_by_slug!: nil) }
   let(:document) { double(:document) }
+  let(:document_id) { double(:document_id) }
 
   let(:document_renderer) {
     double(:document_renderer, call: rendered_document)
@@ -22,7 +23,17 @@ describe SpecialistDocumentDatabaseExporter do
     double(:rendered_document, attributes: rendered_attributes)
   }
 
-  let(:rendered_attributes) { double(:rendered_attributes) }
+  let(:rendered_attributes) {
+    {
+      id: document_id,
+    }.merge(exportable_attributes)
+  }
+
+  let(:exportable_attributes) {
+    {
+      a_field: "a value",
+    }
+  }
 
   it "renders the document" do
     exporter.call
@@ -33,6 +44,20 @@ describe SpecialistDocumentDatabaseExporter do
   it "writes the serialized document attributes to the database" do
     exporter.call
 
-    expect(active_record).to have_received(:create!).with(rendered_attributes)
+    expect(active_record).to have_received(:create_or_update_by_slug!).with(
+      hash_including(exportable_attributes)
+    )
+  end
+
+  it "translates the id field to document id" do
+    exporter.call
+
+    expect(active_record).to have_received(:create_or_update_by_slug!).with(
+      hash_including(document_id: document_id)
+    )
+
+    expect(active_record).to have_received(:create_or_update_by_slug!).with(
+      hash_excluding(id: document_id)
+    )
   end
 end
