@@ -10,9 +10,7 @@ When(/^I publish the CMA case$/) do
 end
 
 Then(/^the CMA case should be published$/) do
-  expect(
-    specialist_document_repository.all.last
-  ).to be_published
+  check_cma_case_is_published(@cma_fields.fetch(:title))
 end
 
 When(/^I attempt to publish a new CMA case without a title$/) do

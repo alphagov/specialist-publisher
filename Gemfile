@@ -16,7 +16,7 @@ gem 'govspeak', '1.5.1'
 if ENV['CONTENT_MODELS_DEV']
   gem 'govuk_content_models', :path => '../govuk_content_models'
 else
-  gem "govuk_content_models", '7.3.1'
+  gem 'govuk_content_models', '8.6.0'
 end
 
 group :assets do
@@ -37,4 +37,5 @@ group :test do
   gem 'database_cleaner', '1.2.0'
   gem 'timecop'
   gem 'poltergeist', '1.5.0'
+  gem 'webmock', '~> 1.17.4'
 end

@@ -6,7 +6,8 @@ class SpecialistDocumentsController < ApplicationController
 
   def new; end
 
-  def edit; end
+  def edit
+  end
 
   def create
     if preview_requested?
@@ -79,6 +80,6 @@ protected
   end
 
   def generate_preview
-    Govspeak::Document.new(document.body).to_html
+    specialist_document_renderer.call(document).body
   end
 end

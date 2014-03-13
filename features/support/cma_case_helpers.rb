@@ -38,7 +38,12 @@ module CmaCaseHelpers
   end
 
   def check_cma_case_exists_with(attributes)
-    assert SpecialistDocumentEdition.exists?(conditions: attributes)
+    expect(
+      # LOL: Mongiod helpfully replaces "\n" with "\r\n" so a body
+      #      containing line breaks will never match.
+      #      Perhaps we should just match on slug?
+      SpecialistDocumentEdition.exists?(conditions: attributes.except(:body))
+    ).to be(true)
   end
 
   def check_for_missing_title_error
@@ -64,8 +69,8 @@ module CmaCaseHelpers
   end
 
   def go_to_edit_page_for_most_recent_case
-    # TODO: testing antipattern, relies on datastore co-incidence
     registry = SpecialistPublisherWiring.get(:specialist_document_repository)
+    # TODO: testing antipattern, relies on datastore co-incidence
     document = registry.all.last
 
     visit edit_specialist_document_path(document.id)
@@ -103,5 +108,23 @@ module CmaCaseHelpers
     go_to_edit_page_for_most_recent_case
 
     expect(page).to have_css(".slug span", text: expected_slug)
+  end
+
+  def check_cma_case_is_published(title)
+    published_cma_case = RenderedSpecialistDocument.where(title: title).first
+
+    expect(published_cma_case).not_to be_nil
+
+    check_rendered_document_contains_html(published_cma_case)
+    check_rendered_document_contains_header_meta_data(published_cma_case)
+  end
+
+  def check_rendered_document_contains_html(document)
+    parsed_body = Nokogiri::HTML::Document.parse(document.body)
+    expect(parsed_body).to have_css("p")
+  end
+
+  def check_rendered_document_contains_header_meta_data(document)
+    expect(document.headers.first).to include( "text" => "Header" )
   end
 end

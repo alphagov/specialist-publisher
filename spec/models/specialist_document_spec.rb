@@ -1,4 +1,7 @@
-require 'spec_helper'
+require "support/fast_spec_helper"
+require "active_support/core_ext/hash"
+
+require "specialist_document"
 
 describe SpecialistDocument do
   subject(:doc) {
@@ -11,6 +14,18 @@ describe SpecialistDocument do
   let(:slug_generator)      { double(:slug_generator, call: slug) }
   let(:edition_factory)     { double(:edition_factory, call: new_edition) }
   let(:new_edition)         { double(:new_edition, published?: false, assign_attributes: nil) }
+  let(:attachments)         { double(:attachments) }
+
+  let(:edition_messages)    {
+    {
+      build_attachment: nil,
+      assign_attributes: nil,
+      version_number: 1,
+      attachments: attachments_proxy,
+    }
+  }
+
+  let(:attachments_proxy) { double(:attachments_proxy, to_a: attachments) }
 
   let(:draft_edition)       {
     double(:draft_edition,
@@ -26,18 +41,9 @@ describe SpecialistDocument do
       edition_messages.merge(
         published?: true,
         draft?: false,
+        slug: published_slug,
       )
     )
-  }
-
-  let(:edition_messages) {
-    {
-      published?: true,
-      draft?: false,
-      slug: published_slug,
-      version_number: 1,
-      assign_attributes: nil,
-    }
   }
 
   context "document is new, with no previous editions" do
@@ -164,6 +170,95 @@ describe SpecialistDocument do
           )
         end
       end
+    end
+  end
+
+  describe "#add_attachment" do
+    let(:editions) { [ published_edition, draft_edition ] }
+    let(:params) { double(:params) }
+
+    it "tells the latest edition to create an attachment using the supplied parameters" do
+      doc.add_attachment(params)
+
+      expect(draft_edition).to have_received(:build_attachment).with(params)
+    end
+  end
+
+  describe "#attachments" do
+    let(:editions) { [ published_edition, draft_edition ] }
+
+    it "delegates to the latest edition" do
+      doc.attachments
+
+      expect(draft_edition).to have_received(:attachments)
+    end
+
+    it "returns the attachments from the latest edition" do
+      expect(doc.attachments).to eq(attachments)
+    end
+  end
+
+  describe "#previous_editions" do
+    context "with two editions" do
+      let(:editions) { [ published_edition, draft_edition ] }
+
+      it "returns an array including the first edition" do
+        expect(doc.previous_editions).to eq([published_edition])
+      end
+    end
+
+    context "with one edition" do
+      let(:editions) { [draft_edition] }
+
+      it "returns an empty array" do
+        expect(doc.previous_editions).to be_empty
+      end
+    end
+  end
+
+  describe "#attributes" do
+    let(:relevant_document_attrs) {
+      {
+        "title" => "document_title",
+      }
+    }
+
+    let(:undesirable_edtion_attrs) {
+      {
+        "junk_key" => "junk_value",
+      }
+    }
+
+    let(:edition) {
+      double(:edition,
+        edition_messages.merge(
+          attributes: relevant_document_attrs.merge(undesirable_edtion_attrs)
+        )
+      )
+    }
+
+    let(:editions) { [published_edition, edition] }
+
+    it "symbolizes the keys" do
+      expect(doc.attributes.keys.map(&:class).uniq).to eq([Symbol])
+    end
+
+    it "returns attributes with junk removed" do
+      expect(doc.attributes).not_to include(
+        undesirable_edtion_attrs.symbolize_keys
+      )
+    end
+
+    it "returns the latest edition's attributes" do
+      expect(doc.attributes).to include(
+        relevant_document_attrs.symbolize_keys
+      )
+    end
+
+    it "returns a has including the document's id" do
+      expect(doc.attributes).to include(
+        id: document_id,
+      )
     end
   end
 end

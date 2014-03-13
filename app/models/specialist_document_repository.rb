@@ -5,11 +5,13 @@ class SpecialistDocumentRepository
   def initialize(panopticon_mappings,
     specialist_document_editions,
     panopticon_api,
-    specialist_document_factory)
+    specialist_document_factory,
+    specialist_document_publication_observers)
     @panopticon_mappings = panopticon_mappings
     @specialist_document_editions = specialist_document_editions
     @panopticon_api = panopticon_api
     @document_factory = specialist_document_factory
+    @publication_observers = specialist_document_publication_observers
   end
 
   def all
@@ -75,7 +77,9 @@ class SpecialistDocumentRepository
     document_previously_published = document.published?
 
     latest_edition = document.latest_edition
-    latest_edition.emergency_publish unless latest_edition.published?
+    latest_edition.publish unless latest_edition.published?
+
+    publication_observers.each { |o| o.call(document) }
 
     notify_panopticon_of_publish(mapping.panopticon_id, document) unless document_previously_published
 
@@ -93,8 +97,13 @@ class SpecialistDocumentRepository
 
 private
 
-  attr_reader :panopticon_mappings, :specialist_document_editions, :panopticon_api, :document_factory
-
+  attr_reader(
+    :panopticon_mappings,
+    :specialist_document_editions,
+    :panopticon_api,
+    :document_factory,
+    :publication_observers,
+  )
   def create_artefact(artefact_attributes)
     panopticon_api.create_artefact!(artefact_attributes)
   end
