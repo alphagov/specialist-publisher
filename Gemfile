@@ -25,7 +25,7 @@ group :assets do
   gem 'govuk_frontend_toolkit', '0.43.0'
 end
 
-gem 'debugger', group: [:development, :test]
+gem 'byebug', group: [:development, :test]
 gem 'pry', group: [:development, :test]
 gem 'awesome_print', group: [:development, :test]
 
