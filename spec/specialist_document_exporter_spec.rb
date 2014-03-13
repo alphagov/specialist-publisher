@@ -1,17 +1,17 @@
 require "support/fast_spec_helper"
 
-require "specialist_document_database_exporter"
+require "specialist_document_exporter"
 
-describe SpecialistDocumentDatabaseExporter do
+describe SpecialistDocumentExporter do
   subject(:exporter) {
-    SpecialistDocumentDatabaseExporter.new(
-      active_record,
+    SpecialistDocumentExporter.new(
+      export_recipent,
       document_renderer,
       document,
     )
   }
 
-  let(:active_record) { double(:active_record, create_or_update_by_slug!: nil) }
+  let(:export_recipent) { double(:export_recipent, create_or_update_by_slug!: nil) }
   let(:document) { double(:document) }
   let(:document_id) { double(:document_id) }
 
@@ -41,10 +41,10 @@ describe SpecialistDocumentDatabaseExporter do
     expect(document_renderer).to have_received(:call).with(document)
   end
 
-  it "writes the serialized document attributes to the database" do
+  it "exports the serialized document attributes" do
     exporter.call
 
-    expect(active_record).to have_received(:create_or_update_by_slug!).with(
+    expect(export_recipent).to have_received(:create_or_update_by_slug!).with(
       hash_including(exportable_attributes)
     )
   end
@@ -52,11 +52,11 @@ describe SpecialistDocumentDatabaseExporter do
   it "translates the id field to document id" do
     exporter.call
 
-    expect(active_record).to have_received(:create_or_update_by_slug!).with(
+    expect(export_recipent).to have_received(:create_or_update_by_slug!).with(
       hash_including(document_id: document_id)
     )
 
-    expect(active_record).to have_received(:create_or_update_by_slug!).with(
+    expect(export_recipent).to have_received(:create_or_update_by_slug!).with(
       hash_excluding(id: document_id)
     )
   end

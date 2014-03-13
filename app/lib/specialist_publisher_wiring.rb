@@ -3,7 +3,7 @@ require 'securerandom'
 require 'builders/specialist_document_builder'
 require 'gds_api/panopticon'
 require "specialist_document_attachment_processor"
-require "specialist_document_database_exporter"
+require "specialist_document_exporter"
 require "rendered_specialist_document"
 require "specialist_document_govspeak_to_html_renderer"
 require "specialist_document_header_extractor"
@@ -93,13 +93,13 @@ SpecialistPublisherWiring = DependencyContainer.new do
 
   define_singleton(:specialist_document_publication_observers) {
     [
-      get(:specialist_document_database_exporter),
+      get(:specialist_document_exporter),
     ]
   }
 
-  define_instance(:specialist_document_database_exporter) {
+  define_instance(:specialist_document_exporter) {
     ->(doc) {
-      SpecialistDocumentDatabaseExporter.new(
+      SpecialistDocumentExporter.new(
         RenderedSpecialistDocument,
         get(:specialist_document_renderer),
         doc,

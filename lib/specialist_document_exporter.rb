@@ -1,18 +1,18 @@
-class SpecialistDocumentDatabaseExporter
+class SpecialistDocumentExporter
 
-  def initialize(active_record, document_renderer, document)
-    @active_record = active_record
+  def initialize(export_recipent, document_renderer, document)
+    @export_recipent = export_recipent
     @document_renderer = document_renderer
     @document = document
   end
 
   def call
-    active_record.create_or_update_by_slug!(exportable_attributes)
+    export_recipent.create_or_update_by_slug!(exportable_attributes)
   end
 
 private
 
-  attr_reader :active_record, :document_renderer, :document
+  attr_reader :export_recipent, :document_renderer, :document
 
   def rendered_document
     @rendered_document ||= document_renderer.call(document)
