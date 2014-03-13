@@ -16,7 +16,7 @@ gem 'govspeak', '1.5.1'
 if ENV['CONTENT_MODELS_DEV']
   gem 'govuk_content_models', :path => '../govuk_content_models'
 else
-  gem 'govuk_content_models', '8.5.0'
+  gem 'govuk_content_models', '8.6.0'
 end
 
 group :assets do
