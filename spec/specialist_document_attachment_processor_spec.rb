@@ -33,6 +33,7 @@ this is my attachment [#{title}](#{url}) 28 Feb 2014
       title: title,
       filename: "rofl.gif",
       url: url,
+      snippet: "[InlineAttachment:rofl.gif]",
     )
   }
 
@@ -41,6 +42,7 @@ this is my attachment [#{title}](#{url}) 28 Feb 2014
       title: "My attachment LOL",
       filename: "lol.gif",
       url: "http://example.com/LOL",
+      snippet: "[InlineAttachment:lol.gif]",
     )
   }
 

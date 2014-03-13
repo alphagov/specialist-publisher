@@ -3,16 +3,15 @@ require "delegate"
 class SpecialistDocumentAttachmentProcessor < SimpleDelegator
 
   def body
-    doc.body.gsub(/\[InlineAttachment:(.+)\]/) do |a|
-      attachment = find_attachment($1)
-      "[#{attachment.title}](#{attachment.url})"
-    end
+    attachments.reduce(doc.body) { |body, attachment|
+      body.gsub(attachment.snippet, attachment_markdown(attachment))
+    }
   end
 
   private
 
-  def find_attachment(filename)
-    attachments.find { |a| a.filename == filename }
+  def attachment_markdown(attachment)
+    "[#{attachment.title}](#{attachment.url})"
   end
 
   def doc
