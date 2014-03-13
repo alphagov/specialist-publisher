@@ -1,17 +1,21 @@
 module AttachmentHelpers
+  def test_asset_manager_base_url
+    Plek.current.find("asset-manager")
+  end
+
   def add_attachment_to_case(document_title)
     click_on document_title
     click_on "Add attachment"
     fill_in "Title", with: "My attachment"
     attach_file "File", File.expand_path("../fixtures/greenpaper.pdf", File.dirname(__FILE__))
 
-    stub_request(:post, "http://asset-manager.dev.gov.uk/assets")
+    stub_request(:post, "#{test_asset_manager_base_url}/assets")
       .to_return(
         body: JSON.dump(asset_manager_response),
         status: 201,
       )
 
-    stub_request(:get, "http://asset-manager.dev.gov.uk/assets/#{asset_id}")
+    stub_request(:get, "#{test_asset_manager_base_url}/assets/#{asset_id}")
       .to_return(
         body: JSON.dump(asset_manager_response),
         status: 200,
@@ -30,8 +34,8 @@ module AttachmentHelpers
         "status" => "ok"
       },
       "content_type" => "image/jpeg",
-      "file_url" => "https://assets-origin.preview.alphagov.co.uk/media/#{asset_id}/greenpaper.pdf",
-      "id" => "https://asset-manager.preview.alphagov.co.uk/assets/#{asset_id}",
+      "file_url" => "https://stubbed-asset-manager.alphagov.co.uk/media/#{asset_id}/greenpaper.pdf",
+      "id" => "https://stubbed-asset-manager.alphagov.co.uk/assets/#{asset_id}",
       "name" => "greenpaper.pdf",
       "state" => "clean"
     }
