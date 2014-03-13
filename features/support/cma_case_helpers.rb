@@ -38,7 +38,12 @@ module CmaCaseHelpers
   end
 
   def check_cma_case_exists_with(attributes)
-    assert SpecialistDocumentEdition.exists?(conditions: attributes)
+    expect(
+      # LOL: Mongiod helpfully replaces "\n" with "\r\n" so a body
+      #      containing line breaks will never match.
+      #      Perhaps we should just match on slug?
+      SpecialistDocumentEdition.exists?(conditions: attributes.except(:body))
+    ).to be(true)
   end
 
   def check_for_missing_title_error
@@ -111,10 +116,15 @@ module CmaCaseHelpers
     expect(published_cma_case).not_to be_nil
 
     check_rendered_document_contains_html(published_cma_case)
+    check_rendered_document_contains_header_meta_data(published_cma_case)
   end
 
   def check_rendered_document_contains_html(document)
     parsed_body = Nokogiri::HTML::Document.parse(document.body)
     expect(parsed_body).to have_css("p")
+  end
+
+  def check_rendered_document_contains_header_meta_data(document)
+    expect(document.headers.first).to include( "text" => "Header" )
   end
 end

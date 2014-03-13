@@ -6,6 +6,7 @@ require "specialist_document_attachment_processor"
 require "specialist_document_database_exporter"
 require "rendered_specialist_document"
 require "specialist_document_govspeak_to_html_renderer"
+require "specialist_document_header_extractor"
 
 SpecialistPublisherWiring = DependencyContainer.new do
   define_instance(:specialist_document_editions) { SpecialistDocumentEdition }
@@ -50,6 +51,12 @@ SpecialistPublisherWiring = DependencyContainer.new do
     }
   }
 
+  define_instance(:govspeak_header_extractor) {
+    ->(string) {
+      get(:govspeak_document_factory).call(string).structured_headers
+    }
+  }
+
   define_instance(:specialist_document_govspeak_to_html_renderer) {
     ->(doc) {
       SpecialistDocumentGovspeakToHTMLRenderer.new(
@@ -59,9 +66,19 @@ SpecialistPublisherWiring = DependencyContainer.new do
     }
   }
 
+  define_instance(:specialist_document_govspeak_header_extractor) {
+    ->(doc) {
+      SpecialistDocumentHeaderExtractor.new(
+        get(:govspeak_header_extractor),
+        doc,
+      )
+    }
+  }
+
   define_instance(:specialist_document_render_pipeline) {
     [
       get(:specialist_document_attachment_processor),
+      get(:specialist_document_govspeak_header_extractor),
       get(:specialist_document_govspeak_to_html_renderer),
     ]
   }
