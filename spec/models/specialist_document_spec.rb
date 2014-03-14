@@ -146,6 +146,14 @@ describe SpecialistDocument do
         expect(edition_factory).to have_received(:call).with(hash_including(state: 'draft'))
       end
 
+      it "builds a new edition copying over the previous edition's attachements" do
+        doc.update(params)
+
+        expect(edition_factory).to have_received(:call).with(hash_including(
+          attachments: attachments,
+        ))
+      end
+
       it "presents the new edition as the latest" do
         doc.update(params)
 

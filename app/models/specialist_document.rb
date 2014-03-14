@@ -134,6 +134,7 @@ protected
       .merge(
         version_number: current_version_number + 1,
         slug: slug,
+        attachments: attachments,
       )
 
     edition_factory.call(edition_params)

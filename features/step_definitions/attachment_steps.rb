@@ -23,3 +23,9 @@ Then(/^I can see a link to the file with the title in the document preview$/) do
   generate_preview
   check_preview_contains_attachment_link("My attachment")
 end
+
+Then(/^the attachments from the previous edition remain$/) do
+  go_to_edit_page_for_most_recent_case
+
+  check_for_an_attachment
+end
