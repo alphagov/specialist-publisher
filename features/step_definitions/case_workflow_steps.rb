@@ -27,7 +27,7 @@ Then(/^I should see the editing form again with an error about the missing title
   check_for_missing_title_error
 end
 
-When(/^then I edit it and republish$/) do
+When(/^I edit it and republish$/) do
   @amended_document_attributes = {summary: "New summary", title: "My title"}
   edit_cma_case(@amended_document_attributes, publish: true)
 end

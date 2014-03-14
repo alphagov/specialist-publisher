@@ -22,7 +22,7 @@ Feature: Publishing a CMA case
 
   Scenario: immediately republish a published case
     When I publish a new CMA case
-    And then I edit it and republish
+    And I edit it and republish
     Then the amended CMA case should be published
 
   Scenario: validation errors on publishing
