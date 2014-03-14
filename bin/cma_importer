@@ -68,8 +68,12 @@ Pathname.glob("#{content_directory}/*.json").each do |case_file|
       original_url: asset_data['original_url']
     )
 
+    if repository.store!(document)
+      puts "-- OK"
+    else
+      puts "-- FAILED to store because #{document.errors.full_messages.to_sentence}"
+    end
+
     file.close
   end
-
-  repository.store!(document)
 end
