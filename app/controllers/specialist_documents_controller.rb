@@ -60,7 +60,7 @@ protected
           current_document
         end
       else
-        specialist_document_builder.call(params.fetch(:specialist_document, {}))
+        build_from_params
       end
     end
   end
@@ -80,6 +80,12 @@ protected
   end
 
   def generate_preview
-    specialist_document_renderer.call(document).body
+    preview_document = document || build_from_params
+
+    specialist_document_renderer.call(preview_document).body
+  end
+
+  def build_from_params
+    specialist_document_builder.call(params.fetch(:specialist_document, {}))
   end
 end
