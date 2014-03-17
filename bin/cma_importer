@@ -7,6 +7,58 @@ abort("Usage: bin/cma_importer content_directory") if ARGV.empty? || !File.direc
 require 'pathname'
 content_directory = Pathname.new(ARGV.first)
 
+class ImportedSpecialistDocumentPresenter
+  attr_reader :case_data
+
+  def initialize(case_data)
+    @case_data = case_data
+  end
+
+  def to_hash
+    {
+      title: case_data['title'],
+      summary: (case_data['summary'] || case_data['title']),
+      body: body,
+      case_type: case_data['case_type'],
+      case_state: case_data['case_state'],
+      market_sector: (case_data['sector'] || 'MISSING MARKET SECTOR'),
+      state: 'draft',
+      version_number: 1,
+      opened_date: Date.parse(case_data['opened_date'] || '01-01-1970')
+    }
+  end
+
+  def body
+    if case_data.has_key?('body')
+      case_data.fetch('body')
+    else
+      [
+        decision_body,
+        initial_undertakings_body,
+        invitation_to_comment_body
+      ].compact.join("\n\n")
+    end
+  end
+
+  def decision_body
+    if case_data.has_key?('decision')
+      "# Decision\n\n#{case_data['decision']}\n\n"
+    end
+  end
+
+  def initial_undertakings_body
+    if case_data.has_key?('initial_undertakings')
+      "# Initial undertakings\n\n#{case_data['initial_undertakings']}\n\n"
+    end
+  end
+
+  def invitation_to_comment_body
+    if case_data.has_key?('invitation_to_comment')
+      "# Invitation to comment\n\n#{case_data['invitation_to_comment']}\n\n"
+    end
+  end
+end
+
 Pathname.glob("#{content_directory}/*.json").each do |case_file|
   puts "Processing #{case_file}"
   case_data = JSON.parse(case_file.read)
@@ -30,17 +82,7 @@ Pathname.glob("#{content_directory}/*.json").each do |case_file|
   end
 
   builder = SpecialistPublisherWiring.get(:specialist_document_builder)
-  document = builder.call({
-    title: case_data['title'],
-    summary: (case_data['summary'] || case_data['title']),
-    body: (case_data['body'] || case_data['title']),
-    case_type: case_data['case_type'],
-    case_state: case_data['case_state'],
-    market_sector: (case_data['sector'] || 'MISSING MARKET SECTOR'),
-    state: 'draft',
-    version_number: 1,
-    opened_date: Date.parse(case_data['opened_date'] || '01-01-1970')
-  })
+  document = builder.call(ImportedSpecialistDocumentPresenter.new(case_data).to_hash)
 
   repository = SpecialistPublisherWiring.get(:specialist_document_repository)
   unless repository.store!(document)
