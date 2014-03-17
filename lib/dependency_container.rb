@@ -29,9 +29,12 @@ class DependencyContainer
     @definitions[name] || raise("Missing dependency #{name}")
   end
 
-  def inject_into(klass)
+  def inject_into(klass, visibility: :private)
     @definitions.each do |name, dependency|
-      klass.send(:define_method, name) { dependency.get } unless klass.method_defined?(name)
+      unless klass.method_defined?(name)
+        klass.send(:define_method, name) { dependency.get }
+        klass.send(visibility, name)
+      end
     end
   end
 

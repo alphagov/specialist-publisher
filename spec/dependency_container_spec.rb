@@ -45,14 +45,41 @@ describe DependencyContainer do
     expect(container.get(:example)).to be_a ExampleClass
   end
 
-  it "can inject helper methods for all defined dependencies" do
-    container = DependencyContainer.new
-    container.define_singleton(:example) { ExampleClass.new }
+  describe "#inject_into" do
+    let(:container) {
+      DependencyContainer.new.tap{ |c|
+        c.define_singleton(:example) { ExampleClass.new }
+      }
+    }
 
-    my_class = Class.new
-    container.inject_into(my_class)
+    let(:target_class) { Class.new }
 
-    expect(my_class.new.example).to be_a ExampleClass
+    context "without a visibity option" do
+      it "injects private helper methods for all defined dependencies" do
+        container.inject_into(target_class)
+
+        expect(target_class.private_instance_methods).to include(:example)
+        expect(target_class.new.send(:example)).to be_a ExampleClass
+      end
+    end
+
+    context "with visibility option set to public" do
+      it "injects private helper methods for all defined dependencies" do
+        container.inject_into(target_class, visibility: :public)
+
+        expect(target_class.public_instance_methods).to include(:example)
+        expect(target_class.new.send(:example)).to be_a ExampleClass
+      end
+    end
+
+    context "with visibility option set to protected" do
+      it "injects protected helper methods for all defined dependencies" do
+        container.inject_into(target_class, visibility: :protected)
+
+        expect(target_class.protected_instance_methods).to include(:example)
+        expect(target_class.new.send(:example)).to be_a ExampleClass
+      end
+    end
   end
 
   context "a class with a constructor dependency" do
