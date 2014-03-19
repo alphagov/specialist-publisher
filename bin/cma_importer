@@ -14,47 +14,5 @@ Pathname.glob("#{content_directory}/*.json").each do |case_file|
   puts "Processing #{case_file}"
   case_data = JSON.parse(case_file.read)
 
-  case_data = CMAImporter::DocumentImporter.new(case_data).case_data
-
-  presenter = CMAImporter::ImportedSpecialistDocumentPresenter.new(case_data)
-
-  builder = SpecialistPublisherWiring.get(:specialist_document_builder)
-  document = builder.call(presenter.to_hash)
-
-  repository = SpecialistPublisherWiring.get(:specialist_document_repository)
-  unless repository.store!(document)
-    raise "Failed to store document, #{document.errors}"
-  end
-
-  mapping = SpecialistPublisherWiring.get(:panopticon_mappings).where(document_id: document.id).last
-  mapping.update_attribute(:original_urls, case_data['original_urls'])
-
-  Array(case_data['assets']).each do |asset_data|
-    basename = asset_data['filename'].split('/').last
-    puts "-- Adding asset #{basename}"
-
-    file = File.open(content_directory + asset_data['filename'])
-    uploaded_file = ActionDispatch::Http::UploadedFile.new(
-      tempfile: file,
-      filename: basename,
-      type: asset_data['content_type']
-    )
-
-    asset_path = URI.parse(asset_data['original_url']).path
-
-    document.add_attachment(
-      file: uploaded_file,
-      filename: basename,
-      title: presenter.attachment_titles[asset_path] || basename,
-      original_url: asset_data['original_url']
-    )
-
-    if repository.store!(document)
-      puts "---- OK"
-    else
-      puts "---- FAILED to store because #{document.errors.full_messages.to_sentence}"
-    end
-
-    file.close
-  end
+  CMAImporter::DocumentImporter.new(content_directory, case_data).import
 end
