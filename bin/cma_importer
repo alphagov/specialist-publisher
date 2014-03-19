@@ -111,9 +111,9 @@ Pathname.glob("#{content_directory}/*.json").each do |case_file|
     )
 
     if repository.store!(document)
-      puts "-- OK"
+      puts "---- OK"
     else
-      puts "-- FAILED to store because #{document.errors.full_messages.to_sentence}"
+      puts "---- FAILED to store because #{document.errors.full_messages.to_sentence}"
     end
 
     file.close
