@@ -40,6 +40,11 @@ form {
   .preview {
     border: 1px solid $border-colour;
     padding: $gutter-half;
+
+    .visuallyhidden {
+      position: absolute;
+      left: -9999em;
+    }
   }
 }
 

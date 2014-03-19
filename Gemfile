@@ -23,7 +23,7 @@ end
 group :assets do
   gem "sass-rails", "3.2.6"
   gem "uglifier", ">= 1.3.0"
-  gem "govuk_frontend_toolkit", "0.43.0"
+  gem "govuk_frontend_toolkit", "0.44.0"
 end
 
 gem "byebug", group: [:development, :test]
