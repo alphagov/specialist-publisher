@@ -13,14 +13,14 @@ module CMAImporter
     def to_hash
       {
         title: case_data['title'],
-        summary: (case_data['summary'] || case_data['title']),
+        summary: case_data['summary'],
         body: body,
         case_type: case_data['case_type'],
         case_state: case_data['case_state'],
-        market_sector: (case_data['sector'] || 'MISSING MARKET SECTOR'),
+        market_sector: case_data['sector'],
         state: 'draft',
         version_number: 1,
-        opened_date: Date.parse(case_data['opened_date'] || '01-01-1970')
+        opened_date: case_data['opened_date']
       }
     end
 

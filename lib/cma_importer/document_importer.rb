@@ -13,9 +13,7 @@ module CMAImporter
       required_fields = [
         'title',
         'summary',
-        'body',
-        'opened_date',
-        'market_sector',
+        'sector',
         'case_type',
         'case_state'
       ]
@@ -25,6 +23,12 @@ module CMAImporter
           puts "!!! Case #{file_path} is missing #{field} !!!"
           @case_data[field] = field
         end
+      end
+
+      if @case_data.has_key?('opened_date')
+        @case_data['opened_date'] = Date.parse(@case_data['opened_date'])
+      else
+        @case_data['opened_date'] = Date.parse('2012-01-01')
       end
     end
 
