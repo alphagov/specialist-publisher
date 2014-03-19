@@ -1,0 +1,22 @@
+#!/usr/bin/env ruby
+
+require File.expand_path('../../config/environment', __FILE__)
+
+unless ARGV.include?("--confirm")
+  puts %Q{Usage: #{File.basename(__FILE__)} --confirm
+
+Destroys ALL specialist document data and associated artefacts. Does not
+currently delete attachment files from the filesystem of asset-manager.
+}
+  exit(1)
+end
+
+SpecialistDocumentEdition.all.each do |e|
+  puts "Destroying edition '#{e.title}' v#{e.version_number}"
+  e.attachments.each(&:destroy); e.destroy
+end
+
+Artefact.where(kind: 'specialist-document').each do |a|
+  puts "Destroying artefact '#{a.slug}'"
+  a.destroy
+end
