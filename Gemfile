@@ -12,6 +12,7 @@ gem "mongoid", "2.5.2"
 
 gem "generic_form_builder", "0.8.0"
 gem "govspeak", "1.5.1"
+gem "multi_json", "1.9.0"
 
 if ENV["CONTENT_MODELS_DEV"]
   gem "govuk_content_models", :path => "../govuk_content_models"
