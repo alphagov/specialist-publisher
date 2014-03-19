@@ -1,6 +1,6 @@
 module CMAImporter
   class DocumentImporter
-    def initialize(content_directory, case_data)
+    def initialize(content_directory, case_data, file_path)
       @content_directory = content_directory
       @case_data = case_data.dup
 
@@ -9,6 +9,23 @@ module CMAImporter
       end
 
       @case_data['original_urls'] ||= Array(@case_data.delete('original_url'))
+
+      required_fields = [
+        'title',
+        'summary',
+        'body',
+        'opened_date',
+        'market_sector',
+        'case_type',
+        'case_state'
+      ]
+
+      required_fields.each do |field|
+        unless @case_data.has_key?(field)
+          puts "!!! Case #{file_path} is missing #{field} !!!"
+          @case_data[field] = field
+        end
+      end
     end
 
     attr_reader :case_data, :content_directory

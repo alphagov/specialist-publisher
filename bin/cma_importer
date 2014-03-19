@@ -14,5 +14,5 @@ Pathname.glob("#{content_directory}/*.json").each do |case_file|
   puts "Processing #{case_file}"
   case_data = JSON.parse(case_file.read)
 
-  CMAImporter::DocumentImporter.new(content_directory, case_data).import
+  CMAImporter::DocumentImporter.new(content_directory, case_data, case_file.path).import
 end
