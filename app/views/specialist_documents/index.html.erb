@@ -12,18 +12,20 @@
           <ul class="metadata">
             <li>updated <%= time_ago_in_words(document.updated_at) %> ago</li>
             <li>
-              <% if document.draft? && document.published? %>
-                published with new draft
-              <% else %>
+              <% if document.published? %>
+                published
                 <% if document.draft? %>
-                  draft
-                <% else %>
-                  published
+                   with new draft
                 <% end %>
+              <% else %>
+                draft
               <% end %>
             </li>
             <li class="actions">
               <%= link_to 'edit', edit_specialist_document_path(document.id) %>
+              <% if document.published? %>
+                <%= link_to "view live", published_specialist_document_path(document) %>
+              <% end %>
             </li>
           </ul>
         </li>

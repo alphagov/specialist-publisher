@@ -1,3 +1,17 @@
+// Dependency declarations
+//
+// These are only needed to ensure automatic reloading in dev mode. This
+// should happen automatically using the @import statements. The fact that it
+// doesn't is probably a bug in the version of rails or sprockets that we're
+// using. This bug was supposedly fixed some time ago[1], but still seeing it.
+//
+// [1] https://github.com/rails/rails/issues/3686
+//
+//= depend_on _document-list
+//= depend_on _forms
+//= depend_on _govspeak
+//= depend_on _govspeak-help
+//= depend_on _navbar
 
 // govuk_frontend_toolkit
 @import "colours";
@@ -5,11 +19,9 @@
 @import "measurements";
 @import "css3";
 
-
 // app styles
 @import "document-list";
 @import "forms";
 @import "govspeak";
 @import "govspeak-help";
 @import "navbar";
-

@@ -13,7 +13,7 @@ SpecialistPublisherWiring = DependencyContainer.new do
   define_instance(:artefacts) { Artefact }
   define_instance(:panopticon_mappings) { PanopticonMapping }
   define_singleton(:panopticon_api) do
-    GdsApi::Panopticon.new(Plek.current.find("panopticon"), PANOPTICON_API_CREDENTIALS)
+    GdsApi::Panopticon.new(get(:plek).find("panopticon"), PANOPTICON_API_CREDENTIALS)
   end
 
   define_singleton(:specialist_document_factory) {
@@ -110,5 +110,14 @@ SpecialistPublisherWiring = DependencyContainer.new do
   define_singleton(:finder_schema) {
     require "finder_schema"
     FinderSchema.new(Rails.root.join("schemas/cma-cases.json"))
+  }
+
+  define_singleton(:plek) {
+    Plek.current
+  }
+
+  define_singleton(:url_maker) {
+    require "url_maker"
+    UrlMaker.new(plek: get(:plek))
   }
 end

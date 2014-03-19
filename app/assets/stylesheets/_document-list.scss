@@ -18,11 +18,15 @@
 
     li {
       display: inline-block;
-      width: 180px;
+      min-width: 200px;
     }
+
+    li.actions a {
+      padding-right: $gutter-half;
+    }
+
     .published {
       font-weight: bold;
     }
   }
 }
-
