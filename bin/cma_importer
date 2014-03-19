@@ -7,6 +7,8 @@ abort("Usage: bin/cma_importer content_directory") if ARGV.empty? || !File.direc
 require 'pathname'
 content_directory = Pathname.new(ARGV.first)
 
+require 'uri'
+
 class ImportedSpecialistDocumentPresenter
   attr_reader :case_data
 
@@ -33,7 +35,7 @@ class ImportedSpecialistDocumentPresenter
   end
 
   def body
-    @body ||= body.gsub(/\[(.*?)\]\([^)]+pdf\)/) do
+    @body ||= body_with_links.gsub(/\[([^\]]+)\]\(([^)]+pdf)\)/) do
       link_text, link = $1, $2
       filename = link.split('/').last
 
@@ -120,10 +122,12 @@ Pathname.glob("#{content_directory}/*.json").each do |case_file|
       type: asset_data['content_type']
     )
 
+    asset_path = URI.parse(asset_data['original_url']).path
+
     document.add_attachment(
       file: uploaded_file,
       filename: basename,
-      title: presenter.attachment_titles[asset_data['original_url']] || basename,
+      title: presenter.attachment_titles[asset_path] || basename,
       original_url: asset_data['original_url']
     )
 
