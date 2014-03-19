@@ -14,6 +14,7 @@
 
     function displayPreview(previewHtml) {
       $(args.render_to).html(previewHtml);
+      $(window).trigger('displayPreviewDone');
     }
 
     function getPreview(){
