@@ -1,0 +1,16 @@
+{
+  "slug": "cma-cases",
+  "name": "Competition and Markets Authority cases",
+  "document_noun": "case",
+  "facets": [
+    {
+      "key": "case_type",
+      "name": "Case type",
+      "type": "single-select",
+      "include_blank": "All case types",
+      "allowed_values": [
+        {"label": "CA98 and civil cartels", "value": "ca98-and-civil-cartels"}
+      ]
+    }
+  ]
+}

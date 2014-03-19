@@ -106,4 +106,9 @@ SpecialistPublisherWiring = DependencyContainer.new do
       ).call
     }
   }
+
+  define_singleton(:finder_schema) {
+    require "finder_schema"
+    FinderSchema.new(Rails.root.join("schemas/cma-cases.json"))
+  }
 end

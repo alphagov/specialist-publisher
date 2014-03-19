@@ -7,5 +7,7 @@ class ApplicationController < ActionController::Base
 
   protect_from_forgery with: :exception
 
+  helper_method :finder_schema
+
   SpecialistPublisherWiring.inject_into(self)
 end
