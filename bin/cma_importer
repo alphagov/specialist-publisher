@@ -14,23 +14,7 @@ Pathname.glob("#{content_directory}/*.json").each do |case_file|
   puts "Processing #{case_file}"
   case_data = JSON.parse(case_file.read)
 
-  case_data.each do |k, v|
-    case_data.delete(k) if v.blank?
-  end
-
-  case_data['original_urls'] ||= Array(case_data.delete('original_url'))
-
-  [
-    'title',
-    'original_urls',
-    'case_type',
-    'case_state'
-  ].each do |required_field|
-    unless case_data.has_key?(required_field)
-      puts "Skipping case_file as it is missing at least #{required_field}"
-      next
-    end
-  end
+  case_data = CMAImporter::DocumentImporter.new(case_data).case_data
 
   presenter = CMAImporter::ImportedSpecialistDocumentPresenter.new(case_data)
 
