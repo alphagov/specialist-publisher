@@ -38,13 +38,18 @@ module CMAImporter
           type: asset_data['content_type']
         )
 
-        asset_path = URI.parse(asset_data['original_url']).path
+        asset_url = asset_data['original_url']
+        asset_path = URI.parse(asset_url).path
+
+        asset_title = presenter.attachment_titles[asset_path] ||
+                      presenter.attachment_titles[asset_url] ||
+                      basename
 
         document.add_attachment(
           file: uploaded_file,
           filename: basename,
-          title: presenter.attachment_titles[asset_path] || basename,
-          original_url: asset_data['original_url']
+          title: asset_title,
+          original_url: asset_url
         )
 
         if repository.store!(document)
