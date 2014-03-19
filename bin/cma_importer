@@ -12,7 +12,11 @@ class ImportedSpecialistDocumentPresenter
 
   def initialize(case_data)
     @case_data = case_data
+    @attachment_titles = {}
+    body # Initialize attachment titles
   end
+
+  attr_reader :attachment_titles
 
   def to_hash
     {
@@ -29,6 +33,17 @@ class ImportedSpecialistDocumentPresenter
   end
 
   def body
+    @body ||= body.gsub(/\[(.*?)\]\([^)]+pdf\)/) do
+      link_text, link = $1, $2
+      filename = link.split('/').last
+
+      @attachment_titles[link] = link_text
+
+      "#{link_text} [InlineAttachment:#{filename}]"
+    end
+  end
+
+  def body_with_links
     if case_data.has_key?('body')
       case_data.fetch('body')
     else
@@ -81,8 +96,10 @@ Pathname.glob("#{content_directory}/*.json").each do |case_file|
     end
   end
 
+  presenter = ImportedSpecialistDocumentPresenter.new(case_data)
+
   builder = SpecialistPublisherWiring.get(:specialist_document_builder)
-  document = builder.call(ImportedSpecialistDocumentPresenter.new(case_data).to_hash)
+  document = builder.call(presenter.to_hash)
 
   repository = SpecialistPublisherWiring.get(:specialist_document_repository)
   unless repository.store!(document)
@@ -106,14 +123,14 @@ Pathname.glob("#{content_directory}/*.json").each do |case_file|
     document.add_attachment(
       file: uploaded_file,
       filename: basename,
-      title: basename,
+      title: presenter.attachment_titles[asset_data['original_url']] || basename,
       original_url: asset_data['original_url']
     )
 
     if repository.store!(document)
-      puts "-- OK"
+      puts "---- OK"
     else
-      puts "-- FAILED to store because #{document.errors.full_messages.to_sentence}"
+      puts "---- FAILED to store because #{document.errors.full_messages.to_sentence}"
     end
 
     file.close
