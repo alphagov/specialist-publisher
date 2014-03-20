@@ -8,7 +8,7 @@ describe CMAImporter::ImportedSpecialistDocumentPresenter do
         'body' => "[A title](http://www.example.com/test.pdf)"
       })
 
-      expect(presenter.body).to eq("A title [InlineAttachment:test.pdf]")
+      expect(presenter.body).to eq("[InlineAttachment:test.pdf]")
     end
 
     it 'replaces PDF path markdown with attachment govspeak' do
@@ -16,7 +16,7 @@ describe CMAImporter::ImportedSpecialistDocumentPresenter do
         'body' => "[A title](/test.pdf)"
       })
 
-      expect(presenter.body).to eq("A title [InlineAttachment:test.pdf]")
+      expect(presenter.body).to eq("[InlineAttachment:test.pdf]")
     end
 
     it 'leaves non-PDF links alone' do

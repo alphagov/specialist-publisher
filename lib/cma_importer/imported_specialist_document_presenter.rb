@@ -31,7 +31,7 @@ module CMAImporter
 
         @attachment_titles[link] = link_text
 
-        "#{link_text} [InlineAttachment:#{filename}]"
+        "[InlineAttachment:#{filename}]"
       end
     end
 
