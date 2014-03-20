@@ -1,4 +1,4 @@
-.govspeak {
+ .govspeak {
   h2:first-child,
   h3:first-child,
   h4:first-child,
@@ -216,40 +216,26 @@
   table {
     border-collapse: collapse;
     border-spacing: 0;
-    margin: $gutter -10px $gutter -10px;
+    margin: $gutter 0 $gutter 0;
     width: $full-width;
-    @include core-19;
+    @include core-14;
 
     caption {
       text-align:left;
-      font-weight: 300;
       margin-bottom: 0.5em;
-      font-size:1.16em;
-      padding-left:1em;
     }
 
     th, td {
       vertical-align: top;
-      line-height: 1.3em;
-      padding: 0.7em 0.5em 0.7em 1em;
-    }
+      padding: $gutter-one-third $gutter-one-third $gutter-one-third 0;
+      border-bottom:solid 1px $grey-2;
 
-    tr:nth-child(even) td {
-      background-color: #fff;
-    }
-
-    td {
-      background: #fafafa;
-      border:dotted 1px #bbb;
     }
 
     th {
-      line-height:1.25em;
       text-align: left;
       color: $black;
-      font-weight:normal;
-      background-color: #e1e8e8;
-      border:solid 1px #bbb;
+      @include bold-14;
     }
 
     td small{
