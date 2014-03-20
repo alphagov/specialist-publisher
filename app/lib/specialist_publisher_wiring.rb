@@ -102,6 +102,7 @@ SpecialistPublisherWiring = DependencyContainer.new do
       SpecialistDocumentExporter.new(
         RenderedSpecialistDocument,
         get(:specialist_document_renderer),
+        get(:finder_schema),
         doc,
       ).call
     }
