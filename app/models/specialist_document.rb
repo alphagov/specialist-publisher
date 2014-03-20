@@ -63,6 +63,10 @@ class SpecialistDocument
     end
   end
 
+  def finder_slug
+    slug.split('/').first
+  end
+
   def update(params)
     raise "Can only update the latest version" unless latest_edition_exposed?
 

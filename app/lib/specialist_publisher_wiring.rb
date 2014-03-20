@@ -7,6 +7,8 @@ require "specialist_document_exporter"
 require "rendered_specialist_document"
 require "specialist_document_govspeak_to_html_renderer"
 require "specialist_document_header_extractor"
+require "finder_api_notifier"
+require "finder_api"
 
 SpecialistPublisherWiring = DependencyContainer.new do
   define_instance(:specialist_document_editions) { SpecialistDocumentEdition }
@@ -94,6 +96,7 @@ SpecialistPublisherWiring = DependencyContainer.new do
   define_singleton(:specialist_document_publication_observers) {
     [
       get(:specialist_document_exporter),
+      get(:finder_api_notifier)
     ]
   }
 
@@ -106,6 +109,16 @@ SpecialistPublisherWiring = DependencyContainer.new do
         doc,
       ).call
     }
+  }
+
+  define_singleton(:http_client) { Faraday }
+
+  define_singleton(:finder_api) {
+    FinderAPI.new(get(:http_client), get(:plek))
+  }
+
+  define_singleton(:finder_api_notifier) {
+    FinderAPINotifier.new(get(:finder_api))
   }
 
   define_singleton(:finder_schema) {

@@ -336,4 +336,13 @@ describe SpecialistDocument do
       )
     end
   end
+
+  describe "#finder_slug" do
+    let(:editions) { [published_edition_v1] }
+    let(:published_slug) { "finder-791/some-document" }
+
+    it "uses the first part of the slug" do
+      expect(doc.finder_slug).to eq("finder-791")
+    end
+  end
 end
