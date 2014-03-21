@@ -130,16 +130,18 @@ module CmaCaseHelpers
 
   def create_cases(number_of_cases, state: 'draft')
     stub_out_panopticon
-    number_of_cases.times do |index|
-
+    @created_case_index ||= 0
+    number_of_cases.times do
+      @created_case_index += 1
       doc = specialist_document_builder.call(
-        title: "Specialist Document #{index+1}",
+        title: "Specialist Document #{@created_case_index}",
         summary: "summary",
         body: "body",
         opened_date: Time.zone.parse("2014-01-01"),
         market_sector: 'agriculture-environment-and-natural-resources',
         case_state: 'open',
         case_type: 'ca98',
+        outcome_type: 'ca98-commitment',
         state: state,
       )
 
