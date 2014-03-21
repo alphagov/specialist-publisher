@@ -20,18 +20,25 @@ class SpecialistDocument
       :market_sector,
       :outcome_type,
       :updated_at,
+      :version_number
     ]
   end
 
-  def_delegators :latest_edition, *edition_attributes
+  def_delegators :exposed_edition, *edition_attributes
 
-  attr_reader :id, :editions
+  attr_reader :id, :editions, :exposed_edition
 
-  def initialize(slug_generator, edition_factory, id, editions)
+  def initialize(slug_generator, edition_factory, id, editions, version_number: nil)
     @slug_generator = slug_generator
     @edition_factory = edition_factory
     @id = id
     @editions = editions.sort_by(&:version_number)
+    @editions.push(create_first_edition) if @editions.empty?
+    @exposed_edition = if version_number
+      @editions.find { |e| e.version_number == version_number }
+    else
+      @editions.last
+    end
   end
 
   def to_param
@@ -39,7 +46,7 @@ class SpecialistDocument
   end
 
   def attributes
-    latest_edition.attributes
+    exposed_edition.attributes
       .symbolize_keys
       .select { |k, v|
         self.class.edition_attributes.include?(k)
@@ -49,24 +56,34 @@ class SpecialistDocument
       )
   end
 
+  def published_version
+    published_edition = editions.select(&:published?).last
+    if published_edition
+      self.class.new(@slug_generator, @edition_factory, @id, @editions, version_number: published_edition.version_number)
+    end
+  end
+
   def update(params)
+    raise "Can only update the latest version" unless latest_edition_exposed?
+
     if never_published? && params.fetch(:title, false)
       params = params.merge(
         slug: slug_generator.call(params.fetch(:title))
       )
     end
 
-    if latest_edition.published?
-      editions.push(new_draft(params))
+    if exposed_edition.published?
+      @exposed_edition = new_draft(params)
+      editions.push(@exposed_edition)
     else
-      latest_edition.assign_attributes(params)
+      exposed_edition.assign_attributes(params)
     end
 
     self
   end
 
   def valid?
-    latest_edition.valid?
+    exposed_edition.valid?
   end
 
   def published?
@@ -74,21 +91,18 @@ class SpecialistDocument
   end
 
   def draft?
-    latest_edition.draft?
+    exposed_edition.draft?
   end
 
   def errors
-    latest_edition.errors.messages
+    exposed_edition.errors.messages
   end
 
   def add_error(field, message)
-    latest_edition.errors[field] ||= []
-    latest_edition.errors[field] += message
+    exposed_edition.errors[field] ||= []
+    exposed_edition.errors[field] += message
   end
 
-  def latest_edition
-    @editions.last || create_first_edition
-  end
 
   def previous_editions
     @editions[0...-1]
@@ -100,11 +114,20 @@ class SpecialistDocument
   end
 
   def add_attachment(attributes)
-    latest_edition.build_attachment(attributes)
+    exposed_edition.build_attachment(attributes)
   end
 
   def attachments
-    latest_edition.attachments.to_a
+    exposed_edition.attachments.to_a
+  end
+
+  def publish!
+    raise "Can only publish the latest edition" unless latest_edition_exposed?
+    latest_edition.publish unless latest_edition.published?
+  end
+
+  def latest_edition_exposed?
+    latest_edition == exposed_edition
   end
 
 protected
@@ -123,9 +146,11 @@ protected
   end
 
   def create_first_edition
-    edition_factory.call(new_edition_defaults).tap { |e|
-      editions.push(e)
-    }
+    edition_factory.call(new_edition_defaults)
+  end
+
+  def latest_edition
+    @editions.last
   end
 
   def new_draft(params = {})
@@ -141,6 +166,6 @@ protected
   end
 
   def current_version_number
-    latest_edition.version_number
+    exposed_edition.version_number
   end
 end
