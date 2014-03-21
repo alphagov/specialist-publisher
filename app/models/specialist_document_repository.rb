@@ -34,7 +34,7 @@ class SpecialistDocumentRepository
 
   def store!(document)
     artefact_attributes = artefact_attributes_for(document)
-    edition = document.latest_edition
+    edition = document.exposed_edition
 
     edition.document_id = document.id
     edition.slug = artefact_attributes[:slug]
@@ -76,8 +76,7 @@ class SpecialistDocumentRepository
 
     document_previously_published = document.published?
 
-    latest_edition = document.latest_edition
-    latest_edition.publish unless latest_edition.published?
+    document.publish!
 
     publication_observers.each { |o| o.call(document) }
 

@@ -83,6 +83,8 @@ World(DependencyContainerMethods)
 
 require 'cma_case_helpers'
 require 'attachment_helpers'
+require 'rerendering_helpers'
 
 World(CmaCaseHelpers)
 World(AttachmentHelpers)
+World(RerenderingHelpers)

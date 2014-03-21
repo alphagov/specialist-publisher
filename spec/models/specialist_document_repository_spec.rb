@@ -48,6 +48,7 @@ describe SpecialistDocumentRepository do
       :errors => {},
       :publish => nil,
       :version_number => 2,
+      :archive => nil,
     )
   }
 
@@ -180,10 +181,9 @@ describe SpecialistDocumentRepository do
 
       let(:panopticon_id) { 'some-panopticon-id' }
 
-      let(:latest_edition) { new_draft_edition }
       let(:previous_edition) { published_edition }
 
-      let(:editions) { [previous_edition, latest_edition] }
+      let(:editions) { [previous_edition, new_draft_edition] }
 
       it "returns true" do
         expect(specialist_document_repository.store!(document)).to be true
@@ -192,13 +192,13 @@ describe SpecialistDocumentRepository do
       it "assigns the document_id edition" do
         specialist_document_repository.store!(document)
 
-        expect(latest_edition).to have_received(:document_id=).with(document_id)
+        expect(new_draft_edition).to have_received(:document_id=).with(document_id)
       end
 
       it "only saves the latest edition" do
         specialist_document_repository.store!(document)
 
-        expect(latest_edition).to have_received(:save)
+        expect(new_draft_edition).to have_received(:save)
         expect(previous_edition).not_to have_received(:save)
       end
     end
@@ -239,9 +239,10 @@ describe SpecialistDocumentRepository do
         id: document_id,
         published?: false,
         previous_editions: [],
-        latest_edition: new_draft_edition,
+        exposed_edition: new_draft_edition,
         title: document_title,
         slug: document_slug,
+        publish!: nil,
       )
     }
 
@@ -272,24 +273,28 @@ describe SpecialistDocumentRepository do
       end
     end
 
-    context "when the document exists and is published" do
+    context "when a draft exists with a previous published edition" do
       let(:doc) {
         double(:doc,
           id: document_id,
           published?: true,
           previous_editions: [published_edition],
-          latest_edition: latest_published_edition,
+          publish!: nil
         )
       }
-
-      let(:latest_published_edition) { build_published_edition(version: 2) }
 
       describe "#publish!(document)" do
         it "archives old editions" do
           specialist_document_repository.publish!(doc)
 
           expect(published_edition).to have_received(:archive)
-          expect(latest_published_edition).not_to have_received(:archive)
+          expect(new_draft_edition).not_to have_received(:archive)
+        end
+
+        it "publishes the document" do
+          specialist_document_repository.publish!(doc)
+
+          expect(doc).to have_received(:publish!)
         end
 
         it "does not notify panopticon of the update" do
@@ -306,9 +311,10 @@ describe SpecialistDocumentRepository do
           id: document_id,
           published?: false,
           previous_editions: [],
-          latest_edition: new_draft_edition,
+          exposed_edition: new_draft_edition,
           title: document_title,
           slug: document_slug,
+          publish!: nil,
         )
       }
 
@@ -316,7 +322,7 @@ describe SpecialistDocumentRepository do
         it "the document becomes published" do
           specialist_document_repository.publish!(doc)
 
-          expect(new_draft_edition).to have_received(:publish)
+          expect(doc).to have_received(:publish!)
         end
 
         it "notifies panopticon of the update" do

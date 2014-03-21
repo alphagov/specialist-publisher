@@ -127,4 +127,27 @@ module CmaCaseHelpers
   def check_rendered_document_contains_header_meta_data(document)
     expect(document.headers.first).to include( "text" => "Header" )
   end
+
+  def create_cases(number_of_cases, state: 'draft')
+    stub_out_panopticon
+    @created_case_index ||= 0
+    number_of_cases.times do
+      @created_case_index += 1
+      doc = specialist_document_builder.call(
+        title: "Specialist Document #{@created_case_index}",
+        summary: "summary",
+        body: "body",
+        opened_date: Time.zone.parse("2014-01-01"),
+        market_sector: 'agriculture-environment-and-natural-resources',
+        case_state: 'open',
+        case_type: 'ca98',
+        outcome_type: 'ca98-commitment',
+        state: state,
+      )
+
+      specialist_document_repository.store!(doc)
+
+      Timecop.travel(10.minutes.from_now)
+    end
+  end
 end
