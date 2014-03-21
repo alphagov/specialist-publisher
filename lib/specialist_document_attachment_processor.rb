@@ -11,7 +11,7 @@ class SpecialistDocumentAttachmentProcessor < SimpleDelegator
 private
 
   def attachment_markdown(attachment)
-    "[#{attachment.title}](#{attachment.url})"
+    "[#{attachment.title}](#{attachment.file_url})"
   end
 
   def doc
