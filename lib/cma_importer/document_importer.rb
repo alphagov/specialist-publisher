@@ -1,6 +1,9 @@
+require 'logger'
+
 module CMAImporter
   class DocumentImporter
-    def initialize(content_directory, case_data, file_path)
+    def initialize(content_directory, case_data, file_path, custom_logger = nil)
+      @logger = custom_logger || Logger.new(nil)
       @content_directory = content_directory
       @case_data = case_data.dup
 
@@ -20,7 +23,7 @@ module CMAImporter
 
       required_fields.each do |field|
         unless @case_data.has_key?(field)
-          puts "!!! Case #{file_path} is missing #{field} !!!"
+          logger.info("!!! Case #{file_path} is missing #{field} !!!")
           @case_data[field] = field
         end
       end
@@ -32,7 +35,7 @@ module CMAImporter
       end
     end
 
-    attr_reader :case_data, :content_directory
+    attr_reader :case_data, :content_directory, :logger
 
     def import
       presenter = CMAImporter::ImportedSpecialistDocumentPresenter.new(case_data)
@@ -50,7 +53,7 @@ module CMAImporter
 
       Array(case_data['assets']).each do |asset_data|
         basename = asset_data['filename'].split('/').last
-        puts "-- Adding asset #{basename}"
+        logger.info("-- Adding asset #{basename}")
 
         file = File.open(content_directory + asset_data['filename'])
         uploaded_file = ActionDispatch::Http::UploadedFile.new(
@@ -74,9 +77,9 @@ module CMAImporter
         )
 
         if repository.store!(document)
-          puts "---- OK"
+          logger.info("---- OK")
         else
-          puts "---- FAILED to store because #{document.errors.full_messages.to_sentence}"
+          logger.info("---- FAILED to store because #{document.errors.full_messages.to_sentence}")
         end
 
         file.close
