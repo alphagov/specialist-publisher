@@ -58,27 +58,6 @@ Given(/^a draft CMA case exists$/) do
   create_cma_case(@cma_fields, publish: false)
 end
 
-def create_cases(number_of_cases, state: 'draft')
-  stub_out_panopticon
-  number_of_cases.times do |index|
-
-    doc = specialist_document_builder.call(
-      title: "Specialist Document #{index+1}",
-      summary: "summary",
-      body: "body",
-      opened_date: Time.zone.parse("2014-01-01"),
-      market_sector: 'agriculture-environment-and-natural-resources',
-      case_state: 'open',
-      case_type: 'ca98',
-      state: state,
-    )
-
-    specialist_document_repository.store!(doc)
-
-    Timecop.travel(10.minutes.from_now)
-  end
-end
-
 Then(/^the CMA case should exist$/) do
   check_cma_case_exists_with(@cma_fields)
 end
