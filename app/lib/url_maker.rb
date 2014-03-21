@@ -6,6 +6,6 @@ class UrlMaker
   end
 
   def published_specialist_document_path(document)
-    [plek.find('specialist-frontend'), document.slug].join("/")
+    [plek.website_root, document.slug].join("/")
   end
 end
