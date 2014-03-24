@@ -17,7 +17,7 @@ this is my attachment [InlineAttachment:rofl.gif] 28 Feb 2014
 %{
 # Hi
 
-this is my attachment [#{title}](#{url}) 28 Feb 2014
+this is my attachment [#{title}](#{file_url}) 28 Feb 2014
 }
   }
 
@@ -26,13 +26,13 @@ this is my attachment [#{title}](#{url}) 28 Feb 2014
   let(:attachments) { [lol, rofl] }
 
   let(:title) { "My attachment ROFL" }
-  let(:url) { "http://example.com/rofl.gif" }
+  let(:file_url) { "http://example.com/rofl.gif" }
 
   let(:rofl) {
     double(:attachment,
       title: title,
       filename: "rofl.gif",
-      url: url,
+      file_url: file_url,
       snippet: "[InlineAttachment:rofl.gif]",
     )
   }
@@ -41,7 +41,7 @@ this is my attachment [#{title}](#{url}) 28 Feb 2014
     double(:attachment,
       title: "My attachment LOL",
       filename: "lol.gif",
-      url: "http://example.com/LOL",
+      file_url: "http://example.com/LOL",
       snippet: "[InlineAttachment:lol.gif]",
     )
   }

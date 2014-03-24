@@ -1,0 +1,11 @@
+#!/usr/bin/env ruby
+
+require File.expand_path('../../config/environment', __FILE__)
+
+repository = SpecialistPublisherWiring.get(:specialist_document_repository)
+
+repository.all.each do |doc|
+  doc.attachments.each do |a|
+    a.update_attribute(:file_url, a.file.file_url) if a.file
+  end
+end
