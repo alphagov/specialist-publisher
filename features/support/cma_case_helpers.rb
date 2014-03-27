@@ -1,6 +1,7 @@
 module CmaCaseHelpers
   def create_cma_case(fields, publish: false)
     stub_out_panopticon
+    stub_finder_api
 
     visit new_specialist_document_path
     fill_in_cma_fields(fields)

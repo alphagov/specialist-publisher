@@ -255,6 +255,7 @@ DEPENDENCIES
   cucumber-rails (= 1.4.0)
   database_cleaner (= 1.2.0)
   factory_girl (= 4.3.0)
+  faraday (= 0.9.0)
   gds-sso (= 9.2.4)
   generic_form_builder (= 0.8.0)
   govspeak (= 1.5.1)
