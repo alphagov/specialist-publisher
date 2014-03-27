@@ -3,14 +3,28 @@
 
   var SpecialistDocument = {};
 
-  SpecialistDocument.enhancePreview = function enhancePreview(args) {
-    $(args.button_selector).click(function(e) {
-      e.preventDefault();
+  SpecialistDocument.addPreviewFeature = function addPreviewFeature(args) {
+    insertMarkup();
+    addButtonPressListener();
+    showMarkup();
 
-      getPreview().done(function(response) {
-        displayPreview(response.preview_html);
+    function insertMarkup(){
+      $(args.insert_into).html(previewMarkup());
+    }
+
+    function addButtonPressListener(){
+      $(buttonSelector()).click(function(e) {
+        e.preventDefault();
+
+        getPreview().done(function(response) {
+          displayPreview(response.preview_html);
+        });
       });
-    });
+    }
+
+    function showMarkup(){
+      $(args.insert_into).show();
+    }
 
     function displayPreview(previewHtml) {
       $(args.render_to).html(previewHtml);
@@ -29,6 +43,17 @@
         type: 'post',
         dataType: 'json'
       });
+    }
+
+    function previewMarkup(){
+      return '<button name="preview">Preview</button>'
+        + '<div class="preview">'
+        + '  <div class="govspeak"></div>'
+        + '</div>';
+    }
+
+    function buttonSelector(){
+      return 'button[name="preview"]';
     }
   };
 

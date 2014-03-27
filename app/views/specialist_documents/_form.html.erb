@@ -23,12 +23,9 @@
     <%= f.text_field :title %>
     <%= f.text_area :summary, class: 'short-textarea' %>
     <%= f.text_area :body %>
-    <button name='preview'>Preview</button>
-    <div class="preview">
-      <div class="govspeak">
-        <%= preview.html_safe if respond_to?(:preview) %>
-      </div>
-    </div>
+
+    <div class="preview_container" style="display: none;"></div>
+
     <%= f.text_field :opened_date, placeholder: '2012-04-23' %>
     <%= f.text_field :closed_date, placeholder: '2013-10-19' %>
     <%= f.select :case_type, facet_options(:case_type) %>
@@ -60,9 +57,9 @@
 </div>
 
 <%= content_for :document_ready do %>
-  window.SpecialistDocument.enhancePreview({
+  window.SpecialistDocument.addPreviewFeature({
     'url'             : '<%= preview_specialist_document_path(document) %>',
-    'button_selector' : 'button[name="preview"]',
+    'insert_into'     : '.preview_container',
     'render_to'       : '.preview .govspeak'
   });
 <% end -%>
