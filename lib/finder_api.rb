@@ -4,7 +4,7 @@ class FinderAPI
     @http_client = http_client.new(url: finder_api_host)
   end
 
-  def notify_of_publication(finder_slug, document)
-    @http_client.post("/finders/#{finder_slug}", document.to_json)
+  def notify_of_publication(slug, document_attributes)
+    @http_client.put("/finders/#{slug}", document: document_attributes.to_json)
   end
 end

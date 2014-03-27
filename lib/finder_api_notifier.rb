@@ -4,6 +4,6 @@ class FinderAPINotifier
   end
 
   def call(document)
-    @api_client.notify_of_publication(document.finder_slug, document.attributes)
+    @api_client.notify_of_publication(document.slug, document.attributes)
   end
 end
