@@ -15,8 +15,7 @@ class SpecialistDocumentRepository
   end
 
   def all
-    editions = specialist_document_editions.all
-    document_ids = editions.map(&:document_id).uniq
+    document_ids = specialist_document_editions.all.distinct(:document_id)
     documents = document_ids.map { |id| fetch(id) }
 
     documents.sort_by(&:updated_at).reverse
