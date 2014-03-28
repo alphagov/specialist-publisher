@@ -117,6 +117,9 @@ GEM
     launchy (2.4.2)
       addressable (~> 2.3)
     link_header (0.0.8)
+    logstash-event (1.1.5)
+    logstasher (0.4.8)
+      logstash-event (~> 1.1.0)
     lrucache (0.1.4)
       PriorityQueue (~> 0.1.2)
     mail (2.5.4)
@@ -262,6 +265,7 @@ DEPENDENCIES
   govuk_content_models (= 8.10.0)
   govuk_frontend_toolkit (= 0.44.0)
   launchy
+  logstasher (= 0.4.8)
   mongoid (= 2.5.2)
   multi_json (= 1.9.0)
   plek (= 1.7.0)
