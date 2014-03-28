@@ -32,7 +32,7 @@ class SpecialistDocument
     @slug_generator = slug_generator
     @edition_factory = edition_factory
     @id = id
-    @editions = editions.sort_by(&:version_number)
+    @editions = editions
     @editions.push(create_first_edition) if @editions.empty?
     @exposed_edition = if version_number
       @editions.find { |e| e.version_number == version_number }
