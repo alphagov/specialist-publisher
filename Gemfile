@@ -16,6 +16,8 @@ gem "multi_json", "1.9.0"
 
 gem 'faraday', '0.9.0'
 
+gem 'logstasher', '0.4.8'
+
 if ENV["CONTENT_MODELS_DEV"]
   gem "govuk_content_models", :path => "../govuk_content_models"
 else
