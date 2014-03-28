@@ -75,16 +75,21 @@ describe SpecialistDocumentRepository do
   describe "#all" do
     before do
       @edition_1, @edition_2 = [2, 1].map do |n|
+        document_id = "document-id-#{n}"
+
         edition = FactoryGirl.create(:specialist_document_edition,
-                            document_id: "document-id-#{n}",
+                            document_id: document_id,
                             updated_at: n.days.ago)
 
         allow(document_factory).to receive(:call)
-          .with("document-id-#{n}", [edition])
-          .and_return(build_specialist_document("document-id-#{n}", [edition]))
+          .with(document_id, [edition])
+          .and_return(build_specialist_document(document_id, [edition]))
 
         edition
       end
+
+      allow(panopticon_mappings).to receive(:all_document_ids)
+        .and_return([@edition_1.document_id, @edition_2.document_id])
     end
 
     it "returns all documents by date updated desc" do
@@ -93,7 +98,7 @@ describe SpecialistDocumentRepository do
   end
 
   describe "#fetch" do
-    let(:editions_proxy) { double(:editions_proxy, to_a: editions) }
+    let(:editions_proxy) { double(:editions_proxy, to_a: editions).as_null_object }
     let(:editions)       { [ published_edition ] }
 
     before do
@@ -115,9 +120,7 @@ describe SpecialistDocumentRepository do
 
     context "when there are no editions" do
       before do
-       allow(SpecialistDocumentEdition).to receive(:where)
-        .with(document_id: document_id)
-        .and_return([])
+        allow(editions_proxy).to receive(:to_a).and_return([])
       end
 
       it "returns nil" do

@@ -15,14 +15,21 @@ class SpecialistDocumentRepository
   end
 
   def all
-    document_ids = specialist_document_editions.all.distinct(:document_id)
+    # TODO: add a method on PanopticonMapping to handle this
+    document_ids = panopticon_mappings.all_document_ids
     documents = document_ids.map { |id| fetch(id) }
 
     documents.sort_by(&:updated_at).reverse
   end
 
   def fetch(id)
-    editions = specialist_document_editions.where(document_id: id).to_a
+    # TODO: add a method on SpecialistDocumentEdition to handle this
+    editions = specialist_document_editions
+      .where(document_id: id)
+      .order_by([:version_number, :desc])
+      .limit(2)
+      .to_a
+      .reverse
 
     if editions.empty?
        nil
