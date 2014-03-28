@@ -50,6 +50,38 @@ this is my attachment [#{title}](#{file_url}) 28 Feb 2014
     it "replaces inline attachment tags with link" do
       expect(renderer.body).to eq(processed_body)
     end
+
+    context "when the title has some regex characters in it" do
+      let(:title) { "Some people have crazy titles \\' \\1 \\2" }
+
+      it "does multiple replacements" do
+        expect(renderer.body).to eq(processed_body)
+      end
+    end
+
+    context "when the attachment link appears more than once" do
+  let(:unprocessed_body) {
+%{
+# Hi
+
+this is my attachment [InlineAttachment:rofl.gif] 28 Feb 2014
+my attachment again [InlineAttachment:rofl.gif] 28 Feb 2014
+}
+  }
+
+  let(:processed_body) {
+%{
+# Hi
+
+this is my attachment [#{title}](#{file_url}) 28 Feb 2014
+my attachment again [#{title}](#{file_url}) 28 Feb 2014
+}
+  }
+
+      it "does multiple replacements" do
+        expect(renderer.body).to eq(processed_body)
+      end
+    end
   end
 
 end
