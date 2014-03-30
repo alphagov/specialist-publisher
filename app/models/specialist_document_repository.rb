@@ -17,7 +17,7 @@ class SpecialistDocumentRepository
   def all
     # TODO: add a method on PanopticonMapping to handle this
     document_ids = panopticon_mappings.all_document_ids
-    documents = document_ids.map { |id| fetch(id) }
+    documents = document_ids.map { |id| fetch(id) }.to_a.compact
 
     documents.sort_by(&:updated_at).reverse
   end
