@@ -1,4 +1,4 @@
-require "support/fast_spec_helper"
+require "fast_spec_helper"
 
 require "specialist_document_exporter"
 
