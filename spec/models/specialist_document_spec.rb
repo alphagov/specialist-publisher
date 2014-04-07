@@ -1,4 +1,4 @@
-require "support/fast_spec_helper"
+require "fast_spec_helper"
 require "active_support/core_ext/hash"
 
 require "specialist_document"
