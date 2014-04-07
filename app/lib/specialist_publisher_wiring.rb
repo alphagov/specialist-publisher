@@ -39,7 +39,7 @@ SpecialistPublisherWiring = DependencyContainer.new do
 
   define_instance(:slug_generator) { SlugGenerator }
 
-  define_instance(:specialist_document_attachment_processor) {
+  define_instance(:markdown_renderer) {
     SpecialistDocumentAttachmentProcessor.method(:new)
   }
 
@@ -79,7 +79,7 @@ SpecialistPublisherWiring = DependencyContainer.new do
 
   define_instance(:specialist_document_render_pipeline) {
     [
-      get(:specialist_document_attachment_processor),
+      get(:markdown_renderer),
       get(:specialist_document_govspeak_header_extractor),
       get(:specialist_document_govspeak_to_html_renderer),
     ]
@@ -118,7 +118,7 @@ SpecialistPublisherWiring = DependencyContainer.new do
   }
 
   define_singleton(:finder_api_notifier) {
-    FinderAPINotifier.new(get(:finder_api))
+    FinderAPINotifier.new(get(:finder_api), get(:markdown_renderer))
   }
 
   define_singleton(:finder_schema) {
