@@ -15,3 +15,8 @@ Feature: Attachments
     Then I can see a link to the file with the title in the document preview
     When I edit it and republish
     Then the attachments from the previous edition remain
+
+  Scenario: CMA editor can replace and attachment
+    Given there is a published case with an attachment
+    When I edit the attachment
+    Then I see the updated attachment on the document edit page

@@ -8,7 +8,8 @@ Given(/^there is an existing draft case$/) do
 end
 
 When(/^I attach a file and give it a title$/) do
-  add_attachment_to_case("Nullam quis risus")
+  @attachment_title = "My attachment"
+  add_attachment_to_case("Nullam quis risus", @attachment_title)
 end
 
 Then(/^I see the attachment on the case with its example markdown embed code$/) do
@@ -21,11 +22,38 @@ end
 
 Then(/^I can see a link to the file with the title in the document preview$/) do
   generate_preview
-  check_preview_contains_attachment_link("My attachment")
+  check_preview_contains_attachment_link(@attachment_title)
 end
 
 Then(/^the attachments from the previous edition remain$/) do
   go_to_edit_page_for_most_recent_case
 
   check_for_an_attachment
+end
+
+Given(/^there is a published case with an attachment$/) do
+  @document_title = "Nullam quis risus"
+  @attachment_title = "My attachment"
+
+  create_case_with_attachment(@document_title, @attachment_title)
+end
+
+When(/^I edit the attachment$/) do
+  @new_attachment_title = "And now for something completely different"
+  @new_attachment_file_name = "text_file.txt"
+
+  edit_attachment(
+    @document_title,
+    @attachment_title,
+    @new_attachment_title,
+    @new_attachment_file_name,
+  )
+end
+
+Then(/^I see the updated attachment on the document edit page$/) do
+  check_for_attachment_update(
+    @document_title,
+    @new_attachment_title,
+    @new_attachment_file_name,
+  )
 end
