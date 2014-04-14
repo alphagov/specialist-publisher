@@ -1,4 +1,4 @@
-require 'support/fast_spec_helper'
+require 'fast_spec_helper'
 require 'finder_api_notifier'
 
 describe FinderAPINotifier do
