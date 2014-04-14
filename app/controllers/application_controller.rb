@@ -14,4 +14,8 @@ class ApplicationController < ActionController::Base
 
   def_delegators :url_maker, :published_specialist_document_path
   helper_method :published_specialist_document_path
+
+  def render_with(locals)
+    render(action_name, locals: locals)
+  end
 end
