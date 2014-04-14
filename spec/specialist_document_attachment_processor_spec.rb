@@ -84,4 +84,23 @@ my attachment again [#{title}](#{file_url}) 28 Feb 2014
     end
   end
 
+  describe "#attributes" do
+    before do
+      allow(doc).to receive(:attributes).and_return(doc_attrs)
+    end
+
+    let(:doc_attrs) {
+      {
+        body: unprocessed_body,
+        other_stuff: "other stuff",
+      }
+    }
+
+    it "merges the rendered body into the attributes" do
+      expect(renderer.attributes).to eq(
+        body: processed_body,
+        other_stuff: "other stuff",
+      )
+    end
+  end
 end

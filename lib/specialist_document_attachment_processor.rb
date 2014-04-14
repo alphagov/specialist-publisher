@@ -10,6 +10,12 @@ class SpecialistDocumentAttachmentProcessor < SimpleDelegator
     }
   end
 
+  def attributes
+    doc.attributes.merge(
+      body: body,
+    )
+  end
+
 private
 
   def attachment_markdown(attachment)
