@@ -85,7 +85,6 @@ my attachment again [#{title}](#{file_url}) 28 Feb 2014
   end
 
   describe "#attributes" do
-
     before do
       allow(doc).to receive(:attributes).and_return(doc_attrs)
     end
