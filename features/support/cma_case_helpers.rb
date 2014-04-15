@@ -38,6 +38,11 @@ module CmaCaseHelpers
     click_on "Save and publish"
   end
 
+  def check_slug_registered_with_panopticon(slug)
+    expect(fake_panopticon).to have_received(:create_artefact!)
+      .with(hash_including(slug: slug))
+  end
+
   def check_cma_case_exists_with(attributes)
     expect(
       # LOL: Mongiod helpfully replaces "\n" with "\r\n" so a body
@@ -111,6 +116,20 @@ module CmaCaseHelpers
     expect(page).to have_css(".slug span", text: expected_slug)
   end
 
+  def capture_most_recent_slug
+    current_path_to_return_to = current_path
+
+    go_to_edit_page_for_most_recent_case
+
+    capture_slug.tap {
+      visit(current_path_to_return_to)
+    }
+  end
+
+  def capture_slug
+    page.all(".slug span").last.text
+  end
+
   def check_cma_case_is_published(title)
     published_cma_case = RenderedSpecialistDocument.where(title: title).first
 
@@ -118,6 +137,19 @@ module CmaCaseHelpers
 
     check_rendered_document_contains_html(published_cma_case)
     check_rendered_document_contains_header_meta_data(published_cma_case)
+
+    check_published_with_panopticon(title)
+    check_added_to_finder_api(title)
+  end
+
+  def check_published_with_panopticon(title)
+    expect(fake_panopticon).to have_received(:put_artefact!)
+      .with(anything, hash_including(name: title, state: "live"))
+  end
+
+  def check_added_to_finder_api(title)
+    expect(finder_api).to have_received(:notify_of_publication)
+      .with(anything, hash_including(title: title))
   end
 
   def check_rendered_document_contains_html(document)

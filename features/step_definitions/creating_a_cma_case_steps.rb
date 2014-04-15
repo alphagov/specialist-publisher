@@ -11,6 +11,7 @@ When(/^I create a CMA case$/) do
   }
 
   create_cma_case(@cma_fields)
+  @slug = capture_most_recent_slug
 end
 
 When(/^I create a CMA case without one of the required fields$/) do
@@ -60,6 +61,7 @@ end
 
 Then(/^the CMA case should exist$/) do
   check_cma_case_exists_with(@cma_fields)
+  check_slug_registered_with_panopticon(@slug)
 end
 
 Then(/^I should see an error message about a missing field$/) do
