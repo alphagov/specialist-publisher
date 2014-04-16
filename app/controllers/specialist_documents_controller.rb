@@ -1,4 +1,6 @@
 require "govspeak"
+require_relative "../services/publish_document_service"
+require_relative "../services/update_document_service"
 
 class SpecialistDocumentsController < ApplicationController
 
@@ -21,10 +23,27 @@ class SpecialistDocumentsController < ApplicationController
   end
 
   def update
-    document = current_document
-    document.update(form_params)
+    document = UpdateDocumentService.new(
+      specialist_document_repository,
+      update_listeners,
+      self,
+    ).call
 
-    store_and_redirect(document, :edit)
+    if document.valid?
+      if params.has_key?("publish")
+        document = PublishDocumentService.new(
+          specialist_document_repository,
+          publication_listeners,
+          self,
+        ).call
+      end
+    end
+
+    if document.valid?
+      redirect_to(specialist_documents_path)
+    else
+      render(:edit, locals: {document: document})
+    end
   end
 
   def preview
@@ -32,6 +51,14 @@ class SpecialistDocumentsController < ApplicationController
   end
 
 protected
+
+  def publication_listeners
+    specialist_document_publication_observers
+  end
+
+  def update_listeners
+    []
+  end
 
   def all_documents
     specialist_document_repository.all
