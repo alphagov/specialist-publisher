@@ -8,7 +8,6 @@ class UpdateDocumentService
   def call
     document.update(new_attributes)
 
-    binding.pry
     if document.valid?
       persist
     end

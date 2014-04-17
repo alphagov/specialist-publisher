@@ -17,26 +17,24 @@ class SpecialistDocumentsController < ApplicationController
   end
 
   def create
-    document = new_document(form_params)
+    document = services.create_document(self).call
 
-    store_and_redirect(document, :new)
+    if document.valid? && publish_document?
+      services.publish_document(document).call
+    end
+
+    if document.valid?
+      redirect_to(specialist_documents_path)
+    else
+      render(:new, locals: {document: document})
+    end
   end
 
   def update
-    document = UpdateDocumentService.new(
-      specialist_document_repository,
-      update_listeners,
-      self,
-    ).call
+    document = services.update_document(self).call
 
-    if document.valid?
-      if params.has_key?("publish")
-        document = PublishDocumentService.new(
-          specialist_document_repository,
-          publication_listeners,
-          self,
-        ).call
-      end
+    if document.valid? && publish_document?
+      services.publish_document(document).call
     end
 
     if document.valid?
@@ -52,12 +50,8 @@ class SpecialistDocumentsController < ApplicationController
 
 protected
 
-  def publication_listeners
-    specialist_document_publication_observers
-  end
-
-  def update_listeners
-    []
+  def publish_document?
+    params.has_key?("publish")
   end
 
   def all_documents
@@ -80,22 +74,6 @@ protected
     end
 
     specialist_document_renderer.call(preview_document).body
-  end
-
-  def store_and_redirect(document, error_action_name)
-    if store(document, publish: params.has_key?('publish'))
-      redirect_to specialist_documents_path
-    else
-      render(error_action_name, locals: {document: document})
-    end
-  end
-
-  def store(document, publish: false)
-    stored_ok = specialist_document_repository.store!(document)
-    if stored_ok && publish
-      specialist_document_repository.publish!(document)
-    end
-    stored_ok
   end
 
   def form_params

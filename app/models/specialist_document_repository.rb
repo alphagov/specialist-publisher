@@ -43,9 +43,11 @@ class SpecialistDocumentRepository
     edition = document.exposed_edition
 
     edition.document_id = document.id
-    edition.slug = artefact_attributes[:slug]
+    edition.slug = document.slug
 
     if edition.save
+      # Panopticon stuff
+      #
       unless panopticon_mappings.exists?(conditions: {document_id: document.id})
         response = create_artefact(artefact_attributes)
         panopticon_mappings.create!(
@@ -59,37 +61,40 @@ class SpecialistDocumentRepository
     else
       false
     end
-  rescue GdsApi::HTTPErrorResponse => e
-    if e.code == 422
-      errors = e.error_details['errors'].symbolize_keys
-      Rails.logger.info(errors)
-      document.add_error(:title, errors.delete(:name)) if errors.has_key?(:name)
-      errors.each do |field, message|
-        document.add_error(field, message)
-      end
+  # Error handling, only relevant if slug collides which we can guarantee
+  #                 within Specialist Publisher
+  #
+  # rescue GdsApi::HTTPErrorResponse => e
+  #   if e.code == 422
+  #     errors = e.error_details['errors'].symbolize_keys
+  #     Rails.logger.info(errors)
+  #     document.add_error(:title, errors.delete(:name)) if errors.has_key?(:name)
+  #     errors.each do |field, message|
+  #       document.add_error(field, message)
+  #     end
 
-      false
-    else
-      raise e
-    end
+  #     false
+  #   else
+  #     raise e
+  #   end
   end
 
-  def publish!(document)
-    mapping = panopticon_mappings.where(document_id: document.id).last
+  # def publish!(document)
+  #   mapping = panopticon_mappings.where(document_id: document.id).last
 
-    missing_registration_message = "Can't publish a document which is not registered with Panopticon"
-    raise InvalidDocumentError.new(missing_registration_message, document) if mapping.nil?
+  #   missing_registration_message = "Can't publish a document which is not registered with Panopticon"
+  #   raise InvalidDocumentError.new(missing_registration_message, document) if mapping.nil?
 
-    document_previously_published = document.published?
+  #   document_previously_published = document.published?
 
-    document.publish!
+  #   document.publish!
 
-    publication_observers.each { |o| o.call(document) }
+  #   publication_observers.each { |o| o.call(document) }
 
-    notify_panopticon_of_publish(mapping.panopticon_id, document) unless document_previously_published
+  #   notify_panopticon_of_publish(mapping.panopticon_id, document) unless document_previously_published
 
-    document.previous_editions.each(&:archive)
-  end
+  #   document.previous_editions.each(&:archive)
+  # end
 
   class InvalidDocumentError < Exception
     def initialize(message, document)

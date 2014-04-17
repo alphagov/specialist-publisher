@@ -1,22 +1,32 @@
 class PublishDocumentService
-  def initialize(repo, listeners, context)
-    @repo = repo
+  def initialize(document_repository, listeners, document)
+    @document_repository = document_repository
     @listeners = listeners
-    @context = context
+    @document = document
+    @document_previously_published = document.published?
   end
 
   def call
-    repo.publish!(document)
+    publish
+    persist
 
     document
   end
 
   private
 
-  attr_reader :repo, :listeners, :context
+  attr_reader :document_repository, :listeners, :document
+
+  def publish
+    document.publish!
+
+    listeners.each { |o| o.call(document) }
+
+    document.previous_editions.each(&:archive)
+  end
 
   def persist
-    repo.store!(document)
+    document_repository.store!(document)
   end
 
   def notify_listeners
@@ -25,11 +35,4 @@ class PublishDocumentService
     end
   end
 
-  def document
-    @document ||= repo.fetch(document_id)
-  end
-
-  def document_id
-    context.params.fetch("id")
-  end
 end
