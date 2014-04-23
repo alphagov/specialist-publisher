@@ -16,6 +16,11 @@ Feature: Creating and editing a CMA case
     Then I should see an error message about a missing field
     And the CMA case should not have been created
 
+  Scenario: Cannot create a CMA case with a duplicate slug
+    Given a published CMA case exists
+    When I create another case with the same slug
+    Then I should see an error message about the duplicate slug
+
   Scenario: Can view a list of all cases in the publisher
     Given two CMA cases exist
     Then the CMA cases should be in the publisher case index in the correct order

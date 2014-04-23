@@ -56,6 +56,12 @@ module CmaCaseHelpers
     page.should have_content("Title can't be blank")
   end
 
+  def check_for_error(expected_error_message)
+    within("ul.errors") do
+      expect(page).to have_content(expected_error_message)
+    end
+  end
+
   def check_for_new_title
     visit specialist_documents_path
     page.should have_content('Edited Example CMA Case')

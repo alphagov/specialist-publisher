@@ -102,7 +102,7 @@ Given(/^a published CMA case exists$/) do
     opened_date: "2014-01-01",
   }
 
-  @expected_slug = "original-cma-case-title"
+  @slug = "original-cma-case-title"
 
   create_cma_case(@cma_fields, publish: true)
 end
@@ -116,5 +116,13 @@ Then(/^the title has been updated$/) do
 end
 
 Then(/^the URL slug remains unchanged$/) do
-  check_for_unchanged_slug(@expected_slug)
+  check_for_unchanged_slug(@slug)
+end
+
+When(/^I create another case with the same slug$/) do
+  create_cma_case(@cma_fields)
+end
+
+Then(/^I should see an error message about the duplicate slug$/) do
+  check_for_error("Slug is already taken")
 end
