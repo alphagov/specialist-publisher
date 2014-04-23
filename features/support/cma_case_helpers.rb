@@ -81,11 +81,22 @@ module CmaCaseHelpers
   end
 
   def go_to_edit_page_for_most_recent_case
+    warn "DEPRECATED: use #go_to_edit_page_for_document and provide title"
     registry = SpecialistPublisherWiring.get(:specialist_document_repository)
     # TODO: testing antipattern, relies on datastore co-incidence
     document = registry.all.last
 
     visit edit_specialist_document_path(document.id)
+  end
+
+  def go_to_edit_page_for_document(document_title)
+    unless current_path == specialist_documents_path
+      visit(specialist_documents_path)
+    end
+
+    document_listing = page.find("ul.document-list li", text: document_title)
+    edit_link = document_listing.find("a", text: "edit")
+    edit_link.click
   end
 
   def make_changes_without_saving(fields)
@@ -194,5 +205,11 @@ module CmaCaseHelpers
       # TODO: seeded data is created in the future, this is odd
       Timecop.travel(10.minutes.from_now)
     end
+  end
+
+  def withdraw_document(title)
+    visit specialist_documents_path
+    click_link title
+    click_button 'Withdraw'
   end
 end

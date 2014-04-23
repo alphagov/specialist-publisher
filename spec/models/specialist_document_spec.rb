@@ -22,6 +22,7 @@ describe SpecialistDocument do
       assign_attributes: nil,
       attachments: attachments_proxy,
       publish: nil,
+      withdraw: nil,
     }
   }
 
@@ -31,8 +32,10 @@ describe SpecialistDocument do
     double(:draft_edition_v1,
       edition_messages.merge(
         title: "Draft edition v1",
+        state: 'draft',
         draft?: true,
         published?: false,
+        withdrawn?: false,
         version_number: 1,
       )
     )
@@ -42,8 +45,10 @@ describe SpecialistDocument do
     double(:draft_edition_v2,
       edition_messages.merge(
         title: "Draft edition v2",
+        state: 'draft',
         draft?: true,
         published?: false,
+        withdrawn?: false,
         version_number: 2,
       )
     )
@@ -53,10 +58,26 @@ describe SpecialistDocument do
     double(:published_edition_v1,
       edition_messages.merge(
         title: "Published edition",
+        state: 'published',
         published?: true,
         draft?: false,
+        withdrawn?: false,
         slug: published_slug,
         version_number: 1,
+      )
+    )
+  }
+
+  let(:withdrawn_edition_v2) {
+    double(:withdrawn_edition_v2,
+      edition_messages.merge(
+        title: "Withdrawn edition",
+        state: 'withdrawn',
+        published?: false,
+        draft?: false,
+        withdrawn?: true,
+        slug: published_slug,
+        version_number: 2,
       )
     )
   }
@@ -374,6 +395,109 @@ describe SpecialistDocument do
       expect(
         doc.find_attachment_by_id("does-not-exist")
       ).to be_nil
+    end
+  end
+
+  describe "#publication_state" do
+    context "when the first edition is in draft" do
+      let(:editions) { [draft_edition_v1] }
+
+      it "returns 'draft'" do
+        expect(doc.publication_state).to eq("draft")
+      end
+    end
+
+    context "with a single published edition" do
+      let(:editions) { [published_edition_v1] }
+
+      it "returns 'published'" do
+        expect(doc.publication_state).to eq("published")
+      end
+    end
+
+    context "with a single published edition" do
+      let(:editions) { [published_edition_v1, draft_edition_v2] }
+
+      it "returns 'published'" do
+        expect(doc.publication_state).to eq("published")
+      end
+    end
+
+    context "with a published edition, and withdrawn edition" do
+      let(:editions) { [published_edition_v1, withdrawn_edition_v2] }
+
+      it "returns 'withdrawn'" do
+        expect(doc.publication_state).to eq("withdrawn")
+      end
+    end
+  end
+
+  describe "#withdrawn?" do
+    context "one draft" do
+      let(:editions) { [ draft_edition_v1 ] }
+
+      it "returns false" do
+        expect(doc).not_to be_withdrawn
+      end
+    end
+
+    context "one published" do
+      let(:editions) { [ published_edition_v1 ] }
+
+      it "returns false" do
+        expect(doc).not_to be_withdrawn
+      end
+    end
+
+    context "one published and one withdrawn" do
+      let(:editions) { [ published_edition_v1, withdrawn_edition_v2 ] }
+
+      it "returns true" do
+        expect(doc).to be_withdrawn
+      end
+    end
+  end
+
+  describe "#withdraw!" do
+    context "one draft" do
+      let(:editions) { [ draft_edition_v1 ] }
+
+      it "does nothing" do
+        doc.withdraw!
+
+        expect(draft_edition_v1).not_to have_received(:withdraw)
+      end
+    end
+
+    context "one published and one withdrawn" do
+      let(:editions) { [ published_edition_v1, withdrawn_edition_v2 ] }
+
+      it "does nothing" do
+        doc.withdraw!
+
+        expect(published_edition_v1).not_to have_received(:withdraw)
+        expect(withdrawn_edition_v2).not_to have_received(:withdraw)
+      end
+    end
+
+    context "one published and one draft edition" do
+      let(:editions) { [ published_edition_v1, draft_edition_v2 ] }
+
+      it "sets the published edition's state to withdrawn" do
+        doc.withdraw!
+
+        expect(published_edition_v1).to have_received(:withdraw)
+      end
+    end
+
+    context "one published edition" do
+      let(:editions) { [ published_edition_v1] }
+
+      it "sets the published edition's state to withdrawn" do
+        doc.withdraw!
+
+        expect(published_edition_v1).to have_received(:withdraw)
+      end
     end
   end
 end

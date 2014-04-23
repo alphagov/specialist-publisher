@@ -8,6 +8,10 @@ class SpecialistDocumentsController < ApplicationController
     render_with(documents: all_documents)
   end
 
+  def show
+    render_with(document: current_document)
+  end
+
   def new
     render_with(document: new_document({}))
   end
@@ -44,6 +48,12 @@ class SpecialistDocumentsController < ApplicationController
     end
   end
 
+  def withdraw
+    current_document.withdraw!
+    specialist_document_repository.store!(current_document)
+    redirect_to(specialist_documents_path)
+  end
+
   def preview
     render json: { preview_html: generate_preview }
   end
@@ -63,7 +73,7 @@ protected
   end
 
   def current_document
-    specialist_document_repository.fetch(params.fetch(:id))
+    @current_document ||= specialist_document_repository.fetch(params.fetch(:id))
   end
 
   def generate_preview
