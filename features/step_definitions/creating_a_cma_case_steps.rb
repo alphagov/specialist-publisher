@@ -45,7 +45,7 @@ Then(/^the CMA case should have been updated$/) do
 end
 
 Given(/^two CMA cases exist$/) do
-  create_cases(2)
+  seed_cases(2)
 end
 
 Given(/^a draft CMA case exists$/) do

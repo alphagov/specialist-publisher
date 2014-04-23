@@ -167,8 +167,8 @@ module CmaCaseHelpers
     expect(document.headers.first).to include( "text" => "Header" )
   end
 
-  def create_cases(number_of_cases, state: 'draft')
-    stub_out_panopticon
+  def seed_cases(number_of_cases, state: 'draft')
+    # TODO: Use the create document service or a more robust way of seeding data
     @created_case_index ||= 0
     number_of_cases.times do
       @created_case_index += 1
@@ -184,8 +184,14 @@ module CmaCaseHelpers
         state: state,
       )
 
+      PanopticonMapping.create!(
+        document_id: doc.id,
+        panopticon_id: SecureRandom.hex,
+      )
+
       specialist_document_repository.store!(doc)
 
+      # TODO: seeded data is created in the future, this is odd
       Timecop.travel(10.minutes.from_now)
     end
   end

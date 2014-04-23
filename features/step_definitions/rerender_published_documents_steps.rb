@@ -1,6 +1,6 @@
 Given(/^some published and draft specialist documents exist$/) do
-  create_cases(1, state: "draft")
-  create_cases(2, state: "published")
+  seed_cases(1, state: "draft")
+  seed_cases(2, state: "published")
 end
 
 Given(/^their RenderedSpecialistDocument records are missing$/) do
