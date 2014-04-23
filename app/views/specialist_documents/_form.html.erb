@@ -51,7 +51,11 @@
 
   <ul class="attachments">
     <% document.attachments.each do |attachment| %>
-      <li class="attachment"><span class="title"><%= attachment.title %></span> <span class="snippet"><%= attachment.snippet %></span></li>
+      <li class="attachment">
+        <span class="title"><%= attachment.title %></span>
+        <span class="snippet"><%= attachment.snippet %></span>
+        <%= link_to "edit", edit_specialist_document_attachment_path(document, attachment) %>
+      </li>
     <% end %>
   </ul>
 </div>

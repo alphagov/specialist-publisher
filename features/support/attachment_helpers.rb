@@ -3,10 +3,10 @@ module AttachmentHelpers
     Plek.current.find("asset-manager")
   end
 
-  def add_attachment_to_case(document_title)
+  def add_attachment_to_case(document_title, attachment_title)
     click_on document_title
     click_on "Add attachment"
-    fill_in "Title", with: "My attachment"
+    fill_in "Title", with: attachment_title
     attach_file "File", File.expand_path("../fixtures/greenpaper.pdf", File.dirname(__FILE__))
 
     stub_request(:post, "#{test_asset_manager_base_url}/assets")
@@ -64,5 +64,45 @@ module AttachmentHelpers
     within(".preview") do
       expect(page).to have_css("a", text: title)
     end
+  end
+
+  def create_case_with_attachment(document_title, attachment_title)
+    create_cma_case(
+      title: document_title,
+      summary: 'Eget urna mollis ornare vel eu leo.',
+      body: ('Praesent commodo cursus magna, vel scelerisque nisl consectetur et.' * 10),
+      opened_date: '2014-01-01'
+    )
+
+    add_attachment_to_case(document_title, attachment_title)
+  end
+
+  def edit_attachment(document_title, attachment_title, new_attachment_title, new_attachment_file_name)
+    go_to_edit_page_for_most_recent_case
+
+    attachment_li = page.find(".attachments li", text: attachment_title)
+    attachment_edit_link = attachment_li.find("a", text: "edit")
+
+    within(attachment_li) do
+      click_link("edit")
+    end
+
+    fill_in "Title", with: new_attachment_title
+    attach_file "File", fixture_filepath(new_attachment_file_name)
+
+    stub_request(:put, "#{test_asset_manager_base_url}/assets/#{asset_id}")
+      .to_return(
+        body: JSON.dump(asset_manager_response),
+        status: 200,
+      )
+
+    click_button "Save attachment"
+  end
+
+  def check_for_attachment_update(document_title, attachment_title, attachment_file_name)
+    go_to_edit_page_for_most_recent_case
+
+    expect(page).to have_css(".attachments li", text: @new_attachment_title)
+    expect(page).to have_css(".attachments li", text: @new_attachment_file_name)
   end
 end

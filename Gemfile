@@ -21,7 +21,7 @@ gem 'logstasher', '0.4.8'
 if ENV["CONTENT_MODELS_DEV"]
   gem "govuk_content_models", :path => "../govuk_content_models"
 else
-  gem "govuk_content_models", "8.10.0"
+  gem "govuk_content_models", "10.4.0"
 end
 
 group :assets do

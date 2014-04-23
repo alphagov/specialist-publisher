@@ -134,6 +134,10 @@ class SpecialistDocument
     latest_edition == exposed_edition
   end
 
+  def find_attachment_by_id(attachment_id)
+    attachments.find { |a| a.id.to_s == attachment_id }
+  end
+
 protected
 
   attr_reader :slug_generator, :edition_factory

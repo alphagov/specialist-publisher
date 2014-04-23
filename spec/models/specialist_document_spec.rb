@@ -345,4 +345,35 @@ describe SpecialistDocument do
       expect(doc.finder_slug).to eq("finder-791")
     end
   end
+
+  describe "#find_attachment_by_id" do
+    let(:editions) { [published_edition_v1] }
+
+    let(:attachment_one) { double("attachment_one", id: id_object("one")) }
+    let(:attachment_two) { double("attachment_two", id: id_object("two")) }
+
+    let(:attachments) {
+      [
+        attachment_one,
+        attachment_two,
+      ]
+    }
+
+    def id_object(id_string)
+      # like a Mongoid BSON id
+      double(to_s: id_string)
+    end
+
+    it "returns the attachment with the corresponding id" do
+      expect(
+        doc.find_attachment_by_id("one")
+      ).to eq(attachment_one)
+    end
+
+    it "returns nil if the attachment does not exist" do
+      expect(
+        doc.find_attachment_by_id("does-not-exist")
+      ).to be_nil
+    end
+  end
 end
