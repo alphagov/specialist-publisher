@@ -4,17 +4,18 @@ require "create_document_service"
 
 class ServiceRegistry
 
-  def initialize(document_builder, document_repository, publication_listeners)
+  def initialize(document_builder, document_repository, publication_listeners, creation_listeners)
     @document_builder = document_builder
     @document_repository = document_repository
     @publication_listeners = publication_listeners
+    @creation_listeners = creation_listeners
   end
 
   def create_document(context)
     CreateDocumentService.new(
       document_builder,
       document_repository,
-      [],
+      creation_listeners,
       context,
     )
   end
@@ -41,5 +42,6 @@ class ServiceRegistry
     :document_builder,
     :document_repository,
     :publication_listeners,
+    :creation_listeners,
   )
 end

@@ -7,10 +7,11 @@ class CreateDocumentService
   end
 
   def call
-    document = builder.call(attributes)
+    @document = builder.call(attributes)
 
     if document.valid?
       repo.store!(document)
+      notify_listeners
     end
 
     document
@@ -18,7 +19,7 @@ class CreateDocumentService
 
   private
 
-  attr_reader :builder, :repo, :listeners, :context
+  attr_reader :builder, :repo, :listeners, :context, :document
 
   def notify_listeners
     listeners.each do |listener|

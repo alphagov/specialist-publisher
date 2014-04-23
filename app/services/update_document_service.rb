@@ -10,6 +10,7 @@ class UpdateDocumentService
 
     if document.valid?
       persist
+      notify_listeners
     end
 
     document

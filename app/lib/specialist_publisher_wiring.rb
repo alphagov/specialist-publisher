@@ -116,6 +116,12 @@ SpecialistPublisherWiring = DependencyContainer.new do
     ]
   }
 
+  define_singleton(:specialist_document_creation_observers) {
+    [
+      get(:panopticon_registerer),
+    ]
+  }
+
   define_factory(:panopticon_registerer) {
     ->(document) {
       PanopticonRegisterer.new(
@@ -166,6 +172,7 @@ SpecialistPublisherWiring = DependencyContainer.new do
       get(:specialist_document_builder),
       get(:specialist_document_repository),
       get(:specialist_document_publication_observers),
+      get(:specialist_document_creation_observers),
     )
   }
 

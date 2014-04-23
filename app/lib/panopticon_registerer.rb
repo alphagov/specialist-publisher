@@ -6,28 +6,44 @@ class PanopticonRegisterer
   end
 
   def call
-    raise "Publication failed" unless mapping
-
-    api.put_artefact!(mapping.id, artefact_attributes_for(document))
+    if mapping
+      notify_of_update
+    else
+      register_new_document
+    end
   end
 
   private
 
   attr_reader :api, :mappings, :document
 
+  def register_new_document
+    response = api.create_artefact!(artefact_attributes)
+
+    save_new_mapping(response)
+  end
+
+  def notify_of_update
+    api.put_artefact!(mapping.id, artefact_attributes)
+  end
+
   def mapping
     @mapping ||= mappings.where(document_id: document.id).last
   end
 
-  def notify_of_publish(id, document)
-    api.put_artefact!(id, artefact_attributes_for(document, 'live'))
+  def save_new_mapping(response)
+    mappings.create!(
+      document_id: document.id,
+      panopticon_id: response["id"],
+      slug: document.slug,
+    )
   end
 
   def artefact_state
-    "live"
+    document.published? ? "live" : "draft"
   end
 
-  def artefact_attributes_for(document)
+  def artefact_attributes
     {
       name: document.title,
       slug: document.slug,
