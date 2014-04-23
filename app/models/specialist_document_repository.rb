@@ -38,6 +38,14 @@ class SpecialistDocumentRepository
     end
   end
 
+  def slug_unique?(document)
+    # TODO: push this method down into persistence layer
+    editions_with_slug = specialist_document_editions.where(
+      :slug => document.slug,
+      :document_id.ne => document.id,
+    ).empty?
+  end
+
   def store!(document)
     artefact_attributes = artefact_attributes_for(document)
     edition = document.exposed_edition
