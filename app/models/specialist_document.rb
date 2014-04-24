@@ -168,6 +168,8 @@ protected
         version_number: current_version_number + 1,
         slug: slug,
         attachments: attachments,
+        # TODO: Remove persistence conern
+        document_id: id,
       )
 
     edition_factory.call(edition_params)
