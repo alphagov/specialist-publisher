@@ -49,9 +49,9 @@ class SpecialistDocumentsController < ApplicationController
   end
 
   def withdraw
-    current_document.withdraw!
-    specialist_document_repository.store!(current_document)
-    redirect_to(specialist_documents_path)
+    document = services.withdraw_document(self).call
+
+    redirect_to(specialist_document_path(document))
   end
 
   def preview

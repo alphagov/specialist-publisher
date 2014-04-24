@@ -1,6 +1,7 @@
 require "publish_document_service"
 require "update_document_service"
 require "create_document_service"
+require "withdraw_document_service"
 
 class ServiceRegistry
 
@@ -30,6 +31,14 @@ class ServiceRegistry
 
   def update_document(context)
     UpdateDocumentService.new(
+      document_repository,
+      [],
+      context,
+    )
+  end
+
+  def withdraw_document(context)
+    WithdrawDocumentService.new(
       document_repository,
       [],
       context,
