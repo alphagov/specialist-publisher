@@ -111,7 +111,7 @@ SpecialistPublisherWiring = DependencyContainer.new do
 
   define_singleton(:specialist_document_publication_observers) {
     [
-      get(:specialist_document_exporter),
+      get(:specialist_document_content_api_exporter),
       get(:finder_api_notifier),
       get(:panopticon_registerer),
     ]
@@ -119,6 +119,14 @@ SpecialistPublisherWiring = DependencyContainer.new do
 
   define_singleton(:specialist_document_creation_observers) {
     [
+      get(:panopticon_registerer),
+    ]
+  }
+
+  define_singleton(:specialist_document_withdrawal_observers) {
+    [
+      get(:specialist_document_content_api_withdrawer),
+      get(:finder_api_withdrawer),
       get(:panopticon_registerer),
     ]
   }
@@ -133,7 +141,19 @@ SpecialistPublisherWiring = DependencyContainer.new do
     }
   }
 
-  define_instance(:specialist_document_exporter) {
+  define_factory(:specialist_document_content_api_withdrawer) {
+    ->(document) {
+      RenderedSpecialistDocument.where(slug: document.slug).map(&:destroy)
+    }
+  }
+
+  define_factory(:finder_api_withdrawer) {
+    ->(doc) {
+      get(:finder_api).notify_of_withdrawal(doc.slug)
+    }
+  }
+
+  define_instance(:specialist_document_content_api_exporter) {
     ->(doc) {
       SpecialistDocumentExporter.new(
         RenderedSpecialistDocument,
@@ -174,6 +194,7 @@ SpecialistPublisherWiring = DependencyContainer.new do
       get(:specialist_document_repository),
       get(:specialist_document_publication_observers),
       get(:specialist_document_creation_observers),
+      get(:specialist_document_withdrawal_observers),
     )
   }
 

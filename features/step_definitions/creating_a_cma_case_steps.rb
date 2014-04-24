@@ -102,7 +102,7 @@ Given(/^a published CMA case exists$/) do
     opened_date: "2014-01-01",
   }
 
-  @slug = "original-cma-case-title"
+  @slug = "cma-cases/original-cma-case-title"
 
   create_cma_case(@cma_fields, publish: true)
 end
