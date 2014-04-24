@@ -12,4 +12,8 @@ module ApplicationHelper
 
     state
   end
+
+  def nav_link_to(text, href)
+    link_to(text, href)
+  end
 end
