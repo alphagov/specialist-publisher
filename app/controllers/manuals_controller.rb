@@ -2,6 +2,10 @@ class ManualsController < ApplicationController
   def index
   end
 
+  def show
+    render_with(manual: current_manual)
+  end
+
   def new
     render_with(manual: new_manual)
   end
@@ -18,6 +22,10 @@ class ManualsController < ApplicationController
   end
 
 private
+  def current_manual
+    manual_repository.fetch(params[:id])
+  end
+
   def new_manual
     ManualForm.new
   end
