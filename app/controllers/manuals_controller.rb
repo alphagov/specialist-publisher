@@ -1,5 +1,6 @@
 class ManualsController < ApplicationController
   def index
+    render_with(manuals: all_manuals)
   end
 
   def show
@@ -22,6 +23,10 @@ class ManualsController < ApplicationController
   end
 
 private
+  def all_manuals
+    manual_repository.all
+  end
+
   def current_manual
     manual_repository.fetch(params[:id])
   end

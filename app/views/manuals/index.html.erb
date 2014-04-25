@@ -6,6 +6,12 @@
   </div>
 
   <div class="col-md-9">
-    <p>Hello, World! This could be a list!</p>
+    <ul class="document-list">
+      <% manuals.each do |manual| %>
+        <li class="document">
+          <%= link_to manual.title, manual_path(manual), class: 'document-title' %>
+        </li>
+      <% end %>
+    </ul>
   </div>
 </div>

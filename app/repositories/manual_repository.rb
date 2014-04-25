@@ -8,6 +8,12 @@ class ManualRepository
     build_manual_for(edition)
   end
 
+  def all
+    ManualEdition.all.map do |edition|
+      build_manual_for(edition)
+    end
+  end
+
 private
   def create_manual_edition(manual)
     ManualEdition.create(attributes_for(manual))
