@@ -2,6 +2,7 @@ require 'dependency_container'
 require 'securerandom'
 require 'builders/specialist_document_builder'
 require 'gds_api/panopticon'
+require 'panopticon_registerer'
 require "specialist_document_attachment_processor"
 require "specialist_document_exporter"
 require "rendered_specialist_document"
@@ -9,6 +10,8 @@ require "specialist_document_govspeak_to_html_renderer"
 require "specialist_document_header_extractor"
 require "finder_api_notifier"
 require "finder_api"
+
+$LOAD_PATH.unshift(File.expand_path("../..", "app/services"))
 
 SpecialistPublisherWiring = DependencyContainer.new do
   define_instance(:specialist_document_editions) { SpecialistDocumentEdition }
@@ -20,7 +23,11 @@ SpecialistPublisherWiring = DependencyContainer.new do
 
   define_singleton(:specialist_document_factory) {
     ->(*args) {
-      SpecialistDocument.new(get(:slug_generator), get(:edition_factory), *args)
+      SpecialistDocument.new(
+        get(:slug_generator),
+        get(:edition_factory),
+        *args,
+      )
     }
   }
 
@@ -34,7 +41,15 @@ SpecialistPublisherWiring = DependencyContainer.new do
   define_singleton(:attachment_factory) { Attachment.method(:new) }
 
   define_factory(:specialist_document_builder) {
-    build_with_dependencies(SpecialistDocumentBuilder)
+    SpecialistDocumentBuilder.new(
+      ->(*args) {
+        SlugUniquenessValidator.new(
+          get(:specialist_document_repository),
+          get(:specialist_document_factory).call(*args),
+        )
+      },
+      get(:id_generator),
+    )
   }
 
   define_instance(:slug_generator) { SlugGenerator }
@@ -96,8 +111,25 @@ SpecialistPublisherWiring = DependencyContainer.new do
   define_singleton(:specialist_document_publication_observers) {
     [
       get(:specialist_document_exporter),
-      get(:finder_api_notifier)
+      get(:finder_api_notifier),
+      get(:panopticon_registerer),
     ]
+  }
+
+  define_singleton(:specialist_document_creation_observers) {
+    [
+      get(:panopticon_registerer),
+    ]
+  }
+
+  define_factory(:panopticon_registerer) {
+    ->(document) {
+      PanopticonRegisterer.new(
+        get(:panopticon_api),
+        get(:panopticon_mappings),
+        document,
+      ).call
+    }
   }
 
   define_instance(:specialist_document_exporter) {
@@ -134,4 +166,14 @@ SpecialistPublisherWiring = DependencyContainer.new do
     require "url_maker"
     UrlMaker.new(plek: get(:plek))
   }
+
+  define_factory(:services) {
+    ServiceRegistry.new(
+      get(:specialist_document_builder),
+      get(:specialist_document_repository),
+      get(:specialist_document_publication_observers),
+      get(:specialist_document_creation_observers),
+    )
+  }
+
 end

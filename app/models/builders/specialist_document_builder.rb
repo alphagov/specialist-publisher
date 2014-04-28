@@ -6,7 +6,7 @@ class SpecialistDocumentBuilder
 
   def call(attrs)
     document_factory
-      .call(id_generator.call, [])
+      .call(new_document_id, editions)
       .tap { |d|
         d.update(attrs)
       }
@@ -15,4 +15,12 @@ class SpecialistDocumentBuilder
   private
 
   attr_reader :document_factory, :id_generator
+
+  def new_document_id
+    id_generator.call
+  end
+
+  def editions
+    []
+  end
 end

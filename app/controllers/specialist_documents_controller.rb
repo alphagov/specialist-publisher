@@ -1,4 +1,6 @@
 require "govspeak"
+require_relative "../services/publish_document_service"
+require_relative "../services/update_document_service"
 
 class SpecialistDocumentsController < ApplicationController
 
@@ -15,16 +17,31 @@ class SpecialistDocumentsController < ApplicationController
   end
 
   def create
-    document = new_document(form_params)
+    document = services.create_document(self).call
 
-    store_and_redirect(document, :new)
+    if document.valid? && publish_document?
+      services.publish_document(document).call
+    end
+
+    if document.valid?
+      redirect_to(specialist_documents_path)
+    else
+      render(:new, locals: {document: document})
+    end
   end
 
   def update
-    document = current_document
-    document.update(form_params)
+    document = services.update_document(self).call
 
-    store_and_redirect(document, :edit)
+    if document.valid? && publish_document?
+      services.publish_document(document).call
+    end
+
+    if document.valid?
+      redirect_to(specialist_documents_path)
+    else
+      render(:edit, locals: {document: document})
+    end
   end
 
   def preview
@@ -32,6 +49,10 @@ class SpecialistDocumentsController < ApplicationController
   end
 
 protected
+
+  def publish_document?
+    params.has_key?("publish")
+  end
 
   def all_documents
     specialist_document_repository.all
@@ -53,22 +74,6 @@ protected
     end
 
     specialist_document_renderer.call(preview_document).body
-  end
-
-  def store_and_redirect(document, error_action_name)
-    if store(document, publish: params.has_key?('publish'))
-      redirect_to specialist_documents_path
-    else
-      render(error_action_name, locals: {document: document})
-    end
-  end
-
-  def store(document, publish: false)
-    stored_ok = specialist_document_repository.store!(document)
-    if stored_ok && publish
-      specialist_document_repository.publish!(document)
-    end
-    stored_ok
   end
 
   def form_params
