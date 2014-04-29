@@ -12,14 +12,7 @@
           <ul class="metadata">
             <li>updated <%= time_ago_in_words(document.updated_at) %> ago</li>
             <li>
-              <% if document.published? %>
-                published
-                <% if document.draft? %>
-                   with new draft
-                <% end %>
-              <% else %>
-                draft
-              <% end %>
+              <%= document_state(document) %>
             </li>
             <li class="actions">
               <%= link_to 'edit', edit_specialist_document_path(document.id) %>
