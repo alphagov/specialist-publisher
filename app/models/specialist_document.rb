@@ -75,11 +75,11 @@ class SpecialistDocument
       )
     end
 
-    if exposed_edition.published?
+    if draft?
+      exposed_edition.assign_attributes(params)
+    else
       @exposed_edition = new_draft(params)
       editions.push(@exposed_edition)
-    else
-      exposed_edition.assign_attributes(params)
     end
 
     self
