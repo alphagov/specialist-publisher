@@ -46,7 +46,7 @@ class SlugUniquenessValidator < SimpleDelegator
   end
 
   def error_message
-    "Slug is already taken"
+    "is already taken"
   end
 
   def document_with_same_slug_exists?
