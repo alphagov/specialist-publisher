@@ -131,12 +131,12 @@ class SpecialistDocument
 
   def withdraw!
     if published_edition
-      published_edition.withdraw
+      published_edition.archive
     end
   end
 
   def withdrawn?
-    most_recent_non_draft && most_recent_non_draft.withdrawn?
+    most_recent_non_draft && most_recent_non_draft.archived?
   end
 
   def latest_edition_exposed?

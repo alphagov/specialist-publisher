@@ -230,7 +230,7 @@ module CmaCaseHelpers
     expect(fake_panopticon).to have_received(:put_artefact!)
       .with(anything, hash_including(
         name: document_title,
-        state: "withdrawn",
+        state: "archived",
       ))
 
     expect(page).to have_content("Publication state: withdrawn")

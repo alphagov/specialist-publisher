@@ -22,7 +22,7 @@ describe SpecialistDocument do
       assign_attributes: nil,
       attachments: attachments_proxy,
       publish: nil,
-      withdraw: nil,
+      archive: nil,
     }
   }
 
@@ -35,7 +35,7 @@ describe SpecialistDocument do
         state: 'draft',
         draft?: true,
         published?: false,
-        withdrawn?: false,
+        archived?: false,
         version_number: 1,
       )
     )
@@ -48,7 +48,7 @@ describe SpecialistDocument do
         state: 'draft',
         draft?: true,
         published?: false,
-        withdrawn?: false,
+        archived?: false,
         version_number: 2,
       )
     )
@@ -61,7 +61,7 @@ describe SpecialistDocument do
         state: 'published',
         published?: true,
         draft?: false,
-        withdrawn?: false,
+        archived?: false,
         slug: published_slug,
         version_number: 1,
       )
@@ -75,7 +75,7 @@ describe SpecialistDocument do
         state: 'withdrawn',
         published?: false,
         draft?: false,
-        withdrawn?: true,
+        archived?: true,
         slug: published_slug,
         version_number: 2,
       )
@@ -465,7 +465,7 @@ describe SpecialistDocument do
       it "does nothing" do
         doc.withdraw!
 
-        expect(draft_edition_v1).not_to have_received(:withdraw)
+        expect(draft_edition_v1).not_to have_received(:archive)
       end
     end
 
@@ -475,8 +475,8 @@ describe SpecialistDocument do
       it "does nothing" do
         doc.withdraw!
 
-        expect(published_edition_v1).not_to have_received(:withdraw)
-        expect(withdrawn_edition_v2).not_to have_received(:withdraw)
+        expect(published_edition_v1).not_to have_received(:archive)
+        expect(withdrawn_edition_v2).not_to have_received(:archive)
       end
     end
 
@@ -486,7 +486,7 @@ describe SpecialistDocument do
       it "sets the published edition's state to withdrawn" do
         doc.withdraw!
 
-        expect(published_edition_v1).to have_received(:withdraw)
+        expect(published_edition_v1).to have_received(:archive)
       end
     end
 
@@ -496,7 +496,7 @@ describe SpecialistDocument do
       it "sets the published edition's state to withdrawn" do
         doc.withdraw!
 
-        expect(published_edition_v1).to have_received(:withdraw)
+        expect(published_edition_v1).to have_received(:archive)
       end
     end
   end

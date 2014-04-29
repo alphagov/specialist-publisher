@@ -47,7 +47,7 @@ class PanopticonRegisterer
     {
       "published"   => "live",
       "draft"       => "draft",
-      "withdrawn"   => "withdrawn",
+      "withdrawn"   => "archived",
     }
   end
 
