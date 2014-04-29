@@ -24,7 +24,7 @@ class PanopticonRegisterer
   end
 
   def notify_of_update
-    api.put_artefact!(mapping.id, artefact_attributes)
+    api.put_artefact!(mapping.panopticon_id, artefact_attributes)
   end
 
   def mapping
