@@ -74,7 +74,7 @@ describe SlugUniquenessValidator do
         document_with_validator.valid?
 
         expect(document_with_validator.errors.fetch(:slug))
-          .to include("Slug is already taken")
+          .to include("is already taken")
       end
 
       context "when the document has other errors" do
