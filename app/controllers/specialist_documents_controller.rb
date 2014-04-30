@@ -51,7 +51,7 @@ class SpecialistDocumentsController < ApplicationController
   def withdraw
     document = services.withdraw_document(self).call
 
-    redirect_to(specialist_document_path(document))
+    redirect_to(specialist_documents_path)
   end
 
   def preview
