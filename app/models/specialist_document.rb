@@ -57,7 +57,6 @@ class SpecialistDocument
   end
 
   def published_version
-    published_edition = editions.select(&:published?).last
     if published_edition
       self.class.new(@slug_generator, @edition_factory, @id, @editions, version_number: published_edition.version_number)
     end
@@ -76,11 +75,11 @@ class SpecialistDocument
       )
     end
 
-    if exposed_edition.published?
+    if draft?
+      exposed_edition.assign_attributes(params)
+    else
       @exposed_edition = new_draft(params)
       editions.push(@exposed_edition)
-    else
-      exposed_edition.assign_attributes(params)
     end
 
     self
@@ -130,12 +129,32 @@ class SpecialistDocument
     latest_edition.publish unless latest_edition.published?
   end
 
+  def withdraw!
+    if published_edition
+      published_edition.archive
+    end
+  end
+
+  def withdrawn?
+    most_recent_non_draft && most_recent_non_draft.archived?
+  end
+
   def latest_edition_exposed?
     latest_edition == exposed_edition
   end
 
   def find_attachment_by_id(attachment_id)
     attachments.find { |a| a.id.to_s == attachment_id }
+  end
+
+  def publication_state
+    if withdrawn?
+      "withdrawn"
+    elsif published?
+      "published"
+    elsif draft?
+      "draft"
+    end
   end
 
 protected
@@ -177,5 +196,15 @@ protected
 
   def current_version_number
     exposed_edition.version_number
+  end
+
+  def published_edition
+    if most_recent_non_draft && most_recent_non_draft.published?
+      most_recent_non_draft
+    end
+  end
+
+  def most_recent_non_draft
+    editions.reject { |e| e.draft? }.last
   end
 end

@@ -13,7 +13,7 @@ describe SpecialistDocument do
   let(:published_slug)      { double(:published_slug) }
   let(:slug_generator)      { double(:slug_generator, call: slug) }
   let(:edition_factory)     { double(:edition_factory, call: new_edition) }
-  let(:new_edition)         { double(:new_edition, published?: false, assign_attributes: nil, version_number: 2) }
+  let(:new_edition)         { double(:new_edition, published?: false, draft?: true, assign_attributes: nil, version_number: 2) }
   let(:attachments)         { double(:attachments) }
 
   let(:edition_messages)    {
@@ -22,6 +22,7 @@ describe SpecialistDocument do
       assign_attributes: nil,
       attachments: attachments_proxy,
       publish: nil,
+      archive: nil,
     }
   }
 
@@ -31,8 +32,10 @@ describe SpecialistDocument do
     double(:draft_edition_v1,
       edition_messages.merge(
         title: "Draft edition v1",
+        state: 'draft',
         draft?: true,
         published?: false,
+        archived?: false,
         version_number: 1,
       )
     )
@@ -42,8 +45,10 @@ describe SpecialistDocument do
     double(:draft_edition_v2,
       edition_messages.merge(
         title: "Draft edition v2",
+        state: 'draft',
         draft?: true,
         published?: false,
+        archived?: false,
         version_number: 2,
       )
     )
@@ -53,29 +58,29 @@ describe SpecialistDocument do
     double(:published_edition_v1,
       edition_messages.merge(
         title: "Published edition",
+        state: 'published',
         published?: true,
         draft?: false,
+        archived?: false,
         slug: published_slug,
         version_number: 1,
       )
     )
   }
 
-  context "document is new, with no previous editions" do
-    let(:editions) { [] }
-    let(:attrs)    { { title: "Test title" } }
-
-    describe "#udpate" do
-      it "creates the first edition" do
-        doc.update(attrs)
-
-        expect(edition_factory).to have_received(:call).with(
-          version_number: 1,
-          state: "draft",
-        )
-      end
-    end
-  end
+  let(:withdrawn_edition_v2) {
+    double(:withdrawn_edition_v2,
+      edition_messages.merge(
+        title: "Withdrawn edition",
+        state: 'withdrawn',
+        published?: false,
+        draft?: false,
+        archived?: true,
+        slug: published_slug,
+        version_number: 2,
+      )
+    )
+  }
 
   context "with one draft edition" do
     let(:editions) { [ draft_edition_v1 ] }
@@ -116,6 +121,20 @@ describe SpecialistDocument do
   end
 
   describe "#update" do
+    context "document is new, with no previous editions" do
+      let(:editions) { [] }
+      let(:attrs)    { { title: "Test title" } }
+      
+      it "creates the first edition" do
+        doc.update(attrs)
+
+        expect(edition_factory).to have_received(:call).with(
+          version_number: 1,
+          state: "draft",
+        )
+      end
+    end
+
     context "before the document is published" do
       context "with an existing draft edition" do
         let(:editions)  { [draft_edition_v1] }
@@ -158,6 +177,63 @@ describe SpecialistDocument do
         doc.update(params)
 
         expect(edition_factory).to have_received(:call).with(hash_including(version_number: 2))
+      end
+
+      it "builds a new edition in the 'draft' state" do
+        doc.update(params)
+
+        expect(edition_factory).to have_received(:call).with(hash_including(state: 'draft'))
+      end
+
+      it "builds a new edition copying over the previous edition's attachements" do
+        doc.update(params)
+
+        expect(edition_factory).to have_received(:call).with(hash_including(
+          attachments: attachments,
+        ))
+      end
+
+      it "presents the new edition" do
+        doc.update(params)
+
+        expect(doc.version_number).to eq(new_edition.version_number)
+      end
+
+      it "returns self" do
+        expect(doc.update(params)).to eq(doc)
+      end
+
+      context "when providing a title" do
+        let(:new_title) { double(:new_title) }
+        let(:slug)      { double(:slug) }
+
+        it "does not update the slug" do
+          doc.update(title: new_title)
+
+          expect(edition_factory).to have_received(:call).with(
+            hash_including(
+              :slug => published_slug,
+            )
+          )
+        end
+      end
+    end
+
+    context "when the current document is withdrawn" do
+      let(:editions) { [withdrawn_edition_v2] }
+
+      let(:params) { {title: "It is a new title"} }
+
+      it "builds a new edition with the new params" do
+        doc.update(params)
+
+        expect(edition_factory).to have_received(:call).with(hash_including(params))
+      end
+
+      it "builds a new edition with an incremented version number" do
+        doc.update(params)
+
+        expect(edition_factory).to have_received(:call).with(hash_including(version_number: 3))
       end
 
       it "builds a new edition in the 'draft' state" do
@@ -374,6 +450,109 @@ describe SpecialistDocument do
       expect(
         doc.find_attachment_by_id("does-not-exist")
       ).to be_nil
+    end
+  end
+
+  describe "#publication_state" do
+    context "when the first edition is in draft" do
+      let(:editions) { [draft_edition_v1] }
+
+      it "returns 'draft'" do
+        expect(doc.publication_state).to eq("draft")
+      end
+    end
+
+    context "with a single published edition" do
+      let(:editions) { [published_edition_v1] }
+
+      it "returns 'published'" do
+        expect(doc.publication_state).to eq("published")
+      end
+    end
+
+    context "with a single published edition" do
+      let(:editions) { [published_edition_v1, draft_edition_v2] }
+
+      it "returns 'published'" do
+        expect(doc.publication_state).to eq("published")
+      end
+    end
+
+    context "with a published edition, and withdrawn edition" do
+      let(:editions) { [published_edition_v1, withdrawn_edition_v2] }
+
+      it "returns 'withdrawn'" do
+        expect(doc.publication_state).to eq("withdrawn")
+      end
+    end
+  end
+
+  describe "#withdrawn?" do
+    context "one draft" do
+      let(:editions) { [ draft_edition_v1 ] }
+
+      it "returns false" do
+        expect(doc).not_to be_withdrawn
+      end
+    end
+
+    context "one published" do
+      let(:editions) { [ published_edition_v1 ] }
+
+      it "returns false" do
+        expect(doc).not_to be_withdrawn
+      end
+    end
+
+    context "one published and one withdrawn" do
+      let(:editions) { [ published_edition_v1, withdrawn_edition_v2 ] }
+
+      it "returns true" do
+        expect(doc).to be_withdrawn
+      end
+    end
+  end
+
+  describe "#withdraw!" do
+    context "one draft" do
+      let(:editions) { [ draft_edition_v1 ] }
+
+      it "does nothing" do
+        doc.withdraw!
+
+        expect(draft_edition_v1).not_to have_received(:archive)
+      end
+    end
+
+    context "one published and one withdrawn" do
+      let(:editions) { [ published_edition_v1, withdrawn_edition_v2 ] }
+
+      it "does nothing" do
+        doc.withdraw!
+
+        expect(published_edition_v1).not_to have_received(:archive)
+        expect(withdrawn_edition_v2).not_to have_received(:archive)
+      end
+    end
+
+    context "one published and one draft edition" do
+      let(:editions) { [ published_edition_v1, draft_edition_v2 ] }
+
+      it "sets the published edition's state to withdrawn" do
+        doc.withdraw!
+
+        expect(published_edition_v1).to have_received(:archive)
+      end
+    end
+
+    context "one published edition" do
+      let(:editions) { [ published_edition_v1] }
+
+      it "sets the published edition's state to withdrawn" do
+        doc.withdraw!
+
+        expect(published_edition_v1).to have_received(:archive)
+      end
     end
   end
 end

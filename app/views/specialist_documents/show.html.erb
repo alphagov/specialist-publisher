@@ -1,0 +1,13 @@
+<h1 class="page-header"><%= document.title %></h1>
+<h4><%= document.slug %></h4>
+
+
+<div class="row">
+  <%= form_tag(withdraw_specialist_document_path(document), method: :post) do %>
+    <button name='submit' class="btn btn-danger">Withdraw</button>
+  <% end -%>
+</div>
+
+<div class="row">
+  <div>Publication state: <%= document.publication_state %></div>
+</div>

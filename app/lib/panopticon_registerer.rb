@@ -40,7 +40,15 @@ class PanopticonRegisterer
   end
 
   def artefact_state
-    document.published? ? "live" : "draft"
+    state_mapping.fetch(document.publication_state)
+  end
+
+  def state_mapping
+    {
+      "published"   => "live",
+      "draft"       => "draft",
+      "withdrawn"   => "archived",
+    }
   end
 
   def artefact_attributes

@@ -81,11 +81,32 @@ module CmaCaseHelpers
   end
 
   def go_to_edit_page_for_most_recent_case
+    warn "DEPRECATED: use #go_to_edit_page_for_document and provide title"
     registry = SpecialistPublisherWiring.get(:specialist_document_repository)
     # TODO: testing antipattern, relies on datastore co-incidence
     document = registry.all.last
 
     visit edit_specialist_document_path(document.id)
+  end
+
+  def go_to_document_index
+    unless current_path == specialist_documents_path
+      visit(specialist_documents_path)
+    end
+  end
+
+  def go_to_show_page_for_document(document_title)
+    go_to_document_index
+
+    click_link document_title
+  end
+
+  def go_to_edit_page_for_document(document_title)
+    go_to_document_index
+
+    document_listing = page.find("ul.document-list li", text: document_title)
+    edit_link = document_listing.find("a", text: "edit")
+    edit_link.click
   end
 
   def make_changes_without_saving(fields)
@@ -149,11 +170,13 @@ module CmaCaseHelpers
   end
 
   def check_published_with_panopticon(title)
+    # TODO: properly test that the received panopticon id is correct
     expect(fake_panopticon).to have_received(:put_artefact!)
       .with(anything, hash_including(name: title, state: "live"))
   end
 
   def check_added_to_finder_api(title)
+    # TODO: properly test that the received panopticon id is correct
     expect(finder_api).to have_received(:notify_of_publication)
       .with(anything, hash_including(title: title))
   end
@@ -194,5 +217,24 @@ module CmaCaseHelpers
       # TODO: seeded data is created in the future, this is odd
       Timecop.travel(10.minutes.from_now)
     end
+  end
+
+  def withdraw_document(title)
+    visit specialist_documents_path
+    click_link 'withdraw'
+    click_button 'Withdraw'
+  end
+
+  def check_document_is_withdrawn(document_title)
+    # TODO: properly test that the received panopticon id is correct
+    expect(fake_panopticon).to have_received(:put_artefact!)
+      .with(anything, hash_including(
+        name: document_title,
+        state: "archived",
+      ))
+
+    expect(page).to have_content("withdrawn")
+    expect(RenderedSpecialistDocument.where(title: document_title)).to be_empty
+    expect(finder_api).to have_received(:notify_of_withdrawal).with(@slug)
   end
 end

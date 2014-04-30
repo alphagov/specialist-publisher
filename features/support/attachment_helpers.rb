@@ -4,7 +4,8 @@ module AttachmentHelpers
   end
 
   def add_attachment_to_case(document_title, attachment_title)
-    click_on document_title
+    go_to_edit_page_for_document(document_title)
+
     click_on "Add attachment"
     fill_in "Title", with: attachment_title
     attach_file "File", File.expand_path("../fixtures/greenpaper.pdf", File.dirname(__FILE__))
