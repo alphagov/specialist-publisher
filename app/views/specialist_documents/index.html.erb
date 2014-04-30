@@ -8,16 +8,17 @@
     <ul class="document-list">
       <% documents.each do |document| %>
         <li class="document">
-          <%= link_to document.title, specialist_document_path(document.id), class: 'document-title' %>
+          <%= link_to document.title, edit_specialist_document_path(document), class: 'document-title' %>
           <ul class="metadata">
             <li>updated <%= time_ago_in_words(document.updated_at) %> ago</li>
             <li>
               <%= document_state(document) %>
             </li>
             <li class="actions">
-              <%= link_to 'edit', edit_specialist_document_path(document.id) %>
+              <%= link_to 'edit', edit_specialist_document_path(document) %>
               <% if document.published? %>
                 <%= link_to "view live", published_specialist_document_path(document) %>
+                <%= link_to "withdraw", specialist_document_path(document) %>
               <% end %>
             </li>
           </ul>

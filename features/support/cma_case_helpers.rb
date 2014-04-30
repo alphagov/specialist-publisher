@@ -221,7 +221,7 @@ module CmaCaseHelpers
 
   def withdraw_document(title)
     visit specialist_documents_path
-    click_link title
+    click_link 'withdraw'
     click_button 'Withdraw'
   end
 
@@ -233,7 +233,7 @@ module CmaCaseHelpers
         state: "archived",
       ))
 
-    expect(page).to have_content("Publication state: withdrawn")
+    expect(page).to have_content("withdrawn")
     expect(RenderedSpecialistDocument.where(title: document_title)).to be_empty
     expect(finder_api).to have_received(:notify_of_withdrawal).with(@slug)
   end
