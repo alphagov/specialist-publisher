@@ -1,6 +1,6 @@
 class ManualRepository
   def store(manual)
-    create_manual_edition(manual)
+    create_or_update_manual_edition(manual)
   end
 
   def fetch(manual_id)
@@ -15,13 +15,13 @@ class ManualRepository
   end
 
 private
-  def create_manual_edition(manual)
-    ManualEdition.create(attributes_for(manual))
+  def create_or_update_manual_edition(manual)
+    edition = ManualEdition.find_or_initialize_by(manual_id: manual.id, state: 'draft')
+    edition.update_attributes(attributes_for(manual))
   end
 
   def attributes_for(manual)
     {
-      manual_id: manual.id,
       title: manual.title,
       summary: manual.summary,
     }

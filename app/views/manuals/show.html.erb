@@ -1,7 +1,9 @@
-<h1 class="page-header">Your manuals</h1>
+<h1 class="page-header"><%= manual.title %></h1>
+
+<%= link_to 'Edit', edit_manual_path(manual), class: 'btn btn-default' %>
 
 <div class="row">
   <div class="sidebar col-md-8">
-    <%= manual.title %>
+    <%= manual.summary %>
   </div>
 </div>

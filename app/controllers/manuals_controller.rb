@@ -8,17 +8,32 @@ class ManualsController < ApplicationController
   end
 
   def new
-    render_with(manual: new_manual)
+    render_with(manual: manual_form)
   end
 
   def create
-    manual = new_manual
+    manual = manual_form
     manual.update(form_params)
 
     if store(manual)
       redirect_to manual_path(manual)
     else
       render(:new, locals: {manual: manual})
+    end
+  end
+
+  def edit
+    render_with(manual: manual_form(current_manual))
+  end
+
+  def update
+    manual = manual_form(current_manual)
+    manual.update(form_params)
+
+    if store(manual)
+      redirect_to manual_path(manual)
+    else
+      render(:edit, locals: {manual: manual})
     end
   end
 
@@ -31,8 +46,8 @@ private
     manual_repository.fetch(params[:id])
   end
 
-  def new_manual
-    ManualForm.new
+  def manual_form(manual = nil)
+    ManualForm.new(manual)
   end
 
   def form_params

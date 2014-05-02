@@ -5,6 +5,16 @@ class ManualForm
 
   attr_accessor :title, :summary
 
+  def initialize(manual = nil)
+    @manual = manual
+
+    if manual
+      @id = manual.id
+      @title = manual.title
+      @summary = manual.summary
+    end
+  end
+
   def self.model_name
     ActiveModel::Name.new(self, nil, "Manual")
   end
@@ -20,10 +30,13 @@ class ManualForm
   end
 
   def persisted?
-    false
+    manual.present?
   end
 
   def to_param
     id
   end
+
+private
+  attr_reader :manual
 end
