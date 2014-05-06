@@ -28,3 +28,16 @@ end
 Then(/^the manual should have been updated$/) do
   check_for_manual_with_title(@new_title)
 end
+
+When(/^I create a manual with an empty title$/) do
+  @fields = {
+    title: '',
+    summary: 'Nullam quis risus eget urna mollis ornare vel eu leo.',
+  }
+
+  create_manual(@fields)
+end
+
+Then(/^I see errors for the title field$/) do
+  check_for_errors_for_fields('title')
+end

@@ -14,3 +14,7 @@ Feature: Creating and editing a manual
     Given a draft manual exists
     When I edit a manual
     Then the manual should have been updated
+
+  Scenario: Try to create an invalid manual
+    When I create a manual with an empty title
+    Then I see errors for the title field

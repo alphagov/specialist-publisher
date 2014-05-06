@@ -39,4 +39,8 @@ module ManualHelpers
     visit manuals_path
     page.should have_content(title)
   end
+
+  def check_for_errors_for_fields(field)
+    page.should have_content("#{field.titlecase} can't be blank")
+  end
 end

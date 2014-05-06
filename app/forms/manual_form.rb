@@ -5,6 +5,8 @@ class ManualForm
 
   attr_accessor :title, :summary
 
+  validates :title, presence: true
+
   def initialize(manual = nil)
     @manual = manual
 
