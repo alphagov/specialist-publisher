@@ -12,14 +12,7 @@ class ManualsController < ApplicationController
   end
 
   def create
-    manual = manual_form
-    manual.update(form_params)
-
-    if store(manual)
-      redirect_to manual_path(manual)
-    else
-      render(:new, locals: {manual: manual})
-    end
+    save_manual
   end
 
   def edit
@@ -27,14 +20,7 @@ class ManualsController < ApplicationController
   end
 
   def update
-    manual = manual_form(current_manual)
-    manual.update(form_params)
-
-    if store(manual)
-      redirect_to manual_path(manual)
-    else
-      render(:edit, locals: {manual: manual})
-    end
+    save_manual(current_manual)
   end
 
 private
@@ -60,5 +46,20 @@ private
 
   def manual_repository
     ManualRepository.new
+  end
+
+  def save_manual(manual = nil)
+    manual = manual_form(manual)
+    manual.update(form_params)
+
+    if manual.valid? && store(manual)
+      redirect_to manual_path(manual)
+    else
+      if manual.persisted?
+        render(:edit, locals: {manual: manual})
+      else
+        render(:new, locals: {manual: manual})
+      end
+    end
   end
 end
