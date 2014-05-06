@@ -32,6 +32,7 @@ private
       id: manual_edition.manual_id,
       title: manual_edition.title,
       summary: manual_edition.summary,
+      updated_at: manual_edition.updated_at,
     )
   end
 end

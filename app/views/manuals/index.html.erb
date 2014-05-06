@@ -10,6 +10,7 @@
       <% manuals.each do |manual| %>
         <li class="document">
           <%= link_to manual.title, manual_path(manual), class: 'document-title' %>
+          - Last updated: <%= manual.updated_at.strftime('%e/%m/%y %R') %>
         </li>
       <% end %>
     </ul>
