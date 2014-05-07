@@ -9,47 +9,26 @@ class SlugUniquenessValidator < SimpleDelegator
   end
 
   def valid?
-    unset_error_state
-    if document_with_same_slug_exists?
-      set_error_state
-    end
-
-    errors.empty?
+    document.valid? && slug_unique?
   end
 
   def errors
-    if error_state?
-      document.errors.merge(slug_error)
-    else
-      document.errors
-    end
+    document.errors.merge(slug_error)
   end
 
   private
 
   attr_reader :document_repository, :document
 
-  def error_state?
-    @error_state
-  end
-
-  def unset_error_state
-    @error_state = false
-  end
-
-  def set_error_state
-    @error_state = true
-  end
-
   def slug_error
-    { slug: error_message }
+    slug_unique? ? {} : { slug: error_message }
   end
 
   def error_message
     "is already taken"
   end
 
-  def document_with_same_slug_exists?
-    !document_repository.slug_unique?(document)
+  def slug_unique?
+    document_repository.slug_unique?(document)
   end
 end
