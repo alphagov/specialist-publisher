@@ -168,7 +168,9 @@ protected
   def new_edition_defaults
     {
       state: "draft",
-      version_number: 1
+      version_number: 1,
+      # TODO: Remove persistence conern
+      document_id: id,
     }
   end
 
@@ -187,8 +189,6 @@ protected
         version_number: current_version_number + 1,
         slug: slug,
         attachments: attachments,
-        # TODO: Remove persistence conern
-        document_id: id,
       )
 
     edition_factory.call(edition_params)

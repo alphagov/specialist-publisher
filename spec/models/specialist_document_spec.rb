@@ -131,6 +131,7 @@ describe SpecialistDocument do
         expect(edition_factory).to have_received(:call).with(
           version_number: 1,
           state: "draft",
+          document_id: document_id,
         )
       end
     end

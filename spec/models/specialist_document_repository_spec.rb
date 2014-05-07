@@ -42,7 +42,7 @@ describe SpecialistDocumentRepository do
       :"document_id=" => nil,
       :"slug=" => nil,
       :changed? => true,
-      :save => true,
+      :save! => true,
       :published? => false,
       :draft? => true,
       :errors => {},
@@ -58,7 +58,7 @@ describe SpecialistDocumentRepository do
       :title => "Example document about oil reserves #{version}",
       :"document_id=" => nil,
       :changed? => false,
-      :save => nil,
+      :save! => nil,
       :archive => nil,
       :published? => true,
       :draft? => false,
@@ -138,7 +138,7 @@ describe SpecialistDocumentRepository do
   describe "#store!(document)" do
     context "with an invalid document" do
       before do
-        allow(new_draft_edition).to receive(:save).and_return(false)
+        allow(new_draft_edition).to receive(:save!).and_return(false)
       end
 
       it "returns false" do
@@ -155,17 +155,11 @@ describe SpecialistDocumentRepository do
         expect(specialist_document_repository.store!(document)).to be true
       end
 
-      it "assigns the document_id edition" do
-        specialist_document_repository.store!(document)
-
-        expect(new_draft_edition).to have_received(:document_id=).with(document_id)
-      end
-
       it "only saves the latest edition" do
         specialist_document_repository.store!(document)
 
-        expect(new_draft_edition).to have_received(:save)
-        expect(previous_edition).not_to have_received(:save)
+        expect(new_draft_edition).to have_received(:save!)
+        expect(previous_edition).not_to have_received(:save!)
       end
     end
   end

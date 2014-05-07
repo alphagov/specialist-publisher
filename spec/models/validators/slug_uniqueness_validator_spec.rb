@@ -7,8 +7,8 @@ describe SlugUniquenessValidator do
     SlugUniquenessValidator.new(document_repository, document)
   }
 
-  let(:document) { double(:document, slug: slug, errors: {}) }
-  let(:document_repository) { double(:document_repository, slug_unique?: []) }
+  let(:document) { double(:document, slug: slug, valid?: true, errors: {}) }
+  let(:document_repository) { double(:document_repository, slug_unique?: true) }
   let(:slug) { double(:slug) }
 
   it "is a true decorator" do
@@ -24,10 +24,16 @@ describe SlugUniquenessValidator do
       expect(document_repository).to have_received(:slug_unique?).with(document)
     end
 
+    it "validates the underlying document" do
+      document_with_validator.valid?
+
+      expect(document).to have_received(:valid?)
+    end
+
     context "when the no other document has the same slug" do
       before do
         allow(document_repository).to receive(:slug_unique?)
-          .and_return([])
+          .and_return(true)
       end
 
       it "returns true" do
@@ -44,6 +50,7 @@ describe SlugUniquenessValidator do
         let(:existing_errors) { { field_name: ["Some error"] } }
 
         before do
+          allow(document).to receive(:valid?).and_return(false)
           allow(document).to receive(:errors).and_return(existing_errors)
         end
 
@@ -81,6 +88,7 @@ describe SlugUniquenessValidator do
         let(:existing_errors) { { field_name: ["Some error"] } }
 
         before do
+          allow(document).to receive(:valid?).and_return(false)
           allow(document).to receive(:errors).and_return(existing_errors)
         end
 
@@ -105,7 +113,7 @@ describe SlugUniquenessValidator do
         document_with_validator.valid?
 
         allow(document_repository).to receive(:slug_unique? )
-          .and_return([])
+          .and_return(true)
       end
 
       it "resets the errors each time" do

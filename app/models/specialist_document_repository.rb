@@ -49,10 +49,7 @@ class SpecialistDocumentRepository
   def store!(document)
     edition = document.exposed_edition
 
-    edition.document_id = document.id
-    edition.slug = document.slug
-
-    edition.save
+    edition.save!
   end
 
   class InvalidDocumentError < Exception
