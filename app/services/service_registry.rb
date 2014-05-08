@@ -46,6 +46,15 @@ class ServiceRegistry
     )
   end
 
+  def create_manual_document(context)
+    CreateDocumentService.new(
+      document_builder,
+      document_repository,
+      [],
+      context,
+    )
+  end
+
   private
 
   attr_reader(

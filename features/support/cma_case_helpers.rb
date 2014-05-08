@@ -4,7 +4,7 @@ module CmaCaseHelpers
     stub_finder_api
 
     visit new_specialist_document_path
-    fill_in_cma_fields(fields)
+    fill_in_fields(fields)
 
     if publish
       publish_document
@@ -15,18 +15,12 @@ module CmaCaseHelpers
 
   def edit_cma_case(fields, publish: false)
     go_to_edit_page_for_most_recent_case
-    fill_in_cma_fields(fields)
+    fill_in_fields(fields)
 
     if publish
       publish_document
     else
       save_document
-    end
-  end
-
-  def fill_in_cma_fields(fields)
-    fields.slice(:title, :summary, :body, :opened_date).each do |field, text|
-      fill_in field.to_s.humanize, with: text
     end
   end
 
@@ -111,7 +105,7 @@ module CmaCaseHelpers
 
   def make_changes_without_saving(fields)
     go_to_edit_page_for_most_recent_case
-    fill_in_cma_fields(fields)
+    fill_in_fields(fields)
   end
 
   def generate_preview
@@ -130,7 +124,7 @@ module CmaCaseHelpers
 
     go_to_edit_page_for_most_recent_case
 
-    fill_in_cma_fields(
+    fill_in_fields(
       title: updated_title,
     )
 

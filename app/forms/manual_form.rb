@@ -9,6 +9,7 @@ class ManualForm
 
   def initialize(manual = nil)
     @manual = manual
+    @new_documents = []
 
     if manual
       @id = manual.id
@@ -37,6 +38,10 @@ class ManualForm
 
   def to_param
     id
+  end
+
+  def documents
+    []
   end
 
 private

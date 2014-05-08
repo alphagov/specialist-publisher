@@ -37,6 +37,18 @@ SpecialistPublisherWiring = DependencyContainer.new do
     build_with_dependencies(SpecialistDocumentRepository)
   end
 
+  define_factory(:manual_repository) {
+    ManualRepository.new(
+      association_marshallers: [
+        DocumentAssociationMarshaller.new(
+          document_repository: get(:specialist_document_repository),
+          decorator: ManualWithDocuments.method(:new),
+        ),
+      ],
+      factory: Manual.method(:new),
+    )
+  }
+
   define_singleton(:id_generator) { SecureRandom.method(:uuid) }
 
   define_singleton(:edition_factory) { SpecialistDocumentEdition.method(:new) }
@@ -198,5 +210,4 @@ SpecialistPublisherWiring = DependencyContainer.new do
       get(:specialist_document_withdrawal_observers),
     )
   }
-
 end
