@@ -1,6 +1,6 @@
 require "spec_helper"
 
-describe ManualRecord do
+describe ManualRecord, hits_db: true do
   subject(:record) { ManualRecord.new }
 
   describe "#new_or_existing_draft_edition" do
