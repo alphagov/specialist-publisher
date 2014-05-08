@@ -76,17 +76,16 @@ module DependencyContainerMethods
   SpecialistPublisherWiring.inject_into(self)
 end
 
-require "features/support/cma_case_helpers"
-
-World(CmaCaseHelpers)
 World(DependencyContainerMethods)
 
 require 'cma_case_helpers'
+require 'manual_helpers'
 require 'attachment_helpers'
 require 'rerendering_helpers'
 require 'file_fixture_helpers'
 
 World(CmaCaseHelpers)
+World(ManualHelpers)
 World(AttachmentHelpers)
 World(FileFixtureHelpers)
 World(RerenderingHelpers)

@@ -1,5 +1,6 @@
 require 'dependency_container'
 require 'securerandom'
+require "specialist_document_repository"
 require 'builders/specialist_document_builder'
 require 'gds_api/panopticon'
 require 'panopticon_registerer'

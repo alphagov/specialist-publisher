@@ -1,0 +1,52 @@
+class ManualRecord
+  include ::Mongoid::Document
+  include ::Mongoid::Timestamps
+
+  field :manual_id, type: String
+
+  embeds_many :editions,
+    class_name: 'ManualRecord::Edition',
+    cascade_callbacks: true
+
+  def self.find_by(attributes)
+    first(conditions: attributes)
+  end
+
+  def new_or_existing_draft_edition
+    editions
+      .where(state: 'draft')
+      .order(:version_number)
+      .last || build_draft_edition
+  end
+
+  def latest_edition
+    editions.last
+  end
+
+private
+  def build_draft_edition
+    editions.build(state: 'draft', version_number: next_version_number)
+  end
+
+  def next_version_number
+    current_version_number + 1
+  end
+
+  def current_version_number
+    latest_edition && latest_edition.version_number || 0
+  end
+
+  class Edition
+    include ::Mongoid::Document
+    include ::Mongoid::Timestamps
+
+    field :title, type: String
+    field :summary, type: String
+    field :state, type: String
+    field :version_number, type: Integer
+
+    # We don't make use of the relationship but Mongiod can't save the
+    # timestamps properly without it.
+    embedded_in 'ManualRecord'
+  end
+end

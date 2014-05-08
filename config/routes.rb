@@ -5,5 +5,7 @@ SpecialistPublisher::Application.routes.draw do
     post :withdraw, on: :member
   end
 
+  resources :manuals, except: :destroy
+
   root to: redirect('/specialist-documents')
 end
