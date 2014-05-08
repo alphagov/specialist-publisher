@@ -24,20 +24,16 @@ module ManualHelpers
   end
 
   def check_manual_exists_with(attributes)
-    expect(
-      ManualEdition.exists?(conditions: attributes)
-    ).to be(true)
+    visit manuals_path
+    click_link attributes.fetch(:title)
+
+    expect(page).to have_content(attributes.fetch(:summary))
   end
 
   def go_to_edit_page_for_manual(manual_title)
     visit manuals_path
     click_on(manual_title)
     click_on('Edit')
-  end
-
-  def check_for_manual_with_title(title)
-    visit manuals_path
-    page.should have_content(title)
   end
 
   def check_for_errors_for_fields(field)

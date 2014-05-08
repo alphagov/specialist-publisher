@@ -1,5 +1,5 @@
 class ManualRepository
-  def initialize(dependencies)
+  def initialize(dependencies = {})
     @collection = dependencies.fetch(:collection) { ManualRecord }
     @factory = dependencies.fetch(:factory) { Manual.method(:new) }
   end

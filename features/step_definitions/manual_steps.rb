@@ -26,7 +26,7 @@ When(/^I edit a manual$/) do
 end
 
 Then(/^the manual should have been updated$/) do
-  check_for_manual_with_title(@new_title)
+  check_manual_exists_with(@fields.merge(title: @new_title))
 end
 
 When(/^I create a manual with an empty title$/) do
