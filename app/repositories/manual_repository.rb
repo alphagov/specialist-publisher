@@ -1,24 +1,30 @@
 class ManualRepository
+  def initialize(dependencies)
+    @collection = dependencies.fetch(:collection) { ManualRecord }
+    @factory = dependencies.fetch(:factory) { Manual.method(:new) }
+  end
+
   def store(manual)
-    create_or_update_manual_edition(manual)
+    manual_record = collection.find_or_initialize_by(manual_id: manual.id)
+    edition = manual_record.new_or_existing_draft_edition
+    edition.attributes = attributes_for(manual)
+
+    manual_record.save!
   end
 
   def fetch(manual_id)
-    edition = ManualEdition.where(manual_id: manual_id).last
-    build_manual_for(edition)
+    manual_record = collection.find_by(manual_id: manual_id)
+    build_manual_for(manual_record)
   end
 
   def all
-    ManualEdition.all.map do |edition|
-      build_manual_for(edition)
-    end
+    collection.all.lazy.map { |manual_record|
+      build_manual_for(manual_record)
+    }
   end
 
 private
-  def create_or_update_manual_edition(manual)
-    edition = ManualEdition.find_or_initialize_by(manual_id: manual.id, state: 'draft')
-    edition.update_attributes(attributes_for(manual))
-  end
+  attr_reader :collection, :factory
 
   def attributes_for(manual)
     {
@@ -27,12 +33,14 @@ private
     }
   end
 
-  def build_manual_for(manual_edition)
-    Manual.new(
-      id: manual_edition.manual_id,
-      title: manual_edition.title,
-      summary: manual_edition.summary,
-      updated_at: manual_edition.updated_at,
+  def build_manual_for(record)
+    edition = record.latest_edition
+
+    factory.call(
+      id: record.manual_id,
+      title: edition.title,
+      summary: edition.summary,
+      updated_at: edition.updated_at,
     )
   end
 end
