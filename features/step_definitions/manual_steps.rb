@@ -47,8 +47,6 @@ When(/^I create a document for the manual$/) do
     title: 'Section 1',
     summary: 'Section 1 summary',
     body: 'Section 1 body',
-    # TODO This shouldn't be necessary (or even possible)
-    opened_date: Date.parse("2014-04-01")
   }
 
   create_manual_document(@manual_fields.fetch(:title), @document_fields)
@@ -65,7 +63,6 @@ Given(/^a draft document exists for the manual$/) do
     title: 'Section 1',
     summary: 'Section 1 summary',
     body: 'Section 1 body',
-    opened_date: Date.parse("2014-04-01")
   }
 
   create_manual_document(@manual_fields.fetch(:title), @document_fields)

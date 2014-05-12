@@ -15,6 +15,7 @@ class ManualDocumentsController < ApplicationController
 
   def create
     document = specialist_document_builder.call(document_params)
+
     document = ManualDocumentForm.new(parent_manual, document)
 
     if document.valid?

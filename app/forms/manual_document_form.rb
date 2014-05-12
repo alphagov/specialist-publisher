@@ -4,7 +4,6 @@ class ManualDocumentForm
   extend Forwardable
   extend ActiveModel::Naming
   include ActiveModel::Conversion
-  # include ActiveModel::Validations
 
   def_delegators :document, :exposed_edition
 
@@ -30,11 +29,11 @@ class ManualDocumentForm
     :summary,
     :body,
     :opened_date,
-    :closed_date,
     :case_type,
     :case_state,
     :market_sector,
     :outcome_type,
+    :closed_date,
   )
 
   def initialize(manual, document = nil)
@@ -46,12 +45,19 @@ class ManualDocumentForm
       @title = document.title
       @summary = document.summary
       @body = document.body
-      @opened_date = document.opened_date
-      @closed_date = document.closed_date
-      @case_type = document.case_type
-      @case_state = document.case_state
-      @market_sector = document.market_sector
-      @outcome_type = document.outcome_type
+
+      # TODO: Remove this hack for irrelevant required CMA fields
+      @opened_date = Date.parse('1/04/2014')
+      @market_sector = 'manual'
+      @case_type = 'manual'
+      @case_state = 'manual'
+
+      document.update(
+        opened_date: @opened_date,
+        market_sector: @market_sector,
+        case_type: @case_type,
+        case_state: @case_state,
+      )
     end
   end
 
