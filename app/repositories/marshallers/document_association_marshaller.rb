@@ -5,19 +5,19 @@ class DocumentAssociationMarshaller
   end
 
   def load(entity, record)
-    docs = Array(record.document_ids).map do |id|
-      document_repository.fetch(id)
-    end
+    docs = record.document_ids.map { |doc_id|
+      document_repository.fetch(doc_id)
+    }
 
     decorator.call(entity, documents: docs)
   end
 
   def dump(entity, record)
-    entity.documents.each do |doc|
-      document_repository.store!(doc)
+    entity.documents.each do |document|
+      document_repository.store(document)
     end
 
-    record.document_ids = entity.documents.map(&:id)
+    record.document_ids = entity.documents.map { |d| d.id }
 
     nil
   end

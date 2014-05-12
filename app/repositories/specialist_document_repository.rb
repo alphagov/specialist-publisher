@@ -46,10 +46,15 @@ class SpecialistDocumentRepository
     ).empty?
   end
 
-  def store!(document)
+  def store(document)
     edition = document.exposed_edition
 
     edition.save!
+  end
+
+  def store!(document)
+    warn("DEPRECATED: SpecialistDocumentRepository#store!, use #store instead")
+    store(document)
   end
 
   class InvalidDocumentError < Exception
