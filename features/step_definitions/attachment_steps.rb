@@ -1,6 +1,8 @@
 Given(/^there is an existing draft case$/) do
+  @document_title = "Nullam quis risus"
+
   create_cma_case(
-    title: "Nullam quis risus",
+    title: @document_title,
     summary: 'Eget urna mollis ornare vel eu leo.',
     body: ('Praesent commodo cursus magna, vel scelerisque nisl consectetur et.' * 10),
     opened_date: '2014-01-01'
@@ -9,7 +11,7 @@ end
 
 When(/^I attach a file and give it a title$/) do
   @attachment_title = "My attachment"
-  add_attachment_to_case("Nullam quis risus", @attachment_title)
+  add_attachment_to_case(@document_title, @attachment_title)
 end
 
 Then(/^I see the attachment on the case with its example markdown embed code$/) do
@@ -56,4 +58,8 @@ Then(/^I see the updated attachment on the document edit page$/) do
     @new_attachment_title,
     @new_attachment_file_name,
   )
+end
+
+Then(/^I see the attached file$/) do
+  check_for_an_attachment
 end

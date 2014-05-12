@@ -29,3 +29,9 @@ Feature: Creating and editing a manual
     And a draft document exists for the manual
     When I edit the document
     Then the document should have been updated
+
+  Scenario: Attach a file to a manual document
+    Given a draft manual exists
+    And a draft document exists for the manual
+    When I attach a file and give it a title
+    Then I see the attached file

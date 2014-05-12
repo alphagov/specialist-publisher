@@ -43,8 +43,10 @@ Then(/^I see errors for the title field$/) do
 end
 
 When(/^I create a document for the manual$/) do
+  @document_title = 'Section 1'
+
   @document_fields = {
-    title: 'Section 1',
+    title: @document_title,
     summary: 'Section 1 summary',
     body: 'Section 1 body',
   }
@@ -59,8 +61,10 @@ Then(/^I see the manual has the new page$/) do
 end
 
 Given(/^a draft document exists for the manual$/) do
+  @document_title = 'Section 1'
+
   @document_fields = {
-    title: 'Section 1',
+    title: @document_title,
     summary: 'Section 1 summary',
     body: 'Section 1 body',
   }
