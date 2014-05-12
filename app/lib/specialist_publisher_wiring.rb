@@ -12,6 +12,7 @@ require "specialist_document_header_extractor"
 require "finder_api_notifier"
 require "finder_api"
 require "validators/slug_uniqueness_validator"
+require "marshallers/document_association_marshaller"
 
 $LOAD_PATH.unshift(File.expand_path("../..", "app/services"))
 
