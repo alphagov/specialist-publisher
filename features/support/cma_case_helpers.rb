@@ -206,7 +206,7 @@ module CmaCaseHelpers
         panopticon_id: SecureRandom.hex,
       )
 
-      specialist_document_repository.store!(doc)
+      specialist_document_repository.store(doc)
 
       # TODO: seeded data is created in the future, this is odd
       Timecop.travel(10.minutes.from_now)

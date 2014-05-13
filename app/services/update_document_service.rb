@@ -21,7 +21,7 @@ class UpdateDocumentService
   attr_reader :repo, :listeners, :context
 
   def persist
-    repo.store!(document)
+    repo.store(document)
   end
 
   def notify_listeners

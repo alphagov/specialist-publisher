@@ -52,11 +52,6 @@ class SpecialistDocumentRepository
     edition.save!
   end
 
-  def store!(document)
-    warn("DEPRECATED: SpecialistDocumentRepository#store!, use #store instead")
-    store(document)
-  end
-
   class InvalidDocumentError < Exception
     def initialize(message, document)
       super(message)

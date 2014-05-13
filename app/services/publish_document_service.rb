@@ -26,7 +26,7 @@ class PublishDocumentService
   end
 
   def persist
-    document_repository.store!(document)
+    document_repository.store(document)
   end
 
   def notify_listeners

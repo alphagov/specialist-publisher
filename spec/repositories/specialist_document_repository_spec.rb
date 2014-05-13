@@ -135,14 +135,14 @@ describe SpecialistDocumentRepository do
     end
   end
 
-  describe "#store!(document)" do
+  describe "#store(document)" do
     context "with an invalid document" do
       before do
         allow(new_draft_edition).to receive(:save!).and_return(false)
       end
 
       it "returns false" do
-        expect(specialist_document_repository.store!(document)).to be false
+        expect(specialist_document_repository.store(document)).to be false
       end
     end
 
@@ -152,11 +152,11 @@ describe SpecialistDocumentRepository do
       let(:editions) { [previous_edition, new_draft_edition] }
 
       it "returns true" do
-        expect(specialist_document_repository.store!(document)).to be true
+        expect(specialist_document_repository.store(document)).to be true
       end
 
       it "only saves the latest edition" do
-        specialist_document_repository.store!(document)
+        specialist_document_repository.store(document)
 
         expect(new_draft_edition).to have_received(:save!)
         expect(previous_edition).not_to have_received(:save!)
