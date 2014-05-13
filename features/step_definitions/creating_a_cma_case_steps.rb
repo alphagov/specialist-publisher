@@ -1,5 +1,9 @@
 Given(/^I am logged in as a CMA editor$/) do
   login_as(:cma_editor)
+
+  # WARNING: These must be stubbed before the first request takes place
+  stub_out_panopticon
+  stub_finder_api
 end
 
 When(/^I create a CMA case$/) do
