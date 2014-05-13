@@ -4,7 +4,11 @@ module AttachmentHelpers
   end
 
   def add_attachment_to_case(document_title, attachment_title)
-    go_to_edit_page_for_document(document_title)
+    click_on(document_title)
+
+    unless current_path.include?("edit")
+      click_on "Edit"
+    end
 
     click_on "Add attachment"
     fill_in "Title", with: attachment_title

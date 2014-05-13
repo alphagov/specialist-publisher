@@ -44,6 +44,7 @@ private
     field :summary, type: String
     field :state, type: String
     field :version_number, type: Integer
+    field :document_ids, type: Array
 
     # We don't make use of the relationship but Mongiod can't save the
     # timestamps properly without it.

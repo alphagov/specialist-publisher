@@ -1,0 +1,55 @@
+<div class="col-md-8">
+  <%= form_for [manual, document] do |f| %>
+    <% if document.errors.any? %>
+      <div class="errors error-list">
+        <h2>Please fix the following errors found in the form</h2>
+        <ul class="errors">
+          <% document.errors.each do |field, errors| %>
+            <% if errors %>
+              <li><%= field.to_s.humanize %> <%= [*errors].join(' and ')  %></li>
+            <% end %>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <%= f.text_field :title %>
+    <%= f.text_area :summary, class: 'short-textarea' %>
+    <%= f.text_area :body %>
+
+    <div class="preview_container" style="display: none;"></div>
+
+    <button name='draft'>Save as draft</button>
+    <button name='publish'>Save and publish</button>
+  <% end %>
+</div>
+
+<div class="col-md-4">
+  <%= render partial: 'shared/govspeak-help' %>
+
+  <h2>Attachments</h2>
+
+  <% if document.persisted? %>
+    <%= link_to "Add attachment", new_specialist_document_attachment_path(document) %>
+  <% else %>
+    <p>To add an attachment, please save the draft first.</p>
+  <% end %>
+
+  <ul class="attachments">
+    <% document.attachments.each do |attachment| %>
+      <li class="attachment">
+        <span class="title"><%= attachment.title %></span>
+        <span class="snippet"><%= attachment.snippet %></span>
+        <%= link_to "edit", edit_specialist_document_attachment_path(document, attachment) %>
+      </li>
+    <% end %>
+  </ul>
+</div>
+
+<%= content_for :document_ready do %>
+  window.SpecialistDocument.addPreviewFeature({
+    'url'             : '<%= preview_specialist_document_path(document) %>',
+    'insert_into'     : '.preview_container',
+    'render_to'       : '.preview .govspeak'
+  });
+<% end -%>

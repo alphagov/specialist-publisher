@@ -7,3 +7,13 @@
     <%= manual.summary %>
   </div>
 </div>
+
+<div class="row">
+  <ul class="documents">
+    <% manual.documents.each do |document| %>
+      <li><%= link_to(document.title, manual_document_path(manual, document)) %></li>
+    <% end %>
+  </ul>
+</div>
+
+<%= link_to 'Add section', new_manual_document_path(manual), class: 'btn btn-default' %>

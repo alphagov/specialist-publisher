@@ -78,12 +78,14 @@ end
 
 World(DependencyContainerMethods)
 
+require 'form_helpers'
 require 'cma_case_helpers'
 require 'manual_helpers'
 require 'attachment_helpers'
 require 'rerendering_helpers'
 require 'file_fixture_helpers'
 
+World(FormHelpers)
 World(CmaCaseHelpers)
 World(ManualHelpers)
 World(AttachmentHelpers)

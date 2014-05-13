@@ -44,10 +44,6 @@ private
     manual_repository.store(manual)
   end
 
-  def manual_repository
-    ManualRepository.new
-  end
-
   def save_manual(manual = nil)
     manual = manual_form(manual)
     manual.update(form_params)
