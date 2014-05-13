@@ -97,7 +97,7 @@ protected
   end
 
   def authorize_user_org
-    unless current_user.organisation_slug == "competition-and-markets-authority"
+    unless user_can_edit_documents?
       redirect_to manuals_path, flash: { error: "You don't have permission to do that." }
     end
   end
