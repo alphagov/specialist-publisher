@@ -6,7 +6,7 @@ class ManualAttachmentsController < ApplicationController
 
   def create
     document.add_attachment(params[:attachment])
-    document_repository.store!(document)
+    document_repository.store(document)
     redirect_to edit_manual_document_path(parent_manual, document)
   end
 

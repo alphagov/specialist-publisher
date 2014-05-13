@@ -6,7 +6,7 @@ class AttachmentsController < ApplicationController
 
   def create
     specialist_document.add_attachment(params[:attachment])
-    specialist_document_repository.store!(specialist_document)
+    specialist_document_repository.store(specialist_document)
     redirect_to edit_specialist_document_path(specialist_document)
   end
 

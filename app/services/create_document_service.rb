@@ -10,7 +10,7 @@ class CreateDocumentService
     @document = builder.call(attributes)
 
     if document.valid?
-      repo.store!(document)
+      repo.store(document)
       notify_listeners
     end
 

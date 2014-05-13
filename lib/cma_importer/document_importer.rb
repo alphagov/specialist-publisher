@@ -44,7 +44,7 @@ module CMAImporter
       document = builder.call(presenter.to_hash)
 
       repository = SpecialistPublisherWiring.get(:specialist_document_repository)
-      unless repository.store!(document)
+      unless repository.store(document)
         raise "Failed to store document, #{document.errors}"
       end
 
@@ -76,7 +76,7 @@ module CMAImporter
           original_url: asset_url
         )
 
-        if repository.store!(document)
+        if repository.store(document)
           logger.info("---- OK")
         else
           logger.info("---- FAILED to store because #{document.errors.full_messages.to_sentence}")
