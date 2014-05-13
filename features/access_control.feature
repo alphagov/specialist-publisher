@@ -11,4 +11,4 @@ Feature: Access control
     Given I am logged in as a non-CMA editor
     When I attempt to visit a document edit URL
     Then I am redirected back to the index page
-    And I see a message like "You do not have permission"
+    And I see a message like "You don't have permission to do that"
