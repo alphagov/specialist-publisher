@@ -38,16 +38,19 @@ SpecialistPublisherWiring = DependencyContainer.new do
     build_with_dependencies(SpecialistDocumentRepository)
   end
 
-  define_factory(:manual_repository) {
-    ManualRepository.new(
-      association_marshallers: [
-        DocumentAssociationMarshaller.new(
-          document_repository: get(:specialist_document_repository),
-          decorator: ManualWithDocuments.method(:new),
-        ),
-      ],
-      factory: Manual.method(:new),
-    )
+  define_factory(:manual_repository_factory) {
+    ->(organisation_slug) {
+      ManualRepository.new(
+        association_marshallers: [
+          DocumentAssociationMarshaller.new(
+            document_repository: get(:specialist_document_repository),
+            decorator: ManualWithDocuments.method(:new),
+          ),
+        ],
+        factory: Manual.method(:new),
+        collection: ManualRecord.find_by_organisation(organisation_slug),
+      )
+    }
   }
 
   define_singleton(:id_generator) { SecureRandom.method(:uuid) }

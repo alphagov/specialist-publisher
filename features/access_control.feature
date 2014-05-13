@@ -12,3 +12,8 @@ Feature: Access control
     When I attempt to visit a document edit URL
     Then I am redirected back to the index page
     And I see a message like "You don't have permission to do that"
+
+  Scenario: Editors from multiple organisations have created content
+    Given there are manuals created by multiple organisations
+    When I view my list of manuals
+    Then I only see manuals created by my organisation

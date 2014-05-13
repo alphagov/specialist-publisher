@@ -90,6 +90,7 @@ require 'attachment_helpers'
 require 'rerendering_helpers'
 require 'file_fixture_helpers'
 require 'gds_sso_helpers'
+require 'access_control_helpers'
 
 World(PanopticonHelpers)
 World(FormHelpers)
@@ -99,3 +100,4 @@ World(AttachmentHelpers)
 World(FileFixtureHelpers)
 World(RerenderingHelpers)
 World(GdsSsoHelpers)
+World(AccessControlHelpers)

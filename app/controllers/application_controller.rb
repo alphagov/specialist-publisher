@@ -23,4 +23,8 @@ class ApplicationController < ActionController::Base
     current_user.organisation_slug == 'competition-and-markets-authority'
   end
   helper_method :user_can_edit_documents?
+
+  def manual_repository
+    @manual_repository ||= manual_repository_factory.call(current_user.organisation_slug)
+  end
 end

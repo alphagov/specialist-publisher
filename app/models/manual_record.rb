@@ -3,6 +3,7 @@ class ManualRecord
   include ::Mongoid::Timestamps
 
   field :manual_id, type: String
+  field :organisation_slug, type: String
 
   embeds_many :editions,
     class_name: 'ManualRecord::Edition',
@@ -10,6 +11,10 @@ class ManualRecord
 
   def self.find_by(attributes)
     first(conditions: attributes)
+  end
+
+  def self.find_by_organisation(organisation_slug)
+    where(organisation_slug: organisation_slug)
   end
 
   def new_or_existing_draft_edition
