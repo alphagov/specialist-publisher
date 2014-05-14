@@ -42,7 +42,7 @@ class ManualForm
   end
 
   def documents
-    []
+    manual && manual.documents || []
   end
 
 private

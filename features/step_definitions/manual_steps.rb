@@ -60,6 +60,10 @@ Then(/^I see the manual has the new page$/) do
   expect(page).to have_content(@document_fields.fetch(:title))
 end
 
+Then(/^I see the new page$/) do
+  expect(page).to have_content(@document_fields.fetch(:title))
+end
+
 Given(/^a draft document exists for the manual$/) do
   @document_title = 'Section 1'
 
@@ -96,4 +100,8 @@ end
 
 Then(/^the document is not found$/) do
   expect(page).to have_content("Document not found")
+end
+
+Then(/^the manual's documents won't have changed$/) do
+  expect(page).to have_content(@document_fields.fetch(:title))
 end
