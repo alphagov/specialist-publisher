@@ -172,14 +172,14 @@ describe ManualRepository do
 
   describe "#all" do
     before do
-      allow(record_collection).to receive(:all).and_return([manual_record])
+      allow(record_collection).to receive(:all_by_updated_at).and_return([manual_record])
       allow(manual_record).to receive(:latest_edition).and_return(edition)
     end
 
     it "retrieves all records from the collection" do
       repo.all
 
-      expect(record_collection).to have_received(:all)
+      expect(record_collection).to have_received(:all_by_updated_at)
     end
 
     it "builds a manual for each record" do

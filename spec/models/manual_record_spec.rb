@@ -48,4 +48,22 @@ describe ManualRecord, hits_db: true do
       expect(ManualRecord.find_by_organisation('cma').to_a).to eq([cma_manual])
     end
   end
+
+  describe "#all_by_updated_at" do
+    let!(:middle_edition) {
+      ManualRecord.create!(updated_at: 2.days.ago)
+    }
+
+    let!(:early_edition) {
+      ManualRecord.create!(updated_at: 3.days.ago)
+    }
+
+    let!(:later_edition) {
+      ManualRecord.create!(updated_at: 1.day.ago)
+    }
+
+    it "returns manuals ordered with most recently updated first" do
+      expect(ManualRecord.all_by_updated_at.to_a).to eq([later_edition, middle_edition, early_edition])
+    end
+  end
 end
