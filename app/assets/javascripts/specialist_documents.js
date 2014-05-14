@@ -35,11 +35,7 @@
       return $.ajax({
         url: args.url,
         context: document.body,
-        data: {
-          'specialist_document' : {
-            'body' : $('#specialist_document_body').val()
-          }
-        },
+        data: args.data_target.apply(),
         type: 'post',
         dataType: 'json'
       });

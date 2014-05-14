@@ -48,8 +48,15 @@
 
 <%= content_for :document_ready do %>
   window.SpecialistDocument.addPreviewFeature({
-    'url'             : '<%= preview_specialist_document_path(document) %>',
+    'url'             : '<%= preview_manual_document_path(manual, document) %>',
     'insert_into'     : '.preview_container',
-    'render_to'       : '.preview .govspeak'
+    'render_to'       : '.preview .govspeak',
+    'data_target'     : function() {
+                          return {
+                            'document' : {
+                              'body' : $('#document_body').val()
+                            }
+                          };
+                        }
   });
 <% end -%>

@@ -64,6 +64,13 @@
   window.SpecialistDocument.addPreviewFeature({
     'url'             : '<%= preview_specialist_document_path(document) %>',
     'insert_into'     : '.preview_container',
-    'render_to'       : '.preview .govspeak'
+    'render_to'       : '.preview .govspeak',
+    'data_target'     : function() {
+                          return {
+                            'specialist_document' : {
+                              'body' : $('#specialist_document_body').val()
+                            }
+                          };
+                        }
   });
 <% end -%>
