@@ -13,7 +13,7 @@ module CmaCaseHelpers
   def edit_cma_case(fields, publish: false)
     go_to_edit_page_for_most_recent_case
     fill_in_fields(fields)
-
+    
     if publish
       publish_document
     else
@@ -63,8 +63,9 @@ module CmaCaseHelpers
   end
 
   def check_for_cma_cases(*titles)
-    # TODO: will give terrible message, check for each individually
-    page.should have_content(Regexp.new(titles.join('.+')))
+    titles.each do |title|
+      page.should have_content(title)
+    end
   end
 
   def check_currently_on_publisher_index_page
@@ -196,6 +197,7 @@ module CmaCaseHelpers
         case_type: 'ca98',
         outcome_type: 'ca98-commitment',
         state: state,
+        document_type: 'cma_case',
       )
 
       PanopticonMapping.create!(

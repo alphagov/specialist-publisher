@@ -1,4 +1,4 @@
-class ManualAttachmentsController < ApplicationController
+class ManualDocumentsAttachmentsController < ApplicationController
   def new
     # TODO: This be should be created from the document or just be a form object
     @attachment = Attachment.new
@@ -6,7 +6,7 @@ class ManualAttachmentsController < ApplicationController
 
   def create
     document.add_attachment(params[:attachment])
-    document_repository.store(document)
+    manual_document_repository.store(document)
     redirect_to edit_manual_document_path(parent_manual, document)
   end
 
@@ -36,10 +36,15 @@ private
     @parent_manual ||= manual_repository.fetch(manual_id)
   end
 
-  def document
-    @document ||= specialist_document_repository.fetch(params[:document_id])
+  def manual
+    ManualForm.new(parent_manual)
   end
-  helper_method :specialist_document
+  helper_method :manual
+
+  def document
+    @document ||= ManualDocumentForm.new(parent_manual, parent_manual.documents.find { |d| d.id == document_id })
+  end
+  helper_method :document
 
   def existing_attachment
     document.find_attachment_by_id(attachment_id)
@@ -58,5 +63,9 @@ private
 
   def manual_id
     params.fetch("manual_id")
+  end
+
+  def document_id
+    params.fetch("document_id")
   end
 end

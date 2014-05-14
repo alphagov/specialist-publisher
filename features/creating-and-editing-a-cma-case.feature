@@ -8,6 +8,7 @@ Feature: Creating and editing a CMA case
 
   Scenario: Create a new CMA case
     When I create a CMA case
+    When I visit the specialist documents page
     Then the CMA case should exist
     And I should be returned to the list of documents
 

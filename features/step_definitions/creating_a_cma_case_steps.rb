@@ -130,3 +130,7 @@ end
 Then(/^I should see an error message about the duplicate slug$/) do
   check_for_error("Slug is already taken")
 end
+
+When(/^I visit the specialist documents page$/) do
+  visit specialist_documents_path
+end

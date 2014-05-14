@@ -25,7 +25,7 @@ module AttachmentHelpers
         body: JSON.dump(asset_manager_response),
         status: 200,
       )
-
+      
     click_on "Save attachment"
   end
 

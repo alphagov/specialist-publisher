@@ -2,22 +2,13 @@ require 'spec_helper'
 
 describe SpecialistDocumentRepository do
 
-  let(:panopticon_api) do
-    double(:panopticon_api)
-  end
-
   let(:panopticon_mappings) { PanopticonMapping }
-
-  let(:publication_observers) { [publication_observer] }
-  let(:publication_observer)  { double(:publication_observer, call: nil) }
 
   let(:specialist_document_repository) do
     SpecialistDocumentRepository.new(
       panopticon_mappings,
       SpecialistDocumentEdition,
-      panopticon_api,
       document_factory,
-      publication_observers,
     )
   end
 
@@ -123,8 +114,10 @@ describe SpecialistDocumentRepository do
         allow(editions_proxy).to receive(:to_a).and_return([])
       end
 
-      it "returns nil" do
-        expect(specialist_document_repository.fetch(document_id)).to be(nil)
+      it "raises NotFound" do
+        expect {
+          specialist_document_repository.fetch(document_id)
+        }.to raise_error(SpecialistDocumentRepository::NotFound)
       end
     end
   end

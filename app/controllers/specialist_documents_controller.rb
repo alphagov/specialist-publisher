@@ -6,6 +6,10 @@ class SpecialistDocumentsController < ApplicationController
 
   before_filter :authorize_user_org
 
+  rescue_from(SpecialistDocumentRepository::NotFound) do
+    redirect_to(manuals_path, flash: { error: "Document not found" })
+  end
+
   def index
     render_with(documents: all_documents)
   end
@@ -86,6 +90,10 @@ protected
     end
 
     specialist_document_renderer.call(preview_document).body
+  end
+
+  def specialist_document_params
+    form_params.merge(document_type: 'cma_case')
   end
 
   def form_params

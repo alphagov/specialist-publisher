@@ -35,7 +35,19 @@ SpecialistPublisherWiring = DependencyContainer.new do
   }
 
   define_singleton(:specialist_document_repository) do
-    build_with_dependencies(SpecialistDocumentRepository)
+    SpecialistDocumentRepository.new(
+      get(:panopticon_mappings),
+      get(:specialist_document_editions).where(document_type: "cma_case"),
+      get(:specialist_document_factory),
+    )
+  end
+
+  define_singleton(:manual_document_repository) do
+    SpecialistDocumentRepository.new(
+      get(:panopticon_mappings),
+      get(:specialist_document_editions).where(document_type: "manual"),
+      get(:specialist_document_factory),
+    )
   end
 
   define_factory(:manual_repository_factory) {
@@ -43,7 +55,7 @@ SpecialistPublisherWiring = DependencyContainer.new do
       ManualRepository.new(
         association_marshallers: [
           DocumentAssociationMarshaller.new(
-            document_repository: get(:specialist_document_repository),
+            document_repository: get(:manual_document_repository),
             decorator: ManualWithDocuments.method(:new),
           ),
         ],

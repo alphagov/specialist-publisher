@@ -24,6 +24,11 @@ else
   gem "govuk_content_models", "10.4.0"
 end
 
+group :development do
+  gem 'better_errors'
+  gem 'binding_of_caller'
+end
+
 group :assets do
   gem "sass-rails", "3.2.6"
   gem "uglifier", ">= 1.3.0"
