@@ -29,12 +29,8 @@ class SpecialistDocumentsController < ApplicationController
   def create
     document = services.create_document(self).call
 
-    if document.valid? && publish_document?
-      services.publish_document(document).call
-    end
-
     if document.valid?
-      redirect_to(specialist_documents_path)
+      redirect_to(specialist_document_path(document))
     else
       render(:new, locals: {document: document})
     end
@@ -43,15 +39,17 @@ class SpecialistDocumentsController < ApplicationController
   def update
     document = services.update_document(self).call
 
-    if document.valid? && publish_document?
-      services.publish_document(document).call
-    end
-
     if document.valid?
-      redirect_to(specialist_documents_path)
+      redirect_to(specialist_document_path(document))
     else
       render(:edit, locals: {document: document})
     end
+  end
+
+  def publish
+    services.publish_document(current_document).call
+
+    redirect_to(specialist_document_path(current_document))
   end
 
   def withdraw
@@ -65,10 +63,6 @@ class SpecialistDocumentsController < ApplicationController
   end
 
 protected
-
-  def publish_document?
-    params.has_key?("publish")
-  end
 
   def all_documents
     specialist_document_repository.all

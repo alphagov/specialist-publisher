@@ -11,7 +11,7 @@ end
 
 When(/^I attach a file and give it a title$/) do
   @attachment_title = "My attachment"
-  add_attachment_to_case(@document_title, @attachment_title)
+  add_attachment_to_manual_document(@document_title, @attachment_title)
 end
 
 Then(/^I see the attachment on the case with its example markdown embed code$/) do

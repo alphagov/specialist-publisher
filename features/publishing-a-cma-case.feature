@@ -14,7 +14,6 @@ Feature: Publishing a CMA case
     Given a draft CMA case exists
     When I publish the CMA case
     Then the CMA case should be published
-    And I should be returned to the list of documents
 
   Scenario: can create a new CMA case and publish immediately
     When I publish a new CMA case
@@ -24,7 +23,3 @@ Feature: Publishing a CMA case
     When I publish a new CMA case
     And I edit it and republish
     Then the amended CMA case should be published
-
-  Scenario: validation errors on publishing
-    When I attempt to publish a new CMA case without a title
-    Then I should see the editing form again with an error about the missing title

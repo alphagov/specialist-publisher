@@ -7,8 +7,9 @@ Given(/^I am logged in as a CMA editor$/) do
 end
 
 When(/^I create a CMA case$/) do
+  @document_title = 'Example CMA Case'
   @cma_fields = {
-    title: 'Example CMA Case',
+    title: @document_title,
     summary: 'Nullam quis risus eget urna mollis ornare vel eu leo.',
     body: "## Header" + ("\n\nPraesent commodo cursus magna, vel scelerisque nisl consectetur et." * 10),
     opened_date: '2014-01-01'
@@ -29,8 +30,10 @@ When(/^I create a CMA case without one of the required fields$/) do
 end
 
 When(/^I publish a new CMA case$/) do
+  @document_title = 'Example CMA Case'
+
   @cma_fields = {
-    title: 'Example CMA Case',
+    title: @document_title,
     summary: 'Nullam quis risus eget urna mollis ornare vel eu leo.',
     body: "## Header" + ("\n\nPraesent commodo cursus magna, vel scelerisque nisl consectetur et." * 10),
     opened_date: '2014-01-01'
@@ -41,7 +44,7 @@ end
 
 When(/^I edit a CMA case$/) do
   @new_title = 'Edited Example CMA Case'
-  edit_cma_case(title: @new_title)
+  edit_cma_case(@document_title, title: @new_title)
 end
 
 Then(/^the CMA case should have been updated$/) do
@@ -53,8 +56,10 @@ Given(/^two CMA cases exist$/) do
 end
 
 Given(/^a draft CMA case exists$/) do
+  @document_title = 'Example CMA Case'
+
   @cma_fields = {
-    title: 'Example CMA Case',
+    title: @document_title,
     summary: 'Nullam quis risus eget urna mollis ornare vel eu leo.',
     body: "## Header" + ("\n\nPraesent commodo cursus magna, vel scelerisque nisl consectetur et." * 10),
     opened_date: '2014-01-01'
@@ -99,8 +104,10 @@ Then(/^I see the case body preview$/) do
 end
 
 Given(/^a published CMA case exists$/) do
+  @document_title = "Original CMA case title"
+
   @cma_fields = {
-    title: "Original CMA case title",
+    title: @document_title,
     summary: "Nullam quis risus eget urna mollis ornare vel eu leo.",
     body: ("Praesent commodo cursus magna, vel scelerisque nisl consectetur et." * 10),
     opened_date: "2014-01-01",
@@ -112,7 +119,8 @@ Given(/^a published CMA case exists$/) do
 end
 
 When(/^I change the CMA case title and re-publish$/) do
-  update_title_and_republish(to: "Updated CMA case title")
+  @updated_title = "Updated CMA case title"
+  update_title_and_republish(@document_title, to: @updated_title)
 end
 
 Then(/^the title has been updated$/) do
@@ -120,7 +128,7 @@ Then(/^the title has been updated$/) do
 end
 
 Then(/^the URL slug remains unchanged$/) do
-  check_for_unchanged_slug(@slug)
+  check_for_unchanged_slug(@updated_title, @slug)
 end
 
 When(/^I create another case with the same slug$/) do

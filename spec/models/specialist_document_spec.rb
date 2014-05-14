@@ -9,6 +9,7 @@ describe SpecialistDocument do
   }
 
   let(:document_id)         { "a-document-id" }
+  let(:document_type)       { "cma_case" }
   let(:slug)                { double(:slug) }
   let(:published_slug)      { double(:published_slug) }
   let(:slug_generator)      { double(:slug_generator, call: slug) }
@@ -37,6 +38,7 @@ describe SpecialistDocument do
         published?: false,
         archived?: false,
         version_number: 1,
+        document_type: document_type,
       )
     )
   }
@@ -50,6 +52,7 @@ describe SpecialistDocument do
         published?: false,
         archived?: false,
         version_number: 2,
+        document_type: document_type,
       )
     )
   }
@@ -64,6 +67,7 @@ describe SpecialistDocument do
         archived?: false,
         slug: published_slug,
         version_number: 1,
+        document_type: document_type,
       )
     )
   }
@@ -78,6 +82,7 @@ describe SpecialistDocument do
         archived?: true,
         slug: published_slug,
         version_number: 2,
+        document_type: document_type,
       )
     )
   }

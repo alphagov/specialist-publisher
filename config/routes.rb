@@ -3,6 +3,7 @@ SpecialistPublisher::Application.routes.draw do
     resources :attachments, only: [:new, :create, :edit, :update]
     post :preview, on: :member
     post :withdraw, on: :member
+    post :publish, on: :member
   end
 
   resources :manuals, except: :destroy do
