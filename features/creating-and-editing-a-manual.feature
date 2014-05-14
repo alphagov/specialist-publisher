@@ -15,6 +15,13 @@ Feature: Creating and editing a manual
     When I edit a manual
     Then the manual should have been updated
 
+  @regression
+  Scenario: Create and edit a manual with documents
+    Given a draft manual exists
+    And a draft document exists for the manual
+    When I edit a manual
+    Then the manual's documents won't have changed
+
   Scenario: Try to create an invalid manual
     When I create a manual with an empty title
     Then I see errors for the title field
@@ -36,6 +43,7 @@ Feature: Creating and editing a manual
     When I attach a file and give it a title
     Then I see the attached file
 
+  @regression
   Scenario: Manual documents are not available as specialist documents
     Given a draft manual exists
     And a draft document exists for the manual
