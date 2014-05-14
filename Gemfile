@@ -2,21 +2,17 @@ source "https://rubygems.org"
 
 gem "rails", "3.2.17"
 
+# Alphabetical order please :)
 gem "airbrake", "3.1.15"
-gem "unicorn"
-
+gem "faraday", "0.9.0"
 gem "gds-sso", "9.2.4"
-gem "plek", "1.7.0"
-
-gem "mongoid", "2.5.2"
-
 gem "generic_form_builder", "0.8.0"
 gem "govspeak", "1.5.1"
+gem "logstasher", "0.4.8"
+gem "mongoid", "2.5.2"
 gem "multi_json", "1.9.0"
-
-gem 'faraday', '0.9.0'
-
-gem 'logstasher', '0.4.8'
+gem "plek", "1.7.0"
+gem "unicorn", "4.8.2"
 
 if ENV["CONTENT_MODELS_DEV"]
   gem "govuk_content_models", :path => "../govuk_content_models"
@@ -25,8 +21,8 @@ else
 end
 
 group :development do
-  gem 'better_errors'
-  gem 'binding_of_caller'
+  gem "better_errors"
+  gem "binding_of_caller"
 end
 
 group :assets do
