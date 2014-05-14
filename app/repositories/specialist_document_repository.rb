@@ -4,25 +4,21 @@ class SpecialistDocumentRepository
 
   def initialize(panopticon_mappings,
     specialist_document_editions,
-    panopticon_api,
-    specialist_document_factory,
-    specialist_document_publication_observers)
+    specialist_document_factory)
     @panopticon_mappings = panopticon_mappings
     @specialist_document_editions = specialist_document_editions
-    @panopticon_api = panopticon_api
     @document_factory = specialist_document_factory
-    @publication_observers = specialist_document_publication_observers
   end
 
   def all
     # TODO: add a method on PanopticonMapping to handle this
     document_ids = panopticon_mappings.all_document_ids
-    documents = document_ids.map { |id| fetch(id) }.to_a.compact
+    documents = document_ids.map { |id| fetch(id) {} }.to_a.compact
 
     documents.sort_by(&:updated_at).reverse
   end
 
-  def fetch(id)
+  def fetch(id, &block)
     # TODO: add a method on SpecialistDocumentEdition to handle this
     editions = specialist_document_editions
       .where(document_id: id)
@@ -32,7 +28,11 @@ class SpecialistDocumentRepository
       .reverse
 
     if editions.empty?
-       nil
+      if block_given?
+        yield(id)
+      else
+        raise NotFound
+      end
     else
       document_factory.call(id, editions)
     end
@@ -52,7 +52,9 @@ class SpecialistDocumentRepository
     edition.save!
   end
 
-  class InvalidDocumentError < Exception
+  NotFound = Class.new(StandardError)
+
+  class InvalidDocumentError < StandardError
     def initialize(message, document)
       super(message)
       @document = document
@@ -66,8 +68,7 @@ private
   attr_reader(
     :panopticon_mappings,
     :specialist_document_editions,
-    :panopticon_api,
     :document_factory,
-    :publication_observers,
   )
+
 end
