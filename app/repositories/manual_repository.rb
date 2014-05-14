@@ -25,7 +25,7 @@ class ManualRepository
   end
 
   def all
-    collection.all.lazy.map { |manual_record|
+    collection.all_by_updated_at.lazy.map { |manual_record|
       build_manual_for(manual_record)
     }
   end

@@ -17,6 +17,10 @@ class ManualRecord
     where(organisation_slug: organisation_slug)
   end
 
+  def self.all_by_updated_at
+    order_by([:updated_at, :desc])
+  end
+
   def new_or_existing_draft_edition
     editions
       .where(state: 'draft')
