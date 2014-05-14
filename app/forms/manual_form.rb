@@ -3,7 +3,7 @@ class ManualForm
   include ActiveModel::Conversion
   include ActiveModel::Validations
 
-  attr_accessor :title, :summary
+  attr_accessor :title, :summary, :organisation_slug
 
   validates :title, presence: true
 
@@ -15,6 +15,7 @@ class ManualForm
       @id = manual.id
       @title = manual.title
       @summary = manual.summary
+      @organisation_slug = manual.organisation_slug
     end
   end
 

@@ -29,6 +29,7 @@ describe ManualRepository do
       id: manual_id,
       title: "title",
       summary: "summary",
+      organisation_slug: "organisation_slug",
     }
   }
 
@@ -37,6 +38,8 @@ describe ManualRepository do
       :manual_record,
       manual_id: manual_id,
       new_or_existing_draft_edition: nil,
+      organisation_slug: "organisation_slug", 
+      :"organisation_slug=" => nil,
       latest_edition: nil,
       save!: nil,
     )
@@ -53,6 +56,7 @@ describe ManualRepository do
       title: "title",
       summary: "summary",
       updated_at: "yesterday",
+      organisation_slug: "organisation_slug",
     }
   }
 
@@ -87,7 +91,13 @@ describe ManualRepository do
         .with(manual_attributes.slice(:title, :summary))
     end
 
-    it "saves the manual (with a bang)" do
+    it "sets the organisation_slug" do
+      repo.store(manual)
+
+      expect(manual_record).to have_received(:organisation_slug=).with("organisation_slug")
+    end
+
+    it "saves the manual" do
       repo.store(manual)
 
       expect(manual_record).to have_received(:save!)

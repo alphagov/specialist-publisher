@@ -9,5 +9,5 @@ SpecialistPublisher::Application.routes.draw do
     resources :documents, except: :destroy, path: 'sections', controller: "ManualDocuments"
   end
 
-  root to: redirect('/specialist-documents')
+  root to: redirect('/manuals')
 end

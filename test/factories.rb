@@ -7,6 +7,12 @@ FactoryGirl.define do
 end
 
 FactoryGirl.define do
+  factory :generic_editor, parent: :user do
+    organisation_slug 'ministry-of-tea'
+  end
+end
+
+FactoryGirl.define do
   factory :panopticon_mapping do
     sequence(:document_id) { |n| "some-uuid-#{n}"}
     sequence(:panopticon_id) { |n| "some-panopticon-id-#{n}"}

@@ -22,6 +22,10 @@ After('@javascript') do
   WebMock.disable_net_connect!
 end
 
+After do
+  log_out
+end
+
 # Capybara defaults to CSS3 selectors rather than XPath.
 # If you'd prefer to use XPath, just uncomment this line and adjust any
 # selectors in your step definitions to use the XPath syntax.
@@ -78,16 +82,22 @@ end
 
 World(DependencyContainerMethods)
 
+require 'panopticon_helpers'
 require 'form_helpers'
 require 'cma_case_helpers'
 require 'manual_helpers'
 require 'attachment_helpers'
 require 'rerendering_helpers'
 require 'file_fixture_helpers'
+require 'gds_sso_helpers'
+require 'access_control_helpers'
 
+World(PanopticonHelpers)
 World(FormHelpers)
 World(CmaCaseHelpers)
 World(ManualHelpers)
 World(AttachmentHelpers)
 World(FileFixtureHelpers)
 World(RerenderingHelpers)
+World(GdsSsoHelpers)
+World(AccessControlHelpers)

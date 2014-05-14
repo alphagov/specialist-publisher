@@ -21,8 +21,10 @@
         </div>
         <div class="collapse navbar-collapse">
           <ul class="nav navbar-nav">
-            <li><%= nav_link_to 'Documents', '/specialist-documents' %></li>
             <li><%= nav_link_to 'Manuals', '/manuals' %></li>
+            <% if user_can_edit_documents? %>
+              <li><%= nav_link_to 'Documents', '/specialist-documents' %></li>
+            <% end -%>
           </ul>
         </div><!--/.nav-collapse -->
       </div>
@@ -30,6 +32,10 @@
 
 
     <div class="container">
+
+      <% flash.each do |type, msg| -%>
+        <%= content_tag :div, msg, class: "alert #{bootstrap_class_for(type)}" %>
+      <% end -%>
 
       <%= yield %>
 

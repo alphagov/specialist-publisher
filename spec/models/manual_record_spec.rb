@@ -5,12 +5,10 @@ describe ManualRecord, hits_db: true do
 
   describe "#new_or_existing_draft_edition" do
     context "when a draft edition exists" do
-      before do
-        @edition = record.editions.create!(state: 'draft')
-      end
+      let!(:edition) { record.editions.create!(state: 'draft') }
 
       it "returns the existing draft edition" do
-        expect(record.new_or_existing_draft_edition).to eq(@edition)
+        expect(record.new_or_existing_draft_edition).to eq(edition)
       end
     end
 
@@ -34,6 +32,20 @@ describe ManualRecord, hits_db: true do
         expect(new_edition.state).to eq('draft')
         expect(new_edition.version_number).to eq(2)
       end
+    end
+  end
+
+  describe "#find_by_organisation" do
+    let!(:cma_manual) {
+      ManualRecord.create!(organisation_slug: 'cma')
+    }
+
+    let!(:tea_manual) {
+      ManualRecord.create!(organisation_slug: 'ministry-of-tea')
+    }
+
+    it "filters by organisation" do
+      expect(ManualRecord.find_by_organisation('cma').to_a).to eq([cma_manual])
     end
   end
 end

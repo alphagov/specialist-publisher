@@ -36,6 +36,10 @@ private
     ManualForm.new(manual)
   end
 
+  def manual_params
+    form_params.merge(organisation_slug: current_user.organisation_slug)
+  end
+
   def form_params
     params.fetch(:manual, {})
   end
@@ -46,7 +50,7 @@ private
 
   def save_manual(manual = nil)
     manual = manual_form(manual)
-    manual.update(form_params)
+    manual.update(manual_params)
 
     if manual.valid? && store(manual)
       redirect_to manual_path(manual)

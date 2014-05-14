@@ -1,12 +1,13 @@
 class ManualRepository
   def initialize(dependencies = {})
-    @collection = dependencies.fetch(:collection) { ManualRecord }
-    @factory = dependencies.fetch(:factory) { Manual.method(:new) }
+    @collection = dependencies.fetch(:collection)
+    @factory = dependencies.fetch(:factory)
     @association_marshallers = dependencies.fetch(:association_marshallers, [])
   end
 
   def store(manual)
     manual_record = collection.find_or_initialize_by(manual_id: manual.id)
+    manual_record.organisation_slug = manual.organisation_slug
     edition = manual_record.new_or_existing_draft_edition
     edition.attributes = attributes_for(manual)
 
@@ -46,6 +47,7 @@ private
       id: manual_record.manual_id,
       title: edition.title,
       summary: edition.summary,
+      organisation_slug: manual_record.organisation_slug,
       updated_at: edition.updated_at,
     )
 

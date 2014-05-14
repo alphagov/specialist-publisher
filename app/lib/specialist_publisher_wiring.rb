@@ -12,6 +12,7 @@ require "specialist_document_header_extractor"
 require "finder_api_notifier"
 require "finder_api"
 require "validators/slug_uniqueness_validator"
+require "marshallers/document_association_marshaller"
 
 $LOAD_PATH.unshift(File.expand_path("../..", "app/services"))
 
@@ -37,16 +38,19 @@ SpecialistPublisherWiring = DependencyContainer.new do
     build_with_dependencies(SpecialistDocumentRepository)
   end
 
-  define_factory(:manual_repository) {
-    ManualRepository.new(
-      association_marshallers: [
-        DocumentAssociationMarshaller.new(
-          document_repository: get(:specialist_document_repository),
-          decorator: ManualWithDocuments.method(:new),
-        ),
-      ],
-      factory: Manual.method(:new),
-    )
+  define_factory(:manual_repository_factory) {
+    ->(organisation_slug) {
+      ManualRepository.new(
+        association_marshallers: [
+          DocumentAssociationMarshaller.new(
+            document_repository: get(:specialist_document_repository),
+            decorator: ManualWithDocuments.method(:new),
+          ),
+        ],
+        factory: Manual.method(:new),
+        collection: ManualRecord.find_by_organisation(organisation_slug),
+      )
+    }
   }
 
   define_singleton(:id_generator) { SecureRandom.method(:uuid) }

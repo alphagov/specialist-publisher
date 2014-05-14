@@ -4,6 +4,8 @@ require_relative "../services/update_document_service"
 
 class SpecialistDocumentsController < ApplicationController
 
+  before_filter :authorize_user_org
+
   def index
     render_with(documents: all_documents)
   end
@@ -92,5 +94,11 @@ protected
 
   def build_from_params
     specialist_document_builder.call(form_params)
+  end
+
+  def authorize_user_org
+    unless user_can_edit_documents?
+      redirect_to manuals_path, flash: { error: "You don't have permission to do that." }
+    end
   end
 end
