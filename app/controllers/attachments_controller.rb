@@ -33,7 +33,7 @@ class AttachmentsController < ApplicationController
 private
 
   def specialist_document
-    @specialist_document ||= specialist_document_repository.fetch(params[:specialist_document_id])
+    @specialist_document ||= specialist_document_repository.fetch(params.fetch(:specialist_document_id))
   end
   helper_method :specialist_document
 

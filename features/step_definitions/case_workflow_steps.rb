@@ -33,9 +33,9 @@ When(/^I edit it and republish$/) do
 end
 
 Then(/^the amended CMA case should be published$/) do
-  last_case = specialist_document_repository.all.last
+  published_doc = RenderedSpecialistDocument.where(title: @amended_document_attributes.fetch(:title)).last
+
   @amended_document_attributes.each do |attribute, expected_value|
-    expect(last_case.send(attribute)).to eq expected_value
+    expect(published_doc.public_send(attribute)).to eq(expected_value)
   end
-  expect(last_case).to be_published
 end

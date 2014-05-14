@@ -17,7 +17,6 @@ class ManualDocumentsController < ApplicationController
     document = specialist_document_builder.call(document_params)
 
     document = ManualDocumentForm.new(parent_manual, document)
-
     if document.valid?
       parent_manual.add_document(document)
 
@@ -76,6 +75,6 @@ private
   end
 
   def document_params
-    params.fetch("document")
+    params.fetch("document").merge(document_type: 'manual')
   end
 end

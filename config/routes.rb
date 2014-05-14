@@ -6,7 +6,9 @@ SpecialistPublisher::Application.routes.draw do
   end
 
   resources :manuals, except: :destroy do
-    resources :documents, except: :destroy, path: 'sections', controller: "ManualDocuments"
+    resources :documents, except: :destroy, path: 'sections', controller: "ManualDocuments" do
+      resources :attachments, controller: "ManualDocumentsAttachments", only: [:new, :create, :edit, :update]
+    end
   end
 
   root to: redirect('/manuals')

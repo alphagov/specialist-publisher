@@ -28,6 +28,8 @@ class CreateDocumentService
   end
 
   def attributes
-    context.params.fetch("specialist_document", {})
+    context.params
+      .fetch("specialist_document", {})
+      .merge(document_type: 'cma_case')
   end
 end

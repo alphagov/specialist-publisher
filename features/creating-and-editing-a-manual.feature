@@ -35,3 +35,9 @@ Feature: Creating and editing a manual
     And a draft document exists for the manual
     When I attach a file and give it a title
     Then I see the attached file
+
+  Scenario: Manual documents are not available as specialist documents
+    Given a draft manual exists
+    And a draft document exists for the manual
+    When I visit the specialist documents path for the manual document
+    Then the document is not found

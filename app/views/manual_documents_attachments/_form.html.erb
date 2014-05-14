@@ -1,0 +1,6 @@
+<%= form_for([manual, document, @attachment]) do |f| %>
+  <%= f.text_field :title %>
+  <%= f.file_field :file %>
+
+  <button type="submit">Save attachment</button>
+<% end %>
