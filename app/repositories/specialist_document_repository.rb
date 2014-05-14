@@ -1,6 +1,8 @@
 require "gds_api/panopticon"
+require "fetchable"
 
 class SpecialistDocumentRepository
+  include Fetchable
 
   def initialize(panopticon_mappings,
     specialist_document_editions,
@@ -13,12 +15,12 @@ class SpecialistDocumentRepository
   def all
     # TODO: add a method on PanopticonMapping to handle this
     document_ids = panopticon_mappings.all_document_ids
-    documents = document_ids.map { |id| fetch(id) {} }.to_a.compact
+    documents = document_ids.map { |id| self[id] }.to_a.compact
 
     documents.sort_by(&:updated_at).reverse
   end
 
-  def fetch(id, &block)
+  def [](id)
     # TODO: add a method on SpecialistDocumentEdition to handle this
     editions = specialist_document_editions
       .where(document_id: id)
@@ -28,11 +30,7 @@ class SpecialistDocumentRepository
       .reverse
 
     if editions.empty?
-      if block_given?
-        yield(id)
-      else
-        raise NotFound
-      end
+      nil
     else
       document_factory.call(id, editions)
     end

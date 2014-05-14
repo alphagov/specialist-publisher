@@ -63,6 +63,10 @@ describe SpecialistDocumentRepository do
 
   let(:published_edition) { build_published_edition }
 
+  it "supports the fetch interface" do
+    expect(specialist_document_repository).to be_a_kind_of(Fetchable)
+  end
+
   describe "#all" do
     before do
       @edition_1, @edition_2 = [2, 1].map do |n|
@@ -88,7 +92,7 @@ describe SpecialistDocumentRepository do
     end
   end
 
-  describe "#fetch" do
+  describe "#[]" do
     let(:editions_proxy) { double(:editions_proxy, to_a: editions).as_null_object }
     let(:editions)       { [ published_edition ] }
 
@@ -100,13 +104,13 @@ describe SpecialistDocumentRepository do
     end
 
     it "populates the document with all editions for that document id" do
-      specialist_document_repository.fetch(document_id)
+      specialist_document_repository[document_id]
 
       expect(document_factory).to have_received(:call).with(document_id, editions)
     end
 
     it "returns the document" do
-      expect(specialist_document_repository.fetch(document_id)).to eq(document)
+      expect(specialist_document_repository[document_id]).to eq(document)
     end
 
     context "when there are no editions" do
@@ -114,10 +118,8 @@ describe SpecialistDocumentRepository do
         allow(editions_proxy).to receive(:to_a).and_return([])
       end
 
-      it "raises NotFound" do
-        expect {
-          specialist_document_repository.fetch(document_id)
-        }.to raise_error(SpecialistDocumentRepository::NotFound)
+      it "returns nil" do
+        expect(specialist_document_repository[document_id]).to be_nil
       end
     end
   end

@@ -1,4 +1,8 @@
+require "fetchable"
+
 class ManualRepository
+  include Fetchable
+
   def initialize(dependencies = {})
     @collection = dependencies.fetch(:collection)
     @factory = dependencies.fetch(:factory)
@@ -18,7 +22,7 @@ class ManualRepository
     manual_record.save!
   end
 
-  def fetch(manual_id)
+  def [](manual_id)
     manual_record = collection.find_by(manual_id: manual_id)
 
     build_manual_for(manual_record)

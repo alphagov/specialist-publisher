@@ -5,6 +5,7 @@ gem "rails", "3.2.17"
 # Alphabetical order please :)
 gem "airbrake", "3.1.15"
 gem "faraday", "0.9.0"
+gem "fetchable", "1.0.0"
 gem "gds-sso", "9.2.4"
 gem "generic_form_builder", "0.8.0"
 gem "govspeak", "1.5.1"

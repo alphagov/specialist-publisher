@@ -6,7 +6,7 @@ class SpecialistDocumentsController < ApplicationController
 
   before_filter :authorize_user_org
 
-  rescue_from(SpecialistDocumentRepository::NotFound) do
+  rescue_from(KeyError) do
     redirect_to(manuals_path, flash: { error: "Document not found" })
   end
 
