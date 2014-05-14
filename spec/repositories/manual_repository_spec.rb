@@ -60,6 +60,10 @@ describe ManualRepository do
     }
   }
 
+  it "supports the fetch interface" do
+    expect(repo).to be_a_kind_of(Fetchable)
+  end
+
   describe "#store" do
     let(:draft_edition) { double(:draft_edition, :attributes= => nil) }
 
@@ -118,7 +122,7 @@ describe ManualRepository do
     end
   end
 
-  describe "#fetch" do
+  describe "#[]" do
     before do
       allow(record_collection).to receive(:find_by).and_return(manual_record)
       allow(manual_record).to receive(:latest_edition).and_return(edition)
@@ -126,14 +130,14 @@ describe ManualRepository do
     end
 
     it "finds the manual record by manual id" do
-      repo.fetch(manual_id)
+      repo[manual_id]
 
       expect(record_collection).to have_received(:find_by)
         .with(manual_id: manual_id)
     end
 
     it "builds a new manual from the latest edition" do
-      repo.fetch(manual_id)
+      repo[manual_id]
 
       factory_arguments = edition_attributes.merge(id: manual_id)
 
@@ -142,7 +146,7 @@ describe ManualRepository do
     end
 
     it "returns the built manual" do
-      expect(repo.fetch(manual_id)).to be(manual)
+      expect(repo[manual_id]).to be(manual)
     end
 
     context "with an association_marshaller" do
@@ -155,13 +159,13 @@ describe ManualRepository do
       let(:unmarshalled_manual) { double(:unmarshalled_manual) }
 
       it "calls load on each marshaller with the manual domain object and edition" do
-        repo.fetch(manual_id)
+        repo[manual_id]
 
         expect(association_marshaller).to have_received(:load).with(manual, edition)
       end
 
       it "returns the result of the marshaller" do
-        expect(repo.fetch(manual_id)).to eq(unmarshalled_manual)
+        expect(repo[manual_id]).to eq(unmarshalled_manual)
       end
     end
   end
