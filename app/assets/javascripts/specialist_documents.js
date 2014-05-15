@@ -10,6 +10,7 @@
 
     function insertMarkup(){
       $(args.insert_into).html(previewMarkup());
+      $(args.insert_button).html(previewButton());
     }
 
     function addButtonPressListener(){
@@ -28,6 +29,7 @@
 
     function displayPreview(previewHtml) {
       $(args.render_to).html(previewHtml);
+      $('.preview').show();
       $(window).trigger('displayPreviewDone');
     }
 
@@ -42,10 +44,13 @@
     }
 
     function previewMarkup(){
-      return '<button name="preview">Preview</button>'
-        + '<div class="preview">'
+      return '<div class="preview" style="display: none;">'
         + '  <div class="govspeak"></div>'
         + '</div>';
+    }
+
+    function previewButton(){
+      return '<button name="preview" class="btn btn-primary">Preview</button>'
     }
 
     function buttonSelector(){

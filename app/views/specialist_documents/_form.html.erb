@@ -24,6 +24,7 @@
     <%= f.text_area :summary, class: 'short-textarea' %>
     <%= f.text_area :body %>
 
+    <div class="preview_button"></div>
     <div class="preview_container" style="display: none;"></div>
 
     <%= f.text_field :opened_date, placeholder: '2012-04-23' %>
@@ -63,6 +64,7 @@
   window.SpecialistDocument.addPreviewFeature({
     'url'             : '<%= preview_specialist_document_path(document) %>',
     'insert_into'     : '.preview_container',
+    'insert_button'   : '.preview_button',
     'render_to'       : '.preview .govspeak',
     'data_target'     : function() {
                           return {
