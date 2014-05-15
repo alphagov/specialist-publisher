@@ -3,21 +3,21 @@ module CmaCaseHelpers
     visit new_specialist_document_path
     fill_in_fields(fields)
 
+    save_document
+
     if publish
       publish_document
-    else
-      save_document
     end
   end
 
-  def edit_cma_case(fields, publish: false)
-    go_to_edit_page_for_most_recent_case
-    fill_in_fields(fields)
-    
+  def edit_cma_case(title, updated_fields, publish: false)
+    go_to_edit_page_for_document(title)
+    fill_in_fields(updated_fields)
+
+    save_document
+
     if publish
       publish_document
-    else
-      save_document
     end
   end
 
@@ -26,7 +26,7 @@ module CmaCaseHelpers
   end
 
   def publish_document
-    click_on "Save and publish"
+    click_on "Publish"
   end
 
   def check_slug_registered_with_panopticon(slug)
@@ -88,6 +88,7 @@ module CmaCaseHelpers
   end
 
   def go_to_show_page_for_document(document_title)
+    raise "Cannot find document nil title" if document_title.nil?
     go_to_document_index
 
     click_link document_title
@@ -117,22 +118,23 @@ module CmaCaseHelpers
     end
   end
 
-  def update_title_and_republish(args)
+  def update_title_and_republish(current_title, args)
     updated_title = args.fetch(:to)
 
-    go_to_edit_page_for_most_recent_case
+    go_to_edit_page_for_document(current_title)
 
     fill_in_fields(
       title: updated_title,
     )
 
+    save_document
     publish_document
   end
 
-  def check_for_unchanged_slug(expected_slug)
-    go_to_edit_page_for_most_recent_case
+  def check_for_unchanged_slug(title, expected_slug)
+    go_to_show_page_for_document(title)
 
-    expect(page).to have_css(".slug span", text: expected_slug)
+    expect(page).to have_css("h4", text: expected_slug)
   end
 
   def capture_most_recent_slug
@@ -159,6 +161,15 @@ module CmaCaseHelpers
 
     check_published_with_panopticon(title)
     check_added_to_finder_api(title)
+  end
+
+  def check_for_published_document_with(attrs)
+    published_document = RenderedSpecialistDocument.where(attrs).first
+    expect(published_document).not_to be_nil
+
+    attrs.each do |attr_name, value|
+      expect(published_document.public_send(attr_name)).to eq(value)
+    end
   end
 
   def check_published_with_panopticon(title)

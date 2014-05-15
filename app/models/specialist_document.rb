@@ -13,6 +13,7 @@ class SpecialistDocument
       :slug,
       :summary,
       :body,
+      :document_type,
       :opened_date,
       :closed_date,
       :case_type,
@@ -188,6 +189,7 @@ protected
       .merge(
         version_number: current_version_number + 1,
         slug: slug,
+        document_type: document_type,
         attachments: attachments,
       )
 

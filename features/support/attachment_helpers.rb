@@ -3,11 +3,19 @@ module AttachmentHelpers
     Plek.current.find("asset-manager")
   end
 
-  def add_attachment_to_case(document_title, attachment_title)
-    click_on(document_title)
+  def add_attachment_to_manual_document(document_title, attachment_title)
+    if page.has_css?("a", text: document_title)
+      click_on(document_title)
+    elsif page.has_css?("a", text: "Edit")
+      click_on("Edit")
+    end
 
+    add_attachment_to_case(document_title, attachment_title)
+  end
+
+  def add_attachment_to_case(document_title, attachment_title)
     unless current_path.include?("edit")
-      click_on "Edit"
+      click_link "Edit"
     end
 
     click_on "Add attachment"
