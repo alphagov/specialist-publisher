@@ -5,7 +5,7 @@ class ManualDocumentForm
   extend ActiveModel::Naming
   include ActiveModel::Conversion
 
-  def_delegators :document, :exposed_edition, :add_attachment, :attachments
+  def_delegators :document, :exposed_edition, :add_attachment, :attachments, :find_attachment_by_id
 
   def errors
     if document

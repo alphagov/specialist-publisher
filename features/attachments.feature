@@ -20,3 +20,12 @@ Feature: Attachments
     Given there is a published case with an attachment
     When I edit the attachment
     Then I see the updated attachment on the document edit page
+
+  @regression
+  Scenario: CMA editor can add and replace attachment to manual
+    Given a draft manual exists
+    And a draft document exists for the manual
+    When I attach a file and give it a title
+    Then I see the attached file
+    When I edit the attachment
+    Then I see the updated attachment on the document edit page
