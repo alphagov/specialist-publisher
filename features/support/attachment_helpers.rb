@@ -83,8 +83,6 @@ module AttachmentHelpers
   end
 
   def edit_attachment(document_title, attachment_title, new_attachment_title, new_attachment_file_name)
-    go_to_edit_page_for_most_recent_case
-
     attachment_li = page.find(".attachments li", text: attachment_title)
     attachment_edit_link = attachment_li.find("a", text: "edit")
 
@@ -105,8 +103,6 @@ module AttachmentHelpers
   end
 
   def check_for_attachment_update(document_title, attachment_title, attachment_file_name)
-    go_to_edit_page_for_most_recent_case
-
     expect(page).to have_css(".attachments li", text: @new_attachment_title)
     expect(page).to have_css(".attachments li", text: @new_attachment_file_name)
   end
