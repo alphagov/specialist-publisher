@@ -52,6 +52,10 @@ class ManualDocumentsController < ApplicationController
     end
   end
 
+  def preview
+    render json: { preview_html: generate_preview }
+  end
+
 private
 
   def new_document
@@ -75,6 +79,16 @@ private
   end
 
   def document_params
-    params.fetch("document").merge(document_type: 'manual')
+    params.fetch("document", {}).merge(document_type: 'manual')
+  end
+
+  def generate_preview
+    if current_document
+      preview_document = current_document.update(document_params)
+    else
+      preview_document = specialist_document_builder.call(document_params)
+    end
+
+    specialist_document_renderer.call(preview_document).body
   end
 end
