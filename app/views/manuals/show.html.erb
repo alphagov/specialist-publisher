@@ -1,19 +1,54 @@
-<h1 class="page-header"><%= manual.title %></h1>
+<div class="manual-header">
+  <p>Manual title</p>
+  <h1 class="page-header">
+    <%= manual.title %>
+  </h1>
 
-<%= link_to 'Edit', edit_manual_path(manual), class: 'btn btn-default' %>
+  <div class="actions">
+    <%= link_to 'Edit Manual', edit_manual_path(manual), class: 'btn btn-primary' %> 
+    <%= link_to 'Add Section', new_manual_document_path(manual), class: 'btn btn-primary' %>
+  </div>
+  <div class="clearfix"></div>
+</div>
 
 <div class="row">
   <div class="sidebar col-md-8">
-    <%= manual.summary %>
+    <p>Summary</p>
+    <%= govspeak(manual.summary) %>
   </div>
 </div>
 
-<div class="row">
-  <ul class="documents">
-    <% manual.documents.each do |document| %>
-      <li><%= link_to(document.title, manual_document_path(manual, document)) %></li>
-    <% end %>
-  </ul>
-</div>
-
-<%= link_to 'Add section', new_manual_document_path(manual), class: 'btn btn-default' %>
+<% if manual.documents.any? %>
+  <div class="row">
+    <div class="col-md-12">
+      <h2>Sections</h2>
+      <table class="documents table">
+        <thead>
+          <th>
+            Section Title
+          </th>
+          <th>
+            Last updated
+          </th>
+          <th>
+          </th>
+        </thead>
+        <tbody>
+          <% manual.documents.each do |document| %>
+            <tr>
+              <td>
+                <%= link_to(document.title, manual_document_path(manual, document)) %>
+              </td>
+              <td>
+                <%= time_ago_in_words(document.updated_at) %>
+              </td>
+              <td>
+                <%= link_to('Edit', edit_manual_document_path(manual, document)) %>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+<% end %>

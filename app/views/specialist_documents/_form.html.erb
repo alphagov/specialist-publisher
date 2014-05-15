@@ -34,7 +34,9 @@
     <%= f.select :market_sector, facet_options(:market_sector) %>
     <%= f.select :outcome_type, facet_options(:outcome_type), include_blank: true %>
 
-    <button name='save'>Save as draft</button>
+    <div class="actions">
+      <button name="save" class="btn btn-success">Save as draft</button>
+    </div>
   <% end %>
 </div>
 

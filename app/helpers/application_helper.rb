@@ -31,4 +31,10 @@ module ApplicationHelper
         flash_type.to_s
     end
   end
+
+  def govspeak(text)
+    if text
+      content_tag(:div, Govspeak::Document.new(text).to_sanitized_html.html_safe, class: "govspeak")
+    end
+  end
 end
