@@ -77,7 +77,7 @@ protected
   end
 
   def generate_preview
-    if current_document
+    if params.has_key?(:id)
       preview_document = current_document.update(form_params)
     else
       preview_document = build_from_params
