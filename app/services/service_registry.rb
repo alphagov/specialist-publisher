@@ -6,6 +6,7 @@ require "publish_document_service"
 require "update_document_service"
 require "create_document_service"
 require "withdraw_document_service"
+require "show_manual_document_service"
 
 class ServiceRegistry
 
@@ -16,6 +17,8 @@ class ServiceRegistry
     @creation_listeners = dependencies.fetch(:creation_listeners)
     @withdrawal_listeners = dependencies.fetch(:withdrawal_listeners)
     @document_renderer = dependencies.fetch(:document_renderer)
+    @manual_repository_factory = dependencies.fetch(:manual_repository_factory)
+    @manual_document_builder = dependencies.fetch(:manual_document_builder)
   end
 
   def list_documents(context)
@@ -81,15 +84,40 @@ class ServiceRegistry
   end
 
   def create_manual_document(context)
-    CreateDocumentService.new(
-      document_builder,
-      document_repository,
-      [],
+    CreateManualDocumentService.new(
+      manual_repository(context),
+      manual_document_builder,
+      context,
+    )
+  end
+
+  def update_manual_document(context)
+    UpdateManualDocumentService.new(
+      manual_repository(context),
+      context,
+    )
+  end
+
+  def show_manual_document(context)
+    ShowManualDocumentService.new(
+      manual_repository(context),
+      context,
+    )
+  end
+
+  def new_manual_document(context)
+    NewManualDocumentService.new(
+      manual_repository(context),
+      manual_document_builder,
       context,
     )
   end
 
   private
+
+  def manual_repository(context)
+    manual_repository_factory.call(context.current_organisation_slug)
+  end
 
   attr_reader(
     :document_builder,
@@ -98,5 +126,8 @@ class ServiceRegistry
     :creation_listeners,
     :withdrawal_listeners,
     :document_renderer,
+
+    :manual_repository_factory,
+    :manual_document_builder,
   )
 end

@@ -2,6 +2,7 @@ require 'dependency_container'
 require 'securerandom'
 require "specialist_document_repository"
 require 'builders/specialist_document_builder'
+require "builders/manual_document_builder"
 require 'gds_api/panopticon'
 require 'panopticon_registerer'
 require "specialist_document_attachment_processor"
@@ -225,6 +226,15 @@ SpecialistPublisherWiring = DependencyContainer.new do
       creation_listeners: get(:specialist_document_creation_observers),
       withdrawal_listeners: get(:specialist_document_withdrawal_observers),
       document_renderer: get(:specialist_document_renderer),
+
+      manual_repository_factory: get(:manual_repository_factory),
+      manual_document_builder: get(:manual_document_builder),
+    )
+  }
+
+  define_factory(:manual_document_builder) {
+    ManualDocumentBuilder.new(
+      get(:specialist_document_builder),
     )
   }
 end

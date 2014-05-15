@@ -21,6 +21,10 @@ class ApplicationController < ActionController::Base
   helper_method :user_can_edit_documents?
 
   def manual_repository
-    @manual_repository ||= manual_repository_factory.call(current_user.organisation_slug)
+    @manual_repository ||= manual_repository_factory.call(current_organisation_slug)
+  end
+
+  def current_organisation_slug
+    current_user.organisation_slug
   end
 end

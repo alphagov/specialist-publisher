@@ -1,94 +1,55 @@
 class ManualDocumentsController < ApplicationController
   def show
+    manual, document = services.show_manual_document(self).call
+
     render(:show, locals: {
-      manual: parent_manual,
-      document: current_document,
+      manual: manual,
+      document: document,
     })
   end
 
   def new
+    manual, document = services.new_manual_document(self).call
+
     render(:new, locals: {
-      manual: ManualForm.new(parent_manual),
-      document: ManualDocumentForm.new(parent_manual)
+      manual: ManualForm.new(manual),
+      document: ManualDocumentForm.new(manual, document)
     })
   end
 
   def create
-    document = specialist_document_builder.call(document_params)
+    manual, document = services.create_manual_document(self).call
 
-    document = ManualDocumentForm.new(parent_manual, document)
     if document.valid?
-      parent_manual.add_document(document)
-
-      manual_repository.store(parent_manual)
-
-      redirect_to(manual_path(parent_manual))
+      redirect_to(manual_path(manual))
     else
+      # TODO: this branch is untested
       render(:new, locals: {
-        manual: ManualForm.new(parent_manual),
-        document: ManualDocumentForm.new(parent_manual, document),
+        manual: ManualForm.new(manual),
+        document: ManualDocumentForm.new(manual, document),
       })
     end
   end
 
   def edit
+    manual, document = services.show_manual_document(self).call
+
     render(:edit, locals: {
-      manual: ManualForm.new(parent_manual),
-      document: ManualDocumentForm.new(parent_manual, current_document),
+      manual: ManualForm.new(manual),
+      document: ManualDocumentForm.new(manual, document),
     })
   end
 
   def update
-    current_document.update(document_params)
+    manual, document = services.update_manual_document(self).call
 
-    if current_document.valid?
-      manual_repository.store(parent_manual)
-      redirect_to(manual_path(parent_manual))
+    if document.valid?
+      redirect_to(manual_path(manual))
     else
       render(:edit, locals: {
-        manual: ManualForm.new(parent_manual),
-        document: ManualDocumentForm.new(parent_manual, current_document),
+        manual: ManualForm.new(manual),
+        document: ManualDocumentForm.new(manual, document),
       })
     end
-  end
-
-  def preview
-    render json: { preview_html: generate_preview }
-  end
-
-private
-
-  def new_document
-    @new_document ||= specialist_document_builder.call({})
-  end
-
-  def parent_manual
-    @parent_manual ||= manual_repository.fetch(manual_id)
-  end
-
-  def current_document
-    @current_document ||= parent_manual.documents.find { |d| d.id == document_id }
-  end
-
-  def manual_id
-    params.fetch("manual_id")
-  end
-
-  def document_id
-    params.fetch("id", nil)
-  end
-
-  def document_params
-    params.fetch("document", {}).merge(document_type: 'manual')
-  end
-
-  def generate_preview
-    if current_document
-      preview_document = current_document.update(document_params)
-    else
-      preview_document = specialist_document_builder.call(document_params)
-    end
-
-    specialist_document_renderer.call(preview_document).body
   end
 end
