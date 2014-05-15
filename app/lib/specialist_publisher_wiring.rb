@@ -224,6 +224,7 @@ SpecialistPublisherWiring = DependencyContainer.new do
       publication_listeners: get(:specialist_document_publication_observers),
       creation_listeners: get(:specialist_document_creation_observers),
       withdrawal_listeners: get(:specialist_document_withdrawal_observers),
+      document_renderer: get(:specialist_document_renderer),
     )
   }
 end

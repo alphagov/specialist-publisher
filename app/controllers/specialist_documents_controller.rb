@@ -1,7 +1,3 @@
-require "govspeak"
-require_relative "../services/publish_document_service"
-require_relative "../services/update_document_service"
-
 class SpecialistDocumentsController < ApplicationController
 
   before_filter :authorize_user_org
@@ -12,19 +8,27 @@ class SpecialistDocumentsController < ApplicationController
   end
 
   def index
-    render(:index, locals: { documents: all_documents })
+    documents = services.list_documents(self).call
+
+    render(:index, locals: { documents: documents })
   end
 
   def show
-    render(:show, locals: { document: current_document })
+    document = services.show_document(self).call
+
+    render(:show, locals: { document: document })
   end
 
   def new
-    render(:new, locals: { document: new_document({}) })
+    document = services.new_document(self).call
+
+    render(:new, locals: { document: document })
   end
 
   def edit
-    render(:edit, locals: { document: current_document })
+    document = services.show_document(self).call
+
+    render(:edit, locals: { document: document })
   end
 
   def create
@@ -48,9 +52,9 @@ class SpecialistDocumentsController < ApplicationController
   end
 
   def publish
-    services.publish_document(current_document).call
+    document = services.publish_document(self).call
 
-    redirect_to(specialist_document_path(current_document))
+    redirect_to(specialist_document_path(document))
   end
 
   def withdraw
@@ -60,44 +64,12 @@ class SpecialistDocumentsController < ApplicationController
   end
 
   def preview
-    render json: { preview_html: generate_preview }
+    preview_html = services.preview_document(self).call
+
+    render json: { preview_html: preview_html }
   end
 
 protected
-
-  def all_documents
-    specialist_document_repository.all
-  end
-
-  def new_document(doc_params)
-    specialist_document_builder.call(doc_params)
-  end
-
-  def current_document
-    @current_document ||= specialist_document_repository.fetch(params.fetch(:id))
-  end
-
-  def generate_preview
-    if params.has_key?(:id)
-      preview_document = current_document.update(form_params)
-    else
-      preview_document = build_from_params
-    end
-
-    specialist_document_renderer.call(preview_document).body
-  end
-
-  def specialist_document_params
-    form_params.merge(document_type: 'cma_case')
-  end
-
-  def form_params
-    params.fetch(:specialist_document, {})
-  end
-
-  def build_from_params
-    specialist_document_builder.call(form_params)
-  end
 
   def authorize_user_org
     unless user_can_edit_documents?

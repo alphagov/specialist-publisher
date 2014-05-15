@@ -1,3 +1,7 @@
+require "list_documents_service"
+require "show_document_service"
+require "preview_document_service"
+require "new_document_service"
 require "publish_document_service"
 require "update_document_service"
 require "create_document_service"
@@ -11,6 +15,20 @@ class ServiceRegistry
     @publication_listeners = dependencies.fetch(:publication_listeners)
     @creation_listeners = dependencies.fetch(:creation_listeners)
     @withdrawal_listeners = dependencies.fetch(:withdrawal_listeners)
+    @document_renderer = dependencies.fetch(:document_renderer)
+  end
+
+  def list_documents(context)
+    ListDocuments.new(
+      document_repository,
+    )
+  end
+
+  def new_document(context)
+    NewDocumentService.new(
+      document_builder,
+      context,
+    )
   end
 
   def create_document(context)
@@ -18,6 +36,22 @@ class ServiceRegistry
       document_builder,
       document_repository,
       creation_listeners,
+      context,
+    )
+  end
+
+  def show_document(context)
+    ShowDocument.new(
+      document_repository,
+      context,
+    )
+  end
+
+  def preview_document(context)
+    PreviewDocumentService.new(
+      document_repository,
+      document_builder,
+      document_renderer,
       context,
     )
   end
@@ -63,5 +97,6 @@ class ServiceRegistry
     :publication_listeners,
     :creation_listeners,
     :withdrawal_listeners,
+    :document_renderer,
   )
 end
