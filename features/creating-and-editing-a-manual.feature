@@ -26,6 +26,11 @@ Feature: Creating and editing a manual
     When I create a manual with an empty title
     Then I see errors for the title field
 
+  Scenario: Try to create an invalid manual document
+    Given a draft manual exists
+    When I create a document with empty fields
+    Then I see errors for the document fields
+
   Scenario: Add a document to a manual
     Given a draft manual exists
     When I create a document for the manual
