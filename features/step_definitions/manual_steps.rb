@@ -105,3 +105,14 @@ end
 Then(/^the manual's documents won't have changed$/) do
   expect(page).to have_content(@document_fields.fetch(:title))
 end
+
+When(/^I create a document with empty fields$/) do
+  create_manual_document(@manual_fields.fetch(:title), {})
+end
+
+Then(/^I see errors for the document fields$/) do
+  ['Title', 'Summary', 'Body'].each do |field|
+    expect(page).to have_content("#{field} can't be blank")
+  end
+  expect(page).not_to have_content('Add attachment')
+end

@@ -75,7 +75,7 @@ class ManualDocumentForm
   end
 
   def persisted?
-    document.present?
+    document && document.persisted?
   end
 
   def to_param
