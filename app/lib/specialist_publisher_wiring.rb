@@ -219,11 +219,11 @@ SpecialistPublisherWiring = DependencyContainer.new do
 
   define_factory(:services) {
     ServiceRegistry.new(
-      get(:specialist_document_builder),
-      get(:specialist_document_repository),
-      get(:specialist_document_publication_observers),
-      get(:specialist_document_creation_observers),
-      get(:specialist_document_withdrawal_observers),
+      document_builder: get(:specialist_document_builder),
+      document_repository: get(:specialist_document_repository),
+      publication_listeners: get(:specialist_document_publication_observers),
+      creation_listeners: get(:specialist_document_creation_observers),
+      withdrawal_listeners: get(:specialist_document_withdrawal_observers),
     )
   }
 end

@@ -5,12 +5,12 @@ require "withdraw_document_service"
 
 class ServiceRegistry
 
-  def initialize(document_builder, document_repository, publication_listeners, creation_listeners, withdrawal_listeners)
-    @document_builder = document_builder
-    @document_repository = document_repository
-    @publication_listeners = publication_listeners
-    @creation_listeners = creation_listeners
-    @withdrawal_listeners = withdrawal_listeners
+  def initialize(dependencies)
+    @document_builder = dependencies.fetch(:document_builder)
+    @document_repository = dependencies.fetch(:document_repository)
+    @publication_listeners = dependencies.fetch(:publication_listeners)
+    @creation_listeners = dependencies.fetch(:creation_listeners)
+    @withdrawal_listeners = dependencies.fetch(:withdrawal_listeners)
   end
 
   def create_document(context)
