@@ -11,19 +11,19 @@ class SpecialistDocumentsController < ApplicationController
   end
 
   def index
-    render_with(documents: all_documents)
+    render(:index, locals: { documents: all_documents })
   end
 
   def show
-    render_with(document: current_document)
+    render(:show, locals: { document: current_document })
   end
 
   def new
-    render_with(document: new_document({}))
+    render(:new, locals: { document: new_document({}) })
   end
 
   def edit
-    render_with(document: current_document)
+    render(:edit, locals: { document: current_document })
   end
 
   def create

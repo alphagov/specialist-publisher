@@ -15,10 +15,6 @@ class ApplicationController < ActionController::Base
   def_delegators :url_maker, :published_specialist_document_path
   helper_method :published_specialist_document_path
 
-  def render_with(locals)
-    render(action_name, locals: locals)
-  end
-
   def user_can_edit_documents?
     current_user.organisation_slug == 'competition-and-markets-authority'
   end
