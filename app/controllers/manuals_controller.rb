@@ -1,14 +1,14 @@
 class ManualsController < ApplicationController
   def index
-    render_with(manuals: all_manuals)
+    render(:index, locals: { manuals: all_manuals })
   end
 
   def show
-    render_with(manual: current_manual)
+    render(:show, locals: { manual: current_manual })
   end
 
   def new
-    render_with(manual: manual_form)
+    render(:new, locals: { manual: manual_form })
   end
 
   def create
@@ -16,7 +16,7 @@ class ManualsController < ApplicationController
   end
 
   def edit
-    render_with(manual: manual_form(current_manual))
+    render(:edit, locals: { manual: manual_form(current_manual) })
   end
 
   def update

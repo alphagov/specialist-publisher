@@ -1,16 +1,16 @@
 class ManualDocumentsController < ApplicationController
   def show
-    render_with(
+    render(:show, locals: {
       manual: parent_manual,
       document: current_document,
-    )
+    })
   end
 
   def new
-    render_with(
+    render(:new, locals: {
       manual: ManualForm.new(parent_manual),
       document: ManualDocumentForm.new(parent_manual)
-    )
+    })
   end
 
   def create
@@ -32,10 +32,10 @@ class ManualDocumentsController < ApplicationController
   end
 
   def edit
-    render_with(
+    render(:edit, locals: {
       manual: ManualForm.new(parent_manual),
       document: ManualDocumentForm.new(parent_manual, current_document),
-    )
+    })
   end
 
   def update

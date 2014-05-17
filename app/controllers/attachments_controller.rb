@@ -1,7 +1,10 @@
 class AttachmentsController < ApplicationController
   def new
-    # TODO: This be should be created from the document or just be a form object
-    @attachment = Attachment.new
+    render(:new, locals: {
+      specialist_document: specialist_document,
+      # TODO: This be should be created from the document or just be a form object
+      attachment: Attachment.new,
+    })
   end
 
   def create
@@ -11,12 +14,15 @@ class AttachmentsController < ApplicationController
   end
 
   def edit
-    @attachment = existing_attachment
+    render(:edit, locals: {
+      specialist_document: specialist_document,
+      attachment: existing_attachment,
+    })
   end
 
   def update
-    @attachment = existing_attachment
-    update_result = @attachment.update_attributes(
+    attachment = existing_attachment
+    update_result = attachment.update_attributes(
       params.fetch(:attachment).merge(
         # TODO: move this into content models as a persistence concern
         filename: uploaded_filename,
@@ -26,7 +32,10 @@ class AttachmentsController < ApplicationController
     if update_result
       redirect_to(edit_specialist_document_path(specialist_document))
     else
-      render(:edit)
+      render(:edit, locals: {
+        specialist_document: specialist_document,
+        attachment: attachment,
+      })
     end
   end
 
@@ -35,7 +44,6 @@ private
   def specialist_document
     @specialist_document ||= specialist_document_repository.fetch(params.fetch(:specialist_document_id))
   end
-  helper_method :specialist_document
 
   def existing_attachment
     specialist_document.find_attachment_by_id(attachment_id)
