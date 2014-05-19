@@ -1,81 +1,44 @@
 class ManualDocumentsAttachmentsController < ApplicationController
   def new
+    manual, document, attachment = services.new_manual_document_attachment(self).call
+
     render(:new, locals: {
-      manual: manual,
-      document: document,
-      # TODO: This be should be created from the document or just be a form object
-      attachment: Attachment.new,
+      manual: ManualForm.new(manual),
+      document: ManualDocumentForm.new(manual, document),
+      attachment: attachment,
     })
   end
 
   def create
-    document.add_attachment(params[:attachment])
-    manual_document_repository.store(document)
-    redirect_to edit_manual_document_path(parent_manual, document)
+    manual, document, attachment = services.create_manual_document_attachment(self).call
+
+    redirect_to edit_manual_document_path(manual, document)
   end
 
   def edit
+    # TODO: action not tested
+    manual, document, attachment = services.show_manual_document_attachment(self).call
+
     render(:edit, locals: {
-      manual: manual,
-      document: document,
-      attachment: existing_attachment,
+      manual: ManualForm.new(manual),
+      document: ManualDocumentForm.new(manual, document),
+      attachment: attachment,
     })
   end
 
   def update
-    attachment = existing_attachment
-    update_result = attachment.update_attributes(
-      params.fetch(:attachment).merge(
-        # TODO: move this into content models as a persistence concern
-        filename: uploaded_filename,
-      )
-    )
+    manual, document, attachment = services.update_manual_document_attachment(self).call
 
-    if update_result
-      redirect_to(edit_manual_document_path(parent_manual, document))
+    if attachment.persisted?
+      redirect_to(edit_manual_document_path(manual, document))
     else
+      @attachment = attachment
+
       render(:edit, locals: {
-        manual: manual,
-        document: document,
+        manual: ManualForm.new(manual),
+        document: ManualDocumentForm.new(manual, document),
         attachment: attachment,
       })
     end
-  end
-
-private
-
-  def parent_manual
-    @parent_manual ||= manual_repository.fetch(manual_id)
-  end
-
-  def manual
-    ManualForm.new(parent_manual)
-  end
-
-  def document
-    @document ||= ManualDocumentForm.new(parent_manual, parent_manual.documents.find { |d| d.id == document_id })
-  end
-
-  def existing_attachment
-    document.find_attachment_by_id(attachment_id)
-  end
-
-  def attachment_id
-    params.fetch(:id)
-  end
-
-  def uploaded_filename
-    params
-      .fetch(:attachment)
-      .fetch(:file)
-      .original_filename
-  end
-
-  def manual_id
-    params.fetch("manual_id")
-  end
-
-  def document_id
-    params.fetch("document_id")
   end
 end

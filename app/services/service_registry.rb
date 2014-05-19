@@ -113,6 +113,36 @@ class ServiceRegistry
     )
   end
 
+  def create_manual_document_attachment(context)
+    CreateManualDocumentAttachmentService.new(
+      manual_repository(context),
+      context,
+    )
+  end
+
+  def update_manual_document_attachment(context)
+    UpdateManualDocumentAttachmentService.new(
+      manual_repository(context),
+      context,
+    )
+  end
+
+  def show_manual_document_attachment(context)
+    ShowManualDocumentAttachmentService.new(
+      manual_repository(context),
+      context,
+    )
+  end
+
+  def new_manual_document_attachment(context)
+    NewManualDocumentAttachmentService.new(
+      manual_repository(context),
+      # TODO: This be should be created from the document or just be a form object
+      Attachment.method(:new),
+      context,
+    )
+  end
+
   private
 
   def manual_repository(context)
