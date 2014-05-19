@@ -1,18 +1,42 @@
-<h1 class="page-header">Your manuals</h1>
+<div class="manual-header">
+  <h1 class="page-header">
+    Manuals <small>(<%= manuals.count %>)</small>
+  </h1>
+
+  <div class="actions">
+    <%= link_to "Create new manual", new_manual_path, class: 'btn btn-success' %>
+  </div>
+  <div class="clearfix"></div>
+</div>
 
 <div class="row">
-  <div class="sidebar col-md-3">
-    <%= link_to "Create new manual", new_manual_path, class: 'btn btn-default' %>
-  </div>
-
-  <div class="col-md-9">
-    <ul class="document-list">
-      <% manuals.each do |manual| %>
-        <li class="document">
-          <%= link_to manual.title, manual_path(manual), class: 'document-title' %>
-          - Last updated: <%= manual.updated_at.strftime('%e/%m/%y %R') %>
-        </li>
-      <% end %>
-    </ul>
+  <div class="col-md-12">
+    <table class="document-list table">
+      <thead>
+        <th>
+          Title
+        </th>
+        <th>
+          Updated
+        </th>
+        <th>
+        </th>
+      </thead>
+      <tbody>
+        <% manuals.each do |manual| %>
+          <tr>
+            <td>
+              <%= link_to manual.title, manual_path(manual), class: 'document-title' %>
+            </td>
+            <td>
+              <%= time_ago_in_words(manual.updated_at) %>
+            </td>
+            <td>
+              <%= link_to 'Edit', edit_manual_path(manual) %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
   </div>
 </div>

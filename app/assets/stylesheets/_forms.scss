@@ -40,11 +40,16 @@ form {
   .preview {
     border: 1px solid $border-colour;
     padding: $gutter-half;
+    margin: 20px 0 0 0;
 
     .visuallyhidden {
       position: absolute;
       left: -9999em;
     }
+  }
+
+  .actions {
+    margin: 20px 0;
   }
 }
 

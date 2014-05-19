@@ -17,10 +17,13 @@
     <%= f.text_area :summary, class: 'short-textarea' %>
     <%= f.text_area :body %>
 
+    <div class="preview_button"></div>
     <div class="preview_container" style="display: none;"></div>
 
-    <button name='draft'>Save as draft</button>
-    <button name='publish'>Save and publish</button>
+    <div class="actions">
+      <button name='draft' class="btn btn-success">Save as draft</button>
+      <button name='publish' class="btn btn-danger">Save and publish</button>
+    </div>
   <% end %>
 </div>
 
@@ -50,6 +53,7 @@
   window.SpecialistDocument.addPreviewFeature({
     'url'             : '<%= preview_manual_document_path(manual, document) %>',
     'insert_into'     : '.preview_container',
+    'insert_button'   : '.preview_button',
     'render_to'       : '.preview .govspeak',
     'data_target'     : function() {
                           return {
