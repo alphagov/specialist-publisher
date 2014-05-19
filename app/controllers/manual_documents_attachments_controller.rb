@@ -32,8 +32,6 @@ class ManualDocumentsAttachmentsController < ApplicationController
     if attachment.persisted?
       redirect_to(edit_manual_document_path(manual, document))
     else
-      @attachment = attachment
-
       render(:edit, locals: {
         manual: ManualForm.new(manual),
         document: ManualDocumentForm.new(manual, document),
