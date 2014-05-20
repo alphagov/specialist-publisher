@@ -53,15 +53,28 @@ SpecialistPublisherWiring = DependencyContainer.new do
 
   define_factory(:manual_repository_factory) {
     ->(organisation_slug) {
-      ManualRepository.new(
+      get(:plain_manual_repository_factory).call(
+        organisation_slug: organisation_slug,
         association_marshallers: [
           DocumentAssociationMarshaller.new(
             document_repository: get(:manual_document_repository),
             decorator: ManualWithDocuments.method(:new),
           ),
         ],
-        factory: Manual.method(:new),
-        collection: ManualRecord.find_by_organisation(organisation_slug),
+      )
+    }
+  }
+
+  define_factory(:plain_manual_repository_factory) {
+    ->(dependencies) {
+      ManualRepository.new(
+        {
+          association_marshallers: [],
+          factory: Manual.method(:new),
+          collection: ManualRecord.find_by_organisation(
+            dependencies.fetch(:organisation_slug)
+          ),
+        }.merge(dependencies.except(:organisation_slug))
       )
     }
   }
@@ -228,6 +241,7 @@ SpecialistPublisherWiring = DependencyContainer.new do
       document_renderer: get(:specialist_document_renderer),
 
       manual_repository_factory: get(:manual_repository_factory),
+      plain_manual_repository_factory: get(:plain_manual_repository_factory),
       manual_document_builder: get(:manual_document_builder),
     )
   }

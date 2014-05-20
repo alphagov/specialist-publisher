@@ -18,6 +18,7 @@ class ServiceRegistry
     @withdrawal_listeners = dependencies.fetch(:withdrawal_listeners)
     @document_renderer = dependencies.fetch(:document_renderer)
     @manual_repository_factory = dependencies.fetch(:manual_repository_factory)
+    @plain_manual_repository_factory = dependencies.fetch(:plain_manual_repository_factory)
     @manual_document_builder = dependencies.fetch(:manual_document_builder)
   end
 
@@ -44,7 +45,7 @@ class ServiceRegistry
   end
 
   def show_document(context)
-    ShowDocument.new(
+    ShowDocumentService.new(
       document_repository,
       context,
     )
@@ -109,6 +110,35 @@ class ServiceRegistry
     ShowDocumentAttachmentService.new(
       document_repository,
       context,
+    )
+  end
+
+  def list_manuals(context)
+    ListManualsService.new(
+      manual_repository: manual_repository(context),
+      context: context,
+    )
+  end
+
+  def create_manual(context)
+    CreateManualService.new(
+      manual_repository: plain_manual_repository(context),
+      manual_builder: manual_builder,
+      context: context,
+    )
+  end
+
+  def update_manual(context)
+    UpdateManualService.new(
+      manual_repository: plain_manual_repository(context),
+      context: context,
+    )
+  end
+
+  def show_manual(context)
+    ShowManualService.new(
+      manual_repository: manual_repository(context),
+      context: context,
     )
   end
 
@@ -178,6 +208,26 @@ class ServiceRegistry
     manual_repository_factory.call(context.current_organisation_slug)
   end
 
+  def plain_manual_repository(context)
+    plain_manual_repository_factory.call(
+      organisation_slug: context.current_organisation_slug,
+    )
+  end
+
+  def manual_builder
+    ->(attrs) {
+      default = {
+        id: SecureRandom.uuid,
+        title: "",
+        summary: "",
+        organisation_slug: "",
+        updated_at: "",
+      }
+
+      Manual.new(default.merge(attrs))
+    }
+  end
+
   attr_reader(
     :document_builder,
     :document_repository,
@@ -187,6 +237,7 @@ class ServiceRegistry
     :document_renderer,
 
     :manual_repository_factory,
+    :plain_manual_repository_factory,
     :manual_document_builder,
   )
 end

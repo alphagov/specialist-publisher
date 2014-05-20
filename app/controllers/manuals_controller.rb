@@ -1,65 +1,58 @@
 class ManualsController < ApplicationController
   def index
+    all_manuals = services.list_manuals(self).call
+
     render(:index, locals: { manuals: all_manuals })
   end
 
   def show
-    render(:show, locals: { manual: current_manual })
+    manual = services.show_manual(self).call
+
+    render(:show, locals: { manual: manual })
   end
 
   def new
-    render(:new, locals: { manual: manual_form })
+    # manual = services.new_manual(self).call
+    manual = nil
+
+    render(:new, locals: { manual: manual_form(manual) })
   end
 
   def create
-    save_manual
+    manual = services.create_manual(self).call
+    manual = manual_form(manual)
+
+    if manual.valid?
+      redirect_to(manual_path(manual))
+    else
+      render(:new, locals: {
+        manual: manual,
+      })
+    end
   end
 
   def edit
-    render(:edit, locals: { manual: manual_form(current_manual) })
+    manual = services.show_manual(self).call
+
+    render(:edit, locals: { manual: manual_form(manual) })
   end
 
   def update
-    save_manual(current_manual)
+    manual = services.update_manual(self).call
+    manual = manual_form(manual)
+
+    if manual.valid?
+      redirect_to(manual_path(manual))
+    else
+      render(:edit, locals: {
+        manual: manual,
+      })
+    end
   end
 
 private
-  def all_manuals
-    manual_repository.all
-  end
 
-  def current_manual
-    manual_repository.fetch(params[:id])
-  end
-
-  def manual_form(manual = nil)
+  def manual_form(manual)
     ManualForm.new(manual)
-  end
-
-  def manual_params
-    form_params.merge(organisation_slug: current_user.organisation_slug)
-  end
-
-  def form_params
-    params.fetch(:manual, {})
-  end
-
-  def store(manual)
-    manual_repository.store(manual)
-  end
-
-  def save_manual(manual = nil)
-    manual = manual_form(manual)
-    manual.update(manual_params)
-
-    if manual.valid? && store(manual)
-      redirect_to manual_path(manual)
-    else
-      if manual.persisted?
-        render(:edit, locals: {manual: manual})
-      else
-        render(:new, locals: {manual: manual})
-      end
-    end
   end
 end

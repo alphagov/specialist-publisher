@@ -1,17 +1,17 @@
-class ShowDocument
+class ShowDocumentService
 
-  def initialize(documents_repository, context)
-    @documents_repository = documents_repository
+  def initialize(document_repository, context)
+    @document_repository = document_repository
     @context = context
   end
 
   def call
-    documents_repository.fetch(document_id)
+    document_repository.fetch(document_id)
   end
 
   private
 
-  attr_reader :documents_repository, :context
+  attr_reader :document_repository, :context
 
   def document_id
     context.params.fetch("id")
