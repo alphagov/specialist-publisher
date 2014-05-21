@@ -24,6 +24,7 @@ class ManualRepository
 
   def [](manual_id)
     manual_record = collection.find_by(manual_id: manual_id)
+    return nil unless manual_record
 
     build_manual_for(manual_record)
   end
