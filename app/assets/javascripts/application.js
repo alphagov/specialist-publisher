@@ -2,6 +2,7 @@
 //= require vendor/bootstrap
 //= require govuk_toolkit
 //= require ajax_setup
+//= require length_counter
 //= require specialist_documents
 
 function initPrimaryLinks(){
@@ -9,3 +10,9 @@ function initPrimaryLinks(){
 }
 $(initPrimaryLinks);
 $(window).on('displayPreviewDone', initPrimaryLinks);
+
+jQuery(function($) {
+  $(".js-length-counter").each(function(){
+    new GOVUK.LengthCounter({$el:$(this)});
+  })
+});

@@ -14,7 +14,8 @@
     <% end %>
 
     <%= f.text_field :title %>
-    <%= f.text_area :summary, class: 'short-textarea' %>
+    <%= f.text_area :summary, class: 'short-textarea js-length-counter', data: { :"count-message-threshold" => 280, :"count-message-selector" => ".summary-length-info" } %>
+    <div class="summary-length-info warning" aria-live="polite">Summary text should be 280 characters or fewer. <span class="count"></span></div>
     <%= f.text_area :body %>
 
     <div class="preview_button"></div>
