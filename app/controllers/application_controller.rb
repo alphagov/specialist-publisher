@@ -9,11 +9,20 @@ class ApplicationController < ActionController::Base
 
   protect_from_forgery with: :exception
 
-  SpecialistPublisherWiring.inject_into(self)
+  def finder_schema
+    SpecialistPublisherWiring.get(:finder_schema)
+  end
   helper_method :finder_schema
 
+  def url_maker
+    SpecialistPublisherWiring.get(:url_maker)
+  end
   def_delegators :url_maker, :published_specialist_document_path
   helper_method :published_specialist_document_path
+
+  def services
+    SpecialistPublisherWiring.get(:services)
+  end
 
   def user_can_edit_documents?
     current_user.organisation_slug == 'competition-and-markets-authority'

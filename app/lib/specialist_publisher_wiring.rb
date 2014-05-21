@@ -18,6 +18,22 @@ require "marshallers/document_association_marshaller"
 $LOAD_PATH.unshift(File.expand_path("../..", "app/services"))
 
 SpecialistPublisherWiring = DependencyContainer.new do
+
+  define_factory(:services) {
+    ServiceRegistry.new(
+      document_builder: get(:specialist_document_builder),
+      document_repository: get(:specialist_document_repository),
+      publication_listeners: get(:specialist_document_publication_observers),
+      creation_listeners: get(:specialist_document_creation_observers),
+      withdrawal_listeners: get(:specialist_document_withdrawal_observers),
+      document_renderer: get(:specialist_document_renderer),
+
+      manual_repository_factory: get(:manual_repository_factory),
+      plain_manual_repository_factory: get(:plain_manual_repository_factory),
+      manual_document_builder: get(:manual_document_builder),
+    )
+  }
+
   define_instance(:specialist_document_editions) { SpecialistDocumentEdition }
   define_instance(:artefacts) { Artefact }
   define_instance(:panopticon_mappings) { PanopticonMapping }
@@ -229,21 +245,6 @@ SpecialistPublisherWiring = DependencyContainer.new do
   define_singleton(:url_maker) {
     require "url_maker"
     UrlMaker.new(plek: get(:plek))
-  }
-
-  define_factory(:services) {
-    ServiceRegistry.new(
-      document_builder: get(:specialist_document_builder),
-      document_repository: get(:specialist_document_repository),
-      publication_listeners: get(:specialist_document_publication_observers),
-      creation_listeners: get(:specialist_document_creation_observers),
-      withdrawal_listeners: get(:specialist_document_withdrawal_observers),
-      document_renderer: get(:specialist_document_renderer),
-
-      manual_repository_factory: get(:manual_repository_factory),
-      plain_manual_repository_factory: get(:plain_manual_repository_factory),
-      manual_document_builder: get(:manual_document_builder),
-    )
   }
 
   define_factory(:manual_document_builder) {
