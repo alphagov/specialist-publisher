@@ -12,6 +12,7 @@ Then(/^the manual should exist$/) do
 end
 
 Given(/^a draft manual exists$/) do
+  @manual_slug = "manuals/example-manual-title"
   @manual_fields = {
     title: 'Example Manual Title',
     summary: 'Nullam quis risus eget urna mollis ornare vel eu leo.',
@@ -65,12 +66,13 @@ Then(/^I see the new page$/) do
 end
 
 Given(/^a draft document exists for the manual$/) do
-  @document_title = 'Section 1'
+  @document_title = "Section 1"
+  @document_slug = "manual/example-manual-title/secton-1"
 
   @document_fields = {
     title: @document_title,
-    summary: 'Section 1 summary',
-    body: 'Section 1 body',
+    summary: "Section 1 summary",
+    body: "Section 1 body",
   }
 
   create_manual_document(@manual_fields.fetch(:title), @document_fields)
@@ -115,4 +117,42 @@ Then(/^I see errors for the document fields$/) do
     expect(page).to have_content("#{field} can't be blank")
   end
   expect(page).not_to have_content('Add attachment')
+end
+
+When(/^I publish the manual$/) do
+  click_on "Publish"
+end
+
+Then(/^the manual and its documents are published$/) do
+  check_manual_and_documents_were_published(
+    @manual_slug,
+    @manual_fields,
+    @document_slug,
+    @document_fields,
+  )
+end
+
+Given(/^a published manual exists$/) do
+  @manual_title = "Example Manual Title"
+  @manual_slug = "manuals/example-manual-title"
+
+  @manual_fields = {
+    title: @manual_title,
+    summary: 'Nullam quis risus eget urna mollis ornare vel eu leo.',
+  }
+
+  create_manual(@manual_fields)
+
+  @document_title = 'Section 1'
+  @document_fields = {
+    title: @document_title,
+    summary: 'Section 1 summary',
+    body: 'Section 1 body',
+  }
+
+  create_manual_document(@manual_title, @document_fields)
+end
+
+When(/^I edit the manual's documents$/) do
+  pending # express the regexp above with the code you wish you had
 end

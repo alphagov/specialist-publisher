@@ -62,4 +62,24 @@ module ManualHelpers
     visit manuals_path
     click_link manual_title
   end
+
+  def check_manual_and_documents_were_published(manual_slug, manual_attrs, document_slug, document_attrs)
+    expect(fake_panopticon).to have_received(:put_artifact!)
+      .with(
+        panopticon_id_for_slug(manual_slug),
+        hash_including(
+          name: manual_attrs.fetch(:title),
+          slug: manual_attrs.fetch(:slug),
+        )
+      )
+
+    expect(fake_panopticon).to have_received(:put_artifact!)
+      .with(
+        panopticon_id_for_slug(document_slug),
+        hash_including(
+          name: document_.fetch(:title),
+          slug: manual_attrs.fetch(:slug),
+        )
+      )
+  end
 end

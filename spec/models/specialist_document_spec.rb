@@ -313,6 +313,12 @@ describe SpecialistDocument do
         expect(draft_edition_v2).to have_received(:publish)
       end
 
+      it "archives the previous edition" do
+        doc.publish!
+
+        expect(published_edition_v1).to have_received(:archive)
+      end
+
       context "when the published edition is exposed" do
         it "should raise an exception" do
           expect {

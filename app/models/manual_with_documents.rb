@@ -14,4 +14,13 @@ class ManualWithDocuments < SimpleDelegator
   def add_document(document)
     @documents << document
   end
+
+  def publish
+    manual.publish do
+      documents.each(&:publish)
+    end
+  end
+
+  private
+  attr_reader :manual
 end

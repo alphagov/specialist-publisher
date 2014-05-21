@@ -13,6 +13,8 @@ SpecialistPublisher::Application.routes.draw do
       resources :attachments, controller: "ManualDocumentsAttachments", only: [:new, :create, :edit, :update]
       post :preview, on: :member
     end
+
+    post :publish, on: :member
   end
 
   root to: redirect('/manuals')
