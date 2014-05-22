@@ -5,3 +5,7 @@ end
 require "pry"
 require "awesome_print"
 require "active_support/core_ext/hash"
+
+# RSpec.configure do |config|
+#   config.disable_monkey_patching!
+# end
