@@ -131,29 +131,29 @@ describe SpecialistDocumentRepository do
   end
 
   describe "#store(document)" do
-    context "with an invalid document" do
-      before do
-        allow(new_draft_edition).to receive(:save!).and_return(false)
+    context "with a valid editions" do
+      let(:previous_edition) { build_published_edition(version:1) }
+      let(:current_published_edition) { build_published_edition(version:2) }
+
+      let(:editions) {
+        [
+          previous_edition,
+          current_published_edition,
+          new_draft_edition,
+        ]
+      }
+
+      it "returns self" do
+        expect(specialist_document_repository.store(document)).to be(
+          specialist_document_repository
+        )
       end
 
-      it "returns false" do
-        expect(specialist_document_repository.store(document)).to be false
-      end
-    end
-
-    context "with a valid document" do
-      let(:previous_edition) { published_edition }
-
-      let(:editions) { [previous_edition, new_draft_edition] }
-
-      it "returns true" do
-        expect(specialist_document_repository.store(document)).to be true
-      end
-
-      it "only saves the latest edition" do
+      it "saves the the two most recent editions" do
         specialist_document_repository.store(document)
 
         expect(new_draft_edition).to have_received(:save!)
+        expect(current_published_edition).to have_received(:save!)
         expect(previous_edition).not_to have_received(:save!)
       end
     end

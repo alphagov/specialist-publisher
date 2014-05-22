@@ -3,7 +3,6 @@ class PublishDocumentService
     @document_repository = document_repository
     @listeners = listeners
     @context = context
-    @document_previously_published = document.published?
   end
 
   def call

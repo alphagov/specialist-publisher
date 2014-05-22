@@ -45,9 +45,12 @@ class SpecialistDocumentRepository
   end
 
   def store(document)
-    edition = document.exposed_edition
+    # This actually isn't necessary because only the latest edition ever changes
+    # I think it's safer to perform the save anyway as there is potential for
+    # the previous editions to change
+    document.editions.last(2).each(&:save!)
 
-    edition.save!
+    self
   end
 
   NotFound = Class.new(StandardError)

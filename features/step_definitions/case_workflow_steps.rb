@@ -21,3 +21,7 @@ end
 Then(/^the amended CMA case should be published$/) do
   check_for_published_document_with(@amended_document_attributes)
 end
+
+Then(/^previous editions should be archived$/) do
+  check_for_correctly_archived_editions(@amended_document_attributes)
+end

@@ -23,3 +23,4 @@ Feature: Publishing a CMA case
     When I publish a new CMA case
     And I edit it and republish
     Then the amended CMA case should be published
+    And previous editions should be archived
