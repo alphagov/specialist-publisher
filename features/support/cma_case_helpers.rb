@@ -151,7 +151,7 @@ module CmaCaseHelpers
     page.all(".slug span").last.text
   end
 
-  def check_cma_case_is_published(title)
+  def check_cma_case_is_published(slug, title)
     published_cma_case = RenderedSpecialistDocument.where(title: title).first
 
     expect(published_cma_case).not_to be_nil
@@ -159,8 +159,8 @@ module CmaCaseHelpers
     check_rendered_document_contains_html(published_cma_case)
     check_rendered_document_contains_header_meta_data(published_cma_case)
 
-    check_published_with_panopticon(title)
-    check_added_to_finder_api(title)
+    check_published_with_panopticon(slug, title)
+    check_added_to_finder_api(slug, title)
   end
 
   def check_for_published_document_with(attrs)
@@ -172,16 +172,20 @@ module CmaCaseHelpers
     end
   end
 
-  def check_published_with_panopticon(title)
-    # TODO: properly test that the received panopticon id is correct
+  def check_published_with_panopticon(slug, title)
+    panopticon_id = panopticon_id_for_slug(slug)
+
     expect(fake_panopticon).to have_received(:put_artefact!)
-      .with(anything, hash_including(name: title, state: "live"))
+      .with(panopticon_id, hash_including(
+        slug: slug,
+        name: title,
+        state: "live",
+      ))
   end
 
-  def check_added_to_finder_api(title)
-    # TODO: properly test that the received panopticon id is correct
+  def check_added_to_finder_api(slug, title)
     expect(finder_api).to have_received(:notify_of_publication)
-      .with(anything, hash_including(title: title))
+      .with(slug, hash_including(title: title))
   end
 
   def check_rendered_document_contains_html(document)
@@ -229,10 +233,11 @@ module CmaCaseHelpers
     click_button 'Withdraw'
   end
 
-  def check_document_is_withdrawn(document_title)
-    # TODO: properly test that the received panopticon id is correct
+  def check_document_is_withdrawn(slug, document_title)
+    panopticon_id = panopticon_id_for_slug(slug)
+
     expect(fake_panopticon).to have_received(:put_artefact!)
-      .with(anything, hash_including(
+      .with(panopticon_id, hash_including(
         name: document_title,
         state: "archived",
       ))

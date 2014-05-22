@@ -3,5 +3,5 @@ When(/^I withdraw a CMA case$/) do
 end
 
 Then(/^the CMA case should be withdrawn$/) do
-  check_document_is_withdrawn(@cma_fields.fetch(:title))
+  check_document_is_withdrawn(@slug, @cma_fields.fetch(:title))
 end

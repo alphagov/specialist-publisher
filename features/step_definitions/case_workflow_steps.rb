@@ -10,7 +10,7 @@ When(/^I publish the CMA case$/) do
 end
 
 Then(/^the CMA case should be published$/) do
-  check_cma_case_is_published(@cma_fields.fetch(:title))
+  check_cma_case_is_published(@slug, @cma_fields.fetch(:title))
 end
 
 When(/^I edit it and republish$/) do
