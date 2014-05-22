@@ -1,4 +1,3 @@
-require "gds_api/panopticon"
 require "fetchable"
 
 class SpecialistDocumentRepository
@@ -51,17 +50,6 @@ class SpecialistDocumentRepository
     document.editions.last(2).each(&:save!)
 
     self
-  end
-
-  NotFound = Class.new(StandardError)
-
-  class InvalidDocumentError < StandardError
-    def initialize(message, document)
-      super(message)
-      @document = document
-    end
-
-    attr_reader :document
   end
 
 private
