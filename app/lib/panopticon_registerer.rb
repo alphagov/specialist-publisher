@@ -1,23 +1,23 @@
 class PanopticonRegisterer
-  def initialize(api, mappings, document)
-    @api = api
-    @mappings = mappings
-    @document = document
+  def initialize(dependencies)
+    @api = dependencies.fetch(:api_client)
+    @mappings = dependencies.fetch(:mappings)
+    @artefact = dependencies.fetch(:artefact)
   end
 
   def call
     if mapping
       notify_of_update
     else
-      register_new_document
+      register_new_artefact
     end
   end
 
   private
 
-  attr_reader :api, :mappings, :document
+  attr_reader :api, :mappings, :artefact
 
-  def register_new_document
+  def register_new_artefact
     response = api.create_artefact!(artefact_attributes)
 
     save_new_mapping(response)
@@ -27,39 +27,26 @@ class PanopticonRegisterer
     api.put_artefact!(mapping.panopticon_id, artefact_attributes)
   end
 
-  def mapping
-    @mapping ||= mappings.where(document_id: document.id).last
-  end
-
   def save_new_mapping(response)
     mappings.create!(
-      document_id: document.id,
-      panopticon_id: response["id"],
-      slug: document.slug,
+      resource_id: artefact.resource_id,
+      resource_type: artefact.kind,
+      slug: artefact.slug,
+      panopticon_id: response.fetch("id"),
     )
   end
 
-  def artefact_state
-    state_mapping.fetch(document.publication_state)
-  end
-
-  def state_mapping
-    {
-      "published"   => "live",
-      "draft"       => "draft",
-      "withdrawn"   => "archived",
-    }
-  end
-
   def artefact_attributes
-    {
-      name: document.title,
-      slug: document.slug,
-      kind: 'specialist-document',
-      owning_app: 'specialist-publisher',
-      rendering_app: 'specialist-frontend',
-      paths: ["/#{document.slug}"],
-      state: artefact_state,
-    }
+    artefact.attributes.merge(
+      owning_app: owning_app,
+    )
+  end
+
+  def mapping
+    @mapping ||= mappings.where(resource_id: artefact.resource_id).last
+  end
+
+  def owning_app
+    "specialist-publisher"
   end
 end

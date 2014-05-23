@@ -228,7 +228,8 @@ module CmaCaseHelpers
       )
 
       PanopticonMapping.create!(
-        document_id: doc.id,
+        resource_type: "specialist-document",
+        resource_id: doc.id,
         panopticon_id: SecureRandom.hex,
       )
 
