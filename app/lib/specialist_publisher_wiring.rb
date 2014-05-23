@@ -23,7 +23,8 @@ SpecialistPublisherWiring = DependencyContainer.new do
     ObserversRegistry.new(
       document_content_api_exporter: get(:specialist_document_content_api_exporter),
       finder_api_notifier: get(:finder_api_notifier),
-      panopticon_registerer: get(:panopticon_registerer),
+      document_panopticon_registerer: get(:document_panopticon_registerer),
+      manual_panopticon_registerer: get(:manual_panopticon_registerer),
     )
   }
 
@@ -179,7 +180,7 @@ SpecialistPublisherWiring = DependencyContainer.new do
 
   define_singleton(:specialist_document_creation_observers) {
     [
-      get(:panopticon_registerer),
+      get(:document_panopticon_registerer),
     ]
   }
 
@@ -187,17 +188,33 @@ SpecialistPublisherWiring = DependencyContainer.new do
     [
       get(:specialist_document_content_api_withdrawer),
       get(:finder_api_withdrawer),
-      get(:panopticon_registerer),
+      get(:document_panopticon_registerer),
     ]
   }
 
   define_factory(:panopticon_registerer) {
-    ->(document) {
+    ->(artefact) {
       PanopticonRegisterer.new(
-        get(:panopticon_api),
-        get(:panopticon_mappings),
-        document,
+        api_client: get(:panopticon_api),
+        mappings: get(:panopticon_mappings),
+        artefact: artefact,
       ).call
+    }
+  }
+
+  define_factory(:document_panopticon_registerer) {
+    ->(document) {
+      get(:panopticon_registerer).call(
+        DocumentArtefactFormatter.new(document)
+      )
+    }
+  }
+
+  define_factory(:manual_panopticon_registerer) {
+    ->(manual) {
+      get(:panopticon_registerer).call(
+        ManualArtefactFormatter.new(manual)
+      )
     }
   }
 
