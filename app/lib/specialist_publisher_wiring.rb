@@ -54,7 +54,7 @@ SpecialistPublisherWiring = DependencyContainer.new do
   define_singleton(:specialist_document_factory) {
     ->(*args) {
       SpecialistDocument.new(
-        get(:slug_generator),
+        get(:cma_slug_generator),
         get(:edition_factory),
         *args,
       )
@@ -122,7 +122,8 @@ SpecialistPublisherWiring = DependencyContainer.new do
     )
   }
 
-  define_instance(:slug_generator) { SlugGenerator }
+  define_factory(:cma_slug_generator) { SlugGenerator.new("cma-cases") }
+  define_factory(:manual_slug_generator) { SlugGenerator.new("manuals") }
 
   define_instance(:markdown_renderer) {
     SpecialistDocumentAttachmentProcessor.method(:new)
