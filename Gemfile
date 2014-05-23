@@ -46,3 +46,7 @@ group :test do
   gem "poltergeist", "1.5.0"
   gem "webmock", "~> 1.17.4"
 end
+
+group :development, :test do
+  gem "jasmine-rails"
+end
