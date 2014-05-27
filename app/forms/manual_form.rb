@@ -17,6 +17,8 @@ class ManualForm
       @summary = manual.summary
       @organisation_slug = manual.organisation_slug
     end
+
+    @state ||= "draft"
   end
 
   def self.model_name
@@ -39,10 +41,6 @@ class ManualForm
 
   def to_param
     id
-  end
-
-  def documents
-    manual && manual.documents || []
   end
 
 private

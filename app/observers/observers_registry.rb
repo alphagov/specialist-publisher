@@ -5,6 +5,7 @@ class ObserversRegistry
     @finder_api_notifier = dependencies.fetch(:finder_api_notifier)
     @document_panopticon_registerer = dependencies.fetch(:document_panopticon_registerer)
     @manual_panopticon_registerer = dependencies.fetch(:manual_panopticon_registerer)
+    @manual_document_panopticon_registerer = dependencies.fetch(:manual_document_panopticon_registerer)
   end
 
   def document_publication
@@ -21,6 +22,18 @@ class ObserversRegistry
     ]
   end
 
+  def manual_creation
+    [
+      manual_panopticon_registerer,
+    ]
+  end
+
+  def manual_document_creation
+    [
+      manual_document_panopticon_registerer,
+    ]
+  end
+
 
   private
 
@@ -29,5 +42,6 @@ class ObserversRegistry
     :finder_api_notifier,
     :document_panopticon_registerer,
     :manual_panopticon_registerer,
+    :manual_document_panopticon_registerer,
   )
 end

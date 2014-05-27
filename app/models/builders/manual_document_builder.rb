@@ -4,9 +4,9 @@ class ManualDocumentBuilder
   end
 
   def call(attrs)
-    defaults.merge(attrs)
-
-    factory.call(defaults.merge(attrs))
+    # TODO: reverse merge necessary here to retain indifferent access.
+    #       Consider restricting params in service layer and symbolize keys.
+    factory.call(attrs.reverse_merge(defaults))
   end
 
   private

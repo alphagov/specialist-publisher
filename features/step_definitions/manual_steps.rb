@@ -3,12 +3,17 @@ When(/^I create a manual$/) do
     title: 'Example Manual Title',
     summary: 'Nullam quis risus eget urna mollis ornare vel eu leo.',
   }
+  @manual_slug = "manuals/example-manual-title"
 
   create_manual(@manual_fields)
 end
 
 Then(/^the manual should exist$/) do
   check_manual_exists_with(@manual_fields)
+end
+
+Then(/^the manual slug should be reserved$/) do
+  check_manual_slug_is_reserved(@manual_slug)
 end
 
 Given(/^a draft manual exists$/) do
@@ -45,6 +50,7 @@ end
 
 When(/^I create a document for the manual$/) do
   @document_title = 'Section 1'
+  @document_slug = [@manual_slug, 'section-1'].join('/')
 
   @document_fields = {
     title: @document_title,
@@ -55,7 +61,7 @@ When(/^I create a document for the manual$/) do
   create_manual_document(@manual_fields.fetch(:title), @document_fields)
 end
 
-Then(/^I see the manual has the new page$/) do
+Then(/^I see the manual has the new section$/) do
   visit manuals_path
   click_on @manual_fields.fetch(:title)
   expect(page).to have_content(@document_fields.fetch(:title))
@@ -65,9 +71,13 @@ Then(/^I see the new page$/) do
   expect(page).to have_content(@document_fields.fetch(:title))
 end
 
+Then(/^the manual section slug should be reserved$/) do
+  check_manual_document_slug_is_reserved(@document_slug)
+end
+
 Given(/^a draft document exists for the manual$/) do
   @document_title = "Section 1"
-  @document_slug = "manual/example-manual-title/secton-1"
+  @document_slug = "manuals/example-manual-title/section-1"
 
   @document_fields = {
     title: @document_title,

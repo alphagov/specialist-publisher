@@ -4,6 +4,7 @@ class ManualRecord
 
   field :manual_id, type: String
   field :organisation_slug, type: String
+  field :slug, type: String
 
   embeds_many :editions,
     class_name: 'ManualRecord::Edition',

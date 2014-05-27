@@ -9,6 +9,7 @@ Feature: Creating and editing a manual
   Scenario: Create a new manual
     When I create a manual
     Then the manual should exist
+    And the manual slug should be reserved
 
   Scenario: Edit a draft manual
     Given a draft manual exists
@@ -34,7 +35,8 @@ Feature: Creating and editing a manual
   Scenario: Add a document to a manual
     Given a draft manual exists
     When I create a document for the manual
-    Then I see the manual has the new page
+    Then I see the manual has the new section
+    And the manual section slug should be reserved
 
   Scenario: Edit a draft document on a manual
     Given a draft manual exists

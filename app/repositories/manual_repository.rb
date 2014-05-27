@@ -11,6 +11,8 @@ class ManualRepository
 
   def store(manual)
     manual_record = collection.find_or_initialize_by(manual_id: manual.id)
+    # TODO: slug must not change after publication
+    manual_record.slug = manual.slug
     manual_record.organisation_slug = manual.organisation_slug
     edition = manual_record.new_or_existing_draft_edition
     edition.attributes = attributes_for(manual)
@@ -50,9 +52,11 @@ private
 
     base_manual = factory.call(
       id: manual_record.manual_id,
+      slug: manual_record.slug,
       title: edition.title,
       summary: edition.summary,
       organisation_slug: manual_record.organisation_slug,
+      state: edition.state,
       updated_at: edition.updated_at,
     )
 

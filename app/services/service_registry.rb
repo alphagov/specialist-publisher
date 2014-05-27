@@ -19,6 +19,7 @@ class ServiceRegistry
     @manual_repository_factory = dependencies.fetch(:manual_repository_factory)
     @plain_manual_repository_factory = dependencies.fetch(:plain_manual_repository_factory)
     @manual_document_builder = dependencies.fetch(:manual_document_builder)
+    @manual_builder = dependencies.fetch(:manual_builder)
 
     @observers = dependencies.fetch(:observers)
   end
@@ -125,6 +126,7 @@ class ServiceRegistry
     CreateManualService.new(
       manual_repository: plain_manual_repository(context),
       manual_builder: manual_builder,
+      listeners: observers.manual_creation,
       context: context,
     )
   end
@@ -153,9 +155,10 @@ class ServiceRegistry
 
   def create_manual_document(context)
     CreateManualDocumentService.new(
-      manual_repository(context),
-      manual_document_builder,
-      context,
+      manual_repository: manual_repository(context),
+      manual_document_builder: manual_document_builder,
+      listeners: observers.manual_document_creation,
+      context: context,
     )
   end
 
@@ -223,20 +226,6 @@ class ServiceRegistry
     )
   end
 
-  def manual_builder
-    ->(attrs) {
-      default = {
-        id: SecureRandom.uuid,
-        title: "",
-        summary: "",
-        organisation_slug: "",
-        updated_at: "",
-      }
-
-      Manual.new(default.merge(attrs))
-    }
-  end
-
   attr_reader(
     :observers,
     :document_builder,
@@ -248,5 +237,6 @@ class ServiceRegistry
     :manual_repository_factory,
     :plain_manual_repository_factory,
     :manual_document_builder,
+    :manual_builder,
   )
 end

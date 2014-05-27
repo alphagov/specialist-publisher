@@ -63,22 +63,42 @@ module ManualHelpers
     click_link manual_title
   end
 
+  def check_manual_slug_is_reserved(slug)
+    expect(fake_panopticon).to have_received(:create_artefact!)
+      .with(
+        hash_including(
+          slug: slug,
+        )
+      )
+  end
+
+  def check_manual_document_slug_is_reserved(slug)
+    expect(fake_panopticon).to have_received(:create_artefact!)
+      .with(
+        hash_including(
+          slug: slug,
+        )
+      )
+  end
+
   def check_manual_and_documents_were_published(manual_slug, manual_attrs, document_slug, document_attrs)
-    expect(fake_panopticon).to have_received(:put_artifact!)
+    expect(fake_panopticon).to have_received(:put_artefact!)
       .with(
         panopticon_id_for_slug(manual_slug),
         hash_including(
           name: manual_attrs.fetch(:title),
-          slug: manual_attrs.fetch(:slug),
+          slug: manual_slug,
+          state: "live",
         )
       )
 
-    expect(fake_panopticon).to have_received(:put_artifact!)
+    expect(fake_panopticon).to have_received(:put_artefact!)
       .with(
         panopticon_id_for_slug(document_slug),
         hash_including(
-          name: document_.fetch(:title),
-          slug: manual_attrs.fetch(:slug),
+          name: document_attrs.fetch(:title),
+          slug: document_slug,
+          state: "live",
         )
       )
   end

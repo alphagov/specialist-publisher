@@ -1,6 +1,7 @@
 class Manual
   attr_reader(
     :id,
+    :slug,
     :title,
     :summary,
     :organisation_slug,
@@ -20,6 +21,7 @@ class Manual
   end
 
   def update(attributes)
+    @slug = attributes.fetch(:slug, nil)
     @title = attributes.fetch(:title, nil)
     @summary = attributes.fetch(:summary, nil)
     @organisation_slug = attributes.fetch(:organisation_slug, nil)
