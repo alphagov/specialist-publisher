@@ -6,7 +6,7 @@ class DocumentAssociationMarshaller
 
   def load(entity, record)
     docs = Array(record.document_ids).map { |doc_id|
-      document_repository.fetch(doc_id)
+      document_repository.call(entity).fetch(doc_id)
     }
 
     decorator.call(entity, documents: docs)
@@ -14,7 +14,7 @@ class DocumentAssociationMarshaller
 
   def dump(entity, record)
     entity.documents.each do |document|
-      document_repository.store(document)
+      document_repository.call(entity).store(document)
     end
 
     record.document_ids = entity.documents.map { |d| d.id }

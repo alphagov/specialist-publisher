@@ -1,9 +1,10 @@
 require "delegate"
 
 class ManualWithDocuments < SimpleDelegator
-  def initialize(manual, attrs)
+  def initialize(document_builder, manual, attrs)
     @manual = manual
     @documents = attrs.fetch(:documents)
+    @document_builder = document_builder
     super(manual)
   end
 
@@ -12,21 +13,10 @@ class ManualWithDocuments < SimpleDelegator
   end
 
   def build_document(attributes)
-
-    document_factory_factory(manual)
-
-    document = SpecialistDocument.new(
-      SlugGenerator.new(prefix: slug),
-      SpecialistPublisherWiring.get(:edition_factory),
-      SecureRandom.uuid,
-      [],
-    ).update( attributes.reverse_merge(
-      document_type: "manual",
-      opened_date: Date.parse('1/04/2014'),
-      market_sector: 'manual',
-      case_type: 'manual',
-      case_state: 'manual',
-    ))
+    document = document_builder.call(
+      self,
+      attributes
+    )
 
     add_document(document)
 
@@ -40,7 +30,7 @@ class ManualWithDocuments < SimpleDelegator
   end
 
   private
-  attr_reader :manual
+  attr_reader :document_builder, :manual
 
   def add_document(document)
     @documents << document
