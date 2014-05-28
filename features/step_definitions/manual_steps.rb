@@ -154,6 +154,7 @@ Given(/^a published manual exists$/) do
   create_manual(@manual_fields)
 
   @document_title = 'Section 1'
+  @document_slug = [@manual_slug, "section-1"].join("/")
   @document_fields = {
     title: @document_title,
     summary: 'Section 1 summary',
@@ -164,5 +165,10 @@ Given(/^a published manual exists$/) do
 end
 
 When(/^I edit the manual's documents$/) do
-  pending # express the regexp above with the code you wish you had
+  @updated_document_fields = {
+    summary: "Updated section",
+    body: "Updated section",
+  }
+
+  edit_manual_document(@manual_title, @document_title, @updated_document_fields)
 end
