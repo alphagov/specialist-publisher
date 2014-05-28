@@ -170,5 +170,7 @@ When(/^I edit the manual's documents$/) do
     body: "Updated section",
   }
 
+  @document_fields = @document_fields.merge(@updated_document_fields)
+
   edit_manual_document(@manual_title, @document_title, @updated_document_fields)
 end

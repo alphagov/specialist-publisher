@@ -164,12 +164,9 @@ module CmaCaseHelpers
   end
 
   def check_for_published_document_with(attrs)
-    published_document = RenderedSpecialistDocument.where(attrs).first
-    expect(published_document).not_to be_nil
-
-    attrs.each do |attr_name, value|
-      expect(published_document.public_send(attr_name)).to eq(value)
-    end
+    expect(
+      RenderedSpecialistDocument.where(attrs)
+    ).not_to be_empty
   end
 
   def check_published_with_panopticon(slug, title)

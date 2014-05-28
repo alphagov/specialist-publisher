@@ -13,6 +13,7 @@ require "finder_api_notifier"
 require "finder_api"
 require "validators/slug_uniqueness_validator"
 require "marshallers/document_association_marshaller"
+require "manual_link_list_body_renderer"
 
 $LOAD_PATH.unshift(File.expand_path("../..", "app/services"))
 
@@ -25,6 +26,7 @@ SpecialistPublisherWiring = DependencyContainer.new do
       document_panopticon_registerer: get(:document_panopticon_registerer),
       manual_panopticon_registerer: get(:manual_panopticon_registerer),
       manual_document_panopticon_registerer: get(:manual_document_panopticon_registerer),
+      manual_content_api_exporter: get(:manual_and_documents_content_api_exporter),
     )
   }
 
@@ -324,6 +326,63 @@ SpecialistPublisherWiring = DependencyContainer.new do
         doc,
       ).call
     }
+  }
+
+  define_factory(:manual_document_content_api_exporter) {
+    ->(doc) {
+      SpecialistDocumentExporter.new(
+        RenderedSpecialistDocument,
+        get(:specialist_document_renderer),
+        get(:null_finder_schema),
+        doc,
+      ).call
+    }
+  }
+
+  define_factory(:manual_content_api_exporter) {
+    ->(doc) {
+      SpecialistDocumentExporter.new(
+        RenderedSpecialistDocument,
+        get(:manual_renderer),
+        get(:null_finder_schema),
+        doc,
+      ).call
+    }
+  }
+
+  define_factory(:manual_link_list_body_renderer) {
+    ManualLinkListBodyRenderer.method(:new)
+  }
+
+  define_factory(:manual_render_pipeline) {
+    [
+      get(:manual_link_list_body_renderer),
+      get(:specialist_document_govspeak_header_extractor),
+      get(:specialist_document_govspeak_to_html_renderer),
+    ]
+  }
+
+  define_instance(:manual_renderer) {
+    ->(manual) {
+      get(:manual_render_pipeline).reduce(manual) { |manual, next_renderer|
+        next_renderer.call(manual)
+      }
+    }
+  }
+
+  define_factory(:manual_and_documents_content_api_exporter) {
+    ->(manual) {
+
+      get(:manual_content_api_exporter).call(manual)
+
+      manual.documents.each do |exportable|
+        get(:manual_document_content_api_exporter).call(exportable)
+      end
+    }
+  }
+
+  define_factory(:null_finder_schema) {
+    OpenStruct.new(:facets => [])
   }
 
   define_singleton(:http_client) { Faraday }

@@ -6,6 +6,7 @@ class ObserversRegistry
     @document_panopticon_registerer = dependencies.fetch(:document_panopticon_registerer)
     @manual_panopticon_registerer = dependencies.fetch(:manual_panopticon_registerer)
     @manual_document_panopticon_registerer = dependencies.fetch(:manual_document_panopticon_registerer)
+    @manual_content_api_exporter = dependencies.fetch(:manual_content_api_exporter)
   end
 
   def document_publication
@@ -19,6 +20,7 @@ class ObserversRegistry
   def manual_publication
     [
       manual_panopticon_registerer,
+      manual_content_api_exporter,
     ]
   end
 
@@ -43,5 +45,6 @@ class ObserversRegistry
     :document_panopticon_registerer,
     :manual_panopticon_registerer,
     :manual_document_panopticon_registerer,
+    :manual_content_api_exporter,
   )
 end

@@ -81,25 +81,31 @@ module ManualHelpers
       )
   end
 
-  def check_manual_and_documents_were_published(manual_slug, manual_attrs, document_slug, document_attrs)
+  def check_publication_is_live_on_pantopticon(slug, attrs)
     expect(fake_panopticon).to have_received(:put_artefact!)
       .with(
-        panopticon_id_for_slug(manual_slug),
+        panopticon_id_for_slug(slug),
         hash_including(
-          name: manual_attrs.fetch(:title),
-          slug: manual_slug,
+          name: attrs.fetch(:title),
+          slug: slug,
           state: "live",
         )
       )
+  end
 
-    expect(fake_panopticon).to have_received(:put_artefact!)
-      .with(
-        panopticon_id_for_slug(document_slug),
-        hash_including(
-          name: document_attrs.fetch(:title),
-          slug: document_slug,
-          state: "live",
-        )
-      )
+  def check_manual_is_published_to_content_api(attrs)
+    check_for_published_document_with(attrs.except(:body))
+  end
+
+  def check_manual_document_is_published_to_content_api(attrs)
+    check_for_published_document_with(attrs.except(:body))
+  end
+
+  def check_manual_and_documents_were_published(manual_slug, manual_attrs, document_slug, document_attrs)
+    check_publication_is_live_on_pantopticon(manual_slug, manual_attrs)
+    check_publication_is_live_on_pantopticon(document_slug, document_attrs)
+
+    check_manual_is_published_to_content_api(manual_attrs)
+    check_manual_document_is_published_to_content_api(document_attrs)
   end
 end
