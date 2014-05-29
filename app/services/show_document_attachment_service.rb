@@ -14,7 +14,7 @@ class ShowDocumentAttachmentService
   attr_reader :document_repository, :context
 
   def attachment
-    @attachment ||= document.find_attachment_by_id(attachement_id)
+    @attachment ||= document.find_attachment_by_id(attachment_id)
   end
 
   def document
@@ -25,7 +25,7 @@ class ShowDocumentAttachmentService
     context.params.fetch("specialist_document_id")
   end
 
-  def attachement_id
+  def attachment_id
     context.params.fetch("id")
   end
 end

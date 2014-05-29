@@ -18,7 +18,7 @@ class UpdateManualDocumentAttachmentService
   attr_reader :manual_repository, :context
 
   def attachment
-    @attachment ||= document.find_attachment_by_id(attachement_id)
+    @attachment ||= document.find_attachment_by_id(attachment_id)
   end
 
   def document
@@ -50,7 +50,7 @@ class UpdateManualDocumentAttachmentService
     context.params.fetch("document_id")
   end
 
-  def attachement_id
+  def attachment_id
     context.params.fetch("id")
   end
 end
