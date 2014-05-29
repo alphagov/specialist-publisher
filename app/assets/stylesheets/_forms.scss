@@ -53,3 +53,13 @@ form {
   }
 }
 
+.summary-length-info {
+  text-align: right;
+  &.warning {
+    color: #C09853;
+  }
+  .count {
+    font-weight: bold;
+  }
+}
+

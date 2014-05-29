@@ -1,4 +1,6 @@
 SpecialistPublisher::Application.routes.draw do
+  mount JasmineRails::Engine => '/specs' if defined?(JasmineRails::Engine)
+
   resources :specialist_documents, except: :destroy, path: 'specialist-documents' do
     resources :attachments, only: [:new, :create, :edit, :update]
     post :preview, on: :member

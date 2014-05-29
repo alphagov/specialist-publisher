@@ -2,8 +2,8 @@
   <div class="col-md-8">
     <%= form_for manual do |f| %>
       <%= f.text_field :title %>
-      <%= f.text_area :summary, class: 'short-textarea' %>
-
+      <%= f.text_area :summary, class: 'short-textarea js-length-counter', data: { :"count-message-threshold" => 280, :"count-message-selector" => ".summary-length-info" } %>
+      <div class="summary-length-info" aria-live="polite">Summary text should be 280 characters or fewer. <span class="count"></span></div>
       <button name="draft" class="btn btn-primary">Save as draft</button>
     <% end %>
   </div>
