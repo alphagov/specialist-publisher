@@ -191,7 +191,7 @@ describe SpecialistDocument do
         expect(edition_factory).to have_received(:call).with(hash_including(state: 'draft'))
       end
 
-      it "builds a new edition copying over the previous edition's attachements" do
+      it "builds a new edition copying over the previous edition's attachments" do
         doc.update(params)
 
         expect(edition_factory).to have_received(:call).with(hash_including(
@@ -248,7 +248,7 @@ describe SpecialistDocument do
         expect(edition_factory).to have_received(:call).with(hash_including(state: 'draft'))
       end
 
-      it "builds a new edition copying over the previous edition's attachements" do
+      it "builds a new edition copying over the previous edition's attachments" do
         doc.update(params)
 
         expect(edition_factory).to have_received(:call).with(hash_including(
