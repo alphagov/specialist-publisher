@@ -42,3 +42,9 @@ Feature: Creating and editing a CMA case
     Given a draft CMA case exists
     When I make changes and preview the CMA case
     Then I see the case body preview
+
+  @javascript
+  Scenario: Previewing a new CMA case
+    When I start creating a new CMA case
+    And I preview the case
+    Then I see the case body preview
