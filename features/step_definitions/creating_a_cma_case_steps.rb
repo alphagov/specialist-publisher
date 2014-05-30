@@ -142,3 +142,20 @@ end
 When(/^I visit the specialist documents page$/) do
   visit specialist_documents_path
 end
+
+When(/^I start creating a new CMA case$/) do
+  @document_title = "Original CMA case title"
+
+  @cma_fields = {
+    title: @document_title,
+    summary: "Nullam quis risus eget urna mollis ornare vel eu leo.",
+    body: "Body for preview",
+    opened_date: "2014-01-01",
+  }
+
+  create_cma_case(@cma_fields, save: false)
+end
+
+When(/^I preview the case$/) do
+  generate_preview
+end

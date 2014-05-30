@@ -1,11 +1,13 @@
 module CmaCaseHelpers
-  def create_cma_case(fields, publish: false)
+  def create_cma_case(fields, save: true, publish: false)
     visit new_specialist_document_path
     fill_in_fields(fields)
 
-    save_document
+    if save
+      save_document
+    end
 
-    if publish
+    if save && publish
       publish_document
     end
   end
@@ -112,7 +114,7 @@ module CmaCaseHelpers
   end
 
   def check_for_cma_case_body_preview
-    expect(current_path).to match(%r{/specialist-documents/[0-9a-f-]+})
+    expect(current_path).to match(%r{/specialist-documents/([0-9a-f-]+|new)})
     within('.preview') do
       expect(page).to have_css('p', text: 'Body for preview')
     end

@@ -37,4 +37,20 @@ module ApplicationHelper
       content_tag(:div, Govspeak::Document.new(text).to_sanitized_html.html_safe, class: "govspeak")
     end
   end
+
+  def preview_path_for_specialist_document(document)
+    if document.persisted?
+      preview_specialist_document_path(document)
+    else
+      preview_new_specialist_document_path
+    end
+  end
+
+  def preview_path_for_manual_document(manual, document)
+    if document.persisted?
+      preview_manual_document_path(manual, document)
+    else
+      preview_new_manual_document_path(manual)
+    end
+  end
 end
