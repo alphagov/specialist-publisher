@@ -3,7 +3,7 @@ When(/^I create a manual$/) do
     title: 'Example Manual Title',
     summary: 'Nullam quis risus eget urna mollis ornare vel eu leo.',
   }
-  @manual_slug = "manuals/example-manual-title"
+  @manual_slug = "guidance/example-manual-title"
 
   create_manual(@manual_fields)
 end
@@ -17,7 +17,7 @@ Then(/^the manual slug should be reserved$/) do
 end
 
 Given(/^a draft manual exists$/) do
-  @manual_slug = "manuals/example-manual-title"
+  @manual_slug = "guidance/example-manual-title"
   @manual_fields = {
     title: 'Example Manual Title',
     summary: 'Nullam quis risus eget urna mollis ornare vel eu leo.',
@@ -77,7 +77,7 @@ end
 
 Given(/^a draft document exists for the manual$/) do
   @document_title = "Section 1"
-  @document_slug = "manuals/example-manual-title/section-1"
+  @document_slug = "guidance/example-manual-title/section-1"
 
   @document_fields = {
     title: @document_title,
@@ -144,7 +144,7 @@ end
 
 Given(/^a published manual exists$/) do
   @manual_title = "Example Manual Title"
-  @manual_slug = "manuals/example-manual-title"
+  @manual_slug = "guidance/example-manual-title"
 
   @manual_fields = {
     title: @manual_title,
