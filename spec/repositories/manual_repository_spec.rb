@@ -21,6 +21,7 @@ describe ManualRepository do
 
   let(:manual_factory)  { double(:manual_factory, call: nil) }
   let(:manual_id) { double(:manual_id) }
+  let(:manual_slug) { double(:manual_slug) }
 
   let(:manual)    { double(:manual, manual_attributes) }
 
@@ -30,6 +31,7 @@ describe ManualRepository do
       title: "title",
       summary: "summary",
       organisation_slug: "organisation_slug",
+      slug: manual_slug,
     }
   }
 
@@ -38,8 +40,10 @@ describe ManualRepository do
       :manual_record,
       manual_id: manual_id,
       new_or_existing_draft_edition: nil,
-      organisation_slug: "organisation_slug", 
+      organisation_slug: "organisation_slug",
       :"organisation_slug=" => nil,
+      slug: manual_slug,
+      :"slug=" => nil,
       latest_edition: nil,
       save!: nil,
     )
@@ -57,6 +61,8 @@ describe ManualRepository do
       summary: "summary",
       updated_at: "yesterday",
       organisation_slug: "organisation_slug",
+      state: "draft",
+      slug: manual_slug,
     }
   }
 
@@ -93,6 +99,12 @@ describe ManualRepository do
 
       expect(edition).to have_received(:attributes=)
         .with(manual_attributes.slice(:title, :summary))
+    end
+
+    it "sets the slug" do
+      repo.store(manual)
+
+      expect(manual_record).to have_received(:slug=).with(manual_slug)
     end
 
     it "sets the organisation_slug" do
