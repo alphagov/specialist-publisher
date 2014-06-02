@@ -87,14 +87,14 @@ SpecialistPublisherWiring = DependencyContainer.new do
     )
   end
 
-  define_singleton(:specific_manual_document_repository) do
+  define_singleton(:manual_specific_document_repository_factory) do
     ->(manual) {
-      specific_manual_document_factory = get(:validated_manual_document_factory_factory).call(manual)
+      document_factory = get(:validated_manual_document_factory_factory).call(manual)
 
       SpecialistDocumentRepository.new(
         get(:panopticon_mappings),
         get(:specialist_document_editions).where(document_type: "manual"),
-        specific_manual_document_factory,
+        document_factory,
       )
     }
   end
@@ -105,7 +105,7 @@ SpecialistPublisherWiring = DependencyContainer.new do
         organisation_slug: organisation_slug,
         association_marshallers: [
           DocumentAssociationMarshaller.new(
-            document_repository: get(:specific_manual_document_repository),
+            manual_specific_document_repository_factory: get(:manual_specific_document_repository_factory),
             decorator: ->(manual, attrs) {
               ManualWithDocuments.new(
                 get(:manual_document_builder),
@@ -175,9 +175,9 @@ SpecialistPublisherWiring = DependencyContainer.new do
 
   define_factory(:validated_manual_document_factory_factory) {
     ->(manual) {
-      slug_generator = get(:manual_document_slug_generator).call(manual.slug)
-
       ->(id, editions) {
+        slug_generator = get(:manual_document_slug_generator).call(manual.slug)
+
         SlugUniquenessValidator.new(
           get(:specialist_document_repository),
           SpecialistDocument.new(
