@@ -192,7 +192,7 @@ SpecialistPublisherWiring = DependencyContainer.new do
   }
 
   define_factory(:cma_slug_generator) { SlugGenerator.new(prefix: "cma-cases") }
-  define_factory(:manual_slug_generator) { SlugGenerator.new(prefix: "manuals") }
+  define_factory(:manual_slug_generator) { SlugGenerator.new(prefix: "guidance") }
   define_factory(:manual_document_slug_generator) {
     ->(manual_slug) {
       SlugGenerator.new(prefix: manual_slug)
