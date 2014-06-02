@@ -13,7 +13,7 @@ Then(/^the manual should exist$/) do
 end
 
 Then(/^the manual slug should be reserved$/) do
-  check_manual_slug_is_reserved(@manual_slug)
+  check_manual_slug_was_reserved(@manual_slug)
 end
 
 Given(/^a draft manual exists$/) do
@@ -72,7 +72,7 @@ Then(/^I see the new page$/) do
 end
 
 Then(/^the manual section slug should be reserved$/) do
-  check_manual_document_slug_is_reserved(@document_slug)
+  check_manual_document_slug_was_reserved(@document_slug)
 end
 
 Given(/^a draft document exists for the manual$/) do

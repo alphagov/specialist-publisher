@@ -288,7 +288,7 @@ SpecialistPublisherWiring = DependencyContainer.new do
   define_factory(:manual_document_panopticon_registerer) {
     ->(manual) {
       get(:panopticon_registerer).call(
-        DocumentArtefactFormatter.new(manual)
+        ManualDocumentArtefactFormatter.new(manual)
       )
     }
   }

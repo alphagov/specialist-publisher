@@ -11,6 +11,6 @@ class ManualArtefactFormatter < AbstractArtefactFormatter
   end
 
   def rendering_app
-    "specialist-manuals"
+    "manuals-frontend"
   end
 end
