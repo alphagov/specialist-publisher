@@ -5,12 +5,13 @@ require "manual_with_documents"
 describe ManualWithDocuments do
 
   subject(:manual_with_documents) {
-    ManualWithDocuments.new(manual, documents: documents)
+    ManualWithDocuments.new(document_builder, manual, documents: documents)
   }
 
   let(:manual) { double(:manual, publish: nil) }
+  let(:document_builder) { double(:document_builder) }
   let(:documents) { [document] }
-  let(:document) { double(:document, publish: nil) }
+  let(:document) { double(:document, publish!: nil) }
 
   let(:id) { double(:id) }
   let(:updated_at) { double(:updated_at) }
@@ -40,7 +41,7 @@ describe ManualWithDocuments do
       it "passes a block which publishes" do
         manual_with_documents.publish
 
-        expect(document).to have_received(:publish)
+        expect(document).to have_received(:publish!)
       end
     end
 
@@ -48,7 +49,7 @@ describe ManualWithDocuments do
       it "does not publish the documents" do
         manual_with_documents.publish
 
-        expect(document).not_to have_received(:publish)
+        expect(document).not_to have_received(:publish!)
       end
     end
   end
