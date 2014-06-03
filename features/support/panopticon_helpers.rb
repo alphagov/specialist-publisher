@@ -3,13 +3,27 @@ module PanopticonHelpers
   class FakePanopticon
     include Singleton
 
+    def initialize
+      @slug_id_map = {}
+    end
+
     def put_artefact!(id, attributes = {})
       nil
     end
 
     def create_artefact!(attributes = {})
-      {"id" => "random-panopticon-id-#{SecureRandom.hex}"}
+      new_artefact_id = "test-panopticon-id-#{SecureRandom.hex}"
+      slug_id_map[attributes.fetch(:slug)] = new_artefact_id
+
+      {"id" => new_artefact_id}
     end
+
+    def panopticon_id_for_slug(slug)
+      slug_id_map.fetch(slug) { raise "No artefact with slug '#{slug}' was created" }
+    end
+
+    private
+    attr_reader :slug_id_map
   end
 
   def fake_panopticon
@@ -24,5 +38,9 @@ module PanopticonHelpers
 
     allow(GdsApi::Panopticon).to receive(:new)
       .and_return(fake_panopticon)
+  end
+
+  def panopticon_id_for_slug(slug)
+    fake_panopticon.panopticon_id_for_slug(slug)
   end
 end

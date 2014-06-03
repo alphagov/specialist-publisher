@@ -2,18 +2,20 @@ class CreateManualService
   def initialize(dependencies)
     @manual_repository = dependencies.fetch(:manual_repository)
     @manual_builder = dependencies.fetch(:manual_builder)
+    @listeners = dependencies.fetch(:listeners)
     @context = dependencies.fetch(:context)
   end
 
   def call
     persist
+    notify_listeners
 
     manual
   end
 
   private
 
-  attr_reader :manual_repository, :manual_builder, :context
+  attr_reader :manual_repository, :manual_builder, :listeners, :context
 
   def manual
     @manual ||= manual_builder.call(manual_params)
@@ -21,6 +23,12 @@ class CreateManualService
 
   def persist
     manual_repository.store(manual)
+  end
+
+  def notify_listeners
+    listeners.each do |listener|
+      listener.call(manual)
+    end
   end
 
   def manual_params

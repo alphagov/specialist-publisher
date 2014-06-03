@@ -153,7 +153,7 @@ module CmaCaseHelpers
     page.all(".slug span").last.text
   end
 
-  def check_cma_case_is_published(title)
+  def check_cma_case_is_published(slug, title)
     published_cma_case = RenderedSpecialistDocument.where(title: title).first
 
     expect(published_cma_case).not_to be_nil
@@ -161,29 +161,30 @@ module CmaCaseHelpers
     check_rendered_document_contains_html(published_cma_case)
     check_rendered_document_contains_header_meta_data(published_cma_case)
 
-    check_published_with_panopticon(title)
-    check_added_to_finder_api(title)
+    check_published_with_panopticon(slug, title)
+    check_added_to_finder_api(slug, title)
   end
 
   def check_for_published_document_with(attrs)
-    published_document = RenderedSpecialistDocument.where(attrs).first
-    expect(published_document).not_to be_nil
-
-    attrs.each do |attr_name, value|
-      expect(published_document.public_send(attr_name)).to eq(value)
-    end
+    expect(
+      RenderedSpecialistDocument.where(attrs)
+    ).not_to be_empty
   end
 
-  def check_published_with_panopticon(title)
-    # TODO: properly test that the received panopticon id is correct
+  def check_published_with_panopticon(slug, title)
+    panopticon_id = panopticon_id_for_slug(slug)
+
     expect(fake_panopticon).to have_received(:put_artefact!)
-      .with(anything, hash_including(name: title, state: "live"))
+      .with(panopticon_id, hash_including(
+        slug: slug,
+        name: title,
+        state: "live",
+      ))
   end
 
-  def check_added_to_finder_api(title)
-    # TODO: properly test that the received panopticon id is correct
+  def check_added_to_finder_api(slug, title)
     expect(finder_api).to have_received(:notify_of_publication)
-      .with(anything, hash_including(title: title))
+      .with(slug, hash_including(title: title))
   end
 
   def check_rendered_document_contains_html(document)
@@ -193,6 +194,18 @@ module CmaCaseHelpers
 
   def check_rendered_document_contains_header_meta_data(document)
     expect(document.headers.first).to include( "text" => "Header" )
+  end
+
+  def check_for_correctly_archived_editions(document_attrs)
+    latest_edition = SpecialistDocumentEdition.where(document_attrs).first
+    editions = SpecialistDocumentEdition.where(document_id: latest_edition.document_id)
+    previous_editions = editions.to_a - latest_edition.to_a
+
+    expect(latest_edition).to be_published
+
+    previous_editions.each do |edition|
+      expect(edition).to be_archived
+    end
   end
 
   def seed_cases(number_of_cases, state: 'draft')
@@ -214,7 +227,8 @@ module CmaCaseHelpers
       )
 
       PanopticonMapping.create!(
-        document_id: doc.id,
+        resource_type: "specialist-document",
+        resource_id: doc.id,
         panopticon_id: SecureRandom.hex,
       )
 
@@ -231,10 +245,11 @@ module CmaCaseHelpers
     click_button 'Withdraw'
   end
 
-  def check_document_is_withdrawn(document_title)
-    # TODO: properly test that the received panopticon id is correct
+  def check_document_is_withdrawn(slug, document_title)
+    panopticon_id = panopticon_id_for_slug(slug)
+
     expect(fake_panopticon).to have_received(:put_artefact!)
-      .with(anything, hash_including(
+      .with(panopticon_id, hash_including(
         name: document_title,
         state: "archived",
       ))

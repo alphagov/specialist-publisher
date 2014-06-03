@@ -3,12 +3,39 @@ require "spec_helper"
 describe ManualRecord, hits_db: true do
   subject(:record) { ManualRecord.new }
 
+  describe "#latest_edition" do
+    context "when there are several previous editions" do
+      let!(:editions) {
+        [
+          record.editions.create!(state: 'published', version_number: 2),
+          record.editions.create!(state: 'draft', version_number: 3),
+          record.editions.create!(state: 'published', version_number: 1),
+        ]
+      }
+
+      it "returns the edition with the highest version number" do
+        expect(record.latest_edition.version_number).to eq(3)
+      end
+    end
+  end
+
   describe "#new_or_existing_draft_edition" do
     context "when a draft edition exists" do
       let!(:edition) { record.editions.create!(state: 'draft') }
 
       it "returns the existing draft edition" do
         expect(record.new_or_existing_draft_edition).to eq(edition)
+      end
+    end
+
+    context "when both published and draft editions exist" do
+      before do
+        @draft_edition = record.editions.create!(state: 'draft', version_number: 2)
+        record.editions.create!(state: 'published', version_number: 1)
+      end
+
+      it "returns the existing draft edition" do
+        expect(record.new_or_existing_draft_edition).to eq(@draft_edition)
       end
     end
 

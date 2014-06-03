@@ -1,4 +1,3 @@
-require "gds_api/panopticon"
 require "fetchable"
 
 class SpecialistDocumentRepository
@@ -45,20 +44,13 @@ class SpecialistDocumentRepository
   end
 
   def store(document)
-    edition = document.exposed_edition
+    # It is actually only necessary to save the latest edition, however, I
+    # think it's safer to save latest two as both are exposed to the and have
+    # potential to change. This extra write may save a potential future
+    # headache.
+    document.editions.last(2).each(&:save!)
 
-    edition.save!
-  end
-
-  NotFound = Class.new(StandardError)
-
-  class InvalidDocumentError < StandardError
-    def initialize(message, document)
-      super(message)
-      @document = document
-    end
-
-    attr_reader :document
+    self
   end
 
 private

@@ -31,6 +31,7 @@ end
 
 When(/^I publish a new CMA case$/) do
   @document_title = 'Example CMA Case'
+  @slug = 'cma-cases/example-cma-case'
 
   @cma_fields = {
     title: @document_title,
@@ -57,6 +58,7 @@ end
 
 Given(/^a draft CMA case exists$/) do
   @document_title = 'Example CMA Case'
+  @slug = 'cma-cases/example-cma-case'
 
   @cma_fields = {
     title: @document_title,

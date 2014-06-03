@@ -62,4 +62,70 @@ module ManualHelpers
     visit manuals_path
     click_link manual_title
   end
+
+  def check_manual_slug_was_reserved(slug)
+    expect(fake_panopticon).to have_received(:create_artefact!)
+      .with(
+        hash_including(
+          slug: slug,
+          kind: "manual",
+          rendering_app: "manuals-frontend",
+        )
+      )
+  end
+
+  def check_manual_document_slug_was_reserved(slug)
+    expect(fake_panopticon).to have_received(:create_artefact!)
+      .with(
+        hash_including(
+          slug: slug,
+          kind: "manual-section",
+          rendering_app: "manuals-frontend",
+        )
+      )
+  end
+
+  def check_manual_was_published_to_panopticon(slug, attrs)
+    expect(fake_panopticon).to have_received(:put_artefact!)
+      .with(
+        panopticon_id_for_slug(slug),
+        hash_including(
+          name: attrs.fetch(:title),
+          slug: slug,
+          state: "live",
+          kind: "manual",
+          rendering_app: "manuals-frontend",
+        )
+      )
+  end
+
+  def check_manual_section_was_published_to_panopticon(slug, attrs)
+    expect(fake_panopticon).to have_received(:put_artefact!)
+      .with(
+        panopticon_id_for_slug(slug),
+        hash_including(
+          name: attrs.fetch(:title),
+          slug: slug,
+          state: "live",
+          kind: "manual-section",
+          rendering_app: "manuals-frontend",
+        )
+      )
+  end
+
+  def check_manual_is_published_to_content_api(attrs)
+    check_for_published_document_with(attrs.except(:body))
+  end
+
+  def check_manual_document_is_published_to_content_api(attrs)
+    check_for_published_document_with(attrs.except(:body))
+  end
+
+  def check_manual_and_documents_were_published(manual_slug, manual_attrs, document_slug, document_attrs)
+    check_manual_was_published_to_panopticon(manual_slug, manual_attrs)
+    check_manual_section_was_published_to_panopticon(document_slug, document_attrs)
+
+    check_manual_is_published_to_content_api(manual_attrs)
+    check_manual_document_is_published_to_content_api(document_attrs)
+  end
 end

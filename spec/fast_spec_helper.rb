@@ -1,5 +1,6 @@
-$LOAD_PATH.unshift(File.expand_path("../app/models", File.dirname(__FILE__)))
-$LOAD_PATH.unshift(File.expand_path("../app/repositories", File.dirname(__FILE__)))
+Dir.glob("app/*").each do |app_subdir|
+  $LOAD_PATH.unshift(File.expand_path(app_subdir))
+end
 
 require "pry"
 require "awesome_print"

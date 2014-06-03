@@ -14,7 +14,8 @@ end
 
 FactoryGirl.define do
   factory :panopticon_mapping do
-    sequence(:document_id) { |n| "some-uuid-#{n}"}
+    resource_type "document"
+    sequence(:resource_id) { |n| "some-uuid-#{n}"}
     sequence(:panopticon_id) { |n| "some-panopticon-id-#{n}"}
   end
 end

@@ -127,7 +127,13 @@ class SpecialistDocument
 
   def publish!
     raise "Can only publish the latest edition" unless latest_edition_exposed?
-    latest_edition.publish unless latest_edition.published?
+    unless latest_edition.published?
+      if published_edition
+        published_edition.archive
+      end
+
+      latest_edition.publish
+    end
   end
 
   def withdraw!

@@ -20,6 +20,8 @@ SpecialistPublisher::Application.routes.draw do
       # This is for persisted manual documents
       post :preview, on: :member
     end
+
+    post :publish, on: :member
   end
 
   # This is for new manual documents

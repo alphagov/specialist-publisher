@@ -4,6 +4,7 @@ class ManualRecord
 
   field :manual_id, type: String
   field :organisation_slug, type: String
+  field :slug, type: String
 
   embeds_many :editions,
     class_name: 'ManualRecord::Edition',
@@ -22,14 +23,15 @@ class ManualRecord
   end
 
   def new_or_existing_draft_edition
-    editions
-      .where(state: 'draft')
-      .order(:version_number)
-      .last || build_draft_edition
+    if latest_edition && latest_edition.state == "draft"
+      latest_edition
+    else
+      build_draft_edition
+    end
   end
 
   def latest_edition
-    editions.last
+    editions.order_by([:version_number, :desc]).first
   end
 
 private

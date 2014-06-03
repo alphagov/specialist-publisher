@@ -13,13 +13,14 @@ class ServiceRegistry
   def initialize(dependencies)
     @document_builder = dependencies.fetch(:document_builder)
     @document_repository = dependencies.fetch(:document_repository)
-    @publication_listeners = dependencies.fetch(:publication_listeners)
     @creation_listeners = dependencies.fetch(:creation_listeners)
     @withdrawal_listeners = dependencies.fetch(:withdrawal_listeners)
     @document_renderer = dependencies.fetch(:document_renderer)
     @manual_repository_factory = dependencies.fetch(:manual_repository_factory)
     @plain_manual_repository_factory = dependencies.fetch(:plain_manual_repository_factory)
-    @manual_document_builder = dependencies.fetch(:manual_document_builder)
+    @manual_builder = dependencies.fetch(:manual_builder)
+
+    @observers = dependencies.fetch(:observers)
   end
 
   def list_documents(context)
@@ -63,7 +64,7 @@ class ServiceRegistry
   def publish_document(context)
     PublishDocumentService.new(
       document_repository,
-      publication_listeners,
+      observers.document_publication,
       context,
     )
   end
@@ -124,6 +125,7 @@ class ServiceRegistry
     CreateManualService.new(
       manual_repository: plain_manual_repository(context),
       manual_builder: manual_builder,
+      listeners: observers.manual_creation,
       context: context,
     )
   end
@@ -142,11 +144,19 @@ class ServiceRegistry
     )
   end
 
+  def publish_manual(context)
+    PublishManualService.new(
+      manual_repository: manual_repository(context),
+      listeners: observers.manual_publication,
+      context: context,
+    )
+  end
+
   def create_manual_document(context)
     CreateManualDocumentService.new(
-      manual_repository(context),
-      manual_document_builder,
-      context,
+      manual_repository: manual_repository(context),
+      listeners: observers.manual_document_creation,
+      context: context,
     )
   end
 
@@ -167,7 +177,6 @@ class ServiceRegistry
   def new_manual_document(context)
     NewManualDocumentService.new(
       manual_repository(context),
-      manual_document_builder,
       context,
     )
   end
@@ -214,30 +223,16 @@ class ServiceRegistry
     )
   end
 
-  def manual_builder
-    ->(attrs) {
-      default = {
-        id: SecureRandom.uuid,
-        title: "",
-        summary: "",
-        organisation_slug: "",
-        updated_at: "",
-      }
-
-      Manual.new(default.merge(attrs))
-    }
-  end
-
   attr_reader(
+    :observers,
     :document_builder,
     :document_repository,
-    :publication_listeners,
     :creation_listeners,
     :withdrawal_listeners,
     :document_renderer,
 
     :manual_repository_factory,
     :plain_manual_repository_factory,
-    :manual_document_builder,
+    :manual_builder,
   )
 end

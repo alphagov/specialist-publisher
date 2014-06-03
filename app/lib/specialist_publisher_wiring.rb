@@ -2,7 +2,6 @@ require 'dependency_container'
 require 'securerandom'
 require "specialist_document_repository"
 require 'builders/specialist_document_builder'
-require "builders/manual_document_builder"
 require 'gds_api/panopticon'
 require 'panopticon_registerer'
 require "specialist_document_attachment_processor"
@@ -14,24 +13,52 @@ require "finder_api_notifier"
 require "finder_api"
 require "validators/slug_uniqueness_validator"
 require "marshallers/document_association_marshaller"
+require "manual_link_list_body_renderer"
 
 $LOAD_PATH.unshift(File.expand_path("../..", "app/services"))
 
 SpecialistPublisherWiring = DependencyContainer.new do
 
+  define_factory(:observers) {
+    ObserversRegistry.new(
+      document_content_api_exporter: get(:specialist_document_content_api_exporter),
+      finder_api_notifier: get(:finder_api_notifier),
+      document_panopticon_registerer: get(:document_panopticon_registerer),
+      manual_panopticon_registerer: get(:manual_panopticon_registerer),
+      manual_document_panopticon_registerer: get(:manual_document_panopticon_registerer),
+      manual_content_api_exporter: get(:manual_and_documents_content_api_exporter),
+    )
+  }
+
   define_factory(:services) {
     ServiceRegistry.new(
       document_builder: get(:specialist_document_builder),
       document_repository: get(:specialist_document_repository),
-      publication_listeners: get(:specialist_document_publication_observers),
       creation_listeners: get(:specialist_document_creation_observers),
       withdrawal_listeners: get(:specialist_document_withdrawal_observers),
       document_renderer: get(:specialist_document_renderer),
 
       manual_repository_factory: get(:manual_repository_factory),
       plain_manual_repository_factory: get(:plain_manual_repository_factory),
-      manual_document_builder: get(:manual_document_builder),
+      manual_builder: get(:manual_builder),
+
+      observers: get(:observers),
     )
+  }
+
+  define_factory(:manual_builder) {
+    ->(attrs) {
+      default = {
+        id: SecureRandom.uuid,
+        slug: get(:manual_slug_generator).call(attrs.fetch(:title)),
+        summary: "",
+        state: "draft",
+        organisation_slug: "",
+        updated_at: "",
+      }
+
+      Manual.new(default.merge(attrs))
+    }
   }
 
   define_instance(:specialist_document_editions) { SpecialistDocumentEdition }
@@ -44,12 +71,13 @@ SpecialistPublisherWiring = DependencyContainer.new do
   define_singleton(:specialist_document_factory) {
     ->(*args) {
       SpecialistDocument.new(
-        get(:slug_generator),
+        get(:cma_slug_generator),
         get(:edition_factory),
         *args,
       )
     }
   }
+
 
   define_singleton(:specialist_document_repository) do
     SpecialistDocumentRepository.new(
@@ -59,12 +87,16 @@ SpecialistPublisherWiring = DependencyContainer.new do
     )
   end
 
-  define_singleton(:manual_document_repository) do
-    SpecialistDocumentRepository.new(
-      get(:panopticon_mappings),
-      get(:specialist_document_editions).where(document_type: "manual"),
-      get(:specialist_document_factory),
-    )
+  define_singleton(:manual_specific_document_repository_factory) do
+    ->(manual) {
+      document_factory = get(:validated_manual_document_factory_factory).call(manual)
+
+      SpecialistDocumentRepository.new(
+        get(:panopticon_mappings),
+        get(:specialist_document_editions).where(document_type: "manual"),
+        document_factory,
+      )
+    }
   end
 
   define_factory(:manual_repository_factory) {
@@ -73,8 +105,14 @@ SpecialistPublisherWiring = DependencyContainer.new do
         organisation_slug: organisation_slug,
         association_marshallers: [
           DocumentAssociationMarshaller.new(
-            document_repository: get(:manual_document_repository),
-            decorator: ManualWithDocuments.method(:new),
+            manual_specific_document_repository_factory: get(:manual_specific_document_repository_factory),
+            decorator: ->(manual, attrs) {
+              ManualWithDocuments.new(
+                get(:manual_document_builder),
+                manual,
+                attrs,
+              )
+            }
           ),
         ],
       )
@@ -102,17 +140,64 @@ SpecialistPublisherWiring = DependencyContainer.new do
 
   define_factory(:specialist_document_builder) {
     SpecialistDocumentBuilder.new(
-      ->(*args) {
-        SlugUniquenessValidator.new(
-          get(:specialist_document_repository),
-          get(:specialist_document_factory).call(*args),
-        )
-      },
+      get(:validated_specialist_document_factory),
       get(:id_generator),
     )
   }
 
-  define_instance(:slug_generator) { SlugGenerator }
+  define_factory(:validated_specialist_document_factory) {
+    ->(*args) {
+      SlugUniquenessValidator.new(
+        get(:specialist_document_repository),
+        get(:specialist_document_factory).call(*args),
+      )
+    }
+  }
+
+  define_factory(:manual_document_builder) {
+    ->(manual, attrs) {
+      defaults = {
+          document_type: "manual",
+          opened_date: Date.parse('1/04/2014'),
+          market_sector: 'manual',
+          case_type: 'manual',
+          case_state: 'manual',
+        }
+
+      get(:validated_manual_document_factory_factory)
+        .call(manual)
+        .call(
+          get(:id_generator).call,
+          [],
+        ).update(attrs.reverse_merge(defaults))
+    }
+  }
+
+  define_factory(:validated_manual_document_factory_factory) {
+    ->(manual) {
+      ->(id, editions) {
+        slug_generator = get(:manual_document_slug_generator).call(manual.slug)
+
+        SlugUniquenessValidator.new(
+          get(:specialist_document_repository),
+          SpecialistDocument.new(
+            slug_generator,
+            get(:edition_factory),
+            id,
+            editions,
+          )
+        )
+      }
+    }
+  }
+
+  define_factory(:cma_slug_generator) { SlugGenerator.new(prefix: "cma-cases") }
+  define_factory(:manual_slug_generator) { SlugGenerator.new(prefix: "guidance") }
+  define_factory(:manual_document_slug_generator) {
+    ->(manual_slug) {
+      SlugGenerator.new(prefix: manual_slug)
+    }
+  }
 
   define_instance(:markdown_renderer) {
     SpecialistDocumentAttachmentProcessor.method(:new)
@@ -168,17 +253,9 @@ SpecialistPublisherWiring = DependencyContainer.new do
     }
   }
 
-  define_singleton(:specialist_document_publication_observers) {
-    [
-      get(:specialist_document_content_api_exporter),
-      get(:finder_api_notifier),
-      get(:panopticon_registerer),
-    ]
-  }
-
   define_singleton(:specialist_document_creation_observers) {
     [
-      get(:panopticon_registerer),
+      get(:document_panopticon_registerer),
     ]
   }
 
@@ -186,17 +263,45 @@ SpecialistPublisherWiring = DependencyContainer.new do
     [
       get(:specialist_document_content_api_withdrawer),
       get(:finder_api_withdrawer),
-      get(:panopticon_registerer),
+      get(:document_panopticon_registerer),
     ]
   }
 
   define_factory(:panopticon_registerer) {
-    ->(document) {
+    ->(artefact) {
       PanopticonRegisterer.new(
-        get(:panopticon_api),
-        get(:panopticon_mappings),
-        document,
+        api_client: get(:panopticon_api),
+        mappings: get(:panopticon_mappings),
+        artefact: artefact,
       ).call
+    }
+  }
+
+  define_factory(:document_panopticon_registerer) {
+    ->(document) {
+      get(:panopticon_registerer).call(
+        DocumentArtefactFormatter.new(document)
+      )
+    }
+  }
+
+  define_factory(:manual_document_panopticon_registerer) {
+    ->(manual) {
+      get(:panopticon_registerer).call(
+        ManualDocumentArtefactFormatter.new(manual)
+      )
+    }
+  }
+
+  define_factory(:manual_panopticon_registerer) {
+    ->(manual) {
+      get(:panopticon_registerer).call(
+        ManualArtefactFormatter.new(manual)
+      )
+
+      manual.respond_to?(:documents) && manual.documents.each do |doc|
+        get(:manual_document_panopticon_registerer).call(doc)
+      end
     }
   }
 
@@ -223,6 +328,63 @@ SpecialistPublisherWiring = DependencyContainer.new do
     }
   }
 
+  define_factory(:manual_document_content_api_exporter) {
+    ->(doc) {
+      SpecialistDocumentExporter.new(
+        RenderedSpecialistDocument,
+        get(:specialist_document_renderer),
+        get(:null_finder_schema),
+        doc,
+      ).call
+    }
+  }
+
+  define_factory(:manual_content_api_exporter) {
+    ->(doc) {
+      SpecialistDocumentExporter.new(
+        RenderedSpecialistDocument,
+        get(:manual_renderer),
+        get(:null_finder_schema),
+        doc,
+      ).call
+    }
+  }
+
+  define_factory(:manual_link_list_body_renderer) {
+    ManualLinkListBodyRenderer.method(:new)
+  }
+
+  define_factory(:manual_render_pipeline) {
+    [
+      get(:manual_link_list_body_renderer),
+      get(:specialist_document_govspeak_header_extractor),
+      get(:specialist_document_govspeak_to_html_renderer),
+    ]
+  }
+
+  define_instance(:manual_renderer) {
+    ->(manual) {
+      get(:manual_render_pipeline).reduce(manual) { |manual, next_renderer|
+        next_renderer.call(manual)
+      }
+    }
+  }
+
+  define_factory(:manual_and_documents_content_api_exporter) {
+    ->(manual) {
+
+      get(:manual_content_api_exporter).call(manual)
+
+      manual.documents.each do |exportable|
+        get(:manual_document_content_api_exporter).call(exportable)
+      end
+    }
+  }
+
+  define_factory(:null_finder_schema) {
+    OpenStruct.new(:facets => [])
+  }
+
   define_singleton(:http_client) { Faraday }
 
   define_singleton(:finder_api) {
@@ -247,9 +409,4 @@ SpecialistPublisherWiring = DependencyContainer.new do
     UrlMaker.new(plek: get(:plek))
   }
 
-  define_factory(:manual_document_builder) {
-    ManualDocumentBuilder.new(
-      get(:specialist_document_builder),
-    )
-  }
 end
