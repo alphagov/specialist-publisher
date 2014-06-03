@@ -21,11 +21,11 @@ class Manual
   end
 
   def update(attributes)
-    @slug = attributes.fetch(:slug, nil)
-    @title = attributes.fetch(:title, nil)
-    @summary = attributes.fetch(:summary, nil)
-    @organisation_slug = attributes.fetch(:organisation_slug, nil)
-    @state = attributes.fetch(:state, nil)
+    @slug = attributes.fetch(:slug) { slug }
+    @title = attributes.fetch(:title) { title }
+    @summary = attributes.fetch(:summary) { summary }
+    @organisation_slug = attributes.fetch(:organisation_slug) { organisation_slug }
+    @state = attributes.fetch(:state) { state }
 
     self
   end
