@@ -53,7 +53,7 @@ class ManualsController < ApplicationController
   def publish
     manual = services.publish_manual(self).call
 
-    redirect_to(specialist_document_path(manual))
+    redirect_to(manual_path(manual))
   end
 
 private
