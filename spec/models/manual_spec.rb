@@ -89,9 +89,18 @@ describe Manual do
         expect(manual.organisation_slug).to eq(new_organisation_slug)
         expect(manual.state).to eq(new_state)
       end
+
+      it "doesn't nil out attributes not in list" do
+        manual.update({})
+
+        expect(manual.title).to eq(title)
+        expect(manual.summary).to eq(summary)
+        expect(manual.organisation_slug).to eq(organisation_slug)
+        expect(manual.state).to eq(state)
+      end
     end
 
-    context "with immutable attributes" do
+    context "with disallowed attributes" do
       let(:new_id) { double(:new_id) }
       let(:new_updated_at) { double(:new_updated_at) }
 
