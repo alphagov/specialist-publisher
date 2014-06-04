@@ -1,4 +1,4 @@
-class SpecialistDocumentExporter
+class SpecialistDocumentDatabaseExporter
 
   def initialize(export_recipent, document_renderer, finder_schema, document)
     @export_recipent = export_recipent
