@@ -70,6 +70,11 @@ class SpecialistDocument
   def update(params)
     raise "Can only update the latest version" unless latest_edition_exposed?
 
+    # TODO: this is very defensive, we need enforce consistency of params at the boudary
+    params = params
+      .select { |k,v| allowed_update_params.include?(k.to_s) }
+      .symbolize_keys
+
     if never_published? && params.fetch(:title, false)
       params = params.merge(
         slug: slug_generator.call(params.fetch(:title))
@@ -190,8 +195,9 @@ protected
   end
 
   def new_draft(params = {})
-    edition_params = params
+    new_edition_attributes = previous_edition_attributes
       .merge(new_edition_defaults)
+      .merge(params)
       .merge(
         version_number: current_version_number + 1,
         slug: slug,
@@ -199,7 +205,7 @@ protected
         attachments: attachments,
       )
 
-    edition_factory.call(edition_params)
+    edition_factory.call(new_edition_attributes)
   end
 
   def current_version_number
@@ -214,5 +220,25 @@ protected
 
   def most_recent_non_draft
     editions.reject { |e| e.draft? }.last
+  end
+
+  def previous_edition_attributes
+    exposed_edition.attributes
+      .except("_id", "updated_at")
+      .symbolize_keys
+  end
+
+  def allowed_update_params
+    self.class.edition_attributes
+      .-(unupdatable_attributes)
+      .map(&:to_s)
+  end
+
+  def unupdatable_attributes
+    [
+      :updated_at,
+      :slug,
+      :version_number,
+    ]
   end
 end

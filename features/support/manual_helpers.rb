@@ -35,6 +35,10 @@ module ManualHelpers
     click_on "Save as draft"
   end
 
+  def publish_manual
+    click_on "Publish"
+  end
+
   def check_manual_exists_with(attributes)
     go_to_manual_page(attributes.fetch(:title))
     expect(page).to have_content(attributes.fetch(:summary))
@@ -96,7 +100,7 @@ module ManualHelpers
           kind: "manual",
           rendering_app: "manuals-frontend",
         )
-      )
+      ).at_least(:once)
   end
 
   def check_manual_section_was_published_to_panopticon(slug, attrs)
@@ -110,7 +114,7 @@ module ManualHelpers
           kind: "manual-section",
           rendering_app: "manuals-frontend",
         )
-      )
+      ).at_least(:once)
   end
 
   def check_manual_is_published_to_content_api(attrs)

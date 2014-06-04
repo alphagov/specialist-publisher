@@ -44,6 +44,7 @@ private
     {
       title: manual.title,
       summary: manual.summary,
+      state: manual.state,
     }
   end
 
