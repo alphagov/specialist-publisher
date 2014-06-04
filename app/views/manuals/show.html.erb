@@ -53,6 +53,8 @@
   </div>
 <% end %>
 
-<%= form_tag(publish_manual_path(manual), method: :post) do %>
-  <button name='submit' class="btn btn-danger">Publish</button>
-<% end -%>
+<% if manual.documents.any? %>
+  <%= form_tag(publish_manual_path(manual), method: :post) do %>
+    <button name='submit' class="btn btn-danger">Publish</button>
+  <% end -%>
+<% end %>
