@@ -39,7 +39,6 @@ SpecialistPublisherWiring = DependencyContainer.new do
       document_renderer: get(:specialist_document_renderer),
 
       manual_repository_factory: get(:manual_repository_factory),
-      plain_manual_repository_factory: get(:plain_manual_repository_factory),
       manual_builder: get(:manual_builder),
 
       observers: get(:observers),
@@ -57,7 +56,11 @@ SpecialistPublisherWiring = DependencyContainer.new do
         updated_at: "",
       }
 
-      Manual.new(default.merge(attrs))
+      ManualWithDocuments.new(
+        get(:manual_document_builder),
+        Manual.new(default.merge(attrs)),
+        documents: [],
+      )
     }
   }
 

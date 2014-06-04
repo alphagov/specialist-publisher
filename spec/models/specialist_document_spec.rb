@@ -24,6 +24,7 @@ describe SpecialistDocument do
       attachments: attachments_proxy,
       publish: nil,
       archive: nil,
+      attributes: {},
     }
   }
 
@@ -126,10 +127,42 @@ describe SpecialistDocument do
   end
 
   describe "#update" do
+    context "with string keyed attributes hashes" do
+      let(:editions) { [draft_edition_v1] }
+      let(:string_keyed_attrs) {
+        {
+          "body" => "o hai",
+        }
+      }
+
+      it "symbolizes the keys" do
+        doc.update(string_keyed_attrs)
+
+        expect(draft_edition_v1).to have_received(:assign_attributes).with(
+          hash_including(body: "o hai")
+        )
+      end
+    end
+
+    context "with bad attributes hashes" do
+      let(:editions) { [draft_edition_v1] }
+      let(:bad_attrs) {
+        {
+          :key_that_is_not_allowed => "o hai",
+        }
+      }
+
+      it "cleans the hash" do
+        doc.update(bad_attrs)
+
+        expect(draft_edition_v1).to have_received(:assign_attributes).with({})
+      end
+    end
+
     context "document is new, with no previous editions" do
       let(:editions) { [] }
       let(:attrs)    { { title: "Test title" } }
-      
+
       it "creates the first edition" do
         doc.update(attrs)
 
@@ -173,10 +206,46 @@ describe SpecialistDocument do
 
       let(:params) { {title: "It is a new title"} }
 
+      let(:edition_body) { double(:edition_body) }
+      let(:edition_attributes) {
+        {
+          "_id" => "superfluous id",
+          "updated_at" => "superfluous timestamp",
+          "body" => edition_body,
+        }
+      }
+
+      before do
+        allow(published_edition_v1).to receive(:attributes)
+          .and_return(edition_attributes)
+      end
+
       it "builds a new edition with the new params" do
         doc.update(params)
 
         expect(edition_factory).to have_received(:call).with(hash_including(params))
+      end
+
+      it "builds the new edition with attributes carried over from the previous edition" do
+        doc.update(params)
+
+        expect(edition_factory).to have_received(:call).with(hash_including(
+          body: edition_body,
+        ))
+      end
+
+      it "filters the previous edition's attributes" do
+        doc.update(params)
+
+        expect(edition_factory).not_to have_received(:call).with(hash_including(
+          :"_id" => "superfluous id",
+          :"updated_at" => "superfluous timestamp",
+        ))
+
+        expect(edition_factory).not_to have_received(:call).with(hash_including(
+          "_id" => "superfluous id",
+          "updated_at" => "superfluous timestamp",
+        ))
       end
 
       it "builds a new edition with an incremented version number" do

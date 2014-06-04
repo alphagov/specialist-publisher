@@ -130,7 +130,7 @@ Then(/^I see errors for the document fields$/) do
 end
 
 When(/^I publish the manual$/) do
-  click_on "Publish"
+  publish_manual
 end
 
 Then(/^the manual and its documents are published$/) do
@@ -162,6 +162,8 @@ Given(/^a published manual exists$/) do
   }
 
   create_manual_document(@manual_title, @document_fields)
+
+  publish_manual
 end
 
 When(/^I edit the manual's documents$/) do
