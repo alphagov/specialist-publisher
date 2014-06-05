@@ -113,8 +113,20 @@ module ManualHelpers
       )
   end
 
-  def check_manual_is_published_to_content_api(attrs)
-    check_for_published_document_with(attrs.except(:body))
+  def check_manual_is_published_to_content_api(manual_slug, manual_attrs, document_slug, document_attrs)
+    rendered_manual = RenderedManual.find_by_slug(manual_slug)
+
+    expect(rendered_manual.section_groups.first.fetch("sections")).to include(
+      {
+        "slug" => document_slug,
+        "title" => document_attrs.fetch(:title),
+        "summary" => document_attrs.fetch(:summary),
+      }
+    )
+
+    rendered_section = RenderedSpecialistDocument.find_by_slug(document_slug)
+    expect(rendered_section.title).to eq(document_attrs.fetch(:title))
+    expect(rendered_section.summary).to eq(document_attrs.fetch(:summary))
   end
 
   def check_manual_document_is_published_to_content_api(attrs)
@@ -125,7 +137,7 @@ module ManualHelpers
     check_manual_was_published_to_panopticon(manual_slug, manual_attrs)
     check_manual_section_was_published_to_panopticon(document_slug, document_attrs)
 
-    check_manual_is_published_to_content_api(manual_attrs)
+    check_manual_is_published_to_content_api(manual_slug, manual_attrs, document_slug, document_attrs)
     check_manual_document_is_published_to_content_api(document_attrs)
   end
 end
