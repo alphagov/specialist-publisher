@@ -1,6 +1,10 @@
 require "abstract_artefact_formatter"
 
 class ManualDocumentArtefactFormatter < AbstractArtefactFormatter
+  def initialize(entity, manual)
+    @entity = entity
+    @manual = manual
+  end
 
   def state
     state_mapping.fetch(entity.publication_state)
@@ -14,7 +18,7 @@ class ManualDocumentArtefactFormatter < AbstractArtefactFormatter
     "manuals-frontend"
   end
 
-  private
 
-  attr_reader :document
+private
+  attr_reader :manual
 end
