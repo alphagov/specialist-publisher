@@ -20,6 +20,9 @@
           Updated
         </th>
         <th>
+          Status
+        </th>
+        <th>
         </th>
       </thead>
       <tbody>
@@ -30,6 +33,9 @@
             </td>
             <td>
               <%= time_ago_in_words(manual.updated_at) %>
+            </td>
+            <td>
+              <%= manual.state %>
             </td>
             <td>
               <%= link_to 'Edit', edit_manual_path(manual) %>
