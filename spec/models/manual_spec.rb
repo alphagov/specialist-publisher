@@ -6,6 +6,7 @@ describe Manual do
   subject(:manual) {
     Manual.new(
       id: id,
+      slug: slug,
       title: title,
       summary: summary,
       organisation_slug: organisation_slug,
@@ -20,6 +21,7 @@ describe Manual do
   let(:summary) { double(:summary) }
   let(:organisation_slug) { double(:organisation_slug) }
   let(:state) { double(:state) }
+  let(:slug) { double(:slug) }
 
   it "rasies an error without an ID" do
     expect {
@@ -62,6 +64,20 @@ describe Manual do
           manual.publish(&block)
         }.not_to yield_with_no_args
       end
+    end
+  end
+
+  describe "#attributes" do
+    it "returns a hash of attributes" do
+      expect(manual.attributes).to eq(
+        id: id,
+        title: title,
+        slug: slug,
+        summary: summary,
+        organisation_slug: organisation_slug,
+        state: state,
+        updated_at: updated_at,
+      )
     end
   end
 

@@ -20,6 +20,18 @@ class Manual
     id
   end
 
+  def attributes
+    {
+      id: id,
+      slug: slug,
+      title: title,
+      summary: summary,
+      organisation_slug: organisation_slug,
+      state: state,
+      updated_at: updated_at,
+    }
+  end
+
   def update(attributes)
     @slug = attributes.fetch(:slug) { slug }
     @title = attributes.fetch(:title) { title }
