@@ -18,6 +18,9 @@ class ManualDocumentArtefactFormatter < AbstractArtefactFormatter
     "manuals-frontend"
   end
 
+  def organisation_slugs
+    [manual.organisation_slug]
+  end
 
 private
   attr_reader :manual
