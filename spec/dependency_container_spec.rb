@@ -47,7 +47,7 @@ describe DependencyContainer do
 
   describe "#inject_into" do
     let(:container) {
-      DependencyContainer.new.tap{ |c|
+      DependencyContainer.new.tap { |c|
         c.define_singleton(:example) { ExampleClass.new }
       }
     }
