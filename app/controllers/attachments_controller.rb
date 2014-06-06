@@ -24,7 +24,6 @@ class AttachmentsController < ApplicationController
     })
   end
 
-
   def update
     document, attachment = services.update_document_attachment(self).call
 

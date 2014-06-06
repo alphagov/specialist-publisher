@@ -81,7 +81,6 @@ SpecialistPublisherWiring = DependencyContainer.new do
     }
   }
 
-
   define_singleton(:specialist_document_repository) do
     SpecialistDocumentRepository.new(
       get(:panopticon_mappings),

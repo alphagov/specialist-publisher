@@ -30,7 +30,6 @@ describe SpecialistDocumentGovspeakToHTMLRenderer do
   let(:document_body) { double(:document_body) }
   let(:converted_body) { double(:converted_body) }
 
-
   it "is a true decorator" do
     expect(document).to receive(:any_arbitrary_message)
 

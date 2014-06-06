@@ -112,7 +112,6 @@ class SpecialistDocument
     exposed_edition.errors[field] += message
   end
 
-
   def previous_editions
     @editions[0...-1]
   end
