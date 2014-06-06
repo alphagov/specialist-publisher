@@ -13,13 +13,6 @@
       </div>
     <% end %>
 
-    <% if document.slug %>
-      <p class="slug">
-        <span>Slug:</span>
-        <span><%= document.slug %></span>
-      </p>
-    <% end %>
-
     <%= f.text_field :title %>
     <%= f.text_area :summary, class: 'short-textarea' %>
     <%= f.text_area :body %>

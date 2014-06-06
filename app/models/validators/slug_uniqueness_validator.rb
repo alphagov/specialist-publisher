@@ -13,7 +13,7 @@ class SlugUniquenessValidator < SimpleDelegator
   end
 
   def errors
-    document.errors.merge(slug_error)
+    document.errors.to_hash.merge(slug_error)
   end
 
   private

@@ -139,20 +139,6 @@ module CmaCaseHelpers
     expect(page).to have_css("h4", text: expected_slug)
   end
 
-  def capture_most_recent_slug
-    current_path_to_return_to = current_path
-
-    go_to_edit_page_for_most_recent_case
-
-    capture_slug.tap {
-      visit(current_path_to_return_to)
-    }
-  end
-
-  def capture_slug
-    page.all(".slug span").last.text
-  end
-
   def check_cma_case_is_published(slug, title)
     published_cma_case = RenderedSpecialistDocument.where(title: title).first
 

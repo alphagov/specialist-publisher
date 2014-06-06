@@ -3,8 +3,6 @@ require "active_model/conversion"
 require "active_model/naming"
 
 class SpecialistDocument
-  include ActiveModel::Conversion
-  extend ActiveModel::Naming
   extend Forwardable
 
   def self.edition_attributes
@@ -40,10 +38,6 @@ class SpecialistDocument
     else
       @editions.last
     end
-  end
-
-  def to_param
-    self.id
   end
 
   def attributes
@@ -114,11 +108,6 @@ class SpecialistDocument
 
   def previous_editions
     @editions[0...-1]
-  end
-
-  # TODO: remove this persistence concern
-  def persisted?
-    updated_at.present?
   end
 
   def add_attachment(attributes)

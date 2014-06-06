@@ -22,13 +22,13 @@ class SpecialistDocumentsController < ApplicationController
   def new
     document = services.new_document(self).call
 
-    render(:new, locals: { document: document })
+    render(:new, locals: { document: cma_form(document) })
   end
 
   def edit
     document = services.show_document(self).call
 
-    render(:edit, locals: { document: document })
+    render(:edit, locals: { document: cma_form(document) })
   end
 
   def create
@@ -70,6 +70,10 @@ class SpecialistDocumentsController < ApplicationController
   end
 
 protected
+
+  def cma_form(document)
+    CmaCaseForm.new(document)
+  end
 
   def authorize_user_org
     unless user_can_edit_documents?

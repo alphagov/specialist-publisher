@@ -85,7 +85,7 @@ SpecialistPublisherWiring = DependencyContainer.new do
     SpecialistDocumentRepository.new(
       get(:panopticon_mappings),
       get(:specialist_document_editions).where(document_type: "cma_case"),
-      get(:specialist_document_factory),
+      get(:validated_specialist_document_factory),
     )
   end
 
@@ -151,7 +151,9 @@ SpecialistPublisherWiring = DependencyContainer.new do
     ->(*args) {
       SlugUniquenessValidator.new(
         get(:specialist_document_repository),
-        get(:specialist_document_factory).call(*args),
+        CmaCaseForm.new(
+          get(:specialist_document_factory).call(*args),
+        ),
       )
     }
   }
