@@ -13,7 +13,7 @@ class SpecialistDocumentGovspeakToHTMLRenderer < SimpleDelegator
 
   def attributes
     document.attributes.merge(
-      :body => body,
+      body: body,
     )
   end
 

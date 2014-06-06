@@ -5,4 +5,4 @@ require File.expand_path("../config/application", __FILE__)
 
 SpecialistPublisher::Application.load_tasks
 
-task :default => [:spec, :cucumber]
+task default: [:spec, :cucumber]

@@ -148,7 +148,7 @@ describe SpecialistDocument do
       let(:editions) { [draft_edition_v1] }
       let(:bad_attrs) {
         {
-          :key_that_is_not_allowed => "o hai",
+          key_that_is_not_allowed: "o hai",
         }
       }
 
@@ -287,7 +287,7 @@ describe SpecialistDocument do
 
           expect(edition_factory).to have_received(:call).with(
             hash_including(
-              :slug => published_slug,
+              slug: published_slug,
             )
           )
         end
@@ -344,7 +344,7 @@ describe SpecialistDocument do
 
           expect(edition_factory).to have_received(:call).with(
             hash_including(
-              :slug => published_slug,
+              slug: published_slug,
             )
           )
         end

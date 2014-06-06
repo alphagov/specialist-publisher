@@ -362,7 +362,7 @@ SpecialistPublisherWiring = DependencyContainer.new do
   }
 
   define_factory(:null_finder_schema) {
-    OpenStruct.new(:facets => [])
+    OpenStruct.new(facets: [])
   }
 
   define_singleton(:http_client) { Faraday }
