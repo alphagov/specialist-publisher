@@ -32,7 +32,7 @@ SpecialistPublisherWiring = DependencyContainer.new do
 
   define_factory(:services) {
     ServiceRegistry.new(
-      document_builder: get(:specialist_document_builder),
+      document_builder: get(:cma_case_builder),
       document_repository: get(:specialist_document_repository),
       creation_listeners: get(:specialist_document_creation_observers),
       withdrawal_listeners: get(:specialist_document_withdrawal_observers),
@@ -71,12 +71,14 @@ SpecialistPublisherWiring = DependencyContainer.new do
     GdsApi::Panopticon.new(get(:plek).find("panopticon"), PANOPTICON_API_CREDENTIALS)
   end
 
-  define_singleton(:specialist_document_factory) {
+  define_singleton(:cma_case_factory) {
     ->(*args) {
-      SpecialistDocument.new(
-        get(:cma_slug_generator),
-        get(:edition_factory),
-        *args,
+      CmaCase.new(
+        SpecialistDocument.new(
+          get(:cma_slug_generator),
+          get(:edition_factory),
+          *args,
+        )
       )
     }
   }
@@ -85,7 +87,7 @@ SpecialistPublisherWiring = DependencyContainer.new do
     SpecialistDocumentRepository.new(
       get(:panopticon_mappings),
       get(:specialist_document_editions).where(document_type: "cma_case"),
-      get(:validated_specialist_document_factory),
+      get(:validatable_cma_case_factory),
     )
   end
 
@@ -140,19 +142,19 @@ SpecialistPublisherWiring = DependencyContainer.new do
   define_singleton(:edition_factory) { SpecialistDocumentEdition.method(:new) }
   define_singleton(:attachment_factory) { Attachment.method(:new) }
 
-  define_factory(:specialist_document_builder) {
+  define_factory(:cma_case_builder) {
     SpecialistDocumentBuilder.new(
-      get(:validated_specialist_document_factory),
+      get(:validatable_cma_case_factory),
       get(:id_generator),
     )
   }
 
-  define_factory(:validated_specialist_document_factory) {
+  define_factory(:validatable_cma_case_factory) {
     ->(*args) {
       SlugUniquenessValidator.new(
         get(:specialist_document_repository),
         CmaCaseForm.new(
-          get(:specialist_document_factory).call(*args),
+          get(:cma_case_factory).call(*args),
         ),
       )
     }

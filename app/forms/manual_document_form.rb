@@ -25,8 +25,6 @@ class ManualDocumentForm
     :find_attachment_by_id,
     :errors,
     :valid?,
-    :persisted?,
-    :to_param,
   ]
 
   def_delegators(:document, *(document_methods + document_attributes))
@@ -34,6 +32,14 @@ class ManualDocumentForm
   def initialize(manual, document)
     @manual = manual
     @document = document
+  end
+
+  def persisted?
+    !!document.updated_at
+  end
+
+  def to_param
+    document.id
   end
 
   def self.model_name

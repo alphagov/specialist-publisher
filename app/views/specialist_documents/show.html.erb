@@ -1,5 +1,35 @@
 <h1 class="page-header"><%= document.title %></h1>
+
 <h4><%= document.slug %></h4>
+
+<div class="row">
+  <div class="sidebar col-md-8">
+    <p>Summary</p>
+    <p><%= document.summary %>
+  </div>
+</div>
+
+<div class="row">
+  <div class="sidebar col-md-8">
+    <dl>
+      <dt>Opened date</dt>
+      <dd><%= document.opened_date %></dd>
+      <dt>Closed date</dt>
+      <dd><%= document.closed_date %></dd>
+      <dt>Case type</dt>
+      <dd><%= document.case_type %></dd>
+      <dt>Case state</dt>
+      <dd><%= document.case_state %></dd>
+      <dt>Market sector</dt>
+      <dd><%= document.market_sector %></dd>
+      <dt>Outcome type</dt>
+      <dd><%= document.outcome_type %></dd>
+      <dt>Publication state</dt>
+      <dd><%= document.publication_state %></dd>
+    </dl>
+  </div>
+</div>
+
 
 <div class="row">
   <%= form_tag(publish_specialist_document_path(document), method: :post) do %>
@@ -15,8 +45,4 @@
 
 <div class="row">
   <div><%= link_to("Edit", edit_specialist_document_path(document)) %></div>
-</div>
-
-<div class="row">
-  <div>Publication state: <%= document.publication_state %></div>
 </div>

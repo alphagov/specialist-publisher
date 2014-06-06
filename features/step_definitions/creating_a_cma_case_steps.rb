@@ -70,7 +70,7 @@ Given(/^a draft CMA case exists$/) do
   create_cma_case(@cma_fields, publish: false)
 end
 
-Then(/^the CMA case should exist$/) do
+Then(/^the CMA case has been created$/) do
   check_cma_case_exists_with(@cma_fields)
   check_slug_registered_with_panopticon(@slug)
 end
@@ -139,10 +139,6 @@ end
 
 Then(/^I should see an error message about the duplicate slug$/) do
   check_for_error("Slug is already taken")
-end
-
-When(/^I visit the specialist documents page$/) do
-  visit specialist_documents_path
 end
 
 When(/^I start creating a new CMA case$/) do

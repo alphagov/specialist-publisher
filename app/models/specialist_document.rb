@@ -12,14 +12,9 @@ class SpecialistDocument
       :summary,
       :body,
       :document_type,
-      :opened_date,
-      :closed_date,
-      :case_type,
-      :case_state,
-      :market_sector,
-      :outcome_type,
       :updated_at,
-      :version_number
+      :version_number,
+      :extra_fields,
     ]
   end
 
@@ -40,9 +35,19 @@ class SpecialistDocument
     end
   end
 
+  def to_param
+    id
+  end
+
+  def extra_fields
+    exposed_edition.extra_fields.symbolize_keys
+  end
+
   def attributes
-    exposed_edition.attributes
+    exposed_edition
+      .attributes
       .symbolize_keys
+      .merge(extra_fields: extra_fields)
       .select { |k, v|
         self.class.edition_attributes.include?(k)
       }
