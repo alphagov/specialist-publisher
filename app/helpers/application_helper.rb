@@ -53,4 +53,8 @@ module ApplicationHelper
       preview_new_manual_document_path(manual)
     end
   end
+
+  def url_for_public_manual(manual)
+    "#{MANUAL_CONTENT_URL}/#{manual.slug}"
+  end
 end

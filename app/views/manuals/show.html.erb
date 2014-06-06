@@ -2,6 +2,10 @@
   <p>Manual title</p>
   <h1 class="page-header">
     <%= manual.title %>
+    <p>
+      <small><%= link_to manual.slug, url_for_public_manual(manual) %></small>
+    </p>
+    
   </h1>
 
   <div class="actions">
@@ -13,14 +17,13 @@
 
 <div class="row">
   <div class="sidebar col-md-8">
-    <p>State</p>
-    <%= manual.state %>
+    <p><b>State</b> <%= manual.state %></p>
   </div>
 </div>
 
 <div class="row">
   <div class="sidebar col-md-8">
-    <p>Summary</p>
+    <p><b>Summary</b></p>
     <%= govspeak(manual.summary) %>
   </div>
 </div>
