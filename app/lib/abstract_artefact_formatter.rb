@@ -27,6 +27,7 @@ class AbstractArtefactFormatter
       rendering_app: rendering_app,
       paths: paths,
       state: state,
+      organisation_ids: organisation_slugs,
     }
   end
 
@@ -39,6 +40,10 @@ class AbstractArtefactFormatter
   end
 
   def rendering_app
+    raise NotImplementedError
+  end
+
+  def organisation_slugs
     raise NotImplementedError
   end
 

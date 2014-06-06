@@ -14,7 +14,7 @@ class DocumentArtefactFormatter < AbstractArtefactFormatter
     "specialist-frontend"
   end
 
-  private
-
-  attr_reader :document
+  def organisation_slugs
+    ['competition-and-markets-authority']
+  end
 end

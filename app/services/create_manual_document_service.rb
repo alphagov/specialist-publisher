@@ -27,9 +27,8 @@ class CreateManualDocumentService
   end
 
   def notify_listeners
-    # TODO: consider passing the whole manual as the document doesn't exist in isolation
     listeners.each do |listener|
-      listener.call(new_document)
+      listener.call(new_document, manual)
     end
   end
 
