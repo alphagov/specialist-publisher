@@ -72,7 +72,7 @@ class SpecialistDocument
 
     # TODO: this is very defensive, we need enforce consistency of params at the boudary
     params = params
-      .select { |k,v| allowed_update_params.include?(k.to_s) }
+      .select { |k, v| allowed_update_params.include?(k.to_s) }
       .symbolize_keys
 
     if never_published? && params.fetch(:title, false)

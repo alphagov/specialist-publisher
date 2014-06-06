@@ -132,8 +132,8 @@ describe SpecialistDocumentRepository do
 
   describe "#store(document)" do
     context "with a valid editions" do
-      let(:previous_edition) { build_published_edition(version:1) }
-      let(:current_published_edition) { build_published_edition(version:2) }
+      let(:previous_edition) { build_published_edition(version: 1) }
+      let(:current_published_edition) { build_published_edition(version: 2) }
 
       let(:editions) {
         [
