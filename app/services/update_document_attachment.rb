@@ -28,7 +28,7 @@ class UpdateDocumentAttachmentService
   def attachment_params
     context.params
       .fetch("attachment")
-      .merge( "filename" => uploaded_filename)
+      .merge("filename" => uploaded_filename)
   end
 
   def uploaded_filename

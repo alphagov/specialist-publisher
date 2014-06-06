@@ -112,7 +112,7 @@ describe SlugUniquenessValidator do
 
         document_with_validator.valid?
 
-        allow(document_repository).to receive(:slug_unique? )
+        allow(document_repository).to receive(:slug_unique?)
           .and_return(true)
       end
 

@@ -89,7 +89,7 @@ describe SpecialistDocument do
   }
 
   context "with one draft edition" do
-    let(:editions) { [ draft_edition_v1 ] }
+    let(:editions) { [draft_edition_v1] }
 
     it "is in draft" do
       expect(doc).to be_draft
@@ -101,7 +101,7 @@ describe SpecialistDocument do
   end
 
   context "with one published edition" do
-    let(:editions) { [ published_edition_v1 ] }
+    let(:editions) { [published_edition_v1] }
 
     it "is published" do
       expect(doc).to be_published
@@ -113,7 +113,7 @@ describe SpecialistDocument do
   end
 
   context "with one published edition and one draft edition" do
-    let(:editions) { [ published_edition_v1, draft_edition_v2 ] }
+    let(:editions) { [published_edition_v1, draft_edition_v2] }
 
     it "is published and in draft" do
       expect(doc).to be_draft
@@ -366,7 +366,7 @@ describe SpecialistDocument do
 
   describe "#publish!" do
     context "one draft" do
-      let(:editions) { [ draft_edition_v1 ] }
+      let(:editions) { [draft_edition_v1] }
 
       it "should set its state to published" do
         doc.publish!
@@ -375,7 +375,7 @@ describe SpecialistDocument do
     end
 
     context "one published and one draft edition" do
-      let(:editions) { [ published_edition_v1, draft_edition_v2 ] }
+      let(:editions) { [published_edition_v1, draft_edition_v2] }
 
       it "should set the draft edition's state to published" do
         doc.publish!
@@ -398,7 +398,7 @@ describe SpecialistDocument do
     end
 
     context "one published edition" do
-      let(:editions) { [ published_edition_v1] }
+      let(:editions) { [published_edition_v1] }
 
       it "do nothing" do
         doc.publish!
@@ -408,7 +408,7 @@ describe SpecialistDocument do
   end
 
   describe "#add_attachment" do
-    let(:editions) { [ published_edition_v1, draft_edition_v2 ] }
+    let(:editions) { [published_edition_v1, draft_edition_v2] }
     let(:params) { double(:params) }
 
     it "tells the latest edition to create an attachment using the supplied parameters" do
@@ -419,7 +419,7 @@ describe SpecialistDocument do
   end
 
   describe "#attachments" do
-    let(:editions) { [ published_edition_v1, draft_edition_v2 ] }
+    let(:editions) { [published_edition_v1, draft_edition_v2] }
 
     it "delegates to the latest edition" do
       doc.attachments
@@ -434,7 +434,7 @@ describe SpecialistDocument do
 
   describe "#previous_editions" do
     context "with two editions" do
-      let(:editions) { [ published_edition_v1, draft_edition_v2 ] }
+      let(:editions) { [published_edition_v1, draft_edition_v2] }
 
       it "returns an array including the first edition" do
         expect(doc.previous_editions).to eq([published_edition_v1])
@@ -570,7 +570,7 @@ describe SpecialistDocument do
 
   describe "#withdrawn?" do
     context "one draft" do
-      let(:editions) { [ draft_edition_v1 ] }
+      let(:editions) { [draft_edition_v1] }
 
       it "returns false" do
         expect(doc).not_to be_withdrawn
@@ -578,7 +578,7 @@ describe SpecialistDocument do
     end
 
     context "one published" do
-      let(:editions) { [ published_edition_v1 ] }
+      let(:editions) { [published_edition_v1] }
 
       it "returns false" do
         expect(doc).not_to be_withdrawn
@@ -586,7 +586,7 @@ describe SpecialistDocument do
     end
 
     context "one published and one withdrawn" do
-      let(:editions) { [ published_edition_v1, withdrawn_edition_v2 ] }
+      let(:editions) { [published_edition_v1, withdrawn_edition_v2] }
 
       it "returns true" do
         expect(doc).to be_withdrawn
@@ -596,7 +596,7 @@ describe SpecialistDocument do
 
   describe "#withdraw!" do
     context "one draft" do
-      let(:editions) { [ draft_edition_v1 ] }
+      let(:editions) { [draft_edition_v1] }
 
       it "does nothing" do
         doc.withdraw!
@@ -606,7 +606,7 @@ describe SpecialistDocument do
     end
 
     context "one published and one withdrawn" do
-      let(:editions) { [ published_edition_v1, withdrawn_edition_v2 ] }
+      let(:editions) { [published_edition_v1, withdrawn_edition_v2] }
 
       it "does nothing" do
         doc.withdraw!
@@ -617,7 +617,7 @@ describe SpecialistDocument do
     end
 
     context "one published and one draft edition" do
-      let(:editions) { [ published_edition_v1, draft_edition_v2 ] }
+      let(:editions) { [published_edition_v1, draft_edition_v2] }
 
       it "sets the published edition's state to withdrawn" do
         doc.withdraw!
@@ -627,7 +627,7 @@ describe SpecialistDocument do
     end
 
     context "one published edition" do
-      let(:editions) { [ published_edition_v1] }
+      let(:editions) { [published_edition_v1] }
 
       it "sets the published edition's state to withdrawn" do
         doc.withdraw!

@@ -94,7 +94,7 @@ describe SpecialistDocumentRepository do
 
   describe "#[]" do
     let(:editions_proxy) { double(:editions_proxy, to_a: editions).as_null_object }
-    let(:editions)       { [ published_edition ] }
+    let(:editions)       { [published_edition] }
 
     before do
       allow(SpecialistDocument).to receive(:new).and_return(document)

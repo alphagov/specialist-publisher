@@ -193,7 +193,7 @@ module CmaCaseHelpers
   end
 
   def check_rendered_document_contains_header_meta_data(document)
-    expect(document.headers.first).to include( "text" => "Header" )
+    expect(document.headers.first).to include("text" => "Header")
   end
 
   def check_for_correctly_archived_editions(document_attrs)
