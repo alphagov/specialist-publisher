@@ -5,7 +5,8 @@ require 'builders/specialist_document_builder'
 require 'gds_api/panopticon'
 require 'panopticon_registerer'
 require "specialist_document_attachment_processor"
-require "specialist_document_exporter"
+require "specialist_document_database_exporter"
+require "manual_database_exporter"
 require "rendered_specialist_document"
 require "specialist_document_govspeak_to_html_renderer"
 require "specialist_document_header_extractor"
@@ -13,7 +14,6 @@ require "finder_api_notifier"
 require "finder_api"
 require "validators/slug_uniqueness_validator"
 require "marshallers/document_association_marshaller"
-require "manual_link_list_body_renderer"
 
 $LOAD_PATH.unshift(File.expand_path("../..", "app/services"))
 
@@ -322,7 +322,7 @@ SpecialistPublisherWiring = DependencyContainer.new do
 
   define_instance(:specialist_document_content_api_exporter) {
     ->(doc) {
-      SpecialistDocumentExporter.new(
+      SpecialistDocumentDatabaseExporter.new(
         RenderedSpecialistDocument,
         get(:specialist_document_renderer),
         get(:finder_schema),
@@ -333,7 +333,7 @@ SpecialistPublisherWiring = DependencyContainer.new do
 
   define_factory(:manual_document_content_api_exporter) {
     ->(doc) {
-      SpecialistDocumentExporter.new(
+      SpecialistDocumentDatabaseExporter.new(
         RenderedSpecialistDocument,
         get(:specialist_document_renderer),
         get(:null_finder_schema),
@@ -343,33 +343,11 @@ SpecialistPublisherWiring = DependencyContainer.new do
   }
 
   define_factory(:manual_content_api_exporter) {
-    ->(doc) {
-      SpecialistDocumentExporter.new(
-        RenderedSpecialistDocument,
-        get(:manual_renderer),
-        get(:null_finder_schema),
-        doc,
-      ).call
-    }
-  }
-
-  define_factory(:manual_link_list_body_renderer) {
-    ManualLinkListBodyRenderer.method(:new)
-  }
-
-  define_factory(:manual_render_pipeline) {
-    [
-      get(:manual_link_list_body_renderer),
-      get(:specialist_document_govspeak_header_extractor),
-      get(:specialist_document_govspeak_to_html_renderer),
-    ]
-  }
-
-  define_instance(:manual_renderer) {
     ->(manual) {
-      get(:manual_render_pipeline).reduce(manual) { |manual, next_renderer|
-        next_renderer.call(manual)
-      }
+      ManualDatabaseExporter.new(
+        RenderedManual,
+        manual,
+      ).call
     }
   }
 

@@ -1,10 +1,10 @@
 require "fast_spec_helper"
 
-require "specialist_document_exporter"
+require "specialist_document_database_exporter"
 
-describe SpecialistDocumentExporter do
+describe SpecialistDocumentDatabaseExporter do
   subject(:exporter) {
-    SpecialistDocumentExporter.new(
+    SpecialistDocumentDatabaseExporter.new(
       export_recipent,
       document_renderer,
       finder_schema,
