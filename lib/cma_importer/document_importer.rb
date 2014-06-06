@@ -13,13 +13,13 @@ module CMAImporter
 
       @case_data["original_urls"] ||= Array(@case_data.delete("original_url"))
 
-      required_fields = [
-        "title",
-        "summary",
-        "sector",
-        "case_type",
-        "case_state"
-      ]
+      required_fields = %w(
+        title
+        summary
+        sector
+        case_type
+        case_state
+      )
 
       required_fields.each do |field|
         unless @case_data.has_key?(field)

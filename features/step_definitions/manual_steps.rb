@@ -123,7 +123,7 @@ When(/^I create a document with empty fields$/) do
 end
 
 Then(/^I see errors for the document fields$/) do
-  ["Title", "Summary", "Body"].each do |field|
+  %w(Title Summary Body).each do |field|
     expect(page).to have_content("#{field} can't be blank")
   end
   expect(page).not_to have_content("Add attachment")
