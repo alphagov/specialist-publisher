@@ -32,7 +32,7 @@ class PanopticonRegisterer
       resource_id: artefact.resource_id,
       resource_type: artefact.kind,
       slug: artefact.slug,
-      panopticon_id: response['id'],
+      panopticon_id: response["id"],
     )
   end
 

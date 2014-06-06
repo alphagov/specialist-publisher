@@ -1,15 +1,15 @@
 #!/usr/bin/env ruby
 
-require File.expand_path('../../config/environment', __FILE__)
+require File.expand_path("../../config/environment", __FILE__)
 
 abort("Usage: bin/cma_importer content_directory") if ARGV.empty? || !File.directory?(ARGV.first)
 
-require 'pathname'
+require "pathname"
 content_directory = Pathname.new(ARGV.first)
 
-require 'uri'
-require 'cma_importer'
-require 'logger'
+require "uri"
+require "cma_importer"
+require "logger"
 
 logger = Logger.new(STDOUT)
 

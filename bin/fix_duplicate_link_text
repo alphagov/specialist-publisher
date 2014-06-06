@@ -1,7 +1,7 @@
 #!/usr/bin/env ruby
 
-require File.expand_path('../../config/environment', __FILE__)
-require 'cma_importer/duplicate_link_text_fixer'
+require File.expand_path("../../config/environment", __FILE__)
+require "cma_importer/duplicate_link_text_fixer"
 
 SpecialistDocumentEdition.all.each do |e|
   puts "Removing duplicate text in edition '#{e.title}' v#{e.version_number}"

@@ -7,7 +7,7 @@ module ApplicationHelper
     state = document.publication_state
 
     if %w(published withdrawn).include?(state) && document.draft?
-      state << ' with new draft'
+      state << " with new draft"
     end
 
     state

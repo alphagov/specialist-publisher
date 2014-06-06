@@ -7,12 +7,12 @@ Given(/^I am logged in as a CMA editor$/) do
 end
 
 When(/^I create a CMA case$/) do
-  @document_title = 'Example CMA Case'
+  @document_title = "Example CMA Case"
   @cma_fields = {
     title: @document_title,
-    summary: 'Nullam quis risus eget urna mollis ornare vel eu leo.',
+    summary: "Nullam quis risus eget urna mollis ornare vel eu leo.",
     body: "## Header" + ("\n\nPraesent commodo cursus magna, vel scelerisque nisl consectetur et." * 10),
-    opened_date: '2014-01-01'
+    opened_date: "2014-01-01"
   }
 
   create_cma_case(@cma_fields)
@@ -21,30 +21,30 @@ end
 
 When(/^I create a CMA case without one of the required fields$/) do
   @cma_fields = {
-    summary: 'Nullam quis risus eget urna mollis ornare vel eu leo.',
+    summary: "Nullam quis risus eget urna mollis ornare vel eu leo.",
     body: "## Header" + ("\n\nPraesent commodo cursus magna, vel scelerisque nisl consectetur et." * 10),
-    opened_date: '2014-01-01'
+    opened_date: "2014-01-01"
   }
 
   create_cma_case(@cma_fields)
 end
 
 When(/^I publish a new CMA case$/) do
-  @document_title = 'Example CMA Case'
-  @slug = 'cma-cases/example-cma-case'
+  @document_title = "Example CMA Case"
+  @slug = "cma-cases/example-cma-case"
 
   @cma_fields = {
     title: @document_title,
-    summary: 'Nullam quis risus eget urna mollis ornare vel eu leo.',
+    summary: "Nullam quis risus eget urna mollis ornare vel eu leo.",
     body: "## Header" + ("\n\nPraesent commodo cursus magna, vel scelerisque nisl consectetur et." * 10),
-    opened_date: '2014-01-01'
+    opened_date: "2014-01-01"
   }
 
   create_cma_case(@cma_fields, publish: true)
 end
 
 When(/^I edit a CMA case$/) do
-  @new_title = 'Edited Example CMA Case'
+  @new_title = "Edited Example CMA Case"
   edit_cma_case(@document_title, title: @new_title)
 end
 
@@ -57,14 +57,14 @@ Given(/^two CMA cases exist$/) do
 end
 
 Given(/^a draft CMA case exists$/) do
-  @document_title = 'Example CMA Case'
-  @slug = 'cma-cases/example-cma-case'
+  @document_title = "Example CMA Case"
+  @slug = "cma-cases/example-cma-case"
 
   @cma_fields = {
     title: @document_title,
-    summary: 'Nullam quis risus eget urna mollis ornare vel eu leo.',
+    summary: "Nullam quis risus eget urna mollis ornare vel eu leo.",
     body: "## Header" + ("\n\nPraesent commodo cursus magna, vel scelerisque nisl consectetur et." * 10),
-    opened_date: '2014-01-01'
+    opened_date: "2014-01-01"
   }
 
   create_cma_case(@cma_fields, publish: false)

@@ -7,9 +7,9 @@ describe ManualRecord, hits_db: true do
     context "when there are several previous editions" do
       let!(:editions) {
         [
-          record.editions.create!(state: 'published', version_number: 2),
-          record.editions.create!(state: 'draft', version_number: 3),
-          record.editions.create!(state: 'published', version_number: 1),
+          record.editions.create!(state: "published", version_number: 2),
+          record.editions.create!(state: "draft", version_number: 3),
+          record.editions.create!(state: "published", version_number: 1),
         ]
       }
 
@@ -21,7 +21,7 @@ describe ManualRecord, hits_db: true do
 
   describe "#new_or_existing_draft_edition" do
     context "when a draft edition exists" do
-      let!(:edition) { record.editions.create!(state: 'draft') }
+      let!(:edition) { record.editions.create!(state: "draft") }
 
       it "returns the existing draft edition" do
         expect(record.new_or_existing_draft_edition).to eq(edition)
@@ -30,8 +30,8 @@ describe ManualRecord, hits_db: true do
 
     context "when both published and draft editions exist" do
       before do
-        @draft_edition = record.editions.create!(state: 'draft', version_number: 2)
-        record.editions.create!(state: 'published', version_number: 1)
+        @draft_edition = record.editions.create!(state: "draft", version_number: 2)
+        record.editions.create!(state: "published", version_number: 1)
       end
 
       it "returns the existing draft edition" do
@@ -43,20 +43,20 @@ describe ManualRecord, hits_db: true do
       it "builds a new draft edition" do
         new_edition = record.new_or_existing_draft_edition
         expect(new_edition).not_to be_persisted
-        expect(new_edition.state).to eq('draft')
+        expect(new_edition.state).to eq("draft")
         expect(new_edition.version_number).to eq(1)
       end
     end
 
     context "when only non-draft editions exists" do
       before do
-        record.editions.create!(state: 'published', version_number: 1)
+        record.editions.create!(state: "published", version_number: 1)
       end
 
       it "builds a new draft edition" do
         new_edition = record.new_or_existing_draft_edition
         expect(new_edition).not_to be_persisted
-        expect(new_edition.state).to eq('draft')
+        expect(new_edition.state).to eq("draft")
         expect(new_edition.version_number).to eq(2)
       end
     end
@@ -64,15 +64,15 @@ describe ManualRecord, hits_db: true do
 
   describe "#find_by_organisation" do
     let!(:cma_manual) {
-      ManualRecord.create!(organisation_slug: 'cma')
+      ManualRecord.create!(organisation_slug: "cma")
     }
 
     let!(:tea_manual) {
-      ManualRecord.create!(organisation_slug: 'ministry-of-tea')
+      ManualRecord.create!(organisation_slug: "ministry-of-tea")
     }
 
     it "filters by organisation" do
-      expect(ManualRecord.find_by_organisation('cma').to_a).to eq([cma_manual])
+      expect(ManualRecord.find_by_organisation("cma").to_a).to eq([cma_manual])
     end
   end
 

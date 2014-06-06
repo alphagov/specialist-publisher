@@ -1,5 +1,5 @@
-require 'specialist_publisher_wiring'
-require 'forwardable'
+require "specialist_publisher_wiring"
+require "forwardable"
 
 class ApplicationController < ActionController::Base
   include GDS::SSO::ControllerMethods
@@ -25,7 +25,7 @@ class ApplicationController < ActionController::Base
   end
 
   def user_can_edit_documents?
-    current_user.organisation_slug == 'competition-and-markets-authority'
+    current_user.organisation_slug == "competition-and-markets-authority"
   end
   helper_method :user_can_edit_documents?
 

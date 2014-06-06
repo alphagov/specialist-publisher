@@ -1,14 +1,14 @@
-require 'govuk_content_models/test_helpers/factories'
+require "govuk_content_models/test_helpers/factories"
 
 FactoryGirl.define do
   factory :cma_editor, parent: :user do
-    organisation_slug 'competition-and-markets-authority'
+    organisation_slug "competition-and-markets-authority"
   end
 end
 
 FactoryGirl.define do
   factory :generic_editor, parent: :user do
-    organisation_slug 'ministry-of-tea'
+    organisation_slug "ministry-of-tea"
   end
 end
 

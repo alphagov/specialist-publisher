@@ -15,7 +15,7 @@ class SlugGenerator
   def slugify_title(title)
     title
       .downcase
-      .gsub(/[^a-zA-Z0-9]+/, '-')
-      .gsub(/-+$/, '')
+      .gsub(/[^a-zA-Z0-9]+/, "-")
+      .gsub(/-+$/, "")
   end
 end

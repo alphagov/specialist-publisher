@@ -1,6 +1,6 @@
 #!/usr/bin/env ruby
 
-require File.expand_path('../../config/environment', __FILE__)
-require 'published_document_renderer'
+require File.expand_path("../../config/environment", __FILE__)
+require "published_document_renderer"
 
 PublishedDocumentRenderer.new.rerender!

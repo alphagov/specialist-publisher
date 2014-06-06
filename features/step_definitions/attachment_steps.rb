@@ -3,9 +3,9 @@ Given(/^there is an existing draft case$/) do
 
   create_cma_case(
     title: @document_title,
-    summary: 'Eget urna mollis ornare vel eu leo.',
-    body: ('Praesent commodo cursus magna, vel scelerisque nisl consectetur et.' * 10),
-    opened_date: '2014-01-01'
+    summary: "Eget urna mollis ornare vel eu leo.",
+    body: ("Praesent commodo cursus magna, vel scelerisque nisl consectetur et." * 10),
+    opened_date: "2014-01-01"
   )
 end
 

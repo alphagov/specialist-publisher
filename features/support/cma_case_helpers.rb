@@ -57,7 +57,7 @@ module CmaCaseHelpers
 
   def check_for_new_title
     visit specialist_documents_path
-    page.should have_content('Edited Example CMA Case')
+    page.should have_content("Edited Example CMA Case")
   end
 
   def check_cma_case_does_not_exist_with(attributes)
@@ -115,8 +115,8 @@ module CmaCaseHelpers
 
   def check_for_cma_case_body_preview
     expect(current_path).to match(%r{/specialist-documents/([0-9a-f-]+|new)})
-    within('.preview') do
-      expect(page).to have_css('p', text: 'Body for preview')
+    within(".preview") do
+      expect(page).to have_css("p", text: "Body for preview")
     end
   end
 
@@ -208,7 +208,7 @@ module CmaCaseHelpers
     end
   end
 
-  def seed_cases(number_of_cases, state: 'draft')
+  def seed_cases(number_of_cases, state: "draft")
     # TODO: Use the create document service or a more robust way of seeding data
     @created_case_index ||= 0
     number_of_cases.times do
@@ -218,12 +218,12 @@ module CmaCaseHelpers
         summary: "summary",
         body: "body",
         opened_date: Time.zone.parse("2014-01-01"),
-        market_sector: 'agriculture-environment-and-natural-resources',
-        case_state: 'open',
-        case_type: 'ca98',
-        outcome_type: 'ca98-commitment',
+        market_sector: "agriculture-environment-and-natural-resources",
+        case_state: "open",
+        case_type: "ca98",
+        outcome_type: "ca98-commitment",
         state: state,
-        document_type: 'cma_case',
+        document_type: "cma_case",
       )
 
       PanopticonMapping.create!(
@@ -241,8 +241,8 @@ module CmaCaseHelpers
 
   def withdraw_document(title)
     visit specialist_documents_path
-    click_link 'withdraw'
-    click_button 'Withdraw'
+    click_link "withdraw"
+    click_button "Withdraw"
   end
 
   def check_document_is_withdrawn(slug, document_title)

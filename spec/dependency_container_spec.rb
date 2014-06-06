@@ -1,5 +1,5 @@
-require 'spec_helper'
-require 'dependency_container'
+require "spec_helper"
+require "dependency_container"
 
 describe DependencyContainer do
 

@@ -1,6 +1,6 @@
 #!/usr/bin/env ruby
 
-require File.expand_path('../../config/environment', __FILE__)
+require File.expand_path("../../config/environment", __FILE__)
 
 unless ARGV.include?("--confirm")
   puts %Q{Usage: #{File.basename(__FILE__)} --confirm
@@ -16,7 +16,7 @@ SpecialistDocumentEdition.all.each do |e|
   e.attachments.each(&:destroy); e.destroy
 end
 
-Artefact.where(kind: 'specialist-document').each do |a|
+Artefact.where(kind: "specialist-document").each do |a|
   puts "Destroying artefact '#{a.slug}'"
   a.destroy
 end

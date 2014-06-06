@@ -1,5 +1,5 @@
-require 'spec_helper'
-require 'finder_api'
+require "spec_helper"
+require "finder_api"
 
 describe FinderAPI do
   let(:http_client) { double(:http_client, put: nil, delete: nil) }
@@ -10,7 +10,7 @@ describe FinderAPI do
 
   before do
     allow(plek).to receive(:find)
-                   .with('finder-api')
+                   .with("finder-api")
                    .and_return("http://finder-api.example.com")
 
     allow(http_client).to receive(:new)
@@ -18,8 +18,8 @@ describe FinderAPI do
                            .and_return(http_client)
   end
 
-  describe '#notify_of_publication(finder_type, document)' do
-    it 'puts to the Finder API with the document as JSON data' do
+  describe "#notify_of_publication(finder_type, document)" do
+    it "puts to the Finder API with the document as JSON data" do
       api_client.notify_of_publication(document_slug, document)
 
       expect(http_client).to have_received(:put).with(

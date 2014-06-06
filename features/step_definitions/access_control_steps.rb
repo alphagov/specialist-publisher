@@ -27,15 +27,15 @@ Given(/^there are manuals created by multiple organisations$/) do
 
   login_as(:cma_editor)
   @cma_manual_fields = {
-    title: 'Manual on Competition',
-    summary: 'Nullam quis risus eget urna mollis ornare vel eu leo.',
+    title: "Manual on Competition",
+    summary: "Nullam quis risus eget urna mollis ornare vel eu leo.",
   }
   create_manual(@cma_manual_fields)
 
   login_as(:generic_editor)
   @tea_manual_fields = {
-    title: 'Manual on Tea',
-    summary: 'Nullam quis risus eget urna mollis ornare vel eu leo.',
+    title: "Manual on Tea",
+    summary: "Nullam quis risus eget urna mollis ornare vel eu leo.",
   }
   create_manual(@tea_manual_fields)
 

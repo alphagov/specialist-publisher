@@ -34,7 +34,7 @@ describe SpecialistDocument do
     double(:draft_edition_v1,
       edition_messages.merge(
         title: "Draft edition v1",
-        state: 'draft',
+        state: "draft",
         draft?: true,
         published?: false,
         archived?: false,
@@ -48,7 +48,7 @@ describe SpecialistDocument do
     double(:draft_edition_v2,
       edition_messages.merge(
         title: "Draft edition v2",
-        state: 'draft',
+        state: "draft",
         draft?: true,
         published?: false,
         archived?: false,
@@ -62,7 +62,7 @@ describe SpecialistDocument do
     double(:published_edition_v1,
       edition_messages.merge(
         title: "Published edition",
-        state: 'published',
+        state: "published",
         published?: true,
         draft?: false,
         archived?: false,
@@ -77,7 +77,7 @@ describe SpecialistDocument do
     double(:withdrawn_edition_v2,
       edition_messages.merge(
         title: "Withdrawn edition",
-        state: 'withdrawn',
+        state: "withdrawn",
         published?: false,
         draft?: false,
         archived?: true,
@@ -257,7 +257,7 @@ describe SpecialistDocument do
       it "builds a new edition in the 'draft' state" do
         doc.update(params)
 
-        expect(edition_factory).to have_received(:call).with(hash_including(state: 'draft'))
+        expect(edition_factory).to have_received(:call).with(hash_including(state: "draft"))
       end
 
       it "builds a new edition copying over the previous edition's attachments" do
@@ -314,7 +314,7 @@ describe SpecialistDocument do
       it "builds a new edition in the 'draft' state" do
         doc.update(params)
 
-        expect(edition_factory).to have_received(:call).with(hash_including(state: 'draft'))
+        expect(edition_factory).to have_received(:call).with(hash_including(state: "draft"))
       end
 
       it "builds a new edition copying over the previous edition's attachments" do

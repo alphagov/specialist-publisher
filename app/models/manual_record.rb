@@ -7,7 +7,7 @@ class ManualRecord
   field :slug, type: String
 
   embeds_many :editions,
-    class_name: 'ManualRecord::Edition',
+    class_name: "ManualRecord::Edition",
     cascade_callbacks: true
 
   def self.find_by(attributes)
@@ -36,7 +36,7 @@ class ManualRecord
 
 private
   def build_draft_edition
-    editions.build(state: 'draft', version_number: next_version_number)
+    editions.build(state: "draft", version_number: next_version_number)
   end
 
   def next_version_number
@@ -59,6 +59,6 @@ private
 
     # We don't make use of the relationship but Mongiod can't save the
     # timestamps properly without it.
-    embedded_in 'ManualRecord'
+    embedded_in "ManualRecord"
   end
 end

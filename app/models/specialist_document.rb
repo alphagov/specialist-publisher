@@ -64,7 +64,7 @@ class SpecialistDocument
   end
 
   def finder_slug
-    slug.split('/').first
+    slug.split("/").first
   end
 
   def update(params)

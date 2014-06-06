@@ -1,4 +1,4 @@
-require 'logger'
+require "logger"
 
 module CMAImporter
   class DocumentImporter
@@ -11,14 +11,14 @@ module CMAImporter
         @case_data.delete(k) if v.blank?
       end
 
-      @case_data['original_urls'] ||= Array(@case_data.delete('original_url'))
+      @case_data["original_urls"] ||= Array(@case_data.delete("original_url"))
 
       required_fields = [
-        'title',
-        'summary',
-        'sector',
-        'case_type',
-        'case_state'
+        "title",
+        "summary",
+        "sector",
+        "case_type",
+        "case_state"
       ]
 
       required_fields.each do |field|
@@ -28,10 +28,10 @@ module CMAImporter
         end
       end
 
-      if @case_data.has_key?('opened_date')
-        @case_data['opened_date'] = Date.parse(@case_data['opened_date'])
+      if @case_data.has_key?("opened_date")
+        @case_data["opened_date"] = Date.parse(@case_data["opened_date"])
       else
-        @case_data['opened_date'] = Date.parse('2012-01-01')
+        @case_data["opened_date"] = Date.parse("2012-01-01")
       end
     end
 
@@ -49,20 +49,20 @@ module CMAImporter
       end
 
       mapping = SpecialistPublisherWiring.get(:panopticon_mappings).where(document_id: document.id).last
-      mapping.update_attribute(:original_urls, case_data['original_urls'])
+      mapping.update_attribute(:original_urls, case_data["original_urls"])
 
-      Array(case_data['assets']).each do |asset_data|
-        basename = asset_data['filename'].split('/').last
+      Array(case_data["assets"]).each do |asset_data|
+        basename = asset_data["filename"].split("/").last
         logger.info("-- Adding asset #{basename}")
 
-        file = File.open(content_directory + asset_data['filename'])
+        file = File.open(content_directory + asset_data["filename"])
         uploaded_file = ActionDispatch::Http::UploadedFile.new(
           tempfile: file,
           filename: basename,
-          type: asset_data['content_type']
+          type: asset_data["content_type"]
         )
 
-        asset_url = asset_data['original_url']
+        asset_url = asset_data["original_url"]
         asset_path = URI.parse(asset_url).path
 
         asset_title = presenter.attachment_titles[asset_path] ||

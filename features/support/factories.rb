@@ -1,1 +1,1 @@
-require 'test/factories'
+require "test/factories"

@@ -1,1 +1,1 @@
-require 'cucumber/rspec/doubles'
+require "cucumber/rspec/doubles"
