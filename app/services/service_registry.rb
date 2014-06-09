@@ -60,6 +60,15 @@ class ServiceRegistry
     )
   end
 
+  def preview_manual_document(context)
+    PreviewManualDocumentService.new(
+      manual_repository(context),
+      document_builder,
+      document_renderer,
+      context,
+    )
+  end
+
   def publish_document(context)
     PublishDocumentService.new(
       document_repository,

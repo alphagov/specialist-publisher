@@ -52,4 +52,10 @@ class ManualDocumentsController < ApplicationController
       })
     end
   end
+
+  def preview
+    preview_html = services.preview_manual_document(self).call
+
+    render json: { preview_html: preview_html }
+  end
 end

@@ -23,7 +23,6 @@ When(/^I copy\+paste the embed code into the body of the case$/) do
 end
 
 Then(/^I can see a link to the file with the title in the document preview$/) do
-  generate_preview
   check_preview_contains_attachment_link(@attachment_title)
 end
 

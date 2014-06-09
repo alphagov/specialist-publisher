@@ -144,4 +144,29 @@ module ManualHelpers
     check_manual_is_published_to_content_api(manual_slug, manual_attrs, document_slug, document_attrs)
     check_manual_document_is_published_to_content_api(document_attrs)
   end
+
+  def create_manual_document_for_preview(manual_title, fields)
+    go_to_manual_page(manual_title)
+    click_on "Add Section"
+    fill_in_fields(fields)
+  end
+
+  def check_for_document_body_preview(text)
+    within(".preview") do
+      expect(page).to have_css("p", text: text)
+    end
+  end
+
+  def copy_embed_code_for_attachment_and_paste_into_manual_document_body(title)
+    snippet = within(".attachments") do
+      page
+        .find("li", text: /#{title}/)
+        .find("span.snippet")
+        .text
+    end
+
+    body_text = find("#document_body").value
+    fill_in("Body", with: body_text + snippet)
+  end
+
 end

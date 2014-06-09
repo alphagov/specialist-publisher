@@ -176,3 +176,40 @@ When(/^I edit the manual's documents$/) do
 
   edit_manual_document(@manual_title, @document_title, @updated_document_fields)
 end
+
+When(/^I start creating a new manual document$/) do
+  @document_fields = {
+    title: "Section 1",
+    summary: "Section 1 summary",
+    body: "Section 1 body",
+  }
+
+  create_manual_document_for_preview(
+    @document_fields.fetch(:title),
+    @document_fields,
+  )
+end
+
+When(/^I preview the document$/) do
+  generate_preview
+end
+
+When(/^I create a document to preview$/) do
+  @document_fields = {
+    title: "Section 1",
+    summary: "Section 1 summary",
+    body: "Section 1 body",
+  }
+
+  go_to_manual_page(@manual_fields[:title])
+  click_on "Add Section"
+  fill_in_fields(@document_fields)
+end
+
+Then(/^I see the document body preview$/) do
+  check_for_document_body_preview("Section 1 body")
+end
+
+When(/^I copy\+paste the embed code into the body of the document$/) do
+  copy_embed_code_for_attachment_and_paste_into_manual_document_body("My attachment")
+end
