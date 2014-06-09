@@ -163,12 +163,8 @@ SpecialistPublisherWiring = DependencyContainer.new do
   define_factory(:manual_document_builder) {
     ->(manual, attrs) {
       defaults = {
-          document_type: "manual",
-          opened_date: Date.parse("1/04/2014"),
-          market_sector: "manual",
-          case_type: "manual",
-          case_state: "manual",
-        }
+        document_type: "manual",
+      }
 
       get(:validated_manual_document_factory_factory)
         .call(manual)
