@@ -1,4 +1,4 @@
-require 'spec_helper'
+require "spec_helper"
 
 describe SpecialistDocumentRepository do
 
@@ -94,7 +94,7 @@ describe SpecialistDocumentRepository do
 
   describe "#[]" do
     let(:editions_proxy) { double(:editions_proxy, to_a: editions).as_null_object }
-    let(:editions)       { [ published_edition ] }
+    let(:editions)       { [published_edition] }
 
     before do
       allow(SpecialistDocument).to receive(:new).and_return(document)
@@ -132,8 +132,8 @@ describe SpecialistDocumentRepository do
 
   describe "#store(document)" do
     context "with a valid editions" do
-      let(:previous_edition) { build_published_edition(version:1) }
-      let(:current_published_edition) { build_published_edition(version:2) }
+      let(:previous_edition) { build_published_edition(version: 1) }
+      let(:current_published_edition) { build_published_edition(version: 2) }
 
       let(:editions) {
         [

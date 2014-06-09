@@ -46,6 +46,7 @@ group :test do
   gem "timecop"
   gem "poltergeist", "1.5.0"
   gem "webmock", "~> 1.17.4"
+  gem "rubocop"
 end
 
 group :development, :test do

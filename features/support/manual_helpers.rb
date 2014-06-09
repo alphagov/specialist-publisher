@@ -55,7 +55,7 @@ module ManualHelpers
 
   def go_to_edit_page_for_manual(manual_title)
     go_to_manual_page(manual_title)
-    click_on('Edit Manual')
+    click_on("Edit Manual")
   end
 
   def check_for_errors_for_fields(field)

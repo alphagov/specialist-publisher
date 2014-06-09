@@ -1,4 +1,4 @@
-require 'multi_json'
+require "multi_json"
 
 class FinderSchema
   def initialize(schema_path)

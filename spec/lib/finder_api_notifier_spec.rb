@@ -1,8 +1,8 @@
-require 'fast_spec_helper'
-require 'finder_api_notifier'
+require "fast_spec_helper"
+require "finder_api_notifier"
 
 describe FinderAPINotifier do
-  describe '#call(document)' do
+  describe "#call(document)" do
     subject(:notifier) { FinderAPINotifier.new(api_client, markdown_renderer) }
 
     let(:api_client) { double(:finder_api, notify_of_publication: nil) }

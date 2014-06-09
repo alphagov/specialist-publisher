@@ -33,7 +33,7 @@ module AttachmentHelpers
         body: JSON.dump(asset_manager_response),
         status: 200,
       )
-      
+
     click_on "Save attachment"
   end
 
@@ -82,9 +82,9 @@ module AttachmentHelpers
   def create_case_with_attachment(document_title, attachment_title)
     create_cma_case(
       title: document_title,
-      summary: 'Eget urna mollis ornare vel eu leo.',
-      body: ('Praesent commodo cursus magna, vel scelerisque nisl consectetur et.' * 10),
-      opened_date: '2014-01-01'
+      summary: "Eget urna mollis ornare vel eu leo.",
+      body: ("Praesent commodo cursus magna, vel scelerisque nisl consectetur et." * 10),
+      opened_date: "2014-01-01"
     )
 
     add_attachment_to_case(document_title, attachment_title)

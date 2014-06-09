@@ -12,7 +12,7 @@ describe SpecialistDocumentHeaderExtractor do
 
   let(:doc_body)          { double(:doc_body) }
   let(:doc_attributes)    { { body: doc_body } }
-  let(:header_metadata)   { [ header_metadatum] }
+  let(:header_metadata)   { [header_metadatum] }
   let(:header_metadatum)  { double(:header_metadatum, headers: [], to_h: serialized_metadata) }
   let(:serialized_metadata) { { text: "Header", headers: [] } }
 

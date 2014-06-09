@@ -1,9 +1,9 @@
-require 'dependency_container'
-require 'securerandom'
+require "dependency_container"
+require "securerandom"
 require "specialist_document_repository"
-require 'builders/specialist_document_builder'
-require 'gds_api/panopticon'
-require 'panopticon_registerer'
+require "builders/specialist_document_builder"
+require "gds_api/panopticon"
+require "panopticon_registerer"
 require "specialist_document_attachment_processor"
 require "specialist_document_database_exporter"
 require "manual_database_exporter"
@@ -80,7 +80,6 @@ SpecialistPublisherWiring = DependencyContainer.new do
       )
     }
   }
-
 
   define_singleton(:specialist_document_repository) do
     SpecialistDocumentRepository.new(
@@ -161,10 +160,10 @@ SpecialistPublisherWiring = DependencyContainer.new do
     ->(manual, attrs) {
       defaults = {
           document_type: "manual",
-          opened_date: Date.parse('1/04/2014'),
-          market_sector: 'manual',
-          case_type: 'manual',
-          case_state: 'manual',
+          opened_date: Date.parse("1/04/2014"),
+          market_sector: "manual",
+          case_type: "manual",
+          case_state: "manual",
         }
 
       get(:validated_manual_document_factory_factory)
@@ -363,7 +362,7 @@ SpecialistPublisherWiring = DependencyContainer.new do
   }
 
   define_factory(:null_finder_schema) {
-    OpenStruct.new(:facets => [])
+    OpenStruct.new(facets: [])
   }
 
   define_singleton(:http_client) { Faraday }

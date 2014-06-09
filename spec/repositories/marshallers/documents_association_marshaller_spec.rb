@@ -1,6 +1,6 @@
-require 'fast_spec_helper'
+require "fast_spec_helper"
 
-require 'marshallers/document_association_marshaller'
+require "marshallers/document_association_marshaller"
 
 describe DocumentAssociationMarshaller do
 

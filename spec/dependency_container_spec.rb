@@ -1,5 +1,5 @@
-require 'spec_helper'
-require 'dependency_container'
+require "spec_helper"
+require "dependency_container"
 
 describe DependencyContainer do
 
@@ -47,7 +47,7 @@ describe DependencyContainer do
 
   describe "#inject_into" do
     let(:container) {
-      DependencyContainer.new.tap{ |c|
+      DependencyContainer.new.tap { |c|
         c.define_singleton(:example) { ExampleClass.new }
       }
     }

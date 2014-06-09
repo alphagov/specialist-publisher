@@ -52,4 +52,3 @@ class CreateManualService
     context.current_organisation_slug
   end
 end
-

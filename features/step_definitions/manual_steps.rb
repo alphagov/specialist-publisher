@@ -1,7 +1,7 @@
 When(/^I create a manual$/) do
   @manual_fields = {
-    title: 'Example Manual Title',
-    summary: 'Nullam quis risus eget urna mollis ornare vel eu leo.',
+    title: "Example Manual Title",
+    summary: "Nullam quis risus eget urna mollis ornare vel eu leo.",
   }
   @manual_slug = "guidance/example-manual-title"
 
@@ -19,15 +19,15 @@ end
 Given(/^a draft manual exists$/) do
   @manual_slug = "guidance/example-manual-title"
   @manual_fields = {
-    title: 'Example Manual Title',
-    summary: 'Nullam quis risus eget urna mollis ornare vel eu leo.',
+    title: "Example Manual Title",
+    summary: "Nullam quis risus eget urna mollis ornare vel eu leo.",
   }
 
   create_manual(@manual_fields)
 end
 
 When(/^I edit a manual$/) do
-  @new_title = 'Edited Example Manual'
+  @new_title = "Edited Example Manual"
   edit_manual(@manual_fields[:title], title: @new_title)
 end
 
@@ -37,25 +37,25 @@ end
 
 When(/^I create a manual with an empty title$/) do
   @manual_fields = {
-    title: '',
-    summary: 'Nullam quis risus eget urna mollis ornare vel eu leo.',
+    title: "",
+    summary: "Nullam quis risus eget urna mollis ornare vel eu leo.",
   }
 
   create_manual(@manual_fields)
 end
 
 Then(/^I see errors for the title field$/) do
-  check_for_errors_for_fields('title')
+  check_for_errors_for_fields("title")
 end
 
 When(/^I create a document for the manual$/) do
-  @document_title = 'Section 1'
-  @document_slug = [@manual_slug, 'section-1'].join('/')
+  @document_title = "Section 1"
+  @document_slug = [@manual_slug, "section-1"].join("/")
 
   @document_fields = {
     title: @document_title,
-    summary: 'Section 1 summary',
-    body: 'Section 1 body',
+    summary: "Section 1 summary",
+    body: "Section 1 body",
   }
 
   create_manual_document(@manual_fields.fetch(:title), @document_fields)
@@ -89,7 +89,7 @@ Given(/^a draft document exists for the manual$/) do
 end
 
 When(/^I edit the document$/) do
-  @new_title = 'A new section title'
+  @new_title = "A new section title"
   edit_manual_document(
     @manual_fields.fetch(:title),
     @document_fields.fetch(:title),
@@ -106,7 +106,7 @@ end
 
 When(/^I visit the specialist documents path for the manual document$/) do
   link = page.find("a", text: @document_title)
-  document_id = URI.parse(link['href']).path.split("/").last
+  document_id = URI.parse(link["href"]).path.split("/").last
   visit specialist_document_path(document_id)
 end
 
@@ -123,10 +123,10 @@ When(/^I create a document with empty fields$/) do
 end
 
 Then(/^I see errors for the document fields$/) do
-  ['Title', 'Summary', 'Body'].each do |field|
+  %w(Title Summary Body).each do |field|
     expect(page).to have_content("#{field} can't be blank")
   end
-  expect(page).not_to have_content('Add attachment')
+  expect(page).not_to have_content("Add attachment")
 end
 
 When(/^I publish the manual$/) do
@@ -148,17 +148,17 @@ Given(/^a published manual exists$/) do
 
   @manual_fields = {
     title: @manual_title,
-    summary: 'Nullam quis risus eget urna mollis ornare vel eu leo.',
+    summary: "Nullam quis risus eget urna mollis ornare vel eu leo.",
   }
 
   create_manual(@manual_fields)
 
-  @document_title = 'Section 1'
+  @document_title = "Section 1"
   @document_slug = [@manual_slug, "section-1"].join("/")
   @document_fields = {
     title: @document_title,
-    summary: 'Section 1 summary',
-    body: 'Section 1 body',
+    summary: "Section 1 summary",
+    body: "Section 1 body",
   }
 
   create_manual_document(@manual_title, @document_fields)

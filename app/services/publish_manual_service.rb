@@ -40,4 +40,3 @@ class PublishManualService
     context.params.fetch("id")
   end
 end
-

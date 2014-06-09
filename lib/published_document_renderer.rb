@@ -12,4 +12,3 @@ class PublishedDocumentRenderer
       end
   end
 end
-

@@ -36,7 +36,6 @@ class ObserversRegistry
     ]
   end
 
-
   private
 
   attr_reader(

@@ -64,7 +64,7 @@ class SpecialistDocument
   end
 
   def finder_slug
-    slug.split('/').first
+    slug.split("/").first
   end
 
   def update(params)
@@ -72,7 +72,7 @@ class SpecialistDocument
 
     # TODO: this is very defensive, we need enforce consistency of params at the boudary
     params = params
-      .select { |k,v| allowed_update_params.include?(k.to_s) }
+      .select { |k, v| allowed_update_params.include?(k.to_s) }
       .symbolize_keys
 
     if never_published? && params.fetch(:title, false)
@@ -111,7 +111,6 @@ class SpecialistDocument
     exposed_edition.errors[field] ||= []
     exposed_edition.errors[field] += message
   end
-
 
   def previous_editions
     @editions[0...-1]

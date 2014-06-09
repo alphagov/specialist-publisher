@@ -8,7 +8,7 @@ module AccessControlHelpers
   end
 
   def check_document_link_not_visible
-    expect(page).not_to have_css('a', text: 'Documents')
+    expect(page).not_to have_css("a", text: "Documents")
   end
 
   def check_page_for_content(content)

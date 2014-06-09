@@ -15,6 +15,6 @@ class DocumentArtefactFormatter < AbstractArtefactFormatter
   end
 
   def organisation_slugs
-    ['competition-and-markets-authority']
+    ["competition-and-markets-authority"]
   end
 end
