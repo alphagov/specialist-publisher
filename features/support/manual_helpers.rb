@@ -10,7 +10,11 @@ module ManualHelpers
     go_to_manual_page(manual_title)
     click_on "Add Section"
 
-    fill_in_fields(fields)
+    fill_in_fields(
+      {
+        change_note: "First version",
+      }.merge(fields)
+    )
 
     save_as_draft
   end
@@ -26,7 +30,11 @@ module ManualHelpers
     go_to_manual_page(manual_title)
     click_on section_title
     click_on "Edit"
-    fill_in_fields(new_fields)
+    fill_in_fields(
+      {
+        change_note: "Update",
+      }.merge(new_fields)
+    )
 
     save_as_draft
   end
@@ -169,4 +177,13 @@ module ManualHelpers
     fill_in("Body", with: body_text + snippet)
   end
 
+  def check_manual_change_note_exported(slug, expected_note)
+    exported_history = ManualChangeHistory
+      .find_by_slug(slug)
+
+    most_recent_section_update = exported_history.updates.last
+
+    expect(most_recent_section_update.fetch("change_note"))
+      .to eq(@change_note)
+  end
 end

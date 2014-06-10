@@ -1,3 +1,5 @@
+require "manual_change_note_database_exporter"
+
 class ObserversRegistry
 
   def initialize(dependencies)
@@ -19,8 +21,10 @@ class ObserversRegistry
 
   def manual_publication
     [
+      publication_logger,
       manual_panopticon_registerer,
       manual_content_api_exporter,
+      manual_change_note_content_api_exporter,
     ]
   end
 
@@ -46,4 +50,31 @@ class ObserversRegistry
     :manual_document_panopticon_registerer,
     :manual_content_api_exporter,
   )
+
+  def manual_change_note_content_api_exporter
+    ->(manual) {
+      ManualChangeNoteDatabaseExporter.new(
+        export_target: ManualChangeHistory,
+        publication_logs: PublicationLog,
+        manual: manual,
+      ).call
+    }
+  end
+
+  def publication_logger
+    ->(manual) {
+      PublicationLog.create!(
+        title: manual.title,
+        slug: manual.slug,
+      )
+
+      manual.documents.each do |doc|
+        PublicationLog.create!(
+          title: doc.title,
+          slug: doc.slug,
+          change_note: doc.change_note,
+        )
+      end
+    }
+  end
 end

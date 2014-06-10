@@ -32,6 +32,14 @@ Feature: Creating and editing a manual
     When I create a document with empty fields
     Then I see errors for the document fields
 
+  Scenario: Omit the change note
+    Given a draft manual exists
+    And a draft document exists for the manual
+    When I edit the document without a change note
+    Then I see an error requesting that I provide a change note
+    When I indicate that the change is minor
+    Then the document is updated without a change note
+
   Scenario: Add a document to a manual
     Given a draft manual exists
     When I create a document for the manual
@@ -49,18 +57,6 @@ Feature: Creating and editing a manual
     And a draft document exists for the manual
     When I attach a file and give it a title
     Then I see the attached file
-
-  Scenario: Publish a manual
-    Given a draft manual exists
-    And a draft document exists for the manual
-    When I publish the manual
-    Then the manual and its documents are published
-
-  Scenario: Edit and re-publish a manual
-    Given a published manual exists
-    When I edit the manual's documents
-    And I publish the manual
-    Then the manual and its documents are published
 
   @regression
   Scenario: Manual documents are not available as specialist documents

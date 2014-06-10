@@ -180,13 +180,15 @@ SpecialistPublisherWiring = DependencyContainer.new do
       ->(id, editions) {
         slug_generator = get(:manual_document_slug_generator).call(manual.slug)
 
-        SlugUniquenessValidator.new(
-          get(:specialist_document_repository),
-          SpecialistDocument.new(
-            slug_generator,
-            get(:edition_factory),
-            id,
-            editions,
+        ChangeNoteValidator.new(
+          SlugUniquenessValidator.new(
+            get(:specialist_document_repository),
+            SpecialistDocument.new(
+              slug_generator,
+              get(:edition_factory),
+              id,
+              editions,
+            )
           )
         )
       }

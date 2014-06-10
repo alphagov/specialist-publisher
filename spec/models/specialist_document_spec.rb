@@ -36,6 +36,8 @@ describe SpecialistDocument do
       archive: nil,
       attributes: {},
       extra_fields: extra_fields,
+      minor_update: false,
+      change_note: "Some changes",
     }
   }
 
