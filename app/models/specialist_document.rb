@@ -3,8 +3,6 @@ require "active_model/conversion"
 require "active_model/naming"
 
 class SpecialistDocument
-  include ActiveModel::Conversion
-  extend ActiveModel::Naming
   extend Forwardable
 
   def self.edition_attributes
@@ -14,14 +12,9 @@ class SpecialistDocument
       :summary,
       :body,
       :document_type,
-      :opened_date,
-      :closed_date,
-      :case_type,
-      :case_state,
-      :market_sector,
-      :outcome_type,
       :updated_at,
-      :version_number
+      :version_number,
+      :extra_fields,
     ]
   end
 
@@ -43,12 +36,18 @@ class SpecialistDocument
   end
 
   def to_param
-    self.id
+    id
+  end
+
+  def extra_fields
+    exposed_edition.extra_fields.symbolize_keys
   end
 
   def attributes
-    exposed_edition.attributes
+    exposed_edition
+      .attributes
       .symbolize_keys
+      .merge(extra_fields: extra_fields)
       .select { |k, v|
         self.class.edition_attributes.include?(k)
       }
@@ -114,11 +113,6 @@ class SpecialistDocument
 
   def previous_editions
     @editions[0...-1]
-  end
-
-  # TODO: remove this persistence concern
-  def persisted?
-    updated_at.present?
   end
 
   def add_attachment(attributes)

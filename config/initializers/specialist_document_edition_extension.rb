@@ -1,1 +1,0 @@
-require "specialist_document_edition_extension"

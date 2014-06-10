@@ -8,6 +8,10 @@ describe SpecialistDocument do
     SpecialistDocument.new(slug_generator, edition_factory, document_id, editions)
   }
 
+  def key_classes_for(hash)
+    hash.keys.map(&:class).uniq
+  end
+
   let(:document_id)         { "a-document-id" }
   let(:document_type)       { "cma_case" }
   let(:slug)                { double(:slug) }
@@ -17,6 +21,12 @@ describe SpecialistDocument do
   let(:new_edition)         { double(:new_edition, published?: false, draft?: true, assign_attributes: nil, version_number: 2) }
   let(:attachments)         { double(:attachments) }
 
+  let(:extra_fields) {
+    {
+      "case_state" => "open",
+    }
+  }
+
   let(:edition_messages)    {
     {
       build_attachment: nil,
@@ -25,6 +35,7 @@ describe SpecialistDocument do
       publish: nil,
       archive: nil,
       attributes: {},
+      extra_fields: extra_fields,
     }
   }
 
@@ -53,6 +64,7 @@ describe SpecialistDocument do
         published?: false,
         archived?: false,
         version_number: 2,
+        extra_fields: extra_fields,
         document_type: document_type,
       )
     )
@@ -450,6 +462,16 @@ describe SpecialistDocument do
     end
   end
 
+  describe "#extra_fields" do
+    let(:editions) {
+      [ draft_edition_v1 ]
+    }
+
+    it "returns the extra fields from the edition (symbolized)" do
+      expect(key_classes_for(doc.extra_fields)).to eq([Symbol])
+    end
+  end
+
   describe "#attributes" do
     let(:relevant_document_attrs) {
       {
@@ -471,8 +493,25 @@ describe SpecialistDocument do
 
     let(:editions) { [published_edition_v1, edition] }
 
+    context "with extra fields" do
+      let(:extra_fields) {
+        {
+          "case_state" => "open",
+        }
+      }
+
+      before do
+        allow(edition).to receive(:attributes)
+          .and_return(relevant_document_attrs.merge("extra_fields" => extra_fields))
+      end
+
+      it "deep symbolizes the extra field keys" do
+        expect(key_classes_for(doc.attributes.fetch(:extra_fields))).to eq([Symbol])
+      end
+    end
+
     it "symbolizes the keys" do
-      expect(doc.attributes.keys.map(&:class).uniq).to eq([Symbol])
+      expect(key_classes_for(doc.attributes)).to eq([Symbol])
     end
 
     it "returns attributes with junk removed" do

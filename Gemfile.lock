@@ -82,7 +82,7 @@ GEM
     faraday (0.9.0)
       multipart-post (>= 1.2, < 3)
     fetchable (1.0.0)
-    gds-api-adapters (10.15.0)
+    gds-api-adapters (10.16.0)
       link_header
       lrucache (~> 0.1.1)
       null_logger
@@ -100,7 +100,7 @@ GEM
       htmlentities (~> 4)
       kramdown (~> 0.13.3)
       sanitize (~> 2.0.3)
-    govuk_content_models (11.4.0)
+    govuk_content_models (12.0.0)
       bson_ext
       differ
       gds-api-adapters (>= 10.9.0)
@@ -299,7 +299,7 @@ DEPENDENCIES
   gds-sso (= 9.2.4)
   generic_form_builder (= 0.8.0)
   govspeak (= 1.5.1)
-  govuk_content_models (= 11.4.0)
+  govuk_content_models (= 12.0.0)
   govuk_frontend_toolkit (= 0.44.0)
   jasmine-rails
   launchy

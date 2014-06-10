@@ -37,12 +37,11 @@ module CmaCaseHelpers
   end
 
   def check_cma_case_exists_with(attributes)
-    expect(
-      # LOL: Mongiod helpfully replaces "\n" with "\r\n" so a body
-      #      containing line breaks will never match.
-      #      Perhaps we should just match on slug?
-      SpecialistDocumentEdition.exists?(conditions: attributes.except(:body))
-    ).to be(true)
+    go_to_show_page_for_document(attributes.fetch(:title))
+
+    attributes.except(:body).each do |field, value|
+      expect(page).to have_content(value)
+    end
   end
 
   def check_for_missing_title_error
@@ -139,20 +138,6 @@ module CmaCaseHelpers
     expect(page).to have_css("h4", text: expected_slug)
   end
 
-  def capture_most_recent_slug
-    current_path_to_return_to = current_path
-
-    go_to_edit_page_for_most_recent_case
-
-    capture_slug.tap {
-      visit(current_path_to_return_to)
-    }
-  end
-
-  def capture_slug
-    page.all(".slug span").last.text
-  end
-
   def check_cma_case_is_published(slug, title)
     published_cma_case = RenderedSpecialistDocument.where(title: title).first
 
@@ -213,11 +198,11 @@ module CmaCaseHelpers
     @created_case_index ||= 0
     number_of_cases.times do
       @created_case_index += 1
-      doc = specialist_document_builder.call(
+      doc = cma_case_builder.call(
         title: "Specialist Document #{@created_case_index}",
         summary: "summary",
         body: "body",
-        opened_date: Time.zone.parse("2014-01-01"),
+        opened_date: Time.parse("2014-01-01"),
         market_sector: "agriculture-environment-and-natural-resources",
         case_state: "open",
         case_type: "ca98",
