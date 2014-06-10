@@ -68,3 +68,20 @@ Feature: Creating and editing a manual
     And a draft document exists for the manual
     When I visit the specialist documents path for the manual document
     Then the document is not found
+
+  @javascript
+  Scenario: Previewing a draft manual document with an attachment
+    Given a draft manual exists
+    And a draft document exists for the manual
+    When I attach a file and give it a title
+    Then I see the attached file
+    When I copy+paste the embed code into the body of the document
+    And I preview the document
+    Then I can see a link to the file with the title in the document preview
+
+  @javascript
+  Scenario: Previewing a new manual document
+    Given a draft manual exists
+    When I create a document to preview
+    And I preview the document
+    Then I see the document body preview
