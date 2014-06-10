@@ -444,24 +444,6 @@ describe SpecialistDocument do
     end
   end
 
-  describe "#previous_editions" do
-    context "with two editions" do
-      let(:editions) { [published_edition_v1, draft_edition_v2] }
-
-      it "returns an array including the first edition" do
-        expect(doc.previous_editions).to eq([published_edition_v1])
-      end
-    end
-
-    context "with one edition" do
-      let(:editions) { [draft_edition_v1] }
-
-      it "returns an empty array" do
-        expect(doc.previous_editions).to be_empty
-      end
-    end
-  end
-
   describe "#extra_fields" do
     let(:editions) {
       [ draft_edition_v1 ]
@@ -530,15 +512,6 @@ describe SpecialistDocument do
       expect(doc.attributes).to include(
         id: document_id,
       )
-    end
-  end
-
-  describe "#finder_slug" do
-    let(:editions) { [published_edition_v1] }
-    let(:published_slug) { "finder-791/some-document" }
-
-    it "uses the first part of the slug" do
-      expect(doc.finder_slug).to eq("finder-791")
     end
   end
 

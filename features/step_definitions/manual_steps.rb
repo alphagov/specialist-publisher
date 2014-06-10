@@ -67,10 +67,6 @@ Then(/^I see the manual has the new section$/) do
   expect(page).to have_content(@document_fields.fetch(:title))
 end
 
-Then(/^I see the new page$/) do
-  expect(page).to have_content(@document_fields.fetch(:title))
-end
-
 Then(/^the manual section slug should be reserved$/) do
   check_manual_document_slug_was_reserved(@document_slug)
 end

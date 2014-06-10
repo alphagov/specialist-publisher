@@ -89,10 +89,6 @@ Then(/^the CMA cases should be in the publisher case index in the correct order$
   check_for_cma_cases("Specialist Document 2", "Specialist Document 1")
 end
 
-Then(/^I should be returned to the list of documents$/) do
-  check_currently_on_publisher_index_page
-end
-
 When(/^I make changes and preview the CMA case$/) do
   make_changes_without_saving(
     title: "Title for preview",

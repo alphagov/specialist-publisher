@@ -69,10 +69,6 @@ module CmaCaseHelpers
     end
   end
 
-  def check_currently_on_publisher_index_page
-    current_path.should eq(specialist_documents_path)
-  end
-
   def go_to_edit_page_for_most_recent_case
     warn "DEPRECATED: use #go_to_edit_page_for_document and provide title"
     registry = SpecialistPublisherWiring.get(:specialist_document_repository)
