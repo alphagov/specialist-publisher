@@ -82,11 +82,9 @@ SpecialistPublisherWiring = DependencyContainer.new do
     }
   }
 
-  define_instance(:specialist_document_editions) { SpecialistDocumentEdition }
   define_instance(:artefacts) { Artefact }
-  define_instance(:panopticon_mappings) { PanopticonMapping }
   define_singleton(:panopticon_api) do
-    GdsApi::Panopticon.new(get(:plek).find("panopticon"), PANOPTICON_API_CREDENTIALS)
+    GdsApi::Panopticon.new(Plek.current.find("panopticon"), PANOPTICON_API_CREDENTIALS)
   end
 
   define_singleton(:cma_case_factory) {
@@ -115,14 +113,14 @@ SpecialistPublisherWiring = DependencyContainer.new do
 
   define_singleton(:aaib_report_repository) do
     SpecialistDocumentRepository.new(
-      specialist_document_editions: get(:specialist_document_editions).where(document_type: "aaib_report"),
+      specialist_document_editions: SpecialistDocumentEdition.where(document_type: "aaib_report"),
       document_factory: get(:validatable_aaib_report_factory),
     )
   end
 
   define_singleton(:specialist_document_repository) do
     SpecialistDocumentRepository.new(
-      specialist_document_editions: get(:specialist_document_editions).where(document_type: "cma_case"),
+      specialist_document_editions: SpecialistDocumentEdition.where(document_type: "cma_case"),
       document_factory: get(:validatable_cma_case_factory),
     )
   end
@@ -132,7 +130,7 @@ SpecialistPublisherWiring = DependencyContainer.new do
       document_factory = get(:validated_manual_document_factory_factory).call(manual)
 
       SpecialistDocumentRepository.new(
-        specialist_document_editions: get(:specialist_document_editions).where(document_type: "manual"),
+        specialist_document_editions: SpecialistDocumentEdition.where(document_type: "manual"),
         document_factory: document_factory,
       )
     }
@@ -253,19 +251,15 @@ SpecialistPublisherWiring = DependencyContainer.new do
     SpecialistDocumentAttachmentProcessor.method(:new)
   }
 
-  define_instance(:govspeak_document_factory) {
-    Govspeak::Document.method(:new)
-  }
-
   define_instance(:govspeak_html_converter) {
     ->(string) {
-      get(:govspeak_document_factory).call(string).to_html
+      Govspeak::Document.new(string).to_html
     }
   }
 
   define_instance(:govspeak_header_extractor) {
     ->(string) {
-      get(:govspeak_document_factory).call(string).structured_headers
+      Govspeak::Document.new(string).structured_headers
     }
   }
 
@@ -328,7 +322,7 @@ SpecialistPublisherWiring = DependencyContainer.new do
     ->(artefact) {
       PanopticonRegisterer.new(
         api_client: get(:panopticon_api),
-        mappings: get(:panopticon_mappings),
+        mappings: PanopticonMapping,
         artefact: artefact,
       ).call
     }
@@ -463,10 +457,8 @@ SpecialistPublisherWiring = DependencyContainer.new do
     OpenStruct.new(facets: [])
   }
 
-  define_singleton(:http_client) { Faraday }
-
   define_singleton(:finder_api) {
-    FinderAPI.new(get(:http_client), get(:plek))
+    FinderAPI.new(Faraday, Plek.current)
   }
 
   define_singleton(:finder_api_notifier) {
@@ -487,13 +479,9 @@ SpecialistPublisherWiring = DependencyContainer.new do
     FinderSchema.new(Rails.root.join("schemas/cma-cases.json"))
   }
 
-  define_singleton(:plek) {
-    Plek.current
-  }
-
   define_singleton(:url_maker) {
     require "url_maker"
-    UrlMaker.new(plek: get(:plek))
+    UrlMaker.new(plek: Plek.current)
   }
 
 end
