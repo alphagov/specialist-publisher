@@ -5,4 +5,16 @@ require File.expand_path("../config/application", __FILE__)
 
 SpecialistPublisher::Application.load_tasks
 
-task default: [:spec, :cucumber]
+task :rubocop do
+  system("bin/rubocop")
+
+  exit_code = $?.exitstatus
+  exit(exit_code) unless exit_code == 0
+end
+
+task default: [
+  "rubocop",
+  "spec:javascript",
+  "spec",
+  "cucumber",
+  ]
