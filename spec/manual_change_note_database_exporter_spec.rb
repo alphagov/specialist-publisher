@@ -16,7 +16,7 @@ RSpec.describe ManualChangeNoteDatabaseExporter do
   }
 
   let(:manual_publication_logs) {
-    [ publication_log ]
+    [publication_log]
   }
 
   let(:publication_log) {
@@ -49,7 +49,6 @@ RSpec.describe ManualChangeNoteDatabaseExporter do
   let(:manual_slug) { "guidance/a-manual" }
   let(:manual_title) { double(:manual_title) }
   let(:change_note_slug) { "guidance/a-manual/updates" }
-
 
   describe "#call" do
     before do

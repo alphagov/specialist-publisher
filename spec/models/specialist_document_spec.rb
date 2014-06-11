@@ -252,8 +252,8 @@ describe SpecialistDocument do
         doc.update(params)
 
         expect(edition_factory).not_to have_received(:call).with(hash_including(
-          :"_id" => "superfluous id",
-          :"updated_at" => "superfluous timestamp",
+          _id: "superfluous id",
+          updated_at: "superfluous timestamp",
         ))
 
         expect(edition_factory).not_to have_received(:call).with(hash_including(
@@ -448,7 +448,7 @@ describe SpecialistDocument do
 
   describe "#extra_fields" do
     let(:editions) {
-      [ draft_edition_v1 ]
+      [draft_edition_v1]
     }
 
     it "returns the extra fields from the edition (symbolized)" do

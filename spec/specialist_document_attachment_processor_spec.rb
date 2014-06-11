@@ -6,19 +6,19 @@ describe SpecialistDocumentAttachmentProcessor do
   subject(:renderer) { SpecialistDocumentAttachmentProcessor.new(doc) }
 
   let(:unprocessed_body) {
-%{
+    %{
 # Hi
 
 this is my attachment [InlineAttachment:rofl.gif] 28 Feb 2014
-}
+    }
   }
 
   let(:processed_body) {
-%{
+    %{
 # Hi
 
 this is my attachment [#{title}](#{file_url}) 28 Feb 2014
-}
+    }
   }
 
   let(:doc) { double(:doc, body: unprocessed_body, attachments: attachments) }
@@ -60,23 +60,23 @@ this is my attachment [#{title}](#{file_url}) 28 Feb 2014
     end
 
     context "when the attachment link appears more than once" do
-  let(:unprocessed_body) {
-%{
+      let(:unprocessed_body) {
+        %{
 # Hi
 
 this is my attachment [InlineAttachment:rofl.gif] 28 Feb 2014
 my attachment again [InlineAttachment:rofl.gif] 28 Feb 2014
-}
-  }
+        }
+      }
 
-  let(:processed_body) {
-%{
+      let(:processed_body) {
+        %{
 # Hi
 
 this is my attachment [#{title}](#{file_url}) 28 Feb 2014
 my attachment again [#{title}](#{file_url}) 28 Feb 2014
-}
-  }
+        }
+      }
 
       it "does multiple replacements" do
         expect(renderer.body).to eq(processed_body)

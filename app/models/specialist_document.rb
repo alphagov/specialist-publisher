@@ -31,10 +31,10 @@ class SpecialistDocument
     @id = id
     @editions = editions
     @editions.push(create_first_edition) if @editions.empty?
-    @exposed_edition = if version_number
-      @editions.find { |e| e.version_number == version_number }
+    if version_number
+      @exposed_edition = @editions.find { |e| e.version_number == version_number }
     else
-      @editions.last
+      @exposed_edition = @editions.last
     end
   end
 
@@ -55,7 +55,7 @@ class SpecialistDocument
       .attributes
       .symbolize_keys
       .merge(extra_fields: extra_fields)
-      .select { |k, v|
+      .select { |k, _|
         self.class.edition_attributes.include?(k)
       }
       .merge(
@@ -74,7 +74,7 @@ class SpecialistDocument
 
     # TODO: this is very defensive, we need enforce consistency of params at the boudary
     params = params
-      .select { |k, v| allowed_update_params.include?(k.to_s) }
+      .select { |k, _| allowed_update_params.include?(k.to_s) }
       .symbolize_keys
 
     if never_published? && params.fetch(:title, false)
@@ -125,18 +125,14 @@ class SpecialistDocument
   def publish!
     raise "Can only publish the latest edition" unless latest_edition_exposed?
     unless latest_edition.published?
-      if published_edition
-        published_edition.archive
-      end
+      published_edition.archive if published_edition
 
       latest_edition.publish
     end
   end
 
   def withdraw!
-    if published_edition
-      published_edition.archive
-    end
+    published_edition.archive if published_edition
   end
 
   def withdrawn?
