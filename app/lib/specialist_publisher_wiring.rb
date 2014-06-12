@@ -3,7 +3,6 @@ require "securerandom"
 require "specialist_document_repository"
 require "builders/cma_case_builder"
 require "builders/aaib_report_builder"
-require "gds_api/panopticon"
 require "gds_api/rummager"
 require "panopticon_registerer"
 require "specialist_document_attachment_processor"
@@ -81,10 +80,6 @@ SpecialistPublisherWiring = DependencyContainer.new do
       )
     }
   }
-
-  define_singleton(:panopticon_api) do
-    GdsApi::Panopticon.new(Plek.current.find("panopticon"), PANOPTICON_API_CREDENTIALS)
-  end
 
   define_singleton(:cma_case_factory) {
     ->(*args) {
@@ -319,7 +314,6 @@ SpecialistPublisherWiring = DependencyContainer.new do
   define_factory(:panopticon_registerer) {
     ->(artefact) {
       PanopticonRegisterer.new(
-        api_client: get(:panopticon_api),
         mappings: PanopticonMapping,
         artefact: artefact,
       ).call
