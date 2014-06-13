@@ -1,6 +1,7 @@
 require "specialist_publisher_wiring"
 require "forwardable"
 require "permission_checker"
+require "url_maker"
 
 class ApplicationController < ActionController::Base
   include GDS::SSO::ControllerMethods
@@ -11,7 +12,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
   def url_maker
-    SpecialistPublisherWiring.get(:url_maker)
+    UrlMaker.new
   end
   def_delegators :url_maker, :published_specialist_document_path
   helper_method :published_specialist_document_path
