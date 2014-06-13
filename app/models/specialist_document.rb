@@ -62,10 +62,6 @@ class SpecialistDocument
     end
   end
 
-  def finder_slug
-    slug.split("/").first
-  end
-
   def update(params)
     raise "Can only update the latest version" unless latest_edition_exposed?
 
@@ -109,10 +105,6 @@ class SpecialistDocument
   def add_error(field, message)
     exposed_edition.errors[field] ||= []
     exposed_edition.errors[field] += message
-  end
-
-  def previous_editions
-    @editions[0...-1]
   end
 
   def add_attachment(attributes)
