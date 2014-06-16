@@ -265,3 +265,15 @@ Then(/^the document is updated without a change note$/) do
     summary: @updated_document_fields.fetch(:summary),
   )
 end
+
+When(/^I add another section to the manual$/) do
+  @document_title = "Section 2"
+  @document_slug = [@manual_slug, "section-2"].join("/")
+  @document_fields = {
+    title: @document_title,
+    summary: "Section 2 summary",
+    body: "Section 2 body",
+  }
+
+  create_manual_document(@manual_title, @document_fields)
+end

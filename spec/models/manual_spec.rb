@@ -34,36 +34,18 @@ describe Manual do
       expect(manual.publish).to be(manual)
     end
 
-    context "when the state is draft" do
-      let(:state) { "draft" }
+    let(:state) { "draft" }
 
-      it "sets the state to 'published'" do
-        manual.publish
+    it "sets the state to 'published'" do
+      manual.publish
 
-        expect(manual.state).to eq("published")
-      end
-
-      it "yields to the block" do
-        expect { |block|
-          manual.publish(&block)
-        }.to yield_with_no_args
-      end
+      expect(manual.state).to eq("published")
     end
 
-    context "with the state is not draft" do
-      let(:state) { "anything else" }
-
-      it "does not change state" do
-        manual.publish
-
-        expect(manual.state).to eq(state)
-      end
-
-      it "does not yield to the block" do
-        expect { |block|
-          manual.publish(&block)
-        }.not_to yield_with_no_args
-      end
+    it "yields to the block" do
+      expect { |block|
+        manual.publish(&block)
+      }.to yield_with_no_args
     end
   end
 
