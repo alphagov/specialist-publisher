@@ -9,6 +9,7 @@ gem "fetchable", "1.0.0"
 gem "gds-sso", "9.2.4"
 gem "generic_form_builder", "0.8.0"
 gem "govspeak", "1.5.1"
+gem 'govuk_admin_template', '1.0.0'
 gem "logstasher", "0.4.8"
 gem "mongoid", "2.5.2"
 gem "mongoid_rails_migrations", "1.0.0"
