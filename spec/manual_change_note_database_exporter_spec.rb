@@ -32,7 +32,8 @@ RSpec.describe ManualChangeNoteDatabaseExporter do
   let(:publication_log_slug)        { double(:publication_log_slug) }
   let(:publication_log_title)       { double(:publication_log_title) }
   let(:publication_log_note)        { double(:publication_log_note) }
-  let(:publication_log_timestamp)   { double(:publication_log_timestamp) }
+  let(:utc_publication_log_timestamp) { double(:utc_publication_log_timestamp) }
+  let(:publication_log_timestamp)   { double(:publication_log_timestamp, utc: utc_publication_log_timestamp) }
 
   let(:publication_logs_collection) {
     double(:publication_logs_collection, with_slug_prefix: [])
@@ -86,7 +87,7 @@ RSpec.describe ManualChangeNoteDatabaseExporter do
                 slug: publication_log_slug,
                 title: publication_log_title,
                 change_note: publication_log_note,
-                published_at: publication_log_timestamp,
+                published_at: utc_publication_log_timestamp,
               }
             ]
           )

@@ -28,7 +28,7 @@ class ManualChangeNoteDatabaseExporter
         slug: publication.slug,
         title: publication.title,
         change_note: publication.change_note,
-        published_at: publication.published_at,
+        published_at: publication.published_at.utc,
       }
     }
   end
