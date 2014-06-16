@@ -15,6 +15,9 @@ class SpecialistDocument
       :updated_at,
       :version_number,
       :extra_fields,
+      # TODO: These fields expose the edition a little too directly, rethink?
+      :change_note,
+      :minor_update,
     ]
   end
 
@@ -33,6 +36,10 @@ class SpecialistDocument
     else
       @editions.last
     end
+  end
+
+  def minor_update?
+    !!minor_update
   end
 
   def to_param

@@ -10,12 +10,8 @@ class ManualDocumentForm
     :title,
     :summary,
     :body,
-    :opened_date,
-    :case_type,
-    :case_state,
-    :market_sector,
-    :outcome_type,
-    :closed_date,
+    :change_note,
+    :minor_update,
   ]
 
   document_methods = [
@@ -32,6 +28,7 @@ class ManualDocumentForm
   def initialize(manual, document)
     @manual = manual
     @document = document
+    @errors = {}
   end
 
   def persisted?

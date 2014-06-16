@@ -13,6 +13,8 @@ class SpecialistDocumentEdition
   field :body, type: String
   field :state, type: String
   field :extra_fields, type: Hash, default: {}
+  field :change_note, type: String
+  field :minor_update, type: Boolean
 
   validates :document_id, presence: true
   validates :document_type, presence: true

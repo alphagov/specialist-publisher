@@ -18,6 +18,8 @@ end
 
 Given(/^a draft manual exists$/) do
   @manual_slug = "guidance/example-manual-title"
+  @manual_title = "Example Manual Title"
+
   @manual_fields = {
     title: "Example Manual Title",
     summary: "Nullam quis risus eget urna mollis ornare vel eu leo.",
@@ -208,4 +210,58 @@ end
 
 When(/^I copy\+paste the embed code into the body of the document$/) do
   copy_embed_code_for_attachment_and_paste_into_manual_document_body("My attachment")
+end
+
+When(/^I create a new draft of a section with a change note$/) do
+  click_on(@document_title)
+  click_on("Edit Section")
+
+  @change_note = "Changed title for the purposes of testing."
+
+  fields = {
+    title: "This document has changed for the purposes of testing",
+    change_note: @change_note,
+  }
+
+  save_document
+  edit_manual_document(@manual_title, @document_title, fields)
+end
+
+When(/^I re\-publish the section$/) do
+  publish_document
+end
+
+Then(/^the change note is also published$/) do
+  change_note_slug = [@manual_slug, "updates"].join("/")
+
+  check_manual_change_note_exported(change_note_slug, @change_note)
+end
+
+When(/^I edit the document without a change note$/) do
+  @updated_document_fields = {
+    summary: "Updated section",
+    body: "Updated section",
+    change_note: "",
+  }
+
+  @document_fields = @document_fields.merge(@updated_document_fields)
+
+  edit_manual_document(@manual_title, @document_title, @updated_document_fields)
+end
+
+Then(/^I see an error requesting that I provide a change note$/) do
+  expect(page).to have_content("You must provide a change note or indicate minor update")
+end
+
+When(/^I indicate that the change is minor$/) do
+  check("Minor update")
+  save_document
+end
+
+Then(/^the document is updated without a change note$/) do
+  check_manual_document_exists_with(
+    @manual_title,
+    title: @document_title,
+    summary: @updated_document_fields.fetch(:summary),
+  )
 end
