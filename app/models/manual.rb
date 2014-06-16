@@ -43,10 +43,8 @@ class Manual
   end
 
   def publish(&block)
-    if @state == "draft"
-      @state = "published"
-      block.call if block
-    end
+    @state = "published"
+    block.call if block
 
     self
   end

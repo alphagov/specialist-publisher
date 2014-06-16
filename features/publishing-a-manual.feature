@@ -18,6 +18,12 @@ Feature: Publishing a manual
     And I publish the manual
     Then the manual and its documents are published
 
+  Scenario: Add a section to a published manual
+    Given a published manual exists
+    When I add another section to the manual
+    And I publish the manual
+    Then the manual and its documents are published
+
   Scenario: Add a change note
     Given a published manual exists
     When I create a new draft of a section with a change note
