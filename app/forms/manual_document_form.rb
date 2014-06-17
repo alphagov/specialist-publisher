@@ -10,7 +10,6 @@ class ManualDocumentForm
     :title,
     :summary,
     :body,
-    :change_note,
     :minor_update,
   ]
 
@@ -33,6 +32,14 @@ class ManualDocumentForm
 
   def persisted?
     document.updated_at || document.published?
+  end
+
+  def minor_update
+    document.draft? ? document.minor_update : false
+  end
+
+  def change_note
+    document.draft? ?  document.change_note : ""
   end
 
   def to_param
