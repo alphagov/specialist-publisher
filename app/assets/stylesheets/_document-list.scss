@@ -1,7 +1,13 @@
-.document-list {
+.document-list,
+.documents {
   margin: 0;
   padding: 0;
   list-style: none;
+
+  td:first-child,
+  th:first-child {
+    padding-left:0
+  }
 
   .document {
     border-bottom: 1px solid #999;
