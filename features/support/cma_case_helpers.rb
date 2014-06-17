@@ -39,7 +39,7 @@ module CmaCaseHelpers
   def check_cma_case_exists_with(attributes)
     go_to_show_page_for_document(attributes.fetch(:title))
 
-    attributes.except(:body).each do |field, value|
+    attributes.except(:body).each do |_, value|
       expect(page).to have_content(value)
     end
   end

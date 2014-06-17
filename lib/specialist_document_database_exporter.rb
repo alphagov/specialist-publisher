@@ -37,7 +37,7 @@ private
 
   def label_for(facet_name)
     facet_value = rendered_document_attributes.fetch(facet_name)
-    option_pair = finder_schema.options_for(facet_name).find do |(label, value)|
+    option_pair = finder_schema.options_for(facet_name).find do |(_, value)|
       value == facet_value
     end
     option_pair && option_pair.first
