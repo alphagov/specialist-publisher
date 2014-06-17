@@ -37,6 +37,10 @@ class ManualForm
     id
   end
 
+  def published?
+    manual && manual.published?
+  end
+
 private
   attr_reader :manual
 end

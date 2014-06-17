@@ -21,8 +21,10 @@
     <div class="preview_button"></div>
     <div class="preview_container" style="display: none;"></div>
 
-    <%= f.check_box :minor_update %>
-    <%= f.text_area :change_note %>
+    <% if manual.published? %>
+      <%= f.check_box :minor_update %>
+      <%= f.text_area :change_note %>
+    <% end %>
 
     <div class="actions">
       <button name='draft' class="btn btn-success">Save as draft</button>

@@ -48,4 +48,8 @@ class Manual
 
     self
   end
+
+  def published?
+    @state == "published"
+  end
 end
