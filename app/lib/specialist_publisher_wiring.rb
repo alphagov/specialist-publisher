@@ -64,9 +64,11 @@ SpecialistPublisherWiring = DependencyContainer.new do
 
   define_factory(:manual_builder) {
     ->(attrs) {
+      slug_generator = SlugGenerator.new(prefix: "guidance")
+
       default = {
         id: IdGenerator.call,
-        slug: get(:manual_slug_generator).call(attrs.fetch(:title)),
+        slug: slug_generator.call(attrs.fetch(:title)),
         summary: "",
         state: "draft",
         organisation_slug: "",
@@ -156,7 +158,7 @@ SpecialistPublisherWiring = DependencyContainer.new do
         CmaCaseForm.new(
           CmaCase.new(
             SpecialistDocument.new(
-              get(:cma_slug_generator),
+              SlugGenerator.new(prefix: "cma-cases"),
               get(:edition_factory),
               *args,
             ),
@@ -180,7 +182,7 @@ SpecialistPublisherWiring = DependencyContainer.new do
         AaibReportForm.new(
           AaibReport.new(
             SpecialistDocument.new(
-              get(:aaib_slug_generator),
+              SlugGenerator.new(prefix: "aaib-reports"),
               get(:edition_factory),
               *args,
             )
@@ -200,7 +202,7 @@ SpecialistPublisherWiring = DependencyContainer.new do
   define_factory(:validated_manual_document_factory_factory) {
     ->(manual) {
       ->(id, editions) {
-        slug_generator = get(:manual_document_slug_generator).call(manual.slug)
+        slug_generator = SlugGenerator.new(prefix: manual.slug)
 
         ChangeNoteValidator.new(
           SlugUniquenessValidator.new(
@@ -214,15 +216,6 @@ SpecialistPublisherWiring = DependencyContainer.new do
           )
         )
       }
-    }
-  }
-
-  define_factory(:cma_slug_generator) { SlugGenerator.new(prefix: "cma-cases") }
-  define_factory(:aaib_slug_generator) { SlugGenerator.new(prefix: "aaib-reports") }
-  define_factory(:manual_slug_generator) { SlugGenerator.new(prefix: "guidance") }
-  define_factory(:manual_document_slug_generator) {
-    ->(manual_slug) {
-      SlugGenerator.new(prefix: manual_slug)
     }
   }
 
