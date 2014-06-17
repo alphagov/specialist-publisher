@@ -53,7 +53,7 @@ class ManualsController < ApplicationController
   def publish
     manual = services.publish_manual(self).call
 
-    redirect_to(manual_path(manual))
+    redirect_to(manual_path(manual), flash: { notice: "Published #{manual.title}" })
   end
 
 private
