@@ -304,6 +304,10 @@ SpecialistPublisherWiring = DependencyContainer.new do
         ManualArtefactFormatter.new(manual)
       )
 
+      get(:panopticon_registerer).call(
+        ManualChangeNotesArtefactFormatter.new(manual)
+      )
+
       manual.respond_to?(:documents) && manual.documents.each do |doc|
         get(:manual_document_panopticon_registerer).call(doc, manual)
       end

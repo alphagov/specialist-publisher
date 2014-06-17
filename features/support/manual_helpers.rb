@@ -186,4 +186,8 @@ module ManualHelpers
     expect(most_recent_section_update.fetch("change_note"))
       .to eq(@change_note)
   end
+
+  def check_manual_change_note_artefact_was_created(slug)
+    expect(fake_panopticon).to have_received(:create_artefact!).with(hash_including(slug: slug, state: "draft"))
+  end
 end
