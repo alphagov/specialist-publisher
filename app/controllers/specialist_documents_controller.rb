@@ -54,13 +54,13 @@ class SpecialistDocumentsController < ApplicationController
   def publish
     document = services.publish_document(self).call
 
-    redirect_to(specialist_document_path(document))
+    redirect_to(specialist_document_path(document), flash: { notice: "Published #{document.title}" })
   end
 
   def withdraw
     document = services.withdraw_document(self).call
 
-    redirect_to(specialist_documents_path)
+    redirect_to(specialist_documents_path, flash: { error: "Withdrawn #{document.title}" })
   end
 
   def preview
