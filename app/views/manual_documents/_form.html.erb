@@ -1,4 +1,5 @@
-<div class="col-md-8">
+<div class='row'>
+  <div class="col-md-8">
   <%= form_for [manual, document] do |f| %>
     <% if document.errors.any? %>
       <div class="errors error-list">
@@ -12,11 +13,10 @@
         </ul>
       </div>
     <% end %>
-
-    <%= f.text_field :title %>
-    <%= f.text_area :summary, class: 'short-textarea js-length-counter', data: { :"count-message-threshold" => 280, :"count-message-selector" => ".summary-length-info" } %>
+    <%= f.text_field :title, label: 'Section title' %>
+    <%= f.text_area :summary, label: 'Section summary', class: 'short-textarea js-length-counter', data: { :"count-message-threshold" => 280, :"count-message-selector" => ".summary-length-info" } %>
     <div class="summary-length-info warning" aria-live="polite">Summary text should be 280 characters or fewer. <span class="count"></span></div>
-    <%= f.text_area :body %>
+    <%= f.text_area :body, label: 'Section body' %>
 
     <div class="preview_button"></div>
     <div class="preview_container" style="display: none;"></div>
@@ -53,7 +53,7 @@
     <% end %>
   </ul>
 </div>
-
+</div>
 <%= content_for :document_ready do %>
   window.SpecialistDocument.addPreviewFeature({
     'url'             : '<%= preview_path_for_manual_document(manual, document) %>',
