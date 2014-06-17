@@ -1,5 +1,5 @@
 require "dependency_container"
-require "securerandom"
+require "id_generator"
 require "specialist_document_repository"
 require "builders/cma_case_builder"
 require "builders/aaib_report_builder"
@@ -66,7 +66,7 @@ SpecialistPublisherWiring = DependencyContainer.new do
   define_factory(:manual_builder) {
     ->(attrs) {
       default = {
-        id: SecureRandom.uuid,
+        id: IdGenerator.call,
         slug: get(:manual_slug_generator).call(attrs.fetch(:title)),
         summary: "",
         state: "draft",
@@ -141,14 +141,12 @@ SpecialistPublisherWiring = DependencyContainer.new do
     }
   }
 
-  define_singleton(:id_generator) { SecureRandom.method(:uuid) }
-
   define_singleton(:edition_factory) { SpecialistDocumentEdition.method(:new) }
 
   define_factory(:cma_case_builder) {
     CmaCaseBuilder.new(
       get(:validatable_cma_case_factory),
-      get(:id_generator),
+      IdGenerator,
     )
   }
 
@@ -172,7 +170,7 @@ SpecialistPublisherWiring = DependencyContainer.new do
   define_factory(:aaib_report_builder) {
     AaibReportBuilder.new(
       get(:validatable_aaib_report_factory),
-      get(:id_generator),
+      IdGenerator,
     )
   }
 
@@ -196,7 +194,7 @@ SpecialistPublisherWiring = DependencyContainer.new do
   define_factory(:manual_document_builder) {
     ManualDocumentBuilder.new(
       factory_factory: get(:validated_manual_document_factory_factory),
-      id_generator: get(:id_generator),
+      id_generator: IdGenerator,
     )
   }
 

@@ -26,7 +26,7 @@ class ManualForm
   end
 
   def id
-    @id ||= SecureRandom.uuid
+    @id ||= IdGenerator.call
   end
 
   def persisted?
