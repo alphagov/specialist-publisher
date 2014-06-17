@@ -19,6 +19,7 @@ require "marshallers/document_association_marshaller"
 require "builders/manual_document_builder"
 require "rummager_indexer"
 require "cma_case_indexable_formatter"
+require "null_finder_schema"
 
 $LOAD_PATH.unshift(File.expand_path("../..", "app/services"))
 
@@ -77,30 +78,6 @@ SpecialistPublisherWiring = DependencyContainer.new do
         get(:manual_document_builder),
         Manual.new(default.merge(attrs)),
         documents: [],
-      )
-    }
-  }
-
-  define_singleton(:cma_case_factory) {
-    ->(*args) {
-      CmaCase.new(
-        SpecialistDocument.new(
-          get(:cma_slug_generator),
-          get(:edition_factory),
-          *args,
-        )
-      )
-    }
-  }
-
-  define_singleton(:aaib_report_factory) {
-    ->(*args) {
-      AaibReport.new(
-        SpecialistDocument.new(
-          get(:aaib_slug_generator),
-          get(:edition_factory),
-          *args,
-        )
       )
     }
   }
@@ -180,7 +157,13 @@ SpecialistPublisherWiring = DependencyContainer.new do
       SlugUniquenessValidator.new(
         get(:specialist_document_repository),
         CmaCaseForm.new(
-          get(:cma_case_factory).call(*args),
+          CmaCase.new(
+            SpecialistDocument.new(
+              get(:cma_slug_generator),
+              get(:edition_factory),
+              *args,
+            ),
+          ),
         ),
       )
     }
@@ -198,7 +181,13 @@ SpecialistPublisherWiring = DependencyContainer.new do
       SlugUniquenessValidator.new(
         get(:aaib_report_repository),
         AaibReportForm.new(
-          get(:aaib_report_factory).call(*args),
+          AaibReport.new(
+            SpecialistDocument.new(
+              get(:aaib_slug_generator),
+              get(:edition_factory),
+              *args,
+            )
+          )
         ),
       )
     }
@@ -274,17 +263,15 @@ SpecialistPublisherWiring = DependencyContainer.new do
     }
   }
 
-  define_instance(:specialist_document_render_pipeline) {
-    [
-      get(:markdown_renderer),
-      get(:specialist_document_govspeak_header_extractor),
-      get(:specialist_document_govspeak_to_html_renderer),
-    ]
-  }
-
   define_instance(:specialist_document_renderer) {
     ->(doc) {
-      get(:specialist_document_render_pipeline).reduce(doc) { |doc, next_renderer|
+      pipeline = [
+        get(:markdown_renderer),
+        get(:specialist_document_govspeak_header_extractor),
+        get(:specialist_document_govspeak_to_html_renderer),
+      ]
+
+      pipeline.reduce(doc) { |doc, next_renderer|
         next_renderer.call(doc)
       }
     }
@@ -419,7 +406,7 @@ SpecialistPublisherWiring = DependencyContainer.new do
       SpecialistDocumentDatabaseExporter.new(
         RenderedSpecialistDocument,
         get(:specialist_document_renderer),
-        get(:null_finder_schema),
+        NullFinderSchema.new,
         doc,
       ).call
     }
@@ -443,10 +430,6 @@ SpecialistPublisherWiring = DependencyContainer.new do
         get(:manual_document_content_api_exporter).call(exportable)
       end
     }
-  }
-
-  define_factory(:null_finder_schema) {
-    OpenStruct.new(facets: [])
   }
 
   define_singleton(:finder_api) {
