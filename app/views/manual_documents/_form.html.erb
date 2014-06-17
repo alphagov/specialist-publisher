@@ -23,7 +23,7 @@
 
     <% if manual.published? %>
       <%= f.check_box :minor_update %>
-      <%= f.text_area :change_note %>
+      <%= f.text_area :change_note, class: 'short-textarea' %>
     <% end %>
 
     <div class="actions">
@@ -68,4 +68,10 @@
                           };
                         }
   });
+
+  window.toggleHideWithCheckBox({
+    $checkBox: $("#document_minor_update"),
+    $elementToHide: $("#document_change_note").parent()
+  });
+
 <% end -%>

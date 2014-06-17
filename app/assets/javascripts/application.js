@@ -4,6 +4,7 @@
 //= require ajax_setup
 //= require length_counter
 //= require specialist_documents
+//= require toggle_hide_with_check_box
 
 function initPrimaryLinks(){
   GOVUK.primaryLinks.init('.primary-item');
