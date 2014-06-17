@@ -1,12 +1,18 @@
+require "delegate"
+
 class ChangeNoteValidator < SimpleDelegator
   def initialize(entity)
     @entity = entity
-    @errors = {}
+    reset_errors
     super(entity)
   end
 
   def valid?
-    (change_note_provided_or_minor_update? && entity.valid?)
+    reset_errors
+    entity_valid = entity.valid?
+    change_note_ok = (change_note_not_required? || change_note_provided?)
+
+    entity_valid && change_note_ok
   end
 
   def errors
@@ -17,16 +23,30 @@ class ChangeNoteValidator < SimpleDelegator
 
   attr_reader :entity
 
-  def change_note_provided_or_minor_update?
-    if change_note.present? || minor_update?
-      result = true
-    else
-      result = false
-      @errors[:change_note] ||= []
-      @errors[:change_note].push(change_note_error)
-    end
+  def change_note_not_required?
+    never_published? || minor_update?
+  end
 
-    result
+  def never_published?
+    !entity.published?
+  end
+
+  def change_note_provided?
+    if change_note.present?
+      true
+    else
+      add_errors
+      false
+    end
+  end
+
+  def reset_errors
+    @errors = {}
+  end
+
+  def add_errors
+    @errors[:change_note] ||= []
+    @errors[:change_note].push(change_note_error)
   end
 
   def change_note_error

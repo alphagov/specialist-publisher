@@ -10,11 +10,7 @@ module ManualHelpers
     go_to_manual_page(manual_title)
     click_on "Add Section"
 
-    fill_in_fields(
-      {
-        change_note: "First version",
-      }.merge(fields)
-    )
+    fill_in_fields(fields)
 
     save_as_draft
   end
@@ -30,11 +26,7 @@ module ManualHelpers
     go_to_manual_page(manual_title)
     click_on section_title
     click_on "Edit"
-    fill_in_fields(
-      {
-        change_note: "Update",
-      }.merge(new_fields)
-    )
+    fill_in_fields(new_fields)
 
     save_as_draft
   end

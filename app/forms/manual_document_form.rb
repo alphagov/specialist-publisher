@@ -32,7 +32,7 @@ class ManualDocumentForm
   end
 
   def persisted?
-    !!document.updated_at
+    document.updated_at || document.published?
   end
 
   def to_param

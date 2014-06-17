@@ -168,6 +168,7 @@ When(/^I edit the manual's documents$/) do
   @updated_document_fields = {
     summary: "Updated section",
     body: "Updated section",
+    change_note: "Updated section",
   }
 
   @document_fields = @document_fields.merge(@updated_document_fields)
