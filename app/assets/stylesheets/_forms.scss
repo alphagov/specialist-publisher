@@ -4,8 +4,10 @@ form {
   label {
     display: block;
   }
-  input, textarea {
+  input[type="text"], textarea {
+    padding:2px;
     width: 100%;
+    border:1px solid #555;
   }
   .short-textarea {
     height: 50px;

@@ -1,16 +1,17 @@
 <div class="manual-header">
-  <p>Manual title</p>
   <h1 class="page-header">
     <%= manual.title %>
     <p>
-      <small><%= link_to manual.slug, url_for_public_manual(manual) %></small>
+      <% if manual.state == 'published' %>
+        <small><%= link_to manual.slug, url_for_public_manual(manual) %></small>
+      <% else %>
+        <small><span class='disabled' title='When published this manual will appear here.'><%= manual.slug %></span></small>
+      <% end %>
     </p>
-    
   </h1>
 
   <div class="actions">
-    <%= link_to 'Edit Manual', edit_manual_path(manual), class: 'btn btn-primary' %> 
-    <%= link_to 'Add Section', new_manual_document_path(manual), class: 'btn btn-primary' %>
+    <%= link_to 'Edit Manual', edit_manual_path(manual), class: 'btn btn-primary' %>
   </div>
   <div class="clearfix"></div>
 </div>
@@ -28,10 +29,11 @@
   </div>
 </div>
 
+
+<div class="row">
+  <div class="col-md-12">
+    <h2>Sections</h2>
 <% if manual.documents.any? %>
-  <div class="row">
-    <div class="col-md-12">
-      <h2>Sections</h2>
       <table class="documents table">
         <thead>
           <th>
@@ -59,10 +61,13 @@
           <% end %>
         </tbody>
       </table>
-    </div>
-  </div>
-<% end %>
+  <% else %>
+    <p class='no-content-message'>You haven&rsquo;t added any sections to this manual yet.</p>
+  <% end %>
+  <%= link_to 'Add Section', new_manual_document_path(manual), class: 'btn btn-primary' %>
 
+  </div>
+</div>
 <% if manual.documents.any? %>
   <%= form_tag(publish_manual_path(manual), method: :post) do %>
     <button name='submit' class="btn btn-danger">Publish</button>
