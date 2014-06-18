@@ -63,11 +63,6 @@ class ObserversRegistry
 
   def publication_logger
     ->(manual) {
-      PublicationLog.create!(
-        title: manual.title,
-        slug: manual.slug,
-      )
-
       manual.documents.each do |doc|
         PublicationLog.create!(
           title: doc.title,

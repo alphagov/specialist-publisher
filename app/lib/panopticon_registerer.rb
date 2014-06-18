@@ -43,7 +43,7 @@ class PanopticonRegisterer
   end
 
   def mapping
-    @mapping ||= mappings.where(resource_id: artefact.resource_id).last
+    @mapping ||= mappings.where(slug: artefact.slug).last
   end
 
   def owning_app
