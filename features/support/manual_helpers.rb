@@ -46,7 +46,7 @@ module ManualHelpers
 
   def check_manual_document_exists_with(manual_title, attributes)
     go_to_manual_page(manual_title)
-    click_on(attributes.fetch(:title))
+    click_on(attributes.fetch(:section_title))
 
     attributes.values.each do |attr_val|
       expect(page).to have_content(attr_val)
@@ -166,7 +166,7 @@ module ManualHelpers
     end
 
     body_text = find("#document_body").value
-    fill_in("Body", with: body_text + snippet)
+    fill_in("Section body", with: body_text + snippet)
   end
 
   def check_manual_change_note_exported(slug, expected_note)

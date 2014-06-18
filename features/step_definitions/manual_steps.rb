@@ -55,9 +55,9 @@ When(/^I create a document for the manual$/) do
   @document_slug = [@manual_slug, "section-1"].join("/")
 
   @document_fields = {
-    title: @document_title,
-    summary: "Section 1 summary",
-    body: "Section 1 body",
+    section_title: @document_title,
+    section_summary: "Section 1 summary",
+    section_body: "Section 1 body",
   }
 
   create_manual_document(@manual_fields.fetch(:title), @document_fields)
@@ -66,7 +66,7 @@ end
 Then(/^I see the manual has the new section$/) do
   visit manuals_path
   click_on @manual_fields.fetch(:title)
-  expect(page).to have_content(@document_fields.fetch(:title))
+  expect(page).to have_content(@document_fields.fetch(:section_title))
 end
 
 Then(/^the manual section slug should be reserved$/) do
@@ -78,9 +78,9 @@ Given(/^a draft document exists for the manual$/) do
   @document_slug = "guidance/example-manual-title/section-1"
 
   @document_fields = {
-    title: @document_title,
-    summary: "Section 1 summary",
-    body: "Section 1 body",
+    section_title: @document_title,
+    section_summary: "Section 1 summary",
+    section_body: "Section 1 body",
   }
 
   create_manual_document(@manual_fields.fetch(:title), @document_fields)
@@ -90,15 +90,15 @@ When(/^I edit the document$/) do
   @new_title = "A new section title"
   edit_manual_document(
     @manual_fields.fetch(:title),
-    @document_fields.fetch(:title),
-    title: @new_title,
+    @document_fields.fetch(:section_title),
+    section_title: @new_title,
   )
 end
 
 Then(/^the document should have been updated$/) do
   check_manual_document_exists_with(
     @manual_fields.fetch(:title),
-    title: @new_title,
+    section_title: @new_title,
   )
 end
 
@@ -113,7 +113,7 @@ Then(/^the document is not found$/) do
 end
 
 Then(/^the manual's documents won't have changed$/) do
-  expect(page).to have_content(@document_fields.fetch(:title))
+  expect(page).to have_content(@document_fields.fetch(:section_title))
 end
 
 When(/^I create a document with empty fields$/) do
@@ -132,11 +132,17 @@ When(/^I publish the manual$/) do
 end
 
 Then(/^the manual and its documents are published$/) do
+  document_attributes = {
+    title: @document_fields[:section_title],
+    summary: @document_fields[:section_summary],
+    body: @document_fields[:section_body],
+  }
+
   check_manual_and_documents_were_published(
     @manual_slug,
     @manual_fields,
     @document_slug,
-    @document_fields,
+    document_attributes,
   )
 end
 
@@ -154,9 +160,9 @@ Given(/^a published manual exists$/) do
   @document_title = "Section 1"
   @document_slug = [@manual_slug, "section-1"].join("/")
   @document_fields = {
-    title: @document_title,
-    summary: "Section 1 summary",
-    body: "Section 1 body",
+    section_title: @document_title,
+    section_summary: "Section 1 summary",
+    section_body: "Section 1 body",
   }
 
   create_manual_document(@manual_title, @document_fields)
@@ -166,8 +172,8 @@ end
 
 When(/^I edit the manual's documents$/) do
   @updated_document_fields = {
-    summary: "Updated section",
-    body: "Updated section",
+    section_summary: "Updated section",
+    section_body: "Updated section",
     change_note: "Updated section",
   }
 
@@ -178,9 +184,9 @@ end
 
 When(/^I start creating a new manual document$/) do
   @document_fields = {
-    title: "Section 1",
-    summary: "Section 1 summary",
-    body: "Section 1 body",
+    section_title: "Section 1",
+    section_summary: "Section 1 summary",
+    section_body: "Section 1 body",
   }
 
   create_manual_document_for_preview(
@@ -195,9 +201,9 @@ end
 
 When(/^I create a document to preview$/) do
   @document_fields = {
-    title: "Section 1",
-    summary: "Section 1 summary",
-    body: "Section 1 body",
+    section_title: "Section 1",
+    section_summary: "Section 1 summary",
+    section_body: "Section 1 body",
   }
 
   go_to_manual_page(@manual_fields[:title])
@@ -220,7 +226,7 @@ When(/^I create a new draft of a section with a change note$/) do
   @change_note = "Changed title for the purposes of testing."
 
   fields = {
-    title: "This document has changed for the purposes of testing",
+    section_title: "This document has changed for the purposes of testing",
     change_note: @change_note,
   }
 
@@ -240,8 +246,8 @@ end
 
 When(/^I edit the document without a change note$/) do
   @updated_document_fields = {
-    summary: "Updated section",
-    body: "Updated section",
+    section_summary: "Updated section",
+    section_body: "Updated section",
     change_note: "",
   }
 
@@ -262,8 +268,8 @@ end
 Then(/^the document is updated without a change note$/) do
   check_manual_document_exists_with(
     @manual_title,
-    title: @document_title,
-    summary: @updated_document_fields.fetch(:summary),
+    section_title: @document_title,
+    section_summary: @updated_document_fields.fetch(:section_summary),
   )
 end
 
@@ -271,9 +277,9 @@ When(/^I add another section to the manual$/) do
   @document_title = "Section 2"
   @document_slug = [@manual_slug, "section-2"].join("/")
   @document_fields = {
-    title: @document_title,
-    summary: "Section 2 summary",
-    body: "Section 2 body",
+    section_title: @document_title,
+    section_summary: "Section 2 summary",
+    section_body: "Section 2 body",
   }
 
   create_manual_document(@manual_title, @document_fields)
