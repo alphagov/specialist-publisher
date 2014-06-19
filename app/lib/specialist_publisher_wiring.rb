@@ -162,18 +162,10 @@ SpecialistPublisherWiring = DependencyContainer.new do
   }
 
   define_factory(:manual_document_builder) {
-    ->(manual, attrs) {
-      defaults = {
-        document_type: "manual",
-      }
-
-      get(:validated_manual_document_factory_factory)
-        .call(manual)
-        .call(
-          get(:id_generator).call,
-          [],
-        ).update(attrs.reverse_merge(defaults))
-    }
+    ManualDocumentBuilder.new(
+      factory_factory: get(:validated_manual_document_factory_factory),
+      id_generator: get(:id_generator),
+    )
   }
 
   define_factory(:validated_manual_document_factory_factory) {

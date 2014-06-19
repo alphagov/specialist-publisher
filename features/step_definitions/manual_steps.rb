@@ -239,10 +239,8 @@ When(/^I re\-publish the section$/) do
 end
 
 Then(/^the change note is also published$/) do
-  change_note_slug = [@manual_slug, "updates"].join("/")
-
-  check_manual_change_note_exported(change_note_slug, @change_note)
-  check_manual_change_note_artefact_was_created(change_note_slug)
+  check_manual_change_note_exported(@manual_slug, @change_note)
+  check_manual_change_note_artefact_was_created(@manual_slug)
 end
 
 When(/^I edit the document without a change note$/) do

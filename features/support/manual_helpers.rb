@@ -143,6 +143,7 @@ module ManualHelpers
 
     check_manual_is_published_to_content_api(manual_slug, manual_attrs, document_slug, document_attrs)
     check_manual_document_is_published_to_content_api(document_attrs)
+    check_manual_change_note_is_set_to_default(manual_slug)
   end
 
   def create_manual_document_for_preview(manual_title, fields)
@@ -169,7 +170,13 @@ module ManualHelpers
     fill_in("Section body", with: body_text + snippet)
   end
 
-  def check_manual_change_note_exported(slug, expected_note)
+  def change_note_slug(manual_slug)
+    change_note_slug = [manual_slug, "updates"].join("/")
+  end
+
+  def check_manual_change_note_exported(manual_slug, expected_note)
+    slug = change_note_slug(manual_slug)
+
     exported_history = ManualChangeHistory
       .find_by_slug(slug)
 
@@ -179,7 +186,17 @@ module ManualHelpers
       .to eq(@change_note)
   end
 
-  def check_manual_change_note_artefact_was_created(slug)
+  def check_manual_change_note_artefact_was_created(manual_slug)
+    slug = change_note_slug(manual_slug)
+
     expect(fake_panopticon).to have_received(:create_artefact!).with(hash_including(slug: slug, state: "draft"))
+  end
+
+  def check_manual_change_note_is_set_to_default(manual_slug)
+    slug = change_note_slug(manual_slug)
+
+    change_history = ManualChangeHistory.find_by_slug(slug)
+
+    expect(change_history.updates.first.fetch("change_note")).to eq("New section added.")
   end
 end
