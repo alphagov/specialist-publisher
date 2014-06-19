@@ -165,6 +165,7 @@ SpecialistPublisherWiring = DependencyContainer.new do
     ->(manual, attrs) {
       defaults = {
         document_type: "manual",
+        change_note: "New section added."
       }
 
       get(:validated_manual_document_factory_factory)
