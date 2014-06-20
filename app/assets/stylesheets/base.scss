@@ -30,8 +30,36 @@
 @import "navbar";
 @import "manual_header";
 
-
 p.no-content-message {
   @include core-19;
   color: $grey-1;
+}
+
+.metadata-list {
+  width:100%;
+
+  dt {
+    float: left;
+    clear: left;
+    width:30%;
+  }
+  dd {
+    float: left;
+    width:70%;
+  }
+}
+
+.collapsable-heading a {
+  color: inherit;
+  small {
+    color: $link-color;
+  }
+}
+
+.page-header {
+  span.document-slug {
+    display:block;
+    color: $grey-1;
+    @include core-19;
+  }
 }

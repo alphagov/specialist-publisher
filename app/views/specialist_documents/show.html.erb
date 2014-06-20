@@ -1,17 +1,24 @@
-<h1 class="page-header"><%= document.title %></h1>
-
-<h4><%= document.slug %></h4>
-
-<div class="row">
-  <div class="sidebar col-md-8">
-    <p>Summary</p>
-    <p><%= document.summary %>
+<div class='specialist-header'>
+  <h1 class="page-header"><%= document.title %>
+  <% if document.publication_state == "published" %>
+    <span class='document-slug'>
+      <%= link_to document.slug, published_specialist_document_path(document) %>
+    </span>
+  <% else %>
+    <span class='document-slug' title='When published this document will appear at this URL'><%= document.slug %></span>
+  <% end %>
+  </h1>
+  <div class="row">
+    <div class="col-md-8">
+      <h2>Summary</h2>
+      <p><%= document.summary %></p>
+    </div>
   </div>
 </div>
-
 <div class="row">
-  <div class="sidebar col-md-8">
-    <dl>
+  <div class=" col-md-8">
+    <h2>Metadata</h2>
+    <dl class='metadata-list'>
       <dt>Opened date</dt>
       <dd><%= document.opened_date %></dd>
       <dt>Closed date</dt>
@@ -30,19 +37,52 @@
   </div>
 </div>
 
-
 <div class="row">
+  <div class=" col-md-8">
+    <h2 class='collapsable-heading' >
+      <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
+        Body <small>(click to expand)</small>
+      </a>
+    </h2>
+    <div id="collapseOne" class="panel-collapse collapse">
+      <pre><%= document.body %></pre>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class=" col-md-8">
+    <h2>Attachments</h2>
+    <% if document.attachments.any? %>
+      <table class='table table-bordered table-hover'>
+        <thead>
+          <th>Title</th>
+          <th>Created</th>
+          <th>Last updated</th>
+        </thead>
+        <% document.attachments.each do | attachment | %>
+        <tr>
+          <td><%= attachment.title %></td>
+          <td><%= attachment.created_at.to_s(:govuk_date)%></td>
+          <td><%= attachment.updated_at.to_s(:govuk_date)%></td>
+        </tr>
+        <% end %>
+      </table>
+    <% else %>
+      <p class='no-content-message'>This document doesn't have any attachments</p>
+    <% end %>
+  </div>
+</div>
+  <div class="actions">
+
   <%= form_tag(publish_specialist_document_path(document), method: :post) do %>
     <button name='submit' class="btn btn-danger">Publish</button>
   <% end -%>
-</div>
 
-<div class="row">
   <%= form_tag(withdraw_specialist_document_path(document), method: :post) do %>
     <button name='submit' class="btn btn-danger">Withdraw</button>
   <% end -%>
+
+  <%= link_to "Edit", edit_specialist_document_path(document), class: "action-link"  %>
+
 </div>
 
-<div class="row">
-  <div><%= link_to("Edit", edit_specialist_document_path(document)) %></div>
-</div>
