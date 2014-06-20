@@ -15,6 +15,7 @@ require "finder_api"
 require "validators/slug_uniqueness_validator"
 require "validators/change_note_validator"
 require "marshallers/document_association_marshaller"
+require "builders/manual_document_builder"
 
 $LOAD_PATH.unshift(File.expand_path("../..", "app/services"))
 
