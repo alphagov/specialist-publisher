@@ -8,7 +8,7 @@ gem "faraday", "0.9.0"
 gem "fetchable", "1.0.0"
 gem "gds-sso", "9.2.4"
 gem "generic_form_builder", "0.8.0"
-gem "govspeak", "1.6.1"
+gem "govspeak", "1.6.2"
 gem 'govuk_admin_template', '1.0.0'
 gem "logstasher", "0.4.8"
 gem "mongoid", "2.5.2"
