@@ -1,3 +1,8 @@
+<% content_for :breadcrumbs do %>
+  <li><%= link_to "Your documents", specialist_documents_path %></li>
+  <li class='active'><%= document.title %></li>
+<% end %>
+
 <div class='specialist-header'>
   <h1 class="page-header"><%= document.title %>
   <% if document.publication_state == "published" %>

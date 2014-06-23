@@ -1,3 +1,9 @@
+<% content_for :breadcrumbs do %>
+  <li><%= link_to "Your documents", specialist_documents_path %></li>
+  <li><%= link_to document.title, specialist_document_path(document) %></li>
+  <li class='active'>Edit document</li>
+<% end %>
+
 <h1 class="page-header">Edit document</h1>
 
 <div class="row">

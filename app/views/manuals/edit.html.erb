@@ -1,3 +1,9 @@
+<% content_for :breadcrumbs do %>
+  <li><%= link_to "Your manuals", manuals_path %></li>
+  <li><%= link_to manual.title, manual_path(manual) %></li>
+  <li class='active'>Edit manual</li>
+<% end %>
+
 <h1 class="page-header">Edit a manual</h1>
 
 <%= render 'form', manual: manual %>
