@@ -58,6 +58,14 @@
     text-decoration: underline;
   }
 
+  ol.legislative-list {
+    list-style: none;
+    margin-left: 0;
+    ol {
+      list-style: none;
+    }
+  }
+
   ol {
     list-style: decimal;
     list-style-position: outside;
