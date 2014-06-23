@@ -14,13 +14,6 @@
             <li>
               <%= document_state(document) %>
             </li>
-            <li class="actions">
-              <%= link_to 'edit', edit_specialist_document_path(document) %>
-              <% if document.published? %>
-                <%= link_to "view live", published_specialist_document_path(document) %>
-                <%= link_to "withdraw", specialist_document_path(document) %>
-              <% end %>
-            </li>
           </ul>
         </li>
       <% end %>

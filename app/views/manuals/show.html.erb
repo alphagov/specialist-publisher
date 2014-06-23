@@ -1,13 +1,11 @@
 <div class="manual-header">
   <h1 class="page-header">
     <%= manual.title %>
-    <p>
-      <% if manual.state == 'published' %>
-        <small><%= link_to manual.slug, url_for_public_manual(manual) %></small>
-      <% else %>
-        <small><span class='disabled' title='When published this manual will appear here.'><%= manual.slug %></span></small>
-      <% end %>
-    </p>
+    <% if manual.state == 'published' %>
+      <span class='document-slug'><%= link_to manual.slug, url_for_public_manual(manual) %></span>
+    <% else %>
+      <span class='document-slug' title='When published this manual will appear here.'><%= manual.slug %></span>
+    <% end %>
   </h1>
 
   <div class="actions">

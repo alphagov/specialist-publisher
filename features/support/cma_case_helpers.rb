@@ -92,11 +92,9 @@ module CmaCaseHelpers
   end
 
   def go_to_edit_page_for_document(document_title)
-    go_to_document_index
+    go_to_show_page_for_document(document_title)
 
-    document_listing = page.find("ul.document-list li", text: document_title)
-    edit_link = document_listing.find("a", text: "edit")
-    edit_link.click
+    click_on "Edit"
   end
 
   def make_changes_without_saving(fields)
@@ -131,7 +129,7 @@ module CmaCaseHelpers
   def check_for_unchanged_slug(title, expected_slug)
     go_to_show_page_for_document(title)
 
-    expect(page).to have_css("h4", text: expected_slug)
+    expect(page).to have_link(expected_slug)
   end
 
   def check_cma_case_is_published(slug, title)
@@ -221,8 +219,7 @@ module CmaCaseHelpers
   end
 
   def withdraw_document(title)
-    visit specialist_documents_path
-    click_link "withdraw"
+    go_to_show_page_for_document(title)
     click_button "Withdraw"
   end
 

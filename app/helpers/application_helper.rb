@@ -10,7 +10,14 @@ module ApplicationHelper
       state << " with new draft"
     end
 
-    state
+    if document.draft?
+      classes = "label label-primary"
+    else
+      classes = "label label-default"
+    end
+
+    content_tag(:span, state, class: classes).html_safe
+
   end
 
   def nav_link_to(text, href)
