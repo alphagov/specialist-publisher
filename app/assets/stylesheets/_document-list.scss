@@ -4,9 +4,8 @@
   padding: 0;
   list-style: none;
 
-  td:first-child,
-  th:first-child {
-    padding-left:0
+  li:first-child {
+    padding-top: 0;
   }
 
   .document {
@@ -25,14 +24,6 @@
     li {
       display: inline-block;
       min-width: 300px;
-    }
-
-    li.actions a {
-      padding-right: $gutter-half;
-    }
-
-    .published {
-      font-weight: bold;
     }
   }
 }

@@ -69,9 +69,6 @@ form {
   padding-top:$gutter;
   margin-top: $gutter;
 
-  .action-link {
-    @include core-19
-  }
   form {
     display: inline-block;
     margin-right:$gutter-one-third;
