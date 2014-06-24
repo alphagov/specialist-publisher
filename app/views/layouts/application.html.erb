@@ -22,6 +22,7 @@
   <% flash.each do |type, msg| %>
     <%= content_tag :div, msg, class: "alert #{bootstrap_class_for(type)}" %>
   <% end -%>
+  <%= render(:partial => 'shared/breadcrumbs') %>
   <%= yield %>
 <% end %>
 <%= javascript_include_tag "application" %>
@@ -32,3 +33,4 @@
 </script>
 <%# use the govuk_admin_foundation layout %>
 <%= render :template => 'layouts/govuk_admin_template' %>
+

@@ -1,3 +1,9 @@
+<% content_for :breadcrumbs do %>
+  <li><%= link_to "Your manuals", manuals_path %></li>
+  <li><%= link_to manual.title, manual_path(manual) %></li>
+  <li class='active'><%= document.title %></li>
+<% end %>
+
 <h3><%= link_to "&larr; #{manual.title}".html_safe, manual_path(manual) %></h3>
 
 <div class="manual-header">
