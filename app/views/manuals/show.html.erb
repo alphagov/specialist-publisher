@@ -12,12 +12,6 @@
   <% end %>
 </h1>
 
-  <div class="actions">
-    <%= link_to 'Edit Manual', edit_manual_path(manual), class: 'btn btn-primary' %>
-  </div>
-  <div class="clearfix"></div>
-</div>
-
 <div class="row">
   <div class="sidebar col-md-8">
     <p><b>State</b> <%= manual.state %></p>
@@ -67,11 +61,17 @@
     <p class='no-content-message'>You haven&rsquo;t added any sections to this manual yet.</p>
   <% end %>
   <%= link_to 'Add Section', new_manual_document_path(manual), class: 'btn btn-primary' %>
-
   </div>
 </div>
-<% if manual.documents.any? %>
-  <%= form_tag(publish_manual_path(manual), method: :post) do %>
-    <button name='submit' class="btn btn-danger">Publish</button>
-  <% end -%>
-<% end %>
+<div class='row'>
+  <div class="col-md-12">
+    <div class="actions">
+      <% if manual.documents.any? %>
+        <%= form_tag(publish_manual_path(manual), method: :post) do %>
+          <button name='submit' class="<%= classes %>">Publish</button>
+        <% end -%>
+      <% end %>
+      <%= link_to 'Edit Manual', edit_manual_path(manual), class: 'action-link' %>
+    </div>
+  </div>
+</div>
