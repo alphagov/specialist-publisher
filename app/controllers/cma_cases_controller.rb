@@ -1,6 +1,6 @@
 class CmaCasesController < ApplicationController
 
-  before_filter :authorize_user_org
+  before_filter :authorize_user
 
   rescue_from("SpecialistDocumentRepository::NotFoundError") do
     # TODO: Remove use of exceptions for flow control.
@@ -60,7 +60,7 @@ class CmaCasesController < ApplicationController
   def withdraw
     document = services.withdraw_document(self).call
 
-    redirect_to(specialist_document_path(document), flash: { error: "Withdrawn #{document.title}" })
+    redirect_to(specialist_document_path(document), flash: { notice: "Withdrawn #{document.title}" })
   end
 
   def preview
@@ -75,7 +75,7 @@ protected
     CmaCaseForm.new(document)
   end
 
-  def authorize_user_org
+  def authorize_user
     unless user_can_edit_cma_cases?
       redirect_to manuals_path, flash: { error: "You don't have permission to do that." }
     end
