@@ -221,7 +221,7 @@ end
 
 When(/^I create a new draft of a section with a change note$/) do
   click_on(@document_title)
-  click_on("Edit Section")
+  click_on("Edit section")
 
   @change_note = "Changed title for the purposes of testing."
 
