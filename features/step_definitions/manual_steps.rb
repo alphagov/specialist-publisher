@@ -207,7 +207,7 @@ When(/^I create a document to preview$/) do
   }
 
   go_to_manual_page(@manual_fields[:title])
-  click_on "Add Section"
+  click_on "Add section"
   fill_in_fields(@document_fields)
 end
 

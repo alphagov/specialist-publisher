@@ -8,7 +8,7 @@ module ManualHelpers
 
   def create_manual_document(manual_title, fields)
     go_to_manual_page(manual_title)
-    click_on "Add Section"
+    click_on "Add section"
 
     fill_in_fields(fields)
 
@@ -148,7 +148,7 @@ module ManualHelpers
 
   def create_manual_document_for_preview(manual_title, fields)
     go_to_manual_page(manual_title)
-    click_on "Add Section"
+    click_on "Add section"
     fill_in_fields(fields)
   end
 
