@@ -1,4 +1,4 @@
-class SpecialistDocumentsController < ApplicationController
+class CmaCasesController < ApplicationController
 
   before_filter :authorize_user_org
 
@@ -22,13 +22,13 @@ class SpecialistDocumentsController < ApplicationController
   def new
     document = services.new_document(self).call
 
-    render(:new, locals: { document: cma_form(document) })
+    render(:new, locals: { document: form_object_for(document) })
   end
 
   def edit
     document = services.show_document(self).call
 
-    render(:edit, locals: { document: cma_form(document) })
+    render(:edit, locals: { document: form_object_for(document) })
   end
 
   def create
@@ -60,7 +60,7 @@ class SpecialistDocumentsController < ApplicationController
   def withdraw
     document = services.withdraw_document(self).call
 
-    redirect_to(specialist_documents_path, flash: { error: "Withdrawn #{document.title}" })
+    redirect_to(specialist_document_path(document), flash: { error: "Withdrawn #{document.title}" })
   end
 
   def preview
@@ -71,12 +71,12 @@ class SpecialistDocumentsController < ApplicationController
 
 protected
 
-  def cma_form(document)
+  def form_object_for(document)
     CmaCaseForm.new(document)
   end
 
   def authorize_user_org
-    unless user_can_edit_documents?
+    unless user_can_edit_cma_cases?
       redirect_to manuals_path, flash: { error: "You don't have permission to do that." }
     end
   end

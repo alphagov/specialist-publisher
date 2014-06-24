@@ -25,9 +25,18 @@ class ApplicationController < ActionController::Base
   end
 
   def user_can_edit_documents?
-    current_user.organisation_slug == "competition-and-markets-authority"
+    user_can_edit_cma_cases? ||
+    user_can_edit_aaib_reports?
   end
   helper_method :user_can_edit_documents?
+
+  def user_can_edit_cma_cases?
+    current_organisation_slug == "competition-and-markets-authority"
+  end
+
+  def user_can_edit_aaib_reports?
+    current_organisation_slug == "air-accidents-investigation-branch"
+  end
 
   def current_organisation_slug
     current_user.organisation_slug
