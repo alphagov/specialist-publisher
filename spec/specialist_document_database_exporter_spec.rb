@@ -22,17 +22,38 @@ describe SpecialistDocumentDatabaseExporter do
   let(:document) { double(:document) }
 
   let(:rendered_document) {
-    double(:rendered_document, attributes: rendered_attributes)
+    double(:rendered_document, rendered_document_messages)
   }
 
-  let(:document_id) { double(:document_id) }
+  let(:rendered_document_messages) {
+    core_rendered_attributes
+      .merge(schema_defined_attributes)
+      .merge(other_rendered_attributes)
+  }
 
-  let(:rendered_attributes) {
+  let(:core_rendered_attributes) {
     {
-      id: document_id,
-      case_type: "ca98-and-civil-cartels"
+      slug: "/cma-cases/o-hai",
+      title: "O HAI",
+      summary: "A funny",
+      body: "<p>LOL</p>",
     }
   }
+
+  let(:other_rendered_attributes) {
+    {
+      id: "document_id",
+      serialized_headers: header_metadata,
+    }
+  }
+
+  let(:schema_defined_attributes) {
+    {
+      case_type: "ca98-and-civil-cartels",
+    }
+  }
+
+  let(:header_metadata) { double(:header_metadata) }
 
   it "renders the document" do
     exporter.call
@@ -40,34 +61,31 @@ describe SpecialistDocumentDatabaseExporter do
     expect(document_renderer).to have_received(:call).with(document)
   end
 
-  it "exports the serialized document attributes" do
+  it "exports the core rendered document attributes" do
     exporter.call
 
-    expect(export_recipent).to have_received(:create_or_update_by_slug!).with(
-      hash_including(case_type: "ca98-and-civil-cartels")
-    )
+    expect(export_recipent).to have_received(:create_or_update_by_slug!)
+      .with(hash_including(core_rendered_attributes))
   end
 
-  it "exports both labels and values for filterable options" do
+  it "filters undesirable attributes from the export" do
+    exporter.call
+
+    expect(export_recipent).to have_received(:create_or_update_by_slug!)
+      .with(hash_excluding(other_rendered_attributes))
+  end
+
+  it "exports all the 'details', schema defined facets, labels and headers" do
     exporter.call
 
     expect(export_recipent).to have_received(:create_or_update_by_slug!).with(
       hash_including(
-        case_type: "ca98-and-civil-cartels",
-        case_type_label: "CA98 and civil cartels"
+        details: {
+          case_type: "ca98-and-civil-cartels",
+          case_type_label: "CA98 and civil cartels",
+          headers: header_metadata,
+        }
       )
-    )
-  end
-
-  it "translates the id field to document id" do
-    exporter.call
-
-    expect(export_recipent).to have_received(:create_or_update_by_slug!).with(
-      hash_including(document_id: document_id)
-    )
-
-    expect(export_recipent).to have_received(:create_or_update_by_slug!).with(
-      hash_excluding(id: document_id)
     )
   end
 end

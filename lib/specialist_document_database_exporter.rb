@@ -15,39 +15,44 @@ private
 
   attr_reader :export_recipent, :document_renderer, :finder_schema, :document
 
-  def rendered_document
-    @rendered_document ||= document_renderer.call(document)
-  end
-
-  def rendered_document_attributes
-    rendered_document.attributes
-  end
-
   def exportable_attributes
-    remove_id_key(rendered_document_attributes)
-      .merge(document_id_field)
-      .merge(option_labels)
+    core_rendered_document_attributes
+      .merge(details: all_other_attributes)
   end
 
-  def option_labels
-    finder_schema.facets.each_with_object({}) do |facet_name, labels|
-      labels[:"#{facet_name}_label"] = label_for(facet_name)
+  def all_other_attributes
+    schema_defined_facets_and_labels.merge(headers: header_metadata)
+  end
+
+  def header_metadata
+    rendered_document.serialized_headers
+  end
+
+  def schema_defined_facets_and_labels
+    finder_schema.facets.each_with_object({}) do |facet_name, document_facets|
+      document_facets[facet_name.to_sym] = rendered_document.public_send(facet_name)
+      document_facets[:"#{facet_name}_label"] = label_for(facet_name)
     end
   end
 
   def label_for(facet_name)
-    facet_value = rendered_document_attributes.fetch(facet_name)
+    facet_value = rendered_document.public_send(facet_name)
     option_pair = finder_schema.options_for(facet_name).find do |(_, value)|
       value == facet_value
     end
     option_pair && option_pair.first
   end
 
-  def document_id_field
-    { document_id: rendered_document_attributes.fetch(:id) }
+  def rendered_document
+    @rendered_document ||= document_renderer.call(document)
   end
 
-  def remove_id_key(hash)
-    hash.reject { |k, _| k == :id }
+  def core_rendered_document_attributes
+    {
+      slug: rendered_document.slug,
+      title: rendered_document.title,
+      summary: rendered_document.summary,
+      body: rendered_document.body,
+    }
   end
 end
