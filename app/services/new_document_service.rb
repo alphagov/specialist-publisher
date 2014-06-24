@@ -1,6 +1,7 @@
 class NewDocumentService
-  def initialize(document_builder, context)
+  def initialize(document_builder, context, document_type)
     @document_builder = document_builder
+    @document_type = document_type
   end
 
   def call
@@ -11,9 +12,12 @@ class NewDocumentService
 
   attr_reader(
     :document_builder,
+    :document_type,
   )
 
   def initial_params
-    {}
+    {
+      document_type: document_type,
+    }
   end
 end

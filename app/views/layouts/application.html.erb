@@ -8,8 +8,8 @@
 
 <% content_for :navbar_items do %>
   <li><%= nav_link_to 'Manuals', '/manuals' %></li>
-  <% if user_can_edit_documents? %>
-    <li><%= nav_link_to 'Documents', '/specialist-documents' %></li>
+  <% if user_can_edit_cma_cases? %>
+    <li><%= nav_link_to 'CMA Cases', '/cma-cases' %></li>
   <% end -%>
 <% end %>
 
