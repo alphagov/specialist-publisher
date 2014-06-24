@@ -3,7 +3,7 @@ module ApplicationHelper
     finder_schema.options_for(facet)
   end
 
-  def document_state(document)
+  def state(document)
     state = document.publication_state
 
     if %w(published withdrawn).include?(state) && document.draft?
@@ -14,19 +14,6 @@ module ApplicationHelper
       classes = "label label-primary"
     else
       classes = "label label-default"
-    end
-
-    content_tag(:span, state, class: classes).html_safe
-
-  end
-
-  def manual_state(manual)
-    state = manual.state
-
-    if manual.published?
-      classes = "label label-default"
-    else
-      classes = "label label-primary"
     end
 
     content_tag(:span, state, class: classes).html_safe

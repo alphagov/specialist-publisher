@@ -49,7 +49,15 @@ class Manual
     self
   end
 
+  def draft?
+    state == "draft"
+  end
+
+  def publication_state
+    state
+  end
+
   def published?
-    @state == "published"
+    state == "published"
   end
 end
