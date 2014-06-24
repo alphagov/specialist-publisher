@@ -4,14 +4,11 @@
   <li class='active'><%= document.title %></li>
 <% end %>
 
-<div class="manual-header">
-  <h1 class="page-header">
-    <%= document.title %>
-  </h1>
-  <div class="actions">
-    <%= link_to("Edit Section", edit_manual_document_path(manual, document), class: 'btn btn-primary') %>
-  </div>
-  <div class="clearfix"></div>
+<h1 class="page-header">
+  <%= document.title %>
+</h1>
+<div class="actions">
+  <%= link_to("Edit Section", edit_manual_document_path(manual, document), class: 'btn btn-primary') %>
 </div>
 
 <div class="row">
