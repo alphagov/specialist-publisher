@@ -14,7 +14,7 @@ class SpecialistDocumentHeaderExtractor < SimpleDelegator
 
   def attributes
     {
-      headers: serialize_headers(headers)
+      headers: headers.map(&:to_h),
     }.merge(doc.attributes)
   end
 
@@ -26,14 +26,5 @@ private
 
   def doc
     __getobj__
-  end
-
-  def serialize_headers(headers)
-    # TODO: Push this recursive serialization into Govspeak::StructuredHeader
-    headers.map { |header|
-      header.to_h.symbolize_keys.merge(
-        headers: serialize_headers(header.headers)
-      )
-    }
   end
 end
