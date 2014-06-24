@@ -207,7 +207,7 @@ When(/^I create a document to preview$/) do
   }
 
   go_to_manual_page(@manual_fields[:title])
-  click_on "Add Section"
+  click_on "Add section"
   fill_in_fields(@document_fields)
 end
 
@@ -221,7 +221,7 @@ end
 
 When(/^I create a new draft of a section with a change note$/) do
   click_on(@document_title)
-  click_on("Edit Section")
+  click_on("Edit section")
 
   @change_note = "Changed title for the purposes of testing."
 

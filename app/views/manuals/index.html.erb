@@ -6,45 +6,23 @@
   Your manuals <small>(<%= manuals.count %>)</small>
 </h1>
 
-<div class="actions">
-  <%= link_to "Create new manual", new_manual_path, class: 'btn btn-success' %>
-</div>
- 
-
 <div class="row">
-  <div class="col-md-12">
-    <table class="document-list table">
-      <thead>
-        <th>
-          Title
-        </th>
-        <th>
-          Updated
-        </th>
-        <th>
-          Status
-        </th>
-        <th>
-        </th>
-      </thead>
-      <tbody>
-        <% manuals.each do |manual| %>
-          <tr>
-            <td>
-              <%= link_to manual.title, manual_path(manual), class: 'document-title' %>
-            </td>
-            <td>
-              <%= time_ago_in_words(manual.updated_at) %>
-            </td>
-            <td>
-              <%= manual.state %>
-            </td>
-            <td>
-              <%= link_to 'Edit', edit_manual_path(manual) %>
-            </td>
-          </tr>
-        <% end %>
-      </tbody>
-    </table>
+  <div class="sidebar col-md-3">
+    <%= link_to "New manual", new_manual_path, class: 'action-link' %>
+  </div>
+  <div class="col-md-9">
+    <ul class="document-list">
+      <% manuals.each do |manual| %>
+        <li class="document">
+          <%= link_to manual.title, manual_path(manual), class: 'document-title' %>
+          <ul class="metadata">
+            <li>updated <%= time_ago_in_words(manual.updated_at) %> ago</li>
+            <li>
+              <%= state(manual) %>
+            </li>
+          </ul>
+        </li>
+      <% end %>
+    </ul>
   </div>
 </div>

@@ -12,66 +12,51 @@
   <% end %>
 </h1>
 
-  <div class="actions">
-    <%= link_to 'Edit Manual', edit_manual_path(manual), class: 'btn btn-primary' %>
-  </div>
-  <div class="clearfix"></div>
-</div>
-
 <div class="row">
-  <div class="sidebar col-md-8">
-    <p><b>State</b> <%= manual.state %></p>
-  </div>
-</div>
-
-<div class="row">
-  <div class="sidebar col-md-8">
-    <p><b>Summary</b></p>
+  <div class="col-md-8">
+    <h2>Summary</h2>
     <%= govspeak(manual.summary) %>
   </div>
 </div>
 
-
 <div class="row">
-  <div class="col-md-12">
-    <h2>Sections</h2>
-<% if manual.documents.any? %>
-      <table class="documents table">
-        <thead>
-          <th>
-            Section Title
-          </th>
-          <th>
-            Last updated
-          </th>
-          <th>
-          </th>
-        </thead>
-        <tbody>
-          <% manual.documents.each do |document| %>
-            <tr>
-              <td>
-                <%= link_to(document.title, manual_document_path(manual, document)) %>
-              </td>
-              <td>
-                <%= time_ago_in_words(document.updated_at) %>
-              </td>
-              <td>
-                <%= link_to('Edit', edit_manual_document_path(manual, document)) %>
-              </td>
-            </tr>
-          <% end %>
-        </tbody>
-      </table>
-  <% else %>
-    <p class='no-content-message'>You haven&rsquo;t added any sections to this manual yet.</p>
-  <% end %>
-  <%= link_to 'Add Section', new_manual_document_path(manual), class: 'btn btn-primary' %>
-
+  <div class="col-md-8">
+    <h2>Metadata</h2>
+    <dl class='metadata-list'>
+      <dt>State</dt>
+      <dd><%= state(manual) %></dd>
   </div>
 </div>
-<% if manual.documents.any? %>
-  <%= form_tag(publish_manual_path(manual), method: :post) do %>
-    <button name='submit' class="btn btn-danger">Publish</button>
-  <% end -%>
-<% end %>
+
+<div class="row">
+  <div class="col-md-8">
+    <h2>Sections</h2>
+    <% if manual.documents.any? %>
+    <ul class="document-list">
+     <% manual.documents.each do |document| %>
+        <li class="document">
+          <%= link_to(document.title, manual_document_path(manual, document), class: 'document-title') %>
+          <ul class="metadata">
+            <li>updated <%= time_ago_in_words(document.updated_at) %> ago</li>
+          </ul>
+        </li>
+      <% end %>
+    </ul>
+    <% else %>
+      <p class='no-content-message'>You haven&rsquo;t added any sections to this manual yet.</p>
+    <% end %>
+    <%= link_to 'Add section', new_manual_document_path(manual), class: 'action-link' %>
+  </div>
+</div>
+<div class='row'>
+  <div class="col-md-12">
+    <div class="actions">
+      <% if manual.documents.any? %>
+        <%= form_tag(publish_manual_path(manual), method: :post) do %>
+          <button name='submit' class="btn btn-danger">Publish</button>
+        <% end -%>
+      <% end %>
+      <%= link_to 'Edit manual', edit_manual_path(manual), class: 'action-link' %>
+    </div>
+  </div>
+</div>

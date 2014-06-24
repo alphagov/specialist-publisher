@@ -7,13 +7,14 @@
 <h1 class="page-header">
   <%= document.title %>
 </h1>
-<div class="actions">
-  <%= link_to("Edit Section", edit_manual_document_path(manual, document), class: 'btn btn-primary') %>
-</div>
 
 <div class="row">
   <div class="sidebar col-md-8">
-    <p>Summary</p>
+    <h2>Summary</h2>
     <%= govspeak(document.summary) %>
   </div>
+</div>
+
+<div class="actions">
+  <%= link_to("Edit section", edit_manual_document_path(manual, document), class: 'action-link') %>
 </div>

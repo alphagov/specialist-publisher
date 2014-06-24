@@ -55,3 +55,6 @@ p.no-content-message {
     color: $link-color;
   }
 }
+.action-link {
+  @include core-19;
+}

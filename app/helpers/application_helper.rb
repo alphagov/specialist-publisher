@@ -3,7 +3,7 @@ module ApplicationHelper
     finder_schema.options_for(facet)
   end
 
-  def document_state(document)
+  def state(document)
     state = document.publication_state
 
     if %w(published withdrawn).include?(state) && document.draft?

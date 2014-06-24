@@ -6,7 +6,7 @@
 
 <div class="row">
   <div class="sidebar col-md-3">
-    <%= link_to "New document", new_specialist_document_path %>
+    <%= link_to "New document", new_specialist_document_path, class: 'action-link' %>
   </div>
   <div class="col-md-9">
     <ul class="document-list">
@@ -16,7 +16,7 @@
           <ul class="metadata">
             <li>updated <%= time_ago_in_words(document.updated_at) %> ago</li>
             <li>
-              <%= document_state(document) %>
+              <%= state(document) %>
             </li>
           </ul>
         </li>
