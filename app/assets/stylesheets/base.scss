@@ -28,7 +28,7 @@
 @import "govspeak";
 @import "govspeak-help";
 @import "navbar";
-@import "manual_header";
+@import "header";
 
 p.no-content-message {
   @include core-19;
@@ -53,13 +53,5 @@ p.no-content-message {
   color: inherit;
   small {
     color: $link-color;
-  }
-}
-
-.page-header {
-  span.document-slug {
-    display:block;
-    color: $grey-1;
-    @include core-19;
   }
 }

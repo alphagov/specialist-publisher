@@ -3,21 +3,19 @@
   <li class='active'><%= document.title %></li>
 <% end %>
 
-<div class='specialist-header'>
-  <h1 class="page-header"><%= document.title %>
-  <% if document.publication_state == "published" %>
-    <span class='document-slug'>
-      <%= link_to document.slug, published_specialist_document_path(document) %>
-    </span>
-  <% else %>
-    <span class='document-slug' title='When published this document will appear at this URL'><%= document.slug %></span>
-  <% end %>
-  </h1>
-  <div class="row">
-    <div class="col-md-8">
-      <h2>Summary</h2>
-      <p><%= document.summary %></p>
-    </div>
+<h1 class="page-header"><%= document.title %>
+<% if document.publication_state == "published" %>
+  <span class='document-slug'>
+    <%= link_to document.slug, published_specialist_document_path(document) %>
+  </span>
+<% else %>
+  <span class='document-slug' title='When published this document will appear at this URL'><%= document.slug %></span>
+<% end %>
+</h1>
+<div class="row">
+  <div class="col-md-8">
+    <h2>Summary</h2>
+    <p><%= document.summary %></p>
   </div>
 </div>
 <div class="row">

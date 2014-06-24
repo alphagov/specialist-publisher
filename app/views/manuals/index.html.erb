@@ -2,16 +2,14 @@
   <li class='active'>Your manuals</li>
 <% end %>
 
-<div class="manual-header">
-  <h1 class="page-header">
-    Your manuals <small>(<%= manuals.count %>)</small>
-  </h1>
+<h1 class="page-header">
+  Your manuals <small>(<%= manuals.count %>)</small>
+</h1>
 
-  <div class="actions">
-    <%= link_to "Create new manual", new_manual_path, class: 'btn btn-success' %>
-  </div>
-  <div class="clearfix"></div>
+<div class="actions">
+  <%= link_to "Create new manual", new_manual_path, class: 'btn btn-success' %>
 </div>
+ 
 
 <div class="row">
   <div class="col-md-12">
