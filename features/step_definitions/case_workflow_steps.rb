@@ -15,7 +15,7 @@ end
 
 When(/^I edit it and republish$/) do
   @amended_document_attributes = {summary: "New summary", title: "My title"}
-  edit_cma_case(@document_title, @amended_document_attributes, publish: true)
+  edit_document(@document_title, @amended_document_attributes, publish: true)
 end
 
 Then(/^the amended CMA case should be published$/) do

@@ -23,7 +23,8 @@ SpecialistPublisherWiring = DependencyContainer.new do
 
   define_factory(:observers) {
     ObserversRegistry.new(
-      document_content_api_exporter: get(:specialist_document_content_api_exporter),
+      document_content_api_exporter: get(:cma_case_content_api_exporter),
+      aaib_report_content_api_exporter: get(:aaib_report_content_api_exporter),
       finder_api_notifier: get(:finder_api_notifier),
       document_panopticon_registerer: get(:document_panopticon_registerer),
       aaib_report_panopticon_registerer: get(:aaib_report_panopticon_registerer),
@@ -376,7 +377,18 @@ SpecialistPublisherWiring = DependencyContainer.new do
     }
   }
 
-  define_instance(:specialist_document_content_api_exporter) {
+  define_instance(:aaib_report_content_api_exporter) {
+    ->(doc) {
+      SpecialistDocumentDatabaseExporter.new(
+        RenderedSpecialistDocument,
+        get(:specialist_document_renderer),
+        get(:aaib_report_finder_schema),
+        doc,
+      ).call
+    }
+  }
+
+  define_instance(:cma_case_content_api_exporter) {
     ->(doc) {
       SpecialistDocumentDatabaseExporter.new(
         RenderedSpecialistDocument,

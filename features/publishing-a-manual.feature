@@ -4,7 +4,7 @@ Feature: Publishing a manual
   So that they are availale on gov.uk
 
   Background:
-    Given I am logged in as a CMA editor
+    Given I am logged in as a "CMA" editor
 
   Scenario: Publish a manual
     Given a draft manual exists

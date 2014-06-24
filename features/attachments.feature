@@ -4,7 +4,7 @@ Feature: Attachments
   So that users can access the supporting documents
 
   Background:
-    Given I am logged in as a CMA editor
+    Given I am logged in as a "CMA" editor
 
   @javascript
   Scenario: CMA editor can add attachment to case

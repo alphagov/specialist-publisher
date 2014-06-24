@@ -4,7 +4,7 @@ Feature: Creating and editing a manual
   So that I can start moving my content to gov.uk
 
   Background:
-    Given I am logged in as a CMA editor
+    Given I am logged in as a "CMA" editor
 
   Scenario: Create a new manual
     When I create a manual

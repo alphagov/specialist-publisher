@@ -85,6 +85,7 @@ World(DependencyContainerMethods)
 require "panopticon_helpers"
 require "form_helpers"
 require "cma_case_helpers"
+require "document_helpers"
 require "manual_helpers"
 require "attachment_helpers"
 require "rerendering_helpers"
@@ -95,6 +96,7 @@ require "access_control_helpers"
 World(PanopticonHelpers)
 World(FormHelpers)
 World(CmaCaseHelpers)
+World(DocumentHelpers)
 World(ManualHelpers)
 World(AttachmentHelpers)
 World(FileFixtureHelpers)

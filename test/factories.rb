@@ -5,6 +5,10 @@ FactoryGirl.define do
     organisation_slug "competition-and-markets-authority"
   end
 
+  factory :aaib_editor, parent: :user do
+    organisation_slug "air-accidents-investigation-branch"
+  end
+
   factory :generic_editor, parent: :user do
     organisation_slug "ministry-of-tea"
   end
