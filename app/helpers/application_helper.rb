@@ -20,6 +20,19 @@ module ApplicationHelper
 
   end
 
+  def manual_state(manual)
+    state = manual.state
+
+    if manual.published?
+      classes = "label label-default"
+    else
+      classes = "label label-primary"
+    end
+
+    content_tag(:span, state, class: classes).html_safe
+
+  end
+
   def nav_link_to(text, href)
     link_to(text, href)
   end
