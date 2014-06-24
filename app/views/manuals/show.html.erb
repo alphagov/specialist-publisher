@@ -68,7 +68,7 @@
     <div class="actions">
       <% if manual.documents.any? %>
         <%= form_tag(publish_manual_path(manual), method: :post) do %>
-          <button name='submit' class="<%= classes %>">Publish</button>
+          <button name='submit' class="btn btn-danger">Publish</button>
         <% end -%>
       <% end %>
       <%= link_to 'Edit Manual', edit_manual_path(manual), class: 'action-link' %>
