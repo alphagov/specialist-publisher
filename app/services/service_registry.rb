@@ -11,7 +11,7 @@ require "show_manual_document_service"
 class ServiceRegistry
 
   def initialize(dependencies)
-    @document_builder = dependencies.fetch(:document_builder)
+    @cma_case_builder = dependencies.fetch(:cma_case_builder)
     @aaib_report_builder = dependencies.fetch(:aaib_report_builder)
     @document_repository = dependencies.fetch(:document_repository)
     @aaib_report_repository = dependencies.fetch(:aaib_report_repository)
@@ -47,7 +47,7 @@ class ServiceRegistry
 
   def new_cma_case(context)
     NewDocumentService.new(
-      document_builder,
+      cma_case_builder,
       context,
       "cma_case"
     )
@@ -77,7 +77,7 @@ class ServiceRegistry
 
   def create_cma_case(context)
     CreateDocumentService.new(
-      document_builder,
+      cma_case_builder,
       document_repository,
       creation_listeners,
       context,
@@ -106,7 +106,7 @@ class ServiceRegistry
   def preview_document(context)
     PreviewDocumentService.new(
       document_repository,
-      document_builder,
+      cma_case_builder,
       document_renderer,
       context,
     )
@@ -125,7 +125,7 @@ class ServiceRegistry
   def preview_manual_document(document_id, attributes)
     PreviewManualDocumentService.new(
       manual_repository(context),
-      document_builder,
+      cma_case_builder,
       document_renderer,
       context,
     )
@@ -304,7 +304,7 @@ class ServiceRegistry
     :aaib_report_repository,
     :aaib_report_creation_listeners,
     :creation_listeners,
-    :document_builder,
+    :cma_case_builder,
     :document_renderer,
     :document_repository,
     :manual_builder,
