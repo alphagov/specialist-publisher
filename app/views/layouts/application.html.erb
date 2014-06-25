@@ -24,13 +24,13 @@
   <% end -%>
   <%= render(:partial => 'shared/breadcrumbs') %>
   <%= yield %>
+  <script>
+    $(document).ready(function() {
+      <%= yield :document_ready %>
+    });
+  </script>
 <% end %>
-<%= javascript_include_tag "application" %>
-<script>
-  $(document).ready(function() {
-    <%= yield :document_ready %>
-  });
-</script>
+
 <%# use the govuk_admin_foundation layout %>
 <%= render :template => 'layouts/govuk_admin_template' %>
 
