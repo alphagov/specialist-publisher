@@ -21,14 +21,12 @@ private
   end
 
   def all_other_attributes
-    schema_defined_facets_and_labels.merge(headers: header_metadata)
+    {}
+      .merge(schema_defined_facet_labels)
+      .merge(other_document_attributes)
   end
 
-  def header_metadata
-    rendered_document.serialized_headers
-  end
-
-  def schema_defined_facets_and_labels
+  def schema_defined_facet_labels
     finder_schema.facets.each_with_object({}) do |facet_name, document_facets|
       document_facets[facet_name.to_sym] = rendered_document.public_send(facet_name)
       document_facets[:"#{facet_name}_label"] = label_for(facet_name)
@@ -48,11 +46,27 @@ private
   end
 
   def core_rendered_document_attributes
-    {
-      slug: rendered_document.slug,
-      title: rendered_document.title,
-      summary: rendered_document.summary,
-      body: rendered_document.body,
-    }
+    rendered_document.attributes.slice(*core_attribute_keys)
+  end
+
+  def other_document_attributes
+    rendered_document.attributes.except(
+      *(core_attribute_keys + excluded_attribute_keys)
+    )
+  end
+
+  def core_attribute_keys
+    [
+      :slug,
+      :title,
+      :summary,
+      :body,
+    ]
+  end
+
+  def excluded_attribute_keys
+    [
+      :id,
+    ]
   end
 end

@@ -22,10 +22,16 @@ describe SpecialistDocumentDatabaseExporter do
   let(:document) { double(:document) }
 
   let(:rendered_document) {
-    double(:rendered_document, rendered_document_messages)
+    double(
+      :rendered_document,
+      attributes: rendered_document_attributes,
+      case_type: case_type,
+    )
   }
 
-  let(:rendered_document_messages) {
+  let(:case_type)  { "ca98-and-civil-cartels" }
+
+  let(:rendered_document_attributes) {
     core_rendered_attributes
       .merge(schema_defined_attributes)
       .merge(other_rendered_attributes)
@@ -43,13 +49,13 @@ describe SpecialistDocumentDatabaseExporter do
   let(:other_rendered_attributes) {
     {
       id: "document_id",
-      serialized_headers: header_metadata,
+      headers: header_metadata,
     }
   }
 
   let(:schema_defined_attributes) {
     {
-      case_type: "ca98-and-civil-cartels",
+      case_type: case_type,
     }
   }
 

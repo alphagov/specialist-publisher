@@ -24,16 +24,39 @@ module CmaCaseHelpers
     end
   end
 
-  def check_cma_case_is_published(slug, title)
-    published_cma_case = RenderedSpecialistDocument.where(title: title).first
+  def check_cma_case_is_published(slug, fields)
+    published_cma_case = RenderedSpecialistDocument.find_by_slug(slug)
 
-    expect(published_cma_case).not_to be_nil
+    expect(published_cma_case.title).to eq(fields.fetch(:title))
+    expect(published_cma_case.summary).to eq(fields.fetch(:summary))
+
+    check_metadata_is_rendered(
+      published_cma_case,
+      fields.except(:title, :summary, :body),
+    )
 
     check_rendered_document_contains_html(published_cma_case)
     check_rendered_document_contains_header_meta_data(published_cma_case)
 
-    check_published_with_panopticon(slug, title)
-    check_added_to_finder_api(slug, title)
+    check_published_with_panopticon(slug, fields.fetch(:title))
+    check_added_to_finder_api(slug, fields.fetch(:title))
+  end
+
+  def check_metadata_is_rendered(published_document, fields)
+    # TODO: RSpec 3 change to eq(hash_including( ... ))
+
+    fields.each do |key, value|
+      expect(published_document.details.fetch(key.to_s)).to eq(value)
+    end
+  end
+
+  def check_document_is_published_with_legacy_format(slug, fields)
+    published_document = RenderedSpecialistDocument.find_by_slug(slug)
+
+    # TODO: RSpec 3 change to eq(hash_including( ... ))
+    fields.except(:body).each do |key, value|
+      expect(published_document.read_attribute(key)).to eq(value)
+    end
   end
 
   def seed_cases(number_of_cases, state: "draft")
