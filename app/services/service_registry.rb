@@ -49,7 +49,6 @@ class ServiceRegistry
     NewDocumentService.new(
       cma_case_builder,
       context,
-      "cma_case"
     )
   end
 
@@ -57,7 +56,6 @@ class ServiceRegistry
     NewDocumentService.new(
       aaib_report_builder,
       context,
-      "aaib_report"
     )
   end
 
@@ -71,7 +69,6 @@ class ServiceRegistry
       aaib_report_repository,
       aaib_report_creation_listeners,
       context,
-      "aaib_report",
     )
   end
 
@@ -81,7 +78,6 @@ class ServiceRegistry
       document_repository,
       creation_listeners,
       context,
-      "cma_case",
     )
   end
 

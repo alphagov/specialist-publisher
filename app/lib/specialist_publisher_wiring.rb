@@ -1,7 +1,8 @@
 require "dependency_container"
 require "securerandom"
 require "specialist_document_repository"
-require "builders/specialist_document_builder"
+require "builders/cma_case_builder"
+require "builders/aaib_report_builder"
 require "gds_api/panopticon"
 require "panopticon_registerer"
 require "specialist_document_attachment_processor"
@@ -170,7 +171,7 @@ SpecialistPublisherWiring = DependencyContainer.new do
   define_singleton(:attachment_factory) { Attachment.method(:new) }
 
   define_factory(:cma_case_builder) {
-    SpecialistDocumentBuilder.new(
+    CmaCaseBuilder.new(
       get(:validatable_cma_case_factory),
       get(:id_generator),
     )
@@ -188,7 +189,7 @@ SpecialistPublisherWiring = DependencyContainer.new do
   }
 
   define_factory(:aaib_report_builder) {
-    SpecialistDocumentBuilder.new(
+    AaibReportBuilder.new(
       get(:validatable_aaib_report_factory),
       get(:id_generator),
     )

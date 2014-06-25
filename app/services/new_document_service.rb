@@ -1,7 +1,6 @@
 class NewDocumentService
-  def initialize(document_builder, context, document_type)
+  def initialize(document_builder, context)
     @document_builder = document_builder
-    @document_type = document_type
   end
 
   def call
@@ -16,8 +15,6 @@ class NewDocumentService
   )
 
   def initial_params
-    {
-      document_type: document_type,
-    }
+    {}
   end
 end
