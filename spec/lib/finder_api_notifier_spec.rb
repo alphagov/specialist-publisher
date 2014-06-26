@@ -9,7 +9,19 @@ describe FinderAPINotifier do
     let(:markdown_renderer) { double(:markdown_renderer) }
     let(:document) { double(:document) }
     let(:markdown_document_slug) { "cma-cases/a-cma-case-document" }
-    let(:markdown_document_attributes) { double(:document_attributes) }
+    let(:markdown_document_attributes) {
+      {
+        good_value: "I am good",
+        bad_value: "",
+      }
+    }
+
+    let(:filtered_attributes) {
+      {
+        good_value: "I am good",
+        bad_value: nil,
+      }
+    }
 
     let(:markdown_document) {
       double(
@@ -29,12 +41,12 @@ describe FinderAPINotifier do
       expect(markdown_renderer).to have_received(:call).with(document)
     end
 
-    it "sends all the document's attributes to the Finder API" do
+    it "sends filtered document attributes to the Finder API" do
       notifier.call(document)
 
       expect(api_client).to have_received(:notify_of_publication).with(
         markdown_document_slug,
-        markdown_document_attributes
+        filtered_attributes,
       )
     end
   end
