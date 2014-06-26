@@ -23,4 +23,7 @@ class CmaCaseForm < DocumentForm
     end
   end
 
+  def finder_schema
+    SpecialistPublisherWiring.get(:cma_case_finder_schema)
+  end
 end

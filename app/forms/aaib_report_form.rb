@@ -17,4 +17,8 @@ class AaibReportForm < DocumentForm
       delegate_if_document_exists(attribute_name)
     end
   end
+
+  def finder_schema
+    SpecialistPublisherWiring.get(:aaib_report_finder_schema)
+  end
 end

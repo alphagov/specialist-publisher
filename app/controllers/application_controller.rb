@@ -9,11 +9,6 @@ class ApplicationController < ActionController::Base
 
   protect_from_forgery with: :exception
 
-  def finder_schema
-    SpecialistPublisherWiring.get(:"#{document_type}_finder_schema")
-  end
-  helper_method :finder_schema
-
   def url_maker
     SpecialistPublisherWiring.get(:url_maker)
   end

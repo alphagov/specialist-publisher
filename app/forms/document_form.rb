@@ -32,6 +32,10 @@ class DocumentForm < SimpleDelegator
     document.id
   end
 
+  def facet_options(facet)
+    finder_schema.options_for(facet)
+  end
+
 private
 
   attr_reader :document
