@@ -23,6 +23,12 @@ else
   gem "govuk_content_models", "12.2.0"
 end
 
+if ENV["API_DEV"]
+  gem "gds-api-adapters", :path => "../gds-api-adapters"
+else
+  gem "gds-api-adapters", "11.3.0"
+end
+
 group :development do
   gem "better_errors"
   gem "binding_of_caller"

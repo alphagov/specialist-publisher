@@ -18,6 +18,8 @@ require "validators/slug_uniqueness_validator"
 require "validators/change_note_validator"
 require "marshallers/document_association_marshaller"
 require "builders/manual_document_builder"
+require "rummager_indexer"
+require "cma_case_indexable_formatter"
 
 $LOAD_PATH.unshift(File.expand_path("../..", "app/services"))
 
@@ -33,6 +35,7 @@ SpecialistPublisherWiring = DependencyContainer.new do
       manual_panopticon_registerer: get(:manual_panopticon_registerer),
       manual_document_panopticon_registerer: get(:manual_document_panopticon_registerer),
       manual_content_api_exporter: get(:manual_and_documents_content_api_exporter),
+      cma_case_rummager_indexer: get(:cma_case_rummager_indexer),
     )
   }
 
@@ -314,6 +317,7 @@ SpecialistPublisherWiring = DependencyContainer.new do
       get(:specialist_document_content_api_withdrawer),
       get(:finder_api_withdrawer),
       get(:document_panopticon_registerer),
+      get(:cma_case_rummager_deleter),
     ]
   }
 
@@ -364,6 +368,22 @@ SpecialistPublisherWiring = DependencyContainer.new do
       manual.respond_to?(:documents) && manual.documents.each do |doc|
         get(:manual_document_panopticon_registerer).call(doc, manual)
       end
+    }
+  }
+
+  define_factory(:cma_case_rummager_indexer) {
+    ->(document) {
+      RummagerIndexer.new.add(
+        CmaCaseIndexableFormatter.new(document)
+      )
+    }
+  }
+
+  define_factory(:cma_case_rummager_deleter) {
+    ->(document) {
+      RummagerIndexer.new.delete(
+        CmaCaseIndexableFormatter.new(document)
+      )
     }
   }
 
