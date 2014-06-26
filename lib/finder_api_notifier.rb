@@ -9,11 +9,19 @@ class FinderAPINotifier
 
     api_client.notify_of_publication(
       rendered_document.slug,
-      rendered_document.attributes,
+      filtered_attributes(rendered_document),
     )
   end
 
   private
 
   attr_reader :api_client, :markdown_renderer
+
+  def filtered_attributes(rendered_document)
+    rendered_document.attributes.reduce({}) { |attributes, (k, v)|
+      attributes.merge(
+        k => v.presence,
+      )
+    }
+  end
 end
