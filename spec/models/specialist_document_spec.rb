@@ -133,11 +133,6 @@ describe SpecialistDocument do
       expect(doc).to be_draft
       expect(doc).to be_published
     end
-
-    it "can be instantiated as the published edition" do
-      expect(doc.published_version.title).to eq(published_edition_v1.title)
-      expect(doc.published_version.version_number).to eq(published_edition_v1.version_number)
-    end
   end
 
   describe "#update" do
@@ -364,18 +359,6 @@ describe SpecialistDocument do
         end
       end
     end
-
-    context "with a published and draft edition, published edition exposed" do
-      let(:editions) { [published_edition_v1, draft_edition_v2] }
-      let(:doc_with_published_edition_exposed) {
-        doc.published_version
-      }
-
-      it "raises" do
-        expect { doc_with_published_edition_exposed.update({title: "blah"}) }.to raise_error
-      end
-    end
-
   end
 
   describe "#publish!" do
@@ -400,14 +383,6 @@ describe SpecialistDocument do
         doc.publish!
 
         expect(published_edition_v1).to have_received(:archive)
-      end
-
-      context "when the published edition is exposed" do
-        it "should raise an exception" do
-          expect {
-            doc.published_version.publish!
-          }.to raise_error
-        end
       end
     end
 

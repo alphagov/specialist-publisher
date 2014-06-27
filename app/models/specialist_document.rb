@@ -63,12 +63,6 @@ class SpecialistDocument
       )
   end
 
-  def published_version
-    if published_edition
-      self.class.new(@slug_generator, @edition_factory, @id, @editions, version_number: published_edition.version_number)
-    end
-  end
-
   def update(params)
     raise "Can only update the latest version" unless latest_edition_exposed?
 
