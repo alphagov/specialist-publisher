@@ -57,7 +57,7 @@
 
 <%= content_for :document_ready do %>
   window.SpecialistDocument.addPreviewFeature({
-    'url'             : '<%= preview_path_for_specialist_document(document) %>',
+    'url'             : '<%= preview_path_for_cma_case(document) %>',
     'insert_into'     : '.preview_container',
     'insert_button'   : '.preview_button',
     'render_to'       : '.preview .govspeak',
