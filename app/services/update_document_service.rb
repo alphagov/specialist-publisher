@@ -1,12 +1,13 @@
 class UpdateDocumentService
-  def initialize(repo, listeners, context)
-    @repo = repo
-    @listeners = listeners
-    @context = context
+  def initialize(options)
+    @repo = options.fetch(:repo)
+    @listeners = options.fetch(:listeners)
+    @document_id = options.fetch(:document_id)
+    @attributes = options.fetch(:attributes)
   end
 
   def call
-    document.update(new_attributes)
+    document.update(attributes)
 
     if document.valid?
       persist
@@ -18,7 +19,7 @@ class UpdateDocumentService
 
   private
 
-  attr_reader :repo, :listeners, :context
+  attr_reader :repo, :listeners, :attributes, :document_id
 
   def persist
     repo.store(document)
@@ -30,15 +31,7 @@ class UpdateDocumentService
     end
   end
 
-  def new_attributes
-    context.params.fetch("specialist_document", {})
-  end
-
   def document
     @document ||= repo.fetch(document_id)
-  end
-
-  def document_id
-    context.params.fetch("id")
   end
 end

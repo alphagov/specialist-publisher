@@ -8,31 +8,31 @@ class CmaCasesController < ApplicationController
   end
 
   def index
-    documents = services.list_documents(self).call
+    documents = services.list_documents.call
 
     render(:index, locals: { documents: documents })
   end
 
   def show
-    document = services.show_document(self).call
+    document = services.show_document(params.fetch("id")).call
 
     render(:show, locals: { document: document })
   end
 
   def new
-    document = services.new_document(self).call
+    document = services.new_document.call
 
     render(:new, locals: { document: form_object_for(document) })
   end
 
   def edit
-    document = services.show_document(self).call
+    document = services.show_document(params.fetch("id")).call
 
     render(:edit, locals: { document: form_object_for(document) })
   end
 
   def create
-    document = services.create_document(self).call
+    document = services.create_document(params.fetch("specialist_document", {})).call
 
     if document.valid?
       redirect_to(specialist_document_path(document))
@@ -42,7 +42,7 @@ class CmaCasesController < ApplicationController
   end
 
   def update
-    document = services.update_document(self).call
+    document = services.update_document(params.fetch("id"), params.fetch("specialist_document", {})).call
 
     if document.valid?
       redirect_to(specialist_document_path(document))
@@ -52,19 +52,19 @@ class CmaCasesController < ApplicationController
   end
 
   def publish
-    document = services.publish_document(self).call
+    document = services.publish_document(params.fetch("id")).call
 
     redirect_to(specialist_document_path(document), flash: { notice: "Published #{document.title}" })
   end
 
   def withdraw
-    document = services.withdraw_document(self).call
+    document = services.withdraw_document(params.fetch("id")).call
 
     redirect_to(specialist_document_path(document), flash: { notice: "Withdrawn #{document.title}" })
   end
 
   def preview
-    preview_html = services.preview_document(self).call
+    preview_html = services.preview_document(params.fetch("id", nil), params.fetch("specialist_document", {})).call
 
     render json: { preview_html: preview_html }
   end
