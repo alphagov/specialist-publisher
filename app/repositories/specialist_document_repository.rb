@@ -3,6 +3,14 @@ require "fetchable"
 class SpecialistDocumentRepository
   include Fetchable
 
+  NotFoundError = Module.new
+
+  def fetch(*args, &block)
+    super
+  rescue KeyError => e
+    raise e.extend(NotFoundError)
+  end
+
   def initialize(panopticon_mappings,
     specialist_document_editions,
     specialist_document_factory)
