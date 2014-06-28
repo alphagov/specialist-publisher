@@ -374,7 +374,9 @@ SpecialistPublisherWiring = DependencyContainer.new do
   define_factory(:cma_case_rummager_indexer) {
     ->(document) {
       RummagerIndexer.new.add(
-        CmaCaseIndexableFormatter.new(document)
+        CmaCaseIndexableFormatter.new(
+          SpecialistDocumentAttachmentProcessor.new(document)
+        )
       )
     }
   }
@@ -382,7 +384,9 @@ SpecialistPublisherWiring = DependencyContainer.new do
   define_factory(:cma_case_rummager_deleter) {
     ->(document) {
       RummagerIndexer.new.delete(
-        CmaCaseIndexableFormatter.new(document)
+        CmaCaseIndexableFormatter.new(
+          SpecialistDocumentAttachmentProcessor.new(document)
+        )
       )
     }
   }

@@ -45,7 +45,7 @@ private
   end
 
   def indexable_content
-    SpecialistDocumentAttachmentProcessor.new(entity).body
+    entity.body
   end
 
   def organisation_slugs
