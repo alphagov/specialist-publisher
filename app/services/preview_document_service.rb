@@ -1,9 +1,10 @@
 class PreviewDocumentService
-  def initialize(document_repository, document_builder, document_renderer, context)
+  def initialize(document_repository, document_builder, document_renderer, document_id, document_params)
     @document_repository = document_repository
     @document_builder = document_builder
     @document_renderer = document_renderer
-    @context = context
+    @document_id = document_id
+    @document_params = document_params
   end
 
   def call
@@ -18,7 +19,8 @@ class PreviewDocumentService
     :document_repository,
     :document_builder,
     :document_renderer,
-    :context,
+    :document_id,
+    :document_params,
   )
 
   def document
@@ -31,13 +33,5 @@ class PreviewDocumentService
 
   def existing_document
     @existing_document ||= document_repository.fetch(document_id)
-  end
-
-  def document_params
-    context.params.fetch("specialist_document")
-  end
-
-  def document_id
-    context.params.fetch("id", nil)
   end
 end

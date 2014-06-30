@@ -9,11 +9,6 @@ class ApplicationController < ActionController::Base
 
   protect_from_forgery with: :exception
 
-  def finder_schema
-    SpecialistPublisherWiring.get(:finder_schema)
-  end
-  helper_method :finder_schema
-
   def url_maker
     SpecialistPublisherWiring.get(:url_maker)
   end
@@ -24,10 +19,15 @@ class ApplicationController < ActionController::Base
     SpecialistPublisherWiring.get(:services)
   end
 
-  def user_can_edit_documents?
-    current_user.organisation_slug == "competition-and-markets-authority"
+  def user_can_edit_cma_cases?
+    current_organisation_slug == "competition-and-markets-authority"
   end
-  helper_method :user_can_edit_documents?
+  helper_method :user_can_edit_cma_cases?
+
+  def user_can_edit_aaib_reports?
+    current_organisation_slug == "air-accidents-investigation-branch"
+  end
+  helper_method :user_can_edit_aaib_reports?
 
   def current_organisation_slug
     current_user.organisation_slug

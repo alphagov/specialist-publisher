@@ -4,6 +4,7 @@ class ObserversRegistry
 
   def initialize(dependencies)
     @document_content_api_exporter = dependencies.fetch(:document_content_api_exporter)
+    @aaib_report_content_api_exporter = dependencies.fetch(:aaib_report_content_api_exporter)
     @finder_api_notifier = dependencies.fetch(:finder_api_notifier)
     @document_panopticon_registerer = dependencies.fetch(:document_panopticon_registerer)
     @manual_panopticon_registerer = dependencies.fetch(:manual_panopticon_registerer)
@@ -14,6 +15,14 @@ class ObserversRegistry
   def document_publication
     [
       document_content_api_exporter,
+      finder_api_notifier,
+      document_panopticon_registerer,
+    ]
+  end
+
+  def aaib_report_publication
+    [
+      aaib_report_content_api_exporter,
       finder_api_notifier,
       document_panopticon_registerer,
     ]
@@ -44,6 +53,7 @@ class ObserversRegistry
 
   attr_reader(
     :document_content_api_exporter,
+    :aaib_report_content_api_exporter,
     :finder_api_notifier,
     :document_panopticon_registerer,
     :manual_panopticon_registerer,

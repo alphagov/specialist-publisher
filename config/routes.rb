@@ -2,17 +2,29 @@ SpecialistPublisher::Application.routes.draw do
   mount JasmineRails::Engine => "/specs" if defined?(JasmineRails::Engine)
   mount GovukAdminTemplate::Engine, at: "/style-guide"
 
-  resources :specialist_documents, except: :destroy, path: "specialist-documents" do
+  resources :cma_cases, except: :destroy, path: "cma-cases", as: "specialist_documents" do
     resources :attachments, only: [:new, :create, :edit, :update]
     post :withdraw, on: :member
     post :publish, on: :member
 
-    # This is for persisted documents
+    # This is for persisted cma cases
     post :preview, on: :member
   end
 
-  # This is for new documents
-  post "specialist-documents/preview" => "specialist_documents#preview", as: "preview_new_specialist_document"
+  # This is for new cma cases
+  post "cma-cases/preview" => "cma_cases#preview", as: "preview_new_specialist_document"
+
+  resources :aaib_reports, except: :destroy, path: "aaib-reports" do
+    resources :attachments, only: [:new, :create, :edit, :update]
+    post :withdraw, on: :member
+    post :publish, on: :member
+
+    # This is for persisted aaib reports
+    post :preview, on: :member
+  end
+
+  # This is for new aaib reports
+  post "aaib-reports/preview" => "aaib_reports#preview", as: "preview_new_aaib_report"
 
   resources :manuals, except: :destroy do
     resources :documents, except: :destroy, path: "sections", controller: "ManualDocuments" do

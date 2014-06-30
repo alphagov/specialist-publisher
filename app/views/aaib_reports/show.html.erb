@@ -1,5 +1,5 @@
 <% content_for :breadcrumbs do %>
-  <li><%= link_to "Your documents", specialist_documents_path %></li>
+  <li><%= link_to "Your documents", aaib_reports_path %></li>
   <li class='active'><%= document.title %></li>
 <% end %>
 
@@ -22,18 +22,10 @@
   <div class=" col-md-8">
     <h2>Metadata</h2>
     <dl class='metadata-list'>
-      <dt>Opened date</dt>
-      <dd><%= document.opened_date %></dd>
-      <dt>Closed date</dt>
-      <dd><%= document.closed_date %></dd>
-      <dt>Case type</dt>
-      <dd><%= document.case_type %></dd>
-      <dt>Case state</dt>
-      <dd><%= document.case_state %></dd>
-      <dt>Market sector</dt>
-      <dd><%= document.market_sector %></dd>
-      <dt>Outcome type</dt>
-      <dd><%= document.outcome_type %></dd>
+      <% document.extra_fields.each_pair do |label, value| %>
+        <dt><%= label.to_s.humanize %></dt>
+        <dd><%= value %></dd>
+      <% end %>
       <dt>Publication state</dt>
       <dd><%= state(document) %></dd>
     </dl>
@@ -77,15 +69,15 @@
 </div>
   <div class="actions">
 
-  <%= form_tag(publish_specialist_document_path(document), method: :post) do %>
+  <%= form_tag(publish_aaib_report_path(document), method: :post) do %>
     <button name='submit' class="btn btn-danger">Publish</button>
   <% end -%>
 
-  <%= form_tag(withdraw_specialist_document_path(document), method: :post) do %>
+  <%= form_tag(withdraw_aaib_report_path(document), method: :post) do %>
     <button name='submit' class="btn btn-danger">Withdraw</button>
   <% end -%>
 
-  <%= link_to "Edit", edit_specialist_document_path(document), class: "action-link"  %>
+  <%= link_to "Edit", edit_aaib_report_path(document), class: "action-link" %>
 
 </div>
 

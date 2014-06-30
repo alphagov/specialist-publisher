@@ -1,7 +1,8 @@
 require "dependency_container"
 require "securerandom"
 require "specialist_document_repository"
-require "builders/specialist_document_builder"
+require "builders/cma_case_builder"
+require "builders/aaib_report_builder"
 require "gds_api/panopticon"
 require "panopticon_registerer"
 require "specialist_document_attachment_processor"
@@ -23,9 +24,11 @@ SpecialistPublisherWiring = DependencyContainer.new do
 
   define_factory(:observers) {
     ObserversRegistry.new(
-      document_content_api_exporter: get(:specialist_document_content_api_exporter),
+      document_content_api_exporter: get(:cma_case_content_api_exporter),
+      aaib_report_content_api_exporter: get(:aaib_report_content_api_exporter),
       finder_api_notifier: get(:finder_api_notifier),
       document_panopticon_registerer: get(:document_panopticon_registerer),
+      aaib_report_panopticon_registerer: get(:aaib_report_panopticon_registerer),
       manual_panopticon_registerer: get(:manual_panopticon_registerer),
       manual_document_panopticon_registerer: get(:manual_document_panopticon_registerer),
       manual_content_api_exporter: get(:manual_and_documents_content_api_exporter),
@@ -34,9 +37,12 @@ SpecialistPublisherWiring = DependencyContainer.new do
 
   define_factory(:services) {
     ServiceRegistry.new(
-      document_builder: get(:cma_case_builder),
+      cma_case_builder: get(:cma_case_builder),
+      aaib_report_builder: get(:aaib_report_builder),
       document_repository: get(:specialist_document_repository),
+      aaib_report_repository: get(:aaib_report_repository),
       creation_listeners: get(:specialist_document_creation_observers),
+      aaib_report_creation_listeners: get(:aaib_report_creation_observers),
       withdrawal_listeners: get(:specialist_document_withdrawal_observers),
       document_renderer: get(:specialist_document_renderer),
 
@@ -84,6 +90,26 @@ SpecialistPublisherWiring = DependencyContainer.new do
       )
     }
   }
+
+  define_singleton(:aaib_report_factory) {
+    ->(*args) {
+      AaibReport.new(
+        SpecialistDocument.new(
+          get(:aaib_slug_generator),
+          get(:edition_factory),
+          *args,
+        )
+      )
+    }
+  }
+
+  define_singleton(:aaib_report_repository) do
+    SpecialistDocumentRepository.new(
+      get(:panopticon_mappings),
+      get(:specialist_document_editions).where(document_type: "aaib_report"),
+      get(:validatable_aaib_report_factory),
+    )
+  end
 
   define_singleton(:specialist_document_repository) do
     SpecialistDocumentRepository.new(
@@ -145,7 +171,7 @@ SpecialistPublisherWiring = DependencyContainer.new do
   define_singleton(:attachment_factory) { Attachment.method(:new) }
 
   define_factory(:cma_case_builder) {
-    SpecialistDocumentBuilder.new(
+    CmaCaseBuilder.new(
       get(:validatable_cma_case_factory),
       get(:id_generator),
     )
@@ -157,6 +183,24 @@ SpecialistPublisherWiring = DependencyContainer.new do
         get(:specialist_document_repository),
         CmaCaseForm.new(
           get(:cma_case_factory).call(*args),
+        ),
+      )
+    }
+  }
+
+  define_factory(:aaib_report_builder) {
+    AaibReportBuilder.new(
+      get(:validatable_aaib_report_factory),
+      get(:id_generator),
+    )
+  }
+
+  define_factory(:validatable_aaib_report_factory) {
+    ->(*args) {
+      SlugUniquenessValidator.new(
+        get(:aaib_report_repository),
+        AaibReportForm.new(
+          get(:aaib_report_factory).call(*args),
         ),
       )
     }
@@ -190,6 +234,7 @@ SpecialistPublisherWiring = DependencyContainer.new do
   }
 
   define_factory(:cma_slug_generator) { SlugGenerator.new(prefix: "cma-cases") }
+  define_factory(:aaib_slug_generator) { SlugGenerator.new(prefix: "aaib-reports") }
   define_factory(:manual_slug_generator) { SlugGenerator.new(prefix: "guidance") }
   define_factory(:manual_document_slug_generator) {
     ->(manual_slug) {
@@ -257,6 +302,12 @@ SpecialistPublisherWiring = DependencyContainer.new do
     ]
   }
 
+  define_singleton(:aaib_report_creation_observers) {
+    [
+      get(:aaib_report_panopticon_registerer),
+    ]
+  }
+
   define_singleton(:specialist_document_withdrawal_observers) {
     [
       get(:specialist_document_content_api_withdrawer),
@@ -279,6 +330,14 @@ SpecialistPublisherWiring = DependencyContainer.new do
     ->(document) {
       get(:panopticon_registerer).call(
         DocumentArtefactFormatter.new(document)
+      )
+    }
+  }
+
+  define_factory(:aaib_report_panopticon_registerer) {
+    ->(document) {
+      get(:panopticon_registerer).call(
+        AaibReportArtefactFormatter.new(document)
       )
     }
   }
@@ -319,12 +378,23 @@ SpecialistPublisherWiring = DependencyContainer.new do
     }
   }
 
-  define_instance(:specialist_document_content_api_exporter) {
+  define_instance(:aaib_report_content_api_exporter) {
     ->(doc) {
       SpecialistDocumentDatabaseExporter.new(
         RenderedSpecialistDocument,
         get(:specialist_document_renderer),
-        get(:finder_schema),
+        get(:aaib_report_finder_schema),
+        doc,
+      ).call
+    }
+  }
+
+  define_instance(:cma_case_content_api_exporter) {
+    ->(doc) {
+      SpecialistDocumentDatabaseExporter.new(
+        RenderedSpecialistDocument,
+        get(:specialist_document_renderer),
+        get(:cma_case_finder_schema),
         doc,
       ).call
     }
@@ -375,7 +445,12 @@ SpecialistPublisherWiring = DependencyContainer.new do
     FinderAPINotifier.new(get(:finder_api), get(:markdown_renderer))
   }
 
-  define_singleton(:finder_schema) {
+  define_singleton(:aaib_report_finder_schema) {
+    require "finder_schema"
+    FinderSchema.new(Rails.root.join("schemas/aaib-reports.json"))
+  }
+
+  define_singleton(:cma_case_finder_schema) {
     require "finder_schema"
     FinderSchema.new(Rails.root.join("schemas/cma-cases.json"))
   }

@@ -1,8 +1,8 @@
 class PublishDocumentService
-  def initialize(document_repository, listeners, context)
+  def initialize(document_repository, listeners, document_id)
     @document_repository = document_repository
     @listeners = listeners
-    @context = context
+    @document_id = document_id
   end
 
   def call
@@ -14,7 +14,7 @@ class PublishDocumentService
 
   private
 
-  attr_reader :document_repository, :listeners, :context
+  attr_reader :document_repository, :listeners, :document_id
 
   def publish
     document.publish!
@@ -34,9 +34,5 @@ class PublishDocumentService
 
   def document
     @document ||= document_repository.fetch(document_id)
-  end
-
-  def document_id
-    context.params.fetch("id")
   end
 end

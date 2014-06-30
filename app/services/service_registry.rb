@@ -11,9 +11,12 @@ require "show_manual_document_service"
 class ServiceRegistry
 
   def initialize(dependencies)
-    @document_builder = dependencies.fetch(:document_builder)
+    @cma_case_builder = dependencies.fetch(:cma_case_builder)
+    @aaib_report_builder = dependencies.fetch(:aaib_report_builder)
     @document_repository = dependencies.fetch(:document_repository)
+    @aaib_report_repository = dependencies.fetch(:aaib_report_repository)
     @creation_listeners = dependencies.fetch(:creation_listeners)
+    @aaib_report_creation_listeners = dependencies.fetch(:aaib_report_creation_listeners)
     @withdrawal_listeners = dependencies.fetch(:withdrawal_listeners)
     @document_renderer = dependencies.fetch(:document_renderer)
     @manual_repository_factory = dependencies.fetch(:manual_repository_factory)
@@ -22,74 +25,138 @@ class ServiceRegistry
     @observers = dependencies.fetch(:observers)
   end
 
-  def list_documents(context)
+  def list_documents
     ListDocuments.new(
       document_repository,
     )
   end
 
-  def new_document(context)
-    NewDocumentService.new(
-      document_builder,
-      context,
+  def list_aaib_reports
+    ListDocuments.new(
+      aaib_report_repository,
     )
   end
 
-  def create_document(context)
+  def new_document
+    NewDocumentService.new(
+      cma_case_builder,
+    )
+  end
+
+  def new_aaib_report
+    NewDocumentService.new(
+      aaib_report_builder,
+    )
+  end
+
+  def create_aaib_report(attributes)
     CreateDocumentService.new(
-      document_builder,
+      aaib_report_builder,
+      aaib_report_repository,
+      aaib_report_creation_listeners,
+      attributes,
+    )
+  end
+
+  def create_document(attributes)
+    CreateDocumentService.new(
+      cma_case_builder,
       document_repository,
       creation_listeners,
-      context,
+      attributes,
     )
   end
 
-  def show_document(context)
+  def show_aaib_report(document_id)
+    ShowDocumentService.new(
+      aaib_report_repository,
+      document_id,
+    )
+  end
+
+  def show_document(document_id)
     ShowDocumentService.new(
       document_repository,
-      context,
+      document_id,
     )
   end
 
-  def preview_document(context)
+  def preview_document(document_id, attributes)
     PreviewDocumentService.new(
       document_repository,
-      document_builder,
+      cma_case_builder,
       document_renderer,
-      context,
+      document_id,
+      attributes,
+    )
+  end
+
+  def preview_aaib_report(document_id, attributes)
+    PreviewDocumentService.new(
+      aaib_report_repository,
+      aaib_report_builder,
+      document_renderer,
+      document_id,
+      attributes,
     )
   end
 
   def preview_manual_document(context)
     PreviewManualDocumentService.new(
       manual_repository(context),
-      document_builder,
+      cma_case_builder,
       document_renderer,
       context,
     )
   end
 
-  def publish_document(context)
+  def publish_aaib_report(document_id)
+    PublishDocumentService.new(
+      aaib_report_repository,
+      observers.aaib_report_publication,
+      document_id,
+    )
+  end
+
+  def publish_document(document_id)
     PublishDocumentService.new(
       document_repository,
       observers.document_publication,
-      context,
+      document_id,
     )
   end
 
-  def update_document(context)
+  def update_document(document_id, attributes)
     UpdateDocumentService.new(
-      document_repository,
-      [],
-      context,
+      repo: document_repository,
+      listeners: [],
+      document_id: document_id,
+      attributes: attributes,
     )
   end
 
-  def withdraw_document(context)
+  def update_aaib_report(document_id, attributes)
+    UpdateDocumentService.new(
+      repo: aaib_report_repository,
+      listeners: [],
+      document_id: document_id,
+      attributes: attributes,
+    )
+  end
+
+  def withdraw_document(document_id)
     WithdrawDocumentService.new(
       document_repository,
       withdrawal_listeners,
-      context,
+      document_id,
+    )
+  end
+
+  def withdraw_aaib_report(document_id)
+    WithdrawDocumentService.new(
+      aaib_report_repository,
+      withdrawal_listeners,
+      document_id,
     )
   end
 
@@ -226,14 +293,16 @@ class ServiceRegistry
   end
 
   attr_reader(
-    :observers,
-    :document_builder,
-    :document_repository,
+    :aaib_report_builder,
+    :aaib_report_repository,
+    :aaib_report_creation_listeners,
     :creation_listeners,
-    :withdrawal_listeners,
+    :cma_case_builder,
     :document_renderer,
-
-    :manual_repository_factory,
+    :document_repository,
     :manual_builder,
+    :manual_repository_factory,
+    :observers,
+    :withdrawal_listeners,
   )
 end

@@ -1,5 +1,5 @@
 class NewDocumentService
-  def initialize(document_builder, context)
+  def initialize(document_builder)
     @document_builder = document_builder
   end
 

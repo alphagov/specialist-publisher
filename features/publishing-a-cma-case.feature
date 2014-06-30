@@ -4,7 +4,7 @@ Feature: Publishing a CMA case
   So that I can prepare the info for publication
 
   Background:
-    Given I am logged in as a CMA editor
+    Given I am logged in as a "CMA" editor
 
   Scenario: can create a new CMA case in draft
     When I create a CMA case

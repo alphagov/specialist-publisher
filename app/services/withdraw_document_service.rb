@@ -1,8 +1,8 @@
 class WithdrawDocumentService
-  def initialize(document_repository, listeners, context)
+  def initialize(document_repository, listeners, document_id)
     @document_repository = document_repository
     @listeners = listeners
-    @context = context
+    @document_id = document_id
   end
 
   def call
@@ -13,9 +13,9 @@ class WithdrawDocumentService
     document
   end
 
-  private
+private
 
-  attr_reader :document_repository, :listeners, :context
+  attr_reader :document_repository, :listeners, :document_id
 
   def withdraw
     document.withdraw!
@@ -31,9 +31,5 @@ class WithdrawDocumentService
 
   def document
     @document ||= document_repository.fetch(document_id)
-  end
-
-  def document_id
-    context.params.fetch("id")
   end
 end

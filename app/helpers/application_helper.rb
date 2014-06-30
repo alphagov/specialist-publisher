@@ -1,7 +1,7 @@
 module ApplicationHelper
-  def facet_options(facet)
-    finder_schema.options_for(facet)
-  end
+  # def facet_options(facet)
+  #   finder_schema.options_for(facet)
+  # end
 
   def state(document)
     state = document.publication_state
@@ -45,11 +45,19 @@ module ApplicationHelper
     end
   end
 
-  def preview_path_for_specialist_document(document)
+  def preview_path_for_cma_case(document)
     if document.persisted?
       preview_specialist_document_path(document)
     else
       preview_new_specialist_document_path
+    end
+  end
+
+  def preview_path_for_aaib_report(document)
+    if document.persisted?
+      preview_aaib_report_path(document)
+    else
+      preview_new_aaib_report_path
     end
   end
 

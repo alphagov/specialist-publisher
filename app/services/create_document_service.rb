@@ -1,9 +1,9 @@
 class CreateDocumentService
-  def initialize(builder, repo, listeners, context)
+  def initialize(builder, repo, listeners, attributes)
     @builder = builder
     @repo = repo
     @listeners = listeners
-    @context = context
+    @attributes = attributes
   end
 
   def call
@@ -19,17 +19,11 @@ class CreateDocumentService
 
   private
 
-  attr_reader :builder, :repo, :listeners, :context, :document
+  attr_reader :builder, :repo, :listeners, :attributes, :document
 
   def notify_listeners
     listeners.each do |listener|
       listener.call(document)
     end
-  end
-
-  def attributes
-    context.params
-      .fetch("specialist_document", {})
-      .merge(document_type: "cma_case")
   end
 end
