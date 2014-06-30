@@ -33,6 +33,12 @@ describe SpecialistDocumentHeaderExtractor do
     end
   end
 
+  describe "#serialized_headers" do
+    it "returns the serialized headers" do
+      expect(header_extractor.serialized_headers).to eq([serialized_metadata])
+    end
+  end
+
   describe "#attributes" do
     it "returns the document attributes with header metadata added" do
       expect(header_extractor.attributes).to include(doc_attributes)

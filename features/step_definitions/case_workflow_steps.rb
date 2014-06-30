@@ -10,7 +10,8 @@ When(/^I publish the CMA case$/) do
 end
 
 Then(/^the CMA case should be published$/) do
-  check_cma_case_is_published(@slug, @cma_fields.fetch(:title))
+  check_document_is_published_with_legacy_format(@slug, @cma_fields)
+  check_cma_case_is_published(@slug, @cma_fields)
 end
 
 When(/^I edit it and republish$/) do

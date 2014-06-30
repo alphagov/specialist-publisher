@@ -12,9 +12,13 @@ class SpecialistDocumentHeaderExtractor < SimpleDelegator
     header_parser.call(doc.body)
   end
 
+  def serialized_headers
+    headers.map(&:to_h)
+  end
+
   def attributes
     {
-      headers: headers.map(&:to_h),
+      headers: serialized_headers,
     }.merge(doc.attributes)
   end
 
