@@ -14,7 +14,7 @@ class CmaCasesController < ApplicationController
   end
 
   def show
-    document = services.show_document(params.fetch("id")).call
+    document = services.show_document(document_id).call
 
     render(:show, locals: { document: document })
   end
@@ -26,13 +26,13 @@ class CmaCasesController < ApplicationController
   end
 
   def edit
-    document = services.show_document(params.fetch("id")).call
+    document = services.show_document(document_id).call
 
     render(:edit, locals: { document: form_object_for(document) })
   end
 
   def create
-    document = services.create_document(params.fetch("specialist_document", {})).call
+    document = services.create_document(document_params).call
 
     if document.valid?
       redirect_to(specialist_document_path(document))
@@ -42,7 +42,7 @@ class CmaCasesController < ApplicationController
   end
 
   def update
-    document = services.update_document(params.fetch("id"), params.fetch("specialist_document", {})).call
+    document = services.update_document(document_id, document_params).call
 
     if document.valid?
       redirect_to(specialist_document_path(document))
@@ -52,19 +52,19 @@ class CmaCasesController < ApplicationController
   end
 
   def publish
-    document = services.publish_document(params.fetch("id")).call
+    document = services.publish_document(document_id).call
 
     redirect_to(specialist_document_path(document), flash: { notice: "Published #{document.title}" })
   end
 
   def withdraw
-    document = services.withdraw_document(params.fetch("id")).call
+    document = services.withdraw_document(document_id).call
 
     redirect_to(specialist_document_path(document), flash: { notice: "Withdrawn #{document.title}" })
   end
 
   def preview
-    preview_html = services.preview_document(params.fetch("id", nil), params.fetch("specialist_document", {})).call
+    preview_html = services.preview_document(params.fetch("id", nil), document_params).call
 
     render json: { preview_html: preview_html }
   end
@@ -79,5 +79,13 @@ protected
     unless user_can_edit_cma_cases?
       redirect_to manuals_path, flash: { error: "You don't have permission to do that." }
     end
+  end
+
+  def document_id
+    params.fetch("id")
+  end
+
+  def document_params
+    params.fetch("specialist_document", {})
   end
 end
