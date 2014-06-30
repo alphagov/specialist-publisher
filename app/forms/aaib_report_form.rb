@@ -18,6 +18,8 @@ class AaibReportForm < DocumentForm
     end
   end
 
+private
+
   def finder_schema
     SpecialistPublisherWiring.get(:aaib_report_finder_schema)
   end

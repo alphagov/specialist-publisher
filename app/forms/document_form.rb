@@ -43,4 +43,8 @@ private
   def delegate_if_document_exists(attribute_name)
     document && document.public_send(attribute_name)
   end
+
+  def finder_schema
+    raise NotImplementedError
+  end
 end
