@@ -24,7 +24,9 @@ class PanopticonRegisterer
   end
 
   def notify_of_update
-    api.put_artefact!(mapping.panopticon_id, artefact_attributes)
+    response = api.put_artefact!(mapping.panopticon_id, artefact_attributes)
+
+    update_mapping_slug(response)
   end
 
   def save_new_mapping(response)
@@ -36,6 +38,10 @@ class PanopticonRegisterer
     )
   end
 
+  def update_mapping_slug(response)
+    mapping.update_attribute(:slug, artefact.slug)
+  end
+
   def artefact_attributes
     artefact.attributes.merge(
       owning_app: owning_app,
@@ -43,7 +49,7 @@ class PanopticonRegisterer
   end
 
   def mapping
-    @mapping ||= mappings.where(slug: artefact.slug).last
+    @mapping ||= mappings.where(resource_id: artefact.resource_id).last
   end
 
   def owning_app

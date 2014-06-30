@@ -70,6 +70,16 @@ Given(/^a draft CMA case exists$/) do
   create_cma_case(@cma_fields, publish: false)
 end
 
+When(/^I change the title of the CMA case$/) do
+  @new_document_title = "Updated CMA case title"
+  @new_slug = "cma-cases/updated-cma-case-title"
+  edit_document(@document_title, {title: @new_document_title})
+end
+
+Then(/^the updated URL slug is registered$/) do
+  check_slug_updated_with_panopticon(@slug, @new_slug)
+end
+
 Then(/^the CMA case has been created$/) do
   check_document_exists_with(@cma_fields)
   check_slug_registered_with_panopticon_with_correct_organisation(@slug, ["competition-and-markets-authority"])

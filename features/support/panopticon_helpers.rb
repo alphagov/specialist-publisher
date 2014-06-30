@@ -8,14 +8,18 @@ module PanopticonHelpers
     end
 
     def put_artefact!(id, attributes = {})
-      nil
+      raise "No artifact with id #{id} exists" unless slug_id_map.has_value?(id)
+
+      slug_id_map[attributes.fetch(:slug)] = id
+
+      {"id" => id, "slug" => attributes.fetch(:slug)}
     end
 
     def create_artefact!(attributes = {})
       new_artefact_id = "test-panopticon-id-#{SecureRandom.hex}"
       slug_id_map[attributes.fetch(:slug)] = new_artefact_id
 
-      {"id" => new_artefact_id}
+      {"id" => new_artefact_id, "slug" => attributes.fetch(:slug)}
     end
 
     def panopticon_id_for_slug(slug)

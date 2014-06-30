@@ -35,6 +35,12 @@ Feature: Creating and editing a CMA case
     Then the title has been updated
     And the URL slug remains unchanged
 
+  @regression
+  Scenario: Changing the slug on a draft CMA case
+    Given a draft CMA case exists
+    When I change the title of the CMA case
+    Then the updated URL slug is registered
+
   @javascript
   Scenario: Previewing a draft CMA case
     Given a draft CMA case exists
