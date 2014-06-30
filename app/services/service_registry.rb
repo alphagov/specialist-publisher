@@ -129,7 +129,7 @@ class ServiceRegistry
   def update_document(document_id, attributes)
     UpdateDocumentService.new(
       repo: document_repository,
-      listeners: [],
+      listeners: observers.document_update,
       document_id: document_id,
       attributes: attributes,
     )

@@ -1,4 +1,9 @@
 module CmaCaseHelpers
+  def check_slug_updated_with_panopticon(old_slug, new_slug)
+    expect(fake_panopticon).to have_received(:put_artefact!)
+      .with(panopticon_id_for_slug(old_slug), hash_including(slug: new_slug))
+  end
+
   def go_to_edit_page_for_most_recent_case
     warn "DEPRECATED: use #go_to_edit_page_for_document and provide title"
     registry = SpecialistPublisherWiring.get(:specialist_document_repository)

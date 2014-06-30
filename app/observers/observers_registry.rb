@@ -24,6 +24,11 @@ class ObserversRegistry
     [
       aaib_report_content_api_exporter,
       finder_api_notifier,
+    ]
+  end
+
+  def document_update
+    [
       document_panopticon_registerer,
     ]
   end
