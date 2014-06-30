@@ -4,6 +4,7 @@ Given(/^I am logged in as a "(.*?)" editor$/) do |editor_type|
   # WARNING: These must be stubbed before the first request takes place
   stub_out_panopticon
   stub_finder_api
+  stub_rummager
 end
 
 When(/^I create a CMA case$/) do
