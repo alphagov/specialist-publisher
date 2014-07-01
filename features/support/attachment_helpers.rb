@@ -10,31 +10,7 @@ module AttachmentHelpers
       click_on("Edit")
     end
 
-    add_attachment_to_case(document_title, attachment_title)
-  end
-
-  def add_attachment_to_case(document_title, attachment_title)
-    unless current_path.include?("edit")
-      click_link "Edit"
-    end
-
-    click_on "Add attachment"
-    fill_in "Title", with: attachment_title
-    attach_file "File", File.expand_path("../fixtures/greenpaper.pdf", File.dirname(__FILE__))
-
-    stub_request(:post, "#{test_asset_manager_base_url}/assets")
-      .to_return(
-        body: JSON.dump(asset_manager_response),
-        status: 201,
-      )
-
-    stub_request(:get, "#{test_asset_manager_base_url}/assets/#{asset_id}")
-      .to_return(
-        body: JSON.dump(asset_manager_response),
-        status: 200,
-      )
-
-    click_on "Save attachment"
+    add_attachment_to_document(document_title, attachment_title)
   end
 
   def asset_id
@@ -61,7 +37,7 @@ module AttachmentHelpers
     end
   end
 
-  def copy_embed_code_for_attachment_and_paste_into_body(title)
+  def copy_embed_code_for_attachment_and_paste_into_body(title, body_selector)
     snippet = within(".attachments") do
       page
         .find("li", text: /#{title}/)
@@ -69,7 +45,7 @@ module AttachmentHelpers
         .text
     end
 
-    body_text = find("#specialist_document_body").value
+    body_text = find(body_selector).value
     fill_in("Body", with: body_text + snippet)
   end
 
@@ -87,7 +63,7 @@ module AttachmentHelpers
       opened_date: "2014-01-01"
     )
 
-    add_attachment_to_case(document_title, attachment_title)
+    add_attachment_to_document(document_title, attachment_title)
   end
 
   def edit_attachment(document_title, attachment_title, new_attachment_title, new_attachment_file_name)
@@ -113,5 +89,29 @@ module AttachmentHelpers
   def check_for_attachment_update(document_title, attachment_title, attachment_file_name)
     expect(page).to have_css(".attachments li", text: @new_attachment_title)
     expect(page).to have_css(".attachments li", text: @new_attachment_file_name)
+  end
+
+  def add_attachment_to_document(document_title, attachment_title)
+    unless current_path.include?("edit")
+      click_link "Edit"
+    end
+
+    click_on "Add attachment"
+    fill_in "Title", with: attachment_title
+    attach_file "File", File.expand_path("../fixtures/greenpaper.pdf", File.dirname(__FILE__))
+
+    stub_request(:post, "#{test_asset_manager_base_url}/assets")
+      .to_return(
+        body: JSON.dump(asset_manager_response),
+        status: 201,
+      )
+
+    stub_request(:get, "#{test_asset_manager_base_url}/assets/#{asset_id}")
+      .to_return(
+        body: JSON.dump(asset_manager_response),
+        status: 200,
+      )
+
+    click_on "Save attachment"
   end
 end

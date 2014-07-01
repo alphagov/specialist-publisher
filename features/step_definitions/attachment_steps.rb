@@ -14,12 +14,12 @@ When(/^I attach a file and give it a title$/) do
   add_attachment_to_manual_document(@document_title, @attachment_title)
 end
 
-Then(/^I see the attachment on the case with its example markdown embed code$/) do
+Then(/^I see the attachment on the page with its example markdown embed code$/) do
   check_for_an_attachment
 end
 
 When(/^I copy\+paste the embed code into the body of the case$/) do
-  copy_embed_code_for_attachment_and_paste_into_body("My attachment")
+  copy_embed_code_for_attachment_and_paste_into_body("My attachment", "#specialist_document_body")
 end
 
 Then(/^I can see a link to the file with the title in the document preview$/) do

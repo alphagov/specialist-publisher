@@ -15,7 +15,7 @@ SpecialistPublisher::Application.routes.draw do
   post "cma-cases/preview" => "cma_cases#preview", as: "preview_new_specialist_document"
 
   resources :aaib_reports, except: :destroy, path: "aaib-reports" do
-    resources :attachments, only: [:new, :create, :edit, :update]
+    resources :attachments, controller: "AaibReportsAttachments", only: [:new, :create, :edit, :update]
     post :withdraw, on: :member
     post :publish, on: :member
 
