@@ -207,6 +207,10 @@ module DocumentHelpers
     page.should have_content("Title can't be blank")
   end
 
+  def check_for_invalid_date_error(date_field)
+    page.should have_content("#{date_field} should be formatted YYYY-MM-DD")
+  end
+
   def check_for_error(expected_error_message)
     within("ul.errors") do
       expect(page).to have_content(expected_error_message)

@@ -19,6 +19,7 @@ end
 When(/^I create a AAIB report without one of the required fields$/) do
   @aaib_fields = {
     summary: "Nullam quis risus eget urna mollis ornare vel eu leo.",
+    date_of_occurrence: "Bad data",
   }
 
   create_aaib_report(@aaib_fields)

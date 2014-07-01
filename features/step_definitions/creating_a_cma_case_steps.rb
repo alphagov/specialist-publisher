@@ -23,7 +23,7 @@ When(/^I create a CMA case without one of the required fields$/) do
   @cma_fields = {
     summary: "Nullam quis risus eget urna mollis ornare vel eu leo.",
     body: "## Header" + ("\n\nPraesent commodo cursus magna, vel scelerisque nisl consectetur et." * 10),
-    opened_date: "2014-01-01"
+    opened_date: "Bad data"
   }
 
   create_cma_case(@cma_fields)
@@ -87,6 +87,10 @@ end
 
 Then(/^I should see an error message about a missing field$/) do
   check_for_missing_title_error
+end
+
+Then(/^I should see an error message about an invalid date field "(.*)"$/) do |field|
+  check_for_invalid_date_error(field)
 end
 
 Then(/^the CMA case should not have been created$/) do
