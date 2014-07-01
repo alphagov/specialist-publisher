@@ -21,21 +21,17 @@ class SpecialistDocument
     ]
   end
 
-  def_delegators :exposed_edition, *edition_attributes
+  def_delegators :latest_edition, *edition_attributes
 
-  attr_reader :id, :editions, :exposed_edition
+  attr_reader :id, :editions, :latest_edition
 
-  def initialize(slug_generator, edition_factory, id, editions, version_number: nil)
+  def initialize(slug_generator, edition_factory, id, editions)
     @slug_generator = slug_generator
     @edition_factory = edition_factory
     @id = id
     @editions = editions
     @editions.push(create_first_edition) if @editions.empty?
-    if version_number
-      @exposed_edition = @editions.find { |e| e.version_number == version_number }
-    else
-      @exposed_edition = @editions.last
-    end
+    @latest_edition = @editions.last
   end
 
   def minor_update?
@@ -47,11 +43,11 @@ class SpecialistDocument
   end
 
   def extra_fields
-    exposed_edition.extra_fields.symbolize_keys
+    latest_edition.extra_fields.symbolize_keys
   end
 
   def attributes
-    exposed_edition
+    latest_edition
       .attributes
       .symbolize_keys
       .merge(extra_fields: extra_fields)
@@ -63,15 +59,7 @@ class SpecialistDocument
       )
   end
 
-  def published_version
-    if published_edition
-      self.class.new(@slug_generator, @edition_factory, @id, @editions, version_number: published_edition.version_number)
-    end
-  end
-
   def update(params)
-    raise "Can only update the latest version" unless latest_edition_exposed?
-
     # TODO: this is very defensive, we need enforce consistency of params at the boudary
     params = params
       .select { |k, _| allowed_update_params.include?(k.to_s) }
@@ -84,17 +72,17 @@ class SpecialistDocument
     end
 
     if draft?
-      exposed_edition.assign_attributes(params)
+      latest_edition.assign_attributes(params)
     else
-      @exposed_edition = new_draft(params)
-      editions.push(@exposed_edition)
+      @latest_edition = new_draft(params)
+      editions.push(@latest_edition)
     end
 
     self
   end
 
   def valid?
-    exposed_edition.valid?
+    latest_edition.valid?
   end
 
   def published?
@@ -102,28 +90,27 @@ class SpecialistDocument
   end
 
   def draft?
-    exposed_edition.draft?
+    latest_edition.draft?
   end
 
   def errors
-    exposed_edition.errors.messages
+    latest_edition.errors.messages
   end
 
   def add_error(field, message)
-    exposed_edition.errors[field] ||= []
-    exposed_edition.errors[field] += message
+    latest_edition.errors[field] ||= []
+    latest_edition.errors[field] += message
   end
 
   def add_attachment(attributes)
-    exposed_edition.build_attachment(attributes)
+    latest_edition.build_attachment(attributes)
   end
 
   def attachments
-    exposed_edition.attachments.to_a
+    latest_edition.attachments.to_a
   end
 
   def publish!
-    raise "Can only publish the latest edition" unless latest_edition_exposed?
     unless latest_edition.published?
       published_edition.archive if published_edition
 
@@ -137,10 +124,6 @@ class SpecialistDocument
 
   def withdrawn?
     most_recent_non_draft && most_recent_non_draft.archived?
-  end
-
-  def latest_edition_exposed?
-    latest_edition == exposed_edition
   end
 
   def find_attachment_by_id(attachment_id)
@@ -197,7 +180,7 @@ protected
   end
 
   def current_version_number
-    exposed_edition.version_number
+    latest_edition.version_number
   end
 
   def published_edition
@@ -211,7 +194,7 @@ protected
   end
 
   def previous_edition_attributes
-    exposed_edition.attributes
+    latest_edition.attributes
       .except("_id", "updated_at")
       .symbolize_keys
   end
