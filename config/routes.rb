@@ -14,6 +14,10 @@ SpecialistPublisher::Application.routes.draw do
   # This is for new cma cases
   post "cma-cases/preview" => "cma_cases#preview", as: "preview_new_specialist_document"
 
+  # Redirect old specialist-document routes to cma-cases
+  get "/specialist-documents", to: redirect("/cma-cases")
+  get "/specialist-documents/(*path)", to: redirect { |params, _| "/cma-cases/#{params[:path]}" }
+
   resources :aaib_reports, except: :destroy, path: "aaib-reports" do
     resources :attachments, only: [:new, :create, :edit, :update]
     post :withdraw, on: :member
