@@ -160,32 +160,35 @@ class ServiceRegistry
     )
   end
 
-  def new_document_attachment(context)
+  def new_document_attachment(document_id)
     NewDocumentAttachmentService.new(
       document_repository,
       Attachment.method(:new),
-      context,
+      document_id,
     )
   end
 
-  def create_document_attachment(context)
+  def create_document_attachment(context, document_id)
     CreateDocumentAttachmentService.new(
       document_repository,
       context,
+      document_id,
     )
   end
 
-  def update_document_attachment(context)
+  def update_document_attachment(context, document_id)
     UpdateDocumentAttachmentService.new(
       document_repository,
       context,
+      document_id,
     )
   end
 
-  def show_document_attachment(context)
+  def show_document_attachment(context, document_id)
     ShowDocumentAttachmentService.new(
       document_repository,
       context,
+      document_id,
     )
   end
 

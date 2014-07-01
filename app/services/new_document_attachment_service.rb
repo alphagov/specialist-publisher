@@ -1,9 +1,9 @@
 class NewDocumentAttachmentService
 
-  def initialize(document_repository, builder, context)
+  def initialize(document_repository, builder, document_id)
     @document_repository = document_repository
     @builder = builder
-    @context = context
+    @document_id = document_id
   end
 
   def call
@@ -12,7 +12,7 @@ class NewDocumentAttachmentService
 
   private
 
-  attr_reader :document_repository, :builder, :context
+  attr_reader :document_repository, :builder, :document_id
 
   def attachment
     builder.call(initial_params)
@@ -24,9 +24,5 @@ class NewDocumentAttachmentService
 
   def initial_params
     {}
-  end
-
-  def document_id
-    context.params.fetch("specialist_document_id")
   end
 end
