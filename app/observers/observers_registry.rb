@@ -6,7 +6,8 @@ class ObserversRegistry
     @document_content_api_exporter = dependencies.fetch(:document_content_api_exporter)
     @aaib_report_content_api_exporter = dependencies.fetch(:aaib_report_content_api_exporter)
     @finder_api_notifier = dependencies.fetch(:finder_api_notifier)
-    @document_panopticon_registerer = dependencies.fetch(:document_panopticon_registerer)
+    @cma_case_panopticon_registerer = dependencies.fetch(:cma_case_panopticon_registerer)
+    @aaib_report_panopticon_registerer = dependencies.fetch(:aaib_report_panopticon_registerer)
     @manual_panopticon_registerer = dependencies.fetch(:manual_panopticon_registerer)
     @manual_document_panopticon_registerer = dependencies.fetch(:manual_document_panopticon_registerer)
     @manual_content_api_exporter = dependencies.fetch(:manual_content_api_exporter)
@@ -17,7 +18,7 @@ class ObserversRegistry
     [
       document_content_api_exporter,
       finder_api_notifier,
-      document_panopticon_registerer,
+      cma_case_panopticon_registerer,
       cma_case_rummager_indexer,
     ]
   end
@@ -26,12 +27,13 @@ class ObserversRegistry
     [
       aaib_report_content_api_exporter,
       finder_api_notifier,
+      aaib_report_panopticon_registerer,
     ]
   end
 
   def document_update
     [
-      document_panopticon_registerer,
+      cma_case_panopticon_registerer,
     ]
   end
 
@@ -62,7 +64,8 @@ class ObserversRegistry
     :document_content_api_exporter,
     :aaib_report_content_api_exporter,
     :finder_api_notifier,
-    :document_panopticon_registerer,
+    :cma_case_panopticon_registerer,
+    :aaib_report_panopticon_registerer,
     :manual_panopticon_registerer,
     :manual_document_panopticon_registerer,
     :manual_content_api_exporter,

@@ -31,7 +31,7 @@ SpecialistPublisherWiring = DependencyContainer.new do
       document_content_api_exporter: get(:cma_case_content_api_exporter),
       aaib_report_content_api_exporter: get(:aaib_report_content_api_exporter),
       finder_api_notifier: get(:finder_api_notifier),
-      document_panopticon_registerer: get(:document_panopticon_registerer),
+      cma_case_panopticon_registerer: get(:cma_case_panopticon_registerer),
       aaib_report_panopticon_registerer: get(:aaib_report_panopticon_registerer),
       manual_panopticon_registerer: get(:manual_panopticon_registerer),
       manual_document_panopticon_registerer: get(:manual_document_panopticon_registerer),
@@ -309,7 +309,7 @@ SpecialistPublisherWiring = DependencyContainer.new do
 
   define_singleton(:specialist_document_creation_observers) {
     [
-      get(:document_panopticon_registerer),
+      get(:cma_case_panopticon_registerer),
     ]
   }
 
@@ -323,7 +323,7 @@ SpecialistPublisherWiring = DependencyContainer.new do
     [
       get(:specialist_document_content_api_withdrawer),
       get(:finder_api_withdrawer),
-      get(:document_panopticon_registerer),
+      get(:cma_case_panopticon_registerer),
       get(:cma_case_rummager_deleter),
     ]
   }
@@ -338,10 +338,10 @@ SpecialistPublisherWiring = DependencyContainer.new do
     }
   }
 
-  define_factory(:document_panopticon_registerer) {
+  define_factory(:cma_case_panopticon_registerer) {
     ->(document) {
       get(:panopticon_registerer).call(
-        DocumentArtefactFormatter.new(document)
+        CmaCaseArtefactFormatter.new(document)
       )
     }
   }

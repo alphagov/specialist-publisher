@@ -7,7 +7,7 @@ class AaibReportArtefactFormatter < AbstractArtefactFormatter
   end
 
   def kind
-    "specialist-document"
+    "aaib_report"
   end
 
   def rendering_app

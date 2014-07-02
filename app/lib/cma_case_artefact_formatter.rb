@@ -1,13 +1,13 @@
 require "abstract_artefact_formatter"
 
-class DocumentArtefactFormatter < AbstractArtefactFormatter
+class CmaCaseArtefactFormatter < AbstractArtefactFormatter
 
   def state
     state_mapping.fetch(entity.publication_state)
   end
 
   def kind
-    "specialist-document"
+    "cma_case"
   end
 
   def rendering_app
