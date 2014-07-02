@@ -4,6 +4,7 @@ require "specialist_document_repository"
 require "builders/cma_case_builder"
 require "builders/aaib_report_builder"
 require "gds_api/panopticon"
+require "gds_api/rummager"
 require "panopticon_registerer"
 require "specialist_document_attachment_processor"
 require "specialist_document_database_exporter"
@@ -18,6 +19,8 @@ require "validators/slug_uniqueness_validator"
 require "validators/change_note_validator"
 require "marshallers/document_association_marshaller"
 require "builders/manual_document_builder"
+require "rummager_indexer"
+require "cma_case_indexable_formatter"
 
 $LOAD_PATH.unshift(File.expand_path("../..", "app/services"))
 
@@ -33,6 +36,7 @@ SpecialistPublisherWiring = DependencyContainer.new do
       manual_panopticon_registerer: get(:manual_panopticon_registerer),
       manual_document_panopticon_registerer: get(:manual_document_panopticon_registerer),
       manual_content_api_exporter: get(:manual_and_documents_content_api_exporter),
+      cma_case_rummager_indexer: get(:cma_case_rummager_indexer),
     )
   }
 
@@ -314,6 +318,7 @@ SpecialistPublisherWiring = DependencyContainer.new do
       get(:specialist_document_content_api_withdrawer),
       get(:finder_api_withdrawer),
       get(:document_panopticon_registerer),
+      get(:cma_case_rummager_deleter),
     ]
   }
 
@@ -364,6 +369,26 @@ SpecialistPublisherWiring = DependencyContainer.new do
       manual.respond_to?(:documents) && manual.documents.each do |doc|
         get(:manual_document_panopticon_registerer).call(doc, manual)
       end
+    }
+  }
+
+  define_factory(:cma_case_rummager_indexer) {
+    ->(document) {
+      RummagerIndexer.new.add(
+        CmaCaseIndexableFormatter.new(
+          SpecialistDocumentAttachmentProcessor.new(document)
+        )
+      )
+    }
+  }
+
+  define_factory(:cma_case_rummager_deleter) {
+    ->(document) {
+      RummagerIndexer.new.delete(
+        CmaCaseIndexableFormatter.new(
+          SpecialistDocumentAttachmentProcessor.new(document)
+        )
+      )
     }
   }
 
@@ -448,6 +473,10 @@ SpecialistPublisherWiring = DependencyContainer.new do
 
   define_singleton(:finder_api_notifier) {
     FinderAPINotifier.new(get(:finder_api), get(:markdown_renderer))
+  }
+
+  define_singleton(:rummager_api) {
+    GdsApi::Rummager.new(Plek.new.find("search"))
   }
 
   define_singleton(:aaib_report_finder_schema) {

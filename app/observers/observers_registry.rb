@@ -10,6 +10,7 @@ class ObserversRegistry
     @manual_panopticon_registerer = dependencies.fetch(:manual_panopticon_registerer)
     @manual_document_panopticon_registerer = dependencies.fetch(:manual_document_panopticon_registerer)
     @manual_content_api_exporter = dependencies.fetch(:manual_content_api_exporter)
+    @cma_case_rummager_indexer = dependencies.fetch(:cma_case_rummager_indexer)
   end
 
   def document_publication
@@ -17,6 +18,7 @@ class ObserversRegistry
       document_content_api_exporter,
       finder_api_notifier,
       document_panopticon_registerer,
+      cma_case_rummager_indexer,
     ]
   end
 
@@ -64,6 +66,7 @@ class ObserversRegistry
     :manual_panopticon_registerer,
     :manual_document_panopticon_registerer,
     :manual_content_api_exporter,
+    :cma_case_rummager_indexer,
   )
 
   def manual_change_note_content_api_exporter
