@@ -4,6 +4,7 @@ require "specialist_document_repository"
 require "builders/cma_case_builder"
 require "builders/aaib_report_builder"
 require "gds_api/panopticon"
+require "gds_api/rummager"
 require "panopticon_registerer"
 require "specialist_document_attachment_processor"
 require "specialist_document_database_exporter"
@@ -472,6 +473,10 @@ SpecialistPublisherWiring = DependencyContainer.new do
 
   define_singleton(:finder_api_notifier) {
     FinderAPINotifier.new(get(:finder_api), get(:markdown_renderer))
+  }
+
+  define_singleton(:rummager_api) {
+    GdsApi::Rummager.new(Plek.new.find("search"))
   }
 
   define_singleton(:aaib_report_finder_schema) {

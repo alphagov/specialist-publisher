@@ -1,4 +1,4 @@
-require "gds_api/rummager"
+require "specialist_publisher_wiring"
 
 class RummagerIndexer
   def add(document)
@@ -11,6 +11,6 @@ class RummagerIndexer
 
 private
   def api
-    GdsApi::Rummager.new(Plek.new.find("search"))
+    SpecialistPublisherWiring.get(:rummager_api)
   end
 end

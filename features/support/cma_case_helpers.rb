@@ -45,6 +45,7 @@ module CmaCaseHelpers
 
     check_published_with_panopticon(slug, fields.fetch(:title))
     check_added_to_finder_api(slug, fields.fetch(:title))
+    check_added_to_rummager("cma_case", slug, fields.fetch(:title))
   end
 
   def check_metadata_is_rendered(published_document, fields)

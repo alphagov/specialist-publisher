@@ -135,6 +135,11 @@ module DocumentHelpers
       .with(slug, hash_including(title: title))
   end
 
+  def check_added_to_rummager(document_type, slug, title)
+    expect(rummager_api).to have_received(:add_document)
+      .with(document_type, slug, hash_including(title: title))
+  end
+
   def check_rendered_document_contains_html(document)
     parsed_body = Nokogiri::HTML::Document.parse(document.body)
     expect(parsed_body).to have_css("p")
