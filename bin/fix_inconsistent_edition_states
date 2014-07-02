@@ -1,0 +1,180 @@
+#!/usr/bin/env ruby
+
+class InconsistentEditionStateFixer
+  require "ostruct"
+
+  def initialize(raw_editions, output)
+    @finder = InconsistentEditionStateFinder.new(raw_editions)
+    @output = output
+  end
+
+  def call
+    inconsistent_documents
+    .tap { |docs| log "Found #{docs.size} with inconsistent edition states" }
+    .each do |doc|
+      log "Archiving old editions for #{doc.editions.first.slug}"
+      archive_old_editions(doc)
+    end
+
+    raise "Archiving not successful" unless find_inconsistent_documents.empty?
+    log "Archiving successful"
+  end
+
+  def find_inconsistent_documents
+    @finder.find_inconsistent_documents
+  end
+
+private
+  def archive_old_editions(doc)
+    doc
+      .editions
+      .-(editions_not_to_be_archived(doc))
+      .each { |edition| edition.update_attribute(:state, "archived") }
+  end
+
+  def editions_not_to_be_archived(document)
+    not_to_archive = document.editions.last(2)
+
+    case not_to_archive.last.state
+    when "published"
+      not_to_archive.delete_at(0)
+    when "draft"
+      if not_to_archive.first.state != "published"
+        not_to_archive.delete_at(0)
+      end
+    else
+      not_to_archive = []
+    end
+
+    not_to_archive
+  end
+
+  def inconsistent_documents
+    @inconsistent_documents ||= find_inconsistent_documents
+  end
+
+  def log(string)
+    @output.puts string
+  end
+
+  class InconsistentEditionStateFinder
+    def initialize(editions)
+      @editions = editions
+    end
+
+    def find_inconsistent_documents
+      @editions
+        .all
+        .to_a
+        .group_by(&method(:get_document_id))
+        .map(&method(:sort_editions_by_version))
+        .select(&method(:inconsistent_edition_states?))
+        .map(&method(:create_document_struct))
+    end
+
+  private
+
+    def get_document_id(edition)
+      edition.read_attribute(:document_id)
+    end
+
+    def sort_editions_by_version(tuple)
+      id, editions = *tuple
+      [
+        id,
+        editions.sort_by { |ed| ed.read_attribute(:version_number) }
+      ]
+    end
+
+    def inconsistent_edition_states?(tuple)
+      _id, editions = *tuple
+      state_ints = editions.map { |ed| state_map.fetch(ed.state) }
+      state_ints != state_ints.sort
+    end
+
+    def create_document_struct(tuple)
+      id, editions = *tuple
+      OpenStruct.new(id: id, editions: editions)
+    end
+
+    def state_map
+      {
+        "archived" => 0,
+        "published" => 1,
+        "draft" => 2,
+      }
+    end
+  end
+end
+
+require File.expand_path("../../config/environment", __FILE__)
+
+# Run this script under `bundle exec rspec` to execute tests
+if !defined?(RSpec)
+  specialist_document_editions = Class.new {
+    include Mongoid::Document
+    store_in :specialist_document_editions
+  }
+
+  InconsistentEditionStateFixer.new(specialist_document_editions, STDOUT).call
+else
+  require "spec_helper"
+  RSpec.describe InconsistentEditionStateFixer do
+    subject(:fixer) {
+      InconsistentEditionStateFixer.new(test_specialist_document_editions, STDOUT)
+    }
+
+    let(:test_specialist_document_editions) {
+      Class.new {
+        include Mongoid::Document
+        store_in :edition_tests
+      }
+    }
+
+    before do
+      edition_states.each_with_index do |states, doc_id|
+        states.each_with_index do |state, version|
+          test_specialist_document_editions.create!(
+            state: state,
+            document_id: doc_id,
+            version_number: version,
+            slug: "document-#{doc_id}",
+          )
+        end
+      end
+    end
+
+    let(:edition_states) {
+      bad_edition_states + good_edition_states
+    }
+
+    let(:bad_edition_states) {
+      [
+        ["published"] * 10 + ["archived"] * 2,
+        ["published"] * 22 + ["archived"],
+        ["published"] * 5 + ["archived"] * 9 + ["published"]
+      ]
+    }
+
+    let(:good_edition_states) {
+      [
+        ["archived"] * 10 + ["published"] + ["draft"],
+        ["archived"] * 10 + ["published"],
+      ]
+    }
+
+    describe "#find_inconsistent_documents" do
+      it "finds inconsistent documents" do
+        expect(fixer.find_inconsistent_documents.size).to eq(bad_edition_states.size)
+      end
+    end
+
+    describe "#call" do
+      it "makes all documents have consistent states across editions" do
+        fixer.call
+
+        expect(fixer.find_inconsistent_documents).to be_empty
+      end
+    end
+  end
+end
