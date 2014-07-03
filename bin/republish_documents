@@ -1,0 +1,21 @@
+#!/usr/bin/env ruby
+
+require File.expand_path("../../config/environment", __FILE__)
+require "document_republisher"
+
+def wiring(sym)
+  SpecialistPublisherWiring.get(sym)
+end
+
+observers = wiring(:observers)
+
+# Commented out lines show how we *want* to do this for aaib reports and
+# manuals. Aaib reports should work (but is untested), manuals is awaiting a
+# sane method of accessing all of them through a repository.
+repository_listeners_map = [
+  [wiring(:specialist_document_repository), observers.document_publication],
+  #[wiring(:aaib_report_repository), observers.document_publication],
+  #[wiring(:manuals_repository), observers.manual_publication],
+]
+
+DocumentRepublisher.new(repository_listeners_map).republish!

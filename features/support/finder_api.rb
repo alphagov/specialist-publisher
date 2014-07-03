@@ -10,3 +10,8 @@ def stub_finder_api
 
   allow(finder_api).to receive(:notify_of_withdrawal).and_call_original
 end
+
+def reset_finder_api_stubs_and_messages
+  RSpec::Mocks.proxy_for(finder_api).reset
+  stub_finder_api
+end

@@ -66,33 +66,26 @@ module CmaCaseHelpers
   end
 
   def seed_cases(number_of_cases, state: "draft")
-    # TODO: Use the create document service or a more robust way of seeding data
-    @created_case_index ||= 0
-    number_of_cases.times do
-      @created_case_index += 1
-      doc = cma_case_builder.call(
-        title: "Specialist Document #{@created_case_index}",
+    registry = SpecialistPublisherWiring.get(:services)
+
+    docs = number_of_cases.times.map do
+      registry.create_document(
+        title: "Specialist Document #{SecureRandom.hex}",
         summary: "summary",
-        body: "body",
-        opened_date: Time.parse("2014-01-01"),
+        body: "## Header" + ("\n\nPraesent commodo cursus magna, vel scelerisque nisl consectetur et." * 10),
+        opened_date: "2014-01-01",
         market_sector: "agriculture-environment-and-natural-resources",
         case_state: "open",
         case_type: "ca98",
         outcome_type: "ca98-commitment",
-        state: state,
         document_type: "cma_case",
-      )
-
-      PanopticonMapping.create!(
-        resource_type: "specialist-document",
-        resource_id: doc.id,
-        panopticon_id: SecureRandom.hex,
-      )
-
-      specialist_document_repository.store(doc)
-
-      # TODO: seeded data is created in the future, this is odd
-      Timecop.travel(10.minutes.from_now)
+      ).call
     end
+
+    if state == "published"
+      docs.each { |doc| registry.publish_document(doc.id).call }
+    end
+
+    docs
   end
 end

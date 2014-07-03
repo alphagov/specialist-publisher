@@ -54,7 +54,7 @@ Then(/^the CMA case should have been updated$/) do
 end
 
 Given(/^two CMA cases exist$/) do
-  seed_cases(2)
+  @documents = seed_cases(2)
 end
 
 Given(/^a draft CMA case exists$/) do
@@ -101,7 +101,7 @@ end
 Then(/^the CMA cases should be in the publisher case index in the correct order$/) do
   visit specialist_documents_path
 
-  check_for_documents("Specialist Document 2", "Specialist Document 1")
+  check_for_documents(*@documents.map(&:title))
 end
 
 When(/^I make changes and preview the CMA case$/) do
