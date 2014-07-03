@@ -10,7 +10,7 @@ Feature: Attachments
   Scenario: CMA editor can add attachment to case
     Given there is an existing draft case
     When I attach a file and give it a title
-    Then I see the attachment on the case with its example markdown embed code
+    Then I see the attachment on the page with its example markdown embed code
     When I copy+paste the embed code into the body of the case
     And I preview the document
     Then I can see a link to the file with the title in the document preview

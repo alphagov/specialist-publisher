@@ -74,3 +74,19 @@ end
 Then(/^the AAIB report should have been updated$/) do
   check_for_new_aaib_report_title(@new_title)
 end
+
+Given(/^there is a published report with an attachment$/) do
+  @document_title = "Example AAIB Report"
+  @attachment_title = "My attachment"
+
+  @slug = "aaib-reports/example-aaib-report"
+  @aaib_fields = {
+    title: @document_title,
+    summary: "Nullam quis risus eget urna mollis ornare vel eu leo.",
+    body: "## Header" + ("\n\nPraesent commodo cursus magna, vel scelerisque nisl consectetur et." * 10),
+    date_of_occurrence: "2014-01-01"
+  }
+
+  create_aaib_report(@aaib_fields, publish: true)
+  add_attachment_to_document(@document_title, @attachment_title)
+end
