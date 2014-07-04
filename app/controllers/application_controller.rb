@@ -1,5 +1,6 @@
 require "specialist_publisher_wiring"
 require "forwardable"
+require "permission_checker"
 
 class ApplicationController < ActionController::Base
   include GDS::SSO::ControllerMethods
@@ -24,16 +25,24 @@ class ApplicationController < ActionController::Base
   end
 
   def user_can_edit_cma_cases?
-    current_organisation_slug == "competition-and-markets-authority"
+    current_user_can_edit?("cma_case")
   end
   helper_method :user_can_edit_cma_cases?
 
   def user_can_edit_aaib_reports?
-    current_organisation_slug == "air-accidents-investigation-branch"
+    current_user_can_edit?("aaib_report")
   end
   helper_method :user_can_edit_aaib_reports?
 
+  def current_user_can_edit?(format)
+    permission_checker.can_edit?(format)
+  end
+
   def current_organisation_slug
     current_user.organisation_slug
+  end
+
+  def permission_checker
+    @permission_checker ||= PermissionChecker.new(current_user)
   end
 end
