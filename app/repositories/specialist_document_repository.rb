@@ -11,12 +11,9 @@ class SpecialistDocumentRepository
     raise e.extend(NotFoundError)
   end
 
-  def initialize(panopticon_mappings,
-    specialist_document_editions,
-    specialist_document_factory)
-    @panopticon_mappings = panopticon_mappings
-    @specialist_document_editions = specialist_document_editions
-    @document_factory = specialist_document_factory
+  def initialize(dependencies)
+    @specialist_document_editions = dependencies.fetch(:specialist_document_editions)
+    @document_factory = dependencies.fetch(:document_factory)
   end
 
   def all
@@ -63,7 +60,6 @@ class SpecialistDocumentRepository
 
 private
   attr_reader(
-    :panopticon_mappings,
     :specialist_document_editions,
     :document_factory,
   )

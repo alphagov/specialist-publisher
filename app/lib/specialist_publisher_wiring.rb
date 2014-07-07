@@ -116,17 +116,15 @@ SpecialistPublisherWiring = DependencyContainer.new do
 
   define_singleton(:aaib_report_repository) do
     SpecialistDocumentRepository.new(
-      get(:panopticon_mappings),
-      get(:specialist_document_editions).where(document_type: "aaib_report"),
-      get(:validatable_aaib_report_factory),
+      specialist_document_editions: get(:specialist_document_editions).where(document_type: "aaib_report"),
+      document_factory: get(:validatable_aaib_report_factory),
     )
   end
 
   define_singleton(:specialist_document_repository) do
     SpecialistDocumentRepository.new(
-      get(:panopticon_mappings),
-      get(:specialist_document_editions).where(document_type: "cma_case"),
-      get(:validatable_cma_case_factory),
+      specialist_document_editions: get(:specialist_document_editions).where(document_type: "cma_case"),
+      document_factory: get(:validatable_cma_case_factory),
     )
   end
 
@@ -135,9 +133,8 @@ SpecialistPublisherWiring = DependencyContainer.new do
       document_factory = get(:validated_manual_document_factory_factory).call(manual)
 
       SpecialistDocumentRepository.new(
-        get(:panopticon_mappings),
-        get(:specialist_document_editions).where(document_type: "manual"),
-        document_factory,
+        specialist_document_editions: get(:specialist_document_editions).where(document_type: "manual"),
+        document_factory: document_factory,
       )
     }
   end

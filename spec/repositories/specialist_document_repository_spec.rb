@@ -6,9 +6,8 @@ describe SpecialistDocumentRepository do
 
   let(:specialist_document_repository) do
     SpecialistDocumentRepository.new(
-      panopticon_mappings,
-      SpecialistDocumentEdition,
-      document_factory,
+      specialist_document_editions: SpecialistDocumentEdition,
+      document_factory: document_factory,
     )
   end
 
