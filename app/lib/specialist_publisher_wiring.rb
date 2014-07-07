@@ -20,6 +20,7 @@ require "builders/manual_document_builder"
 require "rummager_indexer"
 require "cma_case_indexable_formatter"
 require "null_finder_schema"
+require "aaib_report_indexable_formatter"
 
 $LOAD_PATH.unshift(File.expand_path("../..", "app/services"))
 
@@ -36,6 +37,7 @@ SpecialistPublisherWiring = DependencyContainer.new do
       manual_document_panopticon_registerer: get(:manual_document_panopticon_registerer),
       manual_content_api_exporter: get(:manual_and_documents_content_api_exporter),
       cma_case_rummager_indexer: get(:cma_case_rummager_indexer),
+      aaib_report_rummager_indexer: get(:aaib_report_rummager_indexer),
     )
   }
 
@@ -351,6 +353,16 @@ SpecialistPublisherWiring = DependencyContainer.new do
     ->(document) {
       RummagerIndexer.new.delete(
         CmaCaseIndexableFormatter.new(
+          SpecialistDocumentAttachmentProcessor.new(document)
+        )
+      )
+    }
+  }
+
+  define_factory(:aaib_report_rummager_indexer) {
+    ->(document) {
+      RummagerIndexer.new.add(
+        AaibReportIndexableFormatter.new(
           SpecialistDocumentAttachmentProcessor.new(document)
         )
       )
