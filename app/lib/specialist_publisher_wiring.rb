@@ -8,7 +8,6 @@ require "gds_api/rummager"
 require "panopticon_registerer"
 require "specialist_document_attachment_processor"
 require "specialist_document_database_exporter"
-require "specialist_document_legacy_database_export_adapter"
 require "manual_database_exporter"
 require "rendered_specialist_document"
 require "specialist_document_govspeak_to_html_renderer"
@@ -413,9 +412,7 @@ SpecialistPublisherWiring = DependencyContainer.new do
   define_instance(:aaib_report_content_api_exporter) {
     ->(doc) {
       SpecialistDocumentDatabaseExporter.new(
-        SpecialistDocumentLegacyDatabaseExportAdapter.new(
-          RenderedSpecialistDocument,
-        ),
+        RenderedSpecialistDocument,
         get(:specialist_document_renderer),
         get(:aaib_report_finder_schema),
         doc,
@@ -426,9 +423,7 @@ SpecialistPublisherWiring = DependencyContainer.new do
   define_instance(:cma_case_content_api_exporter) {
     ->(doc) {
       SpecialistDocumentDatabaseExporter.new(
-        SpecialistDocumentLegacyDatabaseExportAdapter.new(
-          RenderedSpecialistDocument,
-        ),
+        RenderedSpecialistDocument,
         get(:specialist_document_renderer),
         get(:cma_case_finder_schema),
         doc,

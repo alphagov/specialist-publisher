@@ -56,15 +56,6 @@ module CmaCaseHelpers
     end
   end
 
-  def check_document_is_published_with_legacy_format(slug, fields)
-    published_document = RenderedSpecialistDocument.find_by_slug(slug)
-
-    # TODO: RSpec 3 change to eq(hash_including( ... ))
-    fields.except(:body).each do |key, value|
-      expect(published_document.read_attribute(key)).to eq(value)
-    end
-  end
-
   def seed_cases(number_of_cases, state: "draft")
     registry = SpecialistPublisherWiring.get(:services)
 
