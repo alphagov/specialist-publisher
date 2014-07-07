@@ -27,7 +27,6 @@ Then(/^the documents should be republished with valid RenderedSpecialistDocument
 
   @published_documents.each do |document|
     attrs = document.attributes.slice(:title, :summary, :body, :opened_date)
-    check_document_is_published_with_legacy_format(document.slug, attrs)
     check_cma_case_is_published(document.slug, attrs)
   end
 end
