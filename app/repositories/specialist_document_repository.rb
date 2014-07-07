@@ -20,11 +20,11 @@ class SpecialistDocumentRepository
   end
 
   def all
-    # TODO: add a method on PanopticonMapping to handle this
-    document_ids = panopticon_mappings.all_document_ids
-    documents = document_ids.map { |id| self[id] }.to_a.compact
-
-    documents.sort_by(&:updated_at).reverse
+    all_document_ids
+      .map { |id| self[id] }
+      .reject(&:nil?)
+      .sort_by(&:updated_at)
+      .reverse
   end
 
   def [](id)
@@ -62,11 +62,14 @@ class SpecialistDocumentRepository
   end
 
 private
-
   attr_reader(
     :panopticon_mappings,
     :specialist_document_editions,
     :document_factory,
   )
 
+  # TODO Add a method on SpecialistDocumentEdition to handle this
+  def all_document_ids
+    specialist_document_editions.all.distinct(:document_id)
+  end
 end
