@@ -27,4 +27,8 @@ module AaibReportHelpers
     check_for_new_document_title(:aaib_report, *args)
   end
 
+  def withdraw_aaib_report(*args)
+    withdraw_document(:aaib_report, *args)
+  end
+
 end

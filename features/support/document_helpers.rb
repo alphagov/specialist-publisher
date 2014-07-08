@@ -190,4 +190,9 @@ module DocumentHelpers
     click_on "Edit"
   end
 
+  def withdraw_document(type, title)
+    send(:"go_to_show_page_for_#{type}", title)
+    click_button "Withdraw"
+  end
+
 end

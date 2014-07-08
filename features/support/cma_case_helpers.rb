@@ -83,9 +83,8 @@ module CmaCaseHelpers
     publish_document
   end
 
-  def withdraw_cma_case(title)
-    go_to_show_page_for_cma_case(title)
-    click_button "Withdraw"
+  def withdraw_cma_case(*args)
+    withdraw_document(:cma_case, *args)
   end
 
   def edit_cma_case(*args)

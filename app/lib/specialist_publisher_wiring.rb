@@ -50,6 +50,7 @@ SpecialistPublisherWiring = DependencyContainer.new do
       creation_listeners: get(:specialist_document_creation_observers),
       aaib_report_creation_listeners: get(:aaib_report_creation_observers),
       withdrawal_listeners: get(:specialist_document_withdrawal_observers),
+      aaib_report_withdrawal_listeners: get(:aaib_report_withdrawal_observers),
       document_renderer: get(:specialist_document_renderer),
 
       manual_repository_factory: get(:manual_repository_factory),
@@ -290,6 +291,15 @@ SpecialistPublisherWiring = DependencyContainer.new do
     ]
   }
 
+  define_singleton(:aaib_report_withdrawal_observers) {
+    [
+      get(:specialist_document_content_api_withdrawer),
+      get(:finder_api_withdrawer),
+      get(:aaib_report_panopticon_registerer),
+      get(:aaib_report_rummager_deleter),
+    ]
+  }
+
   define_factory(:panopticon_registerer) {
     ->(artefact) {
       PanopticonRegisterer.new(
@@ -362,6 +372,16 @@ SpecialistPublisherWiring = DependencyContainer.new do
   define_factory(:aaib_report_rummager_indexer) {
     ->(document) {
       RummagerIndexer.new.add(
+        AaibReportIndexableFormatter.new(
+          SpecialistDocumentAttachmentProcessor.new(document)
+        )
+      )
+    }
+  }
+
+  define_factory(:aaib_report_rummager_deleter) {
+    ->(document) {
+      RummagerIndexer.new.delete(
         AaibReportIndexableFormatter.new(
           SpecialistDocumentAttachmentProcessor.new(document)
         )

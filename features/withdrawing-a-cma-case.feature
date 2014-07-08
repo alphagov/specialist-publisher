@@ -1,7 +1,7 @@
 Feature: Withdrawing a CMA case
   As a CMA editor
   I want to withdraw a CMA case
-  So that it is not accessable to the public
+  So that it is not accessible to the public
 
   Background:
     Given I am logged in as a "CMA" editor
