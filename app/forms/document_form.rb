@@ -11,10 +11,6 @@ class DocumentForm < SimpleDelegator
   validates :summary, presence: true
   validates :body, presence: true
 
-  def self.model_name
-    ActiveModel::Name.new(self, nil, "SpecialistDocument")
-  end
-
   def initialize(document)
     @document = document
     super(document)

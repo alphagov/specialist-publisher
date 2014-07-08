@@ -21,6 +21,6 @@ Feature: Publishing a CMA case
 
   Scenario: immediately republish a published case
     When I publish a new CMA case
-    And I edit it and republish
-    Then the amended CMA case should be published
+    And I edit the CMA case and republish
+    Then the amended document should be published
     And previous editions should be archived

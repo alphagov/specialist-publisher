@@ -14,7 +14,7 @@ Feature: Attachments
     When I copy+paste the embed code into the body of the case
     And I preview the document
     Then I can see a link to the file with the title in the document preview
-    When I edit it and republish
+    When I edit the CMA case and republish
     Then the attachments from the previous edition remain
 
   Scenario: CMA editor can replace and attachment

@@ -49,7 +49,7 @@
       <li class="attachment">
         <span class="title"><%= attachment.title %></span>
         <span class="snippet"><%= attachment.snippet %></span>
-        <%= link_to "edit", edit_specialist_document_attachment_path(document, attachment) %>
+        <%= link_to "edit", edit_cma_case_attachment_path(document, attachment) %>
       </li>
     <% end %>
   </ul>
@@ -63,8 +63,8 @@
     'render_to'       : '.preview .govspeak',
     'data_target'     : function() {
                           return {
-                            'specialist_document' : {
-                              'body' : $('#specialist_document_body').val()
+                            'cma_case' : {
+                              'body' : $('#cma_case_body').val()
                             }
                           };
                         }
