@@ -1,6 +1,7 @@
+require "gds_api/panopticon"
+
 class PanopticonRegisterer
   def initialize(dependencies)
-    @api = dependencies.fetch(:api_client)
     @mappings = dependencies.fetch(:mappings)
     @artefact = dependencies.fetch(:artefact)
   end
@@ -13,9 +14,8 @@ class PanopticonRegisterer
     end
   end
 
-  private
-
-  attr_reader :api, :mappings, :artefact
+private
+  attr_reader :mappings, :artefact
 
   def register_new_artefact
     response = api.create_artefact!(artefact_attributes)
@@ -54,5 +54,12 @@ class PanopticonRegisterer
 
   def owning_app
     "specialist-publisher"
+  end
+
+  def api
+    @api ||= GdsApi::Panopticon.new(
+      Plek.current.find("panopticon"),
+      PANOPTICON_API_CREDENTIALS
+    )
   end
 end

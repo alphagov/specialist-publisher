@@ -20,7 +20,6 @@ class ServiceRegistry
     @withdrawal_listeners = dependencies.fetch(:withdrawal_listeners)
     @document_renderer = dependencies.fetch(:document_renderer)
     @manual_repository_factory = dependencies.fetch(:manual_repository_factory)
-    @manual_builder = dependencies.fetch(:manual_builder)
 
     @observers = dependencies.fetch(:observers)
   end
@@ -192,44 +191,6 @@ class ServiceRegistry
     )
   end
 
-  def list_manuals(context)
-    ListManualsService.new(
-      manual_repository: manual_repository(context),
-      context: context,
-    )
-  end
-
-  def create_manual(context)
-    CreateManualService.new(
-      manual_repository: manual_repository(context),
-      manual_builder: manual_builder,
-      listeners: observers.manual_creation,
-      context: context,
-    )
-  end
-
-  def update_manual(context)
-    UpdateManualService.new(
-      manual_repository: manual_repository(context),
-      context: context,
-    )
-  end
-
-  def show_manual(context)
-    ShowManualService.new(
-      manual_repository: manual_repository(context),
-      context: context,
-    )
-  end
-
-  def publish_manual(context)
-    PublishManualService.new(
-      manual_repository: manual_repository(context),
-      listeners: observers.manual_publication,
-      context: context,
-    )
-  end
-
   def create_manual_document(context)
     CreateManualDocumentService.new(
       manual_repository: manual_repository(context),
@@ -303,7 +264,6 @@ class ServiceRegistry
     :cma_case_builder,
     :document_renderer,
     :document_repository,
-    :manual_builder,
     :manual_repository_factory,
     :observers,
     :withdrawal_listeners,

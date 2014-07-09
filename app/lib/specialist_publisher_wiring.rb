@@ -1,9 +1,8 @@
 require "dependency_container"
-require "securerandom"
+require "id_generator"
 require "specialist_document_repository"
 require "builders/cma_case_builder"
 require "builders/aaib_report_builder"
-require "gds_api/panopticon"
 require "gds_api/rummager"
 require "panopticon_registerer"
 require "specialist_document_attachment_processor"
@@ -20,6 +19,7 @@ require "marshallers/document_association_marshaller"
 require "builders/manual_document_builder"
 require "rummager_indexer"
 require "cma_case_indexable_formatter"
+require "null_finder_schema"
 
 $LOAD_PATH.unshift(File.expand_path("../..", "app/services"))
 
@@ -51,7 +51,6 @@ SpecialistPublisherWiring = DependencyContainer.new do
       document_renderer: get(:specialist_document_renderer),
 
       manual_repository_factory: get(:manual_repository_factory),
-      manual_builder: get(:manual_builder),
 
       observers: get(:observers),
     )
@@ -65,9 +64,11 @@ SpecialistPublisherWiring = DependencyContainer.new do
 
   define_factory(:manual_builder) {
     ->(attrs) {
+      slug_generator = SlugGenerator.new(prefix: "guidance")
+
       default = {
-        id: SecureRandom.uuid,
-        slug: get(:manual_slug_generator).call(attrs.fetch(:title)),
+        id: IdGenerator.call,
+        slug: slug_generator.call(attrs.fetch(:title)),
         summary: "",
         state: "draft",
         organisation_slug: "",
@@ -82,47 +83,16 @@ SpecialistPublisherWiring = DependencyContainer.new do
     }
   }
 
-  define_instance(:specialist_document_editions) { SpecialistDocumentEdition }
-  define_instance(:artefacts) { Artefact }
-  define_instance(:panopticon_mappings) { PanopticonMapping }
-  define_singleton(:panopticon_api) do
-    GdsApi::Panopticon.new(get(:plek).find("panopticon"), PANOPTICON_API_CREDENTIALS)
-  end
-
-  define_singleton(:cma_case_factory) {
-    ->(*args) {
-      CmaCase.new(
-        SpecialistDocument.new(
-          get(:cma_slug_generator),
-          get(:edition_factory),
-          *args,
-        )
-      )
-    }
-  }
-
-  define_singleton(:aaib_report_factory) {
-    ->(*args) {
-      AaibReport.new(
-        SpecialistDocument.new(
-          get(:aaib_slug_generator),
-          get(:edition_factory),
-          *args,
-        )
-      )
-    }
-  }
-
   define_singleton(:aaib_report_repository) do
     SpecialistDocumentRepository.new(
-      specialist_document_editions: get(:specialist_document_editions).where(document_type: "aaib_report"),
+      specialist_document_editions: SpecialistDocumentEdition.where(document_type: "aaib_report"),
       document_factory: get(:validatable_aaib_report_factory),
     )
   end
 
   define_singleton(:specialist_document_repository) do
     SpecialistDocumentRepository.new(
-      specialist_document_editions: get(:specialist_document_editions).where(document_type: "cma_case"),
+      specialist_document_editions: SpecialistDocumentEdition.where(document_type: "cma_case"),
       document_factory: get(:validatable_cma_case_factory),
     )
   end
@@ -132,7 +102,7 @@ SpecialistPublisherWiring = DependencyContainer.new do
       document_factory = get(:validated_manual_document_factory_factory).call(manual)
 
       SpecialistDocumentRepository.new(
-        specialist_document_editions: get(:specialist_document_editions).where(document_type: "manual"),
+        specialist_document_editions: SpecialistDocumentEdition.where(document_type: "manual"),
         document_factory: document_factory,
       )
     }
@@ -172,15 +142,12 @@ SpecialistPublisherWiring = DependencyContainer.new do
     }
   }
 
-  define_singleton(:id_generator) { SecureRandom.method(:uuid) }
-
   define_singleton(:edition_factory) { SpecialistDocumentEdition.method(:new) }
-  define_singleton(:attachment_factory) { Attachment.method(:new) }
 
   define_factory(:cma_case_builder) {
     CmaCaseBuilder.new(
       get(:validatable_cma_case_factory),
-      get(:id_generator),
+      IdGenerator,
     )
   }
 
@@ -189,7 +156,13 @@ SpecialistPublisherWiring = DependencyContainer.new do
       SlugUniquenessValidator.new(
         get(:specialist_document_repository),
         CmaCaseForm.new(
-          get(:cma_case_factory).call(*args),
+          CmaCase.new(
+            SpecialistDocument.new(
+              SlugGenerator.new(prefix: "cma-cases"),
+              get(:edition_factory),
+              *args,
+            ),
+          ),
         ),
       )
     }
@@ -198,7 +171,7 @@ SpecialistPublisherWiring = DependencyContainer.new do
   define_factory(:aaib_report_builder) {
     AaibReportBuilder.new(
       get(:validatable_aaib_report_factory),
-      get(:id_generator),
+      IdGenerator,
     )
   }
 
@@ -207,7 +180,13 @@ SpecialistPublisherWiring = DependencyContainer.new do
       SlugUniquenessValidator.new(
         get(:aaib_report_repository),
         AaibReportForm.new(
-          get(:aaib_report_factory).call(*args),
+          AaibReport.new(
+            SpecialistDocument.new(
+              SlugGenerator.new(prefix: "aaib-reports"),
+              get(:edition_factory),
+              *args,
+            )
+          )
         ),
       )
     }
@@ -216,14 +195,14 @@ SpecialistPublisherWiring = DependencyContainer.new do
   define_factory(:manual_document_builder) {
     ManualDocumentBuilder.new(
       factory_factory: get(:validated_manual_document_factory_factory),
-      id_generator: get(:id_generator),
+      id_generator: IdGenerator,
     )
   }
 
   define_factory(:validated_manual_document_factory_factory) {
     ->(manual) {
       ->(id, editions) {
-        slug_generator = get(:manual_document_slug_generator).call(manual.slug)
+        slug_generator = SlugGenerator.new(prefix: manual.slug)
 
         ChangeNoteValidator.new(
           SlugUniquenessValidator.new(
@@ -240,32 +219,19 @@ SpecialistPublisherWiring = DependencyContainer.new do
     }
   }
 
-  define_factory(:cma_slug_generator) { SlugGenerator.new(prefix: "cma-cases") }
-  define_factory(:aaib_slug_generator) { SlugGenerator.new(prefix: "aaib-reports") }
-  define_factory(:manual_slug_generator) { SlugGenerator.new(prefix: "guidance") }
-  define_factory(:manual_document_slug_generator) {
-    ->(manual_slug) {
-      SlugGenerator.new(prefix: manual_slug)
-    }
-  }
-
   define_instance(:markdown_renderer) {
     SpecialistDocumentAttachmentProcessor.method(:new)
   }
 
-  define_instance(:govspeak_document_factory) {
-    Govspeak::Document.method(:new)
-  }
-
   define_instance(:govspeak_html_converter) {
     ->(string) {
-      get(:govspeak_document_factory).call(string).to_html
+      Govspeak::Document.new(string).to_html
     }
   }
 
   define_instance(:govspeak_header_extractor) {
     ->(string) {
-      get(:govspeak_document_factory).call(string).structured_headers
+      Govspeak::Document.new(string).structured_headers
     }
   }
 
@@ -287,17 +253,15 @@ SpecialistPublisherWiring = DependencyContainer.new do
     }
   }
 
-  define_instance(:specialist_document_render_pipeline) {
-    [
-      get(:markdown_renderer),
-      get(:specialist_document_govspeak_header_extractor),
-      get(:specialist_document_govspeak_to_html_renderer),
-    ]
-  }
-
   define_instance(:specialist_document_renderer) {
     ->(doc) {
-      get(:specialist_document_render_pipeline).reduce(doc) { |doc, next_renderer|
+      pipeline = [
+        get(:markdown_renderer),
+        get(:specialist_document_govspeak_header_extractor),
+        get(:specialist_document_govspeak_to_html_renderer),
+      ]
+
+      pipeline.reduce(doc) { |doc, next_renderer|
         next_renderer.call(doc)
       }
     }
@@ -327,8 +291,7 @@ SpecialistPublisherWiring = DependencyContainer.new do
   define_factory(:panopticon_registerer) {
     ->(artefact) {
       PanopticonRegisterer.new(
-        api_client: get(:panopticon_api),
-        mappings: get(:panopticon_mappings),
+        mappings: PanopticonMapping,
         artefact: artefact,
       ).call
     }
@@ -433,7 +396,7 @@ SpecialistPublisherWiring = DependencyContainer.new do
       SpecialistDocumentDatabaseExporter.new(
         RenderedSpecialistDocument,
         get(:specialist_document_renderer),
-        get(:null_finder_schema),
+        NullFinderSchema.new,
         doc,
       ).call
     }
@@ -459,14 +422,8 @@ SpecialistPublisherWiring = DependencyContainer.new do
     }
   }
 
-  define_factory(:null_finder_schema) {
-    OpenStruct.new(facets: [])
-  }
-
-  define_singleton(:http_client) { Faraday }
-
   define_singleton(:finder_api) {
-    FinderAPI.new(get(:http_client), get(:plek))
+    FinderAPI.new(Faraday, Plek.current)
   }
 
   define_singleton(:finder_api_notifier) {
@@ -485,15 +442,6 @@ SpecialistPublisherWiring = DependencyContainer.new do
   define_singleton(:cma_case_finder_schema) {
     require "finder_schema"
     FinderSchema.new(Rails.root.join("schemas/cma-cases.json"))
-  }
-
-  define_singleton(:plek) {
-    Plek.current
-  }
-
-  define_singleton(:url_maker) {
-    require "url_maker"
-    UrlMaker.new(plek: get(:plek))
   }
 
 end
