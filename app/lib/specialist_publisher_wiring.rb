@@ -38,6 +38,10 @@ SpecialistPublisherWiring = DependencyContainer.new do
       manual_content_api_exporter: get(:manual_and_documents_content_api_exporter),
       cma_case_rummager_indexer: get(:cma_case_rummager_indexer),
       aaib_report_rummager_indexer: get(:aaib_report_rummager_indexer),
+      specialist_document_content_api_withdrawer: get(:specialist_document_content_api_withdrawer),
+      finder_api_withdrawer: get(:finder_api_withdrawer),
+      cma_case_rummager_deleter: get(:cma_case_rummager_deleter),
+      aaib_report_rummager_deleter: get(:aaib_report_rummager_deleter),
     )
   }
 
@@ -47,10 +51,6 @@ SpecialistPublisherWiring = DependencyContainer.new do
       aaib_report_builder: get(:aaib_report_builder),
       cma_case_repository: get(:cma_case_repository),
       aaib_report_repository: get(:aaib_report_repository),
-      cma_case_creation_listeners: get(:cma_case_creation_observers),
-      aaib_report_creation_listeners: get(:aaib_report_creation_observers),
-      cma_case_withdrawal_listeners: get(:cma_case_withdrawal_observers),
-      aaib_report_withdrawal_listeners: get(:aaib_report_withdrawal_observers),
       document_renderer: get(:specialist_document_renderer),
 
       manual_repository_factory: get(:manual_repository_factory),
@@ -269,36 +269,6 @@ SpecialistPublisherWiring = DependencyContainer.new do
         next_renderer.call(doc)
       }
     }
-  }
-
-  define_singleton(:cma_case_creation_observers) {
-    [
-      get(:cma_case_panopticon_registerer),
-    ]
-  }
-
-  define_singleton(:aaib_report_creation_observers) {
-    [
-      get(:aaib_report_panopticon_registerer),
-    ]
-  }
-
-  define_singleton(:cma_case_withdrawal_observers) {
-    [
-      get(:specialist_document_content_api_withdrawer),
-      get(:finder_api_withdrawer),
-      get(:cma_case_panopticon_registerer),
-      get(:cma_case_rummager_deleter),
-    ]
-  }
-
-  define_singleton(:aaib_report_withdrawal_observers) {
-    [
-      get(:specialist_document_content_api_withdrawer),
-      get(:finder_api_withdrawer),
-      get(:aaib_report_panopticon_registerer),
-      get(:aaib_report_rummager_deleter),
-    ]
   }
 
   define_factory(:panopticon_registerer) {

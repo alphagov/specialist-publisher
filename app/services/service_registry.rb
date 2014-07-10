@@ -15,10 +15,6 @@ class ServiceRegistry
     @aaib_report_builder = dependencies.fetch(:aaib_report_builder)
     @cma_case_repository = dependencies.fetch(:cma_case_repository)
     @aaib_report_repository = dependencies.fetch(:aaib_report_repository)
-    @cma_case_creation_listeners = dependencies.fetch(:cma_case_creation_listeners)
-    @aaib_report_creation_listeners = dependencies.fetch(:aaib_report_creation_listeners)
-    @cma_case_withdrawal_listeners = dependencies.fetch(:cma_case_withdrawal_listeners)
-    @aaib_report_withdrawal_listeners = dependencies.fetch(:aaib_report_withdrawal_listeners)
     @document_renderer = dependencies.fetch(:document_renderer)
     @manual_repository_factory = dependencies.fetch(:manual_repository_factory)
 
@@ -53,7 +49,7 @@ class ServiceRegistry
     CreateDocumentService.new(
       aaib_report_builder,
       aaib_report_repository,
-      aaib_report_creation_listeners,
+      observers.aaib_report_creation,
       attributes,
     )
   end
@@ -62,7 +58,7 @@ class ServiceRegistry
     CreateDocumentService.new(
       cma_case_builder,
       cma_case_repository,
-      cma_case_creation_listeners,
+      observers.cma_case_creation,
       attributes,
     )
   end
@@ -147,7 +143,7 @@ class ServiceRegistry
   def withdraw_cma_case(document_id)
     WithdrawDocumentService.new(
       cma_case_repository,
-      cma_case_withdrawal_listeners,
+      observers.cma_case_withdrawal,
       document_id,
     )
   end
@@ -155,7 +151,7 @@ class ServiceRegistry
   def withdraw_aaib_report(document_id)
     WithdrawDocumentService.new(
       aaib_report_repository,
-      aaib_report_withdrawal_listeners,
+      observers.aaib_report_withdrawal,
       document_id,
     )
   end
@@ -260,14 +256,10 @@ class ServiceRegistry
   attr_reader(
     :aaib_report_builder,
     :aaib_report_repository,
-    :aaib_report_creation_listeners,
-    :cma_case_creation_listeners,
     :cma_case_builder,
     :document_renderer,
     :cma_case_repository,
     :manual_repository_factory,
     :observers,
-    :cma_case_withdrawal_listeners,
-    :aaib_report_withdrawal_listeners,
   )
 end

@@ -13,6 +13,10 @@ class ObserversRegistry
     @manual_content_api_exporter = dependencies.fetch(:manual_content_api_exporter)
     @cma_case_rummager_indexer = dependencies.fetch(:cma_case_rummager_indexer)
     @aaib_report_rummager_indexer = dependencies.fetch(:aaib_report_rummager_indexer)
+    @specialist_document_content_api_withdrawer = dependencies.fetch(:specialist_document_content_api_withdrawer)
+    @finder_api_withdrawer = dependencies.fetch(:finder_api_withdrawer)
+    @cma_case_rummager_deleter = dependencies.fetch(:cma_case_rummager_deleter)
+    @aaib_report_rummager_deleter = dependencies.fetch(:aaib_report_rummager_deleter)
   end
 
   def cma_case_publication
@@ -60,6 +64,36 @@ class ObserversRegistry
     ]
   end
 
+  def cma_case_creation
+    [
+      cma_case_panopticon_registerer,
+    ]
+  end
+
+  def aaib_report_creation
+    [
+      aaib_report_panopticon_registerer,
+    ]
+  end
+
+  def cma_case_withdrawal
+    [
+      specialist_document_content_api_withdrawer,
+      finder_api_withdrawer,
+      cma_case_panopticon_registerer,
+      cma_case_rummager_deleter,
+    ]
+  end
+
+  def aaib_report_withdrawal
+    [
+      specialist_document_content_api_withdrawer,
+      finder_api_withdrawer,
+      aaib_report_panopticon_registerer,
+      aaib_report_rummager_deleter,
+    ]
+  end
+
   private
 
   attr_reader(
@@ -73,6 +107,10 @@ class ObserversRegistry
     :manual_content_api_exporter,
     :cma_case_rummager_indexer,
     :aaib_report_rummager_indexer,
+    :specialist_document_content_api_withdrawer,
+    :finder_api_withdrawer,
+    :cma_case_rummager_deleter,
+    :aaib_report_rummager_deleter,
   )
 
   def manual_change_note_content_api_exporter
