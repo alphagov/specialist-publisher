@@ -21,21 +21,9 @@ class ServiceRegistry
     @observers = dependencies.fetch(:observers)
   end
 
-  def list_cma_cases
-    ListDocumentsService.new(
-      cma_case_repository,
-    )
-  end
-
   def list_aaib_reports
     ListDocumentsService.new(
       aaib_report_repository,
-    )
-  end
-
-  def new_cma_case
-    NewDocumentService.new(
-      cma_case_builder,
     )
   end
 
@@ -54,36 +42,10 @@ class ServiceRegistry
     )
   end
 
-  def create_cma_case(attributes)
-    CreateDocumentService.new(
-      cma_case_builder,
-      cma_case_repository,
-      observers.cma_case_creation,
-      attributes,
-    )
-  end
-
   def show_aaib_report(document_id)
     ShowDocumentService.new(
       aaib_report_repository,
       document_id,
-    )
-  end
-
-  def show_cma_case(document_id)
-    ShowDocumentService.new(
-      cma_case_repository,
-      document_id,
-    )
-  end
-
-  def preview_cma_case(document_id, attributes)
-    PreviewDocumentService.new(
-      cma_case_repository,
-      cma_case_builder,
-      document_renderer,
-      document_id,
-      attributes,
     )
   end
 
@@ -100,6 +62,7 @@ class ServiceRegistry
   def preview_manual_document(context)
     PreviewManualDocumentService.new(
       manual_repository(context),
+      # TODO This doesn't look right!
       cma_case_builder,
       document_renderer,
       context,
@@ -114,37 +77,12 @@ class ServiceRegistry
     )
   end
 
-  def publish_cma_case(document_id)
-    PublishDocumentService.new(
-      cma_case_repository,
-      observers.cma_case_publication,
-      document_id,
-    )
-  end
-
-  def update_cma_case(document_id, attributes)
-    UpdateDocumentService.new(
-      repo: cma_case_repository,
-      listeners: observers.cma_case_update,
-      document_id: document_id,
-      attributes: attributes,
-    )
-  end
-
   def update_aaib_report(document_id, attributes)
     UpdateDocumentService.new(
       repo: aaib_report_repository,
       listeners: [],
       document_id: document_id,
       attributes: attributes,
-    )
-  end
-
-  def withdraw_cma_case(document_id)
-    WithdrawDocumentService.new(
-      cma_case_repository,
-      observers.cma_case_withdrawal,
-      document_id,
     )
   end
 

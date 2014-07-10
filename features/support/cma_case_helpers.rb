@@ -1,3 +1,5 @@
+require "cma_case_service_registry"
+
 module CmaCaseHelpers
 
   def create_cma_case(*args)
@@ -31,10 +33,10 @@ module CmaCaseHelpers
   end
 
   def seed_cases(number_of_cases, state: "draft")
-    registry = SpecialistPublisherWiring.get(:services)
+    services = CmaCaseServiceRegistry.new
 
     docs = number_of_cases.times.map do
-      registry.create_cma_case(
+      services.create(
         title: "Specialist Document #{SecureRandom.hex}",
         summary: "summary",
         body: "## Header" + ("\n\nPraesent commodo cursus magna, vel scelerisque nisl consectetur et." * 10),
@@ -48,7 +50,7 @@ module CmaCaseHelpers
     end
 
     if state == "published"
-      docs.each { |doc| registry.publish_cma_case(doc.id).call }
+      docs.each { |doc| services.publish(doc.id).call }
     end
 
     docs
