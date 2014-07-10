@@ -45,7 +45,7 @@ SpecialistPublisherWiring = DependencyContainer.new do
     ServiceRegistry.new(
       cma_case_builder: get(:cma_case_builder),
       aaib_report_builder: get(:aaib_report_builder),
-      document_repository: get(:specialist_document_repository),
+      cma_case_repository: get(:cma_case_repository),
       aaib_report_repository: get(:aaib_report_repository),
       cma_case_creation_listeners: get(:cma_case_creation_observers),
       aaib_report_creation_listeners: get(:aaib_report_creation_observers),
@@ -93,7 +93,7 @@ SpecialistPublisherWiring = DependencyContainer.new do
     )
   end
 
-  define_singleton(:specialist_document_repository) do
+  define_singleton(:cma_case_repository) do
     SpecialistDocumentRepository.new(
       specialist_document_editions: SpecialistDocumentEdition.where(document_type: "cma_case"),
       document_factory: get(:validatable_cma_case_factory),
@@ -157,7 +157,7 @@ SpecialistPublisherWiring = DependencyContainer.new do
   define_factory(:validatable_cma_case_factory) {
     ->(*args) {
       SlugUniquenessValidator.new(
-        get(:specialist_document_repository),
+        get(:cma_case_repository),
         CmaCaseForm.new(
           CmaCase.new(
             SpecialistDocument.new(
@@ -209,7 +209,8 @@ SpecialistPublisherWiring = DependencyContainer.new do
 
         ChangeNoteValidator.new(
           SlugUniquenessValidator.new(
-            get(:specialist_document_repository),
+            # TODO This doesn't look right!
+            get(:cma_case_repository),
             SpecialistDocument.new(
               slug_generator,
               get(:edition_factory),

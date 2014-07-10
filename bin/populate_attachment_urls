@@ -2,7 +2,8 @@
 
 require File.expand_path("../../config/environment", __FILE__)
 
-repository = SpecialistPublisherWiring.get(:specialist_document_repository)
+# TODO Only CMA cases? Should this do more? Do we even need this file?
+repository = SpecialistPublisherWiring.get(:cma_case_repository)
 
 repository.all.each do |doc|
   doc.attachments.each do |a|

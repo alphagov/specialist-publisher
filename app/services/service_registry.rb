@@ -13,7 +13,7 @@ class ServiceRegistry
   def initialize(dependencies)
     @cma_case_builder = dependencies.fetch(:cma_case_builder)
     @aaib_report_builder = dependencies.fetch(:aaib_report_builder)
-    @document_repository = dependencies.fetch(:document_repository)
+    @cma_case_repository = dependencies.fetch(:cma_case_repository)
     @aaib_report_repository = dependencies.fetch(:aaib_report_repository)
     @cma_case_creation_listeners = dependencies.fetch(:cma_case_creation_listeners)
     @aaib_report_creation_listeners = dependencies.fetch(:aaib_report_creation_listeners)
@@ -27,7 +27,7 @@ class ServiceRegistry
 
   def list_documents
     ListDocuments.new(
-      document_repository,
+      cma_case_repository,
     )
   end
 
@@ -61,7 +61,7 @@ class ServiceRegistry
   def create_document(attributes)
     CreateDocumentService.new(
       cma_case_builder,
-      document_repository,
+      cma_case_repository,
       cma_case_creation_listeners,
       attributes,
     )
@@ -76,14 +76,14 @@ class ServiceRegistry
 
   def show_document(document_id)
     ShowDocumentService.new(
-      document_repository,
+      cma_case_repository,
       document_id,
     )
   end
 
   def preview_document(document_id, attributes)
     PreviewDocumentService.new(
-      document_repository,
+      cma_case_repository,
       cma_case_builder,
       document_renderer,
       document_id,
@@ -120,7 +120,7 @@ class ServiceRegistry
 
   def publish_document(document_id)
     PublishDocumentService.new(
-      document_repository,
+      cma_case_repository,
       observers.cma_case_publication,
       document_id,
     )
@@ -128,7 +128,7 @@ class ServiceRegistry
 
   def update_document(document_id, attributes)
     UpdateDocumentService.new(
-      repo: document_repository,
+      repo: cma_case_repository,
       listeners: observers.cma_case_update,
       document_id: document_id,
       attributes: attributes,
@@ -146,7 +146,7 @@ class ServiceRegistry
 
   def withdraw_document(document_id)
     WithdrawDocumentService.new(
-      document_repository,
+      cma_case_repository,
       cma_case_withdrawal_listeners,
       document_id,
     )
@@ -162,7 +162,7 @@ class ServiceRegistry
 
   def new_document_attachment(document_id)
     NewDocumentAttachmentService.new(
-      document_repository,
+      cma_case_repository,
       Attachment.method(:new),
       document_id,
     )
@@ -170,7 +170,7 @@ class ServiceRegistry
 
   def create_document_attachment(context, document_id)
     CreateDocumentAttachmentService.new(
-      document_repository,
+      cma_case_repository,
       context,
       document_id,
     )
@@ -178,7 +178,7 @@ class ServiceRegistry
 
   def update_document_attachment(context, document_id)
     UpdateDocumentAttachmentService.new(
-      document_repository,
+      cma_case_repository,
       context,
       document_id,
     )
@@ -186,7 +186,7 @@ class ServiceRegistry
 
   def show_document_attachment(context, document_id)
     ShowDocumentAttachmentService.new(
-      document_repository,
+      cma_case_repository,
       context,
       document_id,
     )
@@ -264,7 +264,7 @@ class ServiceRegistry
     :cma_case_creation_listeners,
     :cma_case_builder,
     :document_renderer,
-    :document_repository,
+    :cma_case_repository,
     :manual_repository_factory,
     :observers,
     :cma_case_withdrawal_listeners,

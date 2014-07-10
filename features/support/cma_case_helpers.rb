@@ -11,7 +11,7 @@ module CmaCaseHelpers
 
   def go_to_edit_page_for_most_recent_case
     warn "DEPRECATED: use #go_to_edit_page_for_cma_case and provide title"
-    registry = SpecialistPublisherWiring.get(:specialist_document_repository)
+    registry = SpecialistPublisherWiring.get(:cma_case_repository)
     # TODO: testing antipattern, relies on datastore co-incidence
     document = registry.all.last
 

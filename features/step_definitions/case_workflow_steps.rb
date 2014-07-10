@@ -1,6 +1,6 @@
 Then(/^the CMA case should be in draft$/) do
   expect(
-    specialist_document_repository.all.last
+    cma_case_repository.all.last
   ).to be_draft
 end
 
