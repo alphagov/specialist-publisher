@@ -34,7 +34,7 @@ module CmaCaseHelpers
     registry = SpecialistPublisherWiring.get(:services)
 
     docs = number_of_cases.times.map do
-      registry.create_document(
+      registry.create_cma_case(
         title: "Specialist Document #{SecureRandom.hex}",
         summary: "summary",
         body: "## Header" + ("\n\nPraesent commodo cursus magna, vel scelerisque nisl consectetur et." * 10),
@@ -48,7 +48,7 @@ module CmaCaseHelpers
     end
 
     if state == "published"
-      docs.each { |doc| registry.publish_document(doc.id).call }
+      docs.each { |doc| registry.publish_cma_case(doc.id).call }
     end
 
     docs

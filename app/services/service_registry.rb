@@ -25,7 +25,7 @@ class ServiceRegistry
     @observers = dependencies.fetch(:observers)
   end
 
-  def list_documents
+  def list_cma_cases
     ListDocuments.new(
       cma_case_repository,
     )
@@ -37,7 +37,7 @@ class ServiceRegistry
     )
   end
 
-  def new_document
+  def new_cma_case
     NewDocumentService.new(
       cma_case_builder,
     )
@@ -58,7 +58,7 @@ class ServiceRegistry
     )
   end
 
-  def create_document(attributes)
+  def create_cma_case(attributes)
     CreateDocumentService.new(
       cma_case_builder,
       cma_case_repository,
@@ -74,14 +74,14 @@ class ServiceRegistry
     )
   end
 
-  def show_document(document_id)
+  def show_cma_case(document_id)
     ShowDocumentService.new(
       cma_case_repository,
       document_id,
     )
   end
 
-  def preview_document(document_id, attributes)
+  def preview_cma_case(document_id, attributes)
     PreviewDocumentService.new(
       cma_case_repository,
       cma_case_builder,
@@ -118,7 +118,7 @@ class ServiceRegistry
     )
   end
 
-  def publish_document(document_id)
+  def publish_cma_case(document_id)
     PublishDocumentService.new(
       cma_case_repository,
       observers.cma_case_publication,
@@ -126,7 +126,7 @@ class ServiceRegistry
     )
   end
 
-  def update_document(document_id, attributes)
+  def update_cma_case(document_id, attributes)
     UpdateDocumentService.new(
       repo: cma_case_repository,
       listeners: observers.cma_case_update,
@@ -144,7 +144,7 @@ class ServiceRegistry
     )
   end
 
-  def withdraw_document(document_id)
+  def withdraw_cma_case(document_id)
     WithdrawDocumentService.new(
       cma_case_repository,
       cma_case_withdrawal_listeners,
@@ -160,7 +160,7 @@ class ServiceRegistry
     )
   end
 
-  def new_document_attachment(document_id)
+  def new_cma_case_attachment(document_id)
     NewDocumentAttachmentService.new(
       cma_case_repository,
       Attachment.method(:new),
@@ -168,7 +168,7 @@ class ServiceRegistry
     )
   end
 
-  def create_document_attachment(context, document_id)
+  def create_cma_case_attachment(context, document_id)
     CreateDocumentAttachmentService.new(
       cma_case_repository,
       context,
@@ -176,7 +176,7 @@ class ServiceRegistry
     )
   end
 
-  def update_document_attachment(context, document_id)
+  def update_cma_case_attachment(context, document_id)
     UpdateDocumentAttachmentService.new(
       cma_case_repository,
       context,
@@ -184,7 +184,7 @@ class ServiceRegistry
     )
   end
 
-  def show_document_attachment(context, document_id)
+  def show_cma_case_attachment(context, document_id)
     ShowDocumentAttachmentService.new(
       cma_case_repository,
       context,
