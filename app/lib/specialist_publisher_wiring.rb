@@ -28,7 +28,7 @@ SpecialistPublisherWiring = DependencyContainer.new do
 
   define_factory(:observers) {
     ObserversRegistry.new(
-      document_content_api_exporter: get(:cma_case_content_api_exporter),
+      cma_case_content_api_exporter: get(:cma_case_content_api_exporter),
       aaib_report_content_api_exporter: get(:aaib_report_content_api_exporter),
       finder_api_notifier: get(:finder_api_notifier),
       cma_case_panopticon_registerer: get(:cma_case_panopticon_registerer),

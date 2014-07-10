@@ -3,7 +3,7 @@ require "manual_change_note_database_exporter"
 class ObserversRegistry
 
   def initialize(dependencies)
-    @document_content_api_exporter = dependencies.fetch(:document_content_api_exporter)
+    @cma_case_content_api_exporter = dependencies.fetch(:cma_case_content_api_exporter)
     @aaib_report_content_api_exporter = dependencies.fetch(:aaib_report_content_api_exporter)
     @finder_api_notifier = dependencies.fetch(:finder_api_notifier)
     @cma_case_panopticon_registerer = dependencies.fetch(:cma_case_panopticon_registerer)
@@ -17,7 +17,7 @@ class ObserversRegistry
 
   def cma_case_publication
     [
-      document_content_api_exporter,
+      cma_case_content_api_exporter,
       finder_api_notifier,
       cma_case_panopticon_registerer,
       cma_case_rummager_indexer,
@@ -63,7 +63,7 @@ class ObserversRegistry
   private
 
   attr_reader(
-    :document_content_api_exporter,
+    :cma_case_content_api_exporter,
     :aaib_report_content_api_exporter,
     :finder_api_notifier,
     :cma_case_panopticon_registerer,
