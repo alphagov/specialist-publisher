@@ -15,9 +15,10 @@ class ServiceRegistry
     @aaib_report_builder = dependencies.fetch(:aaib_report_builder)
     @document_repository = dependencies.fetch(:document_repository)
     @aaib_report_repository = dependencies.fetch(:aaib_report_repository)
-    @creation_listeners = dependencies.fetch(:creation_listeners)
+    @cma_case_creation_listeners = dependencies.fetch(:cma_case_creation_listeners)
     @aaib_report_creation_listeners = dependencies.fetch(:aaib_report_creation_listeners)
-    @withdrawal_listeners = dependencies.fetch(:withdrawal_listeners)
+    @cma_case_withdrawal_listeners = dependencies.fetch(:cma_case_withdrawal_listeners)
+    @aaib_report_withdrawal_listeners = dependencies.fetch(:aaib_report_withdrawal_listeners)
     @document_renderer = dependencies.fetch(:document_renderer)
     @manual_repository_factory = dependencies.fetch(:manual_repository_factory)
 
@@ -61,7 +62,7 @@ class ServiceRegistry
     CreateDocumentService.new(
       cma_case_builder,
       document_repository,
-      creation_listeners,
+      cma_case_creation_listeners,
       attributes,
     )
   end
@@ -120,7 +121,7 @@ class ServiceRegistry
   def publish_document(document_id)
     PublishDocumentService.new(
       document_repository,
-      observers.document_publication,
+      observers.cma_case_publication,
       document_id,
     )
   end
@@ -128,7 +129,7 @@ class ServiceRegistry
   def update_document(document_id, attributes)
     UpdateDocumentService.new(
       repo: document_repository,
-      listeners: observers.document_update,
+      listeners: observers.cma_case_update,
       document_id: document_id,
       attributes: attributes,
     )
@@ -146,7 +147,7 @@ class ServiceRegistry
   def withdraw_document(document_id)
     WithdrawDocumentService.new(
       document_repository,
-      withdrawal_listeners,
+      cma_case_withdrawal_listeners,
       document_id,
     )
   end
@@ -154,7 +155,7 @@ class ServiceRegistry
   def withdraw_aaib_report(document_id)
     WithdrawDocumentService.new(
       aaib_report_repository,
-      withdrawal_listeners,
+      aaib_report_withdrawal_listeners,
       document_id,
     )
   end
@@ -260,12 +261,13 @@ class ServiceRegistry
     :aaib_report_builder,
     :aaib_report_repository,
     :aaib_report_creation_listeners,
-    :creation_listeners,
+    :cma_case_creation_listeners,
     :cma_case_builder,
     :document_renderer,
     :document_repository,
     :manual_repository_factory,
     :observers,
-    :withdrawal_listeners,
+    :cma_case_withdrawal_listeners,
+    :aaib_report_withdrawal_listeners,
   )
 end

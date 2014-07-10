@@ -15,7 +15,7 @@ class ObserversRegistry
     @aaib_report_rummager_indexer = dependencies.fetch(:aaib_report_rummager_indexer)
   end
 
-  def document_publication
+  def cma_case_publication
     [
       document_content_api_exporter,
       finder_api_notifier,
@@ -33,7 +33,7 @@ class ObserversRegistry
     ]
   end
 
-  def document_update
+  def cma_case_update
     [
       cma_case_panopticon_registerer,
     ]

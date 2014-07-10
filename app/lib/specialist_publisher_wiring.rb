@@ -47,9 +47,9 @@ SpecialistPublisherWiring = DependencyContainer.new do
       aaib_report_builder: get(:aaib_report_builder),
       document_repository: get(:specialist_document_repository),
       aaib_report_repository: get(:aaib_report_repository),
-      creation_listeners: get(:specialist_document_creation_observers),
+      cma_case_creation_listeners: get(:cma_case_creation_observers),
       aaib_report_creation_listeners: get(:aaib_report_creation_observers),
-      withdrawal_listeners: get(:specialist_document_withdrawal_observers),
+      cma_case_withdrawal_listeners: get(:cma_case_withdrawal_observers),
       aaib_report_withdrawal_listeners: get(:aaib_report_withdrawal_observers),
       document_renderer: get(:specialist_document_renderer),
 
@@ -270,7 +270,7 @@ SpecialistPublisherWiring = DependencyContainer.new do
     }
   }
 
-  define_singleton(:specialist_document_creation_observers) {
+  define_singleton(:cma_case_creation_observers) {
     [
       get(:cma_case_panopticon_registerer),
     ]
@@ -282,7 +282,7 @@ SpecialistPublisherWiring = DependencyContainer.new do
     ]
   }
 
-  define_singleton(:specialist_document_withdrawal_observers) {
+  define_singleton(:cma_case_withdrawal_observers) {
     [
       get(:specialist_document_content_api_withdrawer),
       get(:finder_api_withdrawer),
