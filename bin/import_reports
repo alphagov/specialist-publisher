@@ -1,0 +1,45 @@
+#!/usr/bin/env ruby
+
+require File.expand_path("../../config/environment", __FILE__)
+require "specialist_document_bulk_importer"
+require "aaib_import_mapper"
+require "aaib_summary_nullifier"
+require "aaib_attachment_import_mapper"
+
+repository = SpecialistPublisherWiring.get(:aaib_report_repository)
+
+document_creator = AaibSummaryNullifier.new(
+  repository,
+  AaibAttachmentImportMapper.new(
+    AaibImportMapper.new(
+      ->(attrs) {
+        AaibReportServiceRegistry
+        .new
+        .create(attrs)
+        .call
+      },
+    ),
+    repository,
+  ),
+)
+
+import_job_builder = ->(data) {
+  SingleImport.new(
+    document_creator: document_creator,
+    logger: DocumentImportLogger.new(STDOUT),
+    data: data,
+  )
+}
+
+data_loader = ->(file) {
+  JSON.parse(File.read(file))
+}
+
+def import_filenames
+  Dir["import/metadata/*.json"].to_a
+end
+
+SpecialistDocumentBulkImporter.new(
+  import_job_builder: import_job_builder,
+  data_loader: data_loader,
+).call(import_filenames)

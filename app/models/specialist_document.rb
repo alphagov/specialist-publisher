@@ -106,6 +106,10 @@ class SpecialistDocument
     latest_edition.build_attachment(attributes)
   end
 
+  def add_basic_attachment(attributes)
+    latest_edition.build_basic_attachment(attributes)
+  end
+
   def attachments
     latest_edition.attachments.to_a
   end
