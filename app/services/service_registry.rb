@@ -26,13 +26,13 @@ class ServiceRegistry
   end
 
   def list_cma_cases
-    ListDocuments.new(
+    ListDocumentsService.new(
       cma_case_repository,
     )
   end
 
   def list_aaib_reports
-    ListDocuments.new(
+    ListDocumentsService.new(
       aaib_report_repository,
     )
   end
