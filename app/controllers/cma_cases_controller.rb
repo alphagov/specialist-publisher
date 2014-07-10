@@ -35,7 +35,7 @@ class CmaCasesController < ApplicationController
     document = services.create_document(document_params).call
 
     if document.valid?
-      redirect_to(specialist_document_path(document))
+      redirect_to(cma_case_path(document))
     else
       render(:new, locals: {document: document})
     end
@@ -45,7 +45,7 @@ class CmaCasesController < ApplicationController
     document = services.update_document(document_id, document_params).call
 
     if document.valid?
-      redirect_to(specialist_document_path(document))
+      redirect_to(cma_case_path(document))
     else
       render(:edit, locals: {document: document})
     end
@@ -54,13 +54,13 @@ class CmaCasesController < ApplicationController
   def publish
     document = services.publish_document(document_id).call
 
-    redirect_to(specialist_document_path(document), flash: { notice: "Published #{document.title}" })
+    redirect_to(cma_case_path(document), flash: { notice: "Published #{document.title}" })
   end
 
   def withdraw
     document = services.withdraw_document(document_id).call
 
-    redirect_to(specialist_document_path(document), flash: { notice: "Withdrawn #{document.title}" })
+    redirect_to(cma_case_path(document), flash: { notice: "Withdrawn #{document.title}" })
   end
 
   def preview
@@ -86,6 +86,6 @@ protected
   end
 
   def document_params
-    params.fetch("specialist_document", {})
+    params.fetch("cma_case", {})
   end
 end

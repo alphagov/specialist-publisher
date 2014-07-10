@@ -1,16 +1,21 @@
 module CmaCaseHelpers
+
+  def create_cma_case(*args)
+    create_document(:cma_case, *args)
+  end
+
   def check_slug_updated_with_panopticon(old_slug, new_slug)
     expect(fake_panopticon).to have_received(:put_artefact!)
       .with(panopticon_id_for_slug(old_slug), hash_including(slug: new_slug))
   end
 
   def go_to_edit_page_for_most_recent_case
-    warn "DEPRECATED: use #go_to_edit_page_for_document and provide title"
+    warn "DEPRECATED: use #go_to_edit_page_for_cma_case and provide title"
     registry = SpecialistPublisherWiring.get(:specialist_document_repository)
     # TODO: testing antipattern, relies on datastore co-incidence
     document = registry.all.last
 
-    visit edit_specialist_document_path(document.id)
+    visit edit_cma_case_path(document.id)
   end
 
   def make_changes_without_saving(fields)
@@ -18,41 +23,10 @@ module CmaCaseHelpers
     fill_in_fields(fields)
   end
 
-  def generate_preview
-    click_button("Preview")
-  end
-
   def check_for_cma_case_body_preview
     expect(current_path).to match(%r{/cma-cases/([0-9a-f-]+|new)})
     within(".preview") do
       expect(page).to have_css("p", text: "Body for preview")
-    end
-  end
-
-  def check_cma_case_is_published(slug, fields)
-    published_cma_case = RenderedSpecialistDocument.find_by_slug(slug)
-
-    expect(published_cma_case.title).to eq(fields.fetch(:title))
-    expect(published_cma_case.summary).to eq(fields.fetch(:summary))
-
-    check_metadata_is_rendered(
-      published_cma_case,
-      fields.except(:title, :summary, :body),
-    )
-
-    check_rendered_document_contains_html(published_cma_case)
-    check_rendered_document_contains_header_meta_data(published_cma_case)
-
-    check_published_with_panopticon(slug, fields.fetch(:title))
-    check_added_to_finder_api(slug, fields.fetch(:title))
-    check_added_to_rummager("cma_case", slug, fields.fetch(:title))
-  end
-
-  def check_metadata_is_rendered(published_document, fields)
-    # TODO: RSpec 3 change to eq(hash_including( ... ))
-
-    fields.each do |key, value|
-      expect(published_document.details.fetch(key.to_s)).to eq(value)
     end
   end
 
@@ -79,4 +53,46 @@ module CmaCaseHelpers
 
     docs
   end
+
+  def go_to_cma_case_index
+    visit_path_if_elsewhere(cma_cases_path)
+  end
+
+  def go_to_show_page_for_cma_case(*args)
+    go_to_show_page_for_document(:cma_case, *args)
+  end
+
+  def check_cma_case_exists_with(*args)
+    check_document_exists_with(:cma_case, *args)
+  end
+
+  def go_to_edit_page_for_cma_case(*args)
+    go_to_edit_page_for_document(:cma_case, *args)
+  end
+
+  def update_title_and_republish_cma_case(current_title, args)
+    updated_title = args.fetch(:to)
+
+    go_to_edit_page_for_cma_case(current_title)
+
+    fill_in_fields(
+      title: updated_title,
+    )
+
+    save_document
+    publish_document
+  end
+
+  def withdraw_cma_case(*args)
+    withdraw_document(:cma_case, *args)
+  end
+
+  def edit_cma_case(*args)
+    edit_document(:cma_case, *args)
+  end
+
+  def check_for_new_cma_case_title(*args)
+    check_for_new_document_title(:cma_case, *args)
+  end
+
 end

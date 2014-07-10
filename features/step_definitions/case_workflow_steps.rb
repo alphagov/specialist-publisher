@@ -5,20 +5,20 @@ Then(/^the CMA case should be in draft$/) do
 end
 
 When(/^I publish the CMA case$/) do
-  go_to_show_page_for_document(@document_title)
+  go_to_show_page_for_cma_case(@document_title)
   publish_document
 end
 
 Then(/^the CMA case should be published$/) do
-  check_cma_case_is_published(@slug, @cma_fields)
+  check_document_is_published(@slug, @cma_fields)
 end
 
-When(/^I edit it and republish$/) do
+When(/^I edit the CMA case and republish$/) do
   @amended_document_attributes = {summary: "New summary", title: "My title"}
-  edit_document(@document_title, @amended_document_attributes, publish: true)
+  edit_cma_case(@document_title, @amended_document_attributes, publish: true)
 end
 
-Then(/^the amended CMA case should be published$/) do
+Then(/^the amended document should be published$/) do
   check_for_published_document_with(@amended_document_attributes)
 end
 

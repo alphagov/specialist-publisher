@@ -1,5 +1,5 @@
 When(/^I withdraw a CMA case$/) do
-  withdraw_document(@cma_fields.fetch(:title))
+  withdraw_cma_case(@cma_fields.fetch(:title))
 end
 
 Then(/^the CMA case should be withdrawn$/) do

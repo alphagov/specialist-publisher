@@ -1,15 +1,6 @@
 module DocumentHelpers
-  def create_aaib_report(*args)
-    visit new_aaib_report_path
-    create_document(*args)
-  end
-
-  def create_cma_case(*args)
-    visit new_specialist_document_path
-    create_document(*args)
-  end
-
-  def create_document(fields, save: true, publish: false)
+  def create_document(type, fields, save: true, publish: false)
+    visit send(:"new_#{type}_path")
     fill_in_fields(fields)
 
     if save
@@ -29,86 +20,21 @@ module DocumentHelpers
     click_on "Publish"
   end
 
+  def generate_preview
+    click_button("Preview")
+  end
+
   def check_slug_registered_with_panopticon_with_correct_organisation(slug, organisation_ids = [])
     expect(fake_panopticon).to have_received(:create_artefact!)
       .with(hash_including(slug: slug, organisation_ids: organisation_ids))
-  end
-
-  def check_document_exists_with(attributes)
-    go_to_show_page_for_document(attributes.fetch(:title))
-
-    attributes.except(:body).each do |_, value|
-      expect(page).to have_content(value)
-    end
   end
 
   def check_document_does_not_exist_with(attributes)
     refute SpecialistDocumentEdition.exists?(conditions: attributes)
   end
 
-  def check_aaib_report_exists_with(attributes)
-    go_to_show_page_for_aaib_report(attributes.fetch(:title))
-
-    attributes.except(:body).each do |_, value|
-      expect(page).to have_content(value)
-    end
-  end
-
-  def check_aaib_report_does_not_exist_with(attributes)
-    refute SpecialistDocumentEdition.exists?(conditions: attributes)
-  end
-
-  def go_to_aaib_report_index
-    unless current_path == aaib_reports_path
-      visit(aaib_reports_path)
-    end
-  end
-
-  def go_to_document_index
-    unless current_path == specialist_documents_path
-      visit(specialist_documents_path)
-    end
-  end
-
-  def go_to_show_page_for_aaib_report(aaib_report_title)
-    raise "Cannot find aaib report nil title" if aaib_report_title.nil?
-    go_to_aaib_report_index
-    click_link aaib_report_title
-  end
-
-  def go_to_show_page_for_document(document_title)
-    raise "Cannot find document nil title" if document_title.nil?
-    go_to_document_index
-    click_link document_title
-  end
-
-  def go_to_edit_page_for_document(document_title)
-    go_to_show_page_for_document(document_title)
-
-    click_on "Edit"
-  end
-
-  def go_to_edit_page_for_aaib_report(aaib_report_title)
-    go_to_show_page_for_aaib_report(aaib_report_title)
-
-    click_on "Edit"
-  end
-
-  def update_title_and_republish(current_title, args)
-    updated_title = args.fetch(:to)
-
-    go_to_edit_page_for_document(current_title)
-
-    fill_in_fields(
-      title: updated_title,
-    )
-
-    save_document
-    publish_document
-  end
-
   def check_for_unchanged_slug(title, expected_slug)
-    go_to_show_page_for_document(title)
+    go_to_show_page_for_cma_case(title)
 
     expect(page).to have_link(expected_slug)
   end
@@ -161,11 +87,6 @@ module DocumentHelpers
     end
   end
 
-  def withdraw_document(title)
-    go_to_show_page_for_document(title)
-    click_button "Withdraw"
-  end
-
   def check_document_is_withdrawn(slug, document_title)
     panopticon_id = panopticon_id_for_slug(slug)
 
@@ -186,28 +107,6 @@ module DocumentHelpers
     end
   end
 
-  def edit_aaib_report(title, updated_fields, publish: false)
-    go_to_edit_page_for_aaib_report(title)
-    fill_in_fields(updated_fields)
-
-    save_document
-
-    if publish
-      save_document
-    end
-  end
-
-  def edit_document(title, updated_fields, publish: false)
-    go_to_edit_page_for_document(title)
-    fill_in_fields(updated_fields)
-
-    save_document
-
-    if publish
-      publish_document
-    end
-  end
-
   def check_for_missing_title_error
     page.should have_content("Title can't be blank")
   end
@@ -222,13 +121,78 @@ module DocumentHelpers
     end
   end
 
-  def check_for_new_title(title)
-    visit specialist_documents_path
+  def check_document_is_published(slug, fields)
+    published_document = RenderedSpecialistDocument.find_by_slug(slug)
+
+    expect(published_document.title).to eq(fields.fetch(:title))
+    expect(published_document.summary).to eq(fields.fetch(:summary))
+
+    check_metadata_is_rendered(
+      published_document,
+      fields.except(:title, :summary, :body),
+    )
+
+    check_rendered_document_contains_html(published_document)
+    check_rendered_document_contains_header_meta_data(published_document)
+
+    check_published_with_panopticon(slug, fields.fetch(:title))
+    check_added_to_finder_api(slug, fields.fetch(:title))
+    check_added_to_rummager(published_document.details.fetch("document_type"), slug, fields.fetch(:title))
+  end
+
+  def check_metadata_is_rendered(published_document, fields)
+    # TODO: RSpec 3 change to eq(hash_including( ... ))
+
+    fields.each do |key, value|
+      expect(published_document.details.fetch(key.to_s)).to eq(value)
+    end
+  end
+
+  def check_document_exists_with(type, attributes)
+    send(:"go_to_show_page_for_#{type}", attributes.fetch(:title))
+
+    attributes.except(:body).each do |_, value|
+      expect(page).to have_content(value)
+    end
+  end
+
+  def edit_document(type, title, updated_fields, publish: false)
+    send(:"go_to_edit_page_for_#{type}", title)
+
+    fill_in_fields(updated_fields)
+    save_document
+
+    if publish
+      publish_document
+    end
+  end
+
+  def go_to_show_page_for_document(type, title)
+    raise "Cannot find #{type.to_s.humanize} nil title" if title.nil?
+    send(:"go_to_#{type}_index")
+    click_link title
+  end
+
+  def visit_path_if_elsewhere(path)
+    unless current_path == path
+      visit(path)
+    end
+  end
+
+  def check_for_new_document_title(type, title)
+    visit send(:"#{type.to_s.pluralize}_path")
     page.should have_content(title)
   end
 
-  def check_for_new_aaib_report_title(title)
-    visit aaib_reports_path
-    page.should have_content(title)
+  def go_to_edit_page_for_document(type, title)
+    go_to_show_page_for_document(type, title)
+
+    click_on "Edit"
   end
+
+  def withdraw_document(type, title)
+    send(:"go_to_show_page_for_#{type}", title)
+    click_button "Withdraw"
+  end
+
 end

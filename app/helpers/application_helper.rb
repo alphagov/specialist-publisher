@@ -47,9 +47,9 @@ module ApplicationHelper
 
   def preview_path_for_cma_case(document)
     if document.persisted?
-      preview_specialist_document_path(document)
+      preview_cma_case_path(document)
     else
-      preview_new_specialist_document_path
+      preview_new_cma_case_path
     end
   end
 

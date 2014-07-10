@@ -11,7 +11,7 @@ class AttachmentsController < ApplicationController
   def create
     document, attachment = services.create_document_attachment(self, document_id).call
 
-    redirect_to edit_specialist_document_path(document)
+    redirect_to edit_cma_case_path(document)
   end
 
   def edit
@@ -28,7 +28,7 @@ class AttachmentsController < ApplicationController
     document, attachment = services.update_document_attachment(self, document_id).call
 
     if attachment.persisted?
-      redirect_to(edit_specialist_document_path(document))
+      redirect_to(edit_cma_case_path(document))
     else
       render(:edit, locals: {
         document: document,
@@ -40,6 +40,6 @@ class AttachmentsController < ApplicationController
 protected
 
   def document_id
-    params.fetch("specialist_document_id")
+    params.fetch("cma_case_id")
   end
 end

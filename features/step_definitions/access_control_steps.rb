@@ -12,7 +12,7 @@ Then(/^I do not see an option for editing documents$/) do
 end
 
 When(/^I attempt to visit a document edit URL$/) do
-  visit specialist_documents_path
+  visit cma_cases_path
 end
 
 Then(/^I am redirected back to the index page$/) do

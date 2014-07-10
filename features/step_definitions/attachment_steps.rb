@@ -19,7 +19,7 @@ Then(/^I see the attachment on the page with its example markdown embed code$/) 
 end
 
 When(/^I copy\+paste the embed code into the body of the case$/) do
-  copy_embed_code_for_attachment_and_paste_into_body("My attachment", "#specialist_document_body")
+  copy_embed_code_for_attachment_and_paste_into_body("My attachment", "#cma_case_body")
 end
 
 Then(/^I can see a link to the file with the title in the document preview$/) do

@@ -105,7 +105,7 @@ end
 When(/^I visit the specialist documents path for the manual document$/) do
   link = page.find("a", text: @document_title)
   document_id = URI.parse(link["href"]).path.split("/").last
-  visit specialist_document_path(document_id)
+  visit cma_case_path(document_id)
 end
 
 Then(/^the document is not found$/) do

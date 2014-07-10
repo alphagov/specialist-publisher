@@ -2,7 +2,7 @@ SpecialistPublisher::Application.routes.draw do
   mount JasmineRails::Engine => "/specs" if defined?(JasmineRails::Engine)
   mount GovukAdminTemplate::Engine, at: "/style-guide"
 
-  resources :cma_cases, except: :destroy, path: "cma-cases", as: "specialist_documents" do
+  resources :cma_cases, except: :destroy, path: "cma-cases" do
     resources :attachments, only: [:new, :create, :edit, :update]
     post :withdraw, on: :member
     post :publish, on: :member
@@ -12,7 +12,7 @@ SpecialistPublisher::Application.routes.draw do
   end
 
   # This is for new cma cases
-  post "cma-cases/preview" => "cma_cases#preview", as: "preview_new_specialist_document"
+  post "cma-cases/preview" => "cma_cases#preview", as: "preview_new_cma_case"
 
   # Redirect old specialist-document routes to cma-cases
   get "/specialist-documents", to: redirect("/cma-cases")

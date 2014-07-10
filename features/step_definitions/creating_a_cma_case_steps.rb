@@ -46,11 +46,11 @@ end
 
 When(/^I edit a CMA case$/) do
   @new_title = "Edited Example CMA Case"
-  edit_document(@document_title, title: @new_title)
+  edit_cma_case(@document_title, title: @new_title)
 end
 
 Then(/^the CMA case should have been updated$/) do
-  check_for_new_title(@new_title)
+  check_for_new_cma_case_title(@new_title)
 end
 
 Given(/^two CMA cases exist$/) do
@@ -74,7 +74,7 @@ end
 When(/^I change the title of the CMA case$/) do
   @new_document_title = "Updated CMA case title"
   @new_slug = "cma-cases/updated-cma-case-title"
-  edit_document(@document_title, {title: @new_document_title})
+  edit_cma_case(@document_title, {title: @new_document_title})
 end
 
 Then(/^the updated URL slug is registered$/) do
@@ -82,7 +82,7 @@ Then(/^the updated URL slug is registered$/) do
 end
 
 Then(/^the CMA case has been created$/) do
-  check_document_exists_with(@cma_fields)
+  check_cma_case_exists_with(@cma_fields)
   check_slug_registered_with_panopticon_with_correct_organisation(@slug, ["competition-and-markets-authority"])
 end
 
@@ -99,7 +99,7 @@ Then(/^the CMA case should not have been created$/) do
 end
 
 Then(/^the CMA cases should be in the publisher case index in the correct order$/) do
-  visit specialist_documents_path
+  visit cma_cases_path
 
   check_for_documents(*@documents.map(&:title))
 end
@@ -133,7 +133,7 @@ end
 
 When(/^I change the CMA case title and re-publish$/) do
   @updated_title = "Updated CMA case title"
-  update_title_and_republish(@document_title, to: @updated_title)
+  update_title_and_republish_cma_case(@document_title, to: @updated_title)
 end
 
 Then(/^the title has been updated$/) do
