@@ -18,6 +18,7 @@ document_creator = AaibSummaryNullifier.new(
         .create(attrs)
         .call
       },
+      repository,
     ),
     repository,
   ),

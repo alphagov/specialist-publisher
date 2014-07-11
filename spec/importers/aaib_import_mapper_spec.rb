@@ -5,8 +5,10 @@ require "aaib_import_mapper"
 
 RSpec.describe AaibImportMapper do
   subject(:mapper) {
-    AaibImportMapper.new(document_creator)
+    AaibImportMapper.new(document_creator, repo)
   }
+
+  let(:repo) { double(:repo, store: true) }
 
   let(:document_creator) { double(:document_creator) }
 
@@ -44,7 +46,7 @@ RSpec.describe AaibImportMapper do
 
   let(:transformed_data) {
     {
-      title: "2/1981 Cessna 414, G-BAOZ",
+      title: "2/1981 Cessna 414, G-BAOZ, 23 March 1980",
       summary: "SHOULD BE REMOVED",
       date_of_occurrence: "1980-03-23",
       registration_string: "G-BAOZ",
@@ -61,8 +63,10 @@ RSpec.describe AaibImportMapper do
     }
   }
 
-  it "tranforms the raw data into a domain object" do
-    expect(document_creator).to receive(:call).with(transformed_data)
+  let(:document) { double(:document, valid?: true) }
+
+  it "transforms the raw data into a domain object" do
+    expect(document_creator).to receive(:call).with(transformed_data).and_return(document)
 
     mapper.call(raw_data)
   end

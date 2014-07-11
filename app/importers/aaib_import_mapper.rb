@@ -1,18 +1,42 @@
 class AaibImportMapper
-  def initialize(document_creator)
+  def initialize(document_creator, repo)
     @document_creator = document_creator
+    @repo = repo
   end
 
   def call(raw_data)
-    document_creator.call(
-      massage(raw_data)
-        .slice(*desired_keys)
-        .symbolize_keys
-    )
+    document = document_creator.call(desired_attributes(raw_data))
+    if document.valid?
+      document
+    elsif document.errors.keys == [:slug]
+      destroy_newer_version_or_raise(document)
+    else
+      document
+    end
   end
 
 private
-  attr_reader :document_creator
+  attr_reader :document_creator, :repo
+
+  def destroy_newer_version_or_raise(document)
+    other_document = repo.first_by_slug(document.slug)
+    if document == most_recent(document, other_document)
+      other_document.destroy
+      document
+    else
+      raise DocumentHasNewerVersionError, "#{document.slug}"
+    end
+  end
+
+  def most_recent(doc1, doc2)
+    [doc1, doc2].sort_by { |d| Date.parse(d.date_of_occurrence) }.last
+  end
+
+  def desired_attributes(data)
+    massage(data)
+      .slice(*desired_keys)
+      .symbolize_keys
+  end
 
   def massage(data)
     data.merge({

@@ -59,6 +59,7 @@ RSpec.describe "AAIB import" do
         .create(attrs)
         .call
       },
+      repo,
     )
   }
 

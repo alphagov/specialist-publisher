@@ -33,7 +33,13 @@ class DocumentImportLogger
 
     @output.puts("FAILURE: #{document.slug} #{errors} [took #{duration}s]")
   end
+
+  def skipped(message)
+    @output.puts("SKIPPED: #{message}")
+  end
 end
+
+class DocumentHasNewerVersionError < StandardError; end
 
 class SingleImport
   def initialize(dependencies)
@@ -48,6 +54,8 @@ class SingleImport
     else
       logger.failure(document, duration)
     end
+  rescue DocumentHasNewerVersionError => e
+    logger.skipped(e.message)
   end
 
   private
