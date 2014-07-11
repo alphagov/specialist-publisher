@@ -11,12 +11,12 @@ require "show_manual_document_service"
 class ServiceRegistry
 
   def initialize(dependencies)
-    @cma_case_builder = dependencies.fetch(:cma_case_builder)
     @aaib_report_builder = dependencies.fetch(:aaib_report_builder)
     @cma_case_repository = dependencies.fetch(:cma_case_repository)
     @aaib_report_repository = dependencies.fetch(:aaib_report_repository)
     @document_renderer = dependencies.fetch(:document_renderer)
     @manual_repository_factory = dependencies.fetch(:manual_repository_factory)
+    @manual_document_builder = dependencies.fetch(:manual_document_builder)
 
     @observers = dependencies.fetch(:observers)
   end
@@ -62,8 +62,7 @@ class ServiceRegistry
   def preview_manual_document(context)
     PreviewManualDocumentService.new(
       manual_repository(context),
-      # TODO This doesn't look right!
-      cma_case_builder,
+      manual_document_builder,
       document_renderer,
       context,
     )
@@ -194,10 +193,10 @@ class ServiceRegistry
   attr_reader(
     :aaib_report_builder,
     :aaib_report_repository,
-    :cma_case_builder,
     :document_renderer,
     :cma_case_repository,
     :manual_repository_factory,
+    :manual_document_builder,
     :observers,
   )
 end
