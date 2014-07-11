@@ -6,8 +6,8 @@
     {
       "key": "aircraft_category",
       "name": "Aircraft category",
-      "type": "single-select",
-      "include_blank": false,
+      "type": "multi-select",
+      "include_blank": true,
       "allowed_values": [
         {"label": "Commercial - fixed wing", "value": "commercial-fixed-wing"},
         {"label": "Commercial - rotorcraft", "value": "commercial-rotorcraft"},

@@ -20,7 +20,10 @@
     <div class="preview_button"></div>
     <div class="preview_container" style="display: none;"></div>
 
-    <%= render partial: "aaib_report_form_extra_fields", locals: { f: f } %>
+    <%= f.text_field :date_of_occurrence, placeholder: '2012-04-23' %>
+    <%= f.select :aircraft_category, f.object.facet_options(:aircraft_category), {}, { class: 'select2', multiple: true, data: {placeholder: 'Select an Aircraft category'} } %>
+    <%= f.select :report_type, f.object.facet_options(:report_type) %>
+
 
     <div class="actions">
       <button name="save" class="btn btn-success">Save as draft</button>
