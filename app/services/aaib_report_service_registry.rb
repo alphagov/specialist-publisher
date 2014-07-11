@@ -42,7 +42,7 @@ class AaibReportServiceRegistry
     CreateDocumentService.new(
       aaib_report_builder,
       aaib_report_repository,
-      observers.aaib_report_creation,
+      observers.creation,
       attributes,
     )
   end
@@ -50,7 +50,7 @@ class AaibReportServiceRegistry
   def update(document_id, attributes)
     UpdateDocumentService.new(
       repo: aaib_report_repository,
-      listeners: [],
+      listeners: observers.update,
       document_id: document_id,
       attributes: attributes,
     )
@@ -59,7 +59,7 @@ class AaibReportServiceRegistry
   def publish(document_id)
     PublishDocumentService.new(
       aaib_report_repository,
-      observers.aaib_report_publication,
+      observers.publication,
       document_id,
     )
   end
@@ -67,14 +67,21 @@ class AaibReportServiceRegistry
   def withdraw(document_id)
     WithdrawDocumentService.new(
       aaib_report_repository,
-      observers.aaib_report_withdrawal,
+      observers.withdrawal,
       document_id,
     )
   end
 
 private
   def observers
-    SpecialistPublisherWiring.get(:observers)
+    all_observers = SpecialistPublisherWiring.get(:observers)
+
+    OpenStruct.new(
+      creation: all_observers.aaib_report_creation,
+      update: [],
+      publication: all_observers.aaib_report_publication,
+      withdrawal: all_observers.aaib_report_withdrawal,
+    )
   end
 
   def aaib_report_repository
