@@ -1,4 +1,4 @@
-class ListDocuments
+class ListDocumentsService
 
   def initialize(documents_repository)
     @documents_repository = documents_repository

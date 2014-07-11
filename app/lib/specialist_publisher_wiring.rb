@@ -28,33 +28,27 @@ SpecialistPublisherWiring = DependencyContainer.new do
 
   define_factory(:observers) {
     ObserversRegistry.new(
-      document_content_api_exporter: get(:cma_case_content_api_exporter),
       aaib_report_content_api_exporter: get(:aaib_report_content_api_exporter),
       finder_api_notifier: get(:finder_api_notifier),
-      cma_case_panopticon_registerer: get(:cma_case_panopticon_registerer),
       aaib_report_panopticon_registerer: get(:aaib_report_panopticon_registerer),
       manual_panopticon_registerer: get(:manual_panopticon_registerer),
       manual_document_panopticon_registerer: get(:manual_document_panopticon_registerer),
       manual_content_api_exporter: get(:manual_and_documents_content_api_exporter),
-      cma_case_rummager_indexer: get(:cma_case_rummager_indexer),
       aaib_report_rummager_indexer: get(:aaib_report_rummager_indexer),
+      specialist_document_content_api_withdrawer: get(:specialist_document_content_api_withdrawer),
+      finder_api_withdrawer: get(:finder_api_withdrawer),
+      aaib_report_rummager_deleter: get(:aaib_report_rummager_deleter),
     )
   }
 
   define_factory(:services) {
     ServiceRegistry.new(
-      cma_case_builder: get(:cma_case_builder),
       aaib_report_builder: get(:aaib_report_builder),
-      document_repository: get(:specialist_document_repository),
+      cma_case_repository: get(:cma_case_repository),
       aaib_report_repository: get(:aaib_report_repository),
-      creation_listeners: get(:specialist_document_creation_observers),
-      aaib_report_creation_listeners: get(:aaib_report_creation_observers),
-      withdrawal_listeners: get(:specialist_document_withdrawal_observers),
-      aaib_report_withdrawal_listeners: get(:aaib_report_withdrawal_observers),
       document_renderer: get(:specialist_document_renderer),
-
       manual_repository_factory: get(:manual_repository_factory),
-
+      manual_document_builder: get(:manual_document_builder),
       observers: get(:observers),
     )
   }
@@ -93,7 +87,7 @@ SpecialistPublisherWiring = DependencyContainer.new do
     )
   end
 
-  define_singleton(:specialist_document_repository) do
+  define_singleton(:cma_case_repository) do
     SpecialistDocumentRepository.new(
       specialist_document_editions: SpecialistDocumentEdition.where(document_type: "cma_case"),
       document_factory: get(:validatable_cma_case_factory),
@@ -157,7 +151,7 @@ SpecialistPublisherWiring = DependencyContainer.new do
   define_factory(:validatable_cma_case_factory) {
     ->(*args) {
       SlugUniquenessValidator.new(
-        get(:specialist_document_repository),
+        get(:cma_case_repository),
         CmaCaseForm.new(
           CmaCase.new(
             SpecialistDocument.new(
@@ -209,7 +203,8 @@ SpecialistPublisherWiring = DependencyContainer.new do
 
         ChangeNoteValidator.new(
           SlugUniquenessValidator.new(
-            get(:specialist_document_repository),
+            # TODO This doesn't look right!
+            get(:cma_case_repository),
             SpecialistDocument.new(
               slug_generator,
               get(:edition_factory),
@@ -268,36 +263,6 @@ SpecialistPublisherWiring = DependencyContainer.new do
         next_renderer.call(doc)
       }
     }
-  }
-
-  define_singleton(:specialist_document_creation_observers) {
-    [
-      get(:cma_case_panopticon_registerer),
-    ]
-  }
-
-  define_singleton(:aaib_report_creation_observers) {
-    [
-      get(:aaib_report_panopticon_registerer),
-    ]
-  }
-
-  define_singleton(:specialist_document_withdrawal_observers) {
-    [
-      get(:specialist_document_content_api_withdrawer),
-      get(:finder_api_withdrawer),
-      get(:cma_case_panopticon_registerer),
-      get(:cma_case_rummager_deleter),
-    ]
-  }
-
-  define_singleton(:aaib_report_withdrawal_observers) {
-    [
-      get(:specialist_document_content_api_withdrawer),
-      get(:finder_api_withdrawer),
-      get(:aaib_report_panopticon_registerer),
-      get(:aaib_report_rummager_deleter),
-    ]
   }
 
   define_factory(:panopticon_registerer) {

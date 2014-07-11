@@ -30,7 +30,7 @@ class PreviewManualDocumentService
   end
 
   def ephemeral_document
-    document_builder.call(document_params)
+    document_builder.call(manual, document_params)
   end
 
   def existing_document

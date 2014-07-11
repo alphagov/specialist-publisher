@@ -1,3 +1,5 @@
+require "cma_case_service_registry"
+
 class CmaCasesController < ApplicationController
 
   before_filter :authorize_user
@@ -8,31 +10,31 @@ class CmaCasesController < ApplicationController
   end
 
   def index
-    documents = services.list_documents.call
+    documents = services.list.call
 
     render(:index, locals: { documents: documents })
   end
 
   def show
-    document = services.show_document(document_id).call
+    document = services.show(document_id).call
 
     render(:show, locals: { document: document })
   end
 
   def new
-    document = services.new_document.call
+    document = services.new.call
 
     render(:new, locals: { document: form_object_for(document) })
   end
 
   def edit
-    document = services.show_document(document_id).call
+    document = services.show(document_id).call
 
     render(:edit, locals: { document: form_object_for(document) })
   end
 
   def create
-    document = services.create_document(document_params).call
+    document = services.create(document_params).call
 
     if document.valid?
       redirect_to(cma_case_path(document))
@@ -42,7 +44,7 @@ class CmaCasesController < ApplicationController
   end
 
   def update
-    document = services.update_document(document_id, document_params).call
+    document = services.update(document_id, document_params).call
 
     if document.valid?
       redirect_to(cma_case_path(document))
@@ -52,19 +54,19 @@ class CmaCasesController < ApplicationController
   end
 
   def publish
-    document = services.publish_document(document_id).call
+    document = services.publish(document_id).call
 
     redirect_to(cma_case_path(document), flash: { notice: "Published #{document.title}" })
   end
 
   def withdraw
-    document = services.withdraw_document(document_id).call
+    document = services.withdraw(document_id).call
 
     redirect_to(cma_case_path(document), flash: { notice: "Withdrawn #{document.title}" })
   end
 
   def preview
-    preview_html = services.preview_document(params.fetch("id", nil), document_params).call
+    preview_html = services.preview(params.fetch("id", nil), document_params).call
 
     render json: { preview_html: preview_html }
   end
@@ -87,5 +89,9 @@ protected
 
   def document_params
     params.fetch("cma_case", {})
+  end
+
+  def services
+    @services ||= CmaCaseServiceRegistry.new
   end
 end

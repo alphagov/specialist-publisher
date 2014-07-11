@@ -3,25 +3,16 @@ require "manual_change_note_database_exporter"
 class ObserversRegistry
 
   def initialize(dependencies)
-    @document_content_api_exporter = dependencies.fetch(:document_content_api_exporter)
     @aaib_report_content_api_exporter = dependencies.fetch(:aaib_report_content_api_exporter)
     @finder_api_notifier = dependencies.fetch(:finder_api_notifier)
-    @cma_case_panopticon_registerer = dependencies.fetch(:cma_case_panopticon_registerer)
     @aaib_report_panopticon_registerer = dependencies.fetch(:aaib_report_panopticon_registerer)
     @manual_panopticon_registerer = dependencies.fetch(:manual_panopticon_registerer)
     @manual_document_panopticon_registerer = dependencies.fetch(:manual_document_panopticon_registerer)
     @manual_content_api_exporter = dependencies.fetch(:manual_content_api_exporter)
-    @cma_case_rummager_indexer = dependencies.fetch(:cma_case_rummager_indexer)
     @aaib_report_rummager_indexer = dependencies.fetch(:aaib_report_rummager_indexer)
-  end
-
-  def document_publication
-    [
-      document_content_api_exporter,
-      finder_api_notifier,
-      cma_case_panopticon_registerer,
-      cma_case_rummager_indexer,
-    ]
+    @specialist_document_content_api_withdrawer = dependencies.fetch(:specialist_document_content_api_withdrawer)
+    @finder_api_withdrawer = dependencies.fetch(:finder_api_withdrawer)
+    @aaib_report_rummager_deleter = dependencies.fetch(:aaib_report_rummager_deleter)
   end
 
   def aaib_report_publication
@@ -30,12 +21,6 @@ class ObserversRegistry
       finder_api_notifier,
       aaib_report_panopticon_registerer,
       aaib_report_rummager_indexer,
-    ]
-  end
-
-  def document_update
-    [
-      cma_case_panopticon_registerer,
     ]
   end
 
@@ -60,19 +45,34 @@ class ObserversRegistry
     ]
   end
 
+  def aaib_report_creation
+    [
+      aaib_report_panopticon_registerer,
+    ]
+  end
+
+  def aaib_report_withdrawal
+    [
+      specialist_document_content_api_withdrawer,
+      finder_api_withdrawer,
+      aaib_report_panopticon_registerer,
+      aaib_report_rummager_deleter,
+    ]
+  end
+
   private
 
   attr_reader(
-    :document_content_api_exporter,
     :aaib_report_content_api_exporter,
     :finder_api_notifier,
-    :cma_case_panopticon_registerer,
     :aaib_report_panopticon_registerer,
     :manual_panopticon_registerer,
     :manual_document_panopticon_registerer,
     :manual_content_api_exporter,
-    :cma_case_rummager_indexer,
     :aaib_report_rummager_indexer,
+    :specialist_document_content_api_withdrawer,
+    :finder_api_withdrawer,
+    :aaib_report_rummager_deleter,
   )
 
   def manual_change_note_content_api_exporter

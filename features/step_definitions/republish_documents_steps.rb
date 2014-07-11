@@ -18,7 +18,7 @@ Given(/^their RenderedSpecialistDocument records are missing$/) do
 end
 
 When(/^I republish published documents$/) do
-  mapping = [[specialist_document_repository, observers.document_publication]]
+  mapping = [[cma_case_repository, CmaCaseObserversRegistry.new.publication]]
   DocumentRepublisher.new(mapping).republish!
 end
 

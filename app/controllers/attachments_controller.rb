@@ -1,6 +1,6 @@
 class AttachmentsController < ApplicationController
   def new
-    document, attachment = services.new_document_attachment(document_id).call
+    document, attachment = services.new_cma_case_attachment(document_id).call
 
     render(:new, locals: {
       document: document,
@@ -9,14 +9,14 @@ class AttachmentsController < ApplicationController
   end
 
   def create
-    document, attachment = services.create_document_attachment(self, document_id).call
+    document, attachment = services.create_cma_case_attachment(self, document_id).call
 
     redirect_to edit_cma_case_path(document)
   end
 
   def edit
     # TODO: action not tested
-    document, attachment = services.show_document_attachment(self, document_id).call
+    document, attachment = services.show_cma_case_attachment(self, document_id).call
 
     render(:edit, locals: {
       document: document,
@@ -25,7 +25,7 @@ class AttachmentsController < ApplicationController
   end
 
   def update
-    document, attachment = services.update_document_attachment(self, document_id).call
+    document, attachment = services.update_cma_case_attachment(self, document_id).call
 
     if attachment.persisted?
       redirect_to(edit_cma_case_path(document))

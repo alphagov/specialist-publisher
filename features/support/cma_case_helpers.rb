@@ -1,3 +1,5 @@
+require "cma_case_service_registry"
+
 module CmaCaseHelpers
 
   def create_cma_case(*args)
@@ -11,7 +13,7 @@ module CmaCaseHelpers
 
   def go_to_edit_page_for_most_recent_case
     warn "DEPRECATED: use #go_to_edit_page_for_cma_case and provide title"
-    registry = SpecialistPublisherWiring.get(:specialist_document_repository)
+    registry = SpecialistPublisherWiring.get(:cma_case_repository)
     # TODO: testing antipattern, relies on datastore co-incidence
     document = registry.all.last
 
@@ -31,10 +33,10 @@ module CmaCaseHelpers
   end
 
   def seed_cases(number_of_cases, state: "draft")
-    registry = SpecialistPublisherWiring.get(:services)
+    services = CmaCaseServiceRegistry.new
 
     docs = number_of_cases.times.map do
-      registry.create_document(
+      services.create(
         title: "Specialist Document #{SecureRandom.hex}",
         summary: "summary",
         body: "## Header" + ("\n\nPraesent commodo cursus magna, vel scelerisque nisl consectetur et." * 10),
@@ -48,7 +50,7 @@ module CmaCaseHelpers
     end
 
     if state == "published"
-      docs.each { |doc| registry.publish_document(doc.id).call }
+      docs.each { |doc| services.publish(doc.id).call }
     end
 
     docs
