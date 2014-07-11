@@ -22,12 +22,12 @@
       "type": "single-select",
       "include_blank": false,
       "allowed_values": [
-        {"label": "Annual safety reports", "value": "annual-safety-reports"},
-        {"label": "Correspondence investigations", "value": "correspondence-investigations"},
-        {"label": "Field investigations", "value": "field-investigations"},
-        {"label": "Foreign reports", "value": "foreign-reports"},
-        {"label": "Formal reports", "value": "formal-reports"},
-        {"label": "Special bulletins", "value": "special-bulletins"}
+        {"label": "Annual safety report", "value": "annual-safety-report"},
+        {"label": "Correspondence investigation", "value": "correspondence-investigation"},
+        {"label": "Field investigation", "value": "field-investigation"},
+        {"label": "Foreign report", "value": "foreign-report"},
+        {"label": "Formal report", "value": "formal-report"},
+        {"label": "Special bulletin", "value": "special-bulletin"}
       ]
     }
   ]
