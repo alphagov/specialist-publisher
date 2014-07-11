@@ -5,8 +5,7 @@ class CmaCasesController < ApplicationController
   before_filter :authorize_user
 
   rescue_from("SpecialistDocumentRepository::NotFoundError") do
-    # TODO: Remove use of exceptions for flow control.
-    redirect_to(manuals_path, flash: { error: "Document not found" })
+    redirect_to(cma_cases_path, flash: { error: "Document not found" })
   end
 
   def index
