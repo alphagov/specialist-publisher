@@ -13,7 +13,7 @@ observers = wiring(:observers)
 # manuals. Aaib reports should work (but is untested), manuals is awaiting a
 # sane method of accessing all of them through a repository.
 repository_listeners_map = [
-  [wiring(:cma_cases_repository), observers.cma_case_publication],
+  [wiring(:cma_cases_repository), CmaCaseObserversRegistry.new.publication],
   #[wiring(:aaib_report_repository), observers.aaib_report_publication],
   #[wiring(:manuals_repository), observers.manual_publication],
 ]

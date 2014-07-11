@@ -3,29 +3,16 @@ require "manual_change_note_database_exporter"
 class ObserversRegistry
 
   def initialize(dependencies)
-    @cma_case_content_api_exporter = dependencies.fetch(:cma_case_content_api_exporter)
     @aaib_report_content_api_exporter = dependencies.fetch(:aaib_report_content_api_exporter)
     @finder_api_notifier = dependencies.fetch(:finder_api_notifier)
-    @cma_case_panopticon_registerer = dependencies.fetch(:cma_case_panopticon_registerer)
     @aaib_report_panopticon_registerer = dependencies.fetch(:aaib_report_panopticon_registerer)
     @manual_panopticon_registerer = dependencies.fetch(:manual_panopticon_registerer)
     @manual_document_panopticon_registerer = dependencies.fetch(:manual_document_panopticon_registerer)
     @manual_content_api_exporter = dependencies.fetch(:manual_content_api_exporter)
-    @cma_case_rummager_indexer = dependencies.fetch(:cma_case_rummager_indexer)
     @aaib_report_rummager_indexer = dependencies.fetch(:aaib_report_rummager_indexer)
     @specialist_document_content_api_withdrawer = dependencies.fetch(:specialist_document_content_api_withdrawer)
     @finder_api_withdrawer = dependencies.fetch(:finder_api_withdrawer)
-    @cma_case_rummager_deleter = dependencies.fetch(:cma_case_rummager_deleter)
     @aaib_report_rummager_deleter = dependencies.fetch(:aaib_report_rummager_deleter)
-  end
-
-  def cma_case_publication
-    [
-      cma_case_content_api_exporter,
-      finder_api_notifier,
-      cma_case_panopticon_registerer,
-      cma_case_rummager_indexer,
-    ]
   end
 
   def aaib_report_publication
@@ -34,12 +21,6 @@ class ObserversRegistry
       finder_api_notifier,
       aaib_report_panopticon_registerer,
       aaib_report_rummager_indexer,
-    ]
-  end
-
-  def cma_case_update
-    [
-      cma_case_panopticon_registerer,
     ]
   end
 
@@ -64,24 +45,9 @@ class ObserversRegistry
     ]
   end
 
-  def cma_case_creation
-    [
-      cma_case_panopticon_registerer,
-    ]
-  end
-
   def aaib_report_creation
     [
       aaib_report_panopticon_registerer,
-    ]
-  end
-
-  def cma_case_withdrawal
-    [
-      specialist_document_content_api_withdrawer,
-      finder_api_withdrawer,
-      cma_case_panopticon_registerer,
-      cma_case_rummager_deleter,
     ]
   end
 
@@ -97,19 +63,15 @@ class ObserversRegistry
   private
 
   attr_reader(
-    :cma_case_content_api_exporter,
     :aaib_report_content_api_exporter,
     :finder_api_notifier,
-    :cma_case_panopticon_registerer,
     :aaib_report_panopticon_registerer,
     :manual_panopticon_registerer,
     :manual_document_panopticon_registerer,
     :manual_content_api_exporter,
-    :cma_case_rummager_indexer,
     :aaib_report_rummager_indexer,
     :specialist_document_content_api_withdrawer,
     :finder_api_withdrawer,
-    :cma_case_rummager_deleter,
     :aaib_report_rummager_deleter,
   )
 

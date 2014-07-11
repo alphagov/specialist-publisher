@@ -7,6 +7,7 @@ require "create_document_service"
 require "update_document_service"
 require "publish_document_service"
 require "withdraw_document_service"
+require "cma_case_observers_registry"
 
 class CmaCaseServiceRegistry
   def list
@@ -42,7 +43,7 @@ class CmaCaseServiceRegistry
     CreateDocumentService.new(
       cma_case_builder,
       cma_case_repository,
-      observers.cma_case_creation,
+      observers.creation,
       attributes,
     )
   end
@@ -50,7 +51,7 @@ class CmaCaseServiceRegistry
   def update(document_id, attributes)
     UpdateDocumentService.new(
       repo: cma_case_repository,
-      listeners: observers.cma_case_update,
+      listeners: observers.update,
       document_id: document_id,
       attributes: attributes,
     )
@@ -59,7 +60,7 @@ class CmaCaseServiceRegistry
   def publish(document_id)
     PublishDocumentService.new(
       cma_case_repository,
-      observers.cma_case_publication,
+      observers.publication,
       document_id,
     )
   end
@@ -67,14 +68,14 @@ class CmaCaseServiceRegistry
   def withdraw(document_id)
     WithdrawDocumentService.new(
       cma_case_repository,
-      observers.cma_case_withdrawal,
+      observers.withdrawal,
       document_id,
     )
   end
 
 private
   def observers
-    SpecialistPublisherWiring.get(:observers)
+    @observers ||= CmaCaseObserversRegistry.new
   end
 
   def cma_case_repository
