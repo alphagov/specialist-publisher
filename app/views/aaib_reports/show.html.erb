@@ -24,7 +24,7 @@
     <dl class='metadata-list'>
       <% document.extra_fields.each_pair do |label, value| %>
         <dt><%= label.to_s.humanize %></dt>
-        <dd><%= value %></dd>
+        <dd><%= Array(value).join(" ") %></dd>
       <% end %>
       <dt>Publication state</dt>
       <dd><%= state(document) %></dd>

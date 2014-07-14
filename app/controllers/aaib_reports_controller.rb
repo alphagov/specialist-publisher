@@ -85,6 +85,16 @@ protected
   end
 
   def document_params
-    params.fetch("aaib_report", {})
+    filter_blank_multi_selects(
+      params.fetch("aaib_report", {})
+    ).with_indifferent_access
+  end
+
+  # See http://stackoverflow.com/questions/8929230/why-is-the-first-element-always-blank-in-my-rails-multi-select
+  def filter_blank_multi_selects(values)
+    values.reduce({}) { |filtered_params, (key, value)|
+      filtered_value = value.is_a?(Array) ? value.reject(&:blank?) : value
+      filtered_params.merge(key => filtered_value)
+    }
   end
 end

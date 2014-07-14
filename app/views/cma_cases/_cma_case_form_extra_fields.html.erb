@@ -1,6 +1,0 @@
-<%= f.text_field :opened_date, placeholder: '2012-04-23' %>
-<%= f.text_field :closed_date, placeholder: '2013-10-19' %>
-<%= f.select :case_type, f.object.facet_options(:case_type) %>
-<%= f.select :case_state, f.object.facet_options(:case_state) %>
-<%= f.select :market_sector, f.object.facet_options(:market_sector) %>
-<%= f.select :outcome_type, f.object.facet_options(:outcome_type), include_blank: true %>
