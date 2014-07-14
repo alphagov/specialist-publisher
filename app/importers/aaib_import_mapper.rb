@@ -44,7 +44,18 @@ private
       "title" => title_with_date_if_not_present(data),
       "aircraft_category" => data["aircraft_categories"],
       "report_type" => report_type(data),
+      "body" => body_substitutions(data["body"]),
     })
+  end
+
+  def body_substitutions(body)
+    body.dup.tap do |new_body|
+      {
+        "![PDF icon](http://www.aaib.gov.uk/sites/maib/_shared/ico_pdf.gif)" => "",
+      }.each do |search, replace|
+        new_body.gsub!(search, replace)
+      end
+    end
   end
 
   def title_with_date_if_not_present(data)
