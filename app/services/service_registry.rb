@@ -11,52 +11,12 @@ require "show_manual_document_service"
 class ServiceRegistry
 
   def initialize(dependencies)
-    @aaib_report_builder = dependencies.fetch(:aaib_report_builder)
     @cma_case_repository = dependencies.fetch(:cma_case_repository)
-    @aaib_report_repository = dependencies.fetch(:aaib_report_repository)
     @document_renderer = dependencies.fetch(:document_renderer)
     @manual_repository_factory = dependencies.fetch(:manual_repository_factory)
     @manual_document_builder = dependencies.fetch(:manual_document_builder)
 
     @observers = dependencies.fetch(:observers)
-  end
-
-  def list_aaib_reports
-    ListDocumentsService.new(
-      aaib_report_repository,
-    )
-  end
-
-  def new_aaib_report
-    NewDocumentService.new(
-      aaib_report_builder,
-    )
-  end
-
-  def create_aaib_report(attributes)
-    CreateDocumentService.new(
-      aaib_report_builder,
-      aaib_report_repository,
-      observers.aaib_report_creation,
-      attributes,
-    )
-  end
-
-  def show_aaib_report(document_id)
-    ShowDocumentService.new(
-      aaib_report_repository,
-      document_id,
-    )
-  end
-
-  def preview_aaib_report(document_id, attributes)
-    PreviewDocumentService.new(
-      aaib_report_repository,
-      aaib_report_builder,
-      document_renderer,
-      document_id,
-      attributes,
-    )
   end
 
   def preview_manual_document(context)
@@ -65,31 +25,6 @@ class ServiceRegistry
       manual_document_builder,
       document_renderer,
       context,
-    )
-  end
-
-  def publish_aaib_report(document_id)
-    PublishDocumentService.new(
-      aaib_report_repository,
-      observers.aaib_report_publication,
-      document_id,
-    )
-  end
-
-  def update_aaib_report(document_id, attributes)
-    UpdateDocumentService.new(
-      repo: aaib_report_repository,
-      listeners: [],
-      document_id: document_id,
-      attributes: attributes,
-    )
-  end
-
-  def withdraw_aaib_report(document_id)
-    WithdrawDocumentService.new(
-      aaib_report_repository,
-      observers.aaib_report_withdrawal,
-      document_id,
     )
   end
 
@@ -191,8 +126,6 @@ class ServiceRegistry
   end
 
   attr_reader(
-    :aaib_report_builder,
-    :aaib_report_repository,
     :document_renderer,
     :cma_case_repository,
     :manual_repository_factory,
