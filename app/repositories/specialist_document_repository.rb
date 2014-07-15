@@ -18,10 +18,8 @@ class SpecialistDocumentRepository
 
   def all
     all_document_ids
+      .lazy
       .map { |id| self[id] }
-      .reject(&:nil?)
-      .sort_by(&:updated_at)
-      .reverse
   end
 
   def [](id)
