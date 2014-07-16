@@ -8,13 +8,13 @@ class AbstractDocumentsController < ApplicationController
   def index
     documents = services.list.call
 
-    render(:index, locals: { documents: documents })
+    render(:index, locals: { documents: documents.map { |d| form_object_for(d) } })
   end
 
   def show
     document = services.show(document_id).call
 
-    render(:show, locals: { document: document })
+    render(:show, locals: { document: form_object_for(document) })
   end
 
   def new
@@ -35,7 +35,7 @@ class AbstractDocumentsController < ApplicationController
     if document.valid?
       redirect_to(show_path(document))
     else
-      render(:new, locals: { document: document })
+      render(:new, locals: { document: form_object_for(document) })
     end
   end
 

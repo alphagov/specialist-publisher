@@ -5,12 +5,16 @@ class ManualDocumentBuilder
   end
 
   def call(manual, attrs)
-    @factory_factory
+    document = @factory_factory
       .call(manual)
       .call(
         @id_generator.call,
         [],
-      ).update(attrs.reverse_merge(defaults))
+      )
+
+    document.update(attrs.reverse_merge(defaults))
+
+    document
   end
 
 private

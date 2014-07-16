@@ -22,7 +22,6 @@ end
 
 When(/^I create a CMA case without one of the required fields$/) do
   @cma_fields = {
-    summary: "Nullam quis risus eget urna mollis ornare vel eu leo.",
     body: "## Header" + ("\n\nPraesent commodo cursus magna, vel scelerisque nisl consectetur et." * 10),
     opened_date: "Bad data"
   }
@@ -86,8 +85,9 @@ Then(/^the CMA case has been created$/) do
   check_slug_registered_with_panopticon_with_correct_organisation(@slug, ["competition-and-markets-authority"])
 end
 
-Then(/^I should see an error message about a missing field$/) do
+Then(/^I should see error messages about missing fields$/) do
   check_for_missing_title_error
+  check_for_missing_summary_error
 end
 
 Then(/^I should see an error message about an invalid date field "(.*)"$/) do |field|

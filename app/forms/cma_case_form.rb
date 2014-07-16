@@ -1,7 +1,4 @@
-require "validators/date_validator"
-
 class CmaCaseForm < DocumentForm
-
   attributes = [
     :title,
     :summary,
@@ -13,12 +10,6 @@ class CmaCaseForm < DocumentForm
     :case_state,
     :outcome_type,
   ]
-
-  validates :opened_date, presence: true, date: true
-  validates :market_sector, presence: true
-  validates :case_type, presence: true
-  validates :case_state, presence: true
-  validates :closed_date, allow_blank: true, date: true
 
   attributes.each do |attribute_name|
     define_method(attribute_name) do

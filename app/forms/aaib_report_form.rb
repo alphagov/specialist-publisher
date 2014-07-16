@@ -1,5 +1,3 @@
-require "validators/date_validator"
-
 class AaibReportForm < DocumentForm
   attributes = [
     :title,
@@ -9,8 +7,6 @@ class AaibReportForm < DocumentForm
     :aircraft_category,
     :report_type,
   ]
-
-  validates :date_of_occurrence, presence: true, date: true
 
   def self.model_name
     ActiveModel::Name.new(self, nil, "AaibReport")

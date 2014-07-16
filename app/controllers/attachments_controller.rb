@@ -3,7 +3,7 @@ class AttachmentsController < ApplicationController
     document, attachment = services.new_cma_case_attachment(document_id).call
 
     render(:new, locals: {
-      document: document,
+      document: form_object_for(document),
       attachment: attachment,
     })
   end
@@ -19,7 +19,7 @@ class AttachmentsController < ApplicationController
     document, attachment = services.show_cma_case_attachment(self, document_id).call
 
     render(:edit, locals: {
-      document: document,
+      document: form_object_for(document),
       attachment: attachment,
     })
   end
@@ -31,13 +31,16 @@ class AttachmentsController < ApplicationController
       redirect_to(edit_cma_case_path(document))
     else
       render(:edit, locals: {
-        document: document,
+        document: form_object_for(document),
         attachment: attachment,
       })
     end
   end
 
 protected
+  def form_object_for(document)
+    CmaCaseForm.new(document)
+  end
 
   def document_id
     params.fetch("cma_case_id")

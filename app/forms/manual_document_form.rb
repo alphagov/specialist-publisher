@@ -1,33 +1,13 @@
 require "forwardable"
 
-class ManualDocumentForm
-  extend Forwardable
+class ManualDocumentForm < SimpleDelegator
   extend ActiveModel::Naming
   include ActiveModel::Conversion
-
-  document_attributes = [
-    :id,
-    :title,
-    :summary,
-    :body,
-    :minor_update,
-  ]
-
-  document_methods = [
-    :exposed_edition,
-    :add_attachment,
-    :attachments,
-    :find_attachment_by_id,
-    :errors,
-    :valid?,
-  ]
-
-  def_delegators(:document, *(document_methods + document_attributes))
 
   def initialize(manual, document)
     @manual = manual
     @document = document
-    @errors = {}
+    super(document)
   end
 
   def persisted?
@@ -39,7 +19,7 @@ class ManualDocumentForm
   end
 
   def change_note
-    document.draft? ?  document.change_note : ""
+    document.draft? ? document.change_note : ""
   end
 
   def to_param

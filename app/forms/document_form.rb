@@ -1,15 +1,9 @@
 require "forwardable"
 
 class DocumentForm < SimpleDelegator
-
   extend Forwardable
   extend ActiveModel::Naming
   include ActiveModel::Conversion
-  include ActiveModel::Validations
-
-  validates :title, presence: true
-  validates :summary, presence: true
-  validates :body, presence: true
 
   def initialize(document)
     @document = document

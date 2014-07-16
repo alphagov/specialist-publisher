@@ -150,7 +150,7 @@ SpecialistPublisherWiring = DependencyContainer.new do
     ->(*args) {
       SlugUniquenessValidator.new(
         get(:cma_case_repository),
-        CmaCaseForm.new(
+        CmaCaseValidator.new(
           CmaCase.new(
             SpecialistDocument.new(
               SlugGenerator.new(prefix: "cma-cases"),
@@ -174,7 +174,7 @@ SpecialistPublisherWiring = DependencyContainer.new do
     ->(*args) {
       SlugUniquenessValidator.new(
         get(:aaib_report_repository),
-        AaibReportForm.new(
+        AaibReportValidator.new(
           AaibReport.new(
             SpecialistDocument.new(
               SlugGenerator.new(prefix: "aaib-reports"),
@@ -203,11 +203,13 @@ SpecialistPublisherWiring = DependencyContainer.new do
           SlugUniquenessValidator.new(
             # TODO This doesn't look right!
             get(:cma_case_repository),
-            SpecialistDocument.new(
-              slug_generator,
-              get(:edition_factory),
-              id,
-              editions,
+            CoreDocumentValidator.new(
+              SpecialistDocument.new(
+                slug_generator,
+                get(:edition_factory),
+                id,
+                editions,
+              ),
             )
           )
         )
