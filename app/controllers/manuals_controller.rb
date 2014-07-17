@@ -60,7 +60,7 @@ class ManualsController < ApplicationController
 
 private
   def manual_form(manual)
-    ManualForm.new(manual)
+    ManualViewAdapter.new(manual)
   end
 
   def services

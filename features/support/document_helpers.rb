@@ -111,6 +111,10 @@ module DocumentHelpers
     page.should have_content("Title can't be blank")
   end
 
+  def check_for_missing_summary_error
+    page.should have_content("Summary can't be blank")
+  end
+
   def check_for_invalid_date_error(date_field)
     page.should have_content("#{date_field} should be formatted YYYY-MM-DD")
   end

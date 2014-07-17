@@ -18,9 +18,6 @@ class SpecialistDocumentEdition
 
   validates :document_id, presence: true
   validates :document_type, presence: true
-  validates :title, presence: true
-  validates :summary, presence: true
-  validates :body, presence: true
   validates :slug, presence: true
 
   embeds_many :attachments, cascade_callbacks: true

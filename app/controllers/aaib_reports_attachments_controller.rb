@@ -3,7 +3,7 @@ class AaibReportsAttachmentsController < ApplicationController
     document, attachment = aaib_report_attachment_services.new_aaib_report_attachment(document_id).call
 
     render("attachments/new", locals: {
-      document: document,
+      document: view_adapter(document),
       attachment: attachment,
     })
   end
@@ -19,7 +19,7 @@ class AaibReportsAttachmentsController < ApplicationController
     document, attachment = aaib_report_attachment_services.show_aaib_report_attachment(self, document_id).call
 
     render("attachments/edit", locals: {
-      document: document,
+      document: view_adapter(document),
       attachment: attachment,
     })
   end
@@ -31,13 +31,17 @@ class AaibReportsAttachmentsController < ApplicationController
       redirect_to(edit_aaib_report_path(document))
     else
       render("attachments/edit", locals: {
-        document: document,
+        document: view_adapter(document),
         attachment: attachment,
       })
     end
   end
 
 protected
+
+  def view_adapter(document)
+    AaibReportViewAdapter.new(document)
+  end
 
   def document_id
     params.fetch("aaib_report_id")

@@ -78,7 +78,7 @@ class SpecialistDocument
       editions.push(@latest_edition)
     end
 
-    self
+    nil
   end
 
   def valid?

@@ -283,8 +283,8 @@ describe SpecialistDocument do
         expect(doc.version_number).to eq(new_edition.version_number)
       end
 
-      it "returns self" do
-        expect(doc.update(params)).to eq(doc)
+      it "returns nil" do
+        expect(doc.update(params)).to eq(nil)
       end
 
       context "when providing a title" do
@@ -340,8 +340,8 @@ describe SpecialistDocument do
         expect(doc.version_number).to eq(new_edition.version_number)
       end
 
-      it "returns self" do
-        expect(doc.update(params)).to eq(doc)
+      it "returns nil" do
+        expect(doc.update(params)).to eq(nil)
       end
 
       context "when providing a title" do

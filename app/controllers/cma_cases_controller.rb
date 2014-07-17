@@ -6,8 +6,8 @@ private
     params.fetch("cma_case", {})
   end
 
-  def form_object_for(document)
-    CmaCaseForm.new(document)
+  def view_adapter(document)
+    CmaCaseViewAdapter.new(document)
   end
 
   def authorize_user

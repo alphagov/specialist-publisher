@@ -12,8 +12,8 @@ Feature: Creating and editing a CMA case
 
   Scenario: Cannot create a CMA case without entering required fields
     When I create a CMA case without one of the required fields
-    Then I should see an error message about a missing field
-    Then I should see an error message about an invalid date field "Opened date"
+    Then I should see error messages about missing fields
+    And I should see an error message about an invalid date field "Opened date"
     And the CMA case should not have been created
 
   Scenario: Cannot create a CMA case with a duplicate slug

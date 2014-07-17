@@ -283,3 +283,7 @@ When(/^I add another section to the manual$/) do
 
   create_manual_document(@manual_title, @document_fields)
 end
+
+Then(/^I see no visible change note in the edit form$/) do
+  check_change_note_value(@manual_title, @document_title, "")
+end

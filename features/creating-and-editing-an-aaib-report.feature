@@ -12,7 +12,7 @@ Feature: Creating and editing an AAIB Report
 
   Scenario: Cannot create a AAIB report without entering required fields
     When I create a AAIB report without one of the required fields
-    Then I should see an error message about a missing field
+    Then I should see error messages about missing fields
     Then I should see an error message about an invalid date field "Date of occurrence"
     And the AAIB report should not have been created
 

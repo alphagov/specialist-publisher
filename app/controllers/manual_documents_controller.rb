@@ -12,8 +12,8 @@ class ManualDocumentsController < ApplicationController
     manual, document = services.new_manual_document(self).call
 
     render(:new, locals: {
-      manual: ManualForm.new(manual),
-      document: ManualDocumentForm.new(manual, document)
+      manual: ManualViewAdapter.new(manual),
+      document: ManualDocumentViewAdapter.new(manual, document)
     })
   end
 
@@ -25,8 +25,8 @@ class ManualDocumentsController < ApplicationController
     else
       # TODO: this branch is untested
       render(:new, locals: {
-        manual: ManualForm.new(manual),
-        document: ManualDocumentForm.new(manual, document),
+        manual: ManualViewAdapter.new(manual),
+        document: ManualDocumentViewAdapter.new(manual, document),
       })
     end
   end
@@ -35,8 +35,8 @@ class ManualDocumentsController < ApplicationController
     manual, document = services.show_manual_document(self).call
 
     render(:edit, locals: {
-      manual: ManualForm.new(manual),
-      document: ManualDocumentForm.new(manual, document),
+      manual: ManualViewAdapter.new(manual),
+      document: ManualDocumentViewAdapter.new(manual, document),
     })
   end
 
@@ -47,8 +47,8 @@ class ManualDocumentsController < ApplicationController
       redirect_to(manual_path(manual))
     else
       render(:edit, locals: {
-        manual: ManualForm.new(manual),
-        document: ManualDocumentForm.new(manual, document),
+        manual: ManualViewAdapter.new(manual),
+        document: ManualDocumentViewAdapter.new(manual, document),
       })
     end
   end

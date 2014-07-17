@@ -199,4 +199,13 @@ module ManualHelpers
 
     expect(change_history.updates.first.fetch("change_note")).to eq("New section added.")
   end
+
+  def check_change_note_value(manual_title, document_title, expected_value)
+    go_to_manual_page(manual_title)
+    click_on document_title
+    click_on "Edit section"
+
+    change_note_field_value = page.find("textarea[name='document[change_note]']").text
+    expect(change_note_field_value).to eq(expected_value)
+  end
 end
