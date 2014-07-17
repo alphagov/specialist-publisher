@@ -1,9 +1,12 @@
 require "fast_spec_helper"
-require "aaib_attachment_import_mapper"
+require "aaib_import/attachment_mapper"
 
-RSpec.describe AaibAttachmentImportMapper do
+RSpec.describe AaibImport::AttachmentMapper do
   subject(:mapper) do
-    AaibAttachmentImportMapper.new(aaib_import_mapper, repo, "spec/fixtures")
+    AaibImport::AttachmentMapper.new(aaib_import_mapper,
+      repo,
+      "spec/fixtures/import",
+    )
   end
 
   let(:raw_body) {
@@ -14,7 +17,7 @@ RSpec.describe AaibAttachmentImportMapper do
   let(:expected_body) { "Lorem ipsum dolor sit amet #{govspeak_attachment_string}" }
   let(:attachment) { double(:attachment, snippet: govspeak_attachment_string) }
 
-  let(:document) { double(:document, attributes: {}, body: raw_body, add_basic_attachment: attachment) }
+  let(:document) { double(:document, valid?: true, attributes: {}, body: raw_body, add_attachment: attachment) }
   let(:aaib_import_mapper) { double(:aaib_import_mapper, call: document) }
   let(:repo) { double(:repository, store: true) }
 
@@ -45,7 +48,7 @@ RSpec.describe AaibAttachmentImportMapper do
   end
 
   it "attaches assets" do
-    expect(document).to receive(:add_basic_attachment).with({
+    expect(document).to receive(:add_attachment).with({
       title: attachment_filename,
       filename: attachment_filename,
       file: instance_of(File),

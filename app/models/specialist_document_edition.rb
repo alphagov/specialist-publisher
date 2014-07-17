@@ -44,8 +44,4 @@ class SpecialistDocumentEdition
       filename: attributes.fetch(:file).original_filename
     ))
   end
-
-  def build_basic_attachment(attributes)
-    attachments.build(attributes)
-  end
 end

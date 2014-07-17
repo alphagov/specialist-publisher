@@ -1,11 +1,11 @@
 require "fast_spec_helper"
 require "json"
 
-require "aaib_import_mapper"
+require "aaib_import/mapper"
 
-RSpec.describe AaibImportMapper do
+RSpec.describe AaibImport::Mapper do
   subject(:mapper) {
-    AaibImportMapper.new(document_creator, repo)
+    AaibImport::Mapper.new(document_creator, repo)
   }
 
   let(:repo) { double(:repo, store: true) }
@@ -47,7 +47,6 @@ RSpec.describe AaibImportMapper do
   let(:transformed_data) {
     {
       title: "2/1981 Cessna 414, G-BAOZ, 23 March 1980",
-      summary: "SHOULD BE REMOVED",
       date_of_occurrence: "1980-03-23",
       registration_string: "G-BAOZ",
       registrations: [
