@@ -9,7 +9,7 @@ class DocumentMetadataDecorator < SimpleDelegator
 
     data = attrs
       .except(*extra_field_names)
-      .merge(extra_fields: extra_attrs)
+      .merge(extra_fields: document.extra_fields.merge(extra_attrs))
 
     document.update(data)
   end
