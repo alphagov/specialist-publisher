@@ -1,6 +1,6 @@
 require "delegate"
 
-class CoreDocumentValidator < SimpleDelegator
+class ManualDocumentValidator < SimpleDelegator
   include ActiveModel::Validations
 
   validates :summary, presence: true

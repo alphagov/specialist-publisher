@@ -203,7 +203,7 @@ SpecialistPublisherWiring = DependencyContainer.new do
           SlugUniquenessValidator.new(
             # TODO This doesn't look right!
             get(:cma_case_repository),
-            CoreDocumentValidator.new(
+            ManualDocumentValidator.new(
               SpecialistDocument.new(
                 slug_generator,
                 get(:edition_factory),
