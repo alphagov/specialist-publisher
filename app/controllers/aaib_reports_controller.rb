@@ -6,8 +6,8 @@ private
     params.fetch("aaib_report", {})
   end
 
-  def form_object_for(document)
-    AaibReportForm.new(document)
+  def view_adapter(document)
+    AaibReportViewAdapter.new(document)
   end
 
   def authorize_user

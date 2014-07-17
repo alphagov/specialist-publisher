@@ -8,25 +8,25 @@ class AbstractDocumentsController < ApplicationController
   def index
     documents = services.list.call
 
-    render(:index, locals: { documents: documents.map { |d| form_object_for(d) } })
+    render(:index, locals: { documents: documents.map { |d| view_adapter(d) } })
   end
 
   def show
     document = services.show(document_id).call
 
-    render(:show, locals: { document: form_object_for(document) })
+    render(:show, locals: { document: view_adapter(document) })
   end
 
   def new
     document = services.new.call
 
-    render(:new, locals: { document: form_object_for(document) })
+    render(:new, locals: { document: view_adapter(document) })
   end
 
   def edit
     document = services.show(document_id).call
 
-    render(:edit, locals: { document: form_object_for(document) })
+    render(:edit, locals: { document: view_adapter(document) })
   end
 
   def create
@@ -35,7 +35,7 @@ class AbstractDocumentsController < ApplicationController
     if document.valid?
       redirect_to(show_path(document))
     else
-      render(:new, locals: { document: form_object_for(document) })
+      render(:new, locals: { document: view_adapter(document) })
     end
   end
 
@@ -82,7 +82,7 @@ private
     raise NotImplementedError
   end
 
-  def form_object_for(document)
+  def view_adapter(document)
     raise NotImplementedError
   end
 

@@ -1,4 +1,4 @@
-class AaibReportForm < DocumentForm
+class AaibReportViewAdapter < DocumentViewAdapter
   attributes = [
     :title,
     :summary,

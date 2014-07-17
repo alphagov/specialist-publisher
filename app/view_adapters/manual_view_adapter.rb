@@ -1,4 +1,4 @@
-class ManualForm
+class ManualViewAdapter
   extend ActiveModel::Naming
   include ActiveModel::Conversion
   include ActiveModel::Validations

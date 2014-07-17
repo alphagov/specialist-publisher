@@ -1,4 +1,4 @@
-class CmaCaseForm < DocumentForm
+class CmaCaseViewAdapter < DocumentViewAdapter
   attributes = [
     :title,
     :summary,

@@ -1,6 +1,6 @@
 require "forwardable"
 
-class DocumentForm < SimpleDelegator
+class DocumentViewAdapter < SimpleDelegator
   extend Forwardable
   extend ActiveModel::Naming
   include ActiveModel::Conversion

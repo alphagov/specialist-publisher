@@ -3,8 +3,8 @@ class ManualDocumentsAttachmentsController < ApplicationController
     manual, document, attachment = services.new_manual_document_attachment(self).call
 
     render(:new, locals: {
-      manual: ManualForm.new(manual),
-      document: ManualDocumentForm.new(manual, document),
+      manual: ManualViewAdapter.new(manual),
+      document: ManualDocumentViewAdapter.new(manual, document),
       attachment: attachment,
     })
   end
@@ -20,8 +20,8 @@ class ManualDocumentsAttachmentsController < ApplicationController
     manual, document, attachment = services.show_manual_document_attachment(self).call
 
     render(:edit, locals: {
-      manual: ManualForm.new(manual),
-      document: ManualDocumentForm.new(manual, document),
+      manual: ManualViewAdapter.new(manual),
+      document: ManualDocumentViewAdapter.new(manual, document),
       attachment: attachment,
     })
   end
@@ -33,8 +33,8 @@ class ManualDocumentsAttachmentsController < ApplicationController
       redirect_to(edit_manual_document_path(manual, document))
     else
       render(:edit, locals: {
-        manual: ManualForm.new(manual),
-        document: ManualDocumentForm.new(manual, document),
+        manual: ManualViewAdapter.new(manual),
+        document: ManualDocumentViewAdapter.new(manual, document),
         attachment: attachment,
       })
     end
