@@ -28,7 +28,7 @@ RSpec.describe AaibImport::Mapper do
       "aircraft_categories" => [
         "Commercial Air Transport - Fixed Wing"
       ],
-      "report_type" => "bulletin",
+      "report_type" => "special bulletin",
       "location" => "Near Leeds Bradford Airport",
       "aircraft_types" => "Cessna 414",
       "assets" => [
@@ -55,7 +55,7 @@ RSpec.describe AaibImport::Mapper do
       aircraft_category: [
         "Commercial Air Transport - Fixed Wing"
       ],
-      report_type: "bulletin",
+      report_type: "special-bulletin",
       location: "Near Leeds Bradford Airport",
       aircraft_types: "Cessna 414",
       body: "## Report No: 2/1981. Report on the accident to Cessna 414, G-BAOZ near Leeds\nBradford Airport, 23 March 1980\n\n**Date of occurrence: **23 March 1980\n\n**Location: **   \nNear Leeds Bradford Airport\n\n[ Click here to read full details of this incident](http://www.aaib.gov.uk/pub\nlications/formal_reports/2_1981_g_baoz.cfm)\n\n  \n2/1981 Cessna 414, G-BAOZ\n\n  \nG-BAOZ\n\n  \nCessna 414\n\n  \nNear Leeds Bradford Airport\n\n  \n23 March 1980\n\n  \nCommercial Air Transport - Fixed Wing\n\n  \n [2-1981\nG-BAOZ.pdf](http://www.aaib.gov.uk/cms_resources/2-1981%20G-BAOZ.pdf)\n(2,357.43 kb)\n\n"

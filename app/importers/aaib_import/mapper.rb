@@ -84,25 +84,29 @@ module AaibImport
 
     def report_type(data)
       case data["report_type"]
-      when "bulletin" then "bulletin"
-      when "special bulletin" then "special-bulletin"
+      when "" then "field-investigation"
+      when "correspondence investigation" then "correspondence-investigation"
+      when "field investigation" then "field-investigation"
       when "formal report" then "formal-report"
+      when "overseas occurrence" then "field-investigation"
+      when "special bulletin" then "special-bulletin"
+      when "uncategorised" then "pre-1997-uncategorised-monthly-report"
       else raise "Unknown report type: #{data["report_type"]}"
       end
     end
 
     def desired_keys
       %w(
-        title
-        summary
-        registration_string
-        date_of_occurrence
-        registrations
         aircraft_category
-        report_type
-        location
         aircraft_types
         body
+        date_of_occurrence
+        location
+        registration_string
+        registrations
+        report_type
+        summary
+        title
       )
     end
   end
