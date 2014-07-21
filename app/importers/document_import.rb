@@ -24,22 +24,30 @@ module DocumentImport
       @output = output
     end
 
-    def success(document, duration)
-      @output.puts("SUCCESS: Created #{document.slug} [took #{duration}s]")
+    def success(document, data)
+      @output.puts("SUCCESS: Created #{document.slug} #{format_data(data)}")
     end
 
     # Failure.. Unless it's only failing on summary, in which case it's a..
     # SUCCESS
-    def failure(document, duration)
-      return success(document, duration) if document.errors.keys == [:summary]
+    def failure(document, data)
       errors = document.errors.to_h
-      errors.delete(:summary)
 
-      @output.puts("FAILURE: #{document.slug} #{errors} [took #{duration}s]")
+      @output.puts("FAILURE: #{document.slug} #{errors} #{format_data(data)}")
     end
 
-    def skipped(message)
-      @output.puts("SKIPPED: #{message}")
+    def error(message, data)
+      @output.puts("ERROR: #{message} #{format_data(data)}")
+    end
+
+    def skipped(message, data)
+      @output.puts("SKIPPED: #{message} #{format_data(data)}")
+    end
+
+  private
+
+    def format_data(data)
+      data.map { |kv| kv.join(": ") }.join(", ")
     end
   end
 
@@ -48,30 +56,38 @@ module DocumentImport
       @document_creator = dependencies.fetch(:document_creator)
       @logger = dependencies.fetch(:logger)
       @data = dependencies.fetch(:data)
+      @duration = "unknown"
     end
 
     def call
+      import_with_benchmark
+
       if document.valid?
-        logger.success(document, duration)
+        logger.success(document, logger_metadata)
       else
-        logger.failure(document, duration)
+        logger.failure(document, logger_metadata)
       end
     rescue HasNewerVersionError => e
-      logger.skipped(e.message)
+      logger.skipped(e.message, logger_metadata)
+    rescue RuntimeError => e
+      logger.error(e.message, logger_metadata)
     end
 
     private
 
     attr_reader :document_creator, :logger, :data, :duration
 
+    def logger_metadata
+      {duration: duration, source: data["import_source"]}
+    end
+
     def document
-      return @document if @document
+      @document ||= document_creator.call(data)
+    end
 
-      @duration = Benchmark.realtime do
-        @document = document_creator.call(data)
-      end
-
-      @document
+    def import_with_benchmark
+      seconds = Benchmark.realtime { document }
+      @duration = (seconds * 1000).round.to_s + "ms"
     end
   end
 end

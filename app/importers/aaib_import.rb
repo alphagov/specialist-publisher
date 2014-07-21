@@ -43,7 +43,9 @@ module AaibImport
 
     def data_loader
       ->(file) {
-        JSON.parse(File.read(file))
+        JSON.parse(File.read(file)).merge ({
+          "import_source" => File.basename(file),
+        })
       }
     end
 
