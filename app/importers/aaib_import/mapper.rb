@@ -52,6 +52,7 @@ module AaibImport
       body.dup.tap do |new_body|
         {
           "![PDF icon](http://www.aaib.gov.uk/sites/maib/_shared/ico_pdf.gif)" => "",
+          /^ +/ => "",
         }.each do |search, replace|
           new_body.gsub!(search, replace)
         end
