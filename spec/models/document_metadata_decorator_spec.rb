@@ -4,7 +4,7 @@ require "document_metadata_decorator"
 RSpec.describe DocumentMetadataDecorator do
 
   subject(:document_with_metadata) {
-    extra_attributes_keys = extra_attributes.keys
+    extra_attributes_keys = valid_extra_attributes
 
     Class.new(DocumentMetadataDecorator) {
       set_extra_field_names(extra_attributes_keys)
@@ -14,8 +14,12 @@ RSpec.describe DocumentMetadataDecorator do
   let(:document) {
     double(
       :document,
-      attributes: document_attributes,
-      update: nil,
+      document_attributes.merge(
+        # document attributes are available via reader methods and
+        # as part of the attributes hash
+        attributes: document_attributes,
+        update: nil,
+      )
     )
   }
 
@@ -42,6 +46,13 @@ RSpec.describe DocumentMetadataDecorator do
     }
   }
 
+  let(:valid_extra_attributes) {
+    [
+      :extra_foo,
+      :extra_bar,
+    ]
+  }
+
   let(:extra_foo) { double(:extra_foo) }
 
   it "is a true decorator" do
@@ -54,6 +65,21 @@ RSpec.describe DocumentMetadataDecorator do
       document_with_metadata.update(attributes_with_extras)
 
       expect(document).to have_received(:update).with(document_attributes)
+    end
+
+    context "when partially updated" do
+      let(:extra_bar) { double(:extra_bar) }
+
+      it "keeps fields that are not overwritten" do
+        document_with_metadata.update(extra_bar: extra_bar)
+
+        expect(document).to have_received(:update).with(
+          extra_fields: {
+            extra_foo: extra_foo,
+            extra_bar: extra_bar,
+          }
+        )
+      end
     end
   end
 
