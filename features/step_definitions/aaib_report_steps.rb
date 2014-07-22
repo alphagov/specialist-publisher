@@ -70,6 +70,14 @@ When(/^I edit a AAIB report$/) do
   edit_aaib_report(@document_title, title: @new_title)
 end
 
+When(/^I edit an AAIB report and remove required fields$/) do
+  edit_aaib_report(@document_title, summary: "")
+end
+
+Then(/^the AAIB report should not have been updated$/) do
+  expect(page).to have_content("Summary can't be blank")
+end
+
 Then(/^the AAIB report should have been updated$/) do
   check_for_new_aaib_report_title(@new_title)
 end
