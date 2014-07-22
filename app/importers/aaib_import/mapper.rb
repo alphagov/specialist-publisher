@@ -91,7 +91,7 @@ module AaibImport
       when "formal report" then "formal-report"
       when "overseas occurrence" then "field-investigation"
       when "special bulletin" then "special-bulletin"
-      when "uncategorised" then "pre-1997-uncategorised-monthly-report"
+      when "uncategorised" then "pre-1997-monthly-report"
       else raise "Unknown report type: #{data["report_type"]}"
       end
     end
