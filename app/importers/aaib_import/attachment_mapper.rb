@@ -48,10 +48,14 @@ module AaibImport
       }
 
       {
-        title: asset.fetch("title"),
+        title: clean_title(asset.fetch("title")),
         filename: asset.fetch("original_filename"),
         file: file,
       }
+    end
+
+    def clean_title(string)
+      string.gsub("_", "-")
     end
 
     def replace_link_with_snippet(document, asset, attachment)

@@ -12,8 +12,9 @@ RSpec.describe AaibImport::AttachmentMapper do
   let(:raw_body) {
     "Lorem ipsum dolor sit amet [ASSET_TAG](#ASSET0)"
   }
-  let(:attachment_filename) { "2-1981 G-BAOZ.pdf" }
+  let(:attachment_filename) { "2_1981 G_BAOZ.pdf" }
   let(:govspeak_attachment_string) { "[InlineAttachment: #{attachment_filename}]" }
+  let(:expected_title) { "2-1981 G-BAOZ.pdf" }
   let(:expected_body) { "Lorem ipsum dolor sit amet #{govspeak_attachment_string}" }
   let(:attachment) { double(:attachment, snippet: govspeak_attachment_string) }
 
@@ -49,7 +50,7 @@ RSpec.describe AaibImport::AttachmentMapper do
 
   it "attaches assets" do
     expect(document).to receive(:add_attachment).with({
-      title: attachment_filename,
+      title: expected_title,
       filename: attachment_filename,
       file: instance_of(File),
     }).and_return(attachment)
