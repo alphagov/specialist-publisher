@@ -13,6 +13,10 @@ class Attachment
 
   validates_with SafeHtml
 
+  def to_param
+    id
+  end
+
   def snippet
     "[InlineAttachment:#{filename}]"
   end
