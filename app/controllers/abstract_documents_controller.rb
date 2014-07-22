@@ -45,7 +45,7 @@ class AbstractDocumentsController < ApplicationController
     if document.valid?
       redirect_to(show_path(document))
     else
-      render(:edit, locals: { document: document })
+      render(:edit, locals: { document: view_adapter(document) })
     end
   end
 

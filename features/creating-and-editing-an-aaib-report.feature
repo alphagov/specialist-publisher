@@ -16,6 +16,11 @@ Feature: Creating and editing an AAIB Report
     Then I should see an error message about an invalid date field "Date of occurrence"
     And the AAIB report should not have been created
 
+  Scenario: Cannot edit an AAIB report without entering required fields
+    Given a draft AAIB report exists
+    When I edit an AAIB report and remove required fields
+    Then the AAIB report should not have been updated
+
   Scenario: Can view a list of all AAIB reports in the publisher
     Given two AAIB reports exist
     Then the AAIB reports should be in the publisher report index in the correct order
