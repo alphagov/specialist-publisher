@@ -53,7 +53,7 @@ RSpec.describe AaibImport::Mapper do
         "G-BAOZ"
       ],
       aircraft_category: [
-        "Commercial Air Transport - Fixed Wing"
+        "commercial-fixed-wing"
       ],
       report_type: "special-bulletin",
       location: "Near Leeds Bradford Airport",

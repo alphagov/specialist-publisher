@@ -42,7 +42,7 @@ module AaibImport
     def massage(data)
       data.merge({
         "title" => title_with_date_if_not_present(data),
-        "aircraft_category" => data["aircraft_categories"],
+        "aircraft_category" => aircraft_categories(data["aircraft_categories"]),
         "report_type" => report_type(data),
         "body" => body_substitutions(data["body"]),
       })
@@ -92,6 +92,21 @@ module AaibImport
       when "special bulletin" then "special-bulletin"
       when "uncategorised" then "pre-1997-uncategorised-monthly-report"
       else raise "Unknown report type: #{data["report_type"]}"
+      end
+    end
+
+    def aircraft_categories(categories)
+      categories.map { |c| aircraft_category(c) }
+    end
+
+    def aircraft_category(category)
+      case category
+      when "Commercial Air Transport - Fixed Wing" then "commercial-fixed-wing"
+      when "Commercial Air Transport - Rotorcraft" then "commercial-rotorcraft"
+      when "General Aviation - Fixed Wing" then "general-aviation-fixed-wing"
+      when "General Aviation - Rotorcraft" then "general-aviation-rotorcraft"
+      when "Sport Aviation/Balloons" then "sport-aviation-and-balloons"
+      else raise "Unknown aircraft category: #{category}"
       end
     end
 

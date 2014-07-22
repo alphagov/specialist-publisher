@@ -28,7 +28,7 @@ RSpec.describe "AAIB import" do
       registration_string: "G-BAOZ",
       date_of_occurrence: "1980-03-23",
       registrations: ["G-BAOZ"],
-      aircraft_category: ["Commercial Air Transport - Fixed Wing"],
+      aircraft_category: ["commercial-fixed-wing"],
       report_type: "formal-report",
       location: "Near Leeds Bradford Airport",
       aircraft_types: "Cessna 414",
