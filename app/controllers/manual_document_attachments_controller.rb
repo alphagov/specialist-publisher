@@ -1,4 +1,4 @@
-class ManualDocumentsAttachmentsController < ApplicationController
+class ManualDocumentAttachmentsController < ApplicationController
   def new
     manual, document, attachment = services.new_manual_document_attachment(self).call
 
