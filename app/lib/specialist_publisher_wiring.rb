@@ -21,6 +21,7 @@ require "specialist_document_header_extractor"
 require "specialist_document_repository"
 require "validators/aaib_report_validator"
 require "validators/change_note_validator"
+require "validators/manual_document_validator"
 require "validators/slug_uniqueness_validator"
 
 $LOAD_PATH.unshift(File.expand_path("../..", "app/services"))
