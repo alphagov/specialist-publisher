@@ -69,4 +69,16 @@ RSpec.describe AaibImport::Mapper do
 
     mapper.call(raw_data)
   end
+
+  context "when the date_of_occurrence is nil" do
+    before do
+      raw_data.merge!("date_of_occurrence" => nil)
+    end
+
+    it "raises a RuntimeError" do
+      expect {
+        mapper.call(raw_data)
+      }.to raise_error(RuntimeError)
+    end
+  end
 end

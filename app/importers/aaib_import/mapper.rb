@@ -71,6 +71,8 @@ module AaibImport
       else
         "#{title}, #{occurrence.strftime("%-d %B %Y")}"
       end
+    rescue TypeError => e
+      raise "Date cannot be nil"
     end
 
     def fuzzy_date_match(date1, date2)
