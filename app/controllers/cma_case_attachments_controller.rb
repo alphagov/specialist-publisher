@@ -1,4 +1,4 @@
-class CmaCaseAttachmentsController < ApplicationController
+class CmaCaseAttachmentsController < AbstractAttachmentsController
   def new
     document, attachment = services.new_cma_case_attachment(document_id).call
 
