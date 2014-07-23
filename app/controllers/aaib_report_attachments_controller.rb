@@ -1,4 +1,4 @@
-class AaibReportsAttachmentsController < ApplicationController
+class AaibReportAttachmentsController < ApplicationController
   def new
     document, attachment = aaib_report_attachment_services.new_aaib_report_attachment(document_id).call
 
