@@ -4,7 +4,7 @@ class CmaCaseAttachmentServiceRegistry
     @cma_case_repository = dependencies.fetch(:cma_case_repository)
   end
 
-  def new_cma_case_attachment(document_id)
+  def new_attachment(document_id)
     NewDocumentAttachmentService.new(
       cma_case_repository,
       Attachment.method(:new),
@@ -12,7 +12,7 @@ class CmaCaseAttachmentServiceRegistry
     )
   end
 
-  def create_cma_case_attachment(context, document_id)
+  def create_attachment(context, document_id)
     CreateDocumentAttachmentService.new(
       cma_case_repository,
       context,
@@ -20,7 +20,7 @@ class CmaCaseAttachmentServiceRegistry
     )
   end
 
-  def update_cma_case_attachment(context, document_id)
+  def update_attachment(context, document_id)
     UpdateDocumentAttachmentService.new(
       cma_case_repository,
       context,
@@ -28,7 +28,7 @@ class CmaCaseAttachmentServiceRegistry
     )
   end
 
-  def show_cma_case_attachment(context, document_id)
+  def show_attachment(context, document_id)
     ShowDocumentAttachmentService.new(
       cma_case_repository,
       context,

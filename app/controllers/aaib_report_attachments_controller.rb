@@ -1,6 +1,6 @@
 class AaibReportAttachmentsController < AbstractAttachmentsController
   def new
-    document, attachment = attachment_services.new_aaib_report_attachment(document_id).call
+    document, attachment = attachment_services.new_attachment(document_id).call
 
     render("attachments/new", locals: {
       document: view_adapter(document),
@@ -9,14 +9,14 @@ class AaibReportAttachmentsController < AbstractAttachmentsController
   end
 
   def create
-    document, attachment = attachment_services.create_aaib_report_attachment(self, document_id).call
+    document, attachment = attachment_services.create_attachment(self, document_id).call
 
     redirect_to edit_aaib_report_path(document)
   end
 
   def edit
     # TODO: action not tested
-    document, attachment = attachment_services.show_aaib_report_attachment(self, document_id).call
+    document, attachment = attachment_services.show_attachment(self, document_id).call
 
     render("attachments/edit", locals: {
       document: view_adapter(document),
@@ -25,7 +25,7 @@ class AaibReportAttachmentsController < AbstractAttachmentsController
   end
 
   def update
-    document, attachment = attachment_services.update_aaib_report_attachment(self, document_id).call
+    document, attachment = attachment_services.update_attachment(self, document_id).call
 
     if attachment.persisted?
       redirect_to(edit_aaib_report_path(document))

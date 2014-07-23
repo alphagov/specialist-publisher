@@ -4,7 +4,7 @@ class AaibReportAttachmentServiceRegistry
     @aaib_report_repository = dependencies.fetch(:aaib_report_repository)
   end
 
-  def new_aaib_report_attachment(document_id)
+  def new_attachment(document_id)
     NewDocumentAttachmentService.new(
       aaib_report_repository,
       Attachment.method(:new),
@@ -12,7 +12,7 @@ class AaibReportAttachmentServiceRegistry
     )
   end
 
-  def create_aaib_report_attachment(context, document_id)
+  def create_attachment(context, document_id)
     CreateDocumentAttachmentService.new(
       aaib_report_repository,
       context,
@@ -20,7 +20,7 @@ class AaibReportAttachmentServiceRegistry
     )
   end
 
-  def update_aaib_report_attachment(context, document_id)
+  def update_attachment(context, document_id)
     UpdateDocumentAttachmentService.new(
       aaib_report_repository,
       context,
@@ -28,7 +28,7 @@ class AaibReportAttachmentServiceRegistry
     )
   end
 
-  def show_aaib_report_attachment(context, document_id)
+  def show_attachment(context, document_id)
     ShowDocumentAttachmentService.new(
       aaib_report_repository,
       context,
