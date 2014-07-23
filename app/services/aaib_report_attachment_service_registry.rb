@@ -1,4 +1,4 @@
-class AaibReportAttachmentServiceRegistery
+class AaibReportAttachmentServiceRegistry
 
   def initialize(dependencies)
     @aaib_report_repository = dependencies.fetch(:aaib_report_repository)

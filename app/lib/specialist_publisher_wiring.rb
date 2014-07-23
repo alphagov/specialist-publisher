@@ -54,7 +54,7 @@ SpecialistPublisherWiring = DependencyContainer.new do
   }
 
   define_factory(:aaib_report_attachment_services) {
-    AaibReportAttachmentServiceRegistery.new(
+    AaibReportAttachmentServiceRegistry.new(
       aaib_report_repository: get(:aaib_report_repository),
     )
   }
