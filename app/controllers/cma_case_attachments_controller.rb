@@ -1,6 +1,6 @@
 class CmaCaseAttachmentsController < AbstractAttachmentsController
   def new
-    document, attachment = services.new_cma_case_attachment(document_id).call
+    document, attachment = attachment_services.new_cma_case_attachment(document_id).call
 
     render("attachments/new", locals: {
       document: view_adapter(document),
@@ -9,14 +9,14 @@ class CmaCaseAttachmentsController < AbstractAttachmentsController
   end
 
   def create
-    document, attachment = services.create_cma_case_attachment(self, document_id).call
+    document, attachment = attachment_services.create_cma_case_attachment(self, document_id).call
 
     redirect_to edit_cma_case_path(document)
   end
 
   def edit
     # TODO: action not tested
-    document, attachment = services.show_cma_case_attachment(self, document_id).call
+    document, attachment = attachment_services.show_cma_case_attachment(self, document_id).call
 
     render("attachments/edit", locals: {
       document: view_adapter(document),
@@ -25,7 +25,7 @@ class CmaCaseAttachmentsController < AbstractAttachmentsController
   end
 
   def update
-    document, attachment = services.update_cma_case_attachment(self, document_id).call
+    document, attachment = attachment_services.update_cma_case_attachment(self, document_id).call
 
     if attachment.persisted?
       redirect_to(edit_cma_case_path(document))
@@ -44,5 +44,9 @@ protected
 
   def document_id
     params.fetch("cma_case_id")
+  end
+
+  def attachment_services
+    SpecialistPublisherWiring.get(:cma_case_attachment_services)
   end
 end
