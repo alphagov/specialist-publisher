@@ -3,7 +3,7 @@ SpecialistPublisher::Application.routes.draw do
   mount GovukAdminTemplate::Engine, at: "/style-guide"
 
   resources :cma_cases, except: :destroy, path: "cma-cases" do
-    resources :attachments, only: [:new, :create, :edit, :update]
+    resources :attachments, controller: :cma_case_attachments, only: [:new, :create, :edit, :update]
     post :withdraw, on: :member
     post :publish, on: :member
 

@@ -1,8 +1,8 @@
-class AttachmentsController < ApplicationController
+class CmaCaseAttachmentsController < ApplicationController
   def new
     document, attachment = services.new_cma_case_attachment(document_id).call
 
-    render(:new, locals: {
+    render("attachments/new", locals: {
       document: view_adapter(document),
       attachment: attachment,
     })
@@ -18,7 +18,7 @@ class AttachmentsController < ApplicationController
     # TODO: action not tested
     document, attachment = services.show_cma_case_attachment(self, document_id).call
 
-    render(:edit, locals: {
+    render("attachments/edit", locals: {
       document: view_adapter(document),
       attachment: attachment,
     })
@@ -30,7 +30,7 @@ class AttachmentsController < ApplicationController
     if attachment.persisted?
       redirect_to(edit_cma_case_path(document))
     else
-      render(:edit, locals: {
+      render("attachments/edit", locals: {
         document: view_adapter(document),
         attachment: attachment,
       })
