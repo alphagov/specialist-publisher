@@ -21,10 +21,6 @@ class ApplicationController < ActionController::Base
     SpecialistPublisherWiring.get(:services)
   end
 
-  def aaib_report_attachment_services
-    SpecialistPublisherWiring.get(:aaib_report_attachment_services)
-  end
-
   def user_can_edit_cma_cases?
     current_user_can_edit?("cma_case")
   end

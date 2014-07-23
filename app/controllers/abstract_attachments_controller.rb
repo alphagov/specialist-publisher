@@ -9,4 +9,8 @@ protected
     raise NotImplementedError
   end
 
+  def attachment_services
+    raise NotImplementedError
+  end
+
 end
