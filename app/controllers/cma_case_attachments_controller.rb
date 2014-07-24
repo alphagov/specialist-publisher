@@ -1,6 +1,6 @@
 class CmaCaseAttachmentsController < AbstractAttachmentsController
 
-protected
+private
   def view_adapter(document)
     CmaCaseViewAdapter.new(document)
   end

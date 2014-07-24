@@ -1,6 +1,6 @@
 class AaibReportAttachmentsController < AbstractAttachmentsController
 
-protected
+private
   def view_adapter(document)
     AaibReportViewAdapter.new(document)
   end

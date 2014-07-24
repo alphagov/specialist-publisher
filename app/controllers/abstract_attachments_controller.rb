@@ -38,7 +38,7 @@ class AbstractAttachmentsController < ApplicationController
     end
   end
 
-protected
+private
   def view_adapter(document)
     raise NotImplementedError
   end
