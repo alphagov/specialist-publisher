@@ -1,12 +1,7 @@
 class CmaCaseAttachmentServiceRegistry
-
-  def initialize(dependencies)
-    @cma_case_repository = dependencies.fetch(:cma_case_repository)
-  end
-
   def new_attachment(document_id)
     NewDocumentAttachmentService.new(
-      cma_case_repository,
+      repository,
       Attachment.method(:new),
       document_id,
     )
@@ -14,7 +9,7 @@ class CmaCaseAttachmentServiceRegistry
 
   def create_attachment(context, document_id)
     CreateDocumentAttachmentService.new(
-      cma_case_repository,
+      repository,
       context,
       document_id,
     )
@@ -22,7 +17,7 @@ class CmaCaseAttachmentServiceRegistry
 
   def update_attachment(context, document_id)
     UpdateDocumentAttachmentService.new(
-      cma_case_repository,
+      repository,
       context,
       document_id,
     )
@@ -30,15 +25,14 @@ class CmaCaseAttachmentServiceRegistry
 
   def show_attachment(context, document_id)
     ShowDocumentAttachmentService.new(
-      cma_case_repository,
+      repository,
       context,
       document_id,
     )
   end
 
 private
-
-  attr_reader(
-    :cma_case_repository
-  )
+  def repository
+    SpecialistPublisherWiring.get(:cma_case_repository)
+  end
 end

@@ -10,7 +10,7 @@ private
   end
 
   def services
-    SpecialistPublisherWiring.get(:cma_case_attachment_services)
+    CmaCaseAttachmentServiceRegistry.new
   end
 
   def edit_path(document)

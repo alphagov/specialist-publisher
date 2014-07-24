@@ -10,7 +10,7 @@ private
   end
 
   def services
-    SpecialistPublisherWiring.get(:aaib_report_attachment_services)
+    AaibReportAttachmentServiceRegistry.new
   end
 
   def edit_path(document)

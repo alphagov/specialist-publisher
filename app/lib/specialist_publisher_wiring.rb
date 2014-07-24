@@ -53,18 +53,6 @@ SpecialistPublisherWiring = DependencyContainer.new do
     )
   }
 
-  define_factory(:aaib_report_attachment_services) {
-    AaibReportAttachmentServiceRegistry.new(
-      aaib_report_repository: get(:aaib_report_repository),
-    )
-  }
-
-  define_factory(:cma_case_attachment_services) {
-    CmaCaseAttachmentServiceRegistry.new(
-      cma_case_repository: get(:cma_case_repository),
-    )
-  }
-
   define_factory(:manual_builder) {
     ->(attrs) {
       slug_generator = SlugGenerator.new(prefix: "guidance")
