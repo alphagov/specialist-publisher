@@ -9,6 +9,10 @@ FactoryGirl.define do
     organisation_slug "air-accidents-investigation-branch"
   end
 
+  factory :dfid_editor, parent: :user do
+    organisation_slug "department-for-international-development"
+  end
+
   factory :generic_editor, parent: :user do
     organisation_slug "ministry-of-tea"
   end

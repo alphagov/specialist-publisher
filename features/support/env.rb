@@ -86,6 +86,7 @@ require "panopticon_helpers"
 require "form_helpers"
 require "cma_case_helpers"
 require "aaib_report_helpers"
+require "idf_helpers"
 require "document_helpers"
 require "manual_helpers"
 require "attachment_helpers"
@@ -98,6 +99,7 @@ World(PanopticonHelpers)
 World(FormHelpers)
 World(AaibReportHelpers)
 World(CmaCaseHelpers)
+World(IdfHelpers)
 World(DocumentHelpers)
 World(ManualHelpers)
 World(AttachmentHelpers)
