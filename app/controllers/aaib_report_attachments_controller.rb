@@ -9,7 +9,7 @@ private
     params.fetch("aaib_report_id")
   end
 
-  def attachment_services
+  def services
     SpecialistPublisherWiring.get(:aaib_report_attachment_services)
   end
 

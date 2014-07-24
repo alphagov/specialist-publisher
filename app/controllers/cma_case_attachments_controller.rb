@@ -9,7 +9,7 @@ private
     params.fetch("cma_case_id")
   end
 
-  def attachment_services
+  def services
     SpecialistPublisherWiring.get(:cma_case_attachment_services)
   end
 
