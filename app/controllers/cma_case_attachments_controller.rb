@@ -13,7 +13,7 @@ private
     SpecialistPublisherWiring.get(:cma_case_attachment_services)
   end
 
-  def redirect_path(document)
+  def edit_path(document)
     edit_cma_case_path(document)
   end
 end

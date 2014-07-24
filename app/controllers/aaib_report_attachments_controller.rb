@@ -13,7 +13,7 @@ private
     SpecialistPublisherWiring.get(:aaib_report_attachment_services)
   end
 
-  def redirect_path(document)
+  def edit_path(document)
     edit_aaib_report_path(document)
   end
 end

@@ -12,7 +12,7 @@ class AbstractAttachmentsController < ApplicationController
   def create
     document, attachment = services.create_attachment(self, document_id).call
 
-    redirect_to(redirect_path(document))
+    redirect_to(edit_path(document))
   end
 
   def edit
@@ -29,7 +29,7 @@ class AbstractAttachmentsController < ApplicationController
     document, attachment = services.update_attachment(self, document_id).call
 
     if attachment.persisted?
-      redirect_to(redirect_path(document))
+      redirect_to(edit_path(document))
     else
       render("attachments/edit", locals: {
         document: view_adapter(document),
@@ -51,7 +51,7 @@ private
     raise NotImplementedError
   end
 
-  def redirect_path(document)
-    root_path
+  def edit_path(document)
+    raise NotImplementedError
   end
 end
