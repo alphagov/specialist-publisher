@@ -1,5 +1,5 @@
 class AbstractAttachmentServiceRegistry
-  def new_attachment(document_id)
+  def new(document_id)
     NewDocumentAttachmentService.new(
       repository,
       Attachment.method(:new),
@@ -7,7 +7,7 @@ class AbstractAttachmentServiceRegistry
     )
   end
 
-  def create_attachment(context, document_id)
+  def create(context, document_id)
     CreateDocumentAttachmentService.new(
       repository,
       context,
@@ -15,7 +15,7 @@ class AbstractAttachmentServiceRegistry
     )
   end
 
-  def update_attachment(context, document_id)
+  def update(context, document_id)
     UpdateDocumentAttachmentService.new(
       repository,
       context,
@@ -23,7 +23,7 @@ class AbstractAttachmentServiceRegistry
     )
   end
 
-  def show_attachment(context, document_id)
+  def show(context, document_id)
     ShowDocumentAttachmentService.new(
       repository,
       context,
