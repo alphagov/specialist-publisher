@@ -6,6 +6,9 @@ class AaibReportViewAdapter < DocumentViewAdapter
     :date_of_occurrence,
     :aircraft_category,
     :report_type,
+    :aircraft_type,
+    :registration,
+    :location,
   ]
 
   def self.model_name
