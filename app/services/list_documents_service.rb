@@ -5,7 +5,7 @@ class ListDocumentsService
   end
 
   def call
-    documents_repository.all
+    documents_repository
   end
 
   private

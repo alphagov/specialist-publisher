@@ -16,9 +16,11 @@ class SpecialistDocumentRepository
     @document_factory = dependencies.fetch(:document_factory)
   end
 
-  def all
-    all_document_ids
-      .lazy
+  def all(limit = -1, offset = 0)
+    lower_bound = offset
+    upper_bound = limit < 0 ? limit : offset + limit - 1
+
+    all_document_ids[lower_bound..upper_bound]
       .map { |id| self[id] }
   end
 
@@ -56,6 +58,10 @@ class SpecialistDocumentRepository
     self
   end
 
+  def count
+    specialist_document_editions.count
+  end
+
 private
   attr_reader(
     :specialist_document_editions,
@@ -64,6 +70,11 @@ private
 
   # TODO Add a method on SpecialistDocumentEdition to handle this
   def all_document_ids
-    specialist_document_editions.all.distinct(:document_id)
+    specialist_document_editions
+      .all
+      .only(:document_id, :updated_at)
+      .sort { |a, b| b.updated_at <=> a.updated_at }
+      .map(&:document_id)
+      .uniq
   end
 end

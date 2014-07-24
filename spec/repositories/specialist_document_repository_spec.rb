@@ -87,7 +87,9 @@ describe SpecialistDocumentRepository do
     end
 
     it "returns all documents by date updated desc" do
-      specialist_document_repository.all.map(&:title).should == [@edition_2, @edition_1].map(&:title)
+      expect(
+        specialist_document_repository.all.map(&:title).to_a
+      ).to eq([@edition_2, @edition_1].map(&:title))
     end
   end
 

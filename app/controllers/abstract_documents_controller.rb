@@ -6,9 +6,11 @@ class AbstractDocumentsController < ApplicationController
   end
 
   def index
-    documents = Kaminari.paginate_array(services.list.call).page(params[:page])
+    documents = services.list.call.map { |d| view_adapter(d) }
 
-    render(:index, locals: { documents: documents.map { |d| view_adapter(d) } })
+    paginated_docs = Kaminari.paginate_array(documents).page(params[:page])
+
+    render(:index, locals: { documents: paginated_docs })
   end
 
   def show
