@@ -4,19 +4,17 @@ module DocumentImport
   class BulkImporter
     def initialize(dependencies)
       @import_job_builder = dependencies.fetch(:import_job_builder)
-      @data_loader = dependencies.fetch(:data_loader)
-      @data_collection = dependencies.fetch(:data_collection)
+      @data_enum = dependencies.fetch(:data_enum)
     end
 
     def call
-      data_collection.to_enum.lazy
-        .map { |data| data_loader.call(data) }
+      data_enum.lazy
         .map { |data| import_job_builder.call(data) }
         .each(&:call)
     end
 
   private
-    attr_reader :import_job_builder, :data_loader, :data_collection
+    attr_reader :import_job_builder, :data_enum
   end
 
   class Logger

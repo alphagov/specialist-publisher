@@ -20,8 +20,7 @@ module AaibImport
     def get_instance
       DocumentImport::BulkImporter.new(
         import_job_builder: import_job_builder,
-        data_loader: data_loader,
-        data_collection: data_files,
+        data_enum: data_enum,
       )
     end
 
@@ -37,16 +36,18 @@ module AaibImport
       }
     end
 
+    def data_enum
+      data_files.lazy.map(&method(:parse_json_file))
+    end
+
     def data_files
       Dir.glob(File.join(@data_files_dir, "*.json"))
     end
 
-    def data_loader
-      ->(file) {
-        JSON.parse(File.read(file)).merge ({
-          "import_source" => File.basename(file),
-        })
-      }
+    def parse_json_file(filename)
+      JSON.parse(File.read(filename)).merge ({
+        "import_source" => File.basename(filename),
+      })
     end
 
     def document_creator
