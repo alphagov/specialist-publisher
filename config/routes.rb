@@ -3,7 +3,7 @@ SpecialistPublisher::Application.routes.draw do
   mount GovukAdminTemplate::Engine, at: "/style-guide"
 
   resources :cma_cases, except: :destroy, path: "cma-cases" do
-    resources :attachments, only: [:new, :create, :edit, :update]
+    resources :attachments, controller: :cma_case_attachments, only: [:new, :create, :edit, :update]
     post :withdraw, on: :member
     post :publish, on: :member
 
@@ -19,7 +19,7 @@ SpecialistPublisher::Application.routes.draw do
   get "/specialist-documents/(*path)", to: redirect { |params, _| "/cma-cases/#{params[:path]}" }
 
   resources :aaib_reports, except: :destroy, path: "aaib-reports" do
-    resources :attachments, controller: "AaibReportsAttachments", only: [:new, :create, :edit, :update]
+    resources :attachments, controller: :aaib_report_attachments, only: [:new, :create, :edit, :update]
     post :withdraw, on: :member
     post :publish, on: :member
 
@@ -32,7 +32,7 @@ SpecialistPublisher::Application.routes.draw do
 
   resources :manuals, except: :destroy do
     resources :documents, except: :destroy, path: "sections", controller: "ManualDocuments" do
-      resources :attachments, controller: "ManualDocumentsAttachments", only: [:new, :create, :edit, :update]
+      resources :attachments, controller: :manual_document_attachments, only: [:new, :create, :edit, :update]
 
       # This is for persisted manual documents
       post :preview, on: :member

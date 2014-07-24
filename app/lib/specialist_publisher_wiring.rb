@@ -46,17 +46,10 @@ SpecialistPublisherWiring = DependencyContainer.new do
 
   define_factory(:services) {
     ServiceRegistry.new(
-      cma_case_repository: get(:cma_case_repository),
       document_renderer: get(:specialist_document_renderer),
       manual_repository_factory: get(:manual_repository_factory),
       manual_document_builder: get(:manual_document_builder),
       observers: get(:observers),
-    )
-  }
-
-  define_factory(:aaib_report_attachment_services) {
-    AaibReportAttachmentServiceRegistery.new(
-      aaib_report_repository: get(:aaib_report_repository),
     )
   }
 
