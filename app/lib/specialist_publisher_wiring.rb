@@ -331,6 +331,14 @@ SpecialistPublisherWiring = DependencyContainer.new do
     }
   }
 
+  define_factory(:international_development_fund_panopticon_registerer) {
+    ->(document) {
+      get(:panopticon_registerer).call(
+        InternationalDevelopmentFundArtefactFormatter.new(document)
+      )
+    }
+  }
+
   define_factory(:manual_document_panopticon_registerer) {
     ->(document, manual) {
       get(:panopticon_registerer).call(
@@ -395,6 +403,26 @@ SpecialistPublisherWiring = DependencyContainer.new do
     }
   }
 
+  define_factory(:international_development_fund_rummager_indexer) {
+    ->(document) {
+      RummagerIndexer.new.add(
+        InternationalDevelopmentFundIndexableFormatter.new(
+          SpecialistDocumentAttachmentProcessor.new(document)
+        )
+      )
+    }
+  }
+
+  define_factory(:international_development_fund_rummager_deleter) {
+    ->(document) {
+      RummagerIndexer.new.delete(
+        InternationalDevelopmentFundIndexableFormatter.new(
+          SpecialistDocumentAttachmentProcessor.new(document)
+        )
+      )
+    }
+  }
+
   define_factory(:specialist_document_content_api_withdrawer) {
     ->(document) {
       RenderedSpecialistDocument.where(slug: document.slug).map(&:destroy)
@@ -424,6 +452,17 @@ SpecialistPublisherWiring = DependencyContainer.new do
         RenderedSpecialistDocument,
         get(:specialist_document_renderer),
         get(:cma_case_finder_schema),
+        doc,
+      ).call
+    }
+  }
+
+  define_instance(:international_development_fund_content_api_exporter) {
+    ->(doc) {
+      SpecialistDocumentDatabaseExporter.new(
+        RenderedSpecialistDocument,
+        get(:specialist_document_renderer),
+        get(:international_development_fund_finder_schema),
         doc,
       ).call
     }
