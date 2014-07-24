@@ -1,6 +1,7 @@
 require "aaib_report_indexable_formatter"
 require "builders/aaib_report_builder"
 require "builders/cma_case_builder"
+require "builders/international_development_fund_builder"
 require "builders/manual_document_builder"
 require "cma_case_indexable_formatter"
 require "dependency_container"
@@ -22,6 +23,7 @@ require "specialist_document_repository"
 require "validators/aaib_report_validator"
 require "validators/cma_case_validator"
 require "validators/change_note_validator"
+require "validators/international_development_fund_validator"
 require "validators/manual_document_validator"
 require "validators/slug_uniqueness_validator"
 require "marshallers/document_association_marshaller"
@@ -91,6 +93,13 @@ SpecialistPublisherWiring = DependencyContainer.new do
     SpecialistDocumentRepository.new(
       specialist_document_editions: SpecialistDocumentEdition.where(document_type: "cma_case"),
       document_factory: get(:validatable_cma_case_factory),
+    )
+  end
+
+  define_singleton(:international_development_fund_repository) do
+    SpecialistDocumentRepository.new(
+      specialist_document_editions: SpecialistDocumentEdition.where(document_type: "international_development_fund"),
+      document_factory: get(:validatable_international_development_fund_factory),
     )
   end
 
@@ -190,6 +199,30 @@ SpecialistPublisherWiring = DependencyContainer.new do
           SlugGenerator.new(prefix: "aaib-reports"),
           get(:edition_factory),
           *args,
+        )
+      )
+    }
+  }
+
+  define_factory(:international_development_fund_builder) {
+    InternationalDevelopmentFundBuilder.new(
+      get(:validatable_international_development_fund_factory),
+      IdGenerator,
+    )
+  }
+
+  define_factory(:validatable_international_development_fund_factory) {
+    ->(*args) {
+      SlugUniquenessValidator.new(
+        get(:international_development_fund_repository),
+        InternationalDevelopmentFundValidator.new(
+          InternationalDevelopmentFund.new(
+            SpecialistDocument.new(
+              SlugGenerator.new(prefix: "international-development-funds"),
+              get(:edition_factory),
+              *args,
+            )
+          )
         )
       )
     }
@@ -447,6 +480,11 @@ SpecialistPublisherWiring = DependencyContainer.new do
   define_singleton(:cma_case_finder_schema) {
     require "finder_schema"
     FinderSchema.new(Rails.root.join("schemas/cma-cases.json"))
+  }
+
+  define_singleton(:international_development_fund_finder_schema) {
+    require "finder_schema"
+    FinderSchema.new(Rails.root.join("schemas/international-development-funds.json"))
   }
 
 end
