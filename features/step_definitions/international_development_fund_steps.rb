@@ -1,6 +1,6 @@
 When(/^I create a International Development Fund$/) do
   @document_title = "Example International Development Fund"
-  @slug = "international-development-funds/example-international-development-fund"
+  @slug = "international-development-funding/example-international-development-fund"
   @idf_fields = {
     title: @document_title,
     summary: "Nullam quis risus eget urna mollis ornare vel eu leo.",
@@ -28,7 +28,7 @@ end
 
 Given(/^a draft International Development Fund exists$/) do
   @document_title = "Example International Development Fund"
-  @slug = "international-development-funds/example-international-development-fund"
+  @slug = "international-development-funding/example-international-development-fund"
   @idf_fields = {
     title: @document_title,
     summary: "Nullam quis risus eget urna mollis ornare vel eu leo.",
@@ -94,7 +94,7 @@ end
 
 When(/^I publish a new International Development Fund$/) do
   @document_title = "Example International Development Fund"
-  @slug = "international-development-funds/example-international-development-fund"
+  @slug = "international-development-funding/example-international-development-fund"
   @idf_fields = {
     title: @document_title,
     summary: "Nullam quis risus eget urna mollis ornare vel eu leo.",
@@ -111,7 +111,7 @@ end
 
 Given(/^a published International Development Fund exists$/) do
   @document_title = "Example International Development Fund"
-  @slug = "international-development-funds/example-international-development-fund"
+  @slug = "international-development-funding/example-international-development-fund"
   @idf_fields = {
     title: @document_title,
     summary: "Nullam quis risus eget urna mollis ornare vel eu leo.",
