@@ -6,10 +6,6 @@ Feature: Publishing an AAIB Report
   Background:
     Given I am logged in as a "AAIB" editor
 
-  Scenario: can create a new AAIB Report in draft
-    When I create a AAIB report
-    Then the AAIB report should be in draft
-
   Scenario: can publish a draft AAIB Report
     Given a draft AAIB report exists
     When I publish the AAIB report

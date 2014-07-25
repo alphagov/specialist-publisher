@@ -9,6 +9,7 @@ Feature: Creating and editing an AAIB Report
   Scenario: Create a new AAIB report
     When I create a AAIB report
     Then the AAIB report has been created
+    And the AAIB report should be in draft
 
   Scenario: Cannot create a AAIB report without entering required fields
     When I create a AAIB report without one of the required fields

@@ -14,6 +14,8 @@ RSpec.describe CmaCaseIndexableFormatter do
       slug: double,
       summary: double,
       title: double,
+      opened_date: double,
+      closed_date: double,
     )
   }
 

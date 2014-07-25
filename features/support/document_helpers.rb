@@ -56,14 +56,20 @@ module DocumentHelpers
       ))
   end
 
-  def check_added_to_finder_api(slug, title)
+  def check_added_to_finder_api(slug, fields)
     expect(finder_api).to have_received(:notify_of_publication)
-      .with(slug, hash_including(title: title))
+      .with(slug, hash_including(fields))
   end
 
-  def check_added_to_rummager(document_type, slug, title)
-    expect(rummager_api).to have_received(:add_document)
-      .with(document_type, slug, hash_including(title: title))
+  def check_added_to_rummager(document_type, slug, fields)
+    rummager_fields = fields
+      .except(:summary)
+      .merge(
+        description: fields.fetch(:summary),
+      )
+
+    expect(fake_rummager).to have_received(:add_document)
+      .with(document_type, slug, hash_including(rummager_fields))
   end
 
   def check_rendered_document_contains_html(document)
@@ -140,8 +146,12 @@ module DocumentHelpers
     check_rendered_document_contains_header_meta_data(published_document)
 
     check_published_with_panopticon(slug, fields.fetch(:title))
-    check_added_to_finder_api(slug, fields.fetch(:title))
-    check_added_to_rummager(published_document.details.fetch("document_type"), slug, fields.fetch(:title))
+    check_added_to_finder_api(slug, fields.except(:body))
+    check_added_to_rummager(
+      published_document.details.fetch("document_type"),
+      slug,
+      fields.except(:body),
+    )
   end
 
   def check_metadata_is_rendered(published_document, fields)

@@ -1,16 +1,33 @@
-def stub_rummager
-  stub_request(:post, %r{https?://search\.\w+\.gov\.uk/documents}).
-    to_return(status: 200, body: "", headers: {})
+require "singleton"
 
-  stub_request(:delete, %r{https?://search\.\w+\.gov\.uk/documents/.*}).
-    to_return(status: 200, body: "", headers: {})
+module RummagerHelpers
 
-  # Allow RSpec to spy on the Rummager API adapter
-  allow(rummager_api).to receive(:add_document).and_call_original
-  allow(rummager_api).to receive(:delete_document).and_call_original
-end
+  class FakeRummager
+    include Singleton
 
-def reset_rummager_stubs_and_messages
-  RSpec::Mocks.proxy_for(rummager_api).reset
-  stub_rummager
+    def add_document(type, id, document)
+    end
+
+    def delete_document(type, id)
+    end
+  end
+
+  def stub_rummager
+    # Stub both panopticon methods so RSpec can spy on them
+    allow(fake_rummager).to receive(:add_document).and_call_original
+    allow(fake_rummager).to receive(:delete_document).and_call_original
+
+    allow(GdsApi::Rummager).to receive(:new)
+      .and_return(fake_rummager)
+  end
+
+  def reset_rummager_stubs_and_messages
+    RSpec::Mocks.proxy_for(rummager_api).reset
+    stub_rummager
+  end
+
+  def fake_rummager
+    # memoizing does not work here for some reason
+    FakeRummager.instance
+  end
 end

@@ -1,3 +1,5 @@
+require "singleton"
+
 module PanopticonHelpers
 
   class FakePanopticon
@@ -37,10 +39,10 @@ module PanopticonHelpers
 
   def reset_panopticon_stubs_and_messages
     RSpec::Mocks.proxy_for(fake_panopticon).reset
-    stub_out_panopticon
+    stub_panopticon
   end
 
-  def stub_out_panopticon
+  def stub_panopticon
     # Stub both panopticon methods so RSpec can spy on them
     allow(fake_panopticon).to receive(:put_artefact!).and_call_original
     allow(fake_panopticon).to receive(:create_artefact!).and_call_original

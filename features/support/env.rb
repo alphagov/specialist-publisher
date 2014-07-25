@@ -83,6 +83,8 @@ end
 World(DependencyContainerMethods)
 
 require "panopticon_helpers"
+require "rummager_helpers"
+require "finder_api_helpers"
 require "form_helpers"
 require "cma_case_helpers"
 require "aaib_report_helpers"
@@ -96,6 +98,8 @@ require "gds_sso_helpers"
 require "access_control_helpers"
 
 World(PanopticonHelpers)
+World(RummagerHelpers)
+World(FinderAPIHelpers)
 World(FormHelpers)
 World(AaibReportHelpers)
 World(CmaCaseHelpers)
