@@ -11,7 +11,7 @@ require "withdraw_document_service"
 class AbstractDocumentServiceRegistry
   def list
     ListDocumentsService.new(
-      document_repository,
+      RepositoryPaginator.new(document_repository),
     )
   end
 

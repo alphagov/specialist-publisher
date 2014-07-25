@@ -38,6 +38,7 @@ class SpecialistDocumentEdition
 
   index "document_id"
   index "state"
+  index "updated_at"
 
   def build_attachment(attributes)
     attachments.build(attributes.merge(
