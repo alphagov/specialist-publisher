@@ -21,6 +21,9 @@
     <div class="preview_container" style="display: none;"></div>
 
     <%= f.text_field :date_of_occurrence, placeholder: '2012-04-23' %>
+    <%= f.text_field :aircraft_type %>
+    <%= f.text_field :registration %>
+    <%= f.text_field :location %>
     <%= f.select :aircraft_category, f.object.facet_options(:aircraft_category), {}, { class: 'select2', multiple: true, data: {placeholder: 'Select an Aircraft category'} } %>
     <%= f.select :report_type, f.object.facet_options(:report_type) %>
 

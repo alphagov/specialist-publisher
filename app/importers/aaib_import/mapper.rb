@@ -43,6 +43,8 @@ module AaibImport
       data.merge({
         "title" => title_with_date_if_not_present(data),
         "aircraft_category" => aircraft_categories(data["aircraft_categories"]),
+        "registration" => data["registrations"],
+        "aircraft_type" => data["aircraft_types"],
         "report_type" => report_type(data),
         "body" => body_substitutions(data["body"]),
       })
@@ -117,12 +119,12 @@ module AaibImport
     def desired_keys
       %w(
         aircraft_category
-        aircraft_types
+        aircraft_type
         body
         date_of_occurrence
         location
         registration_string
-        registrations
+        registration
         report_type
         summary
         title
