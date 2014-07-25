@@ -12,7 +12,7 @@ private
       report_type: entity.report_type,
       date_of_occurrence: entity.date_of_occurrence,
       location: entity.location,
-      aircraft_type: entity.airccraft_type,
+      aircraft_type: entity.aircraft_type,
       registration: entity.registration,
     }
   end
