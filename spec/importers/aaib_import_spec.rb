@@ -10,7 +10,7 @@ RSpec.describe "AAIB import" do
   include AttachmentHelpers
 
   before do
-    stub_out_panopticon
+    stub_panopticon
     stub_asset_manager
   end
 

@@ -12,6 +12,8 @@ private
       case_state: entity.case_state,
       market_sector: entity.market_sector,
       outcome_type: entity.outcome_type,
+      opened_date: entity.opened_date,
+      closed_date: entity.closed_date,
     }
   end
 

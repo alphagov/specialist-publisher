@@ -1,7 +1,7 @@
 require "document_republisher"
 
 Given(/^some published and draft specialist documents exist$/) do
-  stub_out_panopticon
+  stub_panopticon
   stub_finder_api
   stub_rummager
 
