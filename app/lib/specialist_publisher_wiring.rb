@@ -24,6 +24,12 @@ require "validators/cma_case_validator"
 require "validators/change_note_validator"
 require "validators/manual_document_validator"
 require "validators/slug_uniqueness_validator"
+require "marshallers/document_association_marshaller"
+require "builders/manual_document_builder"
+require "rummager_indexer"
+require "cma_case_indexable_formatter"
+require "null_finder_schema"
+require "aaib_report_indexable_formatter"
 
 $LOAD_PATH.unshift(File.expand_path("../..", "app/services"))
 
@@ -171,14 +177,20 @@ SpecialistPublisherWiring = DependencyContainer.new do
       SlugUniquenessValidator.new(
         get(:aaib_report_repository),
         AaibReportValidator.new(
-          AaibReport.new(
-            SpecialistDocument.new(
-              SlugGenerator.new(prefix: "aaib-reports"),
-              get(:edition_factory),
-              *args,
-            )
-          )
+          get(:aaib_report_factory).call(*args),
         ),
+      )
+    }
+  }
+
+  define_factory(:aaib_report_factory) {
+    ->(*args) {
+      AaibReport.new(
+        SpecialistDocument.new(
+          SlugGenerator.new(prefix: "aaib-reports"),
+          get(:edition_factory),
+          *args,
+        )
       )
     }
   }
