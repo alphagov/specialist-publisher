@@ -67,7 +67,7 @@ module DocumentImport
       end
     rescue HasNewerVersionError => e
       logger.skipped(e.message, logger_metadata)
-    rescue RuntimeError => e
+    rescue Object => e # ALL THE THINGS
       logger.error(e.message, logger_metadata)
     end
 
