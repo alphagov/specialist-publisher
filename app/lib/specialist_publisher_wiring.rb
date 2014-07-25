@@ -212,7 +212,7 @@ SpecialistPublisherWiring = DependencyContainer.new do
         InternationalDevelopmentFundValidator.new(
           InternationalDevelopmentFund.new(
             SpecialistDocument.new(
-              SlugGenerator.new(prefix: "international-development-funds"),
+              SlugGenerator.new(prefix: "international-development-funding"),
               get(:edition_factory),
               *args,
             )
