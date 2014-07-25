@@ -31,6 +31,11 @@ class ApplicationController < ActionController::Base
   end
   helper_method :user_can_edit_aaib_reports?
 
+  def user_can_edit_international_development_funds?
+    current_user_can_edit?("international_development_fund")
+  end
+  helper_method :user_can_edit_international_development_funds?
+
   def current_user_can_edit?(format)
     permission_checker.can_edit?(format)
   end

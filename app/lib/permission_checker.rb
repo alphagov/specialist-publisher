@@ -26,6 +26,8 @@ private
       "competition-and-markets-authority"
     when "aaib_report"
       "air-accidents-investigation-branch"
+    when "international_development_fund"
+      "department-for-international-development"
     end
   end
 end

@@ -1,3 +1,12 @@
+Given(/^I am logged in as a "(.*?)" editor$/) do |editor_type|
+  login_as(:"#{editor_type.downcase}_editor")
+
+  # WARNING: These must be stubbed before the first request takes place
+  stub_out_panopticon
+  stub_finder_api
+  stub_rummager
+end
+
 Given(/^I am logged in as a non\-CMA editor$/) do
   login_as(:generic_editor)
 

@@ -1,6 +1,7 @@
 require "aaib_report_indexable_formatter"
 require "builders/aaib_report_builder"
 require "builders/cma_case_builder"
+require "builders/international_development_fund_builder"
 require "builders/manual_document_builder"
 require "cma_case_indexable_formatter"
 require "dependency_container"
@@ -22,6 +23,7 @@ require "specialist_document_repository"
 require "validators/aaib_report_validator"
 require "validators/cma_case_validator"
 require "validators/change_note_validator"
+require "validators/international_development_fund_validator"
 require "validators/manual_document_validator"
 require "validators/slug_uniqueness_validator"
 require "marshallers/document_association_marshaller"
@@ -91,6 +93,13 @@ SpecialistPublisherWiring = DependencyContainer.new do
     SpecialistDocumentRepository.new(
       specialist_document_editions: SpecialistDocumentEdition.where(document_type: "cma_case"),
       document_factory: get(:validatable_cma_case_factory),
+    )
+  end
+
+  define_singleton(:international_development_fund_repository) do
+    SpecialistDocumentRepository.new(
+      specialist_document_editions: SpecialistDocumentEdition.where(document_type: "international_development_fund"),
+      document_factory: get(:validatable_international_development_fund_factory),
     )
   end
 
@@ -190,6 +199,30 @@ SpecialistPublisherWiring = DependencyContainer.new do
           SlugGenerator.new(prefix: "aaib-reports"),
           get(:edition_factory),
           *args,
+        )
+      )
+    }
+  }
+
+  define_factory(:international_development_fund_builder) {
+    InternationalDevelopmentFundBuilder.new(
+      get(:validatable_international_development_fund_factory),
+      IdGenerator,
+    )
+  }
+
+  define_factory(:validatable_international_development_fund_factory) {
+    ->(*args) {
+      SlugUniquenessValidator.new(
+        get(:international_development_fund_repository),
+        InternationalDevelopmentFundValidator.new(
+          InternationalDevelopmentFund.new(
+            SpecialistDocument.new(
+              SlugGenerator.new(prefix: "international-development-funds"),
+              get(:edition_factory),
+              *args,
+            )
+          )
         )
       )
     }
@@ -298,6 +331,14 @@ SpecialistPublisherWiring = DependencyContainer.new do
     }
   }
 
+  define_factory(:international_development_fund_panopticon_registerer) {
+    ->(document) {
+      get(:panopticon_registerer).call(
+        InternationalDevelopmentFundArtefactFormatter.new(document)
+      )
+    }
+  }
+
   define_factory(:manual_document_panopticon_registerer) {
     ->(document, manual) {
       get(:panopticon_registerer).call(
@@ -362,6 +403,26 @@ SpecialistPublisherWiring = DependencyContainer.new do
     }
   }
 
+  define_factory(:international_development_fund_rummager_indexer) {
+    ->(document) {
+      RummagerIndexer.new.add(
+        InternationalDevelopmentFundIndexableFormatter.new(
+          SpecialistDocumentAttachmentProcessor.new(document)
+        )
+      )
+    }
+  }
+
+  define_factory(:international_development_fund_rummager_deleter) {
+    ->(document) {
+      RummagerIndexer.new.delete(
+        InternationalDevelopmentFundIndexableFormatter.new(
+          SpecialistDocumentAttachmentProcessor.new(document)
+        )
+      )
+    }
+  }
+
   define_factory(:specialist_document_content_api_withdrawer) {
     ->(document) {
       RenderedSpecialistDocument.where(slug: document.slug).map(&:destroy)
@@ -391,6 +452,17 @@ SpecialistPublisherWiring = DependencyContainer.new do
         RenderedSpecialistDocument,
         get(:specialist_document_renderer),
         get(:cma_case_finder_schema),
+        doc,
+      ).call
+    }
+  }
+
+  define_instance(:international_development_fund_content_api_exporter) {
+    ->(doc) {
+      SpecialistDocumentDatabaseExporter.new(
+        RenderedSpecialistDocument,
+        get(:specialist_document_renderer),
+        get(:international_development_fund_finder_schema),
         doc,
       ).call
     }
@@ -447,6 +519,11 @@ SpecialistPublisherWiring = DependencyContainer.new do
   define_singleton(:cma_case_finder_schema) {
     require "finder_schema"
     FinderSchema.new(Rails.root.join("schemas/cma-cases.json"))
+  }
+
+  define_singleton(:international_development_fund_finder_schema) {
+    require "finder_schema"
+    FinderSchema.new(Rails.root.join("schemas/international-development-funds.json"))
   }
 
 end

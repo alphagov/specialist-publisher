@@ -1,12 +1,3 @@
-Given(/^I am logged in as a "(.*?)" editor$/) do |editor_type|
-  login_as(:"#{editor_type.downcase}_editor")
-
-  # WARNING: These must be stubbed before the first request takes place
-  stub_out_panopticon
-  stub_finder_api
-  stub_rummager
-end
-
 When(/^I create a CMA case$/) do
   @document_title = "Example CMA Case"
   @slug = "cma-cases/example-cma-case"

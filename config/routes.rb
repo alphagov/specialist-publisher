@@ -30,6 +30,18 @@ SpecialistPublisher::Application.routes.draw do
   # This is for new aaib reports
   post "aaib-reports/preview" => "aaib_reports#preview", as: "preview_new_aaib_report"
 
+  resources :international_development_funds, except: :destroy, path: "international-development-funds" do
+    resources :attachments, controller: :international_development_fund_attachments, only: [:new, :create, :edit, :update]
+    post :withdraw, on: :member
+    post :publish, on: :member
+
+    # This is for persisted international development funds
+    post :preview, on: :member
+  end
+
+  # This is for new international development funds
+  post "international-development-funds/preview" => "international_development_funds#preview", as: "preview_new_international_development_fund"
+
   resources :manuals, except: :destroy do
     resources :documents, except: :destroy, path: "sections", controller: "ManualDocuments" do
       resources :attachments, controller: :manual_document_attachments, only: [:new, :create, :edit, :update]
