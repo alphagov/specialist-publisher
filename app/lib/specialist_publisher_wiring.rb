@@ -21,17 +21,11 @@ require "specialist_document_govspeak_to_html_renderer"
 require "specialist_document_header_extractor"
 require "specialist_document_repository"
 require "validators/aaib_report_validator"
-require "validators/cma_case_validator"
 require "validators/change_note_validator"
+require "validators/cma_case_validator"
 require "validators/international_development_fund_validator"
 require "validators/manual_document_validator"
 require "validators/slug_uniqueness_validator"
-require "marshallers/document_association_marshaller"
-require "builders/manual_document_builder"
-require "rummager_indexer"
-require "cma_case_indexable_formatter"
-require "null_finder_schema"
-require "aaib_report_indexable_formatter"
 
 $LOAD_PATH.unshift(File.expand_path("../..", "app/services"))
 
@@ -40,15 +34,15 @@ SpecialistPublisherWiring = DependencyContainer.new do
   define_factory(:observers) {
     ObserversRegistry.new(
       aaib_report_content_api_exporter: get(:aaib_report_content_api_exporter),
-      finder_api_notifier: get(:finder_api_notifier),
       aaib_report_panopticon_registerer: get(:aaib_report_panopticon_registerer),
-      manual_panopticon_registerer: get(:manual_panopticon_registerer),
-      manual_document_panopticon_registerer: get(:manual_document_panopticon_registerer),
-      manual_content_api_exporter: get(:manual_and_documents_content_api_exporter),
-      aaib_report_rummager_indexer: get(:aaib_report_rummager_indexer),
-      specialist_document_content_api_withdrawer: get(:specialist_document_content_api_withdrawer),
-      finder_api_withdrawer: get(:finder_api_withdrawer),
       aaib_report_rummager_deleter: get(:aaib_report_rummager_deleter),
+      aaib_report_rummager_indexer: get(:aaib_report_rummager_indexer),
+      finder_api_notifier: get(:finder_api_notifier),
+      finder_api_withdrawer: get(:finder_api_withdrawer),
+      manual_content_api_exporter: get(:manual_and_documents_content_api_exporter),
+      manual_document_panopticon_registerer: get(:manual_document_panopticon_registerer),
+      manual_panopticon_registerer: get(:manual_panopticon_registerer),
+      specialist_document_content_api_withdrawer: get(:specialist_document_content_api_withdrawer),
     )
   }
 
@@ -315,18 +309,18 @@ SpecialistPublisherWiring = DependencyContainer.new do
     }
   }
 
-  define_factory(:cma_case_panopticon_registerer) {
-    ->(document) {
-      get(:panopticon_registerer).call(
-        CmaCaseArtefactFormatter.new(document)
-      )
-    }
-  }
-
   define_factory(:aaib_report_panopticon_registerer) {
     ->(document) {
       get(:panopticon_registerer).call(
         AaibReportArtefactFormatter.new(document)
+      )
+    }
+  }
+
+  define_factory(:cma_case_panopticon_registerer) {
+    ->(document) {
+      get(:panopticon_registerer).call(
+        CmaCaseArtefactFormatter.new(document)
       )
     }
   }
@@ -363,26 +357,6 @@ SpecialistPublisherWiring = DependencyContainer.new do
     }
   }
 
-  define_factory(:cma_case_rummager_indexer) {
-    ->(document) {
-      RummagerIndexer.new.add(
-        CmaCaseIndexableFormatter.new(
-          SpecialistDocumentAttachmentProcessor.new(document)
-        )
-      )
-    }
-  }
-
-  define_factory(:cma_case_rummager_deleter) {
-    ->(document) {
-      RummagerIndexer.new.delete(
-        CmaCaseIndexableFormatter.new(
-          SpecialistDocumentAttachmentProcessor.new(document)
-        )
-      )
-    }
-  }
-
   define_factory(:aaib_report_rummager_indexer) {
     ->(document) {
       RummagerIndexer.new.add(
@@ -397,6 +371,26 @@ SpecialistPublisherWiring = DependencyContainer.new do
     ->(document) {
       RummagerIndexer.new.delete(
         AaibReportIndexableFormatter.new(
+          SpecialistDocumentAttachmentProcessor.new(document)
+        )
+      )
+    }
+  }
+
+  define_factory(:cma_case_rummager_indexer) {
+    ->(document) {
+      RummagerIndexer.new.add(
+        CmaCaseIndexableFormatter.new(
+          SpecialistDocumentAttachmentProcessor.new(document)
+        )
+      )
+    }
+  }
+
+  define_factory(:cma_case_rummager_deleter) {
+    ->(document) {
+      RummagerIndexer.new.delete(
+        CmaCaseIndexableFormatter.new(
           SpecialistDocumentAttachmentProcessor.new(document)
         )
       )
