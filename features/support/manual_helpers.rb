@@ -59,7 +59,7 @@ module ManualHelpers
   end
 
   def check_for_errors_for_fields(field)
-    page.should have_content("#{field.titlecase} can't be blank")
+    expect(page).to have_content("#{field.titlecase} can't be blank")
   end
 
   def go_to_manual_page(manual_title)
