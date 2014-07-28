@@ -209,4 +209,8 @@ module DocumentHelpers
     click_button "Withdraw"
   end
 
+  def check_for_javascript_usage_error(field)
+    expect(page).to have_content("#{field} cannot include invalid HTML or JavaScript")
+  end
+
 end

@@ -15,9 +15,9 @@ Then(/^the International Development Fund has been created$/) do
   check_slug_registered_with_panopticon_with_correct_organisation(@slug, ["department-for-international-development"])
 end
 
-When(/^I create a International Development Fund without one of the required fields$/) do
+When(/^I create a International Development Fund with invalid fields$/) do
   @idf_fields = {
-    body: "## Header" + ("\n\nPraesent commodo cursus magna, vel scelerisque nisl consectetur et." * 10),
+    body: "<script>alert('Oh noes!)</script>",
   }
   create_international_development_fund(@idf_fields)
 end

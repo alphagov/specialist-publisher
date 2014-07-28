@@ -11,10 +11,11 @@ Feature: Creating and editing an AAIB Report
     Then the AAIB report has been created
     And the AAIB report should be in draft
 
-  Scenario: Cannot create a AAIB report without entering required fields
-    When I create a AAIB report without one of the required fields
+  Scenario: Cannot create a AAIB report with invalid fields
+    When I create a AAIB report with invalid fields
     Then I should see error messages about missing fields
     Then I should see an error message about an invalid date field "Date of occurrence"
+    And I should see an error message about a "Body" field containing javascript
     And the AAIB report should not have been created
 
   Scenario: Cannot edit an AAIB report without entering required fields

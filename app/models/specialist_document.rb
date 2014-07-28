@@ -93,6 +93,10 @@ class SpecialistDocument
     latest_edition.draft?
   end
 
+  def changes
+    latest_edition.changes
+  end
+
   def errors
     latest_edition.errors.messages
   end

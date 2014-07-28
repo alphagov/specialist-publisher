@@ -10,9 +10,10 @@ Feature: Creating and editing an International Development Fund
     When I create a International Development Fund
     Then the International Development Fund has been created
 
-  Scenario: Cannot create a International Development Fund without entering required fields
-    When I create a International Development Fund without one of the required fields
+  Scenario: Cannot create a International Development Fund with invalid fields
+    When I create a International Development Fund with invalid fields
     Then I should see error messages about missing fields
+    And I should see an error message about a "Body" field containing javascript
     And the International Development Fund should not have been created
 
   Scenario: Cannot edit an International Development Fund without entering required fields

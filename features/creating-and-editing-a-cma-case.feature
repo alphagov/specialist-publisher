@@ -10,10 +10,11 @@ Feature: Creating and editing a CMA case
     When I create a CMA case
     Then the CMA case has been created
 
-  Scenario: Cannot create a CMA case without entering required fields
-    When I create a CMA case without one of the required fields
+  Scenario: Cannot create a CMA case with invalid fields
+    When I create a CMA case with invalid fields
     Then I should see error messages about missing fields
     And I should see an error message about an invalid date field "Opened date"
+    And I should see an error message about a "Body" field containing javascript
     And the CMA case should not have been created
 
   Scenario: Cannot create a CMA case with a duplicate slug
