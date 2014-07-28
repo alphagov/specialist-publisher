@@ -5,7 +5,9 @@ RSpec.describe InternationalDevelopmentFund do
 
   it "is a DocumentMetadataDecorator" do
     doc = double(:document)
-    InternationalDevelopmentFund.new(doc).should be_a(DocumentMetadataDecorator)
+    expect(
+      InternationalDevelopmentFund.new(doc)
+    ).to be_a(DocumentMetadataDecorator)
   end
 
 end

@@ -47,13 +47,14 @@ gem "pry", group: [:development, :test]
 gem "awesome_print", group: [:development, :test]
 
 group :test do
+  gem "cucumber", "1.3.16"
   gem "cucumber-rails", "1.4.0", require: false
   gem "launchy"
-  gem "rspec-rails", "2.14.1"
   gem "factory_girl", "4.3.0"
   gem "database_cleaner", "1.2.0"
   gem "poltergeist", "1.5.0"
   gem "webmock", "~> 1.17.4"
+  gem "rspec", "3.0.0"
   gem "rubocop"
 end
 

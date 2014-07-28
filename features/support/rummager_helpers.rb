@@ -22,7 +22,7 @@ module RummagerHelpers
   end
 
   def reset_rummager_stubs_and_messages
-    RSpec::Mocks.proxy_for(rummager_api).reset
+    RSpec::Mocks.space.proxy_for(rummager_api).reset
     stub_rummager
   end
 

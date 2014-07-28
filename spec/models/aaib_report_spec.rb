@@ -5,7 +5,7 @@ RSpec.describe AaibReport do
 
   it "is a DocumentMetadataDecorator" do
     doc = double(:document)
-    AaibReport.new(doc).should be_a(DocumentMetadataDecorator)
+    expect(AaibReport.new(doc)).to be_a(DocumentMetadataDecorator)
   end
 
 end

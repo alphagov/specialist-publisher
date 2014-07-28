@@ -5,7 +5,7 @@ RSpec.describe CmaCase do
 
   it "is a DocumentMetadataDecorator" do
     doc = double(:document)
-    CmaCase.new(doc).should be_a(DocumentMetadataDecorator)
+    expect(CmaCase.new(doc)).to be_a(DocumentMetadataDecorator)
   end
 
 end

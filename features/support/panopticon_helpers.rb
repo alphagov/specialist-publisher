@@ -38,7 +38,7 @@ module PanopticonHelpers
   end
 
   def reset_panopticon_stubs_and_messages
-    RSpec::Mocks.proxy_for(fake_panopticon).reset
+    RSpec::Mocks.space.proxy_for(fake_panopticon).reset
     stub_panopticon
   end
 

@@ -22,7 +22,7 @@ module FinderAPIHelpers
   end
 
   def reset_finder_api_stubs_and_messages
-    RSpec::Mocks.proxy_for(finder_api).reset
+    RSpec::Mocks.space.proxy_for(finder_api).reset
     stub_finder_api
   end
 
