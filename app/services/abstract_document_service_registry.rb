@@ -7,6 +7,7 @@ require "create_document_service"
 require "update_document_service"
 require "publish_document_service"
 require "withdraw_document_service"
+require "paginator"
 
 class AbstractDocumentServiceRegistry
   def list
