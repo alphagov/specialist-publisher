@@ -1,5 +1,4 @@
 require "delegate"
-require "validators/date_validator"
 
 class InternationalDevelopmentFundValidator < SimpleDelegator
   include ActiveModel::Validations
