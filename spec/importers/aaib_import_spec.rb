@@ -18,8 +18,8 @@ RSpec.describe "AAIB import" do
     AaibImport.call(data_dir, attachments_dir)
   end
 
-  let(:data_dir)            { "spec/fixtures/import/metadata" }
-  let(:attachments_dir)     { "spec/fixtures/import/" }
+  let(:data_dir)            { "spec/fixtures/aaib_import/metadata" }
+  let(:attachments_dir)     { "spec/fixtures/aaib_import/" }
 
   let(:report_title) { "2/1981 Cessna 414, G-BAOZ" }
 

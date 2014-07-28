@@ -38,6 +38,10 @@ module DocumentImport
       @output.puts("ERROR: #{message} #{format_data(data)}")
     end
 
+    def warn(message, data)
+      @output.puts("WARNING: #{message} #{format_data(data)}")
+    end
+
     def skipped(message, data)
       @output.puts("SKIPPED: #{message} #{format_data(data)}")
     end

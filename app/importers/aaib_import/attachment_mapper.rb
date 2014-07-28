@@ -1,7 +1,10 @@
 require "validators/attachment_snippet_in_body_validator"
+require "document_import/attachment_helpers"
 
 module AaibImport
   class AttachmentMapper
+    include ::DocumentImport::AttachmentHelpers
+
     def initialize(import_mapper, repo, base_path = ".")
       @import_mapper = import_mapper
       @repo = repo
@@ -12,15 +15,9 @@ module AaibImport
       document = import_mapper.call(data)
 
       if document.valid?
-        data["assets"]
-          .each do |asset_data|
-            attachment = add_attachment(
-              document,
-              attachable_file_attributes(asset_data),
-            )
-
-            replace_link_with_snippet(document, asset_data, attachment)
-          end
+        data["assets"].each do |asset_data|
+          attach_asset(document, asset_data, data)
+        end
 
         repo.store(document)
       end
@@ -30,6 +27,15 @@ module AaibImport
 
   private
     attr_reader :import_mapper, :repo, :base_path
+
+    def attach_asset(document, asset_data, data)
+      attachment = add_attachment(
+        document,
+        attachable_file_attributes(base_path, asset_data),
+      )
+
+      replace_link_with_snippet(document, asset_data, attachment)
+    end
 
     def imported_document(data)
       AttachmentSnippetInBodyValidator.new(
@@ -41,29 +47,9 @@ module AaibImport
       document.add_attachment(asset_data)
     end
 
-    def attachable_file_attributes(asset)
-      file = File.open(File.join(base_path, asset["filename"]))
-      file.define_singleton_method(:original_filename) {
-        asset.fetch("original_filename")
-      }
-
-      {
-        title: clean_title(asset.fetch("title")),
-        filename: asset.fetch("original_filename"),
-        file: file,
-      }
-    end
-
-    def clean_title(string)
-      string.gsub("_", "-")
-    end
-
     def replace_link_with_snippet(document, asset, attachment)
       search = "[ASSET_TAG](#ASSET#{asset.fetch("assetid")})"
-      if document.body.include?(search)
-        new_body = document.body.gsub(search, attachment.snippet)
-        document.update(body: new_body)
-      end
+      replace_in_body(document, search, attachment.snippet)
     end
   end
 end
