@@ -1,12 +1,6 @@
-require "delegate"
 require "validators/date_validator"
+require "validators/specialist_document_validator"
 
-class AaibReportValidator < SimpleDelegator
-  include ActiveModel::Validations
-
-  validates :title, presence: true
-  validates :summary, presence: true
-  validates :body, presence: true
-
+class AaibReportValidator < SpecialistDocumentValidator
   validates :date_of_occurrence, presence: true, date: true
 end

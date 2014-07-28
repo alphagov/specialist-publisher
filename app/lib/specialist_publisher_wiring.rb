@@ -23,9 +23,9 @@ require "specialist_document_repository"
 require "validators/aaib_report_validator"
 require "validators/change_note_validator"
 require "validators/cma_case_validator"
-require "validators/international_development_fund_validator"
 require "validators/manual_document_validator"
 require "validators/slug_uniqueness_validator"
+require "validators/specialist_document_validator"
 
 $LOAD_PATH.unshift(File.expand_path("../..", "app/services"))
 
@@ -209,7 +209,7 @@ SpecialistPublisherWiring = DependencyContainer.new do
     ->(*args) {
       SlugUniquenessValidator.new(
         get(:international_development_fund_repository),
-        InternationalDevelopmentFundValidator.new(
+        SpecialistDocumentValidator.new(
           InternationalDevelopmentFund.new(
             SpecialistDocument.new(
               SlugGenerator.new(prefix: "international-development-funding"),
