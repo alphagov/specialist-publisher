@@ -81,29 +81,12 @@ class SpecialistDocument
     nil
   end
 
-  def valid?
-    latest_edition.valid?
-  end
-
   def published?
     editions.any?(&:published?)
   end
 
   def draft?
     latest_edition.draft?
-  end
-
-  def changes
-    latest_edition.changes
-  end
-
-  def errors
-    latest_edition.errors.messages
-  end
-
-  def add_error(field, message)
-    latest_edition.errors[field] ||= []
-    latest_edition.errors[field] += message
   end
 
   def add_attachment(attributes)
