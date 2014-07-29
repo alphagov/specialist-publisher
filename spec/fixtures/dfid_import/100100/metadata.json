@@ -1,0 +1,12 @@
+{
+   "title":"International development report title",
+   "summary":"International development report summary",
+   "body":"International development body\nSummary\n[InlineAttachment:1]",
+   "attachments":[
+      {
+         "title":"portfolio overview workshop 30 January 2014",
+         "filename":"Attached-document.pdf",
+         "identifier":1
+      }
+   ]
+}
