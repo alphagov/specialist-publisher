@@ -18,7 +18,7 @@ RSpec.describe "DFID import" do
     DfidImport.call(data_dir)
   end
 
-  let(:data_dir)            { "spec/fixtures/dfid_import" }
+  let(:data_dir) { "./spec/fixtures/dfid_import" }
 
   let(:repo) {
     SpecialistPublisherWiring.get(:international_development_fund_repository)
