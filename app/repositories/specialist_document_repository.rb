@@ -66,7 +66,7 @@ class SpecialistDocumentRepository
   end
 
   def count
-    specialist_document_editions.count
+    specialist_document_editions.distinct(:document_id).count
   end
 
 private
