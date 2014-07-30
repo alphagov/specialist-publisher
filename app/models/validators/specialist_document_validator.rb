@@ -6,5 +6,16 @@ class SpecialistDocumentValidator < SimpleDelegator
   validates :title, presence: true
   validates :summary, presence: true
   validates :body, presence: true
-  validates_with SafeHtml
+
+  def valid?
+    super
+    validate_with_safe_html
+    errors.empty?
+  end
+
+private
+
+  def validate_with_safe_html
+    SafeHtml.new({}).check_string(self, "body", body)
+  end
 end
