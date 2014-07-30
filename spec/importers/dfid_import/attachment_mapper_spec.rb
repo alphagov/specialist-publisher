@@ -5,8 +5,7 @@ RSpec.describe DfidImport::AttachmentMapper do
   subject(:mapper) do
     DfidImport::AttachmentMapper.new(dfid_import_mapper,
       repo,
-      logger,
-      "spec/fixtures/dfid_import",
+      logger
     )
   end
 
@@ -30,7 +29,7 @@ RSpec.describe DfidImport::AttachmentMapper do
       "title" =>  expected_title,
       "summary" => "International development report summary",
       "body" => raw_body,
-      "import_source" => "100100",
+      "import_source" => "./spec/fixtures/dfid_import/100100",
       "attachments" => [
         {
           "title" => expected_title,
