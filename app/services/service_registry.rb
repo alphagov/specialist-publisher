@@ -14,8 +14,6 @@ class ServiceRegistry
     @document_renderer = dependencies.fetch(:document_renderer)
     @manual_repository_factory = dependencies.fetch(:manual_repository_factory)
     @manual_document_builder = dependencies.fetch(:manual_document_builder)
-
-    @observers = dependencies.fetch(:observers)
   end
 
   def preview_manual_document(context)
@@ -30,7 +28,7 @@ class ServiceRegistry
   def create_manual_document(context)
     CreateManualDocumentService.new(
       manual_repository: manual_repository(context),
-      listeners: observers.manual_document_creation,
+      listeners: observers.creation,
       context: context,
     )
   end
@@ -88,6 +86,10 @@ class ServiceRegistry
 
   private
 
+  def observers
+    @observers ||= ManualDocumentObserversRegistry.new
+  end
+
   def manual_repository(context)
     manual_repository_factory.call(context.current_organisation_slug)
   end
@@ -96,6 +98,5 @@ class ServiceRegistry
     :document_renderer,
     :manual_repository_factory,
     :manual_document_builder,
-    :observers,
   )
 end

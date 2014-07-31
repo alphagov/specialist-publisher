@@ -30,28 +30,11 @@ require "validators/slug_uniqueness_validator"
 $LOAD_PATH.unshift(File.expand_path("../..", "app/services"))
 
 SpecialistPublisherWiring = DependencyContainer.new do
-
-  define_factory(:observers) {
-    ObserversRegistry.new(
-      aaib_report_content_api_exporter: get(:aaib_report_content_api_exporter),
-      aaib_report_panopticon_registerer: get(:aaib_report_panopticon_registerer),
-      aaib_report_rummager_deleter: get(:aaib_report_rummager_deleter),
-      aaib_report_rummager_indexer: get(:aaib_report_rummager_indexer),
-      finder_api_notifier: get(:finder_api_notifier),
-      finder_api_withdrawer: get(:finder_api_withdrawer),
-      manual_content_api_exporter: get(:manual_and_documents_content_api_exporter),
-      manual_document_panopticon_registerer: get(:manual_document_panopticon_registerer),
-      manual_panopticon_registerer: get(:manual_panopticon_registerer),
-      specialist_document_content_api_withdrawer: get(:specialist_document_content_api_withdrawer),
-    )
-  }
-
   define_factory(:services) {
     ServiceRegistry.new(
       document_renderer: get(:specialist_document_renderer),
       manual_repository_factory: get(:manual_repository_factory),
       manual_document_builder: get(:manual_document_builder),
-      observers: get(:observers),
     )
   }
 

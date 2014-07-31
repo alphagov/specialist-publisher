@@ -12,13 +12,6 @@ private
   end
 
   def observers
-    all_observers = SpecialistPublisherWiring.get(:observers)
-
-    OpenStruct.new(
-      creation: all_observers.aaib_report_creation,
-      update: [],
-      publication: all_observers.aaib_report_publication,
-      withdrawal: all_observers.aaib_report_withdrawal,
-    )
+    @observers ||= AaibReportObserversRegistry.new
   end
 end
