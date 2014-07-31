@@ -19,7 +19,7 @@ describe SpecialistDocumentDatabaseExporter do
       allow(f).to receive(:options_for).with(:case_type).and_return([["CA98 and civil cartels", "ca98-and-civil-cartels"]])
     end
   }
-  let(:document) { double(:document) }
+  let(:document) { double(:document, updated_at: Time.current) }
 
   let(:rendered_document) {
     double(
