@@ -54,3 +54,10 @@ Feature: Creating and editing a CMA case
     When I start creating a new CMA case
     And I preview the case
     Then I see the case body preview
+
+  @javascript
+  Scenario: Previewing a CMA case with a body containing javascript
+    When I start creating a new CMA case with embedded javascript
+    And I preview the case
+    Then I should see an error message about a "Body" field containing javascript
+

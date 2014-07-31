@@ -143,6 +143,14 @@ When(/^I start creating a new CMA case$/) do
   create_cma_case(@cma_fields, save: false)
 end
 
+When(/^I start creating a new CMA case with embedded javascript$/) do
+  @cma_fields = {
+    body: "<script>alert('Oh noes!)</script>",
+  }
+
+  create_cma_case(@cma_fields, save: false)
+end
+
 When(/^I preview the case$/) do
   generate_preview
 end

@@ -9,15 +9,8 @@ class PreviewDocumentService
 
   def call
     document.update(document_params)
-    document.valid? # Force validation check or errors will be empty
 
-    if document.errors[:body].nil?
-      document_renderer.call(document).body
-    else
-      document.errors[:body].map { |m|
-        content_tag(:p, "Body #{m}")
-      }
-    end
+    document_renderer.call(document)
   end
 
   private
