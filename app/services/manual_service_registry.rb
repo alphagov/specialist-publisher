@@ -14,7 +14,7 @@ class ManualServiceRegistry
     CreateManualService.new(
       manual_repository: manual_repository,
       manual_builder: manual_builder,
-      listeners: observers.manual_creation,
+      listeners: observers.creation,
       context: context,
     )
   end
@@ -36,7 +36,7 @@ class ManualServiceRegistry
   def publish(context)
     PublishManualService.new(
       manual_repository: manual_repository,
-      listeners: observers.manual_publication,
+      listeners: observers.publication,
       context: context,
     )
   end
@@ -58,6 +58,6 @@ private
 
   def observers
     # TODO Get a set of manual-specific observers
-    SpecialistPublisherWiring.get(:observers)
+    @observers ||= ManualObserversRegistry.new
   end
 end

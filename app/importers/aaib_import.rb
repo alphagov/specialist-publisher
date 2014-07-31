@@ -64,7 +64,7 @@ module AaibImport
           CreateDocumentService.new(
             report_builder,
             repo,
-            SpecialistPublisherWiring.get(:observers).aaib_report_creation,
+            AaibReportObserversRegistry.new.creation,
             attrs,
           ).call
         },
