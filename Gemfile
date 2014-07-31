@@ -21,7 +21,7 @@ gem "unicorn", "4.8.2"
 if ENV["CONTENT_MODELS_DEV"]
   gem "govuk_content_models", :path => "../govuk_content_models"
 else
-  gem "govuk_content_models", "16.1.0"
+  gem "govuk_content_models", "16.2.0"
 end
 
 if ENV["API_DEV"]
