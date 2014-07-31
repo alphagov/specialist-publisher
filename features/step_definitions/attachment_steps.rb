@@ -27,7 +27,7 @@ Then(/^I can see a link to the file with the title in the document preview$/) do
 end
 
 Then(/^the attachments from the previous edition remain$/) do
-  go_to_edit_page_for_most_recent_case
+  go_to_edit_page_for_cma_case(@document_title)
 
   check_for_an_attachment
 end
