@@ -46,7 +46,15 @@ private
   end
 
   def core_rendered_document_attributes
-    rendered_document.attributes.slice(*core_attribute_keys)
+    rendered_document.attributes
+      .slice(*core_attribute_keys)
+      .merge(document_metadata)
+  end
+
+  def document_metadata
+    {
+      published_at: document.updated_at,
+    }
   end
 
   def other_document_attributes

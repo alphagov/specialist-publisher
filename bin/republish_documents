@@ -14,7 +14,11 @@ observers = wiring(:observers)
 # sane method of accessing all of them through a repository.
 repository_listeners_map = [
   [wiring(:cma_case_repository), CmaCaseObserversRegistry.new.publication],
-  #[wiring(:aaib_report_repository), observers.aaib_report_publication],
+  [wiring(:aaib_report_repository), observers.aaib_report_publication],
+  [
+    wiring(:international_development_fund_repository),
+    InternationalDevelopmentFundObserversRegistry.new.publication,
+  ],
   #[wiring(:manuals_repository), observers.manual_publication],
 ]
 

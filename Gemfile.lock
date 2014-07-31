@@ -116,7 +116,7 @@ GEM
       bootstrap-sass (= 3.1.0)
       jquery-rails (= 3.0.4)
       rails (>= 3.2.0)
-    govuk_content_models (16.1.0)
+    govuk_content_models (16.2.0)
       bson_ext
       differ
       gds-api-adapters (>= 10.9.0)
@@ -329,7 +329,7 @@ DEPENDENCIES
   generic_form_builder (= 0.8.0)
   govspeak (= 1.6.2)
   govuk_admin_template (= 1.0.0)
-  govuk_content_models (= 16.1.0)
+  govuk_content_models (= 16.2.0)
   govuk_frontend_toolkit (= 0.44.0)
   jasmine-rails
   kaminari (= 0.16.1)
