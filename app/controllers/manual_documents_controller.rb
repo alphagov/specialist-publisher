@@ -23,7 +23,6 @@ class ManualDocumentsController < ApplicationController
     if document.valid?
       redirect_to(manual_path(manual))
     else
-      # TODO: this branch is untested
       render(:new, locals: {
         manual: ManualViewAdapter.new(manual),
         document: ManualDocumentViewAdapter.new(manual, document),

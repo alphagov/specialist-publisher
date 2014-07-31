@@ -218,17 +218,14 @@ SpecialistPublisherWiring = DependencyContainer.new do
         slug_generator = SlugGenerator.new(prefix: manual.slug)
 
         ChangeNoteValidator.new(
-          SlugUniquenessValidator.new(
-            # TODO This doesn't look right!
-            get(:cma_case_repository),
-            ManualDocumentValidator.new(
-              SpecialistDocument.new(
-                slug_generator,
-                get(:edition_factory),
-                id,
-                editions,
-              ),
-            )
+          # TODO: validate manual slugs
+          ManualDocumentValidator.new(
+            SpecialistDocument.new(
+              slug_generator,
+              get(:edition_factory),
+              id,
+              editions,
+            ),
           )
         )
       }

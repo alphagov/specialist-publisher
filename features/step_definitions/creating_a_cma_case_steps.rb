@@ -87,7 +87,8 @@ Then(/^the CMA cases should be in the publisher case index in the correct order$
 end
 
 When(/^I make changes and preview the CMA case$/) do
-  make_changes_without_saving(
+  change_cma_case_without_saving(
+    @document_title,
     title: "Title for preview",
     body: "Body for preview",
   )

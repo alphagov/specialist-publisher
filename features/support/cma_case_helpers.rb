@@ -11,17 +11,8 @@ module CmaCaseHelpers
       .with(panopticon_id_for_slug(old_slug), hash_including(slug: new_slug))
   end
 
-  def go_to_edit_page_for_most_recent_case
-    warn "DEPRECATED: use #go_to_edit_page_for_cma_case and provide title"
-    registry = SpecialistPublisherWiring.get(:cma_case_repository)
-    # TODO: testing antipattern, relies on datastore co-incidence
-    document = registry.all.last
-
-    visit edit_cma_case_path(document.id)
-  end
-
-  def make_changes_without_saving(fields)
-    go_to_edit_page_for_most_recent_case
+  def change_cma_case_without_saving(title, fields)
+    go_to_edit_page_for_cma_case(title)
     fill_in_fields(fields)
   end
 

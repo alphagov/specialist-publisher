@@ -16,7 +16,7 @@ class ChangeNoteValidator < SimpleDelegator
   end
 
   def errors
-    entity.errors.merge(@errors)
+    entity.errors.to_hash.merge(@errors)
   end
 
   private
