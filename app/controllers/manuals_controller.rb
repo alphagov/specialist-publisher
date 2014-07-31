@@ -64,7 +64,7 @@ private
   end
 
   def services
-    @services ||= ManualServiceRegistry.new(
+    @services ||= OrganisationalManualServiceRegistry.new(
       organisation_slug: current_organisation_slug,
     )
   end
