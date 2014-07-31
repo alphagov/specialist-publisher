@@ -1,12 +1,13 @@
 require "delegate"
 require "validators/date_validator"
+require "validators/safe_html_validator"
 
 class CmaCaseValidator < SimpleDelegator
   include ActiveModel::Validations
 
   validates :title, presence: true
   validates :summary, presence: true
-  validates :body, presence: true
+  validates :body, presence: true, safe_html: true
 
   validates :opened_date, presence: true, date: true
   validates :market_sector, presence: true

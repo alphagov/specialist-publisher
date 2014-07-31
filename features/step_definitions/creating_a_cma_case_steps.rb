@@ -11,9 +11,9 @@ When(/^I create a CMA case$/) do
   create_cma_case(@cma_fields)
 end
 
-When(/^I create a CMA case without one of the required fields$/) do
+When(/^I create a CMA case with invalid fields$/) do
   @cma_fields = {
-    body: "## Header" + ("\n\nPraesent commodo cursus magna, vel scelerisque nisl consectetur et." * 10),
+    body: "<script>alert('Oh noes!)</script>",
     opened_date: "Bad data"
   }
 
@@ -76,15 +76,6 @@ Then(/^the CMA case has been created$/) do
   check_slug_registered_with_panopticon_with_correct_organisation(@slug, ["competition-and-markets-authority"])
 end
 
-Then(/^I should see error messages about missing fields$/) do
-  check_for_missing_title_error
-  check_for_missing_summary_error
-end
-
-Then(/^I should see an error message about an invalid date field "(.*)"$/) do |field|
-  check_for_invalid_date_error(field)
-end
-
 Then(/^the CMA case should not have been created$/) do
   check_document_does_not_exist_with(@cma_fields)
 end
@@ -137,10 +128,6 @@ end
 
 When(/^I create another case with the same slug$/) do
   create_cma_case(@cma_fields)
-end
-
-Then(/^I should see an error message about the duplicate slug$/) do
-  check_for_error("Slug is already taken")
 end
 
 When(/^I start creating a new CMA case$/) do

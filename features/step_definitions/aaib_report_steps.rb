@@ -16,8 +16,9 @@ Then(/^the AAIB report has been created$/) do
   check_slug_registered_with_panopticon_with_correct_organisation(@slug, ["air-accidents-investigation-branch"])
 end
 
-When(/^I create a AAIB report without one of the required fields$/) do
+When(/^I create a AAIB report with invalid fields$/) do
   @aaib_fields = {
+    body: "<script>alert('Oh noes!)</script>",
     date_of_occurrence: "Bad data",
   }
 
