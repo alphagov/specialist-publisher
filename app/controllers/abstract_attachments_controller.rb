@@ -16,7 +16,6 @@ class AbstractAttachmentsController < ApplicationController
   end
 
   def edit
-    # TODO: action not tested
     document, attachment = services.show(self, document_id).call
 
     render("attachments/edit", locals: {
