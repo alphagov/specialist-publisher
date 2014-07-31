@@ -84,6 +84,10 @@ class ServiceRegistry
     )
   end
 
+  def publish_manual(manual_id)
+    PublishManualService.new(manual_id)
+  end
+
   private
 
   def observers
