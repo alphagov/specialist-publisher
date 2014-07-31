@@ -15,6 +15,7 @@ gem "logstasher", "0.4.8"
 gem "mongoid", "2.5.2"
 gem "mongoid_rails_migrations", "1.0.0"
 gem "multi_json", "1.10.0"
+gem "sidekiq", "3.2.1"
 gem "plek", "1.7.0"
 gem "unicorn", "4.8.2"
 
