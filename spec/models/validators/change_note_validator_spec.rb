@@ -21,7 +21,13 @@ RSpec.describe ChangeNoteValidator do
   let(:change_note) { nil }
   let(:minor_update) { false }
   let(:published) { false }
-  let(:entity_errors) { {} }
+  let(:entity_errors) {
+    double(
+      :entity_errors_uncast,
+      to_hash: entity_errors_hash,
+    )
+  }
+  let(:entity_errors_hash) { {} }
   let(:entity_valid) { false }
 
   describe "#valid?" do
@@ -101,7 +107,7 @@ RSpec.describe ChangeNoteValidator do
       end
 
       context "when the underlying entity has errors" do
-        let(:entity_errors) {
+        let(:entity_errors_hash) {
           {
             another_field: ["is not valid"],
           }
