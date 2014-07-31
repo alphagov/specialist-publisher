@@ -16,7 +16,6 @@ class ManualDocumentAttachmentsController < ApplicationController
   end
 
   def edit
-    # TODO: action not tested
     manual, document, attachment = services.show_manual_document_attachment(self).call
 
     render(:edit, locals: {
