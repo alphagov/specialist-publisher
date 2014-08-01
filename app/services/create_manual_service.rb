@@ -3,7 +3,7 @@ class CreateManualService
     @manual_repository = dependencies.fetch(:manual_repository)
     @manual_builder = dependencies.fetch(:manual_builder)
     @listeners = dependencies.fetch(:listeners)
-    @context = dependencies.fetch(:context)
+    @attributes = dependencies.fetch(:attributes)
   end
 
   def call
@@ -17,10 +17,15 @@ class CreateManualService
 
   private
 
-  attr_reader :manual_repository, :manual_builder, :listeners, :context
+  attr_reader(
+    :manual_repository,
+    :manual_builder,
+    :listeners,
+    :attributes,
+  )
 
   def manual
-    @manual ||= manual_builder.call(manual_params)
+    @manual ||= manual_builder.call(attributes)
   end
 
   def persist
@@ -31,26 +36,5 @@ class CreateManualService
     listeners.each do |listener|
       listener.call(manual)
     end
-  end
-
-  def manual_params
-    context.params
-      .fetch("manual")
-      .slice(*valid_params)
-      .merge(
-        organisation_slug: organisation_slug,
-      )
-      .symbolize_keys
-  end
-
-  def valid_params
-    %i(
-      title
-      summary
-    )
-  end
-
-  def organisation_slug
-    context.current_organisation_slug
   end
 end

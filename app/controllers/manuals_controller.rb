@@ -18,7 +18,7 @@ class ManualsController < ApplicationController
   end
 
   def create
-    manual = services.create(self).call
+    manual = services.create(manual_params).call
     manual = manual_form(manual)
 
     if manual.valid?
@@ -37,7 +37,7 @@ class ManualsController < ApplicationController
   end
 
   def update
-    manual = services.update(self).call
+    manual = services.update(manual_id, manual_params).call
     manual = manual_form(manual)
 
     if manual.valid?
@@ -62,6 +62,23 @@ class ManualsController < ApplicationController
 private
   def manual_id
     params.fetch("id")
+  end
+
+  def manual_params
+    params
+      .fetch("manual")
+      .slice(*valid_params)
+      .merge(
+        organisation_slug: current_organisation_slug,
+      )
+      .symbolize_keys
+  end
+
+  def valid_params
+    %i(
+      title
+      summary
+    )
   end
 
   def manual_form(manual)

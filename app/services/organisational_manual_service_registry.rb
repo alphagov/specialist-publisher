@@ -14,19 +14,20 @@ class OrganisationalManualServiceRegistry
     ->() { manual_builder.call(title: "") }
   end
 
-  def create(context)
+  def create(attributes)
     CreateManualService.new(
       manual_repository: manual_repository,
       manual_builder: manual_builder,
       listeners: observers.creation,
-      context: context,
+      attributes: attributes,
     )
   end
 
-  def update(context)
+  def update(manual_id, attributes)
     UpdateManualService.new(
       manual_repository: manual_repository,
-      context: context,
+      manual_id: manual_id,
+      attributes: attributes,
     )
   end
 

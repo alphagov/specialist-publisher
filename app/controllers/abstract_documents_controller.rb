@@ -97,6 +97,8 @@ private
   end
 
   def filtered_params(params_of_document)
+    # TODO: Make this work like the ManualsController parameter filtering
+    # We shouldn't make our hashes indifferent. Let's make the keys consistently symbols
     filter_blank_multi_selects(params_of_document).with_indifferent_access
   end
 
