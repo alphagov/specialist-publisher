@@ -7,14 +7,18 @@ def wiring(sym)
   SpecialistPublisherWiring.get(sym)
 end
 
-observers = wiring(:observers)
-
 # Commented out lines show how we *want* to do this for aaib reports and
 # manuals. Aaib reports should work (but is untested), manuals is awaiting a
 # sane method of accessing all of them through a repository.
 repository_listeners_map = [
-  [wiring(:cma_case_repository), CmaCaseObserversRegistry.new.publication],
-  [wiring(:aaib_report_repository), observers.aaib_report_publication],
+  [
+    wiring(:cma_case_repository),
+    CmaCaseObserversRegistry.new.publication,
+  ],
+  [
+    wiring(:aaib_report_repository),
+    AaibReportObserversRegistry.new.publication,
+  ],
   [
     wiring(:international_development_fund_repository),
     InternationalDevelopmentFundObserversRegistry.new.publication,
