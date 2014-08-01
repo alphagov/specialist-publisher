@@ -37,7 +37,7 @@ class OrganisationalManualServiceRegistry
     )
   end
 
-  def publish(manual_id)
+  def publish(context)
     PublishManualService.new(
       manual_repository: manual_repository,
       listeners: observers.publication,
