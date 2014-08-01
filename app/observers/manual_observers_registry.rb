@@ -4,7 +4,7 @@ class ManualObserversRegistry
   def publication
     [
       publication_logger,
-      panopticon_registerer,
+      panopticon_exporter,
       content_api_exporter,
       change_note_content_api_exporter,
     ]
@@ -12,7 +12,7 @@ class ManualObserversRegistry
 
   def creation
     [
-      panopticon_registerer,
+      panopticon_exporter,
     ]
   end
 
@@ -39,7 +39,7 @@ private
     }
   end
 
-  def panopticon_registerer
+  def panopticon_exporter
     SpecialistPublisherWiring.get(:manual_panopticon_registerer)
   end
 

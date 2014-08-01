@@ -57,7 +57,6 @@ private
   end
 
   def observers
-    # TODO Get a set of manual-specific observers
     @observers ||= ManualObserversRegistry.new
   end
 end
