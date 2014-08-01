@@ -1,12 +1,12 @@
 class ManualDocumentObserversRegistry
   def creation
     [
-      panopticon_registerer,
+      panopticon_exporter,
     ]
   end
 
 private
-  def panopticon_registerer
+  def panopticon_exporter
     SpecialistPublisherWiring.get(:manual_document_panopticon_registerer)
   end
 end
