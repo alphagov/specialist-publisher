@@ -4,6 +4,8 @@ class PanopticonRegisterer
   def initialize(dependencies)
     @mappings = dependencies.fetch(:mappings)
     @artefact = dependencies.fetch(:artefact)
+    @api = dependencies.fetch(:api)
+    @error_logger = dependencies.fetch(:error_logger)
   end
 
   def call
@@ -12,21 +14,25 @@ class PanopticonRegisterer
     else
       register_new_artefact
     end
+
+    nil
   end
 
 private
-  attr_reader :mappings, :artefact
+  attr_reader :mappings, :artefact, :api, :error_logger
 
   def register_new_artefact
-    response = api.create_artefact!(artefact_attributes)
-
-    save_new_mapping(response)
+    api
+      .create_artefact!(artefact_attributes)
+      .on_success(&method(:save_new_mapping))
+      .on_error(&method(:log_error))
   end
 
   def notify_of_update
-    response = api.put_artefact!(mapping.panopticon_id, artefact_attributes)
-
-    update_mapping_slug(response)
+    api
+      .put_artefact!(mapping.panopticon_id, artefact_attributes)
+      .on_success(&method(:update_mapping_slug))
+      .on_error(&method(:log_error))
   end
 
   def save_new_mapping(response)
@@ -42,6 +48,10 @@ private
     mapping.update_attribute(:slug, artefact.slug)
   end
 
+  def log_error(error, *_api_args)
+    error_logger.call(error)
+  end
+
   def artefact_attributes
     artefact.attributes.merge(
       owning_app: owning_app,
@@ -54,12 +64,5 @@ private
 
   def owning_app
     "specialist-publisher"
-  end
-
-  def api
-    @api ||= GdsApi::Panopticon.new(
-      Plek.current.find("panopticon"),
-      PANOPTICON_API_CREDENTIALS
-    )
   end
 end

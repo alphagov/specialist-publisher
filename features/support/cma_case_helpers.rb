@@ -88,4 +88,8 @@ module CmaCaseHelpers
     check_for_new_document_title(:cma_case, *args)
   end
 
+  def check_publication_has_not_raised_error
+    expect(page).not_to have_content("error")
+    expect(current_path).to match(%r{^/cma-cases/[a-f0-9\-]{36}$})
+  end
 end

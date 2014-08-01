@@ -51,6 +51,11 @@ module PanopticonHelpers
       .and_return(fake_panopticon)
   end
 
+  def mock_panopticon_timeout
+    allow(fake_panopticon).to receive(:put_artefact!).and_raise(GdsApi::TimedOutException)
+    allow(fake_panopticon).to receive(:create_artefact!).and_raise(GdsApi::TimedOutException)
+  end
+
   def panopticon_id_for_slug(slug)
     fake_panopticon.panopticon_id_for_slug(slug)
   end
