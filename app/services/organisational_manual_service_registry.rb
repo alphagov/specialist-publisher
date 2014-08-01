@@ -30,10 +30,10 @@ class OrganisationalManualServiceRegistry
     )
   end
 
-  def show(context)
+  def show(manual_id)
     ShowManualService.new(
       manual_repository: manual_repository,
-      context: context,
+      manual_id: manual_id,
     )
   end
 

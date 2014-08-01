@@ -6,7 +6,7 @@ class ManualsController < ApplicationController
   end
 
   def show
-    manual = services.show(self).call
+    manual = services.show(manual_id).call
 
     render(:show, locals: { manual: manual })
   end
@@ -31,7 +31,7 @@ class ManualsController < ApplicationController
   end
 
   def edit
-    manual = services.show(self).call
+    manual = services.show(manual_id).call
 
     render(:edit, locals: { manual: manual_form(manual) })
   end
@@ -50,8 +50,8 @@ class ManualsController < ApplicationController
   end
 
   def publish
-    manual = services.show(self).call
-    services.queue_publish(manual.id).call
+    manual = services.show(manual_id).call
+    services.queue_publish(manual_id).call
 
     redirect_to(
       manual_path(manual),
@@ -60,6 +60,10 @@ class ManualsController < ApplicationController
   end
 
 private
+  def manual_id
+    params.fetch("id")
+  end
+
   def manual_form(manual)
     ManualViewAdapter.new(manual)
   end
