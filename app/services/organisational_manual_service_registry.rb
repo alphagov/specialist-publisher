@@ -45,6 +45,13 @@ class OrganisationalManualServiceRegistry
     )
   end
 
+  def queue_publish(manual_id)
+    QueuePublishManualService.new(
+      async_services,
+      manual_id,
+    )
+  end
+
 private
   attr_reader :organisation_slug
 
@@ -62,5 +69,9 @@ private
 
   def observers
     @observers ||= ManualObserversRegistry.new
+  end
+
+  def async_services
+    @async_services ||= AsynchronousManualServiceRegistry.new
   end
 end
