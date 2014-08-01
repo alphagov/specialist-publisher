@@ -144,6 +144,35 @@ module ManualHelpers
     check_manual_is_published_to_content_api(manual_slug, manual_attrs, document_slug, document_attrs)
     check_manual_document_is_published_to_content_api(document_attrs)
     check_manual_change_note_is_set_to_default(manual_slug)
+
+    check_manual_is_published_to_rummager(manual_slug, manual_attrs)
+    check_manual_section_is_published_to_rummager(document_slug, document_attrs, manual_attrs)
+  end
+
+  def check_manual_is_published_to_rummager(slug, attrs)
+    expect(fake_rummager).to have_received(:add_document)
+      .with(
+        "manual",
+        slug,
+        hash_including(
+          title: attrs.fetch(:title),
+          link: slug,
+          indexable_content: attrs.fetch(:summary),
+        )
+      ).at_least(:once)
+  end
+
+  def check_manual_section_is_published_to_rummager(slug, attrs, manual_attrs)
+    expect(fake_rummager).to have_received(:add_document)
+      .with(
+        "manual_section",
+        slug,
+        hash_including(
+          title: "#{manual_attrs.fetch(:title)}: #{attrs.fetch(:title)}",
+          link: slug,
+          indexable_content: attrs.fetch(:body),
+        )
+      ).at_least(:once)
   end
 
   def create_manual_document_for_preview(manual_title, fields)
