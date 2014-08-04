@@ -50,8 +50,7 @@ class ManualsController < ApplicationController
   end
 
   def publish
-    manual = services.show(manual_id).call
-    services.queue_publish(manual_id).call
+    manual = services.queue_publish(manual_id).call
 
     redirect_to(
       manual_path(manual),

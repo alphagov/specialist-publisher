@@ -49,6 +49,7 @@ class OrganisationalManualServiceRegistry
   def queue_publish(manual_id)
     QueuePublishManualService.new(
       async_services,
+      manual_repository,
       manual_id,
     )
   end
