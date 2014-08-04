@@ -3,7 +3,7 @@ class PublicationLog
   include Mongoid::Timestamps
 
   field :slug, type: String
-  field :title, typ: String
+  field :title, type: String
   field :change_note, type: String
   field :version_number, type: Integer
 
