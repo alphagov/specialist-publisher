@@ -1,13 +1,15 @@
 class QueuePublishManualService
 
-  def initialize(async_services, repository, manual_id)
+  def initialize(async_services, repository, publication_logger, manual_id)
     @async_services = async_services
     @repository = repository
     @manual_id = manual_id
+    @publication_logger = publication_logger
   end
 
   def call
     async_services.publish(manual.id)
+    publication_logger.call(manual).call
     manual
   end
 
@@ -15,6 +17,7 @@ private
   attr_reader(
     :async_services,
     :repository,
+    :publication_logger,
     :manual_id,
   )
 
