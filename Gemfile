@@ -8,7 +8,6 @@ gem "faraday", "0.9.0"
 gem "fetchable", "1.0.0"
 gem "gds-sso", "9.3.0"
 gem "generic_form_builder", "0.8.0"
-gem "govspeak", "1.6.2"
 gem 'govuk_admin_template', '1.0.0'
 gem "kaminari", "0.16.1"
 gem "logstasher", "0.4.8"
@@ -18,10 +17,16 @@ gem "multi_json", "1.10.0"
 gem "plek", "1.7.0"
 gem "unicorn", "4.8.2"
 
+if ENV["GOVSPEAK_DEV"]
+  gem "govspeak", :path => "../govspeak"
+else
+  gem "govspeak", "2.0.0"
+end
+
 if ENV["CONTENT_MODELS_DEV"]
   gem "govuk_content_models", :path => "../govuk_content_models"
 else
-  gem "govuk_content_models", "16.2.0"
+  gem "govuk_content_models", "17.0.0"
 end
 
 if ENV["API_DEV"]
