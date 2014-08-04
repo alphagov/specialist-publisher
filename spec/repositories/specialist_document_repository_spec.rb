@@ -2,8 +2,6 @@ require "spec_helper"
 
 describe SpecialistDocumentRepository do
 
-  let(:panopticon_mappings) { PanopticonMapping }
-
   let(:specialist_document_repository) do
     SpecialistDocumentRepository.new(
       specialist_document_editions: SpecialistDocumentEdition,
@@ -81,9 +79,6 @@ describe SpecialistDocumentRepository do
 
         edition
       end
-
-      allow(panopticon_mappings).to receive(:all_document_ids)
-        .and_return([@edition_1.document_id, @edition_2.document_id])
     end
 
     it "returns all documents by date updated desc" do
