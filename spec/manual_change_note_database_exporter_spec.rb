@@ -52,6 +52,8 @@ RSpec.describe ManualChangeNoteDatabaseExporter do
   let(:change_note_slug) { "guidance/a-manual/updates" }
 
   describe "#call" do
+    let(:scoped_collection) { double(:scoped_collection) }
+
     before do
       allow(publication_logs_collection).to receive(:change_notes_for)
         .and_return(manual_publication_logs)
