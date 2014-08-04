@@ -7,6 +7,7 @@ require "cma_case_indexable_formatter"
 require "dependency_container"
 require "finder_api"
 require "finder_api_notifier"
+require "gds_api_proxy"
 require "gds_api/rummager"
 require "id_generator"
 require "manual_database_exporter"
@@ -285,8 +286,19 @@ SpecialistPublisherWiring = DependencyContainer.new do
       PanopticonRegisterer.new(
         mappings: PanopticonMapping,
         artefact: artefact,
+        api: get(:panopticon_api),
+        error_logger: Airbrake.method(:notify),
       ).call
     }
+  }
+
+  define_factory(:panopticon_api) {
+    GdsApiProxy.new(
+      GdsApi::Panopticon.new(
+        Plek.current.find("panopticon"),
+        PANOPTICON_API_CREDENTIALS
+      )
+    )
   }
 
   define_factory(:aaib_report_panopticon_registerer) {
