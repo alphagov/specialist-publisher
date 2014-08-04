@@ -67,32 +67,9 @@ module ManualHelpers
     click_link manual_title
   end
 
-  def check_manual_slug_was_reserved(slug)
-    expect(fake_panopticon).to have_received(:create_artefact!)
-      .with(
-        hash_including(
-          slug: slug,
-          kind: "manual",
-          rendering_app: "manuals-frontend",
-        )
-      )
-  end
-
-  def check_manual_document_slug_was_reserved(slug)
-    expect(fake_panopticon).to have_received(:create_artefact!)
-      .with(
-        hash_including(
-          slug: slug,
-          kind: "manual-section",
-          rendering_app: "manuals-frontend",
-        )
-      )
-  end
-
   def check_manual_was_published_to_panopticon(slug, attrs)
-    expect(fake_panopticon).to have_received(:put_artefact!)
+    expect(fake_panopticon).to have_received(:create_artefact!)
       .with(
-        panopticon_id_for_slug(slug),
         hash_including(
           name: attrs.fetch(:title),
           slug: slug,
@@ -104,9 +81,8 @@ module ManualHelpers
   end
 
   def check_manual_section_was_published_to_panopticon(slug, attrs)
-    expect(fake_panopticon).to have_received(:put_artefact!)
+    expect(fake_panopticon).to have_received(:create_artefact!)
       .with(
-        panopticon_id_for_slug(slug),
         hash_including(
           name: attrs.fetch(:title),
           slug: slug,
@@ -215,10 +191,15 @@ module ManualHelpers
       .to eq(@change_note)
   end
 
-  def check_manual_change_note_artefact_was_created(manual_slug)
+  def check_manual_change_note_was_published_with_panopticon(manual_slug)
     slug = change_note_slug(manual_slug)
 
-    expect(fake_panopticon).to have_received(:create_artefact!).with(hash_including(slug: slug, state: "draft"))
+    expect(fake_panopticon).to have_received(:create_artefact!).with(
+      hash_including(
+        slug: slug,
+        state: "live",
+      )
+    )
   end
 
   def check_manual_change_note_is_set_to_default(manual_slug)

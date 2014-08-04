@@ -1,8 +1,6 @@
 class ManualDocumentObserversRegistry
   def creation
-    [
-      panopticon_exporter,
-    ]
+    []
   end
 
 private

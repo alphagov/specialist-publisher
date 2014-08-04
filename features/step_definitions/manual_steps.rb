@@ -12,10 +12,6 @@ Then(/^the manual should exist$/) do
   check_manual_exists_with(@manual_fields)
 end
 
-Then(/^the manual slug should be reserved$/) do
-  check_manual_slug_was_reserved(@manual_slug)
-end
-
 Given(/^a draft manual exists$/) do
   @manual_slug = "guidance/example-manual-title"
   @manual_title = "Example Manual Title"
@@ -67,10 +63,6 @@ Then(/^I see the manual has the new section$/) do
   visit manuals_path
   click_on @manual_fields.fetch(:title)
   expect(page).to have_content(@document_fields.fetch(:section_title))
-end
-
-Then(/^the manual section slug should be reserved$/) do
-  check_manual_document_slug_was_reserved(@document_slug)
 end
 
 Given(/^a draft document exists for the manual$/) do
@@ -240,7 +232,7 @@ end
 
 Then(/^the change note is also published$/) do
   check_manual_change_note_exported(@manual_slug, @change_note)
-  check_manual_change_note_artefact_was_created(@manual_slug)
+  check_manual_change_note_was_published_with_panopticon(@manual_slug)
 end
 
 When(/^I edit the document without a change note$/) do
