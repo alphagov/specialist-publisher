@@ -19,8 +19,9 @@ private
   def create_or_update_artefact
     api
       .artefact_for_slug(slug)
-      .on_success { |_response| notify_of_update }
-      .on_error { |_response| register_new_artefact } # TODO: make this on_not_found
+      .on_success { |_response| notify_of_update } # TODO Check owning app is "specialist-publisher"
+      .on_not_found { |*_| register_new_artefact }
+      .on_error(&method(:log_error))
   end
 
   def register_new_artefact

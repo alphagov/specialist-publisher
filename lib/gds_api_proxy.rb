@@ -13,6 +13,8 @@ class GdsApiProxy
     response = api.public_send(method_id, *args, &block)
 
     SuccessResponseProxy.new(response)
+  rescue GdsApi::HTTPNotFound
+    NotFoundResponseProxy.new(*args)
   rescue GdsApi::BaseError => e
     ErrorResponseProxy.new(e, *args)
   end
@@ -20,38 +22,43 @@ class GdsApiProxy
 private
   attr_reader :api
 
-  module ResponseProxy
-    def on_success(&block)
-      self
-    end
-
-    def on_error(&block)
-      self
-    end
-  end
-
-  class SuccessResponseProxy
-    include ResponseProxy
-
-    def initialize(response)
-      @response = response
-    end
-
-    def on_success(&block)
-      block.call(@response)
-      self
-    end
-  end
-
-  class ErrorResponseProxy
-    include ResponseProxy
-
+  class ResponseProxy
     def initialize(*args)
       @args = args
     end
 
+    def on_success(&block)
+      self
+    end
+
+    def on_not_found(&block)
+      self
+    end
+
     def on_error(&block)
-      block.call(*@args)
+      self
+    end
+  private
+    attr_reader :args
+  end
+
+  class SuccessResponseProxy < ResponseProxy
+    def on_success(&block)
+      block.call(*args)
+      self
+    end
+  end
+
+  class NotFoundResponseProxy < ResponseProxy
+    def on_not_found(&block)
+      block.call(*args)
+      self
+    end
+  end
+
+  class ErrorResponseProxy < ResponseProxy
+    def on_error(&block)
+      block.call(*args)
       self
     end
   end

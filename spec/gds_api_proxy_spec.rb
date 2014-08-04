@@ -1,10 +1,7 @@
 require "fast_spec_helper"
 
 require "gds_api_proxy"
-
-module GdsApi
-  class BaseError < StandardError; end
-end
+require "gds_api/exceptions"
 
 RSpec.describe GdsApiProxy do
   subject(:api_proxy) {
@@ -19,8 +16,14 @@ RSpec.describe GdsApiProxy do
   }
 
   let(:response) { double(:response) }
-  let(:success_spy) { double(:success_spy, call: "not nil") }
-  let(:error_spy) { double(:error_spy, call: "not nil") }
+  let(:spy) { double(:spy) }
+
+  def make_request(*args)
+    api_proxy.put_a_thing(*args)
+      .on_success { |*args| spy.success(*args) }
+      .on_not_found { |*args| spy.not_found(*args) }
+      .on_error { |*args| spy.error(*args) }
+  end
 
   describe "calling an api method" do
     let(:id_of_thing) { double(:id_of_thing) }
@@ -47,25 +50,23 @@ RSpec.describe GdsApiProxy do
 
     context "when the request is successful" do
       it "calls the success callback with the response" do
-        api_proxy.put_a_thing(
-          id_of_thing,
-          attributes_of_thing,
-        )
-        .on_success { |*args| success_spy.call(*args) }
-        .on_error { |*args| error_spy.call(*args) }
+        expect(spy).to receive(:success).with(response)
 
-        expect(success_spy).to have_received(:call).with(response)
+        make_request(id_of_thing, attributes_of_thing)
+      end
+    end
+
+    context "when the response is not found" do
+      let(:error) { GdsApi::HTTPNotFound.new(404, "resource-not-found") }
+
+      before do
+        allow(gds_api).to receive(:put_a_thing).and_raise(error)
       end
 
-      it "does not call the error callback" do
-        api_proxy.put_a_thing(
-          id_of_thing,
-          attributes_of_thing,
-        )
-        .on_success { |*args| success_spy.call(*args) }
-        .on_error { |*args| error_spy.call(*args) }
+      it "calls the not_found callback with the api arguments" do
+        expect(spy).to receive(:not_found).with(id_of_thing, attributes_of_thing)
 
-        expect(error_spy).not_to have_received(:call)
+        make_request(id_of_thing, attributes_of_thing)
       end
     end
 
@@ -77,26 +78,9 @@ RSpec.describe GdsApiProxy do
       end
 
       it "calls the error callback with the exception and api arguments" do
-        api_proxy.put_a_thing(
-          id_of_thing,
-          attributes_of_thing,
-        )
-        .on_success { |*args| success_spy.call(*args) }
-        .on_error { |*args| error_spy.call(*args) }
+        expect(spy).to receive(:error).with(error, id_of_thing, attributes_of_thing)
 
-        expect(error_spy).to have_received(:call)
-          .with(error, id_of_thing, attributes_of_thing)
-      end
-
-      it "does not call the success callback" do
-        api_proxy.put_a_thing(
-          id_of_thing,
-          attributes_of_thing,
-        )
-        .on_success { |*args| success_spy.call(*args) }
-        .on_error { |*args| error_spy.call(*args) }
-
-        expect(success_spy).not_to have_received(:call)
+        make_request(id_of_thing, attributes_of_thing)
       end
     end
   end
