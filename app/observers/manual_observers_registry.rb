@@ -7,6 +7,7 @@ class ManualObserversRegistry
       panopticon_exporter,
       content_api_exporter,
       change_note_content_api_exporter,
+      rummager_exporter,
     ]
   end
 
@@ -34,6 +35,25 @@ private
           title: doc.title,
           slug: doc.slug,
           change_note: doc.change_note,
+        )
+      end
+    }
+  end
+
+  def rummager_exporter
+    ->(manual) {
+      indexer = RummagerIndexer.new
+
+      indexer.add(
+        ManualIndexableFormatter.new(manual)
+      )
+
+      manual.documents.each do |section|
+        indexer.add(
+          ManualSectionIndexableFormatter.new(
+            SpecialistDocumentAttachmentProcessor.new(section),
+            manual,
+          )
         )
       end
     }
