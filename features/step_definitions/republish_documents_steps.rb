@@ -18,8 +18,11 @@ Given(/^their RenderedSpecialistDocument records are missing$/) do
 end
 
 When(/^I republish published documents$/) do
-  mapping = [[cma_case_repository, CmaCaseObserversRegistry.new.publication]]
-  DocumentRepublisher.new(mapping).republish!
+  repositories_and_listeners = [
+    [cma_case_repository, CmaCaseObserversRegistry.new.publication],
+  ]
+
+  DocumentRepublisher.new(repositories_and_listeners).republish!
 end
 
 Then(/^the documents should be republished with valid RenderedSpecialistDocuments$/) do
