@@ -8,7 +8,7 @@ class QueuePublishManualService
   end
 
   def call
-    async_services.publish(manual.id)
+    async_services.publish(manual.id, manual.version_number)
     publication_logger.call(manual).call
     manual
   end

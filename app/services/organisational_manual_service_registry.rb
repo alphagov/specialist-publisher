@@ -38,14 +38,6 @@ class OrganisationalManualServiceRegistry
     )
   end
 
-  def publish(context)
-    PublishManualService.new(
-      manual_repository: manual_repository,
-      listeners: observers.publication,
-      context: context,
-    )
-  end
-
   def queue_publish(manual_id)
     QueuePublishManualService.new(
       async_services,

@@ -1,8 +1,8 @@
 class PublishManualWorker
   include Sidekiq::Worker
 
-  def perform(manual_id)
-    services.publish(manual_id).call
+  def perform(manual_id, version_number)
+    services.publish(manual_id, version_number).call
   end
 
 private

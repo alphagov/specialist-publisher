@@ -1,9 +1,10 @@
 class ManualServiceRegistry
-  def publish(manual_id)
+  def publish(manual_id, version_number)
     PublishManualService.new(
       manual_repository: manual_repository,
       listeners: observers.publication,
       manual_id: manual_id,
+      version_number: version_number,
     )
   end
 

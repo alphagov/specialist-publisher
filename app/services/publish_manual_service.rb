@@ -3,18 +3,30 @@ class PublishManualService
     @manual_id = dependencies.fetch(:manual_id)
     @manual_repository = dependencies.fetch(:manual_repository)
     @listeners = dependencies.fetch(:listeners)
+    @version_number = dependencies.fetch(:version_number)
   end
 
   def call
-    publish
-    persist
+    if versions_match?
+      publish
+      persist
+    end
 
     manual
   end
 
-  private
+private
 
-  attr_reader :manual_id, :manual_repository, :listeners
+  attr_reader(
+    :manual_id,
+    :manual_repository,
+    :listeners,
+    :version_number,
+  )
+
+  def versions_match?
+    version_number == manual.version_number
+  end
 
   def publish
     manual.publish

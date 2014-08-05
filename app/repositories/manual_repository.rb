@@ -65,6 +65,7 @@ private
       summary: edition.summary,
       organisation_slug: manual_record.organisation_slug,
       state: edition.state,
+      version_number: edition.version_number,
       updated_at: edition.updated_at,
     )
 
