@@ -112,6 +112,27 @@ SpecialistPublisherWiring = DependencyContainer.new do
     }
   }
 
+  define_factory(:manual_repository) {
+    ManualRepository.new(
+      {
+        association_marshallers: [
+          DocumentAssociationMarshaller.new(
+            manual_specific_document_repository_factory: get(:manual_specific_document_repository_factory),
+            decorator: ->(manual, attrs) {
+              ManualWithDocuments.new(
+                get(:manual_document_builder),
+                manual,
+                attrs,
+              )
+            }
+          ),
+        ],
+        factory: Manual.method(:new),
+        collection: ManualRecord,
+      }
+    )
+  }
+
   define_factory(:plain_manual_repository_factory) {
     ->(dependencies) {
       ManualRepository.new(

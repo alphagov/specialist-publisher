@@ -50,7 +50,8 @@ class ManualsController < ApplicationController
   end
 
   def publish
-    manual = services.publish(self).call
+    async_services.publish(params[:id])
+    manual = services.show(self).call
 
     redirect_to(
       manual_path(manual),
@@ -64,8 +65,12 @@ private
   end
 
   def services
-    @services ||= ManualServiceRegistry.new(
+    @services ||= OrganisationalManualServiceRegistry.new(
       organisation_slug: current_organisation_slug,
     )
+  end
+
+  def async_services
+    @async_services ||= AsynchronousManualServiceRegistry.new
   end
 end

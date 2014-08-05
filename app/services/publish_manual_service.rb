@@ -1,8 +1,8 @@
 class PublishManualService
   def initialize(dependencies)
+    @manual_id = dependencies.fetch(:manual_id)
     @manual_repository = dependencies.fetch(:manual_repository)
     @listeners = dependencies.fetch(:listeners)
-    @context = dependencies.fetch(:context)
   end
 
   def call
@@ -14,7 +14,7 @@ class PublishManualService
 
   private
 
-  attr_reader :manual_repository, :listeners, :context
+  attr_reader :manual_id, :manual_repository, :listeners
 
   def publish
     manual.publish
@@ -34,9 +34,5 @@ class PublishManualService
 
   def manual
     @manual ||= manual_repository.fetch(manual_id)
-  end
-
-  def manual_id
-    context.params.fetch("id")
   end
 end
