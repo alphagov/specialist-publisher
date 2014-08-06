@@ -279,3 +279,7 @@ end
 Then(/^I see no visible change note in the edit form$/) do
   check_change_note_value(@manual_title, @document_title, "")
 end
+
+When(/^I add invalid HTML to the document body$/) do
+  fill_in :body, with: "<script>alert('naughty naughty');</script>"
+end

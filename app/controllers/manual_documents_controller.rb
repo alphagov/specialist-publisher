@@ -53,8 +53,22 @@ class ManualDocumentsController < ApplicationController
   end
 
   def preview
-    preview_html = services.preview_manual_document(self).call
+    document = services.preview_manual_document(self).call
 
-    render json: { preview_html: preview_html }
+    document.valid? # Force validation check or errors will be empty
+
+    if document.errors[:body].nil?
+      render json: { preview_html: document.body }
+    else
+      render json: {
+        preview_html: render_to_string(
+          "specialist_documents/_preview_errors",
+          layout: false,
+          locals: {
+            errors: document.errors[:body]
+          }
+        )
+      }
+    end
   end
 end

@@ -9,7 +9,7 @@ class PreviewManualDocumentService
   def call
     document.update(document_params)
 
-    document_renderer.call(document).body
+    document_renderer.call(document)
   end
 
   private

@@ -71,3 +71,11 @@ Feature: Creating and editing a manual
     When I create a document to preview
     And I preview the document
     Then I see the document body preview
+
+  @javascript
+  Scenario: Previewing a manual with invalid HTML
+    Given a draft manual exists
+    When I create a document to preview
+    And I add invalid HTML to the document body
+    And I preview the document
+    Then I should see an error message about a "Body" field containing javascript
