@@ -305,7 +305,6 @@ SpecialistPublisherWiring = DependencyContainer.new do
   define_factory(:panopticon_registerer) {
     ->(artefact) {
       PanopticonRegisterer.new(
-        mappings: PanopticonMapping,
         artefact: artefact,
         api: get(:panopticon_api),
         error_logger: Airbrake.method(:notify),

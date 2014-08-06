@@ -1,14 +1,10 @@
 class InternationalDevelopmentFundObserversRegistry
   def creation
-    [
-      panopticon_exporter,
-    ]
+    []
   end
 
   def update
-    [
-      panopticon_exporter,
-    ]
+    []
   end
 
   def publication

@@ -9,15 +9,11 @@ class AaibReportObserversRegistry
   end
 
   def update
-    [
-      panopticon_exporter,
-    ]
+    []
   end
 
   def creation
-    [
-      panopticon_exporter,
-    ]
+    []
   end
 
   def withdrawal

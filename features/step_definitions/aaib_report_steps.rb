@@ -13,7 +13,6 @@ end
 
 Then(/^the AAIB report has been created$/) do
   check_aaib_report_exists_with(@aaib_fields)
-  check_slug_registered_with_panopticon_with_correct_organisation(@slug, ["air-accidents-investigation-branch"])
 end
 
 When(/^I create a AAIB report with invalid fields$/) do

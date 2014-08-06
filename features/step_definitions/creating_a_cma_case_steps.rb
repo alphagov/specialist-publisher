@@ -73,7 +73,6 @@ end
 
 Then(/^the CMA case has been created$/) do
   check_cma_case_exists_with(@cma_fields)
-  check_slug_registered_with_panopticon_with_correct_organisation(@slug, ["competition-and-markets-authority"])
 end
 
 Then(/^the CMA case should not have been created$/) do

@@ -43,12 +43,6 @@ Feature: Creating and editing a CMA case
     When I edit a CMA case
     Then I should not see an error
 
-  @regression
-  Scenario: Changing the slug on a draft CMA case
-    Given a draft CMA case exists
-    When I change the title of the CMA case
-    Then the updated URL slug is registered
-
   @javascript
   Scenario: Previewing a draft CMA case
     Given a draft CMA case exists

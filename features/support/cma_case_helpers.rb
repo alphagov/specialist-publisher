@@ -6,11 +6,6 @@ module CmaCaseHelpers
     create_document(:cma_case, *args)
   end
 
-  def check_slug_updated_with_panopticon(old_slug, new_slug)
-    expect(fake_panopticon).to have_received(:put_artefact!)
-      .with(panopticon_id_for_slug(old_slug), hash_including(slug: new_slug))
-  end
-
   def change_cma_case_without_saving(title, fields)
     go_to_edit_page_for_cma_case(title)
     fill_in_fields(fields)

@@ -3,38 +3,33 @@ require "singleton"
 module PanopticonHelpers
 
   class FakePanopticon
-    include Singleton
-
     def initialize
-      @slug_id_map = {}
+      @artefacts = {}
     end
 
-    def put_artefact!(id, attributes = {})
-      raise "No artifact with id #{id} exists" unless slug_id_map.has_value?(id)
+    def artefact_for_slug(slug)
+      artefacts.fetch(slug) { slug_does_not_exist!(slug) }
+    end
 
-      slug_id_map[attributes.fetch(:slug)] = id
-
-      {"id" => id, "slug" => attributes.fetch(:slug)}
+    def put_artefact!(slug, attributes)
+      artefact = artefacts.fetch(slug) { slug_does_not_exist!(slug) }
+      artefacts.store(slug, artefact.merge(attributes))
     end
 
     def create_artefact!(attributes = {})
-      new_artefact_id = "test-panopticon-id-#{SecureRandom.hex}"
-      slug_id_map[attributes.fetch(:slug)] = new_artefact_id
-
-      {"id" => new_artefact_id, "slug" => attributes.fetch(:slug)}
-    end
-
-    def panopticon_id_for_slug(slug)
-      slug_id_map.fetch(slug) { raise "No artefact with slug '#{slug}' was created" }
+      artefacts.store(attributes.fetch(:slug), attributes)
     end
 
     private
-    attr_reader :slug_id_map
+    attr_reader :artefacts
+
+    def slug_does_not_exist!(slug)
+      raise GdsApi::HTTPNotFound.new(404, "url: #{slug}")
+    end
   end
 
   def fake_panopticon
-    # memoizing does not work here for some reason
-    FakePanopticon.instance
+    @fake_panopticon ||= FakePanopticon.new
   end
 
   def reset_panopticon_stubs_and_messages
@@ -54,9 +49,5 @@ module PanopticonHelpers
   def mock_panopticon_timeout
     allow(fake_panopticon).to receive(:put_artefact!).and_raise(GdsApi::TimedOutException)
     allow(fake_panopticon).to receive(:create_artefact!).and_raise(GdsApi::TimedOutException)
-  end
-
-  def panopticon_id_for_slug(slug)
-    fake_panopticon.panopticon_id_for_slug(slug)
   end
 end

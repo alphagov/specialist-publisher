@@ -12,7 +12,6 @@ end
 
 Then(/^the International Development Fund has been created$/) do
   check_international_development_fund_exists_with(@idf_fields)
-  check_slug_registered_with_panopticon_with_correct_organisation(@slug, ["department-for-international-development"])
 end
 
 When(/^I create a International Development Fund with invalid fields$/) do

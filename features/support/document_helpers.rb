@@ -24,11 +24,6 @@ module DocumentHelpers
     click_button("Preview")
   end
 
-  def check_slug_registered_with_panopticon_with_correct_organisation(slug, organisation_ids = [])
-    expect(fake_panopticon).to have_received(:create_artefact!)
-      .with(hash_including(slug: slug, organisation_ids: organisation_ids))
-  end
-
   def check_document_does_not_exist_with(attributes)
     refute SpecialistDocumentEdition.exists?(conditions: attributes)
   end
@@ -46,14 +41,23 @@ module DocumentHelpers
   end
 
   def check_published_with_panopticon(slug, title)
-    panopticon_id = panopticon_id_for_slug(slug)
-
-    expect(fake_panopticon).to have_received(:put_artefact!)
-      .with(panopticon_id, hash_including(
+    expect(fake_panopticon).to have_received(:create_artefact!)
+      .with(hash_including(
         slug: slug,
         name: title,
         state: "live",
       ))
+  end
+
+  def check_document_republished_with_panopticon(slug, title)
+    expect(fake_panopticon).to have_received(:put_artefact!)
+      .with(
+        slug,
+        hash_including(
+          name: title,
+          state: "live",
+        ),
+      )
   end
 
   def check_added_to_finder_api(slug, fields)
@@ -61,7 +65,16 @@ module DocumentHelpers
       .with(slug, hash_including(fields))
   end
 
-  def check_added_to_rummager(document_type, slug, fields)
+  def check_added_to_rummager(slug, fields)
+    document_type_slug_prefix_map = {
+      "cma-cases" => "cma_case",
+      "aaib-reports" => "aaib_report",
+      "international-development-funding" => "international_development_fund",
+    }
+
+    slug_prefix = slug.split("/").first
+    document_type = document_type_slug_prefix_map.fetch(slug_prefix)
+
     rummager_fields = fields
       .except(:summary)
       .merge(
@@ -94,17 +107,14 @@ module DocumentHelpers
   end
 
   def check_document_is_withdrawn(slug, document_title)
-    panopticon_id = panopticon_id_for_slug(slug)
-
     expect(fake_panopticon).to have_received(:put_artefact!)
-      .with(panopticon_id, hash_including(
-        name: document_title,
+      .with(slug, hash_including(
         state: "archived",
       ))
 
     expect(page).to have_content("withdrawn")
     expect(RenderedSpecialistDocument.where(title: document_title)).to be_empty
-    expect(finder_api).to have_received(:notify_of_withdrawal).with(@slug)
+    expect(finder_api).to have_received(:notify_of_withdrawal).with(slug)
   end
 
   def check_for_documents(*titles)
@@ -132,6 +142,16 @@ module DocumentHelpers
   end
 
   def check_document_is_published(slug, fields)
+    check_document_published_to_content_api(slug, fields)
+    check_published_with_panopticon(slug, fields.fetch(:title))
+    check_added_to_finder_api(slug, fields.except(:body))
+    check_added_to_rummager(
+      slug,
+      fields.except(:body),
+    )
+  end
+
+  def check_document_published_to_content_api(slug, fields)
     published_document = RenderedSpecialistDocument.find_by_slug(slug)
 
     expect(published_document.title).to eq(fields.fetch(:title))
@@ -144,11 +164,13 @@ module DocumentHelpers
 
     check_rendered_document_contains_html(published_document)
     check_rendered_document_contains_header_meta_data(published_document)
+  end
 
-    check_published_with_panopticon(slug, fields.fetch(:title))
+  def check_document_was_republished(slug, fields)
+    check_document_republished_with_panopticon(slug, fields.fetch(:title))
+    check_document_published_to_content_api(slug, fields)
     check_added_to_finder_api(slug, fields.except(:body))
     check_added_to_rummager(
-      published_document.details.fetch("document_type"),
       slug,
       fields.except(:body),
     )

@@ -21,7 +21,7 @@ When(/^I edit the CMA case and republish$/) do
 end
 
 Then(/^the amended document should be published$/) do
-  check_for_published_document_with(@amended_document_attributes)
+  check_document_was_republished(@slug, @amended_document_attributes)
 end
 
 Then(/^previous editions should be archived$/) do
