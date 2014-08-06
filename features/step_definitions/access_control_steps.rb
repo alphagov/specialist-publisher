@@ -5,6 +5,7 @@ Given(/^I am logged in as a "(.*?)" editor$/) do |editor_type|
   stub_panopticon
   stub_finder_api
   stub_rummager
+  stub_publishing_api
 end
 
 Given(/^I am logged in as a non\-CMA editor$/) do
@@ -14,6 +15,7 @@ Given(/^I am logged in as a non\-CMA editor$/) do
   stub_panopticon
   stub_finder_api
   stub_rummager
+  stub_publishing_api
 end
 
 Then(/^I do not see an option for editing documents$/) do

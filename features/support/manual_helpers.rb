@@ -1,4 +1,8 @@
+require "gds_api/test_helpers/publishing_api"
+
 module ManualHelpers
+  include GdsApi::TestHelpers::PublishingApi
+
   def create_manual(fields)
     visit new_manual_path
     fill_in_fields(fields)
@@ -121,6 +125,8 @@ module ManualHelpers
     check_manual_document_is_published_to_content_api(document_attrs)
     check_manual_change_note_is_set_to_default(manual_slug)
 
+    check_manual_is_published_to_publishing_api(manual_slug, manual_attrs)
+
     check_manual_is_published_to_rummager(manual_slug, manual_attrs)
     check_manual_section_is_published_to_rummager(document_slug, document_attrs, manual_attrs)
   end
@@ -136,6 +142,15 @@ module ManualHelpers
           indexable_content: attrs.fetch(:summary),
         )
       ).at_least(:once)
+  end
+
+  def check_manual_is_published_to_publishing_api(slug, attrs)
+    assert_publishing_api_put_item("/#{slug}",
+      "base_path" => "/#{slug}",
+      "format" => "manual",
+      "rendering_app" => "manuals-frontend",
+      "publishing_app" => "specialist-publisher",
+    )
   end
 
   def check_manual_section_is_published_to_rummager(slug, attrs, manual_attrs)

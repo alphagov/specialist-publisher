@@ -1,4 +1,6 @@
+require "gds_api/publishing_api"
 require "manual_change_note_database_exporter"
+require "manual_publishing_api_exporter"
 
 class ManualObserversRegistry
   def publication
@@ -8,6 +10,7 @@ class ManualObserversRegistry
       content_api_exporter,
       change_note_content_api_exporter,
       rummager_exporter,
+      publishing_api_exporter,
     ]
   end
 
@@ -66,4 +69,13 @@ private
     SpecialistPublisherWiring.get(:manual_and_documents_content_api_exporter)
   end
 
+  def publishing_api_exporter
+    ->(manual) {
+      ManualPublishingAPIExporter.new(publishing_api, manual).call
+    }
+  end
+
+  def publishing_api
+    GdsApi::PublishingApi.new(Plek.new.find("publishing-api"))
+  end
 end
