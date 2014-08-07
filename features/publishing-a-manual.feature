@@ -1,7 +1,7 @@
 Feature: Publishing a manual
   As an editor
   I want to publish finished manuals
-  So that they are availale on gov.uk
+  So that they are available on GOV.UK
 
   Background:
     Given I am logged in as a "CMA" editor
