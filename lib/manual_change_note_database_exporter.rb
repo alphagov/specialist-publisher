@@ -23,7 +23,7 @@ class ManualChangeNoteDatabaseExporter
   end
 
   def serialized_change_notes
-    publication_history.map { |publication|
+    relevant_entries.map { |publication|
       {
         slug: publication.slug,
         title: publication.title,
@@ -31,6 +31,14 @@ class ManualChangeNoteDatabaseExporter
         published_at: publication.published_at.utc,
       }
     }
+  end
+
+  def relevant_entries
+    publication_history
+      .sort_by(&:published_at)
+      .uniq { |publication|
+        [publication.slug, publication.version_number]
+      }
   end
 
   def publication_history

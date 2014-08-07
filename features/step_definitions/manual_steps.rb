@@ -138,6 +138,11 @@ Then(/^the manual and its documents are published$/) do
   )
 end
 
+Then(/^change notes for the original section are not duplicated$/) do
+  # There were no changes to the original section, so there should only be a single change note.
+  check_manual_section_has_no_duplicated_change_notes(@manual_slug, @original_document_slug)
+end
+
 Given(/^a published manual exists$/) do
   @manual_title = "Example Manual Title"
   @manual_slug = "guidance/example-manual-title"
@@ -266,6 +271,7 @@ end
 
 When(/^I add another section to the manual$/) do
   @document_title = "Section 2"
+  @original_document_slug = @document_slug
   @document_slug = [@manual_slug, "section-2"].join("/")
   @document_fields = {
     section_title: @document_title,

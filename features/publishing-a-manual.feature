@@ -37,3 +37,11 @@ Feature: Publishing a manual
     Then I see an error requesting that I provide a change note
     When I indicate that the change is minor
     Then the document is updated without a change note
+
+  @regression
+  Scenario: Duplicated change notes
+    Given a published manual exists
+    When I add another section to the manual
+    And I publish the manual
+    Then the manual and its documents are published
+    And change notes for the original section are not duplicated
