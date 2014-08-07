@@ -7,6 +7,7 @@ class ManualPublishTask
   field :manual_id, type: String
   field :version_number, type: Integer
   field :state, type: String
+  field :error, type: String
 
   state_machine initial: :queued do
     event :start! do

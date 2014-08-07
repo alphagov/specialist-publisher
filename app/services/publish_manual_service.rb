@@ -31,7 +31,7 @@ private
   def publish
     manual.publish
 
-    listeners.each { |o| o.call(manual) }
+    notify_listeners
   end
 
   def persist
