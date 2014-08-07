@@ -202,6 +202,17 @@ module ManualHelpers
     )
   end
 
+  def check_manual_section_has_no_duplicated_change_notes(manual_slug, document_slug)
+    slug = change_note_slug(manual_slug)
+
+    manual_change_history = ManualChangeHistory.find_by_slug(slug)
+    document_change_history = manual_change_history.updates.select { |h| h["slug"] == document_slug }
+
+    unique_changes = document_change_history.uniq { |h| h["change_note"] }
+
+    expect(unique_changes.size).to eq(document_change_history.size)
+  end
+
   def check_manual_change_note_is_set_to_default(manual_slug)
     slug = change_note_slug(manual_slug)
 

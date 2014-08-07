@@ -32,6 +32,7 @@ private
         PublicationLog.create!(
           title: doc.title,
           slug: doc.slug,
+          version_number: doc.version_number,
           change_note: doc.change_note,
         )
       end
