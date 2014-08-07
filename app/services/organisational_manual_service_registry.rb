@@ -40,9 +40,8 @@ class OrganisationalManualServiceRegistry
 
   def queue_publish(manual_id)
     QueuePublishManualService.new(
-      async_services,
+      PublishManualWorker,
       manual_repository,
-      publication_logger,
       manual_id,
     )
   end
@@ -66,13 +65,4 @@ private
     @observers ||= ManualObserversRegistry.new
   end
 
-  def async_services
-    @async_services ||= AsynchronousManualServiceRegistry.new
-  end
-
-  def publication_logger
-    ->(manual) {
-      PublicationLogger.new(manual, "queued")
-    }
-  end
 end
