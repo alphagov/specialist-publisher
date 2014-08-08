@@ -1,6 +1,6 @@
 class ManualDocumentsController < ApplicationController
   def show
-    manual, document = services.show_manual_document(self).call
+    manual, document = services.show(self).call
 
     render(:show, locals: {
       manual: manual,
@@ -9,7 +9,7 @@ class ManualDocumentsController < ApplicationController
   end
 
   def new
-    manual, document = services.new_manual_document(self).call
+    manual, document = services.new(self).call
 
     render(:new, locals: {
       manual: ManualViewAdapter.new(manual),
@@ -18,7 +18,7 @@ class ManualDocumentsController < ApplicationController
   end
 
   def create
-    manual, document = services.create_manual_document(self).call
+    manual, document = services.create(self).call
 
     if document.valid?
       redirect_to(manual_path(manual))
@@ -31,7 +31,7 @@ class ManualDocumentsController < ApplicationController
   end
 
   def edit
-    manual, document = services.show_manual_document(self).call
+    manual, document = services.show(self).call
 
     render(:edit, locals: {
       manual: ManualViewAdapter.new(manual),
@@ -40,7 +40,7 @@ class ManualDocumentsController < ApplicationController
   end
 
   def update
-    manual, document = services.update_manual_document(self).call
+    manual, document = services.update(self).call
 
     if document.valid?
       redirect_to(manual_path(manual))
@@ -53,7 +53,7 @@ class ManualDocumentsController < ApplicationController
   end
 
   def preview
-    document = services.preview_manual_document(self).call
+    document = services.preview(self).call
 
     document.valid? # Force validation check or errors will be empty
 
@@ -70,5 +70,10 @@ class ManualDocumentsController < ApplicationController
         )
       }
     end
+  end
+
+private
+  def services
+    ManualDocumentServiceRegistry.new
   end
 end
