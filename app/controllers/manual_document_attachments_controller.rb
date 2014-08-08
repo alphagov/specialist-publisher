@@ -1,6 +1,6 @@
 class ManualDocumentAttachmentsController < ApplicationController
   def new
-    manual, document, attachment = services.new_manual_document_attachment(self).call
+    manual, document, attachment = services.new(self).call
 
     render(:new, locals: {
       manual: ManualViewAdapter.new(manual),
@@ -10,13 +10,13 @@ class ManualDocumentAttachmentsController < ApplicationController
   end
 
   def create
-    manual, document, attachment = services.create_manual_document_attachment(self).call
+    manual, document, attachment = services.create(self).call
 
     redirect_to edit_manual_document_path(manual, document)
   end
 
   def edit
-    manual, document, attachment = services.show_manual_document_attachment(self).call
+    manual, document, attachment = services.show(self).call
 
     render(:edit, locals: {
       manual: ManualViewAdapter.new(manual),
@@ -26,7 +26,7 @@ class ManualDocumentAttachmentsController < ApplicationController
   end
 
   def update
-    manual, document, attachment = services.update_manual_document_attachment(self).call
+    manual, document, attachment = services.update(self).call
 
     if attachment.persisted?
       redirect_to(edit_manual_document_path(manual, document))
@@ -37,5 +37,10 @@ class ManualDocumentAttachmentsController < ApplicationController
         attachment: attachment,
       })
     end
+  end
+
+private
+  def services
+    ManualDocumentAttachmentServiceRegistry.new
   end
 end

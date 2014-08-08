@@ -31,14 +31,6 @@ require "validators/slug_uniqueness_validator"
 $LOAD_PATH.unshift(File.expand_path("../..", "app/services"))
 
 SpecialistPublisherWiring = DependencyContainer.new do
-  define_factory(:services) {
-    ServiceRegistry.new(
-      document_renderer: get(:specialist_document_renderer),
-      manual_repository_factory: get(:manual_repository_factory),
-      manual_document_builder: get(:manual_document_builder),
-    )
-  }
-
   define_factory(:manual_builder) {
     ->(attrs) {
       slug_generator = SlugGenerator.new(prefix: "guidance")

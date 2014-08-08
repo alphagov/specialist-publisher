@@ -17,10 +17,6 @@ class ApplicationController < ActionController::Base
   def_delegators :url_maker, :published_specialist_document_path
   helper_method :published_specialist_document_path
 
-  def services
-    SpecialistPublisherWiring.get(:services)
-  end
-
   def user_can_edit_cma_cases?
     current_user_can_edit?("cma_case")
   end
