@@ -293,3 +293,7 @@ end
 When(/^I create another manual with the same slug$/) do
   create_manual(@manual_fields)
 end
+
+When(/^I create a section with duplicate title$/) do
+  create_manual_document(@manual_fields.fetch(:title), @document_fields)
+end
