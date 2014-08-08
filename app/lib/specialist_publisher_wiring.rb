@@ -7,6 +7,7 @@ require "cma_case_indexable_formatter"
 require "dependency_container"
 require "finder_api"
 require "finder_api_notifier"
+require "footnotes_section_heading_renderer"
 require "gds_api_proxy"
 require "gds_api/rummager"
 require "id_generator"
@@ -262,6 +263,12 @@ SpecialistPublisherWiring = DependencyContainer.new do
     }
   }
 
+  define_instance(:footnotes_section_heading_renderer) {
+    ->(doc) {
+      FootnotesSectionHeadingRenderer.new(doc)
+    }
+  }
+
   define_instance(:specialist_document_govspeak_to_html_renderer) {
     ->(doc) {
       SpecialistDocumentGovspeakToHTMLRenderer.new(
@@ -286,6 +293,20 @@ SpecialistPublisherWiring = DependencyContainer.new do
         get(:markdown_renderer),
         get(:specialist_document_govspeak_header_extractor),
         get(:specialist_document_govspeak_to_html_renderer),
+      ]
+
+      pipeline.reduce(doc) { |doc, next_renderer|
+        next_renderer.call(doc)
+      }
+    }
+  }
+  define_instance(:manual_document_renderer) {
+    ->(doc) {
+      pipeline = [
+        get(:markdown_renderer),
+        get(:specialist_document_govspeak_header_extractor),
+        get(:specialist_document_govspeak_to_html_renderer),
+        get(:footnotes_section_heading_renderer),
       ]
 
       pipeline.reduce(doc) { |doc, next_renderer|
@@ -470,7 +491,7 @@ SpecialistPublisherWiring = DependencyContainer.new do
     ->(doc) {
       SpecialistDocumentDatabaseExporter.new(
         RenderedSpecialistDocument,
-        get(:specialist_document_renderer),
+        get(:manual_document_renderer),
         NullFinderSchema.new,
         doc,
       ).call
