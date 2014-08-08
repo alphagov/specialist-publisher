@@ -92,11 +92,12 @@ GEM
     faraday (0.9.0)
       multipart-post (>= 1.2, < 3)
     fetchable (1.0.0)
-    gds-api-adapters (11.3.0)
+    gds-api-adapters (14.1.0)
       link_header
       lrucache (~> 0.1.1)
       null_logger
       plek
+      rack-cache
       rest-client (~> 1.6.3)
     gds-sso (9.3.0)
       multi_json (~> 1.0)
@@ -250,8 +251,9 @@ GEM
     redis (3.1.0)
     redis-namespace (1.5.0)
       redis (~> 3.0, >= 3.0.4)
-    rest-client (1.6.7)
-      mime-types (>= 1.16)
+    rest-client (1.6.8)
+      mime-types (~> 1.16)
+      rdoc (>= 2.4.2)
     rspec (3.0.0)
       rspec-core (~> 3.0.0)
       rspec-expectations (~> 3.0.0)
@@ -337,7 +339,7 @@ DEPENDENCIES
   factory_girl (= 4.3.0)
   faraday (= 0.9.0)
   fetchable (= 1.0.0)
-  gds-api-adapters (= 11.3.0)
+  gds-api-adapters (= 14.1.0)
   gds-sso (= 9.3.0)
   generic_form_builder (= 0.8.0)
   govspeak (= 2.0.0)
