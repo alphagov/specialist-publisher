@@ -32,21 +32,18 @@ $LOAD_PATH.unshift(File.expand_path("../..", "app/services"))
 
 SpecialistPublisherWiring = DependencyContainer.new do
   define_factory(:manual_builder) {
+    ManualBuilder.new(
+      slug_generator: SlugGenerator.new(prefix: "guidance"),
+      id_generator: IdGenerator,
+      factory: get(:manual_with_sections_factory),
+    )
+  }
+
+  define_factory(:manual_with_sections_factory) {
     ->(attrs) {
-      slug_generator = SlugGenerator.new(prefix: "guidance")
-
-      default = {
-        id: IdGenerator.call,
-        slug: slug_generator.call(attrs.fetch(:title)),
-        summary: "",
-        state: "draft",
-        organisation_slug: "",
-        updated_at: "",
-      }
-
       ManualWithDocuments.new(
         get(:manual_document_builder),
-        Manual.new(default.merge(attrs)),
+        Manual.new(attrs),
         documents: [],
       )
     }
@@ -85,12 +82,12 @@ SpecialistPublisherWiring = DependencyContainer.new do
   end
 
   define_factory(:manual_repository_factory) {
-    ->(organisation_slug) {
-      get(:plain_manual_repository_factory).call(
-        organisation_slug: organisation_slug,
-        association_marshallers: [
-          DocumentAssociationMarshaller.new(
-            manual_specific_document_repository_factory: get(:manual_specific_document_repository_factory),
+  ->(organisation_slug) {
+    get(:plain_manual_repository_factory).call(
+      organisation_slug: organisation_slug,
+      association_marshallers: [
+        DocumentAssociationMarshaller.new(
+          manual_specific_document_repository_factory: get(:manual_specific_document_repository_factory),
             decorator: ->(manual, attrs) {
               ManualWithDocuments.new(
                 get(:manual_document_builder),
