@@ -46,6 +46,11 @@ module PanopticonHelpers
       .and_return(fake_panopticon)
   end
 
+  def mock_panopticon_http_error_once(error_code)
+    allow(fake_panopticon).to receive(:put_artefact!).and_raise(GdsApi::HTTPErrorResponse.new(error_code)).once
+    allow(fake_panopticon).to receive(:create_artefact!).and_raise(GdsApi::HTTPErrorResponse.new(error_code)).once
+  end
+
   def mock_panopticon_timeout
     allow(fake_panopticon).to receive(:put_artefact!).and_raise(GdsApi::TimedOutException)
     allow(fake_panopticon).to receive(:create_artefact!).and_raise(GdsApi::TimedOutException)

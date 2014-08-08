@@ -45,3 +45,17 @@ Feature: Publishing a manual
     And I publish the manual
     Then the manual and its documents are published
     And change notes for the original section are not duplicated
+
+  Scenario: A manual fails to publish from the queue due to an unrecoverable error
+    Given a draft manual exists
+    And a draft document exists for the manual
+    And an unrecoverable error occurs
+    When I publish the manual
+    Then the manual and its documents have failed to publish
+
+  @disable_background_processing
+  Scenario: A manual has been queued to be published
+    Given a draft manual exists
+    And a draft document exists for the manual
+    When I publish the manual
+    Then the manual and its documents are queued for publishing

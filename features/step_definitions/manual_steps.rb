@@ -302,3 +302,21 @@ end
 When(/^I create a section with duplicate title$/) do
   create_manual_document(@manual_fields.fetch(:title), @document_fields)
 end
+
+Then(/^the manual and its documents have failed to publish$/) do
+  expect(page).to have_content("This manual was sent for publishing")
+  expect(page).to have_content("something went wrong. Our team has been notified.")
+end
+
+Then(/^the manual and its documents are queued for publishing$/) do
+  expect(page).to have_content("This manual was sent for publishing")
+  expect(page).to have_content("It should be published shortly.")
+end
+
+Given(/^a recoverable error occurs on the first attempt$/) do
+  mock_panopticon_http_error_once(500)
+end
+
+Given(/^an unrecoverable error occurs$/) do
+  mock_panopticon_http_error_once(409)
+end
