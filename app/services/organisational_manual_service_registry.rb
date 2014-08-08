@@ -10,6 +10,10 @@ class OrganisationalManualServiceRegistry
     )
   end
 
+  def new(context)
+    ->() { manual_builder.call(title: "") }
+  end
+
   def create(context)
     CreateManualService.new(
       manual_repository: manual_repository,

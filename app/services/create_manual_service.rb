@@ -7,8 +7,10 @@ class CreateManualService
   end
 
   def call
-    persist
-    notify_listeners
+    if manual.valid?
+      persist
+      notify_listeners
+    end
 
     manual
   end

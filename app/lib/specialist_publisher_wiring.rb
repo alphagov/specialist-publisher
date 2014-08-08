@@ -2,6 +2,7 @@ require "aaib_report_indexable_formatter"
 require "builders/aaib_report_builder"
 require "builders/cma_case_builder"
 require "builders/international_development_fund_builder"
+require "builders/manual_builder"
 require "builders/manual_document_builder"
 require "cma_case_indexable_formatter"
 require "dependency_container"
@@ -25,6 +26,7 @@ require "validators/aaib_report_validator"
 require "validators/change_note_validator"
 require "validators/cma_case_validator"
 require "validators/international_development_fund_validator"
+require "validators/manual_validator"
 require "validators/manual_document_validator"
 require "validators/slug_uniqueness_validator"
 
@@ -35,8 +37,19 @@ SpecialistPublisherWiring = DependencyContainer.new do
     ManualBuilder.new(
       slug_generator: SlugGenerator.new(prefix: "guidance"),
       id_generator: IdGenerator,
-      factory: get(:manual_with_sections_factory),
+      factory: get(:validatable_manual_with_sections_factory),
     )
+  }
+
+  define_factory(:validatable_manual_with_sections_factory) {
+    ->(attrs) {
+      SlugUniquenessValidator.new(
+        get(:manual_repository),
+        NullValidator.new(
+          get(:manual_with_sections_factory).call(attrs),
+        ),
+      )
+    }
   }
 
   define_factory(:manual_with_sections_factory) {

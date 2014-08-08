@@ -289,3 +289,7 @@ end
 When(/^I add invalid HTML to the document body$/) do
   fill_in :body, with: "<script>alert('naughty naughty');</script>"
 end
+
+When(/^I create another manual with the same slug$/) do
+  create_manual(@manual_fields)
+end
