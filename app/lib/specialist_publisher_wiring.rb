@@ -81,13 +81,12 @@ SpecialistPublisherWiring = DependencyContainer.new do
     }
   end
 
-  define_factory(:manual_repository_factory) {
-  ->(organisation_slug) {
-    get(:plain_manual_repository_factory).call(
-      organisation_slug: organisation_slug,
-      association_marshallers: [
-        DocumentAssociationMarshaller.new(
-          manual_specific_document_repository_factory: get(:manual_specific_document_repository_factory),
+  define_factory(:organisational_manual_repository_factory) {
+    ->(organisation_slug) {
+      ManualRepository.new(
+        association_marshallers: [
+          DocumentAssociationMarshaller.new(
+            manual_specific_document_repository_factory: get(:manual_specific_document_repository_factory),
             decorator: ->(manual, attrs) {
               ManualWithDocuments.new(
                 get(:manual_document_builder),
@@ -97,6 +96,8 @@ SpecialistPublisherWiring = DependencyContainer.new do
             }
           ),
         ],
+        factory: Manual.method(:new),
+        collection: ManualRecord.where(organisation_slug: organisation_slug),
       )
     }
   }
@@ -120,20 +121,6 @@ SpecialistPublisherWiring = DependencyContainer.new do
         collection: ManualRecord,
       }
     )
-  }
-
-  define_factory(:plain_manual_repository_factory) {
-    ->(dependencies) {
-      ManualRepository.new(
-        {
-          association_marshallers: [],
-          factory: Manual.method(:new),
-          collection: ManualRecord.find_by_organisation(
-            dependencies.fetch(:organisation_slug)
-          ),
-        }.merge(dependencies.except(:organisation_slug))
-      )
-    }
   }
 
   define_singleton(:edition_factory) { SpecialistDocumentEdition.method(:new) }
