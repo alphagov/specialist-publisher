@@ -4,8 +4,6 @@ class ManualViewAdapter < SimpleDelegator
   extend ActiveModel::Naming
   include ActiveModel::Conversion
 
-  attr_accessor :title, :summary, :organisation_slug
-
   def initialize(manual)
     @manual = manual
     super(manual)

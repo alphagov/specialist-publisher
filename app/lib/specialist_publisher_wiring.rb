@@ -45,9 +45,11 @@ SpecialistPublisherWiring = DependencyContainer.new do
     ->(attrs) {
       SlugUniquenessValidator.new(
         get(:manual_repository),
-        NullValidator.new(
-          get(:manual_with_sections_factory).call(attrs),
-        ),
+        ManualValidator.new(
+          NullValidator.new(
+            get(:manual_with_sections_factory).call(attrs),
+          ),
+        )
       )
     }
   }
@@ -101,10 +103,17 @@ SpecialistPublisherWiring = DependencyContainer.new do
           DocumentAssociationMarshaller.new(
             manual_specific_document_repository_factory: get(:manual_specific_document_repository_factory),
             decorator: ->(manual, attrs) {
-              ManualWithDocuments.new(
-                get(:manual_document_builder),
-                manual,
-                attrs,
+              SlugUniquenessValidator.new(
+                get(:manual_repository),
+                ManualValidator.new(
+                  NullValidator.new(
+                    ManualWithDocuments.new(
+                      get(:manual_document_builder),
+                      manual,
+                      attrs,
+                    )
+                  )
+                )
               )
             }
           ),

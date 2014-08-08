@@ -54,6 +54,10 @@ Feature: Creating and editing a manual
     Then I should see an error message about the duplicate slug
 
   Scenario: Duplicating a section title
+    Given a draft manual exists
+    And a draft document exists for the manual
+    When I create a section with duplicate title
+    Then I should see an error message about the duplicate slug
 
   @regression
   Scenario: Manual documents are not available as specialist documents
