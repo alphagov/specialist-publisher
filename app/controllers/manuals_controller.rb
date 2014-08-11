@@ -12,7 +12,7 @@ class ManualsController < ApplicationController
   end
 
   def new
-    manual = nil
+    manual = services.new(self).call
 
     render(:new, locals: { manual: manual_form(manual) })
   end

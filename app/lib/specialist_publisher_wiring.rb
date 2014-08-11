@@ -2,6 +2,7 @@ require "aaib_report_indexable_formatter"
 require "builders/aaib_report_builder"
 require "builders/cma_case_builder"
 require "builders/international_development_fund_builder"
+require "builders/manual_builder"
 require "builders/manual_document_builder"
 require "cma_case_indexable_formatter"
 require "dependency_container"
@@ -26,6 +27,7 @@ require "validators/aaib_report_validator"
 require "validators/change_note_validator"
 require "validators/cma_case_validator"
 require "validators/international_development_fund_validator"
+require "validators/manual_validator"
 require "validators/manual_document_validator"
 require "validators/slug_uniqueness_validator"
 
@@ -33,21 +35,31 @@ $LOAD_PATH.unshift(File.expand_path("../..", "app/services"))
 
 SpecialistPublisherWiring = DependencyContainer.new do
   define_factory(:manual_builder) {
+    ManualBuilder.new(
+      slug_generator: SlugGenerator.new(prefix: "guidance"),
+      id_generator: IdGenerator,
+      factory: get(:validatable_manual_with_sections_factory),
+    )
+  }
+
+  define_factory(:validatable_manual_with_sections_factory) {
     ->(attrs) {
-      slug_generator = SlugGenerator.new(prefix: "guidance")
+      SlugUniquenessValidator.new(
+        get(:manual_repository),
+        ManualValidator.new(
+          NullValidator.new(
+            get(:manual_with_sections_factory).call(attrs),
+          ),
+        )
+      )
+    }
+  }
 
-      default = {
-        id: IdGenerator.call,
-        slug: slug_generator.call(attrs.fetch(:title)),
-        summary: "",
-        state: "draft",
-        organisation_slug: "",
-        updated_at: "",
-      }
-
+  define_factory(:manual_with_sections_factory) {
+    ->(attrs) {
       ManualWithDocuments.new(
         get(:manual_document_builder),
-        Manual.new(default.merge(attrs)),
+        Manual.new(attrs),
         documents: [],
       )
     }
@@ -85,22 +97,30 @@ SpecialistPublisherWiring = DependencyContainer.new do
     }
   end
 
-  define_factory(:manual_repository_factory) {
+  define_factory(:organisational_manual_repository_factory) {
     ->(organisation_slug) {
-      get(:plain_manual_repository_factory).call(
-        organisation_slug: organisation_slug,
+      ManualRepository.new(
         association_marshallers: [
           DocumentAssociationMarshaller.new(
             manual_specific_document_repository_factory: get(:manual_specific_document_repository_factory),
             decorator: ->(manual, attrs) {
-              ManualWithDocuments.new(
-                get(:manual_document_builder),
-                manual,
-                attrs,
+              SlugUniquenessValidator.new(
+                get(:manual_repository),
+                ManualValidator.new(
+                  NullValidator.new(
+                    ManualWithDocuments.new(
+                      get(:manual_document_builder),
+                      manual,
+                      attrs,
+                    )
+                  )
+                )
               )
             }
           ),
         ],
+        factory: Manual.method(:new),
+        collection: ManualRecord.where(organisation_slug: organisation_slug),
       )
     }
   }
@@ -124,20 +144,6 @@ SpecialistPublisherWiring = DependencyContainer.new do
         collection: ManualRecord,
       }
     )
-  }
-
-  define_factory(:plain_manual_repository_factory) {
-    ->(dependencies) {
-      ManualRepository.new(
-        {
-          association_marshallers: [],
-          factory: Manual.method(:new),
-          collection: ManualRecord.find_by_organisation(
-            dependencies.fetch(:organisation_slug)
-          ),
-        }.merge(dependencies.except(:organisation_slug))
-      )
-    }
   }
 
   define_singleton(:edition_factory) { SpecialistDocumentEdition.method(:new) }
@@ -233,14 +239,19 @@ SpecialistPublisherWiring = DependencyContainer.new do
         slug_generator = SlugGenerator.new(prefix: manual.slug)
 
         ChangeNoteValidator.new(
-          # TODO: validate manual slugs
-          ManualDocumentValidator.new(
-            SpecialistDocument.new(
-              slug_generator,
-              get(:edition_factory),
-              id,
-              editions,
+          SlugUniquenessValidator.new(
+            SpecialistDocumentRepository.new(
+              specialist_document_editions: SpecialistDocumentEdition.all,
+              document_factory: nil,
             ),
+            ManualDocumentValidator.new(
+              SpecialistDocument.new(
+                slug_generator,
+                get(:edition_factory),
+                id,
+                editions,
+              ),
+            )
           )
         )
       }

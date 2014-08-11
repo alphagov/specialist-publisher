@@ -48,6 +48,17 @@ Feature: Creating and editing a manual
     When I attach a file and give it a title
     Then I see the attached file
 
+  Scenario: Duplicating a manual title
+    Given a draft manual exists
+    When I create another manual with the same slug
+    Then I should see an error message about the duplicate slug
+
+  Scenario: Duplicating a section title
+    Given a draft manual exists
+    And a draft document exists for the manual
+    When I create a section with duplicate title
+    Then I should see an error message about the duplicate slug
+
   @regression
   Scenario: Manual documents are not available as specialist documents
     Given a draft manual exists

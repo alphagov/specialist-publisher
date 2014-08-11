@@ -10,6 +10,10 @@ class OrganisationalManualServiceRegistry
     )
   end
 
+  def new(context)
+    ->() { manual_builder.call(title: "") }
+  end
+
   def create(context)
     CreateManualService.new(
       manual_repository: manual_repository,
@@ -51,9 +55,9 @@ private
 
   def manual_repository
     # TODO Get this from a RepositoryRegistry
-    SpecialistPublisherWiring.get(:manual_repository_factory).call(
-      organisation_slug
-    )
+    SpecialistPublisherWiring
+      .get(:organisational_manual_repository_factory)
+      .call(organisation_slug)
   end
 
   def observers
