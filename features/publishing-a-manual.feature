@@ -59,3 +59,10 @@ Feature: Publishing a manual
     And a draft document exists for the manual
     When I publish the manual
     Then the manual and its documents are queued for publishing
+
+  Scenario: Manual publication retries after recoverable error
+    Given a draft manual exists
+    And a draft document exists for the manual
+    And a recoverable error occurs
+    When I publish the manual expecting a recoverable error
+    Then the publication reattempted

@@ -313,10 +313,24 @@ Then(/^the manual and its documents are queued for publishing$/) do
   expect(page).to have_content("It should be published shortly.")
 end
 
-Given(/^a recoverable error occurs on the first attempt$/) do
-  mock_panopticon_http_error_once(500)
+Given(/^a recoverable error occurs$/) do
+  mock_panopticon_http_error(500)
 end
 
 Given(/^an unrecoverable error occurs$/) do
-  mock_panopticon_http_error_once(409)
+  mock_panopticon_http_error(409)
+end
+
+When(/^I publish the manual expecting a recoverable error$/) do
+  begin
+    publish_manual
+  rescue PublishManualWorker::FailedToPublishError => e
+    @error = e
+  end
+end
+
+Then(/^the publication reattempted$/) do
+  # This is merely to assure that the correct error type is raised forcing
+  # sidekiq to retry. This is the default behaviour of sidekiq in the case of a failure
+  expect(@error).to be_a(PublishManualWorker::FailedToPublishError)
 end

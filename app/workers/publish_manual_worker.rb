@@ -2,6 +2,7 @@ class PublishManualWorker
   include Sidekiq::Worker
 
   sidekiq_options(
+    # This is required to retry in the case of a FailedToPublishError
     retry: 25,
     backtrace: true,
   )
