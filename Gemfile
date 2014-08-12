@@ -6,6 +6,7 @@ gem "rails", "3.2.17"
 gem "airbrake", "3.1.15"
 gem "faraday", "0.9.0"
 gem "fetchable", "1.0.0"
+gem "foreman", "0.74.0"
 gem "gds-sso", "9.3.0"
 gem "generic_form_builder", "0.8.0"
 gem 'govuk_admin_template', '1.0.0'
