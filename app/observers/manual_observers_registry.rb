@@ -1,6 +1,7 @@
 require "gds_api/publishing_api"
 require "manual_change_note_database_exporter"
 require "manual_publishing_api_exporter"
+require "manual_section_publishing_api_exporter"
 
 class ManualObserversRegistry
   def publication
@@ -72,6 +73,16 @@ private
   def publishing_api_exporter
     ->(manual) {
       ManualPublishingAPIExporter.new(publishing_api, manual).call
+
+      document_renderer = SpecialistPublisherWiring.get(:specialist_document_renderer)
+      manual.documents.each do |document|
+        ManualSectionPublishingAPIExporter.new(
+          publishing_api,
+          document_renderer,
+          manual,
+          document
+        ).call
+      end
     }
   end
 
