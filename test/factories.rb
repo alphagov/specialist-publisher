@@ -1,19 +1,27 @@
 require "govuk_content_models/test_helpers/factories"
 
 FactoryGirl.define do
-  factory :cma_editor, parent: :user do
+  factory :editor, parent: :user do
+    permissions %w(signin editor)
+  end
+
+  factory :cma_writer, parent: :user do
     organisation_slug "competition-and-markets-authority"
   end
 
-  factory :aaib_editor, parent: :user do
+  factory :cma_editor, parent: :editor do
+    organisation_slug "competition-and-markets-authority"
+  end
+
+  factory :aaib_editor, parent: :editor do
     organisation_slug "air-accidents-investigation-branch"
   end
 
-  factory :dfid_editor, parent: :user do
+  factory :dfid_editor, parent: :editor do
     organisation_slug "department-for-international-development"
   end
 
-  factory :generic_editor, parent: :user do
+  factory :generic_editor, parent: :editor do
     organisation_slug "ministry-of-tea"
   end
 

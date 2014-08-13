@@ -229,4 +229,31 @@ module ManualHelpers
     change_note_field_value = page.find("textarea[name='document[change_note]']").text
     expect(change_note_field_value).to eq(expected_value)
   end
+
+  def check_manual_can_be_created
+    @manual_fields = {
+      title: "Example Manual Title",
+      summary: "Nullam quis risus eget urna mollis ornare vel eu leo.",
+    }
+
+    create_manual(@manual_fields)
+    check_manual_exists_with(@manual_fields)
+  end
+
+  def check_manual_cannot_be_published
+    document_fields = {
+      section_title: "Section 1",
+      section_summary: "Section 1 summary",
+      section_body: "Section 1 body",
+    }
+    create_manual_document(@manual_fields.fetch(:title), document_fields)
+
+    go_to_manual_page(@manual_fields.fetch(:title))
+    expect(page).not_to have_button("Publish")
+  end
+
+  def check_manual_cannot_be_withdrawn
+    go_to_manual_page(@manual_fields.fetch(:title))
+    expect(page).not_to have_button("Withdraw")
+  end
 end
