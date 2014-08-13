@@ -36,7 +36,7 @@ RSpec.describe ManualChangeNoteDatabaseExporter do
   let(:publication_log_timestamp)   { double(:publication_log_timestamp, utc: utc_publication_log_timestamp) }
 
   let(:publication_logs_collection) {
-    double(:publication_logs_collection, with_slug_prefix: [])
+    double(:publication_logs_collection)
   }
 
   let(:manual) {
@@ -53,14 +53,14 @@ RSpec.describe ManualChangeNoteDatabaseExporter do
 
   describe "#call" do
     before do
-      allow(publication_logs_collection).to receive(:with_slug_prefix)
+      allow(publication_logs_collection).to receive(:change_notes_for)
         .and_return(manual_publication_logs)
     end
 
     it "retrieves the publication history for the manual" do
       exporter.call
 
-      expect(publication_logs_collection).to have_received(:with_slug_prefix)
+      expect(publication_logs_collection).to have_received(:change_notes_for)
         .with(manual_slug)
     end
 

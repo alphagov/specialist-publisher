@@ -16,4 +16,12 @@ class PublicationLog
     where(slug: /^#{slug}.*/)
       .order(:created_at)
   end
+
+  def self.change_notes_for(slug)
+    with_slug_prefix(slug)
+      .sort_by(&:published_at)
+      .uniq { |publication|
+        [publication.slug, publication.version_number]
+      }
+  end
 end
