@@ -18,3 +18,9 @@ Feature: Access control
     Given there are manuals created by multiple organisations
     When I view my list of manuals
     Then I only see manuals created by my organisation
+
+  Scenario: Writers
+    Given I am logged in as a writer
+    Then I can edit cases and manuals
+    And I cannot publish cases nor manuals
+    And I cannot withdraw cases nor manuals

@@ -6,15 +6,6 @@ private
     AaibReportViewAdapter.new(document)
   end
 
-  def authorize_user
-    unless user_can_edit_aaib_reports?
-      redirect_to(
-        manuals_path,
-        flash: { error: "You don't have permission to do that." },
-      )
-    end
-  end
-
   def services
     AaibReportServiceRegistry.new
   end
@@ -29,5 +20,9 @@ private
 
   def show_path(document)
     aaib_report_path(document)
+  end
+
+  def document_type
+    "aaib_report"
   end
 end

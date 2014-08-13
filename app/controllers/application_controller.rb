@@ -36,6 +36,16 @@ class ApplicationController < ActionController::Base
     permission_checker.can_edit?(format)
   end
 
+  def current_user_can_publish?(format)
+    permission_checker.can_publish?(format)
+  end
+  helper_method :current_user_can_publish?
+
+  def current_user_can_withdraw?(format)
+    permission_checker.can_withdraw?(format)
+  end
+  helper_method :current_user_can_withdraw?
+
   def current_organisation_slug
     current_user.organisation_slug
   end

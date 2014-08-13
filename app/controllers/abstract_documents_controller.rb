@@ -1,5 +1,7 @@
 class AbstractDocumentsController < ApplicationController
-  before_filter :authorize_user
+  before_filter :authorize_user_for_editing
+  before_filter :authorize_user_for_publishing, only: [:publish]
+  before_filter :authorize_user_for_withdrawing, only: [:withdraw]
 
   rescue_from("SpecialistDocumentRepository::NotFoundError") do
     redirect_to(index_path, flash: { error: "Document not found" })
@@ -114,8 +116,31 @@ private
     raise NotImplementedError
   end
 
-  def authorize_user
-    raise NotImplementedError
+  def authorize_user_for_editing
+    unless current_user_can_edit?(document_type)
+      redirect_to(
+        manuals_path,
+        flash: { error: "You don't have permission to do that." },
+      )
+    end
+  end
+
+  def authorize_user_for_publishing
+    unless current_user_can_publish?(document_type)
+      redirect_to(
+        show_path(document_id),
+        flash: { error: "You don't have permission to publish." },
+      )
+    end
+  end
+
+  def authorize_user_for_withdrawing
+    unless current_user_can_withdraw?(document_type)
+      redirect_to(
+        show_path(document_id),
+        flash: { error: "You don't have permission to withdraw." },
+      )
+    end
   end
 
   def services
