@@ -19,6 +19,7 @@ class ManualSectionIndexableFormatter
       link: link,
       indexable_content: section.body,
       organisations: [manual.organisation_slug],
+      manual: manual.slug,
     }
   end
 
