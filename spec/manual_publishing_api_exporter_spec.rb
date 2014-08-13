@@ -4,7 +4,7 @@ require "manual_publishing_api_exporter"
 
 describe ManualPublishingAPIExporter do
   subject {
-    ManualPublishingAPIExporter.new(export_recipent, manual)
+    ManualPublishingAPIExporter.new(export_recipent, publication_logs_collection, manual)
   }
 
   let(:export_recipent) { double(:export_recipent, put_content_item: nil) }
@@ -37,6 +37,29 @@ describe ManualPublishingAPIExporter do
       slug: "guidance/my-first-manual",
       updated_at: Date.new(2013, 12, 31),
     }
+  }
+
+  let(:publication_logs_collection) {
+    double(:publication_logs, change_notes_for: publication_logs)
+  }
+
+  let(:publication_logs) {
+    [
+      double(
+        :publication_log,
+        slug: "guidance/my-first-manual/first-section",
+        title: "Document title",
+        change_note: "Added more text",
+        published_at: Time.new(2013, 12, 31, 12, 0, 0),
+      ),
+      double(
+        :publication_log,
+        slug: "guidance/my-first-manual",
+        title: "My manual",
+        change_note: "Changed manual title",
+        published_at: Time.new(2013, 12, 31, 12, 30, 0),
+      ),
+    ]
   }
 
   it "exports the serialized document attributes" do
@@ -78,6 +101,20 @@ describe ManualPublishingAPIExporter do
                 description: "This is the first section",
               ]
             }
+          ],
+          change_notes: [
+            {
+              base_path: "/guidance/my-first-manual/first-section",
+              title: "Document title",
+              change_note: "Added more text",
+              published_at: Time.new(2013, 12, 31, 12, 0, 0),
+            },
+            {
+              base_path: "/guidance/my-first-manual",
+              title: "My manual",
+              change_note: "Changed manual title",
+              published_at: Time.new(2013, 12, 31, 12, 30, 0),
+            },
           ]
         }
       )

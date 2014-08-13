@@ -72,7 +72,11 @@ private
 
   def publishing_api_exporter
     ->(manual) {
-      ManualPublishingAPIExporter.new(publishing_api, manual).call
+      ManualPublishingAPIExporter.new(
+        publishing_api,
+        PublicationLog,
+        manual
+      ).call
 
       document_renderer = SpecialistPublisherWiring.get(:specialist_document_renderer)
       manual.documents.each do |document|

@@ -1,7 +1,8 @@
 class ManualPublishingAPIExporter
 
-  def initialize(export_recipent, manual)
+  def initialize(export_recipent, publication_logs, manual)
     @export_recipent = export_recipent
+    @publication_logs = publication_logs
     @manual = manual
   end
 
@@ -11,7 +12,7 @@ class ManualPublishingAPIExporter
 
 private
 
-  attr_reader :export_recipent, :manual
+  attr_reader :export_recipent, :publication_logs, :manual
 
   def base_path
     "/#{manual.attributes[:slug]}"
@@ -33,18 +34,19 @@ private
           type: "exact",
         }
       ],
-      details: section_data
+      details: details_data
     }
   end
 
-  def section_data
+  def details_data
     {
       child_section_groups: [
         {
           title: "Contents",
           child_sections: sections,
         }
-      ]
+      ],
+      change_notes: serialised_change_notes,
     }
   end
 
@@ -54,6 +56,17 @@ private
         title: d.title,
         description: d.summary,
         base_path: "/#{d.slug}",
+      }
+    }
+  end
+
+  def serialised_change_notes
+    publication_logs.change_notes_for(manual.attributes[:slug]).map { |publication|
+      {
+        base_path: "/#{publication.slug}",
+        title: publication.title,
+        change_note: publication.change_note,
+        published_at: publication.published_at.utc,
       }
     }
   end
