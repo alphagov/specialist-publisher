@@ -4,15 +4,28 @@ require "manual_publishing_api_exporter"
 
 describe ManualPublishingAPIExporter do
   subject {
-    ManualPublishingAPIExporter.new(export_recipent, publication_logs_collection, manual)
+    ManualPublishingAPIExporter.new(
+      export_recipent,
+      organisations_api,
+      publication_logs_collection,
+      manual
+    )
   }
 
   let(:export_recipent) { double(:export_recipent, put_content_item: nil) }
+  let(:organisations_api) {
+    double(
+      :organisations_api,
+      organisation: organisation,
+    )
+  }
+
   let(:manual) {
     double(
       :manual,
       attributes: manual_attributes,
-      documents: documents
+      documents: documents,
+      organisation_slug: "cabinet-office",
     )
   }
 
@@ -27,6 +40,14 @@ describe ManualPublishingAPIExporter do
         slug: "#{manual_slug}/first-section",
       )
     ]
+  }
+
+  let(:organisation) {
+    double(:organisation,
+      web_url: "https://www.gov.uk/government/organisations/cabinet-office",
+      title: "Cabinet Office",
+      details: double(:org_details, abbreviation: "CO"),
+    )
   }
 
   let(:manual_attributes) {
@@ -115,7 +136,14 @@ describe ManualPublishingAPIExporter do
               change_note: "Changed manual title",
               published_at: Time.new(2013, 12, 31, 12, 30, 0),
             },
-          ]
+          ],
+          organisations: [
+            {
+              title: "Cabinet Office",
+              abbreviation: "CO",
+              web_url: "https://www.gov.uk/government/organisations/cabinet-office",
+            }
+          ],
         }
       )
     )

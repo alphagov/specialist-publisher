@@ -1,4 +1,5 @@
 require "gds_api/publishing_api"
+require "gds_api/organisations"
 require "manual_change_note_database_exporter"
 require "manual_publishing_api_exporter"
 require "manual_section_publishing_api_exporter"
@@ -74,6 +75,7 @@ private
     ->(manual) {
       ManualPublishingAPIExporter.new(
         publishing_api,
+        organisations_api,
         PublicationLog,
         manual
       ).call
@@ -82,6 +84,7 @@ private
       manual.documents.each do |document|
         ManualSectionPublishingAPIExporter.new(
           publishing_api,
+          organisations_api,
           document_renderer,
           manual,
           document
@@ -92,5 +95,9 @@ private
 
   def publishing_api
     GdsApi::PublishingApi.new(Plek.new.find("publishing-api"))
+  end
+
+  def organisations_api
+    GdsApi::Organisations.new(Plek.current.find("whitehall-admin"))
   end
 end

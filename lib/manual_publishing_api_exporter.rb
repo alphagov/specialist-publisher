@@ -1,7 +1,8 @@
 class ManualPublishingAPIExporter
 
-  def initialize(export_recipent, publication_logs, manual)
+  def initialize(export_recipent, organisations_api, publication_logs, manual)
     @export_recipent = export_recipent
+    @organisations_api = organisations_api
     @publication_logs = publication_logs
     @manual = manual
   end
@@ -12,7 +13,7 @@ class ManualPublishingAPIExporter
 
 private
 
-  attr_reader :export_recipent, :publication_logs, :manual
+  attr_reader :export_recipent, :organisations_api, :publication_logs, :manual
 
   def base_path
     "/#{manual.attributes[:slug]}"
@@ -47,6 +48,9 @@ private
         }
       ],
       change_notes: serialised_change_notes,
+      organisations: [
+        organisation_info
+      ]
     }
   end
 
@@ -69,5 +73,17 @@ private
         published_at: publication.published_at.utc,
       }
     }
+  end
+
+  def organisation_info
+    {
+      title: organisation.title,
+      abbreviation: organisation.details.abbreviation,
+      web_url: organisation.web_url,
+    }
+  end
+
+  def organisation
+    @organisation ||= organisations_api.organisation(manual.organisation_slug)
   end
 end

@@ -4,17 +4,39 @@ require "manual_section_publishing_api_exporter"
 
 describe ManualSectionPublishingAPIExporter do
   subject {
-    ManualSectionPublishingAPIExporter.new(export_recipent, document_renderer, manual, document)
+    ManualSectionPublishingAPIExporter.new(
+      export_recipent,
+      organisations_api,
+      document_renderer,
+      manual,
+      document
+    )
   }
 
   let(:export_recipent) { double(:export_recipent, put_content_item: nil) }
+  let(:organisations_api) {
+    double(
+      :organisations_api,
+      organisation: organisation,
+    )
+  }
   let(:document_renderer) { ->(_) { double(:rendered_document, attributes: rendered_attributes) } }
+
+  let(:organisation) {
+    double(:organisation,
+      web_url: "https://www.gov.uk/government/organisations/cabinet-office",
+      title: "Cabinet Office",
+      details: double(:org_details, abbreviation: "CO"),
+    )
+  }
+
   let(:manual) {
     double(
       :manual,
       attributes: {
         slug: manual_slug,
       },
+      organisation_slug: "cabinet-office",
     )
   }
 
@@ -73,6 +95,13 @@ describe ManualSectionPublishingAPIExporter do
           },
           child_section_groups: [],
           breadcrumbs: [],
+          organisations: [
+            {
+              title: "Cabinet Office",
+              abbreviation: "CO",
+              web_url: "https://www.gov.uk/government/organisations/cabinet-office",
+            }
+          ],
         }
       )
     )
