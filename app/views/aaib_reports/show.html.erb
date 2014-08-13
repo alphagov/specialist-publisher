@@ -67,17 +67,4 @@
     <% end %>
   </div>
 </div>
-  <div class="actions">
-
-  <%= form_tag(publish_aaib_report_path(document), method: :post) do %>
-    <button name='submit' class="btn btn-danger">Publish</button>
-  <% end -%>
-
-  <%= form_tag(withdraw_aaib_report_path(document), method: :post) do %>
-    <button name='submit' class="btn btn-danger">Withdraw</button>
-  <% end -%>
-
-  <%= link_to "Edit", edit_aaib_report_path(document), class: "action-link" %>
-
-</div>
-
+<%= render partial: 'shared/document_actions', locals: {document: document} %>

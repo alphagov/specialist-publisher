@@ -1,0 +1,15 @@
+<div class="actions">
+  <% if current_user_can_publish?(document.document_type) %>
+    <%= form_tag([:publish, document], method: :post) do %>
+      <button name='submit' class="btn btn-danger">Publish</button>
+    <% end -%>
+  <% end %>
+
+  <% if current_user_can_withdraw?(document.document_type) %>
+    <%= form_tag([:withdraw, document], method: :post) do %>
+      <button name='submit' class="btn btn-danger">Withdraw</button>
+    <% end -%>
+  <% end %>
+
+  <%= link_to "Edit", [:edit, document], class: "action-link" %>
+</div>
