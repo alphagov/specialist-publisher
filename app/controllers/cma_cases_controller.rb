@@ -10,15 +10,6 @@ private
     CmaCaseViewAdapter.new(document)
   end
 
-  def authorize_user
-    unless user_can_edit_cma_cases?
-      redirect_to(
-        manuals_path,
-        flash: { error: "You don't have permission to do that." },
-      )
-    end
-  end
-
   def services
     CmaCaseServiceRegistry.new
   end
@@ -29,5 +20,9 @@ private
 
   def show_path(document)
     cma_case_path(document)
+  end
+
+  def document_type
+    "cma_case"
   end
 end
