@@ -25,6 +25,13 @@
     <dl class='metadata-list'>
       <dt>State</dt>
       <dd><%= state(manual) %></dd>
+    </dl>
+    <% if manual.publish_tasks.any? %>
+      <dl class="metadata-list">
+        <dt>Last published</dt>
+        <dd><%= publication_task_state(manual.publish_tasks.first) %></dd>
+      </dl>
+    <% end %>
   </div>
 </div>
 

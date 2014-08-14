@@ -14,34 +14,35 @@ class OrganisationalManualServiceRegistry
     ->() { manual_builder.call(title: "") }
   end
 
-  def create(context)
+  def create(attributes)
     CreateManualService.new(
       manual_repository: manual_repository,
       manual_builder: manual_builder,
       listeners: observers.creation,
-      context: context,
+      attributes: attributes,
     )
   end
 
-  def update(context)
+  def update(manual_id, attributes)
     UpdateManualService.new(
       manual_repository: manual_repository,
-      context: context,
+      manual_id: manual_id,
+      attributes: attributes,
     )
   end
 
-  def show(context)
+  def show(manual_id)
     ShowManualService.new(
       manual_repository: manual_repository,
-      context: context,
+      manual_id: manual_id,
     )
   end
 
-  def publish(manual_id)
-    PublishManualService.new(
-      manual_repository: manual_repository,
-      listeners: observers.publication,
-      context: context,
+  def queue_publish(manual_id)
+    QueuePublishManualService.new(
+      PublishManualWorker,
+      manual_repository,
+      manual_id,
     )
   end
 
@@ -63,4 +64,5 @@ private
   def observers
     @observers ||= ManualObserversRegistry.new
   end
+
 end

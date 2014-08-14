@@ -1,10 +1,13 @@
+require "state_machine"
+
 class PublicationLog
   include Mongoid::Document
   include Mongoid::Timestamps
 
   field :slug, type: String
-  field :title, typ: String
+  field :title, type: String
   field :change_note, type: String
+  field :document_state, type: String
   field :version_number, type: Integer
 
   validates :slug, presence: true
@@ -12,10 +15,7 @@ class PublicationLog
 
   alias_attribute :published_at, :created_at
 
-  def self.with_slug_prefix(slug)
-    where(slug: /^#{slug}.*/)
-      .order(:created_at)
-  end
+  scope :with_slug_prefix, ->(slug) { where(slug: /^#{slug}.*/) }
 
   def self.change_notes_for(slug)
     with_slug_prefix(slug)

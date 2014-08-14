@@ -1,6 +1,10 @@
 SpecialistPublisher::Application.routes.draw do
   mount JasmineRails::Engine => "/specs" if defined?(JasmineRails::Engine)
   mount GovukAdminTemplate::Engine, at: "/style-guide"
+  if Rails.env.development?
+    require "sidekiq/web"
+    mount Sidekiq::Web => "/sidekiq"
+  end
 
   resources :cma_cases, except: :destroy, path: "cma-cases" do
     resources :attachments, controller: :cma_case_attachments, only: [:new, :create, :edit, :update]

@@ -14,6 +14,7 @@ require "gds_api/rummager"
 require "id_generator"
 require "manual_database_exporter"
 require "marshallers/document_association_marshaller"
+require "marshallers/manual_publish_task_association_marshaller"
 require "null_finder_schema"
 require "panopticon_registerer"
 require "rendered_specialist_document"
@@ -119,6 +120,15 @@ SpecialistPublisherWiring = DependencyContainer.new do
               )
             }
           ),
+          ManualPublishTaskAssociationMarshaller.new(
+            collection: ManualPublishTask,
+            decorator: ->(manual, attrs) {
+              ManualWithPublishTasks.new(
+                manual,
+                attrs,
+              )
+            }
+          ),
         ],
         factory: Manual.method(:new),
         collection: ManualRecord.where(organisation_slug: organisation_slug),
@@ -135,6 +145,15 @@ SpecialistPublisherWiring = DependencyContainer.new do
             decorator: ->(manual, attrs) {
               ManualWithDocuments.new(
                 get(:manual_document_builder),
+                manual,
+                attrs,
+              )
+            }
+          ),
+          ManualPublishTaskAssociationMarshaller.new(
+            collection: ManualPublishTask,
+            decorator: ->(manual, attrs) {
+              ManualWithPublishTasks.new(
                 manual,
                 attrs,
               )
@@ -257,6 +276,12 @@ SpecialistPublisherWiring = DependencyContainer.new do
         )
       }
     }
+  }
+
+  define_factory(:manual_publish_task_builder) {
+    ManualPublishTaskBuilder.new(
+      collection: ManualPublishTask,
+    )
   }
 
   define_instance(:markdown_renderer) {

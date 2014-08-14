@@ -15,11 +15,7 @@ require "capybara/poltergeist"
 Capybara.javascript_driver = :poltergeist
 
 require "sidekiq/testing"
-Sidekiq::Testing.fake!
-
-Before do
-  Sidekiq::Testing.inline!
-end
+Sidekiq::Testing.inline!
 
 Before("@javascript") do
   WebMock.disable_net_connect!(allow_localhost: true)
@@ -27,6 +23,14 @@ end
 
 After("@javascript") do
   WebMock.disable_net_connect!
+end
+
+Before("@disable_background_processing") do
+  Sidekiq::Testing.fake!
+end
+
+After("@disable_background_processing") do
+  Sidekiq::Testing.inline!
 end
 
 After do

@@ -64,6 +64,7 @@ describe ManualRepository do
       organisation_slug: "organisation_slug",
       state: "draft",
       slug: manual_slug,
+      version_number: 1,
     }
   }
 
