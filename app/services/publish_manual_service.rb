@@ -10,6 +10,11 @@ class PublishManualService
     if versions_match?
       publish
       persist
+    else
+      raise VersionMismatchError.new(
+        %Q(The manual with id '#{manual.id}' could not be published due to a version mismatch.
+          The version to publish was '#{version_number}' but the current version was '#{manual.version_number}')
+      )
     end
 
     manual
@@ -46,5 +51,8 @@ private
 
   def manual
     @manual ||= manual_repository.fetch(manual_id)
+  end
+
+  class VersionMismatchError < StandardError
   end
 end

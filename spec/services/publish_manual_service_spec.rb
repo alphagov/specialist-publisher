@@ -6,7 +6,7 @@ RSpec.describe PublishManualService do
   let(:manual_id) { double(:manual_id) }
   let(:manual_repository) { double(:manual_repository) }
   let(:listeners) { [] }
-  let(:manual) { double(:manual, version_number: 3) }
+  let(:manual) { double(:manual, id: manual_id, version_number: 3) }
 
   subject {
     PublishManualService.new(
@@ -35,9 +35,8 @@ RSpec.describe PublishManualService do
   context "when the version numbers differ" do
     let(:version_number) { 4 }
 
-    it "does not publish the manual" do
-      subject.call
-      expect(manual).to_not have_received(:publish)
+    it "should raise a PublishManualService::VersionMismatchError" do
+      expect { subject.call }.to raise_error(PublishManualService::VersionMismatchError)
     end
   end
 end

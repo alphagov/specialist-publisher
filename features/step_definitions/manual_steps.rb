@@ -321,6 +321,10 @@ Given(/^an unrecoverable error occurs$/) do
   mock_panopticon_http_error(409)
 end
 
+Given(/^a version mismatch occurs$/) do
+  PublishManualService.any_instance.stub(:versions_match?).and_return(false)
+end
+
 When(/^I publish the manual expecting a recoverable error$/) do
   begin
     publish_manual

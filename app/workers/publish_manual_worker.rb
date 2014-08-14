@@ -17,7 +17,7 @@ class PublishManualWorker
   rescue PanopticonRegisterer::ServerError => error
     log_error(error)
     requeue_task(task_id, error)
-  rescue PanopticonRegisterer::ClientError, StandardError => error
+  rescue PublishManualService::VersionMismatchError, PanopticonRegisterer::ClientError, StandardError => error
     log_error(error)
     abort_task(task, error)
   end

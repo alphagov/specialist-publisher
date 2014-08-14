@@ -53,6 +53,13 @@ Feature: Publishing a manual
     When I publish the manual
     Then the manual and its documents have failed to publish
 
+  Scenario: A manual fails to publish from the queue due to a version mismatch
+    Given a draft manual exists
+    And a draft document exists for the manual
+    And a version mismatch occurs
+    When I publish the manual
+    Then the manual and its documents have failed to publish
+
   @disable_background_processing
   Scenario: A manual has been queued to be published
     Given a draft manual exists
