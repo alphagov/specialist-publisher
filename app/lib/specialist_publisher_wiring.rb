@@ -1,16 +1,18 @@
 require "aaib_report_indexable_formatter"
 require "builders/aaib_report_builder"
 require "builders/cma_case_builder"
+require "builders/drug_safety_update_builder"
 require "builders/international_development_fund_builder"
 require "builders/manual_builder"
 require "builders/manual_document_builder"
 require "cma_case_indexable_formatter"
 require "dependency_container"
+require "drug_safety_update_indexable_formatter"
 require "finder_api"
 require "finder_api_notifier"
 require "footnotes_section_heading_renderer"
-require "gds_api_proxy"
 require "gds_api/rummager"
+require "gds_api_proxy"
 require "id_generator"
 require "manual_database_exporter"
 require "marshallers/document_association_marshaller"
@@ -27,9 +29,10 @@ require "specialist_document_repository"
 require "validators/aaib_report_validator"
 require "validators/change_note_validator"
 require "validators/cma_case_validator"
+require "validators/drug_safety_update_validator"
 require "validators/international_development_fund_validator"
-require "validators/manual_validator"
 require "validators/manual_document_validator"
+require "validators/manual_validator"
 require "validators/null_validator"
 require "validators/slug_uniqueness_validator"
 
@@ -78,6 +81,13 @@ SpecialistPublisherWiring = DependencyContainer.new do
     SpecialistDocumentRepository.new(
       specialist_document_editions: SpecialistDocumentEdition.where(document_type: "cma_case"),
       document_factory: get(:validatable_cma_case_factory),
+    )
+  end
+
+  define_singleton(:drug_safety_update_repository) do
+    SpecialistDocumentRepository.new(
+      specialist_document_editions: SpecialistDocumentEdition.where(document_type: "drug_safety_update"),
+      document_factory: get(:validatable_drug_safety_update_factory),
     )
   end
 
@@ -215,6 +225,36 @@ SpecialistPublisherWiring = DependencyContainer.new do
       AaibReport.new(
         SpecialistDocument.new(
           SlugGenerator.new(prefix: "aaib-reports"),
+          get(:edition_factory),
+          *args,
+        )
+      )
+    }
+  }
+
+  define_factory(:drug_safety_update_builder) {
+    DrugSafetyUpdateBuilder.new(
+      get(:validatable_drug_safety_update_factory),
+      IdGenerator,
+    )
+  }
+
+  define_factory(:validatable_drug_safety_update_factory) {
+    ->(*args) {
+      SlugUniquenessValidator.new(
+        get(:drug_safety_update_repository),
+        DrugSafetyUpdateValidator.new(
+          get(:drug_safety_update_factory).call(*args),
+        ),
+      )
+    }
+  }
+
+  define_factory(:drug_safety_update_factory) {
+    ->(*args) {
+      DrugSafetyUpdate.new(
+        SpecialistDocument.new(
+          SlugGenerator.new(prefix: "drug-safety-update"),
           get(:edition_factory),
           *args,
         )
@@ -387,6 +427,14 @@ SpecialistPublisherWiring = DependencyContainer.new do
     }
   }
 
+  define_factory(:drug_safety_update_panopticon_registerer) {
+    ->(document) {
+      get(:panopticon_registerer).call(
+        DrugSafetyUpdateArtefactFormatter.new(document)
+      )
+    }
+  }
+
   define_factory(:international_development_fund_panopticon_registerer) {
     ->(document) {
       get(:panopticon_registerer).call(
@@ -459,6 +507,26 @@ SpecialistPublisherWiring = DependencyContainer.new do
     }
   }
 
+  define_factory(:drug_safety_update_rummager_indexer) {
+    ->(document) {
+      RummagerIndexer.new.add(
+        DrugSafetyUpdateIndexableFormatter.new(
+          SpecialistDocumentAttachmentProcessor.new(document)
+        )
+      )
+    }
+  }
+
+  define_factory(:drug_safety_update_rummager_deleter) {
+    ->(document) {
+      RummagerIndexer.new.delete(
+        DrugSafetyUpdateIndexableFormatter.new(
+          SpecialistDocumentAttachmentProcessor.new(document)
+        )
+      )
+    }
+  }
+
   define_factory(:international_development_fund_rummager_indexer) {
     ->(document) {
       RummagerIndexer.new.add(
@@ -508,6 +576,17 @@ SpecialistPublisherWiring = DependencyContainer.new do
         RenderedSpecialistDocument,
         get(:specialist_document_renderer),
         get(:cma_case_finder_schema),
+        doc,
+      ).call
+    }
+  }
+
+  define_instance(:drug_safety_update_content_api_exporter) {
+    ->(doc) {
+      SpecialistDocumentDatabaseExporter.new(
+        RenderedSpecialistDocument,
+        get(:specialist_document_renderer),
+        get(:drug_safety_update_finder_schema),
         doc,
       ).call
     }
@@ -575,6 +654,11 @@ SpecialistPublisherWiring = DependencyContainer.new do
   define_singleton(:cma_case_finder_schema) {
     require "finder_schema"
     FinderSchema.new(Rails.root.join("schemas/cma-cases.json"))
+  }
+
+  define_singleton(:drug_safety_update_finder_schema) {
+    require "finder_schema"
+    FinderSchema.new(Rails.root.join("schemas/drug-safety-updates.json"))
   }
 
   define_singleton(:international_development_fund_finder_schema) {
