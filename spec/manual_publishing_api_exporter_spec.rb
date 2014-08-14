@@ -32,7 +32,11 @@ describe ManualPublishingAPIExporter do
 
   let(:documents) {
     [
-      double(:document, attributes: document_attributes)
+      double(
+        :document,
+        attributes: document_attributes,
+        minor_update?: false,
+      )
     ]
   }
 

@@ -26,7 +26,7 @@ private
       title: manual.attributes.fetch(:title),
       description: manual.attributes.fetch(:summary),
       public_updated_at: manual.attributes.fetch(:updated_at),
-      update_type: "major",
+      update_type: update_type,
       publishing_app: "specialist-publisher",
       rendering_app: "manuals-frontend",
       routes: [
@@ -37,6 +37,10 @@ private
       ],
       details: details_data
     }
+  end
+
+  def update_type
+    manual.documents.all?(&:minor_update?) ? "minor" : "major"
   end
 
   def details_data
