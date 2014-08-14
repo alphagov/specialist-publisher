@@ -10,6 +10,7 @@ SpecialistPublisher::Application.routes.draw do
     aaib_reports
     cma_cases
     international_development_funds
+    drug_safety_updates
   )
 
   document_types.each do |type|
