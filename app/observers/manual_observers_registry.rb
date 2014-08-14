@@ -98,6 +98,6 @@ private
   end
 
   def organisations_api
-    GdsApi::Organisations.new(Plek.current.find("whitehall-admin"))
+    GdsApi::Organisations.new(ORGANISATIONS_API_BASE_PATH)
   end
 end
