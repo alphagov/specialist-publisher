@@ -165,6 +165,11 @@ Given(/^a published manual exists$/) do
   create_manual_document(@manual_title, @document_fields)
 
   publish_manual
+
+  # Clear out any remote requests caught by webmock.
+  # We don't want the remote calls that were made during the publishing setup
+  # to interfere with later webmock assertions.
+  reset_remote_requests
 end
 
 When(/^I edit the manual's documents$/) do
