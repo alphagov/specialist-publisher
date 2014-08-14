@@ -17,16 +17,16 @@ private
   attr_reader :export_recipent, :document_renderer, :organisations_api, :manual, :document
 
   def base_path
-    "/#{rendered_document_attributes[:slug]}"
+    "/#{rendered_document_attributes.fetch(:slug)}"
   end
 
   def exportable_attributes
     {
       base_path: base_path,
       format: "manual-section",
-      title: rendered_document_attributes[:title],
-      description: rendered_document_attributes[:summary],
-      public_updated_at: rendered_document_attributes[:updated_at],
+      title: rendered_document_attributes.fetch(:title),
+      description: rendered_document_attributes.fetch(:summary),
+      public_updated_at: rendered_document_attributes.fetch(:updated_at),
       update_type: update_type,
       publishing_app: "specialist-publisher",
       rendering_app: "manuals-frontend",
@@ -37,11 +37,11 @@ private
         }
       ],
       details: {
-        body: rendered_document_attributes[:body],
+        body: rendered_document_attributes.fetch(:body),
         breadcrumbs: [],
         child_section_groups: [],
         manual: {
-          base_path: "/#{manual.attributes[:slug]}",
+          base_path: "/#{manual.attributes.fetch(:slug)}",
         },
         organisations: [
           organisation_info
@@ -67,6 +67,6 @@ private
   end
 
   def organisation
-    @organisation ||= organisations_api.organisation(manual.organisation_slug)
+    @organisation ||= organisations_api.organisation(manual.attributes.fetch(:organisation_slug))
   end
 end

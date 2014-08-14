@@ -25,7 +25,6 @@ describe ManualPublishingAPIExporter do
       :manual,
       attributes: manual_attributes,
       documents: documents,
-      organisation_slug: "cabinet-office",
     )
   }
 
@@ -33,13 +32,16 @@ describe ManualPublishingAPIExporter do
 
   let(:documents) {
     [
-      double(
-        :document,
-        title: "Document title",
-        summary: "This is the first section",
-        slug: "#{manual_slug}/first-section",
-      )
+      double(:document, attributes: document_attributes)
     ]
+  }
+
+  let(:document_attributes) {
+    {
+      title: "Document title",
+      summary: "This is the first section",
+      slug: "#{manual_slug}/first-section",
+    }
   }
 
   let(:organisation) {
@@ -57,6 +59,7 @@ describe ManualPublishingAPIExporter do
       summary: "This is my first manual",
       slug: "guidance/my-first-manual",
       updated_at: Date.new(2013, 12, 31),
+      organisation_slug: "cabinet-office",
     }
   }
 

@@ -23,9 +23,9 @@ private
     {
       base_path: base_path,
       format: "manual",
-      title: manual.attributes[:title],
-      description: manual.attributes[:summary],
-      public_updated_at: manual.attributes[:updated_at],
+      title: manual.attributes.fetch(:title),
+      description: manual.attributes.fetch(:summary),
+      public_updated_at: manual.attributes.fetch(:updated_at),
       update_type: "major",
       publishing_app: "specialist-publisher",
       rendering_app: "manuals-frontend",
@@ -57,15 +57,15 @@ private
   def sections
     manual.documents.map { |d|
       {
-        title: d.title,
-        description: d.summary,
-        base_path: "/#{d.slug}",
+        title: d.attributes.fetch(:title),
+        description: d.attributes.fetch(:summary),
+        base_path: "/#{d.attributes.fetch(:slug)}",
       }
     }
   end
 
   def serialised_change_notes
-    publication_logs.change_notes_for(manual.attributes[:slug]).map { |publication|
+    publication_logs.change_notes_for(manual.attributes.fetch(:slug)).map { |publication|
       {
         base_path: "/#{publication.slug}",
         title: publication.title,
@@ -84,6 +84,6 @@ private
   end
 
   def organisation
-    @organisation ||= organisations_api.organisation(manual.organisation_slug)
+    @organisation ||= organisations_api.organisation(manual.attributes.fetch(:organisation_slug))
   end
 end

@@ -35,8 +35,8 @@ describe ManualSectionPublishingAPIExporter do
       :manual,
       attributes: {
         slug: manual_slug,
+        organisation_slug: "cabinet-office",
       },
-      organisation_slug: "cabinet-office",
     )
   }
 
