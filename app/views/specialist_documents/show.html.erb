@@ -1,5 +1,5 @@
 <% content_for :breadcrumbs do %>
-  <li><%= link_to "Your documents", international_development_funds_path %></li>
+  <li><%= link_to "Your documents", specialist_documents_path(controller_name) %></li>
   <li class='active'><%= document.title %></li>
 <% end %>
 
@@ -68,4 +68,3 @@
   </div>
 </div>
 <%= render partial: 'shared/document_actions', locals: {document: document} %>
-

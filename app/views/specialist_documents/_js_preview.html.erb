@@ -1,0 +1,15 @@
+<%= content_for :document_ready do %>
+  window.SpecialistDocument.addPreviewFeature({
+    'url'             : '<%= preview_path_for_specialist_document(document) %>',
+    'insert_into'     : '.preview_container',
+    'insert_button'   : '.preview_button',
+    'render_to'       : '.preview .govspeak',
+    'data_target'     : function() {
+                          return {
+                            '<%= form_namespace %>' : {
+                              'body' : $('#<%= form_namespace %>_body').val()
+                            }
+                          };
+                        }
+  });
+<% end -%>

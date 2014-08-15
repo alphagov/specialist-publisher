@@ -16,7 +16,7 @@ SpecialistPublisher::Application.routes.draw do
   end
 
   # This is for new cma cases
-  post "cma-cases/preview" => "cma_cases#preview", as: "preview_new_cma_case"
+  post "cma-cases/preview" => "cma_cases#preview", as: "preview_new_cma_cases"
 
   # Redirect old specialist-document routes to cma-cases
   get "/specialist-documents", to: redirect("/cma-cases")
@@ -32,7 +32,7 @@ SpecialistPublisher::Application.routes.draw do
   end
 
   # This is for new aaib reports
-  post "aaib-reports/preview" => "aaib_reports#preview", as: "preview_new_aaib_report"
+  post "aaib-reports/preview" => "aaib_reports#preview", as: "preview_new_aaib_reports"
 
   resources :international_development_funds, except: :destroy, path: "international-development-funds" do
     resources :attachments, controller: :international_development_fund_attachments, only: [:new, :create, :edit, :update]
@@ -44,7 +44,7 @@ SpecialistPublisher::Application.routes.draw do
   end
 
   # This is for new international development funds
-  post "international-development-funds/preview" => "international_development_funds#preview", as: "preview_new_international_development_fund"
+  post "international-development-funds/preview" => "international_development_funds#preview", as: "preview_new_international_development_funds"
 
   resources :manuals, except: :destroy do
     resources :documents, except: :destroy, path: "sections", controller: "ManualDocuments" do
