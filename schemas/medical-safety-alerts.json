@@ -1,0 +1,49 @@
+{
+  "slug": "drug-device-alerts",
+  "name": "Alerts and recalls for drugs and medical devices",
+  "document_noun": "alert",
+  "facets": [
+    {
+      "key": "alert_type",
+      "name": "Alert type",
+      "type": "multi-select",
+      "include_blank": false,
+      "preposition": "of type",
+      "allowed_values": [
+        {"label": "Drugs", "value": "drugs"},
+        {"label": "Devices", "value": "devices"}
+      ]
+    },
+    {
+      "key": "medical_specialism",
+      "name": "Medical specialism",
+      "type": "multi-select",
+      "include_blank": false,
+      "preposition": "in medical specialism",
+      "allowed_values": [
+        {"label": "Anaesthetics", "value": "anaesthetics" },
+        {"label": "Cardiology", "value": "cardiology" },
+        {"label": "Care home staff", "value": "care-home-staff" },
+        {"label": "Cosmetic surgery", "value": "cosmetic-surgery" },
+        {"label": "Critical care", "value": "critical-care" },
+        {"label": "Dentistry", "value": "dentistry" },
+        {"label": "General practice", "value": "general-practice" },
+        {"label": "General surgery", "value": "general-surgery" },
+        {"label": "Haematology and oncology", "value": "haematology-and-oncology" },
+        {"label": "Infection prevention", "value": "infection-prevention" },
+        {"label": "Obstetrics and gynaecology", "value": "obstetrics-and-gynaecology" },
+        {"label": "Ophthalmology", "value": "ophthalmology" },
+        {"label": "Orthopaedics", "value": "orthopaedics" },
+        {"label": "Paediatrics", "value": "paediatrics" },
+        {"label": "Pathology", "value": "pathology" },
+        {"label": "Pharmacy", "value": "pharmacy" },
+        {"label": "Physiotherapy and occupational therapy", "value": "physiotherapy-and-occupational-therapy" },
+        {"label": "Radiology", "value": "radiology" },
+        {"label": "Renal medicine", "value": "renal-medicine" },
+        {"label": "Theatre practitioners", "value": "theatre-practitioners" },
+        {"label": "Urology", "value": "urology" },
+        {"label": "Vascular and cardiac surgery", "value": "vascular-and-cardiac-surgery" }
+      ]
+    }
+  ]
+}
