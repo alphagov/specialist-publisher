@@ -20,4 +20,14 @@ module SpecialistDocumentsPathHelper
     url_for([:edit, specialist_document, attachment])
   end
 
+  def preview_path_for_specialist_document(document)
+    if document.persisted?
+      url_for([:preview, document])
+      # preview_cma_case_path(document)
+    else
+      url_for([:preview_new, document])
+      # preview_new_cma_case_path
+    end
+  end
+
 end

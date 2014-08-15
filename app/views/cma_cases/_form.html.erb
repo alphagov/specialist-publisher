@@ -24,18 +24,4 @@
 
 <%= render partial: "specialist_documents/attachments_form", locals: { document: document } %>
 
-<%= content_for :document_ready do %>
-  window.SpecialistDocument.addPreviewFeature({
-    'url'             : '<%= preview_path_for_cma_case(document) %>',
-    'insert_into'     : '.preview_container',
-    'insert_button'   : '.preview_button',
-    'render_to'       : '.preview .govspeak',
-    'data_target'     : function() {
-                          return {
-                            'cma_case' : {
-                              'body' : $('#cma_case_body').val()
-                            }
-                          };
-                        }
-  });
-<% end -%>
+<%= render partial: "specialist_documents/js_preview", locals: { document: document, form_namespace: "cma_case" } %>

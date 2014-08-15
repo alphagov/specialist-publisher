@@ -62,30 +62,6 @@ module ApplicationHelper
     end
   end
 
-  def preview_path_for_cma_case(document)
-    if document.persisted?
-      preview_cma_case_path(document)
-    else
-      preview_new_cma_case_path
-    end
-  end
-
-  def preview_path_for_aaib_report(document)
-    if document.persisted?
-      preview_aaib_report_path(document)
-    else
-      preview_new_aaib_report_path
-    end
-  end
-
-  def preview_path_for_international_development_fund(document)
-    if document.persisted?
-      preview_international_development_fund_path(document)
-    else
-      preview_new_international_development_fund_path
-    end
-  end
-
   def preview_path_for_manual_document(manual, document)
     if document.persisted?
       preview_manual_document_path(manual, document)

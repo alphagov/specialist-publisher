@@ -24,18 +24,5 @@
 
 <%= render partial: "specialist_documents/attachments_form", locals: { document: document } %>
 
-<%= content_for :document_ready do %>
-  window.SpecialistDocument.addPreviewFeature({
-    'url'             : '<%= preview_path_for_international_development_fund(document) %>',
-    'insert_into'     : '.preview_container',
-    'insert_button'   : '.preview_button',
-    'render_to'       : '.preview .govspeak',
-    'data_target'     : function() {
-                          return {
-                            'international_development_fund' : {
-                              'body' : $('#international_development_fund_body').val()
-                            }
-                          };
-                        }
-  });
-<% end -%>
+<%= render partial: "specialist_documents/js_preview",
+           locals: { document: document, form_namespace: "international_development_fund" } %>
