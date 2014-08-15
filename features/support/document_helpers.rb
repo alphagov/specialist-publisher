@@ -70,6 +70,7 @@ module DocumentHelpers
       "cma-cases" => "cma_case",
       "aaib-reports" => "aaib_report",
       "international-development-funding" => "international_development_fund",
+      "drug-safety-update" => "drug_safety_update",
     }
 
     slug_prefix = slug.split("/").first

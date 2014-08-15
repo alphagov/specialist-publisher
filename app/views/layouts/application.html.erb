@@ -8,16 +8,16 @@
 
 <% content_for :navbar_items do %>
   <li><%= nav_link_to 'Manuals', '/manuals' %></li>
-  <% if user_can_edit_aaib_reports? %>
+  <% if current_user_can_edit?("aaib_report") %>
     <li><%= nav_link_to 'AAIB Reports', '/aaib-reports' %></li>
   <% end -%>
-  <% if user_can_edit_cma_cases? %>
+  <% if current_user_can_edit?("cma_case") %>
     <li><%= nav_link_to 'CMA Cases', '/cma-cases' %></li>
   <% end -%>
-  <% if user_can_edit_international_development_funds? %>
+  <% if current_user_can_edit?("international_development_fund") %>
     <li><%= nav_link_to 'International Development Funds', '/international-development-funds' %></li>
   <% end -%>
-  <% if user_can_edit_drug_safety_updates? %>
+  <% if current_user_can_edit?("drug_safety_update") %>
     <li><%= nav_link_to 'Drug Safety Update', '/drug-safety-updates' %></li>
   <% end -%>
 <% end %>
