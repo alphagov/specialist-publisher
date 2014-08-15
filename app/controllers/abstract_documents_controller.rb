@@ -18,7 +18,7 @@ class AbstractDocumentsController < ApplicationController
   def show
     document = services.show(document_id).call
 
-    render(:show, locals: { document: view_adapter(document) })
+    render("specialist_documents/show", locals: { document: view_adapter(document) })
   end
 
   def new
