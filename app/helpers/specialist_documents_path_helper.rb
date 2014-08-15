@@ -4,4 +4,12 @@ module SpecialistDocumentsPathHelper
     url_for([type.to_sym])
   end
 
+  def new_specialist_document_path(type)
+    url_for([:new, type.singularize.to_sym])
+  end
+
+  def specialist_document_path(specialist_document)
+    url_for([specialist_document])
+  end
+
 end

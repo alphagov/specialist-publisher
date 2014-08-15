@@ -12,7 +12,7 @@ class AbstractDocumentsController < ApplicationController
 
     paginated_docs = Kaminari.paginate_array(documents).page(params[:page])
 
-    render(:index, locals: { documents: paginated_docs })
+    render("specialist_documents/index", locals: { documents: paginated_docs })
   end
 
   def show
