@@ -24,13 +24,13 @@ class AbstractDocumentsController < ApplicationController
   def new
     document = services.new.call
 
-    render(:new, locals: { document: view_adapter(document) })
+    render("specialist_documents/new", locals: { document: view_adapter(document) })
   end
 
   def edit
     document = services.show(document_id).call
 
-    render(:edit, locals: { document: view_adapter(document) })
+    render("specialist_documents/edit", locals: { document: view_adapter(document) })
   end
 
   def create
@@ -39,7 +39,7 @@ class AbstractDocumentsController < ApplicationController
     if document.valid?
       redirect_to(show_path(document))
     else
-      render(:new, locals: { document: view_adapter(document) })
+      render("specialist_documents/new", locals: { document: view_adapter(document) })
     end
   end
 
@@ -49,7 +49,7 @@ class AbstractDocumentsController < ApplicationController
     if document.valid?
       redirect_to(show_path(document))
     else
-      render(:edit, locals: { document: view_adapter(document) })
+      render("specialist_documents/edit", locals: { document: view_adapter(document) })
     end
   end
 
