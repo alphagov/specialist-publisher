@@ -1,18 +1,7 @@
 <div class="row">
   <div class="col-md-8">
     <%= form_for manual do |f| %>
-      <% if manual.errors.any? %>
-        <div class="errors error-list">
-          <h2>Please fix the following errors found in the form</h2>
-          <ul class="errors">
-            <% manual.errors.each do |field, errors| %>
-              <% if errors %>
-                <li><%= field.to_s.humanize %> <%= [*errors].join(' and ')  %></li>
-              <% end %>
-            <% end %>
-          </ul>
-        </div>
-      <% end %>
+      <%= render partial: "shared/form_errors", locals: { object: manual } %>
 
       <%= f.text_field :title %>
       <%= f.text_area :summary, class: 'short-textarea js-length-counter', data: { :"count-message-threshold" => 280, :"count-message-selector" => ".summary-length-info" } %>
