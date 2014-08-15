@@ -12,4 +12,12 @@ module SpecialistDocumentsPathHelper
     url_for([specialist_document])
   end
 
+  def new_specialist_document_attachment_path(specialist_document)
+    url_for([:new, specialist_document, :attachment])
+  end
+
+  def edit_specialist_document_attachment_path(specialist_document, attachment)
+    url_for([:edit, specialist_document, attachment])
+  end
+
 end
