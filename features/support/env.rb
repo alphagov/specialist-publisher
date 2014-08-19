@@ -101,6 +101,7 @@ require "finder_api_helpers"
 require "form_helpers"
 require "cma_case_helpers"
 require "aaib_report_helpers"
+require "dsu_helpers"
 require "idf_helpers"
 require "document_helpers"
 require "manual_helpers"
@@ -118,6 +119,7 @@ World(FinderAPIHelpers)
 World(FormHelpers)
 World(AaibReportHelpers)
 World(CmaCaseHelpers)
+World(DsuHelpers)
 World(IdfHelpers)
 World(DocumentHelpers)
 World(ManualHelpers)

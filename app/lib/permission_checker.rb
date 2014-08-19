@@ -45,6 +45,8 @@ private
       "air-accidents-investigation-branch"
     when "international_development_fund"
       "department-for-international-development"
+    when "drug_safety_update"
+      "medicines-and-healthcare-products-regulatory-agency"
     end
   end
 end
