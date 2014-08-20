@@ -22,7 +22,7 @@
   <div class=" col-md-8">
     <h2>Metadata</h2>
     <dl class='metadata-list'>
-      <% document.extra_fields.each_pair do |label, value| %>
+      <% document.humanized_attributes.each_pair do |label, value| %>
         <dt><%= label.to_s.humanize %></dt>
         <dd><%= Array(value).join(" ") %></dd>
       <% end %>
