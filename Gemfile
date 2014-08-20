@@ -22,13 +22,13 @@ gem "unicorn", "4.8.2"
 if ENV["GOVSPEAK_DEV"]
   gem "govspeak", :path => "../govspeak"
 else
-  gem "govspeak", "2.0.0"
+  gem "govspeak", "3.1.0"
 end
 
 if ENV["CONTENT_MODELS_DEV"]
   gem "govuk_content_models", :path => "../govuk_content_models"
 else
-  gem "govuk_content_models", "17.0.0"
+  gem "govuk_content_models", "19.0.0"
 end
 
 if ENV["API_DEV"]
