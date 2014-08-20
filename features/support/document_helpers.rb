@@ -189,7 +189,7 @@ module DocumentHelpers
     send(:"go_to_show_page_for_#{type}", attributes.fetch(:title))
 
     attributes.except(:body).each do |_, value|
-      expect(page).to have_content(value)
+      expect(page).to have_content(Array(value).join(" "))
     end
   end
 

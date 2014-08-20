@@ -4,6 +4,10 @@ When(/^I create a Drug Safety Update$/) do
     title: "Example Drug Safety Update",
     summary: "Nullam quis risus eget urna mollis ornare vel eu leo.",
     body: "## Header" + ("\n\nPraesent commodo cursus magna, vel scelerisque nisl consectetur et." * 10),
+    therapeutic_area: ["Anaesthesia and intensive care"],
+  }
+  @dsu_metadata_values = {
+    therapeutic_area: ["anaesthesia-intensive-care"],
   }
 
   create_drug_safety_update(@dsu_fields)
@@ -30,6 +34,10 @@ Given(/^a draft Drug Safety Update exists$/) do
     title: "Example Drug Safety Update",
     summary: "Nullam quis risus eget urna mollis ornare vel eu leo.",
     body: "## Header" + ("\n\nPraesent commodo cursus magna, vel scelerisque nisl consectetur et." * 10),
+    therapeutic_area: ["Anaesthesia and intensive care"],
+  }
+  @dsu_metadata_values = {
+    therapeutic_area: ["anaesthesia-intensive-care"],
   }
 
   create_drug_safety_update(@dsu_fields)
@@ -48,6 +56,10 @@ Given(/^two Drug Safety Updates exist$/) do
     title: "Example Drug Safety Update 1",
     summary: "Nullam quis risus eget urna mollis ornare vel eu leo.",
     body: "## Header" + ("\n\nPraesent commodo cursus magna, vel scelerisque nisl consectetur et." * 10),
+    therapeutic_area: ["Anaesthesia and intensive care"],
+  }
+  @dsu_metadata_values = {
+    therapeutic_area: ["anaesthesia-intensive-care"],
   }
 
   create_drug_safety_update(@dsu_fields)
@@ -56,8 +68,11 @@ Given(/^two Drug Safety Updates exist$/) do
     title: "Example Drug Safety Update 2",
     summary: "Nullam quis risus eget urna mollis ornare vel eu leo.",
     body: "## Header" + ("\n\nPraesent commodo cursus magna, vel scelerisque nisl consectetur et." * 10),
+    therapeutic_area: ["Anaesthesia and intensive care"],
   }
-
+  @dsu_metadata_values = {
+    therapeutic_area: ["anaesthesia-intensive-care"],
+  }
   create_drug_safety_update(@dsu_fields)
 end
 
@@ -88,7 +103,7 @@ When(/^I publish the Drug Safety Update$/) do
 end
 
 Then(/^the Drug Safety Update should be published$/) do
-  check_document_is_published(@slug, @dsu_fields)
+  check_document_is_published(@slug, @dsu_fields.merge(@dsu_metadata_values))
 end
 
 When(/^I publish a new Drug Safety Update$/) do
@@ -97,8 +112,11 @@ When(/^I publish a new Drug Safety Update$/) do
     title: "Example Drug Safety Update",
     summary: "Nullam quis risus eget urna mollis ornare vel eu leo.",
     body: "## Header" + ("\n\nPraesent commodo cursus magna, vel scelerisque nisl consectetur et." * 10),
+    therapeutic_area: "Anaesthesia and intensive care",
   }
-
+  @dsu_metadata_values = {
+    therapeutic_area: ["anaesthesia-intensive-care"],
+  }
   create_drug_safety_update(@dsu_fields, publish: true)
 end
 
@@ -113,8 +131,11 @@ Given(/^a published Drug Safety Update exists$/) do
     title: "Example Drug Safety Update",
     summary: "Nullam quis risus eget urna mollis ornare vel eu leo.",
     body: "## Header" + ("\n\nPraesent commodo cursus magna, vel scelerisque nisl consectetur et." * 10),
+    therapeutic_area: ["Anaesthesia and intensive care"],
   }
-
+  @dsu_metadata_values = {
+    therapeutic_area: ["anaesthesia-intensive-care"],
+  }
   create_drug_safety_update(@dsu_fields, publish: true)
 end
 
