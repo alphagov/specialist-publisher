@@ -15,6 +15,20 @@ class FinderSchema
     allowed_values_as_option_tuples(allowed_values_for(facet_name))
   end
 
+  def humanized_facet_name(key, &block)
+    facet_data_for(key).fetch("name", &block)
+  end
+
+  def humanized_facet_value(facet_key, value, &block)
+    if facet_data_for(facet_key).fetch("type", nil) == "multi-select"
+      value.map do |v|
+        value_label_mapping_for(facet_key, v).fetch("label", &block)
+      end
+    else
+      value_label_mapping_for(facet_key, value).fetch("label", &block)
+    end
+  end
+
 private
   def schema
     @schema ||= MultiJson.load(File.read(@schema_path))
@@ -37,5 +51,11 @@ private
         value.fetch("value", "")
       ]
     end
+  end
+
+  def value_label_mapping_for(facet_key, value)
+    allowed_values_for(facet_key).find do |av|
+      av.fetch("value") == value.to_s
+    end || {}
   end
 end
