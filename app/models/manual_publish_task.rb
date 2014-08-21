@@ -10,7 +10,7 @@ class ManualPublishTask
   field :error, type: String
 
   scope :for_manual, ->(manual) { where(manual_id: manual.id) }
-  scope :by_newest_version_number, order_by("version_number DESC")
+  scope :by_newest_version_number, order_by([:version_number, :desc])
 
   state_machine initial: :queued do
     event :start! do
