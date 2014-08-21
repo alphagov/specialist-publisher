@@ -1,10 +1,10 @@
 class InternationalDevelopmentFundViewAdapter < DocumentViewAdapter
   attributes = [
-    :application_state,
+    :fund_state,
     :location,
     :development_sector,
     :eligible_entities,
-    :value_of_fund,
+    :value_of_funding,
   ]
 
   attributes.each do |attribute_name|

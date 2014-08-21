@@ -9,11 +9,11 @@
     <div class="preview_button"></div>
     <div class="preview_container" style="display: none;"></div>
 
-    <%= f.select :application_state, f.object.facet_options(:application_state) %>
+    <%= f.select :fund_state, f.object.facet_options(:fund_state) %>
     <%= f.select :location, f.object.facet_options(:location), {}, { class: 'select2', multiple: true, data: {placeholder: 'Select a location'} } %>
     <%= f.select :development_sector, f.object.facet_options(:development_sector), { label: 'Sector'}, { class: 'select2', multiple: true, data: {placeholder: 'Select a Sector'} } %>
     <%= f.select :eligible_entities, f.object.facet_options(:eligible_entities), { label: 'Eligible Organisations'}, { class: 'select2', multiple: true, data: {placeholder: 'Select an eligible organisation'} } %>
-    <%= f.select :value_of_fund, f.object.facet_options(:value_of_fund), {}, { class: 'select2', multiple: true, data: {placeholder: 'Select a Value'} } %>
+    <%= f.select :value_of_funding, f.object.facet_options(:value_of_funding), {}, { class: 'select2', multiple: true, data: {placeholder: 'Select a Value'} } %>
 
 
     <div class="actions">
