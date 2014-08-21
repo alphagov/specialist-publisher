@@ -6,7 +6,7 @@ private
   end
 
   def document_id
-    params.fetch("aaib_report_id")
+    params.fetch("drug_safety_update_id")
   end
 
   def services
