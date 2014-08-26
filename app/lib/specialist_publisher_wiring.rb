@@ -7,6 +7,7 @@ require "builders/manual_builder"
 require "builders/manual_document_builder"
 require "cma_case_indexable_formatter"
 require "dependency_container"
+require "document_headers_depth_limiter"
 require "drug_safety_update_indexable_formatter"
 require "finder_api"
 require "finder_api_notifier"
@@ -364,6 +365,12 @@ SpecialistPublisherWiring = DependencyContainer.new do
     }
   }
 
+  define_factory(:international_development_fund_header_depth_limiter) {
+    ->(doc) {
+      DocumentHeadersDepthLimiter.new(doc, depth: 2)
+    }
+  }
+
   define_instance(:specialist_document_renderer) {
     ->(doc) {
       pipeline = [
@@ -377,6 +384,22 @@ SpecialistPublisherWiring = DependencyContainer.new do
       }
     }
   }
+
+  define_instance(:international_development_fund_renderer) {
+    ->(doc) {
+      pipeline = [
+        get(:markdown_renderer),
+        get(:specialist_document_govspeak_header_extractor),
+        get(:international_development_fund_header_depth_limiter),
+        get(:specialist_document_govspeak_to_html_renderer),
+      ]
+
+      pipeline.reduce(doc) { |doc, next_renderer|
+        next_renderer.call(doc)
+      }
+    }
+  }
+
   define_instance(:manual_document_renderer) {
     ->(doc) {
       pipeline = [
@@ -596,7 +619,7 @@ SpecialistPublisherWiring = DependencyContainer.new do
     ->(doc) {
       SpecialistDocumentDatabaseExporter.new(
         RenderedSpecialistDocument,
-        get(:specialist_document_renderer),
+        get(:international_development_fund_renderer),
         get(:international_development_fund_finder_schema),
         doc,
       ).call
