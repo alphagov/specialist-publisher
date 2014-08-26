@@ -4,7 +4,7 @@ When(/^I create a International Development Fund$/) do
   @idf_fields = {
     title: @document_title,
     summary: "Nullam quis risus eget urna mollis ornare vel eu leo.",
-    body: "## Header" + ("\n\nPraesent commodo cursus magna, vel scelerisque nisl consectetur et." * 10),
+    body: document_body_with_deeply_nested_headers,
   }
 
   create_international_development_fund(@idf_fields)
@@ -31,7 +31,7 @@ Given(/^a draft International Development Fund exists$/) do
   @idf_fields = {
     title: @document_title,
     summary: "Nullam quis risus eget urna mollis ornare vel eu leo.",
-    body: "## Header" + ("\n\nPraesent commodo cursus magna, vel scelerisque nisl consectetur et." * 10),
+    body: document_body_with_deeply_nested_headers,
   }
 
   create_international_development_fund(@idf_fields)
@@ -49,14 +49,14 @@ Given(/^two International Development Funds exist$/) do
   @idf_fields = {
     title: "International Development Fund 1",
     summary: "Nullam quis risus eget urna mollis ornare vel eu leo.",
-    body: "## Header" + ("\n\nPraesent commodo cursus magna, vel scelerisque nisl consectetur et." * 10),
+    body: document_body_with_deeply_nested_headers,
   }
   create_international_development_fund(@idf_fields)
 
   @idf_fields = {
     title: "International Development Fund 2",
     summary: "Nullam quis risus eget urna mollis ornare vel eu leo.",
-    body: "## Header" + ("\n\nPraesent commodo cursus magna, vel scelerisque nisl consectetur et." * 10),
+    body: document_body_with_deeply_nested_headers,
   }
   create_international_development_fund(@idf_fields)
 end
@@ -89,6 +89,7 @@ end
 
 Then(/^the International Development Fund should be published$/) do
   check_document_is_published(@slug, @idf_fields)
+  check_header_metadata_depth_is_limited(@slug, depth: 2)
 end
 
 When(/^I publish a new International Development Fund$/) do
@@ -97,7 +98,7 @@ When(/^I publish a new International Development Fund$/) do
   @idf_fields = {
     title: @document_title,
     summary: "Nullam quis risus eget urna mollis ornare vel eu leo.",
-    body: "## Header" + ("\n\nPraesent commodo cursus magna, vel scelerisque nisl consectetur et." * 10),
+    body: document_body_with_deeply_nested_headers,
   }
 
   create_international_development_fund(@idf_fields, publish: true)
@@ -114,7 +115,7 @@ Given(/^a published International Development Fund exists$/) do
   @idf_fields = {
     title: @document_title,
     summary: "Nullam quis risus eget urna mollis ornare vel eu leo.",
-    body: "## Header" + ("\n\nPraesent commodo cursus magna, vel scelerisque nisl consectetur et." * 10),
+    body: document_body_with_deeply_nested_headers,
   }
 
   create_international_development_fund(@idf_fields, publish: true)
