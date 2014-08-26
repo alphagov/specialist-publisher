@@ -5,7 +5,7 @@ class ManualPublishTaskAssociationMarshaller
   end
 
   def load(manual, _record)
-    tasks = collection.for_manual(manual).by_newest_version_number
+    tasks = collection.for_manual(manual)
 
     decorator.call(manual, publish_tasks: tasks)
   end
