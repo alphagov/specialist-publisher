@@ -7,23 +7,34 @@ def wiring(sym)
   SpecialistPublisherWiring.get(sym)
 end
 
-# Commented out lines show how we *want* to do this for aaib reports and
-# manuals. Aaib reports should work (but is untested), manuals is awaiting a
-# sane method of accessing all of them through a repository.
-repository_listeners_map = [
-  [
+# TODO: Extract selection and generation of repository listeners to a class
+# that can be tested in isolation and used here simply with a one-liner.
+
+repository_listeners_map = {
+  "cma_cases" => [
     wiring(:cma_case_repository),
     CmaCaseObserversRegistry.new.publication,
   ],
-  [
+
+  "aaib_reports" => [
     wiring(:aaib_report_repository),
     AaibReportObserversRegistry.new.publication,
   ],
-  [
+
+  "international_development_funds" => [
     wiring(:international_development_fund_repository),
     InternationalDevelopmentFundObserversRegistry.new.publication,
   ],
-  #[wiring(:manuals_repository), observers.manual_publication],
-]
+}
 
-DocumentRepublisher.new(repository_listeners_map).republish!
+document_type = ARGV.any? ? ARGV.fetch(0) : nil
+
+repository_listeners = if document_type.nil?
+                         repository_listeners_map.values
+                       elsif repository_listeners_map.keys.include?(document_type)
+                         repository_listeners_map[document_type]
+                       else
+                         raise "Unknown document type: #{document_type}\n\nAvailable: #{repository_listeners_map.keys}"
+                       end
+
+DocumentRepublisher.new(repository_listeners).republish!
