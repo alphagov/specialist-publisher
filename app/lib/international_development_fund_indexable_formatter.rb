@@ -8,11 +8,11 @@ class InternationalDevelopmentFundIndexableFormatter < AbstractIndexableFormatte
 private
   def extra_attributes
     {
-      application_state: entity.application_state,
+      fund_state: entity.fund_state,
       location: entity.location,
       development_sector: entity.development_sector,
       eligible_entities: entity.eligible_entities,
-      value_of_fund: entity.value_of_fund,
+      value_of_funding: entity.value_of_funding,
     }
   end
 
