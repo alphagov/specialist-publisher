@@ -4,7 +4,7 @@ When(/^I create a Medical Safety Alert$/) do
     title: "Example Medical Safety Alert",
     summary: "Nullam quis risus eget urna mollis ornare vel eu leo.",
     body: "## Header" + ("\n\nPraesent commodo cursus magna, vel scelerisque nisl consectetur et." * 10),
-    alert_type: ["Drugs"],
+    alert_type: ["Drug Alert"],
   }
   @msa_metadata_values = {
     alert_type: ["drugs"],
@@ -34,7 +34,7 @@ Given(/^a draft Medical Safety Alert exists$/) do
     title: "Example Medical Safety Alert",
     summary: "Nullam quis risus eget urna mollis ornare vel eu leo.",
     body: "## Header" + ("\n\nPraesent commodo cursus magna, vel scelerisque nisl consectetur et." * 10),
-    alert_type: ["Drugs"],
+    alert_type: ["Drug Alert"],
   }
   @msa_metadata_values = {
     alert_type: ["drugs"],
@@ -56,7 +56,7 @@ Given(/^two Medical Safety Alerts exist$/) do
     title: "Example Medical Safety Alert 1",
     summary: "Nullam quis risus eget urna mollis ornare vel eu leo.",
     body: "## Header" + ("\n\nPraesent commodo cursus magna, vel scelerisque nisl consectetur et." * 10),
-    alert_type: ["Drugs"],
+    alert_type: ["Drug Alert"],
   }
   @msa_metadata_values = {
     alert_type: ["drugs"],
@@ -68,7 +68,7 @@ Given(/^two Medical Safety Alerts exist$/) do
     title: "Example Medical Safety Alert 2",
     summary: "Nullam quis risus eget urna mollis ornare vel eu leo.",
     body: "## Header" + ("\n\nPraesent commodo cursus magna, vel scelerisque nisl consectetur et." * 10),
-    alert_type: ["Drugs"],
+    alert_type: ["Drug Alert"],
   }
   @msa_metadata_values = {
     alert_type: ["drugs"],
@@ -113,7 +113,7 @@ When(/^I publish a new Medical Safety Alert$/) do
     title: "Example Medical Safety Alert",
     summary: "Nullam quis risus eget urna mollis ornare vel eu leo.",
     body: "## Header" + ("\n\nPraesent commodo cursus magna, vel scelerisque nisl consectetur et." * 10),
-    alert_type: ["Drugs"],
+    alert_type: ["Drug Alert"],
   }
   @msa_metadata_values = {
     alert_type: ["drugs"],
@@ -133,7 +133,7 @@ Given(/^a published Medical Safety Alert exists$/) do
     title: "Example Medical Safety Alert",
     summary: "Nullam quis risus eget urna mollis ornare vel eu leo.",
     body: "## Header" + ("\n\nPraesent commodo cursus magna, vel scelerisque nisl consectetur et." * 10),
-    alert_type: ["Drugs"],
+    alert_type: ["Drug Alert"],
   }
   @msa_metadata_values = {
     alert_type: ["drugs"],
