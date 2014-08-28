@@ -19,7 +19,10 @@ end
 
 When(/^I republish published documents$/) do
   repositories_and_listeners = [
-    [cma_case_repository, CmaCaseObserversRegistry.new.publication],
+    OpenStruct.new(
+      repository: cma_case_repository,
+      observers: CmaCaseObserversRegistry.new.publication,
+    )
   ]
 
   DocumentRepublisher.new(repositories_and_listeners).republish!
