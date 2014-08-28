@@ -105,6 +105,7 @@ require "dsu_helpers"
 require "idf_helpers"
 require "document_helpers"
 require "manual_helpers"
+require "msa_helpers"
 require "attachment_helpers"
 require "rerendering_helpers"
 require "file_fixture_helpers"
@@ -123,6 +124,7 @@ World(DsuHelpers)
 World(IdfHelpers)
 World(DocumentHelpers)
 World(ManualHelpers)
+World(MsaHelpers)
 World(AttachmentHelpers)
 World(FileFixtureHelpers)
 World(RerenderingHelpers)

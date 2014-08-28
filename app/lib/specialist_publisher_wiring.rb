@@ -5,6 +5,7 @@ require "builders/drug_safety_update_builder"
 require "builders/international_development_fund_builder"
 require "builders/manual_builder"
 require "builders/manual_document_builder"
+require "builders/medical_safety_alert_builder"
 require "cma_case_indexable_formatter"
 require "dependency_container"
 require "document_headers_depth_limiter"
@@ -18,6 +19,7 @@ require "id_generator"
 require "manual_database_exporter"
 require "marshallers/document_association_marshaller"
 require "marshallers/manual_publish_task_association_marshaller"
+require "medical_safety_alert_indexable_formatter"
 require "null_finder_schema"
 require "panopticon_registerer"
 require "rendered_specialist_document"
@@ -31,6 +33,7 @@ require "validators/aaib_report_validator"
 require "validators/change_note_validator"
 require "validators/cma_case_validator"
 require "validators/drug_safety_update_validator"
+require "validators/medical_safety_alert_validator"
 require "validators/international_development_fund_validator"
 require "validators/manual_document_validator"
 require "validators/manual_validator"
@@ -89,6 +92,13 @@ SpecialistPublisherWiring = DependencyContainer.new do
     SpecialistDocumentRepository.new(
       specialist_document_editions: SpecialistDocumentEdition.where(document_type: "drug_safety_update"),
       document_factory: get(:validatable_drug_safety_update_factory),
+    )
+  end
+
+  define_singleton(:medical_safety_alert_repository) do
+    SpecialistDocumentRepository.new(
+      specialist_document_editions: SpecialistDocumentEdition.where(document_type: "medical_safety_alert"),
+      document_factory: get(:validatable_medical_safety_alert_factory),
     )
   end
 
@@ -240,6 +250,13 @@ SpecialistPublisherWiring = DependencyContainer.new do
     )
   }
 
+  define_factory(:medical_safety_alert_builder) {
+    MedicalSafetyAlertBuilder.new(
+      get(:validatable_medical_safety_alert_factory),
+      IdGenerator,
+    )
+  }
+
   define_factory(:validatable_drug_safety_update_factory) {
     ->(*args) {
       SlugUniquenessValidator.new(
@@ -251,11 +268,34 @@ SpecialistPublisherWiring = DependencyContainer.new do
     }
   }
 
+  define_factory(:validatable_medical_safety_alert_factory) {
+    ->(*args) {
+      SlugUniquenessValidator.new(
+        get(:medical_safety_alert_repository),
+        MedicalSafetyAlertValidator.new(
+          get(:medical_safety_alert_factory).call(*args),
+        ),
+      )
+    }
+  }
+
   define_factory(:drug_safety_update_factory) {
     ->(*args) {
       DrugSafetyUpdate.new(
         SpecialistDocument.new(
           SlugGenerator.new(prefix: "drug-safety-update"),
+          get(:edition_factory),
+          *args,
+        )
+      )
+    }
+  }
+
+  define_factory(:medical_safety_alert_factory) {
+    ->(*args) {
+      MedicalSafetyAlert.new(
+        SpecialistDocument.new(
+          SlugGenerator.new(prefix: "drug-device-alerts"),
           get(:edition_factory),
           *args,
         )
@@ -458,6 +498,14 @@ SpecialistPublisherWiring = DependencyContainer.new do
     }
   }
 
+  define_factory(:medical_safety_alert_panopticon_registerer) {
+    ->(document) {
+      get(:panopticon_registerer).call(
+        MedicalSafetyAlertArtefactFormatter.new(document)
+      )
+    }
+  }
+
   define_factory(:international_development_fund_panopticon_registerer) {
     ->(document) {
       get(:panopticon_registerer).call(
@@ -540,10 +588,30 @@ SpecialistPublisherWiring = DependencyContainer.new do
     }
   }
 
+  define_factory(:medical_safety_alert_rummager_indexer) {
+    ->(document) {
+      RummagerIndexer.new.add(
+        MedicalSafetyAlertIndexableFormatter.new(
+          SpecialistDocumentAttachmentProcessor.new(document)
+        )
+      )
+    }
+  }
+
   define_factory(:drug_safety_update_rummager_deleter) {
     ->(document) {
       RummagerIndexer.new.delete(
         DrugSafetyUpdateIndexableFormatter.new(
+          SpecialistDocumentAttachmentProcessor.new(document)
+        )
+      )
+    }
+  }
+
+  define_factory(:medical_safety_alert_rummager_deleter) {
+    ->(document) {
+      RummagerIndexer.new.delete(
+        MedicalSafetyAlertIndexableFormatter.new(
           SpecialistDocumentAttachmentProcessor.new(document)
         )
       )
@@ -599,6 +667,17 @@ SpecialistPublisherWiring = DependencyContainer.new do
         RenderedSpecialistDocument,
         get(:specialist_document_renderer),
         get(:cma_case_finder_schema),
+        doc,
+      ).call
+    }
+  }
+
+  define_instance(:medical_safety_alert_content_api_exporter) {
+    ->(doc) {
+      SpecialistDocumentDatabaseExporter.new(
+        RenderedSpecialistDocument,
+        get(:specialist_document_renderer),
+        get(:medical_safety_alert_finder_schema),
         doc,
       ).call
     }
@@ -682,6 +761,11 @@ SpecialistPublisherWiring = DependencyContainer.new do
   define_singleton(:drug_safety_update_finder_schema) {
     require "finder_schema"
     FinderSchema.new(Rails.root.join("schemas/drug-safety-updates.json"))
+  }
+
+  define_singleton(:medical_safety_alert_finder_schema) {
+    require "finder_schema"
+    FinderSchema.new(Rails.root.join("schemas/medical-safety-alerts.json"))
   }
 
   define_singleton(:international_development_fund_finder_schema) {

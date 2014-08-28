@@ -20,6 +20,9 @@
   <% if current_user_can_edit?("drug_safety_update") %>
     <li><%= nav_link_to 'Drug Safety Update', '/drug-safety-updates' %></li>
   <% end -%>
+  <% if current_user_can_edit?("medical_safety_alert") %>
+    <li><%= nav_link_to 'Medical Safety Alerts', '/medical-safety-alerts' %></li>
+  <% end -%>
 <% end %>
 
 <% content_for :navbar_right do %>

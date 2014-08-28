@@ -9,8 +9,9 @@ SpecialistPublisher::Application.routes.draw do
   document_types = %w(
     aaib_reports
     cma_cases
-    international_development_funds
     drug_safety_updates
+    international_development_funds
+    medical_safety_alerts
   )
 
   document_types.each do |type|
