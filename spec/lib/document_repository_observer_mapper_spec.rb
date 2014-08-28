@@ -12,11 +12,17 @@ RSpec.describe DocumentRepositoryObserverMapper do
   }
 
   let(:foo) {
-    [double(:repository), double(:observer)]
+    double(:tuple,
+           repository: double(:repository),
+           observer: double(:observer)
+    )
   }
 
   let(:bar) {
-    [double(:repository), double(:observer)]
+    double(:tuple,
+           repository: double(:repository),
+           observer: double(:observer)
+    )
   }
 
   it "returns all observers for a nil document type" do
