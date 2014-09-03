@@ -8,7 +8,7 @@
       "name": "Alert type",
       "type": "multi-select",
       "include_blank": false,
-      "preposition": "of type",
+      "preposition": "for",
       "allowed_values": [
         {"label": "Drug Alert", "value": "drugs"},
         {"label": "Medical Device Alert", "value": "devices"}
@@ -19,7 +19,7 @@
       "name": "Medical specialism",
       "type": "multi-select",
       "include_blank": false,
-      "preposition": "in medical specialism",
+      "preposition": "about",
       "allowed_values": [
         {"label": "Anaesthetics", "value": "anaesthetics" },
         {"label": "Cardiology", "value": "cardiology" },
@@ -29,20 +29,20 @@
         {"label": "Dentistry", "value": "dentistry" },
         {"label": "General practice", "value": "general-practice" },
         {"label": "General surgery", "value": "general-surgery" },
-        {"label": "Haematology and oncology", "value": "haematology-and-oncology" },
+        {"label": "Haematology and oncology", "value": "haematology-oncology" },
         {"label": "Infection prevention", "value": "infection-prevention" },
-        {"label": "Obstetrics and gynaecology", "value": "obstetrics-and-gynaecology" },
+        {"label": "Obstetrics and gynaecology", "value": "obstetrics-gynaecology" },
         {"label": "Ophthalmology", "value": "ophthalmology" },
         {"label": "Orthopaedics", "value": "orthopaedics" },
         {"label": "Paediatrics", "value": "paediatrics" },
         {"label": "Pathology", "value": "pathology" },
         {"label": "Pharmacy", "value": "pharmacy" },
-        {"label": "Physiotherapy and occupational therapy", "value": "physiotherapy-and-occupational-therapy" },
+        {"label": "Physiotherapy and occupational therapy", "value": "physiotherapy-occupational-therapy" },
         {"label": "Radiology", "value": "radiology" },
         {"label": "Renal medicine", "value": "renal-medicine" },
         {"label": "Theatre practitioners", "value": "theatre-practitioners" },
         {"label": "Urology", "value": "urology" },
-        {"label": "Vascular and cardiac surgery", "value": "vascular-and-cardiac-surgery" }
+        {"label": "Vascular and cardiac surgery", "value": "vascular-cardiac-surgery" }
       ]
     }
   ]
