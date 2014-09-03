@@ -14,17 +14,25 @@ private
 
   def repository_listeners_map
     {
-      "cma_cases" => RepositoryObserversTuple.new(
+      "cma_case" => RepositoryObserversTuple.new(
         wiring(:cma_case_repository),
         CmaCaseObserversRegistry.new.publication,
       ),
-      "aaib_reports" => RepositoryObserversTuple.new(
+      "aaib_report" => RepositoryObserversTuple.new(
         wiring(:aaib_report_repository),
         AaibReportObserversRegistry.new.publication,
       ),
-      "international_development_funds" => RepositoryObserversTuple.new(
+      "international_development_fund" => RepositoryObserversTuple.new(
         wiring(:international_development_fund_repository),
         InternationalDevelopmentFundObserversRegistry.new.publication,
+      ),
+      "medical_safety_alert" => RepositoryObserversTuple.new(
+        wiring(:medical_safety_alert_repository),
+        MedicalSafetyAlertObserversRegistry.new.publication,
+      ),
+      "drug_safety_update" => RepositoryObserversTuple.new(
+        wiring(:drug_safety_update_repository),
+        DrugSafteyUpdateObserversRegistry.new.publication,
       ),
     }
   end
