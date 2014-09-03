@@ -9,15 +9,15 @@ gem "fetchable", "1.0.0"
 gem "foreman", "0.74.0"
 gem "gds-sso", "9.3.0"
 gem "generic_form_builder", "0.8.0"
-gem 'govuk_admin_template', '1.0.0'
+gem "govuk_admin_template", "1.0.0"
 gem "kaminari", "0.16.1"
 gem "logstasher", "0.4.8"
 gem "mongoid", "2.5.2"
 gem "mongoid_rails_migrations", "1.0.0"
 gem "multi_json", "1.10.0"
-gem "sidekiq", "3.2.1"
 gem "plek", "1.7.0"
 gem "quiet_assets", "1.0.3"
+gem "sidekiq", "3.2.1"
 gem "unicorn", "4.8.2"
 
 if ENV["GOVSPEAK_DEV"]
