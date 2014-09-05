@@ -1,6 +1,6 @@
 require "delegate"
 
-class SpecialistDocumentGovspeakToHTMLRenderer < SimpleDelegator
+class GovspeakToHTMLRenderer < SimpleDelegator
 
   def initialize(govspeak_html_converter, document)
     @govspeak_html_converter = govspeak_html_converter

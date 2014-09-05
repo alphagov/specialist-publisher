@@ -26,7 +26,7 @@ require "rendered_specialist_document"
 require "rummager_indexer"
 require "markdown_attachment_processor"
 require "specialist_document_database_exporter"
-require "specialist_document_govspeak_to_html_renderer"
+require "govspeak_to_html_renderer"
 require "specialist_document_header_extractor"
 require "specialist_document_repository"
 require "validators/aaib_report_validator"
@@ -387,9 +387,9 @@ SpecialistPublisherWiring = DependencyContainer.new do
     }
   }
 
-  define_instance(:specialist_document_govspeak_to_html_renderer) {
+  define_instance(:govspeak_to_html_renderer) {
     ->(doc) {
-      SpecialistDocumentGovspeakToHTMLRenderer.new(
+      GovspeakToHTMLRenderer.new(
         get(:govspeak_html_converter),
         doc,
       )
@@ -416,7 +416,7 @@ SpecialistPublisherWiring = DependencyContainer.new do
       pipeline = [
         get(:markdown_attachment_renderer),
         get(:specialist_document_govspeak_header_extractor),
-        get(:specialist_document_govspeak_to_html_renderer),
+        get(:govspeak_to_html_renderer),
       ]
 
       pipeline.reduce(doc) { |doc, next_renderer|
@@ -431,7 +431,7 @@ SpecialistPublisherWiring = DependencyContainer.new do
         get(:markdown_attachment_renderer),
         get(:specialist_document_govspeak_header_extractor),
         get(:international_development_fund_header_depth_limiter),
-        get(:specialist_document_govspeak_to_html_renderer),
+        get(:govspeak_to_html_renderer),
       ]
 
       pipeline.reduce(doc) { |doc, next_renderer|
@@ -445,7 +445,7 @@ SpecialistPublisherWiring = DependencyContainer.new do
       pipeline = [
         get(:markdown_attachment_renderer),
         get(:specialist_document_govspeak_header_extractor),
-        get(:specialist_document_govspeak_to_html_renderer),
+        get(:govspeak_to_html_renderer),
         get(:footnotes_section_heading_renderer),
       ]
 
