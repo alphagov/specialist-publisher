@@ -1,6 +1,6 @@
 {
   "slug": "drug-safety-update",
-  "name": "Drug Safety Update",
+  "name": "Drug safety update",
   "document_noun": "update",
   "facets": [
     {
@@ -8,14 +8,14 @@
       "name": "Therapeutic area",
       "type": "multi-select",
       "include_blank": false,
-      "preposition": "of area",
+      "preposition": "about",
       "allowed_values": [
         {"label": "Anaesthesia and intensive care", "value": "anaesthesia-intensive-care"},
         {"label": "Cancer", "value": "cancer"},
         {"label": "Cardiovascular disease and lipidology", "value": "cardiovascular-disease-lipidology"},
         {"label": "Dermatology", "value": "dermatology"},
         {"label": "Ear, nose and throat", "value": "ear-nose-throat"},
-        {"label": "Endocrinology, diabetology and metabolism", "value": "endocrinology,-diabetology-metabolism"},
+        {"label": "Endocrinology, diabetology and metabolism", "value": "endocrinology-diabetology-metabolism"},
         {"label": "GI, hepatology and pancreatic disorders", "value": "gi-hepatology-pancreatic-disorders"},
         {"label": "Haematology", "value": "haematology"},
         {"label": "Immunology and vaccination", "value": "immunology-vaccination"},
