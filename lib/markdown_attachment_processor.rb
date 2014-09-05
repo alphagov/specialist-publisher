@@ -1,6 +1,6 @@
 require "delegate"
 
-class SpecialistDocumentAttachmentProcessor < SimpleDelegator
+class MarkdownAttachmentProcessor < SimpleDelegator
 
   def body
     attachments.reduce(doc.body) { |body, attachment|

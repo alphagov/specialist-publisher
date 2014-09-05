@@ -55,7 +55,7 @@ private
       manual.documents.each do |section|
         indexer.add(
           ManualSectionIndexableFormatter.new(
-            SpecialistDocumentAttachmentProcessor.new(section),
+            MarkdownAttachmentProcessor.new(section),
             manual,
           )
         )
