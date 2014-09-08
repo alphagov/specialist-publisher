@@ -34,12 +34,6 @@ module DocumentHelpers
     expect(page).to have_link(expected_slug)
   end
 
-  def check_for_published_document_with(attrs)
-    expect(
-      RenderedSpecialistDocument.where(attrs)
-    ).not_to be_empty
-  end
-
   def check_published_with_panopticon(slug, title)
     expect(fake_panopticon).to have_received(:create_artefact!)
       .with(hash_including(

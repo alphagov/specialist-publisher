@@ -711,37 +711,6 @@ SpecialistPublisherWiring = DependencyContainer.new do
     }
   }
 
-  define_factory(:manual_document_content_api_exporter) {
-    ->(doc) {
-      SpecialistDocumentDatabaseExporter.new(
-        RenderedSpecialistDocument,
-        get(:manual_document_renderer),
-        NullFinderSchema.new,
-        doc,
-      ).call
-    }
-  }
-
-  define_factory(:manual_content_api_exporter) {
-    ->(manual) {
-      ManualDatabaseExporter.new(
-        RenderedManual,
-        manual,
-      ).call
-    }
-  }
-
-  define_factory(:manual_and_documents_content_api_exporter) {
-    ->(manual) {
-
-      get(:manual_content_api_exporter).call(manual)
-
-      manual.documents.each do |exportable|
-        get(:manual_document_content_api_exporter).call(exportable)
-      end
-    }
-  }
-
   define_singleton(:finder_api) {
     FinderAPI.new(Faraday, Plek.current)
   }
