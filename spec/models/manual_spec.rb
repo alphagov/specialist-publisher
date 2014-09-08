@@ -9,6 +9,7 @@ describe Manual do
       slug: slug,
       title: title,
       summary: summary,
+      body: body,
       organisation_slug: organisation_slug,
       state: state,
       updated_at: updated_at,
@@ -19,6 +20,7 @@ describe Manual do
   let(:updated_at) { double(:updated_at) }
   let(:title) { double(:title) }
   let(:summary) { double(:summary) }
+  let(:body) { double(:body) }
   let(:organisation_slug) { double(:organisation_slug) }
   let(:state) { double(:state) }
   let(:slug) { double(:slug) }
@@ -56,6 +58,7 @@ describe Manual do
         title: title,
         slug: slug,
         summary: summary,
+        body: body,
         organisation_slug: organisation_slug,
         state: state,
         updated_at: updated_at,

@@ -4,6 +4,7 @@ class Manual
     :slug,
     :title,
     :summary,
+    :body,
     :organisation_slug,
     :state,
     :version_number,
@@ -28,6 +29,7 @@ class Manual
       slug: slug,
       title: title,
       summary: summary,
+      body: body,
       organisation_slug: organisation_slug,
       state: state,
       version_number: version_number,
@@ -39,6 +41,7 @@ class Manual
     @slug = attributes.fetch(:slug) { slug }
     @title = attributes.fetch(:title) { title }
     @summary = attributes.fetch(:summary) { summary }
+    @body = attributes.fetch(:body) { body }
     @organisation_slug = attributes.fetch(:organisation_slug) { organisation_slug }
     @state = attributes.fetch(:state) { state }
 
