@@ -58,6 +58,26 @@ class ManualsController < ApplicationController
     )
   end
 
+  def preview
+    manual = services.preview(params["id"], manual_params).call
+
+    manual.valid? # Force validation check or errors will be empty
+
+    if manual.errors[:body].nil?
+      render json: { preview_html: manual.body }
+    else
+      render json: {
+        preview_html: render_to_string(
+          "shared/_preview_errors",
+          layout: false,
+          locals: {
+            errors: manual.errors[:body]
+          }
+        )
+      }
+    end
+  end
+
 private
   def manual_id
     params.fetch("id")
@@ -65,7 +85,7 @@ private
 
   def manual_params
     params
-      .fetch("manual")
+      .fetch("manual", {})
       .slice(*valid_params)
       .merge(
         organisation_slug: current_organisation_slug,
@@ -77,6 +97,7 @@ private
     %i(
       title
       summary
+      body
     )
   end
 

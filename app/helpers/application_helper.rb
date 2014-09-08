@@ -63,6 +63,14 @@ module ApplicationHelper
     end
   end
 
+  def preview_path_for_manual(manual)
+    if manual.persisted?
+      preview_manual_path(manual)
+    else
+      preview_new_manual_path
+    end
+  end
+
   def preview_path_for_manual_document(manual, document)
     if document.persisted?
       preview_manual_document_path(manual, document)

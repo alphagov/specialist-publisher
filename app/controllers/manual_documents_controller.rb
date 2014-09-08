@@ -62,7 +62,7 @@ class ManualDocumentsController < ApplicationController
     else
       render json: {
         preview_html: render_to_string(
-          "specialist_documents/_preview_errors",
+          "shared/_preview_errors",
           layout: false,
           locals: {
             errors: document.errors[:body]
