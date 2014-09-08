@@ -1,8 +1,9 @@
 class ManualPublishingAPIExporter
 
-  def initialize(export_recipent, organisations_api, publication_logs, manual)
+  def initialize(export_recipent, organisations_api, manual_renderer, publication_logs, manual)
     @export_recipent = export_recipent
     @organisations_api = organisations_api
+    @manual_renderer = manual_renderer
     @publication_logs = publication_logs
     @manual = manual
   end
@@ -13,7 +14,13 @@ class ManualPublishingAPIExporter
 
 private
 
-  attr_reader :export_recipent, :organisations_api, :publication_logs, :manual
+  attr_reader(
+    :export_recipent,
+    :organisations_api,
+    :manual_renderer,
+    :publication_logs,
+    :manual
+  )
 
   def base_path
     "/#{manual.attributes[:slug]}"
@@ -23,9 +30,9 @@ private
     {
       base_path: base_path,
       format: "manual",
-      title: manual.attributes.fetch(:title),
-      description: manual.attributes.fetch(:summary),
-      public_updated_at: manual.attributes.fetch(:updated_at),
+      title: rendered_manual_attributes.fetch(:title),
+      description: rendered_manual_attributes.fetch(:summary),
+      public_updated_at: rendered_manual_attributes.fetch(:updated_at),
       update_type: update_type,
       publishing_app: "specialist-publisher",
       rendering_app: "manuals-frontend",
@@ -43,8 +50,13 @@ private
     manual.documents.all?(&:minor_update?) ? "minor" : "major"
   end
 
+  def rendered_manual_attributes
+    @rendered_manual_attributes ||= manual_renderer.call(manual).attributes
+  end
+
   def details_data
     {
+      body: rendered_manual_attributes.fetch(:body),
       child_section_groups: [
         {
           title: "Contents",

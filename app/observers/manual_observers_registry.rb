@@ -73,9 +73,11 @@ private
 
   def publishing_api_exporter
     ->(manual) {
+      manual_renderer = SpecialistPublisherWiring.get(:manual_renderer)
       ManualPublishingAPIExporter.new(
         publishing_api,
         organisations_api,
+        manual_renderer,
         PublicationLog,
         manual
       ).call
