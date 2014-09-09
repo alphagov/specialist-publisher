@@ -16,6 +16,7 @@ RSpec.describe CmaCaseIndexableFormatter do
       title: double,
       opened_date: double,
       closed_date: double,
+      updated_at: double,
     )
   }
 

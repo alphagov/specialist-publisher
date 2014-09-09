@@ -25,6 +25,7 @@ private
       link: link,
       indexable_content: indexable_content,
       organisations: organisation_slugs,
+      updated_at: updated_at,
     }
   end
 
@@ -46,6 +47,10 @@ private
 
   def indexable_content
     entity.body
+  end
+
+  def updated_at
+    entity.updated_at
   end
 
   def organisation_slugs
