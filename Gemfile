@@ -52,7 +52,7 @@ group :assets do
 end
 
 gem "byebug", group: [:development, :test]
-gem "pry-debugger", group: [:development, :test]
+gem "pry", group: [:development, :test]
 gem "awesome_print", group: [:development, :test]
 
 group :test do
