@@ -32,7 +32,7 @@ private
       ),
       "drug_safety_update" => RepositoryObserversTuple.new(
         wiring(:drug_safety_update_repository),
-        DrugSafteyUpdateObserversRegistry.new.publication,
+        DrugSafetyUpdateObserversRegistry.new.publication,
       ),
     }
   end
