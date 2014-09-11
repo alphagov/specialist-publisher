@@ -240,11 +240,6 @@ When(/^I re\-publish the section$/) do
   publish_document
 end
 
-Then(/^the change note is also published$/) do
-  check_manual_change_note_exported(@manual_slug, @change_note)
-  check_manual_change_note_was_published_with_panopticon(@manual_slug)
-end
-
 When(/^I edit the document without a change note$/) do
   @updated_document_fields = {
     section_summary: "Updated section",

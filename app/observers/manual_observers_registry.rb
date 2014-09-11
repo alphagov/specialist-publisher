@@ -6,13 +6,13 @@ require "manual_section_publishing_api_exporter"
 
 class ManualObserversRegistry
   def publication
+    # The order here is important. For example content exporting
+    # should happen before publishing to search.
     [
       publication_logger,
       panopticon_exporter,
-      content_api_exporter,
-      change_note_content_api_exporter,
-      rummager_exporter,
       publishing_api_exporter,
+      rummager_exporter,
     ]
   end
 
@@ -21,16 +21,6 @@ class ManualObserversRegistry
   end
 
 private
-  def change_note_content_api_exporter
-    ->(manual) {
-      ManualChangeNoteDatabaseExporter.new(
-        export_target: ManualChangeHistory,
-        publication_logs: PublicationLog,
-        manual: manual,
-      ).call
-    }
-  end
-
   def publication_logger
     ->(manual) {
       manual.documents.each do |doc|

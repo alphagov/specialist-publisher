@@ -97,33 +97,9 @@ module ManualHelpers
       ).at_least(:once)
   end
 
-  def check_manual_is_published_to_content_api(manual_slug, manual_attrs, document_slug, document_attrs)
-    rendered_manual = RenderedManual.find_by_slug(manual_slug)
-
-    expect(rendered_manual.section_groups.first.fetch("sections")).to include(
-      {
-        "slug" => document_slug,
-        "title" => document_attrs.fetch(:title),
-        "summary" => document_attrs.fetch(:summary),
-      }
-    )
-
-    rendered_section = RenderedSpecialistDocument.find_by_slug(document_slug)
-    expect(rendered_section.title).to eq(document_attrs.fetch(:title))
-    expect(rendered_section.summary).to eq(document_attrs.fetch(:summary))
-  end
-
-  def check_manual_document_is_published_to_content_api(attrs)
-    check_for_published_document_with(attrs.except(:body))
-  end
-
   def check_manual_and_documents_were_published(manual_slug, manual_attrs, document_slug, document_attrs)
     check_manual_was_published_to_panopticon(manual_slug, manual_attrs)
     check_manual_section_was_published_to_panopticon(document_slug, document_attrs)
-
-    check_manual_is_published_to_content_api(manual_slug, manual_attrs, document_slug, document_attrs)
-    check_manual_document_is_published_to_content_api(document_attrs)
-    check_manual_change_note_is_set_to_default(manual_slug)
 
     check_manual_is_published_to_publishing_api(manual_slug, manual_attrs)
     check_manual_document_is_published_to_publishing_api(document_slug, document_attrs)
@@ -214,36 +190,6 @@ module ManualHelpers
 
     expect(most_recent_section_update.fetch("change_note"))
       .to eq(@change_note)
-  end
-
-  def check_manual_change_note_was_published_with_panopticon(manual_slug)
-    slug = change_note_slug(manual_slug)
-
-    expect(fake_panopticon).to have_received(:create_artefact!).with(
-      hash_including(
-        slug: slug,
-        state: "live",
-      )
-    )
-  end
-
-  def check_manual_section_has_no_duplicated_change_notes(manual_slug, document_slug)
-    slug = change_note_slug(manual_slug)
-
-    manual_change_history = ManualChangeHistory.find_by_slug(slug)
-    document_change_history = manual_change_history.updates.select { |h| h["slug"] == document_slug }
-
-    unique_changes = document_change_history.uniq { |h| h["change_note"] }
-
-    expect(unique_changes.size).to eq(document_change_history.size)
-  end
-
-  def check_manual_change_note_is_set_to_default(manual_slug)
-    slug = change_note_slug(manual_slug)
-
-    change_history = ManualChangeHistory.find_by_slug(slug)
-
-    expect(change_history.updates.first.fetch("change_note")).to eq("New section added.")
   end
 
   def check_change_note_value(manual_title, document_title, expected_value)
