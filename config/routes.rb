@@ -43,8 +43,13 @@ SpecialistPublisher::Application.routes.draw do
     end
 
     post :publish, on: :member
+
+    # This is for persisted manuals
+    post :preview, on: :member
   end
 
+  # This is for new manualss
+  post "manuals/preview" => "Manuals#preview", as: "preview_new_manual"
   # This is for new manual documents
   post "manuals/:manual_id/sections/preview" => "ManualDocuments#preview", as: "preview_new_manual_document"
 

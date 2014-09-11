@@ -51,6 +51,7 @@ private
     {
       title: manual.title,
       summary: manual.summary,
+      body: manual.body,
       state: manual.state,
     }
   end
@@ -63,6 +64,7 @@ private
       slug: manual_record.slug,
       title: edition.title,
       summary: edition.summary,
+      body: edition.body,
       organisation_slug: manual_record.organisation_slug,
       state: edition.state,
       version_number: edition.version_number,

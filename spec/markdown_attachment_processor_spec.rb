@@ -1,9 +1,9 @@
 require "fast_spec_helper"
 
-require "specialist_document_attachment_processor"
+require "markdown_attachment_processor"
 
-describe SpecialistDocumentAttachmentProcessor do
-  subject(:renderer) { SpecialistDocumentAttachmentProcessor.new(doc) }
+describe MarkdownAttachmentProcessor do
+  subject(:renderer) { MarkdownAttachmentProcessor.new(doc) }
 
   let(:unprocessed_body) {
     %{

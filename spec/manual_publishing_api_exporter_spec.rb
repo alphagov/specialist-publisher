@@ -7,6 +7,7 @@ describe ManualPublishingAPIExporter do
     ManualPublishingAPIExporter.new(
       export_recipent,
       organisations_api,
+      manual_renderer,
       publication_logs_collection,
       manual
     )
@@ -19,6 +20,7 @@ describe ManualPublishingAPIExporter do
       organisation: organisation,
     )
   }
+  let(:manual_renderer) { ->(_) { double(:rendered_manual, attributes: manual_attributes) } }
 
   let(:manual) {
     double(
@@ -61,6 +63,7 @@ describe ManualPublishingAPIExporter do
       id: "12345",
       title: "My first manual",
       summary: "This is my first manual",
+      body: "<h1>Some heading</h1>\nmanual body",
       slug: "guidance/my-first-manual",
       updated_at: Date.new(2013, 12, 31),
       organisation_slug: "cabinet-office",
@@ -120,6 +123,7 @@ describe ManualPublishingAPIExporter do
       "/guidance/my-first-manual",
       hash_including(
         details: {
+          body: "<h1>Some heading</h1>\nmanual body",
           child_section_groups: [
             {
               title: "Contents",

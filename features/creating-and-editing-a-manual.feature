@@ -15,6 +15,24 @@ Feature: Creating and editing a manual
     When I edit a manual
     Then the manual should have been updated
 
+  @javascript
+  Scenario: Previewing a draft manual
+    Given a draft manual exists
+    When I make changes and preview the manual
+    Then I see the manual body preview
+
+  @javascript
+  Scenario: Previewing a new manual
+    When I start creating a new manual
+    And I preview the manual
+    Then I see the manual body preview
+
+  @javascript
+  Scenario: Previewing a manual with a body containing javascript
+    When I start creating a new manual with embedded javascript
+    And I preview the manual
+    Then I should see an error message about a "Body" field containing javascript
+
   @regression
   Scenario: Create and edit a manual with documents
     Given a draft manual exists

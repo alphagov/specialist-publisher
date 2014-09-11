@@ -53,6 +53,7 @@ private
 
     field :title, type: String
     field :summary, type: String
+    field :body, type: String
     field :state, type: String
     field :version_number, type: Integer
     field :document_ids, type: Array

@@ -20,6 +20,7 @@ class ManualBuilder
       id: id,
       slug: slug,
       summary: "",
+      body: "",
       state: "draft",
       organisation_slug: "",
       updated_at: "",

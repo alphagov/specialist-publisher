@@ -24,9 +24,9 @@ require "null_finder_schema"
 require "panopticon_registerer"
 require "rendered_specialist_document"
 require "rummager_indexer"
-require "specialist_document_attachment_processor"
+require "markdown_attachment_processor"
 require "specialist_document_database_exporter"
-require "specialist_document_govspeak_to_html_renderer"
+require "govspeak_to_html_renderer"
 require "specialist_document_header_extractor"
 require "specialist_document_repository"
 require "validators/aaib_report_validator"
@@ -365,8 +365,8 @@ SpecialistPublisherWiring = DependencyContainer.new do
     )
   }
 
-  define_instance(:markdown_renderer) {
-    SpecialistDocumentAttachmentProcessor.method(:new)
+  define_instance(:markdown_attachment_renderer) {
+    MarkdownAttachmentProcessor.method(:new)
   }
 
   define_instance(:govspeak_html_converter) {
@@ -387,9 +387,9 @@ SpecialistPublisherWiring = DependencyContainer.new do
     }
   }
 
-  define_instance(:specialist_document_govspeak_to_html_renderer) {
+  define_instance(:govspeak_to_html_renderer) {
     ->(doc) {
-      SpecialistDocumentGovspeakToHTMLRenderer.new(
+      GovspeakToHTMLRenderer.new(
         get(:govspeak_html_converter),
         doc,
       )
@@ -411,12 +411,18 @@ SpecialistPublisherWiring = DependencyContainer.new do
     }
   }
 
+  define_instance(:manual_renderer) {
+    ->(manual) {
+      get(:govspeak_to_html_renderer).call(manual)
+    }
+  }
+
   define_instance(:specialist_document_renderer) {
     ->(doc) {
       pipeline = [
-        get(:markdown_renderer),
+        get(:markdown_attachment_renderer),
         get(:specialist_document_govspeak_header_extractor),
-        get(:specialist_document_govspeak_to_html_renderer),
+        get(:govspeak_to_html_renderer),
       ]
 
       pipeline.reduce(doc) { |doc, next_renderer|
@@ -428,10 +434,10 @@ SpecialistPublisherWiring = DependencyContainer.new do
   define_instance(:international_development_fund_renderer) {
     ->(doc) {
       pipeline = [
-        get(:markdown_renderer),
+        get(:markdown_attachment_renderer),
         get(:specialist_document_govspeak_header_extractor),
         get(:international_development_fund_header_depth_limiter),
-        get(:specialist_document_govspeak_to_html_renderer),
+        get(:govspeak_to_html_renderer),
       ]
 
       pipeline.reduce(doc) { |doc, next_renderer|
@@ -443,9 +449,9 @@ SpecialistPublisherWiring = DependencyContainer.new do
   define_instance(:manual_document_renderer) {
     ->(doc) {
       pipeline = [
-        get(:markdown_renderer),
+        get(:markdown_attachment_renderer),
         get(:specialist_document_govspeak_header_extractor),
-        get(:specialist_document_govspeak_to_html_renderer),
+        get(:govspeak_to_html_renderer),
         get(:footnotes_section_heading_renderer),
       ]
 
@@ -542,7 +548,7 @@ SpecialistPublisherWiring = DependencyContainer.new do
     ->(document) {
       RummagerIndexer.new.add(
         AaibReportIndexableFormatter.new(
-          SpecialistDocumentAttachmentProcessor.new(document)
+          MarkdownAttachmentProcessor.new(document)
         )
       )
     }
@@ -552,7 +558,7 @@ SpecialistPublisherWiring = DependencyContainer.new do
     ->(document) {
       RummagerIndexer.new.delete(
         AaibReportIndexableFormatter.new(
-          SpecialistDocumentAttachmentProcessor.new(document)
+          MarkdownAttachmentProcessor.new(document)
         )
       )
     }
@@ -562,7 +568,7 @@ SpecialistPublisherWiring = DependencyContainer.new do
     ->(document) {
       RummagerIndexer.new.add(
         CmaCaseIndexableFormatter.new(
-          SpecialistDocumentAttachmentProcessor.new(document)
+          MarkdownAttachmentProcessor.new(document)
         )
       )
     }
@@ -572,7 +578,7 @@ SpecialistPublisherWiring = DependencyContainer.new do
     ->(document) {
       RummagerIndexer.new.delete(
         CmaCaseIndexableFormatter.new(
-          SpecialistDocumentAttachmentProcessor.new(document)
+          MarkdownAttachmentProcessor.new(document)
         )
       )
     }
@@ -582,7 +588,7 @@ SpecialistPublisherWiring = DependencyContainer.new do
     ->(document) {
       RummagerIndexer.new.add(
         DrugSafetyUpdateIndexableFormatter.new(
-          SpecialistDocumentAttachmentProcessor.new(document)
+          MarkdownAttachmentProcessor.new(document)
         )
       )
     }
@@ -592,7 +598,7 @@ SpecialistPublisherWiring = DependencyContainer.new do
     ->(document) {
       RummagerIndexer.new.add(
         MedicalSafetyAlertIndexableFormatter.new(
-          SpecialistDocumentAttachmentProcessor.new(document)
+          MarkdownAttachmentProcessor.new(document)
         )
       )
     }
@@ -602,7 +608,7 @@ SpecialistPublisherWiring = DependencyContainer.new do
     ->(document) {
       RummagerIndexer.new.delete(
         DrugSafetyUpdateIndexableFormatter.new(
-          SpecialistDocumentAttachmentProcessor.new(document)
+          MarkdownAttachmentProcessor.new(document)
         )
       )
     }
@@ -612,7 +618,7 @@ SpecialistPublisherWiring = DependencyContainer.new do
     ->(document) {
       RummagerIndexer.new.delete(
         MedicalSafetyAlertIndexableFormatter.new(
-          SpecialistDocumentAttachmentProcessor.new(document)
+          MarkdownAttachmentProcessor.new(document)
         )
       )
     }
@@ -622,7 +628,7 @@ SpecialistPublisherWiring = DependencyContainer.new do
     ->(document) {
       RummagerIndexer.new.add(
         InternationalDevelopmentFundIndexableFormatter.new(
-          SpecialistDocumentAttachmentProcessor.new(document)
+          MarkdownAttachmentProcessor.new(document)
         )
       )
     }
@@ -632,7 +638,7 @@ SpecialistPublisherWiring = DependencyContainer.new do
     ->(document) {
       RummagerIndexer.new.delete(
         InternationalDevelopmentFundIndexableFormatter.new(
-          SpecialistDocumentAttachmentProcessor.new(document)
+          MarkdownAttachmentProcessor.new(document)
         )
       )
     }
@@ -741,7 +747,7 @@ SpecialistPublisherWiring = DependencyContainer.new do
   }
 
   define_singleton(:finder_api_notifier) {
-    FinderAPINotifier.new(get(:finder_api), get(:markdown_renderer))
+    FinderAPINotifier.new(get(:finder_api), get(:markdown_attachment_renderer))
   }
 
   define_singleton(:rummager_api) {

@@ -8,6 +8,11 @@
       <div class="summary-length-info" aria-live="polite">
         Summary text should be 280 characters or fewer. <span class="count"></span>
       </div>
+      <%= f.text_area :body %>
+
+      <div class="preview_button"></div>
+      <div class="preview_container" style="display: none;"></div>
+
       <div class='actions'>
         <button name="draft" class="btn btn-success">Save as draft</button>
       </div>
@@ -18,3 +23,19 @@
     <%= render partial: 'shared/govspeak-help' %>
   </div>
 </div>
+
+<%= content_for :document_ready do %>
+  window.SpecialistDocument.addPreviewFeature({
+    'url'             : '<%= preview_path_for_manual(manual) %>',
+    'insert_into'     : '.preview_container',
+    'insert_button'   : '.preview_button',
+    'render_to'       : '.preview .govspeak',
+    'data_target'     : function() {
+                          return {
+                            'manual' : {
+                              'body' : $('#manual_body').val()
+                            }
+                          };
+                        }
+  });
+<% end -%>

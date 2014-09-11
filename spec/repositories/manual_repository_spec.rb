@@ -31,6 +31,7 @@ describe ManualRepository do
       title: "title",
       state: "draft",
       summary: "summary",
+      body: "body",
       organisation_slug: "organisation_slug",
       slug: manual_slug,
     }
@@ -60,6 +61,7 @@ describe ManualRepository do
     {
       title: "title",
       summary: "summary",
+      body: "body",
       updated_at: "yesterday",
       organisation_slug: "organisation_slug",
       state: "draft",
@@ -100,7 +102,7 @@ describe ManualRepository do
       repo.store(manual)
 
       expect(edition).to have_received(:attributes=)
-        .with(manual_attributes.slice(:title, :summary, :state))
+        .with(manual_attributes.slice(:title, :summary, :state, :body))
     end
 
     it "sets the slug" do

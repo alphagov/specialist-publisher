@@ -46,8 +46,22 @@ class OrganisationalManualServiceRegistry
     )
   end
 
+  def preview(manual_id, attributes)
+    PreviewManualService.new(
+      repository: manual_repository,
+      builder: manual_builder,
+      renderer: manual_renderer,
+      manual_id: manual_id,
+      attributes: attributes,
+    )
+  end
+
 private
   attr_reader :organisation_slug
+
+  def manual_renderer
+    SpecialistPublisherWiring.get(:manual_renderer)
+  end
 
   def manual_builder
     # TODO Use ManualBuilder.new instead

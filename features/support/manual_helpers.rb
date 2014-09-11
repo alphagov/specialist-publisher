@@ -3,11 +3,11 @@ require "gds_api/test_helpers/publishing_api"
 module ManualHelpers
   include GdsApi::TestHelpers::PublishingApi
 
-  def create_manual(fields)
+  def create_manual(fields, save: true)
     visit new_manual_path
     fill_in_fields(fields)
 
-    save_as_draft
+    save_as_draft if save
   end
 
   def create_manual_document(manual_title, fields)
@@ -280,5 +280,17 @@ module ManualHelpers
   def check_manual_cannot_be_withdrawn
     go_to_manual_page(@manual_fields.fetch(:title))
     expect(page).not_to have_button("Withdraw")
+  end
+
+  def change_manual_without_saving(title, fields)
+    go_to_edit_page_for_manual(title)
+    fill_in_fields(fields)
+  end
+
+  def check_for_manual_body_preview
+    expect(current_path).to match(%r{/manuals/([0-9a-f-]+|new)})
+    within(".preview") do
+      expect(page).to have_css("p", text: "Body for preview")
+    end
   end
 end

@@ -1,10 +1,10 @@
 require "fast_spec_helper"
 
-require "specialist_document_govspeak_to_html_renderer"
+require "govspeak_to_html_renderer"
 
-describe SpecialistDocumentGovspeakToHTMLRenderer do
+describe GovspeakToHTMLRenderer do
   let(:renderer) {
-    SpecialistDocumentGovspeakToHTMLRenderer.new(
+    GovspeakToHTMLRenderer.new(
       govspeak_html_converter,
       document,
     )

@@ -5,4 +5,5 @@ class ManualValidator < SimpleDelegator
 
   validates :title, presence: true
   validates :summary, presence: true
+  validates :body, safe_html: true
 end

@@ -338,3 +338,40 @@ Then(/^the publication reattempted$/) do
   # sidekiq to retry. This is the default behaviour of sidekiq in the case of a failure
   expect(@error).to be_a(PublishManualWorker::FailedToPublishError)
 end
+
+When(/^I make changes and preview the manual$/) do
+  change_manual_without_saving(
+    @manual_title,
+    title: "Title for preview",
+    body: "Body for preview",
+  )
+  generate_preview
+end
+
+When(/^I start creating a new manual$/) do
+  @manual_title = "Original Manual title"
+
+  @manual_fields = {
+    title: @manual_title,
+    summary: "Nullam quis risus eget urna mollis ornare vel eu leo.",
+    body: "Body for preview",
+  }
+
+  create_manual(@manual_fields, save: false)
+end
+
+When(/^I preview the manual$/) do
+  generate_preview
+end
+
+Then(/^I see the manual body preview$/) do
+  check_for_manual_body_preview
+end
+
+When(/^I start creating a new manual with embedded javascript$/) do
+  @manual_fields = {
+    body: "<script>alert('Oh noes!)</script>",
+  }
+
+  create_manual(@manual_fields, save: false)
+end
