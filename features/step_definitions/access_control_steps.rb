@@ -3,7 +3,6 @@ Given(/^I am logged in as a "(.*?)" editor$/) do |editor_type|
 
   # WARNING: These must be stubbed before the first request takes place
   stub_panopticon
-  stub_finder_api
   stub_rummager
   stub_publishing_api
   stub_organisation_details(GDS::SSO.test_user.organisation_slug)
@@ -14,7 +13,6 @@ Given(/^I am logged in as a non\-CMA editor$/) do
 
   # WARNING: These must be stubbed before the first request takes place
   stub_panopticon
-  stub_finder_api
   stub_rummager
   stub_publishing_api
   stub_organisation_details(GDS::SSO.test_user.organisation_slug)

@@ -10,8 +10,6 @@ require "cma_case_indexable_formatter"
 require "dependency_container"
 require "document_headers_depth_limiter"
 require "drug_safety_update_indexable_formatter"
-require "finder_api"
-require "finder_api_notifier"
 require "footnotes_section_heading_renderer"
 require "gds_api/rummager"
 require "gds_api_proxy"
@@ -650,12 +648,6 @@ SpecialistPublisherWiring = DependencyContainer.new do
     }
   }
 
-  define_factory(:finder_api_withdrawer) {
-    ->(doc) {
-      get(:finder_api).notify_of_withdrawal(doc.slug)
-    }
-  }
-
   define_instance(:aaib_report_content_api_exporter) {
     ->(doc) {
       SpecialistDocumentDatabaseExporter.new(
@@ -709,14 +701,6 @@ SpecialistPublisherWiring = DependencyContainer.new do
         doc,
       ).call
     }
-  }
-
-  define_singleton(:finder_api) {
-    FinderAPI.new(Faraday, Plek.current)
-  }
-
-  define_singleton(:finder_api_notifier) {
-    FinderAPINotifier.new(get(:finder_api), get(:markdown_attachment_renderer))
   }
 
   define_singleton(:rummager_api) {

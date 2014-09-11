@@ -2,7 +2,6 @@ class AaibReportObserversRegistry
   def publication
     [
       content_api_exporter,
-      finder_api_exporter,
       panopticon_exporter,
       rummager_exporter,
     ]
@@ -19,7 +18,6 @@ class AaibReportObserversRegistry
   def withdrawal
     [
       content_api_withdrawer,
-      finder_api_withdrawer,
       panopticon_exporter,
       rummager_withdrawer,
     ]
@@ -40,14 +38,6 @@ private
 
   def rummager_exporter
     SpecialistPublisherWiring.get(:aaib_report_rummager_indexer)
-  end
-
-  def finder_api_exporter
-    SpecialistPublisherWiring.get(:finder_api_notifier)
-  end
-
-  def finder_api_withdrawer
-    SpecialistPublisherWiring.get(:finder_api_withdrawer)
   end
 
   def content_api_withdrawer
