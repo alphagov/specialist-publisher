@@ -6,11 +6,13 @@ require "manual_section_publishing_api_exporter"
 
 class ManualObserversRegistry
   def publication
+    # The order here is important. For example content exporting
+    # should happen before publishing to search.
     [
       publication_logger,
       panopticon_exporter,
-      rummager_exporter,
       publishing_api_exporter,
+      rummager_exporter,
     ]
   end
 
