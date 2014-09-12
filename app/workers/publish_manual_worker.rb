@@ -14,10 +14,11 @@ class PublishManualWorker
     services.publish(task.manual_id, task.version_number).call
 
     task.finish!
-  rescue PanopticonRegisterer::ServerError => error
+  rescue GdsApi::HTTPServerError => error
     log_error(error)
     requeue_task(task_id, error)
-  rescue PublishManualService::VersionMismatchError, PanopticonRegisterer::ClientError, StandardError => error
+  rescue PublishManualService::VersionMismatchError,
+         GdsApi::HTTPErrorResponse => error
     log_error(error)
     abort_task(task, error)
   end
