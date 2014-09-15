@@ -29,15 +29,8 @@ require "govspeak_to_html_renderer"
 require "specialist_document_header_extractor"
 require "specialist_document_repository"
 require "repository_registry"
-require "validators/aaib_report_validator"
-require "validators/change_note_validator"
-require "validators/cma_case_validator"
-require "validators/drug_safety_update_validator"
-require "validators/medical_safety_alert_validator"
-require "validators/international_development_fund_validator"
-require "validators/manual_document_validator"
-require "validators/manual_validator"
-require "validators/null_validator"
+require "entity_factory_registry"
+require "validatable_entity_factory_registry"
 
 $LOAD_PATH.unshift(File.expand_path("../..", "app/services"))
 
