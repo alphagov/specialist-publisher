@@ -38,7 +38,6 @@ require "validators/international_development_fund_validator"
 require "validators/manual_document_validator"
 require "validators/manual_validator"
 require "validators/null_validator"
-require "validators/slug_uniqueness_validator"
 
 $LOAD_PATH.unshift(File.expand_path("../..", "app/services"))
 

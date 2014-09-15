@@ -221,19 +221,13 @@ class ValidatableEntityFactoryRegistry
         slug_generator = SlugGenerator.new(prefix: manual.slug)
 
         ChangeNoteValidator.new(
-          SlugUniquenessValidator.new(
-            SpecialistDocumentRepository.new(
-              specialist_document_editions: SpecialistDocumentEdition.all,
-              document_factory: nil,
+          ManualDocumentValidator.new(
+            SpecialistDocument.new(
+              slug_generator,
+              entity_factory_registry.edition_factory,
+              id,
+              editions,
             ),
-            ManualDocumentValidator.new(
-              SpecialistDocument.new(
-                slug_generator,
-                entity_factory_registry.edition_factory,
-                id,
-                editions,
-              ),
-            )
           )
         )
       }

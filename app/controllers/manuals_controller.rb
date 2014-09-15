@@ -63,7 +63,7 @@ class ManualsController < ApplicationController
 
     manual.valid? # Force validation check or errors will be empty
 
-    if manual.errors[:body].nil?
+    if manual.errors[:body].blank?
       render json: { preview_html: manual.body }
     else
       render json: {

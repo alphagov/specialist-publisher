@@ -76,7 +76,7 @@ class AbstractDocumentsController < ApplicationController
 
     document.valid? # Force validation check or errors will be empty
 
-    if document.errors[:body].nil?
+    if document.errors[:body].blank?
       render json: { preview_html: document.body }
     else
       render json: {
