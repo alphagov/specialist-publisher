@@ -38,11 +38,47 @@ class RepositoryRegistry
     )
   end
 
+  def organisation_scoped_manual_repository(organisation_slug)
+    ManualRepository.new(
+      association_marshallers: [
+        DocumentAssociationMarshaller.new(
+          manual_specific_document_repository_factory: manual_specific_document_repository_factory,
+          decorator: ->(manual, attrs) {
+            entity_factories.manual_with_documents.call(manual, attrs)
+          }
+        ),
+        ManualPublishTaskAssociationMarshaller.new(
+          collection: ManualPublishTask,
+          decorator: ->(manual, attrs) {
+            ManualWithPublishTasks.new(
+              manual,
+              attrs,
+            )
+          }
+        ),
+      ],
+      factory: Manual.method(:new),
+      collection: ManualRecord.where(organisation_slug: organisation_slug),
+    )
+  end
+
+  def manual_specific_document_repository_factory
+    ->(manual) {
+      document_factory = entity_factories.manual_document_factory_factory.call(manual)
+
+      SpecialistDocumentRepository.new(
+        specialist_document_editions: SpecialistDocumentEdition.where(document_type: "manual"),
+        document_factory: document_factory,
+      )
+    }
+  end
+
 private
 
   attr_reader :entity_factories
 
   def scoped_editions(document_type)
+    # TODO
   end
 end
 
@@ -107,8 +143,6 @@ class EntityFactoryRegistry
     }
   end
 
-private
-
   def edition_factory
     SpecialistDocumentEdition.method(:new)
   end
@@ -159,7 +193,62 @@ class ValidatableEntityFactoryRegistry
     }
   end
 
+  def manual_with_documents
+    ->(manual, attrs){
+      ManualValidator.new(
+        NullValidator.new(
+          ManualWithDocuments.new(
+            manual_document_builder,
+            manual,
+            attrs,
+          )
+        )
+      )
+    }
+  end
+
+  def manual_document_builder
+    ManualDocumentBuilder.new(
+      factory_factory: manual_document_factory_factory,
+      id_generator: IdGenerator,
+    )
+  end
+
+
+  def manual_document_factory_factory
+    ->(manual) {
+      ->(id, editions) {
+        slug_generator = SlugGenerator.new(prefix: manual.slug)
+
+        ChangeNoteValidator.new(
+          SlugUniquenessValidator.new(
+            SpecialistDocumentRepository.new(
+              specialist_document_editions: SpecialistDocumentEdition.all,
+              document_factory: nil,
+            ),
+            ManualDocumentValidator.new(
+              SpecialistDocument.new(
+                slug_generator,
+                entity_factory_registry.edition_factory,
+                id,
+                editions,
+              ),
+            )
+          )
+        )
+      }
+    }
+  end
+
 private
 
   attr_reader :entity_factory_registry
+    ->(manual) {
+      document_factory = get(:validated_manual_document_factory_factory).call(manual)
+
+      SpecialistDocumentRepository.new(
+        specialist_document_editions: SpecialistDocumentEdition.where(document_type: "manual"),
+        document_factory: document_factory,
+      )
+    }
 end
