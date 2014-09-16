@@ -8,10 +8,12 @@ class ManualsController < ApplicationController
   def show
     manual, metadata = services.show(manual_id).call
     slug_unique = metadata.fetch(:slug_unique)
+    clashing_sections = metadata.fetch(:clashing_sections)
 
     render(:show, locals: {
       manual: manual,
       slug_unique: slug_unique,
+      clashing_sections: clashing_sections,
     })
   end
 

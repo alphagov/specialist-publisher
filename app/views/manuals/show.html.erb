@@ -17,6 +17,15 @@
     <% unless slug_unique %>
       <p>Warning: Warning: Clashing slugs can serious reduce the freqeuncy of LOLs you experience</p>
     <% end %>
+
+    <% unless clashing_sections.empty? %>
+      <p>Warning: Clashing slugs can serious reduce the freqeuncy of LOLs you experience</p>
+      <ul>
+        <% clashing_sections.each do |slug, sections| %>
+          <li><%= slug %></li>
+        <% end %>
+      </ul>
+    <% end %>
   </div>
   <div class="col-md-8">
     <h2>Summary</h2>
