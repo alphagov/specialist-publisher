@@ -69,13 +69,13 @@ Feature: Creating and editing a manual
   Scenario: Duplicating a manual title
     Given a draft manual exists
     When I create another manual with the same slug
-    Then I should see an error message about the duplicate slug
+    Then I see a warning about slug clash at publication
 
   Scenario: Duplicating a section title
     Given a draft manual exists
     And a draft document exists for the manual
     When I create a section with duplicate title
-    Then I should see an error message about the duplicate slug
+    Then I see a warning about slug clash at publication
 
   @regression
   Scenario: Manual documents are not available as specialist documents

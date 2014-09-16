@@ -17,10 +17,10 @@ Feature: Creating and editing a CMA case
     And I should see an error message about a "Body" field containing javascript
     And the CMA case should not have been created
 
-  Scenario: Cannot create a CMA case with a duplicate slug
+  Scenario: Create a CMA case with a clashing slug
     Given a published CMA case exists
     When I create another case with the same slug
-    Then I should see an error message about the duplicate slug
+    Then I see a warning about slug clash at publication
 
   Scenario: Can view a list of all cases in the publisher
     Given two CMA cases exist

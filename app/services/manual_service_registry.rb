@@ -11,7 +11,7 @@ class ManualServiceRegistry
 private
   def manual_repository
     # TODO Get this from a RepositoryRegistry
-    SpecialistPublisherWiring.get(:manual_repository)
+    SpecialistPublisherWiring.get(:repository_registry).manual_repository
   end
 
   def observers

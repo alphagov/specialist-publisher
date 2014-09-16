@@ -7,10 +7,10 @@ Then(/^I should see an error message about an invalid date field "(.*)"$/) do |f
   check_for_invalid_date_error(field)
 end
 
-Then(/^I should see an error message about the duplicate slug$/) do
-  check_for_error("Slug is already taken")
-end
-
 Then(/^I should see an error message about a "(.*?)" field containing javascript$/) do |field|
   check_for_javascript_usage_error(field)
+end
+
+Then(/^I see a warning about slug clash at publication$/) do
+  check_for_slug_clash_warning
 end

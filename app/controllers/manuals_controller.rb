@@ -6,9 +6,13 @@ class ManualsController < ApplicationController
   end
 
   def show
-    manual = services.show(manual_id).call
+    manual, metadata = services.show(manual_id).call
+    slug_unique = metadata.fetch(:slug_unique)
 
-    render(:show, locals: { manual: manual })
+    render(:show, locals: {
+      manual: manual,
+      slug_unique: slug_unique,
+    })
   end
 
   def new
@@ -31,7 +35,7 @@ class ManualsController < ApplicationController
   end
 
   def edit
-    manual = services.show(manual_id).call
+    manual, _metadata = services.show(manual_id).call
 
     render(:edit, locals: { manual: manual_form(manual) })
   end

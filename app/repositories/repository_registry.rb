@@ -51,6 +51,16 @@ class RepositoryRegistry
   end
 
   def organisation_scoped_manual_repository(organisation_slug)
+    scoped_manual_repository(
+      ManualRecord.where(organisation_slug: organisation_slug)
+    )
+  end
+
+  def manual_repository
+    scoped_manual_repository(ManualRecord.all)
+  end
+
+  def scoped_manual_repository(collection)
     ManualRepository.new(
       association_marshallers: [
         DocumentAssociationMarshaller.new(
@@ -70,7 +80,7 @@ class RepositoryRegistry
         ),
       ],
       factory: Manual.method(:new),
-      collection: ManualRecord.where(organisation_slug: organisation_slug),
+      collection: collection,
     )
   end
 
