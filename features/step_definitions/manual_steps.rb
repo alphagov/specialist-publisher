@@ -309,11 +309,11 @@ Then(/^the manual and its documents are queued for publishing$/) do
 end
 
 Given(/^a recoverable error occurs$/) do
-  mock_panopticon_http_error(500)
+  mock_panopticon_http_server_error
 end
 
 Given(/^an unrecoverable error occurs$/) do
-  mock_panopticon_http_error(409)
+  mock_panopticon_http_client_error
 end
 
 Given(/^a version mismatch occurs$/) do

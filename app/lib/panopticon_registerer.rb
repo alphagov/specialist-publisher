@@ -37,16 +37,7 @@ private
   end
 
   def handle_error(error, *_api_args)
-    error_logger.call(error)
-
-    case error.code.to_i
-    when (400..499)
-      raise ClientError.new("Panopticon responded with #{error.code}", error)
-    when (500..599)
-      raise ServerError.new("Panopticon responded with #{error.code}", error)
-    else
-      raise HTTPError.new("Panopticon responded with #{error.code}", error)
-    end
+    raise error
   end
 
   def slug
