@@ -520,14 +520,6 @@ SpecialistPublisherWiring = DependencyContainer.new do
     }
   }
 
-  define_factory(:manual_document_panopticon_registerer) {
-    ->(document, manual) {
-      get(:panopticon_registerer).call(
-        ManualDocumentArtefactFormatter.new(document, manual)
-      )
-    }
-  }
-
   define_factory(:manual_panopticon_registerer) {
     ->(manual) {
       get(:panopticon_registerer).call(
@@ -537,10 +529,6 @@ SpecialistPublisherWiring = DependencyContainer.new do
       get(:panopticon_registerer).call(
         ManualChangeNotesArtefactFormatter.new(manual)
       )
-
-      manual.respond_to?(:documents) && manual.documents.each do |doc|
-        get(:manual_document_panopticon_registerer).call(doc, manual)
-      end
     }
   }
 
