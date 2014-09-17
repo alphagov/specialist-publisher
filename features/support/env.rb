@@ -97,7 +97,6 @@ require "panopticon_helpers"
 require "rummager_helpers"
 require "publishing_api_helpers"
 require "organisations_api_helpers"
-require "finder_api_helpers"
 require "form_helpers"
 require "cma_case_helpers"
 require "aaib_report_helpers"
@@ -116,7 +115,6 @@ World(PanopticonHelpers)
 World(RummagerHelpers)
 World(PublishingAPIHelpers)
 World(OrganisationsAPIHelpers)
-World(FinderAPIHelpers)
 World(FormHelpers)
 World(AaibReportHelpers)
 World(CmaCaseHelpers)

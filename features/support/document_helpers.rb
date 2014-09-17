@@ -54,11 +54,6 @@ module DocumentHelpers
       )
   end
 
-  def check_added_to_finder_api(slug, fields)
-    expect(finder_api).to have_received(:notify_of_publication)
-      .with(slug, hash_including(fields))
-  end
-
   def check_added_to_rummager(slug, fields)
     document_type_slug_prefix_map = {
       "cma-cases" => "cma_case",
@@ -110,7 +105,6 @@ module DocumentHelpers
 
     expect(page).to have_content("withdrawn")
     expect(RenderedSpecialistDocument.where(title: document_title)).to be_empty
-    expect(finder_api).to have_received(:notify_of_withdrawal).with(slug)
   end
 
   def check_for_documents(*titles)
@@ -140,7 +134,6 @@ module DocumentHelpers
   def check_document_is_published(slug, fields)
     check_document_published_to_content_api(slug, fields)
     check_published_with_panopticon(slug, fields.fetch(:title))
-    check_added_to_finder_api(slug, fields.except(:body))
     check_added_to_rummager(
       slug,
       fields.except(:body),
@@ -165,7 +158,6 @@ module DocumentHelpers
   def check_document_was_republished(slug, fields)
     check_document_republished_with_panopticon(slug, fields.fetch(:title))
     check_document_published_to_content_api(slug, fields)
-    check_added_to_finder_api(slug, fields.except(:body))
     check_added_to_rummager(
       slug,
       fields.except(:body),

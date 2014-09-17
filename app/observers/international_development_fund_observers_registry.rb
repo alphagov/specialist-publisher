@@ -10,7 +10,6 @@ class InternationalDevelopmentFundObserversRegistry
   def publication
     [
       content_api_exporter,
-      finder_api_exporter,
       panopticon_exporter,
       rummager_exporter,
     ]
@@ -19,7 +18,6 @@ class InternationalDevelopmentFundObserversRegistry
   def withdrawal
     [
       content_api_withdrawer,
-      finder_api_withdrawer,
       panopticon_exporter,
       rummager_withdrawer,
     ]
@@ -34,20 +32,12 @@ private
     SpecialistPublisherWiring.get(:international_development_fund_content_api_exporter)
   end
 
-  def finder_api_exporter
-    SpecialistPublisherWiring.get(:finder_api_notifier)
-  end
-
   def rummager_exporter
     SpecialistPublisherWiring.get(:international_development_fund_rummager_indexer)
   end
 
   def rummager_withdrawer
     SpecialistPublisherWiring.get(:international_development_fund_rummager_deleter)
-  end
-
-  def finder_api_withdrawer
-    SpecialistPublisherWiring.get(:finder_api_withdrawer)
   end
 
   def content_api_withdrawer
