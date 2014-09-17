@@ -1,27 +1,4 @@
-class DrugSafetyUpdateObserversRegistry
-  def publication
-    [
-      content_api_exporter,
-      panopticon_exporter,
-      rummager_exporter,
-    ]
-  end
-
-  def update
-    []
-  end
-
-  def creation
-    []
-  end
-
-  def withdrawal
-    [
-      content_api_withdrawer,
-      panopticon_exporter,
-      rummager_withdrawer,
-    ]
-  end
+class DrugSafetyUpdateObserversRegistry < AbstractSpecialistDocumentObserversRegistry
 
 private
   def content_api_exporter

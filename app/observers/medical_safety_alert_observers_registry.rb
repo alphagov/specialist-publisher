@@ -1,27 +1,4 @@
-class MedicalSafetyAlertObserversRegistry
-  def creation
-    []
-  end
-
-  def update
-    []
-  end
-
-  def publication
-    [
-      content_api_exporter,
-      panopticon_exporter,
-      rummager_exporter,
-    ]
-  end
-
-  def withdrawal
-    [
-      content_api_withdrawer,
-      panopticon_exporter,
-      rummager_withdrawer,
-    ]
-  end
+class MedicalSafetyAlertObserversRegistry < AbstractSpecialistDocumentObserversRegistry
 
 private
   def panopticon_exporter
