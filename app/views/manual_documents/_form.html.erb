@@ -23,6 +23,15 @@
 </div>
 
 <div class="col-md-4">
+
+<% content_for :format_specific_help do %>
+  <h3><a data-toggle="collapse" data-target="#govspeak-collapsible">Collapsible</a></h3>
+  <div class="collapse" id="govspeak-collapsible">
+    <pre>## Section title
+body content to be collapsed.</pre>
+  </div>
+<% end %>
+
   <%= render partial: 'shared/govspeak-help' %>
 
   <h2>Attachments</h2>
