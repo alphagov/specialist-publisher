@@ -3,6 +3,7 @@ require "document_republisher"
 Given(/^some published and draft specialist documents exist$/) do
   stub_panopticon
   stub_rummager
+  stub_delivery_api
 
   seed_cases(1, state: "draft")
   @published_documents = seed_cases(2, state: "published")

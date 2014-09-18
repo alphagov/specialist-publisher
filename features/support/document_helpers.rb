@@ -138,6 +138,22 @@ module DocumentHelpers
       slug,
       fields.except(:body),
     )
+    check_delivery_api_notified_of_publish(slug, fields.fetch(:title))
+  end
+
+  def check_delivery_api_notified_of_publish(slug, title)
+    slug_prefix = slug.split("/").first
+    finder_url = "#{Plek.current.find("finder-frontend")}/#{slug_prefix}.atom"
+    document_url = "#{Plek.current.find("specialist-frontend")}/#{slug}"
+
+    expect(fake_delivery_api).to have_received(:notify)
+      .with(
+        finder_url,
+        "The document '#{title}' has just been published.",
+        "The document '#{title}' has just been published.\n" +
+          "To view this document please visit:\n" +
+          document_url,
+      )
   end
 
   def check_document_published_to_content_api(slug, fields)
