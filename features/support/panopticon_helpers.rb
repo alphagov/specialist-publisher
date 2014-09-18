@@ -46,9 +46,14 @@ module PanopticonHelpers
       .and_return(fake_panopticon)
   end
 
-  def mock_panopticon_http_error(error_code)
-    allow(fake_panopticon).to receive(:put_artefact!).and_raise(GdsApi::HTTPErrorResponse.new(error_code))
-    allow(fake_panopticon).to receive(:create_artefact!).and_raise(GdsApi::HTTPErrorResponse.new(error_code))
+  def mock_panopticon_http_server_error
+    allow(fake_panopticon).to receive(:put_artefact!).and_raise(GdsApi::HTTPServerError.new(500))
+    allow(fake_panopticon).to receive(:create_artefact!).and_raise(GdsApi::HTTPServerError.new(500))
+  end
+
+  def mock_panopticon_http_client_error
+    allow(fake_panopticon).to receive(:put_artefact!).and_raise(GdsApi::HTTPClientError.new(400))
+    allow(fake_panopticon).to receive(:create_artefact!).and_raise(GdsApi::HTTPClientError.new(400))
   end
 
   def mock_panopticon_timeout

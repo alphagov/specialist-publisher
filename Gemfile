@@ -35,7 +35,7 @@ end
 if ENV["API_DEV"]
   gem "gds-api-adapters", :path => "../gds-api-adapters"
 else
-  gem "gds-api-adapters", "14.1.0"
+  gem "gds-api-adapters", "14.6.0"
 end
 
 group :development do
