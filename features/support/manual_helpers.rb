@@ -84,22 +84,8 @@ module ManualHelpers
       ).at_least(:once)
   end
 
-  def check_manual_section_was_published_to_panopticon(slug, attrs)
-    expect(fake_panopticon).to have_received(:create_artefact!)
-      .with(
-        hash_including(
-          name: attrs.fetch(:title),
-          slug: slug,
-          state: "live",
-          kind: "manual-section",
-          rendering_app: "manuals-frontend",
-        )
-      ).at_least(:once)
-  end
-
   def check_manual_and_documents_were_published(manual_slug, manual_attrs, document_slug, document_attrs)
     check_manual_was_published_to_panopticon(manual_slug, manual_attrs)
-    check_manual_section_was_published_to_panopticon(document_slug, document_attrs)
 
     check_manual_is_published_to_publishing_api(manual_slug, manual_attrs)
     check_manual_document_is_published_to_publishing_api(document_slug, document_attrs)

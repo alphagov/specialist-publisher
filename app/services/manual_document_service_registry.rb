@@ -17,7 +17,7 @@ class ManualDocumentServiceRegistry
   def create(context)
     CreateManualDocumentService.new(
       manual_repository: manual_repository(context),
-      listeners: observers.creation,
+      listeners: [],
       context: context,
     )
   end
@@ -54,10 +54,6 @@ private
 
   def manual_document_builder
     SpecialistPublisherWiring.get(:manual_document_builder)
-  end
-
-  def observers
-    @observers ||= ManualDocumentObserversRegistry.new
   end
 
   def manual_repository(context)
