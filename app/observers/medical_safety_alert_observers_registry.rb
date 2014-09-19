@@ -1,3 +1,6 @@
+require "email_alert_exporter"
+require "formatters/medical_safety_alert_publication_alert_formatter"
+
 class MedicalSafetyAlertObserversRegistry < AbstractSpecialistDocumentObserversRegistry
 
 private
@@ -19,5 +22,17 @@ private
 
   def content_api_withdrawer
     SpecialistPublisherWiring.get(:specialist_document_content_api_withdrawer)
+  end
+
+  def document_publication_alert_exporter
+    ->(document) {
+      EmailAlertExporter.new(
+        delivery_api: delivery_api,
+        formatter: MedicalSafetyAlertPublicationAlertFormatter.new(
+          url_maker: url_maker,
+          document: document,
+        ),
+      ).call
+    }
   end
 end

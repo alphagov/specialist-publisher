@@ -1,5 +1,4 @@
-require "email_alert_exporter"
-require "formatters/specialist_document_publication_alert_formatter"
+require "url_maker"
 
 class AbstractSpecialistDocumentObserversRegistry
   def creation
@@ -53,11 +52,10 @@ private
   end
 
   def document_publication_alert_exporter
-    ->(document) {
-      EmailAlertExporter.new(
-        delivery_api: delivery_api,
-        formatter: SpecialistDocumentPublicationAlertFormatter.new(document),
-      ).call
-    }
+    raise NotImplementedError
+  end
+
+  def url_maker
+    UrlMaker.new
   end
 end
