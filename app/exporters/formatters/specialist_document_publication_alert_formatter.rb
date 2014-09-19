@@ -14,9 +14,13 @@ class SpecialistDocumentPublicationAlertFormatter
   end
 
   def body
-    "The document '#{document.title}' has just been published.\n" +
-    "To view this document please visit:\n" +
-    document_url
+    view_renderer.render(
+      template: "email_alerts/publication.txt",
+      locals: {
+        document: document,
+        document_url: document_url,
+      }
+    )
   end
 
 private
@@ -30,5 +34,9 @@ private
 
   def slug_prefix
     document.slug.split("/").first
+  end
+
+  def view_renderer
+    ActionView::Base.new(File.join(Rails.root, "app/views"))
   end
 end

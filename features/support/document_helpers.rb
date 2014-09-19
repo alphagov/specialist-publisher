@@ -150,9 +150,9 @@ module DocumentHelpers
       .with(
         finder_url,
         "The document '#{title}' has just been published.",
-        "The document '#{title}' has just been published.\n" +
+        "The document '#{title}' has just been published.\n\n" +
           "To view this document please visit:\n" +
-          document_url,
+          "#{document_url}\n",
       )
   end
 
