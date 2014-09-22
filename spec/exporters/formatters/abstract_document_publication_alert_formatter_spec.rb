@@ -18,11 +18,12 @@ RSpec.describe AbstractDocumentPublicationAlertFormatter do
   }
   subject(:formatter) {
     Class.new(AbstractDocumentPublicationAlertFormatter) {
-      private
-      def human_document_type
+
+      def name
         "Specialist Documents"
       end
 
+    private
       def document_noun
         "document"
       end
@@ -31,6 +32,10 @@ RSpec.describe AbstractDocumentPublicationAlertFormatter do
       document: document,
     )
   }
+
+  it "has a name which corresponds to the topic name" do
+    expect(formatter.name).to eql("Specialist Documents")
+  end
 
   it "has an identifier with url of the finder for that format" do
     expect(formatter.identifier).to include("#{Plek.current.find("finder-frontend")}/some-prefix")

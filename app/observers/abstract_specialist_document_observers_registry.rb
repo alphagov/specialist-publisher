@@ -14,7 +14,7 @@ class AbstractSpecialistDocumentObserversRegistry
       content_api_exporter,
       panopticon_exporter,
       rummager_exporter,
-      document_publication_alert_exporter,
+      publication_alert_exporter,
     ]
   end
 
@@ -51,7 +51,7 @@ private
     SpecialistPublisherWiring.get(:delivery_api)
   end
 
-  def document_publication_alert_exporter
+  def publication_alert_exporter
     raise NotImplementedError
   end
 

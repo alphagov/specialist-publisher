@@ -6,6 +6,7 @@ class EmailAlertExporter
   end
 
   def call
+    ensure_topic_exists
     send_notification_to_delivery_api
   end
 
@@ -15,6 +16,13 @@ private
     :delivery_api,
     :formatter,
   )
+
+  def ensure_topic_exists
+    delivery_api.topic(
+      formatter.identifier,
+      formatter.name,
+    )
+  end
 
   def send_notification_to_delivery_api
     delivery_api.notify(

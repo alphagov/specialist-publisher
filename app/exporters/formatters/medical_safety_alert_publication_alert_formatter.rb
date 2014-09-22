@@ -2,11 +2,11 @@ require "formatters/abstract_document_publication_alert_formatter"
 
 class MedicalSafetyAlertPublicationAlertFormatter < AbstractDocumentPublicationAlertFormatter
 
-private
-  def human_document_type
+  def name
     "Alerts and recalls for drugs and medical devices"
   end
 
+private
   def document_noun
     "alert"
   end

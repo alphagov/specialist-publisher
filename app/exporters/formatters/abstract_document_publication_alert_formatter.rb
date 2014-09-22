@@ -6,19 +6,23 @@ class AbstractDocumentPublicationAlertFormatter
     @url_maker = dependencies.fetch(:url_maker)
   end
 
+  def name
+    raise NotImplementedError
+  end
+
   def identifier
     "#{Plek.current.find("finder-frontend")}/#{slug_prefix}.atom"
   end
 
   def subject
-    "#{human_document_type}: #{document.title}"
+    "#{name}: #{document.title}"
   end
 
   def body
     view_renderer.render(
       template: "email_alerts/publication.txt",
       locals: {
-        human_document_type: human_document_type,
+        human_document_type: name,
         document_noun: document_noun,
         updated_or_published: updated_or_published_text,
         document_title: document.title,
@@ -33,10 +37,6 @@ private
     :document,
     :url_maker,
   )
-
-  def human_document_type
-    raise NotImplementedError
-  end
 
   def document_noun
     raise NotImplementedError

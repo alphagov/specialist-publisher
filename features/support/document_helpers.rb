@@ -145,6 +145,11 @@ module DocumentHelpers
     slug_prefix = slug.split("/").first
     finder_url = "#{Plek.current.find("finder-frontend")}/#{slug_prefix}.atom"
 
+    expect(fake_delivery_api).to have_received(:topic)
+      .with(
+        finder_url,
+        anything,
+      )
     expect(fake_delivery_api).to have_received(:notify)
       .with(
         finder_url,

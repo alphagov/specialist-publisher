@@ -7,6 +7,9 @@ module DeliveryAPIHelpers
 
     def notify(feed_urls, subject, body)
     end
+
+    def topic(feed_urls, title)
+    end
   end
 
   def stub_delivery_api
@@ -14,6 +17,7 @@ module DeliveryAPIHelpers
       .and_return(fake_delivery_api)
 
     allow(fake_delivery_api).to receive(:notify).and_call_original
+    allow(fake_delivery_api).to receive(:topic).and_call_original
   end
 
   def reset_delivery_api_stubs_and_messages

@@ -24,7 +24,7 @@ private
     SpecialistPublisherWiring.get(:specialist_document_content_api_withdrawer)
   end
 
-  def document_publication_alert_exporter
+  def publication_alert_exporter
     ->(document) {
       EmailAlertExporter.new(
         delivery_api: delivery_api,

@@ -2,11 +2,11 @@ require "formatters/abstract_document_publication_alert_formatter"
 
 class DrugSafetyUpdatePublicationAlertFormatter < AbstractDocumentPublicationAlertFormatter
 
-private
-  def human_document_type
+  def name
     "Drug safety update"
   end
 
+private
   def document_noun
     "update"
   end

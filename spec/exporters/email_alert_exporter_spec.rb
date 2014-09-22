@@ -5,6 +5,7 @@ RSpec.describe EmailAlertExporter do
   let(:delivery_api) { double(:delivery_api) }
   let(:formatter) {
     double(:formatter,
+      name: "format name",
       identifier: "identifier",
       subject: "subject",
       body: "body",
@@ -18,7 +19,17 @@ RSpec.describe EmailAlertExporter do
   }
 
   before do
+    allow(delivery_api).to receive(:topic)
     allow(delivery_api).to receive(:notify)
+  end
+
+  it "ensures the delivery api contains the topic" do
+    exporter.call
+    expect(delivery_api).to have_received(:topic)
+      .with(
+        "identifier",
+        "format name",
+      )
   end
 
   it "notifies the delivery api with the formatter attributes" do
