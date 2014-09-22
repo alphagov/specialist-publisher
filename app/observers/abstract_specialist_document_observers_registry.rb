@@ -18,6 +18,14 @@ class AbstractSpecialistDocumentObserversRegistry
     ]
   end
 
+  def republication
+    [
+      content_api_exporter,
+      panopticon_exporter,
+      rummager_exporter,
+    ]
+  end
+
   def withdrawal
     [
       content_api_withdrawer,

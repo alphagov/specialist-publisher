@@ -158,6 +158,11 @@ module DocumentHelpers
       )
   end
 
+  def check_delivery_api_is_not_notified_of_publish
+    expect(fake_delivery_api).to_not have_received(:topic)
+    expect(fake_delivery_api).to_not have_received(:notify)
+  end
+
   def check_document_published_to_content_api(slug, fields)
     published_document = RenderedSpecialistDocument.find_by_slug(slug)
 

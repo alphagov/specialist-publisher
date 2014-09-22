@@ -22,7 +22,7 @@ module DeliveryAPIHelpers
 
   def reset_delivery_api_stubs_and_messages
     RSpec::Mocks.space.proxy_for(delivery_api).reset
-    stub_rummager
+    stub_delivery_api
   end
 
   def fake_delivery_api

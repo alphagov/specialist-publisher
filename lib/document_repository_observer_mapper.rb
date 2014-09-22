@@ -16,23 +16,23 @@ private
     {
       "cma_case" => RepositoryObserversTuple.new(
         wiring(:cma_case_repository),
-        CmaCaseObserversRegistry.new.publication,
+        CmaCaseObserversRegistry.new.republication,
       ),
       "aaib_report" => RepositoryObserversTuple.new(
         wiring(:aaib_report_repository),
-        AaibReportObserversRegistry.new.publication,
+        AaibReportObserversRegistry.new.republication,
       ),
       "international_development_fund" => RepositoryObserversTuple.new(
         wiring(:international_development_fund_repository),
-        InternationalDevelopmentFundObserversRegistry.new.publication,
+        InternationalDevelopmentFundObserversRegistry.new.republication,
       ),
       "medical_safety_alert" => RepositoryObserversTuple.new(
         wiring(:medical_safety_alert_repository),
-        MedicalSafetyAlertObserversRegistry.new.publication,
+        MedicalSafetyAlertObserversRegistry.new.republication,
       ),
       "drug_safety_update" => RepositoryObserversTuple.new(
         wiring(:drug_safety_update_repository),
-        DrugSafetyUpdateObserversRegistry.new.publication,
+        DrugSafetyUpdateObserversRegistry.new.republication,
       ),
     }
   end
