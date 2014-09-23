@@ -11,6 +11,7 @@ require "dependency_container"
 require "document_headers_depth_limiter"
 require "drug_safety_update_indexable_formatter"
 require "footnotes_section_heading_renderer"
+require "gds_api/gov_uk_delivery"
 require "gds_api/rummager"
 require "gds_api_proxy"
 require "id_generator"
@@ -693,6 +694,10 @@ SpecialistPublisherWiring = DependencyContainer.new do
 
   define_singleton(:rummager_api) {
     GdsApi::Rummager.new(Plek.new.find("search"))
+  }
+
+  define_singleton(:delivery_api) {
+    GdsApi::GovUkDelivery.new(Plek.current.find("govuk-delivery"))
   }
 
   define_singleton(:aaib_report_finder_schema) {

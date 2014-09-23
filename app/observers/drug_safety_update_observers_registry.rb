@@ -1,27 +1,7 @@
-class DrugSafetyUpdateObserversRegistry
-  def publication
-    [
-      content_api_exporter,
-      panopticon_exporter,
-      rummager_exporter,
-    ]
-  end
+require "email_alert_exporter"
+require "formatters/drug_safety_update_publication_alert_formatter"
 
-  def update
-    []
-  end
-
-  def creation
-    []
-  end
-
-  def withdrawal
-    [
-      content_api_withdrawer,
-      panopticon_exporter,
-      rummager_withdrawer,
-    ]
-  end
+class DrugSafetyUpdateObserversRegistry < AbstractSpecialistDocumentObserversRegistry
 
 private
   def content_api_exporter
@@ -42,5 +22,17 @@ private
 
   def content_api_withdrawer
     SpecialistPublisherWiring.get(:specialist_document_content_api_withdrawer)
+  end
+
+  def publication_alert_exporter
+    ->(document) {
+      EmailAlertExporter.new(
+        delivery_api: delivery_api,
+        formatter: DrugSafetyUpdatePublicationAlertFormatter.new(
+          url_maker: url_maker,
+          document: document,
+        ),
+      ).call
+    }
   end
 end
