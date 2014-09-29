@@ -22,6 +22,8 @@ private
       formatter.identifier,
       formatter.name,
     )
+  rescue GdsApi::HTTPClientError => e
+    Rails.logger.warn "Error creating topic #{formatter.identifier} in GovDelivery. Already exists?"
   end
 
   def send_notification_to_delivery_api
