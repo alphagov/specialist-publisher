@@ -17,6 +17,10 @@ When(/^I refuse deletion/) do
   expect { @deleter.call }.to raise_error
 end
 
+Then(/^the script raises an error/) do
+  expect { @deleter.call }.to raise_error
+end
+
 Then(/^the manual and its documents are deleted$/) do
   check_manual_does_not_exist_with(@manual_fields)
 end
