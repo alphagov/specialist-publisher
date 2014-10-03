@@ -48,6 +48,11 @@ module ManualHelpers
     expect(page).to have_content(attributes.fetch(:summary))
   end
 
+  def check_manual_does_not_exist_with(attributes)
+    visit manuals_path
+    expect(page).not_to have_content(attributes.fetch(:title))
+  end
+
   def check_manual_document_exists_with(manual_title, attributes)
     go_to_manual_page(manual_title)
     click_on(attributes.fetch(:section_title))

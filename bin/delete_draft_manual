@@ -1,0 +1,7 @@
+#!/usr/bin/env ruby
+
+require File.expand_path("../../config/environment", __FILE__)
+require "cli_manual_deleter"
+
+manual_slug = ARGV.any? ? ARGV.fetch(0) : nil
+CliManualDeleter.new(manual_slug).call
