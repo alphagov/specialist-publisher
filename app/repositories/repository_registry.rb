@@ -17,35 +17,35 @@ class RepositoryRegistry
 
   def aaib_report_repository
     SpecialistDocumentRepository.new(
-      specialist_document_editions: SpecialistDocumentEdition.where(document_type: "aaib_report"),
+      specialist_document_editions: scoped_editions("aaib_report"),
       document_factory: entity_factories.aaib_report_factory,
     )
   end
 
   def cma_case_repository
     SpecialistDocumentRepository.new(
-      specialist_document_editions: SpecialistDocumentEdition.where(document_type: "cma_case"),
+      specialist_document_editions: scoped_editions("cma_case"),
       document_factory: entity_factories.cma_case_factory,
     )
   end
 
   def drug_safety_update_repository
     SpecialistDocumentRepository.new(
-      specialist_document_editions: SpecialistDocumentEdition.where(document_type: "drug_safety_update"),
+      specialist_document_editions: scoped_editions("drug_safety_update"),
       document_factory: entity_factories.drug_safety_update_factory,
     )
   end
 
   def medical_safety_alert_repository
     SpecialistDocumentRepository.new(
-      specialist_document_editions: SpecialistDocumentEdition.where(document_type: "medical_safety_alert"),
+      specialist_document_editions: scoped_editions("medical_safety_alert"),
       document_factory: entity_factories.medical_safety_alert_factory,
     )
   end
 
   def international_development_fund_repository
     SpecialistDocumentRepository.new(
-      specialist_document_editions: SpecialistDocumentEdition.where(document_type: "international_development_fund"),
+      specialist_document_editions: scoped_editions("international_development_fund"),
       document_factory: entity_factories.international_development_fund_factory,
     )
   end
@@ -89,7 +89,7 @@ class RepositoryRegistry
       document_factory = entity_factories.manual_document_factory_factory.call(manual)
 
       SpecialistDocumentRepository.new(
-        specialist_document_editions: SpecialistDocumentEdition.where(document_type: "manual"),
+        specialist_document_editions: scoped_editions("manual"),
         document_factory: document_factory,
       )
     }
@@ -100,6 +100,6 @@ private
   attr_reader :entity_factories
 
   def scoped_editions(document_type)
-    # TODO
+    SpecialistDocumentEdition.where(document_type: document_type)
   end
 end
