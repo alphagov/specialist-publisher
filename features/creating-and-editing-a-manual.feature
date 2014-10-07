@@ -75,7 +75,7 @@ Feature: Creating and editing a manual
     Given a draft manual exists
     And a draft document exists for the manual
     When I create a section with duplicate title
-    Then I see a warning about slug clash at publication
+    Then I see a warning about section slug clash at publication
 
   @regression
   Scenario: Manual documents are not available as specialist documents

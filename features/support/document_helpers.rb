@@ -247,6 +247,6 @@ module DocumentHelpers
   end
 
   def check_for_slug_clash_warning
-    expect(page).to have_content("Warning: Clashing slugs can serious reduce the freqeuncy of LOLs you experience")
+    expect(page).to have_content("Warning: This slug is already being used")
   end
 end

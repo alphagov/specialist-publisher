@@ -15,11 +15,11 @@
 <div class="row">
   <div class="col-md-8">
     <% unless slug_unique %>
-      <p>Warning: Warning: Clashing slugs can serious reduce the freqeuncy of LOLs you experience</p>
+      <p>Warning: This slug is already being used.</p>
     <% end %>
 
     <% unless clashing_sections.empty? %>
-      <p>Warning: Clashing slugs can serious reduce the freqeuncy of LOLs you experience</p>
+      <p>Warning: There are duplicate section slugs in this manual.</p>
       <ul>
         <% clashing_sections.each do |slug, sections| %>
           <li><%= slug %></li>

@@ -230,4 +230,8 @@ module ManualHelpers
       expect(page).to have_css("p", text: "Body for preview")
     end
   end
+
+  def check_for_clashing_section_slugs
+    expect(page).to have_content("Warning: There are duplicate section slugs in this manual")
+  end
 end
