@@ -246,4 +246,7 @@ module DocumentHelpers
     expect(page).to have_content("#{field} cannot include invalid Govspeak, invalid HTML, any JavaScript or images hosted on sites except for")
   end
 
+  def check_for_slug_clash_warning
+    expect(page).to have_content("Warning: This slug is already being used")
+  end
 end

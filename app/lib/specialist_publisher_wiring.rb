@@ -28,16 +28,9 @@ require "specialist_document_database_exporter"
 require "govspeak_to_html_renderer"
 require "specialist_document_header_extractor"
 require "specialist_document_repository"
-require "validators/aaib_report_validator"
-require "validators/change_note_validator"
-require "validators/cma_case_validator"
-require "validators/drug_safety_update_validator"
-require "validators/medical_safety_alert_validator"
-require "validators/international_development_fund_validator"
-require "validators/manual_document_validator"
-require "validators/manual_validator"
-require "validators/null_validator"
-require "validators/slug_uniqueness_validator"
+require "repository_registry"
+require "entity_factory_registry"
+require "validatable_entity_factory_registry"
 
 $LOAD_PATH.unshift(File.expand_path("../..", "app/services"))
 
@@ -52,15 +45,16 @@ SpecialistPublisherWiring = DependencyContainer.new do
 
   define_factory(:validatable_manual_with_sections_factory) {
     ->(attrs) {
-      SlugUniquenessValidator.new(
-        get(:manual_repository),
-        ManualValidator.new(
-          NullValidator.new(
-            get(:manual_with_sections_factory).call(attrs),
-          ),
-        )
+      ManualValidator.new(
+        NullValidator.new(
+          get(:manual_with_sections_factory).call(attrs),
+        ),
       )
     }
+  }
+
+  define_factory(:manual_document_builder) {
+    get(:validatable_entity_factories).manual_document_builder
   }
 
   define_factory(:manual_with_sections_factory) {
@@ -73,289 +67,79 @@ SpecialistPublisherWiring = DependencyContainer.new do
     }
   }
 
-  define_singleton(:aaib_report_repository) do
-    SpecialistDocumentRepository.new(
-      specialist_document_editions: SpecialistDocumentEdition.where(document_type: "aaib_report"),
-      document_factory: get(:validatable_aaib_report_factory),
+  define_factory(:repository_registry) {
+    RepositoryRegistry.new(
+      entity_factories: get(:validatable_entity_factories),
     )
+  }
+
+  define_factory(:validatable_entity_factories) {
+    ValidatableEntityFactoryRegistry.new(get(:entity_factories))
+  }
+
+  define_factory(:entity_factories) {
+    EntityFactoryRegistry.new
+  }
+
+  define_singleton(:aaib_report_repository) do
+    get(:repository_registry).aaib_report_repository
   end
 
   define_singleton(:cma_case_repository) do
-    SpecialistDocumentRepository.new(
-      specialist_document_editions: SpecialistDocumentEdition.where(document_type: "cma_case"),
-      document_factory: get(:validatable_cma_case_factory),
-    )
+    get(:repository_registry).cma_case_repository
   end
 
   define_singleton(:drug_safety_update_repository) do
-    SpecialistDocumentRepository.new(
-      specialist_document_editions: SpecialistDocumentEdition.where(document_type: "drug_safety_update"),
-      document_factory: get(:validatable_drug_safety_update_factory),
-    )
+    get(:repository_registry).drug_safety_update_repository
   end
 
   define_singleton(:medical_safety_alert_repository) do
-    SpecialistDocumentRepository.new(
-      specialist_document_editions: SpecialistDocumentEdition.where(document_type: "medical_safety_alert"),
-      document_factory: get(:validatable_medical_safety_alert_factory),
-    )
+    get(:repository_registry).medical_safety_alert_repository
   end
 
   define_singleton(:international_development_fund_repository) do
-    SpecialistDocumentRepository.new(
-      specialist_document_editions: SpecialistDocumentEdition.where(document_type: "international_development_fund"),
-      document_factory: get(:validatable_international_development_fund_factory),
-    )
-  end
-
-  define_singleton(:manual_specific_document_repository_factory) do
-    ->(manual) {
-      document_factory = get(:validated_manual_document_factory_factory).call(manual)
-
-      SpecialistDocumentRepository.new(
-        specialist_document_editions: SpecialistDocumentEdition.where(document_type: "manual"),
-        document_factory: document_factory,
-      )
-    }
+    get(:repository_registry).international_development_fund_repository
   end
 
   define_factory(:organisational_manual_repository_factory) {
-    ->(organisation_slug) {
-      ManualRepository.new(
-        association_marshallers: [
-          DocumentAssociationMarshaller.new(
-            manual_specific_document_repository_factory: get(:manual_specific_document_repository_factory),
-            decorator: ->(manual, attrs) {
-              SlugUniquenessValidator.new(
-                get(:manual_repository),
-                ManualValidator.new(
-                  NullValidator.new(
-                    ManualWithDocuments.new(
-                      get(:manual_document_builder),
-                      manual,
-                      attrs,
-                    )
-                  )
-                )
-              )
-            }
-          ),
-          ManualPublishTaskAssociationMarshaller.new(
-            collection: ManualPublishTask,
-            decorator: ->(manual, attrs) {
-              ManualWithPublishTasks.new(
-                manual,
-                attrs,
-              )
-            }
-          ),
-        ],
-        factory: Manual.method(:new),
-        collection: ManualRecord.where(organisation_slug: organisation_slug),
-      )
-    }
-  }
-
-  define_factory(:manual_repository) {
-    ManualRepository.new(
-      {
-        association_marshallers: [
-          DocumentAssociationMarshaller.new(
-            manual_specific_document_repository_factory: get(:manual_specific_document_repository_factory),
-            decorator: ->(manual, attrs) {
-              ManualWithDocuments.new(
-                get(:manual_document_builder),
-                manual,
-                attrs,
-              )
-            }
-          ),
-          ManualPublishTaskAssociationMarshaller.new(
-            collection: ManualPublishTask,
-            decorator: ->(manual, attrs) {
-              ManualWithPublishTasks.new(
-                manual,
-                attrs,
-              )
-            }
-          ),
-        ],
-        factory: Manual.method(:new),
-        collection: ManualRecord,
-      }
-    )
+    get(:repository_registry).method(:organisation_scoped_manual_repository)
   }
 
   define_singleton(:edition_factory) { SpecialistDocumentEdition.method(:new) }
 
   define_factory(:cma_case_builder) {
     CmaCaseBuilder.new(
-      get(:validatable_cma_case_factory),
+      get(:validatable_entity_factories).cma_case_factory,
       IdGenerator,
     )
-  }
-
-  define_factory(:validatable_cma_case_factory) {
-    ->(*args) {
-      SlugUniquenessValidator.new(
-        get(:cma_case_repository),
-        CmaCaseValidator.new(
-          CmaCase.new(
-            SpecialistDocument.new(
-              SlugGenerator.new(prefix: "cma-cases"),
-              get(:edition_factory),
-              *args,
-            ),
-          ),
-        ),
-      )
-    }
   }
 
   define_factory(:aaib_report_builder) {
     AaibReportBuilder.new(
-      get(:validatable_aaib_report_factory),
+      get(:validatable_entity_factories).aaib_report_factory,
       IdGenerator,
     )
   }
 
-  define_factory(:validatable_aaib_report_factory) {
-    ->(*args) {
-      SlugUniquenessValidator.new(
-        get(:aaib_report_repository),
-        AaibReportValidator.new(
-          get(:aaib_report_factory).call(*args),
-        ),
-      )
-    }
-  }
-
-  define_factory(:aaib_report_factory) {
-    ->(*args) {
-      AaibReport.new(
-        SpecialistDocument.new(
-          SlugGenerator.new(prefix: "aaib-reports"),
-          get(:edition_factory),
-          *args,
-        )
-      )
-    }
-  }
-
   define_factory(:drug_safety_update_builder) {
     DrugSafetyUpdateBuilder.new(
-      get(:validatable_drug_safety_update_factory),
+      get(:validatable_entity_factories).drug_safety_update_factory,
       IdGenerator,
     )
   }
 
   define_factory(:medical_safety_alert_builder) {
     MedicalSafetyAlertBuilder.new(
-      get(:validatable_medical_safety_alert_factory),
+      get(:validatable_entity_factories).medical_safety_alert_factory,
       IdGenerator,
     )
-  }
-
-  define_factory(:validatable_drug_safety_update_factory) {
-    ->(*args) {
-      SlugUniquenessValidator.new(
-        get(:drug_safety_update_repository),
-        DrugSafetyUpdateValidator.new(
-          get(:drug_safety_update_factory).call(*args),
-        ),
-      )
-    }
-  }
-
-  define_factory(:validatable_medical_safety_alert_factory) {
-    ->(*args) {
-      SlugUniquenessValidator.new(
-        get(:medical_safety_alert_repository),
-        MedicalSafetyAlertValidator.new(
-          get(:medical_safety_alert_factory).call(*args),
-        ),
-      )
-    }
-  }
-
-  define_factory(:drug_safety_update_factory) {
-    ->(*args) {
-      DrugSafetyUpdate.new(
-        SpecialistDocument.new(
-          SlugGenerator.new(prefix: "drug-safety-update"),
-          get(:edition_factory),
-          *args,
-        )
-      )
-    }
-  }
-
-  define_factory(:medical_safety_alert_factory) {
-    ->(*args) {
-      MedicalSafetyAlert.new(
-        SpecialistDocument.new(
-          SlugGenerator.new(prefix: "drug-device-alerts"),
-          get(:edition_factory),
-          *args,
-        )
-      )
-    }
   }
 
   define_factory(:international_development_fund_builder) {
     InternationalDevelopmentFundBuilder.new(
-      get(:validatable_international_development_fund_factory),
+      get(:validatable_entity_factories).international_development_fund_factory,
       IdGenerator,
     )
-  }
-
-  define_factory(:validatable_international_development_fund_factory) {
-    ->(*args) {
-      SlugUniquenessValidator.new(
-        get(:international_development_fund_repository),
-        InternationalDevelopmentFundValidator.new(
-          InternationalDevelopmentFund.new(
-            SpecialistDocument.new(
-              SlugGenerator.new(prefix: "international-development-funding"),
-              get(:edition_factory),
-              *args,
-            )
-          )
-        )
-      )
-    }
-  }
-
-  define_factory(:manual_document_builder) {
-    ManualDocumentBuilder.new(
-      factory_factory: get(:validated_manual_document_factory_factory),
-      id_generator: IdGenerator,
-    )
-  }
-
-  define_factory(:validated_manual_document_factory_factory) {
-    ->(manual) {
-      ->(id, editions) {
-        slug_generator = SlugGenerator.new(prefix: manual.slug)
-
-        ChangeNoteValidator.new(
-          SlugUniquenessValidator.new(
-            SpecialistDocumentRepository.new(
-              specialist_document_editions: SpecialistDocumentEdition.all,
-              document_factory: nil,
-            ),
-            ManualDocumentValidator.new(
-              SpecialistDocument.new(
-                slug_generator,
-                get(:edition_factory),
-                id,
-                editions,
-              ),
-            )
-          )
-        )
-      }
-    }
   }
 
   define_factory(:manual_publish_task_builder) {

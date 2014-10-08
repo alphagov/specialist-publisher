@@ -6,11 +6,24 @@ class ShowDocumentService
   end
 
   def call
-    document_repository.fetch(document_id)
+    [document, other_metadata]
   end
 
 private
 
   attr_reader :document_repository, :document_id
 
+  def document
+    @document ||= document_repository.fetch(document_id)
+  end
+
+  def other_metadata
+    {
+      slug_unique: slug_unique?,
+    }
+  end
+
+  def slug_unique?
+    document_repository.slug_unique?(document)
+  end
 end

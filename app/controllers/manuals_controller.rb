@@ -6,9 +6,15 @@ class ManualsController < ApplicationController
   end
 
   def show
-    manual = services.show(manual_id).call
+    manual, metadata = services.show(manual_id).call
+    slug_unique = metadata.fetch(:slug_unique)
+    clashing_sections = metadata.fetch(:clashing_sections)
 
-    render(:show, locals: { manual: manual })
+    render(:show, locals: {
+      manual: manual,
+      slug_unique: slug_unique,
+      clashing_sections: clashing_sections,
+    })
   end
 
   def new
@@ -31,7 +37,7 @@ class ManualsController < ApplicationController
   end
 
   def edit
-    manual = services.show(manual_id).call
+    manual, _metadata = services.show(manual_id).call
 
     render(:edit, locals: { manual: manual_form(manual) })
   end
@@ -63,7 +69,7 @@ class ManualsController < ApplicationController
 
     manual.valid? # Force validation check or errors will be empty
 
-    if manual.errors[:body].nil?
+    if manual.errors[:body].blank?
       render json: { preview_html: manual.body }
     else
       render json: {

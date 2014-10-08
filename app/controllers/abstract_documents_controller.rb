@@ -16,9 +16,13 @@ class AbstractDocumentsController < ApplicationController
   end
 
   def show
-    document = services.show(document_id).call
+    document, other_metadata = services.show(document_id).call
+    slug_unique = other_metadata.fetch(:slug_unique)
 
-    render("specialist_documents/show", locals: { document: view_adapter(document) })
+    render("specialist_documents/show", locals: {
+      document: view_adapter(document),
+      slug_unique: slug_unique,
+    })
   end
 
   def new
@@ -28,7 +32,7 @@ class AbstractDocumentsController < ApplicationController
   end
 
   def edit
-    document = services.show(document_id).call
+    document, _metadata = services.show(document_id).call
 
     render("specialist_documents/edit", locals: { document: view_adapter(document) })
   end
@@ -76,7 +80,7 @@ class AbstractDocumentsController < ApplicationController
 
     document.valid? # Force validation check or errors will be empty
 
-    if document.errors[:body].nil?
+    if document.errors[:body].blank?
       render json: { preview_html: document.body }
     else
       render json: {

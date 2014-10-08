@@ -370,3 +370,7 @@ When(/^I start creating a new manual with embedded javascript$/) do
 
   create_manual(@manual_fields, save: false)
 end
+
+Then(/^I see a warning about section slug clash at publication$/) do
+  check_for_clashing_section_slugs
+end
