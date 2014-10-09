@@ -60,6 +60,15 @@ private
   end
 
   def publication_alert_exporter
+    ->(document) {
+      EmailAlertExporter.new(
+        delivery_api: delivery_api,
+        formatter: publication_alert_formatter(document),
+      ).call
+    }
+  end
+
+  def publication_alert_formatter
     raise NotImplementedError
   end
 
