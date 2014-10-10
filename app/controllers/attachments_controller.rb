@@ -1,4 +1,4 @@
-class AbstractAttachmentsController < ApplicationController
+class AttachmentsController < ApplicationController
 
   def new
     document, attachment = services.new(document_id).call
@@ -39,18 +39,29 @@ class AbstractAttachmentsController < ApplicationController
 
 private
   def view_adapter(document)
-    raise NotImplementedError
-  end
-
-  def document_id
-    raise NotImplementedError
+    SpecialistPublisher.view_adapter(document)
   end
 
   def services
-    raise NotImplementedError
+    SpecialistPublisher.attachment_services(document_type)
   end
 
   def edit_path(document)
-    raise NotImplementedError
+    send("edit_#{document_type}_path", document)
+  end
+
+  def document_id
+    params
+      .select { |k, _v| k.ends_with?("_id") }
+      .values
+      .fetch(0)
+  end
+
+  def document_type
+    params
+      .select { |k, _v| k.ends_with?("_id") }
+      .keys
+      .fetch(0)
+      .sub(/_id\z/, "")
   end
 end

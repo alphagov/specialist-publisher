@@ -1,4 +1,8 @@
 class AbstractAttachmentServiceRegistry
+  def initialize(repository:)
+    @repository = repository
+  end
+
   def new(document_id)
     NewDocumentAttachmentService.new(
       repository,
@@ -32,7 +36,5 @@ class AbstractAttachmentServiceRegistry
   end
 
 private
-  def repository
-    raise NotImplementedError
-  end
+  attr_reader :repository
 end
