@@ -1,7 +1,5 @@
 Then(/^the CMA case should be in draft$/) do
-  expect(
-    cma_case_repository.all.last
-  ).to be_draft
+  expect(page).to have_content("Publication state draft")
 end
 
 When(/^I publish the CMA case$/) do

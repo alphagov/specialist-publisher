@@ -87,12 +87,6 @@ end
 # See https://github.com/cucumber/cucumber-rails/blob/master/features/choose_javascript_database_strategy.feature
 Cucumber::Rails::Database.javascript_strategy = :truncation
 
-module DependencyContainerMethods
-  SpecialistPublisherWiring.inject_into(self)
-end
-
-World(DependencyContainerMethods)
-
 require "panopticon_helpers"
 require "rummager_helpers"
 require "publishing_api_helpers"

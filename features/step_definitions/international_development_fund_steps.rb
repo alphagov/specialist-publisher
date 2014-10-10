@@ -77,9 +77,7 @@ Then(/^the International Development Fund should have been updated$/) do
 end
 
 Then(/^the International Development Fund should be in draft$/) do
-  expect(
-    international_development_fund_repository.all.last
-  ).to be_draft
+  expect(page).to have_content("Publication state draft")
 end
 
 When(/^I publish the International Development Fund$/) do

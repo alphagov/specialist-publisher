@@ -1,7 +1,5 @@
 Then(/^the AAIB report should be in draft$/) do
-  expect(
-    aaib_report_repository.all.last
-  ).to be_draft
+  expect(page).to have_content("Publication state draft")
 end
 
 When(/^I publish the AAIB report$/) do

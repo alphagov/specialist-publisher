@@ -21,7 +21,7 @@ module DeliveryAPIHelpers
   end
 
   def reset_delivery_api_stubs_and_messages
-    RSpec::Mocks.space.proxy_for(delivery_api).reset
+    RSpec::Mocks.space.proxy_for(fake_delivery_api).reset
     stub_delivery_api
   end
 
