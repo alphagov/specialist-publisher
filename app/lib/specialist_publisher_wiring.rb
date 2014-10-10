@@ -31,6 +31,7 @@ require "specialist_document_repository"
 require "repository_registry"
 require "entity_factory_registry"
 require "validatable_entity_factory_registry"
+require "view_adapter_registry"
 
 $LOAD_PATH.unshift(File.expand_path("../..", "app/services"))
 
@@ -65,6 +66,10 @@ SpecialistPublisherWiring = DependencyContainer.new do
         documents: [],
       )
     }
+  }
+
+  define_factory(:view_adapter_registry) {
+    ViewAdapterRegistry.new
   }
 
   define_factory(:repository_registry) {

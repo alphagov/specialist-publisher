@@ -15,6 +15,10 @@ class RepositoryRegistry
     @entity_factories = entity_factories
   end
 
+  def for_type(type)
+    public_send("#{type}_repository")
+  end
+
   def aaib_report_repository
     SpecialistDocumentRepository.new(
       specialist_document_editions: scoped_editions("aaib_report"),

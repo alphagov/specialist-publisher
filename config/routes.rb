@@ -18,7 +18,7 @@ SpecialistPublisher::Application.routes.draw do
     type_slug = type.to_s.gsub("_", "-")
 
     resources type.to_sym, except: :destroy, path: type_slug do
-      resources :attachments, controller: "#{type.singularize}_attachments", only: [:new, :create, :edit, :update]
+      resources :attachments, only: [:new, :create, :edit, :update]
       post :withdraw, on: :member
       post :publish, on: :member
 
