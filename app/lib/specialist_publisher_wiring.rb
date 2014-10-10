@@ -86,26 +86,6 @@ SpecialistPublisherWiring = DependencyContainer.new do
     EntityFactoryRegistry.new
   }
 
-  define_singleton(:aaib_report_repository) do
-    get(:repository_registry).aaib_report_repository
-  end
-
-  define_singleton(:cma_case_repository) do
-    get(:repository_registry).cma_case_repository
-  end
-
-  define_singleton(:drug_safety_update_repository) do
-    get(:repository_registry).drug_safety_update_repository
-  end
-
-  define_singleton(:medical_safety_alert_repository) do
-    get(:repository_registry).medical_safety_alert_repository
-  end
-
-  define_singleton(:international_development_fund_repository) do
-    get(:repository_registry).international_development_fund_repository
-  end
-
   define_factory(:organisational_manual_repository_factory) {
     get(:repository_registry).method(:organisation_scoped_manual_repository)
   }
