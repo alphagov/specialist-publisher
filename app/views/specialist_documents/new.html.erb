@@ -1,10 +1,10 @@
 <% content_for :breadcrumbs do %>
-  <li><%= link_to "Your documents", specialist_documents_path(controller_name) %></li>
+  <li><%= link_to "Your documents", specialist_documents_path(document_type) %></li>
   <li class='active'>New document</li>
 <% end %>
 
 <h1 class="page-header">New document</h1>
 
 <div class="row">
-<%= render partial: "#{controller_name}/form", locals: { document: document } %>
+<%= render partial: "#{document_type.pluralize}/form", locals: { document: document } %>
 </div>

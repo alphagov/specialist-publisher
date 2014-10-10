@@ -1,3 +1,6 @@
+#TODO: wow such hack
+require_relative "../lib/specialist_publisher"
+
 class AbstractDocumentsController < ApplicationController
   before_filter :authorize_user_for_editing
   before_filter :authorize_user_for_publishing, only: [:publish]
@@ -114,14 +117,6 @@ private
     }
   end
 
-  def document_params
-    raise NotImplementedError
-  end
-
-  def view_adapter(document)
-    raise NotImplementedError
-  end
-
   def authorize_user_for_editing
     unless current_user_can_edit?(document_type)
       redirect_to(
@@ -149,15 +144,33 @@ private
     end
   end
 
+  def document_params
+    filtered_params(params.fetch(document_type, {}))
+  end
+
+  def view_adapter(document)
+    SpecialistPublisher.view_adapter(document)
+  end
+
   def services
-    raise NotImplementedError
+    SpecialistPublisher.document_services(document_type)
   end
 
   def index_path
-    raise NotImplementedError
+    send(resource_name + "_path")
   end
 
   def show_path(document)
-    raise NotImplementedError
+    send(document_type + "_path", document)
+  end
+
+  helper_method :document_type
+  def document_type
+    resource_name.singularize
+  end
+
+  helper_method :resource_name
+  def resource_name
+    request.path.split("/").fetch(1).underscore
   end
 end

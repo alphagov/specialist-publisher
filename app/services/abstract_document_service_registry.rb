@@ -10,6 +10,12 @@ require "withdraw_document_service"
 require "paginator"
 
 class AbstractDocumentServiceRegistry
+  def initialize(repository:, builder:, observers:)
+    @repository = repository
+    @builder = builder
+    @observers = observers
+  end
+
   def list
     ListDocumentsService.new(
       RepositoryPaginator.new(document_repository),
@@ -79,14 +85,12 @@ private
   end
 
   def document_repository
-    raise NotImplementedError
+    @repository
   end
 
   def document_builder
-    raise NotImplementedError
+    @builder
   end
 
-  def observers
-    raise NotImplementedError
-  end
+  attr_reader :observers
 end

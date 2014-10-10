@@ -17,7 +17,7 @@ SpecialistPublisher::Application.routes.draw do
   document_types.each do |type|
     type_slug = type.to_s.gsub("_", "-")
 
-    resources type.to_sym, except: :destroy, path: type_slug do
+    resources type.to_sym, controller: "abstract_documents", except: :destroy, path: type_slug do
       resources :attachments, only: [:new, :create, :edit, :update]
       post :withdraw, on: :member
       post :publish, on: :member
@@ -27,7 +27,7 @@ SpecialistPublisher::Application.routes.draw do
     end
 
     # This is for new documents
-    post "#{type_slug}/preview" => "#{type}#preview", as: "preview_new_#{type}"
+    post "#{type_slug}/preview" => "abstract_documents#preview", as: "preview_new_#{type}"
   end
 
   # Redirect old specialist-document routes to cma-cases
