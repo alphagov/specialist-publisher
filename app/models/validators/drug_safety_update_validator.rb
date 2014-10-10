@@ -7,6 +7,4 @@ class DrugSafetyUpdateValidator < SimpleDelegator
   validates :title, presence: true
   validates :summary, presence: true
   validates :body, presence: true, safe_html: true
-
-  validates :therapeutic_area, presence: true
 end
