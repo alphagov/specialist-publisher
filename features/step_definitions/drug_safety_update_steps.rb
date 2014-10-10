@@ -92,9 +92,7 @@ Then(/^the Drug Safety Update should have been updated$/) do
 end
 
 Then(/^the Drug Safety Update should be in draft$/) do
-  expect(
-    drug_safety_update_repository.all.last
-  ).to be_draft
+  expect(page).to have_content("Publication state draft")
 end
 
 When(/^I publish the Drug Safety Update$/) do

@@ -93,9 +93,7 @@ Then(/^the Medical Safety Alert should have been updated$/) do
 end
 
 Then(/^the Medical Safety Alert should be in draft$/) do
-  expect(
-    medical_safety_alert_repository.all.last
-  ).to be_draft
+  expect(page).to have_content("Publication state draft")
 end
 
 When(/^I publish the Medical Safety Alert$/) do
