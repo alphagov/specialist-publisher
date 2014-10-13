@@ -11,6 +11,7 @@
 
     <%= f.select :alert_type, f.object.facet_options(:alert_type), {}, { class: 'select2', multiple: true, data: {placeholder: 'Select an Alert type'} } %>
     <%= f.select :medical_specialism, f.object.facet_options(:medical_specialism), {}, { class: 'select2', multiple: true, data: {placeholder: 'Select a Medical specialism'} } %>
+    <%= f.text_field :issued_date, placeholder: '2012-04-23' %>
 
     <div class="actions">
       <button name="save" class="btn btn-success">Save as draft</button>

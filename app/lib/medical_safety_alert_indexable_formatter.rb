@@ -10,6 +10,7 @@ private
     {
       alert_type: entity.alert_type,
       medical_specialism: entity.medical_specialism,
+      issued_date: entity.issued_date,
     }
   end
 

@@ -1,7 +1,8 @@
 class MedicalSafetyAlertViewAdapter < DocumentViewAdapter
   attributes = [
     :alert_type,
-    :medical_specialism
+    :medical_specialism,
+    :issued_date,
   ]
 
   attributes.each do |attribute_name|
