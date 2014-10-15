@@ -1,5 +1,4 @@
-#TODO: wow such hack
-require_relative "../lib/specialist_publisher"
+require "specialist_publisher"
 
 class AbstractDocumentsController < ApplicationController
   before_filter :authorize_user_for_editing
