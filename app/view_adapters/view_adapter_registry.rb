@@ -9,9 +9,9 @@ class ViewAdapterRegistry
     {
       "aaib_report" => AaibReportViewAdapter,
       "cma_case" => CmaCaseViewAdapter,
-      "drug_safety_updates" => DrugSafetyUpdateViewAdapter,
-      "international_development_funds" => InternationalDevelopmentFundViewAdapter,
-      "medical_safety_alerts" => MedicalSafetyAlertViewAdapter,
+      "drug_safety_update" => DrugSafetyUpdateViewAdapter,
+      "international_development_fund" => InternationalDevelopmentFundViewAdapter,
+      "medical_safety_alert" => MedicalSafetyAlertViewAdapter,
     }.fetch(type)
   end
 end
