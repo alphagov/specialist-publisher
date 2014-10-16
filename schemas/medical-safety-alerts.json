@@ -44,6 +44,12 @@
         {"label": "Urology", "value": "urology" },
         {"label": "Vascular and cardiac surgery", "value": "vascular-cardiac-surgery" }
       ]
+    },
+    {
+      "key": "issued_date",
+      "name": "Issued",
+      "type": "date",
+      "preposition": "issued"
     }
   ]
 }

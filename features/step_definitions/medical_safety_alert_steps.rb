@@ -1,14 +1,7 @@
 When(/^I create a Medical Safety Alert$/) do
   @slug = "drug-device-alerts/example-medical-safety-alert"
-  @msa_fields = {
-    title: "Example Medical Safety Alert",
-    summary: "Nullam quis risus eget urna mollis ornare vel eu leo.",
-    body: "## Header" + ("\n\nPraesent commodo cursus magna, vel scelerisque nisl consectetur et." * 10),
-    alert_type: ["Drug Alert"],
-  }
-  @msa_metadata_values = {
-    alert_type: ["drugs"],
-  }
+  @msa_fields = msa_fields
+  @msa_metadata_values = msa_metadata_fields
 
   create_medical_safety_alert(@msa_fields)
 end
@@ -30,15 +23,8 @@ end
 
 Given(/^a draft Medical Safety Alert exists$/) do
   @slug = "drug-device-alerts/example-medical-safety-alert"
-  @msa_fields = {
-    title: "Example Medical Safety Alert",
-    summary: "Nullam quis risus eget urna mollis ornare vel eu leo.",
-    body: "## Header" + ("\n\nPraesent commodo cursus magna, vel scelerisque nisl consectetur et." * 10),
-    alert_type: ["Drug Alert"],
-  }
-  @msa_metadata_values = {
-    alert_type: ["drugs"],
-  }
+  @msa_fields = msa_fields
+  @msa_metadata_values = msa_metadata_fields
 
   create_medical_safety_alert(@msa_fields)
 end
@@ -52,27 +38,15 @@ Then(/^the Medical Safety Alert should not have been updated$/) do
 end
 
 Given(/^two Medical Safety Alerts exist$/) do
-  @msa_fields = {
-    title: "Example Medical Safety Alert 1",
-    summary: "Nullam quis risus eget urna mollis ornare vel eu leo.",
-    body: "## Header" + ("\n\nPraesent commodo cursus magna, vel scelerisque nisl consectetur et." * 10),
-    alert_type: ["Drug Alert"],
-  }
-  @msa_metadata_values = {
-    alert_type: ["drugs"],
-  }
+  @msa_fields = msa_fields
+  @msa_metadata_values = msa_metadata_fields
 
   create_medical_safety_alert(@msa_fields)
 
-  @msa_fields = {
+  @msa_fields = msa_fields.merge({
     title: "Example Medical Safety Alert 2",
-    summary: "Nullam quis risus eget urna mollis ornare vel eu leo.",
-    body: "## Header" + ("\n\nPraesent commodo cursus magna, vel scelerisque nisl consectetur et." * 10),
-    alert_type: ["Drug Alert"],
-  }
-  @msa_metadata_values = {
-    alert_type: ["drugs"],
-  }
+  })
+  @msa_metadata_values = msa_metadata_fields
 
   create_medical_safety_alert(@msa_fields)
 end
@@ -80,7 +54,7 @@ end
 Then(/^the Medical Safety Alerts should be in the publisher MSA index in the correct order$/) do
   visit medical_safety_alerts_path
 
-  check_for_documents("Example Medical Safety Alert 1", "Example Medical Safety Alert 2")
+  check_for_documents("Example Medical Safety Alert", "Example Medical Safety Alert 2")
 end
 
 When(/^I edit a Medical Safety Alert$/) do
@@ -107,15 +81,8 @@ end
 
 When(/^I publish a new Medical Safety Alert$/) do
   @slug = "drug-device-alerts/example-medical-safety-alert"
-  @msa_fields = {
-    title: "Example Medical Safety Alert",
-    summary: "Nullam quis risus eget urna mollis ornare vel eu leo.",
-    body: "## Header" + ("\n\nPraesent commodo cursus magna, vel scelerisque nisl consectetur et." * 10),
-    alert_type: ["Drug Alert"],
-  }
-  @msa_metadata_values = {
-    alert_type: ["drugs"],
-  }
+  @msa_fields = msa_fields
+  @msa_metadata_values = msa_metadata_fields
 
   create_medical_safety_alert(@msa_fields, publish: true)
 end
@@ -127,15 +94,8 @@ end
 
 Given(/^a published Medical Safety Alert exists$/) do
   @slug = "drug-device-alerts/example-medical-safety-alert"
-  @msa_fields = {
-    title: "Example Medical Safety Alert",
-    summary: "Nullam quis risus eget urna mollis ornare vel eu leo.",
-    body: "## Header" + ("\n\nPraesent commodo cursus magna, vel scelerisque nisl consectetur et." * 10),
-    alert_type: ["Drug Alert"],
-  }
-  @msa_metadata_values = {
-    alert_type: ["drugs"],
-  }
+  @msa_fields = msa_fields
+  @msa_metadata_values = msa_metadata_fields
 
   create_medical_safety_alert(@msa_fields, publish: true)
 end
@@ -146,4 +106,20 @@ end
 
 Then(/^the Medical Safety Alert should be withdrawn$/) do
   check_document_is_withdrawn(@slug, @msa_fields.fetch(:title))
+end
+
+def msa_fields
+  {
+    title: "Example Medical Safety Alert",
+    summary: "Nullam quis risus eget urna mollis ornare vel eu leo.",
+    body: "## Header" + ("\n\nPraesent commodo cursus magna, vel scelerisque nisl consectetur et." * 10),
+    alert_type: ["Drug Alert"],
+    issued_date: "2014-01-01",
+  }
+end
+
+def msa_metadata_fields
+  {
+    alert_type: ["drugs"],
+  }
 end
