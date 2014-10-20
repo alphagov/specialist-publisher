@@ -3,6 +3,9 @@
 require File.expand_path("../../config/environment", __FILE__)
 require "specialist_publisher"
 
+# Override global panopticon timeout as this is a long operation...
+PANOPTICON_API_CREDENTIALS.merge!(timeout: 30)
+
 # We need the repository separately to grab all the documents
 repository = SpecialistPublisherWiring.get(:repository_registry).aaib_report_repository
 service = SpecialistPublisher.document_services("aaib_report")
@@ -16,7 +19,10 @@ repository.all.lazy.select(&:draft?).each do |document|
   begin
     service.republish(document.id).call
     puts "SUCCESS"
-  rescue RuntimeError => e
+  rescue GdsApi::HTTPErrorResponse => e
+    puts "API_ERROR"
+    puts "  #{e.message}"
+  rescue StandardError => e
     puts "FAILED"
     puts "  #{e.message}"
   end
