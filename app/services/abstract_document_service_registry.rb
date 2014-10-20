@@ -71,6 +71,14 @@ class AbstractDocumentServiceRegistry
     )
   end
 
+  def republish(document_id)
+    PublishDocumentService.new(
+      document_repository,
+      observers.republication,
+      document_id,
+    )
+  end
+
   def withdraw(document_id)
     WithdrawDocumentService.new(
       document_repository,

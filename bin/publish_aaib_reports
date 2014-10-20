@@ -1,0 +1,24 @@
+#!/usr/bin/env ruby
+
+require File.expand_path("../../config/environment", __FILE__)
+require "specialist_publisher"
+
+# We need the repository separately to grab all the documents
+repository = SpecialistPublisherWiring.get(:repository_registry).aaib_report_repository
+service = SpecialistPublisher.document_services("aaib_report")
+
+$stdout.sync = true
+
+puts "Loading all draft AAIB reports. This could take some time..."
+repository.all.lazy.select(&:draft?).each do |document|
+  print "Publishing draft document #{document.slug}..."
+  $stdout.flush
+  begin
+    service.republish(document.id).call
+    puts "SUCCESS"
+  rescue RuntimeError => e
+    puts "FAILED"
+    puts "  #{e.message}"
+  end
+  $stdout.flush
+end
