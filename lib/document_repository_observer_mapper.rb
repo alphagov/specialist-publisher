@@ -15,30 +15,30 @@ private
   def repository_listeners_map
     {
       "cma_case" => RepositoryObserversTuple.new(
-        wiring(:cma_case_repository),
+        repository_registry.cma_case_repository,
         CmaCaseObserversRegistry.new.republication,
       ),
       "aaib_report" => RepositoryObserversTuple.new(
-        wiring(:aaib_report_repository),
+        repository_registry.aaib_report_repository,
         AaibReportObserversRegistry.new.republication,
       ),
       "international_development_fund" => RepositoryObserversTuple.new(
-        wiring(:international_development_fund_repository),
+        repository_registry.international_development_fund_repository,
         InternationalDevelopmentFundObserversRegistry.new.republication,
       ),
       "medical_safety_alert" => RepositoryObserversTuple.new(
-        wiring(:medical_safety_alert_repository),
+        repository_registry.medical_safety_alert_repository,
         MedicalSafetyAlertObserversRegistry.new.republication,
       ),
       "drug_safety_update" => RepositoryObserversTuple.new(
-        wiring(:drug_safety_update_repository),
+        repository_registry.drug_safety_update_repository,
         DrugSafetyUpdateObserversRegistry.new.republication,
       ),
     }
   end
 
-  def wiring(key)
-    SpecialistPublisherWiring.get(key)
+  def repository_registry
+    @repository_registry ||= SpecialistPublisherWiring.get(:repository_registry)
   end
 
   class RepositoryObserversTuple < Struct.new(:repository, :observers); end
