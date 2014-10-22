@@ -19,6 +19,7 @@ gem "plek", "1.7.0"
 gem "quiet_assets", "1.0.3"
 gem "sidekiq", "3.2.1"
 gem "unicorn", "4.8.2"
+gem "reform", "1.1.1"
 
 if ENV["GOVSPEAK_DEV"]
   gem "govspeak", :path => "../govspeak"
