@@ -1,7 +1,8 @@
-class RepositoryPaginator
+class RepositoryPaginator < SimpleDelegator
   def initialize(repo)
     @repo = repo
     @pipeline = []
+    super(@repo)
   end
 
   def [](offset, limit)

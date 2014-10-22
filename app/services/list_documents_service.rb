@@ -1,15 +1,22 @@
 class ListDocumentsService
 
-  def initialize(documents_repository)
+  def initialize(documents_repository, search_details)
     @documents_repository = documents_repository
+    @search_details = search_details
   end
 
   def call
-    documents_repository
+    if search_details.term.present?
+      documents_repository.send(search_method, search_details.term)
+    else
+      documents_repository
+    end
   end
 
-  private
+private
+  attr_reader :documents_repository, :search_details
 
-  attr_reader :documents_repository
-
+  def search_method
+    "by_#{search_details.attribute}"
+  end
 end
