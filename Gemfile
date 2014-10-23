@@ -65,6 +65,7 @@ group :test do
   gem "webmock", "~> 1.17.4"
   gem "rspec", "3.0.0"
   gem "rubocop"
+  gem "timecop"
 end
 
 group :development, :test do
