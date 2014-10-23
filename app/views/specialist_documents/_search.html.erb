@@ -2,6 +2,7 @@
 <%= form_for search, url: specialist_documents_path(document_type), method: :get do |f| %>
   <p>
     <%= f.text_field :term, {default_builder: true}, {placeholder: "Search term"} %>
+    <p class="help-block">(case sensitive)</p>
   </p>
   <p>
     Search which field?
