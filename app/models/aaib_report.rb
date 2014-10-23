@@ -8,6 +8,5 @@ class AaibReport < DocumentMetadataDecorator
     :location,
     :aircraft_type,
     :registration,
-    :registration_string,
   ]
 end
