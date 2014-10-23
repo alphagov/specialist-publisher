@@ -47,6 +47,16 @@ class SpecialistDocumentRepository
       .map { |id| fetch(id) }.first
   end
 
+  def by_title(title)
+    all_document_ids_scoped(title: /#{title}/)
+      .map { |id| fetch(id)  }
+  end
+
+  def by_slug(slug)
+    all_document_ids_scoped(slug: /#{slug}/)
+      .map { |id| fetch(id)  }
+  end
+
   def slug_unique?(document)
     # TODO: push this method down into persistence layer
     editions_with_slug = specialist_document_editions.where(
@@ -75,13 +85,26 @@ private
     :document_factory,
   )
 
-  # TODO Add a method on SpecialistDocumentEdition to handle this
-  def all_document_ids
-    specialist_document_editions
-      .all
+  def all_document_ids_scoped(conditions)
+    only_document_ids_for(
+      specialist_document_editions
+        .where(conditions)
+    )
+  end
+
+  def only_document_ids_for(collection)
+    collection.all
       .only(:document_id, :updated_at)
       .sort { |a, b| b.updated_at <=> a.updated_at }
       .map(&:document_id)
       .uniq
+  end
+
+  # TODO Add a method on SpecialistDocumentEdition to handle this
+  def all_document_ids
+    only_document_ids_for(
+      specialist_document_editions
+        .all
+    )
   end
 end

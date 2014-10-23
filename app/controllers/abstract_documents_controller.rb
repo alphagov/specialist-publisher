@@ -10,11 +10,18 @@ class AbstractDocumentsController < ApplicationController
   end
 
   def index
-    documents = services.list.call.map { |d| view_adapter(d) }
+    documents = services.list(search_adapter.model).call.map { |d| view_adapter(d) }
+
+    truncate_and_warn(documents) if searching? && documents.size >= max_per_page
+
+    flash.now[:alert] = "Your search returned 0 results." if searching? && documents.size == 0
 
     paginated_docs = Kaminari.paginate_array(documents).page(params[:page])
 
-    render("specialist_documents/index", locals: { documents: paginated_docs })
+    render("specialist_documents/index", locals: {
+      documents: paginated_docs,
+      search: search_adapter,
+    })
   end
 
   def show
@@ -98,6 +105,30 @@ class AbstractDocumentsController < ApplicationController
   end
 
 private
+  def max_per_page
+    @max_per_page ||= Kaminari.config.default_per_page
+  end
+
+  def truncate_and_warn(documents)
+    flash.now[:alert] = "Your search returned #{documents.size} results. Only the first #{max_per_page} are shown."
+    documents = documents.first(max_per_page)
+  end
+
+  def searching?
+    search_adapter.term.present?
+  end
+
+  def search_adapter
+    @search_adapter ||= SearchForm.new(
+      OpenStruct.new(search_params)
+    )
+  end
+
+  def search_params
+    initial = params[:search] || {}
+    {attribute: "title"}.merge(initial)
+  end
+
   def document_id
     params.fetch("id")
   end

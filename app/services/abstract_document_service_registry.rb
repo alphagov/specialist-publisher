@@ -16,9 +16,10 @@ class AbstractDocumentServiceRegistry
     @observers = observers
   end
 
-  def list
+  def list(search_details)
     ListDocumentsService.new(
       RepositoryPaginator.new(document_repository),
+      search_details,
     )
   end
 

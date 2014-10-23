@@ -31,4 +31,29 @@ module AaibReportHelpers
     withdraw_document(:aaib_report, *args)
   end
 
+  def create_multiple_aaib_reports(titles)
+    base_data = {
+      summary: "Nullam quis risus eget urna mollis ornare vel eu leo.",
+      body: "## Header" + ("\n\nPraesent commodo cursus magna, vel scelerisque nisl consectetur et." * 10),
+      date_of_occurrence: "2014-01-01"
+    }
+
+    titles.each do |title|
+      create_document(:aaib_report, base_data.merge(title: title))
+    end
+  end
+
+  def aaib_reports_are_visible(titles)
+    titles.each { |t| aaib_report_is_visible(t) }
+  end
+
+  def aaib_report_is_visible(title)
+    expect(page).to have_content(title)
+  end
+
+  def aaib_reports_are_not_visible(titles)
+    titles.each do |title|
+      expect(page).not_to have_content(title)
+    end
+  end
 end
