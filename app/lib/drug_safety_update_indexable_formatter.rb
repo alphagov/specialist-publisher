@@ -8,7 +8,8 @@ class DrugSafetyUpdateIndexableFormatter < AbstractIndexableFormatter
 private
   def extra_attributes
     {
-      therapeutic_area: entity.therapeutic_area
+      therapeutic_area: entity.therapeutic_area,
+      published_at: entity.published_at,
     }
   end
 

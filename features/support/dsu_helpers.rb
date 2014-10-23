@@ -1,5 +1,6 @@
 module DsuHelpers
   def create_drug_safety_update(*args)
+    Timecop.freeze("2001-01-01 01:00:00")
     create_document(:drug_safety_update, *args)
   end
 
