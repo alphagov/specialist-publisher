@@ -1,0 +1,18 @@
+#!/usr/bin/env ruby
+require File.expand_path("../../config/environment", __FILE__)
+require "specialist_publisher"
+
+SpecialistDocumentEdition.where(document_type: "aaib_report").each do |edition|
+  puts "Updating: #{edition.slug}"
+  begin
+    registration_string = edition.extra_fields.delete("registration_string")
+    if edition.extra_fields["registration"].kind_of?(Array) && registration_string
+      edition.extra_fields["registration"] = registration_string
+    else
+      puts "Already converted: #{edition.slug}"
+    end
+    edition.save
+  rescue StandardError => e
+    puts "!!! Failed #{e.message}"
+  end
+end
