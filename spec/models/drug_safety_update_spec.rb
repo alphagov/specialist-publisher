@@ -6,6 +6,7 @@ RSpec.describe DrugSafetyUpdate do
   let(:document) {
     double(:document,
       publish!: true,
+      withdraw!: true,
       extra_fields: {
         published_at: published_at,
       },
@@ -47,6 +48,24 @@ RSpec.describe DrugSafetyUpdate do
         drug_safety_update.publish!
         expect(document).to_not have_received(:update)
       end
+    end
+  end
+
+  describe "#withdraw!" do
+    let(:published_at) { double(:published_at) }
+
+    before do
+      allow(document).to receive(:update)
+    end
+
+    it "calls withdraw on the specialist document" do
+      drug_safety_update.withdraw!
+      expect(document).to have_received(:withdraw!)
+    end
+
+    it "sets the published_at on the document to nil" do
+      drug_safety_update.withdraw!
+      expect(document).to have_received(:update).with(hash_including(extra_fields: { published_at: nil }))
     end
   end
 

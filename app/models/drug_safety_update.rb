@@ -17,4 +17,13 @@ class DrugSafetyUpdate < DocumentMetadataDecorator
     document.publish!
   end
 
+  def withdraw!
+    document.update(
+      extra_fields: extra_fields.merge(
+        published_at: nil,
+      )
+    )
+    document.withdraw!
+  end
+
 end
