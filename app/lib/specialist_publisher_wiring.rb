@@ -468,6 +468,11 @@ SpecialistPublisherWiring = DependencyContainer.new do
     FinderSchema.new(Rails.root.join("schemas/drug-safety-updates.json"))
   }
 
+  define_singleton(:maib_report_finder_schema) {
+    require "finder_schema"
+    FinderSchema.new(Rails.root.join("schemas/maib-reports.json"))
+  }
+
   define_singleton(:medical_safety_alert_finder_schema) {
     require "finder_schema"
     FinderSchema.new(Rails.root.join("schemas/medical-safety-alerts.json"))
