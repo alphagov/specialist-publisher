@@ -11,6 +11,7 @@ SpecialistPublisher::Application.routes.draw do
     cma_cases
     drug_safety_updates
     international_development_funds
+    maib_reports
     medical_safety_alerts
   )
 
