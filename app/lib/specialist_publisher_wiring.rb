@@ -261,6 +261,14 @@ SpecialistPublisherWiring = DependencyContainer.new do
     }
   }
 
+  define_factory(:maib_report_panopticon_registerer) {
+    ->(document) {
+      get(:panopticon_registerer).call(
+        MaibReportArtefactFormatter.new(document)
+      )
+    }
+  }
+
   define_factory(:medical_safety_alert_panopticon_registerer) {
     ->(document) {
       get(:panopticon_registerer).call(
@@ -333,6 +341,26 @@ SpecialistPublisherWiring = DependencyContainer.new do
     ->(document) {
       RummagerIndexer.new.add(
         DrugSafetyUpdateIndexableFormatter.new(
+          MarkdownAttachmentProcessor.new(document)
+        )
+      )
+    }
+  }
+
+  define_factory(:maib_report_rummager_indexer) {
+    ->(document) {
+      RummagerIndexer.new.add(
+        MaibReportIndexableFormatter.new(
+          MarkdownAttachmentProcessor.new(document)
+        )
+      )
+    }
+  }
+
+  define_factory(:maib_report_rummager_deleter) {
+    ->(document) {
+      RummagerIndexer.new.delete(
+        MaibReportIndexableFormatter.new(
           MarkdownAttachmentProcessor.new(document)
         )
       )
@@ -412,6 +440,17 @@ SpecialistPublisherWiring = DependencyContainer.new do
         RenderedSpecialistDocument,
         get(:specialist_document_renderer),
         get(:cma_case_finder_schema),
+        doc,
+      ).call
+    }
+  }
+
+  define_instance(:maib_report_content_api_exporter) {
+    ->(doc) {
+      SpecialistDocumentDatabaseExporter.new(
+        RenderedSpecialistDocument,
+        get(:specialist_document_renderer),
+        get(:maib_report_finder_schema),
         doc,
       ).call
     }
