@@ -14,7 +14,6 @@ require "footnotes_section_heading_renderer"
 require "gds_api/gov_uk_delivery"
 require "gds_api/rummager"
 require "gds_api_proxy"
-require "id_generator"
 require "manual_database_exporter"
 require "marshallers/document_association_marshaller"
 require "marshallers/manual_publish_task_association_marshaller"
@@ -39,7 +38,6 @@ SpecialistPublisherWiring = DependencyContainer.new do
   define_factory(:manual_builder) {
     ManualBuilder.new(
       slug_generator: SlugGenerator.new(prefix: "guidance"),
-      id_generator: IdGenerator,
       factory: get(:validatable_manual_with_sections_factory),
     )
   }
@@ -93,38 +91,24 @@ SpecialistPublisherWiring = DependencyContainer.new do
   define_singleton(:edition_factory) { SpecialistDocumentEdition.method(:new) }
 
   define_factory(:cma_case_builder) {
-    CmaCaseBuilder.new(
-      get(:validatable_entity_factories).cma_case_factory,
-      IdGenerator,
-    )
+    CmaCaseBuilder.new(get(:validatable_entity_factories).cma_case_factory)
   }
 
   define_factory(:aaib_report_builder) {
-    AaibReportBuilder.new(
-      get(:validatable_entity_factories).aaib_report_factory,
-      IdGenerator,
-    )
+    AaibReportBuilder.new(get(:validatable_entity_factories).aaib_report_factory)
   }
 
   define_factory(:drug_safety_update_builder) {
-    DrugSafetyUpdateBuilder.new(
-      get(:validatable_entity_factories).drug_safety_update_factory,
-      IdGenerator,
-    )
+    DrugSafetyUpdateBuilder.new(get(:validatable_entity_factories).drug_safety_update_factory)
   }
 
   define_factory(:medical_safety_alert_builder) {
-    MedicalSafetyAlertBuilder.new(
-      get(:validatable_entity_factories).medical_safety_alert_factory,
-      IdGenerator,
-    )
+    MedicalSafetyAlertBuilder.new(get(:validatable_entity_factories).medical_safety_alert_factory)
   }
 
   define_factory(:international_development_fund_builder) {
     InternationalDevelopmentFundBuilder.new(
-      get(:validatable_entity_factories).international_development_fund_factory,
-      IdGenerator,
-    )
+      get(:validatable_entity_factories).international_development_fund_factory)
   }
 
   define_factory(:manual_publish_task_builder) {
