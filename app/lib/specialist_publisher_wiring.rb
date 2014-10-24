@@ -3,6 +3,7 @@ require "builders/aaib_report_builder"
 require "builders/cma_case_builder"
 require "builders/drug_safety_update_builder"
 require "builders/international_development_fund_builder"
+require "builders/maib_report_builder"
 require "builders/manual_builder"
 require "builders/manual_document_builder"
 require "builders/medical_safety_alert_builder"
@@ -100,6 +101,10 @@ SpecialistPublisherWiring = DependencyContainer.new do
 
   define_factory(:drug_safety_update_builder) {
     DrugSafetyUpdateBuilder.new(get(:validatable_entity_factories).drug_safety_update_factory)
+  }
+
+  define_factory(:maib_report_builder) {
+    MaibReportBuilder.new(get(:validatable_entity_factories).maib_report_factory)
   }
 
   define_factory(:medical_safety_alert_builder) {
