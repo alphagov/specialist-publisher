@@ -40,6 +40,13 @@ class RepositoryRegistry
     )
   end
 
+  def maib_report_repository
+    SpecialistDocumentRepository.new(
+      specialist_document_editions: scoped_editions("maib_report"),
+      document_factory: entity_factories.maib_report_factory,
+    )
+  end
+
   def medical_safety_alert_repository
     SpecialistDocumentRepository.new(
       specialist_document_editions: scoped_editions("medical_safety_alert"),
