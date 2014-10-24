@@ -98,6 +98,7 @@ require "aaib_report_helpers"
 require "dsu_helpers"
 require "idf_helpers"
 require "document_helpers"
+require "maib_report_helpers"
 require "manual_helpers"
 require "msa_helpers"
 require "attachment_helpers"
@@ -117,6 +118,7 @@ World(CmaCaseHelpers)
 World(DsuHelpers)
 World(IdfHelpers)
 World(DocumentHelpers)
+World(MaibReportHelpers)
 World(ManualHelpers)
 World(MsaHelpers)
 World(AttachmentHelpers)

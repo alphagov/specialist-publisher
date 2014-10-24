@@ -60,7 +60,8 @@ module DocumentHelpers
       "aaib-reports" => "aaib_report",
       "international-development-funding" => "international_development_fund",
       "drug-safety-update" => "drug_safety_update",
-      "drug-device-alerts" => "medical_safety_alert"
+      "drug-device-alerts" => "medical_safety_alert",
+      "maib-reports" => "maib_report",
     }
 
     slug_prefix = slug.split("/").first
