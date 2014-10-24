@@ -23,6 +23,9 @@
   <% if current_user_can_edit?("medical_safety_alert") %>
     <li><%= nav_link_to 'Medical Safety Alerts', '/medical-safety-alerts' %></li>
   <% end -%>
+  <% if current_user_can_edit?("maib_report") %>
+    <li><%= nav_link_to 'MAIB Reports', '/maib-reports' %></li>
+  <% end -%>
 <% end %>
 
 <% content_for :navbar_right do %>
