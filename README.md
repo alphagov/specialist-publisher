@@ -9,6 +9,7 @@ Publishing App for Specialist Documents and Manuals.
 ## Nomenclature
 
 * Specialist Documents: Documents with metadata which are published to Finders
+* Schema: JSON file defining slug, document noun and name of Specialist Document document_types. Also has select facets and their possible values for each document_type which are displayed by the `_form.html.erb`.
 * Manual: Grouped Documents published as a number of sections inside a parent document
 
 ## Current formats
@@ -46,7 +47,25 @@ $ bundle exec rake
 
 ## Adding a new specialist document format
 
-Still to come...
+1. Add the document_type to the `document_types` array in `config/routes.rb`
+2. Add the schema to the `schemas` folder and define the singleton for it in `app/lib/specialist_publisher_wiring.rb`
+3. Add a model (which is a subclass of `DocumentMetadataDecorator` and only defines the extra fields of the document type), validator and builder for the new format. Add the require and define the factory with the builder in `app/lib/specialist_publisher_wiring.rb`. Define the entity factory in the ` app/models/entity_factory_registry.rb` and the validatable entity validator in `app/models/validatable_entity_factory_registry.rb`.
+4. Add a service registry for the format in `app/services` along with one for it's attachments. These are subclasses of `AbstractDocumentServiceRegistry` and `AbstractAttachmentServiceRegistry` respectively.
+5. Define a repository in `app/repositories/repository_registry.rb`
+6. Add observers, along with formatters required:
+  - `document_type_publication_alert_formatter.rb` in `app/exporters/formatters/`
+  - `document_type_artefact_formatter.rb` in `app/lib/` for Panopticon
+  - `document_type_indexable_formatter.rb` app/lib/` for Rummager
+  - define a factory for `document_type_panopticon_registerer`, `document_type_rummager_indexer`, `document_type_rummager_deleter` and `document_type_content_api_exporter` in `app/lib/specialist_publisher_wiring.rb`
+  - add an Observers registry for the docuemt type and add it to the has in the `observers_registry` method in `app/lib/specialist_publisher`
+7. Add `app/view_adapters/document_type_view_adapter.rb` along with it's entry in `app/view_adapters/view_adapter_registry.rb`. Also add the `_form.html.erb` which has the extra fields for that document_type. Be sure to pass the correct `form_namespace` matching the document_type.
+8. Add the entry to `app/lib/permission_checker.rb` for the owning organisation and a link in `app/views/layouts/application.html.erb` to the document index
+9. That's it!
+
+### Testing your new specialist document format
+
+We have a spec for each model but most of the testing is done in Cucumber tests. Each document format has a feature for creating & editing, publishing and withdrawing. Be sure to add an editor type to `test/factories.rb` for the owning Org of the newformat (if there isn't already a format owned by that Org). The step definitions in each of the tests are pretty similar, so the methods in `features/support/document_format_helpers.rb` call the abstract methods in `features/support/document_helpers.rb`. The features should also cover add attachments, if you follow the same pattern as the other document formats.
+
 
 ## Application Structure
 
