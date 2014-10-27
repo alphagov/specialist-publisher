@@ -49,10 +49,12 @@ $ bundle exec rake
 
 1. Add the document_type to the `document_types` array in `config/routes.rb`
 2. Add the schema to the `schemas` folder and define the singleton for it in `app/lib/specialist_publisher_wiring.rb`
-3. Add a model (which is a subclass of `DocumentMetadataDecorator` and only defines the extra fields of the document type), validator and builder for the new format. Add the require and define the factory with the builder in `app/lib/specialist_publisher_wiring.rb`. Define the entity factory in the ` app/models/entity_factory_registry.rb` and the validatable entity validator in `app/models/validatable_entity_factory_registry.rb`.
-4. Add a service registry for the format in `app/services` along with one for it's attachments. These are subclasses of `AbstractDocumentServiceRegistry` and `AbstractAttachmentServiceRegistry` respectively.
-5. Define a repository in `app/repositories/repository_registry.rb`
-6. Add observers, along with formatters required:
+3. Add a model (which is a subclass of `DocumentMetadataDecorator` and only defines the extra fields of the document type), validator and builder for the new format.
+4. Define the factory with the builder in `app/lib/specialist_publisher_wiring.rb`.
+5. Define the entity factory in the ` app/models/entity_factory_registry.rb` and the validatable entity validator in `app/models/validatable_entity_factory_registry.rb`.
+6. Add a service registry for the format in `app/services` along with one for it's attachments. These are subclasses of `AbstractDocumentServiceRegistry` and `AbstractAttachmentServiceRegistry` respectively.
+7. Define a repository in `app/repositories/repository_registry.rb`
+8. Add observers, along with formatters required:
   - `document_type_publication_alert_formatter.rb` in `app/exporters/formatters/`
   - `document_type_artefact_formatter.rb` in `app/lib/` for Panopticon
   - `document_type_indexable_formatter.rb` app/lib/` for Rummager
@@ -97,10 +99,6 @@ Non standard Rails directories and what they're used for:
   Classes for sidekiq workers. Currently the only worker in the App is for publishing Manuals as Manual publishing was timing out due to the large number of document objects inside a Manual
 
 
-### Wiring
-
 ### Services
 
  Services do things such as previewing a document, creation, updating, showing, withdrawing, queueing. This replaces the normal Rails behaviour of completeing these actions directly from a controller, instead we call a service registry
-
-### Document structure
