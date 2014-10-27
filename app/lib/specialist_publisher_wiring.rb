@@ -1,12 +1,6 @@
 require "aaib_report_indexable_formatter"
-require "builders/aaib_report_builder"
-require "builders/cma_case_builder"
-require "builders/drug_safety_update_builder"
-require "builders/international_development_fund_builder"
-require "builders/maib_report_builder"
 require "builders/manual_builder"
 require "builders/manual_document_builder"
-require "builders/medical_safety_alert_builder"
 require "cma_case_indexable_formatter"
 require "dependency_container"
 require "document_headers_depth_limiter"
@@ -92,27 +86,32 @@ SpecialistPublisherWiring = DependencyContainer.new do
   define_singleton(:edition_factory) { SpecialistDocumentEdition.method(:new) }
 
   define_factory(:cma_case_builder) {
-    CmaCaseBuilder.new(get(:validatable_entity_factories).cma_case_factory)
+    SpecialistDocumentBuilder.new("cma_case",
+      get(:validatable_entity_factories).cma_case_factory)
   }
 
   define_factory(:aaib_report_builder) {
-    AaibReportBuilder.new(get(:validatable_entity_factories).aaib_report_factory)
+    SpecialistDocumentBuilder.new("aaib_report",
+      get(:validatable_entity_factories).aaib_report_factory)
   }
 
   define_factory(:drug_safety_update_builder) {
-    DrugSafetyUpdateBuilder.new(get(:validatable_entity_factories).drug_safety_update_factory)
+    SpecialistDocumentBuilder.new("drug_safety_update",
+      get(:validatable_entity_factories).drug_safety_update_factory)
   }
 
   define_factory(:maib_report_builder) {
-    MaibReportBuilder.new(get(:validatable_entity_factories).maib_report_factory)
+    SpecialistDocumentBuilder.new("maib_report",
+      get(:validatable_entity_factories).maib_report_factory)
   }
 
   define_factory(:medical_safety_alert_builder) {
-    MedicalSafetyAlertBuilder.new(get(:validatable_entity_factories).medical_safety_alert_factory)
+    SpecialistDocumentBuilder.new("medical_safety_alert",
+      get(:validatable_entity_factories).medical_safety_alert_factory)
   }
 
   define_factory(:international_development_fund_builder) {
-    InternationalDevelopmentFundBuilder.new(
+    SpecialistDocumentBuilder.new("international_development_fund",
       get(:validatable_entity_factories).international_development_fund_factory)
   }
 
