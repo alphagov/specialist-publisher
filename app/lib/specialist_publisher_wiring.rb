@@ -3,6 +3,7 @@ require "builders/aaib_report_builder"
 require "builders/cma_case_builder"
 require "builders/drug_safety_update_builder"
 require "builders/international_development_fund_builder"
+require "builders/maib_report_builder"
 require "builders/manual_builder"
 require "builders/manual_document_builder"
 require "builders/medical_safety_alert_builder"
@@ -100,6 +101,10 @@ SpecialistPublisherWiring = DependencyContainer.new do
 
   define_factory(:drug_safety_update_builder) {
     DrugSafetyUpdateBuilder.new(get(:validatable_entity_factories).drug_safety_update_factory)
+  }
+
+  define_factory(:maib_report_builder) {
+    MaibReportBuilder.new(get(:validatable_entity_factories).maib_report_factory)
   }
 
   define_factory(:medical_safety_alert_builder) {
@@ -256,6 +261,14 @@ SpecialistPublisherWiring = DependencyContainer.new do
     }
   }
 
+  define_factory(:maib_report_panopticon_registerer) {
+    ->(document) {
+      get(:panopticon_registerer).call(
+        MaibReportArtefactFormatter.new(document)
+      )
+    }
+  }
+
   define_factory(:medical_safety_alert_panopticon_registerer) {
     ->(document) {
       get(:panopticon_registerer).call(
@@ -328,6 +341,26 @@ SpecialistPublisherWiring = DependencyContainer.new do
     ->(document) {
       RummagerIndexer.new.add(
         DrugSafetyUpdateIndexableFormatter.new(
+          MarkdownAttachmentProcessor.new(document)
+        )
+      )
+    }
+  }
+
+  define_factory(:maib_report_rummager_indexer) {
+    ->(document) {
+      RummagerIndexer.new.add(
+        MaibReportIndexableFormatter.new(
+          MarkdownAttachmentProcessor.new(document)
+        )
+      )
+    }
+  }
+
+  define_factory(:maib_report_rummager_deleter) {
+    ->(document) {
+      RummagerIndexer.new.delete(
+        MaibReportIndexableFormatter.new(
           MarkdownAttachmentProcessor.new(document)
         )
       )
@@ -412,6 +445,17 @@ SpecialistPublisherWiring = DependencyContainer.new do
     }
   }
 
+  define_instance(:maib_report_content_api_exporter) {
+    ->(doc) {
+      SpecialistDocumentDatabaseExporter.new(
+        RenderedSpecialistDocument,
+        get(:specialist_document_renderer),
+        get(:maib_report_finder_schema),
+        doc,
+      ).call
+    }
+  }
+
   define_instance(:medical_safety_alert_content_api_exporter) {
     ->(doc) {
       SpecialistDocumentDatabaseExporter.new(
@@ -466,6 +510,11 @@ SpecialistPublisherWiring = DependencyContainer.new do
   define_singleton(:drug_safety_update_finder_schema) {
     require "finder_schema"
     FinderSchema.new(Rails.root.join("schemas/drug-safety-updates.json"))
+  }
+
+  define_singleton(:maib_report_finder_schema) {
+    require "finder_schema"
+    FinderSchema.new(Rails.root.join("schemas/maib-reports.json"))
   }
 
   define_singleton(:medical_safety_alert_finder_schema) {

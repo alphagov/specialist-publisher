@@ -43,6 +43,18 @@ class EntityFactoryRegistry
     }
   end
 
+  def maib_report_factory
+    ->(*args) {
+      MaibReport.new(
+        SpecialistDocument.new(
+          SlugGenerator.new(prefix: "maib-reports"),
+          edition_factory,
+          *args,
+        ),
+      )
+    }
+  end
+
   def medical_safety_alert_factory
     ->(*args) {
       MedicalSafetyAlert.new(

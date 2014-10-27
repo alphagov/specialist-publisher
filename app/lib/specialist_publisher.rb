@@ -34,6 +34,7 @@ private
       "cma_case" => CmaCaseObserversRegistry,
       "drug_safety_update" => DrugSafetyUpdateObserversRegistry,
       "international_development_fund" => InternationalDevelopmentFundObserversRegistry,
+      "maib_report" => MaibReportObserversRegistry,
       "medical_safety_alert" => MedicalSafetyAlertObserversRegistry,
     }.fetch(document_type).new
   end

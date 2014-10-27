@@ -3,6 +3,7 @@ require "validators/change_note_validator"
 require "validators/cma_case_validator"
 require "validators/drug_safety_update_validator"
 require "validators/international_development_fund_validator"
+require "validators/maib_report_validator"
 require "validators/manual_document_validator"
 require "validators/manual_validator"
 require "validators/medical_safety_alert_validator"
@@ -39,6 +40,14 @@ class ValidatableEntityFactoryRegistry
     ->(*args) {
       DrugSafetyUpdateValidator.new(
         entity_factory_registry.drug_safety_update_factory.call(*args),
+      )
+    }
+  end
+
+  def maib_report_factory
+    ->(*args) {
+      MaibReportValidator.new(
+        entity_factory_registry.maib_report_factory.call(*args),
       )
     }
   end
