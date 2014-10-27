@@ -1,24 +1,17 @@
+require "securerandom"
+
 class SpecialistDocumentBuilder
-  def initialize(specialist_document_factory, id_generator)
+  def initialize(specialist_document_factory)
     @document_factory = specialist_document_factory
-    @id_generator = id_generator
   end
 
   def call(attrs)
-    document_factory
-      .call(new_document_id, editions)
-      .tap { |d|
-        d.update(attrs)
-      }
+    document_factory.call(SecureRandom.uuid, editions).tap { |d| d.update(attrs) }
   end
 
   private
 
-  attr_reader :document_factory, :id_generator
-
-  def new_document_id
-    id_generator.call
-  end
+  attr_reader :document_factory
 
   def editions
     []
