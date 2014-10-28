@@ -101,7 +101,12 @@ When(/^I publish the Drug Safety Update$/) do
 end
 
 Then(/^the Drug Safety Update should be published$/) do
-  check_document_is_published(@slug, @dsu_fields.merge(@dsu_metadata_values))
+  check_document_is_published(
+    @slug,
+    @dsu_fields
+      .merge(@dsu_metadata_values)
+      .merge(first_published_at: "01-01-2001 01:00:00")
+  )
 end
 
 When(/^I publish a new Drug Safety Update$/) do
