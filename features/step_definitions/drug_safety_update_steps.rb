@@ -105,7 +105,7 @@ Then(/^the Drug Safety Update should be published$/) do
     @slug,
     @dsu_fields
       .merge(@dsu_metadata_values)
-      .merge(published_at: "01-01-2001 01:00:00")
+      .merge(first_published_at: "01-01-2001 01:00:00")
   )
 end
 

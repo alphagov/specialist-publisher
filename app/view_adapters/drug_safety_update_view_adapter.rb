@@ -18,14 +18,14 @@ class DrugSafetyUpdateViewAdapter < DocumentViewAdapter
 
   def humanized_attributes
     super.tap do |human_output|
-      human_output.merge!(published_at: human_published_at) if published_at.present?
+      human_output.merge!(first_published_at: human_first_published_at) if first_published_at.present?
     end
   end
 
 private
 
-  def human_published_at
-    published_at.strftime("%-d %B %Y, %H:%m")
+  def human_first_published_at
+    first_published_at.strftime("%-d %B %Y, %H:%m")
   end
 
   def finder_schema

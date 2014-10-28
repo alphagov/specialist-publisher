@@ -9,7 +9,7 @@ private
   def extra_attributes
     {
       therapeutic_area: entity.therapeutic_area,
-      published_at: entity.published_at,
+      first_published_at: entity.first_published_at,
     }
   end
 

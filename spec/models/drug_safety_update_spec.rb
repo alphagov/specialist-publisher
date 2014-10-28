@@ -8,7 +8,7 @@ RSpec.describe DrugSafetyUpdate do
       publish!: true,
       withdraw!: true,
       extra_fields: {
-        published_at: published_at,
+        first_published_at: first_published_at,
       },
     )
   }
@@ -19,32 +19,32 @@ RSpec.describe DrugSafetyUpdate do
       allow(document).to receive(:update)
     end
 
-    context "when there is not a published_at" do
-      let(:published_at) { "" }
+    context "when there is not a first_published_at" do
+      let(:first_published_at) { "" }
 
       it "calls publish on the specialist document" do
         drug_safety_update.publish!
         expect(document).to have_received(:publish!)
       end
 
-      it "sets the published_at on the document to current time" do
+      it "sets the first_published_at on the document to current time" do
         time = Time.now
         Timecop.freeze(time) do
           drug_safety_update.publish!
-          expect(document).to have_received(:update).with(hash_including(extra_fields: { published_at: time }))
+          expect(document).to have_received(:update).with(hash_including(extra_fields: { first_published_at: time }))
         end
       end
     end
 
-    context "when there is a published_at" do
-      let(:published_at) { double(:published_at) }
+    context "when there is a first_published_at" do
+      let(:first_published_at) { double(:first_published_at) }
 
       it "calls publish on the specialist document" do
         drug_safety_update.publish!
         expect(document).to have_received(:publish!)
       end
 
-      it "does not set the published_at on the document" do
+      it "does not set the first_published_at on the document" do
         drug_safety_update.publish!
         expect(document).to_not have_received(:update)
       end
@@ -52,7 +52,7 @@ RSpec.describe DrugSafetyUpdate do
   end
 
   describe "#withdraw!" do
-    let(:published_at) { double(:published_at) }
+    let(:first_published_at) { double(:first_published_at) }
 
     before do
       allow(document).to receive(:update)
@@ -63,9 +63,9 @@ RSpec.describe DrugSafetyUpdate do
       expect(document).to have_received(:withdraw!)
     end
 
-    it "sets the published_at on the document to nil" do
+    it "sets the first_published_at on the document to nil" do
       drug_safety_update.withdraw!
-      expect(document).to have_received(:update).with(hash_including(extra_fields: { published_at: nil }))
+      expect(document).to have_received(:update).with(hash_including(extra_fields: { first_published_at: nil }))
     end
   end
 
