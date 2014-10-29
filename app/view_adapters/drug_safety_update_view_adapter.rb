@@ -25,7 +25,7 @@ class DrugSafetyUpdateViewAdapter < DocumentViewAdapter
 private
 
   def human_first_published_at
-    first_published_at.strftime("%-d %B %Y, %H:%m")
+    first_published_at.strftime("%-d %B %Y, %H:%M")
   end
 
   def finder_schema
