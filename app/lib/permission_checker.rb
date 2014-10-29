@@ -18,12 +18,12 @@ class PermissionChecker
     can_publish?(format)
   end
 
-private
-  attr_reader :user
-
   def is_gds_editor?
     user.has_permission?(GDS_EDITOR_PERMISSION)
   end
+
+private
+  attr_reader :user
 
   def is_editor?
     user.has_permission?(EDITOR_PERMISSION)
