@@ -26,6 +26,9 @@
   <% if current_user_can_edit?("maib_report") %>
     <li><%= nav_link_to 'MAIB Reports', '/maib-reports' %></li>
   <% end -%>
+  <% if current_user_can_edit?("raib_report") %>
+    <li><%= nav_link_to 'RAIB Reports', '/raib-reports' %></li>
+  <% end -%>
 <% end %>
 
 <% content_for :navbar_right do %>

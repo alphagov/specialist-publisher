@@ -1,6 +1,7 @@
 require "aaib_report_indexable_formatter"
 require "builders/manual_builder"
 require "builders/manual_document_builder"
+require "builders/specialist_document_builder"
 require "cma_case_indexable_formatter"
 require "dependency_container"
 require "document_headers_depth_limiter"
@@ -113,6 +114,11 @@ SpecialistPublisherWiring = DependencyContainer.new do
   define_factory(:international_development_fund_builder) {
     SpecialistDocumentBuilder.new("international_development_fund",
       get(:validatable_entity_factories).international_development_fund_factory)
+  }
+
+  define_factory(:raib_report_builder) {
+    SpecialistDocumentBuilder.new("raib_report",
+      get(:validatable_entity_factories).raib_report_factory)
   }
 
   define_factory(:manual_publish_task_builder) {
@@ -284,6 +290,14 @@ SpecialistPublisherWiring = DependencyContainer.new do
     }
   }
 
+  define_factory(:raib_report_panopticon_registerer) {
+    ->(document) {
+      get(:panopticon_registerer).call(
+        RaibReportArtefactFormatter.new(document)
+      )
+    }
+  }
+
   define_factory(:manual_panopticon_registerer) {
     ->(manual) {
       get(:panopticon_registerer).call(
@@ -416,6 +430,26 @@ SpecialistPublisherWiring = DependencyContainer.new do
     }
   }
 
+  define_factory(:raib_report_rummager_indexer) {
+    ->(document) {
+      RummagerIndexer.new.add(
+        RaibReportIndexableFormatter.new(
+          MarkdownAttachmentProcessor.new(document)
+        )
+      )
+    }
+  }
+
+  define_factory(:raib_report_rummager_deleter) {
+    ->(document) {
+      RummagerIndexer.new.delete(
+        RaibReportIndexableFormatter.new(
+          MarkdownAttachmentProcessor.new(document)
+        )
+      )
+    }
+  }
+
   define_factory(:specialist_document_content_api_withdrawer) {
     ->(document) {
       RenderedSpecialistDocument.where(slug: document.slug).map(&:destroy)
@@ -488,6 +522,17 @@ SpecialistPublisherWiring = DependencyContainer.new do
     }
   }
 
+  define_instance(:raib_report_content_api_exporter) {
+    ->(doc) {
+      SpecialistDocumentDatabaseExporter.new(
+        RenderedSpecialistDocument,
+        get(:specialist_document_renderer),
+        get(:raib_report_finder_schema),
+        doc,
+      ).call
+    }
+  }
+
   define_singleton(:rummager_api) {
     GdsApi::Rummager.new(Plek.new.find("search"))
   }
@@ -526,4 +571,8 @@ SpecialistPublisherWiring = DependencyContainer.new do
     FinderSchema.new(Rails.root.join("schemas/international-development-funds.json"))
   }
 
+  define_singleton(:raib_report_finder_schema) {
+    require "finder_schema"
+    FinderSchema.new(Rails.root.join("schemas/raib-reports.json"))
+  }
 end

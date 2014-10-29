@@ -49,6 +49,8 @@ private
       "medicines-and-healthcare-products-regulatory-agency"
     when "maib_report"
       "marine-accident-investigation-branch"
+    when "raib_report"
+      "rail-accidents-investigation-branch"
     end
   end
 end

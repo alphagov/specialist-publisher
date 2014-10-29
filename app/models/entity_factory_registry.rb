@@ -79,6 +79,18 @@ class EntityFactoryRegistry
     }
   end
 
+  def raib_report_factory
+    ->(*args) {
+      RaibReport.new(
+        SpecialistDocument.new(
+          SlugGenerator.new(prefix: "raib-reports"),
+          edition_factory,
+          *args,
+        ),
+      )
+    }
+  end
+
   def edition_factory
     SpecialistDocumentEdition.method(:new)
   end

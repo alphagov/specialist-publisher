@@ -61,6 +61,13 @@ class RepositoryRegistry
     )
   end
 
+  def raib_report_repository
+    SpecialistDocumentRepository.new(
+      specialist_document_editions: scoped_editions("raib_report"),
+      document_factory: entity_factories.raib_report_factory,
+    )
+  end
+
   def organisation_scoped_manual_repository(organisation_slug)
     scoped_manual_repository(
       ManualRecord.where(organisation_slug: organisation_slug)

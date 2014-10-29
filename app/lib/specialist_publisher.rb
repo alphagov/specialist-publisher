@@ -36,6 +36,7 @@ private
       "international_development_fund" => InternationalDevelopmentFundObserversRegistry,
       "maib_report" => MaibReportObserversRegistry,
       "medical_safety_alert" => MedicalSafetyAlertObserversRegistry,
+      "raib_report" => RaibReportObserversRegistry,
     }.fetch(document_type).new
   end
 end

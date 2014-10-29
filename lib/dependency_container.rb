@@ -1,3 +1,5 @@
+require "builders/specialist_document_builder"
+
 class DependencyContainer
   def initialize(&block)
     @definitions = {}

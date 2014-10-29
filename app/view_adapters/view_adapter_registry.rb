@@ -13,6 +13,7 @@ class ViewAdapterRegistry
       "international_development_fund" => InternationalDevelopmentFundViewAdapter,
       "maib_report" => MaibReportViewAdapter,
       "medical_safety_alert" => MedicalSafetyAlertViewAdapter,
+      "raib_report" => RaibReportViewAdapter,
     }.fetch(type)
   end
 end

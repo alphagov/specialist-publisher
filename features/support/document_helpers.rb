@@ -62,6 +62,7 @@ module DocumentHelpers
       "drug-safety-update" => "drug_safety_update",
       "drug-device-alerts" => "medical_safety_alert",
       "maib-reports" => "maib_report",
+      "raib-reports" => "raib_report",
     }
 
     slug_prefix = slug.split("/").first
