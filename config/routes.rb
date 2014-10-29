@@ -13,6 +13,7 @@ SpecialistPublisher::Application.routes.draw do
     international_development_funds
     maib_reports
     medical_safety_alerts
+    raib_reports
   )
 
   document_types.each do |type|

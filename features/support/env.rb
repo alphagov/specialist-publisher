@@ -103,6 +103,7 @@ require "dsu_helpers"
 require "idf_helpers"
 require "document_helpers"
 require "maib_report_helpers"
+require "raib_report_helpers"
 require "manual_helpers"
 require "msa_helpers"
 require "attachment_helpers"
@@ -123,6 +124,7 @@ World(DsuHelpers)
 World(IdfHelpers)
 World(DocumentHelpers)
 World(MaibReportHelpers)
+World(RaibReportHelpers)
 World(ManualHelpers)
 World(MsaHelpers)
 World(AttachmentHelpers)

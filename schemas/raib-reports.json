@@ -1,0 +1,33 @@
+{
+  "slug": "raib-reports",
+  "name": "Rail Accident Investigation Branch reports",
+  "document_noun": "report",
+  "facets": [
+    {
+      "key": "railway_type",
+      "name": "Railway type",
+      "type": "multi-select",
+      "include_blank": true,
+      "preposition": "of type",
+      "allowed_values": [
+        {"label": "Heavy rail", "value": "heavy-rail"},
+        {"label": "Light rail", "value": "light-rail"},
+        {"label": "Metros", "value": "metros"},
+        {"label": "Heritage railways", "value": "heritage-railways"}
+      ]
+    },
+    {
+      "key": "report_type",
+      "name": "Report type",
+      "type": "single-select",
+      "include_blank": false,
+      "preposition": "of type",
+      "allowed_values": [
+        {"label": "Investigation report", "value": "investigation-report"},
+        {"label": "Bulletin", "value": "bulletin"},
+        {"label": "Interim report", "value": "interim-report"},
+        {"label": "Discontinuation report", "value": "discontinuation-report"}
+      ]
+    }
+  ]
+}

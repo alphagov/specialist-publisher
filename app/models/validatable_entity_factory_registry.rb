@@ -8,6 +8,7 @@ require "validators/manual_document_validator"
 require "validators/manual_validator"
 require "validators/medical_safety_alert_validator"
 require "validators/null_validator"
+require "validators/raib_report_validator"
 
 # TODO: remove these dependencies
 require "builders/manual_document_builder"
@@ -64,6 +65,14 @@ class ValidatableEntityFactoryRegistry
     ->(*args) {
       InternationalDevelopmentFundValidator.new(
         entity_factory_registry.international_development_fund_factory.call(*args),
+      )
+    }
+  end
+
+  def raib_report_factory
+    ->(*args) {
+      RaibReportValidator.new(
+        entity_factory_registry.raib_report_factory.call(*args),
       )
     }
   end

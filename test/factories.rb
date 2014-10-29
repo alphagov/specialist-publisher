@@ -29,6 +29,10 @@ FactoryGirl.define do
     organisation_slug "medicines-and-healthcare-products-regulatory-agency"
   end
 
+  factory :raib_editor, parent: :editor do
+    organisation_slug "rail-accidents-investigation-branch"
+  end
+
   factory :generic_editor, parent: :editor do
     organisation_slug "ministry-of-tea"
   end

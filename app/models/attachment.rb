@@ -11,8 +11,6 @@ class Attachment
 
   embedded_in :specialist_document_edition
 
-  validates_with SafeHtml
-
   def to_param
     id
   end
