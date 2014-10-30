@@ -24,6 +24,6 @@
         </li>
       <% end %>
     </ul>
-    <%= paginate documents %>
+    <%= paginate documents, params: { document_type: document_type } %>
   </div>
 </div>
