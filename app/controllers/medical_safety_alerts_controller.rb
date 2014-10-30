@@ -1,0 +1,2 @@
+class MedicalSafetyAlertsController < AbstractDocumentsController
+end

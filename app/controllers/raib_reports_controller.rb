@@ -1,0 +1,2 @@
+class RaibReportsController < AbstractDocumentsController
+end

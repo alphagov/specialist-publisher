@@ -1,0 +1,2 @@
+class CmaCasesController < AbstractDocumentsController
+end

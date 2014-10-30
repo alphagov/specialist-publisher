@@ -19,7 +19,7 @@ SpecialistPublisher::Application.routes.draw do
   document_types.each do |type|
     type_slug = type.to_s.gsub("_", "-")
 
-    resources type.to_sym, controller: "abstract_documents", except: :destroy, path: type_slug do
+    resources type.to_sym, controller: type, except: :destroy, path: type_slug do
       resources :attachments, only: [:new, :create, :edit, :update]
       post :withdraw, on: :member
       post :publish, on: :member
