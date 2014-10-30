@@ -1,0 +1,2 @@
+class DrugSafetyUpdatesController < AbstractDocumentsController
+end

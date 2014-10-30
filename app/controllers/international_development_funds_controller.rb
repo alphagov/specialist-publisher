@@ -1,0 +1,2 @@
+class InternationalDevelopmentFundsController < AbstractDocumentsController
+end

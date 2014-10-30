@@ -48,21 +48,22 @@ $ bundle exec rake
 ## Adding a new specialist document format
 
 1. Add the document_type to the `document_types` array in `config/routes.rb`
-2. Add the schema to the `schemas` folder and define the singleton for it in `app/lib/specialist_publisher_wiring.rb`
-3. Add a model (which is a subclass of `DocumentMetadataDecorator` and only defines the extra fields of the document type), validator and builder for the new format.
-4. Define the factory with the builder in `app/lib/specialist_publisher_wiring.rb`.
-5. Define the entity factory in the ` app/models/entity_factory_registry.rb` and the validatable entity validator in `app/models/validatable_entity_factory_registry.rb`.
-6. Add a service registry for the format in `app/services` along with one for it's attachments. These are subclasses of `AbstractDocumentServiceRegistry` and `AbstractAttachmentServiceRegistry` respectively.
-7. Define a repository in `app/repositories/repository_registry.rb`
-8. Add observers, along with formatters required:
+2. Add a controller that inherits `AbstractDocumentController`
+3. Add the schema to the `schemas` folder and define the singleton for it in `app/lib/specialist_publisher_wiring.rb`
+4. Add a model (which is a subclass of `DocumentMetadataDecorator` and only defines the extra fields of the document type), validator and builder for the new format.
+5. Define the factory with the builder in `app/lib/specialist_publisher_wiring.rb`.
+6. Define the entity factory in the ` app/models/entity_factory_registry.rb` and the validatable entity validator in `app/models/validatable_entity_factory_registry.rb`.
+7. Add a service registry for the format in `app/services` along with one for it's attachments. These are subclasses of `AbstractDocumentServiceRegistry` and `AbstractAttachmentServiceRegistry` respectively.
+8. Define a repository in `app/repositories/repository_registry.rb`
+9. Add observers, along with formatters required:
   - `document_type_publication_alert_formatter.rb` in `app/exporters/formatters/`
   - `document_type_artefact_formatter.rb` in `app/lib/` for Panopticon
   - `document_type_indexable_formatter.rb` app/lib/` for Rummager
   - define a factory for `document_type_panopticon_registerer`, `document_type_rummager_indexer`, `document_type_rummager_deleter` and `document_type_content_api_exporter` in `app/lib/specialist_publisher_wiring.rb`
   - add an Observers registry for the docuemt type and add it to the has in the `observers_registry` method in `app/lib/specialist_publisher`
-7. Add `app/view_adapters/document_type_view_adapter.rb` along with it's entry in `app/view_adapters/view_adapter_registry.rb`. Also add the `_form.html.erb` which has the extra fields for that document_type. Be sure to pass the correct `form_namespace` matching the document_type.
-8. Add the entry to `app/lib/permission_checker.rb` for the owning organisation and a link in `app/views/layouts/application.html.erb` to the document index
-9. That's it!
+10. Add `app/view_adapters/document_type_view_adapter.rb` along with it's entry in `app/view_adapters/view_adapter_registry.rb`. Also add the `_form.html.erb` which has the extra fields for that document_type. Be sure to pass the correct `form_namespace` matching the document_type.
+11. Add the entry to `app/lib/permission_checker.rb` for the owning organisation and a link in `app/views/layouts/application.html.erb` to the document index
+12. That's it!
 
 ### Testing your new specialist document format
 
