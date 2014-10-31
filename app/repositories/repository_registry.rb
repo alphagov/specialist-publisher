@@ -16,55 +16,9 @@ class RepositoryRegistry
   end
 
   def for_type(type)
-    public_send("#{type}_repository")
-  end
-
-  def aaib_report_repository
     SpecialistDocumentRepository.new(
-      document_type: "aaib_report",
-      document_factory: entity_factories.aaib_report_factory,
-    )
-  end
-
-  def cma_case_repository
-    SpecialistDocumentRepository.new(
-      document_type: "cma_case",
-      document_factory: entity_factories.cma_case_factory,
-    )
-  end
-
-  def drug_safety_update_repository
-    SpecialistDocumentRepository.new(
-      document_type: "drug_safety_update",
-      document_factory: entity_factories.drug_safety_update_factory,
-    )
-  end
-
-  def maib_report_repository
-    SpecialistDocumentRepository.new(
-      document_type: "maib_report",
-      document_factory: entity_factories.maib_report_factory,
-    )
-  end
-
-  def medical_safety_alert_repository
-    SpecialistDocumentRepository.new(
-      document_type: "medical_safety_alert",
-      document_factory: entity_factories.medical_safety_alert_factory,
-    )
-  end
-
-  def international_development_fund_repository
-    SpecialistDocumentRepository.new(
-      document_type: "international_development_fund",
-      document_factory: entity_factories.international_development_fund_factory,
-    )
-  end
-
-  def raib_report_repository
-    SpecialistDocumentRepository.new(
-      document_type: "raib_report",
-      document_factory: entity_factories.raib_report_factory,
+      document_type: type,
+      document_factory: entity_factories.public_send("#{type}_factory")
     )
   end
 

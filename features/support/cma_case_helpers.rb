@@ -1,5 +1,3 @@
-require "cma_case_service_registry"
-
 module CmaCaseHelpers
 
   def create_cma_case(*args)

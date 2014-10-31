@@ -20,7 +20,7 @@ end
 When(/^I republish published documents$/) do
   repositories_and_listeners = [
     OpenStruct.new(
-      repository: SpecialistPublisherWiring.get(:repository_registry).cma_case_repository,
+      repository: SpecialistPublisherWiring.get(:repository_registry).for_type("cma_case"),
       observers: CmaCaseObserversRegistry.new.republication,
     )
   ]
