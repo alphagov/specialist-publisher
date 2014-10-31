@@ -11,6 +11,45 @@ class ApplicationController < ActionController::Base
 
   protect_from_forgery with: :exception
 
+  def current_finder
+    finders.fetch(request.path.split("/")[1], nil)
+  end
+  helper_method :current_finder
+
+  def finders
+    {
+      "aaib-reports" => {
+        document_type: "aaib_report",
+        title: "AAIB Reports",
+      },
+      "cma-cases" => {
+        document_type: "cma_case",
+        title: "CMA Cases",
+      },
+      "international-development-funds" => {
+        document_type: "international_development_fund",
+        title: "International Development Funds",
+      },
+      "drug-safety-update" => {
+        document_type: "drug_safety_update",
+        title: "Drug Safety Update",
+      },
+      "medical-safety-alert" => {
+        document_type: "medical_safety_alert" ,
+        title: "Medical Safety Alerts",
+      },
+      "maib-reports" => {
+        document_type: "maib_report",
+        title: "MAIB Reports",
+      },
+      "raib-reports" => {
+        document_type: "raib_report",
+        title: "RAIB Reports",
+      },
+    }
+  end
+  helper_method :finders
+
   def url_maker
     UrlMaker.new
   end
@@ -31,6 +70,11 @@ class ApplicationController < ActionController::Base
     permission_checker.can_withdraw?(format)
   end
   helper_method :current_user_can_withdraw?
+
+  def current_user_is_gds_editor?
+    permission_checker.is_gds_editor?
+  end
+  helper_method :current_user_is_gds_editor?
 
   def current_organisation_slug
     current_user.organisation_slug

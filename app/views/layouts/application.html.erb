@@ -8,27 +8,30 @@
 
 <% content_for :navbar_items do %>
   <li><%= nav_link_to 'Manuals', '/manuals' %></li>
-  <% if current_user_can_edit?("aaib_report") %>
-    <li><%= nav_link_to 'AAIB Reports', '/aaib-reports' %></li>
-  <% end -%>
-  <% if current_user_can_edit?("cma_case") %>
-    <li><%= nav_link_to 'CMA Cases', '/cma-cases' %></li>
-  <% end -%>
-  <% if current_user_can_edit?("international_development_fund") %>
-    <li><%= nav_link_to 'International Development Funds', '/international-development-funds' %></li>
-  <% end -%>
-  <% if current_user_can_edit?("drug_safety_update") %>
-    <li><%= nav_link_to 'Drug Safety Update', '/drug-safety-updates' %></li>
-  <% end -%>
-  <% if current_user_can_edit?("medical_safety_alert") %>
-    <li><%= nav_link_to 'Medical Safety Alerts', '/medical-safety-alerts' %></li>
-  <% end -%>
-  <% if current_user_can_edit?("maib_report") %>
-    <li><%= nav_link_to 'MAIB Reports', '/maib-reports' %></li>
-  <% end -%>
-  <% if current_user_can_edit?("raib_report") %>
-    <li><%= nav_link_to 'RAIB Reports', '/raib-reports' %></li>
-  <% end -%>
+
+  <% if current_user_is_gds_editor? %>
+    <li class="dropdown">
+      <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+        <% if current_finder %>
+          <%= current_finder[:title] %>
+        <% else %>
+          Finders
+        <% end %>
+        <span class="caret"></span>
+      </a>
+      <ul class="dropdown-menu" role="menu">
+  <% end %>
+
+  <% finders.each do |key, value| %>
+    <% if current_user_can_edit?(value[:document_type]) %>
+      <li><%= nav_link_to value[:title], "/#{key}" %></li>
+    <% end %>
+  <% end %>
+
+  <% if current_user_is_gds_editor? %>
+      </ul>
+    </li>
+  <% end %>
 <% end %>
 
 <% content_for :navbar_right do %>
