@@ -30,11 +30,11 @@ class ApplicationController < ActionController::Base
         document_type: "international_development_fund",
         title: "International Development Funds",
       },
-      "drug-safety-update" => {
+      "drug-safety-updates" => {
         document_type: "drug_safety_update",
         title: "Drug Safety Update",
       },
-      "medical-safety-alert" => {
+      "medical-safety-alerts" => {
         document_type: "medical_safety_alert" ,
         title: "Medical Safety Alerts",
       },
