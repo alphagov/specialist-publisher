@@ -62,7 +62,7 @@ $ bundle exec rake
   - define a factory for `document_type_panopticon_registerer`, `document_type_rummager_indexer`, `document_type_rummager_deleter` and `document_type_content_api_exporter` in `app/lib/specialist_publisher_wiring.rb`
   - add an Observers registry for the docuemt type and add it to the has in the `observers_registry` method in `app/lib/specialist_publisher`
 10. Add `app/view_adapters/document_type_view_adapter.rb` along with it's entry in `app/view_adapters/view_adapter_registry.rb`. Also add the `_form.html.erb` which has the extra fields for that document_type. Be sure to pass the correct `form_namespace` matching the document_type.
-11. Add the entry to `app/lib/permission_checker.rb` for the owning organisation and a link in `app/views/layouts/application.html.erb` to the document index
+11. Add the entry to `app/lib/permission_checker.rb` for the owning organisation and an entry in the finders array in `ApplicationController`.
 12. That's it!
 
 ### Testing your new specialist document format
