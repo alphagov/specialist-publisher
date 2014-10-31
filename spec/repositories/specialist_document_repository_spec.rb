@@ -15,7 +15,7 @@ describe SpecialistDocumentRepository do
   let(:document_type) { "generic_document"}
 
   let(:document) {
-    SpecialistDocument.new(slug_generator, edition_factory, document_id, editions)
+    SpecialistDocument.new(slug_generator, document_id, editions, edition_factory)
   }
 
   let(:slug_generator) { double(:slug_generator) }
@@ -56,7 +56,7 @@ describe SpecialistDocumentRepository do
   end
 
   def build_specialist_document(*args)
-    SpecialistDocument.new(slug_generator, edition_factory, *args)
+    SpecialistDocument.new(slug_generator, *args)
   end
 
   let(:published_edition) { build_published_edition }
