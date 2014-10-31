@@ -25,11 +25,11 @@ class SpecialistDocument
 
   attr_reader :id, :editions, :latest_edition
 
-  def initialize(slug_generator, edition_factory, id, editions)
+  def initialize(slug_generator, id, editions, edition_factory = SpecialistDocumentEdition.method(:new))
     @slug_generator = slug_generator
-    @edition_factory = edition_factory
     @id = id
     @editions = editions
+    @edition_factory = edition_factory
     @editions.push(create_first_edition) if @editions.empty?
     @latest_edition = @editions.last
   end

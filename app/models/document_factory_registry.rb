@@ -10,21 +10,29 @@ require "validators/medical_safety_alert_validator"
 require "validators/null_validator"
 require "validators/raib_report_validator"
 
-# TODO: remove these dependencies
 require "builders/manual_document_builder"
 require "manual_with_documents"
 require "slug_generator"
 require "specialist_document"
 
-class ValidatableEntityFactoryRegistry
-  def initialize(entity_factory_registry)
-    @entity_factory_registry = entity_factory_registry
-  end
+require "slug_generator"
+require "specialist_document"
+require "aaib_report"
+require "cma_case"
+require "drug_safety_update"
+require "medical_safety_alert"
+require "international_development_fund"
 
+class DocumentFactoryRegistry
   def aaib_report_factory
     ->(*args) {
       AaibReportValidator.new(
-        entity_factory_registry.aaib_report_factory.call(*args),
+        AaibReport.new(
+          SpecialistDocument.new(
+            SlugGenerator.new(prefix: "aaib-reports"),
+            *args,
+          ),
+        )
       )
     }
   end
@@ -32,7 +40,12 @@ class ValidatableEntityFactoryRegistry
   def cma_case_factory
     ->(*args) {
       CmaCaseValidator.new(
-        entity_factory_registry.cma_case_factory.call(*args),
+        CmaCase.new(
+          SpecialistDocument.new(
+            SlugGenerator.new(prefix: "cma-cases"),
+            *args,
+          ),
+        )
       )
     }
   end
@@ -40,7 +53,12 @@ class ValidatableEntityFactoryRegistry
   def drug_safety_update_factory
     ->(*args) {
       DrugSafetyUpdateValidator.new(
-        entity_factory_registry.drug_safety_update_factory.call(*args),
+        DrugSafetyUpdate.new(
+          SpecialistDocument.new(
+            SlugGenerator.new(prefix: "drug-safety-update"),
+            *args,
+          )
+        )
       )
     }
   end
@@ -48,7 +66,12 @@ class ValidatableEntityFactoryRegistry
   def maib_report_factory
     ->(*args) {
       MaibReportValidator.new(
-        entity_factory_registry.maib_report_factory.call(*args),
+        MaibReport.new(
+          SpecialistDocument.new(
+            SlugGenerator.new(prefix: "maib-reports"),
+            *args,
+          ),
+        )
       )
     }
   end
@@ -56,7 +79,12 @@ class ValidatableEntityFactoryRegistry
   def medical_safety_alert_factory
     ->(*args) {
       MedicalSafetyAlertValidator.new(
-        entity_factory_registry.medical_safety_alert_factory.call(*args),
+        MedicalSafetyAlert.new(
+          SpecialistDocument.new(
+            SlugGenerator.new(prefix: "drug-device-alerts"),
+            *args,
+          )
+        )
       )
     }
   end
@@ -64,7 +92,12 @@ class ValidatableEntityFactoryRegistry
   def international_development_fund_factory
     ->(*args) {
       InternationalDevelopmentFundValidator.new(
-        entity_factory_registry.international_development_fund_factory.call(*args),
+        InternationalDevelopmentFund.new(
+          SpecialistDocument.new(
+            SlugGenerator.new(prefix: "international-development-funding"),
+            *args,
+          ),
+        )
       )
     }
   end
@@ -72,7 +105,12 @@ class ValidatableEntityFactoryRegistry
   def raib_report_factory
     ->(*args) {
       RaibReportValidator.new(
-        entity_factory_registry.raib_report_factory.call(*args),
+        RaibReport.new(
+          SpecialistDocument.new(
+            SlugGenerator.new(prefix: "raib-reports"),
+            *args,
+          ),
+        )
       )
     }
   end
@@ -104,7 +142,6 @@ class ValidatableEntityFactoryRegistry
           ManualDocumentValidator.new(
             SpecialistDocument.new(
               slug_generator,
-              entity_factory_registry.edition_factory,
               id,
               editions,
             ),
@@ -113,8 +150,4 @@ class ValidatableEntityFactoryRegistry
       }
     }
   end
-
-private
-
-  attr_reader :entity_factory_registry
 end

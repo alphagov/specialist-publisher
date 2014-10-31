@@ -5,7 +5,7 @@ require "specialist_document"
 
 describe SpecialistDocument do
   subject(:doc) {
-    SpecialistDocument.new(slug_generator, edition_factory, document_id, editions)
+    SpecialistDocument.new(slug_generator, document_id, editions, edition_factory)
   }
 
   def key_classes_for(hash)

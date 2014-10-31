@@ -24,8 +24,7 @@ require "govspeak_to_html_renderer"
 require "specialist_document_header_extractor"
 require "specialist_document_repository"
 require "repository_registry"
-require "entity_factory_registry"
-require "validatable_entity_factory_registry"
+require "document_factory_registry"
 require "view_adapter_registry"
 
 $LOAD_PATH.unshift(File.expand_path("../..", "app/services"))
@@ -49,7 +48,7 @@ SpecialistPublisherWiring = DependencyContainer.new do
   }
 
   define_factory(:manual_document_builder) {
-    get(:validatable_entity_factories).manual_document_builder
+    get(:validatable_document_factories).manual_document_builder
   }
 
   define_factory(:manual_with_sections_factory) {
@@ -68,16 +67,12 @@ SpecialistPublisherWiring = DependencyContainer.new do
 
   define_factory(:repository_registry) {
     RepositoryRegistry.new(
-      entity_factories: get(:validatable_entity_factories),
+      entity_factories: get(:validatable_document_factories),
     )
   }
 
-  define_factory(:validatable_entity_factories) {
-    ValidatableEntityFactoryRegistry.new(get(:entity_factories))
-  }
-
-  define_factory(:entity_factories) {
-    EntityFactoryRegistry.new
+  define_factory(:validatable_document_factories) {
+    DocumentFactoryRegistry.new
   }
 
   define_factory(:organisational_manual_repository_factory) {
@@ -88,37 +83,37 @@ SpecialistPublisherWiring = DependencyContainer.new do
 
   define_factory(:cma_case_builder) {
     SpecialistDocumentBuilder.new("cma_case",
-      get(:validatable_entity_factories).cma_case_factory)
+      get(:validatable_document_factories).cma_case_factory)
   }
 
   define_factory(:aaib_report_builder) {
     SpecialistDocumentBuilder.new("aaib_report",
-      get(:validatable_entity_factories).aaib_report_factory)
+      get(:validatable_document_factories).aaib_report_factory)
   }
 
   define_factory(:drug_safety_update_builder) {
     SpecialistDocumentBuilder.new("drug_safety_update",
-      get(:validatable_entity_factories).drug_safety_update_factory)
+      get(:validatable_document_factories).drug_safety_update_factory)
   }
 
   define_factory(:maib_report_builder) {
     SpecialistDocumentBuilder.new("maib_report",
-      get(:validatable_entity_factories).maib_report_factory)
+      get(:validatable_document_factories).maib_report_factory)
   }
 
   define_factory(:medical_safety_alert_builder) {
     SpecialistDocumentBuilder.new("medical_safety_alert",
-      get(:validatable_entity_factories).medical_safety_alert_factory)
+      get(:validatable_document_factories).medical_safety_alert_factory)
   }
 
   define_factory(:international_development_fund_builder) {
     SpecialistDocumentBuilder.new("international_development_fund",
-      get(:validatable_entity_factories).international_development_fund_factory)
+      get(:validatable_document_factories).international_development_fund_factory)
   }
 
   define_factory(:raib_report_builder) {
     SpecialistDocumentBuilder.new("raib_report",
-      get(:validatable_entity_factories).raib_report_factory)
+      get(:validatable_document_factories).raib_report_factory)
   }
 
   define_factory(:manual_publish_task_builder) {

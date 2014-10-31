@@ -77,7 +77,7 @@ module DrugSafetyUpdateImport
         ->(*args) {
           null_validator(
             SpecialistPublisherWiring
-            .get(:validatable_entity_factories)
+            .get(:validatable_document_factories)
             .drug_safety_update_factory
             .call(*args)
           )
