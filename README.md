@@ -52,7 +52,7 @@ $ bundle exec rake
 3. Add the schema to the `schemas` folder and define the singleton for it in `app/lib/specialist_publisher_wiring.rb`
 4. Add a model (which is a subclass of `DocumentMetadataDecorator` and only defines the extra fields of the document type), validator and builder for the new format.
 5. Define the factory with the builder in `app/lib/specialist_publisher_wiring.rb`.
-6. Define the entity factory in the ` app/models/entity_factory_registry.rb` and the validatable entity validator in `app/models/validatable_entity_factory_registry.rb`.
+6. Define the validatable document factory in `app/models/document_factory_registry.rb`
 7. Add a service registry for the format in `app/services` along with one for it's attachments. These are subclasses of `AbstractDocumentServiceRegistry` and `AbstractAttachmentServiceRegistry` respectively.
 8. Define a repository in `app/repositories/repository_registry.rb`
 9. Add observers, along with formatters required:
