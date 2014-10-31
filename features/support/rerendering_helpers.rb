@@ -6,7 +6,7 @@ module RerenderingHelpers
   def check_all_published_documents_have_valid_rendered_specialist_documents
     published_slugs = SpecialistPublisherWiring
       .get(:repository_registry)
-      .cma_case_repository
+      .for_type("cma_case")
       .all
       .select(&:published?)
       .map(&:slug)

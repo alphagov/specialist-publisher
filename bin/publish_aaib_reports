@@ -7,7 +7,7 @@ require "specialist_publisher"
 PANOPTICON_API_CREDENTIALS.merge!(timeout: 30)
 
 # We need the repository separately to grab all the documents
-repository = SpecialistPublisherWiring.get(:repository_registry).aaib_report_repository
+repository = SpecialistPublisherWiring.get(:repository_registry).for_type("aaib_report")
 service = SpecialistPublisher.document_services("aaib_report")
 
 $stdout.sync = true

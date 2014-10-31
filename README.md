@@ -53,17 +53,16 @@ $ bundle exec rake
 4. Add a model (which is a subclass of `DocumentMetadataDecorator` and only defines the extra fields of the document type), validator and builder for the new format.
 5. Define the factory with the builder in `app/lib/specialist_publisher_wiring.rb`.
 6. Define the validatable document factory in `app/models/document_factory_registry.rb`
-7. Add a service registry for the format in `app/services` along with one for it's attachments. These are subclasses of `AbstractDocumentServiceRegistry` and `AbstractAttachmentServiceRegistry` respectively.
-8. Define a repository in `app/repositories/repository_registry.rb`
-9. Add observers, along with formatters required:
+7. Define a repository in `app/repositories/repository_registry.rb`
+8. Add observers, along with formatters required:
   - `document_type_publication_alert_formatter.rb` in `app/exporters/formatters/`
   - `document_type_artefact_formatter.rb` in `app/lib/` for Panopticon
   - `document_type_indexable_formatter.rb` app/lib/` for Rummager
   - define a factory for `document_type_panopticon_registerer`, `document_type_rummager_indexer`, `document_type_rummager_deleter` and `document_type_content_api_exporter` in `app/lib/specialist_publisher_wiring.rb`
   - add an Observers registry for the docuemt type and add it to the has in the `observers_registry` method in `app/lib/specialist_publisher`
-10. Add `app/view_adapters/document_type_view_adapter.rb` along with it's entry in `app/view_adapters/view_adapter_registry.rb`. Also add the `_form.html.erb` which has the extra fields for that document_type. Be sure to pass the correct `form_namespace` matching the document_type.
-11. Add the entry to `app/lib/permission_checker.rb` for the owning organisation and an entry in the finders array in `ApplicationController`.
-12. That's it!
+9. Add `app/view_adapters/document_type_view_adapter.rb` along with it's entry in `app/view_adapters/view_adapter_registry.rb`. Also add the `_form.html.erb` which has the extra fields for that document_type. Be sure to pass the correct `form_namespace` matching the document_type.
+10. Add the entry to `app/lib/permission_checker.rb` for the owning organisation and an entry in the finders array in `ApplicationController`.
+11. That's it!
 
 ### Testing your new specialist document format
 

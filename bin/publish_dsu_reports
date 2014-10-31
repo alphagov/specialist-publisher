@@ -7,7 +7,7 @@ require "specialist_publisher"
 PANOPTICON_API_CREDENTIALS.merge!(timeout: 30)
 
 # We need the repository separately to grab all the documents
-repository = SpecialistPublisherWiring.get(:repository_registry).drug_safety_update_repository
+repository = SpecialistPublisherWiring.get(:repository_registry).for_type("drug_safety_update")
 service = SpecialistPublisher.document_services("drug_safety_update")
 
 $stdout.sync = true

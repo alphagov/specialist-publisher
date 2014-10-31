@@ -15,23 +15,23 @@ private
   def repository_listeners_map
     {
       "cma_case" => RepositoryObserversTuple.new(
-        repository_registry.cma_case_repository,
+        repository_registry.for_type("cma_case"),
         CmaCaseObserversRegistry.new.republication,
       ),
       "aaib_report" => RepositoryObserversTuple.new(
-        repository_registry.aaib_report_repository,
+        repository_registry.for_type("aaib_report"),
         AaibReportObserversRegistry.new.republication,
       ),
       "international_development_fund" => RepositoryObserversTuple.new(
-        repository_registry.international_development_fund_repository,
+        repository_registry.for_type("international_development_fund"),
         InternationalDevelopmentFundObserversRegistry.new.republication,
       ),
       "medical_safety_alert" => RepositoryObserversTuple.new(
-        repository_registry.medical_safety_alert_repository,
+        repository_registry.for_type("medical_safety_alert"),
         MedicalSafetyAlertObserversRegistry.new.republication,
       ),
       "drug_safety_update" => RepositoryObserversTuple.new(
-        repository_registry.drug_safety_update_repository,
+        repository_registry.for_type("drug_safety_update"),
         DrugSafetyUpdateObserversRegistry.new.republication,
       ),
     }
