@@ -4,7 +4,7 @@ describe SpecialistDocumentRepository do
 
   let(:specialist_document_repository) do
     SpecialistDocumentRepository.new(
-      specialist_document_editions: SpecialistDocumentEdition,
+      document_type: document_type,
       document_factory: document_factory,
     )
   end
@@ -12,6 +12,7 @@ describe SpecialistDocumentRepository do
   let(:document_factory) { double(:document_factory, call: document) }
 
   let(:document_id) { "document-id" }
+  let(:document_type) { "generic_document"}
 
   let(:document) {
     SpecialistDocument.new(slug_generator, edition_factory, document_id, editions)
@@ -71,6 +72,7 @@ describe SpecialistDocumentRepository do
 
         edition = FactoryGirl.create(:specialist_document_edition,
                             document_id: document_id,
+                            document_type: document_type,
                             updated_at: n.days.ago)
 
         allow(document_factory).to receive(:call)
@@ -95,7 +97,6 @@ describe SpecialistDocumentRepository do
     before do
       allow(SpecialistDocument).to receive(:new).and_return(document)
       allow(SpecialistDocumentEdition).to receive(:where)
-        .with(document_id: document_id)
         .and_return(editions_proxy)
     end
 

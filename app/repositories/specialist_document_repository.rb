@@ -12,7 +12,7 @@ class SpecialistDocumentRepository
   end
 
   def initialize(dependencies)
-    @specialist_document_editions = dependencies.fetch(:specialist_document_editions)
+    @document_type = dependencies.fetch(:document_type)
     @document_factory = dependencies.fetch(:document_factory)
   end
 
@@ -81,7 +81,7 @@ class SpecialistDocumentRepository
 
 private
   attr_reader(
-    :specialist_document_editions,
+    :document_type,
     :document_factory,
   )
 
@@ -106,5 +106,9 @@ private
       specialist_document_editions
         .all
     )
+  end
+
+  def specialist_document_editions
+    SpecialistDocumentEdition.where(document_type: document_type)
   end
 end
