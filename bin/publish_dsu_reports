@@ -12,7 +12,7 @@ service = SpecialistPublisher.document_services("drug_safety_update")
 
 $stdout.sync = true
 
-puts "Loading all draft DSU reports. This could take some time..."
+puts "Loading all draft drug safety updates. This could take some time..."
 repository.all.lazy.select(&:draft?).each do |document|
   print "Publishing draft document #{document.slug}..."
   $stdout.flush
