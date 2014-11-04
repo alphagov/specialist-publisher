@@ -1,0 +1,12 @@
+#!/usr/bin/env ruby
+
+require File.expand_path("../../config/environment", __FILE__)
+require "maib_import"
+
+data_files_dir = ARGV.fetch(0)
+attachments_dir = ARGV.fetch(1)
+
+# Override the timeout value for the Panopticon API during a data import.
+PANOPTICON_API_CREDENTIALS.merge!(timeout: 30)
+
+MaibImport.call(data_files_dir, attachments_dir)
