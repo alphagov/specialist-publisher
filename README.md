@@ -101,4 +101,4 @@ Non standard Rails directories and what they're used for:
 
 ### Services
 
- Services do things such as previewing a document, creation, updating, showing, withdrawing, queueing. This replaces the normal Rails behaviour of completeing these actions directly from a controller, instead we call a service registry
+ Services do things such as previewing a document, creation, updating, showing, withdrawing, queueing. This replaces the normal Rails behaviour of completing these actions directly from a controller, instead we call a service registry
