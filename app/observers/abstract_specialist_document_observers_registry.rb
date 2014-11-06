@@ -55,14 +55,14 @@ private
     raise NotImplementedError
   end
 
-  def delivery_api
-    SpecialistPublisherWiring.get(:delivery_api)
+  def email_alert_api
+    SpecialistPublisherWiring.get(:email_alert_api)
   end
 
   def publication_alert_exporter
     ->(document) {
       EmailAlertExporter.new(
-        delivery_api: delivery_api,
+        email_alert_api: email_alert_api,
         formatter: publication_alert_formatter(document),
       ).call
     }
