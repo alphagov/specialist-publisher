@@ -24,15 +24,10 @@ private
     SpecialistPublisherWiring.get(:specialist_document_content_api_withdrawer)
   end
 
-  def publication_alert_exporter
-    ->(document) {
-      EmailAlertExporter.new(
-        delivery_api: delivery_api,
-        formatter: AaibReportPublicationAlertFormatter.new(
-          url_maker: url_maker,
-          document: document,
-        ),
-      ).call
-    }
+  def publication_alert_formatter(document)
+    AaibReportPublicationAlertFormatter.new(
+      url_maker: url_maker,
+      document: document,
+    )
   end
 end
