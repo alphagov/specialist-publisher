@@ -1,4 +1,5 @@
 require "plek"
+require "action_view"
 
 class AbstractDocumentPublicationAlertFormatter
   def initialize(dependencies = {})
@@ -10,8 +11,10 @@ class AbstractDocumentPublicationAlertFormatter
     raise NotImplementedError
   end
 
-  def identifier
-    "#{Plek.current.find("finder-frontend")}/#{slug_prefix}.atom"
+  def tags
+    document.extra_fields.merge(
+      format: document.document_type
+    )
   end
 
   def subject
@@ -47,7 +50,7 @@ private
   end
 
   def view_renderer
-    ActionView::Base.new(File.join(Rails.root, "app/views"))
+    ActionView::Base.new("app/views")
   end
 
   def updated_or_published_text
