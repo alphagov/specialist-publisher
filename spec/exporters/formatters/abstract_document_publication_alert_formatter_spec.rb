@@ -9,6 +9,7 @@ RSpec.describe AbstractDocumentPublicationAlertFormatter do
     )
   }
   let(:metadata_attribute) { double(:metadata_attribute) }
+  let(:array_metadata_attribute) { [double(:metadata_attribute_in_array)] }
   let(:document) {
     double(:document,
       document_type: "document",
@@ -18,6 +19,7 @@ RSpec.describe AbstractDocumentPublicationAlertFormatter do
       version_number: 1,
       extra_fields: {
         metadata_attribute: metadata_attribute,
+        array_metadata_attribute: array_metadata_attribute
       },
     )
   }
@@ -43,8 +45,9 @@ RSpec.describe AbstractDocumentPublicationAlertFormatter do
   end
 
   it "has tags which correspond to the email filter tags for that document type (format)" do
-    expect(formatter.tags[:format]).to eql("document")
-    expect(formatter.tags[:metadata_attribute]).to eql(metadata_attribute)
+    expect(formatter.tags[:format]).to eql(["document"])
+    expect(formatter.tags[:metadata_attribute]).to eql([metadata_attribute])
+    expect(formatter.tags[:array_metadata_attribute]).to eql(array_metadata_attribute)
   end
 
   it "has a subject containing the document title" do

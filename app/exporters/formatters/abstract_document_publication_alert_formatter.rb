@@ -12,8 +12,8 @@ class AbstractDocumentPublicationAlertFormatter
   end
 
   def tags
-    document.extra_fields.merge(
-      format: document.document_type
+    arrayified_extra_fields.merge(
+      format: [document.document_type]
     )
   end
 
@@ -55,5 +55,15 @@ private
 
   def updated_or_published_text
     document.version_number == 1 ? "published" : "updated"
+  end
+
+  def extra_fields
+    document.extra_fields
+  end
+
+  def arrayified_extra_fields
+    hash = {}
+    extra_fields.each { |key, value| hash[key] = value.is_a?(Array) ? value : [value] }
+    hash
   end
 end
