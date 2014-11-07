@@ -131,3 +131,18 @@ end
 Then(/^the MAIB report should be withdrawn$/) do
   check_document_is_withdrawn(@slug, @maib_report_fields.fetch(:title))
 end
+
+When(/^I edit the MAIB report and indicate the change is minor$/) do
+  @updated_document_fields = {
+    body: "Updated section",
+  }
+
+  @maib_report_fields = @maib_report_fields.merge(@updated_document_fields)
+
+  go_to_edit_page_for_maib_report(@document_title)
+
+  fill_in "Body", with: @updated_document_fields[:body]
+  check "Minor update"
+
+  save_document
+end
