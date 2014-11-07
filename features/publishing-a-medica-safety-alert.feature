@@ -24,3 +24,8 @@ Feature: Publishing an Medical Safety Alert
     And I edit the Medical Safety Alert and republish
     Then the amended document should be published
     And previous editions should be archived
+
+  Scenario: Sends an email alert on publish
+    Given a draft Medical Safety Alert exists
+    When I publish the Medical Safety Alert
+    Then a publication notification should have been sent

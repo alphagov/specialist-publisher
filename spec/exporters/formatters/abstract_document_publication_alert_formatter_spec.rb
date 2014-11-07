@@ -8,12 +8,19 @@ RSpec.describe AbstractDocumentPublicationAlertFormatter do
       published_specialist_document_path: "http://www.example.com"
     )
   }
+  let(:metadata_attribute) { double(:metadata_attribute) }
+  let(:array_metadata_attribute) { [double(:metadata_attribute_in_array)] }
   let(:document) {
     double(:document,
+      document_type: "document",
       title: "Some title",
       slug: "some-prefix/some-permalink",
       summary: "some summary",
-      version_number: 1
+      version_number: 1,
+      extra_fields: {
+        metadata_attribute: metadata_attribute,
+        array_metadata_attribute: array_metadata_attribute
+      },
     )
   }
   subject(:formatter) {
@@ -37,8 +44,10 @@ RSpec.describe AbstractDocumentPublicationAlertFormatter do
     expect(formatter.name).to eql("Specialist Documents")
   end
 
-  it "has an identifier with url of the finder for that format" do
-    expect(formatter.identifier).to include("#{Plek.current.find("finder-frontend")}/some-prefix")
+  it "has tags which correspond to the email filter tags for that document type (format)" do
+    expect(formatter.tags[:format]).to eql(["document"])
+    expect(formatter.tags[:metadata_attribute]).to eql([metadata_attribute])
+    expect(formatter.tags[:array_metadata_attribute]).to eql(array_metadata_attribute)
   end
 
   it "has a subject containing the document title" do

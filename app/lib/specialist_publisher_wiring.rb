@@ -7,7 +7,7 @@ require "dependency_container"
 require "document_headers_depth_limiter"
 require "drug_safety_update_indexable_formatter"
 require "footnotes_section_heading_renderer"
-require "gds_api/gov_uk_delivery"
+require "gds_api/email_alert_api"
 require "gds_api/rummager"
 require "gds_api_proxy"
 require "manual_database_exporter"
@@ -532,8 +532,8 @@ SpecialistPublisherWiring = DependencyContainer.new do
     GdsApi::Rummager.new(Plek.new.find("search"))
   }
 
-  define_singleton(:delivery_api) {
-    GdsApi::GovUkDelivery.new(Plek.current.find("govuk-delivery"))
+  define_singleton(:email_alert_api) {
+    GdsApi::EmailAlertApi.new(Plek.current.find("email-alert-api"))
   }
 
   define_singleton(:aaib_report_finder_schema) {

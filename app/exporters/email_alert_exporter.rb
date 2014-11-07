@@ -1,36 +1,22 @@
 class EmailAlertExporter
 
   def initialize(dependencies = {})
-    @delivery_api = dependencies.fetch(:delivery_api)
+    @email_alert_api = dependencies.fetch(:email_alert_api)
     @formatter = dependencies.fetch(:formatter)
   end
 
   def call
-    ensure_topic_exists
-    send_notification_to_delivery_api
+    email_alert_api.send_alert(
+      "subject" => formatter.subject,
+      "body" => formatter.body,
+      "tags" => formatter.tags,
+    )
   end
 
 private
 
   attr_reader(
-    :delivery_api,
+    :email_alert_api,
     :formatter,
   )
-
-  def ensure_topic_exists
-    delivery_api.topic(
-      formatter.identifier,
-      formatter.name,
-    )
-  rescue GdsApi::HTTPClientError => e
-    Rails.logger.warn "Error creating topic #{formatter.identifier} in GovDelivery. Already exists?"
-  end
-
-  def send_notification_to_delivery_api
-    delivery_api.notify(
-      formatter.identifier,
-      formatter.subject,
-      formatter.body,
-    )
-  end
 end

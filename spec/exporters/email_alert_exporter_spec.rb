@@ -2,43 +2,36 @@ require "fast_spec_helper"
 require "email_alert_exporter"
 
 RSpec.describe EmailAlertExporter do
-  let(:delivery_api) { double(:delivery_api) }
+  let(:email_alert_api) { double(:email_alert_api) }
+  let(:email_subject) { double(:email_subject) }
+  let(:email_body) { double(:email_body) }
+  let(:email_tags) { double(:email_tags) }
   let(:formatter) {
     double(:formatter,
       name: "format name",
-      identifier: "identifier",
-      subject: "subject",
-      body: "body",
+      subject: email_subject,
+      body: email_body,
+      tags: email_tags
     )
   }
   subject(:exporter) {
     EmailAlertExporter.new(
-      delivery_api: delivery_api,
+      email_alert_api: email_alert_api,
       formatter: formatter,
     )
   }
 
   before do
-    allow(delivery_api).to receive(:topic)
-    allow(delivery_api).to receive(:notify)
+    allow(email_alert_api).to receive(:send_alert)
   end
 
-  it "ensures the delivery api contains the topic" do
+  it "notifies the email alert api with the formatter attributes" do
     exporter.call
-    expect(delivery_api).to have_received(:topic)
+    expect(email_alert_api).to have_received(:send_alert)
       .with(
-        "identifier",
-        "format name",
-      )
-  end
-
-  it "notifies the delivery api with the formatter attributes" do
-    exporter.call
-    expect(delivery_api).to have_received(:notify)
-      .with(
-        "identifier",
-        "subject",
-        "body",
+        "subject" => email_subject,
+        "body" => email_body,
+        "tags" => email_tags,
       )
   end
 end
