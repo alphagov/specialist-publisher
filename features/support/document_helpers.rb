@@ -151,6 +151,7 @@ module DocumentHelpers
           "tags",
         )
       )
+    reset_email_alert_api_stubs_and_messages
   end
 
   def check_email_alert_api_is_not_notified_of_publish

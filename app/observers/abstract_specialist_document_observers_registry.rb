@@ -61,10 +61,12 @@ private
 
   def publication_alert_exporter
     ->(document) {
-      EmailAlertExporter.new(
-        email_alert_api: email_alert_api,
-        formatter: publication_alert_formatter(document),
-      ).call
+      if !document.minor_update
+        EmailAlertExporter.new(
+          email_alert_api: email_alert_api,
+          formatter: publication_alert_formatter(document),
+        ).call
+      end
     }
   end
 

@@ -16,6 +16,10 @@
     <%= f.select :market_sector, f.object.facet_options(:market_sector) %>
     <%= f.select :outcome_type, f.object.facet_options(:outcome_type), include_blank: true %>
 
+    <% if document.published? %>
+      <%= f.check_box :minor_update %>
+    <% end %>
+
     <div class="actions">
       <button name="save" class="btn btn-success">Save as draft</button>
     </div>
