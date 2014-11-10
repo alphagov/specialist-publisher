@@ -24,3 +24,11 @@ Feature: Publishing a CMA case
     And I edit the CMA case and republish
     Then the amended document should be published
     And previous editions should be archived
+
+  Scenario: Minor updates do not send emails
+    When I publish a new CMA case
+    Then the CMA case should be published
+    And a publication notification should have been sent
+    When I edit the CMA case and indicate the change is minor
+    When I publish the CMA case
+    Then an email alert should not be sent

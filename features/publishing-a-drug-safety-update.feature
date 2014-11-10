@@ -24,3 +24,11 @@ Feature: Publishing an Drug Safety Update
     And I edit the Drug Safety Update and republish
     Then the amended document should be published
     And previous editions should be archived
+
+  Scenario: Minor updates do not send emails
+    When I publish a new Drug Safety Update
+    Then the Drug Safety Update should be published
+    And a publication notification should have been sent
+    When I edit the Drug Safety Update and indicate the change is minor
+    When I publish the Drug Safety Update
+    Then an email alert should not be sent

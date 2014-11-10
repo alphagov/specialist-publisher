@@ -20,3 +20,11 @@ Feature: Publishing a RAIB Report
     And I edit the RAIB report and republish
     Then the amended document should be published
     And previous editions should be archived
+
+  Scenario: Minor updates do not send emails
+    When I publish a new RAIB report
+    Then the RAIB report should be published
+    And a publication notification should have been sent
+    When I edit the RAIB report and indicate the change is minor
+    When I publish the RAIB report
+    Then an email alert should not be sent

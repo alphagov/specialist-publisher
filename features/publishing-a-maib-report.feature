@@ -20,3 +20,11 @@ Feature: Publishing a MAIB Report
     And I edit the MAIB report and republish
     Then the amended document should be published
     And previous editions should be archived
+
+  Scenario: Minor updates do not send emails
+    When I publish a new MAIB report
+    Then the MAIB report should be published
+    And a publication notification should have been sent
+    When I edit the MAIB report and indicate the change is minor
+    When I publish the MAIB report
+    Then an email alert should not be sent

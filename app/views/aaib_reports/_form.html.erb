@@ -16,6 +16,9 @@
     <%= f.select :aircraft_category, f.object.facet_options(:aircraft_category), {}, { class: 'select2', multiple: true, data: {placeholder: 'Select an Aircraft category'} } %>
     <%= f.select :report_type, f.object.facet_options(:report_type) %>
 
+    <% if document.published? %>
+      <%= f.check_box :minor_update %>
+    <% end %>
 
     <div class="actions">
       <button name="save" class="btn btn-success">Save as draft</button>

@@ -11,6 +11,10 @@
 
     <%= f.select :therapeutic_area, f.object.facet_options(:therapeutic_area), {}, { class: 'select2', multiple: true, data: {placeholder: 'Select a Therapeutic area'} } %>
 
+    <% if document.published? %>
+      <%= f.check_box :minor_update %>
+    <% end %>
+
     <div class="actions">
       <button name="save" class="btn btn-success">Save as draft</button>
     </div>

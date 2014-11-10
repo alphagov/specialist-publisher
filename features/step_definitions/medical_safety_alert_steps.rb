@@ -108,6 +108,21 @@ Then(/^the Medical Safety Alert should be withdrawn$/) do
   check_document_is_withdrawn(@slug, @msa_fields.fetch(:title))
 end
 
+When(/^I edit the Medical Safety Alert and indicate the change is minor$/) do
+  @updated_document_fields = {
+    body: "Updated body",
+  }
+
+  @msa_fields = @msa_fields.merge(@updated_document_fields)
+
+  go_to_edit_page_for_medical_safety_alert(msa_fields[:title])
+
+  fill_in "Body", with: @updated_document_fields[:body]
+  check "Minor update"
+
+  save_document
+end
+
 def msa_fields
   {
     title: "Example Medical Safety Alert",
