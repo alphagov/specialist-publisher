@@ -24,3 +24,11 @@ Feature: Publishing an International Development Fund
     And I edit the International Development Fund and republish
     Then the amended document should be published
     And previous editions should be archived
+
+  Scenario: Minor updates do not send emails
+    When I publish a new International Development Fund
+    Then the International Development Fund should be published
+    And a publication notification should have been sent
+    When I edit the International Development Fund and indicate the change is minor
+    When I publish the International Development Fund
+    Then an email alert should not be sent

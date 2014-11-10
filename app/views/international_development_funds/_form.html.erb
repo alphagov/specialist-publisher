@@ -15,6 +15,9 @@
     <%= f.select :eligible_entities, f.object.facet_options(:eligible_entities), { label: 'Eligible Organisations'}, { class: 'select2', multiple: true, data: {placeholder: 'Select an eligible organisation'} } %>
     <%= f.select :value_of_funding, f.object.facet_options(:value_of_funding), {}, { class: 'select2', multiple: true, data: {placeholder: 'Select a Value'} } %>
 
+    <% if document.published? %>
+      <%= f.check_box :minor_update %>
+    <% end %>
 
     <div class="actions">
       <button name="save" class="btn btn-success">Save as draft</button>
