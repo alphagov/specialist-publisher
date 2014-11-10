@@ -29,3 +29,11 @@ Feature: Publishing an Medical Safety Alert
     Given a draft Medical Safety Alert exists
     When I publish the Medical Safety Alert
     Then a publication notification should have been sent
+
+  Scenario: Minor updates do not send emails
+    When I publish a new Medical Safety Alert
+    Then the Medical Safety Alert should be published
+    And a publication notification should have been sent
+    When I edit the Medical Safety Alert and indicate the change is minor
+    When I publish the Medical Safety Alert
+    Then an email alert should not be sent
