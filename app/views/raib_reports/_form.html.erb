@@ -13,6 +13,9 @@
     <%= f.select :railway_type, f.object.facet_options(:railway_type), {}, { class: 'select2', multiple: true, data: {placeholder: 'Select a Railway type'} } %>
     <%= f.select :report_type, f.object.facet_options(:report_type) %>
 
+    <% if document.published? %>
+      <%= f.check_box :minor_update %>
+    <% end %>
 
     <div class="actions">
       <button name="save" class="btn btn-success">Save as draft</button>
