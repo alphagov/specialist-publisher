@@ -13,9 +13,7 @@
     <%= f.select :vessel_type, f.object.facet_options(:vessel_type), {}, { class: 'select2', multiple: true, data: {placeholder: 'Select a Vessel type'} } %>
     <%= f.select :report_type, f.object.facet_options(:report_type) %>
 
-    <% if document.published? %>
-      <%= f.check_box :minor_update %>
-    <% end %>
+    <%= render partial: "specialist_documents/minor_major_update_fields", locals: { f: f, document: document } %>
 
     <div class="actions">
       <button name="save" class="btn btn-success">Save as draft</button>
