@@ -1,42 +1,42 @@
 When(/^I create a MAIB report$/) do
   @document_title = "Example MAIB report"
   @slug = "maib-reports/example-maib-report"
-  @maib_report_fields = {
+  @document_fields = {
     title: @document_title,
     summary: "Nullam quis risus eget urna mollis ornare vel eu leo.",
     body: "## Header" + ("\n\nPraesent commodo cursus magna, vel scelerisque nisl consectetur et." * 10),
     date_of_occurrence: "2014-01-01",
   }
 
-  create_maib_report(@maib_report_fields)
+  create_maib_report(@document_fields)
 end
 
 Then(/^the MAIB report has been created$/) do
-  check_maib_report_exists_with(@maib_report_fields)
+  check_maib_report_exists_with(@document_fields)
 end
 
 When(/^I create a MAIB report with invalid fields$/) do
-  @maib_report_fields = {
+  @document_fields = {
     body: "<script>alert('Oh noes!)</script>",
   }
-  create_maib_report(@maib_report_fields)
+  create_maib_report(@document_fields)
 end
 
 Then(/^the MAIB report should not have been created$/) do
-  check_document_does_not_exist_with(@maib_report_fields)
+  check_document_does_not_exist_with(@document_fields)
 end
 
 Given(/^a draft MAIB report exists$/) do
   @document_title = "Example MAIB report"
   @slug = "maib-reports/example-maib-report"
-  @maib_report_fields = {
+  @document_fields = {
     title: @document_title,
     summary: "Nullam quis risus eget urna mollis ornare vel eu leo.",
     body: "## Header" + ("\n\nPraesent commodo cursus magna, vel scelerisque nisl consectetur et." * 10),
     date_of_occurrence: "2014-01-01",
   }
 
-  create_maib_report(@maib_report_fields)
+  create_maib_report(@document_fields)
 end
 
 When(/^I edit an MAIB report and remove required fields$/) do
@@ -48,21 +48,21 @@ Then(/^the MAIB report should not have been updated$/) do
 end
 
 Given(/^two MAIB reports exist$/) do
-  @maib_report_fields = {
+  @document_fields = {
     title: "MAIB report 1",
     summary: "Nullam quis risus eget urna mollis ornare vel eu leo.",
     body: "## Header" + ("\n\nPraesent commodo cursus magna, vel scelerisque nisl consectetur et." * 10),
     date_of_occurrence: "2014-01-01",
   }
-  create_maib_report(@maib_report_fields)
+  create_maib_report(@document_fields)
 
-  @maib_report_fields = {
+  @document_fields = {
     title: "MAIB report 2",
     summary: "Nullam quis risus eget urna mollis ornare vel eu leo.",
     body: "## Header" + ("\n\nPraesent commodo cursus magna, vel scelerisque nisl consectetur et." * 10),
     date_of_occurrence: "2014-01-01",
   }
-  create_maib_report(@maib_report_fields)
+  create_maib_report(@document_fields)
 end
 
 Then(/^the MAIB reports should be in the publisher IDF index in the correct order$/) do
@@ -90,20 +90,20 @@ When(/^I publish the MAIB report$/) do
 end
 
 Then(/^the MAIB report should be published$/) do
-  check_document_is_published(@slug, @maib_report_fields)
+  check_document_is_published(@slug, @document_fields)
 end
 
 When(/^I publish a new MAIB report$/) do
   @document_title = "Example MAIB report"
   @slug = "maib-reports/example-maib-report"
-  @maib_report_fields = {
+  @document_fields = {
     title: @document_title,
     summary: "Nullam quis risus eget urna mollis ornare vel eu leo.",
     body: "## Header" + ("\n\nPraesent commodo cursus magna, vel scelerisque nisl consectetur et." * 10),
     date_of_occurrence: "2014-01-01",
   }
 
-  create_maib_report(@maib_report_fields, publish: true)
+  create_maib_report(@document_fields, publish: true)
 end
 
 When(/^I edit the MAIB report and republish$/) do
@@ -114,22 +114,22 @@ end
 Given(/^a published MAIB report exists$/) do
   @document_title = "Example MAIB report"
   @slug = "maib-reports/example-maib-report"
-  @maib_report_fields = {
+  @document_fields = {
     title: @document_title,
     summary: "Nullam quis risus eget urna mollis ornare vel eu leo.",
     body: "## Header" + ("\n\nPraesent commodo cursus magna, vel scelerisque nisl consectetur et." * 10),
     date_of_occurrence: "2014-01-01",
   }
 
-  create_maib_report(@maib_report_fields, publish: true)
+  create_maib_report(@document_fields, publish: true)
 end
 
 When(/^I withdraw a MAIB report$/) do
-  withdraw_maib_report(@maib_report_fields.fetch(:title))
+  withdraw_maib_report(@document_fields.fetch(:title))
 end
 
 Then(/^the MAIB report should be withdrawn$/) do
-  check_document_is_withdrawn(@slug, @maib_report_fields.fetch(:title))
+  check_document_is_withdrawn(@slug, @document_fields.fetch(:title))
 end
 
 When(/^I edit the MAIB report and indicate the change is minor$/) do

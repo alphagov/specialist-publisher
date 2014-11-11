@@ -1,49 +1,49 @@
 When(/^I create a AAIB report$/) do
   @document_title = "Example AAIB Report"
   @slug = "aaib-reports/example-aaib-report"
-  @aaib_fields = {
+  @document_fields = {
     title: @document_title,
     summary: "Nullam quis risus eget urna mollis ornare vel eu leo.",
     body: "## Header" + ("\n\nPraesent commodo cursus magna, vel scelerisque nisl consectetur et." * 10),
     date_of_occurrence: "2014-01-01"
   }
 
-  create_aaib_report(@aaib_fields)
+  create_aaib_report(@document_fields)
 end
 
 Then(/^the AAIB report has been created$/) do
-  check_aaib_report_exists_with(@aaib_fields)
+  check_aaib_report_exists_with(@document_fields)
 end
 
 When(/^I create a AAIB report with invalid fields$/) do
-  @aaib_fields = {
+  @document_fields = {
     body: "<script>alert('Oh noes!)</script>",
     date_of_occurrence: "Bad data",
   }
 
-  create_aaib_report(@aaib_fields)
+  create_aaib_report(@document_fields)
 end
 
 Then(/^the AAIB report should not have been created$/) do
-  check_document_does_not_exist_with(@aaib_fields)
+  check_document_does_not_exist_with(@document_fields)
 end
 
 Given(/^two AAIB reports exist$/) do
-  @aaib_fields = {
+  @document_fields = {
     title: "AAIB Report 1",
     summary: "Nullam quis risus eget urna mollis ornare vel eu leo.",
     body: "## Header" + ("\n\nPraesent commodo cursus magna, vel scelerisque nisl consectetur et." * 10),
     date_of_occurrence: "2014-01-01"
   }
-  create_aaib_report(@aaib_fields)
+  create_aaib_report(@document_fields)
 
-  @aaib_fields = {
+  @document_fields = {
     title: "AAIB Report 2",
     summary: "Nullam quis risus eget urna mollis ornare vel eu leo.",
     body: "## Header" + ("\n\nPraesent commodo cursus magna, vel scelerisque nisl consectetur et." * 10),
     date_of_occurrence: "2014-01-01"
   }
-  create_aaib_report(@aaib_fields)
+  create_aaib_report(@document_fields)
 end
 
 Then(/^the AAIB reports should be in the publisher report index in the correct order$/) do
@@ -55,14 +55,14 @@ end
 Given(/^a draft AAIB report exists$/) do
   @document_title = "Example AAIB Report"
   @slug = "aaib-reports/example-aaib-report"
-  @aaib_fields = {
+  @document_fields = {
     title: @document_title,
     summary: "Nullam quis risus eget urna mollis ornare vel eu leo.",
     body: "## Header" + ("\n\nPraesent commodo cursus magna, vel scelerisque nisl consectetur et." * 10),
     date_of_occurrence: "2014-01-01"
   }
 
-  create_aaib_report(@aaib_fields)
+  create_aaib_report(@document_fields)
 end
 
 When(/^I edit a AAIB report$/) do
@@ -87,36 +87,36 @@ Given(/^there is a published report with an attachment$/) do
   @attachment_title = "My attachment"
 
   @slug = "aaib-reports/example-aaib-report"
-  @aaib_fields = {
+  @document_fields = {
     title: @document_title,
     summary: "Nullam quis risus eget urna mollis ornare vel eu leo.",
     body: "## Header" + ("\n\nPraesent commodo cursus magna, vel scelerisque nisl consectetur et." * 10),
     date_of_occurrence: "2014-01-01"
   }
 
-  create_aaib_report(@aaib_fields, publish: true)
+  create_aaib_report(@document_fields, publish: true)
   add_attachment_to_document(@document_title, @attachment_title)
 end
 
 Given(/^a published AAIB report exists$/) do
   @document_title = "Example AAIB Report"
   @slug = "aaib-reports/example-aaib-report"
-  @aaib_fields = {
+  @document_fields = {
     title: @document_title,
     summary: "Nullam quis risus eget urna mollis ornare vel eu leo.",
     body: "## Header" + ("\n\nPraesent commodo cursus magna, vel scelerisque nisl consectetur et." * 10),
     date_of_occurrence: "2014-01-01"
   }
 
-  create_aaib_report(@aaib_fields, publish: true)
+  create_aaib_report(@document_fields, publish: true)
 end
 
 When(/^I withdraw a AAIB report$/) do
-  withdraw_aaib_report(@aaib_fields.fetch(:title))
+  withdraw_aaib_report(@document_fields.fetch(:title))
 end
 
 Then(/^the AAIB report should be withdrawn$/) do
-  check_document_is_withdrawn(@slug, @aaib_fields.fetch(:title))
+  check_document_is_withdrawn(@slug, @document_fields.fetch(:title))
 end
 
 When(/^I edit the AAIB report and indicate the change is minor$/) do
@@ -132,4 +132,35 @@ When(/^I edit the AAIB report and indicate the change is minor$/) do
   check "Minor update"
 
   save_document
+end
+
+Then(/^the AAIB report should be in draft$/) do
+  expect(page).to have_content("Publication state draft")
+end
+
+When(/^I publish the AAIB report$/) do
+  go_to_show_page_for_aaib_report(@document_title)
+  publish_document
+end
+
+Then(/^the AAIB report should be published$/) do
+  check_document_is_published(@slug, @document_fields)
+end
+
+When(/^I publish a new AAIB report$/) do
+  @document_title = "Example AAIB Report"
+  @slug = "aaib-reports/example-aaib-report"
+  @document_fields = {
+    title: @document_title,
+    summary: "Nullam quis risus eget urna mollis ornare vel eu leo.",
+    body: "## Header" + ("\n\nPraesent commodo cursus magna, vel scelerisque nisl consectetur et." * 10),
+    date_of_occurrence: "2014-01-01"
+  }
+
+  create_aaib_report(@document_fields, publish: true)
+end
+
+When(/^I edit the AAIB report and republish$/) do
+  @amended_document_attributes = {summary: "New summary", title: "My title"}
+  edit_aaib_report(@document_title, @amended_document_attributes, publish: true)
 end

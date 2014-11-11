@@ -1,36 +1,36 @@
 When(/^I create a Medical Safety Alert$/) do
   @slug = "drug-device-alerts/example-medical-safety-alert"
-  @msa_fields = msa_fields
+  @document_fields = msa_fields
   @msa_metadata_values = msa_metadata_fields
 
-  create_medical_safety_alert(@msa_fields)
+  create_medical_safety_alert(@document_fields)
 end
 
 Then(/^the Medical Safety Alert has been created$/) do
-  check_medical_safety_alert_exists_with(@msa_fields)
+  check_medical_safety_alert_exists_with(@document_fields)
 end
 
 When(/^I create a Medical Safety Alert with invalid fields$/) do
-  @msa_fields = {
+  @document_fields = {
     body: "<script>alert('Oh noes!)</script>",
   }
-  create_medical_safety_alert(@msa_fields)
+  create_medical_safety_alert(@document_fields)
 end
 
 Then(/^the Medical Safety Alert should not have been created$/) do
-  check_document_does_not_exist_with(@msa_fields)
+  check_document_does_not_exist_with(@document_fields)
 end
 
 Given(/^a draft Medical Safety Alert exists$/) do
   @slug = "drug-device-alerts/example-medical-safety-alert"
-  @msa_fields = msa_fields
+  @document_fields = msa_fields
   @msa_metadata_values = msa_metadata_fields
 
-  create_medical_safety_alert(@msa_fields)
+  create_medical_safety_alert(@document_fields)
 end
 
 When(/^I edit a Medical Safety Alert and remove required fields$/) do
-  edit_medical_safety_alert(@msa_fields.fetch(:title), summary: "")
+  edit_medical_safety_alert(@document_fields.fetch(:title), summary: "")
 end
 
 Then(/^the Medical Safety Alert should not have been updated$/) do
@@ -38,17 +38,17 @@ Then(/^the Medical Safety Alert should not have been updated$/) do
 end
 
 Given(/^two Medical Safety Alerts exist$/) do
-  @msa_fields = msa_fields
+  @document_fields = msa_fields
   @msa_metadata_values = msa_metadata_fields
 
-  create_medical_safety_alert(@msa_fields)
+  create_medical_safety_alert(@document_fields)
 
-  @msa_fields = msa_fields.merge({
+  @document_fields = msa_fields.merge({
     title: "Example Medical Safety Alert 2",
   })
   @msa_metadata_values = msa_metadata_fields
 
-  create_medical_safety_alert(@msa_fields)
+  create_medical_safety_alert(@document_fields)
 end
 
 Then(/^the Medical Safety Alerts should be in the publisher MSA index in the correct order$/) do
@@ -59,7 +59,7 @@ end
 
 When(/^I edit a Medical Safety Alert$/) do
   @new_title = "New Medical Safety Alert Title"
-  edit_medical_safety_alert(@msa_fields.fetch(:title), title: @new_title)
+  edit_medical_safety_alert(@document_fields.fetch(:title), title: @new_title)
 end
 
 Then(/^the Medical Safety Alert should have been updated$/) do
@@ -71,41 +71,41 @@ Then(/^the Medical Safety Alert should be in draft$/) do
 end
 
 When(/^I publish the Medical Safety Alert$/) do
-  go_to_show_page_for_medical_safety_alert(@msa_fields.fetch(:title))
+  go_to_show_page_for_medical_safety_alert(@document_fields.fetch(:title))
   publish_document
 end
 
 Then(/^the Medical Safety Alert should be published$/) do
-  check_document_is_published(@slug, @msa_fields.merge(@msa_metadata_values))
+  check_document_is_published(@slug, @document_fields.merge(@msa_metadata_values))
 end
 
 When(/^I publish a new Medical Safety Alert$/) do
   @slug = "drug-device-alerts/example-medical-safety-alert"
-  @msa_fields = msa_fields
+  @document_fields = msa_fields
   @msa_metadata_values = msa_metadata_fields
 
-  create_medical_safety_alert(@msa_fields, publish: true)
+  create_medical_safety_alert(@document_fields, publish: true)
 end
 
 When(/^I edit the Medical Safety Alert and republish$/) do
   @amended_document_attributes = {summary: "New summary", title: "My title"}
-  edit_medical_safety_alert(@msa_fields.fetch(:title), @amended_document_attributes, publish: true)
+  edit_medical_safety_alert(@document_fields.fetch(:title), @amended_document_attributes, publish: true)
 end
 
 Given(/^a published Medical Safety Alert exists$/) do
   @slug = "drug-device-alerts/example-medical-safety-alert"
-  @msa_fields = msa_fields
+  @document_fields = msa_fields
   @msa_metadata_values = msa_metadata_fields
 
-  create_medical_safety_alert(@msa_fields, publish: true)
+  create_medical_safety_alert(@document_fields, publish: true)
 end
 
 When(/^I withdraw a Medical Safety Alert$/) do
-  withdraw_medical_safety_alert(@msa_fields.fetch(:title))
+  withdraw_medical_safety_alert(@document_fields.fetch(:title))
 end
 
 Then(/^the Medical Safety Alert should be withdrawn$/) do
-  check_document_is_withdrawn(@slug, @msa_fields.fetch(:title))
+  check_document_is_withdrawn(@slug, @document_fields.fetch(:title))
 end
 
 When(/^I edit the Medical Safety Alert and indicate the change is minor$/) do

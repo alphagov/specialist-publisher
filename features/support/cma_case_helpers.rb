@@ -87,24 +87,24 @@ module CmaCaseHelpers
   end
 
   def check_cma_case_can_be_created
-    @cma_fields = {
+    @document_fields = {
       title: "Example CMA Case",
       summary: "Nullam quis risus eget urna mollis ornare vel eu leo.",
       body: "## Header" + ("\n\nPraesent commodo cursus magna, vel scelerisque nisl consectetur et." * 10),
       opened_date: "2014-01-01",
     }
 
-    create_cma_case(@cma_fields)
-    check_cma_case_exists_with(@cma_fields)
+    create_cma_case(@document_fields)
+    check_cma_case_exists_with(@document_fields)
   end
 
   def check_cma_case_cannot_be_published
-    go_to_show_page_for_cma_case(@cma_fields.fetch(:title))
+    go_to_show_page_for_cma_case(@document_fields.fetch(:title))
     expect(page).not_to have_button("Publish")
   end
 
   def check_cma_case_cannot_be_withdrawn
-    go_to_show_page_for_cma_case(@cma_fields.fetch(:title))
+    go_to_show_page_for_cma_case(@document_fields.fetch(:title))
     expect(page).not_to have_button("Withdraw")
   end
 end
