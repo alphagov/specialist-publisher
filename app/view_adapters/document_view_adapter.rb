@@ -35,6 +35,10 @@ class DocumentViewAdapter < SimpleDelegator
     end
   end
 
+  def minor_update
+    document.draft? ? document.minor_update : false
+  end
+
 private
 
   attr_reader :document
