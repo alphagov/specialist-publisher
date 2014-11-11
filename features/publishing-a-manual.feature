@@ -31,8 +31,8 @@ Feature: Publishing a manual
 
   Scenario: Omit the change note
     Given a published manual exists
-    Then I see no visible change note in the edit form
-    When I edit the document without a change note
+    Then I see no visible change note in the manual document edit form
+    When I edit the manual document without a change note
     Then I see an error requesting that I provide a change note
     When I indicate that the change is minor
     Then the document is updated without a change note
