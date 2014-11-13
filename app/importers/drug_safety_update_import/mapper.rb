@@ -24,7 +24,7 @@ module DrugSafetyUpdateImport
         "title" => data["title"],
         "assets" => [],
         "body" => data["body"],
-        "first_published_at" => Time.utc(data["first_published_at"])
+        "first_published_at" => Time.parse(data["first_published_at"])
       })
     end
 
