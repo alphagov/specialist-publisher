@@ -1,0 +1,30 @@
+#!/usr/bin/env ruby
+
+require File.expand_path("../../config/environment", __FILE__)
+require "specialist_publisher"
+
+# Override global panopticon timeout as this is a long operation...
+PANOPTICON_API_CREDENTIALS.merge!(timeout: 30)
+
+# We need the repository separately to grab all the documents
+repository = SpecialistPublisherWiring.get(:repository_registry).for_type("maib_report")
+service = SpecialistPublisher.document_services("maib_report")
+
+$stdout.sync = true
+
+puts "Loading all draft MAIB reports. This could take some time..."
+repository.all.lazy.select(&:draft?).each do |document|
+  print "Publishing draft document #{document.slug}..."
+  $stdout.flush
+  begin
+    service.republish(document.id).call
+    puts "SUCCESS"
+  rescue GdsApi::HTTPErrorResponse => e
+    puts "API_ERROR"
+    puts "  #{e.message}"
+  rescue StandardError => e
+    puts "FAILED"
+    puts "  #{e.message}"
+  end
+  $stdout.flush
+end
