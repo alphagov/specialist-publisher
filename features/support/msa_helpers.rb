@@ -19,8 +19,9 @@ module MsaHelpers
     go_to_edit_page_for_document(:medical_safety_alert, *args)
   end
 
-  def edit_medical_safety_alert(*args)
-    edit_document(:medical_safety_alert, *args)
+  def edit_medical_safety_alert(title, *args)
+    go_to_edit_page_for_medical_safety_alert(title)
+    edit_document(title, *args)
   end
 
   def check_for_new_medical_safety_alert_title(*args)

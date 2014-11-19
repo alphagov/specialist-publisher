@@ -198,9 +198,7 @@ module DocumentHelpers
     end
   end
 
-  def edit_document(type, title, updated_fields, publish: false)
-    send(:"go_to_edit_page_for_#{type}", title)
-
+  def edit_document(title, updated_fields, publish: false)
     fill_in_fields(updated_fields)
     save_document
 

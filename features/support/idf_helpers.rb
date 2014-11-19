@@ -19,8 +19,9 @@ module IdfHelpers
     go_to_edit_page_for_document(:international_development_fund, *args)
   end
 
-  def edit_international_development_fund(*args)
-    edit_document(:international_development_fund, *args)
+  def edit_international_development_fund(title, *args)
+    go_to_edit_page_for_international_development_fund(title)
+    edit_document(title, *args)
   end
 
   def check_for_new_international_development_fund_title(*args)

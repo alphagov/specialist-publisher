@@ -20,8 +20,9 @@ module DsuHelpers
     go_to_edit_page_for_document(:drug_safety_update, *args)
   end
 
-  def edit_drug_safety_update(*args)
-    edit_document(:drug_safety_update, *args)
+  def edit_drug_safety_update(title, *args)
+    go_to_edit_page_for_drug_safety_update(title)
+    edit_document(title, *args)
   end
 
   def check_for_new_drug_safety_update_title(*args)

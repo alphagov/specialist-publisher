@@ -73,8 +73,9 @@ module CmaCaseHelpers
     withdraw_document(:cma_case, *args)
   end
 
-  def edit_cma_case(*args)
-    edit_document(:cma_case, *args)
+  def edit_cma_case(title, *args)
+    go_to_edit_page_for_cma_case(title)
+    edit_document(title, *args)
   end
 
   def check_for_new_cma_case_title(*args)
