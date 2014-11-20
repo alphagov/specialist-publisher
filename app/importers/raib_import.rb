@@ -41,7 +41,7 @@ module RaibImport
     end
 
     def data_files
-      Dir.glob(File.join(@data_files_dir, "*.json")).sort
+      Dir.glob(File.join(@data_files_dir, "*.json")).sort.reverse
     end
 
     def parse_json_file(filename)
