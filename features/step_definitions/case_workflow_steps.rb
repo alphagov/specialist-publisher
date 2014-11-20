@@ -14,7 +14,7 @@ end
 When(/^I edit the CMA case and republish$/) do
   new_title = "New title"
   @amended_document_attributes = {summary: "New summary", title: new_title }
-  edit_cma_case(@document_title, @amended_document_attributes, publish: true)
+  edit_cma_case(@document_title, @amended_document_attributes, minor_update: true, publish: true)
   @document_title = new_title
 end
 

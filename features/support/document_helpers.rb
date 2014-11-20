@@ -198,8 +198,11 @@ module DocumentHelpers
     end
   end
 
-  def edit_document(title, updated_fields, publish: false)
+  def edit_document(title, updated_fields, minor_update: false, publish: false)
     fill_in_fields(updated_fields)
+
+    check "Minor update" if minor_update && page.has_field?("Minor update")
+
     save_document
 
     if publish

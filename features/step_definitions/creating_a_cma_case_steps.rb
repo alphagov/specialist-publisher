@@ -163,17 +163,6 @@ Then(/^I should not see an error$/) do
   check_publication_has_not_raised_error
 end
 
-When(/^I edit the CMA case and indicate the change is minor$/) do
-  @updated_document_fields = {
-    body: "Updated section",
-  }
-
-  @document_fields = @document_fields.merge(@updated_document_fields)
-
+When(/^I am on the CMA case edit page$/) do
   go_to_edit_page_for_cma_case(@document_title)
-
-  fill_in "Body", with: @updated_document_fields[:body]
-  check "Minor update"
-
-  save_document
 end

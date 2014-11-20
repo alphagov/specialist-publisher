@@ -59,14 +59,7 @@ module CmaCaseHelpers
   def update_title_and_republish_cma_case(current_title, args)
     updated_title = args.fetch(:to)
 
-    go_to_edit_page_for_cma_case(current_title)
-
-    fill_in_fields(
-      title: updated_title,
-    )
-
-    save_document
-    publish_document
+    edit_cma_case(current_title, { title: updated_title }, minor_update: true, publish: true)
   end
 
   def withdraw_cma_case(*args)

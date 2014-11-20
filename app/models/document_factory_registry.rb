@@ -39,12 +39,14 @@ class DocumentFactoryRegistry
 
   def cma_case_factory
     ->(*args) {
-      CmaCaseValidator.new(
-        CmaCase.new(
-          SpecialistDocument.new(
-            SlugGenerator.new(prefix: "cma-cases"),
-            *args,
-          ),
+      ChangeNoteValidator.new(
+        CmaCaseValidator.new(
+          CmaCase.new(
+            SpecialistDocument.new(
+              SlugGenerator.new(prefix: "cma-cases"),
+              *args,
+            ),
+          )
         )
       )
     }
