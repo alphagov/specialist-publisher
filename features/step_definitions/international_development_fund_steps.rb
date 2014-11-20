@@ -127,17 +127,6 @@ Then(/^the International Development Fund should be withdrawn$/) do
   check_document_is_withdrawn(@slug, @document_fields.fetch(:title))
 end
 
-When(/^I edit the International Development Fund and indicate the change is minor$/) do
-  @updated_document_fields = {
-    body: "Updated body",
-  }
-
-  @idf_fields = @idf_fields.merge(@updated_document_fields)
-
-  go_to_edit_page_for_international_development_fund(@idf_fields[:title])
-
-  fill_in "Body", with: @updated_document_fields[:body]
-  check "Minor update"
-
-  save_document
+When(/^I am on the International Development Fund edit page$/) do
+  go_to_edit_page_for_international_development_fund(@document_fields.fetch(:title))
 end

@@ -101,12 +101,14 @@ class DocumentFactoryRegistry
 
   def international_development_fund_factory
     ->(*args) {
-      InternationalDevelopmentFundValidator.new(
-        InternationalDevelopmentFund.new(
-          SpecialistDocument.new(
-            SlugGenerator.new(prefix: "international-development-funding"),
-            *args,
-          ),
+      ChangeNoteValidator.new(
+        InternationalDevelopmentFundValidator.new(
+          InternationalDevelopmentFund.new(
+            SpecialistDocument.new(
+              SlugGenerator.new(prefix: "international-development-funding"),
+              *args,
+            ),
+          )
         )
       )
     }
