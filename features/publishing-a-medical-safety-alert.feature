@@ -19,21 +19,37 @@ Feature: Publishing an Medical Safety Alert
     When I publish a new Medical Safety Alert
     Then the Medical Safety Alert should be published
 
-  Scenario: immediately republish a published case
+  Scenario: immediately republish a published Medical Safety Alert
     When I publish a new Medical Safety Alert
-    And I edit the Medical Safety Alert and republish
+    When I am on the Medical Safety Alert edit page
+    And I edit the document and republish
     Then the amended document should be published
     And previous editions should be archived
 
-  Scenario: Sends an email alert on publish
+  Scenario: Sends an email alert on first publish
     Given a draft Medical Safety Alert exists
     When I publish the Medical Safety Alert
+    Then a publication notification should have been sent
+
+  Scenario: Cannot edit a published Medical Safety Alert without a change note
+    Given a published Medical Safety Alert exists
+    When I am on the Medical Safety Alert edit page
+    And I edit the document without a change note
+    Then I see an error requesting that I provide a change note
+
+  Scenario: Sends an email alert on a major update
+    Given a published Medical Safety Alert exists
+    Then a publication notification should have been sent
+    When I am on the Medical Safety Alert edit page
+    And I edit the document with a change note
+    And I publish the Medical Safety Alert
     Then a publication notification should have been sent
 
   Scenario: Minor updates do not send emails
     When I publish a new Medical Safety Alert
     Then the Medical Safety Alert should be published
     And a publication notification should have been sent
-    When I edit the Medical Safety Alert and indicate the change is minor
+    When I am on the Medical Safety Alert edit page
+    And I edit the document and indicate the change is minor
     When I publish the Medical Safety Alert
     Then an email alert should not be sent

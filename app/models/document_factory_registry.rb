@@ -84,11 +84,13 @@ class DocumentFactoryRegistry
 
   def medical_safety_alert_factory
     ->(*args) {
-      MedicalSafetyAlertValidator.new(
-        MedicalSafetyAlert.new(
-          SpecialistDocument.new(
-            SlugGenerator.new(prefix: "drug-device-alerts"),
-            *args,
+      ChangeNoteValidator.new(
+        MedicalSafetyAlertValidator.new(
+          MedicalSafetyAlert.new(
+            SpecialistDocument.new(
+              SlugGenerator.new(prefix: "drug-device-alerts"),
+              *args,
+            )
           )
         )
       )
