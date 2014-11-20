@@ -26,12 +26,14 @@ require "international_development_fund"
 class DocumentFactoryRegistry
   def aaib_report_factory
     ->(*args) {
-      AaibReportValidator.new(
-        AaibReport.new(
-          SpecialistDocument.new(
-            SlugGenerator.new(prefix: "aaib-reports"),
-            *args,
-          ),
+      ChangeNoteValidator.new(
+        AaibReportValidator.new(
+          AaibReport.new(
+            SpecialistDocument.new(
+              SlugGenerator.new(prefix: "aaib-reports"),
+              *args,
+            ),
+          )
         )
       )
     }
