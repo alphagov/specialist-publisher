@@ -150,17 +150,6 @@ Then(/^the Drug Safety Update should be withdrawn$/) do
   check_document_is_withdrawn(@slug, @document_fields.fetch(:title))
 end
 
-When(/^I edit the Drug Safety Update and indicate the change is minor$/) do
-  @updated_document_fields = {
-    body: "Updated section",
-  }
-
-  @dsu_fields = @dsu_fields.merge(@updated_document_fields)
-
-  go_to_edit_page_for_drug_safety_update(@dsu_fields[:title])
-
-  fill_in "Body", with: @updated_document_fields[:body]
-  check "Minor update"
-
-  save_document
+When(/^I am on the Drug Safety Update edit page$/) do
+  go_to_edit_page_for_drug_safety_update(@document_fields.fetch(:title))
 end

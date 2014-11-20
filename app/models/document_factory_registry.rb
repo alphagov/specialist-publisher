@@ -54,11 +54,13 @@ class DocumentFactoryRegistry
 
   def drug_safety_update_factory
     ->(*args) {
-      DrugSafetyUpdateValidator.new(
-        DrugSafetyUpdate.new(
-          SpecialistDocument.new(
-            SlugGenerator.new(prefix: "drug-safety-update"),
-            *args,
+      ChangeNoteValidator.new(
+        DrugSafetyUpdateValidator.new(
+          DrugSafetyUpdate.new(
+            SpecialistDocument.new(
+              SlugGenerator.new(prefix: "drug-safety-update"),
+              *args,
+            )
           )
         )
       )
