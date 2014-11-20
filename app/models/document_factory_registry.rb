@@ -112,12 +112,14 @@ class DocumentFactoryRegistry
 
   def raib_report_factory
     ->(*args) {
-      RaibReportValidator.new(
-        RaibReport.new(
-          SpecialistDocument.new(
-            SlugGenerator.new(prefix: "raib-reports"),
-            *args,
-          ),
+      ChangeNoteValidator.new(
+        RaibReportValidator.new(
+          RaibReport.new(
+            SpecialistDocument.new(
+              SlugGenerator.new(prefix: "raib-reports"),
+              *args,
+            ),
+          )
         )
       )
     }
