@@ -69,12 +69,14 @@ class DocumentFactoryRegistry
 
   def maib_report_factory
     ->(*args) {
-      MaibReportValidator.new(
-        MaibReport.new(
-          SpecialistDocument.new(
-            SlugGenerator.new(prefix: "maib-reports"),
-            *args,
-          ),
+      ChangeNoteValidator.new(
+        MaibReportValidator.new(
+          MaibReport.new(
+            SpecialistDocument.new(
+              SlugGenerator.new(prefix: "maib-reports"),
+              *args,
+            ),
+          )
         )
       )
     }
