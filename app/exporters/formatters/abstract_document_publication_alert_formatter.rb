@@ -23,7 +23,7 @@ class AbstractDocumentPublicationAlertFormatter
 
   def body
     view_renderer.render(
-      template: "email_alerts/publication.txt",
+      template: "email_alerts/publication.html",
       locals: {
         human_document_type: name,
         document_noun: document_noun,
