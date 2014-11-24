@@ -6,7 +6,7 @@
     {
       "key": "alert_type",
       "name": "Alert type",
-      "type": "multi-select",
+      "type": "single-select",
       "include_blank": false,
       "preposition": "for",
       "allowed_values": [
