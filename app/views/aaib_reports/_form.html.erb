@@ -14,7 +14,7 @@
     <%= f.text_field :registration %>
     <%= f.text_field :location %>
     <%= f.select :aircraft_category, f.object.facet_options(:aircraft_category), {}, { class: 'select2', multiple: true, data: {placeholder: 'Select an Aircraft category'} } %>
-    <%= f.select :report_type, f.object.facet_options(:report_type) %>
+    <%= f.select :report_type, f.object.facet_options(:report_type), {}, { class: 'form-control' } %>
 
     <%= render partial: "specialist_documents/minor_major_update_fields", locals: { f: f, document: document } %>
 
