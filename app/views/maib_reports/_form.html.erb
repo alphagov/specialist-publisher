@@ -11,7 +11,7 @@
 
     <%= f.text_field :date_of_occurrence, placeholder: '2012-04-23' %>
     <%= f.select :vessel_type, f.object.facet_options(:vessel_type), {}, { class: 'select2', multiple: true, data: {placeholder: 'Select a Vessel type'} } %>
-    <%= f.select :report_type, f.object.facet_options(:report_type) %>
+    <%= f.select :report_type, f.object.facet_options(:report_type), {}, { class: 'form-control' } %>
 
     <%= render partial: "specialist_documents/minor_major_update_fields", locals: { f: f, document: document } %>
 
