@@ -19,8 +19,9 @@ module RaibReportHelpers
     go_to_edit_page_for_document(:raib_report, *args)
   end
 
-  def edit_raib_report(*args)
-    edit_document(:raib_report, *args)
+  def edit_raib_report(title, *args)
+    go_to_edit_page_for_raib_report(title)
+    edit_document(title, *args)
   end
 
   def check_for_new_raib_report_title(*args)

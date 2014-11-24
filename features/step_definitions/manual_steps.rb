@@ -240,7 +240,7 @@ When(/^I re\-publish the section$/) do
   publish_document
 end
 
-When(/^I edit the document without a change note$/) do
+When(/^I edit the manual document without a change note$/) do
   @updated_document_fields = {
     section_summary: "Updated section",
     section_body: "Updated section",
@@ -282,7 +282,7 @@ When(/^I add another section to the manual$/) do
   create_manual_document(@manual_title, @document_fields)
 end
 
-Then(/^I see no visible change note in the edit form$/) do
+Then(/^I see no visible change note in the manual document edit form$/) do
   check_change_note_value(@manual_title, @document_title, "")
 end
 

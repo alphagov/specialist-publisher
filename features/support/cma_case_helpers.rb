@@ -59,22 +59,16 @@ module CmaCaseHelpers
   def update_title_and_republish_cma_case(current_title, args)
     updated_title = args.fetch(:to)
 
-    go_to_edit_page_for_cma_case(current_title)
-
-    fill_in_fields(
-      title: updated_title,
-    )
-
-    save_document
-    publish_document
+    edit_cma_case(current_title, { title: updated_title }, minor_update: true, publish: true)
   end
 
   def withdraw_cma_case(*args)
     withdraw_document(:cma_case, *args)
   end
 
-  def edit_cma_case(*args)
-    edit_document(:cma_case, *args)
+  def edit_cma_case(title, *args)
+    go_to_edit_page_for_cma_case(title)
+    edit_document(title, *args)
   end
 
   def check_for_new_cma_case_title(*args)
@@ -87,24 +81,24 @@ module CmaCaseHelpers
   end
 
   def check_cma_case_can_be_created
-    @cma_fields = {
+    @document_fields = {
       title: "Example CMA Case",
       summary: "Nullam quis risus eget urna mollis ornare vel eu leo.",
       body: "## Header" + ("\n\nPraesent commodo cursus magna, vel scelerisque nisl consectetur et." * 10),
       opened_date: "2014-01-01",
     }
 
-    create_cma_case(@cma_fields)
-    check_cma_case_exists_with(@cma_fields)
+    create_cma_case(@document_fields)
+    check_cma_case_exists_with(@document_fields)
   end
 
   def check_cma_case_cannot_be_published
-    go_to_show_page_for_cma_case(@cma_fields.fetch(:title))
+    go_to_show_page_for_cma_case(@document_fields.fetch(:title))
     expect(page).not_to have_button("Publish")
   end
 
   def check_cma_case_cannot_be_withdrawn
-    go_to_show_page_for_cma_case(@cma_fields.fetch(:title))
+    go_to_show_page_for_cma_case(@document_fields.fetch(:title))
     expect(page).not_to have_button("Withdraw")
   end
 end

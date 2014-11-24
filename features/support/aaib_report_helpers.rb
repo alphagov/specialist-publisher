@@ -19,8 +19,9 @@ module AaibReportHelpers
     go_to_edit_page_for_document(:aaib_report, *args)
   end
 
-  def edit_aaib_report(*args)
-    edit_document(:aaib_report, *args)
+  def edit_aaib_report(title, *args)
+    go_to_edit_page_for_aaib_report(title)
+    edit_document(title, *args)
   end
 
   def check_for_new_aaib_report_title(*args)

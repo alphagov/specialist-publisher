@@ -26,12 +26,14 @@ require "international_development_fund"
 class DocumentFactoryRegistry
   def aaib_report_factory
     ->(*args) {
-      AaibReportValidator.new(
-        AaibReport.new(
-          SpecialistDocument.new(
-            SlugGenerator.new(prefix: "aaib-reports"),
-            *args,
-          ),
+      ChangeNoteValidator.new(
+        AaibReportValidator.new(
+          AaibReport.new(
+            SpecialistDocument.new(
+              SlugGenerator.new(prefix: "aaib-reports"),
+              *args,
+            ),
+          )
         )
       )
     }
@@ -39,12 +41,14 @@ class DocumentFactoryRegistry
 
   def cma_case_factory
     ->(*args) {
-      CmaCaseValidator.new(
-        CmaCase.new(
-          SpecialistDocument.new(
-            SlugGenerator.new(prefix: "cma-cases"),
-            *args,
-          ),
+      ChangeNoteValidator.new(
+        CmaCaseValidator.new(
+          CmaCase.new(
+            SpecialistDocument.new(
+              SlugGenerator.new(prefix: "cma-cases"),
+              *args,
+            ),
+          )
         )
       )
     }
@@ -52,11 +56,13 @@ class DocumentFactoryRegistry
 
   def drug_safety_update_factory
     ->(*args) {
-      DrugSafetyUpdateValidator.new(
-        DrugSafetyUpdate.new(
-          SpecialistDocument.new(
-            SlugGenerator.new(prefix: "drug-safety-update"),
-            *args,
+      ChangeNoteValidator.new(
+        DrugSafetyUpdateValidator.new(
+          DrugSafetyUpdate.new(
+            SpecialistDocument.new(
+              SlugGenerator.new(prefix: "drug-safety-update"),
+              *args,
+            )
           )
         )
       )
@@ -65,12 +71,14 @@ class DocumentFactoryRegistry
 
   def maib_report_factory
     ->(*args) {
-      MaibReportValidator.new(
-        MaibReport.new(
-          SpecialistDocument.new(
-            SlugGenerator.new(prefix: "maib-reports"),
-            *args,
-          ),
+      ChangeNoteValidator.new(
+        MaibReportValidator.new(
+          MaibReport.new(
+            SpecialistDocument.new(
+              SlugGenerator.new(prefix: "maib-reports"),
+              *args,
+            ),
+          )
         )
       )
     }
@@ -78,11 +86,13 @@ class DocumentFactoryRegistry
 
   def medical_safety_alert_factory
     ->(*args) {
-      MedicalSafetyAlertValidator.new(
-        MedicalSafetyAlert.new(
-          SpecialistDocument.new(
-            SlugGenerator.new(prefix: "drug-device-alerts"),
-            *args,
+      ChangeNoteValidator.new(
+        MedicalSafetyAlertValidator.new(
+          MedicalSafetyAlert.new(
+            SpecialistDocument.new(
+              SlugGenerator.new(prefix: "drug-device-alerts"),
+              *args,
+            )
           )
         )
       )
@@ -91,12 +101,14 @@ class DocumentFactoryRegistry
 
   def international_development_fund_factory
     ->(*args) {
-      InternationalDevelopmentFundValidator.new(
-        InternationalDevelopmentFund.new(
-          SpecialistDocument.new(
-            SlugGenerator.new(prefix: "international-development-funding"),
-            *args,
-          ),
+      ChangeNoteValidator.new(
+        InternationalDevelopmentFundValidator.new(
+          InternationalDevelopmentFund.new(
+            SpecialistDocument.new(
+              SlugGenerator.new(prefix: "international-development-funding"),
+              *args,
+            ),
+          )
         )
       )
     }
@@ -104,12 +116,14 @@ class DocumentFactoryRegistry
 
   def raib_report_factory
     ->(*args) {
-      RaibReportValidator.new(
-        RaibReport.new(
-          SpecialistDocument.new(
-            SlugGenerator.new(prefix: "raib-reports"),
-            *args,
-          ),
+      ChangeNoteValidator.new(
+        RaibReportValidator.new(
+          RaibReport.new(
+            SpecialistDocument.new(
+              SlugGenerator.new(prefix: "raib-reports"),
+              *args,
+            ),
+          )
         )
       )
     }

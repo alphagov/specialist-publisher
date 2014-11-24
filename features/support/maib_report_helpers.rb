@@ -19,8 +19,9 @@ module MaibReportHelpers
     go_to_edit_page_for_document(:maib_report, *args)
   end
 
-  def edit_maib_report(*args)
-    edit_document(:maib_report, *args)
+  def edit_maib_report(title, *args)
+    go_to_edit_page_for_maib_report(title)
+    edit_document(title, *args)
   end
 
   def check_for_new_maib_report_title(*args)

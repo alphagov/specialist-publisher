@@ -15,16 +15,37 @@ Feature: Publishing a RAIB Report
     When I publish a new RAIB report
     Then the RAIB report should be published
 
-  Scenario: immediately republish a published case
+  Scenario: immediately republish a published RAIB report
     When I publish a new RAIB report
-    And I edit the RAIB report and republish
+    When I am on the RAIB report edit page
+    And I edit the document and republish
     Then the amended document should be published
     And previous editions should be archived
+
+  Scenario: Sends an email alert on first publish
+    Given a draft RAIB report exists
+    When I publish the RAIB report
+    Then a publication notification should have been sent
+
+  Scenario: Cannot edit a published RAIB report without a change note
+    Given a published RAIB report exists
+    When I am on the RAIB report edit page
+    And I edit the document without a change note
+    Then I see an error requesting that I provide a change note
+
+  Scenario: Sends an email alert on a major update
+    Given a published RAIB report exists
+    Then a publication notification should have been sent
+    When I am on the RAIB report edit page
+    And I edit the document with a change note
+    And I publish the RAIB report
+    Then a publication notification should have been sent
 
   Scenario: Minor updates do not send emails
     When I publish a new RAIB report
     Then the RAIB report should be published
     And a publication notification should have been sent
-    When I edit the RAIB report and indicate the change is minor
+    When I am on the RAIB report edit page
+    And I edit the document and indicate the change is minor
     When I publish the RAIB report
     Then an email alert should not be sent

@@ -1,37 +1,37 @@
 When(/^I create a CMA case$/) do
   @document_title = "Example CMA Case"
   @slug = "cma-cases/example-cma-case"
-  @cma_fields = {
+  @document_fields = {
     title: @document_title,
     summary: "Nullam quis risus eget urna mollis ornare vel eu leo.",
     body: "## Header" + ("\n\nPraesent commodo cursus magna, vel scelerisque nisl consectetur et." * 10),
     opened_date: "2014-01-01"
   }
 
-  create_cma_case(@cma_fields)
+  create_cma_case(@document_fields)
 end
 
 When(/^I create a CMA case with invalid fields$/) do
-  @cma_fields = {
+  @document_fields = {
     body: "<script>alert('Oh noes!)</script>",
     opened_date: "Bad data"
   }
 
-  create_cma_case(@cma_fields)
+  create_cma_case(@document_fields)
 end
 
 When(/^I publish a new CMA case$/) do
   @document_title = "Example CMA Case"
   @slug = "cma-cases/example-cma-case"
 
-  @cma_fields = {
+  @document_fields = {
     title: @document_title,
     summary: "Nullam quis risus eget urna mollis ornare vel eu leo.",
     body: "## Header" + ("\n\nPraesent commodo cursus magna, vel scelerisque nisl consectetur et." * 10),
     opened_date: "2014-01-01"
   }
 
-  create_cma_case(@cma_fields, publish: true)
+  create_cma_case(@document_fields, publish: true)
 end
 
 When(/^I edit a CMA case$/) do
@@ -51,14 +51,14 @@ Given(/^a draft CMA case exists$/) do
   @document_title = "Example CMA Case"
   @slug = "cma-cases/example-cma-case"
 
-  @cma_fields = {
+  @document_fields = {
     title: @document_title,
     summary: "Nullam quis risus eget urna mollis ornare vel eu leo.",
     body: "## Header" + ("\n\nPraesent commodo cursus magna, vel scelerisque nisl consectetur et." * 10),
     opened_date: "2014-01-01"
   }
 
-  create_cma_case(@cma_fields, publish: false)
+  create_cma_case(@document_fields, publish: false)
 end
 
 When(/^I change the title of the CMA case$/) do
@@ -72,11 +72,11 @@ Then(/^the updated URL slug is registered$/) do
 end
 
 Then(/^the CMA case has been created$/) do
-  check_cma_case_exists_with(@cma_fields)
+  check_cma_case_exists_with(@document_fields)
 end
 
 Then(/^the CMA case should not have been created$/) do
-  check_document_does_not_exist_with(@cma_fields)
+  check_document_does_not_exist_with(@document_fields)
 end
 
 Then(/^the CMA cases should be in the publisher case index in the correct order$/) do
@@ -101,7 +101,7 @@ end
 Given(/^a published CMA case exists$/) do
   @document_title = "Original CMA case title"
 
-  @cma_fields = {
+  @document_fields = {
     title: @document_title,
     summary: "Nullam quis risus eget urna mollis ornare vel eu leo.",
     body: ("Praesent commodo cursus magna, vel scelerisque nisl consectetur et." * 10),
@@ -110,7 +110,7 @@ Given(/^a published CMA case exists$/) do
 
   @slug = "cma-cases/original-cma-case-title"
 
-  create_cma_case(@cma_fields, publish: true)
+  create_cma_case(@document_fields, publish: true)
 end
 
 When(/^I change the CMA case title and re-publish$/) do
@@ -127,28 +127,28 @@ Then(/^the URL slug remains unchanged$/) do
 end
 
 When(/^I create another case with the same slug$/) do
-  create_cma_case(@cma_fields)
+  create_cma_case(@document_fields)
 end
 
 When(/^I start creating a new CMA case$/) do
   @document_title = "Original CMA case title"
 
-  @cma_fields = {
+  @document_fields = {
     title: @document_title,
     summary: "Nullam quis risus eget urna mollis ornare vel eu leo.",
     body: "Body for preview",
     opened_date: "2014-01-01",
   }
 
-  create_cma_case(@cma_fields, save: false)
+  create_cma_case(@document_fields, save: false)
 end
 
 When(/^I start creating a new CMA case with embedded javascript$/) do
-  @cma_fields = {
+  @document_fields = {
     body: "<script>alert('Oh noes!)</script>",
   }
 
-  create_cma_case(@cma_fields, save: false)
+  create_cma_case(@document_fields, save: false)
 end
 
 When(/^I preview the case$/) do
@@ -163,17 +163,6 @@ Then(/^I should not see an error$/) do
   check_publication_has_not_raised_error
 end
 
-When(/^I edit the CMA case and indicate the change is minor$/) do
-  @updated_document_fields = {
-    body: "Updated section",
-  }
-
-  @cma_fields = @cma_fields.merge(@updated_document_fields)
-
+When(/^I am on the CMA case edit page$/) do
   go_to_edit_page_for_cma_case(@document_title)
-
-  fill_in "Body", with: @updated_document_fields[:body]
-  check "Minor update"
-
-  save_document
 end

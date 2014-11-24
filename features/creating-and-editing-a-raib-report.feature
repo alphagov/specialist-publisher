@@ -14,9 +14,3 @@ Feature: Publishing a RAIB Report
   Scenario: can create a new RAIB report and publish immediately
     When I publish a new RAIB report
     Then the RAIB report should be published
-
-  Scenario: immediately republish a published case
-    When I publish a new RAIB report
-    And I edit the RAIB report and republish
-    Then the amended document should be published
-    And previous editions should be archived

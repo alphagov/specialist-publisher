@@ -1,40 +1,40 @@
 When(/^I create a International Development Fund$/) do
   @document_title = "Example International Development Fund"
   @slug = "international-development-funding/example-international-development-fund"
-  @idf_fields = {
+  @document_fields = {
     title: @document_title,
     summary: "Nullam quis risus eget urna mollis ornare vel eu leo.",
     body: document_body_with_deeply_nested_headers,
   }
 
-  create_international_development_fund(@idf_fields)
+  create_international_development_fund(@document_fields)
 end
 
 Then(/^the International Development Fund has been created$/) do
-  check_international_development_fund_exists_with(@idf_fields)
+  check_international_development_fund_exists_with(@document_fields)
 end
 
 When(/^I create a International Development Fund with invalid fields$/) do
-  @idf_fields = {
+  @document_fields = {
     body: "<script>alert('Oh noes!)</script>",
   }
-  create_international_development_fund(@idf_fields)
+  create_international_development_fund(@document_fields)
 end
 
 Then(/^the International Development Fund should not have been created$/) do
-  check_document_does_not_exist_with(@idf_fields)
+  check_document_does_not_exist_with(@document_fields)
 end
 
 Given(/^a draft International Development Fund exists$/) do
   @document_title = "Example International Development Fund"
   @slug = "international-development-funding/example-international-development-fund"
-  @idf_fields = {
+  @document_fields = {
     title: @document_title,
     summary: "Nullam quis risus eget urna mollis ornare vel eu leo.",
     body: document_body_with_deeply_nested_headers,
   }
 
-  create_international_development_fund(@idf_fields)
+  create_international_development_fund(@document_fields)
 end
 
 When(/^I edit an International Development Fund and remove required fields$/) do
@@ -46,19 +46,19 @@ Then(/^the International Development Fund should not have been updated$/) do
 end
 
 Given(/^two International Development Funds exist$/) do
-  @idf_fields = {
+  @document_fields = {
     title: "International Development Fund 1",
     summary: "Nullam quis risus eget urna mollis ornare vel eu leo.",
     body: document_body_with_deeply_nested_headers,
   }
-  create_international_development_fund(@idf_fields)
+  create_international_development_fund(@document_fields)
 
-  @idf_fields = {
+  @document_fields = {
     title: "International Development Fund 2",
     summary: "Nullam quis risus eget urna mollis ornare vel eu leo.",
     body: document_body_with_deeply_nested_headers,
   }
-  create_international_development_fund(@idf_fields)
+  create_international_development_fund(@document_fields)
 end
 
 Then(/^the International Development Funds should be in the publisher IDF index in the correct order$/) do
@@ -86,20 +86,20 @@ When(/^I publish the International Development Fund$/) do
 end
 
 Then(/^the International Development Fund should be published$/) do
-  check_document_is_published(@slug, @idf_fields)
+  check_document_is_published(@slug, @document_fields)
   check_header_metadata_depth_is_limited(@slug, depth: 2)
 end
 
 When(/^I publish a new International Development Fund$/) do
   @document_title = "Example International Development Fund"
   @slug = "international-development-funding/example-international-development-fund"
-  @idf_fields = {
+  @document_fields = {
     title: @document_title,
     summary: "Nullam quis risus eget urna mollis ornare vel eu leo.",
     body: document_body_with_deeply_nested_headers,
   }
 
-  create_international_development_fund(@idf_fields, publish: true)
+  create_international_development_fund(@document_fields, publish: true)
 end
 
 When(/^I edit the International Development Fund and republish$/) do
@@ -110,34 +110,23 @@ end
 Given(/^a published International Development Fund exists$/) do
   @document_title = "Example International Development Fund"
   @slug = "international-development-funding/example-international-development-fund"
-  @idf_fields = {
+  @document_fields = {
     title: @document_title,
     summary: "Nullam quis risus eget urna mollis ornare vel eu leo.",
     body: document_body_with_deeply_nested_headers,
   }
 
-  create_international_development_fund(@idf_fields, publish: true)
+  create_international_development_fund(@document_fields, publish: true)
 end
 
 When(/^I withdraw a International Development Fund$/) do
-  withdraw_international_development_fund(@idf_fields.fetch(:title))
+  withdraw_international_development_fund(@document_fields.fetch(:title))
 end
 
 Then(/^the International Development Fund should be withdrawn$/) do
-  check_document_is_withdrawn(@slug, @idf_fields.fetch(:title))
+  check_document_is_withdrawn(@slug, @document_fields.fetch(:title))
 end
 
-When(/^I edit the International Development Fund and indicate the change is minor$/) do
-  @updated_document_fields = {
-    body: "Updated body",
-  }
-
-  @idf_fields = @idf_fields.merge(@updated_document_fields)
-
-  go_to_edit_page_for_international_development_fund(@idf_fields[:title])
-
-  fill_in "Body", with: @updated_document_fields[:body]
-  check "Minor update"
-
-  save_document
+When(/^I am on the International Development Fund edit page$/) do
+  go_to_edit_page_for_international_development_fund(@document_fields.fetch(:title))
 end
