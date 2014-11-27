@@ -51,8 +51,7 @@ RSpec.describe AbstractDocumentPublicationAlertFormatter do
   end
 
   it "has a subject containing the document title" do
-    expect(formatter.subject).to include("Specialist Documents")
-    expect(formatter.subject).to include("Some title")
+    expect(formatter.subject).to eq("Some title")
   end
 
   it "has a body containing the document title, url, and summary" do

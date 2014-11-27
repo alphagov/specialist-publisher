@@ -18,7 +18,7 @@ class AbstractDocumentPublicationAlertFormatter
   end
 
   def subject
-    "#{name}: #{document.title}"
+    document.title
   end
 
   def body
