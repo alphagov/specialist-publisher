@@ -34,6 +34,7 @@ module MedicalSafetyAlertImport
         alert_type
         medical_specialism
         issued_date
+        summary
       )
     end
   end
