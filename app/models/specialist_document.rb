@@ -17,6 +17,7 @@ class SpecialistDocument
       :extra_fields,
       # TODO: These fields expose the edition a little too directly, rethink?
       :change_note,
+      :change_history,
       :minor_update,
     ]
   end
