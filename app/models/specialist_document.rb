@@ -186,7 +186,7 @@ protected
 
   def previous_edition_attributes
     latest_edition.attributes
-      .except("_id", "updated_at")
+      .except("_id")
       .symbolize_keys
   end
 
