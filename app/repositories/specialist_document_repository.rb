@@ -94,8 +94,8 @@ private
 
   def only_document_ids_for(collection)
     collection.all
+      .order_by(updated_at: "desc")
       .only(:document_id, :updated_at)
-      .sort { |a, b| b.updated_at <=> a.updated_at }
       .map(&:document_id)
       .uniq
   end
