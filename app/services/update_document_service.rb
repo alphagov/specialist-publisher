@@ -8,12 +8,6 @@ class UpdateDocumentService
 
   def call
     document.update(attributes)
-    if !document.minor_update
-      document.change_history << {
-        public_timestamp: Time.now,
-        note: document.change_note
-      }
-    end
 
     if document.valid?
       persist
