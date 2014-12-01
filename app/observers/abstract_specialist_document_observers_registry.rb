@@ -77,12 +77,14 @@ private
 
   def publication_logger
     ->(document) {
-      PublicationLog.create!(
-        title: document.title,
-        slug: document.slug,
-        version_number: document.version_number,
-        change_note: document.change_note,
-      )
+      unless document.minor_update?
+        PublicationLog.create!(
+          title: document.title,
+          slug: document.slug,
+          version_number: document.version_number,
+          change_note: document.change_note,
+        )
+      end
     }
   end
 
