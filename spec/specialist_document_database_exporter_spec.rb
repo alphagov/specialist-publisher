@@ -9,9 +9,12 @@ describe SpecialistDocumentDatabaseExporter do
       document_renderer,
       finder_schema,
       document,
+      publication_logs,
     )
   }
 
+  let(:document_slug) { double(:document_slug) }
+  let(:publication_logs) { double(:publication_logs, change_notes_for: []) }
   let(:export_recipent) { double(:export_recipent, create_or_update_by_slug!: nil) }
   let(:document_renderer) { double(:document_renderer, call: rendered_document) }
   let(:finder_schema) {
@@ -19,10 +22,12 @@ describe SpecialistDocumentDatabaseExporter do
       allow(f).to receive(:options_for).with(:case_type).and_return([["CA98 and civil cartels", "ca98-and-civil-cartels"]])
     end
   }
+
   let(:last_published_time) { double(:last_published_time) }
   let(:newly_published_time) { double(:newly_published_time) }
   let(:document) {
     double(:document,
+      slug: document_slug,
       minor_update?: false,
       last_published_at: last_published_time,
       updated_at: newly_published_time,
@@ -98,6 +103,34 @@ describe SpecialistDocumentDatabaseExporter do
           case_type: "ca98-and-civil-cartels",
           case_type_label: "CA98 and civil cartels",
           headers: header_metadata,
+          change_history: []
+        }
+      )
+    )
+  end
+
+  it "exports change notes if there are any in the details hash" do
+    published_at = Time.now
+    publication_log_entry = double(:publication_log,
+      change_note: "Change is good!",
+      published_at: published_at
+    )
+    allow(publication_logs).to receive(:change_notes_for).with(document_slug)
+                                                          .and_return([publication_log_entry])
+
+    exporter.call
+    expect(export_recipent).to have_received(:create_or_update_by_slug!).with(
+      hash_including(
+        details: {
+          case_type: "ca98-and-civil-cartels",
+          case_type_label: "CA98 and civil cartels",
+          headers: header_metadata,
+          change_history: [
+            {
+              note: "Change is good!",
+              published_timestamp: published_at.utc,
+            }
+          ]
         }
       )
     )

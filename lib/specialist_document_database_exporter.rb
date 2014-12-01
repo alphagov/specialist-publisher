@@ -1,10 +1,11 @@
 class SpecialistDocumentDatabaseExporter
 
-  def initialize(export_recipent, document_renderer, finder_schema, document)
+  def initialize(export_recipent, document_renderer, finder_schema, document, publication_logs)
     @export_recipent = export_recipent
     @document_renderer = document_renderer
     @finder_schema = finder_schema
     @document = document
+    @publication_logs = publication_logs
   end
 
   def call
@@ -13,7 +14,13 @@ class SpecialistDocumentDatabaseExporter
 
 private
 
-  attr_reader :export_recipent, :document_renderer, :finder_schema, :document
+  attr_reader(
+    :export_recipent,
+    :document_renderer,
+    :finder_schema,
+    :document,
+    :publication_logs,
+  )
 
   def exportable_attributes
     core_rendered_document_attributes
@@ -24,6 +31,9 @@ private
     {}
       .merge(schema_defined_facet_labels)
       .merge(other_document_attributes)
+      .merge({
+        change_history: serialised_change_notes,
+      })
   end
 
   def schema_defined_facet_labels
@@ -76,5 +86,14 @@ private
     [
       :id,
     ]
+  end
+
+  def serialised_change_notes
+    publication_logs.change_notes_for(document.slug).map { |publication|
+      {
+        note: publication.change_note,
+        published_timestamp: publication.published_at.utc,
+      }
+    }
   end
 end
