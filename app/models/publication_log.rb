@@ -1,5 +1,3 @@
-require "state_machine"
-
 class PublicationLog
   include Mongoid::Document
   include Mongoid::Timestamps
@@ -7,7 +5,6 @@ class PublicationLog
   field :slug, type: String
   field :title, type: String
   field :change_note, type: String
-  field :document_state, type: String
   field :version_number, type: Integer
 
   validates :slug, presence: true
