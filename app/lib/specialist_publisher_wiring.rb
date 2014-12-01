@@ -458,6 +458,7 @@ SpecialistPublisherWiring = DependencyContainer.new do
         get(:specialist_document_renderer),
         get(:aaib_report_finder_schema),
         doc,
+        PublicationLog,
       ).call
     }
   }
@@ -469,6 +470,7 @@ SpecialistPublisherWiring = DependencyContainer.new do
         get(:specialist_document_renderer),
         get(:cma_case_finder_schema),
         doc,
+        PublicationLog,
       ).call
     }
   }
@@ -480,6 +482,7 @@ SpecialistPublisherWiring = DependencyContainer.new do
         get(:specialist_document_renderer),
         get(:maib_report_finder_schema),
         doc,
+        PublicationLog,
       ).call
     }
   }
@@ -491,6 +494,7 @@ SpecialistPublisherWiring = DependencyContainer.new do
         get(:specialist_document_renderer),
         get(:medical_safety_alert_finder_schema),
         doc,
+        PublicationLog,
       ).call
     }
   }
@@ -502,6 +506,7 @@ SpecialistPublisherWiring = DependencyContainer.new do
         get(:specialist_document_renderer),
         get(:drug_safety_update_finder_schema),
         doc,
+        PublicationLog,
       ).call
     }
   }
@@ -513,6 +518,7 @@ SpecialistPublisherWiring = DependencyContainer.new do
         get(:international_development_fund_renderer),
         get(:international_development_fund_finder_schema),
         doc,
+        PublicationLog,
       ).call
     }
   }
@@ -524,6 +530,7 @@ SpecialistPublisherWiring = DependencyContainer.new do
         get(:specialist_document_renderer),
         get(:raib_report_finder_schema),
         doc,
+        PublicationLog,
       ).call
     }
   }
