@@ -17,6 +17,7 @@ class PublishDocumentService
   attr_reader :document_repository, :listeners, :document_id
 
   def publish
+    append_change_history unless document.minor_update
     document.publish!
 
     listeners.each { |o| o.call(document) }
@@ -34,5 +35,12 @@ class PublishDocumentService
 
   def document
     @document ||= document_repository.fetch(document_id)
+  end
+
+  def append_change_history
+    document.change_history << {
+      public_timestamp: Time.now,
+      note: document.change_note
+    }
   end
 end
