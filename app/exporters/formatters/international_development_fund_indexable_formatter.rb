@@ -1,6 +1,6 @@
-require "abstract_indexable_formatter"
+require "formatters/abstract_specialist_document_indexable_formatter"
 
-class InternationalDevelopmentFundIndexableFormatter < AbstractIndexableFormatter
+class InternationalDevelopmentFundIndexableFormatter < AbstractSpecialistDocumentIndexableFormatter
   def type
     "international_development_fund"
   end

@@ -1,6 +1,6 @@
-require "abstract_indexable_formatter"
+require "formatters/abstract_specialist_document_indexable_formatter"
 
-class MaibReportIndexableFormatter < AbstractIndexableFormatter
+class MaibReportIndexableFormatter < AbstractSpecialistDocumentIndexableFormatter
   def type
     "maib_report"
   end

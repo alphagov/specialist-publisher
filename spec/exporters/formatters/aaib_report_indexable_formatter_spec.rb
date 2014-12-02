@@ -1,33 +1,33 @@
 require "spec_helper"
 require "spec/lib/abstract_indexable_formatter_spec"
 require "spec/exporters/formatters/abstract_specialist_document_indexable_formatter_spec"
-require "formatters/cma_case_indexable_formatter"
+require "formatters/aaib_report_indexable_formatter"
 
-RSpec.describe CmaCaseIndexableFormatter do
+RSpec.describe AaibReportIndexableFormatter do
   let(:document) {
     double(
-      :cma_case,
+      :aaib_report,
       body: double,
-      case_state: double,
-      case_type: double,
-      market_sector: double,
-      outcome_type: double,
       slug: double,
       summary: double,
       title: double,
-      opened_date: double,
-      closed_date: double,
       updated_at: double,
       minor_update?: false,
+      aircraft_category: double,
+      report_type: double,
+      date_of_occurrence: double,
+      location: double,
+      aircraft_type: double,
+      registration: double
     )
   }
 
-  subject(:formatter) { CmaCaseIndexableFormatter.new(document) }
+  subject(:formatter) { AaibReportIndexableFormatter.new(document) }
 
   it_should_behave_like "an indexable formatter"
   it_should_behave_like "a specialist document indexable formatter"
 
-  it "should have a type of cma_case" do
-    expect(formatter.type).to eq("cma_case")
+  it "should have a type of aaib_report" do
+    expect(formatter.type).to eq("aaib_report")
   end
 end

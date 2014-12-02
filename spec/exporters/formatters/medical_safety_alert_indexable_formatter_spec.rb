@@ -1,33 +1,30 @@
 require "spec_helper"
 require "spec/lib/abstract_indexable_formatter_spec"
 require "spec/exporters/formatters/abstract_specialist_document_indexable_formatter_spec"
-require "formatters/cma_case_indexable_formatter"
+require "formatters/medical_safety_alert_indexable_formatter"
 
-RSpec.describe CmaCaseIndexableFormatter do
+RSpec.describe MedicalSafetyAlertIndexableFormatter do
   let(:document) {
     double(
-      :cma_case,
+      :medical_safety_alert,
       body: double,
-      case_state: double,
-      case_type: double,
-      market_sector: double,
-      outcome_type: double,
       slug: double,
       summary: double,
       title: double,
-      opened_date: double,
-      closed_date: double,
       updated_at: double,
       minor_update?: false,
+      alert_type: double,
+      medical_specialism: double,
+      issued_date: double
     )
   }
 
-  subject(:formatter) { CmaCaseIndexableFormatter.new(document) }
+  subject(:formatter) { MedicalSafetyAlertIndexableFormatter.new(document) }
 
   it_should_behave_like "an indexable formatter"
   it_should_behave_like "a specialist document indexable formatter"
 
-  it "should have a type of cma_case" do
-    expect(formatter.type).to eq("cma_case")
+  it "should have a type of medical_safety_alert" do
+    expect(formatter.type).to eq("medical_safety_alert")
   end
 end

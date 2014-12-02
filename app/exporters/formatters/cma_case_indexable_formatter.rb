@@ -1,6 +1,6 @@
-require "abstract_indexable_formatter"
+require "formatters/abstract_specialist_document_indexable_formatter"
 
-class CmaCaseIndexableFormatter < AbstractIndexableFormatter
+class CmaCaseIndexableFormatter < AbstractSpecialistDocumentIndexableFormatter
   def type
     "cma_case"
   end
