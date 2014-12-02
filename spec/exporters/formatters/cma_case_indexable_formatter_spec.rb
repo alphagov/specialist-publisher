@@ -1,9 +1,10 @@
 require "spec_helper"
 require "spec/lib/abstract_indexable_formatter_spec"
-require "cma_case_indexable_formatter"
+require "spec/exporters/formatters/abstract_specialist_document_indexable_formatter_spec"
+require "formatters/cma_case_indexable_formatter"
 
 RSpec.describe CmaCaseIndexableFormatter do
-  let(:cma_case) {
+  let(:document) {
     double(
       :cma_case,
       body: double,
@@ -17,12 +18,14 @@ RSpec.describe CmaCaseIndexableFormatter do
       opened_date: double,
       closed_date: double,
       updated_at: double,
+      minor_update?: false,
     )
   }
 
-  subject(:formatter) { CmaCaseIndexableFormatter.new(cma_case) }
+  subject(:formatter) { CmaCaseIndexableFormatter.new(document) }
 
   it_should_behave_like "an indexable formatter"
+  it_should_behave_like "a specialist document indexable formatter"
 
   it "should have a type of cma_case" do
     expect(formatter.type).to eq("cma_case")

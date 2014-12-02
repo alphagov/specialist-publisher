@@ -1,6 +1,6 @@
-require "abstract_indexable_formatter"
+require "formatters/abstract_specialist_document_indexable_formatter"
 
-class MedicalSafetyAlertIndexableFormatter < AbstractIndexableFormatter
+class MedicalSafetyAlertIndexableFormatter < AbstractSpecialistDocumentIndexableFormatter
   def type
     "medical_safety_alert"
   end

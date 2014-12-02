@@ -19,7 +19,15 @@ describe SpecialistDocumentDatabaseExporter do
       allow(f).to receive(:options_for).with(:case_type).and_return([["CA98 and civil cartels", "ca98-and-civil-cartels"]])
     end
   }
-  let(:document) { double(:document, updated_at: Time.current) }
+  let(:last_published_time) { double(:last_published_time) }
+  let(:newly_published_time) { double(:newly_published_time) }
+  let(:document) {
+    double(:document,
+      minor_update?: false,
+      last_published_at: last_published_time,
+      updated_at: newly_published_time,
+    )
+  }
 
   let(:rendered_document) {
     double(
@@ -93,5 +101,25 @@ describe SpecialistDocumentDatabaseExporter do
         }
       )
     )
+  end
+
+  context "published dates" do
+    it "updates the published date if it is a major update" do
+      exporter.call
+
+      expect(export_recipent).to have_received(:create_or_update_by_slug!).with(
+        hash_including(published_at: newly_published_time)
+      )
+    end
+
+    it "does not update the published date if it is a minor update" do
+      allow(document).to receive(:minor_update?).and_return(true)
+
+      exporter.call
+
+      expect(export_recipent).to have_received(:create_or_update_by_slug!).with(
+        hash_including(published_at: last_published_time)
+      )
+    end
   end
 end

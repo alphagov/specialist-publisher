@@ -1,6 +1,6 @@
-require "abstract_indexable_formatter"
+require "formatters/abstract_specialist_document_indexable_formatter"
 
-class DrugSafetyUpdateIndexableFormatter < AbstractIndexableFormatter
+class DrugSafetyUpdateIndexableFormatter < AbstractSpecialistDocumentIndexableFormatter
   def type
     "drug_safety_update"
   end

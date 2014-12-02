@@ -1,6 +1,6 @@
-require "abstract_indexable_formatter"
+require "formatters/abstract_specialist_document_indexable_formatter"
 
-class RaibReportIndexableFormatter < AbstractIndexableFormatter
+class RaibReportIndexableFormatter < AbstractSpecialistDocumentIndexableFormatter
   def type
     "raib_report"
   end
