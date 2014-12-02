@@ -53,7 +53,7 @@ private
 
   def document_metadata
     {
-      published_at: document.updated_at,
+      published_at: document.minor_update? ? document.last_published_at : document.updated_at,
     }
   end
 

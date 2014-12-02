@@ -132,6 +132,10 @@ class SpecialistDocument
     end
   end
 
+  def last_published_at
+    published_edition.updated_at
+  end
+
 protected
 
   attr_reader :slug_generator, :edition_factory
