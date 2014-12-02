@@ -38,3 +38,7 @@ When(/^I edit the document and republish$/) do
   @amended_document_attributes = {summary: "New summary", title: "My title"}
   edit_document(@document_fields.fetch(:title), @amended_document_attributes, minor_update: true, publish: true)
 end
+
+Then(/^the publish should(?: still)* have been logged (\d+) times?$/) do |expected_count_of_logs|
+  check_count_of_logs(expected_count_of_logs)
+end

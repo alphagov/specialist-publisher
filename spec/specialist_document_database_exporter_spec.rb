@@ -121,17 +121,14 @@ describe SpecialistDocumentDatabaseExporter do
     exporter.call
     expect(export_recipent).to have_received(:create_or_update_by_slug!).with(
       hash_including(
-        details: {
-          case_type: "ca98-and-civil-cartels",
-          case_type_label: "CA98 and civil cartels",
-          headers: header_metadata,
+        details: hash_including(
           change_history: [
             {
               note: "Change is good!",
               published_timestamp: published_at.utc,
             }
           ]
-        }
+        )
       )
     )
   end

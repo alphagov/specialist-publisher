@@ -89,11 +89,13 @@ private
   end
 
   def serialised_change_notes
-    publication_logs.change_notes_for(document.slug).map { |publication|
-      {
-        note: publication.change_note,
-        published_timestamp: publication.published_at.utc,
+    publication_logs
+      .change_notes_for(document.slug)
+      .map { |publication|
+        {
+          note: publication.change_note,
+          published_timestamp: publication.published_at.utc,
+        }
       }
-    }
   end
 end
