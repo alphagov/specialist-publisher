@@ -245,4 +245,9 @@ module DocumentHelpers
   def check_for_slug_clash_warning
     expect(page).to have_content("Warning: This slug is already being used")
   end
+
+  def check_count_of_logs(expected_count_of_logs)
+    count_of_logs = PublicationLog.where(slug: @slug).count
+    expect(count_of_logs).to eq(expected_count_of_logs.to_i)
+  end
 end

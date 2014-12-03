@@ -11,6 +11,7 @@ class AbstractSpecialistDocumentObserversRegistry
 
   def publication
     [
+      publication_logger,
       content_api_exporter,
       panopticon_exporter,
       rummager_exporter,
@@ -72,6 +73,19 @@ private
 
   def publication_alert_formatter
     raise NotImplementedError
+  end
+
+  def publication_logger
+    ->(document) {
+      unless document.minor_update?
+        PublicationLog.create!(
+          title: document.title,
+          slug: document.slug,
+          version_number: document.version_number,
+          change_note: document.change_note,
+        )
+      end
+    }
   end
 
   def url_maker
