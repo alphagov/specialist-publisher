@@ -17,7 +17,7 @@ repository.all.lazy.select(&:draft?).each do |document|
   print "Publishing draft document #{document.slug}..."
   $stdout.flush
   begin
-    service.republish(document.id).call
+    service.republish(document.id, true).call
     puts "SUCCESS"
   rescue GdsApi::HTTPErrorResponse => e
     puts "API_ERROR"
