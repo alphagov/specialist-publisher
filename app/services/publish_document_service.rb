@@ -18,7 +18,7 @@ class PublishDocumentService
   attr_reader :document_repository, :listeners, :document_id, :bulk_publish
 
   def publish
-    document.update(bulk_published: bulk_publish)
+    document.update(bulk_published: bulk_publish) unless document.minor_update
     document.publish!
 
     listeners.each { |o| o.call(document) }
