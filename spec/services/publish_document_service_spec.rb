@@ -3,7 +3,8 @@ require "publish_document_service"
 RSpec.describe PublishDocumentService do
   let(:document_id) { double(:document_id) }
   let(:repository) { double(:repository) }
-  let(:document) { double(:document, extra_fields: {bulk_published: false}) }
+  let(:document) { double(:document, minor_update: minor_update, extra_fields: {bulk_published: false}) }
+  let(:minor_update) { nil }
   let(:listeners) { [] }
 
   subject {
@@ -36,6 +37,15 @@ RSpec.describe PublishDocumentService do
     it "clears bulk published" do
       subject.call
       expect(document).to have_received(:update).with({bulk_published: false})
+    end
+
+    context "on a minor update" do
+      let(:minor_update) { true }
+
+      it "does not clear bulk published" do
+        subject.call
+        expect(document).not_to have_received(:update)
+      end
     end
   end
 
