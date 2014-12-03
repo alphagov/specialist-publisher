@@ -72,11 +72,16 @@ class AbstractDocumentServiceRegistry
     )
   end
 
-  def republish(document_id)
+  # `bulk_publish` attribute is optional in both places (here and in
+  # PublishDocumentService) because there are multiple entrypoints to both this
+  # republish method and the PublishDocumentService, and I don't want to change
+  # the method signature.
+  def republish(document_id, bulk_publish = false)
     PublishDocumentService.new(
       document_repository,
       observers.republication,
       document_id,
+      bulk_publish,
     )
   end
 

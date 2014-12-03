@@ -1,8 +1,9 @@
 class PublishDocumentService
-  def initialize(document_repository, listeners, document_id)
+  def initialize(document_repository, listeners, document_id, bulk_publish = false)
     @document_repository = document_repository
     @listeners = listeners
     @document_id = document_id
+    @bulk_publish = bulk_publish
   end
 
   def call
@@ -14,9 +15,10 @@ class PublishDocumentService
 
   private
 
-  attr_reader :document_repository, :listeners, :document_id
+  attr_reader :document_repository, :listeners, :document_id, :bulk_publish
 
   def publish
+    document.update(bulk_published: bulk_publish)
     document.publish!
 
     listeners.each { |o| o.call(document) }

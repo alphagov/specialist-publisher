@@ -26,9 +26,10 @@ class DocumentMetadataDecorator < SimpleDelegator
 
 private
   def self.set_extra_field_names(field_names)
-    @extra_field_names = field_names
+    all_fields = field_names + common_extra_fields
+    @extra_field_names = all_fields
 
-    field_names.each do |field_name|
+    all_fields.each do |field_name|
       define_method(field_name) do
         document.extra_fields.fetch(field_name, nil)
       end
@@ -37,6 +38,10 @@ private
 
   def self.extra_field_names
     @extra_field_names || []
+  end
+
+  def self.common_extra_fields
+    [:bulk_published]
   end
 
   def extra_field_names
