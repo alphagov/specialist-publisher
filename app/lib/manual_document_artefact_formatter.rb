@@ -11,7 +11,7 @@ class ManualDocumentArtefactFormatter < AbstractArtefactFormatter
   end
 
   def kind
-    "manual-section"
+    "manual_section"
   end
 
   def rendering_app

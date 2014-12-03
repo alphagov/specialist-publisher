@@ -66,7 +66,7 @@ describe ManualSectionPublishingAPIExporter do
       "/guidance/my-first-manual/first-section",
       hash_including(
         base_path: "/guidance/my-first-manual/first-section",
-        format: "manual-section",
+        format: "manual_section",
         title: "Document title",
         description: "This is the first section",
         public_updated_at: Date.new(2013, 12, 31),
