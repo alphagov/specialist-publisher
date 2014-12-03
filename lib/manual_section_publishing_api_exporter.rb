@@ -23,7 +23,7 @@ private
   def exportable_attributes
     {
       base_path: base_path,
-      format: "manual-section",
+      format: "manual_section",
       title: rendered_document_attributes.fetch(:title),
       description: rendered_document_attributes.fetch(:summary),
       public_updated_at: rendered_document_attributes.fetch(:updated_at),
