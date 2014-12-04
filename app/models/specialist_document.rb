@@ -157,10 +157,6 @@ protected
     edition_factory.call(new_edition_defaults)
   end
 
-  def latest_edition
-    @editions.last
-  end
-
   def new_draft(params = {})
     new_edition_attributes = previous_edition_attributes
       .merge(new_edition_defaults)
