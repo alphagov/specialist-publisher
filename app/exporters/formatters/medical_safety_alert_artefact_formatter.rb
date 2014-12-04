@@ -1,4 +1,4 @@
-require "abstract_artefact_formatter"
+require "formatters/abstract_artefact_formatter"
 
 class MedicalSafetyAlertArtefactFormatter < AbstractArtefactFormatter
 

@@ -1,4 +1,4 @@
-require "abstract_indexable_formatter"
+require "formatters/abstract_indexable_formatter"
 
 class AbstractSpecialistDocumentIndexableFormatter < AbstractIndexableFormatter
 

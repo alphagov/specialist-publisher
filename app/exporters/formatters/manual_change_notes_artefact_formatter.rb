@@ -1,4 +1,4 @@
-require "manual_artefact_formatter"
+require "formatters/manual_artefact_formatter"
 
 class ManualChangeNotesArtefactFormatter < ManualArtefactFormatter
   def resource_id

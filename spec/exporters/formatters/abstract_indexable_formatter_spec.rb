@@ -1,4 +1,4 @@
-require "abstract_indexable_formatter"
+require "formatters/abstract_indexable_formatter"
 
 RSpec.shared_examples_for "an indexable formatter" do
   it "should respond to #id" do
