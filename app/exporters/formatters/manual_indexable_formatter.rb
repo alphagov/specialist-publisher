@@ -1,4 +1,4 @@
-require "abstract_indexable_formatter"
+require "formatters/abstract_indexable_formatter"
 
 class ManualIndexableFormatter < AbstractIndexableFormatter
   def type
