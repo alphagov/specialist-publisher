@@ -1,13 +1,13 @@
-require "abstract_artefact_formatter"
+require "formatters/abstract_artefact_formatter"
 
-class RaibReportArtefactFormatter < AbstractArtefactFormatter
+class AaibReportArtefactFormatter < AbstractArtefactFormatter
 
   def state
     state_mapping.fetch(entity.publication_state)
   end
 
   def kind
-    "raib_report"
+    "aaib_report"
   end
 
   def rendering_app
@@ -15,6 +15,6 @@ class RaibReportArtefactFormatter < AbstractArtefactFormatter
   end
 
   def organisation_slugs
-    ["rail-accidents-investigation-branch"]
+    ["air-accidents-investigation-branch"]
   end
 end
