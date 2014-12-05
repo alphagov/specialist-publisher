@@ -1,8 +1,21 @@
 <div class="actions">
   <% if current_user_can_publish?(document.document_type) %>
-    <%= form_tag([:publish, document], method: :post) do %>
-      <button name='submit' class="btn btn-danger" <% unless slug_unique %>disabled="disabled"<% end %>>Publish</button>
-    <% end -%>
+    <div class="panel panel-danger">
+      <% if !document.minor_update %>
+        <div class="panel-heading">
+          You are about to publish a <strong>major edit</strong> with a public change note.<br>
+        </div>
+        <div class="panel-body">
+          <p>This will email subscribers to <%= current_finder[:title] %>.</p>
+      <% else %>
+        <div class="panel-body">
+          <p>You are about to publish a <strong>minor edit</strong></p>
+      <% end %>
+        <%= form_tag([:publish, document], method: :post) do %>
+          <button name='submit' class="btn btn-danger" <% unless slug_unique %>disabled="disabled"<% end %>>Publish</button>
+        <% end -%>
+      </div>
+    </div>
   <% end %>
 
   <% if current_user_can_withdraw?(document.document_type) %>
@@ -11,5 +24,5 @@
     <% end -%>
   <% end %>
 
-  <%= link_to "Edit", [:edit, document], class: "action-link" %>
+  <%= link_to "Edit", [:edit, document], class: "btn btn-primary" %>
 </div>

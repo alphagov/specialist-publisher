@@ -71,10 +71,15 @@ form {
   border-top: 1px solid #eeeeee;
   padding-top:$gutter;
   margin-top: $gutter;
+  max-width: 600px;
 
   form {
     display: inline-block;
     margin-right:$gutter-one-third;
+  }
+
+  .panel {
+    margin-bottom: 32px;
   }
 }
 
