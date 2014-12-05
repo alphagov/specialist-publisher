@@ -10,6 +10,10 @@ class ManualsController < ApplicationController
     slug_unique = metadata.fetch(:slug_unique)
     clashing_sections = metadata.fetch(:clashing_sections)
 
+    unless slug_unique
+      flash.now[:error] = "Warning: This manual's URL is already used on GOV.UK. You can't publish it until you change the title."
+    end
+
     render(:show, locals: {
       manual: manual,
       slug_unique: slug_unique,

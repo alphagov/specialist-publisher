@@ -243,7 +243,7 @@ module DocumentHelpers
   end
 
   def check_for_slug_clash_warning
-    expect(page).to have_content("Warning: This slug is already being used")
+    expect(page).to have_content("You can't publish it until you change the title.")
   end
 
   def check_count_of_logs(expected_count_of_logs)

@@ -14,11 +14,6 @@
 </h1>
 <div class="row">
   <div class="col-md-8">
-    <% unless slug_unique %>
-      <p>Warning: This slug is already being used.</p>
-    <% end %>
-  </div>
-  <div class="col-md-8">
     <h2>Summary</h2>
     <p><%= document.summary %></p>
   </div>
@@ -74,4 +69,4 @@
     <% end %>
   </div>
 </div>
-<%= render partial: 'shared/document_actions', locals: {document: document} %>
+<%= render partial: 'shared/document_actions', locals: { document: document, slug_unique: slug_unique } %>

@@ -1,7 +1,7 @@
 <div class="actions">
   <% if current_user_can_publish?(document.document_type) %>
     <%= form_tag([:publish, document], method: :post) do %>
-      <button name='submit' class="btn btn-danger">Publish</button>
+      <button name='submit' class="btn btn-danger" <% unless slug_unique %>disabled="disabled"<% end %>>Publish</button>
     <% end -%>
   <% end %>
 

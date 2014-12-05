@@ -14,9 +14,6 @@
 
 <div class="row">
   <div class="col-md-8">
-    <% unless slug_unique %>
-      <p>Warning: This slug is already being used.</p>
-    <% end %>
 
     <% unless clashing_sections.empty? %>
       <p>Warning: There are duplicate section slugs in this manual.</p>
@@ -88,7 +85,7 @@
     <div class="actions">
       <% if manual.documents.any? && current_user_can_publish?("manual") %>
         <%= form_tag(publish_manual_path(manual), method: :post) do %>
-          <button name='submit' class="btn btn-danger">Publish</button>
+          <button name='submit' class="btn btn-danger" <% unless slug_unique %>disabled="disabled"<% end %>>Publish</button>
         <% end -%>
       <% end %>
       <%= link_to 'Edit manual', edit_manual_path(manual), class: 'action-link' %>
