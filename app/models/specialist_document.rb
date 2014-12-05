@@ -132,8 +132,8 @@ class SpecialistDocument
     end
   end
 
-  def last_published_at
-    published_edition.updated_at
+  def previous_major_updated_at
+    last_major_edition.updated_at
   end
 
 protected
@@ -155,10 +155,6 @@ protected
 
   def create_first_edition
     edition_factory.call(new_edition_defaults)
-  end
-
-  def latest_edition
-    @editions.last
   end
 
   def new_draft(params = {})
@@ -183,6 +179,14 @@ protected
     if most_recent_non_draft && most_recent_non_draft.published?
       most_recent_non_draft
     end
+  end
+
+  def last_major_edition
+    major_editions.last
+  end
+
+  def major_editions
+    editions.reject { |e| e.minor_update? }
   end
 
   def most_recent_non_draft

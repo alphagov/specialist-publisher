@@ -23,13 +23,13 @@ describe SpecialistDocumentDatabaseExporter do
     end
   }
 
-  let(:last_published_time) { double(:last_published_time) }
+  let(:previous_major_updated_at) { double(:previous_major_updated_at) }
   let(:newly_published_time) { double(:newly_published_time) }
   let(:document) {
     double(:document,
       slug: document_slug,
       minor_update?: false,
-      last_published_at: last_published_time,
+      previous_major_updated_at: previous_major_updated_at,
       updated_at: newly_published_time,
     )
   }
@@ -131,25 +131,5 @@ describe SpecialistDocumentDatabaseExporter do
         )
       )
     )
-  end
-
-  context "published dates" do
-    it "updates the published date if it is a major update" do
-      exporter.call
-
-      expect(export_recipent).to have_received(:create_or_update_by_slug!).with(
-        hash_including(published_at: newly_published_time)
-      )
-    end
-
-    it "does not update the published date if it is a minor update" do
-      allow(document).to receive(:minor_update?).and_return(true)
-
-      exporter.call
-
-      expect(export_recipent).to have_received(:create_or_update_by_slug!).with(
-        hash_including(published_at: last_published_time)
-      )
-    end
   end
 end
