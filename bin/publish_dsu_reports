@@ -13,7 +13,7 @@ service = SpecialistPublisher.document_services("drug_safety_update")
 $stdout.sync = true
 
 puts "Loading all draft drug safety updates. This could take some time..."
-repository.all.lazy.select(&:draft?).each do |document|
+repository.all.sort { |a, b| a.extra_fields[:first_published_at] <=> b.extra_fields[:first_published_at] }.lazy.select(&:draft?).each do |document|
   print "Publishing draft document #{document.slug}..."
   $stdout.flush
   begin
