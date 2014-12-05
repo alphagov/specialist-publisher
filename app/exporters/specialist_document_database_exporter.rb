@@ -94,7 +94,7 @@ private
       .map { |publication|
         {
           note: publication.change_note,
-          published_timestamp: publication.published_at.utc,
+          public_timestamp: publication.published_at.utc,
         }
       }
   end

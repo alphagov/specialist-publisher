@@ -125,7 +125,7 @@ describe SpecialistDocumentDatabaseExporter do
           change_history: [
             {
               note: "Change is good!",
-              published_timestamp: published_at.utc,
+              public_timestamp: published_at.utc,
             }
           ]
         )
