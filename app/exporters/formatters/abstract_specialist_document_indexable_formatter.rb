@@ -4,6 +4,6 @@ class AbstractSpecialistDocumentIndexableFormatter < AbstractIndexableFormatter
 
 private
   def last_update
-    entity.previous_major_updated_at
+    entity.updated_at
   end
 end

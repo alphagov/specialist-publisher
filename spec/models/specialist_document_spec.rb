@@ -625,24 +625,4 @@ describe SpecialistDocument do
       end
     end
   end
-
-  describe "previous_major_updated_at" do
-    let(:major_edition_updated_at)  { double(:major_edition_updated_at) }
-    let(:minor_edition_updated_at)  { double(:minor_edition_updated_at) }
-    let(:new_edition_updated_at)    { double(:new_edition_updated_at) }
-    let(:major_edition) { double(:major_edition, minor_update?: false, updated_at: major_edition_updated_at) }
-    let(:minor_edition) { double(:minor_edition, minor_update?: true, updated_at: minor_edition_updated_at) }
-    let(:new_edition)   { double(:new_edition, minor_update?: true, updated_at: new_edition_updated_at) }
-
-    let(:editions) { [major_edition, minor_edition, new_edition] }
-
-    it "returns the previous edition's updated_at if the latest edition is a minor update" do
-      expect(doc.previous_major_updated_at).to eq(major_edition_updated_at)
-    end
-
-    it "returns the new edition's updated_at if the latest edition is a major update" do
-      allow(new_edition).to receive(:minor_update?).and_return(false)
-      expect(doc.previous_major_updated_at).to eq(new_edition_updated_at)
-    end
-  end
 end

@@ -23,14 +23,12 @@ describe SpecialistDocumentDatabaseExporter do
     end
   }
 
-  let(:previous_major_updated_at) { double(:previous_major_updated_at) }
-  let(:newly_published_time) { double(:newly_published_time) }
+  let(:updated_at) { double(:updated_at) }
   let(:document) {
     double(:document,
       slug: document_slug,
       minor_update?: false,
-      previous_major_updated_at: previous_major_updated_at,
-      updated_at: newly_published_time,
+      updated_at: updated_at,
     )
   }
 
