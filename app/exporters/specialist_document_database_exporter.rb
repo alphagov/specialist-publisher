@@ -63,7 +63,7 @@ private
 
   def document_metadata
     {
-      published_at: document.updated_at,
+      published_at: document.public_updated_at || document.updated_at,
     }
   end
 

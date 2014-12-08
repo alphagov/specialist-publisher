@@ -21,7 +21,6 @@ RSpec.describe RaibReportIndexableFormatter do
 
   subject(:formatter) { RaibReportIndexableFormatter.new(document) }
 
-  it_should_behave_like "an indexable formatter"
   it_should_behave_like "a specialist document indexable formatter"
 
   it "should have a type of raib_report" do

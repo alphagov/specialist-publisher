@@ -15,6 +15,7 @@ class SpecialistDocumentEdition
   field :extra_fields, type: Hash, default: {}
   field :change_note, type: String
   field :minor_update, type: Boolean
+  field :public_updated_at, type: DateTime
 
   validates :document_id, presence: true
   validates :document_type, presence: true

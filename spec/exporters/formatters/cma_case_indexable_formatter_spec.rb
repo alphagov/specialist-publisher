@@ -24,7 +24,6 @@ RSpec.describe CmaCaseIndexableFormatter do
 
   subject(:formatter) { CmaCaseIndexableFormatter.new(document) }
 
-  it_should_behave_like "an indexable formatter"
   it_should_behave_like "a specialist document indexable formatter"
 
   it "should have a type of cma_case" do
