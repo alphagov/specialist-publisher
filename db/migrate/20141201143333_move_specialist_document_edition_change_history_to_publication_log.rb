@@ -3,12 +3,14 @@ class MoveSpecialistDocumentEditionChangeHistoryToPublicationLog < Mongoid::Migr
     editions_with_change_history.each do |edition|
       latest_change = edition.change_history.last
 
-      PublicationLog.create!(
-        slug: edition.slug,
-        title: edition.title,
-        change_note: latest_change.note,
-        version_number: edition.version_number,
-      )
+      if latest_change
+        PublicationLog.create!(
+          slug: edition.slug,
+          title: edition.title,
+          change_note: latest_change.note,
+          version_number: edition.version_number,
+        )
+      end
     end
   end
 
@@ -18,6 +20,6 @@ class MoveSpecialistDocumentEditionChangeHistoryToPublicationLog < Mongoid::Migr
 
 private
   def self.editions_with_change_history
-    SpecialistDocumentEdition.where(:change_history.ne => nil)
+    SpecialistDocumentEdition.where(:change_history.nin => [nil, []])
   end
 end
