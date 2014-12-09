@@ -8,14 +8,24 @@ class SpecialistDocumentBuilder
 
   def call(attrs)
     document_factory.call(SecureRandom.uuid, editions).
-      tap { |d| d.update(attrs.merge(document_type: @document_type)) }
+      tap { |d| d.update(attrs.merge(defaults)) }
   end
 
-  private
+private
 
-  attr_reader :document_factory
+  attr_reader(
+    :document_type,
+    :document_factory,
+  )
 
   def editions
     []
+  end
+
+  def defaults
+    {
+      document_type: document_type,
+      change_note: "First published.",
+    }
   end
 end
