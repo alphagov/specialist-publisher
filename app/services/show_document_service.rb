@@ -20,10 +20,15 @@ private
   def other_metadata
     {
       slug_unique: slug_unique?,
+      publishable: publishable?,
     }
   end
 
   def slug_unique?
     document_repository.slug_unique?(document)
+  end
+
+  def publishable?
+    document.latest_edition != document.published_edition
   end
 end

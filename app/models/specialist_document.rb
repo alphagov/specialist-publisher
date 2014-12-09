@@ -133,6 +133,12 @@ class SpecialistDocument
     end
   end
 
+  def published_edition
+    if most_recent_non_draft && most_recent_non_draft.published?
+      most_recent_non_draft
+    end
+  end
+
 protected
 
   attr_reader :slug_generator, :edition_factory
@@ -170,12 +176,6 @@ protected
 
   def current_version_number
     latest_edition.version_number
-  end
-
-  def published_edition
-    if most_recent_non_draft && most_recent_non_draft.published?
-      most_recent_non_draft
-    end
   end
 
   def most_recent_non_draft

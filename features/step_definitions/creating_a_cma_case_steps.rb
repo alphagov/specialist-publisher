@@ -28,7 +28,7 @@ When(/^I publish a new CMA case$/) do
     title: @document_title,
     summary: "Nullam quis risus eget urna mollis ornare vel eu leo.",
     body: "## Header" + ("\n\nPraesent commodo cursus magna, vel scelerisque nisl consectetur et." * 10),
-    opened_date: "2014-01-01"
+    opened_date: "2014-01-01",
   }
 
   create_cma_case(@document_fields, publish: true)
@@ -104,7 +104,7 @@ Given(/^a published CMA case exists$/) do
   @document_fields = {
     title: @document_title,
     summary: "Nullam quis risus eget urna mollis ornare vel eu leo.",
-    body: ("Praesent commodo cursus magna, vel scelerisque nisl consectetur et." * 10),
+    body: "## Header" + ("\n\nPraesent commodo cursus magna, vel scelerisque nisl consectetur et." * 10),
     opened_date: "2014-01-01",
   }
 

@@ -40,3 +40,7 @@ end
 Then(/^no email notification is sent$/) do
   check_email_alert_api_is_not_notified_of_publish
 end
+
+Then(/^I should be unable to publish the document$/) do
+  check_document_cant_be_published
+end
