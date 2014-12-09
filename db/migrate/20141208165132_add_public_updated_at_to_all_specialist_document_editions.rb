@@ -12,7 +12,7 @@ class AddPublicUpdatedAtToAllSpecialistDocumentEditions < Mongoid::Migration
 
     editions.each do |edition|
       # use set in order to not touch updated_at timestamps
-      edition.set(:public_updated_at, edition.updated_at)
+      edition.set(:public_updated_at, edition.updated_at.utc)
     end
   end
 
