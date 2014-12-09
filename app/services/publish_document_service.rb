@@ -20,7 +20,7 @@ class PublishDocumentService
   def publish
     unless document.minor_update
       document.update(bulk_published: bulk_publish)
-      document.update(public_updated_at: Time.current) unless bulk_publish
+      document.update(public_updated_at: Time.current)
     end
 
     document.publish!
