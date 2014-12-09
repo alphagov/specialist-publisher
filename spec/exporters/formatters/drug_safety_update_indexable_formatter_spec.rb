@@ -20,7 +20,6 @@ RSpec.describe DrugSafetyUpdateIndexableFormatter do
 
   subject(:formatter) { DrugSafetyUpdateIndexableFormatter.new(document) }
 
-  it_should_behave_like "an indexable formatter"
   it_should_behave_like "a specialist document indexable formatter"
 
   it "should have a type of drug_safety_update" do

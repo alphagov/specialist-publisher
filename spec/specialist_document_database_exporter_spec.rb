@@ -23,14 +23,14 @@ describe SpecialistDocumentDatabaseExporter do
     end
   }
 
-  let(:previous_major_updated_at) { double(:previous_major_updated_at) }
-  let(:newly_published_time) { double(:newly_published_time) }
+  let(:updated_at) { double(:updated_at) }
+  let(:public_updated_at) { double(:public_updated_at) }
   let(:document) {
     double(:document,
       slug: document_slug,
       minor_update?: false,
-      previous_major_updated_at: previous_major_updated_at,
-      updated_at: newly_published_time,
+      updated_at: updated_at,
+      public_updated_at: public_updated_at,
     )
   }
 
@@ -131,5 +131,29 @@ describe SpecialistDocumentDatabaseExporter do
         )
       )
     )
+  end
+
+  context "published_at dates" do
+    it "sends public_updated_at if it is present" do
+      exporter.call
+
+      expect(export_recipent).to have_received(:create_or_update_by_slug!).with(
+        hash_including(
+          published_at: public_updated_at
+        )
+      )
+    end
+
+    it "sends updated at if there is no public_updated_at present" do
+      allow(document).to receive(:public_updated_at).and_return(nil)
+
+      exporter.call
+
+      expect(export_recipent).to have_received(:create_or_update_by_slug!).with(
+        hash_including(
+          published_at: updated_at
+        )
+      )
+    end
   end
 end

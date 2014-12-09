@@ -1,10 +1,6 @@
 require "formatters/abstract_indexable_formatter"
 
 RSpec.shared_examples_for "an indexable formatter" do
-  before do
-    allow(document).to receive(:previous_major_updated_at).and_return(double)
-  end
-
   it "should respond to #id" do
     expect(formatter).to respond_to(:id)
   end

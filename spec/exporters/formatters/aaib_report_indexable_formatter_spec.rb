@@ -24,7 +24,6 @@ RSpec.describe AaibReportIndexableFormatter do
 
   subject(:formatter) { AaibReportIndexableFormatter.new(document) }
 
-  it_should_behave_like "an indexable formatter"
   it_should_behave_like "a specialist document indexable formatter"
 
   it "should have a type of aaib_report" do

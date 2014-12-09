@@ -21,7 +21,6 @@ RSpec.describe MedicalSafetyAlertIndexableFormatter do
 
   subject(:formatter) { MedicalSafetyAlertIndexableFormatter.new(document) }
 
-  it_should_behave_like "an indexable formatter"
   it_should_behave_like "a specialist document indexable formatter"
 
   it "should have a type of medical_safety_alert" do

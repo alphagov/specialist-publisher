@@ -23,7 +23,6 @@ RSpec.describe InternationalDevelopmentFundIndexableFormatter do
 
   subject(:formatter) { InternationalDevelopmentFundIndexableFormatter.new(document) }
 
-  it_should_behave_like "an indexable formatter"
   it_should_behave_like "a specialist document indexable formatter"
 
   it "should have a type of international_development_fund" do
