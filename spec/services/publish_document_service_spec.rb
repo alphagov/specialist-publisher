@@ -66,14 +66,20 @@ RSpec.describe PublishDocumentService do
     let(:bulk_publish) { true }
     it_behaves_like "a document publication"
 
+    let(:time) { double(:time) }
+
+    before do
+      allow(Time).to receive(:current).and_return(time)
+    end
+
     it "sets bulk published" do
       subject.call
       expect(document).to have_received(:update).with({bulk_published: true})
     end
 
-    it "does not set the public_updated_at" do
+    it "does sets the public_updated_at" do
       subject.call
-      expect(document).not_to have_received(:update).with(hash_including(:public_updated_at))
+      expect(document).to have_received(:update).with({public_updated_at: time})
     end
   end
 end
