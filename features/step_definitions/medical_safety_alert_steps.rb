@@ -117,7 +117,7 @@ def msa_fields
     title: "Example Medical Safety Alert",
     summary: "Nullam quis risus eget urna mollis ornare vel eu leo.",
     body: "## Header" + ("\n\nPraesent commodo cursus magna, vel scelerisque nisl consectetur et." * 10),
-    alert_type: "Drug Alert",
+    alert_type: "Drug alert",
     issued_date: "2014-01-01",
   }
 end

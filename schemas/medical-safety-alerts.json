@@ -10,8 +10,8 @@
       "include_blank": false,
       "preposition": "for",
       "allowed_values": [
-        {"label": "Drug Alert", "value": "drugs"},
-        {"label": "Medical Device Alert", "value": "devices"}
+        {"label": "Drug alert", "value": "drugs"},
+        {"label": "Medical device alert", "value": "devices"}
       ]
     },
     {
