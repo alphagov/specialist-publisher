@@ -69,4 +69,15 @@
     <% end %>
   </div>
 </div>
-<%= render partial: 'shared/document_actions', locals: { document: document, slug_unique: slug_unique } %>
+
+<div class="actions">
+  <%= publish_form(slug_unique, publishable, document) %>
+
+  <% if current_user_can_withdraw?(document.document_type) %>
+    <%= form_tag([:withdraw, document], method: :post) do %>
+      <button name='submit' class="btn btn-danger">Withdraw</button>
+    <% end -%>
+  <% end %>
+
+  <%= link_to "Edit", [:edit, document], class: "btn btn-primary" %>
+</div>

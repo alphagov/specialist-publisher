@@ -27,6 +27,13 @@ Feature: Publishing a CMA case
     Then the amended document should be published
     And previous editions should be archived
 
+  Scenario: can't publish a document without a new draft
+    Given a published CMA case exists
+    Then I should be unable to publish the document
+    When I am on the CMA case edit page
+    And I edit the document and republish
+    Then the amended document should be published
+
   Scenario: Sends an email alert on first publish
     Given a draft CMA case exists
     When I publish the CMA case

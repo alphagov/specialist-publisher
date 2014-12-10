@@ -250,4 +250,8 @@ module DocumentHelpers
     count_of_logs = PublicationLog.where(slug: @slug).count
     expect(count_of_logs).to eq(expected_count_of_logs.to_i)
   end
+
+  def check_document_cant_be_published
+    expect(page).to_not have_selector(:button, "Publish")
+  end
 end

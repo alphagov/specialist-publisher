@@ -1,0 +1,14 @@
+<div class="panel panel-danger">
+  <% if warning %>
+    <div class="panel-heading">
+      <%= warning.html_safe %>
+    </div>
+  <% end %>
+  <div class="panel-body">
+    <p><%= notification.html_safe %></p>
+
+    <%= form_tag([:publish, document], method: :post) do %>
+      <button name='submit' <% if disabled %>disabled="disabled"<% end %> class="btn btn-danger">Publish</button>
+    <% end -%>
+  </div>
+</div>
