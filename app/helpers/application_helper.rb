@@ -90,7 +90,7 @@ module ApplicationHelper
         publish_locals = publish_form_text[:slug_not_unique]
       end
     elsif publishable
-      if !document.change_note.blank?
+      if !document.change_note.blank? && document.change_note != "First published."
         publish_locals = publish_form_text[:major_update]
       elsif document.minor_update
         publish_locals = publish_form_text[:minor_update]
