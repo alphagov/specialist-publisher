@@ -11,7 +11,8 @@ RSpec.describe EmailAlertExporter do
       name: "format name",
       subject: email_subject,
       body: email_body,
-      tags: email_tags
+      tags: email_tags,
+      extra_options: {},
     )
   }
   subject(:exporter) {
@@ -33,5 +34,17 @@ RSpec.describe EmailAlertExporter do
         "body" => email_body,
         "tags" => email_tags,
       )
+  end
+
+  it "includes extra options if they are specified" do
+    extra_options = {
+      urgent: true,
+      email_address_id: 12345,
+      header: "foo",
+      footer: "bar",
+    }
+    allow(formatter).to receive(:extra_options).and_return(extra_options)
+    exporter.call
+    expect(email_alert_api).to have_received(:send_alert).with(hash_including(extra_options))
   end
 end

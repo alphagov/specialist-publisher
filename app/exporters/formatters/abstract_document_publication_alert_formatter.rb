@@ -1,5 +1,6 @@
 require "plek"
 require "action_view"
+require "yaml"
 
 class AbstractDocumentPublicationAlertFormatter
   def initialize(dependencies = {})
@@ -36,6 +37,15 @@ class AbstractDocumentPublicationAlertFormatter
     )
   end
 
+  def extra_options
+    {
+      header: header,
+      footer: footer,
+      urgent: urgent,
+      from_address_id: from_address_id,
+    }.reject { |_k, v| v.nil? }
+  end
+
 private
   attr_reader(
     :document,
@@ -67,4 +77,29 @@ private
     extra_fields.each { |key, value| hash[key] = value.is_a?(Array) ? value : [value] }
     hash
   end
+
+  def header
+    nil
+  end
+
+  def footer
+    nil
+  end
+
+  def urgent
+    # DO NOT set default to false, this will send false to gov delivery
+    # and FORCE overriding of topic defaults set in gov delivery
+    # This should only be overridden where we explicitly want an
+    # email to be non urgent and not to fallback to gov delivery defaults
+    nil
+  end
+
+  def from_address_id
+    from_address_config[document.document_type]
+  end
+
+  def from_address_config
+    @config ||= YAML.load_file(File.join(Rails.root, "config", "gov_delivery_from_address_ids.yml"))[Rails.env]
+  end
+
 end

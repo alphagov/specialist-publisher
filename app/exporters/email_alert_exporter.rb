@@ -7,9 +7,7 @@ class EmailAlertExporter
 
   def call
     email_alert_api.send_alert(
-      "subject" => formatter.subject,
-      "body" => formatter.body,
-      "tags" => formatter.tags,
+      base_params.merge(formatter.extra_options)
     )
   end
 
@@ -19,4 +17,12 @@ private
     :email_alert_api,
     :formatter,
   )
+
+  def base_params
+    {
+      "subject" => formatter.subject,
+      "body" => formatter.body,
+      "tags" => formatter.tags,
+    }
+  end
 end

@@ -1,0 +1,11 @@
+production:
+  medical_safety_alert: 42026
+
+staging: &staging
+  medical_safety_alert: 16221
+
+development:
+  <<: *staging
+
+test:
+  medical_safety_alert: 12345

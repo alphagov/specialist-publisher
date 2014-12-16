@@ -10,4 +10,9 @@ private
   def document_noun
     "alert"
   end
+
+  def urgent
+    true
+  end
+
 end
