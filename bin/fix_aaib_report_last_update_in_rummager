@@ -1,0 +1,72 @@
+#!/usr/bin/env ruby
+
+require File.expand_path("../../config/environment", __FILE__)
+require "specialist_publisher"
+require "formatters/aaib_report_indexable_formatter"
+
+class FixAaibDateIndexableFormatter < AaibReportIndexableFormatter
+  def initialize(entity, new_last_update)
+    @new_last_update = new_last_update
+    super(entity)
+  end
+
+  def last_update
+    new_last_update
+  end
+
+private
+  attr_reader :new_last_update
+end
+
+$repository = SpecialistPublisherWiring.get(:repository_registry).for_type("aaib_report")
+
+$indexer_builder = ->(document, new_last_update) {
+  RummagerIndexer.new.add(
+    FixAaibDateIndexableFormatter.new(
+      MarkdownAttachmentProcessor.new(document),
+      new_last_update,
+    )
+  )
+}
+
+def set_last_update_date(slug, date_to_use)
+  document = $repository.first_by_slug(slug)
+  if document.present?
+    begin
+      indexer = $indexer_builder.call(document, date_to_use)
+      indexer.call
+      puts "SUCCESS: Set last_update of document #{document.id} -- #{slug} to #{date_to_use}"
+    rescue StandardError => e
+      puts "ERROR: encountered #{e.message} when attempting to call indexer for #{slug}"
+    end
+  else
+    puts "FAILURE: Couldn't find document with slug #{slug}"
+  end
+end
+
+date_before_import = Time.new(2014, 12, 1)
+
+# These will never appear on the first page of the finder so send them to the bottom
+set_last_update_date("aaib-reports/aaib-investigation-to-reims-cessna-f-172h-f-bogb-corrigendum", date_before_import)
+set_last_update_date("aaib-reports/aaib-investigation-to-boeing-747-b-g-bdxb", date_before_import)
+set_last_update_date("aaib-reports/aaib-investigation-to-spitfire-mk-5c-g-mkvc", date_before_import)
+set_last_update_date("aaib-reports/aaib-investigation-to-airbus-a319-111-g-ezac-special-bulletin-s9-2006", date_before_import)
+set_last_update_date("aaib-reports/aaib-investigation-to-paramania-revolution-23-paramotor-special-bulletin-s4-2007", date_before_import)
+set_last_update_date("aaib-reports/aaib-investigation-to-boeing-737-73v-g-ezjk-special-bulletin-s2-2009", date_before_import)
+set_last_update_date("aaib-reports/aaib-investigation-to-eurocopter-as332l2-super-puma-g-redl-special-bulletin-s5-2009", date_before_import)
+set_last_update_date("aaib-reports/aaib-investigation-to-airbus-a321-231-g-medj-special-bulletin-s2-2010", date_before_import)
+
+# These need setting to specific dates
+set_last_update_date("aaib-reports/aaib-investigation-to-sikorsky-s-76c-g-wiwi", Time.new(2014, 12, 10, 22, 43, 33))
+set_last_update_date("aaib-reports/aaib-investigation-to-sikorsky-s-76c-g-wiwi-special-bulletin-s4-2012", Time.new(2014, 12, 10, 22, 43, 33))
+set_last_update_date("aaib-reports/aaib-investigation-to-ec225-lp-super-puma-g-redw-special-bulletin-s2-2012", Time.new(2014, 12, 10, 22, 43, 54))
+set_last_update_date("aaib-reports/aaib-investigation-to-ec225-lp-super-puma-g-redw-special-bulletin-s5-2012", Time.new(2014, 12, 10, 22, 43, 54))
+set_last_update_date("aaib-reports/aaib-investigation-to-britten-norman-bn2a-26-islander-vp-mon-special-bulletin-s4-2012", Time.new(2014, 12, 10, 22, 50, 03))
+set_last_update_date("aaib-reports/aaib-investigation-to-ec225-lp-super-puma-g-chcn-special-bulletin-s7-2012", Time.new(2014, 12, 10, 22, 50, 47))
+set_last_update_date("aaib-reports/aaib-investigation-to-boeing-787-8-et-aop-special-bulletin-s5-2013", Time.new(2014, 12, 10, 22, 56, 25))
+set_last_update_date("aaib-reports/aaib-investigation-to-as332-l2-super-puma-g-wnsb-special-bulletin-s1-2014", Time.new(2014, 12, 10, 22, 58, 38))
+set_last_update_date("aaib-reports/aaib-investigation-to-as332-l2-super-puma-g-wnsb-special-bulletin-s6-2013", Time.new(2014, 12, 10, 22, 58, 47))
+set_last_update_date("aaib-reports/aaib-investigation-to-as332-l2-super-puma-g-wnsb-special-bulletin-s7-2013", Time.new(2014, 12, 10, 22, 58, 49))
+set_last_update_date("aaib-reports/aaib-investigation-to-eurocopter-ec135-t2-g-spao-special-bulletin-s2-2014", Time.new(2014, 12, 10, 23, 02, 10))
+set_last_update_date("aaib-reports/aaib-investigation-to-eurocopter-ec135-t2-g-spao-special-bulletin-s9-2013", Time.new(2014, 12, 10, 23, 02, 8))
+set_last_update_date("aaib-reports/aaib-investigation-to-agusta-aw139-g-lbal-special-bulletin-s3-2014", Time.new(2014, 12, 10, 23, 3, 52))
