@@ -70,3 +70,5 @@ set_last_update_date("aaib-reports/aaib-investigation-to-as332-l2-super-puma-g-w
 set_last_update_date("aaib-reports/aaib-investigation-to-eurocopter-ec135-t2-g-spao-special-bulletin-s2-2014", Time.new(2014, 12, 10, 23, 02, 10))
 set_last_update_date("aaib-reports/aaib-investigation-to-eurocopter-ec135-t2-g-spao-special-bulletin-s9-2013", Time.new(2014, 12, 10, 23, 02, 8))
 set_last_update_date("aaib-reports/aaib-investigation-to-agusta-aw139-g-lbal-special-bulletin-s3-2014", Time.new(2014, 12, 10, 23, 3, 52))
+set_last_update_date("aaib-reports/aaib-investigation-to-dhc-8-402-dash-8-g-jecj-addendum", Time.new(2014, 12, 10, 23, 0, 58))
+set_last_update_date("aaib-reports/aaib-investigation-to-cessna-310q-g-bxuy", Time.new(2014, 12, 10, 23, 1, 50))
