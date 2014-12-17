@@ -1,7 +1,15 @@
 require "email_alert_exporter"
-require "formatters/drug_safety_update_publication_alert_formatter"
 
 class DrugSafetyUpdateObserversRegistry < AbstractSpecialistDocumentObserversRegistry
+  # Overridden to not send publication alerts -- they're sent manually each month to the list
+  def publication
+    [
+      publication_logger,
+      content_api_exporter,
+      panopticon_exporter,
+      rummager_exporter,
+    ]
+  end
 
 private
   def content_api_exporter
@@ -22,12 +30,5 @@ private
 
   def content_api_withdrawer
     SpecialistPublisherWiring.get(:specialist_document_content_api_withdrawer)
-  end
-
-  def publication_alert_formatter(document)
-    DrugSafetyUpdatePublicationAlertFormatter.new(
-      url_maker: url_maker,
-      document: document,
-    )
   end
 end
