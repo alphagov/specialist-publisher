@@ -26,14 +26,7 @@ class AbstractDocumentPublicationAlertFormatter
     view_renderer.render(
       template: "email_alerts/publication",
       formats: ["html"],
-      locals: {
-        human_document_type: name,
-        document_noun: document_noun,
-        updated_or_published: updated_or_published_text,
-        document_title: document.title,
-        document_summary: document.summary,
-        document_url: url_maker.published_specialist_document_path(document),
-      }
+      locals: html_body_local_assigns
     )
   end
 
@@ -51,6 +44,17 @@ private
     :document,
     :url_maker,
   )
+
+  def html_body_local_assigns
+    {
+      human_document_type: name,
+      document_noun: document_noun,
+      updated_or_published: updated_or_published_text,
+      document_title: document.title,
+      document_summary: document.summary,
+      document_url: url_maker.published_specialist_document_path(document),
+    }
+  end
 
   def document_noun
     raise NotImplementedError
@@ -102,4 +106,20 @@ private
     @config ||= YAML.load_file(File.join(Rails.root, "config", "gov_delivery_from_address_ids.yml"))[Rails.env]
   end
 
+  def header
+    view_renderer.render(
+      template: "email_alerts/publication_header",
+      formats: ["html"],
+      locals: {
+        human_document_type: name
+      }
+    )
+  end
+
+  def footer
+    view_renderer.render(
+      template: "email_alerts/publication_footer",
+      formats: ["html"],
+    )
+  end
 end
