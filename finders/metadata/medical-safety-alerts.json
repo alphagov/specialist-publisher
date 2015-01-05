@@ -1,0 +1,30 @@
+{
+  "content_id": "1e9c0ada-5f7e-43cc-a55f-cc32757edaa3",
+  "slug": "drug-device-alerts",
+  "format": "medical_safety_alert",
+  "name": "Alerts and recalls for drugs and medical devices",
+  "beta": true,
+  "beta_message": "Until January 2015, <a href='http://www.mhra.gov.uk/Safetyinformation/Safetywarningsalertsandrecalls/index.htm'>the MHRA website</a> is the main source for drug alerts and medical device alerts.",
+  "signup_content_id": "a796ca43-021b-4960-9c99-f41bb8ef2266",
+  "signup_title": "Drug alerts and medical device alerts",
+  "signup_copy": "You'll get an email each time an alert is updated or a new alert is published.",
+  "organisations": ["240f72bd-9a4d-4f39-94d9-77235cadde8e"],
+  "related": ["602be505-4cf4-4f8c-8bfc-7bc4b63a7f47"],
+  "email_filter_by": "alert_type",
+  "email_signup_choice": [
+    {
+      "key": "devices",
+      "radio_button_name": "Medical device alerts",
+      "topic_name": "medical device alerts",
+      "body": "information published by the MHRA about defective medical devices.",
+      "prechecked": true
+    },
+    {
+      "key": "drugs",
+      "radio_button_name": "Drug alerts",
+      "topic_name": "drug alerts",
+      "body": "information published by the MHRA about defective medicines.",
+      "prechecked": true
+    }
+  ]
+}
