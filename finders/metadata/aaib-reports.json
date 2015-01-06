@@ -1,0 +1,47 @@
+{
+  "content_id": "b7574bba-969f-4c49-855a-ae1586258ff6",
+  "slug": "aaib-reports",
+  "format": "aaib_report",
+  "name": "Air Accidents Investigation Branch reports",
+  "beta": true,
+  "signup_content_id": "1ad5918c-19ff-4431-b20b-1bab890cd84b",
+  "signup_copy": "You'll get an email each time a report is updated or a new report is published.",
+  "organisations": ["38eb5d8f-2d89-480c-8655-e2e7ac23f8f4"],
+  "subscription_list_title_prefix": {
+    "singular": "Air Accidents Investigation Branch (AAIB) reports with the following aircraft category: ",
+    "plural": "Air Accidents Investigation Branch (AAIB) reports with the following aircraft categories: "
+  },
+  "email_filter_by": "aircraft_category",
+  "email_signup_choice": [
+    {
+      "key": "commercial-fixed-wing",
+      "radio_button_name": "Commercial - fixed wing",
+      "topic_name": "commercial - fixed wing",
+      "prechecked": false
+    },
+    {
+      "key": "commercial-rotorcraft",
+      "radio_button_name": "Commercial - rotorcraft",
+      "topic_name": "commercial - rotorcraft",
+      "prechecked": false
+    },
+    {
+      "key": "general-aviation-fixed-wing",
+      "radio_button_name": "General aviation - fixed wing",
+      "topic_name": "general aviation - fixed wing",
+      "prechecked": false
+    },
+    {
+      "key": "general-aviation-rotorcraft",
+      "radio_button_name": "General aviation - rotorcraft",
+      "topic_name": "general aviation - rotorcraft",
+      "prechecked": false
+    },
+    {
+      "key": "sport-aviation-and-balloons",
+      "radio_button_name": "Sport aviation and balloons",
+      "topic_name": "sport aviation and balloons",
+      "prechecked": false
+    }
+  ]
+}

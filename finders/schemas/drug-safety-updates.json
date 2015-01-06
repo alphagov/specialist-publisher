@@ -1,6 +1,5 @@
 {
   "slug": "drug-safety-update",
-  "name": "Drug safety update",
   "document_noun": "update",
   "facets": [
     {
@@ -34,6 +33,13 @@
         {"label": "Rheumatology", "value": "rheumatology"},
         {"label": "Urology and nephrology", "value": "urology-nephrology"}
       ]
+    },
+
+    {
+      "key": "first_published_at",
+      "name": "Published",
+      "type": "date",
+      "preposition": "published"
     }
   ]
 }

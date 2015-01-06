@@ -1,13 +1,13 @@
 {
   "slug": "international-development-funding",
-  "name": "International development funding",
   "document_noun": "fund",
   "facets": [
     {
       "key": "fund_state",
       "name": "Funds",
-      "type": "single-select",
+      "type": "multi-select",
       "include_blank": false,
+      "preposition": "which are",
       "allowed_values": [
         {"label": "Open", "value": "open"},
         {"label": "Closed", "value": "closed"}
@@ -247,7 +247,7 @@
     {
       "key": "value_of_funding",
       "name": "Value of funding",
-      "type": "single-select",
+      "type": "multi-select",
       "include_blank": false,
       "preposition": "with value",
       "allowed_values": [

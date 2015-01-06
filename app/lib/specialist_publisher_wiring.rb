@@ -555,36 +555,36 @@ SpecialistPublisherWiring = DependencyContainer.new do
 
   define_singleton(:aaib_report_finder_schema) {
     require "finder_schema"
-    FinderSchema.new(Rails.root.join("schemas/aaib-reports.json"))
+    FinderSchema.new(Rails.root.join("finders/schemas/aaib-reports.json"))
   }
 
   define_singleton(:cma_case_finder_schema) {
     require "finder_schema"
-    FinderSchema.new(Rails.root.join("schemas/cma-cases.json"))
+    FinderSchema.new(Rails.root.join("finders/schemas/cma-cases.json"))
   }
 
   define_singleton(:drug_safety_update_finder_schema) {
     require "finder_schema"
-    FinderSchema.new(Rails.root.join("schemas/drug-safety-updates.json"))
+    FinderSchema.new(Rails.root.join("finders/schemas/drug-safety-updates.json"))
   }
 
   define_singleton(:maib_report_finder_schema) {
     require "finder_schema"
-    FinderSchema.new(Rails.root.join("schemas/maib-reports.json"))
+    FinderSchema.new(Rails.root.join("finders/schemas/maib-reports.json"))
   }
 
   define_singleton(:medical_safety_alert_finder_schema) {
     require "finder_schema"
-    FinderSchema.new(Rails.root.join("schemas/medical-safety-alerts.json"))
+    FinderSchema.new(Rails.root.join("finders/schemas/medical-safety-alerts.json"))
   }
 
   define_singleton(:international_development_fund_finder_schema) {
     require "finder_schema"
-    FinderSchema.new(Rails.root.join("schemas/international-development-funds.json"))
+    FinderSchema.new(Rails.root.join("finders/schemas/international-development-funds.json"))
   }
 
   define_singleton(:raib_report_finder_schema) {
     require "finder_schema"
-    FinderSchema.new(Rails.root.join("schemas/raib-reports.json"))
+    FinderSchema.new(Rails.root.join("finders/schemas/raib-reports.json"))
   }
 end
