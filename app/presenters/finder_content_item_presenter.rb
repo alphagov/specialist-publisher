@@ -16,6 +16,7 @@ class FinderContentItemPresenter < Struct.new(:metadata, :schema, :timestamp)
         "organisations" => organisations,
         "topics" => [],
         "related" => related,
+        "email_alert_signup" => email_alert_signup,
       },
     }
   end
@@ -91,5 +92,9 @@ private
 
   def public_updated_at
     timestamp
+  end
+
+  def email_alert_signup
+    [metadata.fetch("signup_content_id", nil)].compact
   end
 end

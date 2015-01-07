@@ -11,7 +11,7 @@ class PublishingApiFinderPublisher
   def call
     metadata.zip(schemae).map { |metadata, schema|
       export_finder(metadata, schema)
-      export_signup(metadata) if metadata.has_key?("signup_content_id")
+      export_signup(metadata) if metadata[:file].has_key?("signup_content_id")
     }
   end
 
@@ -27,9 +27,6 @@ private
 
     attrs = finder.exportable_attributes
 
-    if metadata.has_key?("signup_content_id")
-      attrs["links"].merge!({ "email_alert_signup" => [metadata["signup_content_id"]] })
-    end
     publishing_api.put_content_item(attrs["base_path"], attrs)
   end
 
