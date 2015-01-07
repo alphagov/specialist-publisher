@@ -1,5 +1,3 @@
-require "time"
-
 class FinderSignupContentItemPresenter < Struct.new(:metadata, :timestamp)
   def exportable_attributes
     {
