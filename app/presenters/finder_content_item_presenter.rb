@@ -74,7 +74,7 @@ private
   end
 
   def publishing_app
-    "finder-api"
+    "specialist-publisher"
   end
 
   def rendering_app
