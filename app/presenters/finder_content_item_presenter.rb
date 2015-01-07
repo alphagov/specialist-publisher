@@ -2,15 +2,15 @@ require "time"
 
 class FinderContentItemPresenter < Struct.new(:metadata, :schema)
   def title
-    metadata["name"]
+    metadata.fetch("name")
   end
 
   def content_id
-    metadata["content_id"]
+    metadata.fetch("content_id")
   end
 
   def base_path
-    "/#{metadata["slug"]}"
+    "/#{metadata.fetch("slug", "")}"
   end
 
   def description
@@ -21,10 +21,10 @@ class FinderContentItemPresenter < Struct.new(:metadata, :schema)
     {
       beta: metadata.fetch("beta", false),
       beta_message: metadata.fetch("beta_message", nil),
-      document_noun: schema["document_noun"],
-      document_type: metadata["format"],
+      document_noun: schema.fetch("document_noun"),
+      document_type: metadata.fetch("format"),
       email_signup_enabled: metadata.fetch("signup_enabled", false),
-      facets: schema["facets"],
+      facets: schema.fetch("facets"),
     }
   end
 
@@ -58,7 +58,7 @@ class FinderContentItemPresenter < Struct.new(:metadata, :schema)
   end
 
   def organisations
-    metadata["organisations"]
+    metadata.fetch("organisations", [])
   end
 
   def update_type

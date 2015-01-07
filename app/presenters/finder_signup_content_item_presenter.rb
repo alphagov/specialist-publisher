@@ -2,19 +2,19 @@ require "time"
 
 class FinderSignupContentItemPresenter < Struct.new(:metadata)
   def title
-    metadata.fetch("signup_title", metadata["name"])
+    metadata.fetch("signup_title", metadata.fetch("name"))
   end
 
   def content_id
-    metadata["signup_content_id"]
+    metadata.fetch("signup_content_id")
   end
 
   def base_path
-    "/#{metadata["slug"]}/email-signup"
+    "/#{metadata.fetch("slug")}/email-signup"
   end
 
   def description
-    metadata["signup_copy"]
+    metadata.fetch("signup_copy", nil)
   end
 
   def format
@@ -22,7 +22,9 @@ class FinderSignupContentItemPresenter < Struct.new(:metadata)
   end
 
   def related
-    [metadata["content_id"]]
+    [
+      metadata.fetch("content_id"),
+    ]
   end
 
   def routes
@@ -52,7 +54,7 @@ class FinderSignupContentItemPresenter < Struct.new(:metadata)
   end
 
   def organisations
-    metadata["organisations"]
+    metadata.fetch("organisations", [])
   end
 
   def update_type
