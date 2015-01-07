@@ -1,6 +1,28 @@
 require "time"
 
-class FinderContentItemPresenter < Struct.new(:metadata, :schema)
+class FinderContentItemPresenter < Struct.new(:metadata, :schema, :timestamp)
+  def exportable_attributes
+    {
+      "base_path" => base_path,
+      "format" => format,
+      "content_id" => content_id,
+      "title" => title,
+      "description" => description,
+      "public_updated_at" => public_updated_at,
+      "update_type" => update_type,
+      "publishing_app" => publishing_app,
+      "rendering_app" => rendering_app,
+      "routes" => routes,
+      "details" => details,
+      "links" => {
+        "organisations" => organisations,
+        "topics" => [],
+        "related" => related,
+      },
+    }
+  end
+
+private
   def title
     metadata.fetch("name")
   end
@@ -53,6 +75,10 @@ class FinderContentItemPresenter < Struct.new(:metadata, :schema)
     []
   end
 
+  def publishing_app
+    "finder-api"
+  end
+
   def rendering_app
     "finder-frontend"
   end
@@ -63,5 +89,9 @@ class FinderContentItemPresenter < Struct.new(:metadata, :schema)
 
   def update_type
     "minor"
+  end
+
+  def public_updated_at
+    timestamp
   end
 end
