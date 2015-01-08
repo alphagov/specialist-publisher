@@ -1,20 +1,40 @@
-require "time"
+class FinderSignupContentItemPresenter < Struct.new(:metadata, :timestamp)
+  def exportable_attributes
+    {
+      "base_path" => base_path,
+      "format" => format,
+      "content_id" => content_id,
+      "title" => title,
+      "description" => description,
+      "public_updated_at" => public_updated_at,
+      "update_type" => update_type,
+      "publishing_app" => publishing_app,
+      "rendering_app" => rendering_app,
+      "routes" => routes,
+      "details" => details,
+      "links" => {
+        "organisations" => organisations,
+        "topics" => [],
+        "related" => related,
+      },
+    }
+  end
 
-class FinderSignupContentItemPresenter < Struct.new(:metadata)
+private
   def title
-    metadata.fetch("signup_title", metadata["name"])
+    metadata.fetch("signup_title", metadata.fetch("name"))
   end
 
   def content_id
-    metadata["signup_content_id"]
+    metadata.fetch("signup_content_id")
   end
 
   def base_path
-    "/#{metadata["slug"]}/email-signup"
+    "/#{metadata.fetch("slug")}/email-signup"
   end
 
   def description
-    metadata["signup_copy"]
+    metadata.fetch("signup_copy", nil)
   end
 
   def format
@@ -22,7 +42,9 @@ class FinderSignupContentItemPresenter < Struct.new(:metadata)
   end
 
   def related
-    [metadata["content_id"]]
+    [
+      metadata.fetch("content_id"),
+    ]
   end
 
   def routes
@@ -47,15 +69,23 @@ class FinderSignupContentItemPresenter < Struct.new(:metadata)
     []
   end
 
+  def publishing_app
+    "specialist-publisher"
+  end
+
   def rendering_app
     "finder-frontend"
   end
 
   def organisations
-    metadata["organisations"]
+    metadata.fetch("organisations", [])
   end
 
   def update_type
     "minor"
+  end
+
+  def public_updated_at
+    timestamp
   end
 end
