@@ -6,7 +6,6 @@
       "key": "alert_type",
       "name": "Alert type",
       "type": "multi-select",
-      "include_blank": false,
       "preposition": "for",
       "allowed_values": [
         {"label": "Drug alert", "value": "drugs"},
@@ -17,7 +16,6 @@
       "key": "medical_specialism",
       "name": "Medical specialism",
       "type": "multi-select",
-      "include_blank": false,
       "preposition": "about",
       "allowed_values": [
         {"label": "Anaesthetics", "value": "anaesthetics" },

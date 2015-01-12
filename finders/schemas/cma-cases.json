@@ -6,7 +6,6 @@
         "key": "case_type",
         "name": "Case type",
         "type": "multi-select",
-        "include_blank": "All case types",
         "preposition": "of type",
         "allowed_values": [
           {"label": "CA98 and civil cartels", "value": "ca98-and-civil-cartels"},
@@ -23,7 +22,6 @@
       "key": "case_state",
       "name": "Case state",
       "type": "multi-select",
-      "include_blank": false,
       "preposition": "which are",
       "allowed_values": [
         {"label": "Open", "value": "open"},
@@ -35,7 +33,6 @@
       "key": "market_sector",
       "name": "Market sector",
       "type": "multi-select",
-      "include_blank": false,
       "preposition": "about",
       "allowed_values": [
         {"label": "Aerospace", "value": "aerospace"},
@@ -74,7 +71,6 @@
       "key": "outcome_type",
       "name": "Outcome",
       "type": "multi-select",
-      "include_blank": false,
       "preposition": "with outcome",
       "allowed_values": [
         {"label": "CA98 - no grounds for action", "value": "ca98-no-grounds-for-action-non-infringement"},

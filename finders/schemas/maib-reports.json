@@ -6,7 +6,6 @@
       "key": "vessel_type",
       "name": "Vessel type",
       "type": "multi-select",
-      "include_blank": false,
       "preposition": "of type",
       "allowed_values": [
         {"label": "Merchant vessel 100 gross tons or over", "value": "merchant-vessel-100-gross-tons-or-over"},
@@ -20,7 +19,6 @@
      "key": "report_type",
      "name": "Report type",
      "type": "multi-select",
-     "include_blank": false,
      "preposition": "of type",
      "allowed_values": [
        {"label": "Investigation report", "value": "investigation-report"},

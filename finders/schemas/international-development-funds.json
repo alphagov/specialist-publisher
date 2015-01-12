@@ -6,7 +6,6 @@
       "key": "fund_state",
       "name": "Funds",
       "type": "multi-select",
-      "include_blank": false,
       "preposition": "which are",
       "allowed_values": [
         {"label": "Open", "value": "open"},
@@ -17,7 +16,6 @@
       "key": "location",
       "name": "Countries",
       "type": "multi-select",
-      "include_blank": false,
       "preposition": "for",
       "allowed_values": [
         {
@@ -138,7 +136,6 @@
       "key": "development_sector",
       "name": "Sector",
       "type": "multi-select",
-      "include_blank": false,
       "preposition": "for",
       "allowed_values": [
         {
@@ -207,7 +204,6 @@
       "key": "eligible_entities",
       "name": "Eligible organisations",
       "type": "multi-select",
-      "include_blank": false,
       "preposition": "open to",
       "allowed_values": [
         {
@@ -248,7 +244,6 @@
       "key": "value_of_funding",
       "name": "Value of funding",
       "type": "multi-select",
-      "include_blank": false,
       "preposition": "with value",
       "allowed_values": [
         {"label": "Up to £100,000", "value": "up-to-100000"},
