@@ -50,7 +50,7 @@ private
     when "maib_report"
       "marine-accident-investigation-branch"
     when "raib_report"
-      "rail-accidents-investigation-branch"
+      "rail-accident-investigation-branch"
     end
   end
 end

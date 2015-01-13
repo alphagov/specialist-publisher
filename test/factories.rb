@@ -30,7 +30,7 @@ FactoryGirl.define do
   end
 
   factory :raib_editor, parent: :editor do
-    organisation_slug "rail-accidents-investigation-branch"
+    organisation_slug "rail-accident-investigation-branch"
   end
 
   factory :generic_editor, parent: :editor do
