@@ -42,6 +42,7 @@ SpecialistPublisher::Application.routes.draw do
 
       # This is for persisted manual documents
       post :preview, on: :member
+      get :reorder, on: :collection
     end
 
     post :publish, on: :member

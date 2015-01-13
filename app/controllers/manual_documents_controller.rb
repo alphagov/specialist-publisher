@@ -72,6 +72,15 @@ class ManualDocumentsController < ApplicationController
     end
   end
 
+  def reorder
+    manual, documents = services.list(self).call
+
+    render(:reorder, locals: {
+      manual: ManualViewAdapter.new(manual),
+      documents: documents,
+    })
+  end
+
 private
   def services
     ManualDocumentServiceRegistry.new

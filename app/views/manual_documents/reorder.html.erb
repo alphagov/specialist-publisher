@@ -1,0 +1,30 @@
+<% content_for :breadcrumbs do %>
+  <li><%= link_to "Your manuals", manuals_path %></li>
+  <li><%= link_to manual.title, manual_path(manual) %></li>
+  <li class="active">Reorder sections</li>
+<% end %>
+
+<h1 class="page-header">
+  Reorder sections
+</h1>
+
+<div class="row">
+  <div class="col-md-8">
+    <ol class="reorderable-document-list">
+      <% documents.each do |document| %>
+        <li><%= document.title %></li>
+      <% end %>
+    </ol>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-12">
+    <div class="actions">
+      <%= form_tag(reorder_manual_documents_path(manual), method: :post) do %>
+        <button name="submit" class="btn btn-primary">Save section order</button>
+      <% end %>
+      <%= link_to "Back", manual_path(manual), class: "action-link" %>
+    </div>
+  </div>
+</div>
