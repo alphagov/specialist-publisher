@@ -24,7 +24,7 @@ Publishing App for Specialist Documents and Manuals.
 * Drug Safety Updates
 * Medical Safety Alerts
 
-## Dependancies
+## Dependencies
 
 * [alphagov/static](http://github.com/alphagov/static): provides static assets (JS/CSS)
 * [alphagov/panopticon](http://github.com/alphagov/panopticon): provides public URLs for content on GOV.UK
