@@ -34,6 +34,10 @@ private
         repository_registry.for_type("drug_safety_update"),
         DrugSafetyUpdateObserversRegistry.new.republication,
       ),
+      "raib_report" => RepositoryObserversTuple.new(
+        repository_registry.for_type("raib_report"),
+        RaibReportObserversRegistry.new.republication,
+      ),
     }
   end
 
