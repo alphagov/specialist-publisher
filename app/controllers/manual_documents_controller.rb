@@ -81,6 +81,17 @@ class ManualDocumentsController < ApplicationController
     })
   end
 
+  def update_order
+    manual, documents = services.list(self).call
+
+    redirect_to(
+      manual_path(manual),
+      flash: {
+        notice: "Order of sections saved for #{manual.title}",
+      },
+    )
+  end
+
 private
   def services
     ManualDocumentServiceRegistry.new

@@ -21,7 +21,7 @@
 <div class="row">
   <div class="col-md-12">
     <div class="actions">
-      <%= form_tag(reorder_manual_documents_path(manual), method: :post) do %>
+      <%= form_tag(update_order_manual_documents_path(manual), method: :post) do %>
         <button name="submit" class="btn btn-primary">Save section order</button>
       <% end %>
       <%= link_to "Back", manual_path(manual), class: "action-link" %>
