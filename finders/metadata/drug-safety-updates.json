@@ -7,6 +7,7 @@
   "beta_message": "Until January 2015, <a href='http://www.mhra.gov.uk/Safetyinformation/DrugSafetyUpdate/index.htm'>the MHRA website</a> is the official home of the Drug Safety Update.",
   "signup_content_id": "ccf11f55-02ee-48ec-b71c-7e3fe78b3a17",
   "signup_copy": "The drug safety update is a monthly newsletter for healthcare professionals, bringing you information and clinical advice on the safe use of medicines.",
+  "signup_enabled": true,
   "organisations": ["240f72bd-9a4d-4f39-94d9-77235cadde8e"],
   "related": ["1e9c0ada-5f7e-43cc-a55f-cc32757edaa3"],
   "subscription_list_title_prefix": "Drug Safety Update"
