@@ -1,0 +1,18 @@
+.reorderable-document-list {
+
+  padding-left: 0;
+
+  .ui-sortable-handle {
+    cursor: move;
+    list-style: none;
+    padding: 1em;
+    border: 1px solid $border-colour;
+    background-color: white;
+    margin: 1em 0;
+
+    &.ui-sortable-helper {
+      box-shadow: 3px 3px 15px 5px $grey-3;
+      transform: rotate(5deg);
+    }
+  }
+}
