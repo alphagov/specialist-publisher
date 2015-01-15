@@ -51,6 +51,13 @@ class ManualDocumentServiceRegistry
     )
   end
 
+  def update_order(context)
+    ReorderManualDocumentsService.new(
+      manual_repository(context),
+      context,
+    )
+  end
+
 private
   def document_renderer
     SpecialistPublisherWiring.get(:specialist_document_renderer)

@@ -29,6 +29,12 @@ class ManualWithDocuments < SimpleDelegator
     end
   end
 
+  def reorder_documents(document_order)
+    # TODO This errors if there are documents that aren't in document_order.
+    # Reject the request a bit more gracefully
+    @documents.sort_by! { |doc| document_order.index(doc.id) }
+  end
+
   private
   attr_reader :document_builder, :manual
 

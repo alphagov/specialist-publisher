@@ -82,7 +82,7 @@ class ManualDocumentsController < ApplicationController
   end
 
   def update_order
-    manual, documents = services.list(self).call
+    manual, documents = services.update_order(self).call
 
     redirect_to(
       manual_path(manual),
