@@ -14,6 +14,16 @@ class MedicalSafetyAlertPublicationAlertFormatter < AbstractDocumentPublicationA
     )
   end
 
+  def subject
+    if document.alert_type == "drugs"
+      "Drug alert: #{document.title}"
+    elsif document.alert_type == "devices"
+      "Medical device alert: #{document.title}"
+    else
+      document.title
+    end
+  end
+
 private
   def document_noun
     "alert"
