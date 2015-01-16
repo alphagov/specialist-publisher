@@ -6,7 +6,6 @@
       "key": "railway_type",
       "name": "Railway type",
       "type": "multi-select",
-      "include_blank": false,
       "preposition": "of type",
       "allowed_values": [
         {"label": "Heavy rail", "value": "heavy-rail"},
@@ -19,7 +18,6 @@
       "key": "report_type",
       "name": "Report type",
       "type": "multi-select",
-      "include_blank": false,
       "preposition": "of type",
       "allowed_values": [
         {"label": "Investigation report", "value": "investigation-report"},

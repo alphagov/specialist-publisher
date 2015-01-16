@@ -6,7 +6,6 @@
       "key": "aircraft_category",
       "name": "Aircraft category",
       "type": "multi-select",
-      "include_blank": false,
       "preposition": "in aircraft category",
       "allowed_values": [
         {"label": "Commercial - fixed wing", "value": "commercial-fixed-wing"},
@@ -20,7 +19,6 @@
       "key": "report_type",
       "name": "Report type",
       "type": "multi-select",
-      "include_blank": false,
       "preposition": "of type",
       "allowed_values": [
         {"label": "Annual safety report", "value": "annual-safety-report"},
