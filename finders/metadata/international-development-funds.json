@@ -3,7 +3,6 @@
   "slug": "international-development-funding",
   "format": "international_development_fund",
   "name": "International development funding",
-  "signup_beta": true,
   "signup_content_id": "f1a4e5b2-c8b3-40f2-acde-75061a45184d",
   "signup_copy": "You'll get an email each time a fund is updated or a new fund is published.",
   "organisations": ["db994552-7644-404d-a770-a2fe659c661f"],
