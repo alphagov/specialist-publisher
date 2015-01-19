@@ -117,7 +117,7 @@ private
       already_published: {
         disabled: true,
         warning: "You can't publish this document",
-        notification: "There's no changes to publish.",
+        notification: "There are no changes to publish.",
       },
       slug_not_unique: {
         disabled: true,
