@@ -1,6 +1,5 @@
 require "gds_api/publishing_api"
 require "gds_api/organisations"
-require "manual_change_note_database_exporter"
 require "manual_publishing_api_exporter"
 require "manual_section_publishing_api_exporter"
 
