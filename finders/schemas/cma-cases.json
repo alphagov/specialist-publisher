@@ -110,11 +110,11 @@
     {
       "key": "opened_date",
       "name": "Opened",
+      "short_name": "Opened",
       "type": "date",
       "preposition": "opened",
       "display_as_result_metadata": true,
-      "filterable": true
-    },
+      "filterable": true    },
 
     {
       "key": "closed_date",

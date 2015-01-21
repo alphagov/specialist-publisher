@@ -49,6 +49,7 @@
     {
       "key": "issued_date",
       "name": "Issued",
+      "short_name": "Issued",
       "type": "date",
       "preposition": "issued",
       "display_as_result_metadata": true,

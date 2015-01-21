@@ -39,6 +39,7 @@
     {
       "key": "first_published_at",
       "name": "Published",
+      "short_name": "Published",
       "type": "date",
       "preposition": "published",
       "display_as_result_metadata": true,
