@@ -8,6 +8,7 @@
   "signup_title": "Drug alerts and medical device alerts",
   "signup_copy": "You'll get an email each time an alert is updated or a new alert is published.",
   "signup_enabled": true,
+  "show_summaries": true,
   "organisations": ["240f72bd-9a4d-4f39-94d9-77235cadde8e"],
   "related": ["602be505-4cf4-4f8c-8bfc-7bc4b63a7f47"],
   "email_filter_by": "alert_type",

@@ -7,6 +7,7 @@
   "beta_message": "Until early 2015, the <a href='http://www.aaib.gov.uk/home/index.cfm'>AAIB website</a> is the main source for AAIB reports",
   "signup_content_id": "1ad5918c-19ff-4431-b20b-1bab890cd84b",
   "signup_copy": "You'll get an email each time a report is updated or a new report is published.",
+  "show_summaries": true,
   "organisations": ["38eb5d8f-2d89-480c-8655-e2e7ac23f8f4"],
   "subscription_list_title_prefix": {
     "singular": "Air Accidents Investigation Branch (AAIB) reports with the following aircraft category: ",
