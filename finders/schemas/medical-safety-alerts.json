@@ -5,8 +5,10 @@
     {
       "key": "alert_type",
       "name": "Alert type",
-      "type": "multi-select",
+      "type": "text",
       "preposition": "for",
+      "display_as_result_metadata": true,
+      "filterable": true,
       "allowed_values": [
         {"label": "Drug alert", "value": "drugs"},
         {"label": "Medical device alert", "value": "devices"}
@@ -15,8 +17,10 @@
     {
       "key": "medical_specialism",
       "name": "Medical specialism",
-      "type": "multi-select",
+      "type": "text",
       "preposition": "about",
+      "display_as_result_metadata": true,
+      "filterable": true,
       "allowed_values": [
         {"label": "Anaesthetics", "value": "anaesthetics" },
         {"label": "Cardiology", "value": "cardiology" },
@@ -46,7 +50,9 @@
       "key": "issued_date",
       "name": "Issued",
       "type": "date",
-      "preposition": "issued"
+      "preposition": "issued",
+      "display_as_result_metadata": true,
+      "filterable": true
     }
   ]
 }

@@ -5,8 +5,10 @@
     {
       "key": "fund_state",
       "name": "Funds",
-      "type": "multi-select",
+      "type": "text",
       "preposition": "which are",
+      "display_as_result_metadata": true,
+      "filterable": true,
       "allowed_values": [
         {"label": "Open", "value": "open"},
         {"label": "Closed", "value": "closed"}
@@ -15,8 +17,10 @@
     {
       "key": "location",
       "name": "Countries",
-      "type": "multi-select",
+      "type": "text",
       "preposition": "for",
+      "display_as_result_metadata": true,
+      "filterable": true,
       "allowed_values": [
         {
           "label": "Afghanistan",
@@ -135,8 +139,10 @@
     {
       "key": "development_sector",
       "name": "Sector",
-      "type": "multi-select",
+      "type": "text",
       "preposition": "for",
+      "display_as_result_metadata": false,
+      "filterable": true,
       "allowed_values": [
         {
           "label": "Agriculture",
@@ -203,8 +209,10 @@
     {
       "key": "eligible_entities",
       "name": "Eligible organisations",
-      "type": "multi-select",
+      "type": "text",
       "preposition": "open to",
+      "filterable": true,
+      "display_as_result_metadata": false,
       "allowed_values": [
         {
           "label": "Non-governmental organisations (NGOs)",
@@ -243,8 +251,10 @@
     {
       "key": "value_of_funding",
       "name": "Value of funding",
-      "type": "multi-select",
+      "type": "text",
       "preposition": "with value",
+      "display_as_result_metadata": false,
+      "filterable": false,
       "allowed_values": [
         {"label": "Up to £100,000", "value": "up-to-100000"},
         {"label": "£100,001 to £500,000", "value": "100001-500000"},
