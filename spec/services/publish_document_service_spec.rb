@@ -3,7 +3,16 @@ require "publish_document_service"
 RSpec.describe PublishDocumentService do
   let(:document_id) { double(:document_id) }
   let(:repository) { double(:repository) }
-  let(:document) { double(:document, minor_update: minor_update, extra_fields: {bulk_published: false}) }
+  let(:latest_edition) { double(:latest_edition) }
+  let(:published_edition) { double(:published_edition) }
+  let(:document) {
+    double(:document,
+      minor_update: minor_update,
+      extra_fields: {bulk_published: false},
+      latest_edition: latest_edition,
+      published_edition: published_edition,
+    )
+  }
   let(:minor_update) { nil }
   let(:listeners) { [] }
 

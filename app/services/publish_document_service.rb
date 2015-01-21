@@ -7,8 +7,10 @@ class PublishDocumentService
   end
 
   def call
-    publish
-    persist
+    if document.latest_edition != document.published_edition
+      publish
+      persist
+    end
 
     document
   end
