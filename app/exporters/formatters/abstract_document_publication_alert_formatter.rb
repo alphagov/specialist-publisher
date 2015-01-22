@@ -53,6 +53,7 @@ private
       document_title: document.title,
       document_summary: document.summary,
       document_url: url_maker.published_specialist_document_path(document),
+      document_change_note: document_change_note,
     }
   end
 
@@ -70,6 +71,10 @@ private
 
   def updated_or_published_text
     document.version_number == 1 ? "published" : "updated"
+  end
+
+  def document_change_note
+    document.change_note if document.version_number != 1
   end
 
   def extra_fields
