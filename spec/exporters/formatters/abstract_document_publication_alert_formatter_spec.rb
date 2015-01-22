@@ -16,7 +16,8 @@ RSpec.describe AbstractDocumentPublicationAlertFormatter do
       title: "Some title",
       slug: "some-prefix/some-permalink",
       summary: "some summary",
-      version_number: 1,
+      change_note: change_note,
+      version_number: version_number,
       extra_fields: {
         metadata_attribute: metadata_attribute,
         array_metadata_attribute: array_metadata_attribute
@@ -40,29 +41,46 @@ RSpec.describe AbstractDocumentPublicationAlertFormatter do
     )
   }
 
-  it "has a name which corresponds to the topic name" do
-    expect(formatter.name).to eql("Specialist Documents")
+  context "a new document" do
+    let(:change_note) { "First published." }
+    let(:version_number) { 1 }
+
+    it "has a name which corresponds to the topic name" do
+      expect(formatter.name).to eql("Specialist Documents")
+    end
+
+    it "has tags which correspond to the email filter tags for that document type (format)" do
+      expect(formatter.tags[:format]).to eql(["document"])
+      expect(formatter.tags[:metadata_attribute]).to eql([metadata_attribute])
+      expect(formatter.tags[:array_metadata_attribute]).to eql(array_metadata_attribute)
+    end
+
+    it "has a subject containing the document title" do
+      expect(formatter.subject).to eq("Some title")
+    end
+
+    it "has a body containing the document title, url, and summary" do
+      expect(formatter.body).to include("Some title")
+      expect(formatter.body).to include("http://www.example.com")
+      expect(formatter.body).to include("some summary")
+      expect(formatter.body).to include("published")
+    end
+
+    it "doesn't include the change note in the body" do
+      expect(formatter.body).to_not include("First published")
+    end
   end
 
-  it "has tags which correspond to the email filter tags for that document type (format)" do
-    expect(formatter.tags[:format]).to eql(["document"])
-    expect(formatter.tags[:metadata_attribute]).to eql([metadata_attribute])
-    expect(formatter.tags[:array_metadata_attribute]).to eql(array_metadata_attribute)
-  end
+  context "an updated document" do
+    let(:change_note) { "This is the change note" }
+    let(:version_number) { 2 }
 
-  it "has a subject containing the document title" do
-    expect(formatter.subject).to eq("Some title")
-  end
+    it "includes 'updated' in the body" do
+      expect(formatter.body).to include("updated")
+    end
 
-  it "has a body containing the document title, url, and summary" do
-    expect(formatter.body).to include("Some title")
-    expect(formatter.body).to include("http://www.example.com")
-    expect(formatter.body).to include("some summary")
-    expect(formatter.body).to include("published")
-  end
-
-  it "includes 'updated' in the body if its not the first document version" do
-    allow(document).to receive(:version_number).and_return(2)
-    expect(formatter.body).to include("updated")
+    it "includes the change note in the body" do
+      expect(formatter.body).to include("This is the change note")
+    end
   end
 end

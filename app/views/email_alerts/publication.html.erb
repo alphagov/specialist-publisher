@@ -15,6 +15,12 @@
         <%= document_summary %>
       </p>
 
+      <% if document_change_note.present? %>
+        <p style="color: #0B0C0C; font-family: sans-serif; font-size: 19px; line-height: 1.315789474; margin: 15px 0;">
+          Update: <%= document_change_note %>
+        </p>
+      <% end %>
+
       <p style="color: #0B0C0C; font-family: sans-serif; font-size: 19px; line-height: 1.315789474; margin: 15px 0;">
         For further information on this <%= updated_or_published %> <%= document_noun %>:
       </p>
