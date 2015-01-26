@@ -42,6 +42,27 @@
       "preposition": "occurred",
       "display_as_result_metadata": true,
       "filterable": true
+    },
+    {
+      "key": "aircraft_type",
+      "name": "Aircraft type",
+      "type": "text",
+      "display_as_result_metadata": false,
+      "filterable": false
+    },
+    {
+      "key": "location",
+      "name": "Location",
+      "type": "text",
+      "display_as_result_metadata": false,
+      "filterable": false
+    },
+    {
+      "key": "location",
+      "name": "Location",
+      "type": "text",
+      "display_as_result_metadata": false,
+      "filterable": false
     }
   ]
 }
