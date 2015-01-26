@@ -2,6 +2,7 @@
   "content_id": "33eb214a-9291-49d3-8789-445c1e97b586",
   "slug": "maib-reports",
   "format": "maib_report",
+  "format_name": "Marine Accident Investigation Branch report",
   "name": "Marine Accident Investigation Branch reports",
   "beta": true,
   "beta_message": "Until early 2015, the <a href='http://www.maib.gov.uk/home/index.cfm'>MAIB website</a> is the main source for MAIB reports",

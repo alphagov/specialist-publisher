@@ -2,6 +2,7 @@
   "content_id": "1e9c0ada-5f7e-43cc-a55f-cc32757edaa3",
   "slug": "drug-device-alerts",
   "format": "medical_safety_alert",
+  "format_name": "Medical safety alert",
   "name": "Alerts and recalls for drugs and medical devices",
   "signup_content_id": "a796ca43-021b-4960-9c99-f41bb8ef2266",
   "signup_link": "/government/organisations/medicines-and-healthcare-products-regulatory-agency/email-signup",

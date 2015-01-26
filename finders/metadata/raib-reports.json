@@ -2,6 +2,7 @@
   "content_id": "e3ff7fc5-6788-45de-83f0-cbf34e9fe8bd",
   "slug": "raib-reports",
   "format": "raib_report",
+  "format_name": "Rail Accident Investigation Branch report",
   "name": "Rail Accident Investigation Branch reports",
   "beta": true,
   "beta_message": "Until early 2015, the <a href='http://www.raib.gov.uk/home/index.cfm'>RAIB website</a> is the main source for RAIB reports",
