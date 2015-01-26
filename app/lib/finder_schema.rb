@@ -20,7 +20,7 @@ class FinderSchema
   end
 
   def humanized_facet_value(facet_key, value, &block)
-    if facet_data_for(facet_key).fetch("type", nil) == "multi-select"
+    if facet_data_for(facet_key).fetch("type", nil) == "text"
       Array(value).map do |v|
         value_label_mapping_for(facet_key, v).fetch("label", &block)
       end
