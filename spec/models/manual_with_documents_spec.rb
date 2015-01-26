@@ -53,4 +53,65 @@ describe ManualWithDocuments do
       end
     end
   end
+
+  describe "#reorder_documents" do
+    let(:documents) {
+      [
+        alpha_document,
+        beta_document,
+        gamma_document,
+      ]
+    }
+
+    let(:alpha_document) { double(:document, id: "alpha") }
+    let(:beta_document) { double(:document, id: "beta") }
+    let(:gamma_document) { double(:document, id: "gamma") }
+
+    let(:document_order) { %w(gamma alpha beta) }
+
+    it "reorders the documents to match the given order" do
+      manual_with_documents.reorder_documents(%w(
+        gamma
+        alpha
+        beta
+      ))
+
+      expect(manual_with_documents.documents.to_a).to eq([
+        gamma_document,
+        alpha_document,
+        beta_document,
+      ])
+    end
+
+    it "raises an error if document_order doesn't contain all IDs" do
+      expect {
+        manual_with_documents.reorder_documents(%w(
+          alpha
+          beta
+        ))
+      }.to raise_error(ArgumentError)
+    end
+
+    it "raises an error if document_order contains non-existent IDs" do
+      expect {
+        manual_with_documents.reorder_documents(%w(
+          alpha
+          beta
+          gamma
+          delta
+        ))
+      }.to raise_error(ArgumentError)
+    end
+
+    it "raises an error if document_order contains duplicate IDs" do
+      expect {
+        manual_with_documents.reorder_documents(%w(
+          alpha
+          beta
+          gamma
+          beta
+        ))
+      }.to raise_error(ArgumentError)
+    end
+  end
 end

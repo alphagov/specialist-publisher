@@ -30,8 +30,13 @@ class ManualWithDocuments < SimpleDelegator
   end
 
   def reorder_documents(document_order)
-    # TODO This errors if there are documents that aren't in document_order.
-    # Reject the request a bit more gracefully
+    unless document_order.sort == @documents.map(&:id).sort
+      raise(
+        ArgumentError,
+        "document_order must contain each document_id exactly once",
+      )
+    end
+
     @documents.sort_by! { |doc| document_order.index(doc.id) }
   end
 
