@@ -1,6 +1,7 @@
 require "validators/aaib_report_validator"
 require "validators/change_note_validator"
 require "validators/cma_case_validator"
+require "validators/countryside_stewardship_grant_validator"
 require "validators/drug_safety_update_validator"
 require "validators/international_development_fund_validator"
 require "validators/maib_report_validator"
@@ -46,6 +47,21 @@ class DocumentFactoryRegistry
           CmaCase.new(
             SpecialistDocument.new(
               SlugGenerator.new(prefix: "cma-cases"),
+              *args,
+            ),
+          )
+        )
+      )
+    }
+  end
+
+  def countryside_stewardship_grant_factory
+    ->(*args) {
+      ChangeNoteValidator.new(
+        CountrysideStewardshipGrantValidator.new(
+          CountrysideStewardshipGrant.new(
+            SpecialistDocument.new(
+              SlugGenerator.new(prefix: "countryside-stewardship-grants"),
               *args,
             ),
           )
