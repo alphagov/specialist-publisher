@@ -1,4 +1,5 @@
 //= require vendor/jquery-1.11.0.min
+//= require vendor/jquery-ui.min.js
 
 //= require govuk_toolkit
 //= require ajax_setup
@@ -21,4 +22,6 @@ jQuery(function($) {
   $(".js-length-counter").each(function(){
     new GOVUK.LengthCounter({$el:$(this)});
   })
+
+  $(".reorderable-document-list").sortable();
 });

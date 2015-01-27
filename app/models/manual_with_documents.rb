@@ -29,6 +29,17 @@ class ManualWithDocuments < SimpleDelegator
     end
   end
 
+  def reorder_documents(document_order)
+    unless document_order.sort == @documents.map(&:id).sort
+      raise(
+        ArgumentError,
+        "document_order must contain each document_id exactly once",
+      )
+    end
+
+    @documents.sort_by! { |doc| document_order.index(doc.id) }
+  end
+
   private
   attr_reader :document_builder, :manual
 

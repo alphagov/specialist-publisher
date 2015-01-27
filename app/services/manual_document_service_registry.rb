@@ -3,6 +3,7 @@ require "create_manual_document_service"
 require "update_manual_document_service"
 require "show_manual_document_service"
 require "new_manual_document_service"
+require "list_manual_documents_service"
 
 class ManualDocumentServiceRegistry
   def preview(context)
@@ -38,6 +39,20 @@ class ManualDocumentServiceRegistry
 
   def new(context)
     NewManualDocumentService.new(
+      manual_repository(context),
+      context,
+    )
+  end
+
+  def list(context)
+    ListManualDocumentsService.new(
+      manual_repository(context),
+      context,
+    )
+  end
+
+  def update_order(context)
+    ReorderManualDocumentsService.new(
       manual_repository(context),
       context,
     )

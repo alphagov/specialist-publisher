@@ -62,7 +62,11 @@
 
 <div class="row">
   <div class="col-md-8">
-    <h2>Sections</h2>
+    <h2 class='with-actions'>Sections</h2>
+    <ul class="title-actions">
+      <li><%= link_to 'Reorder sections', reorder_manual_documents_path(manual), class: 'action-link' %></li>
+      <li><%= link_to 'Add section', new_manual_document_path(manual), class: 'action-link' %></li>
+     </ul>
     <% if manual.documents.any? %>
     <ul class="document-list">
      <% manual.documents.each do |document| %>
@@ -77,7 +81,6 @@
     <% else %>
       <p class='no-content-message'>You haven&rsquo;t added any sections to this manual yet.</p>
     <% end %>
-    <%= link_to 'Add section', new_manual_document_path(manual), class: 'action-link' %>
   </div>
 </div>
 <div class='row'>
