@@ -32,6 +32,7 @@ private
     {
       "aaib_report" => AaibReportObserversRegistry,
       "cma_case" => CmaCaseObserversRegistry,
+      "countryside_stewardship_grant" => CountrysideStewardshipGrantObserversRegistry,
       "drug_safety_update" => DrugSafetyUpdateObserversRegistry,
       "international_development_fund" => InternationalDevelopmentFundObserversRegistry,
       "maib_report" => MaibReportObserversRegistry,
