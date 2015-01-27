@@ -18,6 +18,7 @@ class CountrysideStewardshipGrantArtefactFormatter < AbstractArtefactFormatter
     %w(
       natural-england
       department-for-environment-food-rural-affairs
+      forestry-commission
     )
   end
 end
