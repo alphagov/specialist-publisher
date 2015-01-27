@@ -10,8 +10,12 @@ class PublishingApiFinderPublisher
 
   def call
     metadata.zip(schemae).map { |metadata, schema|
-      export_finder(metadata, schema)
-      export_signup(metadata) if metadata[:file].has_key?("signup_content_id")
+      if metadata[:file].has_key?("content_id")
+        export_finder(metadata, schema)
+        export_signup(metadata) if metadata[:file].has_key?("signup_content_id")
+      else
+        puts "didn't publish #{metadata[:file][:title]} because it doesn't have a content_id"
+      end
     }
   end
 
@@ -27,6 +31,8 @@ private
 
     attrs = finder.exportable_attributes
 
+    puts "publishing '#{attrs["title"]}' finder"
+
     publishing_api.put_content_item(attrs["base_path"], attrs)
   end
 
@@ -37,6 +43,8 @@ private
     )
 
     attrs = finder_signup.exportable_attributes
+
+    puts "publishing '#{attrs["title"]}' finder signup page"
 
     publishing_api.put_content_item(attrs["base_path"], attrs)
   end
