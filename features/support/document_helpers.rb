@@ -63,6 +63,7 @@ module DocumentHelpers
       "drug-device-alerts" => "medical_safety_alert",
       "maib-reports" => "maib_report",
       "raib-reports" => "raib_report",
+      "countryside-stewardship-grants" => "countryside_stewardship_grant",
     }
 
     slug_prefix = slug.split("/").first
