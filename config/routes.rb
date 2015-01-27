@@ -9,6 +9,7 @@ SpecialistPublisher::Application.routes.draw do
   document_types = %w(
     aaib_reports
     cma_cases
+    countryside_stewardship_grants
     drug_safety_updates
     international_development_funds
     maib_reports

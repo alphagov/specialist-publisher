@@ -26,6 +26,10 @@ class ApplicationController < ActionController::Base
         document_type: "cma_case",
         title: "CMA Cases",
       },
+      "countryside-stewardship-grants" => {
+        document_type: "countryside_stewardship_grant",
+        title: "Countryside Stewardship Grants",
+      },
       "international-development-funds" => {
         document_type: "international_development_fund",
         title: "International Development Funds",
