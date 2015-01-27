@@ -3,8 +3,6 @@
   "slug": "drug-device-alerts",
   "format": "medical_safety_alert",
   "name": "Alerts and recalls for drugs and medical devices",
-  "beta": true,
-  "beta_message": "Until January 2015, <a href='http://www.mhra.gov.uk/Safetyinformation/Safetywarningsalertsandrecalls/index.htm'>the MHRA website</a> is the main source for drug alerts and medical device alerts.",
   "signup_content_id": "a796ca43-021b-4960-9c99-f41bb8ef2266",
   "signup_link": "/government/organisations/medicines-and-healthcare-products-regulatory-agency/email-signup",
   "signup_title": "Drug alerts and medical device alerts",
