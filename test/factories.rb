@@ -17,6 +17,10 @@ FactoryGirl.define do
     organisation_slug "air-accidents-investigation-branch"
   end
 
+  factory :defra_editor, parent: :editor do
+    organisation_slug "department-for-environment-food-rural-affairs"
+  end
+
   factory :dfid_editor, parent: :editor do
     organisation_slug "department-for-international-development"
   end

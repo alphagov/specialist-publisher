@@ -98,6 +98,7 @@ require "organisations_api_helpers"
 require "email_alert_api_helpers"
 require "form_helpers"
 require "cma_case_helpers"
+require "csg_helpers"
 require "aaib_report_helpers"
 require "dsu_helpers"
 require "idf_helpers"
@@ -120,6 +121,7 @@ World(EmailAlertAPIHelpers)
 World(FormHelpers)
 World(AaibReportHelpers)
 World(CmaCaseHelpers)
+World(CsgHelpers)
 World(DsuHelpers)
 World(IdfHelpers)
 World(DocumentHelpers)

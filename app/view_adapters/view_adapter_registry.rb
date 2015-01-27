@@ -9,6 +9,7 @@ class ViewAdapterRegistry
     {
       "aaib_report" => AaibReportViewAdapter,
       "cma_case" => CmaCaseViewAdapter,
+      "countryside_stewardship_grant" => CountrysideStewardshipGrantViewAdapter,
       "drug_safety_update" => DrugSafetyUpdateViewAdapter,
       "international_development_fund" => InternationalDevelopmentFundViewAdapter,
       "maib_report" => MaibReportViewAdapter,
