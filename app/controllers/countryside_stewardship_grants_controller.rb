@@ -1,0 +1,2 @@
+class CountrysideStewardshipGrantsController < AbstractDocumentsController
+end
