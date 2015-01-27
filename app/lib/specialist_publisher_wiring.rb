@@ -9,6 +9,8 @@ require "formatters/aaib_report_artefact_formatter"
 require "formatters/aaib_report_indexable_formatter"
 require "formatters/cma_case_artefact_formatter"
 require "formatters/cma_case_indexable_formatter"
+require "formatters/countryside_stewardship_grant_artefact_formatter"
+require "formatters/countryside_stewardship_grant_indexable_formatter"
 require "formatters/drug_safety_update_artefact_formatter"
 require "formatters/drug_safety_update_indexable_formatter"
 require "formatters/international_development_fund_artefact_formatter"
@@ -98,6 +100,11 @@ SpecialistPublisherWiring = DependencyContainer.new do
   define_factory(:aaib_report_builder) {
     SpecialistDocumentBuilder.new("aaib_report",
       get(:validatable_document_factories).aaib_report_factory)
+  }
+
+  define_factory(:countryside_stewardship_grant_builder) {
+    SpecialistDocumentBuilder.new("countryside_stewardship_grant",
+    get(:validatable_document_factories).countryside_stewardship_grant_factory)
   }
 
   define_factory(:drug_safety_update_builder) {
@@ -262,6 +269,14 @@ SpecialistPublisherWiring = DependencyContainer.new do
     }
   }
 
+  define_factory(:countryside_stewardship_grant_panopticon_registerer) {
+    ->(document) {
+      get(:panopticon_registerer).call(
+        CountrysideStewardshipGrantArtefactFormatter.new(document)
+      )
+    }
+  }
+
   define_factory(:drug_safety_update_panopticon_registerer) {
     ->(document) {
       get(:panopticon_registerer).call(
@@ -348,6 +363,26 @@ SpecialistPublisherWiring = DependencyContainer.new do
     ->(document) {
       RummagerIndexer.new.delete(
         CmaCaseIndexableFormatter.new(
+          MarkdownAttachmentProcessor.new(document)
+        )
+      )
+    }
+  }
+
+  define_factory(:countryside_stewardship_grant_rummager_indexer) {
+    ->(document) {
+      RummagerIndexer.new.add(
+        CountrysideStewardshipGrantIndexableFormatter.new(
+          MarkdownAttachmentProcessor.new(document)
+        )
+      )
+    }
+  }
+
+  define_factory(:countryside_stewardship_grant_rummager_deleter) {
+    ->(document) {
+      RummagerIndexer.new.delete(
+        CountrysideStewardshipGrantIndexableFormatter.new(
           MarkdownAttachmentProcessor.new(document)
         )
       )
@@ -484,6 +519,18 @@ SpecialistPublisherWiring = DependencyContainer.new do
     }
   }
 
+  define_instance(:countryside_stewardship_grant_content_api_exporter) {
+    ->(doc) {
+      SpecialistDocumentDatabaseExporter.new(
+        RenderedSpecialistDocument,
+        get(:specialist_document_renderer),
+        get(:countryside_stewardship_grant_finder_schema),
+        doc,
+        PublicationLog,
+      ).call
+    }
+  }
+
   define_instance(:maib_report_content_api_exporter) {
     ->(doc) {
       SpecialistDocumentDatabaseExporter.new(
@@ -560,6 +607,11 @@ SpecialistPublisherWiring = DependencyContainer.new do
   define_singleton(:cma_case_finder_schema) {
     require "finder_schema"
     FinderSchema.new(Rails.root.join("finders/schemas/cma-cases.json"))
+  }
+
+  define_singleton(:countryside_stewardship_grant_finder_schema) {
+    require "finder_schema"
+    FinderSchema.new(Rails.root.join("finders/schemas/countryside-stewardship-grants.json"))
   }
 
   define_singleton(:drug_safety_update_finder_schema) {
