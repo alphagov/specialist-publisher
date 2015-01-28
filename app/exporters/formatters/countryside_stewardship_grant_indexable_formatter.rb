@@ -14,6 +14,7 @@ class CountrysideStewardshipGrantIndexableFormatter < AbstractSpecialistDocument
     %w(
       natural-england
       department-for-environment-food-rural-affairs
+      forestry-commission
     )
   end
 end
