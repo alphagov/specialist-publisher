@@ -14,7 +14,7 @@ class PublishingApiFinderPublisher
         export_finder(metadata, schema)
         export_signup(metadata) if metadata[:file].has_key?("signup_content_id")
       else
-        puts "didn't publish #{metadata[:file][:title]} because it doesn't have a content_id"
+        puts "didn't publish #{metadata[:file]["name"]} because it doesn't have a content_id"
       end
     }
   end
