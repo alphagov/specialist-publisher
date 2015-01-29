@@ -3,6 +3,10 @@ class CountrysideStewardshipGrantViewAdapter < DocumentViewAdapter
     :title,
     :summary,
     :body,
+    :grant_type,
+    :land_use,
+    :tiers_or_standalone_items,
+    :funding_amount,
   ]
 
   attributes.each do |attribute_name|

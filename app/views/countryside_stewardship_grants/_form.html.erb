@@ -9,6 +9,11 @@
   <div class="preview_button"></div>
   <div class="preview_container" style="display: none;"></div>
 
+  <%= f.select :grant_type, f.object.facet_options(:grant_type), {}, { class: 'form-control' } %>
+  <%= f.select :land_use, f.object.facet_options(:land_use), {}, { class: 'select2', multiple: true, data: {placeholder: 'Select a location'} } %>
+  <%= f.select :tiers_or_standalone_items, f.object.facet_options(:tiers_or_standalone_items), {}, { class: 'select2', multiple: true, data: {placeholder: 'Select a Tier or Standalone Item'} } %>
+  <%= f.select :funding_amount, f.object.facet_options(:funding_amount), { label: 'Funding (per unit per year)'}, { class: 'select2', multiple: true, data: {placeholder: 'Select a level of funding (per unit per year) '} } %>
+
   <%= render partial: "specialist_documents/minor_major_update_fields", locals: { f: f, document: document } %>
 
   <div class="actions">

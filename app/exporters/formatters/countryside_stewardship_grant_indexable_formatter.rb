@@ -7,7 +7,12 @@ class CountrysideStewardshipGrantIndexableFormatter < AbstractSpecialistDocument
 
   private
   def extra_attributes
-    {}
+    {
+      grant_type: entity.grant_type,
+      land_use: entity.land_use,
+      tiers_or_standalone_items: entity.tiers_or_standalone_items,
+      funding_amount: entity.funding_amount,
+    }
   end
 
   def organisation_slugs
