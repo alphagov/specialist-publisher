@@ -58,8 +58,8 @@
       "filterable": false
     },
     {
-      "key": "location",
-      "name": "Location",
+      "key": "registration",
+      "name": "Registration",
       "type": "text",
       "display_as_result_metadata": false,
       "filterable": false
