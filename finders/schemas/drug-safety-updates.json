@@ -5,8 +5,10 @@
     {
       "key": "therapeutic_area",
       "name": "Therapeutic area",
-      "type": "multi-select",
+      "type": "text",
       "preposition": "about",
+      "display_as_result_metadata": true,
+      "filterable": true,
       "allowed_values": [
         {"label": "Anaesthesia and intensive care", "value": "anaesthesia-intensive-care"},
         {"label": "Cancer", "value": "cancer"},
@@ -37,8 +39,11 @@
     {
       "key": "first_published_at",
       "name": "Published",
+      "short_name": "Published",
       "type": "date",
-      "preposition": "published"
+      "preposition": "published",
+      "display_as_result_metadata": true,
+      "filterable": true
     }
   ]
 }

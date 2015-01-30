@@ -5,8 +5,10 @@
     {
       "key": "vessel_type",
       "name": "Vessel type",
-      "type": "multi-select",
+      "type": "text",
       "preposition": "of type",
+      "display_as_result_metadata": true,
+      "filterable": true,
       "allowed_values": [
         {"label": "Merchant vessel 100 gross tons or over", "value": "merchant-vessel-100-gross-tons-or-over"},
         {"label": "Merchant vessel under 100 gross tons", "value": "merchant-vessel-under-100-gross-tons"},
@@ -18,8 +20,10 @@
    {
      "key": "report_type",
      "name": "Report type",
-     "type": "multi-select",
+     "type": "text",
      "preposition": "of type",
+     "display_as_result_metadata": true,
+      "filterable": true,
      "allowed_values": [
        {"label": "Investigation report", "value": "investigation-report"},
        {"label": "Safety bulletin", "value": "safety-bulletin"},
@@ -31,8 +35,11 @@
     {
       "key": "date_of_occurrence",
       "name": "Date of occurrence",
+      "short_name": "Occurred",
       "type": "date",
-      "preposition": "occurred"
+      "preposition": "occurred",
+      "display_as_result_metadata": true,
+      "filterable": true
     }
   ]
 }

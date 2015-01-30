@@ -5,8 +5,10 @@
     {
       "key": "aircraft_category",
       "name": "Aircraft category",
-      "type": "multi-select",
+      "type": "text",
       "preposition": "in aircraft category",
+      "display_as_result_metadata": true,
+      "filterable": true,
       "allowed_values": [
         {"label": "Commercial - fixed wing", "value": "commercial-fixed-wing"},
         {"label": "Commercial - rotorcraft", "value": "commercial-rotorcraft"},
@@ -18,8 +20,10 @@
     {
       "key": "report_type",
       "name": "Report type",
-      "type": "multi-select",
+      "type": "text",
       "preposition": "of type",
+      "display_as_result_metadata": true,
+      "filterable": true,
       "allowed_values": [
         {"label": "Annual safety report", "value": "annual-safety-report"},
         {"label": "Bulletin - Correspondence investigation", "value": "correspondence-investigation"},
@@ -33,8 +37,32 @@
     {
       "key": "date_of_occurrence",
       "name": "Date of occurrence",
+      "short_name": "Occurred",
       "type": "date",
-      "preposition": "occurred"
+      "preposition": "occurred",
+      "display_as_result_metadata": true,
+      "filterable": true
+    },
+    {
+      "key": "aircraft_type",
+      "name": "Aircraft type",
+      "type": "text",
+      "display_as_result_metadata": false,
+      "filterable": false
+    },
+    {
+      "key": "location",
+      "name": "Location",
+      "type": "text",
+      "display_as_result_metadata": false,
+      "filterable": false
+    },
+    {
+      "key": "location",
+      "name": "Location",
+      "type": "text",
+      "display_as_result_metadata": false,
+      "filterable": false
     }
   ]
 }

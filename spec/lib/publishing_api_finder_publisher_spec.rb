@@ -10,6 +10,7 @@ describe PublishingApiFinderPublisher do
           file: {
             "slug" => "first-finder",
             "name" => "first finder",
+            "format_name" => "first finder things",
             "content_id" => "some-random-id",
             "format" => "a_report_format",
             "signup_content_id" => "content-id-for-email-signup-page",
@@ -20,6 +21,7 @@ describe PublishingApiFinderPublisher do
           file: {
             "slug" => "second-finder",
             "name" => "second finder",
+            "format_name" => "second finder things",
             "content_id" => "some-other-random-id",
             "format" => "some_case_format",
           },
@@ -69,6 +71,7 @@ describe PublishingApiFinderPublisher do
             "slug" => "finder-without-content-id",
             "name" => "finder without content id",
             "format" => "a_report_format",
+            "format_name" => "a report format",
           },
           timestamp: "2015-01-05T10:45:10.000+00:00",
         },
@@ -78,6 +81,7 @@ describe PublishingApiFinderPublisher do
             "name" => "finder with content id",
             "content_id" => "some-random-id",
             "format" => "a_report_format",
+            "format_name" => "a report format",
             "signup_content_id" => "content-id-for-email-signup-page",
           },
           timestamp: "2015-01-05T10:45:10.000+00:00",

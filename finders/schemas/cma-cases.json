@@ -5,8 +5,10 @@
     {
         "key": "case_type",
         "name": "Case type",
-        "type": "multi-select",
+        "type": "text",
         "preposition": "of type",
+        "display_as_result_metadata": true,
+        "filterable": true,
         "allowed_values": [
           {"label": "CA98 and civil cartels", "value": "ca98-and-civil-cartels"},
           {"label": "Criminal cartels", "value": "criminal-cartels"},
@@ -21,8 +23,10 @@
     {
       "key": "case_state",
       "name": "Case state",
-      "type": "multi-select",
+      "type": "text",
       "preposition": "which are",
+      "display_as_result_metadata": true,
+      "filterable": true,
       "allowed_values": [
         {"label": "Open", "value": "open"},
         {"label": "Closed", "value": "closed"}
@@ -32,8 +36,10 @@
     {
       "key": "market_sector",
       "name": "Market sector",
-      "type": "multi-select",
+      "type": "text",
       "preposition": "about",
+      "display_as_result_metadata": true,
+      "filterable": true,
       "allowed_values": [
         {"label": "Aerospace", "value": "aerospace"},
         {"label": "Agriculture, environment and natural resources", "value": "agriculture-environment-and-natural-resources"},
@@ -70,8 +76,10 @@
     {
       "key": "outcome_type",
       "name": "Outcome",
-      "type": "multi-select",
+      "type": "text",
       "preposition": "with outcome",
+      "display_as_result_metadata": true,
+      "filterable": true,
       "allowed_values": [
         {"label": "CA98 - no grounds for action", "value": "ca98-no-grounds-for-action-non-infringement"},
         {"label": "CA98 - infringement Chapter I", "value": "ca98-infringement-chapter-i"},
@@ -102,8 +110,18 @@
     {
       "key": "opened_date",
       "name": "Opened",
+      "short_name": "Opened",
       "type": "date",
-      "preposition": "opened"
+      "preposition": "opened",
+      "display_as_result_metadata": true,
+      "filterable": true    },
+
+    {
+      "key": "closed_date",
+      "short_name": "Closed",
+      "type": "date",
+      "display_as_result_metadata": true,
+      "filterable": false
     }
   ]
 }
