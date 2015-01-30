@@ -114,10 +114,12 @@
       "type": "date",
       "preposition": "opened",
       "display_as_result_metadata": true,
-      "filterable": true    },
+      "filterable": true
+    },
 
     {
       "key": "closed_date",
+      "name": "Closed",
       "short_name": "Closed",
       "type": "date",
       "display_as_result_metadata": true,
