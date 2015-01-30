@@ -254,7 +254,7 @@
       "type": "text",
       "preposition": "with value",
       "display_as_result_metadata": false,
-      "filterable": false,
+      "filterable": true,
       "allowed_values": [
         {"label": "Up to £100,000", "value": "up-to-100000"},
         {"label": "£100,001 to £500,000", "value": "100001-500000"},
