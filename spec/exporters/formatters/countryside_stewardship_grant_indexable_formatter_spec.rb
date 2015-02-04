@@ -11,6 +11,10 @@ RSpec.describe CountrysideStewardshipGrantIndexableFormatter do
     slug: double,
     summary: double,
     title: double,
+    grant_type: double,
+    land_use: double,
+    tiers_or_standalone_items: double,
+    funding_amount: double,
     updated_at: double,
     minor_update?: false,
     )

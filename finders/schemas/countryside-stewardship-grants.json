@@ -1,5 +1,67 @@
 {
   "slug": "countryside-stewardship-grants",
   "document_noun": "grant",
-  "facets": []
+  "facets": [
+    {
+      "key": "grant_type",
+      "name": "Grant type",
+      "type": "multi-select",
+      "preposition": "of type",
+      "allowed_values": [
+        {"label": "Option", "value": "option"},
+        {"label": "Capital item", "value": "capital-item"}
+      ]
+    },
+    {
+      "key": "land_use",
+      "name": "Land use",
+      "type": "multi-select",
+      "preposition": "for",
+      "allowed_values": [
+        {"label": "Access", "value": "access"},
+        {"label": "Arable land", "value": "arable-land"},
+        {"label": "Boundaries", "value": "boundaries"},
+        {"label": "Coast", "value": "coast"},
+        {"label": "Farmland wildlife", "value": "farmland-wildlife"},
+        {"label": "Flood risk", "value": "flood-risk"},
+        {"label": "Grassland", "value": "grassland"},
+        {"label": "Historic environment", "value": "historic-environment"},
+        {"label": "Livestock management", "value": "livestock-management"},
+        {"label": "Organic land", "value": "organic-land"},
+        {"label": "Trees (non-woodland)", "value": "trees-non-woodland"},
+        {"label": "Uplands", "value": "uplands"},
+        {"label": "Vegetation control", "value": "vegetation-control"},
+        {"label": "Water quality", "value": "water-quality"},
+        {"label": "Wildlife package", "value": "wildlife-package"},
+        {"label": "Woodland", "value": "woodland"}
+      ]
+    },
+    {
+      "key": "tiers_or_standalone_items",
+      "name": "Tiers or standalone items",
+      "type": "multi-select",
+      "preposition": "for",
+      "allowed_values": [
+        {"label": "Higher Tier", "value": "higher-tier"},
+        {"label": "Mid Tier", "value": "mid-tier"},
+        {"label": "Standalone capital items", "value": "standalone-capital-items"}
+      ]
+    },
+    {
+      "key": "funding_amount",
+      "name": "Funding (per unit per year)",
+      "type": "multi-select",
+      "preposition": "of",
+      "allowed_values": [
+        {"label": "Up to £100", "value": "up-to-100"},
+        {"label": "£101 to £200", "value": "101-to-200"},
+        {"label": "£201 to £300", "value": "201-to-300"},
+        {"label": "£301 to £400", "value": "301-to-400"},
+        {"label": "£401 to £500", "value": "401-to-500"},
+        {"label": "More than £500", "value": "more-than-500"},
+        {"label": "Up to 50% actual costs", "value": "up-to-50-actual-costs"},
+        {"label": "More than 50% actual costs", "value": "more-than-50-actual-costs"}
+      ]
+    }
+  ]
 }
