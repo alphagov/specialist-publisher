@@ -1,6 +1,6 @@
 {
   "content_id": "e3ff7fc5-6788-45de-83f0-cbf34e9fe8bd",
-  "slug": "raib-reports",
+  "base_path": "/raib-reports",
   "format": "raib_report",
   "format_name": "Rail Accident Investigation Branch report",
   "name": "Rail Accident Investigation Branch reports",

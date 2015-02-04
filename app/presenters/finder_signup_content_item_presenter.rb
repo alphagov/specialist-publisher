@@ -30,7 +30,7 @@ private
   end
 
   def base_path
-    "/#{metadata.fetch("slug")}/email-signup"
+    "#{metadata.fetch("base_path")}/email-signup"
   end
 
   def description
