@@ -4,6 +4,9 @@
   "format": "drug_safety_update",
   "format_name": "Drug Safety Update",
   "name": "Drug Safety Update",
+  "filter": {
+    "filter_document_type": "drug_safety_update"
+  },
   "show_summaries": true,
   "signup_content_id": "ccf11f55-02ee-48ec-b71c-7e3fe78b3a17",
   "signup_link": "/government/organisations/medicines-and-healthcare-products-regulatory-agency/email-signup",
