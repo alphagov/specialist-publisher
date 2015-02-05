@@ -31,7 +31,7 @@ private
   end
 
   def base_path
-    "/#{metadata.fetch("slug", "")}"
+    metadata.fetch("base_path")
   end
 
   def description

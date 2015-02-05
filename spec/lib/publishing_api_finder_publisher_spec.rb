@@ -8,7 +8,7 @@ describe PublishingApiFinderPublisher do
       metadata = [
         {
           file: {
-            "slug" => "first-finder",
+            "base_path" => "/first-finder",
             "name" => "first finder",
             "format_name" => "first finder things",
             "content_id" => "some-random-id",
@@ -19,7 +19,7 @@ describe PublishingApiFinderPublisher do
         },
         {
           file: {
-            "slug" => "second-finder",
+            "base_path" => "/second-finder",
             "name" => "second finder",
             "format_name" => "second finder things",
             "content_id" => "some-other-random-id",
@@ -32,7 +32,6 @@ describe PublishingApiFinderPublisher do
       schemae =  [
         {
           file: {
-            "slug" => "first-finder",
             "facets" => ["a facet", "another facet"],
             "document_noun" => "reports",
           },
@@ -40,7 +39,6 @@ describe PublishingApiFinderPublisher do
         },
         {
           file: {
-            "slug" => "second-finder",
             "facets" => ["a facet", "another facet"],
             "document_noun" => "cases",
           },
@@ -68,7 +66,7 @@ describe PublishingApiFinderPublisher do
       metadata = [
         {
           file: {
-            "slug" => "finder-without-content-id",
+            "base_path" => "/finder-without-content-id",
             "name" => "finder without content id",
             "format" => "a_report_format",
             "format_name" => "a report format",
@@ -77,7 +75,7 @@ describe PublishingApiFinderPublisher do
         },
         {
           file: {
-            "slug" => "finder-with-content-id",
+            "base_path" => "/finder-with-content-id",
             "name" => "finder with content id",
             "content_id" => "some-random-id",
             "format" => "a_report_format",
@@ -91,7 +89,6 @@ describe PublishingApiFinderPublisher do
       schemae =  [
         {
           file: {
-            "slug" => "finder-without-content-id",
             "facets" => ["a facet", "another facet"],
             "document_noun" => "reports",
           },
@@ -99,7 +96,6 @@ describe PublishingApiFinderPublisher do
         },
         {
           file: {
-            "slug" => "finder-with-content-id",
             "facets" => ["a facet", "another facet"],
             "document_noun" => "reports",
           },

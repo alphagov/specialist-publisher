@@ -1,6 +1,6 @@
 {
   "content_id": "b7574bba-969f-4c49-855a-ae1586258ff6",
-  "slug": "aaib-reports",
+  "base_path": "/aaib-reports",
   "format": "aaib_report",
   "format_name": "Air Accidents Investigation Branch report",
   "name": "Air Accidents Investigation Branch reports",

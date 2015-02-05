@@ -1,6 +1,6 @@
 {
   "content_id": "1e9c0ada-5f7e-43cc-a55f-cc32757edaa3",
-  "slug": "drug-device-alerts",
+  "base_path": "/drug-device-alerts",
   "format": "medical_safety_alert",
   "format_name": "Medical safety alert",
   "name": "Alerts and recalls for drugs and medical devices",
