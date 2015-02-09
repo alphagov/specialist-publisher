@@ -11,6 +11,7 @@ class ViewAdapterRegistry
       "cma_case" => CmaCaseViewAdapter,
       "countryside_stewardship_grant" => CountrysideStewardshipGrantViewAdapter,
       "drug_safety_update" => DrugSafetyUpdateViewAdapter,
+      "esi_fund" => EsiFundViewAdapter,
       "international_development_fund" => InternationalDevelopmentFundViewAdapter,
       "maib_report" => MaibReportViewAdapter,
       "medical_safety_alert" => MedicalSafetyAlertViewAdapter,
