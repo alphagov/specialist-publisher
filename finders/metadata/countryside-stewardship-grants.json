@@ -1,6 +1,5 @@
 {
   "base_path": "/countryside-stewardship-grants",
-  "format": "countryside_stewardship_grant",
   "name": "Countryside Stewardship grants",
   "beta": true,
   "filter": {
