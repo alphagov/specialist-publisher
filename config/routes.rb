@@ -11,6 +11,7 @@ SpecialistPublisher::Application.routes.draw do
     cma_cases
     countryside_stewardship_grants
     drug_safety_updates
+    esi_funds
     international_development_funds
     maib_reports
     medical_safety_alerts
