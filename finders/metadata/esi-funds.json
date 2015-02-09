@@ -1,0 +1,9 @@
+{
+  "base_path": "/european-structural-investment-funds",
+  "name": "European Structural and Investment Funds",
+  "beta": true,
+  "filter": {
+    "filter_document_type": "european_structural_investment_fund"
+  },
+  "organisations": []
+}

@@ -13,6 +13,8 @@ require "formatters/countryside_stewardship_grant_artefact_formatter"
 require "formatters/countryside_stewardship_grant_indexable_formatter"
 require "formatters/drug_safety_update_artefact_formatter"
 require "formatters/drug_safety_update_indexable_formatter"
+require "formatters/esi_fund_artefact_formatter"
+require "formatters/esi_fund_indexable_formatter"
 require "formatters/international_development_fund_artefact_formatter"
 require "formatters/international_development_fund_indexable_formatter"
 require "formatters/maib_report_artefact_formatter"
@@ -110,6 +112,11 @@ SpecialistPublisherWiring = DependencyContainer.new do
   define_factory(:drug_safety_update_builder) {
     SpecialistDocumentBuilder.new("drug_safety_update",
       get(:validatable_document_factories).drug_safety_update_factory)
+  }
+
+  define_factory(:esi_fund_builder) {
+    SpecialistDocumentBuilder.new("esi_fund",
+      get(:validatable_document_factories).esi_fund_factory)
   }
 
   define_factory(:maib_report_builder) {
@@ -285,6 +292,14 @@ SpecialistPublisherWiring = DependencyContainer.new do
     }
   }
 
+  define_factory(:esi_fund_panopticon_registerer) {
+    ->(document) {
+      get(:panopticon_registerer).call(
+        EsiFundArtefactFormatter.new(document)
+      )
+    }
+  }
+
   define_factory(:maib_report_panopticon_registerer) {
     ->(document) {
       get(:panopticon_registerer).call(
@@ -393,6 +408,26 @@ SpecialistPublisherWiring = DependencyContainer.new do
     ->(document) {
       RummagerIndexer.new.add(
         DrugSafetyUpdateIndexableFormatter.new(
+          MarkdownAttachmentProcessor.new(document)
+        )
+      )
+    }
+  }
+
+  define_factory(:esi_fund_rummager_indexer) {
+    ->(document) {
+      RummagerIndexer.new.add(
+        EsiFundIndexableFormatter.new(
+          MarkdownAttachmentProcessor.new(document)
+        )
+      )
+    }
+  }
+
+  define_factory(:esi_fund_rummager_deleter) {
+    ->(document) {
+      RummagerIndexer.new.delete(
+        EsiFundIndexableFormatter.new(
           MarkdownAttachmentProcessor.new(document)
         )
       )
@@ -531,6 +566,18 @@ SpecialistPublisherWiring = DependencyContainer.new do
     }
   }
 
+  define_instance(:esi_fund_content_api_exporter) {
+    ->(doc) {
+      SpecialistDocumentDatabaseExporter.new(
+        RenderedSpecialistDocument,
+        get(:specialist_document_renderer),
+        get(:esi_fund_finder_schema),
+        doc,
+        PublicationLog,
+      ).call
+    }
+  }
+
   define_instance(:maib_report_content_api_exporter) {
     ->(doc) {
       SpecialistDocumentDatabaseExporter.new(
@@ -617,6 +664,11 @@ SpecialistPublisherWiring = DependencyContainer.new do
   define_singleton(:drug_safety_update_finder_schema) {
     require "finder_schema"
     FinderSchema.new(Rails.root.join("finders/schemas/drug-safety-updates.json"))
+  }
+
+  define_singleton(:esi_fund_finder_schema) {
+    require "finder_schema"
+    FinderSchema.new(Rails.root.join("finders/schemas/esi-funds.json"))
   }
 
   define_singleton(:maib_report_finder_schema) {

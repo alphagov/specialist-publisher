@@ -34,6 +34,7 @@ private
       "cma_case" => CmaCaseObserversRegistry,
       "countryside_stewardship_grant" => CountrysideStewardshipGrantObserversRegistry,
       "drug_safety_update" => DrugSafetyUpdateObserversRegistry,
+      "esi_fund" => EsiFundObserversRegistry,
       "international_development_fund" => InternationalDevelopmentFundObserversRegistry,
       "maib_report" => MaibReportObserversRegistry,
       "medical_safety_alert" => MedicalSafetyAlertObserversRegistry,

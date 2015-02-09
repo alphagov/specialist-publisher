@@ -38,6 +38,10 @@ class ApplicationController < ActionController::Base
         document_type: "drug_safety_update",
         title: "Drug Safety Update",
       },
+      "esi-funds" => {
+        document_type: "esi_fund",
+        title: "ESI Funds",
+      },
       "medical-safety-alerts" => {
         document_type: "medical_safety_alert" ,
         title: "Medical Safety Alerts",

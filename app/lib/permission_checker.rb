@@ -47,6 +47,8 @@ private
       "department-for-international-development"
     when "drug_safety_update", "medical_safety_alert"
       "medicines-and-healthcare-products-regulatory-agency"
+    when "esi_fund"
+      "department-for-communities-and-local-government"
     when "maib_report"
       "marine-accident-investigation-branch"
     when "raib_report"
