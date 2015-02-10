@@ -43,7 +43,6 @@ private
       beta: metadata.fetch("beta", false),
       beta_message: metadata.fetch("beta_message", nil),
       document_noun: schema.fetch("document_noun"),
-      document_type: metadata.fetch("format"),
       email_signup_enabled: metadata.fetch("signup_enabled", false),
       filter: metadata.fetch("filter", {}),
       format_name: metadata.fetch("format_name", nil),
