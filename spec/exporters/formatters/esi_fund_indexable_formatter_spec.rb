@@ -11,6 +11,11 @@ RSpec.describe EsiFundIndexableFormatter do
     slug: double,
     summary: double,
     title: double,
+    fund_state: double,
+    fund_type: double,
+    location: double,
+    funding_source: double,
+    closing_date: double,
     updated_at: double,
     minor_update?: false,
     )
