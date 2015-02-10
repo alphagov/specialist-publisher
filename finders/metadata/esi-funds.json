@@ -3,7 +3,7 @@
   "name": "European Structural and Investment Funds",
   "beta": true,
   "filter": {
-    "filter_document_type": "european_structural_investment_fund"
+    "document_type": "european_structural_investment_fund"
   },
   "organisations": []
 }
