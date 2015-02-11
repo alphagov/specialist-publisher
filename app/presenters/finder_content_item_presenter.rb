@@ -48,6 +48,7 @@ private
       format_name: metadata.fetch("format_name", nil),
       signup_link: metadata.fetch("signup_link", nil),
       show_summaries: metadata.fetch("show_summaries", false),
+      summary: metadata.fetch("summary", nil),
       facets: schema.fetch("facets", []),
     }
   end
