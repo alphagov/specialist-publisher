@@ -3,6 +3,11 @@ class EsiFundViewAdapter < DocumentViewAdapter
     :title,
     :summary,
     :body,
+    :fund_state,
+    :fund_type,
+    :location,
+    :funding_source,
+    :closing_date,
   ]
 
   attributes.each do |attribute_name|
@@ -18,7 +23,7 @@ class EsiFundViewAdapter < DocumentViewAdapter
 private
 
   def finder_schema
-    SpecialistPublisherWiring.get(:esi_fund_schema)
+    SpecialistPublisherWiring.get(:esi_fund_finder_schema)
   end
 
 end

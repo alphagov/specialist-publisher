@@ -9,6 +9,12 @@
   <div class="preview_button"></div>
   <div class="preview_container" style="display: none;"></div>
 
+  <%= f.select :fund_state, f.object.facet_options(:fund_state), {}, { class: 'form-control' } %>
+  <%= f.select :fund_type, f.object.facet_options(:fund_type), {}, { class: 'select2', multiple: true, data: {placeholder: 'Select a fund type'} } %>
+  <%= f.select :location, f.object.facet_options(:location), {}, { class: 'select2', multiple: true, data: {placeholder: 'Select a location'} } %>
+  <%= f.select :funding_source, f.object.facet_options(:funding_source), {}, { class: 'select2', multiple: true, data: {placeholder: 'Select a source'} } %>
+  <%= f.text_field :closing_date, placeholder: '2018-10-19' %>
+
   <%= render partial: "specialist_documents/minor_major_update_fields", locals: { f: f, document: document } %>
 
   <div class="actions">

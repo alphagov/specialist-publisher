@@ -90,9 +90,11 @@ class DocumentFactoryRegistry
     ->(*args) {
       ChangeNoteValidator.new(
         EsiFundValidator.new(
-          SpecialistDocument.new(
-            SlugGenerator.new(prefix: "european-structural-investment-funds"),
-            *args,
+          EsiFund.new(
+            SpecialistDocument.new(
+              SlugGenerator.new(prefix: "european-structural-investment-funds"),
+              *args,
+            )
           )
         )
       )
