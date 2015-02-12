@@ -2,6 +2,7 @@
   "base_path": "/european-structural-investment-funds",
   "name": "European Structural and Investment Funds",
   "beta": true,
+  "summary": "<p>Applies to: England (see guidance for <a rel=\"external\" href=\"http://www.scotland.gov.uk/Topics/Business-Industry/support/17404\">Scotland</a>, <a rel=\"external\" href=\"http://wefo.wales.gov.uk/programmes/post2013/?skip=1&amp;lang=en\">Wales</a> and <a rel=\"external\" href=\"http://www.dfpni.gov.uk/index/finance/european-funding/content_-_european_funding-future-funding.htm\">Northern Ireland</a>)</p><p>Apply to run projects backed by the European Stuctural and Investment Fund (ESIF). ESIF includes money from the European Social Fund (ESF), European Regional Development Fund (ERDF) and European Agricultural Fund for Rural Development (EAFRD).</p>",
   "filter": {
     "document_type": "european_structural_investment_fund"
   },
