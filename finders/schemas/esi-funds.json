@@ -1,5 +1,5 @@
 {
-  "document_noun": "fund",
+  "document_noun": "call",
   "facets": [
     {
       "key": "fund_state",
@@ -15,7 +15,7 @@
     },
     {
       "key": "fund_type",
-      "name": "Fund type",
+      "name": "Type",
       "type": "text",
       "preposition": "of type",
       "display_as_result_metadata": false,
@@ -59,7 +59,7 @@
       "key": "funding_source",
       "name": "Funding source",
       "type": "text",
-      "preposition": "in",
+      "preposition": "from",
       "display_as_result_metadata": false,
       "filterable": true,
       "allowed_values": [
