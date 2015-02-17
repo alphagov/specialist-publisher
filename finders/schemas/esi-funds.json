@@ -7,7 +7,7 @@
       "type": "text",
       "preposition": "which are",
       "display_as_result_metadata": false,
-      "filterable": false,
+      "filterable": true,
       "allowed_values": [
         {"label": "Open", "value": "open"},
         {"label": "Closed", "value": "closed"}
