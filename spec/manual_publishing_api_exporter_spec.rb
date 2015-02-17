@@ -99,7 +99,6 @@ describe ManualPublishingAPIExporter do
     expect(export_recipent).to have_received(:put_content_item).with(
       "/guidance/my-first-manual",
       hash_including(
-        base_path: "/guidance/my-first-manual",
         format: "manual",
         title: "My first manual",
         description: "This is my first manual",

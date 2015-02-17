@@ -1,7 +1,6 @@
 class FinderContentItemPresenter < Struct.new(:metadata, :schema, :timestamp)
   def exportable_attributes
     {
-      "base_path" => base_path,
       "format" => format,
       "content_id" => content_id,
       "title" => title,
@@ -21,6 +20,10 @@ class FinderContentItemPresenter < Struct.new(:metadata, :schema, :timestamp)
     }
   end
 
+  def base_path
+    metadata.fetch("base_path")
+  end
+
 private
   def title
     metadata.fetch("name")
@@ -28,10 +31,6 @@ private
 
   def content_id
     metadata.fetch("content_id")
-  end
-
-  def base_path
-    metadata.fetch("base_path")
   end
 
   def description
