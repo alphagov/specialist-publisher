@@ -33,7 +33,7 @@ private
 
     puts "publishing '#{attrs["title"]}' finder"
 
-    publishing_api.put_content_item(attrs["base_path"], attrs)
+    publishing_api.put_content_item(finder.base_path, attrs)
   end
 
   def export_signup(metadata)
@@ -46,7 +46,7 @@ private
 
     puts "publishing '#{attrs["title"]}' finder signup page"
 
-    publishing_api.put_content_item(attrs["base_path"], attrs)
+    publishing_api.put_content_item(finder_signup.base_path, attrs)
   end
 
   def publishing_api

@@ -114,7 +114,6 @@ module ManualHelpers
 
   def check_manual_is_published_to_publishing_api(slug, attrs)
     assert_publishing_api_put_item("/#{slug}",
-      "base_path" => "/#{slug}",
       "format" => "manual",
       "rendering_app" => "manuals-frontend",
       "publishing_app" => "specialist-publisher",
@@ -123,7 +122,6 @@ module ManualHelpers
 
   def check_manual_document_is_published_to_publishing_api(slug, attrs)
     assert_publishing_api_put_item("/#{slug}",
-      "base_path" => "/#{slug}",
       "format" => "manual_section",
       "rendering_app" => "manuals-frontend",
       "publishing_app" => "specialist-publisher",

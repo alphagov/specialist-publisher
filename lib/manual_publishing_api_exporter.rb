@@ -28,7 +28,6 @@ private
 
   def exportable_attributes
     {
-      base_path: base_path,
       format: "manual",
       title: rendered_manual_attributes.fetch(:title),
       description: rendered_manual_attributes.fetch(:summary),

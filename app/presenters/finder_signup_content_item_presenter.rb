@@ -1,7 +1,6 @@
 class FinderSignupContentItemPresenter < Struct.new(:metadata, :timestamp)
   def exportable_attributes
     {
-      "base_path" => base_path,
       "format" => format,
       "content_id" => content_id,
       "title" => title,
@@ -20,6 +19,10 @@ class FinderSignupContentItemPresenter < Struct.new(:metadata, :timestamp)
     }
   end
 
+  def base_path
+    "#{metadata.fetch("base_path")}/email-signup"
+  end
+
 private
   def title
     metadata.fetch("signup_title", metadata.fetch("name"))
@@ -27,10 +30,6 @@ private
 
   def content_id
     metadata.fetch("signup_content_id")
-  end
-
-  def base_path
-    "#{metadata.fetch("base_path")}/email-signup"
   end
 
   def description
