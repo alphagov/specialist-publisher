@@ -56,10 +56,6 @@ private
     SpecialistPublisherWiring.get(:manual_panopticon_registerer)
   end
 
-  def content_api_exporter
-    SpecialistPublisherWiring.get(:manual_and_documents_content_api_exporter)
-  end
-
   def publishing_api_exporter
     ->(manual) {
       manual_renderer = SpecialistPublisherWiring.get(:manual_renderer)
