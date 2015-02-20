@@ -41,8 +41,4 @@ private
       )
     }
   end
-
-  def content_api_withdrawer
-    SpecialistPublisherWiring.get(:specialist_document_content_api_withdrawer)
-  end
 end

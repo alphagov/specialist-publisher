@@ -34,10 +34,6 @@ class CountrysideStewardshipGrantObserversRegistry < AbstractSpecialistDocumentO
     }
   end
 
-  def content_api_withdrawer
-    SpecialistPublisherWiring.get(:specialist_document_content_api_withdrawer)
-  end
-
   def publication_alert_formatter(document)
     CountrysideStewardshipGrantPublicationAlertFormatter.new(
       url_maker: url_maker,

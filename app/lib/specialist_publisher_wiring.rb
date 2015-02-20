@@ -334,12 +334,6 @@ SpecialistPublisherWiring = DependencyContainer.new do
     }
   }
 
-  define_factory(:specialist_document_content_api_withdrawer) {
-    ->(document) {
-      RenderedSpecialistDocument.where(slug: document.slug).map(&:destroy)
-    }
-  }
-
   define_instance(:aaib_report_content_api_exporter) {
     ->(doc) {
       SpecialistDocumentDatabaseExporter.new(

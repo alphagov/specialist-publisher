@@ -53,7 +53,9 @@ private
   end
 
   def content_api_withdrawer
-    raise NotImplementedError
+    ->(document) {
+      RenderedSpecialistDocument.where(slug: document.slug).map(&:destroy)
+    }
   end
 
   def email_alert_api
