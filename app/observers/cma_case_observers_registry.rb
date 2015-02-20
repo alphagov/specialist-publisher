@@ -1,4 +1,3 @@
-require "email_alert_exporter"
 require "formatters/cma_case_publication_alert_formatter"
 
 class CmaCaseObserversRegistry < AbstractSpecialistDocumentObserversRegistry

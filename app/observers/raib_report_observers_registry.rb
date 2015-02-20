@@ -1,4 +1,3 @@
-require "email_alert_exporter"
 require "formatters/raib_report_publication_alert_formatter"
 
 class RaibReportObserversRegistry < AbstractSpecialistDocumentObserversRegistry

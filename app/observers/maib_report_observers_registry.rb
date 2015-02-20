@@ -1,4 +1,3 @@
-require "email_alert_exporter"
 require "formatters/maib_report_publication_alert_formatter"
 
 class MaibReportObserversRegistry < AbstractSpecialistDocumentObserversRegistry

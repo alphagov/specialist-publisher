@@ -1,5 +1,3 @@
-require "email_alert_exporter"
-
 class DrugSafetyUpdateObserversRegistry < AbstractSpecialistDocumentObserversRegistry
   # Overridden to not send publication alerts -- they're sent manually each month to the list
   def publication

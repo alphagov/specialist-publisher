@@ -1,4 +1,3 @@
-require "email_alert_exporter"
 require "formatters/countryside_stewardship_grant_publication_alert_formatter"
 
 class CountrysideStewardshipGrantObserversRegistry < AbstractSpecialistDocumentObserversRegistry

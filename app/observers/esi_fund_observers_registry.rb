@@ -1,4 +1,3 @@
-require "email_alert_exporter"
 require "formatters/esi_fund_publication_alert_formatter"
 
 class EsiFundObserversRegistry < AbstractSpecialistDocumentObserversRegistry

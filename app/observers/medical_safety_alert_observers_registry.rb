@@ -1,4 +1,3 @@
-require "email_alert_exporter"
 require "formatters/medical_safety_alert_publication_alert_formatter"
 
 class MedicalSafetyAlertObserversRegistry < AbstractSpecialistDocumentObserversRegistry
