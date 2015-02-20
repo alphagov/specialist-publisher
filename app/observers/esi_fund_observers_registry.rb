@@ -1,4 +1,7 @@
 require "formatters/esi_fund_publication_alert_formatter"
+require "formatters/esi_fund_indexable_formatter"
+require "markdown_attachment_processor"
+require "rummager_indexer"
 
 class EsiFundObserversRegistry < AbstractSpecialistDocumentObserversRegistry
 
@@ -12,11 +15,23 @@ class EsiFundObserversRegistry < AbstractSpecialistDocumentObserversRegistry
   end
 
   def rummager_exporter
-    SpecialistPublisherWiring.get(:esi_fund_rummager_indexer)
+    ->(document) {
+      RummagerIndexer.new.add(
+        EsiFundIndexableFormatter.new(
+          MarkdownAttachmentProcessor.new(document)
+        )
+      )
+    }
   end
 
   def rummager_withdrawer
-    SpecialistPublisherWiring.get(:esi_fund_rummager_deleter)
+    ->(document) {
+      RummagerIndexer.new.delete(
+        EsiFundIndexableFormatter.new(
+          MarkdownAttachmentProcessor.new(document)
+        )
+      )
+    }
   end
 
   def content_api_withdrawer

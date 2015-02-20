@@ -1,3 +1,7 @@
+require "formatters/drug_safety_update_indexable_formatter"
+require "markdown_attachment_processor"
+require "rummager_indexer"
+
 class DrugSafetyUpdateObserversRegistry < AbstractSpecialistDocumentObserversRegistry
   # Overridden to not send publication alerts -- they're sent manually each month to the list
   def publication
@@ -19,11 +23,23 @@ private
   end
 
   def rummager_withdrawer
-    SpecialistPublisherWiring.get(:drug_safety_update_rummager_deleter)
+    ->(document) {
+      RummagerIndexer.new.delete(
+        DrugSafetyUpdateIndexableFormatter.new(
+          MarkdownAttachmentProcessor.new(document)
+        )
+      )
+    }
   end
 
   def rummager_exporter
-    SpecialistPublisherWiring.get(:drug_safety_update_rummager_indexer)
+    ->(document) {
+      RummagerIndexer.new.add(
+        DrugSafetyUpdateIndexableFormatter.new(
+          MarkdownAttachmentProcessor.new(document)
+        )
+      )
+    }
   end
 
   def content_api_withdrawer

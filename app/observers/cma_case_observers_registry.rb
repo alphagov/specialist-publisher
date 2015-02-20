@@ -1,4 +1,7 @@
 require "formatters/cma_case_publication_alert_formatter"
+require "formatters/cma_case_indexable_formatter"
+require "markdown_attachment_processor"
+require "rummager_indexer"
 
 class CmaCaseObserversRegistry < AbstractSpecialistDocumentObserversRegistry
 
@@ -12,11 +15,23 @@ private
   end
 
   def rummager_exporter
-    SpecialistPublisherWiring.get(:cma_case_rummager_indexer)
+    ->(document) {
+      RummagerIndexer.new.add(
+        CmaCaseIndexableFormatter.new(
+          MarkdownAttachmentProcessor.new(document)
+        )
+      )
+    }
   end
 
   def rummager_withdrawer
-    SpecialistPublisherWiring.get(:cma_case_rummager_deleter)
+    ->(document) {
+      RummagerIndexer.new.delete(
+        CmaCaseIndexableFormatter.new(
+          MarkdownAttachmentProcessor.new(document)
+        )
+      )
+    }
   end
 
   def content_api_withdrawer

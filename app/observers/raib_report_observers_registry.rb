@@ -1,4 +1,7 @@
 require "formatters/raib_report_publication_alert_formatter"
+require "formatters/raib_report_indexable_formatter"
+require "markdown_attachment_processor"
+require "rummager_indexer"
 
 class RaibReportObserversRegistry < AbstractSpecialistDocumentObserversRegistry
 
@@ -12,11 +15,23 @@ private
   end
 
   def rummager_withdrawer
-    SpecialistPublisherWiring.get(:raib_report_rummager_deleter)
+    ->(document) {
+      RummagerIndexer.new.delete(
+        RaibReportIndexableFormatter.new(
+          MarkdownAttachmentProcessor.new(document)
+        )
+      )
+    }
   end
 
   def rummager_exporter
-    SpecialistPublisherWiring.get(:raib_report_rummager_indexer)
+    ->(document) {
+      RummagerIndexer.new.add(
+        RaibReportIndexableFormatter.new(
+          MarkdownAttachmentProcessor.new(document)
+        )
+      )
+    }
   end
 
   def content_api_withdrawer

@@ -1,4 +1,7 @@
 require "formatters/aaib_report_publication_alert_formatter"
+require "formatters/aaib_report_indexable_formatter"
+require "markdown_attachment_processor"
+require "rummager_indexer"
 
 class AaibReportObserversRegistry < AbstractSpecialistDocumentObserversRegistry
 
@@ -12,11 +15,23 @@ private
   end
 
   def rummager_withdrawer
-    SpecialistPublisherWiring.get(:aaib_report_rummager_deleter)
+    ->(document) {
+      RummagerIndexer.new.delete(
+        AaibReportIndexableFormatter.new(
+          MarkdownAttachmentProcessor.new(document)
+        )
+      )
+    }
   end
 
   def rummager_exporter
-    SpecialistPublisherWiring.get(:aaib_report_rummager_indexer)
+    ->(document) {
+      RummagerIndexer.new.add(
+        AaibReportIndexableFormatter.new(
+          MarkdownAttachmentProcessor.new(document)
+        )
+      )
+    }
   end
 
   def content_api_withdrawer

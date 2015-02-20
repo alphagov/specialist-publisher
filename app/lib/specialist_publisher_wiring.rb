@@ -6,23 +6,14 @@ require "document_factory_registry"
 require "document_headers_depth_limiter"
 require "footnotes_section_heading_renderer"
 require "formatters/aaib_report_artefact_formatter"
-require "formatters/aaib_report_indexable_formatter"
 require "formatters/cma_case_artefact_formatter"
-require "formatters/cma_case_indexable_formatter"
 require "formatters/countryside_stewardship_grant_artefact_formatter"
-require "formatters/countryside_stewardship_grant_indexable_formatter"
 require "formatters/drug_safety_update_artefact_formatter"
-require "formatters/drug_safety_update_indexable_formatter"
 require "formatters/esi_fund_artefact_formatter"
-require "formatters/esi_fund_indexable_formatter"
 require "formatters/international_development_fund_artefact_formatter"
-require "formatters/international_development_fund_indexable_formatter"
 require "formatters/maib_report_artefact_formatter"
-require "formatters/maib_report_indexable_formatter"
 require "formatters/medical_safety_alert_artefact_formatter"
-require "formatters/medical_safety_alert_indexable_formatter"
 require "formatters/raib_report_artefact_formatter"
-require "formatters/raib_report_indexable_formatter"
 require "gds_api/email_alert_api"
 require "gds_api/rummager"
 require "gds_api_proxy"
@@ -34,7 +25,6 @@ require "null_finder_schema"
 require "panopticon_registerer"
 require "rendered_specialist_document"
 require "repository_registry"
-require "rummager_indexer"
 require "specialist_document_database_exporter"
 require "specialist_document_header_extractor"
 require "specialist_document_repository"
@@ -340,186 +330,6 @@ SpecialistPublisherWiring = DependencyContainer.new do
 
       get(:panopticon_registerer).call(
         ManualChangeNotesArtefactFormatter.new(manual)
-      )
-    }
-  }
-
-  define_factory(:aaib_report_rummager_indexer) {
-    ->(document) {
-      RummagerIndexer.new.add(
-        AaibReportIndexableFormatter.new(
-          MarkdownAttachmentProcessor.new(document)
-        )
-      )
-    }
-  }
-
-  define_factory(:aaib_report_rummager_deleter) {
-    ->(document) {
-      RummagerIndexer.new.delete(
-        AaibReportIndexableFormatter.new(
-          MarkdownAttachmentProcessor.new(document)
-        )
-      )
-    }
-  }
-
-  define_factory(:cma_case_rummager_indexer) {
-    ->(document) {
-      RummagerIndexer.new.add(
-        CmaCaseIndexableFormatter.new(
-          MarkdownAttachmentProcessor.new(document)
-        )
-      )
-    }
-  }
-
-  define_factory(:cma_case_rummager_deleter) {
-    ->(document) {
-      RummagerIndexer.new.delete(
-        CmaCaseIndexableFormatter.new(
-          MarkdownAttachmentProcessor.new(document)
-        )
-      )
-    }
-  }
-
-  define_factory(:countryside_stewardship_grant_rummager_indexer) {
-    ->(document) {
-      RummagerIndexer.new.add(
-        CountrysideStewardshipGrantIndexableFormatter.new(
-          MarkdownAttachmentProcessor.new(document)
-        )
-      )
-    }
-  }
-
-  define_factory(:countryside_stewardship_grant_rummager_deleter) {
-    ->(document) {
-      RummagerIndexer.new.delete(
-        CountrysideStewardshipGrantIndexableFormatter.new(
-          MarkdownAttachmentProcessor.new(document)
-        )
-      )
-    }
-  }
-
-  define_factory(:drug_safety_update_rummager_indexer) {
-    ->(document) {
-      RummagerIndexer.new.add(
-        DrugSafetyUpdateIndexableFormatter.new(
-          MarkdownAttachmentProcessor.new(document)
-        )
-      )
-    }
-  }
-
-  define_factory(:esi_fund_rummager_indexer) {
-    ->(document) {
-      RummagerIndexer.new.add(
-        EsiFundIndexableFormatter.new(
-          MarkdownAttachmentProcessor.new(document)
-        )
-      )
-    }
-  }
-
-  define_factory(:esi_fund_rummager_deleter) {
-    ->(document) {
-      RummagerIndexer.new.delete(
-        EsiFundIndexableFormatter.new(
-          MarkdownAttachmentProcessor.new(document)
-        )
-      )
-    }
-  }
-
-  define_factory(:maib_report_rummager_indexer) {
-    ->(document) {
-      RummagerIndexer.new.add(
-        MaibReportIndexableFormatter.new(
-          MarkdownAttachmentProcessor.new(document)
-        )
-      )
-    }
-  }
-
-  define_factory(:maib_report_rummager_deleter) {
-    ->(document) {
-      RummagerIndexer.new.delete(
-        MaibReportIndexableFormatter.new(
-          MarkdownAttachmentProcessor.new(document)
-        )
-      )
-    }
-  }
-
-  define_factory(:medical_safety_alert_rummager_indexer) {
-    ->(document) {
-      RummagerIndexer.new.add(
-        MedicalSafetyAlertIndexableFormatter.new(
-          MarkdownAttachmentProcessor.new(document)
-        )
-      )
-    }
-  }
-
-  define_factory(:drug_safety_update_rummager_deleter) {
-    ->(document) {
-      RummagerIndexer.new.delete(
-        DrugSafetyUpdateIndexableFormatter.new(
-          MarkdownAttachmentProcessor.new(document)
-        )
-      )
-    }
-  }
-
-  define_factory(:medical_safety_alert_rummager_deleter) {
-    ->(document) {
-      RummagerIndexer.new.delete(
-        MedicalSafetyAlertIndexableFormatter.new(
-          MarkdownAttachmentProcessor.new(document)
-        )
-      )
-    }
-  }
-
-  define_factory(:international_development_fund_rummager_indexer) {
-    ->(document) {
-      RummagerIndexer.new.add(
-        InternationalDevelopmentFundIndexableFormatter.new(
-          MarkdownAttachmentProcessor.new(document)
-        )
-      )
-    }
-  }
-
-  define_factory(:international_development_fund_rummager_deleter) {
-    ->(document) {
-      RummagerIndexer.new.delete(
-        InternationalDevelopmentFundIndexableFormatter.new(
-          MarkdownAttachmentProcessor.new(document)
-        )
-      )
-    }
-  }
-
-  define_factory(:raib_report_rummager_indexer) {
-    ->(document) {
-      RummagerIndexer.new.add(
-        RaibReportIndexableFormatter.new(
-          MarkdownAttachmentProcessor.new(document)
-        )
-      )
-    }
-  }
-
-  define_factory(:raib_report_rummager_deleter) {
-    ->(document) {
-      RummagerIndexer.new.delete(
-        RaibReportIndexableFormatter.new(
-          MarkdownAttachmentProcessor.new(document)
-        )
       )
     }
   }

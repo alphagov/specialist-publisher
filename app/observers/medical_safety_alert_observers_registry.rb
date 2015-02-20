@@ -1,4 +1,7 @@
 require "formatters/medical_safety_alert_publication_alert_formatter"
+require "formatters/medical_safety_alert_indexable_formatter"
+require "markdown_attachment_processor"
+require "rummager_indexer"
 
 class MedicalSafetyAlertObserversRegistry < AbstractSpecialistDocumentObserversRegistry
 
@@ -12,11 +15,23 @@ private
   end
 
   def rummager_exporter
-    SpecialistPublisherWiring.get(:medical_safety_alert_rummager_indexer)
+    ->(document) {
+      RummagerIndexer.new.add(
+        MedicalSafetyAlertIndexableFormatter.new(
+          MarkdownAttachmentProcessor.new(document)
+        )
+      )
+    }
   end
 
   def rummager_withdrawer
-    SpecialistPublisherWiring.get(:medical_safety_alert_rummager_deleter)
+    ->(document) {
+      RummagerIndexer.new.delete(
+        MedicalSafetyAlertIndexableFormatter.new(
+          MarkdownAttachmentProcessor.new(document)
+        )
+      )
+    }
   end
 
   def content_api_withdrawer

@@ -1,4 +1,7 @@
 require "formatters/countryside_stewardship_grant_publication_alert_formatter"
+require "formatters/countryside_stewardship_grant_indexable_formatter"
+require "markdown_attachment_processor"
+require "rummager_indexer"
 
 class CountrysideStewardshipGrantObserversRegistry < AbstractSpecialistDocumentObserversRegistry
 
@@ -12,11 +15,23 @@ class CountrysideStewardshipGrantObserversRegistry < AbstractSpecialistDocumentO
   end
 
   def rummager_exporter
-    SpecialistPublisherWiring.get(:countryside_stewardship_grant_rummager_indexer)
+    ->(document) {
+      RummagerIndexer.new.add(
+        CountrysideStewardshipGrantIndexableFormatter.new(
+          MarkdownAttachmentProcessor.new(document)
+        )
+      )
+    }
   end
 
   def rummager_withdrawer
-    SpecialistPublisherWiring.get(:countryside_stewardship_grant_rummager_deleter)
+    ->(document) {
+      RummagerIndexer.new.delete(
+        CountrysideStewardshipGrantIndexableFormatter.new(
+          MarkdownAttachmentProcessor.new(document)
+        )
+      )
+    }
   end
 
   def content_api_withdrawer
