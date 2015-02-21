@@ -1,4 +1,5 @@
 require "url_maker"
+require "rummager_indexer"
 
 class AbstractSpecialistDocumentObserversRegistry
   def creation
@@ -45,10 +46,22 @@ private
   end
 
   def rummager_exporter
-    raise NotImplementedError
+    ->(document) {
+      RummagerIndexer.new.add(
+        format_document_for_indexing(document)
+      )
+    }
   end
 
   def rummager_withdrawer
+    ->(document) {
+      RummagerIndexer.new.delete(
+        format_document_for_indexing(document)
+      )
+    }
+  end
+
+  def format_document_for_indexing(document)
     raise NotImplementedError
   end
 

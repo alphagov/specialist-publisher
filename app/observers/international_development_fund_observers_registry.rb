@@ -1,7 +1,6 @@
 require "formatters/international_development_fund_publication_alert_formatter"
 require "formatters/international_development_fund_indexable_formatter"
 require "markdown_attachment_processor"
-require "rummager_indexer"
 
 class InternationalDevelopmentFundObserversRegistry < AbstractSpecialistDocumentObserversRegistry
 
@@ -14,24 +13,10 @@ private
     SpecialistPublisherWiring.get(:international_development_fund_content_api_exporter)
   end
 
-  def rummager_exporter
-    ->(document) {
-      RummagerIndexer.new.add(
-        InternationalDevelopmentFundIndexableFormatter.new(
-          MarkdownAttachmentProcessor.new(document)
-        )
-      )
-    }
-  end
-
-  def rummager_withdrawer
-    ->(document) {
-      RummagerIndexer.new.delete(
-        InternationalDevelopmentFundIndexableFormatter.new(
-          MarkdownAttachmentProcessor.new(document)
-        )
-      )
-    }
+  def format_document_for_indexing(document)
+    InternationalDevelopmentFundIndexableFormatter.new(
+      MarkdownAttachmentProcessor.new(document)
+    )
   end
 
   def publication_alert_formatter(document)
