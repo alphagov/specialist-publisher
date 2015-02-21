@@ -38,6 +38,18 @@ class AbstractSpecialistDocumentObserversRegistry
 
 private
   def panopticon_exporter
+    ->(document) {
+      panopticon_registerer.call(
+        format_document_as_artefact(document)
+      )
+    }
+  end
+
+  def panopticon_registerer
+    SpecialistPublisherWiring.get(:panopticon_registerer)
+  end
+
+  def format_document_as_artefact(document)
     raise NotImplementedError
   end
 

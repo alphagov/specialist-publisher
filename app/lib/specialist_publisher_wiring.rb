@@ -5,15 +5,6 @@ require "dependency_container"
 require "document_factory_registry"
 require "document_headers_depth_limiter"
 require "footnotes_section_heading_renderer"
-require "formatters/aaib_report_artefact_formatter"
-require "formatters/cma_case_artefact_formatter"
-require "formatters/countryside_stewardship_grant_artefact_formatter"
-require "formatters/drug_safety_update_artefact_formatter"
-require "formatters/esi_fund_artefact_formatter"
-require "formatters/international_development_fund_artefact_formatter"
-require "formatters/maib_report_artefact_formatter"
-require "formatters/medical_safety_alert_artefact_formatter"
-require "formatters/raib_report_artefact_formatter"
 require "gds_api/email_alert_api"
 require "gds_api/rummager"
 require "gds_api_proxy"
@@ -248,78 +239,6 @@ SpecialistPublisherWiring = DependencyContainer.new do
         PANOPTICON_API_CREDENTIALS
       )
     )
-  }
-
-  define_factory(:aaib_report_panopticon_registerer) {
-    ->(document) {
-      get(:panopticon_registerer).call(
-        AaibReportArtefactFormatter.new(document)
-      )
-    }
-  }
-
-  define_factory(:cma_case_panopticon_registerer) {
-    ->(document) {
-      get(:panopticon_registerer).call(
-        CmaCaseArtefactFormatter.new(document)
-      )
-    }
-  }
-
-  define_factory(:countryside_stewardship_grant_panopticon_registerer) {
-    ->(document) {
-      get(:panopticon_registerer).call(
-        CountrysideStewardshipGrantArtefactFormatter.new(document)
-      )
-    }
-  }
-
-  define_factory(:drug_safety_update_panopticon_registerer) {
-    ->(document) {
-      get(:panopticon_registerer).call(
-        DrugSafetyUpdateArtefactFormatter.new(document)
-      )
-    }
-  }
-
-  define_factory(:esi_fund_panopticon_registerer) {
-    ->(document) {
-      get(:panopticon_registerer).call(
-        EsiFundArtefactFormatter.new(document)
-      )
-    }
-  }
-
-  define_factory(:maib_report_panopticon_registerer) {
-    ->(document) {
-      get(:panopticon_registerer).call(
-        MaibReportArtefactFormatter.new(document)
-      )
-    }
-  }
-
-  define_factory(:medical_safety_alert_panopticon_registerer) {
-    ->(document) {
-      get(:panopticon_registerer).call(
-        MedicalSafetyAlertArtefactFormatter.new(document)
-      )
-    }
-  }
-
-  define_factory(:international_development_fund_panopticon_registerer) {
-    ->(document) {
-      get(:panopticon_registerer).call(
-        InternationalDevelopmentFundArtefactFormatter.new(document)
-      )
-    }
-  }
-
-  define_factory(:raib_report_panopticon_registerer) {
-    ->(document) {
-      get(:panopticon_registerer).call(
-        RaibReportArtefactFormatter.new(document)
-      )
-    }
   }
 
   define_factory(:manual_panopticon_registerer) {

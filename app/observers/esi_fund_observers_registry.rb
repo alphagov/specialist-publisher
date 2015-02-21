@@ -5,8 +5,8 @@ require "markdown_attachment_processor"
 class EsiFundObserversRegistry < AbstractSpecialistDocumentObserversRegistry
 
   private
-  def panopticon_exporter
-    SpecialistPublisherWiring.get(:esi_fund_panopticon_registerer)
+  def format_document_as_artefact(document)
+    EsiFundArtefactFormatter.new(document)
   end
 
   def content_api_exporter

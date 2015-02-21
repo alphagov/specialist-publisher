@@ -5,8 +5,8 @@ require "markdown_attachment_processor"
 class InternationalDevelopmentFundObserversRegistry < AbstractSpecialistDocumentObserversRegistry
 
 private
-  def panopticon_exporter
-    SpecialistPublisherWiring.get(:international_development_fund_panopticon_registerer)
+  def format_document_as_artefact(document)
+    InternationalDevelopmentFundArtefactFormatter.new(document)
   end
 
   def content_api_exporter

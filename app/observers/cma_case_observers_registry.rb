@@ -5,8 +5,8 @@ require "markdown_attachment_processor"
 class CmaCaseObserversRegistry < AbstractSpecialistDocumentObserversRegistry
 
 private
-  def panopticon_exporter
-    SpecialistPublisherWiring.get(:cma_case_panopticon_registerer)
+  def format_document_as_artefact(document)
+    CmaCaseArtefactFormatter.new(document)
   end
 
   def content_api_exporter

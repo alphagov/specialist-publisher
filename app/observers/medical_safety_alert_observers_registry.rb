@@ -5,8 +5,8 @@ require "markdown_attachment_processor"
 class MedicalSafetyAlertObserversRegistry < AbstractSpecialistDocumentObserversRegistry
 
 private
-  def panopticon_exporter
-    SpecialistPublisherWiring.get(:medical_safety_alert_panopticon_registerer)
+  def format_document_as_artefact(document)
+    MedicalSafetyAlertArtefactFormatter.new(document)
   end
 
   def content_api_exporter

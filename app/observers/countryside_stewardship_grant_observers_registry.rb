@@ -5,8 +5,8 @@ require "markdown_attachment_processor"
 class CountrysideStewardshipGrantObserversRegistry < AbstractSpecialistDocumentObserversRegistry
 
   private
-  def panopticon_exporter
-    SpecialistPublisherWiring.get(:countryside_stewardship_grant_panopticon_registerer)
+  def format_document_as_artefact(document)
+    CountrysideStewardshipGrantArtefactFormatter.new(document)
   end
 
   def content_api_exporter
