@@ -1,27 +1,22 @@
-require "email_alert_exporter"
 require "formatters/international_development_fund_publication_alert_formatter"
+require "formatters/international_development_fund_indexable_formatter"
+require "markdown_attachment_processor"
 
 class InternationalDevelopmentFundObserversRegistry < AbstractSpecialistDocumentObserversRegistry
 
 private
-  def panopticon_exporter
-    SpecialistPublisherWiring.get(:international_development_fund_panopticon_registerer)
+  def format_document_as_artefact(document)
+    InternationalDevelopmentFundArtefactFormatter.new(document)
   end
 
   def content_api_exporter
     SpecialistPublisherWiring.get(:international_development_fund_content_api_exporter)
   end
 
-  def rummager_exporter
-    SpecialistPublisherWiring.get(:international_development_fund_rummager_indexer)
-  end
-
-  def rummager_withdrawer
-    SpecialistPublisherWiring.get(:international_development_fund_rummager_deleter)
-  end
-
-  def content_api_withdrawer
-    SpecialistPublisherWiring.get(:specialist_document_content_api_withdrawer)
+  def format_document_for_indexing(document)
+    InternationalDevelopmentFundIndexableFormatter.new(
+      MarkdownAttachmentProcessor.new(document)
+    )
   end
 
   def publication_alert_formatter(document)

@@ -1,4 +1,5 @@
 require "url_maker"
+require "rummager_indexer"
 
 class AbstractSpecialistDocumentObserversRegistry
   def creation
@@ -37,6 +38,18 @@ class AbstractSpecialistDocumentObserversRegistry
 
 private
   def panopticon_exporter
+    ->(document) {
+      panopticon_registerer.call(
+        format_document_as_artefact(document)
+      )
+    }
+  end
+
+  def panopticon_registerer
+    SpecialistPublisherWiring.get(:panopticon_registerer)
+  end
+
+  def format_document_as_artefact(document)
     raise NotImplementedError
   end
 
@@ -45,15 +58,29 @@ private
   end
 
   def rummager_exporter
-    raise NotImplementedError
+    ->(document) {
+      RummagerIndexer.new.add(
+        format_document_for_indexing(document)
+      )
+    }
   end
 
   def rummager_withdrawer
+    ->(document) {
+      RummagerIndexer.new.delete(
+        format_document_for_indexing(document)
+      )
+    }
+  end
+
+  def format_document_for_indexing(document)
     raise NotImplementedError
   end
 
   def content_api_withdrawer
-    raise NotImplementedError
+    ->(document) {
+      RenderedSpecialistDocument.where(slug: document.slug).map(&:destroy)
+    }
   end
 
   def email_alert_api

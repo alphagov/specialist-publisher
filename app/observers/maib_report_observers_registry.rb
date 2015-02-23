@@ -1,5 +1,6 @@
-require "email_alert_exporter"
 require "formatters/maib_report_publication_alert_formatter"
+require "formatters/maib_report_indexable_formatter"
+require "markdown_attachment_processor"
 
 class MaibReportObserversRegistry < AbstractSpecialistDocumentObserversRegistry
 
@@ -8,20 +9,14 @@ private
     SpecialistPublisherWiring.get(:maib_report_content_api_exporter)
   end
 
-  def panopticon_exporter
-    SpecialistPublisherWiring.get(:maib_report_panopticon_registerer)
+  def format_document_as_artefact(document)
+    MaibReportArtefactFormatter.new(document)
   end
 
-  def rummager_withdrawer
-    SpecialistPublisherWiring.get(:maib_report_rummager_deleter)
-  end
-
-  def rummager_exporter
-    SpecialistPublisherWiring.get(:maib_report_rummager_indexer)
-  end
-
-  def content_api_withdrawer
-    SpecialistPublisherWiring.get(:specialist_document_content_api_withdrawer)
+  def format_document_for_indexing(document)
+    MaibReportIndexableFormatter.new(
+      MarkdownAttachmentProcessor.new(document)
+    )
   end
 
   def publication_alert_formatter(document)

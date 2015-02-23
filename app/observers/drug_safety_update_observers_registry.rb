@@ -1,4 +1,5 @@
-require "email_alert_exporter"
+require "formatters/drug_safety_update_indexable_formatter"
+require "markdown_attachment_processor"
 
 class DrugSafetyUpdateObserversRegistry < AbstractSpecialistDocumentObserversRegistry
   # Overridden to not send publication alerts -- they're sent manually each month to the list
@@ -16,19 +17,13 @@ private
     SpecialistPublisherWiring.get(:drug_safety_update_content_api_exporter)
   end
 
-  def panopticon_exporter
-    SpecialistPublisherWiring.get(:drug_safety_update_panopticon_registerer)
+  def format_document_as_artefact(document)
+    DrugSafetyUpdateArtefactFormatter.new(document)
   end
 
-  def rummager_withdrawer
-    SpecialistPublisherWiring.get(:drug_safety_update_rummager_deleter)
-  end
-
-  def rummager_exporter
-    SpecialistPublisherWiring.get(:drug_safety_update_rummager_indexer)
-  end
-
-  def content_api_withdrawer
-    SpecialistPublisherWiring.get(:specialist_document_content_api_withdrawer)
+  def format_document_for_indexing(document)
+    DrugSafetyUpdateIndexableFormatter.new(
+      MarkdownAttachmentProcessor.new(document)
+    )
   end
 end

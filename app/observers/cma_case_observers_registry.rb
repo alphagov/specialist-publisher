@@ -1,27 +1,22 @@
-require "email_alert_exporter"
 require "formatters/cma_case_publication_alert_formatter"
+require "formatters/cma_case_indexable_formatter"
+require "markdown_attachment_processor"
 
 class CmaCaseObserversRegistry < AbstractSpecialistDocumentObserversRegistry
 
 private
-  def panopticon_exporter
-    SpecialistPublisherWiring.get(:cma_case_panopticon_registerer)
+  def format_document_as_artefact(document)
+    CmaCaseArtefactFormatter.new(document)
   end
 
   def content_api_exporter
     SpecialistPublisherWiring.get(:cma_case_content_api_exporter)
   end
 
-  def rummager_exporter
-    SpecialistPublisherWiring.get(:cma_case_rummager_indexer)
-  end
-
-  def rummager_withdrawer
-    SpecialistPublisherWiring.get(:cma_case_rummager_deleter)
-  end
-
-  def content_api_withdrawer
-    SpecialistPublisherWiring.get(:specialist_document_content_api_withdrawer)
+  def format_document_for_indexing(document)
+    CmaCaseIndexableFormatter.new(
+      MarkdownAttachmentProcessor.new(document)
+    )
   end
 
   def publication_alert_formatter(document)
