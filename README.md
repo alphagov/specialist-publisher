@@ -28,7 +28,7 @@ Publishing App for Specialist Documents and Manuals.
 
 * [alphagov/static](http://github.com/alphagov/static): provides static assets (JS/CSS)
 * [alphagov/panopticon](http://github.com/alphagov/panopticon): provides public URLs for content on GOV.UK
-* [alphagov/asset_manager](http://github.com/alphagov/asset_manager): provides uploading for static files
+* [alphagov/asset-manager](http://github.com/alphagov/asset-manager): provides uploading for static files
 * [alphagov/rummager](http://github.com/alphagov/rummager): allows documents to be indexed for searching in both Finders and site search
 * [alphagov/publishing-api](http://github.com/alphagov/publishing-api): allows documents to be published to the Publishing queue
 
