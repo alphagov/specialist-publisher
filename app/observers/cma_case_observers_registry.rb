@@ -9,8 +9,8 @@ private
     CmaCaseArtefactFormatter.new(document)
   end
 
-  def content_api_exporter
-    SpecialistPublisherWiring.get(:cma_case_content_api_exporter)
+  def finder_schema
+    SpecialistPublisherWiring.get(:cma_case_finder_schema)
   end
 
   def format_document_for_indexing(document)

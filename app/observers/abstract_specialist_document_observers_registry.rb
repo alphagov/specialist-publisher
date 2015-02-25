@@ -54,7 +54,15 @@ private
   end
 
   def content_api_exporter
-    raise NotImplementedError
+    ->(document) {
+      SpecialistDocumentDatabaseExporter.new(
+        RenderedSpecialistDocument,
+        SpecialistPublisherWiring.get(:specialist_document_renderer),
+        finder_schema,
+        document,
+        PublicationLog,
+      ).call
+    }
   end
 
   def rummager_exporter

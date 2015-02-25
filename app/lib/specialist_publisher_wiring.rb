@@ -4,6 +4,7 @@ require "builders/specialist_document_builder"
 require "dependency_container"
 require "document_factory_registry"
 require "document_headers_depth_limiter"
+require "finder_schema"
 require "footnotes_section_heading_renderer"
 require "gds_api/email_alert_api"
 require "gds_api/rummager"
@@ -253,114 +254,6 @@ SpecialistPublisherWiring = DependencyContainer.new do
     }
   }
 
-  define_instance(:aaib_report_content_api_exporter) {
-    ->(doc) {
-      SpecialistDocumentDatabaseExporter.new(
-        RenderedSpecialistDocument,
-        get(:specialist_document_renderer),
-        get(:aaib_report_finder_schema),
-        doc,
-        PublicationLog,
-      ).call
-    }
-  }
-
-  define_instance(:cma_case_content_api_exporter) {
-    ->(doc) {
-      SpecialistDocumentDatabaseExporter.new(
-        RenderedSpecialistDocument,
-        get(:specialist_document_renderer),
-        get(:cma_case_finder_schema),
-        doc,
-        PublicationLog,
-      ).call
-    }
-  }
-
-  define_instance(:countryside_stewardship_grant_content_api_exporter) {
-    ->(doc) {
-      SpecialistDocumentDatabaseExporter.new(
-        RenderedSpecialistDocument,
-        get(:specialist_document_renderer),
-        get(:countryside_stewardship_grant_finder_schema),
-        doc,
-        PublicationLog,
-      ).call
-    }
-  }
-
-  define_instance(:esi_fund_content_api_exporter) {
-    ->(doc) {
-      SpecialistDocumentDatabaseExporter.new(
-        RenderedSpecialistDocument,
-        get(:specialist_document_renderer),
-        get(:esi_fund_finder_schema),
-        doc,
-        PublicationLog,
-      ).call
-    }
-  }
-
-  define_instance(:maib_report_content_api_exporter) {
-    ->(doc) {
-      SpecialistDocumentDatabaseExporter.new(
-        RenderedSpecialistDocument,
-        get(:specialist_document_renderer),
-        get(:maib_report_finder_schema),
-        doc,
-        PublicationLog,
-      ).call
-    }
-  }
-
-  define_instance(:medical_safety_alert_content_api_exporter) {
-    ->(doc) {
-      SpecialistDocumentDatabaseExporter.new(
-        RenderedSpecialistDocument,
-        get(:specialist_document_renderer),
-        get(:medical_safety_alert_finder_schema),
-        doc,
-        PublicationLog,
-      ).call
-    }
-  }
-
-  define_instance(:drug_safety_update_content_api_exporter) {
-    ->(doc) {
-      SpecialistDocumentDatabaseExporter.new(
-        RenderedSpecialistDocument,
-        get(:specialist_document_renderer),
-        get(:drug_safety_update_finder_schema),
-        doc,
-        PublicationLog,
-      ).call
-    }
-  }
-
-  define_instance(:international_development_fund_content_api_exporter) {
-    ->(doc) {
-      SpecialistDocumentDatabaseExporter.new(
-        RenderedSpecialistDocument,
-        get(:international_development_fund_renderer),
-        get(:international_development_fund_finder_schema),
-        doc,
-        PublicationLog,
-      ).call
-    }
-  }
-
-  define_instance(:raib_report_content_api_exporter) {
-    ->(doc) {
-      SpecialistDocumentDatabaseExporter.new(
-        RenderedSpecialistDocument,
-        get(:specialist_document_renderer),
-        get(:raib_report_finder_schema),
-        doc,
-        PublicationLog,
-      ).call
-    }
-  }
-
   define_singleton(:rummager_api) {
     GdsApi::Rummager.new(Plek.new.find("search"))
   }
@@ -370,47 +263,38 @@ SpecialistPublisherWiring = DependencyContainer.new do
   }
 
   define_singleton(:aaib_report_finder_schema) {
-    require "finder_schema"
     FinderSchema.new(Rails.root.join("finders/schemas/aaib-reports.json"))
   }
 
   define_singleton(:cma_case_finder_schema) {
-    require "finder_schema"
     FinderSchema.new(Rails.root.join("finders/schemas/cma-cases.json"))
   }
 
   define_singleton(:countryside_stewardship_grant_finder_schema) {
-    require "finder_schema"
     FinderSchema.new(Rails.root.join("finders/schemas/countryside-stewardship-grants.json"))
   }
 
   define_singleton(:drug_safety_update_finder_schema) {
-    require "finder_schema"
     FinderSchema.new(Rails.root.join("finders/schemas/drug-safety-updates.json"))
   }
 
   define_singleton(:esi_fund_finder_schema) {
-    require "finder_schema"
     FinderSchema.new(Rails.root.join("finders/schemas/esi-funds.json"))
   }
 
   define_singleton(:maib_report_finder_schema) {
-    require "finder_schema"
     FinderSchema.new(Rails.root.join("finders/schemas/maib-reports.json"))
   }
 
   define_singleton(:medical_safety_alert_finder_schema) {
-    require "finder_schema"
     FinderSchema.new(Rails.root.join("finders/schemas/medical-safety-alerts.json"))
   }
 
   define_singleton(:international_development_fund_finder_schema) {
-    require "finder_schema"
     FinderSchema.new(Rails.root.join("finders/schemas/international-development-funds.json"))
   }
 
   define_singleton(:raib_report_finder_schema) {
-    require "finder_schema"
     FinderSchema.new(Rails.root.join("finders/schemas/raib-reports.json"))
   }
 end

@@ -5,8 +5,8 @@ require "markdown_attachment_processor"
 class AaibReportObserversRegistry < AbstractSpecialistDocumentObserversRegistry
 
 private
-  def content_api_exporter
-    SpecialistPublisherWiring.get(:aaib_report_content_api_exporter)
+  def finder_schema
+    SpecialistPublisherWiring.get(:aaib_report_finder_schema)
   end
 
   def format_document_as_artefact(document)
