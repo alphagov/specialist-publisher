@@ -1,4 +1,5 @@
 require "builders/specialist_document_builder"
+require "cma_import/mapper"
 
 class CmaImport
   def initialize(data_files_dir)
@@ -22,11 +23,15 @@ private
   def import_job_builder
     ->(data) {
       DocumentImport::SingleImport.new(
-        document_creator: create_cma_case_service,
+        document_creator: attribute_mapper,
         logger: logger,
         data: data,
       )
     }
+  end
+
+  def attribute_mapper
+    CmaImportAttributeMapper.new(create_cma_case_service)
   end
 
   def create_cma_case_service
