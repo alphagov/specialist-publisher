@@ -10,7 +10,19 @@ private
   end
 
   def content_api_exporter
-    SpecialistPublisherWiring.get(:international_development_fund_content_api_exporter)
+    ->(document) {
+      SpecialistDocumentDatabaseExporter.new(
+        RenderedSpecialistDocument,
+        SpecialistPublisherWiring.get(:international_development_fund_renderer),
+        finder_schema,
+        document,
+        PublicationLog,
+      ).call
+    }
+  end
+
+  def finder_schema
+    SpecialistPublisherWiring.get(:international_development_fund_finder_schema)
   end
 
   def format_document_for_indexing(document)

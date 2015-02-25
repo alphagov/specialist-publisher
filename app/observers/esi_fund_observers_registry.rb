@@ -9,8 +9,8 @@ class EsiFundObserversRegistry < AbstractSpecialistDocumentObserversRegistry
     EsiFundArtefactFormatter.new(document)
   end
 
-  def content_api_exporter
-    SpecialistPublisherWiring.get(:esi_fund_content_api_exporter)
+  def finder_schema
+    SpecialistPublisherWiring.get(:esi_fund_finder_schema)
   end
 
   def format_document_for_indexing(document)

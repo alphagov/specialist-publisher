@@ -9,8 +9,8 @@ class CountrysideStewardshipGrantObserversRegistry < AbstractSpecialistDocumentO
     CountrysideStewardshipGrantArtefactFormatter.new(document)
   end
 
-  def content_api_exporter
-    SpecialistPublisherWiring.get(:countryside_stewardship_grant_content_api_exporter)
+  def finder_schema
+    SpecialistPublisherWiring.get(:countryside_stewardship_grant_finder_schema)
   end
 
   def format_document_for_indexing(document)

@@ -13,8 +13,8 @@ class DrugSafetyUpdateObserversRegistry < AbstractSpecialistDocumentObserversReg
   end
 
 private
-  def content_api_exporter
-    SpecialistPublisherWiring.get(:drug_safety_update_content_api_exporter)
+  def finder_schema
+    SpecialistPublisherWiring.get(:drug_safety_update_finder_schema)
   end
 
   def format_document_as_artefact(document)
