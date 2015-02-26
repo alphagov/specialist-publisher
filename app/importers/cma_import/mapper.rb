@@ -16,13 +16,15 @@ private
     data
       .slice(*attribute_keys)
       .symbolize_keys
+      .merge(
+        body: data.fetch("body", ""),
+      )
   end
 
   def attribute_keys
     %w(
       title
       summary
-      body
 
       opened_date
       closed_date
