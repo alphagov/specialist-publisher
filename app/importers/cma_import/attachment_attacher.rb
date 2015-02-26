@@ -45,12 +45,13 @@ private
         original_link.match,
         attachment.snippet,
       )
-    end
 
-    OpenStruct.new(
-      linked_from_body?: original_link.present?,
-      filename: filename,
-    )
+      AssetAttachmentValidator.valid_asset
+    else
+      AssetAttachmentValidator.unlinked_asset(filename)
+    end
+  rescue DocumentImport::FileNotFound => e
+    AssetAttachmentValidator.missing_asset(e)
   end
 
   def find_link_in_document(asset_data, document)
@@ -84,17 +85,35 @@ private
       )
     end
 
+    def self.valid_asset
+      OpenStruct.new(
+        valid?: true,
+      )
+    end
+
+    def self.unlinked_asset(filename)
+      OpenStruct.new(
+        valid?: false,
+        error: "#{filename} not linked from body",
+      )
+    end
+
+    def self.missing_asset(error)
+      OpenStruct.new(
+        valid?: false,
+        error: error.message,
+      )
+    end
+
   private
     attr_reader :document, :assets
 
     def assets_valid?
-      assets.all?(&:linked_from_body?)
+      assets.all?(&:valid?)
     end
 
     def assets_errors
-      assets.reject(&:linked_from_body?).map { |asset|
-        "#{asset.filename} not linked from body"
-      }
+      assets.reject(&:valid?).map(&:error)
     end
   end
 end

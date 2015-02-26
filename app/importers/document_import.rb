@@ -1,5 +1,6 @@
 module DocumentImport
   class HasNewerVersionError < StandardError; end
+  class FileNotFound < StandardError; end
 
   class BulkImporter
     def initialize(dependencies)
