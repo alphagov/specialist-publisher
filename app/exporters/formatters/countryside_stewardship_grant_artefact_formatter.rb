@@ -7,7 +7,7 @@ class CountrysideStewardshipGrantArtefactFormatter < AbstractArtefactFormatter
   end
 
   def kind
-    "countryside_stewardship_grants"
+    "countryside_stewardship_grant"
   end
 
   def rendering_app
