@@ -1,5 +1,6 @@
 require "builders/specialist_document_builder"
 require "cma_import/mapper"
+require "cma_import/attachment_attacher"
 
 class CmaImport
   def initialize(data_files_dir)
@@ -23,11 +24,15 @@ private
   def import_job_builder
     ->(data) {
       DocumentImport::SingleImport.new(
-        document_creator: attribute_mapper,
+        document_creator: attachment_attacher,
         logger: logger,
         data: data,
       )
     }
+  end
+
+  def attachment_attacher
+    CmaImportAttachmentAttacher.new(attribute_mapper, data_files_dir)
   end
 
   def attribute_mapper
