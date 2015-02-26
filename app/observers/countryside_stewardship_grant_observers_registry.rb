@@ -1,5 +1,6 @@
-require "formatters/countryside_stewardship_grant_publication_alert_formatter"
+require "formatters/countryside_stewardship_grant_artefact_formatter"
 require "formatters/countryside_stewardship_grant_indexable_formatter"
+require "formatters/countryside_stewardship_grant_publication_alert_formatter"
 require "markdown_attachment_processor"
 
 class CountrysideStewardshipGrantObserversRegistry < AbstractSpecialistDocumentObserversRegistry

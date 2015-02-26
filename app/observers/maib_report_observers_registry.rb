@@ -1,5 +1,6 @@
-require "formatters/maib_report_publication_alert_formatter"
+require "formatters/maib_report_artefact_formatter"
 require "formatters/maib_report_indexable_formatter"
+require "formatters/maib_report_publication_alert_formatter"
 require "markdown_attachment_processor"
 
 class MaibReportObserversRegistry < AbstractSpecialistDocumentObserversRegistry

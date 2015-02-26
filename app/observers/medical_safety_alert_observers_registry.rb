@@ -1,5 +1,6 @@
-require "formatters/medical_safety_alert_publication_alert_formatter"
+require "formatters/medical_safety_alert_artefact_formatter"
 require "formatters/medical_safety_alert_indexable_formatter"
+require "formatters/medical_safety_alert_publication_alert_formatter"
 require "markdown_attachment_processor"
 
 class MedicalSafetyAlertObserversRegistry < AbstractSpecialistDocumentObserversRegistry
