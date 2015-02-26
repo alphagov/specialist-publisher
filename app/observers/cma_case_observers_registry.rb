@@ -1,5 +1,6 @@
-require "formatters/cma_case_publication_alert_formatter"
+require "formatters/cma_case_artefact_formatter"
 require "formatters/cma_case_indexable_formatter"
+require "formatters/cma_case_publication_alert_formatter"
 require "markdown_attachment_processor"
 
 class CmaCaseObserversRegistry < AbstractSpecialistDocumentObserversRegistry

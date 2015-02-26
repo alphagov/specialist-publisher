@@ -1,5 +1,5 @@
-require "formatters/esi_fund_publication_alert_formatter"
 require "formatters/esi_fund_indexable_formatter"
+require "formatters/esi_fund_publication_alert_formatter"
 require "markdown_attachment_processor"
 
 class EsiFundObserversRegistry < AbstractSpecialistDocumentObserversRegistry

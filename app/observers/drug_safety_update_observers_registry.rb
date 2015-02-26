@@ -1,3 +1,4 @@
+require "formatters/drug_safety_update_artefact_formatter"
 require "formatters/drug_safety_update_indexable_formatter"
 require "markdown_attachment_processor"
 
