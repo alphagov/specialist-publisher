@@ -60,12 +60,19 @@ private
 
     def messages
       [
+        original_url_message,
         body_missing_message,
       ].compact
     end
 
     def body_missing_message
       "`body` field not defined" unless data.has_key?("body")
+    end
+
+    def original_url_message
+      url = data.fetch("original_url", "unknown")
+
+      "original_url: #{url}"
     end
   end
 end
