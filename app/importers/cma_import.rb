@@ -41,12 +41,14 @@ private
 
   def create_cma_case_service
     ->(attributes) {
-      CreateDocumentService.new(
-        cma_case_builder,
-        cma_cases_repository,
-        [],
-        attributes,
-      ).call
+      DocumentPresenter.new(
+        CreateDocumentService.new(
+          cma_case_builder,
+          cma_cases_repository,
+          [],
+          attributes,
+        ).call
+      )
     }
   end
 
@@ -90,5 +92,14 @@ private
     JSON.parse(File.read(filename)).merge ({
       "import_source" => File.basename(filename),
     })
+  end
+
+  class DocumentPresenter < SimpleDelegator
+    def import_notes
+      [
+        "id: #{id}",
+        "slug: #{slug}",
+      ]
+    end
   end
 end

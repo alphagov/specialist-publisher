@@ -24,31 +24,38 @@ module DocumentImport
     end
 
     def success(document, data)
-      @output.puts("SUCCESS: Created #{document.slug} #{format_data(data)}")
+      write("SUCCESS", document.import_notes.join("\t"), data)
     end
 
     def failure(document, data)
-      errors = document.errors.to_h
-
-      @output.puts("FAILURE: #{document.slug} #{errors} #{format_data(data)}")
+      write("FAILURE", document.errors.to_h, data)
     end
 
     def error(message, data)
-      @output.puts("ERROR: #{message} #{format_data(data)}")
+      write("ERROR", message, data)
     end
 
     def warn(message, data)
-      @output.puts("WARNING: #{message} #{format_data(data)}")
+      write("WARNING", message, data)
     end
 
     def skipped(message, data)
-      @output.puts("SKIPPED: #{message} #{format_data(data)}")
+      write("SKIPPED", message, data)
     end
 
   private
+    def write(status, message, data)
+      line = [
+        status,
+        message,
+        format_data(data),
+      ].join("\t")
+
+      @output.puts(line)
+    end
 
     def format_data(data)
-      data.map { |kv| kv.join(": ") }.join(", ")
+      data.map { |kv| kv.join(": ") }.join("\t")
     end
   end
 

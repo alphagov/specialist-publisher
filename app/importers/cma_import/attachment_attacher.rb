@@ -13,7 +13,7 @@ class CmaImportAttachmentAttacher
       attach_asset_to_document(asset_data, document)
     }
 
-    AssetAttachmentValidator.new(
+    Presenter.new(
       document,
       assets,
     )
@@ -46,12 +46,12 @@ private
         attachment.snippet,
       )
 
-      AssetAttachmentValidator.valid_asset
+      valid_asset
     else
-      AssetAttachmentValidator.unlinked_asset(filename)
+      unlinked_asset(filename)
     end
   rescue DocumentImport::FileNotFound => e
-    AssetAttachmentValidator.missing_asset(e)
+    missing_asset(e)
   end
 
   def find_link_in_document(asset_data, document)
@@ -67,53 +67,57 @@ private
     end
   end
 
-  class AssetAttachmentValidator < SimpleDelegator
+  def valid_asset
+    OpenStruct.new(
+      valid?: true,
+    )
+  end
+
+  def unlinked_asset(filename)
+    OpenStruct.new(
+      valid?: false,
+      error: "#{filename} not linked from body",
+    )
+  end
+
+  def missing_asset(error)
+    OpenStruct.new(
+      valid?: false,
+      error: error.message,
+    )
+  end
+
+  class Presenter < SimpleDelegator
     def initialize(document, assets)
-      @document = document
       @assets = assets
 
       super(document)
     end
 
-    def valid?
-      super && assets_valid?
-    end
-
-    def errors
-      super.merge(
-        assets: assets_errors,
-      )
-    end
-
-    def self.valid_asset
-      OpenStruct.new(
-        valid?: true,
-      )
-    end
-
-    def self.unlinked_asset(filename)
-      OpenStruct.new(
-        valid?: false,
-        error: "#{filename} not linked from body",
-      )
-    end
-
-    def self.missing_asset(error)
-      OpenStruct.new(
-        valid?: false,
-        error: error.message,
-      )
+    def import_notes
+      super.concat(messages)
     end
 
   private
-    attr_reader :document, :assets
+    attr_reader :assets
 
-    def assets_valid?
-      assets.all?(&:valid?)
+    def messages
+      [
+        attachment_count_message,
+        invalid_attachments_message,
+      ].compact
     end
 
-    def assets_errors
-      assets.reject(&:valid?).map(&:error)
+    def attachment_count_message
+      "number of attachments: #{assets.count}"
+    end
+
+    def invalid_attachments_message
+      errors = assets.reject(&:valid?).map(&:error).join(", ")
+
+      if errors.present?
+        "attachments with problems: #{errors}"
+      end
     end
   end
 end
