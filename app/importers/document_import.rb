@@ -27,8 +27,6 @@ module DocumentImport
       @output.puts("SUCCESS: Created #{document.slug} #{format_data(data)}")
     end
 
-    # Failure.. Unless it's only failing on summary, in which case it's a..
-    # SUCCESS
     def failure(document, data)
       errors = document.errors.to_h
 
