@@ -1,0 +1,11 @@
+#!/usr/bin/env ruby
+
+require File.expand_path("../../config/environment", __FILE__)
+require "cma_import"
+
+data_files_dir = ARGV.fetch(0)
+
+# Override the timeout value for the Panopticon API during a data import.
+PANOPTICON_API_CREDENTIALS.merge!(timeout: 30)
+
+CmaImport.new(data_files_dir).call

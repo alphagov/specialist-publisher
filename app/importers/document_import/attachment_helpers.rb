@@ -11,7 +11,14 @@ module DocumentImport
     def attachable_file_attributes(base_path, asset_data)
       original_filename = asset_data.fetch("original_filename", asset_data["filename"])
 
-      file = File.open(File.join(base_path, asset_data["filename"]))
+      path_to_file = File.join(base_path, asset_data["filename"])
+
+      unless File.exist?(path_to_file)
+        raise FileNotFound.new("file #{path_to_file} does not exist")
+      end
+
+      file = File.open(path_to_file)
+
       file.define_singleton_method(:original_filename) { original_filename }
 
       {
