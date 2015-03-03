@@ -93,7 +93,7 @@
         {"label": "Mergers - phase 1 clearance with undertakings in lieu", "value": "mergers-phase-1-clearance-with-undertakings-in-lieu"},
         {"label": "Mergers - phase 1 referral", "value": "mergers-phase-1-referral"},
         {"label": "Mergers - phase 1 found not to qualify", "value": "mergers-phase-1-found-not-to-qualify"},
-        {"label": "Mergers - phase 1 public interest interventions", "value": "mergers-phase-1-public-interest-interventions"},
+        {"label": "Mergers - phase 1 public interest intervention", "value": "mergers-phase-1-public-interest-interventions"},
         {"label": "Markets - phase 2 clearance - no adverse effect on competition", "value": "markets-phase-2-clearance-no-adverse-effect-on-competition"},
         {"label": "Markets - phase 2 adverse effect on competition leading to remedies", "value": "markets-phase-2-adverse-effect-on-competition-leading-to-remedies"},
         {"label": "Markets - phase 2 decision to dispense with procedural obligations", "value": "markets-phase-2-decision-to-dispense-with-procedural-obligations"},
