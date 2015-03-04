@@ -31,6 +31,7 @@ Publishing App for Specialist Documents and Manuals.
 * [alphagov/asset-manager](http://github.com/alphagov/asset-manager): provides uploading for static files
 * [alphagov/rummager](http://github.com/alphagov/rummager): allows documents to be indexed for searching in both Finders and site search
 * [alphagov/publishing-api](http://github.com/alphagov/publishing-api): allows documents to be published to the Publishing queue
+* [alphagov/email-alert-api](http://github.com/alphagov/email-alert-api): sends emails to subscribed users when documents are published
 
 ## Running the application
 
