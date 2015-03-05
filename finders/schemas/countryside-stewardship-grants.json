@@ -4,7 +4,7 @@
     {
       "key": "grant_type",
       "name": "Grant type",
-      "type": "multi-select",
+      "type": "text",
       "preposition": "of type",
       "filterable": true,
       "allowed_values": [
@@ -15,7 +15,7 @@
     {
       "key": "land_use",
       "name": "Land use",
-      "type": "multi-select",
+      "type": "text",
       "preposition": "for",
       "filterable": true,
       "allowed_values": [
@@ -40,7 +40,7 @@
     {
       "key": "tiers_or_standalone_items",
       "name": "Tiers or standalone items",
-      "type": "multi-select",
+      "type": "text",
       "preposition": "for",
       "filterable": true,
       "allowed_values": [
@@ -52,7 +52,7 @@
     {
       "key": "funding_amount",
       "name": "Funding (per unit per year)",
-      "type": "multi-select",
+      "type": "text",
       "preposition": "of",
       "filterable": true,
       "allowed_values": [
