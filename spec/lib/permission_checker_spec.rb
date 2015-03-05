@@ -1,9 +1,10 @@
 require "spec_helper"
 
 describe PermissionChecker do
-  let(:cma_writer)  { FactoryGirl.build(:cma_writer) }
-  let(:dclg_editor) { FactoryGirl.build(:dclg_editor) }
-  let(:gds_editor)  { FactoryGirl.build(:gds_editor) }
+  let(:cma_writer)   { FactoryGirl.build(:cma_writer) }
+  let(:dclg_editor)  { FactoryGirl.build(:dclg_editor) }
+  let(:defra_editor) { FactoryGirl.build(:defra_editor) }
+  let(:gds_editor)   { FactoryGirl.build(:gds_editor) }
 
   describe "#can_edit?" do
     context "a user who is not an editor" do
@@ -86,6 +87,24 @@ describe PermissionChecker do
     it "is false for a non-GDS editor" do
       checker = PermissionChecker.new(dclg_editor)
       expect(checker.is_gds_editor?).to be false
+    end
+  end
+
+  describe "multiple organisations owning a format" do
+    let(:checkers) {
+      [PermissionChecker.new(dclg_editor), PermissionChecker.new(defra_editor)]
+    }
+
+    it "allows members of all owning organisations to edit" do
+      checkers.each do |checker|
+        expect(checker.can_edit?("esi_fund")).to be true
+      end
+    end
+
+    it "allows editors who are members of all owning organisations to publish" do
+      checkers.each do |checker|
+        expect(checker.can_publish?("esi_fund")).to be true
+      end
     end
   end
 end
