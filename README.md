@@ -61,8 +61,8 @@ $ bundle exec rake
   - `document_type_artefact_formatter.rb` in `app/lib/` for Panopticon
   - `document_type_indexable_formatter.rb` app/lib/` for Rummager
   - define a factory for `document_type_panopticon_registerer`, `document_type_rummager_indexer`, `document_type_rummager_deleter` and `document_type_content_api_exporter` in `app/lib/specialist_publisher_wiring.rb`
-  - add an Observers registry for the docuemt type and add it to the has in the `observers_registry` method in `app/lib/specialist_publisher`
-10. Add `app/view_adapters/document_type_view_adapter.rb` along with it's entry in `app/view_adapters/view_adapter_registry.rb`. Also add the `_form.html.erb` which has the extra fields for that document_type. Be sure to pass the correct `form_namespace` matching the document_type.
+  - add an Observers registry for the document type and add it to the hash in the `observers_registry` method in `app/lib/specialist_publisher`
+10. Add `app/view_adapters/document_type_view_adapter.rb` along with its entry in `app/view_adapters/view_adapter_registry.rb`. Also add the `_form.html.erb` which has the extra fields for that document_type. Be sure to pass the correct `form_namespace` matching the document_type.
 11. Add the entry to `app/lib/permission_checker.rb` for the owning organisation and an entry in the finders array in `ApplicationController`.
 12. That's it!
 
@@ -90,7 +90,7 @@ Non standard Rails directories and what they're used for:
   * `app/models/validators`
     Not validators. Decorators for providing validation logic.
 * `app/observers`
-  Define ordered lists of exporters, called at different stages of a documents life cycle, for example, publication.
+  Define ordered lists of exporters, called at different stages of a document's life cycle, for example, publication
 * `app/presenters`
   Presenters used to format Finders for publishing to the Content Store
 * `app/repositories`
@@ -105,4 +105,4 @@ Non standard Rails directories and what they're used for:
 
 ### Services
 
- Services do things such as previewing a document, creation, updating, showing, withdrawing, queueing. This replaces the normal Rails behaviour of completing these actions directly from a controller, instead we call a service registry
+ Services do things such as previewing a document, creation, updating, showing, withdrawing, queueing. This replaces the normal Rails behaviour of completing these actions directly from a controller, instead we call a service registry.
