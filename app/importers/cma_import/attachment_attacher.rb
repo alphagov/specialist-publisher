@@ -1,8 +1,9 @@
 class CmaImportAttachmentAttacher
   include ::DocumentImport::AttachmentHelpers
 
-  def initialize(create_document_service, assets_directory)
+  def initialize(create_document_service, repo, assets_directory)
     @create_document_service = create_document_service
+    @repo = repo
     @assets_directory = assets_directory
   end
 
@@ -13,6 +14,8 @@ class CmaImportAttachmentAttacher
       attach_asset_to_document(asset_data, document)
     }
 
+    repo.store(document)
+
     Presenter.new(
       document,
       assets,
@@ -20,7 +23,7 @@ class CmaImportAttachmentAttacher
   end
 
 private
-  attr_reader :create_document_service, :assets_directory
+  attr_reader :create_document_service, :repo, :assets_directory
 
   def attach_asset_to_document(asset_data, document)
     # Get the link markdown for this asset out of the document body

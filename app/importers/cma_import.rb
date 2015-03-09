@@ -32,7 +32,11 @@ private
   end
 
   def attachment_attacher
-    CmaImportAttachmentAttacher.new(attribute_mapper, data_files_dir)
+    CmaImportAttachmentAttacher.new(
+      attribute_mapper,
+      cma_cases_repository,
+      data_files_dir,
+    )
   end
 
   def attribute_mapper
