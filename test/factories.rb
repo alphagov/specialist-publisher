@@ -41,6 +41,10 @@ FactoryGirl.define do
     organisation_slug "rail-accident-investigation-branch"
   end
 
+  factory :generic_writer, parent: :user do
+    organisation_slug "ministry-of-tea"
+  end
+
   factory :generic_editor, parent: :editor do
     organisation_slug "ministry-of-tea"
   end

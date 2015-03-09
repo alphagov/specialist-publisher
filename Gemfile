@@ -66,6 +66,7 @@ group :test do
   gem "phantomjs", ">= 1.9.7.1"
   gem "webmock", "~> 1.17.4"
   gem "rspec", "3.0.0"
+  gem "rspec-rails", "3.0.0"
   gem "rubocop"
   gem "timecop"
 end
