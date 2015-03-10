@@ -33,9 +33,9 @@ private
 
   def attachment_attacher
     CmaImportAttachmentAttacher.new(
-      attribute_mapper,
-      cma_cases_repository,
-      data_files_dir,
+      create_document_service: attribute_mapper,
+      document_repository: cma_cases_repository,
+      assets_directory: data_files_dir,
     )
   end
 
