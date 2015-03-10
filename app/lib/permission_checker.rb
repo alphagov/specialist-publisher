@@ -34,27 +34,31 @@ private
   end
 
   def user_organisation_owns_format?(format)
-    user.organisation_slug == owning_organisation_for_format(format)
+    owning_organisations_for_format(format).include?(user.organisation_slug)
   end
 
-  def owning_organisation_for_format(format)
+  def owning_organisations_for_format(format)
     case format
     when "cma_case"
-      "competition-and-markets-authority"
+      ["competition-and-markets-authority"]
     when "aaib_report"
-      "air-accidents-investigation-branch"
+      ["air-accidents-investigation-branch"]
     when "international_development_fund"
-      "department-for-international-development"
+      ["department-for-international-development"]
     when "drug_safety_update", "medical_safety_alert"
-      "medicines-and-healthcare-products-regulatory-agency"
+      ["medicines-and-healthcare-products-regulatory-agency"]
     when "esi_fund"
-      "department-for-communities-and-local-government"
+      %w(
+        department-for-communities-and-local-government
+        department-for-work-pensions
+        department-for-environment-food-rural-affairs
+      )
     when "maib_report"
-      "marine-accident-investigation-branch"
+      ["marine-accident-investigation-branch"]
     when "raib_report"
-      "rail-accident-investigation-branch"
+      ["rail-accident-investigation-branch"]
     when "countryside_stewardship_grant"
-      "department-for-environment-food-rural-affairs"
+      ["department-for-environment-food-rural-affairs"]
     end
   end
 end

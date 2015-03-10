@@ -45,6 +45,11 @@ FactoryGirl.define do
     organisation_slug "ministry-of-tea"
   end
 
+  factory :gds_editor, parent: :user do
+    permissions %w(signin gds_editor)
+    organisation_slug "government-digital-service"
+  end
+
   factory :panopticon_mapping do
     resource_type "specialist-document"
     sequence(:resource_id) { |n| "some-uuid-#{n}"}
