@@ -1,6 +1,7 @@
 require "builders/specialist_document_builder"
 require "cma_import/mapper"
 require "cma_import/attachment_attacher"
+require "cma_import/missing_body_generator"
 
 class CmaImport
   def initialize(data_files_dir)
@@ -24,11 +25,18 @@ private
   def import_job_builder
     ->(data) {
       DocumentImport::SingleImport.new(
-        document_creator: attachment_attacher,
+        document_creator: missing_body_generator,
         logger: logger,
         data: data,
       )
     }
+  end
+
+  def missing_body_generator
+    CmaImportMissingBodyGenerator.new(
+      create_document_service: attachment_attacher,
+      document_repository: cma_cases_repository,
+    )
   end
 
   def attachment_attacher
