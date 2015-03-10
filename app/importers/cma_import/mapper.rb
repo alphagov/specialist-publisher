@@ -40,10 +40,6 @@ private
     )
   end
 
-  def body_defined?(data)
-    data.has_key?("body")
-  end
-
   class Presenter < SimpleDelegator
     def initialize(document, data)
       @data = data
