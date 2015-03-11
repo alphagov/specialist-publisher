@@ -9,7 +9,8 @@
       "filterable": true,
       "allowed_values": [
         {"label": "Option", "value": "option"},
-        {"label": "Capital item", "value": "capital-item"}
+        {"label": "Capital item", "value": "capital-item"},
+        {"label": "Supplement", "value": "supplement"}
       ]
     },
     {
@@ -19,16 +20,16 @@
       "preposition": "for",
       "filterable": true,
       "allowed_values": [
-        {"label": "Access", "value": "access"},
         {"label": "Arable land", "value": "arable-land"},
         {"label": "Boundaries", "value": "boundaries"},
         {"label": "Coast", "value": "coast"},
-        {"label": "Farmland wildlife", "value": "farmland-wildlife"},
+        {"label": "Educational access", "value": "educational-access"},
         {"label": "Flood risk", "value": "flood-risk"},
         {"label": "Grassland", "value": "grassland"},
         {"label": "Historic environment", "value": "historic-environment"},
         {"label": "Livestock management", "value": "livestock-management"},
         {"label": "Organic land", "value": "organic-land"},
+        {"label": "Priority habitats", "value": "priority-habitats"},
         {"label": "Trees (non-woodland)", "value": "trees-non-woodland"},
         {"label": "Uplands", "value": "uplands"},
         {"label": "Vegetation control", "value": "vegetation-control"},
