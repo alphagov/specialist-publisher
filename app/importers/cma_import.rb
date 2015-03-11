@@ -102,8 +102,18 @@ private
     def import_notes
       [
         "id: #{id}",
+        "publisher_url: #{publisher_url}",
         "slug: #{slug}",
       ]
+    end
+
+  private
+    def publisher_url
+      "#{publisher_host}/cma-cases/#{id}"
+    end
+
+    def publisher_host
+      Plek.new.find("specialist-publisher")
     end
   end
 end
