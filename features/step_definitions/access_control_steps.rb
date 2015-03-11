@@ -78,7 +78,6 @@ Then(/^I cannot publish cases nor manuals$/) do
   check_cma_case_cannot_be_published
 end
 
-Then(/^I cannot withdraw cases nor manuals$/) do
-  check_manual_cannot_be_withdrawn
+Then(/^I cannot withdraw cases$/) do
   check_cma_case_cannot_be_withdrawn
 end

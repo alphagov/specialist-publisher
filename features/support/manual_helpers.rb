@@ -212,11 +212,6 @@ module ManualHelpers
     expect(page).not_to have_button("Publish")
   end
 
-  def check_manual_cannot_be_withdrawn
-    go_to_manual_page(@manual_fields.fetch(:title))
-    expect(page).not_to have_button("Withdraw")
-  end
-
   def change_manual_without_saving(title, fields)
     go_to_edit_page_for_manual(title)
     fill_in_fields(fields)

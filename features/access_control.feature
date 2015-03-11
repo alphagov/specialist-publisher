@@ -23,4 +23,4 @@ Feature: Access control
     Given I am logged in as a writer
     Then I can edit cases and manuals
     And I cannot publish cases nor manuals
-    And I cannot withdraw cases nor manuals
+    And I cannot withdraw cases
