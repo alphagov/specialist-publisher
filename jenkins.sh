@@ -36,7 +36,12 @@ github_status "$REPO_NAME" pending "is running on Jenkins"
 git merge --no-commit origin/master || git merge --abort
 
 bundle install --path "${HOME}/bundles/${JOB_NAME}" --deployment --without development
-RAILS_ENV=test bundle exec rake
+
+# Clone govuk-content-schemas depedency for contract tests
+rm -rf tmp/govuk-content-schemas
+git clone git@github.com:alphagov/govuk-content-schemas.git tmp/govuk-content-schemas
+
+GOVUK_CONTENT_SCHEMAS_PATH=tmp/govuk-content-schemas RAILS_ENV=test bundle exec rake
 
 export EXIT_STATUS=$?
 
