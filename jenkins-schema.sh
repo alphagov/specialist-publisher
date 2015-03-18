@@ -2,12 +2,13 @@
 export DISPLAY=:99
 export GOVUK_APP_DOMAIN=test.alphagov.co.uk
 export GOVUK_ASSET_ROOT=http://static.test.alphagov.co.uk
+export CONTEXT_MESSAGE="Verify specialist-publisher against content schemas"
 env
 
 function github_status {
   STATUS="$1"
   MESSAGE="$2"
-  gh-status alphagov/govuk-content-schemas "$SCHEMA_GIT_COMMIT" "$STATUS" -d "Build #${BUILD_NUMBER} ${MESSAGE}" -u "$BUILD_URL" -c "Verify contacts-admin against content schemas" >/dev/null
+  gh-status alphagov/govuk-content-schemas "$SCHEMA_GIT_COMMIT" "$STATUS" -d "Build #${BUILD_NUMBER} ${MESSAGE}" -u "$BUILD_URL" -c "$CONTEXT_MESSAGE" >/dev/null
 }
 
 function error_handler {
