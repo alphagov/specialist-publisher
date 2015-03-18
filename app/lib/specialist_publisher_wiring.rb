@@ -24,7 +24,7 @@ require "view_adapter_registry"
 
 $LOAD_PATH.unshift(File.expand_path("../..", "app/services"))
 
-SpecialistPublisherWiring = DependencyContainer.new do
+SpecialistPublisherWiring ||= DependencyContainer.new do
   define_factory(:manual_builder) {
     ManualBuilder.new(
       slug_generator: SlugGenerator.new(prefix: "guidance"),
