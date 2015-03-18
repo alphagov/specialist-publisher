@@ -13,10 +13,10 @@ class FinderContentItemPresenter < Struct.new(:metadata, :schema, :timestamp)
       "details" => details,
       "links" => {
         "organisations" => organisations,
-        "topics" => [],
         "related" => related,
         "email_alert_signup" => email_alert_signup,
       },
+      "locale" => "en",
     }
   end
 
