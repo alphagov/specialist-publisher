@@ -24,7 +24,8 @@ require "view_adapter_registry"
 
 $LOAD_PATH.unshift(File.expand_path("../..", "app/services"))
 
-SpecialistPublisherWiring = DependencyContainer.new do
+# rubocop:disable ConstantName
+SpecialistPublisherWiring ||= DependencyContainer.new do
   define_factory(:manual_builder) {
     ManualBuilder.new(
       slug_generator: SlugGenerator.new(prefix: "guidance"),
@@ -298,3 +299,4 @@ SpecialistPublisherWiring = DependencyContainer.new do
     FinderSchema.new(Rails.root.join("finders/schemas/raib-reports.json"))
   }
 end
+# rubocop:enable ConstantName
