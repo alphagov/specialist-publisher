@@ -13,6 +13,7 @@ Scenario: Create a new ESI Fund
 Scenario: Cannot create an ESI Fund with invalid fields
   When I create an ESI Fund with invalid fields
   Then I should see error messages about missing fields
+  And I should see an error message about an invalid date field "Closing date"
   And I should see an error message about a "Body" field containing javascript
   And the ESI Fund should not have been created
 
