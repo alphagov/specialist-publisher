@@ -9,4 +9,5 @@ class EsiFundValidator < SimpleDelegator
   validates :summary, presence: true
   validates :body, presence: true, safe_html: true
 
+  validates :closing_date, allow_blank: true, date: true
 end

@@ -17,6 +17,7 @@ end
 When(/^I create an ESI Fund with invalid fields$/) do
   @document_fields = {
     body: "<script>alert('Oh noes!)</script>",
+    closing_date: "2016/01/01",
   }
   create_esi_fund(@document_fields)
 end
