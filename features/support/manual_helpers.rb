@@ -169,18 +169,6 @@ module ManualHelpers
     change_note_slug = [manual_slug, "updates"].join("/")
   end
 
-  def check_manual_change_note_exported(manual_slug, expected_note)
-    slug = change_note_slug(manual_slug)
-
-    exported_history = ManualChangeHistory
-      .find_by_slug(slug)
-
-    most_recent_section_update = exported_history.updates.last
-
-    expect(most_recent_section_update.fetch("change_note"))
-      .to eq(@change_note)
-  end
-
   def check_change_note_value(manual_title, document_title, expected_value)
     go_to_manual_page(manual_title)
     click_on document_title
