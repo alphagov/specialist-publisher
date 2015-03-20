@@ -2,6 +2,9 @@ require "gds_api/publishing_api"
 require "gds_api/organisations"
 require "manual_publishing_api_exporter"
 require "manual_section_publishing_api_exporter"
+require "rummager_indexer"
+require "formatters/manual_indexable_formatter"
+require "formatters/manual_section_indexable_formatter"
 
 class ManualObserversRegistry
   def publication
