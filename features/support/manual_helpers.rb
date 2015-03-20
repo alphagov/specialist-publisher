@@ -166,7 +166,7 @@ module ManualHelpers
   end
 
   def change_note_slug(manual_slug)
-    change_note_slug = [manual_slug, "updates"].join("/")
+    [manual_slug, "updates"].join("/")
   end
 
   def check_change_note_value(manual_title, document_title, expected_value)
