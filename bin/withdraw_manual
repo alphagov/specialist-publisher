@@ -1,0 +1,20 @@
+#!/usr/bin/env ruby
+
+require File.expand_path("../../config/environment", __FILE__)
+require "manual_service_registry"
+
+manual_id = ARGV.any? ? ARGV.fetch(0) : nil
+
+begin
+  manual = ManualServiceRegistry.new.withdraw(manual_id).call
+
+  if manual.withdrawn?
+    STDOUT.puts "SUCCESS: Manual `#{manual.slug}` withdrawn"
+  else
+    STDERR.puts "FAILURE: Manual `#{manual.slug}` could not be withdrawn"
+    exit 1
+  end
+rescue WithdrawManualService::ManualNotFoundError
+  STDERR.puts "ERROR: Manual not found for manual_id `#{manual_id}`"
+  exit 1
+end
