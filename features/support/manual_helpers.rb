@@ -166,19 +166,7 @@ module ManualHelpers
   end
 
   def change_note_slug(manual_slug)
-    change_note_slug = [manual_slug, "updates"].join("/")
-  end
-
-  def check_manual_change_note_exported(manual_slug, expected_note)
-    slug = change_note_slug(manual_slug)
-
-    exported_history = ManualChangeHistory
-      .find_by_slug(slug)
-
-    most_recent_section_update = exported_history.updates.last
-
-    expect(most_recent_section_update.fetch("change_note"))
-      .to eq(@change_note)
+    [manual_slug, "updates"].join("/")
   end
 
   def check_change_note_value(manual_title, document_title, expected_value)
@@ -226,5 +214,71 @@ module ManualHelpers
 
   def check_for_clashing_section_slugs
     expect(page).to have_content("Warning: There are duplicate section slugs in this manual")
+  end
+
+  def withdraw_manual(manual_title)
+    manual_id = get_id_for_manual(manual_title)
+
+    manual_services = ManualServiceRegistry.new
+    manual_services.withdraw(manual_id).call
+  end
+
+  def get_id_for_manual(manual_title)
+    visit manuals_path
+    link = page.find_link(manual_title)
+    # TODO this is pretty gross, consider making it less so
+    link.native.attribute("href").value.match(%r{\A/manuals/(.*?)(\?|\z)})[1]
+  end
+
+  def check_manual_is_withdrawn(manual_title, manual_slug, section_titles, section_slugs)
+    check_manual_is_withdrawn_from_publishing_api(manual_slug, section_slugs)
+    check_manual_is_withdrawn_from_rummager(manual_slug, section_slugs)
+    check_manual_is_withdrawn_from_panopticon(manual_slug)
+  end
+
+  def check_manual_is_withdrawn_from_publishing_api(manual_slug, section_slugs)
+    slugs = [manual_slug].concat(section_slugs)
+
+    attributes = {
+      "format" => "gone",
+      "publishing_app" => "specialist-publisher",
+    }
+
+    slugs.each do |slug|
+      assert_publishing_api_put_item("/#{slug}", attributes)
+    end
+  end
+
+  def check_manual_is_withdrawn_from_rummager(manual_slug, section_slugs)
+    expect(fake_rummager).to have_received(:delete_document)
+      .with(
+        "manual",
+        manual_slug,
+      )
+
+    section_slugs.each do |section_slug|
+      expect(fake_rummager).to have_received(:delete_document)
+        .with(
+          "manual_section",
+          section_slug,
+        )
+    end
+  end
+
+  def check_manual_is_withdrawn_from_panopticon(manual_slug)
+    slugs = [
+      manual_slug,
+      change_note_slug(manual_slug),
+    ]
+
+    slugs.each do |slug|
+      expect(fake_panopticon).to have_received(:put_artefact!)
+        .with(
+          slug,
+          hash_including(
+            state: "archived",
+          )
+        )
+    end
   end
 end

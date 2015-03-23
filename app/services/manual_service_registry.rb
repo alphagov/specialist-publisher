@@ -8,6 +8,14 @@ class ManualServiceRegistry
     )
   end
 
+  def withdraw(manual_id)
+    WithdrawManualService.new(
+      manual_repository: manual_repository,
+      listeners: observers.withdrawal,
+      manual_id: manual_id,
+    )
+  end
+
 private
   def manual_repository
     # TODO Get this from a RepositoryRegistry

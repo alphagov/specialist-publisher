@@ -2,6 +2,10 @@ require "gds_api/publishing_api"
 require "gds_api/organisations"
 require "manual_publishing_api_exporter"
 require "manual_section_publishing_api_exporter"
+require "publishing_api_withdrawer"
+require "rummager_indexer"
+require "formatters/manual_indexable_formatter"
+require "formatters/manual_section_indexable_formatter"
 
 class ManualObserversRegistry
   def publication
@@ -17,6 +21,14 @@ class ManualObserversRegistry
 
   def creation
     []
+  end
+
+  def withdrawal
+    [
+      publishing_api_withdrawer,
+      rummager_withdrawer,
+      panopticon_exporter,
+    ]
   end
 
 private
@@ -52,6 +64,25 @@ private
     }
   end
 
+  def rummager_withdrawer
+    ->(manual) {
+      indexer = RummagerIndexer.new
+
+      indexer.delete(
+        ManualIndexableFormatter.new(manual)
+      )
+
+      manual.documents.each do |section|
+        indexer.delete(
+          ManualSectionIndexableFormatter.new(
+            MarkdownAttachmentProcessor.new(section),
+            manual,
+          )
+        )
+      end
+    }
+  end
+
   def panopticon_exporter
     SpecialistPublisherWiring.get(:manual_panopticon_registerer)
   end
@@ -75,6 +106,22 @@ private
           document_renderer,
           manual,
           document
+        ).call
+      end
+    }
+  end
+
+  def publishing_api_withdrawer
+    ->(manual) {
+      PublishingAPIWithdrawer.new(
+        publishing_api: publishing_api,
+        entity: manual,
+      ).call
+
+      manual.documents.each do |document|
+        PublishingAPIWithdrawer.new(
+          publishing_api: publishing_api,
+          entity: document,
         ).call
       end
     }
