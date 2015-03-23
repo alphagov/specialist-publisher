@@ -374,3 +374,48 @@ end
 Then(/^I see a warning about section slug clash at publication$/) do
   check_for_clashing_section_slugs
 end
+
+Given(/^a published manual with at least two sections exists$/) do
+  @manual_title = "Example Manual Title"
+  @manual_slug = "guidance/example-manual-title"
+
+  @manual_fields = {
+    title: @manual_title,
+    summary: "Nullam quis risus eget urna mollis ornare vel eu leo.",
+  }
+
+  create_manual(@manual_fields)
+
+  @section_titles = []
+  @section_slugs = []
+
+  (1..3).each do |section_number|
+    section_title = "Section #{section_number}"
+    section_slug = [@manual_slug, "section-#{section_number}"].join("/")
+    section_fields = {
+      section_title: section_title,
+      section_summary: "Section #{section_number} summary",
+      section_body: "Section #{section_number} body",
+    }
+
+    create_manual_document(@manual_title, section_fields)
+
+    @section_titles << section_title
+    @section_slugs << section_slug
+  end
+
+  publish_manual
+
+  # Clear out any remote requests caught by webmock.
+  # We don't want the remote calls that were made during the publishing setup
+  # to interfere with later webmock assertions.
+  reset_remote_requests
+end
+
+When(/^a DevOps specialist withdraws the manual for me$/) do
+  withdraw_manual(@manual_title)
+end
+
+Then(/^the manual should be withdrawn$/) do
+  check_manual_is_withdrawn(@manual_title, @manual_slug, @section_titles, @section_slugs)
+end

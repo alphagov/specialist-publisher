@@ -66,4 +66,14 @@ class Manual
   def published?
     state == "published"
   end
+
+  def withdraw
+    @state = "withdrawn" if state == "published"
+
+    self
+  end
+
+  def withdrawn?
+    state == "withdrawn"
+  end
 end
