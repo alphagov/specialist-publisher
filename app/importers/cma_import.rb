@@ -2,6 +2,7 @@ require "builders/specialist_document_builder"
 require "cma_import/mapper"
 require "cma_import/attachment_attacher"
 require "cma_import/missing_body_generator"
+require "cma_import/body_fixer"
 
 class CmaImport
   def initialize(data_files_dir)
@@ -34,8 +35,14 @@ private
 
   def missing_body_generator
     CmaImportMissingBodyGenerator.new(
-      create_document_service: attachment_attacher,
+      create_document_service: body_fixer,
       document_repository: cma_cases_repository,
+    )
+  end
+
+  def body_fixer
+    CmaImportBodyFixer.new(
+      create_document_service: attachment_attacher,
     )
   end
 
