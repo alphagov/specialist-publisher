@@ -58,14 +58,27 @@ private
   end
 
   def find_link_in_document(asset_data, document)
+    url = asset_data.fetch("original_url")
+
     match = document.body.match(
-      %r|\[([^\]]+)\]\(#{asset_data.fetch("original_url")}\)|
+      %r!
+        # markdown link
+        \[([^\]]+)\] # link text
+        \(#{url}\)
+
+        |
+
+        # html link
+        <a\s+href="#{url}">
+          ([^<]+) # link text
+        </a>
+      !x
     )
 
     if match
       OpenStruct.new(
         match: match.to_s,
-        title: match.captures.first,
+        title: match.captures.compact.first,
       )
     end
   end
