@@ -19,6 +19,10 @@ Feature: Searching specialist documents
     When I search for a partial title
     Then I see the matching AAIB reports in the list
 
+  Scenario: Can ignore case when searching
+    When I search for a partial title in the wrong case
+    Then I see the matching AAIB reports in the list
+
   Scenario: Can clear the search
     Given a search has been performed
     When I clear the search term field

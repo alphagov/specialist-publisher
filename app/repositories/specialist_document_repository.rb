@@ -48,12 +48,12 @@ class SpecialistDocumentRepository
   end
 
   def by_title(title)
-    all_document_ids_scoped(title: /#{title}/)
+    all_document_ids_scoped(title: /#{title}/i)
       .map { |id| fetch(id)  }
   end
 
   def by_slug(slug)
-    all_document_ids_scoped(slug: /#{slug}/)
+    all_document_ids_scoped(slug: /#{slug}/i)
       .map { |id| fetch(id)  }
   end
 

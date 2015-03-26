@@ -1,9 +1,6 @@
 <h2>Search</h2>
-<%= form_for search, url: specialist_documents_path(document_type), method: :get do |f| %>
-  <p>
-    <%= f.text_field :term, {default_builder: true}, {placeholder: "Search term"} %>
-    <p class="help-block">(case sensitive)</p>
-  </p>
+<%= form_for search, url: specialist_documents_path(document_type), method: :get, html: {class: 'well'} do |f| %>
+  <%= f.text_field :term, {default_builder: true}, {placeholder: "Search term", class: 'form-control add-bottom-margin'} %>
   <p>
     Search which field?
     <%= f.radio_button :attribute, "title", label: "Title" %>

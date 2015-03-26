@@ -50,6 +50,17 @@ When(/^I search for a partial title$/) do
   click_on "Search"
 end
 
+When(/^I search for a partial title in the wrong case$/) do
+  visit aaib_reports_path
+
+  @searching_for = @aaib_reports_data.last
+
+  # 0..4 => "THIRD"
+  fill_in "Search term", with: @searching_for[:title][0..4].upcase
+  choose "Title"
+  click_on "Search"
+end
+
 Given(/^a search has been performed$/) do
   visit aaib_reports_path
 
