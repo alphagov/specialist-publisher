@@ -3,8 +3,6 @@
   "base_path": "/maib-reports",
   "format_name": "Marine Accident Investigation Branch report",
   "name": "Marine Accident Investigation Branch reports",
-  "beta": true,
-  "beta_message": "Until early 2015, the <a href='http://www.maib.gov.uk/home/index.cfm'>MAIB website</a> is the main source for MAIB reports",
   "filter": {
     "document_type": "maib_report"
   },
