@@ -47,13 +47,10 @@ class SpecialistDocumentRepository
       .map { |id| fetch(id) }.first
   end
 
-  def by_title(title)
-    all_document_ids_scoped(title: /#{title}/i)
-      .map { |id| fetch(id)  }
-  end
+  def search(query)
+    conditions = [{title: /#{query}/i}, {slug: /#{query}/i}]
 
-  def by_slug(slug)
-    all_document_ids_scoped(slug: /#{slug}/i)
+    all_document_ids_scoped(conditions)
       .map { |id| fetch(id)  }
   end
 
@@ -93,7 +90,7 @@ private
   def all_document_ids_scoped(conditions)
     only_document_ids_for(
       specialist_document_editions
-        .where(conditions)
+        .any_of(conditions)
     )
   end
 

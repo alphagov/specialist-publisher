@@ -131,8 +131,7 @@ private
   end
 
   def search_params
-    initial = params[:search] || {}
-    {attribute: "title"}.merge(initial)
+    params.fetch(:search, {})
   end
 
   def document_id
