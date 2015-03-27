@@ -6,8 +6,8 @@ class ListDocumentsService
   end
 
   def call
-    if search_details.term.present?
-      documents_repository.search(search_details.term)
+    if search_details.query.present?
+      documents_repository.search(search_details.query)
     else
       documents_repository
     end

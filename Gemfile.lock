@@ -79,9 +79,6 @@ GEM
     debug_inspector (0.0.2)
     debugger-linecache (1.2.0)
     diff-lcs (1.2.5)
-    disposable (0.0.8)
-      representable (~> 2.0)
-      uber
     dotenv (0.11.1)
       dotenv-deployment (~> 0.0.2)
     dotenv-deployment (0.0.2)
@@ -259,15 +256,6 @@ GEM
     redis (3.1.0)
     redis-namespace (1.5.0)
       redis (~> 3.0, >= 3.0.4)
-    reform (1.1.1)
-      activemodel
-      disposable (~> 0.0.5)
-      representable (~> 2.0.3)
-      uber (~> 0.0.8)
-    representable (2.0.4)
-      multi_json
-      nokogiri
-      uber (~> 0.0.7)
     rest-client (1.6.8)
       mime-types (~> 1.16)
       rdoc (>= 2.4.2)
@@ -336,7 +324,6 @@ GEM
       polyglot
       polyglot (>= 0.3.1)
     tzinfo (0.3.41)
-    uber (0.0.9)
     uglifier (2.4.0)
       execjs (>= 0.3.0)
       json (>= 1.8.0)
@@ -392,7 +379,6 @@ DEPENDENCIES
   pry
   quiet_assets (= 1.0.3)
   rails (= 3.2.17)
-  reform (= 1.1.1)
   rspec (= 3.0.0)
   rspec-rails (= 3.0.0)
   rubocop

@@ -10,7 +10,7 @@ class AbstractDocumentsController < ApplicationController
   end
 
   def index
-    documents = services.list(search_adapter.model).call.map { |d| view_adapter(d) }
+    documents = services.list(search_adapter).call.map { |d| view_adapter(d) }
 
     truncate_and_warn(documents) if searching? && documents.size >= max_per_page
 
@@ -20,7 +20,6 @@ class AbstractDocumentsController < ApplicationController
 
     render("specialist_documents/index", locals: {
       documents: paginated_docs,
-      search: search_adapter,
     })
   end
 
@@ -121,17 +120,15 @@ private
   end
 
   def searching?
-    search_adapter.term.present?
+    search_query.present?
   end
 
   def search_adapter
-    @search_adapter ||= SearchForm.new(
-      OpenStruct.new(search_params)
-    )
+    OpenStruct.new(query: search_query)
   end
 
-  def search_params
-    params.fetch(:search, {})
+  def search_query
+    params.fetch(:query, nil)
   end
 
   def document_id
