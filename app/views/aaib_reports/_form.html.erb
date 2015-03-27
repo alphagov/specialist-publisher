@@ -2,17 +2,17 @@
   <%= form_for document do |f| %>
     <%= render partial: "shared/form_errors", locals: { object: document } %>
 
-    <%= f.text_field :title %>
-    <%= f.text_area :summary, class: 'short-textarea' %>
-    <%= f.text_area :body %>
+    <%= f.text_field :title, class: 'form-control' %>
+    <%= f.text_area :summary, class: 'form-control short-textarea' %>
+    <%= f.text_area :body, class: 'form-control' %>
 
-    <div class="preview_button"></div>
-    <div class="preview_container" style="display: none;"></div>
+    <div class="preview_button add-vertical-margins"></div>
+    <div class="preview_container add-vertical-margins" style="display: none;"></div>
 
-    <%= f.text_field :date_of_occurrence, placeholder: '2012-04-23' %>
-    <%= f.text_field :aircraft_type %>
-    <%= f.text_field :registration %>
-    <%= f.text_field :location %>
+    <%= f.text_field :date_of_occurrence, placeholder: '2012-04-23', class: 'form-control' %>
+    <%= f.text_field :aircraft_type, class: 'form-control' %>
+    <%= f.text_field :registration, class: 'form-control' %>
+    <%= f.text_field :location, class: 'form-control' %>
     <%= f.select :aircraft_category, f.object.facet_options(:aircraft_category), {}, { class: 'select2', multiple: true, data: {placeholder: 'Select an Aircraft category'} } %>
     <%= f.select :report_type, f.object.facet_options(:report_type), {}, { class: 'form-control' } %>
 

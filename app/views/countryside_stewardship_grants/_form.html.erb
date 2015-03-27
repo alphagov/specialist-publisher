@@ -2,12 +2,12 @@
   <%= form_for document do |f| %>
   <%= render partial: "shared/form_errors", locals: { object: document } %>
 
-  <%= f.text_field :title %>
-  <%= f.text_area :summary, class: 'short-textarea' %>
-  <%= f.text_area :body %>
+  <%= f.text_field :title, class: 'form-control' %>
+  <%= f.text_area :summary, class: 'form-control short-textarea' %>
+  <%= f.text_area :body, class: 'form-control' %>
 
-  <div class="preview_button"></div>
-  <div class="preview_container" style="display: none;"></div>
+  <div class="preview_button add-vertical-margins"></div>
+  <div class="preview_container add-vertical-margins" style="display: none;"></div>
 
   <%= f.select :grant_type, f.object.facet_options(:grant_type), {}, { class: 'form-control' } %>
   <%= f.select :land_use, f.object.facet_options(:land_use), {}, { class: 'select2', multiple: true, data: {placeholder: 'Select a location'} } %>
