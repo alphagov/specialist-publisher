@@ -48,7 +48,7 @@ class SpecialistDocumentRepository
   end
 
   def search(query)
-    conditions = [{title: /#{query}/i}, {slug: /#{query}/i}]
+    conditions = search_conditions(query)
 
     all_document_ids_scoped(conditions)
       .map { |id| fetch(id)  }
@@ -86,6 +86,20 @@ private
     :document_type,
     :document_factory,
   )
+
+  def search_conditions(query)
+    matcher = /#{query}/i
+    searchable_attributes.map { |attr|
+      {attr => matcher}
+    }
+  end
+
+  def searchable_attributes
+    [
+      :title,
+      :slug,
+    ]
+  end
 
   def all_document_ids_scoped(conditions)
     only_document_ids_for(
