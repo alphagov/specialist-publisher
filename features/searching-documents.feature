@@ -25,5 +25,5 @@ Feature: Searching specialist documents
 
   Scenario: Can clear the search
     Given a search has been performed
-    When I clear the search term field
+    When I clear the search field
     Then I see all AAIB reports in the list

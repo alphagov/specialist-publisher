@@ -1,5 +1,5 @@
-<h2>Search</h2>
 <%= form_for search, url: specialist_documents_path(document_type), method: :get, html: {class: 'well'} do |f| %>
-  <%= f.text_field :term, {default_builder: true}, {placeholder: "Search term", class: 'form-control add-bottom-margin'} %>
+  <%= f.label :term, "Search" %>
+  <%= f.text_field :term, {default_builder: true}, {class: 'form-control add-bottom-margin'} %>
   <button type="submit" class="btn btn-success">Search</button>
 <% end %>
