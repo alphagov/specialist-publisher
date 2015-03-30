@@ -15,9 +15,7 @@ When(/^I search for an exact slug$/) do
 
   @searching_for = @aaib_reports_data.first
 
-  fill_in "Search term", with: @searching_for[:slug]
-  choose "Slug"
-  click_on "Search"
+  search_for(@searching_for[:slug])
 end
 
 When(/^I search for a partial slug$/) do
@@ -26,9 +24,7 @@ When(/^I search for a partial slug$/) do
   @searching_for = @aaib_reports_data.first
 
   # 0..18 => "aaib-reports/first-"
-  fill_in "Search term", with: @searching_for[:slug][0..18]
-  choose "Slug"
-  click_on "Search"
+  search_for(@searching_for[:slug][0..18])
 end
 
 Then(/^I see the matching AAIB reports in the list$/) do
@@ -45,22 +41,25 @@ When(/^I search for a partial title$/) do
   @searching_for = @aaib_reports_data.last
 
   # 0..4 => "Third"
-  fill_in "Search term", with: @searching_for[:title][0..4]
-  choose "Title"
-  click_on "Search"
+  search_for(@searching_for[:title][0..4])
+end
+
+When(/^I search for a partial title in the wrong case$/) do
+  visit aaib_reports_path
+
+  @searching_for = @aaib_reports_data.last
+
+  # 0..4 => "THIRD"
+  search_for(@searching_for[:title][0..4].upcase)
 end
 
 Given(/^a search has been performed$/) do
   visit aaib_reports_path
-
-  fill_in "Search term", with: "Any data"
-  choose "Title"
-  click_on "Search"
+  search_for("Any data")
 end
 
-When(/^I clear the search term field$/) do
-  fill_in "Search term", with: ""
-  click_on "Search"
+When(/^I clear the search field$/) do
+  search_for("")
 end
 
 Then(/^I see all AAIB reports in the list$/) do

@@ -6,8 +6,8 @@ class ListDocumentsService
   end
 
   def call
-    if search_details.term.present?
-      documents_repository.send(search_method, search_details.term)
+    if search_details.query.present?
+      documents_repository.search(search_details.query)
     else
       documents_repository
     end
@@ -15,8 +15,4 @@ class ListDocumentsService
 
 private
   attr_reader :documents_repository, :search_details
-
-  def search_method
-    "by_#{search_details.attribute}"
-  end
 end

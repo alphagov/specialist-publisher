@@ -47,13 +47,10 @@ class SpecialistDocumentRepository
       .map { |id| fetch(id) }.first
   end
 
-  def by_title(title)
-    all_document_ids_scoped(title: /#{title}/)
-      .map { |id| fetch(id)  }
-  end
+  def search(query)
+    conditions = search_conditions(query)
 
-  def by_slug(slug)
-    all_document_ids_scoped(slug: /#{slug}/)
+    all_document_ids_scoped(conditions)
       .map { |id| fetch(id)  }
   end
 
@@ -90,10 +87,24 @@ private
     :document_factory,
   )
 
+  def search_conditions(query)
+    matcher = /#{query}/i
+    searchable_attributes.map { |attr|
+      {attr => matcher}
+    }
+  end
+
+  def searchable_attributes
+    [
+      :title,
+      :slug,
+    ]
+  end
+
   def all_document_ids_scoped(conditions)
     only_document_ids_for(
       specialist_document_editions
-        .where(conditions)
+        .any_of(conditions)
     )
   end
 

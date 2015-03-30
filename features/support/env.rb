@@ -104,6 +104,7 @@ require "rerendering_helpers"
 require "file_fixture_helpers"
 require "gds_sso_helpers"
 require "access_control_helpers"
+require "search_helpers"
 
 require "aaib_report_helpers"
 require "cma_case_helpers"
@@ -128,6 +129,7 @@ World(FileFixtureHelpers)
 World(RerenderingHelpers)
 World(GdsSsoHelpers)
 World(AccessControlHelpers)
+World(SearchHelpers)
 
 World(AaibReportHelpers)
 World(CmaCaseHelpers)
