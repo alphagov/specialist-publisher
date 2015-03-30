@@ -12,7 +12,9 @@
     <div class="preview_container add-vertical-margins" style="display: none;"></div>
 
     <% if manual.published? %>
-      <%= f.check_box :minor_update %>
+      <div class="checkbox add-vertical-margins">
+        <%= f.check_box :minor_update %>
+      </div>
       <%= f.text_area :change_note, class: 'form-control short-textarea' %>
     <% end %>
 
