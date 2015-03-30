@@ -1,13 +1,8 @@
 <div class="col-md-8">
   <%= form_for document do |f| %>
     <%= render partial: "shared/form_errors", locals: { object: document } %>
-
-    <%= f.text_field :title, class: 'form-control' %>
-    <%= f.text_area :summary, class: 'form-control short-textarea' %>
-    <%= f.text_area :body, class: 'form-control' %>
-
-    <div class="preview_button add-vertical-margins"></div>
-    <div class="preview_container add-vertical-margins" style="display: none;"></div>
+    <%= render partial: "shared/form_fields", locals: { f: f } %>
+    <%= render partial: "shared/form_preview" %>
 
     <%= f.select :fund_state, f.object.facet_options(:fund_state), {}, { class: 'form-control' } %>
     <%= f.select :location, f.object.facet_options(:location), {}, { class: 'select2', multiple: true, data: {placeholder: 'Select a location'} } %>
