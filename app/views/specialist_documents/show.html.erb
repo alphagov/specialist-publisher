@@ -48,13 +48,15 @@
 </div>
 <div class="row">
   <div class=" col-md-8">
-    <h2>Attachments</h2>
+    <h2 class="add-bottom-margin">Attachments</h2>
     <% if document.attachments.any? %>
-      <table class='table table-bordered table-hover'>
+      <table class='table table-bordered table-striped'>
         <thead>
-          <th>Title</th>
-          <th>Created</th>
-          <th>Last updated</th>
+          <tr class="table-header">
+            <th>Title</th>
+            <th>Created</th>
+            <th>Last updated</th>
+          </tr>
         </thead>
         <% document.attachments.each do | attachment | %>
         <tr>
