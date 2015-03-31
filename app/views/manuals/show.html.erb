@@ -81,14 +81,15 @@
     <% else %>
       <p class='no-content-message'>You haven&rsquo;t added any sections to this manual yet.</p>
     <% end %>
-  </div>
-</div>
 
-<div class="actions">
-  <% if manual.documents.any? && current_user_can_publish?("manual") %>
-    <%= form_tag(publish_manual_path(manual), method: :post) do %>
-      <button name='submit' class="btn btn-danger" <% unless slug_unique %>disabled="disabled"<% end %>>Publish</button>
-    <% end -%>
-  <% end %>
-  <%= link_to 'Edit manual', edit_manual_path(manual), class: 'action-link' %>
+    <div class="well">
+      <%= link_to 'Edit manual', edit_manual_path(manual), class: 'btn btn-success' %>
+    </div>
+
+    <% if manual.documents.any? && current_user_can_publish?("manual") && slug_unique %>
+      <%= form_tag(publish_manual_path(manual), method: :post, class: 'well') do %>
+        <button name='submit' class="btn btn-danger">Publish manual</button>
+      <% end -%>
+    <% end %>
+  </div>
 </div>

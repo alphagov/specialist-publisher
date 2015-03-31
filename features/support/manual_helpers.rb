@@ -40,7 +40,7 @@ module ManualHelpers
   end
 
   def publish_manual
-    click_on "Publish"
+    click_on "Publish manual"
   end
 
   def check_manual_exists_with(attributes)

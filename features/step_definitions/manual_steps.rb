@@ -237,7 +237,7 @@ When(/^I create a new draft of a section with a change note$/) do
 end
 
 When(/^I re\-publish the section$/) do
-  publish_document
+  publish_manual
 end
 
 When(/^I edit the manual document without a change note$/) do
