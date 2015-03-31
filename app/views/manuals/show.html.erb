@@ -62,11 +62,11 @@
 
 <div class="row">
   <div class="col-md-8">
-    <h2 class='with-actions'>Sections</h2>
-    <ul class="title-actions">
-      <li><%= link_to 'Reorder sections', reorder_manual_documents_path(manual), class: 'action-link' %></li>
-      <li><%= link_to 'Add section', new_manual_document_path(manual), class: 'action-link' %></li>
-     </ul>
+    <h2>Sections</h2>
+    <div class="add-bottom-margin">
+      <%= link_to 'Reorder sections', reorder_manual_documents_path(manual), class: 'btn btn-default add-right-margin' %>
+      <%= link_to 'Add section', new_manual_document_path(manual), class: 'btn btn-default' %>
+    </div>
     <% if manual.documents.any? %>
     <ul class="document-list">
      <% manual.documents.each do |document| %>
