@@ -26,28 +26,23 @@
   </div>
   <div class="col-md-8">
     <h2>Summary</h2>
-    <p><%= manual.summary %></p>
+    <p class="lead"><%= manual.summary %></p>
   </div>
 </div>
 
-<div class="row">
-  <div class=" col-md-8">
-    <h2 class='collapsable-heading' >
-      <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
-        Body <small>(click to expand)</small>
-      </a>
-    </h2>
-    <div id="collapseOne" class="panel-collapse collapse">
-      <pre><%= manual.body %></pre>
+<% if manual.body.present? %>
+  <div class="row">
+    <div class=" col-md-8">
+      <h2>Body</h2>
+      <pre class="body-pre add-bottom-margin"><%= manual.body %></pre>
     </div>
   </div>
-</div>
+<% end %>
 
-
-<div class="row">
+<div class="row add-bottom-margin">
   <div class="col-md-8">
     <h2>Metadata</h2>
-    <dl class='metadata-list'>
+    <dl class="metadata-list">
       <dt>State</dt>
       <dd><%= state(manual) %></dd>
     </dl>

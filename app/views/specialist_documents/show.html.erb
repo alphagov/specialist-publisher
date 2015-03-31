@@ -15,13 +15,13 @@
 <div class="row">
   <div class="col-md-8">
     <h2>Summary</h2>
-    <p><%= document.summary %></p>
+    <p class="lead"><%= document.summary %></p>
   </div>
 </div>
-<div class="row">
+<div class="row add-bottom-margin">
   <div class=" col-md-8">
     <h2>Metadata</h2>
-    <dl class='metadata-list'>
+    <dl class="metadata-list">
       <% document.humanized_attributes.each_pair do |label, values| %>
         <dt><%= label.to_s.humanize %></dt>
         <% Array(values).each do |value| %>
@@ -34,18 +34,15 @@
   </div>
 </div>
 
-<div class="row">
-  <div class=" col-md-8">
-    <h2 class='collapsable-heading' >
-      <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
-        Body <small>(click to expand)</small>
-      </a>
-    </h2>
-    <div id="collapseOne" class="panel-collapse collapse">
-      <pre><%= document.body %></pre>
+<% if document.body.present? %>
+  <div class="row">
+    <div class="col-md-8">
+      <h2>Body</h2>
+      <pre class="body-pre add-bottom-margin"><%= document.body %></pre>
     </div>
   </div>
-</div>
+<% end %>
+
 <div class="row">
   <div class=" col-md-8">
     <h2 class="add-bottom-margin">Attachments</h2>
