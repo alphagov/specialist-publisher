@@ -52,14 +52,14 @@
           <tr class="table-header">
             <th>Title</th>
             <th>Created</th>
-            <th>Last updated</th>
+            <th>Last&nbsp;updated</th>
           </tr>
         </thead>
         <% document.attachments.each do | attachment | %>
         <tr>
           <td><%= attachment.title %></td>
-          <td><%= attachment.created_at.to_s(:govuk_date)%></td>
-          <td><%= attachment.updated_at.to_s(:govuk_date)%></td>
+          <td><%= attachment.created_at.to_date.to_s(:govuk_date) %></td>
+          <td><%= attachment.updated_at.to_date.to_s(:govuk_date) %></td>
         </tr>
         <% end %>
       </table>
