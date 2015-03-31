@@ -83,15 +83,12 @@
     <% end %>
   </div>
 </div>
-<div class='row'>
-  <div class="col-md-12">
-    <div class="actions">
-      <% if manual.documents.any? && current_user_can_publish?("manual") %>
-        <%= form_tag(publish_manual_path(manual), method: :post) do %>
-          <button name='submit' class="btn btn-danger" <% unless slug_unique %>disabled="disabled"<% end %>>Publish</button>
-        <% end -%>
-      <% end %>
-      <%= link_to 'Edit manual', edit_manual_path(manual), class: 'action-link' %>
-    </div>
-  </div>
+
+<div class="actions">
+  <% if manual.documents.any? && current_user_can_publish?("manual") %>
+    <%= form_tag(publish_manual_path(manual), method: :post) do %>
+      <button name='submit' class="btn btn-danger" <% unless slug_unique %>disabled="disabled"<% end %>>Publish</button>
+    <% end -%>
+  <% end %>
+  <%= link_to 'Edit manual', edit_manual_path(manual), class: 'action-link' %>
 </div>
