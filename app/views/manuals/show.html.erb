@@ -73,7 +73,7 @@
         <li class="document">
           <%= link_to(document.title, manual_document_path(manual, document), class: 'document-title') %>
           <ul class="metadata">
-            <li>updated <%= time_ago_in_words(document.updated_at) %> ago</li>
+            <li class="text-muted">Updated <%= time_ago_in_words(document.updated_at) %> ago</li>
           </ul>
         </li>
       <% end %>
