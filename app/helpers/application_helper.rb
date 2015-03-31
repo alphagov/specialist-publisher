@@ -127,7 +127,7 @@ private
       major_update: {
         disabled: false,
         warning: "You are about to publish a <strong>major edit</strong> with a public change note.",
-        notification: "This will email subscribers to #{current_finder[:title]}.",
+        notification: "Publishing will email subscribers to #{current_finder[:title]}.",
       },
       minor_update: {
         disabled: false,
@@ -137,7 +137,7 @@ private
       new_document: {
         disabled: false,
         warning: nil,
-        notification: "This will email subscribers to #{current_finder[:title]}.",
+        notification: "Publishing will email subscribers to #{current_finder[:title]}.",
       }
     }
   end
