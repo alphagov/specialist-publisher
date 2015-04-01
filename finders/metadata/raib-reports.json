@@ -3,13 +3,12 @@
   "base_path": "/raib-reports",
   "format_name": "Rail Accident Investigation Branch report",
   "name": "Rail Accident Investigation Branch reports",
-  "beta": true,
-  "beta_message": "Until early 2015, the <a href='http://www.raib.gov.uk/home/index.cfm'>RAIB website</a> is the main source for RAIB reports",
   "filter": {
     "document_type": "raib_report"
   },
   "signup_content_id": "db81c7e8-b1b6-4c29-992a-1289f1b63073",
   "signup_copy": "You'll get an email each time a report is updated or a new report is published.",
+  "signup_enabled": true,
   "organisations": ["013872d8-8bbb-4e80-9b79-45c7c5cf9177"],
   "subscription_list_title_prefix": {
     "singular": "Rail Accident Investigation Branch (RAIB) reports with the following railway type: ",
