@@ -6,14 +6,12 @@ module FormHelpers
   end
 
   def fill_in_field(field_name, value)
-    human_field_name = field_name.to_s.humanize
-    tag_name = page.find_field(field_name.to_s.humanize).tag_name
+    label_text = field_name.to_s.humanize
 
-    case tag_name
-    when "select"
-      select value, from: human_field_name
+    if page.first(:select, label_text)
+      select value, from: label_text
     else
-      fill_in human_field_name, with: value
+      fill_in label_text, with: value
     end
   end
 end
