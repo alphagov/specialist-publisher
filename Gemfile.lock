@@ -35,7 +35,7 @@ GEM
       multi_json
     arel (3.0.3)
     ast (2.0.0)
-    autoprefixer-rails (5.1.7)
+    autoprefixer-rails (5.1.8)
       execjs
       json
     awesome_print (1.2.0)
@@ -44,7 +44,7 @@ GEM
       erubis (>= 2.6.6)
     binding_of_caller (0.7.2)
       debug_inspector (>= 0.0.1)
-    bootstrap-sass (3.3.3)
+    bootstrap-sass (3.3.4.1)
       autoprefixer-rails (>= 5.0.0.1)
       sass (>= 3.2.19)
     bson (1.9.2)
@@ -122,7 +122,7 @@ GEM
       sanitize (~> 2.1.0)
     govuk-content-schema-test-helpers (1.0.2)
       json-schema (~> 2.5.1)
-    govuk_admin_template (2.1.0)
+    govuk_admin_template (2.2.0)
       bootstrap-sass (~> 3.3.3)
       jquery-rails (~> 3.1.1)
       rails (>= 3.2.0)
@@ -367,7 +367,7 @@ DEPENDENCIES
   generic_form_builder (= 0.11.0)
   govspeak (= 3.1.0)
   govuk-content-schema-test-helpers (= 1.0.2)
-  govuk_admin_template (= 2.1.0)
+  govuk_admin_template (= 2.2.0)
   govuk_content_models (= 22.2.0)
   govuk_frontend_toolkit (= 0.44.0)
   jasmine-rails

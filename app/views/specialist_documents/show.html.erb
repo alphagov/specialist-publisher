@@ -44,10 +44,10 @@
 <% end %>
 
 <div class="row">
-  <div class=" col-md-8">
+  <div class="col-md-8">
     <h2 class="add-bottom-margin">Attachments</h2>
     <% if document.attachments.any? %>
-      <table class='table table-bordered table-striped'>
+      <table class='table table-bordered table-striped add-bottom-margin'>
         <thead>
           <tr class="table-header">
             <th>Title</th>
@@ -64,19 +64,23 @@
         <% end %>
       </table>
     <% else %>
-      <p class='no-content-message'>This document doesn't have any attachments</p>
+      <p class='no-content-message'>This document doesn’t have any attachments</p>
     <% end %>
   </div>
 </div>
 
-<div class="actions">
-  <%= publish_form(slug_unique, publishable, document) %>
+<div class="row">
+  <div class="col-md-8">
+    <h2>Actions</h2>
+    <div class="well">
+      <%= link_to "Edit document", [:edit, document], class: "btn btn-success" %>
+      <% if current_user_can_withdraw?(document.document_type) %>
+        <%= form_tag([:withdraw, document], method: :post, class: 'add-left-margin inline add-top-margin') do %>
+          <button name="submit" class="btn btn-default" data-module="confirm" data-message="Are you sure you want to withdraw this document?">Withdraw document</button>
+        <% end %>
+      <% end %>
+    </div>
 
-  <% if current_user_can_withdraw?(document.document_type) %>
-    <%= form_tag([:withdraw, document], method: :post) do %>
-      <button name='submit' class="btn btn-danger">Withdraw</button>
-    <% end -%>
-  <% end %>
-
-  <%= link_to "Edit", [:edit, document], class: "btn btn-primary" %>
+    <%= publish_form(slug_unique, publishable, document) %>
+  </div>
 </div>

@@ -83,7 +83,7 @@
 
     <% if manual.documents.any? && current_user_can_publish?("manual") && slug_unique %>
       <%= form_tag(publish_manual_path(manual), method: :post, class: 'well') do %>
-        <button name='submit' class="btn btn-danger">Publish manual</button>
+        <button name="submit" class="btn btn-danger" data-module="confirm" data-message="Are you sure you want to publish this manual?">Publish manual</button>
       <% end -%>
     <% end %>
   </div>
