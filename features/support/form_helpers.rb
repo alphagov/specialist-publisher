@@ -6,9 +6,7 @@ module FormHelpers
 
       case tag_name
       when "select"
-        Array(value).each do |val|
-          select val, from: human_field_name
-        end
+        select value, from: human_field_name
       else
         fill_in human_field_name, with: value
       end

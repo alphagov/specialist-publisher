@@ -4,7 +4,7 @@ When(/^I create a Drug Safety Update$/) do
     title: "Example Drug Safety Update",
     summary: "Nullam quis risus eget urna mollis ornare vel eu leo.",
     body: "## Header" + ("\n\nPraesent commodo cursus magna, vel scelerisque nisl consectetur et." * 10),
-    therapeutic_area: ["Anaesthesia and intensive care"],
+    therapeutic_area: "Anaesthesia and intensive care",
   }
   @dsu_metadata_values = {
     therapeutic_area: ["anaesthesia-intensive-care"],
@@ -34,7 +34,7 @@ Given(/^a draft Drug Safety Update exists$/) do
     title: "Example Drug Safety Update",
     summary: "Nullam quis risus eget urna mollis ornare vel eu leo.",
     body: "## Header" + ("\n\nPraesent commodo cursus magna, vel scelerisque nisl consectetur et." * 10),
-    therapeutic_area: ["Anaesthesia and intensive care"],
+    therapeutic_area: "Anaesthesia and intensive care",
   }
   @dsu_metadata_values = {
     therapeutic_area: ["anaesthesia-intensive-care"],
@@ -56,7 +56,7 @@ Given(/^two Drug Safety Updates exist$/) do
     title: "Example Drug Safety Update 1",
     summary: "Nullam quis risus eget urna mollis ornare vel eu leo.",
     body: "## Header" + ("\n\nPraesent commodo cursus magna, vel scelerisque nisl consectetur et." * 10),
-    therapeutic_area: ["Anaesthesia and intensive care"],
+    therapeutic_area: "Anaesthesia and intensive care",
   }
   @dsu_metadata_values = {
     therapeutic_area: ["anaesthesia-intensive-care"],
@@ -68,7 +68,7 @@ Given(/^two Drug Safety Updates exist$/) do
     title: "Example Drug Safety Update 2",
     summary: "Nullam quis risus eget urna mollis ornare vel eu leo.",
     body: "## Header" + ("\n\nPraesent commodo cursus magna, vel scelerisque nisl consectetur et." * 10),
-    therapeutic_area: ["Anaesthesia and intensive care"],
+    therapeutic_area: "Anaesthesia and intensive care",
   }
   @dsu_metadata_values = {
     therapeutic_area: ["anaesthesia-intensive-care"],
@@ -134,7 +134,7 @@ Given(/^a published Drug Safety Update exists$/) do
     title: "Example Drug Safety Update",
     summary: "Nullam quis risus eget urna mollis ornare vel eu leo.",
     body: "## Header" + ("\n\nPraesent commodo cursus magna, vel scelerisque nisl consectetur et." * 10),
-    therapeutic_area: ["Anaesthesia and intensive care"],
+    therapeutic_area: "Anaesthesia and intensive care",
   }
   @dsu_metadata_values = {
     therapeutic_area: ["anaesthesia-intensive-care"],
