@@ -8,7 +8,13 @@ When(/^I publish the CMA case$/) do
 end
 
 Then(/^the CMA case should be published$/) do
-  check_document_is_published(@slug, @document_fields)
+  market_sectors = Array(@document_fields.fetch(:market_sector, nil))
+
+  expected_fields = @document_fields.merge(
+    market_sector: market_sectors.map(&:downcase),
+  )
+
+  check_document_is_published(@slug, expected_fields)
 end
 
 When(/^I edit the CMA case and republish$/) do
