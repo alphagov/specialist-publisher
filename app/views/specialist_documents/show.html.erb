@@ -45,9 +45,15 @@
 
 <div class="row">
   <div class="col-md-8">
-    <h2 class="add-bottom-margin">Attachments</h2>
+    <%
+      truncate_at_size = 5
+      attachments = document.attachments
+    %>
+    <h2 class="add-bottom-margin">
+      <%= number_with_delimiter(attachments.size) %> <%= 'attachment'.pluralize(attachments.size) %>
+    </h2>
     <% if document.attachments.any? %>
-      <table class='table table-bordered table-striped add-bottom-margin'>
+      <table class="table table-bordered table-striped add-bottom-margin" data-module="toggle">
         <thead>
           <tr class="table-header">
             <th>Title</th>
@@ -55,12 +61,19 @@
             <th>Last&nbsp;updated</th>
           </tr>
         </thead>
-        <% document.attachments.each do | attachment | %>
-        <tr>
-          <td><%= attachment.title %></td>
-          <td><%= attachment.created_at.to_date.to_s(:govuk_date) %></td>
-          <td><%= attachment.updated_at.to_date.to_s(:govuk_date) %></td>
-        </tr>
+        <% attachments.each_with_index do | attachment, i | %>
+          <% if i == truncate_at_size - 1 %>
+            <tr class="table-header">
+              <td colspan="3" class="js-toggle-target text-center">
+                <strong><a href="#expand-table" class="js-toggle">…and <%= attachments.size - (truncate_at_size - 1)%> more</a></strong>
+              </td>
+            </tr>
+          <% end %>
+          <tr <% if i > truncate_at_size - 2 %>class="js-toggle-target if-js-hide"<% end %>>
+            <td><%= attachment.title %></td>
+            <td><%= attachment.created_at.to_date.to_s(:govuk_date) %></td>
+            <td><%= attachment.updated_at.to_date.to_s(:govuk_date) %></td>
+          </tr>
         <% end %>
       </table>
     <% else %>
