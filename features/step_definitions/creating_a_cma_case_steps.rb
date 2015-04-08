@@ -5,7 +5,8 @@ When(/^I create a CMA case$/) do
     title: @document_title,
     summary: "Nullam quis risus eget urna mollis ornare vel eu leo.",
     body: "## Header" + ("\n\nPraesent commodo cursus magna, vel scelerisque nisl consectetur et." * 10),
-    opened_date: "2014-01-01"
+    opened_date: "2014-01-01",
+    market_sector: "Energy",
   }
 
   create_cma_case(@document_fields)
@@ -29,6 +30,7 @@ When(/^I publish a new CMA case$/) do
     summary: "Nullam quis risus eget urna mollis ornare vel eu leo.",
     body: "## Header" + ("\n\nPraesent commodo cursus magna, vel scelerisque nisl consectetur et." * 10),
     opened_date: "2014-01-01",
+    market_sector: "Energy",
   }
 
   create_cma_case(@document_fields, publish: true)
@@ -55,7 +57,8 @@ Given(/^a draft CMA case exists$/) do
     title: @document_title,
     summary: "Nullam quis risus eget urna mollis ornare vel eu leo.",
     body: "## Header" + ("\n\nPraesent commodo cursus magna, vel scelerisque nisl consectetur et." * 10),
-    opened_date: "2014-01-01"
+    opened_date: "2014-01-01",
+    market_sector: "Energy",
   }
 
   create_cma_case(@document_fields, publish: false)
@@ -106,6 +109,7 @@ Given(/^a published CMA case exists$/) do
     summary: "Nullam quis risus eget urna mollis ornare vel eu leo.",
     body: "## Header" + ("\n\nPraesent commodo cursus magna, vel scelerisque nisl consectetur et." * 10),
     opened_date: "2014-01-01",
+    market_sector: "Energy",
   }
 
   @slug = "cma-cases/original-cma-case-title"
@@ -138,6 +142,7 @@ When(/^I start creating a new CMA case$/) do
     summary: "Nullam quis risus eget urna mollis ornare vel eu leo.",
     body: "Body for preview",
     opened_date: "2014-01-01",
+    market_sector: "Energy",
   }
 
   create_cma_case(@document_fields, save: false)

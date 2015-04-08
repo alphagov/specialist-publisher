@@ -60,7 +60,8 @@ module AttachmentHelpers
       title: document_title,
       summary: "Eget urna mollis ornare vel eu leo.",
       body: ("Praesent commodo cursus magna, vel scelerisque nisl consectetur et." * 10),
-      opened_date: "2014-01-01"
+      opened_date: "2014-01-01",
+      market_sector: "Energy",
     )
 
     add_attachment_to_document(document_title, attachment_title)
