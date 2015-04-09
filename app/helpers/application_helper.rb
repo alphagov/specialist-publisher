@@ -1,3 +1,5 @@
+# encoding: UTF-8
+
 module ApplicationHelper
   def state(document)
     state = document.publication_state
@@ -111,17 +113,17 @@ private
     {
       no_permission: {
         disabled: true,
-        warning: "You can't publish this document",
-        notification: "You don't have permission to publish.",
+        warning: nil,
+        notification: "You don’t have permission to publish this document.",
       },
       already_published: {
         disabled: true,
-        warning: "You can't publish this document",
+        warning: nil,
         notification: "There are no changes to publish.",
       },
       slug_not_unique: {
         disabled: true,
-        warning: "You can't publish this document",
+        warning: "You can’t publish this document",
         notification: "This document has a duplicate slug.<br/> You need to #{link_to "edit the document", [:edit, document]} and change the title to be able to be published.",
       },
       major_update: {
