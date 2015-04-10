@@ -56,7 +56,7 @@ private
     end
 
     def body
-      raw_data.fetch("body")
+      raw_data.fetch("body", "")
     end
 
     def normalised_body
