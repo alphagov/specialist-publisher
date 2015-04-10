@@ -64,7 +64,7 @@ private
     end
 
     def markup_sections
-      raw_data.fetch("markup_sections", [])
+      raw_data.fetch("markup_sections", {})
     end
 
     def missing_content
