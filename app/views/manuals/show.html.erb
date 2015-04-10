@@ -26,28 +26,23 @@
   </div>
   <div class="col-md-8">
     <h2>Summary</h2>
-    <p><%= manual.summary %></p>
+    <p class="lead"><%= manual.summary %></p>
   </div>
 </div>
 
-<div class="row">
-  <div class=" col-md-8">
-    <h2 class='collapsable-heading' >
-      <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
-        Body <small>(click to expand)</small>
-      </a>
-    </h2>
-    <div id="collapseOne" class="panel-collapse collapse">
-      <pre><%= manual.body %></pre>
+<% if manual.body.present? %>
+  <div class="row">
+    <div class=" col-md-8">
+      <h2>Body</h2>
+      <pre class="body-pre add-bottom-margin"><%= manual.body %></pre>
     </div>
   </div>
-</div>
+<% end %>
 
-
-<div class="row">
+<div class="row add-bottom-margin">
   <div class="col-md-8">
     <h2>Metadata</h2>
-    <dl class='metadata-list'>
+    <dl class="metadata-list">
       <dt>State</dt>
       <dd><%= state(manual) %></dd>
     </dl>
@@ -62,18 +57,18 @@
 
 <div class="row">
   <div class="col-md-8">
-    <h2 class='with-actions'>Sections</h2>
-    <ul class="title-actions">
-      <li><%= link_to 'Reorder sections', reorder_manual_documents_path(manual), class: 'action-link' %></li>
-      <li><%= link_to 'Add section', new_manual_document_path(manual), class: 'action-link' %></li>
-     </ul>
+    <h2>Sections</h2>
+    <div class="add-bottom-margin">
+      <%= link_to 'Reorder sections', reorder_manual_documents_path(manual), class: 'btn btn-default add-right-margin' %>
+      <%= link_to 'Add section', new_manual_document_path(manual), class: 'btn btn-default' %>
+    </div>
     <% if manual.documents.any? %>
     <ul class="document-list">
      <% manual.documents.each do |document| %>
         <li class="document">
           <%= link_to(document.title, manual_document_path(manual, document), class: 'document-title') %>
           <ul class="metadata">
-            <li>updated <%= time_ago_in_words(document.updated_at) %> ago</li>
+            <li class="text-muted">Updated <%= time_ago_in_words(document.updated_at) %> ago</li>
           </ul>
         </li>
       <% end %>
@@ -81,17 +76,15 @@
     <% else %>
       <p class='no-content-message'>You haven&rsquo;t added any sections to this manual yet.</p>
     <% end %>
-  </div>
-</div>
-<div class='row'>
-  <div class="col-md-12">
-    <div class="actions">
-      <% if manual.documents.any? && current_user_can_publish?("manual") %>
-        <%= form_tag(publish_manual_path(manual), method: :post) do %>
-          <button name='submit' class="btn btn-danger" <% unless slug_unique %>disabled="disabled"<% end %>>Publish</button>
-        <% end -%>
-      <% end %>
-      <%= link_to 'Edit manual', edit_manual_path(manual), class: 'action-link' %>
+
+    <div class="well">
+      <%= link_to 'Edit manual', edit_manual_path(manual), class: 'btn btn-success' %>
     </div>
+
+    <% if manual.documents.any? && current_user_can_publish?("manual") && slug_unique %>
+      <%= form_tag(publish_manual_path(manual), method: :post, class: 'well') do %>
+        <button name="submit" class="btn btn-danger" data-module="confirm" data-message="Are you sure you want to publish this manual?">Publish manual</button>
+      <% end -%>
+    <% end %>
   </div>
 </div>

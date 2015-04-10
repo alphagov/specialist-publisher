@@ -1,16 +1,9 @@
 form {
 
-  label {
-    display: block;
-  }
-  input[type="text"], textarea {
-    padding:2px;
-    width: 100%;
-    border:1px solid #555;
-  }
   .select2-container {
     width: 100%;
   }
+
   .short-textarea {
     height: 50px;
   }
@@ -71,6 +64,7 @@ h2.with-actions {
   width: 50%;
   float: left;
 }
+
 .title-actions {
   width: 50%;
   margin: 30px 0 10px;

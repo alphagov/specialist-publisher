@@ -3,15 +3,15 @@
     <%= form_for manual do |f| %>
       <%= render partial: "shared/form_errors", locals: { object: manual } %>
 
-      <%= f.text_field :title %>
-      <%= f.text_area :summary, class: 'short-textarea js-length-counter', data: { :"count-message-threshold" => 280, :"count-message-selector" => ".summary-length-info" } %>
+      <%= f.text_field :title, class: 'form-control' %>
+      <%= f.text_area :summary, class: 'form-control short-textarea js-length-counter', data: { :"count-message-threshold" => 280, :"count-message-selector" => ".summary-length-info" } %>
       <div class="summary-length-info" aria-live="polite">
         Summary text should be 280 characters or fewer. <span class="count"></span>
       </div>
-      <%= f.text_area :body %>
+      <%= f.text_area :body, class: 'form-control' %>
 
-      <div class="preview_button"></div>
-      <div class="preview_container" style="display: none;"></div>
+      <div class="preview_button add-vertical-margins"></div>
+      <div class="preview_container add-vertical-margins" style="display: none;"></div>
 
       <div class='actions'>
         <button name="draft" class="btn btn-success">Save as draft</button>

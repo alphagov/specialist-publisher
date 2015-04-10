@@ -1,15 +1,11 @@
 .page-header {
-  border-bottom: 1px solid $grey-3;
-  padding-bottom: $gutter-half;
-  margin-bottom: $gutter;
+  border-bottom: none;
 
-  span.document-slug {
-    display:block;
-    color: $grey-1;
-    @include core-19;
-  }
-
-  small {
-    color: $grey-1;
+  .document-slug {
+    color: $text-muted;
+    font-size: $font-size-large;
+    display: block;
+    margin-top: 5px;
+    font-weight: normal;
   }
 }

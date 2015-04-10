@@ -1,9 +1,11 @@
 <% if document.published? %>
-  <%= f.check_box :minor_update,
-    note: {
-      text: "Only use for minor changes like fixes to typos, links, GOV.UK style or metadata.",
-      class: "help-block"
-    }
-  %>
-  <%= f.text_area :change_note, class: 'short-textarea' %>
+  <div class="checkbox add-vertical-margins">
+    <%= f.check_box :minor_update,
+      note: {
+        text: "Only use for minor changes like fixes to typos, links, GOV.UK style or metadata.",
+        class: "help-block"
+      }
+    %>
+  </div>
+  <%= f.text_area :change_note, class: 'form-control short-textarea' %>
 <% end %>

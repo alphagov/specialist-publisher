@@ -15,13 +15,13 @@
 <div class="row">
   <div class="col-md-8">
     <h2>Summary</h2>
-    <p><%= document.summary %></p>
+    <p class="lead"><%= document.summary %></p>
   </div>
 </div>
-<div class="row">
+<div class="row add-bottom-margin">
   <div class=" col-md-8">
     <h2>Metadata</h2>
-    <dl class='metadata-list'>
+    <dl class="metadata-list">
       <% document.humanized_attributes.each_pair do |label, values| %>
         <dt><%= label.to_s.humanize %></dt>
         <% Array(values).each do |value| %>
@@ -34,50 +34,75 @@
   </div>
 </div>
 
-<div class="row">
-  <div class=" col-md-8">
-    <h2 class='collapsable-heading' >
-      <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
-        Body <small>(click to expand)</small>
-      </a>
-    </h2>
-    <div id="collapseOne" class="panel-collapse collapse">
-      <pre><%= document.body %></pre>
+<% if document.body.present? %>
+  <div class="row">
+    <div class="col-md-8">
+      <h2>Body</h2>
+      <pre class="body-pre add-bottom-margin"><%= document.body %></pre>
     </div>
   </div>
-</div>
+<% end %>
+
 <div class="row">
-  <div class=" col-md-8">
-    <h2>Attachments</h2>
+  <div class="col-md-8">
+    <%
+      truncate_at_size = 5
+      attachments = document.attachments
+    %>
+    <h2 class="add-bottom-margin">
+      <%= number_with_delimiter(attachments.size) %> <%= 'attachment'.pluralize(attachments.size) %>
+    </h2>
     <% if document.attachments.any? %>
-      <table class='table table-bordered table-hover'>
+      <table class="table table-bordered table-striped add-bottom-margin" data-module="toggle">
         <thead>
-          <th>Title</th>
-          <th>Created</th>
-          <th>Last updated</th>
+          <tr class="table-header">
+            <th>Title</th>
+            <th>Created</th>
+            <th>Last&nbsp;updated</th>
+          </tr>
         </thead>
-        <% document.attachments.each do | attachment | %>
-        <tr>
-          <td><%= attachment.title %></td>
-          <td><%= attachment.created_at.to_s(:govuk_date)%></td>
-          <td><%= attachment.updated_at.to_s(:govuk_date)%></td>
-        </tr>
+        <% attachments.each_with_index do | attachment, i | %>
+          <% if i == truncate_at_size - 1 %>
+            <tr class="table-header">
+              <td colspan="3" class="js-toggle-target text-center">
+                <strong><a href="#expand-table" class="js-toggle">…and <%= attachments.size - (truncate_at_size - 1)%> more</a></strong>
+              </td>
+            </tr>
+          <% end %>
+          <tr <% if i > truncate_at_size - 2 %>class="js-toggle-target if-js-hide"<% end %>>
+            <td><%= attachment.title %></td>
+            <td><%= attachment.created_at.to_date.to_s(:govuk_date) %></td>
+            <td><%= attachment.updated_at.to_date.to_s(:govuk_date) %></td>
+          </tr>
         <% end %>
       </table>
     <% else %>
-      <p class='no-content-message'>This document doesn't have any attachments</p>
+      <p class='no-content-message'>This document doesn’t have any attachments</p>
     <% end %>
   </div>
 </div>
 
-<div class="actions">
-  <%= publish_form(slug_unique, publishable, document) %>
+<div class="row">
+  <div class="col-md-8">
+    <h2>Actions</h2>
+    <div class="well">
+      <%= link_to "Edit document", [:edit, document], class: "btn btn-success" %>
+    </div>
 
-  <% if current_user_can_withdraw?(document.document_type) %>
-    <%= form_tag([:withdraw, document], method: :post) do %>
-      <button name='submit' class="btn btn-danger">Withdraw</button>
-    <% end -%>
-  <% end %>
+    <%= publish_form(slug_unique, publishable, document) %>
 
-  <%= link_to "Edit", [:edit, document], class: "btn btn-primary" %>
+    <% if current_user_can_withdraw?(document.document_type) %>
+      <%= form_tag([:withdraw, document], method: :post, class: 'panel panel-default') do %>
+        <div class="panel-heading">
+          <div class="panel-title">
+            Withdraw document
+          </div>
+        </div>
+        <div class="panel-body">
+          <p>The document will be removed from the site. It will still be possible to edit the document and publish a new version.</p>
+          <button name="submit" class="btn btn-warning" data-module="confirm" data-message="Are you sure you want to withdraw this document?">Withdraw document</button>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
 </div>

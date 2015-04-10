@@ -62,3 +62,9 @@ p.no-content-message {
 .action-link {
   @include core-19;
 }
+
+.body-pre {
+  max-height: 500px;
+  overflow: scroll;
+  word-break: break-word;
+}
