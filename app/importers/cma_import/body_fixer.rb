@@ -56,7 +56,7 @@ private
     end
 
     def body
-      raw_data.fetch("body")
+      raw_data.fetch("body", "")
     end
 
     def normalised_body
@@ -64,7 +64,7 @@ private
     end
 
     def markup_sections
-      raw_data.fetch("markup_sections", [])
+      raw_data.fetch("markup_sections", {})
     end
 
     def missing_content
