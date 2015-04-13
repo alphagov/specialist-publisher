@@ -27,7 +27,7 @@ class PublishDocumentService
 
     document.publish!
 
-    listeners.each { |o| o.call(document) }
+    notify_listeners
   end
 
   def persist
