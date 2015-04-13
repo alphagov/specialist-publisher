@@ -9,6 +9,7 @@ class PublishDocumentService
   def call
     if document.latest_edition != document.published_edition
       publish
+      notify_listeners
       persist
     end
 
@@ -26,8 +27,6 @@ class PublishDocumentService
     end
 
     document.publish!
-
-    notify_listeners
   end
 
   def persist

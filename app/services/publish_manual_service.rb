@@ -9,6 +9,7 @@ class PublishManualService
   def call
     if versions_match?
       publish
+      notify_listeners
       persist
     else
       raise VersionMismatchError.new(
@@ -35,8 +36,6 @@ private
 
   def publish
     manual.publish
-
-    notify_listeners
   end
 
   def persist
