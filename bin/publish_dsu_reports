@@ -17,7 +17,7 @@ repository.all.sort { |a, b| a.extra_fields[:first_published_at] <=> b.extra_fie
   print "Publishing draft document #{document.slug}..."
   $stdout.flush
   begin
-    service.republish(document.id, true).call
+    service.bulk_publish(document.id).call
     puts "SUCCESS"
   rescue GdsApi::HTTPErrorResponse => e
     puts "API_ERROR"
