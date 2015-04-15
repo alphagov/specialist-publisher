@@ -4,7 +4,6 @@
   "format_name": "Air Accidents Investigation Branch report",
   "name": "Air Accidents Investigation Branch reports",
   "beta": true,
-  "beta_message": "Until early 2015, the <a href='http://www.aaib.gov.uk/home/index.cfm'>AAIB website</a> is the main source for AAIB reports",
   "filter": {
     "document_type": "aaib_report"
   },
