@@ -15,6 +15,6 @@ private
   end
 
   def organisation_slugs
-    ["marine-accidents-investigation-branch"]
+    ["marine-accident-investigation-branch"]
   end
 end

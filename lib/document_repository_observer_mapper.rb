@@ -38,6 +38,10 @@ private
         repository_registry.for_type("raib_report"),
         RaibReportObserversRegistry.new.republication,
       ),
+      "maib_report" => RepositoryObserversTuple.new(
+        repository_registry.for_type("maib_report"),
+        MaibReportObserversRegistry.new.republication,
+      ),
     }
   end
 
