@@ -23,6 +23,7 @@ class PermissionChecker
   end
 
 private
+
   attr_reader :user
 
   def is_editor?
@@ -59,6 +60,8 @@ private
       ["rail-accident-investigation-branch"]
     when "countryside_stewardship_grant"
       ["department-for-environment-food-rural-affairs"]
+    when "vehicle_recalls_and_faults_alert"
+      ["driver-and-vehicle-standards-agency"]
     end
   end
 end

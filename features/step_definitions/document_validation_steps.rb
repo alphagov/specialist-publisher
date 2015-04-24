@@ -14,3 +14,7 @@ end
 Then(/^I see a warning about slug clash at publication$/) do
   check_for_slug_clash_warning
 end
+
+Then(/^I should see an error message about invalid HTML in "(.*?)"$/) do |field|
+  check_for_javascript_usage_error(field)
+end

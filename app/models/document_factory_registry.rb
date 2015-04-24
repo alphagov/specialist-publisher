@@ -11,6 +11,7 @@ require "validators/manual_validator"
 require "validators/medical_safety_alert_validator"
 require "validators/null_validator"
 require "validators/raib_report_validator"
+require "validators/vehicle_recalls_and_faults_validator"
 
 require "builders/manual_document_builder"
 require "manual_with_documents"
@@ -155,6 +156,21 @@ class DocumentFactoryRegistry
               SlugGenerator.new(prefix: "raib-reports"),
               *args,
             ),
+          )
+        )
+      )
+    }
+  end
+
+  def vehicle_recalls_and_faults_alert_factory
+    ->(*args) {
+      ChangeNoteValidator.new(
+        VehicleRecallsAndFaultsAlertValidator.new(
+          VehicleRecallsAndFaultsAlert.new(
+            SpecialistDocument.new(
+              SlugGenerator.new(prefix: "vehicle-recalls-faults"),
+              *args,
+            )
           )
         )
       )

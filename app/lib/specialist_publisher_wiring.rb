@@ -91,7 +91,7 @@ SpecialistPublisherWiring ||= DependencyContainer.new do
 
   define_factory(:countryside_stewardship_grant_builder) {
     SpecialistDocumentBuilder.new("countryside_stewardship_grant",
-    get(:validatable_document_factories).countryside_stewardship_grant_factory)
+      get(:validatable_document_factories).countryside_stewardship_grant_factory)
   }
 
   define_factory(:drug_safety_update_builder) {
@@ -122,6 +122,11 @@ SpecialistPublisherWiring ||= DependencyContainer.new do
   define_factory(:raib_report_builder) {
     SpecialistDocumentBuilder.new("raib_report",
       get(:validatable_document_factories).raib_report_factory)
+  }
+
+  define_factory(:vehicle_recalls_and_faults_alert_builder) {
+    SpecialistDocumentBuilder.new("vehicle_recalls_and_faults_alert",
+      get(:validatable_document_factories).vehicle_recalls_and_faults_alert_factory)
   }
 
   define_factory(:manual_publish_task_builder) {
@@ -299,6 +304,10 @@ SpecialistPublisherWiring ||= DependencyContainer.new do
 
   define_singleton(:raib_report_finder_schema) {
     FinderSchema.new(Rails.root.join("finders/schemas/raib-reports.json"))
+  }
+
+  define_singleton(:vehicle_recalls_and_faults_alert_finder_schema) {
+    FinderSchema.new(Rails.root.join("finders/schemas/vehicle-recalls-and-faults-alert.json"))
   }
 end
 # rubocop:enable ConstantName

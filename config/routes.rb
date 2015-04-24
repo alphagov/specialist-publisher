@@ -16,6 +16,7 @@ SpecialistPublisher::Application.routes.draw do
     maib_reports
     medical_safety_alerts
     raib_reports
+    vehicle_recalls_and_faults_alerts
   )
 
   document_types.each do |type|

@@ -1,0 +1,2 @@
+class VehicleRecallsAndFaultsAlertsController < AbstractDocumentsController
+end

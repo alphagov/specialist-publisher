@@ -65,6 +65,7 @@ module DocumentHelpers
       "maib-reports" => "maib_report",
       "raib-reports" => "raib_report",
       "countryside-stewardship-grants" => "countryside_stewardship_grant",
+      "vehicle-recalls-faults" => "vehicle_recalls_and_faults_alert",
     }
 
     slug_prefix = slug.split("/").first
