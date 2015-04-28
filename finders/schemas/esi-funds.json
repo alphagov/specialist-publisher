@@ -21,7 +21,7 @@
       "display_as_result_metadata": false,
       "filterable": true,
       "allowed_values": [
-        {"label": "Access to work", "value": "access-to-work"},
+        {"label": "Access to employment", "value": "access-to-work"},
         {"label": "Business support", "value": "business-support"},
         {"label": "Climate change", "value": "climate-change"},
         {"label": "Environment", "value": "environment"},
