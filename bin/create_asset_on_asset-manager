@@ -1,0 +1,31 @@
+#!/usr/bin/env ruby
+
+require File.expand_path("../../config/environment", __FILE__)
+
+filename = ARGV.any? ? ARGV.fetch(0) : nil
+unless filename
+  puts "You need to provide a filename as argument when running this script"
+  abort
+end
+file = File.new(filename)
+
+# Even though the script is not dealing with attachments, we are
+# using this instance of the API client because authentication is
+# correctly setup in the attachment API initializer for each
+# environment from alphagov-deployment
+
+client = Attachable.asset_api_client
+
+# This will always create a new asset and won't update existing ones
+response = client.create_asset({file: file})
+
+if response.code == 201
+  puts "Successfully created and submitted for virus scanning"
+  puts "Asset url: #{response.file_url}"
+  puts "Asset id: #{response.id}"
+else
+  puts "The asset was not created and the response status was: #{response.code}"
+  puts "With response body:"
+  puts response.raw_response_body
+  abort
+end
