@@ -11,7 +11,7 @@ When(/^I try to save a Vehicle Recall alert with invalid HTML and no title$/) do
     title: nil,
     summary: nil,
     body: "<p< A paragraph about <script>alert('h4x0r')</script>",
-    issue_date: "99-99/99"
+    alert_issue_date: "99-99/99"
   }
   create_vehicle_recalls_and_faults_alert(@invalid_fields)
 end
@@ -38,7 +38,7 @@ Given(/^two Vehicle Recalls and Faults alerts exist$/) do
       title: "Example fault #{index}",
       summary: "Example summary #{index}",
       body: "Example Content #{index}",
-      issue_date: "2015-04-28"
+      alert_issue_date: "2015-04-28"
     }
     create_vehicle_recalls_and_faults_alert(document_fields)
   end
@@ -91,7 +91,7 @@ def create_a_draft_of_vehicle_fault_alert(options = {})
     title: @document_title,
     summary: "Summary of the vehicle recall",
     body: "## Header" + ("\n\nPraesent commodo cursus magna, vel scelerisque nisl consectetur et." * 10),
-    issue_date: "2015-04-28"
+    alert_issue_date: "2015-04-28"
   }
 
   create_vehicle_recalls_and_faults_alert(@document_fields, options)

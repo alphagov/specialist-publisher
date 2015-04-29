@@ -14,7 +14,7 @@ Feature: Creating and editing a Vehicle Recalls and Faults alert
     When I try to save a Vehicle Recall alert with invalid HTML and no title
     Then I should see error messages about missing fields
     And I should see an error message about invalid HTML in "Body"
-    And I should see an error message about an invalid date field "Issue date"
+    And I should see an error message about an invalid date field "Alert issue date"
     And the Vehicle Recall alert is not persisted
 
   Scenario: Providing invalid inputs when editing an alert

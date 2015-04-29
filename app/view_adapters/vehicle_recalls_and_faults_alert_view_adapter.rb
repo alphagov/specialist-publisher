@@ -3,7 +3,14 @@ class VehicleRecallsAndFaultsAlertViewAdapter < DocumentViewAdapter
     :title,
     :summary,
     :body,
-    :issue_date,
+    :alert_issue_date,
+    :fault_type,
+    :item_type,
+    :manufacturer,
+    :item_model,
+    :serial_number,
+    :build_start_date,
+    :build_end_date,
   ]
 
   attributes.each do |attribute_name|
