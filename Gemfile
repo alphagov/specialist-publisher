@@ -68,7 +68,7 @@ group :test do
   gem "rspec-rails", "3.0.0"
   gem "rubocop"
   gem "timecop"
-  gem "govuk-content-schema-test-helpers", "1.0.2"
+  gem "govuk-content-schema-test-helpers", "1.3.0"
 end
 
 group :development, :test do
