@@ -48,6 +48,8 @@ $ bundle exec rake
 
 ## Adding a new specialist document format
 
+### In this repo
+
 1. Add the document_type to the `document_types` array in `config/routes.rb`
 2. Add a controller that inherits `AbstractDocumentsController`
 3. Add the schema to the `finders/schemas` folder and define the singleton for it in `app/lib/specialist_publisher_wiring.rb`
@@ -64,7 +66,18 @@ $ bundle exec rake
   Add the observer registry to the `observer_registry` hash in `app/lib/specialist_publisher.rb`
 10. Add `app/view_adapters/document_type_view_adapter.rb` along with its entry in `app/view_adapters/view_adapter_registry.rb`. Also add the `_form.html.erb` which has the extra fields for that document_type. Be sure to pass the correct `form_namespace` matching the document_type.
 11. Add the entry to `app/lib/permission_checker.rb` for the owning organisation and an entry in the finders array in `ApplicationController`.
-12. That's it!
+
+### In [rummager](https://github.com/alphagov/rummager/)
+
+1. Add the new document schema in `config/schema/document_types/`.
+2. Add missing field definitions in `config/schema/field_definitions.json`.
+3. Add the new document type in `config/schema/indexes/mainstream.json`.
+
+### [govuk_content_models](https://github.com/alphagov/govuk_content_models)
+
+1. Add the new artefact type in `app/models/artefact.rb`.
+2. Bump the gem version.
+3. Update `govuk_content_models` gem version in [panopticon](https://github.com/alphagov/panopticon) and specialist-publisher.
 
 ### Testing your new specialist document format
 
