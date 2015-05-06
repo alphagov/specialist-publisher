@@ -1,0 +1,29 @@
+<div class="col-md-8">
+  <%= form_for document do |f| %>
+    <%= render partial: "shared/form_errors", locals: { object: document } %>
+    <%= render partial: "shared/form_fields", locals: { f: f } %>
+    <%= render partial: "shared/form_preview" %>
+
+
+    <%= f.select :fault_type, f.object.facet_options(:fault_type), {}, { class: 'form-control' } %>
+    <%= f.text_field :alert_issue_date, placeholder: Date.today.to_s, class: 'form-control' %>
+
+    <%= f.select :faulty_item_type, f.object.facet_options(:faulty_item_type), { label: "Item type" }, { class: 'form-control' } %>
+    <%= f.select :manufacturer, f.object.facet_options(:manufacturer), {}, { class: 'form-control' } %>
+    <%= f.text_field :faulty_item_model, placeholder: 'A80', class: 'form-control', label: "Model" %>
+    <%= f.text_field :serial_number, placeholder: 'XX YY 12345 - XX YY 22345', class: 'form-control', label: "Serial number/Vehicle ID" %>
+
+    <%= f.text_field :build_start_date, placeholder: '2014-07-12', class: 'form-control' %>
+    <%= f.text_field :build_end_date, placeholder: '2014-10-15', class: 'form-control' %>
+
+  <%= render partial: "specialist_documents/minor_major_update_fields", locals: { f: f, document: document } %>
+
+  <div class="actions">
+    <button name="save" class="btn btn-success">Save as draft</button>
+  </div>
+  <% end %>
+</div>
+
+<%= render partial: "specialist_documents/attachments_form", locals: { document: document } %>
+
+<%= render partial: "specialist_documents/js_preview", locals: { document: document, form_namespace: "vehicle_recalls_and_faults_alert" } %>

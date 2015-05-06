@@ -115,6 +115,7 @@ require "idf_helpers"
 require "maib_report_helpers"
 require "msa_helpers"
 require "raib_report_helpers"
+require "vehicle_recalls_and_faults_alert_helpers"
 
 World(PanopticonHelpers)
 World(RummagerHelpers)
@@ -140,3 +141,4 @@ World(IdfHelpers)
 World(MaibReportHelpers)
 World(MsaHelpers)
 World(RaibReportHelpers)
+World(VehicleRecallsAndFaultsAlertHelpers)

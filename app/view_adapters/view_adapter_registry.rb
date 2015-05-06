@@ -16,6 +16,7 @@ class ViewAdapterRegistry
       "maib_report" => MaibReportViewAdapter,
       "medical_safety_alert" => MedicalSafetyAlertViewAdapter,
       "raib_report" => RaibReportViewAdapter,
+      "vehicle_recalls_and_faults_alert" => VehicleRecallsAndFaultsAlertViewAdapter,
     }.fetch(type)
   end
 end

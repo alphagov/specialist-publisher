@@ -18,6 +18,7 @@ module SpecialistPublisher
   def view_adapter(document)
     view_adapters.for_document(document)
   end
+
 private
 
   def view_adapters
@@ -39,6 +40,7 @@ private
       "maib_report" => MaibReportObserversRegistry,
       "medical_safety_alert" => MedicalSafetyAlertObserversRegistry,
       "raib_report" => RaibReportObserversRegistry,
+      "vehicle_recalls_and_faults_alert" => VehicleRecallsAndFaultsAlertObserversRegistry,
     }.fetch(document_type).new
   end
 end

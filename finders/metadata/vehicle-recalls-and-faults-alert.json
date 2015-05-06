@@ -1,0 +1,12 @@
+{
+  "content_id": "76290530-743e-4a8c-8752-04ebee25f64a",
+  "base_path": "/vehicle-recalls-faults",
+  "format_name": "Vehicle recalls and faults",
+  "name": "Vehicle recalls and faults",
+  "beta": true,
+  "summary": "<p>Find out if your vehicle has been recalled by the manufacturer or has a fault. You can also search for car seats, tyres and other vehicle parts.</p>",
+  "filter": {
+    "document_type": "vehicle_recalls_and_faults_alert"
+  },
+  "organisations": []
+}

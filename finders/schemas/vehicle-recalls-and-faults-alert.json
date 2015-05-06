@@ -1,0 +1,97 @@
+{
+  "document_noun": "alert",
+  "facets": [
+    {
+      "key": "fault_type",
+      "name": "Fault Type",
+      "type": "text",
+      "preposition": "of type",
+      "display_as_result_metadata": true,
+      "filterable": true,
+      "allowed_values": [
+        {"label": "Recall", "value": "recall"},
+        {"label": "Non-urgent fault", "value": "non_urgent_fault"}
+      ]
+    },
+    {
+      "key": "faulty_item_type",
+      "name": "Item Type",
+      "type": "text",
+      "preposition": "of type",
+      "display_as_result_metadata": true,
+      "filterable": true,
+      "allowed_values": [
+        {"label": "Vehicle", "value": "vehicle"},
+        {"label": "Baby seat", "value": "baby-seat"},
+        {"label": "Tyres", "value": "tyres"},
+        {"label": "Parts", "value": "parts"},
+        {"label": "Agricultural equipment", "value": "agricultural-equipment"},
+        {"label": "Other accessories", "value": "other-accessories"}
+      ]
+    },
+    {
+      "key": "manufacturer",
+      "name": "Manufacturer",
+      "type": "text",
+      "preposition": "manufactured by",
+      "display_as_result_metadata": true,
+      "filterable": true,
+      "allowed_values": [
+        {"label": "Alfa Romeo", "value": "alfa-romeo"},
+        {"label": "Audi", "value": "audi"},
+        {"label": "Balco", "value": "balco"},
+        {"label": "BMW", "value": "bmw"},
+        {"label": "Bridgestone", "value": "bridgestone"},
+        {"label": "Britax", "value": "britax"},
+        {"label": "Citroen", "value": "citroen"},
+        {"label": "Ferrari", "value": "ferrari"},
+        {"label": "McCormick Tractors LTD", "value": "mccormick-tractors-ltd"},
+        {"label": "Michelin", "value": "michelin"},
+        {"label": "Mitas Tyres LTD", "value": "mitas-tyres-ltd"},
+        {"label": "Mothercare", "value": "mothercare"},
+        {"label": "Nim Engineering LTD", "value": "nim-engineering-ltd"},
+        {"label": "Other manufacturer", "value": "other-manufacturer"}
+      ]
+    },
+    {
+      "key": "faulty_item_model",
+      "name": "Model",
+      "short_name": "Model",
+      "type": "text",
+      "display_as_result_metadata": true,
+      "filterable": false
+    },
+    {
+      "key": "serial_number",
+      "name": "Serial number/Vehicle ID",
+      "short_name": "SN",
+      "type": "text",
+      "display_as_result_metadata": false,
+      "filterable": false
+    },
+    {
+      "key": "alert_issue_date",
+      "name": "Alert issue date",
+      "short_name": "Issued",
+      "type": "date",
+      "display_as_result_metadata": true,
+      "filterable": false
+    },
+    {
+      "key": "build_start_date",
+      "name": "Build start date",
+      "short_name": "Built from",
+      "type": "date",
+      "display_as_result_metadata": false,
+      "filterable": false
+    },
+    {
+      "key": "build_end_date",
+      "name": "Build end date",
+      "short_name": "Built to",
+      "type": "date",
+      "display_as_result_metadata": false,
+      "filterable": false
+    }
+  ]
+}

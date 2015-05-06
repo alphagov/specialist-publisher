@@ -54,6 +54,10 @@ class ApplicationController < ActionController::Base
         document_type: "raib_report",
         title: "RAIB Reports",
       },
+      "vehicle-recalls-and-faults-alerts" => {
+        document_type: "vehicle_recalls_and_faults_alert",
+        title: "Vehicle Recalls and Faults",
+      },
     }
   end
   helper_method :finders
