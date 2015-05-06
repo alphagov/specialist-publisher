@@ -40,7 +40,7 @@ cd ../..
 
 time bundle install --path "${HOME}/bundles/${JOB_NAME}" --deployment
 # TODO as schemas are added for them, change this to include more formats
-RAILS_ENV=test GOVUK_CONTENT_SCHEMAS_PATH=tmp/govuk-content-schemas time bundle exec rspec spec/lib/publishing_api_finder_publisher_spec.rb
+RAILS_ENV=test GOVUK_CONTENT_SCHEMAS_PATH=tmp/govuk-content-schemas time bundle exec rspec spec/lib/publishing_api_finder_publisher_spec.rb spec/manual_publishing_api_exporter_spec.rb
 
 EXIT_STATUS=$?
 echo "EXIT STATUS: $EXIT_STATUS"

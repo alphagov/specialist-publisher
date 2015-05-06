@@ -31,7 +31,7 @@ private
       format: "manual",
       title: rendered_manual_attributes.fetch(:title),
       description: rendered_manual_attributes.fetch(:summary),
-      public_updated_at: rendered_manual_attributes.fetch(:updated_at),
+      public_updated_at: rendered_manual_attributes.fetch(:updated_at).iso8601,
       update_type: update_type,
       publishing_app: "specialist-publisher",
       rendering_app: "manuals-frontend",
@@ -41,7 +41,8 @@ private
           type: "exact",
         }
       ],
-      details: details_data
+      details: details_data,
+      locale: "en",
     }
   end
 
@@ -85,7 +86,7 @@ private
         base_path: "/#{publication.slug}",
         title: publication.title,
         change_note: publication.change_note,
-        published_at: publication.published_at.utc,
+        published_at: publication.published_at.iso8601,
       }
     }
   end
