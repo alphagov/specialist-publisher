@@ -14,7 +14,7 @@
       ]
     },
     {
-      "key": "item_type",
+      "key": "faulty_item_type",
       "name": "Item Type",
       "type": "text",
       "preposition": "of type",
@@ -54,7 +54,7 @@
       ]
     },
     {
-      "key": "item_model",
+      "key": "faulty_item_model",
       "name": "Model",
       "short_name": "Model",
       "type": "text",

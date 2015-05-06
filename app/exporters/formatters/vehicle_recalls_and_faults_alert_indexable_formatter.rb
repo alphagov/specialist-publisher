@@ -10,10 +10,10 @@ private
   def extra_attributes
     {
       fault_type: entity.fault_type,
-      item_type: entity.item_type,
+      faulty_item_type: entity.faulty_item_type,
       manufacturer: entity.manufacturer,
       alert_issue_date: entity.alert_issue_date,
-      item_model: entity.item_model,
+      faulty_item_model: entity.faulty_item_model,
       serial_number: entity.serial_number,
       build_start_date: entity.build_start_date,
       build_end_date: entity.build_end_date,
