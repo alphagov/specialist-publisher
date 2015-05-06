@@ -37,8 +37,6 @@ private
       ],
       details: {
         body: rendered_document_attributes.fetch(:body),
-        breadcrumbs: [],
-        child_section_groups: [],
         manual: {
           base_path: "/#{manual.attributes.fetch(:slug)}",
         },

@@ -92,8 +92,6 @@ describe ManualSectionPublishingAPIExporter do
           manual: {
             base_path: "/guidance/my-first-manual",
           },
-          child_section_groups: [],
-          breadcrumbs: [],
           organisations: [
             {
               title: "Cabinet Office",
