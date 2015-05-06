@@ -15,6 +15,7 @@ describe PublishingApiFinderPublisher do
             "content_id" => SecureRandom.uuid,
             "format" => "a_report_format",
             "signup_content_id" => SecureRandom.uuid,
+            "logo_path" => "http://example.com/logo.png",
           },
           timestamp: "2015-01-05T10:45:10.000+00:00",
         },
@@ -25,6 +26,7 @@ describe PublishingApiFinderPublisher do
             "format_name" => "second finder things",
             "content_id" => SecureRandom.uuid,
             "format" => "some_case_format",
+            "logo_path" => "http://example.com/logo.png",
           },
           timestamp: "2015-01-05T10:45:10.000+00:00",
         }
