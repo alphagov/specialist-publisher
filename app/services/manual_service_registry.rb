@@ -8,6 +8,14 @@ class ManualServiceRegistry
     )
   end
 
+  def republish(manual_id)
+    RepublishManualService.new(
+      manual_repository: manual_repository,
+      listeners: observers.republication,
+      manual_id: manual_id,
+    )
+  end
+
   def withdraw(manual_id)
     WithdrawManualService.new(
       manual_repository: manual_repository,
