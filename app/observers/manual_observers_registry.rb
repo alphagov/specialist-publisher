@@ -19,6 +19,14 @@ class ManualObserversRegistry
     ]
   end
 
+  def republication
+    [
+      panopticon_exporter,
+      publishing_api_exporter,
+      rummager_exporter,
+    ]
+  end
+
   def creation
     []
   end

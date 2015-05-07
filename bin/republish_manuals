@@ -1,0 +1,10 @@
+#!/usr/bin/env ruby
+
+require File.expand_path("../../config/environment", __FILE__)
+require "manual_service_registry"
+
+repository = SpecialistPublisherWiring.get(:repository_registry).manual_repository
+
+repository.all.each do |manual|
+  ManualServiceRegistry.new.republish(manual.id).call
+end
