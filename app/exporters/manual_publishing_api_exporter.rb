@@ -26,6 +26,10 @@ private
     "/#{manual.attributes[:slug]}"
   end
 
+  def updates_path
+    [base_path, "updates"].join("/")
+  end
+
   def exportable_attributes
     {
       format: "manual",
@@ -38,6 +42,10 @@ private
       routes: [
         {
           path: base_path,
+          type: "exact",
+        },
+        {
+          path: updates_path,
           type: "exact",
         }
       ],

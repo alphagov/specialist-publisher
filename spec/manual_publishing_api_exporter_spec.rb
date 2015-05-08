@@ -110,6 +110,10 @@ describe ManualPublishingAPIExporter do
           {
             path: "/guidance/my-first-manual",
             type: "exact",
+          },
+          {
+            path: "/guidance/my-first-manual/updates",
+            type: "exact",
           }
         ],
       ))
