@@ -26,6 +26,7 @@ describe ManualPublishingAPIExporter do
   let(:manual) {
     double(
       :manual,
+      id: "52ab9439-95c8-4d39-9b83-0a2050a0978b",
       attributes: manual_attributes,
       documents: documents,
     )
@@ -104,6 +105,7 @@ describe ManualPublishingAPIExporter do
     expect(export_recipent).to have_received(:put_content_item).with(
       "/guidance/my-first-manual",
       hash_including(
+        content_id: "52ab9439-95c8-4d39-9b83-0a2050a0978b",
         format: "manual",
         title: "My first manual",
         description: "This is my first manual",
