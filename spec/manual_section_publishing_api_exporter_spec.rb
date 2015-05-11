@@ -46,6 +46,7 @@ describe ManualSectionPublishingAPIExporter do
   let(:document) {
     double(
       :document,
+      id: "c19ffb7d-448c-4cc8-bece-022662ef9611",
       minor_update?: true,
     )
   }
@@ -70,6 +71,7 @@ describe ManualSectionPublishingAPIExporter do
     expect(export_recipent).to have_received(:put_content_item).with(
       "/guidance/my-first-manual/first-section",
       hash_including(
+        content_id: "c19ffb7d-448c-4cc8-bece-022662ef9611",
         format: "manual_section",
         title: "Document title",
         description: "This is the first section",
