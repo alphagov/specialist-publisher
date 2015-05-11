@@ -165,10 +165,6 @@ module ManualHelpers
     fill_in("Section body", with: body_text + snippet)
   end
 
-  def change_note_slug(manual_slug)
-    [manual_slug, "updates"].join("/")
-  end
-
   def check_change_note_value(manual_title, document_title, expected_value)
     go_to_manual_page(manual_title)
     click_on document_title
@@ -268,7 +264,6 @@ module ManualHelpers
   def check_manual_is_withdrawn_from_panopticon(manual_slug)
     slugs = [
       manual_slug,
-      change_note_slug(manual_slug),
     ]
 
     slugs.each do |slug|

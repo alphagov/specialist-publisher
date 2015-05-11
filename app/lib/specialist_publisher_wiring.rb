@@ -7,7 +7,6 @@ require "document_headers_depth_limiter"
 require "finder_schema"
 require "footnotes_section_heading_renderer"
 require "formatters/manual_artefact_formatter"
-require "formatters/manual_change_notes_artefact_formatter"
 require "gds_api/email_alert_api"
 require "gds_api/rummager"
 require "gds_api_proxy"
@@ -254,10 +253,6 @@ SpecialistPublisherWiring ||= DependencyContainer.new do
     ->(manual) {
       get(:panopticon_registerer).call(
         ManualArtefactFormatter.new(manual)
-      )
-
-      get(:panopticon_registerer).call(
-        ManualChangeNotesArtefactFormatter.new(manual)
       )
     }
   }
