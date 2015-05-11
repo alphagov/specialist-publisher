@@ -1,4 +1,5 @@
 require "fast_spec_helper"
+require "support/govuk_content_schema_helpers"
 
 require "manual_publishing_api_exporter"
 
@@ -65,7 +66,7 @@ describe ManualPublishingAPIExporter do
       summary: "This is my first manual",
       body: "<h1>Some heading</h1>\nmanual body",
       slug: "guidance/my-first-manual",
-      updated_at: Date.new(2013, 12, 31),
+      updated_at: Time.new(2013, 12, 31, 12, 0, 0),
       organisation_slug: "cabinet-office",
     }
   }
@@ -93,6 +94,10 @@ describe ManualPublishingAPIExporter do
     ]
   }
 
+  it "exports a manual valid against the schema" do
+    expect(subject.send(:exportable_attributes).to_json).to be_valid_against_schema("manual")
+  end
+
   it "exports the serialized document attributes" do
     subject.call
 
@@ -102,7 +107,7 @@ describe ManualPublishingAPIExporter do
         format: "manual",
         title: "My first manual",
         description: "This is my first manual",
-        public_updated_at: Date.new(2013, 12, 31),
+        public_updated_at: Time.new(2013, 12, 31, 12, 0, 0).iso8601,
         update_type: "major",
         publishing_app: "specialist-publisher",
         rendering_app: "manuals-frontend",
@@ -116,6 +121,7 @@ describe ManualPublishingAPIExporter do
             type: "exact",
           }
         ],
+        locale: "en",
       ))
   end
 
@@ -142,13 +148,13 @@ describe ManualPublishingAPIExporter do
               base_path: "/guidance/my-first-manual/first-section",
               title: "Document title",
               change_note: "Added more text",
-              published_at: Time.new(2013, 12, 31, 12, 0, 0),
+              published_at: Time.new(2013, 12, 31, 12, 0, 0).iso8601,
             },
             {
               base_path: "/guidance/my-first-manual",
               title: "My manual",
               change_note: "Changed manual title",
-              published_at: Time.new(2013, 12, 31, 12, 30, 0),
+              published_at: Time.new(2013, 12, 31, 12, 30, 0).iso8601,
             },
           ],
           organisations: [

@@ -1,4 +1,5 @@
 require "fast_spec_helper"
+require "support/govuk_content_schema_helpers"
 
 require "manual_section_publishing_api_exporter"
 
@@ -55,9 +56,13 @@ describe ManualSectionPublishingAPIExporter do
       summary: "This is the first section",
       slug: "guidance/my-first-manual/first-section",
       body: "<h1>Some heading</h1>\nsection body",
-      updated_at: Date.new(2013, 12, 31),
+      updated_at: Time.new(2013, 12, 31, 12, 0, 0),
     }
   }
+
+  it "exports a manual_section valid against the schema" do
+    expect(subject.send(:exportable_attributes).to_json).to be_valid_against_schema("manual_section")
+  end
 
   it "exports the serialized document attributes" do
     subject.call
@@ -68,7 +73,7 @@ describe ManualSectionPublishingAPIExporter do
         format: "manual_section",
         title: "Document title",
         description: "This is the first section",
-        public_updated_at: Date.new(2013, 12, 31),
+        public_updated_at: Time.new(2013, 12, 31, 12, 0, 0).iso8601,
         update_type: "minor",
         publishing_app: "specialist-publisher",
         rendering_app: "manuals-frontend",
@@ -92,8 +97,6 @@ describe ManualSectionPublishingAPIExporter do
           manual: {
             base_path: "/guidance/my-first-manual",
           },
-          child_section_groups: [],
-          breadcrumbs: [],
           organisations: [
             {
               title: "Cabinet Office",

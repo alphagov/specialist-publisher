@@ -25,7 +25,7 @@ private
       format: "manual_section",
       title: rendered_document_attributes.fetch(:title),
       description: rendered_document_attributes.fetch(:summary),
-      public_updated_at: rendered_document_attributes.fetch(:updated_at),
+      public_updated_at: rendered_document_attributes.fetch(:updated_at).iso8601,
       update_type: update_type,
       publishing_app: "specialist-publisher",
       rendering_app: "manuals-frontend",
@@ -37,15 +37,14 @@ private
       ],
       details: {
         body: rendered_document_attributes.fetch(:body),
-        breadcrumbs: [],
-        child_section_groups: [],
         manual: {
           base_path: "/#{manual.attributes.fetch(:slug)}",
         },
         organisations: [
           organisation_info
         ],
-      }
+      },
+      locale: "en",
     }
   end
 
