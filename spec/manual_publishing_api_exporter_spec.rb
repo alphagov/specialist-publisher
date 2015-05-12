@@ -62,7 +62,6 @@ describe ManualPublishingAPIExporter do
 
   let(:manual_attributes) {
     {
-      id: "12345",
       title: "My first manual",
       summary: "This is my first manual",
       body: "<h1>Some heading</h1>\nmanual body",
