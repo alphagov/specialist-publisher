@@ -32,6 +32,7 @@ private
 
   def exportable_attributes
     {
+      content_id: manual.id,
       format: "manual",
       title: rendered_manual_attributes.fetch(:title),
       description: rendered_manual_attributes.fetch(:summary),

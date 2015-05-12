@@ -22,6 +22,7 @@ private
 
   def exportable_attributes
     {
+      content_id: document.id,
       format: "manual_section",
       title: rendered_document_attributes.fetch(:title),
       description: rendered_document_attributes.fetch(:summary),
