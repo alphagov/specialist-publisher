@@ -19,7 +19,23 @@ module SpecialistPublisher
     view_adapters.for_document(document)
   end
 
+  def document_types
+    OBSERVER_MAP.keys
+  end
+
 private
+  OBSERVER_MAP = {
+    "aaib_report" => AaibReportObserversRegistry,
+    "cma_case" => CmaCaseObserversRegistry,
+    "countryside_stewardship_grant" => CountrysideStewardshipGrantObserversRegistry,
+    "drug_safety_update" => DrugSafetyUpdateObserversRegistry,
+    "esi_fund" => EsiFundObserversRegistry,
+    "international_development_fund" => InternationalDevelopmentFundObserversRegistry,
+    "maib_report" => MaibReportObserversRegistry,
+    "medical_safety_alert" => MedicalSafetyAlertObserversRegistry,
+    "raib_report" => RaibReportObserversRegistry,
+    "vehicle_recalls_and_faults_alert" => VehicleRecallsAndFaultsAlertObserversRegistry,
+  }.freeze
 
   def view_adapters
     SpecialistPublisherWiring.get(:view_adapter_registry)
@@ -30,17 +46,6 @@ private
   end
 
   def observer_registry(document_type)
-    {
-      "aaib_report" => AaibReportObserversRegistry,
-      "cma_case" => CmaCaseObserversRegistry,
-      "countryside_stewardship_grant" => CountrysideStewardshipGrantObserversRegistry,
-      "drug_safety_update" => DrugSafetyUpdateObserversRegistry,
-      "esi_fund" => EsiFundObserversRegistry,
-      "international_development_fund" => InternationalDevelopmentFundObserversRegistry,
-      "maib_report" => MaibReportObserversRegistry,
-      "medical_safety_alert" => MedicalSafetyAlertObserversRegistry,
-      "raib_report" => RaibReportObserversRegistry,
-      "vehicle_recalls_and_faults_alert" => VehicleRecallsAndFaultsAlertObserversRegistry,
-    }.fetch(document_type).new
+    OBSERVER_MAP.fetch(document_type).new
   end
 end
