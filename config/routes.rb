@@ -1,3 +1,5 @@
+require "specialist_publisher"
+
 SpecialistPublisher::Application.routes.draw do
   mount JasmineRails::Engine => "/specs" if defined?(JasmineRails::Engine)
   mount GovukAdminTemplate::Engine, at: "/style-guide"
@@ -6,18 +8,7 @@ SpecialistPublisher::Application.routes.draw do
     mount Sidekiq::Web => "/sidekiq"
   end
 
-  document_types = %w(
-    aaib_reports
-    cma_cases
-    countryside_stewardship_grants
-    drug_safety_updates
-    esi_funds
-    international_development_funds
-    maib_reports
-    medical_safety_alerts
-    raib_reports
-    vehicle_recalls_and_faults_alerts
-  )
+  document_types = SpecialistPublisher.document_types.map(&:pluralize)
 
   document_types.each do |type|
     type_slug = type.to_s.gsub("_", "-")

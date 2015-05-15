@@ -1,10 +1,17 @@
 #!/usr/bin/env ruby
 
 require File.expand_path("../../config/environment", __FILE__)
-require "document_republisher"
-require "document_repository_observer_mapper"
+require "specialist_publisher"
 
-document_type = ARGV.any? ? ARGV.fetch(0) : nil
-repository_listeners = DocumentRepositoryObserverMapper.new.repository_listeners(document_type)
+document_types = ARGV.any? ? ARGV : SpecialistPublisher.document_types
 
-DocumentRepublisher.new(repository_listeners).republish!
+unsupported_document_types = document_types - SpecialistPublisher.document_types
+if unsupported_document_types.any?
+  raise ArgumentError, "Unrecognised document types: #{unsupported_document_types}. " \
+                       "If supplied, document types must be in the list: #{SpecialistPublisher.document_types}"
+end
+
+document_types.each do |type|
+  services = SpecialistPublisher.document_services(type)
+  services.republish_all.call
+end

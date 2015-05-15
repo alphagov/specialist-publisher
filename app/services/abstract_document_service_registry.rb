@@ -72,6 +72,22 @@ class AbstractDocumentServiceRegistry
     )
   end
 
+  def republish(document_id)
+    RepublishDocumentService.new(
+      document_repository: document_repository,
+      listeners: observers.republication,
+      document_id: document_id,
+    )
+  end
+
+  def republish_all
+    -> {
+      document_repository.all.each do |document|
+        republish(document.id).call
+      end
+    }
+  end
+
   def bulk_publish(document_id)
     PublishDocumentService.new(
       document_repository,
