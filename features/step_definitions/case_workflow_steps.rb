@@ -31,3 +31,7 @@ end
 Then(/^previous editions should be archived$/) do
   check_for_correctly_archived_editions(@amended_document_attributes)
 end
+
+Then(/^I should be unable to publish the document$/) do
+  check_document_cant_be_published
+end
