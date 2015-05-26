@@ -37,11 +37,11 @@ private
   end
 
   def user_must_confirm(manual_record)
-    document_ids = document_ids_for(manual_record).count
+    number_of_sections = document_ids_for(manual_record).count
     log "### PLEASE CONFIRM -------------------------------------"
     log "Manual to be deleted: #{manual_record.slug}"
     log "Organisation: #{manual_record.organisation_slug}"
-    log "This manual has #{document_ids.size} sections, and was last edited at #{manual_record.updated_at}"
+    log "This manual has #{number_of_sections} sections, and was last edited at #{manual_record.updated_at}"
     log "Type 'Yes' to proceed and delete this manual or anything else to exit:"
 
     response = stdin.gets
