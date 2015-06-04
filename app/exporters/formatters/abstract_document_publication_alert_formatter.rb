@@ -61,10 +61,6 @@ private
     raise NotImplementedError
   end
 
-  def slug_prefix
-    document.slug.split("/").first
-  end
-
   def view_renderer
     ActionView::Base.new("app/views")
   end

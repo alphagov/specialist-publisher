@@ -40,13 +40,6 @@ class SpecialistDocumentRepository
     end
   end
 
-  def first_by_slug(slug)
-    specialist_document_editions
-      .where(slug: slug)
-      .distinct(:document_id)
-      .map { |id| fetch(id) }.first
-  end
-
   def search(query)
     conditions = search_conditions(query)
 

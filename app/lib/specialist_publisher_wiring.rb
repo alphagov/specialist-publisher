@@ -128,12 +128,6 @@ SpecialistPublisherWiring ||= DependencyContainer.new do
       get(:validatable_document_factories).vehicle_recalls_and_faults_alert_factory)
   }
 
-  define_factory(:manual_publish_task_builder) {
-    ManualPublishTaskBuilder.new(
-      collection: ManualPublishTask,
-    )
-  }
-
   define_instance(:markdown_attachment_renderer) {
     MarkdownAttachmentProcessor.method(:new)
   }

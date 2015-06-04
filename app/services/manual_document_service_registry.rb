@@ -44,13 +44,6 @@ class ManualDocumentServiceRegistry
     )
   end
 
-  def list(context)
-    ListManualDocumentsService.new(
-      manual_repository(context),
-      context,
-    )
-  end
-
   def update_order(context)
     ReorderManualDocumentsService.new(
       manual_repository(context),

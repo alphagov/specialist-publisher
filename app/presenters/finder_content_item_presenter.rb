@@ -77,10 +77,6 @@ private
     ]
   end
 
-  def need_ids
-    []
-  end
-
   def publishing_app
     "specialist-publisher"
   end
