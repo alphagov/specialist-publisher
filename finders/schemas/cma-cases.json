@@ -114,7 +114,6 @@
       "name": "Opened",
       "short_name": "Opened",
       "type": "date",
-      "preposition": "opened",
       "display_as_result_metadata": true,
       "filterable": false
     },
@@ -124,6 +123,7 @@
       "name": "Closed",
       "short_name": "Closed",
       "type": "date",
+      "preposition": "closed",
       "display_as_result_metadata": true,
       "filterable": true
     }
