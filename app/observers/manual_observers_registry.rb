@@ -106,7 +106,7 @@ private
         manual
       ).call
 
-      document_renderer = SpecialistPublisherWiring.get(:specialist_document_renderer)
+      document_renderer = SpecialistPublisherWiring.get(:manual_document_renderer)
       manual.documents.each do |document|
         ManualSectionPublishingAPIExporter.new(
           publishing_api,
