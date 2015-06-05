@@ -130,12 +130,6 @@ module DocumentHelpers
     page.should have_content("#{date_field} should be formatted YYYY-MM-DD")
   end
 
-  def check_for_error(expected_error_message)
-    within("ul.errors") do
-      expect(page).to have_content(expected_error_message)
-    end
-  end
-
   def check_document_is_published(slug, fields)
     check_document_published_to_content_api(slug, fields)
     check_published_with_panopticon(slug, fields.fetch(:title))

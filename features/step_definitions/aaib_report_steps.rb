@@ -148,8 +148,3 @@ When(/^I publish a new AAIB report$/) do
 
   create_aaib_report(@document_fields, publish: true)
 end
-
-When(/^I edit the AAIB report and republish$/) do
-  @amended_document_attributes = {summary: "New summary", title: "My title"}
-  edit_aaib_report(@document_title, @amended_document_attributes, publish: true)
-end

@@ -13,11 +13,4 @@ module GdsSsoHelpers
     GDS::SSO.test_user = nil
     logout # warden
   end
-
-  def as_user(user)
-    original_user = GDS::SSO.test_user
-    login_as(user)
-    yield
-    login_as(original_user)
-  end
 end

@@ -32,11 +32,6 @@ module PanopticonHelpers
     @fake_panopticon ||= FakePanopticon.new
   end
 
-  def reset_panopticon_stubs_and_messages
-    RSpec::Mocks.space.proxy_for(fake_panopticon).reset
-    stub_panopticon
-  end
-
   def stub_panopticon
     # Stub both panopticon methods so RSpec can spy on them
     allow(fake_panopticon).to receive(:put_artefact!).and_call_original

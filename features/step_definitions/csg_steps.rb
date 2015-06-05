@@ -101,11 +101,6 @@ When(/^I publish a new Countryside Stewardship Grant$/) do
   create_countryside_stewardship_grant(@document_fields, publish: true)
 end
 
-When(/^I edit the Countryside Stewardship Grant and republish$/) do
-  @amended_document_attributes = {summary: "New summary", title: "My title"}
-  edit_countryside_stewardship_grant(@document_title, @amended_document_attributes, publish: true)
-end
-
 Given(/^a published Countryside Stewardship Grant exists$/) do
   @document_title = "Example Countryside Stewardship Grant"
   @slug = "countryside-stewardship-grants/example-countryside-stewardship-grant"

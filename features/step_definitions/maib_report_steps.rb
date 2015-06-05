@@ -107,11 +107,6 @@ When(/^I publish a new MAIB report$/) do
   create_maib_report(@document_fields, publish: true)
 end
 
-When(/^I edit the MAIB report and republish$/) do
-  @amended_document_attributes = {summary: "New summary", title: "My title"}
-  edit_maib_report(@document_title, @amended_document_attributes, publish: true)
-end
-
 Given(/^a published MAIB report exists$/) do
   @document_title = "Example MAIB report"
   @slug = "maib-reports/example-maib-report"

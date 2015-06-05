@@ -123,11 +123,6 @@ When(/^I publish a new Drug Safety Update$/) do
   create_drug_safety_update(@document_fields, publish: true)
 end
 
-When(/^I edit the Drug Safety Update and republish$/) do
-  @amended_document_attributes = {summary: "New summary", title: "My title"}
-  edit_drug_safety_update(@document_fields.fetch(:title), @amended_document_attributes, publish: true)
-end
-
 Given(/^a published Drug Safety Update exists$/) do
   @slug = "drug-safety-update/example-drug-safety-update"
   @document_fields = {

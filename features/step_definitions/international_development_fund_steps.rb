@@ -102,11 +102,6 @@ When(/^I publish a new International Development Fund$/) do
   create_international_development_fund(@document_fields, publish: true)
 end
 
-When(/^I edit the International Development Fund and republish$/) do
-  @amended_document_attributes = {summary: "New summary", title: "My title"}
-  edit_international_development_fund(@document_title, @amended_document_attributes, publish: true)
-end
-
 Given(/^a published International Development Fund exists$/) do
   @document_title = "Example International Development Fund"
   @slug = "international-development-funding/example-international-development-fund"

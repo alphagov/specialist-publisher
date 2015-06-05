@@ -107,11 +107,6 @@ When(/^I publish a new RAIB report$/) do
   create_raib_report(@document_fields, publish: true)
 end
 
-When(/^I edit the RAIB report and republish$/) do
-  @amended_document_attributes = {summary: "New summary", title: "My title"}
-  edit_raib_report(@document_title, @amended_document_attributes, publish: true)
-end
-
 Given(/^a published RAIB report exists$/) do
   @document_title = "Example RAIB report"
   @slug = "raib-reports/example-raib-report"

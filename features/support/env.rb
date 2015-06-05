@@ -103,7 +103,6 @@ require "form_helpers"
 require "document_helpers"
 require "manual_helpers"
 require "attachment_helpers"
-require "rerendering_helpers"
 require "file_fixture_helpers"
 require "gds_sso_helpers"
 require "access_control_helpers"
@@ -130,7 +129,6 @@ World(DocumentHelpers)
 World(ManualHelpers)
 World(AttachmentHelpers)
 World(FileFixtureHelpers)
-World(RerenderingHelpers)
 World(GdsSsoHelpers)
 World(AccessControlHelpers)
 World(SearchHelpers)
