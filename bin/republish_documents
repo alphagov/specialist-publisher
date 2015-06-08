@@ -2,10 +2,6 @@
 
 require File.expand_path("../../config/environment", __FILE__)
 require "specialist_publisher"
-require "logger"
-
-logger = Logger.new(STDOUT)
-logger.formatter = Logger::Formatter.new
 
 def usage
   $stderr.puts %Q{
