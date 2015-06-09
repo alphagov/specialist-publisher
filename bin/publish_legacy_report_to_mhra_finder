@@ -1,0 +1,15 @@
+#!/usr/bin/env ruby
+
+require File.expand_path("../../config/environment", __FILE__)
+require "specialist_publisher"
+
+repository = SpecialistPublisherWiring.get(:repository_registry).for_type(:medical_safety_alert)
+document = repository.fetch("46147971-ed51-4d1a-88f5-f9ae06ef23f1")
+document.update(bulk_published: true)
+document.update(public_updated_at: DateTime.new(2013, 07, 18, 14, 00, 00))
+document.publish!
+repository.store(document)
+
+SpecialistPublisher.document_services("medical_safety_alert").republish("46147971-ed51-4d1a-88f5-f9ae06ef23f1").call
+
+puts "Timestamps updated."
