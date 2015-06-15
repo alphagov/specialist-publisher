@@ -19,7 +19,7 @@ class OrganisationalManualServiceRegistry
       manual_repository: manual_repository,
       manual_builder: manual_builder,
       listeners: observers.creation,
-      attributes: attributes,
+      attributes: organisation_attributes(attributes),
     )
   end
 
@@ -27,7 +27,7 @@ class OrganisationalManualServiceRegistry
     UpdateManualService.new(
       manual_repository: manual_repository,
       manual_id: manual_id,
-      attributes: attributes,
+      attributes: organisation_attributes(attributes),
     )
   end
 
@@ -52,7 +52,7 @@ class OrganisationalManualServiceRegistry
       builder: manual_builder,
       renderer: manual_renderer,
       manual_id: manual_id,
-      attributes: attributes,
+      attributes: organisation_attributes(attributes),
     )
   end
 
@@ -79,4 +79,7 @@ private
     @observers ||= ManualObserversRegistry.new
   end
 
+  def organisation_attributes(attributes)
+    attributes.merge(organisation_slug: organisation_slug)
+  end
 end

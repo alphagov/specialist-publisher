@@ -99,9 +99,6 @@ private
     params
       .fetch("manual", {})
       .slice(*valid_params)
-      .merge(
-        organisation_slug: current_organisation_slug,
-      )
       .symbolize_keys
   end
 
