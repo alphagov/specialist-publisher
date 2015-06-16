@@ -253,18 +253,17 @@ module ManualHelpers
     expect(page).to have_content("Warning: There are duplicate section slugs in this manual")
   end
 
-  def withdraw_manual(manual_title)
-    manual_id = get_id_for_manual(manual_title)
-
-    manual_services = ManualServiceRegistry.new
-    manual_services.withdraw(manual_id).call
+  def stub_manual_withdrawal_observers
+    stub_panopticon
+    stub_rummager
+    stub_publishing_api
   end
 
-  def get_id_for_manual(manual_title)
-    visit manuals_path
-    link = page.find_link(manual_title)
-    # TODO this is pretty gross, consider making it less so
-    link.native.attribute("href").value.match(%r{\A/manuals/(.*?)(\?|\z)})[1]
+  def withdraw_manual_without_ui(manual)
+    stub_manual_withdrawal_observers
+
+    manual_services = ManualServiceRegistry.new
+    manual_services.withdraw(manual.id).call
   end
 
   def check_manual_is_withdrawn(manual_title, manual_slug, section_titles, section_slugs)
