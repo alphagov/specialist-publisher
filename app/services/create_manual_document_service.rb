@@ -33,6 +33,6 @@ class CreateManualDocumentService
   end
 
   def document_params
-    context.params.fetch(:document)
+    context.params.fetch("document")
   end
 end
