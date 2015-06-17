@@ -1,6 +1,6 @@
 source "https://rubygems.org"
 
-gem "rails", "3.2.17"
+gem "rails", "3.2.22"
 
 # Alphabetical order please :)
 gem "airbrake", "3.1.15"
@@ -9,7 +9,7 @@ gem "fetchable", "1.0.0"
 gem "foreman", "0.74.0"
 gem "gds-sso", "10.0.0"
 gem "generic_form_builder", "0.11.0"
-gem "govuk_admin_template", "2.2.0"
+gem "govuk_admin_template", "2.3.1"
 gem "kaminari", "0.16.1"
 gem "logstasher", "0.4.8"
 gem "mongoid", "2.5.2"
@@ -17,6 +17,7 @@ gem "mongoid_rails_migrations", "1.0.0"
 gem "multi_json", "1.10.0"
 gem "plek", "1.7.0"
 gem "quiet_assets", "1.0.3"
+gem "rack", "~> 1.4.6" # explicitly requiring patched version re: CVE-2015-3225
 gem "sidekiq", "3.2.1"
 gem "unicorn", "4.8.2"
 
