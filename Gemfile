@@ -17,6 +17,7 @@ gem "mongoid_rails_migrations", "1.0.0"
 gem "multi_json", "1.10.0"
 gem "plek", "1.7.0"
 gem "quiet_assets", "1.0.3"
+gem "rack", "~> 1.4.6" # explicitly requiring patched version re: CVE-2015-3225
 gem "sidekiq", "3.2.1"
 gem "unicorn", "4.8.2"
 
