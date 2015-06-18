@@ -39,6 +39,7 @@ describe DocumentAssociationMarshaller do
   let(:document_id) { double(:document_id) }
   let(:document_ids) { [document_id] }
   let(:document) { double(:document, id: document_id) }
+  let(:documents) { [document] }
 
   describe "#load" do
     let(:decorated_entity) { double(:decorated_entity) }
@@ -58,7 +59,7 @@ describe DocumentAssociationMarshaller do
       marshaller.load(entity, record)
 
       expect(decorator).to have_received(:call)
-        .with(entity, documents: [document])
+        .with(entity, documents: documents)
     end
 
     it "returns the decorated entity" do
@@ -70,7 +71,7 @@ describe DocumentAssociationMarshaller do
 
   describe "#dump" do
     before do
-      allow(entity).to receive(:documents).and_return([document])
+      allow(entity).to receive(:documents).and_return(documents)
     end
 
     it "saves associated documents" do
@@ -82,7 +83,7 @@ describe DocumentAssociationMarshaller do
     it "updates associated document ids on the record" do
       marshaller.dump(entity, record)
 
-      expect(record).to have_received(:document_ids=).with([document_id])
+      expect(record).to have_received(:document_ids=).with(document_ids)
     end
 
     it "returns nil" do
