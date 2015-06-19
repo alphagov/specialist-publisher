@@ -94,7 +94,6 @@ Type 'Yes' to proceed and remove this manual section or type anything else to ex
 
   def service_context
     OpenStruct.new(
-      current_organisation_slug: organisation_slug,
       params: {
         "manual_id" => manual_id,
         "id" => section_id,
@@ -103,7 +102,9 @@ Type 'Yes' to proceed and remove this manual section or type anything else to ex
   end
 
   def services
-    OrganisationalManualDocumentServiceRegistry.new
+    OrganisationalManualDocumentServiceRegistry.new(
+      organisation_slug: organisation_slug,
+    )
   end
 
   class PreviouslyPublishedError < StandardError; end

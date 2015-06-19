@@ -7,9 +7,13 @@ require "list_manual_documents_service"
 require "remove_manual_document_service"
 
 class OrganisationalManualDocumentServiceRegistry
+  def initialize(dependencies)
+    @organisation_slug = dependencies.fetch(:organisation_slug)
+  end
+
   def preview(context)
     PreviewManualDocumentService.new(
-      manual_repository(context),
+      manual_repository,
       manual_document_builder,
       document_renderer,
       context,
@@ -18,7 +22,7 @@ class OrganisationalManualDocumentServiceRegistry
 
   def create(context)
     CreateManualDocumentService.new(
-      manual_repository: manual_repository(context),
+      manual_repository: manual_repository,
       listeners: [],
       context: context,
     )
@@ -26,47 +30,49 @@ class OrganisationalManualDocumentServiceRegistry
 
   def update(context)
     UpdateManualDocumentService.new(
-      manual_repository(context),
+      manual_repository,
       context,
     )
   end
 
   def show(context)
     ShowManualDocumentService.new(
-      manual_repository(context),
+      manual_repository,
       context,
     )
   end
 
   def new(context)
     NewManualDocumentService.new(
-      manual_repository(context),
+      manual_repository,
       context,
     )
   end
 
   def list(context)
     ListManualDocumentsService.new(
-      manual_repository(context),
+      manual_repository,
       context,
     )
   end
 
   def update_order(context)
     ReorderManualDocumentsService.new(
-      manual_repository(context),
+      manual_repository,
       context,
     )
   end
 
   def remove(context)
     RemoveManualDocumentService.new(
-      manual_repository(context),
+      manual_repository,
       context,
     )
   end
 
 private
+  attr_reader :organisation_slug
+
   def document_renderer
     SpecialistPublisherWiring.get(:specialist_document_renderer)
   end
@@ -80,7 +86,7 @@ private
     SpecialistPublisherWiring.get(:manual_document_builder)
   end
 
-  def manual_repository(context)
-    manual_repository_factory.call(context.current_organisation_slug)
+  def manual_repository
+    manual_repository_factory.call(organisation_slug)
   end
 end
