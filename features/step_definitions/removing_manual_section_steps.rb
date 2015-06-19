@@ -6,7 +6,6 @@ When(/^I run the manual section removal script$/) do
   @remover = CliManualSectionRemover.new(
     manual_id: @manual.id,
     section_id: @section.id,
-    organisation_slug: "ministry-of-tea",
     options: {
       stdin: @stdin,
       stdout: null_stdout,

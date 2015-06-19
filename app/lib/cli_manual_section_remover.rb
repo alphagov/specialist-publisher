@@ -1,8 +1,7 @@
 class CliManualSectionRemover
-  def initialize(manual_id:, section_id:, organisation_slug:, options: {})
+  def initialize(manual_id:, section_id:, options: {})
     @manual_id = manual_id
     @section_id = section_id
-    @organisation_slug = organisation_slug
     @stdin = options.fetch(:stdin, STDIN)
     @stdout = options.fetch(:stdout, STDOUT)
     @stderr = options.fetch(:stderr, STDERR)
@@ -22,7 +21,7 @@ class CliManualSectionRemover
   end
 
 private
-  attr_reader :manual_id, :section_id, :organisation_slug, :stdin, :stdout, :stderr
+  attr_reader :manual_id, :section_id, :stdin, :stdout, :stderr
 
   def user_must_confirm(manual, section)
     stdout.puts confirmation_message(manual, section)
@@ -53,7 +52,7 @@ Type 'Yes' to proceed and remove this manual section or type anything else to ex
   end
 
   def something_not_found
-    "ERROR: We couldn't find the manual and/or section with those IDs owned by that organisation."
+    "ERROR: We couldn't find the manual and/or section with those IDs."
   end
 
   def no_user_confirmation_notice
@@ -83,7 +82,7 @@ Type 'Yes' to proceed and remove this manual section or type anything else to ex
   end
 
   def manual_and_section
-    manual, section = organisational_services.show(service_context).call
+    manual, section = services.show(service_context).call
 
     something_not_found_error if manual.nil? || section.nil?
 
@@ -98,12 +97,6 @@ Type 'Yes' to proceed and remove this manual section or type anything else to ex
         "manual_id" => manual_id,
         "id" => section_id,
       },
-    )
-  end
-
-  def organisational_services
-    OrganisationalManualDocumentServiceRegistry.new(
-      organisation_slug: organisation_slug,
     )
   end
 
