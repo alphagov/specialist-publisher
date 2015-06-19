@@ -83,7 +83,7 @@ Type 'Yes' to proceed and remove this manual section or type anything else to ex
   end
 
   def manual_and_section
-    manual, section = services.show(service_context).call
+    manual, section = organisational_services.show(service_context).call
 
     something_not_found_error if manual.nil? || section.nil?
 
@@ -101,10 +101,14 @@ Type 'Yes' to proceed and remove this manual section or type anything else to ex
     )
   end
 
-  def services
+  def organisational_services
     OrganisationalManualDocumentServiceRegistry.new(
       organisation_slug: organisation_slug,
     )
+  end
+
+  def services
+    ManualDocumentServiceRegistry.new
   end
 
   class PreviouslyPublishedError < StandardError; end
