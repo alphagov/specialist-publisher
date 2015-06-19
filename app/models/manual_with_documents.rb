@@ -45,6 +45,18 @@ class ManualWithDocuments < SimpleDelegator
     @documents.sort_by! { |doc| document_order.index(doc.id) }
   end
 
+  def remove_document(document_id)
+    found_document = @documents.find { |d| d.id == document_id }
+
+    return if found_document.nil?
+
+    removed = @documents.delete(found_document)
+
+    return if removed.nil?
+
+    @removed_documents << removed
+  end
+
   private
   attr_reader :document_builder, :manual
 
