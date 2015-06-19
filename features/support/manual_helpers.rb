@@ -10,6 +10,19 @@ module ManualHelpers
     save_as_draft if save
   end
 
+  def create_manual_without_ui(fields, organisation_slug: "ministry-of-tea")
+    manual_services = OrganisationalManualServiceRegistry.new(
+      organisation_slug: organisation_slug,
+    )
+    manual = manual_services.create(fields).call
+
+    manual_repository = SpecialistPublisherWiring.
+      get(:repository_registry).
+      manual_repository
+
+    manual_repository.fetch(manual.id)
+  end
+
   def create_manual_document(manual_title, fields)
     go_to_manual_page(manual_title)
     click_on "Add section"
@@ -17,6 +30,20 @@ module ManualHelpers
     fill_in_fields(fields)
 
     save_as_draft
+  end
+
+  def create_manual_document_without_ui(manual, fields, organisation_slug: "ministry-of-tea")
+    manual_document_services = ManualDocumentServiceRegistry.new
+    create_service_context = OpenStruct.new(
+      {
+        current_organisation_slug: organisation_slug,
+        params: {
+          "manual_id" => manual.id,
+          "document" => fields,
+        },
+      }
+    )
+    manual_document_services.create(create_service_context).call
   end
 
   def edit_manual(manual_title, new_fields)
@@ -41,6 +68,20 @@ module ManualHelpers
 
   def publish_manual
     click_on "Publish manual"
+  end
+
+  def stub_manual_publication_observers(organisation_slug)
+    stub_panopticon
+    stub_rummager
+    stub_publishing_api
+    stub_organisation_details(organisation_slug)
+  end
+
+  def publish_manual_without_ui(manual, organisation_slug: "ministry-of-tea")
+    stub_manual_publication_observers(organisation_slug)
+
+    manual_services = ManualServiceRegistry.new
+    manual_services.publish(manual.id, manual.version_number).call
   end
 
   def check_manual_exists_with(attributes)
@@ -212,18 +253,17 @@ module ManualHelpers
     expect(page).to have_content("Warning: There are duplicate section slugs in this manual")
   end
 
-  def withdraw_manual(manual_title)
-    manual_id = get_id_for_manual(manual_title)
-
-    manual_services = ManualServiceRegistry.new
-    manual_services.withdraw(manual_id).call
+  def stub_manual_withdrawal_observers
+    stub_panopticon
+    stub_rummager
+    stub_publishing_api
   end
 
-  def get_id_for_manual(manual_title)
-    visit manuals_path
-    link = page.find_link(manual_title)
-    # TODO this is pretty gross, consider making it less so
-    link.native.attribute("href").value.match(%r{\A/manuals/(.*?)(\?|\z)})[1]
+  def withdraw_manual_without_ui(manual)
+    stub_manual_withdrawal_observers
+
+    manual_services = ManualServiceRegistry.new
+    manual_services.withdraw(manual.id).call
   end
 
   def check_manual_is_withdrawn(manual_title, manual_slug, section_titles, section_slugs)

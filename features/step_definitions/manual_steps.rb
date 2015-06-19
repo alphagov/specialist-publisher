@@ -384,7 +384,7 @@ Given(/^a published manual with at least two sections exists$/) do
     summary: "Nullam quis risus eget urna mollis ornare vel eu leo.",
   }
 
-  create_manual(@manual_fields)
+  @manual = create_manual_without_ui(@manual_fields)
 
   @section_titles = []
   @section_slugs = []
@@ -393,18 +393,18 @@ Given(/^a published manual with at least two sections exists$/) do
     section_title = "Section #{section_number}"
     section_slug = [@manual_slug, "section-#{section_number}"].join("/")
     section_fields = {
-      section_title: section_title,
-      section_summary: "Section #{section_number} summary",
-      section_body: "Section #{section_number} body",
+      title: section_title,
+      summary: "Section #{section_number} summary",
+      body: "Section #{section_number} body",
     }
 
-    create_manual_document(@manual_title, section_fields)
+    create_manual_document_without_ui(@manual, section_fields)
 
     @section_titles << section_title
     @section_slugs << section_slug
   end
 
-  publish_manual
+  publish_manual_without_ui(@manual)
 
   # Clear out any remote requests caught by webmock.
   # We don't want the remote calls that were made during the publishing setup
@@ -413,7 +413,7 @@ Given(/^a published manual with at least two sections exists$/) do
 end
 
 When(/^a DevOps specialist withdraws the manual for me$/) do
-  withdraw_manual(@manual_title)
+  withdraw_manual_without_ui(@manual)
 end
 
 Then(/^the manual should be withdrawn$/) do
