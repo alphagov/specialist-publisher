@@ -26,7 +26,6 @@ class ManualServiceRegistry
 
 private
   def manual_repository
-    # TODO Get this from a RepositoryRegistry
     SpecialistPublisherWiring.get(:repository_registry).manual_repository
   end
 
