@@ -43,7 +43,10 @@ module ManualHelpers
         },
       }
     )
-    manual_document_services.create(create_service_context).call
+
+    _, document = manual_document_services.create(create_service_context).call
+
+    document
   end
 
   def edit_manual(manual_title, new_fields)
