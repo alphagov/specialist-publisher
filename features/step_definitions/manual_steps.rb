@@ -24,6 +24,18 @@ Given(/^a draft manual exists$/) do
   create_manual(@manual_fields)
 end
 
+Given(/^a draft manual was created without the UI$/) do
+  @manual_slug = "guidance/example-manual-title"
+  @manual_title = "Example Manual Title"
+
+  @manual_fields = {
+    title: "Example Manual Title",
+    summary: "Nullam quis risus eget urna mollis ornare vel eu leo.",
+  }
+
+  @manual = create_manual_without_ui(@manual_fields)
+end
+
 When(/^I edit a manual$/) do
   @new_title = "Edited Example Manual"
   edit_manual(@manual_fields[:title], title: @new_title)
@@ -76,6 +88,19 @@ Given(/^a draft document exists for the manual$/) do
   }
 
   create_manual_document(@manual_fields.fetch(:title), @document_fields)
+end
+
+Given(/^a draft section was created for the manual without the UI$/) do
+  @section_title = "Section 1"
+  @section_slug = "guidance/example-manual-title/section-1"
+
+  @section_fields = {
+    title: @section_title,
+    summary: "Section 1 summary",
+    body: "Section 1 body",
+  }
+
+  @section = create_manual_document_without_ui(@manual, @section_fields)
 end
 
 When(/^I edit the document$/) do
