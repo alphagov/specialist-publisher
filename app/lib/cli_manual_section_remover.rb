@@ -103,7 +103,7 @@ Type 'Yes' to proceed and remove this manual section or type anything else to ex
   end
 
   def services
-    ManualDocumentServiceRegistry.new
+    OrganisationalManualDocumentServiceRegistry.new
   end
 
   class PreviouslyPublishedError < StandardError; end

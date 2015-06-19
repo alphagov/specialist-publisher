@@ -33,7 +33,7 @@ module ManualHelpers
   end
 
   def create_manual_document_without_ui(manual, fields, organisation_slug: "ministry-of-tea")
-    manual_document_services = ManualDocumentServiceRegistry.new
+    manual_document_services = OrganisationalManualDocumentServiceRegistry.new
     create_service_context = OpenStruct.new(
       {
         current_organisation_slug: organisation_slug,

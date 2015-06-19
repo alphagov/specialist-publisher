@@ -6,7 +6,7 @@ require "new_manual_document_service"
 require "list_manual_documents_service"
 require "remove_manual_document_service"
 
-class ManualDocumentServiceRegistry
+class OrganisationalManualDocumentServiceRegistry
   def preview(context)
     PreviewManualDocumentService.new(
       manual_repository(context),

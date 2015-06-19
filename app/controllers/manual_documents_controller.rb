@@ -94,6 +94,6 @@ class ManualDocumentsController < ApplicationController
 
 private
   def services
-    ManualDocumentServiceRegistry.new
+    OrganisationalManualDocumentServiceRegistry.new
   end
 end
