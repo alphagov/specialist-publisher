@@ -4,12 +4,17 @@ class ManualWithDocuments < SimpleDelegator
   def initialize(document_builder, manual, attrs)
     @manual = manual
     @documents = attrs.fetch(:documents)
+    @removed_documents = attrs.fetch(:removed_documents, [])
     @document_builder = document_builder
     super(manual)
   end
 
   def documents
     @documents.to_enum
+  end
+
+  def removed_documents
+    @removed_documents.to_enum
   end
 
   def build_document(attributes)

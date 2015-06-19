@@ -11,7 +11,11 @@ class DocumentAssociationMarshaller
       document_repository.fetch(doc_id)
     }
 
-    decorator.call(manual, documents: docs)
+    removed_docs = Array(record.removed_document_ids).map { |doc_id|
+      document_repository.fetch(doc_id)
+    }
+
+    decorator.call(manual, documents: docs, removed_documents: removed_docs)
   end
 
   def dump(manual, record)
@@ -21,7 +25,12 @@ class DocumentAssociationMarshaller
       document_repository.store(document)
     end
 
+    manual.removed_documents.each do |document|
+      document_repository.store(document)
+    end
+
     record.document_ids = manual.documents.map { |d| d.id }
+    record.removed_document_ids = manual.removed_documents.map { |d| d.id }
 
     nil
   end
