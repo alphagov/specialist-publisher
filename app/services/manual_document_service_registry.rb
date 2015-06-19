@@ -4,6 +4,7 @@ require "update_manual_document_service"
 require "show_manual_document_service"
 require "new_manual_document_service"
 require "list_manual_documents_service"
+require "remove_manual_document_service"
 
 class ManualDocumentServiceRegistry
   def preview(context)
@@ -53,6 +54,13 @@ class ManualDocumentServiceRegistry
 
   def update_order(context)
     ReorderManualDocumentsService.new(
+      manual_repository(context),
+      context,
+    )
+  end
+
+  def remove(context)
+    RemoveManualDocumentService.new(
       manual_repository(context),
       context,
     )
