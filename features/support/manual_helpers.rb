@@ -3,6 +3,10 @@ require "gds_api/test_helpers/publishing_api"
 module ManualHelpers
   include GdsApi::TestHelpers::PublishingApi
 
+  def manual_repository
+    SpecialistPublisherWiring.get(:repository_registry).manual_repository
+  end
+
   def create_manual(fields, save: true)
     visit new_manual_path
     fill_in_fields(fields)
@@ -15,10 +19,6 @@ module ManualHelpers
       organisation_slug: organisation_slug,
     )
     manual = manual_services.create(fields).call
-
-    manual_repository = SpecialistPublisherWiring.
-      get(:repository_registry).
-      manual_repository
 
     manual_repository.fetch(manual.id)
   end
