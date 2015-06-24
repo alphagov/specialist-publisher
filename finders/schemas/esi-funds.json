@@ -6,7 +6,7 @@
       "name": "Fund state",
       "type": "text",
       "preposition": "which are",
-      "display_as_result_metadata": false,
+      "display_as_result_metadata": true,
       "filterable": true,
       "allowed_values": [
         {"label": "Open", "value": "open"},
@@ -71,7 +71,6 @@
     {
       "key": "closing_date",
       "name": "Closing date",
-      "short_name": "Closing",
       "type": "date",
       "display_as_result_metadata": true,
       "filterable": false
