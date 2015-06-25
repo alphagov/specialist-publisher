@@ -9,5 +9,6 @@
   "filter": {
     "document_type": "european_structural_investment_fund"
   },
+  "default_order": "-closing_date",
   "organisations": []
 }

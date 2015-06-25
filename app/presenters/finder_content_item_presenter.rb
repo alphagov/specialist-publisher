@@ -49,7 +49,8 @@ private
       show_summaries: metadata.fetch("show_summaries", false),
       summary: metadata.fetch("summary", nil),
       facets: schema.fetch("facets", []),
-    }
+      default_order: metadata.fetch("default_order", nil),
+    }.reject {|_, value| value.nil?}
   end
 
   def format
