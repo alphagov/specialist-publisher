@@ -14,7 +14,6 @@ require "govspeak_to_html_renderer"
 require "markdown_attachment_processor"
 require "marshallers/document_association_marshaller"
 require "marshallers/manual_publish_task_association_marshaller"
-require "null_finder_schema"
 require "panopticon_registerer"
 require "rendered_specialist_document"
 require "repository_registry"
@@ -126,12 +125,6 @@ SpecialistPublisherWiring ||= DependencyContainer.new do
   define_factory(:vehicle_recalls_and_faults_alert_builder) {
     SpecialistDocumentBuilder.new("vehicle_recalls_and_faults_alert",
       get(:validatable_document_factories).vehicle_recalls_and_faults_alert_factory)
-  }
-
-  define_factory(:manual_publish_task_builder) {
-    ManualPublishTaskBuilder.new(
-      collection: ManualPublishTask,
-    )
   }
 
   define_instance(:markdown_attachment_renderer) {

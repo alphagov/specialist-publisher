@@ -12,7 +12,6 @@ class NewManualDocumentService
 
   attr_reader(
     :manual_repository,
-    :document_builder,
     :context,
   )
 
@@ -22,9 +21,5 @@ class NewManualDocumentService
 
   def manual_id
     context.params.fetch("manual_id")
-  end
-
-  def initial_params
-    {}
   end
 end

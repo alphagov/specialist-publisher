@@ -3,10 +3,6 @@ class AbstractArtefactFormatter
     @entity = entity
   end
 
-  def resource_id
-    entity.id
-  end
-
   def name
     entity.title
   end

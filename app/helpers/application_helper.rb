@@ -55,12 +55,6 @@ module ApplicationHelper
     end
   end
 
-  def govspeak(text)
-    if text
-      content_tag(:div, Govspeak::Document.new(text).to_sanitized_html.html_safe, class: "govspeak")
-    end
-  end
-
   def preview_path_for_manual(manual)
     if manual.persisted?
       preview_manual_path(manual)

@@ -64,16 +64,6 @@ Given(/^a draft CMA case exists$/) do
   create_cma_case(@document_fields, publish: false)
 end
 
-When(/^I change the title of the CMA case$/) do
-  @new_document_title = "Updated CMA case title"
-  @new_slug = "cma-cases/updated-cma-case-title"
-  edit_cma_case(@document_title, {title: @new_document_title})
-end
-
-Then(/^the updated URL slug is registered$/) do
-  check_slug_updated_with_panopticon(@slug, @new_slug)
-end
-
 Then(/^the CMA case has been created$/) do
   check_cma_case_exists_with(@document_fields)
 end

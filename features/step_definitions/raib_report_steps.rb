@@ -18,6 +18,7 @@ end
 When(/^I create a RAIB report with invalid fields$/) do
   @document_fields = {
     body: "<script>alert('Oh noes!)</script>",
+    date_of_occurrence: "Bad data",
   }
   create_raib_report(@document_fields)
 end
@@ -65,7 +66,7 @@ Given(/^two RAIB reports exist$/) do
   create_raib_report(@document_fields)
 end
 
-Then(/^the RAIB reports should be in the publisher IDF index in the correct order$/) do
+Then(/^the RAIB reports should be in the publisher report index in the correct order$/) do
   visit raib_reports_path
 
   check_for_documents("RAIB report 2", "RAIB report 1")
@@ -104,11 +105,6 @@ When(/^I publish a new RAIB report$/) do
   }
 
   create_raib_report(@document_fields, publish: true)
-end
-
-When(/^I edit the RAIB report and republish$/) do
-  @amended_document_attributes = {summary: "New summary", title: "My title"}
-  edit_raib_report(@document_title, @amended_document_attributes, publish: true)
 end
 
 Given(/^a published RAIB report exists$/) do

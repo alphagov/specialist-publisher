@@ -18,6 +18,7 @@ end
 When(/^I create a MAIB report with invalid fields$/) do
   @document_fields = {
     body: "<script>alert('Oh noes!)</script>",
+    date_of_occurrence: "Bad data",
   }
   create_maib_report(@document_fields)
 end
@@ -65,7 +66,7 @@ Given(/^two MAIB reports exist$/) do
   create_maib_report(@document_fields)
 end
 
-Then(/^the MAIB reports should be in the publisher IDF index in the correct order$/) do
+Then(/^the MAIB reports should be in the publisher report index in the correct order$/) do
   visit maib_reports_path
 
   check_for_documents("MAIB report 2", "MAIB report 1")
@@ -104,11 +105,6 @@ When(/^I publish a new MAIB report$/) do
   }
 
   create_maib_report(@document_fields, publish: true)
-end
-
-When(/^I edit the MAIB report and republish$/) do
-  @amended_document_attributes = {summary: "New summary", title: "My title"}
-  edit_maib_report(@document_title, @amended_document_attributes, publish: true)
 end
 
 Given(/^a published MAIB report exists$/) do

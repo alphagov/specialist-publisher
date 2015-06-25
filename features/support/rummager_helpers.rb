@@ -21,11 +21,6 @@ module RummagerHelpers
       .and_return(fake_rummager)
   end
 
-  def reset_rummager_stubs_and_messages
-    RSpec::Mocks.space.proxy_for(fake_rummager).reset
-    stub_rummager
-  end
-
   def fake_rummager
     # memoizing does not work here for some reason
     FakeRummager.instance

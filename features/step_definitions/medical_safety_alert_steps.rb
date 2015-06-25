@@ -87,11 +87,6 @@ When(/^I publish a new Medical Safety Alert$/) do
   create_medical_safety_alert(@document_fields, publish: true)
 end
 
-When(/^I edit the Medical Safety Alert and republish$/) do
-  @amended_document_attributes = {summary: "New summary", title: "My title"}
-  edit_medical_safety_alert(@document_fields.fetch(:title), @amended_document_attributes, publish: true)
-end
-
 Given(/^a published Medical Safety Alert exists$/) do
   @slug = "drug-device-alerts/example-medical-safety-alert"
   @document_fields = msa_fields

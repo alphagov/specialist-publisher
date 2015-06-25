@@ -102,11 +102,6 @@ When(/^I publish a new ESI Fund$/) do
   create_esi_fund(@document_fields, publish: true)
 end
 
-When(/^I edit the ESI Fund and republish$/) do
-  @amended_document_attributes = {summary: "New summary", title: "My title"}
-  edit_esi_fund(@document_title, @amended_document_attributes, publish: true)
-end
-
 Given(/^a published ESI Fund exists$/) do
   @document_title = "Example ESI Fund"
   @slug = "european-structural-investment-funds/example-esi-fund"
