@@ -71,10 +71,6 @@ SpecialistPublisherWiring ||= DependencyContainer.new do
     DocumentFactoryRegistry.new
   }
 
-  define_factory(:organisational_manual_repository_factory) {
-    get(:repository_registry).method(:organisation_scoped_manual_repository)
-  }
-
   define_singleton(:edition_factory) { SpecialistDocumentEdition.method(:new) }
 
   define_factory(:cma_case_builder) {

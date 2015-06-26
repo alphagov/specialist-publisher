@@ -68,11 +68,13 @@ private
     SpecialistPublisherWiring.get(:manual_builder)
   end
 
+  def manual_repository_factory
+    SpecialistPublisherWiring.get(:repository_registry).
+      organisation_scoped_manual_repository_factory
+  end
+
   def manual_repository
-    # TODO Get this from a RepositoryRegistry
-    SpecialistPublisherWiring
-      .get(:organisational_manual_repository_factory)
-      .call(organisation_slug)
+    manual_repository_factory.call(organisation_slug)
   end
 
   def observers

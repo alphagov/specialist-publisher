@@ -3,6 +3,10 @@ require "gds_api/test_helpers/publishing_api"
 module ManualHelpers
   include GdsApi::TestHelpers::PublishingApi
 
+  def manual_repository
+    SpecialistPublisherWiring.get(:repository_registry).manual_repository
+  end
+
   def create_manual(fields, save: true)
     visit new_manual_path
     fill_in_fields(fields)
@@ -15,10 +19,6 @@ module ManualHelpers
       organisation_slug: organisation_slug,
     )
     manual = manual_services.create(fields).call
-
-    manual_repository = SpecialistPublisherWiring.
-      get(:repository_registry).
-      manual_repository
 
     manual_repository.fetch(manual.id)
   end
@@ -33,17 +33,22 @@ module ManualHelpers
   end
 
   def create_manual_document_without_ui(manual, fields, organisation_slug: "ministry-of-tea")
-    manual_document_services = ManualDocumentServiceRegistry.new
+    manual_document_services = OrganisationalManualDocumentServiceRegistry.new(
+      organisation_slug: organisation_slug,
+    )
+
     create_service_context = OpenStruct.new(
       {
-        current_organisation_slug: organisation_slug,
         params: {
           "manual_id" => manual.id,
           "document" => fields,
         },
       }
     )
-    manual_document_services.create(create_service_context).call
+
+    _, document = manual_document_services.create(create_service_context).call
+
+    document
   end
 
   def edit_manual(manual_title, new_fields)
@@ -101,6 +106,18 @@ module ManualHelpers
     attributes.values.each do |attr_val|
       expect(page).to have_content(attr_val)
     end
+  end
+
+  def check_manual_section_exists(manual_id, section_id)
+    manual = manual_repository.fetch(manual_id)
+
+    manual.documents.any? { |document| document.id == section_id }
+  end
+
+  def check_manual_section_was_removed(manual_id, section_id)
+    manual = manual_repository.fetch(manual_id)
+
+    manual.removed_documents.any? { |document| document.id == section_id }
   end
 
   def go_to_edit_page_for_manual(manual_title)

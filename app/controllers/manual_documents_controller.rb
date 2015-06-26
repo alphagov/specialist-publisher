@@ -94,6 +94,8 @@ class ManualDocumentsController < ApplicationController
 
 private
   def services
-    ManualDocumentServiceRegistry.new
+    OrganisationalManualDocumentServiceRegistry.new(
+      organisation_slug: current_organisation_slug,
+    )
   end
 end

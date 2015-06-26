@@ -39,6 +39,7 @@ private
   end
 
   def self.repository_factory
-    SpecialistPublisherWiring.get(:organisational_manual_repository_factory)
+    SpecialistPublisherWiring.get(:repository_registry).
+      organisation_scoped_manual_repository_factory
   end
 end

@@ -114,4 +114,44 @@ describe ManualWithDocuments do
       }.to raise_error(ArgumentError)
     end
   end
+
+  describe "#remove_document" do
+    subject(:manual_with_documents) {
+      ManualWithDocuments.new(
+        document_builder,
+        manual,
+        documents: documents,
+        removed_documents: removed_documents,
+      )
+    }
+
+    let(:documents) {
+      [
+        document_a,
+        document_b,
+      ]
+    }
+    let(:document_a) { double(:document, id: "a") }
+    let(:document_b) { double(:document, id: "b") }
+
+    let(:removed_documents) { [document_c] }
+    let(:document_c) { double(:document, id: "c") }
+
+    it "removes the document from #documents" do
+      manual_with_documents.remove_document(document_a.id)
+
+      expect(manual_with_documents.documents.to_a).to eq([document_b])
+    end
+
+    it "adds the document to #removed_documents" do
+      manual_with_documents.remove_document(document_a.id)
+
+      expect(manual_with_documents.removed_documents.to_a).to eq(
+        [
+          document_c,
+          document_a,
+        ]
+      )
+    end
+  end
 end

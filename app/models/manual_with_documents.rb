@@ -4,12 +4,17 @@ class ManualWithDocuments < SimpleDelegator
   def initialize(document_builder, manual, attrs)
     @manual = manual
     @documents = attrs.fetch(:documents)
+    @removed_documents = attrs.fetch(:removed_documents, [])
     @document_builder = document_builder
     super(manual)
   end
 
   def documents
     @documents.to_enum
+  end
+
+  def removed_documents
+    @removed_documents.to_enum
   end
 
   def build_document(attributes)
@@ -38,6 +43,18 @@ class ManualWithDocuments < SimpleDelegator
     end
 
     @documents.sort_by! { |doc| document_order.index(doc.id) }
+  end
+
+  def remove_document(document_id)
+    found_document = @documents.find { |d| d.id == document_id }
+
+    return if found_document.nil?
+
+    removed = @documents.delete(found_document)
+
+    return if removed.nil?
+
+    @removed_documents << removed
   end
 
   private
