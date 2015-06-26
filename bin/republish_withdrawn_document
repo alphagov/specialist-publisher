@@ -1,0 +1,35 @@
+#!/usr/bin/env ruby
+
+require File.expand_path("../../config/environment", __FILE__)
+require "specialist_publisher"
+
+def republish_withdrawn_edition(edition)
+  # Change the state to published
+  edition.update_attribute(:state, "published")
+
+  # Get the services for the right document type
+  services = SpecialistPublisher.document_services(edition.document_type)
+
+  # Republish the document to other GOV.UK systems
+  services.republish(edition.document_id).call
+end
+
+unless ARGV.any?
+  $stderr.puts "usage: #{File.basename(__FILE__)} document_id ..."
+  exit(1)
+end
+
+ARGV.each do |document_id|
+  edition = SpecialistDocumentEdition
+    .where(document_id: document_id)
+    .order_by(:version_number)
+    .last
+
+  if edition.nil?
+    $stderr.puts "SKIPPING #{document_id}; could not find document"
+  elsif !edition.archived?
+    $stderr.puts "SKIPPING #{document_id}; latest edition is not withdrawn"
+  else
+    republish_withdrawn_edition(edition)
+  end
+end
