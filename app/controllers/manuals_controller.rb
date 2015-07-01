@@ -126,7 +126,7 @@ private
   end
 
   def services
-    @services ||= OrganisationalManualServiceRegistry.new(
+    OrganisationalManualServiceRegistry.new(
       organisation_slug: current_organisation_slug,
     )
   end
