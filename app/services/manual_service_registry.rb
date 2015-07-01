@@ -1,7 +1,7 @@
 class ManualServiceRegistry
   def list(context)
     ListManualsService.new(
-      manual_repository: manual_repository,
+      manual_repository: associationless_manual_repository,
       context: context,
     )
   end
@@ -84,6 +84,11 @@ private
 
   def manual_builder
     SpecialistPublisherWiring.get(:manual_builder)
+  end
+
+  def associationless_manual_repository
+    SpecialistPublisherWiring.get(:repository_registry).
+      associationless_manual_repository
   end
 
   def manual_repository
