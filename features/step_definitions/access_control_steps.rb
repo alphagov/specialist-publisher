@@ -64,6 +64,11 @@ Then(/^I only see manuals created by my organisation$/) do
   check_manual_not_visible(@cma_manual_fields.fetch(:title))
 end
 
+Then(/^I see manuals created by all organisations$/) do
+  check_manual_visible(@tea_manual_fields.fetch(:title))
+  check_manual_visible(@cma_manual_fields.fetch(:title))
+end
+
 Given(/^I am logged in as a writer$/) do
   login_as(:cma_writer)
 end
