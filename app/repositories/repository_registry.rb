@@ -69,6 +69,25 @@ class RepositoryRegistry
     }
   end
 
+  def associationless_manual_repository
+    associationless_scoped_manual_repository(ManualRecord.all)
+  end
+
+  def associationless_scoped_manual_repository(collection)
+    ManualRepository.new(
+      factory: Manual.method(:new),
+      collection: collection,
+    )
+  end
+
+  def associationless_organisation_scoped_manual_repository_factory
+    ->(organisation_slug) {
+      associationless_scoped_manual_repository(
+        ManualRecord.where(organisation_slug: organisation_slug)
+      )
+    }
+  end
+
 private
   attr_reader :entity_factories
 end
