@@ -18,7 +18,9 @@ module ManualHelpers
     manual_services = OrganisationalManualServiceRegistry.new(
       organisation_slug: organisation_slug,
     )
-    manual = manual_services.create(fields).call
+    manual = manual_services.create(
+      fields.merge(organisation_slug: organisation_slug),
+    ).call
 
     manual_repository.fetch(manual.id)
   end
