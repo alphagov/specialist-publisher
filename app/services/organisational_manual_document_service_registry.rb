@@ -4,6 +4,7 @@ require "update_manual_document_service"
 require "show_manual_document_service"
 require "new_manual_document_service"
 require "list_manual_documents_service"
+require "reorder_manual_documents_service"
 
 class OrganisationalManualDocumentServiceRegistry
   def initialize(dependencies)
