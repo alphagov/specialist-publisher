@@ -5,7 +5,7 @@ class OrganisationalManualServiceRegistry
 
   def list(context)
     ListManualsService.new(
-      manual_repository: manual_repository,
+      manual_repository: associationless_manual_repository,
       context: context,
     )
   end
@@ -75,6 +75,15 @@ private
 
   def manual_repository
     manual_repository_factory.call(organisation_slug)
+  end
+
+  def associationless_manual_repository_factory
+    SpecialistPublisherWiring.get(:repository_registry).
+      associationless_organisation_scoped_manual_repository_factory
+  end
+
+  def associationless_manual_repository
+    associationless_manual_repository_factory.call(organisation_slug)
   end
 
   def observers
