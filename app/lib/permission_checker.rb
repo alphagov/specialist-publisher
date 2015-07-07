@@ -53,6 +53,7 @@ private
         department-for-communities-and-local-government
         department-for-work-pensions
         department-for-environment-food-rural-affairs
+        rural-payments-agency
       )
     when "maib_report"
       ["marine-accident-investigation-branch"]
