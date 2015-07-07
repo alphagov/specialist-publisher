@@ -41,6 +41,9 @@ end
 
 repository = SpecialistPublisherWiring.get(:repository_registry).for_type(document_type.to_sym)
 document = repository.fetch(document_id)
+unless document.published?
+  raise "This document isn't published, so I am refusing to change the public_updated_at and publish it in case it shouldn't be published."
+end
 document.update(public_updated_at: date)
 document.publish!
 repository.store(document)
