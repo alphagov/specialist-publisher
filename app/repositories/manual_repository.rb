@@ -3,10 +3,18 @@ require "fetchable"
 class ManualRepository
   include Fetchable
 
+  NotFoundError = Module.new
+
   def initialize(dependencies = {})
     @collection = dependencies.fetch(:collection)
     @factory = dependencies.fetch(:factory)
     @association_marshallers = dependencies.fetch(:association_marshallers, [])
+  end
+
+  def fetch(*args, &block)
+    super
+  rescue KeyError => e
+    raise e.extend(NotFoundError)
   end
 
   def store(manual)
