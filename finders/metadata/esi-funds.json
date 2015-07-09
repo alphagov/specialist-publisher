@@ -17,6 +17,7 @@
     "singular": "European Structural and Investment Fund",
     "plural": "European Structural and Investment Funds"
   },
+  "email_filter_by": "location",
   "email_signup_choice": [
     {
       "key": "north-east",
