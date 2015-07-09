@@ -11,6 +11,10 @@ class ApplicationController < ActionController::Base
 
   protect_from_forgery with: :exception
 
+  rescue_from("ManualRepository::NotFoundError") do
+    redirect_to(manuals_path, flash: { error: "Manual not found" })
+  end
+
   def current_finder
     finders.fetch(request.path.split("/")[1], nil)
   end
