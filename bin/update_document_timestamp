@@ -41,7 +41,17 @@ end
 
 repository = SpecialistPublisherWiring.get(:repository_registry).for_type(document_type.to_sym)
 document = repository.fetch(document_id)
+unless document.published?
+  raise "This document isn't published, so I am refusing to change the public_updated_at and publish it in case it shouldn't be published."
+end
 document.update(public_updated_at: date)
+# Directly set the state of the current edition as published, instead of using
+# the publish service. We do it this way because we don't want to trigger email
+# alerts. We still need to send the change to other systems though, hence we
+# use the republish service later on.
+#
+# Note: this will publish any other unpublished changes if there is already a
+# draft, but won't trigger email alerts, even if there should be some.
 document.publish!
 repository.store(document)
 
