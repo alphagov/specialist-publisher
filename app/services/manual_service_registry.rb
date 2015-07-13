@@ -1,35 +1,12 @@
-class ManualServiceRegistry
-  def publish(manual_id, version_number)
-    PublishManualService.new(
-      manual_repository: manual_repository,
-      listeners: observers.publication,
-      manual_id: manual_id,
-      version_number: version_number,
-    )
-  end
-
-  def republish(manual_id)
-    RepublishManualService.new(
-      manual_repository: manual_repository,
-      listeners: observers.republication,
-      manual_id: manual_id,
-    )
-  end
-
-  def withdraw(manual_id)
-    WithdrawManualService.new(
-      manual_repository: manual_repository,
-      listeners: observers.withdrawal,
-      manual_id: manual_id,
-    )
-  end
+class ManualServiceRegistry < AbstractManualServiceRegistry
 
 private
-  def manual_repository
-    SpecialistPublisherWiring.get(:repository_registry).manual_repository
+  def associationless_repository
+    SpecialistPublisherWiring.get(:repository_registry)
+      .associationless_manual_repository
   end
 
-  def observers
-    @observers ||= ManualObserversRegistry.new
+  def repository
+    SpecialistPublisherWiring.get(:repository_registry).manual_repository
   end
 end

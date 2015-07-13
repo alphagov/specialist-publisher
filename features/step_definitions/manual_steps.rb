@@ -36,6 +36,18 @@ Given(/^a draft manual was created without the UI$/) do
   @manual = create_manual_without_ui(@manual_fields)
 end
 
+Given(/^a draft manual exists belonging to "(.*?)"$/) do |organisation_slug|
+  @manual_slug = "guidance/example-manual-title"
+  @manual_title = "Example Manual Title"
+
+  @manual_fields = {
+    title: "Example Manual Title",
+    summary: "Nullam quis risus eget urna mollis ornare vel eu leo.",
+  }
+
+  @manual = create_manual_without_ui(@manual_fields, organisation_slug: organisation_slug)
+end
+
 When(/^I edit a manual$/) do
   @new_title = "Edited Example Manual"
   edit_manual(@manual_fields[:title], title: @new_title)
@@ -438,4 +450,12 @@ end
 
 Then(/^the manual should be withdrawn$/) do
   check_manual_is_withdrawn(@manual_title, @manual_slug, @section_titles, @section_slugs)
+end
+
+Then(/^the manual should belong to "(.*?)"$/) do |organisation_slug|
+  check_manual_has_organisation_slug(@manual_fields, organisation_slug)
+end
+
+Then(/^the manual should still belong to "(.*?)"$/) do |organisation_slug|
+  check_manual_has_organisation_slug(@manual_fields.merge(title: @new_title), organisation_slug)
 end

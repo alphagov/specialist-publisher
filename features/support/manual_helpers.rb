@@ -18,7 +18,9 @@ module ManualHelpers
     manual_services = OrganisationalManualServiceRegistry.new(
       organisation_slug: organisation_slug,
     )
-    manual = manual_services.create(fields).call
+    manual = manual_services.create(
+      fields.merge(organisation_slug: organisation_slug),
+    ).call
 
     manual_repository.fetch(manual.id)
   end
@@ -332,5 +334,23 @@ module ManualHelpers
           )
         )
     end
+  end
+
+  def get_id_for_manual(manual_title)
+    visit manuals_path
+    link = page.find_link(manual_title)
+    # TODO this is pretty gross, consider making it less so
+    link.native.attribute("href").value.match(%r{\A/manuals/(.*?)(\?|\z)})[1]
+  end
+
+  def check_manual_has_organisation_slug(attributes, organisation_slug)
+    # there's currently no mention of the manual's organisation on its page
+    manual_id = get_id_for_manual(attributes.fetch(:title))
+    manual_services = ManualServiceRegistry.new
+
+    manual, _ = manual_services.show(manual_id).call
+
+    expect(manual).not_to be_nil
+    expect(manual.organisation_slug).to eq(organisation_slug)
   end
 end

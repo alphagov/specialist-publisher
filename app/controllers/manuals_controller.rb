@@ -30,7 +30,7 @@ class ManualsController < ApplicationController
   end
 
   def create
-    manual = services.create(manual_params).call
+    manual = services.create(create_manual_params).call
     manual = manual_form(manual)
 
     if manual.valid?
@@ -49,7 +49,7 @@ class ManualsController < ApplicationController
   end
 
   def update
-    manual = services.update(manual_id, manual_params).call
+    manual = services.update(manual_id, update_manual_params).call
     manual = manual_form(manual)
 
     if manual.valid?
@@ -71,7 +71,7 @@ class ManualsController < ApplicationController
   end
 
   def preview
-    manual = services.preview(params["id"], manual_params).call
+    manual = services.preview(params["id"], update_manual_params).call
 
     manual.valid? # Force validation check or errors will be empty
 
@@ -95,7 +95,18 @@ private
     params.fetch("id")
   end
 
-  def manual_params
+  def create_manual_params
+    base_manual_params
+      .merge(
+        organisation_slug: current_organisation_slug,
+      )
+  end
+
+  def update_manual_params
+    base_manual_params
+  end
+
+  def base_manual_params
     params
       .fetch("manual", {})
       .slice(*valid_params)
@@ -115,7 +126,19 @@ private
   end
 
   def services
-    @services ||= OrganisationalManualServiceRegistry.new(
+    if current_user_is_gds_editor?
+      gds_editor_services
+    else
+      organisational_services
+    end
+  end
+
+  def gds_editor_services
+    ManualServiceRegistry.new
+  end
+
+  def organisational_services
+    OrganisationalManualServiceRegistry.new(
       organisation_slug: current_organisation_slug,
     )
   end
