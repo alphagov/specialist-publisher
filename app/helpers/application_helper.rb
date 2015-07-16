@@ -75,6 +75,10 @@ module ApplicationHelper
     "#{MANUAL_CONTENT_URL}/#{manual.slug}"
   end
 
+  def url_for_public_org(organisation_slug)
+    "#{ORGANISATION_URL}/government/organisations/#{organisation_slug}"
+  end
+
   def publish_form(slug_unique, publishable, document)
     publish_form_text = publish_text_hash(document)
     if !current_user_can_publish?(document.document_type) || !slug_unique || !publishable
