@@ -52,6 +52,12 @@
         <dd><%= publication_task_state(manual.publish_tasks.first) %></dd>
       </dl>
     <% end %>
+    <% if current_user_is_gds_editor? %>
+      <dl class="metadata-list">
+        <dt>From</dt>
+        <dd><%= link_to manual.organisation_slug, url_for_public_org(manual.organisation_slug) %></dd>
+      </dl>
+    <% end %>
   </div>
 </div>
 
