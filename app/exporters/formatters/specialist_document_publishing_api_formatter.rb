@@ -15,14 +15,18 @@ class SpecialistDocumentPublishingApiFormatter
       rendering_app: "specialist-frontend",
       title: rendered_document_attributes.fetch(:title),
       description: rendered_document_attributes.fetch(:summary),
-      update_type: "major",
+      update_type: update_type,
       locale: "en",
       public_updated_at: public_updated_at,
       details: {
         metadata: metadata,
         change_history: change_history,
         body: rendered_document_attributes[:body]
-      }.merge(headers)
+      }.merge(headers),
+      routes: [
+        path: base_path,
+        type: 'exact'
+      ]
     }
   end
 
@@ -42,6 +46,10 @@ class SpecialistDocumentPublishingApiFormatter
     specialist_document.public_updated_at || specialist_document.updated_at
   end
 
+  def update_type
+    specialist_document.minor_update? ? "minor" : "major"
+  end
+
   def change_history
     publication_logs.change_notes_for(specialist_document.slug).map do |log|
       {
@@ -49,6 +57,10 @@ class SpecialistDocumentPublishingApiFormatter
         note: log.change_note,
       }
     end
+  end
+
+  def base_path
+    "/#{specialist_document.attributes[:slug]}"
   end
 
   def headers
