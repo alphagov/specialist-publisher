@@ -22,7 +22,7 @@ class SpecialistDocumentPublishingApiFormatter
         metadata: metadata,
         change_history: change_history,
         body: rendered_document_attributes[:body]
-      }
+      }.merge(headers)
     }
   end
 
@@ -48,6 +48,20 @@ class SpecialistDocumentPublishingApiFormatter
         public_timestamp: log.published_at.iso8601,
         note: log.change_note,
       }
+    end
+  end
+
+  def headers
+    strip_empty_header_lists(
+      :headers => rendered_document_attributes[:headers]
+    )
+  end
+
+  def strip_empty_header_lists(header_struct)
+    if header_struct[:headers].any?
+      header_struct.merge(:headers => header_struct[:headers].map {|h| strip_empty_header_lists(h)} )
+    else
+      header_struct.reject { |k, _| k == :headers }
     end
   end
 end
