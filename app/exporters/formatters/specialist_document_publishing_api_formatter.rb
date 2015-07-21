@@ -1,7 +1,7 @@
 class SpecialistDocumentPublishingApiFormatter
   attr_reader :specialist_document, :specialist_document_renderer, :publication_logs
 
-  def initialize(specialist_document, specialist_document_renderer: , publication_logs: )
+  def initialize(specialist_document, specialist_document_renderer:, publication_logs:)
     @specialist_document = specialist_document
     @specialist_document_renderer = specialist_document_renderer
     @publication_logs = publication_logs
@@ -25,7 +25,7 @@ class SpecialistDocumentPublishingApiFormatter
       }.merge(headers),
       routes: [
         path: base_path,
-        type: 'exact'
+        type: "exact"
       ]
     }
   end
@@ -65,13 +65,13 @@ class SpecialistDocumentPublishingApiFormatter
 
   def headers
     strip_empty_header_lists(
-      :headers => rendered_document_attributes[:headers]
+      headers: rendered_document_attributes[:headers]
     )
   end
 
   def strip_empty_header_lists(header_struct)
     if header_struct[:headers].any?
-      header_struct.merge(:headers => header_struct[:headers].map {|h| strip_empty_header_lists(h)} )
+      header_struct.merge(headers: header_struct[:headers].map {|h| strip_empty_header_lists(h)})
     else
       header_struct.reject { |k, _| k == :headers }
     end

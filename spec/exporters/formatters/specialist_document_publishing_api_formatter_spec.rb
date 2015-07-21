@@ -4,7 +4,6 @@ require "support/govuk_content_schema_helpers"
 require "specialist_publisher_wiring"
 require "specialist_document"
 
-
 RSpec.describe SpecialistDocumentPublishingApiFormatter do
   let(:specialist_document_renderer) {
     SpecialistPublisherWiring.get(:specialist_document_renderer)
@@ -61,13 +60,13 @@ RSpec.describe SpecialistDocumentPublishingApiFormatter do
     end
 
     it "should include the relevant metadata in the details hash" do
-      fields = ["case_type", "case_state", "market_sector", "opened_date", "document_type"]
+      fields = %w(case_type case_state market_sector opened_date document_type)
       expect(presented["details"]["metadata"].keys).to eq(fields)
     end
 
     it "should include the document change history" do
       expect(publication_logs).to receive(:change_notes_for).with(document.slug)
-      expect(presented['details']['change_history'].size).to eq(1)
+      expect(presented["details"]["change_history"].size).to eq(1)
     end
 
     context "with a body containing some govspeak" do
@@ -76,7 +75,7 @@ RSpec.describe SpecialistDocumentPublishingApiFormatter do
       it { should be_valid_against_schema("specialist_document") }
 
       it "should convert the body from govspeak to html" do
-        expect(presented['details']['body']).to eq(%{<h2 id="heading-2">Heading 2</h2>\n\n<p>Paragraph</p>\n})
+        expect(presented["details"]["body"]).to eq(%{<h2 id="heading-2">Heading 2</h2>\n\n<p>Paragraph</p>\n})
       end
     end
 
@@ -86,12 +85,13 @@ RSpec.describe SpecialistDocumentPublishingApiFormatter do
       it { should be_valid_against_schema("specialist_document") }
 
       it "should extract headers" do
-        expect(presented['details']['headers']).to eq([{"text"=>"Heading 2", "level"=>2, "id"=>"heading-2"}])
+        expect(presented["details"]["headers"]).to eq([{"text" => "Heading 2", "level" => 2, "id" => "heading-2"}])
       end
     end
 
     context "with a body containing multiple govspeak headers" do
-      let(:body) { <<END_OF_GOVSPEAK
+      let(:body) {
+        <<END_OF_GOVSPEAK
 ## Heading 2
 
 ### Heading 3a
@@ -106,27 +106,27 @@ END_OF_GOVSPEAK
       it { should be_valid_against_schema("specialist_document") }
 
       it "should extract headers" do
-        expect(presented['details']['headers']).to eq(
+        expect(presented["details"]["headers"]).to eq(
           [
             {
-              "text"=>"Heading 2",
-              "level"=>2,
-              "id"=>"heading-2",
+              "text" => "Heading 2",
+              "level" => 2,
+              "id" => "heading-2",
               "headers" => [
                 {
-                  "text"=>"Heading 3a",
-                  "level"=>3,
-                  "id"=>"heading-3a"
+                  "text" => "Heading 3a",
+                  "level" => 3,
+                  "id" => "heading-3a"
                 },
                 {
-                  "text"=>"Heading 3b",
-                  "level"=>3,
-                  "id"=>"heading-3b"
+                  "text" => "Heading 3b",
+                  "level" => 3,
+                  "id" => "heading-3b"
                 },
                 {
-                  "text"=>"Heading 3c",
-                  "level"=>3,
-                  "id"=>"heading-3c"
+                  "text" => "Heading 3c",
+                  "level" => 3,
+                  "id" => "heading-3c"
                 }
               ]
             }
