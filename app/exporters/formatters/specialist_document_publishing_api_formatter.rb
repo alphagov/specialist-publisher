@@ -1,9 +1,10 @@
 class SpecialistDocumentPublishingApiFormatter
-  attr_reader :specialist_document, :specialist_document_renderer
+  attr_reader :specialist_document, :specialist_document_renderer, :publication_logs
 
-  def initialize(specialist_document, specialist_document_renderer: )
+  def initialize(specialist_document, specialist_document_renderer: , publication_logs: )
     @specialist_document = specialist_document
     @specialist_document_renderer = specialist_document_renderer
+    @publication_logs = publication_logs
   end
 
   def call
@@ -19,7 +20,7 @@ class SpecialistDocumentPublishingApiFormatter
       public_updated_at: public_updated_at,
       details: {
         metadata: metadata,
-        change_history: [],
+        change_history: change_history,
         body: rendered_document_attributes[:body]
       }
     }
@@ -41,4 +42,12 @@ class SpecialistDocumentPublishingApiFormatter
     specialist_document.public_updated_at || specialist_document.updated_at
   end
 
+  def change_history
+    publication_logs.change_notes_for(specialist_document.slug).map do |log|
+      {
+        public_timestamp: log.published_at.iso8601,
+        note: log.change_note,
+      }
+    end
+  end
 end

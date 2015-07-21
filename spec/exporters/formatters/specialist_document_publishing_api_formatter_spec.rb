@@ -11,12 +11,22 @@ RSpec.describe SpecialistDocumentPublishingApiFormatter do
   }
   let(:formatter) {
     described_class.new(
-        document, specialist_document_renderer: specialist_document_renderer
+      document,
+      specialist_document_renderer: specialist_document_renderer,
+      publication_logs: publication_logs
     )
   }
 
-  let(:document) {
-    SpecialistDocument.new(nil, edition.id, [edition])
+  let(:publication_logs) { class_double("PublicationLog", change_notes_for: [publication_log]) }
+
+  let(:publication_log) {
+    instance_double("PublicationLog",
+      slug: document.slug,
+      title: document.title,
+      version_number: document.version_number,
+      change_note: "My change note",
+      published_at: 1.day.ago
+    )
   }
 
   let(:document) {
@@ -54,5 +64,11 @@ RSpec.describe SpecialistDocumentPublishingApiFormatter do
       fields = ["case_type", "case_state", "market_sector", "opened_date", "document_type"]
       expect(presented["details"]["metadata"].keys).to eq(fields)
     end
+
+    it "should include the document change history" do
+      expect(publication_logs).to receive(:change_notes_for).with(document.slug)
+      expect(presented['details']['change_history'].size).to eq(1)
+    end
+
   end
 end
