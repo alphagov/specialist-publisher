@@ -1,4 +1,4 @@
-class SpecialistDocumentPublishingApiFormatter
+class SpecialistDocumentPublishingAPIFormatter
   attr_reader :specialist_document, :specialist_document_renderer, :publication_logs
 
   def initialize(specialist_document, specialist_document_renderer:, publication_logs:)

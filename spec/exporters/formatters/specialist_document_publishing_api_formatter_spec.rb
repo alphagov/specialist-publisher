@@ -4,10 +4,11 @@ require "support/govuk_content_schema_helpers"
 require "specialist_publisher_wiring"
 require "specialist_document"
 
-RSpec.describe SpecialistDocumentPublishingApiFormatter do
+RSpec.describe SpecialistDocumentPublishingAPIFormatter do
   let(:specialist_document_renderer) {
     SpecialistPublisherWiring.get(:specialist_document_renderer)
   }
+
   let(:formatter) {
     described_class.new(
       document,
