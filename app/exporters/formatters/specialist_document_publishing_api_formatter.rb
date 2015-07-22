@@ -30,6 +30,10 @@ class SpecialistDocumentPublishingAPIFormatter
     }
   end
 
+  def base_path
+    "/#{specialist_document.attributes[:slug]}"
+  end
+
   private
 
   def rendered_document_attributes
@@ -57,10 +61,6 @@ class SpecialistDocumentPublishingAPIFormatter
         note: log.change_note,
       }
     end
-  end
-
-  def base_path
-    "/#{specialist_document.attributes[:slug]}"
   end
 
   def headers
