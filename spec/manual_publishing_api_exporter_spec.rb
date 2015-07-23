@@ -7,7 +7,7 @@ describe ManualPublishingAPIExporter do
   subject {
     ManualPublishingAPIExporter.new(
       export_recipent,
-      organisations_api,
+      organisation,
       manual_renderer,
       publication_logs_collection,
       manual
@@ -15,12 +15,6 @@ describe ManualPublishingAPIExporter do
   }
 
   let(:export_recipent) { double(:export_recipent, put_content_item: nil) }
-  let(:organisations_api) {
-    double(
-      :organisations_api,
-      organisation: organisation,
-    )
-  }
   let(:manual_renderer) { ->(_) { double(:rendered_manual, attributes: manual_attributes) } }
 
   let(:manual) {

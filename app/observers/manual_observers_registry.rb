@@ -97,10 +97,12 @@ private
 
   def publishing_api_exporter
     ->(manual) {
+      organisation = organisations_api.organisation(manual.attributes.fetch(:organisation_slug))
+
       manual_renderer = SpecialistPublisherWiring.get(:manual_renderer)
       ManualPublishingAPIExporter.new(
         publishing_api,
-        organisations_api,
+        organisation,
         manual_renderer,
         PublicationLog,
         manual
@@ -110,7 +112,7 @@ private
       manual.documents.each do |document|
         ManualSectionPublishingAPIExporter.new(
           publishing_api,
-          organisations_api,
+          organisation,
           document_renderer,
           manual,
           document
