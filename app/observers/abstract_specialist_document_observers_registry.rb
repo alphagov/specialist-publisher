@@ -1,5 +1,6 @@
 require "url_maker"
 require "rummager_indexer"
+require "formatters/specialist_document_publishing_api_formatter"
 
 class AbstractSpecialistDocumentObserversRegistry
   def creation
@@ -14,6 +15,7 @@ class AbstractSpecialistDocumentObserversRegistry
     [
       publication_logger,
       content_api_exporter,
+      publishing_api_exporter,
       panopticon_exporter,
       rummager_exporter,
       publication_alert_exporter,
@@ -42,6 +44,21 @@ private
       panopticon_registerer.call(
         format_document_as_artefact(document)
       )
+    }
+  end
+
+  def publishing_api_exporter
+    ->(document) {
+      rendered_document = SpecialistDocumentPublishingAPIFormatter.new(
+        document,
+        specialist_document_renderer: SpecialistPublisherWiring.get(:specialist_document_renderer),
+        publication_logs: PublicationLog
+      )
+
+      SpecialistDocumentPublishingAPIExporter.new(
+        publishing_api,
+        rendered_document
+      ).call
     }
   end
 
@@ -126,4 +143,9 @@ private
   def url_maker
     UrlMaker.new
   end
+
+  def publishing_api
+    SpecialistPublisherWiring.get(:publishing_api)
+  end
+
 end
