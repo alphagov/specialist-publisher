@@ -91,5 +91,11 @@ describe PublicationLog, hits_db: true do
         end
       end
     end
+
+    context "no publication logs exist for a slug" do
+      it "returns an empty list" do
+        expect(PublicationLog.change_notes_for("cma-cases/my-slug")).to eq([])
+      end
+    end
   end
 end

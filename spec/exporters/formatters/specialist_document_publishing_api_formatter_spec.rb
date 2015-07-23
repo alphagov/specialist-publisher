@@ -90,6 +90,16 @@ RSpec.describe SpecialistDocumentPublishingAPIFormatter do
       end
     end
 
+    context "with a body containing govspeak without headers" do
+      let(:body) { "This is a paragraph" }
+
+      it { should be_valid_against_schema("specialist_document") }
+
+      it "should omit the headers attribute" do
+        expect(presented["details"].keys).not_to include("headers")
+      end
+    end
+
     context "with a body containing multiple govspeak headers" do
       let(:body) {
         <<END_OF_GOVSPEAK
