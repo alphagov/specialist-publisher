@@ -13,15 +13,15 @@ class SpecialistDocumentPublishingAPIFormatter
       format: "specialist_document",
       publishing_app: "specialist-publisher",
       rendering_app: "specialist-frontend",
-      title: rendered_document_attributes.fetch(:title),
-      description: rendered_document_attributes.fetch(:summary),
+      title: rendered_document.attributes.fetch(:title),
+      description: rendered_document.attributes.fetch(:summary),
       update_type: update_type,
       locale: "en",
       public_updated_at: public_updated_at,
       details: {
         metadata: metadata,
         change_history: change_history,
-        body: rendered_document_attributes[:body]
+        body: rendered_document.attributes[:body]
       }.merge(headers),
       routes: [
         path: base_path,
@@ -36,12 +36,12 @@ class SpecialistDocumentPublishingAPIFormatter
 
   private
 
-  def rendered_document_attributes
-    @rendered_document_attributes ||= specialist_document_renderer.call(specialist_document).attributes
+  def rendered_document
+    @rendered_document ||= specialist_document_renderer.call(specialist_document)
   end
 
   def metadata
-    rendered_document_attributes[:extra_fields].merge(document_type: specialist_document.document_type)
+    rendered_document.extra_fields.merge(document_type: specialist_document.document_type)
   end
 
   def public_updated_at
@@ -65,7 +65,7 @@ class SpecialistDocumentPublishingAPIFormatter
 
   def headers
     strip_empty_header_lists(
-      headers: rendered_document_attributes[:headers]
+      headers: rendered_document.attributes[:headers]
     )
   end
 

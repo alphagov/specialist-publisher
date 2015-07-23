@@ -30,7 +30,9 @@ RSpec.describe SpecialistDocumentPublishingAPIFormatter do
   }
 
   let(:document) {
-    SpecialistDocument.new(nil, edition.document_id, [edition], nil)
+    AaibReport.new(
+      SpecialistDocument.new(nil, edition.document_id, [edition], nil)
+    )
   }
 
   let(:edition) {
