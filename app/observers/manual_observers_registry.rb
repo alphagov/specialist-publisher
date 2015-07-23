@@ -1,4 +1,3 @@
-require "gds_api/publishing_api"
 require "gds_api/organisations"
 require "manual_publishing_api_exporter"
 require "manual_section_publishing_api_exporter"
@@ -136,7 +135,7 @@ private
   end
 
   def publishing_api
-    GdsApi::PublishingApi.new(Plek.new.find("publishing-api"))
+    SpecialistPublisherWiring.get(:publishing_api)
   end
 
   def organisations_api
