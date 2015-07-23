@@ -54,6 +54,17 @@ module DocumentHelpers
       )
   end
 
+  def check_document_published_to_publishing_api(slug, fields)
+    attributes = {
+      title: fields[:title],
+      description: fields[:summary],
+      format: "specialist_document",
+      publishing_app: "specialist-publisher",
+      rendering_app: "specialist-frontend",
+    }
+    assert_publishing_api_put_item("/#{slug}", attributes)
+  end
+
   def check_added_to_rummager(slug, fields)
     document_type_slug_prefix_map = {
       "cma-cases" => "cma_case",
@@ -133,6 +144,7 @@ module DocumentHelpers
   def check_document_is_published(slug, fields)
     check_document_published_to_content_api(slug, fields)
     check_published_with_panopticon(slug, fields.fetch(:title))
+    check_document_published_to_publishing_api(slug, fields)
     check_added_to_rummager(
       slug,
       fields.except(:body),
