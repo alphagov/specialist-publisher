@@ -42,6 +42,7 @@ describe ManualSectionPublishingAPIExporter do
       :document,
       id: "c19ffb7d-448c-4cc8-bece-022662ef9611",
       minor_update?: true,
+      mark_as_exported: nil,
     )
   }
 
@@ -103,5 +104,11 @@ describe ManualSectionPublishingAPIExporter do
         }
       )
     )
+  end
+
+  it "marks the document as exported" do
+    subject.call
+
+    expect(document).to have_received(:mark_as_exported)
   end
 end

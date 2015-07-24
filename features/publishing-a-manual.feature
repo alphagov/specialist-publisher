@@ -8,21 +8,20 @@ Feature: Publishing a manual
 
   Scenario: Publish a manual
     Given a draft manual exists
-    And a draft document exists for the manual
     When I publish the manual
-    Then the manual and its documents are published
+    Then the manual and all its documents are published
 
   Scenario: Edit and re-publish a manual
     Given a published manual exists
-    When I edit the manual's documents
+    When I edit one of the manual's documents
     And I publish the manual
-    Then the manual and its documents are published
+    Then the manual and the edited document are published
 
   Scenario: Add a section to a published manual
     Given a published manual exists
     When I add another section to the manual
     And I publish the manual
-    Then the manual and its documents are published
+    Then the manual and its new document are published
 
   Scenario: Add a change note
     Given a published manual exists
@@ -32,7 +31,7 @@ Feature: Publishing a manual
   Scenario: Omit the change note
     Given a published manual exists
     Then I see no visible change note in the manual document edit form
-    When I edit the manual document without a change note
+    When I edit one of the manual's documents without a change note
     Then I see an error requesting that I provide a change note
     When I indicate that the change is minor
     Then the document is updated without a change note

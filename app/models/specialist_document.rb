@@ -135,6 +135,16 @@ class SpecialistDocument
     end
   end
 
+  def needs_exporting?
+    latest_edition.exported_at.nil?
+  end
+
+  def mark_as_exported
+    edition = latest_edition
+    edition.exported_at = Time.zone.now
+    edition.save
+  end
+
 protected
 
   attr_reader :slug_generator, :edition_factory
@@ -180,7 +190,7 @@ protected
 
   def previous_edition_attributes
     latest_edition.attributes
-      .except("_id")
+      .except(*no_copy_attributes)
       .symbolize_keys
   end
 
@@ -195,6 +205,15 @@ protected
       :updated_at,
       :slug,
       :version_number,
+    ]
+  end
+
+  def no_copy_attributes
+    %w[
+      _id
+      created_at
+      updated_at
+      exported_at
     ]
   end
 end

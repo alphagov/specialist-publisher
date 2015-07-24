@@ -152,8 +152,8 @@ module ManualHelpers
   def check_manual_and_documents_were_published(manual_slug, manual_attrs, document_slug, document_attrs)
     check_manual_was_published_to_panopticon(manual_slug, manual_attrs)
 
-    check_manual_is_published_to_publishing_api(manual_slug, manual_attrs)
-    check_manual_document_is_published_to_publishing_api(document_slug, document_attrs)
+    check_manual_is_published_to_publishing_api(manual_slug)
+    check_manual_document_is_published_to_publishing_api(document_slug)
 
     check_manual_is_published_to_rummager(manual_slug, manual_attrs)
     check_manual_section_is_published_to_rummager(document_slug, document_attrs, manual_attrs)
@@ -172,7 +172,7 @@ module ManualHelpers
       ).at_least(:once)
   end
 
-  def check_manual_is_published_to_publishing_api(slug, attrs)
+  def check_manual_is_published_to_publishing_api(slug)
     assert_publishing_api_put_item("/#{slug}",
       "format" => "manual",
       "rendering_app" => "manuals-frontend",
@@ -180,7 +180,7 @@ module ManualHelpers
     )
   end
 
-  def check_manual_document_is_published_to_publishing_api(slug, attrs)
+  def check_manual_document_is_published_to_publishing_api(slug)
     assert_publishing_api_put_item("/#{slug}",
       "format" => "manual_section",
       "rendering_app" => "manuals-frontend",
@@ -194,9 +194,9 @@ module ManualHelpers
         "manual_section",
         slug,
         hash_including(
-          title: "#{manual_attrs.fetch(:title)}: #{attrs.fetch(:title)}",
+          title: "#{manual_attrs.fetch(:title)}: #{attrs.fetch(:section_title)}",
           link: slug,
-          indexable_content: attrs.fetch(:body),
+          indexable_content: attrs.fetch(:section_body),
         )
       ).at_least(:once)
   end
@@ -285,37 +285,36 @@ module ManualHelpers
     manual_services.withdraw(manual.id).call
   end
 
-  def check_manual_is_withdrawn(manual_title, manual_slug, section_titles, section_slugs)
-    check_manual_is_withdrawn_from_publishing_api(manual_slug, section_slugs)
-    check_manual_is_withdrawn_from_rummager(manual_slug, section_slugs)
+  def check_manual_is_withdrawn(manual_title, manual_slug, attributes_for_documents)
+    check_manual_is_withdrawn_from_publishing_api(manual_slug, attributes_for_documents)
+    check_manual_is_withdrawn_from_rummager(manual_slug, attributes_for_documents)
     check_manual_is_withdrawn_from_panopticon(manual_slug)
   end
 
-  def check_manual_is_withdrawn_from_publishing_api(manual_slug, section_slugs)
-    slugs = [manual_slug].concat(section_slugs)
-
-    attributes = {
+  def check_manual_is_withdrawn_from_publishing_api(manual_slug, attributes_for_documents)
+    gone_item = {
       "format" => "gone",
       "publishing_app" => "specialist-publisher",
     }
 
-    slugs.each do |slug|
-      assert_publishing_api_put_item("/#{slug}", attributes)
+    assert_publishing_api_put_item("/#{manual_slug}", gone_item)
+    attributes_for_documents.each do |document_attributes|
+      assert_publishing_api_put_item("/#{document_attributes[:slug]}", gone_item)
     end
   end
 
-  def check_manual_is_withdrawn_from_rummager(manual_slug, section_slugs)
+  def check_manual_is_withdrawn_from_rummager(manual_slug, attributes_for_documents)
     expect(fake_rummager).to have_received(:delete_document)
       .with(
         "manual",
         manual_slug,
       )
 
-    section_slugs.each do |section_slug|
+    attributes_for_documents.each do |document_attributes|
       expect(fake_rummager).to have_received(:delete_document)
         .with(
           "manual_section",
-          section_slug,
+          document_attributes[:slug],
         )
     end
   end
@@ -340,5 +339,27 @@ module ManualHelpers
     go_to_manual_page(attributes.fetch(:title))
 
     expect(page.body).to have_content(organisation_slug)
+  end
+
+  def create_documents_for_manual(count:, manual_fields:)
+    attributes_for_documents = (1..count).map do |n|
+      title = "Section #{n}"
+
+      {
+        title: title,
+        slug: "guidance/example-manual-title/section-#{n}",
+        fields: {
+          section_title: title,
+          section_summary: "Section #{n} summary",
+          section_body: "Section #{n} body",
+        }
+      }
+    end
+
+    attributes_for_documents.each do |attributes|
+      create_manual_document(@manual_fields.fetch(:title), attributes[:fields])
+    end
+
+    attributes_for_documents
   end
 end
