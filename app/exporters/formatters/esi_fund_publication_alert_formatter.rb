@@ -6,6 +6,10 @@ class EsiFundPublicationAlertFormatter < AbstractDocumentPublicationAlertFormatt
     "European Structural and Investment Funds"
   end
 
+  def format
+    "european_structural_investment_fund"
+  end
+
 private
   def document_noun
     "fund"

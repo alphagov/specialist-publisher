@@ -14,7 +14,7 @@ class AbstractDocumentPublicationAlertFormatter
 
   def tags
     arrayified_extra_fields.merge(
-      format: [document.document_type]
+      format: [format]
     )
   end
 
@@ -59,6 +59,10 @@ private
 
   def document_noun
     raise NotImplementedError
+  end
+
+  def format
+    document.document_type
   end
 
   def view_renderer
