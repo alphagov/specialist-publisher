@@ -119,6 +119,8 @@ module DocumentHelpers
         state: "archived",
       ))
 
+    assert_publishing_api_put_item("/#{slug}", format: "gone")
+
     expect(page).to have_content("withdrawn")
     expect(RenderedSpecialistDocument.where(title: document_title)).to be_empty
   end

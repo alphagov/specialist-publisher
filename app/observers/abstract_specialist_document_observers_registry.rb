@@ -1,5 +1,6 @@
 require "url_maker"
 require "rummager_indexer"
+require "publishing_api_withdrawer"
 require "formatters/specialist_document_publishing_api_formatter"
 
 class AbstractSpecialistDocumentObserversRegistry
@@ -33,6 +34,7 @@ class AbstractSpecialistDocumentObserversRegistry
   def withdrawal
     [
       content_api_withdrawer,
+      publishing_api_withdrawer,
       panopticon_exporter,
       rummager_withdrawer,
     ]
@@ -58,6 +60,15 @@ private
       SpecialistDocumentPublishingAPIExporter.new(
         publishing_api,
         rendered_document
+      ).call
+    }
+  end
+
+  def publishing_api_withdrawer
+    ->(document) {
+      PublishingAPIWithdrawer.new(
+        publishing_api: publishing_api,
+        entity: document,
       ).call
     }
   end
