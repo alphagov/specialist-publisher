@@ -5,11 +5,15 @@ require "formatters/specialist_document_publishing_api_formatter"
 
 class AbstractSpecialistDocumentObserversRegistry
   def creation
-    []
+    [
+      publishing_api_exporter,
+    ]
   end
 
   def update
-    []
+    [
+      publishing_api_exporter,
+    ]
   end
 
   def publication
@@ -59,7 +63,8 @@ private
 
       SpecialistDocumentPublishingAPIExporter.new(
         publishing_api,
-        rendered_document
+        rendered_document,
+        document.draft?
       ).call
     }
   end

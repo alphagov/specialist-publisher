@@ -36,13 +36,31 @@ describe SpecialistDocumentPublishingAPIExporter do
   subject {
     described_class.new(
       publishing_api,
-      document
+      document,
+      draft
     )
   }
 
-  it "exports to the publishing api" do
-    expect(publishing_api).to receive(:put_content_item).with(document_path, document_data)
-    subject.call
+  context "a published item" do
+
+    let(:draft) { false }
+
+    it "exports to the publishing api" do
+      expect(publishing_api).to receive(:put_content_item).with(document_path, document_data)
+      subject.call
+
+    end
+  end
+
+  context "a draft item" do
+
+    let(:draft) { true }
+
+    it "exports to the publishing api" do
+      expect(publishing_api).to receive(:put_draft_content_item).with(document_path, document_data)
+      subject.call
+
+    end
   end
 
 end
