@@ -9,6 +9,7 @@ Feature: Creating and editing a Vehicle Recalls and Faults alert
   Scenario: Creating a new Vehicle Recalls and Faults alert
     When I create a Vehicle Recalls and Faults alert
     Then I should see that Vehicle Recalls and Faults alert
+    And the document should be sent to content preview
 
   Scenario: Providing invalid inputs when creating an alert
     When I try to save a Vehicle Recall alert with invalid HTML and no title
@@ -30,3 +31,4 @@ Feature: Creating and editing a Vehicle Recalls and Faults alert
     Given a draft of a Vehicle Recalls and Faults alert exists
     When I change the title of that Vehicle Recalls and Faults alert to "A big vehicle fault"
     Then I should see "A big vehicle fault" as the title fo the Vehicle Recalls and Faults alert
+    And the document should be sent to content preview

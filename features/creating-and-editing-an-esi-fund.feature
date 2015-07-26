@@ -9,6 +9,7 @@ Given I am logged in as a "DCLG" editor
 Scenario: Create a new ESI Fund
   When I create an ESI Fund
   Then the ESI Fund has been created
+  And the document should be sent to content preview
 
 Scenario: Cannot create an ESI Fund with invalid fields
   When I create an ESI Fund with invalid fields
@@ -30,3 +31,4 @@ Scenario: Edit a draft ESI Fund
   Given a draft ESI Fund exists
   When I edit an ESI Fund
   Then the ESI Fund should have been updated
+  And the document should be sent to content preview

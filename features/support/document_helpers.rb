@@ -54,7 +54,7 @@ module DocumentHelpers
       )
   end
 
-  def check_document_published_to_publishing_api(slug, fields)
+  def check_document_published_to_publishing_api(slug, fields, draft: false)
     attributes = {
       title: fields[:title],
       description: fields[:summary],
@@ -62,7 +62,11 @@ module DocumentHelpers
       publishing_app: "specialist-publisher",
       rendering_app: "specialist-frontend",
     }
-    assert_publishing_api_put_item("/#{slug}", attributes)
+    if draft
+      assert_publishing_api_put_draft_item("/#{slug}", attributes)
+    else
+      assert_publishing_api_put_item("/#{slug}", attributes)
+    end
   end
 
   def check_added_to_rummager(slug, fields)

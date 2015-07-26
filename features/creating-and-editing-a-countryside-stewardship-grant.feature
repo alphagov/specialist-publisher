@@ -9,6 +9,7 @@ Given I am logged in as a "DEFRA" editor
 Scenario: Create a new Countryside Stewardship Grant
   When I create a Countryside Stewardship Grant
   Then the Countryside Stewardship Grant has been created
+  And the document should be sent to content preview
 
 Scenario: Cannot create a Countryside Stewardship Grant with invalid fields
   When I create a Countryside Stewardship Grant with invalid fields
@@ -29,3 +30,4 @@ Scenario: Edit a draft Countryside Stewardship Grant
   Given a draft Countryside Stewardship Grant exists
   When I edit a Countryside Stewardship Grant
   Then the Countryside Stewardship Grant should have been updated
+  And the document should be sent to content preview

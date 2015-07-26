@@ -10,6 +10,7 @@ Feature: Creating and editing an AAIB Report
     When I create a AAIB report
     Then the AAIB report has been created
     And the AAIB report should be in draft
+    And the document should be sent to content preview
 
   Scenario: Cannot create a AAIB report with invalid fields
     When I create a AAIB report with invalid fields
@@ -31,3 +32,4 @@ Feature: Creating and editing an AAIB Report
     Given a draft AAIB report exists
     When I edit a AAIB report
     Then the AAIB report should have been updated
+    And the document should be sent to content preview

@@ -10,6 +10,7 @@ Feature: Publishing an MAIB Report
     When I create a MAIB report
     Then the MAIB report has been created
     And the MAIB report should be in draft
+    And the document should be sent to content preview
 
   Scenario: Cannot create a MAIB report with invalid fields
     When I create a MAIB report with invalid fields
@@ -31,3 +32,4 @@ Feature: Publishing an MAIB Report
     Given a draft MAIB report exists
     When I edit a MAIB report
     Then the MAIB report should have been updated
+    And the document should be sent to content preview

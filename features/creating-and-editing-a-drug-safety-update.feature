@@ -9,6 +9,7 @@ Feature: Creating and editing a Drug Safety Update
   Scenario: Create a new Drug Safety Update
     When I create a Drug Safety Update
     Then the Drug Safety Update has been created
+    And the document should be sent to content preview
 
   Scenario: Cannot create a Drug Safety Update with invalid fields
     When I create a Drug Safety Update with invalid fields
@@ -29,3 +30,4 @@ Feature: Creating and editing a Drug Safety Update
     Given a draft Drug Safety Update exists
     When I edit a Drug Safety Update
     Then the Drug Safety Update should have been updated
+    And the document should be sent to content preview

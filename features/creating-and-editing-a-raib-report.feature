@@ -10,6 +10,7 @@ Feature: Publishing a RAIB Report
     When I create a RAIB report
     Then the RAIB report has been created
     And the RAIB report should be in draft
+    And the document should be sent to content preview
 
   Scenario: Cannot create a RAIB report with invalid fields
     When I create a RAIB report with invalid fields
@@ -31,3 +32,4 @@ Feature: Publishing a RAIB Report
     Given a draft RAIB report exists
     When I edit a RAIB report
     Then the RAIB report should have been updated
+    And the document should be sent to content preview
