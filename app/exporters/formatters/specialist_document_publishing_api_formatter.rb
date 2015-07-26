@@ -26,8 +26,8 @@ class SpecialistDocumentPublishingAPIFormatter
       routes: [
         path: base_path,
         type: "exact"
-      ]
-    }
+      ],
+    }.merge(access_limited)
   end
 
   def base_path
@@ -76,4 +76,26 @@ class SpecialistDocumentPublishingAPIFormatter
       header_struct.reject { |k, _| k == :headers }
     end
   end
+
+  def access_limited
+    if specialist_document.draft?
+      { access_limited: users }
+    else
+      {}
+    end
+  end
+
+  def users
+    {
+      users: User.any_of(
+        { organisation_slug: { "$in" => organisation_slugs } },
+        { permissions: "gds_editor" }
+      ).map(&:uid).compact
+    }
+  end
+
+  def organisation_slugs
+    PermissionChecker.owning_organisations_for_format(specialist_document.document_type)
+  end
+
 end

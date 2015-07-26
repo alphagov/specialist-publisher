@@ -42,6 +42,7 @@ RSpec.describe SpecialistDocumentPublishingAPIFormatter do
       document_type: "cma_case",
       updated_at: 2.days.ago,
       body: body,
+      state: state,
       extra_fields: {
         case_type: "mergers",
         case_state: "open",
@@ -54,6 +55,8 @@ RSpec.describe SpecialistDocumentPublishingAPIFormatter do
   }
 
   let(:body) { "" }
+
+  let(:state) { "published" }
 
   subject(:presented) { formatter.call.as_json }
 
@@ -70,6 +73,10 @@ RSpec.describe SpecialistDocumentPublishingAPIFormatter do
     it "should include the document change history" do
       expect(publication_logs).to receive(:change_notes_for).with(document.slug)
       expect(presented["details"]["change_history"].size).to eq(1)
+    end
+
+    it "should not include an access_limited hash" do
+      expect(presented).not_to include("access_limited")
     end
 
     context "with a body containing some govspeak" do
@@ -146,6 +153,23 @@ END_OF_GOVSPEAK
           ]
         )
       end
+    end
+
+    context "in draft state" do
+      let(:state) { "draft" }
+
+      let!(:cma_editor) { FactoryGirl.create(:cma_editor) }
+      let!(:aaib_editor) { FactoryGirl.create(:aaib_editor) }
+      let!(:gds_editor) { FactoryGirl.create(:gds_editor) }
+
+      it "includes an access_limited hash" do
+        expect(presented).to include("access_limited")
+      end
+
+      it "includes uids of departmental editors and GDS editors" do
+        expect(presented["access_limited"]["users"]).to eq([cma_editor.uid, gds_editor.uid])
+      end
+
     end
   end
 end
