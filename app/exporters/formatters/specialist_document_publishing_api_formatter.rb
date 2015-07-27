@@ -97,5 +97,4 @@ class SpecialistDocumentPublishingAPIFormatter
   def organisation_slugs
     PermissionChecker.owning_organisations_for_format(specialist_document.document_type)
   end
-
 end

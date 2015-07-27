@@ -14,5 +14,4 @@ class SpecialistDocumentPublishingAPIExporter
       publishing_api.put_content_item(document.base_path, document.call)
     end
   end
-
 end

@@ -169,7 +169,6 @@ END_OF_GOVSPEAK
       it "includes uids of departmental editors and GDS editors" do
         expect(presented["access_limited"]["users"]).to eq([cma_editor.uid, gds_editor.uid])
       end
-
     end
   end
 end

@@ -163,5 +163,4 @@ private
   def publishing_api
     SpecialistPublisherWiring.get(:publishing_api)
   end
-
 end
