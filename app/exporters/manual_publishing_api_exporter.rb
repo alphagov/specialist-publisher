@@ -1,8 +1,8 @@
 class ManualPublishingAPIExporter
 
-  def initialize(export_recipent, organisations_api, manual_renderer, publication_logs, manual)
+  def initialize(export_recipent, organisation, manual_renderer, publication_logs, manual)
     @export_recipent = export_recipent
-    @organisations_api = organisations_api
+    @organisation = organisation
     @manual_renderer = manual_renderer
     @publication_logs = publication_logs
     @manual = manual
@@ -16,7 +16,7 @@ private
 
   attr_reader(
     :export_recipent,
-    :organisations_api,
+    :organisation,
     :manual_renderer,
     :publication_logs,
     :manual
@@ -106,9 +106,5 @@ private
       abbreviation: organisation.details.abbreviation,
       web_url: organisation.web_url,
     }
-  end
-
-  def organisation
-    @organisation ||= organisations_api.organisation(manual.attributes.fetch(:organisation_slug))
   end
 end

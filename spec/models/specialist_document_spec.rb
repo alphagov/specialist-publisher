@@ -38,6 +38,8 @@ describe SpecialistDocument do
       extra_fields: extra_fields,
       minor_update: false,
       change_note: "Some changes",
+      :exported_at= => nil,
+      save: nil,
     }
   }
 
@@ -622,6 +624,22 @@ describe SpecialistDocument do
         doc.withdraw!
 
         expect(published_edition_v1).to have_received(:archive)
+      end
+    end
+  end
+
+  describe "#mark_as_exported" do
+    let(:editions) { [published_edition_v1, draft_edition_v2] }
+
+    it "sets the exported_at date on the latest edition" do
+      time = Time.now
+      Timecop.freeze(time) do
+        doc.mark_as_exported
+        expect(draft_edition_v2).to have_received(:exported_at=).with(time).ordered
+        expect(draft_edition_v2).to have_received(:save).ordered
+
+        expect(published_edition_v1).not_to have_received(:exported_at=)
+        expect(published_edition_v1).not_to have_received(:save)
       end
     end
   end

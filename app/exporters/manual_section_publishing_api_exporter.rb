@@ -1,8 +1,8 @@
 class ManualSectionPublishingAPIExporter
 
-  def initialize(export_recipent, organisations_api, document_renderer, manual, document)
+  def initialize(export_recipent, organisation, document_renderer, manual, document)
     @export_recipent = export_recipent
-    @organisations_api = organisations_api
+    @organisation = organisation
     @document_renderer = document_renderer
     @manual = manual
     @document = document
@@ -10,11 +10,12 @@ class ManualSectionPublishingAPIExporter
 
   def call
     export_recipent.put_content_item(base_path, exportable_attributes)
+    document.mark_as_exported
   end
 
 private
 
-  attr_reader :export_recipent, :document_renderer, :organisations_api, :manual, :document
+  attr_reader :export_recipent, :document_renderer, :organisation, :manual, :document
 
   def base_path
     "/#{rendered_document_attributes.fetch(:slug)}"
@@ -63,9 +64,5 @@ private
       abbreviation: organisation.details.abbreviation,
       web_url: organisation.web_url,
     }
-  end
-
-  def organisation
-    @organisation ||= organisations_api.organisation(manual.attributes.fetch(:organisation_slug))
   end
 end

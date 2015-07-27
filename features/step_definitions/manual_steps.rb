@@ -22,6 +22,11 @@ Given(/^a draft manual exists$/) do
   }
 
   create_manual(@manual_fields)
+
+  @attributes_for_documents = create_documents_for_manual(
+    manual_fields: @manual_fields,
+    count: 2,
+  )
 end
 
 Given(/^a draft manual was created without the UI$/) do
@@ -90,29 +95,29 @@ Then(/^I see the manual has the new section$/) do
 end
 
 Given(/^a draft document exists for the manual$/) do
-  @document_title = "Section 1"
-  @document_slug = "guidance/example-manual-title/section-1"
+  @document_title = "New section"
+  @document_slug = "guidance/example-manual-title/new-section"
 
   @document_fields = {
     section_title: @document_title,
-    section_summary: "Section 1 summary",
-    section_body: "Section 1 body",
+    section_summary: "New section summary",
+    section_body: "New section body",
   }
 
   create_manual_document(@manual_fields.fetch(:title), @document_fields)
 end
 
 Given(/^a draft section was created for the manual without the UI$/) do
-  @section_title = "Section 1"
-  @section_slug = "guidance/example-manual-title/section-1"
+  @document_title = "New section"
+  @document_slug = "guidance/example-manual-title/new-section"
 
-  @section_fields = {
-    title: @section_title,
-    summary: "Section 1 summary",
-    body: "Section 1 body",
+  @document_fields = {
+    title: @document_title,
+    summary: "New section summary",
+    body: "New section body",
   }
 
-  @section = create_manual_document_without_ui(@manual, @section_fields)
+  @section = create_manual_document_without_ui(@manual, @document_fields)
 end
 
 When(/^I edit the document$/) do
@@ -160,18 +165,32 @@ When(/^I publish the manual$/) do
   publish_manual
 end
 
-Then(/^the manual and its documents are published$/) do
-  document_attributes = {
-    title: @document_fields[:section_title],
-    summary: @document_fields[:section_summary],
-    body: @document_fields[:section_body],
-  }
+Then(/^the manual and all its documents are published$/) do
+  @attributes_for_documents.each do |document_attributes|
+    check_manual_and_documents_were_published(
+      @manual_slug,
+      @manual_fields,
+      document_attributes[:slug],
+      document_attributes[:fields],
+    )
+  end
+end
 
+Then(/^the manual and the edited document are published$/) do
   check_manual_and_documents_were_published(
     @manual_slug,
     @manual_fields,
-    @document_slug,
-    document_attributes,
+    @updated_document[:slug],
+    @updated_document[:fields],
+  )
+end
+
+Then(/^the manual and its new document are published$/) do
+  check_manual_and_documents_were_published(
+    @manual_slug,
+    @manual_fields,
+    @new_document[:slug],
+    @new_document[:fields],
   )
 end
 
@@ -186,15 +205,10 @@ Given(/^a published manual exists$/) do
 
   create_manual(@manual_fields)
 
-  @document_title = "Section 1"
-  @document_slug = [@manual_slug, "section-1"].join("/")
-  @document_fields = {
-    section_title: @document_title,
-    section_summary: "Section 1 summary",
-    section_body: "Section 1 body",
-  }
-
-  create_manual_document(@manual_title, @document_fields)
+  @attributes_for_documents = create_documents_for_manual(
+    manual_fields: @manual_fields,
+    count: 2,
+  )
 
   publish_manual
 
@@ -204,16 +218,35 @@ Given(/^a published manual exists$/) do
   reset_remote_requests
 end
 
-When(/^I edit the manual's documents$/) do
-  @updated_document_fields = {
-    section_summary: "Updated section",
-    section_body: "Updated section",
-    change_note: "Updated section",
+When(/^I edit one of the manual's documents$/) do
+  document_to_edit = @attributes_for_documents.first
+
+  @updated_document = {
+    slug: document_to_edit[:slug],
+    fields: {
+      section_title: document_to_edit[:fields][:section_title],
+      section_summary: "Updated section",
+      section_body: "Updated section",
+      change_note: "Updated section",
+    }
   }
 
-  @document_fields = @document_fields.merge(@updated_document_fields)
+  edit_manual_document(@manual_title, document_to_edit[:title], @updated_document[:fields])
+end
 
-  edit_manual_document(@manual_title, @document_title, @updated_document_fields)
+When(/^I edit one of the manual's documents without a change note$/) do
+  document_to_edit = @attributes_for_documents.first
+
+  @updated_document = document_to_edit.merge(
+    fields: {
+      section_title: document_to_edit[:fields][:section_title],
+      section_summary: "Updated section",
+      section_body: "Updated section",
+      change_note: "",
+    }
+  )
+
+  edit_manual_document(@manual_title, document_to_edit[:title], @updated_document[:fields])
 end
 
 When(/^I start creating a new manual document$/) do
@@ -254,7 +287,9 @@ When(/^I copy\+paste the embed code into the body of the document$/) do
 end
 
 When(/^I create a new draft of a section with a change note$/) do
-  click_on(@document_title)
+  document = @attributes_for_documents.first
+
+  click_on(document[:title])
   click_on("Edit section")
 
   @change_note = "Changed title for the purposes of testing."
@@ -265,23 +300,11 @@ When(/^I create a new draft of a section with a change note$/) do
   }
 
   save_document
-  edit_manual_document(@manual_title, @document_title, fields)
+  edit_manual_document(@manual_title, document[:title], fields)
 end
 
 When(/^I re\-publish the section$/) do
   publish_manual
-end
-
-When(/^I edit the manual document without a change note$/) do
-  @updated_document_fields = {
-    section_summary: "Updated section",
-    section_body: "Updated section",
-    change_note: "",
-  }
-
-  @document_fields = @document_fields.merge(@updated_document_fields)
-
-  edit_manual_document(@manual_title, @document_title, @updated_document_fields)
 end
 
 Then(/^I see an error requesting that I provide a change note$/) do
@@ -296,26 +319,30 @@ end
 Then(/^the document is updated without a change note$/) do
   check_manual_document_exists_with(
     @manual_title,
-    section_title: @document_title,
-    section_summary: @updated_document_fields.fetch(:section_summary),
+    section_title: @updated_document[:title],
+    section_summary: @updated_document[:fields].fetch(:section_summary),
   )
 end
 
 When(/^I add another section to the manual$/) do
-  @document_title = "Section 2"
-  @original_document_slug = @document_slug
-  @document_slug = [@manual_slug, "section-2"].join("/")
-  @document_fields = {
-    section_title: @document_title,
-    section_summary: "Section 2 summary",
-    section_body: "Section 2 body",
+  title = "Section 2"
+
+  @new_document = {
+    title: title,
+    slug: [@manual_slug, title.parameterize].join("/"),
+    fields: {
+      section_title: title,
+      section_summary: "#{title} summary",
+      section_body: "#{title} body",
+    }
   }
 
-  create_manual_document(@manual_title, @document_fields)
+  create_manual_document(@manual_title, @new_document[:fields])
 end
 
 Then(/^I see no visible change note in the manual document edit form$/) do
-  check_change_note_value(@manual_title, @document_title, "")
+  document = @attributes_for_documents.first
+  check_change_note_value(@manual_title, document[:title], "")
 end
 
 When(/^I add invalid HTML to the document body$/) do
@@ -407,49 +434,15 @@ Then(/^I see a warning about section slug clash at publication$/) do
   check_for_clashing_section_slugs
 end
 
-Given(/^a published manual with at least two sections exists$/) do
-  @manual_title = "Example Manual Title"
-  @manual_slug = "guidance/example-manual-title"
-
-  @manual_fields = {
-    title: @manual_title,
-    summary: "Nullam quis risus eget urna mollis ornare vel eu leo.",
-  }
-
-  @manual = create_manual_without_ui(@manual_fields)
-
-  @section_titles = []
-  @section_slugs = []
-
-  (1..3).each do |section_number|
-    section_title = "Section #{section_number}"
-    section_slug = [@manual_slug, "section-#{section_number}"].join("/")
-    section_fields = {
-      title: section_title,
-      summary: "Section #{section_number} summary",
-      body: "Section #{section_number} body",
-    }
-
-    create_manual_document_without_ui(@manual, section_fields)
-
-    @section_titles << section_title
-    @section_slugs << section_slug
-  end
-
-  publish_manual_without_ui(@manual)
-
-  # Clear out any remote requests caught by webmock.
-  # We don't want the remote calls that were made during the publishing setup
-  # to interfere with later webmock assertions.
-  reset_remote_requests
-end
-
 When(/^a DevOps specialist withdraws the manual for me$/) do
-  withdraw_manual_without_ui(@manual)
+  manual_repository = SpecialistPublisherWiring.get(:repository_registry).manual_repository
+  manual = manual_repository.all.find { |manual| manual.slug == @manual_slug }
+
+  withdraw_manual_without_ui(manual)
 end
 
 Then(/^the manual should be withdrawn$/) do
-  check_manual_is_withdrawn(@manual_title, @manual_slug, @section_titles, @section_slugs)
+  check_manual_is_withdrawn(@manual_title, @manual_slug, @attributes_for_documents)
 end
 
 Then(/^the manual should belong to "(.*?)"$/) do |organisation_slug|

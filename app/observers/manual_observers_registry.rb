@@ -43,6 +43,8 @@ private
   def publication_logger
     ->(manual) {
       manual.documents.each do |doc|
+        next unless doc.needs_exporting?
+
         PublicationLog.create!(
           title: doc.title,
           slug: doc.slug,
@@ -97,10 +99,12 @@ private
 
   def publishing_api_exporter
     ->(manual) {
+      organisation = organisations_api.organisation(manual.attributes.fetch(:organisation_slug))
+
       manual_renderer = SpecialistPublisherWiring.get(:manual_renderer)
       ManualPublishingAPIExporter.new(
         publishing_api,
-        organisations_api,
+        organisation,
         manual_renderer,
         PublicationLog,
         manual
@@ -108,9 +112,11 @@ private
 
       document_renderer = SpecialistPublisherWiring.get(:manual_document_renderer)
       manual.documents.each do |document|
+        next unless document.needs_exporting?
+
         ManualSectionPublishingAPIExporter.new(
           publishing_api,
-          organisations_api,
+          organisation,
           document_renderer,
           manual,
           document
