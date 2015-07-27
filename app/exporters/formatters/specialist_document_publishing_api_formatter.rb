@@ -13,31 +13,35 @@ class SpecialistDocumentPublishingAPIFormatter
       format: "specialist_document",
       publishing_app: "specialist-publisher",
       rendering_app: "specialist-frontend",
-      title: rendered_document_attributes.fetch(:title),
-      description: rendered_document_attributes.fetch(:summary),
+      title: rendered_document.attributes.fetch(:title),
+      description: rendered_document.attributes.fetch(:summary),
       update_type: update_type,
       locale: "en",
       public_updated_at: public_updated_at,
       details: {
         metadata: metadata,
         change_history: change_history,
-        body: rendered_document_attributes[:body]
+        body: rendered_document.attributes[:body]
       }.merge(headers),
       routes: [
         path: base_path,
         type: "exact"
-      ]
-    }
+      ],
+    }.merge(access_limited)
+  end
+
+  def base_path
+    "/#{specialist_document.attributes[:slug]}"
   end
 
   private
 
-  def rendered_document_attributes
-    @rendered_document_attributes ||= specialist_document_renderer.call(specialist_document).attributes
+  def rendered_document
+    @rendered_document ||= specialist_document_renderer.call(specialist_document)
   end
 
   def metadata
-    rendered_document_attributes[:extra_fields].merge(document_type: specialist_document.document_type)
+    rendered_document.extra_fields.merge(document_type: specialist_document.document_type)
   end
 
   def public_updated_at
@@ -59,13 +63,9 @@ class SpecialistDocumentPublishingAPIFormatter
     end
   end
 
-  def base_path
-    "/#{specialist_document.attributes[:slug]}"
-  end
-
   def headers
     strip_empty_header_lists(
-      headers: rendered_document_attributes[:headers]
+      headers: rendered_document.attributes[:headers]
     )
   end
 
@@ -75,5 +75,26 @@ class SpecialistDocumentPublishingAPIFormatter
     else
       header_struct.reject { |k, _| k == :headers }
     end
+  end
+
+  def access_limited
+    if specialist_document.draft?
+      { access_limited: users }
+    else
+      {}
+    end
+  end
+
+  def users
+    {
+      users: User.any_of(
+        { organisation_slug: { "$in" => organisation_slugs } },
+        { permissions: "gds_editor" }
+      ).map(&:uid).compact
+    }
+  end
+
+  def organisation_slugs
+    PermissionChecker.owning_organisations_for_format(specialist_document.document_type)
   end
 end

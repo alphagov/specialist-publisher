@@ -8,6 +8,7 @@ class DrugSafetyUpdateObserversRegistry < AbstractSpecialistDocumentObserversReg
     [
       publication_logger,
       content_api_exporter,
+      publishing_api_exporter,
       panopticon_exporter,
       rummager_exporter,
     ]

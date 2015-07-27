@@ -42,3 +42,7 @@ end
 Then(/^the publish should(?: still)* have been logged (\d+) times?$/) do |expected_count_of_logs|
   check_count_of_logs(expected_count_of_logs)
 end
+
+Then(/^the document should be sent to content preview/) do
+  check_document_published_to_publishing_api(@slug, @document_fields, draft: true)
+end

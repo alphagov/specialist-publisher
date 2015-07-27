@@ -1,23 +1,11 @@
 Given(/^I am logged in as a "(.*?)" editor$/) do |editor_type|
   login_as(:"#{editor_type.downcase}_editor")
-
-  # WARNING: These must be stubbed before the first request takes place
-  stub_panopticon
-  stub_rummager
-  stub_publishing_api
   stub_organisation_details(GDS::SSO.test_user.organisation_slug)
-  stub_email_alert_api
 end
 
 Given(/^I am logged in as a non\-CMA editor$/) do
   login_as(:generic_editor)
-
-  # WARNING: These must be stubbed before the first request takes place
-  stub_panopticon
-  stub_rummager
-  stub_publishing_api
   stub_organisation_details(GDS::SSO.test_user.organisation_slug)
-  stub_email_alert_api
 end
 
 Then(/^I do not see an option for editing documents$/) do

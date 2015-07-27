@@ -4,6 +4,7 @@ module PublishingAPIHelpers
   include GdsApi::TestHelpers::PublishingApi
   def stub_publishing_api
     stub_default_publishing_api_put
+    stub_default_publishing_api_put_draft
   end
 
   def reset_remote_requests

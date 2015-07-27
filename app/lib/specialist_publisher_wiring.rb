@@ -8,6 +8,7 @@ require "finder_schema"
 require "footnotes_section_heading_renderer"
 require "formatters/manual_artefact_formatter"
 require "gds_api/email_alert_api"
+require "gds_api/publishing_api"
 require "gds_api/rummager"
 require "gds_api_proxy"
 require "govspeak_to_html_renderer"
@@ -252,6 +253,10 @@ SpecialistPublisherWiring ||= DependencyContainer.new do
 
   define_singleton(:email_alert_api) {
     GdsApi::EmailAlertApi.new(Plek.current.find("email-alert-api"))
+  }
+
+  define_singleton(:publishing_api) {
+    GdsApi::PublishingApi.new(Plek.new.find("publishing-api"))
   }
 
   define_singleton(:aaib_report_finder_schema) {

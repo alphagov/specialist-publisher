@@ -9,6 +9,7 @@ Feature: Creating and editing a CMA case
   Scenario: Create a new CMA case
     When I create a CMA case
     Then the CMA case has been created
+    And the document should be sent to content preview
 
   Scenario: Cannot create a CMA case with invalid fields
     When I create a CMA case with invalid fields
@@ -30,6 +31,7 @@ Feature: Creating and editing a CMA case
     Given a draft CMA case exists
     When I edit a CMA case
     Then the CMA case should have been updated
+    And the document should be sent to content preview
 
   Scenario: Change the title of a previously published document
     Given a published CMA case exists
@@ -60,4 +62,3 @@ Feature: Creating and editing a CMA case
     When I start creating a new CMA case with embedded javascript
     And I preview the case
     Then I should see an error message about a "Body" field containing javascript
-

@@ -65,4 +65,3 @@ Feature: Publishing a CMA case
     When I publish the CMA case
     Then an email alert should not be sent
     And the publish should still have been logged 1 time
-

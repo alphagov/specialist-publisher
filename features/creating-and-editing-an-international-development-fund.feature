@@ -9,6 +9,7 @@ Feature: Creating and editing an International Development Fund
   Scenario: Create a new International Development Fund
     When I create a International Development Fund
     Then the International Development Fund has been created
+    And the document should be sent to content preview
 
   Scenario: Cannot create a International Development Fund with invalid fields
     When I create a International Development Fund with invalid fields
@@ -29,3 +30,4 @@ Feature: Creating and editing an International Development Fund
     Given a draft International Development Fund exists
     When I edit a International Development Fund
     Then the International Development Fund should have been updated
+    And the document should be sent to content preview
