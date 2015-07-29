@@ -14,7 +14,7 @@ class SpecialistDocumentPublishingAPIFormatter
       publishing_app: "specialist-publisher",
       rendering_app: "specialist-frontend",
       title: rendered_document.attributes.fetch(:title),
-      description: rendered_document.attributes.fetch(:summary),
+      description: rendered_document.attributes.fetch(:summary, ""),
       update_type: update_type,
       locale: "en",
       public_updated_at: public_updated_at,
