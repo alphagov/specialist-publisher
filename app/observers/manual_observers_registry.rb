@@ -24,6 +24,12 @@ class ManualObserversRegistry
     ]
   end
 
+  def update
+    [
+      publishing_api_draft_exporter
+    ]
+  end
+
   def creation
     [
       publishing_api_draft_exporter

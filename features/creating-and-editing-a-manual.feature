@@ -15,6 +15,7 @@ Feature: Creating and editing a manual
     Given a draft manual exists
     When I edit a manual
     Then the manual should have been updated
+    And the edited manual should have been sent to the draft publishing api
 
   @javascript
   Scenario: Previewing a draft manual
