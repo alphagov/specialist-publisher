@@ -163,12 +163,17 @@ module ManualHelpers
       ).at_least(:once)
   end
 
-  def check_manual_is_published_to_publishing_api(slug)
-    assert_publishing_api_put_item("/#{slug}",
+  def check_manual_is_published_to_publishing_api(slug, draft: false)
+    attributes = {
       "format" => "manual",
       "rendering_app" => "manuals-frontend",
       "publishing_app" => "specialist-publisher",
-    )
+    }
+    if draft
+      assert_publishing_api_put_draft_item("/#{slug}", attributes)
+    else
+      assert_publishing_api_put_item("/#{slug}", attributes)
+    end
   end
 
   def check_manual_document_is_published_to_publishing_api(slug)

@@ -12,6 +12,10 @@ Then(/^the manual should exist$/) do
   check_manual_exists_with(@manual_fields)
 end
 
+Then(/^the manual should have been sent to the draft publishing api$/) do
+  check_manual_is_published_to_publishing_api(@manual_slug, draft: true)
+end
+
 Given(/^a draft manual exists$/) do
   @manual_slug = "guidance/example-manual-title"
   @manual_title = "Example Manual Title"

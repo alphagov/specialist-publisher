@@ -9,6 +9,7 @@ Feature: Creating and editing a manual
   Scenario: Create a new manual
     When I create a manual
     Then the manual should exist
+    And the manual should have been sent to the draft publishing api
 
   Scenario: Edit a draft manual
     Given a draft manual exists
