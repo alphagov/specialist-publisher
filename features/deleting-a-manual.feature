@@ -6,14 +6,14 @@ Feature: Script to delete a manual
     Given I am logged in as a "CMA" editor
 
   Scenario: Deleting a manual
-    Given a draft manual exists
+    Given a draft manual exists without any documents
     And a draft document exists for the manual
     When I run the deletion script
     And I confirm deletion
     Then the manual and its documents are deleted
 
   Scenario: Not confirming manual deletion
-    Given a draft manual exists
+    Given a draft manual exists without any documents
     And a draft document exists for the manual
     When I run the deletion script
     And I refuse deletion

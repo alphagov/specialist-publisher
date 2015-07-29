@@ -24,7 +24,7 @@ Feature: Attachments
 
   @regression
   Scenario: CMA editor can add and replace attachment to manual
-    Given a draft manual exists
+    Given a draft manual exists without any documents
     And a draft document exists for the manual
     When I attach a file and give it a title
     Then I see the attached file

@@ -24,7 +24,21 @@ Then(/^the edited manual should have been sent to the draft publishing api$/) do
   )
 end
 
-Given(/^a draft manual exists$/) do
+Given(/^a draft manual exists without any documents$/) do
+  @manual_slug = "guidance/example-manual-title"
+  @manual_title = "Example Manual Title"
+
+  @manual_fields = {
+    title: "Example Manual Title",
+    summary: "Nullam quis risus eget urna mollis ornare vel eu leo.",
+  }
+
+  create_manual(@manual_fields)
+
+  WebMock::RequestRegistry.instance.reset!
+end
+
+Given(/^a draft manual exists with some documents$/) do
   @manual_slug = "guidance/example-manual-title"
   @manual_title = "Example Manual Title"
 

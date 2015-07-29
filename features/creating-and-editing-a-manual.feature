@@ -12,14 +12,14 @@ Feature: Creating and editing a manual
     And the manual should have been sent to the draft publishing api
 
   Scenario: Edit a draft manual
-    Given a draft manual exists
+    Given a draft manual exists without any documents
     When I edit a manual
     Then the manual should have been updated
     And the edited manual should have been sent to the draft publishing api
 
   @javascript
   Scenario: Previewing a draft manual
-    Given a draft manual exists
+    Given a draft manual exists without any documents
     When I make changes and preview the manual
     Then I see the manual body preview
 
@@ -37,7 +37,7 @@ Feature: Creating and editing a manual
 
   @regression
   Scenario: Create and edit a manual with documents
-    Given a draft manual exists
+    Given a draft manual exists without any documents
     And a draft document exists for the manual
     When I edit a manual
     Then the manual's documents won't have changed
@@ -47,48 +47,48 @@ Feature: Creating and editing a manual
     Then I see errors for the title field
 
   Scenario: Try to create an invalid manual document
-    Given a draft manual exists
+    Given a draft manual exists without any documents
     When I create a document with empty fields
     Then I see errors for the document fields
 
   Scenario: Add a document to a manual
-    Given a draft manual exists
+    Given a draft manual exists without any documents
     When I create a document for the manual
     Then I see the manual has the new section
 
   Scenario: Edit a draft document on a manual
-    Given a draft manual exists
+    Given a draft manual exists without any documents
     And a draft document exists for the manual
     When I edit the document
     Then the document should have been updated
 
   Scenario: Attach a file to a manual document
-    Given a draft manual exists
+    Given a draft manual exists without any documents
     And a draft document exists for the manual
     When I attach a file and give it a title
     Then I see the attached file
 
   Scenario: Duplicating a manual title
-    Given a draft manual exists
+    Given a draft manual exists without any documents
     When I create another manual with the same slug
     Then I see a warning about slug clash at publication
 
   Scenario: Duplicating a section title
-    Given a draft manual exists
+    Given a draft manual exists without any documents
     And a draft document exists for the manual
     When I create a section with duplicate title
     Then I see a warning about section slug clash at publication
 
   @regression
   Scenario: Manual documents are not available as specialist documents
-    Given a draft manual exists
+    Given a draft manual exists without any documents
     And a draft document exists for the manual
     When I visit the specialist documents path for the manual document
     Then the document is not found
 
   @javascript
   Scenario: Previewing a draft manual document with an attachment
-    Given a draft manual exists
+    Given a draft manual exists without any documents
     And a draft document exists for the manual
     When I attach a file and give it a title
     Then I see the attached file
@@ -98,14 +98,14 @@ Feature: Creating and editing a manual
 
   @javascript
   Scenario: Previewing a new manual document
-    Given a draft manual exists
+    Given a draft manual exists without any documents
     When I create a document to preview
     And I preview the document
     Then I see the document body preview
 
   @javascript
   Scenario: Previewing a manual with invalid HTML
-    Given a draft manual exists
+    Given a draft manual exists without any documents
     When I create a document to preview
     And I add invalid HTML to the document body
     And I preview the document
