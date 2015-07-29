@@ -25,7 +25,9 @@ class ManualObserversRegistry
   end
 
   def creation
-    []
+    [
+      publishing_api_draft_exporter
+    ]
   end
 
   def withdrawal
@@ -114,6 +116,21 @@ private
           document
         ).call
       end
+    }
+  end
+
+  def publishing_api_draft_exporter
+    ->(manual) {
+      organisation = organisations_api.organisation(manual.attributes.fetch(:organisation_slug))
+
+      manual_renderer = SpecialistPublisherWiring.get(:manual_renderer)
+      ManualPublishingAPIExporter.new(
+        publishing_api.method(:put_draft_content_item),
+        organisation,
+        manual_renderer,
+        PublicationLog,
+        manual
+      ).call
     }
   end
 
