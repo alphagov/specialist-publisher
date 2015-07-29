@@ -9,7 +9,7 @@ class ManualSectionPublishingAPIExporter
   end
 
   def call
-    export_recipent.put_content_item(base_path, exportable_attributes)
+    export_recipent.call(base_path, exportable_attributes)
     document.mark_as_exported
   end
 

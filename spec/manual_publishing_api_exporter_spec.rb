@@ -14,7 +14,7 @@ describe ManualPublishingAPIExporter do
     )
   }
 
-  let(:export_recipent) { double(:export_recipent, put_content_item: nil) }
+  let(:export_recipent) { double(:export_recipent, call: nil) }
   let(:manual_renderer) { ->(_) { double(:rendered_manual, attributes: manual_attributes) } }
 
   let(:manual) {
@@ -95,7 +95,7 @@ describe ManualPublishingAPIExporter do
   it "exports the serialized document attributes" do
     subject.call
 
-    expect(export_recipent).to have_received(:put_content_item).with(
+    expect(export_recipent).to have_received(:call).with(
       "/guidance/my-first-manual",
       hash_including(
         content_id: "52ab9439-95c8-4d39-9b83-0a2050a0978b",
@@ -123,7 +123,7 @@ describe ManualPublishingAPIExporter do
   it "exports section metadata for the manual" do
     subject.call
 
-    expect(export_recipent).to have_received(:put_content_item).with(
+    expect(export_recipent).to have_received(:call).with(
       "/guidance/my-first-manual",
       hash_including(
         details: {

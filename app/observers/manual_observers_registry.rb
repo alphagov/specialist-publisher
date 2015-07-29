@@ -95,7 +95,7 @@ private
 
       manual_renderer = SpecialistPublisherWiring.get(:manual_renderer)
       ManualPublishingAPIExporter.new(
-        publishing_api,
+        publishing_api.method(:put_content_item),
         organisation,
         manual_renderer,
         PublicationLog,
@@ -107,7 +107,7 @@ private
         next unless document.needs_exporting?
 
         ManualSectionPublishingAPIExporter.new(
-          publishing_api,
+          publishing_api.method(:put_content_item),
           organisation,
           document_renderer,
           manual,

@@ -14,7 +14,7 @@ describe ManualSectionPublishingAPIExporter do
     )
   }
 
-  let(:export_recipent) { double(:export_recipent, put_content_item: nil) }
+  let(:export_recipent) { double(:export_recipent, call: nil) }
   let(:document_renderer) { ->(_) { double(:rendered_document, attributes: rendered_attributes) } }
 
   let(:organisation) {
@@ -63,7 +63,7 @@ describe ManualSectionPublishingAPIExporter do
   it "exports the serialized document attributes" do
     subject.call
 
-    expect(export_recipent).to have_received(:put_content_item).with(
+    expect(export_recipent).to have_received(:call).with(
       "/guidance/my-first-manual/first-section",
       hash_including(
         content_id: "c19ffb7d-448c-4cc8-bece-022662ef9611",
@@ -86,7 +86,7 @@ describe ManualSectionPublishingAPIExporter do
   it "exports section metadata for the document" do
     subject.call
 
-    expect(export_recipent).to have_received(:put_content_item).with(
+    expect(export_recipent).to have_received(:call).with(
       "/guidance/my-first-manual/first-section",
       hash_including(
         details: {
