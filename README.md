@@ -75,12 +75,6 @@ $ bundle exec rake
 2. Add missing field definitions in `config/schema/field_definitions.json`.
 3. Add the new document type in `config/schema/indexes/mainstream.json`.
 
-### [govuk_content_models](https://github.com/alphagov/govuk_content_models)
-
-1. Add the new artefact type in `app/models/artefact.rb`.
-2. Bump the gem version.
-3. Update `govuk_content_models` gem version in [panopticon](https://github.com/alphagov/panopticon) and specialist-publisher.
-
 ### Testing your new specialist document format
 
 We have a spec for each model but most of the testing is done in Cucumber tests. Each document format has a feature for creating & editing, publishing and withdrawing. Be sure to add an editor type to `test/factories.rb` for the owning Org of the newformat (if there isn't already a format owned by that Org). The step definitions in each of the tests are pretty similar, so the methods in `features/support/document_format_helpers.rb` call the abstract methods in `features/support/document_helpers.rb`. The features should also cover add attachments, if you follow the same pattern as the other document formats.
