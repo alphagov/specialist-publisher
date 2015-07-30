@@ -14,6 +14,7 @@ FinderRummagerPresenter = Struct.new(:metadata, :timestamp) do
       "link" => metadata.fetch("base_path"),
       "format" => "finder",
       "public_timestamp" => timestamp,
+      "specialist_sectors" => metadata.fetch("topics", []),
     }
   end
 end

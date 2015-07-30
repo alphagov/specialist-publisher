@@ -15,6 +15,9 @@ describe RummagerFinderPublisher do
             "format" => "a_report_format",
             "signup_content_id" => SecureRandom.uuid,
             "logo_path" => "http://example.com/logo.png",
+            "topics" => [
+              "business-tax/paye",
+            ],
           },
           timestamp: "2015-01-05T10:45:10.000+00:00",
         },
@@ -26,6 +29,10 @@ describe RummagerFinderPublisher do
             "content_id" => SecureRandom.uuid,
             "format" => "some_case_format",
             "logo_path" => "http://example.com/logo.png",
+            "topics" => [
+              "competition/mergers",
+              "competition/markets",
+            ],
           },
           timestamp: "2015-02-14T11:43:23.000+00:00",
         }
@@ -43,6 +50,9 @@ describe RummagerFinderPublisher do
           "link" => "/first-finder",
           "format" => "finder",
           "public_timestamp" => "2015-01-05T10:45:10.000+00:00",
+          "specialist_sectors" => [
+            "business-tax/paye",
+          ]
         })
 
       expect(rummager).to receive(:add_document)
@@ -52,6 +62,10 @@ describe RummagerFinderPublisher do
           "link" => "/second-finder",
           "format" => "finder",
           "public_timestamp" => "2015-02-14T11:43:23.000+00:00",
+          "specialist_sectors" => [
+            "competition/mergers",
+            "competition/markets",
+          ],
         })
 
       RummagerFinderPublisher.new(metadata).call
