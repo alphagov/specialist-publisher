@@ -93,4 +93,20 @@ describe ManualRecord, hits_db: true do
       expect(ManualRecord.all_by_updated_at.to_a).to eq([later_edition, middle_edition, early_edition])
     end
   end
+
+  describe "#tags" do
+
+    it "can store tags" do
+      tags = [
+        {
+          type: "A tag type",
+          slug: "a-tag-slug",
+        }
+      ]
+
+      record.editions.create!(tags: tags)
+
+      expect(record.latest_edition.tags).to eq(tags)
+    end
+  end
 end

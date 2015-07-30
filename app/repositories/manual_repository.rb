@@ -61,6 +61,7 @@ private
       summary: manual.summary,
       body: manual.body,
       state: manual.state,
+      tags: manual.tags
     }
   end
 

@@ -9,6 +9,7 @@ class Manual
     :state,
     :version_number,
     :updated_at,
+    :tags,
   )
 
   def initialize(attributes)
@@ -34,6 +35,7 @@ class Manual
       state: state,
       version_number: version_number,
       updated_at: updated_at,
+      tags: tags,
     }
   end
 
@@ -44,6 +46,7 @@ class Manual
     @body = attributes.fetch(:body) { body }
     @organisation_slug = attributes.fetch(:organisation_slug) { organisation_slug }
     @state = attributes.fetch(:state) { state }
+    @tags = attributes.fetch(:tags) { tags }
 
     self
   end
