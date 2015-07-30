@@ -3,7 +3,11 @@ require "lib/specialist_document_bulk_exporter"
 class ExportAllDocumentsToPublishingApi < Mongoid::Migration
   def self.up
     SpecialistPublisher.document_types.each do |type|
-      SpecialistDocumentBulkExporter.new(type, formatter: MigrationSpecialistDocumentPublishingAPIFormatter).call
+      SpecialistDocumentBulkExporter.new(
+        type,
+        formatter: MigrationSpecialistDocumentPublishingAPIFormatter,
+        logger: Logger.new(STDOUT)
+      ).call
     end
   end
 

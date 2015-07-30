@@ -1,11 +1,13 @@
 class SpecialistDocumentBulkExporter
-  attr_reader :type, :formatter, :exporter
+  attr_reader :type, :formatter, :exporter, :logger
 
   def initialize(type,
                  formatter: SpecialistDocumentPublishingAPIFormatter,
-                 exporter: SpecialistDocumentPublishingAPIExporter)
+                 exporter: SpecialistDocumentPublishingAPIExporter,
+                 logger: Logger.new(nil))
     @formatter = formatter
     @exporter = exporter
+    @logger = logger
     @type = type
   end
 
@@ -14,12 +16,14 @@ class SpecialistDocumentBulkExporter
     export_all_editions("draft")
   end
 
+  private
+
   def export_all_editions(state)
     editions = specialist_document_editions.where(state: state)
-    puts "Exporting #{editions.count} #{state} #{type} documents"
+    logger.info("Exporting #{editions.count} #{state} #{type} documents")
 
     editions.each_with_index do |edition, i|
-      puts i if i % 10 == 0
+      logger.info(i) if i % 10 == 0
       export_edition(edition)
     end
   end
