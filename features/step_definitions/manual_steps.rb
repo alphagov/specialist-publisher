@@ -102,8 +102,8 @@ Then(/^I see errors for the title field$/) do
 end
 
 When(/^I create a document for the manual$/) do
-  @document_title = "Section 1"
-  @document_slug = [@manual_slug, "section-1"].join("/")
+  @document_title = "Created Section 1"
+  @document_slug = [@manual_slug, "created-section-1"].join("/")
 
   @document_fields = {
     section_title: @document_title,
