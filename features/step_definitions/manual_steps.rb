@@ -53,6 +53,7 @@ Given(/^a draft manual exists with some documents$/) do
     manual_fields: @manual_fields,
     count: 2,
   )
+  WebMock::RequestRegistry.instance.reset!
 end
 
 Given(/^a draft manual was created without the UI$/) do
@@ -65,6 +66,7 @@ Given(/^a draft manual was created without the UI$/) do
   }
 
   @manual = create_manual_without_ui(@manual_fields)
+  WebMock::RequestRegistry.instance.reset!
 end
 
 Given(/^a draft manual exists belonging to "(.*?)"$/) do |organisation_slug|
@@ -77,6 +79,7 @@ Given(/^a draft manual exists belonging to "(.*?)"$/) do |organisation_slug|
   }
 
   @manual = create_manual_without_ui(@manual_fields, organisation_slug: organisation_slug)
+  WebMock::RequestRegistry.instance.reset!
 end
 
 When(/^I edit a manual$/) do
@@ -156,6 +159,7 @@ Given(/^a draft document exists for the manual$/) do
   }
 
   create_manual_document(@manual_fields.fetch(:title), @document_fields)
+  WebMock::RequestRegistry.instance.reset!
 end
 
 Given(/^a draft section was created for the manual without the UI$/) do
@@ -169,6 +173,7 @@ Given(/^a draft section was created for the manual without the UI$/) do
   }
 
   @section = create_manual_document_without_ui(@manual, @document_fields)
+  WebMock::RequestRegistry.instance.reset!
 end
 
 When(/^I edit the document$/) do
