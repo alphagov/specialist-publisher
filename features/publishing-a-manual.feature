@@ -14,7 +14,8 @@ Feature: Publishing a manual
   Scenario: Edit and re-publish a manual
     Given a published manual exists
     When I edit one of the manual's documents
-    And I publish the manual
+    Then the updated manual document is available to preview
+    When I publish the manual
     Then the manual and the edited document are published
 
   Scenario: Add a section to a published manual

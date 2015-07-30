@@ -121,6 +121,8 @@ private
           manual,
           document
         ).call
+
+        document.mark_as_exported
       end
     }
   end

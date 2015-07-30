@@ -10,7 +10,6 @@ class ManualSectionPublishingAPIExporter
 
   def call
     export_recipent.call(base_path, exportable_attributes)
-    document.mark_as_exported
   end
 
 private

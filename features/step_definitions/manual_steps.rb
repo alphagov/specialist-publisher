@@ -267,6 +267,32 @@ Then(/^the manual and the edited document are published$/) do
   )
 end
 
+Then(/^the updated manual document is available to preview$/) do
+  check_manual_document_is_published_to_publishing_api(@updated_document[:slug], draft: true)
+  updated_documents = [@updated_document] + @attributes_for_documents[1..-1]
+  manual_table_of_contents_attributes = {
+    details: {
+      child_section_groups: [
+        {
+          title: "Contents",
+          child_sections: updated_documents.map do |updated_document|
+            {
+              title: updated_document[:fields][:section_title],
+              description: updated_document[:fields][:section_summary],
+              base_path: "/#{updated_document[:slug]}",
+            }
+          end
+        }
+      ]
+    }
+  }
+  check_manual_is_published_to_publishing_api(
+    @manual_slug,
+    extra_attributes: manual_table_of_contents_attributes,
+    draft: true
+  )
+end
+
 Then(/^the manual and its new document are published$/) do
   check_manual_and_documents_were_published(
     @manual_slug,
