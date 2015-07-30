@@ -55,6 +55,7 @@ Feature: Creating and editing a manual
     Given a draft manual exists without any documents
     When I create a document for the manual
     Then I see the manual has the new section
+    And the manual document and table of contents will have been sent to the draft publishing api
 
   Scenario: Edit a draft document on a manual
     Given a draft manual exists without any documents

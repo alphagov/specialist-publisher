@@ -120,6 +120,31 @@ Then(/^I see the manual has the new section$/) do
   expect(page).to have_content(@document_fields.fetch(:section_title))
 end
 
+Then(/^the manual document and table of contents will have been sent to the draft publishing api$/) do
+  check_manual_document_is_published_to_publishing_api(@document_slug, draft: true)
+  manual_table_of_contents_attributes = {
+    details: {
+      child_section_groups: [
+        {
+          title: "Contents",
+          child_sections: [
+            {
+              title: @document_title,
+              description: @document_fields[:section_summary],
+              base_path: "/#{@document_slug}",
+            }
+          ]
+        }
+      ]
+    }
+  }
+  check_manual_is_published_to_publishing_api(
+    @manual_slug,
+    extra_attributes: manual_table_of_contents_attributes,
+    draft: true
+  )
+end
+
 Given(/^a draft document exists for the manual$/) do
   @document_title = "New section"
   @document_slug = "guidance/example-manual-title/new-section"

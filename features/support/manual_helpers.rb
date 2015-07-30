@@ -170,18 +170,23 @@ module ManualHelpers
       "publishing_app" => "specialist-publisher",
     }.merge(extra_attributes)
     if draft
+      assert_publishing_api_put_draft_item("/#{slug}", request_json_including(attributes))
+    else
+      assert_publishing_api_put_item("/#{slug}", request_json_including(attributes))
+    end
+  end
+
+  def check_manual_document_is_published_to_publishing_api(slug, draft: false)
+    attributes = {
+      "format" => "manual_section",
+      "rendering_app" => "manuals-frontend",
+      "publishing_app" => "specialist-publisher",
+    }
+    if draft
       assert_publishing_api_put_draft_item("/#{slug}", attributes)
     else
       assert_publishing_api_put_item("/#{slug}", attributes)
     end
-  end
-
-  def check_manual_document_is_published_to_publishing_api(slug)
-    assert_publishing_api_put_item("/#{slug}",
-      "format" => "manual_section",
-      "rendering_app" => "manuals-frontend",
-      "publishing_app" => "specialist-publisher",
-    )
   end
 
   def check_manual_section_is_published_to_rummager(slug, attrs, manual_attrs)

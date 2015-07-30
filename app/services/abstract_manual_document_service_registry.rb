@@ -21,7 +21,7 @@ class AbstractManualDocumentServiceRegistry
   def create(context)
     CreateManualDocumentService.new(
       manual_repository: manual_repository,
-      listeners: [],
+      listeners: [publishing_api_draft_exporter],
       context: context,
     )
   end
@@ -79,5 +79,39 @@ private
 
   def manual_repository
     raise NotImplementedError
+  end
+
+  def publishing_api_draft_exporter
+    ->(manual_document, manual) {
+      organisation = organisations_api.organisation(manual.attributes.fetch(:organisation_slug))
+
+      ManualPublishingAPIExporter.new(
+        publishing_api.method(:put_draft_content_item),
+        organisation,
+        SpecialistPublisherWiring.get(:manual_renderer),
+        PublicationLog,
+        manual
+      ).call
+
+      ManualSectionPublishingAPIExporter.new(
+        publishing_api.method(:put_draft_content_item),
+        organisation,
+        SpecialistPublisherWiring.get(:manual_document_renderer),
+        manual,
+        manual_document
+      ).call
+    }
+  end
+
+  def manual_document_renderer
+    SpecialistPublisherWiring.get(:manual_document_renderer)
+  end
+
+  def publishing_api
+    SpecialistPublisherWiring.get(:publishing_api)
+  end
+
+  def organisations_api
+    GdsApi::Organisations.new(ORGANISATIONS_API_BASE_PATH)
   end
 end
