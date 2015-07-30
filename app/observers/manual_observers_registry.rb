@@ -122,7 +122,7 @@ private
           document
         ).call
 
-        document.mark_as_exported
+        document.mark_as_exported_to_live_publishing_api!
       end
     }
   end

@@ -139,7 +139,7 @@ class SpecialistDocument
     latest_edition.exported_at.nil?
   end
 
-  def mark_as_exported
+  def mark_as_exported_to_live_publishing_api!
     edition = latest_edition
     edition.exported_at = Time.zone.now
     edition.save
