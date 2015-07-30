@@ -1,7 +1,8 @@
 class UpdateManualDocumentService
-  def initialize(manual_repository, context)
+  def initialize(manual_repository:, context:, listeners:)
     @manual_repository = manual_repository
     @context = context
+    @listeners = listeners
   end
 
   def call
@@ -9,6 +10,7 @@ class UpdateManualDocumentService
 
     if document.valid?
       manual_repository.store(manual)
+      notify_listeners
     end
 
     [manual, document]
@@ -16,7 +18,7 @@ class UpdateManualDocumentService
 
   private
 
-  attr_reader :manual_repository, :context
+  attr_reader :manual_repository, :context, :listeners
 
   def document
     @document ||= manual.documents.find { |d| d.id == document_id }
@@ -36,5 +38,11 @@ class UpdateManualDocumentService
 
   def document_params
     context.params.fetch("document")
+  end
+
+  def notify_listeners
+    listeners.each do |listener|
+      listener.call(document, manual)
+    end
   end
 end

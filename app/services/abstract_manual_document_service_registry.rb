@@ -28,8 +28,9 @@ class AbstractManualDocumentServiceRegistry
 
   def update(context)
     UpdateManualDocumentService.new(
-      manual_repository,
-      context,
+      manual_repository: manual_repository,
+      context: context,
+      listeners: [publishing_api_draft_exporter]
     )
   end
 

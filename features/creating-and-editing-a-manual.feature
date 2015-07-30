@@ -62,6 +62,7 @@ Feature: Creating and editing a manual
     And a draft document exists for the manual
     When I edit the document
     Then the document should have been updated
+    And the updated manual document at the new slug and updated table of contents will have been sent to the draft publishing api
 
   Scenario: Attach a file to a manual document
     Given a draft manual exists without any documents
