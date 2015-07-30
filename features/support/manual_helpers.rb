@@ -17,6 +17,7 @@ module ManualHelpers
   end
 
   def create_manual_without_ui(fields, organisation_slug: "ministry-of-tea")
+    stub_organisation_details(organisation_slug)
     manual_services = OrganisationalManualServiceRegistry.new(
       organisation_slug: organisation_slug,
     )

@@ -28,6 +28,7 @@ end
 Given(/^there are manuals created by multiple organisations$/) do
 
   login_as(:cma_editor)
+  stub_organisation_details(GDS::SSO.test_user.organisation_slug)
   @cma_manual_fields = {
     title: "Manual on Competition",
     summary: "Nullam quis risus eget urna mollis ornare vel eu leo.",
@@ -35,6 +36,7 @@ Given(/^there are manuals created by multiple organisations$/) do
   create_manual(@cma_manual_fields)
 
   login_as(:generic_editor)
+  stub_organisation_details(GDS::SSO.test_user.organisation_slug)
   @tea_manual_fields = {
     title: "Manual on Tea",
     summary: "Nullam quis risus eget urna mollis ornare vel eu leo.",
@@ -59,6 +61,7 @@ end
 
 Given(/^I am logged in as a writer$/) do
   login_as(:cma_writer)
+  stub_organisation_details(GDS::SSO.test_user.organisation_slug)
 end
 
 Then(/^I can edit cases and manuals$/) do
