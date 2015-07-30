@@ -3,6 +3,7 @@
   "base_path": "/aaib-reports",
   "format_name": "Air Accidents Investigation Branch report",
   "name": "Air Accidents Investigation Branch reports",
+  "description": "Find reports of AAIB investigations into air accidents and incidents",
   "beta": true,
   "filter": {
     "document_type": "aaib_report"

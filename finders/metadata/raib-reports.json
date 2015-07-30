@@ -3,6 +3,7 @@
   "base_path": "/raib-reports",
   "format_name": "Rail Accident Investigation Branch report",
   "name": "Rail Accident Investigation Branch reports",
+  "description": "Find reports of RAIB investigations into rail accidents and incidents",
   "filter": {
     "document_type": "raib_report"
   },

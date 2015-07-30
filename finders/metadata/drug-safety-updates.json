@@ -3,6 +3,7 @@
   "base_path": "/drug-safety-update",
   "format_name": "Drug Safety Update",
   "name": "Drug Safety Update",
+  "description": "Find drug safety updates issued by MHRA",
   "filter": {
     "document_type": "drug_safety_update"
   },
