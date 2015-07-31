@@ -3,6 +3,7 @@
   "base_path": "/maib-reports",
   "format_name": "Marine Accident Investigation Branch report",
   "name": "Marine Accident Investigation Branch reports",
+  "description": "Find reports of MAIB investigations into marine accidents and incidents",
   "filter": {
     "document_type": "maib_report"
   },

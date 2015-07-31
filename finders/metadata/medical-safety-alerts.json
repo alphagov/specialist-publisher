@@ -3,6 +3,7 @@
   "base_path": "/drug-device-alerts",
   "format_name": "Medical safety alert",
   "name": "Alerts and recalls for drugs and medical devices",
+  "description": "Find alerts and recalls issued by MHRA",
   "filter": {
     "document_type": "medical_safety_alert"
   },
@@ -13,6 +14,10 @@
   "show_summaries": true,
   "organisations": ["240f72bd-9a4d-4f39-94d9-77235cadde8e"],
   "related": ["602be505-4cf4-4f8c-8bfc-7bc4b63a7f47"],
+  "topics": [
+    "medicines-medical-devices-blood/medical-devices-regulation-safety",
+    "medicines-medical-devices-blood/vigilance-safety-alerts"
+  ],
   "email_filter_by": "alert_type",
   "email_signup_choice": [
     {

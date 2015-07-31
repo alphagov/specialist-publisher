@@ -3,6 +3,7 @@
   "base_path": "/international-development-funding",
   "format_name": "International development funding",
   "name": "International development funding",
+  "description": "Find and apply for funds to run international development projects",
   "filter": {
     "document_type": "international_development_fund"
   },
