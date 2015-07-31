@@ -561,3 +561,44 @@ end
 Then(/^the manual should still belong to "(.*?)"$/) do |organisation_slug|
   check_manual_has_organisation_slug(@manual_fields.merge(title: @new_title), organisation_slug)
 end
+
+When(/^I reorder the documents$/) do
+  click_on("Reorder sections")
+  elems = page.all(".reorderable-document-list li.ui-sortable-handle")
+  elems[0].drag_to(elems[1])
+  click_on("Save section order")
+  @reordered_document_attributes = [
+    @attributes_for_documents[1],
+    @attributes_for_documents[0]
+  ]
+end
+
+Then(/^the order of the documents in the manual should have been updated$/) do
+  @reordered_document_attributes.map { |doc| doc[:title] }.each.with_index do |title, index|
+    expect(page).to have_css(".document-list li.document:nth-child(#{index + 1}) .document-title", text: title)
+  end
+end
+
+Then(/^the new order should be visible in the preview environment$/) do
+  manual_table_of_contents_attributes = {
+    details: {
+      child_section_groups: [
+        {
+          title: "Contents",
+          child_sections: @reordered_document_attributes.map do |doc|
+            {
+              title: doc[:fields][:section_title],
+              description: doc[:fields][:section_summary],
+              base_path: "/#{doc[:slug]}",
+            }
+          end
+        }
+      ]
+    }
+  }
+  check_manual_is_published_to_publishing_api(
+    @manual_slug,
+    extra_attributes: manual_table_of_contents_attributes,
+    draft: true
+  )
+end

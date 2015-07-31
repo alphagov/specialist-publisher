@@ -21,7 +21,10 @@ class AbstractManualDocumentServiceRegistry
   def create(context)
     CreateManualDocumentService.new(
       manual_repository: manual_repository,
-      listeners: [publishing_api_draft_exporter],
+      listeners: [
+        publishing_api_draft_manual_exporter,
+        publishing_api_draft_manual_document_exporter
+      ],
       context: context,
     )
   end
@@ -30,7 +33,10 @@ class AbstractManualDocumentServiceRegistry
     UpdateManualDocumentService.new(
       manual_repository: manual_repository,
       context: context,
-      listeners: [publishing_api_draft_exporter]
+      listeners: [
+        publishing_api_draft_manual_exporter,
+        publishing_api_draft_manual_document_exporter
+      ],
     )
   end
 
@@ -59,6 +65,7 @@ class AbstractManualDocumentServiceRegistry
     ReorderManualDocumentsService.new(
       manual_repository,
       context,
+      listeners: [publishing_api_draft_manual_exporter]
     )
   end
 
@@ -82,21 +89,29 @@ private
     raise NotImplementedError
   end
 
-  def publishing_api_draft_exporter
-    ->(manual_document, manual) {
-      organisation = organisations_api.organisation(manual.attributes.fetch(:organisation_slug))
+  def organisation(slug)
+    @organisations ||= {}
+    @organisations[slug] ||= organisations_api.organisation(slug)
+    @organisations[slug]
+  end
 
+  def publishing_api_draft_manual_exporter
+    ->(_, manual) {
       ManualPublishingAPIExporter.new(
         publishing_api.method(:put_draft_content_item),
-        organisation,
+        organisation(manual.attributes.fetch(:organisation_slug)),
         SpecialistPublisherWiring.get(:manual_renderer),
         PublicationLog,
         manual
       ).call
+    }
+  end
 
+  def publishing_api_draft_manual_document_exporter
+    ->(manual_document, manual) {
       ManualSectionPublishingAPIExporter.new(
         publishing_api.method(:put_draft_content_item),
-        organisation,
+        organisation(manual.attributes.fetch(:organisation_slug)),
         SpecialistPublisherWiring.get(:manual_document_renderer),
         manual,
         manual_document

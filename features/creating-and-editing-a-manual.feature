@@ -112,3 +112,10 @@ Feature: Creating and editing a manual
     And I add invalid HTML to the document body
     And I preview the document
     Then I should see an error message about a "Body" field containing javascript
+
+  @javascript
+  Scenario: Reordering manual sections
+    Given a draft manual exists with some documents
+    When I reorder the documents
+    Then the order of the documents in the manual should have been updated
+    And the new order should be visible in the preview environment
