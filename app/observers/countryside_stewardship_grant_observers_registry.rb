@@ -4,7 +4,7 @@ require "markdown_attachment_processor"
 
 class CountrysideStewardshipGrantObserversRegistry < AbstractSpecialistDocumentObserversRegistry
 
-  private
+private
 
   def finder_schema
     SpecialistPublisherWiring.get(:countryside_stewardship_grant_finder_schema)

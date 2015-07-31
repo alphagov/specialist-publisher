@@ -3,7 +3,7 @@ require "formatters/vehicle_recalls_and_faults_alert_publication_alert_formatter
 require "markdown_attachment_processor"
 
 class VehicleRecallsAndFaultsAlertObserversRegistry < AbstractSpecialistDocumentObserversRegistry
-  private
+private
 
   def finder_schema
     SpecialistPublisherWiring.get(:vehicle_recalls_and_faults_alert_finder_schema)

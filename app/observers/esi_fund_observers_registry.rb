@@ -4,7 +4,7 @@ require "markdown_attachment_processor"
 
 class EsiFundObserversRegistry < AbstractSpecialistDocumentObserversRegistry
 
-  private
+private
   def finder_schema
     SpecialistPublisherWiring.get(:esi_fund_finder_schema)
   end
