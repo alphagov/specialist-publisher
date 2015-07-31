@@ -27,7 +27,6 @@ Publishing App for Specialist Documents and Manuals.
 ## Dependencies
 
 * [alphagov/static](http://github.com/alphagov/static): provides static assets (JS/CSS)
-* [alphagov/panopticon](http://github.com/alphagov/panopticon): provides public URLs for content on GOV.UK
 * [alphagov/asset-manager](http://github.com/alphagov/asset-manager): provides uploading for static files
 * [alphagov/rummager](http://github.com/alphagov/rummager): allows documents to be indexed for searching in both Finders and site search
 * [alphagov/publishing-api](http://github.com/alphagov/publishing-api): allows documents to be published to the Publishing queue
@@ -62,7 +61,6 @@ $ bundle exec rake
 1. Define a repository in `app/repositories/repository_registry.rb`
 1. Add observers, along with formatters required. In `app/exporters/formatters/`:
   - `document_type_publication_alert_formatter.rb`
-  - `document_type_artefact_formatter.rb` for Panopticon
   - `document_type_indexable_formatter.rb` for Rummager
   - `document_type_observers_registry.rb` in `app/observers/`
   Add the observer registry to the `observer_registry` hash in `app/lib/specialist_publisher.rb`

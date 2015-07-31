@@ -78,7 +78,6 @@ module ManualHelpers
   end
 
   def stub_manual_publication_observers(organisation_slug)
-    stub_panopticon
     stub_rummager
     stub_publishing_api
     stub_organisation_details(organisation_slug)
@@ -136,22 +135,7 @@ module ManualHelpers
     click_link manual_title
   end
 
-  def check_manual_was_published_to_panopticon(slug, attrs)
-    expect(fake_panopticon).to have_received(:create_artefact!)
-      .with(
-        hash_including(
-          name: attrs.fetch(:title),
-          slug: slug,
-          state: "live",
-          kind: "manual",
-          rendering_app: "manuals-frontend",
-        )
-      ).at_least(:once)
-  end
-
   def check_manual_and_documents_were_published(manual_slug, manual_attrs, document_slug, document_attrs)
-    check_manual_was_published_to_panopticon(manual_slug, manual_attrs)
-
     check_manual_is_published_to_publishing_api(manual_slug)
     check_manual_document_is_published_to_publishing_api(document_slug)
 
@@ -273,7 +257,6 @@ module ManualHelpers
   end
 
   def stub_manual_withdrawal_observers
-    stub_panopticon
     stub_rummager
     stub_publishing_api
   end
@@ -288,7 +271,6 @@ module ManualHelpers
   def check_manual_is_withdrawn(manual_title, manual_slug, attributes_for_documents)
     check_manual_is_withdrawn_from_publishing_api(manual_slug, attributes_for_documents)
     check_manual_is_withdrawn_from_rummager(manual_slug, attributes_for_documents)
-    check_manual_is_withdrawn_from_panopticon(manual_slug)
   end
 
   def check_manual_is_withdrawn_from_publishing_api(manual_slug, attributes_for_documents)
@@ -315,22 +297,6 @@ module ManualHelpers
         .with(
           "manual_section",
           document_attributes[:slug],
-        )
-    end
-  end
-
-  def check_manual_is_withdrawn_from_panopticon(manual_slug)
-    slugs = [
-      manual_slug,
-    ]
-
-    slugs.each do |slug|
-      expect(fake_panopticon).to have_received(:put_artefact!)
-        .with(
-          slug,
-          hash_including(
-            state: "archived",
-          )
         )
     end
   end

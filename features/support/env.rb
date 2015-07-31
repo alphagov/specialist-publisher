@@ -94,7 +94,6 @@ end
 # See https://github.com/cucumber/cucumber-rails/blob/master/features/choose_javascript_database_strategy.feature
 Cucumber::Rails::Database.javascript_strategy = :truncation
 
-require "panopticon_helpers"
 require "rummager_helpers"
 require "publishing_api_helpers"
 require "organisations_api_helpers"
@@ -121,7 +120,6 @@ require "msa_helpers"
 require "raib_report_helpers"
 require "vehicle_recalls_and_faults_alert_helpers"
 
-World(PanopticonHelpers)
 World(RummagerHelpers)
 World(PublishingAPIHelpers)
 World(OrganisationsAPIHelpers)

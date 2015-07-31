@@ -39,12 +39,6 @@ Feature: Creating and editing a CMA case
     Then the title has been updated
     And the URL slug remains unchanged
 
-  Scenario: Panopticon timeout
-    Given a draft CMA case exists
-    And Panopticon is timing out
-    When I edit a CMA case
-    Then I should not see an error
-
   @javascript
   Scenario: Previewing a draft CMA case
     Given a draft CMA case exists

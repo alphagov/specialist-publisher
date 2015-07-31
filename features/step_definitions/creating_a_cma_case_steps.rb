@@ -150,10 +150,6 @@ When(/^I preview the case$/) do
   generate_preview
 end
 
-Given(/^Panopticon is timing out$/) do
-  mock_panopticon_timeout
-end
-
 Then(/^I should not see an error$/) do
   check_publication_has_not_raised_error
 end

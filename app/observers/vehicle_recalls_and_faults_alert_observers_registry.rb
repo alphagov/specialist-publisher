@@ -1,14 +1,9 @@
-require "formatters/vehicle_recalls_and_faults_alert_artefact_formatter"
 require "formatters/vehicle_recalls_and_faults_alert_indexable_formatter"
 require "formatters/vehicle_recalls_and_faults_alert_publication_alert_formatter"
 require "markdown_attachment_processor"
 
 class VehicleRecallsAndFaultsAlertObserversRegistry < AbstractSpecialistDocumentObserversRegistry
   private
-
-  def format_document_as_artefact(document)
-    VehicleRecallsAndFaultsAlertArtefactFormatter.new(document)
-  end
 
   def finder_schema
     SpecialistPublisherWiring.get(:vehicle_recalls_and_faults_alert_finder_schema)

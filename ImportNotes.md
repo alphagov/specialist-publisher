@@ -45,7 +45,6 @@ document.
 * [finder-api](https://github.com/alphagov/finder-api)
 * [govuk_content_api](https://github.com/alphagov/govuk_content_api)
 * [imminence](https://github.com/alphagov/imminence)
-* [panopticon](https://github.com/alphagov/panopticon)
 * puppet
 * [rummager](https://github.com/alphagov/rummager)
 * [specialist-frontend](https://github.com/alphagov/specialist-frontend)
@@ -59,7 +58,6 @@ document.
 10.1.1.254      static.dev.gov.uk
 10.1.1.254      contentapi.dev.gov.uk
 10.1.1.254      rummager.dev.gov.uk
-10.1.1.254      panopticon.dev.gov.uk
 10.1.1.254      www.dev.gov.uk
 10.1.1.254      assets-origin.dev.gov.uk
 10.1.1.254      dev.gov.uk

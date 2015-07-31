@@ -21,7 +21,6 @@ class AbstractSpecialistDocumentObserversRegistry
       publication_logger,
       content_api_exporter,
       publishing_api_exporter,
-      panopticon_exporter,
       rummager_exporter,
       publication_alert_exporter,
     ]
@@ -30,7 +29,6 @@ class AbstractSpecialistDocumentObserversRegistry
   def republication
     [
       content_api_exporter,
-      panopticon_exporter,
       rummager_exporter,
     ]
   end
@@ -39,20 +37,11 @@ class AbstractSpecialistDocumentObserversRegistry
     [
       content_api_withdrawer,
       publishing_api_withdrawer,
-      panopticon_exporter,
       rummager_withdrawer,
     ]
   end
 
 private
-  def panopticon_exporter
-    ->(document) {
-      panopticon_registerer.call(
-        format_document_as_artefact(document)
-      )
-    }
-  end
-
   def publishing_api_exporter
     ->(document) {
       rendered_document = SpecialistDocumentPublishingAPIFormatter.new(
@@ -76,14 +65,6 @@ private
         entity: document,
       ).call
     }
-  end
-
-  def panopticon_registerer
-    SpecialistPublisherWiring.get(:panopticon_registerer)
-  end
-
-  def format_document_as_artefact(document)
-    raise NotImplementedError
   end
 
   def content_api_exporter

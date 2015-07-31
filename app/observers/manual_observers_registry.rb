@@ -12,7 +12,6 @@ class ManualObserversRegistry
     # should happen before publishing to search.
     [
       publication_logger,
-      panopticon_exporter,
       publishing_api_exporter,
       rummager_exporter,
     ]
@@ -20,7 +19,6 @@ class ManualObserversRegistry
 
   def republication
     [
-      panopticon_exporter,
       publishing_api_exporter,
       rummager_exporter,
     ]
@@ -34,7 +32,6 @@ class ManualObserversRegistry
     [
       publishing_api_withdrawer,
       rummager_withdrawer,
-      panopticon_exporter,
     ]
   end
 
@@ -90,10 +87,6 @@ private
         )
       end
     }
-  end
-
-  def panopticon_exporter
-    SpecialistPublisherWiring.get(:manual_panopticon_registerer)
   end
 
   def publishing_api_exporter

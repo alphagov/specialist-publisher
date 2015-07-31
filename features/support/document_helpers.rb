@@ -34,26 +34,6 @@ module DocumentHelpers
     expect(page).to have_link(expected_slug)
   end
 
-  def check_published_with_panopticon(slug, title)
-    expect(fake_panopticon).to have_received(:create_artefact!)
-      .with(hash_including(
-        slug: slug,
-        name: title,
-        state: "live",
-      ))
-  end
-
-  def check_document_republished_with_panopticon(slug, title)
-    expect(fake_panopticon).to have_received(:put_artefact!)
-      .with(
-        slug,
-        hash_including(
-          name: title,
-          state: "live",
-        ),
-      )
-  end
-
   def check_document_published_to_publishing_api(slug, fields, draft: false)
     attributes = {
       title: fields[:title],
@@ -118,11 +98,6 @@ module DocumentHelpers
   end
 
   def check_document_is_withdrawn(slug, document_title)
-    expect(fake_panopticon).to have_received(:put_artefact!)
-      .with(slug, hash_including(
-        state: "archived",
-      ))
-
     assert_publishing_api_put_item("/#{slug}", format: "gone")
 
     expect(page).to have_content("withdrawn")
@@ -149,7 +124,6 @@ module DocumentHelpers
 
   def check_document_is_published(slug, fields)
     check_document_published_to_content_api(slug, fields)
-    check_published_with_panopticon(slug, fields.fetch(:title))
     check_document_published_to_publishing_api(slug, fields)
     check_added_to_rummager(
       slug,
@@ -189,7 +163,6 @@ module DocumentHelpers
   end
 
   def check_document_was_republished(slug, fields)
-    check_document_republished_with_panopticon(slug, fields.fetch(:title))
     check_document_published_to_content_api(slug, fields)
     check_added_to_rummager(
       slug,
