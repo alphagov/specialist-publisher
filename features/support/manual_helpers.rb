@@ -1,7 +1,9 @@
 require "gds_api/test_helpers/publishing_api"
+require "gds_api/test_helpers/content_api"
 
 module ManualHelpers
   include GdsApi::TestHelpers::PublishingApi
+  include GdsApi::TestHelpers::ContentApi
 
   def manual_repository
     SpecialistPublisherWiring.get(:repository_registry).manual_repository
@@ -74,6 +76,7 @@ module ManualHelpers
   end
 
   def publish_manual
+    content_api_does_not_have_manual
     click_on "Publish manual"
   end
 
@@ -81,6 +84,10 @@ module ManualHelpers
     stub_rummager
     stub_publishing_api
     stub_organisation_details(organisation_slug)
+  end
+
+  def content_api_does_not_have_manual
+    content_api_does_not_have_an_artefact("guidance/example-manual-title")
   end
 
   def publish_manual_without_ui(manual, organisation_slug: "ministry-of-tea")
