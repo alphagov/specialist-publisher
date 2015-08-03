@@ -19,7 +19,6 @@ class AbstractSpecialistDocumentObserversRegistry
   def publication
     [
       publication_logger,
-      content_api_exporter,
       publishing_api_exporter,
       rummager_exporter,
       publication_alert_exporter,
@@ -28,14 +27,12 @@ class AbstractSpecialistDocumentObserversRegistry
 
   def republication
     [
-      content_api_exporter,
       rummager_exporter,
     ]
   end
 
   def withdrawal
     [
-      content_api_withdrawer,
       publishing_api_withdrawer,
       rummager_withdrawer,
     ]
@@ -67,18 +64,6 @@ private
     }
   end
 
-  def content_api_exporter
-    ->(document) {
-      SpecialistDocumentDatabaseExporter.new(
-        RenderedSpecialistDocument,
-        SpecialistPublisherWiring.get(:specialist_document_renderer),
-        finder_schema,
-        document,
-        PublicationLog,
-      ).call
-    }
-  end
-
   def rummager_exporter
     ->(document) {
       RummagerIndexer.new.add(
@@ -97,12 +82,6 @@ private
 
   def format_document_for_indexing(document)
     raise NotImplementedError
-  end
-
-  def content_api_withdrawer
-    ->(document) {
-      RenderedSpecialistDocument.where(slug: document.slug).map(&:destroy)
-    }
   end
 
   def email_alert_api

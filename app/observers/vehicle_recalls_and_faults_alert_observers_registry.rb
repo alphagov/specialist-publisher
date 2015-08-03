@@ -3,12 +3,8 @@ require "formatters/vehicle_recalls_and_faults_alert_publication_alert_formatter
 require "markdown_attachment_processor"
 
 class VehicleRecallsAndFaultsAlertObserversRegistry < AbstractSpecialistDocumentObserversRegistry
+
 private
-
-  def finder_schema
-    SpecialistPublisherWiring.get(:vehicle_recalls_and_faults_alert_finder_schema)
-  end
-
   def format_document_for_indexing(document)
     VehicleRecallsAndFaultsAlertIndexableFormatter.new(
       MarkdownAttachmentProcessor.new(document)

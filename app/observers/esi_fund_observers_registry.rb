@@ -5,10 +5,6 @@ require "markdown_attachment_processor"
 class EsiFundObserversRegistry < AbstractSpecialistDocumentObserversRegistry
 
 private
-  def finder_schema
-    SpecialistPublisherWiring.get(:esi_fund_finder_schema)
-  end
-
   def format_document_for_indexing(document)
     EsiFundIndexableFormatter.new(
       MarkdownAttachmentProcessor.new(document)

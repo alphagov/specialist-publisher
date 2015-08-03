@@ -5,10 +5,6 @@ require "markdown_attachment_processor"
 class RaibReportObserversRegistry < AbstractSpecialistDocumentObserversRegistry
 
 private
-  def finder_schema
-    SpecialistPublisherWiring.get(:raib_report_finder_schema)
-  end
-
   def format_document_for_indexing(document)
     RaibReportIndexableFormatter.new(
       MarkdownAttachmentProcessor.new(document)

@@ -5,11 +5,6 @@ require "markdown_attachment_processor"
 class CountrysideStewardshipGrantObserversRegistry < AbstractSpecialistDocumentObserversRegistry
 
 private
-
-  def finder_schema
-    SpecialistPublisherWiring.get(:countryside_stewardship_grant_finder_schema)
-  end
-
   def format_document_for_indexing(document)
     CountrysideStewardshipGrantIndexableFormatter.new(
       MarkdownAttachmentProcessor.new(document)

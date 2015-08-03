@@ -5,10 +5,6 @@ require "markdown_attachment_processor"
 class MedicalSafetyAlertObserversRegistry < AbstractSpecialistDocumentObserversRegistry
 
 private
-  def finder_schema
-    SpecialistPublisherWiring.get(:medical_safety_alert_finder_schema)
-  end
-
   def format_document_for_indexing(document)
     MedicalSafetyAlertIndexableFormatter.new(
       MarkdownAttachmentProcessor.new(document)

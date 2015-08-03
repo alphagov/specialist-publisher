@@ -5,11 +5,6 @@ require "markdown_attachment_processor"
 class CmaCaseObserversRegistry < AbstractSpecialistDocumentObserversRegistry
 
 private
-
-  def finder_schema
-    SpecialistPublisherWiring.get(:cma_case_finder_schema)
-  end
-
   def format_document_for_indexing(document)
     CmaCaseIndexableFormatter.new(
       MarkdownAttachmentProcessor.new(document)

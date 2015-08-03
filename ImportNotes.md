@@ -43,7 +43,6 @@ document.
 * development
 * [fact-cave](https://github.com/alphagov/fact-cave)
 * [finder-api](https://github.com/alphagov/finder-api)
-* [govuk_content_api](https://github.com/alphagov/govuk_content_api)
 * [imminence](https://github.com/alphagov/imminence)
 * puppet
 * [rummager](https://github.com/alphagov/rummager)
@@ -122,7 +121,6 @@ A rake task that does:
 ```
 Artefact.destroy_all
 SpecialistDocumentEdition.destroy_all
-RenderedSpecialistDocument.destroy_all
 ```
 
 will clear out all documents.

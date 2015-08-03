@@ -4,7 +4,7 @@ When(/^I create a Countryside Stewardship Grant$/) do
   @document_fields = {
     title: @document_title,
     summary: "Nullam quis risus eget urna mollis ornare vel eu leo.",
-    body: document_body_with_deeply_nested_headers,
+    body: document_body,
   }
 
   create_countryside_stewardship_grant(@document_fields)
@@ -31,7 +31,7 @@ Given(/^a draft Countryside Stewardship Grant exists$/) do
   @document_fields = {
     title: @document_title,
     summary: "Nullam quis risus eget urna mollis ornare vel eu leo.",
-    body: document_body_with_deeply_nested_headers,
+    body: document_body,
   }
 
   create_countryside_stewardship_grant(@document_fields)
@@ -49,14 +49,14 @@ Given(/^two Countryside Stewardship Grants exist$/) do
   @document_fields = {
     title: "Countryside Stewardship Grant 1",
     summary: "Nullam quis risus eget urna mollis ornare vel eu leo.",
-    body: document_body_with_deeply_nested_headers,
+    body: document_body,
   }
   create_countryside_stewardship_grant(@document_fields)
 
   @document_fields = {
     title: "Countryside Stewardship Grant 2",
     summary: "Nullam quis risus eget urna mollis ornare vel eu leo.",
-    body: document_body_with_deeply_nested_headers,
+    body: document_body,
   }
   create_countryside_stewardship_grant(@document_fields)
 end
@@ -95,7 +95,7 @@ When(/^I publish a new Countryside Stewardship Grant$/) do
   @document_fields = {
     title: @document_title,
     summary: "Nullam quis risus eget urna mollis ornare vel eu leo.",
-    body: document_body_with_deeply_nested_headers,
+    body: document_body,
   }
 
   create_countryside_stewardship_grant(@document_fields, publish: true)
@@ -107,7 +107,7 @@ Given(/^a published Countryside Stewardship Grant exists$/) do
   @document_fields = {
     title: @document_title,
     summary: "Nullam quis risus eget urna mollis ornare vel eu leo.",
-    body: document_body_with_deeply_nested_headers,
+    body: document_body,
   }
 
   create_countryside_stewardship_grant(@document_fields, publish: true)
