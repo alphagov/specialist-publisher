@@ -58,12 +58,6 @@ FactoryGirl.define do
     organisation_slug "government-digital-service"
   end
 
-  factory :panopticon_mapping do
-    resource_type "specialist-document"
-    sequence(:resource_id) { |n| "some-uuid-#{n}"}
-    sequence(:panopticon_id) { |n| "some-panopticon-id-#{n}"}
-  end
-
   factory :specialist_document_edition do
     sequence(:slug) {|n| "test-specialist-document-#{n}" }
     sequence(:title) {|n| "Test Specialist Document #{n}" }

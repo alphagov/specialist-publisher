@@ -34,26 +34,6 @@ module DocumentHelpers
     expect(page).to have_link(expected_slug)
   end
 
-  def check_published_with_panopticon(slug, title)
-    expect(fake_panopticon).to have_received(:create_artefact!)
-      .with(hash_including(
-        slug: slug,
-        name: title,
-        state: "live",
-      ))
-  end
-
-  def check_document_republished_with_panopticon(slug, title)
-    expect(fake_panopticon).to have_received(:put_artefact!)
-      .with(
-        slug,
-        hash_including(
-          name: title,
-          state: "live",
-        ),
-      )
-  end
-
   def check_document_published_to_publishing_api(slug, fields, draft: false)
     attributes = {
       title: fields[:title],
@@ -96,15 +76,6 @@ module DocumentHelpers
       .with(document_type, slug, hash_including(rummager_fields))
   end
 
-  def check_rendered_document_contains_html(document)
-    parsed_body = Nokogiri::HTML::Document.parse(document.body)
-    expect(parsed_body).to have_css("p")
-  end
-
-  def check_rendered_document_contains_header_meta_data(document)
-    expect(document.details["headers"].first).to include("text" => "Header")
-  end
-
   def check_for_correctly_archived_editions(document_attrs)
     latest_edition = SpecialistDocumentEdition.where(document_attrs).first
     editions = SpecialistDocumentEdition.where(document_id: latest_edition.document_id)
@@ -118,11 +89,6 @@ module DocumentHelpers
   end
 
   def check_document_is_withdrawn(slug, document_title)
-    expect(fake_panopticon).to have_received(:put_artefact!)
-      .with(slug, hash_including(
-        state: "archived",
-      ))
-
     assert_publishing_api_put_item("/#{slug}", format: "gone")
 
     expect(page).to have_content("withdrawn")
@@ -148,8 +114,6 @@ module DocumentHelpers
   end
 
   def check_document_is_published(slug, fields)
-    check_document_published_to_content_api(slug, fields)
-    check_published_with_panopticon(slug, fields.fetch(:title))
     check_document_published_to_publishing_api(slug, fields)
     check_added_to_rummager(
       slug,
@@ -173,36 +137,11 @@ module DocumentHelpers
     expect(fake_email_alert_api).to_not have_received(:send_alert)
   end
 
-  def check_document_published_to_content_api(slug, fields)
-    published_document = RenderedSpecialistDocument.find_by_slug(slug)
-
-    expect(published_document.title).to eq(fields.fetch(:title))
-    expect(published_document.summary).to eq(fields.fetch(:summary))
-
-    check_metadata_is_rendered(
-      published_document,
-      fields.except(:title, :summary, :body),
-    )
-
-    check_rendered_document_contains_html(published_document)
-    check_rendered_document_contains_header_meta_data(published_document)
-  end
-
   def check_document_was_republished(slug, fields)
-    check_document_republished_with_panopticon(slug, fields.fetch(:title))
-    check_document_published_to_content_api(slug, fields)
     check_added_to_rummager(
       slug,
       fields.except(:body),
     )
-  end
-
-  def check_metadata_is_rendered(published_document, fields)
-    # TODO: RSpec 3 change to eq(hash_including( ... ))
-
-    fields.each do |key, value|
-      expect(published_document.details.fetch(key.to_s)).to eq(value)
-    end
   end
 
   def check_document_exists_with(type, attributes)
@@ -268,5 +207,18 @@ module DocumentHelpers
 
   def check_document_cant_be_published
     expect(page).to_not have_selector(:button, "Publish")
+  end
+
+  def document_body
+    %{
+
+      ## Header
+
+      Praesent commodo cursus magna, vel scelerisque nisl consectetur et.
+
+      ### Level 2
+
+      Praesent commodo cursus magna, vel scelerisque nisl consectetur et.
+    }
   end
 end

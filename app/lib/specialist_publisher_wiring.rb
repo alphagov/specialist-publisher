@@ -3,10 +3,8 @@ require "builders/manual_document_builder"
 require "builders/specialist_document_builder"
 require "dependency_container"
 require "document_factory_registry"
-require "document_headers_depth_limiter"
 require "finder_schema"
 require "footnotes_section_heading_renderer"
-require "formatters/manual_artefact_formatter"
 require "gds_api/email_alert_api"
 require "gds_api/publishing_api"
 require "gds_api/rummager"
@@ -15,10 +13,7 @@ require "govspeak_to_html_renderer"
 require "markdown_attachment_processor"
 require "marshallers/document_association_marshaller"
 require "marshallers/manual_publish_task_association_marshaller"
-require "panopticon_registerer"
-require "rendered_specialist_document"
 require "repository_registry"
-require "specialist_document_database_exporter"
 require "specialist_document_header_extractor"
 require "specialist_document_repository"
 require "view_adapter_registry"
@@ -164,12 +159,6 @@ SpecialistPublisherWiring ||= DependencyContainer.new do
     }
   }
 
-  define_factory(:international_development_fund_header_depth_limiter) {
-    ->(doc) {
-      DocumentHeadersDepthLimiter.new(doc, depth: 2)
-    }
-  }
-
   define_instance(:manual_renderer) {
     ->(manual) {
       get(:govspeak_to_html_renderer).call(manual)
@@ -181,21 +170,6 @@ SpecialistPublisherWiring ||= DependencyContainer.new do
       pipeline = [
         get(:markdown_attachment_renderer),
         get(:specialist_document_govspeak_header_extractor),
-        get(:govspeak_to_html_renderer),
-      ]
-
-      pipeline.reduce(doc) { |doc, next_renderer|
-        next_renderer.call(doc)
-      }
-    }
-  }
-
-  define_instance(:international_development_fund_renderer) {
-    ->(doc) {
-      pipeline = [
-        get(:markdown_attachment_renderer),
-        get(:specialist_document_govspeak_header_extractor),
-        get(:international_development_fund_header_depth_limiter),
         get(:govspeak_to_html_renderer),
       ]
 
@@ -217,33 +191,6 @@ SpecialistPublisherWiring ||= DependencyContainer.new do
       pipeline.reduce(doc) { |doc, next_renderer|
         next_renderer.call(doc)
       }
-    }
-  }
-
-  define_factory(:panopticon_registerer) {
-    ->(artefact) {
-      PanopticonRegisterer.new(
-        artefact: artefact,
-        api: get(:panopticon_api),
-        error_logger: Airbrake.method(:notify),
-      ).call
-    }
-  }
-
-  define_factory(:panopticon_api) {
-    GdsApiProxy.new(
-      GdsApi::Panopticon.new(
-        Plek.current.find("panopticon"),
-        PANOPTICON_API_CREDENTIALS
-      )
-    )
-  }
-
-  define_factory(:manual_panopticon_registerer) {
-    ->(manual) {
-      get(:panopticon_registerer).call(
-        ManualArtefactFormatter.new(manual)
-      )
     }
   }
 

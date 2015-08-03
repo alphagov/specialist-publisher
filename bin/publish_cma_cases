@@ -12,9 +12,6 @@
 require File.expand_path("../../config/environment", __FILE__)
 require "specialist_publisher"
 
-# Override global panopticon timeout as this is a long operation...
-PANOPTICON_API_CREDENTIALS.merge!(timeout: 30)
-
 repository = SpecialistPublisherWiring.get(:repository_registry).for_type("cma_case")
 
 def public_update_at_timestamp_for_document(document)

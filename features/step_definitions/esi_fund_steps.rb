@@ -4,7 +4,7 @@ When(/^I create an ESI Fund$/) do
   @document_fields = {
     title: @document_title,
     summary: "Nullam quis risus eget urna mollis ornare vel eu leo.",
-    body: document_body_with_deeply_nested_headers,
+    body: document_body,
   }
 
   create_esi_fund(@document_fields)
@@ -32,7 +32,7 @@ Given(/^a draft ESI Fund exists$/) do
   @document_fields = {
     title: @document_title,
     summary: "Nullam quis risus eget urna mollis ornare vel eu leo.",
-    body: document_body_with_deeply_nested_headers,
+    body: document_body,
   }
 
   create_esi_fund(@document_fields)
@@ -50,14 +50,14 @@ Given(/^two ESI Funds exist$/) do
   @document_fields = {
     title: "ESI Fund 1",
     summary: "Nullam quis risus eget urna mollis ornare vel eu leo.",
-    body: document_body_with_deeply_nested_headers,
+    body: document_body,
   }
   create_esi_fund(@document_fields)
 
   @document_fields = {
     title: "ESI Fund 2",
     summary: "Nullam quis risus eget urna mollis ornare vel eu leo.",
-    body: document_body_with_deeply_nested_headers,
+    body: document_body,
   }
   create_esi_fund(@document_fields)
 end
@@ -96,7 +96,7 @@ When(/^I publish a new ESI Fund$/) do
   @document_fields = {
     title: @document_title,
     summary: "Nullam quis risus eget urna mollis ornare vel eu leo.",
-    body: document_body_with_deeply_nested_headers,
+    body: document_body,
   }
 
   create_esi_fund(@document_fields, publish: true)
@@ -108,7 +108,7 @@ Given(/^a published ESI Fund exists$/) do
   @document_fields = {
     title: @document_title,
     summary: "Nullam quis risus eget urna mollis ornare vel eu leo.",
-    body: document_body_with_deeply_nested_headers,
+    body: document_body,
   }
 
   create_esi_fund(@document_fields, publish: true)
