@@ -30,7 +30,7 @@ private
   end
 
   def extra_attributes
-    {}
+    raise NotImplementedError
   end
 
   def title

@@ -26,6 +26,10 @@ class ManualSectionIndexableFormatter
 private
   attr_reader :section, :manual
 
+  def extra_attributes
+    {}
+  end
+
   def link
     section.slug
   end
