@@ -37,6 +37,7 @@ class AbstractManualServiceRegistry
       manual_repository: repository,
       manual_id: manual_id,
       attributes: attributes,
+      listeners: observers.update,
     )
   end
 

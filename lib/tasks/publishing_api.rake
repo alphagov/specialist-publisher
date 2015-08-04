@@ -34,8 +34,14 @@ namespace :publishing_api do
       ).call
     end
   end
-end
 
+  namespace :draft do
+    desc "Export all manuals and manual documents to the draft publishing api"
+    task :publish_manuals => :environment do
+      ManualPublishingApiBulkDraftExporter.new(SpecialistPublisherWiring, logger: Logger.new(STDOUT)).export_all
+    end
+  end
+end
 
 class MigrationSpecialistDocumentPublishingAPIFormatter < SpecialistDocumentPublishingAPIFormatter
   def call

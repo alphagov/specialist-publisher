@@ -245,5 +245,17 @@ SpecialistPublisherWiring ||= DependencyContainer.new do
   define_singleton(:vehicle_recalls_and_faults_alert_finder_schema) {
     FinderSchema.new(Rails.root.join("finders/schemas/vehicle-recalls-and-faults-alert.json"))
   }
+
+  define_singleton(:organisations_api) {
+    require "gds_api/organisations"
+    GdsApi::Organisations.new(ORGANISATIONS_API_BASE_PATH)
+  }
+
+  define_singleton(:organisation_fetcher) {
+    organisations = {}
+    ->(organisation_slug) {
+      organisations[organisation_slug] ||= get(:organisations_api).organisation(organisation_slug)
+    }
+  }
 end
 # rubocop:enable ConstantName

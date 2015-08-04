@@ -1,4 +1,3 @@
-require "gds_api/organisations"
 require "manual_publishing_api_exporter"
 require "manual_section_publishing_api_exporter"
 require "publishing_api_withdrawer"
@@ -24,8 +23,16 @@ class ManualObserversRegistry
     ]
   end
 
+  def update
+    [
+      publishing_api_draft_exporter
+    ]
+  end
+
   def creation
-    []
+    [
+      publishing_api_draft_exporter
+    ]
   end
 
   def withdrawal
@@ -91,12 +98,10 @@ private
 
   def publishing_api_exporter
     ->(manual) {
-      organisation = organisations_api.organisation(manual.attributes.fetch(:organisation_slug))
-
       manual_renderer = SpecialistPublisherWiring.get(:manual_renderer)
       ManualPublishingAPIExporter.new(
-        publishing_api,
-        organisation,
+        publishing_api.method(:put_content_item),
+        organisation(manual.attributes.fetch(:organisation_slug)),
         manual_renderer,
         PublicationLog,
         manual
@@ -107,13 +112,28 @@ private
         next unless document.needs_exporting?
 
         ManualSectionPublishingAPIExporter.new(
-          publishing_api,
-          organisation,
+          publishing_api.method(:put_content_item),
+          organisation(manual.attributes.fetch(:organisation_slug)),
           document_renderer,
           manual,
           document
         ).call
+
+        document.mark_as_exported_to_live_publishing_api!
       end
+    }
+  end
+
+  def publishing_api_draft_exporter
+    ->(manual) {
+      manual_renderer = SpecialistPublisherWiring.get(:manual_renderer)
+      ManualPublishingAPIExporter.new(
+        publishing_api.method(:put_draft_content_item),
+        organisation(manual.attributes.fetch(:organisation_slug)),
+        manual_renderer,
+        PublicationLog,
+        manual
+      ).call
     }
   end
 
@@ -137,7 +157,7 @@ private
     SpecialistPublisherWiring.get(:publishing_api)
   end
 
-  def organisations_api
-    GdsApi::Organisations.new(ORGANISATIONS_API_BASE_PATH)
+  def organisation(slug)
+    SpecialistPublisherWiring.get(:organisation_fetcher).call(slug)
   end
 end

@@ -17,6 +17,7 @@ module ManualHelpers
   end
 
   def create_manual_without_ui(fields, organisation_slug: "ministry-of-tea")
+    stub_organisation_details(organisation_slug)
     manual_services = OrganisationalManualServiceRegistry.new(
       organisation_slug: organisation_slug,
     )
@@ -163,20 +164,30 @@ module ManualHelpers
       ).at_least(:once)
   end
 
-  def check_manual_is_published_to_publishing_api(slug)
-    assert_publishing_api_put_item("/#{slug}",
+  def check_manual_is_published_to_publishing_api(slug, extra_attributes: {}, draft: false)
+    attributes = {
       "format" => "manual",
       "rendering_app" => "manuals-frontend",
       "publishing_app" => "specialist-publisher",
-    )
+    }.merge(extra_attributes)
+    if draft
+      assert_publishing_api_put_draft_item("/#{slug}", request_json_including(attributes))
+    else
+      assert_publishing_api_put_item("/#{slug}", request_json_including(attributes))
+    end
   end
 
-  def check_manual_document_is_published_to_publishing_api(slug)
-    assert_publishing_api_put_item("/#{slug}",
+  def check_manual_document_is_published_to_publishing_api(slug, draft: false)
+    attributes = {
       "format" => "manual_section",
       "rendering_app" => "manuals-frontend",
       "publishing_app" => "specialist-publisher",
-    )
+    }
+    if draft
+      assert_publishing_api_put_draft_item("/#{slug}", attributes)
+    else
+      assert_publishing_api_put_item("/#{slug}", attributes)
+    end
   end
 
   def check_manual_section_is_published_to_rummager(slug, attrs, manual_attrs)

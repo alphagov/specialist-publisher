@@ -7,14 +7,15 @@ Feature: Publishing a manual
     Given I am logged in as a "CMA" editor
 
   Scenario: Publish a manual
-    Given a draft manual exists
+    Given a draft manual exists with some documents
     When I publish the manual
     Then the manual and all its documents are published
 
   Scenario: Edit and re-publish a manual
     Given a published manual exists
     When I edit one of the manual's documents
-    And I publish the manual
+    Then the updated manual document is available to preview
+    When I publish the manual
     Then the manual and the edited document are published
 
   Scenario: Add a section to a published manual
@@ -37,14 +38,14 @@ Feature: Publishing a manual
     Then the document is updated without a change note
 
   Scenario: A manual fails to publish from the queue due to an unrecoverable error
-    Given a draft manual exists
+    Given a draft manual exists without any documents
     And a draft document exists for the manual
     And an unrecoverable error occurs
     When I publish the manual
     Then the manual and its documents have failed to publish
 
   Scenario: A manual fails to publish from the queue due to a version mismatch
-    Given a draft manual exists
+    Given a draft manual exists without any documents
     And a draft document exists for the manual
     And a version mismatch occurs
     When I publish the manual
@@ -52,13 +53,13 @@ Feature: Publishing a manual
 
   @disable_background_processing
   Scenario: A manual has been queued to be published
-    Given a draft manual exists
+    Given a draft manual exists without any documents
     And a draft document exists for the manual
     When I publish the manual
     Then the manual and its documents are queued for publishing
 
   Scenario: Manual publication retries after recoverable error
-    Given a draft manual exists
+    Given a draft manual exists without any documents
     And a draft document exists for the manual
     And a recoverable error occurs
     When I publish the manual expecting a recoverable error

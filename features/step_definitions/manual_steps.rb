@@ -12,7 +12,33 @@ Then(/^the manual should exist$/) do
   check_manual_exists_with(@manual_fields)
 end
 
-Given(/^a draft manual exists$/) do
+Then(/^the manual should have been sent to the draft publishing api$/) do
+  check_manual_is_published_to_publishing_api(@manual_slug, draft: true)
+end
+
+Then(/^the edited manual should have been sent to the draft publishing api$/) do
+  check_manual_is_published_to_publishing_api(
+    @manual_slug,
+    extra_attributes: {title: @new_title},
+    draft: true
+  )
+end
+
+Given(/^a draft manual exists without any documents$/) do
+  @manual_slug = "guidance/example-manual-title"
+  @manual_title = "Example Manual Title"
+
+  @manual_fields = {
+    title: "Example Manual Title",
+    summary: "Nullam quis risus eget urna mollis ornare vel eu leo.",
+  }
+
+  create_manual(@manual_fields)
+
+  WebMock::RequestRegistry.instance.reset!
+end
+
+Given(/^a draft manual exists with some documents$/) do
   @manual_slug = "guidance/example-manual-title"
   @manual_title = "Example Manual Title"
 
@@ -27,6 +53,7 @@ Given(/^a draft manual exists$/) do
     manual_fields: @manual_fields,
     count: 2,
   )
+  WebMock::RequestRegistry.instance.reset!
 end
 
 Given(/^a draft manual was created without the UI$/) do
@@ -39,6 +66,7 @@ Given(/^a draft manual was created without the UI$/) do
   }
 
   @manual = create_manual_without_ui(@manual_fields)
+  WebMock::RequestRegistry.instance.reset!
 end
 
 Given(/^a draft manual exists belonging to "(.*?)"$/) do |organisation_slug|
@@ -50,7 +78,9 @@ Given(/^a draft manual exists belonging to "(.*?)"$/) do |organisation_slug|
     summary: "Nullam quis risus eget urna mollis ornare vel eu leo.",
   }
 
+  stub_organisation_details(organisation_slug)
   @manual = create_manual_without_ui(@manual_fields, organisation_slug: organisation_slug)
+  WebMock::RequestRegistry.instance.reset!
 end
 
 When(/^I edit a manual$/) do
@@ -76,8 +106,8 @@ Then(/^I see errors for the title field$/) do
 end
 
 When(/^I create a document for the manual$/) do
-  @document_title = "Section 1"
-  @document_slug = [@manual_slug, "section-1"].join("/")
+  @document_title = "Created Section 1"
+  @document_slug = [@manual_slug, "created-section-1"].join("/")
 
   @document_fields = {
     section_title: @document_title,
@@ -94,6 +124,56 @@ Then(/^I see the manual has the new section$/) do
   expect(page).to have_content(@document_fields.fetch(:section_title))
 end
 
+Then(/^the manual document and table of contents will have been sent to the draft publishing api$/) do
+  check_manual_document_is_published_to_publishing_api(@document_slug, draft: true)
+  manual_table_of_contents_attributes = {
+    details: {
+      child_section_groups: [
+        {
+          title: "Contents",
+          child_sections: [
+            {
+              title: @document_title,
+              description: @document_fields[:section_summary],
+              base_path: "/#{@document_slug}",
+            }
+          ]
+        }
+      ]
+    }
+  }
+  check_manual_is_published_to_publishing_api(
+    @manual_slug,
+    extra_attributes: manual_table_of_contents_attributes,
+    draft: true
+  )
+end
+
+Then(/^the updated manual document at the new slug and updated table of contents will have been sent to the draft publishing api$/) do
+  check_manual_document_is_published_to_publishing_api(@new_slug, draft: true)
+  manual_table_of_contents_attributes = {
+    details: {
+      child_section_groups: [
+        {
+          title: "Contents",
+          child_sections: [
+            {
+              title: @new_title,
+              description: @document_fields[:section_summary],
+              base_path: "/#{@new_slug}",
+            }
+          ]
+        }
+      ]
+    }
+  }
+  check_manual_is_published_to_publishing_api(
+    @manual_slug,
+    extra_attributes: manual_table_of_contents_attributes,
+    draft: true
+  )
+end
+
 Given(/^a draft document exists for the manual$/) do
   @document_title = "New section"
   @document_slug = "guidance/example-manual-title/new-section"
@@ -105,6 +185,7 @@ Given(/^a draft document exists for the manual$/) do
   }
 
   create_manual_document(@manual_fields.fetch(:title), @document_fields)
+  WebMock::RequestRegistry.instance.reset!
 end
 
 Given(/^a draft section was created for the manual without the UI$/) do
@@ -118,10 +199,12 @@ Given(/^a draft section was created for the manual without the UI$/) do
   }
 
   @section = create_manual_document_without_ui(@manual, @document_fields)
+  WebMock::RequestRegistry.instance.reset!
 end
 
 When(/^I edit the document$/) do
   @new_title = "A new section title"
+  @new_slug = "#{@manual_slug}/a-new-section-title"
   edit_manual_document(
     @manual_fields.fetch(:title),
     @document_fields.fetch(:section_title),
@@ -182,6 +265,32 @@ Then(/^the manual and the edited document are published$/) do
     @manual_fields,
     @updated_document[:slug],
     @updated_document[:fields],
+  )
+end
+
+Then(/^the updated manual document is available to preview$/) do
+  check_manual_document_is_published_to_publishing_api(@updated_document[:slug], draft: true)
+  updated_documents = [@updated_document] + @attributes_for_documents[1..-1]
+  manual_table_of_contents_attributes = {
+    details: {
+      child_section_groups: [
+        {
+          title: "Contents",
+          child_sections: updated_documents.map do |updated_document|
+            {
+              title: updated_document[:fields][:section_title],
+              description: updated_document[:fields][:section_summary],
+              base_path: "/#{updated_document[:slug]}",
+            }
+          end
+        }
+      ]
+    }
+  }
+  check_manual_is_published_to_publishing_api(
+    @manual_slug,
+    extra_attributes: manual_table_of_contents_attributes,
+    draft: true
   )
 end
 
@@ -451,4 +560,45 @@ end
 
 Then(/^the manual should still belong to "(.*?)"$/) do |organisation_slug|
   check_manual_has_organisation_slug(@manual_fields.merge(title: @new_title), organisation_slug)
+end
+
+When(/^I reorder the documents$/) do
+  click_on("Reorder sections")
+  elems = page.all(".reorderable-document-list li.ui-sortable-handle")
+  elems[0].drag_to(elems[1])
+  click_on("Save section order")
+  @reordered_document_attributes = [
+    @attributes_for_documents[1],
+    @attributes_for_documents[0]
+  ]
+end
+
+Then(/^the order of the documents in the manual should have been updated$/) do
+  @reordered_document_attributes.map { |doc| doc[:title] }.each.with_index do |title, index|
+    expect(page).to have_css(".document-list li.document:nth-child(#{index + 1}) .document-title", text: title)
+  end
+end
+
+Then(/^the new order should be visible in the preview environment$/) do
+  manual_table_of_contents_attributes = {
+    details: {
+      child_section_groups: [
+        {
+          title: "Contents",
+          child_sections: @reordered_document_attributes.map do |doc|
+            {
+              title: doc[:fields][:section_title],
+              description: doc[:fields][:section_summary],
+              base_path: "/#{doc[:slug]}",
+            }
+          end
+        }
+      ]
+    }
+  }
+  check_manual_is_published_to_publishing_api(
+    @manual_slug,
+    extra_attributes: manual_table_of_contents_attributes,
+    draft: true
+  )
 end

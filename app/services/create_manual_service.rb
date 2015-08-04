@@ -33,8 +33,9 @@ class CreateManualService
   end
 
   def notify_listeners
+    reloaded_manual = manual_repository[manual.id]
     listeners.each do |listener|
-      listener.call(manual)
+      listener.call(reloaded_manual)
     end
   end
 end
