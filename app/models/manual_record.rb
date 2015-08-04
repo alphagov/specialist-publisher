@@ -58,6 +58,7 @@ private
     field :version_number, type: Integer
     field :document_ids, type: Array
     field :removed_document_ids, type: Array
+    field :tags, type: Array
 
     # We don't make use of the relationship but Mongiod can't save the
     # timestamps properly without it.

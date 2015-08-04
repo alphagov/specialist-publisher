@@ -34,6 +34,7 @@ describe ManualRepository do
       body: "body",
       organisation_slug: "organisation_slug",
       slug: manual_slug,
+      tags: []
     }
   }
 
@@ -48,6 +49,7 @@ describe ManualRepository do
       :"slug=" => nil,
       latest_edition: nil,
       save!: nil,
+      tags: [],
     )
   }
 
@@ -102,7 +104,7 @@ describe ManualRepository do
       repo.store(manual)
 
       expect(edition).to have_received(:attributes=)
-        .with(manual_attributes.slice(:title, :summary, :state, :body))
+        .with(manual_attributes.slice(:title, :summary, :state, :body, :tags))
     end
 
     it "sets the slug" do
