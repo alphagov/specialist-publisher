@@ -1,4 +1,3 @@
-require "gds_api/organisations"
 require "manual_publishing_api_exporter"
 require "manual_section_publishing_api_exporter"
 require "publishing_api_withdrawer"
@@ -99,12 +98,10 @@ private
 
   def publishing_api_exporter
     ->(manual) {
-      organisation = organisations_api.organisation(manual.attributes.fetch(:organisation_slug))
-
       manual_renderer = SpecialistPublisherWiring.get(:manual_renderer)
       ManualPublishingAPIExporter.new(
         publishing_api.method(:put_content_item),
-        organisation,
+        organisation(manual.attributes.fetch(:organisation_slug)),
         manual_renderer,
         PublicationLog,
         manual
@@ -116,7 +113,7 @@ private
 
         ManualSectionPublishingAPIExporter.new(
           publishing_api.method(:put_content_item),
-          organisation,
+          organisation(manual.attributes.fetch(:organisation_slug)),
           document_renderer,
           manual,
           document
@@ -129,12 +126,10 @@ private
 
   def publishing_api_draft_exporter
     ->(manual) {
-      organisation = organisations_api.organisation(manual.attributes.fetch(:organisation_slug))
-
       manual_renderer = SpecialistPublisherWiring.get(:manual_renderer)
       ManualPublishingAPIExporter.new(
         publishing_api.method(:put_draft_content_item),
-        organisation,
+        organisation(manual.attributes.fetch(:organisation_slug)),
         manual_renderer,
         PublicationLog,
         manual
@@ -162,7 +157,7 @@ private
     SpecialistPublisherWiring.get(:publishing_api)
   end
 
-  def organisations_api
-    GdsApi::Organisations.new(ORGANISATIONS_API_BASE_PATH)
+  def organisation(slug)
+    SpecialistPublisherWiring.get(:organisation_fetcher).call(slug)
   end
 end

@@ -90,9 +90,7 @@ private
   end
 
   def organisation(slug)
-    @organisations ||= {}
-    @organisations[slug] ||= organisations_api.organisation(slug)
-    @organisations[slug]
+    SpecialistPublisherWiring.get(:organisation_fetcher).call(slug)
   end
 
   def publishing_api_draft_manual_exporter

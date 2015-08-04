@@ -1,5 +1,3 @@
-require "gds_api/organisations"
-
 class ManualPublishingApiBulkDraftExporter
   attr_reader :wiring, :logger
 
@@ -58,8 +56,7 @@ private
   end
 
   def organisation(slug)
-    @organisations ||= {}
-    @organisations[slug] ||= organisations_api.organisation(slug)
+    wiring.get(:organisation_fetcher).call(slug)
   end
 
   def manual_renderer
@@ -68,9 +65,5 @@ private
 
   def manual_document_renderer
     wiring.get(:manual_document_renderer)
-  end
-
-  def organisations_api
-    GdsApi::Organisations.new(ORGANISATIONS_API_BASE_PATH)
   end
 end
