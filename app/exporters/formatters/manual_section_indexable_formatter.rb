@@ -1,6 +1,8 @@
-class ManualSectionIndexableFormatter
+require "formatters/abstract_indexable_formatter"
+
+class ManualSectionIndexableFormatter < AbstractIndexableFormatter
   def initialize(section, manual)
-    @section = section
+    @entity = section
     @manual = manual
   end
 
@@ -8,33 +10,36 @@ class ManualSectionIndexableFormatter
     "manual_section"
   end
 
-  def id
-    link
-  end
+private
+  attr_reader :manual
 
-  def indexable_attributes
+  def extra_attributes
     {
-      title: "#{manual.title}: #{section.title}",
-      description: section.summary,
-      link: link,
-      indexable_content: section.body,
-      organisations: [manual.organisation_slug],
       manual: manual.slug,
     }
   end
 
-private
-  attr_reader :section, :manual
+  def title
+    "#{manual.title}: #{entity.title}"
+  end
 
-  def extra_attributes
-    {}
+  def description
+    entity.summary
   end
 
   def link
-    with_leading_slash(section.slug)
+    with_leading_slash(entity.slug)
   end
 
-  def with_leading_slash(slug)
-    slug.start_with?("/") ? slug : "/#{slug}"
+  def indexable_content
+    entity.body
+  end
+
+  def last_update
+    nil
+  end
+
+  def organisation_slugs
+    [manual.organisation_slug]
   end
 end
