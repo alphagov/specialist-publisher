@@ -165,10 +165,10 @@ module ManualHelpers
     expect(fake_rummager).to have_received(:add_document)
       .with(
         "manual",
-        slug,
+        "/#{slug}",
         hash_including(
           title: attrs.fetch(:title),
-          link: slug,
+          link: "/#{slug}",
           indexable_content: attrs.fetch(:summary),
         )
       ).at_least(:once)
@@ -204,10 +204,10 @@ module ManualHelpers
     expect(fake_rummager).to have_received(:add_document)
       .with(
         "manual_section",
-        slug,
+        "/#{slug}",
         hash_including(
           title: "#{manual_attrs.fetch(:title)}: #{attrs.fetch(:section_title)}",
-          link: slug,
+          link: "/#{slug}",
           indexable_content: attrs.fetch(:section_body),
         )
       ).at_least(:once)
@@ -317,14 +317,14 @@ module ManualHelpers
     expect(fake_rummager).to have_received(:delete_document)
       .with(
         "manual",
-        manual_slug,
+        "/#{manual_slug}",
       )
 
     attributes_for_documents.each do |document_attributes|
       expect(fake_rummager).to have_received(:delete_document)
         .with(
           "manual_section",
-          document_attributes[:slug],
+          "/#{document_attributes[:slug]}",
         )
     end
   end

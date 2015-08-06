@@ -31,6 +31,10 @@ private
   end
 
   def link
-    section.slug
+    with_leading_slash(section.slug)
+  end
+
+  def with_leading_slash(slug)
+    slug.start_with?("/") ? slug : "/#{slug}"
   end
 end
