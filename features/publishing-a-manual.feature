@@ -10,6 +10,7 @@ Feature: Publishing a manual
     Given a draft manual exists with some documents
     When I publish the manual
     Then the manual and all its documents are published
+    And I should see a link to the live manual
 
   Scenario: Edit and re-publish a manual
     Given a published manual exists

@@ -10,6 +10,7 @@ Feature: Creating and editing a CMA case
     When I create a CMA case
     Then the CMA case has been created
     And the document should be sent to content preview
+    And I should see a link to preview the document
 
   Scenario: Cannot create a CMA case with invalid fields
     When I create a CMA case with invalid fields

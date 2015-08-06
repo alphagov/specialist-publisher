@@ -31,7 +31,8 @@ module DocumentHelpers
   def check_for_unchanged_slug(title, expected_slug)
     go_to_show_page_for_cma_case(title)
 
-    expect(page).to have_link(expected_slug)
+    expected_link = "#{Plek.current.website_root}/#{expected_slug}"
+    expect(page).to have_link("View on website", href: expected_link)
   end
 
   def check_document_published_to_publishing_api(slug, fields, draft: false)
@@ -111,6 +112,16 @@ module DocumentHelpers
 
   def check_for_invalid_date_error(date_field)
     page.should have_content("#{date_field} should be formatted YYYY-MM-DD")
+  end
+
+  def check_content_preview_link(slug)
+    preview_url = "#{Plek.current.find("draft-origin")}/#{slug}"
+    expect(page).to have_link("Preview draft", href: preview_url)
+  end
+
+  def check_live_link(slug)
+    live_url = "#{Plek.current.website_root}/#{slug}"
+    expect(page).to have_link("View on website", href: live_url)
   end
 
   def check_document_is_published(slug, fields)

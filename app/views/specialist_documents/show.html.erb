@@ -3,15 +3,8 @@
   <li class='active'><%= document.title %></li>
 <% end %>
 
-<h1 class="page-header"><%= document.title %>
-<% if document.publication_state == "published" %>
-  <span class='document-slug'>
-    <%= link_to document.slug, published_specialist_document_path(document) %>
-  </span>
-<% else %>
-  <span class='document-slug' title='When published this document will appear at this URL'><%= document.slug %></span>
-<% end %>
-</h1>
+<%= render partial: "shared/title", locals: { document: document, public_url: published_specialist_document_path(document) } %>
+
 <div class="row">
   <div class="col-md-8">
     <h2>Summary</h2>
