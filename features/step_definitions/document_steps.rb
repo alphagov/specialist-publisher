@@ -46,3 +46,11 @@ end
 Then(/^the document should be sent to content preview/) do
   check_document_published_to_publishing_api(@slug, @document_fields, draft: true)
 end
+
+Then(/^I should see a link to preview the document$/) do
+  check_content_preview_link(@slug)
+end
+
+Then(/^I should see a link to the live document$/) do
+  check_live_link(@slug)
+end

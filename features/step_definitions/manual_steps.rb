@@ -12,6 +12,10 @@ Then(/^the manual should exist$/) do
   check_manual_exists_with(@manual_fields)
 end
 
+Then(/^I should see a link to preview the manual$/) do
+  check_content_preview_link(@manual_slug)
+end
+
 Then(/^the manual should have been sent to the draft publishing api$/) do
   check_manual_is_published_to_publishing_api(@manual_slug, draft: true)
 end
@@ -301,6 +305,10 @@ Then(/^the manual and its new document are published$/) do
     @new_document[:slug],
     @new_document[:fields],
   )
+end
+
+Then(/^I should see a link to the live manual$/) do
+  check_live_link(@manual_slug)
 end
 
 Given(/^a published manual exists$/) do

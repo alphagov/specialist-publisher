@@ -138,6 +138,16 @@ module ManualHelpers
     expect(page).to have_content("#{field.titlecase} can't be blank")
   end
 
+  def check_content_preview_link(slug)
+    preview_url = "#{Plek.current.find("draft-origin")}/#{slug}"
+    expect(page).to have_link("Preview draft", href: preview_url)
+  end
+
+  def check_live_link(slug)
+    live_url = "#{Plek.current.website_root}/#{slug}"
+    expect(page).to have_link("View on website", href: live_url)
+  end
+
   def go_to_manual_page(manual_title)
     visit manuals_path
     click_link manual_title

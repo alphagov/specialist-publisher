@@ -3,14 +3,7 @@
   <li class='active'><%= manual.title %></li>
 <% end %>
 
-<h1 class="page-header">
-  <%= manual.title %>
-  <% if manual.state == 'published' %>
-    <span class='document-slug'><%= link_to manual.slug, url_for_public_manual(manual) %></span>
-  <% else %>
-    <span class='document-slug' title='When published this manual will appear here.'><%= manual.slug %></span>
-  <% end %>
-</h1>
+<%= render partial: "shared/title", locals: { document: manual, public_url: url_for_public_manual(manual) } %>
 
 <div class="row">
   <div class="col-md-8">

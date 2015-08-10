@@ -79,6 +79,10 @@ module ApplicationHelper
     "#{Plek.current.website_root}/government/organisations/#{organisation_slug}"
   end
 
+  def content_preview_url(document)
+    "#{Plek.current.find("draft-origin")}/#{document.slug}"
+  end
+
   def publish_form(slug_unique, publishable, document)
     publish_form_text = publish_text_hash(document)
     if !current_user_can_publish?(document.document_type) || !slug_unique || !publishable

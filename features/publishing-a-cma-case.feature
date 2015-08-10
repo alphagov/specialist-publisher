@@ -19,6 +19,7 @@ Feature: Publishing a CMA case
   Scenario: can create a new CMA case and publish immediately
     When I publish a new CMA case
     Then the CMA case should be published
+    And I should see a link to the live document
 
   Scenario: immediately republish a published case
     When I publish a new CMA case
