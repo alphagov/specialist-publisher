@@ -9,7 +9,6 @@ RSpec.describe EsiFundPublicationAlertFormatter do
   }
   let(:document) {
     double(:document,
-      alert_type: "drugs",
       title: "Some title",
       extra_fields: {},
       document_type: "esi_fund",
