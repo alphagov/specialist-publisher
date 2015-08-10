@@ -1,0 +1,69 @@
+#!/usr/bin/env ruby
+
+require File.expand_path("../../config/environment", __FILE__)
+require "logger"
+
+require "manual_service_registry"
+
+require "specialist_publisher"
+require "specialist_publisher_wiring"
+
+# Script to fix id and link fields being sent to Rummager without the leading
+# slash. Because the ids are changing, we need to add the documents to Rummager
+# with their new ids and then delete the old documents.
+#
+# For each manual and specialist document:
+# - republish
+# - delete the old document from rummager (for the slug without leading slash)
+
+logger = Logger.new(STDOUT)
+logger.formatter = Logger::Formatter.new
+
+rummager = SpecialistPublisherWiring.get(:rummager_api)
+
+# Manuals
+
+repository = SpecialistPublisherWiring.get(:repository_registry).manual_repository
+count = repository.all.count
+
+logger.info "Migrating #{count} manuals..."
+
+repository.all.each.with_index do |manual, i|
+  logger.info("[% 2d/%d] id=%s slug=%s" % [i + 1, count, manual.id, manual.slug])
+  ManualServiceRegistry.new.republish(manual.id).call
+
+  rummager.delete_document("manual", manual.slug)
+  # The sections are republished along with the manual, but need cleaning up in
+  # Rummager separately:
+  manual.documents.each do |document|
+    rummager.delete_document("manual_section", document.slug)
+  end
+end
+
+logger.info "Migrating of #{count} manuals complete."
+
+# Specialist documents
+
+document_types = SpecialistPublisher.document_types
+
+logger.info "Migrating all specialist documents..."
+
+document_types.each.with_index do |type, format_index|
+  logger.info("Format % 2d/%d: %s" % [format_index + 1, document_types.size, type])
+
+  repository = SpecialistPublisherWiring.get(:repository_registry).for_type(type)
+  count = repository.all.count
+  logger.info "Migrating #{count} #{type}s..."
+
+  services = SpecialistPublisher.document_services(type)
+  repository.all.each.with_index do |document, document_index|
+    logger.info("    [% 5d/%d] id=%s slug=%s" % [document_index + 1, count, document.id, document.slug])
+    services.republish(document.id).call
+
+    rummager.delete_document(type, document.slug)
+  end
+
+  logger.info "Migration of all #{type}s complete."
+end
+
+logger.info "Migration of all specialist documents complete."
