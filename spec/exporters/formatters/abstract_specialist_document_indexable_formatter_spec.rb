@@ -7,6 +7,7 @@ RSpec.shared_examples_for "a specialist document indexable formatter" do
 
     before do
       allow(document).to receive(:updated_at).and_return(updated_at)
+      allow(document.slug).to receive(:start_with?).and_return(false)
     end
 
     it "returns the document's public_updated_at if available" do

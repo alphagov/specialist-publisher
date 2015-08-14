@@ -21,6 +21,10 @@ private
   end
 
   def specialist_sectors
-    entity.tags.select { |t| t[:type] == "specialist_sector" }.map { |t| t[:slug] }
+    if entity.tags.present?
+      entity.tags.select { |t| t[:type] == "specialist_sector" }.map { |t| t[:slug] }
+    else
+      []
+    end
   end
 end

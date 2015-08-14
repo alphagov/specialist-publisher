@@ -42,7 +42,11 @@ private
   end
 
   def link
-    entity.slug
+    with_leading_slash(entity.slug)
+  end
+
+  def with_leading_slash(slug)
+    slug.start_with?("/") ? slug : "/#{slug}"
   end
 
   def indexable_content

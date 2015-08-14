@@ -74,7 +74,7 @@ module DocumentHelpers
       )
 
     expect(fake_rummager).to have_received(:add_document)
-      .with(document_type, slug, hash_including(rummager_fields))
+      .with(document_type, "/#{slug}", hash_including(rummager_fields))
   end
 
   def check_for_correctly_archived_editions(document_attrs)
