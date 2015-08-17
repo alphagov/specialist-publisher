@@ -34,7 +34,7 @@ private
   end
 
   def description
-    ""
+    metadata.fetch("description", "")
   end
 
   def details
