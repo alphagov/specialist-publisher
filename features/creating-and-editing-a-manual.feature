@@ -120,3 +120,8 @@ Feature: Creating and editing a manual
     When I reorder the documents
     Then the order of the documents in the manual should have been updated
     And the new order should be visible in the preview environment
+
+  Scenario: Editing a manual document
+    Given a published manual exists
+    When I edit one of the manual's documents
+    Then I should see a link to preview the manual

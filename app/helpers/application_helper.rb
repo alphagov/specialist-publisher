@@ -18,6 +18,14 @@ module ApplicationHelper
 
   end
 
+  def show_preview?(item)
+    if item.respond_to?(:documents)
+      item.draft? || item.documents.any?(&:draft?)
+    else
+      item.draft?
+    end
+  end
+
   def publication_task_state(task)
     zoned_time = time_with_local_zone(task.updated_at)
     formatted_time = nice_time_format(zoned_time)
