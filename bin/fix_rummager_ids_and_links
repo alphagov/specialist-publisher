@@ -60,7 +60,9 @@ document_types.each.with_index do |type, format_index|
     logger.info("    [% 5d/%d] id=%s slug=%s" % [document_index + 1, count, document.id, document.slug])
     services.republish(document.id).call
 
-    rummager.delete_document(type, document.slug)
+    search_format = type == "esi_fund" ? "european_structural_investment_fund" : type
+
+    rummager.delete_document(search_format, document.slug)
   end
 
   logger.info "Migration of all #{type}s complete."
