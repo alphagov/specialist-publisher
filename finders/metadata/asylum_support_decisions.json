@@ -1,0 +1,13 @@
+{
+  "content_id": "581b4bba-e58f-4d07-8e0a-03c8c00165cc",
+  "base_path": "/asylum-support-decisions",
+  "format_name": "First-tier Tribunal (Asylum Support) decision",
+  "name": "First-tier Tribunal (Asylum Support) decisions",
+  "description": "Find decisions by the First-tier Tribunal (Asylum Support)",
+  "beta": true,
+  "filter": {
+    "document_type": "asylum_support_decision"
+  },
+  "show_summaries": true,
+  "organisations": ["7141e343-e7bb-483b-920a-c6a5cf8f758c"]
+}

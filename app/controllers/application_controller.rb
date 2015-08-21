@@ -22,6 +22,10 @@ class ApplicationController < ActionController::Base
 
   def finders
     {
+      "asylum-support-decisions" => {
+        document_type: "asylum_support_decision",
+        title: "Asylum Support Decisions",
+      },
       "aaib-reports" => {
         document_type: "aaib_report",
         title: "AAIB Reports",

@@ -17,6 +17,7 @@ class ViewAdapterRegistry
       "medical_safety_alert" => MedicalSafetyAlertViewAdapter,
       "raib_report" => RaibReportViewAdapter,
       "vehicle_recalls_and_faults_alert" => VehicleRecallsAndFaultsAlertViewAdapter,
-    }.fetch(type)
+       "asylum_support_decision" => AsylumSupportDecisionViewAdapter,
+   }.fetch(type)
   end
 end
