@@ -41,6 +41,18 @@ class ManualDocumentAttachmentsController < ApplicationController
 
 private
   def services
+    if current_user_is_gds_editor?
+      gds_editor_services
+    else
+      organisational_services
+    end
+  end
+
+  def gds_editor_services
+    ManualDocumentAttachmentServiceRegistry.new
+  end
+
+  def organisational_services
     OrganisationalManualDocumentAttachmentServiceRegistry.new(
       organisation_slug: current_organisation_slug,
     )
