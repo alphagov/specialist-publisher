@@ -41,6 +41,8 @@ class ManualDocumentAttachmentsController < ApplicationController
 
 private
   def services
-    ManualDocumentAttachmentServiceRegistry.new
+    OrganisationalManualDocumentAttachmentServiceRegistry.new(
+      organisation_slug: current_organisation_slug,
+    )
   end
 end
