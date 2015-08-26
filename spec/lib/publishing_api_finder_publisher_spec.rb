@@ -41,19 +41,21 @@ describe PublishingApiFinderPublisher do
       }
     end
 
-    it "uses GdsApi::PublishingApi to publish the Finders" do
-      publishing_api = double("publishing-api")
+    let(:publishing_api) { double("publishing-api") }
 
+    before do
+      allow(GdsApi::PublishingApi).to receive(:new)
+        .with(Plek.new.find("publishing-api"))
+        .and_return(publishing_api)
+    end
+
+    it "uses GdsApi::PublishingApi to publish the Finders" do
       metadata = [
         make_metadata("/first-finder", "signup_content_id" => SecureRandom.uuid),
         make_metadata("/second-finder")
       ]
 
       schemae =  [schema, schema]
-
-      expect(GdsApi::PublishingApi).to receive(:new)
-        .with(Plek.new.find("publishing-api"))
-        .and_return(publishing_api)
 
       expect(publishing_api).to receive(:put_content_item)
         .with("/first-finder", be_valid_against_schema("finder"))
@@ -65,11 +67,10 @@ describe PublishingApiFinderPublisher do
       expect(publishing_api).to receive(:put_content_item)
         .with("/second-finder", be_valid_against_schema("finder"))
 
-      PublishingApiFinderPublisher.new(metadata, schemae).call
+      PublishingApiFinderPublisher.new(metadata, schemae, false).call
     end
 
     it "doesn't publish a Finder without a content id" do
-
       metadata = [
         make_metadata("/finder-without-content-id", "content_id" => nil),
         make_metadata("/finder-with-content-id")
@@ -77,20 +78,72 @@ describe PublishingApiFinderPublisher do
 
       schemae =  [schema, schema]
 
-      publishing_api = double("publishing-api")
-
-      expect(GdsApi::PublishingApi).to receive(:new)
-        .with(Plek.new.find("publishing-api"))
-        .and_return(publishing_api)
-
       expect(publishing_api).not_to receive(:put_content_item)
         .with("/finder-without-content-id", anything)
 
       expect(publishing_api).to receive(:put_content_item)
         .with("/finder-with-content-id", anything)
 
-      PublishingApiFinderPublisher.new(metadata, schemae).call
+      PublishingApiFinderPublisher.new(metadata, schemae, false).call
     end
 
+    context 'with preview_only false metadata and RAILS_ENV is "production"' do
+      it "does publish finder" do
+        metadata = [
+          make_metadata("/finder-with-preview-only-true", "preview_only" => false)
+        ]
+        production = ActiveSupport::StringInquirer.new("production")
+        allow(Rails).to receive(:env).and_return(production)
+
+        expect(publishing_api).to receive(:put_content_item)
+          .with("/finder-with-preview-only-true", anything)
+
+        PublishingApiFinderPublisher.new(metadata, [schema], false).call
+      end
+    end
+
+    context "with preview_only true metadata" do
+      let(:metadata) do
+        [
+          make_metadata("/finder-with-preview-only-true", "preview_only" => true)
+        ]
+      end
+
+      context 'and RAILS_ENV is not "production"' do
+        it "publishes finder" do
+          expect(publishing_api).to receive(:put_content_item)
+            .with("/finder-with-preview-only-true", anything)
+
+          PublishingApiFinderPublisher.new(metadata, [schema], false).call
+        end
+      end
+
+      context 'and RAILS_ENV is "production"' do
+        before do
+          production = ActiveSupport::StringInquirer.new("production")
+          allow(Rails).to receive(:env).and_return(production)
+        end
+
+        context 'and GOVUK_APP_DOMAIN does not contain "preview"' do
+          it "does not publish finder" do
+            expect(publishing_api).not_to receive(:put_content_item)
+              .with("/finder-with-preview-only-true", anything)
+
+            PublishingApiFinderPublisher.new(metadata, [schema], false).call
+          end
+        end
+
+        context 'and GOVUK_APP_DOMAIN contains "preview"' do
+          it "publishes finder" do
+            allow(ENV).to receive(:fetch).with("GOVUK_APP_DOMAIN", "").and_return("preview")
+            expect(publishing_api).to receive(:put_content_item)
+              .with("/finder-with-preview-only-true", anything)
+
+            PublishingApiFinderPublisher.new(metadata, [schema], false).call
+          end
+        end
+
+      end
+    end
   end
 end
