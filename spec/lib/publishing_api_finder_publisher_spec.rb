@@ -3,67 +3,53 @@ require "publishing_api_finder_publisher"
 
 describe PublishingApiFinderPublisher do
   describe ".call" do
+
+    let(:schema) do
+      {
+        file: {
+          "facets" => [
+            {
+              "key" => "report_type",
+              "name" => "Report type",
+              "type" => "text",
+              "display_as_result_metadata" => true,
+              "filterable" => true,
+            },
+          ],
+          "document_noun" => "reports",
+        },
+        timestamp: "2015-01-05T10:45:10.000+00:00",
+      }
+    end
+
+    def make_metadata base_path, overrides = {}
+      underscore_name = base_path.sub("/", "")
+      name = underscore_name.humanize
+      metadata = {
+        "base_path" => base_path,
+        "name" => name,
+        "format_name" => "#{name} things",
+        "content_id" => SecureRandom.uuid,
+        "format" => "#{underscore_name}_format",
+        "logo_path" => "http://example.com/logo.png",
+      }.merge(overrides)
+      metadata.delete("content_id") if metadata["content_id"].nil?
+
+      {
+        file: metadata,
+        timestamp: "2015-01-05T10:45:10.000+00:00",
+      }
+    end
+
     it "uses GdsApi::PublishingApi to publish the Finders" do
       publishing_api = double("publishing-api")
 
       metadata = [
-        {
-          file: {
-            "base_path" => "/first-finder",
-            "name" => "first finder",
-            "format_name" => "first finder things",
-            "content_id" => SecureRandom.uuid,
-            "format" => "a_report_format",
-            "signup_content_id" => SecureRandom.uuid,
-            "logo_path" => "http://example.com/logo.png",
-          },
-          timestamp: "2015-01-05T10:45:10.000+00:00",
-        },
-        {
-          file: {
-            "base_path" => "/second-finder",
-            "name" => "second finder",
-            "format_name" => "second finder things",
-            "content_id" => SecureRandom.uuid,
-            "format" => "some_case_format",
-            "logo_path" => "http://example.com/logo.png",
-          },
-          timestamp: "2015-01-05T10:45:10.000+00:00",
-        }
+        make_metadata("/first-finder", "signup_content_id" => SecureRandom.uuid),
+        make_metadata("/second-finder")
       ]
 
-      schemae =  [
-        {
-          file: {
-            "facets" => [
-              {
-                "key" => "report_type",
-                "name" => "Report type",
-                "type" => "text",
-                "display_as_result_metadata" => true,
-                "filterable" => true,
-              },
-            ],
-            "document_noun" => "reports",
-          },
-          timestamp: "2015-01-05T10:45:10.000+00:00",
-        },
-        {
-          file: {
-            "facets" => [
-              {
-                "key" => "report_type",
-                "name" => "Report type",
-                "type" => "text",
-                "display_as_result_metadata" => true,
-                "filterable" => true,
-              }
-            ],
-            "document_noun" => "cases",
-          },
-          timestamp: "2015-01-05T10:45:10.000+00:00",
-        }
-      ]
+      schemae =  [schema, schema]
 
       expect(GdsApi::PublishingApi).to receive(:new)
         .with(Plek.new.find("publishing-api"))
@@ -83,45 +69,13 @@ describe PublishingApiFinderPublisher do
     end
 
     it "doesn't publish a Finder without a content id" do
+
       metadata = [
-        {
-          file: {
-            "base_path" => "/finder-without-content-id",
-            "name" => "finder without content id",
-            "format" => "a_report_format",
-            "format_name" => "a report format",
-          },
-          timestamp: "2015-01-05T10:45:10.000+00:00",
-        },
-        {
-          file: {
-            "base_path" => "/finder-with-content-id",
-            "name" => "finder with content id",
-            "content_id" => "some-random-id",
-            "format" => "a_report_format",
-            "format_name" => "a report format",
-            "signup_content_id" => SecureRandom.uuid,
-          },
-          timestamp: "2015-01-05T10:45:10.000+00:00",
-        },
+        make_metadata("/finder-without-content-id", "content_id" => nil),
+        make_metadata("/finder-with-content-id")
       ]
 
-      schemae =  [
-        {
-          file: {
-            "facets" => ["a facet", "another facet"],
-            "document_noun" => "reports",
-          },
-          timestamp: "2015-01-05T10:45:10.000+00:00",
-        },
-        {
-          file: {
-            "facets" => ["a facet", "another facet"],
-            "document_noun" => "reports",
-          },
-          timestamp: "2015-01-05T10:45:10.000+00:00",
-        },
-      ]
+      schemae =  [schema, schema]
 
       publishing_api = double("publishing-api")
 
@@ -137,5 +91,6 @@ describe PublishingApiFinderPublisher do
 
       PublishingApiFinderPublisher.new(metadata, schemae).call
     end
+
   end
 end
