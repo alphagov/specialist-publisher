@@ -35,7 +35,7 @@ private
     entity.body
   end
 
-  def last_update
+  def public_timestamp
     nil
   end
 

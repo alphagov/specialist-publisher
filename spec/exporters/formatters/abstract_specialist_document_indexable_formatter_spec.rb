@@ -12,12 +12,12 @@ RSpec.shared_examples_for "a specialist document indexable formatter" do
 
     it "returns the document's public_updated_at if available" do
       allow(document).to receive(:public_updated_at).and_return(public_updated_at)
-      expect(formatter.indexable_attributes[:last_update]).to eq(public_updated_at)
+      expect(formatter.indexable_attributes[:public_timestamp]).to eq(public_updated_at)
     end
 
     it "returns the document's updated_at if there is no public_updated_at" do
       allow(document).to receive(:public_updated_at).and_return(nil)
-      expect(formatter.indexable_attributes[:last_update]).to eq(updated_at)
+      expect(formatter.indexable_attributes[:public_timestamp]).to eq(updated_at)
     end
   end
 end
