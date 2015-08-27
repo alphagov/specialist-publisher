@@ -14,6 +14,7 @@ private
       tribunal_decision_sub_category: entity.tribunal_decision_sub_category,
       tribunal_decision_landmark: entity.tribunal_decision_landmark,
       tribunal_decision_reference_number: entity.tribunal_decision_reference_number,
+      indexable_content: entity.hidden_indexable_content || entity.body
     }
   end
 

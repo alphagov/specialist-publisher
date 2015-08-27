@@ -10,6 +10,7 @@ class AsylumSupportDecisionViewAdapter < DocumentViewAdapter
     :tribunal_decision_sub_category,
     :tribunal_decision_landmark,
     :tribunal_decision_reference_number,
+    :hidden_indexable_content,
   ]
 
   def self.model_name

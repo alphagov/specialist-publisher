@@ -10,6 +10,7 @@
     <%= f.text_field :tribunal_decision_sub_category, label: "Sub-category", class: 'form-control' %>
     <%= f.select :tribunal_decision_landmark, f.object.facet_options(:tribunal_decision_landmark), { label: "Landmark" }, { class: 'form-control' } %>
     <%= f.text_field :tribunal_decision_reference_number, label: "Reference number", class: 'form-control' %>
+    <%= f.text_area :hidden_indexable_content, class: 'form-control' %>
 
     <%= render partial: "specialist_documents/minor_major_update_fields", locals: { f: f, document: document } %>
 
