@@ -9,5 +9,8 @@
     "document_type": "asylum_support_decision"
   },
   "show_summaries": true,
-  "organisations": ["7141e343-e7bb-483b-920a-c6a5cf8f758c"]
+  "organisations": [
+    "7141e343-e7bb-483b-920a-c6a5cf8f758c"
+  ],
+  "preview_only": true
 }
