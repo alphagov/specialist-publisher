@@ -4,6 +4,8 @@ class PermissionChecker
 
   def self.owning_organisations_for_format(format)
     case format
+    when "asylum_support_decision"
+      ["first-tier-tribunal-asylum-support"]
     when "cma_case"
       ["competition-and-markets-authority"]
     when "aaib_report"

@@ -119,6 +119,11 @@ SpecialistPublisherWiring ||= DependencyContainer.new do
       get(:validatable_document_factories).vehicle_recalls_and_faults_alert_factory)
   }
 
+  define_factory(:asylum_support_decision_builder) {
+    SpecialistDocumentBuilder.new("asylum_support_decision",
+      get(:validatable_document_factories).asylum_support_decision_factory)
+  }
+
   define_instance(:markdown_attachment_renderer) {
     MarkdownAttachmentProcessor.method(:new)
   }
@@ -244,6 +249,10 @@ SpecialistPublisherWiring ||= DependencyContainer.new do
 
   define_singleton(:vehicle_recalls_and_faults_alert_finder_schema) {
     FinderSchema.new(Rails.root.join("finders/schemas/vehicle-recalls-and-faults-alert.json"))
+  }
+
+  define_singleton(:asylum_support_decision_finder_schema) {
+    FinderSchema.new(Rails.root.join("finders/schemas/asylum-support-decisions.json"))
   }
 
   define_singleton(:organisations_api) {

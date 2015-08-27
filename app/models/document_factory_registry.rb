@@ -12,6 +12,7 @@ require "validators/medical_safety_alert_validator"
 require "validators/null_validator"
 require "validators/raib_report_validator"
 require "validators/vehicle_recalls_and_faults_alert_validator"
+require "validators/asylum_support_decision_validator"
 
 require "builders/manual_document_builder"
 require "manual_with_documents"
@@ -25,6 +26,7 @@ require "cma_case"
 require "drug_safety_update"
 require "medical_safety_alert"
 require "international_development_fund"
+require "asylum_support_decision"
 
 class DocumentFactoryRegistry
   def aaib_report_factory
@@ -171,6 +173,21 @@ class DocumentFactoryRegistry
               SlugGenerator.new(prefix: "vehicle-recalls-faults"),
               *args,
             )
+          )
+        )
+      )
+    }
+  end
+
+  def asylum_support_decision_factory
+    ->(*args) {
+      ChangeNoteValidator.new(
+        AsylumSupportDecisionValidator.new(
+          AsylumSupportDecision.new(
+            SpecialistDocument.new(
+              SlugGenerator.new(prefix: "asylum-support-decisions"),
+              *args,
+            ),
           )
         )
       )

@@ -26,6 +26,7 @@ module SpecialistPublisher
 private
   OBSERVER_MAP = {
     "aaib_report" => AaibReportObserversRegistry,
+    "asylum_support_decision" => AsylumSupportDecisionObserversRegistry,
     "cma_case" => CmaCaseObserversRegistry,
     "countryside_stewardship_grant" => CountrysideStewardshipGrantObserversRegistry,
     "drug_safety_update" => DrugSafetyUpdateObserversRegistry,
