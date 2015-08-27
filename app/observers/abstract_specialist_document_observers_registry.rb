@@ -27,6 +27,7 @@ class AbstractSpecialistDocumentObserversRegistry
 
   def republication
     [
+      publishing_api_exporter,
       rummager_exporter,
     ]
   end
