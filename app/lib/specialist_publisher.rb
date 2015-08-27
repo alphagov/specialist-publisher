@@ -23,8 +23,8 @@ module SpecialistPublisher
     OBSERVER_MAP.keys
   end
 
+private
   OBSERVER_MAP = {
-    "asylum_support_decision" => AsylumSupportDecisionObserversRegistry,
     "aaib_report" => AaibReportObserversRegistry,
     "asylum_support_decision" => AsylumSupportDecisionObserversRegistry,
     "cma_case" => CmaCaseObserversRegistry,
@@ -37,8 +37,6 @@ module SpecialistPublisher
     "raib_report" => RaibReportObserversRegistry,
     "vehicle_recalls_and_faults_alert" => VehicleRecallsAndFaultsAlertObserversRegistry,
   }.freeze
-
-  private
 
   def view_adapters
     SpecialistPublisherWiring.get(:view_adapter_registry)
