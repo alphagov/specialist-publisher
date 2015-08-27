@@ -28,12 +28,12 @@ class PublishingApiFinderPublisher
 private
   attr_reader :schemae, :metadata
 
-  def publish metadata, schema
+  def publish(metadata, schema)
     export_finder(metadata, schema)
     export_signup(metadata) if metadata[:file].has_key?("signup_content_id")
   end
 
-  def preview_only? metadata
+  def preview_only?(metadata)
     metadata[:file]["preview_only"] == true
   end
 
