@@ -4,12 +4,12 @@ require "validators/safe_html_validator"
 
 class AsylumSupportDecisionViewAdapter < DocumentViewAdapter
   attributes = [
-    :tribunal_decision_decision_date,
     :tribunal_decision_judges,
     :tribunal_decision_category,
     :tribunal_decision_sub_category,
     :tribunal_decision_landmark,
     :tribunal_decision_reference_number,
+    :tribunal_decision_decision_date,
     :hidden_indexable_content,
   ]
 

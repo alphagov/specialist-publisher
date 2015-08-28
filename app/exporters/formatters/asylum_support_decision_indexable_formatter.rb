@@ -8,12 +8,12 @@ class AsylumSupportDecisionIndexableFormatter < AbstractSpecialistDocumentIndexa
 private
   def extra_attributes
     {
-      tribunal_decision_decision_date: entity.tribunal_decision_decision_date,
       tribunal_decision_judges: entity.tribunal_decision_judges,
       tribunal_decision_category: entity.tribunal_decision_category,
       tribunal_decision_sub_category: entity.tribunal_decision_sub_category,
       tribunal_decision_landmark: entity.tribunal_decision_landmark,
       tribunal_decision_reference_number: entity.tribunal_decision_reference_number,
+      tribunal_decision_decision_date: entity.tribunal_decision_decision_date,
       indexable_content: entity.hidden_indexable_content || entity.body
     }
   end
