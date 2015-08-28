@@ -6,19 +6,16 @@ describe PublishingApiFinderPublisher do
 
     let(:schema) do
       {
-        file: {
-          "facets" => [
-            {
-              "key" => "report_type",
-              "name" => "Report type",
-              "type" => "text",
-              "display_as_result_metadata" => true,
-              "filterable" => true,
-            },
-          ],
-          "document_noun" => "reports",
-        },
-        timestamp: "2015-01-05T10:45:10.000+00:00",
+        "facets" => [
+          {
+            "key" => "report_type",
+            "name" => "Report type",
+            "type" => "text",
+            "display_as_result_metadata" => true,
+            "filterable" => true,
+          },
+        ],
+        "document_noun" => "reports",
       }
     end
 
@@ -35,9 +32,14 @@ describe PublishingApiFinderPublisher do
       }.merge(overrides)
       metadata.delete("content_id") if metadata["content_id"].nil?
 
+      metadata
+    end
+
+    def make_finder(base_path, overrides = {})
       {
-        file: metadata,
-        timestamp: "2015-01-05T10:45:10.000+00:00",
+        schema: schema,
+        metadata: make_metadata(base_path, overrides),
+        timestamp: "2015-01-05T10:45:10.000+00:00"
       }
     end
 
@@ -50,12 +52,10 @@ describe PublishingApiFinderPublisher do
     end
 
     it "uses GdsApi::PublishingApi to publish the Finders" do
-      metadata = [
-        make_metadata("/first-finder", "signup_content_id" => SecureRandom.uuid),
-        make_metadata("/second-finder")
+      finders = [
+        make_finder("/first-finder", "signup_content_id" => SecureRandom.uuid),
+        make_finder("/second-finder"),
       ]
-
-      schemae =  [schema, schema]
 
       expect(publishing_api).to receive(:put_content_item)
         .with("/first-finder", be_valid_against_schema("finder"))
@@ -67,16 +67,14 @@ describe PublishingApiFinderPublisher do
       expect(publishing_api).to receive(:put_content_item)
         .with("/second-finder", be_valid_against_schema("finder"))
 
-      PublishingApiFinderPublisher.new(metadata, schemae, false).call
+      PublishingApiFinderPublisher.new(finders, false).call
     end
 
     it "doesn't publish a Finder without a content id" do
-      metadata = [
-        make_metadata("/finder-without-content-id", "content_id" => nil),
-        make_metadata("/finder-with-content-id")
+      finders = [
+        make_finder("/finder-without-content-id", "content_id" => nil),
+        make_finder("/finder-with-content-id")
       ]
-
-      schemae =  [schema, schema]
 
       expect(publishing_api).not_to receive(:put_content_item)
         .with("/finder-without-content-id", anything)
@@ -84,28 +82,29 @@ describe PublishingApiFinderPublisher do
       expect(publishing_api).to receive(:put_content_item)
         .with("/finder-with-content-id", anything)
 
-      PublishingApiFinderPublisher.new(metadata, schemae, false).call
+      PublishingApiFinderPublisher.new(finders, false).call
     end
 
     context 'with preview_only false metadata and RAILS_ENV is "production"' do
       it "does publish finder" do
-        metadata = [
-          make_metadata("/finder-with-preview-only-true", "preview_only" => false)
+        finders = [
+          make_finder("/finder-with-preview-only-true", "preview_only" => false)
         ]
+
         production = ActiveSupport::StringInquirer.new("production")
         allow(Rails).to receive(:env).and_return(production)
 
         expect(publishing_api).to receive(:put_content_item)
           .with("/finder-with-preview-only-true", anything)
 
-        PublishingApiFinderPublisher.new(metadata, [schema], false).call
+        PublishingApiFinderPublisher.new(finders, false).call
       end
     end
 
     context "with preview_only true metadata" do
-      let(:metadata) do
+      let(:finders) do
         [
-          make_metadata("/finder-with-preview-only-true", "preview_only" => true)
+          make_finder("/finder-with-preview-only-true", "preview_only" => true)
         ]
       end
 
@@ -114,7 +113,7 @@ describe PublishingApiFinderPublisher do
           expect(publishing_api).to receive(:put_content_item)
             .with("/finder-with-preview-only-true", anything)
 
-          PublishingApiFinderPublisher.new(metadata, [schema], false).call
+          PublishingApiFinderPublisher.new(finders, false).call
         end
       end
 
@@ -129,7 +128,7 @@ describe PublishingApiFinderPublisher do
             expect(publishing_api).not_to receive(:put_content_item)
               .with("/finder-with-preview-only-true", anything)
 
-            PublishingApiFinderPublisher.new(metadata, [schema], false).call
+            PublishingApiFinderPublisher.new(finders, false).call
           end
         end
 
@@ -139,7 +138,7 @@ describe PublishingApiFinderPublisher do
             expect(publishing_api).to receive(:put_content_item)
               .with("/finder-with-preview-only-true", anything)
 
-            PublishingApiFinderPublisher.new(metadata, [schema], false).call
+            PublishingApiFinderPublisher.new(finders, false).call
           end
         end
 

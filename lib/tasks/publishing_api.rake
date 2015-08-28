@@ -8,21 +8,23 @@ namespace :publishing_api do
 
     require "multi_json"
 
-    metadata = Dir.glob("finders/metadata/**/*.json").map do |file_path|
+    metadata_files = Dir.glob("finders/metadata/*.json").map { |file| File.basename(file) }
+    schemas_files = Dir.glob("finders/schemas/*.json").map { |file| File.basename(file) }
+
+    matching_files = metadata_files.select { |filename| schemae_files.include?(filename) }
+
+    finders = matching_files.map do |filename|
+      metadata_file = File.join('finders/metadata', filename)
+      schema_file = File.join('finders/schemas', filename)
+
       {
-        file: MultiJson.load(File.read(file_path)),
-        timestamp: File.mtime(file_path)
+        metadata: MultiJson.load(File.read(metadata_file)),
+        schema: MultiJons.load(File.read(schema_file)),
+        timestamp: File.mtime(metadata_file)
       }
     end
 
-    schemae = Dir.glob("finders/schemas/**/*.json").map do |file_path|
-      {
-        file: MultiJson.load(File.read(file_path)),
-        timestamp: File.mtime(file_path)
-      }
-    end
-
-    PublishingApiFinderPublisher.new(metadata, schemae).call
+    PublishingApiFinderPublisher.new(finders).call
   end
 
   task :publish_documents_as_placeholders => :environment do
