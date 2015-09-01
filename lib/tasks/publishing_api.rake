@@ -5,26 +5,19 @@ namespace :publishing_api do
   desc "Publish all Finders to the Publishing API"
   task :publish_finders do
     require "publishing_api_finder_publisher"
+    require "publishing_api_finder_loader"
 
-    require "multi_json"
+    finder_loader = PublishingApiFinderLoader.new('finders')
 
-    metadata_files = Dir.glob("finders/metadata/*.json").map { |file| File.basename(file) }
-    schemas_files = Dir.glob("finders/schemas/*.json").map { |file| File.basename(file) }
-
-    matching_files = metadata_files.select { |filename| schemae_files.include?(filename) }
-
-    finders = matching_files.map do |filename|
-      metadata_file = File.join('finders/metadata', filename)
-      schema_file = File.join('finders/schemas', filename)
-
-      {
-        metadata: MultiJson.load(File.read(metadata_file)),
-        schema: MultiJons.load(File.read(schema_file)),
-        timestamp: File.mtime(metadata_file)
-      }
+    if finder_loader.metadata_files_missing_schema.any?
+      puts "Metadata files without a matching schema: #{finder_loader.metadata_files_missing_schema}"
     end
 
-    PublishingApiFinderPublisher.new(finders).call
+    if finder_loader.schema_files_missing_metadata.any?
+      puts "Schema files without a matching metadata: #{finder_loader.schema_files_missing_metadata}"
+    end
+
+    PublishingApiFinderPublisher.new(finder_loader.finders).call
   end
 
   task :publish_documents_as_placeholders => :environment do
