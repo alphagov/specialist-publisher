@@ -15,7 +15,7 @@ RSpec.describe AsylumSupportDecisionIndexableFormatter do
       minor_update?: false,
       public_updated_at: double,
 
-      tribunal_decision_judges: double,
+      tribunal_decision_judges: [double],
       tribunal_decision_category: double,
       tribunal_decision_sub_category: double,
       tribunal_decision_landmark: double,
@@ -26,6 +26,8 @@ RSpec.describe AsylumSupportDecisionIndexableFormatter do
   }
 
   subject(:formatter) { AsylumSupportDecisionIndexableFormatter.new(document) }
+
+  include_context "schema available"
 
   it_should_behave_like "a specialist document indexable formatter"
 

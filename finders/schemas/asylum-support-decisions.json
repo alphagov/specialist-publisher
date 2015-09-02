@@ -6,7 +6,7 @@
       "name": "Judges",
       "type": "text",
       "preposition": "by judge",
-      "display_as_result_metadata": true,
+      "display_as_result_metadata": false,
       "filterable": true,
       "allowed_values": [
         {
@@ -140,11 +140,18 @@
       ]
     },
     {
+      "key": "tribunal_decision_judges_name",
+      "name": "Judges name",
+      "type": "text",
+      "display_as_result_metadata": true,
+      "filterable": false
+    },
+    {
       "key": "tribunal_decision_category",
       "name": "Category",
       "type": "text",
       "preposition": "categorised as",
-      "display_as_result_metadata": true,
+      "display_as_result_metadata": false,
       "filterable": true,
       "allowed_values": [
         {
@@ -162,11 +169,18 @@
       ]
     },
     {
+      "key": "tribunal_decision_category_name",
+      "name": "Category name",
+      "type": "text",
+      "display_as_result_metadata": true,
+      "filterable": false
+    },
+    {
       "key": "tribunal_decision_sub_category",
       "name": "Sub-category",
       "type": "text",
       "preposition": "sub-categorised as",
-      "display_as_result_metadata": true,
+      "display_as_result_metadata": false,
       "filterable": true,
       "allowed_values": [
         {
@@ -248,11 +262,17 @@
       ]
     },
     {
+      "key": "tribunal_decision_sub_category_name",
+      "name": "Sub-category name",
+      "type": "text",
+      "display_as_result_metadata": true,
+      "filterable": false
+    },
+    {
       "key": "tribunal_decision_landmark",
       "name": "Landmark",
       "type": "text",
-      "preposition": null,
-      "display_as_result_metadata": true,
+      "display_as_result_metadata": false,
       "filterable": false,
       "allowed_values": [
         {
@@ -266,10 +286,16 @@
       ]
     },
     {
+      "key": "tribunal_decision_landmark_name",
+      "name": "Landmark name",
+      "type": "text",
+      "display_as_result_metadata": true,
+      "filterable": false
+    },
+    {
       "key": "tribunal_decision_reference_number",
       "name": "Reference number",
       "type": "text",
-      "preposition": null,
       "display_as_result_metadata": true,
       "filterable": false
     },
@@ -277,7 +303,7 @@
       "key": "tribunal_decision_decision_date",
       "name": "Decision date",
       "type": "date",
-      "preposition": null,
+      "preposition": null, 
       "display_as_result_metadata": true,
       "filterable": true
     }
