@@ -17,7 +17,7 @@ class FinderContentItemPresenter < Struct.new(:metadata, :schema, :timestamp)
         "email_alert_signup" => email_alert_signup,
       },
       "locale" => "en",
-    }
+    }.merge(phase)
   end
 
   def base_path
@@ -39,7 +39,6 @@ private
 
   def details
     {
-      beta: metadata.fetch("beta", false),
       beta_message: metadata.fetch("beta_message", nil),
       document_noun: schema.fetch("document_noun"),
       filter: metadata.fetch("filter", {}),
@@ -100,5 +99,16 @@ private
 
   def email_alert_signup
     [metadata.fetch("signup_content_id", nil)].compact
+  end
+
+  def phase
+    phase = metadata["phase"]
+    if phase
+      {
+        "phase" => phase
+      }
+    else
+      {}
+    end
   end
 end

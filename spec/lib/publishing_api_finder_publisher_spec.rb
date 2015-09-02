@@ -85,6 +85,17 @@ describe PublishingApiFinderPublisher do
       PublishingApiFinderPublisher.new(finders, false).call
     end
 
+    it "can publish a Finder with a phase" do
+      finders = [
+        make_finder("/finder-with-phase", "phase" => "beta"),
+      ]
+
+      expect(publishing_api).to receive(:put_content_item)
+        .with("/finder-with-phase", be_valid_against_schema("finder"))
+
+      PublishingApiFinderPublisher.new(finders, false).call
+    end
+
     context 'with preview_only false metadata and RAILS_ENV is "production"' do
       it "does publish finder" do
         finders = [
