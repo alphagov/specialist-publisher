@@ -19,7 +19,7 @@ describe PublishingApiFinderPublisher do
       }
     end
 
-    def make_metadata base_path, overrides = {}
+    def make_metadata(base_path, overrides = {})
       underscore_name = base_path.sub("/", "")
       name = underscore_name.humanize
       metadata = {
