@@ -302,8 +302,9 @@
     {
       "key": "tribunal_decision_decision_date",
       "name": "Decision date",
+      "short_name": "Decided",
       "type": "date",
-      "preposition": null, 
+      "preposition": "decided", 
       "display_as_result_metadata": true,
       "filterable": true
     }
