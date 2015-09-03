@@ -19,7 +19,7 @@ describe PublishingApiFinderPublisher do
       }
     end
 
-    def make_metadata base_path, overrides = {}
+    def make_metadata(base_path, overrides = {})
       underscore_name = base_path.sub("/", "")
       name = underscore_name.humanize
       metadata = {
@@ -81,6 +81,17 @@ describe PublishingApiFinderPublisher do
 
       expect(publishing_api).to receive(:put_content_item)
         .with("/finder-with-content-id", anything)
+
+      PublishingApiFinderPublisher.new(finders, false).call
+    end
+
+    it "can publish a Finder with a phase" do
+      finders = [
+        make_finder("/finder-with-phase", "phase" => "beta"),
+      ]
+
+      expect(publishing_api).to receive(:put_content_item)
+        .with("/finder-with-phase", be_valid_against_schema("finder"))
 
       PublishingApiFinderPublisher.new(finders, false).call
     end
