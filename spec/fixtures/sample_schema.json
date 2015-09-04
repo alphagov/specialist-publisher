@@ -6,9 +6,10 @@
     {
       "key": "case_type",
       "name": "Case type",
-      "type": "single-select",
+      "type": "text",
       "allowed_values": [
-        {"label": "CA98 and civil cartels", "value": "ca98-and-civil-cartels"}
+        {"label": "CA98 and civil cartels", "value": "ca98-and-civil-cartels"},
+        {"label": "Criminal cartels", "value": "criminal-cartels"}
       ]
     }
   ]
