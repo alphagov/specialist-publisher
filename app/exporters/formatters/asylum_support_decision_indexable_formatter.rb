@@ -18,7 +18,7 @@ private
       tribunal_decision_landmark_name: expand_value(:tribunal_decision_landmark),
       tribunal_decision_reference_number: entity.tribunal_decision_reference_number,
       tribunal_decision_decision_date: entity.tribunal_decision_decision_date,
-      indexable_content: entity.hidden_indexable_content || entity.body
+      indexable_content: "#{entity.hidden_indexable_content}\n#{entity.body}".strip
     }
   end
 
