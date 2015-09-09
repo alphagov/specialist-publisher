@@ -12,5 +12,32 @@
   "organisations": [
     "7141e343-e7bb-483b-920a-c6a5cf8f758c"
   ],
+  "signup_content_id": "307ea825-594c-4d88-85c9-0809fdc9c79e",
+  "signup_copy": "You'll get an email each time a decision is updated or a new decision is published.",
+  "subscription_list_title_prefix": {
+    "singular": "First-tier Tribunal (Asylum Support) decisions with the following category: ",
+    "plural": "First-tier Tribunal (Asylum Support) decisions with the following categories: "
+  },
+  "email_filter_by": "tribunal_decision_category",
+  "email_signup_choice": [
+    {
+      "key": "section-95-asylum-seekers",
+      "radio_button_name": "Section 95 (asylum-seekers)",
+      "topic_name": "section 95 asylum seekers",
+      "prechecked": false
+    },
+    {
+      "key": "section-4-2-failed-asylum-seekers",
+      "radio_button_name": "Section 4(2) (failed asylum seekers)",
+      "topic_name": "section 4 2 failed asylum seekers",
+      "prechecked": false
+    },
+    {
+      "key": "section-4-1-neither-an-asylum-seeker-nor-a-failed-asylum-seeker",
+      "radio_button_name": "Section 4(1) (neither an asylum seeker nor a failed asylum seeker)",
+      "topic_name": "section 4 1 neither an asylum seeker nor a failed asylum seeker",
+      "prechecked": false
+    }
+  ],
   "preview_only": true
 }
