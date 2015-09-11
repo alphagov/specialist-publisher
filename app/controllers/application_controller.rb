@@ -62,6 +62,10 @@ class ApplicationController < ActionController::Base
         document_type: "raib_report",
         title: "RAIB Reports",
       },
+      "utaac-decisions" => {
+        document_type: "utaac_decision",
+        title: "UTAAC Decisions",
+      },
       "vehicle-recalls-and-faults-alerts" => {
         document_type: "vehicle_recalls_and_faults_alert",
         title: "Vehicle Recalls and Faults",

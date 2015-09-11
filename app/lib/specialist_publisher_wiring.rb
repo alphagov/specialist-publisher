@@ -124,6 +124,11 @@ SpecialistPublisherWiring ||= DependencyContainer.new do
       get(:validatable_document_factories).asylum_support_decision_factory)
   }
 
+  define_factory(:utaac_decision_builder) {
+    SpecialistDocumentBuilder.new("utaac_decision",
+      get(:validatable_document_factories).utaac_decision_factory)
+  }
+
   define_instance(:markdown_attachment_renderer) {
     MarkdownAttachmentProcessor.method(:new)
   }
@@ -253,6 +258,10 @@ SpecialistPublisherWiring ||= DependencyContainer.new do
 
   define_singleton(:asylum_support_decision_finder_schema) {
     FinderSchema.new(Rails.root.join("finders/schemas/asylum-support-decisions.json"))
+  }
+
+  define_singleton(:utaac_decision_finder_schema) {
+    FinderSchema.new(Rails.root.join("finders/schemas/utaac-decisions.json"))
   }
 
   define_singleton(:organisations_api) {
