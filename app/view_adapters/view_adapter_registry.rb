@@ -15,6 +15,7 @@ private
     "maib_report" => MaibReportViewAdapter,
     "medical_safety_alert" => MedicalSafetyAlertViewAdapter,
     "raib_report" => RaibReportViewAdapter,
+    "utaac_decision" => UtaacDecisionViewAdapter,
     "vehicle_recalls_and_faults_alert" => VehicleRecallsAndFaultsAlertViewAdapter,
   }.freeze
 

@@ -27,6 +27,8 @@ class PermissionChecker
       ["rail-accident-investigation-branch"]
     when "countryside_stewardship_grant"
       ["department-for-environment-food-rural-affairs"]
+    when "utaac_decision"
+      ["upper-tribunal-administrative-appeals-chamber"]
     when "vehicle_recalls_and_faults_alert"
       ["driver-and-vehicle-standards-agency"]
     end
