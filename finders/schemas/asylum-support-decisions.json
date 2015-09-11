@@ -2,151 +2,6 @@
   "document_noun": "decision",
   "facets": [
     {
-      "key": "tribunal_decision_judges",
-      "name": "Judges",
-      "type": "text",
-      "preposition": "by judge",
-      "display_as_result_metadata": false,
-      "filterable": true,
-      "allowed_values": [
-        {
-          "label": "Alan Ponting",
-          "value": "alan-ponting"
-        },
-        {
-          "label": "Alison Lock",
-          "value": "alison-lock"
-        },
-        {
-          "label": "Allan Briddock",
-          "value": "allan-briddock"
-        },
-        {
-          "label": "Anne-Marie Tootell",
-          "value": "anne-marie-tootell"
-        },
-        {
-          "label": "Charlotte Bayati",
-          "value": "charlotte-bayati"
-        },
-        {
-          "label": "Christopher Rayner",
-          "value": "christopher-rayner"
-        },
-        {
-          "label": "David Saunders",
-          "value": "david-saunders"
-        },
-        {
-          "label": "Dr E Prince",
-          "value": "dr-e-prince"
-        },
-        {
-          "label": "Fiona Ripley",
-          "value": "fiona-ripley"
-        },
-        {
-          "label": "Fozia Rizvi",
-          "value": "fozia-rizvi"
-        },
-        {
-          "label": "Gary Garland",
-          "value": "gary-garland"
-        },
-        {
-          "label": "Gill Carter",
-          "value": "gill-carter"
-        },
-        {
-          "label": "Ian Lewis",
-          "value": "ian-lewis"
-        },
-        {
-          "label": "Jessica Wyman",
-          "value": "jessica-wyman"
-        },
-        {
-          "label": "Joanna Swaney",
-          "value": "joanna-swaney"
-        },
-        {
-          "label": "Julie Cornes",
-          "value": "julie-cornes"
-        },
-        {
-          "label": "Laurence Brass",
-          "value": "laurence-brass"
-        },
-        {
-          "label": "Margaret Phelan",
-          "value": "margaret-phelan"
-        },
-        {
-          "label": "Martin Penrose",
-          "value": "martin-penrose"
-        },
-        {
-          "label": "Noor-Ul Khan",
-          "value": "noor-ul-khan"
-        },
-        {
-          "label": "Paulene Gandhi",
-          "value": "paulene-gandhi"
-        },
-        {
-          "label": "Rafaquat Hussain",
-          "value": "rafaquat-hussain"
-        },
-        {
-          "label": "Rebecca Owens",
-          "value": "rebecca-owens"
-        },
-        {
-          "label": "Richard Briden",
-          "value": "richard-briden"
-        },
-        {
-          "label": "Sally Verity Smith",
-          "value": "sally-verity-smith"
-        },
-        {
-          "label": "Salma Bashir",
-          "value": "salma-bashir"
-        },
-        {
-          "label": "Sanjay Lal",
-          "value": "sanjay-lal"
-        },
-        {
-          "label": "Sarah Breach",
-          "value": "sarah-breach"
-        },
-        {
-          "label": "Sehba Storey",
-          "value": "sehba-storey"
-        },
-        {
-          "label": "Sheila Grewal",
-          "value": "sheila-grewal"
-        },
-        {
-          "label": "Susannah Walker",
-          "value": "susannah-walker"
-        },
-        {
-          "label": "Victoria Woollen",
-          "value": "victoria-woollen"
-        }
-      ]
-    },
-    {
-      "key": "tribunal_decision_judges_name",
-      "name": "Judges name",
-      "type": "text",
-      "display_as_result_metadata": true,
-      "filterable": false
-    },
-    {
       "key": "tribunal_decision_category",
       "name": "Category",
       "type": "text",
@@ -269,19 +124,132 @@
       "filterable": false
     },
     {
+      "key": "tribunal_decision_judges",
+      "name": "Judges",
+      "type": "text",
+      "preposition": "by judge",
+      "display_as_result_metadata": false,
+      "filterable": true,
+      "allowed_values": [
+        {
+          "label": "Bashir, S",
+          "value": "bashir-s"
+        },
+        {
+          "label": "Bayati, C",
+          "value": "bayati-c"
+        },
+        {
+          "label": "Briden, R",
+          "value": "briden-r"
+        },
+        {
+          "label": "Carter, G",
+          "value": "carter-g"
+        },
+        {
+          "label": "Cornes, J",
+          "value": "cornes-j"
+        },
+        {
+          "label": "Gandhi, P",
+          "value": "gandhi-p"
+        },
+        {
+          "label": "Grewal, S",
+          "value": "grewal-s"
+        },
+        {
+          "label": "Hussain, R",
+          "value": "hussain-r"
+        },
+        {
+          "label": "Khan, NU",
+          "value": "khan-nu"
+        },
+        {
+          "label": "Lal, S",
+          "value": "lal-s"
+        },
+        {
+          "label": "Lewis, I",
+          "value": "lewis-i"
+        },
+        {
+          "label": "Lock, A",
+          "value": "lock-a"
+        },
+        {
+          "label": "Owens, R",
+          "value": "owens-r"
+        },
+        {
+          "label": "Penrose, M",
+          "value": "penrose-m"
+        },
+        {
+          "label": "Phelan, M",
+          "value": "phelan-m"
+        },
+        {
+          "label": "Rayner, C",
+          "value": "rayner-c"
+        },
+        {
+          "label": "Ripley, F",
+          "value": "ripley-f"
+        },
+        {
+          "label": "Rizvi, F",
+          "value": "rizvi-f"
+        },
+        {
+          "label": "Saunders, D",
+          "value": "saunders-d"
+        },
+        {
+          "label": "Smith, SV",
+          "value": "smith-sv"
+        },
+        {
+          "label": "Storey, S",
+          "value": "storey-s"
+        },
+        {
+          "label": "Swaney, J",
+          "value": "swaney-j"
+        },
+        {
+          "label": "Tootell, A",
+          "value": "tootell-a"
+        },
+        {
+          "label": "Wyman, J",
+          "value": "wyman-j"
+        }
+      ]
+    },
+    {
+      "key": "tribunal_decision_judges_name",
+      "name": "Judges name",
+      "type": "text",
+      "display_as_result_metadata": true,
+      "filterable": false
+    },
+    {
       "key": "tribunal_decision_landmark",
       "name": "Landmark",
       "type": "text",
       "display_as_result_metadata": false,
-      "filterable": false,
+      "filterable": true,
       "allowed_values": [
-        {
-          "label": "Not Landmark",
-          "value": "not-landmark"
-        },
         {
           "label": "Landmark",
           "value": "landmark"
+        },
+        {
+          "label": "Not landmark",
+          "value": "not-landmark"
         }
       ]
     },
@@ -304,7 +272,7 @@
       "name": "Decision date",
       "short_name": "Decided",
       "type": "date",
-      "preposition": "decided", 
+      "preposition": "decided",
       "display_as_result_metadata": true,
       "filterable": true
     }
