@@ -15,8 +15,12 @@ private
 
   def extra_attributes
     {
-      manual: manual.slug,
+      manual: manual_slug,
     }
+  end
+
+  def manual_slug
+    with_leading_slash(manual.slug)
   end
 
   def title
