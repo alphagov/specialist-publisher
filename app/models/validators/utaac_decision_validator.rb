@@ -1,6 +1,7 @@
 require "delegate"
 require "validators/date_validator"
 require "validators/safe_html_validator"
+require "validators/tribunal_decision_sub_category_relates_to_parent_validator"
 
 class UtaacDecisionValidator < SimpleDelegator
   include ActiveModel::Validations
@@ -12,6 +13,6 @@ class UtaacDecisionValidator < SimpleDelegator
   validates :tribunal_decision_category, presence: true
   validates :tribunal_decision_decision_date, presence: true, date: true
   validates :tribunal_decision_judges, presence: true
-  validates :tribunal_decision_sub_category, presence: true
+  validates :tribunal_decision_sub_category, presence: true, tribunal_decision_sub_category_relates_to_parent: true
 
 end

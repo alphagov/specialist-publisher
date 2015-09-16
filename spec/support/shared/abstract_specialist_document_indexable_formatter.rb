@@ -21,4 +21,3 @@ RSpec.shared_examples_for "a specialist document indexable formatter" do
     end
   end
 end
-
