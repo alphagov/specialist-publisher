@@ -25,7 +25,9 @@ RSpec.describe AsylumSupportDecisionIndexableFormatter do
 
   subject(:formatter) { AsylumSupportDecisionIndexableFormatter.new(document) }
 
-  include_context "schema available"
+  let(:document_type) { formatter.type }
+  let(:humanized_facet_value) { double }
+  include_context "schema with humanized_facet_value available"
 
   it_should_behave_like "a specialist document indexable formatter"
 
