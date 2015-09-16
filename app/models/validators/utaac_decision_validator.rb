@@ -10,7 +10,7 @@ class UtaacDecisionValidator < SimpleDelegator
   validates :body, presence: true, safe_html: true
 
   validates :tribunal_decision_category, presence: true
-  validates :tribunal_decision_decision_date, presence: true
+  validates :tribunal_decision_decision_date, presence: true, date: true
   validates :tribunal_decision_judges, presence: true
   validates :tribunal_decision_sub_category, presence: true
 
