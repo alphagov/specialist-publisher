@@ -15,7 +15,7 @@ class AsylumSupportDecisionValidator < SimpleDelegator
   validates :tribunal_decision_judges, presence: true
   validates :tribunal_decision_landmark, presence: true
   validates :tribunal_decision_reference_number, presence: true
-  validates :tribunal_decision_sub_category, presence: true, tribunal_decision_sub_category_relates_to_parent: true
+  validates :tribunal_decision_sub_category, tribunal_decision_sub_category_relates_to_parent: true
 
   def category_prefix_for(category)
     case category

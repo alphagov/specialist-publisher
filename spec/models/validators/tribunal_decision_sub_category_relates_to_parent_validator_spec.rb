@@ -8,6 +8,17 @@ RSpec.shared_examples_for "tribunal decision sub_category validator" do
 
   describe "#errors" do
 
+    context "when sub_category not provided" do
+      let(:category) { "category-name" }
+      let(:sub_category) { "" }
+
+      it "returns an empty error hash" do
+        validatable.valid?
+        errors = validatable.errors.messages
+        expect(errors).to eq({})
+      end
+    end
+
     context "when sub_category does not match category" do
       let(:category) { "category-name" }
       let(:sub_category) { "non-matching-sub-category" }

@@ -1,7 +1,14 @@
 class TribunalDecisionSubCategoryRelatesToParentValidator < ActiveModel::EachValidator
 
   def validate_each(validator, attribute, sub_category)
+    if sub_category.present?
+      validate_sub_category(validator, attribute, sub_category)
+    end
+  end
 
+  private
+
+  def validate_sub_category(validator, attribute, sub_category)
     unless prefixed_by_parent_category? sub_category, validator
       message = "change to be a sub-category of '#{category_label(validator)}' or change category"
       validator.errors.add attribute, message
