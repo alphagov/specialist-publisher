@@ -32,7 +32,7 @@ RSpec.describe AsylumSupportDecisionValidator do
 
     context "when sub_category matches alternate prefix for parent category" do
       let(:category) { "section-95-asylum-seekers" }
-      let(:sub_category) { "section-95-jurisdiction" }
+      let(:sub_category) { ["section-95-jurisdiction"] }
 
       it "returns an empty error hash" do
         errors = validatable.errors.messages

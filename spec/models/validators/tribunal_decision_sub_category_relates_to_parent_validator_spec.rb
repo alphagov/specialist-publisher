@@ -10,7 +10,7 @@ RSpec.shared_examples_for "tribunal decision sub_category validator" do
 
     context "when sub_category not provided" do
       let(:category) { "category-name" }
-      let(:sub_category) { "" }
+      let(:sub_category) { [] }
 
       it "returns an empty error hash" do
         validatable.valid?
@@ -19,9 +19,22 @@ RSpec.shared_examples_for "tribunal decision sub_category validator" do
       end
     end
 
+    context "when sub_category has two values" do
+      let(:category) { "category-name" }
+      let(:sub_category) { %w[category-name-sub-category-1 category-name-sub-category-2] }
+
+      it "returns error for sub_category" do
+        validatable.valid?
+        errors = validatable.errors.messages
+        expect(errors).to eq({
+          tribunal_decision_sub_category: ["change to a single sub-category"]
+        })
+      end
+    end
+
     context "when sub_category does not match category" do
       let(:category) { "category-name" }
-      let(:sub_category) { "non-matching-sub-category" }
+      let(:sub_category) { ["non-matching-sub-category"] }
 
       it "returns error for sub_category" do
         validatable.valid?
@@ -34,7 +47,7 @@ RSpec.shared_examples_for "tribunal decision sub_category validator" do
 
     context "when sub_category matches category" do
       let(:category) { "category-name" }
-      let(:sub_category) { "category-name-subcategory-name" }
+      let(:sub_category) { ["category-name-subcategory-name"] }
 
       it "returns an empty error hash" do
         validatable.valid?

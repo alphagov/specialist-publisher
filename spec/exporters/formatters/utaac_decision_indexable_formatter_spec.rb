@@ -1,7 +1,9 @@
 require "spec_helper"
 require "formatters/aaib_report_indexable_formatter"
+require_relative "tribunal_decision_indexable_formatter_spec"
 
 RSpec.describe UtaacDecisionIndexableFormatter do
+  let(:sub_category) { [double] }
   let(:document) {
     double(
       :utaac_decision,
@@ -17,7 +19,7 @@ RSpec.describe UtaacDecisionIndexableFormatter do
       tribunal_decision_category: double,
       tribunal_decision_decision_date: double,
       tribunal_decision_judges: [double],
-      tribunal_decision_sub_category: double,
+      tribunal_decision_sub_category: sub_category,
     )
   }
 
@@ -27,7 +29,8 @@ RSpec.describe UtaacDecisionIndexableFormatter do
   let(:humanized_facet_value) { double }
   include_context "schema with humanized_facet_value available"
 
-  it_should_behave_like "a specialist document indexable formatter"
+  it_behaves_like "a specialist document indexable formatter"
+  it_behaves_like "a tribunal decision indexable formatter"
 
   it "should have a type of utaac_decision" do
     expect(formatter.type).to eq("utaac_decision")

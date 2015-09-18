@@ -17,8 +17,8 @@ private
       tribunal_decision_landmark: entity.tribunal_decision_landmark,
       tribunal_decision_landmark_name: expand_value(:tribunal_decision_landmark),
       tribunal_decision_reference_number: entity.tribunal_decision_reference_number,
-      tribunal_decision_sub_category: entity.tribunal_decision_sub_category,
-      tribunal_decision_sub_category_name: expand_value(:tribunal_decision_sub_category),
+      tribunal_decision_sub_category: entity.tribunal_decision_sub_category.first,
+      tribunal_decision_sub_category_name: expand_value(:tribunal_decision_sub_category).first,
     }
   end
 
