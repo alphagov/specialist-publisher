@@ -1,5 +1,4 @@
 require "spec_helper"
-require "spec/exporters/formatters/abstract_indexable_formatter_spec"
 require "formatters/manual_section_indexable_formatter"
 
 RSpec.describe ManualSectionIndexableFormatter do

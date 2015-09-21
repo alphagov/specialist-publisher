@@ -1,6 +1,4 @@
 require "spec_helper"
-require "spec/exporters/formatters/abstract_indexable_formatter_spec"
-require "spec/exporters/formatters/abstract_specialist_document_indexable_formatter_spec"
 require "formatters/maib_report_indexable_formatter"
 
 RSpec.describe MaibReportIndexableFormatter do

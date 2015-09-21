@@ -1,5 +1,3 @@
-require "formatters/abstract_specialist_document_indexable_formatter"
-
 RSpec.shared_context "schema available" do
   before do
     schema = double
