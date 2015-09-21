@@ -4,6 +4,8 @@ require "rummager_finder_publisher"
 describe RummagerFinderPublisher do
   let(:rummager) { double }
 
+  let(:test_logger) { Logger.new(nil) }
+
   describe ".call" do
     it "uses GdsApi::Rummager to publish the Finders" do
       metadata = [
@@ -69,7 +71,7 @@ describe RummagerFinderPublisher do
           ],
         })
 
-      RummagerFinderPublisher.new(metadata).call
+      RummagerFinderPublisher.new(metadata, logger: test_logger).call
     end
 
     it "doesn't publish a Finder without a content id" do
@@ -106,7 +108,7 @@ describe RummagerFinderPublisher do
       expect(rummager).to receive(:add_document)
         .with(anything, "/finder-with-content-id", anything)
 
-      RummagerFinderPublisher.new(metadata).call
+      RummagerFinderPublisher.new(metadata, logger: test_logger).call
     end
   end
 end

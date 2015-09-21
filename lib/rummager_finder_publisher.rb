@@ -2,8 +2,9 @@ require "gds_api/rummager"
 require_relative "../app/presenters/finder_rummager_presenter"
 
 class RummagerFinderPublisher
-  def initialize(metadatas)
+  def initialize(metadatas, logger: Logger.new(STDOUT))
     @metadatas = metadatas
+    @logger = logger
   end
 
   def call
@@ -14,13 +15,13 @@ class RummagerFinderPublisher
         # Even though rummager doesn't use the content_id we only want to push
         # to rummager if this is live in content-store, so this needs to
         # replicate the logic in PublishingApiFinderPublisher.
-        puts "didn't publish #{metadata[:file]["name"]} because it doesn't have a content_id"
+        logger.info("didn't publish #{metadata[:file]["name"]} because it doesn't have a content_id")
       end
     end
   end
 
 private
-  attr_reader :metadatas
+  attr_reader :metadatas, :logger
 
   def export_finder(metadata)
     presenter = FinderRummagerPresenter.new(metadata[:file], metadata[:timestamp])
