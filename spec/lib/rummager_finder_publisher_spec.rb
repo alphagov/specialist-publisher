@@ -2,6 +2,8 @@ require "spec_helper"
 require "rummager_finder_publisher"
 
 describe RummagerFinderPublisher do
+  let(:rummager) { double }
+
   describe ".call" do
     it "uses GdsApi::Rummager to publish the Finders" do
       metadata = [
@@ -38,7 +40,6 @@ describe RummagerFinderPublisher do
         }
       ]
 
-      rummager = double("rummager")
       expect(GdsApi::Rummager).to receive(:new)
         .with(Plek.new.find("rummager"))
         .and_return(rummager)
@@ -95,7 +96,6 @@ describe RummagerFinderPublisher do
         },
       ]
 
-      rummager = double("rummager")
       expect(GdsApi::Rummager).to receive(:new)
         .with(Plek.new.find("rummager"))
         .and_return(rummager)

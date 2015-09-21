@@ -7,7 +7,7 @@ class RummagerFinderPublisher
   end
 
   def call
-    @metadatas.each do |metadata|
+    metadatas.each do |metadata|
       if metadata[:file].has_key?("content_id")
         export_finder(metadata)
       else
@@ -19,7 +19,8 @@ class RummagerFinderPublisher
     end
   end
 
-  private
+private
+  attr_reader :metadatas
 
   def export_finder(metadata)
     presenter = FinderRummagerPresenter.new(metadata[:file], metadata[:timestamp])
