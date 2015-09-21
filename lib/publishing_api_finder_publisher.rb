@@ -3,9 +3,9 @@ require_relative "../app/presenters/finder_content_item_presenter"
 require_relative "../app/presenters/finder_signup_content_item_presenter"
 
 class PublishingApiFinderPublisher
-  def initialize(finders, log = true)
+  def initialize(finders, logger: Logger.new(STDOUT))
     @finders = finders
-    @log = log
+    @logger = logger
   end
 
   def call
@@ -16,16 +16,16 @@ class PublishingApiFinderPublisher
         if preview_domain_or_not_production?
           publish(finder)
         else
-          puts "didn't publish #{finder[:metadata]["name"]} because it is preview_only" if @log
+          logger.info("didn't publish #{finder[:metadata]["name"]} because it is preview_only")
         end
       else
-        puts "didn't publish #{finder[:metadata]["name"]} because it doesn't have a content_id" if @log
+        logger.info("didn't publish #{finder[:metadata]["name"]} because it doesn't have a content_id")
       end
     end
   end
 
 private
-  attr_reader :finders
+  attr_reader :finders, :logger
 
   def publish(finder)
     export_finder(finder)
@@ -49,7 +49,7 @@ private
 
     attrs = finder.exportable_attributes
 
-    puts "publishing '#{attrs["title"]}' finder" if @log
+    logger.info("publishing '#{attrs["title"]}' finder")
 
     publishing_api.put_content_item(finder.base_path, attrs)
   end
@@ -62,7 +62,7 @@ private
 
     attrs = finder_signup.exportable_attributes
 
-    puts "publishing '#{attrs["title"]}' finder signup page" if @log
+    logger.info("publishing '#{attrs["title"]}' finder signup page")
 
     publishing_api.put_content_item(finder_signup.base_path, attrs)
   end

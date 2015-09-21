@@ -45,6 +45,8 @@ describe PublishingApiFinderPublisher do
 
     let(:publishing_api) { double("publishing-api") }
 
+    let(:test_logger) { Logger.new(nil) }
+
     before do
       allow(GdsApi::PublishingApi).to receive(:new)
         .with(Plek.new.find("publishing-api"))
@@ -67,7 +69,7 @@ describe PublishingApiFinderPublisher do
       expect(publishing_api).to receive(:put_content_item)
         .with("/second-finder", be_valid_against_schema("finder"))
 
-      PublishingApiFinderPublisher.new(finders, false).call
+      PublishingApiFinderPublisher.new(finders, logger: test_logger).call
     end
 
     it "doesn't publish a Finder without a content id" do
@@ -82,7 +84,7 @@ describe PublishingApiFinderPublisher do
       expect(publishing_api).to receive(:put_content_item)
         .with("/finder-with-content-id", anything)
 
-      PublishingApiFinderPublisher.new(finders, false).call
+      PublishingApiFinderPublisher.new(finders, logger: test_logger).call
     end
 
     it "can publish a Finder with a phase" do
@@ -93,7 +95,7 @@ describe PublishingApiFinderPublisher do
       expect(publishing_api).to receive(:put_content_item)
         .with("/finder-with-phase", be_valid_against_schema("finder"))
 
-      PublishingApiFinderPublisher.new(finders, false).call
+      PublishingApiFinderPublisher.new(finders, logger: test_logger).call
     end
 
     context 'with preview_only false metadata and RAILS_ENV is "production"' do
@@ -108,7 +110,7 @@ describe PublishingApiFinderPublisher do
         expect(publishing_api).to receive(:put_content_item)
           .with("/finder-with-preview-only-true", anything)
 
-        PublishingApiFinderPublisher.new(finders, false).call
+        PublishingApiFinderPublisher.new(finders, logger: test_logger).call
       end
     end
 
@@ -124,7 +126,7 @@ describe PublishingApiFinderPublisher do
           expect(publishing_api).to receive(:put_content_item)
             .with("/finder-with-preview-only-true", anything)
 
-          PublishingApiFinderPublisher.new(finders, false).call
+          PublishingApiFinderPublisher.new(finders, logger: test_logger).call
         end
       end
 
@@ -139,7 +141,7 @@ describe PublishingApiFinderPublisher do
             expect(publishing_api).not_to receive(:put_content_item)
               .with("/finder-with-preview-only-true", anything)
 
-            PublishingApiFinderPublisher.new(finders, false).call
+            PublishingApiFinderPublisher.new(finders, logger: test_logger).call
           end
         end
 
@@ -149,7 +151,7 @@ describe PublishingApiFinderPublisher do
             expect(publishing_api).to receive(:put_content_item)
               .with("/finder-with-preview-only-true", anything)
 
-            PublishingApiFinderPublisher.new(finders, false).call
+            PublishingApiFinderPublisher.new(finders, logger: test_logger).call
           end
         end
 
