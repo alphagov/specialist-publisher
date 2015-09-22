@@ -58,3 +58,4 @@ module AaibReportHelpers
     end
   end
 end
+RSpec.configuration.include AaibReportHelpers, type: :feature

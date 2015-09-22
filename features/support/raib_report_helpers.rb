@@ -32,3 +32,4 @@ module RaibReportHelpers
     withdraw_document(:raib_report, *args)
   end
 end
+RSpec.configuration.include RaibReportHelpers, type: :feature

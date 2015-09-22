@@ -15,3 +15,4 @@ module AccessControlHelpers
     expect(page).to have_content(content)
   end
 end
+RSpec.configuration.include AccessControlHelpers, type: :feature

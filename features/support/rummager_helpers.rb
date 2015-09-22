@@ -36,3 +36,4 @@ module RummagerHelpers
     allow(fake_rummager).to receive(:delete_document).and_raise(GdsApi::HTTPClientError.new(400))
   end
 end
+RSpec.configuration.include RummagerHelpers, type: :feature

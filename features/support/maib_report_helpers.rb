@@ -32,3 +32,4 @@ module MaibReportHelpers
     withdraw_document(:maib_report, *args)
   end
 end
+RSpec.configuration.include MaibReportHelpers, type: :feature

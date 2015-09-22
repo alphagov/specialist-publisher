@@ -32,3 +32,4 @@ module EsiFundHelpers
     withdraw_document(:esi_fund, *args)
   end
 end
+RSpec.configuration.include EsiFundHelpers, type: :feature

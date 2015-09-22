@@ -4,3 +4,4 @@ module SearchHelpers
     click_on "Search"
   end
 end
+RSpec.configuration.include SearchHelpers, type: :feature

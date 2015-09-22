@@ -31,5 +31,5 @@ module MsaHelpers
   def withdraw_medical_safety_alert(*args)
     withdraw_document(:medical_safety_alert, *args)
   end
-
 end
+RSpec.configuration.include MsaHelpers, type: :feature

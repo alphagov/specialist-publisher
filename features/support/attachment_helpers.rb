@@ -116,3 +116,4 @@ module AttachmentHelpers
     click_on "Save attachment"
   end
 end
+RSpec.configuration.include AttachmentHelpers, type: :feature
