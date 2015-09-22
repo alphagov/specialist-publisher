@@ -98,20 +98,20 @@ module DocumentHelpers
 
   def check_for_documents(*titles)
     titles.each do |title|
-      page.should have_content(title)
+      expect(page).to have_content(title)
     end
   end
 
   def check_for_missing_title_error
-    page.should have_content("Title can't be blank")
+    expect(page).to have_content("Title can't be blank")
   end
 
   def check_for_missing_summary_error
-    page.should have_content("Summary can't be blank")
+    expect(page).to have_content("Summary can't be blank")
   end
 
   def check_for_invalid_date_error(date_field)
-    page.should have_content("#{date_field} should be formatted YYYY-MM-DD")
+    expect(page).to have_content("#{date_field} should be formatted YYYY-MM-DD")
   end
 
   def check_content_preview_link(slug)
@@ -189,7 +189,7 @@ module DocumentHelpers
 
   def check_for_new_document_title(type, title)
     visit send(:"#{type.to_s.pluralize}_path")
-    page.should have_content(title)
+    expect(page).to have_content(title)
   end
 
   def go_to_edit_page_for_document(type, title)
@@ -233,3 +233,4 @@ module DocumentHelpers
     }
   end
 end
+RSpec.configuration.include DocumentHelpers, type: :feature

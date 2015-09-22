@@ -6,3 +6,4 @@ module FileFixtureHelpers
     filepath
   end
 end
+RSpec.configuration.include FileFixtureHelpers, type: :feature

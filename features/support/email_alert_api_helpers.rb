@@ -26,3 +26,4 @@ module EmailAlertAPIHelpers
     FakeEmailAlertAPI.instance
   end
 end
+RSpec.configuration.include EmailAlertAPIHelpers, type: :feature

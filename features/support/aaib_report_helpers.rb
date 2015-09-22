@@ -1,6 +1,6 @@
 module AaibReportHelpers
-  def create_aaib_report(*args)
-    create_document(:aaib_report, *args)
+  def create_aaib_report(fields, **kwargs)
+    create_document(:aaib_report, fields, **kwargs)
   end
 
   def go_to_show_page_for_aaib_report(*args)
@@ -58,3 +58,4 @@ module AaibReportHelpers
     end
   end
 end
+RSpec.configuration.include AaibReportHelpers, type: :feature

@@ -15,7 +15,7 @@ class DocumentViewAdapter < SimpleDelegator
   end
 
   def persisted?
-    document && document.updated_at
+    document && document.persisted?
   end
 
   def to_param

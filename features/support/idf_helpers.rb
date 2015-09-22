@@ -32,3 +32,4 @@ module IdfHelpers
     withdraw_document(:international_development_fund, *args)
   end
 end
+RSpec.configuration.include IdfHelpers, type: :feature

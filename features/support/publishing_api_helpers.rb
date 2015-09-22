@@ -11,3 +11,4 @@ module PublishingAPIHelpers
     WebMock::RequestRegistry.instance.reset!
   end
 end
+RSpec.configuration.include PublishingAPIHelpers, type: :feature

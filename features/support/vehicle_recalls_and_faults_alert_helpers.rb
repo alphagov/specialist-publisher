@@ -24,3 +24,4 @@ module VehicleRecallsAndFaultsAlertHelpers
     edit_document(title, *args)
   end
 end
+RSpec.configuration.include VehicleRecallsAndFaultsAlertHelpers, type: :feature

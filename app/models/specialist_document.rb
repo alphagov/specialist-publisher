@@ -145,6 +145,10 @@ class SpecialistDocument
     edition.save
   end
 
+  def persisted?
+    editions.any?(&:persisted?)
+  end
+
 protected
 
   attr_reader :slug_generator, :edition_factory

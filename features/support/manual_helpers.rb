@@ -357,3 +357,4 @@ module ManualHelpers
     attributes_for_documents
   end
 end
+RSpec.configuration.include ManualHelpers, type: :feature

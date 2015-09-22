@@ -15,3 +15,4 @@ module FormHelpers
     end
   end
 end
+RSpec.configuration.include FormHelpers, type: :feature

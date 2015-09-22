@@ -32,3 +32,4 @@ module CsgHelpers
     withdraw_document(:countryside_stewardship_grant, *args)
   end
 end
+RSpec.configuration.include CsgHelpers, type: :feature

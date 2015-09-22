@@ -32,5 +32,5 @@ module DsuHelpers
   def withdraw_drug_safety_update(*args)
     withdraw_document(:drug_safety_update, *args)
   end
-
 end
+RSpec.configuration.include DsuHelpers, type: :feature

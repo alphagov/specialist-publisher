@@ -103,3 +103,4 @@ module CmaCaseHelpers
     expect(page).not_to have_button("Withdraw")
   end
 end
+RSpec.configuration.include CmaCaseHelpers, type: :feature
