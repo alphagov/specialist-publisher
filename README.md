@@ -52,7 +52,7 @@ $ bundle exec rake
 1. Add the document_type to the `document_types` array in `config/routes.rb`
 1. Add a controller that inherits `AbstractDocumentsController`
 1. Add the schema to the `finders/schemas` folder and define the singleton for it in `app/lib/specialist_publisher_wiring.rb`
-1. Add the metadata about the Finder to `finders/metadata`
+1. Add the metadata about the Finder to `finders/metadata`. This can contain `"preview_only": true` to limit the Finder to the preview environment.
 1. [Add an example](https://github.com/alphagov/govuk-content-schemas/tree/master/formats/specialist_document/frontend/examples) of this format to govuk-content-schemas
 1. Use the [finder schema converter](https://github.com/alphagov/govuk-content-schemas/blob/master/docs/converting-finder-schemas.md) to modify the [`details.json`](https://github.com/alphagov/govuk-content-schemas/blob/master/formats/specialist_document/publisher/details.json) to include the new format
 1. Add a model (which is a subclass of `DocumentMetadataDecorator` and only defines the extra fields of the document type), validator and builder for the new format.
