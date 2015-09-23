@@ -12,10 +12,32 @@ RSpec.shared_examples_for "tribunal decision sub_category validator" do
       let(:category) { "category-name" }
       let(:sub_category) { [] }
 
-      it "returns an empty error hash" do
-        validatable.valid?
-        errors = validatable.errors.messages
-        expect(errors).to eq({})
+      context "and parent category has no sub-categories" do
+        before do
+          allow(finder_schema).to receive(:options_for).with(:tribunal_decision_sub_category).
+            and_return [["Other category sub-category", "other-category-sub-category"]]
+        end
+
+        it "returns an empty error hash" do
+          validatable.valid?
+          errors = validatable.errors.messages
+          expect(errors).to eq({})
+        end
+      end
+
+      context "and parent category has sub-categories" do
+        before do
+          allow(finder_schema).to receive(:options_for).with(:tribunal_decision_sub_category).
+            and_return [["Category name sub-category", "category-name-sub-category"]]
+        end
+
+        it "returns error for sub_category" do
+          validatable.valid?
+          errors = validatable.errors.messages
+          expect(errors).to eq({
+            tribunal_decision_sub_category: ["must not be blank"]
+          })
+        end
       end
     end
 
@@ -36,12 +58,34 @@ RSpec.shared_examples_for "tribunal decision sub_category validator" do
       let(:category) { "category-name" }
       let(:sub_category) { ["non-matching-sub-category"] }
 
-      it "returns error for sub_category" do
-        validatable.valid?
-        errors = validatable.errors.messages
-        expect(errors).to eq({
-          tribunal_decision_sub_category: ["change to be a sub-category of '#{category_label}' or change category"]
-        })
+      context "and relevant sub_categories exist" do
+        before do
+          allow(finder_schema).to receive(:options_for).with(:tribunal_decision_sub_category).
+            and_return [["Category name sub-category", "category-name-sub-category"]]
+        end
+
+        it "returns change sub-category error message" do
+          validatable.valid?
+          errors = validatable.errors.messages
+          expect(errors).to eq({
+            tribunal_decision_sub_category: ["change to be a sub-category of '#{category_label}' or change category"]
+          })
+        end
+      end
+
+      context "and no relevant sub_categories exist" do
+        before do
+          allow(finder_schema).to receive(:options_for).with(:tribunal_decision_sub_category).
+            and_return [["Other category sub-category", "other-category-sub-category"]]
+        end
+
+        it "returns remove sub-category error message" do
+          validatable.valid?
+          errors = validatable.errors.messages
+          expect(errors).to eq({
+            tribunal_decision_sub_category: ["remove sub-category as '#{category_label}' category has no sub-categories"]
+          })
+        end
       end
     end
 

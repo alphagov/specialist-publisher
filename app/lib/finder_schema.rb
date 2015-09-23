@@ -8,6 +8,11 @@ class FinderSchema
     schema.humanized_facet_value(key, value)
   end
 
+  def self.options_for(facet_name, type)
+    schema = SpecialistPublisherWiring.get("#{type}_finder_schema".to_sym)
+    schema.options_for(facet_name)
+  end
+
   def initialize(schema_path)
     @schema_path = schema_path
   end
