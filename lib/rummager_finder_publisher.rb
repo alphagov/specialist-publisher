@@ -9,7 +9,7 @@ class RummagerFinderPublisher
 
   def call
     metadatas.each do |metadata|
-      if metadata[:file].has_key?("content_id") && !preview_only?(metadata)
+      if !preview_only?(metadata)
         export_finder(metadata)
       elsif preview_only?(metadata)
         if preview_domain_or_not_production?
@@ -17,11 +17,6 @@ class RummagerFinderPublisher
         else
           logger.info("didn't publish #{metadata[:file]["name"]} because it is preview_only")
         end
-      else
-        # Even though rummager doesn't use the content_id we only want to push
-        # to rummager if this is live in content-store, so this needs to
-        # replicate the logic in PublishingApiFinderPublisher.
-        logger.info("didn't publish #{metadata[:file]["name"]} because it doesn't have a content_id")
       end
     end
   end
