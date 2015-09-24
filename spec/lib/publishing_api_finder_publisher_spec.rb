@@ -112,7 +112,15 @@ describe PublishingApiFinderPublisher do
         ]
       }
 
-      context "and RAILS_ENV is not 'production'" do
+      context "and PUBLISH_PRE_PRODUCTION_FINDERS is set" do
+        before do
+          ENV["PUBLISH_PRE_PRODUCTION_FINDERS"] = "1"
+        end
+
+        after do
+          ENV["PUBLISH_PRE_PRODUCTION_FINDERS"] = nil
+        end
+
         it "publishes finder" do
           expect(publishing_api).to receive(:put_content_item)
             .with("/pre-production-finder", anything)
@@ -121,32 +129,13 @@ describe PublishingApiFinderPublisher do
         end
       end
 
-      context "and RAILS_ENV is 'production'" do
-        before do
-          production = ActiveSupport::StringInquirer.new("production")
-          allow(Rails).to receive(:env).and_return(production)
+      context "and PUBLISH_PRE_PRODUCTION_FINDERS is not set" do
+        it "doesn't publish the finder" do
+          expect(publishing_api).not_to receive(:put_content_item)
+            .with("/pre-production-finder", anything)
+
+          PublishingApiFinderPublisher.new(finders, logger: test_logger).call
         end
-
-        context "and GOVUK_APP_DOMAIN does not contain 'preview'" do
-          it "does not publish finder" do
-            expect(publishing_api).not_to receive(:put_content_item)
-              .with("/pre-production-finder", anything)
-
-            PublishingApiFinderPublisher.new(finders, logger: test_logger).call
-          end
-        end
-
-        context "and GOVUK_APP_DOMAIN contains 'preview'" do
-          it "publishes finder" do
-            allow(ENV).to receive(:fetch).with("GOVUK_APP_DOMAIN", "")
-              .and_return("preview")
-            expect(publishing_api).to receive(:put_content_item)
-              .with("/pre-production-finder", anything)
-
-            PublishingApiFinderPublisher.new(finders, logger: test_logger).call
-          end
-        end
-
       end
     end
   end

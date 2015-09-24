@@ -22,15 +22,15 @@ private
   attr_reader :metadatas, :logger
 
   def should_publish_in_this_environment?(metadata)
-    !pre_production?(metadata) || preview_domain_or_not_production?
+    !pre_production?(metadata) || should_publish_pre_production_finders?
   end
 
   def pre_production?(metadata)
     metadata[:file]["pre_production"] == true
   end
 
-  def preview_domain_or_not_production?
-    ENV.fetch("GOVUK_APP_DOMAIN", "")[/preview/] || !Rails.env.production?
+  def should_publish_pre_production_finders?
+    ENV.fetch("PUBLISH_PRE_PRODUCTION_FINDERS", false)
   end
 
   def export_finder(metadata)

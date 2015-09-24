@@ -27,15 +27,15 @@ private
   end
 
   def should_publish_in_this_environment?(finder)
-    !pre_production?(finder) || preview_domain_or_not_production?
+    !pre_production?(finder) || should_publish_pre_production_finders?
   end
 
   def pre_production?(finder)
     finder[:metadata]["pre_production"] == true
   end
 
-  def preview_domain_or_not_production?
-    ENV.fetch("GOVUK_APP_DOMAIN", "")[/preview/] || !Rails.env.production?
+  def should_publish_pre_production_finders?
+    ENV.fetch("PUBLISH_PRE_PRODUCTION_FINDERS", false)
   end
 
   def export_finder(finder)
