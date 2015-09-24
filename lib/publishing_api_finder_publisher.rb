@@ -10,16 +10,10 @@ class PublishingApiFinderPublisher
 
   def call
     finders.map do |finder|
-      if finder[:metadata].has_key?("content_id") && !preview_only?(finder)
+      if should_publish_in_this_environment?(finder)
         publish(finder)
-      elsif preview_only?(finder)
-        if preview_domain_or_not_production?
-          publish(finder)
-        else
-          logger.info("didn't publish #{finder[:metadata]["name"]} because it is preview_only")
-        end
       else
-        logger.info("didn't publish #{finder[:metadata]["name"]} because it doesn't have a content_id")
+        logger.info("Not publishing #{finder[:metadata]["name"]} because it is preview_only")
       end
     end
   end
@@ -30,6 +24,10 @@ private
   def publish(finder)
     export_finder(finder)
     export_signup(finder) if finder[:metadata].has_key?("signup_content_id")
+  end
+
+  def should_publish_in_this_environment?(finder)
+    !preview_only?(finder) || preview_domain_or_not_production?
   end
 
   def preview_only?(finder)

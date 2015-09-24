@@ -72,21 +72,6 @@ describe PublishingApiFinderPublisher do
       PublishingApiFinderPublisher.new(finders, logger: test_logger).call
     end
 
-    it "doesn't publish a Finder without a content id" do
-      finders = [
-        make_finder("/finder-without-content-id", "content_id" => nil),
-        make_finder("/finder-with-content-id")
-      ]
-
-      expect(publishing_api).not_to receive(:put_content_item)
-        .with("/finder-without-content-id", anything)
-
-      expect(publishing_api).to receive(:put_content_item)
-        .with("/finder-with-content-id", anything)
-
-      PublishingApiFinderPublisher.new(finders, logger: test_logger).call
-    end
-
     it "can publish a Finder with a phase" do
       finders = [
         make_finder("/finder-with-phase", "phase" => "beta"),
