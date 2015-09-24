@@ -110,6 +110,7 @@ require "mocks"
 require "api_helpers"
 
 require "aaib_report_helpers"
+require "asylum_support_decision_helpers"
 require "cma_case_helpers"
 require "csg_helpers"
 require "dsu_helpers"
@@ -134,6 +135,7 @@ World(AccessControlHelpers)
 World(SearchHelpers)
 
 World(AaibReportHelpers)
+World(AsylumSupportDecisionHelpers)
 World(CmaCaseHelpers)
 World(CsgHelpers)
 World(DsuHelpers)
