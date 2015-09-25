@@ -2,9 +2,9 @@ require "spec_helper"
 require "publishing_api_finder_publisher"
 
 describe PublishingApiFinderPublisher do
-  describe ".call" do
+  describe "#call" do
 
-    let(:schema) do
+    let(:schema) {
       {
         "facets" => [
           {
@@ -17,7 +17,7 @@ describe PublishingApiFinderPublisher do
         ],
         "document_noun" => "reports",
       }
-    end
+    }
 
     def make_metadata(base_path, overrides = {})
       underscore_name = base_path.sub("/", "")
@@ -30,7 +30,6 @@ describe PublishingApiFinderPublisher do
         "format" => "#{underscore_name}_format",
         "logo_path" => "http://example.com/logo.png",
       }.merge(overrides)
-      metadata.delete("content_id") if metadata["content_id"].nil?
 
       metadata
     end
@@ -39,7 +38,7 @@ describe PublishingApiFinderPublisher do
       {
         schema: schema,
         metadata: make_metadata(base_path, overrides),
-        timestamp: "2015-01-05T10:45:10.000+00:00"
+        timestamp: "2015-01-05T10:45:10.000+00:00",
       }
     end
 
@@ -53,88 +52,96 @@ describe PublishingApiFinderPublisher do
         .and_return(publishing_api)
     end
 
-    it "uses GdsApi::PublishingApi to publish the Finders" do
-      finders = [
-        make_finder("/first-finder", "signup_content_id" => SecureRandom.uuid),
-        make_finder("/second-finder"),
-      ]
-
-      expect(publishing_api).to receive(:put_content_item)
-        .with("/first-finder", be_valid_against_schema("finder"))
-
-       # This should be validated against an email-signup schema if one gets created
-      expect(publishing_api).to receive(:put_content_item)
-        .with("/first-finder/email-signup", anything)
-
-      expect(publishing_api).to receive(:put_content_item)
-        .with("/second-finder", be_valid_against_schema("finder"))
-
-      PublishingApiFinderPublisher.new(finders, logger: test_logger).call
-    end
-
-    it "can publish a Finder with a phase" do
-      finders = [
-        make_finder("/finder-with-phase", "phase" => "beta"),
-      ]
-
-      expect(publishing_api).to receive(:put_content_item)
-        .with("/finder-with-phase", be_valid_against_schema("finder"))
-
-      PublishingApiFinderPublisher.new(finders, logger: test_logger).call
-    end
-
-    context 'with pre_production false metadata and RAILS_ENV is "production"' do
-      it "does publish finder" do
-        finders = [
-          make_finder("/finder-with-pre-production-true", "pre_production" => false)
+    describe "publishing finders" do
+      let(:finders) {
+        [
+          make_finder("/first-finder", "signup_content_id" => SecureRandom.uuid),
+          make_finder("/second-finder"),
         ]
+      }
 
-        production = ActiveSupport::StringInquirer.new("production")
-        allow(Rails).to receive(:env).and_return(production)
+      it "uses GdsApi::PublishingApi" do
+        expect(publishing_api).to receive(:put_content_item)
+          .with("/first-finder", be_valid_against_schema("finder"))
+
+         # This should be validated against an email-signup schema if one gets created
+        expect(publishing_api).to receive(:put_content_item)
+          .with("/first-finder/email-signup", anything)
 
         expect(publishing_api).to receive(:put_content_item)
-          .with("/finder-with-pre-production-true", anything)
+          .with("/second-finder", be_valid_against_schema("finder"))
 
         PublishingApiFinderPublisher.new(finders, logger: test_logger).call
       end
     end
 
-    context "with pre_production true metadata" do
-      let(:finders) do
+    context "when the finder has a `phase`" do
+      let(:finders) {
         [
-          make_finder("/finder-with-pre-production-true", "pre_production" => true)
+          make_finder("/finder-with-phase", "phase" => "beta"),
         ]
-      end
+      }
 
-      context 'and RAILS_ENV is not "production"' do
+      it "publishes finder" do
+        expect(publishing_api).to receive(:put_content_item)
+          .with("/finder-with-phase", be_valid_against_schema("finder"))
+
+        PublishingApiFinderPublisher.new(finders, logger: test_logger).call
+      end
+    end
+
+    context "when the finder isn't `pre_production`" do
+      let(:finders) {
+        [
+          make_finder("/not-pre-production-finder", "pre_production" => false),
+        ]
+      }
+
+      it "publishes finder" do
+        expect(publishing_api).to receive(:put_content_item)
+          .with("/not-pre-production-finder", anything)
+
+        PublishingApiFinderPublisher.new(finders, logger: test_logger).call
+      end
+    end
+
+    context "when the finder is `pre_production`" do
+      let(:finders) {
+        [
+          make_finder("/pre-production-finder", "pre_production" => true),
+        ]
+      }
+
+      context "and RAILS_ENV is not 'production'" do
         it "publishes finder" do
           expect(publishing_api).to receive(:put_content_item)
-            .with("/finder-with-pre-production-true", anything)
+            .with("/pre-production-finder", anything)
 
           PublishingApiFinderPublisher.new(finders, logger: test_logger).call
         end
       end
 
-      context 'and RAILS_ENV is "production"' do
+      context "and RAILS_ENV is 'production'" do
         before do
           production = ActiveSupport::StringInquirer.new("production")
           allow(Rails).to receive(:env).and_return(production)
         end
 
-        context 'and GOVUK_APP_DOMAIN does not contain "preview"' do
+        context "and GOVUK_APP_DOMAIN does not contain 'preview'" do
           it "does not publish finder" do
             expect(publishing_api).not_to receive(:put_content_item)
-              .with("/finder-with-pre-production-true", anything)
+              .with("/pre-production-finder", anything)
 
             PublishingApiFinderPublisher.new(finders, logger: test_logger).call
           end
         end
 
-        context 'and GOVUK_APP_DOMAIN contains "preview"' do
+        context "and GOVUK_APP_DOMAIN contains 'preview'" do
           it "publishes finder" do
-            allow(ENV).to receive(:fetch).with("GOVUK_APP_DOMAIN", "").and_return("preview")
+            allow(ENV).to receive(:fetch).with("GOVUK_APP_DOMAIN", "")
+              .and_return("preview")
             expect(publishing_api).to receive(:put_content_item)
-              .with("/finder-with-pre-production-true", anything)
+              .with("/pre-production-finder", anything)
 
             PublishingApiFinderPublisher.new(finders, logger: test_logger).call
           end
