@@ -13,7 +13,7 @@ class PublishingApiFinderPublisher
       if should_publish_in_this_environment?(finder)
         publish(finder)
       else
-        logger.info("Not publishing #{finder[:metadata]["name"]} because it is preview_only")
+        logger.info("Not publishing #{finder[:metadata]["name"]} because it is pre_production")
       end
     end
   end
@@ -27,11 +27,11 @@ private
   end
 
   def should_publish_in_this_environment?(finder)
-    !preview_only?(finder) || preview_domain_or_not_production?
+    !pre_production?(finder) || preview_domain_or_not_production?
   end
 
-  def preview_only?(finder)
-    finder[:metadata]["preview_only"] == true
+  def pre_production?(finder)
+    finder[:metadata]["pre_production"] == true
   end
 
   def preview_domain_or_not_production?

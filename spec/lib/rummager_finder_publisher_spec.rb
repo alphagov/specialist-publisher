@@ -74,17 +74,17 @@ describe RummagerFinderPublisher do
       RummagerFinderPublisher.new(metadata, logger: test_logger).call
     end
 
-    context 'with preview_only false metadata and RAILS_ENV is "production"' do
+    context 'with pre_production false metadata and RAILS_ENV is "production"' do
       let(:metadata) do
         [
           {
             file: {
-              "base_path" => "/finder-with-preview-only-true",
+              "base_path" => "/finder-with-pre-production-true",
               "content_id" => SecureRandom.uuid,
-              "name" => "finder with preview only true",
+              "name" => "finder with pre-production true",
               "format" => "a_report_format",
               "format_name" => "a report format",
-              "preview_only" => false,
+              "pre_production" => false,
             },
             timestamp: "2015-01-05T10:45:10.000+00:00",
           },
@@ -102,22 +102,22 @@ describe RummagerFinderPublisher do
           .and_return(rummager)
 
         expect(rummager).to receive(:add_document)
-          .with(anything, "/finder-with-preview-only-true", anything)
+          .with(anything, "/finder-with-pre-production-true", anything)
 
         RummagerFinderPublisher.new(metadata, logger: test_logger).call
       end
     end
 
-    context "with preview_only true metadata" do
+    context "with pre_production true metadata" do
       let(:metadata) do
         [
           {
             file: {
-              "base_path" => "/finder-with-preview-only-true",
-              "name" => "finder with preview only true",
+              "base_path" => "/finder-with-pre-production-true",
+              "name" => "finder with pre-production true",
               "format" => "a_report_format",
               "format_name" => "a report format",
-              "preview_only" => true,
+              "pre_production" => true,
             },
             timestamp: "2015-01-05T10:45:10.000+00:00",
           },
@@ -132,7 +132,7 @@ describe RummagerFinderPublisher do
             .and_return(rummager)
 
           expect(rummager).to receive(:add_document)
-            .with(anything, "/finder-with-preview-only-true", anything)
+            .with(anything, "/finder-with-pre-production-true", anything)
 
           RummagerFinderPublisher.new(metadata, logger: test_logger).call
         end
@@ -143,12 +143,12 @@ describe RummagerFinderPublisher do
           [
             {
               file: {
-                "base_path" => "/finder-with-preview-only-true",
+                "base_path" => "/finder-with-pre-production-true",
                 "content_id" => SecureRandom.uuid,
-                "name" => "finder with preview only true",
+                "name" => "finder with pre-production true",
                 "format" => "a_report_format",
                 "format_name" => "a report format",
-                "preview_only" => true,
+                "pre_production" => true,
               },
               timestamp: "2015-01-05T10:45:10.000+00:00",
             },
@@ -169,7 +169,7 @@ describe RummagerFinderPublisher do
         context 'and GOVUK_APP_DOMAIN does not contain "preview"' do
           it "does not publish finder" do
             expect(rummager).not_to receive(:add_document)
-              .with(anything, "/finder-with-preview-only-true", anything)
+              .with(anything, "/finder-with-pre-production-true", anything)
 
             RummagerFinderPublisher.new(metadata, logger: test_logger).call
           end
@@ -179,7 +179,7 @@ describe RummagerFinderPublisher do
           it "publishes finder" do
             allow(ENV).to receive(:fetch).with("GOVUK_APP_DOMAIN", "").and_return("preview")
             expect(rummager).to receive(:add_document)
-              .with(anything, "/finder-with-preview-only-true", anything)
+              .with(anything, "/finder-with-pre-production-true", anything)
 
             RummagerFinderPublisher.new(metadata, logger: test_logger).call
           end
