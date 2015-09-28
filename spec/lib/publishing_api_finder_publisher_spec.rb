@@ -83,33 +83,33 @@ describe PublishingApiFinderPublisher do
       PublishingApiFinderPublisher.new(finders, logger: test_logger).call
     end
 
-    context 'with preview_only false metadata and RAILS_ENV is "production"' do
+    context 'with pre_production false metadata and RAILS_ENV is "production"' do
       it "does publish finder" do
         finders = [
-          make_finder("/finder-with-preview-only-true", "preview_only" => false)
+          make_finder("/finder-with-pre-production-true", "pre_production" => false)
         ]
 
         production = ActiveSupport::StringInquirer.new("production")
         allow(Rails).to receive(:env).and_return(production)
 
         expect(publishing_api).to receive(:put_content_item)
-          .with("/finder-with-preview-only-true", anything)
+          .with("/finder-with-pre-production-true", anything)
 
         PublishingApiFinderPublisher.new(finders, logger: test_logger).call
       end
     end
 
-    context "with preview_only true metadata" do
+    context "with pre_production true metadata" do
       let(:finders) do
         [
-          make_finder("/finder-with-preview-only-true", "preview_only" => true)
+          make_finder("/finder-with-pre-production-true", "pre_production" => true)
         ]
       end
 
       context 'and RAILS_ENV is not "production"' do
         it "publishes finder" do
           expect(publishing_api).to receive(:put_content_item)
-            .with("/finder-with-preview-only-true", anything)
+            .with("/finder-with-pre-production-true", anything)
 
           PublishingApiFinderPublisher.new(finders, logger: test_logger).call
         end
@@ -124,7 +124,7 @@ describe PublishingApiFinderPublisher do
         context 'and GOVUK_APP_DOMAIN does not contain "preview"' do
           it "does not publish finder" do
             expect(publishing_api).not_to receive(:put_content_item)
-              .with("/finder-with-preview-only-true", anything)
+              .with("/finder-with-pre-production-true", anything)
 
             PublishingApiFinderPublisher.new(finders, logger: test_logger).call
           end
@@ -134,7 +134,7 @@ describe PublishingApiFinderPublisher do
           it "publishes finder" do
             allow(ENV).to receive(:fetch).with("GOVUK_APP_DOMAIN", "").and_return("preview")
             expect(publishing_api).to receive(:put_content_item)
-              .with("/finder-with-preview-only-true", anything)
+              .with("/finder-with-pre-production-true", anything)
 
             PublishingApiFinderPublisher.new(finders, logger: test_logger).call
           end

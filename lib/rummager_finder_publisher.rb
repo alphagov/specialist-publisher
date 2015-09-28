@@ -12,7 +12,7 @@ class RummagerFinderPublisher
       if should_publish_in_this_environment?(metadata)
         export_finder(metadata)
       else
-        logger.info("Not publishing #{metadata[:file]["name"]} because it is preview_only")
+        logger.info("Not publishing #{metadata[:file]["name"]} because it is pre_production")
       end
     end
   end
@@ -22,11 +22,11 @@ private
   attr_reader :metadatas, :logger
 
   def should_publish_in_this_environment?(metadata)
-    !preview_only?(metadata) || preview_domain_or_not_production?
+    !pre_production?(metadata) || preview_domain_or_not_production?
   end
 
-  def preview_only?(metadata)
-    metadata[:file]["preview_only"] == true
+  def pre_production?(metadata)
+    metadata[:file]["pre_production"] == true
   end
 
   def preview_domain_or_not_production?
