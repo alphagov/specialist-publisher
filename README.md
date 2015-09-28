@@ -15,14 +15,17 @@ Publishing App for Specialist Documents and Manuals.
 ## Current formats
 
 ### Live
-* [CMA Cases](https://www.gov.uk/cma-cases)
-* [International Funding Development](https://www.gov.uk/international-funding-development)
-* Manuals (there's no public index page for Manuals, they can all be found at `gov.uk/guidance/:manual-slug`)
 
-### Live with no content
-* AAIB Reports
-* Drug Safety Updates
-* Medical Safety Alerts
+* [AAIB Reports](https://www.gov.uk/aaib-reports)
+* [CMA Cases](https://www.gov.uk/cma-cases)
+* [Countryside Stewardship Grants](https://www.gov.uk/countryside-stewardship-grants)
+* [International Development Funds](https://www.gov.uk/international-development-funds)
+* [Drug Safety Update](https://www.gov.uk/drug-safety-updates)
+* [ESI Funds](https://www.gov.uk/esi-funds)
+* [Medical Safety Alerts](https://www.gov.uk/drug-device-alerts)
+* [MAIB Reports](https://www.gov.uk/maib-reports)
+* [RAIB Reports](https://www.gov.uk/raib-reports)
+* Manuals (there's no public index page for Manuals, they can all be found at `gov.uk/guidance/:manual-slug`)
 
 ## Dependencies
 
