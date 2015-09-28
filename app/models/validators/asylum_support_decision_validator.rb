@@ -1,6 +1,7 @@
 require "delegate"
 require "validators/date_validator"
 require "validators/safe_html_validator"
+require "validators/tribunal_decision_sub_category_relates_to_parent_validator"
 
 class AsylumSupportDecisionValidator < SimpleDelegator
   include ActiveModel::Validations
@@ -14,6 +15,16 @@ class AsylumSupportDecisionValidator < SimpleDelegator
   validates :tribunal_decision_judges, presence: true
   validates :tribunal_decision_landmark, presence: true
   validates :tribunal_decision_reference_number, presence: true
-  validates :tribunal_decision_sub_category, presence: true
+  validates :tribunal_decision_sub_category, tribunal_decision_sub_category_relates_to_parent: true
 
+  def category_prefix_for(category)
+    case category
+    when "section-95-asylum-seekers"
+      "section-95"
+    when "section-4-2-failed-asylum-seekers"
+      "section-4-2"
+    when "section-4-1-neither-an-asylum-seeker-nor-a-failed-asylum-seeker"
+      "section-4-1"
+    end
+  end
 end

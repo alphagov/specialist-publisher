@@ -4,9 +4,7 @@ class AbstractSpecialistDocumentIndexableFormatter < AbstractIndexableFormatter
 
 private
   def expand_value(key)
-    schema = SpecialistPublisherWiring.get("#{type}_finder_schema".to_sym)
-    value = entity.send(key)
-    schema.humanized_facet_value(key, value)
+    FinderSchema.humanized_facet_name(key, entity, type)
   end
 
   def public_timestamp

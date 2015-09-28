@@ -1,7 +1,9 @@
 require "spec_helper"
 require "formatters/aaib_report_indexable_formatter"
+require_relative "tribunal_decision_indexable_formatter_spec"
 
 RSpec.describe AsylumSupportDecisionIndexableFormatter do
+  let(:sub_category) { [double] }
   let(:document) {
     double(
       :asylum_support_decision,
@@ -19,15 +21,18 @@ RSpec.describe AsylumSupportDecisionIndexableFormatter do
       tribunal_decision_judges: [double],
       tribunal_decision_landmark: double,
       tribunal_decision_reference_number: double,
-      tribunal_decision_sub_category: double,
+      tribunal_decision_sub_category: sub_category,
     )
   }
 
   subject(:formatter) { AsylumSupportDecisionIndexableFormatter.new(document) }
 
-  include_context "schema available"
+  let(:document_type) { formatter.type }
+  let(:humanized_facet_value) { double }
+  include_context "schema with humanized_facet_value available"
 
-  it_should_behave_like "a specialist document indexable formatter"
+  it_behaves_like "a specialist document indexable formatter"
+  it_behaves_like "a tribunal decision indexable formatter"
 
   it "should have a type of asylum_support_decision" do
     expect(formatter.type).to eq("asylum_support_decision")

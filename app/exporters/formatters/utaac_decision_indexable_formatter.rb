@@ -14,8 +14,8 @@ private
       tribunal_decision_decision_date: entity.tribunal_decision_decision_date,
       tribunal_decision_judges: entity.tribunal_decision_judges,
       tribunal_decision_judges_name: expand_value(:tribunal_decision_judges),
-      tribunal_decision_sub_category: entity.tribunal_decision_sub_category,
-      tribunal_decision_sub_category_name: expand_value(:tribunal_decision_sub_category),
+      tribunal_decision_sub_category: entity.tribunal_decision_sub_category.first,
+      tribunal_decision_sub_category_name: expand_value(:tribunal_decision_sub_category).first,
     }
   end
 
