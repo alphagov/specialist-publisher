@@ -112,13 +112,15 @@ describe PublishingApiFinderPublisher do
         ]
       }
 
-      context "and PUBLISH_PRE_PRODUCTION_FINDERS is set" do
+      context "and the app is configured to publish pre-production finders" do
         before do
-          ENV["PUBLISH_PRE_PRODUCTION_FINDERS"] = "1"
+          SpecialistPublisher::Application.config
+            .publish_pre_production_finders = true
         end
 
         after do
-          ENV["PUBLISH_PRE_PRODUCTION_FINDERS"] = nil
+          SpecialistPublisher::Application.config
+            .publish_pre_production_finders = false
         end
 
         it "publishes finder" do
@@ -129,7 +131,7 @@ describe PublishingApiFinderPublisher do
         end
       end
 
-      context "and PUBLISH_PRE_PRODUCTION_FINDERS is not set" do
+      context "and is not configured to publish pre-production finders" do
         it "doesn't publish the finder" do
           expect(publishing_api).not_to receive(:put_content_item)
             .with("/pre-production-finder", anything)

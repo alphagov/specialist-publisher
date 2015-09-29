@@ -30,7 +30,7 @@ private
   end
 
   def should_publish_pre_production_finders?
-    ENV.fetch("PUBLISH_PRE_PRODUCTION_FINDERS", false)
+    SpecialistPublisher::Application.config.publish_pre_production_finders
   end
 
   def export_finder(metadata)
