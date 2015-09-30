@@ -1,7 +1,7 @@
 
 namespace :rummager do
   desc "Publish all Finders to Rummager"
-  task :publish_finders do
+  task :publish_finders => :environment do
     require "rummager_finder_publisher"
 
     require "multi_json"
