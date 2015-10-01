@@ -17,6 +17,10 @@ FactoryGirl.define do
     organisation_slug "air-accidents-investigation-branch"
   end
 
+  factory :ast_editor, parent: :editor do
+    organisation_slug "first-tier-tribunal-asylum-support"
+  end
+
   factory :dclg_editor, parent: :editor do
     organisation_slug "department-for-communities-and-local-government"
   end
