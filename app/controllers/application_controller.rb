@@ -62,6 +62,10 @@ class ApplicationController < ActionController::Base
         document_type: "raib_report",
         title: "RAIB Reports",
       },
+      "tax-tribunal-decisions" => {
+        document_type: "tax_tribunal_decision",
+        title: "Tax Tribunal Decisions",
+      },
       "utaac-decisions" => {
         document_type: "utaac_decision",
         title: "UTAAC Decisions",

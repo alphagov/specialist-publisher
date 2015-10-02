@@ -129,6 +129,11 @@ SpecialistPublisherWiring ||= DependencyContainer.new do
       get(:validatable_document_factories).utaac_decision_factory)
   }
 
+  define_factory(:tax_tribunal_decision_builder) {
+    SpecialistDocumentBuilder.new("tax_tribunal_decision",
+      get(:validatable_document_factories).tax_tribunal_decision_factory)
+  }
+
   define_instance(:markdown_attachment_renderer) {
     MarkdownAttachmentProcessor.method(:new)
   }
@@ -262,6 +267,10 @@ SpecialistPublisherWiring ||= DependencyContainer.new do
 
   define_singleton(:utaac_decision_finder_schema) {
     FinderSchema.new(Rails.root.join("finders/schemas/utaac-decisions.json"))
+  }
+
+  define_singleton(:tax_tribunal_decision_finder_schema) {
+    FinderSchema.new(Rails.root.join("finders/schemas/tax-tribunal-decisions.json"))
   }
 
   define_singleton(:organisations_api) {

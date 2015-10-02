@@ -1,0 +1,55 @@
+{
+  "document_noun": "decision",
+  "facets": [
+    {
+      "key": "tribunal_decision_category",
+      "name": "Category",
+      "short_name": "category",
+      "type": "text",
+      "preposition": "categorised as",
+      "display_as_result_metadata": false,
+      "filterable": true,
+      "allowed_values": [
+        {
+          "label": "Banking",
+          "value": "banking"
+        },
+        {
+          "label": "Charity",
+          "value": "charity"
+        },
+        {
+          "label": "Financial Services",
+          "value": "financial-services"
+        },
+        {
+          "label": "Land Registration",
+          "value": "land-registration"
+        },
+        {
+          "label": "Pensions",
+          "value": "pensions"
+        },
+        {
+          "label": "Tax",
+          "value": "tax"
+        }
+      ]
+    },
+    {
+      "key": "tribunal_decision_category_name",
+      "name": "Category name",
+      "type": "text",
+      "display_as_result_metadata": true,
+      "filterable": false
+    },
+    {
+      "key": "tribunal_decision_decision_date",
+      "name": "Release date",
+      "short_name": "Released",
+      "type": "date",
+      "display_as_result_metadata": true,
+      "filterable": true
+    }
+  ]
+}
