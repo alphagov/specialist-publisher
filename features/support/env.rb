@@ -119,6 +119,7 @@ require "idf_helpers"
 require "maib_report_helpers"
 require "msa_helpers"
 require "raib_report_helpers"
+require "tax_tribunal_decision_helpers"
 require "utaac_decision_helpers"
 require "vehicle_recalls_and_faults_alert_helpers"
 
@@ -145,5 +146,6 @@ World(IdfHelpers)
 World(MaibReportHelpers)
 World(MsaHelpers)
 World(RaibReportHelpers)
+World(TaxTribunalDecisionHelpers)
 World(UtaacDecisionHelpers)
 World(VehicleRecallsAndFaultsAlertHelpers)
