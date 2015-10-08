@@ -139,6 +139,11 @@ SpecialistPublisherWiring ||= DependencyContainer.new do
       get(:validatable_document_factories).employment_appeal_tribunal_decision_factory)
   }
 
+  define_factory(:employment_tribunal_decision_builder) {
+    SpecialistDocumentBuilder.new("employment_tribunal_decision",
+      get(:validatable_document_factories).employment_tribunal_decision_factory)
+  }
+
   define_instance(:markdown_attachment_renderer) {
     MarkdownAttachmentProcessor.method(:new)
   }
@@ -280,6 +285,10 @@ SpecialistPublisherWiring ||= DependencyContainer.new do
 
   define_singleton(:employment_appeal_tribunal_decision_finder_schema) {
     FinderSchema.new(Rails.root.join("finders/schemas/employment-appeal-tribunal-decisions.json"))
+  }
+
+  define_singleton(:employment_tribunal_decision_finder_schema) {
+    FinderSchema.new(Rails.root.join("finders/schemas/employment-tribunal-decisions.json"))
   }
 
   define_singleton(:organisations_api) {

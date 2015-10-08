@@ -1,0 +1,22 @@
+<div class="col-md-8">
+  <%= form_for document do |f| %>
+    <%= render partial: "shared/form_errors", locals: { object: document } %>
+    <%= render partial: "shared/form_fields", locals: { f: f } %>
+    <%= render partial: "shared/form_preview" %>
+
+    <%= f.select :tribunal_decision_country, f.object.facet_options(:tribunal_decision_country), { label: "Country" }, { class: 'form-control' } %>
+    <%= f.select :tribunal_decision_categories, f.object.facet_options(:tribunal_decision_categories), { label: "Jurisdiction code" }, { class: 'select2', multiple: true, data: { placeholder: '' } } %>
+    <%= f.text_field :tribunal_decision_decision_date, label: "Decision date", placeholder: '2015-07-30', class: 'form-control' %>
+    <%= f.text_area :hidden_indexable_content, class: 'form-control' %>
+
+    <%= render partial: "specialist_documents/minor_major_update_fields", locals: { f: f, document: document } %>
+
+    <div class="actions">
+      <button name="save" class="btn btn-success">Save as draft</button>
+    </div>
+  <% end %>
+</div>
+
+<%= render partial: "specialist_documents/attachments_form", locals: { document: document } %>
+
+<%= render partial: "specialist_documents/js_preview", locals: { document: document, form_namespace: "employment_tribunal_decision" } %>
