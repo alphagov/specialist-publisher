@@ -59,6 +59,7 @@ module DocumentHelpers
       "drug-safety-update" => "drug_safety_update",
       "drug-device-alerts" => "medical_safety_alert",
       "employment-appeal-tribunal-decisions" => "employment_appeal_tribunal_decision",
+      "employment-tribunal-decisions" => "employment_tribunal_decision",
       "european-structural-investment-funds" => "european_structural_investment_fund",
       "maib-reports" => "maib_report",
       "raib-reports" => "raib_report",
