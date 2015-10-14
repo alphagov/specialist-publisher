@@ -33,6 +33,20 @@
       "topic_name": "drug alerts",
       "body": "information published by the MHRA about defective medicines.",
       "prechecked": true
+    },
+    {
+      "key": "field-safety",
+      "radio_button_name": "Field safety notices",
+      "topic_name": "field safety notices",
+      "body": "information from medical device manufacturers.",
+      "prechecked": true
+    },
+    {
+      "key": "company-led-drug",
+      "radio_button_name": "Drug alerts: company-led",
+      "topic_name": "drug alerts: company-led",
+      "body": "recalls of medicines issued by manufacturers.",
+      "prechecked": true
     }
   ]
 }
