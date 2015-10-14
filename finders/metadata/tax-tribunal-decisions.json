@@ -8,6 +8,7 @@
   "filter": {
     "document_type": "tax_tribunal_decision"
   },
+  "default_order": "-tribunal_decision_decision_date",
   "show_summaries": true,
   "organisations": [
     "1a68b2cc-eb52-4528-8989-429f710da00f"
