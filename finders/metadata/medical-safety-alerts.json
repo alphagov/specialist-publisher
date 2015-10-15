@@ -35,16 +35,16 @@
       "prechecked": true
     },
     {
-      "key": "field-safety",
-      "radio_button_name": "Field safety notices",
-      "topic_name": "field safety notices",
+      "key": "field-safety-notices",
+      "radio_button_name": "Field safety notice",
+      "topic_name": "field safety notice",
       "body": "information from medical device manufacturers.",
       "prechecked": true
     },
     {
-      "key": "company-led-drug",
-      "radio_button_name": "Drug alerts: company-led",
-      "topic_name": "drug alerts: company-led",
+      "key": "company-led-drugs",
+      "radio_button_name": "Drug alert: company-led",
+      "topic_name": "drug alert: company-led",
       "body": "recalls of medicines issued by manufacturers.",
       "prechecked": true
     }
