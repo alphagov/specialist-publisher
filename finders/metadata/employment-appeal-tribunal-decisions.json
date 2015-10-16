@@ -1,0 +1,284 @@
+{
+  "content_id": "975cf540-6e64-40e3-b62a-df655a8c99ef",
+  "base_path": "/employment-appeal-tribunal-decisions",
+  "format_name": "Employment appeal tribunal decision",
+  "name": "Employment appeal tribunal decisions",
+  "description": "Find decisions on appeals against employment tribunals heard by the Employment Appeal Tribunal.",
+  "beta": true,
+  "filter": {
+    "document_type": "employment_appeal_tribunal_decision"
+  },
+  "show_summaries": true,
+  "organisations": [
+    "caeb418c-d11c-4352-92e9-47b21289f696"
+  ],
+  "signup_content_id": "1f5911f4-417a-4380-a5a0-674ebff332df",
+  "signup_copy": "You'll get an email each time a decision is updated or a new decision is published.",
+  "subscription_list_title_prefix": {
+    "singular": "Employment Appeal Tribunal decisions with the following category: ",
+    "plural": "Employment Appeal Tribunal decisions with the following categories: "
+  },
+  "email_filter_by": "tribunal_decision_categories",
+  "email_signup_choice": [
+    {
+      "key": "age-discrimination",
+      "radio_button_name": "Age Discrimination",
+      "topic_name": "age discrimination",
+      "prechecked": false
+    },
+    {
+      "key": "agency-workers",
+      "radio_button_name": "Agency Workers",
+      "topic_name": "agency workers",
+      "prechecked": false
+    },
+    {
+      "key": "blacklisting-regulations",
+      "radio_button_name": "Blacklisting Regulations",
+      "topic_name": "blacklisting regulations",
+      "prechecked": false
+    },
+    {
+      "key": "central-arbitration-committee-cac",
+      "radio_button_name": "Central Arbitration Committee (CAC)",
+      "topic_name": "central arbitration committee cac",
+      "prechecked": false
+    },
+    {
+      "key": "certification-officer",
+      "radio_button_name": "Certification Officer",
+      "topic_name": "certification officer",
+      "prechecked": false
+    },
+    {
+      "key": "contract-of-employment",
+      "radio_button_name": "Contract of Employment",
+      "topic_name": "contract of employment",
+      "prechecked": false
+    },
+    {
+      "key": "disability-discrimination",
+      "radio_button_name": "Disability Discrimination",
+      "topic_name": "disability discrimination",
+      "prechecked": false
+    },
+    {
+      "key": "employment-agencies-act-1973",
+      "radio_button_name": "Employment Agencies Act 1973",
+      "topic_name": "employment agencies act 1973",
+      "prechecked": false
+    },
+    {
+      "key": "employment-agencies-act-1973-obsolete-topic",
+      "radio_button_name": "Employment Agencies Act 1973 (obsolete topic)",
+      "topic_name": "employment agencies act 1973 obsolete topic",
+      "prechecked": false
+    },
+    {
+      "key": "equal-pay-act",
+      "radio_button_name": "Equal Pay Act",
+      "topic_name": "equal pay act",
+      "prechecked": false
+    },
+    {
+      "key": "european-material-obsolete-topic",
+      "radio_button_name": "European Material (obsolete topic)",
+      "topic_name": "european material obsolete topic",
+      "prechecked": false
+    },
+    {
+      "key": "fixed-term-regulations",
+      "radio_button_name": "Fixed Term Regulations",
+      "topic_name": "fixed term regulations",
+      "prechecked": false
+    },
+    {
+      "key": "flexible-working",
+      "radio_button_name": "Flexible Working",
+      "topic_name": "flexible working",
+      "prechecked": false
+    },
+    {
+      "key": "harassment",
+      "radio_button_name": "Harassment",
+      "topic_name": "harassment",
+      "prechecked": false
+    },
+    {
+      "key": "health-safety",
+      "radio_button_name": "Health & Safety",
+      "topic_name": "health safety",
+      "prechecked": false
+    },
+    {
+      "key": "human-rights",
+      "radio_button_name": "Human Rights",
+      "topic_name": "human rights",
+      "prechecked": false
+    },
+    {
+      "key": "jurisdiction-obsolete-topic",
+      "radio_button_name": "Jurisdiction (obsolete topic)",
+      "topic_name": "jurisdiction obsolete topic",
+      "prechecked": false
+    },
+    {
+      "key": "jurisdictional-points",
+      "radio_button_name": "Jurisdictional Points",
+      "topic_name": "jurisdictional points",
+      "prechecked": false
+    },
+    {
+      "key": "maternity-rights-and-parental-leave",
+      "radio_button_name": "Maternity Rights and Parental Leave",
+      "topic_name": "maternity rights and parental leave",
+      "prechecked": false
+    },
+    {
+      "key": "national-minimum-wage",
+      "radio_button_name": "National Minimum Wage",
+      "topic_name": "national minimum wage",
+      "prechecked": false
+    },
+    {
+      "key": "national-security",
+      "radio_button_name": "National Security",
+      "topic_name": "national security",
+      "prechecked": false
+    },
+    {
+      "key": "part-time-workers",
+      "radio_button_name": "Part Time Workers",
+      "topic_name": "part time workers",
+      "prechecked": false
+    },
+    {
+      "key": "practice-and-procedure",
+      "radio_button_name": "Practice and Procedure",
+      "topic_name": "practice and procedure",
+      "prechecked": false
+    },
+    {
+      "key": "procedural-issues-obsolete-topic",
+      "radio_button_name": "Procedural Issues (obsolete topic)",
+      "topic_name": "procedural issues obsolete topic",
+      "prechecked": false
+    },
+    {
+      "key": "public-interest-disclosure-obsolete-topic",
+      "radio_button_name": "Public Interest Disclosure (obsolete topic)",
+      "topic_name": "public interest disclosure obsolete topic",
+      "prechecked": false
+    },
+    {
+      "key": "race-discrimination",
+      "radio_button_name": "Race Discrimination",
+      "topic_name": "race discrimination",
+      "prechecked": false
+    },
+    {
+      "key": "redundancy",
+      "radio_button_name": "Redundancy",
+      "topic_name": "redundancy",
+      "prechecked": false
+    },
+    {
+      "key": "religion-or-belief-discrimination",
+      "radio_button_name": "Religion or Belief Discrimination",
+      "topic_name": "religion or belief discrimination",
+      "prechecked": false
+    },
+    {
+      "key": "reserved-forces-act-obsolete-topic",
+      "radio_button_name": "Reserved Forces Act (obsolete topic)",
+      "topic_name": "reserved forces act obsolete topic",
+      "prechecked": false
+    },
+    {
+      "key": "right-to-be-accompanied",
+      "radio_button_name": "Right To Be Accompanied",
+      "topic_name": "right to be accompanied",
+      "prechecked": false
+    },
+    {
+      "key": "rights-on-insolvency",
+      "radio_button_name": "Rights on Insolvency",
+      "topic_name": "rights on insolvency",
+      "prechecked": false
+    },
+    {
+      "key": "sex-discrimination",
+      "radio_button_name": "Sex Discrimination",
+      "topic_name": "sex discrimination",
+      "prechecked": false
+    },
+    {
+      "key": "sexual-orientation-discrimination-transexualism",
+      "radio_button_name": "Sexual Orientation Discrimination/Transexualism",
+      "topic_name": "sexual orientation discrimination transexualism",
+      "prechecked": false
+    },
+    {
+      "key": "statutory-discipline-and-grievance-procedures",
+      "radio_button_name": "Statutory Discipline and Grievance Procedures",
+      "topic_name": "statutory discipline and grievance procedures",
+      "prechecked": false
+    },
+    {
+      "key": "time-limits-obsolete-topic",
+      "radio_button_name": "Time Limits (obsolete topic)",
+      "topic_name": "time limits obsolete topic",
+      "prechecked": false
+    },
+    {
+      "key": "time-off",
+      "radio_button_name": "Time Off",
+      "topic_name": "time off",
+      "prechecked": false
+    },
+    {
+      "key": "trade-union-membership",
+      "radio_button_name": "Trade Union Membership",
+      "topic_name": "trade union membership",
+      "prechecked": false
+    },
+    {
+      "key": "trade-union-rights",
+      "radio_button_name": "Trade Union Rights",
+      "topic_name": "trade union rights",
+      "prechecked": false
+    },
+    {
+      "key": "transfer-of-undertakings",
+      "radio_button_name": "Transfer of Undertakings",
+      "topic_name": "transfer of undertakings",
+      "prechecked": false
+    },
+    {
+      "key": "unfair-dismissal",
+      "radio_button_name": "Unfair Dismissal",
+      "topic_name": "unfair dismissal",
+      "prechecked": false
+    },
+    {
+      "key": "unlawful-deduction-from-wages",
+      "radio_button_name": "Unlawful Deduction from Wages",
+      "topic_name": "unlawful deduction from wages",
+      "prechecked": false
+    },
+    {
+      "key": "victimisation-discrimination",
+      "radio_button_name": "Victimisation Discrimination",
+      "topic_name": "victimisation discrimination",
+      "prechecked": false
+    },
+    {
+      "key": "working-time-regulations",
+      "radio_button_name": "Working Time Regulations",
+      "topic_name": "working time regulations",
+      "prechecked": false
+    }
+  ],
+  "summary": "<p>Find decisions on appeals against employment tribunals heard by the Employment Appeal Tribunal.</p><p>Includes decisions after December 2015. Find details of <a rel=\"external\" href=\"http://www.employmentappeals.gov.uk/Public/Search.aspx\">older cases.</a></p>",
+  "pre_production": true
+}

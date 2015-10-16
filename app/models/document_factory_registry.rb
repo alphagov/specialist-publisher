@@ -15,6 +15,7 @@ require "validators/vehicle_recalls_and_faults_alert_validator"
 require "validators/asylum_support_decision_validator"
 require "validators/utaac_decision_validator"
 require "validators/tax_tribunal_decision_validator"
+require "validators/employment_appeal_tribunal_decision_validator"
 
 require "builders/manual_document_builder"
 require "manual_with_documents"
@@ -31,6 +32,7 @@ require "international_development_fund"
 require "asylum_support_decision"
 require "utaac_decision"
 require "tax_tribunal_decision"
+require "employment_appeal_tribunal_decision"
 
 class DocumentFactoryRegistry
   def aaib_report_factory
@@ -220,6 +222,21 @@ class DocumentFactoryRegistry
           TaxTribunalDecision.new(
             SpecialistDocument.new(
               SlugGenerator.new(prefix: "tax-and-chancery-tribunal-decisions"),
+              *args,
+            ),
+          )
+        )
+      )
+    }
+  end
+
+  def employment_appeal_tribunal_decision_factory
+    ->(*args) {
+      ChangeNoteValidator.new(
+        EmploymentAppealTribunalDecisionValidator.new(
+          EmploymentAppealTribunalDecision.new(
+            SpecialistDocument.new(
+              SlugGenerator.new(prefix: "employment-appeal-tribunal-decisions"),
               *args,
             ),
           )

@@ -1,0 +1,2 @@
+class EmploymentAppealTribunalDecisionsController < AbstractDocumentsController
+end
