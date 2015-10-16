@@ -1,9 +1,9 @@
 {
   "content_id": "581b4bba-e58f-4d07-8e0a-03c8c00165cc",
-  "base_path": "/asylum-support-decisions",
-  "format_name": "First-tier Tribunal (Asylum Support) decision",
-  "name": "First-tier Tribunal (Asylum Support) decisions",
-  "description": "Find decisions by the First-tier Tribunal (Asylum Support)",
+  "base_path": "/asylum-support-tribunal-decisions",
+  "format_name": "Asylum support tribunal decision",
+  "name": "Asylum support tribunal decisions",
+  "description": "Find decisions on appeals against the Home Office heard by the First-tier Tribunal (Asylum Support).",
   "beta": true,
   "filter": {
     "document_type": "asylum_support_decision"
@@ -39,6 +39,6 @@
       "prechecked": false
     }
   ],
-  "summary": "<p>Find details of <a rel=\"external\" href=\"http://www.asylum-support-tribunal.gov.uk/public/search.aspx\">earlier decisions</a>.</p>",
+  "summary": "<p>Find decisions on appeals against the Home Office heard by the First-tier Tribunal (Asylum Support).</p>",
   "pre_production": true
 }
