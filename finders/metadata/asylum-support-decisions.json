@@ -21,21 +21,21 @@
   "email_filter_by": "tribunal_decision_category",
   "email_signup_choice": [
     {
-      "key": "section-95-asylum-seekers",
-      "radio_button_name": "Section 95 (asylum-seekers)",
-      "topic_name": "section 95 asylum seekers",
+      "key": "section-4-1-support-for-persons-who-are-neither-an-asylum-seeker-nor-a-failed-asylum-seeker",
+      "radio_button_name": "Section 4(1) (support for persons who are neither an asylum seeker nor a failed asylum seeker)",
+      "topic_name": "section 4 1 support for persons who are neither an asylum seeker nor a failed asylum seeker",
       "prechecked": false
     },
     {
-      "key": "section-4-2-failed-asylum-seekers",
-      "radio_button_name": "Section 4(2) (failed asylum seekers)",
-      "topic_name": "section 4 2 failed asylum seekers",
+      "key": "section-4-2-support-for-failed-asylum-seekers",
+      "radio_button_name": "Section 4(2) (support for failed asylum seekers)",
+      "topic_name": "section 4 2 support for failed asylum seekers",
       "prechecked": false
     },
     {
-      "key": "section-4-1-neither-an-asylum-seeker-nor-a-failed-asylum-seeker",
-      "radio_button_name": "Section 4(1) (neither an asylum seeker nor a failed asylum seeker)",
-      "topic_name": "section 4 1 neither an asylum seeker nor a failed asylum seeker",
+      "key": "section-95-support-for-asylum-seekers",
+      "radio_button_name": "Section 95 (support for asylum seekers)",
+      "topic_name": "section 95 support for asylum seekers",
       "prechecked": false
     }
   ],

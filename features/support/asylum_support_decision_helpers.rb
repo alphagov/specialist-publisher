@@ -57,7 +57,7 @@ module AsylumSupportDecisionHelpers
       title: "Lorem ipsum",
       summary: "Nullam quis risus eget urna mollis ornare vel eu leo.",
       body: "## Link to attachement:",
-      "Category" => "Section 95 (asylum-seekers)",
+      "Category" => "Section 95 (support for asylum seekers)",
       "Sub-category" => "Section 95 - jurisdiction",
       "Judges" => "Bashir, S",
       "Decision date" => "2015-02-02",
