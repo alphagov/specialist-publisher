@@ -1,0 +1,18 @@
+#!/usr/bin/env ruby
+
+require File.expand_path("../../config/environment", __FILE__)
+
+slug_hash = {}
+SpecialistDocumentEdition.all.each do |edition|
+  slug_hash[edition.slug] ||= {}
+  slug_hash[edition.slug][edition.document_id] ||= {state: edition.state, created_at: edition.created_at, editions: 0}
+  slug_hash[edition.slug][edition.document_id][:editions] += 1
+end
+
+slug_hash.reject! { |_slug, document_ids| document_ids.size == 1 }
+
+slug_hash.each do |slug, documents|
+  documents.each do |document_id, data|
+    puts [slug, document_id, data[:state], data[:created_at], data[:editions]].join(",")
+  end
+end
