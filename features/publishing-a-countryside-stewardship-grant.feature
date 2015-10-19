@@ -1,10 +1,10 @@
 Feature: Publishing a Countryside Stewardship Grant
-As a DEFRA Editor
+As a NE Editor
 I want to create countryside stewardship fund pages in draft
 So that I can prepare the info for publication
 
 Background:
-Given I am logged in as a "DEFRA" editor
+Given I am logged in as a "NE" editor
 
 Scenario: can create a new Countryside Stewardship Grant in draft
   When I create a Countryside Stewardship Grant
