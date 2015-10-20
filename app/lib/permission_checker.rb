@@ -26,7 +26,7 @@ class PermissionChecker
     when "raib_report"
       ["rail-accident-investigation-branch"]
     when "countryside_stewardship_grant"
-      ["department-for-environment-food-rural-affairs"]
+      ["natural-england"]
     when "tax_tribunal_decision"
       ["upper-tribunal-tax-and-chancery-chamber"]
     when "utaac_decision"
