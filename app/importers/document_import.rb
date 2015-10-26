@@ -24,7 +24,8 @@ module DocumentImport
     end
 
     def success(document, data)
-      write("SUCCESS", document.import_notes.join("\t"), data)
+      import_notes = document.respond_to?(:import_notes) ? document.import_notes : []
+      write("SUCCESS", import_notes.join("\t"), data)
     end
 
     def failure(document, data)

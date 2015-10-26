@@ -1,0 +1,8 @@
+#!/usr/bin/env ruby
+
+require File.expand_path("../../config/environment", __FILE__)
+require "medical_safety_alert_import"
+
+data_file = ARGV.fetch(0)
+
+MedicalSafetyAlertImport.call(data_file)
