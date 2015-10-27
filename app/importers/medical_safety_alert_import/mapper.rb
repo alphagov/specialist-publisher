@@ -9,11 +9,8 @@ module MedicalSafetyAlertImport
     def call(raw_data)
       document = document_creator.call(desired_attributes(raw_data))
       document = document_publisher.call(document.id)
+      puts "#{raw_data["slug"]} => #{document.slug}"
       document
-    end
-
-    def import_notes
-      []
     end
 
   private
