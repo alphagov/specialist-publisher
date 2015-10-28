@@ -25,9 +25,9 @@ module MedicalSafetyAlertImport
     def massage(data)
       alert_type = case data["import_source"]
                    when /safety-information-from-manufacturers-field-safety-notices/
-                     "field-safety"
+                     "field-safety-notices"
                    when /medicines-company-led-recalls/
-                     "company-led-drug"
+                     "company-led-drugs"
                    end
 
       title_date = /\d\d? \w+ 2015/.match(data["title"])
