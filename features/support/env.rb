@@ -114,6 +114,7 @@ require "asylum_support_decision_helpers"
 require "cma_case_helpers"
 require "csg_helpers"
 require "dsu_helpers"
+require "employment_appeal_tribunal_decision_helpers"
 require "esi_fund_helpers"
 require "idf_helpers"
 require "maib_report_helpers"
@@ -141,6 +142,7 @@ World(AsylumSupportDecisionHelpers)
 World(CmaCaseHelpers)
 World(CsgHelpers)
 World(DsuHelpers)
+World(EmploymentAppealTribunalDecisionHelpers)
 World(EsiFundHelpers)
 World(IdfHelpers)
 World(MaibReportHelpers)
