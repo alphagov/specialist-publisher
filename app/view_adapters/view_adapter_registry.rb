@@ -10,6 +10,7 @@ private
     "cma_case" => CmaCaseViewAdapter,
     "countryside_stewardship_grant" => CountrysideStewardshipGrantViewAdapter,
     "drug_safety_update" => DrugSafetyUpdateViewAdapter,
+    "employment_appeal_tribunal_decision" => EmploymentAppealTribunalDecisionViewAdapter,
     "esi_fund" => EsiFundViewAdapter,
     "international_development_fund" => InternationalDevelopmentFundViewAdapter,
     "maib_report" => MaibReportViewAdapter,

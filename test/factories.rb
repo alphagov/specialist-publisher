@@ -61,6 +61,10 @@ FactoryGirl.define do
     organisation_slug "upper-tribunal-tax-and-chancery-chamber"
   end
 
+  factory :employmentappealtribunal_editor, parent: :editor do
+    organisation_slug "employment-appeal-tribunal"
+  end
+
   factory :generic_writer, parent: :user do
     organisation_slug "ministry-of-tea"
   end

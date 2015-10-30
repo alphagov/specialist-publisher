@@ -46,6 +46,10 @@ class ApplicationController < ActionController::Base
         document_type: "drug_safety_update",
         title: "Drug Safety Update",
       },
+      "employment-appeal-tribunal-decisions" => {
+        document_type: "employment_appeal_tribunal_decision",
+        title: "EAT Decisions",
+      },
       "esi-funds" => {
         document_type: "esi_fund",
         title: "ESI Funds",

@@ -14,6 +14,8 @@ class PermissionChecker
       ["department-for-international-development"]
     when "drug_safety_update", "medical_safety_alert"
       ["medicines-and-healthcare-products-regulatory-agency"]
+    when "employment_appeal_tribunal_decision"
+      ["employment-appeal-tribunal"]
     when "esi_fund"
       %w(
         department-for-communities-and-local-government
