@@ -38,6 +38,10 @@ class ApplicationController < ActionController::Base
         document_type: "countryside_stewardship_grant",
         title: "Countryside Stewardship Grants",
       },
+      "employment-tribunal-decisions" => {
+        document_type: "employment_tribunal_decision",
+        title: "ET Decisions",
+      },
       "international-development-funds" => {
         document_type: "international_development_fund",
         title: "International Development Funds",

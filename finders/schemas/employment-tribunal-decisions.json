@@ -1,0 +1,227 @@
+{
+  "document_noun": "decision",
+  "facets": [
+    {
+      "key": "tribunal_decision_country",
+      "name": "Country",
+      "type": "text",
+      "preposition": "by country",
+      "display_as_result_metadata": false,
+      "filterable": true,
+      "allowed_values": [
+        {
+          "label": "England and Wales",
+          "value": "england-and-wales"
+        },
+        {
+          "label": "Scotland",
+          "value": "scotland"
+        }
+      ]
+    },
+    {
+      "key": "tribunal_decision_country_name",
+      "name": "Country name",
+      "type": "text",
+      "display_as_result_metadata": true,
+      "filterable": false
+    },
+    {
+      "key": "tribunal_decision_categories",
+      "name": "Jurisdiction code",
+      "type": "text",
+      "preposition": "by jurisdiction",
+      "display_as_result_metadata": false,
+      "filterable": true,
+      "allowed_values": [
+        {
+          "label": "Age Discrimination",
+          "value": "age-discrimination"
+        },
+        {
+          "label": "Agency Workers",
+          "value": "agency-workers"
+        },
+        {
+          "label": "Blacklisting Regulations",
+          "value": "blacklisting-regulations"
+        },
+        {
+          "label": "Central Arbitration Committee (CAC)",
+          "value": "central-arbitration-committee-cac"
+        },
+        {
+          "label": "Certification Officer",
+          "value": "certification-officer"
+        },
+        {
+          "label": "Contract of Employment",
+          "value": "contract-of-employment"
+        },
+        {
+          "label": "Disability Discrimination",
+          "value": "disability-discrimination"
+        },
+        {
+          "label": "Employment Agencies Act 1973",
+          "value": "employment-agencies-act-1973"
+        },
+        {
+          "label": "Employment Agencies Act 1973 (obsolete topic)",
+          "value": "employment-agencies-act-1973-obsolete-topic"
+        },
+        {
+          "label": "Equal Pay Act",
+          "value": "equal-pay-act"
+        },
+        {
+          "label": "European Material (obsolete topic)",
+          "value": "european-material-obsolete-topic"
+        },
+        {
+          "label": "Fixed Term Regulations",
+          "value": "fixed-term-regulations"
+        },
+        {
+          "label": "Flexible Working",
+          "value": "flexible-working"
+        },
+        {
+          "label": "Harassment",
+          "value": "harassment"
+        },
+        {
+          "label": "Health & Safety",
+          "value": "health-safety"
+        },
+        {
+          "label": "Human Rights",
+          "value": "human-rights"
+        },
+        {
+          "label": "Jurisdiction (obsolete topic)",
+          "value": "jurisdiction-obsolete-topic"
+        },
+        {
+          "label": "Jurisdictional Points",
+          "value": "jurisdictional-points"
+        },
+        {
+          "label": "Maternity Rights and Parental Leave",
+          "value": "maternity-rights-and-parental-leave"
+        },
+        {
+          "label": "National Minimum Wage",
+          "value": "national-minimum-wage"
+        },
+        {
+          "label": "National Security",
+          "value": "national-security"
+        },
+        {
+          "label": "Part Time Workers",
+          "value": "part-time-workers"
+        },
+        {
+          "label": "Practice and Procedure",
+          "value": "practice-and-procedure"
+        },
+        {
+          "label": "Procedural Issues (obsolete topic)",
+          "value": "procedural-issues-obsolete-topic"
+        },
+        {
+          "label": "Public Interest Disclosure (obsolete topic)",
+          "value": "public-interest-disclosure-obsolete-topic"
+        },
+        {
+          "label": "Race Discrimination",
+          "value": "race-discrimination"
+        },
+        {
+          "label": "Redundancy",
+          "value": "redundancy"
+        },
+        {
+          "label": "Religion or Belief Discrimination",
+          "value": "religion-or-belief-discrimination"
+        },
+        {
+          "label": "Reserved Forces Act (obsolete topic)",
+          "value": "reserved-forces-act-obsolete-topic"
+        },
+        {
+          "label": "Right To Be Accompanied",
+          "value": "right-to-be-accompanied"
+        },
+        {
+          "label": "Rights on Insolvency",
+          "value": "rights-on-insolvency"
+        },
+        {
+          "label": "Sex Discrimination",
+          "value": "sex-discrimination"
+        },
+        {
+          "label": "Sexual Orientation Discrimination/Transexualism",
+          "value": "sexual-orientation-discrimination-transexualism"
+        },
+        {
+          "label": "Statutory Discipline and Grievance Procedures",
+          "value": "statutory-discipline-and-grievance-procedures"
+        },
+        {
+          "label": "Time Limits (obsolete topic)",
+          "value": "time-limits-obsolete-topic"
+        },
+        {
+          "label": "Time Off",
+          "value": "time-off"
+        },
+        {
+          "label": "Trade Union Membership",
+          "value": "trade-union-membership"
+        },
+        {
+          "label": "Trade Union Rights",
+          "value": "trade-union-rights"
+        },
+        {
+          "label": "Transfer of Undertakings",
+          "value": "transfer-of-undertakings"
+        },
+        {
+          "label": "Unfair Dismissal",
+          "value": "unfair-dismissal"
+        },
+        {
+          "label": "Unlawful Deduction from Wages",
+          "value": "unlawful-deduction-from-wages"
+        },
+        {
+          "label": "Victimisation Discrimination",
+          "value": "victimisation-discrimination"
+        },
+        {
+          "label": "Working Time Regulations",
+          "value": "working-time-regulations"
+        }
+      ]
+    },
+    {
+      "key": "tribunal_decision_categories_name",
+      "name": "Jurisdiction code name",
+      "type": "text",
+      "display_as_result_metadata": true,
+      "filterable": false
+    },
+    {
+      "key": "tribunal_decision_decision_date",
+      "name": "Decision date",
+      "short_name": "Decided",
+      "type": "date",
+      "display_as_result_metadata": true,
+      "filterable": true
+    }
+  ]
+}

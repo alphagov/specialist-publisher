@@ -31,6 +31,7 @@ private
     "countryside_stewardship_grant" => CountrysideStewardshipGrantObserversRegistry,
     "drug_safety_update" => DrugSafetyUpdateObserversRegistry,
     "employment_appeal_tribunal_decision" => EmploymentAppealTribunalDecisionObserversRegistry,
+    "employment_tribunal_decision" => EmploymentTribunalDecisionObserversRegistry,
     "esi_fund" => EsiFundObserversRegistry,
     "international_development_fund" => InternationalDevelopmentFundObserversRegistry,
     "maib_report" => MaibReportObserversRegistry,
