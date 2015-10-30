@@ -19,11 +19,11 @@ class AsylumSupportDecisionValidator < SimpleDelegator
 
   def category_prefix_for(category)
     case category
-    when "section-95-asylum-seekers"
+    when "section-95-support-for-asylum-seekers"
       "section-95"
-    when "section-4-2-failed-asylum-seekers"
+    when "section-4-2-support-for-failed-asylum-seekers"
       "section-4-2"
-    when "section-4-1-neither-an-asylum-seeker-nor-a-failed-asylum-seeker"
+    when "section-4-1-support-for-persons-who-are-neither-an-asylum-seeker-nor-a-failed-asylum-seeker"
       "section-4-1"
     end
   end

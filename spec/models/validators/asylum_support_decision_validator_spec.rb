@@ -31,7 +31,7 @@ RSpec.describe AsylumSupportDecisionValidator do
     end
 
     context "when sub_category matches alternate prefix for parent category" do
-      let(:category) { "section-95-asylum-seekers" }
+      let(:category) { "section-95-support-for-asylum-seekers" }
       let(:sub_category) { ["section-95-jurisdiction"] }
 
       it "returns an empty error hash" do
