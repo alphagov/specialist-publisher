@@ -1,6 +1,6 @@
 When(/^I create a asylum support decision$/) do
   @document_title = "Example asylum support decision"
-  @slug = "asylum-support-decisions/example-asylum-support-decision"
+  @slug = "asylum-support-tribunal-decisions/example-asylum-support-decision"
   @document_fields = asylum_support_decision_fields(title: @document_title)
 
   create_asylum_support_decision(@document_fields)
@@ -44,7 +44,7 @@ end
 
 Given(/^a draft asylum support decision exists$/) do
   @document_title = "Example asylum support decision"
-  @slug = "asylum-support-decisions/example-asylum-support-decision"
+  @slug = "asylum-support-tribunal-decisions/example-asylum-support-decision"
   @document_fields = asylum_support_decision_fields(title: @document_title)
   @rummager_fields = asylum_support_decision_rummager_fields(title: @document_title)
 
@@ -72,7 +72,7 @@ Given(/^there is a published asylum support decision with an attachment$/) do
   @document_title = "Example asylum support decision"
   @attachment_title = "My attachment"
 
-  @slug = "asylum-support-decisions/example-asylum-support-decision"
+  @slug = "asylum-support-tribunal-decisions/example-asylum-support-decision"
   @document_fields = asylum_support_decision_fields(title: @document_title)
 
   create_asylum_support_decision(@document_fields, publish: true)
@@ -81,7 +81,7 @@ end
 
 Given(/^a published asylum support decision exists$/) do
   @document_title = "Example asylum support decision"
-  @slug = "asylum-support-decisions/example-asylum-support-decision"
+  @slug = "asylum-support-tribunal-decisions/example-asylum-support-decision"
   @document_fields = asylum_support_decision_fields(title: @document_title)
 
   create_asylum_support_decision(@document_fields, publish: true)
@@ -114,7 +114,7 @@ end
 
 When(/^I publish a new asylum support decision$/) do
   @document_title = "Example asylum support decision"
-  @slug = "asylum-support-decisions/example-asylum-support-decision"
+  @slug = "asylum-support-tribunal-decisions/example-asylum-support-decision"
   @document_fields = asylum_support_decision_fields(title: @document_title)
   @rummager_fields = asylum_support_decision_rummager_fields(title: @document_title)
 

@@ -272,7 +272,7 @@ SpecialistPublisherWiring ||= DependencyContainer.new do
   }
 
   define_singleton(:asylum_support_decision_finder_schema) {
-    FinderSchema.new(Rails.root.join("finders/schemas/asylum-support-decisions.json"))
+    FinderSchema.new(Rails.root.join("finders/schemas/asylum-support-tribunal-decisions.json"))
   }
 
   define_singleton(:utaac_decision_finder_schema) {
