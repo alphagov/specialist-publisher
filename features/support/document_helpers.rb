@@ -54,7 +54,7 @@ module DocumentHelpers
     document_type_slug_prefix_map = {
       "cma-cases" => "cma_case",
       "aaib-reports" => "aaib_report",
-      "asylum-support-decisions" => "asylum_support_decision",
+      "asylum-support-tribunal-decisions" => "asylum_support_decision",
       "international-development-funding" => "international_development_fund",
       "drug-safety-update" => "drug_safety_update",
       "drug-device-alerts" => "medical_safety_alert",

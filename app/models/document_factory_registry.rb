@@ -193,7 +193,7 @@ class DocumentFactoryRegistry
         AsylumSupportDecisionValidator.new(
           AsylumSupportDecision.new(
             SpecialistDocument.new(
-              SlugGenerator.new(prefix: "asylum-support-decisions"),
+              SlugGenerator.new(prefix: "asylum-support-tribunal-decisions"),
               *args,
             ),
           )
