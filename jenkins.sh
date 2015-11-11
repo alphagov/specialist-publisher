@@ -1,6 +1,9 @@
 #!/bin/bash
 
-GH_STATUS_REPO_NAME=${INITIATING_REPO_NAME:-"specialist-publisher"}
+export GOVUK_APP_DOMAIN=test.gov.uk
+export GOVUK_ASSET_ROOT=http://static.test.gov.uk
+
+GH_STATUS_REPO_NAME="alphagov/specialist-publisher"
 CONTEXT_MESSAGE=${CONTEXT_MESSAGE:-"default"}
 GH_STATUS_GIT_COMMIT=${INITIATING_GIT_COMMIT:-${GIT_COMMIT}}
 
