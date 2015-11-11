@@ -1,3 +1,0 @@
-#!/usr/bin/env bash
-
-rubocop --config=rubocop/rubocop.yml

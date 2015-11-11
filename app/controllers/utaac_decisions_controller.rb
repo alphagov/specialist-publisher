@@ -1,2 +1,0 @@
-class UtaacDecisionsController < AbstractDocumentsController
-end

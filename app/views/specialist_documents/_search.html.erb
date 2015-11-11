@@ -1,5 +1,0 @@
-<%= form_tag(specialist_documents_path(document_type), method: :get, class: "add-vertical-margins well") do %>
-  <%= label_tag "query", "Search" %>
-  <%= text_field_tag("query", params[:query], class: "form-control add-bottom-margin") %>
-  <%= submit_tag "Search", name: nil, class: "btn btn-default" %>
-<% end %>

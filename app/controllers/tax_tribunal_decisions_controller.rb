@@ -1,2 +1,0 @@
-class TaxTribunalDecisionsController < AbstractDocumentsController
-end

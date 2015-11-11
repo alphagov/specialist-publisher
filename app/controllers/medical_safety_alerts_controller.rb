@@ -1,2 +1,0 @@
-class MedicalSafetyAlertsController < AbstractDocumentsController
-end

@@ -1,2 +1,0 @@
-class AaibReportsController < AbstractDocumentsController
-end

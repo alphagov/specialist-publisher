@@ -1,2 +1,0 @@
-class InternationalDevelopmentFundsController < AbstractDocumentsController
-end

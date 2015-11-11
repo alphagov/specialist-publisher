@@ -1,2 +1,0 @@
-class EmploymentTribunalDecisionsController < AbstractDocumentsController
-end

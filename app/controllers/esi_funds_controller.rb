@@ -1,2 +1,0 @@
-class EsiFundsController < AbstractDocumentsController
-end

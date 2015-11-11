@@ -1,8 +1,0 @@
-#!/usr/bin/env ruby
-
-require File.expand_path("../../config/environment", __FILE__)
-require "cma_import"
-
-data_files_dir = ARGV.fetch(0)
-
-CmaImport.new(data_files_dir).call

@@ -1,8 +1,0 @@
-AllCops:
-  Exclude:
-    - 'tmp/govuk-content-schemas/**/*'
-inherit_from:
-  - gds-ruby-styleguide.yml
-  - other-lint.yml
-  - other-rails.yml
-  - other-style.yml

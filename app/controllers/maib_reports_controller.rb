@@ -1,2 +1,0 @@
-class MaibReportsController < AbstractDocumentsController
-end
