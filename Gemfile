@@ -13,6 +13,8 @@ gem 'uglifier', '>= 1.3.0'
 gem 'plek', '~> 1.10'
 
 group :development, :test do
+  gem 'better_errors', '~> 2.1.1'
+  gem 'binding_of_caller', '~> 0.7.2'
   gem 'rspec-rails', '~> 3.3'
   gem 'simplecov', '0.10.0', require: false
   gem 'simplecov-rcov', '0.2.3', require: false
