@@ -11,6 +11,8 @@ gem 'uglifier', '>= 1.3.0'
 
 # GDS managed dependencies
 gem 'plek', '~> 1.10'
+gem 'gds-sso', '11.0.0'
+gem 'govuk_admin_template', '1.0.0'
 
 group :development, :test do
   gem 'better_errors', '~> 2.1.1'
