@@ -1,13 +1,33 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <title>SpecialistPublisher</title>
-  <%= stylesheet_link_tag    'application', media: 'all' %>
+<% content_for :head do %>
+  <%= stylesheet_link_tag "application", :media => "all" %>
+  <%= javascript_include_tag 'application' %>
   <%= csrf_meta_tags %>
-</head>
-<body>
+<% end %>
 
-<%= yield %>
+<% content_for :page_title, "Specialist Publisher" %>
+<% content_for :app_title, "GOV.UK Specialist Publisher" %>
 
-</body>
-</html>
+<% content_for :navbar_items do %>
+
+<% end %>
+
+<% content_for :navbar_right do %>
+  Hello, <%= link_to current_user.name, Plek.current.find('signon') %>
+  &bull; <%= link_to 'Sign out', gds_sign_out_path %>
+<% end %>
+
+<% content_for :content do %>
+  <% flash.each do |type, msg| %>
+    <%= content_tag :div, msg, class: "alert #{bootstrap_class_for(type)}" %>
+  <% end -%>
+
+  <%= yield %>
+  <script>
+    $(document).ready(function() {
+      <%= yield :document_ready %>
+    });
+  </script>
+<% end %>
+
+<%# use the govuk_admin_foundation layout %>
+<%= render :template => 'layouts/govuk_admin_template' %>
