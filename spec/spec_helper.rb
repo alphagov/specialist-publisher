@@ -26,6 +26,8 @@ require 'capybara/rspec'
 require 'capybara/webkit/matchers'
 Capybara.javascript_driver = :webkit
 
+require 'gds_api/test_helpers/publishing_api_v2'
+
 RSpec.configure do |config|
   # config.disable_monkey_patching!
 
@@ -45,6 +47,7 @@ RSpec.configure do |config|
 
   config.include Capybara::DSL, type: :feature
   config.include(Capybara::Webkit::RspecMatchers, :type => :feature)
+  config.include(GdsApi::TestHelpers::PublishingApiV2)
 
   config.after(:each) do
     #DatabaseCleaner.clean
