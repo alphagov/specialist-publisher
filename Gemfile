@@ -29,6 +29,7 @@ end
 group :development, :test do
   gem 'better_errors', '~> 2.1.1'
   gem 'binding_of_caller', '~> 0.7.2'
+  gem 'pry'
   gem 'foreman', '0.74.0'
   gem 'rspec-rails', '~> 3.3'
   gem 'simplecov', '0.10.0', require: false
