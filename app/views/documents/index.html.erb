@@ -1,1 +1,4 @@
-<h1><%= current_finder.title.pluralize %></h1>
+<div class="page-title">
+  <h1><%= current_format.title.pluralize %></h1>
+</div>
+<p class="subtitle"><%= link_to "New #{current_format.title}", new_document_path(document_type: current_format.document_type) %></p>
