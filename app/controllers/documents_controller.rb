@@ -1,7 +1,62 @@
+require 'gds_api/publishing_api_v2'
+
 class DocumentsController <  ApplicationController
 
   def index
     redirect_to "/#{document_types.keys.first}" unless params[:document_type]
+  end
+
+  def new
+    render :new, locals: { document: document_klass.new }
+  end
+
+  def create
+    document = document_klass.new(
+      filtered_params(params[current_format.format_name])
+    )
+
+    presented_document = DocumentPresenter.new(document)
+    presented_links = DocumentLinksPresenter.new(document)
+
+    item_request = publishing_api.put_content(document.content_id, presented_document.to_json)
+    links_request = publishing_api.put_links(document.content_id, presented_links.to_json)
+
+    if item_request.code == 200 && links_request.code == 200
+      flash[:success] = "Created #{document.title}"
+      redirect_to documents_path(document_type: current_format.document_type)
+    else
+      errors = request.body.error.fields.map { |k, v|
+        "#{k}: #{v}"
+      }
+      flash[:error] = errors.join(', ')
+      render :new, locals: { document: current_format.klass.new }
+    end
+  end
+
+private
+
+  def document_type
+    params[:document_type]
+  end
+
+  def document_klass
+    current_format.klass
+  end
+
+  def filtered_params(params_of_document)
+    filter_blank_multi_selects(params_of_document).with_indifferent_access
+  end
+
+  # See http://stackoverflow.com/questions/8929230/why-is-the-first-element-always-blank-in-my-rails-multi-select
+  def filter_blank_multi_selects(values)
+    values.reduce({}) { |filtered_params, (key, value)|
+      filtered_value = value.is_a?(Array) ? value.reject(&:blank?) : value
+      filtered_params.merge(key => filtered_value)
+    }
+  end
+
+  def publishing_api
+    @publishing_api ||= SpecialistPublisher.services(:publishing_api)
   end
 
 end
