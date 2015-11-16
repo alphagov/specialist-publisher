@@ -39,3 +39,7 @@ group :development, :test do
   gem "capybara", "2.5.0"
   gem 'capybara-webkit', '1.7.1'
 end
+
+group :test do
+  gem 'webmock'
+end
