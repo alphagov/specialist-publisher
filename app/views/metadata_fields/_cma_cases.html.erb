@@ -1,0 +1,12 @@
+<%= f.label :opened_date %>
+<%= f.text_field :opened_date, placeholder: '2012-04-23', class: 'form-control' %>
+<%= f.label :closed_date %>
+<%= f.text_field :closed_date, placeholder: '2013-10-19', class: 'form-control' %>
+<%= f.label :case_type %>
+<%= f.select :case_type, f.object.facet_options(:case_type), {}, { class: 'form-control' } %>
+<%= f.label :case_state %>
+<%= f.select :case_state, f.object.facet_options(:case_state), {}, { class: 'form-control' } %>
+<%= f.label :market_sector %>
+<%= f.select :market_sector, f.object.facet_options(:market_sector), {}, { class: 'select2', multiple: true, data: { placeholder: 'Select a market sector' } } %>
+<%= f.label :outcome_type %>
+<%= f.select :outcome_type, f.object.facet_options(:outcome_type), { include_blank: true }, { class: 'form-control' } %>

@@ -8,11 +8,14 @@ gem 'unicorn', '~> 4.9.0'
 gem 'sass-rails', '~> 4.0.3'
 gem 'mongoid', '5.0.1'
 gem 'uglifier', '>= 1.3.0'
+gem 'jquery-rails', '~> 3.1.4'
+gem 'select2-rails', '~> 4.0.0'
 
 # GDS managed dependencies
 gem 'plek', '~> 1.10'
 gem 'gds-sso', '11.0.0'
 gem 'govuk_admin_template', '~> 3.3.1'
+gem "govuk_frontend_toolkit", "0.44.0"
 
 if ENV["GOVSPEAK_DEV"]
   gem "govspeak", :path => "../govspeak"
