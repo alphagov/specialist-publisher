@@ -3,6 +3,8 @@ Rails.application.routes.draw do
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
+  mount GovukAdminTemplate::Engine, at: "/style-guide"
+
   resources :documents, path: "/:document_type", except: :destroy do
     resources :attachments, only: [:new, :create, :edit, :update]
 
