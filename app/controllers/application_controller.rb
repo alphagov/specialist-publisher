@@ -7,21 +7,29 @@ class ApplicationController < ActionController::Base
 
   before_filter :require_signin_permission!
 
-  helper_method :current_finder
+  helper_method :current_format
 
 private
 
-  def document_types
-    {
-      "cma-cases" => OpenStruct.new(
-        document_type: "cma_case",
-        title: "CMA Cases",
-      ),
-    }
+  def current_format
+    document_types.fetch(params.fetch(:document_type, nil), nil)
   end
 
-  def current_finder
-    document_types.fetch(params.fetch(:document_type, nil), nil)
+  def document_types
+    data = {
+      "CMA Case" => CmaCase
+    }
+
+    data.map do |k, v|
+      {
+        k.downcase.parameterize.pluralize => OpenStruct.new(
+          klass: v,
+          document_type: k.downcase.parameterize.pluralize,
+          format_name: k.downcase.parameterize.underscore,
+          title: k,
+        )
+      }
+    end.reduce({}, :merge)
   end
 
 end
