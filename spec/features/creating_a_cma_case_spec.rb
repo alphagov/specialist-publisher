@@ -58,6 +58,15 @@ RSpec.feature "Creating a CMA case", type: :feature do
 
     stub_any_publishing_api_put_content
     stub_any_publishing_api_put_links
+
+    fields = [
+      :base_path,
+      :content_id,
+      :title,
+      :public_updated_at,
+    ]
+
+    publishing_api_has_fields_for_format('cma_case', [cma_case_content_item], fields)
   end
 
   scenario "with valid data" do
