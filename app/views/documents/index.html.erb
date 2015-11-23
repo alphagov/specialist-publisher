@@ -1,4 +1,27 @@
-<div class="page-title">
-  <h1><%= current_format.title.pluralize %></h1>
+<% content_for :breadcrumbs do %>
+  <li class='active'><%= current_format.title.pluralize %></li>
+<% end %>
+
+<h1 class="page-header"><%= current_format.title.pluralize %></h1>
+
+<div class="row">
+  <div class="sidebar col-md-3">
+    <%= link_to "New #{current_format.title}", new_document_path(document_type: current_format.document_type), class: 'action-link' %>
+  </div>
+
+  <div class="col-md-9">
+    <ul class="document-list">
+      <% @documents.each do |document| %>
+        <li class="document">
+          <%= link_to document.title, document_path(document_type: current_format.document_type, id: document.content_id), class: 'document-title' %>
+          <ul class="metadata">
+            <li class="text-muted">Updated <%= time_ago_in_words(document.public_updated_at) %> ago</li>
+            <li>
+              <%= document.publication_state %>
+            </li>
+          </ul>
+        </li>
+      <% end %>
+    </ul>
+  </div>
 </div>
-<p class="subtitle"><%= link_to "New #{current_format.title}", new_document_path(document_type: current_format.document_type) %></p>
