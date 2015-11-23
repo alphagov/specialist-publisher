@@ -63,6 +63,9 @@ class DocumentsController <  ApplicationController
     end
   end
 
+  def show
+    @document = current_format.klass.from_publishing_api(publishing_api.get_content(params[:id]).to_ostruct)
+  end
 private
 
   def document_type
