@@ -1,7 +1,12 @@
 class Document
   include ActiveModel::Model
+  include ActiveModel::Validations
 
   attr_accessor :content_id, :title, :summary, :body, :format_specific_fields, :state, :bulk_published, :minor_update, :change_note
+
+  validates :title, presence: true
+  validates :summary, presence: true
+  validates :body, presence: true, safe_html: true
 
   def initialize(params = {}, format_specific_fields = [])
     @title = params.fetch(:title, nil)
