@@ -69,6 +69,16 @@ class Document
     end
   end
 
+  def humanized_attributes
+    format_specific_metadata.inject({}) do |attributes, (key, value)|
+      humanized_name = finder_schema.humanized_facet_name(key) { key }
+      humanized_value = finder_schema.humanized_facet_value(key, value) { value }
+
+      attributes.merge(humanized_name => humanized_value)
+    end
+  end
+
+
   def self.from_publishing_api(payload)
     document = self.new(
       {
