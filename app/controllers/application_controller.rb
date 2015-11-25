@@ -16,6 +16,25 @@ private
   end
 
   def document_types
+    # For each format that follows the standard naming convention, this
+    # method takes the title and name of the model class of eacg format
+    # like this:
+    #
+    # data = {
+    #   "GDS Report" => GdsReport
+    # }
+    #
+    # which will become this:
+    #
+    # {
+    #   "gds-reports" => {
+    #     klass: GdsReports
+    #     document_type: "gds-reports",
+    #     format_name: "gds_report",
+    #     title: "GDS Report"
+    #   }
+    # }
+
     data = {
       "CMA Case" => CmaCase
     }
