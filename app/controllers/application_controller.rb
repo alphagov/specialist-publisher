@@ -15,6 +15,9 @@ private
     document_types.fetch(params.fetch(:document_type, nil), nil)
   end
 
+  # This Struct is for the document_types method below
+  FormatStruct = Struct.new(:klass, :document_type, :format_name, :title)
+
   def document_types
     # For each format that follows the standard naming convention, this
     # method takes the title and name of the model class of eacg format
@@ -41,11 +44,11 @@ private
 
     data.map do |k, v|
       {
-        k.downcase.parameterize.pluralize => OpenStruct.new(
-          klass: v,
-          document_type: k.downcase.parameterize.pluralize,
-          format_name: k.downcase.parameterize.underscore,
-          title: k,
+        k.downcase.parameterize.pluralize => FormatStruct.new(
+          v,
+          k.downcase.parameterize.pluralize,
+          k.downcase.parameterize.underscore,
+          k
         )
       }
     end.reduce({}, :merge)
