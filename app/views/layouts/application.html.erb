@@ -17,9 +17,6 @@
 <% end %>
 
 <% content_for :content do %>
-  <% flash.each do |type, msg| %>
-    <%= content_tag :div, msg, class: "alert #{bootstrap_class_for(type)}" %>
-  <% end -%>
 
   <%= yield %>
   <script>

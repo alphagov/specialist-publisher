@@ -1,6 +1,9 @@
 require 'gds_api/publishing_api_v2'
 
 class DocumentsController <  ApplicationController
+  include ActionView::Context
+  include ActionView::Helpers::TagHelper
+  include ActionView::Helpers::TextHelper
 
   def index
     redirect_to "/#{document_types.keys.first}" unless params[:document_type]
@@ -15,21 +18,35 @@ class DocumentsController <  ApplicationController
       filtered_params(params[current_format.format_name])
     )
 
-    presented_document = DocumentPresenter.new(document)
-    presented_links = DocumentLinksPresenter.new(document)
+    if document.valid?
+      presented_document = DocumentPresenter.new(document)
+      presented_links = DocumentLinksPresenter.new(document)
 
-    item_request = publishing_api.put_content(document.content_id, presented_document.to_json)
-    links_request = publishing_api.put_links(document.content_id, presented_links.to_json)
+      item_request = publishing_api.put_content(document.content_id, presented_document.to_json)
+      links_request = publishing_api.put_links(document.content_id, presented_links.to_json)
 
-    if item_request.code == 200 && links_request.code == 200
-      flash[:success] = "Created #{document.title}"
-      redirect_to documents_path(document_type: current_format.document_type)
+      if item_request.code == 200 && links_request.code == 200
+        flash.now[:success] = "Created #{document.title}"
+        redirect_to documents_path(current_format.document_type)
+      else
+        flash.now[:danger] = "There was an error publishing #{document.title}. Please try again later."
+        render :new, locals: { document: document }
+      end
     else
-      errors = request.body.error.fields.map { |k, v|
-        "#{k}: #{v}"
-      }
-      flash[:error] = errors.join(', ')
-      render :new, locals: { document: current_format.klass.new }
+      document_errors = document.errors.messages
+      errors = content_tag(:p,
+        %Q{
+          There #{document_errors.length > 1 ? 'were' : 'was' } the following
+          #{document_errors.length > 1 ? 'errors' : 'error' } with your
+          #{current_format.title.singularize}:
+        }
+      )
+      errors += content_tag :ul do
+        document.errors.full_messages.map { |e| content_tag(:li, e) }.join('').html_safe
+      end
+
+      flash.now[:danger] = errors
+      render :new, locals: { document: document }, status: 422
     end
   end
 
