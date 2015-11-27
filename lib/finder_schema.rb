@@ -1,6 +1,10 @@
 class FinderSchema
+
+  attr_reader :organisations
+
   def initialize(schema_type)
     @schema ||= load_schema_for(schema_type)
+    @organisations = schema.fetch("organisations", [])
   end
 
   def facets

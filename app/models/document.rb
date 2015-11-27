@@ -51,6 +51,10 @@ class Document
     finder_schema.options_for(facet)
   end
 
+  def organisations
+    finder_schema.organisations
+  end
+
   def public_updated_at
     @public_updated_at ||= Time.zone.now
   end
