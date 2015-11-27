@@ -7,21 +7,51 @@ class ApplicationController < ActionController::Base
 
   before_filter :require_signin_permission!
 
-  helper_method :current_finder
+  helper_method :current_format
 
 private
 
-  def document_types
-    {
-      "cma-cases" => OpenStruct.new(
-        document_type: "cma_case",
-        title: "CMA Cases",
-      ),
-    }
+  def current_format
+    document_types.fetch(params.fetch(:document_type, nil), nil)
   end
 
-  def current_finder
-    document_types.fetch(params.fetch(:document_type, nil), nil)
+  # This Struct is for the document_types method below
+  FormatStruct = Struct.new(:klass, :document_type, :format_name, :title)
+
+  def document_types
+    # For each format that follows the standard naming convention, this
+    # method takes the title and name of the model class of eacg format
+    # like this:
+    #
+    # data = {
+    #   "GDS Report" => GdsReport
+    # }
+    #
+    # which will become this:
+    #
+    # {
+    #   "gds-reports" => {
+    #     klass: GdsReports
+    #     document_type: "gds-reports",
+    #     format_name: "gds_report",
+    #     title: "GDS Report"
+    #   }
+    # }
+
+    data = {
+      "CMA Case" => CmaCase
+    }
+
+    data.map do |k, v|
+      {
+        k.downcase.parameterize.pluralize => FormatStruct.new(
+          v,
+          k.downcase.parameterize.pluralize,
+          k.downcase.parameterize.underscore,
+          k
+        )
+      }
+    end.reduce({}, :merge)
   end
 
 end

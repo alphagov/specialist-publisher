@@ -11,6 +11,15 @@
  * file per style scope.
  *
  *= require_self
+ *= require select2
+ *= require select2-bootstrap
  */
 
+// govuk_frontend_toolkit
+@import "colours";
+@import "typography";
+@import "measurements";
+@import "css3";
+
 @import 'govuk_admin_template';
+@import 'forms';

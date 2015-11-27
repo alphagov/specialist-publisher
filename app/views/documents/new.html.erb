@@ -1,0 +1,15 @@
+<h2>New <%= current_format.title.singularize %></h2>
+
+<div class="col-md-8">
+  <%= form_for document, url: documents_path(document, document_type: params[:document_type]) do |f| %>
+    <%= render partial: "shared/form_fields", locals: { f: f } %>
+
+    <%= render partial: "metadata_fields/#{params[:document_type].underscore}", locals: { f: f } %>
+
+    <%= render partial: "shared/minor_major_update_fields", locals: { f: f, document: document } %>
+
+    <div class="actions">
+      <button name="save" class="btn btn-success">Save as draft</button>
+    </div>
+  <% end %>
+</div>
