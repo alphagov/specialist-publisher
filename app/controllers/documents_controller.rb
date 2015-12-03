@@ -6,7 +6,20 @@ class DocumentsController <  ApplicationController
   include ActionView::Helpers::TextHelper
 
   def index
-    redirect_to "/#{document_types.keys.first}" unless params[:document_type]
+    unless params[:document_type]
+      redirect_to "/#{document_types.keys.first}"
+      return
+    end
+
+    @documents = publishing_api.get_content_items(
+      content_format: current_format.format_name,
+      fields: [
+        :base_path,
+        :content_id,
+        :title,
+        :public_updated_at,
+      ]
+    ).to_ostruct
   end
 
   def new
@@ -50,6 +63,9 @@ class DocumentsController <  ApplicationController
     end
   end
 
+  def show
+    @document = current_format.klass.from_publishing_api(publishing_api.get_content(params[:id]).to_ostruct)
+  end
 private
 
   def document_type

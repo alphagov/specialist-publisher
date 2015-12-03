@@ -27,6 +27,10 @@ class FinderSchema
     end
   end
 
+  def humanized_facet_name(key, &block)
+    facet_data_for(key).fetch("name", &block)
+  end
+
 private
 
   attr_reader :schema

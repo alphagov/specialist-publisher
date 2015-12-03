@@ -1,0 +1,21 @@
+.page-header {
+  border-bottom: none;
+
+  .document-slug {
+    color: $text-muted;
+    font-size: $font-size-large;
+    display: block;
+    margin-top: 5px;
+    font-weight: normal;
+    padding: 0;
+
+    & li {
+      display: inline;
+      list-style: none;
+
+      & + li:before {
+        content: "– ";
+      }
+    }
+  }
+}
