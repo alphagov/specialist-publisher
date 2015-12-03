@@ -44,7 +44,7 @@ class DocumentsController <  ApplicationController
         flash.now[:success] = "Created #{@document.title}"
         redirect_to documents_path(current_format.document_type)
       else
-        flash.now[:danger] = "There was an error publishing #{@document.title}. Please try again later."
+        flash.now[:danger] = "There was an error creating #{@document.title}. Please try again later."
         render :new
       end
     else
