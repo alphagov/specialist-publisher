@@ -88,6 +88,7 @@ class Document
 
     document.base_path = payload.base_path
     document.public_updated_at = payload.public_updated_at
+    document.publication_state = payload.publication_state
 
     document.format_specific_fields.each do |field|
       document.public_send(:"#{field.to_s}=", payload.details.metadata.send(:"#{field}"))
