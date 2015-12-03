@@ -9,6 +9,7 @@ class Document
   validates :body, presence: true, safe_html: true
 
   def initialize(params = {}, format_specific_fields = [])
+    @content_id = params.fetch(:content_id, SecureRandom.uuid)
     @title = params.fetch(:title, nil)
     @summary = params.fetch(:summary, nil)
     @body = params.fetch(:body, nil)
@@ -21,10 +22,6 @@ class Document
 
   def base_path
     "#{public_path}/#{title.parameterize}"
-  end
-
-  def content_id
-    @content_id ||= SecureRandom.uuid
   end
 
   def format
@@ -82,6 +79,7 @@ class Document
   def self.from_publishing_api(payload)
     document = self.new(
       {
+        content_id: payload.content_id,
         title: payload.title,
         summary: payload.description,
         body: payload.details.body,

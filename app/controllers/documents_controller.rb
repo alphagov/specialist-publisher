@@ -71,7 +71,7 @@ class DocumentsController <  ApplicationController
 
   def update
     @document = current_format.klass.new(
-      filtered_params(params[:"#{current_format.format_name}"])
+      filtered_params(params[:"#{current_format.format_name}"]).merge({content_id: params[:content_id]})
     )
 
     if @document.valid?
