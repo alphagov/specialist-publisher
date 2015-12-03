@@ -5,6 +5,8 @@ class DocumentsController <  ApplicationController
   include ActionView::Helpers::TagHelper
   include ActionView::Helpers::TextHelper
 
+  before_action :fetch_document, only: [:edit, :show]
+
   def index
     unless params[:document_type]
       redirect_to "/#{document_types.keys.first}"
@@ -63,9 +65,10 @@ class DocumentsController <  ApplicationController
     end
   end
 
-  def show
-    @document = current_format.klass.from_publishing_api(publishing_api.get_content(params[:content_id]).to_ostruct)
-  end
+  def show; end
+
+  def edit; end
+
 private
 
   def document_type
@@ -74,6 +77,10 @@ private
 
   def document_klass
     current_format.klass
+  end
+
+  def fetch_document
+    @document = current_format.klass.from_publishing_api(publishing_api.get_content(params[:content_id]).to_ostruct)
   end
 
   def filtered_params(params_of_document)

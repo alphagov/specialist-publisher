@@ -37,3 +37,12 @@
     </div>
   </div>
 <% end %>
+
+<div class="row">
+  <div class="col-md-8">
+    <h2>Actions</h2>
+    <div class="well">
+      <%= link_to "Edit document", edit_document_path(current_format.document_type, @document.content_id), class: "btn btn-success" %>
+    </div>
+  </div>
+</div>
