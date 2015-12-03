@@ -30,6 +30,9 @@ Capybara.javascript_driver = :webkit
 
 require 'gds_api/test_helpers/publishing_api_v2'
 
+# Quiet down now Mongo
+Mongo::Logger.logger.level = ::Logger::FATAL
+
 RSpec.configure do |config|
   # config.disable_monkey_patching!
 
