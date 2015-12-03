@@ -101,7 +101,7 @@ class Document
   end
 
   def public_updated_at=(timestamp)
-    public_updated_at = Time.zone.parse(timestamp)
+    public_updated_at = Time.parse(timestamp)
   end
 
 private

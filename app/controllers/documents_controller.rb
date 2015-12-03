@@ -74,6 +74,8 @@ class DocumentsController <  ApplicationController
       filtered_params(params[:"#{current_format.format_name}"]).merge({content_id: params[:content_id]})
     )
 
+    @document.public_updated_at = Time.zone.now
+
     if @document.valid?
       presented_document = DocumentPresenter.new(@document)
       presented_links = DocumentLinksPresenter.new(@document)
