@@ -23,30 +23,30 @@ class DocumentsController <  ApplicationController
   end
 
   def new
-    render :new, locals: { document: document_klass.new }
+    @document = document_klass.new
   end
 
   def create
-    document = document_klass.new(
+    @document = document_klass.new(
       filtered_params(params[current_format.format_name])
     )
 
-    if document.valid?
-      presented_document = DocumentPresenter.new(document)
-      presented_links = DocumentLinksPresenter.new(document)
+    if @document.valid?
+      presented_document = DocumentPresenter.new(@document)
+      presented_links = DocumentLinksPresenter.new(@document)
 
-      item_request = publishing_api.put_content(document.content_id, presented_document.to_json)
-      links_request = publishing_api.put_links(document.content_id, presented_links.to_json)
+      item_request = publishing_api.put_content(@document.content_id, presented_document.to_json)
+      links_request = publishing_api.put_links(@document.content_id, presented_links.to_json)
 
       if item_request.code == 200 && links_request.code == 200
-        flash.now[:success] = "Created #{document.title}"
+        flash.now[:success] = "Created #{@document.title}"
         redirect_to documents_path(current_format.document_type)
       else
-        flash.now[:danger] = "There was an error publishing #{document.title}. Please try again later."
-        render :new, locals: { document: document }
+        flash.now[:danger] = "There was an error publishing #{@document.title}. Please try again later."
+        render :new
       end
     else
-      document_errors = document.errors.messages
+      document_errors = @document.errors.messages
       errors = content_tag(:p,
         %Q{
           There #{document_errors.length > 1 ? 'were' : 'was' } the following
@@ -55,16 +55,16 @@ class DocumentsController <  ApplicationController
         }
       )
       errors += content_tag :ul do
-        document.errors.full_messages.map { |e| content_tag(:li, e) }.join('').html_safe
+        @document.errors.full_messages.map { |e| content_tag(:li, e) }.join('').html_safe
       end
 
       flash.now[:danger] = errors
-      render :new, locals: { document: document }, status: 422
+      render :new, status: 422
     end
   end
 
   def show
-    @document = current_format.klass.from_publishing_api(publishing_api.get_content(params[:id]).to_ostruct)
+    @document = current_format.klass.from_publishing_api(publishing_api.get_content(params[:content_id]).to_ostruct)
   end
 private
 
