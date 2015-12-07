@@ -48,19 +48,7 @@ class DocumentsController <  ApplicationController
         render :new
       end
     else
-      document_errors = @document.errors.messages
-      errors = content_tag(:p,
-        %Q{
-          There #{document_errors.length > 1 ? 'were' : 'was' } the following
-          #{document_errors.length > 1 ? 'errors' : 'error' } with your
-          #{current_format.title.singularize}:
-        }
-      )
-      errors += content_tag :ul do
-        @document.errors.full_messages.map { |e| content_tag(:li, e) }.join('').html_safe
-      end
-
-      flash.now[:danger] = errors
+      flash.now[:danger] = document_error_messages
       render :new, status: 422
     end
   end
@@ -91,20 +79,8 @@ class DocumentsController <  ApplicationController
         render :edit
       end
     else
-      document_errors = @document.errors.messages
-      errors = content_tag(:p,
-        %Q{
-          There #{document_errors.length > 1 ? 'were' : 'was' } the following
-          #{document_errors.length > 1 ? 'errors' : 'error' } with your
-          #{current_format.title.singularize}:
-        }
-      )
-      errors += content_tag :ul do
-        @document.errors.full_messages.map { |e| content_tag(:li, e) }.join('').html_safe
-      end
-
-      flash.now[:danger] = errors
-      render :new, status: 422
+      flash.now[:danger] = document_error_messages
+      render :edit, status: 422
     end
   end
 private
@@ -115,6 +91,20 @@ private
 
   def document_klass
     current_format.klass
+  end
+
+  def document_error_messages
+    document_errors = @document.errors.messages
+    errors = content_tag(:p,
+      %Q{
+        There #{document_errors.length > 1 ? 'were' : 'was' } the following
+        #{document_errors.length > 1 ? 'errors' : 'error' } with your
+        #{current_format.title.singularize}:
+      }
+    )
+    errors += content_tag :ul do
+      @document.errors.full_messages.map { |e| content_tag(:li, e) }.join('').html_safe
+    end
   end
 
   def fetch_document
