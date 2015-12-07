@@ -34,13 +34,7 @@ class DocumentsController <  ApplicationController
     )
 
     if @document.valid?
-      presented_document = DocumentPresenter.new(@document)
-      presented_links = DocumentLinksPresenter.new(@document)
-
-      item_request = publishing_api.put_content(@document.content_id, presented_document.to_json)
-      links_request = publishing_api.put_links(@document.content_id, presented_links.to_json)
-
-      if item_request.code == 200 && links_request.code == 200
+      if save_document
         flash.now[:success] = "Created #{@document.title}"
         redirect_to documents_path(current_format.document_type)
       else
@@ -58,20 +52,14 @@ class DocumentsController <  ApplicationController
   def edit; end
 
   def update
-    @document = current_format.klass.new(
-      filtered_params(params[:"#{current_format.format_name}"]).merge({content_id: params[:content_id]})
+    @document = document_klass.new(
+      filtered_params(params[current_format.format_name]).merge({content_id: params[:content_id]})
     )
 
     @document.public_updated_at = Time.zone.now
 
     if @document.valid?
-      presented_document = DocumentPresenter.new(@document)
-      presented_links = DocumentLinksPresenter.new(@document)
-
-      item_request = publishing_api.put_content(@document.content_id, presented_document.to_json)
-      links_request = publishing_api.put_links(@document.content_id, presented_links.to_json)
-
-      if item_request.code == 200 && links_request.code == 200
+      if save_document
         flash.now[:success] = "Updated #{@document.title}"
         redirect_to documents_path(current_format.document_type)
       else
@@ -121,6 +109,16 @@ private
       filtered_value = value.is_a?(Array) ? value.reject(&:blank?) : value
       filtered_params.merge(key => filtered_value)
     }
+  end
+
+  def save_document
+    presented_document = DocumentPresenter.new(@document)
+    presented_links = DocumentLinksPresenter.new(@document)
+
+    item_request = publishing_api.put_content(@document.content_id, presented_document.to_json)
+    links_request = publishing_api.put_links(@document.content_id, presented_links.to_json)
+
+    item_request.code == 200 && links_request.code == 200
   end
 
   def publishing_api
