@@ -1,4 +1,5 @@
 require 'gds_api/publishing_api_v2'
+require 'gds_api/rummager'
 
 module SpecialistPublisher
 
@@ -17,3 +18,4 @@ module SpecialistPublisher
 end
 
 SpecialistPublisher.register_service(:publishing_api, GdsApi::PublishingApiV2.new(Plek.new.find('publishing-api')))
+SpecialistPublisher.register_service(:rummager, GdsApi::Rummager.new(Plek.new.find('search')))
