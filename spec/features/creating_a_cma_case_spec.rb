@@ -83,6 +83,7 @@ RSpec.feature "Creating a CMA case", type: :feature do
     assert_publishing_api_put_content("4a656f42-35ad-4034-8c7a-08870db7fffe", request_json_including(cma_case_content_item))
 
     expect(page.status_code).to eq(200)
+    expect(page).to have_content("Created Example CMA Case")
   end
 
   scenario "with no data" do

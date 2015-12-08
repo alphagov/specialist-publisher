@@ -101,6 +101,7 @@ RSpec.feature "Editing a CMA case", type: :feature do
     expect(@changed_json["public_updated_at"]).to eq("2015-12-03T16:59:13.144Z")
 
     expect(page.status_code).to eq(200)
+    expect(page).to have_content("Updated Changed title")
   end
 
   scenario "with some invalid changed attributes" do

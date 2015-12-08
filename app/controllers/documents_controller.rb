@@ -35,7 +35,7 @@ class DocumentsController <  ApplicationController
 
     if @document.valid?
       if save_document
-        flash.now[:success] = "Created #{@document.title}"
+        flash[:success] = "Created #{@document.title}"
         redirect_to documents_path(current_format.document_type)
       else
         flash.now[:danger] = "There was an error creating #{@document.title}. Please try again later."
@@ -60,7 +60,7 @@ class DocumentsController <  ApplicationController
 
     if @document.valid?
       if save_document
-        flash.now[:success] = "Updated #{@document.title}"
+        flash[:success] = "Updated #{@document.title}"
         redirect_to documents_path(current_format.document_type)
       else
         flash.now[:danger] = "There was an error updating #{@document.title}. Please try again later."
