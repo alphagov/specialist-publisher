@@ -44,10 +44,6 @@ class Document
     publication_state == "draft"
   end
 
-  def organisations
-    []
-  end
-
   def users
     content_item.users || []
   end
