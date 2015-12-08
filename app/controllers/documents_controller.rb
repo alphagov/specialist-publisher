@@ -5,6 +5,8 @@ class DocumentsController <  ApplicationController
   include ActionView::Helpers::TagHelper
   include ActionView::Helpers::TextHelper
 
+  before_action :fetch_document, only: [:edit, :show]
+
   def index
     unless params[:document_type]
       redirect_to "/#{document_types.keys.first}"
@@ -23,48 +25,51 @@ class DocumentsController <  ApplicationController
   end
 
   def new
-    render :new, locals: { document: document_klass.new }
+    @document = document_klass.new
   end
 
   def create
-    document = document_klass.new(
+    @document = document_klass.new(
       filtered_params(params[current_format.format_name])
     )
 
-    if document.valid?
-      presented_document = DocumentPresenter.new(document)
-      presented_links = DocumentLinksPresenter.new(document)
-
-      item_request = publishing_api.put_content(document.content_id, presented_document.to_json)
-      links_request = publishing_api.put_links(document.content_id, presented_links.to_json)
-
-      if item_request.code == 200 && links_request.code == 200
-        flash.now[:success] = "Created #{document.title}"
+    if @document.valid?
+      if save_document
+        flash.now[:success] = "Created #{@document.title}"
         redirect_to documents_path(current_format.document_type)
       else
-        flash.now[:danger] = "There was an error publishing #{document.title}. Please try again later."
-        render :new, locals: { document: document }
+        flash.now[:danger] = "There was an error creating #{@document.title}. Please try again later."
+        render :new
       end
     else
-      document_errors = document.errors.messages
-      errors = content_tag(:p,
-        %Q{
-          There #{document_errors.length > 1 ? 'were' : 'was' } the following
-          #{document_errors.length > 1 ? 'errors' : 'error' } with your
-          #{current_format.title.singularize}:
-        }
-      )
-      errors += content_tag :ul do
-        document.errors.full_messages.map { |e| content_tag(:li, e) }.join('').html_safe
-      end
-
-      flash.now[:danger] = errors
-      render :new, locals: { document: document }, status: 422
+      flash.now[:danger] = document_error_messages
+      render :new, status: 422
     end
   end
 
-  def show
-    @document = current_format.klass.from_publishing_api(publishing_api.get_content(params[:id]).to_ostruct)
+  def show; end
+
+  def edit; end
+
+  def update
+    @document = document_klass.new(
+      filtered_params(params[current_format.format_name]).merge({content_id: params[:content_id]})
+    )
+
+    @document.public_updated_at = Time.zone.now
+
+    if @document.valid?
+      if save_document
+        flash.now[:success] = "Updated #{@document.title}"
+        redirect_to documents_path(current_format.document_type)
+      else
+        flash.now[:danger] = "There was an error updating #{@document.title}. Please try again later."
+        render :edit
+      end
+    else
+      flash.now[:danger] = document_error_messages
+      render :edit, status: 422
+    end
   end
 private
 
@@ -74,6 +79,24 @@ private
 
   def document_klass
     current_format.klass
+  end
+
+  def document_error_messages
+    document_errors = @document.errors.messages
+    errors = content_tag(:p,
+      %Q{
+        There #{document_errors.length > 1 ? 'were' : 'was' } the following
+        #{document_errors.length > 1 ? 'errors' : 'error' } with your
+        #{current_format.title.singularize}:
+      }
+    )
+    errors += content_tag :ul do
+      @document.errors.full_messages.map { |e| content_tag(:li, e) }.join('').html_safe
+    end
+  end
+
+  def fetch_document
+    @document = current_format.klass.from_publishing_api(publishing_api.get_content(params[:content_id]).to_ostruct)
   end
 
   def filtered_params(params_of_document)
@@ -86,6 +109,16 @@ private
       filtered_value = value.is_a?(Array) ? value.reject(&:blank?) : value
       filtered_params.merge(key => filtered_value)
     }
+  end
+
+  def save_document
+    presented_document = DocumentPresenter.new(@document)
+    presented_links = DocumentLinksPresenter.new(@document)
+
+    item_request = publishing_api.put_content(@document.content_id, presented_document.to_json)
+    links_request = publishing_api.put_links(@document.content_id, presented_links.to_json)
+
+    item_request.code == 200 && links_request.code == 200
   end
 
   def publishing_api

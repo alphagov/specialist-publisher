@@ -9,6 +9,7 @@ class Document
   validates :body, presence: true, safe_html: true
 
   def initialize(params = {}, format_specific_fields = [])
+    @content_id = params.fetch(:content_id, SecureRandom.uuid)
     @title = params.fetch(:title, nil)
     @summary = params.fetch(:summary, nil)
     @body = params.fetch(:body, nil)
@@ -21,10 +22,6 @@ class Document
 
   def base_path
     "#{public_path}/#{title.parameterize}"
-  end
-
-  def content_id
-    @content_id ||= SecureRandom.uuid
   end
 
   def format
@@ -82,6 +79,7 @@ class Document
   def self.from_publishing_api(payload)
     document = self.new(
       {
+        content_id: payload.content_id,
         title: payload.title,
         summary: payload.description,
         body: payload.details.body,
@@ -90,6 +88,7 @@ class Document
 
     document.base_path = payload.base_path
     document.public_updated_at = payload.public_updated_at
+    document.publication_state = payload.publication_state
 
     document.format_specific_fields.each do |field|
       document.public_send(:"#{field.to_s}=", payload.details.metadata.send(:"#{field}"))
@@ -103,7 +102,7 @@ class Document
   end
 
   def public_updated_at=(timestamp)
-    public_updated_at = Time.zone.parse(timestamp)
+    public_updated_at = Time.parse(timestamp)
   end
 
 private

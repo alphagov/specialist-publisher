@@ -5,7 +5,7 @@ Rails.application.routes.draw do
 
   mount GovukAdminTemplate::Engine, at: "/style-guide"
 
-  resources :documents, path: "/:document_type", except: :destroy do
+  resources :documents, path: "/:document_type", param: :content_id, except: :destroy do
     resources :attachments, only: [:new, :create, :edit, :update]
 
     post :withdraw, on: :member
