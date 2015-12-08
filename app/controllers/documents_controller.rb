@@ -5,7 +5,7 @@ class DocumentsController <  ApplicationController
   include ActionView::Helpers::TagHelper
   include ActionView::Helpers::TextHelper
 
-  before_action :fetch_document, only: [:edit, :show]
+  before_action :fetch_document, only: [:edit, :show, :publish]
 
   def index
     unless params[:document_type]
@@ -71,6 +71,19 @@ class DocumentsController <  ApplicationController
       render :edit, status: 422
     end
   end
+
+  def publish
+    publish_request = publishing_api.publish(params[:content_id], "major")
+
+    if publish_request.code == 200
+      flash[:success] = "Published #{@document.title}"
+      redirect_to documents_path(current_format.document_type)
+    else
+      flash[:danger] = "There was an error publishing #{@document.title}. Please try again later."
+      redirect_to document_path(current_format.document_type, params[:content_id])
+    end
+  end
+
 private
 
   def document_type
