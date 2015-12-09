@@ -36,8 +36,8 @@ class Document
     raise NoMethodError
   end
 
-  def published?
-    !draft?
+  def live?
+    publication_state == "live"
   end
 
   def draft?

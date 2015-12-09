@@ -64,6 +64,8 @@ RSpec.feature "Creating a CMA case", type: :feature do
       :content_id,
       :title,
       :public_updated_at,
+      :details,
+      :description,
     ]
 
     publishing_api_has_fields_for_format('cma_case', [cma_case_content_item], fields)

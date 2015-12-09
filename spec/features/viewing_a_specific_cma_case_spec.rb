@@ -53,6 +53,8 @@ RSpec.feature "Viewing a specific case", type: :feature do
       :content_id,
       :title,
       :public_updated_at,
+      :details,
+      :description,
     ]
 
     cma_cases = []
