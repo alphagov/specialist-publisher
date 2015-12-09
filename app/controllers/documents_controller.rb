@@ -56,7 +56,7 @@ class DocumentsController <  ApplicationController
       filtered_params(params[current_format.format_name]).merge({content_id: params[:content_id]})
     )
 
-    @document.public_updated_at = Time.zone.now
+    @document.public_updated_at = Time.zone.now.to_s
 
     if @document.valid?
       if save_document
