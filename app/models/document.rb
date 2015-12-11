@@ -21,7 +21,7 @@ class Document
   end
 
   def base_path
-    "#{public_path}/#{title.parameterize}"
+    @base_path ||= "#{public_path}/#{title.parameterize}"
   end
 
   def format
