@@ -80,9 +80,16 @@ class DocumentsController <  ApplicationController
   end
 
   def publish
-    publish_request = publishing_api.publish(params[:content_id], "major")
+    indexable_document = SearchPresenter.new(@document)
 
-    if publish_request.code == 200
+    publish_request = publishing_api.publish(params[:content_id], "major")
+    rummager_request = rummager.add_document(
+      @document.format,
+      @document.base_path,
+      indexable_document.to_json,
+    )
+
+    if publish_request.code == 200 && rummager_request.code == 200
       flash[:success] = "Published #{@document.title}"
       redirect_to documents_path(current_format.document_type)
     else
@@ -143,6 +150,10 @@ private
 
   def publishing_api
     @publishing_api ||= SpecialistPublisher.services(:publishing_api)
+  end
+
+  def rummager
+    @rummager ||= SpecialistPublisher.services(:rummager)
   end
 
 end

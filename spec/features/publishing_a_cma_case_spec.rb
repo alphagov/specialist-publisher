@@ -42,10 +42,60 @@ RSpec.feature "Publishing a CMA case", type: :feature do
         }
       ],
       "redirects" => [],
+      "need_ids" => [],
       "update_type" => "major",
+      "phase" => "live",
+      "publication_state" => "live",
       "links" => {
         "organisations" => ["957eb4ec-089b-4f71-ba2a-dc69ac8919ea"]
       }
+    }
+  end
+
+  def cma_org_content_item
+    {
+      "base_path" => "/government/organisations/competition-and-markets-authority",
+      "content_id" => "957eb4ec-089b-4f71-ba2a-dc69ac8919ea",
+      "title" => "Competition and Markets Authority",
+      "format" => "placeholder_organisation",
+      "need_ids" => [],
+      "locale" => "en",
+      "updated_at" => "2015-10-26T09:21:17.645Z",
+      "public_updated_at" => "2015-03-10T16:23:14.000+00:00",
+      "phase" => "live",
+      "analytics_identifier" => "D550",
+      "links" => {
+        "available_translations" => [
+          {
+            "content_id" => "957eb4ec-089b-4f71-ba2a-dc69ac8919ea",
+            "title" => "Competition and Markets Authority",
+            "base_path" => "/government/organisations/competition-and-markets-authority",
+            "description" => nil,
+            "api_url" => "https://www.gov.uk/api/content/government/organisations/competition-and-markets-authority",
+            "web_url" => "https://www.gov.uk/government/organisations/competition-and-markets-authority",
+            "locale" => "en"
+          }
+        ]
+      },
+      "description" => nil,
+      "details" => {}
+    }
+  end
+
+  def indexable_attributes
+    {
+      "title" => "Example CMA Case",
+      "description" => "This is the summary of example CMA case",
+      "link" => "/cma-cases/example-cma-case",
+      "indexable_content" => "## Header" + ("\r\n\r\nThis is the long body of an example CMA case" * 10),
+      "public_timestamp" => "2015-11-16T11:53:30.000+00:00",
+      "opened_date" => "2014-01-01",
+      "closed_date" => "",
+      "case_type" => "ca98-and-civil-cartels",
+      "case_state" => "open",
+      "market_sector" => ["energy"],
+      "outcome_type" => "",
+      "organisations" => ["competition-and-markets-authority"],
     }
   end
 
@@ -57,13 +107,17 @@ RSpec.feature "Publishing a CMA case", type: :feature do
       :content_id,
       :title,
       :public_updated_at,
+      :details,
+      :description,
     ]
 
     publishing_api_has_fields_for_format('cma_case', [cma_case_content_item], fields)
+    publishing_api_has_fields_for_format('organisation', [cma_org_content_item], [:base_path, :content_id])
 
     publishing_api_has_item(cma_case_content_item)
 
     stub_publishing_api_publish(content_id, {})
+    stub_any_rummager_post
   end
 
   scenario "from the index" do
@@ -78,7 +132,11 @@ RSpec.feature "Publishing a CMA case", type: :feature do
 
     click_button "Publish"
 
+    expect(page.status_code).to eq(200)
+    expect(page).to have_content("Published Example CMA Case")
+
     assert_publishing_api_publish(content_id)
+    assert_rummager_posted_item(indexable_attributes)
   end
 
 end
