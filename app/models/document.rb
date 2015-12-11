@@ -8,14 +8,19 @@ class Document
   validates :summary, presence: true
   validates :body, presence: true, safe_html: true
 
+  COMMON_FIELDS = [
+    :title,
+    :summary,
+    :body,
+    :publication_state,
+    :public_updated_at,
+  ]
+
   def initialize(params = {}, format_specific_fields = [])
     @content_id = params.fetch(:content_id, SecureRandom.uuid)
-    @title = params.fetch(:title, nil)
-    @summary = params.fetch(:summary, nil)
-    @body = params.fetch(:body, nil)
     @format_specific_fields = format_specific_fields
 
-    format_specific_fields.each do |field|
+    (COMMON_FIELDS + format_specific_fields).each do |field|
       public_send(:"#{field.to_s}=", params.fetch(field, nil))
     end
   end
@@ -79,15 +84,15 @@ class Document
         title: payload.title,
         summary: payload.description,
         body: payload.details.body,
+        publication_state: payload.publication_state,
+        public_updated_at: payload.public_updated_at
       }
     )
 
     document.base_path = payload.base_path
-    document.public_updated_at = payload.public_updated_at
-    document.publication_state = payload.publication_state
 
     document.format_specific_fields.each do |field|
-      document.public_send(:"#{field.to_s}=", payload.details.metadata.send(:"#{field}"))
+      document.public_send(:"#{field.to_s}=", payload.details.metadata.send(field))
     end
 
     document
@@ -98,7 +103,7 @@ class Document
   end
 
   def public_updated_at=(timestamp)
-    public_updated_at = Time.parse(timestamp)
+    @public_updated_at = Time.parse(timestamp) unless timestamp.nil?
   end
 
 private

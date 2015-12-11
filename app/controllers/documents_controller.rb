@@ -5,7 +5,7 @@ class DocumentsController <  ApplicationController
   include ActionView::Helpers::TagHelper
   include ActionView::Helpers::TextHelper
 
-  before_action :fetch_document, only: [:edit, :show, :publish]
+  before_action :fetch_document, only: [:edit, :show, :publish, :update]
 
   def index
     unless params[:document_type]
@@ -52,9 +52,11 @@ class DocumentsController <  ApplicationController
   def edit; end
 
   def update
-    @document = document_klass.new(
-      filtered_params(params[current_format.format_name]).merge({content_id: params[:content_id]})
-    )
+    new_params = filtered_params(params[current_format.format_name])
+
+    new_params.each do |k, v|
+      @document.public_send(:"#{k}=", v)
+    end
 
     @document.public_updated_at = Time.zone.now.to_s
 
@@ -109,7 +111,7 @@ private
   end
 
   def fetch_document
-    @document = current_format.klass.from_publishing_api(publishing_api.get_content(params[:content_id]).to_ostruct)
+    @document = document_klass.from_publishing_api(publishing_api.get_content(params[:content_id]).to_ostruct)
   end
 
   def filtered_params(params_of_document)
