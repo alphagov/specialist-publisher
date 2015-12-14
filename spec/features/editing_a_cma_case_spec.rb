@@ -18,6 +18,7 @@ RSpec.feature "Editing a CMA case", type: :feature do
       "locale" => "en",
       "phase" => "live",
       "public_updated_at" => "2015-11-23T14:07:47.240Z",
+      "publication_state" => "draft",
       "details" => {
         "body" => "## Header" + ("\r\n\r\nThis is the long body of an example CMA case" * 10),
         "metadata" => {
@@ -61,24 +62,21 @@ RSpec.feature "Editing a CMA case", type: :feature do
       :content_id,
       :title,
       :public_updated_at,
+      :details,
+      :description,
     ]
 
     publishing_api_has_fields_for_format('cma_case', [cma_case_content_item], fields)
 
     publishing_api_has_item(cma_case_content_item)
 
-    @changed_json = cma_case_content_item.deep_merge({
-      "base_path" => "/cma-cases/changed-title",
+    @changed_json = cma_case_content_item.merge({
       "title" => "Changed title",
       "description" => "Changed summary",
       "public_updated_at" => "2015-12-03T16:59:13.144Z",
-      "routes" => [
-        {
-          "path" => "/cma-cases/changed-title",
-          "type" => "exact",
-        }
-      ],
     })
+
+    @changed_json.delete("publication_state")
 
     allow(Time.zone).to receive(:now).and_return("2015-12-03T16:59:13.144Z")
   end

@@ -5,7 +5,7 @@ class DocumentsController <  ApplicationController
   include ActionView::Helpers::TagHelper
   include ActionView::Helpers::TextHelper
 
-  before_action :fetch_document, only: [:edit, :show]
+  before_action :fetch_document, only: [:edit, :show, :publish, :update]
 
   def index
     unless params[:document_type]
@@ -13,15 +13,20 @@ class DocumentsController <  ApplicationController
       return
     end
 
-    @documents = publishing_api.get_content_items(
+    response = publishing_api.get_content_items(
       content_format: current_format.format_name,
       fields: [
         :base_path,
         :content_id,
         :title,
         :public_updated_at,
+        :details,
+        :description,
       ]
     ).to_ostruct
+
+    @documents = response.map { |payload| document_klass.from_publishing_api(payload) }
+    @documents.sort!{ |a, b| a.public_updated_at <=> b.public_updated_at }.reverse!
   end
 
   def new
@@ -52,9 +57,11 @@ class DocumentsController <  ApplicationController
   def edit; end
 
   def update
-    @document = document_klass.new(
-      filtered_params(params[current_format.format_name]).merge({content_id: params[:content_id]})
-    )
+    new_params = filtered_params(params[current_format.format_name])
+
+    new_params.each do |k, v|
+      @document.public_send(:"#{k}=", v)
+    end
 
     @document.public_updated_at = Time.zone.now.to_s
 
@@ -71,6 +78,30 @@ class DocumentsController <  ApplicationController
       render :edit, status: 422
     end
   end
+
+  def publish
+    indexable_document = SearchPresenter.new(@document)
+
+    begin
+      publish_request = publishing_api.publish(params[:content_id], "major")
+      rummager_request = rummager.add_document(
+        @document.format,
+        @document.base_path,
+        indexable_document.to_json,
+      )
+    rescue GdsApi::HTTPErrorResponse => e
+      Airbrake.notify(e)
+    end
+
+    if publish_request.code == 200 && rummager_request.code == 200
+      flash[:success] = "Published #{@document.title}"
+      redirect_to documents_path(current_format.document_type)
+    else
+      flash[:danger] = "There was an error publishing #{@document.title}. Please try again later."
+      redirect_to document_path(current_format.document_type, params[:content_id])
+    end
+  end
+
 private
 
   def document_type
@@ -96,7 +127,7 @@ private
   end
 
   def fetch_document
-    @document = current_format.klass.from_publishing_api(publishing_api.get_content(params[:content_id]).to_ostruct)
+    @document = document_klass.from_publishing_api(publishing_api.get_content(params[:content_id]).to_ostruct)
   end
 
   def filtered_params(params_of_document)
@@ -115,14 +146,24 @@ private
     presented_document = DocumentPresenter.new(@document)
     presented_links = DocumentLinksPresenter.new(@document)
 
-    item_request = publishing_api.put_content(@document.content_id, presented_document.to_json)
-    links_request = publishing_api.put_links(@document.content_id, presented_links.to_json)
+    begin
+      item_request = publishing_api.put_content(@document.content_id, presented_document.to_json)
+      links_request = publishing_api.put_links(@document.content_id, presented_links.to_json)
 
-    item_request.code == 200 && links_request.code == 200
+      item_request.code == 200 && links_request.code == 200
+    rescue GdsApi::HTTPErrorResponse => e
+      Airbrake.notify(e)
+
+      false
+    end
   end
 
   def publishing_api
     @publishing_api ||= SpecialistPublisher.services(:publishing_api)
+  end
+
+  def rummager
+    @rummager ||= SpecialistPublisher.services(:rummager)
   end
 
 end

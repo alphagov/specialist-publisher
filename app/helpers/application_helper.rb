@@ -11,4 +11,17 @@ module ApplicationHelper
   def published_document_path(document)
     Plek.current.find("website-root") + document.base_path
   end
+
+  def state(document)
+    state = document.publication_state
+
+    if document.draft?
+     classes = "label label-primary"
+    else
+     classes = "label label-default"
+    end
+
+    content_tag(:span, state, class: classes).html_safe
+  end
+
 end
