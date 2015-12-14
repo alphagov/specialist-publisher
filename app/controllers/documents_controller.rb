@@ -82,12 +82,16 @@ class DocumentsController <  ApplicationController
   def publish
     indexable_document = SearchPresenter.new(@document)
 
-    publish_request = publishing_api.publish(params[:content_id], "major")
-    rummager_request = rummager.add_document(
-      @document.format,
-      @document.base_path,
-      indexable_document.to_json,
-    )
+    begin
+      publish_request = publishing_api.publish(params[:content_id], "major")
+      rummager_request = rummager.add_document(
+        @document.format,
+        @document.base_path,
+        indexable_document.to_json,
+      )
+    rescue GdsApi::HTTPErrorResponse => e
+      Airbrake.notify(e)
+    end
 
     if publish_request.code == 200 && rummager_request.code == 200
       flash[:success] = "Published #{@document.title}"
@@ -142,10 +146,16 @@ private
     presented_document = DocumentPresenter.new(@document)
     presented_links = DocumentLinksPresenter.new(@document)
 
-    item_request = publishing_api.put_content(@document.content_id, presented_document.to_json)
-    links_request = publishing_api.put_links(@document.content_id, presented_links.to_json)
+    begin
+      item_request = publishing_api.put_content(@document.content_id, presented_document.to_json)
+      links_request = publishing_api.put_links(@document.content_id, presented_links.to_json)
 
-    item_request.code == 200 && links_request.code == 200
+      item_request.code == 200 && links_request.code == 200
+    rescue GdsApi::HTTPErrorResponse => e
+      Airbrake.notify(e)
+
+      false
+    end
   end
 
   def publishing_api
