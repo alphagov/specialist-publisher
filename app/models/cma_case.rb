@@ -25,6 +25,10 @@ class CmaCase < Document
     "cma_case"
   end
 
+  def self.format
+    new.format
+  end
+
   def public_path
     "/cma-cases"
   end

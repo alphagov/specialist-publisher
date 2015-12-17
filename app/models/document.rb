@@ -30,7 +30,11 @@ class Document
   end
 
   def format
-    "document"
+    raise NotImplementedError
+  end
+
+  def self.format
+    raise NotImplementedError
   end
 
   def phase
@@ -106,10 +110,29 @@ class Document
     @public_updated_at = Time.parse(timestamp) unless timestamp.nil?
   end
 
-private
+  def self.all
+    response = self.publishing_api.get_content_items(
+      content_format: self.format,
+      fields: [
+        :base_path,
+        :content_id,
+        :title,
+        :public_updated_at,
+        :details,
+        :description,
+      ]
+    ).to_ostruct
+
+    response.map { |payload| self.from_publishing_api(payload) }
+  end
+
+  def self.publishing_api
+    SpecialistPublisher.services(:publishing_api)
+  end
 
   def finder_schema
     @finder_schema ||= FinderSchema.new(format.pluralize)
   end
+  private :finder_schema
 
 end

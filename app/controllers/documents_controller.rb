@@ -13,19 +13,8 @@ class DocumentsController <  ApplicationController
       return
     end
 
-    response = publishing_api.get_content_items(
-      content_format: current_format.format_name,
-      fields: [
-        :base_path,
-        :content_id,
-        :title,
-        :public_updated_at,
-        :details,
-        :description,
-      ]
-    ).to_ostruct
+    @documents = document_klass.all
 
-    @documents = response.map { |payload| document_klass.from_publishing_api(payload) }
     @documents.sort!{ |a, b| a.public_updated_at <=> b.public_updated_at }.reverse!
   end
 
