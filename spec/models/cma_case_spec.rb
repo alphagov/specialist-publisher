@@ -63,4 +63,22 @@ describe CmaCase do
       expect(described_class.all.length).to be(@cma_cases.length)
     end
   end
+
+  context "#find" do
+    it "returns a CMA Case" do
+      content_id = @cma_cases[0]["content_id"]
+      cma_case = described_class.find(content_id)
+
+      expect(cma_case.base_path).to     eq(@cma_cases[0]["base_path"])
+      expect(cma_case.title).to         eq(@cma_cases[0]["title"])
+      expect(cma_case.summary).to       eq(@cma_cases[0]["description"])
+      expect(cma_case.body).to          eq(@cma_cases[0]["details"]["body"])
+      expect(cma_case.opened_date).to   eq(@cma_cases[0]["details"]["metadata"]["opened_date"])
+      expect(cma_case.closed_date).to   eq(@cma_cases[0]["details"]["metadata"]["closed_date"])
+      expect(cma_case.case_type).to     eq(@cma_cases[0]["details"]["metadata"]["case_type"])
+      expect(cma_case.case_state).to    eq(@cma_cases[0]["details"]["metadata"]["case_state"])
+      expect(cma_case.market_sector).to eq(@cma_cases[0]["details"]["metadata"]["market_sector"])
+      expect(cma_case.outcome_type).to  eq(@cma_cases[0]["details"]["metadata"]["outcome_type"])
+    end
+  end
 end

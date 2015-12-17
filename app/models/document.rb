@@ -126,6 +126,10 @@ class Document
     response.map { |payload| self.from_publishing_api(payload) }
   end
 
+  def self.find(content_id)
+    self.from_publishing_api(publishing_api.get_content(content_id).to_ostruct)
+  end
+
   def self.publishing_api
     SpecialistPublisher.services(:publishing_api)
   end

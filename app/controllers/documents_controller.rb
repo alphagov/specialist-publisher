@@ -116,7 +116,7 @@ private
   end
 
   def fetch_document
-    @document = document_klass.from_publishing_api(publishing_api.get_content(params[:content_id]).to_ostruct)
+    @document = document_klass.find(params[:content_id])
   end
 
   def filtered_params(params_of_document)
