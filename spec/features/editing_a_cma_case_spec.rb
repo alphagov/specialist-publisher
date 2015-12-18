@@ -73,12 +73,15 @@ RSpec.feature "Editing a CMA case", type: :feature do
     @changed_json = cma_case_content_item.merge({
       "title" => "Changed title",
       "description" => "Changed summary",
-      "public_updated_at" => "2015-12-03T16:59:13.144Z",
+      "public_updated_at" => "2015-12-03 16:59:13 UTC",
     })
 
     @changed_json.delete("publication_state")
+    Timecop.freeze(Time.parse("2015-12-03 16:59:13 UTC"))
+  end
 
-    allow(Time.zone).to receive(:now).and_return("2015-12-03T16:59:13.144Z")
+  after do
+    Timecop.return
   end
 
   scenario "with some changed attributes" do
@@ -96,7 +99,7 @@ RSpec.feature "Editing a CMA case", type: :feature do
 
     assert_publishing_api_put_content("4a656f42-35ad-4034-8c7a-08870db7fffe", request_json_including(@changed_json))
     expect(@changed_json["content_id"]).to eq("4a656f42-35ad-4034-8c7a-08870db7fffe")
-    expect(@changed_json["public_updated_at"]).to eq("2015-12-03T16:59:13.144Z")
+    expect(@changed_json["public_updated_at"]).to eq("2015-12-03 16:59:13 UTC")
 
     expect(page.status_code).to eq(200)
     expect(page).to have_content("Updated Changed title")

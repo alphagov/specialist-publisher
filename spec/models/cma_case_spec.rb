@@ -57,7 +57,7 @@ describe CmaCase do
 
     publishing_api_has_item(@cma_cases[0])
 
-    allow(Time.zone).to receive(:now).and_return("2015-12-18 10:12:26 UTC")
+    Timecop.freeze(Time.parse("2015-12-18 10:12:26 UTC"))
   end
 
   context "#all" do
@@ -89,7 +89,7 @@ describe CmaCase do
       stub_any_publishing_api_put_content
       stub_any_publishing_api_put_links
 
-      @cma_cases[0].merge("public_updated_at" => "2015-12-18 10:12:26 UTC")
+      @cma_cases[0].merge!("public_updated_at" => "2015-12-18 10:12:26 UTC")
 
       c = described_class.find(@cma_cases[0]["content_id"])
       expect(c.save!).to eq(true)

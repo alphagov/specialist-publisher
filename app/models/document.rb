@@ -107,7 +107,7 @@ class Document
   end
 
   def public_updated_at=(timestamp)
-    @public_updated_at = Time.parse(timestamp) unless timestamp.nil?
+    @public_updated_at = Time.parse(timestamp.to_s) unless timestamp.nil?
   end
 
   def self.all
@@ -131,7 +131,7 @@ class Document
   end
 
   def save!
-    public_updated_at = Time.zone.now.to_s
+    self.public_updated_at = Time.zone.now
 
     presented_document = DocumentPresenter.new(self)
     presented_links = DocumentLinksPresenter.new(self)

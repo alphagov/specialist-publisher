@@ -17,7 +17,7 @@ class DocumentPresenter
       rendering_app: "specialist-frontend",
       locale: "en",
       phase: document.phase,
-      public_updated_at: document.public_updated_at,
+      public_updated_at: document.public_updated_at.to_s,
       details: {
         body: document.body,
         metadata: metadata,
