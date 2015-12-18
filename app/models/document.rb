@@ -130,6 +130,28 @@ class Document
     self.from_publishing_api(publishing_api.get_content(content_id).to_ostruct)
   end
 
+  def save!
+    public_updated_at = Time.zone.now.to_s
+
+    presented_document = DocumentPresenter.new(self)
+    presented_links = DocumentLinksPresenter.new(self)
+
+    begin
+      item_request = publishing_api.put_content(self.content_id, presented_document.to_json)
+      links_request = publishing_api.put_links(self.content_id, presented_links.to_json)
+
+      item_request.code == 200 && links_request.code == 200
+    rescue GdsApi::HTTPErrorResponse => e
+      Airbrake.notify(e)
+
+      false
+    end
+  end
+
+  def publishing_api
+    self.class.publishing_api
+  end
+
   def self.publishing_api
     SpecialistPublisher.services(:publishing_api)
   end

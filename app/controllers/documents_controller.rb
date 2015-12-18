@@ -28,7 +28,7 @@ class DocumentsController <  ApplicationController
     )
 
     if @document.valid?
-      if save_document
+      if @document.save!
         flash[:success] = "Created #{@document.title}"
         redirect_to documents_path(current_format.document_type)
       else
@@ -52,10 +52,8 @@ class DocumentsController <  ApplicationController
       @document.public_send(:"#{k}=", v)
     end
 
-    @document.public_updated_at = Time.zone.now.to_s
-
     if @document.valid?
-      if save_document
+      if @document.save!
         flash[:success] = "Updated #{@document.title}"
         redirect_to documents_path(current_format.document_type)
       else
@@ -129,22 +127,6 @@ private
       filtered_value = value.is_a?(Array) ? value.reject(&:blank?) : value
       filtered_params.merge(key => filtered_value)
     }
-  end
-
-  def save_document
-    presented_document = DocumentPresenter.new(@document)
-    presented_links = DocumentLinksPresenter.new(@document)
-
-    begin
-      item_request = publishing_api.put_content(@document.content_id, presented_document.to_json)
-      links_request = publishing_api.put_links(@document.content_id, presented_links.to_json)
-
-      item_request.code == 200 && links_request.code == 200
-    rescue GdsApi::HTTPErrorResponse => e
-      Airbrake.notify(e)
-
-      false
-    end
   end
 
   def publishing_api

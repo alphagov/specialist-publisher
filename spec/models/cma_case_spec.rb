@@ -56,6 +56,8 @@ describe CmaCase do
     publishing_api_has_fields_for_format('cma_case', @cma_cases, fields)
 
     publishing_api_has_item(@cma_cases[0])
+
+    allow(Time.zone).to receive(:now).and_return("2015-12-18 10:12:26 UTC")
   end
 
   context "#all" do
@@ -79,6 +81,20 @@ describe CmaCase do
       expect(cma_case.case_state).to    eq(@cma_cases[0]["details"]["metadata"]["case_state"])
       expect(cma_case.market_sector).to eq(@cma_cases[0]["details"]["metadata"]["market_sector"])
       expect(cma_case.outcome_type).to  eq(@cma_cases[0]["details"]["metadata"]["outcome_type"])
+    end
+  end
+
+  context "#save!" do
+    it "saves the CMA Case" do
+      stub_any_publishing_api_put_content
+      stub_any_publishing_api_put_links
+
+      @cma_cases[0].merge("public_updated_at" => "2015-12-18 10:12:26 UTC")
+
+      c = described_class.find(@cma_cases[0]["content_id"])
+      expect(c.save!).to eq(true)
+
+      assert_publishing_api_put_content(c.content_id, request_json_including(@cma_cases[0]))
     end
   end
 end
