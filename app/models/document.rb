@@ -148,6 +148,27 @@ class Document
     end
   end
 
+  def publish!
+    indexable_document = SearchPresenter.new(self)
+
+    begin
+      publish_request = publishing_api.publish(content_id, "major")
+      rummager_request = rummager.add_document(
+        format,
+        base_path,
+        indexable_document.to_json,
+      )
+
+      publish_request.code == 200 && rummager_request.code == 200
+    rescue GdsApi::HTTPErrorResponse => e
+      Airbrake.notify(e)
+    end
+  end
+
+  def rummager
+    SpecialistPublisher.services(:rummager)
+  end
+
   def publishing_api
     self.class.publishing_api
   end

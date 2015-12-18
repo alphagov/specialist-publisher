@@ -22,7 +22,7 @@ RSpec.feature "Publishing a CMA case", type: :feature do
       "rendering_app" => "specialist-frontend",
       "locale" => "en",
       "phase" => "live",
-      "public_updated_at" => "2015-11-16T11:53:30.000+00:00",
+      "public_updated_at" => "2015-11-16 11:53:30 +0000",
       "details" => {
         "body" => "## Header" + ("\r\n\r\nThis is the long body of an example CMA case" * 10),
         "metadata" => {
@@ -88,7 +88,7 @@ RSpec.feature "Publishing a CMA case", type: :feature do
       "description" => "This is the summary of example CMA case",
       "link" => "/cma-cases/example-cma-case",
       "indexable_content" => "## Header" + ("\r\n\r\nThis is the long body of an example CMA case" * 10),
-      "public_timestamp" => "2015-11-16T11:53:30.000+00:00",
+      "public_timestamp" => "2015-11-16 11:53:30 +0000",
       "opened_date" => "2014-01-01",
       "closed_date" => "",
       "case_type" => "ca98-and-civil-cartels",

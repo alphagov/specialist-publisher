@@ -37,6 +37,53 @@ describe CmaCase do
     }
   end
 
+  def cma_org_content_item
+    {
+      "base_path" => "/government/organisations/competition-and-markets-authority",
+      "content_id" => "957eb4ec-089b-4f71-ba2a-dc69ac8919ea",
+      "title" => "Competition and Markets Authority",
+      "format" => "placeholder_organisation",
+      "need_ids" => [],
+      "locale" => "en",
+      "updated_at" => "2015-10-26T09:21:17.645Z",
+      "public_updated_at" => "2015-03-10T16:23:14.000+00:00",
+      "phase" => "live",
+      "analytics_identifier" => "D550",
+      "links" => {
+        "available_translations" => [
+          {
+            "content_id" => "957eb4ec-089b-4f71-ba2a-dc69ac8919ea",
+            "title" => "Competition and Markets Authority",
+            "base_path" => "/government/organisations/competition-and-markets-authority",
+            "description" => nil,
+            "api_url" => "https://www.gov.uk/api/content/government/organisations/competition-and-markets-authority",
+            "web_url" => "https://www.gov.uk/government/organisations/competition-and-markets-authority",
+            "locale" => "en"
+          }
+        ]
+      },
+      "description" => nil,
+      "details" => {}
+    }
+  end
+
+  def indexable_attributes
+    {
+      "title" => "Example CMA Case 0",
+      "description" => "This is the summary of example CMA case 0",
+      "link" => "/cma-cases/example-cma-case-0",
+      "indexable_content" => "## Header" + ("\r\n\r\nThis is the long body of an example CMA case" * 10),
+      "public_timestamp" => "2015-11-16 11:53:30 +0000",
+      "opened_date" => "2014-01-01",
+      "closed_date" => "",
+      "case_type" => "ca98-and-civil-cartels",
+      "case_state" => "open",
+      "market_sector" => ["energy"],
+      "outcome_type" => "",
+      "organisations" => ["competition-and-markets-authority"],
+    }
+  end
+
   before do
     fields = [
       :base_path,
@@ -95,6 +142,20 @@ describe CmaCase do
       expect(c.save!).to eq(true)
 
       assert_publishing_api_put_content(c.content_id, request_json_including(@cma_cases[0]))
+    end
+  end
+
+  context "#publish!" do
+    it "publishes the CMA Case" do
+      stub_publishing_api_publish(@cma_cases[0]["content_id"], {})
+      stub_any_rummager_post
+      publishing_api_has_fields_for_format('organisation', [cma_org_content_item], [:base_path, :content_id])
+
+      c = described_class.find(@cma_cases[0]["content_id"])
+      expect(c.publish!).to eq(true)
+
+      assert_publishing_api_publish(c.content_id)
+      assert_rummager_posted_item(indexable_attributes)
     end
   end
 end

@@ -67,20 +67,7 @@ class DocumentsController <  ApplicationController
   end
 
   def publish
-    indexable_document = SearchPresenter.new(@document)
-
-    begin
-      publish_request = publishing_api.publish(params[:content_id], "major")
-      rummager_request = rummager.add_document(
-        @document.format,
-        @document.base_path,
-        indexable_document.to_json,
-      )
-    rescue GdsApi::HTTPErrorResponse => e
-      Airbrake.notify(e)
-    end
-
-    if publish_request.code == 200 && rummager_request.code == 200
+    if @document.publish!
       flash[:success] = "Published #{@document.title}"
       redirect_to documents_path(current_format.document_type)
     else
