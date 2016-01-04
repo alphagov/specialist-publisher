@@ -30,7 +30,11 @@ class Document
   end
 
   def format
-    "document"
+    raise NotImplementedError
+  end
+
+  def self.format
+    raise NotImplementedError
   end
 
   def phase
@@ -103,13 +107,79 @@ class Document
   end
 
   def public_updated_at=(timestamp)
-    @public_updated_at = Time.parse(timestamp) unless timestamp.nil?
+    @public_updated_at = Time.parse(timestamp.to_s) unless timestamp.nil?
   end
 
-private
+  def self.all
+    response = self.publishing_api.get_content_items(
+      content_format: self.format,
+      fields: [
+        :base_path,
+        :content_id,
+        :title,
+        :public_updated_at,
+        :details,
+        :description,
+      ]
+    ).to_ostruct
+
+    response.map { |payload| self.from_publishing_api(payload) }
+  end
+
+  def self.find(content_id)
+    self.from_publishing_api(publishing_api.get_content(content_id).to_ostruct)
+  end
+
+  def save!
+    self.public_updated_at = Time.zone.now
+
+    presented_document = DocumentPresenter.new(self)
+    presented_links = DocumentLinksPresenter.new(self)
+
+    begin
+      item_request = publishing_api.put_content(self.content_id, presented_document.to_json)
+      links_request = publishing_api.put_links(self.content_id, presented_links.to_json)
+
+      item_request.code == 200 && links_request.code == 200
+    rescue GdsApi::HTTPErrorResponse => e
+      Airbrake.notify(e)
+
+      false
+    end
+  end
+
+  def publish!
+    indexable_document = SearchPresenter.new(self)
+
+    begin
+      publish_request = publishing_api.publish(content_id, "major")
+      rummager_request = rummager.add_document(
+        format,
+        base_path,
+        indexable_document.to_json,
+      )
+
+      publish_request.code == 200 && rummager_request.code == 200
+    rescue GdsApi::HTTPErrorResponse => e
+      Airbrake.notify(e)
+    end
+  end
+
+  def rummager
+    SpecialistPublisher.services(:rummager)
+  end
+
+  def publishing_api
+    self.class.publishing_api
+  end
+
+  def self.publishing_api
+    SpecialistPublisher.services(:publishing_api)
+  end
 
   def finder_schema
     @finder_schema ||= FinderSchema.new(format.pluralize)
   end
+  private :finder_schema
 
 end

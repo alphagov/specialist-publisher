@@ -13,19 +13,8 @@ class DocumentsController <  ApplicationController
       return
     end
 
-    response = publishing_api.get_content_items(
-      content_format: current_format.format_name,
-      fields: [
-        :base_path,
-        :content_id,
-        :title,
-        :public_updated_at,
-        :details,
-        :description,
-      ]
-    ).to_ostruct
+    @documents = document_klass.all
 
-    @documents = response.map { |payload| document_klass.from_publishing_api(payload) }
     @documents.sort!{ |a, b| a.public_updated_at <=> b.public_updated_at }.reverse!
   end
 
@@ -39,7 +28,7 @@ class DocumentsController <  ApplicationController
     )
 
     if @document.valid?
-      if save_document
+      if @document.save!
         flash[:success] = "Created #{@document.title}"
         redirect_to documents_path(current_format.document_type)
       else
@@ -63,10 +52,8 @@ class DocumentsController <  ApplicationController
       @document.public_send(:"#{k}=", v)
     end
 
-    @document.public_updated_at = Time.zone.now.to_s
-
     if @document.valid?
-      if save_document
+      if @document.save!
         flash[:success] = "Updated #{@document.title}"
         redirect_to documents_path(current_format.document_type)
       else
@@ -80,20 +67,7 @@ class DocumentsController <  ApplicationController
   end
 
   def publish
-    indexable_document = SearchPresenter.new(@document)
-
-    begin
-      publish_request = publishing_api.publish(params[:content_id], "major")
-      rummager_request = rummager.add_document(
-        @document.format,
-        @document.base_path,
-        indexable_document.to_json,
-      )
-    rescue GdsApi::HTTPErrorResponse => e
-      Airbrake.notify(e)
-    end
-
-    if publish_request.code == 200 && rummager_request.code == 200
+    if @document.publish!
       flash[:success] = "Published #{@document.title}"
       redirect_to documents_path(current_format.document_type)
     else
@@ -127,7 +101,7 @@ private
   end
 
   def fetch_document
-    @document = document_klass.from_publishing_api(publishing_api.get_content(params[:content_id]).to_ostruct)
+    @document = document_klass.find(params[:content_id])
   end
 
   def filtered_params(params_of_document)
@@ -140,22 +114,6 @@ private
       filtered_value = value.is_a?(Array) ? value.reject(&:blank?) : value
       filtered_params.merge(key => filtered_value)
     }
-  end
-
-  def save_document
-    presented_document = DocumentPresenter.new(@document)
-    presented_links = DocumentLinksPresenter.new(@document)
-
-    begin
-      item_request = publishing_api.put_content(@document.content_id, presented_document.to_json)
-      links_request = publishing_api.put_links(@document.content_id, presented_links.to_json)
-
-      item_request.code == 200 && links_request.code == 200
-    rescue GdsApi::HTTPErrorResponse => e
-      Airbrake.notify(e)
-
-      false
-    end
   end
 
   def publishing_api

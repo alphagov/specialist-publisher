@@ -41,6 +41,7 @@ group :development, :test do
   gem 'factory_girl'
   gem "capybara", "2.5.0"
   gem 'capybara-webkit', '1.7.1'
+  gem 'timecop', '0.8.0'
 end
 
 group :test do
