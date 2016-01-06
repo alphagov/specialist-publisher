@@ -1,5 +1,5 @@
 require "gds_api/rummager"
-require_relative "../app/presenters/finder_rummager_presenter"
+require_relative "../app/presenters/finders/finder_rummager_presenter"
 
 class RummagerFinderPublisher
   def initialize(schemas, logger: Logger.new(STDOUT))
@@ -26,16 +26,16 @@ private
   end
 
   def pre_production?(schema)
-    file[:file]["pre_production"] == true
+    schema[:file]["pre_production"] == true
   end
 
   def should_publish_pre_production_finders?
     SpecialistPublisher::Application.config.publish_pre_production_finders
   end
 
-  def export_finder(file)
+  def export_finder(schema)
     presenter = FinderRummagerPresenter.new(schema[:file], schema[:timestamp])
-    rummager.add_document(presenter.type, presenter.id, presenter.attributes)
+    rummager.add_document(presenter.type, presenter.id, presenter.to_json)
   end
 
   def rummager
