@@ -123,7 +123,7 @@ class Document
       ]
     ).to_ostruct
 
-    response.map { |payload| self.from_publishing_api(payload) }
+    response.map { |payload| self.find(payload.content_id) }
   end
 
   def self.find(content_id)

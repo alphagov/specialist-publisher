@@ -65,7 +65,9 @@ RSpec.feature "Viewing a specific case", type: :feature do
 
     publishing_api_has_fields_for_format('cma_case', cma_cases, fields)
 
-    publishing_api_has_item(cma_cases[0])
+    cma_cases.each do |cma_case|
+      publishing_api_has_item(cma_case)
+    end
   end
 
   scenario "from the index" do
