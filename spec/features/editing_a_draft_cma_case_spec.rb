@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-RSpec.feature "Editing a CMA case", type: :feature do
+RSpec.feature "Editing a draft CMA case", type: :feature do
   def log_in_as_editor(editor)
     user = FactoryGirl.create(editor)
     GDS::SSO.test_user = user
@@ -29,7 +29,13 @@ RSpec.feature "Editing a CMA case", type: :feature do
           "market_sector" => ["energy"],
           "outcome_type" => "",
           "document_type" => "cma_case",
-        }
+        },
+        "change_history" => [
+          {
+            "public_timestamp" => "2015-12-03 16:59:13 UTC",
+            "note" => "First published."
+          }
+        ]
       },
       "routes" => [
         {
@@ -75,6 +81,15 @@ RSpec.feature "Editing a CMA case", type: :feature do
       "description" => "Changed summary",
       "public_updated_at" => "2015-12-03 16:59:13 UTC",
     })
+
+    @changed_json["details"].merge!(
+      "change_history" => [
+        {
+          "public_timestamp" => "2015-12-03 16:59:13 UTC",
+          "note" => "First published.",
+        }
+      ]
+    )
 
     @changed_json.delete("publication_state")
     Timecop.freeze(Time.parse("2015-12-03 16:59:13 UTC"))
