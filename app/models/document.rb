@@ -185,7 +185,8 @@ class Document
     indexable_document = SearchPresenter.new(self)
 
     begin
-      publish_request = publishing_api.publish(content_id, "major")
+      update_type = self.update_type || 'major'
+      publish_request = publishing_api.publish(content_id, update_type)
       rummager_request = rummager.add_document(
         format,
         base_path,
