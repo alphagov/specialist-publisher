@@ -158,22 +158,28 @@ class Document
   end
 
   def save!
-    self.public_updated_at = Time.zone.now
+    if self.valid?
+      self.public_updated_at = Time.zone.now if self.update_type == 'major'
 
-    presented_document = DocumentPresenter.new(self)
-    presented_links = DocumentLinksPresenter.new(self)
+      presented_document = DocumentPresenter.new(self)
+      presented_links = DocumentLinksPresenter.new(self)
 
-    begin
-      item_request = publishing_api.put_content(self.content_id, presented_document.to_json)
-      links_request = publishing_api.put_links(self.content_id, presented_links.to_json)
+      begin
+        item_request = publishing_api.put_content(self.content_id, presented_document.to_json)
+        links_request = publishing_api.put_links(self.content_id, presented_links.to_json)
 
-      item_request.code == 200 && links_request.code == 200
-    rescue GdsApi::HTTPErrorResponse => e
-      Airbrake.notify(e)
+        item_request.code == 200 && links_request.code == 200
+      rescue GdsApi::HTTPErrorResponse => e
+        Airbrake.notify(e)
 
-      false
+        false
+      end
+    else
+      raise RecordNotSaved
     end
   end
+
+  class RecordNotSaved < StandardError; end
 
   def publish!
     indexable_document = SearchPresenter.new(self)
