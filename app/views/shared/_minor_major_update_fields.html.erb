@@ -1,11 +1,17 @@
-<% if document.live? %>
+<% if document.published? %>
   <div class="checkbox add-vertical-margins">
-    <%= f.check_box :minor_update,
-      note: {
-        text: "Only use for minor changes like fixes to typos, links, GOV.UK style or metadata.",
-        class: "help-block"
-      }
-    %>
+    <%= f.radio_button :update_type, :minor, class: 'js-update-type-minor' %>
+    <%= f.label :update_type_minor %>
+    <p class="help-block">Only use for minor changes like fixes to typos, links, GOV.UK style or metadata.</p>
   </div>
-  <%= f.text_area :change_note, class: 'form-control short-textarea' %>
+  <div class="checkbox add-vertical-margins">
+    <%= f.radio_button :update_type, :major, class: 'js-update-type-major' %>
+    <%= f.label :update_type_major %>
+    <p class="help-block">This will notify subscribers to <%= current_format.title.pluralize %>.</p>
+  </div>
+  <div class="<%= document.update_type != 'major' ? 'js-hidden' : nil %> js-change-note">
+    <%= f.label :change_note %>
+    <%= f.text_area :change_note, class: 'form-control short-textarea' %>
+    <p class="help-block">This will be publically viewable on GOV.UK</p>
+  </div>
 <% end %>
