@@ -45,12 +45,16 @@ class Document
     raise NoMethodError
   end
 
-  def live?
-    publication_state == "live"
+  %w{draft live redrafted}.each do |state|
+    define_method("#{state}?") do
+      publication_state == state
+    end
   end
 
-  def draft?
-    publication_state == "draft"
+  def published?
+    live? || redrafted?
+  end
+
   end
 
   def users
