@@ -14,6 +14,7 @@ describe CmaCase do
       "locale" => "en",
       "phase" => "live",
       "public_updated_at" => "2015-11-16T11:53:30.000+00:00",
+      "publication_state" => "draft",
       "details" => {
         "body" => "## Header" + ("\r\n\r\nThis is the long body of an example CMA case" * 10),
         "metadata" => {
@@ -24,7 +25,8 @@ describe CmaCase do
           "market_sector" => ["energy"],
           "outcome_type" => "",
           "document_type" => "cma_case",
-        }
+        },
+        "change_history" => [],
       },
       "routes" => [
         {
@@ -138,12 +140,24 @@ describe CmaCase do
       stub_any_publishing_api_put_content
       stub_any_publishing_api_put_links
 
-      @cma_cases[0].merge!("public_updated_at" => "2015-12-18 10:12:26 UTC")
 
-      c = described_class.find(@cma_cases[0]["content_id"])
+      cma_case = @cma_cases[0]
+
+      cma_case.delete("publication_state")
+      cma_case.merge!("public_updated_at" => "2015-12-18 10:12:26 UTC")
+      cma_case["details"].merge!(
+        "change_history" => [
+          {
+            "public_timestamp" => "2015-12-18 10:12:26 UTC",
+            "note" => "First published.",
+          }
+        ]
+      )
+
+      c = described_class.find(cma_case["content_id"])
       expect(c.save!).to eq(true)
 
-      assert_publishing_api_put_content(c.content_id, request_json_including(@cma_cases[0]))
+      assert_publishing_api_put_content(c.content_id, request_json_including(cma_case))
     end
   end
 
