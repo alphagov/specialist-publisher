@@ -33,7 +33,13 @@ RSpec.feature "Publishing a CMA case", type: :feature do
           "market_sector" => ["energy"],
           "outcome_type" => "",
           "document_type" => "cma_case",
-        }
+        },
+        "change_history" => [
+          {
+            "public_timestamp" => "2015-12-03 16:59:13 UTC",
+            "note" => "First published."
+          }
+        ]
       },
       "routes" => [
         {

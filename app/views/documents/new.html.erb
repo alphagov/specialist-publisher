@@ -6,8 +6,6 @@
 
     <%= render partial: "metadata_fields/#{params[:document_type].underscore}", locals: { f: f } %>
 
-    <%= render partial: "shared/minor_major_update_fields", locals: { f: f, document: @document } %>
-
     <div class="actions">
       <button name="save" class="btn btn-success">Save as draft</button>
     </div>

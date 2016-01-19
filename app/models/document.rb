@@ -2,11 +2,14 @@ class Document
   include ActiveModel::Model
   include ActiveModel::Validations
 
-  attr_accessor :content_id, :base_path, :title, :summary, :body, :format_specific_fields, :public_updated_at, :state, :bulk_published, :publication_state, :minor_update, :change_note
+  attr_accessor :content_id, :base_path, :title, :summary, :body, :format_specific_fields, :public_updated_at, :state, :bulk_published, :publication_state, :change_note
+  attr_writer :change_history, :update_type
 
   validates :title, presence: true
   validates :summary, presence: true
   validates :body, presence: true, safe_html: true
+  validates :update_type, presence: true, if: :live?
+  validates :change_note, presence: true, if: :change_note_required?
 
   COMMON_FIELDS = [
     :title,
@@ -45,12 +48,26 @@ class Document
     raise NoMethodError
   end
 
-  def live?
-    publication_state == "live"
+  %w{draft live redrafted}.each do |state|
+    define_method("#{state}?") do
+      publication_state == state
+    end
   end
 
-  def draft?
-    publication_state == "draft"
+  def published?
+    live? || redrafted?
+  end
+
+  def change_note_required?
+    update_type == 'major' && published?
+  end
+
+  def change_history
+    @change_history ||= []
+  end
+
+  def update_type
+    @update_type || "major"
   end
 
   def users
@@ -94,6 +111,16 @@ class Document
     )
 
     document.base_path = payload.base_path
+    document.update_type = payload.update_type
+
+    # If the document is redrafted remove the last/most
+    # recent change note from the change_history array
+    # and set it as the document's change note
+    document.change_note = payload.details.change_history.pop["note"] if document.redrafted? && payload.details.change_history.length > 1
+
+    # Persist the rest of the change_history on the document
+    # if the document is live or redrafted
+    document.change_history = payload.details.change_history.map(&:to_h) if document.published?
 
     document.format_specific_fields.each do |field|
       document.public_send(:"#{field.to_s}=", payload.details.metadata.send(field))
@@ -131,28 +158,35 @@ class Document
   end
 
   def save!
-    self.public_updated_at = Time.zone.now
+    if self.valid?
+      self.public_updated_at = Time.zone.now if self.update_type == 'major'
 
-    presented_document = DocumentPresenter.new(self)
-    presented_links = DocumentLinksPresenter.new(self)
+      presented_document = DocumentPresenter.new(self)
+      presented_links = DocumentLinksPresenter.new(self)
 
-    begin
-      item_request = publishing_api.put_content(self.content_id, presented_document.to_json)
-      links_request = publishing_api.put_links(self.content_id, presented_links.to_json)
+      begin
+        item_request = publishing_api.put_content(self.content_id, presented_document.to_json)
+        links_request = publishing_api.put_links(self.content_id, presented_links.to_json)
 
-      item_request.code == 200 && links_request.code == 200
-    rescue GdsApi::HTTPErrorResponse => e
-      Airbrake.notify(e)
+        item_request.code == 200 && links_request.code == 200
+      rescue GdsApi::HTTPErrorResponse => e
+        Airbrake.notify(e)
 
-      false
+        false
+      end
+    else
+      raise RecordNotSaved
     end
   end
+
+  class RecordNotSaved < StandardError; end
 
   def publish!
     indexable_document = SearchPresenter.new(self)
 
     begin
-      publish_request = publishing_api.publish(content_id, "major")
+      update_type = self.update_type || 'major'
+      publish_request = publishing_api.publish(content_id, update_type)
       rummager_request = rummager.add_document(
         format,
         base_path,

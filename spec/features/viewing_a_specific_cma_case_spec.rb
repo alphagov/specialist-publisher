@@ -29,7 +29,13 @@ RSpec.feature "Viewing a specific case", type: :feature do
           "market_sector" => ["energy"],
           "outcome_type" => "",
           "document_type" => "cma_case",
-        }
+        },
+        "change_history" => [
+          {
+            "public_timestamp" => "2015-12-03 16:59:13 UTC",
+            "note" => "First published."
+          }
+        ]
       },
       "routes" => [
         {
@@ -41,7 +47,8 @@ RSpec.feature "Viewing a specific case", type: :feature do
       "update_type" => "major",
       "links" => {
         "organisations" => ["957eb4ec-089b-4f71-ba2a-dc69ac8919ea"]
-      }
+      },
+      "publication_state" => "draft"
     }
   end
 
