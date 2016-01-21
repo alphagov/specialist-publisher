@@ -155,6 +155,7 @@ describe CmaCase do
       expect(c.save!).to eq(true)
 
       assert_publishing_api_put_content(c.content_id, request_json_including(cma_case))
+      expect(cma_case.to_json).to be_valid_against_schema('specialist_document')
     end
   end
 
