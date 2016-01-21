@@ -17,26 +17,24 @@ RSpec.feature "Publishing a CMA case", type: :feature do
       "base_path" => "/cma-cases/example-cma-case",
       "title" => "Example CMA Case",
       "description" => "This is the summary of example CMA case",
-      "format" => "cma_case",
+      "format" => "specialist_document",
       "publishing_app" => "specialist-publisher",
       "rendering_app" => "specialist-frontend",
       "locale" => "en",
       "phase" => "live",
-      "public_updated_at" => "2015-11-16 11:53:30 +0000",
+      "public_updated_at" => "2015-11-16T11:53:30+00:00",
       "details" => {
         "body" => "## Header" + ("\r\n\r\nThis is the long body of an example CMA case" * 10),
         "metadata" => {
           "opened_date" => "2014-01-01",
-          "closed_date" => "",
           "case_type" => "ca98-and-civil-cartels",
           "case_state" => "open",
           "market_sector" => ["energy"],
-          "outcome_type" => "",
           "document_type" => "cma_case",
         },
         "change_history" => [
           {
-            "public_timestamp" => "2015-12-03 16:59:13 UTC",
+            "public_timestamp" => "2015-11-16T11:53:30+00:00",
             "note" => "First published."
           }
         ]
@@ -94,13 +92,13 @@ RSpec.feature "Publishing a CMA case", type: :feature do
       "description" => "This is the summary of example CMA case",
       "link" => "/cma-cases/example-cma-case",
       "indexable_content" => "## Header" + ("\r\n\r\nThis is the long body of an example CMA case" * 10),
-      "public_timestamp" => "2015-11-16 11:53:30 +0000",
+      "public_timestamp" => "2015-11-16T11:53:30+00:00",
       "opened_date" => "2014-01-01",
-      "closed_date" => "",
+      "closed_date" => nil,
       "case_type" => "ca98-and-civil-cartels",
       "case_state" => "open",
       "market_sector" => ["energy"],
-      "outcome_type" => "",
+      "outcome_type" => nil,
       "organisations" => ["competition-and-markets-authority"],
     }
   end

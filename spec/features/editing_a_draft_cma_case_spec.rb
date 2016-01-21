@@ -12,7 +12,7 @@ RSpec.feature "Editing a draft CMA case", type: :feature do
       "base_path" => "/cma-cases/example-cma-case",
       "title" => "Example CMA Case",
       "description" => "This is the summary of an example CMA case",
-      "format" => "cma_case",
+      "format" => "specialist_document",
       "publishing_app" => "specialist-publisher",
       "rendering_app" => "specialist-frontend",
       "locale" => "en",
@@ -23,16 +23,14 @@ RSpec.feature "Editing a draft CMA case", type: :feature do
         "body" => "## Header" + ("\r\n\r\nThis is the long body of an example CMA case" * 10),
         "metadata" => {
           "opened_date" => "2014-01-01",
-          "closed_date" => "",
           "case_type" => "ca98-and-civil-cartels",
           "case_state" => "open",
           "market_sector" => ["energy"],
-          "outcome_type" => "",
           "document_type" => "cma_case",
         },
         "change_history" => [
           {
-            "public_timestamp" => "2015-12-03 16:59:13 UTC",
+            "public_timestamp" => "2015-11-23T14:07:47.240Z",
             "note" => "First published."
           }
         ]
@@ -79,20 +77,20 @@ RSpec.feature "Editing a draft CMA case", type: :feature do
     @changed_json = cma_case_content_item.merge({
       "title" => "Changed title",
       "description" => "Changed summary",
-      "public_updated_at" => "2015-12-03 16:59:13 UTC",
+      "public_updated_at" => "2015-12-03T16:59:13+00:00",
     })
 
     @changed_json["details"].merge!(
       "change_history" => [
         {
-          "public_timestamp" => "2015-12-03 16:59:13 UTC",
+          "public_timestamp" => "2015-12-03T16:59:13+00:00",
           "note" => "First published.",
         }
       ]
     )
 
     @changed_json.delete("publication_state")
-    Timecop.freeze(Time.parse("2015-12-03 16:59:13 UTC"))
+    Timecop.freeze(Time.parse("2015-12-03T16:59:13+00:00"))
   end
 
   after do
@@ -114,7 +112,7 @@ RSpec.feature "Editing a draft CMA case", type: :feature do
 
     assert_publishing_api_put_content("4a656f42-35ad-4034-8c7a-08870db7fffe", request_json_including(@changed_json))
     expect(@changed_json["content_id"]).to eq("4a656f42-35ad-4034-8c7a-08870db7fffe")
-    expect(@changed_json["public_updated_at"]).to eq("2015-12-03 16:59:13 UTC")
+    expect(@changed_json["public_updated_at"]).to eq("2015-12-03T16:59:13+00:00")
 
     expect(page.status_code).to eq(200)
     expect(page).to have_content("Updated Changed title")
