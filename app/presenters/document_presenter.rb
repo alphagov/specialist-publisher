@@ -43,7 +43,7 @@ private
       {
         f => document.send(f)
       }
-    end.reduce({}, :merge).merge(document_type: document.format)
+    end.reduce({}, :merge).merge(document_type: document.format).reject { |k, v| v.blank? }
   end
 
   def public_updated_at
