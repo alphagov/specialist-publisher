@@ -13,7 +13,7 @@ class SearchPresenter
       link: document.base_path,
       indexable_content: indexable_content,
       organisations: organisation_slugs,
-      public_timestamp: document.public_updated_at.to_s,
+      public_timestamp: document.public_updated_at.to_datetime.rfc3339,
     }.merge(document.format_specific_metadata)
   end
 

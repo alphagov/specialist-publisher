@@ -47,7 +47,7 @@ private
   end
 
   def public_updated_at
-    document.public_updated_at.to_s
+    document.public_updated_at.to_datetime.rfc3339
   end
 
   def change_history
