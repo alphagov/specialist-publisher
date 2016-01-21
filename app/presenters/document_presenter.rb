@@ -12,7 +12,7 @@ class DocumentPresenter
       base_path: document.base_path,
       title: document.title,
       description: document.summary,
-      format: document.format,
+      format: "specialist_document",
       publishing_app: "specialist-publisher",
       rendering_app: "specialist-frontend",
       locale: "en",
