@@ -106,7 +106,7 @@ RSpec.feature "Editing a published CMA case", type: :feature do
       :description,
     ]
 
-    publishing_api_has_fields_for_format('cma_case', [published_cma_case_content_item], fields)
+    publishing_api_has_fields_for_format('specialist_document', [published_cma_case_content_item], fields)
 
     publishing_api_has_item(published_cma_case_content_item)
 

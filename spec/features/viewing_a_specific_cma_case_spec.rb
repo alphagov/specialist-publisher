@@ -70,7 +70,7 @@ RSpec.feature "Viewing a specific case", type: :feature do
       cma_cases << cma_case_content_item(n)
     end
 
-    publishing_api_has_fields_for_format('cma_case', cma_cases, fields)
+    publishing_api_has_fields_for_format('specialist_document', cma_cases, fields)
 
     cma_cases.each do |cma_case|
       publishing_api_has_item(cma_case)
