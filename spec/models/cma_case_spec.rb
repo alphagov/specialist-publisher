@@ -8,22 +8,20 @@ describe CmaCase do
       "base_path" => "/cma-cases/example-cma-case-#{n}",
       "title" => "Example CMA Case #{n}",
       "description" => "This is the summary of example CMA case #{n}",
-      "format" => "cma_case",
+      "format" => "specialist_document",
       "publishing_app" => "specialist-publisher",
       "rendering_app" => "specialist-frontend",
       "locale" => "en",
       "phase" => "live",
-      "public_updated_at" => "2015-11-16T11:53:30.000+00:00",
+      "public_updated_at" => "2015-11-16T11:53:30",
       "publication_state" => "draft",
       "details" => {
         "body" => "## Header" + ("\r\n\r\nThis is the long body of an example CMA case" * 10),
         "metadata" => {
           "opened_date" => "2014-01-01",
-          "closed_date" => "",
           "case_type" => "ca98-and-civil-cartels",
           "case_state" => "open",
           "market_sector" => ["energy"],
-          "outcome_type" => "",
           "document_type" => "cma_case",
         },
         "change_history" => [],
@@ -75,13 +73,13 @@ describe CmaCase do
       "description" => "This is the summary of example CMA case 0",
       "link" => "/cma-cases/example-cma-case-0",
       "indexable_content" => "## Header" + ("\r\n\r\nThis is the long body of an example CMA case" * 10),
-      "public_timestamp" => "2015-11-16 11:53:30 +0000",
+      "public_timestamp" => "2015-11-16T11:53:30+00:00",
       "opened_date" => "2014-01-01",
-      "closed_date" => "",
+      "closed_date" => nil,
       "case_type" => "ca98-and-civil-cartels",
       "case_state" => "open",
       "market_sector" => ["energy"],
-      "outcome_type" => "",
+      "outcome_type" => nil,
       "organisations" => ["competition-and-markets-authority"],
     }
   end
@@ -140,15 +138,14 @@ describe CmaCase do
       stub_any_publishing_api_put_content
       stub_any_publishing_api_put_links
 
-
       cma_case = @cma_cases[0]
 
       cma_case.delete("publication_state")
-      cma_case.merge!("public_updated_at" => "2015-12-18 10:12:26 UTC")
+      cma_case.merge!("public_updated_at" => "2015-12-18T10:12:26+00:00")
       cma_case["details"].merge!(
         "change_history" => [
           {
-            "public_timestamp" => "2015-12-18 10:12:26 UTC",
+            "public_timestamp" => "2015-12-18T10:12:26+00:00",
             "note" => "First published.",
           }
         ]
@@ -158,6 +155,7 @@ describe CmaCase do
       expect(c.save!).to eq(true)
 
       assert_publishing_api_put_content(c.content_id, request_json_including(cma_case))
+      expect(cma_case.to_json).to be_valid_against_schema('specialist_document')
     end
   end
 

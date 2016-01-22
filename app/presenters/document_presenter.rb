@@ -12,7 +12,7 @@ class DocumentPresenter
       base_path: document.base_path,
       title: document.title,
       description: document.summary,
-      format: document.format,
+      format: "specialist_document",
       publishing_app: "specialist-publisher",
       rendering_app: "specialist-frontend",
       locale: "en",
@@ -43,11 +43,11 @@ private
       {
         f => document.send(f)
       }
-    end.reduce({}, :merge).merge(document_type: document.format)
+    end.reduce({}, :merge).merge(document_type: document.format).reject { |k, v| v.blank? }
   end
 
   def public_updated_at
-    document.public_updated_at.to_s
+    document.public_updated_at.to_datetime.rfc3339
   end
 
   def change_history
