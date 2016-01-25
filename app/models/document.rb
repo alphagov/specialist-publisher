@@ -158,7 +158,14 @@ class Document
       ]
     ).to_ostruct
 
-    response.map { |payload| self.find(payload.content_id) }
+    # Fetch individual payloads for each `specialist_document`
+    payloads = response.map { |payload| publishing_api.get_content(payload.content_id).to_ostruct }
+
+    # Select the ones which match the current format
+    payloads_of_format = payloads.select { |payload| payload.details.metadata.document_type == self.format }
+
+    # Deserialize the payloads into real Objects and return them
+    payloads_of_format.map { |payload| self.from_publishing_api(payload) }
   end
 
   def self.find(content_id)
