@@ -37,7 +37,7 @@ describe CmaCase do
     }
   end
 
-  def cma_org_content_item
+  let(:cma_org_content_item) {
     {
       "base_path" => "/government/organisations/competition-and-markets-authority",
       "content_id" => "957eb4ec-089b-4f71-ba2a-dc69ac8919ea",
@@ -65,9 +65,9 @@ describe CmaCase do
       "description" => nil,
       "details" => {}
     }
-  end
+  }
 
-  def indexable_attributes
+  let(:indexable_attributes) {
     {
       "title" => "Example CMA Case 0",
       "description" => "This is the summary of example CMA case 0",
