@@ -51,6 +51,10 @@ RSpec.configure do |config|
     #stub_email_alert_api
   end
 
+  config.after(:each) do
+    Timecop.return
+  end
+
   config.include Capybara::DSL, type: :feature
   config.include(Capybara::Webkit::RspecMatchers, :type => :feature)
   config.include(GdsApi::TestHelpers::PublishingApiV2)
