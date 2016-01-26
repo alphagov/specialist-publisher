@@ -19,12 +19,8 @@ class AaibReport < Document
     super(params, FORMAT_SPECIFIC_FIELDS)
   end
 
-  def format
-    "aaib_report"
-  end
-
   def self.format
-    new.format
+    "aaib_report"
   end
 
   def public_path
