@@ -33,7 +33,7 @@ class Document
   end
 
   def format
-    raise NotImplementedError
+    self.class.format
   end
 
   def self.format
