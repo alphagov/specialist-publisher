@@ -6,16 +6,16 @@ class DocumentsController <  ApplicationController
   include ActionView::Helpers::TextHelper
 
   before_action :fetch_document, only: [:edit, :show, :publish, :update]
+  before_action :permitted?, if: :document_type
 
   def index
-    unless params[:document_type]
-      redirect_to "/#{document_types.keys.first}"
-      return
+    if current_format
+      @documents = document_klass.all
+
+      @documents.sort!{ |a, b| a.public_updated_at <=> b.public_updated_at }.reverse!
+    else
+      redirect_to documents_path(formats_user_can_access.keys.first)
     end
-
-    @documents = document_klass.all
-
-    @documents.sort!{ |a, b| a.public_updated_at <=> b.public_updated_at }.reverse!
   end
 
   def new
@@ -122,6 +122,15 @@ private
 
   def rummager
     @rummager ||= SpecialistPublisher.services(:rummager)
+  end
+
+  def permitted?
+    if formats_user_can_access.fetch(document_type, nil)
+      true
+    else
+      flash[:danger] = "You aren't permitted to access #{current_format.title.pluralize}. If you feel you've reached this in error, contact your SPOC."
+      redirect_to documents_path(formats_user_can_access.keys.first)
+    end
   end
 
 end
