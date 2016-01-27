@@ -37,7 +37,7 @@ group :development, :test do
   gem 'rspec-rails', '~> 3.3'
   gem 'simplecov', '0.10.0', require: false
   gem 'simplecov-rcov', '0.2.3', require: false
-  gem 'database_cleaner', '1.5.0'
+  gem 'database_cleaner', '1.5.1'
   gem 'factory_girl'
   gem "capybara", "2.5.0"
   gem 'capybara-webkit', '1.7.1'
