@@ -21,8 +21,8 @@ Dir[Rails.root.join("features/support/**/*_helpers.rb")]
   .each { |f| require f }
 
 require "database_cleaner"
-# DatabaseCleaner[:mongoid].strategy = :truncation
-# DatabaseCleaner.clean
+DatabaseCleaner[:mongoid].strategy = :truncation
+DatabaseCleaner.clean
 
 require 'capybara/rspec'
 require 'capybara/webkit/matchers'
