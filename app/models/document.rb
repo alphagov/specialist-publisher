@@ -82,6 +82,10 @@ class Document
     finder_schema.organisations
   end
 
+  def self.organisations
+    new.organisations
+  end
+
   def format_specific_metadata
     format_specific_fields.each_with_object({}) do |f, fields|
       fields[f] = send(f)
