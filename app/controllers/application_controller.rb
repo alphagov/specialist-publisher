@@ -20,7 +20,7 @@ private
 
   def document_types
     # For each format that follows the standard naming convention, this
-    # method takes the title and name of the model class of eacg format
+    # method takes the title and name of the model class of each format
     # like this:
     #
     # data = {
