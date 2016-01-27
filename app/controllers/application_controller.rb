@@ -15,6 +15,14 @@ private
     document_types.fetch(params.fetch(:document_type, nil), nil)
   end
 
+  def formats_user_can_access
+    if current_user.permissions.include?('gds_editor')
+      document_types
+    else
+      Hash(document_types.select { |k, v| v.organisations.include?(current_user.organisation_content_id) })
+    end
+  end
+
   # This Struct is for the document_types method below
   FormatStruct = Struct.new(:klass, :document_type, :format_name, :title, :organisations)
 
