@@ -48,8 +48,8 @@ private
     # }
 
     data = {
-      "CMA Case" => CmaCase,
       "AAIB Report" => AaibReport,
+      "CMA Case" => CmaCase,
     }
 
     data.map do |k, v|
