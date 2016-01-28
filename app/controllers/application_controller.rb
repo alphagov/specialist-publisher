@@ -15,12 +15,20 @@ private
     document_types.fetch(params.fetch(:document_type, nil), nil)
   end
 
+  def formats_user_can_access
+    if current_user.permissions.include?('gds_editor')
+      document_types
+    else
+      Hash(document_types.select { |k, v| v.organisations.include?(current_user.organisation_content_id) })
+    end
+  end
+
   # This Struct is for the document_types method below
-  FormatStruct = Struct.new(:klass, :document_type, :format_name, :title)
+  FormatStruct = Struct.new(:klass, :document_type, :format_name, :title, :organisations)
 
   def document_types
     # For each format that follows the standard naming convention, this
-    # method takes the title and name of the model class of eacg format
+    # method takes the title and name of the model class of each format
     # like this:
     #
     # data = {
@@ -30,12 +38,13 @@ private
     # which will become this:
     #
     # {
-    #   "gds-reports" => {
+    #   "gds-reports" => FormatStruct.new(
     #     klass: GdsReports
     #     document_type: "gds-reports",
     #     format_name: "gds_report",
-    #     title: "GDS Report"
-    #   }
+    #     title: "GDS Report",
+    #     organisations: ["a-content-id"],
+    #   )
     # }
 
     data = {
@@ -49,7 +58,8 @@ private
           v,
           k.downcase.parameterize.pluralize,
           k.downcase.parameterize.underscore,
-          k
+          k,
+          v.organisations,
         )
       }
     end.reduce({}, :merge)
