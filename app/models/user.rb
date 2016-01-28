@@ -12,4 +12,8 @@ class User
   field :organisation_content_id, type: String
   field :disabled, type: Boolean, default: false
 
+  def gds_editor?
+    permissions.include?('gds_editor')
+  end
+
 end

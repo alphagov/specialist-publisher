@@ -8,6 +8,7 @@ class ApplicationController < ActionController::Base
   before_filter :require_signin_permission!
 
   helper_method :current_format
+  helper_method :formats_user_can_access
 
 private
 
@@ -16,7 +17,7 @@ private
   end
 
   def formats_user_can_access
-    if current_user.permissions.include?('gds_editor')
+    if current_user.gds_editor?
       document_types
     else
       Hash(document_types.select { |k, v| v.organisations.include?(current_user.organisation_content_id) })
@@ -48,8 +49,8 @@ private
     # }
 
     data = {
-      "CMA Case" => CmaCase,
       "AAIB Report" => AaibReport,
+      "CMA Case" => CmaCase,
     }
 
     data.map do |k, v|
