@@ -8,6 +8,7 @@ class ApplicationController < ActionController::Base
   before_filter :require_signin_permission!
 
   helper_method :current_format
+  helper_method :formats_user_can_access
 
 private
 
