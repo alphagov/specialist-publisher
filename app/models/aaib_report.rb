@@ -22,8 +22,4 @@ class AaibReport < Document
   def self.format
     "aaib_report"
   end
-
-  def public_path
-    "/aaib-reports"
-  end
 end
