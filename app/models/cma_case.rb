@@ -21,7 +21,7 @@ class CmaCase < Document
     super(params, FORMAT_SPECIFIC_FIELDS)
   end
 
-  def self.format
+  def self.document_type
     "cma_case"
   end
 end

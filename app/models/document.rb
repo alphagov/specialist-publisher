@@ -32,11 +32,11 @@ class Document
     @base_path ||= "#{finder_schema.base_path}/#{title.parameterize}"
   end
 
-  def format
-    self.class.format
+  def document_type
+    self.class.document_type
   end
 
-  def self.format
+  def self.document_type
     raise NotImplementedError
   end
 
@@ -161,8 +161,8 @@ class Document
     # Fetch individual payloads for each `specialist_document`
     payloads = response.map { |payload| publishing_api.get_content(payload.content_id).to_ostruct }
 
-    # Select the ones which match the current format
-    payloads_of_format = payloads.select { |payload| payload.details.metadata.document_type == self.format }
+    # Select the ones which match the current document type
+    payloads_of_format = payloads.select { |payload| payload.details.metadata.document_type == self.document_type }
 
     # Deserialize the payloads into real Objects and return them
     payloads_of_format.map { |payload| self.from_publishing_api(payload) }
@@ -203,7 +203,7 @@ class Document
       update_type = self.update_type || 'major'
       publish_request = publishing_api.publish(content_id, update_type)
       rummager_request = rummager.add_document(
-        format,
+        document_type,
         base_path,
         indexable_document.to_json,
       )
@@ -227,7 +227,7 @@ class Document
   end
 
   def finder_schema
-    @finder_schema ||= FinderSchema.new(format.pluralize)
+    @finder_schema ||= FinderSchema.new(document_type.pluralize)
   end
   private :finder_schema
 
