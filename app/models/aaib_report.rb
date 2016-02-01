@@ -19,7 +19,7 @@ class AaibReport < Document
     super(params, FORMAT_SPECIFIC_FIELDS)
   end
 
-  def self.format
+  def self.document_type
     "aaib_report"
   end
 end
