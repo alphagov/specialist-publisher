@@ -29,7 +29,7 @@ class Document
   end
 
   def base_path
-    @base_path ||= "#{public_path}/#{title.parameterize}"
+    @base_path ||= "#{finder_schema.base_path}/#{title.parameterize}"
   end
 
   def format
@@ -42,10 +42,6 @@ class Document
 
   def phase
     "live"
-  end
-
-  def public_path
-    raise NoMethodError
   end
 
   %w{draft live redrafted}.each do |state|

@@ -1,9 +1,10 @@
 class FinderSchema
 
-  attr_reader :organisations
+  attr_reader :base_path, :organisations
 
   def initialize(schema_type)
     @schema ||= load_schema_for(schema_type)
+    @base_path = schema.fetch("base_path")
     @organisations = schema.fetch("organisations", [])
   end
 
