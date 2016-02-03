@@ -51,6 +51,7 @@ private
     data = {
       "AAIB Report" => AaibReport,
       "CMA Case" => CmaCase,
+      "RAIB Report" => RaibReport,
     }
 
     data.map do |k, v|
