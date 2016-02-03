@@ -1,0 +1,6 @@
+<%= f.label :date_of_occurrence %>
+<%= f.text_field :date_of_occurrence, placeholder: '2012-04-23', class: 'form-control' %>
+<%= f.label :railway_type %>
+<%= f.select :railway_type, f.object.facet_options(:railway_type), {}, { class: 'select2', multiple: true, data: {placeholder: 'Select a Railway type'} } %>
+<%= f.label :report_type %>
+<%= f.select :report_type, f.object.facet_options(:report_type), {}, { class: 'form-control' } %>
