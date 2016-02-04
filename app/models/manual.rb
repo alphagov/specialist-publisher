@@ -2,7 +2,7 @@ class Manual
   include ActiveModel::Model
   include ActiveModel::Validations
 
-  attr_accessor :content_id, :base_path, :title, :summary, :body, :public_updated_at, :publication_state, :update_type
+  attr_accessor :content_id, :base_path, :title, :summary, :body, :public_updated_at, :publication_state, :update_type, :organisations
 
   validates :title, presence: true
   validates :summary, presence: true
@@ -24,15 +24,32 @@ class Manual
   end
 
   def self.all
-    response = self.publishing_api.get_content_items(
-      content_format: "manual",
-      fields: [
-        :content_id,
-      ]
-    ).to_ostruct
+    # Fetch individual payloads and links for each `manual`
+    payloads = content_ids.map { |content_id|
+      publishing_api.get_content(content_id).to_hash.deep_merge!(
+        publishing_api.get_links(content_id).to_hash
+      )
+    }
 
-    # Fetch individual payloads for each `manual`
-    payloads = response.map { |payload| publishing_api.get_content(payload.content_id).to_ostruct }
+    # Deserialize the payloads into real Objects and return them
+    payloads.map { |payload| self.from_publishing_api(payload) }
+  end
+
+  def self.where(organisation_content_id:)
+    # Fetch individual links for each `manual`
+    payloads = content_ids.map { |content_id|
+      publishing_api.get_links(content_id).to_ostruct
+    }
+
+    # Select ones which have the same `content_id` as the `organisation_content_id` arguement
+    payloads.select! { |payload| payload.links.organisations.present? }
+    payloads.select! { |payload| payload.links.organisations.include?(organisation_content_id) }
+
+    # Fetch the content_id
+    payloads = payloads.map { |payload|
+      content = publishing_api.get_content(payload.content_id).to_hash
+      content.deep_merge!(payload.links)
+    }
 
     # Deserialize the payloads into real Objects and return them
     payloads.map { |payload| self.from_publishing_api(payload) }
@@ -41,20 +58,36 @@ class Manual
   def self.from_publishing_api(payload)
     manual = self.new(
       {
-        content_id: payload.content_id,
-        title: payload.title,
-        summary: payload.description,
-        body: payload.details.body,
-        publication_state: payload.publication_state,
-        public_updated_at: payload.public_updated_at,
+        content_id: payload["content_id"],
+        title: payload["title"],
+        summary: payload["description"],
+        body: payload["details"]["body"],
+        publication_state: payload["publication_state"],
+        public_updated_at: payload["public_updated_at"],
       }
     )
 
-    manual.base_path = payload.base_path
-    manual.update_type = payload.update_type
+    manual.base_path = payload["base_path"]
+    manual.update_type = payload["update_type"]
+
+    if payload["links"]
+      manual.organisations = payload["links"]["organisations"] || []
+    end
 
     manual
   end
+
+  def self.content_ids
+    response = self.publishing_api.get_content_items(
+      content_format: "manual",
+      fields: [
+        :content_id,
+      ]
+    ).to_ostruct.map(&:content_id)
+  end
+  private_class_method :content_ids
+
+private
 
   def publishing_api
     self.class.publishing_api
