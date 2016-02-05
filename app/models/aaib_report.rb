@@ -19,7 +19,7 @@ class AaibReport < Document
     super(params, FORMAT_SPECIFIC_FIELDS)
   end
 
-  def self.document_type
+  def self.publishing_api_document_type
     "aaib_report"
   end
 end
