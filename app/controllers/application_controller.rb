@@ -40,11 +40,11 @@ private
     #
     # {
     #   "gds-reports" => FormatStruct.new(
-    #     klass: GdsReports
-    #     document_type: "gds-reports",
-    #     format_name: "gds_report",
-    #     title: "GDS Report",
-    #     organisations: ["a-content-id"],
+    #     klass: GdsReports, # This is the class name of the model
+    #     document_type: "gds-reports", # This is internally used for building urls
+    #     format_name: "gds_report", # This is used for fetching the params of the format
+    #     title: "GDS Report", # Rendered as the format name to the User
+    #     organisations: ["a-content-id"], # Content IDs for the Orgs fetched from the schema
     #   )
     # }
 
