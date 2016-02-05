@@ -1,11 +1,12 @@
 class FinderSchema
 
-  attr_reader :base_path, :organisations
+  attr_reader :base_path, :organisations, :document_type_filter
 
   def initialize(schema_type)
     @schema ||= load_schema_for(schema_type)
     @base_path = schema.fetch("base_path")
     @organisations = schema.fetch("organisations", [])
+    @document_type_filter = schema.fetch("filter", {}).fetch("document_type")
   end
 
   def facets

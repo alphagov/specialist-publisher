@@ -42,6 +42,10 @@ class Document
     raise NotImplementedError
   end
 
+  def search_document_type
+    finder_schema.document_type_filter
+  end
+
   def phase
     "live"
   end
@@ -205,7 +209,7 @@ class Document
       update_type = self.update_type || 'major'
       publish_request = publishing_api.publish(content_id, update_type)
       rummager_request = rummager.add_document(
-        document_type,
+        search_document_type,
         base_path,
         indexable_document.to_json,
       )
