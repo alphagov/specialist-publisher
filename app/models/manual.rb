@@ -23,6 +23,10 @@ class Manual
     end
   end
 
+  def sections
+    []
+  end
+
   def organisation_content_ids
     @organisation_content_ids
   end
@@ -72,6 +76,25 @@ class Manual
     payloads.map { |payload| self.from_publishing_api(payload) }
   end
 
+  def self.find(content_id:, organisation_content_id: nil)
+    if organisation_content_id
+      links = publishing_api.get_links(content_id).to_ostruct
+
+      if links.organisations.include?(organisation_content_id)
+        content = publishing_api.get_links(content_id).to_hash
+        payload = content.deep_merge(links.to_hash)
+      else
+        return nil
+      end
+    else
+      content = publishing_api.get_content(content_id).to_hash
+      links = publishing_api.get_links(content_id).to_hash
+      payload = content.deep_merge(links)
+    end
+
+    self.from_publishing_api(payload)
+  end
+
   def self.from_publishing_api(payload)
     manual = self.new(
       {
@@ -92,6 +115,11 @@ class Manual
     end
 
     manual
+  end
+
+  def publish_tasks
+    # TODO Implment sidekiq
+    []
   end
 
   def self.content_ids

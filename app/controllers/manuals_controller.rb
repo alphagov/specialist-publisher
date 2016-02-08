@@ -8,4 +8,8 @@ class ManualsController <  ApplicationController
     end
   end
 
+  def show
+    @manual = Manual.find(content_id: params[:content_id])
+  end
+
 end
