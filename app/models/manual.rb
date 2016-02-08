@@ -2,7 +2,7 @@ class Manual
   include ActiveModel::Model
   include ActiveModel::Validations
 
-  attr_accessor :content_id, :base_path, :title, :summary, :body, :public_updated_at, :publication_state, :update_type, :organisations
+  attr_accessor :content_id, :base_path, :title, :summary, :body, :public_updated_at, :publication_state, :update_type
 
   validates :title, presence: true
   validates :summary, presence: true
@@ -21,6 +21,23 @@ class Manual
     define_method("#{state}?") do
       publication_state == state
     end
+  end
+
+  def organisation_content_ids
+    @organisation_content_ids
+  end
+
+  def organisation_content_ids=(organisation_content_ids)
+    @organisation_content_ids = organisation_content_ids
+  end
+
+  OrganisationStruct = Struct.new(:content_id, :base_path, :title)
+
+  def organisations
+    @organisations ||= @organisation_content_ids.map { |content_id|
+      payload = publishing_api.get_content(content_id).to_hash
+      OrganisationStruct.new(payload["content_id"], payload["base_path"], payload["title"])
+    }
   end
 
   def self.all
@@ -71,7 +88,7 @@ class Manual
     manual.update_type = payload["update_type"]
 
     if payload["links"]
-      manual.organisations = payload["links"]["organisations"] || []
+      manual.organisation_content_ids = payload["links"].fetch("organisations", [])
     end
 
     manual
