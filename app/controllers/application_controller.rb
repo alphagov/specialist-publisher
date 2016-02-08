@@ -51,6 +51,7 @@ private
     data = {
       "AAIB Report" => AaibReport,
       "CMA Case" => CmaCase,
+      "ESI Fund" => EsiFund,
       "MAIB Report" => MaibReport,
       "RAIB Report" => RaibReport,
     }
