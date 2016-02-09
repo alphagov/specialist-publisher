@@ -40,8 +40,18 @@ class Manual
     @public_updated_at = Time.parse(timestamp.to_s) unless timestamp.nil?
   end
 
+  def section_content_ids
+    @section_content_ids
+  end
+
+  def section_content_ids=(section_content_ids)
+    @section_content_ids = section_content_ids
+  end
+
   def sections
-    []
+    @sections ||= @section_content_ids.map { |content_id|
+      Section.find(content_id: content_id)
+    }
   end
 
   def organisation_content_ids
@@ -129,6 +139,7 @@ class Manual
 
     if payload["links"]
       manual.organisation_content_ids = payload["links"].fetch("organisations", [])
+      manual.section_content_ids = payload["links"].fetch("sections", [])
     end
 
     manual
