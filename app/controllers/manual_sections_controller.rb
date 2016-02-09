@@ -1,0 +1,3 @@
+class ManualSectionsController < ApplicationController
+
+end
