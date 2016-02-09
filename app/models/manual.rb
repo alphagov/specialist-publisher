@@ -2,7 +2,7 @@ class Manual
   include ActiveModel::Model
   include ActiveModel::Validations
 
-  attr_accessor :content_id, :base_path, :title, :summary, :body, :public_updated_at, :publication_state, :update_type
+  attr_accessor :content_id, :base_path, :title, :summary, :body, :publication_state, :update_type
 
   validates :title, presence: true
   validates :summary, presence: true
@@ -14,13 +14,30 @@ class Manual
     @summary = params.fetch(:summary, nil)
     @body = params.fetch(:body, nil)
     @publication_state = params.fetch(:publication_state, nil)
-    @public_updated_at = params.fetch(:public_updated_at, nil)
+    self.updated_at = params.fetch(:updated_at, nil)
+    self.public_updated_at = params.fetch(:public_updated_at, nil)
   end
 
   %w{draft live redrafted}.each do |state|
     define_method("#{state}?") do
       publication_state == state
     end
+  end
+
+  def updated_at
+    @updated_at ||= Time.zone.now
+  end
+
+  def updated_at=(timestamp)
+    @updated_at = Time.parse(timestamp.to_s) unless timestamp.nil?
+  end
+
+  def public_updated_at
+    @public_updated_at ||= Time.zone.now
+  end
+
+  def public_updated_at=(timestamp)
+    @public_updated_at = Time.parse(timestamp.to_s) unless timestamp.nil?
   end
 
   def sections
