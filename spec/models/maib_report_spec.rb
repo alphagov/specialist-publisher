@@ -36,6 +36,7 @@ describe MaibReport do
   let(:non_maib_report_content_item) {
     {
       "content_id" => SecureRandom.uuid,
+      "base_path" => "/other-reports/not-a-maib-report",
       "format" => "specialist_document",
       "details" => {
         "metadata" => {
@@ -92,10 +93,6 @@ describe MaibReport do
     @fields = [
       :base_path,
       :content_id,
-      :title,
-      :public_updated_at,
-      :details,
-      :description,
     ]
 
     @maib_reports = []
