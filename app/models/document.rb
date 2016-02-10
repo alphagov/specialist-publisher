@@ -157,21 +157,17 @@ class Document
       fields: [
         :base_path,
         :content_id,
-        :title,
-        :public_updated_at,
-        :details,
-        :description,
       ]
     ).to_ostruct
 
-    # Fetch individual payloads for each `specialist_document`
-    payloads = response.map { |payload| publishing_api.get_content(payload.content_id).to_ostruct }
-
     # Select the ones which match the current document type
-    payloads_of_format = payloads.select { |payload| payload.details.metadata.document_type == self.publishing_api_document_type }
+    payloads_of_format = response.select { |payload| payload.base_path.starts_with?(self.finder_schema.base_path) }
+
+    # Fetch individual payloads for each `specialist_document`
+    payloads = payloads_of_format.map { |payload| publishing_api.get_content(payload.content_id).to_ostruct }
 
     # Deserialize the payloads into real Objects and return them
-    payloads_of_format.map { |payload| self.from_publishing_api(payload) }
+    payloads.map { |payload| self.from_publishing_api(payload) }
   end
 
   def self.find(content_id)
@@ -220,6 +216,8 @@ class Document
     end
   end
 
+private
+
   def rummager
     SpecialistPublisher.services(:rummager)
   end
@@ -232,9 +230,12 @@ class Document
     SpecialistPublisher.services(:publishing_api)
   end
 
-  def finder_schema
+  def self.finder_schema
     @finder_schema ||= FinderSchema.new(publishing_api_document_type.pluralize)
   end
-  private :finder_schema
+
+  def finder_schema
+    self.class.finder_schema
+  end
 
 end

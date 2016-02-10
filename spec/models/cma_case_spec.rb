@@ -40,6 +40,7 @@ describe CmaCase do
   let(:non_cma_case_content_item) {
     {
       "content_id" => SecureRandom.uuid,
+      "base_path" => "/other-documents/not-a-cma-case",
       "format" => "specialist_document",
       "details" => {
         "metadata" => {
@@ -100,10 +101,6 @@ describe CmaCase do
     @fields = [
       :base_path,
       :content_id,
-      :title,
-      :public_updated_at,
-      :details,
-      :description,
     ]
 
     @cma_cases = []

@@ -37,6 +37,7 @@ describe AaibReport do
   let(:non_aaib_report_content_item) {
     {
       "content_id" => SecureRandom.uuid,
+      "base_path" => "/other-documents/not-an-aaib-report",
       "format" => "specialist_document",
       "details" => {
         "metadata" => {
@@ -92,10 +93,6 @@ describe AaibReport do
     @fields = [
       :base_path,
       :content_id,
-      :title,
-      :public_updated_at,
-      :details,
-      :description,
     ]
 
     @aaib_reports = []

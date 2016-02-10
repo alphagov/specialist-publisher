@@ -10,10 +10,6 @@ RSpec.feature "Access control", type: :feature do
     fields = [
       :base_path,
       :content_id,
-      :title,
-      :public_updated_at,
-      :details,
-      :description,
     ]
 
     publishing_api_has_fields_for_format('specialist_document', [], fields)
