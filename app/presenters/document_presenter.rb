@@ -43,7 +43,10 @@ private
       {
         f => document.send(f)
       }
-    }.reduce({}, :merge).merge(document_type: document.publishing_api_document_type).reject { |k, v| v.blank? }
+    }.reduce({}, :merge).merge({
+      document_type: document.publishing_api_document_type,
+      bulk_published: document.bulk_published,
+    }).reject { |k, v| v.blank? }
   end
 
   def public_updated_at
