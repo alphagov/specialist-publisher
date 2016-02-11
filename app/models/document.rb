@@ -103,7 +103,6 @@ class Document
     end
   end
 
-
   def self.from_publishing_api(payload)
     document = self.new(
       {
