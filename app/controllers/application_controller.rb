@@ -52,6 +52,7 @@ private
       "AAIB Report" => AaibReport,
       "CMA Case" => CmaCase,
       "MAIB Report" => MaibReport,
+      "Medical Safety Alert" => MedicalSafetyAlert,
       "RAIB Report" => RaibReport,
     }
 
