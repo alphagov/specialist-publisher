@@ -118,6 +118,8 @@ class Document
     document.base_path = payload.base_path
     document.update_type = payload.update_type
 
+    document.bulk_published = payload.details.metadata.bulk_published
+
     # If the document is redrafted remove the last/most
     # recent change note from the change_history array
     # and set it as the document's change note
