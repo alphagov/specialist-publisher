@@ -52,6 +52,7 @@ private
       "AAIB Report" => AaibReport,
       "CMA Case" => CmaCase,
       "Drug Safety Update" => DrugSafetyUpdate,
+      "EAT Decisions" => EmploymentAppealTribunalDecision,
       "ESI Fund" => EsiFund,
       "ET Decisions" => EmploymentTribunalDecision,
       "MAIB Report" => MaibReport,
