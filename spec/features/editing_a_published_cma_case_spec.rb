@@ -135,7 +135,7 @@ RSpec.feature "Editing a published CMA case", type: :feature do
 
     click_button "Save as draft"
 
-    assert_publishing_api_put_content("4a656f42-35ad-4034-8c7a-08870db7fffe", request_json_including(changed_json))
+    assert_publishing_api_put_content("4a656f42-35ad-4034-8c7a-08870db7fffe", request_json_includes(changed_json))
     expect(changed_json["content_id"]).to eq("4a656f42-35ad-4034-8c7a-08870db7fffe")
     expect(changed_json["public_updated_at"]).to eq("2015-11-23T14:07:47+00:00")
 
@@ -170,7 +170,7 @@ RSpec.feature "Editing a published CMA case", type: :feature do
 
     click_button "Save as draft"
 
-    assert_publishing_api_put_content("4a656f42-35ad-4034-8c7a-08870db7fffe", request_json_including(changed_json))
+    assert_publishing_api_put_content("4a656f42-35ad-4034-8c7a-08870db7fffe", request_json_includes(changed_json))
     expect(changed_json["content_id"]).to eq("4a656f42-35ad-4034-8c7a-08870db7fffe")
     expect(changed_json["public_updated_at"]).to eq("2015-12-03T16:59:13+00:00")
 
