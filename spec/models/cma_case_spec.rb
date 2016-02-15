@@ -97,21 +97,14 @@ describe CmaCase do
     }
   }
 
+  let(:fields) { %i[base_path content_id] }
+
+  let(:cma_cases) { 10.times.map { |n| cma_case_content_item(n) } }
+
   before do
-    @fields = [
-      :base_path,
-      :content_id,
-    ]
+    publishing_api_has_fields_for_format('specialist_document', cma_cases, fields)
 
-    @cma_cases = []
-
-    10.times do |n|
-      @cma_cases << cma_case_content_item(n)
-    end
-
-    publishing_api_has_fields_for_format('specialist_document', @cma_cases, @fields)
-
-    @cma_cases.each do |cma_case|
+    cma_cases.each do |cma_case|
       publishing_api_has_item(cma_case)
     end
 
@@ -120,42 +113,42 @@ describe CmaCase do
 
   context ".all" do
     it "returns all CMA Cases" do
-      expect(described_class.all.length).to be(@cma_cases.length)
+      expect(described_class.all.length).to be(cma_cases.length)
     end
 
     it "rejects any non CMA Cases" do
-      all_specialist_documents = [non_cma_case_content_item] + @cma_cases
-      publishing_api_has_fields_for_format('specialist_document', all_specialist_documents , @fields)
+      all_specialist_documents = [non_cma_case_content_item] + cma_cases
+      publishing_api_has_fields_for_format('specialist_document', all_specialist_documents , fields)
       publishing_api_has_item(non_cma_case_content_item)
 
-      expect(described_class.all.length).to be(@cma_cases.length)
+      expect(described_class.all.length).to be(cma_cases.length)
     end
   end
 
   context ".find" do
     it "returns a CMA Case" do
-      content_id = @cma_cases[0]["content_id"]
+      content_id = cma_cases[0]["content_id"]
       cma_case = described_class.find(content_id)
 
-      expect(cma_case.base_path).to     eq(@cma_cases[0]["base_path"])
-      expect(cma_case.title).to         eq(@cma_cases[0]["title"])
-      expect(cma_case.summary).to       eq(@cma_cases[0]["description"])
-      expect(cma_case.body).to          eq(@cma_cases[0]["details"]["body"])
-      expect(cma_case.opened_date).to   eq(@cma_cases[0]["details"]["metadata"]["opened_date"])
-      expect(cma_case.closed_date).to   eq(@cma_cases[0]["details"]["metadata"]["closed_date"])
-      expect(cma_case.case_type).to     eq(@cma_cases[0]["details"]["metadata"]["case_type"])
-      expect(cma_case.case_state).to    eq(@cma_cases[0]["details"]["metadata"]["case_state"])
-      expect(cma_case.market_sector).to eq(@cma_cases[0]["details"]["metadata"]["market_sector"])
-      expect(cma_case.outcome_type).to  eq(@cma_cases[0]["details"]["metadata"]["outcome_type"])
+      expect(cma_case.base_path).to     eq(cma_cases[0]["base_path"])
+      expect(cma_case.title).to         eq(cma_cases[0]["title"])
+      expect(cma_case.summary).to       eq(cma_cases[0]["description"])
+      expect(cma_case.body).to          eq(cma_cases[0]["details"]["body"])
+      expect(cma_case.opened_date).to   eq(cma_cases[0]["details"]["metadata"]["opened_date"])
+      expect(cma_case.closed_date).to   eq(cma_cases[0]["details"]["metadata"]["closed_date"])
+      expect(cma_case.case_type).to     eq(cma_cases[0]["details"]["metadata"]["case_type"])
+      expect(cma_case.case_state).to    eq(cma_cases[0]["details"]["metadata"]["case_state"])
+      expect(cma_case.market_sector).to eq(cma_cases[0]["details"]["metadata"]["market_sector"])
+      expect(cma_case.outcome_type).to  eq(cma_cases[0]["details"]["metadata"]["outcome_type"])
     end
   end
 
-  context "#save!" do
+  describe "#save!" do
     it "saves the CMA Case" do
       stub_any_publishing_api_put_content
       stub_any_publishing_api_put_links
 
-      cma_case = @cma_cases[0]
+      cma_case = cma_cases[0]
 
       cma_case.delete("publication_state")
       cma_case.merge!("public_updated_at" => "2015-12-18T10:12:26+00:00")
@@ -176,13 +169,13 @@ describe CmaCase do
     end
   end
 
-  context "#publish!" do
+  describe "#publish!" do
     it "publishes the CMA Case" do
-      stub_publishing_api_publish(@cma_cases[0]["content_id"], {})
+      stub_publishing_api_publish(cma_cases[0]["content_id"], {})
       stub_any_rummager_post
       publishing_api_has_fields_for_format('organisation', [cma_org_content_item], [:base_path, :content_id])
 
-      c = described_class.find(@cma_cases[0]["content_id"])
+      c = described_class.find(cma_cases[0]["content_id"])
       expect(c.publish!).to eq(true)
 
       assert_publishing_api_publish(c.content_id)

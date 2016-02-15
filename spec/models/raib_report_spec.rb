@@ -89,21 +89,14 @@ describe RaibReport do
     }
   }
 
+  let(:fields) { %i[base_path content_id] }
+
+  let(:raib_reports) { 10.times.map { |n| raib_report_content_item(n) } }
+
   before do
-    @fields = [
-      :base_path,
-      :content_id,
-    ]
+    publishing_api_has_fields_for_format('specialist_document', raib_reports, fields)
 
-    @raib_reports = []
-
-    10.times do |n|
-      @raib_reports << raib_report_content_item(n)
-    end
-
-    publishing_api_has_fields_for_format('specialist_document', @raib_reports, @fields)
-
-    @raib_reports.each do |raib_report|
+    raib_reports.each do |raib_report|
       publishing_api_has_item(raib_report)
     end
 
@@ -112,37 +105,37 @@ describe RaibReport do
 
   context ".all" do
     it "returns all RAIB Reports" do
-      expect(described_class.all.length).to be(@raib_reports.length)
+      expect(described_class.all.length).to be(raib_reports.length)
     end
 
     it "rejects any non RAIB Reports" do
-      all_specialist_documents = [non_raib_report_content_item] + @raib_reports
-      publishing_api_has_fields_for_format('specialist_document', all_specialist_documents , @fields)
+      all_specialist_documents = [non_raib_report_content_item] + raib_reports
+      publishing_api_has_fields_for_format('specialist_document', all_specialist_documents , fields)
       publishing_api_has_item(non_raib_report_content_item)
 
-      expect(described_class.all.length).to be(@raib_reports.length)
+      expect(described_class.all.length).to be(raib_reports.length)
     end
   end
 
   context ".find" do
     it "returns a AAIB Report" do
-      content_id = @raib_reports[0]["content_id"]
+      content_id = raib_reports[0]["content_id"]
       raib_report = described_class.find(content_id)
 
-      expect(raib_report.base_path).to            eq(@raib_reports[0]["base_path"])
-      expect(raib_report.title).to                eq(@raib_reports[0]["title"])
-      expect(raib_report.summary).to              eq(@raib_reports[0]["description"])
-      expect(raib_report.body).to                 eq(@raib_reports[0]["details"]["body"])
-      expect(raib_report.date_of_occurrence).to   eq(@raib_reports[0]["details"]["metadata"]["date_of_occurrence"])
+      expect(raib_report.base_path).to            eq(raib_reports[0]["base_path"])
+      expect(raib_report.title).to                eq(raib_reports[0]["title"])
+      expect(raib_report.summary).to              eq(raib_reports[0]["description"])
+      expect(raib_report.body).to                 eq(raib_reports[0]["details"]["body"])
+      expect(raib_report.date_of_occurrence).to   eq(raib_reports[0]["details"]["metadata"]["date_of_occurrence"])
     end
   end
 
-  context "#save!" do
+  describe "#save!" do
     it "saves the RAIB Report" do
       stub_any_publishing_api_put_content
       stub_any_publishing_api_put_links
 
-      raib_report = @raib_reports[0]
+      raib_report = raib_reports[0]
 
       raib_report.delete("publication_state")
       raib_report.merge!("public_updated_at" => "2015-12-18T10:12:26+00:00")
@@ -163,13 +156,13 @@ describe RaibReport do
     end
   end
 
-  context "#publish!" do
+  describe "#publish!" do
     it "publishes the RAIB Report" do
-      stub_publishing_api_publish(@raib_reports[0]["content_id"], {})
+      stub_publishing_api_publish(raib_reports[0]["content_id"], {})
       stub_any_rummager_post
       publishing_api_has_fields_for_format('organisation', [raib_org_content_item], [:base_path, :content_id])
 
-      raib_report = described_class.find(@raib_reports[0]["content_id"])
+      raib_report = described_class.find(raib_reports[0]["content_id"])
       expect(raib_report.publish!).to eq(true)
 
       assert_publishing_api_publish(raib_report.content_id)
