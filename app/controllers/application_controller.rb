@@ -65,7 +65,7 @@ private
         k.downcase.parameterize.pluralize => FormatStruct.new(
           v,
           k.downcase.parameterize.pluralize,
-          k.downcase.parameterize.underscore,
+          v.to_s.underscore,
           k,
           v.organisations,
         )
