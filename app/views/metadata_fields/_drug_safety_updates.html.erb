@@ -1,0 +1,2 @@
+<%= f.label :therapeutic_area %>
+<%= f.select :therapeutic_area, f.object.facet_options(:therapeutic_area), {}, { class: 'select2', multiple: true, data: {placeholder: 'Select a Therapeutic area'} } %>
