@@ -14,7 +14,7 @@ class DocumentsController <  ApplicationController
 
       @documents.sort!{ |a, b| a.public_updated_at <=> b.public_updated_at }.reverse!
     else
-      redirect_to documents_path(formats_user_can_access.keys.first)
+      redirect_to manuals_path
     end
   end
 
@@ -129,7 +129,7 @@ private
       true
     else
       flash[:danger] = "You aren't permitted to access #{current_format.title.pluralize}. If you feel you've reached this in error, contact your SPOC."
-      redirect_to documents_path(formats_user_can_access.keys.first)
+      redirect_to manuals_path
     end
   end
 

@@ -158,7 +158,7 @@ describe RaibReport do
       c = described_class.find(raib_report["content_id"])
       expect(c.save!).to eq(true)
 
-      assert_publishing_api_put_content(c.content_id, request_json_including(raib_report))
+      assert_publishing_api_put_content(c.content_id, request_json_includes(raib_report))
       expect(raib_report.to_json).to be_valid_against_schema('specialist_document')
     end
   end

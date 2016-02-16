@@ -13,6 +13,7 @@ RSpec.feature "Access control", type: :feature do
     ]
 
     publishing_api_has_fields_for_format('specialist_document', [], fields)
+    publishing_api_has_fields_for_format('manual', [], [:content_id])
   end
 
   context "as a CMA Editor" do
@@ -30,7 +31,7 @@ RSpec.feature "Access control", type: :feature do
     scenario "visiting /aaib-reports" do
       visit "/aaib-reports"
 
-      expect(page.current_path).to eq("/cma-cases")
+      expect(page.current_path).to eq("/manuals")
       expect(page).to have_content("You aren't permitted to access AAIB Reports")
     end
   end
@@ -50,7 +51,7 @@ RSpec.feature "Access control", type: :feature do
     scenario "visiting /cma-cases" do
       visit "/cma-cases"
 
-      expect(page.current_path).to eq("/aaib-reports")
+      expect(page.current_path).to eq("/manuals")
       expect(page).to have_content("You aren't permitted to access CMA Cases")
     end
   end
