@@ -56,6 +56,7 @@ private
       "ET Decisions" => EmploymentTribunalDecision,
       "MAIB Report" => MaibReport,
       "RAIB Report" => RaibReport,
+      "Vehicle Recalls and Faults Alert" => VehicleRecallsAndFaultsAlert,
     }
 
     data.map do |k, v|
