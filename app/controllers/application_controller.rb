@@ -52,6 +52,7 @@ private
       "AAIB Report" => AaibReport,
       "CMA Case" => CmaCase,
       "ESI Fund" => EsiFund,
+      "ET Decisions" => EmploymentTribunalDecision,
       "MAIB Report" => MaibReport,
       "RAIB Report" => RaibReport,
     }
