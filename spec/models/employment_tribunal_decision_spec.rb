@@ -157,7 +157,7 @@ describe EmploymentTribunalDecision do
       c = described_class.find(employment_tribunal_decision["content_id"])
       expect(c.save!).to eq(true)
 
-      assert_publishing_api_put_content(c.content_id, request_json_including(employment_tribunal_decision))
+      assert_publishing_api_put_content(c.content_id, request_json_includes(employment_tribunal_decision))
       expect(employment_tribunal_decision.to_json).to be_valid_against_schema('specialist_document')
     end
   end

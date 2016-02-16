@@ -156,7 +156,7 @@ describe VehicleRecallsAndFaultsAlert do
       c = described_class.find(vehicle_recall_and_fault["content_id"])
       expect(c.save!).to eq(true)
 
-      assert_publishing_api_put_content(c.content_id, request_json_including(vehicle_recall_and_fault))
+      assert_publishing_api_put_content(c.content_id, request_json_includes(vehicle_recall_and_fault))
       expect(vehicle_recall_and_fault.to_json).to be_valid_against_schema('specialist_document')
     end
   end
