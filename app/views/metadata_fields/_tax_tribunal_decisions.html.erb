@@ -1,0 +1,12 @@
+<div class="form-group">
+  <%= f.label :tribunal_decision_category %>
+  <%= f.select :tribunal_decision_category, f.object.facet_options(:tribunal_decision_category), { label: "Category" }, { class: 'form-control' } %>
+</div>
+<div class="form-group">
+  <%= f.label :tribunal_decision_decision_date %>
+  <%= f.text_field :tribunal_decision_decision_date, label: "Release date", placeholder: '2015-07-30', class: 'form-control' %>
+</div>
+<div class="form-group">
+  <%= f.label :hidden_indexable_content %>
+  <%= f.text_area :hidden_indexable_content, class: 'form-control' %>
+</div>

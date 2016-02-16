@@ -56,6 +56,7 @@ private
       "ET Decisions" => EmploymentTribunalDecision,
       "MAIB Report" => MaibReport,
       "RAIB Report" => RaibReport,
+      "Tax Tribunal Decision" => TaxTribunalDecision,
       "Vehicle Recalls and Faults Alert" => VehicleRecallsAndFaultsAlert,
     }
 
