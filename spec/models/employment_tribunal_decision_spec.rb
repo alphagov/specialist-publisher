@@ -93,12 +93,12 @@ describe EmploymentTribunalDecision do
     }
   }
 
-    let(:fields) { %i[base_path content_id] }
+  let(:fields) { %i[base_path content_id] }
 
-    let(:employment_tribunal_decisions) { 10.times.map { |n| employment_tribunal_decision_content_item(n) } }
+  let(:employment_tribunal_decisions) { 10.times.map { |n| employment_tribunal_decision_content_item(n) } }
 
-    before do
-     publishing_api_has_fields_for_format('specialist_document', employment_tribunal_decisions, fields)
+  before do
+    publishing_api_has_fields_for_format('specialist_document', employment_tribunal_decisions, fields)
 
     employment_tribunal_decisions.each do |decision|
       publishing_api_has_item(decision)
