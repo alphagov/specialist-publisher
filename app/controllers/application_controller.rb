@@ -52,6 +52,7 @@ private
       "AAIB Report" => AaibReport,
       "CMA Case" => CmaCase,
       "Drug Safety Update" => DrugSafetyUpdate,
+      "EAT Decisions" => EmploymentAppealTribunalDecision,
       "ESI Fund" => EsiFund,
       "ET Decisions" => EmploymentTribunalDecision,
       "MAIB Report" => MaibReport,
@@ -64,7 +65,7 @@ private
         k.downcase.parameterize.pluralize => FormatStruct.new(
           v,
           k.downcase.parameterize.pluralize,
-          k.downcase.parameterize.underscore,
+          v.to_s.underscore,
           k,
           v.organisations,
         )

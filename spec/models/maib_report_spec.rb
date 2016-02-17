@@ -110,7 +110,7 @@ describe MaibReport do
     Timecop.freeze(Time.parse("2015-12-18 10:12:26 UTC"))
   end
 
-  context "#all" do
+  context ".all" do
     it "returns all MAIB Reports" do
       expect(described_class.all.length).to be(@maib_reports.length)
     end
@@ -124,7 +124,7 @@ describe MaibReport do
     end
   end
 
-  context "#find" do
+  context ".find" do
     it "returns a MAIB Report" do
       content_id = @maib_reports[0]["content_id"]
       maib_report = described_class.find(content_id)

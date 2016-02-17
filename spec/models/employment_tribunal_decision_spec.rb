@@ -107,7 +107,7 @@ describe EmploymentTribunalDecision do
     Timecop.freeze(Time.parse("2015-12-18 10:12:26 UTC"))
   end
 
-  describe "#all" do
+  describe ".all" do
     it "returns all Employment Tribunal Decisions" do
       expect(described_class.all.length).to be(employment_tribunal_decisions.length)
     end
@@ -121,7 +121,7 @@ describe EmploymentTribunalDecision do
     end
   end
 
-  describe "#find" do
+  describe ".find" do
     it "returns an Employment Tribunal Decision" do
       content_id = employment_tribunal_decisions[0]["content_id"]
       employment_tribunal_decision = described_class.find(content_id)

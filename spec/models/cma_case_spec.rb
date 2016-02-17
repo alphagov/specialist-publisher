@@ -118,7 +118,7 @@ describe CmaCase do
     Timecop.freeze(Time.parse("2015-12-18 10:12:26 UTC"))
   end
 
-  context "#all" do
+  context ".all" do
     it "returns all CMA Cases" do
       expect(described_class.all.length).to be(@cma_cases.length)
     end
@@ -132,7 +132,7 @@ describe CmaCase do
     end
   end
 
-  context "#find" do
+  context ".find" do
     it "returns a CMA Case" do
       content_id = @cma_cases[0]["content_id"]
       cma_case = described_class.find(content_id)
