@@ -101,7 +101,7 @@ describe DrugSafetyUpdate do
     Timecop.freeze(Time.parse("2015-12-18 10:12:26 UTC"))
   end
 
-  describe "#all" do
+  describe ".all" do
     it "returns all Drug Safety Updates" do
       expect(described_class.all.length).to be(drug_safety_updates.length)
     end
@@ -115,7 +115,7 @@ describe DrugSafetyUpdate do
     end
   end
 
-  describe "#find" do
+  describe ".find" do
     it "returns a Drug Safety Update" do
       content_id = drug_safety_updates[0]["content_id"]
       drug_safety_update = described_class.find(content_id)

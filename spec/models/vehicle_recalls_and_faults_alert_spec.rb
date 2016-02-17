@@ -106,7 +106,7 @@ describe VehicleRecallsAndFaultsAlert do
     Timecop.freeze(Time.parse("2015-12-18 10:12:26 UTC"))
   end
 
-  describe "#all" do
+  describe ".all" do
     it "returns all Vehicle Recalls and Faults" do
       expect(described_class.all.length).to be(vehicle_recalls_and_faults.length)
     end
@@ -120,7 +120,7 @@ describe VehicleRecallsAndFaultsAlert do
     end
   end
 
-  describe "#find" do
+  describe ".find" do
     it "returns a Vehicle Recall and Fault" do
       content_id = vehicle_recalls_and_faults[0]["content_id"]
       vehicle_recall_and_fault = described_class.find(content_id)
