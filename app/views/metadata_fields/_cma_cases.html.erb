@@ -1,12 +1,24 @@
-<%= f.label :opened_date %>
-<%= f.text_field :opened_date, placeholder: '2012-04-23', class: 'form-control' %>
-<%= f.label :closed_date %>
-<%= f.text_field :closed_date, placeholder: '2013-10-19', class: 'form-control' %>
-<%= f.label :case_type %>
-<%= f.select :case_type, facet_options(f, :case_type), {}, { class: 'form-control' } %>
-<%= f.label :case_state %>
-<%= f.select :case_state, facet_options(f, :case_state), {}, { class: 'form-control' } %>
-<%= f.label :market_sector %>
-<%= f.select :market_sector, facet_options(f, :market_sector), {}, { class: 'select2', multiple: true, data: { placeholder: 'Select a market sector' } } %>
-<%= f.label :outcome_type %>
-<%= f.select :outcome_type, facet_options(f, :outcome_type), { include_blank: true }, { class: 'form-control' } %>
+<div class="form-group">
+  <%= f.label :opened_date %>
+  <%= f.text_field :opened_date, placeholder: '2012-04-23', class: 'form-control' %>
+</div>
+<div class="form-group">
+  <%= f.label :closed_date %>
+  <%= f.text_field :closed_date, placeholder: '2013-10-19', class: 'form-control' %>
+</div>
+<div class="form-group">
+  <%= f.label :case_type %>
+  <%= f.select :case_type, facet_options(f, :case_type), {}, { class: 'form-control' } %>
+</div>
+<div class="form-group">
+  <%= f.label :case_state %>
+  <%= f.select :case_state, facet_options(f, :case_state), {}, { class: 'form-control' } %>
+</div>
+<div class="form-group">
+  <%= f.label :market_sector %>
+  <%= f.select :market_sector, facet_options(f, :market_sector), {}, { class: 'select2 form-control', multiple: true, data: { placeholder: 'Select a market sector' } } %>
+</div>
+<div class="form-group">
+  <%= f.label :outcome_type %>
+  <%= f.select :outcome_type, facet_options(f, :outcome_type), { include_blank: true }, { class: 'form-control' } %>
+</div>
