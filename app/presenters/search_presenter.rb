@@ -14,7 +14,7 @@ class SearchPresenter
       indexable_content: indexable_content,
       organisations: organisation_slugs,
       public_timestamp: document.public_updated_at.to_datetime.rfc3339,
-    }.merge(document.format_specific_metadata)
+    }.merge(document.format_specific_metadata).reject { |k, v| v.blank? }
   end
 
   def indexable_content
