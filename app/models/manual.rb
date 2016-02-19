@@ -105,22 +105,34 @@ class Manual
 
   def self.find(content_id:, organisation_content_id: nil)
     if organisation_content_id
-      links = publishing_api.get_links(content_id).to_ostruct
+      links_response = publishing_api.get_links(content_id)
 
-      if links.organisations.include?(organisation_content_id)
-        content = publishing_api.get_links(content_id).to_hash
+      if links_response.to_ostruct.organisations.include?(organisation_content_id)
+        content_response = publishing_api.get_content(content_id)
+
+        content = content_response.to_hash
         payload = content.deep_merge(links.to_hash)
       else
-        return nil
+        raise RecordNotFound
       end
     else
-      content = publishing_api.get_content(content_id).to_hash
-      links = publishing_api.get_links(content_id).to_hash
-      payload = content.deep_merge(links)
+      content_response = publishing_api.get_content(content_id)
+      links_response = publishing_api.get_links(content_id)
+
+      if content_response && links_response
+        content = content_response.to_hash
+        links = links_response.to_hash
+
+        payload = content.deep_merge(links)
+      else
+        raise RecordNotFound
+      end
     end
 
     self.from_publishing_api(payload)
   end
+
+  class RecordNotFound < StandardError; end
 
   def self.from_publishing_api(payload)
     manual = self.new(

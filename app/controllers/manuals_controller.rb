@@ -9,7 +9,14 @@ class ManualsController <  ApplicationController
   end
 
   def show
-    @manual = Manual.find(content_id: params[:content_id])
+    begin
+      @manual = Manual.find(content_id: params[:content_id])
+    rescue Manual::RecordNotFound => e
+      flash[:danger] = "Manual not found"
+      redirect_to manuals_path
+
+      Airbrake.notify(e)
+    end
   end
 
 end
