@@ -452,5 +452,16 @@ RSpec.feature "Viewing a Manual", type: :feature do
       expect(page).to have_content("First section")
       expect(page).to have_content("Second section")
     end
+
+    scenario "which doesnt exist" do
+      content_id = "a-case-that-doesnt-exist"
+      publishing_api_does_not_have_item(content_id)
+      publishing_api_does_not_have_links(content_id)
+
+      visit "/manuals/#{content_id}"
+
+      expect(page.current_path).to eq("/manuals")
+      expect(page).to have_content("Manual not found")
+    end
   end
 end
