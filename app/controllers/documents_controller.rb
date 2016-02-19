@@ -101,7 +101,14 @@ private
   end
 
   def fetch_document
-    @document = document_klass.find(params[:content_id])
+    begin
+      @document = document_klass.find(params[:content_id])
+    rescue Document::RecordNotFound => e
+      flash[:danger] = "Document not found"
+      redirect_to documents_path(document_type: document_type)
+
+      Airbrake.notify(e)
+    end
   end
 
   def filtered_params(params_of_document)

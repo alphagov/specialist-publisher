@@ -172,8 +172,16 @@ class Document
   end
 
   def self.find(content_id)
-    self.from_publishing_api(publishing_api.get_content(content_id).to_ostruct)
+    response = publishing_api.get_content(content_id)
+
+    if response
+      self.from_publishing_api(response.to_ostruct)
+    else
+      raise RecordNotFound
+    end
   end
+
+  class RecordNotFound < StandardError; end
 
   def save!
     if self.valid?
