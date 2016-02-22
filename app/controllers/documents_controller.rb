@@ -134,8 +134,11 @@ private
   def permitted?
     if formats_user_can_access.fetch(document_type, nil)
       true
-    else
+    elsif current_format
       flash[:danger] = "You aren't permitted to access #{current_format.title.pluralize}. If you feel you've reached this in error, contact your SPOC."
+      redirect_to manuals_path
+    else
+      flash[:danger] = "That format doesn't exist. If you feel you've reached this in error, contact your SPOC."
       redirect_to manuals_path
     end
   end

@@ -34,6 +34,13 @@ RSpec.feature "Access control", type: :feature do
       expect(page.current_path).to eq("/manuals")
       expect(page).to have_content("You aren't permitted to access AAIB Reports")
     end
+
+    scenario "visiting a format which doesn't exist" do
+      visit "/a-format-which-doesnt-exist"
+
+      expect(page.current_path).to eq("/manuals")
+      expect(page).to have_content("That format doesn't exist.")
+    end
   end
 
   context "as an AAIB Editor" do
