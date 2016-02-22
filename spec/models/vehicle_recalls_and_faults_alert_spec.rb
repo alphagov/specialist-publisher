@@ -89,7 +89,6 @@ describe VehicleRecallsAndFaultsAlert do
       "alert_issue_date" => "2015-04-28",
       "build_start_date" => "2015-04-28",
       "build_end_date" => "2015-06-28",
-      "organisations" => [],
     }
   }
 

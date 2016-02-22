@@ -89,21 +89,14 @@ describe MaibReport do
     }
   }
 
+  let(:fields) { %i[base_path content_id] }
+
+  let(:maib_reports) { 10.times.map { |n| maib_report_content_item(n) } }
+
   before do
-    @fields = [
-      :base_path,
-      :content_id,
-    ]
+    publishing_api_has_fields_for_format('specialist_document', maib_reports, fields)
 
-    @maib_reports = []
-
-    10.times do |n|
-      @maib_reports << maib_report_content_item(n)
-    end
-
-    publishing_api_has_fields_for_format('specialist_document', @maib_reports, @fields)
-
-    @maib_reports.each do |maib_report|
+    maib_reports.each do |maib_report|
       publishing_api_has_item(maib_report)
     end
 
@@ -112,37 +105,37 @@ describe MaibReport do
 
   context ".all" do
     it "returns all MAIB Reports" do
-      expect(described_class.all.length).to be(@maib_reports.length)
+      expect(described_class.all.length).to be(maib_reports.length)
     end
 
     it "rejects any non MAIB Reports" do
-      all_specialist_documents = [non_maib_report_content_item] + @maib_reports
-      publishing_api_has_fields_for_format('specialist_document', all_specialist_documents , @fields)
+      all_specialist_documents = [non_maib_report_content_item] + maib_reports
+      publishing_api_has_fields_for_format('specialist_document', all_specialist_documents , fields)
       publishing_api_has_item(non_maib_report_content_item)
 
-      expect(described_class.all.length).to be(@maib_reports.length)
+      expect(described_class.all.length).to be(maib_reports.length)
     end
   end
 
   context ".find" do
     it "returns a MAIB Report" do
-      content_id = @maib_reports[0]["content_id"]
+      content_id = maib_reports[0]["content_id"]
       maib_report = described_class.find(content_id)
 
-      expect(maib_report.base_path).to            eq(@maib_reports[0]["base_path"])
-      expect(maib_report.title).to                eq(@maib_reports[0]["title"])
-      expect(maib_report.summary).to              eq(@maib_reports[0]["description"])
-      expect(maib_report.body).to                 eq(@maib_reports[0]["details"]["body"])
-      expect(maib_report.date_of_occurrence).to   eq(@maib_reports[0]["details"]["metadata"]["date_of_occurrence"])
+      expect(maib_report.base_path).to            eq(maib_reports[0]["base_path"])
+      expect(maib_report.title).to                eq(maib_reports[0]["title"])
+      expect(maib_report.summary).to              eq(maib_reports[0]["description"])
+      expect(maib_report.body).to                 eq(maib_reports[0]["details"]["body"])
+      expect(maib_report.date_of_occurrence).to   eq(maib_reports[0]["details"]["metadata"]["date_of_occurrence"])
     end
   end
 
-  context "#save!" do
+  describe "#save!" do
     it "saves the MAIB Report" do
       stub_any_publishing_api_put_content
       stub_any_publishing_api_put_links
 
-      maib_report = @maib_reports[0]
+      maib_report = maib_reports[0]
 
       maib_report.delete("publication_state")
       maib_report.merge!("public_updated_at" => "2015-12-18T10:12:26+00:00")
@@ -163,13 +156,13 @@ describe MaibReport do
     end
   end
 
-  context "#publish!" do
+  describe "#publish!" do
     it "publishes the MAIB Report" do
-      stub_publishing_api_publish(@maib_reports[0]["content_id"], {})
+      stub_publishing_api_publish(maib_reports[0]["content_id"], {})
       stub_any_rummager_post
       publishing_api_has_fields_for_format('organisation', [maib_org_content_item], [:base_path, :content_id])
 
-      maib_report = described_class.find(@maib_reports[0]["content_id"])
+      maib_report = described_class.find(maib_reports[0]["content_id"])
       expect(maib_report.publish!).to eq(true)
 
       assert_publishing_api_publish(maib_report.content_id)

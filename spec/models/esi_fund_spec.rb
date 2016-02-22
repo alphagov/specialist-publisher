@@ -108,21 +108,14 @@ describe EsiFund do
     }
   }
 
+  let(:fields) { %i[base_path content_id] }
+
+  let(:esi_funds) { 10.times.map { |n| esi_fund_content_item(n) } }
+
   before do
-    @fields = [
-      :base_path,
-      :content_id,
-    ]
+    publishing_api_has_fields_for_format('specialist_document', esi_funds, fields)
 
-    @esi_funds = []
-
-    10.times do |n|
-      @esi_funds << esi_fund_content_item(n)
-    end
-
-    publishing_api_has_fields_for_format('specialist_document', @esi_funds, @fields)
-
-    @esi_funds.each do |esi_fund|
+    esi_funds.each do |esi_fund|
       publishing_api_has_item(esi_fund)
     end
 
@@ -131,37 +124,37 @@ describe EsiFund do
 
   context ".all" do
     it "returns all ESI Funds" do
-      expect(described_class.all.length).to be(@esi_funds.length)
+      expect(described_class.all.length).to be(esi_funds.length)
     end
 
     it "rejects any non ESI Funds" do
-      all_specialist_documents = [non_esi_fund_content_item] + @esi_funds
-      publishing_api_has_fields_for_format('specialist_document', all_specialist_documents , @fields)
+      all_specialist_documents = [non_esi_fund_content_item] + esi_funds
+      publishing_api_has_fields_for_format('specialist_document', all_specialist_documents , fields)
       publishing_api_has_item(non_esi_fund_content_item)
 
-      expect(described_class.all.length).to be(@esi_funds.length)
+      expect(described_class.all.length).to be(esi_funds.length)
     end
   end
 
   context ".find" do
     it "returns an ESI Fund" do
-      content_id = @esi_funds[0]["content_id"]
+      content_id = esi_funds[0]["content_id"]
       esi_fund = described_class.find(content_id)
 
-      expect(esi_fund.base_path).to            eq(@esi_funds[0]["base_path"])
-      expect(esi_fund.title).to                eq(@esi_funds[0]["title"])
-      expect(esi_fund.summary).to              eq(@esi_funds[0]["description"])
-      expect(esi_fund.body).to                 eq(@esi_funds[0]["details"]["body"])
-      expect(esi_fund.closing_date).to         eq(@esi_funds[0]["details"]['metadata']["closing_date"])
+      expect(esi_fund.base_path).to            eq(esi_funds[0]["base_path"])
+      expect(esi_fund.title).to                eq(esi_funds[0]["title"])
+      expect(esi_fund.summary).to              eq(esi_funds[0]["description"])
+      expect(esi_fund.body).to                 eq(esi_funds[0]["details"]["body"])
+      expect(esi_fund.closing_date).to         eq(esi_funds[0]["details"]['metadata']["closing_date"])
     end
   end
 
-  context "#save!" do
+  describe "#save!" do
     it "saves the ESI Fund" do
       stub_any_publishing_api_put_content
       stub_any_publishing_api_put_links
 
-      esi_fund = @esi_funds[0]
+      esi_fund = esi_funds[0]
 
       esi_fund.delete("publication_state")
       esi_fund.merge!("public_updated_at" => "2015-12-18T10:12:26+00:00")
@@ -182,13 +175,13 @@ describe EsiFund do
     end
   end
 
-  context "#publish!" do
+  describe "#publish!" do
     it "publishes the ESI Fund" do
-      stub_publishing_api_publish(@esi_funds[0]["content_id"], {})
+      stub_publishing_api_publish(esi_funds[0]["content_id"], {})
       stub_any_rummager_post
       publishing_api_has_fields_for_format('organisation', esi_fund_org_content_items, [:base_path, :content_id])
 
-      esi_fund = described_class.find(@esi_funds[0]["content_id"])
+      esi_fund = described_class.find(esi_funds[0]["content_id"])
       expect(esi_fund.publish!).to eq(true)
 
       assert_publishing_api_publish(esi_fund.content_id)
