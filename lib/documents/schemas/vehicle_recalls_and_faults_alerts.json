@@ -8,7 +8,6 @@
   "filter": {
     "document_type": "vehicle_recalls_and_faults_alert"
   },
-  "organisations": [],
   "document_noun": "alert",
   "facets": [
     {
