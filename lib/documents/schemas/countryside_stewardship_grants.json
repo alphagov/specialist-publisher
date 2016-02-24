@@ -1,0 +1,85 @@
+{
+  "content_id": "0eb7b150-879a-4c44-becc-718e23a77e2c",
+  "base_path": "/countryside-stewardship-grants",
+  "name": "Countryside Stewardship grants",
+  "format_name": "Countryside Stewardship grant",
+  "description": "Find information about Countryside Stewardship options, capital items and supplements",
+  "beta": true,
+  "filter": {
+    "document_type": "countryside_stewardship_grant"
+  },
+  "organisations": ["d3ce4ba7-bc75-46b4-89d9-38cb3240376d", "de4e9dc6-cca4-43af-a594-682023b84d6c", "8bf5624b-dec2-44fa-9b6c-daed166333a5"],
+  "related": [
+    "c763d9e0-3228-4fde-9b30-a4f69f656468",
+    "6f6d6f3e-be96-48bb-8ba8-c5bce6cc6922"
+  ],
+  "document_noun": "grant",
+  "facets": [
+    {
+      "key": "grant_type",
+      "name": "Grant type",
+      "type": "text",
+      "preposition": "of type",
+      "filterable": true,
+      "allowed_values": [
+        {"label": "Option", "value": "option"},
+        {"label": "Capital item", "value": "capital-item"},
+        {"label": "Supplement", "value": "supplement"}
+      ]
+    },
+    {
+      "key": "land_use",
+      "name": "Land use",
+      "type": "text",
+      "preposition": "for",
+      "filterable": true,
+      "allowed_values": [
+        {"label": "Arable land", "value": "arable-land"},
+        {"label": "Boundaries", "value": "boundaries"},
+        {"label": "Coast", "value": "coast"},
+        {"label": "Educational access", "value": "educational-access"},
+        {"label": "Flood risk", "value": "flood-risk"},
+        {"label": "Grassland", "value": "grassland"},
+        {"label": "Historic environment", "value": "historic-environment"},
+        {"label": "Livestock management", "value": "livestock-management"},
+        {"label": "Organic land", "value": "organic-land"},
+        {"label": "Priority habitats", "value": "priority-habitats"},
+        {"label": "Trees (non-woodland)", "value": "trees-non-woodland"},
+        {"label": "Uplands", "value": "uplands"},
+        {"label": "Vegetation control", "value": "vegetation-control"},
+        {"label": "Water quality", "value": "water-quality"},
+        {"label": "Wildlife package", "value": "wildlife-package"},
+        {"label": "Woodland", "value": "woodland"}
+      ]
+    },
+    {
+      "key": "tiers_or_standalone_items",
+      "name": "Tiers or standalone items",
+      "type": "text",
+      "preposition": "for",
+      "filterable": true,
+      "allowed_values": [
+        {"label": "Higher Tier", "value": "higher-tier"},
+        {"label": "Mid Tier", "value": "mid-tier"},
+        {"label": "Standalone capital items", "value": "standalone-capital-items"}
+      ]
+    },
+    {
+      "key": "funding_amount",
+      "name": "Funding (per unit per year)",
+      "type": "text",
+      "preposition": "of",
+      "filterable": true,
+      "allowed_values": [
+        {"label": "Up to £100", "value": "up-to-100"},
+        {"label": "£101 to £200", "value": "101-to-200"},
+        {"label": "£201 to £300", "value": "201-to-300"},
+        {"label": "£301 to £400", "value": "301-to-400"},
+        {"label": "£401 to £500", "value": "401-to-500"},
+        {"label": "More than £500", "value": "more-than-500"},
+        {"label": "Up to 50% actual costs", "value": "up-to-50-actual-costs"},
+        {"label": "More than 50% actual costs", "value": "more-than-50-actual-costs"}
+      ]
+    }
+  ]
+}
