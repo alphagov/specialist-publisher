@@ -153,7 +153,7 @@ describe MedicalSafetyAlert do
       c = described_class.find(medical_safety_alert["content_id"])
       expect(c.save!).to eq(true)
 
-      assert_publishing_api_put_content(c.content_id, request_json_including(medical_safety_alert))
+      assert_publishing_api_put_content(c.content_id, request_json_includes(medical_safety_alert))
       expect(medical_safety_alert.to_json).to be_valid_against_schema('specialist_document')
     end
   end
