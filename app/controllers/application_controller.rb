@@ -57,6 +57,7 @@ private
       "ESI Fund" => EsiFund,
       "ET Decisions" => EmploymentTribunalDecision,
       "MAIB Report" => MaibReport,
+      "Medical Safety Alert" => MedicalSafetyAlert,
       "RAIB Report" => RaibReport,
       "Tax Tribunal Decision" => TaxTribunalDecision,
       "Vehicle Recalls and Faults Alert" => VehicleRecallsAndFaultsAlert,
