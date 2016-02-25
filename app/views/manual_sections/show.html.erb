@@ -1,0 +1,20 @@
+<% content_for :breadcrumbs do %>
+  <li><%= link_to "Your manuals", manuals_path %></li>
+  <li><%= link_to @section.manual.title, manual_path(content_id: @section.manual.content_id) %></li>
+  <li class='active'><%= @section.title %></li>
+<% end %>
+
+<h1 class="page-header">
+  <%= @section.title %>
+</h1>
+
+<div class="row">
+  <div class="sidebar col-md-8">
+    <h2>Summary</h2>
+    <p><%= @section.summary %></p>
+  </div>
+</div>
+
+<div class="actions">
+  <%= link_to("Edit section", edit_manual_section_path(manual_content_id: @section.manual.content_id, content_id: @section.content_id), class: 'action-link') %>
+</div>

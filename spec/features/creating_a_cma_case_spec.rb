@@ -1,10 +1,6 @@
 require 'spec_helper'
 
 RSpec.feature "Creating a CMA case", type: :feature do
-  def log_in_as_editor(editor)
-    user = FactoryGirl.create(editor)
-    GDS::SSO.test_user = user
-  end
 
   def cma_case_content_item
     {

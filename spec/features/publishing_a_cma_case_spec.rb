@@ -2,11 +2,6 @@ require 'spec_helper'
 
 RSpec.feature "Publishing a CMA case", type: :feature do
 
-  def log_in_as_editor(editor)
-    user = FactoryGirl.create(editor)
-    GDS::SSO.test_user = user
-  end
-
   def content_id
     "4a656f42-35ad-4034-8c7a-08870db7fffe"
   end

@@ -1,10 +1,6 @@
 require 'spec_helper'
 
 RSpec.feature "Viewing a Manual", type: :feature do
-  def log_in_as_editor(editor)
-    user = FactoryGirl.create(editor)
-    GDS::SSO.test_user = user
-  end
 
   context 'as a GDS editor' do
     def manual_content_item
