@@ -2,7 +2,7 @@ class Document
   include ActiveModel::Model
   include ActiveModel::Validations
 
-  attr_accessor :content_id, :base_path, :title, :summary, :body, :format_specific_fields, :public_updated_at, :state, :bulk_published, :publication_state, :change_note
+  attr_accessor :content_id, :base_path, :title, :summary, :body, :format_specific_fields, :public_updated_at, :state, :bulk_published, :publication_state, :change_note, :document_type
   attr_writer :change_history, :update_type
 
   validates :title, presence: true
@@ -184,6 +184,7 @@ class Document
   class RecordNotFound < StandardError; end
 
   def save!
+
     if self.valid?
       self.public_updated_at = Time.zone.now if self.update_type == 'major'
 

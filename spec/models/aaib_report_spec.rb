@@ -8,7 +8,8 @@ describe AaibReport do
       "base_path" => "/aaib-reports/example-aaib-report-#{n}",
       "title" => "Example AAIB Report #{n}",
       "description" => "This is the summary of example AAIB Report #{n}",
-      "format" => "specialist_document",
+      "document_type" => "aaib_report",
+      "schema_name" => "specialist_document",
       "publishing_app" => "specialist-publisher",
       "rendering_app" => "specialist-frontend",
       "locale" => "en",
@@ -132,6 +133,7 @@ describe AaibReport do
 
   describe "#save!" do
     it "saves the AAIB Report" do
+
       stub_any_publishing_api_put_content
       stub_any_publishing_api_put_links
 
