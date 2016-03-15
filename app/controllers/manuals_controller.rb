@@ -19,4 +19,8 @@ class ManualsController <  ApplicationController
     end
   end
 
+  def new
+    @manual = Manual.new
+  end
+
 end

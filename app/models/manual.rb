@@ -8,7 +8,7 @@ class Manual
   validates :summary, presence: true
   validates :body, safe_html: true
 
-  def initialize(params)
+  def initialize(params = {})
     @content_id = params.fetch(:content_id, SecureRandom.uuid)
     @title = params.fetch(:title, nil)
     @summary = params.fetch(:summary, nil)
