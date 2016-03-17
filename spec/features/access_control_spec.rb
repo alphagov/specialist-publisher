@@ -8,8 +8,8 @@ RSpec.feature "Access control", type: :feature do
       :content_id,
     ]
 
-    publishing_api_has_fields_for_format('specialist_document', [], fields)
-    publishing_api_has_fields_for_format('manual', [], [:content_id])
+    publishing_api_has_fields_for_document('specialist_document', [], fields)
+    publishing_api_has_fields_for_document('manual', [], [:content_id])
   end
 
   context "as a CMA Editor" do

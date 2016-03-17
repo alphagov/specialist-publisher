@@ -95,7 +95,7 @@ describe RaibReport do
   let(:raib_reports) { 10.times.map { |n| raib_report_content_item(n) } }
 
   before do
-    publishing_api_has_fields_for_format('specialist_document', raib_reports, fields)
+    publishing_api_has_fields_for_document('specialist_document', raib_reports, fields)
 
     raib_reports.each do |raib_report|
       publishing_api_has_item(raib_report)
@@ -111,7 +111,7 @@ describe RaibReport do
 
     it "rejects any non RAIB Reports" do
       all_specialist_documents = [non_raib_report_content_item] + raib_reports
-      publishing_api_has_fields_for_format('specialist_document', all_specialist_documents , fields)
+      publishing_api_has_fields_for_document('specialist_document', all_specialist_documents , fields)
       publishing_api_has_item(non_raib_report_content_item)
 
       expect(described_class.all.length).to be(raib_reports.length)
@@ -134,7 +134,7 @@ describe RaibReport do
   describe "#save!" do
     it "saves the RAIB Report" do
       stub_any_publishing_api_put_content
-      stub_any_publishing_api_put_links
+      stub_any_publishing_api_patch_links
 
       raib_report = raib_reports[0]
 
@@ -161,7 +161,7 @@ describe RaibReport do
     it "publishes the RAIB Report" do
       stub_publishing_api_publish(raib_reports[0]["content_id"], {})
       stub_any_rummager_post
-      publishing_api_has_fields_for_format('organisation', [raib_org_content_item], [:base_path, :content_id])
+      publishing_api_has_fields_for_document('organisation', [raib_org_content_item], [:base_path, :content_id])
 
       raib_report = described_class.find(raib_reports[0]["content_id"])
       expect(raib_report.publish!).to eq(true)

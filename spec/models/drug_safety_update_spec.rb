@@ -93,7 +93,7 @@ describe DrugSafetyUpdate do
   let(:drug_safety_updates) { 10.times.map { |n| drug_safety_update_content_item(n) } }
 
   before do
-    publishing_api_has_fields_for_format('specialist_document', drug_safety_updates, fields)
+    publishing_api_has_fields_for_document('specialist_document', drug_safety_updates, fields)
 
     drug_safety_updates.each do |drug_safety_update|
       publishing_api_has_item(drug_safety_update)
@@ -109,7 +109,7 @@ describe DrugSafetyUpdate do
 
     it "rejects any non Drug Safety Updates" do
       all_specialist_documents = [non_drug_safety_update_content_item] + drug_safety_updates
-      publishing_api_has_fields_for_format('specialist_document', all_specialist_documents , fields)
+      publishing_api_has_fields_for_document('specialist_document', all_specialist_documents , fields)
       publishing_api_has_item(non_drug_safety_update_content_item)
 
       expect(described_class.all.length).to be(drug_safety_updates.length)
@@ -131,7 +131,7 @@ describe DrugSafetyUpdate do
   describe "#save!" do
     it "saves the Drug Safety Update" do
       stub_any_publishing_api_put_content
-      stub_any_publishing_api_put_links
+      stub_any_publishing_api_patch_links
 
       drug_safety_update = drug_safety_updates[0]
 
@@ -158,7 +158,7 @@ describe DrugSafetyUpdate do
     it "publishes the Drug Safety Update" do
       stub_publishing_api_publish(drug_safety_updates[0]["content_id"], {})
       stub_any_rummager_post
-      publishing_api_has_fields_for_format('organisation', [drug_safety_update_org_content_item], [:base_path, :content_id])
+      publishing_api_has_fields_for_document('organisation', [drug_safety_update_org_content_item], [:base_path, :content_id])
 
       drug_safety_update = described_class.find(drug_safety_updates[0]["content_id"])
       expect(drug_safety_update.publish!).to eq(true)

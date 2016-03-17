@@ -154,7 +154,7 @@ class Document
     # will request all the required fields and the map will call
     # `self.from_publishing_api` itself.
     response = self.publishing_api.get_content_items(
-      content_format: "specialist_document",
+      document_type: "specialist_document",
       fields: [
         :base_path,
         :content_id,
@@ -162,7 +162,7 @@ class Document
     ).to_ostruct
 
     # Select the ones which match the current document type
-    payloads_of_format = response.select { |payload| payload.base_path.starts_with?(self.finder_schema.base_path) }
+    payloads_of_format = response.results.select { |payload| payload.base_path.starts_with?(self.finder_schema.base_path) }
 
     # Fetch individual payloads for each `specialist_document`
     payloads = payloads_of_format.map { |payload| publishing_api.get_content(payload.content_id).to_ostruct }
@@ -193,7 +193,7 @@ class Document
 
       begin
         item_request = publishing_api.put_content(self.content_id, presented_document.to_json)
-        links_request = publishing_api.put_links(self.content_id, presented_links.to_json)
+        links_request = publishing_api.patch_links(self.content_id, presented_links.to_json)
 
         item_request.code == 200 && links_request.code == 200
       rescue GdsApi::HTTPErrorResponse => e

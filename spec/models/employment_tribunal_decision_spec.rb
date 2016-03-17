@@ -99,7 +99,7 @@ describe EmploymentTribunalDecision do
   let(:employment_tribunal_decisions) { 10.times.map { |n| employment_tribunal_decision_content_item(n) } }
 
   before do
-    publishing_api_has_fields_for_format('specialist_document', employment_tribunal_decisions, fields)
+    publishing_api_has_fields_for_document('specialist_document', employment_tribunal_decisions, fields)
 
     employment_tribunal_decisions.each do |decision|
       publishing_api_has_item(decision)
@@ -115,7 +115,7 @@ describe EmploymentTribunalDecision do
 
     it "rejects any non Employment Tribunal Decisions" do
       all_specialist_documents = [non_employment_tribunal_decision_content_item] + employment_tribunal_decisions
-      publishing_api_has_fields_for_format('specialist_document', all_specialist_documents , fields)
+      publishing_api_has_fields_for_document('specialist_document', all_specialist_documents , fields)
       publishing_api_has_item(non_employment_tribunal_decision_content_item)
 
       expect(described_class.all.length).to be(employment_tribunal_decisions.length)
@@ -140,7 +140,7 @@ describe EmploymentTribunalDecision do
   describe "#save!" do
     it "saves the Employment Tribunal Decision" do
       stub_any_publishing_api_put_content
-      stub_any_publishing_api_put_links
+      stub_any_publishing_api_patch_links
 
       employment_tribunal_decision = employment_tribunal_decisions[0]
 
@@ -167,7 +167,7 @@ describe EmploymentTribunalDecision do
     it "publishes the Employment Tribunal Decision" do
       stub_publishing_api_publish(employment_tribunal_decisions[0]["content_id"], {})
       stub_any_rummager_post
-      publishing_api_has_fields_for_format('organisation', [employment_tribunal_decision_org_content_item], [:base_path, :content_id])
+      publishing_api_has_fields_for_document('organisation', [employment_tribunal_decision_org_content_item], [:base_path, :content_id])
 
       employment_tribunal_decision = described_class.find(employment_tribunal_decisions[0]["content_id"])
       expect(employment_tribunal_decision.publish!).to eq(true)

@@ -98,7 +98,7 @@ describe TaxTribunalDecision do
   let(:tax_tribunal_decisions) { 10.times.map { |n| tax_tribunal_decision_content_item(n) } }
 
   before do
-    publishing_api_has_fields_for_format('specialist_document', tax_tribunal_decisions, fields)
+    publishing_api_has_fields_for_document('specialist_document', tax_tribunal_decisions, fields)
 
     tax_tribunal_decisions.each do |decision|
       publishing_api_has_item(decision)
@@ -114,7 +114,7 @@ describe TaxTribunalDecision do
 
     it "rejects any non Tax Tribunal Decisions" do
       all_specialist_documents = [non_tax_tribunal_decision_content_item] + tax_tribunal_decisions
-      publishing_api_has_fields_for_format('specialist_document', all_specialist_documents , fields)
+      publishing_api_has_fields_for_document('specialist_document', all_specialist_documents , fields)
       publishing_api_has_item(non_tax_tribunal_decision_content_item)
 
       expect(described_class.all.length).to be(tax_tribunal_decisions.length)
@@ -139,7 +139,7 @@ describe TaxTribunalDecision do
   describe "#save!" do
     it "saves the Tax Tribunal Decision" do
       stub_any_publishing_api_put_content
-      stub_any_publishing_api_put_links
+      stub_any_publishing_api_patch_links
 
       tax_tribunal_decision = tax_tribunal_decisions[0]
 
@@ -166,7 +166,7 @@ describe TaxTribunalDecision do
     it "publishes the Tax Tribunal Decision" do
       stub_publishing_api_publish(tax_tribunal_decisions[0]["content_id"], {})
       stub_any_rummager_post
-      publishing_api_has_fields_for_format('organisation', [tax_tribunal_decision_org_content_item], [:base_path, :content_id])
+      publishing_api_has_fields_for_document('organisation', [tax_tribunal_decision_org_content_item], [:base_path, :content_id])
 
       tax_tribunal_decision = described_class.find(tax_tribunal_decisions[0]["content_id"])
       expect(tax_tribunal_decision.publish!).to eq(true)

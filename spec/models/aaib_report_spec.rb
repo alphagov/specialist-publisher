@@ -95,7 +95,7 @@ describe AaibReport do
   let(:aaib_reports) { 10.times.map { |n| aaib_report_content_item(n) } }
 
   before do
-    publishing_api_has_fields_for_format('specialist_document', aaib_reports, fields)
+    publishing_api_has_fields_for_document('specialist_document', aaib_reports, fields)
 
     aaib_reports.each do |aaib_report|
       publishing_api_has_item(aaib_report)
@@ -111,7 +111,7 @@ describe AaibReport do
 
     it "rejects any non AAIB Reports" do
       all_specialist_documents = [non_aaib_report_content_item] + aaib_reports
-      publishing_api_has_fields_for_format('specialist_document', all_specialist_documents , fields)
+      publishing_api_has_fields_for_document('specialist_document', all_specialist_documents , fields)
       publishing_api_has_item(non_aaib_report_content_item)
 
       expect(described_class.all.length).to be(aaib_reports.length)
@@ -135,7 +135,7 @@ describe AaibReport do
     it "saves the AAIB Report" do
 
       stub_any_publishing_api_put_content
-      stub_any_publishing_api_put_links
+      stub_any_publishing_api_patch_links
 
       aaib_report = aaib_reports[0]
 
@@ -162,7 +162,7 @@ describe AaibReport do
     it "publishes the AAIB Report" do
       stub_publishing_api_publish(aaib_reports[0]["content_id"], {})
       stub_any_rummager_post
-      publishing_api_has_fields_for_format('organisation', [aaib_org_content_item], [:base_path, :content_id])
+      publishing_api_has_fields_for_document('organisation', [aaib_org_content_item], [:base_path, :content_id])
 
       aaib_report = described_class.find(aaib_reports[0]["content_id"])
       expect(aaib_report.publish!).to eq(true)

@@ -53,7 +53,7 @@ private
     logger.info("publishing '#{finder[:file]["name"]}' finder")
 
     publishing_api.put_content(finder_payload.content_id, finder_payload.to_json)
-    publishing_api.put_links(finder_payload.content_id, links_payload.to_json)
+    publishing_api.patch_links(finder_payload.content_id, links_payload.to_json)
     publishing_api.publish(finder_payload.content_id, "major")
   end
 
@@ -70,7 +70,7 @@ private
     logger.info("publishing '#{finder[:file]["name"]}' finder signup page")
 
     publishing_api.put_content(signup_payload.content_id, signup_payload.to_json)
-    publishing_api.put_links(signup_payload.content_id, links_payload.to_json)
+    publishing_api.patch_links(signup_payload.content_id, links_payload.to_json)
     publishing_api.publish(signup_payload.content_id, "major")
   end
 

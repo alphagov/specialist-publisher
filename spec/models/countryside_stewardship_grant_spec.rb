@@ -100,7 +100,7 @@ describe CountrysideStewardshipGrant do
   let(:non_csg_content_item) { SecureRandom.uuid }
 
   before do
-    publishing_api_has_fields_for_format('specialist_document', countryside_stewardship_grants, fields)
+    publishing_api_has_fields_for_document('specialist_document', countryside_stewardship_grants, fields)
 
     countryside_stewardship_grants.each do |countryside_stewardship_grant|
       publishing_api_has_item(countryside_stewardship_grant)
@@ -116,7 +116,7 @@ describe CountrysideStewardshipGrant do
 
     it "rejects any non Countryside Stewardship Grants" do
       all_specialist_documents = [non_countryside_stewardship_grant_content_item] + countryside_stewardship_grants
-      publishing_api_has_fields_for_format('specialist_document', all_specialist_documents , fields)
+      publishing_api_has_fields_for_document('specialist_document', all_specialist_documents , fields)
       publishing_api_has_item(non_countryside_stewardship_grant_content_item)
 
       expect(described_class.all.map(&:content_id)).not_to include(non_csg_content_item)
@@ -138,7 +138,7 @@ describe CountrysideStewardshipGrant do
   describe "#save!" do
     it "saves the Countryside Stewardship Grant" do
       stub_any_publishing_api_put_content
-      stub_any_publishing_api_put_links
+      stub_any_publishing_api_patch_links
 
       countryside_stewardship_grant = countryside_stewardship_grants[0]
 
@@ -165,7 +165,7 @@ describe CountrysideStewardshipGrant do
     it "publishes the Countryside Stewardship Grant" do
       stub_publishing_api_publish(countryside_stewardship_grants[0]["content_id"], {})
       stub_any_rummager_post
-      publishing_api_has_fields_for_format('organisation', countryside_stewardship_grant_org_content_items, [:base_path, :content_id])
+      publishing_api_has_fields_for_document('organisation', countryside_stewardship_grant_org_content_items, [:base_path, :content_id])
 
       countryside_stewardship_grant = described_class.find(countryside_stewardship_grants[0]["content_id"])
       expect(countryside_stewardship_grant.publish!).to eq(true)

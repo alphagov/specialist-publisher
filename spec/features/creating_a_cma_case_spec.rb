@@ -58,14 +58,14 @@ RSpec.feature "Creating a CMA case", type: :feature do
     Timecop.freeze(Time.parse("2015-12-03 16:59:13 UTC"))
 
     stub_any_publishing_api_put_content
-    stub_any_publishing_api_put_links
+    stub_any_publishing_api_patch_links
 
     fields = [
       :base_path,
       :content_id,
     ]
 
-    publishing_api_has_fields_for_format('specialist_document', [cma_case_content_item], fields)
+    publishing_api_has_fields_for_document('specialist_document', [cma_case_content_item], fields)
     publishing_api_has_item(cma_case_content_item)
   end
 

@@ -196,8 +196,8 @@ RSpec.feature "Viewing a Manual", type: :feature do
     before do
       log_in_as_editor(:gds_editor)
 
-      publishing_api_has_fields_for_format("manual", [manual_content_item], [:content_id])
-      publishing_api_has_fields_for_format("manual_section", section_content_items.map { |section| { content_id: section["content_id"] } }, [:content_id])
+      publishing_api_has_fields_for_document("manual", [manual_content_item], [:content_id])
+      publishing_api_has_fields_for_document("manual_section", section_content_items.map { |section| { content_id: section["content_id"] } }, [:content_id])
 
       content_items = [manual_content_item] + section_content_items
 
@@ -420,8 +420,8 @@ RSpec.feature "Viewing a Manual", type: :feature do
     before do
       log_in_as_editor(:cma_editor)
 
-      publishing_api_has_fields_for_format("manual", [manual_content_item], [:content_id])
-      publishing_api_has_fields_for_format("manual_section", section_content_items.map { |section| { content_id: section["content_id"] } }, [:content_id])
+      publishing_api_has_fields_for_document("manual", [manual_content_item], [:content_id])
+      publishing_api_has_fields_for_document("manual_section", section_content_items.map { |section| { content_id: section["content_id"] } }, [:content_id])
 
       content_items = [manual_content_item] + section_content_items
 
