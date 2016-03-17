@@ -1,0 +1,15 @@
+<div class="col-md-12">
+  <h2>Attachments</h2>
+  <%= link_to "Add attachment", new_document_attachment_path(params[:document_type], @document.content_id) %>
+  <% if @document.attachments %>
+    <ul class="attachments">
+      <% @document.attachments.each do |attachment| %>
+          <li class="attachment">
+            <span class="title"><%= attachment.title %></span>
+            <%= link_to "edit", edit_document_attachment_path(params[:document_type], @document.content_id, attachment.content_id) %>
+          </li>
+      <% end %>
+    </ul>
+  <% end %>
+</div>
+

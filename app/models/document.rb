@@ -1,8 +1,9 @@
 class Document
   include ActiveModel::Model
   include ActiveModel::Validations
+  
+  attr_accessor :content_id, :base_path, :title, :summary, :body, :format_specific_fields, :public_updated_at, :state, :bulk_published, :publication_state, :change_note, :document_type, :attachments
 
-  attr_accessor :content_id, :base_path, :title, :summary, :body, :format_specific_fields, :public_updated_at, :state, :bulk_published, :publication_state, :change_note, :document_type
   attr_writer :change_history, :update_type
 
   validates :title, presence: true
@@ -125,6 +126,7 @@ class Document
     # and set it as the document's change note
     document.change_note = payload.details.change_history.pop["note"] if document.redrafted? && payload.details.change_history.length > 1
 
+    document.attachments = payload.details.attachments.map{|attachment|Attachment.new(attachment)} if payload.details.attachments
     # Persist the rest of the change_history on the document
     # if the document is live or redrafted
     document.change_history = payload.details.change_history.map(&:to_h) if document.published?
@@ -219,6 +221,19 @@ class Document
       publish_request.code == 200 && rummager_request.code == 200
     rescue GdsApi::HTTPErrorResponse => e
       Airbrake.notify(e)
+    end
+  end
+
+  def upload(attachment)
+    begin
+      response = SpecialistPublisher.services(:asset_api).create_asset(:file => attachment.file)
+      attachment.url = response.file_url
+      attachment.content_type = attachment.file.content_type
+      self.attachments ||= []
+      self.attachments.push(attachment)
+    rescue GdsApi::BaseError => e
+      Airbrake.notify(e)
+      false
     end
   end
 

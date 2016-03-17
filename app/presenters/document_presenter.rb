@@ -23,6 +23,7 @@ class DocumentPresenter
         body: document.body,
         metadata: metadata,
         change_history: change_history,
+        attachments: (document.attachments.map{|attachment| AttachmentPresenter.new(attachment).to_json} if document.attachments) }.delete_if{ |k,v| v.nil?
       },
       routes: [
         {
