@@ -34,19 +34,6 @@ describe CountrysideStewardshipGrant do
     }
   end
 
-  let(:non_countryside_stewardship_grant_content_item) {
-    {
-      "content_id" => SecureRandom.uuid,
-      "base_path" => "/other-documents/not-a-countryside-stewardship-grant-content-item",
-      "format" => "specialist_document",
-      "details" => {
-        "metadata" => {
-          "document_type" => "not_a_countryside_stewardship_grant",
-        },
-      },
-    }
-  }
-
   let(:countryside_stewardship_grant_org_content_items) {
     [
       {
@@ -93,14 +80,12 @@ describe CountrysideStewardshipGrant do
     }
   }
 
-  let(:fields) { %i[base_path content_id] }
+  let(:fields) { %i[base_path content_id public_updated_at title publication_state] }
 
   let(:countryside_stewardship_grants) { 10.times.map { |n| countryside_stewardship_grant_content_item(n) } }
 
-  let(:non_csg_content_item) { SecureRandom.uuid }
-
   before do
-    publishing_api_has_fields_for_document('specialist_document', countryside_stewardship_grants, fields)
+    publishing_api_has_fields_for_document(described_class.publishing_api_document_type, countryside_stewardship_grants, fields)
 
     countryside_stewardship_grants.each do |countryside_stewardship_grant|
       publishing_api_has_item(countryside_stewardship_grant)
@@ -112,14 +97,6 @@ describe CountrysideStewardshipGrant do
   describe ".all" do
     it "returns all Countryside Stewardship Grants" do
       expect(described_class.all.length).to be(countryside_stewardship_grants.length)
-    end
-
-    it "rejects any non Countryside Stewardship Grants" do
-      all_specialist_documents = [non_countryside_stewardship_grant_content_item] + countryside_stewardship_grants
-      publishing_api_has_fields_for_document('specialist_document', all_specialist_documents , fields)
-      publishing_api_has_item(non_countryside_stewardship_grant_content_item)
-
-      expect(described_class.all.map(&:content_id)).not_to include(non_csg_content_item)
     end
   end
 

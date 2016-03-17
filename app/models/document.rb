@@ -154,21 +154,17 @@ class Document
     # will request all the required fields and the map will call
     # `self.from_publishing_api` itself.
     response = self.publishing_api.get_content_items(
-      document_type: "specialist_document",
+      document_type: self.publishing_api_document_type,
       fields: [
         :base_path,
         :content_id,
+        :public_updated_at,
+        :title,
+        :publication_state,
       ]
     ).to_ostruct
 
-    # Select the ones which match the current document type
-    payloads_of_format = response.results.select { |payload| payload.base_path.starts_with?(self.finder_schema.base_path) }
-
-    # Fetch individual payloads for each `specialist_document`
-    payloads = payloads_of_format.map { |payload| publishing_api.get_content(payload.content_id).to_ostruct }
-
-    # Deserialize the payloads into real Objects and return them
-    payloads.map { |payload| self.from_publishing_api(payload) }
+    response.results
   end
 
   def self.find(content_id)

@@ -34,19 +34,6 @@ describe MaibReport do
     }
   end
 
-  let(:non_maib_report_content_item) {
-    {
-      "content_id" => SecureRandom.uuid,
-      "base_path" => "/other-reports/not-a-maib-report",
-      "format" => "specialist_document",
-      "details" => {
-        "metadata" => {
-          "document_type" => "not_an_maib_report",
-        },
-      },
-    }
-  }
-
   let(:maib_org_content_item) {
     {
       "base_path" => "/government/organisations/marine-accident-investigation-branch",
@@ -90,12 +77,12 @@ describe MaibReport do
     }
   }
 
-  let(:fields) { %i[base_path content_id] }
+  let(:fields) { %i[base_path content_id public_updated_at title publication_state] }
 
   let(:maib_reports) { 10.times.map { |n| maib_report_content_item(n) } }
 
   before do
-    publishing_api_has_fields_for_document('specialist_document', maib_reports, fields)
+    publishing_api_has_fields_for_document(described_class.publishing_api_document_type, maib_reports, fields)
 
     maib_reports.each do |maib_report|
       publishing_api_has_item(maib_report)
@@ -106,14 +93,6 @@ describe MaibReport do
 
   context ".all" do
     it "returns all MAIB Reports" do
-      expect(described_class.all.length).to be(maib_reports.length)
-    end
-
-    it "rejects any non MAIB Reports" do
-      all_specialist_documents = [non_maib_report_content_item] + maib_reports
-      publishing_api_has_fields_for_document('specialist_document', all_specialist_documents , fields)
-      publishing_api_has_item(non_maib_report_content_item)
-
       expect(described_class.all.length).to be(maib_reports.length)
     end
   end

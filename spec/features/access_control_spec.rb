@@ -2,13 +2,11 @@ require 'spec_helper'
 
 RSpec.feature "Access control", type: :feature do
 
-  before do
-    fields = [
-      :base_path,
-      :content_id,
-    ]
+  let(:fields){ [:base_path, :content_id, :public_updated_at, :title, :publication_state] }
 
-    publishing_api_has_fields_for_document('specialist_document', [], fields)
+  before do
+    publishing_api_has_fields_for_document(CmaCase.publishing_api_document_type, [], fields)
+    publishing_api_has_fields_for_document(AaibReport.publishing_api_document_type, [], fields)
     publishing_api_has_fields_for_document('manual', [], [:content_id])
   end
 

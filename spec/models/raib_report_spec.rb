@@ -34,19 +34,6 @@ describe RaibReport do
     }
   end
 
-  let(:non_raib_report_content_item) {
-    {
-      "content_id" => SecureRandom.uuid,
-      "base_path" => "/other-documents/not-a-raib-report",
-      "format" => "specialist_document",
-      "details" => {
-        "metadata" => {
-          "document_type" => "not_an_raib_report",
-        },
-      },
-    }
-  }
-
   let(:raib_org_content_item) {
     {
       "base_path" => "/government/organisations/rail-accidents-investigation-branch",
@@ -90,12 +77,12 @@ describe RaibReport do
     }
   }
 
-  let(:fields) { %i[base_path content_id] }
+  let(:fields) { %i[base_path content_id public_updated_at title publication_state] }
 
   let(:raib_reports) { 10.times.map { |n| raib_report_content_item(n) } }
 
   before do
-    publishing_api_has_fields_for_document('specialist_document', raib_reports, fields)
+    publishing_api_has_fields_for_document(described_class.publishing_api_document_type, raib_reports, fields)
 
     raib_reports.each do |raib_report|
       publishing_api_has_item(raib_report)
@@ -106,14 +93,6 @@ describe RaibReport do
 
   context ".all" do
     it "returns all RAIB Reports" do
-      expect(described_class.all.length).to be(raib_reports.length)
-    end
-
-    it "rejects any non RAIB Reports" do
-      all_specialist_documents = [non_raib_report_content_item] + raib_reports
-      publishing_api_has_fields_for_document('specialist_document', all_specialist_documents , fields)
-      publishing_api_has_item(non_raib_report_content_item)
-
       expect(described_class.all.length).to be(raib_reports.length)
     end
   end

@@ -37,19 +37,6 @@ describe EmploymentTribunalDecision do
     }
   end
 
-  let(:non_employment_tribunal_decision_content_item) {
-    {
-      "content_id" => SecureRandom.uuid,
-      "base_path" => "/other-documents/not-an-employment-tribunal-decision",
-      "format" => "specialist_document",
-      "details" => {
-        "metadata" => {
-          "document_type" => "not_an_employment_tribunal_decision",
-        },
-      },
-    }
-  }
-
   let(:employment_tribunal_decision_org_content_item) {
     {
       "base_path" => "/courts-tribunals/employment-tribunal",
@@ -94,12 +81,12 @@ describe EmploymentTribunalDecision do
     }
   }
 
-  let(:fields) { %i[base_path content_id] }
+  let(:fields) { %i[base_path content_id public_updated_at title publication_state] }
 
   let(:employment_tribunal_decisions) { 10.times.map { |n| employment_tribunal_decision_content_item(n) } }
 
   before do
-    publishing_api_has_fields_for_document('specialist_document', employment_tribunal_decisions, fields)
+    publishing_api_has_fields_for_document(described_class.publishing_api_document_type, employment_tribunal_decisions, fields)
 
     employment_tribunal_decisions.each do |decision|
       publishing_api_has_item(decision)
@@ -110,14 +97,6 @@ describe EmploymentTribunalDecision do
 
   describe ".all" do
     it "returns all Employment Tribunal Decisions" do
-      expect(described_class.all.length).to be(employment_tribunal_decisions.length)
-    end
-
-    it "rejects any non Employment Tribunal Decisions" do
-      all_specialist_documents = [non_employment_tribunal_decision_content_item] + employment_tribunal_decisions
-      publishing_api_has_fields_for_document('specialist_document', all_specialist_documents , fields)
-      publishing_api_has_item(non_employment_tribunal_decision_content_item)
-
       expect(described_class.all.length).to be(employment_tribunal_decisions.length)
     end
   end

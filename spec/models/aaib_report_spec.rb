@@ -35,19 +35,6 @@ describe AaibReport do
     }
   end
 
-  let(:non_aaib_report_content_item) {
-    {
-      "content_id" => SecureRandom.uuid,
-      "base_path" => "/other-documents/not-an-aaib-report",
-      "format" => "specialist_document",
-      "details" => {
-        "metadata" => {
-          "document_type" => "not_an_aaib_report",
-        },
-      },
-    }
-  }
-
   let(:aaib_org_content_item) {
     {
       "base_path" => "/government/organisations/air-accidents-investigation-branch",
@@ -90,12 +77,12 @@ describe AaibReport do
     }
   }
 
-  let(:fields) { %i[base_path content_id] }
+  let(:fields) { %i[base_path content_id public_updated_at title publication_state] }
 
   let(:aaib_reports) { 10.times.map { |n| aaib_report_content_item(n) } }
 
   before do
-    publishing_api_has_fields_for_document('specialist_document', aaib_reports, fields)
+    publishing_api_has_fields_for_document(described_class.publishing_api_document_type, aaib_reports, fields)
 
     aaib_reports.each do |aaib_report|
       publishing_api_has_item(aaib_report)
@@ -109,12 +96,13 @@ describe AaibReport do
       expect(described_class.all.length).to be(aaib_reports.length)
     end
 
-    it "rejects any non AAIB Reports" do
-      all_specialist_documents = [non_aaib_report_content_item] + aaib_reports
-      publishing_api_has_fields_for_document('specialist_document', all_specialist_documents , fields)
-      publishing_api_has_item(non_aaib_report_content_item)
-
-      expect(described_class.all.length).to be(aaib_reports.length)
+    it "returns AAIB with necessary info" do
+      sample_aaib_report = described_class.all.sample
+      expect(sample_aaib_report.base_path.nil?).to eq(false)
+      expect(sample_aaib_report.content_id.nil?).to eq(false)
+      expect(sample_aaib_report.title.nil?).to eq(false)
+      expect(sample_aaib_report.publication_state.nil?).to eq(false)
+      expect(sample_aaib_report.public_updated_at.nil?).to eq(false)
     end
   end
 

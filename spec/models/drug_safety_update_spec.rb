@@ -34,19 +34,6 @@ describe DrugSafetyUpdate do
     }
   end
 
-  let(:non_drug_safety_update_content_item) {
-    {
-      "content_id" => SecureRandom.uuid,
-      "base_path" => "/other-documents/not-a-drug-safety-update",
-      "format" => "specialist_document",
-      "details" => {
-        "metadata" => {
-          "document_type" => "not_a_drug_saftety_update",
-        },
-      },
-    }
-  }
-
   let(:drug_safety_update_org_content_item) {
     {
       "base_path" => "/government/organisations/medicines-and-healthcare-products-regulatory-agency",
@@ -88,12 +75,12 @@ describe DrugSafetyUpdate do
     }
   }
 
-  let(:fields) { %i[base_path content_id] }
+  let(:fields) { %i[base_path content_id public_updated_at title publication_state] }
 
   let(:drug_safety_updates) { 10.times.map { |n| drug_safety_update_content_item(n) } }
 
   before do
-    publishing_api_has_fields_for_document('specialist_document', drug_safety_updates, fields)
+    publishing_api_has_fields_for_document(described_class.publishing_api_document_type, drug_safety_updates, fields)
 
     drug_safety_updates.each do |drug_safety_update|
       publishing_api_has_item(drug_safety_update)
@@ -104,14 +91,6 @@ describe DrugSafetyUpdate do
 
   describe ".all" do
     it "returns all Drug Safety Updates" do
-      expect(described_class.all.length).to be(drug_safety_updates.length)
-    end
-
-    it "rejects any non Drug Safety Updates" do
-      all_specialist_documents = [non_drug_safety_update_content_item] + drug_safety_updates
-      publishing_api_has_fields_for_document('specialist_document', all_specialist_documents , fields)
-      publishing_api_has_item(non_drug_safety_update_content_item)
-
       expect(described_class.all.length).to be(drug_safety_updates.length)
     end
   end

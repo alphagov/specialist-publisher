@@ -37,19 +37,6 @@ describe VehicleRecallsAndFaultsAlert do
     }
   end
 
-  let(:non_vehicle_recalls_and_faults_alert_content_item) {
-    {
-      "content_id" => SecureRandom.uuid,
-      "base_path" => "/other-documents/non-vehicle-recalls-and-faults",
-      "format" => "specialist_document",
-      "details" => {
-        "metadata" => {
-          "document_type" => "non_vehicle_recalls_and_faults",
-        },
-      },
-    }
-  }
-
   let(:vehicle_recalls_and_faults_alert_org_content_item) {
     {
       "base_path" => "/vehicle-recalls-faults",
@@ -93,11 +80,11 @@ describe VehicleRecallsAndFaultsAlert do
     }
   }
 
-  let(:fields){ %i[base_path content_id] }
+  let(:fields) { %i[base_path content_id public_updated_at title publication_state] }
   let(:vehicle_recalls_and_faults){ 10.times.map { |n| vehicle_recalls_and_faults_alert_content_item(n) } }
 
   before do
-    publishing_api_has_fields_for_document('specialist_document', vehicle_recalls_and_faults, fields)
+    publishing_api_has_fields_for_document(described_class.publishing_api_document_type, vehicle_recalls_and_faults, fields)
 
     vehicle_recalls_and_faults.each do |vehicle|
       publishing_api_has_item(vehicle)
@@ -108,14 +95,6 @@ describe VehicleRecallsAndFaultsAlert do
 
   describe ".all" do
     it "returns all Vehicle Recalls and Faults" do
-      expect(described_class.all.length).to be(vehicle_recalls_and_faults.length)
-    end
-
-    it "rejects any non Vehicle Recalls and Faults" do
-      all_specialist_documents = [non_vehicle_recalls_and_faults_alert_content_item] + vehicle_recalls_and_faults
-      publishing_api_has_fields_for_document('specialist_document', all_specialist_documents , fields)
-      publishing_api_has_item(non_vehicle_recalls_and_faults_alert_content_item)
-
       expect(described_class.all.length).to be(vehicle_recalls_and_faults.length)
     end
   end

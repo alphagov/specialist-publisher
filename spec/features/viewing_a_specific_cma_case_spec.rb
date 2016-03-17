@@ -47,13 +47,10 @@ RSpec.feature "Viewing a specific case", type: :feature do
     }
   end
 
+  let(:fields){ [:base_path, :content_id, :public_updated_at, :title, :publication_state] }
+
   before do
     log_in_as_editor(:cma_editor)
-
-    fields = [
-      :base_path,
-      :content_id,
-    ]
 
     cma_cases = []
 
@@ -61,7 +58,7 @@ RSpec.feature "Viewing a specific case", type: :feature do
       cma_cases << cma_case_content_item(n)
     end
 
-    publishing_api_has_fields_for_document('specialist_document', cma_cases, fields)
+    publishing_api_has_fields_for_document(CmaCase.publishing_api_document_type, cma_cases, fields)
 
     cma_cases.each do |cma_case|
       publishing_api_has_item(cma_case)

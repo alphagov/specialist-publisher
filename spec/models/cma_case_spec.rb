@@ -38,19 +38,6 @@ describe CmaCase do
     }
   end
 
-  let(:non_cma_case_content_item) {
-    {
-      "content_id" => SecureRandom.uuid,
-      "base_path" => "/other-documents/not-a-cma-case",
-      "format" => "specialist_document",
-      "details" => {
-        "metadata" => {
-          "document_type" => "not_a_cma_case",
-        },
-      },
-    }
-  }
-
   let(:cma_org_content_item) {
     {
       "base_path" => "/government/organisations/competition-and-markets-authority",
@@ -98,12 +85,12 @@ describe CmaCase do
     }
   }
 
-  let(:fields) { %i[base_path content_id] }
+  let(:fields) { %i[base_path content_id public_updated_at title publication_state] }
 
   let(:cma_cases) { 10.times.map { |n| cma_case_content_item(n) } }
 
   before do
-    publishing_api_has_fields_for_document('specialist_document', cma_cases, fields)
+    publishing_api_has_fields_for_document(described_class.publishing_api_document_type, cma_cases, fields)
 
     cma_cases.each do |cma_case|
       publishing_api_has_item(cma_case)
@@ -114,14 +101,6 @@ describe CmaCase do
 
   context ".all" do
     it "returns all CMA Cases" do
-      expect(described_class.all.length).to be(cma_cases.length)
-    end
-
-    it "rejects any non CMA Cases" do
-      all_specialist_documents = [non_cma_case_content_item] + cma_cases
-      publishing_api_has_fields_for_document('specialist_document', all_specialist_documents , fields)
-      publishing_api_has_item(non_cma_case_content_item)
-
       expect(described_class.all.length).to be(cma_cases.length)
     end
   end

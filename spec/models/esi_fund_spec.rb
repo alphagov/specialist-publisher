@@ -35,19 +35,6 @@ describe EsiFund do
     }
   end
 
-  let(:non_esi_fund_content_item) {
-    {
-      "base_path" => "/non-esi-fund/not-an-esi-fund",
-      "content_id" => SecureRandom.uuid,
-      "format" => "specialist_document",
-      "details" => {
-        "metadata" => {
-          "document_type" => "not_an_esi_fund",
-        },
-      },
-    }
-  }
-
   let(:esi_fund_org_content_items) {
     [
       {
@@ -109,12 +96,12 @@ describe EsiFund do
     }
   }
 
-  let(:fields) { %i[base_path content_id] }
+  let(:fields) { %i[base_path content_id public_updated_at title publication_state] }
 
   let(:esi_funds) { 10.times.map { |n| esi_fund_content_item(n) } }
 
   before do
-    publishing_api_has_fields_for_document('specialist_document', esi_funds, fields)
+    publishing_api_has_fields_for_document(described_class.publishing_api_document_type, esi_funds, fields)
 
     esi_funds.each do |esi_fund|
       publishing_api_has_item(esi_fund)
@@ -125,14 +112,6 @@ describe EsiFund do
 
   context ".all" do
     it "returns all ESI Funds" do
-      expect(described_class.all.length).to be(esi_funds.length)
-    end
-
-    it "rejects any non ESI Funds" do
-      all_specialist_documents = [non_esi_fund_content_item] + esi_funds
-      publishing_api_has_fields_for_document('specialist_document', all_specialist_documents , fields)
-      publishing_api_has_item(non_esi_fund_content_item)
-
       expect(described_class.all.length).to be(esi_funds.length)
     end
   end

@@ -52,18 +52,15 @@ RSpec.feature "Editing a draft CMA case", type: :feature do
     }
   end
 
+  let(:fields){ [:base_path, :content_id, :public_updated_at, :title, :publication_state] }
+
   before do
     log_in_as_editor(:cma_editor)
 
     stub_any_publishing_api_put_content
     stub_any_publishing_api_patch_links
 
-    fields = [
-      :base_path,
-      :content_id,
-    ]
-
-    publishing_api_has_fields_for_document('specialist_document', [cma_case_content_item], fields)
+    publishing_api_has_fields_for_document(CmaCase.publishing_api_document_type, [cma_case_content_item], fields)
 
     publishing_api_has_item(cma_case_content_item)
 
