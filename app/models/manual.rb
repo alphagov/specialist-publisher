@@ -164,11 +164,12 @@ class Manual
 
   def self.content_ids
     response = self.publishing_api.get_content_items(
-      content_format: "manual",
-      fields: [
-        :content_id,
-      ]
-    ).to_ostruct.map(&:content_id)
+        document_type: "manual",
+        fields: [
+            :content_id,
+        ]
+    ).to_ostruct
+    response.results.map(&:content_id)
   end
   private_class_method :content_ids
 

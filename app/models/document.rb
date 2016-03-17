@@ -2,7 +2,7 @@ class Document
   include ActiveModel::Model
   include ActiveModel::Validations
 
-  attr_accessor :content_id, :base_path, :title, :summary, :body, :format_specific_fields, :public_updated_at, :state, :bulk_published, :publication_state, :change_note
+  attr_accessor :content_id, :base_path, :title, :summary, :body, :format_specific_fields, :public_updated_at, :state, :bulk_published, :publication_state, :change_note, :document_type
   attr_writer :change_history, :update_type
 
   validates :title, presence: true
@@ -154,21 +154,17 @@ class Document
     # will request all the required fields and the map will call
     # `self.from_publishing_api` itself.
     response = self.publishing_api.get_content_items(
-      content_format: "specialist_document",
+      document_type: self.publishing_api_document_type,
       fields: [
         :base_path,
         :content_id,
+        :public_updated_at,
+        :title,
+        :publication_state,
       ]
     ).to_ostruct
 
-    # Select the ones which match the current document type
-    payloads_of_format = response.select { |payload| payload.base_path.starts_with?(self.finder_schema.base_path) }
-
-    # Fetch individual payloads for each `specialist_document`
-    payloads = payloads_of_format.map { |payload| publishing_api.get_content(payload.content_id).to_ostruct }
-
-    # Deserialize the payloads into real Objects and return them
-    payloads.map { |payload| self.from_publishing_api(payload) }
+    response.results
   end
 
   def self.find(content_id)
@@ -184,6 +180,7 @@ class Document
   class RecordNotFound < StandardError; end
 
   def save!
+
     if self.valid?
       self.public_updated_at = Time.zone.now if self.update_type == 'major'
 
@@ -192,7 +189,7 @@ class Document
 
       begin
         item_request = publishing_api.put_content(self.content_id, presented_document.to_json)
-        links_request = publishing_api.put_links(self.content_id, presented_links.to_json)
+        links_request = publishing_api.patch_links(self.content_id, presented_links.to_json)
 
         item_request.code == 200 && links_request.code == 200
       rescue GdsApi::HTTPErrorResponse => e

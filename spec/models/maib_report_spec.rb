@@ -8,7 +8,8 @@ describe MaibReport do
       "base_path" => "/maib-reports/example-maib-report-#{n}",
       "title" => "Example MAIB Report #{n}",
       "description" => "This is the summary of example MAIB Report #{n}",
-      "format" => "specialist_document",
+      "document_type" => "maib_report",
+      "schema_name" => "specialist_document",
       "publishing_app" => "specialist-publisher",
       "rendering_app" => "specialist-frontend",
       "locale" => "en",
@@ -32,19 +33,6 @@ describe MaibReport do
       "update_type" => "major",
     }
   end
-
-  let(:non_maib_report_content_item) {
-    {
-      "content_id" => SecureRandom.uuid,
-      "base_path" => "/other-reports/not-a-maib-report",
-      "format" => "specialist_document",
-      "details" => {
-        "metadata" => {
-          "document_type" => "not_an_maib_report",
-        },
-      },
-    }
-  }
 
   let(:maib_org_content_item) {
     {
@@ -89,12 +77,12 @@ describe MaibReport do
     }
   }
 
-  let(:fields) { %i[base_path content_id] }
+  let(:fields) { %i[base_path content_id public_updated_at title publication_state] }
 
   let(:maib_reports) { 10.times.map { |n| maib_report_content_item(n) } }
 
   before do
-    publishing_api_has_fields_for_format('specialist_document', maib_reports, fields)
+    publishing_api_has_fields_for_document(described_class.publishing_api_document_type, maib_reports, fields)
 
     maib_reports.each do |maib_report|
       publishing_api_has_item(maib_report)
@@ -105,14 +93,6 @@ describe MaibReport do
 
   context ".all" do
     it "returns all MAIB Reports" do
-      expect(described_class.all.length).to be(maib_reports.length)
-    end
-
-    it "rejects any non MAIB Reports" do
-      all_specialist_documents = [non_maib_report_content_item] + maib_reports
-      publishing_api_has_fields_for_format('specialist_document', all_specialist_documents , fields)
-      publishing_api_has_item(non_maib_report_content_item)
-
       expect(described_class.all.length).to be(maib_reports.length)
     end
   end
@@ -133,7 +113,7 @@ describe MaibReport do
   describe "#save!" do
     it "saves the MAIB Report" do
       stub_any_publishing_api_put_content
-      stub_any_publishing_api_put_links
+      stub_any_publishing_api_patch_links
 
       maib_report = maib_reports[0]
 
@@ -160,7 +140,7 @@ describe MaibReport do
     it "publishes the MAIB Report" do
       stub_publishing_api_publish(maib_reports[0]["content_id"], {})
       stub_any_rummager_post
-      publishing_api_has_fields_for_format('organisation', [maib_org_content_item], [:base_path, :content_id])
+      publishing_api_has_fields_for_document('organisation', [maib_org_content_item], [:base_path, :content_id])
 
       maib_report = described_class.find(maib_reports[0]["content_id"])
       expect(maib_report.publish!).to eq(true)

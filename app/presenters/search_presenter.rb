@@ -22,9 +22,9 @@ class SearchPresenter
   end
 
   def organisation_slugs
-    response = publishing_api.get_content_items({content_format: "organisation", fields: [:content_id, :base_path]})
+    response = publishing_api.get_content_items({document_type: "organisation", fields: [:content_id, :base_path]})
 
-    orgs = response.select { |o| document.organisations.include?(o["content_id"]) }
+    orgs = response.results.select { |o| document.organisations.include?(o["content_id"]) }
     orgs.map { |o| o["base_path"].gsub("/government/organisations/", "")}.map { |o| o.gsub("/courts-tribunals/", "") }
   end
 

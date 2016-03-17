@@ -8,7 +8,8 @@ describe MedicalSafetyAlert do
       "base_path" => "/drug-device-alerts/example-medical-safety-alert-#{n}",
       "title" => "Example Medical Safety Alert #{n}",
       "description" => "This is the summary of example Medical Safety Alert #{n}",
-      "format" => "specialist_document",
+      "document_type" => "medical_safety_alert",
+      "schema_name" => "specialist_document",
       "publishing_app" => "specialist-publisher",
       "rendering_app" => "specialist-frontend",
       "locale" => "en",
@@ -34,19 +35,6 @@ describe MedicalSafetyAlert do
       "update_type" => "major",
     }
   end
-
-  let(:non_medical_safety_alert_content_item) {
-    {
-      "content_id" => SecureRandom.uuid,
-      "base_path" => "/other-documents/not-a-medical-safety-alert",
-      "format" => "specialist_document",
-      "details" => {
-        "metadata" => {
-          "document_type" => "not_an_medical_safety_alert",
-        },
-      },
-    }
-  }
 
   let(:mhra_org_content_item) {
     {
@@ -91,12 +79,12 @@ describe MedicalSafetyAlert do
     }
   }
 
-  let(:fields) { %i[base_path content_id] }
+  let(:fields) { %i[base_path content_id public_updated_at title publication_state] }
 
   let(:medical_safety_alerts) { 10.times.map { |n| medical_safety_alert_content_item(n) } }
 
   before do
-    publishing_api_has_fields_for_format('specialist_document', medical_safety_alerts, fields)
+    publishing_api_has_fields_for_document(described_class.publishing_api_document_type, medical_safety_alerts, fields)
 
     medical_safety_alerts.each do |medical_safety_alert|
       publishing_api_has_item(medical_safety_alert)
@@ -108,14 +96,6 @@ describe MedicalSafetyAlert do
   describe ".all" do
     it "returns all Medical Safety Alerts" do
       expect(described_class.all.length).to eq(medical_safety_alerts.length)
-    end
-
-    it "rejects any non Medical Safety Alerts" do
-      all_specialist_documents = [non_medical_safety_alert_content_item] + medical_safety_alerts
-      publishing_api_has_fields_for_format('specialist_document', all_specialist_documents, fields)
-      publishing_api_has_item(non_medical_safety_alert_content_item)
-
-      expect(described_class.all.length).to be(medical_safety_alerts.length)
     end
   end
 
@@ -135,7 +115,7 @@ describe MedicalSafetyAlert do
   describe "#save!" do
     it "saves the Medical Safety Alert" do
       stub_any_publishing_api_put_content
-      stub_any_publishing_api_put_links
+      stub_any_publishing_api_patch_links
 
       medical_safety_alert = medical_safety_alerts[0]
 
@@ -162,7 +142,7 @@ describe MedicalSafetyAlert do
     it "publishes the Medical Safety Alert" do
       stub_publishing_api_publish(medical_safety_alerts[0]["content_id"], {})
       stub_any_rummager_post
-      publishing_api_has_fields_for_format('organisation', [mhra_org_content_item], [:base_path, :content_id])
+      publishing_api_has_fields_for_document('organisation', [mhra_org_content_item], [:base_path, :content_id])
 
       medical_safety_alert = described_class.find(medical_safety_alerts[0]["content_id"])
       expect(medical_safety_alert.publish!).to eq(true)
