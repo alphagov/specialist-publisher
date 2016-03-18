@@ -237,6 +237,10 @@ class Document
     end
   end
 
+  def find_attachment(attachment_content_id)
+    self.attachments.find{|attachment| attachment.content_id == attachment_content_id}
+  end
+
 private
 
   def rummager

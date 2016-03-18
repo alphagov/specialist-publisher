@@ -234,4 +234,14 @@ describe CmaCase do
       expect(document.attachments.count).to equal(1)
     end
   end
+
+  describe "#find_attachment" do
+    it "finds attachment object inside the document object" do
+      document = described_class.find(cma_cases[1]["content_id"])
+      attachment_content_id = document.attachments[0].content_id
+
+      attachment = document.find_attachment(attachment_content_id)
+      expect(attachment).to eq(document.attachments[0])
+    end
+  end
 end

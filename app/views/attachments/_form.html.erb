@@ -1,0 +1,9 @@
+<%= form_for(@attachment, :url => document_attachments_path(params[:document_type], params[:document_content_id])) do |f| %>
+    <%= f.label :title %>
+    <%= f.text_field :title, class: 'form-control input-md-8' %>
+
+    <%= f.file_field :file %>
+    <div class='actions'>
+      <button type="submit" class='btn btn-success'>Save attachment</button>
+    </div>
+<% end %>

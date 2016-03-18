@@ -17,7 +17,8 @@ class AttachmentsController < ApplicationController
   end
 
   def edit
-
+    document = fetch_document
+    @attachment = document.find_attachment(params[:attachment_content_id])
   end
 
   private
