@@ -127,6 +127,9 @@ RSpec.feature "Editing a published CMA case", type: :feature do
 
     choose("cma_case_update_type_minor")
 
+    expect(page).to have_css('div.govspeak-help')
+    expect(page).to have_content('Add attachment')
+
     click_button "Save as draft"
 
     assert_publishing_api_put_content("4a656f42-35ad-4034-8c7a-08870db7fffe", request_json_includes(changed_json))
@@ -161,6 +164,9 @@ RSpec.feature "Editing a published CMA case", type: :feature do
     choose("cma_case_update_type_major")
 
     fill_in "Change note", with: "This is a change note."
+
+    expect(page).to have_css('div.govspeak-help')
+    expect(page).to have_content('Add attachment')
 
     click_button "Save as draft"
 

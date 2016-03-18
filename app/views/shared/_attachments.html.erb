@@ -1,6 +1,13 @@
-<div class="col-md-12">
+<div class="col-md-4">
+  <%= render partial: 'shared/govspeak_help' %>
   <h2>Attachments</h2>
-  <%= link_to "Add attachment", new_document_attachment_path(params[:document_type], @document.content_id) %>
+
+  <% if @document.publication_state %>
+      <%= link_to "Add attachment", new_document_attachment_path(params[:document_type], @document.content_id) %>
+  <% else %>
+      <p>To add an attachment, please save the draft first.</p>
+  <% end %>
+
   <% if @document.attachments %>
     <ul class="attachments">
       <% @document.attachments.each do |attachment| %>
@@ -12,4 +19,5 @@
     </ul>
   <% end %>
 </div>
+
 

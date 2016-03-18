@@ -7,10 +7,11 @@
     <%= render partial: "metadata_fields/#{params[:document_type].underscore}", locals: { f: f } %>
 
     <%= render partial: "shared/minor_major_update_fields", locals: { f: f, document: @document } %>
-    <%= render partial: 'shared/attachments_link' %>
 
     <div class="actions">
       <button name="save" class="btn btn-success">Save as draft</button>
     </div>
   <% end %>
 </div>
+
+<%= render partial: 'shared/attachments' %>

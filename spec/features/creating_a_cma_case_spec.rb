@@ -75,6 +75,9 @@ RSpec.feature "Creating a CMA case", type: :feature do
     fill_in "Opened date", with: "2014-01-01"
     select "Energy", from: "Market sector"
 
+    expect(page).to have_css('div.govspeak-help')
+    expect(page).to have_content('To add an attachment, please save the draft first.')
+
     click_button "Save as draft"
 
     assert_publishing_api_put_content("4a656f42-35ad-4034-8c7a-08870db7fffe", request_json_includes(cma_case_content_item))
