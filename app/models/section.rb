@@ -116,18 +116,27 @@ class Section
     section
   end
 
+  def update_manual_links
+    manual_links = publishing_api.get_links(self.manual_content_id)['links']
+    section_ids = manual_links.fetch('sections', [])
+
+    if section_ids.include?(self.content_id)
+      true
+    else
+      manual_link_request = publishing_api.patch_links(self.manual_content_id, {links: {sections: section_ids << self.content_id}})
+      manual_link_request.code == 200
+    end
+  end
+
   def save!
     if self.valid?
       presented_section = SectionPresenter.new(self).to_json
 
       presented_section_links = {links: {manual: [self.manual_content_id]}}
-
-      presented_manual_links = {links: {sections: [self.content_id]}}
       begin
         item_request = publishing_api.put_content(self.content_id, presented_section)
         section_link_request = publishing_api.patch_links(self.content_id, presented_section_links)
-        manual_link_request = publishing_api.patch_links(self.manual_content_id, presented_manual_links)
-        item_request.code == 200 && manual_link_request.code == 200 && section_link_request.code == 200
+        item_request.code == 200 && update_manual_links && section_link_request.code == 200
       rescue GdsApi::HTTPErrorResponse => e
         Airbrake.notify(e)
         false

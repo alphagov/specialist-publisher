@@ -12,25 +12,20 @@ RSpec.feature "adding a section to a manual" do
 
     def stub_json
       {
-          base_path: manual_base_path,
-          content_id: manual_content_id,
-          title: "My New Manual",
-          description: "Summary of new manual",
-          details: {
-              body: "The body of my new manual. The body of my new manual. The body of my new manual."
-          }
+        base_path: manual_base_path,
+        content_id: manual_content_id,
+        title: "My New Manual",
+        description: "Summary of new manual",
+        details: {
+        body: "The body of my new manual. The body of my new manual. The body of my new manual."
+      }
       }
     end
 
     def manual_links
       {
-          "content_id" => manual_content_id,
-          "links" => {
-              "sections" => [
-              ],
-              "organisations" => [
-              ]
-          }
+        content_id: manual_content_id,
+        links: { }
       }
     end
 
@@ -69,3 +64,4 @@ RSpec.feature "adding a section to a manual" do
     end
   end
 end
+
