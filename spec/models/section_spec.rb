@@ -13,8 +13,8 @@ RSpec.describe Section do
 
     before do
       expect(described_class).to receive(:from_publishing_api)
-        .with(content_id: content_id)
-        .and_return(section)
+                                   .with(content_id: content_id)
+                                   .and_return(section)
     end
 
     context "with content_id" do
@@ -46,7 +46,7 @@ RSpec.describe Section do
         content_id: content_id,
         title: "Section title",
         description: "Section description",
-        details: { body: "## Some body text" },
+        details: {body: "## Some body text"},
       }
     end
 
@@ -54,7 +54,7 @@ RSpec.describe Section do
 
       before do
         publishing_api_has_item(content_item)
-        publishing_api_has_links({ content_id: content_id, links: { manual: [manual_content_id] } })
+        publishing_api_has_links({content_id: content_id, links: {manual: [manual_content_id]}})
       end
 
       subject { described_class.from_publishing_api(content_id: content_id) }
@@ -81,6 +81,102 @@ RSpec.describe Section do
         expect {
           described_class.from_publishing_api(content_id: content_id)
         }.to raise_error(Section::RecordNotFound)
+      end
+    end
+  end
+
+  describe "#save!" do
+    let(:section_content_id) { SecureRandom.uuid }
+    let(:manual_content_id) { SecureRandom.uuid }
+    let(:manual_base_path) { "/guidance/manual_path" }
+
+    let(:manual) do
+      {content_id: manual_content_id,
+       base_path: manual_base_path,
+       details: {body: ""}}
+    end
+
+    let(:test_time) { "2015-12-03 16:59:13 UTC" }
+
+    before do
+      stub_publishing_api_put_content(section_content_id, {})
+      stub_publishing_api_patch_links(section_content_id, {})
+      stub_publishing_api_patch_links(manual_content_id, {})
+      publishing_api_has_item(manual)
+      publishing_api_has_links({content_id: manual_content_id, body: {}})
+      Timecop.freeze(Time.parse(test_time))
+
+    end
+
+    context "with valid input" do
+      it "should put content to publishing-api" do
+        test_params = {
+          content_id: section_content_id,
+          title: "My New section",
+          summary: "Summary of new section",
+          body: "The body of my new section.",
+          manual_content_id: manual_content_id
+        }
+
+        expected_params =
+          {
+            base_path: "/guidance/manual_path/my-new-section",
+            title: "My New section",
+            description: "Summary of new section",
+            format: "manual_section",
+            need_ids: [],
+            locale: "en",
+            public_updated_at: test_time.to_datetime.rfc3339,
+            publishing_app: "specialist-publisher",
+            rendering_app: "manuals-frontend",
+            details: {
+              body: "The body of my new section.",
+              manual: {
+                base_path: manual_base_path
+              },
+              organisations: []
+            },
+            routes: [
+              {
+                path: "/guidance/manual_path/my-new-section",
+                type: "exact"
+              }
+            ]
+          }
+
+        expected_section_links = {
+          links: {
+            manual: [manual_content_id],
+          }
+        }
+
+        expected_manual_links = {
+          links: {
+            sections: [section_content_id],
+          }
+        }
+        section = Section.new(test_params)
+        expect(section.save!).to eq(true)
+        assert_publishing_api_put_content(section.content_id, request_json_includes(expected_params), 1)
+        assert_publishing_api_patch_links(section.content_id, request_json_includes(expected_section_links))
+        assert_publishing_api_patch_links(manual_content_id, request_json_includes(expected_manual_links))
+      end
+    end
+
+    context "with invalid input" do
+      it "should NOT put content to publishing-api" do
+        test_params = {
+          content_id: section_content_id,
+          title: "",
+          summary: "",
+          body: "",
+          manual_content_id: manual_content_id
+        }
+
+        section = Section.new(test_params)
+        presented_section = SectionPresenter.new(section).to_json
+        expect(section.save!).to eq(false)
+        assert_publishing_api_put_content(section.content_id, presented_section, 0)
       end
     end
   end
