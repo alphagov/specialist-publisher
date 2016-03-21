@@ -98,6 +98,7 @@ RSpec.describe AttachmentsController, type: :controller do
 
       post :create, document_type: document_type, document_content_id: document_content_id, attachment: {file: Rack::Test::UploadedFile.new("spec/support/images/cma_case_image.jpg", "mime/type"), title: 'test attachment upload'}
 
+      expect(document.attachments.count).to eq(3)
       expect(response).to redirect_to(edit_document_path(document_type: document_type, content_id: document_content_id))
     end
   end
@@ -109,6 +110,24 @@ RSpec.describe AttachmentsController, type: :controller do
       get :edit, document_type: document_type, document_content_id: document_content_id, attachment_content_id: attachment_content_id
 
       expect(response).to render_template :edit
+    end
+  end
+
+  describe "POST update" do
+    it "render the specalist document edit page" do
+      document = CmaCase.find(document_content_id)
+      allow_any_instance_of(AttachmentsController).to receive(:fetch_document).and_return(document)
+
+      stub_any_publishing_api_put_content
+      stub_any_publishing_api_patch_links
+      request = stub_request(:post, "#{Plek.find('asset-manager')}/assets").
+        with(:body => %r{.*}).
+        to_return(:body => JSON.dump(asset_manager_response), :status => 201)
+
+      post :update, document_type: document_type, document_content_id: document_content_id, attachment_content_id: attachment_content_id, attachment: {file: Rack::Test::UploadedFile.new("spec/support/images/updated_cma_case_image.jpg", "mime/type"), title: 'updated test attachment upload'}
+
+      expect(document.attachments.count).to eq(2)
+      expect(response).to redirect_to(edit_document_path(document_type: document_type, content_id: document_content_id))
     end
   end
 end

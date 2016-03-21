@@ -229,8 +229,13 @@ class Document
       response = SpecialistPublisher.services(:asset_api).create_asset(:file => attachment.file)
       attachment.url = response.file_url
       attachment.content_type = attachment.file.content_type
-      self.attachments ||= []
-      self.attachments.push(attachment)
+
+      unless attachment.has_changed
+        self.attachments ||= []
+        self.attachments.push(attachment)
+      end
+      attachment.has_changed = false
+      attachment
     rescue GdsApi::BaseError => e
       Airbrake.notify(e)
       false

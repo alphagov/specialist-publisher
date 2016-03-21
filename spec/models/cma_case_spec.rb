@@ -220,18 +220,38 @@ describe CmaCase do
   end
 
   describe "#upload" do
-    it "uploads an attachment" do
-
+    it "uploads an new attachment" do
       request = stub_request(:post, "#{Plek.find('asset-manager')}/assets").
         with(:body => %r{.*}).
         to_return(:body => JSON.dump(asset_manager_response), :status => 201)
 
-      attachment = Attachment.new({file: Rack::Test::UploadedFile.new("spec/support/images/cma_case_image.jpg", "mime/type"), title: 'test attachment upload'})
+      attachment = Attachment.new({file: Rack::Test::UploadedFile.new("spec/support/images/cma_case_image.jpg", "image/jpg"), title: 'test attachment upload'})
       document = described_class.find(cma_cases[0]["content_id"])
 
       document.upload(attachment)
 
+      assert_requested(request)
+      expect(document.attachments.count).to eq(1)
+      expect(attachment.url).to eq("http://assets-origin.dev.gov.uk/media/56c45553759b740609000000/cma_case_image.jpg")
+      expect(attachment.content_type).to eq('image/jpg')
       expect(document.attachments.count).to equal(1)
+    end
+
+    it "edits an existing attachment" do
+      request = stub_request(:post, "#{Plek.find('asset-manager')}/assets").
+        with(:body => %r{.*}).
+        to_return(:body => JSON.dump(asset_manager_response), :status => 201)
+
+      document = described_class.find(cma_cases[1]['content_id'])
+      attachment = document.attachments[0]
+
+      attachment.update_attributes({title: "Updated attachment", file: Rack::Test::UploadedFile.new("spec/support/images/updated_cma_case_image.jpg", "image/jpg")})
+      document.upload(attachment)
+
+      assert_requested(request)
+      expect(attachment.url).to eq("http://assets-origin.dev.gov.uk/media/56c45553759b740609000000/cma_case_image.jpg")
+      expect(attachment.content_type).to eq('image/jpg')
+      expect(document.attachments.count).to eq(2)
     end
   end
 

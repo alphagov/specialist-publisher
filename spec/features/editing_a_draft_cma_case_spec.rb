@@ -191,5 +191,9 @@ RSpec.feature "Editing a draft CMA case", type: :feature do
     fill_in "Title", with: "Updated cma case image"
     page.attach_file('attachment_file', "spec/support/images/updated_cma_case_image.jpg")
 
+    click_button("Save attachment")
+
+    expect(page.status_code).to eq(200)
+    expect(page).to have_content("Editing Example CMA Case")
   end
 end
