@@ -68,7 +68,7 @@ describe Attachment do
 
       expect(attachment.file).to eq(http_file_upload)
       expect(attachment.title).to eq("updated attachment title")
-      expect(attachment.has_changed).to be(true)
+      expect(attachment.changed?).to be(true)
 
     end
   end

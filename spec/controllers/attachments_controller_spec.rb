@@ -61,43 +61,43 @@ RSpec.describe AttachmentsController, type: :controller do
   end
 
   let(:cma_case) { cma_case_content_item }
-  let(:document_type) { cma_case['document_type']}
+  let(:document_type) { 'cma-cases'}
   let(:document_content_id) { cma_case['content_id']}
   let(:attachment_content_id) { cma_case['details']['attachments'][0]['content_id']}
-  let(:file_name) { "cma_case_image.jpg" }
-  let(:asset_url) { "http://assets-origin.dev.gov.uk/media/56c45553759b740609000000/#{file_name}" }
 
+  let(:asset_id) { SecureRandom.uuid}
+  let(:file_name) { "cma_case_image.jpg" }
+  let(:file_url) { "http://assets-origin.dev.gov.uk/media/#{asset_id}/#{file_name}" }
+  let(:file_id) { "http://asset-manager.dev.gov.uk/assets/#{asset_id}" }
+
+  let(:asset_url) { "http://assets-origin.dev.gov.uk/media/#{asset_id}/#{file_name}" }
   let(:asset_manager_response) {
-    {
-      id: 'http://asset-manager.dev.gov.uk/assets/another_image_id',
-      file_url: asset_url
-    }
-  }
+       {
+            id: 'http://asset-manager.dev.gov.uk/assets/another_image_id',
+           file_url: asset_url
+       }
+   }
 
   before do
     log_in_as_gds_editor
     publishing_api_has_item(cma_case)
   end
 
-  describe "GET new" do
-    it "renders the new attachment form" do
-      get :new, document_type: document_type, document_content_id: document_content_id
-      expect(response).to render_template :new
-    end
-  end
-
   describe "POST create" do
-    it "renders the specialist document edit page" do
+    let(:attachment) { {file: Rack::Test::UploadedFile.new("spec/support/images/cma_case_image.jpg", "image/jpg"), title: 'test attachment upload'} }
+    it "redirect to the specialist document edit page" do
       document = CmaCase.find(document_content_id)
       allow_any_instance_of(AttachmentsController).to receive(:fetch_document).and_return(document)
+
       stub_any_publishing_api_put_content
       stub_any_publishing_api_patch_links
+
       request = stub_request(:post, "#{Plek.find('asset-manager')}/assets").
         with(:body => %r{.*}).
         to_return(:body => JSON.dump(asset_manager_response), :status => 201)
 
-      post :create, document_type: document_type, document_content_id: document_content_id, attachment: {file: Rack::Test::UploadedFile.new("spec/support/images/cma_case_image.jpg", "mime/type"), title: 'test attachment upload'}
-
+      post :create, document_type: document_type, document_content_id: document_content_id, attachment: attachment
+      
       expect(document.attachments.count).to eq(3)
       expect(response).to redirect_to(edit_document_path(document_type: document_type, content_id: document_content_id))
     end
@@ -106,15 +106,18 @@ RSpec.describe AttachmentsController, type: :controller do
   describe "GET edit" do
     it "renders the edit attachment form" do
       document = CmaCase.find(document_content_id)
+      attachment = document.find_attachment(attachment_content_id)
       allow_any_instance_of(AttachmentsController).to receive(:fetch_document).and_return(document)
+
       get :edit, document_type: document_type, document_content_id: document_content_id, attachment_content_id: attachment_content_id
 
+      expect(assigns(:attachment)).to eq(attachment)
       expect(response).to render_template :edit
     end
   end
 
-  describe "POST update" do
-    it "render the specalist document edit page" do
+  describe "PUT update" do
+    it "redirects to the specalist document edit page" do
       document = CmaCase.find(document_content_id)
       allow_any_instance_of(AttachmentsController).to receive(:fetch_document).and_return(document)
 

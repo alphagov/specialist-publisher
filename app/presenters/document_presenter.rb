@@ -19,12 +19,7 @@ class DocumentPresenter
       locale: "en",
       phase: document.phase,
       public_updated_at: public_updated_at,
-      details: {
-        body: document.body,
-        metadata: metadata,
-        change_history: change_history,
-        attachments: (document.attachments.map{|attachment| AttachmentPresenter.new(attachment).to_json} if document.attachments) }.delete_if{ |k,v| v.nil?
-      },
+      details: details,
       routes: [
         {
           path: document.base_path,
@@ -39,6 +34,20 @@ class DocumentPresenter
 private
 
   attr_reader :document
+
+  def details
+    {
+      body: document.body,
+      metadata: metadata,
+      change_history: change_history
+    }.tap do |details_hash|
+      details_hash[:attachments] = attachments if document.attachments
+    end
+  end
+
+  def attachments
+    document.attachments.map{|attachment| AttachmentPresenter.new(attachment).to_json}
+  end
 
   def metadata
     document.format_specific_fields.map { |f|
