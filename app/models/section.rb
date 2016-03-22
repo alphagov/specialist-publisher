@@ -128,7 +128,7 @@ class Section
     end
   end
 
-  def save!
+  def save
     if self.valid?
       presented_section = SectionPresenter.new(self).to_json
 

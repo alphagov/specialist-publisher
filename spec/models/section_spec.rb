@@ -89,7 +89,7 @@ RSpec.describe Section do
     end
   end
 
-  describe "#save!" do
+  describe "#save" do
     let(:section_content_id) { SecureRandom.uuid }
     let(:another_section_content_id) { SecureRandom.uuid }
     let(:manual_content_id) { SecureRandom.uuid }
@@ -169,7 +169,7 @@ RSpec.describe Section do
 
       it "should put content to publishing-api" do
         section = Section.new(test_params)
-        expect(section.save!).to eq(true)
+        expect(section.save).to eq(true)
         assert_publishing_api_put_content(section.content_id, request_json_includes(expected_params), 1)
         assert_publishing_api_patch_links(section.content_id, request_json_includes(expected_section_links))
         assert_publishing_api_patch_links(manual_content_id, request_json_includes(expected_manual_links))
@@ -182,7 +182,7 @@ RSpec.describe Section do
                                   }})
 
         section = Section.new(test_params)
-        expect(section.save!).to eq(true)
+        expect(section.save).to eq(true)
         assert_publishing_api_put_content(section.content_id, request_json_includes(expected_params), 1)
         assert_publishing_api_patch_links(section.content_id, request_json_includes(expected_section_links))
         assert_publishing_api_patch_links(manual_content_id, match_any_body, 0)
@@ -200,7 +200,7 @@ RSpec.describe Section do
         }
 
         section = Section.new(test_params)
-        expect(section.save!).to eq(false)
+        expect(section.save).to eq(false)
         assert_publishing_api_put_content(section.content_id, match_any_body, 0)
       end
     end

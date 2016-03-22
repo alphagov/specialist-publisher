@@ -22,17 +22,12 @@ class ManualSectionsController < ApplicationController
 
     @section = Section.new(section_data)
 
-    if @section.valid?
-      if @section.save!
-        flash[:success] = "Created #{@section.title}"
-        redirect_to manual_path(@section.manual.content_id)
-      else
-        flash.now[:danger] = "There was an error creating #{@section.title}. Please try again later."
-        render :new
-      end
+    if @section.save
+      flash[:success] = "Created #{@section.title}"
+      redirect_to manual_path(@section.manual.content_id)
     else
-      flash.now[:danger] = "Please fix the errors and try again."
-      render :new, status: 422
+      flash.now[:danger] = "There was an error creating #{@section.title}. Please try again later."
+      render :new
     end
   end
 

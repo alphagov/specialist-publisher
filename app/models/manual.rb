@@ -177,7 +177,7 @@ class Manual
   end
   private_class_method :content_ids
 
-  def save!
+  def save
     if self.valid?
       presented_manual = ManualPresenter.new(self)
 
@@ -191,11 +191,9 @@ class Manual
         false
       end
     else
-      raise RecordNotSaved
+      false
     end
   end
-
-  class RecordNotSaved < StandardError; end
 
 private
 
