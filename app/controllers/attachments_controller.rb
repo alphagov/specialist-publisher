@@ -4,10 +4,11 @@ class AttachmentsController < ApplicationController
   end
 
   def create
-    attachment = Attachment.new(params[:attachment])
+    attachment = Attachment.new(attachment_params)
     document = fetch_document
+    attachment.content_type = attachment.file.content_type
 
-    if document.upload(attachment) && document.save!
+    if upload_attachment(attachment, document)
       flash[:success] = "Attached #{attachment.title}"
       redirect_to edit_document_path(document_type, document.content_id)
     else
@@ -18,15 +19,15 @@ class AttachmentsController < ApplicationController
 
   def edit
     document = fetch_document
-    @attachment = document.find_attachment(params[:attachment_content_id])
+    @attachment = document.find_attachment(attachment_content_id)
   end
 
   def update
     document = fetch_document
-    attachment = document.find_attachment(params[:attachment_content_id])
-    attachment.update_attributes(params[:attachment])
+    attachment = document.find_attachment(attachment_content_id)
+    attachment.update_attributes(attachment_params)
 
-    if document.upload(attachment) && document.save!
+    if upload_attachment(attachment, document)
       flash[:success] = "Attachment succesfully updated"
       redirect_to edit_document_path(document_type, document.content_id)
     else
@@ -36,22 +37,27 @@ class AttachmentsController < ApplicationController
   end
 
   private
-  def document_type
-    params[:document_type]
-  end
 
   def fetch_document
-    begin
-      @document = document_klass.find(params[:document_content_id])
-    rescue Document::RecordNotFound => e
-      flash[:danger] = "Document not found"
-      redirect_to documents_path(document_type: document_type)
-
-      Airbrake.notify(e)
+    document_klass.find(params[:document_content_id]).tap do |document|
+      document.update_type = "minor"
     end
+  rescue Document::RecordNotFound => e
+    flash[:danger] = "Document not found"
+    redirect_to documents_path(document_type: document_type)
+
+    Airbrake.notify(e)
   end
 
-  def document_klass
-    current_format.klass
+  def attachment_content_id
+    params[:attachment_content_id]
+  end
+
+  def upload_attachment(attachment, document)
+    AttachmentUploader.new.upload(attachment, document)
+  end
+
+  def attachment_params
+    params.require(:attachment).permit(:title, :file)
   end
 end

@@ -126,7 +126,7 @@ class Document
     # and set it as the document's change note
     document.change_note = payload.details.change_history.pop["note"] if document.redrafted? && payload.details.change_history.length > 1
 
-    document.attachments = payload.details.attachments.map{|attachment|Attachment.new(attachment)} if payload.details.attachments
+    document.attachments = attachments(payload) if payload.details.attachments
     # Persist the rest of the change_history on the document
     # if the document is live or redrafted
     document.change_history = payload.details.change_history.map(&:to_h) if document.published?
@@ -224,29 +224,15 @@ class Document
     end
   end
 
-  def upload(attachment)
-    begin
-      response = SpecialistPublisher.services(:asset_api).create_asset(:file => attachment.file)
-      attachment.url = response.file_url
-      attachment.content_type = attachment.file.content_type
-
-      unless attachment.has_changed
-        self.attachments ||= []
-        self.attachments.push(attachment)
-      end
-      attachment.has_changed = false
-      attachment
-    rescue GdsApi::BaseError => e
-      Airbrake.notify(e)
-      false
-    end
-  end
-
   def find_attachment(attachment_content_id)
-    self.attachments.find{|attachment| attachment.content_id == attachment_content_id}
+    self.attachments.detect { |attachment| attachment.content_id == attachment_content_id }
   end
 
 private
+
+  def self.attachments(payload)
+    payload.details.attachments.map{|attachment|Attachment.new(attachment)}
+  end
 
   def rummager
     SpecialistPublisher.services(:rummager)
