@@ -1,5 +1,6 @@
 class AttachmentsController < ApplicationController
   def new
+    @document = fetch_document
     @attachment = Attachment.new
   end
 
@@ -18,8 +19,8 @@ class AttachmentsController < ApplicationController
   end
 
   def edit
-    document = fetch_document
-    @attachment = document.find_attachment(attachment_content_id)
+    @document = fetch_document
+    @attachment = @document.find_attachment(attachment_content_id)
   end
 
   def update

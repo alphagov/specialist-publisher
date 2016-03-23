@@ -12,8 +12,7 @@ class AttachmentUploader
     false
   end
 
-  private
-
+private
   attr_reader :publisher
 
   def add_attachment(document, attachment)

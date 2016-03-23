@@ -15,7 +15,7 @@ class AttachmentPresenter
     }
   end
 
-  private
+private
   def updated_at
     Time.now.to_datetime.rfc3339
   end
