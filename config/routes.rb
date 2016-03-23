@@ -18,7 +18,7 @@ Rails.application.routes.draw do
   end
 
   resources :documents, path: "/:document_type", param: :content_id, except: :destroy do
-    resources :attachments, only: [:new, :create, :edit, :update]
+    resources :attachments, param: :attachment_content_id, only: [:new, :create, :edit, :update]
 
     post :withdraw, on: :member
     post :publish, on: :member

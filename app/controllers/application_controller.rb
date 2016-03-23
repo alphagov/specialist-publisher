@@ -12,6 +12,10 @@ class ApplicationController < ActionController::Base
 
 private
 
+  def document_type
+    params[:document_type]
+  end
+
   def current_format
     document_types.fetch(params.fetch(:document_type, nil), nil)
   end
@@ -74,6 +78,10 @@ private
         )
       }
     end.reduce({}, :merge)
+  end
+
+  def document_klass
+    current_format.klass
   end
 
 end

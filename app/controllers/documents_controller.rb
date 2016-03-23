@@ -78,14 +78,6 @@ class DocumentsController <  ApplicationController
 
 private
 
-  def document_type
-    params[:document_type]
-  end
-
-  def document_klass
-    current_format.klass
-  end
-
   def document_error_messages
     document_errors = @document.errors.messages
     errors = content_tag(:p,
@@ -101,14 +93,12 @@ private
   end
 
   def fetch_document
-    begin
-      @document = document_klass.find(params[:content_id])
+    @document = document_klass.find(params[:content_id])
     rescue Document::RecordNotFound => e
       flash[:danger] = "Document not found"
       redirect_to documents_path(document_type: document_type)
 
       Airbrake.notify(e)
-    end
   end
 
   def filtered_params(params_of_document)
