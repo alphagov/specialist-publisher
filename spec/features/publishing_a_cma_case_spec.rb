@@ -69,6 +69,7 @@ RSpec.feature "Publishing a CMA case", type: :feature do
 
     stub_publishing_api_publish(content_id, {})
     stub_any_rummager_post
+    email_alert_api_accepts_alert
   end
 
   scenario "from the index" do
@@ -82,11 +83,11 @@ RSpec.feature "Publishing a CMA case", type: :feature do
     expect(page).to have_content("Example CMA Case")
 
     click_button "Publish"
-
     expect(page.status_code).to eq(200)
     expect(page).to have_content("Published Example CMA Case")
 
     assert_publishing_api_publish(content_id)
     assert_rummager_posted_item(indexable_attributes)
+    assert_email_alert_sent()
   end
 end

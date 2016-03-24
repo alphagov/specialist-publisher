@@ -142,6 +142,10 @@ describe EmploymentTribunalDecision do
   end
 
   describe "#publish!" do
+    before do
+      email_alert_api_accepts_alert
+    end
+
     it "publishes the Employment Tribunal Decision" do
       stub_publishing_api_publish(employment_tribunal_decisions[0]["content_id"], {})
       stub_any_rummager_post
