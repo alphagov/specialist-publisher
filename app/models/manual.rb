@@ -54,9 +54,7 @@ class Manual
     }
   end
 
-  attr_reader :organisation_content_ids
-
-  attr_writer :organisation_content_ids
+  attr_accessor :organisation_content_ids
 
   OrganisationStruct = Struct.new(:content_id, :base_path, :title)
 
@@ -133,11 +131,11 @@ class Manual
   def self.from_publishing_api(payload)
     manual = self.new(
       content_id: payload["content_id"],
-title: payload["title"],
-summary: payload["description"],
-body: payload["details"]["body"],
-publication_state: payload["publication_state"],
-public_updated_at: payload["public_updated_at"],
+      title: payload["title"],
+      summary: payload["description"],
+      body: payload["details"]["body"],
+      publication_state: payload["publication_state"],
+      public_updated_at: payload["public_updated_at"],
     )
 
     manual.base_path = payload["base_path"]

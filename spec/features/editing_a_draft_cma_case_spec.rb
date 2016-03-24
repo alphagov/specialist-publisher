@@ -106,9 +106,9 @@ RSpec.feature "Editing a draft CMA case", type: :feature do
     @changed_json.delete("publication_state")
     Timecop.freeze(Time.parse("2015-12-03T16:59:13+00:00"))
 
-    request = stub_request(:post, "#{Plek.find('asset-manager')}/assets").
-      with(body: %r{.*}).
-      to_return(body: JSON.dump(asset_manager_response), status: 201)
+    stub_request(:post, "#{Plek.find('asset-manager')}/assets")
+      .with(body: %r{.*})
+      .to_return(body: JSON.dump(asset_manager_response), status: 201)
   end
 
   after do

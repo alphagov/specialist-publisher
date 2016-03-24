@@ -80,16 +80,19 @@ private
 
   def document_error_messages
     document_errors = @document.errors.messages
-    errors = content_tag(:p,
+    heading = content_tag(
+      :p,
       %{
         There #{document_errors.length > 1 ? 'were' : 'was'} the following
         #{document_errors.length > 1 ? 'errors' : 'error'} with your
         #{current_format.title.singularize}:
       }
-                        )
-    errors += content_tag :ul do
+    )
+    errors = content_tag :ul do
       @document.errors.full_messages.map { |e| content_tag(:li, e) }.join('').html_safe
     end
+
+    heading + errors
   end
 
   def fetch_document

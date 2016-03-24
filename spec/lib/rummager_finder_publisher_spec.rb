@@ -60,7 +60,8 @@ describe RummagerFinderPublisher do
             ])
 
         expect(rummager).to receive(:add_document)
-          .with("edition", "/second-finder", {
+          .with("edition",
+            "/second-finder",
             title: "second finder",
             description: "",
             link: "/second-finder",
@@ -69,8 +70,7 @@ describe RummagerFinderPublisher do
             specialist_sectors: [
               "competition/mergers",
               "competition/markets",
-            ],
-          })
+            ])
 
         RummagerFinderPublisher.new(schemas, logger: test_logger).call
       end

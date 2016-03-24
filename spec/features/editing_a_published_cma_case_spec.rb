@@ -126,9 +126,9 @@ RSpec.feature "Editing a published CMA case", type: :feature do
 
     publishing_api_has_item(published_cma_case_content_item)
 
-    request = stub_request(:post, "#{Plek.find('asset-manager')}/assets").
-      with(body: %r{.*}).
-      to_return(body: JSON.dump(asset_manager_response), status: 201)
+    stub_request(:post, "#{Plek.find('asset-manager')}/assets")
+      .with(body: %r{.*})
+      .to_return(body: JSON.dump(asset_manager_response), status: 201)
 
     Timecop.freeze(Time.parse("2015-12-03 16:59:13 UTC"))
   end

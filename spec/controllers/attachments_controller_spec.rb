@@ -92,9 +92,9 @@ RSpec.describe AttachmentsController, type: :controller do
       stub_any_publishing_api_put_content
       stub_any_publishing_api_patch_links
 
-      request = stub_request(:post, "#{Plek.find('asset-manager')}/assets").
-        with(body: %r{.*}).
-        to_return(body: JSON.dump(asset_manager_response), status: 201)
+      stub_request(:post, "#{Plek.find('asset-manager')}/assets")
+        .with(body: %r{.*})
+        .to_return(body: JSON.dump(asset_manager_response), status: 201)
 
       post :create, document_type: document_type, document_content_id: document_content_id, attachment: attachment
 
@@ -123,9 +123,9 @@ RSpec.describe AttachmentsController, type: :controller do
 
       stub_any_publishing_api_put_content
       stub_any_publishing_api_patch_links
-      request = stub_request(:post, "#{Plek.find('asset-manager')}/assets").
-        with(body: %r{.*}).
-        to_return(body: JSON.dump(asset_manager_response), status: 201)
+      stub_request(:post, "#{Plek.find('asset-manager')}/assets")
+        .with(body: %r{.*})
+        .to_return(body: JSON.dump(asset_manager_response), status: 201)
 
       post :update, document_type: document_type, document_content_id: document_content_id, attachment_content_id: attachment_content_id, attachment: { file: Rack::Test::UploadedFile.new("spec/support/images/updated_cma_case_image.jpg", "mime/type"), title: 'updated test attachment upload' }
 

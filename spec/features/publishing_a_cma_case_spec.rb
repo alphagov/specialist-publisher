@@ -42,7 +42,6 @@ RSpec.feature "Publishing a CMA case", type: :feature do
       "redirects" => [],
       "need_ids" => [],
       "update_type" => "major",
-      "phase" => "live",
       "publication_state" => "live",
       "links" => {
         "organisations" => ["957eb4ec-089b-4f71-ba2a-dc69ac8919ea"]

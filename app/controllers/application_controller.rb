@@ -67,7 +67,7 @@ private
       "Vehicle Recalls and Faults Alert" => VehicleRecallsAndFaultsAlert,
     }
 
-    data.map do |k, v|
+    data.map { |k, v|
       {
         k.downcase.parameterize.pluralize => FormatStruct.new(
           v,
@@ -77,7 +77,7 @@ private
           v.organisations,
         )
       }
-    end.reduce({}, :merge)
+    }.reduce({}, :merge)
   end
 
   def document_klass

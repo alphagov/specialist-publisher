@@ -1,4 +1,4 @@
-class FinderLinksPresenter < Struct.new(:file)
+FinderLinksPresenter = Struct.new(:file) do
   def to_json
     {
       content_id: file.fetch("content_id"),

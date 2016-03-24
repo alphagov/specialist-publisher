@@ -10,7 +10,7 @@ class DocumentLinksPresenter
         organisations: document.organisations
       },
     }
-    end
+  end
 
 private
 

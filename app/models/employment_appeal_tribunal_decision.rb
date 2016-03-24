@@ -12,7 +12,7 @@ class EmploymentAppealTribunalDecision < Document
     :tribunal_decision_sub_categories
   ]
 
-  attr_accessor *FORMAT_SPECIFIC_FIELDS
+  attr_accessor(*FORMAT_SPECIFIC_FIELDS)
 
   def initialize(params = {})
     super(params, FORMAT_SPECIFIC_FIELDS)

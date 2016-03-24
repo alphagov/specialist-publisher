@@ -14,7 +14,7 @@ class CmaCase < Document
     :outcome_type
   ]
 
-  attr_accessor *FORMAT_SPECIFIC_FIELDS
+  attr_accessor(*FORMAT_SPECIFIC_FIELDS)
 
   def initialize(params = {})
     super(params, FORMAT_SPECIFIC_FIELDS)

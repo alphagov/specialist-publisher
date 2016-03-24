@@ -1,4 +1,4 @@
-class FinderContentItemPresenter < Struct.new(:file, :timestamp)
+FinderContentItemPresenter = Struct.new(:file, :timestamp) do
   def to_json
     {
       base_path: base_path,

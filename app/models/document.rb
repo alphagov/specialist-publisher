@@ -107,11 +107,11 @@ class Document
   def self.from_publishing_api(payload)
     document = self.new(
       content_id: payload.content_id,
-title: payload.title,
-summary: payload.description,
-body: payload.details.body,
-publication_state: payload.publication_state,
-public_updated_at: payload.public_updated_at
+      title: payload.title,
+      summary: payload.description,
+      body: payload.details.body,
+      publication_state: payload.publication_state,
+      public_updated_at: payload.public_updated_at
     )
 
     document.base_path = payload.base_path

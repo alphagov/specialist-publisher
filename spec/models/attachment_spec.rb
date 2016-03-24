@@ -3,14 +3,17 @@ require 'spec_helper'
 describe Attachment do
   describe "#new" do
     let(:attachment) {
-      Attachment.new(file: ActionDispatch::Http::UploadedFile.new(tempfile: "spec/support/images/cma_case_image.jpg", filename: File.basename("spec/support/images/cma_case_image.jpg"), type: "image/jpeg"),
-       title: 'test attachment')
+      Attachment.new(
+        title: 'test attachment',
+        file: ActionDispatch::Http::UploadedFile.new(
+          tempfile: "spec/support/images/cma_case_image.jpg",
+          filename: File.basename("spec/support/images/cma_case_image.jpg"),
+          type: "image/jpeg"
+        ),
+      )
     }
 
     it "should set content_id and file attributes with data from attachments new form" do
-      attachment = Attachment.new(file: ActionDispatch::Http::UploadedFile.new(tempfile: "spec/support/images/cma_case_image.jpg", filename: File.basename("spec/support/images/cma_case_image.jpg"), type: "image/jpeg"),
-        title: 'test attachment')
-
       expect(attachment.content_id).to be_truthy
       expect(attachment.file.content_type).to eq("image/jpeg")
       expect(attachment.file.tempfile).to eq("spec/support/images/cma_case_image.jpg")
@@ -22,12 +25,14 @@ describe Attachment do
 
     it "should set content_id, title, url, created_at and updated_at with data from publishing-api" do
       content_id = SecureRandom.uuid
-      attachment = Attachment.new(title: 'test attachment',
+      attachment = Attachment.new(
+        title: 'test attachment',
         content_id: content_id,
         url: "/path/to/file/in/asset/manager",
         content_type: 'image/jpg',
         created_at: "2015-12-03T16:59:13+00:00",
-        updated_at: "2015-12-03T16:59:13+00:00")
+        updated_at: "2015-12-03T16:59:13+00:00",
+      )
       expect(attachment.content_id).to eq(content_id)
       expect(attachment.url).to eq("/path/to/file/in/asset/manager")
       expect(attachment.content_type).to eq("image/jpg")
@@ -41,16 +46,22 @@ describe Attachment do
     let(:content_id) { SecureRandom.uuid }
 
     let(:attachment) {
-      Attachment.new(title: 'test attachment',
+      Attachment.new(
+        title: 'test attachment',
         content_id: content_id,
         url: "/path/to/file/in/asset/manager",
         content_type: 'image/jpg',
         created_at: "2015-12-03T16:59:13+00:00",
-        updated_at: "2015-12-03T16:59:13+00:00")
+        updated_at: "2015-12-03T16:59:13+00:00",
+      )
     }
 
     let(:http_file_upload) {
-      ActionDispatch::Http::UploadedFile.new(tempfile: "spec/support/images/updated_cma_case_image.jpg", filename: File.basename("spec/support/images/updated_cma_case_image.jpg"), type: "image/jpeg")
+      ActionDispatch::Http::UploadedFile.new(
+        tempfile: "spec/support/images/updated_cma_case_image.jpg",
+        filename: File.basename("spec/support/images/updated_cma_case_image.jpg"),
+        type: "image/jpeg"
+      )
     }
 
     it "should update the title, file and has_changed attributes" do
