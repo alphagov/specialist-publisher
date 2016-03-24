@@ -45,6 +45,7 @@ group :development, :test do
   gem 'capybara-webkit', '1.7.1'
   gem 'timecop', '0.8.0'
   gem 'govuk-content-schema-test-helpers', '1.4.0'
+  gem 'govuk-lint'
 end
 
 group :test do
