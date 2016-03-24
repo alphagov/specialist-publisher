@@ -11,7 +11,7 @@ require "rspec/rails"
 require "fixtures/factories"
 
 require "webmock/rspec"
-WebMock.disable_net_connect!(:allow_localhost => true)
+WebMock.disable_net_connect!(allow_localhost: true)
 
 # Requires supporting ruby files with custom matchers and macros, etc,
 # in spec/support/ and its subdirectories.
@@ -56,7 +56,7 @@ RSpec.configure do |config|
   end
 
   config.include Capybara::DSL, type: :feature
-  config.include(Capybara::Webkit::RspecMatchers, :type => :feature)
+  config.include(Capybara::Webkit::RspecMatchers, type: :feature)
   config.include(GdsApi::TestHelpers::PublishingApiV2)
   config.include(GdsApi::TestHelpers::Rummager)
 

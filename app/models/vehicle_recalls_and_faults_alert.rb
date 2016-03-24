@@ -26,7 +26,7 @@ class VehicleRecallsAndFaultsAlert < Document
     "vehicle_recalls_and_faults_alert"
   end
 
-  private
+private
 
   def build_dates
     return unless build_start_date.present? && build_end_date.present?

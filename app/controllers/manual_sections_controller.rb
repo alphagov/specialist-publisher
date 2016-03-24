@@ -32,6 +32,5 @@ class ManualSectionsController < ApplicationController
   end
 
   def edit
-
   end
 end

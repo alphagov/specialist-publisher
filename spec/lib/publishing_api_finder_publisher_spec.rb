@@ -3,7 +3,6 @@ require "publishing_api_finder_publisher"
 
 describe PublishingApiFinderPublisher do
   describe "#call" do
-
     def make_file(base_path, overrides = {})
       underscore_name = base_path.sub("/", "")
       name = underscore_name.humanize
@@ -65,25 +64,25 @@ describe PublishingApiFinderPublisher do
         expect(publishing_api).to receive(:put_content)
           .with(finders[0][:file]["content_id"], be_valid_against_schema("finder"))
         expect(publishing_api).to receive(:patch_links)
-         .with(finders[0][:file]["content_id"], anything)
+          .with(finders[0][:file]["content_id"], anything)
         expect(publishing_api).to receive(:publish)
           .with(finders[0][:file]["content_id"], "major")
 
         # This should be validated against an email-signup schema if one gets created
         expect(publishing_api).to receive(:put_content)
-         .with(finders[0][:file]["signup_content_id"], anything)
+          .with(finders[0][:file]["signup_content_id"], anything)
         expect(publishing_api).to receive(:patch_links)
           .with(finders[0][:file]["signup_content_id"], anything)
         expect(publishing_api).to receive(:publish)
-         .with(finders[0][:file]["signup_content_id"], "major")
+          .with(finders[0][:file]["signup_content_id"], "major")
 
 
         expect(publishing_api).to receive(:put_content)
-         .with(finders[1][:file]["content_id"], be_valid_against_schema("finder"))
+          .with(finders[1][:file]["content_id"], be_valid_against_schema("finder"))
         expect(publishing_api).to receive(:patch_links)
           .with(finders[1][:file]["content_id"], anything)
         expect(publishing_api).to receive(:publish)
-         .with(finders[1][:file]["content_id"], "major")
+          .with(finders[1][:file]["content_id"], "major")
 
         PublishingApiFinderPublisher.new(finders, logger: test_logger).call
       end
@@ -108,7 +107,7 @@ describe PublishingApiFinderPublisher do
         expect(publishing_api).to receive(:put_content)
           .with(finders[0][:file]["content_id"], be_valid_against_schema("finder"))
         expect(publishing_api).to receive(:patch_links)
-         .with(finders[0][:file]["content_id"], anything)
+          .with(finders[0][:file]["content_id"], anything)
         expect(publishing_api).to receive(:publish)
           .with(finders[0][:file]["content_id"], "major")
 
@@ -135,7 +134,7 @@ describe PublishingApiFinderPublisher do
         expect(publishing_api).to receive(:put_content)
           .with(content_id, be_valid_against_schema("finder"))
         expect(publishing_api).to receive(:patch_links)
-         .with(content_id, anything)
+          .with(content_id, anything)
         expect(publishing_api).to receive(:publish)
           .with(content_id, "major")
 
@@ -169,7 +168,7 @@ describe PublishingApiFinderPublisher do
           expect(publishing_api).to receive(:put_content)
             .with(content_id, be_valid_against_schema("finder"))
           expect(publishing_api).to receive(:patch_links)
-           .with(content_id, anything)
+            .with(content_id, anything)
           expect(publishing_api).to receive(:publish)
             .with(content_id, "major")
 
@@ -182,7 +181,7 @@ describe PublishingApiFinderPublisher do
           expect(publishing_api).not_to receive(:put_content)
             .with(content_id, be_valid_against_schema("finder"))
           expect(publishing_api).not_to receive(:patch_links)
-           .with(content_id, anything)
+            .with(content_id, anything)
           expect(publishing_api).not_to receive(:publish)
             .with(content_id, "major")
 

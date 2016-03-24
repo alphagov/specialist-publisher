@@ -55,10 +55,9 @@ RSpec.describe Section do
     end
 
     context "given a section exists" do
-
       before do
         publishing_api_has_item(content_item)
-        publishing_api_has_links({content_id: content_id, links: {manual: [manual_content_id]}})
+        publishing_api_has_links(content_id: content_id, links: { manual: [manual_content_id] })
       end
 
       subject { described_class.from_publishing_api(content_id: content_id) }

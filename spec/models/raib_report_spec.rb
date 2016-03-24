@@ -1,7 +1,6 @@
 require 'spec_helper'
 
 describe RaibReport do
-
   def raib_report_content_item(n)
     {
       "content_id" => SecureRandom.uuid,

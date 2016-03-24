@@ -20,13 +20,13 @@ gem 'govuk_admin_template', '~> 3.4.0'
 gem "govuk_frontend_toolkit", "0.44.0"
 
 if ENV["GOVSPEAK_DEV"]
-  gem "govspeak", :path => "../govspeak"
+  gem "govspeak", path: "../govspeak"
 else
   gem "govspeak", "3.4.0"
 end
 
 if ENV["API_DEV"]
-  gem "gds-api-adapters", :path => "../gds-api-adapters"
+  gem "gds-api-adapters", path: "../gds-api-adapters"
 else
   gem "gds-api-adapters", "30.0.0"
 end

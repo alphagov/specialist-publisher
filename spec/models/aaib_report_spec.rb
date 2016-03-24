@@ -1,7 +1,6 @@
 require 'spec_helper'
 
 describe AaibReport do
-
   def aaib_report_content_item(n)
     {
       "content_id" => SecureRandom.uuid,
@@ -121,7 +120,6 @@ describe AaibReport do
 
   describe "#save!" do
     it "saves the AAIB Report" do
-
       stub_any_publishing_api_put_content
       stub_any_publishing_api_patch_links
 

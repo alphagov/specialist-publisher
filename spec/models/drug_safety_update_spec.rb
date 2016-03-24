@@ -1,7 +1,6 @@
 require 'spec_helper'
 
 describe DrugSafetyUpdate do
-
   def drug_safety_update_content_item(n)
     {
       "content_id" => SecureRandom.uuid,

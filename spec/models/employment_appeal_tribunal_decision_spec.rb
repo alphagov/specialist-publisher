@@ -1,7 +1,6 @@
 require 'spec_helper'
 
 describe EmploymentAppealTribunalDecision do
-
   def employment_appeal_tribunal_decision_content_item(n)
     {
       "content_id" => SecureRandom.uuid,
@@ -115,7 +114,7 @@ describe EmploymentAppealTribunalDecision do
       expect(employment_appeal_tribunal_decision.tribunal_decision_categories).to       eq(employment_appeal_tribunal_decisions[0]["details"]["metadata"]["tribunal_decision_categories"])
       expect(employment_appeal_tribunal_decision.tribunal_decision_decision_date).to    eq(employment_appeal_tribunal_decisions[0]["details"]["metadata"]["tribunal_decision_decision_date"])
       expect(employment_appeal_tribunal_decision.tribunal_decision_landmark).to         eq(employment_appeal_tribunal_decisions[0]["details"]["metadata"]["tribunal_decision_landmark"])
-      expect(employment_appeal_tribunal_decision.tribunal_decision_sub_categories).to  eq(employment_appeal_tribunal_decisions[0]["details"]["metadata"]["tribunal_decision_sub_categories"])
+      expect(employment_appeal_tribunal_decision.tribunal_decision_sub_categories).to eq(employment_appeal_tribunal_decisions[0]["details"]["metadata"]["tribunal_decision_sub_categories"])
     end
   end
 

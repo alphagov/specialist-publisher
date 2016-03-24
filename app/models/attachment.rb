@@ -4,7 +4,7 @@ class Attachment < Document
   attr_accessor :title, :file, :content_type, :url, :content_id, :created_at, :updated_at
   attr_writer :changed
 
-  def initialize(params={})
+  def initialize(params = {})
     @title = params[:title]
     @file = params[:file]
     @content_type = params[:content_type]

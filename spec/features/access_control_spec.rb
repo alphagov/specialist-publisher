@@ -1,8 +1,7 @@
 require 'spec_helper'
 
 RSpec.feature "Access control", type: :feature do
-
-  let(:fields){ [:base_path, :content_id, :public_updated_at, :title, :publication_state] }
+  let(:fields) { [:base_path, :content_id, :public_updated_at, :title, :publication_state] }
 
   before do
     publishing_api_has_fields_for_document(CmaCase.publishing_api_document_type, [], fields)

@@ -1,7 +1,6 @@
 require 'spec_helper'
 
 describe VehicleRecallsAndFaultsAlert do
-
   def vehicle_recalls_and_faults_alert_content_item(n)
     {
       "content_id" => SecureRandom.uuid,
@@ -81,7 +80,7 @@ describe VehicleRecallsAndFaultsAlert do
   }
 
   let(:fields) { %i[base_path content_id public_updated_at title publication_state] }
-  let(:vehicle_recalls_and_faults){ 10.times.map { |n| vehicle_recalls_and_faults_alert_content_item(n) } }
+  let(:vehicle_recalls_and_faults) { 10.times.map { |n| vehicle_recalls_and_faults_alert_content_item(n) } }
 
   before do
     publishing_api_has_fields_for_document(described_class.publishing_api_document_type, vehicle_recalls_and_faults, fields)

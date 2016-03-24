@@ -1,7 +1,6 @@
 require "rails_helper"
 
 describe TaxTribunalDecision do
-
   def tax_tribunal_decision_content_item(n)
     {
       "content_id" => SecureRandom.uuid,

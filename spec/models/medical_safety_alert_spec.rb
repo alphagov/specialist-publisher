@@ -1,7 +1,6 @@
 require 'spec_helper'
 
 describe MedicalSafetyAlert do
-
   def medical_safety_alert_content_item(n)
     {
       "content_id" => SecureRandom.uuid,
@@ -151,5 +150,4 @@ describe MedicalSafetyAlert do
       assert_rummager_posted_item(indexable_attributes)
     end
   end
-
 end

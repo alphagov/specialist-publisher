@@ -1,7 +1,6 @@
 require 'spec_helper'
 
 describe MaibReport do
-
   def maib_report_content_item(n)
     {
       "content_id" => SecureRandom.uuid,

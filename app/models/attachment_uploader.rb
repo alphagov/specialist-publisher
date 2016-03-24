@@ -13,6 +13,7 @@ class AttachmentUploader
   end
 
 private
+
   attr_reader :publisher
 
   def add_attachment(document, attachment)
@@ -25,7 +26,7 @@ private
   end
 
   def response(file)
-    asset_api.create_asset(:file => file)
+    asset_api.create_asset(file: file)
   end
 
   def asset_api

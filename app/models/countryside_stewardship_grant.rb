@@ -1,5 +1,4 @@
 class CountrysideStewardshipGrant < Document
-
   FORMAT_SPECIFIC_FIELDS = %i(
     grant_type
     land_use

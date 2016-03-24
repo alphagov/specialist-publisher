@@ -1,5 +1,4 @@
 class FinderSignupLinksPresenter < Struct.new(:file)
-
   def to_json
     {
       content_id: file.fetch("signup_content_id"),
@@ -19,5 +18,4 @@ private
   def related
     [file.fetch("content_id")]
   end
-
 end

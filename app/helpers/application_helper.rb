@@ -1,5 +1,4 @@
 module ApplicationHelper
-
   def facet_options(form, facet)
     form.object.facet_options(facet)
   end
@@ -16,12 +15,11 @@ module ApplicationHelper
     state = document.publication_state
 
     if document.draft?
-     classes = "label label-primary"
+      classes = "label label-primary"
     else
-     classes = "label label-default"
+      classes = "label label-default"
     end
 
     content_tag(:span, state, class: classes).html_safe
   end
-
 end

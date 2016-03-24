@@ -45,25 +45,17 @@ class Section
     @public_updated_at = Time.parse(timestamp.to_s) unless timestamp.nil?
   end
 
-  def manual_content_id
-    @manual_content_id
-  end
+  attr_reader :manual_content_id
 
-  def manual_content_id=(manual_content_id)
-    @manual_content_id = manual_content_id
-  end
+  attr_writer :manual_content_id
 
   def manual
     @manual ||= Manual.find(content_id: @manual_content_id)
   end
 
-  def organisation_content_ids
-    @organisation_content_ids
-  end
+  attr_reader :organisation_content_ids
 
-  def organisation_content_ids=(organisation_content_ids)
-    @organisation_content_ids = organisation_content_ids
-  end
+  attr_writer :organisation_content_ids
 
   OrganisationStruct = Struct.new(:content_id, :base_path, :title)
 
@@ -95,15 +87,13 @@ class Section
     )
 
     section = self.new(
-      {
-        content_id: payload["content_id"],
-        title: payload["title"],
-        summary: payload["description"],
-        body: payload["details"]["body"],
-        publication_state: payload["publication_state"],
-        public_updated_at: payload["public_updated_at"],
-        manual_content_id: payload["links"]["manual"].first
-      }
+      content_id: payload["content_id"],
+title: payload["title"],
+summary: payload["description"],
+body: payload["details"]["body"],
+publication_state: payload["publication_state"],
+public_updated_at: payload["public_updated_at"],
+manual_content_id: payload["links"]["manual"].first
     )
 
     section.base_path = payload["base_path"]

@@ -1,5 +1,4 @@
 class DrugSafetyUpdate < Document
-
   FORMAT_SPECIFIC_FIELDS = [
     :therapeutic_area,
     :first_published_at,

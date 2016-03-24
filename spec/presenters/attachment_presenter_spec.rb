@@ -1,14 +1,12 @@
 require 'rails_helper'
 
 describe AttachmentPresenter do
-  let(:content_id) { SecureRandom.uuid}
+  let(:content_id) { SecureRandom.uuid }
   let(:attachment) {
-    Attachment.new({
-      url: 'path/to/file/in/asset/manger',
+    Attachment.new(url: 'path/to/file/in/asset/manger',
       content_type: 'application/jpeg',
       title: 'test specialist document attachment',
-      content_id: content_id
-    })
+      content_id: content_id)
   }
 
   let(:attachment_presenter) {
@@ -34,6 +32,5 @@ describe AttachmentPresenter do
       expect(presented_data[:created_at]).to eq("2015-12-03T16:59:13+00:00")
       expect(presented_data[:updated_at]).to eq("2015-12-03T16:59:13+00:00")
     end
-
   end
 end

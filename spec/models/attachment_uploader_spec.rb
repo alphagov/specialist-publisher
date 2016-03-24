@@ -36,27 +36,27 @@ RSpec.describe AttachmentUploader do
       "update_type" => "major",
     }
   end
-  
+
   let(:cma_cases) { 2.times.map { |n| cma_case_content_item(n) } }
 
   before do
     cma_cases[1]["details"].merge!(
       "attachments" => [
         {
-          "content_id"=> "77f2d40e-3853-451f-9ca3-a747e8402e34",
+          "content_id" => "77f2d40e-3853-451f-9ca3-a747e8402e34",
           "url" => "https://assets.digital.cabinet-office.gov.uk/media/513a0efbed915d425e000002/asylum-support-image.jpg",
-          "content_type"=> "application/jpeg",
-          "title"=> "asylum report image title",
-          "created_at"=> "2015-12-18T10:12:26+00:00",
-          "updated_at"=> "2015-12-18T10:12:26+00:00"
+          "content_type" => "application/jpeg",
+          "title" => "asylum report image title",
+          "created_at" => "2015-12-18T10:12:26+00:00",
+          "updated_at" => "2015-12-18T10:12:26+00:00"
         },
         {
-          "content_id"=> "ec3f6901-4156-4720-b4e5-f04c0b152141",
-          "url"=> "https://assets.digital.cabinet-office.gov.uk/media/513a0efbed915d425e000002/asylum-support-pdf.pdf",
-          "content_type"=> "application/pdf",
-          "title"=> "asylum report pdf title",
-          "created_at"=> "2015-12-18T10:12:26+00:00",
-          "updated_at"=> "2015-12-18T10:12:26+00:00"
+          "content_id" => "ec3f6901-4156-4720-b4e5-f04c0b152141",
+          "url" => "https://assets.digital.cabinet-office.gov.uk/media/513a0efbed915d425e000002/asylum-support-pdf.pdf",
+          "content_type" => "application/pdf",
+          "title" => "asylum report pdf title",
+          "created_at" => "2015-12-18T10:12:26+00:00",
+          "updated_at" => "2015-12-18T10:12:26+00:00"
         }
       ]
     )
@@ -75,7 +75,7 @@ RSpec.describe AttachmentUploader do
 
     let(:service) { double("service", create_asset: double("file", file_url: url)) }
     let(:publisher) { double("publisher", services: service) }
-    
+
     let(:attachment) { Attachment.new(changed: false) }
     let(:document) { CmaCase.find(cma_cases[0]["content_id"]) }
 

@@ -15,5 +15,4 @@ class User
   def gds_editor?
     permissions.include?('gds_editor')
   end
-
 end

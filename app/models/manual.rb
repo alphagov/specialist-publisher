@@ -44,13 +44,9 @@ class Manual
     @public_updated_at = Time.parse(timestamp.to_s) unless timestamp.nil?
   end
 
-  def section_content_ids
-    @section_content_ids
-  end
+  attr_reader :section_content_ids
 
-  def section_content_ids=(section_content_ids)
-    @section_content_ids = section_content_ids
-  end
+  attr_writer :section_content_ids
 
   def sections
     @sections ||= @section_content_ids.map { |content_id|
@@ -58,13 +54,9 @@ class Manual
     }
   end
 
-  def organisation_content_ids
-    @organisation_content_ids
-  end
+  attr_reader :organisation_content_ids
 
-  def organisation_content_ids=(organisation_content_ids)
-    @organisation_content_ids = organisation_content_ids
-  end
+  attr_writer :organisation_content_ids
 
   OrganisationStruct = Struct.new(:content_id, :base_path, :title)
 
@@ -140,14 +132,12 @@ class Manual
 
   def self.from_publishing_api(payload)
     manual = self.new(
-      {
-        content_id: payload["content_id"],
-        title: payload["title"],
-        summary: payload["description"],
-        body: payload["details"]["body"],
-        publication_state: payload["publication_state"],
-        public_updated_at: payload["public_updated_at"],
-      }
+      content_id: payload["content_id"],
+title: payload["title"],
+summary: payload["description"],
+body: payload["details"]["body"],
+publication_state: payload["publication_state"],
+public_updated_at: payload["public_updated_at"],
     )
 
     manual.base_path = payload["base_path"]
@@ -168,10 +158,10 @@ class Manual
 
   def self.content_ids
     response = self.publishing_api.get_content_items(
-        document_type: "manual",
-        fields: [
-            :content_id,
-        ]
+      document_type: "manual",
+      fields: [
+          :content_id,
+      ]
     ).to_ostruct
     response.results.map(&:content_id)
   end
@@ -204,5 +194,4 @@ private
   def self.publishing_api
     SpecialistPublisher.services(:publishing_api)
   end
-
 end

@@ -1,7 +1,6 @@
 require 'spec_helper'
 
 describe CountrysideStewardshipGrant do
-
   def countryside_stewardship_grant_content_item(n)
     {
       "content_id" => SecureRandom.uuid,
@@ -76,7 +75,7 @@ describe CountrysideStewardshipGrant do
       "link" => "/countryside-stewardship-grants/example-countryside-stewardship-grant-0",
       "indexable_content" => "## Header" + ("\r\n\r\nThis is the long body of an example Countryside Stewardship Grant" * 10),
       "public_timestamp" => "2015-11-16T11:53:30+00:00",
-      "organisations" => ["natural-england","department-for-environment-food-rural-affairs","forestry-commission"],
+      "organisations" => ["natural-england", "department-for-environment-food-rural-affairs", "forestry-commission"],
     }
   }
 

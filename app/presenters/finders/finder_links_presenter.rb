@@ -1,5 +1,4 @@
 class FinderLinksPresenter < Struct.new(:file)
-
   def to_json
     {
       content_id: file.fetch("content_id"),
@@ -24,5 +23,4 @@ private
   def email_alert_signup
     [file.fetch("signup_content_id", nil)].compact
   end
-
 end

@@ -1,10 +1,10 @@
 module AuthenticationControllerHelpers
   def log_in_as(user)
     request.env['warden'] = double(:auth,
-      :authenticate! => true,
-      :authenticated? => true,
-      :user => user
-    )
+      authenticate!: true,
+      authenticated?: true,
+      user: user
+                                  )
   end
 
   def log_in_as_gds_editor

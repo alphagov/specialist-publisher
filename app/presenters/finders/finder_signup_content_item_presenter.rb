@@ -26,7 +26,7 @@ private
   end
 
   def base_path
-    "#{schema.fetch("base_path")}/email-signup"
+    "#{schema.fetch('base_path')}/email-signup"
   end
 
   def description
