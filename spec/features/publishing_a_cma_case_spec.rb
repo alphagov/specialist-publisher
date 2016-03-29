@@ -59,10 +59,17 @@ RSpec.feature "Publishing a CMA case", type: :feature do
 
   let(:fields) { [:base_path, :content_id, :public_updated_at, :title, :publication_state] }
 
+  def minor_update_item
+    cma_case_content_item.merge({
+                                  "title" => "Minor Update Case",
+                                  "update_type" => "minor"
+                                })
+  end
+
   before do
     log_in_as_editor(:cma_editor)
 
-    publishing_api_has_fields_for_document(CmaCase.publishing_api_document_type, [cma_case], fields)
+    publishing_api_has_fields_for_document(CmaCase.publishing_api_document_type, [cma_case, minor_update_item], fields)
     publishing_api_has_fields_for_document('organisation', [cma_org_content_item], [:base_path, :content_id])
 
     publishing_api_has_item(cma_case)
@@ -73,6 +80,8 @@ RSpec.feature "Publishing a CMA case", type: :feature do
   end
 
   scenario "from the index" do
+    publishing_api_has_item(cma_case_content_item)
+
     visit "/cma-cases"
 
     expect(page.status_code).to eq(200)
@@ -89,5 +98,26 @@ RSpec.feature "Publishing a CMA case", type: :feature do
     assert_publishing_api_publish(content_id)
     assert_rummager_posted_item(indexable_attributes)
     assert_email_alert_sent()
+  end
+
+  scenario "alerts should not be sent when update type is minor" do
+    publishing_api_has_item(minor_update_item)
+
+    visit "/cma-cases"
+
+    expect(page.status_code).to eq(200)
+
+    click_link "Minor Update Case"
+
+    expect(page.status_code).to eq(200)
+    expect(page).to have_content("Minor Update Case")
+
+    click_button "Publish"
+    expect(page.status_code).to eq(200)
+    expect(page).to have_content("Published Minor Update Case")
+
+    assert_publishing_api_publish(content_id)
+
+    assert_not_requested(:post, Plek.current.find('email-alert-api') + "/notifications")
   end
 end

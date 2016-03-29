@@ -214,7 +214,15 @@ class Document
         base_path,
         indexable_document.to_json,
       )
-      email_alert_api.send_alert({})
+
+      if self.update_type == "major"
+        email_alert_api.send_alert(
+          {
+            "tags" => {},
+            "links" => [self.content_id],
+            "document_type" => self.publishing_api_document_type
+          })
+      end
 
       publish_request.code == 200 && rummager_request.code == 200
     rescue GdsApi::HTTPErrorResponse => e
