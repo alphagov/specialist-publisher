@@ -8,7 +8,7 @@ class Manual
   validates :summary, presence: true
   validates :body, safe_html: true
 
-  def initialize(params)
+  def initialize(params = {})
     @content_id = params.fetch(:content_id, SecureRandom.uuid)
     @title = params.fetch(:title, nil)
     @summary = params.fetch(:summary, nil)
@@ -16,6 +16,10 @@ class Manual
     @publication_state = params.fetch(:publication_state, nil)
     self.updated_at = params.fetch(:updated_at, nil)
     self.public_updated_at = params.fetch(:public_updated_at, nil)
+  end
+
+  def base_path
+    @base_path ||= "/guidance/#{title.parameterize}"
   end
 
   %w{draft live redrafted}.each do |state|
@@ -172,6 +176,24 @@ class Manual
     response.results.map(&:content_id)
   end
   private_class_method :content_ids
+
+  def save
+    if self.valid?
+      presented_manual = ManualPresenter.new(self)
+
+      begin
+        item_request = publishing_api.put_content(self.content_id, presented_manual.to_json)
+
+        item_request.code == 200
+      rescue GdsApi::HTTPErrorResponse => e
+        Airbrake.notify(e)
+
+        false
+      end
+    else
+      false
+    end
+  end
 
 private
 

@@ -8,7 +8,7 @@ class Section
   validates :title, presence: true
   validates :body, presence: true, safe_html: true
 
-  def initialize(params)
+  def initialize(params={})
     @content_id = params.fetch(:content_id, SecureRandom.uuid)
     @title = params.fetch(:title, nil)
     @summary = params.fetch(:summary, nil)
@@ -17,6 +17,10 @@ class Section
     self.manual_content_id = params.fetch(:manual_content_id)
     self.updated_at = params.fetch(:updated_at, nil)
     self.public_updated_at = params.fetch(:public_updated_at, nil)
+  end
+
+  def base_path
+    @base_path ||= "#{manual.base_path}/#{title.parameterize}"
   end
 
   %w{draft live redrafted}.each do |state|
@@ -112,7 +116,38 @@ class Section
     section
   end
 
-private
+  def update_manual_links
+    manual_links = publishing_api.get_links(self.manual_content_id)['links']
+    section_ids = manual_links.fetch('sections', [])
+
+    if section_ids.include?(self.content_id)
+      true
+    else
+      manual_link_request = publishing_api.patch_links(self.manual_content_id, {links: {sections: section_ids << self.content_id}})
+      manual_link_request.code == 200
+    end
+  end
+
+  def save
+    if self.valid?
+      presented_section = SectionPresenter.new(self).to_json
+
+      presented_section_links = {links: {manual: [self.manual_content_id]}}
+      begin
+        item_request = publishing_api.put_content(self.content_id, presented_section)
+        section_link_request = publishing_api.patch_links(self.content_id, presented_section_links)
+        item_request.code == 200 && update_manual_links && section_link_request.code == 200
+      rescue GdsApi::HTTPErrorResponse => e
+        Airbrake.notify(e)
+        false
+      end
+    else
+      false
+    end
+  end
+
+
+  private
 
   def publishing_api
     self.class.publishing_api
@@ -122,5 +157,6 @@ private
     SpecialistPublisher.services(:publishing_api)
   end
 
-  class RecordNotFound < StandardError; end
+  class RecordNotFound < StandardError;
+  end
 end

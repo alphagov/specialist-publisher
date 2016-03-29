@@ -1,5 +1,6 @@
 //= require jquery
 //= require select2
+//= require length_counter
 
 jQuery(function($) {
   $(".select2").select2({
@@ -15,4 +16,8 @@ jQuery(function($) {
   $('.js-update-type-minor').click(function() {
     $('.js-change-note').hide();
   });
+
+  $(".js-length-counter").each(function(){
+    new GOVUK.LengthCounter({$el:$(this)});
+  })
 });
