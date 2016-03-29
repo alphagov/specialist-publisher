@@ -84,7 +84,13 @@ RSpec.describe AttachmentsController, type: :controller do
   end
 
   describe "POST create" do
-    let(:attachment) { { file: Rack::Test::UploadedFile.new("spec/support/images/cma_case_image.jpg", "image/jpg"), title: 'test attachment upload' } }
+    let(:attachment) {
+      {
+        file: Rack::Test::UploadedFile.new("spec/support/images/cma_case_image.jpg", "image/jpg"),
+        title: 'test attachment upload'
+      }
+    }
+
     it "redirect to the specialist document edit page" do
       document = CmaCase.find(document_content_id)
       allow_any_instance_of(AttachmentsController).to receive(:fetch_document).and_return(document)

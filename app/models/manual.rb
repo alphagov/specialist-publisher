@@ -44,9 +44,7 @@ class Manual
     @public_updated_at = Time.parse(timestamp.to_s) unless timestamp.nil?
   end
 
-  attr_reader :section_content_ids
-
-  attr_writer :section_content_ids
+  attr_accessor :section_content_ids
 
   def sections
     @sections ||= @section_content_ids.map { |content_id|

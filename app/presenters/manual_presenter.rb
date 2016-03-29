@@ -31,7 +31,7 @@ class ManualPresenter
     }
   end
 
-  private
+private
+
   attr_reader :manual
 end
-

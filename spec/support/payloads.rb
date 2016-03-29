@@ -1,5 +1,5 @@
 module Payloads
-  def self.manual_content_item(attr={})
+  def self.manual_content_item(attr = {})
     {
       "base_path" => "/guidance/a-manual",
       "content_id" => "b1dc075f-d946-4bcb-a5eb-941f8c8188cf",
@@ -72,7 +72,7 @@ module Payloads
     }.merge(attr)
   end
 
-  def self.manual_links(attr={})
+  def self.manual_links(attr = {})
     {
       "content_id" => "b1dc075f-d946-4bcb-a5eb-941f8c8188cf",
       "links" => {
@@ -188,5 +188,4 @@ module Payloads
       }
     ]
   end
-
 end

@@ -6,7 +6,7 @@ RSpec.feature "Viewing a Manual and its Sections", type: :feature do
     let(:manual_links) { Payloads.manual_links }
     let(:section_content_items) { Payloads.section_content_items }
     let(:section_links) { Payloads.section_links }
-    
+
     before do
       log_in_as_editor(:gds_editor)
 

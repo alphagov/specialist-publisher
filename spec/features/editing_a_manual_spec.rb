@@ -1,8 +1,7 @@
 require 'spec_helper'
 
 RSpec.feature 'editing a manual' do
-
-  let(:manual_content_item) { Payloads.manual_content_item({"title" => "Example manual"}) }
+  let(:manual_content_item) { Payloads.manual_content_item("title" => "Example manual") }
   let(:manual_links) { Payloads.manual_links }
   let(:section_content_items) { Payloads.section_content_items }
   let(:section_links) { Payloads.section_links }
@@ -33,9 +32,9 @@ RSpec.feature 'editing a manual' do
 
     expect(page.status_code).to eq(200)
 
-    fill_in('Title', :with => 'Edited title')
-    fill_in('Summary', :with => 'Edited summary')
-    fill_in('Body', :with => 'Edited body')
+    fill_in('Title', with: 'Edited title')
+    fill_in('Summary', with: 'Edited summary')
+    fill_in('Body', with: 'Edited body')
 
     click_button 'Save as draft'
 
@@ -44,4 +43,3 @@ RSpec.feature 'editing a manual' do
     expect(page).to have_content('Edited title')
   end
 end
-

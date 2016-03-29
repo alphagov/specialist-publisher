@@ -25,7 +25,7 @@ RSpec.feature "adding a section to a manual" do
     def manual_links
       {
         content_id: manual_content_id,
-        links: { }
+        links: {}
       }
     end
 
@@ -64,4 +64,3 @@ RSpec.feature "adding a section to a manual" do
     end
   end
 end
-

@@ -70,12 +70,11 @@ RSpec.feature "Creating a Manual", type: :feature do
 
       click_button "Save as draft"
 
-      assert_publishing_api_put_content(test_content_id, request_json_includes({"base_path" => test_base_path}))
-      assert_publishing_api_put_content(test_content_id, request_json_includes({"routes" => [{"path" => test_base_path, "type" => "exact"}]}))
+      assert_publishing_api_put_content(test_content_id, request_json_includes("base_path" => test_base_path))
+      assert_publishing_api_put_content(test_content_id, request_json_includes("routes" => [{ "path" => test_base_path, "type" => "exact" }]))
 
       expect(page.status_code).to eq(200)
       expect(page).to have_content("Summary of new manual")
     end
   end
 end
-
