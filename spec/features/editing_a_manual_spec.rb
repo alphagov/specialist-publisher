@@ -11,7 +11,7 @@ RSpec.feature 'editing a manual' do
     publishing_api_has_fields_for_document("manual", [manual_content_item], [:content_id])
     publishing_api_has_fields_for_document("manual_section", section_content_items.map { |section| { content_id: section["content_id"] } }, [:content_id])
     stub_publishing_api_put_content(manual_content_item["content_id"], {})
-
+    stub_publishing_api_patch_links(manual_content_item["content_id"], {})
     content_items = [manual_content_item] + section_content_items
 
     content_items.each do |payload|
@@ -22,6 +22,13 @@ RSpec.feature 'editing a manual' do
 
     links.each do |link_set|
       publishing_api_has_links(link_set)
+      link_set['links']['organisations'].each do |organisation|
+        organisation = {
+          content_id: organisation,
+          base_path: "/government/organisations/#{organisation}"
+        }
+        publishing_api_has_item(organisation)
+      end
     end
   end
 
