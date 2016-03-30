@@ -1,5 +1,4 @@
 class ManualLinksPresenter
-
   def initialize(manual)
     @manual = manual
   end
@@ -13,8 +12,7 @@ class ManualLinksPresenter
     }
   end
 
-  private
+private
 
   attr_reader :manual
-
 end

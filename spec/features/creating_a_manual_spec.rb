@@ -43,6 +43,12 @@ RSpec.feature "Creating a Manual", type: :feature do
       publishing_api_has_item(stub_json)
       publishing_api_has_links(manual_links)
 
+      organisation = {
+        content_id: manual_links['links']['organisations'][0],
+        base_path: "/government/organisations/"
+      }
+      publishing_api_has_item(organisation)
+
       allow(SecureRandom).to receive(:uuid).and_return(stub_json[:content_id])
     end
 
@@ -70,7 +76,6 @@ RSpec.feature "Creating a Manual", type: :feature do
       fill_in "Body", with: "The body of my new manual. The body of my new manual. The body of my new manual."
 
       click_button "Save as draft"
-
 
       assert_publishing_api_put_content(
         test_content_id,

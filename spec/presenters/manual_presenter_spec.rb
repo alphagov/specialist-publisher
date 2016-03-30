@@ -2,12 +2,10 @@ require 'rails_helper'
 
 describe ManualPresenter do
   let(:manual) {
-    Manual.new({
-      body: 'test body content for manual',
+    Manual.new(body: 'test body content for manual',
       summary: 'test manual summary',
       title: 'test manual title',
-      content_id: SecureRandom.uuid
-    })
+      content_id: SecureRandom.uuid)
   }
 
   let(:content_id) { manual.content_id }
@@ -31,7 +29,5 @@ describe ManualPresenter do
       expect(presented_data[:public_updated_at]).to eq("2015-12-03T16:59:13+00:00")
       expect(presented_data[:description]).to eq('test manual summary')
     end
-
   end
 end
-

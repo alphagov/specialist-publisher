@@ -208,6 +208,10 @@ RSpec.feature "Viewing a Manual", type: :feature do
 
       links.each do |link_set|
         publishing_api_has_links(link_set)
+        link_set['links']['organisations'].each do |organisation|
+          organisation = { content_id: organisation, base_path: "/government/organisations/#{organisation}" }
+          publishing_api_has_item(organisation)
+        end
       end
     end
 

@@ -2,13 +2,11 @@ require 'rails_helper'
 
 describe ManualLinksPresenter do
   let(:manual) {
-    Manual.new({
-      body: 'test body content for manual',
+    Manual.new(body: 'test body content for manual',
       summary: 'test manual summary',
       title: 'test manual title',
       content_id: SecureRandom.uuid,
-      organisation_content_ids: organisation_content_id
-    })
+      organisation_content_ids: organisation_content_id)
   }
 
   let(:content_id) { manual.content_id }
