@@ -60,10 +60,10 @@ RSpec.feature "Publishing a CMA case", type: :feature do
   let(:fields) { [:base_path, :content_id, :public_updated_at, :title, :publication_state] }
 
   def minor_update_item
-    cma_case.merge({
-                     "title" => "Minor Update Case",
-                     "update_type" => "minor"
-                   })
+    cma_case.merge(
+      "title" => "Minor Update Case",
+      "update_type" => "minor"
+    )
   end
 
   before do
@@ -97,7 +97,7 @@ RSpec.feature "Publishing a CMA case", type: :feature do
 
     assert_publishing_api_publish(content_id)
     assert_rummager_posted_item(indexable_attributes)
-    assert_email_alert_sent()
+    assert_email_alert_sent
   end
 
   scenario "alerts should not be sent when update type is minor" do

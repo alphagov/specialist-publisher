@@ -3,7 +3,6 @@ require 'spec_helper'
 describe EmailAlertPresenter do
   let(:document) { Payloads.cma_case_content_item }
   describe "#to_json" do
-
     before do
       publishing_api_has_item(document)
     end

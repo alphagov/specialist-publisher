@@ -1,5 +1,4 @@
 class EmailAlertPresenter
-
   attr_reader :document
 
   def initialize(document)
@@ -28,7 +27,7 @@ class EmailAlertPresenter
     )
   end
 
-  private
+private
 
   def view_renderer
     ActionView::Base.new("app/views")
@@ -47,5 +46,4 @@ class EmailAlertPresenter
       formats: ["html"],
     )
   end
-
 end
