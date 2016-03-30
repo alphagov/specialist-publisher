@@ -8,10 +8,10 @@ class EmailAlertPresenter
   def to_json
     {
       subject: document.title + " updated",
-      body: header + body + footer,
+      body: body,
       links: { topics: [document.content_id] },
       document_type: document.publishing_api_document_type,
-    }
+    }.merge(extra_options)
   end
 
   def body
@@ -28,6 +28,13 @@ class EmailAlertPresenter
   end
 
 private
+
+  def extra_options
+    {
+      header: header,
+      footer: footer,
+    }.reject { |_k, v| v.nil? }
+  end
 
   def view_renderer
     ActionView::Base.new("app/views")

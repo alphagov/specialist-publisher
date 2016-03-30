@@ -17,6 +17,8 @@ describe EmailAlertPresenter do
       expect(presented_data[:body]).to include(document["title"])
       expect(presented_data[:links]).to eq(topics: [document["content_id"]])
       expect(presented_data[:document_type]).to eq("cma_case")
+      expect(presented_data[:footer]).to include("SUBSCRIBER_PREFERENCES_URL")
+      expect(presented_data[:header]).to include("govuk-email-header")
     end
   end
 end
