@@ -9,7 +9,7 @@ class EmailAlertPresenter
     {
       subject: document.title + " updated",
       body: header + body + footer,
-      links: [document.content_id],
+      links: { topics: [document.content_id] },
       document_type: document.publishing_api_document_type,
     }
   end

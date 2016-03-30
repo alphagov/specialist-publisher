@@ -15,7 +15,7 @@ describe EmailAlertPresenter do
       expect(presented_data[:subject]).to include(document["title"])
       expect(presented_data[:body]).to include(document["description"])
       expect(presented_data[:body]).to include(document["title"])
-      expect(presented_data[:links]).to eq([document["content_id"]])
+      expect(presented_data[:links]).to eq(topics: [document["content_id"]])
       expect(presented_data[:document_type]).to eq("cma_case")
     end
   end
