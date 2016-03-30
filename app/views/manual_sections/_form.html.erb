@@ -1,6 +1,6 @@
 <div class="row">
   <div class="col-md-8">
-    <%= form_for section, url: manual_sections_path do |f| %>
+    <%= form_for section, url: url, method: method do |f| %>
       <%= render partial: "shared/form_errors", locals: { object: section } %>
       <%= f.label :title %>
       <%= f.text_field :title, class: 'form-control' %>
