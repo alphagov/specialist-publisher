@@ -17,10 +17,7 @@ class ManualSectionsController < ApplicationController
   end
 
   def create
-    section_data = params["section"]
-    section_data["manual_content_id"] = params["manual_content_id"]
-
-    @section = Section.new(section_data)
+    @section = Section.new(section_params.merge(manual_content_id: params[:manual_content_id]))
 
     if @section.save
       flash[:success] = "Created #{@section.title}"
@@ -37,16 +34,19 @@ class ManualSectionsController < ApplicationController
 
   def update
     @section = Section.find(content_id: params[:content_id], manual_content_id: params[:manual_content_id])
-    params[:section].each do |k, v|
-      @section.public_send(:"#{k}=", v)
-    end
 
-    if @section.save
+    if @section.update_attributes(section_params)
       flash[:success] = "#{@section.title} has been updated"
       redirect_to manual_section_path(@section.manual.content_id, @section.content_id)
     else
       flash.now[:danger] = "There was an error updating #{@section.title}. Please try again later."
       render :edit
     end
+  end
+
+private
+
+  def section_params
+    params.require(:section).permit(:title, :summary, :body)
   end
 end

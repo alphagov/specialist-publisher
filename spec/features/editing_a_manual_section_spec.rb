@@ -30,7 +30,7 @@ RSpec.feature "editing a manual section" do
       click_link 'Edit section'
 
       expect(page.status_code).to eq(200)
-      
+
       fill_in "Title", with: "My updated first section"
 
       fill_in "Summary", with: "Updated summary of first section"

@@ -117,6 +117,13 @@ class Section
     end
   end
 
+  def update_attributes(new_attributes)
+    new_attributes.each do |attribute, value|
+      public_send(:"#{attribute}=", value)
+    end
+    save
+  end
+
   def save
     if self.valid?
       presented_section = SectionPresenter.new(self).to_json
