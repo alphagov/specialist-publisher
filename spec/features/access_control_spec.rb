@@ -68,12 +68,17 @@ RSpec.feature "Access control", type: :feature do
 
     before do
       publishing_api_has_item(manual_content_item_1)
-      publishing_api_has_links(manual_links_1)
-
       publishing_api_has_item(manual_content_item_2)
-      publishing_api_has_links(manual_links_2)
 
       publishing_api_has_fields_for_document('manual', [manual_content_item_1, manual_content_item_2], [:content_id])
+
+      [manual_links_1, manual_links_2].each do |link_set|
+        publishing_api_has_links(link_set)
+        link_set['links']['organisations'].each do |organisation|
+          organisation = { content_id: organisation, base_path: "/government/organisations/#{organisation}", title: 'Government Digital Service' }
+          publishing_api_has_item(organisation)
+        end
+      end
     end
 
     context 'as a GDS editor' do
