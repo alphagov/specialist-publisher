@@ -80,23 +80,6 @@ module Payloads
       "description" => "A manual description",
       "details" => {
         "body" => "A manual body",
-        "child_section_groups" => [
-          {
-            "title" => "Contents",
-            "child_sections" => [
-              {
-                "title" => "First section",
-                "description" => "This is a manual's first section",
-                "base_path" => "/guidance/a-manual/first-section"
-              },
-              {
-                "title" => "Second section",
-                "description" => "This is a manual's second section",
-                "base_path" => "/guidance/a-manual/second-section"
-              },
-            ]
-          }
-        ],
         "change_notes" => [
           {
             "base_path" => "/guidance/a-manual/first-section",
@@ -110,13 +93,6 @@ module Payloads
             "change_note" => "New section added.",
             "published_at" => "2015-12-23T14:38:51+00:00"
           },
-        ],
-        "organisations" => [
-          {
-            "title" => "Goverment Digital Service",
-            "abbreviation" => "GDS",
-            "web_url" => "https://www.gov.uk/government/organisations/government-digital-service"
-          }
         ]
       },
       "format" => "manual",
@@ -158,7 +134,7 @@ module Payloads
           "af07d5a5-df63-4ddc-9383-6a666845ebe9"
         ]
       }
-    }.merge(attr)
+    }.deep_merge(attr)
   end
 
   def self.section_content_items
