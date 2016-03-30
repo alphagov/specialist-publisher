@@ -1,7 +1,6 @@
 require 'spec_helper'
 
 describe EmploymentTribunalDecision do
-
   def employment_tribunal_decision_content_item(n)
     {
       "content_id" => SecureRandom.uuid,

@@ -1,7 +1,6 @@
 require 'spec_helper'
 
 RSpec.feature "Viewing a Manual", type: :feature do
-
   context 'as a GDS editor' do
     def manual_content_item
       {
@@ -202,7 +201,7 @@ RSpec.feature "Viewing a Manual", type: :feature do
       content_items = [manual_content_item] + section_content_items
 
       content_items.each do |payload|
-       publishing_api_has_item(payload)
+        publishing_api_has_item(payload)
       end
 
       links = [manual_links] + section_links
@@ -426,7 +425,7 @@ RSpec.feature "Viewing a Manual", type: :feature do
       content_items = [manual_content_item] + section_content_items
 
       content_items.each do |payload|
-       publishing_api_has_item(payload)
+        publishing_api_has_item(payload)
       end
 
       links = [manual_links] + section_links

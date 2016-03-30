@@ -37,7 +37,7 @@ class AttachmentsController < ApplicationController
     end
   end
 
-  private
+private
 
   def fetch_document
     document_klass.find(params[:document_content_id]).tap do |document|

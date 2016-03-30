@@ -1,5 +1,4 @@
 class AttachmentPresenter
-
   def initialize(attachment)
     @attachment = attachment
   end
@@ -16,6 +15,7 @@ class AttachmentPresenter
   end
 
 private
+
   def updated_at
     Time.now.to_datetime.rfc3339
   end

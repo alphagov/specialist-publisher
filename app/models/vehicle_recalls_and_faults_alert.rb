@@ -16,7 +16,7 @@ class VehicleRecallsAndFaultsAlert < Document
     :build_end_date,
   ]
 
-  attr_accessor *FORMAT_SPECIFIC_FIELDS
+  attr_accessor(*FORMAT_SPECIFIC_FIELDS)
 
   def initialize(params = {})
     super(params, FORMAT_SPECIFIC_FIELDS)
@@ -26,7 +26,7 @@ class VehicleRecallsAndFaultsAlert < Document
     "vehicle_recalls_and_faults_alert"
   end
 
-  private
+private
 
   def build_dates
     return unless build_start_date.present? && build_end_date.present?

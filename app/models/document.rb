@@ -1,7 +1,7 @@
 class Document
   include ActiveModel::Model
   include ActiveModel::Validations
-  
+
   attr_accessor :content_id, :base_path, :title, :summary, :body, :format_specific_fields, :public_updated_at, :state, :bulk_published, :publication_state, :change_note, :document_type, :attachments
 
   attr_writer :change_history, :update_type
@@ -106,14 +106,12 @@ class Document
 
   def self.from_publishing_api(payload)
     document = self.new(
-      {
-        content_id: payload.content_id,
-        title: payload.title,
-        summary: payload.description,
-        body: payload.details.body,
-        publication_state: payload.publication_state,
-        public_updated_at: payload.public_updated_at
-      }
+      content_id: payload.content_id,
+      title: payload.title,
+      summary: payload.description,
+      body: payload.details.body,
+      publication_state: payload.publication_state,
+      public_updated_at: payload.public_updated_at
     )
 
     document.base_path = payload.base_path
@@ -182,7 +180,6 @@ class Document
   class RecordNotFound < StandardError; end
 
   def save!
-
     if self.valid?
       self.public_updated_at = Time.zone.now if self.update_type == 'major'
 
@@ -231,7 +228,7 @@ class Document
 private
 
   def self.attachments(payload)
-    payload.details.attachments.map{|attachment|Attachment.new(attachment)}
+    payload.details.attachments.map { |attachment| Attachment.new(attachment) }
   end
 
   def rummager
@@ -253,5 +250,4 @@ private
   def finder_schema
     self.class.finder_schema
   end
-
 end

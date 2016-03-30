@@ -1,7 +1,6 @@
 require 'govspeak'
 
 class DocumentPresenter
-
   def initialize(document)
     @document = document
   end
@@ -46,18 +45,21 @@ private
   end
 
   def attachments
-    document.attachments.map{|attachment| AttachmentPresenter.new(attachment).to_json}
+    document.attachments.map { |attachment| AttachmentPresenter.new(attachment).to_json }
   end
 
   def metadata
-    document.format_specific_fields.map { |f|
+    merged_fields = document.format_specific_fields.map { |f|
       {
         f => document.send(f)
       }
-    }.reduce({}, :merge).merge({
-      document_type: document.publishing_api_document_type,
-      bulk_published: document.bulk_published,
-    }).reject { |k, v| v.blank? }
+    }.reduce({}, :merge)
+      .merge(
+        document_type: document.publishing_api_document_type,
+        bulk_published: document.bulk_published,
+      )
+
+    merged_fields.reject { |_k, v| v.blank? }
   end
 
   def public_updated_at

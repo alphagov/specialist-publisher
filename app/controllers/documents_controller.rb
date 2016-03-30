@@ -1,6 +1,6 @@
 require 'gds_api/publishing_api_v2'
 
-class DocumentsController <  ApplicationController
+class DocumentsController < ApplicationController
   include ActionView::Context
   include ActionView::Helpers::TagHelper
   include ActionView::Helpers::TextHelper
@@ -12,7 +12,7 @@ class DocumentsController <  ApplicationController
     if current_format
       @documents = document_klass.all
 
-      @documents.sort!{ |a, b| a.public_updated_at <=> b.public_updated_at }.reverse!
+      @documents.sort! { |a, b| a.public_updated_at <=> b.public_updated_at }.reverse!
     else
       redirect_to manuals_path
     end
@@ -80,25 +80,28 @@ private
 
   def document_error_messages
     document_errors = @document.errors.messages
-    errors = content_tag(:p,
-      %Q{
-        There #{document_errors.length > 1 ? 'were' : 'was' } the following
-        #{document_errors.length > 1 ? 'errors' : 'error' } with your
+    heading = content_tag(
+      :p,
+      %{
+        There #{document_errors.length > 1 ? 'were' : 'was'} the following
+        #{document_errors.length > 1 ? 'errors' : 'error'} with your
         #{current_format.title.singularize}:
       }
     )
-    errors += content_tag :ul do
+    errors = content_tag :ul do
       @document.errors.full_messages.map { |e| content_tag(:li, e) }.join('').html_safe
     end
+
+    heading + errors
   end
 
   def fetch_document
     @document = document_klass.find(params[:content_id])
-    rescue Document::RecordNotFound => e
-      flash[:danger] = "Document not found"
-      redirect_to documents_path(document_type: document_type)
+  rescue Document::RecordNotFound => e
+    flash[:danger] = "Document not found"
+    redirect_to documents_path(document_type: document_type)
 
-      Airbrake.notify(e)
+    Airbrake.notify(e)
   end
 
   def filtered_params(params_of_document)
@@ -132,5 +135,4 @@ private
       redirect_to manuals_path
     end
   end
-
 end

@@ -13,17 +13,16 @@ class SafeHtmlValidator < ActiveModel::EachValidator
   ]
 
   def validate_each(record, attribute, value)
-    unless safe_html?(value)
-      record.errors.add(attribute, error_message)
-    end
+    record.errors.add(attribute, error_message) unless safe_html?(value)
   end
 
 private
+
   def safe_html?(html_string)
     Govspeak::Document.new(html_string).valid?(allowed_image_hosts: ALLOWED_IMAGE_HOSTS)
   end
 
   def error_message
-    options[:message] || "cannot include invalid Govspeak, invalid HTML, any JavaScript or images hosted on sites except for #{ALLOWED_IMAGE_HOSTS.join(", ")}"
+    options[:message] || "cannot include invalid Govspeak, invalid HTML, any JavaScript or images hosted on sites except for #{ALLOWED_IMAGE_HOSTS.join(', ')}"
   end
 end

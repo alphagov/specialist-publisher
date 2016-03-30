@@ -1,5 +1,4 @@
 class SectionPresenter
-
   def initialize(section)
     @section = section
   end
@@ -29,4 +28,3 @@ class SectionPresenter
     }
   end
 end
-

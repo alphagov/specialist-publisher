@@ -1,7 +1,6 @@
 require "spec_helper"
 
 RSpec.describe ManualSectionsController, type: :controller do
-
   before do
     log_in_as_gds_editor
   end

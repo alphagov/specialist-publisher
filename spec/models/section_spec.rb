@@ -2,7 +2,7 @@ require "spec_helper"
 require "manual"
 
 def match_any_body
-  lambda { |a| true }
+  lambda { |_a| true }
 end
 
 RSpec.describe Section do
@@ -17,8 +17,8 @@ RSpec.describe Section do
 
     before do
       expect(described_class).to receive(:from_publishing_api)
-                                   .with(content_id: content_id)
-                                   .and_return(section)
+        .with(content_id: content_id)
+        .and_return(section)
     end
 
     context "with content_id" do
@@ -50,15 +50,14 @@ RSpec.describe Section do
         content_id: content_id,
         title: "Section title",
         description: "Section description",
-        details: {body: "## Some body text"},
+        details: { body: "## Some body text" },
       }
     end
 
     context "given a section exists" do
-
       before do
         publishing_api_has_item(content_item)
-        publishing_api_has_links({content_id: content_id, links: {manual: [manual_content_id]}})
+        publishing_api_has_links(content_id: content_id, links: { manual: [manual_content_id] })
       end
 
       subject { described_class.from_publishing_api(content_id: content_id) }
@@ -96,13 +95,13 @@ RSpec.describe Section do
     let(:manual_base_path) { "/guidance/manual_path" }
 
     let(:manual) do
-      {content_id: manual_content_id,
+      { content_id: manual_content_id,
        base_path: manual_base_path,
-       details: {body: ""}}
+       details: { body: "" } }
     end
 
     let(:manual_links) do
-      {content_id: manual_content_id,
+      { content_id: manual_content_id,
        links: {
          sections: [another_section_content_id]
        }
@@ -118,7 +117,6 @@ RSpec.describe Section do
       publishing_api_has_item(manual)
       publishing_api_has_links(manual_links)
       Timecop.freeze(Time.parse(test_time))
-
     end
 
     context "with valid input" do
@@ -160,11 +158,11 @@ RSpec.describe Section do
       end
 
       let(:expected_section_links) do
-        {links: {manual: [manual_content_id]}}
+        { links: { manual: [manual_content_id] } }
       end
 
       let(:expected_manual_links) do
-        {links: {sections: [another_section_content_id, section_content_id]}}
+        { links: { sections: [another_section_content_id, section_content_id] } }
       end
 
       it "should put content to publishing-api" do
@@ -176,10 +174,10 @@ RSpec.describe Section do
       end
 
       it "should not send duplicated section ids to manual links" do
-        publishing_api_has_links({content_id: manual_content_id,
+        publishing_api_has_links(content_id: manual_content_id,
                                   links: {
                                     sections: [another_section_content_id, section_content_id]
-                                  }})
+                                  })
 
         section = Section.new(test_params)
         expect(section.save).to eq(true)

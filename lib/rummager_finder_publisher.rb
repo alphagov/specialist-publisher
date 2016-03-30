@@ -12,7 +12,7 @@ class RummagerFinderPublisher
       if should_publish_in_this_environment?(schema)
         export_finder(schema)
       else
-        logger.info("Not publishing #{schema[:file]["name"]} because it is pre_production")
+        logger.info("Not publishing #{schema[:file]['name']} because it is pre_production")
       end
     end
   end

@@ -1,7 +1,6 @@
 require 'spec_helper'
 
 RSpec.feature "Publishing a CMA case", type: :feature do
-
   def content_id
     "4a656f42-35ad-4034-8c7a-08870db7fffe"
   end
@@ -43,7 +42,6 @@ RSpec.feature "Publishing a CMA case", type: :feature do
       "redirects" => [],
       "need_ids" => [],
       "update_type" => "major",
-      "phase" => "live",
       "publication_state" => "live",
       "links" => {
         "organisations" => ["957eb4ec-089b-4f71-ba2a-dc69ac8919ea"]
@@ -98,7 +96,7 @@ RSpec.feature "Publishing a CMA case", type: :feature do
     }
   end
 
-  let(:fields){ [:base_path, :content_id, :public_updated_at, :title, :publication_state] }
+  let(:fields) { [:base_path, :content_id, :public_updated_at, :title, :publication_state] }
 
   before do
     log_in_as_editor(:cma_editor)
@@ -130,5 +128,4 @@ RSpec.feature "Publishing a CMA case", type: :feature do
     assert_publishing_api_publish(content_id)
     assert_rummager_posted_item(indexable_attributes)
   end
-
 end

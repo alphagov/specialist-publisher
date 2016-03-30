@@ -1,7 +1,6 @@
 require 'spec_helper'
 
 describe EsiFund do
-
   def esi_fund_content_item(n)
     {
       "content_id" => SecureRandom.uuid,
@@ -92,7 +91,7 @@ describe EsiFund do
       "location" => nil,
       "funding_source" => nil,
       "closing_date" => "2016-01-01",
-      "organisations" => ["department-for-communities-and-local-government","department-for-environment-food-rural-affairs","department-for-business-innovation-skills","department-for-work-pensions"],
+      "organisations" => ["department-for-communities-and-local-government", "department-for-environment-food-rural-affairs", "department-for-business-innovation-skills", "department-for-work-pensions"],
     }
   }
 

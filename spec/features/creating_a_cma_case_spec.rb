@@ -1,7 +1,6 @@
 require 'spec_helper'
 
 RSpec.feature "Creating a CMA case", type: :feature do
-
   def cma_case_content_item
     {
       "content_id" => "4a656f42-35ad-4034-8c7a-08870db7fffe",
@@ -51,7 +50,7 @@ RSpec.feature "Creating a CMA case", type: :feature do
     }
   end
 
-  let(:fields){ [:base_path, :content_id, :public_updated_at, :title, :publication_state] }
+  let(:fields) { [:base_path, :content_id, :public_updated_at, :title, :publication_state] }
 
   before do
     log_in_as_editor(:cma_editor)
@@ -87,7 +86,6 @@ RSpec.feature "Creating a CMA case", type: :feature do
   end
 
   scenario "with no data" do
-
     visit "/cma-cases/new"
 
     click_button "Save as draft"

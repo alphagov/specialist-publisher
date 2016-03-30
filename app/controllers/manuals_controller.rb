@@ -1,5 +1,4 @@
 class ManualsController < ApplicationController
-
   def index
     if current_user.gds_editor?
       @manuals = Manual.all

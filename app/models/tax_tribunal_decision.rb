@@ -8,7 +8,7 @@ class TaxTribunalDecision < Document
     :tribunal_decision_decision_date,
   ]
 
-  attr_accessor *FORMAT_SPECIFIC_FIELDS
+  attr_accessor(*FORMAT_SPECIFIC_FIELDS)
 
   def initialize(params = {})
     super(params, FORMAT_SPECIFIC_FIELDS)

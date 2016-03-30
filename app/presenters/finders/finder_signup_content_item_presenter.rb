@@ -1,4 +1,4 @@
-class FinderSignupContentItemPresenter < Struct.new(:schema, :timestamp)
+FinderSignupContentItemPresenter = Struct.new(:schema, :timestamp) do
   def to_json
     {
       base_path: base_path,
@@ -26,7 +26,7 @@ private
   end
 
   def base_path
-    "#{schema.fetch("base_path")}/email-signup"
+    "#{schema.fetch('base_path')}/email-signup"
   end
 
   def description

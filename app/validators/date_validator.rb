@@ -1,11 +1,10 @@
 class DateValidator < ActiveModel::EachValidator
   def validate_each(record, attribute, value)
-    unless parsable_date?(value)
-      record.errors.add(attribute, error_message)
-    end
+    record.errors.add(attribute, error_message) unless parsable_date?(value)
   end
 
 private
+
   def parsable_date?(date_string)
     date_string =~ iso8601_regex && Date.parse(date_string)
   rescue ArgumentError

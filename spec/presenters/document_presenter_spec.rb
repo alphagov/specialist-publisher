@@ -1,7 +1,6 @@
 require 'rails_helper'
 
 describe DocumentPresenter do
-
   def cma_case_content_item(n)
     {
       "content_id" => SecureRandom.uuid,
@@ -45,28 +44,27 @@ describe DocumentPresenter do
 
   let(:content_item_without_attachments) { cma_case_content_item(0) }
 
-  let(:content_item_with_attachments) { cma_case_content_item(1).deep_merge!({
-   "details" => {
+  let(:content_item_with_attachments) {
+    cma_case_content_item(1).deep_merge!("details" => {
      "attachments" => [
        {
-         "content_id"=> "77f2d40e-3853-451f-9ca3-a747e8402e34",
+         "content_id" => "77f2d40e-3853-451f-9ca3-a747e8402e34",
          "url" => "https://assets.digital.cabinet-office.gov.uk/media/513a0efbed915d425e000002/asylum-support-image.jpg",
-         "content_type"=> "application/jpeg",
-         "title"=> "asylum report image title",
-         "created_at"=> "2015-12-03T16:59:13+00:00",
-         "updated_at"=> "2015-12-03T16:59:13+00:00"
+         "content_type" => "application/jpeg",
+         "title" => "asylum report image title",
+         "created_at" => "2015-12-03T16:59:13+00:00",
+         "updated_at" => "2015-12-03T16:59:13+00:00"
        },
        {
-         "content_id"=> "ec3f6901-4156-4720-b4e5-f04c0b152141",
-         "url"=> "https://assets.digital.cabinet-office.gov.uk/media/513a0efbed915d425e000002/asylum-support-pdf.pdf",
-         "content_type"=> "application/pdf",
-         "title"=> "asylum report pdf title",
-         "created_at"=> "2015-12-03T16:59:13+00:00",
-         "updated_at"=> "2015-12-03T16:59:13+00:00"
+         "content_id" => "ec3f6901-4156-4720-b4e5-f04c0b152141",
+         "url" => "https://assets.digital.cabinet-office.gov.uk/media/513a0efbed915d425e000002/asylum-support-pdf.pdf",
+         "content_type" => "application/pdf",
+         "title" => "asylum report pdf title",
+         "created_at" => "2015-12-03T16:59:13+00:00",
+         "updated_at" => "2015-12-03T16:59:13+00:00"
        }
      ]
-   }
-  })
+   })
   }
 
   before do
@@ -95,7 +93,7 @@ describe DocumentPresenter do
     end
 
     it "returns a specialist document content item" do
-      presented_data[:details][:change_history] =  [{public_timestamp: "2015-11-23T14:07:47+00:00", note: "First published." }]
+      presented_data[:details][:change_history] = [{ public_timestamp: "2015-11-23T14:07:47+00:00", note: "First published." }]
       content_item_without_attachments.delete('publication_state')
 
       expect(presented_data).to eq(content_item_without_attachments.to_h.deep_symbolize_keys)
@@ -117,13 +115,10 @@ describe DocumentPresenter do
     end
 
     it "returns a specialist document content item" do
-      presented_data[:details][:change_history] =  [{public_timestamp: "2015-11-23T14:07:47+00:00", note: "First published." }]
+      presented_data[:details][:change_history] = [{ public_timestamp: "2015-11-23T14:07:47+00:00", note: "First published." }]
       content_item_with_attachments.delete('publication_state')
 
       expect(presented_data).to eq(content_item_with_attachments.to_h.deep_symbolize_keys)
     end
   end
 end
-
-
-

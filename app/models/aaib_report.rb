@@ -1,5 +1,4 @@
 class AaibReport < Document
-
   validates :date_of_occurrence, presence: true, date: true, unless: ->(report) {
     report.report_type == "safety-study" && report.date_of_occurrence.blank?
   }
@@ -13,7 +12,7 @@ class AaibReport < Document
     :registration,
   ]
 
-  attr_accessor *FORMAT_SPECIFIC_FIELDS
+  attr_accessor(*FORMAT_SPECIFIC_FIELDS)
 
   def initialize(params = {})
     super(params, FORMAT_SPECIFIC_FIELDS)

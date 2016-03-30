@@ -8,7 +8,7 @@ class Section
   validates :title, presence: true
   validates :body, presence: true, safe_html: true
 
-  def initialize(params={})
+  def initialize(params = {})
     @content_id = params.fetch(:content_id, SecureRandom.uuid)
     @title = params.fetch(:title, nil)
     @summary = params.fetch(:summary, nil)
@@ -45,25 +45,13 @@ class Section
     @public_updated_at = Time.parse(timestamp.to_s) unless timestamp.nil?
   end
 
-  def manual_content_id
-    @manual_content_id
-  end
-
-  def manual_content_id=(manual_content_id)
-    @manual_content_id = manual_content_id
-  end
+  attr_accessor :manual_content_id
 
   def manual
     @manual ||= Manual.find(content_id: @manual_content_id)
   end
 
-  def organisation_content_ids
-    @organisation_content_ids
-  end
-
-  def organisation_content_ids=(organisation_content_ids)
-    @organisation_content_ids = organisation_content_ids
-  end
+  attr_accessor :organisation_content_ids
 
   OrganisationStruct = Struct.new(:content_id, :base_path, :title)
 
@@ -95,15 +83,13 @@ class Section
     )
 
     section = self.new(
-      {
-        content_id: payload["content_id"],
-        title: payload["title"],
-        summary: payload["description"],
-        body: payload["details"]["body"],
-        publication_state: payload["publication_state"],
-        public_updated_at: payload["public_updated_at"],
-        manual_content_id: payload["links"]["manual"].first
-      }
+      content_id: payload["content_id"],
+      title: payload["title"],
+      summary: payload["description"],
+      body: payload["details"]["body"],
+      publication_state: payload["publication_state"],
+      public_updated_at: payload["public_updated_at"],
+      manual_content_id: payload["links"]["manual"].first
     )
 
     section.base_path = payload["base_path"]
@@ -123,7 +109,10 @@ class Section
     if section_ids.include?(self.content_id)
       true
     else
-      manual_link_request = publishing_api.patch_links(self.manual_content_id, {links: {sections: section_ids << self.content_id}})
+      manual_link_request = publishing_api.patch_links(
+        self.manual_content_id,
+        links: { sections: section_ids << self.content_id }
+      )
       manual_link_request.code == 200
     end
   end
@@ -132,7 +121,7 @@ class Section
     if self.valid?
       presented_section = SectionPresenter.new(self).to_json
 
-      presented_section_links = {links: {manual: [self.manual_content_id]}}
+      presented_section_links = { links: { manual: [self.manual_content_id] } }
       begin
         item_request = publishing_api.put_content(self.content_id, presented_section)
         section_link_request = publishing_api.patch_links(self.content_id, presented_section_links)
@@ -146,8 +135,7 @@ class Section
     end
   end
 
-
-  private
+private
 
   def publishing_api
     self.class.publishing_api

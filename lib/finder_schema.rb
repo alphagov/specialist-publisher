@@ -1,5 +1,4 @@
 class FinderSchema
-
   attr_reader :base_path, :organisations, :document_type_filter
 
   def initialize(schema_type)

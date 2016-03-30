@@ -1,5 +1,4 @@
 class SearchPresenter
-
   delegate :title, to: :document
 
   def initialize(document)
@@ -14,7 +13,7 @@ class SearchPresenter
       indexable_content: indexable_content,
       organisations: organisation_slugs,
       public_timestamp: document.public_updated_at.to_datetime.rfc3339,
-    }.merge(document.format_specific_metadata).reject { |k, v| v.blank? }
+    }.merge(document.format_specific_metadata).reject { |_k, v| v.blank? }
   end
 
   def indexable_content
@@ -22,10 +21,10 @@ class SearchPresenter
   end
 
   def organisation_slugs
-    response = publishing_api.get_content_items({document_type: "organisation", fields: [:content_id, :base_path]})
+    response = publishing_api.get_content_items(document_type: "organisation", fields: [:content_id, :base_path])
 
     orgs = response.results.select { |o| document.organisations.include?(o["content_id"]) }
-    orgs.map { |o| o["base_path"].gsub("/government/organisations/", "")}.map { |o| o.gsub("/courts-tribunals/", "") }
+    orgs.map { |o| o["base_path"].gsub("/government/organisations/", "") }.map { |o| o.gsub("/courts-tribunals/", "") }
   end
 
 private
@@ -35,5 +34,4 @@ private
   def publishing_api
     @publishing_api ||= SpecialistPublisher.services(:publishing_api)
   end
-
 end

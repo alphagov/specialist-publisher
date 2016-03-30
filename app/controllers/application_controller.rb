@@ -24,7 +24,7 @@ private
     if current_user.gds_editor?
       document_types
     else
-      Hash(document_types.select { |k, v| v.organisations.include?(current_user.organisation_content_id) })
+      Hash(document_types.select { |_k, v| v.organisations.include?(current_user.organisation_content_id) })
     end
   end
 
@@ -67,7 +67,7 @@ private
       "Vehicle Recalls and Faults Alert" => VehicleRecallsAndFaultsAlert,
     }
 
-    data.map do |k, v|
+    data.map { |k, v|
       {
         k.downcase.parameterize.pluralize => FormatStruct.new(
           v,
@@ -77,11 +77,10 @@ private
           v.organisations,
         )
       }
-    end.reduce({}, :merge)
+    }.reduce({}, :merge)
   end
 
   def document_klass
     current_format.klass
   end
-
 end

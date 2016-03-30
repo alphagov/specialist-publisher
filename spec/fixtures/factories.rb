@@ -1,8 +1,8 @@
 FactoryGirl.define do
   factory :user do
-   sequence(:uid) { |n| "uid-#{n}"}
-   sequence(:name) { |n| "Joe Bloggs #{n}" }
-   sequence(:email) { |n| "joe#{n}@bloggs.com" }
+    sequence(:uid) { |n| "uid-#{n}" }
+    sequence(:name) { |n| "Joe Bloggs #{n}" }
+    sequence(:email) { |n| "joe#{n}@bloggs.com" }
     if defined?(GDS::SSO::Config)
       # Grant permission to signin to the app using the gem
       permissions { ["signin"] }
@@ -27,5 +27,4 @@ FactoryGirl.define do
     organisation_slug "air-accidents-investigation-branch"
     organisation_content_id "38eb5d8f-2d89-480c-8655-e2e7ac23f8f4"
   end
-
 end

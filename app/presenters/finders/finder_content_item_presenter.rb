@@ -1,5 +1,4 @@
-class FinderContentItemPresenter < Struct.new(:file, :timestamp)
-
+FinderContentItemPresenter = Struct.new(:file, :timestamp) do
   def to_json
     {
       base_path: base_path,
@@ -47,7 +46,7 @@ private
       summary: file.fetch("summary", nil),
       facets: file.fetch("facets", nil),
       default_order: file.fetch("default_order", nil),
-    }.reject {|_, value| value.nil?}
+    }.reject { |_, value| value.nil? }
   end
 
   def format

@@ -1,7 +1,6 @@
 require 'spec_helper'
 
 RSpec.feature "Viewing a specific case", type: :feature do
-
   def cma_case_content_item(n)
     {
       "content_id" => SecureRandom.uuid,
@@ -47,7 +46,7 @@ RSpec.feature "Viewing a specific case", type: :feature do
     }
   end
 
-  let(:fields){ [:base_path, :content_id, :public_updated_at, :title, :publication_state] }
+  let(:fields) { [:base_path, :content_id, :public_updated_at, :title, :publication_state] }
 
   before do
     log_in_as_editor(:cma_editor)
@@ -93,5 +92,4 @@ RSpec.feature "Viewing a specific case", type: :feature do
     expect(page.current_path).to eq("/cma-cases")
     expect(page).to have_content("Document not found")
   end
-
 end

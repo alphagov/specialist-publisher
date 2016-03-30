@@ -18,11 +18,11 @@ RSpec.describe Manual do
         "description" => "This is a manual's first section",
         "base_path" => "/guidance/a-manual/first-section"
       },
-        {
-        "title" => "Second section",
-        "description" => "This is a manual's second section",
-        "base_path" => "/guidance/a-manual/second-section"
-      },
+          {
+          "title" => "Second section",
+          "description" => "This is a manual's second section",
+          "base_path" => "/guidance/a-manual/second-section"
+        },
       ]
       }
       ],
@@ -33,12 +33,12 @@ RSpec.describe Manual do
         "change_note" => "New section added.",
         "published_at" => "2015-12-23T14:38:51+00:00"
       },
-        {
-        "base_path" => "/guidance/a-manual/second-section",
-        "title" => "Second section",
-        "change_note" => "New section added.",
-        "published_at" => "2015-12-23T14:38:51+00:00"
-      },
+          {
+          "base_path" => "/guidance/a-manual/second-section",
+          "title" => "Second section",
+          "change_note" => "New section added.",
+          "published_at" => "2015-12-23T14:38:51+00:00"
+        },
       ],
       "organisations" => [
         {
@@ -59,10 +59,10 @@ RSpec.describe Manual do
         "path" => "/guidance/a-manual",
         "type" => "exact"
       },
-        {
-        "path" => "/guidance/a-manual/updates",
-        "type" => "exact"
-      }
+          {
+          "path" => "/guidance/a-manual/updates",
+          "type" => "exact"
+        }
       ],
         "title" => "A Manual",
         "analytics_identifier" => nil,
@@ -101,11 +101,11 @@ RSpec.describe Manual do
         body: "body",
         child_section_groups: [],
         change_notes: [],
-        organisations: []},
+        organisations: [] },
         routes: [
           {
         path: test_path,
-        type: "exact"}]
+        type: "exact" }]
       }
 
       manual = Manual.new(test_params)
@@ -116,4 +116,3 @@ RSpec.describe Manual do
     end
   end
 end
-
