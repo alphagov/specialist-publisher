@@ -1,46 +1,6 @@
 require 'spec_helper'
 
 RSpec.feature "Creating a CMA case", type: :feature do
-  def cma_case_content_item
-    {
-      "content_id" => "4a656f42-35ad-4034-8c7a-08870db7fffe",
-      "base_path" => "/cma-cases/example-cma-case",
-      "title" => "Example CMA Case",
-      "description" => "This is the summary of an example CMA case",
-      "document_type" => "cma_case",
-      "schema_name" => "specialist_document",
-      "publishing_app" => "specialist-publisher",
-      "rendering_app" => "specialist-frontend",
-      "locale" => "en",
-      "phase" => "live",
-      "public_updated_at" => "2015-12-03T16:59:13+00:00",
-      "details" => {
-        "body" => "## Header" + ("\r\n\r\nThis is the long body of an example CMA case" * 10),
-        "metadata" => {
-          "opened_date" => "2014-01-01",
-          "case_type" => "ca98-and-civil-cartels",
-          "case_state" => "open",
-          "market_sector" => ["energy"],
-          "document_type" => "cma_case",
-        },
-        "change_history" => [
-          {
-            "public_timestamp" => "2015-12-03T16:59:13+00:00",
-            "note" => "First published."
-          }
-        ]
-      },
-      "routes" => [
-        {
-          "path" => "/cma-cases/example-cma-case",
-          "type" => "exact",
-        }
-      ],
-      "redirects" => [],
-      "update_type" => "major",
-    }
-  end
-
   def cma_case_content_item_links
     {
       "content_id" => "4a656f42-35ad-4034-8c7a-08870db7fffe",
@@ -51,18 +11,20 @@ RSpec.feature "Creating a CMA case", type: :feature do
   end
 
   let(:fields) { [:base_path, :content_id, :public_updated_at, :title, :publication_state] }
+  let(:cma_case) { Payloads.cma_case_content_item }
+  let(:content_id) { cma_case['content_id'] }
 
   before do
     log_in_as_editor(:cma_editor)
 
-    allow(SecureRandom).to receive(:uuid).and_return("4a656f42-35ad-4034-8c7a-08870db7fffe")
+    allow(SecureRandom).to receive(:uuid).and_return(content_id)
     Timecop.freeze(Time.parse("2015-12-03 16:59:13 UTC"))
 
     stub_any_publishing_api_put_content
     stub_any_publishing_api_patch_links
 
-    publishing_api_has_fields_for_document(CmaCase.publishing_api_document_type, [cma_case_content_item], fields)
-    publishing_api_has_item(cma_case_content_item)
+    publishing_api_has_fields_for_document(CmaCase.publishing_api_document_type, [cma_case], fields)
+    publishing_api_has_item(cma_case)
   end
 
   scenario "with valid data" do
@@ -78,8 +40,7 @@ RSpec.feature "Creating a CMA case", type: :feature do
     expect(page).to have_content('To add an attachment, please save the draft first.')
 
     click_button "Save as draft"
-
-    assert_publishing_api_put_content("4a656f42-35ad-4034-8c7a-08870db7fffe", request_json_includes(cma_case_content_item))
+    assert_publishing_api_put_content(content_id, request_json_includes(cma_case))
 
     expect(page.status_code).to eq(200)
     expect(page).to have_content("Created Example CMA Case")

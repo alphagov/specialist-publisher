@@ -1,54 +1,6 @@
 require 'spec_helper'
 
 RSpec.feature "Publishing a CMA case", type: :feature do
-  def content_id
-    "4a656f42-35ad-4034-8c7a-08870db7fffe"
-  end
-
-  def cma_case_content_item
-    {
-      "content_id" => content_id,
-      "base_path" => "/cma-cases/example-cma-case",
-      "title" => "Example CMA Case",
-      "description" => "This is the summary of example CMA case",
-      "format" => "specialist_document",
-      "publishing_app" => "specialist-publisher",
-      "rendering_app" => "specialist-frontend",
-      "locale" => "en",
-      "phase" => "live",
-      "public_updated_at" => "2015-11-16T11:53:30+00:00",
-      "details" => {
-        "body" => "## Header" + ("\r\n\r\nThis is the long body of an example CMA case" * 10),
-        "metadata" => {
-          "opened_date" => "2014-01-01",
-          "case_type" => "ca98-and-civil-cartels",
-          "case_state" => "open",
-          "market_sector" => ["energy"],
-          "document_type" => "cma_case",
-        },
-        "change_history" => [
-          {
-            "public_timestamp" => "2015-11-16T11:53:30+00:00",
-            "note" => "First published."
-          }
-        ]
-      },
-      "routes" => [
-        {
-          "path" => "/cma-cases/example-cma-case",
-          "type" => "exact",
-        }
-      ],
-      "redirects" => [],
-      "need_ids" => [],
-      "update_type" => "major",
-      "publication_state" => "live",
-      "links" => {
-        "organisations" => ["957eb4ec-089b-4f71-ba2a-dc69ac8919ea"]
-      }
-    }
-  end
-
   def cma_org_content_item
     {
       "base_path" => "/government/organisations/competition-and-markets-authority",
@@ -82,7 +34,7 @@ RSpec.feature "Publishing a CMA case", type: :feature do
   def indexable_attributes
     {
       "title" => "Example CMA Case",
-      "description" => "This is the summary of example CMA case",
+      "description" => "This is the summary of an example CMA case",
       "link" => "/cma-cases/example-cma-case",
       "indexable_content" => "## Header" + ("\r\n\r\nThis is the long body of an example CMA case" * 10),
       "public_timestamp" => "2015-11-16T11:53:30+00:00",
@@ -96,15 +48,24 @@ RSpec.feature "Publishing a CMA case", type: :feature do
     }
   end
 
+  let(:cma_case) {
+    Payloads.cma_case_content_item(
+      "public_updated_at" => "2015-11-16T11:53:30+00:00",
+      "need_ids" => [],
+      "publication_state" => "live",
+    )
+  }
+  let(:content_id) { cma_case['content_id'] }
+
   let(:fields) { [:base_path, :content_id, :public_updated_at, :title, :publication_state] }
 
   before do
     log_in_as_editor(:cma_editor)
 
-    publishing_api_has_fields_for_document(CmaCase.publishing_api_document_type, [cma_case_content_item], fields)
+    publishing_api_has_fields_for_document(CmaCase.publishing_api_document_type, [cma_case], fields)
     publishing_api_has_fields_for_document('organisation', [cma_org_content_item], [:base_path, :content_id])
 
-    publishing_api_has_item(cma_case_content_item)
+    publishing_api_has_item(cma_case)
 
     stub_publishing_api_publish(content_id, {})
     stub_any_rummager_post
