@@ -216,12 +216,7 @@ class Document
       )
 
       if self.update_type == "major"
-        email_alert_api.send_alert(
-          {
-            "tags" => {},
-            "links" => [self.content_id],
-            "document_type" => self.publishing_api_document_type
-          })
+        email_alert_api.send_alert(EmailAlertPresenter.new(self).to_json)
       end
 
       publish_request.code == 200 && rummager_request.code == 200

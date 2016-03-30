@@ -60,10 +60,10 @@ RSpec.feature "Publishing a CMA case", type: :feature do
   let(:fields) { [:base_path, :content_id, :public_updated_at, :title, :publication_state] }
 
   def minor_update_item
-    cma_case_content_item.merge({
-                                  "title" => "Minor Update Case",
-                                  "update_type" => "minor"
-                                })
+    cma_case.merge({
+                     "title" => "Minor Update Case",
+                     "update_type" => "minor"
+                   })
   end
 
   before do
@@ -80,7 +80,7 @@ RSpec.feature "Publishing a CMA case", type: :feature do
   end
 
   scenario "from the index" do
-    publishing_api_has_item(cma_case_content_item)
+    publishing_api_has_item(cma_case)
 
     visit "/cma-cases"
 

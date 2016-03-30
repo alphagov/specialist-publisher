@@ -90,7 +90,6 @@ RSpec.describe CmaCase do
 
   let(:email_alert_payload) do
     {
-      "tags" => {},
       "links" => [cma_cases[0]["content_id"]],
       "document_type" => "cma_case"
     }
