@@ -124,7 +124,7 @@ class Document
     # and set it as the document's change note
     document.change_note = payload['details']['change_history'].pop["note"] if document.redrafted? && payload['details']['change_history'].length > 1
 
-    document.attachments = attachments(payload) if payload['details']['attachments']
+    document.attachments = Attachment.all_from_publishing_api(payload)
     # Persist the rest of the change_history on the document
     # if the document is live or redrafted
     document.change_history = payload['details']['change_history'].map(&:to_h) if document.published?
@@ -230,10 +230,6 @@ class Document
   end
 
 private
-
-  def self.attachments(payload)
-    payload['details']['attachments'].map { |attachment| Attachment.new(attachment) }
-  end
 
   def email_alert_api
     SpecialistPublisher.services(:email_alert_api)

@@ -2,8 +2,8 @@ class Section
   include ActiveModel::Model
   include ActiveModel::Validations
 
-  attr_accessor :content_id, :base_path, :title, :summary, :body, :update_type
-
+  attr_accessor :content_id, :base_path, :title, :summary, :body, :update_type, :attachments
+  attr_reader :publication_state
   validates :summary, presence: true
   validates :title, presence: true
   validates :body, presence: true, safe_html: true
@@ -100,6 +100,8 @@ class Section
       section.organisation_content_ids = payload["links"].fetch("organisations") || []
     end
 
+    section.attachments = Attachment.all_from_publishing_api(payload)
+
     section
   end
 
@@ -143,6 +145,18 @@ class Section
     end
   end
 
+  def save!
+    if save
+      true
+    else
+      raise RecordNotSaved
+    end
+  end
+
+  def find_attachment(attachment_content_id)
+    self.attachments.detect { |attachment| attachment.content_id == attachment_content_id }
+  end
+
 private
 
   def publishing_api
@@ -155,4 +169,6 @@ private
 
   class RecordNotFound < StandardError;
   end
+
+  class RecordNotSaved < StandardError; end
 end

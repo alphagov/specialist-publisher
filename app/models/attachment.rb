@@ -26,4 +26,9 @@ class Attachment < Document
   def changed?
     @changed
   end
+
+  def self.all_from_publishing_api(payload)
+    return nil unless payload.fetch('details',{}).key?('attachments')
+    payload['details']['attachments'].map { |attachment| Attachment.new(attachment) }
+  end
 end
