@@ -215,6 +215,10 @@ class Document
         indexable_document.to_json,
       )
 
+      if self.update_type == "major"
+        email_alert_api.send_alert(EmailAlertPresenter.new(self).to_json)
+      end
+
       publish_request.code == 200 && rummager_request.code == 200
     rescue GdsApi::HTTPErrorResponse => e
       Airbrake.notify(e)
@@ -229,6 +233,10 @@ private
 
   def self.attachments(payload)
     payload.details.attachments.map { |attachment| Attachment.new(attachment) }
+  end
+
+  def email_alert_api
+    SpecialistPublisher.services(:email_alert_api)
   end
 
   def rummager

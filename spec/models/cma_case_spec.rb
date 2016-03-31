@@ -88,6 +88,14 @@ RSpec.describe CmaCase do
 
   let(:cma_cases) { 10.times.map { |n| cma_case_content_item(n) } }
 
+  let(:email_alert_payload) do
+    {
+      "links" => {
+        "topics" => [cma_cases[0]["content_id"]]
+      },
+      "document_type" => "cma_case"
+    }
+  end
 
   before do
     publishing_api_has_fields_for_document(described_class.publishing_api_document_type, cma_cases, fields)
@@ -197,6 +205,10 @@ RSpec.describe CmaCase do
   end
 
   describe "#publish!" do
+    before do
+      email_alert_api_accepts_alert
+    end
+
     it "publishes the CMA Case" do
       stub_publishing_api_publish(cma_cases[0]["content_id"], {})
       stub_any_rummager_post
@@ -207,6 +219,7 @@ RSpec.describe CmaCase do
 
       assert_publishing_api_publish(c.content_id)
       assert_rummager_posted_item(indexable_attributes)
+      assert_email_alert_sent(email_alert_payload)
     end
   end
 

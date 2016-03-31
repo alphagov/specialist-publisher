@@ -30,6 +30,7 @@ Capybara.javascript_driver = :webkit
 
 require 'gds_api/test_helpers/publishing_api_v2'
 require 'gds_api/test_helpers/rummager'
+require 'gds_api/test_helpers/email_alert_api'
 
 # Quiet down now Mongo
 Mongo::Logger.logger.level = ::Logger::FATAL
@@ -59,6 +60,7 @@ RSpec.configure do |config|
   config.include(Capybara::Webkit::RspecMatchers, type: :feature)
   config.include(GdsApi::TestHelpers::PublishingApiV2)
   config.include(GdsApi::TestHelpers::Rummager)
+  config.include(GdsApi::TestHelpers::EmailAlertApi)
 
   config.after(:each) do
     #DatabaseCleaner.clean

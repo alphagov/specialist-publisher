@@ -136,6 +136,10 @@ describe RaibReport do
   end
 
   describe "#publish!" do
+    before do
+      email_alert_api_accepts_alert
+    end
+
     it "publishes the RAIB Report" do
       stub_publishing_api_publish(raib_reports[0]["content_id"], {})
       stub_any_rummager_post

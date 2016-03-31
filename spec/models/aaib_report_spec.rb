@@ -145,6 +145,10 @@ describe AaibReport do
   end
 
   describe "#publish!" do
+    before do
+      email_alert_api_accepts_alert
+    end
+
     it "publishes the AAIB Report" do
       stub_publishing_api_publish(aaib_reports[0]["content_id"], {})
       stub_any_rummager_post

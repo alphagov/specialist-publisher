@@ -133,6 +133,10 @@ describe DrugSafetyUpdate do
   end
 
   describe "#publish!" do
+    before do
+      email_alert_api_accepts_alert
+    end
+
     it "publishes the Drug Safety Update" do
       stub_publishing_api_publish(drug_safety_updates[0]["content_id"], {})
       stub_any_rummager_post
