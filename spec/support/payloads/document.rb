@@ -39,6 +39,40 @@ module Payloads
     }.deep_merge(attrs)
   end
 
+  def self.medical_safety_alert_content_item(attrs = {})
+    {
+      "content_id" => SecureRandom.uuid,
+      "base_path" => "/drug-device-alerts/example-medical-safety-alert",
+      "title" => "Example Medical Safety Alert",
+      "description" => "This is the summary of example Medical Safety Alert",
+      "document_type" => "medical_safety_alert",
+      "schema_name" => "specialist_document",
+      "publishing_app" => "specialist-publisher",
+      "rendering_app" => "specialist-frontend",
+      "locale" => "en",
+      "phase" => "live",
+      "public_updated_at" => "2015-11-16T11:53:30",
+      "publication_state" => "draft",
+      "details" => {
+        "body" => "## Header" + ("\r\n\r\nThis is the long body of an example Medical Safety Alert" * 10),
+        "metadata" => {
+          "alert_type" => "company-led-drugs",
+          "issued_date" => "2016-02-01",
+          "document_type" => "medical_safety_alert"
+        },
+        "change_history" => [],
+      },
+      "routes" => [
+        {
+          "path" => "/drug-device-alerts/example-medical-safety-alert",
+          "type" => "exact",
+        }
+      ],
+      "redirects" => [],
+      "update_type" => "major",
+    }.deep_merge(attrs)
+  end
+
   def self.manual_content_item(attr = {})
     {
       "base_path" => "/guidance/a-manual",
