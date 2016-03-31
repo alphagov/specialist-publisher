@@ -7,3 +7,5 @@
 <h1 class="page-header">Edit section</h1>
 
 <%= render 'form', section: @section, url: {action: "update"}, method: :put %>
+
+<%= render partial: 'manual_sections_attachments/attachment_links' %>

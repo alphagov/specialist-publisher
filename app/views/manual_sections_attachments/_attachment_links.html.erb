@@ -1,0 +1,22 @@
+<div class="col-md-4">
+  <%= render partial: 'shared/govspeak_help' %>
+  <h2>Attachments</h2>
+
+  <% if @section.publication_state %>
+      <%= link_to "Add attachment", new_manual_section_attachment_path(@section.manual_content_id, @section.content_id) %>
+  <% else %>
+      <p>To add an attachment, please save the draft first.</p>
+  <% end %>
+  <% if @section.attachments %>
+      <ul class="attachments">
+        <% @section.attachments.each do |attachment| %>
+            <li class="attachment">
+              <span class="title"><%= attachment.title %></span>
+              <%= link_to "edit", edit_manual_section_attachment_path(@section.manual_content_id, @section.content_id, attachment.content_id) %>
+            </li>
+        <% end %>
+      </ul>
+  <% end %>
+</div>
+
+

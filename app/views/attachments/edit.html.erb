@@ -2,7 +2,7 @@
 
 <h1 class="page-header">Edit attachment</h1>
 
-<%= render(partial: "attachments/form", locals: {
+<%= render(partial: "shared/attachments_form", locals: {
     attachment: @attachment,
     url: document_attachment_path(params[:document_type], params[:document_content_id], params[:attachment_content_id]),
     method: 'put'

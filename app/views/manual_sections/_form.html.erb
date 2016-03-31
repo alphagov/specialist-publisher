@@ -1,28 +1,22 @@
-<div class="row">
-  <div class="col-md-8">
-    <%= form_for section, url: url, method: method do |f| %>
-      <%= render partial: "shared/form_errors", locals: { object: section } %>
-      <%= f.label :title %>
-      <%= f.text_field :title, class: 'form-control' %>
-      <%= f.label :summary %>
-      <%= f.text_area :summary, class: 'form-control short-textarea js-length-counter', data: { :"count-message-threshold" => 280, :"count-message-selector" => ".summary-length-info" } %>
-      <div class="summary-length-info" aria-live="polite">
-        Summary text should be 280 characters or fewer. <span class="count"></span>
-      </div>
-      <%= f.label :body %>
-      <%= f.text_area :body, class: 'form-control' %>
+<div class="col-md-8">
+  <%= form_for section, url: url, method: method do |f| %>
+    <%= render partial: "shared/form_errors", locals: { object: section } %>
+    <%= f.label :title %>
+    <%= f.text_field :title, class: 'form-control' %>
+    <%= f.label :summary %>
+    <%= f.text_area :summary, class: 'form-control short-textarea js-length-counter', data: { :"count-message-threshold" => 280, :"count-message-selector" => ".summary-length-info" } %>
+    <div class="summary-length-info" aria-live="polite">
+      Summary text should be 280 characters or fewer. <span class="count"></span>
+    </div>
+    <%= f.label :body %>
+    <%= f.text_area :body, class: 'form-control' %>
 
-      <div class="preview_button add-vertical-margins"></div>
-      <div class="preview_container add-vertical-margins" style="display: none;"></div>
+    <div class="preview_button add-vertical-margins"></div>
+    <div class="preview_container add-vertical-margins" style="display: none;"></div>
 
-      <div class='actions'>
-        <button name="draft" class="btn btn-success">Save as draft</button>
-      </div>
-    <% end %>
-  </div>
-
-  <div class="col-md-4">
-    <%= render partial: 'shared/govspeak_help' %>
-  </div>
+    <div class='actions'>
+      <button name="draft" class="btn btn-success">Save as draft</button>
+    </div>
+  <% end %>
 </div>
 

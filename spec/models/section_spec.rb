@@ -174,7 +174,6 @@ RSpec.describe Section do
             manual: {
               base_path: manual_base_path
             },
-            organisations: []
           },
           routes: [
             {
