@@ -14,9 +14,19 @@ class EmailAlertPresenter
     }.merge(extra_options)
   end
 
+private
+
   def body
+    if document.publishing_api_document_type == "medical_safety_alert"
+      standard_body("email_alerts/medical_safety_alerts/publication")
+    else
+      standard_body("email_alerts/publication")
+    end
+  end
+
+  def standard_body(template_path)
     view_renderer.render(
-      template: "email_alerts/publication",
+      template: template_path,
       formats: ["html"],
       locals:   {
         document_title: document.title,
@@ -26,8 +36,6 @@ class EmailAlertPresenter
       }
     )
   end
-
-private
 
   def extra_options
     {
