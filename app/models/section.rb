@@ -63,23 +63,24 @@ class Section
   end
 
   def self.find(content_id:, manual_content_id: nil)
-    section = self.from_publishing_api(content_id: content_id)
-
-    if manual_content_id && section.manual_content_id != manual_content_id
-      raise RecordNotFound.new("Section does exist, but not within the supplied manual")
-    end
-
-    section
-  end
-
-  def self.from_publishing_api(content_id:)
     content_item_response = self.publishing_api.get_content(content_id)
 
-    raise RecordNotFound.new("Section not found") unless content_item_response
+    if content_item_response
+      section = from_publishing_api(content_item_response.to_hash)
 
-    content = content_item_response.to_hash
-    payload = content.merge(
-      self.publishing_api.get_links(content_id).to_hash
+      if manual_content_id && section.manual_content_id != manual_content_id
+        raise RecordNotFound.new("Section does exist, but not within the supplied manual")
+      else
+        section
+      end
+    else
+      raise RecordNotFound.new("Section not found")
+    end
+  end
+
+  def self.from_publishing_api(payload)
+    payload = payload.merge(
+      self.publishing_api.get_links(payload['content_id']).to_hash
     )
 
     section = self.new(

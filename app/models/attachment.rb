@@ -5,6 +5,7 @@ class Attachment < Document
   attr_writer :changed
 
   def initialize(params = {})
+    params = params.symbolize_keys
     @title = params[:title]
     @file = params[:file]
     @content_type = params[:content_type]
