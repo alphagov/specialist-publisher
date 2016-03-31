@@ -21,7 +21,7 @@ class EmailAlertPresenter
       locals:   {
         document_title: document.title,
         document_summary: document.summary,
-        document_url: [Plek.current.website_root, document.base_path].join(""),
+        document_url: File.join(Plek.current.website_root, document.base_path),
         document_change_note: document.change_note,
       }
     )
