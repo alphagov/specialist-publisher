@@ -147,6 +147,7 @@ describe DrugSafetyUpdate do
 
       assert_publishing_api_publish(drug_safety_update.content_id)
       assert_rummager_posted_item(indexable_attributes)
+      assert_not_requested(:post, Plek.current.find('email-alert-api') + "/notifications")
     end
   end
 end
