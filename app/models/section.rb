@@ -2,8 +2,8 @@ class Section
   include ActiveModel::Model
   include ActiveModel::Validations
 
-  attr_accessor :content_id, :base_path, :title, :summary, :body, :update_type
-
+  attr_accessor :content_id, :base_path, :title, :summary, :body, :update_type, :attachments
+  attr_reader :publication_state
   validates :summary, presence: true
   validates :title, presence: true
   validates :body, presence: true, safe_html: true
@@ -63,23 +63,24 @@ class Section
   end
 
   def self.find(content_id:, manual_content_id: nil)
-    section = self.from_publishing_api(content_id: content_id)
-
-    if manual_content_id && section.manual_content_id != manual_content_id
-      raise RecordNotFound.new("Section does exist, but not within the supplied manual")
-    end
-
-    section
-  end
-
-  def self.from_publishing_api(content_id:)
     content_item_response = self.publishing_api.get_content(content_id)
 
-    raise RecordNotFound.new("Section not found") unless content_item_response
+    if content_item_response
+      section = from_publishing_api(content_item_response.to_hash)
 
-    content = content_item_response.to_hash
-    payload = content.merge(
-      self.publishing_api.get_links(content_id).to_hash
+      if manual_content_id && section.manual_content_id != manual_content_id
+        raise RecordNotFound.new("Section does exist, but not within the supplied manual")
+      else
+        section
+      end
+    else
+      raise RecordNotFound.new("Section not found")
+    end
+  end
+
+  def self.from_publishing_api(payload)
+    payload = payload.merge(
+      self.publishing_api.get_links(payload['content_id']).to_hash
     )
 
     section = self.new(
@@ -98,6 +99,8 @@ class Section
     if payload["links"]["organisations"]
       section.organisation_content_ids = payload["links"].fetch("organisations") || []
     end
+
+    section.attachments = Attachment.all_from_publishing_api(payload)
 
     section
   end
@@ -142,6 +145,18 @@ class Section
     end
   end
 
+  def save!
+    if save
+      true
+    else
+      raise RecordNotSaved
+    end
+  end
+
+  def find_attachment(attachment_content_id)
+    self.attachments.detect { |attachment| attachment.content_id == attachment_content_id }
+  end
+
 private
 
   def publishing_api
@@ -154,4 +169,6 @@ private
 
   class RecordNotFound < StandardError;
   end
+
+  class RecordNotSaved < StandardError; end
 end

@@ -14,17 +14,28 @@ class SectionPresenter
       public_updated_at: @section.public_updated_at.to_datetime.rfc3339,
       publishing_app: "specialist-publisher",
       rendering_app: "manuals-frontend",
-      details: {
-      body: @section.body,
-      manual: {
-      base_path: @section.manual.base_path
-    },
-      organisations: []
-    },
+      details: details,
       routes: [{
       path: @section.base_path,
       type: "exact"
     }]
     }
+  end
+
+private
+
+  def details
+    {
+      body: @section.body,
+      manual: {
+        base_path: @section.manual.base_path
+      },
+    }.tap do |details_hash|
+      details_hash[:attachments] = attachments if @section.attachments
+    end
+  end
+
+  def attachments
+    @section.attachments.map { |attachment| AttachmentPresenter.new(attachment).to_json }
   end
 end

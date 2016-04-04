@@ -5,6 +5,7 @@ class Attachment < Document
   attr_writer :changed
 
   def initialize(params = {})
+    params = params.symbolize_keys
     @title = params[:title]
     @file = params[:file]
     @content_type = params[:content_type]
@@ -24,5 +25,10 @@ class Attachment < Document
 
   def changed?
     @changed
+  end
+
+  def self.all_from_publishing_api(payload)
+    return nil unless payload.fetch('details', {}).key?('attachments')
+    payload['details']['attachments'].map { |attachment| Attachment.new(attachment) }
   end
 end

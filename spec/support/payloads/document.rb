@@ -169,13 +169,6 @@ module Payloads
         "description" => "This is a manual's first section",
         "details" => {
           "body" => "First section body",
-          "organisations" => [
-            {
-              "title" => "Goverment Digital Service",
-              "abbreviation" => "DVSA",
-              "web_url" => "https://www.gov.uk/government/organisations/government-digital-service"
-            }
-          ]
         },
         "format" => "manual_section",
         "locale" => "en",
@@ -204,11 +197,22 @@ module Payloads
         "description" => "This is a manual's second section",
         "details" => {
           "body" => "Second section body",
-          "organisations" => [
+          "attachments" => [
             {
-              "title" => "Goverment Digital Service",
-              "abbreviation" => "DVSA",
-              "web_url" => "https://www.gov.uk/government/organisations/government-digital-service"
+              "content_id" => "77f2d40e-3853-451f-9ca3-a747e8402e34",
+              "url" => "https://assets.digital.cabinet-office.gov.uk/media/513a0efbed915d425e000002/section-image.jpg",
+              "content_type" => "application/jpeg",
+              "title" => "section image title",
+              "created_at" => "2015-12-03T16:59:13+00:00",
+              "updated_at" => "2015-12-03T16:59:13+00:00"
+            },
+            {
+              "content_id" => "ec3f6901-4156-4720-b4e5-f04c0b152141",
+              "url" => "https://assets.digital.cabinet-office.gov.uk/media/513a0efbed915d425e000002/section-pdf.pdf",
+              "content_type" => "application/pdf",
+              "title" => "section pdf title",
+              "created_at" => "2015-12-03T16:59:13+00:00",
+              "updated_at" => "2015-12-03T16:59:13+00:00"
             }
           ]
         },

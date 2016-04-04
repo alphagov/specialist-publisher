@@ -106,31 +106,31 @@ class Document
 
   def self.from_publishing_api(payload)
     document = self.new(
-      content_id: payload.content_id,
-      title: payload.title,
-      summary: payload.description,
-      body: payload.details.body,
-      publication_state: payload.publication_state,
-      public_updated_at: payload.public_updated_at
+      content_id: payload['content_id'],
+      title: payload['title'],
+      summary: payload['description'],
+      body: payload['details']['body'],
+      publication_state: payload['publication_state'],
+      public_updated_at: payload['public_updated_at']
     )
 
-    document.base_path = payload.base_path
-    document.update_type = payload.update_type
+    document.base_path = payload['base_path']
+    document.update_type = payload['update_type']
 
-    document.bulk_published = payload.details.metadata.bulk_published
+    document.bulk_published = payload['details']['metadata']['bulk_published']
 
     # If the document is redrafted remove the last/most
     # recent change note from the change_history array
     # and set it as the document's change note
-    document.change_note = payload.details.change_history.pop["note"] if document.redrafted? && payload.details.change_history.length > 1
+    document.change_note = payload['details']['change_history'].pop["note"] if document.redrafted? && payload['details']['change_history'].length > 1
 
-    document.attachments = attachments(payload) if payload.details.attachments
+    document.attachments = Attachment.all_from_publishing_api(payload)
     # Persist the rest of the change_history on the document
     # if the document is live or redrafted
-    document.change_history = payload.details.change_history.map(&:to_h) if document.published?
+    document.change_history = payload['details']['change_history'].map(&:to_h) if document.published?
 
     document.format_specific_fields.each do |field|
-      document.public_send(:"#{field.to_s}=", payload.details.metadata.send(field))
+      document.public_send(:"#{field.to_s}=", payload['details']['metadata'][field.to_s])
     end
 
     document
@@ -171,7 +171,7 @@ class Document
     response = publishing_api.get_content(content_id)
 
     if response
-      self.from_publishing_api(response.to_ostruct)
+      self.from_publishing_api(response.to_hash)
     else
       raise RecordNotFound
     end
@@ -230,10 +230,6 @@ class Document
   end
 
 private
-
-  def self.attachments(payload)
-    payload.details.attachments.map { |attachment| Attachment.new(attachment) }
-  end
 
   def email_alert_api
     SpecialistPublisher.services(:email_alert_api)

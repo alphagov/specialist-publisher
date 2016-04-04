@@ -10,7 +10,7 @@ Rails.application.routes.draw do
     post :publish, on: :member
 
     resources :sections, param: :content_id, except: :destroy, controller: "manual_sections" do
-      resources :attachments, controller: :manual_document_attachments, only: [:new, :create, :edit, :update]
+      resources :attachments, controller: 'manual_sections_attachments', param: :attachment_content_id, only: [:new, :create, :edit, :update]
 
       get :reorder, on: :collection
       post :update_order, on: :collection
