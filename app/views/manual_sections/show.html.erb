@@ -15,6 +15,15 @@
   </div>
 </div>
 
+<% if @section.body.present? %>
+  <div class="row">
+    <div class=" col-md-8">
+      <h2>Body</h2>
+      <pre class="body-pre add-bottom-margin"><%= @section.body %></pre>
+    </div>
+  </div>
+<% end %>
+
 <div class="actions">
   <%= link_to("Edit section", edit_manual_section_path(manual_content_id: @section.manual.content_id, content_id: @section.content_id), class: 'action-link') %>
 </div>

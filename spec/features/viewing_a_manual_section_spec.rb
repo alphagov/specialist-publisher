@@ -49,6 +49,7 @@ RSpec.feature "Viewing a Manual and its Sections", type: :feature do
 
       expect(page.status_code).to eq(200)
       expect(page).to have_content("This is a manual's first section")
+      expect(page).to have_content("First section body")
     end
 
     scenario "requesting a Section with the wrong content id" do

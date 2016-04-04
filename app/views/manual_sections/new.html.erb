@@ -5,4 +5,4 @@
 
 <h1 class="page-header">Add section</h1>
 
-<%= render 'form', section: @section %>
+<%= render 'form', section: @section, url: {action: 'create'}, method: 'post' %>

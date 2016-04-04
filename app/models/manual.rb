@@ -163,6 +163,13 @@ class Manual
   end
   private_class_method :content_ids
 
+  def update_attributes(new_attributes)
+    new_attributes.each do |attribute, value|
+      public_send(:"#{attribute}=", value)
+    end
+    save
+  end
+
   def save
     if self.valid?
       presented_manual = ManualPresenter.new(self)

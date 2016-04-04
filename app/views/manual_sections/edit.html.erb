@@ -1,0 +1,9 @@
+<% content_for :breadcrumbs do %>
+  <li><%= link_to "Your manuals", manuals_path %></li>
+  <li><%= link_to @section.manual.title, manual_path(@section.manual_content_id) %></li>
+  <li class='active'>Edit section</li>
+<% end %>
+
+<h1 class="page-header">Edit section</h1>
+
+<%= render 'form', section: @section, url: {action: "update"}, method: :put %>
