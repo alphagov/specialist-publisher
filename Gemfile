@@ -10,6 +10,7 @@ gem 'mongoid', '5.0.1'
 gem 'uglifier', '>= 1.3.0'
 gem 'jquery-rails', '~> 3.1.4'
 gem 'select2-rails', '~> 4.0.0'
+gem "kaminari"
 
 # GDS managed dependencies
 gem 'plek', '~> 1.10'
