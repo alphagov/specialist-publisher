@@ -9,10 +9,11 @@ class DocumentsController < ApplicationController
   before_action :permitted?, if: :document_type
 
   def index
+    page = params[:page]
+    per_page = params[:per_page]
     if current_format
-      @documents = document_klass.all
-
-      @documents.sort! { |a, b| a.public_updated_at <=> b.public_updated_at }.reverse!
+      @response = document_klass.all(page, per_page)
+      @paged_documents = PaginationPresenter.new(@response, per_page)
     else
       redirect_to manuals_path
     end

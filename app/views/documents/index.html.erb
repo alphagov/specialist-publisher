@@ -11,7 +11,7 @@
 
   <div class="col-md-9">
     <ul class="document-list">
-      <% @documents.each do |document| %>
+      <% @paged_documents.each do |document| %>
         <li class="document">
           <%= link_to document.title, document_path(current_format.document_type, document.content_id), class: 'document-title' %>
           <ul class="metadata">
@@ -24,4 +24,5 @@
       <% end %>
     </ul>
   </div>
+  <%= paginate @paged_documents %>
 </div>
