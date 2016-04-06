@@ -1,15 +1,22 @@
+<% content_for :breadcrumbs do %>
+  <li><%= link_to "Your documents", documents_path(current_format.document_type) %></li>
+  <li class='active'>New document</li>
+<% end %>
+
 <h2>New <%= current_format.title.singularize %></h2>
 
-<div class="col-md-8">
-  <%= form_for @document, url: documents_path(params[:document_type]) do |f| %>
-    <%= render partial: "shared/form_fields", locals: { f: f } %>
+<div class="row">
+  <div class="col-md-8">
+    <%= form_for @document, url: documents_path(params[:document_type]) do |f| %>
+      <%= render partial: "shared/form_fields", locals: { f: f } %>
 
-    <%= render partial: "metadata_fields/#{params[:document_type].underscore}", locals: { f: f } %>
+      <%= render partial: "metadata_fields/#{params[:document_type].underscore}", locals: { f: f } %>
 
-    <div class="actions">
-      <button name="save" class="btn btn-success">Save as draft</button>
-    </div>
-  <% end %>
+      <div class="actions">
+        <button name="save" class="btn btn-success">Save as draft</button>
+      </div>
+    <% end %>
+  </div>
+
+  <%= render partial: 'attachments/attachment_links' %>
 </div>
-
-<%= render partial: 'attachments/attachment_links' %>
