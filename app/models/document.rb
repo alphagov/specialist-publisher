@@ -168,8 +168,6 @@ class Document
     # will request all the required fields and the map will call
     # `self.from_publishing_api` itself.
 
-    #filter_pagination_params(page)
-
     response = self.publishing_api.get_content_items(
       document_type: self.publishing_api_document_type,
       fields: [
@@ -179,8 +177,8 @@ class Document
         :title,
         :publication_state,
       ],
-      page: page ||= 1,
-      per_page: per_page ||= 50
+      page: page,
+      per_page: per_page
     ).to_ostruct
     response
   end

@@ -9,8 +9,8 @@ class DocumentsController < ApplicationController
   before_action :permitted?, if: :document_type
 
   def index
-    page = params[:page]
-    per_page = params[:per_page]
+    page = filtered_page_param(params[:page])
+    per_page = filtered_per_page_param(params[:per_page])
     if current_format
       @response = document_klass.all(page, per_page)
       @paged_documents = PaginationPresenter.new(@response, per_page)
@@ -102,6 +102,14 @@ private
     redirect_to documents_path(document_type: document_type)
 
     Airbrake.notify(e)
+  end
+
+  def filtered_page_param(page)
+    page.to_i.to_s == page ? page : 1
+  end
+
+  def filtered_per_page_param(per_page)
+    per_page.to_i.to_s == per_page ? per_page : 50
   end
 
   def filtered_params(params_of_document)
