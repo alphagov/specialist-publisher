@@ -2,8 +2,13 @@ require 'spec_helper'
 
 RSpec.feature "Viewing a specific case", type: :feature do
   let(:fields) { [:base_path, :content_id, :public_updated_at, :title, :publication_state] }
+  let(:cma_case_with_attachments) {
+    Payloads.cma_case_with_attachments(
+      "title" => "CMA Case With Attachment"
+    )
+  }
   let(:cma_cases) {
-    10.times.collect do |n|
+    ten_example_cases = 10.times.collect do |n|
       Payloads.cma_case_content_item(
         "title" => "Example CMA Case #{n}",
         "description" => "This is the summary of example CMA case #{n}",
@@ -11,6 +16,7 @@ RSpec.feature "Viewing a specific case", type: :feature do
         "publication_state" => "draft",
       )
     end
+    ten_example_cases << cma_case_with_attachments
   }
 
   before do
@@ -50,5 +56,28 @@ RSpec.feature "Viewing a specific case", type: :feature do
 
     expect(page.current_path).to eq("/cma-cases")
     expect(page).to have_content("Document not found")
+  end
+
+  scenario "Viewing attachments on a document" do
+    attachments_payloads = cma_case_with_attachments["details"]["attachments"]
+
+    visit "/cma-cases"
+    expect(page).to have_content("Example CMA Case 0")
+    expect(page).to have_content("CMA Case With Attachment")
+
+    click_link "Example CMA Case 0"
+
+    expect(page).to have_content("This document doesn’t have any attachments")
+
+    visit "/cma-cases"
+    click_link "CMA Case With Attachment"
+
+    expect(page).not_to have_content("This document doesn’t have any attachments")
+    expect(page).to have_content(attachments_payloads.length.to_s + " attachments")
+    attachments_payloads.each do |attachment|
+      expect(page).to have_content(attachment["title"])
+      expect(page).to have_content(attachment["created_at"].to_date.to_s(:govuk_date))
+      expect(page).to have_content(attachment["updated_at"].to_date.to_s(:govuk_date))
+    end
   end
 end
