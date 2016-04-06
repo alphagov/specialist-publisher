@@ -57,5 +57,17 @@
         <% end %>
       </div>
     </div>
+
+    <%= form_tag(withdraw_document_path(current_format.document_type, @document.content_id), method: :post, class: 'panel panel-default') do %>
+        <div class="panel-heading">
+          <div class="panel-title">
+            Withdraw document
+          </div>
+        </div>
+        <div class="panel-body">
+          <p>The document will be removed from the site. It will still be possible to edit the document and publish a new version.</p>
+          <button name="submit" class="btn btn-warning" data-module="confirm" data-message="Are you sure you want to withdraw this document?">Withdraw document</button>
+        </div>
+    <% end %>
   </div>
 </div>

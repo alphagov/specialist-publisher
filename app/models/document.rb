@@ -225,6 +225,22 @@ class Document
     end
   end
 
+  def withdraw!
+    gone_content_id = SecureRandom.uuid
+    presented_document = WithdrawPresenter.new(gone_content_id, self.base_path)
+
+    begin
+      item_request = publishing_api.put_content(gone_content_id, presented_document.to_json)
+      publish_request = publishing_api.publish(gone_content_id, update_type)
+
+      item_request.code == 200 && publish_request.code == 200
+    rescue GdsApi::HTTPErrorResponse => e
+      Airbrake.notify(e)
+
+      false
+    end
+  end
+
   def find_attachment(attachment_content_id)
     self.attachments.detect { |attachment| attachment.content_id == attachment_content_id }
   end
