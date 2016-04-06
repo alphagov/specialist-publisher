@@ -59,11 +59,12 @@ describe MedicalSafetyAlert do
   }
 
   let(:fields) { %i[base_path content_id public_updated_at title publication_state] }
-
   let(:medical_safety_alerts) { 10.times.map { |n| medical_safety_alert_content_item(n) } }
+  let(:page) {1}
+  let(:per_page) {50}
 
   before do
-    publishing_api_has_fields_for_document(described_class.publishing_api_document_type, medical_safety_alerts, fields)
+    publishing_api_has_fields_for_document_with_pagination(described_class.publishing_api_document_type, medical_safety_alerts, fields, page, per_page)
 
     medical_safety_alerts.each do |medical_safety_alert|
       publishing_api_has_item(medical_safety_alert)
@@ -74,7 +75,7 @@ describe MedicalSafetyAlert do
 
   describe ".all" do
     it "returns all Medical Safety Alerts" do
-      expect(described_class.all.length).to eq(medical_safety_alerts.length)
+      expect(described_class.all(page, per_page).results.length).to eq(medical_safety_alerts.length)
     end
   end
 

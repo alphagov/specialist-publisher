@@ -77,11 +77,12 @@ describe EsiFund do
   }
 
   let(:fields) { %i[base_path content_id public_updated_at title publication_state] }
-
   let(:esi_funds) { 10.times.map { |n| esi_fund_content_item(n) } }
+  let(:page) {1}
+  let(:per_page) {50}
 
   before do
-    publishing_api_has_fields_for_document(described_class.publishing_api_document_type, esi_funds, fields)
+    publishing_api_has_fields_for_document_with_pagination(described_class.publishing_api_document_type, esi_funds, fields, page, per_page)
 
     esi_funds.each do |esi_fund|
       publishing_api_has_item(esi_fund)
@@ -92,7 +93,7 @@ describe EsiFund do
 
   context ".all" do
     it "returns all ESI Funds" do
-      expect(described_class.all.length).to be(esi_funds.length)
+      expect(described_class.all(page, per_page).results.length).to be(esi_funds.length)
     end
   end
 

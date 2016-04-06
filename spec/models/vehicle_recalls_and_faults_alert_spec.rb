@@ -60,9 +60,11 @@ describe VehicleRecallsAndFaultsAlert do
 
   let(:fields) { %i[base_path content_id public_updated_at title publication_state] }
   let(:vehicle_recalls_and_faults) { 10.times.map { |n| vehicle_recalls_and_faults_alert_content_item(n) } }
+  let(:page) {1}
+  let(:per_page) {50}
 
   before do
-    publishing_api_has_fields_for_document(described_class.publishing_api_document_type, vehicle_recalls_and_faults, fields)
+    publishing_api_has_fields_for_document_with_pagination(described_class.publishing_api_document_type, vehicle_recalls_and_faults, fields, page, per_page)
 
     vehicle_recalls_and_faults.each do |vehicle|
       publishing_api_has_item(vehicle)
@@ -73,7 +75,7 @@ describe VehicleRecallsAndFaultsAlert do
 
   describe ".all" do
     it "returns all Vehicle Recalls and Faults" do
-      expect(described_class.all.length).to be(vehicle_recalls_and_faults.length)
+      expect(described_class.all(page, per_page).results.length).to be(vehicle_recalls_and_faults.length)
     end
   end
 

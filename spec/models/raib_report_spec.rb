@@ -59,11 +59,12 @@ describe RaibReport do
   }
 
   let(:fields) { %i[base_path content_id public_updated_at title publication_state] }
-
   let(:raib_reports) { 10.times.map { |n| raib_report_content_item(n) } }
+  let(:page) {1}
+  let(:per_page) {50}
 
   before do
-    publishing_api_has_fields_for_document(described_class.publishing_api_document_type, raib_reports, fields)
+    publishing_api_has_fields_for_document_with_pagination(described_class.publishing_api_document_type, raib_reports, fields, page, per_page)
 
     raib_reports.each do |raib_report|
       publishing_api_has_item(raib_report)
@@ -74,7 +75,7 @@ describe RaibReport do
 
   context ".all" do
     it "returns all RAIB Reports" do
-      expect(described_class.all.length).to be(raib_reports.length)
+      expect(described_class.all(page, per_page).results.length).to be(raib_reports.length)
     end
   end
 
