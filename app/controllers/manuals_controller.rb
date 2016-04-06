@@ -22,6 +22,19 @@ class ManualsController < ApplicationController
     @manual = Manual.new
   end
 
+  def create
+    @manual = Manual.new(manual_params)
+    @manual.organisation_content_ids = [current_user.organisation_content_id]
+
+    if @manual.save
+      flash[:success] = "Created #{@manual.title}"
+      redirect_to manual_path(@manual.content_id)
+    else
+      flash.now[:danger] = "There was an error creating #{@manual.title}. Please try again later."
+      render :new
+    end
+  end
+
   def edit
     @manual = Manual.find(content_id: params[:content_id])
   end
@@ -35,18 +48,6 @@ class ManualsController < ApplicationController
     else
       flash.now[:danger] = "There was an error updating #{@manual.title}. Please try again later."
       render :edit
-    end
-  end
-
-  def create
-    @manual = Manual.new(manual_params)
-
-    if @manual.save
-      flash[:success] = "Created #{@manual.title}"
-      redirect_to manual_path(@manual.content_id)
-    else
-      flash.now[:danger] = "There was an error creating #{@manual.title}. Please try again later."
-      render :new
     end
   end
 

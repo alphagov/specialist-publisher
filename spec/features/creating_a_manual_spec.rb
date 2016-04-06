@@ -17,8 +17,8 @@ RSpec.feature "Creating a Manual", type: :feature do
         title: "My New Manual",
         description: "Summary of new manual",
         details: {
-        body: "The body of my new manual. The body of my new manual. The body of my new manual."
-      }
+          body: "The body of my new manual. The body of my new manual. The body of my new manual."
+        }
       }
     end
 
@@ -26,11 +26,10 @@ RSpec.feature "Creating a Manual", type: :feature do
       {
         "content_id" => test_content_id,
         "links" => {
-        "sections" => [
-      ],
-      "organisations" => [
-      ]
-      }
+          "sections" => [
+          ],
+          "organisations" => ["af07d5a5-df63-4ddc-9383-6a666845ebe9"]
+        }
       }
     end
 
@@ -40,8 +39,16 @@ RSpec.feature "Creating a Manual", type: :feature do
       publishing_api_has_fields_for_document("manual", [], [:content_id])
 
       stub_publishing_api_put_content(test_content_id, {})
+      stub_publishing_api_patch_links(test_content_id, {})
       publishing_api_has_item(stub_json)
       publishing_api_has_links(manual_links)
+
+      organisation = {
+        content_id: manual_links['links']['organisations'][0],
+        base_path: "/government/organisations/"
+      }
+      publishing_api_has_item(organisation)
+
       allow(SecureRandom).to receive(:uuid).and_return(stub_json[:content_id])
     end
 
@@ -70,8 +77,39 @@ RSpec.feature "Creating a Manual", type: :feature do
 
       click_button "Save as draft"
 
-      assert_publishing_api_put_content(test_content_id, request_json_includes("base_path" => test_base_path))
-      assert_publishing_api_put_content(test_content_id, request_json_includes("routes" => [{ "path" => test_base_path, "type" => "exact" }]))
+      assert_publishing_api_put_content(
+        test_content_id,
+        request_json_includes("base_path" => test_base_path)
+      )
+
+      assert_publishing_api_put_content(
+        test_content_id,
+        request_json_includes(
+          "routes" => [
+            { "path" => test_base_path, "type" => "exact" }
+          ]
+        )
+      )
+
+      assert_publishing_api_put_content(
+        test_content_id,
+        request_json_includes(
+          "details" => {
+            "body" => "The body of my new manual. The body of my new manual. The body of my new manual.",
+            "child_section_groups" => [],
+            "change_notes" => [],
+          }
+        )
+      )
+
+      assert_publishing_api_patch_links(
+        test_content_id,
+        request_json_includes(
+          "links" => {
+            "organisations" => ["af07d5a5-df63-4ddc-9383-6a666845ebe9"]
+          }
+        )
+      )
 
       expect(page.status_code).to eq(200)
       expect(page).to have_content("Summary of new manual")

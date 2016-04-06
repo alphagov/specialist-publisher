@@ -15,10 +15,20 @@ RSpec.feature "editing a manual section" do
       log_in_as_editor(:gds_editor)
 
       publishing_api_has_item(manual)
-      publishing_api_has_links(manual_links)
 
       sections.each { |section| publishing_api_has_item(section) }
-      sections_links.each { |section_links| publishing_api_has_links(section_links) }
+
+      links = [manual_links] + sections_links
+      links.each do |link_set|
+        publishing_api_has_links(link_set)
+        link_set['links']['organisations'].each do |organisation|
+          organisation = {
+            content_id: organisation,
+            base_path: "/government/organisations/#{organisation}"
+          }
+          publishing_api_has_item(organisation)
+        end
+      end
 
       section_content_ids.each do |section_content_id|
         stub_publishing_api_put_content(section_content_id, {})

@@ -15,17 +15,16 @@ class ManualPresenter
       rendering_app: "specialist-frontend",
       public_updated_at: manual.public_updated_at.to_datetime.rfc3339,
       details: {
-      body: manual.body,
-      child_section_groups: [],
-      change_notes: [],
-      organisations: []
-    },
+        body: manual.body,
+        child_section_groups: [],
+        change_notes: []
+      },
       routes: [
         {
-      path: manual.base_path,
-      type: "exact"
-    }
-    ],
+          path: manual.base_path,
+          type: "exact"
+        }
+      ],
       redirects: [],
       update_type: manual.update_type
     }

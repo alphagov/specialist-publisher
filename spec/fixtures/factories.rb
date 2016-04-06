@@ -16,6 +16,7 @@ FactoryGirl.define do
   factory :gds_editor, parent: :user do
     organisation_slug "government-digital-service"
     organisation_content_id "af07d5a5-df63-4ddc-9383-6a666845ebe9"
+    permissions %w(signin gds_editor)
   end
 
   factory :cma_editor, parent: :user do

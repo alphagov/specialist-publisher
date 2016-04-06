@@ -20,6 +20,11 @@
             <li>
               <%= state(manual) %>
             </li>
+            <% if current_user.gds_editor? && manual.organisations.present? %>
+              <% manual.organisations.each do |organisation| %>
+                <li class="text-muted">From <%= link_to organisation.title, url_for_public_org(organisation.base_path) %></li>
+              <% end %>
+            <% end %>
           </ul>
         </li>
       <% end %>
