@@ -10,6 +10,7 @@ class WithdrawPresenter
       base_path: base_path,
       document_type: "gone",
       schema_name: "gone",
+      format: "gone",
       publishing_app: "specialist-publisher",
       routes: [
         {

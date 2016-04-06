@@ -11,6 +11,7 @@ RSpec.feature 'Unpublishing a CMA case', type: :feature do
       base_path: published_cma_case['base_path'],
       schema_name: 'gone',
       document_type: 'gone',
+      format: 'gone',
       publishing_app: 'specialist-publisher',
       routes: [{
         path: published_cma_case['base_path'],
