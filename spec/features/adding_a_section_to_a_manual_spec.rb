@@ -29,10 +29,13 @@ RSpec.feature "adding a section to a manual" do
       }
     end
 
+    let(:page_number) {1}
+    let(:per_page) {50}
+
     before do
       log_in_as_editor(:gds_editor)
 
-      publishing_api_has_fields_for_document("manual", [], [:content_id])
+      publishing_api_has_fields_for_document_with_pagination("manual", [], [:content_id], page_number, per_page)
 
       stub_publishing_api_put_content(manual_content_id, {})
       stub_any_publishing_api_patch_links

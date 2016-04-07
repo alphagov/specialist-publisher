@@ -19,10 +19,13 @@ RSpec.feature "Viewing a specific case", type: :feature do
     ten_example_cases << cma_case_with_attachments
   }
 
+  let(:page_number) {1}
+  let(:per_page) {50}
+
   before do
     log_in_as_editor(:cma_editor)
 
-    publishing_api_has_fields_for_document(CmaCase.publishing_api_document_type, cma_cases, fields)
+    publishing_api_has_fields_for_document_with_pagination(CmaCase.publishing_api_document_type, cma_cases, fields, page_number, per_page)
 
     cma_cases.each do |cma_case|
       publishing_api_has_item(cma_case)
