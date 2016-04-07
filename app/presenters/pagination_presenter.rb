@@ -8,9 +8,8 @@ class PaginationPresenter < SimpleDelegator
     super(present_results(api_response.results))
 
     @current_page = api_response.current_page
-    @total_pages = api_response.pages
+    @total_pages = api_response.pages || 1
     @total_count = api_response.total
-    @limit_value = per_page
   end
 
 private
