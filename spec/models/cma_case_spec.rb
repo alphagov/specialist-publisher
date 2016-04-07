@@ -128,6 +128,19 @@ RSpec.describe CmaCase do
       expect(cma_case.market_sector).to eq(cma_cases[0]["details"]["metadata"]["market_sector"])
       expect(cma_case.outcome_type).to  eq(cma_cases[0]["details"]["metadata"]["outcome_type"])
     end
+
+    it "should be able backward compatible for a single string representation of body in payload" do
+      simple_cma_case_payload = Payloads.cma_case_content_item("details" => { "body" => "single string body" })
+      publishing_api_has_item(simple_cma_case_payload)
+
+      content_id = simple_cma_case_payload["content_id"]
+      cma_case = described_class.find(content_id)
+
+      expect(simple_cma_case_payload["details"]["body"].class).to eq(String)
+      expect(cma_case.body.class).to eq(String)
+
+      expect(cma_case.body).to eq(simple_cma_case_payload["details"]["body"])
+    end
   end
 
   describe "#save! without attachments" do

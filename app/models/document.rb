@@ -104,12 +104,26 @@ class Document
     end
   end
 
+  def self.extract_body_from_payload(payload)
+    body_attribute = payload.fetch('details').fetch('body')
+
+    case body_attribute
+    when Array
+      govspeak_body = body_attribute.detect do |body_hash|
+        body_hash['content_type'] == 'text/govspeak'
+      end
+      govspeak_body['content']
+    when String
+      body_attribute
+    end
+  end
+
   def self.from_publishing_api(payload)
     document = self.new(
       content_id: payload['content_id'],
       title: payload['title'],
       summary: payload['description'],
-      body: payload['details']['body'],
+      body: extract_body_from_payload(payload),
       publication_state: payload['publication_state'],
       public_updated_at: payload['public_updated_at']
     )
