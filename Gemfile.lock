@@ -96,7 +96,8 @@ GEM
       rails (>= 3.0.0)
       warden (~> 1.2)
       warden-oauth2 (~> 0.0.1)
-    govspeak (3.4.0)
+    govspeak (3.5.2)
+      addressable (~> 2.3.8)
       htmlentities (~> 4)
       kramdown (~> 1.5.0)
       nokogiri (~> 1.5)
@@ -302,7 +303,7 @@ DEPENDENCIES
   foreman (= 0.74.0)
   gds-api-adapters (= 30.0.0)
   gds-sso (= 11.0.0)
-  govspeak (= 3.4.0)
+  govspeak (~> 3.5)
   govuk-content-schema-test-helpers (= 1.4.0)
   govuk-lint
   govuk_admin_template (~> 3.4.0)
