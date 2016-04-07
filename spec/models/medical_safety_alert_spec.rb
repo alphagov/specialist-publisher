@@ -2,37 +2,17 @@ require 'spec_helper'
 
 describe MedicalSafetyAlert do
   def medical_safety_alert_content_item(n)
-    {
-      "content_id" => SecureRandom.uuid,
+    Payloads.medical_safety_alert_content_item(
       "base_path" => "/drug-device-alerts/example-medical-safety-alert-#{n}",
       "title" => "Example Medical Safety Alert #{n}",
       "description" => "This is the summary of example Medical Safety Alert #{n}",
-      "document_type" => "medical_safety_alert",
-      "schema_name" => "specialist_document",
-      "publishing_app" => "specialist-publisher",
-      "rendering_app" => "specialist-frontend",
-      "locale" => "en",
-      "phase" => "live",
-      "public_updated_at" => "2015-11-16T11:53:30",
-      "publication_state" => "draft",
-      "details" => {
-        "body" => "## Header" + ("\r\n\r\nThis is the long body of an example Medical Safety Alert" * 10),
-        "metadata" => {
-          "alert_type" => "company-led-drugs",
-          "issued_date" => "2016-02-01",
-          "document_type" => "medical_safety_alert"
-        },
-        "change_history" => [],
-      },
       "routes" => [
         {
           "path" => "/drug-device-alerts/example-medical-safety-alert-#{n}",
           "type" => "exact",
         }
-      ],
-      "redirects" => [],
-      "update_type" => "major",
-    }
+      ]
+    )
   end
 
   let(:mhra_org_content_item) {
@@ -106,7 +86,7 @@ describe MedicalSafetyAlert do
       expect(medical_safety_alert.base_path).to            eq(medical_safety_alerts[0]["base_path"])
       expect(medical_safety_alert.title).to                eq(medical_safety_alerts[0]["title"])
       expect(medical_safety_alert.summary).to              eq(medical_safety_alerts[0]["description"])
-      expect(medical_safety_alert.body).to                 eq(medical_safety_alerts[0]["details"]["body"])
+      expect(medical_safety_alert.body).to                 eq(medical_safety_alerts[0]["details"]["body"][0]["content"])
       expect(medical_safety_alert.alert_type).to           eq(medical_safety_alerts[0]["details"]["metadata"]["alert_type"])
     end
   end

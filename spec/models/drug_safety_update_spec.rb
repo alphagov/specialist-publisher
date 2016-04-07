@@ -2,35 +2,17 @@ require 'spec_helper'
 
 describe DrugSafetyUpdate do
   def drug_safety_update_content_item(n)
-    {
-      "content_id" => SecureRandom.uuid,
+    Payloads.drug_safety_update_content_item(
       "base_path" => "/drug-safety-update/example-drug-safety-update-#{n}",
       "title" => "Example Drug Safety Update #{n}",
       "description" => "This is the summary of an example Drug Safety Update #{n}",
-      "document_type" => "drug_safety_update",
-      "schema_name" => "specialist_document",
-      "publishing_app" => "specialist-publisher",
-      "rendering_app" => "specialist-frontend",
-      "locale" => "en",
-      "phase" => "live",
-      "public_updated_at" => "2015-11-16T11:53:30",
-      "publication_state" => "draft",
-      "details" => {
-        "body" => "## Header" + ("\r\n\r\nThis is the long body of an example Drug Safety Update" * 10),
-        "metadata" => {
-          "document_type" => "drug_safety_update",
-        },
-        "change_history" => [],
-      },
       "routes" => [
         {
           "path" => "/drug-safety-update/example-drug-safety-update-#{n}",
           "type" => "exact",
         }
-      ],
-      "redirects" => [],
-      "update_type" => "major",
-    }
+      ]
+    )
   end
 
   let(:drug_safety_update_org_content_item) {
@@ -102,7 +84,7 @@ describe DrugSafetyUpdate do
       expect(drug_safety_update.base_path).to            eq(drug_safety_updates[0]["base_path"])
       expect(drug_safety_update.title).to                eq(drug_safety_updates[0]["title"])
       expect(drug_safety_update.summary).to              eq(drug_safety_updates[0]["description"])
-      expect(drug_safety_update.body).to                 eq(drug_safety_updates[0]["details"]["body"])
+      expect(drug_safety_update.body).to                 eq(drug_safety_updates[0]["details"]["body"][0]["content"])
     end
   end
 

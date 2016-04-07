@@ -2,35 +2,17 @@ require 'spec_helper'
 
 describe RaibReport do
   def raib_report_content_item(n)
-    {
-      "content_id" => SecureRandom.uuid,
+    Payloads.raib_report_content_item(
       "base_path" => "/raib-reports/example-raib-report-#{n}",
       "title" => "Example RAIB Report #{n}",
       "description" => "This is the summary of example RAIB Report #{n}",
-      "document_type" => "raib_report",
-      "schema_name" => "specialist_document",
-      "publishing_app" => "specialist-publisher",
-      "rendering_app" => "specialist-frontend",
-      "locale" => "en",
-      "phase" => "live",
-      "public_updated_at" => "2015-11-16T11:53:30",
-      "publication_state" => "draft",
-      "details" => {
-        "body" => "## Header" + ("\r\n\r\nThis is the long body of an example RAIB Report" * 10),
-        "metadata" => {
-          "date_of_occurrence" => "2015-10-10",
-          "document_type" => "raib_report"
-        },
-      },
       "routes" => [
         {
           "path" => "/raib-reports/example-raib-report-#{n}",
           "type" => "exact",
         }
-      ],
-      "redirects" => [],
-      "update_type" => "major",
-    }
+      ]
+    )
   end
 
   let(:raib_org_content_item) {
@@ -104,7 +86,7 @@ describe RaibReport do
       expect(raib_report.base_path).to            eq(raib_reports[0]["base_path"])
       expect(raib_report.title).to                eq(raib_reports[0]["title"])
       expect(raib_report.summary).to              eq(raib_reports[0]["description"])
-      expect(raib_report.body).to                 eq(raib_reports[0]["details"]["body"])
+      expect(raib_report.body).to                 eq(raib_reports[0]["details"]["body"][0]["content"])
       expect(raib_report.date_of_occurrence).to   eq(raib_reports[0]["details"]["metadata"]["date_of_occurrence"])
     end
   end

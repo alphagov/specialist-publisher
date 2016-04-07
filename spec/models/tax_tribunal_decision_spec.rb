@@ -2,37 +2,17 @@ require "rails_helper"
 
 describe TaxTribunalDecision do
   def tax_tribunal_decision_content_item(n)
-    {
-      "content_id" => SecureRandom.uuid,
+    Payloads.tax_tribunal_decision_content_item(
       "base_path" => "/tax-and-chancery-tribunal-decisions/example-tax-tribunal-decision-#{n}",
       "title" => "Example Tax Tribunal Decision #{n}",
       "description" => "This is the summary of example Tax Tribunal Decision #{n}",
-      "document_type" => "tax_tribunal_decision",
-      "schema_name" => "specialist_document",
-      "publishing_app" => "specialist-publisher",
-      "rendering_app" => "specialist-frontend",
-      "locale" => "en",
-      "phase" => "live",
-      "public_updated_at" => "2015-11-16T11:53:30",
-      "publication_state" => "draft",
-      "details" => {
-        "body" => "## Header" + ("\r\n\r\nThis is the long body of an example Tax Tribunal Decision" * 10),
-        "metadata" => {
-          "tribunal_decision_category" => "banking",
-          "tribunal_decision_decision_date" => "2015-07-30",
-          "document_type" => "tax_tribunal_decision",
-        },
-        "change_history" => [],
-      },
       "routes" => [
         {
           "path" => "/tax-and-chancery-tribunal-decisions/example-tax-tribunal-decision-#{n}",
           "type" => "exact",
         }
-      ],
-      "redirects" => [],
-      "update_type" => "major",
-    }
+      ]
+    )
   end
 
   let(:tax_tribunal_decision_org_content_item) {
@@ -107,7 +87,7 @@ describe TaxTribunalDecision do
       expect(tax_tribunal_decision.base_path).to                        eq(tax_tribunal_decisions[0]["base_path"])
       expect(tax_tribunal_decision.title).to                            eq(tax_tribunal_decisions[0]["title"])
       expect(tax_tribunal_decision.summary).to                          eq(tax_tribunal_decisions[0]["description"])
-      expect(tax_tribunal_decision.body).to                             eq(tax_tribunal_decisions[0]["details"]["body"])
+      expect(tax_tribunal_decision.body).to                             eq(tax_tribunal_decisions[0]["details"]["body"][0]["content"])
       expect(tax_tribunal_decision.tribunal_decision_category).to       eq(tax_tribunal_decisions[0]["details"]["metadata"]["tribunal_decision_category"])
       expect(tax_tribunal_decision.tribunal_decision_decision_date).to  eq(tax_tribunal_decisions[0]["details"]["metadata"]["tribunal_decision_decision_date"])
     end

@@ -2,35 +2,17 @@ require 'spec_helper'
 
 describe CountrysideStewardshipGrant do
   def countryside_stewardship_grant_content_item(n)
-    {
-      "content_id" => SecureRandom.uuid,
+    Payloads.countryside_stewardship_grant_content_item(
       "base_path" => "/countryside-stewardship-grants/example-countryside-stewardship-grant-#{n}",
       "title" => "Example Countryside Stewardship Grant #{n}",
       "description" => "This is the summary of example Countryside Stewardship Grant #{n}",
-      "document_type" => "countryside_stewardship_grant",
-      "schema_name" => "specialist_document",
-      "publishing_app" => "specialist-publisher",
-      "rendering_app" => "specialist-frontend",
-      "locale" => "en",
-      "phase" => "live",
-      "public_updated_at" => "2015-11-16T11:53:30",
-      "publication_state" => "draft",
-      "details" => {
-        "body" => "## Header" + ("\r\n\r\nThis is the long body of an example Countryside Stewardship Grant" * 10),
-        "metadata" => {
-          "document_type" => "countryside_stewardship_grant"
-        },
-        "change_history" => [],
-      },
       "routes" => [
         {
           "path" => "/countryside-stewardship-grants/example-countryside-stewardship-grant-#{n}",
           "type" => "exact",
         }
-      ],
-      "redirects" => [],
-      "update_type" => "major",
-    }
+      ]
+    )
   end
 
   let(:countryside_stewardship_grant_org_content_items) {
@@ -107,7 +89,7 @@ describe CountrysideStewardshipGrant do
       expect(countryside_stewardship_grant.base_path).to eq(countryside_stewardship_grants[0]["base_path"])
       expect(countryside_stewardship_grant.title).to eq(countryside_stewardship_grants[0]["title"])
       expect(countryside_stewardship_grant.summary).to eq(countryside_stewardship_grants[0]["description"])
-      expect(countryside_stewardship_grant.body).to eq(countryside_stewardship_grants[0]["details"]["body"])
+      expect(countryside_stewardship_grant.body).to eq(countryside_stewardship_grants[0]["details"]["body"][0]["content"])
     end
   end
 

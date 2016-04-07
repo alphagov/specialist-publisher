@@ -2,39 +2,17 @@ require 'spec_helper'
 
 RSpec.describe CmaCase do
   def cma_case_content_item(n)
-    {
-      "content_id" => SecureRandom.uuid,
+    Payloads.cma_case_content_item(
       "base_path" => "/cma-cases/example-cma-case-#{n}",
       "title" => "Example CMA Case #{n}",
       "description" => "This is the summary of example CMA case #{n}",
-      "document_type" => "cma_case",
-      "schema_name" => "specialist_document",
-      "publishing_app" => "specialist-publisher",
-      "rendering_app" => "specialist-frontend",
-      "locale" => "en",
-      "phase" => "live",
-      "public_updated_at" => "2015-11-16T11:53:30",
-      "publication_state" => "draft",
-      "details" => {
-        "body" => "## Header" + ("\r\n\r\nThis is the long body of an example CMA case" * 10),
-        "metadata" => {
-          "opened_date" => "2014-01-01",
-          "case_type" => "ca98-and-civil-cartels",
-          "case_state" => "open",
-          "market_sector" => ["energy"],
-          "document_type" => "cma_case",
-        },
-        "change_history" => [],
-      },
       "routes" => [
         {
           "path" => "/cma-cases/example-cma-case-#{n}",
           "type" => "exact",
         }
-      ],
-      "redirects" => [],
-      "update_type" => "major",
-    }
+      ]
+    )
   end
 
   let(:cma_org_content_item) {
@@ -73,7 +51,7 @@ RSpec.describe CmaCase do
       "description" => "This is the summary of example CMA case 0",
       "link" => "/cma-cases/example-cma-case-0",
       "indexable_content" => "## Header" + ("\r\n\r\nThis is the long body of an example CMA case" * 10),
-      "public_timestamp" => "2015-11-16T11:53:30+00:00",
+      "public_timestamp" => "2015-12-03T16:59:13+00:00",
       "opened_date" => "2014-01-01",
       "closed_date" => nil,
       "case_type" => "ca98-and-civil-cartels",
@@ -142,7 +120,7 @@ RSpec.describe CmaCase do
       expect(cma_case.base_path).to     eq(cma_cases[0]["base_path"])
       expect(cma_case.title).to         eq(cma_cases[0]["title"])
       expect(cma_case.summary).to       eq(cma_cases[0]["description"])
-      expect(cma_case.body).to          eq(cma_cases[0]["details"]["body"])
+      expect(cma_case.body).to          eq(cma_cases[0]["details"]["body"][0]["content"])
       expect(cma_case.opened_date).to   eq(cma_cases[0]["details"]["metadata"]["opened_date"])
       expect(cma_case.closed_date).to   eq(cma_cases[0]["details"]["metadata"]["closed_date"])
       expect(cma_case.case_type).to     eq(cma_cases[0]["details"]["metadata"]["case_type"])
