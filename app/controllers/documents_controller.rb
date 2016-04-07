@@ -30,7 +30,7 @@ class DocumentsController < ApplicationController
     if @document.valid?
       if @document.save!
         flash[:success] = "Created #{@document.title}"
-        redirect_to documents_path(current_format.document_type)
+        redirect_to document_path(current_format.document_type, @document.content_id)
       else
         flash.now[:danger] = "There was an error creating #{@document.title}. Please try again later."
         render :new
@@ -55,7 +55,7 @@ class DocumentsController < ApplicationController
     if @document.valid?
       if @document.save!
         flash[:success] = "Updated #{@document.title}"
-        redirect_to documents_path(current_format.document_type)
+        redirect_to document_path(current_format.document_type, @document.content_id)
       else
         flash.now[:danger] = "There was an error updating #{@document.title}. Please try again later."
         render :edit
@@ -69,11 +69,10 @@ class DocumentsController < ApplicationController
   def publish
     if @document.publish!
       flash[:success] = "Published #{@document.title}"
-      redirect_to documents_path(current_format.document_type)
     else
       flash[:danger] = "There was an error publishing #{@document.title}. Please try again later."
-      redirect_to document_path(current_format.document_type, params[:content_id])
     end
+    redirect_to document_path(current_format.document_type, params[:content_id])
   end
 
 private
