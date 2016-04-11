@@ -145,14 +145,6 @@ class Document
   end
 
   def self.all
-    # The current version of this method is a result of the Publishing API
-    # returning the `details` field as an empty hash. As such, we get the
-    # content_id of all `specialist_document`s, then request the individual
-    # payload for each, which allows us to construct the real object.
-    #
-    # When the Publishing API is fixed and `details` is returned, this method
-    # will request all the required fields and the map will call
-    # `self.from_publishing_api` itself.
     response = self.publishing_api.get_content_items(
       document_type: self.publishing_api_document_type,
       fields: [
