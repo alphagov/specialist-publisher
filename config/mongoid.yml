@@ -1,9 +1,7 @@
 development:
   clients:
     default:
-      # MONGODB_URI includes draft_content_store_development or content_store_development
-      # depending on whether we're running content store in draft mode or not.
-      uri: <%= ENV['MONGODB_URI'] || 'mongodb://localhost/specialist_publisher_development' %>
+      uri: <%= ENV['MONGODB_URI'] || 'mongodb://localhost/specialist_publisher_rebuild_development' %>
       options:
         write:
           w: 1
@@ -11,7 +9,7 @@ development:
 test:
   clients:
     default:
-      uri: mongodb://localhost/specialist_publisher_test
+      uri: mongodb://localhost/specialist_publisher_rebuild_test
       options:
         write:
           w: 1
