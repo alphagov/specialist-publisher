@@ -2,36 +2,17 @@ require 'spec_helper'
 
 describe AaibReport do
   def aaib_report_content_item(n)
-    {
-      "content_id" => SecureRandom.uuid,
+    Payloads.aaib_report_content_item(
       "base_path" => "/aaib-reports/example-aaib-report-#{n}",
       "title" => "Example AAIB Report #{n}",
       "description" => "This is the summary of example AAIB Report #{n}",
-      "document_type" => "aaib_report",
-      "schema_name" => "specialist_document",
-      "publishing_app" => "specialist-publisher",
-      "rendering_app" => "specialist-frontend",
-      "locale" => "en",
-      "phase" => "live",
-      "public_updated_at" => "2015-11-16T11:53:30",
-      "publication_state" => "draft",
-      "details" => {
-        "body" => "## Header" + ("\r\n\r\nThis is the long body of an example AAIB Report" * 10),
-        "metadata" => {
-          "date_of_occurrence" => "2015-10-10",
-          "document_type" => "aaib_report"
-        },
-        "change_history" => [],
-      },
       "routes" => [
         {
           "path" => "/aaib-reports/example-aaib-report-#{n}",
           "type" => "exact",
         }
-      ],
-      "redirects" => [],
-      "update_type" => "major",
-    }
+      ]
+    )
   end
 
   let(:aaib_org_content_item) {
@@ -113,7 +94,7 @@ describe AaibReport do
       expect(aaib_report.base_path).to            eq(aaib_reports[0]["base_path"])
       expect(aaib_report.title).to                eq(aaib_reports[0]["title"])
       expect(aaib_report.summary).to              eq(aaib_reports[0]["description"])
-      expect(aaib_report.body).to                 eq(aaib_reports[0]["details"]["body"])
+      expect(aaib_report.body).to                 eq(aaib_reports[0]["details"]["body"][0]["content"])
       expect(aaib_report.date_of_occurrence).to   eq(aaib_reports[0]["details"]["metadata"]["date_of_occurrence"])
     end
   end

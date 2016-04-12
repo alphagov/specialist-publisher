@@ -36,7 +36,7 @@ private
 
   def details
     {
-      body: document.body,
+      body: GovspeakPresenter.present(document.body),
       metadata: metadata,
       change_history: change_history
     }.tap do |details_hash|

@@ -2,35 +2,17 @@ require 'spec_helper'
 
 describe MaibReport do
   def maib_report_content_item(n)
-    {
-      "content_id" => SecureRandom.uuid,
+    Payloads.maib_report_content_item(
       "base_path" => "/maib-reports/example-maib-report-#{n}",
       "title" => "Example MAIB Report #{n}",
       "description" => "This is the summary of example MAIB Report #{n}",
-      "document_type" => "maib_report",
-      "schema_name" => "specialist_document",
-      "publishing_app" => "specialist-publisher",
-      "rendering_app" => "specialist-frontend",
-      "locale" => "en",
-      "phase" => "live",
-      "public_updated_at" => "2015-11-16T11:53:30",
-      "publication_state" => "draft",
-      "details" => {
-        "body" => "## Header" + ("\r\n\r\nThis is the long body of an example MAIB Report" * 10),
-        "metadata" => {
-          "date_of_occurrence" => "2015-10-10",
-          "document_type" => "maib_report"
-        },
-      },
       "routes" => [
         {
           "path" => "/maib-reports/example-maib-report-#{n}",
           "type" => "exact",
         }
-      ],
-      "redirects" => [],
-      "update_type" => "major",
-    }
+      ]
+    )
   end
 
   let(:maib_org_content_item) {
@@ -104,7 +86,7 @@ describe MaibReport do
       expect(maib_report.base_path).to            eq(maib_reports[0]["base_path"])
       expect(maib_report.title).to                eq(maib_reports[0]["title"])
       expect(maib_report.summary).to              eq(maib_reports[0]["description"])
-      expect(maib_report.body).to                 eq(maib_reports[0]["details"]["body"])
+      expect(maib_report.body).to                 eq(maib_reports[0]["details"]["body"][0]["content"])
       expect(maib_report.date_of_occurrence).to   eq(maib_reports[0]["details"]["metadata"]["date_of_occurrence"])
     end
   end

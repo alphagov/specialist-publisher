@@ -2,36 +2,17 @@ require 'spec_helper'
 
 describe EsiFund do
   def esi_fund_content_item(n)
-    {
-      "content_id" => SecureRandom.uuid,
+    Payloads.esi_fund_content_item(
       "base_path" => "/european-structural-investment-funds/example-esi-fund-#{n}",
       "title" => "Example ESI Fund #{n}",
       "description" => "This is the summary of example ESI Fund #{n}",
-      "document_type" => "esi_fund",
-      "schema_name" => "specialist_document",
-      "publishing_app" => "specialist-publisher",
-      "rendering_app" => "specialist-frontend",
-      "locale" => "en",
-      "phase" => "live",
-      "public_updated_at" => "2015-11-16T11:53:30",
-      "publication_state" => "draft",
-      "details" => {
-        "body" => "## Header" + ("\r\n\r\nThis is the long body of an example ESI Fund" * 10),
-        "metadata" => {
-          "closing_date" => "2016-01-01",
-          "document_type" => "esi_fund",
-        },
-        "change_history" => [],
-      },
       "routes" => [
         {
           "path" => "/european-structural-investment-funds/example-esi-fund-#{n}",
           "type" => "exact",
         },
-      ],
-      "redirects" => [],
-      "update_type" => "major",
-    }
+      ]
+    )
   end
 
   let(:esi_fund_org_content_items) {
@@ -123,7 +104,7 @@ describe EsiFund do
       expect(esi_fund.base_path).to            eq(esi_funds[0]["base_path"])
       expect(esi_fund.title).to                eq(esi_funds[0]["title"])
       expect(esi_fund.summary).to              eq(esi_funds[0]["description"])
-      expect(esi_fund.body).to                 eq(esi_funds[0]["details"]["body"])
+      expect(esi_fund.body).to                 eq(esi_funds[0]["details"]["body"][0]["content"])
       expect(esi_fund.closing_date).to         eq(esi_funds[0]["details"]['metadata']["closing_date"])
     end
   end

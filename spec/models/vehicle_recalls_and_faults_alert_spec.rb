@@ -2,38 +2,17 @@ require 'spec_helper'
 
 describe VehicleRecallsAndFaultsAlert do
   def vehicle_recalls_and_faults_alert_content_item(n)
-    {
-      "content_id" => SecureRandom.uuid,
+    Payloads.vehicle_recalls_and_faults_alert_content_item(
       "base_path" => "/vehicle-recalls-faults/example-vehicle-recalls-and-faults-#{n}",
       "title" => "Example Vehicle Recalls And Faults #{n}",
       "description" => "This is the summary of example Vehicle Recalls And Faults #{n}",
-      "document_type" => "vehicle_recalls_and_faults_alert",
-      "schema_name" => "specialist_document",
-      "publishing_app" => "specialist-publisher",
-      "rendering_app" => "specialist-frontend",
-      "locale" => "en",
-      "phase" => "live",
-      "public_updated_at" => "2015-11-16T11:53:30",
-      "publication_state" => "draft",
-      "details" => {
-        "body" => "## Header" + ("\r\n\r\nThis is the long body of an example Vehicle Recalls And Faults" * 10),
-        "metadata" => {
-          "alert_issue_date" => "2015-04-28",
-          "build_start_date" => "2015-04-28",
-          "build_end_date" => "2015-06-28",
-          "document_type" => "vehicle_recalls_and_faults_alert"
-        },
-        "change_history" => [],
-      },
       "routes" => [
         {
           "path" => "/vehicle-recalls-faults/example-vehicle-recalls-and-faults-#{n}",
           "type" => "exact",
         }
-      ],
-      "redirects" => [],
-      "update_type" => "major",
-    }
+      ]
+    )
   end
 
   let(:vehicle_recalls_and_faults_alert_org_content_item) {
@@ -106,7 +85,7 @@ describe VehicleRecallsAndFaultsAlert do
       expect(vehicle_recall_and_fault.base_path).to            eq(vehicle_recalls_and_faults[0]["base_path"])
       expect(vehicle_recall_and_fault.title).to                eq(vehicle_recalls_and_faults[0]["title"])
       expect(vehicle_recall_and_fault.summary).to              eq(vehicle_recalls_and_faults[0]["description"])
-      expect(vehicle_recall_and_fault.body).to                 eq(vehicle_recalls_and_faults[0]["details"]["body"])
+      expect(vehicle_recall_and_fault.body).to                 eq(vehicle_recalls_and_faults[0]["details"]["body"][0]["content"])
       expect(vehicle_recall_and_fault.alert_issue_date).to     eq(vehicle_recalls_and_faults[0]["details"]["metadata"]["alert_issue_date"])
       expect(vehicle_recall_and_fault.build_start_date).to     eq(vehicle_recalls_and_faults[0]["details"]["metadata"]["build_start_date"])
       expect(vehicle_recall_and_fault.build_end_date).to       eq(vehicle_recalls_and_faults[0]["details"]["metadata"]["build_end_date"])

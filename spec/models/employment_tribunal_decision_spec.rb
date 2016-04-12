@@ -2,38 +2,17 @@ require 'spec_helper'
 
 describe EmploymentTribunalDecision do
   def employment_tribunal_decision_content_item(n)
-    {
-      "content_id" => SecureRandom.uuid,
+    Payloads.employment_tribunal_decision_content_item(
       "base_path" => "/employment-tribunal-decisions/example-employment-tribunal-decision-#{n}",
       "title" => "Example Employment Tribunal Decision #{n}",
       "description" => "This is the summary of example Employment Tribunal Decision #{n}",
-      "document_type" => "employment_tribunal_decision",
-      "schema_name" => "specialist_document",
-      "publishing_app" => "specialist-publisher",
-      "rendering_app" => "specialist-frontend",
-      "locale" => "en",
-      "phase" => "live",
-      "public_updated_at" => "2015-11-16T11:53:30",
-      "publication_state" => "draft",
-      "details" => {
-        "body" => "## Header" + ("\r\n\r\nThis is the long body of an example Employment Tribunal Decision" * 10),
-        "metadata" => {
-          "tribunal_decision_categories" => ["age-discrimination"],
-          "tribunal_decision_country" => "england-and-wales",
-          "tribunal_decision_decision_date" => "2015-07-30",
-          "document_type" => "employment_tribunal_decision",
-        },
-        "change_history" => [],
-      },
       "routes" => [
         {
           "path" => "/employment-tribunal-decisions/example-employment-tribunal-decision-#{n}",
           "type" => "exact",
         }
-      ],
-      "redirects" => [],
-      "update_type" => "major",
-    }
+      ]
+    )
   end
 
   let(:employment_tribunal_decision_org_content_item) {
@@ -108,7 +87,7 @@ describe EmploymentTribunalDecision do
       expect(employment_tribunal_decision.base_path).to                        eq(employment_tribunal_decisions[0]["base_path"])
       expect(employment_tribunal_decision.title).to                            eq(employment_tribunal_decisions[0]["title"])
       expect(employment_tribunal_decision.summary).to                          eq(employment_tribunal_decisions[0]["description"])
-      expect(employment_tribunal_decision.body).to                             eq(employment_tribunal_decisions[0]["details"]["body"])
+      expect(employment_tribunal_decision.body).to                             eq(employment_tribunal_decisions[0]["details"]["body"][0]["content"])
       expect(employment_tribunal_decision.tribunal_decision_categories).to     eq(employment_tribunal_decisions[0]["details"]["metadata"]["tribunal_decision_categories"])
       expect(employment_tribunal_decision.tribunal_decision_country).to        eq(employment_tribunal_decisions[0]["details"]["metadata"]["tribunal_decision_country"])
       expect(employment_tribunal_decision.tribunal_decision_decision_date).to  eq(employment_tribunal_decisions[0]["details"]["metadata"]["tribunal_decision_decision_date"])
