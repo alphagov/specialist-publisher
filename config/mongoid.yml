@@ -13,3 +13,11 @@ test:
       options:
         write:
           w: 1
+
+production:
+  clients:
+    default:
+      uri: <%= ENV['MONGODB_URI'] %>
+      options:
+        write:
+          w: majority
