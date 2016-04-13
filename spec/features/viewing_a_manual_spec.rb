@@ -7,15 +7,15 @@ RSpec.feature "Viewing a Manual", type: :feature do
   let(:section_links) { Payloads.section_links }
 
   before do
-    publishing_api_has_fields_for_document("manual", [manual_content_item], [:content_id])
-    publishing_api_has_fields_for_document(
-      "manual_section",
+    publishing_api_has_content([manual_content_item], document_type: "manual", fields: [:content_id])
+    publishing_api_has_content(
       section_content_items.map do |section|
         {
           content_id: section["content_id"]
         }
       end,
-      [:content_id]
+      document_type: "manual_section",
+      fields: [:content_id]
     )
 
     content_items = [manual_content_item] + section_content_items

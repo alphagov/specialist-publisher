@@ -60,11 +60,11 @@ describe RaibReport do
 
   let(:fields) { %i[base_path content_id public_updated_at title publication_state] }
   let(:raib_reports) { 10.times.map { |n| raib_report_content_item(n) } }
-  let(:page) {1}
-  let(:per_page) {50}
+  let(:page) { 1 }
+  let(:per_page) { 50 }
 
   before do
-    publishing_api_has_fields_for_document_with_pagination(described_class.publishing_api_document_type, raib_reports, fields, page, per_page)
+    publishing_api_has_content(raib_reports, document_type: described_class.publishing_api_document_type, fields: fields, page: page, per_page: per_page)
 
     raib_reports.each do |raib_report|
       publishing_api_has_item(raib_report)
@@ -126,7 +126,11 @@ describe RaibReport do
     it "publishes the RAIB Report" do
       stub_publishing_api_publish(raib_reports[0]["content_id"], {})
       stub_any_rummager_post
-      publishing_api_has_fields_for_document('organisation', [raib_org_content_item], [:base_path, :content_id])
+      publishing_api_has_content(
+        [raib_org_content_item],
+        document_type: 'organisation',
+        fields: [:base_path, :content_id]
+      )
 
       raib_report = described_class.find(raib_reports[0]["content_id"])
       expect(raib_report.publish!).to eq(true)

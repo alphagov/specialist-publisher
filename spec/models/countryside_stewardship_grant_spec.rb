@@ -63,11 +63,11 @@ describe CountrysideStewardshipGrant do
 
   let(:fields) { %i[base_path content_id public_updated_at title publication_state] }
   let(:countryside_stewardship_grants) { 10.times.map { |n| countryside_stewardship_grant_content_item(n) } }
-  let(:page) {1}
-  let(:per_page) {50}
+  let(:page) { 1 }
+  let(:per_page) { 50 }
 
   before do
-    publishing_api_has_fields_for_document_with_pagination(described_class.publishing_api_document_type, countryside_stewardship_grants, fields, page, per_page)
+    publishing_api_has_content(countryside_stewardship_grants, document_type: described_class.publishing_api_document_type, fields: fields, page: page, per_page: per_page)
 
     countryside_stewardship_grants.each do |countryside_stewardship_grant|
       publishing_api_has_item(countryside_stewardship_grant)
@@ -128,7 +128,11 @@ describe CountrysideStewardshipGrant do
     it "publishes the Countryside Stewardship Grant" do
       stub_publishing_api_publish(countryside_stewardship_grants[0]["content_id"], {})
       stub_any_rummager_post
-      publishing_api_has_fields_for_document('organisation', countryside_stewardship_grant_org_content_items, [:base_path, :content_id])
+      publishing_api_has_content(
+        countryside_stewardship_grant_org_content_items,
+        document_type: 'organisation',
+        fields: [:base_path, :content_id]
+      )
 
       countryside_stewardship_grant = described_class.find(countryside_stewardship_grants[0]["content_id"])
       expect(countryside_stewardship_grant.publish!).to eq(true)

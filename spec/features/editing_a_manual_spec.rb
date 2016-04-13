@@ -8,8 +8,8 @@ RSpec.feature 'editing a manual' do
 
   before do
     log_in_as_editor(:gds_editor)
-    publishing_api_has_fields_for_document("manual", [manual_content_item], [:content_id])
-    publishing_api_has_fields_for_document("manual_section", section_content_items.map { |section| { content_id: section["content_id"] } }, [:content_id])
+    publishing_api_has_content([manual_content_item], document_type: "manual", fields: [:content_id])
+    publishing_api_has_content(section_content_items.map { |section| { content_id: section["content_id"] } }, document_type: "manual_section", fields: [:content_id])
     stub_publishing_api_put_content(manual_content_item["content_id"], {})
     stub_publishing_api_patch_links(manual_content_item["content_id"], {})
     content_items = [manual_content_item] + section_content_items

@@ -58,8 +58,8 @@ RSpec.feature "Publishing a CMA case", type: :feature do
   let(:content_id) { cma_case['content_id'] }
 
   let(:fields) { [:base_path, :content_id, :public_updated_at, :title, :publication_state] }
-  let(:page_number) {1}
-  let(:per_page) {50}
+  let(:page_number) { 1 }
+  let(:per_page) { 50 }
 
   def minor_update_item
     cma_case.merge(
@@ -71,8 +71,8 @@ RSpec.feature "Publishing a CMA case", type: :feature do
   before do
     log_in_as_editor(:cma_editor)
 
-    publishing_api_has_fields_for_document_with_pagination(CmaCase.publishing_api_document_type, [cma_case, minor_update_item], fields, page_number, per_page)
-    publishing_api_has_fields_for_document('organisation', [cma_org_content_item], [:base_path, :content_id])
+    publishing_api_has_content([cma_case, minor_update_item], document_type: CmaCase.publishing_api_document_type, fields: fields, page: page_number, per_page: per_page)
+    publishing_api_has_content([cma_org_content_item], document_type: 'organisation', fields: [:base_path, :content_id])
 
     publishing_api_has_item(cma_case)
 

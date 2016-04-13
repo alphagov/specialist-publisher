@@ -60,11 +60,11 @@ describe MedicalSafetyAlert do
 
   let(:fields) { %i[base_path content_id public_updated_at title publication_state] }
   let(:medical_safety_alerts) { 10.times.map { |n| medical_safety_alert_content_item(n) } }
-  let(:page) {1}
-  let(:per_page) {50}
+  let(:page) { 1 }
+  let(:per_page) { 50 }
 
   before do
-    publishing_api_has_fields_for_document_with_pagination(described_class.publishing_api_document_type, medical_safety_alerts, fields, page, per_page)
+    publishing_api_has_content(medical_safety_alerts, document_type: described_class.publishing_api_document_type, fields: fields, page: page, per_page: per_page)
 
     medical_safety_alerts.each do |medical_safety_alert|
       publishing_api_has_item(medical_safety_alert)
@@ -126,7 +126,11 @@ describe MedicalSafetyAlert do
     it "publishes the Medical Safety Alert" do
       stub_publishing_api_publish(medical_safety_alerts[0]["content_id"], {})
       stub_any_rummager_post
-      publishing_api_has_fields_for_document('organisation', [mhra_org_content_item], [:base_path, :content_id])
+      publishing_api_has_content(
+        [mhra_org_content_item],
+        document_type: 'organisation',
+        fields: [:base_path, :content_id]
+      )
 
       medical_safety_alert = described_class.find(medical_safety_alerts[0]["content_id"])
       expect(medical_safety_alert.publish!).to eq(true)

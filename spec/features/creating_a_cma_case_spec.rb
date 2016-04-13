@@ -13,8 +13,8 @@ RSpec.feature "Creating a CMA case", type: :feature do
   let(:fields) { [:base_path, :content_id, :public_updated_at, :title, :publication_state] }
   let(:cma_case) { Payloads.cma_case_content_item }
   let(:content_id) { cma_case['content_id'] }
-  let(:page_number) {1}
-  let(:per_page) {50}
+  let(:page_number) { 1 }
+  let(:per_page) { 50 }
 
   before do
     log_in_as_editor(:cma_editor)
@@ -25,7 +25,7 @@ RSpec.feature "Creating a CMA case", type: :feature do
     stub_any_publishing_api_put_content
     stub_any_publishing_api_patch_links
 
-    publishing_api_has_fields_for_document_with_pagination(CmaCase.publishing_api_document_type, [cma_case], fields, page_number, per_page)
+    publishing_api_has_content([cma_case], document_type: CmaCase.publishing_api_document_type, fields: fields, page: page_number, per_page: per_page)
     publishing_api_has_item(cma_case)
   end
 
