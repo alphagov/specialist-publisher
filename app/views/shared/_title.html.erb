@@ -3,10 +3,10 @@
     <li title='<% if !document.live? %>When published this document will appear at this URL<% end %>'>
       <%= document.base_path %>
     </li>
-    <% if document.live? %>
+    <% if document.published? %>
       <li><%= link_to "View on website", public_url %></li>
     <% end %>
-    <% if document.draft? %>
+    <% if document.draft? || document.redrafted? %>
       <li><%= link_to "Preview draft", content_preview_url(document) %></li>
     <% end %>
   </li>

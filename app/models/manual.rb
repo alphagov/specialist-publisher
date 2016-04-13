@@ -28,6 +28,10 @@ class Manual
     end
   end
 
+  def published?
+    live? || redrafted?
+  end
+
   def updated_at
     @updated_at ||= Time.zone.now
   end

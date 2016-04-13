@@ -344,6 +344,32 @@ module Payloads
     }.deep_merge(attrs)
   end
 
+  def self.cma_case_with_attachments(attrs = {})
+    attachments = {
+      "details" => {
+        "attachments" => [
+          {
+            "content_id" => "0aa1aa33-36b9-4677-a643-52b9034a1c32",
+            "url" => "https://assets.digital.cabinet-office.gov.uk/media/56e7fc15ed915d037a000004/example-cma-case-image.jpg",
+            "content_type" => "application/jpg",
+            "title" => "example cma case image",
+            "created_at" => "2015-02-11T13:45:00.000+00:00",
+            "updated_at" => "2015-02-13T13:45:00.000+00:00"
+          },
+          {
+            "content_id" => "130d2b69-e32f-437f-9caa-89a4246fbe39",
+            "url" => "https://assets.digital.cabinet-office.gov.uk/media/56e7fc15ed915d037a000004/example-cma-case-pdf.pdf",
+            "content_type" => "application/pdf",
+            "title" => "example cma case pdf",
+            "created_at" => "2015-02-11T13:45:00.000+00:00",
+            "updated_at" => "2015-02-13T13:45:00.000+00:00"
+          }
+        ]
+      } }.deep_merge(attrs)
+
+    cma_case_content_item(attachments)
+  end
+
   def self.medical_safety_alert_content_item(attrs = {})
     {
       "content_id" => SecureRandom.uuid,

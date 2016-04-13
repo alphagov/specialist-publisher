@@ -42,6 +42,45 @@
 
 <div class="row">
   <div class="col-md-8">
+    <%
+      truncate_at_size = 5
+      attachments = @document.attachments || []
+    %>
+    <h2 class="add-bottom-margin">
+      <%= number_with_delimiter(attachments.size) %> <%= 'attachment'.pluralize(attachments.size) %>
+    </h2>
+    <% if attachments.any? %>
+      <table class="table table-bordered table-striped add-bottom-margin" data-module="toggle">
+        <thead>
+          <tr class="table-header">
+            <th>Title</th>
+            <th>Created</th>
+            <th>Last&nbsp;updated</th>
+          </tr>
+        </thead>
+        <% attachments.each_with_index do | attachment, i | %>
+          <% if i == truncate_at_size - 1 %>
+            <tr class="table-header">
+              <td colspan="3" class="js-toggle-target text-center">
+                <strong><a href="#expand-table" class="js-toggle">…and <%= attachments.size - (truncate_at_size - 1) %> more</a></strong>
+              </td>
+            </tr>
+          <% end %>
+          <tr <% if i > truncate_at_size - 2 %>class="js-toggle-target if-js-hide"<% end %>>
+            <td><%= attachment.title %></td>
+            <td><%= attachment.created_at.to_date.to_s(:govuk_date) %></td>
+            <td><%= attachment.updated_at.to_date.to_s(:govuk_date) %></td>
+          </tr>
+        <% end %>
+      </table>
+    <% else %>
+      <p class='no-content-message'>This document doesn’t have any attachments</p>
+    <% end %>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-8">
     <h2>Actions</h2>
     <div class="well">
       <%= link_to "Edit document", edit_document_path(current_format.document_type, @document.content_id), class: "btn btn-success" %>

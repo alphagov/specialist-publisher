@@ -1,17 +1,25 @@
+<% content_for :breadcrumbs do %>
+  <li><%= link_to "Your documents", documents_path(current_format.document_type) %></li>
+  <li><%= link_to @document.title, document_path(document_type: params[:document_type], content_id: @document.content_id) %></li>
+  <li class='active'>Edit document</li>
+<% end %>
+
 <h2>Editing <%= @document.title %></h2>
 
-<div class="col-md-8">
-  <%= form_for @document, url: document_path(document_type: params[:document_type], content_id: @document.content_id), method: :put do |f| %>
-    <%= render partial: "shared/form_fields", locals: { f: f } %>
+<div class="row">
+  <div class="col-md-8">
+    <%= form_for @document, url: document_path(document_type: params[:document_type], content_id: @document.content_id), method: :put do |f| %>
+      <%= render partial: "shared/form_fields", locals: { f: f } %>
 
-    <%= render partial: "metadata_fields/#{params[:document_type].underscore}", locals: { f: f } %>
+      <%= render partial: "metadata_fields/#{params[:document_type].underscore}", locals: { f: f } %>
 
-    <%= render partial: "shared/minor_major_update_fields", locals: { f: f, document: @document } %>
+      <%= render partial: "shared/minor_major_update_fields", locals: { f: f, document: @document } %>
 
-    <div class="actions">
-      <button name="save" class="btn btn-success">Save as draft</button>
-    </div>
-  <% end %>
+      <div class="actions">
+        <button name="save" class="btn btn-success">Save as draft</button>
+      </div>
+    <% end %>
+  </div>
+
+  <%= render partial: 'attachments/attachment_links' %>
 </div>
-
-<%= render partial: 'attachments/attachment_links' %>
