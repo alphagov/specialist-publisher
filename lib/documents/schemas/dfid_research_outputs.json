@@ -1,0 +1,39 @@
+{
+  "content_id": "af7c7cdb-1335-4f1c-b21c-b3c8bfec8a1b",
+  "base_path": "/dfid-research-outputs",
+  "format_name": "DFID Research Output",
+  "name": "DFID Research Outputs",
+  "description": "Find outputs from DFID research projects",
+  "filter": {
+    "document_type": "dfid_research_output"
+  },
+  "signup_content_id": "a062704c-f49d-4942-aaf4-c06d81ada3b8",
+  "signup_copy": "You'll get an email each time an output is updated or a new output is published.",
+  "organisations": ["db994552-7644-404d-a770-a2fe659c661f"],
+  "topics": [
+    "some/dummy-topic"
+  ],
+  "document_noun": "output",
+  "facets": [
+    {
+        "key": "country",
+        "name": "Country",
+        "type": "text",
+        "preposition": "called",
+        "display_as_result_metadata": true,
+        "filterable": true,
+        "allowed_values": [
+          {"label": "Azerbaijan", "value": "AZ"},
+          {"label": "United Kingdom", "value": "GB"}
+        ]
+    },
+    {
+      "key": "published_date",
+      "name": "Published",
+      "short_name": "Published",
+      "type": "date",
+      "display_as_result_metadata": true,
+      "filterable": false
+    }
+  ]
+}
