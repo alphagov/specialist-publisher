@@ -38,7 +38,28 @@ Publishing App for Specialist Documents and Manuals.
 ```
 $ ./startup.sh
 ```
-If you are using the GDS development virtual machine then the application will be available on the host at http://specialist-publisher.dev.gov.uk/
+If you are using the GDS development virtual machine then the application will be available on the host at https://specialist-publisher-rebuild.dev.gov.uk/
+
+### Notes on Mock User while running the application on development environment
+
+In the development environment, a mock user is created automatically by the gds-sso gem.
+The creation of this mock api user requires a User instance in the application.
+
+This can be done by the following steps (if using a development VM):
+
+1. In the project directory, run `bundle exec rails console`
+2. In the Rails console, run `User.create`. This creates an empty user instance that is sufficient for the gds-sso gem to work.
+
+Secondly, this app relies on publishing-api for all its document data, which are filtered by `app_name` attribute on the API user on publishing-api.
+If you experience a problem where you know there should be documents in your local copy of publishing-api but nothing is displayed when running the application.
+Check that the development api user (created automatically by gds-sso gem) has the `app_name` correctly set to `"specialist-publisher"`
+
+This can be done by the following steps (if using a development VM):
+
+1. Go to the publishing-api directory in your VM and run `bundle exec rails console`
+2. Find and update the dummy api user by running `User.find_by(email: "dummyapiuser@domain.com").update(app_name: "specialist-publisher")`
+
+Now your application should be able to retrieve specialist documents from publishing-api
 
 ## Running the test suite
 
