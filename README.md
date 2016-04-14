@@ -40,6 +40,13 @@ $ ./startup.sh
 ```
 If you are using the GDS development virtual machine then the application will be available on the host at https://specialist-publisher-rebuild.dev.gov.uk/
 
+### Populate development database
+
+In order to quickly get your local database into working order run `$ bundle exec rake db:seed`.
+
+Currently this:
+* creates a default user record with basic permissions that allows you to log in and create a new document
+
 ### Notes on Mock User while running the application on development environment
 
 In the development environment, a mock user is created automatically by the gds-sso gem.
