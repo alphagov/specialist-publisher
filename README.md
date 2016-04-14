@@ -47,17 +47,9 @@ In order to quickly get your local database into working order run `$ bundle exe
 Currently this:
 * creates a default user record with basic permissions that allows you to log in and create a new document
 
-### Notes on Mock User while running the application on development environment
+### Notes on Mock API User for publishing-api while running the application
 
-In the development environment, a mock user is created automatically by the gds-sso gem.
-The creation of this mock api user requires a User instance in the application.
-
-This can be done by the following steps (if using a development VM):
-
-1. In the project directory, run `bundle exec rails console`
-2. In the Rails console, run `User.create`. This creates an empty user instance that is sufficient for the gds-sso gem to work.
-
-Secondly, this app relies on publishing-api for all its document data, which are filtered by `app_name` attribute on the API user on publishing-api.
+This app relies on publishing-api for all its document data, which are filtered by `app_name` attribute on the API user on publishing-api.
 If you experience a problem where you know there should be documents in your local copy of publishing-api but nothing is displayed when running the application.
 Check that the development api user (created automatically by gds-sso gem) has the `app_name` correctly set to `"specialist-publisher"`
 
