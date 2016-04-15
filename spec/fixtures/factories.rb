@@ -34,4 +34,9 @@ FactoryGirl.define do
     organisation_slug "air-accidents-investigation-branch"
     organisation_content_id "38eb5d8f-2d89-480c-8655-e2e7ac23f8f4"
   end
+
+  factory :dfid_editor, parent: :editor do
+    organisation_slug "department-for-international-development"
+    organisation_content_id "db994552-7644-404d-a770-a2fe659c661f"
+  end
 end
