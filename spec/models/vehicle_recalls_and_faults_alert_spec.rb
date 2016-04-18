@@ -60,9 +60,11 @@ describe VehicleRecallsAndFaultsAlert do
 
   let(:fields) { %i[base_path content_id public_updated_at title publication_state] }
   let(:vehicle_recalls_and_faults) { 10.times.map { |n| vehicle_recalls_and_faults_alert_content_item(n) } }
+  let(:page) { 1 }
+  let(:per_page) { 50 }
 
   before do
-    publishing_api_has_fields_for_document(described_class.publishing_api_document_type, vehicle_recalls_and_faults, fields)
+    publishing_api_has_content(vehicle_recalls_and_faults, document_type: described_class.publishing_api_document_type, fields: fields, page: page, per_page: per_page)
 
     vehicle_recalls_and_faults.each do |vehicle|
       publishing_api_has_item(vehicle)
@@ -73,7 +75,7 @@ describe VehicleRecallsAndFaultsAlert do
 
   describe ".all" do
     it "returns all Vehicle Recalls and Faults" do
-      expect(described_class.all.length).to be(vehicle_recalls_and_faults.length)
+      expect(described_class.all(page, per_page).results.length).to be(vehicle_recalls_and_faults.length)
     end
   end
 
@@ -126,7 +128,11 @@ describe VehicleRecallsAndFaultsAlert do
     it "publishes the Vehicle Recall and Fault" do
       stub_publishing_api_publish(vehicle_recalls_and_faults[0]["content_id"], {})
       stub_any_rummager_post
-      publishing_api_has_fields_for_document('organisation', [vehicle_recalls_and_faults_alert_org_content_item], [:base_path, :content_id])
+      publishing_api_has_content(
+        [vehicle_recalls_and_faults_alert_org_content_item],
+        document_type: 'organisation',
+        fields: [:base_path, :content_id]
+      )
 
       vehicle_recall_and_fault = described_class.find(vehicle_recalls_and_faults[0]["content_id"])
       expect(vehicle_recall_and_fault.publish!).to eq(true)

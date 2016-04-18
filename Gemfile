@@ -10,6 +10,8 @@ gem 'mongoid', '5.0.1'
 gem 'uglifier', '>= 1.3.0'
 gem 'jquery-rails', '~> 3.1.4'
 gem 'select2-rails', '~> 4.0.0'
+gem "kaminari"
+gem 'bootstrap-kaminari-views', '0.0.5'
 
 # GDS managed dependencies
 gem 'plek', '~> 1.10'
@@ -26,7 +28,7 @@ end
 if ENV["API_DEV"]
   gem "gds-api-adapters", path: "../gds-api-adapters"
 else
-  gem "gds-api-adapters", "30.0.0"
+  gem "gds-api-adapters", "30.1.0"
 end
 
 group :development, :test do

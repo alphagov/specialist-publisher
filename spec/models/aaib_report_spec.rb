@@ -58,11 +58,12 @@ describe AaibReport do
   }
 
   let(:fields) { %i[base_path content_id public_updated_at title publication_state] }
-
   let(:aaib_reports) { 10.times.map { |n| aaib_report_content_item(n) } }
+  let(:page) { 1 }
+  let(:per_page) { 50 }
 
   before do
-    publishing_api_has_fields_for_document(described_class.publishing_api_document_type, aaib_reports, fields)
+    publishing_api_has_content(aaib_reports, document_type: described_class.publishing_api_document_type, fields: fields, page: page, per_page: per_page)
 
     aaib_reports.each do |aaib_report|
       publishing_api_has_item(aaib_report)
@@ -71,13 +72,13 @@ describe AaibReport do
     Timecop.freeze(Time.parse("2015-12-18 10:12:26 UTC"))
   end
 
-  context ".all" do
+  describe ".all" do
     it "returns all AAIB Reports" do
-      expect(described_class.all.length).to be(aaib_reports.length)
+      expect(described_class.all(page, per_page).results.length).to be(aaib_reports.length)
     end
 
     it "returns AAIB with necessary info" do
-      sample_aaib_report = described_class.all.sample
+      sample_aaib_report = described_class.all(1, 50).results.sample
       expect(sample_aaib_report.base_path.nil?).to eq(false)
       expect(sample_aaib_report.content_id.nil?).to eq(false)
       expect(sample_aaib_report.title.nil?).to eq(false)
@@ -86,7 +87,7 @@ describe AaibReport do
     end
   end
 
-  context ".find" do
+  describe ".find" do
     it "returns a AAIB Report" do
       content_id = aaib_reports[0]["content_id"]
       aaib_report = described_class.find(content_id)
@@ -133,7 +134,11 @@ describe AaibReport do
     it "publishes the AAIB Report" do
       stub_publishing_api_publish(aaib_reports[0]["content_id"], {})
       stub_any_rummager_post
-      publishing_api_has_fields_for_document('organisation', [aaib_org_content_item], [:base_path, :content_id])
+      publishing_api_has_content(
+        [aaib_org_content_item],
+        document_type: 'organisation',
+        fields: [:base_path, :content_id]
+      )
 
       aaib_report = described_class.find(aaib_reports[0]["content_id"])
       expect(aaib_report.publish!).to eq(true)

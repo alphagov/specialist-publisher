@@ -35,8 +35,7 @@ RSpec.feature "Creating a Manual", type: :feature do
 
     before do
       log_in_as_editor(:gds_editor)
-
-      publishing_api_has_fields_for_document("manual", [], [:content_id])
+      publishing_api_has_content([], document_type: "manual", fields: [:content_id])
 
       stub_publishing_api_put_content(test_content_id, {})
       stub_publishing_api_patch_links(test_content_id, {})

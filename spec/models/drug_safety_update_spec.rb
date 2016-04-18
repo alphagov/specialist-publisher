@@ -57,11 +57,12 @@ describe DrugSafetyUpdate do
   }
 
   let(:fields) { %i[base_path content_id public_updated_at title publication_state] }
-
   let(:drug_safety_updates) { 10.times.map { |n| drug_safety_update_content_item(n) } }
+  let(:page) { 1 }
+  let(:per_page) { 50 }
 
   before do
-    publishing_api_has_fields_for_document(described_class.publishing_api_document_type, drug_safety_updates, fields)
+    publishing_api_has_content(drug_safety_updates, document_type: described_class.publishing_api_document_type, fields: fields, page: page, per_page: per_page)
 
     drug_safety_updates.each do |drug_safety_update|
       publishing_api_has_item(drug_safety_update)
@@ -72,7 +73,7 @@ describe DrugSafetyUpdate do
 
   describe ".all" do
     it "returns all Drug Safety Updates" do
-      expect(described_class.all.length).to be(drug_safety_updates.length)
+      expect(described_class.all(page, per_page).results.length).to be(drug_safety_updates.length)
     end
   end
 
@@ -122,7 +123,11 @@ describe DrugSafetyUpdate do
     it "publishes the Drug Safety Update" do
       stub_publishing_api_publish(drug_safety_updates[0]["content_id"], {})
       stub_any_rummager_post
-      publishing_api_has_fields_for_document('organisation', [drug_safety_update_org_content_item], [:base_path, :content_id])
+      publishing_api_has_content(
+        [drug_safety_update_org_content_item],
+        document_type: 'organisation',
+        fields: [:base_path, :content_id]
+      )
 
       drug_safety_update = described_class.find(drug_safety_updates[0]["content_id"])
       expect(drug_safety_update.publish!).to eq(true)

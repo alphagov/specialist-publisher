@@ -77,11 +77,12 @@ describe EsiFund do
   }
 
   let(:fields) { %i[base_path content_id public_updated_at title publication_state] }
-
   let(:esi_funds) { 10.times.map { |n| esi_fund_content_item(n) } }
+  let(:page) { 1 }
+  let(:per_page) { 50 }
 
   before do
-    publishing_api_has_fields_for_document(described_class.publishing_api_document_type, esi_funds, fields)
+    publishing_api_has_content(esi_funds, document_type: described_class.publishing_api_document_type, fields: fields, page: page, per_page: per_page)
 
     esi_funds.each do |esi_fund|
       publishing_api_has_item(esi_fund)
@@ -92,7 +93,7 @@ describe EsiFund do
 
   context ".all" do
     it "returns all ESI Funds" do
-      expect(described_class.all.length).to be(esi_funds.length)
+      expect(described_class.all(page, per_page).results.length).to be(esi_funds.length)
     end
   end
 
@@ -143,7 +144,11 @@ describe EsiFund do
     it "publishes the ESI Fund" do
       stub_publishing_api_publish(esi_funds[0]["content_id"], {})
       stub_any_rummager_post
-      publishing_api_has_fields_for_document('organisation', esi_fund_org_content_items, [:base_path, :content_id])
+      publishing_api_has_content(
+        esi_fund_org_content_items,
+        document_type: 'organisation',
+        fields: [:base_path, :content_id]
+      )
 
       esi_fund = described_class.find(esi_funds[0]["content_id"])
       expect(esi_fund.publish!).to eq(true)

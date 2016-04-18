@@ -73,7 +73,7 @@ RSpec.describe Manual do
     let(:current_user) { double(User, organisations_content_id: organisations_content_id) }
 
     before do
-      publishing_api_has_fields_for_document("manual", [manual_content_item], [:content_id])
+      publishing_api_has_content([manual_content_item], document_type: "manual", fields: [:content_id])
       stub_publishing_api_put_content(test_content_id, {})
       stub_publishing_api_patch_links(test_content_id, {})
     end

@@ -36,14 +36,16 @@ RSpec.feature "Editing a published CMA case", type: :feature do
     }
   }
 
+  let(:page_number) { 1 }
+  let(:per_page) { 50 }
+
   before do
     log_in_as_editor(:cma_editor)
 
     stub_any_publishing_api_put_content
     stub_any_publishing_api_patch_links
 
-    publishing_api_has_fields_for_document(CmaCase.publishing_api_document_type, [published_cma_case], fields)
-
+    publishing_api_has_content([published_cma_case], document_type: CmaCase.publishing_api_document_type, fields: fields, page: page_number, per_page: per_page)
     publishing_api_has_item(published_cma_case)
 
     stub_request(:post, "#{Plek.find('asset-manager')}/assets")
@@ -83,6 +85,7 @@ RSpec.feature "Editing a published CMA case", type: :feature do
     click_button "Save as draft"
 
     assert_publishing_api_put_content(content_id, request_json_includes(changed_json))
+
     expect(changed_json["content_id"]).to eq(content_id)
     expect(changed_json["public_updated_at"]).to eq("2015-12-03T16:59:13+00:00")
 

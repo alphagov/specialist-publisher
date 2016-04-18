@@ -59,11 +59,12 @@ describe MaibReport do
   }
 
   let(:fields) { %i[base_path content_id public_updated_at title publication_state] }
-
   let(:maib_reports) { 10.times.map { |n| maib_report_content_item(n) } }
+  let(:page) { 1 }
+  let(:per_page) { 50 }
 
   before do
-    publishing_api_has_fields_for_document(described_class.publishing_api_document_type, maib_reports, fields)
+    publishing_api_has_content(maib_reports, document_type: described_class.publishing_api_document_type, fields: fields, page: page, per_page: per_page)
 
     maib_reports.each do |maib_report|
       publishing_api_has_item(maib_report)
@@ -74,7 +75,7 @@ describe MaibReport do
 
   context ".all" do
     it "returns all MAIB Reports" do
-      expect(described_class.all.length).to be(maib_reports.length)
+      expect(described_class.all(page, per_page).results.length).to be(maib_reports.length)
     end
   end
 
@@ -125,7 +126,11 @@ describe MaibReport do
     it "publishes the MAIB Report" do
       stub_publishing_api_publish(maib_reports[0]["content_id"], {})
       stub_any_rummager_post
-      publishing_api_has_fields_for_document('organisation', [maib_org_content_item], [:base_path, :content_id])
+      publishing_api_has_content(
+        [maib_org_content_item],
+        document_type: 'organisation',
+        fields: [:base_path, :content_id]
+      )
 
       maib_report = described_class.find(maib_reports[0]["content_id"])
       expect(maib_report.publish!).to eq(true)

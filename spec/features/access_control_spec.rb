@@ -2,11 +2,13 @@ require 'spec_helper'
 
 RSpec.feature "Access control", type: :feature do
   let(:fields) { [:base_path, :content_id, :public_updated_at, :title, :publication_state] }
+  let(:page_number) { 1 }
+  let(:per_page) { 50 }
 
   before do
-    publishing_api_has_fields_for_document(CmaCase.publishing_api_document_type, [], fields)
-    publishing_api_has_fields_for_document(AaibReport.publishing_api_document_type, [], fields)
-    publishing_api_has_fields_for_document('manual', [], [:content_id])
+    publishing_api_has_content([], document_type: CmaCase.publishing_api_document_type, fields: fields, page: page_number, per_page: per_page)
+    publishing_api_has_content([], document_type: AaibReport.publishing_api_document_type, fields: fields, page: page_number, per_page: per_page)
+    publishing_api_has_content([], document_type: 'manual', fields: [:content_id])
   end
 
   context "as a CMA Editor" do
@@ -70,7 +72,7 @@ RSpec.feature "Access control", type: :feature do
       publishing_api_has_item(manual_content_item_1)
       publishing_api_has_item(manual_content_item_2)
 
-      publishing_api_has_fields_for_document('manual', [manual_content_item_1, manual_content_item_2], [:content_id])
+      publishing_api_has_content([manual_content_item_1, manual_content_item_2], document_type: 'manual', fields: [:content_id])
 
       [manual_links_1, manual_links_2].each do |link_set|
         publishing_api_has_links(link_set)

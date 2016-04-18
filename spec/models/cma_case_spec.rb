@@ -75,8 +75,11 @@ RSpec.describe CmaCase do
     }
   end
 
+  let(:page) { 1 }
+  let(:per_page) { 50 }
+
   before do
-    publishing_api_has_fields_for_document(described_class.publishing_api_document_type, cma_cases, fields)
+    publishing_api_has_content(cma_cases, document_type: described_class.publishing_api_document_type, fields: fields, page: page, per_page: per_page)
 
     cma_cases[1]["details"].merge!(
       "attachments" => [
@@ -108,7 +111,7 @@ RSpec.describe CmaCase do
 
   context ".all" do
     it "returns all CMA Cases" do
-      expect(described_class.all.length).to be(cma_cases.length)
+      expect(described_class.all(page, per_page).results.length).to be(cma_cases.length)
     end
   end
 
@@ -203,7 +206,11 @@ RSpec.describe CmaCase do
     it "publishes the CMA Case" do
       stub_publishing_api_publish(cma_cases[0]["content_id"], {})
       stub_any_rummager_post
-      publishing_api_has_fields_for_document('organisation', [cma_org_content_item], [:base_path, :content_id])
+      publishing_api_has_content(
+        [cma_org_content_item],
+        document_type: 'organisation',
+        fields: [:base_path, :content_id]
+      )
 
       c = described_class.find(cma_cases[0]["content_id"])
       expect(c.publish!).to eq(true)
