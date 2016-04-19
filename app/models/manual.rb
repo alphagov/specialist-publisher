@@ -1,6 +1,7 @@
 class Manual
   include ActiveModel::Model
   include ActiveModel::Validations
+  #publishing-api will return per_page default of 50 items. ALL variable is set to high number to return all manuals until pagination is properly implemented, else user would only see 50 manuals.
 
   attr_accessor :content_id, :base_path, :title, :summary, :body, :publication_state, :update_type
 
@@ -69,20 +70,18 @@ class Manual
 
   def self.all
     # Fetch individual payloads and links for each `manual`
-    payloads = content_ids.map { |content_id|
-      publishing_api.get_content(content_id).to_hash.deep_merge!(
-        publishing_api.get_links(content_id).to_hash
-      )
-    }
-
+    results = get_content_items.results
+    results.each do |item|
+      item.links = publishing_api.get_links(item.content_id).to_hash["links"]
+    end
     # Deserialize the payloads into real Objects and return them
-    payloads.map { |payload| self.from_publishing_api(payload) }
+    results.map { |payload| self.from_publishing_api(payload) }
   end
 
   def self.where(organisation_content_id:)
     # Fetch individual links for each `manual`
-    payloads = content_ids.map { |content_id|
-      publishing_api.get_links(content_id).to_ostruct
+    payloads = get_content_items.results.map { |item|
+      publishing_api.get_links(item.content_id).to_ostruct
     }
 
     # Select ones which have the same `content_id` as the `organisation_content_id` arguement
@@ -137,12 +136,11 @@ class Manual
       summary: payload["description"],
       body: payload["details"]["body"],
       publication_state: payload["publication_state"],
-      public_updated_at: payload["public_updated_at"],
+      public_updated_at: payload["public_updated_at"]
     )
 
     manual.base_path = payload["base_path"]
     manual.update_type = payload["update_type"]
-
     if payload["links"]
       manual.organisation_content_ids = payload["links"].fetch("organisations", [])
       manual.section_content_ids = payload["links"].fetch("sections", [])
@@ -156,16 +154,26 @@ class Manual
     []
   end
 
-  def self.content_ids
-    response = self.publishing_api.get_content_items(
+  def self.get_content_items
+    self.publishing_api.get_content_items(
       document_type: "manual",
       fields: [
           :content_id,
-      ]
+          :description,
+          :title,
+          :details,
+          :public_updated_at,
+          :publication_state,
+          :base_path,
+          :update_type
+      ],
+      per_page: max_numbers_of_manuals
     ).to_ostruct
-    response.results.map(&:content_id)
   end
-  private_class_method :content_ids
+
+  def self.max_numbers_of_manuals
+    10000
+  end
 
   def update_attributes(new_attributes)
     new_attributes.each do |attribute, value|

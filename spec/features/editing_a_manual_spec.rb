@@ -5,10 +5,11 @@ RSpec.feature 'editing a manual' do
   let(:manual_links) { Payloads.manual_links }
   let(:section_content_items) { Payloads.section_content_items }
   let(:section_links) { Payloads.section_links }
+  let(:fields) { %i[content_id description title details public_updated_at publication_state base_path update_type] }
 
   before do
     log_in_as_editor(:gds_editor)
-    publishing_api_has_content([manual_content_item], document_type: "manual", fields: [:content_id])
+    publishing_api_has_content([manual_content_item], document_type: "manual", fields: fields, per_page: 10000)
     publishing_api_has_content(section_content_items.map { |section| { content_id: section["content_id"] } }, document_type: "manual_section", fields: [:content_id])
     stub_publishing_api_put_content(manual_content_item["content_id"], {})
     stub_publishing_api_patch_links(manual_content_item["content_id"], {})
