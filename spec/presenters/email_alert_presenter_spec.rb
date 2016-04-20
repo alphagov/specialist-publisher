@@ -18,8 +18,9 @@ describe EmailAlertPresenter do
         expect(presented_data[:subject]).to include(cma_case_payload["title"])
         expect(presented_data[:body]).to include(cma_case_payload["description"])
         expect(presented_data[:body]).to include(cma_case_payload["title"])
-        expect(presented_data[:links]).to eq(topics: [cma_case_payload["content_id"]])
-        expect(presented_data[:document_type]).to eq("cma_case")
+        expect(presented_data[:tags][:format]).to eq(cma_case_payload["document_type"])
+        expect(presented_data[:tags][:case_type]).to eq(cma_case_payload["details"]["metadata"]["case_type"])
+        expect(presented_data[:document_type]).to eq(cma_case_payload["document_type"])
         expect(presented_data[:footer]).to include("SUBSCRIBER_PREFERENCES_URL")
         expect(presented_data[:header]).to include("govuk-email-header")
       end
@@ -38,7 +39,6 @@ describe EmailAlertPresenter do
         presented_data = email_alert_presenter.to_json
 
         expect(presented_data[:body]).to include(mhra_email_address)
-        expect(presented_data[:links]).to eq(topics: [medical_safety_payload["content_id"]])
         expect(presented_data[:document_type]).to eq("medical_safety_alert")
       end
     end
