@@ -238,6 +238,7 @@ class Document
       publish_request.code == 200 && rummager_request.code == 200
     rescue GdsApi::HTTPErrorResponse => e
       Airbrake.notify(e)
+      false
     end
   end
 

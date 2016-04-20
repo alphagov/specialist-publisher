@@ -129,22 +129,36 @@ describe AaibReport do
   describe "#publish!" do
     before do
       email_alert_api_accepts_alert
-    end
-
-    it "publishes the AAIB Report" do
-      stub_publishing_api_publish(aaib_reports[0]["content_id"], {})
-      stub_any_rummager_post
       publishing_api_has_content(
         [aaib_org_content_item],
         document_type: 'organisation',
         fields: [:base_path, :content_id]
       )
+    end
 
-      aaib_report = described_class.find(aaib_reports[0]["content_id"])
+    let(:aaib_report) { described_class.find(aaib_reports[0]["content_id"]) }
+
+    it "publishes the AAIB Report" do
+      stub_publishing_api_publish(aaib_reports[0]["content_id"], {})
+      stub_any_rummager_post
       expect(aaib_report.publish!).to eq(true)
 
       assert_publishing_api_publish(aaib_report.content_id)
       assert_rummager_posted_item(indexable_attributes)
+    end
+
+    it "notifies Airbrake and returns false if publishing-api does not return status 200" do
+      expect(Airbrake).to receive(:notify)
+      stub_publishing_api_publish(aaib_reports[0]["content_id"], {}, status: 503)
+      stub_any_rummager_post
+      expect(aaib_report.publish!).to eq(false)
+    end
+
+    it "notifies Airbrake and returns false if rummager does not return status 200" do
+      expect(Airbrake).to receive(:notify)
+      stub_publishing_api_publish(aaib_reports[0]["content_id"], {})
+      stub_request(:post, %r{#{Plek.new.find('search')}/documents}).to_return(status: 503)
+      expect(aaib_report.publish!).to eq(false)
     end
   end
 end
