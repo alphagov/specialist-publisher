@@ -6,7 +6,8 @@ class DocumentsController < ApplicationController
   include ActionView::Helpers::TextHelper
 
   before_action :fetch_document, only: [:edit, :show, :publish, :update]
-  before_action :permitted?, if: :document_type
+  before_action :permitted?, if: :document_type, except: :publish
+  before_action :publish_permitted?, if: :document_type, only: :publish
 
   def index
     page = filtered_page_param(params[:page])
@@ -140,6 +141,15 @@ private
       redirect_to manuals_path
     else
       flash[:danger] = "That format doesn't exist. If you feel you've reached this in error, contact your SPOC."
+      redirect_to manuals_path
+    end
+  end
+
+  def publish_permitted?
+    if current_user.gds_editor?
+      true
+    else
+      flash[:danger] = "Please contact your organisation's managing editor to publish this document."
       redirect_to manuals_path
     end
   end
