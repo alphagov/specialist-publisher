@@ -33,9 +33,12 @@ RSpec.feature "Creating a Manual", type: :feature do
       }
     end
 
+    let(:fields) { %i[content_id description title details public_updated_at publication_state base_path update_type] }
+
     before do
       log_in_as_editor(:gds_editor)
-      publishing_api_has_content([], document_type: "manual", fields: [:content_id])
+      #make manual content items... before they just needed ids now needs other fields1
+      publishing_api_has_content([], document_type: "manual", fields: fields, per_page: 10000)
 
       stub_publishing_api_put_content(test_content_id, {})
       stub_publishing_api_patch_links(test_content_id, {})

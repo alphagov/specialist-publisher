@@ -4,11 +4,12 @@ RSpec.feature "Access control", type: :feature do
   let(:fields) { [:base_path, :content_id, :public_updated_at, :title, :publication_state] }
   let(:page_number) { 1 }
   let(:per_page) { 50 }
+  let(:manual_fields) { %i[content_id description title details public_updated_at publication_state base_path update_type] }
 
   before do
     publishing_api_has_content([], document_type: CmaCase.publishing_api_document_type, fields: fields, page: page_number, per_page: per_page)
     publishing_api_has_content([], document_type: AaibReport.publishing_api_document_type, fields: fields, page: page_number, per_page: per_page)
-    publishing_api_has_content([], document_type: 'manual', fields: [:content_id])
+    publishing_api_has_content([], document_type: 'manual', fields: manual_fields, per_page: 10000)
   end
 
   context "as a CMA Editor" do
@@ -67,12 +68,12 @@ RSpec.feature "Access control", type: :feature do
     let(:manual_links_2) { Payloads.manual_links("content_id" => manual_content_id_2, "links" => { "organisations" => [organisation_user.organisation_content_id] }) }
 
     let(:organisation_user) { FactoryGirl.create(:cma_editor) }
-
+    let(:manual_fields) { %i[content_id description title details public_updated_at publication_state base_path update_type] }
     before do
       publishing_api_has_item(manual_content_item_1)
       publishing_api_has_item(manual_content_item_2)
 
-      publishing_api_has_content([manual_content_item_1, manual_content_item_2], document_type: 'manual', fields: [:content_id])
+      publishing_api_has_content([manual_content_item_1, manual_content_item_2], document_type: 'manual', fields: manual_fields, per_page: 10000)
 
       [manual_links_1, manual_links_2].each do |link_set|
         publishing_api_has_links(link_set)
