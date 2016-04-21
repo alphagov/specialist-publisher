@@ -69,7 +69,7 @@ RSpec.feature "Publishing a CMA case", type: :feature do
   end
 
   before do
-    log_in_as_editor(:cma_editor)
+    log_in_as_editor(:gds_editor)
 
     publishing_api_has_content([cma_case, minor_update_item], document_type: CmaCase.publishing_api_document_type, fields: fields, page: page_number, per_page: per_page)
     publishing_api_has_content([cma_org_content_item], document_type: 'organisation', fields: [:base_path, :content_id])
@@ -121,5 +121,23 @@ RSpec.feature "Publishing a CMA case", type: :feature do
     assert_publishing_api_publish(content_id)
 
     assert_not_requested(:post, Plek.current.find('email-alert-api') + "/notifications")
+  end
+
+  context "a regular CMA editor" do
+    it "shouldn't be able to publish anything" do
+      log_in_as_editor(:cma_editor)
+
+      publishing_api_has_item(minor_update_item)
+
+      visit "/cma-cases"
+      expect(page.status_code).to eq(200)
+
+      click_link "Minor Update Case"
+
+      expect(page.status_code).to eq(200)
+      expect(page).to have_content("Minor Update Case")
+
+      expect(page).not_to have_button("Publish")
+    end
   end
 end
