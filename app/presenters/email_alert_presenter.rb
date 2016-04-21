@@ -25,16 +25,9 @@ private
   end
 
   def tags
-    { format: document.publishing_api_document_type }.deep_merge(metadata)
-  end
-
-  def metadata
-    merged_fields = document.format_specific_fields.map { |f|
-      {
-        f => document.send(f)
-      }
-    }.reduce({}, :merge)
-    merged_fields.reject { |_k, v| v.blank? }
+    {
+      format: document.publishing_api_document_type
+    }.deep_merge(document.format_specific_metadata.reject { |_k, v| v.blank? })
   end
 
   def standard_body(template_path)
