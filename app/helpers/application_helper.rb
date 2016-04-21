@@ -12,7 +12,7 @@ module ApplicationHelper
   end
 
   def state(document)
-    state = document.publication_state
+    state = document.live? ? "published" : document.publication_state
 
     if document.draft?
       classes = "label label-primary"
