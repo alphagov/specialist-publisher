@@ -16,6 +16,7 @@ RSpec.feature "Viewing a specific case", type: :feature do
         "publication_state" => "draft",
       )
     end
+    ten_example_cases[1]["publication_state"] = "published"
     ten_example_cases << cma_case_with_attachments
   }
 
@@ -39,7 +40,9 @@ RSpec.feature "Viewing a specific case", type: :feature do
     expect(page).to have_content("Example CMA Case 0")
     expect(page).to have_content("Example CMA Case 1")
     expect(page).to have_content("Example CMA Case 2")
-
+    within(".document-list li.document:nth-child(2)") do
+      expect(page).to have_content("published")
+    end
     click_link "Example CMA Case 0"
 
     expect(page.status_code).to eq(200)
