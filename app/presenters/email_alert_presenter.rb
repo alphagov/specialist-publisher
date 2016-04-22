@@ -9,7 +9,7 @@ class EmailAlertPresenter
     {
       subject: document.title + " updated",
       body: body,
-      links: { topics: [document.content_id] },
+      tags: tags,
       document_type: document.publishing_api_document_type,
     }.merge(extra_options)
   end
@@ -22,6 +22,12 @@ private
     else
       standard_body("email_alerts/publication")
     end
+  end
+
+  def tags
+    {
+      format: document.publishing_api_document_type
+    }.deep_merge(document.format_specific_metadata.reject { |_k, v| v.blank? })
   end
 
   def standard_body(template_path)

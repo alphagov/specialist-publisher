@@ -68,8 +68,12 @@ RSpec.describe CmaCase do
 
   let(:email_alert_payload) do
     {
-      "links" => {
-        "topics" => [cma_cases[0]["content_id"]]
+      "tags" => {
+        "format" => "cma_case",
+        "opened_date" => "2014-01-01",
+        "case_type" => "ca98-and-civil-cartels",
+        "case_state" => "open",
+        "market_sector" => ["energy"]
       },
       "document_type" => "cma_case"
     }
