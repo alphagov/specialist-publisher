@@ -16,7 +16,7 @@ RSpec.feature "Viewing a specific case", type: :feature do
         "publication_state" => "draft",
       )
     end
-    ten_example_cases[1]["publication_state"] = "published"
+    ten_example_cases[1]["publication_state"] = "live"
     ten_example_cases << cma_case_with_attachments
   }
 
