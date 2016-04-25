@@ -52,7 +52,7 @@ RSpec.feature "Publishing a CMA case", type: :feature do
     Payloads.cma_case_content_item(
       "public_updated_at" => "2015-11-16T11:53:30+00:00",
       "need_ids" => [],
-      "publication_state" => "live",
+      "publication_state" => "draft",
     )
   }
   let(:content_id) { cma_case['content_id'] }
@@ -68,10 +68,24 @@ RSpec.feature "Publishing a CMA case", type: :feature do
     )
   end
 
+  def live_item
+    cma_case.merge(
+      "title" => "Live Item",
+      "publication_state" => "live"
+    )
+  end
+
+  def withdrawn_item
+    cma_case.merge(
+      "title" => "Withdrawn Item",
+      "publication_state" => "withdrawn"
+    )
+  end
+
   before do
     log_in_as_editor(:cma_editor)
 
-    publishing_api_has_content([cma_case, minor_update_item], document_type: CmaCase.publishing_api_document_type, fields: fields, page: page_number, per_page: per_page)
+    publishing_api_has_content([cma_case, minor_update_item, live_item, withdrawn_item], document_type: CmaCase.publishing_api_document_type, fields: fields, page: page_number, per_page: per_page)
     publishing_api_has_content([cma_org_content_item], document_type: 'organisation', fields: [:base_path, :content_id])
 
     publishing_api_has_item(cma_case)
@@ -121,5 +135,31 @@ RSpec.feature "Publishing a CMA case", type: :feature do
     assert_publishing_api_publish(content_id)
 
     assert_not_requested(:post, Plek.current.find('email-alert-api') + "/notifications")
+  end
+
+  scenario "when content item is live, there will be no publish button" do
+    publishing_api_has_item(live_item)
+
+    visit "/cma-cases"
+
+    expect(page.status_code).to eq(200)
+
+    click_link "Live Item"
+
+    expect(page).not_to have_selector(:button, 'Publish')
+    expect(page).to have_content("There are no changes to publish.")
+  end
+
+  scenario "when content item is withdrawn, there will be a publish button" do
+    publishing_api_has_item(withdrawn_item)
+
+    visit "/cma-cases"
+
+    expect(page.status_code).to eq(200)
+
+    click_link "Withdrawn Item"
+
+    expect(page).to have_selector(:button, 'Publish')
+    expect(page).not_to have_content("There are no changes to publish.")
   end
 end
