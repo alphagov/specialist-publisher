@@ -6,17 +6,24 @@ class DocumentsController < ApplicationController
   include ActionView::Helpers::TextHelper
 
   before_action :fetch_document, only: [:edit, :show, :publish, :update]
-  before_action :permitted?, if: :document_type
+  before_action :check_authorisation, if: :document_type
+
+  after_action :verify_authorized
+
+  def check_authorisation
+    if current_format
+      authorize document_klass
+    else
+      flash[:danger] = "That format doesn't exist. If you feel you've reached this in error, contact your SPOC."
+      redirect_to manuals_path
+    end
+  end
 
   def index
     page = filtered_page_param(params[:page])
     per_page = filtered_per_page_param(params[:per_page])
-    if current_format
-      @response = document_klass.all(page, per_page)
-      @paged_documents = PaginationPresenter.new(@response, per_page)
-    else
-      redirect_to manuals_path
-    end
+    @response = document_klass.all(page, per_page)
+    @paged_documents = PaginationPresenter.new(@response, per_page)
   end
 
   def new
@@ -130,17 +137,5 @@ private
 
   def rummager
     @rummager ||= SpecialistPublisher.services(:rummager)
-  end
-
-  def permitted?
-    if formats_user_can_access.fetch(document_type, nil)
-      true
-    elsif current_format
-      flash[:danger] = "You aren't permitted to access #{current_format.title.pluralize}. If you feel you've reached this in error, contact your SPOC."
-      redirect_to manuals_path
-    else
-      flash[:danger] = "That format doesn't exist. If you feel you've reached this in error, contact your SPOC."
-      redirect_to manuals_path
-    end
   end
 end

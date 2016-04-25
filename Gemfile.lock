@@ -198,6 +198,8 @@ GEM
       coderay (~> 1.1.0)
       method_source (~> 0.8.1)
       slop (~> 3.4)
+    pundit (1.1.0)
+      activesupport (>= 3.0.0)
     rack (1.6.4)
     rack-accept (0.4.5)
       rack (>= 0.4)
@@ -343,6 +345,7 @@ DEPENDENCIES
   mongoid (= 5.0.1)
   plek (~> 1.10)
   pry
+  pundit
   rails (= 4.2.6)
   rspec-rails (~> 3.3)
   sass-rails (~> 4.0.3)

@@ -20,6 +20,10 @@ class Document
     :public_updated_at,
   ]
 
+  def self.policy_class
+    DocumentPolicy
+  end
+
   def initialize(params = {}, format_specific_fields = [])
     @content_id = params.fetch(:content_id, SecureRandom.uuid)
     @format_specific_fields = format_specific_fields

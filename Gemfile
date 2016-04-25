@@ -12,7 +12,7 @@ gem 'jquery-rails', '~> 3.1.4'
 gem 'select2-rails', '~> 4.0.0'
 gem "kaminari"
 gem 'bootstrap-kaminari-views', '0.0.5'
-
+gem 'pundit'
 # GDS managed dependencies
 gem 'plek', '~> 1.10'
 gem 'gds-sso', '11.0.0'
