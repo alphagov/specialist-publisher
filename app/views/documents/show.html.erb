@@ -3,7 +3,7 @@
   <li class='active'><%= @document.title %></li>
 <% end %>
 
-<%= render partial: "shared/title", locals: { document: @document, public_url: published_document_path(@document) } %>
+<%= render partial: "shared/title", locals: { document: @document } %>
 
 <div class="row">
   <div class="col-md-8">
