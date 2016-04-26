@@ -14,6 +14,11 @@ RSpec.feature "Viewing a specific case", type: :feature do
         "description" => "This is the summary of example CMA case #{n}",
         "base_path" => "/cma-cases/example-cma-case-#{n}",
         "publication_state" => "draft",
+        "details" => {
+          "metadata" => {
+            "bulk_published" => false
+          }
+        }
       )
     end
     ten_example_cases[1]["publication_state"] = "live"
@@ -52,6 +57,7 @@ RSpec.feature "Viewing a specific case", type: :feature do
     expect(page).to have_content("2014-01-01")
     expect(page).to have_content("CA98 and civil cartels")
     expect(page).to have_content("Energy")
+    expect(page).to have_content("Bulk published false")
   end
 
   scenario "that doesn't exist" do
