@@ -1,4 +1,10 @@
 class AttachmentsController < ApplicationController
+  before_action :check_authorisation, if: :document_type
+
+  def check_authorisation
+    authorize current_format
+  end
+
   def new
     @document = fetch_document
     @attachment = Attachment.new
