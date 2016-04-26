@@ -1,4 +1,10 @@
 class ManualsController < ApplicationController
+  before_action :check_authorisation
+
+  def check_authorisation
+    authorize :manual
+  end
+
   def index
     if current_user.gds_editor?
       @manuals = Manual.all
