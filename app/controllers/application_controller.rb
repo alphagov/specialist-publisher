@@ -4,13 +4,22 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
   include GDS::SSO::ControllerMethods
+  include Pundit
 
   before_filter :require_signin_permission!
 
   helper_method :current_format
   helper_method :formats_user_can_access
 
+  rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
+
 private
+
+  def user_not_authorized
+    flash[:danger] = "You aren't permitted to access #{current_format.title.pluralize}. If you feel you've reached this in error, contact your SPOC."
+    redirect_to manuals_path
+  end
+
 
   def document_type
     params[:document_type]
