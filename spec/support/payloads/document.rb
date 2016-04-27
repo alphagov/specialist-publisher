@@ -24,6 +24,11 @@ module Payloads
             "content" => ("<h2 id=\"header\">Header</h2>\n" + "\n<p>This is the long body of an example AAIB Report</p>\n" * 10)
           }
         ],
+        "headers" => [{
+          "text" => "Header",
+          "level" => 2,
+          "id" => "header",
+        }],
         "metadata" => {
           "date_of_occurrence" => "2015-10-10",
           "document_type" => "aaib_report"
@@ -66,6 +71,11 @@ module Payloads
             "content" => ("<h2 id=\"header\">Header</h2>\n" + "\n<p>This is the long body of an example Employment Appeal Tribunal Decision</p>\n" * 10)
           }
         ],
+        "headers" => [{
+          "text" => "Header",
+          "level" => 2,
+          "id" => "header",
+        }],
         "metadata" => {
           "tribunal_decision_categories" => ["age-discrimination"],
           "tribunal_decision_decision_date" => "2015-07-30",
@@ -110,6 +120,11 @@ module Payloads
             "content" => ("<h2 id=\"header\">Header</h2>\n" + "\n<p>This is the long body of an example CMA case</p>\n" * 10)
           }
         ],
+        "headers" => [{
+          "text" => "Header",
+          "level" => 2,
+          "id" => "header",
+        }],
         "metadata" => {
           "opened_date" => "2014-01-01",
           "case_type" => "ca98-and-civil-cartels",
@@ -160,6 +175,11 @@ module Payloads
             "content" => ("<h2 id=\"header\">Header</h2>\n" + "\n<p>This is the long body of an example Countryside Stewardship Grant</p>\n" * 10)
           }
         ],
+        "headers" => [{
+          "text" => "Header",
+          "level" => 2,
+          "id" => "header",
+        }],
         "metadata" => {
           "document_type" => "countryside_stewardship_grant"
         },
@@ -201,6 +221,11 @@ module Payloads
             "content" => ("<h2 id=\"header\">Header</h2>\n" + "\n<p>This is the long body of an example Drug Safety Update</p>\n" * 10)
           }
         ],
+        "headers" => [{
+          "text" => "Header",
+          "level" => 2,
+          "id" => "header",
+        }],
         "metadata" => {
           "document_type" => "drug_safety_update",
         },
@@ -242,6 +267,11 @@ module Payloads
             "content" => ("<h2 id=\"header\">Header</h2>\n" + "\n<p>This is the long body of an example Employment Tribunal Decision</p>\n" * 10)
           }
         ],
+        "headers" => [{
+          "text" => "Header",
+          "level" => 2,
+          "id" => "header",
+        }],
         "metadata" => {
           "tribunal_decision_categories" => ["age-discrimination"],
           "tribunal_decision_country" => "england-and-wales",
@@ -286,6 +316,11 @@ module Payloads
             "content" => ("<h2 id=\"header\">Header</h2>\n" + "\n<p>This is the long body of an example ESI Fund</p>\n" * 10)
           }
         ],
+        "headers" => [{
+          "text" => "Header",
+          "level" => 2,
+          "id" => "header",
+        }],
         "metadata" => {
           "closing_date" => "2016-01-01",
           "document_type" => "esi_fund",
@@ -328,6 +363,11 @@ module Payloads
             "content" => ("<h2 id=\"header\">Header</h2>\n" + "\n<p>This is the long body of an example MAIB Report</p>\n" * 10)
           }
         ],
+        "headers" => [{
+          "text" => "Header",
+          "level" => 2,
+          "id" => "header",
+        }],
         "metadata" => {
           "date_of_occurrence" => "2015-10-10",
           "document_type" => "maib_report"
@@ -395,6 +435,11 @@ module Payloads
             "content" => ("<h2 id=\"header\">Header</h2>\n" + "\n<p>This is the long body of an example Medical Safety Alert</p>\n" * 10)
           }
         ],
+        "headers" => [{
+          "text" => "Header",
+          "level" => 2,
+          "id" => "header",
+        }],
         "metadata" => {
           "alert_type" => "company-led-drugs",
           "issued_date" => "2016-02-01",
@@ -438,6 +483,11 @@ module Payloads
             "content" => ("<h2 id=\"header\">Header</h2>\n" + "\n<p>This is the long body of an example RAIB Report</p>\n" * 10)
           }
         ],
+        "headers" => [{
+          "text" => "Header",
+          "level" => 2,
+          "id" => "header",
+        }],
         "metadata" => {
           "date_of_occurrence" => "2015-10-10",
           "document_type" => "raib_report"
@@ -479,6 +529,11 @@ module Payloads
             "content" => ("<h2 id=\"header\">Header</h2>\n" + "\n<p>This is the long body of an example Tax Tribunal Decision</p>\n" * 10)
           }
         ],
+        "headers" => [{
+          "text" => "Header",
+          "level" => 2,
+          "id" => "header",
+        }],
         "metadata" => {
           "tribunal_decision_category" => "banking",
           "tribunal_decision_decision_date" => "2015-07-30",
@@ -522,6 +577,11 @@ module Payloads
             "content" => ("<h2 id=\"header\">Header</h2>\n" + "\n<p>This is the long body of an example Vehicle Recalls And Faults</p>\n" * 10)
           }
         ],
+        "headers" => [{
+          "text" => "Header",
+          "level" => 2,
+          "id" => "header",
+        }],
         "metadata" => {
           "alert_issue_date" => "2015-04-28",
           "build_start_date" => "2015-04-28",
