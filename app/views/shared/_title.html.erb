@@ -4,10 +4,10 @@
       <%= document.base_path %>
     </li>
     <% if document.published? %>
-      <li><%= link_to "View on website", public_url %></li>
+      <li><%= view_on_website_link_for(document) %></li>
     <% end %>
     <% if document.draft? || document.redrafted? %>
-      <li><%= link_to "Preview draft", content_preview_url(document) %></li>
+      <li><%= preview_draft_link_for(document) %></li>
     <% end %>
   </li>
 </h1>

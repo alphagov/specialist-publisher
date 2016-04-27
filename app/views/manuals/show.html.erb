@@ -3,7 +3,7 @@
   <li class='active'><%= @manual.title %></li>
 <% end %>
 
-<%= render partial: "shared/title", locals: { document: @manual, public_url: url_for_public_manual(@manual) } %>
+<%= render partial: "shared/title", locals: { document: @manual } %>
 
 <div class="row">
   <div class="col-md-8">
