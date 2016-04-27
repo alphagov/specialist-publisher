@@ -2,7 +2,7 @@ class ManualSectionsController < ApplicationController
   before_action :check_authorisation
 
   def check_authorisation
-    authorize :manual_section
+    authorize :manual
   end
 
   def show
