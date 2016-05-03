@@ -21,4 +21,8 @@ class AaibReport < Document
   def self.publishing_api_document_type
     "aaib_report"
   end
+
+  def self.title
+    "AAIB Report"
+  end
 end

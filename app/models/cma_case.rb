@@ -23,4 +23,8 @@ class CmaCase < Document
   def self.publishing_api_document_type
     "cma_case"
   end
+
+  def self.title
+    "CMA Case"
+  end
 end

@@ -19,4 +19,8 @@ class EmploymentTribunalDecision < Document
   def self.publishing_api_document_type
     "employment_tribunal_decision"
   end
+
+  def self.title
+    "ET Decision"
+  end
 end

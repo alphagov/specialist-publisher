@@ -32,4 +32,8 @@ class DrugSafetyUpdate < Document
   def self.publishing_api_document_type
     "drug_safety_update"
   end
+
+  def self.title
+    "Drug Safety Update"
+  end
 end

@@ -17,4 +17,8 @@ class MedicalSafetyAlert < Document
   def self.publishing_api_document_type
     "medical_safety_alert"
   end
+
+  def self.title
+    "Medical Safety Alert"
+  end
 end

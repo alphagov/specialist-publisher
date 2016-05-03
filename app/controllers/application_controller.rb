@@ -38,48 +38,44 @@ private
 
   def document_types
     # For each format that follows the standard naming convention, this
-    # method takes the title and name of the model class of each format
-    # like this:
+    # method takes the model class and generates a FormatStructure.
     #
-    # data = {
-    #   "GDS Report" => GdsReport
-    # }
-    #
-    # which will become this:
+    # eg GdsReport will become this:
     #
     # {
     #   "gds-reports" => FormatStruct.new(
     #     klass: GdsReports, # This is the class name of the model
     #     document_type: "gds-reports", # This is internally used for building urls
     #     format_name: "gds_report", # This is used for fetching the params of the format
-    #     title: "GDS Report", # Rendered as the format name to the User
+    #     title: "GDS Report", # Rendered as the format name to the User, taken from GdsReport.title
     #     organisations: ["a-content-id"], # Content IDs for the Orgs fetched from the schema
     #   )
     # }
 
-    data = {
-      "AAIB Report" => AaibReport,
-      "CMA Case" => CmaCase,
-      "Countryside Stewardship Grant" => CountrysideStewardshipGrant,
-      "Drug Safety Update" => DrugSafetyUpdate,
-      "EAT Decisions" => EmploymentAppealTribunalDecision,
-      "ESI Fund" => EsiFund,
-      "ET Decisions" => EmploymentTribunalDecision,
-      "MAIB Report" => MaibReport,
-      "Medical Safety Alert" => MedicalSafetyAlert,
-      "RAIB Report" => RaibReport,
-      "Tax Tribunal Decision" => TaxTribunalDecision,
-      "Vehicle Recalls and Faults Alert" => VehicleRecallsAndFaultsAlert,
-    }
+    document_classes = [
+      AaibReport,
+      CmaCase,
+      CountrysideStewardshipGrant,
+      DrugSafetyUpdate,
+      EmploymentAppealTribunalDecision,
+      EsiFund,
+      EmploymentTribunalDecision,
+      MaibReport,
+      MedicalSafetyAlert,
+      RaibReport,
+      TaxTribunalDecision,
+      VehicleRecallsAndFaultsAlert,
+    ]
 
-    data.map { |k, v|
+    document_classes.map { |document_class|
+      title = document_class.title
       {
-        k.downcase.parameterize.pluralize => FormatStruct.new(
-          v,
-          k.downcase.parameterize.pluralize,
-          v.to_s.underscore,
-          k,
-          v.organisations,
+        title.downcase.parameterize.pluralize => FormatStruct.new(
+          document_class,
+          title.downcase.parameterize.pluralize,
+          document_class.to_s.underscore,
+          title,
+          document_class.organisations,
         )
       }
     }.reduce({}, :merge)

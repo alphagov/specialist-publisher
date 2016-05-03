@@ -17,4 +17,8 @@ class TaxTribunalDecision < Document
   def self.publishing_api_document_type
     "tax_tribunal_decision"
   end
+
+  def self.title
+    "Tax Tribunal Decision"
+  end
 end
