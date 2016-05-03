@@ -1,4 +1,8 @@
 <div class="form-group">
   <%= f.label :country %>
-  <%= f.select :country, facet_options(f, :country), { include_blank: true }, { class: 'form-control' } %>
+  <%=
+    f.select :country, facet_options(f, :country),
+      { include_blank: true },
+      { class: 'select2', multiple: true, data: { placeholder: 'Select countries' } }
+  %>
 </div>
