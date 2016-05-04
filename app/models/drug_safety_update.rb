@@ -25,6 +25,7 @@ class DrugSafetyUpdate < Document
       true
     rescue GdsApi::HTTPErrorResponse => e
       Airbrake.notify(e)
+      false
     end
   end
 

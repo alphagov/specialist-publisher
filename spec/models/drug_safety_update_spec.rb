@@ -117,24 +117,37 @@ describe DrugSafetyUpdate do
 
   describe "#publish!" do
     before do
-      email_alert_api_accepts_alert
-    end
-
-    it "publishes the Drug Safety Update" do
-      stub_publishing_api_publish(drug_safety_updates[0]["content_id"], {})
-      stub_any_rummager_post
       publishing_api_has_content(
         [drug_safety_update_org_content_item],
         document_type: 'organisation',
         fields: [:base_path, :content_id]
       )
+    end
 
-      drug_safety_update = described_class.find(drug_safety_updates[0]["content_id"])
+    let(:drug_safety_update) { described_class.find(drug_safety_updates[0]["content_id"]) }
+
+    it "publishes the Drug Safety Update" do
+      stub_publishing_api_publish(drug_safety_updates[0]["content_id"], {})
+      stub_any_rummager_post
       expect(drug_safety_update.publish!).to eq(true)
 
       assert_publishing_api_publish(drug_safety_update.content_id)
       assert_rummager_posted_item(indexable_attributes)
       assert_not_requested(:post, Plek.current.find('email-alert-api') + "/notifications")
+    end
+
+    it "notifies Airbrake and returns false if publishing-api does not return status 200" do
+      expect(Airbrake).to receive(:notify)
+      stub_publishing_api_publish(drug_safety_updates[0]["content_id"], {}, status: 503)
+      stub_any_rummager_post_with_queueing_enabled
+      expect(drug_safety_update.publish!).to eq(false)
+    end
+
+    it "notifies Airbrake and returns false if rummager does not return status 200" do
+      expect(Airbrake).to receive(:notify)
+      stub_publishing_api_publish(drug_safety_updates[0]["content_id"], {})
+      stub_request(:post, %r{#{Plek.new.find('search')}/documents}).to_return(status: 503)
+      expect(drug_safety_update.publish!).to eq(false)
     end
   end
 end
