@@ -22,7 +22,8 @@ class DocumentsController < ApplicationController
   def index
     page = filtered_page_param(params[:page])
     per_page = filtered_per_page_param(params[:per_page])
-    @response = current_format.all(page, per_page)
+    query = params[:query]
+    @response = current_format.all(page, per_page, q: query)
     @paged_documents = PaginationPresenter.new(@response, per_page)
   end
 
