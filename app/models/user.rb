@@ -2,6 +2,10 @@ class User
   include Mongoid::Document
   include GDS::SSO::User
 
+  def self.collection_name
+    "specialist_publisher_users"
+  end
+
   field :uid, type: String
   field :email, type: String
   field :version, type: Integer
