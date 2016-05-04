@@ -187,10 +187,10 @@ class Manual
       presented_manual = ManualPresenter.new(self)
       presented_links = ManualLinksPresenter.new(self)
       begin
-        item_request = publishing_api.put_content(self.content_id, presented_manual.to_json)
-        links_request = publishing_api.patch_links(self.content_id, presented_links.to_json)
+        publishing_api.put_content(self.content_id, presented_manual.to_json)
+        publishing_api.patch_links(self.content_id, presented_links.to_json)
 
-        item_request.code == 200 && links_request.code == 200
+        true
       rescue GdsApi::HTTPErrorResponse => e
         Airbrake.notify(e)
 

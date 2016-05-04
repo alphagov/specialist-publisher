@@ -209,7 +209,7 @@ RSpec.describe CmaCase do
 
     it "publishes the CMA Case" do
       stub_publishing_api_publish(cma_cases[0]["content_id"], {})
-      stub_any_rummager_post
+      stub_any_rummager_post_with_queueing_enabled
       publishing_api_has_content(
         [cma_org_content_item],
         document_type: 'organisation',

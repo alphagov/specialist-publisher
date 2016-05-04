@@ -125,7 +125,7 @@ describe MaibReport do
 
     it "publishes the MAIB Report" do
       stub_publishing_api_publish(maib_reports[0]["content_id"], {})
-      stub_any_rummager_post
+      stub_any_rummager_post_with_queueing_enabled
       publishing_api_has_content(
         [maib_org_content_item],
         document_type: 'organisation',

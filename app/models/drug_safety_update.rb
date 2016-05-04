@@ -15,15 +15,14 @@ class DrugSafetyUpdate < Document
 
     begin
       update_type = self.update_type || 'major'
-      publish_request = publishing_api.publish(content_id, update_type)
-      rummager_request = rummager.add_document(
+      publishing_api.publish(content_id, update_type)
+      rummager.add_document(
         search_document_type,
         base_path,
         indexable_document.to_json,
       )
 
-      publish_request.code == 200 && rummager_request.code == 200
-
+      true
     rescue GdsApi::HTTPErrorResponse => e
       Airbrake.notify(e)
     end

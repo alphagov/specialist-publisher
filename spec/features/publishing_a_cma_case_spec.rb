@@ -91,7 +91,7 @@ RSpec.feature "Publishing a CMA case", type: :feature do
     publishing_api_has_item(cma_case)
 
     stub_publishing_api_publish(content_id, {})
-    stub_any_rummager_post
+    stub_any_rummager_post_with_queueing_enabled
     email_alert_api_accepts_alert
   end
 

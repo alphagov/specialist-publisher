@@ -125,7 +125,7 @@ describe RaibReport do
 
     it "publishes the RAIB Report" do
       stub_publishing_api_publish(raib_reports[0]["content_id"], {})
-      stub_any_rummager_post
+      stub_any_rummager_post_with_queueing_enabled
       publishing_api_has_content(
         [raib_org_content_item],
         document_type: 'organisation',
