@@ -1,6 +1,8 @@
 class Manual
   include ActiveModel::Model
   include ActiveModel::Validations
+  include PublishingHelper
+
   #publishing-api will return per_page default of 50 items. ALL variable is set to high number to return all manuals until pagination is properly implemented, else user would only see 50 manuals.
 
   attr_accessor :content_id, :base_path, :title, :summary, :body, :publication_state, :update_type
@@ -186,15 +188,9 @@ class Manual
     if self.valid?
       presented_manual = ManualPresenter.new(self)
       presented_links = ManualLinksPresenter.new(self)
-      begin
+      handle_remote_error do
         publishing_api.put_content(self.content_id, presented_manual.to_json)
         publishing_api.patch_links(self.content_id, presented_links.to_json)
-
-        true
-      rescue GdsApi::HTTPErrorResponse => e
-        Airbrake.notify(e)
-
-        false
       end
     else
       false
@@ -208,6 +204,6 @@ private
   end
 
   def self.publishing_api
-    SpecialistPublisher.services(:publishing_api)
+    Services.publishing_api
   end
 end

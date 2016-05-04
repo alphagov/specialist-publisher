@@ -1,6 +1,7 @@
 class Document
   include ActiveModel::Model
   include ActiveModel::Validations
+  include PublishingHelper
 
   attr_accessor :content_id, :base_path, :title, :summary, :body, :format_specific_fields, :public_updated_at, :state, :bulk_published, :publication_state, :change_note, :document_type, :attachments
 
@@ -206,14 +207,9 @@ class Document
       presented_document = DocumentPresenter.new(self)
       presented_links = DocumentLinksPresenter.new(self)
 
-      begin
+      handle_remote_error do
         publishing_api.put_content(self.content_id, presented_document.to_json)
         publishing_api.patch_links(self.content_id, presented_links.to_json)
-
-        true
-      rescue GdsApi::HTTPErrorResponse => e
-        Airbrake.notify(e)
-        false
       end
     else
       raise RecordNotSaved
@@ -225,23 +221,18 @@ class Document
   def publish!
     indexable_document = SearchPresenter.new(self)
 
-    begin
+    handle_remote_error do
       update_type = self.update_type || 'major'
       publishing_api.publish(content_id, update_type)
-      rummager.add_document(
+      Services.rummager.add_document(
         search_document_type,
         base_path,
         indexable_document.to_json,
       )
 
       if self.update_type == "major"
-        email_alert_api.send_alert(EmailAlertPresenter.new(self).to_json)
+        Services.email_alert_api.send_alert(EmailAlertPresenter.new(self).to_json)
       end
-
-      true
-    rescue GdsApi::HTTPErrorResponse => e
-      Airbrake.notify(e)
-      false
     end
   end
 
@@ -263,20 +254,12 @@ private
     payload.details.attachments.map { |attachment| Attachment.new(attachment) }
   end
 
-  def email_alert_api
-    SpecialistPublisher.services(:email_alert_api)
-  end
-
-  def rummager
-    SpecialistPublisher.services(:rummager)
-  end
-
   def publishing_api
     self.class.publishing_api
   end
 
   def self.publishing_api
-    SpecialistPublisher.services(:publishing_api)
+    Services.publishing_api
   end
 
   def self.finder_schema

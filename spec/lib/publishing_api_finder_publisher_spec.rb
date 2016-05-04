@@ -40,8 +40,7 @@ describe PublishingApiFinderPublisher do
     let(:test_logger) { Logger.new(nil) }
 
     before do
-      allow(SpecialistPublisher).to receive(:services)
-        .with(:publishing_api)
+      allow(Services).to receive(:publishing_api)
         .and_return(publishing_api)
 
       stub_any_publishing_api_put_content

@@ -76,6 +76,6 @@ private
   end
 
   def publishing_api
-    SpecialistPublisher.services(:publishing_api)
+    Services.publishing_api
   end
 end
