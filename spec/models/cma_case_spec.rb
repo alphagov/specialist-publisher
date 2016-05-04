@@ -117,6 +117,13 @@ RSpec.describe CmaCase do
     it "returns all CMA Cases" do
       expect(described_class.all(page, per_page).results.length).to be(cma_cases.length)
     end
+
+    it "passes query parameter if supplied" do
+      expect(described_class.publishing_api).to receive(:get_content_items)
+        .with(hash_including(q: "foo"))
+        .and_return(double(to_ostruct: {}))
+      described_class.all(page, per_page, q: "foo")
+    end
   end
 
   context ".find" do
