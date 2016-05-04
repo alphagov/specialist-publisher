@@ -140,7 +140,7 @@ describe AaibReport do
 
     it "publishes the AAIB Report" do
       stub_publishing_api_publish(aaib_reports[0]["content_id"], {})
-      stub_any_rummager_post
+      stub_any_rummager_post_with_queueing_enabled
       expect(aaib_report.publish!).to eq(true)
 
       assert_publishing_api_publish(aaib_report.content_id)
@@ -150,7 +150,7 @@ describe AaibReport do
     it "notifies Airbrake and returns false if publishing-api does not return status 200" do
       expect(Airbrake).to receive(:notify)
       stub_publishing_api_publish(aaib_reports[0]["content_id"], {}, status: 503)
-      stub_any_rummager_post
+      stub_any_rummager_post_with_queueing_enabled
       expect(aaib_report.publish!).to eq(false)
     end
 

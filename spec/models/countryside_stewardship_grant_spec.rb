@@ -127,7 +127,7 @@ describe CountrysideStewardshipGrant do
 
     it "publishes the Countryside Stewardship Grant" do
       stub_publishing_api_publish(countryside_stewardship_grants[0]["content_id"], {})
-      stub_any_rummager_post
+      stub_any_rummager_post_with_queueing_enabled
       publishing_api_has_content(
         countryside_stewardship_grant_org_content_items,
         document_type: 'organisation',

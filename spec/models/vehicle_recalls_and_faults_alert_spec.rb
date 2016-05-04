@@ -127,7 +127,7 @@ describe VehicleRecallsAndFaultsAlert do
 
     it "publishes the Vehicle Recall and Fault" do
       stub_publishing_api_publish(vehicle_recalls_and_faults[0]["content_id"], {})
-      stub_any_rummager_post
+      stub_any_rummager_post_with_queueing_enabled
       publishing_api_has_content(
         [vehicle_recalls_and_faults_alert_org_content_item],
         document_type: 'organisation',

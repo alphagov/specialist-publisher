@@ -130,7 +130,7 @@ describe EmploymentAppealTribunalDecision do
 
     it "publishes the Employment Appeal Tribunal Decision" do
       stub_publishing_api_publish(employment_appeal_tribunal_decisions[0]["content_id"], {})
-      stub_any_rummager_post
+      stub_any_rummager_post_with_queueing_enabled
       publishing_api_has_content(
         [employment_appeal_tribunal_decision_org_content_item],
         document_type: 'organisation',

@@ -125,7 +125,7 @@ describe MedicalSafetyAlert do
 
     it "publishes the Medical Safety Alert" do
       stub_publishing_api_publish(medical_safety_alerts[0]["content_id"], {})
-      stub_any_rummager_post
+      stub_any_rummager_post_with_queueing_enabled
       publishing_api_has_content(
         [mhra_org_content_item],
         document_type: 'organisation',

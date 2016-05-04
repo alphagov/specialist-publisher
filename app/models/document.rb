@@ -207,13 +207,12 @@ class Document
       presented_links = DocumentLinksPresenter.new(self)
 
       begin
-        item_request = publishing_api.put_content(self.content_id, presented_document.to_json)
-        links_request = publishing_api.patch_links(self.content_id, presented_links.to_json)
+        publishing_api.put_content(self.content_id, presented_document.to_json)
+        publishing_api.patch_links(self.content_id, presented_links.to_json)
 
-        item_request.code == 200 && links_request.code == 200
+        true
       rescue GdsApi::HTTPErrorResponse => e
         Airbrake.notify(e)
-
         false
       end
     else
@@ -228,8 +227,8 @@ class Document
 
     begin
       update_type = self.update_type || 'major'
-      publish_request = publishing_api.publish(content_id, update_type)
-      rummager_request = rummager.add_document(
+      publishing_api.publish(content_id, update_type)
+      rummager.add_document(
         search_document_type,
         base_path,
         indexable_document.to_json,
@@ -239,7 +238,7 @@ class Document
         email_alert_api.send_alert(EmailAlertPresenter.new(self).to_json)
       end
 
-      publish_request.code == 200 && rummager_request.code == 200
+      true
     rescue GdsApi::HTTPErrorResponse => e
       Airbrake.notify(e)
       false
