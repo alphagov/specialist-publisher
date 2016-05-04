@@ -40,7 +40,7 @@ class AttachmentsController < ApplicationController
 private
 
   def fetch_document
-    document_klass.find(params[:document_content_id]).tap do |document|
+    current_format.find(params[:document_content_id]).tap do |document|
       document.update_type = "minor"
     end
   rescue Document::RecordNotFound => e

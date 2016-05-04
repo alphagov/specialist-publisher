@@ -26,6 +26,10 @@ class VehicleRecallsAndFaultsAlert < Document
     "vehicle_recalls_and_faults_alert"
   end
 
+  def self.title
+    "Vehicle Recalls and Faults Alert"
+  end
+
 private
 
   def build_dates

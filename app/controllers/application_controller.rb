@@ -26,66 +26,27 @@ private
   end
 
   def current_format
-    document_types.fetch(params.fetch(:document_type, nil), nil)
+    @current_format ||= document_types.detect { |format| format.document_type == document_type }
   end
 
   def formats_user_can_access
-    document_types.select { |_, v| policy(v.klass).index? }
+    document_types.select { |format| policy(format).index? }
   end
-
-  # This Struct is for the document_types method below
-  FormatStruct = Struct.new(:klass, :document_type, :format_name, :title, :organisations)
 
   def document_types
-    # For each format that follows the standard naming convention, this
-    # method takes the title and name of the model class of each format
-    # like this:
-    #
-    # data = {
-    #   "GDS Report" => GdsReport
-    # }
-    #
-    # which will become this:
-    #
-    # {
-    #   "gds-reports" => FormatStruct.new(
-    #     klass: GdsReports, # This is the class name of the model
-    #     document_type: "gds-reports", # This is internally used for building urls
-    #     format_name: "gds_report", # This is used for fetching the params of the format
-    #     title: "GDS Report", # Rendered as the format name to the User
-    #     organisations: ["a-content-id"], # Content IDs for the Orgs fetched from the schema
-    #   )
-    # }
-
-    data = {
-      "AAIB Report" => AaibReport,
-      "CMA Case" => CmaCase,
-      "Countryside Stewardship Grant" => CountrysideStewardshipGrant,
-      "Drug Safety Update" => DrugSafetyUpdate,
-      "EAT Decisions" => EmploymentAppealTribunalDecision,
-      "ESI Fund" => EsiFund,
-      "ET Decisions" => EmploymentTribunalDecision,
-      "MAIB Report" => MaibReport,
-      "Medical Safety Alert" => MedicalSafetyAlert,
-      "RAIB Report" => RaibReport,
-      "Tax Tribunal Decision" => TaxTribunalDecision,
-      "Vehicle Recalls and Faults Alert" => VehicleRecallsAndFaultsAlert,
-    }
-
-    data.map { |k, v|
-      {
-        k.downcase.parameterize.pluralize => FormatStruct.new(
-          v,
-          k.downcase.parameterize.pluralize,
-          v.to_s.underscore,
-          k,
-          v.organisations,
-        )
-      }
-    }.reduce({}, :merge)
-  end
-
-  def document_klass
-    current_format.klass
+    [
+      AaibReport,
+      CmaCase,
+      CountrysideStewardshipGrant,
+      DrugSafetyUpdate,
+      EmploymentAppealTribunalDecision,
+      EsiFund,
+      EmploymentTribunalDecision,
+      MaibReport,
+      MedicalSafetyAlert,
+      RaibReport,
+      TaxTribunalDecision,
+      VehicleRecallsAndFaultsAlert,
+    ]
   end
 end

@@ -15,4 +15,8 @@ class CountrysideStewardshipGrant < Document
   def self.publishing_api_document_type
     "countryside_stewardship_grant"
   end
+
+  def self.title
+    "Countryside Stewardship Grant"
+  end
 end

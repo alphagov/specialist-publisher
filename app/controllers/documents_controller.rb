@@ -12,7 +12,7 @@ class DocumentsController < ApplicationController
 
   def check_authorisation
     if current_format
-      authorize document_klass
+      authorize current_format
     else
       flash[:danger] = "That format doesn't exist. If you feel you've reached this in error, contact your SPOC."
       redirect_to manuals_path
@@ -22,16 +22,16 @@ class DocumentsController < ApplicationController
   def index
     page = filtered_page_param(params[:page])
     per_page = filtered_per_page_param(params[:per_page])
-    @response = document_klass.all(page, per_page)
+    @response = current_format.all(page, per_page)
     @paged_documents = PaginationPresenter.new(@response, per_page)
   end
 
   def new
-    @document = document_klass.new
+    @document = current_format.new
   end
 
   def create
-    @document = document_klass.new(
+    @document = current_format.new(
       filtered_params(params[current_format.format_name])
     )
 
@@ -103,7 +103,7 @@ private
   end
 
   def fetch_document
-    @document = document_klass.find(params[:content_id])
+    @document = current_format.find(params[:content_id])
   rescue Document::RecordNotFound => e
     flash[:danger] = "Document not found"
     redirect_to documents_path(document_type: document_type)

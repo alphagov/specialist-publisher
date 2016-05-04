@@ -22,8 +22,8 @@
       <ul class="dropdown-menu" role="menu">
   <% end %>
 
-  <% formats_user_can_access.each do |key, value| %>
-    <li><%= link_to value.title.pluralize, documents_path(key) %></li>
+  <% formats_user_can_access.each do |format| %>
+    <li><%= link_to format.title.pluralize, documents_path(format.document_type) %></li>
   <% end %>
 
   <% if current_user.gds_editor? %>

@@ -16,4 +16,8 @@ class RaibReport < Document
   def self.publishing_api_document_type
     "raib_report"
   end
+
+  def self.title
+    "RAIB Report"
+  end
 end
