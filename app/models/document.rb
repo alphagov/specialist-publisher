@@ -250,6 +250,14 @@ class Document
     self.attachments.detect { |attachment| attachment.content_id == attachment_content_id }
   end
 
+  def self.document_type
+    title.downcase.parameterize.pluralize
+  end
+
+  def self.format_name
+    to_s.underscore
+  end
+
 private
 
   def self.attachments(payload)
