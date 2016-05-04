@@ -30,11 +30,7 @@ private
   end
 
   def formats_user_can_access
-    if current_user.gds_editor?
-      document_types
-    else
-      Hash(document_types.select { |_k, v| v.organisations.include?(current_user.organisation_content_id) })
-    end
+    document_types.select { |_, v| policy(v.klass).index? }
   end
 
   # This Struct is for the document_types method below
