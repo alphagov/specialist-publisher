@@ -166,17 +166,8 @@ class Document
     @public_updated_at = Time.parse(timestamp.to_s) unless timestamp.nil?
   end
 
-  def self.all(page, per_page)
-    # The current version of this method is a result of the Publishing API
-    # returning the `details` field as an empty hash. As such, we get the
-    # content_id of all `specialist_document`s, then request the individual
-    # payload for each, which allows us to construct the real object.
-
-    # When the Publishing API is fixed and `details` is returned, this method
-    # will request all the required fields and the map will call
-    # `self.from_publishing_api` itself.
-
-    response = self.publishing_api.get_content_items(
+  def self.all(page, per_page, q: nil)
+    params = {
       document_type: self.publishing_api_document_type,
       fields: [
         :base_path,
@@ -186,9 +177,10 @@ class Document
         :publication_state,
       ],
       page: page,
-      per_page: per_page
-    ).to_ostruct
-    response
+      per_page: per_page,
+    }
+    params[:q] = q if q.present?
+    self.publishing_api.get_content_items(params)
   end
 
   def self.find(content_id)
