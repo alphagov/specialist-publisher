@@ -8,8 +8,6 @@ class DocumentsController < ApplicationController
   before_action :fetch_document, only: [:edit, :show, :publish, :update]
   before_action :check_authorisation, if: :document_type
 
-  after_action :verify_authorized
-
   def check_authorisation
     if current_format
       authorize current_format

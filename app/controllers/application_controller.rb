@@ -7,6 +7,7 @@ class ApplicationController < ActionController::Base
   include Pundit
 
   before_filter :require_signin_permission!
+  after_action :verify_authorized
 
   helper_method :current_format
   helper_method :formats_user_can_access

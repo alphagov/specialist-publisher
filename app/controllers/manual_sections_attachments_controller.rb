@@ -1,4 +1,10 @@
 class ManualSectionsAttachmentsController < ApplicationController
+  before_action :check_authorisation
+
+  def check_authorisation
+    authorize :manual
+  end
+
   def new
     @section = fetch_section
     @attachment = Attachment.new

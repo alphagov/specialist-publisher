@@ -32,6 +32,8 @@ require 'gds_api/test_helpers/publishing_api_v2'
 require 'gds_api/test_helpers/rummager'
 require 'gds_api/test_helpers/email_alert_api'
 
+require 'pundit/rspec'
+
 # Quiet down now Mongo
 Mongo::Logger.logger.level = ::Logger::FATAL
 

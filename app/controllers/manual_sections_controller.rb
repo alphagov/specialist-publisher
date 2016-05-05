@@ -1,4 +1,10 @@
 class ManualSectionsController < ApplicationController
+  before_action :check_authorisation
+
+  def check_authorisation
+    authorize :manual
+  end
+
   def show
     @section = Section.find(
       content_id: params[:content_id],
