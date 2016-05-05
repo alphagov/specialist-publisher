@@ -65,9 +65,54 @@ describe DocumentPresenter do
    })
   }
 
+  let(:content_item_with_headers) {
+    content_item_with_rendered_body.deep_merge(
+      "content_id" => SecureRandom.uuid,
+      "details" => {
+        "body" => [
+          {
+            "content_type" => "text/govspeak",
+            "content" => "## heading"
+          }
+        ]
+      },
+    )
+  }
+
+  let(:content_item_with_nested_headers) {
+    content_item_with_rendered_body.deep_merge(
+      "content_id" => SecureRandom.uuid,
+      "details" => {
+        "body" => [
+          {
+            "content_type" => "text/govspeak",
+            "content" => "## heading2\r\n\r\n### heading3\r\n\r\n#### heading4\r\n\r\n## anotherheading2"
+          }
+        ]
+      },
+    )
+  }
+
+  let(:content_item_without_headers) {
+    content_item_with_rendered_body.deep_merge(
+      "content_id" => SecureRandom.uuid,
+      "details" => {
+        "body" => [
+          {
+            "content_type" => "text/govspeak",
+            "content" => "body text with no headings"
+          }
+        ]
+      },
+    )
+  }
+
   before do
     publishing_api_has_item(content_item_without_attachments)
     publishing_api_has_item(content_item_with_attachments)
+    publishing_api_has_item(content_item_with_headers)
+    publishing_api_has_item(content_item_with_nested_headers)
+    publishing_api_has_item(content_item_without_headers)
 
     Timecop.freeze(Time.parse("2015-12-03T16:59:13+00:00"))
   end
@@ -117,6 +162,36 @@ describe DocumentPresenter do
       content_item_with_rendered_body_and_attachments.delete('publication_state')
 
       expect(presented_data).to eq(content_item_with_rendered_body_and_attachments.to_h.deep_symbolize_keys)
+    end
+  end
+
+  describe '#to_json with headers' do
+    let(:specialist_document) { CmaCase.find(content_item_with_headers["content_id"]) }
+    let(:document_presenter) { DocumentPresenter.new(specialist_document) }
+    let(:presented_data) { document_presenter.to_json }
+
+    it "is valid against the content schemas" do
+      expect(presented_data).to be_valid_against_schema("specialist_document")
+    end
+  end
+
+  describe '#to_json with nested headers' do
+    let(:specialist_document) { CmaCase.find(content_item_with_nested_headers["content_id"]) }
+    let(:document_presenter) { DocumentPresenter.new(specialist_document) }
+    let(:presented_data) { document_presenter.to_json }
+
+    it "is valid against the content schemas" do
+      expect(presented_data).to be_valid_against_schema("specialist_document")
+    end
+  end
+
+  describe '#to_json without headers' do
+    let(:specialist_document) { CmaCase.find(content_item_without_headers["content_id"]) }
+    let(:document_presenter) { DocumentPresenter.new(specialist_document) }
+    let(:presented_data) { document_presenter.to_json }
+
+    it 'is valid against the content schemas' do
+      expect(presented_data).to be_valid_against_schema("specialist_document")
     end
   end
 end

@@ -41,6 +41,19 @@ private
       change_history: change_history
     }.tap do |details_hash|
       details_hash[:attachments] = attachments if document.attachments
+      details_hash[:headers] = headers if !headers.empty?
+    end
+  end
+
+  def headers
+    headers = Govspeak::Document.new(document.body).structured_headers
+    remove_empty_headers(headers.map(&:to_h))
+  end
+
+  def remove_empty_headers(headers)
+    headers.each do |header|
+      header.delete_if { |k, v| k == :headers && v.empty? }
+      remove_empty_headers(header[:headers]) if header.has_key?(:headers)
     end
   end
 
