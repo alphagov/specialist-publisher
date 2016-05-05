@@ -7,6 +7,16 @@ RSpec.feature "Viewing a specific case", type: :feature do
       "title" => "CMA Case With Attachment"
     )
   }
+  let(:cma_case_bulk_published) {
+    Payloads.cma_case_with_attachments(
+      "title" => "Bulk published CMA Case",
+      "details" => {
+        "metadata" => {
+          "bulk_published" => true,
+        }
+      }
+    )
+  }
   let(:cma_cases) {
     ten_example_cases = 10.times.collect do |n|
       Payloads.cma_case_content_item(
@@ -23,6 +33,7 @@ RSpec.feature "Viewing a specific case", type: :feature do
     end
     ten_example_cases[1]["publication_state"] = "live"
     ten_example_cases << cma_case_with_attachments
+    ten_example_cases << cma_case_bulk_published
   }
 
   let(:page_number) { 1 }
@@ -44,7 +55,7 @@ RSpec.feature "Viewing a specific case", type: :feature do
       visit "/cma-cases"
 
       expect(page.status_code).to eq(200)
-      expect(page).to have_selector('li.document', count: 11)
+      expect(page).to have_selector('li.document', count: 12)
       expect(page).to have_content("Example CMA Case 0")
       expect(page).to have_content("Example CMA Case 1")
       expect(page).to have_content("Example CMA Case 2")
@@ -84,6 +95,13 @@ RSpec.feature "Viewing a specific case", type: :feature do
 
     expect(page.current_path).to eq("/cma-cases")
     expect(page).to have_content("Document not found")
+  end
+
+  scenario "the document has been bulk published" do
+    visit "/cma-cases"
+    expect(page).to have_content("Bulk published CMA Case")
+    click_link "Bulk published CMA Case"
+    expect(page).to have_content("Bulk published true")
   end
 
   scenario "Viewing attachments on a document" do

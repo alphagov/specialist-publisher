@@ -46,6 +46,7 @@ RSpec.feature "Creating a CMA case", type: :feature do
 
     expect(page.status_code).to eq(200)
     expect(page).to have_content("Created Example CMA Case")
+    expect(page).to have_content('Bulk published false')
   end
 
   scenario "with no data" do

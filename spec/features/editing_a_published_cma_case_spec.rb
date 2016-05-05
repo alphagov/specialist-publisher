@@ -3,6 +3,9 @@ require 'spec_helper'
 RSpec.feature "Editing a published CMA case", type: :feature do
   let(:published_cma_case) {
     Payloads.cma_case_content_item("details" => {
+      "metadata" => {
+        "bulk_published" => true,
+      },
       "attachments" => [
         {
           "content_id" => "77f2d40e-3853-451f-9ca3-a747e8402e34",
@@ -91,6 +94,7 @@ RSpec.feature "Editing a published CMA case", type: :feature do
 
     expect(page.status_code).to eq(200)
     expect(page).to have_content("Updated Minor update title")
+    expect(page).to have_content('Bulk published true')
   end
 
   scenario "with a major update" do
@@ -129,6 +133,7 @@ RSpec.feature "Editing a published CMA case", type: :feature do
 
     expect(page.status_code).to eq(200)
     expect(page).to have_content("Updated Major update title")
+    expect(page).to have_content('Bulk published true')
   end
 
   scenario "adding an attachment" do
