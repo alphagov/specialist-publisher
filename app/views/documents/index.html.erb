@@ -16,17 +16,7 @@
 
   <div class="col-md-9">
     <ul class="document-list">
-      <% @paged_documents.each do |document| %>
-        <li class="document">
-          <%= link_to document.title, document_path(current_format.document_type, document.content_id), class: 'document-title' %>
-          <ul class="metadata">
-            <li class="text-muted">Updated <%= time_ago_in_words(document.public_updated_at) %> ago</li>
-            <li>
-              <%= state(document) %>
-            </li>
-          </ul>
-        </li>
-      <% end %>
+      <%= render partial: 'document', collection: @paged_documents %>
     </ul>
     <%= paginate @paged_documents, :theme => 'twitter-bootstrap-3' %>
   </div>
