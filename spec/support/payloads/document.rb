@@ -208,7 +208,7 @@ module Payloads
       "rendering_app" => "specialist-frontend",
       "locale" => "en",
       "phase" => "live",
-      "public_updated_at" => "2015-11-16T11:53:30",
+      "public_updated_at" => "2015-11-16T11:53:30+00:00",
       "publication_state" => "draft",
       "details" => {
         "body" => [
@@ -229,7 +229,12 @@ module Payloads
         "metadata" => {
           "document_type" => "drug_safety_update",
         },
-        "change_history" => [],
+        "change_history" => [
+          {
+            "public_timestamp" => "2015-11-16T11:53:30+00:00",
+            "note" => "First published."
+          }
+        ]
       },
       "routes" => [
         {

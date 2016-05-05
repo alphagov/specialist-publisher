@@ -62,8 +62,6 @@ describe DrugSafetyUpdate do
   let(:per_page) { 50 }
 
   before do
-    publishing_api_has_content(drug_safety_updates, document_type: described_class.publishing_api_document_type, fields: fields, page: page, per_page: per_page)
-
     drug_safety_updates.each do |drug_safety_update|
       publishing_api_has_item(drug_safety_update)
     end
@@ -73,6 +71,7 @@ describe DrugSafetyUpdate do
 
   describe ".all" do
     it "returns all Drug Safety Updates" do
+      publishing_api_has_content(drug_safety_updates, document_type: described_class.publishing_api_document_type, fields: fields, page: page, per_page: per_page)
       expect(described_class.all(page, per_page).results.length).to be(drug_safety_updates.length)
     end
   end
@@ -116,7 +115,28 @@ describe DrugSafetyUpdate do
   end
 
   describe "#publish!" do
+    let(:unpublished_drug_safety_update_content_item) { drug_safety_update_content_item(0) }
+    let(:published_drug_safety_update_content_item) {
+      drug_safety_update_content_item(0).deep_merge(
+        "details" => {
+          "metadata" => {
+            "first_published_at": "2015-12-18T10:12:26.000+00:00",
+            "document_type": "drug_safety_update"
+          }
+        },
+        "publication_state" => "live"
+      )
+    }
+
     before do
+      email_alert_api_accepts_alert
+      allow(Time.zone).to receive(:now).and_return(Time.parse("2015-12-18T10:12:26.000+00:00"))
+      stub_any_rummager_post_with_queueing_enabled
+      stub_any_publishing_api_put_content
+
+      publishing_api_has_item(unpublished_drug_safety_update_content_item)
+      publishing_api_has_item(published_drug_safety_update_content_item)
+
       publishing_api_has_content(
         [drug_safety_update_org_content_item],
         document_type: 'organisation',
@@ -127,8 +147,12 @@ describe DrugSafetyUpdate do
     let(:drug_safety_update) { described_class.find(drug_safety_updates[0]["content_id"]) }
 
     it "publishes the Drug Safety Update" do
-      stub_publishing_api_publish(drug_safety_updates[0]["content_id"], {})
-      stub_any_rummager_post
+      payload = unpublished_drug_safety_update_content_item
+
+      stub_publishing_api_publish(payload["content_id"], {})
+
+      drug_safety_update = described_class.find(payload["content_id"])
+
       expect(drug_safety_update.publish!).to eq(true)
 
       assert_publishing_api_publish(drug_safety_update.content_id)
@@ -148,6 +172,41 @@ describe DrugSafetyUpdate do
       stub_publishing_api_publish(drug_safety_updates[0]["content_id"], {})
       stub_request(:post, %r{#{Plek.new.find('search')}/documents}).to_return(status: 503)
       expect(drug_safety_update.publish!).to eq(false)
+    end
+
+    context "for the first time" do
+      it "sets first_published_at" do
+        payload = unpublished_drug_safety_update_content_item
+
+        stub_publishing_api_publish(payload["content_id"], {})
+
+        drug_safety_update = described_class.find(payload["content_id"])
+        expect(drug_safety_update.publish!).to eq(true)
+
+        expected_details_payload = payload["details"]
+        expected_details_payload["metadata"].merge!(
+          "first_published_at" => "2015-12-18T10:12:26.000+00:00"
+        )
+
+        assert_publishing_api_put_content(
+          drug_safety_update.content_id,
+          request_json_includes("details": expected_details_payload)
+        )
+      end
+    end
+
+    context "an already published drug safety update" do
+      it "does not update first_published_at" do
+        payload = published_drug_safety_update_content_item
+
+        stub_publishing_api_publish(payload["content_id"], {})
+
+        drug_safety_update = described_class.find(payload["content_id"])
+        expect(drug_safety_update.publish!).to eq(true)
+
+        assert_not_requested(:put, "#{Plek.current.find('publishing-api')}/v2/content/#{payload['content_id']}")
+        assert_publishing_api_publish(drug_safety_update.content_id)
+      end
     end
   end
 end

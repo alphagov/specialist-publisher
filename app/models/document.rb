@@ -65,6 +65,10 @@ class Document
     live? || redrafted?
   end
 
+  def not_published?
+    !published?
+  end
+
   def change_note_required?
     update_type == 'major' && published?
   end
