@@ -50,29 +50,6 @@ RSpec.feature "Viewing a specific case", type: :feature do
     end
   end
 
-  context "visiting the index" do
-    scenario "viewing the unfiltered items" do
-      visit "/cma-cases"
-
-      expect(page.status_code).to eq(200)
-      expect(page).to have_selector('li.document', count: 12)
-      expect(page).to have_content("Example CMA Case 0")
-      expect(page).to have_content("Example CMA Case 1")
-      expect(page).to have_content("Example CMA Case 2")
-      within(".document-list li.document:nth-child(2)") do
-        expect(page).to have_content("published")
-      end
-    end
-
-    scenario "filtering the items" do
-      visit "/cma-cases"
-      fill_in "Search", with: "0"
-      click_button "Search"
-      expect(page).to have_content("Example CMA Case 0")
-      expect(page).to have_selector('li.document', count: 1)
-    end
-  end
-
   scenario "from the index" do
     visit "/cma-cases"
     click_link "Example CMA Case 0"
