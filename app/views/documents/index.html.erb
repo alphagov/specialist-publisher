@@ -22,6 +22,8 @@
       <%= paginate @paged_documents, :theme => 'twitter-bootstrap-3' %>
     <% elsif @query %>
       <p class="no-content no-content-bordered">Your search – <%= @query %> – did not match any documents.</p>
+    <% else %>
+      <p class="no-content no-content-bordered">No <%= current_format.title.pluralize %> available.</p>
     <% end %>
   </div>
 </div>

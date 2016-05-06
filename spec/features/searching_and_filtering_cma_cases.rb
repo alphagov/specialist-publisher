@@ -23,7 +23,7 @@ RSpec.feature "Searching and filtering", type: :feature do
     log_in_as_editor(:cma_editor)
   end
 
-  context "visiting the index" do
+  context "visiting the index with results" do
     before do
       publishing_api_has_content(cma_cases, document_type: CmaCase.publishing_api_document_type, fields: fields, page: page_number, per_page: per_page)
     end
@@ -59,6 +59,19 @@ RSpec.feature "Searching and filtering", type: :feature do
       fill_in "Search", with: "abcdef"
       click_button "Search"
       expect(page).to have_content("Your search – abcdef – did not match any documents.")
+    end
+  end
+
+  context "visiting the index with no results" do
+    before do
+      publishing_api_has_content([], document_type: CmaCase.publishing_api_document_type, fields: fields, page: page_number, per_page: per_page)
+    end
+
+    scenario "viewing the unfiltered items" do
+      visit "/cma-cases"
+
+      expect(page.status_code).to eq(200)
+      expect(page).to have_content("No CMA Cases available.")
     end
   end
 end
