@@ -42,5 +42,7 @@
   </script>
 <% end %>
 
+<% content_for :footer_version, CURRENT_RELEASE_SHA %>
+
 <%# use the govuk_admin_foundation layout %>
 <%= render :template => 'layouts/govuk_admin_template'%>
