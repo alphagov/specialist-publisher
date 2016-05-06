@@ -1,7 +1,7 @@
 development:
   clients:
     default:
-      uri: <%= ENV['MONGODB_URI'] || 'mongodb://localhost/specialist_publisher_rebuild_development' %>
+      uri: mongodb://localhost/specialist_publisher_rebuild_development
       options:
         write:
           w: 1
