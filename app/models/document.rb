@@ -33,6 +33,10 @@ class Document
     end
   end
 
+  def bulk_published
+    @bulk_published || false
+  end
+
   def base_path
     @base_path ||= "#{finder_schema.base_path}/#{title.parameterize}"
   end
