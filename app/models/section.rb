@@ -1,6 +1,7 @@
 class Section
   include ActiveModel::Model
   include ActiveModel::Validations
+  include PublishingHelper
 
   attr_accessor :content_id, :base_path, :title, :summary, :body, :update_type, :attachments
   attr_reader :publication_state
@@ -63,7 +64,7 @@ class Section
   end
 
   def self.find(content_id:, manual_content_id: nil)
-    content_item_response = self.publishing_api.get_content(content_id)
+    content_item_response = publishing_api.get_content(content_id)
 
     if content_item_response
       section = from_publishing_api(content_item_response.to_hash)
@@ -80,7 +81,7 @@ class Section
 
   def self.from_publishing_api(payload)
     payload = payload.merge(
-      self.publishing_api.get_links(payload['content_id']).to_hash
+      publishing_api.get_links(payload['content_id']).to_hash
     )
 
     section = self.new(
@@ -112,11 +113,12 @@ class Section
     if section_ids.include?(self.content_id)
       true
     else
-      publishing_api.patch_links(
-        self.manual_content_id,
-        links: { sections: section_ids << self.content_id }
-      )
-      true
+      handle_remote_error do
+        publishing_api.patch_links(
+          self.manual_content_id,
+          links: { sections: section_ids << self.content_id }
+        )
+      end
     end
   end
 
@@ -132,13 +134,10 @@ class Section
       presented_section = SectionPresenter.new(self).to_json
 
       presented_section_links = { links: { manual: [self.manual_content_id] } }
-      begin
+      handle_remote_error do
         publishing_api.put_content(self.content_id, presented_section)
         publishing_api.patch_links(self.content_id, presented_section_links)
         update_manual_links
-      rescue GdsApi::HTTPErrorResponse => e
-        Airbrake.notify(e)
-        false
       end
     else
       false

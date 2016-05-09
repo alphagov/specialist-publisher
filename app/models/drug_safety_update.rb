@@ -13,23 +13,17 @@ class DrugSafetyUpdate < Document
   def publish!
     indexable_document = SearchPresenter.new(self)
 
-    begin
+    handle_remote_error do
       update_type = self.update_type || 'major'
 
       save_first_published_at if not_published?
 
       publishing_api.publish(content_id, update_type)
-      rummager.add_document(
+      Services.rummager.add_document(
         search_document_type,
         base_path,
         indexable_document.to_json,
       )
-
-      true
-    rescue GdsApi::HTTPErrorResponse => e
-      Airbrake.notify(e)
-
-      false
     end
   end
 

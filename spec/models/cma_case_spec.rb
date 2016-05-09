@@ -119,7 +119,11 @@ RSpec.describe CmaCase do
     end
 
     it "passes query parameter if supplied" do
-      expect(described_class.publishing_api).to receive(:get_content_items)
+      publishing_api = double("publishing-api")
+      allow(Services).to receive(:publishing_api)
+        .and_return(publishing_api)
+
+      expect(publishing_api).to receive(:get_content_items)
         .with(hash_including(q: "foo"))
         .and_return(double(to_ostruct: {}))
       described_class.all(page, per_page, q: "foo")
