@@ -197,6 +197,10 @@ class Manual
     end
   end
 
+  def can_be_published?
+    sections.any?
+  end
+
 private
 
   def publishing_api
