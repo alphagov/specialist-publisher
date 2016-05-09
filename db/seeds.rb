@@ -1,4 +1,21 @@
-if Rails.env.development?
-  # Setup a mock user
-  User.create(name: "Test user", permissions: ["signin", "gds_editor"])
+def seed
+  unless Rails.env.development?
+    puts "Skipping because not in development"
+    return
+  end
+
+  if User.where(name: "Test user").present?
+    puts "Skipping because user already exists"
+    return
+  end
+
+  gds_organisation_id = "af07d5a5-df63-4ddc-9383-6a666845ebe9"
+
+  user = User.create!(
+    name: "Test user",
+    permissions: ["signin", "gds_editor"],
+    organisation_content_id: gds_organisation_id,
+  )
 end
+
+seed
