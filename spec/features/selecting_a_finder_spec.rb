@@ -2,8 +2,9 @@ require 'spec_helper'
 
 RSpec.feature 'The root specialist-publisher page', type: :feature do
   context 'when logged in as a GDS editor' do
+    let(:fields) { %i(content_id base_path description details public_updated_at publication_state title update_type) }
     before do
-      publishing_api_has_fields_for_document('manual', [], [:content_id])
+      publishing_api_has_content([], document_type: 'manual', fields: fields, per_page: 10000)
       log_in_as_editor(:gds_editor)
     end
 
