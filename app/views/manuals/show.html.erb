@@ -69,7 +69,7 @@
       <%= link_to 'Edit manual', edit_manual_path(@manual.content_id), class: 'btn btn-success' %>
     </div>
 
-    <% if @manual.can_be_published? %>
+    <% if policy(@manual).publish? && @manual.can_be_published? %>
       <%= form_tag(publish_manual_path(@manual.content_id), method: :post, class: 'well') do %>
         <button name="submit" class="btn btn-danger" data-module="confirm" data-message="Are you sure you want to publish this manual?">Publish manual</button>
       <% end -%>

@@ -9,6 +9,10 @@ class ManualPolicy < ApplicationPolicy
   alias_method :update?, :index?
   alias_method :show?, :index?
 
+  def publish?
+    gds_editor || departmental_editor
+  end
+
   class Scope
     attr_reader :user, :scope
 
