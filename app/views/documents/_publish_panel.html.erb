@@ -3,7 +3,11 @@
     <h3 class="panel-title">Publish document</h3>
   </div>
   <div class="panel-body">
-    <% if @document.can_be_published? %>
+    <% if !policy(@document).publish? %>
+      <p class="remove-bottom-margin">
+        You don’t have permission to publish this document.
+      </p>
+    <% elsif @document.can_be_published? %>
       <%= form_tag(publish_document_path(current_format.document_type, @document.content_id), method: :post) do %>
         <button name="submit" class="btn btn-danger" data-module="confirm" data-message="Publishing will email subscribers to <%= current_format.title.pluralize %> Continue?">Publish</button>
       <% end %>
