@@ -19,7 +19,7 @@
         "key": "country",
         "name": "Country",
         "type": "text",
-        "preposition": "called",
+        "preposition": "covering",
         "display_as_result_metadata": true,
         "filterable": true,
         "allowed_values": [
