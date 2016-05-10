@@ -150,6 +150,18 @@ RSpec.feature "Publishing a CMA case", type: :feature do
     expect(page).to have_content("There are no changes to publish.")
   end
 
+  scenario "writers don't see a publish button" do
+    log_in_as_editor(:cma_writer)
+
+    publishing_api_has_item(minor_update_item)
+
+    visit "/cma-cases"
+    click_link "Minor Update Case"
+
+    expect(page).not_to have_selector(:button, 'Publish')
+    expect(page).to have_content("You don’t have permission to publish this document.")
+  end
+
   scenario "when content item is withdrawn, there will be a publish button" do
     publishing_api_has_item(withdrawn_item)
 

@@ -248,6 +248,10 @@ class Document
     to_s.underscore
   end
 
+  def can_be_published?
+    !live?
+  end
+
 private
 
   def self.attachments(payload)

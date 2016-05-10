@@ -24,6 +24,12 @@ FactoryGirl.define do
     organisation_content_id "957eb4ec-089b-4f71-ba2a-dc69ac8919ea"
   end
 
+  factory :cma_writer, parent: :editor do
+    organisation_slug "competition-and-markets-authority"
+    organisation_content_id "957eb4ec-089b-4f71-ba2a-dc69ac8919ea"
+    permissions %w(signin)
+  end
+
   factory :aaib_editor, parent: :editor do
     organisation_slug "air-accidents-investigation-branch"
     organisation_content_id "38eb5d8f-2d89-480c-8655-e2e7ac23f8f4"
