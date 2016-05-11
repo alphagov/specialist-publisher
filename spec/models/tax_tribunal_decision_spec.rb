@@ -129,10 +129,9 @@ describe TaxTribunalDecision do
     it "publishes the Tax Tribunal Decision" do
       stub_publishing_api_publish(tax_tribunal_decisions[0]["content_id"], {})
       stub_any_rummager_post_with_queueing_enabled
-      publishing_api_has_content(
+      publishing_api_has_linkables(
         [tax_tribunal_decision_org_content_item],
-        document_type: 'organisation',
-        fields: [:base_path, :content_id]
+        document_type: 'organisation'
       )
 
       tax_tribunal_decision = described_class.find(tax_tribunal_decisions[0]["content_id"])

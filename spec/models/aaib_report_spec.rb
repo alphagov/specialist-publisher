@@ -129,10 +129,9 @@ describe AaibReport do
   describe "#publish!" do
     before do
       email_alert_api_accepts_alert
-      publishing_api_has_content(
+      publishing_api_has_linkables(
         [aaib_org_content_item],
-        document_type: 'organisation',
-        fields: [:base_path, :content_id]
+        document_type: 'organisation'
       )
     end
 

@@ -86,7 +86,7 @@ RSpec.feature "Publishing a CMA case", type: :feature do
     log_in_as_editor(:cma_editor)
 
     publishing_api_has_content([cma_case, minor_update_item, live_item, withdrawn_item], document_type: CmaCase.publishing_api_document_type, fields: fields, page: page_number, per_page: per_page)
-    publishing_api_has_content([cma_org_content_item], document_type: 'organisation', fields: [:base_path, :content_id])
+    publishing_api_has_linkables([cma_org_content_item], document_type: 'organisation')
 
     publishing_api_has_item(cma_case)
 

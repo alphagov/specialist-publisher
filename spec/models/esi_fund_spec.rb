@@ -144,11 +144,7 @@ describe EsiFund do
     it "publishes the ESI Fund" do
       stub_publishing_api_publish(esi_funds[0]["content_id"], {})
       stub_any_rummager_post_with_queueing_enabled
-      publishing_api_has_content(
-        esi_fund_org_content_items,
-        document_type: 'organisation',
-        fields: [:base_path, :content_id]
-      )
+      publishing_api_has_linkables(esi_fund_org_content_items, document_type: 'organisation')
 
       esi_fund = described_class.find(esi_funds[0]["content_id"])
       expect(esi_fund.publish!).to eq(true)

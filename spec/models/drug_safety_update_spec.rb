@@ -137,10 +137,9 @@ describe DrugSafetyUpdate do
       publishing_api_has_item(unpublished_drug_safety_update_content_item)
       publishing_api_has_item(published_drug_safety_update_content_item)
 
-      publishing_api_has_content(
+      publishing_api_has_linkables(
         [drug_safety_update_org_content_item],
-        document_type: 'organisation',
-        fields: [:base_path, :content_id]
+        document_type: 'organisation'
       )
     end
 

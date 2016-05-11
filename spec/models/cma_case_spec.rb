@@ -221,10 +221,9 @@ RSpec.describe CmaCase do
     it "publishes the CMA Case" do
       stub_publishing_api_publish(cma_cases[0]["content_id"], {})
       stub_any_rummager_post_with_queueing_enabled
-      publishing_api_has_content(
+      publishing_api_has_linkables(
         [cma_org_content_item],
-        document_type: 'organisation',
-        fields: [:base_path, :content_id]
+        document_type: 'organisation'
       )
 
       c = described_class.find(cma_cases[0]["content_id"])

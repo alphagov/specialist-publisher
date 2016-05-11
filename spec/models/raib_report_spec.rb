@@ -126,10 +126,9 @@ describe RaibReport do
     it "publishes the RAIB Report" do
       stub_publishing_api_publish(raib_reports[0]["content_id"], {})
       stub_any_rummager_post_with_queueing_enabled
-      publishing_api_has_content(
+      publishing_api_has_linkables(
         [raib_org_content_item],
-        document_type: 'organisation',
-        fields: [:base_path, :content_id]
+        document_type: 'organisation'
       )
 
       raib_report = described_class.find(raib_reports[0]["content_id"])

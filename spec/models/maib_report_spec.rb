@@ -126,10 +126,9 @@ describe MaibReport do
     it "publishes the MAIB Report" do
       stub_publishing_api_publish(maib_reports[0]["content_id"], {})
       stub_any_rummager_post_with_queueing_enabled
-      publishing_api_has_content(
+      publishing_api_has_linkables(
         [maib_org_content_item],
-        document_type: 'organisation',
-        fields: [:base_path, :content_id]
+        document_type: 'organisation'
       )
 
       maib_report = described_class.find(maib_reports[0]["content_id"])
