@@ -4,6 +4,7 @@
   "format_name": "DFID Research Output",
   "name": "DFID Research Outputs",
   "description": "Find outputs from DFID research projects",
+  "pre_production": true,
   "filter": {
     "document_type": "dfid_research_output"
   },
