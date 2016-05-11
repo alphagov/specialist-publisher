@@ -21,10 +21,15 @@ class SearchPresenter
   end
 
   def organisation_slugs
-    response = publishing_api.get_content_items(document_type: "organisation", fields: [:content_id, :base_path])
+    response = publishing_api.get_linkables(document_type: "organisation")
 
-    orgs = response.results.select { |o| document.organisations.include?(o["content_id"]) }
-    orgs.map { |o| o["base_path"].gsub("/government/organisations/", "") }.map { |o| o.gsub("/courts-tribunals/", "") }
+    organisations = response.select do |organisation|
+      document.organisations.include?(organisation["content_id"])
+    end
+
+    organisations.map do |org|
+      org["base_path"].gsub("/government/organisations/", "").gsub("/courts-tribunals/", "")
+    end
   end
 
 private
