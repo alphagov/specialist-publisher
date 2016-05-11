@@ -2,7 +2,7 @@
   <tr>
     <td style="border-collapse: collapse; padding: 0 0 0 15px;">
       <h1 style="color: #0B0C0C !important; font-family: sans-serif; font-weight: 700; font-size: 30px; line-height: 1.111111111; margin: 15px 0; padding: 15px 0;">
-        Documents
+        <%= document_org_title %>
       </h1>
 
       <p style="color: #0B0C0C; font-family: sans-serif; font-size: 19px; line-height: 1.315789474; margin: 15px 0;">
@@ -22,7 +22,7 @@
       <% end %>
 
       <p style="color: #0B0C0C; font-family: sans-serif; font-size: 19px; line-height: 1.315789474; margin: 15px 0;">
-      For further information on this updated document:
+      For further information on this <%= updated_or_published %> <%= document_noun %>:
       </p>
 
       <p style="color: #0B0C0C; font-family: sans-serif; font-size: 19px; line-height: 1.315789474; margin: 15px 0;">
@@ -31,4 +31,3 @@
     </td>
   </tr>
 </table>
-
