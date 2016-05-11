@@ -15,37 +15,6 @@ describe TaxTribunalDecision do
     )
   end
 
-  let(:tax_tribunal_decision_org_content_item) {
-    {
-      "base_path" => "/courts-tribunals/upper-tribunal-tax-and-chancery-chamber",
-      "content_id" => "1a68b2cc-eb52-4528-8989-429f710da00f",
-      "title" => "Upper Tribunal (Tax and Chancery Chamber)",
-      "format" => "placeholder_organisation",
-      "need_ids" => [],
-      "locale" => "en",
-      "updated_at" => "2015-08-20T10:26:56.082Z",
-      "public_updated_at" => "2015-04-15T10:04:28.000+00:00",
-      "phase" => "live",
-      "analytics_identifier" => "CO1133",
-      "links" => {
-        "available_translations" => [
-          {
-
-            "title" => "Upper Tribunal (Tax and Chancery Chamber)",
-            "base_path" => "/courts-tribunals/upper-tribunal-tax-and-chancery-chamber",
-            "description" => nil,
-            "api_url" => "https://www-origin.integration.publishing.service.gov.uk/api/content/courts-tribunals/upper-tribunal-tax-and-chancery-chamber",
-            "web_url" => "https://www-origin.integration.publishing.service.gov.uk/courts-tribunals/upper-tribunal-tax-and-chancery-chamber",
-            "locale" => "en",
-            "analytics_identifier" => "PB1140",
-          }
-        ]
-      },
-      "description" => nil,
-      "details" => {},
-    }
-  }
-
   let(:indexable_attributes) {
     {
       "title" => "Example Tax Tribunal Decision 0",
@@ -55,7 +24,6 @@ describe TaxTribunalDecision do
       "public_timestamp" => "2015-11-16T11:53:30+00:00",
       "tribunal_decision_category" => "banking",
       "tribunal_decision_decision_date" => "2015-07-30",
-      "organisations" => ["upper-tribunal-tax-and-chancery-chamber"]
     }
   }
 
@@ -129,10 +97,6 @@ describe TaxTribunalDecision do
     it "publishes the Tax Tribunal Decision" do
       stub_publishing_api_publish(tax_tribunal_decisions[0]["content_id"], {})
       stub_any_rummager_post_with_queueing_enabled
-      publishing_api_has_linkables(
-        [tax_tribunal_decision_org_content_item],
-        document_type: 'organisation'
-      )
 
       tax_tribunal_decision = described_class.find(tax_tribunal_decisions[0]["content_id"])
       expect(tax_tribunal_decision.publish!).to eq(true)

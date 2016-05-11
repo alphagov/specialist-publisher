@@ -15,37 +15,6 @@ describe MaibReport do
     )
   end
 
-  let(:maib_org_content_item) {
-    {
-      "base_path" => "/government/organisations/marine-accident-investigation-branch",
-      "content_id" => "9c66b9a3-1e6a-48e8-974d-2a5635f84679",
-      "title" => "Marine Accident Investigation Branch",
-      "format" => "redirect",
-      "need_ids" => [],
-      "locale" => "en",
-      "updated_at" => "2015-10-27T11:47:43.454Z",
-      "public_updated_at" => "2014-12-19T14:16:32.000+00:00",
-      "phase" => "live",
-      "analytics_identifier" => nil,
-      "links" => {
-        "available_translations" => [
-          {
-            "content_id" => "9c66b9a3-1e6a-48e8-974d-2a5635f84679",
-            "title" => "Marine Accident Investigation Branch",
-            "base_path" => "/government/organisations/marine-accident-investigation-branch",
-            "description" => "nil",
-            "api_url" => "https://www.gov.uk/api/content/government/organisations/marine-accident-investigation-branch",
-            "web_url" => "https://www.gov.uk/government/organisations/marine-accident-investigation-branch",
-            "locale" => "en"
-          }
-        ]
-      },
-      "description" => nil,
-      "details" => {
-      }
-    }
-  }
-
   let(:indexable_attributes) {
     {
       "title" => "Example MAIB Report 0",
@@ -54,7 +23,6 @@ describe MaibReport do
       "indexable_content" => "## Header" + ("\r\n\r\nThis is the long body of an example MAIB Report" * 10),
       "public_timestamp" => "2015-11-16T11:53:30+00:00",
       "date_of_occurrence" => "2015-10-10",
-      "organisations" => ["marine-accident-investigation-branch"],
     }
   }
 
@@ -126,10 +94,6 @@ describe MaibReport do
     it "publishes the MAIB Report" do
       stub_publishing_api_publish(maib_reports[0]["content_id"], {})
       stub_any_rummager_post_with_queueing_enabled
-      publishing_api_has_linkables(
-        [maib_org_content_item],
-        document_type: 'organisation'
-      )
 
       maib_report = described_class.find(maib_reports[0]["content_id"])
       expect(maib_report.publish!).to eq(true)

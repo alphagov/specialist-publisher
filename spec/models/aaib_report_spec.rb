@@ -15,36 +15,6 @@ describe AaibReport do
     )
   end
 
-  let(:aaib_org_content_item) {
-    {
-      "base_path" => "/government/organisations/air-accidents-investigation-branch",
-      "content_id" => "38eb5d8f-2d89-480c-8655-e2e7ac23f8f4",
-      "title" => "Air Accidents Investigation Branch",
-      "format" => "placeholder_organisation",
-      "need_ids" => [],
-      "locale" => "en",
-      "updated_at" => "2015-08-20T10:26:56.082Z",
-      "public_updated_at" => "2015-04-15T10:04:28.000+00:00",
-      "phase" => "live",
-      "analytics_identifier" => "OT248",
-      "links" => {
-        "available_translations" => [
-          {
-            "content_id" => "38eb5d8f-2d89-480c-8655-e2e7ac23f8f4",
-            "title" => "Air Accidents Investigation Branch",
-            "base_path" => "/government/organisations/air-accidents-investigation-branch",
-            "description" => nil,
-            "api_url" => "https://www.gov.uk/api/content/government/organisations/air-accidents-investigation-branch",
-            "web_url" => "https://www.gov.uk/government/organisations/air-accidents-investigation-branch",
-            "locale" => "en"
-          }
-        ]
-      },
-      "description" => nil,
-      "details" => {}
-    }
-  }
-
   let(:indexable_attributes) {
     {
       "title" => "Example AAIB Report 0",
@@ -53,7 +23,6 @@ describe AaibReport do
       "indexable_content" => "## Header" + ("\r\n\r\nThis is the long body of an example AAIB Report" * 10),
       "public_timestamp" => "2015-11-16T11:53:30+00:00",
       "date_of_occurrence" => "2015-10-10",
-      "organisations" => ["air-accidents-investigation-branch"],
     }
   }
 
@@ -129,10 +98,6 @@ describe AaibReport do
   describe "#publish!" do
     before do
       email_alert_api_accepts_alert
-      publishing_api_has_linkables(
-        [aaib_org_content_item],
-        document_type: 'organisation'
-      )
     end
 
     let(:aaib_report) { described_class.find(aaib_reports[0]["content_id"]) }

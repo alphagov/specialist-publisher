@@ -15,36 +15,6 @@ describe VehicleRecallsAndFaultsAlert do
     )
   end
 
-  let(:vehicle_recalls_and_faults_alert_org_content_item) {
-    {
-      "base_path" => "/vehicle-recalls-faults",
-      "content_id" => "76290530-743e-4a8c-8752-04ebee25f64a",
-      "title" => "Vehicle recalls and faults",
-      "format" => "placeholder_organisation",
-      "need_ids" => [],
-      "locale" => "en",
-      "updated_at" => "2015-08-20T10:26:56.082Z",
-      "public_updated_at" => "2015-04-15T10:04:28.000+00:00",
-      "phase" => "live",
-      "analytics_identifier" => nil,
-      "links" => {
-        "available_translations" => [
-          {
-            "content_id" => "76290530-743e-4a8c-8752-04ebee25f64a",
-            "title" => "Vehicle recalls and faults",
-            "base_path" => "/vehicle-recalls-faults",
-            "description" => nil,
-            "api_url" => "https://www.gov.uk/api/content/vehicle-recalls-faults",
-            "web_url" => "https://www.gov.uk/vehicle-recalls-faults",
-            "locale" => "en"
-          }
-        ]
-      },
-      "description" => nil,
-      "details" => {}
-    }
-  }
-
   let(:indexable_attributes) {
     {
       "title" => "Example Vehicle Recalls And Faults 0",
@@ -128,10 +98,6 @@ describe VehicleRecallsAndFaultsAlert do
     it "publishes the Vehicle Recall and Fault" do
       stub_publishing_api_publish(vehicle_recalls_and_faults[0]["content_id"], {})
       stub_any_rummager_post_with_queueing_enabled
-      publishing_api_has_linkables(
-        [vehicle_recalls_and_faults_alert_org_content_item],
-        document_type: 'organisation'
-      )
 
       vehicle_recall_and_fault = described_class.find(vehicle_recalls_and_faults[0]["content_id"])
       expect(vehicle_recall_and_fault.publish!).to eq(true)

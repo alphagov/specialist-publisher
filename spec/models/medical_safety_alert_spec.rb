@@ -15,36 +15,6 @@ describe MedicalSafetyAlert do
     )
   end
 
-  let(:mhra_org_content_item) {
-    {
-      "base_path" => "/government/organisations/medicines-and-healthcare-products-regulatory-agency",
-      "content_id" => "240f72bd-9a4d-4f39-94d9-77235cadde8e",
-      "title" => "Medicines and Healthcare products Regulatory Agency",
-      "format" => "placeholder_organisation",
-      "need_ids" => [],
-      "locale" => "en",
-      "updated_at" => "2015-12-01T15:51:43.521Z",
-      "public_updated_at" => "2015-06-29T14:33:29.000+00:00",
-      "phase" => "live",
-      "analytics_identifier" => "EA63",
-      "links" => {
-        "available_translations" => [
-          {
-            "content_id" => "240f72bd-9a4d-4f39-94d9-77235cadde8e",
-            "title" => "Medicines and Healthcare products Regulatory Agency",
-            "base_path" => "/government/organisations/medicines-and-healthcare-products-regulatory-agency",
-            "description" => nil,
-            "api_url" => "https://www.gov.uk/api/content/government/organisations/medicines-and-healthcare-products-regulatory-agency",
-            "web_url" => "https://www.gov.uk/government/organisations/medicines-and-healthcare-products-regulatory-agency",
-            "locale" => "en"
-          }
-        ]
-      },
-      "description" => nil,
-      "details" => {}
-    }
-  }
-
   let(:indexable_attributes) {
     {
       "title" => "Example Medical Safety Alert 0",
@@ -52,7 +22,6 @@ describe MedicalSafetyAlert do
       "link" => "/drug-device-alerts/example-medical-safety-alert-0",
       "indexable_content" => "## Header" + ("\r\n\r\nThis is the long body of an example Medical Safety Alert" * 10),
       "public_timestamp" => "2015-11-16T11:53:30+00:00",
-      "organisations" => ["medicines-and-healthcare-products-regulatory-agency"],
       "alert_type" => "company-led-drugs",
       "issued_date" => "2016-02-01",
     }
@@ -126,10 +95,6 @@ describe MedicalSafetyAlert do
     it "publishes the Medical Safety Alert" do
       stub_publishing_api_publish(medical_safety_alerts[0]["content_id"], {})
       stub_any_rummager_post_with_queueing_enabled
-      publishing_api_has_linkables(
-        [mhra_org_content_item],
-        document_type: 'organisation'
-      )
 
       medical_safety_alert = described_class.find(medical_safety_alerts[0]["content_id"])
       expect(medical_safety_alert.publish!).to eq(true)

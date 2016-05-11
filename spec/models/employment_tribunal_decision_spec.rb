@@ -15,36 +15,6 @@ describe EmploymentTribunalDecision do
     )
   end
 
-  let(:employment_tribunal_decision_org_content_item) {
-    {
-      "base_path" => "/courts-tribunals/employment-tribunal",
-      "content_id" => "8bb37087-a5a7-4493-8afe-900b36ebc927",
-      "title" => "Employment Tribunal",
-      "format" => "placeholder_organisation",
-      "need_ids" => [],
-      "locale" => "en",
-      "updated_at" => "2015-08-20T10:26:56.082Z",
-      "public_updated_at" => "2015-04-15T10:04:28.000+00:00",
-      "phase" => "live",
-      "analytics_identifier" => "CO1133",
-      "links" => {
-        "available_translations" => [
-          {
-            "content_id" => "1b5e08c8-ddde-4637-9375-f79e085ba6d5",
-            "title" => "Employment tribunal decisions",
-            "base_path" => "/employment-tribunal-decisions",
-            "description" => nil,
-            "api_url" => "https://www-origin.integration.publishing.service.gov.uk/api/content/employment-tribunal-decisions",
-            "web_url" => "https://www-origin.integration.publishing.service.gov.uk/employment-tribunal-decisions",
-            "locale" => "en"
-          }
-        ]
-      },
-      "description" => nil,
-      "details" => {}
-    }
-  }
-
   let(:indexable_attributes) {
     {
       "title" => "Example Employment Tribunal Decision 0",
@@ -55,7 +25,6 @@ describe EmploymentTribunalDecision do
       "tribunal_decision_categories" => ["age-discrimination"],
       "tribunal_decision_country" => "england-and-wales",
       "tribunal_decision_decision_date" => "2015-07-30",
-      "organisations" => ["employment-tribunal"],
     }
   }
 
@@ -129,10 +98,6 @@ describe EmploymentTribunalDecision do
     it "publishes the Employment Tribunal Decision" do
       stub_publishing_api_publish(employment_tribunal_decisions[0]["content_id"], {})
       stub_any_rummager_post_with_queueing_enabled
-      publishing_api_has_linkables(
-        [employment_tribunal_decision_org_content_item],
-        document_type: 'organisation'
-      )
 
       employment_tribunal_decision = described_class.find(employment_tribunal_decisions[0]["content_id"])
       expect(employment_tribunal_decision.publish!).to eq(true)
