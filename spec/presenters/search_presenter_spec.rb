@@ -37,9 +37,6 @@ describe SearchPresenter do
       it 'does not include blank values' do
         expect { json.fetch(:blank_value) }.to raise_error(KeyError)
       end
-
-      # This needs thought.
-      it 'prepares organisation details *somehow*'
     end
   end
 end

@@ -11,11 +11,6 @@ class SearchPresenter
       description: document.summary,
       link: document.base_path,
       indexable_content: indexable_content,
-      # FIXME: This line was dependent on a method called #organisation_slugs,
-      # which in turn used publishing_api.get_content to map org content_ids to
-      # organisation slugs. It was stubbed in many places in spec/, but that method
-      # call always returned a blank list in the real world.
-      organisations: [],
       public_timestamp: document.public_updated_at.to_datetime.rfc3339,
     }.merge(document.format_specific_metadata).reject { |_k, v| v.blank? }
   end
