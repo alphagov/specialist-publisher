@@ -1,0 +1,10 @@
+<div class="form-group <%= 'elements-error' if @document.errors.full_messages_for(sym).any? %>">
+  <%= f.label sym do %>
+    <%= sym.to_s.humanize %>
+    <% @document.errors.full_messages_for(sym).each do |msg| %>
+      <br />
+      <span class="elements-error-message add-label-margin"><%= msg %></span>
+    <% end %>
+  <% end %>
+  <%= yield %>
+</div>

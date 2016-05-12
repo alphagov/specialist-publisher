@@ -1,18 +1,11 @@
-<div class="form-group <%= 'elements-error' if @document.errors.full_messages_for(:title).any? %>">
-  <%= f.label :title do %>
-    <%= :title.to_s.humanize %>
-    <% @document.errors.full_messages_for(:title).each do |msg| %>
-      <br />
-      <span class="elements-error-message add-label-margin"><%= msg %></span>
-    <% end %>
-  <% end %>
+<%= render layout: "shared/form_group", locals: { f: f, sym: :title } do %>
   <%= f.text_field :title, class: 'form-control' %>
-</div>
-<div class="form-group">
-  <%= f.label :summary %>
+<% end %>
+
+<%= render layout: "shared/form_group", locals: { f: f, sym: :summary } do %>
   <%= f.text_area :summary, class: 'form-control short-textarea' %>
-</div>
-<div class="form-group">
-  <%= f.label :body %>
+<% end %>
+
+<%= render layout: "shared/form_group", locals: { f: f, sym: :body } do %>
   <%= f.text_area :body, rows: 20, class: 'form-control' %>
-</div>
+<% end %>
