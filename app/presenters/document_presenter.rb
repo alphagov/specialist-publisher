@@ -38,7 +38,8 @@ private
     {
       body: GovspeakPresenter.present(document.body),
       metadata: metadata,
-      change_history: change_history
+      change_history: change_history,
+      max_cache_time: 10,
     }.tap do |details_hash|
       details_hash[:attachments] = attachments if document.attachments
       details_hash[:headers] = headers if !headers.empty?

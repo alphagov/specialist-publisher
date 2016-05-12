@@ -33,6 +33,7 @@ module Payloads
           "date_of_occurrence" => "2015-10-10",
           "document_type" => "aaib_report"
         },
+        "max_cache_time" => 10,
         "change_history" => [],
       },
       "routes" => [
@@ -83,6 +84,7 @@ module Payloads
           "tribunal_decision_sub_categories" => ["contract-of-employment-apprenticeship"],
           "document_type" => "employment_appeal_tribunal_decision",
         },
+        "max_cache_time" => 10,
         "change_history" => [],
       },
       "routes" => [
@@ -132,6 +134,7 @@ module Payloads
           "market_sector" => ["energy"],
           "document_type" => "cma_case",
         },
+        "max_cache_time" => 10,
         "change_history" => [
           {
             "public_timestamp" => "2015-12-03T16:59:13+00:00",
@@ -183,6 +186,7 @@ module Payloads
         "metadata" => {
           "document_type" => "countryside_stewardship_grant"
         },
+        "max_cache_time" => 10,
         "change_history" => [],
       },
       "routes" => [
@@ -229,6 +233,7 @@ module Payloads
         "metadata" => {
           "document_type" => "drug_safety_update",
         },
+        "max_cache_time" => 10,
         "change_history" => [
           {
             "public_timestamp" => "2015-11-16T11:53:30+00:00",
@@ -283,6 +288,7 @@ module Payloads
           "tribunal_decision_decision_date" => "2015-07-30",
           "document_type" => "employment_tribunal_decision",
         },
+        "max_cache_time" => 10,
         "change_history" => [],
       },
       "routes" => [
@@ -330,6 +336,7 @@ module Payloads
           "closing_date" => "2016-01-01",
           "document_type" => "esi_fund",
         },
+        "max_cache_time" => 10,
         "change_history" => [],
       },
       "routes" => [
@@ -377,6 +384,7 @@ module Payloads
           "date_of_occurrence" => "2015-10-10",
           "document_type" => "maib_report"
         },
+        "max_cache_time" => 10,
       },
       "routes" => [
         {
@@ -450,6 +458,7 @@ module Payloads
           "issued_date" => "2016-02-01",
           "document_type" => "medical_safety_alert"
         },
+        "max_cache_time" => 10,
         "change_history" => [],
       },
       "routes" => [
@@ -497,6 +506,7 @@ module Payloads
           "date_of_occurrence" => "2015-10-10",
           "document_type" => "raib_report"
         },
+        "max_cache_time" => 10,
       },
       "routes" => [
         {
@@ -544,6 +554,7 @@ module Payloads
           "tribunal_decision_decision_date" => "2015-07-30",
           "document_type" => "tax_tribunal_decision",
         },
+        "max_cache_time" => 10,
         "change_history" => [],
       },
       "routes" => [
@@ -593,6 +604,7 @@ module Payloads
           "build_end_date" => "2015-06-28",
           "document_type" => "vehicle_recalls_and_faults_alert"
         },
+        "max_cache_time" => 10,
         "change_history" => [],
       },
       "routes" => [
