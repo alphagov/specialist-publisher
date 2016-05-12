@@ -15,37 +15,6 @@ describe RaibReport do
     )
   end
 
-  let(:raib_org_content_item) {
-    {
-      "base_path" => "/government/organisations/rail-accidents-investigation-branch",
-      "content_id" => "013872d8-8bbb-4e80-9b79-45c7c5cf9177",
-      "title" => "Rail Accident Investigation Branch",
-      "format" => "redirect",
-      "need_ids" => [],
-      "locale" => "en",
-      "updated_at" => "2015-10-27T11:47:43.454Z",
-      "public_updated_at" => "2014-12-19T14:16:32.000+00:00",
-      "phase" => "live",
-      "analytics_identifier" => nil,
-      "links" => {
-        "available_translations" => [
-          {
-            "content_id" => "c4c1bd4d-f252-43f1-91cf-a8cfdd526097",
-            "title" => "Rail Accident Investigation Branch",
-            "base_path" => "/government/organisations/rail-accidents-investigation-branch",
-            "description" => "nil",
-            "api_url" => "https://www.gov.uk/api/content/government/organisations/air-accidents-investigation-branch",
-            "web_url" => "https://www.gov.uk/government/organisations/air-accidents-investigation-branch",
-            "locale" => "en"
-          }
-        ]
-      },
-      "description" => nil,
-      "details" => {
-      }
-    }
-  }
-
   let(:indexable_attributes) {
     {
       "title" => "Example RAIB Report 0",
@@ -54,7 +23,6 @@ describe RaibReport do
       "indexable_content" => "## Header" + ("\r\n\r\nThis is the long body of an example RAIB Report" * 10),
       "public_timestamp" => "2015-11-16T11:53:30+00:00",
       "date_of_occurrence" => "2015-10-10",
-      "organisations" => ["rail-accidents-investigation-branch"],
     }
   }
 
@@ -126,11 +94,6 @@ describe RaibReport do
     it "publishes the RAIB Report" do
       stub_publishing_api_publish(raib_reports[0]["content_id"], {})
       stub_any_rummager_post_with_queueing_enabled
-      publishing_api_has_content(
-        [raib_org_content_item],
-        document_type: 'organisation',
-        fields: [:base_path, :content_id]
-      )
 
       raib_report = described_class.find(raib_reports[0]["content_id"])
       expect(raib_report.publish!).to eq(true)

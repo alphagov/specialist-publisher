@@ -15,41 +15,6 @@ describe CountrysideStewardshipGrant do
     )
   end
 
-  let(:countryside_stewardship_grant_org_content_items) {
-    [
-      {
-        "content_id" => "d3ce4ba7-bc75-46b4-89d9-38cb3240376d",
-        "title" => "Natural England",
-        "base_path" => "/government/organisations/natural-england",
-        "description" => nil,
-        "api_url" => "https://www.gov.uk/api/content/government/organisations/natural-england",
-        "web_url" => "https://www.gov.uk/government/organisations/natural-england",
-        "locale" => "en",
-        "analytics_identifier" => "PB202"
-      },
-      {
-        "content_id" => "de4e9dc6-cca4-43af-a594-682023b84d6c",
-        "title" => "Department for Environment, Food & Rural Affairs",
-        "base_path" => "/government/organisations/department-for-environment-food-rural-affairs",
-        "description" => nil,
-        "api_url" => "https://www.gov.uk/api/content/government/organisations/department-for-environment-food-rural-affairs",
-        "web_url" => "https://www.gov.uk/government/organisations/department-for-environment-food-rural-affairs",
-        "locale" => "en",
-        "analytics_identifier" => "D7"
-      },
-      {
-        "content_id" => "8bf5624b-dec2-44fa-9b6c-daed166333a5",
-        "title" => "Forestry Commission",
-        "base_path" => "/government/organisations/forestry-commission",
-        "description" => nil,
-        "api_url" => "https://www.gov.uk/api/content/government/organisations/forestry-commission",
-        "web_url" => "https://www.gov.uk/government/organisations/forestry-commission",
-        "locale" => "en",
-        "analytics_identifier" => "D85"
-      },
-    ]
-  }
-
   let(:indexable_attributes) {
     {
       "title" => "Example Countryside Stewardship Grant 0",
@@ -57,7 +22,6 @@ describe CountrysideStewardshipGrant do
       "link" => "/countryside-stewardship-grants/example-countryside-stewardship-grant-0",
       "indexable_content" => "## Header" + ("\r\n\r\nThis is the long body of an example Countryside Stewardship Grant" * 10),
       "public_timestamp" => "2015-11-16T11:53:30+00:00",
-      "organisations" => ["natural-england", "department-for-environment-food-rural-affairs", "forestry-commission"],
     }
   }
 
@@ -128,11 +92,6 @@ describe CountrysideStewardshipGrant do
     it "publishes the Countryside Stewardship Grant" do
       stub_publishing_api_publish(countryside_stewardship_grants[0]["content_id"], {})
       stub_any_rummager_post_with_queueing_enabled
-      publishing_api_has_content(
-        countryside_stewardship_grant_org_content_items,
-        document_type: 'organisation',
-        fields: [:base_path, :content_id]
-      )
 
       countryside_stewardship_grant = described_class.find(countryside_stewardship_grants[0]["content_id"])
       expect(countryside_stewardship_grant.publish!).to eq(true)

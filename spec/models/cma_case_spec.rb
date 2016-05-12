@@ -15,36 +15,6 @@ RSpec.describe CmaCase do
     )
   end
 
-  let(:cma_org_content_item) {
-    {
-      "base_path" => "/government/organisations/competition-and-markets-authority",
-      "content_id" => "957eb4ec-089b-4f71-ba2a-dc69ac8919ea",
-      "title" => "Competition and Markets Authority",
-      "format" => "placeholder_organisation",
-      "need_ids" => [],
-      "locale" => "en",
-      "updated_at" => "2015-10-26T09:21:17.645Z",
-      "public_updated_at" => "2015-03-10T16:23:14.000+00:00",
-      "phase" => "live",
-      "analytics_identifier" => "D550",
-      "links" => {
-        "available_translations" => [
-          {
-            "content_id" => "957eb4ec-089b-4f71-ba2a-dc69ac8919ea",
-            "title" => "Competition and Markets Authority",
-            "base_path" => "/government/organisations/competition-and-markets-authority",
-            "description" => nil,
-            "api_url" => "https://www.gov.uk/api/content/government/organisations/competition-and-markets-authority",
-            "web_url" => "https://www.gov.uk/government/organisations/competition-and-markets-authority",
-            "locale" => "en"
-          }
-        ]
-      },
-      "description" => nil,
-      "details" => {}
-    }
-  }
-
   let(:indexable_attributes) {
     {
       "title" => "Example CMA Case 0",
@@ -57,8 +27,7 @@ RSpec.describe CmaCase do
       "case_type" => "ca98-and-civil-cartels",
       "case_state" => "open",
       "market_sector" => ["energy"],
-      "outcome_type" => nil,
-      "organisations" => ["competition-and-markets-authority"],
+      "outcome_type" => nil
     }
   }
 
@@ -221,11 +190,6 @@ RSpec.describe CmaCase do
     it "publishes the CMA Case" do
       stub_publishing_api_publish(cma_cases[0]["content_id"], {})
       stub_any_rummager_post_with_queueing_enabled
-      publishing_api_has_content(
-        [cma_org_content_item],
-        document_type: 'organisation',
-        fields: [:base_path, :content_id]
-      )
 
       c = described_class.find(cma_cases[0]["content_id"])
       expect(c.publish!).to eq(true)

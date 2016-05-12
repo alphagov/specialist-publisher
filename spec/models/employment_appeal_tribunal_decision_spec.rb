@@ -15,36 +15,6 @@ describe EmploymentAppealTribunalDecision do
     )
   end
 
-  let(:employment_appeal_tribunal_decision_org_content_item) {
-    {
-      "base_path" => "/courts-tribunals/employment-appeal-tribunal",
-      "content_id" => "caeb418c-d11c-4352-92e9-47b21289f696",
-      "title" => "Employment Appeal Tribunal",
-      "format" => "placeholder_organisation",
-      "need_ids" => [],
-      "locale" => "en",
-      "updated_at" => "2015-08-20T10:26:56.082Z",
-      "public_updated_at" => "2015-04-15T10:04:28.000+00:00",
-      "phase" => "live",
-      "analytics_identifier" => "CO1134",
-      "links" => {
-        "available_translations" => [
-          {
-            "content_id" => "975cf540-6e64-40e3-b62a-df655a8c99ef",
-            "title" => "Employment appeal tribunal decisions",
-            "base_path" => "/employment-appeal-tribunal-decisions",
-            "description" => nil,
-            "api_url" => "https://www-origin.integration.publishing.service.gov.uk/api/content/employment-appeal-tribunal-decisions",
-            "web_url" => "https://www-origin.integration.publishing.service.gov.uk/employment-appeal-tribunal-decisions",
-            "locale" => "en"
-          }
-        ]
-      },
-      "description" => nil,
-      "details" => {}
-    }
-  }
-
   let(:indexable_attributes) {
     {
       "title" => "Example Employment Appeal Tribunal Decision 0",
@@ -56,7 +26,6 @@ describe EmploymentAppealTribunalDecision do
       "tribunal_decision_decision_date" => "2015-07-30",
       "tribunal_decision_landmark" => "landmark",
       "tribunal_decision_sub_categories" => ["contract-of-employment-apprenticeship"],
-      "organisations" => ["employment-appeal-tribunal"],
     }
   }
 
@@ -131,11 +100,6 @@ describe EmploymentAppealTribunalDecision do
     it "publishes the Employment Appeal Tribunal Decision" do
       stub_publishing_api_publish(employment_appeal_tribunal_decisions[0]["content_id"], {})
       stub_any_rummager_post_with_queueing_enabled
-      publishing_api_has_content(
-        [employment_appeal_tribunal_decision_org_content_item],
-        document_type: 'organisation',
-        fields: [:base_path, :content_id]
-      )
 
       employment_appeal_tribunal_decision = described_class.find(employment_appeal_tribunal_decisions[0]["content_id"])
       expect(employment_appeal_tribunal_decision.publish!).to eq(true)

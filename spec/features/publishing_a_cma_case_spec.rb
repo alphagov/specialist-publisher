@@ -1,36 +1,6 @@
 require 'spec_helper'
 
 RSpec.feature "Publishing a CMA case", type: :feature do
-  def cma_org_content_item
-    {
-      "base_path" => "/government/organisations/competition-and-markets-authority",
-      "content_id" => "957eb4ec-089b-4f71-ba2a-dc69ac8919ea",
-      "title" => "Competition and Markets Authority",
-      "format" => "placeholder_organisation",
-      "need_ids" => [],
-      "locale" => "en",
-      "updated_at" => "2015-10-26T09:21:17.645Z",
-      "public_updated_at" => "2015-03-10T16:23:14.000+00:00",
-      "phase" => "live",
-      "analytics_identifier" => "D550",
-      "links" => {
-        "available_translations" => [
-          {
-            "content_id" => "957eb4ec-089b-4f71-ba2a-dc69ac8919ea",
-            "title" => "Competition and Markets Authority",
-            "base_path" => "/government/organisations/competition-and-markets-authority",
-            "description" => nil,
-            "api_url" => "https://www.gov.uk/api/content/government/organisations/competition-and-markets-authority",
-            "web_url" => "https://www.gov.uk/government/organisations/competition-and-markets-authority",
-            "locale" => "en"
-          }
-        ]
-      },
-      "description" => nil,
-      "details" => {}
-    }
-  end
-
   def indexable_attributes
     {
       "title" => "Example CMA Case",
@@ -44,7 +14,6 @@ RSpec.feature "Publishing a CMA case", type: :feature do
       "case_state" => "open",
       "market_sector" => ["energy"],
       "outcome_type" => nil,
-      "organisations" => ["competition-and-markets-authority"],
     }
   end
 
@@ -86,7 +55,6 @@ RSpec.feature "Publishing a CMA case", type: :feature do
     log_in_as_editor(:cma_editor)
 
     publishing_api_has_content([cma_case, minor_update_item, live_item, withdrawn_item], document_type: CmaCase.publishing_api_document_type, fields: fields, page: page_number, per_page: per_page)
-    publishing_api_has_content([cma_org_content_item], document_type: 'organisation', fields: [:base_path, :content_id])
 
     publishing_api_has_item(cma_case)
 

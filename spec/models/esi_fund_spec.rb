@@ -15,51 +15,6 @@ describe EsiFund do
     )
   end
 
-  let(:esi_fund_org_content_items) {
-    [
-      {
-        "content_id" => "2e7868a8-38f5-4ff6-b62f-9a15d1c22d28",
-        "title" => "Department for Communities and Local Government",
-        "base_path" => "/government/organisations/department-for-communities-and-local-government",
-        "description" => nil,
-        "api_url" => "https://www.gov.uk/api/content/government/organisations/department-for-communities-and-local-government",
-        "web_url" => "https://www.gov.uk/government/organisations/department-for-communities-and-local-government",
-        "locale" => "en",
-        "analytics_identifier" => "D4"
-      },
-      {
-        "content_id" => "de4e9dc6-cca4-43af-a594-682023b84d6c",
-        "title" => "Department for Environment, Food & Rural Affairs",
-        "base_path" => "/government/organisations/department-for-environment-food-rural-affairs",
-        "description" => nil,
-        "api_url" => "https://www.gov.uk/api/content/government/organisations/department-for-environment-food-rural-affairs",
-        "web_url" => "https://www.gov.uk/government/organisations/department-for-environment-food-rural-affairs",
-        "locale" => "en",
-        "analytics_identifier" => "D7"
-      },
-      {
-        "content_id" => "569a9ee5-c195-4b7f-b9dc-edc17a09113f",
-        "title" => "Department for Business, Innovation & Skills",
-        "base_path" => "/government/organisations/department-for-business-innovation-skills",
-        "description" => nil,
-        "api_url" => "https://www.gov.uk/api/content/government/organisations/department-for-business-innovation-skills",
-        "web_url" => "https://www.gov.uk/government/organisations/department-for-business-innovation-skills",
-        "locale" => "en",
-        "analytics_identifier" => "D3"
-      },
-      {
-        "content_id" => "b548a09f-8b35-4104-89f4-f1a40bf3136d",
-        "title" => "Department for Work and Pensions",
-        "base_path" => "/government/organisations/department-for-work-pensions",
-        "description" => nil,
-        "api_url" => "https://www.gov.uk/api/content/government/organisations/department-for-work-pensions",
-        "web_url" => "https://www.gov.uk/government/organisations/department-for-work-pensions",
-        "locale" => "en",
-        "analytics_identifier" => "D10"
-      }
-    ]
-  }
-
   let(:indexable_attributes) {
     {
       "title" => "Example ESI Fund 0",
@@ -72,7 +27,6 @@ describe EsiFund do
       "location" => nil,
       "funding_source" => nil,
       "closing_date" => "2016-01-01",
-      "organisations" => ["department-for-communities-and-local-government", "department-for-environment-food-rural-affairs", "department-for-business-innovation-skills", "department-for-work-pensions"],
     }
   }
 
@@ -144,11 +98,6 @@ describe EsiFund do
     it "publishes the ESI Fund" do
       stub_publishing_api_publish(esi_funds[0]["content_id"], {})
       stub_any_rummager_post_with_queueing_enabled
-      publishing_api_has_content(
-        esi_fund_org_content_items,
-        document_type: 'organisation',
-        fields: [:base_path, :content_id]
-      )
 
       esi_fund = described_class.find(esi_funds[0]["content_id"])
       expect(esi_fund.publish!).to eq(true)
