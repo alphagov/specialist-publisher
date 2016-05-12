@@ -24,7 +24,7 @@ FactoryGirl.define do
     organisation_content_id "957eb4ec-089b-4f71-ba2a-dc69ac8919ea"
   end
 
-  factory :cma_writer, parent: :editor do
+  factory :writer, aliases: [:cma_writer], parent: :editor do
     organisation_slug "competition-and-markets-authority"
     organisation_content_id "957eb4ec-089b-4f71-ba2a-dc69ac8919ea"
     permissions %w(signin)
