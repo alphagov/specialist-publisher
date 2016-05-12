@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe Document do
+RSpec.describe Document do
   class MyDocumentType < Document
     def self.title
       "My Document Type"

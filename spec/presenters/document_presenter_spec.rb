@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe DocumentPresenter do
+RSpec.describe DocumentPresenter do
   let(:cma_case) { Payloads.cma_case_content_item }
   let(:content_item_with_rendered_body) {
     cma_case.deep_merge!("details" => {

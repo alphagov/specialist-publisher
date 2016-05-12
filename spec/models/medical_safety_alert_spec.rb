@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe MedicalSafetyAlert do
+RSpec.describe MedicalSafetyAlert do
   def medical_safety_alert_content_item(n)
     Payloads.medical_safety_alert_content_item(
       "base_path" => "/drug-device-alerts/example-medical-safety-alert-#{n}",

@@ -1,6 +1,6 @@
 require "rails_helper"
 
-describe TaxTribunalDecision do
+RSpec.describe TaxTribunalDecision do
   def tax_tribunal_decision_content_item(n)
     Payloads.tax_tribunal_decision_content_item(
       "base_path" => "/tax-and-chancery-tribunal-decisions/example-tax-tribunal-decision-#{n}",

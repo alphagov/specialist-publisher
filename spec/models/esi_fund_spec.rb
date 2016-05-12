@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe EsiFund do
+RSpec.describe EsiFund do
   def esi_fund_content_item(n)
     Payloads.esi_fund_content_item(
       "base_path" => "/european-structural-investment-funds/example-esi-fund-#{n}",

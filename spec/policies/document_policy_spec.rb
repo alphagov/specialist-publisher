@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe DocumentPolicy do
+RSpec.describe DocumentPolicy do
   let(:allowed_organisation_id) { 'department-of-serious-business' }
   let(:not_allowed_organisation_id) { 'ministry-of-funk' }
   let(:gds_editor) { User.new(permissions: %w(signin gds_editor)) }

@@ -1,6 +1,6 @@
 require "rails_helper"
 
-describe UrlHelper, type: :helper do
+RSpec.describe UrlHelper, type: :helper do
   describe "#view_on_website_link_for" do
     it "returns document's public link" do
       manual = Manual.new.tap { |doc| doc.base_path = "/guidance/abc" }

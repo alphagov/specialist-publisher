@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe GovspeakPresenter do
+RSpec.describe GovspeakPresenter do
   it "should render html and Govspeak when a Govspeak string is provided" do
     input_govspeak = "^callout test^"
     rendered_html = "\n<div role=\"note\" aria-label=\"Information\" class=\"application-notice info-notice\">\n<p>callout test</p>\n</div>\n"

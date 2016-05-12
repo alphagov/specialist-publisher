@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe MaibReport do
+RSpec.describe MaibReport do
   def maib_report_content_item(n)
     Payloads.maib_report_content_item(
       "base_path" => "/maib-reports/example-maib-report-#{n}",

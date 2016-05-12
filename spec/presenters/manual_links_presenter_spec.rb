@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe ManualLinksPresenter do
+RSpec.describe ManualLinksPresenter do
   let(:manual) {
     Manual.new(body: 'test body content for manual',
       summary: 'test manual summary',

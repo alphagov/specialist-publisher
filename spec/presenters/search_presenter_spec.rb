@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe SearchPresenter do
+RSpec.describe SearchPresenter do
   subject(:presenter) { SearchPresenter.new(document) }
 
   context 'a complete document is given' do

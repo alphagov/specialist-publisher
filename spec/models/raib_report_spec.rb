@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe RaibReport do
+RSpec.describe RaibReport do
   def raib_report_content_item(n)
     Payloads.raib_report_content_item(
       "base_path" => "/raib-reports/example-raib-report-#{n}",

@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe AttachmentPresenter do
+RSpec.describe AttachmentPresenter do
   let(:content_id) { SecureRandom.uuid }
   let(:attachment) {
     Attachment.new(url: 'path/to/file/in/asset/manger',

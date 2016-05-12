@@ -1,7 +1,7 @@
 require "spec_helper"
 require "publishing_api_finder_loader"
 
-describe PublishingApiFinderLoader do
+RSpec.describe PublishingApiFinderLoader do
   before do
     expect(Dir).to receive(:glob).with("lib/documents/schemas/*.json").and_return(%w{
       lib/documents/schemas/format-1.json
