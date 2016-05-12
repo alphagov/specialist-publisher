@@ -56,6 +56,11 @@ RSpec.feature "Creating a CMA case", type: :feature do
 
     expect(page.status_code).to eq(422)
 
+    expect(page).to have_css('.elements-error-summary')
+    expect(page).to have_css('.form-group.elements-error')
+    expect(page).to have_css('.elements-error-message')
+
+    expect(page).to have_content("Please fix the following errors")
     expect(page).to have_content("Title can't be blank")
     expect(page).to have_content("Summary can't be blank")
     expect(page).to have_content("Body can't be blank")
@@ -75,6 +80,10 @@ RSpec.feature "Creating a CMA case", type: :feature do
 
     expect(page.status_code).to eq(422)
 
+    expect(page).to have_css('.elements-error-summary')
+    expect(page).to have_css('.elements-error-message')
+
+    expect(page).to have_content("Please fix the following errors")
     expect(page).to have_content("Opened date should be formatted YYYY-MM-DD")
     expect(page).to have_content("Body cannot include invalid Govspeak")
   end

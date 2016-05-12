@@ -1,3 +1,15 @@
+.elements-error-summary {
+  border: 5px solid #b10e1e;
+  padding: 15px;
+  color: #b10e1e;
+  font-weight: bold;
+
+  h4 {
+    margin-top: 0;
+    color: black;
+  }
+}
+
 form {
 
   .select2 {
@@ -9,7 +21,7 @@ form {
   }
 
   .elements-error {
-    border-left: 3px solid #b10e1e;
+    border-left: 5px solid #b10e1e;
     padding-left: 15px;
 
     label {
@@ -22,7 +34,8 @@ form {
     }
 
     input, textarea {
-      border-width: 3px;
+      border-width: 2px;
+      border-radius: 0;
       border-color: #b10e1e;
     }
 
