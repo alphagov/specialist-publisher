@@ -25,7 +25,7 @@ RSpec.feature "Searching and filtering", type: :feature do
 
   context "visiting the index with results" do
     before do
-      publishing_api_has_content(cma_cases, document_type: CmaCase.publishing_api_document_type, fields: fields, page: page_number, per_page: per_page)
+      publishing_api_has_content(cma_cases, hash_including(document_type: CmaCase.publishing_api_document_type))
     end
 
     scenario "viewing the unfiltered items" do
@@ -42,7 +42,7 @@ RSpec.feature "Searching and filtering", type: :feature do
     end
 
     scenario "filtering the items with some results returned" do
-      publishing_api_has_content([cma_cases.first], document_type: CmaCase.publishing_api_document_type, fields: fields, page: page_number, per_page: per_page, q: "0")
+      publishing_api_has_content([cma_cases.first], hash_including(document_type: CmaCase.publishing_api_document_type, q: "0"))
 
       visit "/cma-cases"
 
@@ -53,7 +53,7 @@ RSpec.feature "Searching and filtering", type: :feature do
     end
 
     scenario "filtering the items with no results returned" do
-      publishing_api_has_content([], document_type: CmaCase.publishing_api_document_type, fields: fields, page: page_number, per_page: per_page, q: "abcdef")
+      publishing_api_has_content([], hash_including(document_type: CmaCase.publishing_api_document_type, q: "abcdef"))
 
       visit "/cma-cases"
       fill_in "Search", with: "abcdef"
@@ -64,7 +64,7 @@ RSpec.feature "Searching and filtering", type: :feature do
 
   context "visiting the index with no results" do
     before do
-      publishing_api_has_content([], document_type: CmaCase.publishing_api_document_type, fields: fields, page: page_number, per_page: per_page)
+      publishing_api_has_content([], hash_including(document_type: CmaCase.publishing_api_document_type))
     end
 
     scenario "viewing the unfiltered items" do

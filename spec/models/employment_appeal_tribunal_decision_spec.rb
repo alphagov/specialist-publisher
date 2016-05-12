@@ -35,7 +35,7 @@ describe EmploymentAppealTribunalDecision do
   let(:per_page) { 50 }
 
   before do
-    publishing_api_has_content(employment_appeal_tribunal_decisions, document_type: described_class.publishing_api_document_type, fields: fields, page: page, per_page: per_page)
+    publishing_api_has_content(employment_appeal_tribunal_decisions, hash_including(document_type: described_class.publishing_api_document_type))
 
     employment_appeal_tribunal_decisions.each do |decision|
       publishing_api_has_item(decision)

@@ -36,7 +36,7 @@ describe EsiFund do
   let(:per_page) { 50 }
 
   before do
-    publishing_api_has_content(esi_funds, document_type: described_class.publishing_api_document_type, fields: fields, page: page, per_page: per_page)
+    publishing_api_has_content(esi_funds, hash_including(document_type: described_class.publishing_api_document_type))
 
     esi_funds.each do |esi_fund|
       publishing_api_has_item(esi_fund)

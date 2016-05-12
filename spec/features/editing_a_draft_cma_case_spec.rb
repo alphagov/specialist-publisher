@@ -43,7 +43,7 @@ RSpec.feature "Editing a draft CMA case", type: :feature do
     stub_any_publishing_api_put_content
     stub_any_publishing_api_patch_links
 
-    publishing_api_has_content([cma_case], document_type: CmaCase.publishing_api_document_type, fields: fields, page: page_number, per_page: per_page)
+    publishing_api_has_content([cma_case], hash_including(document_type: CmaCase.publishing_api_document_type))
 
     publishing_api_has_item(cma_case)
 
