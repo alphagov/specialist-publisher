@@ -20,6 +20,9 @@ Dir[Rails.root.join("features/support/**/*_helpers.rb")]
   .reject { |f| f =~ %r{/api_helpers.rb$} }
   .each { |f| require f }
 
+# Quiet down now Mongo
+Mongo::Logger.logger.level = ::Logger::FATAL
+
 require "database_cleaner"
 DatabaseCleaner[:mongoid].strategy = :truncation
 DatabaseCleaner.clean
@@ -33,9 +36,6 @@ require 'gds_api/test_helpers/rummager'
 require 'gds_api/test_helpers/email_alert_api'
 
 require 'pundit/rspec'
-
-# Quiet down now Mongo
-Mongo::Logger.logger.level = ::Logger::FATAL
 
 RSpec.configure do |config|
   # config.disable_monkey_patching!
