@@ -8,6 +8,26 @@ form {
     height: 50px;
   }
 
+  .elements-error {
+    border-left: 3px solid #b10e1e;
+    padding-left: 15px;
+
+    label {
+      color: black;
+    }
+
+    .elements-error-message {
+      color: #b10e1e;
+      font-weight: bold;
+    }
+
+    input, textarea {
+      border-width: 3px;
+      border-color: #b10e1e;
+    }
+
+  }
+
   .error-list {
     h2 {
       font-weight: bold;
