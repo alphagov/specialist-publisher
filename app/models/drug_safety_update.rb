@@ -18,7 +18,7 @@ class DrugSafetyUpdate < Document
 
       save_first_published_at if not_published?
 
-      publishing_api.publish(content_id, update_type)
+      Services.publishing_api.publish(content_id, update_type)
       Services.rummager.add_document(
         search_document_type,
         base_path,
@@ -41,6 +41,6 @@ private
     self.first_published_at = Time.zone.now
     presented_document = DocumentPresenter.new(self).to_json
 
-    publishing_api.put_content(self.content_id, presented_document)
+    Services.publishing_api.put_content(self.content_id, presented_document)
   end
 end

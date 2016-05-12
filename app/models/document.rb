@@ -185,11 +185,11 @@ class Document
       per_page: per_page,
     }
     params[:q] = q if q.present?
-    self.publishing_api.get_content_items(params)
+    Services.publishing_api.get_content_items(params)
   end
 
   def self.find(content_id)
-    response = publishing_api.get_content(content_id)
+    response = Services.publishing_api.get_content(content_id)
 
     if response
       self.from_publishing_api(response.to_hash)
@@ -208,8 +208,8 @@ class Document
       presented_links = DocumentLinksPresenter.new(self)
 
       handle_remote_error do
-        publishing_api.put_content(self.content_id, presented_document.to_json)
-        publishing_api.patch_links(self.content_id, presented_links.to_json)
+        Services.publishing_api.put_content(self.content_id, presented_document.to_json)
+        Services.publishing_api.patch_links(self.content_id, presented_links.to_json)
       end
     else
       raise RecordNotSaved
@@ -223,7 +223,7 @@ class Document
 
     handle_remote_error do
       update_type = self.update_type || 'major'
-      publishing_api.publish(content_id, update_type)
+      Services.publishing_api.publish(content_id, update_type)
       Services.rummager.add_document(
         search_document_type,
         base_path,
@@ -256,14 +256,6 @@ private
 
   def self.attachments(payload)
     payload.details.attachments.map { |attachment| Attachment.new(attachment) }
-  end
-
-  def publishing_api
-    self.class.publishing_api
-  end
-
-  def self.publishing_api
-    Services.publishing_api
   end
 
   def self.finder_schema
