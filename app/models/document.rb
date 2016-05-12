@@ -183,6 +183,7 @@ class Document
       ],
       page: page,
       per_page: per_page,
+      order: "-updated_at",
     }
     params[:q] = q if q.present?
     Services.publishing_api.get_content_items(params)
