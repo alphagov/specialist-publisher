@@ -1,24 +1,34 @@
-<div class="form-group">
-  <%= f.label :date_of_occurrence %>
+<%= render layout: "shared/form_group", locals: { f: f, field: :date_of_occurrence } do %>
   <%= f.text_field :date_of_occurrence, placeholder: '2012-04-23', class: 'form-control' %>
-</div>
-<div class="form-group">
-  <%= f.label :aircraft_type %>
+<% end %>
+<%= render layout: "shared/form_group", locals: { f: f, field: :aircraft_type } do %>
   <%= f.text_field :aircraft_type, class: 'form-control' %>
-</div>
-<div class="form-group">
-  <%= f.label :registration %>
+<% end %>
+<%= render layout: "shared/form_group", locals: { f: f, field: :registration } do %>
   <%= f.text_field :registration, class: 'form-control' %>
-</div>
-<div class="form-group">
-  <%= f.label :location %>
+<% end %>
+<%= render layout: "shared/form_group", locals: { f: f, field: :location } do %>
   <%= f.text_field :location, class: 'form-control' %>
-</div>
-<div class="form-group">
-  <%= f.label :aircraft_category %>
-  <%= f.select :aircraft_category, f.object.facet_options(:aircraft_category), {}, { class: 'select2 form-control', multiple: true, data: {placeholder: 'Select an Aircraft category'} } %>
-</div>
-<div class="form-group">
-  <%= f.label :report_type %>
-  <%= f.select :report_type, f.object.facet_options(:report_type), {}, { class: 'form-control' } %>
-</div>
+<% end %>
+<%= render layout: "shared/form_group", locals: { f: f, field: :aircraft_category } do %>
+  <%= f.select :aircraft_category,
+      f.object.facet_options(:aircraft_category),
+      {},
+      {
+        class: 'select2 form-control',
+        multiple: true,
+        data: {
+          placeholder: 'Select an Aircraft category'
+        }
+      }
+  %>
+<% end %>
+<%= render layout: "shared/form_group", locals: { f: f, field: :report_type } do %>
+  <%= f.select :report_type,
+      f.object.facet_options(:report_type),
+      {},
+      {
+        class: 'form-control'
+      }
+  %>
+<% end %>
