@@ -1,9 +1,6 @@
 require 'spec_helper'
 
 RSpec.feature "Access control", type: :feature do
-  let(:fields) { [:base_path, :content_id, :public_updated_at, :title, :publication_state] }
-  let(:page_number) { 1 }
-  let(:per_page) { 50 }
   let(:manual_fields) { %i[content_id description title details public_updated_at publication_state base_path update_type] }
 
   before do

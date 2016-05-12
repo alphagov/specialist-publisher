@@ -34,9 +34,7 @@ RSpec.feature "Editing a draft CMA case", type: :feature do
     "publication_state" => "draft")
   }
   let(:content_id) { cma_case['content_id'] }
-  let(:fields) { [:base_path, :content_id, :public_updated_at, :title, :publication_state] }
-  let(:page_number) { 1 }
-  let(:per_page) { 50 }
+
   before do
     log_in_as_editor(:cma_editor)
 

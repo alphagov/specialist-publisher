@@ -25,10 +25,7 @@ describe DrugSafetyUpdate do
     }
   }
 
-  let(:fields) { %i[base_path content_id public_updated_at title publication_state] }
   let(:drug_safety_updates) { 10.times.map { |n| drug_safety_update_content_item(n) } }
-  let(:page) { 1 }
-  let(:per_page) { 50 }
 
   before do
     drug_safety_updates.each do |drug_safety_update|
@@ -36,13 +33,6 @@ describe DrugSafetyUpdate do
     end
 
     Timecop.freeze(Time.parse("2015-12-18 10:12:26 UTC"))
-  end
-
-  describe ".all" do
-    it "returns all Drug Safety Updates" do
-      publishing_api_has_content(drug_safety_updates, hash_including(document_type: described_class.publishing_api_document_type))
-      expect(described_class.all(page, per_page).results.length).to be(drug_safety_updates.length)
-    end
   end
 
   describe ".find" do

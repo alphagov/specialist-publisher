@@ -27,25 +27,14 @@ describe MedicalSafetyAlert do
     }
   }
 
-  let(:fields) { %i[base_path content_id public_updated_at title publication_state] }
   let(:medical_safety_alerts) { 10.times.map { |n| medical_safety_alert_content_item(n) } }
-  let(:page) { 1 }
-  let(:per_page) { 50 }
 
   before do
-    publishing_api_has_content(medical_safety_alerts, hash_including(document_type: described_class.publishing_api_document_type))
-
     medical_safety_alerts.each do |medical_safety_alert|
       publishing_api_has_item(medical_safety_alert)
     end
 
     Timecop.freeze(Time.parse("2015-12-18 10:12:26 UTC"))
-  end
-
-  describe ".all" do
-    it "returns all Medical Safety Alerts" do
-      expect(described_class.all(page, per_page).results.length).to eq(medical_safety_alerts.length)
-    end
   end
 
   describe ".find" do

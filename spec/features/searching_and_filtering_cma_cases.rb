@@ -1,8 +1,6 @@
 require 'spec_helper'
 
 RSpec.feature "Searching and filtering", type: :feature do
-  let(:fields) { [:base_path, :content_id, :public_updated_at, :title, :publication_state] }
-
   let(:cma_cases) {
     ten_example_cases = 10.times.collect do |n|
       Payloads.cma_case_content_item(
@@ -15,9 +13,6 @@ RSpec.feature "Searching and filtering", type: :feature do
     ten_example_cases[1]["publication_state"] = "live"
     ten_example_cases
   }
-
-  let(:page_number) { 1 }
-  let(:per_page) { 50 }
 
   before do
     log_in_as_editor(:cma_editor)

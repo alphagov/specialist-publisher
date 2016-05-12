@@ -26,25 +26,14 @@ describe MaibReport do
     }
   }
 
-  let(:fields) { %i[base_path content_id public_updated_at title publication_state] }
   let(:maib_reports) { 10.times.map { |n| maib_report_content_item(n) } }
-  let(:page) { 1 }
-  let(:per_page) { 50 }
 
   before do
-    publishing_api_has_content(maib_reports, hash_including(document_type: described_class.publishing_api_document_type))
-
     maib_reports.each do |maib_report|
       publishing_api_has_item(maib_report)
     end
 
     Timecop.freeze(Time.parse("2015-12-18 10:12:26 UTC"))
-  end
-
-  context ".all" do
-    it "returns all MAIB Reports" do
-      expect(described_class.all(page, per_page).results.length).to be(maib_reports.length)
-    end
   end
 
   context ".find" do

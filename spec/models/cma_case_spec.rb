@@ -31,8 +31,6 @@ RSpec.describe CmaCase do
     }
   }
 
-  let(:fields) { %i[base_path content_id public_updated_at title publication_state] }
-
   let(:cma_cases) { 10.times.map { |n| cma_case_content_item(n) } }
 
   let(:email_alert_payload) do
@@ -48,12 +46,7 @@ RSpec.describe CmaCase do
     }
   end
 
-  let(:page) { 1 }
-  let(:per_page) { 50 }
-
   before do
-    publishing_api_has_content(cma_cases, hash_including(document_type: described_class.publishing_api_document_type))
-
     cma_cases[1]["details"].merge!(
       "attachments" => [
         {
@@ -80,23 +73,6 @@ RSpec.describe CmaCase do
     end
 
     Timecop.freeze(Time.parse("2015-12-18 10:12:26 UTC"))
-  end
-
-  context ".all" do
-    it "returns all CMA Cases" do
-      expect(described_class.all(page, per_page).results.length).to be(cma_cases.length)
-    end
-
-    it "passes query parameter if supplied" do
-      publishing_api = double("publishing-api")
-      allow(Services).to receive(:publishing_api)
-        .and_return(publishing_api)
-
-      expect(publishing_api).to receive(:get_content_items)
-        .with(hash_including(q: "foo"))
-        .and_return(double(to_ostruct: {}))
-      described_class.all(page, per_page, q: "foo")
-    end
   end
 
   context ".find" do

@@ -25,25 +25,14 @@ describe CountrysideStewardshipGrant do
     }
   }
 
-  let(:fields) { %i[base_path content_id public_updated_at title publication_state] }
   let(:countryside_stewardship_grants) { 10.times.map { |n| countryside_stewardship_grant_content_item(n) } }
-  let(:page) { 1 }
-  let(:per_page) { 50 }
 
   before do
-    publishing_api_has_content(countryside_stewardship_grants, hash_including(document_type: described_class.publishing_api_document_type))
-
     countryside_stewardship_grants.each do |countryside_stewardship_grant|
       publishing_api_has_item(countryside_stewardship_grant)
     end
 
     Timecop.freeze("2015-12-18 10:12:26 UTC")
-  end
-
-  describe ".all" do
-    it "returns all Countryside Stewardship Grants" do
-      expect(described_class.all(page, per_page).results.length).to be(countryside_stewardship_grants.length)
-    end
   end
 
   describe ".find" do

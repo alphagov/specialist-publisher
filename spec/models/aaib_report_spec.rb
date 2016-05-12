@@ -26,34 +26,14 @@ describe AaibReport do
     }
   }
 
-  let(:fields) { %i[base_path content_id public_updated_at title publication_state] }
   let(:aaib_reports) { 10.times.map { |n| aaib_report_content_item(n) } }
-  let(:page) { 1 }
-  let(:per_page) { 50 }
 
   before do
-    publishing_api_has_content(aaib_reports, hash_including(document_type: described_class.publishing_api_document_type))
-
     aaib_reports.each do |aaib_report|
       publishing_api_has_item(aaib_report)
     end
 
     Timecop.freeze(Time.parse("2015-12-18 10:12:26 UTC"))
-  end
-
-  describe ".all" do
-    it "returns all AAIB Reports" do
-      expect(described_class.all(page, per_page).results.length).to be(aaib_reports.length)
-    end
-
-    it "returns AAIB with necessary info" do
-      sample_aaib_report = described_class.all(1, 50).results.sample
-      expect(sample_aaib_report.base_path.nil?).to eq(false)
-      expect(sample_aaib_report.content_id.nil?).to eq(false)
-      expect(sample_aaib_report.title.nil?).to eq(false)
-      expect(sample_aaib_report.publication_state.nil?).to eq(false)
-      expect(sample_aaib_report.public_updated_at.nil?).to eq(false)
-    end
   end
 
   describe ".find" do

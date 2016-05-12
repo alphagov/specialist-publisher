@@ -10,11 +10,8 @@ RSpec.feature "Creating a CMA case", type: :feature do
     }
   end
 
-  let(:fields) { [:base_path, :content_id, :public_updated_at, :title, :publication_state] }
   let(:cma_case) { Payloads.cma_case_content_item }
   let(:content_id) { cma_case['content_id'] }
-  let(:page_number) { 1 }
-  let(:per_page) { 50 }
 
   before do
     log_in_as_editor(:cma_editor)

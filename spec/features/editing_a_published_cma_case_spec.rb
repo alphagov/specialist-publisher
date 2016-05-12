@@ -29,7 +29,6 @@ RSpec.feature "Editing a published CMA case", type: :feature do
   }
 
   let(:content_id) { published_cma_case['content_id'] }
-  let(:fields) { [:base_path, :content_id, :public_updated_at, :title, :publication_state] }
   let(:file_name) { "cma_case_image.jpg" }
   let(:asset_url) { "http://assets-origin.dev.gov.uk/media/56c45553759b740609000000/#{file_name}" }
   let(:asset_manager_response) {
@@ -38,9 +37,6 @@ RSpec.feature "Editing a published CMA case", type: :feature do
       file_url: asset_url
     }
   }
-
-  let(:page_number) { 1 }
-  let(:per_page) { 50 }
 
   before do
     log_in_as_editor(:cma_editor)

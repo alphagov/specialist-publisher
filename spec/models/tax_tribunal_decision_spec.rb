@@ -27,25 +27,14 @@ describe TaxTribunalDecision do
     }
   }
 
-  let(:fields) { %i[base_path content_id public_updated_at title publication_state] }
   let(:tax_tribunal_decisions) { 10.times.map { |n| tax_tribunal_decision_content_item(n) } }
-  let(:page) { 1 }
-  let(:per_page) { 50 }
 
   before do
-    publishing_api_has_content(tax_tribunal_decisions, hash_including(document_type: described_class.publishing_api_document_type))
-
     tax_tribunal_decisions.each do |decision|
       publishing_api_has_item(decision)
     end
 
     Timecop.freeze(Time.parse("2015-12-18 10:12:26 UTC"))
-  end
-
-  describe ".all" do
-    it "returns all Tax Tribunal Decisions" do
-      expect(described_class.all(page, per_page).results.length).to be(tax_tribunal_decisions.length)
-    end
   end
 
   describe ".find" do

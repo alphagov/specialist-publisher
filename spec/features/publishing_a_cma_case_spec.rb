@@ -26,10 +26,6 @@ RSpec.feature "Publishing a CMA case", type: :feature do
   }
   let(:content_id) { cma_case['content_id'] }
 
-  let(:fields) { [:base_path, :content_id, :public_updated_at, :title, :publication_state] }
-  let(:page_number) { 1 }
-  let(:per_page) { 50 }
-
   def minor_update_item
     cma_case.merge(
       "title" => "Minor Update Case",
