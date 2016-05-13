@@ -18,10 +18,6 @@ class EmploymentAppealTribunalDecision < Document
     super(params, FORMAT_SPECIFIC_FIELDS)
   end
 
-  def self.publishing_api_document_type
-    "employment_appeal_tribunal_decision"
-  end
-
   def self.title
     "EAT Decision"
   end

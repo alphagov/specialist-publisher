@@ -47,9 +47,7 @@ class Document
   end
 
   def self.publishing_api_document_type
-    # This is the string sent as `document_type` in the `details["metadata"]` hash
-    # and should be redefined within the child classes
-    raise NotImplementedError
+    to_s.underscore
   end
 
   def search_document_type

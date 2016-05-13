@@ -14,10 +14,6 @@ class MedicalSafetyAlert < Document
     super(params, FORMAT_SPECIFIC_FIELDS)
   end
 
-  def self.publishing_api_document_type
-    "medical_safety_alert"
-  end
-
   def self.title
     "Medical Safety Alert"
   end

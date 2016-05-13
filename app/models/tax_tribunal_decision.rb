@@ -14,10 +14,6 @@ class TaxTribunalDecision < Document
     super(params, FORMAT_SPECIFIC_FIELDS)
   end
 
-  def self.publishing_api_document_type
-    "tax_tribunal_decision"
-  end
-
   def self.title
     "Tax Tribunal Decision"
   end
