@@ -70,7 +70,7 @@ $ bundle exec rake
 
 1. Create a model which inherits from `Document` within: `specialist-publisher/app/models`
 
-  - Structure of this model will be very similar to those of other format models. See `aaib_report.rb` for an example of what the model for this new format will need to include (i.e validations, `FORMAT_SPECIFIC_FIELDS` and the `publishing_api_document_type`)
+  - Structure of this model will be very similar to those of other format models. See `aaib_report.rb` for an example of what the model for this new format will need to include (i.e validations, `FORMAT_SPECIFIC_FIELDS`)
 
 1. Add the format definition to the `data` hash in `ApplicationController`. This ensures that the file naming convention of `specialist-publisher` will work for the new format
 

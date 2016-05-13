@@ -42,11 +42,11 @@ class Document
     @base_path ||= "#{finder_schema.base_path}/#{title.parameterize}"
   end
 
-  def publishing_api_document_type
-    self.class.publishing_api_document_type
+  def document_type
+    self.class.document_type
   end
 
-  def self.publishing_api_document_type
+  def self.document_type
     to_s.underscore
   end
 
@@ -171,7 +171,7 @@ class Document
 
   def self.all(page, per_page, q: nil)
     params = {
-      document_type: self.publishing_api_document_type,
+      document_type: self.document_type,
       fields: [
         :base_path,
         :content_id,
@@ -243,10 +243,6 @@ class Document
     title.parameterize.pluralize
   end
 
-  def self.format_name
-    to_s.underscore
-  end
-
   def can_be_published?
     !live?
   end
@@ -258,7 +254,7 @@ private
   end
 
   def self.finder_schema
-    @finder_schema ||= FinderSchema.new(publishing_api_document_type.pluralize)
+    @finder_schema ||= FinderSchema.new(document_type.pluralize)
   end
 
   def finder_schema

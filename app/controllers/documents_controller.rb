@@ -31,7 +31,7 @@ class DocumentsController < ApplicationController
 
   def create
     @document = current_format.new(
-      filtered_params(params[current_format.format_name])
+      filtered_params(params[current_format.document_type])
     )
 
     if @document.valid?
@@ -53,7 +53,7 @@ class DocumentsController < ApplicationController
   def edit; end
 
   def update
-    new_params = filtered_params(params[current_format.format_name])
+    new_params = filtered_params(params[current_format.document_type])
 
     new_params.each do |k, v|
       @document.public_send(:"#{k}=", v)

@@ -5,18 +5,14 @@ describe Document do
     def self.title
       "My Document Type"
     end
-
-    def self.publishing_api_document_type
-      "my_document_type"
-    end
   end
 
   it "has a document_type for building URLs" do
     expect(MyDocumentType.slug).to eq("my-document-types")
   end
 
-  it "has a format_name for fetching params of the format" do
-    expect(MyDocumentType.format_name).to eq("my_document_type")
+  it "has a document_type for fetching params of the format" do
+    expect(MyDocumentType.document_type).to eq("my_document_type")
   end
 
   describe ".all" do

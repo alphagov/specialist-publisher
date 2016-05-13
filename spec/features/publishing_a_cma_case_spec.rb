@@ -50,7 +50,7 @@ RSpec.feature "Publishing a CMA case", type: :feature do
   before do
     log_in_as_editor(:cma_editor)
 
-    publishing_api_has_content([cma_case, minor_update_item, live_item, withdrawn_item], hash_including(document_type: CmaCase.publishing_api_document_type))
+    publishing_api_has_content([cma_case, minor_update_item, live_item, withdrawn_item], hash_including(document_type: CmaCase.document_type))
 
     publishing_api_has_item(cma_case)
 

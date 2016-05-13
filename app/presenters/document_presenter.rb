@@ -11,7 +11,7 @@ class DocumentPresenter
       base_path: document.base_path,
       title: document.title,
       description: document.summary,
-      document_type: document.publishing_api_document_type,
+      document_type: document.document_type,
       schema_name: "specialist_document",
       publishing_app: "specialist-publisher",
       rendering_app: "specialist-frontend",
@@ -68,7 +68,7 @@ private
       }
     }.reduce({}, :merge)
       .merge(
-        document_type: document.publishing_api_document_type,
+        document_type: document.document_type,
         bulk_published: document.bulk_published,
       )
 

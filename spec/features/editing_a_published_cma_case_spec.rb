@@ -44,7 +44,7 @@ RSpec.feature "Editing a published CMA case", type: :feature do
     stub_any_publishing_api_put_content
     stub_any_publishing_api_patch_links
 
-    publishing_api_has_content([published_cma_case], hash_including(document_type: CmaCase.publishing_api_document_type))
+    publishing_api_has_content([published_cma_case], hash_including(document_type: CmaCase.document_type))
     publishing_api_has_item(published_cma_case)
 
     stub_request(:post, "#{Plek.find('asset-manager')}/assets")

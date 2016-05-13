@@ -10,14 +10,14 @@ class EmailAlertPresenter
       subject: subject,
       body: body,
       tags: tags,
-      document_type: document.publishing_api_document_type,
+      document_type: document.document_type,
     }.merge(extra_options)
   end
 
 private
 
   def body
-    if document.publishing_api_document_type == "medical_safety_alert"
+    if document.document_type == "medical_safety_alert"
       standard_body("email_alerts/medical_safety_alerts/publication")
     else
       standard_body("email_alerts/publication")
@@ -26,7 +26,7 @@ private
 
   def tags
     {
-      format: document.publishing_api_document_type
+      format: document.document_type
     }.deep_merge(document.format_specific_metadata.reject { |_k, v| v.blank? })
   end
 
@@ -39,8 +39,8 @@ private
         document_summary: document.summary,
         document_url: File.join(Plek.current.website_root, document.base_path),
         document_change_note: document.change_note,
-        document_org_title: org_title[document.publishing_api_document_type],
-        document_noun: document_noun[document.publishing_api_document_type],
+        document_org_title: org_title[document.document_type],
+        document_noun: document_noun[document.document_type],
         updated_or_published: updated_or_published,
       }
     )
