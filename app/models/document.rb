@@ -175,7 +175,7 @@ class Document
       fields: [
         :base_path,
         :content_id,
-        :public_updated_at,
+        :updated_at,
         :title,
         :publication_state,
       ],

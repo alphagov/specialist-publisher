@@ -1,6 +1,7 @@
 require 'spec_helper'
 
 RSpec.feature "Searching and filtering", type: :feature do
+  let(:test_date) { Date.new(2016, 1, 11) }
   let(:cma_cases) {
     ten_example_cases = 10.times.collect do |n|
       Payloads.cma_case_content_item(
@@ -8,6 +9,8 @@ RSpec.feature "Searching and filtering", type: :feature do
         "description" => "This is the summary of example CMA case #{n}",
         "base_path" => "/cma-cases/example-cma-case-#{n}",
         "publication_state" => "draft",
+        "updated_at" => (test_date - (n + 1).days).iso8601,
+        "public_updated_at" => (test_date - (10 - n).days).iso8601,
       )
     end
     ten_example_cases[1]["publication_state"] = "live"
@@ -33,6 +36,20 @@ RSpec.feature "Searching and filtering", type: :feature do
       expect(page).to have_content("Example CMA Case 2")
       within(".document-list li.document:nth-child(2)") do
         expect(page).to have_content("published")
+      end
+    end
+
+    scenario "viewing the updated_at field on the index page" do
+      Timecop.freeze(test_date) do
+        visit "/cma-cases"
+
+        within(".document-list li.document:nth-child(1)") do
+          expect(page).to have_content("Updated 1 day ago")
+        end
+
+        within(".document-list li.document:nth-child(10)") do
+          expect(page).to have_content("Updated 10 days ago")
+        end
       end
     end
 
