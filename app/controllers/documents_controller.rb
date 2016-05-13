@@ -68,7 +68,7 @@ class DocumentsController < ApplicationController
         render :edit
       end
     else
-      flash.now[:danger] = document_error_messages
+      flash.now[:errors] = document_error_messages
       render :edit, status: 422
     end
   end
@@ -85,7 +85,7 @@ class DocumentsController < ApplicationController
 private
 
   def document_error_messages
-    document_errors = @document.errors.messages
+    @document.errors.messages
     heading = content_tag(
       :h4,
       %{

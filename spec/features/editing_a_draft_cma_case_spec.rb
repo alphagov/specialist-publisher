@@ -112,9 +112,13 @@ RSpec.feature "Editing a draft CMA case", type: :feature do
 
     click_button "Save as draft"
 
+    expect(page).to have_css('.elements-error-summary')
+    expect(page).to have_css('.elements-error-message')
+
     expect(@changed_json["content_id"]).to eq(content_id)
     expect(page).to have_content("Opened date should be formatted YYYY-MM-DD")
     expect(page).to have_content("Body cannot include invalid Govspeak")
+    expect(page).to have_content("Please fix the following errors")
 
     expect(page.status_code).to eq(422)
   end
