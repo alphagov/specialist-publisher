@@ -124,13 +124,11 @@ RSpec.describe RummagerFinderPublisher do
 
       context "and the app is configured to publish pre-production finders" do
         before do
-          SpecialistPublisher::Application.config
-            .publish_pre_production_finders = true
+          SpecialistPublisher.publish_pre_production_finders = true
         end
 
         after do
-          SpecialistPublisher::Application.config
-            .publish_pre_production_finders = false
+          SpecialistPublisher.publish_pre_production_finders = false
         end
 
         it "publishes finder" do

@@ -30,15 +30,11 @@ private
   end
 
   def should_publish_in_this_environment?(finder)
-    !pre_production?(finder) || should_publish_pre_production_finders?
+    !pre_production?(finder) || SpecialistPublisher.should_publish_pre_production_finders?
   end
 
   def pre_production?(finder)
     finder[:file]["pre_production"] == true
-  end
-
-  def should_publish_pre_production_finders?
-    SpecialistPublisher::Application.config.publish_pre_production_finders
   end
 
   def export_finder(finder)

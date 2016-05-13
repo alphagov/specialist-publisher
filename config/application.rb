@@ -28,4 +28,10 @@ module SpecialistPublisher
 
     config.autoload_paths << Rails.root.join('lib')
   end
+
+  mattr_accessor :publish_pre_production_finders
+
+  def self.should_publish_pre_production_finders?
+    publish_pre_production_finders.present?
+  end
 end
