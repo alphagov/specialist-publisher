@@ -4,6 +4,6 @@
 
 <%= render(partial: "shared/attachments_form", locals: {
     attachment: @attachment,
-    url: document_attachments_path(params[:document_type], params[:document_content_id]),
+    url: document_attachments_path(params[:document_type_slug], params[:document_content_id]),
     method: 'post'
 }) %>

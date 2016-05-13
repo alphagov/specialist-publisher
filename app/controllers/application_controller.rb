@@ -22,12 +22,12 @@ private
   end
 
 
-  def document_type
-    params[:document_type]
+  def document_type_slug
+    params[:document_type_slug]
   end
 
   def current_format
-    @current_format ||= document_types.detect { |format| format.document_type == document_type }
+    @current_format ||= document_types.detect { |format| format.slug == document_type_slug }
   end
 
   def formats_user_can_access

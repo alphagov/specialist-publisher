@@ -23,7 +23,7 @@ RSpec.describe AttachmentsController, type: :controller do
       ]
     })}
 
-  let(:document_type) { 'cma-cases' }
+  let(:document_type_slug) { 'cma-cases' }
   let(:document_content_id) { cma_case['content_id'] }
   let(:attachment_content_id) { cma_case['details']['attachments'][0]['content_id'] }
 
@@ -63,10 +63,10 @@ RSpec.describe AttachmentsController, type: :controller do
         .with(body: %r{.*})
         .to_return(body: JSON.dump(asset_manager_response), status: 201)
 
-      post :create, document_type: document_type, document_content_id: document_content_id, attachment: attachment
+      post :create, document_type_slug: document_type_slug, document_content_id: document_content_id, attachment: attachment
 
       expect(document.attachments.count).to eq(3)
-      expect(response).to redirect_to(edit_document_path(document_type: document_type, content_id: document_content_id))
+      expect(response).to redirect_to(edit_document_path(document_type_slug: document_type_slug, content_id: document_content_id))
     end
   end
 
@@ -76,7 +76,7 @@ RSpec.describe AttachmentsController, type: :controller do
       attachment = document.find_attachment(attachment_content_id)
       allow_any_instance_of(AttachmentsController).to receive(:fetch_document).and_return(document)
 
-      get :edit, document_type: document_type, document_content_id: document_content_id, attachment_content_id: attachment_content_id
+      get :edit, document_type_slug: document_type_slug, document_content_id: document_content_id, attachment_content_id: attachment_content_id
 
       expect(assigns(:attachment)).to eq(attachment)
       expect(response).to render_template :edit
@@ -94,10 +94,10 @@ RSpec.describe AttachmentsController, type: :controller do
         .with(body: %r{.*})
         .to_return(body: JSON.dump(asset_manager_response), status: 201)
 
-      post :update, document_type: document_type, document_content_id: document_content_id, attachment_content_id: attachment_content_id, attachment: { file: Rack::Test::UploadedFile.new("spec/support/images/updated_cma_case_image.jpg", "mime/type"), title: 'updated test attachment upload' }
+      post :update, document_type_slug: document_type_slug, document_content_id: document_content_id, attachment_content_id: attachment_content_id, attachment: { file: Rack::Test::UploadedFile.new("spec/support/images/updated_cma_case_image.jpg", "mime/type"), title: 'updated test attachment upload' }
 
       expect(document.attachments.count).to eq(2)
-      expect(response).to redirect_to(edit_document_path(document_type: document_type, content_id: document_content_id))
+      expect(response).to redirect_to(edit_document_path(document_type_slug: document_type_slug, content_id: document_content_id))
     end
   end
 end

@@ -12,7 +12,7 @@ describe Document do
   end
 
   it "has a document_type for building URLs" do
-    expect(MyDocumentType.document_type).to eq("my-document-types")
+    expect(MyDocumentType.slug).to eq("my-document-types")
   end
 
   it "has a format_name for fetching params of the format" do
