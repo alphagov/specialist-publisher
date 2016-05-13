@@ -58,6 +58,7 @@ describe MedicalSafetyAlert do
       medical_safety_alert = medical_safety_alerts[0]
 
       medical_safety_alert.delete("publication_state")
+      medical_safety_alert.delete("updated_at")
       medical_safety_alert.merge!("public_updated_at" => "2015-12-18T10:12:26+00:00")
       medical_safety_alert["details"].merge!(
         "change_history" => [

@@ -57,6 +57,7 @@ describe MaibReport do
       maib_report = maib_reports[0]
 
       maib_report.delete("publication_state")
+      maib_report.delete("updated_at")
       maib_report.merge!("public_updated_at" => "2015-12-18T10:12:26+00:00")
       maib_report["details"].merge!(
         "change_history" => [

@@ -138,6 +138,7 @@ describe DocumentPresenter do
     it "returns a specialist document content item" do
       presented_data[:details][:change_history] = [{ public_timestamp: "2015-12-03T16:59:13+00:00", note: "First published." }]
       content_item_with_rendered_body.delete('publication_state')
+      content_item_with_rendered_body.delete('updated_at')
 
       expect(presented_data).to eq(content_item_with_rendered_body.to_h.deep_symbolize_keys)
     end
@@ -160,6 +161,7 @@ describe DocumentPresenter do
     it "returns a specialist document content item" do
       presented_data[:details][:change_history] = [{ public_timestamp: "2015-12-03T16:59:13+00:00", note: "First published." }]
       content_item_with_rendered_body_and_attachments.delete('publication_state')
+      content_item_with_rendered_body_and_attachments.delete('updated_at')
 
       expect(presented_data).to eq(content_item_with_rendered_body_and_attachments.to_h.deep_symbolize_keys)
     end

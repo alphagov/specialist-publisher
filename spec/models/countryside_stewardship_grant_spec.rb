@@ -55,6 +55,7 @@ describe CountrysideStewardshipGrant do
       countryside_stewardship_grant = countryside_stewardship_grants[0]
 
       countryside_stewardship_grant.delete("publication_state")
+      countryside_stewardship_grant.delete("updated_at")
       countryside_stewardship_grant.merge!("public_updated_at" => "2015-12-18T10:12:26+00:00")
       countryside_stewardship_grant["details"].merge!(
         "change_history" => [

@@ -57,6 +57,7 @@ describe AaibReport do
       aaib_report = aaib_reports[0]
 
       aaib_report.delete("publication_state")
+      aaib_report.delete("updated_at")
       aaib_report.merge!("public_updated_at" => "2015-12-18T10:12:26+00:00")
       aaib_report["details"].merge!(
         "change_history" => [

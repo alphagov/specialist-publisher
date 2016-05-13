@@ -61,6 +61,7 @@ describe VehicleRecallsAndFaultsAlert do
       vehicle_recall_and_fault = vehicle_recalls_and_faults[0]
 
       vehicle_recall_and_fault.delete("publication_state")
+      vehicle_recall_and_fault.delete("updated_at")
       vehicle_recall_and_fault.merge!("public_updated_at" => "2015-12-18T10:12:26+00:00")
       vehicle_recall_and_fault["details"].merge!(
         "change_history" => [

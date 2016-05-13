@@ -63,6 +63,7 @@ describe EmploymentAppealTribunalDecision do
       employment_appeal_tribunal_decision = employment_appeal_tribunal_decisions[0]
 
       employment_appeal_tribunal_decision.delete("publication_state")
+      employment_appeal_tribunal_decision.delete("updated_at")
       employment_appeal_tribunal_decision.merge!("public_updated_at" => "2015-12-18T10:12:26+00:00")
       employment_appeal_tribunal_decision["details"].merge!(
         "change_history" => [

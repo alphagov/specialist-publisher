@@ -61,6 +61,7 @@ describe EsiFund do
       esi_fund = esi_funds[0]
 
       esi_fund.delete("publication_state")
+      esi_fund.delete("updated_at")
       esi_fund.merge!("public_updated_at" => "2015-12-18T10:12:26+00:00")
       esi_fund["details"].merge!(
         "change_history" => [

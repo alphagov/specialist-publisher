@@ -60,6 +60,7 @@ describe TaxTribunalDecision do
       tax_tribunal_decision = tax_tribunal_decisions[0]
 
       tax_tribunal_decision.delete("publication_state")
+      tax_tribunal_decision.delete("updated_at")
       tax_tribunal_decision.merge!("public_updated_at" => "2015-12-18T10:12:26+00:00")
       tax_tribunal_decision["details"].merge!(
         "change_history" => [

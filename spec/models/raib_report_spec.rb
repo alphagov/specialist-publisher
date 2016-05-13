@@ -57,6 +57,7 @@ describe RaibReport do
       raib_report = raib_reports[0]
 
       raib_report.delete("publication_state")
+      raib_report.delete("updated_at")
       raib_report.merge!("public_updated_at" => "2015-12-18T10:12:26+00:00")
       raib_report["details"].merge!(
         "change_history" => [

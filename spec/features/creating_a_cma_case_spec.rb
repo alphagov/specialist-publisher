@@ -39,6 +39,8 @@ RSpec.feature "Creating a CMA case", type: :feature do
     expect(page).to have_content('To add an attachment, please save the draft first.')
 
     click_button "Save as draft"
+
+    cma_case.delete("updated_at")
     assert_publishing_api_put_content(content_id, request_json_includes(cma_case))
 
     expect(page.status_code).to eq(200)

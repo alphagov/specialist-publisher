@@ -66,6 +66,7 @@ RSpec.feature "Editing a published CMA case", type: :feature do
     )
 
     changed_json.delete("publication_state")
+    changed_json.delete("updated_at")
 
     visit "/cma-cases/#{content_id}"
 
@@ -104,6 +105,7 @@ RSpec.feature "Editing a published CMA case", type: :feature do
     changed_json["details"]["change_history"] << { "public_timestamp" => "2015-12-03T16:59:13+00:00", "note" => "This is a change note." }
 
     changed_json.delete("publication_state")
+    changed_json.delete("updated_at")
 
     visit "/cma-cases/#{content_id}"
 
