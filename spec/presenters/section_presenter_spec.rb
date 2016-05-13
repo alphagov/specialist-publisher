@@ -1,6 +1,6 @@
 require "spec_helper"
 
-describe SectionPresenter do
+RSpec.describe SectionPresenter do
   let(:manual_content_id) { SecureRandom.uuid }
   let(:manual_base_path) { "/guidance/content-design" }
   let(:content_id) { SecureRandom.uuid }

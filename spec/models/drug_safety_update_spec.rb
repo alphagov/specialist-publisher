@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe DrugSafetyUpdate do
+RSpec.describe DrugSafetyUpdate do
   def drug_safety_update_content_item(n)
     Payloads.drug_safety_update_content_item(
       "base_path" => "/drug-safety-update/example-drug-safety-update-#{n}",

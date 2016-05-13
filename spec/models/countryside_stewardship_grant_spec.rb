@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe CountrysideStewardshipGrant do
+RSpec.describe CountrysideStewardshipGrant do
   def countryside_stewardship_grant_content_item(n)
     Payloads.countryside_stewardship_grant_content_item(
       "base_path" => "/countryside-stewardship-grants/example-countryside-stewardship-grant-#{n}",

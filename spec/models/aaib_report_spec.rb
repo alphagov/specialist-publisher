@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe AaibReport do
+RSpec.describe AaibReport do
   def aaib_report_content_item(n)
     Payloads.aaib_report_content_item(
       "base_path" => "/aaib-reports/example-aaib-report-#{n}",

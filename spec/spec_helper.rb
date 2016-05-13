@@ -38,7 +38,7 @@ require 'gds_api/test_helpers/email_alert_api'
 require 'pundit/rspec'
 
 RSpec.configure do |config|
-  # config.disable_monkey_patching!
+  config.disable_monkey_patching!
 
   config.expect_with :rspec do |c|
     c.syntax = :expect

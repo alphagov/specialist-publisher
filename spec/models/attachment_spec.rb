@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe Attachment do
+RSpec.describe Attachment do
   describe "#new" do
     let(:attachment) {
       Attachment.new(

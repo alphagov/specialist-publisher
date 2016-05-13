@@ -1,7 +1,7 @@
 require "spec_helper"
 require "rummager_finder_publisher"
 
-describe RummagerFinderPublisher do
+RSpec.describe RummagerFinderPublisher do
   let(:rummager) { double(:rummager) }
 
   let(:test_logger) { Logger.new(nil) }

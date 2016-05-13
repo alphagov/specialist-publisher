@@ -1,7 +1,7 @@
 require "spec_helper"
 require "publishing_api_finder_publisher"
 
-describe PublishingApiFinderPublisher do
+RSpec.describe PublishingApiFinderPublisher do
   describe "#call" do
     def make_file(base_path, overrides = {})
       underscore_name = base_path.sub("/", "")

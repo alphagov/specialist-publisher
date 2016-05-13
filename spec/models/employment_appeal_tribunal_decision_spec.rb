@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe EmploymentAppealTribunalDecision do
+RSpec.describe EmploymentAppealTribunalDecision do
   def employment_appeal_tribunal_decision_content_item(n)
     Payloads.employment_appeal_tribunal_decision_content_item(
       "base_path" => "/employment-appeal-tribunal-decisions/example-employment-appeal-tribunal-decision-#{n}",

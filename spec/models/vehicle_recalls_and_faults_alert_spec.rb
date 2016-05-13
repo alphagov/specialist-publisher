@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe VehicleRecallsAndFaultsAlert do
+RSpec.describe VehicleRecallsAndFaultsAlert do
   def vehicle_recalls_and_faults_alert_content_item(n)
     Payloads.vehicle_recalls_and_faults_alert_content_item(
       "base_path" => "/vehicle-recalls-faults/example-vehicle-recalls-and-faults-#{n}",
