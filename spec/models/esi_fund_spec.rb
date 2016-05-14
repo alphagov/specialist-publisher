@@ -30,25 +30,14 @@ RSpec.describe EsiFund do
     }
   }
 
-  let(:fields) { %i[base_path content_id public_updated_at title publication_state] }
   let(:esi_funds) { 10.times.map { |n| esi_fund_content_item(n) } }
-  let(:page) { 1 }
-  let(:per_page) { 50 }
 
   before do
-    publishing_api_has_content(esi_funds, document_type: described_class.publishing_api_document_type, fields: fields, page: page, per_page: per_page)
-
     esi_funds.each do |esi_fund|
       publishing_api_has_item(esi_fund)
     end
 
     Timecop.freeze(Time.parse("2015-12-18 10:12:26 UTC"))
-  end
-
-  context ".all" do
-    it "returns all ESI Funds" do
-      expect(described_class.all(page, per_page).results.length).to be(esi_funds.length)
-    end
   end
 
   context ".find" do
@@ -72,6 +61,7 @@ RSpec.describe EsiFund do
       esi_fund = esi_funds[0]
 
       esi_fund.delete("publication_state")
+      esi_fund.delete("updated_at")
       esi_fund.merge!("public_updated_at" => "2015-12-18T10:12:26+00:00")
       esi_fund["details"].merge!(
         "change_history" => [

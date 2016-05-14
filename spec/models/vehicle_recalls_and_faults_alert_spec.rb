@@ -28,25 +28,14 @@ RSpec.describe VehicleRecallsAndFaultsAlert do
     }
   }
 
-  let(:fields) { %i[base_path content_id public_updated_at title publication_state] }
   let(:vehicle_recalls_and_faults) { 10.times.map { |n| vehicle_recalls_and_faults_alert_content_item(n) } }
-  let(:page) { 1 }
-  let(:per_page) { 50 }
 
   before do
-    publishing_api_has_content(vehicle_recalls_and_faults, document_type: described_class.publishing_api_document_type, fields: fields, page: page, per_page: per_page)
-
     vehicle_recalls_and_faults.each do |vehicle|
       publishing_api_has_item(vehicle)
     end
 
     Timecop.freeze(Time.parse("2015-12-18 10:12:26 UTC"))
-  end
-
-  describe ".all" do
-    it "returns all Vehicle Recalls and Faults" do
-      expect(described_class.all(page, per_page).results.length).to be(vehicle_recalls_and_faults.length)
-    end
   end
 
   describe ".find" do
@@ -72,6 +61,7 @@ RSpec.describe VehicleRecallsAndFaultsAlert do
       vehicle_recall_and_fault = vehicle_recalls_and_faults[0]
 
       vehicle_recall_and_fault.delete("publication_state")
+      vehicle_recall_and_fault.delete("updated_at")
       vehicle_recall_and_fault.merge!("public_updated_at" => "2015-12-18T10:12:26+00:00")
       vehicle_recall_and_fault["details"].merge!(
         "change_history" => [

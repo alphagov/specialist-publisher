@@ -1,5 +1,5 @@
 class AttachmentsController < ApplicationController
-  before_action :check_authorisation, if: :document_type
+  before_action :check_authorisation, if: :document_type_slug
 
   def check_authorisation
     authorize current_format
@@ -17,10 +17,10 @@ class AttachmentsController < ApplicationController
 
     if upload_attachment(attachment, document)
       flash[:success] = "Attached #{attachment.title}"
-      redirect_to edit_document_path(document_type, document.content_id)
+      redirect_to edit_document_path(document_type_slug, document.content_id)
     else
       flash[:danger] = "There was an error uploading the attachment, please try again later."
-      redirect_to new_document_attachment_path(document_type, document.content_id)
+      redirect_to new_document_attachment_path(document_type_slug, document.content_id)
     end
   end
 
@@ -36,10 +36,10 @@ class AttachmentsController < ApplicationController
 
     if upload_attachment(attachment, document)
       flash[:success] = "Attachment succesfully updated"
-      redirect_to edit_document_path(document_type, document.content_id)
+      redirect_to edit_document_path(document_type_slug, document.content_id)
     else
       flash[:danger] = "There was an error uploading the attachment, please try again later."
-      redirect_to edit_document_attachment_path(document_type, document.content_id, attachment.content_id)
+      redirect_to edit_document_attachment_path(document_type_slug, document.content_id, attachment.content_id)
     end
   end
 
@@ -51,7 +51,7 @@ private
     end
   rescue Document::RecordNotFound => e
     flash[:danger] = "Document not found"
-    redirect_to documents_path(document_type: document_type)
+    redirect_to documents_path(document_type_slug: document_type_slug)
 
     Airbrake.notify(e)
   end

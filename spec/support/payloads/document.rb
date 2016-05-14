@@ -12,6 +12,7 @@ module Payloads
       "locale" => "en",
       "phase" => "live",
       "public_updated_at" => "2015-11-16T11:53:30",
+      "updated_at" => "2015-11-15T11:53:30",
       "publication_state" => "draft",
       "details" => {
         "body" => [
@@ -60,6 +61,7 @@ module Payloads
       "locale" => "en",
       "phase" => "live",
       "public_updated_at" => "2015-11-16T11:53:30",
+      "updated_at" => "2015-11-15T11:53:30",
       "publication_state" => "draft",
       "details" => {
         "body" => [
@@ -111,6 +113,7 @@ module Payloads
       "locale" => "en",
       "phase" => "live",
       "public_updated_at" => "2015-12-03T16:59:13+00:00",
+      "updated_at" => "2015-12-02T16:59:13+00:00",
       "details" => {
         "body" => [
           {
@@ -166,6 +169,7 @@ module Payloads
       "locale" => "en",
       "phase" => "live",
       "public_updated_at" => "2015-11-16T11:53:30",
+      "updated_at" => "2015-11-15T11:53:30",
       "publication_state" => "draft",
       "details" => {
         "body" => [
@@ -213,6 +217,7 @@ module Payloads
       "locale" => "en",
       "phase" => "live",
       "public_updated_at" => "2015-11-16T11:53:30+00:00",
+      "updated_at" => "2015-11-15T11:53:30+00:00",
       "publication_state" => "draft",
       "details" => {
         "body" => [
@@ -265,6 +270,7 @@ module Payloads
       "locale" => "en",
       "phase" => "live",
       "public_updated_at" => "2015-11-16T11:53:30",
+      "updated_at" => "2015-11-15T11:53:30",
       "publication_state" => "draft",
       "details" => {
         "body" => [
@@ -315,6 +321,7 @@ module Payloads
       "locale" => "en",
       "phase" => "live",
       "public_updated_at" => "2015-11-16T11:53:30",
+      "updated_at" => "2015-11-15T11:53:30",
       "publication_state" => "draft",
       "details" => {
         "body" => [
@@ -363,6 +370,7 @@ module Payloads
       "locale" => "en",
       "phase" => "live",
       "public_updated_at" => "2015-11-16T11:53:30",
+      "updated_at" => "2015-11-15T11:53:30",
       "publication_state" => "draft",
       "details" => {
         "body" => [
@@ -436,6 +444,7 @@ module Payloads
       "locale" => "en",
       "phase" => "live",
       "public_updated_at" => "2015-11-16T11:53:30",
+      "updated_at" => "2015-11-15T11:53:30",
       "publication_state" => "draft",
       "details" => {
         "body" => [
@@ -485,6 +494,7 @@ module Payloads
       "locale" => "en",
       "phase" => "live",
       "public_updated_at" => "2015-11-16T11:53:30",
+      "updated_at" => "2015-11-15T11:53:30",
       "publication_state" => "draft",
       "details" => {
         "body" => [
@@ -532,6 +542,7 @@ module Payloads
       "locale" => "en",
       "phase" => "live",
       "public_updated_at" => "2015-11-16T11:53:30",
+      "updated_at" => "2015-11-15T11:53:30",
       "publication_state" => "draft",
       "details" => {
         "body" => [
@@ -581,6 +592,7 @@ module Payloads
       "locale" => "en",
       "phase" => "live",
       "public_updated_at" => "2015-11-16T11:53:30",
+      "updated_at" => "2015-11-15T11:53:30",
       "publication_state" => "draft",
       "details" => {
         "body" => [
@@ -643,6 +655,7 @@ module Payloads
       "format" => "manual",
       "locale" => "en",
       "public_updated_at" => "2016-02-02T12:28:41.000Z",
+      "updated_at" => "2016-02-01T12:28:41.000Z",
       "publishing_app" => "specialist-publisher",
       "redirects" => [],
       "rendering_app" => "manuals-frontend",
@@ -694,6 +707,7 @@ module Payloads
         "format" => "manual_section",
         "locale" => "en",
         "public_updated_at" => "2016-02-02T12:28:41.000Z",
+        "updated_at" => "2016-02-01T12:28:41.000Z",
         "publishing_app" => "specialist-publisher",
         "redirects" => [],
         "rendering_app" => "manuals-frontend",
@@ -740,6 +754,7 @@ module Payloads
         "format" => "manual_section",
         "locale" => "en",
         "public_updated_at" => "2016-02-02T12:28:41.000Z",
+        "updated_at" => "2016-02-01T12:28:41.000Z",
         "publishing_app" => "specialist-publisher",
         "redirects" => [],
         "rendering_app" => "manuals-frontend",

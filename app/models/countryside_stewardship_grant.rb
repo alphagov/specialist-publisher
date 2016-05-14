@@ -12,10 +12,6 @@ class CountrysideStewardshipGrant < Document
     super(params, FORMAT_SPECIFIC_FIELDS)
   end
 
-  def self.publishing_api_document_type
-    "countryside_stewardship_grant"
-  end
-
   def self.title
     "Countryside Stewardship Grant"
   end

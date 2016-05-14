@@ -22,19 +22,19 @@ private
   end
 
 
-  def document_type
-    params[:document_type]
+  def document_type_slug
+    params[:document_type_slug]
   end
 
   def current_format
-    @current_format ||= document_types.detect { |format| format.document_type == document_type }
+    @current_format ||= document_models.detect { |model| model.slug == document_type_slug }
   end
 
   def formats_user_can_access
-    document_types.select { |format| policy(format).index? }
+    document_models.select { |model| policy(model).index? }
   end
 
-  def document_types
+  def document_models
     [
       AaibReport,
       CmaCase,

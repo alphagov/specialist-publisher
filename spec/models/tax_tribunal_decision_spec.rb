@@ -27,25 +27,14 @@ RSpec.describe TaxTribunalDecision do
     }
   }
 
-  let(:fields) { %i[base_path content_id public_updated_at title publication_state] }
   let(:tax_tribunal_decisions) { 10.times.map { |n| tax_tribunal_decision_content_item(n) } }
-  let(:page) { 1 }
-  let(:per_page) { 50 }
 
   before do
-    publishing_api_has_content(tax_tribunal_decisions, document_type: described_class.publishing_api_document_type, fields: fields, page: page, per_page: per_page)
-
     tax_tribunal_decisions.each do |decision|
       publishing_api_has_item(decision)
     end
 
     Timecop.freeze(Time.parse("2015-12-18 10:12:26 UTC"))
-  end
-
-  describe ".all" do
-    it "returns all Tax Tribunal Decisions" do
-      expect(described_class.all(page, per_page).results.length).to be(tax_tribunal_decisions.length)
-    end
   end
 
   describe ".find" do
@@ -71,6 +60,7 @@ RSpec.describe TaxTribunalDecision do
       tax_tribunal_decision = tax_tribunal_decisions[0]
 
       tax_tribunal_decision.delete("publication_state")
+      tax_tribunal_decision.delete("updated_at")
       tax_tribunal_decision.merge!("public_updated_at" => "2015-12-18T10:12:26+00:00")
       tax_tribunal_decision["details"].merge!(
         "change_history" => [

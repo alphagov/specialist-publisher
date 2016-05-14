@@ -29,7 +29,6 @@ RSpec.feature "Editing a published CMA case", type: :feature do
   }
 
   let(:content_id) { published_cma_case['content_id'] }
-  let(:fields) { [:base_path, :content_id, :public_updated_at, :title, :publication_state] }
   let(:file_name) { "cma_case_image.jpg" }
   let(:asset_url) { "http://assets-origin.dev.gov.uk/media/56c45553759b740609000000/#{file_name}" }
   let(:asset_manager_response) {
@@ -39,16 +38,13 @@ RSpec.feature "Editing a published CMA case", type: :feature do
     }
   }
 
-  let(:page_number) { 1 }
-  let(:per_page) { 50 }
-
   before do
     log_in_as_editor(:cma_editor)
 
     stub_any_publishing_api_put_content
     stub_any_publishing_api_patch_links
 
-    publishing_api_has_content([published_cma_case], document_type: CmaCase.publishing_api_document_type, fields: fields, page: page_number, per_page: per_page)
+    publishing_api_has_content([published_cma_case], hash_including(document_type: CmaCase.document_type))
     publishing_api_has_item(published_cma_case)
 
     stub_request(:post, "#{Plek.find('asset-manager')}/assets")
@@ -70,6 +66,7 @@ RSpec.feature "Editing a published CMA case", type: :feature do
     )
 
     changed_json.delete("publication_state")
+    changed_json.delete("updated_at")
 
     visit "/cma-cases/#{content_id}"
 
@@ -108,6 +105,7 @@ RSpec.feature "Editing a published CMA case", type: :feature do
     changed_json["details"]["change_history"] << { "public_timestamp" => "2015-12-03T16:59:13+00:00", "note" => "This is a change note." }
 
     changed_json.delete("publication_state")
+    changed_json.delete("updated_at")
 
     visit "/cma-cases/#{content_id}"
 

@@ -25,25 +25,14 @@ RSpec.describe CountrysideStewardshipGrant do
     }
   }
 
-  let(:fields) { %i[base_path content_id public_updated_at title publication_state] }
   let(:countryside_stewardship_grants) { 10.times.map { |n| countryside_stewardship_grant_content_item(n) } }
-  let(:page) { 1 }
-  let(:per_page) { 50 }
 
   before do
-    publishing_api_has_content(countryside_stewardship_grants, document_type: described_class.publishing_api_document_type, fields: fields, page: page, per_page: per_page)
-
     countryside_stewardship_grants.each do |countryside_stewardship_grant|
       publishing_api_has_item(countryside_stewardship_grant)
     end
 
     Timecop.freeze("2015-12-18 10:12:26 UTC")
-  end
-
-  describe ".all" do
-    it "returns all Countryside Stewardship Grants" do
-      expect(described_class.all(page, per_page).results.length).to be(countryside_stewardship_grants.length)
-    end
   end
 
   describe ".find" do
@@ -66,6 +55,7 @@ RSpec.describe CountrysideStewardshipGrant do
       countryside_stewardship_grant = countryside_stewardship_grants[0]
 
       countryside_stewardship_grant.delete("publication_state")
+      countryside_stewardship_grant.delete("updated_at")
       countryside_stewardship_grant.merge!("public_updated_at" => "2015-12-18T10:12:26+00:00")
       countryside_stewardship_grant["details"].merge!(
         "change_history" => [

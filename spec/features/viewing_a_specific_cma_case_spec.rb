@@ -1,7 +1,6 @@
 require 'spec_helper'
 
 RSpec.feature "Viewing a specific case", type: :feature do
-  let(:fields) { [:base_path, :content_id, :public_updated_at, :title, :publication_state] }
   let(:cma_case_with_attachments) {
     Payloads.cma_case_with_attachments(
       "title" => "CMA Case With Attachment"
@@ -36,14 +35,10 @@ RSpec.feature "Viewing a specific case", type: :feature do
     ten_example_cases << cma_case_bulk_published
   }
 
-  let(:page_number) { 1 }
-  let(:per_page) { 50 }
-
   before do
     log_in_as_editor(:cma_editor)
 
-    publishing_api_has_content(cma_cases, document_type: CmaCase.publishing_api_document_type, fields: fields, page: page_number, per_page: per_page)
-    publishing_api_has_content([cma_cases.first], document_type: CmaCase.publishing_api_document_type, fields: fields, page: page_number, per_page: per_page, q: "0")
+    publishing_api_has_content(cma_cases, hash_including(document_type: CmaCase.document_type))
 
     cma_cases.each do |cma_case|
       publishing_api_has_item(cma_case)

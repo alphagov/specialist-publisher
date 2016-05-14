@@ -26,25 +26,14 @@ RSpec.describe MaibReport do
     }
   }
 
-  let(:fields) { %i[base_path content_id public_updated_at title publication_state] }
   let(:maib_reports) { 10.times.map { |n| maib_report_content_item(n) } }
-  let(:page) { 1 }
-  let(:per_page) { 50 }
 
   before do
-    publishing_api_has_content(maib_reports, document_type: described_class.publishing_api_document_type, fields: fields, page: page, per_page: per_page)
-
     maib_reports.each do |maib_report|
       publishing_api_has_item(maib_report)
     end
 
     Timecop.freeze(Time.parse("2015-12-18 10:12:26 UTC"))
-  end
-
-  context ".all" do
-    it "returns all MAIB Reports" do
-      expect(described_class.all(page, per_page).results.length).to be(maib_reports.length)
-    end
   end
 
   context ".find" do
@@ -68,6 +57,7 @@ RSpec.describe MaibReport do
       maib_report = maib_reports[0]
 
       maib_report.delete("publication_state")
+      maib_report.delete("updated_at")
       maib_report.merge!("public_updated_at" => "2015-12-18T10:12:26+00:00")
       maib_report["details"].merge!(
         "change_history" => [

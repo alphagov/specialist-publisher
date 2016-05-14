@@ -26,34 +26,14 @@ RSpec.describe AaibReport do
     }
   }
 
-  let(:fields) { %i[base_path content_id public_updated_at title publication_state] }
   let(:aaib_reports) { 10.times.map { |n| aaib_report_content_item(n) } }
-  let(:page) { 1 }
-  let(:per_page) { 50 }
 
   before do
-    publishing_api_has_content(aaib_reports, document_type: described_class.publishing_api_document_type, fields: fields, page: page, per_page: per_page)
-
     aaib_reports.each do |aaib_report|
       publishing_api_has_item(aaib_report)
     end
 
     Timecop.freeze(Time.parse("2015-12-18 10:12:26 UTC"))
-  end
-
-  describe ".all" do
-    it "returns all AAIB Reports" do
-      expect(described_class.all(page, per_page).results.length).to be(aaib_reports.length)
-    end
-
-    it "returns AAIB with necessary info" do
-      sample_aaib_report = described_class.all(1, 50).results.sample
-      expect(sample_aaib_report.base_path.nil?).to eq(false)
-      expect(sample_aaib_report.content_id.nil?).to eq(false)
-      expect(sample_aaib_report.title.nil?).to eq(false)
-      expect(sample_aaib_report.publication_state.nil?).to eq(false)
-      expect(sample_aaib_report.public_updated_at.nil?).to eq(false)
-    end
   end
 
   describe ".find" do
@@ -77,6 +57,7 @@ RSpec.describe AaibReport do
       aaib_report = aaib_reports[0]
 
       aaib_report.delete("publication_state")
+      aaib_report.delete("updated_at")
       aaib_report.merge!("public_updated_at" => "2015-12-18T10:12:26+00:00")
       aaib_report["details"].merge!(
         "change_history" => [

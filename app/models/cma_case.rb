@@ -20,10 +20,6 @@ class CmaCase < Document
     super(params, FORMAT_SPECIFIC_FIELDS)
   end
 
-  def self.publishing_api_document_type
-    "cma_case"
-  end
-
   def self.title
     "CMA Case"
   end

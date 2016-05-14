@@ -1,7 +1,7 @@
 <li class="document">
-  <%= link_to document.title, document_path(current_format.document_type, document.content_id), class: 'document-title' %>
+  <%= link_to document.title, document_path(current_format.slug, document.content_id), class: 'document-title' %>
   <ul class="metadata">
-    <li class="text-muted">Updated <%= time_ago_in_words(document.public_updated_at) %> ago</li>
+    <li class="text-muted">Updated <%= time_ago_in_words(document.updated_at) %> ago</li>
     <li>
       <%= state(document) %>
     </li>

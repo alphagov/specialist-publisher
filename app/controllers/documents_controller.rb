@@ -6,7 +6,7 @@ class DocumentsController < ApplicationController
   include ActionView::Helpers::TextHelper
 
   before_action :fetch_document, only: [:edit, :show, :publish, :update]
-  before_action :check_authorisation, if: :document_type
+  before_action :check_authorisation, if: :document_type_slug
 
   def check_authorisation
     if current_format
@@ -31,13 +31,13 @@ class DocumentsController < ApplicationController
 
   def create
     @document = current_format.new(
-      filtered_params(params[current_format.format_name])
+      filtered_params(params[current_format.document_type])
     )
 
     if @document.valid?
       if @document.save!
         flash[:success] = "Created #{@document.title}"
-        redirect_to document_path(current_format.document_type, @document.content_id)
+        redirect_to document_path(current_format.slug, @document.content_id)
       else
         flash.now[:danger] = "There was an error creating #{@document.title}. Please try again later."
         render :new
@@ -53,7 +53,7 @@ class DocumentsController < ApplicationController
   def edit; end
 
   def update
-    new_params = filtered_params(params[current_format.format_name])
+    new_params = filtered_params(params[current_format.document_type])
 
     new_params.each do |k, v|
       @document.public_send(:"#{k}=", v)
@@ -62,7 +62,7 @@ class DocumentsController < ApplicationController
     if @document.valid?
       if @document.save!
         flash[:success] = "Updated #{@document.title}"
-        redirect_to document_path(current_format.document_type, @document.content_id)
+        redirect_to document_path(current_format.slug, @document.content_id)
       else
         flash.now[:danger] = "There was an error updating #{@document.title}. Please try again later."
         render :edit
@@ -79,7 +79,7 @@ class DocumentsController < ApplicationController
     else
       flash[:danger] = "There was an error publishing #{@document.title}. Please try again later."
     end
-    redirect_to document_path(current_format.document_type, params[:content_id])
+    redirect_to document_path(current_format.slug, params[:content_id])
   end
 
 private
@@ -105,7 +105,7 @@ private
     @document = current_format.find(params[:content_id])
   rescue Document::RecordNotFound => e
     flash[:danger] = "Document not found"
-    redirect_to documents_path(document_type: document_type)
+    redirect_to documents_path(document_type_slug: document_type_slug)
 
     Airbrake.notify(e)
   end

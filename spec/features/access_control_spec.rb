@@ -1,14 +1,11 @@
 require 'spec_helper'
 
 RSpec.feature "Access control", type: :feature do
-  let(:fields) { [:base_path, :content_id, :public_updated_at, :title, :publication_state] }
-  let(:page_number) { 1 }
-  let(:per_page) { 50 }
   let(:manual_fields) { %i[content_id description title details public_updated_at publication_state base_path update_type] }
 
   before do
-    publishing_api_has_content([], document_type: CmaCase.publishing_api_document_type, fields: fields, page: page_number, per_page: per_page)
-    publishing_api_has_content([], document_type: AaibReport.publishing_api_document_type, fields: fields, page: page_number, per_page: per_page)
+    publishing_api_has_content([], hash_including(document_type: CmaCase.document_type))
+    publishing_api_has_content([], hash_including(document_type: AaibReport.document_type))
     publishing_api_has_content([], document_type: 'manual', fields: manual_fields, per_page: 10000)
   end
 

@@ -25,10 +25,7 @@ RSpec.describe DrugSafetyUpdate do
     }
   }
 
-  let(:fields) { %i[base_path content_id public_updated_at title publication_state] }
   let(:drug_safety_updates) { 10.times.map { |n| drug_safety_update_content_item(n) } }
-  let(:page) { 1 }
-  let(:per_page) { 50 }
 
   before do
     drug_safety_updates.each do |drug_safety_update|
@@ -36,13 +33,6 @@ RSpec.describe DrugSafetyUpdate do
     end
 
     Timecop.freeze(Time.parse("2015-12-18 10:12:26 UTC"))
-  end
-
-  describe ".all" do
-    it "returns all Drug Safety Updates" do
-      publishing_api_has_content(drug_safety_updates, document_type: described_class.publishing_api_document_type, fields: fields, page: page, per_page: per_page)
-      expect(described_class.all(page, per_page).results.length).to be(drug_safety_updates.length)
-    end
   end
 
   describe ".find" do
@@ -65,6 +55,7 @@ RSpec.describe DrugSafetyUpdate do
       drug_safety_update = drug_safety_updates[0]
 
       drug_safety_update.delete("publication_state")
+      drug_safety_update.delete("updated_at")
       drug_safety_update.merge!("public_updated_at" => "2015-12-18T10:12:26+00:00")
       drug_safety_update["details"].merge!(
         "change_history" => [

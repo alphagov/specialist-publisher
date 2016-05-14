@@ -15,10 +15,6 @@ class EsiFund < Document
     super(params, FORMAT_SPECIFIC_FIELDS)
   end
 
-  def self.publishing_api_document_type
-    "esi_fund"
-  end
-
   def self.title
     "ESI Fund"
   end

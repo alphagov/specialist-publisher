@@ -13,10 +13,6 @@ class MaibReport < Document
     super(params, FORMAT_SPECIFIC_FIELDS)
   end
 
-  def self.publishing_api_document_type
-    "maib_report"
-  end
-
   def self.title
     "MAIB Report"
   end

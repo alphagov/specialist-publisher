@@ -22,10 +22,6 @@ class VehicleRecallsAndFaultsAlert < Document
     super(params, FORMAT_SPECIFIC_FIELDS)
   end
 
-  def self.publishing_api_document_type
-    "vehicle_recalls_and_faults_alert"
-  end
-
   def self.title
     "Vehicle Recalls and Faults Alert"
   end
