@@ -1,3 +1,17 @@
+$elements-red: #b10e1e;
+
+.elements-error-summary {
+  border: 5px solid $elements-red;
+  padding: 15px;
+  color: $elements-red;
+  font-weight: bold;
+
+  h4 {
+    margin-top: 0;
+    color: black;
+  }
+}
+
 form {
 
   .select2 {
@@ -6,6 +20,27 @@ form {
 
   .short-textarea {
     height: 50px;
+  }
+
+  .elements-error {
+    border-left: 5px solid $elements-red;
+    padding-left: 15px;
+
+    label {
+      color: black;
+    }
+
+    .elements-error-message {
+      color: $elements-red;
+      font-weight: bold;
+    }
+
+    input, textarea {
+      border-width: 2px;
+      border-radius: 0;
+      border-color: $elements-red;
+    }
+
   }
 
   .error-list {

@@ -33,6 +33,11 @@
 <% end %>
 
 <% content_for :content do %>
+  <% if flash[:errors].present? %>
+    <div class="elements-error-summary add-bottom-margin">
+      <%= flash[:errors] %>
+    </div>
+  <% end %>
   <%= render partial: 'shared/breadcrumbs' %>
   <%= yield %>
   <script>

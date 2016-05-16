@@ -43,7 +43,7 @@ class DocumentsController < ApplicationController
         render :new
       end
     else
-      flash.now[:danger] = document_error_messages
+      flash.now[:errors] = document_error_messages
       render :new, status: 422
     end
   end
@@ -68,7 +68,7 @@ class DocumentsController < ApplicationController
         render :edit
       end
     else
-      flash.now[:danger] = document_error_messages
+      flash.now[:errors] = document_error_messages
       render :edit, status: 422
     end
   end
@@ -85,16 +85,14 @@ class DocumentsController < ApplicationController
 private
 
   def document_error_messages
-    document_errors = @document.errors.messages
+    @document.errors.messages
     heading = content_tag(
-      :p,
+      :h4,
       %{
-        There #{document_errors.length > 1 ? 'were' : 'was'} the following
-        #{document_errors.length > 1 ? 'errors' : 'error'} with your
-        #{current_format.title.singularize}:
+        Please fix the following errors
       }
     )
-    errors = content_tag :ul do
+    errors = content_tag :ul, class: "list-unstyled remove-bottom-margin" do
       @document.errors.full_messages.map { |e| content_tag(:li, e) }.join('').html_safe
     end
 
