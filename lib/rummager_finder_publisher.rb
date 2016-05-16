@@ -22,15 +22,11 @@ private
   attr_reader :schemas, :logger
 
   def should_publish_in_this_environment?(schema)
-    !pre_production?(schema) || should_publish_pre_production_finders?
+    !pre_production?(schema) || SpecialistPublisher.should_publish_pre_production_finders?
   end
 
   def pre_production?(schema)
     schema[:file]["pre_production"] == true
-  end
-
-  def should_publish_pre_production_finders?
-    SpecialistPublisher::Application.config.publish_pre_production_finders
   end
 
   def export_finder(schema)
