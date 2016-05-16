@@ -22,8 +22,4 @@ class SearchPresenter
 private
 
   attr_reader :document
-
-  def publishing_api
-    @publishing_api ||= Services.publishing_api
-  end
 end
