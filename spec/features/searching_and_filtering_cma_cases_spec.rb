@@ -34,8 +34,19 @@ RSpec.feature "Searching and filtering", type: :feature do
       expect(page).to have_content("Example CMA Case 0")
       expect(page).to have_content("Example CMA Case 1")
       expect(page).to have_content("Example CMA Case 2")
+    end
+
+    scenario "viewing the publication state on the index page" do
+      visit "/cma-cases"
+
       within(".document-list li.document:nth-child(2)") do
+        expect(page).to have_css(".label-default")
         expect(page).to have_content("published")
+      end
+
+      within(".document-list li.document:nth-child(3)") do
+        expect(page).to have_css(".label-primary")
+        expect(page).to have_content("draft")
       end
     end
 
