@@ -16,14 +16,10 @@ class SearchPresenter
   end
 
   def indexable_content
-    document.body
+    Govspeak::Document.new(document.body).to_text
   end
 
 private
 
   attr_reader :document
-
-  def publishing_api
-    @publishing_api ||= Services.publishing_api
-  end
 end

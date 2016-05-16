@@ -18,7 +18,7 @@ RSpec.describe SearchPresenter do
 
     describe '#indexable_content' do
       it 'indexes the body alone' do
-        expect(presenter.indexable_content).to eql('## A Title')
+        expect(presenter.indexable_content).to eql('A Title')
       end
     end
 

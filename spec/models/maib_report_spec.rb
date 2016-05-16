@@ -20,7 +20,7 @@ RSpec.describe MaibReport do
       "title" => "Example MAIB Report 0",
       "description" => "This is the summary of example MAIB Report 0",
       "link" => "/maib-reports/example-maib-report-0",
-      "indexable_content" => "## Header" + ("\r\n\r\nThis is the long body of an example MAIB Report" * 10),
+      "indexable_content" => "Header " + (["This is the long body of an example MAIB Report"] * 10).join(" "),
       "public_timestamp" => "2015-11-16T11:53:30+00:00",
       "date_of_occurrence" => "2015-10-10",
     }

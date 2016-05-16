@@ -20,7 +20,7 @@ RSpec.describe RaibReport do
       "title" => "Example RAIB Report 0",
       "description" => "This is the summary of example RAIB Report 0",
       "link" => "/raib-reports/example-raib-report-0",
-      "indexable_content" => "## Header" + ("\r\n\r\nThis is the long body of an example RAIB Report" * 10),
+      "indexable_content" => "Header " + (["This is the long body of an example RAIB Report"] * 10).join(" "),
       "public_timestamp" => "2015-11-16T11:53:30+00:00",
       "date_of_occurrence" => "2015-10-10",
     }

@@ -6,7 +6,7 @@ RSpec.feature "Publishing a CMA case", type: :feature do
       "title" => "Example CMA Case",
       "description" => "This is the summary of an example CMA case",
       "link" => "/cma-cases/example-cma-case",
-      "indexable_content" => "## Header" + ("\r\n\r\nThis is the long body of an example CMA case" * 10),
+      "indexable_content" => "Header " + (["This is the long body of an example CMA case"] * 10).join(" "),
       "public_timestamp" => "2015-11-16T11:53:30+00:00",
       "opened_date" => "2014-01-01",
       "closed_date" => nil,
