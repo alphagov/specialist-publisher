@@ -20,7 +20,7 @@ RSpec.describe TaxTribunalDecision do
       "title" => "Example Tax Tribunal Decision 0",
       "description" => "This is the summary of example Tax Tribunal Decision 0",
       "link" => "/tax-and-chancery-tribunal-decisions/example-tax-tribunal-decision-0",
-      "indexable_content" => "## Header" + ("\r\n\r\nThis is the long body of an example Tax Tribunal Decision" * 10),
+      "indexable_content" => "Header " + (["This is the long body of an example Tax Tribunal Decision"] * 10).join(" "),
       "public_timestamp" => "2015-11-16T11:53:30+00:00",
       "tribunal_decision_category" => "banking",
       "tribunal_decision_decision_date" => "2015-07-30",

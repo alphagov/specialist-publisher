@@ -20,7 +20,7 @@ RSpec.describe VehicleRecallsAndFaultsAlert do
       "title" => "Example Vehicle Recalls And Faults 0",
       "description" => "This is the summary of example Vehicle Recalls And Faults 0",
       "link" => "/vehicle-recalls-faults/example-vehicle-recalls-and-faults-0",
-      "indexable_content" => "## Header" + ("\r\n\r\nThis is the long body of an example Vehicle Recalls And Faults" * 10),
+      "indexable_content" => "Header " + (["This is the long body of an example Vehicle Recalls And Faults"] * 10).join(" "),
       "public_timestamp" => "2015-11-16T11:53:30+00:00",
       "alert_issue_date" => "2015-04-28",
       "build_start_date" => "2015-04-28",

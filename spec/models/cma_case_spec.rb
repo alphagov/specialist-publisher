@@ -20,7 +20,7 @@ RSpec.describe CmaCase do
       "title" => "Example CMA Case 0",
       "description" => "This is the summary of example CMA case 0",
       "link" => "/cma-cases/example-cma-case-0",
-      "indexable_content" => "## Header" + ("\r\n\r\nThis is the long body of an example CMA case" * 10),
+      "indexable_content" => "Header " + (["This is the long body of an example CMA case"] * 10).join(" "),
       "public_timestamp" => "2015-12-03T16:59:13+00:00",
       "opened_date" => "2014-01-01",
       "closed_date" => nil,

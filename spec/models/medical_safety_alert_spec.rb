@@ -20,7 +20,7 @@ RSpec.describe MedicalSafetyAlert do
       "title" => "Example Medical Safety Alert 0",
       "description" => "This is the summary of example Medical Safety Alert 0",
       "link" => "/drug-device-alerts/example-medical-safety-alert-0",
-      "indexable_content" => "## Header" + ("\r\n\r\nThis is the long body of an example Medical Safety Alert" * 10),
+      "indexable_content" => "Header " + (["This is the long body of an example Medical Safety Alert"] * 10).join(" "),
       "public_timestamp" => "2015-11-16T11:53:30+00:00",
       "alert_type" => "company-led-drugs",
       "issued_date" => "2016-02-01",

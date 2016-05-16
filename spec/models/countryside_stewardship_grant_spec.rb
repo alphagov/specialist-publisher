@@ -20,7 +20,7 @@ RSpec.describe CountrysideStewardshipGrant do
       "title" => "Example Countryside Stewardship Grant 0",
       "description" => "This is the summary of example Countryside Stewardship Grant 0",
       "link" => "/countryside-stewardship-grants/example-countryside-stewardship-grant-0",
-      "indexable_content" => "## Header" + ("\r\n\r\nThis is the long body of an example Countryside Stewardship Grant" * 10),
+      "indexable_content" => "Header " + (["This is the long body of an example Countryside Stewardship Grant"] * 10).join(" "),
       "public_timestamp" => "2015-11-16T11:53:30+00:00",
     }
   }

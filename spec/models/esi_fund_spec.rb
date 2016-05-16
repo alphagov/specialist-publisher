@@ -20,7 +20,7 @@ RSpec.describe EsiFund do
       "title" => "Example ESI Fund 0",
       "description" => "This is the summary of example ESI Fund 0",
       "link" => "/european-structural-investment-funds/example-esi-fund-0",
-      "indexable_content" => "## Header" + ("\r\n\r\nThis is the long body of an example ESI Fund" * 10),
+      "indexable_content" => "Header " + (["This is the long body of an example ESI Fund"] * 10).join(" "),
       "public_timestamp" => "2015-11-16T11:53:30+00:00",
       "fund_state" => nil,
       "fund_type" => nil,

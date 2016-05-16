@@ -16,7 +16,7 @@ class SearchPresenter
   end
 
   def indexable_content
-    document.body
+    Govspeak::Document.new(document.body).to_text
   end
 
 private
