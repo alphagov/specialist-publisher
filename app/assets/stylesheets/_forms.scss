@@ -1,7 +1,9 @@
+$elements-red: #b10e1e;
+
 .elements-error-summary {
-  border: 5px solid #b10e1e;
+  border: 5px solid $elements-red;
   padding: 15px;
-  color: #b10e1e;
+  color: $elements-red;
   font-weight: bold;
 
   h4 {
@@ -21,7 +23,7 @@ form {
   }
 
   .elements-error {
-    border-left: 5px solid #b10e1e;
+    border-left: 5px solid $elements-red;
     padding-left: 15px;
 
     label {
@@ -29,14 +31,14 @@ form {
     }
 
     .elements-error-message {
-      color: #b10e1e;
+      color: $elements-red;
       font-weight: bold;
     }
 
     input, textarea {
       border-width: 2px;
       border-radius: 0;
-      border-color: #b10e1e;
+      border-color: $elements-red;
     }
 
   }
