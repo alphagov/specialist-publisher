@@ -6,7 +6,7 @@ module ApplicationHelper
   def state(document)
     state = document.publication_state == "live" ? "published" : document.publication_state
 
-    if document.draft?
+    if document.publication_state == "draft"
       classes = "label label-primary"
     else
       classes = "label label-default"
