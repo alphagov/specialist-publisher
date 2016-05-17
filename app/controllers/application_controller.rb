@@ -39,6 +39,7 @@ private
       AaibReport,
       CmaCase,
       CountrysideStewardshipGrant,
+      DfidResearchOutput,
       DrugSafetyUpdate,
       EmploymentAppealTribunalDecision,
       EsiFund,

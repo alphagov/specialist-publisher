@@ -204,6 +204,52 @@ module Payloads
     }.deep_merge(attrs)
   end
 
+  def self.dfid_research_output_content_item(attrs = {})
+    {
+      "content_id" => SecureRandom.uuid,
+      "base_path" => "/dfid-research-outputs/example-dfid-research-output",
+      "title" => "Example DFID Research output",
+      "description" => "This is the summary of an example DFID research output",
+      "document_type" => "dfid_research_output",
+      "schema_name" => "specialist_document",
+      "publishing_app" => "specialist-publisher",
+      "rendering_app" => "specialist-frontend",
+      "locale" => "en",
+      "phase" => "live",
+      "public_updated_at" => "2016-03-15T16:59:59+00:00",
+      "details" => {
+        "body" => [
+          {
+            "content_type" => "text/govspeak",
+            "content" => "## Header" + ("\r\n\r\nThis is the long body of an example DFID research output" * 10)
+          },
+          {
+            "content_type" => "text/html",
+            "content" => ("<h2 id=\"header\">Header</h2>\n" + "\n<p>This is the long body of an example DFID research output</p>\n" * 10)
+          }
+        ],
+        "metadata" => {
+          "country" => "GB",
+          "document_type" => "dfid_research_output",
+        },
+        "change_history" => [
+          {
+            "public_timestamp" => "2016-03-15T16:59:59+00:00",
+            "note" => "First published."
+          }
+        ]
+      },
+      "routes" => [
+        {
+          "path" => "/dfid-research-outputs/example-dfid-research-output",
+          "type" => "exact",
+        }
+      ],
+      "redirects" => [],
+      "update_type" => "major",
+    }.deep_merge(attrs)
+  end
+
   def self.drug_safety_update_content_item(attrs = {})
     {
       "content_id" => SecureRandom.uuid,
