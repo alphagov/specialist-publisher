@@ -15,7 +15,7 @@ RSpec.feature 'The root specialist-publisher page', type: :feature do
 
       json_schema_count = Dir['lib/documents/schemas/*.json'].length
       expect(page).to have_css(
-        '.dropdown-menu.finders li',
+        '.dropdown-menu:nth-of-type(1) li',
         count: json_schema_count
       )
     end
