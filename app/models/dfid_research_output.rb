@@ -9,10 +9,6 @@ class DfidResearchOutput < Document
     super(params, FORMAT_SPECIFIC_FIELDS)
   end
 
-  def self.publishing_api_document_type
-    'dfid_research_output'
-  end
-
   def self.title
     'DFID Research Output'
   end
