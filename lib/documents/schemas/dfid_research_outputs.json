@@ -823,14 +823,6 @@
           "label": "Zimbabwe"
         }
       ]
-    },
-    {
-      "key": "published_date",
-      "name": "Published",
-      "short_name": "Published",
-      "type": "date",
-      "display_as_result_metadata": true,
-      "filterable": false
     }
   ]
 }
