@@ -5,6 +5,12 @@ RSpec.describe Document do
     def self.title
       "My Document Type"
     end
+
+    attr_accessor :field1, :field2, :field3
+
+    def initialize(params = {})
+      super(params, [:field1, :field2, :field3])
+    end
   end
 
   it "has a document_type for building URLs" do
@@ -37,6 +43,100 @@ RSpec.describe Document do
         )
 
       MyDocumentType.all(1, 20, q: "foo")
+    end
+  end
+
+  let(:finder_schema) {
+    {
+      base_path: "/my-document-types",
+      filter: {
+        document_type: "my_document_type",
+      }
+    }.deep_stringify_keys
+  }
+
+  let(:payload) {
+    FactoryGirl.create(:document,
+      document_type: "my_document_type",
+      title: "Example document",
+      description: "This is a summary",
+      base_path: "/my-document-types/example-document",
+      details: {
+        body: [
+          {
+            content_type: "text/govspeak",
+            content: "## Header" + ("\r\n\r\nThis is the long body of an example document" * 10),
+          },
+          {
+            content_type: "text/html",
+            content: ("<h2 id=\"header\">Header</h2>\n" + "\n<p>This is the long body of an example document</p>\n" * 10),
+          },
+        ],
+        metadata: {
+          field1: "2015-12-01",
+          field2: "open",
+          field3: %w(x y z),
+          document_type: "my_document_type",
+          bulk_published: true,
+        }
+      })
+  }
+  let(:document) { MyDocumentType.from_publishing_api(payload) }
+
+  before do
+    allow_any_instance_of(FinderSchema).to receive(:load_schema_for).with("my_document_types").
+      and_return(finder_schema)
+  end
+
+  context "successful #publish!" do
+    before do
+      stub_publishing_api_publish(document.content_id, {})
+      stub_any_rummager_post_with_queueing_enabled
+      @email_alert_api = email_alert_api_accepts_alert
+    end
+
+    it "sends a payload to Publishing API" do
+      expect(document.publish!).to eq(true)
+
+      assert_publishing_api_publish(document.content_id)
+    end
+
+    it "sends a payload to Rummager" do
+      expect(document.publish!).to eq(true)
+
+      assert_rummager_posted_item(
+        "title" => "Example document",
+        "description" => "This is a summary",
+        "indexable_content" => "Header " + (["This is the long body of an example document"] * 10).join(" "),
+        "link" => "/my-document-types/example-document",
+        "public_timestamp" => "2015-11-16T11:53:30+00:00",
+        "field1" => "2015-12-01",
+        "field2" => "open",
+      )
+    end
+
+    it "alerts the email API for major updates" do
+      document.update_type = "major"
+
+      expect(document.publish!).to eq(true)
+
+      assert_email_alert_sent(
+        "tags" => {
+          "format" => "my_document_type",
+          "field1" => "2015-12-01",
+          "field2" => "open",
+          "field3" => %w(x y z),
+        },
+        "document_type" => "my_document_type"
+      )
+    end
+
+    it "doesn't alerts the email API for minor updates" do
+      document.update_type = "minor"
+
+      expect(document.publish!).to eq(true)
+
+      expect(@email_alert_api).to_not have_been_requested
     end
   end
 end
