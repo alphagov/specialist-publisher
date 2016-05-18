@@ -64,26 +64,4 @@ RSpec.describe AaibReport do
       expect(aaib_report.to_json).to be_valid_against_schema('specialist_document')
     end
   end
-
-  describe "#publish!" do
-    before do
-      email_alert_api_accepts_alert
-    end
-
-    let(:aaib_report) { described_class.find(aaib_reports[0]["content_id"]) }
-
-    it "notifies Airbrake and returns false if publishing-api does not return status 200" do
-      expect(Airbrake).to receive(:notify)
-      stub_publishing_api_publish(aaib_reports[0]["content_id"], {}, status: 503)
-      stub_any_rummager_post_with_queueing_enabled
-      expect(aaib_report.publish!).to eq(false)
-    end
-
-    it "notifies Airbrake and returns false if rummager does not return status 200" do
-      expect(Airbrake).to receive(:notify)
-      stub_publishing_api_publish(aaib_reports[0]["content_id"], {})
-      stub_request(:post, %r{#{Plek.new.find('search')}/documents}).to_return(status: 503)
-      expect(aaib_report.publish!).to eq(false)
-    end
-  end
 end
