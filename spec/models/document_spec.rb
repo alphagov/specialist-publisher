@@ -189,4 +189,18 @@ RSpec.describe Document do
     document.delete("publication_state")
     document
   end
+
+  describe ".find" do
+    it "returns a document" do
+      publishing_api_has_item(payload)
+
+      found_document = MyDocumentType.find(document.content_id)
+
+      expect(found_document.base_path).to eq(payload["base_path"])
+      expect(found_document.title).to     eq(payload["title"])
+      expect(found_document.summary).to   eq(payload["description"])
+      expect(found_document.body).to      eq(payload["details"]["body"][0]["content"])
+      expect(found_document.field3).to    eq(payload["details"]["metadata"]["field3"])
+    end
+  end
 end
