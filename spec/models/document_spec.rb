@@ -139,4 +139,38 @@ RSpec.describe Document do
       expect(@email_alert_api).to_not have_been_requested
     end
   end
+
+  describe "#save!" do
+    before do
+      publishing_api_has_item(payload)
+      Timecop.freeze(Time.parse("2015-12-18 10:12:26 UTC"))
+    end
+
+    it "saves document" do
+      stub_any_publishing_api_put_content
+      stub_any_publishing_api_patch_links
+
+      c = MyDocumentType.find(payload["content_id"])
+      expect(c.save!).to eq(true)
+
+      expected_payload = write_payload(payload.deep_stringify_keys).deep_merge(
+        "public_updated_at" => "2015-12-18T10:12:26+00:00",
+        "details" => {
+          "change_history" => [
+            {
+              "public_timestamp" => "2015-12-18T10:12:26+00:00",
+              "note" => "First published.",
+            }
+          ]
+        }
+      )
+      assert_publishing_api_put_content(c.content_id, expected_payload)
+    end
+  end
+
+  def write_payload(document)
+    document.delete("updated_at")
+    document.delete("publication_state")
+    document
+  end
 end
