@@ -25,19 +25,6 @@ RSpec.describe EsiFund do
     Timecop.freeze(Time.parse("2015-12-18 10:12:26 UTC"))
   end
 
-  context ".find" do
-    it "returns an ESI Fund" do
-      content_id = esi_funds[0]["content_id"]
-      esi_fund = described_class.find(content_id)
-
-      expect(esi_fund.base_path).to            eq(esi_funds[0]["base_path"])
-      expect(esi_fund.title).to                eq(esi_funds[0]["title"])
-      expect(esi_fund.summary).to              eq(esi_funds[0]["description"])
-      expect(esi_fund.body).to                 eq(esi_funds[0]["details"]["body"][0]["content"])
-      expect(esi_fund.closing_date).to         eq(esi_funds[0]["details"]['metadata']["closing_date"])
-    end
-  end
-
   describe "#save!" do
     it "saves the ESI Fund" do
       stub_any_publishing_api_put_content

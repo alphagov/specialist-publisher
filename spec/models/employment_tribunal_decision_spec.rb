@@ -25,21 +25,6 @@ RSpec.describe EmploymentTribunalDecision do
     Timecop.freeze(Time.parse("2015-12-18 10:12:26 UTC"))
   end
 
-  describe ".find" do
-    it "returns an Employment Tribunal Decision" do
-      content_id = employment_tribunal_decisions[0]["content_id"]
-      employment_tribunal_decision = described_class.find(content_id)
-
-      expect(employment_tribunal_decision.base_path).to                        eq(employment_tribunal_decisions[0]["base_path"])
-      expect(employment_tribunal_decision.title).to                            eq(employment_tribunal_decisions[0]["title"])
-      expect(employment_tribunal_decision.summary).to                          eq(employment_tribunal_decisions[0]["description"])
-      expect(employment_tribunal_decision.body).to                             eq(employment_tribunal_decisions[0]["details"]["body"][0]["content"])
-      expect(employment_tribunal_decision.tribunal_decision_categories).to     eq(employment_tribunal_decisions[0]["details"]["metadata"]["tribunal_decision_categories"])
-      expect(employment_tribunal_decision.tribunal_decision_country).to        eq(employment_tribunal_decisions[0]["details"]["metadata"]["tribunal_decision_country"])
-      expect(employment_tribunal_decision.tribunal_decision_decision_date).to  eq(employment_tribunal_decisions[0]["details"]["metadata"]["tribunal_decision_decision_date"])
-    end
-  end
-
   describe "#save!" do
     it "saves the Employment Tribunal Decision" do
       stub_any_publishing_api_put_content

@@ -25,22 +25,6 @@ RSpec.describe EmploymentAppealTribunalDecision do
     Timecop.freeze(Time.parse("2015-12-18 10:12:26 UTC"))
   end
 
-  describe ".find" do
-    it "returns an Employment Appeal Tribunal Decision" do
-      content_id = employment_appeal_tribunal_decisions[0]["content_id"]
-      employment_appeal_tribunal_decision = described_class.find(content_id)
-
-      expect(employment_appeal_tribunal_decision.base_path).to                          eq(employment_appeal_tribunal_decisions[0]["base_path"])
-      expect(employment_appeal_tribunal_decision.title).to                              eq(employment_appeal_tribunal_decisions[0]["title"])
-      expect(employment_appeal_tribunal_decision.summary).to                            eq(employment_appeal_tribunal_decisions[0]["description"])
-      expect(employment_appeal_tribunal_decision.body).to                               eq(employment_appeal_tribunal_decisions[0]["details"]["body"][0]["content"])
-      expect(employment_appeal_tribunal_decision.tribunal_decision_categories).to       eq(employment_appeal_tribunal_decisions[0]["details"]["metadata"]["tribunal_decision_categories"])
-      expect(employment_appeal_tribunal_decision.tribunal_decision_decision_date).to    eq(employment_appeal_tribunal_decisions[0]["details"]["metadata"]["tribunal_decision_decision_date"])
-      expect(employment_appeal_tribunal_decision.tribunal_decision_landmark).to         eq(employment_appeal_tribunal_decisions[0]["details"]["metadata"]["tribunal_decision_landmark"])
-      expect(employment_appeal_tribunal_decision.tribunal_decision_sub_categories).to eq(employment_appeal_tribunal_decisions[0]["details"]["metadata"]["tribunal_decision_sub_categories"])
-    end
-  end
-
   describe "#save!" do
     it "saves the Employment Appeal Tribunal Decision" do
       stub_any_publishing_api_put_content

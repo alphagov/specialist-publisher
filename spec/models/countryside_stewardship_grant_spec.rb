@@ -25,18 +25,6 @@ RSpec.describe CountrysideStewardshipGrant do
     Timecop.freeze("2015-12-18 10:12:26 UTC")
   end
 
-  describe ".find" do
-    it "returns a Countryside Stewardship Grant" do
-      content_id = countryside_stewardship_grants[0]["content_id"]
-      countryside_stewardship_grant = described_class.find(content_id)
-
-      expect(countryside_stewardship_grant.base_path).to eq(countryside_stewardship_grants[0]["base_path"])
-      expect(countryside_stewardship_grant.title).to eq(countryside_stewardship_grants[0]["title"])
-      expect(countryside_stewardship_grant.summary).to eq(countryside_stewardship_grants[0]["description"])
-      expect(countryside_stewardship_grant.body).to eq(countryside_stewardship_grants[0]["details"]["body"][0]["content"])
-    end
-  end
-
   describe "#save!" do
     it "saves the Countryside Stewardship Grant" do
       stub_any_publishing_api_put_content

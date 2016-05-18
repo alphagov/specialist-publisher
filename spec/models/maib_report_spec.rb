@@ -25,19 +25,6 @@ RSpec.describe MaibReport do
     Timecop.freeze(Time.parse("2015-12-18 10:12:26 UTC"))
   end
 
-  context ".find" do
-    it "returns a MAIB Report" do
-      content_id = maib_reports[0]["content_id"]
-      maib_report = described_class.find(content_id)
-
-      expect(maib_report.base_path).to            eq(maib_reports[0]["base_path"])
-      expect(maib_report.title).to                eq(maib_reports[0]["title"])
-      expect(maib_report.summary).to              eq(maib_reports[0]["description"])
-      expect(maib_report.body).to                 eq(maib_reports[0]["details"]["body"][0]["content"])
-      expect(maib_report.date_of_occurrence).to   eq(maib_reports[0]["details"]["metadata"]["date_of_occurrence"])
-    end
-  end
-
   describe "#save!" do
     it "saves the MAIB Report" do
       stub_any_publishing_api_put_content

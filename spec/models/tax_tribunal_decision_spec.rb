@@ -25,21 +25,6 @@ RSpec.describe TaxTribunalDecision do
     Timecop.freeze(Time.parse("2015-12-18 10:12:26 UTC"))
   end
 
-  describe ".find" do
-    it "returns an Tax Tribunal Decision" do
-      content_id = tax_tribunal_decisions[0]["content_id"]
-      tax_tribunal_decision = described_class.find(content_id)
-
-      expect(tax_tribunal_decision.base_path).to                        eq(tax_tribunal_decisions[0]["base_path"])
-      expect(tax_tribunal_decision.title).to                            eq(tax_tribunal_decisions[0]["title"])
-      expect(tax_tribunal_decision.summary).to                          eq(tax_tribunal_decisions[0]["description"])
-      expect(tax_tribunal_decision.body).to                             eq(tax_tribunal_decisions[0]["details"]["body"][0]["content"])
-      expect(tax_tribunal_decision.tribunal_decision_category).to       eq(tax_tribunal_decisions[0]["details"]["metadata"]["tribunal_decision_category"])
-      expect(tax_tribunal_decision.tribunal_decision_decision_date).to  eq(tax_tribunal_decisions[0]["details"]["metadata"]["tribunal_decision_decision_date"])
-    end
-  end
-
-
   describe "#save!" do
     it "saves the Tax Tribunal Decision" do
       stub_any_publishing_api_put_content

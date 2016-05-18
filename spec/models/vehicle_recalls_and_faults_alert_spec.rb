@@ -25,21 +25,6 @@ RSpec.describe VehicleRecallsAndFaultsAlert do
     Timecop.freeze(Time.parse("2015-12-18 10:12:26 UTC"))
   end
 
-  describe ".find" do
-    it "returns a Vehicle Recall and Fault" do
-      content_id = vehicle_recalls_and_faults[0]["content_id"]
-      vehicle_recall_and_fault = described_class.find(content_id)
-
-      expect(vehicle_recall_and_fault.base_path).to            eq(vehicle_recalls_and_faults[0]["base_path"])
-      expect(vehicle_recall_and_fault.title).to                eq(vehicle_recalls_and_faults[0]["title"])
-      expect(vehicle_recall_and_fault.summary).to              eq(vehicle_recalls_and_faults[0]["description"])
-      expect(vehicle_recall_and_fault.body).to                 eq(vehicle_recalls_and_faults[0]["details"]["body"][0]["content"])
-      expect(vehicle_recall_and_fault.alert_issue_date).to     eq(vehicle_recalls_and_faults[0]["details"]["metadata"]["alert_issue_date"])
-      expect(vehicle_recall_and_fault.build_start_date).to     eq(vehicle_recalls_and_faults[0]["details"]["metadata"]["build_start_date"])
-      expect(vehicle_recall_and_fault.build_end_date).to       eq(vehicle_recalls_and_faults[0]["details"]["metadata"]["build_end_date"])
-    end
-  end
-
   describe "#save!" do
     it "saves the Vehicle Recall and Fault" do
       stub_any_publishing_api_put_content

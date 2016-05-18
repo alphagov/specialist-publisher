@@ -46,37 +46,6 @@ RSpec.describe CmaCase do
     Timecop.freeze(Time.parse("2015-12-18 10:12:26 UTC"))
   end
 
-  context ".find" do
-    it "returns a CMA Case" do
-      content_id = cma_cases[0]["content_id"]
-      cma_case = described_class.find(content_id)
-
-      expect(cma_case.base_path).to     eq(cma_cases[0]["base_path"])
-      expect(cma_case.title).to         eq(cma_cases[0]["title"])
-      expect(cma_case.summary).to       eq(cma_cases[0]["description"])
-      expect(cma_case.body).to          eq(cma_cases[0]["details"]["body"][0]["content"])
-      expect(cma_case.opened_date).to   eq(cma_cases[0]["details"]["metadata"]["opened_date"])
-      expect(cma_case.closed_date).to   eq(cma_cases[0]["details"]["metadata"]["closed_date"])
-      expect(cma_case.case_type).to     eq(cma_cases[0]["details"]["metadata"]["case_type"])
-      expect(cma_case.case_state).to    eq(cma_cases[0]["details"]["metadata"]["case_state"])
-      expect(cma_case.market_sector).to eq(cma_cases[0]["details"]["metadata"]["market_sector"])
-      expect(cma_case.outcome_type).to  eq(cma_cases[0]["details"]["metadata"]["outcome_type"])
-    end
-
-    it "should be able backward compatible for a single string representation of body in payload" do
-      simple_cma_case_payload = Payloads.cma_case_content_item("details" => { "body" => "single string body" })
-      publishing_api_has_item(simple_cma_case_payload)
-
-      content_id = simple_cma_case_payload["content_id"]
-      cma_case = described_class.find(content_id)
-
-      expect(simple_cma_case_payload["details"]["body"].class).to eq(String)
-      expect(cma_case.body.class).to eq(String)
-
-      expect(cma_case.body).to eq(simple_cma_case_payload["details"]["body"])
-    end
-  end
-
   describe "#save! without attachments" do
     it "saves the CMA Case" do
       stub_any_publishing_api_put_content
