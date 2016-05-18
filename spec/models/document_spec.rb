@@ -140,6 +140,22 @@ RSpec.describe Document do
     end
   end
 
+  context "unsuccessful #publish!" do
+    it "notifies Airbrake and returns false if publishing-api does not return status 200" do
+      expect(Airbrake).to receive(:notify)
+      stub_publishing_api_publish(document.content_id, {}, status: 503)
+      stub_any_rummager_post_with_queueing_enabled
+      expect(document.publish!).to eq(false)
+    end
+
+    it "notifies Airbrake and returns false if rummager does not return status 200" do
+      expect(Airbrake).to receive(:notify)
+      stub_publishing_api_publish(document.content_id, {})
+      stub_request(:post, %r{#{Plek.new.find('search')}/documents}).to_return(status: 503)
+      expect(document.publish!).to eq(false)
+    end
+  end
+
   describe "#save!" do
     before do
       publishing_api_has_item(payload)
