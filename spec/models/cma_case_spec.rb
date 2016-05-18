@@ -15,36 +15,7 @@ RSpec.describe CmaCase do
     )
   end
 
-  let(:indexable_attributes) {
-    {
-      "title" => "Example CMA Case 0",
-      "description" => "This is the summary of example CMA case 0",
-      "link" => "/cma-cases/example-cma-case-0",
-      "indexable_content" => "Header " + (["This is the long body of an example CMA case"] * 10).join(" "),
-      "public_timestamp" => "2015-12-03T16:59:13+00:00",
-      "opened_date" => "2014-01-01",
-      "closed_date" => nil,
-      "case_type" => "ca98-and-civil-cartels",
-      "case_state" => "open",
-      "market_sector" => ["energy"],
-      "outcome_type" => nil
-    }
-  }
-
   let(:cma_cases) { 10.times.map { |n| cma_case_content_item(n) } }
-
-  let(:email_alert_payload) do
-    {
-      "tags" => {
-        "format" => "cma_case",
-        "opened_date" => "2014-01-01",
-        "case_type" => "ca98-and-civil-cartels",
-        "case_state" => "open",
-        "market_sector" => ["energy"]
-      },
-      "document_type" => "cma_case"
-    }
-  end
 
   before do
     cma_cases[1]["details"].merge!(
@@ -157,24 +128,6 @@ RSpec.describe CmaCase do
 
       assert_publishing_api_put_content(c.content_id, request_json_includes(cma_case))
       expect(cma_case.to_json).to be_valid_against_schema('specialist_document')
-    end
-  end
-
-  describe "#publish!" do
-    before do
-      email_alert_api_accepts_alert
-    end
-
-    it "publishes the CMA Case" do
-      stub_publishing_api_publish(cma_cases[0]["content_id"], {})
-      stub_any_rummager_post_with_queueing_enabled
-
-      c = described_class.find(cma_cases[0]["content_id"])
-      expect(c.publish!).to eq(true)
-
-      assert_publishing_api_publish(c.content_id)
-      assert_rummager_posted_item(indexable_attributes)
-      assert_email_alert_sent(email_alert_payload)
     end
   end
 

@@ -15,17 +15,6 @@ RSpec.describe RaibReport do
     )
   end
 
-  let(:indexable_attributes) {
-    {
-      "title" => "Example RAIB Report 0",
-      "description" => "This is the summary of example RAIB Report 0",
-      "link" => "/raib-reports/example-raib-report-0",
-      "indexable_content" => "Header " + (["This is the long body of an example RAIB Report"] * 10).join(" "),
-      "public_timestamp" => "2015-11-16T11:53:30+00:00",
-      "date_of_occurrence" => "2015-10-10",
-    }
-  }
-
   let(:raib_reports) { 10.times.map { |n| raib_report_content_item(n) } }
 
   before do
@@ -73,23 +62,6 @@ RSpec.describe RaibReport do
 
       assert_publishing_api_put_content(c.content_id, request_json_includes(raib_report))
       expect(raib_report.to_json).to be_valid_against_schema('specialist_document')
-    end
-  end
-
-  describe "#publish!" do
-    before do
-      email_alert_api_accepts_alert
-    end
-
-    it "publishes the RAIB Report" do
-      stub_publishing_api_publish(raib_reports[0]["content_id"], {})
-      stub_any_rummager_post_with_queueing_enabled
-
-      raib_report = described_class.find(raib_reports[0]["content_id"])
-      expect(raib_report.publish!).to eq(true)
-
-      assert_publishing_api_publish(raib_report.content_id)
-      assert_rummager_posted_item(indexable_attributes)
     end
   end
 end

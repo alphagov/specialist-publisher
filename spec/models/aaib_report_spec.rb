@@ -15,17 +15,6 @@ RSpec.describe AaibReport do
     )
   end
 
-  let(:indexable_attributes) {
-    {
-      "title" => "Example AAIB Report 0",
-      "description" => "This is the summary of example AAIB Report 0",
-      "link" => "/aaib-reports/example-aaib-report-0",
-      "indexable_content" => "Header " + (["This is the long body of an example AAIB Report"] * 10).join(" "),
-      "public_timestamp" => "2015-11-16T11:53:30+00:00",
-      "date_of_occurrence" => "2015-10-10",
-    }
-  }
-
   let(:aaib_reports) { 10.times.map { |n| aaib_report_content_item(n) } }
 
   before do
@@ -82,15 +71,6 @@ RSpec.describe AaibReport do
     end
 
     let(:aaib_report) { described_class.find(aaib_reports[0]["content_id"]) }
-
-    it "publishes the AAIB Report" do
-      stub_publishing_api_publish(aaib_reports[0]["content_id"], {})
-      stub_any_rummager_post_with_queueing_enabled
-      expect(aaib_report.publish!).to eq(true)
-
-      assert_publishing_api_publish(aaib_report.content_id)
-      assert_rummager_posted_item(indexable_attributes)
-    end
 
     it "notifies Airbrake and returns false if publishing-api does not return status 200" do
       expect(Airbrake).to receive(:notify)

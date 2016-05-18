@@ -15,16 +15,6 @@ RSpec.describe CountrysideStewardshipGrant do
     )
   end
 
-  let(:indexable_attributes) {
-    {
-      "title" => "Example Countryside Stewardship Grant 0",
-      "description" => "This is the summary of example Countryside Stewardship Grant 0",
-      "link" => "/countryside-stewardship-grants/example-countryside-stewardship-grant-0",
-      "indexable_content" => "Header " + (["This is the long body of an example Countryside Stewardship Grant"] * 10).join(" "),
-      "public_timestamp" => "2015-11-16T11:53:30+00:00",
-    }
-  }
-
   let(:countryside_stewardship_grants) { 10.times.map { |n| countryside_stewardship_grant_content_item(n) } }
 
   before do
@@ -71,23 +61,6 @@ RSpec.describe CountrysideStewardshipGrant do
 
       assert_publishing_api_put_content(c.content_id, request_json_includes(countryside_stewardship_grant))
       expect(countryside_stewardship_grant.to_json).to be_valid_against_schema('specialist_document')
-    end
-  end
-
-  describe "#publish!" do
-    before do
-      email_alert_api_accepts_alert
-    end
-
-    it "publishes the Countryside Stewardship Grant" do
-      stub_publishing_api_publish(countryside_stewardship_grants[0]["content_id"], {})
-      stub_any_rummager_post_with_queueing_enabled
-
-      countryside_stewardship_grant = described_class.find(countryside_stewardship_grants[0]["content_id"])
-      expect(countryside_stewardship_grant.publish!).to eq(true)
-
-      assert_publishing_api_publish(countryside_stewardship_grant.content_id)
-      assert_rummager_posted_item(indexable_attributes)
     end
   end
 end

@@ -15,19 +15,6 @@ RSpec.describe EmploymentTribunalDecision do
     )
   end
 
-  let(:indexable_attributes) {
-    {
-      "title" => "Example Employment Tribunal Decision 0",
-      "description" => "This is the summary of example Employment Tribunal Decision 0",
-      "link" => "/employment-tribunal-decisions/example-employment-tribunal-decision-0",
-      "indexable_content" => "Header " + (["This is the long body of an example Employment Tribunal Decision"] * 10).join(" "),
-      "public_timestamp" => "2015-11-16T11:53:30+00:00",
-      "tribunal_decision_categories" => ["age-discrimination"],
-      "tribunal_decision_country" => "england-and-wales",
-      "tribunal_decision_decision_date" => "2015-07-30",
-    }
-  }
-
   let(:employment_tribunal_decisions) { 10.times.map { |n| employment_tribunal_decision_content_item(n) } }
 
   before do
@@ -77,23 +64,6 @@ RSpec.describe EmploymentTribunalDecision do
 
       assert_publishing_api_put_content(c.content_id, request_json_includes(employment_tribunal_decision))
       expect(employment_tribunal_decision.to_json).to be_valid_against_schema('specialist_document')
-    end
-  end
-
-  describe "#publish!" do
-    before do
-      email_alert_api_accepts_alert
-    end
-
-    it "publishes the Employment Tribunal Decision" do
-      stub_publishing_api_publish(employment_tribunal_decisions[0]["content_id"], {})
-      stub_any_rummager_post_with_queueing_enabled
-
-      employment_tribunal_decision = described_class.find(employment_tribunal_decisions[0]["content_id"])
-      expect(employment_tribunal_decision.publish!).to eq(true)
-
-      assert_publishing_api_publish(employment_tribunal_decision.content_id)
-      assert_rummager_posted_item(indexable_attributes)
     end
   end
 end

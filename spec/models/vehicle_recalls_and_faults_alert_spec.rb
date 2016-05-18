@@ -15,19 +15,6 @@ RSpec.describe VehicleRecallsAndFaultsAlert do
     )
   end
 
-  let(:indexable_attributes) {
-    {
-      "title" => "Example Vehicle Recalls And Faults 0",
-      "description" => "This is the summary of example Vehicle Recalls And Faults 0",
-      "link" => "/vehicle-recalls-faults/example-vehicle-recalls-and-faults-0",
-      "indexable_content" => "Header " + (["This is the long body of an example Vehicle Recalls And Faults"] * 10).join(" "),
-      "public_timestamp" => "2015-11-16T11:53:30+00:00",
-      "alert_issue_date" => "2015-04-28",
-      "build_start_date" => "2015-04-28",
-      "build_end_date" => "2015-06-28",
-    }
-  }
-
   let(:vehicle_recalls_and_faults) { 10.times.map { |n| vehicle_recalls_and_faults_alert_content_item(n) } }
 
   before do
@@ -77,23 +64,6 @@ RSpec.describe VehicleRecallsAndFaultsAlert do
 
       assert_publishing_api_put_content(c.content_id, request_json_includes(vehicle_recall_and_fault))
       expect(vehicle_recall_and_fault.to_json).to be_valid_against_schema('specialist_document')
-    end
-  end
-
-  describe "#publish!" do
-    before do
-      email_alert_api_accepts_alert
-    end
-
-    it "publishes the Vehicle Recall and Fault" do
-      stub_publishing_api_publish(vehicle_recalls_and_faults[0]["content_id"], {})
-      stub_any_rummager_post_with_queueing_enabled
-
-      vehicle_recall_and_fault = described_class.find(vehicle_recalls_and_faults[0]["content_id"])
-      expect(vehicle_recall_and_fault.publish!).to eq(true)
-
-      assert_publishing_api_publish(vehicle_recall_and_fault.content_id)
-      assert_rummager_posted_item(indexable_attributes)
     end
   end
 end

@@ -15,21 +15,6 @@ RSpec.describe EsiFund do
     )
   end
 
-  let(:indexable_attributes) {
-    {
-      "title" => "Example ESI Fund 0",
-      "description" => "This is the summary of example ESI Fund 0",
-      "link" => "/european-structural-investment-funds/example-esi-fund-0",
-      "indexable_content" => "Header " + (["This is the long body of an example ESI Fund"] * 10).join(" "),
-      "public_timestamp" => "2015-11-16T11:53:30+00:00",
-      "fund_state" => nil,
-      "fund_type" => nil,
-      "location" => nil,
-      "funding_source" => nil,
-      "closing_date" => "2016-01-01",
-    }
-  }
-
   let(:esi_funds) { 10.times.map { |n| esi_fund_content_item(n) } }
 
   before do
@@ -77,23 +62,6 @@ RSpec.describe EsiFund do
 
       assert_publishing_api_put_content(c.content_id, request_json_includes(esi_fund))
       expect(esi_fund.to_json).to be_valid_against_schema('specialist_document')
-    end
-  end
-
-  describe "#publish!" do
-    before do
-      email_alert_api_accepts_alert
-    end
-
-    it "publishes the ESI Fund" do
-      stub_publishing_api_publish(esi_funds[0]["content_id"], {})
-      stub_any_rummager_post_with_queueing_enabled
-
-      esi_fund = described_class.find(esi_funds[0]["content_id"])
-      expect(esi_fund.publish!).to eq(true)
-
-      assert_publishing_api_publish(esi_fund.content_id)
-      assert_rummager_posted_item(indexable_attributes)
     end
   end
 end

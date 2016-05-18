@@ -15,18 +15,6 @@ RSpec.describe MedicalSafetyAlert do
     )
   end
 
-  let(:indexable_attributes) {
-    {
-      "title" => "Example Medical Safety Alert 0",
-      "description" => "This is the summary of example Medical Safety Alert 0",
-      "link" => "/drug-device-alerts/example-medical-safety-alert-0",
-      "indexable_content" => "Header " + (["This is the long body of an example Medical Safety Alert"] * 10).join(" "),
-      "public_timestamp" => "2015-11-16T11:53:30+00:00",
-      "alert_type" => "company-led-drugs",
-      "issued_date" => "2016-02-01",
-    }
-  }
-
   let(:medical_safety_alerts) { 10.times.map { |n| medical_safety_alert_content_item(n) } }
 
   before do
@@ -74,23 +62,6 @@ RSpec.describe MedicalSafetyAlert do
 
       assert_publishing_api_put_content(c.content_id, request_json_includes(medical_safety_alert))
       expect(medical_safety_alert.to_json).to be_valid_against_schema('specialist_document')
-    end
-  end
-
-  describe "#publish!" do
-    before do
-      email_alert_api_accepts_alert
-    end
-
-    it "publishes the Medical Safety Alert" do
-      stub_publishing_api_publish(medical_safety_alerts[0]["content_id"], {})
-      stub_any_rummager_post_with_queueing_enabled
-
-      medical_safety_alert = described_class.find(medical_safety_alerts[0]["content_id"])
-      expect(medical_safety_alert.publish!).to eq(true)
-
-      assert_publishing_api_publish(medical_safety_alert.content_id)
-      assert_rummager_posted_item(indexable_attributes)
     end
   end
 end
