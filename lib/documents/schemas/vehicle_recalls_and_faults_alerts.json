@@ -8,6 +8,9 @@
   "filter": {
     "document_type": "vehicle_recalls_and_faults_alert"
   },
+  "organisations": [
+    "d39237a5-678b-4bb5-a372-eb2cb036933d"
+  ],
   "document_noun": "alert",
   "facets": [
     {
