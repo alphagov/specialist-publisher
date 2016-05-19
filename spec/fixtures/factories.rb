@@ -39,4 +39,100 @@ FactoryGirl.define do
     organisation_slug "department-for-international-development"
     organisation_content_id "db994552-7644-404d-a770-a2fe659c661f"
   end
+
+  sequence :content_id do |_|
+    SecureRandom.uuid
+  end
+
+  factory :document, class: Hash do
+    content_id
+    base_path "/a/b"
+    title "Example document"
+    description "This is the summary of example document"
+    schema_name "specialist_document"
+    publishing_app "specialist-publisher"
+    rendering_app "specialist-frontend"
+    locale "en"
+    phase "live"
+    redirects []
+    update_type "major"
+    public_updated_at "2015-11-16T11:53:30"
+    updated_at "2015-11-15T11:53:30"
+    publication_state "draft"
+    routes {
+      [
+        {
+          "path" => base_path,
+          "type" => "exact",
+        }
+      ]
+    }
+
+    details { default_details }
+
+    transient do
+      default_details {
+        {
+          "body" => [
+            {
+              "content_type" => "text/govspeak",
+              "content" => "## Header" + ("\r\n\r\nThis is the long body of an example document" * 10)
+            },
+            {
+              "content_type" => "text/html",
+              "content" => ("<h2 id=\"header\">Header</h2>\n" + "\n<p>This is the long body of an example document</p>\n" * 10)
+            }
+          ],
+          "headers" => [{
+            "text" => "Header",
+            "level" => 2,
+            "id" => "header",
+          }],
+          "metadata" => default_metadata,
+          "max_cache_time" => 10,
+          "change_history" => [],
+        }
+      }
+      default_metadata { {} }
+    end
+
+    initialize_with {
+      merged_details = default_details.deep_stringify_keys.deep_merge(details.deep_stringify_keys)
+      attributes.merge(details: merged_details)
+    }
+    to_create(&:deep_stringify_keys!)
+  end
+
+  factory :aaib_report, parent: :document do
+    base_path "/aaib-reports/example-aaib-report"
+    document_type "aaib_report"
+
+    transient do
+      default_metadata {
+        {
+         "date_of_occurrence" => "2015-10-10",
+         "document_type" => "aaib_report"
+        }
+      }
+    end
+  end
+
+  factory :cma_case, parent: :document do
+    base_path "/cma-cases/example-cma-case"
+    document_type "cma_case"
+
+    transient do
+      default_metadata {
+        {
+          "document_type" => "cma_case",
+          "opened_date" => "2014-01-01",
+          "closed_date" => "2015-01-01",
+          "case_type" => "ca98-and-civil-cartels",
+          "case_state" => "closed",
+          "market_sector" => ["energy"],
+          "outcome_type" => "ca98-no-grounds-for-action-non-infringement",
+        }
+      }
+    end
+  end
 end

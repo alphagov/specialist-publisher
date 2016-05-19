@@ -2,17 +2,10 @@ require 'spec_helper'
 
 RSpec.describe CmaCase do
   def cma_case_content_item(n)
-    Payloads.cma_case_content_item(
-      "base_path" => "/cma-cases/example-cma-case-#{n}",
-      "title" => "Example CMA Case #{n}",
-      "description" => "This is the summary of example CMA case #{n}",
-      "routes" => [
-        {
-          "path" => "/cma-cases/example-cma-case-#{n}",
-          "type" => "exact",
-        }
-      ]
-    )
+    FactoryGirl.create(:cma_case,
+      base_path: "/cma-cases/example-cma-case-#{n}",
+      title: "Example CMA Case #{n}",
+      description: "This is the summary of example CMA case #{n}")
   end
 
   let(:indexable_attributes) {
@@ -20,14 +13,14 @@ RSpec.describe CmaCase do
       "title" => "Example CMA Case 0",
       "description" => "This is the summary of example CMA case 0",
       "link" => "/cma-cases/example-cma-case-0",
-      "indexable_content" => "Header " + (["This is the long body of an example CMA case"] * 10).join(" "),
-      "public_timestamp" => "2015-12-03T16:59:13+00:00",
+      "indexable_content" => "Header " + (["This is the long body of an example document"] * 10).join(" "),
+      "public_timestamp" => "2015-11-16T11:53:30+00:00",
       "opened_date" => "2014-01-01",
-      "closed_date" => nil,
+      "closed_date" => "2015-01-01",
       "case_type" => "ca98-and-civil-cartels",
-      "case_state" => "open",
+      "case_state" => "closed",
       "market_sector" => ["energy"],
-      "outcome_type" => nil
+      "outcome_type" => "ca98-no-grounds-for-action-non-infringement",
     }
   }
 
@@ -38,9 +31,11 @@ RSpec.describe CmaCase do
       "tags" => {
         "format" => "cma_case",
         "opened_date" => "2014-01-01",
+        "closed_date" => "2015-01-01",
         "case_type" => "ca98-and-civil-cartels",
-        "case_state" => "open",
-        "market_sector" => ["energy"]
+        "case_state" => "closed",
+        "market_sector" => ["energy"],
+        "outcome_type" => "ca98-no-grounds-for-action-non-infringement",
       },
       "document_type" => "cma_case"
     }
@@ -93,7 +88,8 @@ RSpec.describe CmaCase do
     end
 
     it "should be able backward compatible for a single string representation of body in payload" do
-      simple_cma_case_payload = Payloads.cma_case_content_item("details" => { "body" => "single string body" })
+      simple_cma_case_payload = FactoryGirl.create(:cma_case, details: { "body" => "single string body" })
+
       publishing_api_has_item(simple_cma_case_payload)
 
       content_id = simple_cma_case_payload["content_id"]
@@ -113,23 +109,23 @@ RSpec.describe CmaCase do
 
       cma_case = cma_cases[0]
 
-      cma_case.delete("publication_state")
-      cma_case.delete("updated_at")
-      cma_case.merge!("public_updated_at" => "2015-12-18T10:12:26+00:00")
-      cma_case["details"].merge!(
-        "change_history" => [
-          {
-            "public_timestamp" => "2015-12-18T10:12:26+00:00",
-            "note" => "First published.",
-          }
-        ]
-      )
-
       c = described_class.find(cma_case["content_id"])
       expect(c.save!).to eq(true)
 
-      assert_publishing_api_put_content(c.content_id, request_json_includes(cma_case))
-      expect(cma_case.to_json).to be_valid_against_schema('specialist_document')
+      expected_payload = write_payload(cma_case).deep_merge(
+        "public_updated_at" => "2015-12-18T10:12:26+00:00",
+        "details" => {
+          "change_history" => [
+            {
+              "public_timestamp" => "2015-12-18T10:12:26+00:00",
+              "note" => "First published.",
+            }
+          ]
+        }
+      )
+
+      assert_publishing_api_put_content(c.content_id, expected_payload)
+      expect(expected_payload).to be_valid_against_schema('specialist_document')
     end
   end
 
@@ -140,23 +136,23 @@ RSpec.describe CmaCase do
 
       cma_case = cma_cases[1]
 
-      cma_case.delete("publication_state")
-      cma_case.delete("updated_at")
-      cma_case.merge!("public_updated_at" => "2015-12-18T10:12:26+00:00")
-      cma_case["details"].merge!(
-        "change_history" => [
-          {
-            "public_timestamp" => "2015-12-18T10:12:26+00:00",
-            "note" => "First published.",
-          }
-        ]
+      expected_payload = write_payload(cma_case).deep_merge(
+        "public_updated_at" => "2015-12-18T10:12:26+00:00",
+        "details" => {
+          "change_history" => [
+            {
+              "public_timestamp" => "2015-12-18T10:12:26+00:00",
+              "note" => "First published.",
+            }
+          ]
+        }
       )
 
       c = described_class.find(cma_case["content_id"])
       expect(c.save!).to eq(true)
 
-      assert_publishing_api_put_content(c.content_id, request_json_includes(cma_case))
-      expect(cma_case.to_json).to be_valid_against_schema('specialist_document')
+      assert_publishing_api_put_content(c.content_id, expected_payload)
+      expect(expected_payload).to be_valid_against_schema('specialist_document')
     end
   end
 
