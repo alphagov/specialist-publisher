@@ -184,12 +184,6 @@ RSpec.describe Document do
     end
   end
 
-  def write_payload(document)
-    document.delete("updated_at")
-    document.delete("publication_state")
-    document
-  end
-
   describe ".find" do
     it "returns a document" do
       publishing_api_has_item(payload)

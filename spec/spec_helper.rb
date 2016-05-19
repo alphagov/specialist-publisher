@@ -63,4 +63,10 @@ RSpec.configure do |config|
   # the seed, which is printed after each run.
   #     --seed 1234
   config.order = "random"
+
+  def write_payload(document)
+    document.delete("updated_at")
+    document.delete("publication_state")
+    document
+  end
 end
