@@ -48,12 +48,6 @@ RSpec.configure do |config|
     mocks.syntax = :expect
   end
 
-  config.before(:each, type: :feature) do
-    #stub_rummager
-    #stub_publishing_api
-    #stub_email_alert_api
-  end
-
   config.after(:each) do
     Timecop.return
   end
@@ -63,10 +57,6 @@ RSpec.configure do |config|
   config.include(GdsApi::TestHelpers::PublishingApiV2)
   config.include(GdsApi::TestHelpers::Rummager)
   config.include(GdsApi::TestHelpers::EmailAlertApi)
-
-  config.after(:each) do
-    #DatabaseCleaner.clean
-  end
 
   # Run specs in random order to surface order dependencies. If you find an
   # order dependency and want to debug it, you can fix the order by providing
