@@ -206,10 +206,12 @@ class Document
       presented_document = DocumentPresenter.new(self)
       presented_links = DocumentLinksPresenter.new(self)
 
-      handle_remote_error do
+      success = handle_remote_error do
         Services.publishing_api.put_content(self.content_id, presented_document.to_json)
         Services.publishing_api.patch_links(self.content_id, presented_links.to_json)
       end
+
+      raise RecordNotSaved unless success
     else
       raise RecordNotSaved
     end
