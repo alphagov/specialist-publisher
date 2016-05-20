@@ -1,8 +1,10 @@
-<div class="form-group">
-  <%= f.label :country %>
+<%= render layout: 'shared/form_group', locals: { f: f, field: :country } do %>
   <%=
     f.select :country, facet_options(f, :country),
       { include_blank: true },
       { class: 'select2', multiple: true, data: { placeholder: 'Select countries' } }
   %>
-</div>
+<% end %>
+<%= render layout: 'shared/form_group', locals: { f: f, field: :first_published_at } do %>
+  <%= f.text_field :first_published_at, placeholder: '2012-04-23', class: 'form-control' %>
+<% end %>
