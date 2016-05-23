@@ -82,21 +82,16 @@ $ bundle exec rake
 
 1. Add model spec within: `spec/models`
 
-### Testing your new specialist document format
+## Deployment
 
-####TODO
+Currently, this app is deployed along side with [Specialist-publisher v1](https://github.com/alphagov/specialist-publisher) on a "per-format" basis. As more formats become production ready, we will transition them to use the rebuild app.
 
-## Application Structure
+![deployment diagram](deployment.png)
 
-####TODO
+The rebuild app can then be accessed in two ways.
 
-### Directory Structure
+1. At the URL `specialist-publisher.*.gov.uk`: you can access the "Frankenstein" app, a combination between SPv1 + SPv2.
 
-Non standard Rails directories and what they're used for:
+2. At `specialist-publisher-rebuild-standalone.integration.publishing.service.gov.uk`: This is an integration-only instance of the app running only specialist-publisher-rebuild code.
 
-####TODO
-
-
-### Services
-
-####TODO
+When a format is ready to deploy to production, add the endpoint to this [puppet configuration](https://github.com/alphagov/govuk-puppet/blob/master/modules/govuk/manifests/node/s_backend_lb.pp#L48). This will configure Nginx to route requests for those endpoints to be handled by this app.
