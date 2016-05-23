@@ -169,17 +169,7 @@ RSpec.describe Document do
       c = MyDocumentType.find(payload["content_id"])
       expect(c.save!).to eq(true)
 
-      expected_payload = write_payload(payload.deep_stringify_keys).deep_merge(
-        "public_updated_at" => "2015-12-18T10:12:26+00:00",
-        "details" => {
-          "change_history" => [
-            {
-              "public_timestamp" => "2015-12-18T10:12:26+00:00",
-              "note" => "First published.",
-            }
-          ]
-        }
-      )
+      expected_payload = saved_for_the_first_time(write_payload(payload.deep_stringify_keys))
       assert_publishing_api_put_content(c.content_id, expected_payload)
     end
   end

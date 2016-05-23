@@ -14,20 +14,5 @@ RSpec.shared_examples "it saves payloads that are valid against the 'specialist_
       assert_publishing_api_put_content(instance.content_id, expected_payload_sent_to_publishing_api)
       expect(expected_payload_sent_to_publishing_api.to_json).to be_valid_against_schema('specialist_document')
     end
-
-    def saved_for_the_first_time(document)
-      timestamp = Time.now.to_datetime.rfc3339
-      document.deep_merge(
-        "public_updated_at" => timestamp,
-        "details" => {
-          "change_history" => [
-            {
-              "public_timestamp" => timestamp,
-              "note" => "First published.",
-            }
-          ]
-        }
-      )
-    end
   end
 end
