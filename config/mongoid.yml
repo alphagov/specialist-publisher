@@ -1,7 +1,7 @@
 development:
   clients:
     default:
-      uri: mongodb://localhost/specialist_publisher_rebuild_development
+      uri: <%= ENV['MONGODB_URI'] || 'mongodb://localhost/govuk_content_development' %>
       options:
         write:
           w: 1
@@ -17,7 +17,7 @@ test:
 production:
   clients:
     default:
-      uri: <%= ENV['MONGODB_URI'] %>
+      uri: <%= ENV['MONGODB_URI'] || 'mongodb://localhost/govuk_content_development' %>
       options:
         write:
           w: majority
