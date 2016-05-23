@@ -27,6 +27,7 @@ RSpec.feature "Creating a DFID Research Output", type: :feature do
     fill_in "Title", with: title
     fill_in "Summary", with: summary
     fill_in "Body", with: ("## Header" + ("\n\nThis is the long body of an example DFID research output" * 10))
+    fill_in "First published at", with: "2013-01-01"
     select "United Kingdom", from: "Country"
 
     expect(page).to have_css('div.govspeak-help')
