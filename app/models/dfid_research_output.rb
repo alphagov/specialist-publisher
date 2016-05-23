@@ -10,6 +10,15 @@ class DfidResearchOutput < Document
     super(params, FORMAT_SPECIFIC_FIELDS)
   end
 
+  ##
+  # DFID research outputs are always bulk published, because our 'publication'
+  # is just a proxy for a research output PDF. Its date is not important to a
+  # user. Setting this +true+ means that specialist-frontend will never render
+  # the publishing-api +published+ date.
+  def bulk_published
+    true
+  end
+
   def self.title
     'DFID Research Output'
   end
