@@ -35,18 +35,6 @@ RSpec.describe DrugSafetyUpdate do
     Timecop.freeze(Time.parse("2015-12-18 10:12:26 UTC"))
   end
 
-  describe ".find" do
-    it "returns a Drug Safety Update" do
-      content_id = drug_safety_updates[0]["content_id"]
-      drug_safety_update = described_class.find(content_id)
-
-      expect(drug_safety_update.base_path).to            eq(drug_safety_updates[0]["base_path"])
-      expect(drug_safety_update.title).to                eq(drug_safety_updates[0]["title"])
-      expect(drug_safety_update.summary).to              eq(drug_safety_updates[0]["description"])
-      expect(drug_safety_update.body).to                 eq(drug_safety_updates[0]["details"]["body"][0]["content"])
-    end
-  end
-
   describe "#save!" do
     it "saves the Drug Safety Update" do
       stub_any_publishing_api_put_content

@@ -303,7 +303,7 @@ module Payloads
     }.deep_merge(attrs)
   end
 
-  def self.employment_tribunal_decision_content_item(attrs)
+  def self.employment_tribunal_decision_content_item(attrs = {})
     {
       "content_id" => SecureRandom.uuid,
       "base_path" => "/employment-tribunal-decisions/example-employment-tribunal-decision",
@@ -354,7 +354,7 @@ module Payloads
     }.deep_merge(attrs)
   end
 
-  def self.esi_fund_content_item(attrs)
+  def self.esi_fund_content_item(attrs = {})
     {
       "content_id" => SecureRandom.uuid,
       "base_path" => "/european-structural-investment-funds/example-esi-fund",
@@ -403,7 +403,7 @@ module Payloads
     }.deep_merge(attrs)
   end
 
-  def self.maib_report_content_item(attrs)
+  def self.maib_report_content_item(attrs = {})
     {
       "content_id" => SecureRandom.uuid,
       "base_path" => "/maib-reports/example-maib-report",
@@ -527,7 +527,7 @@ module Payloads
     }.deep_merge(attrs)
   end
 
-  def self.raib_report_content_item(attrs)
+  def self.raib_report_content_item(attrs = {})
     {
       "content_id" => SecureRandom.uuid,
       "base_path" => "/raib-reports/example-raib-report",
@@ -575,7 +575,7 @@ module Payloads
     }.deep_merge(attrs)
   end
 
-  def self.tax_tribunal_decision_content_item(attrs)
+  def self.tax_tribunal_decision_content_item(attrs = {})
     {
       "content_id" => SecureRandom.uuid,
       "base_path" => "/tax-and-chancery-tribunal-decisions/example-tax-tribunal-decision",
@@ -625,7 +625,7 @@ module Payloads
     }.deep_merge(attrs)
   end
 
-  def self.vehicle_recalls_and_faults_alert_content_item(attrs)
+  def self.vehicle_recalls_and_faults_alert_content_item(attrs = {})
     {
       "content_id" => SecureRandom.uuid,
       "base_path" => "/vehicle-recalls-faults/example-vehicle-recalls-and-faults",
