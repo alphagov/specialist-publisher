@@ -8,7 +8,7 @@ RSpec.feature "Viewing a Manual", type: :feature do
   let(:fields) { %i[content_id description title details public_updated_at publication_state base_path update_type] }
 
   before do
-    publishing_api_has_content([manual_content_item], document_type: "manual", fields: fields, per_page: 10000)
+    publishing_api_has_content([manual_content_item], document_type: "manual", fields: fields, per_page: Manual.max_numbers_of_manuals)
     publishing_api_has_content(
       section_content_items.map do |section|
         {

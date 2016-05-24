@@ -5,7 +5,7 @@ RSpec.feature "Visiting the app", type: :feature do
 
   before do
     log_in_as_editor(:cma_editor)
-    publishing_api_has_content([], document_type: "manual", fields: fields, per_page: 10000)
+    publishing_api_has_content([], document_type: "manual", fields: fields, per_page: Manual.max_numbers_of_manuals)
   end
 
   scenario "visiting / should redirect to manuals" do

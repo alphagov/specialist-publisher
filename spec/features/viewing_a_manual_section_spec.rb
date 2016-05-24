@@ -10,8 +10,8 @@ RSpec.feature "Viewing a Manual and its Sections", type: :feature do
     before do
       log_in_as_editor(:gds_editor)
 
-      publishing_api_has_content([manual_content_item], document_type: "manual", fields: fields, per_page: 10000)
-      publishing_api_has_content(section_content_items.map { |section| { content_id: section["content_id"] } }, document_type: "manual_section", fields: fields, per_page: 10000)
+      publishing_api_has_content([manual_content_item], document_type: "manual", fields: fields, per_page: Manual.max_numbers_of_manuals)
+      publishing_api_has_content(section_content_items.map { |section| { content_id: section["content_id"] } }, document_type: "manual_section", fields: fields, per_page: Manual.max_numbers_of_manuals)
 
       content_items = [manual_content_item] + section_content_items
 
