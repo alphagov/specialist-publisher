@@ -17,7 +17,7 @@ test:
 production:
   clients:
     default:
-      uri: <%= ENV['MONGODB_URI'] || 'mongodb://localhost/govuk_content_development' %>
+      uri: <%= ENV['MONGODB_URI'] %>
       options:
         write:
           w: majority
