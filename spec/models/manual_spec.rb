@@ -123,4 +123,8 @@ RSpec.describe Manual do
       assert_publishing_api_patch_links(manual.content_id, request_json_includes(expected_links_params))
     end
   end
+
+  it "should have max number per page set" do
+    expect(Manual.max_numbers_of_manuals).to eq(10)
+  end
 end

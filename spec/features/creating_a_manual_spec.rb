@@ -38,7 +38,7 @@ RSpec.feature "Creating a Manual", type: :feature do
     before do
       log_in_as_editor(:gds_editor)
       #make manual content items... before they just needed ids now needs other fields1
-      publishing_api_has_content([], document_type: "manual", fields: fields, per_page: 10000)
+      publishing_api_has_content([], document_type: "manual", fields: fields, per_page: Manual.max_numbers_of_manuals)
 
       stub_publishing_api_put_content(test_content_id, {})
       stub_publishing_api_patch_links(test_content_id, {})

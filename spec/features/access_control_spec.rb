@@ -6,7 +6,7 @@ RSpec.feature "Access control", type: :feature do
   before do
     publishing_api_has_content([], hash_including(document_type: CmaCase.document_type))
     publishing_api_has_content([], hash_including(document_type: AaibReport.document_type))
-    publishing_api_has_content([], document_type: 'manual', fields: manual_fields, per_page: 10000)
+    publishing_api_has_content([], document_type: 'manual', fields: manual_fields, per_page: Manual.max_numbers_of_manuals)
   end
 
   context "as a CMA Editor" do
@@ -70,7 +70,7 @@ RSpec.feature "Access control", type: :feature do
       publishing_api_has_item(manual_content_item_1)
       publishing_api_has_item(manual_content_item_2)
 
-      publishing_api_has_content([manual_content_item_1, manual_content_item_2], document_type: 'manual', fields: manual_fields, per_page: 10000)
+      publishing_api_has_content([manual_content_item_1, manual_content_item_2], document_type: 'manual', fields: manual_fields, per_page: Manual.max_numbers_of_manuals)
 
       [manual_links_1, manual_links_2].each do |link_set|
         publishing_api_has_links(link_set)

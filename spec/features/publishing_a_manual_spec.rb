@@ -8,8 +8,8 @@ RSpec.feature "Publishing a Manual", type: :feature do
   let(:section_links) { Payloads.section_links }
   let(:fields) { %i[content_id description title details public_updated_at publication_state base_path update_type] }
   before do
-    publishing_api_has_content([manual_content_item], document_type: "manual", fields: fields, per_page: 10000)
-    publishing_api_has_content(section_content_items.map { |section| { content_id: section["content_id"] } }, document_type: "manual_section", fields: fields, per_page: 10000)
+    publishing_api_has_content([manual_content_item], document_type: "manual", fields: fields, per_page: Manual.max_numbers_of_manuals)
+    publishing_api_has_content(section_content_items.map { |section| { content_id: section["content_id"] } }, document_type: "manual_section", fields: fields, per_page: Manual.max_numbers_of_manuals)
 
     content_items = [manual_content_item] + section_content_items
 

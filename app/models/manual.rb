@@ -174,7 +174,7 @@ class Manual
   end
 
   def self.max_numbers_of_manuals
-    10000
+    10
   end
 
   def update_attributes(new_attributes)
