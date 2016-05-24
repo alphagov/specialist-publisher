@@ -1,7 +1,7 @@
 development:
   clients:
     default:
-      uri: <%= ENV['MONGODB_URI'] || 'mongodb://localhost/govuk_content_development' %>
+      uri: mongodb://localhost/govuk_content_development
       options:
         write:
           w: 1
