@@ -63,17 +63,17 @@ private
   end
 
   def metadata
-    merged_fields = document.format_specific_fields.map { |f|
-      {
-        f => document.send(f)
-      }
-    }.reduce({}, :merge)
-      .merge(
-        document_type: document.document_type,
-        bulk_published: document.bulk_published,
-      )
+    fields = document.format_specific_fields
+    metadata = fields.each_with_object({}) do |field, hash|
+      hash[field] = document.public_send(field)
+    end
 
-    merged_fields.reject { |_k, v| v.blank? }
+    metadata.merge!(
+      document_type: document.document_type,
+      bulk_published: document.bulk_published,
+    )
+
+    metadata.reject { |_k, v| v.blank? }
   end
 
   def public_updated_at
