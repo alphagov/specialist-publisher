@@ -25,6 +25,13 @@ RSpec.feature "Creating a CMA case", type: :feature do
     publishing_api_has_content([cma_case], hash_including(document_type: CmaCase.document_type))
     publishing_api_has_item(cma_case)
   end
+  scenario "getting to the new document page" do
+    visit "/cma-cases"
+    click_link "Add another CMA Case"
+
+    expect(page.status_code).to eq(200)
+    expect(page.current_path).to eq("/cma-cases/new")
+  end
 
   scenario "with valid data" do
     visit "/cma-cases/new"
