@@ -56,7 +56,7 @@ FactoryGirl.define do
     phase "live"
     redirects []
     update_type "major"
-    public_updated_at "2015-11-16T11:53:30"
+    public_updated_at "2015-11-16T11:53:30+00:00"
     updated_at "2015-11-15T11:53:30"
     publication_state "draft"
     routes {
@@ -112,6 +112,25 @@ FactoryGirl.define do
         {
           "date_of_occurrence" => "2015-10-10",
           "document_type" => "aaib_report",
+        }
+      }
+    end
+  end
+
+  factory :cma_case, parent: :document do
+    base_path "/cma-cases/example-cma-case"
+    document_type "cma_case"
+
+    transient do
+      default_metadata {
+        {
+          "document_type" => "cma_case",
+          "opened_date" => "2014-01-01",
+          "closed_date" => "2015-01-01",
+          "case_type" => "ca98-and-civil-cartels",
+          "case_state" => "closed",
+          "market_sector" => ["energy"],
+          "outcome_type" => "ca98-no-grounds-for-action-non-infringement",
         }
       }
     end
