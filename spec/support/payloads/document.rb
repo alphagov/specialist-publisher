@@ -134,57 +134,6 @@ module Payloads
     cma_case_content_item(attachments)
   end
 
-  def self.vehicle_recalls_and_faults_alert_content_item(attrs = {})
-    {
-      "content_id" => SecureRandom.uuid,
-      "base_path" => "/vehicle-recalls-faults/example-vehicle-recalls-and-faults",
-      "title" => "Example Vehicle Recalls And Faults",
-      "description" => "This is the summary of example Vehicle Recalls And Faults",
-      "document_type" => "vehicle_recalls_and_faults_alert",
-      "schema_name" => "specialist_document",
-      "publishing_app" => "specialist-publisher",
-      "rendering_app" => "specialist-frontend",
-      "locale" => "en",
-      "phase" => "live",
-      "public_updated_at" => "2015-11-16T11:53:30",
-      "updated_at" => "2015-11-15T11:53:30",
-      "publication_state" => "draft",
-      "details" => {
-        "body" => [
-          {
-            "content_type" => "text/govspeak",
-            "content" => "## Header" + ("\r\n\r\nThis is the long body of an example Vehicle Recalls And Faults" * 10)
-          },
-          {
-            "content_type" => "text/html",
-            "content" => ("<h2 id=\"header\">Header</h2>\n" + "\n<p>This is the long body of an example Vehicle Recalls And Faults</p>\n" * 10)
-          }
-        ],
-        "headers" => [{
-          "text" => "Header",
-          "level" => 2,
-          "id" => "header",
-        }],
-        "metadata" => {
-          "alert_issue_date" => "2015-04-28",
-          "build_start_date" => "2015-04-28",
-          "build_end_date" => "2015-06-28",
-          "document_type" => "vehicle_recalls_and_faults_alert"
-        },
-        "max_cache_time" => 10,
-        "change_history" => [],
-      },
-      "routes" => [
-        {
-          "path" => "/vehicle-recalls-faults/example-vehicle-recalls-and-faults",
-          "type" => "exact",
-        }
-      ],
-      "redirects" => [],
-      "update_type" => "major",
-    }.deep_merge(attrs)
-  end
-
   def self.manual_content_item(attr = {})
     {
       "base_path" => "/guidance/a-manual",

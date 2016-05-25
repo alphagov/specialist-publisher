@@ -248,4 +248,20 @@ FactoryGirl.define do
       }
     end
   end
+
+  factory :vehicle_recalls_and_faults_alert, parent: :document do
+    base_path "/vehicle-recalls-faults/example-vehicle-recalls-and-faults"
+    document_type "vehicle_recalls_and_faults_alert"
+
+    transient do
+      default_metadata {
+        {
+          "alert_issue_date" => "2015-04-28",
+          "build_start_date" => "2015-04-28",
+          "build_end_date" => "2015-06-28",
+          "document_type" => "vehicle_recalls_and_faults_alert",
+        }
+      }
+    end
+  end
 end
