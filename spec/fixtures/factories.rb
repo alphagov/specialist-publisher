@@ -219,4 +219,18 @@ FactoryGirl.define do
       }
     end
   end
+
+  factory :raib_report, parent: :document do
+    base_path "/raib-reports/example-raib-report"
+    document_type "raib_report"
+
+    transient do
+      default_metadata {
+        {
+          "date_of_occurrence" => "2015-10-10",
+          "document_type" => "raib_report",
+        }
+      }
+    end
+  end
 end

@@ -134,54 +134,6 @@ module Payloads
     cma_case_content_item(attachments)
   end
 
-  def self.raib_report_content_item(attrs = {})
-    {
-      "content_id" => SecureRandom.uuid,
-      "base_path" => "/raib-reports/example-raib-report",
-      "title" => "Example RAIB Report",
-      "description" => "This is the summary of example RAIB Report",
-      "document_type" => "raib_report",
-      "schema_name" => "specialist_document",
-      "publishing_app" => "specialist-publisher",
-      "rendering_app" => "specialist-frontend",
-      "locale" => "en",
-      "phase" => "live",
-      "public_updated_at" => "2015-11-16T11:53:30",
-      "updated_at" => "2015-11-15T11:53:30",
-      "publication_state" => "draft",
-      "details" => {
-        "body" => [
-          {
-            "content_type" => "text/govspeak",
-            "content" => "## Header" + ("\r\n\r\nThis is the long body of an example RAIB Report" * 10)
-          },
-          {
-            "content_type" => "text/html",
-            "content" => ("<h2 id=\"header\">Header</h2>\n" + "\n<p>This is the long body of an example RAIB Report</p>\n" * 10)
-          }
-        ],
-        "headers" => [{
-          "text" => "Header",
-          "level" => 2,
-          "id" => "header",
-        }],
-        "metadata" => {
-          "date_of_occurrence" => "2015-10-10",
-          "document_type" => "raib_report"
-        },
-        "max_cache_time" => 10,
-      },
-      "routes" => [
-        {
-          "path" => "/raib-reports/example-raib-report",
-          "type" => "exact",
-        }
-      ],
-      "redirects" => [],
-      "update_type" => "major",
-    }.deep_merge(attrs)
-  end
-
   def self.tax_tribunal_decision_content_item(attrs = {})
     {
       "content_id" => SecureRandom.uuid,
