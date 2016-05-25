@@ -116,4 +116,21 @@ FactoryGirl.define do
       }
     end
   end
+
+  factory :employment_appeal_tribunal_decision, parent: :document do
+    base_path "/employment-appeal-tribunal-decisions/example-employment-appeal-tribunal-decision"
+    document_type "employment_appeal_tribunal_decision"
+
+    transient do
+      default_metadata {
+        {
+          "tribunal_decision_categories" => ["age-discrimination"],
+          "tribunal_decision_decision_date" => "2015-07-30",
+          "tribunal_decision_landmark" => "landmark",
+          "tribunal_decision_sub_categories" => ["contract-of-employment-apprenticeship"],
+          "document_type" => "employment_appeal_tribunal_decision",
+        }
+      }
+    end
+  end
 end
