@@ -102,4 +102,18 @@ FactoryGirl.define do
     }
     to_create(&:deep_stringify_keys!)
   end
+
+  factory :aaib_report, parent: :document do
+    base_path "/aaib-reports/example-aaib-report"
+    document_type "aaib_report"
+
+    transient do
+      default_metadata {
+        {
+          "date_of_occurrence" => "2015-10-10",
+          "document_type" => "aaib_report",
+        }
+      }
+    end
+  end
 end
