@@ -108,55 +108,6 @@ module Payloads
     }.deep_merge(attrs)
   end
 
-  def self.esi_fund_content_item(attrs = {})
-    {
-      "content_id" => SecureRandom.uuid,
-      "base_path" => "/european-structural-investment-funds/example-esi-fund",
-      "title" => "Example ESI Fund",
-      "description" => "This is the summary of example ESI Fund",
-      "document_type" => "esi_fund",
-      "schema_name" => "specialist_document",
-      "publishing_app" => "specialist-publisher",
-      "rendering_app" => "specialist-frontend",
-      "locale" => "en",
-      "phase" => "live",
-      "public_updated_at" => "2015-11-16T11:53:30",
-      "updated_at" => "2015-11-15T11:53:30",
-      "publication_state" => "draft",
-      "details" => {
-        "body" => [
-          {
-            "content_type" => "text/govspeak",
-            "content" => "## Header" + ("\r\n\r\nThis is the long body of an example ESI Fund" * 10)
-          },
-          {
-            "content_type" => "text/html",
-            "content" => ("<h2 id=\"header\">Header</h2>\n" + "\n<p>This is the long body of an example ESI Fund</p>\n" * 10)
-          }
-        ],
-        "headers" => [{
-          "text" => "Header",
-          "level" => 2,
-          "id" => "header",
-        }],
-        "metadata" => {
-          "closing_date" => "2016-01-01",
-          "document_type" => "esi_fund",
-        },
-        "max_cache_time" => 10,
-        "change_history" => [],
-      },
-      "routes" => [
-        {
-          "path" => "/european-structural-investment-funds/example-esi-fund",
-          "type" => "exact",
-        },
-      ],
-      "redirects" => [],
-      "update_type" => "major",
-    }.deep_merge(attrs)
-  end
-
   def self.maib_report_content_item(attrs = {})
     {
       "content_id" => SecureRandom.uuid,

@@ -176,4 +176,18 @@ FactoryGirl.define do
       }
     end
   end
+
+  factory :esi_fund, parent: :document do
+    base_path "/european-structural-investment-funds/example-esi-fund"
+    document_type "esi_fund"
+
+    transient do
+      default_metadata {
+        {
+          "closing_date" => "2016-01-01",
+          "document_type" => "esi_fund",
+        }
+      }
+    end
+  end
 end
