@@ -134,56 +134,6 @@ module Payloads
     cma_case_content_item(attachments)
   end
 
-  def self.medical_safety_alert_content_item(attrs = {})
-    {
-      "content_id" => SecureRandom.uuid,
-      "base_path" => "/drug-device-alerts/example-medical-safety-alert",
-      "title" => "Example Medical Safety Alert",
-      "description" => "This is the summary of example Medical Safety Alert",
-      "document_type" => "medical_safety_alert",
-      "schema_name" => "specialist_document",
-      "publishing_app" => "specialist-publisher",
-      "rendering_app" => "specialist-frontend",
-      "locale" => "en",
-      "phase" => "live",
-      "public_updated_at" => "2015-11-16T11:53:30",
-      "updated_at" => "2015-11-15T11:53:30",
-      "publication_state" => "draft",
-      "details" => {
-        "body" => [
-          {
-            "content_type" => "text/govspeak",
-            "content" => "## Header" + ("\r\n\r\nThis is the long body of an example Medical Safety Alert" * 10)
-          },
-          {
-            "content_type" => "text/html",
-            "content" => ("<h2 id=\"header\">Header</h2>\n" + "\n<p>This is the long body of an example Medical Safety Alert</p>\n" * 10)
-          }
-        ],
-        "headers" => [{
-          "text" => "Header",
-          "level" => 2,
-          "id" => "header",
-        }],
-        "metadata" => {
-          "alert_type" => "company-led-drugs",
-          "issued_date" => "2016-02-01",
-          "document_type" => "medical_safety_alert"
-        },
-        "max_cache_time" => 10,
-        "change_history" => [],
-      },
-      "routes" => [
-        {
-          "path" => "/drug-device-alerts/example-medical-safety-alert",
-          "type" => "exact",
-        }
-      ],
-      "redirects" => [],
-      "update_type" => "major",
-    }.deep_merge(attrs)
-  end
-
   def self.raib_report_content_item(attrs = {})
     {
       "content_id" => SecureRandom.uuid,

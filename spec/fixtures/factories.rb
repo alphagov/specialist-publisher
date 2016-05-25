@@ -204,4 +204,19 @@ FactoryGirl.define do
       }
     end
   end
+
+  factory :medical_safety_alert, parent: :document do
+    base_path "/drug-device-alerts/example-medical-safety-alert"
+    document_type "medical_safety_alert"
+
+    transient do
+      default_metadata {
+        {
+          "alert_type" => "company-led-drugs",
+          "issued_date" => "2016-02-01",
+          "document_type" => "medical_safety_alert",
+        }
+      }
+    end
+  end
 end
