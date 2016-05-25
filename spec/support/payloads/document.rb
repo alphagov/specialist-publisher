@@ -108,54 +108,6 @@ module Payloads
     }.deep_merge(attrs)
   end
 
-  def self.maib_report_content_item(attrs = {})
-    {
-      "content_id" => SecureRandom.uuid,
-      "base_path" => "/maib-reports/example-maib-report",
-      "title" => "Example MAIB Report",
-      "description" => "This is the summary of example MAIB Report",
-      "document_type" => "maib_report",
-      "schema_name" => "specialist_document",
-      "publishing_app" => "specialist-publisher",
-      "rendering_app" => "specialist-frontend",
-      "locale" => "en",
-      "phase" => "live",
-      "public_updated_at" => "2015-11-16T11:53:30",
-      "updated_at" => "2015-11-15T11:53:30",
-      "publication_state" => "draft",
-      "details" => {
-        "body" => [
-          {
-            "content_type" => "text/govspeak",
-            "content" => "## Header" + ("\r\n\r\nThis is the long body of an example MAIB Report" * 10)
-          },
-          {
-            "content_type" => "text/html",
-            "content" => ("<h2 id=\"header\">Header</h2>\n" + "\n<p>This is the long body of an example MAIB Report</p>\n" * 10)
-          }
-        ],
-        "headers" => [{
-          "text" => "Header",
-          "level" => 2,
-          "id" => "header",
-        }],
-        "metadata" => {
-          "date_of_occurrence" => "2015-10-10",
-          "document_type" => "maib_report"
-        },
-        "max_cache_time" => 10,
-      },
-      "routes" => [
-        {
-          "path" => "/maib-reports/example-maib-report",
-          "type" => "exact",
-        }
-      ],
-      "redirects" => [],
-      "update_type" => "major",
-    }.deep_merge(attrs)
-  end
-
   def self.cma_case_with_attachments(attrs = {})
     attachments = {
       "details" => {
