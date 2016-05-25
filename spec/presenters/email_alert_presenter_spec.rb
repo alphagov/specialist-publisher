@@ -2,7 +2,7 @@ require 'spec_helper'
 
 RSpec.describe EmailAlertPresenter do
   let(:cma_case_payload) { Payloads.cma_case_content_item }
-  let(:medical_safety_payload) { Payloads.medical_safety_alert_content_item }
+  let(:medical_safety_payload) { FactoryGirl.create(:medical_safety_alert) }
   let(:cma_case_redrafted_payload) { Payloads.cma_case_content_item("publication_state" => "redrafted") }
 
   describe "#to_json" do
