@@ -233,4 +233,19 @@ FactoryGirl.define do
       }
     end
   end
+
+  factory :tax_tribunal_decision, parent: :document do
+    base_path "/tax-and-chancery-tribunal-decisions/example-tax-tribunal-decision"
+    document_type "tax_tribunal_decision"
+
+    transient do
+      default_metadata {
+        {
+          "tribunal_decision_category" => "banking",
+          "tribunal_decision_decision_date" => "2015-07-30",
+          "document_type" => "tax_tribunal_decision",
+        }
+      }
+    end
+  end
 end
