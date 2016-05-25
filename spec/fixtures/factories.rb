@@ -160,4 +160,20 @@ FactoryGirl.define do
       }
     end
   end
+
+  factory :employment_tribunal_decision, parent: :document do
+    base_path "/employment-tribunal-decisions/example-employment-tribunal-decision"
+    document_type "employment_tribunal_decision"
+
+    transient do
+      default_metadata {
+        {
+          "tribunal_decision_categories" => ["age-discrimination"],
+          "tribunal_decision_country" => "england-and-wales",
+          "tribunal_decision_decision_date" => "2015-07-30",
+          "document_type" => "employment_tribunal_decision",
+        }
+      }
+    end
+  end
 end
