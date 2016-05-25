@@ -130,6 +130,20 @@ FactoryGirl.define do
     end
   end
 
+  factory :dfid_research_output, parent: :document do
+    base_path "/dfid-research-outputs/example-dfid-research-output"
+    document_type "dfid_research_output"
+
+    transient do
+      default_metadata {
+        {
+          "country" => "GB",
+          "document_type" => "dfid_research_output",
+        }
+      }
+    end
+  end
+
   factory :employment_appeal_tribunal_decision, parent: :document do
     base_path "/employment-appeal-tribunal-decisions/example-employment-appeal-tribunal-decision"
     document_type "employment_appeal_tribunal_decision"
