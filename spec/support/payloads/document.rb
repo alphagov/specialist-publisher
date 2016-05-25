@@ -55,54 +55,6 @@ module Payloads
     }.deep_merge(attrs)
   end
 
-  def self.countryside_stewardship_grant_content_item(attrs = {})
-    {
-      "content_id" => SecureRandom.uuid,
-      "base_path" => "/countryside-stewardship-grants/example-countryside-stewardship-grant",
-      "title" => "Example Countryside Stewardship Grant",
-      "description" => "This is the summary of example Countryside Stewardship Grant",
-      "document_type" => "countryside_stewardship_grant",
-      "schema_name" => "specialist_document",
-      "publishing_app" => "specialist-publisher",
-      "rendering_app" => "specialist-frontend",
-      "locale" => "en",
-      "phase" => "live",
-      "public_updated_at" => "2015-11-16T11:53:30",
-      "updated_at" => "2015-11-15T11:53:30",
-      "publication_state" => "draft",
-      "details" => {
-        "body" => [
-          {
-            "content_type" => "text/govspeak",
-            "content" => "## Header" + ("\r\n\r\nThis is the long body of an example Countryside Stewardship Grant" * 10)
-          },
-          {
-            "content_type" => "text/html",
-            "content" => ("<h2 id=\"header\">Header</h2>\n" + "\n<p>This is the long body of an example Countryside Stewardship Grant</p>\n" * 10)
-          }
-        ],
-        "headers" => [{
-          "text" => "Header",
-          "level" => 2,
-          "id" => "header",
-        }],
-        "metadata" => {
-          "document_type" => "countryside_stewardship_grant"
-        },
-        "max_cache_time" => 10,
-        "change_history" => [],
-      },
-      "routes" => [
-        {
-          "path" => "/countryside-stewardship-grants/example-countryside-stewardship-grant",
-          "type" => "exact",
-        }
-      ],
-      "redirects" => [],
-      "update_type" => "major",
-    }.deep_merge(attrs)
-  end
-
   def self.dfid_research_output_content_item(attrs = {})
     {
       "content_id" => SecureRandom.uuid,

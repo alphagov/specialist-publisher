@@ -117,6 +117,19 @@ FactoryGirl.define do
     end
   end
 
+  factory :countryside_stewardship_grant, parent: :document do
+    base_path "/countryside-stewardship-grants/example-countryside-stewardship-grant"
+    document_type "countryside_stewardship_grant"
+
+    transient do
+      default_metadata {
+        {
+          "document_type" => "countryside_stewardship_grant",
+        }
+      }
+    end
+  end
+
   factory :employment_appeal_tribunal_decision, parent: :document do
     base_path "/employment-appeal-tribunal-decisions/example-employment-appeal-tribunal-decision"
     document_type "employment_appeal_tribunal_decision"
