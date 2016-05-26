@@ -67,6 +67,7 @@ RSpec.feature "Editing a published CMA case", type: :feature do
 
     changed_json.delete("publication_state")
     changed_json.delete("updated_at")
+    changed_json.delete("first_published_at")
 
     visit "/cma-cases/#{content_id}"
 
@@ -106,6 +107,7 @@ RSpec.feature "Editing a published CMA case", type: :feature do
 
     changed_json.delete("publication_state")
     changed_json.delete("updated_at")
+    changed_json.delete("first_published_at")
 
     visit "/cma-cases/#{content_id}"
 

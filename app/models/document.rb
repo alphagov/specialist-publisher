@@ -3,7 +3,7 @@ class Document
   include ActiveModel::Validations
   include PublishingHelper
 
-  attr_accessor :content_id, :base_path, :title, :summary, :body, :format_specific_fields, :public_updated_at, :state, :bulk_published, :publication_state, :change_note, :document_type, :attachments
+  attr_accessor :content_id, :base_path, :title, :summary, :body, :format_specific_fields, :public_updated_at, :state, :bulk_published, :publication_state, :change_note, :document_type, :attachments, :first_published_at
 
   attr_writer :change_history, :update_type
 
@@ -19,6 +19,7 @@ class Document
     :body,
     :publication_state,
     :public_updated_at,
+    :first_published_at,
   ]
 
   def self.policy_class
@@ -136,7 +137,8 @@ class Document
       summary: payload['description'],
       body: extract_body_from_payload(payload),
       publication_state: payload['publication_state'],
-      public_updated_at: payload['public_updated_at']
+      public_updated_at: payload['public_updated_at'],
+      first_published_at: payload['first_published_at'],
     )
 
     document.base_path = payload['base_path']

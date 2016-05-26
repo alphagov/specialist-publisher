@@ -110,6 +110,7 @@ RSpec.describe Document do
         "indexable_content" => "Header " + (["This is the long body of an example document"] * 10).join(" "),
         "link" => "/my-document-types/example-document",
         "public_timestamp" => "2015-11-16T11:53:30+00:00",
+        "first_published_at" => "2015-11-15T00:00:00+00:00",
         "field1" => "2015-12-01",
         "field2" => "open",
       )

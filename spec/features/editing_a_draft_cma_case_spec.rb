@@ -63,6 +63,7 @@ RSpec.feature "Editing a draft CMA case", type: :feature do
 
     @changed_json.delete("publication_state")
     @changed_json.delete("updated_at")
+    @changed_json.delete("first_published_at")
     Timecop.freeze(Time.parse("2015-12-03T16:59:13+00:00"))
 
     stub_request(:post, "#{Plek.find('asset-manager')}/assets")

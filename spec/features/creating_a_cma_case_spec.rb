@@ -48,6 +48,7 @@ RSpec.feature "Creating a CMA case", type: :feature do
     click_button "Save as draft"
 
     cma_case.delete("updated_at")
+    cma_case.delete("first_published_at")
     assert_publishing_api_put_content(content_id, request_json_includes(cma_case))
 
     expect(page.status_code).to eq(200)

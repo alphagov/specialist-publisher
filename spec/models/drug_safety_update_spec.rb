@@ -44,6 +44,7 @@ RSpec.describe DrugSafetyUpdate do
 
       drug_safety_update.delete("publication_state")
       drug_safety_update.delete("updated_at")
+      drug_safety_update.delete("first_published_at")
       drug_safety_update.merge!("public_updated_at" => "2015-12-18T10:12:26+00:00")
       drug_safety_update["details"].merge!(
         "change_history" => [

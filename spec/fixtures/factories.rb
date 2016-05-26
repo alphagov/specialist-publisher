@@ -57,6 +57,7 @@ FactoryGirl.define do
     redirects []
     update_type "major"
     public_updated_at "2015-11-16T11:53:30+00:00"
+    first_published_at "2015-11-15T00:00:00"
     updated_at "2015-11-15T11:53:30"
     publication_state "draft"
     routes {
