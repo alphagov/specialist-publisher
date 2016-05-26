@@ -1,9 +1,9 @@
 require 'spec_helper'
 
 RSpec.describe EmailAlertPresenter do
-  let(:cma_case_payload) { Payloads.cma_case_content_item }
+  let(:cma_case_payload) { FactoryGirl.create(:cma_case) }
   let(:medical_safety_payload) { FactoryGirl.create(:medical_safety_alert) }
-  let(:cma_case_redrafted_payload) { Payloads.cma_case_content_item("publication_state" => "redrafted") }
+  let(:cma_case_redrafted_payload) { FactoryGirl.create(:cma_case, publication_state: "redrafted") }
 
   describe "#to_json" do
     context "any finders document" do
