@@ -10,7 +10,7 @@ RSpec.feature "Creating a CMA case", type: :feature do
     }
   end
 
-  let(:cma_case) { Payloads.cma_case_content_item }
+  let(:cma_case) { FactoryGirl.create(:cma_case) }
   let(:content_id) { cma_case['content_id'] }
 
   before do
@@ -25,6 +25,7 @@ RSpec.feature "Creating a CMA case", type: :feature do
     publishing_api_has_content([cma_case], hash_including(document_type: CmaCase.document_type))
     publishing_api_has_item(cma_case)
   end
+
   scenario "getting to the new document page" do
     visit "/cma-cases"
     click_link "Add another CMA Case"
@@ -38,7 +39,7 @@ RSpec.feature "Creating a CMA case", type: :feature do
 
     fill_in "Title", with: "Example CMA Case"
     fill_in "Summary", with: "This is the summary of an example CMA case"
-    fill_in "Body", with: "## Header" + ("\n\nThis is the long body of an example CMA case" * 10)
+    fill_in "Body", with: "## Header" + ("\n\nThis is the long body of an example CMA case" * 2)
     fill_in "Opened date", with: "2014-01-01"
     select "Energy", from: "Market sector"
 
@@ -47,9 +48,53 @@ RSpec.feature "Creating a CMA case", type: :feature do
 
     click_button "Save as draft"
 
-    cma_case.delete("updated_at")
-    cma_case.delete("first_published_at")
-    assert_publishing_api_put_content(content_id, request_json_includes(cma_case))
+    expected_sent_payload = {
+      "content_id" => SecureRandom.uuid, # this is stubbed in the setup
+      "base_path" => "/cma-cases/example-cma-case",
+      "title" => "Example CMA Case",
+      "description" => "This is the summary of an example CMA case",
+      "document_type" => "cma_case",
+      "schema_name" => "specialist_document",
+      "publishing_app" => "specialist-publisher",
+      "rendering_app" => "specialist-frontend",
+      "locale" => "en",
+      "phase" => "live",
+      "public_updated_at" => "2015-12-03T16:59:13+00:00",
+      "details" => {
+        "body" => [
+          {
+            "content_type" => "text/govspeak",
+            "content" => "## Header\r\n\r\nThis is the long body of an example CMA case\r\n\r\nThis is the long body of an example CMA case"
+          },
+          {
+             "content_type" => "text/html",
+             "content" => "<h2 id=\"header\">Header</h2>\n\n<p>This is the long body of an example CMA case</p>\n\n<p>This is the long body of an example CMA case</p>\n",
+          }
+        ],
+        "metadata" => {
+          "opened_date" => "2014-01-01",
+          "case_type" => "ca98-and-civil-cartels",
+          "case_state" => "open",
+          "market_sector" => ["energy"],
+          "document_type" => "cma_case"
+        },
+        "change_history" => [
+          {
+            "public_timestamp" => "2015-12-03T16:59:13+00:00",
+            "note" => "First published."
+          }
+        ],
+        "max_cache_time" => 10,
+        "headers" => [
+          { "text" => "Header", "level" => 2, "id" => "header" }
+        ],
+      },
+      "routes" => [{ "path" => "/cma-cases/example-cma-case", "type" => "exact" }],
+      "redirects" => [],
+      "update_type" => "major",
+    }
+
+    assert_publishing_api_put_content(content_id, expected_sent_payload)
 
     expect(page.status_code).to eq(200)
     expect(page).to have_content("Created Example CMA Case")
