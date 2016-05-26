@@ -220,11 +220,13 @@ class Document
   class RecordNotSaved < StandardError; end
 
   def publish!
-    indexable_document = SearchPresenter.new(self)
-
     handle_remote_error do
       update_type = self.update_type || 'major'
       Services.publishing_api.publish(content_id, update_type)
+
+      published_document = self.class.find(self.content_id)
+      indexable_document = SearchPresenter.new(published_document)
+
       Services.rummager.add_document(
         search_document_type,
         base_path,
