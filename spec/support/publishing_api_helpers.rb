@@ -5,14 +5,13 @@ module PublishingApiHelpers
     document
   end
 
-  def saved_for_the_first_time(document)
-    timestamp = Time.now.to_datetime.rfc3339
+  def saved_for_the_first_time(document, at_time: Time.now.to_datetime.rfc3339)
     document.deep_merge(
-      "public_updated_at" => timestamp,
+      "public_updated_at" => at_time,
       "details" => {
         "change_history" => [
           {
-            "public_timestamp" => timestamp,
+            "public_timestamp" => at_time,
             "note" => "First published.",
           }
         ]
