@@ -202,22 +202,18 @@ class Document
   class RecordNotFound < StandardError; end
 
   def save
-    if self.valid?
-      self.public_updated_at = Time.zone.now if self.update_type == 'major'
+    return false unless self.valid?
 
-      presented_document = DocumentPresenter.new(self)
-      presented_links = DocumentLinksPresenter.new(self)
+    self.public_updated_at = Time.zone.now if self.update_type == 'major'
 
-      handle_remote_error do
-        Services.publishing_api.put_content(self.content_id, presented_document.to_json)
-        Services.publishing_api.patch_links(self.content_id, presented_links.to_json)
-      end
-    else
-      raise RecordNotSaved
+    presented_document = DocumentPresenter.new(self)
+    presented_links = DocumentLinksPresenter.new(self)
+
+    handle_remote_error do
+      Services.publishing_api.put_content(self.content_id, presented_document.to_json)
+      Services.publishing_api.patch_links(self.content_id, presented_links.to_json)
     end
   end
-
-  class RecordNotSaved < StandardError; end
 
   def publish!
     handle_remote_error do

@@ -193,6 +193,21 @@ RSpec.describe Document do
       expected_payload = saved_for_the_first_time(write_payload(payload.deep_stringify_keys))
       assert_publishing_api_put_content(c.content_id, expected_payload)
     end
+
+    it "returns false without making any Publishing API calls if the document is invalid" do
+      stub = stub_any_publishing_api_call
+
+      document.title = nil # this is an invalid title
+      expect(document).to_not be_valid
+
+      expect(document.save).to be_falsey
+      expect(stub).to_not have_been_requested
+    end
+
+    it "returns false if the Publishing API calls fail" do
+      publishing_api_isnt_available
+      expect(document.save).to be_falsey
+    end
   end
 
   describe ".find" do
