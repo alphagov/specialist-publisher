@@ -12,6 +12,7 @@ class SearchPresenter
       link: document.base_path,
       indexable_content: indexable_content,
       public_timestamp: document.public_updated_at.to_datetime.rfc3339,
+      first_published_at: document.first_published_at.to_datetime.rfc3339,
     }.merge(document.format_specific_metadata).reject { |_k, v| v.blank? }
   end
 

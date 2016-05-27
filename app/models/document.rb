@@ -3,7 +3,7 @@ class Document
   include ActiveModel::Validations
   include PublishingHelper
 
-  attr_accessor :content_id, :base_path, :title, :summary, :body, :format_specific_fields, :public_updated_at, :state, :bulk_published, :publication_state, :change_note, :document_type, :attachments
+  attr_accessor :content_id, :base_path, :title, :summary, :body, :format_specific_fields, :public_updated_at, :state, :bulk_published, :publication_state, :change_note, :document_type, :attachments, :first_published_at
 
   attr_writer :change_history, :update_type
 
@@ -19,6 +19,7 @@ class Document
     :body,
     :publication_state,
     :public_updated_at,
+    :first_published_at,
   ]
 
   def self.policy_class
@@ -136,7 +137,8 @@ class Document
       summary: payload['description'],
       body: extract_body_from_payload(payload),
       publication_state: payload['publication_state'],
-      public_updated_at: payload['public_updated_at']
+      public_updated_at: payload['public_updated_at'],
+      first_published_at: payload['first_published_at'],
     )
 
     document.base_path = payload['base_path']
@@ -218,18 +220,20 @@ class Document
   class RecordNotSaved < StandardError; end
 
   def publish!
-    indexable_document = SearchPresenter.new(self)
-
     handle_remote_error do
       update_type = self.update_type || 'major'
       Services.publishing_api.publish(content_id, update_type)
+
+      published_document = self.class.find(self.content_id)
+      indexable_document = SearchPresenter.new(published_document)
+
       Services.rummager.add_document(
         search_document_type,
         base_path,
         indexable_document.to_json,
       )
 
-      if self.update_type == "major"
+      if send_email_on_publish?
         Services.email_alert_api.send_alert(EmailAlertPresenter.new(self).to_json)
       end
     end
@@ -245,6 +249,10 @@ class Document
 
   def can_be_published?
     !live?
+  end
+
+  def send_email_on_publish?
+    update_type == "major"
   end
 
 private

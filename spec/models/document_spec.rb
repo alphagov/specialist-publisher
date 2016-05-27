@@ -91,6 +91,7 @@ RSpec.describe Document do
   context "successful #publish!" do
     before do
       stub_publishing_api_publish(document.content_id, {})
+      publishing_api_has_item(payload)
       stub_any_rummager_post_with_queueing_enabled
       @email_alert_api = email_alert_api_accepts_alert
     end
@@ -110,6 +111,7 @@ RSpec.describe Document do
         "indexable_content" => "Header " + (["This is the long body of an example document"] * 10).join(" "),
         "link" => "/my-document-types/example-document",
         "public_timestamp" => "2015-11-16T11:53:30+00:00",
+        "first_published_at" => "2015-11-15T00:00:00+00:00",
         "field1" => "2015-12-01",
         "field2" => "open",
       )
@@ -138,6 +140,24 @@ RSpec.describe Document do
 
       expect(@email_alert_api).to_not have_been_requested
     end
+
+    context "document has never been published" do
+      let(:unpublished_document) { MyDocumentType.from_publishing_api(payload.except("first_published_at")) }
+
+      it 'sends first_published_at to Rummager' do
+        unpublished_document.publish!
+        assert_rummager_posted_item(
+          "title" => "Example document",
+          "description" => "This is a summary",
+          "indexable_content" => "Header " + (["This is the long body of an example document"] * 10).join(" "),
+          "link" => "/my-document-types/example-document",
+          "public_timestamp" => "2015-11-16T11:53:30+00:00",
+          "first_published_at" => "2015-11-15T00:00:00+00:00",
+          "field1" => "2015-12-01",
+          "field2" => "open",
+        )
+      end
+    end
   end
 
   context "unsuccessful #publish!" do
@@ -151,6 +171,7 @@ RSpec.describe Document do
     it "notifies Airbrake and returns false if rummager does not return status 200" do
       expect(Airbrake).to receive(:notify)
       stub_publishing_api_publish(document.content_id, {})
+      publishing_api_has_item(payload)
       stub_request(:post, %r{#{Plek.new.find('search')}/documents}).to_return(status: 503)
       expect(document.publish!).to eq(false)
     end

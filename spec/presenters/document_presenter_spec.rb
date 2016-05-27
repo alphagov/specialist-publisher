@@ -114,4 +114,40 @@ RSpec.describe DocumentPresenter do
       expect(presented_data).to be_valid_against_schema("specialist_document")
     end
   end
+
+  describe '#to_json with format_specific_fields' do
+    let(:payload) {
+      FactoryGirl.create(:cma_case,
+        details: {
+          metadata: {
+            case_state: "open",
+            case_type: "ca98-and-civil-cartels",
+            outcome_type: "",
+            bulk_published: true,
+          }
+        })
+    }
+
+    let(:metadata) { presented_data[:details][:metadata] }
+
+    it 'returns the format specific fields in the details.metadata' do
+      expect(metadata).to include(
+        case_state: "open",
+        case_type: "ca98-and-civil-cartels",
+      )
+    end
+
+    it 'does not return fields that are blank' do
+      expect(metadata).not_to include(
+        :outcome_type
+      )
+    end
+
+    it 'returns document_type and bulk_published in details metadata' do
+      expect(metadata).to include(
+        document_type: "cma_case",
+        bulk_published: true,
+      )
+    end
+  end
 end

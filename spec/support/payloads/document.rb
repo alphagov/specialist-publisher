@@ -12,6 +12,7 @@ module Payloads
       "locale" => "en",
       "phase" => "live",
       "public_updated_at" => "2015-12-03T16:59:13+00:00",
+      "first_published_at" => "2015-11-15T00:00:00+00:00",
       "updated_at" => "2015-12-02T16:59:13+00:00",
       "details" => {
         "body" => [
@@ -68,6 +69,7 @@ module Payloads
       "locale" => "en",
       "phase" => "live",
       "public_updated_at" => "2015-11-16T11:53:30+00:00",
+      "first_published_at" => "2015-11-15T00:00:00+00:00",
       "updated_at" => "2015-11-15T11:53:30+00:00",
       "publication_state" => "draft",
       "details" => {

@@ -11,6 +11,7 @@ RSpec.describe SearchPresenter do
         summary:                  'A summary',
         base_path:                '/some-finder/a-title',
         public_updated_at:        Time.now,
+        first_published_at:       Time.now,
         body:                     '## A Title',
         format_specific_metadata: { country: ['GB'], blank_value: '' }
       )

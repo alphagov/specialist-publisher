@@ -44,6 +44,7 @@ RSpec.describe DrugSafetyUpdate do
 
       drug_safety_update.delete("publication_state")
       drug_safety_update.delete("updated_at")
+      drug_safety_update.delete("first_published_at")
       drug_safety_update.merge!("public_updated_at" => "2015-12-18T10:12:26+00:00")
       drug_safety_update["details"].merge!(
         "change_history" => [
@@ -68,7 +69,6 @@ RSpec.describe DrugSafetyUpdate do
       drug_safety_update_content_item(0).deep_merge(
         "details" => {
           "metadata" => {
-            "first_published_at": "2015-12-18T10:12:26.000+00:00",
             "document_type": "drug_safety_update"
           }
         },
@@ -114,41 +114,6 @@ RSpec.describe DrugSafetyUpdate do
       stub_publishing_api_publish(drug_safety_updates[0]["content_id"], {})
       stub_request(:post, %r{#{Plek.new.find('search')}/documents}).to_return(status: 503)
       expect(drug_safety_update.publish!).to eq(false)
-    end
-
-    context "for the first time" do
-      it "sets first_published_at" do
-        payload = unpublished_drug_safety_update_content_item
-
-        stub_publishing_api_publish(payload["content_id"], {})
-
-        drug_safety_update = described_class.find(payload["content_id"])
-        expect(drug_safety_update.publish!).to eq(true)
-
-        expected_details_payload = payload["details"]
-        expected_details_payload["metadata"].merge!(
-          "first_published_at" => "2015-12-18T10:12:26.000+00:00"
-        )
-
-        assert_publishing_api_put_content(
-          drug_safety_update.content_id,
-          request_json_includes("details": expected_details_payload)
-        )
-      end
-    end
-
-    context "an already published drug safety update" do
-      it "does not update first_published_at" do
-        payload = published_drug_safety_update_content_item
-
-        stub_publishing_api_publish(payload["content_id"], {})
-
-        drug_safety_update = described_class.find(payload["content_id"])
-        expect(drug_safety_update.publish!).to eq(true)
-
-        assert_not_requested(:put, "#{Plek.current.find('publishing-api')}/v2/content/#{payload['content_id']}")
-        assert_publishing_api_publish(drug_safety_update.content_id)
-      end
     end
   end
 end
