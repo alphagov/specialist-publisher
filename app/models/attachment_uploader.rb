@@ -6,7 +6,7 @@ class AttachmentUploader
   def upload(attachment, document)
     attachment.url = file_url(attachment.file)
     add_attachment(document, attachment) unless attachment.changed?
-    document.save!
+    document.save
   rescue GdsApi::BaseError => e
     Airbrake.notify(e)
     false

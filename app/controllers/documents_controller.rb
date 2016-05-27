@@ -35,7 +35,7 @@ class DocumentsController < ApplicationController
     )
 
     if @document.valid?
-      if @document.save!
+      if @document.save
         flash[:success] = "Created #{@document.title}"
         redirect_to document_path(current_format.slug, @document.content_id)
       else
@@ -60,7 +60,7 @@ class DocumentsController < ApplicationController
     end
 
     if @document.valid?
-      if @document.save!
+      if @document.save
         flash[:success] = "Updated #{@document.title}"
         redirect_to document_path(current_format.slug, @document.content_id)
       else
