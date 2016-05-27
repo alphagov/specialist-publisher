@@ -88,7 +88,7 @@ RSpec.describe AttachmentUploader do
 
       context 'publisher raises an error' do
         before do
-          allow(service).to receive(:create_asset).and_raise(GdsApi::BaseError)
+          allow(service).to receive(:create_asset).and_raise(Document::RecordNotSaved)
         end
 
         it 'returns false' do
@@ -181,7 +181,7 @@ RSpec.describe AttachmentUploader do
 
       context 'publisher raises an error' do
         before do
-          allow(service).to receive(:create_asset).and_raise(GdsApi::BaseError)
+          allow(service).to receive(:create_asset).and_raise(Document::RecordNotSaved)
         end
 
         it 'returns false' do

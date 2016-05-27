@@ -188,10 +188,16 @@ RSpec.describe Document do
       stub_any_publishing_api_patch_links
 
       c = MyDocumentType.find(payload["content_id"])
-      expect(c.save!).to eq(true)
+      c.save!
 
       expected_payload = saved_for_the_first_time(write_payload(payload.deep_stringify_keys))
       assert_publishing_api_put_content(c.content_id, expected_payload)
+    end
+
+    it "notifies Airbrake and raises an error if any of the Publishing API calls fail" do
+      expect(Airbrake).to receive(:notify)
+      publishing_api_isnt_available
+      expect { document.save! }.to raise_error(Document::RecordNotSaved)
     end
   end
 

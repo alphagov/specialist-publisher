@@ -7,7 +7,8 @@ class AttachmentUploader
     attachment.url = file_url(attachment.file)
     add_attachment(document, attachment) unless attachment.changed?
     document.save!
-  rescue GdsApi::BaseError => e
+    true
+  rescue Document::RecordNotSaved => e
     Airbrake.notify(e)
     false
   end

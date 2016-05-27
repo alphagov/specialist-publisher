@@ -35,10 +35,11 @@ class DocumentsController < ApplicationController
     )
 
     if @document.valid?
-      if @document.save!
+      begin
+        @document.save!
         flash[:success] = "Created #{@document.title}"
         redirect_to document_path(current_format.slug, @document.content_id)
-      else
+      rescue Document::RecordNotSaved
         flash.now[:danger] = "There was an error creating #{@document.title}. Please try again later."
         render :new
       end
@@ -60,10 +61,11 @@ class DocumentsController < ApplicationController
     end
 
     if @document.valid?
-      if @document.save!
+      begin
+        @document.save!
         flash[:success] = "Updated #{@document.title}"
         redirect_to document_path(current_format.slug, @document.content_id)
-      else
+      rescue Document::RecordNotSaved
         flash.now[:danger] = "There was an error updating #{@document.title}. Please try again later."
         render :edit
       end
