@@ -233,7 +233,7 @@ class Document
         indexable_document.to_json,
       )
 
-      if self.update_type == "major"
+      if send_email_on_publish?
         Services.email_alert_api.send_alert(EmailAlertPresenter.new(self).to_json)
       end
     end
@@ -249,6 +249,10 @@ class Document
 
   def can_be_published?
     !live?
+  end
+
+  def send_email_on_publish?
+    update_type == "major"
   end
 
 private
