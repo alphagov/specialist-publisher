@@ -201,7 +201,7 @@ class Document
 
   class RecordNotFound < StandardError; end
 
-  def save!
+  def save
     if self.valid?
       self.public_updated_at = Time.zone.now if self.update_type == 'major'
 

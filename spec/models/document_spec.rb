@@ -177,7 +177,7 @@ RSpec.describe Document do
     end
   end
 
-  describe "#save!" do
+  describe "#save" do
     before do
       publishing_api_has_item(payload)
       Timecop.freeze(Time.parse("2015-12-18 10:12:26 UTC"))
@@ -188,7 +188,7 @@ RSpec.describe Document do
       stub_any_publishing_api_patch_links
 
       c = MyDocumentType.find(payload["content_id"])
-      expect(c.save!).to eq(true)
+      expect(c.save).to eq(true)
 
       expected_payload = saved_for_the_first_time(write_payload(payload.deep_stringify_keys))
       assert_publishing_api_put_content(c.content_id, expected_payload)

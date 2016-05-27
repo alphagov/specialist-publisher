@@ -35,7 +35,7 @@ RSpec.describe DrugSafetyUpdate do
     Timecop.freeze(Time.parse("2015-12-18 10:12:26 UTC"))
   end
 
-  describe "#save!" do
+  describe "#save" do
     it "saves the Drug Safety Update" do
       stub_any_publishing_api_put_content
       stub_any_publishing_api_patch_links
@@ -56,7 +56,7 @@ RSpec.describe DrugSafetyUpdate do
       )
 
       c = described_class.find(drug_safety_update["content_id"])
-      expect(c.save!).to eq(true)
+      expect(c.save).to eq(true)
 
       assert_publishing_api_put_content(c.content_id, request_json_includes(drug_safety_update))
       expect(drug_safety_update.to_json).to be_valid_against_schema('specialist_document')
