@@ -297,4 +297,18 @@ FactoryGirl.define do
       }
     end
   end
+
+  factory :attachment_payload, class: Hash do
+    content_id
+    sequence(:url) { |n|
+      "https://assets.digital.cabinet-office.gov.uk/media/513a0efbed915d425e000002/asylum-support-image-#{n}.jpg"
+    }
+    content_type "application/jpeg"
+    title "asylum report image title"
+    created_at "2015-12-18T10:12:26+00:00"
+    updated_at "2015-12-18T10:12:26+00:00"
+
+    initialize_with { attributes }
+    to_create(&:deep_stringify_keys!)
+  end
 end
