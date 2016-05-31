@@ -164,6 +164,19 @@ FactoryGirl.define do
     end
   end
 
+  factory :drug_safety_update, parent: :document do
+    base_path "/drug-safety-update/example-drug-safety-update"
+    document_type "drug_safety_update"
+
+    transient do
+      default_metadata {
+        {
+          "document_type" => "drug_safety_update",
+        }
+      }
+    end
+  end
+
   factory :employment_appeal_tribunal_decision, parent: :document do
     base_path "/employment-appeal-tribunal-decisions/example-employment-appeal-tribunal-decision"
     document_type "employment_appeal_tribunal_decision"
