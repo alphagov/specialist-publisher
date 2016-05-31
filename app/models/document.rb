@@ -251,6 +251,11 @@ class Document
     update_type == "major"
   end
 
+  def add_attachment(attachment)
+    self.attachments ||= []
+    self.attachments.push(attachment)
+  end
+
 private
 
   def self.attachments(payload)

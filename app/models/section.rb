@@ -156,6 +156,11 @@ class Section
     self.attachments.detect { |attachment| attachment.content_id == attachment_content_id }
   end
 
+  def add_attachment(attachment)
+    self.attachments ||= []
+    self.attachments.push(attachment)
+  end
+
 private
 
   def publishing_api
