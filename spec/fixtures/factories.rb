@@ -249,6 +249,8 @@ FactoryGirl.define do
       default_metadata {
         {
           "date_of_occurrence" => "2015-10-10",
+          "report_type" => "investigation-report",
+          "vessel_type" => ["merchant-vessel-100-gross-tons-or-over"],
           "document_type" => "maib_report",
         }
       }
