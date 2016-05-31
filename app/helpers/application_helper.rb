@@ -14,4 +14,12 @@ module ApplicationHelper
 
     content_tag(:span, state, class: classes).html_safe
   end
+
+  def pop_up_warning_for_publishing(document)
+    if document.update_type == 'minor'
+      "You are about to publish a minor edit. Continue?"
+    else
+      "Publishing will email subscribers to #{current_format.title.pluralize}. Continue?"
+    end
+  end
 end
