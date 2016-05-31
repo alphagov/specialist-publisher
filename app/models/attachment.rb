@@ -31,4 +31,13 @@ class Attachment < Document
     return nil unless payload.fetch('details', {}).key?('attachments')
     payload['details']['attachments'].map { |attachment| Attachment.new(attachment) }
   end
+
+  def upload
+    response = Services.asset_api.create_asset(file: @file)
+    @url = response.file_url
+    true
+  rescue GdsApi::BaseError => e
+    Airbrake.notify(e)
+    false
+  end
 end
