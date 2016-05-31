@@ -231,6 +231,10 @@ FactoryGirl.define do
       default_metadata {
         {
           "closing_date" => "2016-01-01",
+          "fund_state" => "open",
+          "fund_type" => ["business-support"],
+          "location" => ["south-west"],
+          "funding_source" => ["european-regional-development-fund"],
           "document_type" => "esi_fund",
         }
       }
