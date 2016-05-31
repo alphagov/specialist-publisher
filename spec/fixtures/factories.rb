@@ -199,6 +199,7 @@ FactoryGirl.define do
           "tribunal_decision_decision_date" => "2015-07-30",
           "tribunal_decision_landmark" => "landmark",
           "tribunal_decision_sub_categories" => ["contract-of-employment-apprenticeship"],
+          "hidden_indexable_content" => "???",
           "document_type" => "employment_appeal_tribunal_decision",
         }
       }
@@ -215,6 +216,7 @@ FactoryGirl.define do
           "tribunal_decision_categories" => ["age-discrimination"],
           "tribunal_decision_country" => "england-and-wales",
           "tribunal_decision_decision_date" => "2015-07-30",
+          "hidden_indexable_content" => "???",
           "document_type" => "employment_tribunal_decision",
         }
       }
@@ -287,6 +289,7 @@ FactoryGirl.define do
         {
           "tribunal_decision_category" => "banking",
           "tribunal_decision_decision_date" => "2015-07-30",
+          "hidden_indexable_content" => "???",
           "document_type" => "tax_tribunal_decision",
         }
       }
