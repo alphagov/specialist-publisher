@@ -48,9 +48,7 @@ class DocumentsController < ApplicationController
     end
   end
 
-  def show
-    @publish_warning = PublishWarningPresenter.new.publish_warning(@document).html_safe
-  end
+  def show; end
 
   def edit; end
 

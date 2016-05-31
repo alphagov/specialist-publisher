@@ -2,6 +2,7 @@ require 'spec_helper'
 
 RSpec.feature "Publishing a CMA case", type: :feature do
   let(:content_id) { item['content_id'] }
+  let(:publish_alert_message) { page.find_button('Publish')["data-message"] }
 
   before do
     log_in_as_editor(:cma_editor)
@@ -40,7 +41,7 @@ RSpec.feature "Publishing a CMA case", type: :feature do
       assert_email_alert_sent
     end
 
-    scenario "publish warning will indicate that an email will be sent" do
+    scenario "publish warning and popup text will indicate that an email will be sent" do
       visit "/cma-cases"
 
       expect(page.status_code).to eq(200)
@@ -50,6 +51,8 @@ RSpec.feature "Publishing a CMA case", type: :feature do
       expect(page.status_code).to eq(200)
       expect(page).to have_content("Example CMA Case")
       expect(page).to have_content("Publishing will email subscribers to CMA Cases.")
+
+      expect(publish_alert_message).to eq("Publishing will email subscribers to CMA Cases. Continue?")
     end
 
     scenario "writers don't see a publish button" do
@@ -89,7 +92,7 @@ RSpec.feature "Publishing a CMA case", type: :feature do
         publication_state: "redrafted")
     }
 
-    scenario "publish warning will indicate that it is a major edit" do
+    scenario "publish warning and popup text will indicate that it is a major edit" do
       visit "/cma-cases"
 
       expect(page.status_code).to eq(200)
@@ -100,6 +103,8 @@ RSpec.feature "Publishing a CMA case", type: :feature do
       expect(page).to have_content("Major Update Case")
       expect(page).to have_content("You are about to publish a major edit with a public change note.")
       expect(page).to have_content("Publishing will email subscribers to CMA Cases.")
+
+      expect(publish_alert_message).to eq("Publishing will email subscribers to CMA Cases. Continue?")
     end
   end
 
@@ -130,7 +135,7 @@ RSpec.feature "Publishing a CMA case", type: :feature do
       assert_not_requested(:post, Plek.current.find('email-alert-api') + "/notifications")
     end
 
-    scenario "publish warning will indicate that it is a minor edit" do
+    scenario "publish warning and popup text will indicate that it is a minor edit" do
       visit "/cma-cases"
 
       expect(page.status_code).to eq(200)
@@ -141,6 +146,8 @@ RSpec.feature "Publishing a CMA case", type: :feature do
       expect(page).to have_content("Minor Update Case")
       expect(page).to have_content("You are about to publish a minor edit.")
       expect(page).to have_no_content("Publishing will email subscribers to CMA Cases.")
+
+      expect(publish_alert_message).to eq("You are about to publish a minor edit. Continue?")
     end
   end
 
@@ -161,7 +168,7 @@ RSpec.feature "Publishing a CMA case", type: :feature do
       expect(page).to have_no_content("There are no changes to publish.")
     end
 
-    scenario "publish warning will indicate that an email will be sent" do
+    scenario "publish warning and popup text will indicate that an email will be sent" do
       visit "/cma-cases"
 
       expect(page.status_code).to eq(200)
@@ -174,6 +181,8 @@ RSpec.feature "Publishing a CMA case", type: :feature do
 
       expect(page).to have_no_content("You are about to publish a minor edit")
       expect(page).to have_no_content("You are about to publish a major edit")
+
+      expect(publish_alert_message).to eq("Publishing will email subscribers to CMA Cases. Continue?")
     end
   end
 end
