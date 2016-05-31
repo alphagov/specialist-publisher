@@ -8,7 +8,7 @@
         You don’t have permission to publish this document.
       </p>
     <% elsif @document.can_be_published? %>
-      <%= @publish_warning %>
+      <%= publish_warning(@document) %>
       <%= form_tag(publish_document_path(current_format.slug, @document.content_id), method: :post) do %>
         <button name="submit" class="btn btn-danger" data-module="confirm" data-message="<%= pop_up_warning_for_publishing(@document) %>" >Publish</button>
       <% end %>
