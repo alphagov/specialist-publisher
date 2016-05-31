@@ -315,6 +315,11 @@ FactoryGirl.define do
           "alert_issue_date" => "2015-04-28",
           "build_start_date" => "2015-04-28",
           "build_end_date" => "2015-06-28",
+          "fault_type" => "recall",
+          "faulty_item_type" => "other-accessories",
+          "manufacturer" => "nim-engineering-ltd",
+          "faulty_item_model" => "Cable Recovery Winch",
+          "serial_number" => "SN123",
           "document_type" => "vehicle_recalls_and_faults_alert",
         }
       }
