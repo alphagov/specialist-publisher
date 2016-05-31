@@ -266,6 +266,7 @@ FactoryGirl.define do
         {
           "alert_type" => "company-led-drugs",
           "issued_date" => "2016-02-01",
+          "medical_specialism" => %w(anaesthetics cardiology),
           "document_type" => "medical_safety_alert",
         }
       }
