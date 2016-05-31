@@ -112,6 +112,11 @@ FactoryGirl.define do
       default_metadata {
         {
           "date_of_occurrence" => "2015-10-10",
+          "aircraft_category" => ["commercial-fixed-wing"],
+          "report_type" => "annual-safety-report",
+          "location" => "Near Popham Airfield, Hampshire",
+          "aircraft_type" => "Alpi (Cavaciuti) Pioneer 400",
+          "registration" => "G-CGVO",
           "document_type" => "aaib_report",
         }
       }
