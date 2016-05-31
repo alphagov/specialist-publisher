@@ -281,6 +281,8 @@ FactoryGirl.define do
       default_metadata {
         {
           "date_of_occurrence" => "2015-10-10",
+          "report_type" => "investigation-report",
+          "railway_type" => ["heavy-rail"],
           "document_type" => "raib_report",
         }
       }
