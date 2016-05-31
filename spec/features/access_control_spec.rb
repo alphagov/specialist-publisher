@@ -104,7 +104,7 @@ RSpec.feature "Access control", type: :feature do
         visit "/manuals"
 
         expect(page.status_code).to eq(200)
-        expect(page).not_to have_content 'Example manual'
+        expect(page).to have_no_content 'Example manual'
         expect(page).to have_content 'Exemplar manual'
       end
     end

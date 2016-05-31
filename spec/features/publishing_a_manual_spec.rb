@@ -57,6 +57,6 @@ RSpec.feature "Publishing a Manual", type: :feature do
 
     click_link "A Manual"
 
-    expect(page).not_to have_selector(:button, 'Publish')
+    expect(page).to have_no_selector(:button, 'Publish')
   end
 end

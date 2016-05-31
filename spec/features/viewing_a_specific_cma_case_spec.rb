@@ -121,7 +121,7 @@ RSpec.feature "Viewing a specific case", type: :feature do
       visit "/cma-cases"
       click_link "CMA Case with attachments"
 
-      expect(page).not_to have_content("This document doesn’t have any attachments")
+      expect(page).to have_no_content("This document doesn’t have any attachments")
       expect(page).to have_content("2 attachments")
 
       expect(page).to have_content("first attachment")
