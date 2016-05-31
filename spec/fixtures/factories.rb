@@ -181,6 +181,7 @@ FactoryGirl.define do
     transient do
       default_metadata {
         {
+          "therapeutic_area" => ["cancer", "haematology", "immunosuppression-transplantation"],
           "document_type" => "drug_safety_update",
         }
       }
