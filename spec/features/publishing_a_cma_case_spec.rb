@@ -33,6 +33,13 @@ RSpec.feature "Publishing a CMA case", type: :feature do
     )
   end
 
+  def major_update_item
+    cma_case.merge(
+      "title" => "Major Update Case",
+      "publication_state" => "redrafted",
+    )
+  end
+
   def live_item
     cma_case.merge(
       "title" => "Live Item",
@@ -50,7 +57,7 @@ RSpec.feature "Publishing a CMA case", type: :feature do
   before do
     log_in_as_editor(:cma_editor)
 
-    publishing_api_has_content([cma_case, minor_update_item, live_item, withdrawn_item], hash_including(document_type: CmaCase.document_type))
+    publishing_api_has_content([cma_case, minor_update_item, major_update_item, live_item, withdrawn_item], hash_including(document_type: CmaCase.document_type))
 
     publishing_api_has_item(cma_case)
 
@@ -70,6 +77,7 @@ RSpec.feature "Publishing a CMA case", type: :feature do
 
     expect(page.status_code).to eq(200)
     expect(page).to have_content("Example CMA Case")
+    expect(page).to have_content("Publishing will email subscribers to CMA Cases.")
 
     click_button "Publish"
     expect(page.status_code).to eq(200)
@@ -99,6 +107,35 @@ RSpec.feature "Publishing a CMA case", type: :feature do
     assert_publishing_api_publish(content_id)
 
     assert_not_requested(:post, Plek.current.find('email-alert-api') + "/notifications")
+  end
+
+  scenario "publish warning will appear when published document update type is major" do
+    publishing_api_has_item(major_update_item)
+
+    visit "/cma-cases"
+
+    expect(page.status_code).to eq(200)
+
+    click_link "Major Update Case"
+
+    expect(page.status_code).to eq(200)
+    expect(page).to have_content("Major Update Case")
+    expect(page).to have_content("You are about to publish a major edit with a public change note.")
+    expect(page).to have_content("Publishing will email subscribers to CMA Cases.")
+  end
+
+  scenario "publish waring will appear when update type is minor" do
+    publishing_api_has_item(minor_update_item)
+    visit "/cma-cases"
+
+    expect(page.status_code).to eq(200)
+
+    click_link "Minor Update Case"
+
+    expect(page.status_code).to eq(200)
+    expect(page).to have_content("Minor Update Case")
+    expect(page).to have_content("You are about to publish a minor edit.")
+    expect(page).not_to have_content("Publishing will email subscribers to CMA Cases.")
   end
 
   scenario "when content item is live, there will be no publish button" do
