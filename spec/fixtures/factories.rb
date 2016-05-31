@@ -149,6 +149,10 @@ FactoryGirl.define do
     transient do
       default_metadata {
         {
+          "grant_type" => "option",
+          "land_use" => ["priority-habitats", "trees-non-woodland", "uplands"],
+          "tiers_or_standalone_items" => ["higher-tier"],
+          "funding_amount" => ["201-to-300"],
           "document_type" => "countryside_stewardship_grant",
         }
       }
