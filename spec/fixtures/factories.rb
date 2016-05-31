@@ -166,7 +166,8 @@ FactoryGirl.define do
     transient do
       default_metadata {
         {
-          "country" => "GB",
+          "country" => ["GB"],
+          "first_published_at" => "2016-04-28T11:26:00",
           "document_type" => "dfid_research_output",
         }
       }
