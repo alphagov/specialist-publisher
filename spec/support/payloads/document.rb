@@ -56,60 +56,6 @@ module Payloads
     }.deep_merge(attrs)
   end
 
-  def self.drug_safety_update_content_item(attrs = {})
-    {
-      "content_id" => SecureRandom.uuid,
-      "base_path" => "/drug-safety-update/example-drug-safety-update",
-      "title" => "Example Drug Safety Update",
-      "description" => "This is the summary of an example Drug Safety Update",
-      "document_type" => "drug_safety_update",
-      "schema_name" => "specialist_document",
-      "publishing_app" => "specialist-publisher",
-      "rendering_app" => "specialist-frontend",
-      "locale" => "en",
-      "phase" => "live",
-      "public_updated_at" => "2015-11-16T11:53:30+00:00",
-      "first_published_at" => "2015-11-15T00:00:00+00:00",
-      "updated_at" => "2015-11-15T11:53:30+00:00",
-      "publication_state" => "draft",
-      "details" => {
-        "body" => [
-          {
-            "content_type" => "text/govspeak",
-            "content" => "## Header" + ("\r\n\r\nThis is the long body of an example Drug Safety Update" * 10)
-          },
-          {
-            "content_type" => "text/html",
-            "content" => ("<h2 id=\"header\">Header</h2>\n" + "\n<p>This is the long body of an example Drug Safety Update</p>\n" * 10)
-          }
-        ],
-        "headers" => [{
-          "text" => "Header",
-          "level" => 2,
-          "id" => "header",
-        }],
-        "metadata" => {
-          "document_type" => "drug_safety_update",
-        },
-        "max_cache_time" => 10,
-        "change_history" => [
-          {
-            "public_timestamp" => "2015-11-16T11:53:30+00:00",
-            "note" => "First published."
-          }
-        ]
-      },
-      "routes" => [
-        {
-          "path" => "/drug-safety-update/example-drug-safety-update",
-          "type" => "exact",
-        }
-      ],
-      "redirects" => [],
-      "update_type" => "major",
-    }.deep_merge(attrs)
-  end
-
   def self.cma_case_with_attachments(attrs = {})
     attachments = {
       "details" => {
