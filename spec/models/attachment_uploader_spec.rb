@@ -55,7 +55,7 @@ RSpec.describe AttachmentUploader do
         end
 
         it "document attachment should be changed" do
-          expect(document.attachments).to be_nil
+          expect(document.attachments).to be_empty
           subject.upload(attachment, document)
           expect(document.attachments).to eq([attachment])
         end
@@ -142,7 +142,7 @@ RSpec.describe AttachmentUploader do
         end
 
         it "document attachemnt should be changed" do
-          expect(section.attachments).to_not be
+          expect(section.attachments).to be_empty
           subject.upload(attachment, section)
           expect(section.attachments).to eq([attachment])
         end

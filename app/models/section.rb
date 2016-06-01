@@ -157,12 +157,15 @@ class Section
   end
 
   def find_attachment(attachment_content_id)
-    (self.attachments || []).detect { |attachment| attachment.content_id == attachment_content_id }
+    self.attachments.detect { |attachment| attachment.content_id == attachment_content_id }
   end
 
   def add_attachment(attachment)
-    self.attachments ||= []
     self.attachments.push(attachment)
+  end
+
+  def attachments
+    @attachments ||= []
   end
 
 private

@@ -31,7 +31,7 @@ private
         base_path: @section.manual.base_path
       },
     }.tap do |details_hash|
-      details_hash[:attachments] = attachments if @section.attachments
+      details_hash[:attachments] = attachments if @section.attachments.present?
     end
   end
 
