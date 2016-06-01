@@ -1,6 +1,10 @@
 require 'spec_helper'
-
+require 'gds_api/test_helpers/asset_manager'
 RSpec.describe AttachmentUploader do
+  include GdsApi::TestHelpers::AssetManager
+  before do
+    asset_manager_receives_an_asset(url)
+  end
   context 'for a CMA case document' do
     let(:cma_cases) {
       [
@@ -39,12 +43,8 @@ RSpec.describe AttachmentUploader do
     end
 
     describe "uploader" do
-      subject { described_class.new(publisher: publisher) }
+      subject { described_class.new }
       let(:url) { '/uploaded/document.jpg' }
-
-      let(:service) { double("service", create_asset: double("file", file_url: url)) }
-      let(:publisher) { double("publisher", services: service) }
-
       let(:attachment) { Attachment.new(changed: false) }
       let(:document) { CmaCase.find(cma_cases[0]["content_id"]) }
 
@@ -59,7 +59,7 @@ RSpec.describe AttachmentUploader do
           expect(attachment.url).to eq(url)
         end
 
-        it "document attachemnt should be changed" do
+        it "document attachment should be changed" do
           expect(document.attachments).to_not be
           subject.upload(attachment, document)
           expect(document.attachments).to eq([attachment])
@@ -70,7 +70,7 @@ RSpec.describe AttachmentUploader do
         let(:document) { CmaCase.find(cma_cases[1]["content_id"]) }
         let(:attachment) { document.attachments.first }
 
-        it "document attachemnt should be changed" do
+        it "document attachment should be changed" do
           attachment.changed = true
           expect(document.attachments.count).to eq(2)
           subject.upload(attachment, document)
@@ -80,7 +80,7 @@ RSpec.describe AttachmentUploader do
 
       context 'publisher raises an error' do
         before do
-          allow(service).to receive(:create_asset).and_raise(GdsApi::BaseError)
+          asset_manager_upload_failure
         end
 
         it 'returns false' do
@@ -132,7 +132,7 @@ RSpec.describe AttachmentUploader do
     end
 
     describe "uploader" do
-      subject { described_class.new(publisher: publisher) }
+      subject { described_class.new }
       let(:url) { '/uploaded/document.jpg' }
 
       let(:service) { double("service", create_asset: double("file", file_url: url)) }
@@ -173,7 +173,7 @@ RSpec.describe AttachmentUploader do
 
       context 'publisher raises an error' do
         before do
-          allow(service).to receive(:create_asset).and_raise(GdsApi::BaseError)
+          asset_manager_upload_failure
         end
 
         it 'returns false' do
