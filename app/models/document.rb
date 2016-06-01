@@ -258,10 +258,6 @@ class Document
 
 private
 
-  def self.attachments(payload)
-    payload.details.attachments.map { |attachment| Attachment.new(attachment) }
-  end
-
   def self.finder_schema
     @finder_schema ||= FinderSchema.new(document_type.pluralize)
   end
