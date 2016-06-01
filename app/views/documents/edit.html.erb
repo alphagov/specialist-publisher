@@ -16,7 +16,7 @@
       <%= render partial: "shared/minor_major_update_fields", locals: { f: f, document: @document } %>
 
       <div class="actions">
-        <button name="save" class="btn btn-success">Save as draft</button>
+        <button name="save" class="btn btn-success" data-disable-with="Saving...">Save as draft</button>
       </div>
     <% end %>
   </div>

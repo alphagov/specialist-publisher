@@ -3,6 +3,7 @@ require 'spec_helper'
 RSpec.feature "Publishing a CMA case", type: :feature do
   let(:content_id) { item['content_id'] }
   let(:publish_alert_message) { page.find_button('Publish')["data-message"] }
+  let(:publish_disable_with_message) { page.find_button('Publish')["data-disable-with"] }
 
   before do
     log_in_as_editor(:cma_editor)
@@ -53,6 +54,7 @@ RSpec.feature "Publishing a CMA case", type: :feature do
       expect(page).to have_content("Publishing will email subscribers to CMA Cases.")
 
       expect(publish_alert_message).to eq("Publishing will email subscribers to CMA Cases. Continue?")
+      expect(publish_disable_with_message).to eq("Publishing...")
     end
 
     scenario "writers don't see a publish button" do

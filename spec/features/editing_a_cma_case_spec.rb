@@ -8,6 +8,7 @@ RSpec.feature "Editing a CMA case", type: :feature do
   }
 
   let(:content_id) { cma_case['content_id'] }
+  let(:save_button_disable_with_message) { page.find_button('Save as draft')["data-disable-with"] }
 
   before do
     log_in_as_editor(:cma_editor)
@@ -65,6 +66,7 @@ RSpec.feature "Editing a CMA case", type: :feature do
 
     expect(page).to have_css('div.govspeak-help')
     expect(page).to have_content('Add attachment')
+    expect(save_button_disable_with_message).to eq("Saving...")
 
     click_button "Save as draft"
 
