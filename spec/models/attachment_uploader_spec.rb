@@ -49,18 +49,13 @@ RSpec.describe AttachmentUploader do
       let(:document) { CmaCase.find(cma_cases[0]["content_id"]) }
 
       context 'uploading new attachment' do
-        it "attachment should not be changed" do
-          subject.upload(attachment, document)
-          expect(attachment.changed?).to be(false)
-        end
-
         it "sets the attachment url" do
           subject.upload(attachment, document)
           expect(attachment.url).to eq(url)
         end
 
         it "document attachment should be changed" do
-          expect(document.attachments).to_not be
+          expect(document.attachments).to be_nil
           subject.upload(attachment, document)
           expect(document.attachments).to eq([attachment])
         end
@@ -71,7 +66,6 @@ RSpec.describe AttachmentUploader do
         let(:attachment) { document.attachments.first }
 
         it "document attachment should be changed" do
-          attachment.changed = true
           expect(document.attachments.count).to eq(2)
           subject.upload(attachment, document)
           expect(document.attachments.count).to eq(2)
@@ -142,11 +136,6 @@ RSpec.describe AttachmentUploader do
       let(:section) { Section.find(content_id: sections[0]["content_id"]) }
 
       context 'uploading new attachment' do
-        it "attachment should not be changed" do
-          subject.upload(attachment, section)
-          expect(attachment.changed?).to be(false)
-        end
-
         it "sets the attachment url" do
           subject.upload(attachment, section)
           expect(attachment.url).to eq(url)
@@ -164,7 +153,6 @@ RSpec.describe AttachmentUploader do
         let(:attachment) { section.attachments.first }
 
         it "section attachemnt should be changed" do
-          attachment.changed = true
           expect(section.attachments.count).to eq(2)
           subject.upload(attachment, section)
           expect(section.attachments.count).to eq(2)

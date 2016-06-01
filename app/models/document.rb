@@ -235,8 +235,12 @@ class Document
     end
   end
 
+  def has_attachment?(attachment)
+    find_attachment(attachment.content_id).present?
+  end
+
   def find_attachment(attachment_content_id)
-    self.attachments.detect { |attachment| attachment.content_id == attachment_content_id }
+    (self.attachments || []).detect { |attachment| attachment.content_id == attachment_content_id }
   end
 
   def self.slug

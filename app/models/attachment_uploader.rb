@@ -1,7 +1,7 @@
 class AttachmentUploader
   def upload(attachment, document)
     if attachment.upload
-      document.add_attachment(attachment) unless attachment.changed?
+      document.add_attachment(attachment) unless document.has_attachment?(attachment)
       document.save
     else
       false
