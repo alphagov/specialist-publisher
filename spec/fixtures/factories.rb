@@ -112,6 +112,11 @@ FactoryGirl.define do
       default_metadata {
         {
           "date_of_occurrence" => "2015-10-10",
+          "aircraft_category" => ["commercial-fixed-wing"],
+          "report_type" => "annual-safety-report",
+          "location" => "Near Popham Airfield, Hampshire",
+          "aircraft_type" => "Alpi (Cavaciuti) Pioneer 400",
+          "registration" => "G-CGVO",
           "document_type" => "aaib_report",
         }
       }
@@ -144,6 +149,10 @@ FactoryGirl.define do
     transient do
       default_metadata {
         {
+          "grant_type" => "option",
+          "land_use" => ["priority-habitats", "trees-non-woodland", "uplands"],
+          "tiers_or_standalone_items" => ["higher-tier"],
+          "funding_amount" => ["201-to-300"],
           "document_type" => "countryside_stewardship_grant",
         }
       }
@@ -157,7 +166,8 @@ FactoryGirl.define do
     transient do
       default_metadata {
         {
-          "country" => "GB",
+          "country" => ["GB"],
+          "first_published_at" => "2016-04-28T11:26:00",
           "document_type" => "dfid_research_output",
         }
       }
@@ -171,6 +181,7 @@ FactoryGirl.define do
     transient do
       default_metadata {
         {
+          "therapeutic_area" => ["cancer", "haematology", "immunosuppression-transplantation"],
           "document_type" => "drug_safety_update",
         }
       }
@@ -188,6 +199,7 @@ FactoryGirl.define do
           "tribunal_decision_decision_date" => "2015-07-30",
           "tribunal_decision_landmark" => "landmark",
           "tribunal_decision_sub_categories" => ["contract-of-employment-apprenticeship"],
+          "hidden_indexable_content" => "???",
           "document_type" => "employment_appeal_tribunal_decision",
         }
       }
@@ -204,6 +216,7 @@ FactoryGirl.define do
           "tribunal_decision_categories" => ["age-discrimination"],
           "tribunal_decision_country" => "england-and-wales",
           "tribunal_decision_decision_date" => "2015-07-30",
+          "hidden_indexable_content" => "???",
           "document_type" => "employment_tribunal_decision",
         }
       }
@@ -218,6 +231,10 @@ FactoryGirl.define do
       default_metadata {
         {
           "closing_date" => "2016-01-01",
+          "fund_state" => "open",
+          "fund_type" => ["business-support"],
+          "location" => ["south-west"],
+          "funding_source" => ["european-regional-development-fund"],
           "document_type" => "esi_fund",
         }
       }
@@ -232,6 +249,8 @@ FactoryGirl.define do
       default_metadata {
         {
           "date_of_occurrence" => "2015-10-10",
+          "report_type" => "investigation-report",
+          "vessel_type" => ["merchant-vessel-100-gross-tons-or-over"],
           "document_type" => "maib_report",
         }
       }
@@ -247,6 +266,7 @@ FactoryGirl.define do
         {
           "alert_type" => "company-led-drugs",
           "issued_date" => "2016-02-01",
+          "medical_specialism" => %w(anaesthetics cardiology),
           "document_type" => "medical_safety_alert",
         }
       }
@@ -261,6 +281,8 @@ FactoryGirl.define do
       default_metadata {
         {
           "date_of_occurrence" => "2015-10-10",
+          "report_type" => "investigation-report",
+          "railway_type" => ["heavy-rail"],
           "document_type" => "raib_report",
         }
       }
@@ -276,6 +298,7 @@ FactoryGirl.define do
         {
           "tribunal_decision_category" => "banking",
           "tribunal_decision_decision_date" => "2015-07-30",
+          "hidden_indexable_content" => "???",
           "document_type" => "tax_tribunal_decision",
         }
       }
@@ -292,6 +315,11 @@ FactoryGirl.define do
           "alert_issue_date" => "2015-04-28",
           "build_start_date" => "2015-04-28",
           "build_end_date" => "2015-06-28",
+          "fault_type" => "recall",
+          "faulty_item_type" => "other-accessories",
+          "manufacturer" => "nim-engineering-ltd",
+          "faulty_item_model" => "Cable Recovery Winch",
+          "serial_number" => "SN123",
           "document_type" => "vehicle_recalls_and_faults_alert",
         }
       }
