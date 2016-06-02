@@ -17,7 +17,6 @@ class DocumentPresenter
       rendering_app: "specialist-frontend",
       locale: "en",
       phase: document.phase,
-      public_updated_at: public_updated_at,
       details: details,
       routes: [
         {
