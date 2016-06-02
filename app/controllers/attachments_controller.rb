@@ -61,7 +61,7 @@ private
   end
 
   def upload_attachment(attachment, document)
-    AttachmentUploader.new.upload(attachment, document)
+    document.upload_attachment(attachment)
   end
 
   def attachment_params

@@ -168,6 +168,15 @@ class Section
     @attachments ||= []
   end
 
+  def upload_attachment(attachment)
+    if attachment.upload
+      add_attachment(attachment) unless has_attachment?(attachment)
+      save
+    else
+      false
+    end
+  end
+
 private
 
   def publishing_api

@@ -276,5 +276,51 @@ RSpec.describe Document do
         expect(attachment).to eq(document.attachments[0])
       end
     end
+
+    describe "#upload_attachment" do
+      let(:url) { '/uploaded/mocked_asset_name.jpg' }
+      context "for new attachment" do
+        context "on successful attachment upload" do
+          it "adds attachment to document and saves the document" do
+            new_attachment = Attachment.new
+
+            expect(document).to receive(:save)
+            expect(new_attachment).to receive(:upload).and_return(url)
+
+            document.upload_attachment(new_attachment)
+
+            expect(document.attachments).to include(new_attachment)
+          end
+        end
+
+        context "on failed attachment upload" do
+          it "does not add attachment and does not save the document" do
+            new_attachment = Attachment.new
+
+            expect(new_attachment).to receive(:upload).and_return(false)
+            expect(document).to_not receive(:save)
+
+            document.upload_attachment(new_attachment)
+
+            expect(document.attachments).to_not include(new_attachment)
+          end
+        end
+      end
+
+      context "for existing attachment" do
+        it "does not add the attachment to the attachments array" do
+          attachment_content_id = payload["details"]["attachments"][0]["content_id"]
+          document = MyDocumentType.from_publishing_api(payload)
+          attachment = document.find_attachment(attachment_content_id)
+
+          expect(attachment).to receive(:upload).and_return(url)
+          expect(document).to receive(:save)
+
+          document.upload_attachment(attachment)
+
+          expect(document).to_not receive(:add_attachment)
+        end
+      end
+    end
   end
 end

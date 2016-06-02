@@ -1,6 +1,8 @@
 require 'spec_helper'
-
+require 'gds_api/test_helpers/asset_manager'
 RSpec.describe Attachment do
+  include GdsApi::TestHelpers::AssetManager
+
   describe "#new" do
     let(:attachment) {
       Attachment.new(
@@ -69,6 +71,34 @@ RSpec.describe Attachment do
 
       expect(attachment.file).to eq(http_file_upload)
       expect(attachment.title).to eq("updated attachment title")
+    end
+  end
+
+  describe "#upload" do
+    let(:url) { '/uploaded/document.jpg' }
+    let(:attachment) {
+      Attachment.new(
+        title: 'test attachment',
+        file: ActionDispatch::Http::UploadedFile.new(
+          tempfile: Tempfile.new("cma_case_image.jpg"),
+          filename: File.basename("spec/support/images/cma_case_image.jpg"),
+          type: "image/jpeg"
+        ),
+      )
+    }
+
+    it "returns true on successful upload and sets the url" do
+      asset_manager_receives_an_asset(url)
+
+      expect(attachment.upload).to eq(true)
+      expect(attachment.url).to eq(url)
+    end
+
+    it "returns false on failed upload and does not set the url" do
+      asset_manager_upload_failure
+
+      expect(attachment.upload).to eq(false)
+      expect(attachment.url).to be_nil
     end
   end
 end

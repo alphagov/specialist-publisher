@@ -243,6 +243,15 @@ class Document
     self.attachments.detect { |attachment| attachment.content_id == attachment_content_id }
   end
 
+  def upload_attachment(attachment)
+    if attachment.upload
+      add_attachment(attachment) unless has_attachment?(attachment)
+      save
+    else
+      false
+    end
+  end
+
   def self.slug
     title.parameterize.pluralize
   end
