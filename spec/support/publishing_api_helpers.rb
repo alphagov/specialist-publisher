@@ -7,12 +7,12 @@ module PublishingApiHelpers
     document
   end
 
-  def saved_for_the_first_time(document, at_time: Time.now.to_datetime.rfc3339)
+  def saved_for_the_first_time(document)
     document.deep_merge(
       "details" => {
         "change_history" => [
           {
-            "public_timestamp" => at_time,
+            "public_timestamp" => STUB_TIME_STAMP,
             "note" => "First published.",
           }
         ]

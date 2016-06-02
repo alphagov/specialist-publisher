@@ -75,14 +75,11 @@ private
     metadata.reject { |_k, v| v.blank? }
   end
 
-  def public_updated_at
-    document.public_updated_at.to_datetime.rfc3339
-  end
-
   def change_history
     case document.update_type
     when "major"
-      document.change_history + [{ public_timestamp: public_updated_at, note: document.change_note || "First published." }]
+      # FIXME: public timestamp used an incorrectly set public_updated_at, using the STUB_TIME_STAMP as a temporary measure to decouple the two until future bug fix story is in play.
+      document.change_history + [{ public_timestamp: STUB_TIME_STAMP, note: document.change_note || "First published." }]
     when "minor"
       document.change_history
     end

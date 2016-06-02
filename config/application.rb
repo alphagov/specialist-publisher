@@ -12,6 +12,8 @@ require "sprockets/railtie"
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
 
+STUB_TIME_STAMP = "2015-12-03T16:59:13+00:00"
+
 module SpecialistPublisher
   class Application < Rails::Application
     # Settings in config/environments/* take precedence over those specified here.
