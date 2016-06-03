@@ -231,10 +231,10 @@ RSpec.describe Section do
     end
   end
 
-  describe "#find_attachment" do
-    it "finds attachment object inside the document object" do
-      section = described_class.new(manual_content_id: '1234-56789', title: 'A section')
-      section.attachments = [
+  context "with attachments" do
+    before do
+      @section = described_class.new(manual_content_id: '1234-56789', title: 'A section')
+      @section.attachments = [
         Attachment.new(
           "content_id" => "77f2d40e-3853-451f-9ca3-a747e8402e34",
           "url" => "https://assets.digital.cabinet-office.gov.uk/media/513a0efbed915d425e000002/section-image.jpg",
@@ -252,10 +252,60 @@ RSpec.describe Section do
           "updated_at" => "2015-12-18T10:12:26+00:00"
         )
       ]
-      attachment_content_id = section.attachments[0].content_id
+    end
 
-      attachment = section.find_attachment(attachment_content_id)
-      expect(attachment).to eq(section.attachments[0])
+    describe "#find_attachment" do
+      it "finds attachment object inside the document object" do
+        attachment_content_id = @section.attachments[0].content_id
+
+        attachment = @section.find_attachment(attachment_content_id)
+        expect(attachment).to eq(@section.attachments[0])
+      end
+    end
+
+    describe "#upload_attachment" do
+      let(:url) { '/uploaded/mocked_asset_name.jpg' }
+
+      context "for new attachment" do
+        context "on successful attachment upload" do
+          it "adds attachment to document and saves the document" do
+            new_attachment = Attachment.new
+
+            expect(@section).to receive(:save)
+            expect(new_attachment).to receive(:upload).and_return(url)
+
+            @section.upload_attachment(new_attachment)
+
+            expect(@section.attachments).to include(new_attachment)
+          end
+        end
+
+        context "on failed attachment upload" do
+          it "does not add attachment and does not save the section" do
+            new_attachment = Attachment.new
+
+            expect(new_attachment).to receive(:upload).and_return(false)
+            expect(@section).to_not receive(:save)
+
+            @section.upload_attachment(new_attachment)
+
+            expect(@section.attachments).to_not include(new_attachment)
+          end
+        end
+      end
+
+      context "for existing attachment" do
+        it "does not add the attachment to the attachments array" do
+          attachment = @section.attachments[0]
+
+          expect(attachment).to receive(:upload).and_return(url)
+          expect(@section).to receive(:save)
+
+          @section.upload_attachment(attachment)
+
+          expect(@section).to_not receive(:add_attachment)
+        end
+      end
     end
   end
 end

@@ -235,8 +235,21 @@ class Document
     end
   end
 
+  def has_attachment?(attachment)
+    find_attachment(attachment.content_id).present?
+  end
+
   def find_attachment(attachment_content_id)
     self.attachments.detect { |attachment| attachment.content_id == attachment_content_id }
+  end
+
+  def upload_attachment(attachment)
+    if attachment.upload
+      add_attachment(attachment) unless has_attachment?(attachment)
+      save
+    else
+      false
+    end
   end
 
   def self.slug
@@ -251,11 +264,15 @@ class Document
     update_type == "major"
   end
 
-private
-
-  def self.attachments(payload)
-    payload.details.attachments.map { |attachment| Attachment.new(attachment) }
+  def add_attachment(attachment)
+    self.attachments.push(attachment)
   end
+
+  def attachments
+    @attachments ||= []
+  end
+
+private
 
   def self.finder_schema
     @finder_schema ||= FinderSchema.new(document_type.pluralize)

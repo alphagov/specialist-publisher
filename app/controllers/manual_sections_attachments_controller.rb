@@ -63,7 +63,7 @@ private
   end
 
   def upload_attachment(attachment, section)
-    AttachmentUploader.new.upload(attachment, section)
+    section.upload_attachment(attachment)
   end
 
   def attachment_params
