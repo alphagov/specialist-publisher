@@ -28,7 +28,7 @@ RSpec.describe DocumentPresenter do
     end
 
     it "returns a specialist document content item" do
-      expected = write_payload(saved_for_the_first_time(payload, at_time: payload["public_updated_at"]))
+      expected = write_payload(saved_for_the_first_time(payload))
       expect(presented_data).to eq(expected.to_h.deep_symbolize_keys)
     end
   end

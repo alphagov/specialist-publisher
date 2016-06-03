@@ -3,16 +3,16 @@ module PublishingApiHelpers
     document.delete("updated_at")
     document.delete("publication_state")
     document.delete("first_published_at")
+    document.delete("public_updated_at")
     document
   end
 
-  def saved_for_the_first_time(document, at_time: Time.now.to_datetime.rfc3339)
+  def saved_for_the_first_time(document)
     document.deep_merge(
-      "public_updated_at" => at_time,
       "details" => {
         "change_history" => [
           {
-            "public_timestamp" => at_time,
+            "public_timestamp" => STUB_TIME_STAMP,
             "note" => "First published.",
           }
         ]

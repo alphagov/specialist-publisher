@@ -33,7 +33,6 @@ RSpec.feature "Editing a CMA case", type: :feature do
     updated_cma_case = cma_case.deep_merge(
       "title" => "Changed title",
       "description" => "Changed summary",
-      "public_updated_at" => "2015-12-03T16:59:13+00:00",
       "details" => {
         "metadata" => {
           "opened_date" => "2014-01-01",
@@ -89,7 +88,7 @@ RSpec.feature "Editing a CMA case", type: :feature do
           ],
           "change_history" => [
             {
-              "public_timestamp" => "2014-12-03T16:59:13+00:00",
+              "public_timestamp" => STUB_TIME_STAMP,
               "note" => "First published.",
             }
           ],
@@ -108,11 +107,11 @@ RSpec.feature "Editing a CMA case", type: :feature do
 
       expected_change_history = [
         {
-          "public_timestamp" => "2014-12-03T16:59:13+00:00",
+          "public_timestamp" => STUB_TIME_STAMP,
           "note" => "First published.",
         },
         {
-          "public_timestamp" => "2015-12-03T16:59:13+00:00",
+          "public_timestamp" => STUB_TIME_STAMP,
           "note" => "This is a change note.",
         }
       ]

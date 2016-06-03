@@ -61,7 +61,6 @@ RSpec.feature "Creating a CMA case", type: :feature do
       "rendering_app" => "specialist-frontend",
       "locale" => "en",
       "phase" => "live",
-      "public_updated_at" => "2015-12-03T16:59:13+00:00",
       "details" => {
         "body" => [
           {
@@ -82,7 +81,7 @@ RSpec.feature "Creating a CMA case", type: :feature do
         },
         "change_history" => [
           {
-            "public_timestamp" => "2015-12-03T16:59:13+00:00",
+            "public_timestamp" => STUB_TIME_STAMP,
             "note" => "First published."
           }
         ],

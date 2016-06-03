@@ -163,14 +163,6 @@ class Document
     document
   end
 
-  def public_updated_at
-    @public_updated_at ||= Time.zone.now
-  end
-
-  def public_updated_at=(timestamp)
-    @public_updated_at = Time.parse(timestamp.to_s) unless timestamp.nil?
-  end
-
   def self.all(page, per_page, q: nil)
     params = {
       document_type: self.document_type,
@@ -203,8 +195,6 @@ class Document
 
   def save
     return false unless self.valid?
-
-    self.public_updated_at = Time.zone.now if self.update_type == 'major'
 
     presented_document = DocumentPresenter.new(self)
     presented_links = DocumentLinksPresenter.new(self)
