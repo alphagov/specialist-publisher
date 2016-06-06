@@ -7,6 +7,7 @@ class ApplicationController < ActionController::Base
   include Pundit
 
   before_filter :require_signin_permission!
+  before_filter :set_authenticated_user_header
   after_action :verify_authorized
 
   helper_method :current_format
@@ -50,5 +51,11 @@ private
       TaxTribunalDecision,
       VehicleRecallsAndFaultsAlert,
     ]
+  end
+
+  def set_authenticated_user_header
+    if current_user && GdsApi::GovukHeaders.headers[:x_govuk_authenticated_user].nil?
+      GdsApi::GovukHeaders.set_header(:x_govuk_authenticated_user, current_user.uid)
+    end
   end
 end

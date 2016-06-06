@@ -12,4 +12,9 @@ RSpec.feature "Visiting the app", type: :feature do
     visit "/"
     expect(page).to have_content("Your manuals (0)")
   end
+
+  scenario "visiting any path should set an authenticated user header" do
+    visit "/"
+    expect(/uid-\d+/).to match(GdsApi::GovukHeaders.headers[:x_govuk_authenticated_user])
+  end
 end
