@@ -225,6 +225,12 @@ class Document
     end
   end
 
+  def withdraw
+    handle_remote_error do
+      Services.publishing_api.unpublish(content_id, type: 'gone')
+    end
+  end
+
   def has_attachment?(attachment)
     find_attachment(attachment.content_id).present?
   end
