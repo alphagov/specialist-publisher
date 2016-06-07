@@ -12,4 +12,8 @@ class DocumentPolicy < ApplicationPolicy
   def publish?
     gds_editor || departmental_editor
   end
+
+  def withdraw?
+    true #FIXME: Find out withdraw permissions
+  end
 end
