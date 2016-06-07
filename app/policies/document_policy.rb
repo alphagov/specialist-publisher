@@ -13,7 +13,5 @@ class DocumentPolicy < ApplicationPolicy
     gds_editor || departmental_editor
   end
 
-  def withdraw?
-    true #FIXME: Find out withdraw permissions
-  end
+  alias_method :withdraw?, :publish?
 end
