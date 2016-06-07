@@ -83,8 +83,11 @@ class DocumentsController < ApplicationController
   end
 
   def withdraw
-    @document.withdraw
-    flash[:success] = "Withdrawn #{@document.title}"
+    if @document.withdraw
+      flash[:success] = "Withdrawn #{@document.title}"
+    else
+      flash[:danger] = "There was an error withdrawing #{@document.title}. Please try again later."
+    end
     redirect_to document_path(current_format.slug, params[:content_id])
   end
 
