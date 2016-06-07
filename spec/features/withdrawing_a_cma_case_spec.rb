@@ -25,6 +25,14 @@ RSpec.feature "Withdrawing a CMA Case", type: :feature do
 
       assert_publishing_api_unpublish(content_id)
     end
+
+    scenario "writers don't see a withdraw document button" do
+      log_in_as_editor(:cma_writer)
+
+      visit document_path(content_id: content_id, document_type_slug: "cma-cases")
+
+      expect(page).to have_no_selector(:button, 'Withdraw document')
+    end
   end
 
   context "publishing-api returns error" do
