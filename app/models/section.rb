@@ -184,7 +184,7 @@ private
   end
 
   def self.publishing_api
-    SpecialistPublisher.services(:publishing_api)
+    Services.publishing_api
   end
 
   class RecordNotFound < StandardError;
