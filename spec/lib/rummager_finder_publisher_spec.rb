@@ -2,9 +2,11 @@ require "spec_helper"
 require "rummager_finder_publisher"
 
 RSpec.describe RummagerFinderPublisher do
-  let(:rummager) { double(:rummager) }
-
   let(:test_logger) { Logger.new(nil) }
+
+  before do
+    stub_any_rummager_post_with_queueing_enabled
+  end
 
   describe "#call" do
     describe "publishing finders" do
@@ -45,11 +47,7 @@ RSpec.describe RummagerFinderPublisher do
       }
 
       it "uses GdsApi::Rummager" do
-        expect(GdsApi::Rummager).to receive(:new)
-          .with(Plek.new.find("rummager"))
-          .and_return(rummager)
-
-        expect(rummager).to receive(:add_document)
+        expect(Services.rummager).to receive(:add_document)
           .with("edition", "/first-finder", title: "first finder",
             description: "first finder description",
             link: "/first-finder",
@@ -59,7 +57,7 @@ RSpec.describe RummagerFinderPublisher do
               "business-tax/paye",
             ])
 
-        expect(rummager).to receive(:add_document)
+        expect(Services.rummager).to receive(:add_document)
           .with("edition",
             "/second-finder",
             title: "second finder",
@@ -94,11 +92,7 @@ RSpec.describe RummagerFinderPublisher do
       }
 
       it "publishes finder" do
-        expect(GdsApi::Rummager).to receive(:new)
-          .with(Plek.new.find("rummager"))
-          .and_return(rummager)
-
-        expect(rummager).to receive(:add_document)
+        expect(Services.rummager).to receive(:add_document)
           .with(anything, "/not-pre-production-finder", anything)
 
         RummagerFinderPublisher.new(schemas, logger: test_logger).call
@@ -132,11 +126,7 @@ RSpec.describe RummagerFinderPublisher do
         end
 
         it "publishes finder" do
-          expect(GdsApi::Rummager).to receive(:new)
-            .with(Plek.new.find("rummager"))
-            .and_return(rummager)
-
-          expect(rummager).to receive(:add_document)
+          expect(Services.rummager).to receive(:add_document)
             .with(anything, "/pre-production-finder", anything)
 
           RummagerFinderPublisher.new(schemas, logger: test_logger).call
@@ -145,7 +135,7 @@ RSpec.describe RummagerFinderPublisher do
 
       context "and is not configured to publish pre-production finders" do
         it "does not publish finder" do
-          expect(rummager).not_to receive(:add_document)
+          expect(Services.rummager).not_to receive(:add_document)
             .with(anything, "/pre-production-finder", anything)
 
           RummagerFinderPublisher.new(schemas, logger: test_logger).call
