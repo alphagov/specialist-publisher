@@ -11,10 +11,6 @@ module Services
     )
   end
 
-  def self.rummager
-    @rummager ||= GdsApi::Rummager.new(Plek.new.find('search'))
-  end
-
   def self.asset_api
     @asset_api ||= GdsApi::AssetManager.new(
       Plek.current.find('asset-manager'),
@@ -22,6 +18,12 @@ module Services
     )
   end
 
+  # Asynchronously called from app/workers.
+  def self.rummager
+    @rummager ||= GdsApi::Rummager.new(Plek.new.find('search'))
+  end
+
+  # Asynchronously called from app/workers.
   def self.email_alert_api
     @email_alert_api ||= GdsApi::EmailAlertApi.new(
       Plek.current.find('email-alert-api'),
