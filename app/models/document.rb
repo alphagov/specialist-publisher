@@ -220,7 +220,7 @@ class Document
       )
 
       if send_email_on_publish?
-        Services.email_alert_api.send_alert(EmailAlertPresenter.new(self).to_json)
+        EmailAlertApiWorker.perform_async(EmailAlertPresenter.new(self).to_json)
       end
     end
   end
