@@ -65,7 +65,7 @@ class Manual
 
   def organisations
     @organisations ||= @organisation_content_ids.map { |content_id|
-      payload = publishing_api.get_content(content_id).to_hash
+      payload = Services.publishing_api.get_content(content_id).to_hash
       OrganisationStruct.new(payload["content_id"], payload["base_path"], payload["title"])
     }
   end
@@ -74,7 +74,7 @@ class Manual
     # Fetch individual payloads and links for each `manual`
     results = get_content_items.results
     results.each do |item|
-      item.links = publishing_api.get_links(item.content_id).to_hash["links"]
+      item.links = Services.publishing_api.get_links(item.content_id).to_hash["links"]
     end
     # Deserialize the payloads into real Objects and return them
     results.map { |payload| self.from_publishing_api(payload) }
@@ -83,7 +83,7 @@ class Manual
   def self.where(organisation_content_id:)
     # Fetch individual links for each `manual`
     payloads = get_content_items.results.map { |item|
-      publishing_api.get_links(item.content_id).to_ostruct
+      Services.publishing_api.get_links(item.content_id).to_ostruct
     }
 
     # Select ones which have the same `content_id` as the `organisation_content_id` arguement
@@ -92,7 +92,7 @@ class Manual
 
     # Fetch the content_id
     payloads = payloads.map { |payload|
-      content = publishing_api.get_content(payload.content_id).to_hash
+      content = Services.publishing_api.get_content(payload.content_id).to_hash
       content.deep_merge!(payload.links)
     }
 
@@ -102,10 +102,10 @@ class Manual
 
   def self.find(content_id:, organisation_content_id: nil)
     if organisation_content_id
-      links_response = publishing_api.get_links(content_id)
+      links_response = Services.publishing_api.get_links(content_id)
 
       if links_response.to_ostruct.organisations.include?(organisation_content_id)
-        content_response = publishing_api.get_content(content_id)
+        content_response = Services.publishing_api.get_content(content_id)
 
         content = content_response.to_hash
         payload = content.deep_merge(links.to_hash)
@@ -113,8 +113,8 @@ class Manual
         raise RecordNotFound
       end
     else
-      content_response = publishing_api.get_content(content_id)
-      links_response = publishing_api.get_links(content_id)
+      content_response = Services.publishing_api.get_content(content_id)
+      links_response = Services.publishing_api.get_links(content_id)
 
       if content_response && links_response
         content = content_response.to_hash
@@ -157,7 +157,7 @@ class Manual
   end
 
   def self.get_content_items
-    self.publishing_api.get_content_items(
+    Services.publishing_api.get_content_items(
       document_type: "manual",
       fields: [
           :content_id,
@@ -189,8 +189,8 @@ class Manual
       presented_manual = ManualPresenter.new(self)
       presented_links = ManualLinksPresenter.new(self)
       handle_remote_error do
-        publishing_api.put_content(self.content_id, presented_manual.to_json)
-        publishing_api.patch_links(self.content_id, presented_links.to_json)
+        Services.publishing_api.put_content(self.content_id, presented_manual.to_json)
+        Services.publishing_api.patch_links(self.content_id, presented_links.to_json)
       end
     else
       false
@@ -199,15 +199,5 @@ class Manual
 
   def can_be_published?
     sections.any?
-  end
-
-private
-
-  def publishing_api
-    self.class.publishing_api
-  end
-
-  def self.publishing_api
-    Services.publishing_api
   end
 end
