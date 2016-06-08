@@ -12,4 +12,6 @@ class DocumentPolicy < ApplicationPolicy
   def publish?
     gds_editor || departmental_editor
   end
+
+  alias_method :withdraw?, :publish?
 end

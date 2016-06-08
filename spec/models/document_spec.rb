@@ -177,6 +177,28 @@ RSpec.describe Document do
     end
   end
 
+  describe "#withdraw" do
+    before do
+      publishing_api_has_item(payload)
+      document = MyDocumentType.find(payload["content_id"])
+      stub_publishing_api_unpublish(document.content_id, body: { type: 'gone' })
+    end
+
+    it "sends correct payload to publishing api" do
+      expect(document.withdraw).to eq(true)
+
+      assert_publishing_api_unpublish(document.content_id)
+    end
+
+    context "unsuccessful #unpublish" do
+      it "notifies Airbrake and returns false if publishing-api does not return status 200" do
+        expect(Airbrake).to receive(:notify)
+        stub_publishing_api_unpublish(document.content_id, { body: { type: 'gone' } }, status: 409)
+        expect(document.withdraw).to eq(false)
+      end
+    end
+  end
+
   describe "#save" do
     before do
       publishing_api_has_item(payload)

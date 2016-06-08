@@ -39,7 +39,7 @@ RSpec.describe DocumentPolicy do
     end
   end
 
-  permissions :publish? do
+  permissions :publish?, :withdraw? do
     it 'denies access to users without editors permissions' do
       expect(described_class).not_to permit(departmental_writer, allowed_document_type)
     end
