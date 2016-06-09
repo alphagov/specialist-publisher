@@ -85,6 +85,12 @@ RSpec.describe DocumentPresenter do
     it "is valid against the content schemas" do
       expect(presented_data).to be_valid_against_schema("specialist_document")
     end
+
+    it "adds the header to the payload" do
+      expected_headers_payload = [{ text: "heading", level: 2, id: "heading" }]
+
+      expect(presented_data[:details][:headers]).to eq(expected_headers_payload)
+    end
   end
 
   describe '#to_json with nested headers' do
@@ -103,6 +109,18 @@ RSpec.describe DocumentPresenter do
     it "is valid against the content schemas" do
       expect(presented_data).to be_valid_against_schema("specialist_document")
     end
+
+    it "adds the nested header to the payload" do
+      expected_headers_payload = [
+        { text: "heading2", level: 2, id: "heading2", headers: [
+            { text: "heading3", level: 3, id: "heading3", headers: [
+                { text: "heading4", level: 4, id: "heading4" }
+              ] }] },
+        { text: "anotherheading2", level: 2, id: "anotherheading2" }
+      ]
+
+      expect(presented_data[:details][:headers]).to eq(expected_headers_payload)
+    end
   end
 
   describe '#to_json without headers' do
@@ -112,6 +130,10 @@ RSpec.describe DocumentPresenter do
 
     it 'is valid against the content schemas' do
       expect(presented_data).to be_valid_against_schema("specialist_document")
+    end
+
+    it 'does not add a headers section to the payload' do
+      expect(presented_data[:details]).to_not include(:headers)
     end
   end
 
