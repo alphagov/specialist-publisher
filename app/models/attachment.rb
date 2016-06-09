@@ -33,4 +33,8 @@ class Attachment < Document
     Airbrake.notify(e)
     false
   end
+
+  def snippet
+    "[InlineAttachment:#{url.split('/').last}]"
+  end
 end

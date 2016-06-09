@@ -230,6 +230,7 @@ RSpec.feature "Editing a CMA case", type: :feature do
         expect(page.status_code).to eq(200)
         expect(page).to have_content("Editing Example CMA Case")
         expect(page).to have_content("New cma case image")
+        expect(page).to have_content("[InlineAttachment:asylum-support-image.jpg]")
       end
 
       scenario "editing an attachment on a #{publication_state} CMA case" do
