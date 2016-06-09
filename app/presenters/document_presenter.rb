@@ -35,7 +35,7 @@ private
 
   def details
     {
-      body: GovspeakPresenter.present(document.body),
+      body: GovspeakPresenter.new(@document).present,
       metadata: metadata,
       change_history: change_history,
       max_cache_time: 10,

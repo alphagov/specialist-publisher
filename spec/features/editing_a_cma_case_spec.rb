@@ -219,6 +219,22 @@ RSpec.feature "Editing a CMA case", type: :feature do
       }
 
       scenario "adding an attachment to a #{publication_state} CMA case" do
+        updated_cma_case = cma_case.deep_merge(
+          "update_type" => "minor",
+          "details" => {
+            "body" => [
+              {
+                "content_type" => "text/govspeak",
+                "content" => "[InlineAttachment:asylum-support-image.jpg]"
+              },
+              {
+                "content_type" => "text/html",
+                "content" => "<p><a rel=\"external\" href=\"https://assets.digital.cabinet-office.gov.uk/media/513a0efbed915d425e000002/asylum-support-image.jpg\">asylum report image title</a></p>\n"
+              }
+            ],
+          },
+        )
+
         click_link "Add attachment"
         expect(page.status_code).to eq(200)
 
@@ -230,6 +246,17 @@ RSpec.feature "Editing a CMA case", type: :feature do
         expect(page.status_code).to eq(200)
         expect(page).to have_content("Editing Example CMA Case")
         expect(page).to have_content("New cma case image")
+        expect(page).to have_content("[InlineAttachment:asylum-support-image.jpg]")
+
+        fill_in "Body", with: "[InlineAttachment:asylum-support-image.jpg]"
+        choose "Update type minor"
+
+        publishing_api_has_item(updated_cma_case)
+
+        click_button "Save as draft"
+
+        assert_publishing_api_put_content(content_id, write_payload(updated_cma_case))
+
         expect(page).to have_content("[InlineAttachment:asylum-support-image.jpg]")
       end
 
