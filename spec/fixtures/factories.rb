@@ -77,18 +77,13 @@ FactoryGirl.define do
           "body" => [
             {
               "content_type" => "text/govspeak",
-              "content" => "## Header" + ("\r\n\r\nThis is the long body of an example document" * 10)
+              "content" => "default text"
             },
             {
               "content_type" => "text/html",
-              "content" => ("<h2 id=\"header\">Header</h2>\n" + "\n<p>This is the long body of an example document</p>\n" * 10)
+              "content" => "<p>default text</p>\n"
             }
           ],
-          "headers" => [{
-            "text" => "Header",
-            "level" => 2,
-            "id" => "header",
-          }],
           "metadata" => default_metadata,
           "max_cache_time" => 10,
           "change_history" => [],
