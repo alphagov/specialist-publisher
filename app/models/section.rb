@@ -152,25 +152,16 @@ class Section
     end
   end
 
-  def has_attachment?(attachment)
-    find_attachment(attachment.content_id).present?
-  end
-
-  def find_attachment(attachment_content_id)
-    self.attachments.detect { |attachment| attachment.content_id == attachment_content_id }
-  end
-
-  def add_attachment(attachment)
-    self.attachments.push(attachment)
+  def attachments=(attachments)
+    @attachments = AttachmentCollection.new(attachments)
   end
 
   def attachments
-    @attachments ||= []
+    @attachments ||= AttachmentCollection.new
   end
 
   def upload_attachment(attachment)
-    if attachment.upload
-      add_attachment(attachment) unless has_attachment?(attachment)
+    if attachments.upload(attachment)
       save
     else
       false
