@@ -75,7 +75,7 @@ RSpec.describe AttachmentsController, type: :controller do
   describe "GET edit" do
     it "renders the edit attachment form" do
       document = CmaCase.find(document_content_id)
-      attachment = document.find_attachment(attachment_content_id)
+      attachment = document.attachments.find(attachment_content_id)
       allow_any_instance_of(AttachmentsController).to receive(:fetch_document).and_return(document)
 
       get :edit, document_type_slug: document_type_slug, document_content_id: document_content_id, attachment_content_id: attachment_content_id

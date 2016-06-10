@@ -231,17 +231,16 @@ class Document
     end
   end
 
-  def has_attachment?(attachment)
-    find_attachment(attachment.content_id).present?
+  def attachments=(attachments)
+    @attachments = AttachmentCollection.new(attachments)
   end
 
-  def find_attachment(attachment_content_id)
-    self.attachments.detect { |attachment| attachment.content_id == attachment_content_id }
+  def attachments
+    @attachments ||= AttachmentCollection.new
   end
 
   def upload_attachment(attachment)
-    if attachment.upload
-      add_attachment(attachment) unless has_attachment?(attachment)
+    if attachments.upload(attachment)
       save
     else
       false
@@ -258,14 +257,6 @@ class Document
 
   def send_email_on_publish?
     update_type == "major"
-  end
-
-  def add_attachment(attachment)
-    self.attachments.push(attachment)
-  end
-
-  def attachments
-    @attachments ||= []
   end
 
 private

@@ -40,7 +40,7 @@ private
       change_history: change_history,
       max_cache_time: 10,
     }.tap do |details_hash|
-      details_hash[:attachments] = attachments if document.attachments.present?
+      details_hash[:attachments] = attachments if document.attachments.any?
       details_hash[:headers] = headers if !headers.empty?
     end
   end
