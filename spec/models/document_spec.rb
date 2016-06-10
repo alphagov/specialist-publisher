@@ -65,11 +65,11 @@ RSpec.describe Document do
         body: [
           {
             content_type: "text/govspeak",
-            content: "## Header" + ("\r\n\r\nThis is the long body of an example document" * 10),
+            content: "This is the body of an example document",
           },
           {
             content_type: "text/html",
-            content: ("<h2 id=\"header\">Header</h2>\n" + "\n<p>This is the long body of an example document</p>\n" * 10),
+            content: "<p>This is the body of an example document</p>\n",
           },
         ],
         metadata: {
@@ -108,7 +108,7 @@ RSpec.describe Document do
       assert_rummager_posted_item(
         "title" => "Example document",
         "description" => "This is a summary",
-        "indexable_content" => "Header " + (["This is the long body of an example document"] * 10).join(" "),
+        "indexable_content" => "This is the body of an example document",
         "link" => "/my-document-types/example-document",
         "public_timestamp" => "2015-11-16T11:53:30+00:00",
         "first_published_at" => "2015-11-15T00:00:00+00:00",
@@ -149,7 +149,7 @@ RSpec.describe Document do
         assert_rummager_posted_item(
           "title" => "Example document",
           "description" => "This is a summary",
-          "indexable_content" => "Header " + (["This is the long body of an example document"] * 10).join(" "),
+          "indexable_content" => "This is the body of an example document",
           "link" => "/my-document-types/example-document",
           "public_timestamp" => "2015-11-16T11:53:30+00:00",
           "first_published_at" => "2015-11-15T00:00:00+00:00",

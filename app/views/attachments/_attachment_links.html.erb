@@ -13,10 +13,9 @@
             <li class="attachment">
               <span class="title"><%= attachment.title %></span>
               <%= link_to "edit", edit_document_attachment_path(params[:document_type_slug], @document.content_id, attachment.content_id) %>
+              <%= attachment.snippet %>
             </li>
         <% end %>
       </ul>
   <% end %>
 </div>
-
-
