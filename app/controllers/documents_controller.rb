@@ -136,12 +136,4 @@ private
       filtered_params.merge(key => filtered_value)
     }
   end
-
-  def publishing_api
-    @publishing_api ||= Services.publishing_api
-  end
-
-  def rummager
-    @rummager ||= Services.rummager
-  end
 end

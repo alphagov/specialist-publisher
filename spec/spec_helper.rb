@@ -37,6 +37,9 @@ require 'gds_api/test_helpers/email_alert_api'
 
 require 'pundit/rspec'
 
+require 'sidekiq/testing'
+Sidekiq::Testing.inline!
+
 RSpec.configure do |config|
   config.disable_monkey_patching!
 

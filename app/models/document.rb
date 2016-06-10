@@ -213,14 +213,14 @@ class Document
       published_document = self.class.find(self.content_id)
       indexable_document = SearchPresenter.new(published_document)
 
-      Services.rummager.add_document(
+      RummagerWorker.perform_async(
         search_document_type,
         base_path,
         indexable_document.to_json,
       )
 
       if send_email_on_publish?
-        Services.email_alert_api.send_alert(EmailAlertPresenter.new(self).to_json)
+        EmailAlertApiWorker.perform_async(EmailAlertPresenter.new(self).to_json)
       end
     end
   end

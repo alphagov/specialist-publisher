@@ -58,13 +58,13 @@ class Section
 
   def organisations
     @organisations ||= @organisation_content_ids.map { |content_id|
-      payload = publishing_api.get_content(content_id).to_hash
+      payload = Services.publishing_api.get_content(content_id).to_hash
       OrganisationStruct.new(payload["content_id"], payload["base_path"], payload["title"])
     }
   end
 
   def self.find(content_id:, manual_content_id: nil)
-    content_item_response = publishing_api.get_content(content_id)
+    content_item_response = Services.publishing_api.get_content(content_id)
 
     if content_item_response
       section = from_publishing_api(content_item_response.to_hash)
@@ -81,7 +81,7 @@ class Section
 
   def self.from_publishing_api(payload)
     payload = payload.merge(
-      publishing_api.get_links(payload['content_id']).to_hash
+      Services.publishing_api.get_links(payload['content_id']).to_hash
     )
 
     section = self.new(
@@ -107,14 +107,14 @@ class Section
   end
 
   def update_manual_links
-    manual_links = publishing_api.get_links(self.manual_content_id)['links']
+    manual_links = Services.publishing_api.get_links(self.manual_content_id)['links']
     section_ids = manual_links.fetch('sections', [])
 
     if section_ids.include?(self.content_id)
       true
     else
       handle_remote_error do
-        publishing_api.patch_links(
+        Services.publishing_api.patch_links(
           self.manual_content_id,
           links: { sections: section_ids << self.content_id }
         )
@@ -135,8 +135,8 @@ class Section
 
       presented_section_links = { links: { manual: [self.manual_content_id] } }
       handle_remote_error do
-        publishing_api.put_content(self.content_id, presented_section)
-        publishing_api.patch_links(self.content_id, presented_section_links)
+        Services.publishing_api.put_content(self.content_id, presented_section)
+        Services.publishing_api.patch_links(self.content_id, presented_section_links)
         update_manual_links
       end
     else
@@ -175,16 +175,6 @@ class Section
     else
       false
     end
-  end
-
-private
-
-  def publishing_api
-    self.class.publishing_api
-  end
-
-  def self.publishing_api
-    SpecialistPublisher.services(:publishing_api)
   end
 
   class RecordNotFound < StandardError;

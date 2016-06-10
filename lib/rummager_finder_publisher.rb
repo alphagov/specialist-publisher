@@ -31,10 +31,6 @@ private
 
   def export_finder(schema)
     presenter = FinderRummagerPresenter.new(schema[:file], schema[:timestamp])
-    rummager.add_document(presenter.type, presenter.id, presenter.to_json)
-  end
-
-  def rummager
-    @rummager ||= GdsApi::Rummager.new(Plek.new.find("rummager"))
+    RummagerWorker.perform_async(presenter.type, presenter.id, presenter.to_json)
   end
 end
