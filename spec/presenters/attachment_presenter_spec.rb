@@ -30,6 +30,9 @@ RSpec.describe AttachmentPresenter do
       expect(presented_data[:content_id]).to eq(content_id)
       expect(presented_data[:title]).to eq('test specialist document attachment')
       expect(presented_data[:created_at]).to eq("2015-12-03T16:59:13+00:00")
+    end
+
+    it "sets updated_at to the current time" do
       expect(presented_data[:updated_at]).to eq("2015-12-03T16:59:13+00:00")
     end
   end
