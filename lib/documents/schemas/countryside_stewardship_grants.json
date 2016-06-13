@@ -23,6 +23,7 @@
       "name": "Grant type",
       "type": "text",
       "preposition": "of type",
+      "display_as_result_metadata": false,
       "filterable": true,
       "allowed_values": [
         {"label": "Option", "value": "option"},
@@ -35,6 +36,7 @@
       "name": "Land use",
       "type": "text",
       "preposition": "for",
+      "display_as_result_metadata": false,
       "filterable": true,
       "allowed_values": [
         {"label": "Arable land", "value": "arable-land"},
@@ -60,6 +62,7 @@
       "name": "Tiers or standalone items",
       "type": "text",
       "preposition": "for",
+      "display_as_result_metadata": false,
       "filterable": true,
       "allowed_values": [
         {"label": "Higher Tier", "value": "higher-tier"},
@@ -72,6 +75,7 @@
       "name": "Funding (per unit per year)",
       "type": "text",
       "preposition": "of",
+      "display_as_result_metadata": false,
       "filterable": true,
       "allowed_values": [
         {"label": "Up to £100", "value": "up-to-100"},
