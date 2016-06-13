@@ -1,3 +1,5 @@
+require "services"
+
 class RummagerWorker
   include Sidekiq::Worker
 

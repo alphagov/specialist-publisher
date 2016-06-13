@@ -1,3 +1,5 @@
+require "services"
+
 class EmailAlertApiWorker
   include Sidekiq::Worker
 
