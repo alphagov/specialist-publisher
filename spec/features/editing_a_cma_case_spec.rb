@@ -55,7 +55,7 @@ RSpec.feature "Editing a CMA case", type: :feature do
         }],
       }
     )
-    expected_sent_payload = saved_for_the_first_time(write_payload(updated_cma_case))
+    expected_sent_payload = write_payload(updated_cma_case)
 
     fill_in "Title", with: "Changed title"
     fill_in "Summary", with: "Changed summary"

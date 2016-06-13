@@ -212,7 +212,7 @@ RSpec.describe Document do
       c = MyDocumentType.find(payload["content_id"])
       expect(c.save).to eq(true)
 
-      expected_payload = saved_for_the_first_time(write_payload(payload.deep_stringify_keys))
+      expected_payload = write_payload(payload.deep_stringify_keys)
       assert_publishing_api_put_content(c.content_id, expected_payload)
     end
 

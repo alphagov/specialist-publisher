@@ -6,19 +6,6 @@ module PublishingApiHelpers
     document.delete("public_updated_at")
     document
   end
-
-  def saved_for_the_first_time(document)
-    document.deep_merge(
-      "details" => {
-        "change_history" => [
-          {
-            "public_timestamp" => STUB_TIME_STAMP,
-            "note" => "First published.",
-          }
-        ]
-      }
-    )
-  end
 end
 
 RSpec.configuration.include PublishingApiHelpers

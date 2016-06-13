@@ -79,12 +79,7 @@ RSpec.feature "Creating a CMA case", type: :feature do
           "market_sector" => ["energy"],
           "document_type" => "cma_case"
         },
-        "change_history" => [
-          {
-            "public_timestamp" => STUB_TIME_STAMP,
-            "note" => "First published."
-          }
-        ],
+        "change_history" => [],
         "max_cache_time" => 10,
         "headers" => [
           { "text" => "Header", "level" => 2, "id" => "header" }

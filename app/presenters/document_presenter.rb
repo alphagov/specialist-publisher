@@ -78,8 +78,11 @@ private
   def change_history
     case document.update_type
     when "major"
-      # FIXME: public timestamp used an incorrectly set public_updated_at, using the STUB_TIME_STAMP as a temporary measure to decouple the two until future bug fix story is in play.
-      document.change_history + [{ public_timestamp: STUB_TIME_STAMP, note: document.change_note || "First published." }]
+      if document.change_note
+        document.change_history + [{ public_timestamp: STUB_TIME_STAMP, note: document.change_note }]
+      else
+        document.change_history
+      end
     when "minor"
       document.change_history
     end
