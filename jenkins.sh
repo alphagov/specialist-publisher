@@ -52,7 +52,7 @@ if [[ ${GIT_BRANCH} != "origin/master" ]]; then
     app spec lib spec config
 fi
 
-GOVUK_CONTENT_SCHEMAS_PATH=tmp/govuk-content-schemas RAILS_ENV=test bundle exec rake
+GOVUK_CONTENT_SCHEMAS_PATH=tmp/govuk-content-schemas RAILS_ENV=test xvfb-run -a bundle exec rake
 
 export EXIT_STATUS=$?
 
