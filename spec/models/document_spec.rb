@@ -90,6 +90,8 @@ RSpec.describe Document do
 
   context "successful #publish!" do
     before do
+      stub_any_publishing_api_put_content
+      stub_any_publishing_api_patch_links
       stub_publishing_api_publish(document.content_id, {})
       publishing_api_has_item(payload)
       stub_any_rummager_post_with_queueing_enabled
@@ -163,6 +165,8 @@ RSpec.describe Document do
   context "unsuccessful #publish!" do
     it "notifies Airbrake and returns false if publishing-api does not return status 200" do
       expect(Airbrake).to receive(:notify)
+      stub_any_publishing_api_put_content
+      stub_any_publishing_api_patch_links
       stub_publishing_api_publish(document.content_id, {}, status: 503)
       stub_any_rummager_post_with_queueing_enabled
       expect(document.publish!).to eq(false)
@@ -170,6 +174,8 @@ RSpec.describe Document do
 
     it "notifies Airbrake and returns false if rummager does not return status 200" do
       expect(Airbrake).to receive(:notify)
+      stub_any_publishing_api_put_content
+      stub_any_publishing_api_patch_links
       stub_publishing_api_publish(document.content_id, {})
       publishing_api_has_item(payload)
       stub_request(:post, %r{#{Plek.new.find('search')}/documents}).to_return(status: 503)
@@ -298,6 +304,29 @@ RSpec.describe Document do
 
         expect(subject.upload_attachment(attachment)).to eq(false)
       end
+    end
+  end
+
+  context "change_history" do
+    let(:note) { 'my change note' }
+    let(:document) { MyDocumentType.new.tap { |document| document.change_note = note } }
+
+    it 'add note when major change' do
+      document.update_type = 'major'
+
+      expect(document.change_history.last).to eq('public_timestamp' => Time.current.iso8601, 'note' => note)
+    end
+
+    it 'should not add note when minor change' do
+      document.update_type = 'minor'
+
+      expect(document.change_history).to be_empty
+    end
+
+    it 'should not add note when no update type' do
+      document.update_type = ''
+
+      expect(document.change_history).to be_empty
     end
   end
 end

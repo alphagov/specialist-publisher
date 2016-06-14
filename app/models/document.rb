@@ -79,6 +79,12 @@ class Document
 
   def change_history
     @change_history ||= []
+
+    if change_note && update_type == 'major'
+      @change_history + [{ 'public_timestamp' => Time.current.iso8601, 'note' => change_note }]
+    else
+      @change_history
+    end
   end
 
   def update_type

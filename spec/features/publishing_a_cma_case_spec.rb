@@ -6,6 +6,7 @@ RSpec.feature "Publishing a CMA case", type: :feature do
   let(:publish_disable_with_message) { page.find_button('Publish')["data-disable-with"] }
 
   before do
+    Timecop.freeze(Time.parse("2015-12-03T16:59:13+00:00"))
     log_in_as_editor(:cma_editor)
 
     publishing_api_has_content([item], hash_including(document_type: CmaCase.document_type))
@@ -14,6 +15,10 @@ RSpec.feature "Publishing a CMA case", type: :feature do
     stub_publishing_api_publish(content_id, {})
     stub_any_rummager_post_with_queueing_enabled
     email_alert_api_accepts_alert
+  end
+
+  after do
+    Timecop.return
   end
 
   context "when the document is a new draft" do
@@ -43,7 +48,7 @@ RSpec.feature "Publishing a CMA case", type: :feature do
 
       expected_change_history = [
           {
-              "public_timestamp" => STUB_TIME_STAMP,
+              "public_timestamp" => Time.current.iso8601,
               "note" => "First published.",
           }
       ]
@@ -124,6 +129,37 @@ RSpec.feature "Publishing a CMA case", type: :feature do
       expect(page).to have_content("Publishing will email subscribers to CMA Cases.")
 
       expect(publish_alert_message).to eq("Publishing will email subscribers to CMA Cases. Continue?")
+    end
+
+    scenario "adds to the change history" do
+      visit "/cma-cases"
+
+      expect(page.status_code).to eq(200)
+
+      click_link "Major Update Case"
+      expect(page.status_code).to eq(200)
+
+      click_link "Edit document"
+      fill_in "Title", with: "Changed title"
+
+      choose "Update type major"
+      fill_in "Change note", with: "This is a change note for a major update to redrafted document."
+      click_button "Save as draft"
+
+      expected_change_history = [
+          {
+              "public_timestamp" => Time.current.iso8601,
+
+              "note" => "This is a change note for a major update to redrafted document.",
+          }
+      ]
+
+      changed_json = {
+          "title" => "Changed title",
+          "update_type" => "major",
+          "details" => item["details"].merge("change_history" => expected_change_history),
+      }
+      assert_publishing_api_put_content(content_id, request_json_includes(changed_json))
     end
   end
 
