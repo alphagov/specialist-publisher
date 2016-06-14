@@ -26,6 +26,9 @@ RSpec.feature "Publishing a CMA case", type: :feature do
     }
 
     scenario "from the index" do
+      stub_any_publishing_api_put_content
+      stub_any_publishing_api_patch_links
+
       visit "/cma-cases"
       expect(page.status_code).to eq(200)
 
@@ -36,6 +39,20 @@ RSpec.feature "Publishing a CMA case", type: :feature do
       click_button "Publish"
       expect(page.status_code).to eq(200)
       expect(page).to have_content("Published Example CMA Case")
+
+
+      expected_change_history = [
+          {
+              "public_timestamp" => STUB_TIME_STAMP,
+              "note" => "First published.",
+          }
+      ]
+
+      changed_json = {
+          "details" => item["details"].merge("change_history" => expected_change_history)
+      }
+
+      assert_publishing_api_put_content(content_id, request_json_includes(changed_json))
 
       assert_publishing_api_publish(content_id)
       assert_rummager_posted_item("link" => "/cma-cases/example-cma-case")

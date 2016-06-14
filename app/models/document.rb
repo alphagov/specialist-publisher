@@ -216,6 +216,12 @@ class Document
   def publish!
     handle_remote_error do
       update_type = self.update_type || 'major'
+
+      if not_published?
+        self.change_note = "First published."
+        self.save
+      end
+
       Services.publishing_api.publish(content_id, update_type)
 
       published_document = self.class.find(self.content_id)
