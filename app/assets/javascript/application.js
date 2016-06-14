@@ -29,7 +29,7 @@ jQuery(function($) {
           { bodyText: bodyText
           },
           function(data) {
-              $('.govspeak').html(data['renderedGovspeak']);
+              $('.govspeak').html(data);
           }
       );
       return false;
