@@ -140,4 +140,27 @@ RSpec.feature "Creating a CMA case", type: :feature do
     expect(page).to have_content("Opened date should be formatted YYYY-MM-DD")
     expect(page).to have_content("Body cannot include invalid Govspeak")
   end
+
+  scenario "previewing GovSpeak", js: true do
+    visit "/cma-cases/new"
+
+    fill_in "Body", with: "$CTA some text $CTA"
+
+    click_link "Preview"
+
+    within(".preview_container") do
+      expect(page).to have_content("some text")
+      expect(page).not_to have_content("$CTA")
+    end
+
+    fill_in "Body", with: "[link text](http://www.example.com)"
+
+    click_link "Preview"
+
+    within(".preview_container") do
+      expect(page).to have_content("link text")
+      expect(page).not_to have_content("http://www.example.com")
+      expect(page).not_to have_content("some text")
+    end
+  end
 end

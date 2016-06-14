@@ -19,5 +19,19 @@ jQuery(function($) {
 
   $(".js-length-counter").each(function(){
     new GOVUK.LengthCounter({$el:$(this)});
-  })
+  });
+
+  $("#preview-button").click(function(){
+      $('.preview_container').removeClass('hide');
+      var bodyText = $('.body-text').val();
+      $.post(
+          "/preview",
+          { bodyText: bodyText
+          },
+          function(data) {
+              $('.govspeak').html(data['renderedGovspeak']);
+          }
+      );
+      return false;
+  });
 });
