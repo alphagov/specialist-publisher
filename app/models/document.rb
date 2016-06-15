@@ -284,8 +284,20 @@ class Document
     end
   end
 
+  def discard
+    handle_remote_error { discard! }
+  end
+
+  def discard!
+    Services.publishing_api.discard_draft(content_id, previous_version: previous_version)
+  end
+
   def attachments=(attachments)
     @attachments = AttachmentCollection.new(attachments)
+  end
+
+  def has_attachment?(attachment)
+    find_attachment(attachment.content_id).present?
   end
 
   def attachments
