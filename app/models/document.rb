@@ -184,14 +184,22 @@ class Document
   def self.find(content_id)
     response = Services.publishing_api.get_content(content_id)
 
-    if response
-      self.from_publishing_api(response.to_hash)
+    raise RecordNotFound, "Document: #{content_id}" unless response
+
+    attributes = response.to_hash
+    document_type = attributes.fetch("document_type")
+    document_class = document_type.camelize.constantize
+
+    if [document_class, Document].include?(self)
+      document_class.from_publishing_api(response.to_hash)
     else
-      raise RecordNotFound
+      message = "#{self}.find('#{content_id}') returned the wrong type: '#{document_class}'"
+      raise TypeMismatchError, message
     end
   end
 
   class RecordNotFound < StandardError; end
+  class TypeMismatchError < StandardError; end
 
   def save
     return false unless self.valid?

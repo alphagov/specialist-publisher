@@ -233,9 +233,11 @@ RSpec.describe Document do
   end
 
   describe ".find" do
-    it "returns a document" do
+    before do
       publishing_api_has_item(payload)
+    end
 
+    it "returns a document" do
       found_document = MyDocumentType.find(document.content_id)
 
       expect(found_document.base_path).to eq(payload["base_path"])
@@ -243,6 +245,21 @@ RSpec.describe Document do
       expect(found_document.summary).to   eq(payload["description"])
       expect(found_document.body).to      eq(payload["details"]["body"][0]["content"])
       expect(found_document.field3).to    eq(payload["details"]["metadata"]["field3"])
+    end
+
+    describe "when called on the Document superclass" do
+      it "returns an instance of the subclass with matching document_type" do
+        found_document = Document.find(document.content_id)
+        expect(found_document).to be_a(MyDocumentType)
+      end
+    end
+
+    describe "when called on a class that mismatches the document_type" do
+      it "raises a helpful error" do
+        expect {
+          CmaCase.find(document.content_id)
+        }.to raise_error(/wrong type/)
+      end
     end
   end
 
