@@ -272,6 +272,27 @@ RSpec.feature "Editing a CMA case", type: :feature do
         expect(page.status_code).to eq(200)
         expect(page).to have_content("Editing Example CMA Case")
       end
+
+      scenario "previewing GovSpeak", js: true do
+        fill_in "Body", with: "$CTA some text $CTA"
+
+        click_link "Preview"
+
+        within(".preview_container") do
+          expect(page).to have_content("some text")
+          expect(page).not_to have_content("$CTA")
+        end
+
+        fill_in "Body", with: "[link text](http://www.example.com)"
+
+        click_link "Preview"
+
+        within(".preview_container") do
+          expect(page).to have_content("link text")
+          expect(page).not_to have_content("http://www.example.com")
+          expect(page).not_to have_content("some text")
+        end
+      end
     end
   end
 end

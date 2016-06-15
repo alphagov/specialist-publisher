@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   get '/healthcheck', to: proc { [200, {}, ['OK']] }
   get '/rebuild-healthcheck', to: proc { [200, {}, ['OK']] }
+  post '/preview', to: 'govspeak#preview'
 
   mount GovukAdminTemplate::Engine, at: "/style-guide"
 
