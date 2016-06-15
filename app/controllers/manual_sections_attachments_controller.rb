@@ -11,11 +11,11 @@ class ManualSectionsAttachmentsController < ApplicationController
   end
 
   def create
-    attachment = Attachment.new(attachment_params)
     section = fetch_section
+    attachment = section.attachments.build(attachment_params)
     attachment.content_type = attachment.file.content_type
 
-    if upload_attachment(attachment, section)
+    if section.upload_attachment(attachment)
       flash[:success] = "Attached #{attachment.title}"
       redirect_to edit_manual_section_path(section.manual_content_id, section.content_id)
     else
@@ -26,14 +26,15 @@ class ManualSectionsAttachmentsController < ApplicationController
 
   def edit
     @section = fetch_section
-    @attachment = @section.find_attachment(attachment_content_id)
+    @attachment = @section.attachments.find(attachment_content_id)
   end
 
   def update
     section = fetch_section
-    attachment = section.find_attachment(attachment_content_id)
+    attachment = section.attachments.find(attachment_content_id)
     attachment.update_attributes(attachment_params)
-    if upload_attachment(attachment, section)
+
+    if section.upload_attachment(attachment)
       flash[:success] = "Attachment succesfully updated"
       redirect_to edit_manual_section_path(section.manual_content_id, section.content_id)
     else
@@ -60,10 +61,6 @@ private
 
   def attachment_content_id
     params[:attachment_content_id]
-  end
-
-  def upload_attachment(attachment, section)
-    section.upload_attachment(attachment)
   end
 
   def attachment_params

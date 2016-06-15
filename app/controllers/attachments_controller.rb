@@ -11,11 +11,11 @@ class AttachmentsController < ApplicationController
   end
 
   def create
-    attachment = Attachment.new(attachment_params)
     document = fetch_document
+    attachment = document.attachments.build(attachment_params)
     attachment.content_type = attachment.file.content_type
 
-    if upload_attachment(attachment, document)
+    if document.upload_attachment(attachment)
       flash[:success] = "Attached #{attachment.title}"
       redirect_to edit_document_path(document_type_slug, document.content_id)
     else
@@ -26,15 +26,15 @@ class AttachmentsController < ApplicationController
 
   def edit
     @document = fetch_document
-    @attachment = @document.find_attachment(attachment_content_id)
+    @attachment = @document.attachments.find(attachment_content_id)
   end
 
   def update
     document = fetch_document
-    attachment = document.find_attachment(attachment_content_id)
+    attachment = document.attachments.find(attachment_content_id)
     attachment.update_attributes(attachment_params)
 
-    if upload_attachment(attachment, document)
+    if document.upload_attachment(attachment)
       flash[:success] = "Attachment succesfully updated"
       redirect_to edit_document_path(document_type_slug, document.content_id)
     else
@@ -58,10 +58,6 @@ private
 
   def attachment_content_id
     params[:attachment_content_id]
-  end
-
-  def upload_attachment(attachment, document)
-    document.upload_attachment(attachment)
   end
 
   def attachment_params

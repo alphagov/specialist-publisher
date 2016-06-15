@@ -263,102 +263,40 @@ RSpec.describe Document do
     end
   end
 
-  context "with attachments" do
-    let(:payload) {
-      FactoryGirl.create(:document,
-        document_type: "my_document_type",
-        details: {
-          "metadata" => {
-            "document_type" => "my_document_type"
-          },
-          "attachments" => [
-            {
-              "content_id" => "77f2d40e-3853-451f-9ca3-a747e8402e34",
-              "url" => "https://assets.digital.cabinet-office.gov.uk/media/513a0efbed915d425e000002/asylum-support-image.jpg",
-              "content_type" => "application/jpeg",
-              "title" => "asylum report image title",
-              "created_at" => "2015-12-18T10:12:26+00:00",
-              "updated_at" => "2015-12-18T10:12:26+00:00"
-            },
-            {
-              "content_id" => "ec3f6901-4156-4720-b4e5-f04c0b152141",
-              "url" => "https://assets.digital.cabinet-office.gov.uk/media/513a0efbed915d425e000002/asylum-support-pdf.pdf",
-              "content_type" => "application/pdf",
-              "title" => "asylum report pdf title",
-              "created_at" => "2015-12-18T10:12:26+00:00",
-              "updated_at" => "2015-12-18T10:12:26+00:00"
-            }
-          ]
-        })
-    }
+  describe "attachment methods" do
+    let(:attachment) { Attachment.new }
 
-    before do
-      Timecop.freeze(Time.parse("2016-01-30 10:12:26 UTC"))
+    describe "#attachments=" do
+      it "creates an AttachmentCollection with the given attachments" do
+        subject.attachments = [attachment]
+
+        expect(subject.attachments).to be_kind_of(AttachmentCollection)
+        expect(subject.attachments.first).to eq(attachment)
+      end
     end
 
-    it "re-sends attachments to the Publishing API with updated timestamps" do
-      document = MyDocumentType.from_publishing_api(payload)
-      presented_document = DocumentPresenter.new(document).to_json.deep_stringify_keys
-
-      expect(presented_document["details"]["attachments"]).to eq([
-        payload["details"]["attachments"][0].merge("updated_at" => "2016-01-30T10:12:26+00:00"),
-        payload["details"]["attachments"][1].merge("updated_at" => "2016-01-30T10:12:26+00:00"),
-      ])
-    end
-
-    describe "#find_attachment" do
-      it "finds an attachment object in the document payload" do
-        attachment_content_id = payload["details"]["attachments"][0]["content_id"]
-        document = MyDocumentType.from_publishing_api(payload)
-        attachment = document.find_attachment(attachment_content_id)
-
-        expect(attachment).to eq(document.attachments[0])
+    describe "#attachments" do
+      it "returns an empty AttachmentCollection if none is set" do
+        expect(subject.attachments).to be_kind_of(AttachmentCollection)
+        expect(subject.attachments.count).to eq(0)
       end
     end
 
     describe "#upload_attachment" do
-      let(:url) { '/uploaded/mocked_asset_name.jpg' }
-      context "for new attachment" do
-        context "on successful attachment upload" do
-          it "adds attachment to document and saves the document" do
-            new_attachment = Attachment.new
-
-            expect(document).to receive(:save)
-            expect(new_attachment).to receive(:upload).and_return(url)
-
-            document.upload_attachment(new_attachment)
-
-            expect(document.attachments).to include(new_attachment)
-          end
-        end
-
-        context "on failed attachment upload" do
-          it "does not add attachment and does not save the document" do
-            new_attachment = Attachment.new
-
-            expect(new_attachment).to receive(:upload).and_return(false)
-            expect(document).to_not receive(:save)
-
-            document.upload_attachment(new_attachment)
-
-            expect(document.attachments).to_not include(new_attachment)
-          end
-        end
+      before do
+        subject.attachments = [attachment]
       end
 
-      context "for existing attachment" do
-        it "does not add the attachment to the attachments array" do
-          attachment_content_id = payload["details"]["attachments"][0]["content_id"]
-          document = MyDocumentType.from_publishing_api(payload)
-          attachment = document.find_attachment(attachment_content_id)
+      it "saves itself on successful attachment upload" do
+        expect(subject.attachments).to receive(:upload).and_return(true)
+        expect(subject).to receive(:save)
+        subject.upload_attachment(attachment)
+      end
 
-          expect(attachment).to receive(:upload).and_return(url)
-          expect(document).to receive(:save)
+      it "returns false on failed attachment upload" do
+        expect(subject.attachments).to receive(:upload).and_return(false)
 
-          document.upload_attachment(attachment)
-
-          expect(document).to_not receive(:add_attachment)
-        end
+        expect(subject.upload_attachment(attachment)).to eq(false)
       end
     end
   end

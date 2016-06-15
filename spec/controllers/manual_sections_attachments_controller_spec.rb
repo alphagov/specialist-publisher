@@ -81,7 +81,7 @@ RSpec.describe ManualSectionsAttachmentsController, type: :controller do
 
   describe "GET edit" do
     it "renders the edit attachment form" do
-      attachment = section.find_attachment(attachment_content_id)
+      attachment = section.attachments.find(attachment_content_id)
 
       get :edit, manual_content_id: section.manual_content_id, section_content_id: section.content_id, attachment_content_id: attachment_content_id
 
