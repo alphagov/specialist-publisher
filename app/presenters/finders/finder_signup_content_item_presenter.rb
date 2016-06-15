@@ -2,9 +2,10 @@ FinderSignupContentItemPresenter = Struct.new(:schema, :timestamp) do
   def to_json
     {
       base_path: base_path,
-      format: format,
       content_id: content_id,
       title: title,
+      schema_name: schema_name,
+      document_type: document_type,
       description: description,
       public_updated_at: public_updated_at,
       update_type: update_type,
@@ -12,6 +13,7 @@ FinderSignupContentItemPresenter = Struct.new(:schema, :timestamp) do
       rendering_app: rendering_app,
       routes: routes,
       details: details,
+      locale: locale,
     }
   end
 
@@ -20,6 +22,10 @@ FinderSignupContentItemPresenter = Struct.new(:schema, :timestamp) do
   end
 
 private
+
+  def locale
+    "en"
+  end
 
   def title
     schema.fetch("signup_title", schema.fetch("name"))
@@ -33,7 +39,11 @@ private
     schema.fetch("signup_copy", nil)
   end
 
-  def format
+  def document_type
+    "finder_email_signup"
+  end
+
+  def schema_name
     "finder_email_signup"
   end
 
@@ -78,6 +88,6 @@ private
   end
 
   def public_updated_at
-    timestamp
+    timestamp.to_datetime.rfc3339
   end
 end
