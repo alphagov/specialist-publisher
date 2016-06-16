@@ -5,7 +5,7 @@ class DocumentsController < ApplicationController
   include ActionView::Helpers::TagHelper
   include ActionView::Helpers::TextHelper
 
-  before_action :fetch_document, only: [:edit, :show, :publish, :update, :withdraw]
+  before_action :fetch_document, only: [:edit, :show, :publish, :update, :unpublish]
   before_action :check_authorisation, if: :document_type_slug
 
   def check_authorisation
@@ -82,11 +82,11 @@ class DocumentsController < ApplicationController
     redirect_to document_path(current_format.slug, params[:content_id])
   end
 
-  def withdraw
-    if @document.withdraw
-      flash[:success] = "Withdrawn #{@document.title}"
+  def unpublish
+    if @document.unpublish
+      flash[:success] = "Unpublished #{@document.title}"
     else
-      flash[:danger] = "There was an error withdrawing #{@document.title}. Please try again later."
+      flash[:danger] = "There was an error unpublishing #{@document.title}. Please try again later."
     end
     redirect_to document_path(current_format.slug, params[:content_id])
   end

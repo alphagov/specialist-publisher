@@ -153,18 +153,18 @@ RSpec.feature "Publishing a CMA case", type: :feature do
     end
   end
 
-  context "when the document is withdrawn" do
+  context "when the document is unpublished" do
     let(:item) {
       FactoryGirl.create(:cma_case,
-        title: "Withdrawn Item",
-        publication_state: "withdrawn")
+        title: "Unpublished Item",
+        publication_state: "Unpublished")
     }
 
-    scenario "when content item is withdrawn, there will be a publish button" do
+    scenario "when content item is unpublished, there will be a publish button" do
       visit "/cma-cases"
       expect(page.status_code).to eq(200)
 
-      click_link "Withdrawn Item"
+      click_link "Unpublished Item"
 
       expect(page).to have_selector(:button, 'Publish')
       expect(page).to have_no_content("There are no changes to publish.")
@@ -175,10 +175,10 @@ RSpec.feature "Publishing a CMA case", type: :feature do
 
       expect(page.status_code).to eq(200)
 
-      click_link "Withdrawn Item"
+      click_link "Unpublished Item"
 
       expect(page.status_code).to eq(200)
-      expect(page).to have_content("Withdrawn Item")
+      expect(page).to have_content("Unpublished Item")
       expect(page).to have_content("Publishing will email subscribers to CMA Cases.")
 
       expect(page).to have_no_content("You are about to publish a minor edit")

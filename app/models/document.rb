@@ -233,7 +233,7 @@ class Document
     end
   end
 
-  def withdraw
+  def unpublish
     handle_remote_error do
       Services.publishing_api.unpublish(content_id, type: 'gone')
     end
