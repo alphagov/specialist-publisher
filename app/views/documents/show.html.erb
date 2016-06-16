@@ -89,16 +89,16 @@
     </div>
 
     <%= render partial: 'publish_panel' %>
-    <% if policy(@document).withdraw? %>
-      <%= form_tag(withdraw_document_path(current_format.slug, @document.content_id), method: :post, class: 'panel panel-default') do %>
+    <% if policy(@document).unpublish? %>
+      <%= form_tag(unpublish_document_path(current_format.slug, @document.content_id), method: :post, class: 'panel panel-default') do %>
         <div class="panel-heading">
           <div class="panel-title">
-            Withdraw document
+            Unpublish document
           </div>
         </div>
         <div class="panel-body">
           <p>The document will be removed from the site. It will still be possible to edit the document and publish a new version.</p>
-          <button name="submit" class="btn btn-warning" data-module="confirm" data-message="Are you sure you want to withdraw this document?" data-disable-with="Withdrawing..." >Withdraw document</button>
+          <button name="submit" class="btn btn-warning" data-module="confirm" data-message="Are you sure you want to unpublish this document?" data-disable-with="Unpublishing..." >Unpublish document</button>
         </div>
       <% end %>
     <% end %>

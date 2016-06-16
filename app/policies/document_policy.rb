@@ -13,5 +13,5 @@ class DocumentPolicy < ApplicationPolicy
     gds_editor || departmental_editor
   end
 
-  alias_method :withdraw?, :publish?
+  alias_method :unpublish?, :publish?
 end
