@@ -252,7 +252,7 @@ class Document
     end
   end
 
-  def publish!
+  def publish
     handle_remote_error do
       update_type = self.update_type || 'major'
 

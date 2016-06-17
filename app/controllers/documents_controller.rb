@@ -74,7 +74,7 @@ class DocumentsController < ApplicationController
   end
 
   def publish
-    if @document.publish!
+    if @document.publish
       flash[:success] = "Published #{@document.title}"
     else
       flash[:danger] = "There was an error publishing #{@document.title}. Please try again later."
