@@ -59,7 +59,7 @@ class Document
     "live"
   end
 
-  %w{draft live redrafted}.each do |state|
+  %w{draft live redrafted superseded unpublished}.each do |state|
     define_method("#{state}?") do
       publication_state == state
     end
