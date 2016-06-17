@@ -15,7 +15,7 @@ class PublishingApiFinderPublisher
       if should_publish_in_this_environment?(finder)
         publish(finder)
       else
-        logger.info("Not publishing #{finder[:file]['title']} because it is pre_production")
+        logger.info("Not publishing #{finder[:file]['name']} because it is pre_production")
       end
     end
   end
@@ -47,7 +47,7 @@ private
       finder[:file],
     )
 
-    logger.info("publishing '#{finder[:file]['name']}' finder")
+    logger.info("Publishing '#{finder[:file]['name']}' finder")
 
     Services.publishing_api.put_content(finder_payload.content_id, finder_payload.to_json)
     Services.publishing_api.patch_links(finder_payload.content_id, links_payload.to_json)
@@ -64,7 +64,7 @@ private
       finder[:file],
     )
 
-    logger.info("publishing '#{finder[:file]['name']}' finder signup page")
+    logger.info("Publishing '#{finder[:file]['name']}' finder signup page")
 
     Services.publishing_api.put_content(signup_payload.content_id, signup_payload.to_json)
     Services.publishing_api.patch_links(signup_payload.content_id, links_payload.to_json)
