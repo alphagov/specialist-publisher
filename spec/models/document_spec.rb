@@ -144,7 +144,14 @@ RSpec.describe Document do
     end
 
     context "document has never been published" do
-      let(:unpublished_document) { MyDocumentType.from_publishing_api(payload.except("first_published_at")) }
+      let(:unpublished_document) {
+        MyDocumentType.from_publishing_api(
+          payload.except("first_published_at").merge(
+            'publication_state' => 'draft',
+            'details' => payload['details'].merge('change_history' => [])
+          )
+        )
+      }
 
       it 'sends first_published_at to Rummager' do
         unpublished_document.publish!
@@ -159,6 +166,75 @@ RSpec.describe Document do
           "field2" => "open",
         )
       end
+
+      it 'saves a "First published" change note before asking the api to publish' do
+        Timecop.freeze(Time.parse("2015-12-18 10:12:26 UTC")) do
+          unpublished_document.publish!
+
+          expected_change_history = [
+            {
+              "public_timestamp" => Time.current.iso8601,
+              "note" => "First published.",
+            },
+          ]
+
+          changed_json = {
+            "update_type" => 'major',
+            "details" => payload["details"].merge("change_history" => expected_change_history),
+          }
+
+          assert_publishing_api_put_content(unpublished_document.content_id, request_json_includes(changed_json))
+        end
+      end
+    end
+
+    shared_examples_for 'publishing changes to a document that has previously been published' do
+      let(:published_change_history) {
+        [
+          {
+            'public_timestamp' => '2015-11-14T00:00:00+00:00',
+            'note' => 'Drafting'
+          },
+          {
+            "public_timestamp" => '2015-11-15T00:00:00+00:00',
+            "note" => Document::FIRST_PUBLISHED_NOTE,
+          },
+        ]
+      }
+      let(:published_document) {
+        MyDocumentType.from_publishing_api(
+          payload.merge(
+            'details' => payload['details'].merge('change_history' => published_change_history),
+            'publication_state' => publication_state
+          )
+        )
+      }
+
+      it 'does not add a "First published" change note before asking the api to publish' do
+        published_document.publish!
+
+        assert_no_publishing_api_put_content(published_document.content_id)
+      end
+    end
+
+    context "when document is in live state" do
+      let(:publication_state) { 'live' }
+      it_behaves_like 'publishing changes to a document that has previously been published'
+    end
+
+    context 'when document is in redrafted state' do
+      let(:publication_state) { 'redrafted' }
+      it_behaves_like 'publishing changes to a document that has previously been published'
+    end
+
+    context 'when document is in unpublished state' do
+      let(:publication_state) { 'unpublished' }
+      it_behaves_like 'publishing changes to a document that has previously been published'
+    end
+
+    context 'when document is in superseded state' do
+      let(:publication_state) { 'superseded' }
+      it_behaves_like 'publishing changes to a document that has previously been published'
     end
   end
 
@@ -327,6 +403,27 @@ RSpec.describe Document do
       document.update_type = ''
 
       expect(document.change_history).to be_empty
+    end
+  end
+
+  context '#ever_been_published?' do
+    let(:change_note_1) { { 'public_timestamp' => Time.current.iso8601, 'note' => 'Drafting' } }
+    let(:change_note_2) { { 'public_timestamp' => Time.current.iso8601, 'note' => Document::FIRST_PUBLISHED_NOTE } }
+    let(:change_note_3) { { 'public_timestamp' => Time.current.iso8601, 'note' => 'Making changes' } }
+    subject { MyDocumentType.new }
+    it "is true if there is a '#{Document::FIRST_PUBLISHED_NOTE}' entry in change_history" do
+      subject.change_history = [change_note_1, change_note_2, change_note_3]
+      expect(subject).to have_ever_been_published
+    end
+
+    it "is false if there is no '#{Document::FIRST_PUBLISHED_NOTE}' entry in change_history" do
+      subject.change_history = [change_note_1, change_note_3]
+      expect(subject).not_to have_ever_been_published
+    end
+
+    it "is false if the change_history is empty" do
+      subject.change_history = []
+      expect(subject).not_to have_ever_been_published
     end
   end
 end

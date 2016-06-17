@@ -6,6 +6,10 @@ module PublishingApiHelpers
     document.delete("public_updated_at")
     document
   end
+
+  def assert_no_publishing_api_put_content(content_id)
+    assert_publishing_api_put_content(content_id, nil, 0)
+  end
 end
 
 RSpec.configuration.include PublishingApiHelpers

@@ -22,6 +22,8 @@ class Document
     :first_published_at,
   ]
 
+  FIRST_PUBLISHED_NOTE = 'First published.'.freeze
+
   def self.policy_class
     DocumentPolicy
   end
@@ -71,6 +73,14 @@ class Document
 
   def not_published?
     !published?
+  end
+
+  # TODO: This is not particularly robust. We'd prefer to check the entire
+  # state history of the document to see if it had really ever been published
+  # but that's not available via the publishing api yet.  Checking for our
+  # "First published" note in change history is a stopgap until it is.
+  def has_ever_been_published?
+    change_history.detect { |notes| notes['note'] == Document::FIRST_PUBLISHED_NOTE }
   end
 
   def change_note_required?
@@ -222,8 +232,8 @@ class Document
     handle_remote_error do
       update_type = self.update_type || 'major'
 
-      if not_published?
-        self.change_note = "First published."
+      unless has_ever_been_published?
+        self.change_note = Document::FIRST_PUBLISHED_NOTE
         self.save
       end
 
