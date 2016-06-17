@@ -407,28 +407,14 @@ RSpec.describe Document do
     end
   end
 
-  describe "#discard!" do
+  describe "#discard" do
     let(:content_id) { payload.fetch("content_id") }
 
     it "sends a discard draft request to the publishing api" do
       stub_publishing_api_discard_draft(content_id)
-
-      document.discard!
-
+      document.discard
       assert_publishing_api_discard_draft(content_id)
     end
-
-    it "raises an error if the draft could not be discarded" do
-      stub_request(:any, /discard/).to_raise(GdsApi::HTTPErrorResponse)
-
-      expect {
-        document.discard!
-      }.to raise_error(GdsApi::HTTPErrorResponse)
-    end
-  end
-
-  describe "#discard" do
-    let(:content_id) { payload.fetch("content_id") }
 
     it "returns true if the draft was discarded successfully" do
       stub_publishing_api_discard_draft(content_id)

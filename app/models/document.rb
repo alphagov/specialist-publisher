@@ -285,11 +285,9 @@ class Document
   end
 
   def discard
-    handle_remote_error { discard! }
-  end
-
-  def discard!
-    Services.publishing_api.discard_draft(content_id, previous_version: previous_version)
+    handle_remote_error do
+      Services.publishing_api.discard_draft(content_id, previous_version: previous_version)
+    end
   end
 
   def attachments=(attachments)
