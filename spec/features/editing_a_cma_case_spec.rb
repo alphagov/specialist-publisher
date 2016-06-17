@@ -78,19 +78,13 @@ RSpec.feature "Editing a CMA case", type: :feature do
   context "a published case" do
     let(:cma_case) {
       FactoryGirl.create(:cma_case,
+        :published,
         title: "Example CMA Case",
         description: "Summary with a typox",
-        publication_state: "live",
         details: {
           "body" => [
             { "content_type" => "text/govspeak", "content" => "A body" },
             { "content_type" => "text/html", "content" => "<p>A body</p>\n" },
-          ],
-          "change_history" => [
-            {
-              "public_timestamp" => Time.current.iso8601,
-              "note" => "First published.",
-            }
           ],
           "metadata" => {
             "bulk_published" => true,
@@ -105,11 +99,7 @@ RSpec.feature "Editing a CMA case", type: :feature do
       fill_in "Change note", with: "This is a change note."
       click_button "Save as draft"
 
-      expected_change_history = [
-        {
-          "public_timestamp" => Time.current.iso8601,
-          "note" => "First published.",
-        },
+      expected_change_history = cma_case['details']['change_history'] + [
         {
           "public_timestamp" => Time.current.iso8601,
           "note" => "This is a change note.",

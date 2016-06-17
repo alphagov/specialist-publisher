@@ -55,8 +55,8 @@ RSpec.describe Document do
     }.deep_stringify_keys
   }
 
-  let(:payload) {
-    FactoryGirl.create(:document,
+  let(:payload_attributes) {
+    {
       document_type: "my_document_type",
       title: "Example document",
       description: "This is a summary",
@@ -79,8 +79,10 @@ RSpec.describe Document do
           document_type: "my_document_type",
           bulk_published: true,
         }
-      })
+      }
+    }
   }
+  let(:payload) { FactoryGirl.create(:document, payload_attributes) }
   let(:document) { MyDocumentType.from_publishing_api(payload) }
 
   before do
@@ -146,10 +148,13 @@ RSpec.describe Document do
     context "document has never been published" do
       let(:unpublished_document) {
         MyDocumentType.from_publishing_api(
-          payload.except("first_published_at").merge(
-            'publication_state' => 'draft',
-            'details' => payload['details'].merge('change_history' => [])
-          )
+          FactoryGirl.create(:document,
+            payload_attributes.merge(
+              first_published_at: nil,
+              publication_state: 'draft',
+              change_history: [],
+              content_id: document.content_id
+            ))
         )
       }
 
@@ -174,7 +179,7 @@ RSpec.describe Document do
           expected_change_history = [
             {
               "public_timestamp" => Time.current.iso8601,
-              "note" => "First published.",
+              "note" => Document::FIRST_PUBLISHED_NOTE,
             },
           ]
 
@@ -189,24 +194,14 @@ RSpec.describe Document do
     end
 
     shared_examples_for 'publishing changes to a document that has previously been published' do
-      let(:published_change_history) {
-        [
-          {
-            'public_timestamp' => '2015-11-14T00:00:00+00:00',
-            'note' => 'Drafting'
-          },
-          {
-            "public_timestamp" => '2015-11-15T00:00:00+00:00',
-            "note" => Document::FIRST_PUBLISHED_NOTE,
-          },
-        ]
-      }
       let(:published_document) {
         MyDocumentType.from_publishing_api(
-          payload.merge(
-            'details' => payload['details'].merge('change_history' => published_change_history),
-            'publication_state' => publication_state
-          )
+          FactoryGirl.create(:document,
+            :published,
+            payload_attributes.merge(
+              publication_state: publication_state,
+              content_id: document.content_id
+            ))
         )
       }
 

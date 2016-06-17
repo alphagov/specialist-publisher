@@ -93,8 +93,8 @@ RSpec.feature "Publishing a CMA case", type: :feature do
   context "when the document is already published" do
     let(:item) {
       FactoryGirl.create(:cma_case,
-        title: "Live Item",
-        publication_state: "live")
+        :published,
+        title: "Live Item")
     }
 
     scenario "publish buttons aren't shown" do
@@ -111,6 +111,7 @@ RSpec.feature "Publishing a CMA case", type: :feature do
   context "when there is a redrafted document with a major update" do
     let(:item) {
       FactoryGirl.create(:cma_case,
+        :published,
         title: "Major Update Case",
         update_type: "major",
         publication_state: "redrafted")
@@ -146,10 +147,9 @@ RSpec.feature "Publishing a CMA case", type: :feature do
       fill_in "Change note", with: "This is a change note for a major update to redrafted document."
       click_button "Save as draft"
 
-      expected_change_history = [
+      expected_change_history = item['details']['change_history'] + [
           {
               "public_timestamp" => Time.current.iso8601,
-
               "note" => "This is a change note for a major update to redrafted document.",
           }
       ]
@@ -166,6 +166,7 @@ RSpec.feature "Publishing a CMA case", type: :feature do
   context "when there is a redrafted document with a minor update" do
     let(:item) {
       FactoryGirl.create(:cma_case,
+        :published,
         title: "Minor Update Case",
         update_type: "minor",
         publication_state: "redrafted")
@@ -209,8 +210,9 @@ RSpec.feature "Publishing a CMA case", type: :feature do
   context "when the document is unpublished" do
     let(:item) {
       FactoryGirl.create(:cma_case,
+        :published,
         title: "Unpublished Item",
-        publication_state: "Unpublished")
+        publication_state: "unpublished")
     }
 
     scenario "when content item is unpublished, there will be a publish button" do

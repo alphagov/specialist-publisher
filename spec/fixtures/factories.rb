@@ -57,7 +57,8 @@ FactoryGirl.define do
     redirects []
     update_type "major"
     public_updated_at "2015-11-16T11:53:30+00:00"
-    first_published_at "2015-11-15T00:00:00"
+    # TODO: "draft" documents shouldn't really have a first_published_at
+    first_published_at "2015-11-15T00:00:00Z"
     updated_at "2015-11-15T11:53:30"
     publication_state "draft"
     routes {
@@ -86,9 +87,10 @@ FactoryGirl.define do
           ],
           "metadata" => default_metadata,
           "max_cache_time" => 10,
-          "change_history" => [],
+          "change_history" => change_history,
         }
       }
+      change_history { [] }
       default_metadata { {} }
     end
 
@@ -96,6 +98,18 @@ FactoryGirl.define do
       merged_details = default_details.deep_stringify_keys.deep_merge(details.deep_stringify_keys)
       attributes.merge(details: merged_details)
     }
+
+    trait :published do
+      publication_state 'live'
+      change_history do
+        [
+          {
+            'published_timestamp' => Time.current.iso8601,
+            'note' => Document::FIRST_PUBLISHED_NOTE
+          }
+        ]
+      end
+    end
     to_create(&:deep_stringify_keys!)
   end
 
