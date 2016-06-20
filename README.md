@@ -40,9 +40,24 @@ $ ./startup.sh
 ```
 If you are using the GDS development virtual machine then the application will be available on the host at https://specialist-publisher-rebuild.dev.gov.uk/
 
+## Granting Permissions
+
+You may find that you can't see any documents after replicating data. To fix
+this, you need to grant user permissions in this application:
+
+```bash
+bundle exec rake permissions:grant['Chris Patuzzo'] # Or whichever user you're logged in as.
+```
+
+You also need to set the `app_name` for the Dummy API User in Publishing API:
+
+```ruby
+User.find_by(email: "dummyapiuser@domain.com").update!(app_name: "specialist-publisher")
+```
+
 ### Populate development database
 
-In order to quickly get your local database into working order run `$ bundle exec rake db:seed`.
+If you're starting from a blank database, you can quickly get your local database into working order with `$ bundle exec rake db:seed`.
 
 Currently this:
 * creates a default user record with basic permissions that allows you to log in and create a new document
