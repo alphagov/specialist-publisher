@@ -1,3 +1,6 @@
+# At present, these tasks will only republish documents that are in a draft,
+# live or republished state.
+
 namespace :republish do
   desc "republish all documents"
   task all: :environment do

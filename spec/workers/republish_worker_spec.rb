@@ -66,4 +66,36 @@ RSpec.describe RepublishWorker do
       assert_rummager_posted_item({})
     end
   end
+
+  context "when the document is unpublished" do
+    let(:document) {
+      FactoryGirl.create(:cma_case, publication_state: "unpublished")
+    }
+
+    it "skips republishing of the document" do
+      expect {
+        subject.perform(content_id)
+      }.to output(/Skipped republishing/).to_stdout
+
+      expect(WebMock).not_to have_requested(:put, /publishing-api/)
+      expect(WebMock).not_to have_requested(:post, /publishing-api/)
+      expect(WebMock).not_to have_requested(:any, /rummager/)
+    end
+  end
+
+  context "when the document is in any other state" do
+    let(:document) {
+      FactoryGirl.create(:cma_case, publication_state: "unrecognised")
+    }
+
+    it "skips republishing of the document" do
+      expect {
+        subject.perform(content_id)
+      }.to output(/Skipped republishing/).to_stdout
+
+      expect(WebMock).not_to have_requested(:put, /publishing-api/)
+      expect(WebMock).not_to have_requested(:post, /publishing-api/)
+      expect(WebMock).not_to have_requested(:any, /rummager/)
+    end
+  end
 end
