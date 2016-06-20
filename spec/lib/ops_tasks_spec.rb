@@ -66,7 +66,7 @@ RSpec.describe OpsTasks do
 
         assert_publishing_api_put_content(
           content_id,
-          request_json_includes("public_updated_at" => "2016-07-08T00:00:00.000Z")
+          request_json_includes("public_updated_at" => "2016-07-08T00:00:00.000+01:00")
         )
       end
     end
