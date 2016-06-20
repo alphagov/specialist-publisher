@@ -14,7 +14,7 @@ module_function
   end
 
   def republish_one(content_id)
-    RepublishWorker.perform_async(content_id)
+    RepublishWorker.new.perform(content_id)
   end
 
   def all_content_ids

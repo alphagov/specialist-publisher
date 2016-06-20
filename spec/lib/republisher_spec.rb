@@ -47,9 +47,11 @@ RSpec.describe Republisher do
   end
 
   describe ".republish_one" do
-    it "enqueues a republish job for the given content id" do
-      expect(RepublishWorker).to receive(:perform_async).with("content-id")
-      expect(RepublishWorker).not_to receive(:perform_async).with("raib-1")
+    it "immediately runs the job rather than enqueueing it" do
+      expect(RepublishWorker).not_to receive(:perform_async)
+
+      expect_any_instance_of(RepublishWorker).to receive(:perform).with("content-id")
+      expect_any_instance_of(RepublishWorker).not_to receive(:perform).with("raib-1")
 
       subject.republish_one("content-id")
     end
