@@ -203,10 +203,12 @@ GEM
       ast (~> 2.2)
     plek (1.12.0)
     powerpack (0.1.1)
-    pry (0.10.1)
+    pry (0.10.3)
       coderay (~> 1.1.0)
       method_source (~> 0.8.1)
       slop (~> 3.4)
+    pry-rails (0.3.4)
+      pry (>= 0.9.10)
     pundit (1.1.0)
       activesupport (>= 3.0.0)
     rack (1.6.4)
@@ -368,7 +370,7 @@ DEPENDENCIES
   logstasher (= 0.6.2)
   mongoid (= 5.0.1)
   plek (~> 1.10)
-  pry
+  pry-rails
   pundit
   rails (= 4.2.6)
   rspec-rails (~> 3.3)
