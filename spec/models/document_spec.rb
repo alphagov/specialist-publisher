@@ -55,8 +55,8 @@ RSpec.describe Document do
     }.deep_stringify_keys
   }
 
-  let(:payload) {
-    FactoryGirl.create(:document,
+  let(:payload_attributes) {
+    {
       document_type: "my_document_type",
       title: "Example document",
       description: "This is a summary",
@@ -79,8 +79,10 @@ RSpec.describe Document do
           document_type: "my_document_type",
           bulk_published: true,
         }
-      })
+      }
+    }
   }
+  let(:payload) { FactoryGirl.create(:document, payload_attributes) }
   let(:document) { MyDocumentType.from_publishing_api(payload) }
 
   before do
@@ -90,6 +92,8 @@ RSpec.describe Document do
 
   context "successful #publish!" do
     before do
+      stub_any_publishing_api_put_content
+      stub_any_publishing_api_patch_links
       stub_publishing_api_publish(document.content_id, {})
       publishing_api_has_item(payload)
       stub_any_rummager_post_with_queueing_enabled
@@ -142,7 +146,17 @@ RSpec.describe Document do
     end
 
     context "document has never been published" do
-      let(:unpublished_document) { MyDocumentType.from_publishing_api(payload.except("first_published_at")) }
+      let(:unpublished_document) {
+        MyDocumentType.from_publishing_api(
+          FactoryGirl.create(:document,
+            payload_attributes.merge(
+              first_published_at: nil,
+              publication_state: 'draft',
+              change_history: [],
+              content_id: document.content_id
+            ))
+        )
+      }
 
       it 'sends first_published_at to Rummager' do
         unpublished_document.publish!
@@ -157,12 +171,73 @@ RSpec.describe Document do
           "field2" => "open",
         )
       end
+
+      it 'saves a "First published" change note before asking the api to publish' do
+        Timecop.freeze(Time.parse("2015-12-18 10:12:26 UTC")) do
+          unpublished_document.publish!
+
+          expected_change_history = [
+            {
+              "public_timestamp" => Time.current.iso8601,
+              "note" => Document::FIRST_PUBLISHED_NOTE,
+            },
+          ]
+
+          changed_json = {
+            "update_type" => 'major',
+            "details" => payload["details"].merge("change_history" => expected_change_history),
+          }
+
+          assert_publishing_api_put_content(unpublished_document.content_id, request_json_includes(changed_json))
+        end
+      end
+    end
+
+    shared_examples_for 'publishing changes to a document that has previously been published' do
+      let(:published_document) {
+        MyDocumentType.from_publishing_api(
+          FactoryGirl.create(:document,
+            :published,
+            payload_attributes.merge(
+              publication_state: publication_state,
+              content_id: document.content_id
+            ))
+        )
+      }
+
+      it 'does not add a "First published" change note before asking the api to publish' do
+        published_document.publish!
+
+        assert_no_publishing_api_put_content(published_document.content_id)
+      end
+    end
+
+    context "when document is in live state" do
+      let(:publication_state) { 'live' }
+      it_behaves_like 'publishing changes to a document that has previously been published'
+    end
+
+    context 'when document is in redrafted state' do
+      let(:publication_state) { 'redrafted' }
+      it_behaves_like 'publishing changes to a document that has previously been published'
+    end
+
+    context 'when document is in unpublished state' do
+      let(:publication_state) { 'unpublished' }
+      it_behaves_like 'publishing changes to a document that has previously been published'
+    end
+
+    context 'when document is in superseded state' do
+      let(:publication_state) { 'superseded' }
+      it_behaves_like 'publishing changes to a document that has previously been published'
     end
   end
 
   context "unsuccessful #publish!" do
     it "notifies Airbrake and returns false if publishing-api does not return status 200" do
       expect(Airbrake).to receive(:notify)
+      stub_any_publishing_api_put_content
+      stub_any_publishing_api_patch_links
       stub_publishing_api_publish(document.content_id, {}, status: 503)
       stub_any_rummager_post_with_queueing_enabled
       expect(document.publish!).to eq(false)
@@ -170,6 +245,8 @@ RSpec.describe Document do
 
     it "notifies Airbrake and returns false if rummager does not return status 200" do
       expect(Airbrake).to receive(:notify)
+      stub_any_publishing_api_put_content
+      stub_any_publishing_api_patch_links
       stub_publishing_api_publish(document.content_id, {})
       publishing_api_has_item(payload)
       stub_request(:post, %r{#{Plek.new.find('search')}/documents}).to_return(status: 503)
@@ -212,7 +289,7 @@ RSpec.describe Document do
       c = MyDocumentType.find(payload["content_id"])
       expect(c.save).to eq(true)
 
-      expected_payload = saved_for_the_first_time(write_payload(payload.deep_stringify_keys))
+      expected_payload = write_payload(payload.deep_stringify_keys)
       assert_publishing_api_put_content(c.content_id, expected_payload)
     end
 
@@ -298,6 +375,50 @@ RSpec.describe Document do
 
         expect(subject.upload_attachment(attachment)).to eq(false)
       end
+    end
+  end
+
+  context "change_history" do
+    let(:note) { 'my change note' }
+    let(:document) { MyDocumentType.new.tap { |document| document.change_note = note } }
+
+    it 'add note when major change' do
+      document.update_type = 'major'
+
+      expect(document.change_history.last).to eq('public_timestamp' => Time.current.iso8601, 'note' => note)
+    end
+
+    it 'should not add note when minor change' do
+      document.update_type = 'minor'
+
+      expect(document.change_history).to be_empty
+    end
+
+    it 'should not add note when no update type' do
+      document.update_type = ''
+
+      expect(document.change_history).to be_empty
+    end
+  end
+
+  context '#ever_been_published?' do
+    let(:change_note_1) { { 'public_timestamp' => Time.current.iso8601, 'note' => 'Drafting' } }
+    let(:change_note_2) { { 'public_timestamp' => Time.current.iso8601, 'note' => Document::FIRST_PUBLISHED_NOTE } }
+    let(:change_note_3) { { 'public_timestamp' => Time.current.iso8601, 'note' => 'Making changes' } }
+    subject { MyDocumentType.new }
+    it "is true if there is a '#{Document::FIRST_PUBLISHED_NOTE}' entry in change_history" do
+      subject.change_history = [change_note_1, change_note_2, change_note_3]
+      expect(subject).to have_ever_been_published
+    end
+
+    it "is false if there is no '#{Document::FIRST_PUBLISHED_NOTE}' entry in change_history" do
+      subject.change_history = [change_note_1, change_note_3]
+      expect(subject).not_to have_ever_been_published
+    end
+
+    it "is false if the change_history is empty" do
+      subject.change_history = []
+      expect(subject).not_to have_ever_been_published
     end
   end
 end

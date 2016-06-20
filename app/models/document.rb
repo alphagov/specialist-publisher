@@ -22,6 +22,8 @@ class Document
     :first_published_at,
   ]
 
+  FIRST_PUBLISHED_NOTE = 'First published.'.freeze
+
   def self.policy_class
     DocumentPolicy
   end
@@ -59,7 +61,7 @@ class Document
     "live"
   end
 
-  %w{draft live redrafted}.each do |state|
+  %w{draft live redrafted superseded unpublished}.each do |state|
     define_method("#{state}?") do
       publication_state == state
     end
@@ -73,12 +75,26 @@ class Document
     !published?
   end
 
+  # TODO: This is not particularly robust. We'd prefer to check the entire
+  # state history of the document to see if it had really ever been published
+  # but that's not available via the publishing api yet.  Checking for our
+  # "First published" note in change history is a stopgap until it is.
+  def has_ever_been_published?
+    change_history.detect { |notes| notes['note'] == Document::FIRST_PUBLISHED_NOTE }
+  end
+
   def change_note_required?
     update_type == 'major' && published?
   end
 
   def change_history
     @change_history ||= []
+
+    if change_note && update_type == 'major'
+      @change_history + [{ 'public_timestamp' => Time.current.iso8601, 'note' => change_note }]
+    else
+      @change_history
+    end
   end
 
   def update_type
@@ -150,11 +166,10 @@ class Document
     # recent change note from the change_history array
     # and set it as the document's change note
     document.change_note = payload['details']['change_history'].pop["note"] if document.redrafted? && payload['details']['change_history'].length > 1
+    # Persist the rest of the change_history on the document
+    document.change_history = payload['details']['change_history'].map(&:to_h)
 
     document.attachments = Attachment.all_from_publishing_api(payload)
-    # Persist the rest of the change_history on the document
-    # if the document is live or redrafted
-    document.change_history = payload['details']['change_history'].map(&:to_h) if document.published?
 
     document.format_specific_fields.each do |field|
       document.public_send(:"#{field.to_s}=", payload['details']['metadata'][field.to_s])
@@ -216,6 +231,12 @@ class Document
   def publish!
     handle_remote_error do
       update_type = self.update_type || 'major'
+
+      unless has_ever_been_published?
+        self.change_note = Document::FIRST_PUBLISHED_NOTE
+        self.save
+      end
+
       Services.publishing_api.publish(content_id, update_type)
 
       published_document = self.class.find(self.content_id)

@@ -37,7 +37,7 @@ private
     {
       body: GovspeakPresenter.new(@document).present,
       metadata: metadata,
-      change_history: change_history,
+      change_history: document.change_history,
       max_cache_time: 10,
     }.tap do |details_hash|
       details_hash[:attachments] = attachments if document.attachments.any?
@@ -73,15 +73,5 @@ private
     )
 
     metadata.reject { |_k, v| v.blank? }
-  end
-
-  def change_history
-    case document.update_type
-    when "major"
-      # FIXME: public timestamp used an incorrectly set public_updated_at, using the STUB_TIME_STAMP as a temporary measure to decouple the two until future bug fix story is in play.
-      document.change_history + [{ public_timestamp: STUB_TIME_STAMP, note: document.change_note || "First published." }]
-    when "minor"
-      document.change_history
-    end
   end
 end

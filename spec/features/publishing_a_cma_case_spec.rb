@@ -6,6 +6,7 @@ RSpec.feature "Publishing a CMA case", type: :feature do
   let(:publish_disable_with_message) { page.find_button('Publish')["data-disable-with"] }
 
   before do
+    Timecop.freeze(Time.parse("2015-12-03T16:59:13+00:00"))
     log_in_as_editor(:cma_editor)
 
     publishing_api_has_content([item], hash_including(document_type: CmaCase.document_type))
@@ -14,6 +15,10 @@ RSpec.feature "Publishing a CMA case", type: :feature do
     stub_publishing_api_publish(content_id, {})
     stub_any_rummager_post_with_queueing_enabled
     email_alert_api_accepts_alert
+  end
+
+  after do
+    Timecop.return
   end
 
   context "when the document is a new draft" do
@@ -26,6 +31,9 @@ RSpec.feature "Publishing a CMA case", type: :feature do
     }
 
     scenario "from the index" do
+      stub_any_publishing_api_put_content
+      stub_any_publishing_api_patch_links
+
       visit "/cma-cases"
       expect(page.status_code).to eq(200)
 
@@ -36,6 +44,20 @@ RSpec.feature "Publishing a CMA case", type: :feature do
       click_button "Publish"
       expect(page.status_code).to eq(200)
       expect(page).to have_content("Published Example CMA Case")
+
+
+      expected_change_history = [
+          {
+              "public_timestamp" => Time.current.iso8601,
+              "note" => "First published.",
+          }
+      ]
+
+      changed_json = {
+          "details" => item["details"].merge("change_history" => expected_change_history)
+      }
+
+      assert_publishing_api_put_content(content_id, request_json_includes(changed_json))
 
       assert_publishing_api_publish(content_id)
       assert_rummager_posted_item("link" => "/cma-cases/example-cma-case")
@@ -71,8 +93,8 @@ RSpec.feature "Publishing a CMA case", type: :feature do
   context "when the document is already published" do
     let(:item) {
       FactoryGirl.create(:cma_case,
-        title: "Live Item",
-        publication_state: "live")
+        :published,
+        title: "Live Item")
     }
 
     scenario "publish buttons aren't shown" do
@@ -89,6 +111,7 @@ RSpec.feature "Publishing a CMA case", type: :feature do
   context "when there is a redrafted document with a major update" do
     let(:item) {
       FactoryGirl.create(:cma_case,
+        :published,
         title: "Major Update Case",
         update_type: "major",
         publication_state: "redrafted")
@@ -108,11 +131,42 @@ RSpec.feature "Publishing a CMA case", type: :feature do
 
       expect(publish_alert_message).to eq("Publishing will email subscribers to CMA Cases. Continue?")
     end
+
+    scenario "adds to the change history" do
+      visit "/cma-cases"
+
+      expect(page.status_code).to eq(200)
+
+      click_link "Major Update Case"
+      expect(page.status_code).to eq(200)
+
+      click_link "Edit document"
+      fill_in "Title", with: "Changed title"
+
+      choose "Update type major"
+      fill_in "Change note", with: "This is a change note for a major update to redrafted document."
+      click_button "Save as draft"
+
+      expected_change_history = item['details']['change_history'] + [
+          {
+              "public_timestamp" => Time.current.iso8601,
+              "note" => "This is a change note for a major update to redrafted document.",
+          }
+      ]
+
+      changed_json = {
+          "title" => "Changed title",
+          "update_type" => "major",
+          "details" => item["details"].merge("change_history" => expected_change_history),
+      }
+      assert_publishing_api_put_content(content_id, request_json_includes(changed_json))
+    end
   end
 
   context "when there is a redrafted document with a minor update" do
     let(:item) {
       FactoryGirl.create(:cma_case,
+        :published,
         title: "Minor Update Case",
         update_type: "minor",
         publication_state: "redrafted")
@@ -156,8 +210,9 @@ RSpec.feature "Publishing a CMA case", type: :feature do
   context "when the document is unpublished" do
     let(:item) {
       FactoryGirl.create(:cma_case,
+        :published,
         title: "Unpublished Item",
-        publication_state: "Unpublished")
+        publication_state: "unpublished")
     }
 
     scenario "when content item is unpublished, there will be a publish button" do

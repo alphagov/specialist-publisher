@@ -7,17 +7,8 @@ module PublishingApiHelpers
     document
   end
 
-  def saved_for_the_first_time(document)
-    document.deep_merge(
-      "details" => {
-        "change_history" => [
-          {
-            "public_timestamp" => STUB_TIME_STAMP,
-            "note" => "First published.",
-          }
-        ]
-      }
-    )
+  def assert_no_publishing_api_put_content(content_id)
+    assert_publishing_api_put_content(content_id, nil, 0)
   end
 end
 

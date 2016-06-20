@@ -11,6 +11,7 @@ RSpec.feature "Editing a CMA case", type: :feature do
   let(:save_button_disable_with_message) { page.find_button('Save as draft')["data-disable-with"] }
 
   before do
+    Timecop.freeze(Time.parse("2015-12-03T16:59:13+00:00"))
     log_in_as_editor(:cma_editor)
 
     stub_any_publishing_api_put_content
@@ -19,7 +20,6 @@ RSpec.feature "Editing a CMA case", type: :feature do
     publishing_api_has_content([cma_case], hash_including(document_type: CmaCase.document_type))
     publishing_api_has_item(cma_case)
 
-    Timecop.freeze(Time.parse("2015-12-03T16:59:13+00:00"))
 
     visit "/cma-cases/#{content_id}"
     click_link "Edit document"
@@ -55,7 +55,7 @@ RSpec.feature "Editing a CMA case", type: :feature do
         }],
       }
     )
-    expected_sent_payload = saved_for_the_first_time(write_payload(updated_cma_case))
+    expected_sent_payload = write_payload(updated_cma_case)
 
     fill_in "Title", with: "Changed title"
     fill_in "Summary", with: "Changed summary"
@@ -78,19 +78,13 @@ RSpec.feature "Editing a CMA case", type: :feature do
   context "a published case" do
     let(:cma_case) {
       FactoryGirl.create(:cma_case,
+        :published,
         title: "Example CMA Case",
         description: "Summary with a typox",
-        publication_state: "live",
         details: {
           "body" => [
             { "content_type" => "text/govspeak", "content" => "A body" },
             { "content_type" => "text/html", "content" => "<p>A body</p>\n" },
-          ],
-          "change_history" => [
-            {
-              "public_timestamp" => STUB_TIME_STAMP,
-              "note" => "First published.",
-            }
           ],
           "metadata" => {
             "bulk_published" => true,
@@ -105,13 +99,9 @@ RSpec.feature "Editing a CMA case", type: :feature do
       fill_in "Change note", with: "This is a change note."
       click_button "Save as draft"
 
-      expected_change_history = [
+      expected_change_history = cma_case['details']['change_history'] + [
         {
-          "public_timestamp" => STUB_TIME_STAMP,
-          "note" => "First published.",
-        },
-        {
-          "public_timestamp" => STUB_TIME_STAMP,
+          "public_timestamp" => Time.current.iso8601,
           "note" => "This is a change note.",
         }
       ]

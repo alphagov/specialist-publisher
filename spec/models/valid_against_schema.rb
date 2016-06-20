@@ -9,7 +9,7 @@ RSpec.shared_examples "it saves payloads that are valid against the 'specialist_
       instance = described_class.find(payload["content_id"])
       expect(instance.save).to eq(true)
 
-      expected_payload_sent_to_publishing_api = saved_for_the_first_time(write_payload(payload))
+      expected_payload_sent_to_publishing_api = write_payload(payload)
 
       assert_publishing_api_put_content(instance.content_id, expected_payload_sent_to_publishing_api)
       expect(expected_payload_sent_to_publishing_api.to_json).to be_valid_against_schema('specialist_document')
