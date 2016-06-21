@@ -14,12 +14,17 @@ class Document
   validates :change_note, presence: true, if: :change_note_required?
 
   COMMON_FIELDS = [
+    :base_path,
     :title,
     :summary,
     :body,
     :publication_state,
     :public_updated_at,
     :first_published_at,
+    :update_type,
+    :bulk_published,
+    :change_note,
+    :change_history,
   ]
 
   FIRST_PUBLISHED_NOTE = 'First published.'.freeze
@@ -146,8 +151,18 @@ class Document
     end
   end
 
+  def self.extract_change_note_from_payload(payload)
+    # If the document is redrafted remove the last/most
+    # recent change note from the change_history array
+    # and set it as the document's change note
+    if payload['publication_state'] == 'redrafted' && payload['details']['change_history'].length > 1
+      payload['details']['change_history'].pop["note"]
+    end
+  end
+
   def self.from_publishing_api(payload)
     document = self.new(
+      base_path: payload['base_path'],
       content_id: payload['content_id'],
       title: payload['title'],
       summary: payload['description'],
@@ -155,19 +170,11 @@ class Document
       publication_state: payload['publication_state'],
       public_updated_at: payload['public_updated_at'],
       first_published_at: payload['first_published_at'],
+      update_type: payload['update_type'],
+      bulk_published: payload['details']['metadata']['bulk_published'],
+      change_note: extract_change_note_from_payload(payload),
+      change_history: payload['details']['change_history'].map(&:to_h)
     )
-
-    document.base_path = payload['base_path']
-    document.update_type = payload['update_type']
-
-    document.bulk_published = payload['details']['metadata']['bulk_published']
-
-    # If the document is redrafted remove the last/most
-    # recent change note from the change_history array
-    # and set it as the document's change note
-    document.change_note = payload['details']['change_history'].pop["note"] if document.redrafted? && payload['details']['change_history'].length > 1
-    # Persist the rest of the change_history on the document
-    document.change_history = payload['details']['change_history'].map(&:to_h)
 
     document.attachments = Attachment.all_from_publishing_api(payload)
 
