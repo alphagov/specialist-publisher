@@ -59,7 +59,7 @@ FactoryGirl.define do
     public_updated_at "2015-11-16T11:53:30+00:00"
     # TODO: "draft" documents shouldn't really have a first_published_at
     first_published_at "2015-11-15T00:00:00Z"
-    updated_at "2015-11-15T11:53:30"
+    last_edited_at "2015-11-15T11:53:30"
     publication_state "draft"
     state_history {
       { "1": "draft" }

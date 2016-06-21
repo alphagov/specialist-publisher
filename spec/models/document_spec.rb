@@ -32,7 +32,6 @@ RSpec.describe Document do
           fields: [
             :base_path,
             :content_id,
-            :updated_at,
             :last_edited_at,
             :title,
             :publication_state,

@@ -9,7 +9,7 @@ RSpec.feature "Searching and filtering", type: :feature do
         "description" => "This is the summary of example CMA case #{n}",
         "base_path" => "/cma-cases/example-cma-case-#{n}",
         "publication_state" => "draft",
-        "updated_at" => (test_date - (n + 1).days).iso8601,
+        "last_edited_at" => (test_date - (n + 1).days).iso8601,
         "public_updated_at" => (test_date - (10 - n).days).iso8601)
     end
     ten_example_cases[1]["publication_state"] = "live"
@@ -57,7 +57,7 @@ RSpec.feature "Searching and filtering", type: :feature do
       end
     end
 
-    scenario "viewing the updated_at field on the index page" do
+    scenario "viewing the last_edited_at field on the index page" do
       Timecop.freeze(test_date) do
         visit "/cma-cases"
 
