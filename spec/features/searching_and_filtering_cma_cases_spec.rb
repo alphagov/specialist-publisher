@@ -60,6 +60,7 @@ RSpec.feature "Searching and filtering", type: :feature do
     scenario "viewing the last_edited_at field on the index page" do
       Timecop.freeze(test_date) do
         visit "/cma-cases"
+        expect(page).to have_css(".last-edited-at")
 
         within(".document-list li.document:nth-child(1)") do
           expect(page).to have_content("Updated 1 day ago")
@@ -102,6 +103,20 @@ RSpec.feature "Searching and filtering", type: :feature do
 
       expect(page.status_code).to eq(200)
       expect(page).to have_content("No CMA Cases available.")
+    end
+  end
+
+  context "when publishing-api returns null values for last-edited-at" do
+    scenario "last-edited-at should be hidden when value is nil" do
+      cma_cases_with_missing_last_edited_at = cma_cases.each { |item| item.merge!("last_edited_at" => nil) }
+      expect(cma_cases_with_missing_last_edited_at.sample["last_edited_at"]).to eq(nil)
+
+      publishing_api_has_content(cma_cases_with_missing_last_edited_at, hash_including(document_type: CmaCase.document_type))
+
+      visit "/cma-cases"
+
+      expect(page.status_code).to eq(200)
+      expect(page).not_to have_css(".last-edited-at")
     end
   end
 end
