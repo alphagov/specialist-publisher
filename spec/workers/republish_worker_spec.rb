@@ -39,6 +39,12 @@ RSpec.describe RepublishWorker do
 
         expect(WebMock).not_to have_requested(:post, /search/)
       end
+
+      it "does not speak to email alert api" do
+        subject.perform(content_id)
+
+        expect(WebMock).not_to have_requested(:post, /notifications/)
+      end
     end
   end
 
@@ -65,6 +71,12 @@ RSpec.describe RepublishWorker do
 
       assert_rummager_posted_item({})
     end
+
+    it "does not speak to email alert api" do
+      subject.perform(content_id)
+
+      expect(WebMock).not_to have_requested(:post, /notifications/)
+    end
   end
 
   context "when the document is unpublished" do
@@ -80,6 +92,7 @@ RSpec.describe RepublishWorker do
       expect(WebMock).not_to have_requested(:put, /publishing-api/)
       expect(WebMock).not_to have_requested(:post, /publishing-api/)
       expect(WebMock).not_to have_requested(:any, /rummager/)
+      expect(WebMock).not_to have_requested(:post, /notifications/)
     end
   end
 
@@ -96,6 +109,7 @@ RSpec.describe RepublishWorker do
       expect(WebMock).not_to have_requested(:put, /publishing-api/)
       expect(WebMock).not_to have_requested(:post, /publishing-api/)
       expect(WebMock).not_to have_requested(:any, /rummager/)
+      expect(WebMock).not_to have_requested(:post, /notifications/)
     end
   end
 end
