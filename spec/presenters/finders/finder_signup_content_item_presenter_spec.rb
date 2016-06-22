@@ -1,4 +1,5 @@
 require 'spec_helper'
+require_relative "../../../app/presenters/finders/finder_signup_content_item_presenter"
 
 RSpec.describe FinderSignupContentItemPresenter do
   describe "#to_json" do
