@@ -77,7 +77,6 @@ RSpec.describe Document do
           field2: "open",
           field3: %w(x y z),
           document_type: "my_document_type",
-          bulk_published: true,
         }
       }
     }
@@ -88,6 +87,138 @@ RSpec.describe Document do
   before do
     allow_any_instance_of(FinderSchema).to receive(:load_schema_for).with("my_document_types").
       and_return(finder_schema)
+  end
+
+  describe ".from_publishing_api" do
+    context "for a published document" do
+      let(:payload) { FactoryGirl.create(:document, :published, payload_attributes) }
+
+      it "sets the top-level attributes on a document" do
+        expect(document.base_path).to eq(payload['base_path'])
+        expect(document.content_id).to eq(payload['content_id'])
+        expect(document.title).to eq(payload['title'])
+        expect(document.summary).to eq(payload['description'])
+        expect(document.publication_state).to eq(payload['publication_state'])
+        expect(document.public_updated_at).to eq(payload['public_updated_at'])
+        expect(document.first_published_at).to eq(payload['first_published_at'])
+        expect(document.update_type).to eq(payload['update_type'])
+      end
+
+      context "when bulk published is true" do
+        let(:payload_attributes) do
+          {
+            details: {
+              metadata: {
+                bulk_published: true
+              }
+            }
+          }
+        end
+
+        specify { expect(document.bulk_published).to eq(true) }
+      end
+
+      context "when bulk published is not present in metadata" do
+        let(:payload_attributes) do
+          {
+            details: {
+              metadata: {}
+            }
+          }
+        end
+
+        specify { expect(document.bulk_published).to eq(false) }
+      end
+
+      context "when the body contains multiple content types" do
+        let(:payload_attributes) do
+          {
+            details: {
+              body: [
+                { content_type: "text/govspeak", content: "# hello" },
+                { content_type: "text/html", content: "<h1>hello</h1>" },
+              ]
+            }
+          }
+        end
+
+        it "sets the body to the content of the govspeak type" do
+          expect(document.body).to eq("# hello")
+        end
+      end
+
+      context "when the body is just a string" do
+        let(:payload_attributes) do
+          {
+            details: {
+              body: "This is just a string.",
+            }
+          }
+        end
+
+        it "sets the body to that string" do
+          expect(document.body).to eq("This is just a string.")
+        end
+      end
+
+      it "sets its attachments collection from the payload" do
+        expect(document.attachments).to be_an(AttachmentCollection)
+      end
+
+      it "sets format specific fields for the document subclass" do
+        expect(document.format_specific_fields).to eq([:field1, :field2, :field3])
+
+        expect(document.field1).to eq("2015-12-01")
+        expect(document.field2).to eq("open")
+        expect(document.field3).to eq(%w(x y z))
+      end
+
+      it "sets the change note to nil" do
+        expect(document.change_note).to be_nil
+      end
+    end
+
+    context "when the document is redrafted" do
+      let(:payload) do
+        FactoryGirl.create(
+          :document,
+          payload_attributes.merge(publication_state: "redrafted"),
+        )
+      end
+
+      context "when there is more than one item in the change history" do
+        let(:payload_attributes) do
+          {
+            details: {
+              change_history: [
+                { note: "First published", public_timestamp: "2016-01-01" },
+                { note: "Second note", public_timestamp: "2016-01-02" },
+              ]
+            }
+          }
+        end
+
+        it "sets the change note to the second item in the change history" do
+          expect(document.change_note).to eq("Second note")
+        end
+
+        it "sets the full change history from the payload" do
+          expect(document.change_history[0]['note']).to eq("First published")
+          expect(document.change_history[0]['public_timestamp']).to eq("2016-01-01")
+          expect(document.change_history[1]['note']).to eq("Second note")
+        end
+
+        it "updates the latest change history's timestamp to now when it is read" do
+          Timecop.freeze("2016-04-21") do
+            expect(document.change_history[1]['public_timestamp']).to eq("2016-04-21T01:00:00+01:00")
+          end
+        end
+      end
+
+      context "when there is just one item in the change history" do
+        specify { expect(document.change_note).to be_nil }
+      end
+    end
   end
 
   context "successful #publish!" do

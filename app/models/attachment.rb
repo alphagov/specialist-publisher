@@ -3,6 +3,11 @@ require "gds_api/asset_manager"
 class Attachment < Document
   attr_accessor :title, :file, :content_type, :url, :content_id, :created_at, :updated_at
 
+  def self.all_from_publishing_api(payload)
+    return [] unless payload.fetch('details', {}).key?('attachments')
+    payload['details']['attachments'].map { |attachment| Attachment.new(attachment) }
+  end
+
   def initialize(params = {})
     params = params.symbolize_keys
     @title = params[:title]
@@ -18,11 +23,6 @@ class Attachment < Document
     new_params.each do |k, v|
       self.public_send(:"#{k}=", v)
     end
-  end
-
-  def self.all_from_publishing_api(payload)
-    return [] unless payload.fetch('details', {}).key?('attachments')
-    payload['details']['attachments'].map { |attachment| Attachment.new(attachment) }
   end
 
   def upload
