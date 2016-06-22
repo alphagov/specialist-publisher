@@ -3,6 +3,55 @@ require 'gds_api/test_helpers/asset_manager'
 RSpec.describe Attachment do
   include GdsApi::TestHelpers::AssetManager
 
+  describe ".all_from_publishing_api" do
+    context "when the payload has attachments in details" do
+      let(:attachment_payload) { FactoryGirl.create(:attachment_payload) }
+
+      let(:payload) do
+        { "details" => { "attachments" => [attachment_payload] } }
+      end
+
+      it "returns an array of attachments" do
+        attachments = described_class.all_from_publishing_api(payload)
+
+        expect(attachments.size).to eq(1)
+        attachment = attachments.first
+
+        expect(attachment.title).to eq(attachment_payload["title"])
+        expect(attachment.file).to eq(attachment_payload["file"])
+        expect(attachment.content_type).to eq(attachment_payload["content_type"])
+        expect(attachment.url).to eq(attachment_payload["url"])
+        expect(attachment.content_id).to eq(attachment_payload["content_id"])
+        expect(attachment.created_at).to eq(attachment_payload["created_at"])
+        expect(attachment.updated_at).to eq(attachment_payload["updated_at"])
+      end
+
+      context "when a content id is not provided" do
+        let(:attachment_payload) {
+          FactoryGirl.create(:attachment_payload, content_id: nil)
+        }
+
+        it "generates a content id" do
+          allow(SecureRandom).to receive(:uuid).and_return("some-content-id")
+
+          attachments = described_class.all_from_publishing_api(payload)
+          attachment = attachments.first
+
+          expect(attachment.content_id).to eq("some-content-id")
+        end
+      end
+    end
+
+    context "when the payload does not have attachments" do
+      let(:payload) { {} }
+
+      it "returns an empty array" do
+        attachments = described_class.all_from_publishing_api(payload)
+        expect(attachments).to eq([])
+      end
+    end
+  end
+
   describe "#new" do
     let(:attachment) {
       Attachment.new(
