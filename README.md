@@ -40,25 +40,27 @@ $ ./startup.sh
 ```
 If you are using the GDS development virtual machine then the application will be available on the host at https://specialist-publisher-rebuild.dev.gov.uk/
 
+## Granting Permissions
+
+You may find that you can't see any documents after replicating data. To fix
+this, you need to grant user permissions in this application:
+
+```bash
+bundle exec rake permissions:grant['Chris Patuzzo'] # Or whichever user you're logged in as.
+```
+
+You also need to set the `app_name` for the Dummy API User in Publishing API:
+
+```ruby
+User.find_by(email: "dummyapiuser@domain.com").update!(app_name: "specialist-publisher")
+```
+
 ### Populate development database
 
-In order to quickly get your local database into working order run `$ bundle exec rake db:seed`.
+If you're starting from a blank database, you can quickly get your local database into working order with `$ bundle exec rake db:seed`.
 
 Currently this:
 * creates a default user record with basic permissions that allows you to log in and create a new document
-
-### Notes on Mock API User for publishing-api while running the application
-
-This app relies on publishing-api for all its document data, which are filtered by `app_name` attribute on the API user on publishing-api.
-If you experience a problem where you know there should be documents in your local copy of publishing-api but nothing is displayed when running the application.
-Check that the development api user (created automatically by gds-sso gem) has the `app_name` correctly set to `"specialist-publisher"`
-
-This can be done by the following steps (if using a development VM):
-
-1. Go to the publishing-api directory in your VM and run `bundle exec rails console`
-2. Find and update the dummy api user by running `User.find_by(email: "dummyapiuser@domain.com").update(app_name: "specialist-publisher")`
-
-Now your application should be able to retrieve specialist documents from publishing-api
 
 ## Running the test suite
 

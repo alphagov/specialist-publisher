@@ -221,7 +221,7 @@ RSpec.describe Document do
     end
   end
 
-  context "successful #publish!" do
+  context "successful #publish" do
     before do
       stub_any_publishing_api_put_content
       stub_any_publishing_api_patch_links
@@ -232,13 +232,13 @@ RSpec.describe Document do
     end
 
     it "sends a payload to Publishing API" do
-      expect(document.publish!).to eq(true)
+      expect(document.publish).to eq(true)
 
       assert_publishing_api_publish(document.content_id)
     end
 
     it "sends a payload to Rummager" do
-      expect(document.publish!).to eq(true)
+      expect(document.publish).to eq(true)
 
       assert_rummager_posted_item(
         "title" => "Example document",
@@ -255,7 +255,7 @@ RSpec.describe Document do
     it "alerts the email API for major updates" do
       document.update_type = "major"
 
-      expect(document.publish!).to eq(true)
+      expect(document.publish).to eq(true)
 
       assert_email_alert_sent(
         "tags" => {
@@ -271,7 +271,7 @@ RSpec.describe Document do
     it "doesn't alerts the email API for minor updates" do
       document.update_type = "minor"
 
-      expect(document.publish!).to eq(true)
+      expect(document.publish).to eq(true)
 
       expect(@email_alert_api).to_not have_been_requested
     end
@@ -290,7 +290,7 @@ RSpec.describe Document do
       }
 
       it 'sends first_published_at to Rummager' do
-        unpublished_document.publish!
+        unpublished_document.publish
         assert_rummager_posted_item(
           "title" => "Example document",
           "description" => "This is a summary",
@@ -305,7 +305,7 @@ RSpec.describe Document do
 
       it 'saves a "First published" change note before asking the api to publish' do
         Timecop.freeze(Time.parse("2015-12-18 10:12:26 UTC")) do
-          unpublished_document.publish!
+          unpublished_document.publish
 
           expected_change_history = [
             {
@@ -337,7 +337,7 @@ RSpec.describe Document do
       }
 
       it 'does not add a "First published" change note before asking the api to publish' do
-        published_document.publish!
+        published_document.publish
 
         assert_no_publishing_api_put_content(published_document.content_id)
       end
@@ -364,14 +364,14 @@ RSpec.describe Document do
     end
   end
 
-  context "unsuccessful #publish!" do
+  context "unsuccessful #publish" do
     it "notifies Airbrake and returns false if publishing-api does not return status 200" do
       expect(Airbrake).to receive(:notify)
       stub_any_publishing_api_put_content
       stub_any_publishing_api_patch_links
       stub_publishing_api_publish(document.content_id, {}, status: 503)
       stub_any_rummager_post_with_queueing_enabled
-      expect(document.publish!).to eq(false)
+      expect(document.publish).to eq(false)
     end
 
     it "notifies Airbrake and returns false if rummager does not return status 200" do
@@ -381,7 +381,7 @@ RSpec.describe Document do
       stub_publishing_api_publish(document.content_id, {})
       publishing_api_has_item(payload)
       stub_request(:post, %r{#{Plek.new.find('search')}/documents}).to_return(status: 503)
-      expect(document.publish!).to eq(false)
+      expect(document.publish).to eq(false)
     end
   end
 
@@ -404,6 +404,26 @@ RSpec.describe Document do
         stub_publishing_api_unpublish(document.content_id, { body: { type: 'gone' } }, status: 409)
         expect(document.unpublish).to eq(false)
       end
+    end
+  end
+
+  describe "#discard" do
+    let(:content_id) { payload.fetch("content_id") }
+
+    it "sends a discard draft request to the publishing api" do
+      stub_publishing_api_discard_draft(content_id)
+      document.discard
+      assert_publishing_api_discard_draft(content_id)
+    end
+
+    it "returns true if the draft was discarded successfully" do
+      stub_publishing_api_discard_draft(content_id)
+      expect(document.discard).to eq(true)
+    end
+
+    it "returns false if the draft could not be discarded" do
+      stub_request(:any, /discard/).to_raise(GdsApi::HTTPErrorResponse)
+      expect(document.discard).to eq(false)
     end
   end
 

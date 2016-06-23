@@ -29,13 +29,13 @@ end
 if ENV["API_DEV"]
   gem "gds-api-adapters", path: "../gds-api-adapters"
 else
-  gem "gds-api-adapters", "30.9.0"
+  gem "gds-api-adapters", "31.1.0"
 end
 
 group :development, :test do
   gem 'better_errors', '~> 2.1.1'
   gem 'binding_of_caller', '~> 0.7.2'
-  gem 'pry'
+  gem 'pry-rails'
   gem 'foreman', '0.74.0'
   gem 'rspec-rails', '~> 3.3'
   gem 'simplecov', '0.10.0', require: false

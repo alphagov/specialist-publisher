@@ -5,7 +5,7 @@ RSpec.describe DrugSafetyUpdate do
   let(:payload) { FactoryGirl.create(:drug_safety_update) }
   include_examples "it saves payloads that are valid against the 'specialist_document' schema"
 
-  context "#publish!" do
+  context "#publish" do
     let(:payload) {
       FactoryGirl.create(:drug_safety_update,
         update_type: "major",
@@ -21,7 +21,7 @@ RSpec.describe DrugSafetyUpdate do
       stub_publishing_api_publish(payload["content_id"], {})
       stub_any_rummager_post_with_queueing_enabled
 
-      document.publish!
+      document.publish
 
       assert_publishing_api_publish(payload["content_id"])
       assert_not_requested(:post, Plek.current.find('email-alert-api') + "/notifications")

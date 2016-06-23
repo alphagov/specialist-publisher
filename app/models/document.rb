@@ -3,7 +3,23 @@ class Document
   include ActiveModel::Validations
   include PublishingHelper
 
-  attr_accessor :content_id, :base_path, :title, :summary, :body, :format_specific_fields, :public_updated_at, :state, :bulk_published, :publication_state, :change_note, :document_type, :attachments, :first_published_at
+  attr_accessor(
+    :content_id,
+    :base_path,
+    :title,
+    :summary,
+    :body,
+    :format_specific_fields,
+    :public_updated_at,
+    :state,
+    :bulk_published,
+    :publication_state,
+    :change_note,
+    :document_type,
+    :attachments,
+    :first_published_at,
+    :previous_version
+  )
 
   attr_writer :change_history, :update_type
 
@@ -173,7 +189,8 @@ class Document
       update_type: payload['update_type'],
       bulk_published: payload['details']['metadata']['bulk_published'],
       change_note: extract_change_note_from_payload(payload),
-      change_history: payload['details']['change_history'].map(&:to_h)
+      change_history: payload['details']['change_history'].map(&:to_h),
+      previous_version: payload['previous_version']
     )
 
     document.attachments = Attachment.all_from_publishing_api(payload)
@@ -235,7 +252,7 @@ class Document
     end
   end
 
-  def publish!
+  def publish
     handle_remote_error do
       update_type = self.update_type || 'major'
 
@@ -267,8 +284,18 @@ class Document
     end
   end
 
+  def discard
+    handle_remote_error do
+      Services.publishing_api.discard_draft(content_id, previous_version: previous_version)
+    end
+  end
+
   def attachments=(attachments)
     @attachments = AttachmentCollection.new(attachments)
+  end
+
+  def has_attachment?(attachment)
+    find_attachment(attachment.content_id).present?
   end
 
   def attachments
