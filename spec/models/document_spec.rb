@@ -102,6 +102,7 @@ RSpec.describe Document do
         expect(document.public_updated_at).to eq(payload['public_updated_at'])
         expect(document.first_published_at).to eq(payload['first_published_at'])
         expect(document.update_type).to eq(payload['update_type'])
+        expect(document.state_history).to eq(payload['state_history'])
       end
 
       context "when bulk published is true" do
