@@ -35,6 +35,7 @@ RSpec.describe Document do
             :updated_at,
             :title,
             :publication_state,
+            :state_history,
           ],
           page: 1,
           per_page: 20,

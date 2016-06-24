@@ -13,6 +13,9 @@ RSpec.feature "Searching and filtering", type: :feature do
         "public_updated_at" => (test_date - (10 - n).days).iso8601)
     end
     ten_example_cases[1]["publication_state"] = "live"
+    ten_example_cases[1]["state_history"] = { "1" => "published" }
+    ten_example_cases[2]["publication_state"] = "redrafted"
+    ten_example_cases[2]["state_history"] = { "1" => "published", "2" => "unpublished", "3" => "draft" }
     ten_example_cases
   }
 
@@ -38,14 +41,19 @@ RSpec.feature "Searching and filtering", type: :feature do
     scenario "viewing the publication state on the index page" do
       visit "/cma-cases"
 
+      within(".document-list li.document:nth-child(1)") do
+        expect(page).to have_content("draft")
+        expect(page).to have_css(".label-primary")
+      end
+
       within(".document-list li.document:nth-child(2)") do
-        expect(page).to have_css(".label-default")
         expect(page).to have_content("published")
+        expect(page).to have_css(".label-default")
       end
 
       within(".document-list li.document:nth-child(3)") do
+        expect(page).to have_content("unpublished with new draft")
         expect(page).to have_css(".label-primary")
-        expect(page).to have_content("draft")
       end
     end
 
