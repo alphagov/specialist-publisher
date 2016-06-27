@@ -831,6 +831,14 @@
       "type": "date",
       "display_as_result_metadata": true,
       "filterable": true
+    },
+    {
+      "key": "dfid_authors",
+      "name": "Authors",
+      "short_name": "Authors",
+      "type": "text",
+      "display_as_result_metadata": true,
+      "filterable": false
     }
   ]
 }

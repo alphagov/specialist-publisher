@@ -1,6 +1,8 @@
+<% label ||= field.to_s.humanize %>
+
 <div class="form-group <%= 'elements-error' if field_has_errors(@document, field) %>">
   <%= f.label field do %>
-    <%= field.to_s.humanize %>
+    <%= label %>
     <% field_errors(@document, field).each do |msg| %>
       <br />
       <span class="elements-error-message add-label-margin"><%= msg %></span>

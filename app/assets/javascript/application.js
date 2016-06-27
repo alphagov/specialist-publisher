@@ -7,6 +7,19 @@ jQuery(function($) {
     placeholder: $(this).data('placeholder')
   });
 
+  ////
+  // Make a select2 that will create new values on return as you type them
+  $(".select2.free-form-list").select2({
+    tags: true,
+    createTag: function (params) {
+      return {
+        id: params.term,
+        text: params.term,
+        newOption: true
+      }
+    }
+  });
+
   $('.js-hidden').hide();
 
   $('.js-update-type-major').click(function() {

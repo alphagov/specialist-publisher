@@ -1,0 +1,39 @@
+require 'spec_helper'
+require 'finder_schema'
+
+RSpec.describe FinderSchema do
+  let(:schema) { FinderSchema.new('dfid_research_outputs') }
+
+  describe '#humanized_facet_value' do
+    context 'a text facet' do
+      context 'with allowed_values ' do
+        context 'looking up a single value' do
+          it 'returns an array with only the looked-up value' do
+            expect(schema.humanized_facet_value('country', 'AL')).to eql(['Albania'])
+          end
+        end
+
+        context 'looking up multiple values' do
+          it 'returns an array with the looked-up values' do
+            expect(schema.humanized_facet_value('country', %w(AL AF))).to eql(%w(Albania Afghanistan))
+          end
+        end
+      end
+
+      context 'with an empty set of allowed_values' do
+        it 'returns the value itself' do
+          authors_value = ['Mr. Potato Head', 'Mrs. Potato Head']
+          expect(
+            schema.humanized_facet_value('dfid_authors', authors_value)
+          ).to eql(authors_value)
+        end
+      end
+    end
+
+    context 'a date facet' do
+      it 'just returns the value unmodified' do
+        expect(schema.humanized_facet_value('first_published_at', '2012-01-01')).to eql('2012-01-01')
+      end
+    end
+  end
+end
