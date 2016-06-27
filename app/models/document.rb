@@ -214,6 +214,7 @@ class Document
         :updated_at,
         :title,
         :publication_state,
+        :state_history,
       ],
       page: page,
       per_page: per_page,

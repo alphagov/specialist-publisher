@@ -1,8 +1,8 @@
 module StateHelper
   def state_for_frontend(document)
-    state = compose_state(document.state_history)
+    state = compose_state(document.state_history.to_h)
 
-    if document.publication_state == "draft"
+    if state =~ /draft/
       classes = "label label-primary"
     else
       classes = "label label-default"
