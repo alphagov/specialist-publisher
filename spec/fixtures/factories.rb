@@ -61,6 +61,10 @@ FactoryGirl.define do
     first_published_at "2015-11-15T00:00:00Z"
     updated_at "2015-11-15T11:53:30"
     publication_state "draft"
+    state_history {
+      { "1": "draft" }
+    }
+
     routes {
       [
         {
@@ -101,6 +105,10 @@ FactoryGirl.define do
 
     trait :published do
       publication_state 'live'
+      state_history {
+        { "1": "published" }
+      }
+
       change_history do
         [
           {

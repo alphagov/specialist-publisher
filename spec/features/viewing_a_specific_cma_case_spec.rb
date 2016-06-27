@@ -18,6 +18,7 @@ RSpec.feature "Viewing a specific case", type: :feature do
           title: "Example CMA Case",
           description: "This is the summary of example CMA case",
           publication_state: "draft",
+          state_history: { "1" => "draft" },
           details: {
             "body" => [
               {
@@ -130,6 +131,116 @@ RSpec.feature "Viewing a specific case", type: :feature do
       expect(page).to have_content("second attachment")
       expect(page).to have_content("3 December 2015")
       expect(page).to have_content("4 December 2015")
+    end
+  end
+
+  context "Viewing publication states" do
+    let(:cma_cases) {
+      [
+        FactoryGirl.create(:cma_case,
+          title: "Example Draft",
+          publication_state: "draft",
+          state_history: { "1" => "draft" }
+                          ),
+        FactoryGirl.create(:cma_case,
+          title: "Example Published",
+          publication_state: "live",
+          state_history: { "1" => "published" }
+                          ),
+        FactoryGirl.create(:cma_case,
+          title: "Example Unpublished",
+          publication_state: "unpublished",
+          state_history: { "1" => "unpublished" }
+                          ),
+        FactoryGirl.create(:cma_case,
+          title: "Example Published with new draft",
+          publication_state: "redrafted",
+          state_history: {
+            "1" => "published",
+            "2" => "draft"
+          }),
+        FactoryGirl.create(:cma_case,
+          title: "Example Unpublished with new draft",
+          publication_state: "redrafted",
+          state_history: {
+            "1" => "unpublished",
+            "2" => "draft"
+          }),
+        FactoryGirl.create(:cma_case,
+          title: "More states",
+          publication_state: "redrafted",
+          state_history: {
+            "1" => "unpublished",
+            "2" => "published",
+            "3" => "draft"
+          }),
+        FactoryGirl.create(:cma_case,
+          title: "More states Published",
+          publication_state: "live",
+          state_history: {
+            "1" => "unpublished",
+            "2" => "published"
+          }),
+      ]
+    }
+
+    scenario "Viewing a document with a draft state" do
+      visit "/cma-cases"
+      click_link "Example Draft"
+
+      within(".metadata-list") do
+        expect(page).to have_content("Publication state draft")
+      end
+    end
+
+    scenario "Viewing a document with a published state" do
+      visit "/cma-cases"
+      click_link "Example Published"
+
+      within(".metadata-list") do
+        expect(page).to have_content("Publication state published")
+      end
+
+      visit "/cma-cases"
+      click_link "More states Published"
+
+      within(".metadata-list") do
+        expect(page).to have_content("Publication state published")
+      end
+    end
+
+    scenario "Viewing a document with an unpublished state" do
+      visit "/cma-cases"
+      click_link "Example Unpublished"
+
+      within(".metadata-list") do
+        expect(page).to have_content("Publication state unpublished")
+      end
+    end
+
+    scenario "Viewing a document that has been published and has a new draft" do
+      visit "/cma-cases"
+      click_link "Example Published with new draft"
+
+      within(".metadata-list") do
+        expect(page).to have_content("Publication state published with new draft")
+      end
+
+      visit "/cma-cases"
+      click_link "More states"
+
+      within(".metadata-list") do
+        expect(page).to have_content("Publication state published with new draft")
+      end
+    end
+
+    scenario "Viewing a document that has been UN-published and has a new draft" do
+      visit "/cma-cases"
+      click_link "Example Unpublished with new draft"
+
+      within(".metadata-list") do
+        expect(page).to have_content("Publication state unpublished with new draft")
+      end
     end
   end
 end

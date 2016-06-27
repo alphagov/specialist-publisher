@@ -4,6 +4,7 @@ module PublishingApiHelpers
     document.delete("publication_state")
     document.delete("first_published_at")
     document.delete("public_updated_at")
+    document.delete("state_history")
     document
   end
 
