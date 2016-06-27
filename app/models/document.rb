@@ -148,8 +148,8 @@ class Document
 
   def humanized_attributes
     format_specific_metadata.inject({}) do |attributes, (key, value)|
-      humanized_name = finder_schema.humanized_facet_name(key) { key }
-      humanized_value = finder_schema.humanized_facet_value(key, value) { value }
+      humanized_name = finder_schema.humanized_facet_name(key)
+      humanized_value = finder_schema.humanized_facet_value(key, value)
 
       attributes.merge(humanized_name => humanized_value)
     end
