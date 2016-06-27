@@ -1,10 +1,19 @@
-<%= render layout: 'shared/form_group', locals: { f: f, field: :country } do %>
+<%= render layout: 'shared/form_group', locals: { f: f, field: :dfid_authors, label: 'Authors' } do %>
+  <%=
+    f.select :dfid_authors, @document.dfid_authors,
+      { include_blank: true },
+      { class: 'select2 free-form-list', multiple: true, data: { placeholder: 'Add authors' } }
+  %>
+<% end %>
+
+<%= render layout: 'shared/form_group', locals: { f: f, field: :country, label: 'Countries' } do %>
   <%=
     f.select :country, facet_options(f, :country),
       { include_blank: true },
       { class: 'select2', multiple: true, data: { placeholder: 'Select countries' } }
   %>
 <% end %>
-<%= render layout: 'shared/form_group', locals: { f: f, field: :first_published_at } do %>
+
+<%= render layout: 'shared/form_group', locals: { f: f, field: :first_published_at, label: 'First published at' } do %>
   <%= f.text_field :first_published_at, placeholder: '2012-04-23', class: 'form-control' %>
 <% end %>

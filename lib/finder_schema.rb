@@ -18,18 +18,22 @@ class FinderSchema
     allowed_values_as_option_tuples(allowed_values_for(facet_name))
   end
 
-  def humanized_facet_value(facet_key, value, &block)
-    if facet_data_for(facet_key).fetch("type", nil) == "text"
+  def humanized_facet_value(facet_key, value)
+    type = facet_data_for(facet_key).fetch("type", nil)
+    case
+    when type == "text" && allowed_values_for(facet_key).empty?
+      value
+    when type == "text"
       Array(value).map do |v|
-        value_label_mapping_for(facet_key, v).fetch("label", &block)
+        value_label_mapping_for(facet_key, v).fetch("label") { value }
       end
     else
-      value_label_mapping_for(facet_key, value).fetch("label", &block)
+      value_label_mapping_for(facet_key, value).fetch("label") { value }
     end
   end
 
-  def humanized_facet_name(key, &block)
-    facet_data_for(key).fetch("name", &block)
+  def humanized_facet_name(key)
+    facet_data_for(key).fetch("name") { key }
   end
 
 private
