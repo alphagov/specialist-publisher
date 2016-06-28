@@ -211,14 +211,14 @@ class Document
       fields: [
         :base_path,
         :content_id,
-        :updated_at,
+        :last_edited_at,
         :title,
         :publication_state,
         :state_history,
       ],
       page: page,
       per_page: per_page,
-      order: "-updated_at",
+      order: "-last_edited_at",
     }
     params[:q] = q if q.present?
     Services.publishing_api.get_content_items(params)

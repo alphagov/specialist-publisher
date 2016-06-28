@@ -32,14 +32,14 @@ RSpec.describe Document do
           fields: [
             :base_path,
             :content_id,
-            :updated_at,
+            :last_edited_at,
             :title,
             :publication_state,
             :state_history,
           ],
           page: 1,
           per_page: 20,
-          order: "-updated_at",
+          order: "-last_edited_at",
           q: "foo",
         )
 
