@@ -1,6 +1,6 @@
 <%= render layout: 'shared/form_group', locals: { f: f, field: :dfid_authors, label: 'Authors' } do %>
   <%=
-    f.select :dfid_authors, @document.dfid_authors,
+    f.select :dfid_authors, @document.dfid_authors || [],
       { include_blank: true },
       { class: 'select2 free-form-list', multiple: true, data: { placeholder: 'Add authors' } }
   %>
