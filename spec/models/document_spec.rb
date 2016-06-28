@@ -272,6 +272,7 @@ RSpec.describe Document do
 
     it "doesn't alerts the email API for minor updates" do
       document.update_type = "minor"
+      document.publication_state = "live"
 
       expect(document.publish).to eq(true)
 
