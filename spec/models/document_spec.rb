@@ -390,12 +390,20 @@ RSpec.describe Document do
       publishing_api_has_item(payload)
       document = MyDocumentType.find(payload["content_id"])
       stub_publishing_api_unpublish(document.content_id, body: { type: 'gone' })
+
+      stub_request(:delete, %r{#{Plek.new.find('search')}/content.*})
     end
 
     it "sends correct payload to publishing api" do
       expect(document.unpublish).to eq(true)
 
       assert_publishing_api_unpublish(document.content_id)
+    end
+
+    it "sends a payload to Rummager" do
+      expect(document.unpublish).to eq(true)
+
+      assert_requested(:delete, %r{#{Plek.new.find('search')}/content.*})
     end
 
     context "unsuccessful #unpublish" do

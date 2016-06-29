@@ -7,6 +7,7 @@ RSpec.feature "Unpublishing a CMA Case", type: :feature do
     log_in_as_editor(:cma_editor)
     publishing_api_has_item(item)
     stub_publishing_api_unpublish(content_id, body: { type: 'gone' })
+    stub_request(:delete, %r{#{Plek.new.find('search')}/content.*})
   end
 
   context "a published document" do

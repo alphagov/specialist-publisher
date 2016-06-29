@@ -281,6 +281,8 @@ class Document
   def unpublish
     handle_remote_error do
       Services.publishing_api.unpublish(content_id, type: 'gone')
+
+      RummagerDeleteWorker.perform_async(base_path)
     end
   end
 
