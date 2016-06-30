@@ -1,0 +1,33 @@
+<% presenter = ActionsPresenter.new(@document, policy(@document)) %>
+
+<div class="row">
+  <div class="col-md-8">
+    <h2>Actions</h2>
+
+    <div class="well">
+      <%= link_to "Edit document", presenter.edit_path, class: "btn btn-success" %>
+    </div>
+
+    <%= form_tag(presenter.publish_path, method: :post, class: 'panel panel-default') do %>
+      <div class="panel-heading"><h3 class="panel-title">Publish document</h3></div>
+      <div class="panel-body">
+        <%= presenter.publish_text %>
+
+        <% if presenter.publish_button_visible? %>
+          <button name="submit" class="btn btn-danger" data-module="confirm" data-message="<%= presenter.publish_alert %>" data-disable-with="Publishing..." >Publish</button>
+        <% end %>
+      </div>
+    <% end %>
+
+    <%= form_tag(presenter.unpublish_path, method: :post, class: 'panel panel-default') do %>
+      <div class="panel-heading"><h3 class="panel-title">Unpublish document</h3></div>
+      <div class="panel-body">
+        <%= presenter.unpublish_text %>
+
+        <% if presenter.unpublish_button_visible? %>
+          <button name="submit" class="btn btn-warning" data-module="confirm" data-message="<%= presenter.unpublish_alert %>" data-disable-with="Unpublishing..." >Unpublish document</button>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+</div>
