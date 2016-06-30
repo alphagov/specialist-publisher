@@ -118,6 +118,23 @@ FactoryGirl.define do
         ]
       end
     end
+
+    trait :unpublished do
+      publication_state 'unpublished'
+      state_history {
+        { "1": "unpublished" }
+      }
+
+      change_history do
+        [
+          {
+            'published_timestamp' => Time.current.iso8601,
+            'note' => Document::FIRST_PUBLISHED_NOTE
+          }
+        ]
+      end
+    end
+
     to_create(&:deep_stringify_keys!)
   end
 
