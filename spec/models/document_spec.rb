@@ -393,12 +393,19 @@ RSpec.describe Document do
       publishing_api_has_item(payload)
       document = MyDocumentType.find(payload["content_id"])
       stub_publishing_api_unpublish(document.content_id, body: { type: 'gone' })
+      stub_any_rummager_delete_content
     end
 
     it "sends correct payload to publishing api" do
       expect(document.unpublish).to eq(true)
 
       assert_publishing_api_unpublish(document.content_id)
+    end
+
+    it "sends a delete request to Rummager" do
+      expect(document.unpublish).to eq(true)
+
+      assert_rummager_deleted_content document.base_path
     end
 
     context "unsuccessful #unpublish" do
