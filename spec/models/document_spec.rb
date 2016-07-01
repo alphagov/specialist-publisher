@@ -399,7 +399,7 @@ RSpec.describe Document do
       assert_publishing_api_unpublish(document.content_id)
     end
 
-    it "sends a payload a delete request to Rummager" do
+    it "sends a delete request to Rummager" do
       expect(document.unpublish).to eq(true)
 
       assert_rummager_deleted_content document.base_path
