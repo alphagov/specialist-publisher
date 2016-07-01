@@ -8,24 +8,35 @@ RSpec.feature 'The root specialist-publisher page', type: :feature do
       log_in_as_editor(:gds_editor)
     end
 
-    it 'has one finder link per document schema' do
+    it 'has one finder link for each viewable schema' do
       visit '/'
 
       click_link('Finders')
 
       json_schema_count = Dir['lib/documents/schemas/*.json'].length
+
+      pre_production = DocumentPolicy.new(:user, CmaCase).pre_production_formats.length
+
       expect(page).to have_css(
         '.dropdown-menu:nth-of-type(1) li',
-        count: json_schema_count
+          count: json_schema_count - pre_production
       )
     end
 
-    it 'has a finder for DFID research outputs' do
+    it 'does not have a finder for pre_production finder DFID research outputs' do
       visit '/'
 
       click_link('Finders')
 
-      expect(page).to have_text('DFID Research Outputs')
+      expect(page).not_to have_text('DFID Research Outputs')
+    end
+
+    it 'does have a finder for non pre_production finder CMA Cases' do
+      visit '/'
+
+      click_link('Finders')
+
+      expect(page).to have_text('CMA Cases')
     end
   end
 end
