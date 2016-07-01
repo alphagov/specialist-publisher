@@ -28,7 +28,6 @@ RSpec.feature "Creating a DFID Research Output", type: :feature do
     fill_in "Summary", with: summary
     fill_in "Body", with: ("## Header" + ("\n\nThis is the long body of an example DFID research output" * 10))
     fill_in "First published at", with: "2013-01-01"
-    select "United Kingdom", from: "Countries"
 
     expect(page).to have_css('div.govspeak-help')
     expect(page).to have_content('To add an attachment, please save the draft first.')
@@ -50,7 +49,7 @@ RSpec.feature "Creating a DFID Research Output", type: :feature do
     expect(page).to have_content("Title can't be blank")
     expect(page).to have_content("Summary can't be blank")
     expect(page).to have_content("Body can't be blank")
-    expect(page).to have_content("Country can't be blank")
+    expect(page).not_to have_content("Country can't be blank")
   end
 
   scenario "with invalid data" do
