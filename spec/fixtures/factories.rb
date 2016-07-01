@@ -183,10 +183,11 @@ FactoryGirl.define do
     transient do
       default_metadata {
         {
-          "country" => ["GB"],
-          "authors" => ["Mr. Potato Head", "Mrs. Potato Head"],
-          "first_published_at" => "2016-04-28T11:26:00",
           "document_type" => "dfid_research_output",
+          "country" => ["GB"],
+          "dfid_authors" => ["Mr. Potato Head", "Mrs. Potato Head"],
+          "first_published_at" => "2016-04-28",
+          "bulk_published" => true
         }
       }
     end
