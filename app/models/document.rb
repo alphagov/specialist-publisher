@@ -121,7 +121,11 @@ class Document
   end
 
   def update_type
-    @update_type || "major"
+    if self.draft?
+      'major'
+    else
+      @update_type || 'major'
+    end
   end
 
   def users

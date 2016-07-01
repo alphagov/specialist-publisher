@@ -5,19 +5,22 @@ class RepublishWorker
 
   def perform(content_id, _ = nil)
     document = Document.find(content_id)
-    document.update_type = "republish"
 
     unless safe_to_republish?(document)
       print_limitations_of_republishing(document)
       return
     end
 
-    publishing_api_put_content(document)
-    publishing_api_patch_links(document)
-
     if document.publication_state == "live"
+      document.update_type = "republish"
+
+      publishing_api_put_content(document)
+      publishing_api_patch_links(document)
       publishing_api_publish(document)
       rummager_add_document(document)
+    else
+      publishing_api_put_content(document)
+      publishing_api_patch_links(document)
     end
   end
 

@@ -4,8 +4,12 @@ RSpec.describe RepublishWorker do
   let(:document) { FactoryGirl.create(:cma_case) }
   let(:content_id) { document["content_id"] }
 
-  let(:republish_matcher) {
+  let(:uses_republish_update_type) {
     request_json_includes("update_type" => "republish")
+  }
+
+  let(:does_not_use_republish_update_type) {
+    request_json_includes("update_type" => "major")
   }
 
   before do
@@ -24,7 +28,7 @@ RSpec.describe RepublishWorker do
       it "sends the document to the publishing api" do
         subject.perform(content_id)
 
-        assert_publishing_api_put_content(content_id, republish_matcher)
+        assert_publishing_api_put_content(content_id, does_not_use_republish_update_type)
         assert_publishing_api_patch_links(content_id)
       end
 
@@ -56,14 +60,14 @@ RSpec.describe RepublishWorker do
     it "sends the document to the publishing api" do
       subject.perform(content_id)
 
-      assert_publishing_api_put_content(content_id, republish_matcher)
+      assert_publishing_api_put_content(content_id, uses_republish_update_type)
       assert_publishing_api_patch_links(content_id)
     end
 
     it "publishes the document" do
       subject.perform(content_id)
 
-      assert_publishing_api_publish(content_id, republish_matcher)
+      assert_publishing_api_publish(content_id, uses_republish_update_type)
     end
 
     it "sends the document to rummager" do
