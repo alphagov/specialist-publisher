@@ -53,6 +53,7 @@ RSpec.configure do |config|
 
   config.after(:each) do
     Timecop.return
+    GDS::SSO.test_user = nil
   end
 
   config.include Capybara::DSL, type: :feature

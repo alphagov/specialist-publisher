@@ -81,26 +81,4 @@
   </div>
 </div>
 
-<div class="row">
-  <div class="col-md-8">
-    <h2>Actions</h2>
-    <div class="well">
-      <%= link_to "Edit document", edit_document_path(current_format.slug, @document.content_id), class: "btn btn-success" %>
-    </div>
-
-    <%= render partial: 'publish_panel' %>
-    <% if policy(@document).unpublish? %>
-      <%= form_tag(unpublish_document_path(current_format.slug, @document.content_id), method: :post, class: 'panel panel-default') do %>
-        <div class="panel-heading">
-          <div class="panel-title">
-            Unpublish document
-          </div>
-        </div>
-        <div class="panel-body">
-          <p>The document will be removed from the site. It will still be possible to edit the document and publish a new version.</p>
-          <button name="submit" class="btn btn-warning" data-module="confirm" data-message="Are you sure you want to unpublish this document?" data-disable-with="Unpublishing..." >Unpublish document</button>
-        </div>
-      <% end %>
-    <% end %>
-  </div>
-</div>
+<%= render partial: "actions" %>

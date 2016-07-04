@@ -86,7 +86,7 @@ RSpec.feature "Publishing a CMA case", type: :feature do
       click_link "Example CMA Case"
 
       expect(page).to have_no_selector(:button, 'Publish')
-      expect(page).to have_content("You don’t have permission to publish this document.")
+      expect(page).to have_content("You don't have permission to publish this document.")
     end
   end
 
@@ -215,31 +215,14 @@ RSpec.feature "Publishing a CMA case", type: :feature do
         publication_state: "unpublished")
     }
 
-    scenario "when content item is unpublished, there will be a publish button" do
+    scenario "when content item is unpublished it cannot be published" do
       visit "/cma-cases"
       expect(page.status_code).to eq(200)
 
       click_link "Unpublished Item"
 
-      expect(page).to have_selector(:button, 'Publish')
-      expect(page).to have_no_content("There are no changes to publish.")
-    end
-
-    scenario "publish warning and popup text will indicate that an email will be sent" do
-      visit "/cma-cases"
-
-      expect(page.status_code).to eq(200)
-
-      click_link "Unpublished Item"
-
-      expect(page.status_code).to eq(200)
-      expect(page).to have_content("Unpublished Item")
-      expect(page).to have_content("Publishing will email subscribers to CMA Cases.")
-
-      expect(page).to have_no_content("You are about to publish a minor edit")
-      expect(page).to have_no_content("You are about to publish a major edit")
-
-      expect(publish_alert_message).to eq("Publishing will email subscribers to CMA Cases. Continue?")
+      expect(page).to have_no_selector(:button, 'Publish')
+      expect(page).to have_content("The document is unpublished. You need to create a new draft before it can be published.")
     end
   end
 end

@@ -324,10 +324,6 @@ class Document
     title.parameterize.pluralize
   end
 
-  def can_be_published?
-    !live?
-  end
-
   def send_email_on_publish?
     update_type == "major"
   end
