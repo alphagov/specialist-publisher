@@ -1,7 +1,9 @@
 class DfidResearchOutput < Document
   validates :first_published_at, presence: true, date: true
 
-  FORMAT_SPECIFIC_FIELDS = %i(country first_published_at dfid_authors)
+  FORMAT_SPECIFIC_FIELDS = %i(
+    country first_published_at dfid_authors dfid_review_status
+  )
 
   attr_accessor(*FORMAT_SPECIFIC_FIELDS)
 
