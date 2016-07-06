@@ -102,7 +102,7 @@ RSpec.describe Document do
         expect(document.publication_state).to eq(payload['publication_state'])
         expect(document.public_updated_at).to eq(payload['public_updated_at'])
         expect(document.first_published_at).to eq(payload['first_published_at'])
-        expect(document.update_type).to eq(payload['update_type'])
+        expect(document.update_type).to eq(nil)
         expect(document.state_history).to eq(payload['state_history'])
       end
 
@@ -187,6 +187,9 @@ RSpec.describe Document do
           payload_attributes.merge(publication_state: "redrafted"),
         )
       end
+      it "sets the update type" do
+        expect(document.update_type).to eq(payload['update_type'])
+      end
 
       context "when there is more than one item in the change history" do
         let(:payload_attributes) do
@@ -270,13 +273,23 @@ RSpec.describe Document do
       )
     end
 
-    it "doesn't alerts the email API for minor updates" do
-      document.update_type = "minor"
-      document.publication_state = "live"
+    context "document is redrafted with a minor edit" do
+      let(:minor_change_document) {
+        MyDocumentType.from_publishing_api(
+          FactoryGirl.create(:document,
+            payload_attributes.merge(
+              publication_state: 'live',
+              update_type: 'minor',
+              content_id: document.content_id
+            ))
+        )
+      }
 
-      expect(document.publish).to eq(true)
+      it "doesn't alert the email API for minor updates" do
+        expect(minor_change_document.publish).to eq(true)
 
-      expect(@email_alert_api).to_not have_been_requested
+        expect(@email_alert_api).to_not have_been_requested
+      end
     end
 
     context "document has never been published" do

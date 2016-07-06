@@ -362,6 +362,11 @@ FactoryGirl.define do
     end
   end
 
+  factory :my_document_type, parent: :document do
+    base_path "/base-path-for-my-document-type"
+    document_type "my_document_type"
+  end
+
   factory :attachment_payload, class: Hash do
     content_id
     sequence(:url) { |n|

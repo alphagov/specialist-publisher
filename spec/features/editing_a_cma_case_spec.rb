@@ -285,4 +285,43 @@ RSpec.feature "Editing a CMA case", type: :feature do
       end
     end
   end
+
+  context 'setting update type:' do
+    %w(live redrafted unpublished).each do |publication_state|
+      let(:cma_case) {
+        FactoryGirl.create(:cma_case,
+                           title: "Example CMA Case",
+                           publication_state: publication_state,
+                           details: {},)
+      }
+
+      scenario "visibility of update type radio buttons when editing a #{publication_state} document" do
+        within(".new_cma_case") do
+          expect(page).to have_content('Only use for minor changes like fixes to typos, links, GOV.UK style or metadata.')
+          expect(page).to have_content('This will notify subscribers to ')
+          expect(page).to have_content('Update type minor')
+          expect(page).to have_content('Update type major')
+        end
+      end
+    end
+  end
+
+  context 'hiding update type buttons:' do
+    %w(draft).each do |publication_state|
+      let(:cma_case) {
+        FactoryGirl.create(:cma_case,
+                           title: "Example CMA Case",
+                           publication_state: publication_state,)
+      }
+
+      scenario "(in)visibility of update type radio buttons when editing a #{publication_state} document" do
+        within(".new_cma_case") do
+          expect(page).not_to have_content('Only use for minor changes like fixes to typos, links, GOV.UK style or metadata.')
+          expect(page).not_to have_content('This will notify subscribers to ')
+          expect(page).not_to have_content('Update type minor')
+          expect(page).not_to have_content('Update type major')
+        end
+      end
+    end
+  end
 end

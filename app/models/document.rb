@@ -121,11 +121,7 @@ class Document
   end
 
   def update_type
-    if self.draft?
-      'major'
-    else
-      @update_type || 'major'
-    end
+    self.draft? ? 'major' : @update_type
   end
 
   def users
@@ -173,6 +169,10 @@ class Document
     end
   end
 
+  def self.extract_update_type_from_payload(payload)
+    payload['update_type'] if payload['publication_state'] == 'redrafted'
+  end
+
   def self.extract_change_note_from_payload(payload)
     # If the document is redrafted remove the last/most
     # recent change note from the change_history array
@@ -193,7 +193,7 @@ class Document
       state_history: payload['state_history'],
       public_updated_at: payload['public_updated_at'],
       first_published_at: payload['first_published_at'],
-      update_type: payload['update_type'],
+      update_type: extract_update_type_from_payload(payload),
       bulk_published: payload['details']['metadata']['bulk_published'],
       change_note: extract_change_note_from_payload(payload),
       change_history: payload['details']['change_history'].map(&:to_h),

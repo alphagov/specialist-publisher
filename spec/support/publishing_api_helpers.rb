@@ -1,11 +1,12 @@
 module PublishingApiHelpers
   def write_payload(document)
-    document.delete("last_edited_at")
-    document.delete("publication_state")
-    document.delete("first_published_at")
-    document.delete("public_updated_at")
-    document.delete("state_history")
-    document
+    copy = FactoryGirl.create(document["document_type"], document)
+    copy.delete("last_edited_at")
+    copy.delete("publication_state")
+    copy.delete("first_published_at")
+    copy.delete("public_updated_at")
+    copy.delete("state_history")
+    copy
   end
 
   def assert_no_publishing_api_put_content(content_id)
