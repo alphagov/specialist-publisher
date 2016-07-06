@@ -204,6 +204,7 @@ FactoryGirl.define do
           "country" => ["GB"],
           "dfid_authors" => ["Mr. Potato Head", "Mrs. Potato Head"],
           "first_published_at" => "2016-04-28",
+          "dfid_review_status" => "unreviewed",
           "bulk_published" => true
         }
       }
