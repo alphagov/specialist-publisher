@@ -845,7 +845,7 @@
       "name": "Review Status",
       "short_name": "Review Status",
       "type": "text",
-      "preposition": "that are",
+      "preposition": "with review status",
       "display_as_result_metadata": true,
       "filterable": true,
       "allowed_values": [
