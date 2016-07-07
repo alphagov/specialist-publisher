@@ -1,9 +1,9 @@
 {
   "content_id": "af7c7cdb-1335-4f1c-b21c-b3c8bfec8a1b",
   "base_path": "/dfid-research-outputs",
-  "format_name": "DFID Research Output",
-  "name": "DFID Research Outputs",
-  "description": "Find outputs from DFID research projects",
+  "format_name": "Research for Development Output",
+  "name": "Research for Development Outputs",
+  "description": "Find outputs from Research for Development projects",
   "pre_production": true,
   "filter": {
     "document_type": "dfid_research_output"
