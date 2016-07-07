@@ -7,7 +7,7 @@ RSpec.feature "Creating a DFID Research Output", type: :feature do
   let(:public_updated_at) { research_output['public_updated_at'] }
 
   before do
-    allow_any_instance_of(DocumentPolicy).to receive(:departmental_editor).and_return(true)
+    allow(Rails.env).to receive(:development?).and_return(true)
     log_in_as_editor(:dfid_editor)
 
     Timecop.freeze(Time.parse(public_updated_at))
@@ -19,7 +19,7 @@ RSpec.feature "Creating a DFID Research Output", type: :feature do
     publishing_api_has_item(research_output)
   end
 
-  scenario "with valid data" do
+  scenario "with valid data in development mode" do
     visit "/dfid-research-outputs/new"
 
     title = "Example DFID Research output"
