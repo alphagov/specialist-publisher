@@ -203,6 +203,7 @@ FactoryGirl.define do
           "document_type" => "dfid_research_output",
           "country" => ["GB"],
           "dfid_authors" => ["Mr. Potato Head", "Mrs. Potato Head"],
+          "dfid_theme" => ["infrastructure"],
           "first_published_at" => "2016-04-28",
           "bulk_published" => true
         }

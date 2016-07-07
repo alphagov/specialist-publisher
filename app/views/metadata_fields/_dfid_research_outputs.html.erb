@@ -14,6 +14,14 @@
   %>
 <% end %>
 
+<%= render layout: 'shared/form_group', locals: { f: f, field: :dfid_theme, label: 'Themes' } do %>
+  <%=
+    f.select :dfid_theme, facet_options(f, :dfid_theme),
+             { include_blank: false },
+             { class: 'select2', multiple: true, data: { placeholder: 'Select themes' } }
+  %>
+<% end %>
+
 <%= render layout: 'shared/form_group', locals: { f: f, field: :first_published_at, label: 'First published at' } do %>
   <%= f.text_field :first_published_at, placeholder: '2012-04-23', class: 'form-control' %>
 <% end %>
