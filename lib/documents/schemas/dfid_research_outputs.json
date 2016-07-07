@@ -825,6 +825,64 @@
       ]
     },
     {
+      "key": "dfid_theme",
+      "name": "Theme",
+      "type": "text",
+      "preposition": "about",
+      "display_as_result_metadata": true,
+      "filterable": true,
+      "allowed_values": [
+        {
+          "value": "agriculture",
+          "label": "Agriculture"
+        },
+        {
+          "value": "climate_and_environment",
+          "label": "Climate and Environment"
+        },
+        {
+          "value": "economic_growth",
+          "label": "Economic Growth"
+        },
+        {
+          "value": "education",
+          "label": "Education"
+        },
+        {
+          "value": "food_and_nutrition",
+          "label": "Food and Nutrition"
+        },
+        {
+          "value": "governance_and_conflict",
+          "label": "Governance and Conflict"
+        },
+        {
+          "value": "health",
+          "label": "Health"
+        },
+        {
+          "value": "humanitarian_disasters_and_emergencies",
+          "label": "Humanitarian Disasters and Emergencies"
+        },
+        {
+          "value": "infrastructure",
+          "label": "Infrastructure"
+        },
+        {
+          "value": "research_communication_and_uptake",
+          "label": "Research Communication and Uptake"
+        },
+        {
+          "value": "social_change",
+          "label": "Social Change"
+        },
+        {
+          "value": "water_and_sanitation",
+          "label": "Water and Sanitation"
+        }
+      ]
+    },
+    {
       "key": "first_published_at",
       "name": "First published",
       "short_name": "First published",
