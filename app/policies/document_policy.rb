@@ -16,7 +16,7 @@ class DocumentPolicy < ApplicationPolicy
   alias_method :unpublish?, :publish?
 
   def pre_production_formats
-    PRE_PRODUCTION
+    Rails.env.development? ? [] : PRE_PRODUCTION
   end
 
   def removed_pre_production?
