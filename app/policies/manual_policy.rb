@@ -10,7 +10,7 @@ class ManualPolicy < ApplicationPolicy
   alias_method :show?, :index?
 
   def publish?
-    gds_editor || departmental_editor
+    gds_editor? || departmental_editor?
   end
 
   class Scope

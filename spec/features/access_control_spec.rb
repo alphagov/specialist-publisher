@@ -93,6 +93,18 @@ RSpec.feature "Access control", type: :feature do
         expect(page).to have_content 'Example manual'
         expect(page).to have_content 'Exemplar manual'
       end
+
+      scenario "visiting a pre_production finder" do
+        visit "/tax-tribunal-decisions"
+        expect(page.current_path).to eq("/manuals")
+        expect(page).to have_content("You aren't permitted to access Tax Tribunal Decisions.")
+      end
+
+      scenario "visiting a non pre_production finder" do
+        visit "/cma-cases"
+        expect(page.status_code).to eq(200)
+        expect(page).to have_content("CMA Cases")
+      end
     end
 
     context 'as a organisation editor' do
