@@ -6,7 +6,7 @@ RSpec.feature "Editing a DFID Research Output", type: :feature do
   let(:public_updated_at) { research_output['public_updated_at'] }
 
   before do
-    allow_any_instance_of(DocumentPolicy).to receive(:departmental_editor).and_return(true)
+    allow_any_instance_of(DocumentPolicy).to receive(:departmental_editor?).and_return(true)
 
     log_in_as_editor(:dfid_editor)
 

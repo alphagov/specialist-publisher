@@ -1,6 +1,6 @@
 class DocumentPolicy < ApplicationPolicy
   def index?
-    gds_editor || departmental_editor || writer
+    gds_editor? || departmental_editor? || writer?
   end
 
   alias_method :new?, :index?
@@ -10,32 +10,32 @@ class DocumentPolicy < ApplicationPolicy
   alias_method :show?, :index?
 
   def publish?
-    gds_editor || departmental_editor
+    gds_editor? || departmental_editor?
   end
 
   alias_method :unpublish?, :publish?
 
-  def pre_production_formats
+  def environment_restricted_formats
     Rails.env.development? ? [] : PRE_PRODUCTION
   end
 
-  def removed_pre_production?
-    !pre_production_formats.include?(document_class.document_type)
+  def restricted_by_environment?
+    environment_restricted_formats.include?(document_class.document_type)
   end
 
   def user_organisation_owns_document_type?
-    document_class.organisations.include?(user.organisation_content_id) && removed_pre_production?
+    document_class.organisations.include?(user.organisation_content_id) && !restricted_by_environment?
   end
 
-  def departmental_editor
+  def departmental_editor?
     user_organisation_owns_document_type? && user.permissions.include?('editor')
   end
 
-  def writer
+  def writer?
     user_organisation_owns_document_type?
   end
 
-  def gds_editor
-    removed_pre_production? && user.gds_editor?
+  def gds_editor?
+    !restricted_by_environment? && user.gds_editor?
   end
 end
