@@ -1,6 +1,6 @@
 class AttachmentPolicy < ApplicationPolicy
   def new?
-    gds_editor || departmental_editor || writer
+    gds_editor? || departmental_editor? || writer?
   end
 
   alias_method :create?, :new?
