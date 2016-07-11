@@ -28,7 +28,7 @@ RSpec.feature 'The root specialist-publisher page', type: :feature do
 
       click_link('Finders')
 
-      expect(page).not_to have_text('DFID Research Outputs')
+      expect(page).not_to have_text('Employment appeal tribunal decision')
     end
 
     it 'does have a finder for non pre_production finder CMA Cases' do

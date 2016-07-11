@@ -7,7 +7,6 @@ RSpec.feature "Creating a DFID Research Output", type: :feature do
   let(:public_updated_at) { research_output['public_updated_at'] }
 
   before do
-    allow(Rails.env).to receive(:development?).and_return(true)
     log_in_as_editor(:dfid_editor)
 
     Timecop.freeze(Time.parse(public_updated_at))
@@ -19,9 +18,12 @@ RSpec.feature "Creating a DFID Research Output", type: :feature do
     publishing_api_has_item(research_output)
   end
 
-  scenario "with valid data in development mode" do
+  scenario "with valid data" do
     visit "/dfid-research-outputs/new"
 
+    expect(page.status_code).to eq(200)
+    expect(page).to have_css('div.govspeak-help')
+    expect(page).to have_content('To add an attachment, please save the draft first.')
     title = "Example DFID Research output"
     summary = "This is the summary of an example DFID research output"
 
@@ -31,9 +33,6 @@ RSpec.feature "Creating a DFID Research Output", type: :feature do
     fill_in "First published at", with: "2013-01-01"
     select "Book Chapter", from: "Document type"
     select "Infrastructure", from: "Themes"
-
-    expect(page).to have_css('div.govspeak-help')
-    expect(page).to have_content('To add an attachment, please save the draft first.')
 
     click_button "Save as draft"
     assert_publishing_api_put_content(content_id)
@@ -45,6 +44,7 @@ RSpec.feature "Creating a DFID Research Output", type: :feature do
   scenario "with no data" do
     visit "/dfid-research-outputs/new"
 
+    expect(page.status_code).to eq(200)
     click_button "Save as draft"
 
     expect(page.status_code).to eq(422)
@@ -58,6 +58,7 @@ RSpec.feature "Creating a DFID Research Output", type: :feature do
   scenario "with invalid data" do
     visit "/dfid-research-outputs/new"
 
+    expect(page.status_code).to eq(200)
     fill_in "Title", with: "Example DFID Research output"
     fill_in "Summary", with: "This is the summary of an example DFID Research output"
     fill_in "Body", with: "<script>alert('hello')</script>"
