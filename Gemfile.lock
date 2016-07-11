@@ -136,6 +136,7 @@ GEM
       sidekiq (~> 4.1)
       sidekiq-logging-json (~> 0.0)
       sidekiq-statsd (~> 0.1)
+    hashdiff (0.3.0)
     hashie (3.4.3)
     hike (1.2.3)
     htmlentities (4.3.4)
@@ -365,6 +366,7 @@ DEPENDENCIES
   govuk_admin_template (~> 3.4.0)
   govuk_frontend_toolkit (= 0.44.0)
   govuk_sidekiq (~> 0.0.3)
+  hashdiff
   jquery-rails (~> 3.1.4)
   kaminari
   logstasher (= 0.6.2)
