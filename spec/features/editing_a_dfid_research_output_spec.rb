@@ -28,6 +28,7 @@ RSpec.feature "Editing a DFID Research Output", type: :feature do
     fill_in "Body", with: ("## Header" + ("\n\nThis is the long body of an example DFID research output" * 10))
     fill_in "First published at", with: "2013-01-01"
     select "United Kingdom", from: "Countries"
+    select "Book Chapter", from: "Document type"
 
     click_button "Save as draft"
     assert_publishing_api_put_content(content_id)

@@ -201,6 +201,7 @@ FactoryGirl.define do
       default_metadata {
         {
           "document_type" => "dfid_research_output",
+          "dfid_document_type" => "book_chapter",
           "country" => ["GB"],
           "dfid_authors" => ["Mr. Potato Head", "Mrs. Potato Head"],
           "dfid_theme" => ["infrastructure"],

@@ -1,3 +1,11 @@
+<%= render layout: 'shared/form_group', locals: { f: f, field: :dfid_document_type, label: 'Document type' } do %>
+  <%=
+    f.select :dfid_document_type, facet_options(f, :dfid_document_type),
+      { include_blank: true },
+      { class: 'select2', multiple: false, data: { placeholder: 'Select document type' } }
+  %>
+<% end %>
+
 <%= render layout: 'shared/form_group', locals: { f: f, field: :dfid_authors, label: 'Authors' } do %>
   <%=
     f.select :dfid_authors, @document.dfid_authors || [],
