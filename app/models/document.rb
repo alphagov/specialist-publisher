@@ -27,7 +27,7 @@ class Document
   validates :title, presence: true
   validates :summary, presence: true
   validates :body, presence: true, safe_html: true
-  validates :update_type, presence: true, if: :live?
+  validates :update_type, presence: true, if: :has_ever_been_published?
   validates :change_note, presence: true, if: :change_note_required?
 
   COMMON_FIELDS = [
@@ -111,7 +111,7 @@ class Document
   end
 
   def change_note_required?
-    update_type == 'major' && published?
+    update_type == 'major' && has_ever_been_published?
   end
 
   def change_history

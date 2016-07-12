@@ -103,6 +103,10 @@ FactoryGirl.define do
       attributes.merge(details: merged_details)
     }
 
+    # This is the default document state.
+    trait :draft do
+    end
+
     trait :published do
       publication_state 'live'
       state_history {
