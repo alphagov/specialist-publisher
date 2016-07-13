@@ -19,4 +19,16 @@ class User
   def gds_editor?
     permissions.include?('gds_editor')
   end
+
+  def organisation_content_id
+    organisation_content_id = super
+
+    if organisation_content_id.present?
+      organisation_content_id
+    else
+      {
+        "rail-accident-investigation-branch" => "013872d8-8bbb-4e80-9b79-45c7c5cf9177",
+      }[organisation_slug]
+    end
+  end
 end
