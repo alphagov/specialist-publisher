@@ -21,7 +21,8 @@ module Payloads
           },
         ]
       },
-      "format" => "manual",
+      "document_type" => "manual",
+      "schema_name" => "manual",
       "locale" => "en",
       "public_updated_at" => "2016-02-02T12:28:41.000Z",
       "updated_at" => "2016-02-01T12:28:41.000Z",
