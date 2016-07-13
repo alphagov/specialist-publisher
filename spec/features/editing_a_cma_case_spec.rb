@@ -273,6 +273,15 @@ RSpec.feature "Editing a CMA case", type: :feature do
           expect(page).not_to have_content("$CTA")
         end
 
+        fill_in "Body", with: "[InlineAttachment:asylum-support-image.jpg]"
+
+        click_link "Preview"
+
+        within(".preview_container") do
+          expect(page).to have_content("asylum report image title")
+          expect(page).not_to have_content("[InlineAttachment:")
+        end
+
         fill_in "Body", with: "[link text](http://www.example.com)"
 
         click_link "Preview"

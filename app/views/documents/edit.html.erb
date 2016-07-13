@@ -11,7 +11,7 @@
     <%= form_for @document, url: document_path(document_type_slug: params[:document_type_slug], content_id: @document.content_id), method: :put do |f| %>
         <%= render partial: "shared/form_fields", locals: {f: f} %>
 
-        <%= render partial: "shared/preview_govspeak" %>
+        <%= render partial: "shared/preview_govspeak", locals: {attachments: @document.attachments} %>
 
         <%= render partial: "metadata_fields/#{params[:document_type_slug].underscore}", locals: {f: f} %>
 
