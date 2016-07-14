@@ -41,7 +41,8 @@ RSpec.describe Manual do
             },
           ]
         },
-        "format" => "manual",
+        "document_type" => "manual",
+        "schema_name" => "manual",
         "locale" => "en",
         "public_updated_at" => "2016-02-02T12:28:41.000Z",
         "publishing_app" => "specialist-publisher",
