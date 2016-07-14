@@ -11,23 +11,28 @@ This will enqueue the documents via Sidekiq.
 
 * Once inside backend integration go to: `cd /var/apps/specialist-publisher`
 
-* Check size of the Sidekiq queue using: `Queue.all.first.size`
+* Within `govuk_app_console specialist-publisher` check size of the Sidekiq queue using: `Sidekiq::Queue.all.first.size`
 
 * Republish! `sudo su deploy govuk_setenv specialist-publisher bundle exec ruby ./bin/republish_documents raib_report`
 
 (Please note - include `bundle exec` to ensure correct versions of dependencies are executed)
 
-* Check the queue size a few times using `Queue.all.first.size`. The number should have risen since originally running the republish script but should reduce subsequently
+* Check the queue size a few times using `Sidekiq::Queue.all.first.size`. The number should have risen since originally running the republish script but should reduce subsequently
 
-* Check the RetrySet. This re-runs jobs that have failed: `SideKiq::RetrySet.new.size` - the number of jobs that fail should = 0
+* Check the RetrySet. This re-runs jobs that have failed: `Sidekiq::RetrySet.new.size` - the number of jobs that fail should = 0
 
 * Check that there are no errors in errbit
 
-* Check that republished documents display a recent `last_updated_at` within the publishing-api
+* Check that republished documents display a recent `updated_at` within the publishing-api
 
 ##### QA
 
 * Work through the QA process which can be found [here](https://docs.google.com/spreadsheets/d/13LmDUgd2CKNjihtDP9KNHTtGtQaZls4O0p10eCFTrsg/edit#gid=1849433504)
+
+##### Deploy the rebuild app
+
+* Go to the release app within the browser: release.publishing.service.gov.uk
+* Select most recent release tag. Scroll down and you will see the 'Deploy to staging' and 'Deploy to Production' buttons. Use these to deploy.
 
 ##### Puppet configuration
 
@@ -35,7 +40,7 @@ This will enqueue the documents via Sidekiq.
 
 ```
 modified_paths => {
-  '/sp-rebuild/raib-reports' => {
+  '/raib-reports' => {
     'app' => 'specialist-publisher-rebuild',
 },
 ```
