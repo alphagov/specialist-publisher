@@ -173,6 +173,10 @@
           "label": "Azerbaijan"
         },
         {
+          "value": "BS",
+          "label": "Bahamas, The"
+        },
+        {
           "value": "BH",
           "label": "Bahrain"
         },
@@ -289,6 +293,10 @@
           "label": "Congo (Democratic Republic)"
         },
         {
+          "value": "CK",
+          "label": "Cook Islands"
+        },
+        {
           "value": "CR",
           "label": "Costa Rica"
         },
@@ -309,10 +317,6 @@
           "label": "Czech Republic"
         },
         {
-          "value": "CS",
-          "label": "Czechoslovakia"
-        },
-        {
           "value": "DK",
           "label": "Denmark"
         },
@@ -327,10 +331,6 @@
         {
           "value": "DO",
           "label": "Dominican Republic"
-        },
-        {
-          "value": "DD",
-          "label": "East Germany"
         },
         {
           "value": "TL",
@@ -379,6 +379,10 @@
         {
           "value": "GA",
           "label": "Gabon"
+        },
+        {
+          "value": "GM",
+          "label": "Gambia, The"
         },
         {
           "value": "GE",
@@ -825,14 +829,6 @@
           "label": "Thailand"
         },
         {
-          "value": "BS",
-          "label": "The Bahamas"
-        },
-        {
-          "value": "GM",
-          "label": "The Gambia"
-        },
-        {
           "value": "TG",
           "label": "Togo"
         },
@@ -859,10 +855,6 @@
         {
           "value": "TV",
           "label": "Tuvalu"
-        },
-        {
-          "value": "SU",
-          "label": "USSR"
         },
         {
           "value": "UG",
@@ -911,10 +903,6 @@
         {
           "value": "YE",
           "label": "Yemen"
-        },
-        {
-          "value": "YU",
-          "label": "Yugoslavia"
         },
         {
           "value": "ZM",
