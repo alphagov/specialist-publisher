@@ -9,7 +9,6 @@ RSpec.describe PublishingApiFinderPublisher do
       json = {
         "base_path" => base_path,
         "name" => name,
-        "format_name" => "#{name} things",
         "content_id" => SecureRandom.uuid,
         "format" => "#{underscore_name}_format",
         "logo_path" => "http://example.com/logo.png",
