@@ -47,6 +47,24 @@ RSpec.describe Document do
     end
   end
 
+  context "saving a new draft" do
+    subject { MyDocumentType.new }
+
+    before do
+      stub_any_publishing_api_put_content
+      stub_any_publishing_api_patch_links
+      subject.title = "Title"
+      subject.summary = "Summary"
+      subject.body = "Body"
+      subject.publication_state = nil
+    end
+
+    it "sends a correct document" do
+      expect(subject.save).to be true
+      assert_publishing_api_put_content(subject.content_id, request_json_includes(update_type: "major"))
+    end
+  end
+
   let(:finder_schema) {
     {
       base_path: "/my-document-types",
@@ -554,7 +572,12 @@ RSpec.describe Document do
 
   context "change_history" do
     let(:note) { 'my change note' }
-    let(:document) { MyDocumentType.new.tap { |document| document.change_note = note } }
+    let(:document) {
+      MyDocumentType.new.tap { |document|
+        document.change_note = note
+        document.publication_state = 'live'
+      }
+    }
 
     it 'add note when major change' do
       document.update_type = 'major'

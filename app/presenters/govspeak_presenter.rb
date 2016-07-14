@@ -12,19 +12,18 @@ class GovspeakPresenter
     ]
   end
 
+  def html_body
+    Govspeak::Document.new(govspeak_body_with_expanded_attachment_links).to_html
+  end
+
 private
 
   def govspeak_body
     document.body
   end
 
-  def html_body
-    Govspeak::Document.new(govspeak_body_with_expanded_attachment_links).to_html
-  end
-
-
   def govspeak_body_with_expanded_attachment_links
-    document.attachments.reduce(document.body) { |body, attachment|
+    document.attachments.reduce(govspeak_body) { |body, attachment|
       body.gsub(attachment.snippet, attachment_markdown(attachment))
     }
   end
