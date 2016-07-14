@@ -84,10 +84,14 @@ class Document
     "live"
   end
 
-  %w{draft live redrafted superseded unpublished}.each do |state|
+  %w{live redrafted superseded unpublished}.each do |state|
     define_method("#{state}?") do
       publication_state == state
     end
+  end
+
+  def draft?
+    publication_state == "draft" || publication_state.nil?
   end
 
   def published?
