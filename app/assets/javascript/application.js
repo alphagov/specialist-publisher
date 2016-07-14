@@ -37,9 +37,11 @@ jQuery(function($) {
   $("#preview-button").click(function(){
       $('.preview_container').removeClass('hide');
       var bodyText = $('.body-text').val();
+      var attachments = $('#attachment_data').attr('data');
       $.post(
           "/preview",
-          { bodyText: bodyText
+          { bodyText: bodyText,
+            attachments: attachments
           },
           function(data) {
               $('.govspeak').html(data);
