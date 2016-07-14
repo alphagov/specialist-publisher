@@ -87,7 +87,7 @@ RSpec.feature "Creating a CMA case", type: :feature do
       },
       "routes" => [{ "path" => "/cma-cases/example-cma-case", "type" => "exact" }],
       "redirects" => [],
-      "update_type" => nil,
+      "update_type" => "major",
     }
 
     assert_publishing_api_put_content(content_id, expected_sent_payload)
