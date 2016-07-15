@@ -499,6 +499,80 @@ RSpec.describe Document do
       publishing_api_isnt_available
       expect(document.save).to be_falsey
     end
+
+    describe "validations" do
+      subject { Document.from_publishing_api(payload) }
+
+      context "when the document is a draft" do
+        let(:payload) { FactoryGirl.create(:document) }
+
+        it "does not require an update_type" do
+          subject.update_type = ""
+          expect(subject).to be_valid
+        end
+
+        it "does not require a change_note" do
+          subject.change_note = ""
+          expect(subject).to be_valid
+        end
+      end
+
+      context "when the document is published" do
+        let(:payload) { FactoryGirl.create(:document, :published) }
+
+        it "requires an update_type" do
+          subject.update_type = ""
+          subject.change_note = "change note"
+
+          expect(subject).not_to be_valid
+        end
+
+        it "requires a change_note" do
+          subject.update_type = "major"
+          subject.change_note = ""
+
+          expect(subject).not_to be_valid
+        end
+      end
+
+      context "when the document is unpublished" do
+        let(:payload) { FactoryGirl.create(:document, :unpublished) }
+
+        it "requires an update_type" do
+          subject.update_type = ""
+          subject.change_note = "change note"
+
+          expect(subject).not_to be_valid
+        end
+
+        it "requires a change_note" do
+          subject.update_type = "major"
+          subject.change_note = ""
+
+          expect(subject).not_to be_valid
+        end
+      end
+
+      context "when the document is brand new" do
+        subject { Document.new }
+
+        before do
+          subject.title = "Title"
+          subject.summary = "Summary"
+          subject.body = "Body"
+        end
+
+        it "does not require an update_type" do
+          subject.update_type = ""
+          expect(subject).to be_valid
+        end
+
+        it "does not require a change_note" do
+          subject.change_note = ""
+          expect(subject).to be_valid
+        end
+      end
+    end
   end
 
   describe ".find" do

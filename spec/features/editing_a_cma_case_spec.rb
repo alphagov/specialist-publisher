@@ -1,12 +1,7 @@
 require 'spec_helper'
 
 RSpec.feature "Editing a CMA case", type: :feature do
-  let(:cma_case) {
-    FactoryGirl.create(:cma_case,
-      title: "Example CMA Case",
-      publication_state: "draft")
-  }
-
+  let(:cma_case) { FactoryGirl.create(:cma_case, title: "Example CMA Case") }
   let(:content_id) { cma_case['content_id'] }
   let(:save_button_disable_with_message) { page.find_button('Save as draft')["data-disable-with"] }
 
@@ -200,12 +195,14 @@ RSpec.feature "Editing a CMA case", type: :feature do
         .to_return(body: asset_manager_response.to_json, status: 201)
     end
 
-    %w(draft live).each do |publication_state|
+    %i(draft published).each do |publication_state|
       let(:cma_case) {
-        FactoryGirl.create(:cma_case,
+        FactoryGirl.create(
+          :cma_case,
+          publication_state,
           title: "Example CMA Case",
-          publication_state: publication_state,
-          details: { "attachments" => existing_attachments })
+          details: { "attachments" => existing_attachments }
+        )
       }
 
       scenario "adding an attachment to a #{publication_state} CMA case" do
@@ -295,16 +292,18 @@ RSpec.feature "Editing a CMA case", type: :feature do
     end
   end
 
-  context 'setting update type:' do
-    %w(live redrafted unpublished).each do |publication_state|
+  %i(published unpublished).each do |publication_state|
+    context "a #{publication_state} documented" do
       let(:cma_case) {
-        FactoryGirl.create(:cma_case,
-                           title: "Example CMA Case",
-                           publication_state: publication_state,
-                           details: {},)
+        FactoryGirl.create(
+          :cma_case,
+          publication_state,
+          title: "Example CMA Case",
+          details: {},
+        )
       }
 
-      scenario "visibility of update type radio buttons when editing a #{publication_state} document" do
+      scenario "showing the update type radio buttons" do
         within(".new_cma_case") do
           expect(page).to have_content('Only use for minor changes like fixes to typos, links, GOV.UK style or metadata.')
           expect(page).to have_content('This will notify subscribers to ')
@@ -312,25 +311,32 @@ RSpec.feature "Editing a CMA case", type: :feature do
           expect(page).to have_content('Update type major')
         end
       end
+
+      scenario "insisting that an update type is chosen" do
+        click_button "Save as draft"
+
+        expect(page).to have_content("Please fix the following errors")
+        expect(page).to have_content("Update type can't be blank")
+
+        expect(page.status_code).to eq(422)
+      end
     end
   end
 
-  context 'hiding update type buttons:' do
-    %w(draft).each do |publication_state|
-      let(:cma_case) {
-        FactoryGirl.create(:cma_case,
-                           title: "Example CMA Case",
-                           publication_state: publication_state,)
-      }
-
-      scenario "(in)visibility of update type radio buttons when editing a #{publication_state} document" do
-        within(".new_cma_case") do
-          expect(page).not_to have_content('Only use for minor changes like fixes to typos, links, GOV.UK style or metadata.')
-          expect(page).not_to have_content('This will notify subscribers to ')
-          expect(page).not_to have_content('Update type minor')
-          expect(page).not_to have_content('Update type major')
-        end
+  context "a draft document" do
+    scenario "not showing the update type radio buttons" do
+      within(".new_cma_case") do
+        expect(page).not_to have_content('Only use for minor changes like fixes to typos, links, GOV.UK style or metadata.')
+        expect(page).not_to have_content('This will notify subscribers to ')
+        expect(page).not_to have_content('Update type minor')
+        expect(page).not_to have_content('Update type major')
       end
+    end
+
+    scenario "saving the document without an update type" do
+      click_button "Save as draft"
+      expect(page).to have_content("Updated Example CMA Case")
+      expect(page.status_code).to eq(200)
     end
   end
 end
