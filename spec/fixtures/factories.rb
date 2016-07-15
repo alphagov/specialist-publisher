@@ -92,6 +92,7 @@ FactoryGirl.define do
           "metadata" => default_metadata,
           "max_cache_time" => 10,
           "change_history" => change_history,
+          "temporary_update_type" => false,
         }
       }
       change_history { [] }

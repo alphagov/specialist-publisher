@@ -46,9 +46,9 @@ class AttachmentsController < ApplicationController
 private
 
   def fetch_document
-    current_format.find(params[:document_content_id]).tap do |document|
-      document.update_type = "minor"
-    end
+    document = current_format.find(params[:document_content_id])
+    document.set_temporary_update_type!
+    document
   rescue Document::RecordNotFound => e
     flash[:danger] = "Document not found"
     redirect_to documents_path(document_type_slug: document_type_slug)

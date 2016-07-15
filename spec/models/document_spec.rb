@@ -644,6 +644,66 @@ RSpec.describe Document do
     end
   end
 
+  describe "#set_temporary_update_type!"do
+    before { subject.publication_state = "published" }
+
+    context "when the document has an update_type" do
+      before do
+        subject.update_type = "major"
+        subject.set_temporary_update_type!
+      end
+
+      it "preserves the existing attributes" do
+        expect(subject.update_type).to eq("major")
+        expect(subject.temporary_update_type).to eq(false)
+      end
+    end
+
+    context "when the document does not have an update_type" do
+      before do
+        subject.update_type = nil
+        subject.set_temporary_update_type!
+      end
+
+      it "sets update_type to minor and temporary_update_type to true" do
+        expect(subject.update_type).to eq("minor")
+        expect(subject.temporary_update_type).to eq(true)
+      end
+    end
+  end
+
+  describe "clear_temporary_update_type!" do
+    before { subject.publication_state = "published" }
+
+    context "when the document has a temporary_update_type" do
+      before do
+        subject.temporary_update_type = true
+        subject.update_type = "major"
+
+        subject.clear_temporary_update_type!
+      end
+
+      it "sets update_type to nil and temporary_update_type to false" do
+        expect(subject.temporary_update_type).to eq(false)
+        expect(subject.update_type).to be_nil
+      end
+    end
+
+    context "when the document does not have a temporary_update_type" do
+      before do
+        subject.temporary_update_type = false
+        subject.update_type = "major"
+
+        subject.clear_temporary_update_type!
+      end
+
+      it "preserves the existing attributes" do
+        expect(subject.update_type).to eq("major")
+        expect(subject.temporary_update_type).to eq(false)
+      end
+    end
+  end
+
   context "change_history" do
     let(:note) { 'my change note' }
     let(:document) {
