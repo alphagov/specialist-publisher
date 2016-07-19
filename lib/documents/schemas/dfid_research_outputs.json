@@ -87,10 +87,6 @@
           "label": "Protocol"
         },
         {
-          "value": "questionnaire",
-          "label": "Questionnaire"
-        },
-        {
           "value": "research_paper",
           "label": "Research Paper"
         },
