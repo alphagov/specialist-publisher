@@ -39,6 +39,7 @@ private
       metadata: metadata,
       change_history: document.change_history,
       max_cache_time: 10,
+      temporary_update_type: document.temporary_update_type,
     }.tap do |details_hash|
       details_hash[:attachments] = attachments if document.attachments.any?
       details_hash[:headers] = headers if !headers.empty?

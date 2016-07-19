@@ -19,7 +19,8 @@ class Document
     :document_type,
     :attachments,
     :first_published_at,
-    :previous_version
+    :previous_version,
+    :temporary_update_type
   )
 
   attr_writer :change_history, :update_type
@@ -43,6 +44,7 @@ class Document
     :bulk_published,
     :change_note,
     :change_history,
+    :temporary_update_type,
   ]
 
   FIRST_PUBLISHED_NOTE = 'First published.'.freeze
@@ -58,6 +60,8 @@ class Document
     (COMMON_FIELDS + format_specific_fields).each do |field|
       public_send(:"#{field.to_s}=", params.fetch(field, nil))
     end
+
+    clear_temporary_update_type!
   end
 
   def bulk_published
@@ -205,7 +209,8 @@ class Document
       bulk_published: payload['details']['metadata']['bulk_published'],
       change_note: extract_change_note_from_payload(payload),
       change_history: payload['details']['change_history'].map(&:to_h),
-      previous_version: payload['previous_version']
+      previous_version: payload['previous_version'],
+      temporary_update_type: payload['details']['temporary_update_type']
     )
 
     document.attachments = Attachment.all_from_publishing_api(payload)
@@ -326,6 +331,17 @@ class Document
     else
       false
     end
+  end
+
+  def set_temporary_update_type!
+    return if update_type
+    self.temporary_update_type = true
+    self.update_type = "minor"
+  end
+
+  def clear_temporary_update_type!
+    self.update_type = nil if temporary_update_type
+    self.temporary_update_type = false
   end
 
   def self.slug
