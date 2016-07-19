@@ -15,7 +15,6 @@ RSpec.feature "Editing a CMA case", type: :feature do
     publishing_api_has_content([cma_case], hash_including(document_type: CmaCase.document_type))
     publishing_api_has_item(cma_case)
 
-
     visit "/cma-cases/#{content_id}"
     click_link "Edit document"
   end
@@ -28,6 +27,8 @@ RSpec.feature "Editing a CMA case", type: :feature do
     updated_cma_case = cma_case.deep_merge(
       "title" => "Changed title",
       "description" => "Changed summary",
+      "base_path" => "/cma-cases/changed-title",
+      "routes" => [{ "path" => "/cma-cases/changed-title", "type" => "exact" }],
       "details" => {
         "metadata" => {
           "opened_date" => "2014-01-01",
@@ -320,23 +321,35 @@ RSpec.feature "Editing a CMA case", type: :feature do
 
         expect(page.status_code).to eq(422)
       end
-    end
-  end
 
-  context "a draft document" do
-    scenario "not showing the update type radio buttons" do
-      within(".new_cma_case") do
-        expect(page).not_to have_content('Only use for minor changes like fixes to typos, links, GOV.UK style or metadata.')
-        expect(page).not_to have_content('This will notify subscribers to ')
-        expect(page).not_to have_content('Update type minor')
-        expect(page).not_to have_content('Update type major')
+      scenario "updating the title does not update the base path" do
+        fill_in "Title", with: "New title"
+        choose "Update type minor"
+        click_button "Save as draft"
+        changed_json = {
+          "title" => "New title",
+          "update_type" => "minor",
+          "base_path" => "/cma-cases/example-document"
+        }
+        assert_publishing_api_put_content(content_id, request_json_includes(changed_json))
       end
     end
 
-    scenario "saving the document without an update type" do
-      click_button "Save as draft"
-      expect(page).to have_content("Updated Example CMA Case")
-      expect(page.status_code).to eq(200)
+    context "a draft document" do
+      scenario "not showing the update type radio buttons" do
+        within(".new_cma_case") do
+          expect(page).not_to have_content('Only use for minor changes like fixes to typos, links, GOV.UK style or metadata.')
+          expect(page).not_to have_content('This will notify subscribers to ')
+          expect(page).not_to have_content('Update type minor')
+          expect(page).not_to have_content('Update type major')
+        end
+      end
+
+      scenario "saving the document without an update type" do
+        click_button "Save as draft"
+        expect(page).to have_content("Updated Example CMA Case")
+        expect(page.status_code).to eq(200)
+      end
     end
   end
 end

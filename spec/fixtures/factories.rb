@@ -46,7 +46,7 @@ FactoryGirl.define do
 
   factory :document, class: Hash do
     content_id
-    base_path "/a/b"
+    base_path "/example-document"
     title "Example document"
     description "This is the summary of example document"
     schema_name "specialist_document"
@@ -143,7 +143,7 @@ FactoryGirl.define do
   end
 
   factory :aaib_report, parent: :document do
-    base_path "/aaib-reports/example-aaib-report"
+    base_path "/aaib-reports/example-document"
     document_type "aaib_report"
 
     transient do
@@ -162,7 +162,7 @@ FactoryGirl.define do
   end
 
   factory :cma_case, parent: :document do
-    base_path "/cma-cases/example-cma-case"
+    base_path "/cma-cases/example-document"
     document_type "cma_case"
 
     transient do
@@ -181,7 +181,7 @@ FactoryGirl.define do
   end
 
   factory :countryside_stewardship_grant, parent: :document do
-    base_path "/countryside-stewardship-grants/example-countryside-stewardship-grant"
+    base_path "/countryside-stewardship-grants/example-document"
     document_type "countryside_stewardship_grant"
 
     transient do
@@ -198,7 +198,7 @@ FactoryGirl.define do
   end
 
   factory :dfid_research_output, parent: :document do
-    base_path "/dfid-research-outputs/example-dfid-research-output"
+    base_path "/dfid-research-outputs/example-document"
     document_type "dfid_research_output"
 
     transient do
@@ -217,7 +217,7 @@ FactoryGirl.define do
   end
 
   factory :drug_safety_update, parent: :document do
-    base_path "/drug-safety-update/example-drug-safety-update"
+    base_path "/drug-safety-update/example-document"
     document_type "drug_safety_update"
 
     transient do
@@ -231,7 +231,7 @@ FactoryGirl.define do
   end
 
   factory :employment_appeal_tribunal_decision, parent: :document do
-    base_path "/employment-appeal-tribunal-decisions/example-employment-appeal-tribunal-decision"
+    base_path "/employment-appeal-tribunal-decisions/example-document"
     document_type "employment_appeal_tribunal_decision"
 
     transient do
@@ -249,7 +249,7 @@ FactoryGirl.define do
   end
 
   factory :employment_tribunal_decision, parent: :document do
-    base_path "/employment-tribunal-decisions/example-employment-tribunal-decision"
+    base_path "/employment-tribunal-decisions/example-document"
     document_type "employment_tribunal_decision"
 
     transient do
@@ -266,7 +266,7 @@ FactoryGirl.define do
   end
 
   factory :esi_fund, parent: :document do
-    base_path "/european-structural-investment-funds/example-esi-fund"
+    base_path "/european-structural-investment-funds/example-document"
     document_type "esi_fund"
 
     transient do
@@ -284,7 +284,7 @@ FactoryGirl.define do
   end
 
   factory :maib_report, parent: :document do
-    base_path "/maib-reports/example-maib-report"
+    base_path "/maib-reports/example-document"
     document_type "maib_report"
 
     transient do
@@ -300,7 +300,7 @@ FactoryGirl.define do
   end
 
   factory :medical_safety_alert, parent: :document do
-    base_path "/drug-device-alerts/example-medical-safety-alert"
+    base_path "/drug-device-alerts/example-document"
     document_type "medical_safety_alert"
 
     transient do
@@ -316,7 +316,7 @@ FactoryGirl.define do
   end
 
   factory :raib_report, parent: :document do
-    base_path "/raib-reports/example-raib-report"
+    base_path "/raib-reports/example-document"
     document_type "raib_report"
 
     transient do
@@ -332,7 +332,7 @@ FactoryGirl.define do
   end
 
   factory :tax_tribunal_decision, parent: :document do
-    base_path "/tax-and-chancery-tribunal-decisions/example-tax-tribunal-decision"
+    base_path "/tax-and-chancery-tribunal-decisions/example-document"
     document_type "tax_tribunal_decision"
 
     transient do
@@ -348,7 +348,7 @@ FactoryGirl.define do
   end
 
   factory :vehicle_recalls_and_faults_alert, parent: :document do
-    base_path "/vehicle-recalls-faults/example-vehicle-recalls-and-faults"
+    base_path "/vehicle-recalls-faults/example-document"
     document_type "vehicle_recalls_and_faults_alert"
 
     transient do

@@ -65,7 +65,11 @@ class Document
   end
 
   def base_path
-    @base_path ||= "#{finder_schema.base_path}/#{title.parameterize}"
+    if has_ever_been_published?
+      @base_path
+    else
+      @base_path = "#{finder_schema.base_path}/#{title.parameterize}"
+    end
   end
 
   def document_type
