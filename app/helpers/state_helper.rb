@@ -20,9 +20,21 @@ module StateHelper
     end
   end
 
-  def last_two_states(state_history)
+  def ordered_history(state_history)
     ordered_history = state_history.sort_by { |k, _v| Integer(k.to_s) }
     ordered_history.map!(&:second)
-    [ordered_history[-2], ordered_history[-1]]
+  end
+
+  def last_two_states(state_history)
+    history = ordered_history(state_history)
+    [history[-2], history[-1]]
+  end
+
+  def show_view_on_website_link?(state_history)
+    last_two_states(state_history).include?("published")
+  end
+
+  def show_preview_draft_link?(state_history)
+    ordered_history(state_history).last == "draft"
   end
 end
