@@ -518,7 +518,9 @@ RSpec.describe Document do
       end
 
       context "when the document is published" do
-        let(:payload) { FactoryGirl.create(:document, :published) }
+        let(:payload) {
+          FactoryGirl.create(:document, :published, state_history: { "1" => "published" })
+        }
 
         it "requires an update_type" do
           subject.update_type = ""
@@ -536,7 +538,9 @@ RSpec.describe Document do
       end
 
       context "when the document is unpublished" do
-        let(:payload) { FactoryGirl.create(:document, :unpublished) }
+        let(:payload) {
+          FactoryGirl.create(:document, :unpublished, state_history: { "1" => "published", "2" => "unpublished" })
+        }
 
         it "requires an update_type" do
           subject.update_type = ""
@@ -732,24 +736,24 @@ RSpec.describe Document do
     end
   end
 
-  context '#ever_been_published?' do
-    let(:change_note_1) { { 'public_timestamp' => Time.current.iso8601, 'note' => 'Drafting' } }
-    let(:change_note_2) { { 'public_timestamp' => Time.current.iso8601, 'note' => Document::FIRST_PUBLISHED_NOTE } }
-    let(:change_note_3) { { 'public_timestamp' => Time.current.iso8601, 'note' => 'Making changes' } }
+  context '#first_draft?' do
+    let(:state_history_1) { { "1" => "published", "2" => "draft", "3" => "unpublished" } }
+    let(:state_history_2) { { "1" => "draft" } }
+    let(:state_history_3) { {} }
     subject { MyDocumentType.new }
-    it "is true if there is a '#{Document::FIRST_PUBLISHED_NOTE}' entry in change_history" do
-      subject.change_history = [change_note_1, change_note_2, change_note_3]
-      expect(subject).to have_ever_been_published
+    it "is false if there is 'published' in state_history" do
+      subject.state_history = state_history_1
+      expect(subject.first_draft?).to eq(false)
     end
 
-    it "is false if there is no '#{Document::FIRST_PUBLISHED_NOTE}' entry in change_history" do
-      subject.change_history = [change_note_1, change_note_3]
-      expect(subject).not_to have_ever_been_published
+    it "is true if it has never been published" do
+      subject.state_history = state_history_2
+      expect(subject.first_draft?).to eq(true)
     end
 
-    it "is false if the change_history is empty" do
-      subject.change_history = []
-      expect(subject).not_to have_ever_been_published
+    it "is true if the state_history is empty" do
+      subject.state_history = state_history_3
+      expect(subject.first_draft?).to eq(true)
     end
   end
 end

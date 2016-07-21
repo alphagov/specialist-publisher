@@ -1,7 +1,9 @@
 require 'spec_helper'
 
 RSpec.feature "Editing a CMA case", type: :feature do
-  let(:cma_case) { FactoryGirl.create(:cma_case, title: "Example CMA Case") }
+  let(:cma_case) {
+    FactoryGirl.create(:cma_case, title: "Example CMA Case", state_history: { "1" => "draft" })
+  }
   let(:content_id) { cma_case['content_id'] }
   let(:save_button_disable_with_message) { page.find_button('Save as draft')["data-disable-with"] }
 
@@ -77,6 +79,7 @@ RSpec.feature "Editing a CMA case", type: :feature do
         :published,
         title: "Example CMA Case",
         description: "Summary with a typox",
+        state_history: { "1" => "draft", "2" => "published" },
         details: {
           "body" => [
             { "content_type" => "text/govspeak", "content" => "A body" },
@@ -293,14 +296,15 @@ RSpec.feature "Editing a CMA case", type: :feature do
     end
   end
 
-  %i(published unpublished).each do |publication_state|
-    context "a #{publication_state} documented" do
+  %i(unpublished).each do |publication_state|
+    context "a #{publication_state} document" do
       let(:cma_case) {
         FactoryGirl.create(
           :cma_case,
           publication_state,
           title: "Example CMA Case",
           details: {},
+          state_history: { "1" => "published", "2" => publication_state.to_s, "3" => "draft" }
         )
       }
 
