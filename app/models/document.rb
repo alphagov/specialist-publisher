@@ -102,14 +102,6 @@ class Document
     publication_state == "draft" || publication_state.nil?
   end
 
-  def published?
-    live? || redrafted?
-  end
-
-  def not_published?
-    !published?
-  end
-
   # TODO: This is not particularly robust. We'd prefer to check the entire
   # state history of the document to see if it had really ever been published
   # but that's not available via the publishing api yet.  Checking for our

@@ -200,4 +200,8 @@ class Manual
   def can_be_published?
     sections.any?
   end
+
+  def state_history
+    {}
+  end
 end
