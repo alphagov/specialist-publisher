@@ -68,7 +68,8 @@
         {"label": "Investigation report", "value": "investigation-report"},
         {"label": "Bulletin", "value": "bulletin"},
         {"label": "Interim report", "value": "interim-report"},
-        {"label": "Discontinuation report", "value": "discontinuation-report"}
+        {"label": "Discontinuation report", "value": "discontinuation-report"},
+        {"label": "Safety digest", "value": "safety-digest"}
       ]
     },
     {
