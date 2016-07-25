@@ -28,7 +28,7 @@ class Document
   validates :title, presence: true
   validates :summary, presence: true
   validates :body, presence: true, safe_html: true
-  validates :update_type, presence: true, if: :has_ever_been_published?
+  validates :update_type, presence: true, unless: :first_draft?
   validates :change_note, presence: true, if: :change_note_required?
 
   COMMON_FIELDS = [
@@ -69,10 +69,10 @@ class Document
   end
 
   def base_path
-    if has_ever_been_published?
-      @base_path
-    else
+    if first_draft?
       @base_path = "#{finder_schema.base_path}/#{title.parameterize}"
+    else
+      @base_path
     end
   end
 
@@ -102,16 +102,16 @@ class Document
     publication_state == "draft" || publication_state.nil?
   end
 
-  # TODO: This is not particularly robust. We'd prefer to check the entire
-  # state history of the document to see if it had really ever been published
-  # but that's not available via the publishing api yet.  Checking for our
-  # "First published" note in change history is a stopgap until it is.
-  def has_ever_been_published?
-    change_history.detect { |notes| notes['note'] == Document::FIRST_PUBLISHED_NOTE }
+  def first_draft?
+    draft? && state_history_one_or_shorter?
+  end
+
+  def state_history_one_or_shorter?
+    state_history.nil? ? true : state_history.size < 2
   end
 
   def change_note_required?
-    update_type == 'major' && has_ever_been_published?
+    update_type == 'major' && !first_draft?
   end
 
   def change_history
@@ -177,6 +177,7 @@ class Document
     payload['update_type'] if payload['publication_state'] == 'redrafted'
   end
 
+  # TODO make this method be a little less ridiculous
   def self.extract_change_note_from_payload(payload)
     # If the document is redrafted remove the last/most
     # recent change note from the change_history array
@@ -269,7 +270,7 @@ class Document
     handle_remote_error do
       update_type = self.update_type || 'major'
 
-      unless has_ever_been_published?
+      if first_draft?
         self.change_note = Document::FIRST_PUBLISHED_NOTE
         self.save
       end
