@@ -54,7 +54,7 @@ RSpec.describe RepublishWorker do
 
   context "when the document is live" do
     let(:document) {
-      FactoryGirl.create(:cma_case, publication_state: "live")
+      FactoryGirl.create(:cma_case, :published)
     }
 
     it "sends the document to the publishing api" do
@@ -85,7 +85,7 @@ RSpec.describe RepublishWorker do
 
   context "when the document is unpublished" do
     let(:document) {
-      FactoryGirl.create(:cma_case, publication_state: "unpublished")
+      FactoryGirl.create(:cma_case, :unpublished)
     }
 
     it "skips republishing of the document" do

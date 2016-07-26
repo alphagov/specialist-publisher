@@ -7,9 +7,10 @@ RSpec.describe DrugSafetyUpdate do
 
   context "#publish" do
     let(:payload) {
-      FactoryGirl.create(:drug_safety_update,
-        update_type: "major",
-        publication_state: "draft")
+      FactoryGirl.create(
+        :drug_safety_update,
+          :published,
+          update_type: "major",)
     }
     let(:document) { described_class.from_publishing_api(payload) }
 

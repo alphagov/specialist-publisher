@@ -20,10 +20,15 @@ class Document
     :attachments,
     :first_published_at,
     :previous_version,
-    :temporary_update_type
+    :temporary_update_type,
+    :update_type
   )
 
-  attr_writer :change_history, :update_type
+  attr_writer :change_history
+
+  def temporary_update_type?
+    @temporary_update_type
+  end
 
   validates :title, presence: true
   validates :summary, presence: true
@@ -60,8 +65,6 @@ class Document
     (COMMON_FIELDS + format_specific_fields).each do |field|
       public_send(:"#{field.to_s}=", params.fetch(field, nil))
     end
-
-    clear_temporary_update_type!
   end
 
   def bulk_published
@@ -103,11 +106,7 @@ class Document
   end
 
   def first_draft?
-    draft? && state_history_one_or_shorter?
-  end
-
-  def state_history_one_or_shorter?
-    state_history.nil? ? true : state_history.size < 2
+    draft? && first_published_at.blank?
   end
 
   def change_note_required?
@@ -122,10 +121,6 @@ class Document
     else
       @change_history
     end
-  end
-
-  def update_type
-    self.draft? ? 'major' : @update_type
   end
 
   def users
@@ -173,8 +168,17 @@ class Document
     end
   end
 
-  def self.extract_update_type_from_payload(payload)
-    payload['update_type'] if payload['publication_state'] == 'redrafted'
+  def self.set_update_type(document, payload)
+    if document.temporary_update_type?
+      document.update_type = nil
+      document.temporary_update_type = false
+    elsif document.live? || document.unpublished?
+      document.update_type = nil
+    elsif document.first_draft?
+      document.update_type = 'major'
+    else
+      document.update_type = payload["update_type"]
+    end
   end
 
   # TODO make this method be a little less ridiculous
@@ -198,13 +202,14 @@ class Document
       state_history: payload['state_history'],
       public_updated_at: payload['public_updated_at'],
       first_published_at: payload['first_published_at'],
-      update_type: extract_update_type_from_payload(payload),
       bulk_published: payload['details']['metadata']['bulk_published'],
       change_note: extract_change_note_from_payload(payload),
       change_history: payload['details']['change_history'].map(&:to_h),
       previous_version: payload['previous_version'],
       temporary_update_type: payload['details']['temporary_update_type']
     )
+
+    set_update_type(document, payload)
 
     document.attachments = Attachment.all_from_publishing_api(payload)
 
@@ -257,6 +262,8 @@ class Document
   def save
     return false unless self.valid?
 
+    self.update_type = 'major' if first_draft?
+
     presented_document = DocumentPresenter.new(self)
     presented_links = DocumentLinksPresenter.new(self)
 
@@ -268,10 +275,9 @@ class Document
 
   def publish
     handle_remote_error do
-      update_type = self.update_type || 'major'
-
       if first_draft?
         self.change_note = Document::FIRST_PUBLISHED_NOTE
+        self.update_type = 'major'
         self.save
       end
 
@@ -330,11 +336,6 @@ class Document
     return if update_type
     self.temporary_update_type = true
     self.update_type = "minor"
-  end
-
-  def clear_temporary_update_type!
-    self.update_type = nil if temporary_update_type
-    self.temporary_update_type = false
   end
 
   def self.slug

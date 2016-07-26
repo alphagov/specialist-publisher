@@ -20,7 +20,7 @@ module Services
 
   # Asynchronously called from app/workers.
   def self.rummager
-    @rummager ||= GdsApi::Rummager.new(Plek.new.find('search'))
+    @rummager ||= GdsApi::Rummager.new(Plek.new.find('rummager'))
   end
 
   # Asynchronously called from app/workers.
