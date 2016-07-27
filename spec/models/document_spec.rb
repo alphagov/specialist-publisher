@@ -192,10 +192,6 @@ RSpec.describe Document do
         expect(document.field2).to eq("open")
         expect(document.field3).to eq(%w(x y z))
       end
-
-      it "sets the change note to nil" do
-        expect(document.change_note).to be_nil
-      end
     end
 
     context "when the document is redrafted" do
@@ -223,18 +219,6 @@ RSpec.describe Document do
 
         it "sets the change note to the second item in the change history" do
           expect(document.change_note).to eq("Second note")
-        end
-
-        it "sets the full change history from the payload" do
-          expect(document.change_history[0]['note']).to eq("First published")
-          expect(document.change_history[0]['public_timestamp']).to eq("2016-01-01")
-          expect(document.change_history[1]['note']).to eq("Second note")
-        end
-
-        it "updates the latest change history's timestamp to now when it is read" do
-          Timecop.freeze("2016-04-21") do
-            expect(document.change_history[1]['public_timestamp']).to eq("2016-04-21T01:00:00+01:00")
-          end
         end
       end
 
@@ -347,14 +331,14 @@ RSpec.describe Document do
         )
       end
 
-      it 'saves a "First published" change note before asking the api to publish' do
+      it 'saves a "First published." change note before asking the api to publish' do
         Timecop.freeze(Time.parse("2015-12-18 10:12:26 UTC")) do
           unpublished_document.publish
 
           expected_change_history = [
             {
               "public_timestamp" => Time.current.iso8601,
-              "note" => Document::FIRST_PUBLISHED_NOTE,
+              "note" => "First published.",
             },
           ]
 
@@ -689,30 +673,27 @@ RSpec.describe Document do
   end
 
   context "change_history" do
-    let(:note) { 'my change note' }
-    let(:document) {
-      MyDocumentType.new.tap { |document|
-        document.change_note = note
-        document.publication_state = 'live'
-      }
-    }
+    subject { MyDocumentType.new }
 
-    it 'add note when major change' do
-      document.update_type = 'major'
+    it "sets the change note when it is a major update" do
+      subject.update_type = "major"
+      subject.change_note = "some change note"
 
-      expect(document.change_history.last).to eq('public_timestamp' => Time.current.iso8601, 'note' => note)
+      expect(subject.change_note).to eq("some change note")
     end
 
-    it 'should not add note when minor change' do
-      document.update_type = 'minor'
+    it "does not set the change note when it is a minor update" do
+      subject.update_type = "minor"
+      subject.change_note = "some change note"
 
-      expect(document.change_history).to be_empty
+      expect(subject.change_note).to be_nil
     end
 
-    it 'should not add note when no update type' do
-      document.update_type = ''
+    it "does not the change note when the update_type is not set" do
+      subject.update_type = nil
+      subject.change_note = "some change note"
 
-      expect(document.change_history).to be_empty
+      expect(subject.change_note).to be_nil
     end
   end
 

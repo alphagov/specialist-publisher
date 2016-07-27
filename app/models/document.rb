@@ -15,7 +15,7 @@ class Document
     :bulk_published,
     :publication_state,
     :state_history,
-    :change_note,
+    :change_history,
     :document_type,
     :attachments,
     :first_published_at,
@@ -23,8 +23,6 @@ class Document
     :temporary_update_type,
     :update_type
   )
-
-  attr_writer :change_history
 
   def temporary_update_type?
     @temporary_update_type
@@ -47,12 +45,9 @@ class Document
     :first_published_at,
     :update_type,
     :bulk_published,
-    :change_note,
     :change_history,
     :temporary_update_type,
   ]
-
-  FIRST_PUBLISHED_NOTE = 'First published.'.freeze
 
   def self.policy_class
     DocumentPolicy
@@ -65,6 +60,8 @@ class Document
     (COMMON_FIELDS + format_specific_fields).each do |field|
       public_send(:"#{field.to_s}=", params.fetch(field, nil))
     end
+
+    @change_history ||= ChangeHistory.new
   end
 
   def bulk_published
@@ -110,17 +107,28 @@ class Document
   end
 
   def change_note_required?
-    update_type == 'major' && !first_draft?
+    return unless update_type == "major"
+    !first_draft?
   end
 
-  def change_history
-    @change_history ||= []
+  def change_note
+    return unless update_type == "major"
+    change_history.latest_change_note
+  end
 
-    if change_note && update_type == 'major'
-      @change_history + [{ 'public_timestamp' => Time.current.iso8601, 'note' => change_note }]
+  def change_note=(note)
+    return unless update_type == "major"
+
+    if @previous_update_type == "major"
+      change_history.update_item(note)
     else
-      @change_history
+      change_history.add_item(note)
     end
+  end
+
+  def update_type=(update_type)
+    @previous_update_type = @update_type
+    @update_type = update_type
   end
 
   def users
@@ -181,16 +189,6 @@ class Document
     end
   end
 
-  # TODO make this method be a little less ridiculous
-  def self.extract_change_note_from_payload(payload)
-    # If the document is redrafted remove the last/most
-    # recent change note from the change_history array
-    # and set it as the document's change note
-    if payload['publication_state'] == 'redrafted' && payload['details']['change_history'].length > 1
-      payload['details']['change_history'].pop["note"]
-    end
-  end
-
   def self.from_publishing_api(payload)
     document = self.new(
       base_path: payload['base_path'],
@@ -203,8 +201,7 @@ class Document
       public_updated_at: payload['public_updated_at'],
       first_published_at: payload['first_published_at'],
       bulk_published: payload['details']['metadata']['bulk_published'],
-      change_note: extract_change_note_from_payload(payload),
-      change_history: payload['details']['change_history'].map(&:to_h),
+      change_history: ChangeHistory.parse(payload['details']['change_history']),
       previous_version: payload['previous_version'],
       temporary_update_type: payload['details']['temporary_update_type']
     )
@@ -276,7 +273,7 @@ class Document
   def publish
     handle_remote_error do
       if first_draft?
-        self.change_note = Document::FIRST_PUBLISHED_NOTE
+        change_history.first_published!
         self.update_type = 'major'
         self.save
       end

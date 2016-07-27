@@ -117,8 +117,8 @@ FactoryGirl.define do
       change_history do
         [
           {
-            'published_timestamp' => Time.current.iso8601,
-            'note' => Document::FIRST_PUBLISHED_NOTE
+            'public_timestamp' => Time.current.iso8601,
+            'note' => "First published.",
           }
         ]
       end
@@ -134,8 +134,8 @@ FactoryGirl.define do
       change_history do
         [
           {
-            'published_timestamp' => Time.current.iso8601,
-            'note' => Document::FIRST_PUBLISHED_NOTE
+            'public_timestamp' => Time.current.iso8601,
+            'note' => "First published.",
           }
         ]
       end

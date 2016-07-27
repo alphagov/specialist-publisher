@@ -65,19 +65,13 @@ RSpec.describe ActionsPresenter do
     end
 
     context "when the document is redrafted" do
-      let(:payload) { FactoryGirl.create(:cma_case, publication_state: "redrafted") }
+      let(:payload) { FactoryGirl.create(:cma_case, first_published_at: "2016-01-01", publication_state: "draft") }
       specify { expect(subject.publish_text).to include("major edit") }
       specify { expect(subject.publish_text).to include("will email subscribers") }
     end
 
-    context "when the update_type is minor" do
-      let(:payload) { FactoryGirl.create(:cma_case, publication_state: "redrafted", update_type: "minor") }
-      specify { expect(subject.publish_text).to include("minor edit") }
-      specify { expect(subject.publish_text).not_to include("will email subscribers") }
-    end
-
     context "when the document is redrafted and the update_type is minor" do
-      let(:payload) { FactoryGirl.create(:cma_case, publication_state: "redrafted", update_type: "minor") }
+      let(:payload) { FactoryGirl.create(:cma_case, first_published_at: "2016-01-01", publication_state: "redrafted", update_type: "minor") }
       specify { expect(subject.publish_text).to include("minor edit") }
       specify { expect(subject.publish_text).not_to include("will email subscribers") }
     end
@@ -128,7 +122,7 @@ RSpec.describe ActionsPresenter do
     end
 
     context "when the document is redrafted" do
-      let(:payload) { FactoryGirl.create(:cma_case, publication_state: "redrafted") }
+      let(:payload) { FactoryGirl.create(:cma_case, first_published_at: "2016-01-01", publication_state: "draft") }
       specify { expect(subject.unpublish_text).to include("publish the draft first") }
     end
 

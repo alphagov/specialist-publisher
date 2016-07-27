@@ -25,7 +25,7 @@ class ActionsPresenter
       text = "<p>You don't have permission to publish this document.</p>"
     elsif update_type == "minor"
       text = "<p>You are about to publish a <strong>minor edit</strong>.</p>"
-    elsif update_type == "major" && state == "redrafted"
+    elsif update_type == "major" && !document.first_draft?
       text = "<p><strong>You are about to publish a major edit with a public change note.</strong></p>"
       text += "<p>Publishing will email subscribers to #{klass_name}.</p>"
     else
@@ -52,9 +52,9 @@ class ActionsPresenter
   end
 
   def unpublish_text
-    if state == "draft"
+    if document.first_draft?
       text = "<p>The document has never been published.</p>"
-    elsif state == "redrafted"
+    elsif state == "draft"
       text = "<p>The document cannot be unpublished because it has a draft. You need to publish the draft first.</p>"
     elsif state == "unpublished"
       text = "<p>The document is already unpublished.</p>"
