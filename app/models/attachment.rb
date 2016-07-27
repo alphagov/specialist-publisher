@@ -10,7 +10,7 @@ class Attachment < Document
 
   def initialize(params = {})
     params = params.symbolize_keys
-    @title = params[:title]
+    @title = extract_title(params)
     @file = params[:file]
     @content_type = params[:content_type]
     @url = params[:url]
@@ -22,6 +22,17 @@ class Attachment < Document
   def update_attributes(new_params)
     new_params.each do |k, v|
       self.public_send(:"#{k}=", v)
+    end
+  end
+
+  def extract_title params
+    if params[:title].blank?
+      if params[:url]
+        separated_url = params[:url].split('/')
+        separated_url[separated_url.length - 1].split('.').first
+      end
+    else
+      params[:title]
     end
   end
 

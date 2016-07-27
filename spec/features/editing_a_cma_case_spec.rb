@@ -209,6 +209,7 @@ RSpec.feature "Editing a CMA case", type: :feature do
         )
       }
 
+      #TODO this test isn't actually checking that the attachment has been added
       scenario "adding an attachment to a #{publication_state} CMA case" do
         updated_cma_case = cma_case.deep_merge(
           "update_type" => "minor",
@@ -254,6 +255,7 @@ RSpec.feature "Editing a CMA case", type: :feature do
       scenario "editing an attachment on a #{publication_state} CMA case" do
         find('.attachments').first(:link, "edit").click
         expect(page.status_code).to eq(200)
+        expect(find('#attachment_title').value).to eq('asylum report image title')
 
         fill_in "Title", with: "Updated cma case image"
         page.attach_file('attachment_file', "spec/support/images/updated_cma_case_image.jpg")
