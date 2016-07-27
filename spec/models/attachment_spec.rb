@@ -68,6 +68,7 @@ RSpec.describe Attachment do
       expect(attachment.content_id).to be_truthy
       expect(attachment.file.content_type).to eq("image/jpeg")
       expect(attachment.file.tempfile).to eq("spec/support/images/cma_case_image.jpg")
+      expect(attachment.title).to eq('test attachment')
       expect(attachment.created_at).to be(nil)
       expect(attachment.updated_at).to be(nil)
       expect(attachment.url).to be(nil)
@@ -77,15 +78,16 @@ RSpec.describe Attachment do
     it "should set content_id, title, url, created_at and updated_at with data from publishing-api" do
       content_id = SecureRandom.uuid
       attachment = Attachment.new(
-        title: 'test attachment',
+        title: '',
         content_id: content_id,
-        url: "/path/to/file/in/asset/manager",
+        url: "/path/to/file/in/asset/manager/cma_case_image.jpg",
         content_type: 'image/jpg',
         created_at: "2015-12-03T16:59:13+00:00",
         updated_at: "2015-12-03T16:59:13+00:00",
       )
       expect(attachment.content_id).to eq(content_id)
-      expect(attachment.url).to eq("/path/to/file/in/asset/manager")
+      expect(attachment.title).to eq('cma_case_image')
+      expect(attachment.url).to eq("/path/to/file/in/asset/manager/cma_case_image.jpg")
       expect(attachment.content_type).to eq("image/jpg")
       expect(attachment.created_at).to eq("2015-12-03T16:59:13+00:00")
       expect(attachment.updated_at).to eq("2015-12-03T16:59:13+00:00")
