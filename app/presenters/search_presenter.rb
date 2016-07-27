@@ -11,9 +11,14 @@ class SearchPresenter
       description: document.summary,
       link: document.base_path,
       indexable_content: indexable_content,
-      public_timestamp: document.public_updated_at.to_datetime.rfc3339,
-      first_published_at: document.first_published_at.to_datetime.rfc3339,
+      public_timestamp: format_date(document.public_updated_at),
+      first_published_at: format_date(document.first_published_at),
     }.merge(document.format_specific_metadata).reject { |_k, v| v.blank? }
+  end
+
+  def format_date(timestamp)
+    raise ArgumentError, "Timestamp is blank" if timestamp.blank?
+    timestamp.to_datetime.rfc3339
   end
 
   def indexable_content

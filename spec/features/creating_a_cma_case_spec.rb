@@ -84,7 +84,7 @@ RSpec.feature "Creating a CMA case", type: :feature do
         "headers" => [
           { "text" => "Header", "level" => 2, "id" => "header" }
         ],
-        "temporary_update_type" => false,
+        "temporary_update_type" => nil,
       },
       "routes" => [{ "path" => "/cma-cases/example-cma-case", "type" => "exact" }],
       "redirects" => [],

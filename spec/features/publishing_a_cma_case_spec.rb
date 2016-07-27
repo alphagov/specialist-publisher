@@ -23,11 +23,22 @@ RSpec.feature "Publishing a CMA case", type: :feature do
 
   context "when the document is a new draft" do
     let(:item) {
-      FactoryGirl.create(:cma_case,
-        title: "Example CMA Case",
-        base_path: "/cma-cases/example-cma-case",
-        public_updated_at: "2015-11-16T11:53:30+00:00",
-        publication_state: "draft")
+      FactoryGirl.create(
+        :cma_case,
+          title: "Example CMA Case",
+          base_path: "/cma-cases/example-cma-case",
+          public_updated_at: "2015-11-16T11:53:30+00:00",
+          publication_state: "draft")
+    }
+
+    let(:published_item) {
+      FactoryGirl.create(
+        :cma_case,
+          :published,
+          content_id: content_id,
+          title: "Example CMA Case",
+          base_path: "/cma-cases/example-cma-case",
+          public_updated_at: "2015-11-16T11:53:30+00:00")
     }
 
     scenario "from the index" do
@@ -41,10 +52,11 @@ RSpec.feature "Publishing a CMA case", type: :feature do
       expect(page.status_code).to eq(200)
       expect(page).to have_content("Example CMA Case")
 
+      publishing_api_has_item_in_sequence(content_id, [item, published_item])
+
       click_button "Publish"
       expect(page.status_code).to eq(200)
       expect(page).to have_content("Published Example CMA Case")
-
 
       expected_change_history = [
           {

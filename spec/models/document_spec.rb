@@ -242,9 +242,19 @@ RSpec.describe Document do
         specify { expect(document.change_note).to be_nil }
       end
     end
+
+    context "when the document has a temporary update type" do
+      let(:payload_attributes) { { details: { temporary_update_type: true } } }
+
+      it "sets update type to nil and clears the temporary update type" do
+        expect(document.update_type).to be_nil
+        expect(document.temporary_update_type).to eq(false)
+      end
+    end
   end
 
   context "successful #publish" do
+    let(:payload) { FactoryGirl.create(:document, :published, payload_attributes) }
     before do
       stub_any_publishing_api_put_content
       stub_any_publishing_api_patch_links
@@ -399,6 +409,8 @@ RSpec.describe Document do
   end
 
   context "unsuccessful #publish" do
+    let(:payload) { FactoryGirl.create(:document, :published, payload_attributes) }
+
     it "notifies Airbrake and returns false if publishing-api does not return status 200" do
       expect(Airbrake).to receive(:notify)
       stub_any_publishing_api_put_content
@@ -414,7 +426,7 @@ RSpec.describe Document do
       stub_any_publishing_api_patch_links
       stub_publishing_api_publish(document.content_id, {})
       publishing_api_has_item(payload)
-      stub_request(:post, %r{#{Plek.new.find('search')}/documents}).to_return(status: 503)
+      stub_request(:post, %r{#{Plek.new.find('rummager')}/documents}).to_return(status: 503)
       expect(document.publish).to eq(false)
     end
   end
@@ -659,7 +671,7 @@ RSpec.describe Document do
 
       it "preserves the existing attributes" do
         expect(subject.update_type).to eq("major")
-        expect(subject.temporary_update_type).to eq(false)
+        expect(subject.temporary_update_type).to be_falsey
       end
     end
 
@@ -672,38 +684,6 @@ RSpec.describe Document do
       it "sets update_type to minor and temporary_update_type to true" do
         expect(subject.update_type).to eq("minor")
         expect(subject.temporary_update_type).to eq(true)
-      end
-    end
-  end
-
-  describe "clear_temporary_update_type!" do
-    before { subject.publication_state = "published" }
-
-    context "when the document has a temporary_update_type" do
-      before do
-        subject.temporary_update_type = true
-        subject.update_type = "major"
-
-        subject.clear_temporary_update_type!
-      end
-
-      it "sets update_type to nil and temporary_update_type to false" do
-        expect(subject.temporary_update_type).to eq(false)
-        expect(subject.update_type).to be_nil
-      end
-    end
-
-    context "when the document does not have a temporary_update_type" do
-      before do
-        subject.temporary_update_type = false
-        subject.update_type = "major"
-
-        subject.clear_temporary_update_type!
-      end
-
-      it "preserves the existing attributes" do
-        expect(subject.update_type).to eq("major")
-        expect(subject.temporary_update_type).to eq(false)
       end
     end
   end
@@ -737,23 +717,16 @@ RSpec.describe Document do
   end
 
   context '#first_draft?' do
-    let(:state_history_1) { { "1" => "published", "2" => "draft", "3" => "unpublished" } }
-    let(:state_history_2) { { "1" => "draft" } }
-    let(:state_history_3) { {} }
     subject { MyDocumentType.new }
-    it "is false if there is 'published' in state_history" do
-      subject.state_history = state_history_1
+
+    it "is true if there is no first_published_at" do
+      subject.first_published_at = nil
+      expect(subject.first_draft?).to eq(true)
+    end
+
+    it "is false if there is a first_published_at" do
+      subject.first_published_at = "2015-11-15T00:00:00+00:00"
       expect(subject.first_draft?).to eq(false)
-    end
-
-    it "is true if it has never been published" do
-      subject.state_history = state_history_2
-      expect(subject.first_draft?).to eq(true)
-    end
-
-    it "is true if the state_history is empty" do
-      subject.state_history = state_history_3
-      expect(subject.first_draft?).to eq(true)
     end
   end
 end
