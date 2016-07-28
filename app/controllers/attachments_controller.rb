@@ -15,13 +15,7 @@ class AttachmentsController < ApplicationController
     attachment = document.attachments.build(attachment_params)
     attachment.content_type = attachment.file.content_type
 
-    if document.upload_attachment(attachment)
-      flash[:success] = "Attached #{attachment.title}"
-      redirect_to edit_document_path(document_type_slug, document.content_id)
-    else
-      flash[:danger] = "There was an error uploading the attachment, please try again later."
-      redirect_to new_document_attachment_path(document_type_slug, document.content_id)
-    end
+    upload_attachment(document, attachment, new_attachment: true)
   end
 
   def edit
@@ -34,16 +28,42 @@ class AttachmentsController < ApplicationController
     attachment = document.attachments.find(attachment_content_id)
     attachment.update_attributes(attachment_params)
 
-    if document.upload_attachment(attachment)
-      flash[:success] = "Attachment succesfully updated"
-      redirect_to edit_document_path(document_type_slug, document.content_id)
+    if attachment.file.nil?
+      save_updated_title(document, attachment)
     else
-      flash[:danger] = "There was an error uploading the attachment, please try again later."
-      redirect_to edit_document_attachment_path(document_type_slug, document.content_id, attachment.content_id)
+      upload_attachment(document, attachment, new_attachment: false)
     end
   end
 
 private
+
+  def save_updated_title(document, attachment)
+    if document.save
+      flash[:success] = "Attachment succesfully updated"
+      redirect_to edit_document_path(document_type_slug, document.content_id)
+    else
+      flash[:danger] = "There was an error updating the title, please try again later."
+      redirect_to edit_document_attachment_path(document_type_slug, document.content_id, attachment.content_id)
+    end
+  end
+
+  def upload_attachment(document, attachment, new_attachment:)
+    if document.upload_attachment(attachment)
+      flash[:success] = new_attachment ? "Attached #{attachment.title}" : "Attachment succesfully updated"
+      redirect_to edit_document_path(document_type_slug, document.content_id)
+    else
+      flash[:danger] = "There was an error uploading the attachment, please try again later."
+      redirect_to previous_address(document, attachment, new_attachment)
+    end
+  end
+
+  def previous_address(document, attachment, new)
+    if new
+      new_document_attachment_path(document_type_slug, document.content_id)
+    else
+      edit_document_attachment_path(document_type_slug, document.content_id, attachment.content_id)
+    end
+  end
 
   def fetch_document
     document = current_format.find(params[:document_content_id])
