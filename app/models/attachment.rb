@@ -25,11 +25,14 @@ class Attachment < Document
     end
   end
 
-  def extract_title params
+  def extract_title(params)
     if params[:title].blank?
       if params[:url]
         separated_url = params[:url].split('/')
-        separated_url[separated_url.length - 1].split('.').first
+        filename = separated_url[separated_url.length - 1]
+        remove_extension_from_filename(filename)
+      elsif params[:file]
+        remove_extension_from_filename(params[:file].original_filename)
       end
     else
       params[:title]
@@ -43,6 +46,10 @@ class Attachment < Document
   rescue GdsApi::BaseError => e
     Airbrake.notify(e)
     false
+  end
+
+  def remove_extension_from_filename(filename)
+    filename.split('.').first
   end
 
   def snippet
