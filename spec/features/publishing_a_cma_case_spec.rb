@@ -123,10 +123,8 @@ RSpec.feature "Publishing a CMA case", type: :feature do
     let(:item) {
       FactoryGirl.create(
         :cma_case,
-        :draft,
-        first_published_at: "2016-01-01",
+        :redrafted,
         title: "Major Update Case",
-        update_type: "major",
         change_history: [
           { "public_timestamp" => "2016-01-01T00:00:00+00:00", "note" => "First published." },
           { "public_timestamp" => "2016-02-02T00:00:00+00:00", "note" => "Some change note" },
@@ -182,13 +180,9 @@ RSpec.feature "Publishing a CMA case", type: :feature do
     let(:item) {
       FactoryGirl.create(
         :cma_case,
-        :draft,
-        first_published_at: "2016-01-01",
+        :redrafted,
         title: "Minor Update Case",
         update_type: "minor",
-        change_history: [
-          { "public_timestamp" => "2016-01-01T00:00:00+00:00", "note" => "First published." },
-        ]
       )
     }
 

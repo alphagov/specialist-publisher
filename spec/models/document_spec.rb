@@ -198,7 +198,8 @@ RSpec.describe Document do
       let(:payload) do
         FactoryGirl.create(
           :document,
-          payload_attributes.merge(publication_state: "redrafted"),
+          :redrafted,
+          payload_attributes.merge(update_type: "minor"),
         )
       end
       it "sets the update type" do
@@ -218,6 +219,7 @@ RSpec.describe Document do
         end
 
         it "sets the change note to the second item in the change history" do
+          document.update_type = "major"
           expect(document.change_note).to eq("Second note")
         end
       end
