@@ -12,10 +12,16 @@ class AttachmentsController < ApplicationController
 
   def create
     document = fetch_document
-    attachment = document.attachments.build(attachment_params)
-    attachment.content_type = attachment.file.content_type
 
-    upload_attachment(document, attachment, new_attachment: true)
+    if attachment_valid?
+      attachment = document.attachments.build(attachment_params)
+      attachment.content_type = attachment.file.content_type
+
+      upload_attachment(document, attachment, new_attachment: true)
+    else
+      flash[:danger] = "Adding an attachment failed. Please make sure you have uploaded an attachment."
+      redirect_to previous_address(document, Attachment.new, new: true)
+    end
   end
 
   def edit
@@ -53,11 +59,11 @@ private
       redirect_to edit_document_path(document_type_slug, document.content_id)
     else
       flash[:danger] = "There was an error uploading the attachment, please try again later."
-      redirect_to previous_address(document, attachment, new_attachment)
+      redirect_to previous_address(document, attachment, new: new_attachment)
     end
   end
 
-  def previous_address(document, attachment, new)
+  def previous_address(document, attachment, new:)
     if new
       new_document_attachment_path(document_type_slug, document.content_id)
     else
@@ -82,5 +88,9 @@ private
 
   def attachment_params
     params.require(:attachment).permit(:title, :file)
+  end
+
+  def attachment_valid?
+    !params["attachment"].nil? && !params["attachment"]["file"].nil?
   end
 end
