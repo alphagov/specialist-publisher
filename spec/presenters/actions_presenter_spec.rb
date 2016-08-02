@@ -81,7 +81,7 @@ RSpec.describe ActionsPresenter do
     specify { expect(subject.publish_alert).to include("will email subscribers to CMA Cases") }
 
     context "when the update_type is minor" do
-      let(:payload) { FactoryGirl.create(:cma_case, publication_state: "redrafted", update_type: "minor") }
+      let(:payload) { FactoryGirl.create(:cma_case, :redrafted, update_type: "minor") }
       specify { expect(subject.publish_alert).to include("minor edit") }
     end
   end

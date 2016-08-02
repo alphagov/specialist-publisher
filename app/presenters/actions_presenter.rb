@@ -13,7 +13,7 @@ class ActionsPresenter
   end
 
   def publish_button_visible?
-    policy.publish? && %w(draft redrafted).include?(document.publication_state)
+    policy.publish? && document.draft?
   end
 
   def publish_text
@@ -54,7 +54,7 @@ class ActionsPresenter
   def unpublish_text
     if document.first_draft?
       text = "<p>The document has never been published.</p>"
-    elsif state == "draft" || state == "redrafted"
+    elsif state == "draft"
       text = "<p>The document cannot be unpublished because it has a draft. You need to publish the draft first.</p>"
     elsif state == "unpublished"
       text = "<p>The document is already unpublished.</p>"

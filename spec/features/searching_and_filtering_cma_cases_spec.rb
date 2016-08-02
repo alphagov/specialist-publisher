@@ -14,7 +14,7 @@ RSpec.feature "Searching and filtering", type: :feature do
     end
     ten_example_cases[1]["publication_state"] = "live"
     ten_example_cases[1]["state_history"] = { "1" => "published" }
-    ten_example_cases[2]["publication_state"] = "redrafted"
+    ten_example_cases[2]["publication_state"] = "draft"
     ten_example_cases[2]["state_history"] = { "1" => "published", "2" => "unpublished", "3" => "draft" }
     ten_example_cases
   }
