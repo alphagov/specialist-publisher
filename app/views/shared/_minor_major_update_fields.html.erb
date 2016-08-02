@@ -1,4 +1,4 @@
-<% unless document.draft? %>
+<% unless document.first_draft? %>
   <div class="checkbox add-vertical-margins">
     <%= f.radio_button :update_type, :minor, class: 'js-update-type-minor' %>
     <%= f.label :update_type_minor %>

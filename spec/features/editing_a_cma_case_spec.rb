@@ -127,6 +127,94 @@ RSpec.feature "Editing a CMA case", type: :feature do
       assert_publishing_api_put_content(content_id, request_json_includes(changed_json))
     end
 
+    context "when a document already has a change note" do
+      let(:cma_case) do
+        FactoryGirl.create(
+          :cma_case,
+          update_type: "major",
+          first_published_at: "2016-01-01",
+          details: {
+            change_history: [
+              {
+                "public_timestamp" => "2016-01-01T00:00:00+00:00",
+                "note" => "First published."
+              },
+              {
+                "public_timestamp" => "2016-02-02T00:00:00+00:00",
+                "note" => "Some change note"
+              },
+            ]
+          }
+        )
+      end
+
+      it "updates the timestamp on the existing change note" do
+        radio_major = field_labeled("cma_case_update_type_major")
+        expect(radio_major).to be_checked
+
+        expect(page).to have_content("Some change note")
+
+        click_button "Save as draft"
+
+        assert_publishing_api_put_content(content_id, ->(request) {
+          payload = JSON.parse(request.body)
+          change_history = payload.fetch("details").fetch("change_history")
+
+          expect(change_history).to eq [
+            { "public_timestamp" => "2016-01-01T00:00:00+00:00", "note" => "First published." },
+            { "public_timestamp" => "2015-12-03T16:59:13+00:00", "note" => "Some change note" }
+          ]
+        })
+      end
+    end
+
+    context "when the document has a temporary update type" do
+      let(:cma_case) do
+        FactoryGirl.create(
+          :cma_case,
+          update_type: "minor",
+          first_published_at: "2016-01-01",
+          details: {
+            temporary_update_type: true,
+            change_history: [
+              {
+                "public_timestamp" => "2015-01-01T00:00:00+00:00",
+                "note" => "First published."
+              },
+              {
+                "public_timestamp" => "2015-02-02T00:00:00+00:00",
+                "note" => "Some change note"
+              },
+            ]
+          }
+        )
+      end
+
+      it "appends to the change history, rather than updating the last item" do
+        radio_minor = field_labeled("cma_case_update_type_minor")
+        radio_major = field_labeled("cma_case_update_type_major")
+
+        expect(radio_minor).not_to be_checked
+        expect(radio_major).not_to be_checked
+
+        choose "Update type major"
+        fill_in "Change note", with: "New change note"
+
+        click_button "Save as draft"
+
+        assert_publishing_api_put_content(content_id, ->(request) {
+          payload = JSON.parse(request.body)
+          change_history = payload.fetch("details").fetch("change_history")
+
+          expect(change_history).to eq [
+            { "public_timestamp" => "2015-01-01T00:00:00+00:00", "note" => "First published." },
+            { "public_timestamp" => "2015-02-02T00:00:00+00:00", "note" => "Some change note" },
+            { "public_timestamp" => "2015-12-03T16:59:13+00:00", "note" => "New change note" }
+          ]
+        })
+      end
+    end
+
     context "a bulk published document" do
       scenario "the 'bulk published' flag isn't lost after an update" do
         expect(cma_case["details"]["metadata"]["bulk_published"]).to be_truthy
@@ -316,64 +404,62 @@ RSpec.feature "Editing a CMA case", type: :feature do
     end
   end
 
-  %i(unpublished).each do |publication_state|
-    context "a #{publication_state} document" do
-      let(:cma_case) {
-        FactoryGirl.create(
-          :cma_case,
-          publication_state,
-          title: "Example CMA Case",
-          details: {},
-          state_history: { "1" => "published", "2" => publication_state.to_s, "3" => "draft" }
-        )
-      }
+  context "an unpublished document" do
+    let(:cma_case) {
+      FactoryGirl.create(
+        :cma_case,
+        :unpublished,
+        title: "Example CMA Case",
+        details: {},
+        state_history: { "1" => "published", "2" => "unpublished", "3" => "draft" }
+      )
+    }
 
-      scenario "showing the update type radio buttons" do
-        within(".new_cma_case") do
-          expect(page).to have_content('Only use for minor changes like fixes to typos, links, GOV.UK style or metadata.')
-          expect(page).to have_content('This will notify subscribers to ')
-          expect(page).to have_content('Update type minor')
-          expect(page).to have_content('Update type major')
-        end
-      end
-
-      scenario "insisting that an update type is chosen" do
-        click_button "Save as draft"
-
-        expect(page).to have_content("Please fix the following errors")
-        expect(page).to have_content("Update type can't be blank")
-
-        expect(page.status_code).to eq(422)
-      end
-
-      scenario "updating the title does not update the base path" do
-        fill_in "Title", with: "New title"
-        choose "Update type minor"
-        click_button "Save as draft"
-        changed_json = {
-          "title" => "New title",
-          "update_type" => "minor",
-          "base_path" => "/cma-cases/example-document"
-        }
-        assert_publishing_api_put_content(content_id, request_json_includes(changed_json))
+    scenario "showing the update type radio buttons" do
+      within(".new_cma_case") do
+        expect(page).to have_content('Only use for minor changes like fixes to typos, links, GOV.UK style or metadata.')
+        expect(page).to have_content('This will notify subscribers to ')
+        expect(page).to have_content('Update type minor')
+        expect(page).to have_content('Update type major')
       end
     end
 
-    context "a draft document" do
-      scenario "not showing the update type radio buttons" do
-        within(".new_cma_case") do
-          expect(page).not_to have_content('Only use for minor changes like fixes to typos, links, GOV.UK style or metadata.')
-          expect(page).not_to have_content('This will notify subscribers to ')
-          expect(page).not_to have_content('Update type minor')
-          expect(page).not_to have_content('Update type major')
-        end
-      end
+    scenario "insisting that an update type is chosen" do
+      click_button "Save as draft"
 
-      scenario "saving the document without an update type" do
-        click_button "Save as draft"
-        expect(page).to have_content("Updated Example CMA Case")
-        expect(page.status_code).to eq(200)
+      expect(page).to have_content("Please fix the following errors")
+      expect(page).to have_content("Update type can't be blank")
+
+      expect(page.status_code).to eq(422)
+    end
+
+    scenario "updating the title does not update the base path" do
+      fill_in "Title", with: "New title"
+      choose "Update type minor"
+      click_button "Save as draft"
+      changed_json = {
+        "title" => "New title",
+        "update_type" => "minor",
+        "base_path" => "/cma-cases/example-document"
+      }
+      assert_publishing_api_put_content(content_id, request_json_includes(changed_json))
+    end
+  end
+
+  context "a draft document" do
+    scenario "not showing the update type radio buttons" do
+      within(".new_cma_case") do
+        expect(page).not_to have_content('Only use for minor changes like fixes to typos, links, GOV.UK style or metadata.')
+        expect(page).not_to have_content('This will notify subscribers to ')
+        expect(page).not_to have_content('Update type minor')
+        expect(page).not_to have_content('Update type major')
       end
+    end
+
+    scenario "saving the document without an update type" do
+      click_button "Save as draft"
+      expect(page).to have_content("Updated Example CMA Case")
+      expect(page.status_code).to eq(200)
     end
   end
 end

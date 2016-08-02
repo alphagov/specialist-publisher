@@ -12,6 +12,8 @@ RSpec.feature "Publishing a CMA case", type: :feature do
     publishing_api_has_content([item], hash_including(document_type: CmaCase.document_type))
     publishing_api_has_item(item)
 
+    stub_any_publishing_api_put_content
+    stub_any_publishing_api_patch_links
     stub_publishing_api_publish(content_id, {})
     stub_any_rummager_post_with_queueing_enabled
     email_alert_api_accepts_alert
@@ -42,9 +44,6 @@ RSpec.feature "Publishing a CMA case", type: :feature do
     }
 
     scenario "from the index" do
-      stub_any_publishing_api_put_content
-      stub_any_publishing_api_patch_links
-
       visit "/cma-cases"
       expect(page.status_code).to eq(200)
 
@@ -122,11 +121,15 @@ RSpec.feature "Publishing a CMA case", type: :feature do
 
   context "when there is a redrafted document with a major update" do
     let(:item) {
-      FactoryGirl.create(:cma_case,
-        :published,
+      FactoryGirl.create(
+        :cma_case,
+        :redrafted,
         title: "Major Update Case",
-        update_type: "major",
-        publication_state: "redrafted")
+        change_history: [
+          { "public_timestamp" => "2016-01-01T00:00:00+00:00", "note" => "First published." },
+          { "public_timestamp" => "2016-02-02T00:00:00+00:00", "note" => "Some change note" },
+        ]
+      )
     }
 
     scenario "publish warning and popup text will indicate that it is a major edit" do
@@ -153,35 +156,34 @@ RSpec.feature "Publishing a CMA case", type: :feature do
       expect(page.status_code).to eq(200)
 
       click_link "Edit document"
-      fill_in "Title", with: "Changed title"
 
+      fill_in "Title", with: "Changed title"
       choose "Update type major"
-      fill_in "Change note", with: "This is a change note for a major update to redrafted document."
+      fill_in "Change note", with: "Updated change note"
+
       click_button "Save as draft"
 
-      expected_change_history = item['details']['change_history'] + [
-          {
-              "public_timestamp" => Time.current.iso8601,
-              "note" => "This is a change note for a major update to redrafted document.",
-          }
-      ]
+      assert_publishing_api_put_content(content_id, ->(request) {
+        payload = JSON.parse(request.body)
 
-      changed_json = {
-          "title" => "Changed title",
-          "update_type" => "major",
-          "details" => item["details"].merge("change_history" => expected_change_history),
-      }
-      assert_publishing_api_put_content(content_id, request_json_includes(changed_json))
+        expect(payload["title"]).to eq("Changed title")
+        expect(payload["update_type"]).to eq("major")
+        expect(payload["details"]["change_history"]).to eq([
+          { "public_timestamp" => "2016-01-01T00:00:00+00:00", "note" => "First published." },
+          { "public_timestamp" => Time.zone.now.iso8601, "note" => "Updated change note" },
+        ])
+      })
     end
   end
 
   context "when there is a redrafted document with a minor update" do
     let(:item) {
-      FactoryGirl.create(:cma_case,
-        :published,
+      FactoryGirl.create(
+        :cma_case,
+        :redrafted,
         title: "Minor Update Case",
         update_type: "minor",
-        publication_state: "redrafted")
+      )
     }
 
     scenario "alerts should not be sent when the item is published" do
@@ -221,7 +223,8 @@ RSpec.feature "Publishing a CMA case", type: :feature do
 
   context "when the document is unpublished" do
     let(:item) {
-      FactoryGirl.create(:cma_case,
+      FactoryGirl.create(
+        :cma_case,
         :published,
         title: "Unpublished Item",
         publication_state: "unpublished")

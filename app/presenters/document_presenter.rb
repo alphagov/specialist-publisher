@@ -37,7 +37,7 @@ private
     {
       body: GovspeakPresenter.new(@document).present,
       metadata: metadata,
-      change_history: document.change_history,
+      change_history: document.change_history.as_json,
       max_cache_time: 10,
       temporary_update_type: document.temporary_update_type,
     }.tap do |details_hash|

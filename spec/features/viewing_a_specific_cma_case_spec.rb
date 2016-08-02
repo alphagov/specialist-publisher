@@ -154,21 +154,21 @@ RSpec.feature "Viewing a specific case", type: :feature do
                           ),
         FactoryGirl.create(:cma_case,
           title: "Example Published with new draft",
-          publication_state: "redrafted",
+          publication_state: "draft",
           state_history: {
             "1" => "published",
             "2" => "draft"
           }),
         FactoryGirl.create(:cma_case,
           title: "Example Unpublished with new draft",
-          publication_state: "redrafted",
+          publication_state: "draft",
           state_history: {
             "1" => "unpublished",
             "2" => "draft"
           }),
         FactoryGirl.create(:cma_case,
           title: "More states",
-          publication_state: "redrafted",
+          publication_state: "draft",
           state_history: {
             "1" => "unpublished",
             "2" => "published",
