@@ -70,6 +70,15 @@ RSpec.describe AttachmentsController, type: :controller do
       expect(document.attachments.count).to eq(3)
       expect(response).to redirect_to(edit_document_path(document_type_slug: document_type_slug, content_id: document_content_id))
     end
+
+    it "shows an error if no attachment is uploaded" do
+      document = CmaCase.find(document_content_id)
+      allow_any_instance_of(AttachmentsController).to receive(:fetch_document).and_return(document)
+
+      post :create, document_type_slug: document_type_slug, document_content_id: document_content_id, attachment: nil
+
+      expect(response).to redirect_to(new_document_attachment_path(document_type_slug: document_type_slug))
+    end
   end
 
   describe "GET edit" do
