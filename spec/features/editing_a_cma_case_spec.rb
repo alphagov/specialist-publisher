@@ -358,6 +358,24 @@ RSpec.feature "Editing a CMA case", type: :feature do
         expect(page).to have_content("Editing Example CMA Case")
       end
 
+      scenario "adding a nil attachment on a #{publication_state} CMA case" do
+        # this is to force app to not update asset manager on invalid error
+        stub_request(:post, "#{Plek.find('asset-manager')}/assets")
+          .with(body: %r{.*})
+          .to_return(body: asset_manager_response.to_json, status: 500)
+
+        click_link "Add attachment"
+        expect(page.status_code).to eq(200)
+
+        fill_in "Title", with: "Updated cma case image"
+
+        click_button("Save attachment")
+
+        expect(page.status_code).to eq(200)
+        expect(page).to have_content("Adding an attachment failed. Please make sure you have uploaded an attachment")
+      end
+
+
       scenario "editing an attachment on a #{publication_state} CMA case" do
         find('.attachments').first(:link, "edit").click
         expect(page.status_code).to eq(200)
