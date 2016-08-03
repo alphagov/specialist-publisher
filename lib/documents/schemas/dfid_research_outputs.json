@@ -13,9 +13,7 @@
   "organisations": [
     "db994552-7644-404d-a770-a2fe659c661f"
   ],
-  "topics": [
-    "some/dummy-topic"
-  ],
+  "subscription_list_title_prefix": "Research for Development output",
   "document_noun": "output",
   "facets": [
     {
