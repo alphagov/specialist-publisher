@@ -230,6 +230,7 @@ RSpec.feature "Editing a CMA case", type: :feature do
         click_link "Add attachment"
         expect(page.status_code).to eq(200)
 
+        expect(page).to have_link("Your documents", href: "/cma-cases")
         fill_in "Title", with: "New cma case image"
         page.attach_file('attachment_file', "spec/support/images/cma_case_image.jpg")
 
