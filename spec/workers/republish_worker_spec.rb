@@ -19,10 +19,10 @@ RSpec.describe RepublishWorker do
     publishing_api_has_item(document)
   end
 
-  %w(draft redrafted).each do |publication_state|
+  %i(draft redrafted).each do |publication_state|
     context "when the publication_state is '#{publication_state}'" do
       let(:document) {
-        FactoryGirl.create(:cma_case, publication_state: publication_state)
+        FactoryGirl.create(:cma_case, publication_state)
       }
 
       it "sends the document to the publishing api" do

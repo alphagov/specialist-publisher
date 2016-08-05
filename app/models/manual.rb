@@ -25,14 +25,14 @@ class Manual
     @base_path ||= "/guidance/#{title.parameterize}"
   end
 
-  %w{draft live redrafted}.each do |state|
+  %w{draft live}.each do |state|
     define_method("#{state}?") do
       publication_state == state
     end
   end
 
   def published?
-    live? || redrafted?
+    live?
   end
 
   def updated_at

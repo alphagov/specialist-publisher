@@ -379,7 +379,7 @@ RSpec.describe Document do
     end
 
     context 'when document is in redrafted state' do
-      let(:publication_state) { 'redrafted' }
+      let(:publication_state) { 'draft' }
       it_behaves_like 'publishing changes to a document that has previously been published'
     end
 

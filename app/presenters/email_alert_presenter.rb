@@ -87,11 +87,7 @@ private
   end
 
   def redrafted?
-    document.publication_state == "redrafted" || redrafted_check
-  end
-
-  def redrafted_check
-    document.publication_state == "draft" && !document.first_draft?
+    document.draft? && !document.first_draft?
   end
 
   def extra_options
