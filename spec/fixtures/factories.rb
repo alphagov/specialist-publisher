@@ -117,9 +117,28 @@ FactoryGirl.define do
       change_history do
         [
           {
-            'published_timestamp' => Time.current.iso8601,
-            'note' => Document::FIRST_PUBLISHED_NOTE
+            'public_timestamp' => Time.current.iso8601,
+            'note' => "First published.",
           }
+        ]
+      end
+    end
+
+    trait :redrafted do
+      state_history {
+        { "2": "draft", "1": "published" }
+      }
+
+      publication_state 'draft'
+      first_published_at "2015-11-15T00:00:00+00:00"
+
+      update_type "major"
+      change_history do
+        [
+            {
+                'public_timestamp' => Time.current.iso8601,
+                'note' => "First published.",
+            },
         ]
       end
     end
@@ -134,8 +153,8 @@ FactoryGirl.define do
       change_history do
         [
           {
-            'published_timestamp' => Time.current.iso8601,
-            'note' => Document::FIRST_PUBLISHED_NOTE
+            'public_timestamp' => Time.current.iso8601,
+            'note' => "First published.",
           }
         ]
       end
