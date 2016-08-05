@@ -33,3 +33,9 @@
 <%= render layout: 'shared/form_group', locals: { f: f, field: :first_published_at, label: 'First published at' } do %>
   <%= f.text_field :first_published_at, placeholder: '2012-04-23', class: 'form-control' %>
 <% end %>
+
+<%= render layout: 'shared/form_group', locals: { f: f, field: :dfid_review_status, label: 'Review status' } do %>
+  <%= f.select :dfid_review_status, facet_options(f, :dfid_review_status),
+    {},
+    { class: 'form-control' } %>
+<% end %>
