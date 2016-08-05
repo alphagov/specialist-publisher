@@ -285,6 +285,24 @@ FactoryGirl.define do
     end
   end
 
+  factory :international_development_fund, parent: :document do
+    base_path "/international-development-funding/example-document"
+    document_type "international_development_fund"
+
+    transient do
+      default_metadata {
+        {
+          "fund_state" => "open",
+          "location" => ["ghana"],
+          "development_sector" => ["climate-change"],
+          "eligible_entities" => ["non-governmental-organisations"],
+          "value_of_funding" => ["up-to-100000"],
+          "document_type" => "international_development_fund",
+        }
+      }
+    end
+  end
+
   factory :maib_report, parent: :document do
     base_path "/maib-reports/example-document"
     document_type "maib_report"
