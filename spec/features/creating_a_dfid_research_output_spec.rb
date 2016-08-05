@@ -33,7 +33,6 @@ RSpec.feature "Creating a DFID Research Output", type: :feature do
     fill_in "First published at", with: "2013-01-01"
     select "Book Chapter", from: "Document type"
     select "Infrastructure", from: "Themes"
-    select "Peer reviewed", from: "Review status"
 
     click_button "Save as draft"
     assert_publishing_api_put_content(content_id)
