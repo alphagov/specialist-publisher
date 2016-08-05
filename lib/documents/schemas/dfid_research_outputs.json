@@ -981,25 +981,6 @@
       "type": "text",
       "display_as_result_metadata": true,
       "filterable": false
-    },
-    {
-      "key": "dfid_review_status",
-      "name": "Review Status",
-      "short_name": "Review Status",
-      "type": "text",
-      "preposition": "with review status",
-      "display_as_result_metadata": false,
-      "filterable": false,
-      "allowed_values": [
-        {
-          "value": "unreviewed",
-          "label": "Unreviewed"
-        },
-        {
-          "value": "peer_reviewed",
-          "label": "Peer reviewed"
-        }
-      ]
     }
   ]
 }
