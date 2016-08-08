@@ -1,10 +1,13 @@
 <%= form_for(@attachment, :url => url, method: method) do |f| %>
+  <p>
     <%= f.label :title %>
     <%= f.text_field :title, class: 'form-control input-md-8' %>
-
-    <%= f.label :image %>
+  </p>
+  <p>
+    <%= f.label :file %>
     <%= f.file_field :file %>
-    <div class='actions'>
-      <button type="submit" class='btn btn-success'>Save attachment</button>
-    </div>
+  </p>
+  <div class='actions'>
+    <button type="submit" class='btn btn-success'>Save attachment</button>
+  </div>
 <% end %>
