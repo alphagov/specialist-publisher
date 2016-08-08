@@ -292,7 +292,7 @@ RSpec.describe Document do
         MyDocumentType.from_publishing_api(
           FactoryGirl.create(:document,
             payload_attributes.merge(
-              publication_state: 'live',
+              publication_state: 'published',
               update_type: 'minor',
               content_id: document.content_id
             ))
@@ -374,7 +374,7 @@ RSpec.describe Document do
     end
 
     context "when document is in live state" do
-      let(:publication_state) { 'live' }
+      let(:publication_state) { 'published' }
       it_behaves_like 'publishing changes to a document that has previously been published'
     end
 

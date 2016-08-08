@@ -1,6 +1,6 @@
 <h1 class="page-header"><%= document.title %>
   <ul class='document-slug'>
-    <li title='<% if !document.live? %>When published this document will appear at this URL<% end %>'>
+    <li title='<% if !document.published? %>When published this document will appear at this URL<% end %>'>
       <%= document.base_path %>
     </li>
     <% if show_view_on_website_link?(document.state_history) %>
@@ -9,5 +9,5 @@
     <% if show_preview_draft_link?(document.state_history) %>
       <li><%= preview_draft_link_for(document) %></li>
     <% end %>
-  </li>
+  </ul>
 </h1>

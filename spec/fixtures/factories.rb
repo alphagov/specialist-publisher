@@ -108,7 +108,7 @@ FactoryGirl.define do
     end
 
     trait :published do
-      publication_state 'live'
+      publication_state 'published'
       first_published_at "2015-11-15T00:00:00+00:00"
       state_history {
         { "1": "published" }

@@ -17,7 +17,7 @@ class ActionsPresenter
   end
 
   def publish_text
-    if state == "live"
+    if state == "published"
       text = "<p>There are no changes to publish.</p>"
     elsif state == "unpublished"
       text = "<p>The document is unpublished. You need to create a new draft before it can be published.</p>"
@@ -48,7 +48,7 @@ class ActionsPresenter
   end
 
   def unpublish_button_visible?
-    policy.unpublish? && state == "live"
+    policy.unpublish? && state == "published"
   end
 
   def unpublish_text
@@ -60,7 +60,7 @@ class ActionsPresenter
       text = "<p>The document is already unpublished.</p>"
     elsif !policy.unpublish?
       text = "<p>You don't have permission to unpublish this document.</p>"
-    elsif state == "live"
+    elsif state == "published"
       text = "<p>The document will be removed from the site. It will still be possible to edit and publish a new version.</p>"
     else
       raise ArgumentError, "Unrecognised state: '#{state}'"

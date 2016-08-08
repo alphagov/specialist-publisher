@@ -14,7 +14,7 @@ RSpec.feature "Unpublishing a CMA Case", type: :feature do
     let(:item) {
       FactoryGirl.create(:cma_case,
         title: "Example CMA Case",
-        publication_state: "live")
+        publication_state: "published")
     }
 
     scenario "clicking the unpublish button redirects back to the show page" do
@@ -40,7 +40,7 @@ RSpec.feature "Unpublishing a CMA Case", type: :feature do
     let(:item) {
       FactoryGirl.create(:cma_case,
         title: "Example CMA Case",
-        publication_state: "live")
+        publication_state: "published")
     }
 
     scenario "clicking the unpublish button shows an error message" do

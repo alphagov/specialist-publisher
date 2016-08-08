@@ -52,7 +52,7 @@ RSpec.describe RepublishWorker do
     end
   end
 
-  context "when the document is live" do
+  context "when the document is published" do
     let(:document) {
       FactoryGirl.create(:cma_case, :published)
     }

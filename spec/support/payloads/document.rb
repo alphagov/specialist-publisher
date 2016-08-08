@@ -44,7 +44,7 @@ module Payloads
       "phase" => "live",
       "update_type" => "major",
       "need_ids" => [],
-      "publication_state" => "live",
+      "publication_state" => "published",
       "live_version" => 2,
       "version" => 2
     }.merge(attr)
@@ -92,7 +92,7 @@ module Payloads
         "phase" => "live",
         "update_type" => "major",
         "need_ids" => [],
-        "publication_state" => "live",
+        "publication_state" => "published",
         "live_version" => 2,
         "version" => 2
       },
@@ -139,7 +139,7 @@ module Payloads
         "phase" => "live",
         "update_type" => "major",
         "need_ids" => [],
-        "publication_state" => "live",
+        "publication_state" => "published",
         "live_version" => 2,
         "version" => 2
       },

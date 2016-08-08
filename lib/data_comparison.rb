@@ -33,7 +33,7 @@ module_function
       return
     end
 
-    if document.live?
+    if document.published?
       puts "Publishing document"
       document.publish
     elsif document.unpublished?

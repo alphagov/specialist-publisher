@@ -11,7 +11,7 @@ class RepublishWorker
       return
     end
 
-    if document.publication_state == "live"
+    if document.publication_state == "published"
       document.update_type = "republish"
 
       publishing_api_put_content(document)
@@ -27,7 +27,7 @@ class RepublishWorker
 private
 
   def safe_to_republish?(document)
-    %w(draft live).include?(document.publication_state)
+    %w(draft published).include?(document.publication_state)
   end
 
   def print_limitations_of_republishing(document)
