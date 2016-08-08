@@ -17,7 +17,7 @@ Publishing App for Specialist Documents and Manuals.
 * [AAIB Reports](https://www.gov.uk/aaib-reports)
 * [CMA Cases](https://www.gov.uk/cma-cases)
 * [Countryside Stewardship Grants](https://www.gov.uk/countryside-stewardship-grants)
-* [International Development Funds](https://www.gov.uk/international-development-funds)
+* [International Development Funds](https://www.gov.uk/international-development-funding)
 * [Drug Safety Update](https://www.gov.uk/drug-safety-updates)
 * [ESI Funds](https://www.gov.uk/esi-funds)
 * [Medical Safety Alerts](https://www.gov.uk/drug-device-alerts)
