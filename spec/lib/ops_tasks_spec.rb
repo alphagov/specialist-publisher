@@ -34,7 +34,7 @@ RSpec.describe OpsTasks do
   describe "#set_public_updated_at" do
     describe "when the document is live" do
       let(:payload) {
-        FactoryGirl.create(:cma_case, publication_state: "live")
+        FactoryGirl.create(:cma_case, publication_state: "published")
       }
 
       before do

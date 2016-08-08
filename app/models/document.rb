@@ -92,7 +92,7 @@ class Document
     "live"
   end
 
-  %w{live superseded unpublished}.each do |state|
+  %w{published superseded unpublished}.each do |state|
     define_method("#{state}?") do
       publication_state == state
     end
@@ -180,7 +180,7 @@ class Document
     if document.temporary_update_type?
       document.update_type = nil
       document.temporary_update_type = false
-    elsif document.live? || document.unpublished?
+    elsif document.published? || document.unpublished?
       document.update_type = nil
     elsif document.first_draft?
       document.update_type = 'major'

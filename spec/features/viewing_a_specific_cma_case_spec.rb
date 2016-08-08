@@ -144,7 +144,7 @@ RSpec.feature "Viewing a specific case", type: :feature do
                           ),
         FactoryGirl.create(:cma_case,
           title: "Example Published",
-          publication_state: "live",
+          publication_state: "published",
           state_history: { "1" => "published" }
                           ),
         FactoryGirl.create(:cma_case,
@@ -176,7 +176,7 @@ RSpec.feature "Viewing a specific case", type: :feature do
           }),
         FactoryGirl.create(:cma_case,
           title: "More states Published",
-          publication_state: "live",
+          publication_state: "published",
           state_history: {
             "1" => "unpublished",
             "2" => "published"

@@ -23,7 +23,7 @@ module_function
     document.update_type = "republish"
 
     state = document.publication_state
-    raise_helpful_error(state) unless state == "live"
+    raise_helpful_error(state) unless state == "published"
 
     payload = DocumentPresenter.new(document).to_json
     payload.merge!("public_updated_at" => timestamp)
