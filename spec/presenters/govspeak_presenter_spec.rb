@@ -72,6 +72,35 @@ RSpec.describe GovspeakPresenter do
 
         expect(presented_html).to eq(expected_html)
       end
+
+      context "when the html uses spaces instead of underscores for InlineAttachment" do
+        let(:payload) {
+          FactoryGirl.create(:cma_case,
+            details: {
+              body: [{
+                "content_type" => "text/govspeak",
+                "content" => "[InlineAttachment:asylum support image.jpg]",
+              }],
+              attachments: [
+                {
+                  "content_id" => "77f2d40e-3853-451f-9ca3-a747e8402e34",
+                  "url" => "https://assets.digital.cabinet-office.gov.uk/media/513a0efbed915d425e000002/asylum_support_image.jpg",
+                  "content_type" => "application/jpeg",
+                  "title" => "asylum report image title",
+                  "created_at" => "2015-12-03T16:59:13+00:00",
+                  "updated_at" => "2015-12-03T16:59:13+00:00"
+                },
+              ]
+            })
+        }
+
+        it "expands the attachment snippet to an html link" do
+          presented_html = presented_data.find { |r| r[:content_type] == "text/html" }[:content]
+          expected_html = "<p><a rel=\"external\" href=\"https://assets.digital.cabinet-office.gov.uk/media/513a0efbed915d425e000002/asylum_support_image.jpg\">asylum report image title</a></p>\n"
+
+          expect(presented_html).to eq(expected_html)
+        end
+      end
     end
   end
 end

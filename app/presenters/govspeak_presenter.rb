@@ -23,9 +23,17 @@ private
   end
 
   def govspeak_body_with_expanded_attachment_links
-    document.attachments.reduce(govspeak_body) { |body, attachment|
-      body.gsub(attachment.snippet, attachment_markdown(attachment))
+    body = replace_spaces_with_underscores_for_attachments(govspeak_body)
+
+    document.attachments.reduce(body) { |b, attachment|
+      b.gsub(attachment.snippet, attachment_markdown(attachment))
     }
+  end
+
+  def replace_spaces_with_underscores_for_attachments(string)
+    string.gsub(/\[InlineAttachment(.*?)\]/) do |attachment_snippet|
+      attachment_snippet.gsub(/\s/, "_")
+    end
   end
 
   def attachment_markdown(attachment)
