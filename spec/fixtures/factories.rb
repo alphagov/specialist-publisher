@@ -386,7 +386,7 @@ FactoryGirl.define do
     end
   end
 
-  factory :utaac_decisions, parent: :document do
+  factory :utaac_decision, parent: :document do
     base_path "/administrative-appeals-tribunal-decisions/example-document"
     document_type "utaac_decision"
 
@@ -394,11 +394,11 @@ FactoryGirl.define do
       default_metadata {
         {
             "tribunal_decision_categories" => ["Benefits for children"],
-            "tribunal_decision_decision_date" => ["2016-01-01"],
+            "tribunal_decision_decision_date" => "2016-01-01",
             "tribunal_decision_judges" => ["angus-r"],
             "tribunal_decision_sub_categories" => ["benefits-for-children-benefit-increases-for-children"],
             "document_type" => "utaac_decision",
-            "indexable_content" => "???"
+            "hidden_indexable_content" => "???"
         }
       }
     end
