@@ -51,6 +51,7 @@ private
       MedicalSafetyAlert,
       RaibReport,
       TaxTribunalDecision,
+      UtaacDecision,
       VehicleRecallsAndFaultsAlert,
     ]
   end
