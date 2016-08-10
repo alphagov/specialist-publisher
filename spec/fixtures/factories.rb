@@ -386,6 +386,24 @@ FactoryGirl.define do
     end
   end
 
+  factory :utaac_decisions, parent: :document do
+    base_path "/administrative-appeals-tribunal-decisions/example-document"
+    document_type "utaac_decision"
+
+    transient do
+      default_metadata {
+        {
+            "tribunal_decision_categories" => ["Benefits for children"],
+            "tribunal_decision_decision_date" => ["2016-01-01"],
+            "tribunal_decision_judges" => ["angus-r"],
+            "tribunal_decision_sub_categories" => ["benefits-for-children-benefit-increases-for-children"],
+            "document_type" => "utaac_decision",
+            "indexable_content" => "???"
+        }
+      }
+    end
+  end
+
   factory :vehicle_recalls_and_faults_alert, parent: :document do
     base_path "/vehicle-recalls-faults/example-document"
     document_type "vehicle_recalls_and_faults_alert"
