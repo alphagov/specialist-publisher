@@ -182,6 +182,26 @@ FactoryGirl.define do
     end
   end
 
+  factory :asylum_support_decision, parent: :document do
+    base_path "/asylum-support-tribunal-decisions/example-document"
+    document_type "asylum_support_decision"
+
+    transient do
+      default_metadata {
+        {
+          "hidden_indexable_content" => "some hidden content",
+          "tribunal_decision_category" => "section-95-support-for-asylum-seekers",
+          "tribunal_decision_decision_date" => "2015-10-10",
+          "tribunal_decision_judges" => ["bayati-c"],
+          "tribunal_decision_landmark" => "not-landmark",
+          "tribunal_decision_reference_number" => "1234567890",
+          "tribunal_decision_sub_category" => "section-95-destitution",
+          "document_type" => "asylum_support_decision",
+        }
+      }
+    end
+  end
+
   factory :cma_case, parent: :document do
     base_path "/cma-cases/example-document"
     document_type "cma_case"
