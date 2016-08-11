@@ -38,6 +38,7 @@ private
   def document_models
     [
       AaibReport,
+      AsylumSupportDecision,
       CmaCase,
       CountrysideStewardshipGrant,
       DfidResearchOutput,
