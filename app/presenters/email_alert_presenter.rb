@@ -49,6 +49,7 @@ private
   def org_title
     {
       "aaib_report" => "Air Accidents Investigation Branch reports",
+      "asylum_support_decision" => "Asylum Support Decision",
       "cma_case" => "Competition and Markets Authority cases",
       "countryside_stewardship_grant" => "Countryside Stewardship Grants",
       "employment_appeal_tribunal_decision" => "Employment appeal tribunal decisions",
@@ -66,6 +67,7 @@ private
   def document_noun
     {
       "aaib_report" => "report",
+      "asylum_support_decision" => "decision",
       "cma_case" => "case",
       "countryside_stewardship_grant" => "grant",
       "employment_appeal_tribunal_decision" => "decision",
