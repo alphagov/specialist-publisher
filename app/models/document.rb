@@ -92,14 +92,16 @@ class Document
     "live"
   end
 
-  %w{published superseded unpublished}.each do |state|
-    define_method("#{state}?") do
-      publication_state == state
-    end
-  end
-
   def draft?
     publication_state == "draft" || publication_state.nil?
+  end
+
+  def published?
+    publication_state == "published"
+  end
+
+  def unpublished?
+    publication_state == "unpublished"
   end
 
   def first_draft?
