@@ -91,9 +91,22 @@ RSpec.feature "Creating a Employment appeal tribunal decision", type: :feature d
       log_in_as_editor(:gds_editor)
     end
 
-    scenario "with valid data" do
-      visit "/eat-decisions/new"
-      expect(page.current_path).to eq("/manuals")
+    context "when logged in as an editor" do
+      before { log_in_as_editor(:editor) }
+
+      scenario "not seeing pre-production formats" do
+        visit "/eat-decisions/new"
+        expect(page.current_path).to eq("/manuals")
+      end
+    end
+
+    context "when logged in as a gds_editor" do
+      before { log_in_as_editor(:gds_editor) }
+
+      scenario "seeing pre-production formats" do
+        visit "/eat-decisions/new"
+        expect(page.current_path).to eq("/eat-decisions/new")
+      end
     end
   end
 end
