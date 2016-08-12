@@ -16,7 +16,10 @@ class DocumentPolicy < ApplicationPolicy
   alias_method :unpublish?, :publish?
 
   def environment_restricted_formats
-    Rails.env.development? ? [] : PRE_PRODUCTION
+    return [] if gds_editor?
+    return [] if Rails.env.development?
+
+    PRE_PRODUCTION
   end
 
   def restricted_by_environment?
@@ -36,6 +39,6 @@ class DocumentPolicy < ApplicationPolicy
   end
 
   def gds_editor?
-    !restricted_by_environment? && user.gds_editor?
+    user.gds_editor?
   end
 end
