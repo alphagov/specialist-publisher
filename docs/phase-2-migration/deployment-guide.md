@@ -1,4 +1,4 @@
-# Process for Deploying a Finder to V2
+## Deployment guide
 
 After following this process, a specified finder would be served from v2 `specialist-publisher` as opposed to v1.
 
@@ -51,7 +51,7 @@ modified_paths => {
 
 ##### Load Balancers
 
-* Run `govuk_puppet --test` on the load balancers: 
+* Run `govuk_puppet --test` on the load balancers:
 
 Within `ssh backend-lb-1.backend.integration` run `govuk_puppet --test`
 
@@ -60,6 +60,3 @@ and
 Within `ssh backend-lb-2.backend.integration` run `govuk_puppet --test`
 
 * Console output should display that there has been a location change for `/raib-reports`
-
-
-
