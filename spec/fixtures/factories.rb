@@ -9,6 +9,7 @@ FactoryGirl.define do
     end
   end
 
+  # Editor factories:
   factory :editor, parent: :user do
     permissions %w(signin editor)
   end
@@ -24,10 +25,9 @@ FactoryGirl.define do
     organisation_content_id "957eb4ec-089b-4f71-ba2a-dc69ac8919ea"
   end
 
-  factory :writer, aliases: [:cma_writer], parent: :editor do
-    organisation_slug "competition-and-markets-authority"
-    organisation_content_id "957eb4ec-089b-4f71-ba2a-dc69ac8919ea"
-    permissions %w(signin)
+  factory :moj_editor, parent: :editor do
+    organisation_slug "ministry-of-justice"
+    organisation_content_id "dcc907d6-433c-42df-9ffb-d9c68be5dc4d"
   end
 
   factory :aaib_editor, parent: :editor do
@@ -38,6 +38,18 @@ FactoryGirl.define do
   factory :dfid_editor, parent: :editor do
     organisation_slug "department-for-international-development"
     organisation_content_id "db994552-7644-404d-a770-a2fe659c661f"
+  end
+
+  # Writer factories:
+  factory :writer, aliases: [:cma_writer], parent: :editor do
+    organisation_slug "competition-and-markets-authority"
+    organisation_content_id "957eb4ec-089b-4f71-ba2a-dc69ac8919ea"
+    permissions %w(signin)
+  end
+
+  factory :moj_writer, parent: :writer do
+    organisation_slug "ministry-of-justice"
+    organisation_content_id "dcc907d6-433c-42df-9ffb-d9c68be5dc4d"
   end
 
   sequence :content_id do |_|
