@@ -15,16 +15,8 @@ class DocumentPolicy < ApplicationPolicy
 
   alias_method :unpublish?, :publish?
 
-  def environment_restricted_formats
-    gds_editor? ? [] : PRE_PRODUCTION
-  end
-
-  def restricted_by_environment?
-    environment_restricted_formats.include?(document_class.document_type)
-  end
-
   def user_organisation_owns_document_type?
-    document_class.organisations.include?(user.organisation_content_id) && !restricted_by_environment?
+    document_class.organisations.include?(user.organisation_content_id)
   end
 
   def departmental_editor?

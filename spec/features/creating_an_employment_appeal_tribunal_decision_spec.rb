@@ -88,15 +88,27 @@ RSpec.feature "Creating a Employment appeal tribunal decision", type: :feature d
   context 'in production' do
     before do
       allow(Rails.env).to receive(:development?).and_return(false)
-      log_in_as_editor(:gds_editor)
+      stub_any_publishing_api_call
+      publishing_api_has_item(research_output)
     end
 
     context "when logged in as an editor" do
-      before { log_in_as_editor(:editor) }
+      before { log_in_as_editor(:moj_editor) }
 
-      scenario "not seeing pre-production formats" do
+      scenario "seeing pre-production formats" do
         visit "/eat-decisions/new"
-        expect(page.current_path).to eq("/manuals")
+        expect(page.status_code).to eq(200), page.html
+        expect(page.current_path).to eq("/eat-decisions/new")
+      end
+    end
+
+    context "when logged in as a writer" do
+      before { log_in_as_editor(:moj_writer) }
+
+      scenario "seeing pre-production formats" do
+        visit "/eat-decisions/new"
+        expect(page.status_code).to eq(200), page.html
+        expect(page.current_path).to eq("/eat-decisions/new")
       end
     end
 
@@ -105,6 +117,7 @@ RSpec.feature "Creating a Employment appeal tribunal decision", type: :feature d
 
       scenario "seeing pre-production formats" do
         visit "/eat-decisions/new"
+        expect(page.status_code).to eq(200), page.html
         expect(page.current_path).to eq("/eat-decisions/new")
       end
     end
