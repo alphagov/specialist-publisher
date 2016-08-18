@@ -25,5 +25,6 @@
 <% end %>
 
 <div class="actions">
-  <%= link_to("Edit section", edit_manual_section_path(manual_content_id: @section.manual.content_id, content_id: @section.content_id), class: 'action-link') %>
+  <%= link_to("Edit section", edit_manual_section_path(manual_content_id: @section.manual.content_id,
+                                                       content_id: @section.content_id), class: 'action-link') %>
 </div>
