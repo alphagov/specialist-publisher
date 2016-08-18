@@ -64,7 +64,8 @@
           <% if i == truncate_at_count - 1 %>
             <tr class="table-header">
               <td colspan="3" class="js-toggle-target text-center">
-                <strong><a href="#expand-table" class="js-toggle">…and <%= attachments.count - (truncate_at_count - 1) %> more</a></strong>
+                <strong><a href="#expand-table" class="js-toggle">…and
+                          <%= attachments.count - (truncate_at_count - 1) %> more</a></strong>
               </td>
             </tr>
           <% end %>

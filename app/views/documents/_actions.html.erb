@@ -14,7 +14,10 @@
         <%= presenter.publish_text %>
 
         <% if presenter.publish_button_visible? %>
-          <button name="submit" class="btn btn-danger" data-module="confirm" data-message="<%= presenter.publish_alert %>" data-disable-with="Publishing..." >Publish</button>
+          <button name="submit" class="btn btn-danger"
+                  data-module="confirm"
+                  data-message="<%= presenter.publish_alert %>"
+                  data-disable-with="Publishing..." >Publish</button>
         <% end %>
       </div>
     <% end %>
@@ -25,7 +28,10 @@
         <%= presenter.unpublish_text %>
 
         <% if presenter.unpublish_button_visible? %>
-          <button name="submit" class="btn btn-warning" data-module="confirm" data-message="<%= presenter.unpublish_alert %>" data-disable-with="Unpublishing..." >Unpublish document</button>
+          <button name="submit" class="btn btn-warning"
+                  data-module="confirm"
+                  data-message="<%= presenter.unpublish_alert %>"
+                  data-disable-with="Unpublishing..." >Unpublish document</button>
         <% end %>
       </div>
     <% end %>

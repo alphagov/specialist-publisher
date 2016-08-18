@@ -5,16 +5,16 @@ class VehicleRecallsAndFaultsAlert < Document
 
   validate :build_dates
 
-  FORMAT_SPECIFIC_FIELDS = [
-    :fault_type,
-    :faulty_item_type,
-    :alert_issue_date,
-    :manufacturer,
-    :faulty_item_model,
-    :serial_number,
-    :build_start_date,
-    :build_end_date,
-  ]
+  FORMAT_SPECIFIC_FIELDS = %i(
+    fault_type
+    faulty_item_type
+    alert_issue_date
+    manufacturer
+    faulty_item_model
+    serial_number
+    build_start_date
+    build_end_date
+  )
 
   attr_accessor(*FORMAT_SPECIFIC_FIELDS)
 

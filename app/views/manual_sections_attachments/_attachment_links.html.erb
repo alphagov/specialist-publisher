@@ -12,7 +12,8 @@
         <% @section.attachments.each do |attachment| %>
             <li class="attachment">
               <span class="title"><%= attachment.title %></span>
-              <%= link_to "edit", edit_manual_section_attachment_path(@section.manual_content_id, @section.content_id, attachment.content_id) %>
+              <%= link_to "edit", edit_manual_section_attachment_path(@section.manual_content_id,
+                                                                      @section.content_id, attachment.content_id) %>
             </li>
         <% end %>
       </ul>
