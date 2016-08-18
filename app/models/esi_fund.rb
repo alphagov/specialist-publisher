@@ -1,13 +1,13 @@
 class EsiFund < Document
   validates :closing_date, allow_blank: true, date: true
 
-  FORMAT_SPECIFIC_FIELDS = [
-    :fund_state,
-    :fund_type,
-    :location,
-    :funding_source,
-    :closing_date,
-  ]
+  FORMAT_SPECIFIC_FIELDS = %i(
+    fund_state
+    fund_type
+    location
+    funding_source
+    closing_date
+  )
 
   attr_accessor(*FORMAT_SPECIFIC_FIELDS)
 
