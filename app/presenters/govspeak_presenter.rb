@@ -13,7 +13,8 @@ class GovspeakPresenter
   end
 
   def html_body
-    Govspeak::Document.new(govspeak_body_with_expanded_attachment_links).to_html
+    non_external_hosts = %w(www.gov.uk assets.publishing.service.gov.uk)
+    Govspeak::Document.new(govspeak_body_with_expanded_attachment_links, document_domains: non_external_hosts).to_html
   end
 
 private
