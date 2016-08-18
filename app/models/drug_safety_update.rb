@@ -1,7 +1,7 @@
 class DrugSafetyUpdate < Document
-  FORMAT_SPECIFIC_FIELDS = [
-    :therapeutic_area,
-  ]
+  FORMAT_SPECIFIC_FIELDS = %i(
+    therapeutic_area
+  )
 
   attr_accessor(*FORMAT_SPECIFIC_FIELDS)
 

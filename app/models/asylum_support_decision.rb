@@ -6,15 +6,15 @@ class AsylumSupportDecision < Document
   validates :tribunal_decision_reference_number, presence: true
   validates :tribunal_decision_sub_category, presence: true, asylum_support_decision_sub_category: true
 
-  FORMAT_SPECIFIC_FIELDS = [
-      :hidden_indexable_content,
-      :tribunal_decision_category,
-      :tribunal_decision_decision_date,
-      :tribunal_decision_judges,
-      :tribunal_decision_landmark,
-      :tribunal_decision_reference_number,
-      :tribunal_decision_sub_category
-  ]
+  FORMAT_SPECIFIC_FIELDS = %i(
+      hidden_indexable_content
+      tribunal_decision_category
+      tribunal_decision_decision_date
+      tribunal_decision_judges
+      tribunal_decision_landmark
+      tribunal_decision_reference_number
+      tribunal_decision_sub_category
+  )
 
   attr_accessor(*FORMAT_SPECIFIC_FIELDS)
 

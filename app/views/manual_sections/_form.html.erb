@@ -4,7 +4,8 @@
     <%= f.label :title %>
     <%= f.text_field :title, class: 'form-control' %>
     <%= f.label :summary %>
-    <%= f.text_area :summary, class: 'form-control short-textarea js-length-counter', data: { :"count-message-threshold" => 280, :"count-message-selector" => ".summary-length-info" } %>
+    <%= f.text_area :summary, class: 'form-control short-textarea js-length-counter',
+                    data: { :"count-message-threshold" => 280, :"count-message-selector" => ".summary-length-info" } %>
     <div class="summary-length-info" aria-live="polite">
       Summary text should be 280 characters or fewer. <span class="count"></span>
     </div>
