@@ -1,6 +1,9 @@
 class GovspeakPresenter
   attr_accessor :document
 
+  PRODUCTION_HOSTS = %w(www.gov.uk assets.publishing.service.gov.uk)
+  INTEGRATION_HOSTS = %w{www-origin.integration.publishing.service.gov.uk assets.digital.cabinet-office.gov.uk }
+
   def initialize(document)
     @document = document
   end
@@ -13,8 +16,9 @@ class GovspeakPresenter
   end
 
   def html_body
-    non_external_hosts = %w(www.gov.uk assets.publishing.service.gov.uk)
-    Govspeak::Document.new(govspeak_body_with_expanded_attachment_links, document_domains: non_external_hosts).to_html
+    internal_hosts = PRODUCTION_HOSTS + INTEGRATION_HOSTS
+
+    Govspeak::Document.new(govspeak_body_with_expanded_attachment_links, document_domains: internal_hosts).to_html
   end
 
 private
