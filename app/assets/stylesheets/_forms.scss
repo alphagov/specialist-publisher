@@ -69,6 +69,10 @@ form {
     }
   }
 
+  .field_with_errors {
+    display: inline;
+  }
+
   .preview {
     border: 1px solid $border-colour;
     padding: $gutter-half;
