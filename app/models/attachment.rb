@@ -16,7 +16,6 @@ class Attachment < Document
     @url = params[:url]
     @content_id = params[:content_id] || SecureRandom.uuid
     @created_at = params[:created_at]
-    @updated_at = params[:updated_at]
   end
 
   def update_attributes(new_params)
