@@ -137,6 +137,63 @@ RSpec.feature "Creating a CMA case", type: :feature do
     expect(page).to have_content("Body cannot include invalid Govspeak")
   end
 
+  scenario "with a very long title" do
+    visit "/cma-cases/new"
+
+    fill_in "Title", with: "At veroeos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi"
+    fill_in "Summary", with: "This is the summary of an example CMA case"
+    fill_in "Body", with: "## Header" + ("\n\nThis is the long body of an example CMA case" * 2)
+    fill_in "Opened date", with: "2014-01-01"
+    select "Energy", from: "Market sector"
+
+    click_button "Save as draft"
+
+    expected_sent_payload = {
+      "content_id" => SecureRandom.uuid, # this is stubbed in the setup
+      "base_path" => "/cma-cases/at-veroeos-et-accusamus-et-iusto-odio-dignissimos-ducimus-qui-blanditiis-praesentium-voluptatum-deleniti-atque-corrupti-quos-dolores-et-quas-molestias-excepturi-sint-occaecati-cupiditate-non-provident-similique-sunt-in-culpa-qui-officia-de",
+      "title" => "At veroeos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi",
+      "description" => "This is the summary of an example CMA case",
+      "document_type" => "cma_case",
+      "schema_name" => "specialist_document",
+      "publishing_app" => "specialist-publisher",
+      "rendering_app" => "specialist-frontend",
+      "locale" => "en",
+      "phase" => "live",
+      "details" => {
+        "body" => [
+          {
+            "content_type" => "text/govspeak",
+            "content" => "## Header\r\n\r\nThis is the long body of an example CMA case\r\n\r\nThis is the long body of an example CMA case"
+          },
+          {
+             "content_type" => "text/html",
+             "content" => "<h2 id=\"header\">Header</h2>\n\n<p>This is the long body of an example CMA case</p>\n\n<p>This is the long body of an example CMA case</p>\n",
+          }
+        ],
+        "metadata" => {
+          "opened_date" => "2014-01-01",
+          "case_type" => "ca98-and-civil-cartels",
+          "case_state" => "open",
+          "market_sector" => ["energy"],
+          "document_type" => "cma_case"
+        },
+        "change_history" => [],
+        "max_cache_time" => 10,
+        "headers" => [
+          { "text" => "Header", "level" => 2, "id" => "header" }
+        ],
+        "temporary_update_type" => nil,
+      },
+      "routes" => [{ "path" => "/cma-cases/at-veroeos-et-accusamus-et-iusto-odio-dignissimos-ducimus-qui-blanditiis-praesentium-voluptatum-deleniti-atque-corrupti-quos-dolores-et-quas-molestias-excepturi-sint-occaecati-cupiditate-non-provident-similique-sunt-in-culpa-qui-officia-de", "type" => "exact" }],
+      "redirects" => [],
+      "update_type" => "major",
+    }
+    assert_publishing_api_put_content(content_id, expected_sent_payload)
+
+    expect(page.status_code).to eq(200)
+    expect(page).to have_content("At veroeos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi")
+  end
+
   scenario "previewing GovSpeak", js: true do
     visit "/cma-cases/new"
 

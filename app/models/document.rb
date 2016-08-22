@@ -1,6 +1,7 @@
 class Document
   include ActiveModel::Model
   include ActiveModel::Validations
+  include ActionView::Helpers::TextHelper
   include PublishingHelper
 
   attr_accessor(
@@ -74,6 +75,7 @@ class Document
     else
       @base_path
     end
+    truncate(@base_path, length: 250, omission: "")
   end
 
   def document_type
