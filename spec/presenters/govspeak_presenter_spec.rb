@@ -40,7 +40,7 @@ RSpec.describe GovspeakPresenter do
             attachments: [
               {
                 "content_id" => "77f2d40e-3853-451f-9ca3-a747e8402e34",
-                "url" => "https://assets.digital.cabinet-office.gov.uk/media/513a0efbed915d425e000002/asylum-support-image.jpg",
+                "url" => "https://assets.publishing.service.gov.uk/media/513a0efbed915d425e000002/asylum-support-image.jpg",
                 "content_type" => "application/jpeg",
                 "title" => "asylum report image title",
                 "created_at" => "2015-12-03T16:59:13+00:00",
@@ -48,7 +48,7 @@ RSpec.describe GovspeakPresenter do
               },
               {
                 "content_id" => "ec3f6901-4156-4720-b4e5-f04c0b152141",
-                "url" => "https://assets.digital.cabinet-office.gov.uk/media/513a0efbed915d425e000002/asylum-support-pdf.pdf",
+                "url" => "https://assets.publishing.service.gov.uk/media/513a0efbed915d425e000002/asylum-support-pdf.pdf",
                 "content_type" => "application/pdf",
                 "title" => "asylum report pdf title",
                 "created_at" => "2015-12-03T16:59:13+00:00",
@@ -66,9 +66,9 @@ RSpec.describe GovspeakPresenter do
       end
 
 
-      it "expands the attachment snippet to an html link" do
+      it "expands the attachment snippet to a non-external html link" do
         presented_html = presented_data.find { |r| r[:content_type] == "text/html" }[:content]
-        expected_html = "<p><a rel=\"external\" href=\"https://assets.digital.cabinet-office.gov.uk/media/513a0efbed915d425e000002/asylum-support-image.jpg\">asylum report image title</a></p>\n"
+        expected_html = "<p><a href=\"https://assets.publishing.service.gov.uk/media/513a0efbed915d425e000002/asylum-support-image.jpg\">asylum report image title</a></p>\n"
 
         expect(presented_html).to eq(expected_html)
       end
@@ -84,7 +84,7 @@ RSpec.describe GovspeakPresenter do
               attachments: [
                 {
                   "content_id" => "77f2d40e-3853-451f-9ca3-a747e8402e34",
-                  "url" => "https://assets.digital.cabinet-office.gov.uk/media/513a0efbed915d425e000002/asylum_support_image.jpg",
+                  "url" => "https://an.external.link.uk/media/513a0efbed915d425e000002/asylum_support_image.jpg",
                   "content_type" => "application/jpeg",
                   "title" => "asylum report image title",
                   "created_at" => "2015-12-03T16:59:13+00:00",
@@ -94,9 +94,9 @@ RSpec.describe GovspeakPresenter do
             })
         }
 
-        it "expands the attachment snippet to an html link" do
+        it "expands the attachment snippet to an external html link" do
           presented_html = presented_data.find { |r| r[:content_type] == "text/html" }[:content]
-          expected_html = "<p><a rel=\"external\" href=\"https://assets.digital.cabinet-office.gov.uk/media/513a0efbed915d425e000002/asylum_support_image.jpg\">asylum report image title</a></p>\n"
+          expected_html = "<p><a rel=\"external\" href=\"https://an.external.link.uk/media/513a0efbed915d425e000002/asylum_support_image.jpg\">asylum report image title</a></p>\n"
 
           expect(presented_html).to eq(expected_html)
         end
