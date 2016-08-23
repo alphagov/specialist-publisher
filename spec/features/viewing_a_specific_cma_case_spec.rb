@@ -100,12 +100,10 @@ RSpec.feature "Viewing a specific case", type: :feature do
             attachments: [
               FactoryGirl.create(:attachment_payload,
                 title: 'first attachment',
-                created_at: "2015-12-01T10:12:26+00:00",
-                updated_at: "2015-12-02T10:12:26+00:00"),
+                created_at: "2015-12-01T10:12:26+00:00"),
               FactoryGirl.create(:attachment_payload,
                 title: 'second attachment',
-                created_at: "2015-12-03T10:12:26+00:00",
-                updated_at: "2015-12-04T10:12:26+00:00"),
+                created_at: "2015-12-03T10:12:26+00:00"),
             ]
           }),
       ]
@@ -127,10 +125,8 @@ RSpec.feature "Viewing a specific case", type: :feature do
 
       expect(page).to have_content("first attachment")
       expect(page).to have_content("1 December 2015")
-      expect(page).to have_content("2 December 2015")
       expect(page).to have_content("second attachment")
       expect(page).to have_content("3 December 2015")
-      expect(page).to have_content("4 December 2015")
     end
   end
 
