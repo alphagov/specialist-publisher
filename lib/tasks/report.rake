@@ -1,13 +1,16 @@
 namespace :report do
-  task attachments: :environment do
+  task :attachments, [:class_name] => :environment do |_, args|
+    class_name = args.class_name || "CmaCase"
+    klass = class_name.constantize
+
     page_size = 10
 
-    response = CmaCase.all(1, page_size)
+    response = klass.all(1, page_size)
     pages = response.to_hash.fetch("pages")
 
     content_ids = Enumerator.new do |y|
       1.upto(pages) do |page|
-        response = CmaCase.all(page, page_size)
+        response = klass.all(page, page_size)
         results = response.to_hash.fetch("results")
         results.each { |r| y.yield r.fetch("content_id") }
       end
@@ -20,8 +23,8 @@ namespace :report do
       begin
         report = AttachmentReporter.report(document)
       rescue => e
-        puts "failed to generate report for #{klass} #{content_id}:"
-        puts "  #{e.class}: #{e.message}\n\n"
+        puts "\nfailed to generate report for #{klass} #{content_id}:"
+        puts "  #{e.class}: #{e.message}\n"
         next
       end
 
@@ -29,7 +32,7 @@ namespace :report do
       unused = report.fetch(:unused_attachments)
 
       if unmatched.any?
-        puts "#{klass} #{content_id} has invalid inline attachments:"
+        puts "\n#{klass} #{content_id} has invalid inline attachments:"
 
         unmatched.group_by { |u| u }.each do |u, array|
           puts "  #{array.count}: '#{u}'"
@@ -41,6 +44,8 @@ namespace :report do
         end
 
         puts
+      else
+        print "."
       end
     end
   end
