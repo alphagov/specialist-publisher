@@ -17,6 +17,7 @@ class Attachment < Document
     @content_id = params[:content_id] || SecureRandom.uuid
     @created_at = params[:created_at]
     @updated_at = params[:updated_at]
+    @params = params
   end
 
   def update_attributes(new_params)
@@ -53,6 +54,10 @@ class Attachment < Document
   end
 
   def snippet
-    "[InlineAttachment:#{url.split('/').last}]"
+    if url
+      "[InlineAttachment:#{url.split('/').last}]"
+    else
+      "[InlineAttachment:#{content_id}]"
+    end
   end
 end
