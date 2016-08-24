@@ -47,7 +47,7 @@ class GovspeakPresenter
     matches.flatten
   end
 
-  private
+private
 
   def replace_with_markdown_links(body, body_snippet, attachment)
     markdown_link = "[#{attachment.title}](#{attachment.url})"

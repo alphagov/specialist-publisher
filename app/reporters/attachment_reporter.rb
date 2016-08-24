@@ -24,7 +24,7 @@ class AttachmentReporter
     }
   end
 
-  private
+private
 
   attr_accessor :document
 

@@ -21,12 +21,14 @@ RSpec.describe AttachmentReporter do
     There's another on the document (unused.pdf) that we're not going to use.
   HTML
 
-  let(:attachments) { [
-    double(:attachment, snippet: "[InlineAttachment:foo.pdf]"),
-    double(:attachment, snippet: "[InlineAttachment:bar.pdf]"),
-    double(:attachment, snippet: "[InlineAttachment:baz.pdf]"),
-    double(:attachment, snippet: "[InlineAttachment:unused.pdf]"),
-  ] }
+  let(:attachments) {
+    [
+      double(:attachment, snippet: "[InlineAttachment:foo.pdf]"),
+      double(:attachment, snippet: "[InlineAttachment:bar.pdf]"),
+      double(:attachment, snippet: "[InlineAttachment:baz.pdf]"),
+      double(:attachment, snippet: "[InlineAttachment:unused.pdf]"),
+    ]
+  }
 
   let(:report) { described_class.report(document) }
 

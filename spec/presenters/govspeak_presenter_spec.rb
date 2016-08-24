@@ -26,7 +26,7 @@ RSpec.describe GovspeakPresenter do
       expect(presented).to eq [
         { content_type: "text/govspeak", content: snippet },
         { content_type: "text/html",
-          content: %Q(<p><a href="/url/foo.pdf">Foo</a></p>\n) }
+          content: %(<p><a href="/url/foo.pdf">Foo</a></p>\n) }
       ]
     end
   end
