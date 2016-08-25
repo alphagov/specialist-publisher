@@ -7,19 +7,19 @@ These steps will need to be taken for each environment. The steps below demonstr
 ##### Republish V1 documents
 This will enqueue the documents via Sidekiq.
 
+* Set up sidekiq monitoring. Instructions can be found [here](https://github.gds/pages/gds/opsmanual/2nd-line/applications/sidekiq-monitoring.html)
+
 * ssh into backend integration: `ssh backend-1.integration`
 
 * Once inside backend integration go to: `cd /var/apps/specialist-publisher`
-
-* Within `govuk_app_console specialist-publisher` check size of the Sidekiq queue using: `Sidekiq::Queue.all.first.size`
 
 * Republish! `sudo su deploy govuk_setenv specialist-publisher bundle exec ruby ./bin/republish_documents raib_report`
 
 (Please note - include `bundle exec` to ensure correct versions of dependencies are executed)
 
-* Check the queue size a few times using `Sidekiq::Queue.all.first.size`. The number should have risen since originally running the republish script but should reduce subsequently
+* Wait for Sidekiq monitoring queue size to reach zero
 
-* Check the RetrySet. This re-runs jobs that have failed: `Sidekiq::RetrySet.new.size` - the number of jobs that fail should = 0
+* Check that there is nothing in the sidekiq monitoring retry set
 
 * Check that there are no errors in errbit
 
