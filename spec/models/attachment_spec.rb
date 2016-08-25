@@ -198,4 +198,22 @@ RSpec.describe Attachment do
       expect(attachment.url).to be_nil
     end
   end
+
+  describe "#snippet" do
+    context "when the attachment has a url" do
+      let(:attachment) { Attachment.new(url: "http://example.com/a/b/c/foo.png") }
+
+      it "returns a snippet containing the suffix of the url" do
+        expect(attachment.snippet).to eq("[InlineAttachment:foo.png]")
+      end
+    end
+
+    context "when the attachment does not have a url" do
+      let(:attachment) { Attachment.new(content_id: "some-content-id") }
+
+      it "returns a snippet containing the content_id" do
+        expect(attachment.snippet).to eq("[InlineAttachment:some-content-id]")
+      end
+    end
+  end
 end
