@@ -42,9 +42,11 @@ class GovspeakPresenter
   end
 
   def snippets_in_body
-    body = document.body
-    matches = body.scan(/(\[InlineAttachment:.*?\])/)
-    matches.flatten
+    @snippets_in_body ||= (
+      body = document.body
+      matches = body.scan(/(\[InlineAttachment:.*?\])/)
+      matches.flatten
+    )
   end
 
 private
@@ -65,8 +67,5 @@ private
     filename = filename.gsub(special_chars, "_")
 
     "[InlineAttachment:#{filename}]"
-  end
-
-  def special_chars
   end
 end
