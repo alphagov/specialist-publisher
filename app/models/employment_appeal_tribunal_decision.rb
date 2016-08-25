@@ -21,4 +21,8 @@ class EmploymentAppealTribunalDecision < Document
   def self.title
     "EAT Decision"
   end
+
+  def self.slug
+    "employment-appeal-tribunal-decisions"
+  end
 end
