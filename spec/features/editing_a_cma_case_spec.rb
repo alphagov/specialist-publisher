@@ -309,7 +309,7 @@ RSpec.feature "Editing a CMA case", type: :feature do
               },
               {
                 "content_type" => "text/html",
-                "content" => "<p><a rel=\"external\" href=\"https://assets.digital.cabinet-office.gov.uk/media/513a0efbed915d425e000002/asylum-support-image.jpg\">asylum report image title</a></p>\n"
+                "content" => "<p><a href=\"https://assets.digital.cabinet-office.gov.uk/media/513a0efbed915d425e000002/asylum-support-image.jpg\">asylum report image title</a></p>\n"
               }
             ],
           },

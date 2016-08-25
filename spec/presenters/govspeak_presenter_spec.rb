@@ -15,8 +15,9 @@ RSpec.describe GovspeakPresenter do
 
   context "when the document has inline attachments" do
     let(:snippet) { "[InlineAttachment:foo.pdf]" }
+    let(:url) { "/url/foo.pdf" }
     let(:attachment) {
-      double(:attachment, snippet: snippet, title: "Foo", url: "/url/foo.pdf")
+      double(:attachment, snippet: snippet, title: "Foo", url: url)
     }
 
     let(:body) { snippet }
@@ -28,6 +29,17 @@ RSpec.describe GovspeakPresenter do
         { content_type: "text/html",
           content: %(<p><a href="/url/foo.pdf">Foo</a></p>\n) }
       ]
+    end
+
+    context "when they are external" do
+      let(:body) { "[External Link](https://something.external.uk/url/foo.pdf)" }
+
+      it "adds rel='external' to anchor tag" do
+        expect(presented).to eq [
+                                    { content_type: "text/govspeak", content: body },
+                                    { content_type: "text/html",
+                                      content: %(<p><a rel="external" href="https://something.external.uk/url/foo.pdf">External Link</a></p>\n) }]
+      end
     end
   end
 
