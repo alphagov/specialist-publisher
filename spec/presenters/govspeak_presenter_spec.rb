@@ -15,8 +15,9 @@ RSpec.describe GovspeakPresenter do
 
   context "when the document has inline attachments" do
     let(:snippet) { "[InlineAttachment:foo.pdf]" }
+    let(:url) { "/url/foo.pdf" }
     let(:attachment) {
-      double(:attachment, snippet: snippet, title: "Foo", url: "/url/foo.pdf")
+      double(:attachment, snippet: snippet, title: "Foo", url: url)
     }
 
     let(:body) { snippet }
@@ -29,6 +30,24 @@ RSpec.describe GovspeakPresenter do
           content: %(<p><a href="/url/foo.pdf">Foo</a></p>\n) }
       ]
     end
+
+    # add tests here, using the pull request as reference
+    # https://github.com/alphagov/specialist-publisher-rebuild/pull/872/files
+    context "when they are internal" do
+      let(:url) { "something internal" }
+
+      it "does something" do
+      end
+    end
+
+    context "when they are external" do
+      let(:url) { "something external" }
+
+      it "does something else" do
+      end
+    end
+    # ----------------------------------------------------------------------
+    # ----------------------------------------------------------------------
   end
 
   describe "#snippets_match?" do

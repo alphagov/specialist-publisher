@@ -1,4 +1,7 @@
 class GovspeakPresenter
+  PRODUCTION_HOSTS = %w(www.gov.uk assets.publishing.service.gov.uk)
+  INTEGRATION_HOSTS = %w{www-origin.integration.publishing.service.gov.uk assets.digital.cabinet-office.gov.uk }
+
   attr_accessor :document
 
   def self.present(document)
@@ -31,7 +34,8 @@ class GovspeakPresenter
       end
     end
 
-    Govspeak::Document.new(body).to_html
+    internal_hosts = PRODUCTION_HOSTS + INTEGRATION_HOSTS
+    Govspeak::Document.new(body, document_domains: internal_hosts).to_html
   end
 
   def snippets_match?(a, b)
