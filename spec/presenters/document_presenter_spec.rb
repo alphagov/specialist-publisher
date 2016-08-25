@@ -165,9 +165,14 @@ RSpec.describe DocumentPresenter do
       )
     end
 
-    it 'returns document_type and bulk_published in details metadata' do
+    it 'does not return the document_type in details.metadata' do
+      expect(metadata).not_to include(
+        :document_type,
+      )
+    end
+
+    it 'returns bulk_published in details metadata' do
       expect(metadata).to include(
-        document_type: "cma_case",
         bulk_published: true,
       )
     end

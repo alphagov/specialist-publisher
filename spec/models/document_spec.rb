@@ -95,7 +95,6 @@ RSpec.describe Document do
           field1: "2015-12-01",
           field2: "open",
           field3: %w(x y z),
-          document_type: "my_document_type",
         }
       }
     }

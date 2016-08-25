@@ -69,7 +69,6 @@ private
     end
 
     metadata.merge!(
-      document_type: document.document_type,
       bulk_published: document.bulk_published,
     )
 
