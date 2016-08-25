@@ -31,23 +31,16 @@ RSpec.describe GovspeakPresenter do
       ]
     end
 
-    # add tests here, using the pull request as reference
-    # https://github.com/alphagov/specialist-publisher-rebuild/pull/872/files
-    context "when they are internal" do
-      let(:url) { "something internal" }
-
-      it "does something" do
-      end
-    end
-
     context "when they are external" do
-      let(:url) { "something external" }
+      let(:body) { "[External Link](https://something.external.uk/url/foo.pdf)" }
 
-      it "does something else" do
+      it "adds rel='external' to anchor tag" do
+        expect(presented).to eq [
+                                    { content_type: "text/govspeak", content: body },
+                                    { content_type: "text/html",
+                                      content: %(<p><a rel="external" href="https://something.external.uk/url/foo.pdf">External Link</a></p>\n) }]
       end
     end
-    # ----------------------------------------------------------------------
-    # ----------------------------------------------------------------------
   end
 
   describe "#snippets_match?" do
