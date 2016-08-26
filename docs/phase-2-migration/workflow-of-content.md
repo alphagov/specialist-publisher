@@ -63,3 +63,8 @@ following endpoints:
 The first endpoint is used for retrieving a specific content item. The second
 is used (with some query parameters) to retrieve an index of content that is
 used for the listing pages of the app.
+
+Note: In Specialist Publisher, we send a `PATCH /v2/links` request when a
+document is saved. This may not be the right approach for other apps because
+changes take effect immediately in both the draft and live content stores.
+Instead, it may be better to make this request immediately before publish.
