@@ -15,7 +15,7 @@ RSpec.describe GovspeakPresenter do
 
   context "when the document has inline attachments" do
     let(:snippet) { "[InlineAttachment:foo.pdf]" }
-    let(:url) { "/url/foo.pdf" }
+    let(:url) { "http://assets.publishing.service.gov.uk/url/foo.pdf" }
     let(:attachment) {
       double(:attachment, snippet: snippet, title: "Foo", url: url)
     }
@@ -23,23 +23,56 @@ RSpec.describe GovspeakPresenter do
     let(:body) { snippet }
     let(:attachments) { [attachment] }
 
-    it "replaces the snippet with an anchor" do
+    it "replaces the snippet with an anchor and no rel='external' tag" do
       expect(presented).to eq [
         { content_type: "text/govspeak", content: snippet },
         { content_type: "text/html",
-          content: %(<p><a href="/url/foo.pdf">Foo</a></p>\n) }
+          content: %(<p><a href="http://assets.publishing.service.gov.uk/url/foo.pdf">Foo</a></p>\n) }
       ]
     end
+  end
 
-    context "when they are external" do
-      let(:body) { "[External Link](https://something.external.uk/url/foo.pdf)" }
+  context "when the document has external links and a protocol (i.e. HTTP:)" do
+    let(:body) { "[External Link with protocol](https://something.external.uk/url/foo.pdf)" }
 
-      it "adds rel='external' to anchor tag" do
-        expect(presented).to eq [
-                                    { content_type: "text/govspeak", content: body },
-                                    { content_type: "text/html",
-                                      content: %(<p><a rel="external" href="https://something.external.uk/url/foo.pdf">External Link</a></p>\n) }]
-      end
+    it "adds rel='external' to anchor tag for non-whitelisted hosts" do
+      expect(presented).to eq [
+                                  { content_type: "text/govspeak", content: body },
+                                  { content_type: "text/html",
+                                    content: %(<p><a rel="external" href="https://something.external.uk/url/foo.pdf">External Link with protocol</a></p>\n) }]
+    end
+  end
+
+  context "when the document has external links and no protocol" do
+    let(:body) { "[External Link without protocol](something.external.uk/url/foo.pdf)" }
+
+    it "does not adds rel='external' to anchor tag" do
+      expect(presented).to eq [
+                                  { content_type: "text/govspeak", content: body },
+                                  { content_type: "text/html",
+                                    content: %(<p><a href="something.external.uk/url/foo.pdf">External Link without protocol</a></p>\n) }]
+    end
+  end
+
+  context "when the document has internal links with a protocol (i.e. HTTP:)" do
+    let(:body) { "[Internal Link with protocol](http://www.gov.uk/url/foo.pdf)" }
+
+    it "does not adds rel='external' to anchor tag" do
+      expect(presented).to eq [
+                                  { content_type: "text/govspeak", content: body },
+                                  { content_type: "text/html",
+                                    content: %(<p><a href="http://www.gov.uk/url/foo.pdf">Internal Link with protocol</a></p>\n) }]
+    end
+  end
+
+  context "when the document has internal links and no protocol" do
+    let(:body) { "[Internal Link without protocol](www.gov.uk/url/foo.pdf)" }
+
+    it "does not adds rel='external' to anchor tag" do
+      expect(presented).to eq [
+                                  { content_type: "text/govspeak", content: body },
+                                  { content_type: "text/html",
+                                    content: %(<p><a href="www.gov.uk/url/foo.pdf">Internal Link without protocol</a></p>\n) }]
     end
   end
 
