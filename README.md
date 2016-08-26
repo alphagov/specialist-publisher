@@ -105,19 +105,15 @@ $ bundle exec rake
 
 Use [this](https://github.com/alphagov/specialist-publisher-rebuild/commit/19218ed625d4c3539bdaec481b250e726258e3aa) as a template.
 
-## Deployment
+## Deploying a new finder
 
-Currently, this app is deployed along side with [Specialist-publisher v1](https://github.com/alphagov/specialist-publisher) on a "per-format" basis. As more formats become production ready, we will transition them to use the rebuild app.
+There is a detailed guide on how to do this
+[here](./docs/phase-2-migration/deployment-guide.md).
 
-![deployment diagram](deployment.png)
+## Phase 2 migration
 
-The rebuild app can then be accessed in two ways.
-
-1. At the URL `specialist-publisher.*.gov.uk`: you can access the "Frankenstein" app, a combination between SPv1 + SPv2.
-
-2. At `specialist-publisher-rebuild-standalone.integration.publishing.service.gov.uk`: This is an integration-only instance of the app running only specialist-publisher-rebuild code.
-
-When a format is ready to deploy to production, add the endpoint to this [puppet configuration](https://github.com/alphagov/govuk-puppet/blob/master/modules/govuk/manifests/node/s_backend_lb.pp#L48). This will configure Nginx to route requests for those endpoints to be handled by this app.
+There is tonnes of information on our learnings from migrating this app to
+"phase 2" [here](./docs/phase-2-migration/README.md).
 
 ## Organisations
 
