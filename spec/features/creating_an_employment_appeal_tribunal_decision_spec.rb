@@ -21,7 +21,7 @@ RSpec.feature "Creating a Employment appeal tribunal decision", type: :feature d
     end
 
     scenario "with valid data" do
-      visit "/eat-decisions/new"
+      visit "/employment-appeal-tribunal-decisions/new"
       title = "Example Employment appeal tribunal decision"
       summary = "This is the summary of an example Employment appeal tribunal decision"
 
@@ -50,9 +50,9 @@ RSpec.feature "Creating a Employment appeal tribunal decision", type: :feature d
     end
 
     scenario "with no data" do
-      visit "/eat-decisions/new"
+      visit "/employment-appeal-tribunal-decisions/new"
 
-      expect(page.status_code).to eq(200)
+      expect(page.status_code).to eq(200), page.html
 
       click_button "Save as draft"
 
@@ -69,7 +69,7 @@ RSpec.feature "Creating a Employment appeal tribunal decision", type: :feature d
     end
 
     scenario "with invalid data" do
-      visit "/eat-decisions/new"
+      visit "/employment-appeal-tribunal-decisions/new"
 
       expect(page.status_code).to eq(200)
 
@@ -96,9 +96,9 @@ RSpec.feature "Creating a Employment appeal tribunal decision", type: :feature d
       before { log_in_as_editor(:moj_editor) }
 
       scenario "seeing pre-production formats" do
-        visit "/eat-decisions/new"
+        visit "/employment-appeal-tribunal-decisions/new"
         expect(page.status_code).to eq(200), page.html
-        expect(page.current_path).to eq("/eat-decisions/new")
+        expect(page.current_path).to eq("/employment-appeal-tribunal-decisions/new")
       end
     end
 
@@ -106,9 +106,9 @@ RSpec.feature "Creating a Employment appeal tribunal decision", type: :feature d
       before { log_in_as_editor(:moj_writer) }
 
       scenario "seeing pre-production formats" do
-        visit "/eat-decisions/new"
+        visit "/employment-appeal-tribunal-decisions/new"
         expect(page.status_code).to eq(200), page.html
-        expect(page.current_path).to eq("/eat-decisions/new")
+        expect(page.current_path).to eq("/employment-appeal-tribunal-decisions/new")
       end
     end
 
@@ -116,9 +116,9 @@ RSpec.feature "Creating a Employment appeal tribunal decision", type: :feature d
       before { log_in_as_editor(:gds_editor) }
 
       scenario "seeing pre-production formats" do
-        visit "/eat-decisions/new"
+        visit "/employment-appeal-tribunal-decisions/new"
         expect(page.status_code).to eq(200), page.html
-        expect(page.current_path).to eq("/eat-decisions/new")
+        expect(page.current_path).to eq("/employment-appeal-tribunal-decisions/new")
       end
     end
   end
