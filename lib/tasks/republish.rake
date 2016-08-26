@@ -29,7 +29,8 @@ namespace :republish do
     find_content_ids = Services.publishing_api.lookup_content_ids(base_paths: paths)
 
     find_content_ids.each do |_, v|
-      Republisher.republish_one(v)
+      RepublishWorker.perform_async(v)
+      print "."
     end
   end
 end
