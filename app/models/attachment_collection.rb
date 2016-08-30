@@ -32,4 +32,12 @@ class AttachmentCollection
       block.call(attachment)
     end
   end
+
+  def remove(attachment)
+    if attachment.destroy
+      @attachments.delete(attachment)
+    else
+      false
+    end
+  end
 end

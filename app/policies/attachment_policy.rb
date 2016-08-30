@@ -6,4 +6,5 @@ class AttachmentPolicy < ApplicationPolicy
   alias_method :create?, :new?
   alias_method :edit?, :new?
   alias_method :update?, :new?
+  alias_method :delete?, :new?
 end

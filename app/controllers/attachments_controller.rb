@@ -41,6 +41,13 @@ class AttachmentsController < ApplicationController
     end
   end
 
+  def destroy
+    document = fetch_document
+    attachment = document.attachments.find(attachment_content_id)
+
+    delete_attachment(document, attachment)
+  end
+
 private
 
   def flag_updated(document, attachment)
@@ -79,6 +86,16 @@ private
       redirect_to new_document_attachment_path(document_type_slug, document.content_id)
     end
   end
+
+  def delete_attachment(document, attachment)
+    if document.delete_attachment(attachment)
+      flash[:success] = "Attachment succesfully removed"
+    else
+      flash[:danger] = "There was an error removing your attachment, please try again later."
+    end
+    redirect_to edit_document_path(document_type_slug, document.content_id)
+  end
+
 
   def fetch_document
     document = current_format.find(params[:document_content_id])

@@ -26,11 +26,11 @@ else
   gem "govspeak", "~> 3.5"
 end
 
-if ENV["API_DEV"]
+# if ENV["API_DEV"]
   gem "gds-api-adapters", path: "../gds-api-adapters"
-else
-  gem "gds-api-adapters", "32.1.0"
-end
+# else
+#   gem "gds-api-adapters", "36.0.1"
+# end
 
 group :development, :test do
   gem 'better_errors', '~> 2.1.1'
