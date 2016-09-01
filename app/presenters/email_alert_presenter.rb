@@ -10,6 +10,7 @@ class EmailAlertPresenter
       subject: subject,
       body: body,
       tags: tags,
+      urgent: urgent,
       document_type: document.document_type,
     }.merge(extra_options)
   end
@@ -86,6 +87,10 @@ private
 
   def subject
     redrafted? ? document.title + " updated" : document.title
+  end
+
+  def urgent
+    document.urgent
   end
 
   def updated_or_published
