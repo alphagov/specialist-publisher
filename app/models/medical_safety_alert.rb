@@ -17,4 +17,8 @@ class MedicalSafetyAlert < Document
   def self.title
     "Medical Safety Alert"
   end
+
+  def urgent
+    true
+  end
 end

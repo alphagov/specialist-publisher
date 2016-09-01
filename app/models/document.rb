@@ -347,6 +347,18 @@ class Document
     update_type == "major"
   end
 
+  # This is set to nil for all non-urgent emails.
+  # Override to true for urgent email handling for a specific format.
+  # Urgent emails are sent immediately to all users,
+  # regardless of how frequently the users are set to get email updates
+  #
+  # Sending false will force overriding of topic defaults, and should
+  # only be done where we explicitly want an email to be non urgent and
+  # not to fallback to gov delivery defaults
+  def urgent
+    nil
+  end
+
 private
 
   def self.finder_schema
