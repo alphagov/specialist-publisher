@@ -1,5 +1,5 @@
 class CmaCase < Document
-  validates :opened_date, allow_blank: true, date: true
+  validates :opened_date, allow_blank: true, date: true, open_before_closed: true
   validates :market_sector, presence: true
   validates :case_type, presence: true
   validates :case_state, presence: true
