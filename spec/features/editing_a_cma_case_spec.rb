@@ -362,7 +362,6 @@ RSpec.feature "Editing a CMA case", type: :feature do
       scenario "adding a nil attachment on a #{publication_state} CMA case" do
         # this is to force app to not update asset manager on invalid error
         stub_request(:post, "#{Plek.find('asset-manager')}/assets")
-          .with(body: %r{.*})
           .to_return(body: asset_manager_response.to_json, status: 500)
 
         click_link "Add attachment"
@@ -378,10 +377,13 @@ RSpec.feature "Editing a CMA case", type: :feature do
 
 
       scenario "editing an attachment on a #{publication_state} CMA case" do
+        stub_request(:put, %r{#{Plek.find('asset-manager')}/assets/.*})
+          .to_return(body: asset_manager_response.to_json, status: 201)
         find('.attachments').first(:link, "edit").click
         expect(page.status_code).to eq(200)
         expect(find('#attachment_title').value).to eq('asylum report image title')
 
+        expect(page).to have_content('asylum-support-image.jpg')
         fill_in "Title", with: "Updated cma case image"
         page.attach_file('attachment_file', "spec/support/images/updated_cma_case_image.jpg")
 
