@@ -137,6 +137,78 @@ RSpec.feature "Creating a CMA case", type: :feature do
     expect(page).to have_content("Body cannot include invalid Govspeak")
   end
 
+  scenario "with closed date before opened date" do
+    visit "/cma-cases/new"
+
+    fill_in "Title", with: "Example CMA Case"
+    fill_in "Summary", with: "This is the summary of an example CMA case"
+    fill_in "Body", with: "Body of text"
+    fill_in "Opened date", with: "2016-02-14"
+    fill_in "Closed date", with: "2015-02-14"
+    select "Energy", from: "Market sector"
+
+    click_button "Save as draft"
+
+    expect(page.status_code).to eq(422)
+
+    expect(page).to have_css('.elements-error-summary')
+    expect(page).to have_css('.elements-error-message')
+
+    expect(page).to have_content("Please fix the following errors")
+    expect(page).to have_content("Opened date must be before closed date")
+  end
+
+  scenario "with blank opened date and filled out closed date" do
+    visit "/cma-cases/new"
+
+    fill_in "Title", with: "Example CMA Case"
+    fill_in "Summary", with: "This is the summary of an example CMA case"
+    fill_in "Body", with: "Body of text"
+    fill_in "Opened date", with: ""
+    fill_in "Closed date", with: "2015-02-14"
+    select "Energy", from: "Market sector"
+
+    click_button "Save as draft"
+
+    expect(page.status_code).to eq(200)
+
+    expect(page).to have_content("Created Example CMA Case")
+  end
+
+  scenario "with blank closed date and filled out opened date" do
+    visit "/cma-cases/new"
+
+    fill_in "Title", with: "Example CMA Case"
+    fill_in "Summary", with: "This is the summary of an example CMA case"
+    fill_in "Body", with: "Body of text"
+    fill_in "Opened date", with: "2015-02-14"
+    fill_in "Closed date", with: ""
+    select "Energy", from: "Market sector"
+
+    click_button "Save as draft"
+
+    expect(page.status_code).to eq(200)
+
+    expect(page).to have_content("Created Example CMA Case")
+  end
+
+  scenario "with blank closed date and opened date" do
+    visit "/cma-cases/new"
+
+    fill_in "Title", with: "Example CMA Case"
+    fill_in "Summary", with: "This is the summary of an example CMA case"
+    fill_in "Body", with: "Body of text"
+    fill_in "Opened date", with: ""
+    fill_in "Closed date", with: ""
+    select "Energy", from: "Market sector"
+
+    click_button "Save as draft"
+
+    expect(page.status_code).to eq(200)
+
+    expect(page).to have_content("Created Example CMA Case")
+  end
+
   scenario "with a very long title" do
     visit "/cma-cases/new"
 
