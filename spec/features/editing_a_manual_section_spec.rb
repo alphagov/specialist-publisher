@@ -80,39 +80,5 @@ RSpec.feature "editing a manual section" do
         .with(body: %r{.*})
         .to_return(body: JSON.dump(asset_manager_response), status: 201)
     end
-
-    scenario "adding an attachment" do
-      visit manual_path(manual_content_id)
-      click_link 'First section'
-      click_link 'Edit section'
-
-      click_link "Add attachment"
-      expect(page.status_code).to eq(200)
-
-      fill_in "Title", with: "New section image"
-      page.attach_file('attachment_file', "spec/support/images/section_image.jpg")
-
-      click_button "Save attachment"
-      expect(page.status_code).to eq(200)
-
-      expect(page).to have_content('Attached New section image')
-      expect(page).to have_content("Edit section")
-    end
-
-    scenario "editing an attachment" do
-      visit manual_path(manual_content_id)
-      click_link 'Second section'
-      click_link 'Edit section'
-      find('.attachments').first(:link, "edit").click
-
-      expect(page.status_code).to eq(200)
-
-      fill_in "Title", with: "Updated section image"
-      page.attach_file('attachment_file', "spec/support/images/updated_section_image.jpg")
-
-      click_button("Save attachment")
-      expect(page.status_code).to eq(200)
-      expect(page).to have_content("Attachment succesfully updated")
-    end
   end
 end

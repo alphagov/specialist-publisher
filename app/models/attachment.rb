@@ -10,10 +10,10 @@ class Attachment < Document
 
   def initialize(params = {})
     params = params.symbolize_keys
-    @title = extract_title(params)
     @file = params[:file]
     @content_type = params[:content_type]
     @url = params[:url]
+    @title = extract_title(params)
     @content_id = params[:content_id] || SecureRandom.uuid
     @created_at = params[:created_at]
     @updated_at = params[:updated_at]
@@ -29,8 +29,6 @@ class Attachment < Document
   def extract_title(params)
     if params[:title].blank?
       if params[:url]
-        separated_url = params[:url].split('/')
-        filename = separated_url[separated_url.length - 1]
         remove_extension_from_filename(filename)
       elsif params[:file]
         remove_extension_from_filename(params[:file].original_filename)
@@ -49,13 +47,31 @@ class Attachment < Document
     false
   end
 
+  def update
+    response = Services.asset_api.update_asset(id_from_url, file: @file)
+    @url = response.file_url
+    true
+  rescue GdsApi::BaseError => e
+    Airbrake.notify(e)
+    false
+  end
+
+  def id_from_url
+    url_array = @url.split('/')
+    url_array[url_array.length - 2]
+  end
+
   def remove_extension_from_filename(filename)
     filename.split('.').first
   end
 
+  def filename
+    url.split('/').last
+  end
+
   def snippet
     if url
-      "[InlineAttachment:#{url.split('/').last}]"
+      "[InlineAttachment:#{filename}]"
     else
       "[InlineAttachment:#{content_id}]"
     end
