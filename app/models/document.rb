@@ -333,6 +333,14 @@ class Document
     end
   end
 
+  def update_attachment(attachment)
+    if attachments.update(attachment)
+      save
+    else
+      false
+    end
+  end
+
   def set_temporary_update_type!
     return if update_type
     self.temporary_update_type = true

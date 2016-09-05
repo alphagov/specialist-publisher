@@ -19,6 +19,10 @@ class AttachmentCollection
     attachment.upload if has_attachment?(attachment)
   end
 
+  def update(attachment)
+    attachment.update if has_attachment?(attachment)
+  end
+
   def has_attachment?(attachment)
     !!find(attachment.content_id)
   end

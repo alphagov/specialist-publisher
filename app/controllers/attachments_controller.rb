@@ -17,10 +17,10 @@ class AttachmentsController < ApplicationController
       attachment = document.attachments.build(attachment_params)
       attachment.content_type = attachment.file.content_type
 
-      upload_attachment(document, attachment, new_attachment: true)
+      upload_attachment(document, attachment)
     else
       flash[:danger] = "Adding an attachment failed. Please make sure you have uploaded an attachment."
-      redirect_to previous_address(document, Attachment.new, new: true)
+      redirect_to new_document_attachment_path(document_type_slug, document.content_id)
     end
   end
 
@@ -37,7 +37,7 @@ class AttachmentsController < ApplicationController
     if attachment.file.nil?
       save_updated_title(document, attachment)
     else
-      upload_attachment(document, attachment, new_attachment: false)
+      update_attachment(document, attachment)
     end
   end
 
@@ -53,21 +53,23 @@ private
     end
   end
 
-  def upload_attachment(document, attachment, new_attachment:)
-    if document.upload_attachment(attachment)
-      flash[:success] = new_attachment ? "Attached #{attachment.title}" : "Attachment succesfully updated"
+  def update_attachment(document, attachment)
+    if document.update_attachment(attachment)
+      flash[:success] = "Updated #{attachment.title}"
       redirect_to edit_document_path(document_type_slug, document.content_id)
     else
-      flash[:danger] = "There was an error uploading the attachment, please try again later."
-      redirect_to previous_address(document, attachment, new: new_attachment)
+      flash[:danger] = "There was an error updating the attachment, please try again later."
+      redirect_to edit_document_attachment_path(document_type_slug, document.content_id, attachment.content_id)
     end
   end
 
-  def previous_address(document, attachment, new:)
-    if new
-      new_document_attachment_path(document_type_slug, document.content_id)
+  def upload_attachment(document, attachment)
+    if document.upload_attachment(attachment)
+      flash[:success] = "Attached #{attachment.title}"
+      redirect_to edit_document_path(document_type_slug, document.content_id)
     else
-      edit_document_attachment_path(document_type_slug, document.content_id, attachment.content_id)
+      flash[:danger] = "There was an error uploading the attachment, please try again later."
+      redirect_to new_document_attachment_path(document_type_slug, document.content_id)
     end
   end
 
