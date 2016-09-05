@@ -20,6 +20,7 @@ namespace :dfid_research_outputs do
       invalid_country_codes = (country_codes - valid_country_codes)
 
       doc = Document.find(content_id)
+      published = doc.published?
 
       if doc
         if doc.country && invalid_country_codes.any?
@@ -28,6 +29,11 @@ namespace :dfid_research_outputs do
           payload = DocumentPresenter.new(doc).to_json
           puts "ContentItem '#{content_id}' updated with countries: #{doc.country}"
           Services.publishing_api.put_content(doc.content_id, payload)
+
+          if published
+            Services.publishing_api.publish(doc.content_id, "minor")
+            puts "published"
+          end
         end
       else
         puts "No document found for #{content_id}"
