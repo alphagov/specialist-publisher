@@ -26,7 +26,7 @@ class Document
   )
 
   def temporary_update_type?
-    @temporary_update_type
+    !!@temporary_update_type
   end
 
   validates :title, presence: true
