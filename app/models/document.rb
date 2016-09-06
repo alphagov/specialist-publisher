@@ -260,8 +260,8 @@ class Document
   class RecordNotFound < StandardError; end
   class TypeMismatchError < StandardError; end
 
-  def save
-    return false unless self.valid?
+  def save(validate: true)
+    return false if validate && !self.valid?
 
     self.update_type = 'major' if first_draft?
 
@@ -327,7 +327,7 @@ class Document
 
   def upload_attachment(attachment)
     if attachments.upload(attachment)
-      save
+      save(validate: false)
     else
       false
     end
@@ -335,7 +335,7 @@ class Document
 
   def update_attachment(attachment)
     if attachments.update(attachment)
-      save
+      save(validate: false)
     else
       false
     end

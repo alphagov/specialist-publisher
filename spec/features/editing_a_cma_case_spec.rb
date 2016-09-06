@@ -359,6 +359,21 @@ RSpec.feature "Editing a CMA case", type: :feature do
         expect(page).to have_content("Editing Example CMA Case")
       end
 
+      context "when the document is in an invalid state" do
+        let(:cma_case) { FactoryGirl.create(:cma_case, details: { body: "" }) }
+
+        scenario "successfully adding an attachment to the invalid document" do
+          click_link "Add attachment"
+
+          fill_in "Title", with: "Some title"
+          page.attach_file('attachment_file', "spec/support/images/cma_case_image.jpg")
+          click_button "Save attachment"
+
+          expect(page.status_code).to eq(200)
+          expect(page).to have_content("Editing Example document")
+        end
+      end
+
       scenario "adding a nil attachment on a #{publication_state} CMA case" do
         # this is to force app to not update asset manager on invalid error
         stub_request(:post, "#{Plek.find('asset-manager')}/assets")
