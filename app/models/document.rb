@@ -31,7 +31,7 @@ class Document
 
   validates :title, presence: true
   validates :summary, presence: true
-  validates :body, presence: true, safe_html: true
+  validates :body, presence: true, safe_html: true, inline_attachments: true
   validates :update_type, presence: true, unless: :first_draft?
   validates :change_note, presence: true, if: :change_note_required?
 
