@@ -15,4 +15,19 @@ RSpec.feature "Validating inline attachments", type: :feature do
       "Body contains an attachment that can't be found: 'missing.pdf'"
     )
   end
+
+  scenario "escaping inline attachments so that they are html safe" do
+    visit "/cma-cases/new"
+    fill_in "Body", with: "[InlineAttachment:<not>safe.pdf]"
+    click_button "Save"
+
+    expect(page).to have_content("Please fix the following errors")
+
+    expect(page).to have_content(
+      "Body contains an attachment that can't be found: '<not>safe.pdf'"
+    )
+    expect(page).not_to have_content(
+      "Body contains an attachment that can't be found: '&lt;not&gt;safe.pdf'"
+    )
+  end
 end
