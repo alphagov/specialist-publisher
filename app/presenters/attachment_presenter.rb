@@ -17,7 +17,11 @@ class AttachmentPresenter
 private
 
   def updated_at
-    Time.now.to_datetime.rfc3339
+    if @attachment.updated_at.nil? || @attachment.being_updated == true
+      @attachment.updated_at = Time.now.to_datetime.rfc3339
+    else
+      @attachment.updated_at
+    end
   end
 
   def created_at

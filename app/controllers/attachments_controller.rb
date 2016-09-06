@@ -43,7 +43,13 @@ class AttachmentsController < ApplicationController
 
 private
 
+  def flag_updated(document, attachment)
+    updated_attachment = document.attachments.find(attachment.content_id)
+    updated_attachment.being_updated = true
+  end
+
   def save_updated_title(document, attachment)
+    flag_updated(document, attachment)
     if document.save(validate: false)
       flash[:success] = "Attachment succesfully updated"
       redirect_to edit_document_path(document_type_slug, document.content_id)
@@ -54,6 +60,7 @@ private
   end
 
   def update_attachment(document, attachment)
+    flag_updated(document, attachment)
     if document.update_attachment(attachment)
       flash[:success] = "Updated #{attachment.title}"
       redirect_to edit_document_path(document_type_slug, document.content_id)

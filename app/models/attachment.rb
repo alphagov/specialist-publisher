@@ -1,7 +1,7 @@
 require "gds_api/asset_manager"
 
 class Attachment < Document
-  attr_accessor :title, :file, :content_type, :url, :content_id, :created_at, :updated_at
+  attr_accessor :title, :file, :content_type, :url, :content_id, :created_at, :updated_at, :being_updated
 
   def self.all_from_publishing_api(payload)
     return [] unless payload.fetch('details', {}).key?('attachments')
@@ -18,6 +18,7 @@ class Attachment < Document
     @created_at = params[:created_at]
     @updated_at = params[:updated_at]
     @params = params
+    @being_updated = false
   end
 
   def update_attributes(new_params)
