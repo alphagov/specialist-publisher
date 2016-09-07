@@ -102,7 +102,11 @@ private
       }
     )
     errors = content_tag :ul, class: "list-unstyled remove-bottom-margin" do
-      @document.errors.full_messages.map { |e| content_tag(:li, e) }.join('').html_safe
+      list_items = @document.errors.full_messages.map do |message|
+        content_tag(:li, message.html_safe)
+      end
+
+      list_items.join.html_safe
     end
 
     heading + errors

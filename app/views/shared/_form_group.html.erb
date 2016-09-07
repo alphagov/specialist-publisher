@@ -5,7 +5,7 @@
     <%= label %>
     <% field_errors(@document, field).each do |msg| %>
       <br />
-      <span class="elements-error-message add-label-margin"><%= msg %></span>
+      <span class="elements-error-message add-label-margin"><%= msg.html_safe %></span>
     <% end %>
   <% end %>
   <%= yield %>

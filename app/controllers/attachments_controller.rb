@@ -44,7 +44,7 @@ class AttachmentsController < ApplicationController
 private
 
   def save_updated_title(document, attachment)
-    if document.save
+    if document.save(validate: false)
       flash[:success] = "Attachment succesfully updated"
       redirect_to edit_document_path(document_type_slug, document.content_id)
     else
