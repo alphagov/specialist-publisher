@@ -31,7 +31,7 @@ class Document
 
   validates :title, presence: true
   validates :summary, presence: true
-  validates :body, presence: true, safe_html: true
+  validates :body, presence: true, safe_html: true, inline_attachments: true
   validates :update_type, presence: true, unless: :first_draft?
   validates :change_note, presence: true, if: :change_note_required?
 
@@ -260,8 +260,8 @@ class Document
   class RecordNotFound < StandardError; end
   class TypeMismatchError < StandardError; end
 
-  def save
-    return false unless self.valid?
+  def save(validate: true)
+    return false if validate && !self.valid?
 
     self.update_type = 'major' if first_draft?
 
@@ -327,7 +327,7 @@ class Document
 
   def upload_attachment(attachment)
     if attachments.upload(attachment)
-      save
+      save(validate: false)
     else
       false
     end
@@ -335,7 +335,7 @@ class Document
 
   def update_attachment(attachment)
     if attachments.update(attachment)
-      save
+      save(validate: false)
     else
       false
     end
