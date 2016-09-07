@@ -51,6 +51,10 @@ RSpec.configure do |config|
     mocks.syntax = :expect
   end
 
+  config.before(:each) do
+    User.destroy_all
+  end
+
   config.after(:each) do
     Timecop.return
     GDS::SSO.test_user = nil
