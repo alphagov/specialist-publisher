@@ -6,7 +6,10 @@ class OpenBeforeClosedValidator < ActiveModel::EachValidator
 private
 
   def before_closed?(record)
-    record.opened_date <= record.closed_date || record.closed_date.blank?
+    opened = record.opened_date
+    closed = record.closed_date
+
+    opened.blank? || closed.blank? || opened <= closed
   end
 
   def error_message
