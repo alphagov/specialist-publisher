@@ -4,6 +4,7 @@
   "format_name": "Vehicle recalls and faults",
   "name": "Vehicle recalls and faults",
   "beta": true,
+  "pre_production": true,
   "summary": "<p>Find out if your vehicle has been recalled by the manufacturer or has a fault. You can also search for child car seats, tyres and other vehicle parts.</p>",
   "filter": {
     "document_type": "vehicle_recalls_and_faults_alert"
