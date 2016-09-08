@@ -188,7 +188,6 @@ FactoryGirl.define do
           "location" => "Near Popham Airfield, Hampshire",
           "aircraft_type" => "Alpi (Cavaciuti) Pioneer 400",
           "registration" => "G-CGVO",
-          "document_type" => "aaib_report",
         }
       }
     end
@@ -208,7 +207,6 @@ FactoryGirl.define do
           "tribunal_decision_landmark" => "not-landmark",
           "tribunal_decision_reference_number" => "1234567890",
           "tribunal_decision_sub_category" => "section-95-destitution",
-          "document_type" => "asylum_support_decision",
         }
       }
     end
@@ -221,7 +219,6 @@ FactoryGirl.define do
     transient do
       default_metadata {
         {
-          "document_type" => "cma_case",
           "opened_date" => "2014-01-01",
           "closed_date" => "2015-01-01",
           "case_type" => "ca98-and-civil-cartels",
@@ -244,7 +241,6 @@ FactoryGirl.define do
           "land_use" => ["priority-habitats", "trees-non-woodland", "uplands"],
           "tiers_or_standalone_items" => ["higher-tier"],
           "funding_amount" => ["201-to-300"],
-          "document_type" => "countryside_stewardship_grant",
         }
       }
     end
@@ -257,7 +253,6 @@ FactoryGirl.define do
     transient do
       default_metadata {
         {
-          "document_type" => "dfid_research_output",
           "dfid_document_type" => "book_chapter",
           "country" => ["GB"],
           "dfid_authors" => ["Mr. Potato Head", "Mrs. Potato Head"],
@@ -277,7 +272,6 @@ FactoryGirl.define do
       default_metadata {
         {
           "therapeutic_area" => ["cancer", "haematology", "immunosuppression-transplantation"],
-          "document_type" => "drug_safety_update",
         }
       }
     end
@@ -295,7 +289,6 @@ FactoryGirl.define do
           "tribunal_decision_landmark" => "landmark",
           "tribunal_decision_sub_categories" => ["contract-of-employment-apprenticeship"],
           "hidden_indexable_content" => "???",
-          "document_type" => "employment_appeal_tribunal_decision",
         }
       }
     end
@@ -312,7 +305,6 @@ FactoryGirl.define do
           "tribunal_decision_country" => "england-and-wales",
           "tribunal_decision_decision_date" => "2015-07-30",
           "hidden_indexable_content" => "???",
-          "document_type" => "employment_tribunal_decision",
         }
       }
     end
@@ -330,7 +322,6 @@ FactoryGirl.define do
           "fund_type" => ["business-support"],
           "location" => ["south-west"],
           "funding_source" => ["european-regional-development-fund"],
-          "document_type" => "esi_fund",
         }
       }
     end
@@ -348,7 +339,6 @@ FactoryGirl.define do
           "development_sector" => ["climate-change"],
           "eligible_entities" => ["non-governmental-organisations"],
           "value_of_funding" => ["up-to-100000"],
-          "document_type" => "international_development_fund",
         }
       }
     end
@@ -364,7 +354,6 @@ FactoryGirl.define do
           "date_of_occurrence" => "2015-10-10",
           "report_type" => "investigation-report",
           "vessel_type" => ["merchant-vessel-100-gross-tons-or-over"],
-          "document_type" => "maib_report",
         }
       }
     end
@@ -380,7 +369,6 @@ FactoryGirl.define do
           "alert_type" => "company-led-drugs",
           "issued_date" => "2016-02-01",
           "medical_specialism" => %w(anaesthetics cardiology),
-          "document_type" => "medical_safety_alert",
         }
       }
     end
@@ -396,7 +384,6 @@ FactoryGirl.define do
           "date_of_occurrence" => "2015-10-10",
           "report_type" => "investigation-report",
           "railway_type" => ["heavy-rail"],
-          "document_type" => "raib_report",
         }
       }
     end
@@ -412,7 +399,6 @@ FactoryGirl.define do
           "tribunal_decision_category" => "banking",
           "tribunal_decision_decision_date" => "2015-07-30",
           "hidden_indexable_content" => "???",
-          "document_type" => "tax_tribunal_decision",
         }
       }
     end
@@ -429,7 +415,6 @@ FactoryGirl.define do
             "tribunal_decision_decision_date" => "2016-01-01",
             "tribunal_decision_judges" => ["angus-r"],
             "tribunal_decision_sub_categories" => ["benefits-for-children-benefit-increases-for-children"],
-            "document_type" => "utaac_decision",
             "hidden_indexable_content" => "???"
         }
       }
@@ -451,7 +436,6 @@ FactoryGirl.define do
           "manufacturer" => "nim-engineering-ltd",
           "faulty_item_model" => "Cable Recovery Winch",
           "serial_number" => "SN123",
-          "document_type" => "vehicle_recalls_and_faults_alert",
         }
       }
     end
