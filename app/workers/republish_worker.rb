@@ -3,7 +3,7 @@ require "services"
 class RepublishWorker
   include Sidekiq::Worker
 
-  def perform(content_id, _ = nil)
+  def perform(content_id)
     document = Document.find(content_id)
 
     unless safe_to_republish?(document)
