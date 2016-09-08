@@ -77,7 +77,6 @@ RSpec.feature "Creating a CMA case", type: :feature do
           "case_type" => "ca98-and-civil-cartels",
           "case_state" => "open",
           "market_sector" => ["energy"],
-          "document_type" => "cma_case"
         },
         "change_history" => [],
         "max_cache_time" => 10,
@@ -247,7 +246,6 @@ RSpec.feature "Creating a CMA case", type: :feature do
           "case_type" => "ca98-and-civil-cartels",
           "case_state" => "open",
           "market_sector" => ["energy"],
-          "document_type" => "cma_case"
         },
         "change_history" => [],
         "max_cache_time" => 10,
