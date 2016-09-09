@@ -28,6 +28,7 @@ RSpec.describe Document do
 
       expect(publishing_api).to receive(:get_content_items)
         .with(
+          publishing_app: "specialist-publisher",
           document_type: "my_document_type",
           fields: [
             :base_path,
