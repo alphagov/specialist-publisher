@@ -43,6 +43,7 @@ time bundle install --path "${HOME}/bundles/${JOB_NAME}" --deployment
 RAILS_ENV=test GOVUK_CONTENT_SCHEMAS_PATH=tmp/govuk-content-schemas \
   bundle exec rspec \
   spec/presenters/document_presenter_spec.rb \
+  spec/presenters/finders/finder_content_item_presenter_spec.rb
   spec/presenters/finders/finder_signup_content_item_presenter_spec.rb
 
 EXIT_STATUS=$?
