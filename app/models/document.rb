@@ -25,9 +25,10 @@ class Document
     :update_type
   )
 
-  def temporary_update_type?
+  def temporary_update_type
     !!@temporary_update_type
   end
+  alias_method :temporary_update_type?, :temporary_update_type
 
   validates :title, presence: true
   validates :summary, presence: true

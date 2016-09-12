@@ -67,6 +67,10 @@ RSpec.describe DocumentPresenter do
       expected_attachments = payload["details"]["attachments"].map(&:symbolize_keys)
       expect(presented_data[:details][:attachments]).to eq(expected_attachments)
     end
+
+    it "sends the temporary_update_type as a boolean so that it validates against the schema" do
+      expect(presented_data[:details][:temporary_update_type]).to eq(false)
+    end
   end
 
   describe '#to_json with headers' do
