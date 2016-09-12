@@ -223,6 +223,7 @@ class Document
 
   def self.all(page, per_page, q: nil)
     params = {
+      publishing_app: "specialist-publisher",
       document_type: self.document_type,
       fields: [
         :base_path,
