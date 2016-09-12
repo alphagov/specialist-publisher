@@ -37,7 +37,7 @@ require 'gds_api/test_helpers/email_alert_api'
 
 require 'pundit/rspec'
 
-require 'sidekiq/testing'
+require 'govuk_sidekiq/testing'
 Sidekiq::Testing.inline!
 
 RSpec.configure do |config|
