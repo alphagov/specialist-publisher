@@ -9,16 +9,24 @@ jQuery(function($) {
 
   ////
   // Make a select2 that will create new values on return as you type them
-  $(".select2.free-form-list").select2({
-    tags: true,
-    createTag: function (params) {
-      return {
-        id: params.term,
-        text: params.term,
-        newOption: true
+  (function () {
+    var element = $(".free-form-list");
+    if (element.length === 0) return;
+
+    var value = element.val();
+    var tags = (value === "") ? [] : value.split("::");
+
+    element.select2({
+      tags: tags,
+      separator: "::"
+    }).on("change", function (event) {
+      var added = event.added;
+
+      if (typeof added !== "undefined" && tags.indexOf(added.text) === -1) {
+        tags.push(added.text);
       }
-    }
-  });
+    });
+  })();
 
   $('.js-hidden').hide();
 
