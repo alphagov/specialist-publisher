@@ -1,16 +1,17 @@
 require 'spec_helper'
 
 RSpec.feature "Visiting the app", type: :feature do
-  let(:fields) { %i[content_id description title details public_updated_at publication_state base_path update_type] }
-
   before do
     log_in_as_editor(:cma_editor)
-    publishing_api_has_content([], document_type: "manual", fields: fields, per_page: Manual.max_numbers_of_manuals)
+    publishing_api_has_content([], hash_including(document_type: CmaCase.document_type))
   end
 
-  scenario "visiting / should redirect to manuals" do
+  scenario "visiting / should display /cma-cases" do
     visit "/"
-    expect(page).to have_content("Your manuals (0)")
+    expect(page).to have_selector("h1", text: "CMA Cases")
+    expect(page).to have_selector("nav a", text: "CMA Cases")
+    expect(page).not_to have_content("AAIB Reports")
+    expect(page).not_to have_content("Manuals")
   end
 
   scenario "visiting any path should set an authenticated user header" do

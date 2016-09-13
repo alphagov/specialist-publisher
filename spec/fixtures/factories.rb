@@ -16,7 +16,6 @@ FactoryGirl.define do
 
   factory :gds_editor, parent: :user do
     organisation_slug "government-digital-service"
-    organisation_content_id "af07d5a5-df63-4ddc-9383-6a666845ebe9"
     permissions %w(signin gds_editor)
   end
 
@@ -28,6 +27,11 @@ FactoryGirl.define do
   factory :moj_editor, parent: :editor do
     organisation_slug "ministry-of-justice"
     organisation_content_id "dcc907d6-433c-42df-9ffb-d9c68be5dc4d"
+  end
+
+  factory :incorrect_id_editor, parent: :editor do
+    organisation_slug "competition-and-markets-authority"
+    organisation_content_id "ycd9e3dh-222g-3h5f-gsaa-v2f28berrc3a"
   end
 
   factory :aaib_editor, parent: :editor do
