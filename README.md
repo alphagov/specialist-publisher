@@ -32,7 +32,7 @@ Publishing App for Specialist Documents and Manuals.
 - **Finder**:  Sometimes Formats are referred to as Finders. They are called 'Finders' because each one of them creates a finder on GOV.UK, e.g. https://www.gov.uk/raib-reports. The formats are served by [Finder Frontend](https://github.com/alphagov/finder-frontend).
 - **Document**: Specialist Documents are created by Government editors and can be published to gov.uk. Documents differ from each other depending on their format. These differences are largely determined by what is contained in the [schema](https://github.com/alphagov/specialist-publisher-rebuild/blob/add-dfid-review-status/lib/documents/schemas/aaib_reports.json) of a format.
 - **Schema**: JSON files defining attributes for each format, including `base_path`, `document_noun` and `document_type`. It also contains the facets and their possible values for each `document_type` which are displayed by `_form.html.erb`.
-- **Manual**: Grouped Documents published as a number of sections inside a parent document.
+- **Manual**: Grouped Documents published as a number of sections inside a parent document. Manuals only exist in V1 specialist-publisher.
 
 ## Technical documentation
 
@@ -44,7 +44,7 @@ Another result of publishing a document is that a call is made to the Email Aler
 
 Attachments are sent to and then handled by Asset Manager. When an attachment is uploaded, Asset Manager will scan the attachment for viruses and then return a URL from which the attachment can be viewed.
 
-The original [Specialist-Pubisher](https://github.com/alphagov/specialist-publisher) contained Manuals and Finders in the same application. Currently Manuals are still being served by the original Specialist-Publisher. It is likely that as a future part of the rebuild, manuals will be separated out into their own application.
+The original [Specialist-Pubisher](https://github.com/alphagov/specialist-publisher) contained Manuals and Finders in the same application. Currently Manuals are still being served by the original Specialist-Publisher. As a future part of the rebuild, manuals will be separated out into their own application.
 
 ### Live (but flagged as pre-production)
 * [UTAAC Decisions](https://www.gov.uk/utaac-decisions)

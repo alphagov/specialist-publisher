@@ -1,7 +1,0 @@
-<% content_for :breadcrumbs do %>
-  <li><%= link_to "Your manuals", manuals_path %></li>
-  <li><%= link_to @section.manual.title, manual_path(@section.manual_content_id) %></li>
-  <li><%= link_to @section.title, edit_manual_section_path(@section.manual_content_id, @section.content_id) %></li>
-  <li class='active'>Edit attachment</li>
-<% end %>
-
