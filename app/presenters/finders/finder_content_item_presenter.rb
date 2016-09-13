@@ -42,7 +42,6 @@ private
       filter: file.fetch("filter", nil),
       format_name: file.fetch("format_name", nil),
       logo_path: file.fetch("logo_path", nil),
-      signup_link: file.fetch("signup_link", nil),
       show_summaries: file.fetch("show_summaries", false),
       summary: file.fetch("summary", nil),
       facets: file.fetch("facets", nil),
