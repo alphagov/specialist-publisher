@@ -7,11 +7,7 @@
 <% end %>
 
 <%= render layout: 'shared/form_group', locals: { f: f, field: :dfid_authors, label: 'Authors' } do %>
-  <%=
-    f.select :dfid_authors, @document.dfid_authors || [],
-      { include_blank: true },
-      { class: 'select2 free-form-list', multiple: true, data: { placeholder: 'Add authors' } }
-  %>
+  <%= f.text_field :dfid_author_tags, class: 'form-control free-form-list', data: { placeholder: 'Add authors' } %>
 <% end %>
 
 <%= render layout: 'shared/form_group', locals: { f: f, field: :country, label: 'Countries' } do %>
