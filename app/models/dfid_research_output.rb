@@ -16,6 +16,7 @@ class DfidResearchOutput < Document
 
   def initialize(params = {})
     super(params, FORMAT_SPECIFIC_FIELDS)
+    self.dfid_author_tags = params[:dfid_author_tags]
   end
 
   ##
@@ -37,5 +38,13 @@ class DfidResearchOutput < Document
 
   def state_history_one_or_shorter?
     state_history.nil? ? true : state_history.size < 2
+  end
+
+  def dfid_author_tags
+    (dfid_authors || []).join("::")
+  end
+
+  def dfid_author_tags=(tags)
+    self.dfid_authors = (tags || "").split("::")
   end
 end

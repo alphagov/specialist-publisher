@@ -10,4 +10,15 @@ RSpec.describe DfidResearchOutput do
   it 'is always bulk published to hide the publishing-api published date' do
     expect(output.bulk_published).to be true
   end
+
+  it "has a dfid_author_tags virtual attribute" do
+    subject.dfid_author_tags = "a, b::c"
+    expect(subject.dfid_authors).to eq ["a, b", "c"]
+
+    subject.dfid_authors = ["foo, bar", "baz"]
+    expect(subject.dfid_author_tags).to eq "foo, bar::baz"
+
+    subject = described_class.new(dfid_author_tags: "foo, bar::baz")
+    expect(subject.dfid_authors).to eq ["foo, bar", "baz"]
+  end
 end
