@@ -1,6 +1,7 @@
 //= require jquery
 //= require select2
 //= require length_counter
+//= require form_change_protection
 
 jQuery(function($) {
   $(".select2").select2({

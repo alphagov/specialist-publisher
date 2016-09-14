@@ -452,7 +452,7 @@ RSpec.feature "Editing a CMA case", type: :feature do
     }
 
     scenario "showing the update type radio buttons" do
-      within(".new_cma_case") do
+      within(".edit_document") do
         expect(page).to have_content('Only use for minor changes like fixes to typos, links, GOV.UK style or metadata.')
         expect(page).to have_content('This will notify subscribers to ')
         expect(page).to have_content('Update type minor')
@@ -484,7 +484,7 @@ RSpec.feature "Editing a CMA case", type: :feature do
 
   context "a draft document" do
     scenario "not showing the update type radio buttons" do
-      within(".new_cma_case") do
+      within(".edit_document") do
         expect(page).not_to have_content('Only use for minor changes like fixes to typos, links, GOV.UK style or metadata.')
         expect(page).not_to have_content('This will notify subscribers to ')
         expect(page).not_to have_content('Update type minor')
