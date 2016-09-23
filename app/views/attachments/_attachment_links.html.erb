@@ -19,7 +19,8 @@
               <%= button_to("delete", document_attachment_path(params[:document_type_slug],
                                                                @document.content_id,
                                                                attachment.content_id),
-                            method: "delete")
+                            method: "delete",
+                  class: "btn btn-danger")
               %>
               <%= attachment.snippet %>
             </li>
