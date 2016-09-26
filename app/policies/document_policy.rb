@@ -8,7 +8,7 @@ class DocumentPolicy < ApplicationPolicy
   alias_method :edit?, :index?
   alias_method :update?, :index?
   alias_method :show?, :index?
-  #TODO fix this, attachments are using the wrong policy
+  #FIXME fix this, attachments are using the wrong policy
   alias_method :destroy?, :index?
 
   def publish?
