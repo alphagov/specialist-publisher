@@ -40,10 +40,6 @@ RSpec.feature "Editing a CMA case", type: :feature do
           {
             "content_type" => "text/govspeak",
             "content" => "## Header" + ("\r\n\r\nThis is the long body of an example CMA case" * 2)
-          },
-          {
-            "content_type" => "text/html",
-            "content" => ("<h2 id=\"header\">Header</h2>\n" + "\n<p>This is the long body of an example CMA case</p>\n" * 2)
           }
         ],
         "headers" => [{
@@ -83,7 +79,6 @@ RSpec.feature "Editing a CMA case", type: :feature do
         details: {
           "body" => [
             { "content_type" => "text/govspeak", "content" => "A body" },
-            { "content_type" => "text/html", "content" => "<p>A body</p>\n" },
           ],
           "metadata" => {
             "bulk_published" => true,
@@ -306,10 +301,6 @@ RSpec.feature "Editing a CMA case", type: :feature do
               {
                 "content_type" => "text/govspeak",
                 "content" => "[InlineAttachment:asylum-support-image.jpg]"
-              },
-              {
-                "content_type" => "text/html",
-                "content" => "<p><a href=\"https://assets.digital.cabinet-office.gov.uk/media/513a0efbed915d425e000002/asylum-support-image.jpg\">asylum report image title</a></p>\n"
               }
             ],
           },
@@ -336,6 +327,8 @@ RSpec.feature "Editing a CMA case", type: :feature do
         publishing_api_has_item(updated_cma_case)
 
         click_button "Save as draft"
+
+        update_govspeak_body_in_payload(updated_cma_case, existing_attachments)
 
         assert_publishing_api_put_content(content_id, write_payload(updated_cma_case))
 

@@ -86,11 +86,7 @@ RSpec.describe Document do
           {
             content_type: "text/govspeak",
             content: "This is the body of an example document",
-          },
-          {
-            content_type: "text/html",
-            content: "<p>This is the body of an example document</p>\n",
-          },
+          }
         ],
         metadata: {
           field1: "2015-12-01",
