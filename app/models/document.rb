@@ -327,6 +327,14 @@ class Document
     @attachments ||= AttachmentCollection.new
   end
 
+  def delete_attachment(attachment)
+    if attachments.remove(attachment)
+      save(validate: false)
+    else
+      false
+    end
+  end
+
   def upload_attachment(attachment)
     if attachments.upload(attachment)
       save(validate: false)

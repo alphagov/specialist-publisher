@@ -11,12 +11,21 @@
       <ul class="attachments">
         <% @document.attachments.each do |attachment| %>
             <li class="attachment">
-              <span class="title"><%= attachment.title %></span>
+              <span class="title attachment-line"><%= attachment.title %></span>
+              <span class="attachment-line"> <%= attachment.snippet %> </span>
               <%= link_to "edit", edit_document_attachment_path(params[:document_type_slug],
-                  @document.content_id,
-                  attachment.content_id)
+                                                                @document.content_id,
+                                                                attachment.content_id),
+                          class: "btn btn-warning"
               %>
-              <%= attachment.snippet %>
+              <%= button_to("delete", document_attachment_path(params[:document_type_slug],
+                                                               @document.content_id,
+                                                               attachment.content_id),
+                            method: "delete",
+                            class: "btn btn-danger",
+                            form_class: "attachment-button",
+                            data: {confirm: "This will delete #{attachment.title}. Are you sure?"})
+              %>
             </li>
         <% end %>
       </ul>

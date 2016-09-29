@@ -644,6 +644,25 @@ RSpec.describe Document do
         expect(subject.upload_attachment(attachment)).to eq(false)
       end
     end
+
+    describe '#delete_attachment' do
+      before do
+        subject.attachments = [attachment]
+      end
+
+      it 'deletes its attachment on a successful API call' do
+        expect(subject.attachments).to receive(:remove).and_return(true)
+        expect(subject).to receive(:save)
+        subject.delete_attachment(attachment)
+        expect subject.attachments.count == 0
+      end
+
+      it 'returns false and preserves its attachment on a failed call' do
+        expect(subject.attachments).to receive(:remove).and_return(false)
+        expect(subject.delete_attachment(attachment)).to eq(false)
+        expect subject.attachments.count == 1
+      end
+    end
   end
 
   describe "#set_temporary_update_type!"do
