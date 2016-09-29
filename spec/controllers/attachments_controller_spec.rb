@@ -110,4 +110,19 @@ RSpec.describe AttachmentsController, type: :controller do
       expect(response).to redirect_to(edit_document_path(document_type_slug: document_type_slug, content_id: document_content_id))
     end
   end
+
+  describe "DELETE destroy" do
+    it "redirects to the specialist document edit page" do
+      document = CmaCase.find(document_content_id)
+      allow_any_instance_of(AttachmentsController).to receive(:fetch_document).and_return(document)
+      stub_any_publishing_api_put_content
+      stub_any_publishing_api_patch_links
+      stub_request(:delete, %r{#{Plek.find('asset-manager')}/assets/.*})
+        .to_return(body: JSON.dump(asset_manager_response), status: 201)
+      expect(document.attachments.count).to eq(2)
+      delete :destroy, document_type_slug: document_type_slug, document_content_id: document_content_id, attachment_content_id: attachment_content_id
+      expect(document.attachments.count).to eq(1)
+      expect(response).to redirect_to(edit_document_path(document_type_slug: document_type_slug, content_id: document_content_id))
+    end
+  end
 end
