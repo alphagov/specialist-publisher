@@ -15,14 +15,14 @@ class GovspeakBodyPresenter
   end
 
   def format_images_for_publishing_api(text)
-    text.gsub(/!\[InlineAttachment:(.+?)\]/) do
+    text.gsub(/!\[InlineAttachment:\s*(.+?)\s*\]/) do
       filename = Regexp.last_match[1]
       inline_attachment_replacement(filename, "image")
     end
   end
 
   def format_inline_attachments_for_publishing_api(text)
-    text.gsub(/\[InlineAttachment:(.+?)\]/) do
+    text.gsub(/\[InlineAttachment:\s*(.+?)\s*\]/) do
       filename = Regexp.last_match[1]
       inline_attachment_replacement(filename, "inline")
     end
@@ -36,7 +36,13 @@ class GovspeakBodyPresenter
 
   def matching_attachment(filename)
     document.attachments.detect do |att|
-      att.url.split("/").last == filename
+      sanitise_filename(att.url) == sanitise_filename(filename)
     end
+  end
+
+  def sanitise_filename(filepath)
+    special_chars = /[^a-z0-9]/
+    filename = filepath.split("/").last
+    CGI::unescape(filename).downcase.gsub(special_chars, "_")
   end
 end
