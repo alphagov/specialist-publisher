@@ -13,7 +13,7 @@ class DocumentsController < ApplicationController
       authorize current_format
     else
       flash[:danger] = "That format doesn't exist. If you feel you've reached this in error, contact your SPOC."
-      redirect_to manuals_path
+      redirect_to root_path
     end
   end
 
