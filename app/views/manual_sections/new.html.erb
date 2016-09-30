@@ -1,8 +1,0 @@
-<% content_for :breadcrumbs do %>
-  <li><%= link_to "Your manuals", manuals_path %></li>
-  <li class='active'>Add section</li>
-<% end %>
-
-<h1 class="page-header">Add section</h1>
-
-<%= render 'form', section: @section, url: {action: 'create'}, method: 'post' %>

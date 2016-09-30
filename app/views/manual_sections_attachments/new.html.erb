@@ -1,9 +1,0 @@
-<%= render partial: "manual_sections_attachments/breadcrumbs" %>
-
-<h1 class="page-header">Add attachment</h1>
-
-<%= render(partial: "shared/attachments_form", locals: {
-    attachment: @attachment,
-    url: manual_section_attachments_path(@section.manual_content_id, @section.content_id),
-    method: 'post'
-}) %>

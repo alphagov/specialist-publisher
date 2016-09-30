@@ -19,7 +19,7 @@ private
 
   def user_not_authorized
     flash[:danger] = "You aren't permitted to access #{current_format.title.pluralize}. If you feel you've reached this in error, contact your SPOC."
-    redirect_to manuals_path
+    redirect_to root_path
   end
 
 
