@@ -27,7 +27,7 @@ RSpec.describe SpecialistPublisherBodyPresenter do
   end
 
   describe ".present" do
-    let(:result) { subject.present(document) }
+    let(:result) { subject.present(document)["content"] }
 
     context "body includes inline attachment" do
       context "matching attachment doesn't exist" do

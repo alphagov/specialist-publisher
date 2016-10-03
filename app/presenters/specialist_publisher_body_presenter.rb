@@ -10,20 +10,23 @@ class SpecialistPublisherBodyPresenter
   end
 
   def present
+    return document.body unless document.body.is_a?(Hash)
     body_content = document.body["content"]
-    formatted = convert_images(body_content)
-    convert_attachments(formatted)
+    convert_images(body_content)
+    convert_attachments(body_content)
+    document.body["content"] = body_content
+    document.body
   end
 
   def convert_attachments(text)
-    text.gsub(/\[embed:attachments:inline:\s*(.+?)\s*\]/) do
+    text.gsub!(/\[embed:attachments:inline:\s*(.+?)\s*\]/) do
       identifier = Regexp.last_match[1]
       inline_attachment_replacement(identifier)
     end
   end
 
   def convert_images(text)
-    text.gsub(/\[embed:attachments:image:\s*(.+?)\s*\]/) do
+    text.gsub!(/\[embed:attachments:image:\s*(.+?)\s*\]/) do
       identifier = Regexp.last_match[1]
       image_replacement(identifier)
     end
