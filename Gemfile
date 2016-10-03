@@ -23,7 +23,7 @@ gem "govuk_frontend_toolkit", "0.44.0"
 if ENV["GOVSPEAK_DEV"]
   gem "govspeak", path: "../govspeak"
 else
-  gem "govspeak", "~> 3.5"
+  gem "govspeak", "~> 5.0"
 end
 
 if ENV["API_DEV"]
