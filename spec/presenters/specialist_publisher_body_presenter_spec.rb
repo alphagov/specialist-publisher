@@ -5,7 +5,7 @@ RSpec.describe SpecialistPublisherBodyPresenter do
   let(:document) do
     instance_double(
       Document,
-      body: { "content": content }.stringify_keys,
+      body: { content: content },
       attachments: attachments,
     )
   end
@@ -27,7 +27,7 @@ RSpec.describe SpecialistPublisherBodyPresenter do
   end
 
   describe ".present" do
-    let(:result) { subject.present(document)["content"] }
+    let(:result) { subject.present(document)[:content] }
 
     context "body includes inline attachment" do
       context "matching attachment doesn't exist" do
