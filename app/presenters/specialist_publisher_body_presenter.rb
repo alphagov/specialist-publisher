@@ -9,26 +9,21 @@ class SpecialistPublisherBodyPresenter
     @document = document
   end
 
-  def govspeak_element
-    document.body.find { |h| h[:content_type] == "text/govspeak" }
-  end
-
   def present
     case
     when document.body.is_a?(Array)
-      body_content = govspeak_element[:content]
-      updated_body_content = parse_body(body_content)
-      govspeak_element[:content] = updated_body_content
+      body_content = document.body.find { |h| h[:content_type] == "text/govspeak" }
+      govspeak_element[:content] = parse_body(body_content)
     when document.body.is_a?(Hash)
       body_content = document.body[:content]
-      updated_body_content = parse_body(body_content)
-      document.body[:content] = updated_body_content
+      document.body[:content] = parse_body(body_content)
     else
-      updated_body_content = parse_body(document.body)
-      document.body = updated_body_content
+      document.body = parse_body(document.body)
     end
     document.body
   end
+
+private
 
   def parse_body(text)
     convert_images(text)
