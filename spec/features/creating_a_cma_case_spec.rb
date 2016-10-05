@@ -66,10 +66,6 @@ RSpec.feature "Creating a CMA case", type: :feature do
           {
             "content_type" => "text/govspeak",
             "content" => "## Header\r\n\r\nThis is the long body of an example CMA case\r\n\r\nThis is the long body of an example CMA case"
-          },
-          {
-             "content_type" => "text/html",
-             "content" => "<h2 id=\"header\">Header</h2>\n\n<p>This is the long body of an example CMA case</p>\n\n<p>This is the long body of an example CMA case</p>\n",
           }
         ],
         "metadata" => {
@@ -235,10 +231,6 @@ RSpec.feature "Creating a CMA case", type: :feature do
           {
             "content_type" => "text/govspeak",
             "content" => "## Header\r\n\r\nThis is the long body of an example CMA case\r\n\r\nThis is the long body of an example CMA case"
-          },
-          {
-             "content_type" => "text/html",
-             "content" => "<h2 id=\"header\">Header</h2>\n\n<p>This is the long body of an example CMA case</p>\n\n<p>This is the long body of an example CMA case</p>\n",
           }
         ],
         "metadata" => {
