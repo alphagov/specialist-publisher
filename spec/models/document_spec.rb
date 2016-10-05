@@ -433,6 +433,12 @@ RSpec.describe Document do
       assert_rummager_deleted_content document.base_path
     end
 
+    it "deletes document attachments" do
+      expect(AttachmentDeleteWorker).to receive(:perform_async).with(payload["content_id"])
+
+      document.unpublish
+    end
+
     context "unsuccessful #unpublish" do
       it "notifies Airbrake and returns false if publishing-api does not return status 200" do
         expect(Airbrake).to receive(:notify)

@@ -306,6 +306,7 @@ class Document
     handle_remote_error do
       Services.publishing_api.unpublish(content_id, type: 'gone')
 
+      AttachmentDeleteWorker.perform_async(content_id)
       RummagerDeleteWorker.perform_async(base_path)
     end
   end
