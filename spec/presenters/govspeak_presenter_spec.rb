@@ -6,73 +6,98 @@ RSpec.describe GovspeakPresenter do
   let(:document) { double(:document, body: body, attachments: attachments) }
   let(:presented) { described_class.present(document) }
 
-  it "presents the body as multi-type content" do
+  it "presents the body as multi-type content without adding HTML" do
     expect(presented).to eq [
       { content_type: "text/govspeak", content: "Hello, world" },
-      { content_type: "text/html", content: "<p>Hello, world</p>\n" },
     ]
   end
 
-  context "when the document has inline attachments" do
-    let(:snippet) { "[InlineAttachment:foo.pdf]" }
-    let(:url) { "http://assets.publishing.service.gov.uk/url/foo.pdf" }
-    let(:attachment) {
-      double(:attachment, snippet: snippet, title: "Foo", url: url)
-    }
+  describe ".presented" do
+    let(:expected) { [{ content_type: "text/govspeak", content: content, }] }
 
-    let(:body) { snippet }
-    let(:attachments) { [attachment] }
+    context "when the document has images as inline attachments" do
+      let(:body)        { "![InlineAttachment:foo.jpg]" }
+      let(:title)       { "Picture of a tasty-looking pizza" }
+      let(:content_id)  { 123 }
+      let(:attachments) {
+        [instance_double(Attachment, url: url, content_id: content_id)]
+      }
 
-    it "replaces the snippet with an anchor and no rel='external' tag" do
-      expect(presented).to eq [
-        { content_type: "text/govspeak", content: snippet },
-        { content_type: "text/html",
-          content: %(<p><a href="http://assets.publishing.service.gov.uk/url/foo.pdf">Foo</a></p>\n) }
-      ]
+      context "there is a matching attachment" do
+        let(:url) { "http://assets.publishing.service.gov.uk/url/foo.jpg" }
+        let(:content) { "[embed:attachments:image:123]" }
+
+        it "replaces InlineAttachment syntax with embed:attachments:image" do
+          expect(presented).to eq expected
+        end
+      end
+
+      context "there is no matching attachment" do
+        let(:url) { "http://assets.publishing.service.gov.uk/url/bar.jpg" }
+        let(:content) { "[embed:attachments:image:foo.jpg]" }
+
+        it "replaces InlineAttachment syntax and references the filename" do
+          expect(presented).to eq expected
+        end
+      end
     end
-  end
 
-  context "when the document has external links and a protocol (i.e. HTTP:)" do
-    let(:body) { "[External Link with protocol](https://something.external.uk/url/foo.pdf)" }
+    context "when the document has inline attachments" do
+      let(:body)        { "[InlineAttachment:foo.pdf]" }
+      let(:content_id)  { 123 }
+      let(:attachments) {
+        [instance_double(Attachment, url: url, content_id: content_id)]
+      }
 
-    it "adds rel='external' to anchor tag for non-whitelisted hosts" do
-      expect(presented).to eq [
-                                  { content_type: "text/govspeak", content: body },
-                                  { content_type: "text/html",
-                                    content: %(<p><a rel="external" href="https://something.external.uk/url/foo.pdf">External Link with protocol</a></p>\n) }]
+      context "there is a matching attachment" do
+        let(:url) { "http://assets.publishing.service.gov.uk/url/foo.pdf" }
+        let(:content) { "[embed:attachments:inline:123]" }
+
+        it "replaces the InlineAttachment syntax with embed:attachments:inline" do
+          expect(presented).to eq expected
+        end
+      end
+
+      context "there is no matching attachment" do
+        let(:url) { "http://assets.publishing.service.gov.uk/url/bar.pdf" }
+        let(:content) { "[embed:attachments:inline:foo.pdf]" }
+
+        it "replaces the InlineAttachment syntax and references the filename" do
+          expect(presented).to eq expected
+        end
+      end
     end
-  end
 
-  context "when the document has external links and no protocol" do
-    let(:body) { "[External Link without protocol](something.external.uk/url/foo.pdf)" }
+    context "when the document has multiple inline attachments" do
+      let(:attachments) do
+        [
+          instance_double(Attachment, url: "falafel.pdf", content_id: 100),
+          instance_double(Attachment, url: "tabbouleh.pdf", content_id: 101),
+          instance_double(Attachment, url: "babaganoush.jpg", content_id: 102),
+        ]
+      end
+      let(:body) do
+        %(
+        Here is some body content.
+        [InlineAttachment:falafel.pdf]
+        [InlineAttachment:tabbouleh.pdf]
+        Some extra text, presumably about Levantine foodstuffs.
+        ![InlineAttachment:babaganoush.jpg]
+        )
+      end
+      let(:content) do
+        %(
+        Here is some body content.
+        [embed:attachments:inline:100]
+        [embed:attachments:inline:101]
+        Some extra text, presumably about Levantine foodstuffs.
+        [embed:attachments:image:102]
+        )
+      end
 
-    it "does not adds rel='external' to anchor tag" do
-      expect(presented).to eq [
-                                  { content_type: "text/govspeak", content: body },
-                                  { content_type: "text/html",
-                                    content: %(<p><a href="something.external.uk/url/foo.pdf">External Link without protocol</a></p>\n) }]
-    end
-  end
-
-  context "when the document has internal links with a protocol (i.e. HTTP:)" do
-    let(:body) { "[Internal Link with protocol](http://www.gov.uk/url/foo.pdf)" }
-
-    it "does not adds rel='external' to anchor tag" do
-      expect(presented).to eq [
-                                  { content_type: "text/govspeak", content: body },
-                                  { content_type: "text/html",
-                                    content: %(<p><a href="http://www.gov.uk/url/foo.pdf">Internal Link with protocol</a></p>\n) }]
-    end
-  end
-
-  context "when the document has internal links and no protocol" do
-    let(:body) { "[Internal Link without protocol](www.gov.uk/url/foo.pdf)" }
-
-    it "does not adds rel='external' to anchor tag" do
-      expect(presented).to eq [
-                                  { content_type: "text/govspeak", content: body },
-                                  { content_type: "text/html",
-                                    content: %(<p><a href="www.gov.uk/url/foo.pdf">Internal Link without protocol</a></p>\n) }]
+      it "replaces the InlineAttachment syntax" do
+        expect(presented).to eq expected
+      end
     end
   end
 

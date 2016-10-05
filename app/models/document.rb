@@ -219,6 +219,7 @@ class Document
       document.public_send(:"#{field.to_s}=", payload['details']['metadata'][field.to_s])
     end
 
+    document.body = SpecialistPublisherBodyPresenter.present(document)
     document
   end
 

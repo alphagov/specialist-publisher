@@ -98,10 +98,6 @@ FactoryGirl.define do
             {
               "content_type" => "text/govspeak",
               "content" => "default text"
-            },
-            {
-              "content_type" => "text/html",
-              "content" => "<p>default text</p>\n"
             }
           ],
           "metadata" => default_metadata,

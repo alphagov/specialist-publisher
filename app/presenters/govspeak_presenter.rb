@@ -13,18 +13,15 @@ class GovspeakPresenter
   end
 
   def present
-    [
-      { content_type: "text/govspeak", content: govspeak_body },
-      { content_type: "text/html", content: html_body },
-    ]
+    [{ content_type: "text/govspeak", content: govspeak_body }]
   end
 
   def govspeak_body
-    document.body
+    GovspeakBodyPresenter.present(document)
   end
 
   def html_body
-    body = govspeak_body
+    body = document.body
 
     snippets_in_body.uniq.each do |body_snippet|
       document.attachments.each do |attachment|
