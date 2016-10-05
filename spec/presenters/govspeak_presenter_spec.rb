@@ -67,6 +67,38 @@ RSpec.describe GovspeakPresenter do
         end
       end
     end
+
+    context "when the document has multiple inline attachments" do
+      let(:attachments) do
+        [
+          instance_double(Attachment, url: "falafel.pdf", content_id: 100),
+          instance_double(Attachment, url: "tabbouleh.pdf", content_id: 101),
+          instance_double(Attachment, url: "babaganoush.jpg", content_id: 102),
+        ]
+      end
+      let(:body) do
+        %(
+        Here is some body content.
+        [InlineAttachment:falafel.pdf]
+        [InlineAttachment:tabbouleh.pdf]
+        Some extra text, presumably about Levantine foodstuffs.
+        ![InlineAttachment:babaganoush.jpg]
+        )
+      end
+      let(:content) do
+        %(
+        Here is some body content.
+        [embed:attachments:inline:100]
+        [embed:attachments:inline:101]
+        Some extra text, presumably about Levantine foodstuffs.
+        [embed:attachments:image:102]
+        )
+      end
+
+      it "replaces the InlineAttachment syntax" do
+        expect(presented).to eq expected
+      end
+    end
   end
 
   describe "#snippets_match?" do
