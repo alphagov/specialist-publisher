@@ -299,6 +299,10 @@ class Document
       if send_email_on_publish?
         EmailAlertApiWorker.perform_async(EmailAlertPresenter.new(self).to_json)
       end
+
+      if previously_unpublished?
+        AttachmentRestoreWorker.perform_async(self.content_id)
+      end
     end
   end
 
@@ -387,5 +391,10 @@ private
 
   def finder_schema
     self.class.finder_schema
+  end
+
+  def previously_unpublished?
+    ordered_states = state_history.sort.to_h.values
+    ordered_states.last(2) == %w(unpublished draft)
   end
 end

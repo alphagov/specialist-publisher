@@ -20,9 +20,7 @@ RSpec.feature "Unpublishing a CMA Case", type: :feature do
     scenario "clicking the unpublish button redirects back to the show page" do
       visit document_path(content_id: content_id, document_type_slug: "cma-cases")
       expect(page).to have_content("Example CMA Case")
-
       click_button "Unpublish document"
-
       expect(page.status_code).to eq(200)
       expect(page).to have_content("Unpublished Example CMA Case")
 

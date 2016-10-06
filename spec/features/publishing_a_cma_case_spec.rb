@@ -53,6 +53,8 @@ RSpec.feature "Publishing a CMA case", type: :feature do
 
       publishing_api_has_item_in_sequence(content_id, [item, published_item])
 
+      expect(AttachmentRestoreWorker).not_to receive(:perform_async)
+
       click_button "Publish"
       expect(page.status_code).to eq(200)
       expect(page).to have_content("Published Example CMA Case")

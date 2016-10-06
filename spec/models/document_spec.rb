@@ -348,6 +348,19 @@ RSpec.describe Document do
           assert_publishing_api_put_content(unpublished_document.content_id, request_json_includes(changed_json))
         end
       end
+
+      context "when the document has previously been unpublished" do
+        before do
+          document.state_history = { "1" => "unpublished", "2" => "draft" }
+        end
+
+        it "asynchronously restores attachments" do
+          expect(AttachmentRestoreWorker).to receive(:perform_async)
+            .with(document.content_id)
+
+          document.publish
+        end
+      end
     end
 
     shared_examples_for 'publishing changes to a document that has previously been published' do
