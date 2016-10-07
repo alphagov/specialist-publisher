@@ -244,9 +244,11 @@ class Document
   end
 
   def self.find(content_id)
-    response = Services.publishing_api.get_content(content_id)
-
-    raise RecordNotFound, "Document: #{content_id}" unless response
+    begin
+      response = Services.publishing_api.get_content(content_id)
+    rescue GdsApi::HTTPNotFound
+      raise RecordNotFound, "Document: #{content_id}"
+    end
 
     attributes = response.to_hash
     document_type = attributes.fetch("document_type")
