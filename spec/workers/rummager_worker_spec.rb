@@ -4,7 +4,7 @@ RSpec.describe RummagerWorker do
   include GdsApi::TestHelpers::Rummager
 
   before do
-    stub_any_rummager_post_with_queueing_enabled
+    stub_any_rummager_post
   end
 
   around do |example|

@@ -5,7 +5,7 @@ RSpec.describe RummagerFinderPublisher do
   let(:test_logger) { Logger.new(nil) }
 
   before do
-    stub_any_rummager_post_with_queueing_enabled
+    stub_any_rummager_post
   end
 
   describe "#call" do
