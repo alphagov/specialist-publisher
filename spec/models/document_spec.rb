@@ -21,6 +21,13 @@ RSpec.describe Document do
     expect(MyDocumentType.document_type).to eq("my_document_type")
   end
 
+  describe "parsing date params" do
+    it "sets a date string from rails date select style params" do
+      doc = MyDocumentType.new("field1(1i)": "2016", "field1(2i)": "09", "field1(3i)": "07")
+      expect(doc.field1).to eq("2016-09-07")
+    end
+  end
+
   describe ".all" do
     it "makes a request to the publishing api with the correct params" do
       publishing_api = double(:publishing_api)
