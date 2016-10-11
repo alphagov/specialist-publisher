@@ -55,8 +55,9 @@ class DocumentsController < ApplicationController
   def update
     new_params = filtered_params(params[current_format.document_type])
 
-    new_params.each do |k, v|
-      @document.public_send(:"#{k}=", v)
+    new_params.each do |k|
+      key = k[0].gsub(/\(\di\)$/, "")
+      @document.public_send(:"#{key}=", Document.param_value(new_params, key))
     end
 
     if @document.valid?
