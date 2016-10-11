@@ -5,12 +5,7 @@
       { class: 'form-control' }
   %>
 <% end %>
-<%= render layout: "shared/form_group", locals: { f: f, field: :tribunal_decision_decision_date } do %>
-  <%= f.text_field :tribunal_decision_decision_date,
-      label: "Release date",
-      placeholder: '2015-07-30',
-      class: 'form-control'
-  %>
+<%= render layout: "shared/date_fields", locals: { f: f, field: :tribunal_decision_decision_date, format: :tax_tribunal_decision } do %>
 <% end %>
 <%= render layout: "shared/form_group", locals: { f: f, field: :hidden_indexable_content } do %>
   <%= f.text_area :hidden_indexable_content,

@@ -1,5 +1,4 @@
-<%= render layout: "shared/form_group", locals: { f: f, field: :date_of_occurrence } do %>
-  <%= f.text_field :date_of_occurrence, placeholder: '2012-04-23', class: 'form-control' %>
+<%= render layout: "shared/date_fields", locals: { f: f, field: :date_of_occurrence, format: :aaib_report } do %>
 <% end %>
 <%= render layout: "shared/form_group", locals: { f: f, field: :aircraft_type } do %>
   <%= f.text_field :aircraft_type, class: 'form-control' %>
