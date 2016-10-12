@@ -41,7 +41,7 @@ class Attachment < Document
 
   def upload
     response = Services.asset_api.create_asset(file: @file)
-    @url = response.file_url
+    @url = response["file_url"]
     true
   rescue GdsApi::BaseError => e
     Airbrake.notify(e)
@@ -50,7 +50,7 @@ class Attachment < Document
 
   def update
     response = Services.asset_api.update_asset(id_from_url, file: @file)
-    @url = response.file_url
+    @url = response["file_url"]
     true
   rescue GdsApi::BaseError => e
     Airbrake.notify(e)

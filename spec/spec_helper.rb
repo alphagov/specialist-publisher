@@ -66,6 +66,8 @@ RSpec.configure do |config|
   config.include(GdsApi::TestHelpers::Rummager)
   config.include(GdsApi::TestHelpers::EmailAlertApi)
 
+  GdsApi.config.always_raise_for_not_found = true
+
   # Run specs in random order to surface order dependencies. If you find an
   # order dependency and want to debug it, you can fix the order by providing
   # the seed, which is printed after each run.
