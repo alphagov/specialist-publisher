@@ -20,7 +20,7 @@ RSpec.describe DrugSafetyUpdate do
 
       publishing_api_has_item(payload)
       stub_publishing_api_publish(payload["content_id"], {})
-      stub_any_rummager_post_with_queueing_enabled
+      stub_any_rummager_post
 
       document.publish
 

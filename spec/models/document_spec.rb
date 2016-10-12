@@ -242,7 +242,7 @@ RSpec.describe Document do
       stub_any_publishing_api_patch_links
       stub_publishing_api_publish(document.content_id, {})
       publishing_api_has_item(payload)
-      stub_any_rummager_post_with_queueing_enabled
+      stub_any_rummager_post
       @email_alert_api = email_alert_api_accepts_alert
     end
 
@@ -348,6 +348,19 @@ RSpec.describe Document do
           assert_publishing_api_put_content(unpublished_document.content_id, request_json_includes(changed_json))
         end
       end
+
+      context "when the document has previously been unpublished" do
+        before do
+          document.state_history = { "1" => "unpublished", "2" => "draft" }
+        end
+
+        it "asynchronously restores attachments" do
+          expect(AttachmentRestoreWorker).to receive(:perform_async)
+            .with(document.content_id)
+
+          document.publish
+        end
+      end
     end
 
     shared_examples_for 'publishing changes to a document that has previously been published' do
@@ -398,7 +411,7 @@ RSpec.describe Document do
       stub_any_publishing_api_put_content
       stub_any_publishing_api_patch_links
       stub_publishing_api_publish(document.content_id, {}, status: 503)
-      stub_any_rummager_post_with_queueing_enabled
+      stub_any_rummager_post
       expect(document.publish).to eq(false)
     end
 
@@ -431,6 +444,12 @@ RSpec.describe Document do
       expect(document.unpublish).to eq(true)
 
       assert_rummager_deleted_content document.base_path
+    end
+
+    it "deletes document attachments" do
+      expect(AttachmentDeleteWorker).to receive(:perform_async).with(payload["content_id"])
+
+      document.unpublish
     end
 
     context "unsuccessful #unpublish" do

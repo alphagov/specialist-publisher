@@ -31,7 +31,7 @@ module_function
         document_type: document_type,
         fields: [:content_id],
         per_page: 999999,
-      ).results.map(&:content_id)
+      )["results"].map { |r| r["content_id"] }
     end
   end
 

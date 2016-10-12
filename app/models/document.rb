@@ -244,9 +244,11 @@ class Document
   end
 
   def self.find(content_id)
-    response = Services.publishing_api.get_content(content_id)
-
-    raise RecordNotFound, "Document: #{content_id}" unless response
+    begin
+      response = Services.publishing_api.get_content(content_id)
+    rescue GdsApi::HTTPNotFound
+      raise RecordNotFound, "Document: #{content_id}"
+    end
 
     attributes = response.to_hash
     document_type = attributes.fetch("document_type")
@@ -299,6 +301,10 @@ class Document
       if send_email_on_publish?
         EmailAlertApiWorker.perform_async(EmailAlertPresenter.new(self).to_json)
       end
+
+      if previously_unpublished?
+        AttachmentRestoreWorker.perform_async(self.content_id)
+      end
     end
   end
 
@@ -306,6 +312,7 @@ class Document
     handle_remote_error do
       Services.publishing_api.unpublish(content_id, type: 'gone')
 
+      AttachmentDeleteWorker.perform_async(content_id)
       RummagerDeleteWorker.perform_async(base_path)
     end
   end
@@ -386,5 +393,10 @@ private
 
   def finder_schema
     self.class.finder_schema
+  end
+
+  def previously_unpublished?
+    ordered_states = state_history.sort.to_h.values
+    ordered_states.last(2) == %w(unpublished draft)
   end
 end
