@@ -55,12 +55,25 @@ class Document
     DocumentPolicy
   end
 
+  def self.param_value(params, key)
+    if params.has_key?(:"#{key.to_s}(1i)")
+      format_date = [
+        params.fetch(:"#{key.to_s}(1i)"),
+        params.fetch(:"#{key.to_s}(2i)"),
+        params.fetch(:"#{key.to_s}(3i)")
+      ]
+      format_date.delete_if(&:empty?).join("-")
+    else
+      params.fetch(key, nil)
+    end
+  end
+
   def initialize(params = {}, format_specific_fields = [])
     @content_id = params.fetch(:content_id, SecureRandom.uuid)
     @format_specific_fields = format_specific_fields
 
     (COMMON_FIELDS + format_specific_fields).each do |field|
-      public_send(:"#{field.to_s}=", params.fetch(field, nil))
+      public_send(:"#{field.to_s}=", self.class.param_value(params, field))
     end
 
     @change_history ||= ChangeHistory.new

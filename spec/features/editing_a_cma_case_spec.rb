@@ -54,7 +54,9 @@ RSpec.feature "Editing a CMA case", type: :feature do
     fill_in "Title", with: "Changed title"
     fill_in "Summary", with: "Changed summary"
     fill_in "Body", with: "## Header" + ("\n\nThis is the long body of an example CMA case" * 2)
-    fill_in "Opened date", with: "2014-01-01"
+    fill_in "[cma_case]opened_date(1i)", with: "2014"
+    fill_in "[cma_case]opened_date(2i)", with: "01"
+    fill_in "[cma_case]opened_date(3i)", with: "01"
     select "Energy", from: "Market sector"
 
     expect(page).to have_css('div.govspeak-help')
@@ -233,7 +235,9 @@ RSpec.feature "Editing a CMA case", type: :feature do
     fill_in "Title", with: "Changed title"
     fill_in "Summary", with: "Changed summary"
     fill_in "Body", with: "<script>alert('hello')</script>"
-    fill_in "Opened date", with: "Not a date"
+    fill_in "[cma_case]opened_date(1i)", with: "not"
+    fill_in "[cma_case]opened_date(2i)", with: "a"
+    fill_in "[cma_case]opened_date(3i)", with: "date"
     select "Energy", from: "Market sector"
 
     click_button "Save as draft"

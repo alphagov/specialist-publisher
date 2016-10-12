@@ -41,7 +41,9 @@ RSpec.feature "Creating a CMA case", type: :feature do
     fill_in "Title", with: "Example CMA Case"
     fill_in "Summary", with: "This is the summary of an example CMA case"
     fill_in "Body", with: "## Header" + ("\n\nThis is the long body of an example CMA case" * 2)
-    fill_in "Opened date", with: "2014-01-01"
+    fill_in "[cma_case]opened_date(1i)", with: "2014"
+    fill_in "[cma_case]opened_date(2i)", with: "01"
+    fill_in "[cma_case]opened_date(3i)", with: "01"
     select "Energy", from: "Market sector"
 
     expect(page).to have_css('div.govspeak-help')
@@ -117,7 +119,9 @@ RSpec.feature "Creating a CMA case", type: :feature do
     fill_in "Title", with: "Example CMA Case"
     fill_in "Summary", with: "This is the summary of an example CMA case"
     fill_in "Body", with: "<script>alert('hello')</script>"
-    fill_in "Opened date", with: "Not a date"
+    fill_in "[cma_case]opened_date(1i)", with: "22222000000111111666"
+    fill_in "[cma_case]opened_date(2i)", with: "2223333444"
+    fill_in "[cma_case]opened_date(3i)", with: "1112223333"
     select "Energy", from: "Market sector"
 
     click_button "Save as draft"
@@ -138,8 +142,12 @@ RSpec.feature "Creating a CMA case", type: :feature do
     fill_in "Title", with: "Example CMA Case"
     fill_in "Summary", with: "This is the summary of an example CMA case"
     fill_in "Body", with: "Body of text"
-    fill_in "Opened date", with: "2016-02-14"
-    fill_in "Closed date", with: "2015-02-14"
+    fill_in "[cma_case]opened_date(1i)", with: "2016"
+    fill_in "[cma_case]opened_date(2i)", with: "02"
+    fill_in "[cma_case]opened_date(3i)", with: "14"
+    fill_in "[cma_case]closed_date(1i)", with: "2015"
+    fill_in "[cma_case]closed_date(2i)", with: "02"
+    fill_in "[cma_case]closed_date(3i)", with: "14"
     select "Energy", from: "Market sector"
 
     click_button "Save as draft"
@@ -159,8 +167,12 @@ RSpec.feature "Creating a CMA case", type: :feature do
     fill_in "Title", with: "Example CMA Case"
     fill_in "Summary", with: "This is the summary of an example CMA case"
     fill_in "Body", with: "Body of text"
-    fill_in "Opened date", with: ""
-    fill_in "Closed date", with: "2015-02-14"
+    fill_in "[cma_case]opened_date(1i)", with: ""
+    fill_in "[cma_case]opened_date(2i)", with: ""
+    fill_in "[cma_case]opened_date(3i)", with: ""
+    fill_in "[cma_case]closed_date(1i)", with: "2015"
+    fill_in "[cma_case]closed_date(2i)", with: "02"
+    fill_in "[cma_case]closed_date(3i)", with: "14"
     select "Energy", from: "Market sector"
 
     click_button "Save as draft"
@@ -176,8 +188,12 @@ RSpec.feature "Creating a CMA case", type: :feature do
     fill_in "Title", with: "Example CMA Case"
     fill_in "Summary", with: "This is the summary of an example CMA case"
     fill_in "Body", with: "Body of text"
-    fill_in "Opened date", with: "2015-02-14"
-    fill_in "Closed date", with: ""
+    fill_in "[cma_case]opened_date(1i)", with: "2015"
+    fill_in "[cma_case]opened_date(2i)", with: "02"
+    fill_in "[cma_case]opened_date(3i)", with: "14"
+    fill_in "[cma_case]closed_date(1i)", with: ""
+    fill_in "[cma_case]closed_date(2i)", with: ""
+    fill_in "[cma_case]closed_date(3i)", with: ""
     select "Energy", from: "Market sector"
 
     click_button "Save as draft"
@@ -193,8 +209,12 @@ RSpec.feature "Creating a CMA case", type: :feature do
     fill_in "Title", with: "Example CMA Case"
     fill_in "Summary", with: "This is the summary of an example CMA case"
     fill_in "Body", with: "Body of text"
-    fill_in "Opened date", with: ""
-    fill_in "Closed date", with: ""
+    fill_in "[cma_case]opened_date(1i)", with: ""
+    fill_in "[cma_case]opened_date(2i)", with: ""
+    fill_in "[cma_case]opened_date(3i)", with: ""
+    fill_in "[cma_case]closed_date(1i)", with: ""
+    fill_in "[cma_case]closed_date(2i)", with: ""
+    fill_in "[cma_case]closed_date(3i)", with: ""
     select "Energy", from: "Market sector"
 
     click_button "Save as draft"
@@ -210,7 +230,10 @@ RSpec.feature "Creating a CMA case", type: :feature do
     fill_in "Title", with: "At veroeos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi"
     fill_in "Summary", with: "This is the summary of an example CMA case"
     fill_in "Body", with: "## Header" + ("\n\nThis is the long body of an example CMA case" * 2)
-    fill_in "Opened date", with: "2014-01-01"
+    fill_in "[cma_case]opened_date(1i)", with: "2014"
+    fill_in "[cma_case]opened_date(2i)", with: "01"
+    fill_in "[cma_case]opened_date(3i)", with: "01"
+
     select "Energy", from: "Market sector"
 
     click_button "Save as draft"

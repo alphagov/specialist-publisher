@@ -23,9 +23,5 @@
       }
   %>
 <% end %>
-<%= render layout: "shared/form_group", locals: { f: f, field: :issued_date } do %>
-  <%= f.text_field :issued_date,
-      placeholder: '2012-04-23',
-      class: 'form-control'
-  %>
+<%= render layout: "shared/date_fields", locals: { f: f, field: :issued_date, format: :medical_safety_alert } do %>
 <% end %>

@@ -38,9 +38,5 @@
       }
     %>
 <% end %>
-<%= render layout: "shared/form_group", locals: { f: f, field: :closing_date } do %>
-  <%= f.text_field :closing_date,
-      placeholder: '2018-10-19',
-      class: 'form-control'
-  %>
+<%= render layout: "shared/date_fields", locals: { f: f, field: :closing_date, format: :esi_fund } do %>
 <% end %>

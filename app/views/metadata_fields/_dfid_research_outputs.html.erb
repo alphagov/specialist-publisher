@@ -25,11 +25,8 @@
              { class: 'select2', multiple: true, data: { placeholder: 'Select themes' } }
   %>
 <% end %>
-
-<%= render layout: 'shared/form_group', locals: { f: f, field: :first_published_at, label: 'First published at' } do %>
-  <%= f.text_field :first_published_at, placeholder: '2012-04-23', class: 'form-control' %>
+<%= render layout: "shared/date_fields", locals: { f: f, field: :first_published_at, format: :dfid_research_output } do %>
 <% end %>
-
 <%= render layout: 'shared/form_group', locals: { f: f, field: :dfid_review_status, label: 'Review status' } do %>
   <%= f.select :dfid_review_status, dfid_review_status_options,
     {},
