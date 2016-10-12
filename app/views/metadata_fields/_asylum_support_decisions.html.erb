@@ -38,12 +38,10 @@
                    class: 'form-control'
   %>
 <% end %>
-<%= render layout: "shared/form_group", locals: {f: f, field: :tribunal_decision_decision_date} do %>
-  <%= f.text_field :tribunal_decision_decision_date, placeholder: '2012-04-23', class: 'form-control' %>
+<%= render layout: "shared/date_fields", locals: { f: f, field: :tribunal_decision_decision_date, format: :asylum_support_decision } do %>
 <% end %>
 <%= render layout: "shared/form_group", locals: {f: f, field: :hidden_indexable_content} do %>
   <%= f.text_area :hidden_indexable_content,
                   class: 'form-control'
   %>
 <% end %>
-

@@ -30,7 +30,9 @@ RSpec.feature "Creating a DFID Research Output", type: :feature do
     fill_in "Title", with: title
     fill_in "Summary", with: summary
     fill_in "Body", with: ("## Header" + ("\n\nThis is the long body of an example DFID research output" * 10))
-    fill_in "First published at", with: "2013-01-01"
+    fill_in "[dfid_research_output]first_published_at(1i)", with: "2013"
+    fill_in "[dfid_research_output]first_published_at(2i)", with: "01"
+    fill_in "[dfid_research_output]first_published_at(3i)", with: "01"
     select "Book Chapter", from: "Document type"
     select "Infrastructure", from: "Themes"
     select "Peer reviewed", from: "Review status"

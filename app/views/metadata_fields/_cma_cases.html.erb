@@ -1,8 +1,6 @@
-<%= render layout: "shared/form_group", locals: { f: f, field: :opened_date } do %>
-  <%= f.text_field :opened_date, placeholder: '2012-04-23', class: 'form-control' %>
+<%= render layout: "shared/date_fields", locals: { f: f, field: :opened_date, format: :cma_case } do %>
 <% end %>
-<%= render layout: "shared/form_group", locals: { f: f, field: :closed_date } do %>
-  <%= f.text_field :closed_date, placeholder: '2013-10-19', class: 'form-control' %>
+<%= render layout: "shared/date_fields", locals: { f: f, field: :closed_date, format: :cma_case } do %>
 <% end %>
 <%= render layout: "shared/form_group", locals: { f: f, field: :case_type } do %>
   <%= f.select :case_type, facet_options(f, :case_type), {}, { class: 'form-control' } %>

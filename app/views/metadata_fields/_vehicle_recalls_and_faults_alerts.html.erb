@@ -7,11 +7,7 @@
       }
   %>
 <% end %>
-<%= render layout: "shared/form_group", locals: { f: f, field: :alert_issue_date} do %>
-  <%= f.text_field :alert_issue_date,
-      placeholder: Date.today.to_s,
-      class: 'form-control'
-  %>
+<%= render layout: "shared/date_fields", locals: { f: f, field: :alert_issue_date, format: :vehicle_recalls_and_faults_alert } do %>
 <% end %>
 <%= render layout: "shared/form_group", locals: { f: f, field: :faulty_item_type} do %>
   <%= f.select :faulty_item_type,
@@ -47,15 +43,7 @@
       label: "Serial number/Vehicle ID"
   %>
 <% end %>
-<%= render layout: "shared/form_group", locals: { f: f, field: :build_start_date} do %>
-  <%= f.text_field :build_start_date,
-      placeholder: '2014-07-12',
-      class: 'form-control'
-  %>
+<%= render layout: "shared/date_fields", locals: { f: f, field: :build_start_date, format: :vehicle_recalls_and_faults_alert } do %>
 <% end %>
-<%= render layout: "shared/form_group", locals: { f: f, field: :build_end_date} do %>
-    <%= f.text_field :build_end_date,
-        placeholder: '2014-10-15',
-        class: 'form-control'
-    %>
+<%= render layout: "shared/date_fields", locals: { f: f, field: :build_end_date, format: :vehicle_recalls_and_faults_alert } do %>
 <% end %>
