@@ -119,9 +119,6 @@ RSpec.feature "Creating a CMA case", type: :feature do
     fill_in "Title", with: "Example CMA Case"
     fill_in "Summary", with: "This is the summary of an example CMA case"
     fill_in "Body", with: "<script>alert('hello')</script>"
-    fill_in "[cma_case]opened_date(1i)", with: "22222000000111111666"
-    fill_in "[cma_case]opened_date(2i)", with: "2223333444"
-    fill_in "[cma_case]opened_date(3i)", with: "1112223333"
     select "Energy", from: "Market sector"
 
     click_button "Save as draft"
@@ -132,8 +129,29 @@ RSpec.feature "Creating a CMA case", type: :feature do
     expect(page).to have_css('.elements-error-message')
 
     expect(page).to have_content("Please fix the following errors")
-    expect(page).to have_content("Opened date should be formatted YYYY-MM-DD")
     expect(page).to have_content("Body cannot include invalid Govspeak")
+  end
+
+  scenario "with an invalid date" do
+    visit "/cma-cases/new"
+
+    fill_in "Title", with: "Example CMA Case"
+    fill_in "Summary", with: "This is the summary of an example CMA case"
+    fill_in "Body", with: "<script>alert('hello')</script>"
+    fill_in "[cma_case]opened_date(1i)", with: "2016"
+    fill_in "[cma_case]opened_date(2i)", with: "2"
+    fill_in "[cma_case]opened_date(3i)", with: "31"
+    select "Energy", from: "Market sector"
+
+    click_button "Save as draft"
+
+    expect(page.status_code).to eq(422)
+
+    expect(page).to have_css('.elements-error-summary')
+    expect(page).to have_css('.elements-error-message')
+
+    expect(page).to have_content("Please fix the following errors")
+    expect(page).to have_content("Opened date is not a valid date")
   end
 
   scenario "with closed date before opened date" do
