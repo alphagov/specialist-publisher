@@ -16,4 +16,15 @@ RSpec.describe DocumentsController, type: :controller do
       expect(response.status).to eq(200)
     end
   end
+
+  describe "POST discard" do
+    before do
+      stub_publishing_api_discard_draft(payload["content_id"])
+    end
+
+    it "responds successfully" do
+      post :discard, document_type_slug: "cma-cases", content_id: payload["content_id"]
+      expect(subject).to redirect_to(documents_path(document_type_slug: "cma-cases"))
+    end
+  end
 end

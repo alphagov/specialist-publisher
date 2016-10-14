@@ -5,7 +5,7 @@ class DocumentsController < ApplicationController
   include ActionView::Helpers::TagHelper
   include ActionView::Helpers::TextHelper
 
-  before_action :fetch_document, only: [:edit, :show, :publish, :update, :unpublish]
+  before_action :fetch_document, except: [:index, :new, :create]
   before_action :check_authorisation, if: :document_type_slug
 
   def check_authorisation
@@ -90,6 +90,15 @@ class DocumentsController < ApplicationController
       flash[:danger] = "There was an error unpublishing #{@document.title}. Please try again later."
     end
     redirect_to document_path(current_format.slug, params[:content_id])
+  end
+
+  def discard
+    if @document.discard
+      flash[:success] = "Discarded draft of #{@document.title}"
+    else
+      flash[:danger] = "There was an error discarding draft of #{@document.title}. Please try again later."
+    end
+    redirect_to documents_path(current_format.slug)
   end
 
 private

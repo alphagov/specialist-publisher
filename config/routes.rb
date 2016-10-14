@@ -13,6 +13,7 @@ Rails.application.routes.draw do
 
     post :unpublish, on: :member
     post :publish, on: :member
+    post :discard, on: :member
   end
 
   root to: 'passthrough#index'
