@@ -245,7 +245,7 @@ RSpec.feature "Editing a CMA case", type: :feature do
     expect(page).to have_css('.elements-error-summary')
     expect(page).to have_css('.elements-error-message')
 
-    expect(page).to have_content("Opened date should be formatted YYYY-MM-DD")
+    expect(page).to have_content("Opened date is not a valid date")
     expect(page).to have_content("Body cannot include invalid Govspeak")
     expect(page).to have_content("Please fix the following errors")
 
