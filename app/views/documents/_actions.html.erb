@@ -35,5 +35,19 @@
         <% end %>
       </div>
     <% end %>
+
+    <%= form_tag(presenter.discard_path, method: :post, class: 'panel panel-default') do %>
+      <div class="panel-heading"><h3 class="panel-title">Discard draft</h3></div>
+      <div class="panel-body">
+        <%= presenter.discard_text %>
+
+        <% if presenter.discard_button_visible? %>
+          <button name="submit" class="btn btn-warning"
+                  data-module="confirm"
+                  data-message="<%= presenter.discard_alert %>"
+                  data-disable-with="Discarding draft..." >Discard draft</button>
+        <% end %>
+      </div>
+    <% end %>
   </div>
 </div>

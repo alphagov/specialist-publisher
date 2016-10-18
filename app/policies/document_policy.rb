@@ -16,6 +16,7 @@ class DocumentPolicy < ApplicationPolicy
   end
 
   alias_method :unpublish?, :publish?
+  alias_method :discard?, :publish?
 
   def user_organisation_owns_document_type?
     document_class.organisations.include?(user.organisation_content_id)
