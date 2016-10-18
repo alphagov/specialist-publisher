@@ -359,4 +359,20 @@ RSpec.feature "Creating a CMA case", type: :feature do
       expect(page).not_to have_content("some text")
     end
   end
+
+  scenario "a draft with the same path as an existing draft" do
+    stub_any_publishing_api_put_content.to_raise(
+      GdsApi::HTTPErrorResponse.new(422, "Content item base path=/cma-cases/example-document conflicts with content_id=#{content_id} and locale=en"))
+
+    visit "/cma-cases/new"
+
+    fill_in "Title", with: "Example document"
+    fill_in "Summary", with: "An explanation"
+    fill_in "Body", with: "Some text"
+    select "Energy", from: "Market sector"
+
+    click_button "Save as draft"
+
+    expect(page).to have_content(%r{Content item base path=/cma-cases/example-document conflicts})
+  end
 end
