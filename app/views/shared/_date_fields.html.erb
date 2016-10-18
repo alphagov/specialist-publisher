@@ -12,10 +12,10 @@
         <%= f.text_field field, name: "[#{format}]#{field}(1i)", class: 'form-control', placeholder: '2013', value: date_value("year", date), type: "number" %>
       </div>
       <div class="col-md-2">
-        <%= f.text_field field, name: "[#{format}]#{field}(2i)", class: 'form-control', placeholder: '03', value: date_value("month", date), type: "number" %>
+        <%= f.text_field field, name: "[#{format}]#{field}(2i)", class: 'form-control', placeholder: '03', value: date_value("month", date), type: "number", min: '0', max: '12' %>
       </div>
       <div class="col-md-2">
-        <%= f.text_field field, name: "[#{format}]#{field}(3i)", class: "form-control", placeholder: '20', value: date_value("day", date), type: "number" %>
+        <%= f.text_field field, name: "[#{format}]#{field}(3i)", class: "form-control", placeholder: '20', value: date_value("day", date), type: "number", min: '0', max: '31' %>
       </div>
     </div>
   </div>
