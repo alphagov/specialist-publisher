@@ -77,6 +77,30 @@ class ActionsPresenter
     unpublish_document_path(slug, document.content_id)
   end
 
+  def discard_button_visible?
+    policy.discard? && document.draft?
+  end
+
+  def discard_text
+    if state != "draft"
+      text = "<p>There is no draft to discard.</p>"
+    elsif !policy.discard?
+      text = "<p>You don't have permission to discard this draft.</p>"
+    else
+      text = "<p>This draft will be discarded.</p>"
+    end
+
+    text.html_safe
+  end
+
+  def discard_alert
+    "Are you sure you want to discard this draft?"
+  end
+
+  def discard_path
+    discard_document_path(slug, document.content_id)
+  end
+
 private
 
   def state
