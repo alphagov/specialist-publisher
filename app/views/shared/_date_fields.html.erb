@@ -3,19 +3,19 @@
   <div class="date-layout">
     <p class="form-hint">For example, 2013 03 20</p>
     <div class="row">
-      <%= f.label :name, 'Year', class: "col-md-2" %>
-      <%= f.label :name, 'Month', class: "col-md-2" %>
-      <%= f.label :name, 'Day', class: "col-md-2" %>
+      <%= f.label 'Year', class: "col-md-2" %>
+      <%= f.label 'Month', class: "col-md-2" %>
+      <%= f.label 'Day', class: "col-md-2" %>
     </div>
     <div class="form-group row">
       <div class="col-md-2">
-        <%= f.text_field field, name: "[#{format}]#{field}(1i)", class: 'form-control', placeholder: '2013', value: date_value("year", date), type: "number", min: '1000', max: '9999' %>
+        <%= f.text_field field, name: "[#{format}]#{field}(1i)", id: "#{format}_#{field}_year", class: 'form-control', placeholder: '2013', value: date_value("year", date), type: "number", min: '1000', max: '9999' %>
       </div>
       <div class="col-md-2">
-        <%= f.text_field field, name: "[#{format}]#{field}(2i)", class: 'form-control', placeholder: '03', value: date_value("month", date), type: "number", min: '0', max: '12' %>
+        <%= f.text_field field, name: "[#{format}]#{field}(2i)", id: "#{format}_#{field}_month", class: 'form-control', placeholder: '03', value: date_value("month", date), type: "number", min: '1', max: '12' %>
       </div>
       <div class="col-md-2">
-        <%= f.text_field field, name: "[#{format}]#{field}(3i)", class: "form-control", placeholder: '20', value: date_value("day", date), type: "number", min: '0', max: '31' %>
+        <%= f.text_field field, name: "[#{format}]#{field}(3i)", id: "#{format}_#{field}_day", class: "form-control", placeholder: '20', value: date_value("day", date), type: "number", min: '1', max: '31' %>
       </div>
     </div>
   </div>

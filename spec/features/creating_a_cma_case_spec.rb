@@ -132,14 +132,32 @@ RSpec.feature "Creating a CMA case", type: :feature do
     expect(page).to have_content("Body cannot include invalid Govspeak")
   end
 
+  scenario "a date with a single digit month and day" do
+    visit "/cma-cases/new"
+
+    fill_in "Title", with: "Example CMA Case"
+    fill_in "Summary", with: "This is the summary of an example CMA case"
+    fill_in "Body", with: "Body of text"
+    fill_in "[cma_case]opened_date(1i)", with: "2016"
+    fill_in "[cma_case]opened_date(2i)", with: "1"
+    fill_in "[cma_case]opened_date(3i)", with: "2"
+    select "Energy", from: "Market sector"
+
+    click_button "Save as draft"
+
+    expect(page.status_code).to eq(200)
+
+    expect(page).to have_content("Created Example CMA Case")
+  end
+
   scenario "with an invalid date" do
     visit "/cma-cases/new"
 
     fill_in "Title", with: "Example CMA Case"
     fill_in "Summary", with: "This is the summary of an example CMA case"
-    fill_in "Body", with: "<script>alert('hello')</script>"
+    fill_in "Body", with: "body of text"
     fill_in "[cma_case]opened_date(1i)", with: "2016"
-    fill_in "[cma_case]opened_date(2i)", with: "2"
+    fill_in "[cma_case]opened_date(2i)", with: "02"
     fill_in "[cma_case]opened_date(3i)", with: "31"
     select "Energy", from: "Market sector"
 
