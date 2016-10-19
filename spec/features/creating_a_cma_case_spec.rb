@@ -179,6 +179,28 @@ RSpec.feature "Creating a CMA case", type: :feature do
     expect(page).to have_content("Opened date must be before closed date")
   end
 
+  scenario "with a blank year but filled out day and month" do
+    visit "/cma-cases/new"
+
+    fill_in "Title", with: "Example CMA Case"
+    fill_in "Summary", with: "This is the summary of an example CMA case"
+    fill_in "Body", with: "Body of text"
+    fill_in "[cma_case]opened_date(1i)", with: ""
+    fill_in "[cma_case]opened_date(2i)", with: "02"
+    fill_in "[cma_case]opened_date(3i)", with: "10"
+    select "Energy", from: "Market sector"
+
+    click_button "Save as draft"
+
+    expect(page.status_code).to eq(422)
+
+    expect(page).to have_css('.elements-error-summary')
+    expect(page).to have_css('.elements-error-message')
+
+    expect(page).to have_content("Please fix the following errors")
+    expect(page).to have_content("Opened date is not a valid date")
+  end
+
   scenario "with blank opened date and filled out closed date" do
     visit "/cma-cases/new"
 
