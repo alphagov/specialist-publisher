@@ -1,6 +1,6 @@
-# Specialist Publisher Rebuild
+# Specialist Publisher
 
-Publishing App for Specialist Documents and Manuals.
+Publishing App for Specialist Documents.
 
 ## Screenshots
 
@@ -23,7 +23,6 @@ Publishing App for Specialist Documents and Manuals.
 - [MAIB Reports](https://www.gov.uk/maib-reports)
 - [RAIB Reports](https://www.gov.uk/raib-reports)
 - [Vehicle Recalls and Faults Alerts](https://www.gov.uk/vehicle-recalls-faults)
-- Manuals: There is no public index page for Manuals. They can be found at `gov.uk/guidance/:manual-slug`.
 
 ## Nomenclature
 
@@ -31,11 +30,10 @@ Publishing App for Specialist Documents and Manuals.
 - **Finder**:  Sometimes Formats are referred to as Finders. They are called 'Finders' because each one of them creates a finder on GOV.UK, e.g. https://www.gov.uk/raib-reports. The formats are served by [Finder Frontend](https://github.com/alphagov/finder-frontend).
 - **Document**: Specialist Documents are created by Government editors and can be published to gov.uk. Documents differ from each other depending on their format. These differences are largely determined by what is contained in the [schema](https://github.com/alphagov/specialist-publisher-rebuild/blob/add-dfid-review-status/lib/documents/schemas/aaib_reports.json) of a format.
 - **Schema**: JSON files defining attributes for each format, including `base_path`, `document_noun` and `document_type`. It also contains the facets and their possible values for each `document_type` which are displayed by `_form.html.erb`.
-- **Manual**: Grouped Documents published as a number of sections inside a parent document. Manuals only exist in V1 specialist-publisher.
 
 ## Technical documentation
 
-Specialist Publisher Rebuild is a Ruby on Rails application used to create and manage documents and manuals. This application does not store documents and manuals in a database of its own. Instead it sends JSON data to the publishing-api where it is persisted in a Postgres datastore. This data is then requested from the publishing-api and displayed to the user.
+Specialist Publisher is a Ruby on Rails application used to create and manage documents. This application does not store documents in a database of its own. Instead it sends JSON data to the publishing-api where it is persisted in a Postgres datastore. This data is then requested from the publishing-api and displayed to the user.
 
 When a document is published, the relevant document information is sent to Rummager enabling it to be searchable on gov.uk.
 
@@ -43,7 +41,7 @@ Another result of publishing a document is that a call is made to the Email Aler
 
 Attachments are sent to and then handled by Asset Manager. When an attachment is uploaded, Asset Manager will scan the attachment for viruses and then return a URL from which the attachment can be viewed.
 
-The original [Specialist-Pubisher](https://github.com/alphagov/specialist-publisher) contained Manuals and Finders in the same application. Currently Manuals are still being served by the original Specialist-Publisher. As a future part of the rebuild, manuals will be separated out into their own application.
+The original Specialist-Publisher codebase contained Manuals and Finders in the same application. Manuals are now being managed by [Manuals Publisher](https://github.com/alphagov/manuals-publisher).
 
 ### Live (but flagged as pre-production)
 * [UTAAC Decisions](https://www.gov.uk/utaac-decisions)
