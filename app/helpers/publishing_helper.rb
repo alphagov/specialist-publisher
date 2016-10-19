@@ -4,7 +4,7 @@ module PublishingHelper
       block.call
       true
     rescue GdsApi::HTTPErrorResponse => e
-      @publishable.errors.add(:base, e.message) if @publishable
+      error_response_message(:base, e.message) if @publishable
       Airbrake.notify(e)
       false
     end
@@ -17,5 +17,13 @@ module PublishingHelper
     end
 
     @publishable = obj
+  end
+
+  def error_response_message(key, message)
+    if message.include? "conflicts with content_id"
+      @publishable.errors.add(key, "Warning: This document's URL is already used on GOV.UK. You can't publish it until you change the title.")
+    else
+      @publishable.errors.add(:base, message)
+    end
   end
 end

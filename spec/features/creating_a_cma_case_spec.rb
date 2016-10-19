@@ -373,6 +373,6 @@ RSpec.feature "Creating a CMA case", type: :feature do
 
     click_button "Save as draft"
 
-    expect(page).to have_content(%r{Content item base path=/cma-cases/example-document conflicts})
+    expect(page).to have_content("Warning: This document's URL is already used on GOV.UK. You can't publish it until you change the title.")
   end
 end

@@ -113,7 +113,6 @@ private
       list_items = @document.errors.full_messages.map do |message|
         content_tag(:li, message.html_safe)
       end
-
       list_items.join.html_safe
     end
 

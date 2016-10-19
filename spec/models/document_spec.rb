@@ -777,7 +777,7 @@ RSpec.describe Document do
 
     it "populates an error on the document" do
       subject.save
-      expect(subject.errors[:base]).to eq(["base path=/foo/bar conflicts with content_id=123"])
+      expect(subject.errors[:base]).to eq(["Warning: This document's URL is already used on GOV.UK. You can't publish it until you change the title."])
     end
   end
 
