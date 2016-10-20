@@ -137,9 +137,9 @@ RSpec.feature "Creating a CMA case", type: :feature do
 
     fill_in "Title", with: "Example CMA Case"
     fill_in "Summary", with: "This is the summary of an example CMA case"
-    fill_in "Body", with: "<script>alert('hello')</script>"
+    fill_in "Body", with: "Something"
     fill_in "[cma_case]opened_date(1i)", with: "2016"
-    fill_in "[cma_case]opened_date(2i)", with: "2"
+    fill_in "[cma_case]opened_date(2i)", with: "02"
     fill_in "[cma_case]opened_date(3i)", with: "31"
     select "Energy", from: "Market sector"
 

@@ -1,7 +1,7 @@
 module DateHelper
   def date_value(measure, field)
-    if /^\d{4}-\d{2}-\d{2}$/ =~ field
-      sprintf('%02d', Date.strptime(field).public_send(measure))
-    end
+    return if field.blank?
+    year, month, day = field.split("-")
+    { "year" => year, "month" => month, "day" => day }[measure]
   end
 end
