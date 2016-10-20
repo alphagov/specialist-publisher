@@ -4,7 +4,7 @@ Publishing App for Specialist Documents.
 
 ## Screenshots
 
-![Specialist Documents - CMA Case Format](docs/screen-shot-specialist-publisher-cma-cases.png)
+![Specialist Documents - CMA Case Format](docs/specialist-publisher-screenshot.png)
 *Specialist Documents - CMA Case Format*
 
 ![A Specialist Document on gov.uk](docs/screen-shot-specialist-document-cma-case.png)
@@ -43,8 +43,9 @@ Attachments are sent to and then handled by Asset Manager. When an attachment is
 
 The original Specialist-Publisher codebase contained Manuals and Finders in the same application. Manuals are now being managed by [Manuals Publisher](https://github.com/alphagov/manuals-publisher).
 
-### Live (but flagged as pre-production)
-* [UTAAC Decisions](https://www.gov.uk/utaac-decisions)
+## Pre-production
+
+A number of formats are [flagged](https://github.com/alphagov/specialist-publisher/blob/f8e93142dfad6f3971a73c923b01f2e7352bdb54/lib/documents/schemas/tax_tribunal_decisions.json#L64) as `pre-production`. `pre-production` documents are only publishable on development and integration.
 
 ### Live (but flagged as pre-production)
 * [UTAAC Decisions](https://www.gov.uk/utaac-decisions)
@@ -102,10 +103,6 @@ $ bundle exec rake
 
 Use [this](https://github.com/alphagov/specialist-publisher-rebuild/commit/19218ed625d4c3539bdaec481b250e726258e3aa) as a template.
 
-## Deploying a new finder
-
-There is a detailed guide on how to do this
-[here](./docs/phase-2-migration/deployment-guide.md).
 
 ## Phase 2 migration
 
