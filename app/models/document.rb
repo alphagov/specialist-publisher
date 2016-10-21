@@ -2,6 +2,7 @@ class Document
   include ActiveModel::Model
   include ActiveModel::Validations
   include ActionView::Helpers::TextHelper
+  include DateHelper
   include PublishingHelper
 
   attr_accessor(
@@ -55,37 +56,20 @@ class Document
     DocumentPolicy
   end
 
-  def self.param_value(params, key)
-    if params.has_key?(:"#{key.to_s}(1i)")
-      format_date = [
-        params.fetch(:"#{key.to_s}(1i)"),
-        params.fetch(:"#{key.to_s}(2i)"),
-        params.fetch(:"#{key.to_s}(3i)")
-      ]
-      format_date.delete_if(&:empty?)
-
-      format_date = format_date.map do |date|
-        if /^\d{1}$/ =~ date
-          sprintf('%02d', date)
-        else
-          date
-        end
-      end
-      format_date.join("-")
-    else
-      params.fetch(key, nil)
-    end
-  end
-
   def initialize(params = {}, format_specific_fields = [])
     @content_id = params.fetch(:content_id, SecureRandom.uuid)
     @format_specific_fields = format_specific_fields
 
-    (COMMON_FIELDS + format_specific_fields).each do |field|
-      public_send(:"#{field.to_s}=", self.class.param_value(params, field))
-    end
+    set_attributes(params, COMMON_FIELDS + format_specific_fields)
 
     @change_history ||= ChangeHistory.new
+  end
+
+  def set_attributes(attrs, keys = nil)
+    keys = attrs.keys unless keys
+    keys.each do |key|
+      public_send(:"#{clean_key(key.to_s)}=", param_value(attrs, key))
+    end
   end
 
   def bulk_published
@@ -420,5 +404,9 @@ private
   def previously_unpublished?
     ordered_states = state_history.sort.to_h.values
     ordered_states.last(2) == %w(unpublished draft)
+  end
+
+  def param_value(params, key)
+    date_param_value(params, key) || params.fetch(key, nil)
   end
 end
