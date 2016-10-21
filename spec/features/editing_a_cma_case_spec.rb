@@ -124,6 +124,17 @@ RSpec.feature "Editing a CMA case", type: :feature do
       assert_publishing_api_put_content(content_id, request_json_includes(changed_json))
     end
 
+    scenario "date values display" do
+      visit "/cma-cases/#{content_id}/edit"
+
+      expect(page).to have_field("cma_case_opened_date_year", with: "2014")
+      expect(page).to have_field("cma_case_opened_date_month", with: "01")
+      expect(page).to have_field("cma_case_opened_date_day", with: "01")
+      expect(page).to have_field("cma_case_closed_date_year", with: "2015")
+      expect(page).to have_field("cma_case_closed_date_month", with: "01")
+      expect(page).to have_field("cma_case_closed_date_day", with: "01")
+    end
+
     context "when a document already has a change note" do
       let(:cma_case) do
         FactoryGirl.create(
