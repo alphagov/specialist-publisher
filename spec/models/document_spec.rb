@@ -26,6 +26,11 @@ RSpec.describe Document do
       doc = MyDocumentType.new("field1(1i)": "2016", "field1(2i)": "09", "field1(3i)": "07")
       expect(doc.field1).to eq("2016-09-07")
     end
+
+    it "formats the date consistently" do
+      doc = MyDocumentType.new("field1(1i)": "2016", "field1(2i)": "9", "field1(3i)": "07")
+      expect(doc.field1).to eq("2016-09-07")
+    end
   end
 
   describe ".all" do
