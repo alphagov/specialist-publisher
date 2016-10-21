@@ -62,7 +62,16 @@ class Document
         params.fetch(:"#{key.to_s}(2i)"),
         params.fetch(:"#{key.to_s}(3i)")
       ]
-      format_date.delete_if(&:empty?).join("-")
+      format_date.delete_if(&:empty?)
+
+      format_date = format_date.map do |date|
+        if /^\d{1}$/ =~ date
+          sprintf('%02d', date)
+        else
+          date
+        end
+      end
+      format_date.join("-")
     else
       params.fetch(key, nil)
     end
