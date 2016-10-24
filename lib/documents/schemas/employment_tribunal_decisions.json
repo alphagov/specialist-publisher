@@ -331,6 +331,10 @@
           "value": "blacklisting-regulations"
         },
         {
+          "label": "Breach of Contract",
+          "value": "breach-of-contract"
+        },
+        {
           "label": "Central Arbitration Committee (CAC)",
           "value": "central-arbitration-committee-cac"
         },
@@ -351,16 +355,12 @@
           "value": "employment-agencies-act-1973"
         },
         {
-          "label": "Employment Agencies Act 1973 (obsolete topic)",
-          "value": "employment-agencies-act-1973-obsolete-topic"
-        },
-        {
           "label": "Equal Pay Act",
           "value": "equal-pay-act"
         },
         {
-          "label": "European Material (obsolete topic)",
-          "value": "european-material-obsolete-topic"
+          "label": "European Material",
+          "value": "european-material"
         },
         {
           "label": "Fixed Term Regulations",
@@ -383,16 +383,20 @@
           "value": "human-rights"
         },
         {
-          "label": "Jurisdiction (obsolete topic)",
-          "value": "jurisdiction-obsolete-topic"
+          "label": "Improvement Notice",
+          "value": "improvement-notice"
+        },
+        {
+          "label": "Interim Relief",
+          "value": "interim-relief" 
         },
         {
           "label": "Jurisdictional Points",
           "value": "jurisdictional-points"
         },
         {
-          "label": "Maternity Rights and Parental Leave",
-          "value": "maternity-rights-and-parental-leave"
+          "label": "Maternity and Pregnancy Rights",
+          "value": "maternity-and-pregnancy-rights"
         },
         {
           "label": "National Minimum Wage",
@@ -403,20 +407,28 @@
           "value": "national-security"
         },
         {
+          "label": "Parental and Maternity Leave",
+          "value": "parental-and-maternity-leave"
+        },
+        {
           "label": "Part Time Workers",
           "value": "part-time-workers"
         },
         {
-          "label": "Practice and Procedure",
-          "value": "practice-and-procedure"
+          "label": "Pension",
+          "value": "pension"
         },
         {
-          "label": "Procedural Issues (obsolete topic)",
-          "value": "procedural-issues-obsolete-topic"
+          "label": "Practice and Procedure Issues",
+          "value": "practice-and-procedure-issues"
         },
         {
-          "label": "Public Interest Disclosure (obsolete topic)",
-          "value": "public-interest-disclosure-obsolete-topic"
+          "label": "Protective Award",
+          "value": "protective-award"
+        },
+        {
+          "label": "Public Interest Disclosure",
+          "value": "public-interest-disclosure"
         },
         {
           "label": "Race Discrimination",
@@ -431,8 +443,16 @@
           "value": "religion-or-belief-discrimination"
         },
         {
-          "label": "Reserved Forces Act (obsolete topic)",
-          "value": "reserved-forces-act-obsolete-topic"
+          "label": "Renumeration",
+          "value": "renumeration"
+        },
+        {
+          "label": "Reorganisation",
+          "value": "reorganisation"
+        },
+        {
+          "label": "Reserved Forces Act",
+          "value": "reserved-forces-act"
         },
         {
           "label": "Right To Be Accompanied",
@@ -455,12 +475,24 @@
           "value": "statutory-discipline-and-grievance-procedures"
         },
         {
-          "label": "Time Limits (obsolete topic)",
-          "value": "time-limits-obsolete-topic"
+          "label": "Tax",
+          "value": "tax"
+        },
+        {
+          "label": "Temporary Employment",
+          "value": "temporary-employment"
+        },
+        {
+          "label": "Time Limits",
+          "value": "time-limits"
         },
         {
           "label": "Time Off",
           "value": "time-off"
+        },
+        {
+          "label": "Time to Train",
+          "value": "time-to-train"
         },
         {
           "label": "Trade Union Membership",
@@ -489,6 +521,14 @@
         {
           "label": "Working Time Regulations",
           "value": "working-time-regulations"
+        },
+        {
+          "label": "Written Pay Statement",
+          "value": "written-pay-statement"
+        },
+        {
+          "label": "Written Statements",
+          "value": "written-statements"
         }
       ]
     },
