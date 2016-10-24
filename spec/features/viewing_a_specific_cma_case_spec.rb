@@ -253,4 +253,18 @@ RSpec.feature "Viewing a specific case", type: :feature do
       end
     end
   end
+
+  context "when a published item exists with the same base path" do
+    let(:content_id) { SecureRandom.uuid }
+    let(:draft) { FactoryGirl.create(:cma_case, content_id: content_id, title: "Example draft", base_path: "/cma-cases/foo") }
+
+    scenario "displays warnings" do
+      stub_request(:get, %r{/v2/content/#{content_id}})
+        .to_return(status: 200, body: draft.merge(warnings: { "content_item_blocking_publish" => true }).to_json)
+
+      visit "/cma-cases/#{content_id}"
+
+      expect(page).to have_content("Warning: This document's URL is already used on GOV.UK. You can't publish it until you change the title.")
+    end
+  end
 end

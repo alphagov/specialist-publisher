@@ -758,4 +758,54 @@ RSpec.describe Document do
       expect(subject.first_draft?).to eq(false)
     end
   end
+
+  context "saving a draft where another draft has the same base_path" do
+    before do
+      stub_any_publishing_api_put_content
+        .to_raise(GdsApi::HTTPErrorResponse.new(422, "base path=/foo/bar conflicts with content_id=123"))
+    end
+
+    subject do
+      MyDocumentType.new(title: "A document",
+                         summary: "An introduction",
+                         body: "Some text")
+    end
+
+    it "cannot be saved" do
+      expect(subject.save).to be false
+    end
+
+    it "populates an error on the document" do
+      subject.save
+      expect(subject.errors[:base]).to eq(["Warning: This document's URL is already used on GOV.UK. You can't publish it until you change the title."])
+    end
+  end
+
+  context "a draft where a published item has the same base_path" do
+    let(:content_id) { SecureRandom.uuid }
+    let(:published) { FactoryGirl.create(:document, document_type: "my_document_type", content_id: content_id) }
+
+    before do
+      stub_request(:get, %r{/v2/content/#{content_id}})
+        .to_return(status: 200,
+                   body: published.merge(warnings: { "content_item_blocking_publish" => "foo" }).to_json)
+    end
+
+    subject { described_class.find(content_id) }
+
+    it "cannot be published" do
+      expect(subject.publish).to be false
+    end
+
+    it "populates warnings on the document" do
+      expect(subject.warnings).to eq("content_item_blocking_publish" => "foo")
+    end
+
+    it "can be saved" do
+      stub_any_publishing_api_put_content
+      stub_any_publishing_api_patch_links
+      subject.update_type = "minor"
+      expect(subject.save).to be true
+    end
+  end
 end

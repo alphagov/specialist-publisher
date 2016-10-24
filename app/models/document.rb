@@ -23,7 +23,8 @@ class Document
     :first_published_at,
     :previous_version,
     :temporary_update_type,
-    :update_type
+    :update_type,
+    :warnings
   )
 
   def temporary_update_type
@@ -50,6 +51,7 @@ class Document
     :bulk_published,
     :change_history,
     :temporary_update_type,
+    :warnings
   ]
 
   def self.policy_class
@@ -214,7 +216,8 @@ class Document
       bulk_published: payload['details']['metadata']['bulk_published'],
       change_history: ChangeHistory.parse(payload['details']['change_history']),
       previous_version: payload['previous_version'],
-      temporary_update_type: payload['details']['temporary_update_type']
+      temporary_update_type: payload['details']['temporary_update_type'],
+      warnings: payload['warnings'] || {}
     )
 
     set_update_type(document, payload)
@@ -280,12 +283,15 @@ class Document
     presented_links = DocumentLinksPresenter.new(self)
 
     handle_remote_error do
+      set_errors_on(self)
       Services.publishing_api.put_content(self.content_id, presented_document.to_json)
       Services.publishing_api.patch_links(self.content_id, presented_links.to_json)
     end
   end
 
   def publish
+    return false unless publishable?
+
     handle_remote_error do
       if first_draft?
         change_history.first_published!
@@ -391,6 +397,10 @@ class Document
     nil
   end
 
+  def content_item_blocking_publish?
+    warnings && warnings.has_key?("content_item_blocking_publish")
+  end
+
 private
 
   def self.finder_schema
@@ -408,5 +418,9 @@ private
 
   def param_value(params, key)
     date_param_value(params, key) || params.fetch(key, nil)
+  end
+
+  def publishable?
+    !content_item_blocking_publish?
   end
 end
