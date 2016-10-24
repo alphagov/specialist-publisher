@@ -9,7 +9,7 @@ the Publishing API. There are two main reasons to republish:
 ## Republishing for the first time
 
 We wrote a rake task in the old Specialist Publisher that reads content out of
-Mongo and writes it into the Publishing API. We chec what state the content is
+Mongo and writes it into the Publishing API. We check what state the content is
 in and issue a set of requests to transition the content into that state in
 Publishing API.
 
