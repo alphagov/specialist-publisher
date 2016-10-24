@@ -34,21 +34,23 @@ class DocumentsController < ApplicationController
       filtered_params(params[current_format.document_type])
     )
 
-    if @document.valid?
-      if @document.save
-        flash[:success] = "Created #{@document.title}"
-        redirect_to document_path(current_format.slug, @document.content_id)
-      else
-        flash.now[:danger] = "There was an error creating #{@document.title}. Please try again later."
-        render :new
-      end
-    else
+    if @document.save
+      flash[:success] = "Created #{@document.title}"
+      redirect_to document_path(current_format.slug, @document.content_id)
+    elsif @document.errors.any?
       flash.now[:errors] = document_error_messages
       render :new, status: 422
+    else
+      flash.now[:danger] = "There was an error creating #{@document.title}. Please try again later."
+      render :new
     end
   end
 
-  def show; end
+  def show
+    if @document.content_item_blocking_publish?
+      flash[:danger] = "Warning: This document's URL is already used on GOV.UK. You can't publish it until you change the title."
+    end
+  end
 
   def edit; end
 
@@ -111,7 +113,6 @@ private
       list_items = @document.errors.full_messages.map do |message|
         content_tag(:li, message.html_safe)
       end
-
       list_items.join.html_safe
     end
 
