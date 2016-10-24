@@ -2,14 +2,26 @@
   <%= f.select :tribunal_decision_category,
      f.object.facet_options(:tribunal_decision_category),
      {},
-     {class: 'form-control'}
+     {
+         class: 'select2 form-control',
+         multiple: true,
+         data: {
+             placeholder: 'Select judges'
+         }
+     }
   %>
 <% end %>
 <%= render layout: "shared/form_group", locals: {f: f, field: :tribunal_decision_sub_category} do %>
   <%= f.select :tribunal_decision_sub_category,
      f.object.facet_options(:tribunal_decision_sub_category),
      {},
-     {class: 'form-control'}
+     {
+         class: 'select2 form-control',
+         multiple: true,
+         data: {
+             placeholder: 'Select judges'
+         }
+     }
   %>
 <% end %>
 <%= render layout: "shared/form_group", locals: {f: f, field: :tribunal_decision_judges} do %>

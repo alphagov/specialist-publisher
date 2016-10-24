@@ -201,12 +201,12 @@ FactoryGirl.define do
       default_metadata {
         {
           "hidden_indexable_content" => "some hidden content",
-          "tribunal_decision_category" => "section-95-support-for-asylum-seekers",
+          "tribunal_decision_category" => ["section-95-support-for-asylum-seekers"],
           "tribunal_decision_decision_date" => "2015-10-10",
           "tribunal_decision_judges" => ["bayati-c"],
           "tribunal_decision_landmark" => "not-landmark",
           "tribunal_decision_reference_number" => "1234567890",
-          "tribunal_decision_sub_category" => "section-95-destitution",
+          "tribunal_decision_sub_category" => ["section-95-destitution"],
         }
       }
     end
