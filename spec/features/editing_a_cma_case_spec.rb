@@ -275,7 +275,7 @@ RSpec.feature "Editing a CMA case", type: :feature do
         {
           "content_id" => "77f2d40e-3853-451f-9ca3-a747e8402e34",
           "url" => "https://assets.digital.cabinet-office.gov.uk/media/513a0efbed915d425e000002/asylum-support-image.jpg",
-          "content_type" => "application/jpeg",
+          "content_type" => "application/jpg",
           "title" => "asylum report image title",
           "created_at" => "2015-12-03T16:59:13+00:00",
           "updated_at" => "2015-12-03T16:59:13+00:00"

@@ -12,15 +12,14 @@ class AttachmentsController < ApplicationController
 
   def create
     document = fetch_document
-
     if attachment_valid?
+
       attachment = document.attachments.build(attachment_params)
       attachment.content_type = attachment.file.content_type
 
       upload_attachment(document, attachment)
     else
-      flash[:danger] = "Adding an attachment failed. Please make sure you have uploaded an attachment."
-      redirect_to new_document_attachment_path(document_type_slug, document.content_id)
+      failed_to_attach(document)
     end
   end
 
@@ -36,8 +35,10 @@ class AttachmentsController < ApplicationController
 
     if attachment.file.nil?
       save_updated_title(document, attachment)
-    else
+    elsif white_listed?
       update_attachment(document, attachment)
+    else
+      failed_to_attach(document)
     end
   end
 
@@ -117,6 +118,16 @@ private
   end
 
   def attachment_valid?
-    !params["attachment"].nil? && !params["attachment"]["file"].nil?
+    attachment = params["attachment"]
+    attachment.present? && attachment["file"].present? && white_listed?
+  end
+
+  def white_listed?
+    Attachment.valid_filetype?(params["attachment"]["file"])
+  end
+
+  def failed_to_attach(document)
+    flash[:danger] = "Adding an attachment failed. Please make sure you have uploaded an attachment of a permitted file type."
+    redirect_to new_document_attachment_path(document_type_slug, document.content_id)
   end
 end

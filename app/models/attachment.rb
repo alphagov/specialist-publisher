@@ -21,6 +21,11 @@ class Attachment < Document
     @being_updated = false
   end
 
+  def self.valid_filetype?(file)
+    extension = File.extname(file.tempfile)
+    EXTENSION_WHITE_LIST.include? extension
+  end
+
   def update_attributes(new_params)
     new_params.each do |k, v|
       self.public_send(:"#{k}=", v)
