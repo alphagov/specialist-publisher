@@ -47,10 +47,18 @@ RSpec.describe AttachmentsController, type: :controller do
   end
 
   describe "POST create" do
+    let(:file) { Rack::Test::UploadedFile.new("spec/support/images/cma_case_image.jpg", "image/jpg") }
     let(:attachment) {
       {
-        file: Rack::Test::UploadedFile.new("spec/support/images/cma_case_image.jpg", "image/jpg"),
+        file: file,
         title: 'test attachment upload'
+      }
+    }
+
+    let(:no_file_attachment) {
+      {
+        file: nil,
+        title: 'no file attached'
       }
     }
 
@@ -60,6 +68,7 @@ RSpec.describe AttachmentsController, type: :controller do
 
       stub_any_publishing_api_put_content
       stub_any_publishing_api_patch_links
+      allow(file).to receive(:tempfile).and_return("/cma_cases.jpg")
 
       stub_request(:post, "#{Plek.find('asset-manager')}/assets")
         .with(body: %r{.*})
@@ -75,8 +84,7 @@ RSpec.describe AttachmentsController, type: :controller do
       document = CmaCase.find(document_content_id)
       allow_any_instance_of(AttachmentsController).to receive(:fetch_document).and_return(document)
 
-      post :create, document_type_slug: document_type_slug, document_content_id: document_content_id, attachment: nil
-
+      post :create, document_type_slug: document_type_slug, document_content_id: document_content_id, attachment: no_file_attachment
       expect(response).to redirect_to(new_document_attachment_path(document_type_slug: document_type_slug))
     end
   end
@@ -95,16 +103,24 @@ RSpec.describe AttachmentsController, type: :controller do
   end
 
   describe "PUT update" do
+    let(:updated_file) { Rack::Test::UploadedFile.new("spec/support/images/updated_cma_case_image.jpg", "mime/type") }
+    let(:updated_attachment) {
+      {
+        file: updated_file,
+        title: 'updated test attachment upload'
+      }
+    }
     it "redirects to the specalist document edit page" do
       document = CmaCase.find(document_content_id)
       allow_any_instance_of(AttachmentsController).to receive(:fetch_document).and_return(document)
+      allow(updated_file).to receive(:tempfile).and_return("/cma_cases.jpg")
 
       stub_any_publishing_api_put_content
       stub_any_publishing_api_patch_links
       stub_request(:put, %r{#{Plek.find('asset-manager')}/assets/.*})
         .to_return(body: JSON.dump(asset_manager_response), status: 201)
 
-      post :update, document_type_slug: document_type_slug, document_content_id: document_content_id, attachment_content_id: attachment_content_id, attachment: { file: Rack::Test::UploadedFile.new("spec/support/images/updated_cma_case_image.jpg", "mime/type"), title: 'updated test attachment upload' }
+      post :update, document_type_slug: document_type_slug, document_content_id: document_content_id, attachment_content_id: attachment_content_id, attachment: updated_attachment
 
       expect(document.attachments.count).to eq(2)
       expect(response).to redirect_to(edit_document_path(document_type_slug: document_type_slug, content_id: document_content_id))

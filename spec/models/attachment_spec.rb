@@ -140,6 +140,14 @@ RSpec.describe Attachment do
     end
   end
 
+  describe ".valid_filetype?" do
+    it "should check that a file extension has been white listed" do
+      tempfile = Tempfile.new(['foobar', '.jpeg'])
+      extension = File.extname(tempfile)
+      allow_any_instance_of(File).to receive(:tempfile).and_return(extension)
+      expect(EXTENSION_WHITE_LIST.include? File.extname(tempfile)).to eq(false)
+    end
+  end
 
   describe "#update_attributes" do
     let(:content_id) { SecureRandom.uuid }
