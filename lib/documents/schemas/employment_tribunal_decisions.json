@@ -71,21 +71,9 @@
       "prechecked": false
     },
     {
-      "key": "employment-agencies-act-1973-obsolete-topic",
-      "radio_button_name": "Employment Agencies Act 1973 (obsolete topic)",
-      "topic_name": "employment agencies act 1973 obsolete topic",
-      "prechecked": false
-    },
-    {
       "key": "equal-pay-act",
       "radio_button_name": "Equal Pay Act",
       "topic_name": "equal pay act",
-      "prechecked": false
-    },
-    {
-      "key": "european-material-obsolete-topic",
-      "radio_button_name": "European Material (obsolete topic)",
-      "topic_name": "european material obsolete topic",
       "prechecked": false
     },
     {
@@ -119,21 +107,9 @@
       "prechecked": false
     },
     {
-      "key": "jurisdiction-obsolete-topic",
-      "radio_button_name": "Jurisdiction (obsolete topic)",
-      "topic_name": "jurisdiction obsolete topic",
-      "prechecked": false
-    },
-    {
       "key": "jurisdictional-points",
       "radio_button_name": "Jurisdictional Points",
       "topic_name": "jurisdictional points",
-      "prechecked": false
-    },
-    {
-      "key": "maternity-rights-and-parental-leave",
-      "radio_button_name": "Maternity Rights and Parental Leave",
-      "topic_name": "maternity rights and parental leave",
       "prechecked": false
     },
     {
@@ -155,24 +131,6 @@
       "prechecked": false
     },
     {
-      "key": "practice-and-procedure",
-      "radio_button_name": "Practice and Procedure",
-      "topic_name": "practice and procedure",
-      "prechecked": false
-    },
-    {
-      "key": "procedural-issues-obsolete-topic",
-      "radio_button_name": "Procedural Issues (obsolete topic)",
-      "topic_name": "procedural issues obsolete topic",
-      "prechecked": false
-    },
-    {
-      "key": "public-interest-disclosure-obsolete-topic",
-      "radio_button_name": "Public Interest Disclosure (obsolete topic)",
-      "topic_name": "public interest disclosure obsolete topic",
-      "prechecked": false
-    },
-    {
       "key": "race-discrimination",
       "radio_button_name": "Race Discrimination",
       "topic_name": "race discrimination",
@@ -188,12 +146,6 @@
       "key": "religion-or-belief-discrimination",
       "radio_button_name": "Religion or Belief Discrimination",
       "topic_name": "religion or belief discrimination",
-      "prechecked": false
-    },
-    {
-      "key": "reserved-forces-act-obsolete-topic",
-      "radio_button_name": "Reserved Forces Act (obsolete topic)",
-      "topic_name": "reserved forces act obsolete topic",
       "prechecked": false
     },
     {
@@ -224,12 +176,6 @@
       "key": "statutory-discipline-and-grievance-procedures",
       "radio_button_name": "Statutory Discipline and Grievance Procedures",
       "topic_name": "statutory discipline and grievance procedures",
-      "prechecked": false
-    },
-    {
-      "key": "time-limits-obsolete-topic",
-      "radio_button_name": "Time Limits (obsolete topic)",
-      "topic_name": "time limits obsolete topic",
       "prechecked": false
     },
     {
@@ -388,7 +334,7 @@
         },
         {
           "label": "Interim Relief",
-          "value": "interim-relief" 
+          "value": "interim-relief"
         },
         {
           "label": "Jurisdictional Points",
