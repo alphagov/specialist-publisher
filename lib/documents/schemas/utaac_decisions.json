@@ -2070,6 +2070,10 @@
       "filterable": true,
       "allowed_values": [
         {
+          "label": "Agnew, C",
+          "value": "agnew-c"
+        },
+        {
           "label": "Angus, R",
           "value": "angus-r"
         },
@@ -2090,12 +2094,20 @@
           "value": "brown-m"
         },
         {
-          "label": "Bruner, K",
-          "value": "bruner-k"
+          "label": "Brunner, K",
+          "value": "brunner-k"
+        },
+        {
+          "label": "Burns, D",
+          "value": "burns-d"
         },
         {
           "label": "Burton, F",
           "value": "burton-f"
+        },
+        {
+          "label": "Caldwell, M",
+          "value": "Caldwell-m"
         },
         {
           "label": "Carlisle, H",
@@ -2218,6 +2230,10 @@
           "value": "lloyd-davies-a"
         },
         {
+          "label": "Lunney, J",
+          "value": "lunney-j"
+        },
+        {
           "label": "Machin, K",
           "value": "machin-k"
         },
@@ -2324,6 +2340,10 @@
         {
           "label": "Skinner, J",
           "value": "skinner-j"
+        },
+        {
+          "label": "Smith, R",
+          "value": "smith-r"
         },
         {
           "label": "Sutherland Williams, M",
