@@ -24,9 +24,7 @@ be created before it can be published again. Similarly, if the content is
 published and there is also a draft, the draft must be published in order to
 unpublish the content.
 
-This workflow would be easier for our users to manage if we added the ability to
-discard a draft. This is something the platform supports but isn't implemented
-by this application.
+Drafts can also be discarded by the user.
 
 ## API requests
 
@@ -43,6 +41,10 @@ Specialist Publisher speaks to four external services.
 - Publishing API: PUT /v2/content
 - Asset Manager: POST /assets
 
+**delete attachment**
+- Publishing API: PUT /v2/content
+- Asset Manager: DELETE /assets/:id
+
 **publish**
 
 - Publishing API: POST /v2/publish
@@ -53,6 +55,10 @@ Specialist Publisher speaks to four external services.
 
 - Publishing API: POST /v2/unpublish
 - Rummager: DELETE /documents
+
+**discard draft**
+
+- Publishing API: POST /v2/content/:content_id/discard-draft
 
 In addition to these, Specialist Publisher also makes GET requests to the
 following endpoints:
