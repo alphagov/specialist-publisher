@@ -6,6 +6,7 @@ module PublishingApiHelpers
     copy.delete("first_published_at")
     copy.delete("public_updated_at")
     copy.delete("state_history")
+    copy.fetch("details", {}).delete("change_history")
     copy
   end
 

@@ -59,16 +59,7 @@ RSpec.feature "Publishing a CMA case", type: :feature do
       expect(page.status_code).to eq(200)
       expect(page).to have_content("Published Example CMA Case")
 
-      expected_change_history = [
-          {
-              "public_timestamp" => Time.current.iso8601,
-              "note" => "First published.",
-          }
-      ]
-
-      changed_json = {
-          "details" => item["details"].merge("change_history" => expected_change_history)
-      }
+      changed_json = { "change_note" => "First published." }
 
       assert_publishing_api_put_content(content_id, request_json_includes(changed_json))
 
@@ -170,10 +161,7 @@ RSpec.feature "Publishing a CMA case", type: :feature do
 
         expect(payload["title"]).to eq("Changed title")
         expect(payload["update_type"]).to eq("major")
-        expect(payload["details"]["change_history"]).to eq([
-          { "public_timestamp" => "2016-01-01T00:00:00+00:00", "note" => "First published." },
-          { "public_timestamp" => Time.zone.now.iso8601, "note" => "Updated change note" },
-        ])
+        expect(payload["change_note"]).to eq("Updated change note")
       })
     end
   end

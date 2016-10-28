@@ -126,17 +126,12 @@ class Document
 
   def change_note
     return unless update_type == "major"
-    change_history.latest_change_note
+    @change_note
   end
 
   def change_note=(note)
     return unless update_type == "major"
-
-    if @previous_update_type == "major"
-      change_history.update_item(note)
-    else
-      change_history.add_item(note)
-    end
+    @change_note = note
   end
 
   def update_type=(update_type)
@@ -294,7 +289,7 @@ class Document
 
     handle_remote_error do
       if first_draft?
-        change_history.first_published!
+        @change_note = "First published."
         self.update_type = 'major'
         self.save
       end
