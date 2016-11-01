@@ -44,8 +44,8 @@ group :development, :test do
   gem 'simplecov-rcov', '0.2.3', require: false
   gem 'database_cleaner', '1.5.1'
   gem 'factory_girl'
-  gem "capybara", "2.5.0"
-  gem 'capybara-webkit', '1.7.1'
+  gem "capybara", "2.7.1"
+  gem 'capybara-webkit', '1.11.1'
   gem 'timecop', '0.8.0'
   gem 'govuk-content-schema-test-helpers', '1.4.0'
   gem 'govuk-lint'
@@ -54,4 +54,5 @@ end
 
 group :test do
   gem 'webmock'
+  gem 'rails-controller-testing'
 end

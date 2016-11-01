@@ -61,14 +61,15 @@ GEM
       sass (>= 3.3.0)
     bson (4.1.1)
     builder (3.2.2)
-    capybara (2.5.0)
+    capybara (2.7.1)
+      addressable
       mime-types (>= 1.16)
       nokogiri (>= 1.3.3)
       rack (>= 1.0.0)
       rack-test (>= 0.5.4)
       xpath (~> 2.0)
-    capybara-webkit (1.7.1)
-      capybara (>= 2.3.0, < 2.6.0)
+    capybara-webkit (1.11.1)
+      capybara (>= 2.3.0, < 2.8.0)
       json
     coderay (1.1.1)
     commander (4.4.0)
@@ -242,6 +243,10 @@ GEM
       bundler (>= 1.3.0, < 2.0)
       railties (= 5.0.0.1)
       sprockets-rails (>= 2.0.0)
+    rails-controller-testing (1.0.1)
+      actionpack (~> 5.x)
+      actionview (~> 5.x)
+      activesupport (~> 5.x)
     rails-dom-testing (2.0.1)
       activesupport (>= 4.2.0, < 6.0)
       nokogiri (~> 1.6.0)
@@ -370,8 +375,8 @@ DEPENDENCIES
   better_errors (~> 2.1.1)
   binding_of_caller (~> 0.7.2)
   bootstrap-kaminari-views (= 0.0.5)
-  capybara (= 2.5.0)
-  capybara-webkit (= 1.7.1)
+  capybara (= 2.7.1)
+  capybara-webkit (= 1.11.1)
   database_cleaner (= 1.5.1)
   factory_girl
   foreman (= 0.74.0)
@@ -393,6 +398,7 @@ DEPENDENCIES
   pry-rails
   pundit
   rails (= 5.0.0.1)
+  rails-controller-testing
   rspec-rails (~> 3.3)
   sass-rails (~> 5.0.4)
   select2-rails (~> 3.5.9)
