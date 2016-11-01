@@ -7,7 +7,7 @@ class EsiFund < Document
     location
     funding_source
     closing_date
-  )
+  ).freeze
 
   attr_accessor(*FORMAT_SPECIFIC_FIELDS)
 

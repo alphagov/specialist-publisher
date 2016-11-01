@@ -26,7 +26,7 @@ module_function
     raise_helpful_error(state) unless state == "published"
 
     payload = DocumentPresenter.new(document).to_json
-    payload.merge!("public_updated_at" => timestamp)
+    payload["public_updated_at"] = timestamp
 
     Services.publishing_api.put_content(content_id, payload)
     Services.publishing_api.publish(content_id, "republish")

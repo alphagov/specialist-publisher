@@ -10,7 +10,7 @@ class AaibReport < Document
     location
     aircraft_type
     registration
-  )
+  ).freeze
 
   attr_accessor(*FORMAT_SPECIFIC_FIELDS)
 

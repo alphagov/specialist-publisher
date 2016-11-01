@@ -23,7 +23,7 @@ RSpec.feature "Viewing a specific case", type: :feature do
             "body" => [
               {
                 "content_type" => "text/govspeak",
-                "content" => "## Header" + ("\r\n\r\nThis is the long body of an example CMA case")
+                "content" => "## Header" + "\r\n\r\nThis is the long body of an example CMA case"
               },
             ],
             "metadata" => {

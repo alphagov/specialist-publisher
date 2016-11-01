@@ -14,7 +14,7 @@ class AsylumSupportDecision < Document
       tribunal_decision_landmark
       tribunal_decision_reference_number
       tribunal_decision_sub_category
-  )
+  ).freeze
 
   attr_accessor(*FORMAT_SPECIFIC_FIELDS)
 

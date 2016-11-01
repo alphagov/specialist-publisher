@@ -1,7 +1,7 @@
 module PublishingHelper
-  def handle_remote_error(&block)
+  def handle_remote_error
     begin
-      block.call
+      yield
       true
     rescue GdsApi::HTTPErrorResponse => e
       error_response_message(:base, e.message) if @publishable

@@ -10,7 +10,7 @@ class DfidResearchOutput < Document
     dfid_authors
     dfid_theme
     dfid_review_status
-  )
+  ).freeze
 
   attr_accessor(*FORMAT_SPECIFIC_FIELDS)
 

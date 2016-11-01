@@ -27,9 +27,9 @@ class AttachmentCollection
     !!find(attachment.content_id)
   end
 
-  def each(&block)
+  def each
     @attachments.each do |attachment|
-      block.call(attachment)
+      yield(attachment)
     end
   end
 

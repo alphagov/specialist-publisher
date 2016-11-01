@@ -11,7 +11,7 @@ class UtaacDecision < Document
     tribunal_decision_decision_date
     tribunal_decision_judges
     tribunal_decision_sub_categories
-  )
+  ).freeze
 
   attr_accessor(*FORMAT_SPECIFIC_FIELDS)
 
