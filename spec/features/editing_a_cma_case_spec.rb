@@ -95,17 +95,10 @@ RSpec.feature "Editing a CMA case", type: :feature do
       fill_in "Change note", with: "This is a change note."
       click_button "Save as draft"
 
-      expected_change_history = cma_case['details']['change_history'] + [
-        {
-          "public_timestamp" => Time.current.iso8601,
-          "note" => "This is a change note.",
-        }
-      ]
-
       changed_json = {
         "title" => "Changed title",
         "update_type" => "major",
-        "details" => cma_case["details"].merge("change_history" => expected_change_history),
+        "change_note" => "This is a change note.",
       }
       assert_publishing_api_put_content(content_id, request_json_includes(changed_json))
     end
@@ -119,7 +112,6 @@ RSpec.feature "Editing a CMA case", type: :feature do
       changed_json = {
         "description" => "Summary without a typo",
         "update_type" => "minor",
-        "details" => cma_case["details"],
       }
       assert_publishing_api_put_content(content_id, request_json_includes(changed_json))
     end
@@ -160,65 +152,14 @@ RSpec.feature "Editing a CMA case", type: :feature do
         radio_major = field_labeled("cma_case_update_type_major")
         expect(radio_major).to be_checked
 
-        expect(page).to have_content("Some change note")
-
-        click_button "Save as draft"
-
-        assert_publishing_api_put_content(content_id, ->(request) {
-          payload = JSON.parse(request.body)
-          change_history = payload.fetch("details").fetch("change_history")
-
-          expect(change_history).to eq [
-            { "public_timestamp" => "2016-01-01T00:00:00+00:00", "note" => "First published." },
-            { "public_timestamp" => "2015-12-03T16:59:13+00:00", "note" => "Some change note" }
-          ]
-        })
-      end
-    end
-
-    context "when the document has a temporary update type" do
-      let(:cma_case) do
-        FactoryGirl.create(
-          :cma_case,
-          update_type: "minor",
-          first_published_at: "2016-01-01",
-          details: {
-            temporary_update_type: true,
-            change_history: [
-              {
-                "public_timestamp" => "2015-01-01T00:00:00+00:00",
-                "note" => "First published."
-              },
-              {
-                "public_timestamp" => "2015-02-02T00:00:00+00:00",
-                "note" => "Some change note"
-              },
-            ]
-          }
-        )
-      end
-
-      it "appends to the change history, rather than updating the last item" do
-        radio_minor = field_labeled("cma_case_update_type_minor")
-        radio_major = field_labeled("cma_case_update_type_major")
-
-        expect(radio_minor).not_to be_checked
-        expect(radio_major).not_to be_checked
-
-        choose "Update type major"
         fill_in "Change note", with: "New change note"
 
         click_button "Save as draft"
 
         assert_publishing_api_put_content(content_id, ->(request) {
           payload = JSON.parse(request.body)
-          change_history = payload.fetch("details").fetch("change_history")
-
-          expect(change_history).to eq [
-            { "public_timestamp" => "2015-01-01T00:00:00+00:00", "note" => "First published." },
-            { "public_timestamp" => "2015-02-02T00:00:00+00:00", "note" => "Some change note" },
-            { "public_timestamp" => "2015-12-03T16:59:13+00:00", "note" => "New change note" }
-          ]
+          change_note = payload.fetch("change_note")
+          expect(change_note).to eq "New change note"
         })
       end
     end
@@ -234,7 +175,6 @@ RSpec.feature "Editing a CMA case", type: :feature do
         changed_json = {
           "description" => "An updated summary",
           "update_type" => "minor",
-          "details" => cma_case["details"], # bulk_published is still true in the metadata
         }
         assert_publishing_api_put_content(content_id, request_json_includes(changed_json))
         expect(page).to have_content('Bulk published true')
