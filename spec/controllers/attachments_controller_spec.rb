@@ -71,10 +71,9 @@ RSpec.describe AttachmentsController, type: :controller do
       allow(file).to receive(:tempfile).and_return("/cma_cases.jpg")
 
       stub_request(:post, "#{Plek.find('asset-manager')}/assets")
-        .with(body: %r{.*})
         .to_return(body: JSON.dump(asset_manager_response), status: 201)
 
-      post :create, document_type_slug: document_type_slug, document_content_id: document_content_id, attachment: attachment
+      post :create, params: { document_type_slug: document_type_slug, document_content_id: document_content_id, attachment: attachment }
 
       expect(document.attachments.count).to eq(3)
       expect(response).to redirect_to(edit_document_path(document_type_slug: document_type_slug, content_id: document_content_id))
@@ -84,7 +83,7 @@ RSpec.describe AttachmentsController, type: :controller do
       document = CmaCase.find(document_content_id)
       allow_any_instance_of(AttachmentsController).to receive(:fetch_document).and_return(document)
 
-      post :create, document_type_slug: document_type_slug, document_content_id: document_content_id, attachment: no_file_attachment
+      post :create, params: { document_type_slug: document_type_slug, document_content_id: document_content_id, attachment: no_file_attachment }
       expect(response).to redirect_to(new_document_attachment_path(document_type_slug: document_type_slug))
     end
   end
@@ -95,7 +94,7 @@ RSpec.describe AttachmentsController, type: :controller do
       attachment = document.attachments.find(attachment_content_id)
       allow_any_instance_of(AttachmentsController).to receive(:fetch_document).and_return(document)
 
-      get :edit, document_type_slug: document_type_slug, document_content_id: document_content_id, attachment_content_id: attachment_content_id
+      get :edit, params: { document_type_slug: document_type_slug, document_content_id: document_content_id, attachment_content_id: attachment_content_id }
 
       expect(assigns(:attachment)).to eq(attachment)
       expect(response).to render_template :edit
@@ -120,7 +119,7 @@ RSpec.describe AttachmentsController, type: :controller do
       stub_request(:put, %r{#{Plek.find('asset-manager')}/assets/.*})
         .to_return(body: JSON.dump(asset_manager_response), status: 201)
 
-      post :update, document_type_slug: document_type_slug, document_content_id: document_content_id, attachment_content_id: attachment_content_id, attachment: updated_attachment
+      post :update, params: { document_type_slug: document_type_slug, document_content_id: document_content_id, attachment_content_id: attachment_content_id, attachment: updated_attachment }
 
       expect(document.attachments.count).to eq(2)
       expect(response).to redirect_to(edit_document_path(document_type_slug: document_type_slug, content_id: document_content_id))
@@ -136,7 +135,7 @@ RSpec.describe AttachmentsController, type: :controller do
       stub_request(:delete, %r{#{Plek.find('asset-manager')}/assets/.*})
         .to_return(body: JSON.dump(asset_manager_response), status: 201)
       expect(document.attachments.count).to eq(2)
-      delete :destroy, document_type_slug: document_type_slug, document_content_id: document_content_id, attachment_content_id: attachment_content_id
+      delete :destroy, params: { document_type_slug: document_type_slug, document_content_id: document_content_id, attachment_content_id: attachment_content_id }
       expect(document.attachments.count).to eq(1)
       expect(response).to redirect_to(edit_document_path(document_type_slug: document_type_slug, content_id: document_content_id))
     end
