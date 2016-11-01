@@ -12,6 +12,7 @@ class DocumentPresenter
       title: document.title,
       description: document.summary,
       document_type: document.document_type,
+      change_note: document.change_note,
       schema_name: "specialist_document",
       publishing_app: "specialist-publisher",
       rendering_app: "specialist-frontend",
@@ -26,7 +27,7 @@ class DocumentPresenter
       ],
       redirects: [],
       update_type: document.update_type,
-    }
+    }.compact
   end
 
 private
@@ -37,7 +38,6 @@ private
     {
       body: GovspeakPresenter.present(@document),
       metadata: metadata,
-      change_history: document.change_history.as_json,
       max_cache_time: 10,
       temporary_update_type: document.temporary_update_type,
     }.tap do |details_hash|

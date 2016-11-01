@@ -76,7 +76,6 @@ RSpec.feature "Creating a CMA case", type: :feature do
           "case_state" => "open",
           "market_sector" => ["energy"],
         },
-        "change_history" => [],
         "max_cache_time" => 10,
         "headers" => [
           { "text" => "Header", "level" => 2, "id" => "header" }
@@ -320,7 +319,6 @@ RSpec.feature "Creating a CMA case", type: :feature do
           "case_state" => "open",
           "market_sector" => ["energy"],
         },
-        "change_history" => [],
         "max_cache_time" => 10,
         "headers" => [
           { "text" => "Header", "level" => 2, "id" => "header" }

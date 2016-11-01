@@ -225,15 +225,6 @@ RSpec.describe Document do
             }
           }
         end
-
-        it "sets the change note to the second item in the change history" do
-          document.update_type = "major"
-          expect(document.change_note).to eq("Second note")
-        end
-      end
-
-      context "when there is just one item in the change history" do
-        specify { expect(document.change_note).to be_nil }
       end
     end
 
@@ -345,16 +336,9 @@ RSpec.describe Document do
         Timecop.freeze(Time.parse("2015-12-18 10:12:26 UTC")) do
           unpublished_document.publish
 
-          expected_change_history = [
-            {
-              "public_timestamp" => Time.current.iso8601,
-              "note" => "First published.",
-            },
-          ]
-
           changed_json = {
-            "update_type" => 'major',
-            "details" => payload["details"].merge("change_history" => expected_change_history),
+            update_type: "major",
+            change_note: "First published.",
           }
 
           assert_publishing_api_put_content(unpublished_document.content_id, request_json_includes(changed_json))
