@@ -201,30 +201,7 @@ class Document
     return false unless publishable?
 
     handle_remote_error do
-      if first_draft?
-        @change_note = "First published."
-        self.update_type = 'major'
-        self.save
-      end
-
-      Services.publishing_api.publish(content_id, update_type)
-
-      published_document = self.class.find(self.content_id)
-      indexable_document = SearchPresenter.new(published_document)
-
-      RummagerWorker.perform_async(
-        search_document_type,
-        base_path,
-        indexable_document.to_json,
-      )
-
-      if send_email_on_publish?
-        EmailAlertApiWorker.perform_async(EmailAlertPresenter.new(self).to_json)
-      end
-
-      if previously_unpublished?
-        AttachmentRestoreWorker.perform_async(self.content_id)
-      end
+      DocumentPublisher.publish(self)
     end
   end
 
@@ -314,11 +291,6 @@ private
 
   def finder_schema
     self.class.finder_schema
-  end
-
-  def previously_unpublished?
-    ordered_states = state_history.sort.to_h.values
-    ordered_states.last(2) == %w(unpublished draft)
   end
 
   def param_value(params, key)
