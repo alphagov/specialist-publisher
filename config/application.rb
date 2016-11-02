@@ -27,7 +27,7 @@ module SpecialistPublisher
     # config.time_zone = 'Central Time (US & Canada)'
     config.time_zone = 'London'
 
-    config.autoload_paths << Rails.root.join('lib')
+    config.eager_load_paths << Rails.root.join('lib')
   end
 
   mattr_accessor :publish_pre_production_finders
