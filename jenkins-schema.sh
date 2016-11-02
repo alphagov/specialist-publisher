@@ -2,7 +2,7 @@
 export DISPLAY=:99
 export GOVUK_APP_DOMAIN=test.gov.uk
 export GOVUK_ASSET_ROOT=http://static.test.alphagov.co.uk
-export CONTEXT_MESSAGE="Verify specialist-publisher-rebuild against content schemas"
+export CONTEXT_MESSAGE="Verify specialist-publisher against content schemas"
 env
 
 function github_status {
