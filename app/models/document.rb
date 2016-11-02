@@ -185,15 +185,8 @@ class Document
   def save(validate: true)
     return false if validate && !self.valid?
 
-    self.update_type = 'major' if first_draft?
-
-    presented_document = DocumentPresenter.new(self)
-    presented_links = DocumentLinksPresenter.new(self)
-
     handle_remote_error do
-      set_errors_on(self)
-      Services.publishing_api.put_content(self.content_id, presented_document.to_json)
-      Services.publishing_api.patch_links(self.content_id, presented_links.to_json)
+      DocumentSaver.save(self)
     end
   end
 
