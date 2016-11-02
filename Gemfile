@@ -16,6 +16,7 @@ gem "kaminari"
 gem 'kaminari-mongoid'
 gem 'bootstrap-kaminari-views', '0.0.5'
 gem 'pundit'
+gem 'hashdiff'
 # GDS managed dependencies
 gem 'plek', '~> 1.10'
 gem 'gds-sso', '13.0.0'
@@ -49,7 +50,6 @@ group :development, :test do
   gem 'timecop', '0.8.0'
   gem 'govuk-content-schema-test-helpers', '1.4.0'
   gem 'govuk-lint'
-  gem 'hashdiff'
 end
 
 group :test do
