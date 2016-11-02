@@ -1,3 +1,4 @@
+# Find a document of a certain type by content_id. Returns a `Document` object.
 class DocumentFinder
   def self.find(klass, content_id)
     begin

@@ -1,3 +1,4 @@
+# Save a document as draft to the publishing-api
 class DocumentSaver
   def self.save(document)
     document.update_type = 'major' if document.first_draft?

@@ -1,3 +1,5 @@
+# Publish a draft document. Also sends out emails and indexes the document
+# in search.
 class DocumentPublisher
   def self.publish(document)
     if document.first_draft?

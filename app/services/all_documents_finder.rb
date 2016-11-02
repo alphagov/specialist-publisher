@@ -1,3 +1,4 @@
+# Request all documents for a certain document type, paginated
 class AllDocumentsFinder
   def self.all(page, per_page, q, document_type)
     params = {
