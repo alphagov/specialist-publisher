@@ -14,7 +14,7 @@ class VehicleRecallsAndFaultsAlert < Document
     serial_number
     build_start_date
     build_end_date
-  )
+  ).freeze
 
   attr_accessor(*FORMAT_SPECIFIC_FIELDS)
 

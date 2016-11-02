@@ -30,9 +30,7 @@ class DocumentsController < ApplicationController
   end
 
   def create
-    @document = current_format.new(
-      filtered_params(params[current_format.document_type])
-    )
+    @document = current_format.new(filtered_params)
 
     if @document.save
       flash[:success] = "Created #{@document.title}"
@@ -55,8 +53,7 @@ class DocumentsController < ApplicationController
   def edit; end
 
   def update
-    new_params = filtered_params(params[current_format.document_type])
-    @document.set_attributes(new_params)
+    @document.set_attributes(filtered_params)
 
     if @document.valid?
       if @document.save
@@ -136,8 +133,12 @@ private
     per_page.to_i.to_s == per_page ? per_page : 50
   end
 
-  def filtered_params(params_of_document)
-    filter_blank_multi_selects(params_of_document).with_indifferent_access
+  def permitted_params
+    params[current_format.document_type].permit!
+  end
+
+  def filtered_params
+    filter_blank_multi_selects(permitted_params.to_h).with_indifferent_access
   end
 
   # See http://stackoverflow.com/questions/8929230/why-is-the-first-element-always-blank-in-my-rails-multi-select

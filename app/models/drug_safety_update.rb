@@ -1,7 +1,7 @@
 class DrugSafetyUpdate < Document
   FORMAT_SPECIFIC_FIELDS = %i(
     therapeutic_area
-  )
+  ).freeze
 
   attr_accessor(*FORMAT_SPECIFIC_FIELDS)
 

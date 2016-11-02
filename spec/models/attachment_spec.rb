@@ -145,7 +145,7 @@ RSpec.describe Attachment do
       tempfile = Tempfile.new(['foobar', '.jpeg'])
       extension = File.extname(tempfile)
       allow_any_instance_of(File).to receive(:tempfile).and_return(extension)
-      expect(EXTENSION_WHITE_LIST.include? File.extname(tempfile)).to eq(false)
+      expect(EXTENSION_WHITE_LIST.include?(File.extname(tempfile))).to eq(false)
     end
   end
 

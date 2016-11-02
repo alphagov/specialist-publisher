@@ -4,7 +4,7 @@ class CountrysideStewardshipGrant < Document
     land_use
     tiers_or_standalone_items
     funding_amount
-  )
+  ).freeze
 
   attr_accessor(*FORMAT_SPECIFIC_FIELDS)
 

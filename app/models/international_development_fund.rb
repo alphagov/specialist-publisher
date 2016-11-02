@@ -5,7 +5,7 @@ class InternationalDevelopmentFund < Document
     development_sector
     eligible_entities
     value_of_funding
-  )
+  ).freeze
 
   attr_accessor(*FORMAT_SPECIFIC_FIELDS)
 

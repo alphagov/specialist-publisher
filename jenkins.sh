@@ -49,7 +49,7 @@ if [[ ${GIT_BRANCH} != "origin/master" ]]; then
   bundle exec govuk-lint-ruby \
     --format html --out rubocop-${GIT_COMMIT}.html \
     --format clang \
-    app spec lib spec config
+    app lib spec config
 fi
 
 GOVUK_CONTENT_SCHEMAS_PATH=tmp/govuk-content-schemas RAILS_ENV=test xvfb-run -a bundle exec rake

@@ -68,9 +68,7 @@ private
       hash[field] = document.public_send(field)
     end
 
-    metadata.merge!(
-      bulk_published: document.bulk_published,
-    )
+    metadata[:bulk_published] = document.bulk_published
 
     metadata.reject { |_k, v| v.blank? }
   end

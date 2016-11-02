@@ -52,7 +52,7 @@ class Document
     :change_history,
     :temporary_update_type,
     :warnings
-  ]
+  ].freeze
 
   def self.policy_class
     DocumentPolicy
@@ -396,11 +396,11 @@ class Document
     warnings && warnings.has_key?("content_item_blocking_publish")
   end
 
-private
-
   def self.finder_schema
     @finder_schema ||= FinderSchema.new(document_type.pluralize)
   end
+
+private
 
   def finder_schema
     self.class.finder_schema

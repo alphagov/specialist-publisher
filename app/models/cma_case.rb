@@ -12,7 +12,7 @@ class CmaCase < Document
     case_state
     market_sector
     outcome_type
-  )
+  ).freeze
 
   attr_accessor(*FORMAT_SPECIFIC_FIELDS)
 

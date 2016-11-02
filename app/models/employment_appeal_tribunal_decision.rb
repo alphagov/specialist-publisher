@@ -10,7 +10,7 @@ class EmploymentAppealTribunalDecision < Document
     tribunal_decision_decision_date
     tribunal_decision_landmark
     tribunal_decision_sub_categories
-  )
+  ).freeze
 
   attr_accessor(*FORMAT_SPECIFIC_FIELDS)
 

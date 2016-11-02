@@ -6,7 +6,7 @@ class MedicalSafetyAlert < Document
     alert_type
     issued_date
     medical_specialism
-  )
+  ).freeze
 
   attr_accessor(*FORMAT_SPECIFIC_FIELDS)
 

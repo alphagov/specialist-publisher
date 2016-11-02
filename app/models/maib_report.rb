@@ -5,7 +5,7 @@ class MaibReport < Document
     date_of_occurrence
     report_type
     vessel_type
-  )
+  ).freeze
 
   attr_accessor(*FORMAT_SPECIFIC_FIELDS)
 
