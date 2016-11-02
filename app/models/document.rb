@@ -175,23 +175,7 @@ class Document
   end
 
   def self.all(page, per_page, q: nil)
-    params = {
-      publishing_app: "specialist-publisher",
-      document_type: self.document_type,
-      fields: [
-        :base_path,
-        :content_id,
-        :last_edited_at,
-        :title,
-        :publication_state,
-        :state_history,
-      ],
-      page: page,
-      per_page: per_page,
-      order: "-last_edited_at",
-    }
-    params[:q] = q if q.present?
-    Services.publishing_api.get_content_items(params)
+    AllDocumentsFinder.all(page, per_page, q, self.document_type)
   end
 
   def self.find(content_id)
