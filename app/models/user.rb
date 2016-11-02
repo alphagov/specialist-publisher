@@ -2,9 +2,7 @@ class User
   include Mongoid::Document
   include GDS::SSO::User
 
-  def self.collection_name
-    "specialist_publisher_users"
-  end
+  store_in collection: :specialist_publisher_users
 
   field :uid, type: String
   field :email, type: String

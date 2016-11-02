@@ -233,7 +233,6 @@ RSpec.feature "Editing a CMA case", type: :feature do
 
     before do
       stub_request(:post, "#{Plek.find('asset-manager')}/assets")
-        .with(body: %r{.*})
         .to_return(body: asset_manager_response.to_json, status: 201)
     end
 

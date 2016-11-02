@@ -5,7 +5,7 @@ class RaibReport < Document
     date_of_occurrence
     report_type
     railway_type
-  )
+  ).freeze
 
   attr_accessor(*FORMAT_SPECIFIC_FIELDS)
 

@@ -114,7 +114,7 @@ private
   end
 
   def attachment_params
-    params.require(:attachment).permit(:title, :file)
+    params.require(:attachment).permit(:title, :file).to_h
   end
 
   def attachment_valid?
