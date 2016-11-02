@@ -25,9 +25,11 @@ private
     end
   end
 
+  # The tags are sent to email-alert-api and matched against subscriberlists.
   def tags
     {
-      format: document.document_type
+      # This format should be the same as https://github.com/alphagov/finder-frontend/blob/2c1d5f25e7e4212795b485b6e4c290c6764c813c/app/controllers/email_alert_subscriptions_controller.rb#L41
+      format: document.search_document_type
     }.deep_merge(document.format_specific_metadata.reject { |_k, v| v.blank? })
   end
 
