@@ -18,19 +18,4 @@ namespace :republish do
   task :one, [:content_id] => :environment do |_, args|
     Republisher.republish_one(args.content_id)
   end
-
-  desc "republish selected DFID docs to truncate urls over 250 chars"
-  task truncate_long_urls: :environment do
-    paths = []
-    CSV.foreach("dfid-URLs.csv") do |row|
-      paths << "/dfid-research-outputs/" + row[0]
-    end
-
-    find_content_ids = Services.publishing_api.lookup_content_ids(base_paths: paths)
-
-    find_content_ids.each do |_, v|
-      RepublishWorker.perform_async(v)
-      print "."
-    end
-  end
 end
