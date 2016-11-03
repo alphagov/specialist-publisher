@@ -48,15 +48,6 @@ RSpec.feature "Unsaved changes to a document", type: :feature, js: true do
       expect(current_path).to eq("/cma-cases")
     end
 
-    pending "when attempting to close the current window and accepting the confirmation" do
-      # accept_confirm curiously times out finding the modal dialog, dismiss_confirm works fine.
-      accept_confirm message do
-        page.evaluate_script "window.close();"
-      end
-
-      expect(current_window).to be_closed
-    end
-
     scenario "when attempting to close the current window and cancelling the confirmation" do
       dismiss_confirm message do
         page.evaluate_script "window.close();"
