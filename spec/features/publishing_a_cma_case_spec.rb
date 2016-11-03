@@ -118,10 +118,6 @@ RSpec.feature "Publishing a CMA case", type: :feature do
         :cma_case,
         :redrafted,
         title: "Major Update Case",
-        change_history: [
-          { "public_timestamp" => "2016-01-01T00:00:00+00:00", "note" => "First published." },
-          { "public_timestamp" => "2016-02-02T00:00:00+00:00", "note" => "Some change note" },
-        ]
       )
     }
 
@@ -140,7 +136,7 @@ RSpec.feature "Publishing a CMA case", type: :feature do
       expect(publish_alert_message).to eq("Publishing will email subscribers to CMA Cases. Continue?")
     end
 
-    scenario "adds to the change history" do
+    scenario "adds a change note" do
       visit "/cma-cases"
 
       expect(page.status_code).to eq(200)

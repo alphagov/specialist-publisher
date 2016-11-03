@@ -213,19 +213,6 @@ RSpec.describe Document do
       it "sets the update type" do
         expect(document.update_type).to eq(payload['update_type'])
       end
-
-      context "when there is more than one item in the change history" do
-        let(:payload_attributes) do
-          {
-            details: {
-              change_history: [
-                { note: "First published", public_timestamp: "2016-01-01" },
-                { note: "Second note", public_timestamp: "2016-01-02" },
-              ]
-            }
-          }
-        end
-      end
     end
 
     context "when the document has a temporary update type" do
@@ -312,7 +299,6 @@ RSpec.describe Document do
             payload_attributes.merge(
               first_published_at: nil,
               publication_state: 'draft',
-              change_history: [],
               content_id: document.content_id
             ))
         )
@@ -704,7 +690,7 @@ RSpec.describe Document do
     end
   end
 
-  context "change_history" do
+  context "change_note" do
     subject { MyDocumentType.new }
 
     it "sets the change note when it is a major update" do
