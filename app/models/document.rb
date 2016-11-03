@@ -170,117 +170,23 @@ class Document
     end
   end
 
-  def self.extract_body_from_payload(payload)
-    body_attribute = payload.fetch('details').fetch('body')
-
-    case body_attribute
-    when Array
-      govspeak_body = body_attribute.detect do |body_hash|
-        body_hash['content_type'] == 'text/govspeak'
-      end
-      govspeak_body['content']
-    when String
-      body_attribute
-    end
-  end
-
-  def self.set_update_type(document, payload)
-    if document.temporary_update_type?
-      document.update_type = nil
-      document.temporary_update_type = false
-    elsif document.published? || document.unpublished?
-      document.update_type = nil
-    elsif document.first_draft?
-      document.update_type = 'major'
-    else
-      document.update_type = payload["update_type"]
-    end
-  end
-
   def self.from_publishing_api(payload)
-    document = self.new(
-      base_path: payload['base_path'],
-      content_id: payload['content_id'],
-      title: payload['title'],
-      summary: payload['description'],
-      body: extract_body_from_payload(payload),
-      publication_state: payload['publication_state'],
-      state_history: payload['state_history'],
-      public_updated_at: payload['public_updated_at'],
-      first_published_at: payload['first_published_at'],
-      bulk_published: payload['details']['metadata']['bulk_published'],
-      change_history: ChangeHistory.parse(payload['details']['change_history']),
-      previous_version: payload['previous_version'],
-      temporary_update_type: payload['details']['temporary_update_type'],
-      warnings: payload['warnings'] || {}
-    )
-
-    set_update_type(document, payload)
-
-    document.attachments = Attachment.all_from_publishing_api(payload)
-
-    document.format_specific_fields.each do |field|
-      document.public_send(:"#{field.to_s}=", payload['details']['metadata'][field.to_s])
-    end
-
-    document.body = SpecialistPublisherBodyPresenter.present(document)
-    document
+    DocumentBuilder.build(self, payload)
   end
 
   def self.all(page, per_page, q: nil)
-    params = {
-      publishing_app: "specialist-publisher",
-      document_type: self.document_type,
-      fields: [
-        :base_path,
-        :content_id,
-        :last_edited_at,
-        :title,
-        :publication_state,
-        :state_history,
-      ],
-      page: page,
-      per_page: per_page,
-      order: "-last_edited_at",
-    }
-    params[:q] = q if q.present?
-    Services.publishing_api.get_content_items(params)
+    AllDocumentsFinder.all(page, per_page, q, self.document_type)
   end
 
   def self.find(content_id)
-    begin
-      response = Services.publishing_api.get_content(content_id)
-    rescue GdsApi::HTTPNotFound
-      raise RecordNotFound, "Document: #{content_id}"
-    end
-
-    attributes = response.to_hash
-    document_type = attributes.fetch("document_type")
-    document_class = document_type.camelize.constantize
-
-    if [document_class, Document].include?(self)
-      document_class.from_publishing_api(response.to_hash)
-    else
-      message = "#{self}.find('#{content_id}') returned the wrong type: '#{document_class}'"
-      raise TypeMismatchError, message
-    end
+    DocumentFinder.find(self, content_id)
   end
-
-  class RecordNotFound < StandardError; end
-  class TypeMismatchError < StandardError; end
 
   def save(validate: true)
     return false if validate && !self.valid?
 
-    self.update_type = 'major' if first_draft?
-
-    presented_document = DocumentPresenter.new(self)
-    presented_links = DocumentLinksPresenter.new(self)
-
     handle_remote_error do
-      set_errors_on(self)
-      Services.publishing_api.put_content(self.content_id, presented_document.to_json)
-      Services.publishing_api.patch_links(self.content_id, presented_links.to_json)
+      DocumentSaver.save(self)
     end
   end
 
@@ -288,39 +194,13 @@ class Document
     return false unless publishable?
 
     handle_remote_error do
-      if first_draft?
-        @change_note = "First published."
-        self.update_type = 'major'
-        self.save
-      end
-
-      Services.publishing_api.publish(content_id, update_type)
-
-      published_document = self.class.find(self.content_id)
-      indexable_document = SearchPresenter.new(published_document)
-
-      RummagerWorker.perform_async(
-        search_document_type,
-        base_path,
-        indexable_document.to_json,
-      )
-
-      if send_email_on_publish?
-        EmailAlertApiWorker.perform_async(EmailAlertPresenter.new(self).to_json)
-      end
-
-      if previously_unpublished?
-        AttachmentRestoreWorker.perform_async(self.content_id)
-      end
+      DocumentPublisher.publish(self)
     end
   end
 
   def unpublish
     handle_remote_error do
-      Services.publishing_api.unpublish(content_id, type: 'gone')
-
-      AttachmentDeleteWorker.perform_async(content_id)
-      RummagerDeleteWorker.perform_async(base_path)
+      DocumentUnpublisher.unpublish(content_id, base_path)
     end
   end
 
@@ -404,11 +284,6 @@ private
 
   def finder_schema
     self.class.finder_schema
-  end
-
-  def previously_unpublished?
-    ordered_states = state_history.sort.to_h.values
-    ordered_states.last(2) == %w(unpublished draft)
   end
 
   def param_value(params, key)
