@@ -47,8 +47,6 @@ RSpec.feature "Temporary update types, relating to attachments", type: :feature 
         :cma_case,
         :redrafted,
         update_type: "major",
-        change_history: [{ "public_timestamp" => "2016-07-18T16:21:22+01:00", "note" => "First published." },
-                         { "public_timestamp" => "2016-07-19T16:21:22+01:00", "note" => "an update" }],
         change_note: "srtj",
         state_history: { "3" => "draft", "2" => "unpublished", "1" => "superseded" },
       )
