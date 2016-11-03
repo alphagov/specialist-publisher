@@ -133,22 +133,10 @@ RSpec.feature "Editing a CMA case", type: :feature do
           :cma_case,
           update_type: "major",
           first_published_at: "2016-01-01",
-          details: {
-            change_history: [
-              {
-                "public_timestamp" => "2016-01-01T00:00:00+00:00",
-                "note" => "First published."
-              },
-              {
-                "public_timestamp" => "2016-02-02T00:00:00+00:00",
-                "note" => "Some change note"
-              },
-            ]
-          }
         )
       end
 
-      it "updates the timestamp on the existing change note" do
+      it "creates new change note" do
         radio_major = field_labeled("cma_case_update_type_major")
         expect(radio_major).to be_checked
 

@@ -102,11 +102,9 @@ FactoryGirl.define do
           ],
           "metadata" => default_metadata,
           "max_cache_time" => 10,
-          "change_history" => change_history,
           "temporary_update_type" => false,
         }
       }
-      change_history { [] }
       default_metadata { {} }
     end
 
@@ -125,15 +123,6 @@ FactoryGirl.define do
       state_history {
         { "1": "published" }
       }
-
-      change_history do
-        [
-          {
-            'public_timestamp' => Time.current.iso8601,
-            'note' => "First published.",
-          }
-        ]
-      end
     end
 
     trait :redrafted do
@@ -145,14 +134,6 @@ FactoryGirl.define do
       first_published_at "2015-11-15T00:00:00+00:00"
 
       update_type "major"
-      change_history do
-        [
-            {
-                'public_timestamp' => Time.current.iso8601,
-                'note' => "First published.",
-            },
-        ]
-      end
     end
 
     trait :unpublished do
@@ -161,15 +142,6 @@ FactoryGirl.define do
       state_history {
         { "1": "unpublished" }
       }
-
-      change_history do
-        [
-          {
-            'public_timestamp' => Time.current.iso8601,
-            'note' => "First published.",
-          }
-        ]
-      end
     end
 
     to_create(&:deep_stringify_keys!)

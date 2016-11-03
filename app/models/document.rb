@@ -17,7 +17,6 @@ class Document
     :bulk_published,
     :publication_state,
     :state_history,
-    :change_history,
     :document_type,
     :attachments,
     :first_published_at,
@@ -49,7 +48,6 @@ class Document
     :first_published_at,
     :update_type,
     :bulk_published,
-    :change_history,
     :temporary_update_type,
     :warnings
   ].freeze
@@ -63,8 +61,6 @@ class Document
     @format_specific_fields = format_specific_fields
 
     set_attributes(params, COMMON_FIELDS + format_specific_fields)
-
-    @change_history ||= ChangeHistory.new
   end
 
   def set_attributes(attrs, keys = nil)

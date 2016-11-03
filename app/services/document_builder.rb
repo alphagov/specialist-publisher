@@ -12,7 +12,6 @@ class DocumentBuilder
       public_updated_at: payload['public_updated_at'],
       first_published_at: payload['first_published_at'],
       bulk_published: payload['details']['metadata']['bulk_published'],
-      change_history: ChangeHistory.parse(payload['details']['change_history']),
       previous_version: payload['previous_version'],
       temporary_update_type: payload['details']['temporary_update_type'],
       warnings: payload['warnings'] || {}
