@@ -118,7 +118,7 @@ private
 
   def fetch_document
     @document = current_format.find(params[:content_id])
-  rescue Document::RecordNotFound => e
+  rescue DocumentFinder::RecordNotFound => e
     flash[:danger] = "Document not found"
     redirect_to documents_path(document_type_slug: document_type_slug)
 
