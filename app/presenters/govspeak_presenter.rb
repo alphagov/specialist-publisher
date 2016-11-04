@@ -36,8 +36,8 @@ class GovspeakPresenter
   end
 
   def snippets_match?(a, b)
-    a = sanitise(a)
-    b = sanitise(b)
+    a = sanitise_snippet(a)
+    b = sanitise_snippet(b)
 
     (a == b) && a.present?
   end
@@ -50,14 +50,7 @@ class GovspeakPresenter
     )
   end
 
-private
-
-  def replace_with_markdown_links(body, body_snippet, attachment)
-    markdown_link = "[#{attachment.title}](#{attachment.url})"
-    body.gsub(body_snippet, markdown_link)
-  end
-
-  def sanitise(snippet)
+  def sanitise_snippet(snippet)
     snippet = CGI::unescape(snippet)
     path = snippet[/\[\s*InlineAttachment\s*:\s*(.*?)\s*\]/, 1]
     return unless path
@@ -68,5 +61,12 @@ private
     filename = filename.gsub(special_chars, "_")
 
     "[InlineAttachment:#{filename}]"
+  end
+
+private
+
+  def replace_with_markdown_links(body, body_snippet, attachment)
+    markdown_link = "[#{attachment.title}](#{attachment.url})"
+    body.gsub(body_snippet, markdown_link)
   end
 end

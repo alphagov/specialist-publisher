@@ -10,9 +10,9 @@ RSpec.describe AttachmentReporter do
     Some of the attachments are referenced more than once:
       [InlineAttachment:bar.pdf]
       [InlineAttachment:bar.pdf]
-      [InlineAttachment:baz.pdf]
-      [InlineAttachment:baz.pdf]
-      [InlineAttachment:baz.pdf]
+      [InlineAttachment:baz-1.pdf]
+      [InlineAttachment:baz-1.pdf]
+      [InlineAttachment:baz-1.pdf]
 
     This one is used, but is missing from the document:
       [InlineAttachment:missing.pdf]
@@ -25,7 +25,8 @@ RSpec.describe AttachmentReporter do
     [
       double(:attachment, snippet: "[InlineAttachment:foo.pdf]"),
       double(:attachment, snippet: "[InlineAttachment:bar.pdf]"),
-      double(:attachment, snippet: "[InlineAttachment:baz.pdf]"),
+      double(:attachment, snippet: "[InlineAttachment:baz-1.pdf]"),
+      double(:attachment, snippet: "[InlineAttachment:baz_1.pdf]"),
       double(:attachment, snippet: "[InlineAttachment:unused.pdf]"),
     ]
   }
@@ -36,13 +37,13 @@ RSpec.describe AttachmentReporter do
     expect(report).to eq(
       attachment_counts: {
         used: 3,
-        unused: 1,
+        unused: 2,
       },
       snippet_counts: {
         matched: 6,
         unmatched: 2,
       },
-      unused_attachments: %w(unused.pdf),
+      unused_attachments: %w(baz_1.pdf unused.pdf),
       unmatched_snippets: %w(missing.pdf missing.pdf)
     )
   end
