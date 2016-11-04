@@ -1,4 +1,5 @@
-log
+/log/*
+!/log/.keep
 tmp
 coverage
 /coverage
