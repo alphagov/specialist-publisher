@@ -35,8 +35,12 @@ class GovspeakBodyPresenter
   end
 
   def matching_attachment(filename)
-    document.attachments.detect do |att|
-      sanitise_filename(att.url) == sanitise_filename(filename)
+    attachments_by_sanitised_filename[sanitise_filename(filename)]
+  end
+
+  def attachments_by_sanitised_filename
+    @attachments_by_sanitised_filename ||= document.attachments.each_with_object({}) do |attachment, memo|
+      memo[sanitise_filename(attachment.url)] = attachment
     end
   end
 
