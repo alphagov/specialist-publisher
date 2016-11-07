@@ -1,6 +1,6 @@
 class AsylumSupportDecisionSubCategoryValidator < ActiveModel::EachValidator
   def validate_each(record, attribute, value)
-    record.errors.add(attribute, error_message) unless related_sub_category?(record.tribunal_decision_category, value)
+    record.errors.add(attribute, error_message) unless related_sub_category?(record.tribunal_decision_categories, value)
   end
 
 private
