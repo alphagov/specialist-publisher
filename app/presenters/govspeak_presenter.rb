@@ -21,18 +21,14 @@ class GovspeakPresenter
   end
 
   def html_body
-    body = document.body
-
-    snippets_in_body.uniq.each do |body_snippet|
-      document.attachments.each do |attachment|
-        if snippets_match?(body_snippet, attachment.snippet)
-          body = replace_with_markdown_links(body, body_snippet, attachment)
-        end
-      end
-    end
-
     internal_hosts = PRODUCTION_HOSTS + INTEGRATION_HOSTS + DEVELOPMENT_HOSTS
-    Govspeak::Document.new(body, document_domains: internal_hosts).to_html
+    attachments = document.attachments.map { |attachment| AttachmentPresenter.new(attachment).to_json }
+    govspeak = Govspeak::Document.new(
+      govspeak_body,
+      attachments: attachments,
+      document_domains: internal_hosts
+    )
+    govspeak.to_html
   end
 
   def snippets_match?(a, b)
