@@ -52,7 +52,8 @@ class DocumentBuilder
     elsif document.first_draft?
       document.update_type = 'major'
     else
-      document.update_type = payload["update_type"]
+      document.update_type = payload['update_type']
+      document.change_note = payload['change_note']
     end
   end
 end
