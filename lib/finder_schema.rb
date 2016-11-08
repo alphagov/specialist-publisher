@@ -41,7 +41,7 @@ private
   attr_reader :schema
 
   def load_schema_for(type)
-    JSON.load(File.read(Rails.root.join("lib/documents/schemas/#{type}.json")))
+    YAML.load_file(Rails.root.join("lib/documents/schemas/#{type}.yml"))
   end
 
   def facet_data_for(facet_name)

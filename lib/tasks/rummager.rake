@@ -5,9 +5,9 @@ namespace :rummager do
 
     require "multi_json"
 
-    schemas = Dir.glob("lib/documents/schemas/*.json").map do |file_path|
+    schemas = Dir.glob("lib/documents/schemas/*.yml").map do |file_path|
       {
-        file: MultiJson.load(File.read(file_path)),
+        file: YAML.load_file(file_path),
         timestamp: File.mtime(file_path)
       }
     end

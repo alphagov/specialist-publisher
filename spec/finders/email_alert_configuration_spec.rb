@@ -1,8 +1,8 @@
 require 'spec_helper'
 
 RSpec.describe "Email alert configuration" do
-  all_finders = Dir["lib/documents/schemas/*.json"].map do |filename|
-    JSON.parse(File.read(filename))
+  all_finders = Dir["lib/documents/schemas/*.yml"].map do |filename|
+    YAML.load_file(filename)
   end
 
   all_finders.each do |finder|
