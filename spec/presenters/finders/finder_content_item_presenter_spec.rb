@@ -3,10 +3,9 @@ require_relative "../../../app/presenters/finders/finder_content_item_presenter"
 
 RSpec.describe FinderContentItemPresenter do
   describe "#to_json" do
-    Dir["lib/documents/schemas/*.json"].each do |file|
+    Dir["lib/documents/schemas/*.yml"].each do |file|
       it "is valid against the #{file} content schemas" do
-        read_file = File.read(file)
-        payload = JSON.parse(read_file)
+        payload = YAML.load_file(file)
 
         presenter = FinderContentItemPresenter.new(
           payload, "2016-01-01T00:00:00-00:00"

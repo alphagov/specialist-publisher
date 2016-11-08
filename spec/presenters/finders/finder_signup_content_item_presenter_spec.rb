@@ -3,10 +3,9 @@ require_relative "../../../app/presenters/finders/finder_signup_content_item_pre
 
 RSpec.describe FinderSignupContentItemPresenter do
   describe "#to_json" do
-    Dir["lib/documents/schemas/*.json"].each do |file|
+    Dir["lib/documents/schemas/*.yml"].each do |file|
       it "is valid against the #{file} content schemas" do
-        read_file = File.read(file)
-        payload = JSON.parse(read_file)
+        payload = YAML.load_file(file)
         if payload.has_key?("signup_content_id")
           finder_signup_content_presenter = FinderSignupContentItemPresenter.new(payload, File.mtime(file))
           presented_data = finder_signup_content_presenter.to_json

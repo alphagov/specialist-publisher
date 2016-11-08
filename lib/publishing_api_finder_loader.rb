@@ -4,7 +4,7 @@ class PublishingApiFinderLoader
   def finders
     files.map do |file|
       {
-        file: MultiJson.load(File.read(file)),
+        file: YAML.load_file(file),
         timestamp: File.mtime(file)
       }
     end
@@ -13,6 +13,6 @@ class PublishingApiFinderLoader
 private
 
   def files
-    @files ||= Dir.glob("lib/documents/schemas/*.json")
+    @files ||= Dir.glob("lib/documents/schemas/*.yml")
   end
 end

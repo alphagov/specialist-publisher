@@ -13,7 +13,7 @@ RSpec.feature 'The root specialist-publisher page', type: :feature do
 
       click_link('AAIB Reports', match: :first)
 
-      count = Dir['lib/documents/schemas/*.json'].length
+      count = Dir['lib/documents/schemas/*.yml'].length
       expect(page).to have_css('.dropdown-menu:nth-of-type(1) li', count: count)
     end
 
