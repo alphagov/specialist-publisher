@@ -1,5 +1,5 @@
-<%= render layout: "shared/form_group", locals: {f: f, field: :tribunal_decision_category} do %>
-  <%= f.select :tribunal_decision_category,
+<%= render layout: "shared/form_group", locals: {f: f, field: :tribunal_decision_categories} do %>
+  <%= f.select :tribunal_decision_categories,
      f.object.facet_options(:tribunal_decision_categories),
      {},
      {
@@ -11,8 +11,8 @@
      }
   %>
 <% end %>
-<%= render layout: "shared/form_group", locals: {f: f, field: :tribunal_decision_sub_category} do %>
-  <%= f.select :tribunal_decision_sub_category,
+<%= render layout: "shared/form_group", locals: {f: f, field: :tribunal_decision_sub_categories} do %>
+  <%= f.select :tribunal_decision_sub_categories,
      f.object.facet_options(:tribunal_decision_sub_categories),
      {},
      {
