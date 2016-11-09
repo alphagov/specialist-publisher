@@ -46,7 +46,7 @@
   "document_noun": "decision",
   "facets": [
     {
-      "key": "tribunal_decision_category",
+      "key": "tribunal_decision_categories",
       "name": "Category",
       "type": "text",
       "preposition": "categorised as",
@@ -75,7 +75,7 @@
       "filterable": false
     },
     {
-      "key": "tribunal_decision_sub_category",
+      "key": "tribunal_decision_sub_categories",
       "name": "Sub-category",
       "type": "text",
       "preposition": "sub-categorised as",
