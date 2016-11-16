@@ -111,7 +111,7 @@ private
   end
 
   def view_renderer
-    ActionView::Base.new("app/views")
+    ActionView::Base.new(Rails.root.join("app/views"))
   end
 
   def header
