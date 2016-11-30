@@ -5,7 +5,7 @@
   "name": "Drug Safety Update",
   "description": "Find drug safety updates issued by MHRA",
   "filter": {
-    "document_type": "drug_safety_update"
+    "elasticsearch_type": "drug_safety_update"
   },
   "show_summaries": true,
   "signup_content_id": "ccf11f55-02ee-48ec-b71c-7e3fe78b3a17",
