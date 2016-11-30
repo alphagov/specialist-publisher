@@ -46,6 +46,7 @@ private
       summary: file.fetch("summary", nil),
       facets: file.fetch("facets", nil),
       default_order: file.fetch("default_order", nil),
+      default_documents_per_page: 50,
     }.reject { |_, value| value.nil? }
   end
 
