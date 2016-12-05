@@ -50,6 +50,7 @@ group :development, :test do
   gem 'timecop', '0.8.0'
   gem 'govuk-content-schema-test-helpers', '1.4.0'
   gem 'govuk-lint'
+  gem "govuk_schemas", "~> 2.0.0"
 end
 
 group :test do
