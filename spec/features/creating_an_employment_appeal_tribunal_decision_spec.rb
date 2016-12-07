@@ -64,7 +64,7 @@ RSpec.feature "Creating a Employment appeal tribunal decision", type: :feature d
       expect(page).to have_content("Summary can't be blank")
       expect(page).to have_content("Body can't be blank")
       expect(page).to have_content("Tribunal decision categories can't be blank")
-      expect(page).to have_content("Tribunal decision sub categories can't be blank")
+      expect(page).not_to have_content("Tribunal decision sub categories can't be blank")
       expect(page).to have_content("Tribunal decision decision date")
 
       expect(page).to_not have_content("Hidden indexable content can't be blank")
