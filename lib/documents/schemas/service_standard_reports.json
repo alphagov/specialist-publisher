@@ -1,0 +1,15 @@
+{
+  "content_id": "da025a9f-8293-4fef-869c-12445d364696",
+  "base_path": "/service-standard-reports",
+  "name": "Service Standard Reports",
+  "format_name": "Service Assessment and Self Certification",
+  "description": "A list of service assessments and self certifications",
+  "show_summaries": true,
+  "pre_production": true,
+  "document_noun": "report",
+  "filter": {
+    "document_type": "service_standard_report"
+  },
+  "facets": [
+  ]
+}
