@@ -108,7 +108,3 @@ Use [this](https://github.com/alphagov/specialist-publisher-rebuild/commit/19218
 
 There is tonnes of information on our learnings from migrating this app to
 "phase 2" [here](./docs/phase-2-migration/README.md).
-
-## Organisations
-
-There is a list of content_id to organisation slug mappings [here](./organisations.md).
