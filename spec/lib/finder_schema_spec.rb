@@ -2,6 +2,12 @@ require 'spec_helper'
 require 'finder_schema'
 
 RSpec.describe FinderSchema do
+  describe '.schema_names' do
+    it 'returns schema names' do
+      expect(FinderSchema.schema_names).to include('aaib_reports')
+    end
+  end
+
   let(:schema) { FinderSchema.new('dfid_research_outputs') }
 
   describe '#humanized_facet_value' do
