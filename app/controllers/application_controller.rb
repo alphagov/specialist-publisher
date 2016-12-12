@@ -36,24 +36,9 @@ private
   end
 
   def document_models
-    [
-      AaibReport,
-      AsylumSupportDecision,
-      CmaCase,
-      CountrysideStewardshipGrant,
-      DfidResearchOutput,
-      DrugSafetyUpdate,
-      EmploymentAppealTribunalDecision,
-      EsiFund,
-      EmploymentTribunalDecision,
-      InternationalDevelopmentFund,
-      MaibReport,
-      MedicalSafetyAlert,
-      RaibReport,
-      TaxTribunalDecision,
-      UtaacDecision,
-      VehicleRecallsAndFaultsAlert,
-    ]
+    @document_models ||= FinderSchema.schema_names.map do |schema_name|
+      schema_name.singularize.camelize.constantize
+    end
   end
 
   def set_authenticated_user_header
