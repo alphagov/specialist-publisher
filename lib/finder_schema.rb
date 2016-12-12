@@ -1,4 +1,11 @@
 class FinderSchema
+  # Pluralized names of all document types
+  def self.schema_names
+    Dir.glob(Rails.root.join("lib/documents/schemas/*.json")).map do |f|
+      File.basename(f).gsub('.json', '')
+    end
+  end
+
   attr_reader :base_path, :organisations, :document_type_filter
 
   def initialize(schema_type)
