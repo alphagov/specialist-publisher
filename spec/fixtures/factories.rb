@@ -165,6 +165,17 @@ FactoryGirl.define do
     end
   end
 
+  factory :service_standard_report, parent: :document do
+    base_path "/service-standard-reports/example-document"
+    document_type "service_standard_report"
+
+    transient do
+      default_metadata do
+        {}
+      end
+    end
+  end
+
   factory :asylum_support_decision, parent: :document do
     base_path "/asylum-support-tribunal-decisions/example-document"
     document_type "asylum_support_decision"
