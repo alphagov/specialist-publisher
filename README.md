@@ -101,8 +101,7 @@ $ bundle exec rake
 
 ## Adding a new Specialist Document format
 
-Use [this](https://github.com/alphagov/specialist-publisher-rebuild/commit/19218ed625d4c3539bdaec481b250e726258e3aa) as a template.
-
+👉 [Creating a new specialist document type](/docs/creating-a-new-specialist-document-type.md)
 
 ## Phase 2 migration
 
