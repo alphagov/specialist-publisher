@@ -171,7 +171,9 @@ FactoryGirl.define do
 
     transient do
       default_metadata do
-        {}
+        {
+          "assessment_date" => "2016-10-10"
+        }
       end
     end
   end
