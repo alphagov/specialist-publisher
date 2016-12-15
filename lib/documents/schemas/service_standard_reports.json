@@ -12,5 +12,14 @@
     "document_type": "service_standard_report"
   },
   "facets": [
+    {
+      "key": "assessment_date",
+      "name": "Assessment date",
+      "short_name": "Assessed",
+      "type": "date",
+      "preposition": "assessed",
+      "display_as_result_metadata": true,
+      "filterable": true
+    }
   ]
 }
