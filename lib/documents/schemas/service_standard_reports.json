@@ -8,6 +8,7 @@
   "pre_production": true,
   "organisations": ["af07d5a5-df63-4ddc-9383-6a666845ebe9"],
   "document_noun": "report",
+  "default_order": "-assessment_date",
   "filter": {
     "document_type": "service_standard_report"
   },
