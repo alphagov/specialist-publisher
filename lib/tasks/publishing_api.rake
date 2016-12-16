@@ -6,6 +6,10 @@ namespace :publishing_api do
 
     finder_loader = PublishingApiFinderLoader.new
 
-    PublishingApiFinderPublisher.new(finder_loader.finders).call
+    begin
+      PublishingApiFinderPublisher.new(finder_loader.finders).call
+    rescue GdsApi::HTTPServerError => e
+      puts "Error publishing finder: #{e.inspect}"
+    end
   end
 end
