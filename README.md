@@ -47,6 +47,9 @@ The original Specialist-Publisher codebase contained Manuals and Finders in the 
 
 A number of formats are [flagged](https://github.com/alphagov/specialist-publisher/blob/f8e93142dfad6f3971a73c923b01f2e7352bdb54/lib/documents/schemas/tax_tribunal_decisions.json#L64) as `pre-production`. `pre-production` documents are only publishable on development and integration.
 
+### Live (but flagged as pre-production)
+* [UTAAC Decisions](https://www.gov.uk/utaac-decisions)
+
 ## Dependencies
 
 - [alphagov/asset-manager](http://github.com/alphagov/asset-manager): provides uploading for static files
