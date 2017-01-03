@@ -30,6 +30,12 @@
       "prechecked": false
     },
     {
+      "key": "competition-disqualification",
+      "radio_button_name": "Competition disqualification",
+      "topic_name": "competition disqualification",
+      "prechecked": false
+    },
+    {
       "key": "criminal-cartels",
       "radio_button_name": "Criminal cartels",
       "topic_name": "criminal cartels",
@@ -77,6 +83,7 @@
         "filterable": true,
         "allowed_values": [
           {"label": "CA98 and civil cartels", "value": "ca98-and-civil-cartels"},
+          {"label": "Competition disqualification", "value": "competition-disqualification"},
           {"label": "Criminal cartels", "value": "criminal-cartels"},
           {"label": "Markets", "value": "markets"},
           {"label": "Mergers", "value": "mergers"},
@@ -152,6 +159,9 @@
         {"label": "CA98 - infringement Chapter II", "value": "ca98-infringement-chapter-ii"},
         {"label": "CA98 - administrative priorities", "value": "ca98-administrative-priorities"},
         {"label": "CA98 - commitments", "value": "ca98-commitment"},
+        {"label": "Competition disqualification - order granted", "value": "competition-disqualification-order-granted"},
+        {"label": "Competition disqualification - undertaking given", "value": "competition-disqualification-undertaking-given"},
+        {"label": "Competition disqualification - no order granted or undertaking given", "value": "competition-disqualification-no-order-granted-or-undertaking-given"},
         {"label": "Criminal cartels - verdict", "value": "criminal-cartels-verdict"},
         {"label": "Markets - phase 1 no enforcement action", "value": "markets-phase-1-no-enforcement-action"},
         {"label": "Markets - phase 1 undertakings in lieu of reference", "value": "markets-phase-1-undertakings-in-lieu-of-reference"},
