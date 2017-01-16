@@ -61,7 +61,7 @@ A number of formats are [flagged](https://github.com/alphagov/specialist-publish
 ```
 $ ./startup.sh
 ```
-If you are using the GDS development virtual machine then the application will be available on the host at https://specialist-publisher-rebuild.dev.gov.uk/
+If you are using the GDS development virtual machine then the application will be available on the host at https://specialist-publisher.dev.gov.uk/
 
 ### Granting permissions
 
