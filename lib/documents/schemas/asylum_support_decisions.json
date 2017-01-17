@@ -18,9 +18,14 @@
   "signup_copy": "You'll get an email each time a decision is updated or a new decision is published.",
   "subscription_list_title_prefix": {
     "singular": "First-tier Tribunal (Asylum Support) decisions with the following category: ",
-    "plural": "First-tier Tribunal (Asylum Support) decisions with the following categories: "
+    "plural": "First-tier Tribunal (Asylum Support) decisions with the following categories: ",
+    "many": "First-tier Tribunal (Asylum Support) decisions: "
   },
   "email_filter_by": "tribunal_decision_categories",
+  "email_filter_name": {
+    "singular": "category",
+    "plural": "categories"
+  },
   "email_signup_choice": [
     {
       "key": "section-4-1-support-for-persons-who-are-neither-an-asylum-seeker-nor-a-failed-asylum-seeker",

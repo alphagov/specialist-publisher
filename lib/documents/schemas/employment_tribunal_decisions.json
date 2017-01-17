@@ -18,9 +18,14 @@
   "signup_copy": "You'll get an email each time a decision is updated or a new decision is published.",
   "subscription_list_title_prefix": {
     "singular": "Employment tribunal decisions with the following jurisdiction code: ",
-    "plural": "Employment tribunal decisions with the following jurisdiction codes: "
+    "plural": "Employment tribunal decisions with the following jurisdiction codes: ",
+    "many": "Employment tribunal decisions: "
   },
   "email_filter_by": "tribunal_decision_categories",
+  "email_filter_name": {
+    "singular": "jurisdiction code",
+    "plural": "jurisdiction codes"
+  },
   "email_signup_choice": [
     {
       "key": "age-discrimination",
