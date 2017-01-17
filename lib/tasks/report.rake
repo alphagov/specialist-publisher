@@ -120,21 +120,48 @@ namespace :report do
       end
     end
 
+    def get_finder_document_hash(finder_schema)
+      begin
+        finder_document = Services.publishing_api.get_content(finder_schema.content_id).to_hash
+      rescue GdsApi::HTTPErrorResponse
+        finder_document = {}
+      end
+      {
+        "base_path" => finder_schema.base_path,
+        "first_published_at" => finder_document["first_published_at"] || "Never published to GOV.UK",
+        "publication_state" => finder_document["publication_state"] || "not-published",
+      }
+    end
+
     require 'csv'
 
-    output_filename = Rails.root.join("content-operating-report-#{Time.zone.today.strftime('%Y-%m-%d')}.csv")
+    document_report_filename = Rails.root.join("content-operating-report-for-documents-#{Time.zone.today.strftime('%Y-%m-%d')}.csv")
+    finder_report_filename = Rails.root.join("content-operating-report-for-finders-#{Time.zone.today.strftime('%Y-%m-%d')}.csv")
 
-    CSV.open(output_filename, 'w') do |csv|
-      csv << ["URL", "Organisation(s)", "Finder", "Status", "First published at"]
-      all_document_classes.each do |document_class|
-        organisations_for_csv = organisations_for_document_class(document_class).join(', ')
-        each_document(document_class) do |document_hash|
-          csv << [
-            public_url_for(document_hash),
+    CSV.open(document_report_filename, 'w') do |document_csv|
+      CSV.open(finder_report_filename, 'w') do |finder_csv|
+        document_csv << ["URL", "Organisation(s)", "Finder", "Status", "First published at"]
+        finder_csv << ["URL", "Organisation(s)", "Status", "How many documents", "First published at"]
+        all_document_classes.each do |document_class|
+          document_count = 0
+          organisations_for_csv = organisations_for_document_class(document_class).join(', ')
+          each_document(document_class) do |document_hash|
+            document_count += 1
+            document_csv << [
+              public_url_for(document_hash),
+              organisations_for_csv,
+              document_class.title,
+              document_hash["publication_state"],
+              document_hash["first_published_at"] || "Never published to GOV.UK",
+            ]
+          end
+          finder_document_hash = get_finder_document_hash(document_class.finder_schema)
+          finder_csv << [
+            public_url_for(finder_document_hash),
             organisations_for_csv,
-            document_class.title,
-            document_hash['publication_state'],
-            document_hash['first_published_at'] || "Never published to GOV.UK",
+            finder_document_hash["publication_state"],
+            document_count,
+            finder_document_hash["first_published_at"],
           ]
         end
       end
