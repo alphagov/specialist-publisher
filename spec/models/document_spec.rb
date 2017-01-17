@@ -83,7 +83,8 @@ RSpec.describe Document do
       base_path: "/my-document-types",
       filter: {
         document_type: "my_document_type",
-      }
+      },
+      content_id: SecureRandom.uuid
     }.deep_stringify_keys
   }
 
