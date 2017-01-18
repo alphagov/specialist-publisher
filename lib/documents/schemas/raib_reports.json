@@ -12,9 +12,14 @@
   "organisations": ["013872d8-8bbb-4e80-9b79-45c7c5cf9177"],
   "subscription_list_title_prefix": {
     "singular": "Rail Accident Investigation Branch (RAIB) reports with the following railway type: ",
-    "plural": "Rail Accident Investigation Branch (RAIB) reports with the following railway types: "
+    "plural": "Rail Accident Investigation Branch (RAIB) reports with the following railway types: ",
+    "many": "Rail Accident Investigation Branch (RAIB) reports: "
   },
   "email_filter_by": "railway_type",
+  "email_filter_name": {
+    "singular": "railway type",
+    "plural": "railway types"
+  },
   "email_signup_choice": [
     {
       "key": "heavy-rail",

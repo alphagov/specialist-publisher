@@ -13,9 +13,14 @@
   "organisations": ["9c66b9a3-1e6a-48e8-974d-2a5635f84679"],
   "subscription_list_title_prefix": {
     "singular": "Marine Accident Investigation Branch (MAIB) reports with the following vessel type: ",
-    "plural": "Marine Accident Investigation Branch (MAIB) reports with the following vessel types: "
+    "plural": "Marine Accident Investigation Branch (MAIB) reports with the following vessel types: ",
+    "many": "Marine Accident Investigation Branch (MAIB) reports: "
   },
   "email_filter_by": "vessel_type",
+  "email_filter_name": {
+    "singular": "vessel type",
+    "plural": "vessel types"
+  },
   "email_signup_choice": [
     {
       "key": "merchant-vessel-100-gross-tons-or-over",

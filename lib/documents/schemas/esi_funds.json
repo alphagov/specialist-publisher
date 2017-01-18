@@ -19,10 +19,15 @@
     "e8fae147-6232-4163-a3f1-1c15b755a8a4"
   ],
   "subscription_list_title_prefix": {
-    "singular": "European Structural and Investment Fund",
-    "plural": "European Structural and Investment Funds"
+    "singular": "European Structural and Investment Fund with the following location: ",
+    "plural": "European Structural and Investment Funds with the following locations: ",
+    "many": "European Structural and Investment Funds: "
   },
   "email_filter_by": "location",
+  "email_filter_name": {
+    "singular": "location",
+    "plural": "locations"
+  },
   "email_signup_choice": [
     {
       "key": "north-east",
