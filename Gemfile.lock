@@ -40,9 +40,9 @@ GEM
       minitest (~> 5.1)
       tzinfo (~> 1.1)
     addressable (2.3.8)
-    airbrake (5.5.0)
-      airbrake-ruby (~> 1.5)
-    airbrake-ruby (1.5.0)
+    airbrake (4.3.8)
+      builder
+      multi_json
     arel (7.1.4)
     ast (2.3.0)
     autoprefixer-rails (6.5.1.1)
@@ -370,8 +370,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  airbrake (~> 5.5)
-  airbrake-ruby (= 1.5)
+  airbrake (~> 4.0)
   better_errors (~> 2.1.1)
   binding_of_caller (~> 0.7.2)
   bootstrap-kaminari-views (= 0.0.5)
