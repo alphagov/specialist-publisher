@@ -25,21 +25,26 @@ RSpec.describe "Email alert configuration" do
         end
       end
 
-      # This is a GovDelivery maximum limit
-      # finder-frontend detects generated strings that are too long and
-      # changes them, but this assumes that the combination of the prefix
-      # and suffix does not already breach the limit, which we test here
-      it "doesn't have a combined prefix and suffix longer than 255 characters" do
-        next unless finder["subscription_list_title_prefix"] &&
-            finder["subscription_list_title_prefix"]["many"] &&
-            finder["email_filter_name"] &&
-            finder["email_filter_name"]["plural"]
+      # GovDelivery limits the name of a subscription list to 255 characters
+      # We test here to make sure we don't try to create lists with names
+      # longer than this for live finders
+      it "doesn't have a name longer than 255 characters" do
+        next unless finder["subscription_list_title_prefix"] && !finder["pre_production"]
 
-        short_name = finder["subscription_list_title_prefix"]["many"] +
-          @facet_used_to_email_things["allowed_values"].length.to_s + " " +
-          finder["email_filter_name"]["plural"]
+        if finder["subscription_list_title_prefix"]["plural"]
+          # If the list name has singular and plural forms, test the plural
+          # form with every possible topic name appended to make the longest
+          # possible name
+          name = (finder["subscription_list_title_prefix"]["plural"] +
+            finder["email_signup_choice"].collect { |topic| topic["topic_name"] }.to_sentence)
+            .humanize
+        else
+          # If the list name only has one form, then topic names are not
+          # appended; just check the name itself isn't too long
+          name = finder["subscription_list_title_prefix"]
+        end
 
-        expect(short_name.length).to be <= 255
+        expect(name.length).to be <= 255
       end
     end
   end
