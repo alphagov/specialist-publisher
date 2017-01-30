@@ -59,7 +59,7 @@ private
   def save_updated_title(document, attachment)
     flag_updated(document, attachment)
     if document.save(validate: false)
-      flash[:success] = "Attachment succesfully updated"
+      flash[:success] = "Attachment successfully updated"
       redirect_to edit_document_path(document_type_slug, document.content_id)
     else
       flash[:danger] = "There was an error updating the title, please try again later."
@@ -90,7 +90,7 @@ private
 
   def delete_attachment(document, attachment)
     if document.delete_attachment(attachment)
-      flash[:success] = "Attachment succesfully removed"
+      flash[:success] = "Attachment successfully removed"
     else
       flash[:danger] = "There was an error removing your attachment, please try again later."
     end
