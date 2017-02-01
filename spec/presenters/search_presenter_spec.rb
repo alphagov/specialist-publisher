@@ -4,22 +4,38 @@ RSpec.describe SearchPresenter do
   subject(:presenter) { SearchPresenter.new(document) }
 
   context 'a complete document is given' do
+    let(:document_fields) do
+      {
+          title: 'A Title',
+          summary: 'A summary',
+          base_path: '/some-finder/a-title',
+          public_updated_at: Time.now,
+          first_published_at: Time.now,
+          body: '## A Title',
+          format_specific_metadata: { country: ['GB'], blank_value: '' }
+      }
+    end
+
     let(:document) do
       double(
         'Document',
-        title:                    'A Title',
-        summary:                  'A summary',
-        base_path:                '/some-finder/a-title',
-        public_updated_at:        Time.now,
-        first_published_at:       Time.now,
-        body:                     '## A Title',
-        format_specific_metadata: { country: ['GB'], blank_value: '' }
+          document_fields
       )
+    end
+
+    let(:document_with_hidden_content) do
+      double(
+        'Document',
+          document_fields.merge(hidden_indexable_content: 'hidden content'))
     end
 
     describe '#indexable_content' do
       it 'indexes the body alone' do
         expect(presenter.indexable_content).to eql('A Title')
+      end
+
+      it 'includes hidden_indexable_content when present in document' do
+        expect(SearchPresenter.new(document_with_hidden_content).indexable_content).to eql('A Title' + ' ' + 'hidden content')
       end
     end
 

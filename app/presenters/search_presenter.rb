@@ -22,7 +22,8 @@ class SearchPresenter
   end
 
   def indexable_content
-    Govspeak::Document.new(document.body).to_text
+    hidden_content = defined?(document.hidden_indexable_content) ? " " + document.hidden_indexable_content : ""
+    Govspeak::Document.new(document.body).to_text + hidden_content
   end
 
 private
