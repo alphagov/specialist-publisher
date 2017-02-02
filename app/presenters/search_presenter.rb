@@ -8,6 +8,7 @@ class SearchPresenter
   def to_json
     {
       title: document.title,
+      content_store_document_type: document.document_type,
       description: document.summary,
       link: document.base_path,
       indexable_content: indexable_content,

@@ -7,6 +7,7 @@ RSpec.describe SearchPresenter do
     let(:document_fields) do
       {
           title: 'A Title',
+          document_type: 'document_type',
           summary: 'A summary',
           base_path: '/some-finder/a-title',
           public_updated_at: Time.now,
@@ -45,6 +46,11 @@ RSpec.describe SearchPresenter do
       it 'has values that are present' do
         expect(json[:title]).to eql('A Title')
         expect(json[:link]).to eql(document.base_path)
+      end
+
+      it 'has attribute "content_store_document_type" with value of "document_type"' do
+        expect(json[:content_store_document_type]).to eql('document_type')
+        expect(json[:content_store_document_type]).to eql(document.document_type)
       end
 
       it 'includes format-specific metadata' do
