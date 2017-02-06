@@ -1,6 +1,6 @@
 require "multi_json"
 
-class PublishingApiFinderLoader
+class FinderLoader
   def finders
     files.map do |file|
       {

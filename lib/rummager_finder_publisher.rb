@@ -31,6 +31,9 @@ private
 
   def export_finder(schema)
     presenter = FinderRummagerPresenter.new(schema[:file], schema[:timestamp])
-    RummagerWorker.perform_async(presenter.type, presenter.id, presenter.to_json)
+
+    logger.info("Publishing '#{schema[:file]['name']}' finder")
+
+    Services.rummager.add_document(presenter.type, presenter.id, presenter.to_json)
   end
 end

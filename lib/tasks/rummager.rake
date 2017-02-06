@@ -1,17 +1,15 @@
 namespace :rummager do
   desc "Publish all Finders to Rummager"
   task publish_finders: :environment do
+    require "finder_loader"
     require "rummager_finder_publisher"
 
-    require "multi_json"
+    finder_loader = FinderLoader.new
 
-    schemas = Dir.glob("lib/documents/schemas/*.json").map do |file_path|
-      {
-        file: MultiJson.load(File.read(file_path)),
-        timestamp: File.mtime(file_path)
-      }
+    begin
+      RummagerFinderPublisher.new(finder_loader.finders).call
+    rescue GdsApi::HTTPServerError => e
+      puts "Error publishing finder: #{e.inspect}"
     end
-
-    RummagerFinderPublisher.new(schemas).call
   end
 end
