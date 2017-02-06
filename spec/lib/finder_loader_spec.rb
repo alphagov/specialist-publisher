@@ -1,7 +1,7 @@
 require "spec_helper"
-require "publishing_api_finder_loader"
+require "finder_loader"
 
-RSpec.describe PublishingApiFinderLoader do
+RSpec.describe FinderLoader do
   before do
     expect(Dir).to receive(:glob).with("lib/documents/schemas/*.json").and_return(%w{
       lib/documents/schemas/format-1.json
@@ -20,7 +20,7 @@ RSpec.describe PublishingApiFinderLoader do
     expect(File).to receive(:mtime).with("lib/documents/schemas/format-2.json")
       .and_return("today")
 
-    loader = PublishingApiFinderLoader.new
+    loader = FinderLoader.new
     expect(loader.finders).to match_array([
       {
         file: { "name" => "format-1" },
