@@ -58,6 +58,6 @@ private
 
   def rummager_add_document(document)
     payload = SearchPresenter.new(document).to_json
-    Services.rummager.add_document(document.document_type, document.base_path, payload)
+    Services.rummager.add_document(document.search_document_type, document.base_path, payload)
   end
 end
