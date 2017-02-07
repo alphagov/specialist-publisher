@@ -7,8 +7,12 @@ RSpec.describe SearchPresenter do
     let(:document_fields) do
       {
           title: 'A Title',
+          content_id: 'content-id',
+          document_type: 'aaib_report',
           summary: 'A summary',
           base_path: '/some-finder/a-title',
+          publishing_app: 'specialist-publisher',
+          rendering_app: 'specialist-frontend',
           public_updated_at: Time.now,
           first_published_at: Time.now,
           body: '## A Title',
@@ -49,6 +53,19 @@ RSpec.describe SearchPresenter do
 
       it 'includes format-specific metadata' do
         expect(json[:country]).to eql(['GB'])
+      end
+
+      it 'includes content_id' do
+        expect(json[:content_id]).to eql('content-id')
+      end
+
+      it 'includes content_store_document_type' do
+        expect(json[:content_store_document_type]).to eql('aaib_report')
+      end
+
+      it 'includes publishing and rendering apps' do
+        expect(json[:publishing_app]).to eql('specialist-publisher')
+        expect(json[:rendering_app]).to eql('specialist-frontend')
       end
 
       it 'does not include blank values' do
