@@ -8,9 +8,13 @@ class SearchPresenter
   def to_json
     {
       title: document.title,
+      content_id: document.content_id,
+      content_store_document_type: document.document_type,
       description: document.summary,
       link: document.base_path,
       indexable_content: indexable_content,
+      publishing_app: "specialist-publisher",
+      rendering_app: "specialist-frontend",
       public_timestamp: format_date(document.public_updated_at),
       first_published_at: format_date(document.first_published_at),
     }.merge(document.format_specific_metadata).reject { |_k, v| v.blank? }

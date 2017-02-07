@@ -18,4 +18,9 @@ namespace :republish do
   task :one, [:content_id] => :environment do |_, args|
     Republisher.republish_one(args.content_id)
   end
+
+  desc "republishes all documents to rummager"
+  task all_documents_to_rummager: :environment do
+    RummagerRepublisher.republish_all
+  end
 end
