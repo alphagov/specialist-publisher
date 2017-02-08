@@ -33,6 +33,12 @@ RSpec.describe SearchPresenter do
           document_fields.merge(hidden_indexable_content: 'hidden content'))
     end
 
+    let(:document_with_undefined_hidden_content) do
+      double(
+        'Document',
+          document_fields.merge(hidden_indexable_content: nil))
+    end
+
     describe '#indexable_content' do
       it 'indexes the body alone' do
         expect(presenter.indexable_content).to eql('A Title')
@@ -40,6 +46,10 @@ RSpec.describe SearchPresenter do
 
       it 'includes hidden_indexable_content when present in document' do
         expect(SearchPresenter.new(document_with_hidden_content).indexable_content).to eql('A Title' + ' ' + 'hidden content')
+      end
+
+      it 'handles hidden_indexable_content when nil in document' do
+        expect(SearchPresenter.new(document_with_undefined_hidden_content).indexable_content).to eql('A Title')
       end
     end
 
