@@ -18,6 +18,7 @@ RSpec.describe RummagerFinderPublisher do
               "name" => "first finder",
               "format_name" => "first finder things",
               "description" => "first finder description",
+              "document_noun" => "something",
               "content_id" => SecureRandom.uuid,
               "format" => "a_report_format",
               "signup_content_id" => SecureRandom.uuid,
@@ -34,6 +35,7 @@ RSpec.describe RummagerFinderPublisher do
               "name" => "second finder",
               "format_name" => "second finder things",
               "content_id" => SecureRandom.uuid,
+              "document_noun" => "something",
               "format" => "some_case_format",
               "logo_path" => "http://example.com/logo.png",
               "topics" => [
@@ -48,27 +50,31 @@ RSpec.describe RummagerFinderPublisher do
 
       it "uses GdsApi::Rummager" do
         expect(Services.rummager).to receive(:add_document)
-          .with("edition", "/first-finder", title: "first finder",
-            description: "first finder description",
-            link: "/first-finder",
-            format: "finder",
-            public_timestamp: "2015-01-05T10:45:10.000+00:00",
-            specialist_sectors: [
-              "business-tax/paye",
-            ])
+          .with("edition", "/first-finder",
+            hash_including(
+              title: "first finder",
+              description: "first finder description",
+              link: "/first-finder",
+              format: "finder",
+              public_timestamp: "2015-01-05T10:45:10.000+00:00",
+              specialist_sectors: [
+                "business-tax/paye",
+              ]
+            )
+          )
 
         expect(Services.rummager).to receive(:add_document)
           .with("edition",
             "/second-finder",
-            title: "second finder",
-            description: "",
-            link: "/second-finder",
-            format: "finder",
-            public_timestamp: "2015-02-14T11:43:23.000+00:00",
-            specialist_sectors: [
-              "competition/mergers",
-              "competition/markets",
-            ])
+            hash_including(
+              title: "second finder",
+              description: "",
+              link: "/second-finder",
+              format: "finder",
+              public_timestamp: "2015-02-14T11:43:23.000+00:00",
+              specialist_sectors: ["competition/mergers", "competition/markets"]
+            )
+          )
 
         RummagerFinderPublisher.new(schemas, logger: test_logger).call
       end
@@ -81,6 +87,7 @@ RSpec.describe RummagerFinderPublisher do
             file: {
               "base_path" => "/not-pre-production-finder",
               "content_id" => SecureRandom.uuid,
+              "document_noun" => "something",
               "name" => "finder with pre-production true",
               "format" => "a_report_format",
               "format_name" => "a report format",
@@ -106,6 +113,7 @@ RSpec.describe RummagerFinderPublisher do
             file: {
               "base_path" => "/pre-production-finder",
               "content_id" => SecureRandom.uuid,
+              "document_noun" => "something",
               "name" => "finder with pre-production true",
               "format" => "a_report_format",
               "format_name" => "a report format",
