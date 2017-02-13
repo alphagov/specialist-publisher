@@ -9,12 +9,12 @@ FinderRummagerPresenter = Struct.new(:file, :timestamp) do
 
   def to_json
     {
-      title: file.fetch("name"),
       description: file.fetch("description", ""),
-      link: file.fetch("base_path"),
       format: "finder",
+      link: file.fetch("base_path"),
       public_timestamp: timestamp,
       specialist_sectors: file.fetch("topics", []),
+      title: file.fetch("name"),
     }
   end
 end
