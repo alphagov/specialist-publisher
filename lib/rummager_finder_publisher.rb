@@ -1,5 +1,4 @@
 require "gds_api/rummager"
-require_relative "../app/presenters/finders/finder_rummager_presenter"
 
 class RummagerFinderPublisher
   def initialize(schemas, logger: Logger.new(STDOUT))
