@@ -1,8 +1,4 @@
 require "gds_api/publishing_api"
-require_relative "../app/presenters/finders/finder_content_item_presenter"
-require_relative "../app/presenters/finders/finder_links_presenter"
-require_relative "../app/presenters/finders/finder_signup_content_item_presenter"
-require_relative "../app/presenters/finders/finder_signup_links_presenter"
 
 class PublishingApiFinderPublisher
   def initialize(finders, logger: Logger.new(STDOUT))
