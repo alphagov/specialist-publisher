@@ -197,6 +197,24 @@ FactoryGirl.define do
     end
   end
 
+  factory :business_finance_support_scheme, parent: :document do
+    base_path "/business-finance-support/example-document"
+    document_type "business_finance_support_scheme"
+
+    transient do
+      default_metadata do
+        {
+          "business_sizes" => ["under-10", "between-10-and-249"],
+          "business_stages" => ["start-up"],
+          "continuation_link" => "https://www.gov.uk",
+          "industries" => ["information-technology-digital-and-creative"],
+          "types_of_support" => ["finance"],
+          "will_continue_on" => "on GOV.UK",
+        }
+      end
+    end
+  end
+
   factory :cma_case, parent: :document do
     base_path "/cma-cases/example-document"
     document_type "cma_case"

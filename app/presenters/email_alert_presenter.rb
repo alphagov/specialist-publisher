@@ -53,6 +53,7 @@ private
     {
       "aaib_report" => "Air Accidents Investigation Branch reports",
       "asylum_support_decision" => "Asylum Support Decision",
+      "business_finance_support_scheme" => "Business finance support scheme",
       "cma_case" => "Competition and Markets Authority cases",
       "countryside_stewardship_grant" => "Countryside Stewardship Grants",
       "employment_appeal_tribunal_decision" => "Employment appeal tribunal decisions",
@@ -72,6 +73,7 @@ private
     {
       "aaib_report" => "report",
       "asylum_support_decision" => "decision",
+      "business_finance_support_scheme" => "scheme",
       "cma_case" => "case",
       "countryside_stewardship_grant" => "grant",
       "employment_appeal_tribunal_decision" => "decision",
