@@ -72,45 +72,9 @@ namespace :report do
       URI.join(Plek.new.website_root, document['base_path']).to_s
     end
 
-    class Paginator
-      def initialize(document_class)
-        @document_class = document_class
-      end
-
-      def document_type
-        @document_type ||= @document_class.document_type
-      end
-
-      def params(page)
-        {
-          publishing_app: "specialist-publisher",
-          document_type: document_type,
-          fields: [
-            :base_path,
-            :content_id,
-            :publication_state,
-            :first_published_at,
-          ],
-          page: page,
-          per_page: 100,
-          order: "-last_edited_at",
-        }
-      end
-
-      def each(&block)
-        page = 1
-        loop do
-          response = Services.publishing_api.get_content_items(params(page))
-          break if response['results'].empty?
-          response['results'].each(&block)
-          break if response['current_page'] >= response['pages']
-          page += 1
-        end
-      end
-    end
-
     def each_document(document_class, &block)
-      Paginator.new(document_class).each(&block)
+      document_field_params = [:base_path, :content_id, :publication_state, :first_published_at]
+      ReportDocumentPaginator.new(document_class, document_field_params).each(&block)
     end
 
     def organisations_for_document_class(document_class)
