@@ -1,0 +1,62 @@
+<%= render layout: "shared/form_group", locals: { f: f, field: :continuation_link } do %>
+  <%= f.url_field :continuation_link, class: 'form-control' %>
+<% end %>
+<%= render layout: "shared/form_group", locals: { f: f, field: :will_continue_on } do %>
+  <%= f.text_field :will_continue_on, class: 'form-control' %>
+<% end %>
+<%= render layout: "shared/form_group", locals: { f: f, field: :types_of_support, label: 'Types of support offered' } do %>
+  <%= f.select :types_of_support,
+      facet_options(f, :types_of_support),
+      {},
+      {
+        class: 'select2 form-control',
+        multiple: true,
+        data:
+        {
+          placeholder: 'Select types of support offered'
+        }
+      }
+  %>
+<% end %>
+<%= render layout: "shared/form_group", locals: { f: f, field: :business_sizes } do %>
+  <%= f.select :business_sizes,
+      facet_options(f, :business_sizes),
+      {},
+      {
+        class: 'select2 form-control',
+        multiple: true,
+        data:
+        {
+          placeholder: 'Select business sizes'
+        }
+      }
+  %>
+<% end %>
+<%= render layout: "shared/form_group", locals: { f: f, field: :industries } do %>
+  <%= f.select :industries,
+      facet_options(f, :industries),
+      {},
+      {
+        class: 'select2 form-control',
+        multiple: true,
+        data:
+        {
+          placeholder: 'Select industries'
+        }
+      }
+  %>
+<% end %>
+<%= render layout: "shared/form_group", locals: { f: f, field: :business_stages } do %>
+  <%= f.select :business_stages,
+      facet_options(f, :business_stages),
+      {},
+      {
+        class: 'select2 form-control',
+        multiple: true,
+        data:
+        {
+          placeholder: 'Select business stages'
+        }
+      }
+  %>
+<% end %>
