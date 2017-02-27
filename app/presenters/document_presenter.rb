@@ -26,6 +26,7 @@ class DocumentPresenter
       ],
       redirects: [],
       update_type: document.update_type,
+      links: document.links,
     }.compact
   end
 

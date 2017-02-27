@@ -66,6 +66,7 @@ FactoryGirl.define do
     title "Example document"
     description "This is the summary of example document"
     schema_name "specialist_document"
+    document_type nil
     publishing_app "specialist-publisher"
     rendering_app "specialist-frontend"
     locale "en"
@@ -79,6 +80,7 @@ FactoryGirl.define do
     state_history {
       { "1": "draft" }
     }
+    links {}
 
     routes {
       [
@@ -110,7 +112,15 @@ FactoryGirl.define do
 
     initialize_with {
       merged_details = default_details.deep_stringify_keys.deep_merge(details.deep_stringify_keys)
-      attributes.merge(details: merged_details)
+      result = attributes.merge(details: merged_details)
+
+      result = result.merge(
+        links: {
+          finder: [FinderSchema.new(document_type.pluralize).content_id]
+        },
+      ) if document_type
+
+      result
     }
 
     # This is the default document state.

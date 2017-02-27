@@ -78,13 +78,19 @@ RSpec.describe Document do
     end
   end
 
+  before(:all) do
+    # this value is cached in the Document as a class variable, so we need it
+    # to not change between tests
+    @finder_content_id = SecureRandom.uuid
+  end
+
   let(:finder_schema) {
     {
       base_path: "/my-document-types",
       filter: {
         document_type: "my_document_type",
       },
-      content_id: SecureRandom.uuid
+      content_id: @finder_content_id
     }.deep_stringify_keys
   }
 
@@ -106,6 +112,9 @@ RSpec.describe Document do
           field2: "open",
           field3: %w(x y z),
         }
+      },
+      links: {
+        finder: [@finder_content_id]
       }
     }
   }
