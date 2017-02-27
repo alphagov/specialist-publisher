@@ -1,5 +1,6 @@
 //= require jquery
 //= require select2
+//= require dropdown_select_all
 //= require length_counter
 //= require form_change_protection
 
@@ -7,6 +8,11 @@ jQuery(function($) {
   $(".select2").select2({
     placeholder: $(this).data('placeholder')
   });
+
+  ////
+  // Add "select all"/"clear all" buttons to each select2 dropdown menu
+  var dropdownSelectAll = new GOVUKAdmin.Modules.DropdownSelectAll();
+  dropdownSelectAll.start($("select.select2"));
 
   ////
   // Make a select2 that will create new values on return as you type them
