@@ -7,7 +7,6 @@ class DocumentPresenter
 
   def to_json
     {
-      content_id: document.content_id,
       base_path: document.base_path,
       title: document.title,
       description: document.summary,

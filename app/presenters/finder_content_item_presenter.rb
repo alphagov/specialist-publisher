@@ -4,7 +4,6 @@ FinderContentItemPresenter = Struct.new(:file, :timestamp) do
       base_path: base_path,
       document_type: format,
       schema_name: format,
-      content_id: content_id,
       title: title,
       description: description,
       public_updated_at: public_updated_at,
