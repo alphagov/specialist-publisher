@@ -53,7 +53,6 @@ RSpec.feature "Creating a CMA case", type: :feature do
     click_button "Save as draft"
 
     expected_sent_payload = {
-      "content_id" => SecureRandom.uuid, # this is stubbed in the setup
       "base_path" => "/cma-cases/example-cma-case",
       "title" => "Example CMA Case",
       "description" => "This is the summary of an example CMA case",
@@ -296,7 +295,6 @@ RSpec.feature "Creating a CMA case", type: :feature do
     click_button "Save as draft"
 
     expected_sent_payload = {
-      "content_id" => SecureRandom.uuid, # this is stubbed in the setup
       "base_path" => "/cma-cases/at-veroeos-et-accusamus-et-iusto-odio-dignissimos-ducimus-qui-blanditiis-praesentium-voluptatum-deleniti-atque-corrupti-quos-dolores-et-quas-molestias-excepturi-sint-occaecati-cupiditate-non-provident-similique-sunt-in-culpa-qui-officia-de",
       "title" => "At veroeos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi",
       "description" => "This is the summary of an example CMA case",

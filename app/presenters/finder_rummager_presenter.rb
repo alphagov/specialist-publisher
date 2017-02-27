@@ -9,7 +9,6 @@ FinderRummagerPresenter = Struct.new(:file, :timestamp) do
 
   def to_json
     {
-      content_id: publishing_api_payload.fetch(:content_id),
       content_store_document_type: publishing_api_payload.fetch(:document_type),
       description: file.fetch("description", ""),
       format: "finder",
