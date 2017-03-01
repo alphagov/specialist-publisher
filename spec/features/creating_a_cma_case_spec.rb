@@ -84,6 +84,9 @@ RSpec.feature "Creating a CMA case", type: :feature do
       "routes" => [{ "path" => "/cma-cases/example-cma-case", "type" => "exact" }],
       "redirects" => [],
       "update_type" => "major",
+      "links" => {
+        "finder" => ["fef4ac7c-024a-4943-9f19-e85a8369a1f3"]
+      }
     }
 
     assert_publishing_api_put_content(content_id, expected_sent_payload)
@@ -326,6 +329,9 @@ RSpec.feature "Creating a CMA case", type: :feature do
       "routes" => [{ "path" => "/cma-cases/at-veroeos-et-accusamus-et-iusto-odio-dignissimos-ducimus-qui-blanditiis-praesentium-voluptatum-deleniti-atque-corrupti-quos-dolores-et-quas-molestias-excepturi-sint-occaecati-cupiditate-non-provident-similique-sunt-in-culpa-qui-officia-de", "type" => "exact" }],
       "redirects" => [],
       "update_type" => "major",
+      "links" => {
+        "finder" => ["fef4ac7c-024a-4943-9f19-e85a8369a1f3"]
+      }
     }
     assert_publishing_api_put_content(content_id, expected_sent_payload)
 

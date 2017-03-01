@@ -23,7 +23,8 @@ class Document
     :previous_version,
     :temporary_update_type,
     :update_type,
-    :warnings
+    :warnings,
+    :links,
   )
 
   def temporary_update_type
@@ -68,6 +69,10 @@ class Document
     keys.each do |key|
       public_send(:"#{clean_key(key.to_s)}=", param_value(attrs, key))
     end
+  end
+
+  def to_h
+    super.merge(links: links)
   end
 
   def bulk_published
@@ -274,6 +279,12 @@ class Document
 
   def self.finder_schema
     @finder_schema ||= FinderSchema.new(document_type.pluralize)
+  end
+
+  def links
+    {
+      "finder": [finder_schema.content_id]
+    }
   end
 
 private
