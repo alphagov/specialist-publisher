@@ -287,11 +287,11 @@ class Document
     }
   end
 
+private
+
   def finder_schema
     self.class.finder_schema
   end
-
-private
 
   def param_value(params, key)
     date_param_value(params, key) || params.fetch(key, nil)

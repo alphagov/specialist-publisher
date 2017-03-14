@@ -7,8 +7,7 @@ class DocumentLinksPresenter
     {
       content_id: document.content_id,
       links: {
-        organisations: document.organisations,
-        parent: [parent_content_id]
+        organisations: document.organisations
       },
     }
   end
@@ -16,8 +15,4 @@ class DocumentLinksPresenter
 private
 
   attr_reader :document
-
-  def parent_content_id
-    document.finder_schema.content_id
-  end
 end
