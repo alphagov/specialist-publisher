@@ -4,7 +4,6 @@
   "format_name": "Research for Development Output",
   "name": "Research for Development Outputs",
   "description": "Find outputs from Research for Development projects",
-  "pre_production": false,
   "filter": {
     "document_type": "dfid_research_output"
   },
