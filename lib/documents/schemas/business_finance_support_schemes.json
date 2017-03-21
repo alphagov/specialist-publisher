@@ -7,6 +7,7 @@
   "filter": {
     "document_type": "business_finance_support_scheme"
   },
+  "show_summaries": true,
   "signup_content_id": "32e87f32-8e37-4186-bc0c-fbed4c0f0239",
   "signup_copy": "You'll get an email each time a scheme is updated or a new scheme is published.",
   "organisations": ["2bde479a-97f2-42b5-986a-287a623c2a1c"],
