@@ -16,6 +16,7 @@
   ],
   "subscription_list_title_prefix": "Business finance support schemes",
   "document_noun": "scheme",
+  "default_order": "title",
   "facets": [
     {
         "key": "types_of_support",
