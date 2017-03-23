@@ -1,7 +1,7 @@
 <%= render layout: "shared/form_group", locals: { f: f, field: :continuation_link } do %>
   <%= f.url_field :continuation_link, class: 'form-control' %>
 <% end %>
-<%= render layout: "shared/form_group", locals: { f: f, field: :will_continue_on } do %>
+<%= render layout: "shared/form_group", locals: { f: f, field: :will_continue_on, label: 'Will continue' } do %>
   <%= f.text_field :will_continue_on, class: 'form-control' %>
 <% end %>
 <%= render layout: "shared/form_group", locals: { f: f, field: :types_of_support, label: 'Types of support offered' } do %>
