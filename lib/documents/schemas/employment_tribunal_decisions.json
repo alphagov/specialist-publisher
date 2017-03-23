@@ -6,7 +6,7 @@
   "description": "Find decisions on Employment Tribunal cases in England, Wales and Scotland.",
   "phase": "beta",
   "filter": {
-    "document_type": "employment_tribunal_decision"
+    "elasticsearch_type": "employment_tribunal_decision"
   },
   "show_summaries": true,
   "organisations": [
