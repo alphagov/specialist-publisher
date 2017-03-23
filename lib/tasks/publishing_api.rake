@@ -12,4 +12,12 @@ namespace :publishing_api do
       puts "Error publishing finder: #{e.inspect}"
     end
   end
+
+  desc "Find manual by base_path, publish redirect for the manual and any sections it may have"
+  task :redirect_manual_and_sections, [:base_path, :destination] => :environment do |_task, args|
+    ManualAndSectionsRedirecter.new(
+      base_path: args[:base_path],
+      destination: args[:destination]
+    ).redirect
+  end
 end
