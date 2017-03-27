@@ -23,7 +23,7 @@
         "name": "Type of support",
         "type": "text",
         "preposition": "of type",
-        "display_as_result_metadata": true,
+        "display_as_result_metadata": false,
         "filterable": true,
         "allowed_values": [
           {"label": "Finance", "value": "finance"},
@@ -40,7 +40,7 @@
       "name": "Business stage",
       "type": "text",
       "preposition": "for businesses which are",
-      "display_as_result_metadata": true,
+      "display_as_result_metadata": false,
       "filterable": true,
       "allowed_values": [
         {"label": "Not yet trading", "value": "not-yet-trading"},
@@ -54,7 +54,7 @@
       "name": "Industry",
       "type": "text",
       "preposition": "for businesses in",
-      "display_as_result_metadata": true,
+      "display_as_result_metadata": false,
       "filterable": true,
       "allowed_values": [
         {"label": "Agriculture and food", "value": "agriculture-and-food"},
@@ -81,7 +81,7 @@
       "name": "Number of employees",
       "type": "text",
       "preposition": "for businesses with",
-      "display_as_result_metadata": true,
+      "display_as_result_metadata": false,
       "filterable": true,
       "allowed_values": [
         {"label": "0 to 9 employees", "value": "under-10"},
