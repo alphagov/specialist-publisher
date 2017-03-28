@@ -16,104 +16,6 @@
   "document_noun": "output",
   "facets": [
     {
-      "key": "dfid_document_type",
-      "name": "Document Type",
-      "type": "text",
-      "preposition": "of type",
-      "display_as_result_metadata": true,
-      "filterable": true,
-      "allowed_values": [
-        {
-          "value": "book",
-          "label": "Book"
-        },
-        {
-          "value": "book_chapter",
-          "label": "Book Chapter"
-        },
-        {
-          "value": "briefing",
-          "label": "Briefing"
-        },
-        {
-          "value": "case_study",
-          "label": "Case Study"
-        },
-        {
-          "value": "conference_paper",
-          "label": "Conference Paper"
-        },
-        {
-          "value": "country_report",
-          "label": "Country Report"
-        },
-        {
-          "value": "dataset",
-          "label": "Dataset"
-        },
-        {
-          "value": "discussion_paper",
-          "label": "Discussion Paper"
-        },
-        {
-          "value": "evaluation_report",
-          "label": "Evaluation Report"
-        },
-        {
-          "value": "journal_article",
-          "label": "Journal Article"
-        },
-        {
-          "value": "journal_issue",
-          "label": "Journal Issue"
-        },
-        {
-          "value": "lessons_learned",
-          "label": "Lessons Learned"
-        },
-        {
-          "value": "literature_review",
-          "label": "Literature Review"
-        },
-        {
-          "value": "manual",
-          "label": "Manual"
-        },
-        {
-          "value": "protocol",
-          "label": "Protocol"
-        },
-        {
-          "value": "research_paper",
-          "label": "Research Paper"
-        },
-        {
-          "value": "systematic_review",
-          "label": "Systematic Review"
-        },
-        {
-          "value": "technical_report",
-          "label": "Technical Report"
-        },
-        {
-          "value": "thematic_summary",
-          "label": "Thematic Summary"
-        },
-        {
-          "value": "tool_kit",
-          "label": "Tool kit"
-        },
-        {
-          "value": "training_materials",
-          "label": "Training Materials"
-        },
-        {
-          "value": "working_paper",
-          "label": "Working Paper"
-        }
-      ]
-    },
-    {
       "key": "country",
       "name": "Country",
       "type": "text",
@@ -904,6 +806,104 @@
         {
           "value": "ZW",
           "label": "Zimbabwe"
+        }
+      ]
+    },
+    {
+      "key": "dfid_document_type",
+      "name": "Document Type",
+      "type": "text",
+      "preposition": "of type",
+      "display_as_result_metadata": true,
+      "filterable": true,
+      "allowed_values": [
+        {
+          "value": "book",
+          "label": "Book"
+        },
+        {
+          "value": "book_chapter",
+          "label": "Book Chapter"
+        },
+        {
+          "value": "briefing",
+          "label": "Briefing"
+        },
+        {
+          "value": "case_study",
+          "label": "Case Study"
+        },
+        {
+          "value": "conference_paper",
+          "label": "Conference Paper"
+        },
+        {
+          "value": "country_report",
+          "label": "Country Report"
+        },
+        {
+          "value": "dataset",
+          "label": "Dataset"
+        },
+        {
+          "value": "discussion_paper",
+          "label": "Discussion Paper"
+        },
+        {
+          "value": "evaluation_report",
+          "label": "Evaluation Report"
+        },
+        {
+          "value": "journal_article",
+          "label": "Journal Article"
+        },
+        {
+          "value": "journal_issue",
+          "label": "Journal Issue"
+        },
+        {
+          "value": "lessons_learned",
+          "label": "Lessons Learned"
+        },
+        {
+          "value": "literature_review",
+          "label": "Literature Review"
+        },
+        {
+          "value": "manual",
+          "label": "Manual"
+        },
+        {
+          "value": "protocol",
+          "label": "Protocol"
+        },
+        {
+          "value": "research_paper",
+          "label": "Research Paper"
+        },
+        {
+          "value": "systematic_review",
+          "label": "Systematic Review"
+        },
+        {
+          "value": "technical_report",
+          "label": "Technical Report"
+        },
+        {
+          "value": "thematic_summary",
+          "label": "Thematic Summary"
+        },
+        {
+          "value": "tool_kit",
+          "label": "Tool kit"
+        },
+        {
+          "value": "training_materials",
+          "label": "Training Materials"
+        },
+        {
+          "value": "working_paper",
+          "label": "Working Paper"
         }
       ]
     },
