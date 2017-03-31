@@ -68,7 +68,7 @@ FactoryGirl.define do
     schema_name "specialist_document"
     document_type nil
     publishing_app "specialist-publisher"
-    rendering_app "specialist-frontend"
+    rendering_app "government-frontend"
     locale "en"
     phase "live"
     redirects []

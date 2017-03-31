@@ -75,7 +75,7 @@ RSpec.describe SearchPresenter do
 
       it 'includes publishing and rendering apps' do
         expect(json[:publishing_app]).to eql('specialist-publisher')
-        expect(json[:rendering_app]).to eql('specialist-frontend')
+        expect(json[:rendering_app]).to eql('government-frontend')
       end
 
       it 'does not include blank values' do

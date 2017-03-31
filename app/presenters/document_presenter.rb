@@ -14,7 +14,7 @@ class DocumentPresenter
       change_note: document.change_note,
       schema_name: "specialist_document",
       publishing_app: "specialist-publisher",
-      rendering_app: "specialist-frontend",
+      rendering_app: "government-frontend",
       locale: "en",
       phase: document.phase,
       details: details,
