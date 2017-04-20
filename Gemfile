@@ -26,20 +26,20 @@ gem "govuk_frontend_toolkit", "0.44.0"
 gem 'plek', '~> 1.10'
 
 group :development, :test do
-  gem 'better_errors', '~> 2.1.1'
-  gem 'binding_of_caller', '~> 0.7.2'
-  gem "capybara", "2.7.1"
-  gem 'capybara-webkit', '1.11.1'
-  gem 'database_cleaner', '1.5.1'
+  gem 'better_errors'
+  gem 'binding_of_caller'
+  gem "capybara"
+  gem 'capybara-webkit'
+  gem 'database_cleaner'
   gem 'factory_girl'
-  gem 'foreman', '0.74.0'
-  gem 'govuk-content-schema-test-helpers', '1.4.0'
+  gem 'foreman'
+  gem 'govuk-content-schema-test-helpers'
   gem 'govuk-lint'
   gem 'pry-rails'
-  gem 'rspec-rails', '~> 3.3'
-  gem 'simplecov', '0.10.0', require: false
-  gem 'simplecov-rcov', '0.2.3', require: false
-  gem 'timecop', '0.8.0'
+  gem 'rspec-rails'
+  gem 'simplecov', require: false
+  gem 'simplecov-rcov', require: false
+  gem 'timecop'
 end
 
 group :test do
