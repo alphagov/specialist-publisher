@@ -18,7 +18,7 @@ gem 'uglifier', '>= 1.3.0'
 gem 'unicorn', '~> 4.9.0'
 
 # GDS managed dependencies
-gem "gds-api-adapters", "37.5.0"
+gem "gds-api-adapters", "41.5.0"
 gem 'gds-sso', '13.0.0'
 gem "govspeak", "~> 5.0.1"
 gem 'govuk_admin_template', '~> 4.4.1'
