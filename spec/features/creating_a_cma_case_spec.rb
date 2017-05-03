@@ -59,7 +59,7 @@ RSpec.feature "Creating a CMA case", type: :feature do
       "document_type" => "cma_case",
       "schema_name" => "specialist_document",
       "publishing_app" => "specialist-publisher",
-      "rendering_app" => "specialist-frontend",
+      "rendering_app" => "government-frontend",
       "locale" => "en",
       "phase" => "live",
       "details" => {
@@ -304,7 +304,7 @@ RSpec.feature "Creating a CMA case", type: :feature do
       "document_type" => "cma_case",
       "schema_name" => "specialist_document",
       "publishing_app" => "specialist-publisher",
-      "rendering_app" => "specialist-frontend",
+      "rendering_app" => "government-frontend",
       "locale" => "en",
       "phase" => "live",
       "details" => {
