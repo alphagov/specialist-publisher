@@ -56,4 +56,24 @@ RSpec.describe Republisher do
       subject.republish_one("content-id")
     end
   end
+
+  describe ".republish_many" do
+    it "immediately runs the job rather than enqueueing it" do
+      expect(RepublishWorker).not_to receive(:perform_async)
+
+      expect_any_instance_of(RepublishWorker).to receive(:perform).with("content-id")
+      expect_any_instance_of(RepublishWorker).not_to receive(:perform).with("raib-1")
+
+      subject.republish_many("content-id")
+    end
+
+    it "can run multiple content items from a comma separated list" do
+      republish_worker = double
+      allow(RepublishWorker).to receive(:new).and_return(republish_worker)
+      expect(republish_worker).to receive(:perform).with("content-id-1")
+      expect(republish_worker).to receive(:perform).with("content-id-2")
+
+      subject.republish_many("content-id-1,content-id-2")
+    end
+  end
 end

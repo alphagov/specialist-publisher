@@ -18,4 +18,9 @@ namespace :republish do
   task :one, [:content_id] => :environment do |_, args|
     Republisher.republish_one(args.content_id)
   end
+
+  desc "republish a many document"
+  task :many, [:content_ids] => :environment do |_, args|
+    Republisher.republish_many(args.content_ids)
+  end
 end
