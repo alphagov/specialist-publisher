@@ -17,6 +17,12 @@ module_function
     RepublishWorker.new.perform(content_id)
   end
 
+  def republish_many(content_ids)
+    content_ids.split(',').each do |content_id|
+      RepublishWorker.new.perform(content_id)
+    end
+  end
+
   def all_content_ids
     document_types.flat_map { |t| content_ids_for_document_type(t) }
   end
