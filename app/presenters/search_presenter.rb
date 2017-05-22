@@ -21,7 +21,7 @@ class SearchPresenter
   end
 
   def format_date(timestamp)
-    raise ArgumentError, "Timestamp is blank" if timestamp.blank?
+    return nil if timestamp.blank?
     timestamp.to_datetime.rfc3339
   end
 
