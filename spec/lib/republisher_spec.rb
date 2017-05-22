@@ -65,11 +65,11 @@ RSpec.describe Republisher do
       subject.republish_many("content-id")
     end
 
-    it "can run multiple content items from a comma separated list" do
+    it "can run multiple content items from a space separated list" do
       expect(RepublishWorker).to receive(:perform_async).with("content-id-1")
       expect(RepublishWorker).to receive(:perform_async).with("content-id-2")
 
-      subject.republish_many("content-id-1,content-id-2")
+      subject.republish_many("content-id-1 content-id-2")
     end
   end
 end

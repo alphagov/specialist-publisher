@@ -19,7 +19,7 @@ namespace :republish do
     Republisher.republish_one(args.content_id)
   end
 
-  desc "republish a many document"
+  desc "republish a many document (space separated list of content IDs)"
   task :many, [:content_ids] => :environment do |_, args|
     Republisher.republish_many(args.content_ids)
   end

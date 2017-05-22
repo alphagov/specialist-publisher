@@ -18,7 +18,7 @@ module_function
   end
 
   def republish_many(content_ids)
-    content_ids.split(',').each do |content_id|
+    content_ids.split(' ').each do |content_id|
       RepublishWorker.perform_async(content_id)
     end
   end
