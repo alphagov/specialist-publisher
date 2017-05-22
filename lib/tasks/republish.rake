@@ -19,8 +19,13 @@ namespace :republish do
     Republisher.republish_one(args.content_id)
   end
 
-  desc "republish a many document (space separated list of content IDs)"
+  desc "republish many documents (space separated list of content IDs)"
   task :many, [:content_ids] => :environment do |_, args|
-    Republisher.republish_many(args.content_ids)
+    Republisher.republish_many(args.content_ids.split(' '))
+  end
+
+  desc "synchronously republish documents to rummager (space separated list of content IDs)"
+  task :search, [:content_ids] => :environment do |_, args|
+    Republisher.republish_search_sync(args.content_ids.split(' '))
   end
 end
