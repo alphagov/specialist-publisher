@@ -18,8 +18,16 @@ module_function
   end
 
   def republish_many(content_ids)
-    content_ids.split(' ').each do |content_id|
+    content_ids.each do |content_id|
       RepublishWorker.perform_async(content_id)
+    end
+  end
+
+  def republish_search_sync(content_ids)
+    content_ids.each do |content_id|
+      document = Document.find(content_id)
+      payload = SearchPresenter.new(document).to_json
+      Services.rummager.add_document(document.search_document_type, document.base_path, payload)
     end
   end
 
