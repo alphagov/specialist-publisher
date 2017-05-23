@@ -39,7 +39,7 @@ class DocumentsController < ApplicationController
       flash.now[:errors] = document_error_messages
       render :new, status: 422
     else
-      flash.now[:danger] = "There was an error creating #{@document.title}. Please try again later."
+      flash.now[:danger] = unknown_error_message
       render :new
     end
   end
@@ -60,7 +60,7 @@ class DocumentsController < ApplicationController
         flash[:success] = "Updated #{@document.title}"
         redirect_to document_path(current_format.slug, @document.content_id)
       else
-        flash.now[:danger] = "There was an error updating #{@document.title}. Please try again later."
+        flash.now[:danger] = unknown_error_message
         render :edit
       end
     else
@@ -73,7 +73,7 @@ class DocumentsController < ApplicationController
     if @document.publish
       flash[:success] = "Published #{@document.title}"
     else
-      flash[:danger] = "There was an error publishing #{@document.title}. Please try again later."
+      flash[:danger] = unknown_error_message
     end
     redirect_to document_path(current_format.slug, params[:content_id])
   end
@@ -82,7 +82,7 @@ class DocumentsController < ApplicationController
     if @document.unpublish
       flash[:success] = "Unpublished #{@document.title}"
     else
-      flash[:danger] = "There was an error unpublishing #{@document.title}. Please try again later."
+      flash[:danger] = unknown_error_message
     end
     redirect_to document_path(current_format.slug, params[:content_id])
   end
@@ -91,12 +91,19 @@ class DocumentsController < ApplicationController
     if @document.discard
       flash[:success] = "Discarded draft of #{@document.title}"
     else
-      flash[:danger] = "There was an error discarding draft of #{@document.title}. Please try again later."
+      flash[:danger] = unknown_error_message
     end
     redirect_to documents_path(current_format.slug)
   end
 
 private
+
+  def unknown_error_message
+    support_url = Plek.find('support') + "/technical_fault_report/new"
+
+    "Something has gone wrong. Please try again and see if it works. <a href='#{support_url}'>Let us know</a>
+    if the problem happens again and a developer will look into it.".html_safe
+  end
 
   def document_error_messages
     @document.errors.messages
