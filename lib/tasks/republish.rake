@@ -4,6 +4,14 @@ require 'csv'
 require 'services'
 
 namespace :republish do
+  # Caution: These tasks should be avoided in production environnments (with
+  # the exception of republish to rummager) as they change the date information
+  # of draft documents and extra superfluous history to published documents.
+  #
+  # If data is incorrect in Publishing API it should be fixed in Publishing API
+  # whereas if there is problems with the search index the republish to rummager
+  # task should be used.
+
   desc "republish all documents"
   task all: :environment do
     Republisher.republish_all
