@@ -110,6 +110,12 @@ You can use the Jenkins rake task runner to run these tasks.
 If a document has been created in draft, it can be discarded with this task:
 `ops:discard['some-content-id']`
 
+Drafts can also be discarded by running a similar task from the Publishing API:
+
+`discard_draft['some-content-id']`
+
+See [Admin Tasks](https://github.com/alphagov/publishing-api/blob/master/doc/admin-tasks.md)
+
 ### Triggering an email notification
 
 If an email has not been sent for a document, it can be re-triggered with this task:
