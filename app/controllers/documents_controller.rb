@@ -79,11 +79,14 @@ class DocumentsController < ApplicationController
   end
 
   def unpublish
-    if @document.unpublish
+    if @document.unpublish(params[:alternative_path])
       flash[:success] = "Unpublished #{@document.title}"
     else
       flash[:danger] = unknown_error_message
     end
+  rescue DocumentUnpublisher::AlternativeContentNotFound => e
+    flash[:danger] = e.message
+  ensure
     redirect_to document_path(current_format.slug, params[:content_id])
   end
 

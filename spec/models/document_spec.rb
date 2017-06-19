@@ -429,7 +429,7 @@ RSpec.describe Document do
     it "sends correct payload to publishing api" do
       expect(document.unpublish).to eq(true)
 
-      assert_publishing_api_unpublish(document.content_id)
+      assert_publishing_api_unpublish(document.content_id, type: 'gone')
     end
 
     it "sends a delete request to Rummager" do
@@ -442,6 +442,17 @@ RSpec.describe Document do
       expect(AttachmentDeleteWorker).to receive(:perform_async).with(payload["content_id"])
 
       document.unpublish
+    end
+
+    context "with an alternative path" do
+      it "sends correct payload to publishing api" do
+        publishing_api_has_lookups('/foo' => SecureRandom.uuid)
+        stub_publishing_api_unpublish(document.content_id, body: { type: 'redirect', alternative_path: '/foo' })
+
+        expect(document.unpublish('/foo')).to eq(true)
+
+        assert_publishing_api_unpublish(document.content_id, type: 'redirect', alternative_path: '/foo')
+      end
     end
 
     context "unsuccessful #unpublish" do
