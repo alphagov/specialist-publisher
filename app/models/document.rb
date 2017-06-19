@@ -199,9 +199,9 @@ class Document
     end
   end
 
-  def unpublish
+  def unpublish(alternative_path = nil)
     handle_remote_error do
-      DocumentUnpublisher.unpublish(content_id, base_path)
+      DocumentUnpublisher.unpublish(content_id, base_path, alternative_path)
     end
   end
 

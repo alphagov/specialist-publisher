@@ -6,7 +6,6 @@ RSpec.feature "Unpublishing a CMA Case", type: :feature do
   before do
     log_in_as_editor(:cma_editor)
     publishing_api_has_item(item)
-    stub_publishing_api_unpublish(content_id, body: { type: 'gone' })
     stub_any_rummager_delete_content
   end
 
@@ -18,6 +17,8 @@ RSpec.feature "Unpublishing a CMA Case", type: :feature do
     }
 
     scenario "clicking the unpublish button redirects back to the show page" do
+      stub_publishing_api_unpublish(content_id, body: { type: 'gone' })
+
       visit document_path(content_id: content_id, document_type_slug: "cma-cases")
       expect(page).to have_content("Example CMA Case")
       click_button "Unpublish document"
@@ -25,6 +26,36 @@ RSpec.feature "Unpublishing a CMA Case", type: :feature do
       expect(page).to have_content("Unpublished Example CMA Case")
 
       assert_publishing_api_unpublish(content_id)
+    end
+
+    scenario "specifying a redirect to an alternative GOV.UK content path" do
+      stub_publishing_api_unpublish(content_id, body: { type: 'redirect', alternative_path: "/government/organisations/competition-and-markets-authority" })
+
+      publishing_api_has_lookups("/government/organisations/competition-and-markets-authority" => SecureRandom.uuid)
+
+      visit document_path(content_id: content_id, document_type_slug: "cma-cases")
+      expect(page).to have_content("Example CMA Case")
+
+      fill_in "alternative_path", with: "/government/organisations/competition-and-markets-authority"
+      click_button "Unpublish document"
+
+      expect(page.status_code).to eq(200)
+      expect(page).to have_content("Unpublished Example CMA Case")
+
+      assert_publishing_api_unpublish(content_id, type: "redirect", alternative_path: "/government/organisations/competition-and-markets-authority")
+    end
+
+    scenario "specifying a redirect to an alternative GOV.UK content path that does not exist" do
+      publishing_api_has_lookups("/government/organisations/competition-and-markets-authority" => SecureRandom.uuid)
+
+      visit document_path(content_id: content_id, document_type_slug: "cma-cases")
+      expect(page).to have_content("Example CMA Case")
+
+      fill_in "alternative_path", with: "/path/to/missing"
+      click_button "Unpublish document"
+
+      expect(page.status_code).to eq(200)
+      expect(page).to have_content("Alternative content not found at the path '/path/to/missing'")
     end
 
     scenario "writers don't see a unpublish document button" do
@@ -68,6 +99,8 @@ RSpec.feature "Unpublishing a CMA Case", type: :feature do
 
       scenario "clicking the unpublish button deletes document attachments" do
         Sidekiq::Testing.inline! do
+          stub_publishing_api_unpublish(content_id, body: { type: 'gone' })
+
           visit document_path(content_id: content_id, document_type_slug: "cma-cases")
 
           expect(Services.asset_api).to receive(:delete_asset).once.ordered
