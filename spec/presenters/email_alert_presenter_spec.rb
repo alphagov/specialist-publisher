@@ -37,7 +37,7 @@ RSpec.describe EmailAlertPresenter do
     end
 
     context "Medical Safety Alerts documents" do
-      let(:mhra_email_address) { "email.support@mhra.gsi.gov.uk" }
+      let(:mhra_email_address) { "email.support@mhra.gov.uk" }
 
       before do
         publishing_api_has_item(medical_safety_payload)
