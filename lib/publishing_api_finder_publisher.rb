@@ -47,7 +47,7 @@ private
 
     Services.publishing_api.put_content(finder_payload.content_id, finder_payload.to_json)
     Services.publishing_api.patch_links(finder_payload.content_id, links_payload.to_json)
-    Services.publishing_api.publish(finder_payload.content_id, "major")
+    Services.publishing_api.publish(finder_payload.content_id)
   end
 
   def export_signup(finder)
@@ -64,6 +64,6 @@ private
 
     Services.publishing_api.put_content(signup_payload.content_id, signup_payload.to_json)
     Services.publishing_api.patch_links(signup_payload.content_id, links_payload.to_json)
-    Services.publishing_api.publish(signup_payload.content_id, "major")
+    Services.publishing_api.publish(signup_payload.content_id)
   end
 end

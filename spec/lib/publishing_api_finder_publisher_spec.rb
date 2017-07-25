@@ -64,7 +64,7 @@ RSpec.describe PublishingApiFinderPublisher do
         expect(publishing_api).to receive(:patch_links)
           .with(finders[0][:file]["content_id"], anything)
         expect(publishing_api).to receive(:publish)
-          .with(finders[0][:file]["content_id"], "major")
+          .with(finders[0][:file]["content_id"])
 
         # This should be validated against an email-signup schema if one gets created
         expect(publishing_api).to receive(:put_content)
@@ -72,7 +72,7 @@ RSpec.describe PublishingApiFinderPublisher do
         expect(publishing_api).to receive(:patch_links)
           .with(finders[0][:file]["signup_content_id"], anything)
         expect(publishing_api).to receive(:publish)
-          .with(finders[0][:file]["signup_content_id"], "major")
+          .with(finders[0][:file]["signup_content_id"])
 
 
         expect(publishing_api).to receive(:put_content)
@@ -80,7 +80,7 @@ RSpec.describe PublishingApiFinderPublisher do
         expect(publishing_api).to receive(:patch_links)
           .with(finders[1][:file]["content_id"], anything)
         expect(publishing_api).to receive(:publish)
-          .with(finders[1][:file]["content_id"], "major")
+          .with(finders[1][:file]["content_id"])
 
         PublishingApiFinderPublisher.new(finders, logger: test_logger).call
       end
@@ -107,7 +107,7 @@ RSpec.describe PublishingApiFinderPublisher do
         expect(publishing_api).to receive(:patch_links)
           .with(finders[0][:file]["content_id"], anything)
         expect(publishing_api).to receive(:publish)
-          .with(finders[0][:file]["content_id"], "major")
+          .with(finders[0][:file]["content_id"])
 
         PublishingApiFinderPublisher.new(finders, logger: test_logger).call
       end
@@ -134,7 +134,7 @@ RSpec.describe PublishingApiFinderPublisher do
         expect(publishing_api).to receive(:patch_links)
           .with(content_id, anything)
         expect(publishing_api).to receive(:publish)
-          .with(content_id, "major")
+          .with(content_id)
 
         PublishingApiFinderPublisher.new(finders, logger: test_logger).call
       end
@@ -166,7 +166,7 @@ RSpec.describe PublishingApiFinderPublisher do
           expect(publishing_api).to receive(:patch_links)
             .with(content_id, anything)
           expect(publishing_api).to receive(:publish)
-            .with(content_id, "major")
+            .with(content_id)
 
           PublishingApiFinderPublisher.new(finders, logger: test_logger).call
         end
@@ -179,7 +179,7 @@ RSpec.describe PublishingApiFinderPublisher do
           expect(publishing_api).not_to receive(:patch_links)
             .with(content_id, anything)
           expect(publishing_api).not_to receive(:publish)
-            .with(content_id, "major")
+            .with(content_id)
 
           PublishingApiFinderPublisher.new(finders, logger: test_logger).call
         end

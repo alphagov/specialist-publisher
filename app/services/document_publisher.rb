@@ -7,8 +7,7 @@ class DocumentPublisher
       document.update_type = 'major'
       document.save
     end
-
-    Services.publishing_api.publish(document.content_id, document.update_type)
+    Services.publishing_api.publish(document.content_id)
 
     published_document = document.class.find(document.content_id)
     indexable_document = SearchPresenter.new(published_document)
