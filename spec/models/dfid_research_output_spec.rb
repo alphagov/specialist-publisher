@@ -5,10 +5,12 @@ RSpec.describe DfidResearchOutput do
   let(:payload) { FactoryGirl.create(:dfid_research_output) }
   include_examples "it saves payloads that are valid against the 'specialist_document' schema"
 
-  subject(:output) { DfidResearchOutput.new }
+  it 'is not exportable' do
+    expect(described_class).not_to be_exportable
+  end
 
   it 'is always bulk published to hide the publishing-api published date' do
-    expect(output.bulk_published).to be true
+    expect(subject.bulk_published).to be true
   end
 
   it "has a dfid_author_tags virtual attribute" do

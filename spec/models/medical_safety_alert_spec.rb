@@ -4,4 +4,8 @@ require 'models/valid_against_schema'
 RSpec.describe MedicalSafetyAlert do
   let(:payload) { FactoryGirl.create(:medical_safety_alert) }
   include_examples "it saves payloads that are valid against the 'specialist_document' schema"
+
+  it 'is not exportable' do
+    expect(described_class).not_to be_exportable
+  end
 end
