@@ -91,15 +91,37 @@ RSpec.describe AllDocumentsFinder do
         expect(pagination_call).to have_been_requested
       end
     end
+
+    it 'respects the query parameter if provided and sends it to publishing api when fetching documents' do
+      documents = [
+        FactoryGirl.create(
+          :business_finance_support_scheme,
+          base_path: '/bfss/1',
+          title: 'Scheme #1'
+        ),
+        FactoryGirl.create(
+          :business_finance_support_scheme,
+          base_path: '/bfss/2',
+          title: 'Scheme #2'
+        ),
+      ]
+      pagination_calls_with_search = publishing_api_paginates_content(documents, 1, BusinessFinanceSupportScheme, search_query: 'hats')
+
+      subject.find_each(BusinessFinanceSupportScheme, query: 'hats') { |x| x }
+
+      pagination_calls_with_search.map do |pagination_call_without_search|
+        expect(pagination_call_without_search).to have_been_requested
+      end
+    end
   end
 
   # NOTE: we do this manually because the publishing_api_has_content test helper
   # is too restrictive and we can't properly control pagination
-  def publishing_api_paginates_content(content_items, per_page, document_klass)
+  def publishing_api_paginates_content(content_items, per_page, document_klass, search_query: nil)
     total_pages = content_items.length / per_page
     total_pages += 1 unless content_items.length.remainder(per_page).zero?
     if total_pages.zero?
-      publishing_api_has_no_content(document_klass)
+      publishing_api_has_no_content(document_klass, search_query)
     else
       content_items.each_slice(per_page).with_index.map do |page_items, index|
         body = {
@@ -108,24 +130,34 @@ RSpec.describe AllDocumentsFinder do
           pages: total_pages,
           current_page: index + 1
         }
+        query_params = {
+          page: (index + 1).to_s,
+          document_type: document_klass.document_type
+        }
+        query_params[:q] = search_query if search_query.present?
 
         stub_request(:get, GdsApi::TestHelpers::PublishingApiV2::PUBLISHING_API_V2_ENDPOINT + '/content')
-          .with(query: hash_including(page: (index + 1).to_s, document_type: document_klass.document_type))
+          .with(query: hash_including(query_params))
           .to_return(status: 200, body: body.to_json, headers: {})
       end
     end
   end
 
-  def publishing_api_has_no_content(document_klass)
+  def publishing_api_has_no_content(document_klass, search_query: nil)
     body = {
       results: [],
       total: 0,
       pages: 0,
       current_page: 1
     }
+    query_params = {
+      page: '1',
+      document_type: document_klass.document_type
+    }
+    query_params[:q] = search_query if search_query.present?
 
     stub_request(:get, GdsApi::TestHelpers::PublishingApiV2::PUBLISHING_API_V2_ENDPOINT + '/content')
-      .with(query: hash_including(page: '1', document_type: document_klass.document_type))
+      .with(query: hash_including(query_params))
       .to_return(status: 200, body: body.to_json, headers: {})
   end
 end

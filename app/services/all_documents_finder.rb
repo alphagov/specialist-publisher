@@ -27,8 +27,9 @@ class AllDocumentsFinder
     Services.publishing_api.get_content_items(params)
   end
 
-  def self.find_each(klass)
+  def self.find_each(klass, query: nil)
     params = default_find_params(klass.document_type).merge(per_page: 50)
+    params[:q] = query if query.present?
 
     current_page = 1
     loop do
