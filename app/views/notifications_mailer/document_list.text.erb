@@ -1,0 +1,3 @@
+Hi <%= @user.name %>,
+
+Please find attached the CSV of <%= @document_klass.title.pluralize %><% if @query.present? %> matching the query "<%= @query %>"<% end %> you requested from GOV.UK specialist publisher.
