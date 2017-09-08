@@ -129,6 +129,9 @@ GEM
       bootstrap-sass (= 3.3.5.1)
       jquery-rails (~> 4.1.1)
       rails (>= 3.2.0)
+    govuk_app_config (0.2.0)
+      sentry-raven (~> 2.6.3)
+      statsd-ruby (~> 1.4.0)
     govuk_frontend_toolkit (0.44.0)
       rails (>= 3.1.0)
       sass (>= 3.2.0)
@@ -317,6 +320,8 @@ GEM
       sass (~> 3.4.20)
     select2-rails (3.5.10)
       thor (~> 0.14)
+    sentry-raven (2.6.3)
+      faraday (>= 0.7.6, < 1.0)
     sidekiq (4.2.10)
       concurrent-ruby (~> 1.0)
       connection_pool (~> 2.2, >= 2.2.0)
@@ -392,6 +397,7 @@ DEPENDENCIES
   govuk-content-schema-test-helpers
   govuk-lint
   govuk_admin_template (~> 4.4.1)
+  govuk_app_config (~> 0.2.0)
   govuk_frontend_toolkit (= 0.44.0)
   govuk_sidekiq (~> 0.0.4)
   hashdiff
