@@ -132,7 +132,7 @@ private
     flash[:danger] = "Document not found"
     redirect_to documents_path(document_type_slug: document_type_slug)
 
-    Airbrake.notify(e)
+    GovukError.notify(e)
   end
 
   def filtered_page_param(page)

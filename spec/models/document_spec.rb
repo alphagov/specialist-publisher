@@ -398,8 +398,8 @@ RSpec.describe Document do
   context "unsuccessful #publish" do
     let(:payload) { FactoryGirl.create(:document, :published, payload_attributes) }
 
-    it "notifies Airbrake and returns false if publishing-api does not return status 200" do
-      expect(Airbrake).to receive(:notify)
+    it "notifies GovukError and returns false if publishing-api does not return status 200" do
+      expect(GovukError).to receive(:notify)
       stub_any_publishing_api_put_content
       stub_any_publishing_api_patch_links
       stub_publishing_api_publish(document.content_id, {}, status: 503)
@@ -407,8 +407,8 @@ RSpec.describe Document do
       expect(document.publish).to eq(false)
     end
 
-    it "notifies Airbrake and returns false if rummager does not return status 200" do
-      expect(Airbrake).to receive(:notify)
+    it "notifies GovukError and returns false if rummager does not return status 200" do
+      expect(GovukError).to receive(:notify)
       stub_any_publishing_api_put_content
       stub_any_publishing_api_patch_links
       stub_publishing_api_publish(document.content_id, {})
@@ -456,8 +456,8 @@ RSpec.describe Document do
     end
 
     context "unsuccessful #unpublish" do
-      it "notifies Airbrake and returns false if publishing-api does not return status 200" do
-        expect(Airbrake).to receive(:notify)
+      it "notifies GovukError and returns false if publishing-api does not return status 200" do
+        expect(GovukError).to receive(:notify)
         stub_publishing_api_unpublish(document.content_id, { body: { type: 'gone' } }, status: 409)
         expect(document.unpublish).to eq(false)
       end
