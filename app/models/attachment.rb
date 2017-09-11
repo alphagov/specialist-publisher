@@ -49,7 +49,7 @@ class Attachment < Document
     @url = response["file_url"]
     true
   rescue GdsApi::BaseError => e
-    Airbrake.notify(e)
+    GovukError.notify(e)
     false
   end
 
@@ -58,7 +58,7 @@ class Attachment < Document
     @url = response["file_url"]
     true
   rescue GdsApi::BaseError => e
-    Airbrake.notify(e)
+    GovukError.notify(e)
     false
   end
 
@@ -74,7 +74,7 @@ class Attachment < Document
   def destroy
     Services.asset_api.delete_asset(id_from_url)
   rescue GdsApi::BaseError => e
-    Airbrake.notify(e)
+    GovukError.notify(e)
     false
   end
 

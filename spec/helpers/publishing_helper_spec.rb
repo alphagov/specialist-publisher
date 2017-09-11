@@ -18,7 +18,7 @@ RSpec.describe PublishingHelper, type: :helper do
 
     it "rescues GdsApi::HTTPErrorResponse exceptions" do
       allow(document).to receive(:explode!).and_raise(http_error)
-      expect(Airbrake).to receive(:notify).with(http_error)
+      expect(GovukError).to receive(:notify).with(http_error)
 
       handled = handle_remote_error do
         document.explode!
@@ -32,7 +32,7 @@ RSpec.describe PublishingHelper, type: :helper do
     it "assigns an object which can be used to store errors" do
       allow(document).to receive(:errors).and_return(ActiveModel::Errors.new(document))
       allow(document).to receive(:explode!).and_raise(http_error)
-      expect(Airbrake).to receive(:notify).with(http_error)
+      expect(GovukError).to receive(:notify).with(http_error)
 
       handled = handle_remote_error do
         set_errors_on(document)

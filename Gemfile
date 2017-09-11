@@ -2,9 +2,8 @@ source 'https://rubygems.org'
 
 gem 'rails', '5.0.2'
 
-gem 'airbrake', '~> 4.0'
 gem 'bootstrap-kaminari-views', '0.0.5'
-gem 'govuk_sidekiq', '~> 0.0.4'
+gem 'govuk_sidekiq', '~> 2.0'
 gem 'hashdiff'
 gem 'jquery-rails', '~> 4.1.1'
 gem "kaminari"
@@ -18,12 +17,13 @@ gem 'uglifier', '>= 1.3.0'
 gem 'unicorn', '~> 4.9.0'
 
 # GDS managed dependencies
-gem "gds-api-adapters", "47.2"
+gem "gds-api-adapters", "~> 47.9.1"
 gem 'gds-sso', '13.2.0'
 gem "govspeak", "~> 5.0.1"
 gem 'govuk_admin_template', '~> 4.4.1'
 gem "govuk_frontend_toolkit", "0.44.0"
 gem 'plek', '~> 1.10'
+gem "govuk_app_config", "~> 0.2.0"
 
 group :development, :test do
   gem 'better_errors'

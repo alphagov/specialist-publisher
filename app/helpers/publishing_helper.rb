@@ -5,7 +5,7 @@ module PublishingHelper
       true
     rescue GdsApi::HTTPErrorResponse => e
       error_response_message(:base, e.message) if @publishable
-      Airbrake.notify(e)
+      GovukError.notify(e)
       false
     end
   end
