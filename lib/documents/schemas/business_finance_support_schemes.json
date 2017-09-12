@@ -65,6 +65,7 @@
         {"label": "Health", "value": "health"},
         {"label": "Hospitality and catering", "value": "hospitality-and-catering"},
         {"label": "IT, digital and creative", "value": "information-technology-digital-and-creative"},
+        {"label": "Life Sciences", "value": "life-sciences"},
         {"label": "Manufacturing", "value": "manufacturing"},
         {"label": "Mining", "value": "mining"},
         {"label": "Real estate and property", "value": "real-estate-and-property"},
