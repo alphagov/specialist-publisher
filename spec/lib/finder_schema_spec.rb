@@ -10,6 +10,16 @@ RSpec.describe FinderSchema do
 
   let(:schema) { FinderSchema.new('dfid_research_outputs') }
 
+  describe '#humanized_facet_name' do
+    it 'returns the name defined in the schema for the supplied facet key' do
+      expect(schema.humanized_facet_name('dfid_document_type')).to eq('Document Type')
+    end
+
+    it 'returns the humanized version of the supplied facet key is not defined in the schema' do
+      expect(schema.humanized_facet_name('dfid_review_status')).to eq('Dfid review status')
+    end
+  end
+
   describe '#humanized_facet_value' do
     context 'a text facet' do
       context 'with allowed_values ' do

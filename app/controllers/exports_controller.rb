@@ -1,0 +1,23 @@
+class ExportsController < ApplicationController
+  before_action :check_authorisation, if: :document_type_slug
+
+  def check_authorisation
+    if current_format
+      authorize current_format
+    else
+      flash[:danger] = "That format doesn't exist. If you feel you've reached this in error, contact your SPOC."
+      redirect_to root_path
+    end
+  end
+
+  def show
+    @query = params[:query]
+  end
+
+  def create
+    @query = params[:query]
+    DocumentListExportWorker.perform_async(current_format.slug, current_user.id, @query)
+    flash[:info] = "The document list is being exported"
+    redirect_to documents_path(current_format.slug, query: @query)
+  end
+end

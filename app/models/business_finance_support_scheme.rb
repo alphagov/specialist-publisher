@@ -20,6 +20,10 @@ class BusinessFinanceSupportScheme < Document
     super(params, FORMAT_SPECIFIC_FIELDS)
   end
 
+  def self.exportable?
+    true
+  end
+
   def self.title
     "Business Finance Support Scheme"
   end

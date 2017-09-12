@@ -3,3 +3,9 @@ AllCops:
 
 Style/ConditionalAssignment:
   Enabled: false
+
+Metrics/BlockLength:
+  Enabled: true
+  Exclude:
+    - test/**/*
+    - spec/**/*

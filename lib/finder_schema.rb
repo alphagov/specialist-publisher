@@ -41,7 +41,7 @@ class FinderSchema
   end
 
   def humanized_facet_name(key)
-    facet_data_for(key).fetch("name") { key }
+    facet_data_for(key).fetch("name") { key.to_s.humanize }
   end
 
 private

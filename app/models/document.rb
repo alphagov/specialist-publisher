@@ -287,6 +287,10 @@ class Document
     }
   end
 
+  def self.exportable?
+    false
+  end
+
 private
 
   def finder_schema
