@@ -12,4 +12,18 @@ namespace :publishing_api do
       puts "Error publishing finder: #{e.inspect}"
     end
   end
+
+  desc "Publish special routes"
+  task publish_special_routes: :environment do
+    logger = Logger.new(STDOUT)
+
+    publisher = SpecialRoutePublisher.new(
+      logger: logger,
+      publishing_api: Services.publishing_api
+    )
+
+    SpecialRoutePublisher.routes.each do |route|
+      publisher.publish(route)
+    end
+  end
 end
