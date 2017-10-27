@@ -7,12 +7,25 @@ class EmailAlertPresenter
 
   def to_json
     {
+      title: title,
+      description: summary,
+      change_note: change_note,
       subject: subject,
       body: body,
       tags: tags,
       urgent: urgent,
       document_type: document.document_type,
+      email_document_supertype: "other",
+      government_document_supertype: "other",
+      content_id: content_id,
+      public_updated_at: public_updated_at,
+      publishing_app: "specialist-publisher",
+      base_path: base_path
     }.merge(extra_options)
+  end
+
+  def content_id
+    document.content_id
   end
 
 private
@@ -89,12 +102,32 @@ private
     }
   end
 
-  def subject
+  def title
     redrafted? ? document.title + " updated" : document.title
+  end
+
+  def summary
+    document.summary
+  end
+
+  def change_note
+    document.change_note
+  end
+
+  def subject
+    title
   end
 
   def urgent
     document.urgent
+  end
+
+  def public_updated_at
+    document.public_updated_at
+  end
+
+  def base_path
+    document.base_path
   end
 
   def updated_or_published

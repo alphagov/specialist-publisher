@@ -21,6 +21,8 @@ RSpec.describe EmailAlertPresenter do
         email_alert_presenter_redrafted = EmailAlertPresenter.new(redrafted_cma_case)
         presented_data_redrafted = email_alert_presenter_redrafted.to_json
 
+        expect(presented_data[:title]).to include(cma_case_payload["title"])
+        expect(presented_data[:description]).to include(cma_case_payload["description"])
         expect(presented_data[:subject]).to include(cma_case_payload["title"])
         expect(presented_data[:subject]).not_to include("updated")
         expect(presented_data_redrafted[:subject]).to include("updated")
@@ -31,8 +33,16 @@ RSpec.describe EmailAlertPresenter do
         expect(presented_data[:tags][:format]).to eq(cma_case_payload["document_type"])
         expect(presented_data[:tags][:case_type]).to eq(cma_case_payload["details"]["metadata"]["case_type"])
         expect(presented_data[:document_type]).to eq(cma_case_payload["document_type"])
+        expect(presented_data[:public_updated_at]).to include(cma_case_payload["public_updated_at"])
+        expect(presented_data[:base_path]).to include(cma_case_payload["base_path"])
         expect(presented_data[:footer]).to include("SUBSCRIBER_PREFERENCES_URL")
         expect(presented_data[:header]).to include("govuk-email-header")
+
+        expect(presented_data.keys).to match_array(%i(
+          title description change_note subject body tags document_type
+          email_document_supertype government_document_supertype content_id
+          public_updated_at publishing_app base_path urgent header footer
+        ))
       end
     end
 
