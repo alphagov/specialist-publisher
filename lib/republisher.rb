@@ -23,14 +23,6 @@ module_function
     end
   end
 
-  def republish_search_sync(content_ids)
-    content_ids.each do |content_id|
-      document = Document.find(content_id)
-      payload = SearchPresenter.new(document).to_json
-      Services.rummager.add_document(document.search_document_type, document.base_path, payload)
-    end
-  end
-
   def all_content_ids
     document_types.flat_map { |t| content_ids_for_document_type(t) }
   end

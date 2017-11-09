@@ -15,7 +15,6 @@ RSpec.feature "Publishing a CMA case", type: :feature do
     stub_any_publishing_api_put_content
     stub_any_publishing_api_patch_links
     stub_publishing_api_publish(content_id, {})
-    stub_any_rummager_post
     email_alert_api_accepts_alert
   end
 
@@ -64,7 +63,6 @@ RSpec.feature "Publishing a CMA case", type: :feature do
       assert_publishing_api_put_content(content_id, request_json_includes(changed_json))
 
       assert_publishing_api_publish(content_id)
-      assert_rummager_posted_item("link" => "/cma-cases/example-cma-case")
       assert_email_alert_sent
     end
 

@@ -36,8 +36,6 @@ Publishing App for Specialist Documents.
 
 Specialist Publisher is a Ruby on Rails application used to create and manage documents. This application does not store documents in a database of its own. Instead it sends JSON data to the publishing-api where it is persisted in a Postgres datastore. This data is then requested from the publishing-api and displayed to the user.
 
-When a document is published, the relevant document information is sent to Rummager enabling it to be searchable on gov.uk.
-
 Another result of publishing a document is that a call is made to the Email Alert Api which will notify Gov Delivery to send an email to subscribers. These emails are sent when a document is first published and also when an editor makes a major update. This is true for all formats other than Drug Safety Updates which are instead sent via a monthly email newsletter.
 
 Attachments are sent to and then handled by Asset Manager. When an attachment is uploaded, Asset Manager will scan the attachment for viruses and then return a URL from which the attachment can be viewed. When an attachment is deleted it will be 'soft' deleted from Asset Manager so as to be no longer viewable by a user.
@@ -134,7 +132,7 @@ You can’t currently set the `public_updated_at` field if a publisher has creat
 
 ### Republishing
 
-Republishing is useful if content failed to make its way through the system. This might be the case if an error was thrown somewhere along the way. Republishing a document will notify Publishing API and Rummager of the change. It will not send email notifications.
+Republishing is useful if content failed to make its way through the system. This might be the case if an error was thrown somewhere along the way. Republishing a document will notify Publishing API of the change (which will in turn notify RUMMAGER). It will not send email notifications.
 
 You can republish a single document with this task:
 `republish:one['some-content-id']`

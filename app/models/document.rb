@@ -96,8 +96,8 @@ class Document
     to_s.underscore
   end
 
-  def search_document_type
-    finder_schema.document_type_filter
+  def format
+    finder_schema.format
   end
 
   def phase

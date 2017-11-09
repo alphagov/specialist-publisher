@@ -10,7 +10,6 @@ RSpec.describe PublishWorker do
 
   before do
     stub_any_publishing_api_call
-    stub_any_rummager_post
 
     publishing_api_has_item(document)
   end

@@ -1,4 +1,4 @@
-# Unpublish a document. Also removes attachments and removes it from search.
+# Unpublish a document. Also removes attachments.
 class DocumentUnpublisher
   AlternativeContentNotFound = Class.new(StandardError)
 
@@ -19,6 +19,5 @@ class DocumentUnpublisher
     end
 
     AttachmentDeleteWorker.perform_async(content_id)
-    RummagerDeleteWorker.perform_async(base_path)
   end
 end
