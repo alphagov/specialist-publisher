@@ -9,7 +9,6 @@ class DocumentBuilder
       body: extract_body_from_payload(payload),
       publication_state: payload['publication_state'],
       state_history: payload['state_history'],
-      change_note: payload['change_note'],
       public_updated_at: payload['public_updated_at'],
       first_published_at: payload['first_published_at'],
       bulk_published: payload['details']['metadata']['bulk_published'],
