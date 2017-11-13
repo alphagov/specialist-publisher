@@ -7,7 +7,6 @@ RSpec.feature "Discarding a draft CMA Case", type: :feature do
     publishing_api_has_item(item)
     stub_publishing_api_discard_draft(content_id)
     publishing_api_has_content([item], hash_including(document_type: CmaCase.document_type))
-    stub_any_rummager_delete_content
   end
 
   context "a draft document" do

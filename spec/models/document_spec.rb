@@ -242,7 +242,6 @@ RSpec.describe Document do
       stub_any_publishing_api_patch_links
       stub_publishing_api_publish(document.content_id, {})
       publishing_api_has_item(payload)
-      stub_any_rummager_post
       @email_alert_api = email_alert_api_accepts_alert
     end
 
@@ -250,21 +249,6 @@ RSpec.describe Document do
       expect(document.publish).to eq(true)
 
       assert_publishing_api_publish(document.content_id)
-    end
-
-    it "sends a payload to Rummager" do
-      expect(document.publish).to eq(true)
-
-      assert_rummager_posted_item(
-        "title" => "Example document",
-        "description" => "This is a summary",
-        "indexable_content" => "This is the body of an example document",
-        "link" => "/my-document-types/example-document",
-        "public_timestamp" => "2015-11-16T11:53:30+00:00",
-        "first_published_at" => "2015-11-15T00:00:00+00:00",
-        "field1" => "2015-12-01",
-        "field2" => "open",
-      )
     end
 
     it "alerts the email API for major updates" do
@@ -313,20 +297,6 @@ RSpec.describe Document do
             ))
         )
       }
-
-      it 'sends first_published_at to Rummager' do
-        unpublished_document.publish
-        assert_rummager_posted_item(
-          "title" => "Example document",
-          "description" => "This is a summary",
-          "indexable_content" => "This is the body of an example document",
-          "link" => "/my-document-types/example-document",
-          "public_timestamp" => "2015-11-16T11:53:30+00:00",
-          "first_published_at" => "2015-11-15T00:00:00+00:00",
-          "field1" => "2015-12-01",
-          "field2" => "open",
-        )
-      end
 
       it 'saves a "First published." change note before asking the api to publish' do
         Timecop.freeze(Time.parse("2015-12-18 10:12:26 UTC")) do
@@ -403,17 +373,6 @@ RSpec.describe Document do
       stub_any_publishing_api_put_content
       stub_any_publishing_api_patch_links
       stub_publishing_api_publish(document.content_id, {}, status: 503)
-      stub_any_rummager_post
-      expect(document.publish).to eq(false)
-    end
-
-    it "notifies GovukError and returns false if rummager does not return status 200" do
-      expect(GovukError).to receive(:notify)
-      stub_any_publishing_api_put_content
-      stub_any_publishing_api_patch_links
-      stub_publishing_api_publish(document.content_id, {})
-      publishing_api_has_item(payload)
-      stub_request(:post, %r{#{Plek.new.find('rummager')}/documents}).to_return(status: 503)
       expect(document.publish).to eq(false)
     end
   end
@@ -423,19 +382,12 @@ RSpec.describe Document do
       publishing_api_has_item(payload)
       document = MyDocumentType.find(payload["content_id"])
       stub_publishing_api_unpublish(document.content_id, body: { type: 'gone' })
-      stub_any_rummager_delete_content
     end
 
     it "sends correct payload to publishing api" do
       expect(document.unpublish).to eq(true)
 
       assert_publishing_api_unpublish(document.content_id, type: 'gone')
-    end
-
-    it "sends a delete request to Rummager" do
-      expect(document.unpublish).to eq(true)
-
-      assert_rummager_deleted_content document.base_path
     end
 
     it "deletes document attachments" do

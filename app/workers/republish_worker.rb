@@ -17,7 +17,6 @@ class RepublishWorker
       publishing_api_put_content(document)
       publishing_api_patch_links(document)
       publishing_api_publish(document)
-      rummager_add_document(document)
     else
       publishing_api_put_content(document)
       publishing_api_patch_links(document)
@@ -54,10 +53,5 @@ private
 
   def publishing_api_publish(document)
     Services.publishing_api.publish(document.content_id, "republish")
-  end
-
-  def rummager_add_document(document)
-    payload = SearchPresenter.new(document).to_json
-    Services.rummager.add_document(document.search_document_type, document.base_path, payload)
   end
 end

@@ -1,5 +1,4 @@
-# Publish a draft document. Also sends out emails and indexes the document
-# in search.
+# Publish a draft document. Also sends out emails.
 class DocumentPublisher
   def self.publish(document)
     if document.first_draft?
@@ -8,17 +7,7 @@ class DocumentPublisher
       document.save
     end
     Services.publishing_api.publish(document.content_id)
-
-    # Refresh the document from the publishing-api to get extra fields like
-    # `public_updated_at` that are set on publish.
     published_document = document.class.find(document.content_id)
-
-    indexable_document = SearchPresenter.new(published_document)
-    RummagerWorker.perform_async(
-      document.search_document_type,
-      document.base_path,
-      indexable_document.to_json,
-    )
 
     if document.send_email_on_publish?
       # We don't have `public_updated_at` until the document is published, so we

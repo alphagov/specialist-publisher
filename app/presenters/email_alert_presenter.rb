@@ -42,7 +42,7 @@ private
   def tags
     {
       # This format should be the same as https://github.com/alphagov/finder-frontend/blob/2c1d5f25e7e4212795b485b6e4c290c6764c813c/app/controllers/email_alert_subscriptions_controller.rb#L41
-      format: document.search_document_type
+      format: document.format
     }.deep_merge(document.format_specific_metadata.reject { |_k, v| v.blank? })
   end
 

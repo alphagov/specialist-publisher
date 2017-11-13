@@ -6,7 +6,6 @@ RSpec.feature "Unpublishing a CMA Case", type: :feature do
   before do
     log_in_as_editor(:cma_editor)
     publishing_api_has_item(item)
-    stub_any_rummager_delete_content
   end
 
   context "a published document" do
