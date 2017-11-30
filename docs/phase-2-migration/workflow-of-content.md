@@ -48,13 +48,11 @@ Specialist Publisher speaks to four external services.
 **publish**
 
 - Publishing API: POST /v2/publish
-- Rummager: POST /documents
 - Email Alert API: POST /notifications
 
 **unpublish**
 
 - Publishing API: POST /v2/unpublish
-- Rummager: DELETE /documents
 
 **discard draft**
 

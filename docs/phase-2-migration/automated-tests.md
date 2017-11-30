@@ -33,8 +33,7 @@ In this example, we are testing the behaviour on publish. We are having to
 resort to stubbing a sequence of responses from the Publishing API so that the
 stubs are representative of what happens when you actually publish something,
 i.e. its state changes to 'published' and it gets a 'first_published_at'
-timestamp. One reason we need to do this is so that we can make an assertion
-that Rummager receives the correct timestamp later on in this test.
+timestamp.
 
 This is far from intuitive and it is difficult to understand what the test is
 doing. We had to add the `publishing_api_has_item_in_sequence` helper to

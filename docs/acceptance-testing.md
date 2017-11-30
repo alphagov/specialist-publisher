@@ -25,7 +25,6 @@ features pertaining to Specialist Documents, for example:
 - Finders Frontend
 - Publishing API
 - Content Store
-- Rummager
 - Email Alert API
 
 This list is not exhaustive.
