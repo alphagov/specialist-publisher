@@ -78,7 +78,6 @@ private
       "raib_report" => "Rail Accident Investigation Branch reports",
       "tax_tribunal_decision" => "Upper Tribunal (Tax and Chancery Chamber)",
       "utaac_decision" => "Upper Tribunal (Administrative Appeals Chamber)",
-      "vehicle_recalls_and_faults_alert" => "Vehicle recalls and faults",
     }
   end
 
@@ -98,7 +97,6 @@ private
       "raib_report" => "report",
       "tax_tribunal_decision" => "decision",
       "utaac_decision" => "decision",
-      "vehicle_recalls_and_faults_alert" => "alert",
     }
   end
 
