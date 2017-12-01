@@ -23,7 +23,6 @@ Publishing App for Specialist Documents.
 - [Medical Safety Alerts](https://www.gov.uk/drug-device-alerts)
 - [MAIB Reports](https://www.gov.uk/maib-reports)
 - [RAIB Reports](https://www.gov.uk/raib-reports)
-- [Vehicle Recalls and Faults Alerts](https://www.gov.uk/vehicle-recalls-faults) (not live)
 
 ## Nomenclature
 
