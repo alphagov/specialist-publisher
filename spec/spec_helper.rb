@@ -32,7 +32,6 @@ require 'capybara/webkit/matchers'
 Capybara.javascript_driver = :webkit
 
 require 'gds_api/test_helpers/publishing_api_v2'
-require 'gds_api/test_helpers/rummager'
 require 'gds_api/test_helpers/email_alert_api'
 
 require 'pundit/rspec'
@@ -63,7 +62,6 @@ RSpec.configure do |config|
   config.include Capybara::DSL, type: :feature
   config.include(Capybara::Webkit::RspecMatchers, type: :feature)
   config.include(GdsApi::TestHelpers::PublishingApiV2)
-  config.include(GdsApi::TestHelpers::Rummager)
   config.include(GdsApi::TestHelpers::EmailAlertApi)
 
   # Run specs in random order to surface order dependencies. If you find an

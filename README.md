@@ -48,7 +48,6 @@ A number of formats are [flagged](https://github.com/alphagov/specialist-publish
 ## Dependencies
 
 - [alphagov/asset-manager](http://github.com/alphagov/asset-manager): provides uploading for static files
-- [alphagov/rummager](http://github.com/alphagov/rummager): allows documents to be indexed for searching in both Finders and site search
 - [alphagov/publishing-api](http://github.com/alphagov/publishing-api): documents are sent here, persisted and then requested.
 - [alphagov/email-alert-api](http://github.com/alphagov/email-alert-api): sends emails to subscribed users when documents are published
 - Mongo: mongodb used for storing local users
@@ -131,7 +130,7 @@ You can’t currently set the `public_updated_at` field if a publisher has creat
 
 ### Republishing
 
-Republishing is useful if content failed to make its way through the system. This might be the case if an error was thrown somewhere along the way. Republishing a document will notify Publishing API of the change (which will in turn notify RUMMAGER). It will not send email notifications.
+Republishing is useful if content failed to make its way through the system. This might be the case if an error was thrown somewhere along the way. Republishing a document will notify Publishing API of the change (which will in turn notify RUMMAGER via a notifaction queue). It will not send email notifications.
 
 You can republish a single document with this task:
 `republish:one['some-content-id']`
