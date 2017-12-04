@@ -138,7 +138,7 @@ GEM
       sidekiq (~> 4.2.8)
       sidekiq-logging-json (~> 0.0)
       sidekiq-statsd (~> 0.1)
-    hashdiff (0.3.6)
+    hashdiff (0.3.7)
     hashie (3.5.6)
     highline (1.7.8)
     htmlentities (4.3.4)
@@ -365,7 +365,7 @@ GEM
       rack (>= 1.0)
     warden-oauth2 (0.0.1)
       warden
-    webmock (3.0.1)
+    webmock (3.1.1)
       addressable (>= 2.3.6)
       crack (>= 0.3.2)
       hashdiff
