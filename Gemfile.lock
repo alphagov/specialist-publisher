@@ -191,9 +191,9 @@ GEM
       i18n (>= 0.6.4, < 0.9)
     mongo (2.4.3)
       bson (>= 4.2.1, < 5.0.0)
-    mongoid (6.0.3)
+    mongoid (6.1.1)
       activemodel (~> 5.0)
-      mongo (~> 2.3)
+      mongo (>= 2.4.1, < 3.0.0)
     multi_json (1.12.2)
     multi_xml (0.6.0)
     multipart-post (2.0.0)
@@ -349,7 +349,7 @@ GEM
     thread_safe (0.3.6)
     tilt (2.0.8)
     timecop (0.9.1)
-    tzinfo (1.2.3)
+    tzinfo (1.2.4)
       thread_safe (~> 0.1)
     uglifier (3.2.0)
       execjs (>= 0.3.0, < 3)
@@ -401,7 +401,7 @@ DEPENDENCIES
   kaminari
   kaminari-mongoid
   logstasher (= 0.6.2)
-  mongoid (~> 6.0.0)
+  mongoid (~> 6.1.1)
   plek (~> 1.10)
   pry-rails
   pundit

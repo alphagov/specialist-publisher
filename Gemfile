@@ -9,7 +9,7 @@ gem 'jquery-rails', '~> 4.1.1'
 gem "kaminari"
 gem 'kaminari-mongoid'
 gem 'logstasher', '0.6.2'
-gem 'mongoid', '~> 6.0.0'
+gem 'mongoid', '~> 6.1.1'
 gem 'pundit'
 gem 'sass-rails', '~> 5.0.4'
 gem 'select2-rails', '~> 3.5.9'
