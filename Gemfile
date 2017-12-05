@@ -14,7 +14,7 @@ gem 'pundit'
 gem 'sass-rails', '~> 5.0.4'
 gem 'select2-rails', '~> 3.5.9'
 gem 'uglifier', '>= 1.3.0'
-gem 'unicorn', '~> 4.9.0'
+gem 'unicorn', '~> 5.3.1'
 
 # GDS managed dependencies
 gem "gds-api-adapters", "~> 47.9.1"
