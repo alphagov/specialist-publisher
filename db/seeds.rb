@@ -1,5 +1,5 @@
 def seed
-  unless Rails.env.development?
+  unless Rails.env.development? || ENV["RUN_SEEDS_IN_PRODUCTION"]
     puts "Skipping because not in development"
     return
   end
