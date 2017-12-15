@@ -20,4 +20,4 @@ production:
       uri: <%= ENV["MONGODB_URI"] %>
       options:
         write:
-          w: majority
+          w: <%= ENV["MONGO_WRITE_CONCERN"] || "majority" %>
