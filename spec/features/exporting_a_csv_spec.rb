@@ -42,7 +42,7 @@ RSpec.feature 'Exporting a list of documents as CSV' do
 
     expect(last_email.attachments.length).to eq 1
     attachment = last_email.attachments[0]
-    expect(attachment.content_type).to start_with('text/comma-separated-values;')
+    expect(attachment.content_type).to start_with('text/csv;')
     expect(attachment.filename).to eq 'document_list.csv'
 
     csv_body = attachment.body.to_s
