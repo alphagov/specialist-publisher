@@ -19,7 +19,7 @@ gem 'unicorn', '~> 4.9.0'
 # GDS managed dependencies
 gem "gds-api-adapters", "~> 50.7.0"
 gem 'gds-sso', '13.5.0'
-gem "govspeak", "~> 5.0.1"
+gem "govspeak", "~> 5.2.2"
 gem 'govuk_admin_template', '~> 6.0.0'
 gem "govuk_frontend_toolkit", "7.2.0"
 gem 'plek', '~> 2.0'
