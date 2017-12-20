@@ -225,7 +225,7 @@ GEM
     parallel (1.12.0)
     parser (2.4.0.2)
       ast (~> 2.3)
-    plek (1.12.0)
+    plek (2.0.0)
     powerpack (0.1.1)
     pry (0.10.4)
       coderay (~> 1.1.0)
@@ -416,7 +416,7 @@ DEPENDENCIES
   kaminari-mongoid
   logstasher (= 0.6.2)
   mongoid (~> 6.0.0)
-  plek (~> 1.10)
+  plek (~> 2.0)
   pry-rails
   pundit
   rails (= 5.0.2)
