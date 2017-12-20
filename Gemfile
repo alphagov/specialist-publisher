@@ -8,7 +8,7 @@ gem 'hashdiff'
 gem 'jquery-rails', '~> 4.1.1'
 gem "kaminari"
 gem 'kaminari-mongoid'
-gem 'logstasher', '0.6.2'
+gem 'logstasher', '1.2.2'
 gem 'mongoid', '~> 6.0.0'
 gem 'pundit'
 gem 'sass-rails', '~> 5.0.4'

@@ -174,9 +174,10 @@ GEM
     kgio (2.11.0)
     kramdown (1.12.0)
     link_header (0.0.8)
-    logstash-event (1.1.5)
-    logstasher (0.6.2)
-      logstash-event (~> 1.1.0)
+    logstash-event (1.2.02)
+    logstasher (1.2.2)
+      activesupport (>= 4.0)
+      logstash-event (~> 1.2.0)
       request_store
     loofah (2.1.1)
       crass (~> 1.0.2)
@@ -414,7 +415,7 @@ DEPENDENCIES
   jquery-rails (~> 4.1.1)
   kaminari
   kaminari-mongoid
-  logstasher (= 0.6.2)
+  logstasher (= 1.2.2)
   mongoid (~> 6.0.0)
   plek (~> 2.0)
   pry-rails
