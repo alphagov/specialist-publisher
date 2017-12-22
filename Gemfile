@@ -5,7 +5,7 @@ gem 'rails', '5.0.2'
 gem 'bootstrap-kaminari-views', '0.0.5'
 gem 'govuk_sidekiq', '~> 2.0'
 gem 'hashdiff'
-gem 'jquery-rails', '~> 4.1.1'
+gem 'jquery-rails', '~> 4.3.1'
 gem "kaminari"
 gem 'kaminari-mongoid'
 gem 'logstasher', '1.2.2'
@@ -20,7 +20,7 @@ gem 'unicorn', '~> 4.9.0'
 gem "gds-api-adapters", "~> 50.7.0"
 gem 'gds-sso', '13.5.0'
 gem "govspeak", "~> 5.2.2"
-gem 'govuk_admin_template', '~> 6.0.0'
+gem 'govuk_admin_template', '~> 6.4.0'
 gem "govuk_frontend_toolkit", "7.2.0"
 gem 'plek', '~> 2.0'
 gem "govuk_app_config", "~> 0.2.0"
