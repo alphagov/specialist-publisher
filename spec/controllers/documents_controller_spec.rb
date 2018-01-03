@@ -3,7 +3,7 @@ require "spec_helper"
 RSpec.describe DocumentsController, type: :controller do
   render_views
 
-  let(:payload) { FactoryGirl.create(:cma_case) }
+  let(:payload) { FactoryBot.create(:cma_case) }
 
   before do
     log_in_as_gds_editor

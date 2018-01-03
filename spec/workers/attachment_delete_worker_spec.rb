@@ -25,7 +25,7 @@ RSpec.describe AttachmentDeleteWorker do
   let(:content_id) { SecureRandom.uuid }
 
   let!(:document) do
-    FactoryGirl.create(:cma_case,
+    FactoryBot.create(:cma_case,
                        :published,
                        content_id: content_id)
   end

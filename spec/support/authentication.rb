@@ -9,7 +9,7 @@ module AuthenticationControllerHelpers
   end
 
   def log_in_as_gds_editor
-    log_in_as FactoryGirl.create(:gds_editor)
+    log_in_as FactoryBot.create(:gds_editor)
   end
 end
 RSpec.configuration.include AuthenticationControllerHelpers, type: :controller
@@ -20,7 +20,7 @@ module AuthenticationFeatureHelpers
   end
 
   def log_in_as_editor(user_type)
-    log_in_as FactoryGirl.create(user_type)
+    log_in_as FactoryBot.create(user_type)
   end
 end
 RSpec.configuration.include AuthenticationFeatureHelpers, type: :feature

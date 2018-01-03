@@ -17,12 +17,12 @@ RSpec.describe AllDocumentsFinder do
 
     it "yields each document from the publishing api response" do
       documents = [
-        FactoryGirl.create(
+        FactoryBot.create(
           :business_finance_support_scheme,
           base_path: '/bfss/1',
           title: 'Scheme #1'
         ),
-        FactoryGirl.create(
+        FactoryBot.create(
           :business_finance_support_scheme,
           base_path: '/bfss/2',
           title: 'Scheme #2'
@@ -44,22 +44,22 @@ RSpec.describe AllDocumentsFinder do
 
     it "fetches each page of documents and yields all of them" do
       documents = [
-        FactoryGirl.create(
+        FactoryBot.create(
           :business_finance_support_scheme,
           base_path: '/bfss/1',
           title: 'Scheme #1'
         ),
-        FactoryGirl.create(
+        FactoryBot.create(
           :business_finance_support_scheme,
           base_path: '/bfss/2',
           title: 'Scheme #2'
         ),
-        FactoryGirl.create(
+        FactoryBot.create(
           :business_finance_support_scheme,
           base_path: '/bfss/3',
           title: 'Scheme #3'
         ),
-        FactoryGirl.create(
+        FactoryBot.create(
           :business_finance_support_scheme,
           base_path: '/bfss/4',
           title: 'Scheme #4'
@@ -94,12 +94,12 @@ RSpec.describe AllDocumentsFinder do
 
     it 'respects the query parameter if provided and sends it to publishing api when fetching documents' do
       documents = [
-        FactoryGirl.create(
+        FactoryBot.create(
           :business_finance_support_scheme,
           base_path: '/bfss/1',
           title: 'Scheme #1'
         ),
-        FactoryGirl.create(
+        FactoryBot.create(
           :business_finance_support_scheme,
           base_path: '/bfss/2',
           title: 'Scheme #2'

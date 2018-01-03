@@ -118,7 +118,7 @@ RSpec.describe Document do
       }
     }
   }
-  let(:payload) { FactoryGirl.create(:document, payload_attributes) }
+  let(:payload) { FactoryBot.create(:document, payload_attributes) }
   let(:document) { MyDocumentType.from_publishing_api(payload) }
 
   before do
@@ -128,7 +128,7 @@ RSpec.describe Document do
 
   describe ".from_publishing_api" do
     context "for a published document" do
-      let(:payload) { FactoryGirl.create(:document, :published, payload_attributes) }
+      let(:payload) { FactoryBot.create(:document, :published, payload_attributes) }
 
       it "sets the top-level attributes on a document" do
         expect(document.base_path).to eq(payload['base_path'])
@@ -214,7 +214,7 @@ RSpec.describe Document do
 
     context "when the document is redrafted" do
       let(:payload) do
-        FactoryGirl.create(
+        FactoryBot.create(
           :document,
           :redrafted,
           payload_attributes.merge(update_type: "minor"),
@@ -236,7 +236,7 @@ RSpec.describe Document do
   end
 
   context "successful #publish" do
-    let(:payload) { FactoryGirl.create(:document, :published, payload_attributes) }
+    let(:payload) { FactoryBot.create(:document, :published, payload_attributes) }
     before do
       stub_any_publishing_api_put_content
       stub_any_publishing_api_patch_links
@@ -270,7 +270,7 @@ RSpec.describe Document do
     context "document is redrafted with a minor edit" do
       let(:minor_change_document) {
         MyDocumentType.from_publishing_api(
-          FactoryGirl.create(:document,
+          FactoryBot.create(:document,
             payload_attributes.merge(
               publication_state: 'published',
               update_type: 'minor',
@@ -289,7 +289,7 @@ RSpec.describe Document do
     context "document has never been published" do
       let(:unpublished_document) {
         MyDocumentType.from_publishing_api(
-          FactoryGirl.create(:document,
+          FactoryBot.create(:document,
             payload_attributes.merge(
               first_published_at: nil,
               publication_state: 'draft',
@@ -328,7 +328,7 @@ RSpec.describe Document do
     shared_examples_for 'publishing changes to a document that has previously been published' do
       let(:published_document) {
         MyDocumentType.from_publishing_api(
-          FactoryGirl.create(:document,
+          FactoryBot.create(:document,
             :published,
             payload_attributes.merge(
               publication_state: publication_state,
@@ -366,7 +366,7 @@ RSpec.describe Document do
   end
 
   context "unsuccessful #publish" do
-    let(:payload) { FactoryGirl.create(:document, :published, payload_attributes) }
+    let(:payload) { FactoryBot.create(:document, :published, payload_attributes) }
 
     it "notifies GovukError and returns false if publishing-api does not return status 200" do
       expect(GovukError).to receive(:notify)
@@ -472,7 +472,7 @@ RSpec.describe Document do
       subject { Document.from_publishing_api(payload) }
 
       context "when the document is a draft" do
-        let(:payload) { FactoryGirl.create(:document) }
+        let(:payload) { FactoryBot.create(:document) }
 
         it "does not require an update_type" do
           subject.update_type = ""
@@ -487,7 +487,7 @@ RSpec.describe Document do
 
       context "when the document is published" do
         let(:payload) {
-          FactoryGirl.create(:document, :published, state_history: { "1" => "published" })
+          FactoryBot.create(:document, :published, state_history: { "1" => "published" })
         }
 
         it "requires an update_type" do
@@ -507,7 +507,7 @@ RSpec.describe Document do
 
       context "when the document is unpublished" do
         let(:payload) {
-          FactoryGirl.create(:document, :unpublished, state_history: { "1" => "published", "2" => "unpublished" })
+          FactoryBot.create(:document, :unpublished, state_history: { "1" => "published", "2" => "unpublished" })
         }
 
         it "requires an update_type" do
@@ -726,7 +726,7 @@ RSpec.describe Document do
 
   context "a draft where a published item has the same base_path" do
     let(:content_id) { SecureRandom.uuid }
-    let(:published) { FactoryGirl.create(:document, document_type: "my_document_type", content_id: content_id) }
+    let(:published) { FactoryBot.create(:document, document_type: "my_document_type", content_id: content_id) }
 
     before do
       stub_request(:get, %r{/v2/content/#{content_id}})

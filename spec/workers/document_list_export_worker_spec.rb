@@ -2,15 +2,15 @@ require "rails_helper"
 
 RSpec.describe DocumentListExportWorker do
   describe "perform" do
-    let(:user) { FactoryGirl.create(:gds_editor) }
+    let(:user) { FactoryBot.create(:gds_editor) }
     let(:documents) do
       [
-        FactoryGirl.create(
+        FactoryBot.create(
           :business_finance_support_scheme,
           base_path: '/bfss/1',
           title: 'Scheme #1'
         ),
-        FactoryGirl.create(
+        FactoryBot.create(
           :business_finance_support_scheme,
           base_path: '/bfss/2',
           title: 'Scheme #2'
