@@ -6,9 +6,8 @@ class ApplicationController < ActionController::Base
   include GDS::SSO::ControllerMethods
   include Pundit
 
-  before_action :require_signin_permission!
   before_action :set_authenticated_user_header
-  after_action :verify_authorized
+  before_action :authenticate_user!
 
   helper_method :current_format
   helper_method :formats_user_can_access
