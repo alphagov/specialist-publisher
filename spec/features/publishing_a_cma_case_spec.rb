@@ -24,7 +24,7 @@ RSpec.feature "Publishing a CMA case", type: :feature do
 
   context "when the document is a new draft" do
     let(:item) {
-      FactoryGirl.create(
+      FactoryBot.create(
         :cma_case,
           title: "Example CMA Case",
           base_path: "/cma-cases/example-cma-case",
@@ -33,7 +33,7 @@ RSpec.feature "Publishing a CMA case", type: :feature do
     }
 
     let(:published_item) {
-      FactoryGirl.create(
+      FactoryBot.create(
         :cma_case,
           :published,
           content_id: content_id,
@@ -94,7 +94,7 @@ RSpec.feature "Publishing a CMA case", type: :feature do
 
   context "when the document is already published" do
     let(:item) {
-      FactoryGirl.create(:cma_case,
+      FactoryBot.create(:cma_case,
         :published,
         title: "Live Item")
     }
@@ -112,7 +112,7 @@ RSpec.feature "Publishing a CMA case", type: :feature do
 
   context "when there is a redrafted document with a major update" do
     let(:item) {
-      FactoryGirl.create(
+      FactoryBot.create(
         :cma_case,
         :redrafted,
         title: "Major Update Case",
@@ -162,7 +162,7 @@ RSpec.feature "Publishing a CMA case", type: :feature do
 
   context "when there is a redrafted document with a minor update" do
     let(:item) {
-      FactoryGirl.create(
+      FactoryBot.create(
         :cma_case,
         :redrafted,
         title: "Minor Update Case",
@@ -207,7 +207,7 @@ RSpec.feature "Publishing a CMA case", type: :feature do
 
   context "when the document is unpublished" do
     let(:item) {
-      FactoryGirl.create(
+      FactoryBot.create(
         :cma_case,
         :published,
         title: "Unpublished Item",

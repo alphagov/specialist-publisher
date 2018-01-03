@@ -14,7 +14,7 @@ RSpec.feature "Viewing a specific case", type: :feature do
   context "from the index" do
     let(:cma_cases) {
       [
-        FactoryGirl.create(:cma_case,
+        FactoryBot.create(:cma_case,
           title: "Example CMA Case",
           description: "This is the summary of example CMA case",
           publication_state: "draft",
@@ -70,7 +70,7 @@ RSpec.feature "Viewing a specific case", type: :feature do
   context "bulk publishing" do
     let(:cma_cases) {
       [
-        FactoryGirl.create(:cma_case,
+        FactoryBot.create(:cma_case,
           title: "Bulk published CMA Case",
           details: {
             "metadata" => {
@@ -91,18 +91,18 @@ RSpec.feature "Viewing a specific case", type: :feature do
   context "attachments" do
     let(:cma_cases) {
       [
-        FactoryGirl.create(:cma_case,
+        FactoryBot.create(:cma_case,
           title: "CMA Case without attachments",
           details: { attachments: [] }),
-        FactoryGirl.create(:cma_case,
+        FactoryBot.create(:cma_case,
           title: "CMA Case with attachments",
           details: {
             attachments: [
-              FactoryGirl.create(:attachment_payload,
+              FactoryBot.create(:attachment_payload,
                 title: 'first attachment',
                 created_at: "2015-12-01T10:12:26+00:00",
                 updated_at: "2015-12-02T10:12:26+00:00"),
-              FactoryGirl.create(:attachment_payload,
+              FactoryBot.create(:attachment_payload,
                 title: 'second attachment',
                 created_at: "2015-12-03T10:12:26+00:00",
                 updated_at: "2015-12-04T10:12:26+00:00"),
@@ -137,36 +137,36 @@ RSpec.feature "Viewing a specific case", type: :feature do
   context "Viewing publication states" do
     let(:cma_cases) {
       [
-        FactoryGirl.create(:cma_case,
+        FactoryBot.create(:cma_case,
           title: "Example Draft",
           publication_state: "draft",
           state_history: { "1" => "draft" }
                           ),
-        FactoryGirl.create(:cma_case,
+        FactoryBot.create(:cma_case,
           title: "Example Published",
           publication_state: "published",
           state_history: { "1" => "published" }
                           ),
-        FactoryGirl.create(:cma_case,
+        FactoryBot.create(:cma_case,
           title: "Example Unpublished",
           publication_state: "unpublished",
           state_history: { "1" => "unpublished" }
                           ),
-        FactoryGirl.create(:cma_case,
+        FactoryBot.create(:cma_case,
           title: "Example Published with new draft",
           publication_state: "draft",
           state_history: {
             "1" => "published",
             "2" => "draft"
           }),
-        FactoryGirl.create(:cma_case,
+        FactoryBot.create(:cma_case,
           title: "Example Unpublished with new draft",
           publication_state: "draft",
           state_history: {
             "1" => "unpublished",
             "2" => "draft"
           }),
-        FactoryGirl.create(:cma_case,
+        FactoryBot.create(:cma_case,
           title: "More states",
           publication_state: "draft",
           state_history: {
@@ -174,7 +174,7 @@ RSpec.feature "Viewing a specific case", type: :feature do
             "2" => "published",
             "3" => "draft"
           }),
-        FactoryGirl.create(:cma_case,
+        FactoryBot.create(:cma_case,
           title: "More states Published",
           publication_state: "published",
           state_history: {
@@ -256,7 +256,7 @@ RSpec.feature "Viewing a specific case", type: :feature do
 
   context "when a published item exists with the same base path" do
     let(:content_id) { SecureRandom.uuid }
-    let(:draft) { FactoryGirl.create(:cma_case, content_id: content_id, title: "Example draft", base_path: "/cma-cases/foo") }
+    let(:draft) { FactoryBot.create(:cma_case, content_id: content_id, title: "Example draft", base_path: "/cma-cases/foo") }
 
     scenario "displays warnings" do
       stub_request(:get, %r{/v2/content/#{content_id}})

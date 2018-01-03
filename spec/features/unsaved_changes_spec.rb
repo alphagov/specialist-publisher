@@ -2,7 +2,7 @@ require 'spec_helper'
 
 RSpec.feature "Unsaved changes to a document", type: :feature, js: true do
   let(:message) { "You have unsaved changes that will be lost if you leave this page." }
-  let(:cma_case) { FactoryGirl.create(:cma_case) }
+  let(:cma_case) { FactoryBot.create(:cma_case) }
   let(:content_id) { cma_case['content_id'] }
 
   before do

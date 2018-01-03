@@ -2,7 +2,7 @@ require "spec_helper"
 
 RSpec.describe AttachmentsController, type: :controller do
   let(:cma_case) {
-    FactoryGirl.create(:cma_case,
+    FactoryBot.create(:cma_case,
       details: {
         "attachments" => [
           {

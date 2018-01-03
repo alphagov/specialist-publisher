@@ -1,7 +1,7 @@
 require "rails_helper"
 
 RSpec.describe RepublishWorker do
-  let(:document) { FactoryGirl.create(:cma_case) }
+  let(:document) { FactoryBot.create(:cma_case) }
   let(:content_id) { document["content_id"] }
 
   let(:uses_republish_update_type) {
@@ -21,7 +21,7 @@ RSpec.describe RepublishWorker do
   %i(draft redrafted).each do |publication_state|
     context "when the publication_state is '#{publication_state}'" do
       let(:document) {
-        FactoryGirl.create(:cma_case, publication_state)
+        FactoryBot.create(:cma_case, publication_state)
       }
 
       it "sends the document to the publishing api" do
@@ -47,7 +47,7 @@ RSpec.describe RepublishWorker do
 
   context "when the document is published" do
     let(:document) {
-      FactoryGirl.create(:cma_case, :published)
+      FactoryBot.create(:cma_case, :published)
     }
 
     it "sends the document to the publishing api" do
@@ -72,7 +72,7 @@ RSpec.describe RepublishWorker do
 
   context "when the document is unpublished" do
     let(:document) {
-      FactoryGirl.create(:cma_case, :unpublished)
+      FactoryBot.create(:cma_case, :unpublished)
     }
 
     it "skips republishing of the document" do
@@ -88,7 +88,7 @@ RSpec.describe RepublishWorker do
 
   context "when the document is in any other state" do
     let(:document) {
-      FactoryGirl.create(:cma_case, publication_state: "unrecognised")
+      FactoryBot.create(:cma_case, publication_state: "unrecognised")
     }
 
     it "skips republishing of the document" do

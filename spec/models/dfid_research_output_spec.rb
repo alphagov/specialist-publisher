@@ -2,7 +2,7 @@ require 'spec_helper'
 require 'models/valid_against_schema'
 
 RSpec.describe DfidResearchOutput do
-  let(:payload) { FactoryGirl.create(:dfid_research_output) }
+  let(:payload) { FactoryBot.create(:dfid_research_output) }
   include_examples "it saves payloads that are valid against the 'specialist_document' schema"
 
   it 'is not exportable' do

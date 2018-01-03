@@ -2,7 +2,7 @@ require 'spec_helper'
 
 RSpec.feature "Editing a CMA case", type: :feature do
   let(:cma_case) {
-    FactoryGirl.create(:cma_case, title: "Example CMA Case", state_history: { "1" => "draft" })
+    FactoryBot.create(:cma_case, title: "Example CMA Case", state_history: { "1" => "draft" })
   }
   let(:content_id) { cma_case['content_id'] }
   let(:save_button_disable_with_message) { page.find_button('Save as draft')["data-disable-with"] }
@@ -73,7 +73,7 @@ RSpec.feature "Editing a CMA case", type: :feature do
 
   context "a published case" do
     let(:cma_case) {
-      FactoryGirl.create(:cma_case,
+      FactoryBot.create(:cma_case,
         :published,
         title: "Example CMA Case",
         description: "Summary with a typox",
@@ -129,7 +129,7 @@ RSpec.feature "Editing a CMA case", type: :feature do
 
     context "when a document already has a change note" do
       let(:cma_case) do
-        FactoryGirl.create(
+        FactoryBot.create(
           :cma_case,
           update_type: "major",
           first_published_at: "2016-01-01",
@@ -226,7 +226,7 @@ RSpec.feature "Editing a CMA case", type: :feature do
 
     %i(draft published).each do |publication_state|
       let(:cma_case) {
-        FactoryGirl.create(
+        FactoryBot.create(
           :cma_case,
           publication_state,
           title: "Example CMA Case",
@@ -297,7 +297,7 @@ RSpec.feature "Editing a CMA case", type: :feature do
       end
 
       context "when the document is in an invalid state" do
-        let(:cma_case) { FactoryGirl.create(:cma_case, details: { body: "" }) }
+        let(:cma_case) { FactoryBot.create(:cma_case, details: { body: "" }) }
 
         scenario "successfully adding an attachment to the invalid document" do
           click_link "Add attachment"
@@ -391,7 +391,7 @@ RSpec.feature "Editing a CMA case", type: :feature do
 
   context "an unpublished document" do
     let(:cma_case) {
-      FactoryGirl.create(
+      FactoryBot.create(
         :cma_case,
         :unpublished,
         title: "Example CMA Case",

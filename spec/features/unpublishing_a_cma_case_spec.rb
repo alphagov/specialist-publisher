@@ -10,7 +10,7 @@ RSpec.feature "Unpublishing a CMA Case", type: :feature do
 
   context "a published document" do
     let(:item) {
-      FactoryGirl.create(:cma_case,
+      FactoryBot.create(:cma_case,
         title: "Example CMA Case",
         publication_state: "published")
     }
@@ -88,7 +88,7 @@ RSpec.feature "Unpublishing a CMA Case", type: :feature do
       }
 
       let(:item) {
-        FactoryGirl.create(
+        FactoryBot.create(
           :cma_case,
           :published,
           title: "Example CMA Case",
@@ -118,7 +118,7 @@ RSpec.feature "Unpublishing a CMA Case", type: :feature do
 
   context "publishing-api returns error" do
     let(:item) {
-      FactoryGirl.create(:cma_case,
+      FactoryBot.create(:cma_case,
         title: "Example CMA Case",
         publication_state: "published")
     }

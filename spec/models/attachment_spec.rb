@@ -5,7 +5,7 @@ RSpec.describe Attachment do
 
   describe ".all_from_publishing_api" do
     context "when the payload has attachments in details" do
-      let(:attachment_payload) { FactoryGirl.create(:attachment_payload) }
+      let(:attachment_payload) { FactoryBot.create(:attachment_payload) }
 
       let(:payload) do
         { "details" => { "attachments" => [attachment_payload] } }
@@ -28,7 +28,7 @@ RSpec.describe Attachment do
 
       context "when a content id is not provided" do
         let(:attachment_payload) {
-          FactoryGirl.create(:attachment_payload, content_id: nil)
+          FactoryBot.create(:attachment_payload, content_id: nil)
         }
 
         it "generates a content id" do

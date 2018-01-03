@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 RSpec.feature "Editing a DFID Research Output", type: :feature do
-  let(:research_output)   { FactoryGirl.create(:dfid_research_output) }
+  let(:research_output)   { FactoryBot.create(:dfid_research_output) }
   let(:content_id)        { research_output['content_id'] }
   let(:public_updated_at) { research_output['public_updated_at'] }
 
