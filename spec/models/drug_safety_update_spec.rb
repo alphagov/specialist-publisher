@@ -2,7 +2,7 @@ require 'spec_helper'
 require 'models/valid_against_schema'
 
 RSpec.describe DrugSafetyUpdate do
-  let(:payload) { FactoryGirl.create(:drug_safety_update) }
+  let(:payload) { FactoryBot.create(:drug_safety_update) }
   include_examples "it saves payloads that are valid against the 'specialist_document' schema"
 
   it 'is not exportable' do
@@ -11,7 +11,7 @@ RSpec.describe DrugSafetyUpdate do
 
   context "#publish" do
     let(:payload) {
-      FactoryGirl.create(
+      FactoryBot.create(
         :drug_safety_update,
           :published,
           update_type: "major",)

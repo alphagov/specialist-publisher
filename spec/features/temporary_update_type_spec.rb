@@ -4,7 +4,7 @@ require "gds_api/test_helpers/asset_manager"
 RSpec.feature "Temporary update types, relating to attachments", type: :feature do
   include GdsApi::TestHelpers::AssetManager
 
-  let(:payload) { FactoryGirl.create(:cma_case, :published) }
+  let(:payload) { FactoryBot.create(:cma_case, :published) }
   let(:content_id) { payload.fetch("content_id") }
 
   before do
@@ -27,7 +27,7 @@ RSpec.feature "Temporary update types, relating to attachments", type: :feature 
   end
 
   context "when the update_type was not set by a user" do
-    let(:payload) { FactoryGirl.create(:cma_case, :published) }
+    let(:payload) { FactoryBot.create(:cma_case, :published) }
 
     scenario "setting temporary_update_type to true and using a minor update_type" do
       add_attachment_to_document
@@ -43,7 +43,7 @@ RSpec.feature "Temporary update types, relating to attachments", type: :feature 
 
   context "when the update_type was set by a user" do
     let(:payload) {
-      FactoryGirl.create(
+      FactoryBot.create(
         :cma_case,
         :redrafted,
         update_type: "major",
@@ -66,7 +66,7 @@ RSpec.feature "Temporary update types, relating to attachments", type: :feature 
 
   context "when temporary_update_type was previously set" do
     let(:payload) {
-      FactoryGirl.create(
+      FactoryBot.create(
         :cma_case,
         :redrafted,
         update_type: "minor",
@@ -101,7 +101,7 @@ RSpec.feature "Temporary update types, relating to attachments", type: :feature 
 
   context "when the document is a draft" do
     let(:payload) {
-      FactoryGirl.create(
+      FactoryBot.create(
         :cma_case,
         publication_state: "draft",
       )

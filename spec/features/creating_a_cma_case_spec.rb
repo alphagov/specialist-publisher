@@ -10,7 +10,7 @@ RSpec.feature "Creating a CMA case", type: :feature do
     }
   end
 
-  let(:cma_case) { FactoryGirl.create(:cma_case) }
+  let(:cma_case) { FactoryBot.create(:cma_case) }
   let(:content_id) { cma_case['content_id'] }
   let(:save_button_disable_with_message) { page.find_button('Save as draft')["data-disable-with"] }
 

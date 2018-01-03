@@ -3,14 +3,14 @@ require 'rails_helper'
 RSpec.feature 'Exporting a list of documents as CSV' do
   let(:documents) {
     3.times.map do |i|
-      FactoryGirl.create(
+      FactoryBot.create(
         :business_finance_support_scheme,
         base_path: "/bfss/#{i}",
         title: "Scheme ##{i}"
       )
     end
   }
-  let(:user) { FactoryGirl.create(:gds_editor) }
+  let(:user) { FactoryBot.create(:gds_editor) }
   let(:expected_csv) {
     CSV.generate do |csv|
       csv << BusinessFinanceSupportSchemeExportPresenter.header_row

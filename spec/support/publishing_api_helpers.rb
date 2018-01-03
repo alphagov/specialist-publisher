@@ -1,6 +1,6 @@
 module PublishingApiHelpers
   def write_payload(document)
-    copy = FactoryGirl.create(document["document_type"], document)
+    copy = FactoryBot.create(document["document_type"], document)
     copy.delete("content_id")
     copy.delete("last_edited_at")
     copy.delete("publication_state")

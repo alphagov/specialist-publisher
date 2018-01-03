@@ -31,7 +31,7 @@ group :development, :test do
   gem "capybara"
   gem 'capybara-webkit'
   gem 'database_cleaner'
-  gem 'factory_girl'
+  gem 'factory_bot'
   gem 'foreman'
   gem 'govuk-content-schema-test-helpers'
   gem 'govuk-lint'
