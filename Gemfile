@@ -12,7 +12,7 @@ gem 'logstasher', '1.2.2'
 gem 'mongoid', '~> 6.0.0'
 gem 'pundit'
 gem 'sass-rails', '~> 5.0.4'
-gem 'select2-rails', '~> 4.0.3'
+gem 'select2-rails', '~> 3.5.10'
 gem 'uglifier', '>= 1.3.0'
 gem 'unicorn', '~> 5.4.0'
 
