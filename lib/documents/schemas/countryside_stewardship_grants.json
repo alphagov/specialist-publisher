@@ -69,7 +69,7 @@
         {"label": "Mid Tier", "value": "mid-tier"},
         {"label": "Offer: Arable", "value": "offer-arable"},
         {"label": "Offer: Lowland Grazing", "value": "offer-lowland-grazing"},
-        {"label": "Offer: Mixed Garming", "value": "offer-mixed-farming"},
+        {"label": "Offer: Mixed Farming", "value": "offer-mixed-farming"},
         {"label": "Offer: Upland", "value": "offer-upland"},
         {"label": "Standalone capital items", "value": "standalone-capital-items"}
       ]
