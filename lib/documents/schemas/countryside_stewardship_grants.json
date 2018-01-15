@@ -53,7 +53,7 @@
         {"label": "Uplands", "value": "uplands"},
         {"label": "Vegetation control", "value": "vegetation-control"},
         {"label": "Water quality", "value": "water-quality"},
-        {"label": "Wildlife package", "value": "wildlife-package"},
+        {"label": "Pollinators and wildlife", "value": "wildlife-package"},
         {"label": "Woodland", "value": "woodland"}
       ]
     },
