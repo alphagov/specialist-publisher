@@ -4,7 +4,7 @@ require "gds_api/test_helpers/publishing_api"
 RSpec.describe OpsTasks do
   include GdsApi::TestHelpers::PublishingApi
 
-  let(:payload) { FactoryGirl.create(:cma_case) }
+  let(:payload) { FactoryBot.create(:cma_case) }
   let(:content_id) { payload["content_id"] }
 
   before do
@@ -34,7 +34,7 @@ RSpec.describe OpsTasks do
   describe "#set_public_updated_at" do
     describe "when the document is live" do
       let(:payload) {
-        FactoryGirl.create(:cma_case, publication_state: "published")
+        FactoryBot.create(:cma_case, publication_state: "published")
       }
 
       before do
@@ -73,7 +73,7 @@ RSpec.describe OpsTasks do
 
     describe "when the document is not live" do
       let(:payload) {
-        FactoryGirl.create(:cma_case, publication_state: "draft")
+        FactoryBot.create(:cma_case, publication_state: "draft")
       }
 
       it "throws a helpful error" do

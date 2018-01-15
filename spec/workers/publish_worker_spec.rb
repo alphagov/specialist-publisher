@@ -1,7 +1,7 @@
 require "rails_helper"
 
 RSpec.describe PublishWorker do
-  let(:document) { FactoryGirl.create(:utaac_decision) }
+  let(:document) { FactoryBot.create(:utaac_decision) }
   let(:content_id) { document["content_id"] }
 
   let(:uses_publish_update_type) {
@@ -16,7 +16,7 @@ RSpec.describe PublishWorker do
 
   context "when the publication_state is 'draft'" do
     let(:document) {
-      FactoryGirl.create(:utaac_decision, :draft)
+      FactoryBot.create(:utaac_decision, :draft)
     }
 
     it "publishes the document" do
@@ -27,7 +27,7 @@ RSpec.describe PublishWorker do
 
   context "when the document is in any other state" do
     let(:document) {
-      FactoryGirl.create(:utaac_decision, :published)
+      FactoryBot.create(:utaac_decision, :published)
     }
 
     it "does not publish the document" do

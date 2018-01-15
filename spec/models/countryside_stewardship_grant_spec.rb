@@ -2,7 +2,7 @@ require 'spec_helper'
 require 'models/valid_against_schema'
 
 RSpec.describe CountrysideStewardshipGrant do
-  let(:payload) { FactoryGirl.create(:countryside_stewardship_grant) }
+  let(:payload) { FactoryBot.create(:countryside_stewardship_grant) }
   include_examples "it saves payloads that are valid against the 'specialist_document' schema"
 
   it 'is not exportable' do

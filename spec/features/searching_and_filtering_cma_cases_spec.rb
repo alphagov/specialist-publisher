@@ -4,7 +4,7 @@ RSpec.feature "Searching and filtering", type: :feature do
   let(:test_date) { Date.new(2016, 1, 11) }
   let(:cma_cases) {
     ten_example_cases = 10.times.collect do |n|
-      FactoryGirl.create(:cma_case,
+      FactoryBot.create(:cma_case,
         "title" => "Example CMA Case #{n}",
         "description" => "This is the summary of example CMA case #{n}",
         "base_path" => "/cma-cases/example-cma-case-#{n}",

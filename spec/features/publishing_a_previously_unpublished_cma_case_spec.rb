@@ -6,7 +6,7 @@ RSpec.feature "Publishing a previously unpublished CMA Case", type: :feature do
   let(:existing_attachments) { [] }
 
   let(:item) do
-    FactoryGirl.create(:cma_case,
+    FactoryBot.create(:cma_case,
                        :unpublished,
                        title: "Example CMA Case",
                        publication_state: "draft",

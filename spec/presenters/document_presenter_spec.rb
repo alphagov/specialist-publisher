@@ -15,7 +15,7 @@ RSpec.describe DocumentPresenter do
 
   describe "#to_json without attachments" do
     let(:payload) {
-      FactoryGirl.create(:cma_case).tap { |p| p["details"].delete("attachments") }
+      FactoryBot.create(:cma_case).tap { |p| p["details"].delete("attachments") }
     }
 
     it "is valid against the content schemas" do
@@ -35,7 +35,7 @@ RSpec.describe DocumentPresenter do
 
   describe "#to_json with attachments" do
     let(:payload) {
-      FactoryGirl.create(:cma_case,
+      FactoryBot.create(:cma_case,
         details: {
           attachments: [
             {
@@ -75,7 +75,7 @@ RSpec.describe DocumentPresenter do
 
   describe '#to_json with headers' do
     let(:payload) {
-      FactoryGirl.create(:cma_case,
+      FactoryBot.create(:cma_case,
         details: {
           body: [
             {
@@ -99,7 +99,7 @@ RSpec.describe DocumentPresenter do
 
   describe '#to_json with nested headers' do
     let(:payload) {
-      FactoryGirl.create(:cma_case,
+      FactoryBot.create(:cma_case,
         details: {
           body: [
             {
@@ -129,7 +129,7 @@ RSpec.describe DocumentPresenter do
 
   describe '#to_json without headers' do
     let(:payload) {
-      FactoryGirl.create(:cma_case).tap { |p| p["details"].delete("headers") }
+      FactoryBot.create(:cma_case).tap { |p| p["details"].delete("headers") }
     }
 
     it 'is valid against the content schemas' do
@@ -143,7 +143,7 @@ RSpec.describe DocumentPresenter do
 
   describe '#to_json with format_specific_fields' do
     let(:payload) {
-      FactoryGirl.create(:cma_case,
+      FactoryBot.create(:cma_case,
         details: {
           metadata: {
             case_state: "open",

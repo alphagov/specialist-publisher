@@ -86,7 +86,7 @@ GEM
     erubi (1.6.1)
     erubis (2.7.0)
     execjs (2.7.0)
-    factory_girl (4.9.0)
+    factory_bot (4.8.2)
       activesupport (>= 3.0.0)
     faraday (0.12.2)
       multipart-post (>= 1.2, < 3)
@@ -402,7 +402,7 @@ DEPENDENCIES
   capybara
   capybara-webkit
   database_cleaner
-  factory_girl
+  factory_bot
   foreman
   gds-api-adapters (~> 50.8.0)
   gds-sso (= 13.5.0)
@@ -435,4 +435,4 @@ DEPENDENCIES
   webmock
 
 BUNDLED WITH
-   1.15.1
+   1.16.0
