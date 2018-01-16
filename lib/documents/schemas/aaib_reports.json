@@ -24,7 +24,8 @@
         {"label": "Commercial - rotorcraft", "value": "commercial-rotorcraft"},
         {"label": "General aviation - fixed wing", "value": "general-aviation-fixed-wing"},
         {"label": "General aviation - rotorcraft", "value": "general-aviation-rotorcraft"},
-        {"label": "Sport aviation and balloons", "value": "sport-aviation-and-balloons"}
+        {"label": "Sport aviation and balloons", "value": "sport-aviation-and-balloons"},
+        {"label": "Unmanned Aircraft Systems (UAS)", "value": "unmanned-aircraft-systems"}
       ]
     },
     {
