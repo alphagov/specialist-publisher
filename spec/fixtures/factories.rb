@@ -402,6 +402,22 @@ FactoryBot.define do
     end
   end
 
+  factory :residential_property_tribunal_decision, parent: :document do
+    base_path "/residential-property-tribunal-decisions/example-document"
+    document_type "residential_property_tribunal_decision"
+
+    transient do
+      default_metadata {
+        {
+          "tribunal_decision_category" => "leasehold-disputes-management",
+          "tribunal_decision_sub_category" => "leasehold-disputes-management---appointment-of-manager",
+          "tribunal_decision_decision_date" => "2018-01-17",
+          "hidden_indexable_content" => "some hidden content",
+        }
+      }
+    end
+  end
+
   factory :tax_tribunal_decision, parent: :document do
     base_path "/tax-and-chancery-tribunal-decisions/example-document"
     document_type "tax_tribunal_decision"
