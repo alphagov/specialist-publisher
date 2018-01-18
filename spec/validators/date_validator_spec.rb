@@ -8,6 +8,11 @@ RSpec.describe DateValidator do
 
     subject { described_class.new(attributes: [:dob]) }
 
+    it "assumes presence: true validation will be used to detect nils if we don't allow them for this attribute so doesn't add an error if the date value is blank" do
+      subject.validate_each(record, :dob, nil)
+      expect(record.errors[:dob]).to be_empty
+    end
+
     it "adds an error to the record if the date value is unparseable" do
       subject.validate_each(record, :dob, "31-02-2013")
       expect(record.errors[:dob]).to eq(["is not a valid date"])
