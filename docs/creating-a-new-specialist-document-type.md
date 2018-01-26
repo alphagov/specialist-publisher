@@ -25,3 +25,25 @@ You could use the [PR to create the International Development Fund](https://gith
 template.
 
 The two most important things here are the document class, like [`AaibReport`](/app/models/aaib_report.rb), and the finder configuration file, like [aaib_reports.json](/lib/documents/schemas/aaib_reports.json).
+
+## 4. Deploy and publish
+
+Yes, deploy your code to the relevant environment. Publish an example of your new document.
+
+## 5 Run the rake task to publish all finders
+
+You'll need to manually run the [`publishing_api:publish_finders`](lib/tasks/publishing_api.rake) rake task to ensure that the finders are correctly published and that all metadata and facets for your new document type are made available.
+
+You can do this through Jenkins or, if you are running from the console, the following will run the rake task:
+
+```
+sudo -u deploy govuk_setenv specialist-publisher bundle exec rake publishing_api:publish_finders
+```
+
+## 6 Reindex rummager
+
+On one of the `search-api` boxes, `cd` to `/var/apps/rummager` and run this rake task. This will take some time (at writing a few hours).
+
+```
+govuk_setenv rummager bundle exec rake rummager:migrate_schema CONFIRM_INDEX_MIGRATION_START=1 RUMMAGER_INDEX=govuk
+```
