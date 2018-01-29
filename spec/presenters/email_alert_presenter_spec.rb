@@ -37,11 +37,13 @@ RSpec.describe EmailAlertPresenter do
         expect(presented_data[:base_path]).to include(cma_case_payload["base_path"])
         expect(presented_data[:footer]).to include("SUBSCRIBER_PREFERENCES_URL")
         expect(presented_data[:header]).to include("govuk-email-header")
+        expect(presented_data[:priority]).to eq("normal")
 
         expect(presented_data.keys).to match_array(%i(
           title description change_note subject body tags document_type
           email_document_supertype government_document_supertype content_id
           public_updated_at publishing_app base_path urgent header footer
+          priority
         ))
       end
     end
@@ -60,6 +62,7 @@ RSpec.describe EmailAlertPresenter do
 
         expect(presented_data[:body]).to include(mhra_email_address)
         expect(presented_data[:document_type]).to eq("medical_safety_alert")
+        expect(presented_data[:priority]).to eq("high")
       end
     end
   end

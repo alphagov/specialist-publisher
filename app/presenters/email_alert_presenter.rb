@@ -20,7 +20,8 @@ class EmailAlertPresenter
       content_id: content_id,
       public_updated_at: public_updated_at,
       publishing_app: "specialist-publisher",
-      base_path: base_path
+      base_path: base_path,
+      priority: priority,
     }.merge(extra_options)
   end
 
@@ -118,6 +119,10 @@ private
 
   def urgent
     document.urgent
+  end
+
+  def priority
+    urgent ? "high" : "normal"
   end
 
   def public_updated_at
