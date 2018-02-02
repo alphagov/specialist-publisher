@@ -23,4 +23,4 @@ RUN GOVUK_APP_DOMAIN=www.gov.uk RAILS_ENV=production bundle exec rails assets:pr
 
 HEALTHCHECK CMD curl --silent --fail localhost:$PORT || exit 1
 
-CMD bash -c "rm -f tmp/pids/server.pid && bundle exec rails s -p $PORT -b '0.0.0.0'"
+CMD bundle exec foreman run web
