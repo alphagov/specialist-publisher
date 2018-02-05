@@ -5,7 +5,6 @@
   "name": "Residential property tribunal decisions",
   "description": "Find decisions on Residential Property Tribunal cases in England, Wales and Scotland.",
   "phase": "beta",
-  "pre_production": true,
   "filter": {
     "document_type": "residential_property_tribunal_decision"
   },
