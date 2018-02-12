@@ -20,4 +20,12 @@ RSpec.describe EmailAlertApiWorker do
 
     assert_email_alert_sent("some" => "payload")
   end
+
+  it "doesn't retry 409s" do
+    stub_any_email_alert_api_call.and_raise(GdsApi::HTTPConflict.new(409))
+
+    expect {
+      described_class.new.perform(payload: {})
+    }.not_to raise_error
+  end
 end
