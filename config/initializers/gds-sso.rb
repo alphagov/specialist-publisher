@@ -6,5 +6,5 @@ GDS::SSO.config do |config|
   config.oauth_secret = ENV['OAUTH_SECRET'] || "secret"
 
   # optional config for location of signon
-  config.oauth_root_url = Plek.current.find("signon")
+  config.oauth_root_url = Plek.new.external_url_for("signon")
 end

@@ -102,7 +102,7 @@ class DocumentsController < ApplicationController
 private
 
   def unknown_error_message
-    support_url = Plek.find('support') + "/technical_fault_report/new"
+    support_url = Plek.new.external_url_for('support') + "/technical_fault_report/new"
 
     "Something has gone wrong. Please try again and see if it works. <a href='#{support_url}'>Let us know</a>
     if the problem happens again and a developer will look into it.".html_safe
