@@ -91,8 +91,6 @@ GEM
     faraday (0.12.2)
       multipart-post (>= 1.2, < 3)
     ffi (1.9.18)
-    foreman (0.84.0)
-      thor (~> 0.19.1)
     gds-api-adapters (51.2.0)
       addressable
       link_header
@@ -407,7 +405,6 @@ DEPENDENCIES
   capybara-webkit
   database_cleaner
   factory_bot
-  foreman
   gds-api-adapters (~> 51.2.0)
   gds-sso (= 13.6.0)
   govspeak (~> 5.4.0)
@@ -437,4 +434,4 @@ DEPENDENCIES
   webmock
 
 BUNDLED WITH
-   1.16.0
+   1.16.1
