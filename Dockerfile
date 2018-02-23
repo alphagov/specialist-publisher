@@ -1,8 +1,9 @@
 FROM ruby:2.4.2
 RUN apt-get update -qq && apt-get upgrade -y && apt-get install -y build-essential nodejs && apt-get clean
-
 # for capybara-webkit
 RUN apt-get install -y libqt4-webkit libqt4-dev xvfb
+RUN gem install foreman
+
 
 ENV GOVUK_APP_NAME specialist-publisher
 ENV MONGODB_URI mongodb://mongo/govuk-content
@@ -23,4 +24,4 @@ RUN GOVUK_APP_DOMAIN=www.gov.uk RAILS_ENV=production bundle exec rails assets:pr
 
 HEALTHCHECK CMD curl --silent --fail localhost:$PORT || exit 1
 
-CMD bundle exec foreman run web
+CMD foreman run web

@@ -3,7 +3,6 @@ source 'https://rubygems.org'
 gem 'rails', '5.0.2'
 
 gem 'bootstrap-kaminari-views', '0.0.5'
-gem 'foreman'
 gem 'govuk_sidekiq', '~> 2.0'
 gem 'hashdiff'
 gem 'jquery-rails', '~> 4.3.1'
