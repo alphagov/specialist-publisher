@@ -19,7 +19,7 @@ gem "gds-api-adapters", "~> 51.2.0"
 gem 'gds-sso', '13.6.0'
 gem "govspeak", "~> 5.4.0"
 gem 'govuk_admin_template', '~> 6.5.0'
-gem "govuk_frontend_toolkit", "7.2.0"
+gem "govuk_frontend_toolkit", "7.4.1"
 gem 'plek', '~> 2.1'
 gem "govuk_app_config", "~> 1.3"
 
