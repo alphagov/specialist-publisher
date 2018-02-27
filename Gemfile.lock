@@ -91,7 +91,7 @@ GEM
     faraday (0.12.2)
       multipart-post (>= 1.2, < 3)
     ffi (1.9.18)
-    gds-api-adapters (51.2.0)
+    gds-api-adapters (51.3.0)
       addressable
       link_header
       lrucache (~> 0.1.1)
@@ -237,7 +237,7 @@ GEM
       slop (~> 3.4)
     pry-rails (0.3.6)
       pry (>= 0.10.4)
-    public_suffix (3.0.1)
+    public_suffix (3.0.2)
     pundit (1.1.0)
       activesupport (>= 3.0.0)
     rack (2.0.4)
@@ -405,7 +405,7 @@ DEPENDENCIES
   capybara-webkit
   database_cleaner
   factory_bot
-  gds-api-adapters (~> 51.2.0)
+  gds-api-adapters (~> 51.3.0)
   gds-sso (= 13.6.0)
   govspeak (~> 5.4.0)
   govuk-content-schema-test-helpers
