@@ -10,7 +10,7 @@ gem "kaminari"
 gem 'kaminari-mongoid'
 gem 'mongoid', '~> 6.0.0'
 gem 'pundit'
-gem 'sass-rails', '~> 5.0.4'
+gem 'sass-rails', '~> 5.0.7'
 gem 'select2-rails', '~> 3.5.10'
 gem 'uglifier', '>= 1.3.0'
 
