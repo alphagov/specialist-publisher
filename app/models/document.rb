@@ -273,6 +273,10 @@ class Document
     nil
   end
 
+  def email_footnote
+    nil
+  end
+
   def content_item_blocking_publish?
     warnings && warnings.has_key?("content_item_blocking_publish")
   end

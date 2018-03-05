@@ -21,4 +21,8 @@ class MedicalSafetyAlert < Document
   def urgent
     true
   end
+
+  def email_footnote
+    "Do not reply to this email. To contact MHRA, email email.support@mhra.gov.uk"
+  end
 end
