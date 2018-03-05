@@ -125,6 +125,10 @@ private
     urgent ? "high" : "normal"
   end
 
+  def footnote
+    document.email_footnote
+  end
+
   def public_updated_at
     document.public_updated_at
   end
@@ -145,6 +149,7 @@ private
     {
       header: header,
       footer: footer,
+      footnote: footnote,
     }.reject { |_k, v| v.nil? }
   end
 
