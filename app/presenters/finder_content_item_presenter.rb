@@ -42,6 +42,7 @@ private
       format_name: file.fetch("format_name", nil),
       logo_path: file.fetch("logo_path", nil),
       show_summaries: file.fetch("show_summaries", false),
+      signup_link: file.fetch("signup_link", nil),
       summary: file.fetch("summary", nil),
       facets: file.fetch("facets", nil),
       default_order: file.fetch("default_order", nil),
