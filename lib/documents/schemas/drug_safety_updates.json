@@ -8,8 +8,7 @@
     "document_type": "drug_safety_update"
   },
   "show_summaries": true,
-  "signup_content_id": "ccf11f55-02ee-48ec-b71c-7e3fe78b3a17",
-  "signup_copy": "The drug safety update is a monthly newsletter for healthcare professionals, bringing you information and clinical advice on the safe use of medicines.",
+  "signup_link": "https://public.govdelivery.com/accounts/UKMHRA/subscriber/new?topic_id=UKMHRA_0044",
   "organisations": ["240f72bd-9a4d-4f39-94d9-77235cadde8e"],
   "related": [
     "1e9c0ada-5f7e-43cc-a55f-cc32757edaa3",
