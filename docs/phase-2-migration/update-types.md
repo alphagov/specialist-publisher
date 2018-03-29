@@ -12,7 +12,7 @@ If the update type is 'major', we send a request to the Email Alert API when the
 content is published. The only exception to this is the 'Drug Safety Update'
 format which has this [explicitly
 disabled](https://github.com/alphagov/specialist-publisher-rebuild/blob/39745ac21b8717130cb3d210469b06cfb2ea72ca/app/models/drug_safety_update.rb#L16-L18). Instead, the MHRA manually send out a monthly digest of
-updates through the govdelivery interface.
+updates through their own GovDelivery account.
 
 If the content item is a 'first draft', we also artificially add a
 'First published.' change note to the content item. We do this immediately

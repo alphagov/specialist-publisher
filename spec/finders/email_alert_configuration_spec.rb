@@ -25,10 +25,10 @@ RSpec.describe "Email alert configuration" do
         end
       end
 
-      # GovDelivery limits the name of a subscription list to 255 characters
+      # email-alert-api limits the name of a subscription list to 1000 characters
       # We test here to make sure we don't try to create lists with names
       # longer than this for live finders
-      it "doesn't have a name longer than 255 characters" do
+      it "doesn't have a name longer than 1000 characters" do
         next unless finder["subscription_list_title_prefix"] && !finder["pre_production"]
 
         if finder["subscription_list_title_prefix"]["plural"]
@@ -44,7 +44,7 @@ RSpec.describe "Email alert configuration" do
           name = finder["subscription_list_title_prefix"]
         end
 
-        expect(name.length).to be <= 255
+        expect(name.length).to be <= 1000
       end
     end
   end
