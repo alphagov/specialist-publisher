@@ -63,7 +63,7 @@ RSpec.describe EmailAlertPresenter do
         expect(presented_data[:body]).to include(mhra_email_address)
         expect(presented_data[:document_type]).to eq("medical_safety_alert")
         expect(presented_data[:priority]).to eq("high")
-        expect(presented_data[:footnote]).to eq("Do not reply to this email. To contact MHRA, email email.support@mhra.gov.uk")
+        expect(presented_data[:footnote]).to eq("If you have any questions about the medical content in this email, contact MHRA on info@mhra.gov.uk")
       end
     end
   end
