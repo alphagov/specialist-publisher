@@ -241,6 +241,7 @@ GEM
     pry-rails (0.3.6)
       pry (>= 0.10.4)
     public_suffix (3.0.2)
+    puma (3.11.4)
     pundit (1.1.0)
       activesupport (>= 3.0.0)
     rack (2.0.4)
@@ -425,6 +426,7 @@ DEPENDENCIES
   mongoid (~> 6.0.0)
   plek (~> 2.1)
   pry-rails
+  puma
   pundit
   rails (= 5.0.2)
   rails-controller-testing
