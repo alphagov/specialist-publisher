@@ -33,6 +33,7 @@ group :development, :test do
   gem 'govuk-content-schema-test-helpers'
   gem 'govuk-lint'
   gem 'pry-rails'
+  gem 'puma'
   gem 'rspec-rails'
   gem 'simplecov', require: false
   gem 'simplecov-rcov', require: false

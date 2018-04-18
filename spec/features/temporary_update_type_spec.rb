@@ -91,8 +91,8 @@ RSpec.feature "Temporary update types, relating to attachments", type: :feature 
       visit "/cma-cases/#{content_id}/edit"
       expect(page.status_code).to eq(200)
 
-      radio_minor = field_labeled("cma_case_update_type_minor")
-      radio_major = field_labeled("cma_case_update_type_major")
+      radio_minor = find_field("cma_case_update_type_minor")
+      radio_major = find_field("cma_case_update_type_major")
 
       expect(radio_minor).not_to be_checked
       expect(radio_major).not_to be_checked

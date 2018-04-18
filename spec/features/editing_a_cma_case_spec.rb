@@ -137,7 +137,7 @@ RSpec.feature "Editing a CMA case", type: :feature do
       end
 
       it "creates new change note" do
-        radio_major = field_labeled("cma_case_update_type_major")
+        radio_major = find_field("cma_case_update_type_major")
         expect(radio_major).to be_checked
 
         fill_in "Change note", with: "New change note"
