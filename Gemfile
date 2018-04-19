@@ -5,7 +5,7 @@ gem 'rails', '5.0.2'
 gem 'bootstrap-kaminari-views', '0.0.5'
 gem 'govuk_sidekiq', '~> 3.0'
 gem 'hashdiff'
-gem 'jquery-rails', '~> 4.3.1'
+gem 'jquery-rails', '~> 4.3.3'
 gem "kaminari"
 gem 'kaminari-mongoid'
 gem 'mongoid', '~> 6.0.0'
