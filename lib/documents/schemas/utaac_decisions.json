@@ -2126,8 +2126,16 @@
           "value": "charles-w"
         },
         {
+          "label": "Church, TH",
+          "value": "church-th"
+        },
+        {
           "label": "Cole, G",
           "value": "cole-g"
+        },
+        {
+          "label": "Dunlop, L",
+          "value": "dunlop-l"
         },
         {
           "label": "Farbey, J",
@@ -2164,6 +2172,10 @@
         {
           "label": "Hallett, V",
           "value": "hallett-v"
+        },
+        {
+          "label": "Hansen, W",
+          "value": "hansen-w"
         },
         {
           "label": "Harris, M",
@@ -2212,6 +2224,10 @@
         {
           "label": "Johnson, M",
           "value": "johnson-m"
+        },
+        {
+          "label": "Jones, R",
+          "value": "jones-r"
         },
         {
           "label": "Jupp, E",
@@ -2286,6 +2302,10 @@
           "value": "mullan-k"
         },
         {
+          "label": "Najib, S",
+          "value": "najib-s"
+        },
+        {
           "label": "Ovey, E",
           "value": "ovey-e"
         },
@@ -2344,6 +2364,14 @@
         {
           "label": "Sanders, R",
           "value": "sanders-r"
+        },
+        {
+          "label": "Scolding, F",
+          "value": "scolding-f"
+        },
+        {
+          "label": "Sims, A",
+          "value": "sims-a"
         },
         {
           "label": "Skinner, J",
