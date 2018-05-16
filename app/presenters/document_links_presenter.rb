@@ -7,7 +7,8 @@ class DocumentLinksPresenter
     {
       content_id: document.content_id,
       links: {
-        organisations: document.organisations
+        organisations: document.organisations,
+        primary_publishing_organisation: [document.primary_publishing_organisation],
       },
     }
   end

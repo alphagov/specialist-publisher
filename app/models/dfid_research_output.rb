@@ -47,4 +47,8 @@ class DfidResearchOutput < Document
   def dfid_author_tags=(tags)
     self.dfid_authors = (tags || "").split("::")
   end
+
+  def primary_publishing_organisation
+    'db994552-7644-404d-a770-a2fe659c661f'
+  end
 end

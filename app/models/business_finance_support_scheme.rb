@@ -27,4 +27,8 @@ class BusinessFinanceSupportScheme < Document
   def self.title
     "Business Finance Support Scheme"
   end
+
+  def primary_publishing_organisation
+    "2bde479a-97f2-42b5-986a-287a623c2a1c"
+  end
 end

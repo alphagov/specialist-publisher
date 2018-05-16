@@ -15,4 +15,8 @@ class CountrysideStewardshipGrant < Document
   def self.title
     "Countryside Stewardship Grant"
   end
+
+  def primary_publishing_organisation
+    "d3ce4ba7-bc75-46b4-89d9-38cb3240376d"
+  end
 end
