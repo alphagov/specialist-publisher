@@ -6,6 +6,10 @@ RSpec.describe Document do
       "My Document Type"
     end
 
+    def primary_publishing_organisation
+      'a-primary-org-id'
+    end
+
     attr_accessor :field1, :field2, :field3
 
     def initialize(params = {})

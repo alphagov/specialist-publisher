@@ -16,4 +16,8 @@ class InternationalDevelopmentFund < Document
   def self.title
     "International Development Fund"
   end
+
+  def primary_publishing_organisation
+    'db994552-7644-404d-a770-a2fe659c661f'
+  end
 end
