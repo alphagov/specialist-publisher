@@ -10,6 +10,7 @@
   "organisations": [],
   "topics": [],
   "document_noun": "statutory instrument",
+  "pre_production": true,
   "facets": [
     {
       "key": "laid_date",
