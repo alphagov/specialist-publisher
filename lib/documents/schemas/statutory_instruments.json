@@ -2,7 +2,7 @@
   "content_id": "f722816d-7e12-4055-8e7e-68b2d144e2b6",
   "base_path": "/statutory-instruments",
   "format_name": "Statutory instrument",
-  "name": "Statutory instrument",
+  "name": "Statutory instruments",
   "description": "Find statutory instruments",
   "filter": {
     "document_type": "statutory_instrument"
