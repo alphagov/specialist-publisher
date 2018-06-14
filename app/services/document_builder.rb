@@ -19,7 +19,8 @@ class DocumentBuilder
 
     set_update_type(document, payload)
 
-    if document.respond_to?(:organisations=)
+    if document.has_organisations?
+      document.primary_publishing_organisation = payload['links']['primary_publishing_organisation'].first
       document.organisations = payload['links']['organisations']
     end
 

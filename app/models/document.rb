@@ -295,6 +295,10 @@ class Document
     false
   end
 
+  def has_organisations?
+    false
+  end
+
 private
 
   def finder_schema

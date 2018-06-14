@@ -3,6 +3,7 @@ class StatutoryInstrument < Document
   validates :sift_end_date, date: true
   validates :sifting_status, presence: true
   validates :subject, presence: true
+  validates :primary_publishing_organisation, presence: true
 
   FORMAT_SPECIFIC_FIELDS = %i(
     laid_date
@@ -12,10 +13,11 @@ class StatutoryInstrument < Document
   ).freeze
 
   attr_accessor(*FORMAT_SPECIFIC_FIELDS)
-  attr_accessor :organisations
+  attr_accessor :organisations, :primary_publishing_organisation
 
   def initialize(params = {})
     super(params, FORMAT_SPECIFIC_FIELDS)
+    @primary_publishing_organisation = params[:primary_publishing_organisation]
     @organisations = params[:organisations]
   end
 
@@ -23,11 +25,14 @@ class StatutoryInstrument < Document
     "Statutory instrument"
   end
 
-  def primary_publishing_organisation
-    "fef4ac7c-024a-4943-9f19-e85a8369a1f3"
+  def links
+    super.merge(
+      organisations: organisations,
+      primary_publishing_organisation: [primary_publishing_organisation]
+    )
   end
 
-  def links
-    super.merge("organisations": organisations)
+  def has_organisations?
+    true
   end
 end

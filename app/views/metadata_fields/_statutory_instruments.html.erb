@@ -17,6 +17,19 @@
       }
   %>
 <% end %>
+<%= render "shared/form_group", f: f, field: :primary_publishing_organisation do %>
+  <%= f.select :primary_publishing_organisation,
+      organisations_options,
+      {},
+      {
+        class: "select2 form-control",
+        multiple: false,
+        data: {
+          placeholder: "Select a primary publishing organisation"
+        }
+      }
+  %>
+<% end %>
 <%= render "shared/form_group", f: f, field: :organisations do %>
   <%= f.select :organisations,
       organisations_options,
