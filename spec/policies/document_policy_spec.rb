@@ -6,22 +6,23 @@ RSpec.describe DocumentPolicy do
   let(:gds_editor) { User.new(permissions: %w(signin gds_editor)) }
   let(:departmental_editor) { User.new(permissions: %w(signin editor), organisation_content_id: allowed_organisation_id) }
   let(:departmental_writer) { User.new(permissions: ['signin'], organisation_content_id: allowed_organisation_id) }
+  let(:document_type_editor) { User.new(permissions: ['class_editor']) }
 
   let(:document_type) {
     Class.new(Document) do
-      cattr_accessor :organisations
+      cattr_accessor :schema_organisations
     end
   }
 
   let(:allowed_document_type) {
     document_type.tap do |dt|
-      dt.organisations = [allowed_organisation_id]
+      dt.schema_organisations = [allowed_organisation_id]
     end
   }
 
   let(:not_allowed_document_type) {
     document_type.tap do |dt|
-      dt.organisations = [not_allowed_organisation_id]
+      dt.schema_organisations = [not_allowed_organisation_id]
     end
   }
 
@@ -36,6 +37,10 @@ RSpec.describe DocumentPolicy do
 
     it 'grants access to users with GDS Editor permissions' do
       expect(described_class).to permit(gds_editor, allowed_document_type)
+    end
+
+    it 'grants access to users with document type permissions' do
+      expect(described_class).to permit(document_type_editor, allowed_document_type)
     end
   end
 
@@ -54,6 +59,10 @@ RSpec.describe DocumentPolicy do
 
     it 'grants access to users with GDS Editor permissions' do
       expect(described_class).to permit(gds_editor, allowed_document_type)
+    end
+
+    it 'grants access to users with document type permissions' do
+      expect(described_class).to permit(document_type_editor, allowed_document_type)
     end
   end
 end

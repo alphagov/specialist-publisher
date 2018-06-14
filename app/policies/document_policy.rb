@@ -1,6 +1,6 @@
 class DocumentPolicy < ApplicationPolicy
   def index?
-    gds_editor? || departmental_editor? || writer?
+    document_type_editor? || gds_editor? || departmental_editor? || writer?
   end
 
   alias_method :new?, :index?
@@ -12,7 +12,7 @@ class DocumentPolicy < ApplicationPolicy
   alias_method :destroy?, :index?
 
   def publish?
-    gds_editor? || departmental_editor?
+    document_type_editor? || gds_editor? || departmental_editor?
   end
 
   alias_method :unpublish?, :publish?

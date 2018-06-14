@@ -148,12 +148,12 @@ class Document
     finder_schema.options_for(facet)
   end
 
-  def organisations
+  def schema_organisations
     finder_schema.organisations
   end
 
-  def self.organisations
-    new.organisations
+  def self.schema_organisations
+    new.schema_organisations
   end
 
   def format_specific_metadata
