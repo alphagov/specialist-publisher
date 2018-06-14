@@ -17,3 +17,16 @@
       }
   %>
 <% end %>
+<%= render "shared/form_group", f: f, field: :organisations do %>
+  <%= f.select :organisations,
+      organisations_options,
+      {},
+      {
+        class: "select2 form-control",
+        multiple: true,
+        data: {
+          placeholder: "Select organisations"
+        }
+      }
+  %>
+<% end %>

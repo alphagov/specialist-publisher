@@ -80,7 +80,7 @@ FactoryBot.define do
     state_history {
       { "1": "draft" }
     }
-    links {}
+    links { {} }
 
     routes {
       [
@@ -431,7 +431,20 @@ FactoryBot.define do
           "subject" => ["oil-and-gas"],
         }
       }
+
+      organisation_content_id "6de6b795-9d30-4bd8-a257-ab9a6879e1ea"
     end
+
+    initialize_with {
+
+      attributes.merge(
+        links: {
+          finder: [FinderSchema.new(document_type.pluralize).content_id],
+          organisations: [organisation_content_id],
+        }
+      )
+
+    }
   end
 
   factory :tax_tribunal_decision, parent: :document do
