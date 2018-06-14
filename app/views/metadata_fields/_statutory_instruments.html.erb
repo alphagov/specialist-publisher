@@ -1,0 +1,19 @@
+<%= render "shared/date_fields", f: f, field: :sift_end_date, format: :statutory_instrument %>
+<%= render "shared/date_fields", f: f, field: :laid_date, format: :statutory_instrument %>
+<%= render "shared/form_group", f: f, field: :sifting_status do %>
+  <%= f.select :sifting_status, facet_options(f, :sifting_status), {}, { class: "form-control" } %>
+<% end %>
+<%= render "shared/form_group", f: f, field: :subject do %>
+  <%= f.select :subject,
+      facet_options(f, :subject),
+      {},
+      {
+        class: "select2 form-control",
+        multiple: true,
+        data:
+        {
+          placeholder: "Select subjects"
+        }
+      }
+  %>
+<% end %>

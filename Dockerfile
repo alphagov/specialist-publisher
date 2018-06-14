@@ -1,9 +1,11 @@
 FROM ruby:2.4.4
-RUN apt-get update -qq && apt-get upgrade -y && apt-get install -y build-essential nodejs && apt-get clean
-# for capybara-webkit
-RUN apt-get install -y libqt4-webkit libqt4-dev xvfb
-RUN gem install foreman
 
+RUN apt-get update -qq && apt-get upgrade -y && apt-get install -y build-essential nodejs && apt-get clean
+
+# https://github.com/thoughtbot/capybara-webkit/wiki/Installing-Qt-and-compiling-capybara-webkit#debian--ubuntu
+RUN apt-get install -y qt5-default libqt5webkit5-dev gstreamer1.0-plugins-base gstreamer1.0-tools gstreamer1.0-x
+
+RUN gem install foreman
 
 ENV GOVUK_APP_NAME specialist-publisher
 ENV MONGODB_URI mongodb://mongo/govuk-content

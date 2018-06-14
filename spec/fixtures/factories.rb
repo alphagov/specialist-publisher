@@ -418,6 +418,22 @@ FactoryBot.define do
     end
   end
 
+  factory :statutory_instrument, parent: :document do
+    base_path "/statutory-instruments/example-document"
+    document_type "statutory_instrument"
+
+    transient do
+      default_metadata {
+        {
+          "laid_date" => "2018-01-01",
+          "sift_end_date" => "2018-01-05",
+          "sifting_status" => "open",
+          "subject" => ["oil-and-gas"],
+        }
+      }
+    end
+  end
+
   factory :tax_tribunal_decision, parent: :document do
     base_path "/tax-and-chancery-tribunal-decisions/example-document"
     document_type "tax_tribunal_decision"
