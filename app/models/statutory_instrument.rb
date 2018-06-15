@@ -27,7 +27,7 @@ class StatutoryInstrument < Document
 
   def links
     super.merge(
-      organisations: organisations,
+      organisations: organisations | [primary_publishing_organisation],
       primary_publishing_organisation: [primary_publishing_organisation]
     )
   end

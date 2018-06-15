@@ -1,6 +1,6 @@
 class Organisation
   def self.all
-    @organisations ||= fetch_all_organisations(organisation_params)
+    @organisations = fetch_all_organisations(organisation_params)
   end
 
   attr_reader :content_id, :title

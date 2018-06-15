@@ -434,14 +434,14 @@ FactoryBot.define do
       }
 
       organisation_content_id "6de6b795-9d30-4bd8-a257-ab9a6879e1ea"
-      primary_publishing_org_content_id "a03b5b02-e864-4660-94d9-39fa0cf86248"
+      primary_publishing_org_content_id "d31d9806-2644-4023-be70-5376cae84a06"
     end
 
     initialize_with {
       attributes.merge(
         links: {
           finder: [FinderSchema.new(document_type.pluralize).content_id],
-          organisations: [organisation_content_id],
+          organisations: [organisation_content_id, primary_publishing_org_content_id],
           primary_publishing_organisation: [primary_publishing_org_content_id]
         }
       )

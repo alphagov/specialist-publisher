@@ -31,10 +31,6 @@ RSpec.describe Organisation do
     end
 
     before do
-      # organisations are memoized on the Organisation class
-      Object.send(:remove_const, :Organisation)
-      load "organisation.rb"
-
       allow(Services.publishing_api).to receive(:get_content_items)
         .with(a_hash_including(page: 1))
         .and_return("results" => p1, "pages" => 2)
