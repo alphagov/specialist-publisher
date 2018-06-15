@@ -14,10 +14,16 @@ class DocumentBuilder
       bulk_published: payload['details']['metadata']['bulk_published'],
       previous_version: payload['previous_version'],
       temporary_update_type: payload['details']['temporary_update_type'],
-      warnings: payload['warnings'] || {}
+      warnings: payload['warnings'] || {},
     )
 
     set_update_type(document, payload)
+
+    if document.has_organisations?
+      primary_organisation_ary = payload['links']['primary_publishing_organisation']
+      document.primary_publishing_organisation = primary_organisation_ary.first
+      document.organisations = payload['links']['organisations'] - primary_organisation_ary
+    end
 
     document.attachments = Attachment.all_from_publishing_api(payload)
 

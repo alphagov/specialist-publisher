@@ -2,7 +2,7 @@ class PassthroughController < ApplicationController
   after_action :skip_authorization
 
   def index
-    current_organisation = document_models.find { |model| model.organisations.include? current_user.organisation_content_id }
+    current_organisation = document_models.find { |model| model.schema_organisations.include? current_user.organisation_content_id }
 
     if current_user.gds_editor?
       redirect_to "/aaib-reports"

@@ -6,7 +6,7 @@ class ApplicationPolicy
   end
 
   def user_organisation_owns_document_type?
-    document_class.organisations.include?(user.organisation_content_id)
+    document_class.schema_organisations.include?(user.organisation_content_id)
   end
 
   def departmental_editor?
@@ -19,5 +19,9 @@ class ApplicationPolicy
 
   def gds_editor?
     user.gds_editor?
+  end
+
+  def document_type_editor?
+    user.permissions.include?(document_class.class.name.underscore + "_editor")
   end
 end
