@@ -18,7 +18,7 @@ class Organisation
     def fetch_all_organisations(params)
       orgs = []
       current_page = 1
-      loop do
+      10.times do
         response = Services.publishing_api.get_content_items(params.merge(page: current_page))
         orgs << response["results"].map { |attrs| Organisation.new(attrs) }
         if response["pages"] > current_page
