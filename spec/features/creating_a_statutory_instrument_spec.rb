@@ -57,8 +57,8 @@ RSpec.feature "Creating a Statutory Instrument", type: :feature do
     fill_in "statutory_instrument_laid_date_day", with: "01"
 
     select "Oil and gas", from: "Subject"
-    select "Org 1", from: "Primary publishing organisation"
-    select "Org 2", from: "Organisations"
+    select "Org 1", from: "Publishing organisation"
+    select "Org 2", from: "Other associated organisations"
 
     click_on "Save"
 
