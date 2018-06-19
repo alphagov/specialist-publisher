@@ -19,6 +19,10 @@ FactoryBot.define do
     permissions %w(signin gds_editor)
   end
 
+  factory :statutory_instrument_editor, parent: :user do
+    permissions %w(signin statutory_instrument_editor)
+  end
+
   factory :cma_editor, parent: :editor do
     organisation_slug "competition-and-markets-authority"
     organisation_content_id "957eb4ec-089b-4f71-ba2a-dc69ac8919ea"

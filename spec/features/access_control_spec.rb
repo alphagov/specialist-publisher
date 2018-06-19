@@ -4,6 +4,7 @@ RSpec.feature "Access control", type: :feature do
   before do
     publishing_api_has_content([], hash_including(document_type: CmaCase.document_type))
     publishing_api_has_content([], hash_including(document_type: AaibReport.document_type))
+    publishing_api_has_content([], hash_including(document_type: StatutoryInstrument.document_type))
   end
 
   context "as a CMA Editor" do
@@ -50,6 +51,19 @@ RSpec.feature "Access control", type: :feature do
 
       expect(page.current_path).to eq("/aaib-reports")
       expect(page).to have_content("You aren't permitted to access CMA Cases")
+    end
+  end
+
+  context "as a statutory instrument editor" do
+    before do
+      log_in_as_editor(:statutory_instrument_editor)
+    end
+
+    scenario "visiting the statutory instruments format" do
+      visit "/statutory-instruments"
+
+      expect(page.status_code).to eq(200)
+      expect(page).to have_content("Statutory instruments")
     end
   end
 

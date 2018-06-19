@@ -1,17 +1,19 @@
 require 'spec_helper'
 
 RSpec.describe DocumentPolicy do
+  class TestDocument < Document
+    cattr_accessor :schema_organisations
+  end
+
   let(:allowed_organisation_id) { 'department-of-serious-business' }
   let(:not_allowed_organisation_id) { 'ministry-of-funk' }
   let(:gds_editor) { User.new(permissions: %w(signin gds_editor)) }
   let(:departmental_editor) { User.new(permissions: %w(signin editor), organisation_content_id: allowed_organisation_id) }
   let(:departmental_writer) { User.new(permissions: ['signin'], organisation_content_id: allowed_organisation_id) }
-  let(:document_type_editor) { User.new(permissions: ['class_editor']) }
+  let(:document_type_editor) { User.new(permissions: ['test_document_editor']) }
 
   let(:document_type) {
-    Class.new(Document) do
-      cattr_accessor :schema_organisations
-    end
+    TestDocument
   }
 
   let(:allowed_document_type) {
