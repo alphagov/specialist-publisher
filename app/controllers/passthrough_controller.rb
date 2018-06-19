@@ -2,17 +2,21 @@ class PassthroughController < ApplicationController
   after_action :skip_authorization
 
   def index
-    current_organisation = document_models.find { |model| model.schema_organisations.include? current_user.organisation_content_id }
-
-    if current_user.gds_editor?
-      redirect_to "/aaib-reports"
-    elsif current_organisation
-      redirect_to "/" + current_organisation.slug
+    if first_permitted_format
+      redirect_to documents_path(document_type_slug: first_permitted_format.slug)
     else
       redirect_to error_path
     end
   end
 
   def error
+  end
+
+private
+
+  def first_permitted_format
+    @first_permitted_format ||= document_models.sort_by(&:name).find do |document_class|
+      DocumentPolicy.new(current_user, document_class).index?
+    end
   end
 end

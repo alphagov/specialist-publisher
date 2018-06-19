@@ -65,6 +65,19 @@ RSpec.feature "Access control", type: :feature do
       expect(page.status_code).to eq(200)
       expect(page).to have_content("Statutory instruments")
     end
+
+    scenario "visiting another format" do
+      visit "/cma-cases"
+
+      expect(page.current_path).to eq("/statutory-instruments")
+      expect(page).to have_content("You aren't permitted to access CMA Cases")
+    end
+
+    scenario "visiting the home page" do
+      visit "/"
+
+      expect(page.current_path).to eq("/statutory-instruments")
+    end
   end
 
   context "as an editor with incorrect organisation_content_id" do
