@@ -3,6 +3,10 @@
 <%= render "shared/form_group", f: f, field: :sifting_status do %>
   <%= f.select :sifting_status, facet_options(f, :sifting_status), {}, { class: "form-control" } %>
 <% end %>
+<% withdrawn_date_display = f.object.withdrawn_sifting_status? ? "block" : "none" %>
+<div class="withdrawn-date-wrapper" style="display:<%= withdrawn_date_display %>">
+  <%= render "shared/date_fields", f: f, field: :withdrawn_date, format: :statutory_instrument %>
+</div>
 <%= render "shared/form_group", f: f, field: :subject do %>
   <%= f.select :subject,
       facet_options(f, :subject),
@@ -42,4 +46,10 @@
         }
       }
   %>
+<% end %>
+<% content_for :document_ready do %>
+  var $withdrawnDateEl = $(".withdrawn-date-wrapper")
+  $("#statutory_instrument_sifting_status").change(function(e) {
+    $withdrawnDateEl.toggle(e.target.value === "withdrawn");
+  });
 <% end %>

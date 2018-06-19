@@ -64,4 +64,36 @@ RSpec.feature "Creating a Statutory Instrument", type: :feature do
 
     expect(page.body).to have_content("Created Statutory instrument")
   end
+
+  scenario "saving a withdrawn document" do
+    visit "/statutory-instruments/new"
+
+    fill_in "Title", with: "Statutory instrument"
+    fill_in "Summary", with: "This is a statutory instrument"
+    fill_in "Body", with: "## What is a statutory instrument?"
+    select "Withdrawn", from: "Sifting status"
+
+    fill_in "statutory_instrument_sift_end_date_year", with: "2017"
+    fill_in "statutory_instrument_sift_end_date_month", with: "02"
+    fill_in "statutory_instrument_sift_end_date_day", with: "01"
+
+    fill_in "statutory_instrument_laid_date_year", with: "2017"
+    fill_in "statutory_instrument_laid_date_month", with: "02"
+    fill_in "statutory_instrument_laid_date_day", with: "01"
+
+    select "Oil and gas", from: "Subject"
+    select "Org 1", from: "Publishing organisation"
+
+    click_on "Save"
+
+    expect(page.body).to have_content("Withdrawn date can't be blank")
+
+    fill_in "statutory_instrument_withdrawn_date_year", with: "2017"
+    fill_in "statutory_instrument_withdrawn_date_month", with: "02"
+    fill_in "statutory_instrument_withdrawn_date_day", with: "01"
+
+    click_on "Save"
+
+    expect(page.body).to have_content("Created Statutory instrument")
+  end
 end
