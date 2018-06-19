@@ -8,15 +8,6 @@ class DocumentsController < ApplicationController
   before_action :fetch_document, except: [:index, :new, :create]
   before_action :check_authorisation, if: :document_type_slug
 
-  def check_authorisation
-    if current_format
-      authorize current_format
-    else
-      flash[:danger] = "That format doesn't exist. If you feel you've reached this in error, contact your SPOC."
-      redirect_to root_path
-    end
-  end
-
   def index
     page = filtered_page_param(params[:page])
     per_page = filtered_per_page_param(params[:per_page])
@@ -100,6 +91,15 @@ class DocumentsController < ApplicationController
   end
 
 private
+
+  def check_authorisation
+    if current_format
+      authorize current_format
+    else
+      flash[:danger] = "That format doesn't exist. If you feel you've reached this in error, contact your SPOC."
+      redirect_to root_path
+    end
+  end
 
   def unknown_error_message
     support_url = Plek.new.external_url_for('support') + "/technical_fault_report/new"

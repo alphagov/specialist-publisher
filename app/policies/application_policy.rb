@@ -22,6 +22,6 @@ class ApplicationPolicy
   end
 
   def document_type_editor?
-    user.permissions.include?(document_class.class.name.underscore + "_editor")
+    user.permissions.include?(document_class.name.underscore + "_editor")
   end
 end
