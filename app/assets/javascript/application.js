@@ -13,7 +13,9 @@ jQuery(function($) {
   // Add "select all"/"clear all" buttons to each select2 dropdown menu
   // but exclude those that aren't for multiple selection
   var dropdownSelectAll = new GOVUKAdmin.Modules.DropdownSelectAll();
-  dropdownSelectAll.start($("select.select2[multiple]"));
+  dropdownSelectAll.init($("select.select2[multiple]").not(".select-all-disabled"));
+  var dropdownClearAll = new GOVUKAdmin.Modules.DropdownClearAll();
+  dropdownClearAll.init($("select.select2[multiple]").not(".clear-all-disabled"));
 
   ////
   // Make a select2 that will create new values on return as you type them
