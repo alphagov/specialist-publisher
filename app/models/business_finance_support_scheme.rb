@@ -3,6 +3,7 @@ class BusinessFinanceSupportScheme < Document
   validates :business_stages, presence: true
   validates :continuation_link, presence: true
   validates :industries, presence: true
+  validates :regions, presence: true
   validates :types_of_support, presence: true
 
   FORMAT_SPECIFIC_FIELDS = %i(
@@ -10,6 +11,7 @@ class BusinessFinanceSupportScheme < Document
     business_stages
     continuation_link
     industries
+    regions
     types_of_support
     will_continue_on
   ).freeze
