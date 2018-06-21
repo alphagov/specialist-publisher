@@ -4,6 +4,7 @@
   "format_name": "Statutory instrument",
   "name": "Statutory instruments",
   "description": "Find statutory instruments",
+  "summary": "<p>Find proposed negative statutory instruments created under the EU (Withdrawal) Act 2018.</p><p>‘Proposed negative’ means the government is proposing that the statutory instruments don’t need to be debated in parliament.</p>",
   "filter": {
     "document_type": "statutory_instrument"
   },
