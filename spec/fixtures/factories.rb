@@ -424,7 +424,7 @@ FactoryBot.define do
   end
 
   factory :statutory_instrument, parent: :document do
-    base_path "/statutory-instruments/example-document"
+    base_path "/eu-withdrawal-act-2018-statutory-instruments/example-document"
     document_type "statutory_instrument"
 
     transient do
