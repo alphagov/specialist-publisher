@@ -24,7 +24,7 @@ class StatutoryInstrument < Document
   end
 
   def self.title
-    "Statutory instrument"
+    "EU Withdrawal Act 2018 statutory instrument"
   end
 
   def links

@@ -60,23 +60,23 @@ RSpec.feature "Access control", type: :feature do
     end
 
     scenario "visiting the statutory instruments format" do
-      visit "/statutory-instruments"
+      visit "/eu-withdrawal-act-2018-statutory-instruments"
 
       expect(page.status_code).to eq(200)
-      expect(page).to have_content("Statutory instruments")
+      expect(page).to have_content("EU Withdrawal Act 2018 statutory instruments")
     end
 
     scenario "visiting another format" do
       visit "/cma-cases"
 
-      expect(page.current_path).to eq("/statutory-instruments")
+      expect(page.current_path).to eq("/eu-withdrawal-act-2018-statutory-instruments")
       expect(page).to have_content("You aren't permitted to access CMA Cases")
     end
 
     scenario "visiting the home page" do
       visit "/"
 
-      expect(page.current_path).to eq("/statutory-instruments")
+      expect(page.current_path).to eq("/eu-withdrawal-act-2018-statutory-instruments")
     end
   end
 
