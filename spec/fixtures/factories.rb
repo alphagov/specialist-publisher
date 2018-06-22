@@ -433,7 +433,7 @@ FactoryBot.define do
           "laid_date" => "2018-01-01",
           "sift_end_date" => "2018-01-05",
           "sifting_status" => "open",
-          "subject" => ["oil-and-gas"],
+          "subject" => ["money"],
         }
       }
 
