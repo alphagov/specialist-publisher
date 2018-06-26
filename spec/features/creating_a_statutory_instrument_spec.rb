@@ -73,10 +73,6 @@ RSpec.feature "Creating a Statutory Instrument", type: :feature do
     fill_in "Body", with: "## What is a statutory instrument?"
     select "Withdrawn", from: "Sifting status"
 
-    fill_in "statutory_instrument_sift_end_date_year", with: "2017"
-    fill_in "statutory_instrument_sift_end_date_month", with: "02"
-    fill_in "statutory_instrument_sift_end_date_day", with: "01"
-
     fill_in "statutory_instrument_laid_date_year", with: "2017"
     fill_in "statutory_instrument_laid_date_month", with: "02"
     fill_in "statutory_instrument_laid_date_day", with: "01"
