@@ -33,16 +33,16 @@ RSpec.feature "Creating a Statutory Instrument", type: :feature do
   end
 
   scenario "getting to the new document page" do
-    visit "/statutory-instruments"
+    visit "/eu-withdrawal-act-2018-statutory-instruments"
 
-    click_link "Add another Statutory instrument"
+    click_link "Add another EU Withdrawal Act 2018 statutory instrument"
 
     expect(page.status_code).to eq(200)
-    expect(page.current_path).to eq("/statutory-instruments/new")
+    expect(page.current_path).to eq("/eu-withdrawal-act-2018-statutory-instruments/new")
   end
 
   scenario "saving valid form values" do
-    visit "/statutory-instruments/new"
+    visit "/eu-withdrawal-act-2018-statutory-instruments/new"
 
     fill_in "Title", with: "Statutory instrument"
     fill_in "Summary", with: "This is a statutory instrument"
@@ -66,7 +66,7 @@ RSpec.feature "Creating a Statutory Instrument", type: :feature do
   end
 
   scenario "saving a withdrawn document" do
-    visit "/statutory-instruments/new"
+    visit "/eu-withdrawal-act-2018-statutory-instruments/new"
 
     fill_in "Title", with: "Statutory instrument"
     fill_in "Summary", with: "This is a statutory instrument"
