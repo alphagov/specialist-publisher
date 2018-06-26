@@ -1,10 +1,12 @@
 class StatutoryInstrument < Document
   validates :laid_date, date: true
   validates :sift_end_date, date: true
+  validates :sift_end_date, absence: { message: "must be blank when withdrawn" }, if: :withdrawn_sifting_status?
   validates :sifting_status, presence: true
   validates :subject, presence: true
   validates :primary_publishing_organisation, presence: true
   validates :withdrawn_date, presence: true, date: true, if: :withdrawn_sifting_status?
+  validates :withdrawn_date, absence: { message: "must be blank if not withdrawn" }, unless: :withdrawn_sifting_status?
 
   FORMAT_SPECIFIC_FIELDS = %i(
     laid_date
