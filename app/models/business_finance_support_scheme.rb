@@ -20,6 +20,10 @@ class BusinessFinanceSupportScheme < Document
     super(params, FORMAT_SPECIFIC_FIELDS)
   end
 
+  def taxons
+    [BUSINESS_FINANCE_AND_SUPPORT_TAXON_ID]
+  end
+
   def self.exportable?
     true
   end

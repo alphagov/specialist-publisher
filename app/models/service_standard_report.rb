@@ -7,6 +7,10 @@ class ServiceStandardReport < Document
     super(params, FORMAT_SPECIFIC_FIELDS)
   end
 
+  def taxons
+    [DIGITAL_SERVICE_STANDARD_TAXON_ID]
+  end
+
   def self.title
     "Service Standard Report"
   end

@@ -19,6 +19,10 @@ class UtaacDecision < Document
     super(params, FORMAT_SPECIFIC_FIELDS)
   end
 
+  def taxons
+    [COURTS_SENTENCING_AND_TRIBUNALS_TAXON_ID]
+  end
+
   def self.title
     "UTAAC Decision"
   end

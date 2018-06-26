@@ -20,6 +20,10 @@ class CmaCase < Document
     super(params, FORMAT_SPECIFIC_FIELDS)
   end
 
+  def taxons
+    [COMPETITION_TAXON_ID]
+  end
+
   def self.title
     "CMA Case"
   end
