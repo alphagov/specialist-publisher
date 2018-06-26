@@ -32,7 +32,6 @@ RSpec.describe DocumentLinksPresenter do
 
       expect(presented_data[:content_id]).to eq('a-content-id')
       expect(presented_data[:links][:organisations]).to eq('an-organisation-id')
-      expect(presented_data[:links][:taxons]).to eq(nil)
       expect(presented_data[:links][:primary_publishing_organisation]).to eq([primary_publishing_organisation_id])
     end
   end
@@ -43,6 +42,6 @@ RSpec.describe DocumentLinksPresenter do
     links_presenter = DocumentLinksPresenter.new(document)
     presented_data = links_presenter.to_json
 
-    expect(presented_data[:links][:taxons]).to eq([DocumentLinksPresenter::BREXIT_CONTENT_ID])
+    expect(presented_data[:links][:taxons]).to eq([Document::BREXIT_TAXON_ID])
   end
 end
