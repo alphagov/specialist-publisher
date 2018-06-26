@@ -12,7 +12,6 @@ class BusinessFinanceSupportSchemeExportPresenter
       finder_schema.humanized_facet_name("business_sizes"),
       finder_schema.humanized_facet_name("business_stages"),
       finder_schema.humanized_facet_name("industries"),
-      finder_schema.humanized_facet_name("regions"),
       finder_schema.humanized_facet_name("types_of_support")
     ]
   end
@@ -32,7 +31,6 @@ class BusinessFinanceSupportSchemeExportPresenter
       finder_schema.humanized_facet_value('business_sizes', document.business_sizes).join(";"),
       finder_schema.humanized_facet_value('business_stages', document.business_stages).join(";"),
       finder_schema.humanized_facet_value('industries', document.industries).join(";"),
-      finder_schema.humanized_facet_value('regions', document.regions).join(";"),
       finder_schema.humanized_facet_value("types_of_support", document.types_of_support).join(";")
     ]
   end
