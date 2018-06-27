@@ -15,6 +15,10 @@ class EsiFund < Document
     super(params, FORMAT_SPECIFIC_FIELDS)
   end
 
+  def taxons
+    [EUROPEAN_FUNDS_TAXON_ID]
+  end
+
   def self.title
     "ESI Fund"
   end

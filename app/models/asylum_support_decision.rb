@@ -24,6 +24,10 @@ class AsylumSupportDecision < Document
     super(params, FORMAT_SPECIFIC_FIELDS)
   end
 
+  def taxons
+    [ASYLUM_DECISIONS_AND_APPEALS_TAXON_ID]
+  end
+
   def self.title
     "Asylum Support Decisions"
   end
