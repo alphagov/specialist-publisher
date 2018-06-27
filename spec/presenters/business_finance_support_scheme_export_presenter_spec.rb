@@ -16,7 +16,8 @@ RSpec.describe BusinessFinanceSupportSchemeExportPresenter do
         'Number of employees',
         'Business stage',
         'Industry',
-        'Type of support'
+        'Region',
+        'Type of support',
       ]
     end
   end
@@ -90,6 +91,18 @@ RSpec.describe BusinessFinanceSupportSchemeExportPresenter do
       document.industries = ['agriculture-and-food', 'information-technology-digital-and-creative']
       position = described_class.header_row.index('Industry')
       expect(subject.row[position]).to eq 'Agriculture and food;IT, digital and creative'
+    end
+
+    it 'includes the humanized version of the regions value in the correct field' do
+      document.regions = ['northern-ireland']
+      position = described_class.header_row.index('Region')
+      expect(subject.row[position]).to eq 'Northern Ireland'
+    end
+
+    it 'concatenates all values for regions with ;' do
+      document.regions = ['northern-ireland', 'scotland']
+      position = described_class.header_row.index('Region')
+      expect(subject.row[position]).to eq 'Northern Ireland;Scotland'
     end
 
     it 'includes the humanized version of the types_of_support value in the correct field' do

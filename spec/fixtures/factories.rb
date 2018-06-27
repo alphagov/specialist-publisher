@@ -223,6 +223,7 @@ FactoryBot.define do
           "business_stages" => ["start-up"],
           "continuation_link" => "https://www.gov.uk",
           "industries" => ["information-technology-digital-and-creative"],
+          "regions" => ["northern-ireland"],
           "types_of_support" => ["finance"],
           "will_continue_on" => "on GOV.UK",
         }
