@@ -1,49 +1,56 @@
-# Creating a new specialist document type
+# Creating a new specialist document format
 
 To create a new specialist document you will have to make changes to this
 application, [govuk-content-schemas][govuk-content-schemas] and
 [rummager][rummager]. You will not have to make any changes to frontend
 applications.
 
-## 1. Configure the specialist document schema
+## Create a new specialist document format in Specialist Publisher
 
-You'll have to make sure that when this app sends new documents to the
-publishing-api it can validate your request against the
-[govuk-content-schemas][govuk-content-schemas].
+### Create the schema
 
-## 2. Configure rummager
+See [CMA cases](https://github.com/alphagov/specialist-publisher/blob/master/lib/documents/schemas/cma_cases.json).
 
-You'll need to add the document type to search (the [rummager][rummager] application), so that it can
-index the new documents.
-
-[govuk-content-schemas]: https://github.com/alphagov/govuk-content-schemas
-[rummager]: https://github.com/alphagov/rummager
-
-## 3. Configure specialist-publisher
-
-You could use the [PR to create the International Development Fund](https://github.com/alphagov/specialist-publisher/pull/855) document as a
-template.
-
-The two most important things here are the document class, like [`AaibReport`](/app/models/aaib_report.rb), and the finder configuration file, like [aaib_reports.json](/lib/documents/schemas/aaib_reports.json).
-
-## 4. Deploy and publish
-
-Yes, deploy your code to the relevant environment. Publish an example of your new document.
-
-## 5 Run the rake task to publish all finders
-
-You'll need to manually run the [`publishing_api:publish_finders`](lib/tasks/publishing_api.rake) rake task to ensure that the finders are correctly published and that all metadata and facets for your new document type are made available.
-
-You can do this through Jenkins or, if you are running from the console, the following will run the rake task:
-
+You'll need to generate your own UUIDs for it, e.g.:
 ```
-sudo -u deploy govuk_setenv specialist-publisher bundle exec rake publishing_api:publish_finders
+$ irb
+irb(main):001:0> require "securerandom"
+=> true
+irb(main):002:0> SecureRandom.uuid
+=> "5087e8b6-ee54-40f9-b592-8c2813c7037d"
 ```
 
-## 6 Reindex rummager
+### Create the model
 
-On one of the `search-api` boxes, `cd` to `/var/apps/rummager` and run this rake task. This will take some time (at writing a few hours).
+See [CMA cases](https://github.com/alphagov/specialist-publisher/blob/master/app/models/cma_case.rb)
 
-```
-govuk_setenv rummager bundle exec rake rummager:migrate_schema CONFIRM_INDEX_MIGRATION_START=1 RUMMAGER_INDEX=govuk
-```
+### Create the view template
+
+[CMA cases](https://github.com/alphagov/specialist-publisher/blob/master/app/views/metadata_fields/_cma_cases.html.erb)
+
+## Configure rummager
+
+### Add the schema
+
+Rummager needs a copy of a schema very similar to the one in Specialist Publisher.
+
+See [CMA cases](https://github.com/alphagov/rummager/blob/master/config/schema/elasticsearch_types/cma_case.json).
+
+You also need to
+[tell Rummager about the format](https://github.com/alphagov/rummager/blob/master/config/govuk_index/migrated_formats.yaml#L20)
+so it will allow it to be indexed.
+
+## Add a schema to govuk-content-schemas
+
+1. Add the format to [this list](https://github.com/alphagov/govuk-content-schemas/blob/master/formats/specialist_document.jsonnet#L2-L22)
+2. Add any new field definitions to [this file](https://github.com/alphagov/govuk-content-schemas/blob/master/formats/shared/definitions/_specialist_document.jsonnet)
+3. Add examples [as instructed](https://github.com/alphagov/govuk-content-schemas/blob/master/docs/adding-a-new-schema.md#examples)
+4. Follow the rest of [the workflow](https://github.com/alphagov/govuk-content-schemas/blob/master/docs/suggested-workflows.md)
+
+## Deploy and publish
+
+Once you're ready to ship your code to an environment,
+
+1. Deploy Specialist Publisher, Rummager, and govuk-content-schemas.
+2. Run the "Search reindex for new schema" Jenkins job.  This takes around 45 minutes.
+3. Use the "Run rake task" Jenkins job to run `publishing_api:publish_finders` or `publishing_api:publish_finder[your_format_name_based_on_the_schema_file]` against the specialist publisher app on a backend machine.
