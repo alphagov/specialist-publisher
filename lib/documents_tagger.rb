@@ -32,10 +32,22 @@ private
     document_type.camelize.constantize.new.taxons
   end
 
+  def editions_enum(params = {})
+    enum = Services.publishing_api.get_paged_editions(params)
+    Enumerator.new do |yielder|
+      enum.each do |response|
+        response
+          .to_h
+          .fetch('results', [])
+          .each { |result| yielder << result }
+      end
+    end
+  end
+
   def all_documents
-    Services.publishing_api.get_content_items_enum(
+    editions_enum(
       publishing_app: 'specialist-publisher',
-      document_type: all_document_types,
+      document_types: all_document_types,
       fields: %i[content_id document_type base_path]
     ).lazy
   end
