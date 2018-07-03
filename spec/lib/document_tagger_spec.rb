@@ -44,8 +44,8 @@ RSpec.describe DocumentsTagger do
   end
 
   def get_content_items_enum_returns(return_value)
-    allow(Services.publishing_api).to receive(:get_content_items_enum).with(
-      hash_including(document_type: %w[document_type_one document_type_two])
-    ).and_return(return_value)
+    allow(Services.publishing_api).to receive(:get_paged_editions).with(
+      hash_including(document_types: %w[document_type_one document_type_two])
+    ).and_return([{ 'results' => return_value }].to_enum)
   end
 end
