@@ -9,8 +9,10 @@
     "document_type": "employment_tribunal_decision"
   },
   "show_summaries": true,
+  "editing_organisations": [
+    "dcc907d6-433c-42df-9ffb-d9c68be5dc4d"
+  ],
   "organisations": [
-    "dcc907d6-433c-42df-9ffb-d9c68be5dc4d",
     "6f757605-ab8f-4b62-84e4-99f79cf085c2",
     "8bb37087-a5a7-4493-8afe-900b36ebc927"
   ],

@@ -6,7 +6,8 @@ class ApplicationPolicy
   end
 
   def user_organisation_owns_document_type?
-    document_class.schema_organisations.include?(user.organisation_content_id)
+    document_class.schema_organisations.include?(user.organisation_content_id) ||
+      document_class.schema_editing_organisations.include?(user.organisation_content_id)
   end
 
   def departmental_editor?
