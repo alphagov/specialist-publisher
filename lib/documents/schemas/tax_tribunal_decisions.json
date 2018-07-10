@@ -10,8 +10,10 @@
   },
   "default_order": "-tribunal_decision_decision_date",
   "show_summaries": true,
+  "editing_organisations": [
+    "dcc907d6-433c-42df-9ffb-d9c68be5dc4d"
+  ],
   "organisations": [
-    "dcc907d6-433c-42df-9ffb-d9c68be5dc4d",
     "6f757605-ab8f-4b62-84e4-99f79cf085c2",
     "1a68b2cc-eb52-4528-8989-429f710da00f"
   ],

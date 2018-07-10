@@ -170,8 +170,16 @@ class Document
     finder_schema.organisations
   end
 
+  def schema_editing_organisations
+    finder_schema.editing_organisations
+  end
+
   def self.schema_organisations
     new.schema_organisations
+  end
+
+  def self.schema_editing_organisations
+    new.schema_editing_organisations
   end
 
   def format_specific_metadata

@@ -6,12 +6,13 @@ class FinderSchema
     end
   end
 
-  attr_reader :base_path, :organisations, :format, :content_id
+  attr_reader :base_path, :organisations, :format, :content_id, :editing_organisations
 
   def initialize(schema_type)
     @schema ||= load_schema_for(schema_type)
     @base_path = schema.fetch("base_path")
     @organisations = schema.fetch("organisations", [])
+    @editing_organisations = schema.fetch("editing_organisations", [])
     @format = schema.fetch("filter", {}).fetch("document_type")
     @content_id = schema.fetch("content_id")
   end

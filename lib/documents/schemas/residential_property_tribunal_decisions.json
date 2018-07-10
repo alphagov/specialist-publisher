@@ -9,8 +9,10 @@
     "document_type": "residential_property_tribunal_decision"
   },
   "show_summaries": true,
+  "editing_organisations": [
+    "dcc907d6-433c-42df-9ffb-d9c68be5dc4d"
+  ],
   "organisations": [
-    "dcc907d6-433c-42df-9ffb-d9c68be5dc4d",
     "6f757605-ab8f-4b62-84e4-99f79cf085c2",
     "bb2b028f-efaa-44fd-b3f8-971b25cb51a2"
   ],
