@@ -1,5 +1,8 @@
 Rails.application.routes.draw do
-  get '/healthcheck', to: proc { [200, {}, ['OK']] }
+  get "/healthcheck", to: GovukHealthcheck.rack_response(
+    GovukHealthcheck::SidekiqRedis,
+  )
+
   get '/rebuild-healthcheck', to: proc { [200, {}, ['OK']] }
   post '/preview', to: 'govspeak#preview'
   get '/error', to: 'passthrough#error'
