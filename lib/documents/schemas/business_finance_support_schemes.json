@@ -96,7 +96,7 @@
     {
       "key": "regions",
       "name": "Region",
-      "type": "text",
+      "type": "hidden",
       "preposition": "for businesses in",
       "display_as_result_metadata": false,
       "filterable": true,
