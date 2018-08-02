@@ -1,0 +1,44 @@
+{
+  "ignored_warnings": [
+    {
+      "warning_type": "Dynamic Render Path",
+      "warning_code": 15,
+      "fingerprint": "1710d332aa168aed33f01c22c64698cfec18b7dfa3be0c5ac696530205a5ce57",
+      "check_name": "Render",
+      "message": "Render path contains parameter value",
+      "file": "app/views/documents/edit.html.erb",
+      "line": 24,
+      "link": "https://brakemanscanner.org/docs/warning_types/dynamic_render_path/",
+      "code": "render(partial => \"metadata_fields/#{params[:document_type_slug].underscore}\", { :locals => ({ :f => FormBuilder.new }) })",
+      "render_path": [{"type":"controller","class":"DocumentsController","method":"edit","line":45,"file":"app/controllers/documents_controller.rb"}],
+      "location": {
+        "type": "template",
+        "template": "documents/edit"
+      },
+      "user_input": "params[:document_type_slug].underscore",
+      "confidence": "Medium",
+      "note": "The document_type_slug is checked by the check_authorisation method which checks that the current_format is set. If it doesn't exist, then the template won't be rendered."
+    },
+    {
+      "warning_type": "Dynamic Render Path",
+      "warning_code": 15,
+      "fingerprint": "d34a7635364873f3063b096bc40cdb17b804fef975b7fe9b84a8d1b1973477c5",
+      "check_name": "Render",
+      "message": "Render path contains parameter value",
+      "file": "app/views/documents/new.html.erb",
+      "line": 20,
+      "link": "https://brakemanscanner.org/docs/warning_types/dynamic_render_path/",
+      "code": "render(partial => \"metadata_fields/#{params[:document_type_slug].underscore}\", { :locals => ({ :f => FormBuilder.new }) })",
+      "render_path": [{"type":"controller","class":"DocumentsController","method":"create","line":31,"file":"app/controllers/documents_controller.rb"}],
+      "location": {
+        "type": "template",
+        "template": "documents/new"
+      },
+      "user_input": "params[:document_type_slug].underscore",
+      "confidence": "Medium",
+      "note": "The document_type_slug is checked by the check_authorisation method which checks that the current_format is set. If it doesn't exist, then the template won't be rendered."
+    }
+  ],
+  "updated": "2018-08-02 15:05:11 +0100",
+  "brakeman_version": "4.3.1"
+}
