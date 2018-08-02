@@ -39,6 +39,26 @@
       "note": "It's not unsafe as it's from a new Attachment. There is no user input involved."
     },
     {
+      "warning_type": "Mass Assignment",
+      "warning_code": 70,
+      "fingerprint": "79a8953064431979892bbf285e301dc8c06c8d9080beea44507c660d7a4841f5",
+      "check_name": "MassAssignment",
+      "message": "Parameters should be whitelisted for mass assignment",
+      "file": "app/controllers/documents_controller.rb",
+      "line": 147,
+      "link": "https://brakemanscanner.org/docs/warning_types/mass_assignment/",
+      "code": "params[current_format.document_type].permit!",
+      "render_path": null,
+      "location": {
+        "type": "method",
+        "class": "DocumentsController",
+        "method": "permitted_params"
+      },
+      "user_input": null,
+      "confidence": "Medium",
+      "note": "Although we pass everything into the model, only allowed fields are set. We use set_attribute and pass in the valid fields fro that particular document type."
+    },
+    {
       "warning_type": "Dynamic Render Path",
       "warning_code": 15,
       "fingerprint": "d34a7635364873f3063b096bc40cdb17b804fef975b7fe9b84a8d1b1973477c5",
@@ -58,6 +78,6 @@
       "note": "The document_type_slug is checked by the check_authorisation method which checks that the current_format is set. If it doesn't exist, then the template won't be rendered."
     }
   ],
-  "updated": "2018-08-02 15:08:05 +0100",
+  "updated": "2018-08-02 15:17:14 +0100",
   "brakeman_version": "4.3.1"
 }
