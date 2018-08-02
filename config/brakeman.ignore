@@ -20,6 +20,25 @@
       "note": "The document_type_slug is checked by the check_authorisation method which checks that the current_format is set. If it doesn't exist, then the template won't be rendered."
     },
     {
+      "warning_type": "Cross-Site Scripting",
+      "warning_code": 4,
+      "fingerprint": "4febd038b878af391d4ed2ba73417e43de948a9cda2ab88f5534e49e652a02e7",
+      "check_name": "LinkToHref",
+      "message": "Potentially unsafe model attribute in link_to href",
+      "file": "app/views/shared/_attachments_form.html.erb",
+      "line": 7,
+      "link": "https://brakemanscanner.org/docs/warning_types/link_to_href",
+      "code": "link_to(Attachment.new.filename, Attachment.new.url)",
+      "render_path": [{"type":"controller","class":"AttachmentsController","method":"new","line":11,"file":"app/controllers/attachments_controller.rb"},{"type":"template","name":"attachments/new","line":5,"file":"app/views/attachments/new.html.erb"}],
+      "location": {
+        "type": "template",
+        "template": "shared/_attachments_form"
+      },
+      "user_input": "Attachment.new.url",
+      "confidence": "Weak",
+      "note": "It's not unsafe as it's from a new Attachment. There is no user input involved."
+    },
+    {
       "warning_type": "Dynamic Render Path",
       "warning_code": 15,
       "fingerprint": "d34a7635364873f3063b096bc40cdb17b804fef975b7fe9b84a8d1b1973477c5",
@@ -39,6 +58,6 @@
       "note": "The document_type_slug is checked by the check_authorisation method which checks that the current_format is set. If it doesn't exist, then the template won't be rendered."
     }
   ],
-  "updated": "2018-08-02 15:05:11 +0100",
+  "updated": "2018-08-02 15:08:05 +0100",
   "brakeman_version": "4.3.1"
 }
