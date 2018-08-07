@@ -5,6 +5,14 @@
 //= require form_change_protection
 
 jQuery(function($) {
+  var token = $('meta[name="csrf-token"]').attr('content');
+
+  $.ajaxSetup({
+    beforeSend: function(xhr) {
+      xhr.setRequestHeader('X-CSRF-Token', token);
+    }
+  });
+
   $(".select2").select2({
     placeholder: $(this).data('placeholder')
   });
