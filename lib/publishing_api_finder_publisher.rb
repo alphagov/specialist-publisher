@@ -43,12 +43,7 @@ private
       finder[:file],
     )
 
-    noun = if pre_production?(finder)
-      "pre-production finder"
-    else
-      "finder"
-    end
-
+    noun = (pre_production?(finder) ? "pre-production finder" : "finder")
     logger.info("Publishing #{noun} '#{finder[:file]['name']}'")
 
     Services.publishing_api.put_content(finder_payload.content_id, finder_payload.to_json)
