@@ -43,7 +43,8 @@ private
       finder[:file],
     )
 
-    logger.info("Publishing '#{finder[:file]['name']}' finder")
+    noun = (pre_production?(finder) ? "pre-production finder" : "finder")
+    logger.info("Publishing #{noun} '#{finder[:file]['name']}'")
 
     Services.publishing_api.put_content(finder_payload.content_id, finder_payload.to_json)
     Services.publishing_api.patch_links(finder_payload.content_id, links_payload.to_json)
