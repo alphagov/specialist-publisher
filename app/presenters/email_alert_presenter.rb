@@ -11,7 +11,6 @@ class EmailAlertPresenter
       description: summary,
       change_note: change_note,
       subject: subject,
-      body: body,
       tags: tags,
       urgent: urgent,
       document_type: document.document_type,
@@ -31,36 +30,12 @@ class EmailAlertPresenter
 
 private
 
-  def body
-    if document.document_type == "medical_safety_alert"
-      standard_body("email_alerts/medical_safety_alerts/publication")
-    else
-      standard_body("email_alerts/publication")
-    end
-  end
-
   # The tags are sent to email-alert-api and matched against subscriberlists.
   def tags
     {
       # This format should be the same as https://github.com/alphagov/finder-frontend/blob/2c1d5f25e7e4212795b485b6e4c290c6764c813c/app/controllers/email_alert_subscriptions_controller.rb#L41
       format: document.format
     }.deep_merge(document.format_specific_metadata.reject { |_k, v| v.blank? })
-  end
-
-  def standard_body(template_path)
-    view_renderer.render(
-      template: template_path,
-      formats: ["html"],
-      locals:   {
-        document_title: document.title,
-        document_summary: document.summary,
-        document_url: File.join(Plek.current.website_root, document.base_path),
-        document_change_note: document.change_note,
-        document_org_title: org_title[document.document_type],
-        document_noun: document_noun[document.document_type],
-        updated_or_published: updated_or_published,
-      }
-    )
   end
 
   def org_title
@@ -147,27 +122,7 @@ private
 
   def extra_options
     {
-      header: header,
-      footer: footer,
       footnote: footnote,
     }.reject { |_k, v| v.nil? }
-  end
-
-  def view_renderer
-    ActionView::Base.new(Rails.root.join("app/views"))
-  end
-
-  def header
-    view_renderer.render(
-      template: "email_alerts/publication_header",
-      formats: ["html"],
-    )
-  end
-
-  def footer
-    view_renderer.render(
-      template: "email_alerts/publication_footer",
-      formats: ["html"],
-    )
   end
 end

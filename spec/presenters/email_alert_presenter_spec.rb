@@ -26,24 +26,17 @@ RSpec.describe EmailAlertPresenter do
         expect(presented_data[:subject]).to include(cma_case_payload["title"])
         expect(presented_data[:subject]).not_to include("updated")
         expect(presented_data_redrafted[:subject]).to include("updated")
-        expect(presented_data[:body]).to include(cma_case_payload["description"])
-        expect(presented_data[:body]).to include(cma_case_payload["title"])
-        expect(presented_data[:body]).to include("For further information on this published case")
-        expect(presented_data_redrafted[:body]).to include("For further information on this updated case")
         expect(presented_data[:tags][:format]).to eq(cma_case_payload["document_type"])
         expect(presented_data[:tags][:case_type]).to eq(cma_case_payload["details"]["metadata"]["case_type"])
         expect(presented_data[:document_type]).to eq(cma_case_payload["document_type"])
         expect(presented_data[:public_updated_at]).to include(cma_case_payload["public_updated_at"])
         expect(presented_data[:base_path]).to include(cma_case_payload["base_path"])
-        expect(presented_data[:footer]).to include("SUBSCRIBER_PREFERENCES_URL")
-        expect(presented_data[:header]).to include("govuk-email-header")
         expect(presented_data[:priority]).to eq("normal")
 
         expect(presented_data.keys).to match_array(%i(
-          title description change_note subject body tags document_type
+          title description change_note subject tags document_type
           email_document_supertype government_document_supertype content_id
-          public_updated_at publishing_app base_path urgent header footer
-          priority
+          public_updated_at publishing_app base_path urgent priority
         ))
       end
     end
@@ -60,7 +53,6 @@ RSpec.describe EmailAlertPresenter do
         email_alert_presenter = EmailAlertPresenter.new(medical_safety_alert)
         presented_data = email_alert_presenter.to_json
 
-        expect(presented_data[:body]).to include(mhra_email_address)
         expect(presented_data[:document_type]).to eq("medical_safety_alert")
         expect(presented_data[:priority]).to eq("high")
         expect(presented_data[:footnote]).to eq("If you have any questions about the medical content in this email, contact MHRA on info@mhra.gov.uk")
