@@ -36,7 +36,6 @@ group :development, :test do
   gem 'puma'
   gem 'rspec-rails'
   gem 'simplecov', require: false
-  gem 'simplecov-rcov', require: false
   gem 'timecop'
 end
 
