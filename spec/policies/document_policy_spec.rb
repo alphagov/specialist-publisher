@@ -1,10 +1,7 @@
 require 'spec_helper'
 
 RSpec.describe DocumentPolicy do
-  class TestDocument < Document
-    cattr_accessor :schema_organisations
-    cattr_accessor :schema_editing_organisations
-  end
+  class TestDocument < Document; end
 
   let(:allowed_organisation_id) { 'department-of-serious-business' }
   let(:allowed_editing_organisation_id) { 'hm-serious-business-countersigners' }
@@ -16,22 +13,27 @@ RSpec.describe DocumentPolicy do
   let(:other_departmental_writer) { User.new(permissions: ['signin'], organisation_content_id: allowed_editing_organisation_id) }
   let(:document_type_editor) { User.new(permissions: ['test_document_editor']) }
 
-  let(:document_type) {
+  def allowed_document_type
+    allow(TestDocument)
+      .to(receive(:schema_organisations))
+      .and_return([allowed_organisation_id])
+    allow(TestDocument)
+      .to(receive(:schema_editing_organisations))
+      .and_return([allowed_editing_organisation_id])
+
     TestDocument
-  }
+  end
 
-  let(:allowed_document_type) {
-    document_type.tap do |dt|
-      dt.schema_organisations = [allowed_organisation_id]
-      dt.schema_editing_organisations = [allowed_editing_organisation_id]
-    end
-  }
+  def not_allowed_document_type
+    allow(TestDocument)
+      .to(receive(:schema_organisations))
+      .and_return([not_allowed_organisation_id])
+    allow(TestDocument)
+      .to(receive(:schema_editing_organisations))
+      .and_return([])
 
-  let(:not_allowed_document_type) {
-    document_type.tap do |dt|
-      dt.schema_organisations = [not_allowed_organisation_id]
-    end
-  }
+    TestDocument
+  end
 
   permissions :index?, :show?, :new?, :create?, :edit?, :update? do
     it 'denies access to users from another organisation' do
