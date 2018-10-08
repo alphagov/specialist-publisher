@@ -12,6 +12,7 @@ class EmailAlertPresenter
       change_note: change_note,
       subject: subject,
       tags: tags,
+      links: links,
       urgent: urgent,
       document_type: document.document_type,
       email_document_supertype: "other",
@@ -36,6 +37,10 @@ private
       # This format should be the same as https://github.com/alphagov/finder-frontend/blob/2c1d5f25e7e4212795b485b6e4c290c6764c813c/app/controllers/email_alert_subscriptions_controller.rb#L41
       format: document.format
     }.deep_merge(document.format_specific_metadata.reject { |_k, v| v.blank? })
+  end
+
+  def links
+    DocumentLinksPresenter.new(document).to_json[:links]
   end
 
   def org_title
