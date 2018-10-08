@@ -4,6 +4,7 @@ gem 'rails', '5.0.2'
 
 gem 'bootstrap-kaminari-views', '0.0.5'
 gem 'govuk_sidekiq', '~> 3.0'
+gem 'govuk_test'
 gem 'hashdiff'
 gem 'jquery-rails', '~> 4.3.3'
 gem "kaminari"
@@ -26,8 +27,6 @@ gem "govuk_app_config", "~> 1.10"
 group :development, :test do
   gem 'better_errors'
   gem 'binding_of_caller'
-  gem "capybara"
-  gem 'capybara-webkit'
   gem 'database_cleaner'
   gem 'factory_bot'
   gem 'govuk-content-schema-test-helpers'

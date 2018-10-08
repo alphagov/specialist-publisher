@@ -40,6 +40,8 @@ GEM
       tzinfo (~> 1.1)
     addressable (2.5.2)
       public_suffix (>= 2.0.2, < 4.0)
+    archive-zip (0.11.0)
+      io-like (~> 0.3.0)
     arel (7.1.4)
     ast (2.4.0)
     autoprefixer-rails (8.3.0)
@@ -68,9 +70,11 @@ GEM
       rack-test (>= 0.6.3)
       regexp_parser (~> 1.2)
       xpath (~> 3.2)
-    capybara-webkit (1.15.1)
-      capybara (>= 2.3, < 4.0)
-      json
+    childprocess (0.9.0)
+      ffi (~> 1.0, >= 1.0.11)
+    chromedriver-helper (2.1.0)
+      archive-zip (~> 0.10)
+      nokogiri (~> 1.8)
     coderay (1.1.2)
     commander (4.4.7)
       highline (~> 2.0.0)
@@ -148,6 +152,11 @@ GEM
       sidekiq (>= 5, < 6)
       sidekiq-logging-json (~> 0.0)
       sidekiq-statsd (~> 0.1)
+    govuk_test (0.3.1)
+      capybara
+      chromedriver-helper
+      puma
+      selenium-webdriver
     hashdiff (0.3.7)
     hashie (3.5.7)
     highline (2.0.0)
@@ -156,6 +165,7 @@ GEM
       domain_name (~> 0.5)
     i18n (0.9.5)
       concurrent-ruby (~> 1.0)
+    io-like (0.3.0)
     jaro_winkler (1.5.1)
     jquery-rails (4.3.3)
       rails-dom-testing (>= 1, < 3)
@@ -326,6 +336,7 @@ GEM
     rubocop-rspec (1.29.0)
       rubocop (>= 0.58.0)
     ruby-progressbar (1.10.0)
+    rubyzip (1.2.2)
     safe_yaml (1.0.4)
     sanitize (4.6.6)
       crass (~> 1.0.2)
@@ -347,6 +358,9 @@ GEM
       sass (~> 3.5.5)
     select2-rails (3.5.10)
       thor (~> 0.14)
+    selenium-webdriver (3.141.0)
+      childprocess (~> 0.5)
+      rubyzip (~> 1.2, >= 1.2.2)
     sentry-raven (2.7.4)
       faraday (>= 0.7.6, < 1.0)
     sidekiq (5.1.3)
@@ -409,8 +423,6 @@ DEPENDENCIES
   better_errors
   binding_of_caller
   bootstrap-kaminari-views (= 0.0.5)
-  capybara
-  capybara-webkit
   database_cleaner
   factory_bot
   gds-api-adapters (~> 54.1.3)
@@ -422,6 +434,7 @@ DEPENDENCIES
   govuk_app_config (~> 1.10)
   govuk_frontend_toolkit (= 8.1.0)
   govuk_sidekiq (~> 3.0)
+  govuk_test
   hashdiff
   jquery-rails (~> 4.3.3)
   kaminari
@@ -442,4 +455,4 @@ DEPENDENCIES
   webmock
 
 BUNDLED WITH
-   1.16.2
+   1.16.6
