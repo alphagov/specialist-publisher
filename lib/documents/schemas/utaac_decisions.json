@@ -2035,6 +2035,42 @@
           "value": "tribunal-procedure-and-practice-tribunal-practice"
         },
         {
+          "label": "Universal Credit - Sanctions",
+          "value": "universal-credit-sanctions"
+        },
+        {
+          "label":  "Universal Credit - Standard Allowance",
+          "value":  "universal-credit-standard-allowance"
+        },
+        {
+          "label":  "Universal Credit - Limited Capability for work",
+          "value":  "universal-credit-limited-capability-for-work"
+        },
+         {
+          "label":  "Universal Credit - Child Element",
+          "value":  "universal-credit-child-element"
+        },
+         {
+          "label":  "Universal Credit - Child Element Disabled Child Addition",
+          "value":  "universal-credit-child-element-disabled-child-addition"
+        },
+         {
+          "label":  "Universal Credit - Child Care",
+          "value":  "universal-credit-child-care"
+        },
+         {
+          "label":  "Universal Credit - Care",
+          "value":  "universal-credit-care"
+        },
+         {
+          "label":  "Universal Credit - Housing",
+          "value":  "universal-credit-housing"
+        },
+        {
+          "label":  "Universal Credit - Other",
+          "value":  "universal-credit-other"
+        },
+        {
           "label": "War pensions and armed forces compensation - Armed Forces Compensation Scheme",
           "value": "war-pensions-and-armed-forces-compensation-armed-forces-compensation-scheme"
         },
