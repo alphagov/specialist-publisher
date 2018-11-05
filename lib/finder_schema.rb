@@ -32,7 +32,7 @@ class FinderSchema
     case
     when type == "text" && allowed_values_for(facet_key).empty?
       value
-    when type == "text"
+    when %w(hidden text).include?(type)
       Array(value).map do |v|
         value_label_mapping_for(facet_key, v).fetch("label") { value }
       end

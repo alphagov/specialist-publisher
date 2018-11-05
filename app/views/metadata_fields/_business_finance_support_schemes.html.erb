@@ -46,6 +46,20 @@
       }
   %>
 <% end %>
+<%= render "shared/form_group", f: f, field: :regions do %>
+  <%= f.select :regions,
+      facet_options(f, :regions),
+      {},
+      {
+        class: 'select2 form-control',
+        multiple: true,
+        data:
+        {
+          placeholder: 'Select regions'
+        }
+      }
+  %>
+<% end %>
 <%= render layout: "shared/form_group", locals: { f: f, field: :business_stages } do %>
   <%= f.select :business_stages,
       facet_options(f, :business_stages),
