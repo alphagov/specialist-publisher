@@ -93,7 +93,7 @@ GEM
     faraday (0.12.2)
       multipart-post (>= 1.2, < 3)
     ffi (1.9.25)
-    gds-api-adapters (54.1.0)
+    gds-api-adapters (54.1.2)
       addressable
       link_header
       null_logger
@@ -247,7 +247,7 @@ GEM
     puma (3.12.0)
     pundit (2.0.0)
       activesupport (>= 3.0.0)
-    rack (2.0.5)
+    rack (2.0.6)
     rack-cache (1.8.0)
       rack (>= 0.4)
     rack-protection (2.0.3)
@@ -413,7 +413,7 @@ DEPENDENCIES
   capybara-webkit
   database_cleaner
   factory_bot
-  gds-api-adapters (~> 54.1.0)
+  gds-api-adapters (~> 54.1.2)
   gds-sso (= 13.6.0)
   govspeak (~> 5.6.0)
   govuk-content-schema-test-helpers
