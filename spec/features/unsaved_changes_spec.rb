@@ -33,7 +33,7 @@ RSpec.feature "Unsaved changes to a document", type: :feature, js: true do
     end
 
     scenario "when an 'Your documents' is clicked and the confirmation is cancelled" do
-      dismiss_confirm message do
+      dismiss_confirm do
         click_link "Your documents"
       end
 
@@ -41,7 +41,7 @@ RSpec.feature "Unsaved changes to a document", type: :feature, js: true do
     end
 
     scenario "when an 'Your documents' is clicked and the confirmation is accepted" do
-      accept_confirm message do
+      accept_confirm do
         click_link "Your documents"
       end
 
@@ -49,7 +49,7 @@ RSpec.feature "Unsaved changes to a document", type: :feature, js: true do
     end
 
     scenario "when attempting to close the current window and cancelling the confirmation" do
-      dismiss_confirm message do
+      dismiss_confirm do
         page.evaluate_script "window.close();"
       end
 
@@ -57,7 +57,7 @@ RSpec.feature "Unsaved changes to a document", type: :feature, js: true do
     end
 
     scenario "when attempting to go back a page and accepting the confirmation" do
-      accept_confirm message do
+      accept_confirm do
         page.evaluate_script "window.history.back();"
       end
 
@@ -65,7 +65,7 @@ RSpec.feature "Unsaved changes to a document", type: :feature, js: true do
     end
 
     scenario "when attempting to go back a page and cancelling the confirmation" do
-      dismiss_confirm message do
+      dismiss_confirm do
         page.evaluate_script "window.history.back();"
       end
 
@@ -103,7 +103,7 @@ RSpec.feature "Unsaved changes to a document", type: :feature, js: true do
     end
 
     scenario "when an 'Add attachment' is clicked and the confirmation is cancelled" do
-      dismiss_confirm message do
+      dismiss_confirm do
         click_link "Add attachment"
       end
 
@@ -111,7 +111,7 @@ RSpec.feature "Unsaved changes to a document", type: :feature, js: true do
     end
 
     scenario "when an 'Add attachment' is clicked and the confirmation is accepted" do
-      accept_confirm message do
+      accept_confirm do
         click_link "Add attachment"
       end
 
@@ -119,7 +119,7 @@ RSpec.feature "Unsaved changes to a document", type: :feature, js: true do
     end
 
     scenario "when attempting to close the current window and cancelling the confirmation" do
-      dismiss_confirm message do
+      dismiss_confirm do
         page.evaluate_script "window.close();"
       end
 
@@ -127,7 +127,7 @@ RSpec.feature "Unsaved changes to a document", type: :feature, js: true do
     end
 
     scenario "when attempting to go back a page and accepting the confirmation" do
-      accept_confirm message do
+      accept_confirm do
         page.evaluate_script "window.history.back();"
       end
 
@@ -135,7 +135,7 @@ RSpec.feature "Unsaved changes to a document", type: :feature, js: true do
     end
 
     scenario "when attempting to go back a page and cancelling the confirmation" do
-      dismiss_confirm message do
+      dismiss_confirm do
         page.evaluate_script "window.history.back();"
       end
 
