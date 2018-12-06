@@ -75,8 +75,6 @@ RSpec.feature "Unsaved changes to a document", type: :feature, js: true do
     scenario "when changes are saved" do
       click_button "Save as draft"
 
-      expect(page.status_code).to eq(200)
-
       within(".alert-success") do
         expect(page).to have_content("Created Example CMA Case")
       end
@@ -144,8 +142,6 @@ RSpec.feature "Unsaved changes to a document", type: :feature, js: true do
 
     scenario "when changes are saved" do
       click_button "Save as draft"
-
-      expect(page.status_code).to eq(200)
 
       within(".alert-success") do
         expect(page).to have_content("Updated Amended example document")
