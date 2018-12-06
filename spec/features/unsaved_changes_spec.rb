@@ -29,7 +29,7 @@ RSpec.feature "Unsaved changes to a document", type: :feature, js: true do
       fill_in "[cma_case]closed_date(1i)", with: "2015"
       fill_in "[cma_case]closed_date(2i)", with: "01"
       fill_in "[cma_case]closed_date(3i)", with: "01"
-      select "Energy", from: "cma_case_market_sector", visible: false # The hidden select2 select element
+      select2 "Energy", from: "Market sector"
     end
 
     scenario "when an 'Your documents' is clicked and the confirmation is cancelled" do
@@ -99,7 +99,7 @@ RSpec.feature "Unsaved changes to a document", type: :feature, js: true do
       fill_in "[cma_case]opened_date(1i)", with: "2014"
       fill_in "[cma_case]opened_date(2i)", with: "02"
       fill_in "[cma_case]opened_date(3i)", with: "02"
-      select "Energy", from: "cma_case_market_sector", visible: false # The hidden select2 select element
+      select2 "Chemicals", from: "Market sector"
     end
 
     scenario "when an 'Add attachment' is clicked and the confirmation is cancelled" do

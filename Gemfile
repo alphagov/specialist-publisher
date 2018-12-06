@@ -27,6 +27,7 @@ gem "govuk_app_config", "~> 1.10"
 group :development, :test do
   gem 'better_errors'
   gem 'binding_of_caller'
+  gem 'capybara-select-2'
   gem 'database_cleaner'
   gem 'factory_bot'
   gem 'govuk-content-schema-test-helpers'
