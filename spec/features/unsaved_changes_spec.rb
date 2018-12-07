@@ -48,14 +48,6 @@ RSpec.feature "Unsaved changes to a document", type: :feature, js: true do
       expect(current_path).to eq("/cma-cases")
     end
 
-    scenario "when attempting to close the current window and cancelling the confirmation" do
-      dismiss_confirm do
-        page.evaluate_script "window.close();"
-      end
-
-      expect(current_path).to eq("/cma-cases/new")
-    end
-
     scenario "when attempting to go back a page and accepting the confirmation" do
       accept_confirm do
         page.evaluate_script "window.history.back();"
@@ -114,14 +106,6 @@ RSpec.feature "Unsaved changes to a document", type: :feature, js: true do
       end
 
       expect(current_path).to eq("/cma-cases/#{content_id}/attachments/new")
-    end
-
-    scenario "when attempting to close the current window and cancelling the confirmation" do
-      dismiss_confirm do
-        page.evaluate_script "window.close();"
-      end
-
-      expect(current_path).to eq("/cma-cases/#{content_id}/edit")
     end
 
     scenario "when attempting to go back a page and accepting the confirmation" do
