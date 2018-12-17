@@ -27,9 +27,7 @@ require "database_cleaner"
 DatabaseCleaner[:mongoid].strategy = :truncation
 DatabaseCleaner.clean
 
-require 'capybara/rspec'
-require 'capybara/webkit/matchers'
-Capybara.javascript_driver = :webkit
+GovukTest.configure
 
 require 'gds_api/test_helpers/publishing_api_v2'
 require 'gds_api/test_helpers/email_alert_api'
@@ -60,7 +58,6 @@ RSpec.configure do |config|
   end
 
   config.include Capybara::DSL, type: :feature
-  config.include(Capybara::Webkit::RspecMatchers, type: :feature)
   config.include(GdsApi::TestHelpers::PublishingApiV2)
   config.include(GdsApi::TestHelpers::EmailAlertApi)
 

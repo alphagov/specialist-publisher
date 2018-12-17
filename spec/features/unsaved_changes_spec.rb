@@ -29,11 +29,11 @@ RSpec.feature "Unsaved changes to a document", type: :feature, js: true do
       fill_in "[cma_case]closed_date(1i)", with: "2015"
       fill_in "[cma_case]closed_date(2i)", with: "01"
       fill_in "[cma_case]closed_date(3i)", with: "01"
-      select "Energy", from: "cma_case_market_sector", visible: false # The hidden select2 select element
+      select2 "Energy", from: "Market sector"
     end
 
     scenario "when an 'Your documents' is clicked and the confirmation is cancelled" do
-      dismiss_confirm message do
+      dismiss_confirm do
         click_link "Your documents"
       end
 
@@ -41,23 +41,15 @@ RSpec.feature "Unsaved changes to a document", type: :feature, js: true do
     end
 
     scenario "when an 'Your documents' is clicked and the confirmation is accepted" do
-      accept_confirm message do
+      accept_confirm do
         click_link "Your documents"
       end
 
       expect(current_path).to eq("/cma-cases")
     end
 
-    scenario "when attempting to close the current window and cancelling the confirmation" do
-      dismiss_confirm message do
-        page.evaluate_script "window.close();"
-      end
-
-      expect(current_path).to eq("/cma-cases/new")
-    end
-
     scenario "when attempting to go back a page and accepting the confirmation" do
-      accept_confirm message do
+      accept_confirm do
         page.evaluate_script "window.history.back();"
       end
 
@@ -65,7 +57,7 @@ RSpec.feature "Unsaved changes to a document", type: :feature, js: true do
     end
 
     scenario "when attempting to go back a page and cancelling the confirmation" do
-      dismiss_confirm message do
+      dismiss_confirm do
         page.evaluate_script "window.history.back();"
       end
 
@@ -74,8 +66,6 @@ RSpec.feature "Unsaved changes to a document", type: :feature, js: true do
 
     scenario "when changes are saved" do
       click_button "Save as draft"
-
-      expect(page.status_code).to eq(200)
 
       within(".alert-success") do
         expect(page).to have_content("Created Example CMA Case")
@@ -99,11 +89,11 @@ RSpec.feature "Unsaved changes to a document", type: :feature, js: true do
       fill_in "[cma_case]opened_date(1i)", with: "2014"
       fill_in "[cma_case]opened_date(2i)", with: "02"
       fill_in "[cma_case]opened_date(3i)", with: "02"
-      select "Energy", from: "cma_case_market_sector", visible: false # The hidden select2 select element
+      select2 "Chemicals", from: "Market sector"
     end
 
     scenario "when an 'Add attachment' is clicked and the confirmation is cancelled" do
-      dismiss_confirm message do
+      dismiss_confirm do
         click_link "Add attachment"
       end
 
@@ -111,23 +101,15 @@ RSpec.feature "Unsaved changes to a document", type: :feature, js: true do
     end
 
     scenario "when an 'Add attachment' is clicked and the confirmation is accepted" do
-      accept_confirm message do
+      accept_confirm do
         click_link "Add attachment"
       end
 
       expect(current_path).to eq("/cma-cases/#{content_id}/attachments/new")
     end
 
-    scenario "when attempting to close the current window and cancelling the confirmation" do
-      dismiss_confirm message do
-        page.evaluate_script "window.close();"
-      end
-
-      expect(current_path).to eq("/cma-cases/#{content_id}/edit")
-    end
-
     scenario "when attempting to go back a page and accepting the confirmation" do
-      accept_confirm message do
+      accept_confirm do
         page.evaluate_script "window.history.back();"
       end
 
@@ -135,7 +117,7 @@ RSpec.feature "Unsaved changes to a document", type: :feature, js: true do
     end
 
     scenario "when attempting to go back a page and cancelling the confirmation" do
-      dismiss_confirm message do
+      dismiss_confirm do
         page.evaluate_script "window.history.back();"
       end
 
@@ -144,8 +126,6 @@ RSpec.feature "Unsaved changes to a document", type: :feature, js: true do
 
     scenario "when changes are saved" do
       click_button "Save as draft"
-
-      expect(page.status_code).to eq(200)
 
       within(".alert-success") do
         expect(page).to have_content("Updated Amended example document")
