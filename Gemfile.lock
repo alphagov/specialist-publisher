@@ -98,7 +98,7 @@ GEM
     faraday (0.12.2)
       multipart-post (>= 1.2, < 3)
     ffi (1.9.25)
-    gds-api-adapters (55.0.0)
+    gds-api-adapters (55.0.1)
       addressable
       link_header
       null_logger
@@ -427,7 +427,7 @@ DEPENDENCIES
   capybara-select-2
   database_cleaner
   factory_bot
-  gds-api-adapters (~> 55.0.0)
+  gds-api-adapters (~> 55.0.1)
   gds-sso (= 13.6.0)
   govspeak (~> 5.8.0)
   govuk-content-schema-test-helpers
