@@ -46,6 +46,6 @@ RSpec.feature 'Exporting a list of documents as CSV' do
     expect(attachment.filename).to eq 'document_list.csv'
 
     csv_body = attachment.body.to_s
-    expect(csv_body).to eq expected_csv
+    expect(csv_body).to eq expected_csv.gsub(/\n/, "\r\n")
   end
 end
