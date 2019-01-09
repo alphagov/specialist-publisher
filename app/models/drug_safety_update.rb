@@ -1,5 +1,6 @@
 class DrugSafetyUpdate < Document
   FORMAT_SPECIFIC_FIELDS = %i(
+    first_published_at
     therapeutic_area
   ).freeze
 
