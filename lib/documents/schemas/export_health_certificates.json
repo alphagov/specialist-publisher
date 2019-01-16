@@ -17,6 +17,7 @@
       "name": "Destination country",
       "short_name": "Destination",
       "type": "text",
+      "preposition": "to",
       "display_as_result_metadata": true,
       "filterable": true,
       "allowed_values": [
@@ -249,6 +250,7 @@
       "name": "Commodity type",
       "short_name": "Commodity",
       "type": "text",
+      "preposition": "of type",
       "display_as_result_metadata": true,
       "filterable": true,
       "allowed_values": [
