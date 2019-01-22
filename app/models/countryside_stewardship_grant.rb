@@ -21,6 +21,6 @@ class CountrysideStewardshipGrant < Document
   end
 
   def primary_publishing_organisation
-    "d3ce4ba7-bc75-46b4-89d9-38cb3240376d"
+    "e8fae147-6232-4163-a3f1-1c15b755a8a4"
   end
 end
