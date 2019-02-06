@@ -323,6 +323,10 @@
           "value": "bereavement-and-death-benefits-bereaved-parents-allowance"
         },
         {
+          "label": "Bereavement and death benefits - bereavement support payment",
+          "value": "bereavement-and-death-benefits-bereavement-support-payment"
+        },
+        {
           "label": "Bereavement and death benefits - bereavement payments",
           "value": "bereavement-and-death-benefits-bereavement-payments"
         },
