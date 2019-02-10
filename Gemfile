@@ -1,5 +1,7 @@
 source 'https://rubygems.org'
 
+ruby File.read(".ruby-version").chomp
+
 gem 'rails', '5.0.2'
 
 gem 'bootstrap-kaminari-views', '0.0.5'
