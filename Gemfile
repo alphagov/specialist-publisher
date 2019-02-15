@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'rails', '5.0.2'
+gem 'rails', '5.2.2'
 
 gem 'bootstrap-kaminari-views', '0.0.5'
 gem 'govuk_sidekiq', '~> 3.0'
