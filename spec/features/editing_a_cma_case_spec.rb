@@ -133,6 +133,7 @@ RSpec.feature "Editing a CMA case", type: :feature do
           :cma_case,
           update_type: "major",
           first_published_at: "2016-01-01",
+          state_history: { "3" => "draft", "2" => "published", "1" => "superseded" },
         )
       end
 

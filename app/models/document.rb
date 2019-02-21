@@ -135,7 +135,11 @@ class Document
   end
 
   def first_draft?
-    draft? && first_published_at.blank?
+    draft? && state_history_one_or_shorter?
+  end
+
+  def state_history_one_or_shorter?
+    state_history.nil? || state_history.size < 2
   end
 
   def change_note_required?

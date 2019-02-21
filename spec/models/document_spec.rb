@@ -333,7 +333,7 @@ RSpec.describe Document do
       let(:published_document) {
         MyDocumentType.from_publishing_api(
           FactoryBot.create(:document,
-            :published,
+            :redrafted,
             payload_attributes.merge(
               publication_state: publication_state,
               content_id: document.content_id
@@ -694,15 +694,25 @@ RSpec.describe Document do
 
   context '#first_draft?' do
     subject { MyDocumentType.new }
-
-    it "is true if there is no first_published_at" do
-      subject.first_published_at = nil
+    it "is true if the state_history is less than 2" do
+      subject.state_history = nil
       expect(subject.first_draft?).to eq(true)
     end
 
-    it "is false if there is a first_published_at" do
-      subject.first_published_at = "2015-11-15T00:00:00+00:00"
+    it "is true if the state_history indicates it has not been published" do
+      subject.state_history = { "1" => "draft" }
+      expect(subject.first_draft?).to eq(true)
+    end
+
+    it "is false if the state_history indicates it has been published" do
+      subject.state_history = { "3" => "draft", "2" => "published", "1" => "superseded" }
       expect(subject.first_draft?).to eq(false)
+    end
+
+    it "is true if there is a first_published_at and a state history indicating it has not been published" do
+      subject.state_history = { "1" => "draft" }
+      subject.first_published_at = "2019-02-21T00:00:00+00:00"
+      expect(subject.first_draft?).to eq(true)
     end
   end
 
