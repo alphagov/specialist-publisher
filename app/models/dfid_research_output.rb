@@ -36,14 +36,6 @@ class DfidResearchOutput < Document
     'DFID Research Output'
   end
 
-  def first_draft?
-    draft? && state_history_one_or_shorter?
-  end
-
-  def state_history_one_or_shorter?
-    state_history.nil? ? true : state_history.size < 2
-  end
-
   def dfid_author_tags
     (dfid_authors || []).join("::")
   end
