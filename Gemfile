@@ -17,7 +17,7 @@ gem 'uglifier', '~> 4'
 
 # GDS managed dependencies
 gem 'gds-api-adapters', '~> 57'
-gem 'gds-sso', '~> 13'
+gem 'gds-sso', '~> 14'
 gem 'govspeak', '~> 5'
 gem 'govuk_admin_template', '~> 6'
 gem 'govuk_frontend_toolkit', '~> 8'
