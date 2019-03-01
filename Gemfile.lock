@@ -441,7 +441,8 @@ DEPENDENCIES
   jquery-rails (~> 4)
   kaminari
   kaminari-mongoid
-  mongoid (~> 6)
+  mongo (< 2.5)
+  mongoid (< 6.3)
   plek (~> 2)
   pry-rails
   puma
