@@ -1,28 +1,28 @@
 source 'https://rubygems.org'
 
-gem 'rails', '5.0.2'
+gem 'rails', '~> 5'
 
-gem 'bootstrap-kaminari-views', '0.0.5'
-gem 'govuk_sidekiq', '~> 3.0'
+gem 'bootstrap-kaminari-views', '~> 0.0.5'
+gem 'govuk_sidekiq', '~> 3'
 gem 'govuk_test'
 gem 'hashdiff'
-gem 'jquery-rails', '~> 4.3.3'
-gem "kaminari"
+gem 'jquery-rails', '~> 4'
+gem 'kaminari'
 gem 'kaminari-mongoid'
-gem 'mongoid', '~> 6.0.0'
+gem 'mongoid', '~> 6'
 gem 'pundit'
-gem 'sass-rails', '~> 5.0.7'
-gem 'select2-rails', '~> 3.5.10'
-gem 'uglifier', '>= 1.3.0'
+gem 'sass-rails', '~> 5'
+gem 'select2-rails', '~> 3'
+gem 'uglifier', '~> 4'
 
 # GDS managed dependencies
-gem "gds-api-adapters", "~> 57.4.2"
-gem 'gds-sso', '13.6.0'
-gem "govspeak", "~> 5.9.1"
-gem 'govuk_admin_template', '~> 6.6.0'
-gem "govuk_frontend_toolkit", "8.1.0"
-gem 'plek', '~> 2.1'
-gem "govuk_app_config", "~> 1.12"
+gem 'gds-api-adapters', '~> 57'
+gem 'gds-sso', '~> 13'
+gem 'govspeak', '~> 5'
+gem 'govuk_admin_template', '~> 6'
+gem 'govuk_frontend_toolkit', '~> 8'
+gem 'plek', '~> 2'
+gem 'govuk_app_config', '~> 1'
 
 group :development, :test do
   gem 'better_errors'
