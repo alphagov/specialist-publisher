@@ -22,7 +22,7 @@ gem "govspeak", "~> 5.9.0"
 gem 'govuk_admin_template', '~> 6.6.0'
 gem "govuk_frontend_toolkit", "8.1.0"
 gem 'plek', '~> 2.1'
-gem "govuk_app_config", "~> 1.11"
+gem "govuk_app_config", "~> 1.12"
 
 group :development, :test do
   gem 'better_errors'
