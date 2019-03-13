@@ -2,7 +2,7 @@ require "rails_helper"
 
 RSpec.describe NotificationsMailer, type: :mailer do
   let(:user) { FactoryBot.create(:user) }
-  let(:csv) { "Header one,Header two\nrow a value one,row a value two\nrow b value one,row b value two\n" }
+  let(:csv) { "Header one,Header two\r\nrow a value one,row a value two\r\nrow b value one,row b value two\r\n" }
   describe "document_list without a query" do
     let(:mail) { described_class.document_list(csv, user, BusinessFinanceSupportScheme, nil) }
 

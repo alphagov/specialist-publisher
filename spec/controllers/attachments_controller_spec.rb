@@ -68,7 +68,6 @@ RSpec.describe AttachmentsController, type: :controller do
 
       stub_any_publishing_api_put_content
       stub_any_publishing_api_patch_links
-      allow(file).to receive(:tempfile).and_return("/cma_cases.jpg")
 
       stub_request(:post, "#{Plek.find('asset-manager')}/assets")
         .to_return(body: JSON.dump(asset_manager_response), status: 201)
@@ -112,7 +111,6 @@ RSpec.describe AttachmentsController, type: :controller do
     it "redirects to the specalist document edit page" do
       document = CmaCase.find(document_content_id)
       allow_any_instance_of(AttachmentsController).to receive(:fetch_document).and_return(document)
-      allow(updated_file).to receive(:tempfile).and_return("/cma_cases.jpg")
 
       stub_any_publishing_api_put_content
       stub_any_publishing_api_patch_links
