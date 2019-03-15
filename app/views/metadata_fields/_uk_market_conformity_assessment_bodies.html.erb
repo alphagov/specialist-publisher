@@ -1,0 +1,93 @@
+<%= render layout: "shared/form_group", locals: { f: f, field: :uk_market_conformity_assessment_body_name } do %>
+  <%= f.select :uk_market_conformity_assessment_body_name,
+      f.object.facet_options(:uk_market_conformity_assessment_body_name),
+      { label: "Body Name" },
+      { class: 'form-control' }
+  %>
+<% end %>
+<%= render layout: "shared/date_fields", locals: { f: f, field: :updated_at } do %>
+<% end %>
+<%= render layout: "shared/form_group", locals: { f: f, field: :uk_market_conformity_assessment_body_number } do %>
+  <%= f.select :uk_market_conformity_assessment_body_number,
+      f.object.facet_options(:uk_market_conformity_assessment_body_number),
+      { label: "Body Number" },
+      { class: 'form-control' }
+  %>
+<% end %>
+<%= render layout: "shared/form_group", locals: { f: f, field: :uk_market_conformity_assessment_body_type } do %>
+  <%= f.select :uk_market_conformity_assessment_body_type,
+      f.object.facet_options(:uk_market_conformity_assessment_body_type),
+      { label: "Body Type" },
+      {
+        class: 'select2 form-control',
+        multiple: true,
+        data:
+        {
+          placeholder: 'Select a body type'
+        }
+      }
+  %>
+<% end %>
+<%= render layout: "shared/form_group", locals: { f: f, field: :uk_market_conformity_assessment_body_registered_office_location } do %>
+  <%= f.select :uk_market_conformity_assessment_body_registered_office_location,
+      f.object.facet_options(:uk_market_conformity_assessment_body_registered_office_location),
+      { label: "Registered Office Location" },
+      {
+        class: 'select2 form-control',
+        multiple: false,
+        data:
+        {
+          placeholder: 'Select an office location'
+        }
+      }
+  %>
+<% end %>
+<%= render layout: "shared/form_group", locals: { f: f, field: :uk_market_conformity_assessment_body_testing_locations } do %>
+  <%= f.select :uk_market_conformity_assessment_body_testing_locations,
+      f.object.facet_options(:uk_market_conformity_assessment_body_testing_locations),
+      { label: "Testing Locations" },
+      {
+        class: 'select2 form-control',
+        multiple: true,
+        data:
+        {
+          placeholder: 'Select testing locations'
+        }
+      }
+  %>
+<% end %>
+<%= render layout: "shared/form_group", locals: { f: f, field: :uk_market_conformity_assessment_body_website } do %>
+  <%= f.select :uk_market_conformity_assessment_body_website,
+      f.object.facet_options(:uk_market_conformity_assessment_body_website),
+      { label: "Website" },
+      { class: 'form-control' }
+  %>
+<% end %>
+<%= render layout: "shared/form_group", locals: { f: f, field: :uk_market_conformity_assessment_body_email } do %>
+  <%= f.select :uk_market_conformity_assessment_body_email,
+      f.object.facet_options(:uk_market_conformity_assessment_body_email),
+      { label: "Email" },
+      { class: 'form-control' }
+  %>
+<% end %>
+<%= render layout: "shared/form_group", locals: { f: f, field: :uk_market_conformity_assessment_body_phone } do %>
+  <%= f.select :uk_market_conformity_assessment_body_phone,
+      f.object.facet_options(:uk_market_conformity_assessment_body_phone),
+      { label: "Phone" },
+      { class: 'form-control' }
+  %>
+<% end %>
+<%= render layout: "shared/form_group", locals: { f: f, field: :uk_market_conformity_assessment_body_legislative_area } do %>
+  <%= f.select :uk_market_conformity_assessment_body_legislative_area,
+      f.object.facet_options(:uk_market_conformity_assessment_body_legislative_area),
+      { label: "Legislation" },
+      {
+        class: 'select2 form-control',
+        multiple: true,
+        data:
+        {
+          placeholder: 'Select legislation'
+        }
+      }
+  %>
+<% end %>
