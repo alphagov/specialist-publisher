@@ -12,7 +12,7 @@ gem 'kaminari-mongoid'
 # MongoDB 2.4 compatibility is required, which was removed in 6.3
 gem 'mongoid', '< 6.3'
 # MongoDB 2.4 compatibility is required, which was removed in 2.5
-gem 'mongo', '< 2.5'
+gem 'mongo', '< 2.9'
 gem 'pundit'
 gem 'sass-rails', '~> 5'
 gem 'select2-rails', '~> 3'
