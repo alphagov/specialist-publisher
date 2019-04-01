@@ -19,7 +19,7 @@ gem 'select2-rails', '~> 3'
 gem 'uglifier', '~> 4'
 
 # GDS managed dependencies
-gem 'gds-api-adapters', '~> 57'
+gem 'gds-api-adapters', '~> 58'
 gem 'gds-sso', '~> 14'
 gem 'govspeak', '~> 6'
 gem 'govuk_admin_template', '~> 6'
