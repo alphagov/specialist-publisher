@@ -10,7 +10,6 @@ class UkMarketConformityAssessmentBody < Document
   validates :uk_market_conformity_assessment_body_legislative_area, presence: true
 
   FORMAT_SPECIFIC_FIELDS = %i(
-    uk_market_conformity_assessment_body_name
     updated_at
     uk_market_conformity_assessment_body_number
     uk_market_conformity_assessment_body_type
