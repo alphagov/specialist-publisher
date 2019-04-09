@@ -36,10 +36,6 @@ class UkMarketConformityAssessmentBody < Document
     "UK Market Conformity Assessment Body"
   end
 
-  def self.slug
-    "uk-market-conformity-assessment-body"
-  end
-
   def primary_publishing_organisation
     '2bde479a-97f2-42b5-986a-287a623c2a1c'
   end
