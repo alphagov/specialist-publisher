@@ -5,7 +5,7 @@
       { class: 'form-control' }
   %>
 <% end %>
-<%= render layout: "shared/date_fields", locals: { f: f, field: :updated_at } do %>
+<%= render layout: "shared/date_fields", locals: { f: f, field: :updated_at, format: :uk_market_conformity_assessment_body } do %>
 <% end %>
 <%= render layout: "shared/form_group", locals: { f: f, field: :uk_market_conformity_assessment_body_number } do %>
   <%= f.select :uk_market_conformity_assessment_body_number,
