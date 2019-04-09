@@ -1,16 +1,14 @@
 <%= render layout: "shared/date_fields", locals: { f: f, field: :updated_at, format: :uk_market_conformity_assessment_body } do %>
 <% end %>
-<%= render layout: "shared/form_group", locals: { f: f, field: :uk_market_conformity_assessment_body_number } do %>
-  <%= f.select :uk_market_conformity_assessment_body_number,
-      f.object.facet_options(:uk_market_conformity_assessment_body_number),
-      { label: "Body Number" },
+<%= render layout: "shared/form_group", locals: { f: f, field: :uk_market_conformity_assessment_body_number, label: "Body Number" } do %>
+  <%= f.text_field :uk_market_conformity_assessment_body_number,
       { class: 'form-control' }
   %>
 <% end %>
-<%= render layout: "shared/form_group", locals: { f: f, field: :uk_market_conformity_assessment_body_type } do %>
+<%= render layout: "shared/form_group", locals: { f: f, field: :uk_market_conformity_assessment_body_type, label: "Body Type" } do %>
   <%= f.select :uk_market_conformity_assessment_body_type,
       f.object.facet_options(:uk_market_conformity_assessment_body_type),
-      { label: "Body Type" },
+      {},
       {
         class: 'select2 form-control',
         multiple: true,
@@ -21,10 +19,10 @@
       }
   %>
 <% end %>
-<%= render layout: "shared/form_group", locals: { f: f, field: :uk_market_conformity_assessment_body_registered_office_location } do %>
+<%= render layout: "shared/form_group", locals: { f: f, field: :uk_market_conformity_assessment_body_registered_office_location, label: "Registered Office Location" } do %>
   <%= f.select :uk_market_conformity_assessment_body_registered_office_location,
       f.object.facet_options(:uk_market_conformity_assessment_body_registered_office_location),
-      { label: "Registered Office Location" },
+      {},
       {
         class: 'select2 form-control',
         multiple: false,
@@ -35,10 +33,10 @@
       }
   %>
 <% end %>
-<%= render layout: "shared/form_group", locals: { f: f, field: :uk_market_conformity_assessment_body_testing_locations } do %>
+<%= render layout: "shared/form_group", locals: { f: f, field: :uk_market_conformity_assessment_body_testing_locations, label: "Testing Locations" } do %>
   <%= f.select :uk_market_conformity_assessment_body_testing_locations,
       f.object.facet_options(:uk_market_conformity_assessment_body_testing_locations),
-      { label: "Testing Locations" },
+      {},
       {
         class: 'select2 form-control',
         multiple: true,
@@ -49,31 +47,25 @@
       }
   %>
 <% end %>
-<%= render layout: "shared/form_group", locals: { f: f, field: :uk_market_conformity_assessment_body_website } do %>
-  <%= f.select :uk_market_conformity_assessment_body_website,
-      f.object.facet_options(:uk_market_conformity_assessment_body_website),
-      { label: "Website" },
+<%= render layout: "shared/form_group", locals: { f: f, field: :uk_market_conformity_assessment_body_website, label: "Website" } do %>
+  <%= f.text_field :uk_market_conformity_assessment_body_website,
       { class: 'form-control' }
   %>
 <% end %>
-<%= render layout: "shared/form_group", locals: { f: f, field: :uk_market_conformity_assessment_body_email } do %>
-  <%= f.select :uk_market_conformity_assessment_body_email,
-      f.object.facet_options(:uk_market_conformity_assessment_body_email),
-      { label: "Email" },
+<%= render layout: "shared/form_group", locals: { f: f, field: :uk_market_conformity_assessment_body_email, label: "Email address" } do %>
+  <%= f.text_field :uk_market_conformity_assessment_body_email,
       { class: 'form-control' }
   %>
 <% end %>
-<%= render layout: "shared/form_group", locals: { f: f, field: :uk_market_conformity_assessment_body_phone } do %>
-  <%= f.select :uk_market_conformity_assessment_body_phone,
-      f.object.facet_options(:uk_market_conformity_assessment_body_phone),
-      { label: "Phone" },
+<%= render layout: "shared/form_group", locals: { f: f, field: :uk_market_conformity_assessment_body_phone, label: "Phone" } do %>
+  <%= f.text_field :uk_market_conformity_assessment_body_phone,
       { class: 'form-control' }
   %>
 <% end %>
-<%= render layout: "shared/form_group", locals: { f: f, field: :uk_market_conformity_assessment_body_legislative_area } do %>
+<%= render layout: "shared/form_group", locals: { f: f, field: :uk_market_conformity_assessment_body_legislative_area, label: "Legislation" } do %>
   <%= f.select :uk_market_conformity_assessment_body_legislative_area,
       f.object.facet_options(:uk_market_conformity_assessment_body_legislative_area),
-      { label: "Legislation" },
+      {},
       {
         class: 'select2 form-control',
         multiple: true,
