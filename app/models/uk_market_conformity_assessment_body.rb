@@ -1,13 +1,13 @@
 class UkMarketConformityAssessmentBody < Document
-  validates :uk_market_conformity_assessment_body_name, presence: true
-  validates :updated_at, presence: true, date: true
-  validates :uk_market_conformity_assessment_body_number, presence: true
-  validates :uk_market_conformity_assessment_body_type, presence: true
-  validates :uk_market_conformity_assessment_body_registered_office_location, presence: true
-  validates :uk_market_conformity_assessment_body_testing_locations, presence: true
-  validates :uk_market_conformity_assessment_body_email, presence: true
-  validates :uk_market_conformity_assessment_body_phone, presence: true
-  validates :uk_market_conformity_assessment_body_legislative_area, presence: true
+  # validates :updated_at, presence: true, date: true
+  # validates :uk_market_conformity_assessment_body_number, presence: true
+  # validates :uk_market_conformity_assessment_body_type, presence: true
+  # validates :uk_market_conformity_assessment_body_registered_office_location, presence: true
+  # validates :uk_market_conformity_assessment_body_testing_locations, presence: true
+  # validates :uk_market_conformity_assessment_body_website, presence: true
+  # validates :uk_market_conformity_assessment_body_email, presence: true
+  # validates :uk_market_conformity_assessment_body_phone, presence: true
+  # validates :uk_market_conformity_assessment_body_legislative_area, presence: true
 
   FORMAT_SPECIFIC_FIELDS = %i(
     updated_at
