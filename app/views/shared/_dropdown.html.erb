@@ -1,0 +1,14 @@
+<%= render "shared/form_group", f: f, field: field do %>
+  <%= f.select field,
+      facet_options(f, field),
+      {},
+      {
+        class: "select2 form-control select-all-disabled",
+        multiple: local_assigns[:multiple] || false,
+        data:
+        {
+          placeholder: "Select #{field.humanize(capitalize: false)}"
+        }
+      }
+  %>
+<% end %>
