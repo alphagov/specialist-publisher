@@ -76,6 +76,10 @@
       "filterable": true,
       "allowed_values": [
         {
+          "label": "United Kingdom",
+          "value": "united-kingdom"
+        },
+        {
           "label": "Australia",
           "value": "australia"
         },
@@ -98,10 +102,6 @@
         {
           "label": "Switzerland",
           "value": "switzerland"
-        },
-        {
-          "label": "United Kingdom",
-          "value": "united-kingdom"
         },
         {
           "label": "United States of America",
