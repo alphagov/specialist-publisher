@@ -1,6 +1,6 @@
 <%= render "shared/form_group", f: f, field: field do %>
   <%= f.select field,
-      facet_options(f, field),
+      local_assigns.fetch(:options, facet_options(f, field)),
       {},
       {
         class: "select2 form-control select-all-disabled",
