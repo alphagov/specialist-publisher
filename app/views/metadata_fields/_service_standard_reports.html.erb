@@ -1,2 +1,6 @@
 <%= render partial: "shared/date_fields",
   locals: { f: f, field: :assessment_date, format: :service_standard_report } %>
+
+<%= render "shared/dropdown", f: f, field: :result %>
+<%= render "shared/dropdown", f: f, field: :stage %>
+<%= render "shared/dropdown", f: f, field: :service_provider, options: organisations_options %>
