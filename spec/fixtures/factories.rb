@@ -187,10 +187,7 @@ FactoryBot.define do
     transient do
       default_metadata do
         {
-          "assessment_date" => "2016-10-10",
-          "result" => "met",
-          "service_provider" => "fef4ac7c-024a-4943-9f19-e85a8369a1f3",
-          "stage" => "live",
+          "assessment_date" => "2016-10-10"
         }
       end
     end
