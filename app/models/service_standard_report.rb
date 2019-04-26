@@ -2,7 +2,6 @@ class ServiceStandardReport < Document
   FORMAT_SPECIFIC_FIELDS = %i(
     assessment_date
     result
-    service_provider
     stage
   ).freeze
 

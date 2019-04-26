@@ -34,14 +34,6 @@
       ]
     },
     {
-      "key": "service_provider",
-      "name": "Service provider",
-      "short_name": "Service provider",
-      "type": "text",
-      "display_as_result_metadata": true,
-      "filterable": true
-    },
-    {
       "key": "stage",
       "name": "Stage",
       "short_name": "Stage",
