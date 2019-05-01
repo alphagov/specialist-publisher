@@ -27,8 +27,6 @@ require "database_cleaner"
 DatabaseCleaner[:mongoid].strategy = :truncation
 DatabaseCleaner.clean
 
-GovukTest.configure
-
 require 'gds_api/test_helpers/publishing_api_v2'
 require 'gds_api/test_helpers/email_alert_api'
 
