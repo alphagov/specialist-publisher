@@ -42,8 +42,12 @@
       "filterable": true,
       "allowed_values": [
         {"label": "Alpha", "value": "alpha"},
+        {"label": "Alpha reassessment", "value": "alpha-reassessment"},
         {"label": "Beta", "value": "beta"},
-        {"label": "Live", "value": "live"}
+        {"label": "Beta reassessment", "value": "alpha-reassessment"},
+        {"label": "Live", "value": "live"},
+        {"label": "Live reassessment", "value": "live-reassessment"},
+        {"label": "Live review", "value": "live-review"}
       ]
     }
   ]
