@@ -44,7 +44,7 @@
         {"label": "Alpha", "value": "alpha"},
         {"label": "Alpha reassessment", "value": "alpha-reassessment"},
         {"label": "Beta", "value": "beta"},
-        {"label": "Beta reassessment", "value": "alpha-reassessment"},
+        {"label": "Beta reassessment", "value": "beta-reassessment"},
         {"label": "Live", "value": "live"},
         {"label": "Live reassessment", "value": "live-reassessment"},
         {"label": "Live review", "value": "live-review"}
