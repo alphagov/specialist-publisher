@@ -153,7 +153,7 @@ GEM
       puma
       selenium-webdriver
       webdrivers
-    hashdiff (0.3.9)
+    hashdiff (0.4.0)
     hashie (3.6.0)
     htmlentities (4.3.4)
     http-cookie (1.0.3)
