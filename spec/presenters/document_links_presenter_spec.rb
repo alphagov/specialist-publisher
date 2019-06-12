@@ -5,7 +5,7 @@ RSpec.describe DocumentLinksPresenter do
     DfidResearchOutput => 'db994552-7644-404d-a770-a2fe659c661f',
     EmploymentTribunalDecision => '6f757605-ab8f-4b62-84e4-99f79cf085c2',
     AaibReport => "38eb5d8f-2d89-480c-8655-e2e7ac23f8f4",
-    CmaCase => "fef4ac7c-024a-4943-9f19-e85a8369a1f3",
+    CmaCase => "957eb4ec-089b-4f71-ba2a-dc69ac8919ea",
     EmploymentAppealTribunalDecision => '6f757605-ab8f-4b62-84e4-99f79cf085c2',
     MaibReport => "9c66b9a3-1e6a-48e8-974d-2a5635f84679",
     EsiFund => "2e7868a8-38f5-4ff6-b62f-9a15d1c22d28",
