@@ -33,4 +33,16 @@ namespace :publishing_api do
       end
     end
   end
+
+  desc "Send links for all cma cases to Publishing API."
+  task patch_cma_case_links: :environment do
+    AllDocumentsFinder.find_each(CmaCase) do |cma_case|
+      content_id = cma_case.content_id
+      payload = {
+          primary_publishing_organisation: [cma_case.primary_publishing_organisation]
+      }
+
+      Services.publishing_api.patch_links(content_id, links: payload, bulk_publishing: true)
+    end
+  end
 end
