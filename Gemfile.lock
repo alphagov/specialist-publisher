@@ -243,7 +243,7 @@ GEM
     parallel (1.17.0)
     parser (2.6.3.0)
       ast (~> 2.4.0)
-    plek (2.1.1)
+    plek (3.0.0)
     pry (0.12.2)
       coderay (~> 1.1.0)
       method_source (~> 0.9.0)
@@ -445,7 +445,7 @@ DEPENDENCIES
   kaminari-mongoid
   mongo (< 2.5)
   mongoid (< 6.3)
-  plek (~> 2)
+  plek (~> 3)
   pry-rails
   puma
   pundit
