@@ -45,7 +45,7 @@ module_function
 
     after = Services.publishing_api.get_content(content_id).to_hash
 
-    diff = HashDiff.diff(before, after)
+    diff = Hashdiff.diff(before, after)
     puts "Differences:"
     puts diff
 
