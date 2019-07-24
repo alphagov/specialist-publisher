@@ -130,7 +130,7 @@ RSpec.feature "Unpublishing a CMA Case", type: :feature do
       expect(page).to have_content("Example CMA Case")
       click_button "Unpublish document"
       expect(page.status_code).to eq(200)
-      expect(page).to have_content("Something has gone wrong. Please try again and see if it works. Let us know if the problem happens again and a developer will look into it.")
+      expect(page).to have_content("Something has gone wrong. Please try again and see if it works.")
     end
   end
 end
