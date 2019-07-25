@@ -10,7 +10,19 @@
       "line": 24,
       "link": "https://brakemanscanner.org/docs/warning_types/dynamic_render_path/",
       "code": "render(partial => \"metadata_fields/#{params[:document_type_slug].underscore}\", { :locals => ({ :f => FormBuilder.new }) })",
-      "render_path": [{"type":"controller","class":"DocumentsController","method":"edit","line":45,"file":"app/controllers/documents_controller.rb"}],
+      "render_path": [
+        {
+          "type": "controller",
+          "class": "DocumentsController",
+          "method": "edit",
+          "line": 45,
+          "file": "app/controllers/documents_controller.rb",
+          "rendered": {
+            "name": "documents/edit",
+            "file": "app/views/documents/edit.html.erb"
+          }
+        }
+      ],
       "location": {
         "type": "template",
         "template": "documents/edit"
@@ -24,12 +36,34 @@
       "warning_code": 4,
       "fingerprint": "4febd038b878af391d4ed2ba73417e43de948a9cda2ab88f5534e49e652a02e7",
       "check_name": "LinkToHref",
-      "message": "Potentially unsafe model attribute in link_to href",
+      "message": "Potentially unsafe model attribute in `link_to` href",
       "file": "app/views/shared/_attachments_form.html.erb",
       "line": 7,
       "link": "https://brakemanscanner.org/docs/warning_types/link_to_href",
       "code": "link_to(Attachment.new.filename, Attachment.new.url)",
-      "render_path": [{"type":"controller","class":"AttachmentsController","method":"new","line":11,"file":"app/controllers/attachments_controller.rb"},{"type":"template","name":"attachments/new","line":5,"file":"app/views/attachments/new.html.erb"}],
+      "render_path": [
+        {
+          "type": "controller",
+          "class": "AttachmentsController",
+          "method": "new",
+          "line": 11,
+          "file": "app/controllers/attachments_controller.rb",
+          "rendered": {
+            "name": "attachments/new",
+            "file": "app/views/attachments/new.html.erb"
+          }
+        },
+        {
+          "type": "template",
+          "name": "attachments/new",
+          "line": 5,
+          "file": "app/views/attachments/new.html.erb",
+          "rendered": {
+            "name": "shared/_attachments_form",
+            "file": "app/views/shared/_attachments_form.html.erb"
+          }
+        }
+      ],
       "location": {
         "type": "template",
         "template": "shared/_attachments_form"
@@ -59,6 +93,22 @@
       "note": "Although we pass everything into the model, only allowed fields are set. We use set_attribute and pass in the valid fields fro that particular document type."
     },
     {
+      "warning_type": "Remote Code Execution",
+      "warning_code": 110,
+      "fingerprint": "9ae68e59cfee3e5256c0540dadfeb74e6b72c91997fdb60411063a6e8518144a",
+      "check_name": "CookieSerialization",
+      "message": "Use of unsafe cookie serialization strategy `:hybrid` might lead to remote code execution",
+      "file": "config/initializers/cookies_serializer.rb",
+      "line": 5,
+      "link": "https://brakemanscanner.org/docs/warning_types/unsafe_deserialization",
+      "code": "Rails.application.config.action_dispatch.cookies_serializer = :hybrid",
+      "render_path": null,
+      "location": null,
+      "user_input": null,
+      "confidence": "Medium",
+      "note": "We can't switch straigt to :json serialisation as this breaks existing cookies.  Change this after some time has passed."
+    },
+    {
       "warning_type": "Dynamic Render Path",
       "warning_code": 15,
       "fingerprint": "d34a7635364873f3063b096bc40cdb17b804fef975b7fe9b84a8d1b1973477c5",
@@ -68,7 +118,19 @@
       "line": 20,
       "link": "https://brakemanscanner.org/docs/warning_types/dynamic_render_path/",
       "code": "render(partial => \"metadata_fields/#{params[:document_type_slug].underscore}\", { :locals => ({ :f => FormBuilder.new }) })",
-      "render_path": [{"type":"controller","class":"DocumentsController","method":"create","line":31,"file":"app/controllers/documents_controller.rb"}],
+      "render_path": [
+        {
+          "type": "controller",
+          "class": "DocumentsController",
+          "method": "create",
+          "line": 31,
+          "file": "app/controllers/documents_controller.rb",
+          "rendered": {
+            "name": "documents/new",
+            "file": "app/views/documents/new.html.erb"
+          }
+        }
+      ],
       "location": {
         "type": "template",
         "template": "documents/new"
@@ -78,6 +140,6 @@
       "note": "The document_type_slug is checked by the check_authorisation method which checks that the current_format is set. If it doesn't exist, then the template won't be rendered."
     }
   ],
-  "updated": "2018-08-02 15:17:14 +0100",
-  "brakeman_version": "4.3.1"
+  "updated": "2019-07-25 10:22:11 +0100",
+  "brakeman_version": "4.6.1"
 }
