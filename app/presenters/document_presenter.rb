@@ -5,7 +5,7 @@ class DocumentPresenter
     @document = document
   end
 
-  def to_json
+  def to_json(*_args)
     {
       base_path: document.base_path,
       title: document.title,

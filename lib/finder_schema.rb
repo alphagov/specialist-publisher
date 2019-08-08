@@ -9,7 +9,7 @@ class FinderSchema
   attr_reader :base_path, :organisations, :format, :content_id, :editing_organisations
 
   def initialize(schema_type)
-    @schema ||= load_schema_for(schema_type)
+    @schema = load_schema_for(schema_type)
     @base_path = schema.fetch("base_path")
     @organisations = schema.fetch("organisations", [])
     @editing_organisations = schema.fetch("editing_organisations", [])
@@ -29,10 +29,9 @@ class FinderSchema
 
   def humanized_facet_value(facet_key, value)
     type = facet_data_for(facet_key).fetch("type", nil)
-    case
-    when type == "text" && allowed_values_for(facet_key).empty?
+    if type == "text" && allowed_values_for(facet_key).empty?
       value
-    when %w(hidden text).include?(type)
+    elsif %w(hidden text).include?(type)
       Array(value).map do |v|
         value_label_mapping_for(facet_key, v).fetch("label") { value }
       end
@@ -50,7 +49,7 @@ private
   attr_reader :schema
 
   def load_schema_for(type)
-    JSON.load(File.read(Rails.root.join("lib/documents/schemas/#{type}.json")))
+    JSON.parse(File.read(Rails.root.join("lib/documents/schemas/#{type}.json")))
   end
 
   def facet_data_for(facet_name)

@@ -2,7 +2,7 @@
 class DocumentUnpublisher
   AlternativeContentNotFound = Class.new(StandardError)
 
-  def self.unpublish(content_id, base_path, alternative_path = nil)
+  def self.unpublish(content_id, _base_path, alternative_path = nil)
     if alternative_path.blank?
       Services.publishing_api.unpublish(content_id, type: 'gone')
 

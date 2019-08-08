@@ -9,9 +9,9 @@ RSpec.describe DocumentPolicy do
   let(:gds_editor) { User.new(permissions: %w(signin gds_editor)) }
   let(:departmental_editor) { User.new(permissions: %w(signin editor), organisation_content_id: allowed_organisation_id) }
   let(:other_departmental_editor) { User.new(permissions: %w(signin editor), organisation_content_id: allowed_editing_organisation_id) }
-  let(:departmental_writer) { User.new(permissions: ['signin'], organisation_content_id: allowed_organisation_id) }
-  let(:other_departmental_writer) { User.new(permissions: ['signin'], organisation_content_id: allowed_editing_organisation_id) }
-  let(:document_type_editor) { User.new(permissions: ['test_document_editor']) }
+  let(:departmental_writer) { User.new(permissions: %w[signin], organisation_content_id: allowed_organisation_id) }
+  let(:other_departmental_writer) { User.new(permissions: %w[signin], organisation_content_id: allowed_editing_organisation_id) }
+  let(:document_type_editor) { User.new(permissions: %w[test_document_editor]) }
 
   def allowed_document_type
     allow(TestDocument)

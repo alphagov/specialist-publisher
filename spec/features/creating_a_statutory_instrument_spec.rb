@@ -3,7 +3,7 @@ RSpec.feature "Creating a Statutory Instrument", type: :feature do
     {
       "content_id" => "4a656f42-35ad-4034-8c7a-08870db7fffe",
       "links" => {
-        "organisations" => ["957eb4ec-089b-4f71-ba2a-dc69ac8919ea"]
+        "organisations" => %w[957eb4ec-089b-4f71-ba2a-dc69ac8919ea]
       }
     }
   end

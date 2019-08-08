@@ -19,7 +19,7 @@ RSpec.describe DocumentListExportWorker do
     end
 
     it 'raises an error if the user does not have permission to see the document type' do
-      user.update_attributes(permissions: ['signin'])
+      user.update_attributes(permissions: %w[signin])
       expect {
         subject.perform(BusinessFinanceSupportScheme.slug, user.id, nil)
       }.to raise_error Pundit::NotAuthorizedError

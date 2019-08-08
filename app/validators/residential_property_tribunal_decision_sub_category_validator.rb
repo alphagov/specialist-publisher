@@ -1,6 +1,7 @@
 class ResidentialPropertyTribunalDecisionSubCategoryValidator < ActiveModel::EachValidator
   def validate_each(record, attribute, value)
     return if [record.tribunal_decision_category, value].any?(&:blank?)
+
     record.errors.add(attribute, error_message) unless related_sub_category?(record.tribunal_decision_category, value)
   end
 

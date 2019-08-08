@@ -26,20 +26,22 @@ RSpec.feature "Publishing a CMA case", type: :feature do
     let(:item) {
       FactoryBot.create(
         :cma_case,
-          title: "Example CMA Case",
-          base_path: "/cma-cases/example-cma-case",
-          public_updated_at: "2015-11-16T11:53:30+00:00",
-          publication_state: "draft")
+        title: "Example CMA Case",
+        base_path: "/cma-cases/example-cma-case",
+        public_updated_at: "2015-11-16T11:53:30+00:00",
+        publication_state: "draft"
+      )
     }
 
     let(:published_item) {
       FactoryBot.create(
         :cma_case,
-          :published,
-          content_id: content_id,
-          title: "Example CMA Case",
-          base_path: "/cma-cases/example-cma-case",
-          public_updated_at: "2015-11-16T11:53:30+00:00")
+        :published,
+        content_id: content_id,
+        title: "Example CMA Case",
+        base_path: "/cma-cases/example-cma-case",
+        public_updated_at: "2015-11-16T11:53:30+00:00"
+      )
     }
 
     scenario "from the index" do
@@ -95,8 +97,8 @@ RSpec.feature "Publishing a CMA case", type: :feature do
   context "when the document is already published" do
     let(:item) {
       FactoryBot.create(:cma_case,
-        :published,
-        title: "Live Item")
+                        :published,
+                        title: "Live Item")
     }
 
     scenario "publish buttons aren't shown" do
@@ -211,7 +213,8 @@ RSpec.feature "Publishing a CMA case", type: :feature do
         :cma_case,
         :published,
         title: "Unpublished Item",
-        publication_state: "unpublished")
+        publication_state: "unpublished"
+      )
     }
 
     scenario "when content item is unpublished it cannot be published" do

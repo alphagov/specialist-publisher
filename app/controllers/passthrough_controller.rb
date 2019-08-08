@@ -9,8 +9,7 @@ class PassthroughController < ApplicationController
     end
   end
 
-  def error
-  end
+  def error; end
 
 private
 

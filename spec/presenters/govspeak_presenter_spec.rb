@@ -104,14 +104,16 @@ RSpec.describe GovspeakPresenter do
   describe "#snippets_match?" do
     let(:subject) { described_class.new(document) }
 
-    def expect_match(a, b)
-      expect(subject.snippets_match?(a, b)).to eq(true),
-        "Expected '#{a}' == '#{b}'"
+    def expect_match(snippet_a, snippet_b)
+      expect(subject.snippets_match?(snippet_a, snippet_b))
+        .to eq(true),
+            "Expected '#{snippet_a}' == '#{snippet_b}'"
     end
 
-    def expect_no_match(a, b)
-      expect(subject.snippets_match?(a, b)).to eq(false),
-        "Expected '#{a}' != '#{b}'"
+    def expect_no_match(snippet_a, snippet_b)
+      expect(subject.snippets_match?(snippet_a, snippet_b))
+        .to eq(false),
+            "Expected '#{snippet_a}' != '#{snippet_b}'"
     end
 
     it "matches on identical strings" do

@@ -83,12 +83,14 @@ RSpec.describe GovspeakBodyPresenter do
 
     context "when the document has image attachments" do
       include_examples "handles filename quirks",
-        "![InlineAttachment:%s]", "[embed:attachments:image:%s]"
+                       "![InlineAttachment:%s]",
+                       "[embed:attachments:image:%s]"
     end
 
     context "when the document has inline attachments" do
       include_examples "handles filename quirks",
-        "[InlineAttachment:%s]", "[embed:attachments:inline:%s]"
+                       "[InlineAttachment:%s]",
+                       "[embed:attachments:inline:%s]"
     end
   end
 end

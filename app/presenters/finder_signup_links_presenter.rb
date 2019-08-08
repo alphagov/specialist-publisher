@@ -1,5 +1,5 @@
 FinderSignupLinksPresenter = Struct.new(:file) do
-  def to_json
+  def to_json(*_args)
     {
       content_id: file.fetch("signup_content_id"),
       links: {
@@ -9,7 +9,7 @@ FinderSignupLinksPresenter = Struct.new(:file) do
     }
   end
 
-  private
+private
 
   def organisations
     file.fetch("organisations", [])

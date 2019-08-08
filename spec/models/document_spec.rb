@@ -13,7 +13,7 @@ RSpec.describe Document do
     attr_accessor :field1, :field2, :field3
 
     def initialize(params = {})
-      super(params, [:field1, :field2, :field3])
+      super(params, %i[field1 field2 field3])
     end
   end
 
@@ -46,21 +46,21 @@ RSpec.describe Document do
         .with(
           publishing_app: "specialist-publisher",
           document_type: "my_document_type",
-          fields: [
-            :base_path,
-            :content_id,
-            :last_edited_at,
-            :title,
-            :publication_state,
-            :state_history,
+          fields: %i[
+            base_path
+            content_id
+            last_edited_at
+            title
+            publication_state
+            state_history
           ],
           page: 1,
           per_page: 20,
           order: "-last_edited_at",
-          q: "foo",
+          query: "foo",
         )
 
-      MyDocumentType.all(1, 20, q: "foo")
+      MyDocumentType.all(1, 20, query: "foo")
     end
   end
 
@@ -208,7 +208,7 @@ RSpec.describe Document do
       end
 
       it "sets format specific fields for the document subclass" do
-        expect(document.format_specific_fields).to eq([:field1, :field2, :field3])
+        expect(document.format_specific_fields).to eq(%i[field1 field2 field3])
 
         expect(document.field1).to eq("2015-12-01")
         expect(document.field2).to eq("open")
@@ -275,11 +275,11 @@ RSpec.describe Document do
       let(:minor_change_document) {
         MyDocumentType.from_publishing_api(
           FactoryBot.create(:document,
-            payload_attributes.merge(
-              publication_state: 'published',
-              update_type: 'minor',
-              content_id: document.content_id
-            ))
+                            payload_attributes.merge(
+                              publication_state: 'published',
+                              update_type: 'minor',
+                              content_id: document.content_id
+                            ))
         )
       }
 
@@ -294,11 +294,11 @@ RSpec.describe Document do
       let(:unpublished_document) {
         MyDocumentType.from_publishing_api(
           FactoryBot.create(:document,
-            payload_attributes.merge(
-              first_published_at: nil,
-              publication_state: 'draft',
-              content_id: document.content_id
-            ))
+                            payload_attributes.merge(
+                              first_published_at: nil,
+                              publication_state: 'draft',
+                              content_id: document.content_id
+                            ))
         )
       }
 
@@ -333,11 +333,11 @@ RSpec.describe Document do
       let(:published_document) {
         MyDocumentType.from_publishing_api(
           FactoryBot.create(:document,
-            :redrafted,
-            payload_attributes.merge(
-              publication_state: publication_state,
-              content_id: document.content_id
-            ))
+                            :redrafted,
+                            payload_attributes.merge(
+                              publication_state: publication_state,
+                              content_id: document.content_id
+                            ))
         )
       }
 

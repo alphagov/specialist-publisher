@@ -5,7 +5,7 @@ class EmailAlertPresenter
     @document = document
   end
 
-  def to_json
+  def to_json(*_args)
     {
       title: title,
       description: summary,

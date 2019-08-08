@@ -36,26 +36,26 @@ RSpec.describe DocumentPresenter do
   describe "#to_json with attachments" do
     let(:payload) {
       FactoryBot.create(:cma_case,
-        details: {
-          attachments: [
-            {
-              "content_id" => "77f2d40e-3853-451f-9ca3-a747e8402e34",
-              "url" => "https://assets.digital.cabinet-office.gov.uk/media/513a0efbed915d425e000002/asylum-support-image.jpg",
-              "content_type" => "application/jpeg",
-              "title" => "asylum report image title",
-              "created_at" => "2015-12-03T16:59:13+00:00",
-              "updated_at" => "2015-12-03T16:59:13+00:00"
-            },
-            {
-              "content_id" => "ec3f6901-4156-4720-b4e5-f04c0b152141",
-              "url" => "https://assets.digital.cabinet-office.gov.uk/media/513a0efbed915d425e000002/asylum-support-pdf.pdf",
-              "content_type" => "application/pdf",
-              "title" => "asylum report pdf title",
-              "created_at" => "2015-12-03T16:59:13+00:00",
-              "updated_at" => "2015-12-03T16:59:13+00:00"
-            }
-          ]
-        })
+                        details: {
+                          attachments: [
+                            {
+                              "content_id" => "77f2d40e-3853-451f-9ca3-a747e8402e34",
+                              "url" => "https://assets.digital.cabinet-office.gov.uk/media/513a0efbed915d425e000002/asylum-support-image.jpg",
+                              "content_type" => "application/jpeg",
+                              "title" => "asylum report image title",
+                              "created_at" => "2015-12-03T16:59:13+00:00",
+                              "updated_at" => "2015-12-03T16:59:13+00:00"
+                            },
+                            {
+                              "content_id" => "ec3f6901-4156-4720-b4e5-f04c0b152141",
+                              "url" => "https://assets.digital.cabinet-office.gov.uk/media/513a0efbed915d425e000002/asylum-support-pdf.pdf",
+                              "content_type" => "application/pdf",
+                              "title" => "asylum report pdf title",
+                              "created_at" => "2015-12-03T16:59:13+00:00",
+                              "updated_at" => "2015-12-03T16:59:13+00:00"
+                            }
+                          ]
+                        })
     }
 
     it "is valid against the content schemas" do
@@ -76,14 +76,14 @@ RSpec.describe DocumentPresenter do
   describe '#to_json with headers' do
     let(:payload) {
       FactoryBot.create(:cma_case,
-        details: {
-          body: [
-            {
-              "content_type" => "text/govspeak",
-              "content" => "## heading",
-            }
-          ]
-        })
+                        details: {
+                          body: [
+                            {
+                              "content_type" => "text/govspeak",
+                              "content" => "## heading",
+                            }
+                          ]
+                        })
     }
 
     it "is valid against the content schemas" do
@@ -100,14 +100,14 @@ RSpec.describe DocumentPresenter do
   describe '#to_json with nested headers' do
     let(:payload) {
       FactoryBot.create(:cma_case,
-        details: {
-          body: [
-            {
-              "content_type" => "text/govspeak",
-              "content" => "## heading2\r\n\r\n### heading3\r\n\r\n#### heading4\r\n\r\n## anotherheading2"
-            }
-          ]
-        })
+                        details: {
+                          body: [
+                            {
+                              "content_type" => "text/govspeak",
+                              "content" => "## heading2\r\n\r\n### heading3\r\n\r\n#### heading4\r\n\r\n## anotherheading2"
+                            }
+                          ]
+                        })
     }
 
     it "is valid against the content schemas" do
@@ -119,7 +119,8 @@ RSpec.describe DocumentPresenter do
         { text: "heading2", level: 2, id: "heading2", headers: [
             { text: "heading3", level: 3, id: "heading3", headers: [
                 { text: "heading4", level: 4, id: "heading4" }
-              ] }] },
+              ] }
+] },
         { text: "anotherheading2", level: 2, id: "anotherheading2" }
       ]
 
@@ -144,14 +145,14 @@ RSpec.describe DocumentPresenter do
   describe '#to_json with format_specific_fields' do
     let(:payload) {
       FactoryBot.create(:cma_case,
-        details: {
-          metadata: {
-            case_state: "open",
-            case_type: "ca98-and-civil-cartels",
-            outcome_type: "",
-            bulk_published: true,
-          }
-        })
+                        details: {
+                          metadata: {
+                            case_state: "open",
+                            case_type: "ca98-and-civil-cartels",
+                            outcome_type: "",
+                            bulk_published: true,
+                          }
+                        })
     }
 
     let(:metadata) { presented_data[:details][:metadata] }

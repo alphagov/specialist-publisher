@@ -1,5 +1,5 @@
 FinderLinksPresenter = Struct.new(:file) do
-  def to_json
+  def to_json(*_args)
     {
       content_id: file.fetch("content_id"),
       links: {

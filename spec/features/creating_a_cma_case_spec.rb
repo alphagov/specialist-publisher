@@ -5,7 +5,7 @@ RSpec.feature "Creating a CMA case", type: :feature do
     {
       "content_id" => "4a656f42-35ad-4034-8c7a-08870db7fffe",
       "links" => {
-        "organisations" => ["957eb4ec-089b-4f71-ba2a-dc69ac8919ea"]
+        "organisations" => %w[957eb4ec-089b-4f71-ba2a-dc69ac8919ea]
       }
     }
   end
@@ -73,7 +73,7 @@ RSpec.feature "Creating a CMA case", type: :feature do
           "opened_date" => "2014-01-01",
           "case_type" => "ca98-and-civil-cartels",
           "case_state" => "open",
-          "market_sector" => ["energy"],
+          "market_sector" => %w[energy],
         },
         "max_cache_time" => 10,
         "headers" => [
@@ -85,7 +85,7 @@ RSpec.feature "Creating a CMA case", type: :feature do
       "redirects" => [],
       "update_type" => "major",
       "links" => {
-        "finder" => ["fef4ac7c-024a-4943-9f19-e85a8369a1f3"]
+        "finder" => %w[fef4ac7c-024a-4943-9f19-e85a8369a1f3]
       }
     }
 
@@ -318,7 +318,7 @@ RSpec.feature "Creating a CMA case", type: :feature do
           "opened_date" => "2014-01-01",
           "case_type" => "ca98-and-civil-cartels",
           "case_state" => "open",
-          "market_sector" => ["energy"],
+          "market_sector" => %w[energy],
         },
         "max_cache_time" => 10,
         "headers" => [
@@ -330,7 +330,7 @@ RSpec.feature "Creating a CMA case", type: :feature do
       "redirects" => [],
       "update_type" => "major",
       "links" => {
-        "finder" => ["fef4ac7c-024a-4943-9f19-e85a8369a1f3"]
+        "finder" => %w[fef4ac7c-024a-4943-9f19-e85a8369a1f3]
       }
     }
     assert_publishing_api_put_content(content_id, expected_sent_payload)
@@ -364,7 +364,8 @@ RSpec.feature "Creating a CMA case", type: :feature do
 
   scenario "a draft with the same path as an existing draft" do
     stub_any_publishing_api_put_content.to_raise(
-      GdsApi::HTTPErrorResponse.new(422, "Content item base path=/cma-cases/example-document conflicts with content_id=#{content_id} and locale=en"))
+      GdsApi::HTTPErrorResponse.new(422, "Content item base path=/cma-cases/example-document conflicts with content_id=#{content_id} and locale=en")
+    )
 
     visit "/cma-cases/new"
 
