@@ -34,7 +34,7 @@ RSpec.feature "Editing a CMA case", type: :feature do
       "details" => {
         "metadata" => {
           "opened_date" => "2014-01-01",
-          "market_sector" => ["energy"],
+          "market_sector" => %w[energy],
         },
         "body" => [
           {
@@ -74,18 +74,18 @@ RSpec.feature "Editing a CMA case", type: :feature do
   context "a published case" do
     let(:cma_case) {
       FactoryBot.create(:cma_case,
-        :published,
-        title: "Example CMA Case",
-        description: "Summary with a typox",
-        state_history: { "1" => "draft", "2" => "published" },
-        details: {
-          "body" => [
-            { "content_type" => "text/govspeak", "content" => "A body" },
-          ],
-          "metadata" => {
-            "bulk_published" => true,
-          }
-        }).tap { |payload| payload["details"].delete("headers") }
+                        :published,
+                        title: "Example CMA Case",
+                        description: "Summary with a typox",
+                        state_history: { "1" => "draft", "2" => "published" },
+                        details: {
+                          "body" => [
+                            { "content_type" => "text/govspeak", "content" => "A body" },
+                          ],
+                          "metadata" => {
+                            "bulk_published" => true,
+                          }
+                        }).tap { |payload| payload["details"].delete("headers") }
     }
 
     scenario "a major update adds to the change history" do

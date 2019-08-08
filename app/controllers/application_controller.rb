@@ -20,7 +20,6 @@ private
     redirect_to root_path
   end
 
-
   def document_type_slug
     params[:document_type_slug]
   end

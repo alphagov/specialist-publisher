@@ -1,10 +1,9 @@
 class DocumentLinksPresenter
-
   def initialize(document)
     @document = document
   end
 
-  def to_json
+  def to_json(*_args)
     {
       content_id: document.content_id,
       links: {

@@ -97,7 +97,6 @@ private
     redirect_to edit_document_path(document_type_slug, document.content_id)
   end
 
-
   def fetch_document
     document = current_format.find(params[:document_content_id])
     document.set_temporary_update_type!

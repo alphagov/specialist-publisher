@@ -1,5 +1,12 @@
-FinderSignupContentItemPresenter = Struct.new(:schema, :timestamp) do
-  def to_json
+class FinderSignupContentItemPresenter
+  attr_reader :schema, :timestamp
+
+  def initialize(schema, timestamp)
+    @schema = schema
+    @timestamp = timestamp
+  end
+
+  def to_json(*_args)
     {
       base_path: base_path,
       title: title,

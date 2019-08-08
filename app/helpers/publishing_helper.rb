@@ -13,7 +13,8 @@ module PublishingHelper
   def set_errors_on(obj)
     unless obj.class.include?(ActiveModel::Validations)
       raise ArgumentError.new(
-        "Can only set errors on an object which includes ActiveModel::Validations")
+        "Can only set errors on an object which includes ActiveModel::Validations"
+      )
     end
 
     @publishable = obj

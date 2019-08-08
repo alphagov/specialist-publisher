@@ -20,7 +20,7 @@ class PublishWorker
 private
 
   def safe_to_publish?(document)
-    "draft" == document.publication_state
+    document.publication_state == "draft"
   end
 
   def print_limitations_of_publishing(document)

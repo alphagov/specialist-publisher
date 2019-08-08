@@ -10,7 +10,7 @@ namespace :ops do
   end
 
   desc "Set the public_updated_at for a published document"
-  task :set_public_updated_at, [:content_id, :timestamp] => :environment do |_, args|
+  task :set_public_updated_at, %i[content_id timestamp] => :environment do |_, args|
     OpsTasks.set_public_updated_at(args.content_id, args.timestamp)
   end
 end

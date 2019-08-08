@@ -8,28 +8,28 @@ class AllDocumentsFinder
     }
   end
 
-  def self.all(page, per_page, q, document_type)
+  def self.all(page, per_page, query, document_type)
     params = default_find_params(document_type).merge(
-      fields: [
-        :base_path,
-        :content_id,
-        :last_edited_at,
-        :title,
-        :publication_state,
-        :state_history,
+      fields: %i[
+        base_path
+        content_id
+        last_edited_at
+        title
+        publication_state
+        state_history
       ],
       page: page,
       per_page: per_page,
       order: "-last_edited_at",
     )
-    params[:q] = q if q.present?
+    params[:query] = query if query.present?
 
     Services.publishing_api.get_content_items(params)
   end
 
   def self.find_each(klass, query: nil)
     params = default_find_params(klass.document_type).merge(per_page: 50)
-    params[:q] = query if query.present?
+    params[:query] = query if query.present?
 
     current_page = 1
     loop do

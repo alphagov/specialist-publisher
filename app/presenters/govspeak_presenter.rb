@@ -1,6 +1,6 @@
 class GovspeakPresenter
   PRODUCTION_HOSTS = %w(www.gov.uk assets.publishing.service.gov.uk).freeze
-  INTEGRATION_HOSTS = %w{www-origin.integration.publishing.service.gov.uk assets.digital.cabinet-office.gov.uk }.freeze
+  INTEGRATION_HOSTS = %w{www-origin.integration.publishing.service.gov.uk assets.digital.cabinet-office.gov.uk}.freeze
   DEVELOPMENT_HOSTS = %w{assets-origin.dev.gov.uk}.freeze
   attr_accessor :document
 
@@ -31,19 +31,19 @@ class GovspeakPresenter
     govspeak.to_html
   end
 
-  def snippets_match?(a, b)
-    a = sanitise_snippet(a)
-    b = sanitise_snippet(b)
+  def snippets_match?(snippet_a, snippet_b)
+    snippet_a = sanitise_snippet(snippet_a)
+    snippet_b = sanitise_snippet(snippet_b)
 
-    (a == b) && a.present?
+    (snippet_a == snippet_b) && snippet_a.present?
   end
 
   def snippets_in_body
-    @snippets_in_body ||= (
+    @snippets_in_body ||= begin
       body = document.body
       matches = body.scan(/(\[InlineAttachment:.*?\])/)
       matches.flatten
-    )
+    end
   end
 
   def sanitise_snippet(snippet)

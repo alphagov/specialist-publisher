@@ -7,6 +7,7 @@ class Tagger
     existing_taxon_ids, version = fetch_existing_taxons(content_id)
     new_taxon_ids = (yield existing_taxon_ids).uniq
     return false if no_change_in_taxons?(existing_taxon_ids, new_taxon_ids)
+
     tag(content_id, new_taxon_ids, version) if do_tag
     true
   rescue GdsApi::HTTPConflict, GdsApi::HTTPGatewayTimeout, GdsApi::TimedOutException

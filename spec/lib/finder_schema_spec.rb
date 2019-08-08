@@ -25,7 +25,7 @@ RSpec.describe FinderSchema do
       context 'with allowed_values ' do
         context 'looking up a single value' do
           it 'returns an array with only the looked-up value' do
-            expect(schema.humanized_facet_value('country', 'AL')).to eql(['Albania'])
+            expect(schema.humanized_facet_value('country', 'AL')).to eql(%w[Albania])
           end
         end
 

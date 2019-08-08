@@ -5,12 +5,12 @@ RSpec.feature "Searching and filtering", type: :feature do
   let(:cma_cases) {
     ten_example_cases = 10.times.collect do |n|
       FactoryBot.create(:cma_case,
-        "title" => "Example CMA Case #{n}",
-        "description" => "This is the summary of example CMA case #{n}",
-        "base_path" => "/cma-cases/example-cma-case-#{n}",
-        "publication_state" => "draft",
-        "last_edited_at" => (test_date - (n + 1).days).iso8601,
-        "public_updated_at" => (test_date - (10 - n).days).iso8601)
+                        "title" => "Example CMA Case #{n}",
+                        "description" => "This is the summary of example CMA case #{n}",
+                        "base_path" => "/cma-cases/example-cma-case-#{n}",
+                        "publication_state" => "draft",
+                        "last_edited_at" => (test_date - (n + 1).days).iso8601,
+                        "public_updated_at" => (test_date - (10 - n).days).iso8601)
     end
     ten_example_cases[1]["publication_state"] = "published"
     ten_example_cases[1]["state_history"] = { "1" => "published" }
@@ -73,7 +73,7 @@ RSpec.feature "Searching and filtering", type: :feature do
     end
 
     scenario "filtering the items with some results returned" do
-      publishing_api_has_content([cma_cases.first], hash_including(document_type: CmaCase.document_type, q: "0"))
+      publishing_api_has_content([cma_cases.first], hash_including(document_type: CmaCase.document_type, query: "0"))
 
       visit "/cma-cases"
 
@@ -84,7 +84,7 @@ RSpec.feature "Searching and filtering", type: :feature do
     end
 
     scenario "filtering the items with no results returned" do
-      publishing_api_has_content([], hash_including(document_type: CmaCase.document_type, q: "abcdef"))
+      publishing_api_has_content([], hash_including(document_type: CmaCase.document_type, query: "abcdef"))
 
       visit "/cma-cases"
       fill_in "Search", with: "abcdef"

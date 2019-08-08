@@ -50,7 +50,6 @@ module_function
     Document.subclasses.map(&:document_type)
   end
 
-
   def with_timeout(seconds)
     previous_timeout = Services.publishing_api.client.options[:timeout]
 

@@ -5,14 +5,14 @@ class DocumentsController < ApplicationController
   include ActionView::Helpers::TagHelper
   include ActionView::Helpers::TextHelper
 
-  before_action :fetch_document, except: [:index, :new, :create]
+  before_action :fetch_document, except: %i[index new create]
   before_action :check_authorisation, if: :document_type_slug
 
   def index
     page = filtered_page_param(params[:page])
     per_page = filtered_per_page_param(params[:per_page])
     @query = params[:query]
-    @response = current_format.all(page, per_page, q: @query)
+    @response = current_format.all(page, per_page, query: @query)
     @paged_documents = PaginationPresenter.new(@response, per_page)
   end
 

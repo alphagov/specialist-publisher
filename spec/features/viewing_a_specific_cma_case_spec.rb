@@ -15,28 +15,28 @@ RSpec.feature "Viewing a specific case", type: :feature do
     let(:cma_cases) {
       [
         FactoryBot.create(:cma_case,
-          title: "Example CMA Case",
-          description: "This is the summary of example CMA case",
-          publication_state: "draft",
-          state_history: { "1" => "draft" },
-          details: {
-            "body" => [
-              {
-                "content_type" => "text/govspeak",
-                "content" => "## Header" + "\r\n\r\nThis is the long body of an example CMA case"
-              },
-            ],
-            "metadata" => {
-              "bulk_published" => false,
-              "document_type" => "cma_case",
-              "opened_date" => "2014-01-01",
-              "closed_date" => "2015-01-01",
-              "case_type" => "ca98-and-civil-cartels",
-              "case_state" => "closed",
-              "market_sector" => ["energy"],
-              "outcome_type" => "ca98-no-grounds-for-action-non-infringement",
-            }
-          })
+                          title: "Example CMA Case",
+                          description: "This is the summary of example CMA case",
+                          publication_state: "draft",
+                          state_history: { "1" => "draft" },
+                          details: {
+                            "body" => [
+                              {
+                                "content_type" => "text/govspeak",
+                                "content" => "## Header" + "\r\n\r\nThis is the long body of an example CMA case"
+                              },
+                            ],
+                            "metadata" => {
+                              "bulk_published" => false,
+                              "document_type" => "cma_case",
+                              "opened_date" => "2014-01-01",
+                              "closed_date" => "2015-01-01",
+                              "case_type" => "ca98-and-civil-cartels",
+                              "case_state" => "closed",
+                              "market_sector" => %w[energy],
+                              "outcome_type" => "ca98-no-grounds-for-action-non-infringement",
+                            }
+                          })
       ]
     }
 
@@ -71,12 +71,12 @@ RSpec.feature "Viewing a specific case", type: :feature do
     let(:cma_cases) {
       [
         FactoryBot.create(:cma_case,
-          title: "Bulk published CMA Case",
-          details: {
-            "metadata" => {
-              "bulk_published" => true,
-            }
-          })
+                          title: "Bulk published CMA Case",
+                          details: {
+                            "metadata" => {
+                              "bulk_published" => true,
+                            }
+                          })
       ]
     }
 
@@ -92,22 +92,22 @@ RSpec.feature "Viewing a specific case", type: :feature do
     let(:cma_cases) {
       [
         FactoryBot.create(:cma_case,
-          title: "CMA Case without attachments",
-          details: { attachments: [] }),
+                          title: "CMA Case without attachments",
+                          details: { attachments: [] }),
         FactoryBot.create(:cma_case,
-          title: "CMA Case with attachments",
-          details: {
-            attachments: [
-              FactoryBot.create(:attachment_payload,
-                title: 'first attachment',
-                created_at: "2015-12-01T10:12:26+00:00",
-                updated_at: "2015-12-02T10:12:26+00:00"),
-              FactoryBot.create(:attachment_payload,
-                title: 'second attachment',
-                created_at: "2015-12-03T10:12:26+00:00",
-                updated_at: "2015-12-04T10:12:26+00:00"),
-            ]
-          }),
+                          title: "CMA Case with attachments",
+                          details: {
+                            attachments: [
+                              FactoryBot.create(:attachment_payload,
+                                                title: 'first attachment',
+                                                created_at: "2015-12-01T10:12:26+00:00",
+                                                updated_at: "2015-12-02T10:12:26+00:00"),
+                              FactoryBot.create(:attachment_payload,
+                                                title: 'second attachment',
+                                                created_at: "2015-12-03T10:12:26+00:00",
+                                                updated_at: "2015-12-04T10:12:26+00:00"),
+                            ]
+                          }),
       ]
     }
 
@@ -138,49 +138,46 @@ RSpec.feature "Viewing a specific case", type: :feature do
     let(:cma_cases) {
       [
         FactoryBot.create(:cma_case,
-          title: "Example Draft",
-          publication_state: "draft",
-          state_history: { "1" => "draft" }
-                          ),
+                          title: "Example Draft",
+                          publication_state: "draft",
+                          state_history: { "1" => "draft" }),
         FactoryBot.create(:cma_case,
-          title: "Example Published",
-          publication_state: "published",
-          state_history: { "1" => "published" }
-                          ),
+                          title: "Example Published",
+                          publication_state: "published",
+                          state_history: { "1" => "published" }),
         FactoryBot.create(:cma_case,
-          title: "Example Unpublished",
-          publication_state: "unpublished",
-          state_history: { "1" => "unpublished" }
-                          ),
+                          title: "Example Unpublished",
+                          publication_state: "unpublished",
+                          state_history: { "1" => "unpublished" }),
         FactoryBot.create(:cma_case,
-          title: "Example Published with new draft",
-          publication_state: "draft",
-          state_history: {
-            "1" => "published",
-            "2" => "draft"
-          }),
+                          title: "Example Published with new draft",
+                          publication_state: "draft",
+                          state_history: {
+                            "1" => "published",
+                            "2" => "draft"
+                          }),
         FactoryBot.create(:cma_case,
-          title: "Example Unpublished with new draft",
-          publication_state: "draft",
-          state_history: {
-            "1" => "unpublished",
-            "2" => "draft"
-          }),
+                          title: "Example Unpublished with new draft",
+                          publication_state: "draft",
+                          state_history: {
+                            "1" => "unpublished",
+                            "2" => "draft"
+                          }),
         FactoryBot.create(:cma_case,
-          title: "More states",
-          publication_state: "draft",
-          state_history: {
-            "1" => "unpublished",
-            "2" => "published",
-            "3" => "draft"
-          }),
+                          title: "More states",
+                          publication_state: "draft",
+                          state_history: {
+                            "1" => "unpublished",
+                            "2" => "published",
+                            "3" => "draft"
+                          }),
         FactoryBot.create(:cma_case,
-          title: "More states Published",
-          publication_state: "published",
-          state_history: {
-            "1" => "unpublished",
-            "2" => "published"
-          }),
+                          title: "More states Published",
+                          publication_state: "published",
+                          state_history: {
+                            "1" => "unpublished",
+                            "2" => "published"
+                          }),
       ]
     }
 

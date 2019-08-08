@@ -15,8 +15,8 @@ RSpec.describe Republisher do
       stub_index(document_type, content_ids: [])
     end
 
-    stub_index("raib_report", content_ids: ["raib-1", "raib-2"])
-    stub_index("cma_case", content_ids: ["cma-1", "cma-2"])
+    stub_index("raib_report", content_ids: %w[raib-1 raib-2])
+    stub_index("cma_case", content_ids: %w[cma-1 cma-2])
   end
 
   describe ".republish_all" do
@@ -63,7 +63,7 @@ RSpec.describe Republisher do
       expect(RepublishWorker).to receive(:perform_async).with("content-id-2")
       expect(RepublishWorker).not_to receive(:perform_async).with("raib-1")
 
-      subject.republish_many(["content-id-1", "content-id-2"])
+      subject.republish_many(%w[content-id-1 content-id-2])
     end
   end
 end

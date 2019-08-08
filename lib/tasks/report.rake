@@ -1,6 +1,6 @@
 namespace :report do
   desc "validate inline attachments snippets for all documents of a class"
-  task :attachments, [:class_name] => :environment do |_, args|
+  task :attachments, [:class_name] => :environment do |_, args| # rubocop:disable Metrics/BlockLength - it could be extracted into a PORO
     if args.class_name.blank? || args.class_name == "all"
       Rails.application.eager_load!
       classes = Document.subclasses
@@ -8,7 +8,7 @@ namespace :report do
       classes = [args.class_name.constantize]
     end
 
-    classes.each do |klass|
+    classes.each do |klass| # rubocop:disable Metrics/BlockLength
       puts "Validating inline attachment snippets for #{klass}"
 
       page_size = 10
@@ -29,7 +29,7 @@ namespace :report do
 
         begin
           report = AttachmentReporter.report(document)
-        rescue => e
+        rescue StandardError => e
           puts "\nfailed to generate report for #{klass} #{content_id}:"
           puts "  #{e.class}: #{e.message}\n"
           next
@@ -61,13 +61,13 @@ namespace :report do
   end
 
   desc "generate a report of counts of published PDF documents per organisation to help the Content Operating Model team"
-  task pdf_content_operating_model: :environment do
+  task pdf_content_operating_model: :environment do # rubocop:disable Metrics/BlockLength - it could be extracted into a PORO
     def unique_owning_organisation_ids
-      @_owning_organisation_ids ||= all_document_classes.map { |document| document.organisations.first }.uniq
+      @unique_owning_organisation_ids ||= all_document_classes.map { |document| document.organisations.first }.uniq
     end
 
     def all_document_classes
-      @_all_document_classes ||= FinderSchema.schema_names.map do |schema_name|
+      @all_document_classes ||= FinderSchema.schema_names.map do |schema_name|
         schema_name.singularize.camelize.constantize
       end
     end
@@ -77,7 +77,7 @@ namespace :report do
     end
 
     def each_document_content_id_and_state_history(document_class, &block)
-      ReportDocumentPaginator.new(document_class, [:content_id, :state_history]).each(&block)
+      ReportDocumentPaginator.new(document_class, %i[content_id state_history]).each(&block)
     end
 
     def document_published_prior_to_date?(document, date)
@@ -160,9 +160,9 @@ namespace :report do
   end
 
   desc "generate a report on all documents to help the Content Operating Model team"
-  task content_operating_model: :environment do
+  task content_operating_model: :environment do # rubocop:disable Metrics/BlockLength - it could be extracted into a PORO
     def all_document_classes
-      @_all_document_classes ||= FinderSchema.schema_names.map do |schema_name|
+      @all_document_classes ||= FinderSchema.schema_names.map do |schema_name|
         schema_name.singularize.camelize.constantize
       end
     end
@@ -172,7 +172,7 @@ namespace :report do
     end
 
     def each_document(document_class, &block)
-      document_field_params = [:base_path, :content_id, :publication_state, :first_published_at]
+      document_field_params = %i[base_path content_id publication_state first_published_at]
       ReportDocumentPaginator.new(document_class, document_field_params).each(&block)
     end
 
@@ -210,22 +210,18 @@ namespace :report do
           organisations_for_csv = organisations_for_document_class(document_class).join(', ')
           each_document(document_class) do |document_hash|
             document_count += 1
-            document_csv << [
-              public_url_for(document_hash),
-              organisations_for_csv,
-              document_class.title,
-              document_hash["publication_state"],
-              document_hash["first_published_at"] || "Never published to GOV.UK",
-            ]
+            document_csv << [public_url_for(document_hash),
+                             organisations_for_csv,
+                             document_class.title,
+                             document_hash["publication_state"],
+                             document_hash["first_published_at"] || "Never published to GOV.UK"]
           end
           finder_document_hash = get_finder_document_hash(document_class.finder_schema)
-          finder_csv << [
-            public_url_for(finder_document_hash),
-            organisations_for_csv,
-            finder_document_hash["publication_state"],
-            document_count,
-            finder_document_hash["first_published_at"],
-          ]
+          finder_csv << [public_url_for(finder_document_hash),
+                         organisations_for_csv,
+                         finder_document_hash["publication_state"],
+                         document_count,
+                         finder_document_hash["first_published_at"]]
         end
       end
     end

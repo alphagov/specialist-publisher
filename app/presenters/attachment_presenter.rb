@@ -3,7 +3,7 @@ class AttachmentPresenter
     @attachment = attachment
   end
 
-  def to_json
+  def to_json(*_args)
     {
       url: @attachment.url,
       title: @attachment.title,

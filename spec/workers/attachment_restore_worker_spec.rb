@@ -26,8 +26,8 @@ RSpec.describe AttachmentRestoreWorker do
 
   let!(:document) do
     FactoryBot.create(:cma_case,
-                       :published,
-                       content_id: content_id)
+                      :published,
+                      content_id: content_id)
   end
 
   before do

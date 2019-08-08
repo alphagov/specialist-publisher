@@ -28,7 +28,7 @@ class DocumentBuilder
     document.attachments = Attachment.all_from_publishing_api(payload)
 
     document.format_specific_fields.each do |field|
-      document.public_send(:"#{field.to_s}=", payload['details']['metadata'][field.to_s])
+      document.public_send(:"#{field}=", payload['details']['metadata'][field.to_s])
     end
 
     document.body = SpecialistPublisherBodyPresenter.present(document)

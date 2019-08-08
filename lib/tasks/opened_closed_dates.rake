@@ -5,8 +5,8 @@ task opened_before_closed_dates: :environment do
     per_page: 999999,
   ).results
 
-  non_blank_opened_dates = cma_cases.select { |cma| !cma.details.metadata.opened_date.blank? }
-  non_blank_closed_dates = cma_cases.select { |cma| !cma.details.metadata.closed_date.blank? }
+  non_blank_opened_dates = cma_cases.reject { |cma| cma.details.metadata.opened_date.blank? }
+  non_blank_closed_dates = cma_cases.reject { |cma| cma.details.metadata.closed_date.blank? }
 
   non_blank_opened_dates.each do |cma|
     if non_blank_closed_dates.include? cma

@@ -5,26 +5,27 @@ class Document
   include DateHelper
   include PublishingHelper
 
+  attr_reader :update_type
+  attr_writer(
+    :temporary_update_type,
+    :bulk_published,
+    :base_path,
+    :document_type,
+    :links
+  )
   attr_accessor(
     :content_id,
-    :base_path,
     :title,
     :summary,
     :body,
     :format_specific_fields,
     :public_updated_at,
     :state,
-    :bulk_published,
     :publication_state,
     :state_history,
-    :document_type,
-    :attachments,
     :first_published_at,
     :previous_version,
-    :temporary_update_type,
-    :update_type,
     :warnings,
-    :links,
   )
 
   def temporary_update_type
@@ -38,19 +39,19 @@ class Document
   validates :update_type, presence: true, unless: :first_draft?
   validates :change_note, presence: true, if: :change_note_required?
 
-  COMMON_FIELDS = [
-    :base_path,
-    :title,
-    :summary,
-    :body,
-    :publication_state,
-    :state_history,
-    :public_updated_at,
-    :first_published_at,
-    :update_type,
-    :bulk_published,
-    :temporary_update_type,
-    :warnings
+  COMMON_FIELDS = %i[
+    base_path
+    title
+    summary
+    body
+    publication_state
+    state_history
+    public_updated_at
+    first_published_at
+    update_type
+    bulk_published
+    temporary_update_type
+    warnings
   ].freeze
 
   AIR_ACCIDENTS_AND_SERIOUS_INCIDENTS_TAXON_ID = '951ece54-c6df-4fbc-aa18-1bc629815fe2'.freeze
@@ -83,7 +84,7 @@ class Document
   end
 
   def set_attributes(attrs, keys = nil)
-    keys = attrs.keys unless keys
+    keys ||= attrs.keys
     keys.each do |key|
       public_send(:"#{clean_key(key.to_s)}=", param_value(attrs, key))
     end
@@ -144,16 +145,19 @@ class Document
 
   def change_note_required?
     return unless update_type == "major"
+
     !first_draft?
   end
 
   def change_note
     return unless update_type == "major"
+
     @change_note
   end
 
   def change_note=(note)
     return unless update_type == "major"
+
     @change_note = note
   end
 
@@ -205,8 +209,8 @@ class Document
     DocumentBuilder.build(self, payload)
   end
 
-  def self.all(page, per_page, q: nil)
-    AllDocumentsFinder.all(page, per_page, q, self.document_type)
+  def self.all(page, per_page, query: nil)
+    AllDocumentsFinder.all(page, per_page, query, self.document_type)
   end
 
   def self.find(content_id)
@@ -279,6 +283,7 @@ class Document
 
   def set_temporary_update_type!
     return if update_type
+
     self.temporary_update_type = true
     self.update_type = "minor"
   end

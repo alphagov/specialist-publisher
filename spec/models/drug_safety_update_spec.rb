@@ -13,8 +13,9 @@ RSpec.describe DrugSafetyUpdate do
     let(:payload) {
       FactoryBot.create(
         :drug_safety_update,
-          :published,
-          update_type: "major",)
+        :published,
+        update_type: "major",
+      )
     }
     let(:document) { described_class.from_publishing_api(payload) }
 

@@ -58,61 +58,61 @@ RSpec.describe BusinessFinanceSupportSchemeExportPresenter do
     end
 
     it 'includes the humanized version of the business_sizes value in the correct field' do
-      document.business_sizes = ['under-10']
+      document.business_sizes = %w[under-10]
       position = described_class.header_row.index('Number of employees')
       expect(subject.row[position]).to eq '0 to 9 employees'
     end
 
     it 'concatenates all values for business_sizes with ;' do
-      document.business_sizes = ['under-10', 'over-500']
+      document.business_sizes = %w[under-10 over-500]
       position = described_class.header_row.index('Number of employees')
       expect(subject.row[position]).to eq '0 to 9 employees;More than 500 employees'
     end
 
     it 'includes the humanized version of the business_stages value in the correct field' do
-      document.business_stages = ['not-yet-trading']
+      document.business_stages = %w[not-yet-trading]
       position = described_class.header_row.index('Business stage')
       expect(subject.row[position]).to eq 'Not yet trading'
     end
 
     it 'concatenates all values for business_stages with ;' do
-      document.business_stages = ['not-yet-trading', 'start-up']
+      document.business_stages = %w[not-yet-trading start-up]
       position = described_class.header_row.index('Business stage')
       expect(subject.row[position]).to eq 'Not yet trading;Start-ups (1-2 years trading)'
     end
 
     it 'includes the humanized version of the industries value in the correct field' do
-      document.industries = ['agriculture-and-food']
+      document.industries = %w[agriculture-and-food]
       position = described_class.header_row.index('Industry')
       expect(subject.row[position]).to eq 'Agriculture and food'
     end
 
     it 'concatenates all values for industries with ;' do
-      document.industries = ['agriculture-and-food', 'information-technology-digital-and-creative']
+      document.industries = %w[agriculture-and-food information-technology-digital-and-creative]
       position = described_class.header_row.index('Industry')
       expect(subject.row[position]).to eq 'Agriculture and food;IT, digital and creative'
     end
 
     it 'includes the humanized version of the regions value in the correct field' do
-      document.regions = ['northern-ireland']
+      document.regions = %w[northern-ireland]
       position = described_class.header_row.index('Region')
       expect(subject.row[position]).to eq 'Northern Ireland'
     end
 
     it 'concatenates all values for regions with ;' do
-      document.regions = ['northern-ireland', 'scotland']
+      document.regions = %w[northern-ireland scotland]
       position = described_class.header_row.index('Region')
       expect(subject.row[position]).to eq 'Northern Ireland;Scotland'
     end
 
     it 'includes the humanized version of the types_of_support value in the correct field' do
-      document.types_of_support = ['finance']
+      document.types_of_support = %w[finance]
       position = described_class.header_row.index('Type of support')
       expect(subject.row[position]).to eq 'Finance'
     end
 
     it 'concatenates all values for types_of_support with ;' do
-      document.types_of_support = ['finance', 'recognition-award']
+      document.types_of_support = %w[finance recognition-award]
       position = described_class.header_row.index('Type of support')
       expect(subject.row[position]).to eq 'Finance;Recognition awards'
     end

@@ -30,10 +30,10 @@ RSpec.describe Tagger do
 
     it 'retries 3 times' do
       stub_any_publishing_api_patch_links.and_raise(GdsApi::HTTPConflict).times(2).then.to_return(body: '{}')
-      expect { subject.add_tags(@content_id) { ['ccc'] } }.to_not raise_error
+      expect { subject.add_tags(@content_id) { %w[ccc] } }.to_not raise_error
 
       stub_any_publishing_api_patch_links.and_raise(GdsApi::HTTPConflict).times(3).then.to_return(body: '{}')
-      expect { subject.add_tags(@content_id) { ['ccc'] } }.to raise_error(GdsApi::HTTPConflict)
+      expect { subject.add_tags(@content_id) { %w[ccc] } }.to raise_error(GdsApi::HTTPConflict)
     end
   end
 end

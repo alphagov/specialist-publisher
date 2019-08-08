@@ -1,5 +1,12 @@
-FinderContentItemPresenter = Struct.new(:file, :timestamp) do
-  def to_json
+class FinderContentItemPresenter
+  attr_reader :file, :timestamp
+
+  def initialize(file, timestamp)
+    @file = file
+    @timestamp = timestamp
+  end
+
+  def to_json(*_args)
     {
       base_path: base_path,
       document_type: format,
