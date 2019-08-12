@@ -57,7 +57,7 @@ RSpec.describe Document do
           page: 1,
           per_page: 20,
           order: "-last_edited_at",
-          query: "foo",
+          q: "foo",
         )
 
       MyDocumentType.all(1, 20, query: "foo")
