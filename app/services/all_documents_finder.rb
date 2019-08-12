@@ -22,14 +22,14 @@ class AllDocumentsFinder
       per_page: per_page,
       order: "-last_edited_at",
     )
-    params[:query] = query if query.present?
+    params[:q] = query if query.present?
 
     Services.publishing_api.get_content_items(params)
   end
 
   def self.find_each(klass, query: nil)
     params = default_find_params(klass.document_type).merge(per_page: 50)
-    params[:query] = query if query.present?
+    params[:q] = query if query.present?
 
     current_page = 1
     loop do

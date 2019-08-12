@@ -134,7 +134,7 @@ RSpec.describe AllDocumentsFinder do
           page: (index + 1).to_s,
           document_type: document_klass.document_type
         }
-        query_params[:query] = search_query if search_query.present?
+        query_params[:q] = search_query if search_query.present?
 
         stub_request(:get, GdsApi::TestHelpers::PublishingApiV2::PUBLISHING_API_V2_ENDPOINT + '/content')
           .with(query: hash_including(query_params))

@@ -73,7 +73,7 @@ RSpec.feature "Searching and filtering", type: :feature do
     end
 
     scenario "filtering the items with some results returned" do
-      publishing_api_has_content([cma_cases.first], hash_including(document_type: CmaCase.document_type, query: "0"))
+      publishing_api_has_content([cma_cases.first], hash_including(document_type: CmaCase.document_type, q: "0"))
 
       visit "/cma-cases"
 
@@ -84,7 +84,7 @@ RSpec.feature "Searching and filtering", type: :feature do
     end
 
     scenario "filtering the items with no results returned" do
-      publishing_api_has_content([], hash_including(document_type: CmaCase.document_type, query: "abcdef"))
+      publishing_api_has_content([], hash_including(document_type: CmaCase.document_type, q: "abcdef"))
 
       visit "/cma-cases"
       fill_in "Search", with: "abcdef"
