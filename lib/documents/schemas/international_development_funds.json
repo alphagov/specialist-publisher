@@ -143,10 +143,6 @@
           "label": "Burkina Faso"
         },
         {
-          "value": "burma",
-          "label": "Burma"
-        },
-        {
           "value": "burundi",
           "label": "Burundi"
         },
@@ -519,6 +515,10 @@
           "label": "Mozambique"
         },
         {
+          "value": "myanmar",
+          "label": "Myanmar"
+        },
+        {
           "value": "namibia",
           "label": "Namibia"
         },
@@ -557,6 +557,10 @@
         {
           "value": "norway",
           "label": "Norway"
+        },
+        {
+          "value": "the-occupied-palestinian-territories",
+          "label": "Occupied Palestinian Territories, The"
         },
         {
           "value": "oman",
