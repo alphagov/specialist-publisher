@@ -13,7 +13,7 @@ gem 'mongoid', '< 6.3'
 # MongoDB 2.4 compatibility is required, which was removed in 2.5
 gem 'mongo', '< 2.5'
 gem 'pundit'
-gem 'sass-rails', '~> 5'
+gem 'sass-rails', '~> 6'
 gem 'select2-rails', '~> 3'
 gem 'uglifier', '~> 4'
 
