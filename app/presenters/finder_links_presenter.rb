@@ -6,6 +6,7 @@ FinderLinksPresenter = Struct.new(:file) do
         organisations: organisations,
         related: related,
         email_alert_signup: email_alert_signup,
+        parent: parent,
       },
     }
   end
@@ -22,5 +23,9 @@ private
 
   def email_alert_signup
     [file.fetch("signup_content_id", nil)].compact
+  end
+
+  def parent
+    [file.fetch("parent", nil)].compact
   end
 end
