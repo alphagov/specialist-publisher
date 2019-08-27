@@ -15,7 +15,7 @@ RSpec.feature "Publishing a CMA case", type: :feature do
     stub_any_publishing_api_put_content
     stub_any_publishing_api_patch_links
     stub_publishing_api_publish(content_id, {})
-    email_alert_api_accepts_alert
+    stub_email_alert_api_accepts_content_change
   end
 
   after do
@@ -65,7 +65,7 @@ RSpec.feature "Publishing a CMA case", type: :feature do
       assert_publishing_api_put_content(content_id, request_json_includes(changed_json))
 
       assert_publishing_api_publish(content_id)
-      assert_email_alert_sent
+      assert_email_alert_api_content_change_created
     end
 
     scenario "publish warning and popup text will indicate that an email will be sent" do
