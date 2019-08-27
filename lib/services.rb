@@ -17,12 +17,4 @@ module Services
       bearer_token: ENV['ASSET_MANAGER_BEARER_TOKEN'] || '12345678'
     )
   end
-
-  # Asynchronously called from app/workers.
-  def self.email_alert_api
-    @email_alert_api ||= GdsApi::EmailAlertApi.new(
-      Plek.current.find('email-alert-api'),
-      bearer_token: ENV['EMAIL_ALERT_API_BEARER_TOKEN'] || 'example123'
-    )
-  end
 end

@@ -9,7 +9,7 @@ module_function
     document = Document.find(content_id)
     payload = EmailAlertPresenter.new(document).to_json
 
-    Services.email_alert_api.create_content_change(payload)
+    GdsApi.email_alert_api.create_content_change(payload)
   end
 
   def set_public_updated_at(content_id, timestamp)
