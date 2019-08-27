@@ -246,7 +246,7 @@ RSpec.describe Document do
       stub_any_publishing_api_patch_links
       stub_publishing_api_publish(document.content_id, {})
       publishing_api_has_item(payload)
-      @email_alert_api = email_alert_api_accepts_alert
+      @email_alert_api = stub_email_alert_api_accepts_content_change
     end
 
     it "sends a payload to Publishing API" do
@@ -260,7 +260,7 @@ RSpec.describe Document do
 
       expect(document.publish).to eq(true)
 
-      assert_email_alert_sent(
+      assert_email_alert_api_content_change_created(
         "tags" => {
           "format" => "my_document_type",
           "field1" => "2015-12-01",

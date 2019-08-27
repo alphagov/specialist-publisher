@@ -23,11 +23,11 @@ RSpec.describe OpsTasks do
 
   describe "#email" do
     it "sends a notification request to the email alert api" do
-      email_alert_api_accepts_alert
+      stub_email_alert_api_accepts_content_change
 
       subject.email(content_id)
 
-      assert_email_alert_sent
+      assert_email_alert_api_content_change_created
     end
   end
 

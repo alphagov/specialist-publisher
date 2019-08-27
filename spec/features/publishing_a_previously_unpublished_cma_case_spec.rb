@@ -23,7 +23,7 @@ RSpec.feature "Publishing a previously unpublished CMA Case", type: :feature do
     stub_any_publishing_api_put_content
     stub_any_publishing_api_patch_links
     stub_publishing_api_publish(content_id, {})
-    email_alert_api_accepts_alert
+    stub_email_alert_api_accepts_content_change
 
     visit "/cma-cases/#{content_id}"
   end
