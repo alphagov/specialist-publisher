@@ -7,6 +7,7 @@ FinderLinksPresenter = Struct.new(:file) do
         related: related,
         email_alert_signup: email_alert_signup,
         parent: parent,
+        topics: topics,
       },
     }
   end
@@ -19,6 +20,10 @@ private
 
   def related
     file.fetch("related", [])
+  end
+
+  def topics
+    file.fetch("topics", [])
   end
 
   def email_alert_signup
