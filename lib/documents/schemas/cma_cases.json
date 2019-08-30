@@ -11,11 +11,11 @@
   "signup_copy": "You'll get an email each time a case is updated or a new case is published.",
   "organisations": ["957eb4ec-089b-4f71-ba2a-dc69ac8919ea"],
   "topics": [
-    "competition/competition-act-cartels",
-    "competition/consumer-protection",
-    "competition/markets",
-    "competition/mergers",
-    "competition/regulatory-appeals-references"
+    "4a6f14ad-baa1-4b15-8026-8282913ef693",
+    "65a89136-2117-41aa-ba96-35feb9d821f5",
+    "1433d403-333f-4d81-b83a-c5358412fd1b",
+    "7aa3ec0c-683e-44ba-aa3f-cc9655651b9b",
+    "fd11e3b0-76bc-4197-b652-a030b57915be"
   ],
   "subscription_list_title_prefix": {
     "singular": "CMA cases with the following case type: ",

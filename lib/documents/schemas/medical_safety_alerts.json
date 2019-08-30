@@ -14,8 +14,8 @@
   "organisations": ["240f72bd-9a4d-4f39-94d9-77235cadde8e"],
   "related": ["602be505-4cf4-4f8c-8bfc-7bc4b63a7f47"],
   "topics": [
-    "medicines-medical-devices-blood/medical-devices-regulation-safety",
-    "medicines-medical-devices-blood/vigilance-safety-alerts"
+    "dd762ed5-abc8-4502-b4b4-3b51f9b7b0ca",
+    "3455b248-9237-40ac-ae9b-480a6a8ebd88"
   ],
   "email_filter_name": "Alert Type",
   "email_filter_by": "alert_type",
