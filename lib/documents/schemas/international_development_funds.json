@@ -558,6 +558,10 @@
           "value": "norway",
           "label": "Norway"
         },
+	{
+          "value": "the-occupied-palestinian-territories",
+          "label": "Occupied Palestinian Territories, The"
+        },
         {
           "value": "oman",
           "label": "Oman"
