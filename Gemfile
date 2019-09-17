@@ -23,7 +23,7 @@ gem 'gds-sso', '~> 14'
 gem 'govspeak', '~> 6'
 gem 'govuk_admin_template', '~> 6'
 gem 'govuk_app_config', '~> 2'
-gem 'govuk_frontend_toolkit', '~> 8'
+gem 'govuk_frontend_toolkit', '~> 9'
 gem 'plek', '~> 3'
 
 group :development, :test do
