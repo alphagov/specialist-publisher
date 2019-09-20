@@ -31,10 +31,6 @@
       "filterable": true,
       "allowed_values": [
         {
-          "label": "Client money",
-          "value": "client-money"
-        },
-        {
           "label": "Housing Act 2004 and Housing and Planning Act 2016",
           "value": "housing-act-2004-and-housing-and-planning-act-2016"
         },
@@ -61,10 +57,6 @@
         {
           "label": "Tenant associations",
           "value": "tenant-associations"
-        },
-        {
-          "label": "Tenant Fees Act",
-          "value": "tenant-fees-act"
         }
       ]
     },
