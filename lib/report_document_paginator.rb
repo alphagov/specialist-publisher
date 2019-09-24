@@ -9,10 +9,10 @@ class ReportDocumentPaginator
     page = 1
     loop do
       response = Services.publishing_api.get_content_items(params(page))
-      break if response['results'].empty?
+      break if response["results"].empty?
 
-      response['results'].each(&block)
-      break if response['current_page'] >= response['pages']
+      response["results"].each(&block)
+      break if response["current_page"] >= response["pages"]
 
       page += 1
     end

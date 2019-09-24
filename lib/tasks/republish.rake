@@ -1,7 +1,7 @@
 # At present, these tasks will only republish documents that are in a draft,
 # published or republished state.
-require 'csv'
-require 'services'
+require "csv"
+require "services"
 
 namespace :republish do
   # Caution: These tasks should be avoided in production environnments  as
@@ -27,6 +27,6 @@ namespace :republish do
 
   desc "republish many documents (space separated list of content IDs)"
   task :many, [:content_ids] => :environment do |_, args|
-    Republisher.republish_many(args.content_ids.split(' '))
+    Republisher.republish_many(args.content_ids.split(" "))
   end
 end

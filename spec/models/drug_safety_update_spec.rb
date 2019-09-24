@@ -1,11 +1,11 @@
-require 'spec_helper'
-require 'models/valid_against_schema'
+require "spec_helper"
+require "models/valid_against_schema"
 
 RSpec.describe DrugSafetyUpdate do
   let(:payload) { FactoryBot.create(:drug_safety_update) }
   include_examples "it saves payloads that are valid against the 'specialist_document' schema"
 
-  it 'is not exportable' do
+  it "is not exportable" do
     expect(described_class).not_to be_exportable
   end
 
@@ -29,7 +29,7 @@ RSpec.describe DrugSafetyUpdate do
       document.publish
 
       assert_publishing_api_publish(payload["content_id"])
-      assert_not_requested(:post, Plek.current.find('email-alert-api') + "/notifications")
+      assert_not_requested(:post, Plek.current.find("email-alert-api") + "/notifications")
     end
   end
 end

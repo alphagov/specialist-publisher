@@ -1,9 +1,9 @@
-require 'spec_helper'
+require "spec_helper"
 
 RSpec.feature "Publishing a CMA case", type: :feature do
-  let(:content_id) { item['content_id'] }
-  let(:publish_alert_message) { page.find_button('Publish')["data-message"] }
-  let(:publish_disable_with_message) { page.find_button('Publish')["data-disable-with"] }
+  let(:content_id) { item["content_id"] }
+  let(:publish_alert_message) { page.find_button("Publish")["data-message"] }
+  let(:publish_disable_with_message) { page.find_button("Publish")["data-disable-with"] }
 
   before do
     Timecop.freeze(Time.parse("2015-12-03T16:59:13+00:00"))
@@ -29,7 +29,7 @@ RSpec.feature "Publishing a CMA case", type: :feature do
         title: "Example CMA Case",
         base_path: "/cma-cases/example-cma-case",
         public_updated_at: "2015-11-16T11:53:30+00:00",
-        publication_state: "draft"
+        publication_state: "draft",
       )
     }
 
@@ -40,7 +40,7 @@ RSpec.feature "Publishing a CMA case", type: :feature do
         content_id: content_id,
         title: "Example CMA Case",
         base_path: "/cma-cases/example-cma-case",
-        public_updated_at: "2015-11-16T11:53:30+00:00"
+        public_updated_at: "2015-11-16T11:53:30+00:00",
       )
     }
 
@@ -89,7 +89,7 @@ RSpec.feature "Publishing a CMA case", type: :feature do
       visit "/cma-cases"
       click_link "Example CMA Case"
 
-      expect(page).to have_no_selector(:button, 'Publish')
+      expect(page).to have_no_selector(:button, "Publish")
       expect(page).to have_content("You don't have permission to publish this document.")
     end
   end
@@ -107,7 +107,7 @@ RSpec.feature "Publishing a CMA case", type: :feature do
 
       click_link "Live Item"
 
-      expect(page).to have_no_selector(:button, 'Publish')
+      expect(page).to have_no_selector(:button, "Publish")
       expect(page).to have_content("There are no changes to publish.")
     end
   end
@@ -188,7 +188,7 @@ RSpec.feature "Publishing a CMA case", type: :feature do
 
       assert_publishing_api_publish(content_id)
 
-      assert_not_requested(:post, Plek.current.find('email-alert-api') + "/notifications")
+      assert_not_requested(:post, Plek.current.find("email-alert-api") + "/notifications")
     end
 
     scenario "publish warning and popup text will indicate that it is a minor edit" do
@@ -213,7 +213,7 @@ RSpec.feature "Publishing a CMA case", type: :feature do
         :cma_case,
         :published,
         title: "Unpublished Item",
-        publication_state: "unpublished"
+        publication_state: "unpublished",
       )
     }
 
@@ -223,7 +223,7 @@ RSpec.feature "Publishing a CMA case", type: :feature do
 
       click_link "Unpublished Item"
 
-      expect(page).to have_no_selector(:button, 'Publish')
+      expect(page).to have_no_selector(:button, "Publish")
       expect(page).to have_content("The document is unpublished. You need to create a new draft before it can be published.")
     end
   end

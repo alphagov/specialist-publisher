@@ -1,7 +1,7 @@
-require 'spec_helper'
+require "spec_helper"
 
 RSpec.feature "Discarding a draft CMA Case", type: :feature do
-  let(:content_id) { item['content_id'] }
+  let(:content_id) { item["content_id"] }
 
   before do
     publishing_api_has_item(item)

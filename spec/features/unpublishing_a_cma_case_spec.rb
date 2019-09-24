@@ -1,7 +1,7 @@
-require 'spec_helper'
+require "spec_helper"
 
 RSpec.feature "Unpublishing a CMA Case", type: :feature do
-  let(:content_id) { item['content_id'] }
+  let(:content_id) { item["content_id"] }
 
   before do
     log_in_as_editor(:cma_editor)
@@ -16,7 +16,7 @@ RSpec.feature "Unpublishing a CMA Case", type: :feature do
     }
 
     scenario "clicking the unpublish button redirects back to the show page" do
-      stub_publishing_api_unpublish(content_id, body: { type: 'gone' })
+      stub_publishing_api_unpublish(content_id, body: { type: "gone" })
 
       visit document_path(content_id: content_id, document_type_slug: "cma-cases")
       expect(page).to have_content("Example CMA Case")
@@ -28,7 +28,7 @@ RSpec.feature "Unpublishing a CMA Case", type: :feature do
     end
 
     scenario "specifying a redirect to an alternative GOV.UK content path" do
-      stub_publishing_api_unpublish(content_id, body: { type: 'redirect', alternative_path: "/government/organisations/competition-and-markets-authority" })
+      stub_publishing_api_unpublish(content_id, body: { type: "redirect", alternative_path: "/government/organisations/competition-and-markets-authority" })
 
       publishing_api_has_lookups("/government/organisations/competition-and-markets-authority" => SecureRandom.uuid)
 
@@ -62,7 +62,7 @@ RSpec.feature "Unpublishing a CMA Case", type: :feature do
 
       visit document_path(content_id: content_id, document_type_slug: "cma-cases")
 
-      expect(page).to have_no_selector(:button, 'Unpublish document')
+      expect(page).to have_no_selector(:button, "Unpublish document")
     end
 
     context "with attachments" do
@@ -74,7 +74,7 @@ RSpec.feature "Unpublishing a CMA Case", type: :feature do
             "content_type" => "application/jpeg",
             "title" => "asylum report image title",
             "created_at" => "2015-12-03T16:59:13+00:00",
-            "updated_at" => "2015-12-03T16:59:13+00:00"
+            "updated_at" => "2015-12-03T16:59:13+00:00",
           },
           {
             "content_id" => "ec3f6901-4156-4720-b4e5-f04c0b152141",
@@ -82,8 +82,8 @@ RSpec.feature "Unpublishing a CMA Case", type: :feature do
             "content_type" => "application/pdf",
             "title" => "asylum report pdf title",
             "created_at" => "2015-12-03T16:59:13+00:00",
-            "updated_at" => "2015-12-03T16:59:13+00:00"
-          }
+            "updated_at" => "2015-12-03T16:59:13+00:00",
+          },
         ]
       }
 
@@ -92,13 +92,13 @@ RSpec.feature "Unpublishing a CMA Case", type: :feature do
           :cma_case,
           :published,
           title: "Example CMA Case",
-          details: { "attachments" => existing_attachments }
+          details: { "attachments" => existing_attachments },
         )
       }
 
       scenario "clicking the unpublish button deletes document attachments" do
         Sidekiq::Testing.inline! do
-          stub_publishing_api_unpublish(content_id, body: { type: 'gone' })
+          stub_publishing_api_unpublish(content_id, body: { type: "gone" })
 
           visit document_path(content_id: content_id, document_type_slug: "cma-cases")
 
@@ -124,7 +124,7 @@ RSpec.feature "Unpublishing a CMA Case", type: :feature do
     }
 
     scenario "clicking the unpublish button shows an error message" do
-      stub_publishing_api_unpublish(content_id, { body: { type: 'gone' } }, status: 409)
+      stub_publishing_api_unpublish(content_id, { body: { type: "gone" } }, status: 409)
 
       visit document_path(content_id: content_id, document_type_slug: "cma-cases")
       expect(page).to have_content("Example CMA Case")

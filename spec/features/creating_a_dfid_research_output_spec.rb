@@ -1,10 +1,10 @@
-require 'spec_helper'
+require "spec_helper"
 
 RSpec.feature "Creating a DFID Research Output", type: :feature do
   let(:fields)            { %i[base_path content_id public_updated_at title publication_state] }
   let(:research_output)   { FactoryBot.create(:dfid_research_output) }
-  let(:content_id)        { research_output['content_id'] }
-  let(:public_updated_at) { research_output['public_updated_at'] }
+  let(:content_id)        { research_output["content_id"] }
+  let(:public_updated_at) { research_output["public_updated_at"] }
 
   before do
     log_in_as_editor(:dfid_editor)
@@ -22,8 +22,8 @@ RSpec.feature "Creating a DFID Research Output", type: :feature do
     visit "/dfid-research-outputs/new"
 
     expect(page.status_code).to eq(200)
-    expect(page).to have_css('div.govspeak-help')
-    expect(page).to have_content('To add an attachment, please save the draft first.')
+    expect(page).to have_css("div.govspeak-help")
+    expect(page).to have_content("To add an attachment, please save the draft first.")
     title = "Example DFID Research output"
     summary = "This is the summary of an example DFID research output"
 

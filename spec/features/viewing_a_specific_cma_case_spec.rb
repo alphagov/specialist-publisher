@@ -1,4 +1,4 @@
-require 'spec_helper'
+require "spec_helper"
 
 RSpec.feature "Viewing a specific case", type: :feature do
   let(:cma_cases) { [] }
@@ -23,7 +23,7 @@ RSpec.feature "Viewing a specific case", type: :feature do
                             "body" => [
                               {
                                 "content_type" => "text/govspeak",
-                                "content" => "## Header" + "\r\n\r\nThis is the long body of an example CMA case"
+                                "content" => "## Header" + "\r\n\r\nThis is the long body of an example CMA case",
                               },
                             ],
                             "metadata" => {
@@ -35,8 +35,8 @@ RSpec.feature "Viewing a specific case", type: :feature do
                               "case_state" => "closed",
                               "market_sector" => %w[energy],
                               "outcome_type" => "ca98-no-grounds-for-action-non-infringement",
-                            }
-                          })
+                            },
+                          }),
       ]
     }
 
@@ -75,8 +75,8 @@ RSpec.feature "Viewing a specific case", type: :feature do
                           details: {
                             "metadata" => {
                               "bulk_published" => true,
-                            }
-                          })
+                            },
+                          }),
       ]
     }
 
@@ -99,14 +99,14 @@ RSpec.feature "Viewing a specific case", type: :feature do
                           details: {
                             attachments: [
                               FactoryBot.create(:attachment_payload,
-                                                title: 'first attachment',
+                                                title: "first attachment",
                                                 created_at: "2015-12-01T10:12:26+00:00",
                                                 updated_at: "2015-12-02T10:12:26+00:00"),
                               FactoryBot.create(:attachment_payload,
-                                                title: 'second attachment',
+                                                title: "second attachment",
                                                 created_at: "2015-12-03T10:12:26+00:00",
                                                 updated_at: "2015-12-04T10:12:26+00:00"),
-                            ]
+                            ],
                           }),
       ]
     }
@@ -154,14 +154,14 @@ RSpec.feature "Viewing a specific case", type: :feature do
                           publication_state: "draft",
                           state_history: {
                             "1" => "published",
-                            "2" => "draft"
+                            "2" => "draft",
                           }),
         FactoryBot.create(:cma_case,
                           title: "Example Unpublished with new draft",
                           publication_state: "draft",
                           state_history: {
                             "1" => "unpublished",
-                            "2" => "draft"
+                            "2" => "draft",
                           }),
         FactoryBot.create(:cma_case,
                           title: "More states",
@@ -169,14 +169,14 @@ RSpec.feature "Viewing a specific case", type: :feature do
                           state_history: {
                             "1" => "unpublished",
                             "2" => "published",
-                            "3" => "draft"
+                            "3" => "draft",
                           }),
         FactoryBot.create(:cma_case,
                           title: "More states Published",
                           publication_state: "published",
                           state_history: {
                             "1" => "unpublished",
-                            "2" => "published"
+                            "2" => "published",
                           }),
       ]
     }

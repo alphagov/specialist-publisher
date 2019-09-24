@@ -6,9 +6,9 @@ class AsylumSupportDecisionSubCategoryValidator < ActiveModel::EachValidator
 private
 
   def related_sub_category?(category, sub_category)
-    split_category = category.split('-')
-    split_sub_category = sub_category.split('-')
-    if split_category[1] == '95'
+    split_category = category.split("-")
+    split_sub_category = sub_category.split("-")
+    if split_category[1] == "95"
       split_category[1] == split_sub_category[1]
     else
       split_category[2] == split_sub_category[2]

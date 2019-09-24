@@ -1,4 +1,4 @@
-require_relative 'boot'
+require_relative "boot"
 
 # Pick the frameworks you want:
 require "active_model/railtie"
@@ -25,9 +25,9 @@ module SpecialistPublisher
     # Set Time.zone default to the specified zone and make Active Record auto-convert to this zone.
     # Run "rake -D time" for a list of tasks for finding time zone names. Default is UTC.
     # config.time_zone = 'Central Time (US & Canada)'
-    config.time_zone = 'London'
+    config.time_zone = "London"
 
-    config.eager_load_paths << Rails.root.join('lib')
+    config.eager_load_paths << Rails.root.join("lib")
   end
 
   mattr_accessor :publish_pre_production_finders

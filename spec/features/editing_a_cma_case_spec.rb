@@ -1,11 +1,11 @@
-require 'spec_helper'
+require "spec_helper"
 
 RSpec.feature "Editing a CMA case", type: :feature do
   let(:cma_case) {
     FactoryBot.create(:cma_case, title: "Example CMA Case", state_history: { "1" => "draft" })
   }
-  let(:content_id) { cma_case['content_id'] }
-  let(:save_button_disable_with_message) { page.find_button('Save as draft')["data-disable-with"] }
+  let(:content_id) { cma_case["content_id"] }
+  let(:save_button_disable_with_message) { page.find_button("Save as draft")["data-disable-with"] }
 
   before do
     Timecop.freeze(Time.parse("2015-12-03T16:59:13+00:00"))
@@ -39,15 +39,15 @@ RSpec.feature "Editing a CMA case", type: :feature do
         "body" => [
           {
             "content_type" => "text/govspeak",
-            "content" => "## Header" + ("\r\n\r\nThis is the long body of an example CMA case" * 2)
-          }
+            "content" => "## Header" + ("\r\n\r\nThis is the long body of an example CMA case" * 2),
+          },
         ],
         "headers" => [{
           "text" => "Header",
           "level" => 2,
           "id" => "header",
         }],
-      }
+      },
     )
     expected_sent_payload = write_payload(updated_cma_case)
 
@@ -59,8 +59,8 @@ RSpec.feature "Editing a CMA case", type: :feature do
     fill_in "[cma_case]opened_date(3i)", with: "01"
     select "Energy", from: "Market sector"
 
-    expect(page).to have_css('div.govspeak-help')
-    expect(page).to have_content('Add attachment')
+    expect(page).to have_css("div.govspeak-help")
+    expect(page).to have_content("Add attachment")
     expect(save_button_disable_with_message).to eq("Saving...")
 
     click_button "Save as draft"
@@ -84,7 +84,7 @@ RSpec.feature "Editing a CMA case", type: :feature do
                           ],
                           "metadata" => {
                             "bulk_published" => true,
-                          }
+                          },
                         }).tap { |payload| payload["details"].delete("headers") }
     }
 
@@ -166,7 +166,7 @@ RSpec.feature "Editing a CMA case", type: :feature do
           "update_type" => "minor",
         }
         assert_publishing_api_put_content(content_id, request_json_includes(changed_json))
-        expect(page).to have_content('Bulk published true')
+        expect(page).to have_content("Bulk published true")
       end
     end
   end
@@ -182,8 +182,8 @@ RSpec.feature "Editing a CMA case", type: :feature do
 
     click_button "Save as draft"
 
-    expect(page).to have_css('.elements-error-summary')
-    expect(page).to have_css('.elements-error-message')
+    expect(page).to have_css(".elements-error-summary")
+    expect(page).to have_css(".elements-error-message")
 
     expect(page).to have_content("Opened date is not a valid date")
     expect(page).to have_content("Body cannot include invalid Govspeak")
@@ -195,7 +195,7 @@ RSpec.feature "Editing a CMA case", type: :feature do
   context "with attachments" do
     let(:asset_manager_response) {
       {
-        id: 'http://asset-manager.dev.gov.uk/assets/another_image_id',
+        id: "http://asset-manager.dev.gov.uk/assets/another_image_id",
         file_url: "http://assets-origin.dev.gov.uk/media/56c45553759b740609000000/cma_case_image.jpg",
       }
     }
@@ -207,7 +207,7 @@ RSpec.feature "Editing a CMA case", type: :feature do
           "content_type" => "application/jpg",
           "title" => "asylum report image title",
           "created_at" => "2015-12-03T16:59:13+00:00",
-          "updated_at" => "2015-12-03T16:59:13+00:00"
+          "updated_at" => "2015-12-03T16:59:13+00:00",
         },
         {
           "content_id" => "ec3f6901-4156-4720-b4e5-f04c0b152141",
@@ -215,8 +215,8 @@ RSpec.feature "Editing a CMA case", type: :feature do
           "content_type" => "application/pdf",
           "title" => "asylum report pdf title",
           "created_at" => "2015-12-03T16:59:13+00:00",
-          "updated_at" => "2015-12-03T16:59:13+00:00"
-        }
+          "updated_at" => "2015-12-03T16:59:13+00:00",
+        },
       ]
     }
 
@@ -231,7 +231,7 @@ RSpec.feature "Editing a CMA case", type: :feature do
           :cma_case,
           publication_state,
           title: "Example CMA Case",
-          details: { "attachments" => existing_attachments }
+          details: { "attachments" => existing_attachments },
         )
       }
 
@@ -243,8 +243,8 @@ RSpec.feature "Editing a CMA case", type: :feature do
             "body" => [
               {
                 "content_type" => "text/govspeak",
-                "content" => "[InlineAttachment:asylum-support-image.jpg]"
-              }
+                "content" => "[InlineAttachment:asylum-support-image.jpg]",
+              },
             ],
           },
         )
@@ -255,7 +255,7 @@ RSpec.feature "Editing a CMA case", type: :feature do
 
         expect(page).to have_link("Your documents", href: "/cma-cases")
         fill_in "Title", with: "New cma case image"
-        page.attach_file('attachment_file', "spec/support/images/cma_case_image.jpg")
+        page.attach_file("attachment_file", "spec/support/images/cma_case_image.jpg")
 
         click_button "Save attachment"
 
@@ -285,9 +285,9 @@ RSpec.feature "Editing a CMA case", type: :feature do
           .to_return(body: asset_manager_response.to_json, status: 500)
 
         expect(page).to have_button("delete")
-        find('.attachments').first(:link, "edit").click
+        find(".attachments").first(:link, "edit").click
         expect(page.status_code).to eq(200)
-        expect(find('#attachment_title').value).to eq('asylum report image title')
+        expect(find("#attachment_title").value).to eq("asylum report image title")
 
         fill_in "Title", with: "Updated cma case image"
 
@@ -304,7 +304,7 @@ RSpec.feature "Editing a CMA case", type: :feature do
           click_link "Add attachment"
 
           fill_in "Title", with: "Some title"
-          page.attach_file('attachment_file', "spec/support/images/cma_case_image.jpg")
+          page.attach_file("attachment_file", "spec/support/images/cma_case_image.jpg")
           click_button "Save attachment"
 
           expect(page.status_code).to eq(200)
@@ -332,13 +332,13 @@ RSpec.feature "Editing a CMA case", type: :feature do
       scenario "editing an attachment on a #{publication_state} CMA case" do
         stub_request(:put, %r{#{Plek.find('asset-manager')}/assets/.*})
           .to_return(body: asset_manager_response.to_json, status: 201)
-        find('.attachments').first(:link, "edit").click
+        find(".attachments").first(:link, "edit").click
         expect(page.status_code).to eq(200)
-        expect(find('#attachment_title').value).to eq('asylum report image title')
+        expect(find("#attachment_title").value).to eq("asylum report image title")
 
-        expect(page).to have_content('asylum-support-image.jpg')
+        expect(page).to have_content("asylum-support-image.jpg")
         fill_in "Title", with: "Updated cma case image"
-        page.attach_file('attachment_file', "spec/support/images/updated_cma_case_image.jpg")
+        page.attach_file("attachment_file", "spec/support/images/updated_cma_case_image.jpg")
 
         click_button("Save attachment")
 
@@ -349,7 +349,7 @@ RSpec.feature "Editing a CMA case", type: :feature do
       scenario "deleting an attachment on a CMA case" do
         stub_request(:delete, %r{#{Plek.find('asset-manager')}/assets/.*})
           .to_return(body: asset_manager_response.to_json, status: 200)
-        find('.attachments').first(:button, "delete").click
+        find(".attachments").first(:button, "delete").click
         expect(page.status_code).to eq(200)
 
         #TODO fix tests so that asset manager is updated appropriately
@@ -397,16 +397,16 @@ RSpec.feature "Editing a CMA case", type: :feature do
         :unpublished,
         title: "Example CMA Case",
         details: {},
-        state_history: { "1" => "published", "2" => "unpublished", "3" => "draft" }
+        state_history: { "1" => "published", "2" => "unpublished", "3" => "draft" },
       )
     }
 
     scenario "showing the update type radio buttons" do
       within(".edit_document") do
-        expect(page).to have_content('Only use for minor changes like fixes to typos, links, GOV.UK style or metadata.')
-        expect(page).to have_content('This will notify subscribers to ')
-        expect(page).to have_content('Update type minor')
-        expect(page).to have_content('Update type major')
+        expect(page).to have_content("Only use for minor changes like fixes to typos, links, GOV.UK style or metadata.")
+        expect(page).to have_content("This will notify subscribers to ")
+        expect(page).to have_content("Update type minor")
+        expect(page).to have_content("Update type major")
       end
     end
 
@@ -426,7 +426,7 @@ RSpec.feature "Editing a CMA case", type: :feature do
       changed_json = {
         "title" => "New title",
         "update_type" => "minor",
-        "base_path" => "/cma-cases/example-document"
+        "base_path" => "/cma-cases/example-document",
       }
       assert_publishing_api_put_content(content_id, request_json_includes(changed_json))
     end
@@ -435,10 +435,10 @@ RSpec.feature "Editing a CMA case", type: :feature do
   context "a draft document" do
     scenario "not showing the update type radio buttons" do
       within(".edit_document") do
-        expect(page).not_to have_content('Only use for minor changes like fixes to typos, links, GOV.UK style or metadata.')
-        expect(page).not_to have_content('This will notify subscribers to ')
-        expect(page).not_to have_content('Update type minor')
-        expect(page).not_to have_content('Update type major')
+        expect(page).not_to have_content("Only use for minor changes like fixes to typos, links, GOV.UK style or metadata.")
+        expect(page).not_to have_content("This will notify subscribers to ")
+        expect(page).not_to have_content("Update type minor")
+        expect(page).not_to have_content("Update type major")
       end
     end
 

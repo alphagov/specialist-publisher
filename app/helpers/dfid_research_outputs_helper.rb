@@ -14,7 +14,7 @@ module DfidResearchOutputsHelper
     # rubocop:disable Style/WordArray
     [
       ["Unreviewed",    "unreviewed"],
-      ["Peer reviewed", "peer_reviewed"]
+      ["Peer reviewed", "peer_reviewed"],
     ]
     # rubocop:enable Style/WordArray
   end

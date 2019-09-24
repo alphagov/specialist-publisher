@@ -44,7 +44,7 @@ RSpec.describe AttachmentReporter do
         unmatched: 2,
       },
       unused_attachments: %w(baz_1.pdf unused.pdf),
-      unmatched_snippets: %w(missing.pdf missing.pdf)
+      unmatched_snippets: %w(missing.pdf missing.pdf),
     )
   end
 end

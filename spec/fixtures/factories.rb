@@ -91,7 +91,7 @@ FactoryBot.define do
         {
           "path" => base_path,
           "type" => "exact",
-        }
+        },
       ]
     end
 
@@ -103,8 +103,8 @@ FactoryBot.define do
           "body" => [
             {
               "content_type" => "text/govspeak",
-              "content" => "default text"
-            }
+              "content" => "default text",
+            },
           ],
           "metadata" => default_metadata,
           "max_cache_time" => 10,
@@ -120,7 +120,7 @@ FactoryBot.define do
       if document_type
         result = result.merge(
           links: {
-            finder: [FinderSchema.new(document_type.pluralize).content_id]
+            finder: [FinderSchema.new(document_type.pluralize).content_id],
           },
         )
       end
@@ -133,7 +133,7 @@ FactoryBot.define do
     end
 
     trait :published do
-      publication_state { 'published' }
+      publication_state { "published" }
       first_published_at { "2015-11-15T00:00:00+00:00" }
       state_history do
         { "1": "published" }
@@ -145,14 +145,14 @@ FactoryBot.define do
         { "2": "draft", "1": "published" }
       end
 
-      publication_state { 'draft' }
+      publication_state { "draft" }
       first_published_at { "2015-11-15T00:00:00+00:00" }
 
       update_type { "major" }
     end
 
     trait :unpublished do
-      publication_state { 'unpublished' }
+      publication_state { "unpublished" }
       first_published_at { "2015-11-15T00:00:00+00:00" }
       state_history do
         { "1": "unpublished" }
@@ -279,7 +279,7 @@ FactoryBot.define do
           "dfid_authors" => ["Mr. Potato Head", "Mrs. Potato Head"],
           "dfid_theme" => %w[infrastructure],
           "first_published_at" => "2016-04-28",
-          "bulk_published" => true
+          "bulk_published" => true,
         }
       end
     end
@@ -449,8 +449,8 @@ FactoryBot.define do
         links: {
           finder: [FinderSchema.new(document_type.pluralize).content_id],
           organisations: [organisation_content_id, primary_publishing_org_content_id],
-          primary_publishing_organisation: [primary_publishing_org_content_id]
-        }
+          primary_publishing_organisation: [primary_publishing_org_content_id],
+        },
       )
     }
   end
@@ -477,15 +477,15 @@ FactoryBot.define do
     transient do
       default_metadata do
         {
-          "updated_at" => '2019-04-10',
-          "uk_market_conformity_assessment_body_number" => 'AB 0000',
-          "uk_market_conformity_assessment_body_type" => 'approved-body',
-          "uk_market_conformity_assessment_body_registered_office_location" => 'united-kingdom',
+          "updated_at" => "2019-04-10",
+          "uk_market_conformity_assessment_body_number" => "AB 0000",
+          "uk_market_conformity_assessment_body_type" => "approved-body",
+          "uk_market_conformity_assessment_body_registered_office_location" => "united-kingdom",
           "uk_market_conformity_assessment_body_testing_locations" => %w[united-kingdom],
-          "uk_market_conformity_assessment_body_website" => 'www.example.com',
-          "uk_market_conformity_assessment_body_email" => 'info@example.com',
-          "uk_market_conformity_assessment_body_phone" => '0800 000 000',
-          "uk_market_conformity_assessment_body_legislative_area" => 'explosives',
+          "uk_market_conformity_assessment_body_website" => "www.example.com",
+          "uk_market_conformity_assessment_body_email" => "info@example.com",
+          "uk_market_conformity_assessment_body_phone" => "0800 000 000",
+          "uk_market_conformity_assessment_body_legislative_area" => "explosives",
         }
       end
     end
@@ -502,7 +502,7 @@ FactoryBot.define do
             "tribunal_decision_decision_date" => "2016-01-01",
             "tribunal_decision_judges" => %w[angus-r],
             "tribunal_decision_sub_categories" => %w[benefits-for-children-benefit-increases-for-children],
-            "hidden_indexable_content" => "???"
+            "hidden_indexable_content" => "???",
         }
       }
     end

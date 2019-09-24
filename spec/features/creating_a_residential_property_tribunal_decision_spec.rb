@@ -1,9 +1,9 @@
-require 'spec_helper'
+require "spec_helper"
 
 RSpec.feature "Creating a residential property tribunal decision", type: :feature do
   let(:tribunal_decision) { FactoryBot.create(:residential_property_tribunal_decision) }
-  let(:content_id)        { tribunal_decision['content_id'] }
-  let(:public_updated_at) { tribunal_decision['public_updated_at'] }
+  let(:content_id)        { tribunal_decision["content_id"] }
+  let(:public_updated_at) { tribunal_decision["public_updated_at"] }
 
   before do
     log_in_as_editor(:moj_editor)
@@ -34,8 +34,8 @@ RSpec.feature "Creating a residential property tribunal decision", type: :featur
     fill_in "[residential_property_tribunal_decision]tribunal_decision_decision_date(3i)", with: "01"
     fill_in "Hidden indexable content", with: "hidden text goes here"
 
-    expect(page).to have_css('div.govspeak-help')
-    expect(page).to have_content('To add an attachment, please save the draft first.')
+    expect(page).to have_css("div.govspeak-help")
+    expect(page).to have_content("To add an attachment, please save the draft first.")
 
     click_button "Save as draft"
 

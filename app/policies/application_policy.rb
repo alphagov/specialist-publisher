@@ -11,7 +11,7 @@ class ApplicationPolicy
   end
 
   def departmental_editor?
-    user_organisation_owns_document_type? && user.permissions.include?('editor')
+    user_organisation_owns_document_type? && user.permissions.include?("editor")
   end
 
   def writer?

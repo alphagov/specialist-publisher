@@ -36,7 +36,7 @@ class ActionsPresenter
   end
 
   def publish_alert
-    if update_type == 'minor'
+    if update_type == "minor"
       "You are about to publish a minor edit. Continue?"
     else
       "Publishing will email subscribers to #{document.class.title.pluralize}. Continue?"

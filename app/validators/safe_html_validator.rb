@@ -9,7 +9,7 @@ class SafeHtmlValidator < ActiveModel::EachValidator
 
     # Hardcode production URLs so that content copied from production is valid
     "www.gov.uk",
-    "assets.digital.cabinet-office.gov.uk"
+    "assets.digital.cabinet-office.gov.uk",
   ].freeze
 
   def validate_each(record, attribute, value)

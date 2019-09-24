@@ -1,4 +1,4 @@
-require 'ostruct'
+require "ostruct"
 
 class PaginationPresenter < SimpleDelegator
   attr_reader :current_page, :total_pages, :total_count, :limit_value

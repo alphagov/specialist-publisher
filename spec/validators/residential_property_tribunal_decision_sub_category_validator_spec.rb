@@ -16,21 +16,21 @@ RSpec.describe ResidentialPropertyTribunalDecisionSubCategoryValidator do
       end
 
       it "doesn't add an error to the record if the sub_category on the record is blank" do
-        allow(record).to receive(:tribunal_decision_category).and_return('foo')
+        allow(record).to receive(:tribunal_decision_category).and_return("foo")
         subject.validate_each(record, :sub_category, nil)
         expect(record.errors[:sub_category]).to be_empty
       end
     end
 
     it "adds an error to the record if the category suffixed by '---' is not a prefix of the sub_category" do
-      allow(record).to receive(:tribunal_decision_category).and_return('foo')
-      subject.validate_each(record, :sub_category, 'foo-bar')
+      allow(record).to receive(:tribunal_decision_category).and_return("foo")
+      subject.validate_each(record, :sub_category, "foo-bar")
       expect(record.errors[:sub_category]).to eq(["must belong to the selected tribunal decision category"])
     end
 
     it "does not add an error to the record if the category suffixed by '---' is a prefix of the sub_category" do
-      allow(record).to receive(:tribunal_decision_category).and_return('foo')
-      subject.validate_each(record, :sub_category, 'foo---bar')
+      allow(record).to receive(:tribunal_decision_category).and_return("foo")
+      subject.validate_each(record, :sub_category, "foo---bar")
       expect(record.errors[:sub_category]).to be_empty
     end
   end

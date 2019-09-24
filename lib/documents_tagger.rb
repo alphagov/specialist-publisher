@@ -9,9 +9,9 @@ class DocumentsTagger
 
   def tag_all
     all_documents.map do |document|
-      mapped_taxon_ids = mapped_taxons(document['document_type'])
-      taxons_tagged = mapped_taxon_ids.empty? ? [] : tag_to_taxons(document['content_id'], mapped_taxon_ids)
-      { base_path: document['base_path'], content_id: document['content_id'], taxons: taxons_tagged }
+      mapped_taxon_ids = mapped_taxons(document["document_type"])
+      taxons_tagged = mapped_taxon_ids.empty? ? [] : tag_to_taxons(document["content_id"], mapped_taxon_ids)
+      { base_path: document["base_path"], content_id: document["content_id"], taxons: taxons_tagged }
     end
   end
 
@@ -38,7 +38,7 @@ private
       enum.each do |response|
         response
           .to_h
-          .fetch('results', [])
+          .fetch("results", [])
           .each { |result| yielder << result }
       end
     end
@@ -46,9 +46,9 @@ private
 
   def all_documents
     editions_enum(
-      publishing_app: 'specialist-publisher',
+      publishing_app: "specialist-publisher",
       document_types: all_document_types,
-      fields: %i[content_id document_type base_path]
+      fields: %i[content_id document_type base_path],
     ).lazy
   end
 end

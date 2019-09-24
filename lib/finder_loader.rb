@@ -5,7 +5,7 @@ class FinderLoader
     files.map do |json_schema|
       {
         file: MultiJson.load(File.read(json_schema)),
-        timestamp: File.mtime(json_schema)
+        timestamp: File.mtime(json_schema),
       }
     end
   end
@@ -16,7 +16,7 @@ class FinderLoader
     if File.exist?(json_schema)
       [{
         file: MultiJson.load(File.read(json_schema)),
-        timestamp: File.mtime(json_schema)
+        timestamp: File.mtime(json_schema),
       }]
     else
       raise "Could not find file: #{json_schema}"

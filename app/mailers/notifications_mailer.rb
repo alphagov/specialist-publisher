@@ -1,6 +1,6 @@
 class NotificationsMailer < ApplicationMailer
   def document_list(csv, user, document_klass, query)
-    attachments['document_list.csv'] = csv
+    attachments["document_list.csv"] = csv
 
     @user = user
     @document_klass = document_klass

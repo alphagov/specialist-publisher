@@ -1,4 +1,4 @@
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe "/healthcheck", type: :request do
   def data(body = response.body)

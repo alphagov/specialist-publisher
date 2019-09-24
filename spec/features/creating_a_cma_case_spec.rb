@@ -1,18 +1,18 @@
-require 'spec_helper'
+require "spec_helper"
 
 RSpec.feature "Creating a CMA case", type: :feature do
   def cma_case_content_item_links
     {
       "content_id" => "4a656f42-35ad-4034-8c7a-08870db7fffe",
       "links" => {
-        "organisations" => %w[957eb4ec-089b-4f71-ba2a-dc69ac8919ea]
-      }
+        "organisations" => %w[957eb4ec-089b-4f71-ba2a-dc69ac8919ea],
+      },
     }
   end
 
   let(:cma_case) { FactoryBot.create(:cma_case) }
-  let(:content_id) { cma_case['content_id'] }
-  let(:save_button_disable_with_message) { page.find_button('Save as draft')["data-disable-with"] }
+  let(:content_id) { cma_case["content_id"] }
+  let(:save_button_disable_with_message) { page.find_button("Save as draft")["data-disable-with"] }
 
   before do
     log_in_as_editor(:cma_editor)
@@ -46,8 +46,8 @@ RSpec.feature "Creating a CMA case", type: :feature do
     fill_in "[cma_case]opened_date(3i)", with: "01"
     select "Energy", from: "Market sector"
 
-    expect(page).to have_css('div.govspeak-help')
-    expect(page).to have_content('To add an attachment, please save the draft first.')
+    expect(page).to have_css("div.govspeak-help")
+    expect(page).to have_content("To add an attachment, please save the draft first.")
     expect(save_button_disable_with_message).to eq("Saving...")
 
     click_button "Save as draft"
@@ -66,8 +66,8 @@ RSpec.feature "Creating a CMA case", type: :feature do
         "body" => [
           {
             "content_type" => "text/govspeak",
-            "content" => "## Header\r\n\r\nThis is the long body of an example CMA case\r\n\r\nThis is the long body of an example CMA case"
-          }
+            "content" => "## Header\r\n\r\nThis is the long body of an example CMA case\r\n\r\nThis is the long body of an example CMA case",
+          },
         ],
         "metadata" => {
           "opened_date" => "2014-01-01",
@@ -77,7 +77,7 @@ RSpec.feature "Creating a CMA case", type: :feature do
         },
         "max_cache_time" => 10,
         "headers" => [
-          { "text" => "Header", "level" => 2, "id" => "header" }
+          { "text" => "Header", "level" => 2, "id" => "header" },
         ],
         "temporary_update_type" => false,
       },
@@ -85,15 +85,15 @@ RSpec.feature "Creating a CMA case", type: :feature do
       "redirects" => [],
       "update_type" => "major",
       "links" => {
-        "finder" => %w[fef4ac7c-024a-4943-9f19-e85a8369a1f3]
-      }
+        "finder" => %w[fef4ac7c-024a-4943-9f19-e85a8369a1f3],
+      },
     }
 
     assert_publishing_api_put_content(content_id, expected_sent_payload)
 
     expect(page.status_code).to eq(200)
     expect(page).to have_content("Created Example CMA Case")
-    expect(page).to have_content('Bulk published false')
+    expect(page).to have_content("Bulk published false")
   end
 
   scenario "with no data" do
@@ -103,9 +103,9 @@ RSpec.feature "Creating a CMA case", type: :feature do
 
     expect(page.status_code).to eq(422)
 
-    expect(page).to have_css('.elements-error-summary')
-    expect(page).to have_css('.form-group.elements-error')
-    expect(page).to have_css('.elements-error-message')
+    expect(page).to have_css(".elements-error-summary")
+    expect(page).to have_css(".form-group.elements-error")
+    expect(page).to have_css(".elements-error-message")
 
     expect(page).to have_content("Please fix the following errors")
     expect(page).to have_content("Title can't be blank")
@@ -126,8 +126,8 @@ RSpec.feature "Creating a CMA case", type: :feature do
 
     expect(page.status_code).to eq(422)
 
-    expect(page).to have_css('.elements-error-summary')
-    expect(page).to have_css('.elements-error-message')
+    expect(page).to have_css(".elements-error-summary")
+    expect(page).to have_css(".elements-error-message")
 
     expect(page).to have_content("Please fix the following errors")
     expect(page).to have_content("Body cannot include invalid Govspeak")
@@ -166,8 +166,8 @@ RSpec.feature "Creating a CMA case", type: :feature do
 
     expect(page.status_code).to eq(422)
 
-    expect(page).to have_css('.elements-error-summary')
-    expect(page).to have_css('.elements-error-message')
+    expect(page).to have_css(".elements-error-summary")
+    expect(page).to have_css(".elements-error-message")
 
     expect(page).to have_content("Please fix the following errors")
     expect(page).to have_content("Opened date is not a valid date")
@@ -191,8 +191,8 @@ RSpec.feature "Creating a CMA case", type: :feature do
 
     expect(page.status_code).to eq(422)
 
-    expect(page).to have_css('.elements-error-summary')
-    expect(page).to have_css('.elements-error-message')
+    expect(page).to have_css(".elements-error-summary")
+    expect(page).to have_css(".elements-error-message")
 
     expect(page).to have_content("Please fix the following errors")
     expect(page).to have_content("Opened date must be before closed date")
@@ -213,8 +213,8 @@ RSpec.feature "Creating a CMA case", type: :feature do
 
     expect(page.status_code).to eq(422)
 
-    expect(page).to have_css('.elements-error-summary')
-    expect(page).to have_css('.elements-error-message')
+    expect(page).to have_css(".elements-error-summary")
+    expect(page).to have_css(".elements-error-message")
 
     expect(page).to have_content("Please fix the following errors")
     expect(page).to have_content("Opened date is not a valid date")
@@ -311,8 +311,8 @@ RSpec.feature "Creating a CMA case", type: :feature do
         "body" => [
           {
             "content_type" => "text/govspeak",
-            "content" => "## Header\r\n\r\nThis is the long body of an example CMA case\r\n\r\nThis is the long body of an example CMA case"
-          }
+            "content" => "## Header\r\n\r\nThis is the long body of an example CMA case\r\n\r\nThis is the long body of an example CMA case",
+          },
         ],
         "metadata" => {
           "opened_date" => "2014-01-01",
@@ -322,7 +322,7 @@ RSpec.feature "Creating a CMA case", type: :feature do
         },
         "max_cache_time" => 10,
         "headers" => [
-          { "text" => "Header", "level" => 2, "id" => "header" }
+          { "text" => "Header", "level" => 2, "id" => "header" },
         ],
         "temporary_update_type" => false,
       },
@@ -330,8 +330,8 @@ RSpec.feature "Creating a CMA case", type: :feature do
       "redirects" => [],
       "update_type" => "major",
       "links" => {
-        "finder" => %w[fef4ac7c-024a-4943-9f19-e85a8369a1f3]
-      }
+        "finder" => %w[fef4ac7c-024a-4943-9f19-e85a8369a1f3],
+      },
     }
     assert_publishing_api_put_content(content_id, expected_sent_payload)
 
@@ -364,7 +364,7 @@ RSpec.feature "Creating a CMA case", type: :feature do
 
   scenario "a draft with the same path as an existing draft" do
     stub_any_publishing_api_put_content.to_raise(
-      GdsApi::HTTPErrorResponse.new(422, "Content item base path=/cma-cases/example-document conflicts with content_id=#{content_id} and locale=en")
+      GdsApi::HTTPErrorResponse.new(422, "Content item base path=/cma-cases/example-document conflicts with content_id=#{content_id} and locale=en"),
     )
 
     visit "/cma-cases/new"

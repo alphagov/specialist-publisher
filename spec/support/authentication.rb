@@ -1,6 +1,6 @@
 module AuthenticationControllerHelpers
   def log_in_as(user)
-    request.env['warden'] = double(
+    request.env["warden"] = double(
       :auth,
       authenticate!: true,
       authenticated?: true,

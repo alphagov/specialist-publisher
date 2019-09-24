@@ -1,4 +1,4 @@
-require 'spec_helper'
+require "spec_helper"
 
 RSpec.feature "Visiting the app", type: :feature do
   before do

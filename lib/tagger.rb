@@ -33,8 +33,8 @@ private
 
   def fetch_existing_taxons(content_id)
     link_content = Services.publishing_api.get_links(content_id)
-    version = link_content['version']
-    taxons = link_content.dig('links', 'taxons') || []
+    version = link_content["version"]
+    taxons = link_content.dig("links", "taxons") || []
     [taxons, version]
   end
 end
