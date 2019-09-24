@@ -19,7 +19,7 @@ module DateHelper
       format_date = [
         attrs.fetch(:"#{k}(1i)"),
         attrs.fetch(:"#{k}(2i)"),
-        attrs.fetch(:"#{k}(3i)")
+        attrs.fetch(:"#{k}(3i)"),
       ]
       format_date.delete_if(&:empty?)
       format_date.map { |d| zero_pad(d) }.join("-")

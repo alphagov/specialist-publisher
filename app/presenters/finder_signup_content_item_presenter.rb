@@ -64,7 +64,7 @@ private
       {
         path: base_path,
         type: "exact",
-      }
+      },
     ]
   end
 
@@ -74,7 +74,7 @@ private
       "email_signup_choice" => schema.fetch("email_signup_choice", []),
       "email_filter_by" => schema.fetch("email_filter_by", nil),
       "email_filter_name" => schema.fetch("email_filter_name", nil),
-      "subscription_list_title_prefix" => schema.fetch("subscription_list_title_prefix", {})
+      "subscription_list_title_prefix" => schema.fetch("subscription_list_title_prefix", {}),
     }
   end
 

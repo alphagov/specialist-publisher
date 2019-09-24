@@ -3,8 +3,8 @@ RSpec.feature "Creating a Statutory Instrument", type: :feature do
     {
       "content_id" => "4a656f42-35ad-4034-8c7a-08870db7fffe",
       "links" => {
-        "organisations" => %w[957eb4ec-089b-4f71-ba2a-dc69ac8919ea]
-      }
+        "organisations" => %w[957eb4ec-089b-4f71-ba2a-dc69ac8919ea],
+      },
     }
   end
 
@@ -12,11 +12,11 @@ RSpec.feature "Creating a Statutory Instrument", type: :feature do
   let(:organisations) {
     [
       { "content_id" => "12345", "title" => "Org 1" },
-      { "content_id" => "67890", "title" => "Org 2" }
+      { "content_id" => "67890", "title" => "Org 2" },
     ]
   }
-  let(:content_id) { statutory_instrument['content_id'] }
-  let(:save_button_disable_with_message) { page.find_button('Save as draft')["data-disable-with"] }
+  let(:content_id) { statutory_instrument["content_id"] }
+  let(:save_button_disable_with_message) { page.find_button("Save as draft")["data-disable-with"] }
 
   before do
     log_in_as_editor(:gds_editor)

@@ -9,7 +9,7 @@ RSpec.describe NotificationsMailer, type: :mailer do
     it "renders the headers" do
       expect(mail.subject).to eq("Your exported list of Business Finance Support Schemes from GOV.UK")
       expect(mail.to).to eq([user.email])
-      expect(mail.from).to eq(['inside-government@digital.cabinet-office.gov.uk'])
+      expect(mail.from).to eq(["inside-government@digital.cabinet-office.gov.uk"])
     end
 
     it "renders the body" do
@@ -18,18 +18,18 @@ RSpec.describe NotificationsMailer, type: :mailer do
     end
 
     it "attaches the CSV" do
-      expect(mail.attachments.first.filename).to eq 'document_list.csv'
+      expect(mail.attachments.first.filename).to eq "document_list.csv"
       expect(mail.attachments.first.body.to_s).to eq csv
     end
   end
 
   describe "document_list with a query" do
-    let(:mail) { described_class.document_list(csv, user, BusinessFinanceSupportScheme, 'startups') }
+    let(:mail) { described_class.document_list(csv, user, BusinessFinanceSupportScheme, "startups") }
 
     it "renders the headers" do
       expect(mail.subject).to eq("Your exported list of Business Finance Support Schemes from GOV.UK")
       expect(mail.to).to eq([user.email])
-      expect(mail.from).to eq(['inside-government@digital.cabinet-office.gov.uk'])
+      expect(mail.from).to eq(["inside-government@digital.cabinet-office.gov.uk"])
     end
 
     it "renders the body" do
@@ -38,7 +38,7 @@ RSpec.describe NotificationsMailer, type: :mailer do
     end
 
     it "attaches the CSV" do
-      expect(mail.attachments.first.filename).to eq 'document_list.csv'
+      expect(mail.attachments.first.filename).to eq "document_list.csv"
       expect(mail.attachments.first.body.to_s).to eq csv
     end
   end

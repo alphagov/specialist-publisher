@@ -35,10 +35,10 @@ class AllDocumentsFinder
     loop do
       response = Services.publishing_api.get_content_items(params.merge(page: current_page))
 
-      response['results'].each do |document|
+      response["results"].each do |document|
         yield klass.from_publishing_api(document)
       end
-      if response['pages'] > current_page
+      if response["pages"] > current_page
         current_page += 1
       else
         break

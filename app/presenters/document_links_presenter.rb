@@ -9,7 +9,7 @@ class DocumentLinksPresenter
       links: {
         organisations: document.schema_organisations,
         primary_publishing_organisation: [document.primary_publishing_organisation],
-        taxons: document.taxons
+        taxons: document.taxons,
       },
     }
   end

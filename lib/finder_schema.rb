@@ -2,7 +2,7 @@ class FinderSchema
   # Pluralized names of all document types
   def self.schema_names
     Dir.glob(Rails.root.join("lib/documents/schemas/*.json")).map do |f|
-      File.basename(f).gsub('.json', '')
+      File.basename(f).gsub(".json", "")
     end
   end
 
@@ -66,7 +66,7 @@ private
     allowed_values.map do |value|
       [
         value.fetch("label", ""),
-        value.fetch("value", "")
+        value.fetch("value", ""),
       ]
     end
   end

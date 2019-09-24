@@ -1,4 +1,4 @@
-require 'spec_helper'
+require "spec_helper"
 
 RSpec.describe GovspeakPresenter do
   let(:body) { "Hello, world" }
@@ -13,7 +13,7 @@ RSpec.describe GovspeakPresenter do
   end
 
   describe ".presented" do
-    let(:expected) { [{ content_type: "text/govspeak", content: content, }] }
+    let(:expected) { [{ content_type: "text/govspeak", content: content }] }
 
     context "when the document has images as inline attachments" do
       let(:body)        { "![InlineAttachment:foo.jpg]" }

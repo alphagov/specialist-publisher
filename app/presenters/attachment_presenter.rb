@@ -10,7 +10,7 @@ class AttachmentPresenter
       content_type: @attachment.content_type,
       updated_at: updated_at,
       created_at: created_at,
-      content_id: @attachment.content_id
+      content_id: @attachment.content_id,
     }
   end
 

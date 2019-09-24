@@ -1,4 +1,4 @@
-require 'govspeak'
+require "govspeak"
 
 class DocumentPresenter
   def initialize(document)
@@ -22,7 +22,7 @@ class DocumentPresenter
         {
           path: document.base_path,
           type: "exact",
-        }
+        },
       ],
       redirects: [],
       update_type: document.update_type,

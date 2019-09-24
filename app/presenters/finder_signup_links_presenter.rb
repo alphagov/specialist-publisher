@@ -5,7 +5,7 @@ FinderSignupLinksPresenter = Struct.new(:file) do
       links: {
         organisations: organisations,
         related: related,
-      }
+      },
     }
   end
 

@@ -1,4 +1,4 @@
-require 'spec_helper'
+require "spec_helper"
 
 RSpec.describe EmailAlertPresenter do
   let(:cma_case_payload) { FactoryBot.create(:cma_case) }

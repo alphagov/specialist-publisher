@@ -74,7 +74,7 @@ private
       {
         path: "#{base_path}.atom",
         type: "exact",
-      }
+      },
     ]
   end
 
@@ -98,7 +98,7 @@ private
     phase = file["phase"]
     if phase
       {
-        phase: phase
+        phase: phase,
       }
     else
       {}

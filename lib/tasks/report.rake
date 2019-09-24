@@ -73,7 +73,7 @@ namespace :report do
     end
 
     def organisation_name_from_id(org_id)
-      Services.publishing_api.get_content(org_id)['title']
+      Services.publishing_api.get_content(org_id)["title"]
     end
 
     def each_document_content_id_and_state_history(document_class, &block)
@@ -84,8 +84,8 @@ namespace :report do
       document.public_updated_at && document.public_updated_at.to_date >= date
     end
 
-    first_period_start_date = ENV.fetch('FIRST_PERIOD_START_DATE', Date.parse('2016-01-01'))
-    last_time_period_days = ENV.fetch('LAST_TIME_PERIOD_DAYS', 30)
+    first_period_start_date = ENV.fetch("FIRST_PERIOD_START_DATE", Date.parse("2016-01-01"))
+    last_time_period_days = ENV.fetch("LAST_TIME_PERIOD_DAYS", 30)
     last_time_period_start_date = last_time_period_days.days.ago
 
     organisation_published_pdfs_total_counts_hash = Hash[unique_owning_organisation_ids.map { |o| [o, 0] }]
@@ -94,25 +94,25 @@ namespace :report do
 
     all_document_classes.each do |document_class|
       each_document_content_id_and_state_history(document_class) do |document_id_and_state_hash|
-        state_history = document_id_and_state_hash['state_history']
+        state_history = document_id_and_state_hash["state_history"]
 
         # Ignore docs that have never been published
-        next if state_history.count == 1 && state_history['1'] == 'draft'
+        next if state_history.count == 1 && state_history["1"] == "draft"
 
-        content_id = document_id_and_state_hash['content_id']
+        content_id = document_id_and_state_hash["content_id"]
 
         unique_pdf_attachment_urls_for_document = []
 
         # Walk through the history of document versions looking for published PDF attachments
         state_history.each_pair do |version_number, version_state|
-          next if version_state == 'draft'
+          next if version_state == "draft"
 
-          response = Services.publishing_api.get_content(content_id, 'version' => version_number)
+          response = Services.publishing_api.get_content(content_id, "version" => version_number)
 
           current_document_version = Document.from_publishing_api(response.parsed_content)
 
           current_document_version.attachments.each do |attachment|
-            next if attachment.content_type != 'application/pdf'
+            next if attachment.content_type != "application/pdf"
 
             # Uses the URL of the attachment as a way to detect if the current attachment is unique
             # in the version history and only count it if so.
@@ -138,14 +138,14 @@ namespace :report do
 
     document_report_filename = Rails.root.join("content-operating-report-for-pdf-documents-#{Time.zone.today.strftime('%Y-%m-%d')}.csv")
 
-    require 'csv'
+    require "csv"
 
-    CSV.open(document_report_filename, 'w') do |document_csv|
+    CSV.open(document_report_filename, "w") do |document_csv|
       document_csv << [
         "Organisation",
         "Total published PDF attachments",
         "#{first_period_start_date} - present PDF attachments",
-        "Last #{last_time_period_days} days PDF attachments"
+        "Last #{last_time_period_days} days PDF attachments",
       ]
 
       unique_owning_organisation_ids.each do |org_id|
@@ -153,7 +153,7 @@ namespace :report do
           organisation_name_from_id(org_id),
           organisation_published_pdfs_total_counts_hash[org_id],
           organisation_published_pdfs_since_first_period_counts_hash[org_id],
-          organisation_published_pdfs_since_second_period_counts_hash[org_id]
+          organisation_published_pdfs_since_second_period_counts_hash[org_id],
         ]
       end
     end
@@ -168,7 +168,7 @@ namespace :report do
     end
 
     def public_url_for(document)
-      URI.join(Plek.new.website_root, document['base_path']).to_s
+      URI.join(Plek.new.website_root, document["base_path"]).to_s
     end
 
     def each_document(document_class, &block)
@@ -179,7 +179,7 @@ namespace :report do
     def organisations_for_document_class(document_class)
       org_ids = document_class.finder_schema.organisations
       org_ids.map do |org_id|
-        Services.publishing_api.get_content(org_id)['title']
+        Services.publishing_api.get_content(org_id)["title"]
       end
     end
 
@@ -196,18 +196,18 @@ namespace :report do
       }
     end
 
-    require 'csv'
+    require "csv"
 
     document_report_filename = Rails.root.join("content-operating-report-for-documents-#{Time.zone.today.strftime('%Y-%m-%d')}.csv")
     finder_report_filename = Rails.root.join("content-operating-report-for-finders-#{Time.zone.today.strftime('%Y-%m-%d')}.csv")
 
-    CSV.open(document_report_filename, 'w') do |document_csv|
-      CSV.open(finder_report_filename, 'w') do |finder_csv|
+    CSV.open(document_report_filename, "w") do |document_csv|
+      CSV.open(finder_report_filename, "w") do |finder_csv|
         document_csv << ["URL", "Organisation(s)", "Finder", "Status", "First published at"]
         finder_csv << ["URL", "Organisation(s)", "Status", "How many documents", "First published at"]
         all_document_classes.each do |document_class|
           document_count = 0
-          organisations_for_csv = organisations_for_document_class(document_class).join(', ')
+          organisations_for_csv = organisations_for_document_class(document_class).join(", ")
           each_document(document_class) do |document_hash|
             document_count += 1
             document_csv << [public_url_for(document_hash),

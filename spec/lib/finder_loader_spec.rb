@@ -22,13 +22,13 @@ RSpec.describe FinderLoader do
     expect(loader.finders).to match_array([
       {
         file: { "name" => "format-1" },
-        timestamp: "yesterday"
+        timestamp: "yesterday",
       },
       {
 
         file: { "name" => "format-2" },
-        timestamp: "today"
-      }
+        timestamp: "today",
+      },
     ])
   end
 
@@ -37,11 +37,11 @@ RSpec.describe FinderLoader do
                       .and_return(true)
 
     loader = FinderLoader.new
-    expect(loader.finder('format-1')).to match_array([
+    expect(loader.finder("format-1")).to match_array([
       {
         file: { "name" => "format-1" },
-        timestamp: "yesterday"
-      }
+        timestamp: "yesterday",
+      },
     ])
   end
 end

@@ -3,9 +3,9 @@ Rails.application.routes.draw do
     GovukHealthcheck::SidekiqRedis,
   )
 
-  get '/rebuild-healthcheck', to: proc { [200, {}, %w[OK]] }
-  post '/preview', to: 'govspeak#preview'
-  get '/error', to: 'passthrough#error'
+  get "/rebuild-healthcheck", to: proc { [200, {}, %w[OK]] }
+  post "/preview", to: "govspeak#preview"
+  get "/error", to: "passthrough#error"
 
   mount GovukAdminTemplate::Engine, at: "/style-guide"
 
@@ -22,5 +22,5 @@ Rails.application.routes.draw do
     post :discard, on: :member
   end
 
-  root to: 'passthrough#index'
+  root to: "passthrough#index"
 end

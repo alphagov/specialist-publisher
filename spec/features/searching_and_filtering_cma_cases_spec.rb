@@ -1,4 +1,4 @@
-require 'spec_helper'
+require "spec_helper"
 
 RSpec.feature "Searching and filtering", type: :feature do
   let(:test_date) { Date.new(2016, 1, 11) }
@@ -32,7 +32,7 @@ RSpec.feature "Searching and filtering", type: :feature do
       visit "/cma-cases"
 
       expect(page.status_code).to eq(200)
-      expect(page).to have_selector('li.document', count: 10)
+      expect(page).to have_selector("li.document", count: 10)
       expect(page).to have_content("Example CMA Case 0")
       expect(page).to have_content("Example CMA Case 1")
       expect(page).to have_content("Example CMA Case 2")
@@ -80,7 +80,7 @@ RSpec.feature "Searching and filtering", type: :feature do
       fill_in "Search", with: "0"
       click_button "Search"
       expect(page).to have_content("Example CMA Case 0")
-      expect(page).to have_selector('li.document', count: 1)
+      expect(page).to have_selector("li.document", count: 1)
     end
 
     scenario "filtering the items with no results returned" do

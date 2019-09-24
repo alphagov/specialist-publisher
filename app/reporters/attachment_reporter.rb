@@ -49,7 +49,7 @@ private
       {
         snippet: snippet,
         sanitised_snippet: sanitise_snippet(snippet),
-        filename: filename_from_snippet(snippet)
+        filename: filename_from_snippet(snippet),
       }
     end
   end
@@ -59,7 +59,7 @@ private
       {
         snippet: attachment.snippet,
         sanitised_snippet: sanitise_snippet(attachment.snippet),
-        filename: filename_from_snippet(attachment.snippet)
+        filename: filename_from_snippet(attachment.snippet),
       }
     end
   end

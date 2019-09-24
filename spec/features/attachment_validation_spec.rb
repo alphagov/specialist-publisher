@@ -12,7 +12,7 @@ RSpec.feature "Validating inline attachments", type: :feature do
 
     expect(page).to have_content("Please fix the following errors")
     expect(page).to have_content(
-      "Body contains an attachment that can't be found: 'missing.pdf'"
+      "Body contains an attachment that can't be found: 'missing.pdf'",
     )
   end
 
@@ -24,10 +24,10 @@ RSpec.feature "Validating inline attachments", type: :feature do
     expect(page).to have_content("Please fix the following errors")
 
     expect(page).to have_content(
-      "Body contains an attachment that can't be found: '<not>safe.pdf'"
+      "Body contains an attachment that can't be found: '<not>safe.pdf'",
     )
     expect(page).not_to have_content(
-      "Body contains an attachment that can't be found: '&lt;not&gt;safe.pdf'"
+      "Body contains an attachment that can't be found: '&lt;not&gt;safe.pdf'",
     )
   end
 end

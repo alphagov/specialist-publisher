@@ -5,7 +5,7 @@ namespace :base_path do
     old_base_path = document.base_path
 
     document.base_path = args[:new_base_path]
-    document.update_type = 'minor'
+    document.update_type = "minor"
     document.save
 
     puts "#{old_base_path} -> #{document.base_path}"

@@ -1,9 +1,9 @@
-require 'spec_helper'
+require "spec_helper"
 
 RSpec.feature "Editing a UK market conformity assessment body", type: :feature do
   let(:body_document) { FactoryBot.create(:uk_market_conformity_assessment_body) }
-  let(:content_id) { body_document['content_id'] }
-  let(:public_updated_at) { body_document['public_updated_at'] }
+  let(:content_id) { body_document["content_id"] }
+  let(:public_updated_at) { body_document["public_updated_at"] }
 
   before do
     allow_any_instance_of(DocumentPolicy).to receive(:departmental_editor?).and_return(true)
@@ -18,7 +18,7 @@ RSpec.feature "Editing a UK market conformity assessment body", type: :feature d
 
   scenario "with valid data" do
     visit  "/uk-market-conformity-assessment-bodies/#{content_id}/edit"
-    expect(page).to have_css('div.govspeak-help')
+    expect(page).to have_css("div.govspeak-help")
 
     title = "Example Company Ltd"
     summary = "This is the summary of a body"

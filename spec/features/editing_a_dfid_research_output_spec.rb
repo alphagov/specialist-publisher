@@ -1,9 +1,9 @@
-require 'spec_helper'
+require "spec_helper"
 
 RSpec.feature "Editing a DFID Research Output", type: :feature do
   let(:research_output)   { FactoryBot.create(:dfid_research_output) }
-  let(:content_id)        { research_output['content_id'] }
-  let(:public_updated_at) { research_output['public_updated_at'] }
+  let(:content_id)        { research_output["content_id"] }
+  let(:public_updated_at) { research_output["public_updated_at"] }
 
   before do
     allow_any_instance_of(DocumentPolicy).to receive(:departmental_editor?).and_return(true)
@@ -18,7 +18,7 @@ RSpec.feature "Editing a DFID Research Output", type: :feature do
 
   scenario "with valid data" do
     visit  "/dfid-research-outputs/#{content_id}/edit"
-    expect(page).to have_css('div.govspeak-help')
+    expect(page).to have_css("div.govspeak-help")
 
     title = "Example DFID Research output"
     summary = "This is the summary of an example DFID research output"

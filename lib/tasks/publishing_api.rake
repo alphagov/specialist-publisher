@@ -39,7 +39,7 @@ namespace :publishing_api do
     AllDocumentsFinder.find_each(CmaCase) do |cma_case|
       content_id = cma_case.content_id
       payload = {
-          primary_publishing_organisation: [cma_case.primary_publishing_organisation]
+          primary_publishing_organisation: [cma_case.primary_publishing_organisation],
       }
 
       Services.publishing_api.patch_links(content_id, links: payload, bulk_publishing: true)

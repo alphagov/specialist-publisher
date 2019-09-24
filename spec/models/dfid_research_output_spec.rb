@@ -1,15 +1,15 @@
-require 'spec_helper'
-require 'models/valid_against_schema'
+require "spec_helper"
+require "models/valid_against_schema"
 
 RSpec.describe DfidResearchOutput do
   let(:payload) { FactoryBot.create(:dfid_research_output) }
   include_examples "it saves payloads that are valid against the 'specialist_document' schema"
 
-  it 'is not exportable' do
+  it "is not exportable" do
     expect(described_class).not_to be_exportable
   end
 
-  it 'is always bulk published to hide the publishing-api published date' do
+  it "is always bulk published to hide the publishing-api published date" do
     expect(subject.bulk_published).to be true
   end
 

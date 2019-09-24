@@ -1,4 +1,4 @@
-require 'spec_helper'
+require "spec_helper"
 
 RSpec.feature "Access control", type: :feature do
   before do
@@ -86,7 +86,7 @@ RSpec.feature "Access control", type: :feature do
     end
 
     scenario "visiting /" do
-      visit '/'
+      visit "/"
 
       expect(page.status_code).to eq(200)
       expect(page).to have_content("Permission Denied")

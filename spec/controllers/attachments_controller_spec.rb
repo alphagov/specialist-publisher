@@ -11,7 +11,7 @@ RSpec.describe AttachmentsController, type: :controller do
                             "content_type" => "application/jpeg",
                             "title" => "asylum report image title",
                             "created_at" => "2015-12-03T16:59:13+00:00",
-                            "updated_at" => "2015-12-03T16:59:13+00:00"
+                            "updated_at" => "2015-12-03T16:59:13+00:00",
                           },
                           {
                             "content_id" => "ec3f6901-4156-4720-b4e5-f04c0b152141",
@@ -19,15 +19,15 @@ RSpec.describe AttachmentsController, type: :controller do
                             "content_type" => "application/pdf",
                             "title" => "asylum report pdf title",
                             "created_at" => "2015-12-03T16:59:13+00:00",
-                            "updated_at" => "2015-12-03T16:59:13+00:00"
-                          }
-                        ]
+                            "updated_at" => "2015-12-03T16:59:13+00:00",
+                          },
+                        ],
                       })
   }
 
-  let(:document_type_slug) { 'cma-cases' }
-  let(:document_content_id) { cma_case['content_id'] }
-  let(:attachment_content_id) { cma_case['details']['attachments'][0]['content_id'] }
+  let(:document_type_slug) { "cma-cases" }
+  let(:document_content_id) { cma_case["content_id"] }
+  let(:attachment_content_id) { cma_case["details"]["attachments"][0]["content_id"] }
 
   let(:asset_id) { SecureRandom.uuid }
   let(:file_name) { "cma_case_image.jpg" }
@@ -36,8 +36,8 @@ RSpec.describe AttachmentsController, type: :controller do
   let(:asset_url) { "http://assets-origin.dev.gov.uk/media/#{asset_id}/#{file_name}" }
   let(:asset_manager_response) {
     {
-         id: 'http://asset-manager.dev.gov.uk/assets/another_image_id',
-        file_url: asset_url
+         id: "http://asset-manager.dev.gov.uk/assets/another_image_id",
+        file_url: asset_url,
     }
   }
 
@@ -51,14 +51,14 @@ RSpec.describe AttachmentsController, type: :controller do
     let(:attachment) {
       {
         file: file,
-        title: 'test attachment upload'
+        title: "test attachment upload",
       }
     }
 
     let(:no_file_attachment) {
       {
         file: nil,
-        title: 'no file attached'
+        title: "no file attached",
       }
     }
 
@@ -105,7 +105,7 @@ RSpec.describe AttachmentsController, type: :controller do
     let(:updated_attachment) {
       {
         file: updated_file,
-        title: 'updated test attachment upload'
+        title: "updated test attachment upload",
       }
     }
     it "redirects to the specalist document edit page" do

@@ -15,6 +15,6 @@ class User
   field :disabled, type: Boolean, default: false
 
   def gds_editor?
-    permissions.include?('gds_editor')
+    permissions.include?("gds_editor")
   end
 end

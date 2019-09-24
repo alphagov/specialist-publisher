@@ -4,9 +4,9 @@ class Attachment < Document
   attr_accessor :title, :file, :content_type, :url, :content_id, :created_at, :updated_at, :being_updated
 
   def self.all_from_publishing_api(payload)
-    return [] unless payload.fetch('details', {}).key?('attachments')
+    return [] unless payload.fetch("details", {}).key?("attachments")
 
-    payload['details']['attachments'].map { |attachment| Attachment.new(attachment) }
+    payload["details"]["attachments"].map { |attachment| Attachment.new(attachment) }
   end
 
   def initialize(params = {})
@@ -64,12 +64,12 @@ class Attachment < Document
   end
 
   def id_from_url
-    url_array = @url.split('/')
+    url_array = @url.split("/")
     url_array[url_array.length - 2]
   end
 
   def remove_extension_from_filename(filename)
-    filename.split('.').first
+    filename.split(".").first
   end
 
   def destroy
@@ -80,7 +80,7 @@ class Attachment < Document
   end
 
   def filename
-    url.split('/').last
+    url.split("/").last
   end
 
   def snippet

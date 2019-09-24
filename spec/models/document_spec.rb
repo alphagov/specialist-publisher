@@ -1,4 +1,4 @@
-require 'spec_helper'
+require "spec_helper"
 
 RSpec.describe Document do
   class MyDocumentType < Document
@@ -7,7 +7,7 @@ RSpec.describe Document do
     end
 
     def primary_publishing_organisation
-      'a-primary-org-id'
+      "a-primary-org-id"
     end
 
     attr_accessor :field1, :field2, :field3
@@ -94,7 +94,7 @@ RSpec.describe Document do
       filter: {
         document_type: "my_document_type",
       },
-      content_id: @finder_content_id
+      content_id: @finder_content_id,
     }.deep_stringify_keys
   }
 
@@ -109,17 +109,17 @@ RSpec.describe Document do
           {
             content_type: "text/govspeak",
             content: "This is the body of an example document",
-          }
+          },
         ],
         metadata: {
           field1: "2015-12-01",
           field2: "open",
           field3: %w(x y z),
-        }
+        },
       },
       links: {
-        finder: [@finder_content_id]
-      }
+        finder: [@finder_content_id],
+      },
     }
   }
   let(:payload) { FactoryBot.create(:document, payload_attributes) }
@@ -135,15 +135,15 @@ RSpec.describe Document do
       let(:payload) { FactoryBot.create(:document, :published, payload_attributes) }
 
       it "sets the top-level attributes on a document" do
-        expect(document.base_path).to eq(payload['base_path'])
-        expect(document.content_id).to eq(payload['content_id'])
-        expect(document.title).to eq(payload['title'])
-        expect(document.summary).to eq(payload['description'])
-        expect(document.publication_state).to eq(payload['publication_state'])
-        expect(document.public_updated_at).to eq(payload['public_updated_at'])
-        expect(document.first_published_at).to eq(payload['first_published_at'])
+        expect(document.base_path).to eq(payload["base_path"])
+        expect(document.content_id).to eq(payload["content_id"])
+        expect(document.title).to eq(payload["title"])
+        expect(document.summary).to eq(payload["description"])
+        expect(document.publication_state).to eq(payload["publication_state"])
+        expect(document.public_updated_at).to eq(payload["public_updated_at"])
+        expect(document.first_published_at).to eq(payload["first_published_at"])
         expect(document.update_type).to eq(nil)
-        expect(document.state_history).to eq(payload['state_history'])
+        expect(document.state_history).to eq(payload["state_history"])
       end
 
       context "when bulk published is true" do
@@ -151,9 +151,9 @@ RSpec.describe Document do
           {
             details: {
               metadata: {
-                bulk_published: true
-              }
-            }
+                bulk_published: true,
+              },
+            },
           }
         end
 
@@ -164,8 +164,8 @@ RSpec.describe Document do
         let(:payload_attributes) do
           {
             details: {
-              metadata: {}
-            }
+              metadata: {},
+            },
           }
         end
 
@@ -179,8 +179,8 @@ RSpec.describe Document do
               body: [
                 { content_type: "text/govspeak", content: "# hello" },
                 { content_type: "text/html", content: "<h1>hello</h1>" },
-              ]
-            }
+              ],
+            },
           }
         end
 
@@ -194,7 +194,7 @@ RSpec.describe Document do
           {
             details: {
               body: "This is just a string.",
-            }
+            },
           }
         end
 
@@ -225,7 +225,7 @@ RSpec.describe Document do
         )
       end
       it "sets the update type" do
-        expect(document.update_type).to eq(payload['update_type'])
+        expect(document.update_type).to eq(payload["update_type"])
       end
     end
 
@@ -267,7 +267,7 @@ RSpec.describe Document do
           "field2" => "open",
           "field3" => %w(x y z),
         },
-        "document_type" => "my_document_type"
+        "document_type" => "my_document_type",
       )
     end
 
@@ -276,10 +276,10 @@ RSpec.describe Document do
         MyDocumentType.from_publishing_api(
           FactoryBot.create(:document,
                             payload_attributes.merge(
-                              publication_state: 'published',
-                              update_type: 'minor',
-                              content_id: document.content_id
-                            ))
+                              publication_state: "published",
+                              update_type: "minor",
+                              content_id: document.content_id,
+                            )),
         )
       }
 
@@ -296,9 +296,9 @@ RSpec.describe Document do
           FactoryBot.create(:document,
                             payload_attributes.merge(
                               first_published_at: nil,
-                              publication_state: 'draft',
-                              content_id: document.content_id
-                            ))
+                              publication_state: "draft",
+                              content_id: document.content_id,
+                            )),
         )
       }
 
@@ -329,15 +329,15 @@ RSpec.describe Document do
       end
     end
 
-    shared_examples_for 'publishing changes to a document that has previously been published' do
+    shared_examples_for "publishing changes to a document that has previously been published" do
       let(:published_document) {
         MyDocumentType.from_publishing_api(
           FactoryBot.create(:document,
                             :redrafted,
                             payload_attributes.merge(
                               publication_state: publication_state,
-                              content_id: document.content_id
-                            ))
+                              content_id: document.content_id,
+                            )),
         )
       }
 
@@ -349,23 +349,23 @@ RSpec.describe Document do
     end
 
     context "when document is in live state" do
-      let(:publication_state) { 'published' }
-      it_behaves_like 'publishing changes to a document that has previously been published'
+      let(:publication_state) { "published" }
+      it_behaves_like "publishing changes to a document that has previously been published"
     end
 
-    context 'when document is in redrafted state' do
-      let(:publication_state) { 'draft' }
-      it_behaves_like 'publishing changes to a document that has previously been published'
+    context "when document is in redrafted state" do
+      let(:publication_state) { "draft" }
+      it_behaves_like "publishing changes to a document that has previously been published"
     end
 
-    context 'when document is in unpublished state' do
-      let(:publication_state) { 'unpublished' }
-      it_behaves_like 'publishing changes to a document that has previously been published'
+    context "when document is in unpublished state" do
+      let(:publication_state) { "unpublished" }
+      it_behaves_like "publishing changes to a document that has previously been published"
     end
 
-    context 'when document is in superseded state' do
-      let(:publication_state) { 'superseded' }
-      it_behaves_like 'publishing changes to a document that has previously been published'
+    context "when document is in superseded state" do
+      let(:publication_state) { "superseded" }
+      it_behaves_like "publishing changes to a document that has previously been published"
     end
   end
 
@@ -385,13 +385,13 @@ RSpec.describe Document do
     before do
       publishing_api_has_item(payload)
       document = MyDocumentType.find(payload["content_id"])
-      stub_publishing_api_unpublish(document.content_id, body: { type: 'gone' })
+      stub_publishing_api_unpublish(document.content_id, body: { type: "gone" })
     end
 
     it "sends correct payload to publishing api" do
       expect(document.unpublish).to eq(true)
 
-      assert_publishing_api_unpublish(document.content_id, type: 'gone')
+      assert_publishing_api_unpublish(document.content_id, type: "gone")
     end
 
     it "deletes document attachments" do
@@ -402,19 +402,19 @@ RSpec.describe Document do
 
     context "with an alternative path" do
       it "sends correct payload to publishing api" do
-        publishing_api_has_lookups('/foo' => SecureRandom.uuid)
-        stub_publishing_api_unpublish(document.content_id, body: { type: 'redirect', alternative_path: '/foo' })
+        publishing_api_has_lookups("/foo" => SecureRandom.uuid)
+        stub_publishing_api_unpublish(document.content_id, body: { type: "redirect", alternative_path: "/foo" })
 
-        expect(document.unpublish('/foo')).to eq(true)
+        expect(document.unpublish("/foo")).to eq(true)
 
-        assert_publishing_api_unpublish(document.content_id, type: 'redirect', alternative_path: '/foo')
+        assert_publishing_api_unpublish(document.content_id, type: "redirect", alternative_path: "/foo")
       end
     end
 
     context "unsuccessful #unpublish" do
       it "notifies GovukError and returns false if publishing-api does not return status 200" do
         expect(GovukError).to receive(:notify)
-        stub_publishing_api_unpublish(document.content_id, { body: { type: 'gone' } }, status: 409)
+        stub_publishing_api_unpublish(document.content_id, { body: { type: "gone" } }, status: 409)
         expect(document.unpublish).to eq(false)
       end
     end
@@ -619,19 +619,19 @@ RSpec.describe Document do
       end
     end
 
-    describe '#delete_attachment' do
+    describe "#delete_attachment" do
       before do
         subject.attachments = [attachment]
       end
 
-      it 'deletes its attachment on a successful API call' do
+      it "deletes its attachment on a successful API call" do
         expect(subject.attachments).to receive(:remove).and_return(true)
         expect(subject).to receive(:save)
         subject.delete_attachment(attachment)
         expect subject.attachments.count == 0
       end
 
-      it 'returns false and preserves its attachment on a failed call' do
+      it "returns false and preserves its attachment on a failed call" do
         expect(subject.attachments).to receive(:remove).and_return(false)
         expect(subject.delete_attachment(attachment)).to eq(false)
         expect subject.attachments.count == 1
@@ -692,7 +692,7 @@ RSpec.describe Document do
     end
   end
 
-  context '#first_draft?' do
+  context "#first_draft?" do
     subject { MyDocumentType.new }
     it "is true if the state_history is less than 2" do
       subject.state_history = nil

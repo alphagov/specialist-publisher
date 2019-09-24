@@ -1,4 +1,4 @@
-require 'spec_helper'
+require "spec_helper"
 
 RSpec.describe FinderContentItemPresenter do
   describe "#to_json" do

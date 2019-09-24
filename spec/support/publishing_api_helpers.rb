@@ -19,7 +19,7 @@ module PublishingApiHelpers
     doc = instance_double(
       Document,
       attachments: mapped_attachments,
-      body: document["details"]["body"][0]["content"]
+      body: document["details"]["body"][0]["content"],
     )
     updated_body_content = GovspeakBodyPresenter.present(doc)
     document["details"]["body"][0]["content"] = updated_body_content

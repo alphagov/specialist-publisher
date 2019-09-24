@@ -26,7 +26,7 @@ class GovspeakPresenter
     govspeak = Govspeak::Document.new(
       govspeak_body,
       attachments: attachments,
-      document_domains: internal_hosts
+      document_domains: internal_hosts,
     )
     govspeak.to_html
   end

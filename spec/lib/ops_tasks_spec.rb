@@ -50,12 +50,12 @@ RSpec.describe OpsTasks do
           request_json_includes(
             "public_updated_at" => "2016-01-01T12:34:00.000+00:00",
             "update_type" => "republish",
-          )
+          ),
         )
 
         assert_publishing_api_publish(
           content_id,
-          request_json_includes("update_type" => "republish")
+          request_json_includes("update_type" => "republish"),
         )
       end
 
@@ -66,7 +66,7 @@ RSpec.describe OpsTasks do
 
         assert_publishing_api_put_content(
           content_id,
-          request_json_includes("public_updated_at" => "2016-07-08T00:00:00.000+01:00")
+          request_json_includes("public_updated_at" => "2016-07-08T00:00:00.000+01:00"),
         )
       end
     end

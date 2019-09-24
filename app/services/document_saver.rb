@@ -1,7 +1,7 @@
 # Save a document as draft to the publishing-api
 class DocumentSaver
   def self.save(document)
-    document.update_type = 'major' if document.first_draft?
+    document.update_type = "major" if document.first_draft?
 
     presented_document = DocumentPresenter.new(document)
     presented_links = DocumentLinksPresenter.new(document)

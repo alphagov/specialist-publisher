@@ -3,7 +3,7 @@ class DocumentPublisher
   def self.publish(document)
     if document.first_draft?
       document.change_note = "First published."
-      document.update_type = 'major'
+      document.update_type = "major"
       document.save
     end
     Services.publishing_api.publish(document.content_id)

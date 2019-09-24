@@ -1,4 +1,4 @@
-require 'spec_helper'
+require "spec_helper"
 
 RSpec.describe "Email alert configuration" do
   all_finders = Dir["lib/documents/schemas/*.json"].map do |filename|

@@ -1,4 +1,4 @@
-require 'gds_api/publishing_api_v2'
+require "gds_api/publishing_api_v2"
 
 class DocumentsController < ApplicationController
   include ActionView::Context
@@ -102,7 +102,7 @@ private
   end
 
   def unknown_error_message
-    support_url = Plek.new.external_url_for('support') + "/technical_fault_report/new"
+    support_url = Plek.new.external_url_for("support") + "/technical_fault_report/new"
 
     "Something has gone wrong. Please try again and see if it works. <a href='#{support_url}'>Let us know</a>
     if the problem happens again and a developer will look into it.".html_safe
@@ -114,7 +114,7 @@ private
       :h4,
       %{
         Please fix the following errors
-      }
+      },
     )
     errors = content_tag :ul, class: "list-unstyled remove-bottom-margin" do
       list_items = @document.errors.full_messages.map do |message|

@@ -8,7 +8,7 @@ class ResidentialPropertyTribunalDecisionSubCategoryValidator < ActiveModel::Eac
 private
 
   def related_sub_category?(category, sub_category)
-    category_from_sub_category, _sub_category_from_sub_category = sub_category&.split('---', 2)
+    category_from_sub_category, _sub_category_from_sub_category = sub_category&.split("---", 2)
     category == category_from_sub_category
   end
 

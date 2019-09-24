@@ -1,12 +1,12 @@
-require 'spec_helper'
+require "spec_helper"
 
 RSpec.feature "Creating a Employment appeal tribunal decision", type: :feature do
   let(:fields)            { %i[base_path content_id public_updated_at title publication_state] }
   let(:research_output)   { FactoryBot.create(:employment_appeal_tribunal_decision) }
-  let(:content_id)        { research_output['content_id'] }
-  let(:public_updated_at) { research_output['public_updated_at'] }
+  let(:content_id)        { research_output["content_id"] }
+  let(:public_updated_at) { research_output["public_updated_at"] }
 
-  context 'in development' do
+  context "in development" do
     before do
       allow(Rails.env).to receive(:development?).and_return(true)
       log_in_as_editor(:gds_editor)
@@ -39,8 +39,8 @@ RSpec.feature "Creating a Employment appeal tribunal decision", type: :feature d
       fill_in "Hidden indexable content", with: "hidden text goes here"
 
 
-      expect(page).to have_css('div.govspeak-help')
-      expect(page).to have_content('To add an attachment, please save the draft first.')
+      expect(page).to have_css("div.govspeak-help")
+      expect(page).to have_content("To add an attachment, please save the draft first.")
 
       click_button "Save as draft"
 
@@ -87,7 +87,7 @@ RSpec.feature "Creating a Employment appeal tribunal decision", type: :feature d
     end
   end
 
-  context 'in production' do
+  context "in production" do
     before do
       allow(Rails.env).to receive(:development?).and_return(false)
       stub_any_publishing_api_call

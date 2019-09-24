@@ -1,7 +1,7 @@
-require 'spec_helper'
+require "spec_helper"
 
 RSpec.feature "Publishing a previously unpublished CMA Case", type: :feature do
-  let(:content_id) { item['content_id'] }
+  let(:content_id) { item["content_id"] }
 
   let(:existing_attachments) { [] }
 
@@ -37,7 +37,7 @@ RSpec.feature "Publishing a previously unpublished CMA Case", type: :feature do
           "content_type" => "application/jpeg",
           "title" => "asylum report image title",
           "created_at" => "2015-12-03T16:59:13+00:00",
-          "updated_at" => "2015-12-03T16:59:13+00:00"
+          "updated_at" => "2015-12-03T16:59:13+00:00",
         },
         {
           "content_id" => "ec3f6901-4156-4720-b4e5-f04c0b152141",
@@ -45,8 +45,8 @@ RSpec.feature "Publishing a previously unpublished CMA Case", type: :feature do
           "content_type" => "application/pdf",
           "title" => "asylum report pdf title",
           "created_at" => "2015-12-03T16:59:13+00:00",
-          "updated_at" => "2015-12-03T16:59:13+00:00"
-        }
+          "updated_at" => "2015-12-03T16:59:13+00:00",
+        },
       ]
     end
 
