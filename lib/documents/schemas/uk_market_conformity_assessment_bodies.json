@@ -26,28 +26,28 @@
     },
     {
       "key": "uk_market_conformity_assessment_body_number",
-      "name": "Body Number",
+      "name": "Body number",
       "type": "text",
       "display_as_result_metadata": true,
       "filterable": false
     },
     {
       "key": "updated_at",
-      "name": "Last Updated",
+      "name": "Last updated",
       "type": "date",
       "display_as_result_metadata": true,
       "filterable": false
     },
     {
       "key": "uk_market_conformity_assessment_body_type",
-      "name": "Body Type",
+      "name": "Body type",
       "type": "text",
       "preposition": "registered as",
       "display_as_result_metadata": true,
       "filterable": true,
       "allowed_values": [
         {
-          "label": "Approved Body",
+          "label": "Approved body",
           "value": "approved-body"
         },
         {
@@ -70,7 +70,7 @@
     },
     {
       "key": "uk_market_conformity_assessment_body_registered_office_location",
-      "name": "Registered Office Location",
+      "name": "Registered office location",
       "type": "text",
       "preposition": "based in",
       "display_as_result_metadata": true,
@@ -112,7 +112,7 @@
     },
     {
       "key": "uk_market_conformity_assessment_body_testing_locations",
-      "name": "Testing Locations",
+      "name": "Testing locations",
       "type": "text",
       "preposition": "testing in",
       "display_as_result_metadata": true,
@@ -923,7 +923,7 @@
     },
     {
       "key": "uk_market_conformity_assessment_body_legislative_area",
-      "name": "Legislative Area",
+      "name": "Legislative area",
       "type": "text",
       "preposition": "concerned with",
       "display_as_result_metadata": true,
@@ -938,6 +938,10 @@
           "value": "construction-products"
         },
         {
+          "label": "Ecodesign",
+          "value": "ecodesign"
+        },
+        {
           "label": "Electromagnetic compatibility",
           "value": "electromagnetic-compatibility"
         },
@@ -950,7 +954,7 @@
           "value": "explosives"
         },
         {
-          "label": "Gas Appliances and related",
+          "label": "Gas appliances and related",
           "value": "gas-appliances-and-related"
         },
         {
@@ -966,7 +970,7 @@
           "value": "marine-equipment"
         },
         {
-          "label": "Measuring Instruments",
+          "label": "Measuring instruments",
           "value": "measuring-instruments"
         },
         {
@@ -978,11 +982,11 @@
           "value": "non-automatic-weighing-instruments"
         },
         {
-          "label": "Personal Protective Equipment",
+          "label": "Personal protective equipment",
           "value": "personal-protective-equipment"
         },
         {
-          "label": "Pressure Equipment",
+          "label": "Pressure equipment",
           "value": "pressure-equipment"
         },
         {
@@ -990,7 +994,7 @@
           "value": "pyrotechnics"
         },
         {
-          "label": "Radio Equipment",
+          "label": "Radio equipment",
           "value": "radio-equipment"
         },
         {
@@ -1010,7 +1014,7 @@
           "value": "toys"
         },
         {
-          "label": "Transportable Pressure Equipment",
+          "label": "Transportable pressure equipment",
           "value": "transportable-pressure-equipment"
         }
       ]
