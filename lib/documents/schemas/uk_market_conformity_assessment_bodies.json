@@ -20,21 +20,21 @@
       "key": "uk_market_conformity_assessment_body_name",
       "name": "Body Name",
       "type": "text",
-      "display_as_result_metadata": true,
+      "display_as_result_metadata": false,
       "filterable": false
     },
     {
       "key": "uk_market_conformity_assessment_body_number",
       "name": "Body number",
       "type": "text",
-      "display_as_result_metadata": true,
+      "display_as_result_metadata": false,
       "filterable": false
     },
     {
       "key": "updated_at",
       "name": "Last updated",
       "type": "date",
-      "display_as_result_metadata": true,
+      "display_as_result_metadata": false,
       "filterable": false
     },
     {
