@@ -19,6 +19,7 @@
     {
       "key": "uk_market_conformity_assessment_body_name",
       "name": "Body Name",
+      "short_name": "Body Name",
       "type": "text",
       "display_as_result_metadata": false,
       "filterable": false
@@ -26,6 +27,7 @@
     {
       "key": "uk_market_conformity_assessment_body_number",
       "name": "Body number",
+      "short_name": "Body number",
       "type": "text",
       "display_as_result_metadata": false,
       "filterable": false
@@ -33,6 +35,7 @@
     {
       "key": "updated_at",
       "name": "Last updated",
+      "short_name": "Last updated",
       "type": "date",
       "display_as_result_metadata": false,
       "filterable": false
@@ -40,6 +43,7 @@
     {
       "key": "uk_market_conformity_assessment_body_type",
       "name": "Body type",
+      "short_name": "Body type",
       "type": "text",
       "preposition": "registered as",
       "display_as_result_metadata": true,
@@ -70,6 +74,7 @@
     {
       "key": "uk_market_conformity_assessment_body_registered_office_location",
       "name": "Registered office location",
+      "short_name": "Registered office location",
       "type": "text",
       "preposition": "based in",
       "display_as_result_metadata": true,
@@ -112,6 +117,7 @@
     {
       "key": "uk_market_conformity_assessment_body_testing_locations",
       "name": "Testing locations",
+      "short_name": "Testing locations",
       "type": "text",
       "preposition": "testing in",
       "display_as_result_metadata": true,
@@ -902,6 +908,7 @@
     {
       "key": "uk_market_conformity_assessment_body_website",
       "name": "Website",
+      "short_name": "Website",
       "type": "text",
       "filterable": false,
       "display_as_result_metadata": false
@@ -909,6 +916,7 @@
     {
       "key": "uk_market_conformity_assessment_body_email",
       "name": "Email",
+      "short_name": "Email",
       "type": "text",
       "filterable": false,
       "display_as_result_metadata": false
@@ -916,6 +924,7 @@
     {
       "key": "uk_market_conformity_assessment_body_phone",
       "name": "Phone",
+      "short_name": "Phone",
       "type": "text",
       "filterable": false,
       "display_as_result_metadata": false
@@ -923,6 +932,7 @@
     {
       "key": "uk_market_conformity_assessment_body_legislative_area",
       "name": "Legislative area",
+      "short_name": "Legislative area",
       "type": "text",
       "preposition": "concerned with",
       "display_as_result_metadata": true,
