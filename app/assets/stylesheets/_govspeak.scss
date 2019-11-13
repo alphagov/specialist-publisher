@@ -1,5 +1,12 @@
 @import "_shims";
 
+@import "govuk_admin_template";
+
+@import "colours";
+@import "typography";
+@import "measurements";
+@import "css3";
+
  .govspeak {
   h2:first-child,
   h3:first-child,
