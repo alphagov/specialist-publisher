@@ -24,11 +24,51 @@
     },
     {
       "facet_id": "commodity_type",
-      "facet_name": "commodity type"
-    },
-    {
-      "facet_id": "certificate_status",
-      "facet_name": "certificate status"
+      "facet_name": "commodity type",
+      "facet_choices": [
+        {
+          "key": "animal-products-including-food",
+          "radio_button_name": "Animal products including food",
+          "topic_name": "Animal products including food",
+          "prechecked": false
+        },
+        {
+          "key": "equine",
+          "radio_button_name": "Equine",
+          "topic_name": "Equine",
+          "prechecked": false
+        },
+        {
+          "key": "fish",
+          "radio_button_name": "Fish",
+          "topic_name": "Fish",
+          "prechecked": false
+        },
+        {
+          "key": "germplasm",
+          "radio_button_name": "Germplasm",
+          "topic_name": "Germplasm",
+          "prechecked": false
+        },
+        {
+          "key": "live-animals",
+          "radio_button_name": "Live animals",
+          "topic_name": "Live animals",
+          "prechecked": false
+        },
+        {
+          "key": "livestock",
+          "radio_button_name": "Livestock",
+          "topic_name": "Livestock",
+          "prechecked": false
+        },
+        {
+          "key": "pets",
+          "radio_button_name": "Pets",
+          "topic_name": "Pets",
+          "prechecked": false
+        }
+      ]
     }
   ],
   "topics": ["keeping-farmed-animals/animal-welfare"],
