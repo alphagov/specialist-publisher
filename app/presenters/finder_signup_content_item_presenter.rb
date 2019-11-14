@@ -72,6 +72,7 @@ private
     {
       "beta" => schema.fetch("signup_beta", false),
       "email_signup_choice" => schema.fetch("email_signup_choice", []),
+      "email_filter_facets" => schema.fetch("email_filter_facets", []),
       "email_filter_by" => schema.fetch("email_filter_by", nil),
       "email_filter_name" => schema.fetch("email_filter_name", nil),
       "subscription_list_title_prefix" => schema.fetch("subscription_list_title_prefix", {}),
