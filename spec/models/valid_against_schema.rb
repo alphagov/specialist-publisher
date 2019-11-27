@@ -2,7 +2,7 @@ RSpec.shared_examples "it saves payloads that are valid against the 'specialist_
   describe "#save" do
     it "saves a valid document" do
       publishing_api_has_item(payload)
-      Timecop.freeze(Time.parse("2015-12-18 10:12:26 UTC"))
+      Timecop.freeze(Time.zone.parse("2015-12-18 10:12:26 UTC"))
       stub_any_publishing_api_put_content
       stub_any_publishing_api_patch_links
 

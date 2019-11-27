@@ -9,7 +9,7 @@ RSpec.feature "Creating a DFID Research Output", type: :feature do
   before do
     log_in_as_editor(:dfid_editor)
 
-    Timecop.freeze(Time.parse(public_updated_at))
+    Timecop.freeze(Time.zone.parse(public_updated_at))
     allow(SecureRandom).to receive(:uuid).and_return(content_id)
 
     stub_any_publishing_api_put_content

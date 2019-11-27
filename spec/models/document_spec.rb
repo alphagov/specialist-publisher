@@ -303,7 +303,7 @@ RSpec.describe Document do
       }
 
       it 'saves a "First published." change note before asking the api to publish' do
-        Timecop.freeze(Time.parse("2015-12-18 10:12:26 UTC")) do
+        Timecop.freeze(Time.zone.parse("2015-12-18 10:12:26 UTC")) do
           unpublished_document.publish
 
           changed_json = {
@@ -443,7 +443,7 @@ RSpec.describe Document do
   describe "#save" do
     before do
       publishing_api_has_item(payload)
-      Timecop.freeze(Time.parse("2015-12-18 10:12:26 UTC"))
+      Timecop.freeze(Time.zone.parse("2015-12-18 10:12:26 UTC"))
     end
 
     it "saves document" do
