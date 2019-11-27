@@ -28,7 +28,7 @@ class DocumentsController < ApplicationController
       redirect_to document_path(current_format.slug, @document.content_id)
     elsif @document.errors.any?
       flash.now[:errors] = document_error_messages
-      render :new, status: 422
+      render :new, status: :unprocessable_entity
     else
       flash.now[:danger] = unknown_error_message
       render :new
@@ -56,7 +56,7 @@ class DocumentsController < ApplicationController
       end
     else
       flash.now[:errors] = document_error_messages
-      render :edit, status: 422
+      render :edit, status: :unprocessable_entity
     end
   end
 
