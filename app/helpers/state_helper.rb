@@ -8,7 +8,7 @@ module StateHelper
       classes = "label label-default"
     end
 
-    content_tag(:span, state, class: classes).html_safe
+    content_tag(:span, state, class: classes)
   end
 
   def compose_state(state_history)

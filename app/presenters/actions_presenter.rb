@@ -1,5 +1,6 @@
 class ActionsPresenter
   include Rails.application.routes.url_helpers
+  include ActionView::Helpers::TagHelper
 
   attr_accessor :document, :policy
 
@@ -18,21 +19,26 @@ class ActionsPresenter
 
   def publish_text
     if state == "published"
-      text = "<p>There are no changes to publish.</p>"
+      text = "There are no changes to publish."
     elsif state == "unpublished"
-      text = "<p>The document is unpublished. You need to create a new draft before it can be published.</p>"
+      text = "The document is unpublished. You need to create a new draft before it can be published."
     elsif !policy.publish?
-      text = "<p>You don't have permission to publish this document.</p>"
+      text = "You don't have permission to publish this document."
     elsif update_type == "minor"
-      text = "<p>You are about to publish a <strong>minor edit</strong>.</p>"
+      text = safe_join([
+        content_tag(:span, "You are about to publish a "),
+        content_tag(:strong, "minor edit."),
+      ])
     elsif update_type == "major" && !document.first_draft?
-      text = "<p><strong>You are about to publish a major edit with a public change note.</strong></p>"
-      text += "<p>Publishing will email subscribers to #{klass_name}.</p>"
+      text = safe_join([
+        content_tag(:strong, "You are about to publish a major edit with a public change note. "),
+        content_tag(:span, "Publishing will email subscribers to #{klass_name}."),
+      ])
     else
-      text = "<p>Publishing will email subscribers to #{klass_name}.</p>"
+      text = "Publishing will email subscribers to #{klass_name}."
     end
 
-    text.html_safe
+    text
   end
 
   def publish_alert
@@ -53,20 +59,20 @@ class ActionsPresenter
 
   def unpublish_text
     if document.first_draft?
-      text = "<p>The document has never been published.</p>"
+      text = "The document has never been published."
     elsif state == "draft"
-      text = "<p>The document cannot be unpublished because it has a draft. You need to publish the draft first.</p>"
+      text = "The document cannot be unpublished because it has a draft. You need to publish the draft first."
     elsif state == "unpublished"
-      text = "<p>The document is already unpublished.</p>"
+      text = "The document is already unpublished."
     elsif !policy.unpublish?
-      text = "<p>You don't have permission to unpublish this document.</p>"
+      text = "You don't have permission to unpublish this document."
     elsif state == "published"
-      text = "<p>The document will be removed from the site. It will still be possible to edit and publish a new version.</p>"
+      text = "The document will be removed from the site. It will still be possible to edit and publish a new version."
     else
       raise ArgumentError, "Unrecognised state: '#{state}'"
     end
 
-    text.html_safe
+    text
   end
 
   def unpublish_alert
@@ -83,14 +89,14 @@ class ActionsPresenter
 
   def discard_text
     if state != "draft"
-      text = "<p>There is no draft to discard.</p>"
+      text = "There is no draft to discard."
     elsif !policy.discard?
-      text = "<p>You don't have permission to discard this draft.</p>"
+      text = "You don't have permission to discard this draft."
     else
-      text = "<p>This draft will be discarded.</p>"
+      text = "This draft will be discarded."
     end
 
-    text.html_safe
+    text
   end
 
   def discard_alert

@@ -11,7 +11,7 @@
     <%= form_tag(presenter.publish_path, method: :post, class: 'panel panel-default') do %>
       <div class="panel-heading"><h3 class="panel-title">Publish document</h3></div>
       <div class="panel-body">
-        <%= presenter.publish_text %>
+        <%= content_tag(:p, presenter.publish_text) %>
 
         <% if presenter.publish_button_visible? %>
           <button name="submit" class="btn btn-danger"
@@ -25,7 +25,7 @@
     <%= form_tag(presenter.unpublish_path, method: :post, class: 'panel panel-default') do %>
       <div class="panel-heading"><h3 class="panel-title">Unpublish document</h3></div>
       <div class="panel-body">
-        <%= presenter.unpublish_text %>
+        <%= content_tag(:p, presenter.unpublish_text) %>
 
         <% if presenter.unpublish_button_visible? %>
           <div class="form-group">
@@ -46,7 +46,7 @@
     <%= form_tag(presenter.discard_path, method: :post, class: 'panel panel-default') do %>
       <div class="panel-heading"><h3 class="panel-title">Discard draft</h3></div>
       <div class="panel-body">
-        <%= presenter.discard_text %>
+        <%= content_tag(:p, presenter.discard_text) %>
 
         <% if presenter.discard_button_visible? %>
           <button name="submit" class="btn btn-warning"

@@ -2,8 +2,10 @@ require "gds_api/publishing_api_v2"
 
 class DocumentsController < ApplicationController
   include ActionView::Context
+  include ActionView::Helpers::OutputSafetyHelper
   include ActionView::Helpers::TagHelper
   include ActionView::Helpers::TextHelper
+  include ActionView::Helpers::UrlHelper
 
   before_action :fetch_document, except: %i[index new create]
   before_action :check_authorisation, if: :document_type_slug
@@ -104,23 +106,13 @@ private
   def unknown_error_message
     support_url = Plek.new.external_url_for("support") + "/technical_fault_report/new"
 
-    "Something has gone wrong. Please try again and see if it works. <a href='#{support_url}'>Let us know</a>
-    if the problem happens again and a developer will look into it.".html_safe
+    safe_join(["Something has gone wrong. Please try again and see if it works. ", link_to("Let us know", support_url), " if the problem happens again and a developer will look into it."])
   end
 
   def document_error_messages
-    @document.errors.messages
-    heading = content_tag(
-      :h4,
-      %{
-        Please fix the following errors
-      },
-    )
-    errors = content_tag :ul, class: "list-unstyled remove-bottom-margin" do
-      list_items = @document.errors.full_messages.map do |message|
-        content_tag(:li, message.html_safe)
-      end
-      list_items.join.html_safe
+    heading = content_tag(:h4, "Please fix the following errors")
+    errors = content_tag(:ul, class: "list-unstyled remove-bottom-margin") do
+      safe_join(@document.errors.full_messages.map { |message| content_tag(:li, message.html_safe) })
     end
 
     heading + errors
