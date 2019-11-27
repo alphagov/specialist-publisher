@@ -6,6 +6,8 @@ RSpec.describe "Email alert configuration" do
   end
 
   all_finders.each do |finder|
+    next if finder["email_filter_by"] == "all_selected_facets"
+
     describe "Finder configuration for #{finder['name']}" do
       next unless finder["email_filter_by"]
 
