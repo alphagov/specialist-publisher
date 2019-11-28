@@ -1,14 +1,12 @@
 module StateHelper
+  def classes_for_frontend(document)
+    return "label label-primary" if state_for_frontend(document) =~ /draft/
+
+    "label label-default"
+  end
+
   def state_for_frontend(document)
-    state = compose_state(document.state_history.to_h)
-
-    if state =~ /draft/
-      classes = "label label-primary"
-    else
-      classes = "label label-default"
-    end
-
-    content_tag(:span, state, class: classes)
+    compose_state(document.state_history.to_h)
   end
 
   def compose_state(state_history)
