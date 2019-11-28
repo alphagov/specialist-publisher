@@ -31,7 +31,7 @@ class AttachmentsController < ApplicationController
   def update
     document = fetch_document
     attachment = document.attachments.find(attachment_content_id)
-    attachment.update_attributes(attachment_params)
+    attachment.update_properties(attachment_params)
 
     if attachment.file.nil?
       save_updated_title(document, attachment)

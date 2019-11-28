@@ -149,7 +149,7 @@ RSpec.describe Attachment do
     end
   end
 
-  describe "#update_attributes" do
+  describe "#update_properties" do
     let(:content_id) { SecureRandom.uuid }
 
     let(:attachment) {
@@ -172,7 +172,7 @@ RSpec.describe Attachment do
     }
 
     it "should update the title, file and has_changed attributes" do
-      attachment.update_attributes(file: http_file_upload, title: "updated attachment title")
+      attachment.update_properties(file: http_file_upload, title: "updated attachment title")
 
       expect(attachment.file).to eq(http_file_upload)
       expect(attachment.title).to eq("updated attachment title")
