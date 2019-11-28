@@ -9,7 +9,7 @@ RSpec.describe PublishingHelper, type: :helper do
     it "calls the given block" do
       expect(document).to receive(:publish!).once
 
-      handled = handle_remote_error do
+      handled = handle_remote_error(document) do
         document.publish!
       end
 
@@ -20,7 +20,7 @@ RSpec.describe PublishingHelper, type: :helper do
       allow(document).to receive(:explode!).and_raise(http_error)
       expect(GovukError).to receive(:notify).with(http_error)
 
-      handled = handle_remote_error do
+      handled = handle_remote_error(document) do
         document.explode!
       end
 
@@ -34,7 +34,7 @@ RSpec.describe PublishingHelper, type: :helper do
       allow(document).to receive(:explode!).and_raise(http_error)
       expect(GovukError).to receive(:notify).with(http_error)
 
-      handled = handle_remote_error do
+      handled = handle_remote_error(document)do
         set_errors_on(document)
         document.explode!
       end
