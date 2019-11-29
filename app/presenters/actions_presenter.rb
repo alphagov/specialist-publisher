@@ -19,26 +19,24 @@ class ActionsPresenter
 
   def publish_text
     if state == "published"
-      text = "There are no changes to publish."
+      "There are no changes to publish."
     elsif state == "unpublished"
-      text = "The document is unpublished. You need to create a new draft before it can be published."
+      "The document is unpublished. You need to create a new draft before it can be published."
     elsif !policy.publish?
-      text = "You don't have permission to publish this document."
+      "You don't have permission to publish this document."
     elsif update_type == "minor"
-      text = safe_join([
+      safe_join([
         content_tag(:span, "You are about to publish a "),
         content_tag(:strong, "minor edit."),
       ])
     elsif update_type == "major" && !document.first_draft?
-      text = safe_join([
+      safe_join([
         content_tag(:strong, "You are about to publish a major edit with a public change note. "),
         content_tag(:span, "Publishing will email subscribers to #{klass_name}."),
       ])
     else
-      text = "Publishing will email subscribers to #{klass_name}."
+      "Publishing will email subscribers to #{klass_name}."
     end
-
-    text
   end
 
   def publish_alert
