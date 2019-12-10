@@ -67,6 +67,12 @@
           "radio_button_name": "Tenant associations",
           "topic_name": "Tenant associations",
           "prechecked": false
+        },
+        {
+          "key": "tenant-fees-act",
+          "radio_button_name": "Tenant Fees act",
+          "topic_name": "Tenant Fees Act",
+          "prechecked": false
         }
       ]
     }
@@ -109,6 +115,10 @@
         {
           "label": "Tenant associations",
           "value": "tenant-associations"
+        },
+        {
+          "label": "Tenant Fees Act",
+          "value": "tenant-fees-act"
         }
       ]
     },
@@ -295,6 +305,14 @@
         {
           "label": "Tenant associations - Request for information",
           "value": "tenant-associations---request-for-information"
+        },
+        {
+          "label": "Tenant Fees Act - Recovery of a prohibited payment",
+          "value": "tenant-fees-act---recovery-of-a-prohibited-payment"
+        },
+        {
+          "label": "Tenant Fees Act - Financial Penalties",
+          "value": "tenant-fees-act---financial-penalties"
         }
       ]
     },
