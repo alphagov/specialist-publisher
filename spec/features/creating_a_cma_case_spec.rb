@@ -18,7 +18,7 @@ RSpec.feature "Creating a CMA case", type: :feature do
     log_in_as_editor(:cma_editor)
 
     allow(SecureRandom).to receive(:uuid).and_return(content_id)
-    Timecop.freeze(Time.parse("2015-12-03 16:59:13 UTC"))
+    Timecop.freeze(Time.zone.parse("2015-12-03 16:59:13 UTC"))
 
     stub_any_publishing_api_put_content
     stub_any_publishing_api_patch_links

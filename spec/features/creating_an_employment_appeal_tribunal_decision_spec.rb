@@ -11,7 +11,7 @@ RSpec.feature "Creating a Employment appeal tribunal decision", type: :feature d
       allow(Rails.env).to receive(:development?).and_return(true)
       log_in_as_editor(:gds_editor)
 
-      Timecop.freeze(Time.parse(public_updated_at))
+      Timecop.freeze(Time.zone.parse(public_updated_at))
       allow(SecureRandom).to receive(:uuid).and_return(content_id)
 
       stub_any_publishing_api_put_content

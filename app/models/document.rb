@@ -220,7 +220,7 @@ class Document
   def save(validate: true)
     return false if validate && !self.valid?
 
-    handle_remote_error do
+    handle_remote_error(self) do
       DocumentSaver.save(self)
     end
   end
@@ -228,19 +228,19 @@ class Document
   def publish
     return false unless publishable?
 
-    handle_remote_error do
+    handle_remote_error(self) do
       DocumentPublisher.publish(self)
     end
   end
 
   def unpublish(alternative_path = nil)
-    handle_remote_error do
+    handle_remote_error(self) do
       DocumentUnpublisher.unpublish(content_id, base_path, alternative_path)
     end
   end
 
   def discard
-    handle_remote_error do
+    handle_remote_error(self) do
       Services.publishing_api.discard_draft(content_id, previous_version: previous_version)
     end
   end

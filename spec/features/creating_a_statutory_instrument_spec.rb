@@ -22,7 +22,7 @@ RSpec.feature "Creating a Statutory Instrument", type: :feature do
     log_in_as_editor(:gds_editor)
 
     allow(SecureRandom).to receive(:uuid).and_return(content_id)
-    Timecop.freeze(Time.parse("2015-12-03 16:59:13 UTC"))
+    Timecop.freeze(Time.zone.parse("2015-12-03 16:59:13 UTC"))
 
     stub_any_publishing_api_put_content
     stub_any_publishing_api_patch_links

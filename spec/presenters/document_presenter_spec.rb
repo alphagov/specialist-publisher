@@ -6,7 +6,7 @@ RSpec.describe DocumentPresenter do
   let(:presented_data) { document_presenter.to_json }
 
   before do
-    Timecop.freeze(Time.parse("2015-12-03T16:59:13+00:00"))
+    Timecop.freeze(Time.zone.parse("2015-12-03T16:59:13+00:00"))
   end
 
   after do

@@ -33,11 +33,11 @@ group :development, :test do
   gem "database_cleaner"
   gem "factory_bot"
   gem "govuk-content-schema-test-helpers"
-  gem "govuk-lint"
   gem "govuk_test"
   gem "pry-rails"
   gem "puma"
   gem "rspec-rails"
+  gem "rubocop-govuk"
   gem "simplecov", require: false
   gem "timecop"
 end

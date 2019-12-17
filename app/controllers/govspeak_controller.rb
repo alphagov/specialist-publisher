@@ -12,6 +12,6 @@ class GovspeakController < ApplicationController
                             attachments: attachments }, [:attachments])
     govspeak_presenter = GovspeakPresenter.new(document)
     govspeak_preview = govspeak_presenter.html_body
-    render html: govspeak_preview.html_safe
+    render html: govspeak_preview.html_safe # rubocop:disable Rails/OutputSafety
   end
 end

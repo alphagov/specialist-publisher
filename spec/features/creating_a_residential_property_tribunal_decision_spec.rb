@@ -8,7 +8,7 @@ RSpec.feature "Creating a residential property tribunal decision", type: :featur
   before do
     log_in_as_editor(:moj_editor)
 
-    Timecop.freeze(Time.parse(public_updated_at))
+    Timecop.freeze(Time.zone.parse(public_updated_at))
     allow(SecureRandom).to receive(:uuid).and_return(content_id)
 
     stub_any_publishing_api_put_content

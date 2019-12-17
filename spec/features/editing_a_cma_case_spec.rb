@@ -8,7 +8,7 @@ RSpec.feature "Editing a CMA case", type: :feature do
   let(:save_button_disable_with_message) { page.find_button("Save as draft")["data-disable-with"] }
 
   before do
-    Timecop.freeze(Time.parse("2015-12-03T16:59:13+00:00"))
+    Timecop.freeze(Time.zone.parse("2015-12-03T16:59:13+00:00"))
     log_in_as_editor(:cma_editor)
 
     stub_any_publishing_api_put_content

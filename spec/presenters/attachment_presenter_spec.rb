@@ -15,7 +15,7 @@ RSpec.describe AttachmentPresenter do
   }
 
   before do
-    Timecop.freeze(Time.parse("2015-12-03 16:59:13 UTC"))
+    Timecop.freeze(Time.zone.parse("2015-12-03 16:59:13 UTC"))
   end
 
   after do

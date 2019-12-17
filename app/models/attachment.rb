@@ -27,7 +27,7 @@ class Attachment < Document
     EXTENSION_WHITE_LIST.include? extension
   end
 
-  def update_attributes(new_params)
+  def update_properties(new_params)
     new_params.each do |k, v|
       self.public_send(:"#{k}=", v)
     end

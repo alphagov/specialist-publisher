@@ -28,7 +28,9 @@
       <dt>Bulk published</dt>
       <dd><%= @document.bulk_published %></dd>
       <dt>Publication state</dt>
-      <dd><%= state_for_frontend(@document) %></dd>
+      <dd>
+        <%= content_tag(:span, state_for_frontend(@document), class: classes_for_frontend(@document)) %>
+      </dd>
     </dl>
   </div>
 </div>
