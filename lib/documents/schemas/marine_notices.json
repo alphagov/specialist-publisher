@@ -75,8 +75,8 @@
     },
 
     {
-      "key": "marine_notice_issued_date",
-      "name": "Issue date",
+      "key": "issued_date",
+      "name": "Issued",
       "short_name": "Issued",
       "type": "date",
       "preposition": "issued",
