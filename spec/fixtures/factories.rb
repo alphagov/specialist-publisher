@@ -180,6 +180,23 @@ FactoryBot.define do
     end
   end
 
+  factory :marine_notice, parent: :document do
+    base_path { "/marine-notices/example-document" }
+
+    document_type { "marine_notice" }
+
+    transient do
+      default_metadata do
+        {
+          "marine_notice_type" => "marine-guidance-note",
+          "marine_notice_vessel_type" => "pleasure-vessels",
+          "marine_notice_topic" => "crew-and-training",
+          "issued_date" => "2015-10-10",
+        }
+      end
+    end
+  end
+
   factory :service_standard_report, parent: :document do
     base_path { "/service-standard-reports/example-document" }
     document_type { "service_standard_report" }
