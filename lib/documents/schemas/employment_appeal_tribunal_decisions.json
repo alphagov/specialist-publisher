@@ -63,6 +63,10 @@
           "value": "employment-agencies-act-1973"
         },
         {
+          "label": "Employee, Worker or Self Employed",
+          "value": "employee-worker-or-self-employed"
+        },
+        {
           "label": "Equal Pay Act",
           "value": "equal-pay-act"
         },
@@ -79,6 +83,10 @@
           "value": "flexible-working"
         },
         {
+          "label": "Gender Reassignment/Transgender Discrimination",
+          "value": "gender-reassignment-transgender-discrimination"
+        },
+        {
           "label": "Harassment",
           "value": "harassment"
         },
@@ -93,6 +101,10 @@
         {
           "label": "Jurisdictional Points",
           "value": "jurisdictional-points"
+        },
+        {
+          "label": "Marriage and Civil Partnership",
+          "value": "marriage-and-civil-partnership"
         },
         {
           "label": "Maternity Rights and Parental Leave",
@@ -189,6 +201,10 @@
         {
           "label": "Victimisation Discrimination",
           "value": "victimisation-discrimination"
+        },
+        {
+          "label": "Whistleblowing, Protected Disclosures",
+          "value": "whistleblowing-protected-disclosures"
         },
         {
           "label": "Working Time Regulations",
