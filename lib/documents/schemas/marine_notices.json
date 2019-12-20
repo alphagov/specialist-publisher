@@ -1,0 +1,87 @@
+{
+  "pre_production": true,
+  "content_id": "d7df3371-2f1a-4307-9aad-a2ef8fa8b9c4",
+  "base_path": "/marine-notices",
+  "format_name": "Maritime and Coastguard Agency Marine Notice",
+  "name": "Maritime and Coastguard Agency Marine Notices",
+  "description": "Find marine notices issued by the Marine and Coastguard Agency",
+  "filter": {
+    "document_type": "marine_notice"
+  },
+  "signup_content_id": "21985d9f-8c84-4fa1-915c-2807eaa37dff",
+  "signup_copy": "You'll get an email each time a notice is updated or a new notice is published.",
+  "organisations": ["23a24aa8-1711-42b6-bf6b-47af0f230295"],
+  "subscription_list_title_prefix": "Marine notices",
+  "summary": "<p>Find marine notices issued by the Maritime and Coastguard Agency</p>",
+  "document_noun": "notice",
+  "facets": [
+    {
+      "key": "marine_notice_type",
+      "name": "Marine notice type",
+      "type": "text",
+      "preposition": "of type",
+      "display_as_result_metadata": true,
+      "filterable": true,
+      "allowed_values": [
+        {"label": "Marine Guidance Note (MGN)", "value": "marine-guidance-note"},
+        {"label": "Merchant Shipping Notice (MSN)", "value": "merchant-shipping-notice"},
+        {"label": "Marine Information Note (MIN)", "value": "marine-information-note"},
+        {"label": "Form (MSF)", "value": "form"},
+        {"label": "Instructions to surveyors", "value": "instructions-to-surveyors"},
+        {"label": "Codes of practice", "value": "codes-of-practice"},
+        {"label": "Safety bulletin", "value": "safety-bulletin"},
+        {"label": "Other", "value": "other"}
+      ]
+    },
+
+    {
+      "key": "marine_notice_vessel_type",
+      "name": "Vessel type",
+      "type": "text",
+      "preposition": "with vessel of type",
+      "display_as_result_metadata": true,
+      "filterable": true,
+      "allowed_values": [
+        {"label": "Pleasure vessels", "value": "pleasure-vessels"},
+        {"label": "Small commercial vessels", "value": "small-commercial-vessels"},
+        {"label": "Cargo vessels over 24 metres", "value": "cargo-vessels-over-24-metres"},
+        {"label": "Fishing vessels under 15 metres", "value": "fishing-vessels-under-15-metres"},
+        {"label": "Fishing vessels 15-24 metres", "value": "fishing-vessels-15-24-metres"},
+        {"label": "Fishing vessels over 24 metres", "value": "fishing-vessels-over-24-metres"},
+        {"label": "High speed craft", "value": "high-speed-craft"},
+        {"label": "Large yachts", "value": "large-yachts"},
+        {"label": "Passenger vessels", "value": "passenger-vessels"}
+      ]
+    },
+
+    {
+      "key": "marine_notice_topic",
+      "name": "Topic",
+      "type": "text",
+      "preposition": "with topic of",
+      "display_as_result_metadata": true,
+      "filterable": true,
+      "allowed_values": [
+        {"label": "Construction and equipment", "value": "construction-and-equipment"},
+        {"label": "Crew and training", "value": "crew-and-training"},
+        {"label": "Health and safety", "value": "health-and-safety"},
+        {"label": "Environmental", "value": "environmental"},
+        {"label": "Navigation", "value": "navigation"},
+        {"label": "Radio communications", "value": "radio-communications"},
+        {"label": "Registration", "value": "registration"},
+        {"label": "Security / ISPS", "value": "security-isps"},
+        {"label": "Survey and inspection", "value": "survey-and-inspection"}
+      ]
+    },
+
+    {
+      "key": "issued_date",
+      "name": "Issued",
+      "short_name": "Issued",
+      "type": "date",
+      "preposition": "issued",
+      "display_as_result_metadata": true,
+      "filterable": true
+    }
+  ]
+}

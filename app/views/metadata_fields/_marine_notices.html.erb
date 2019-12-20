@@ -1,0 +1,26 @@
+<%= render layout: "shared/form_group", locals: { f: f, field: :marine_notice_type } do %>
+  <%= f.select :marine_notice_type,
+      f.object.facet_options(:marine_notice_type),
+      { label: "Notice type", include_blank: 'Select type' },
+      { class: 'form-control' }
+  %>
+<% end %>
+
+<%= render layout: "shared/form_group", locals: { f: f, field: :marine_notice_vessel_type } do %>
+  <%= f.select :marine_notice_vessel_type,
+      f.object.facet_options(:marine_notice_vessel_type),
+      { label: "Vessel type", include_blank: 'Select vessel type' },
+      { class: 'form-control' }
+  %>
+<% end %>
+
+<%= render layout: "shared/form_group", locals: { f: f, field: :marine_notice_topic } do %>
+  <%= f.select :marine_notice_topic,
+      f.object.facet_options(:marine_notice_topic),
+      { label: "Topic", include_blank: 'Select topic' },
+      { class: 'form-control' }
+  %>
+<% end %>
+
+<%= render layout: "shared/date_fields", locals: { f: f, field: :issued_date, format: :marine_notice } do %>
+<% end %>
