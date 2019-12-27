@@ -24,10 +24,6 @@
     "many": "European Structural and Investment Funds: "
   },
   "email_filter_by": "location",
-  "email_filter_name": {
-    "singular": "location",
-    "plural": "locations"
-  },
   "email_filter_facets": [
     {
       "facet_id": "location",

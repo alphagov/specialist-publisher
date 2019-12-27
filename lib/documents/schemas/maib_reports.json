@@ -17,10 +17,6 @@
     "many": "Marine Accident Investigation Branch (MAIB) reports: "
   },
   "email_filter_by": "vessel_type",
-  "email_filter_name": {
-    "singular": "vessel type",
-    "plural": "vessel types"
-  },
   "email_filter_facets": [
     {
       "facet_id": "vessel_type",

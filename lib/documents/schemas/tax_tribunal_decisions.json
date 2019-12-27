@@ -25,10 +25,6 @@
     "many": "Upper Tribunal (Tax and Chancery Chamber) decisions: "
   },
   "email_filter_by": "tribunal_decision_category",
-  "email_filter_name": {
-    "singular": "category",
-    "plural": "categories"
-  },
   "email_filter_facets": [
     {
       "facet_id": "tribunal_decision_category",

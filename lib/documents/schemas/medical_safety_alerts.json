@@ -17,7 +17,6 @@
     "medicines-medical-devices-blood/medical-devices-regulation-safety",
     "medicines-medical-devices-blood/vigilance-safety-alerts"
   ],
-  "email_filter_name": "Alert Type",
   "email_filter_by": "alert_type",
   "email_filter_facets": [
     {

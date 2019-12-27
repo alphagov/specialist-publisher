@@ -16,10 +16,6 @@
     "many": "Rail Accident Investigation Branch (RAIB) reports: "
   },
   "email_filter_by": "railway_type",
-  "email_filter_name": {
-    "singular": "railway type",
-    "plural": "railway types"
-  },
   "email_filter_facets": [
     {
       "facet_id": "railway_type",

@@ -20,7 +20,6 @@
   "signup_copy": "You'll get an email each time a decision is updated or a new decision is published.",
   "subscription_list_title_prefix": "Residential property tribunal decisions",
   "email_filter_by": "all_selected_facets",
-  "email_filter_name": null,
   "email_filter_facets": [
     {
       "facet_id": "tribunal_decision_category",

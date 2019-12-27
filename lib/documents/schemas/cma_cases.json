@@ -23,10 +23,6 @@
     "many": "Competition and Markets Authority (CMA) cases: "
   },
   "email_filter_by": "case_type",
-  "email_filter_name": {
-    "singular": "case type",
-    "plural": "case types"
-  },
   "email_filter_facets": [
     {
       "facet_id": "case_type",
