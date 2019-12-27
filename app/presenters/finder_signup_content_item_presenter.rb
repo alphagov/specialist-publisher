@@ -71,8 +71,8 @@ private
   def details
     {
       "beta" => schema.fetch("signup_beta", false),
-      "email_signup_choice" => schema.fetch("email_signup_choice", []),
       "email_filter_facets" => schema.fetch("email_filter_facets", []),
+      # TODO: Do we need email_filter_by and email_filter_name?
       "email_filter_by" => schema.fetch("email_filter_by", nil),
       "email_filter_name" => schema.fetch("email_filter_name", nil),
       "filter" => schema.fetch("filter", nil),
