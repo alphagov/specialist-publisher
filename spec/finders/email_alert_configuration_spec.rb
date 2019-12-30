@@ -22,7 +22,7 @@ RSpec.describe "Email alert configuration" do
           allowed_value["value"]
         end
 
-        finder["email_signup_choice"].each do |choice|
+        finder.dig("email_filter_facets", 0, "facet_choices").each do |choice|
           expect(choice["key"]).to be_in(actually_possible_keys_for_which_emails_will_be_sent)
         end
       end
@@ -38,7 +38,7 @@ RSpec.describe "Email alert configuration" do
           # form with every possible topic name appended to make the longest
           # possible name
           name = (finder["subscription_list_title_prefix"]["plural"] +
-            finder["email_signup_choice"].collect { |topic| topic["topic_name"] }.to_sentence)
+            finder.dig("email_filter_facets", 0, "facet_choices").collect { |topic| topic["topic_name"] }.to_sentence)
             .humanize
         else
           # If the list name only has one form, then topic names are not
