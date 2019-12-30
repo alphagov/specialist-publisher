@@ -17,41 +17,36 @@
     "medicines-medical-devices-blood/medical-devices-regulation-safety",
     "medicines-medical-devices-blood/vigilance-safety-alerts"
   ],
+  "email_filter_name": "Alert Type",
   "email_filter_by": "alert_type",
-  "email_filter_facets": [
+  "email_signup_choice": [
     {
-      "facet_id": "alert_type",
-      "facet_name": "Alert Type",
-      "facet_choices": [
-        {
-          "key": "devices",
-          "radio_button_name": "Medical device alerts",
-          "topic_name": "medical device alerts",
-          "body": "information published by the MHRA about defective medical devices.",
-          "prechecked": true
-        },
-        {
-          "key": "drugs",
-          "radio_button_name": "Drug alerts",
-          "topic_name": "drug alerts",
-          "body": "information published by the MHRA about defective medicines.",
-          "prechecked": true
-        },
-        {
-          "key": "field-safety-notices",
-          "radio_button_name": "Field safety notice",
-          "topic_name": "field safety notice",
-          "body": "information from medical device manufacturers.",
-          "prechecked": true
-        },
-        {
-          "key": "company-led-drugs",
-          "radio_button_name": "Drug alert: company-led",
-          "topic_name": "drug alert: company-led",
-          "body": "recalls of medicines issued by manufacturers.",
-          "prechecked": true
-        }
-      ]
+      "key": "devices",
+      "radio_button_name": "Medical device alerts",
+      "topic_name": "medical device alerts",
+      "body": "information published by the MHRA about defective medical devices.",
+      "prechecked": true
+    },
+    {
+      "key": "drugs",
+      "radio_button_name": "Drug alerts",
+      "topic_name": "drug alerts",
+      "body": "information published by the MHRA about defective medicines.",
+      "prechecked": true
+    },
+    {
+      "key": "field-safety-notices",
+      "radio_button_name": "Field safety notice",
+      "topic_name": "field safety notice",
+      "body": "information from medical device manufacturers.",
+      "prechecked": true
+    },
+    {
+      "key": "company-led-drugs",
+      "radio_button_name": "Drug alert: company-led",
+      "topic_name": "drug alert: company-led",
+      "body": "recalls of medicines issued by manufacturers.",
+      "prechecked": true
     }
   ],
   "document_noun": "alert",

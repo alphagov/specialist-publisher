@@ -25,48 +25,46 @@
     "many": "Upper Tribunal (Tax and Chancery Chamber) decisions: "
   },
   "email_filter_by": "tribunal_decision_category",
-  "email_filter_facets": [
+  "email_filter_name": {
+    "singular": "category",
+    "plural": "categories"
+  },
+  "email_signup_choice": [
     {
-      "facet_id": "tribunal_decision_category",
-      "facet_name": "Categories",
-      "facet_choices": [
-        {
-          "key": "banking",
-          "radio_button_name": "Banking",
-          "topic_name": "banking",
-          "prechecked": false
-        },
-        {
-          "key": "charity",
-          "radio_button_name": "Charity",
-          "topic_name": "charity",
-          "prechecked": false
-        },
-        {
-          "key": "financial-services",
-          "radio_button_name": "Financial Services",
-          "topic_name": "financial services",
-          "prechecked": false
-        },
-        {
-          "key": "land-registration",
-          "radio_button_name": "Land Registration",
-          "topic_name": "land registration",
-          "prechecked": false
-        },
-        {
-          "key": "pensions",
-          "radio_button_name": "Pensions",
-          "topic_name": "pensions",
-          "prechecked": false
-        },
-        {
-          "key": "tax",
-          "radio_button_name": "Tax",
-          "topic_name": "tax",
-          "prechecked": false
-        }
-      ]
+      "key": "banking",
+      "radio_button_name": "Banking",
+      "topic_name": "banking",
+      "prechecked": false
+    },
+    {
+      "key": "charity",
+      "radio_button_name": "Charity",
+      "topic_name": "charity",
+      "prechecked": false
+    },
+    {
+      "key": "financial-services",
+      "radio_button_name": "Financial Services",
+      "topic_name": "financial services",
+      "prechecked": false
+    },
+    {
+      "key": "land-registration",
+      "radio_button_name": "Land Registration",
+      "topic_name": "land registration",
+      "prechecked": false
+    },
+    {
+      "key": "pensions",
+      "radio_button_name": "Pensions",
+      "topic_name": "pensions",
+      "prechecked": false
+    },
+    {
+      "key": "tax",
+      "radio_button_name": "Tax",
+      "topic_name": "tax",
+      "prechecked": false
     }
   ],
   "summary": "<p>Find decisions on tax, financial services, pensions, charity and land registration appeals to the Upper Tribunal (Tax and Chancery Chamber).</p>",
