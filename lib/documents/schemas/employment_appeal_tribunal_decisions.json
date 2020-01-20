@@ -6,7 +6,7 @@
   "description": "Find decisions on appeals against employment tribunals heard by the Employment Appeal Tribunal.",
   "phase": "beta",
   "filter": {
-    "document_type": "employment_appeal_tribunal_decision"
+    "format": "employment_appeal_tribunal_decision"
   },
   "show_summaries": true,
   "editing_organisations": [

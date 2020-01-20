@@ -5,7 +5,7 @@
   "name": "Drug Safety Update",
   "description": "Find drug safety updates issued by MHRA",
   "filter": {
-    "document_type": "drug_safety_update"
+    "format": "drug_safety_update"
   },
   "show_summaries": true,
   "signup_link": "https://public.govdelivery.com/accounts/UKMHRA/subscriber/new?topic_id=UKMHRA_0044",

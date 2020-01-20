@@ -9,7 +9,7 @@
   "document_noun": "report",
   "default_order": "-assessment_date",
   "filter": {
-    "document_type": "service_standard_report"
+    "format": "service_standard_report"
   },
   "facets": [
     {

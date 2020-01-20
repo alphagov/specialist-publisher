@@ -92,7 +92,7 @@ RSpec.describe Document do
     {
       base_path: "/my-document-types",
       filter: {
-        document_type: "my_document_type",
+        format: "my_format",
       },
       content_id: @finder_content_id,
     }.deep_stringify_keys
@@ -262,7 +262,7 @@ RSpec.describe Document do
 
       assert_email_alert_api_content_change_created(
         "tags" => {
-          "format" => "my_document_type",
+          "format" => "my_format",
           "field1" => "2015-12-01",
           "field2" => "open",
           "field3" => %w(x y z),
