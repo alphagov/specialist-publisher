@@ -6,7 +6,7 @@
   "description": "Find decisions on appeals against the Home Office heard by the First-tier Tribunal (Asylum Support).",
   "phase": "beta",
   "filter": {
-    "document_type": "asylum_support_decision"
+    "format": "asylum_support_decision"
   },
   "show_summaries": true,
   "editing_organisations": [

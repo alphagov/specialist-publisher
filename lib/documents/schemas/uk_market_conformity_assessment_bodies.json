@@ -6,7 +6,7 @@
   "description": "",
   "phase": "alpha",
   "filter": {
-    "document_type": "uk_market_conformity_assessment_body"
+    "format": "uk_market_conformity_assessment_body"
   },
   "show_summaries": true,
   "organisations": ["2bde479a-97f2-42b5-986a-287a623c2a1c"],

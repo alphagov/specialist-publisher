@@ -13,7 +13,7 @@ class FinderSchema
     @base_path = schema.fetch("base_path")
     @organisations = schema.fetch("organisations", [])
     @editing_organisations = schema.fetch("editing_organisations", [])
-    @format = schema.fetch("filter", {}).fetch("document_type")
+    @format = schema.fetch("filter", {}).fetch("format")
     @content_id = schema.fetch("content_id")
   end
 

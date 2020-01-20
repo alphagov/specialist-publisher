@@ -5,7 +5,7 @@
   "name": "Alerts and recalls for drugs and medical devices",
   "description": "Find alerts and recalls issued by MHRA",
   "filter": {
-    "document_type": "medical_safety_alert"
+    "format": "medical_safety_alert"
   },
   "signup_content_id": "a796ca43-021b-4960-9c99-f41bb8ef2266",
   "signup_title": "Drug alerts and medical device alerts",

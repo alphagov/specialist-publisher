@@ -6,7 +6,7 @@
   "description": "Find information about Countryside Stewardship options, capital items and supplements",
   "beta": true,
   "filter": {
-    "document_type": "countryside_stewardship_grant"
+    "format": "countryside_stewardship_grant"
   },
   "organisations": [
     "e8fae147-6232-4163-a3f1-1c15b755a8a4",

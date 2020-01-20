@@ -5,7 +5,7 @@
   "name": "Research for Development Outputs",
   "description": "Find outputs from Research for Development projects",
   "filter": {
-    "document_type": "dfid_research_output"
+    "format": "dfid_research_output"
   },
   "signup_content_id": "a062704c-f49d-4942-aaf4-c06d81ada3b8",
   "signup_copy": "You'll get an email each time an output is updated or a new output is published.",

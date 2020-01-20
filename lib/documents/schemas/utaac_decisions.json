@@ -5,7 +5,7 @@
   "name": "Administrative appeals tribunal decisions",
   "description": "Find decisions on appeals to the Upper Tribunal (Administrative Appeals Chamber), including social security and child support appeals.",
   "filter": {
-    "document_type": "utaac_decision"
+    "format": "utaac_decision"
   },
   "signup_content_id": "13e59efa-6c0d-48e8-a0b9-092b62cdc912",
   "signup_copy": "You'll get an email each time a decision is updated or a new decision is published.",

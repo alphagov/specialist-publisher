@@ -5,7 +5,7 @@
   "name": "Competition and Markets Authority cases",
   "description": "Find reports and updates on current and historical CMA investigations",
   "filter": {
-    "document_type": "cma_case"
+    "format": "cma_case"
   },
   "signup_content_id": "43dd2b13-93ec-4ca6-a7a4-e2eb5f5d485a",
   "signup_copy": "You'll get an email each time a case is updated or a new case is published.",

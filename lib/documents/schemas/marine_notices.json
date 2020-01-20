@@ -6,7 +6,7 @@
   "name": "Maritime and Coastguard Agency Marine Notices",
   "description": "Find marine notices issued by the Marine and Coastguard Agency",
   "filter": {
-    "document_type": "marine_notice"
+    "format": "marine_notice"
   },
   "signup_content_id": "21985d9f-8c84-4fa1-915c-2807eaa37dff",
   "signup_copy": "You'll get an email each time a notice is updated or a new notice is published.",
