@@ -28,6 +28,7 @@
     {
       "facet_id": "location",
       "facet_name": "Locations",
+      "required": true,
       "facet_choices": [
         {
           "key": "north-east",

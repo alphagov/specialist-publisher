@@ -29,6 +29,7 @@
     {
       "facet_id": "tribunal_decision_category",
       "facet_name": "Categories",
+      "required": true,
       "facet_choices": [
         {
           "key": "banking",

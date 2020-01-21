@@ -22,6 +22,7 @@
     {
       "facet_id": "alert_type",
       "facet_name": "Alert Type",
+      "required": true,
       "facet_choices": [
         {
           "key": "devices",
