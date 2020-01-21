@@ -21,6 +21,7 @@
     {
       "facet_id": "vessel_type",
       "facet_name": "Vessel types",
+      "required": true,
       "facet_choices": [
         {
           "key": "merchant-vessel-100-gross-tons-or-over",

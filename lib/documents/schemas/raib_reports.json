@@ -20,6 +20,7 @@
     {
       "facet_id": "railway_type",
       "facet_name": "Railway types",
+      "required": true,
       "facet_choices": [
         {
           "key": "heavy-rail",
