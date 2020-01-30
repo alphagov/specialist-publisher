@@ -44,19 +44,6 @@ RSpec.feature "Unpublishing a CMA Case", type: :feature do
       assert_publishing_api_unpublish(content_id, type: "redirect", alternative_path: "/government/organisations/competition-and-markets-authority")
     end
 
-    scenario "specifying a redirect to an alternative GOV.UK content path that does not exist" do
-      publishing_api_has_lookups("/government/organisations/competition-and-markets-authority" => SecureRandom.uuid)
-
-      visit document_path(content_id: content_id, document_type_slug: "cma-cases")
-      expect(page).to have_content("Example CMA Case")
-
-      fill_in "alternative_path", with: "/path/to/missing"
-      click_button "Unpublish document"
-
-      expect(page.status_code).to eq(200)
-      expect(page).to have_content("Alternative content not found at the path '/path/to/missing'")
-    end
-
     scenario "writers don't see a unpublish document button" do
       log_in_as_editor(:cma_writer)
 
