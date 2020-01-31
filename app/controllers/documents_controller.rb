@@ -77,9 +77,7 @@ class DocumentsController < ApplicationController
     else
       flash[:danger] = unknown_error_message
     end
-  rescue DocumentUnpublisher::AlternativeContentNotFound => e
-    flash[:danger] = e.message
-  ensure
+
     redirect_to document_path(current_format.slug, params[:content_id])
   end
 
