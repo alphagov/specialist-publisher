@@ -56,7 +56,7 @@ RSpec.configure do |config|
   end
 
   config.include Capybara::DSL, type: :feature
-  config.include(GdsApi::TestHelpers::PublishingApiV2)
+  config.include(GdsApi::TestHelpers::PublishingApi)
   config.include(GdsApi::TestHelpers::EmailAlertApi)
 
   # Run specs in random order to surface order dependencies. If you find an

@@ -15,7 +15,7 @@ RSpec.describe RepublishWorker do
   before do
     stub_any_publishing_api_call
 
-    publishing_api_has_item(document)
+    stub_publishing_api_has_item(document)
   end
 
   %i(draft redrafted).each do |publication_state|

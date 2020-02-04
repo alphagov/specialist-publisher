@@ -8,10 +8,10 @@ RSpec.feature "Temporary update types, relating to attachments", type: :feature 
   let(:content_id) { payload.fetch("content_id") }
 
   before do
-    asset_manager_receives_an_asset("http://example.com/attachment.jpg")
+    stub_asset_manager_receives_an_asset("http://example.com/attachment.jpg")
 
     stub_any_publishing_api_call
-    publishing_api_has_item(payload)
+    stub_publishing_api_has_item(payload)
 
     log_in_as_editor(:cma_editor)
   end

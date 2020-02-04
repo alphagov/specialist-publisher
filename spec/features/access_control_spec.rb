@@ -2,9 +2,9 @@ require "spec_helper"
 
 RSpec.feature "Access control", type: :feature do
   before do
-    publishing_api_has_content([], hash_including(document_type: CmaCase.document_type))
-    publishing_api_has_content([], hash_including(document_type: AaibReport.document_type))
-    publishing_api_has_content([], hash_including(document_type: StatutoryInstrument.document_type))
+    stub_publishing_api_has_content([], hash_including(document_type: CmaCase.document_type))
+    stub_publishing_api_has_content([], hash_including(document_type: AaibReport.document_type))
+    stub_publishing_api_has_content([], hash_including(document_type: StatutoryInstrument.document_type))
   end
 
   context "as a CMA Editor" do

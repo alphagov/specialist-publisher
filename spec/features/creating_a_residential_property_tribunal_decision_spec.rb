@@ -14,7 +14,7 @@ RSpec.feature "Creating a residential property tribunal decision", type: :featur
     stub_any_publishing_api_put_content
     stub_any_publishing_api_patch_links
 
-    publishing_api_has_item(tribunal_decision)
+    stub_publishing_api_has_item(tribunal_decision)
   end
 
   scenario "with valid data" do

@@ -15,7 +15,7 @@ RSpec.feature "Creating a DFID Research Output", type: :feature do
     stub_any_publishing_api_put_content
     stub_any_publishing_api_patch_links
 
-    publishing_api_has_item(research_output)
+    stub_publishing_api_has_item(research_output)
   end
 
   scenario "with valid data" do

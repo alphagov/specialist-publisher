@@ -36,6 +36,6 @@ i.e. its state changes to 'published' and it gets a 'first_published_at'
 timestamp.
 
 This is far from intuitive and it is difficult to understand what the test is
-doing. We had to add the `publishing_api_has_item_in_sequence` helper to
+doing. We had to add the `stub_publishing_api_has_item_in_sequence` helper to
 specifically address the need to stub a sequence of responses rather than a
 single canned response.

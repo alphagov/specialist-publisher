@@ -8,7 +8,7 @@ RSpec.describe OpsTasks do
   let(:content_id) { payload["content_id"] }
 
   before do
-    publishing_api_has_item(payload)
+    stub_publishing_api_has_item(payload)
   end
 
   describe "#discard" do

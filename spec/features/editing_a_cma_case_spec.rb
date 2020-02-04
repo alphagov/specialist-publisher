@@ -14,8 +14,8 @@ RSpec.feature "Editing a CMA case", type: :feature do
     stub_any_publishing_api_put_content
     stub_any_publishing_api_patch_links
 
-    publishing_api_has_content([cma_case], hash_including(document_type: CmaCase.document_type))
-    publishing_api_has_item(cma_case)
+    stub_publishing_api_has_content([cma_case], hash_including(document_type: CmaCase.document_type))
+    stub_publishing_api_has_item(cma_case)
 
     visit "/cma-cases/#{content_id}"
     click_link "Edit document"
@@ -267,7 +267,7 @@ RSpec.feature "Editing a CMA case", type: :feature do
         fill_in "Body", with: "[InlineAttachment:asylum-support-image.jpg]"
         choose "Update type minor"
 
-        publishing_api_has_item(updated_cma_case)
+        stub_publishing_api_has_item(updated_cma_case)
 
         click_button "Save as draft"
 

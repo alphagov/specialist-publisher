@@ -8,8 +8,8 @@ RSpec.describe EmailAlertPresenter do
   describe "#to_json" do
     context "any finders document" do
       before do
-        publishing_api_has_item(cma_case_payload)
-        publishing_api_has_item(cma_case_redrafted_payload)
+        stub_publishing_api_has_item(cma_case_payload)
+        stub_publishing_api_has_item(cma_case_redrafted_payload)
       end
 
       it "has correct information" do
@@ -45,7 +45,7 @@ RSpec.describe EmailAlertPresenter do
       let(:mhra_email_address) { "email.support@mhra.gov.uk" }
 
       before do
-        publishing_api_has_item(medical_safety_payload)
+        stub_publishing_api_has_item(medical_safety_payload)
       end
 
       it "should use template that contains the email address of MHRA" do

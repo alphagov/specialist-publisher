@@ -2,7 +2,7 @@ require "rails_helper"
 
 RSpec.describe Republisher do
   def stub_index(document_type, content_ids:)
-    publishing_api_has_content(
+    stub_publishing_api_has_content(
       content_ids.map { |c| { content_id: c } },
       document_type: document_type,
       fields: [:content_id],

@@ -11,7 +11,7 @@ RSpec.describe PublishWorker do
   before do
     stub_any_publishing_api_call
 
-    publishing_api_has_item(document)
+    stub_publishing_api_has_item(document)
   end
 
   context "when the publication_state is 'draft'" do

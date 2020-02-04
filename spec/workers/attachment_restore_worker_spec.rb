@@ -32,7 +32,7 @@ RSpec.describe AttachmentRestoreWorker do
 
   before do
     document["details"]["attachments"] = existing_attachments
-    publishing_api_has_item(document)
+    stub_publishing_api_has_item(document)
   end
 
   describe "perform" do
