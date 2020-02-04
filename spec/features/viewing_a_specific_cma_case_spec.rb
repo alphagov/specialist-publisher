@@ -5,9 +5,9 @@ RSpec.feature "Viewing a specific case", type: :feature do
   before do
     log_in_as_editor(:cma_editor)
 
-    publishing_api_has_content(cma_cases, hash_including(document_type: CmaCase.document_type))
+    stub_publishing_api_has_content(cma_cases, hash_including(document_type: CmaCase.document_type))
     cma_cases.each do |cma_case|
-      publishing_api_has_item(cma_case)
+      stub_publishing_api_has_item(cma_case)
     end
   end
 
@@ -59,7 +59,7 @@ RSpec.feature "Viewing a specific case", type: :feature do
 
   scenario "that doesn't exist" do
     content_id = "a-case-that-doesnt-exist"
-    publishing_api_does_not_have_item(content_id)
+    stub_publishing_api_does_not_have_item(content_id)
 
     visit "/cma-cases/#{content_id}"
 

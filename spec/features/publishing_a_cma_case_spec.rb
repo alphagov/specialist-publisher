@@ -9,8 +9,8 @@ RSpec.feature "Publishing a CMA case", type: :feature do
     Timecop.freeze(Time.zone.parse("2015-12-03T16:59:13+00:00"))
     log_in_as_editor(:cma_editor)
 
-    publishing_api_has_content([item], hash_including(document_type: CmaCase.document_type))
-    publishing_api_has_item(item)
+    stub_publishing_api_has_content([item], hash_including(document_type: CmaCase.document_type))
+    stub_publishing_api_has_item(item)
 
     stub_any_publishing_api_put_content
     stub_any_publishing_api_patch_links
@@ -52,7 +52,7 @@ RSpec.feature "Publishing a CMA case", type: :feature do
       expect(page.status_code).to eq(200)
       expect(page).to have_content("Example CMA Case")
 
-      publishing_api_has_item_in_sequence(content_id, [item, published_item])
+      stub_publishing_api_has_item_in_sequence(content_id, [item, published_item])
 
       expect(AttachmentRestoreWorker).not_to receive(:perform_async)
 

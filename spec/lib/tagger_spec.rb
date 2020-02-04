@@ -5,7 +5,7 @@ RSpec.describe Tagger do
 
   before :each do
     @content_id = "64aadc14-9bca-40d9-abb4-4f21f9792a05"
-    publishing_api_has_links(content_id: @content_id, links: { taxons: %w[aaa bbb] }, version: 5)
+    stub_publishing_api_has_links(content_id: @content_id, links: { taxons: %w[aaa bbb] }, version: 5)
     stub_any_publishing_api_patch_links
   end
 

@@ -7,7 +7,7 @@ RSpec.describe DocumentsController, type: :controller do
 
   before do
     log_in_as_gds_editor
-    publishing_api_has_item(payload)
+    stub_publishing_api_has_item(payload)
   end
 
   describe "GET show" do

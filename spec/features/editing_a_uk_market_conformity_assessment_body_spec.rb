@@ -13,7 +13,7 @@ RSpec.feature "Editing a UK market conformity assessment body", type: :feature d
     stub_any_publishing_api_put_content
     stub_any_publishing_api_patch_links
 
-    publishing_api_has_item(body_document)
+    stub_publishing_api_has_item(body_document)
   end
 
   scenario "with valid data" do

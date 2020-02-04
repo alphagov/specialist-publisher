@@ -245,7 +245,7 @@ RSpec.describe Document do
       stub_any_publishing_api_put_content
       stub_any_publishing_api_patch_links
       stub_publishing_api_publish(document.content_id, {})
-      publishing_api_has_item(payload)
+      stub_publishing_api_has_item(payload)
       @email_alert_api = stub_email_alert_api_accepts_content_change
     end
 
@@ -383,7 +383,7 @@ RSpec.describe Document do
 
   describe "#unpublish" do
     before do
-      publishing_api_has_item(payload)
+      stub_publishing_api_has_item(payload)
       document = MyDocumentType.find(payload["content_id"])
       stub_publishing_api_unpublish(document.content_id, body: { type: "gone" })
     end
@@ -402,7 +402,7 @@ RSpec.describe Document do
 
     context "with an alternative path" do
       it "sends correct payload to publishing api" do
-        publishing_api_has_lookups("/foo" => SecureRandom.uuid)
+        stub_publishing_api_has_lookups("/foo" => SecureRandom.uuid)
         stub_publishing_api_unpublish(document.content_id, body: { type: "redirect", alternative_path: "/foo" })
 
         expect(document.unpublish("/foo")).to eq(true)
@@ -442,7 +442,7 @@ RSpec.describe Document do
 
   describe "#save" do
     before do
-      publishing_api_has_item(payload)
+      stub_publishing_api_has_item(payload)
       Timecop.freeze(Time.zone.parse("2015-12-18 10:12:26 UTC"))
     end
 
@@ -468,7 +468,7 @@ RSpec.describe Document do
     end
 
     it "returns false if the Publishing API calls fail" do
-      publishing_api_isnt_available
+      stub_publishing_api_isnt_available
       expect(document.save).to be_falsey
     end
 
@@ -553,7 +553,7 @@ RSpec.describe Document do
 
   describe ".find" do
     before do
-      publishing_api_has_item(payload)
+      stub_publishing_api_has_item(payload)
     end
 
     it "returns a document" do

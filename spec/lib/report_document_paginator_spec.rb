@@ -11,7 +11,7 @@ RSpec.describe ReportDocumentPaginator do
     let(:all_items) { [first_item, second_item, third_item] }
 
     before do
-      publishing_api_has_content(
+      stub_publishing_api_has_content(
         all_items,
         document_type: "asylum_support_decision",
         fields: content_fields,
@@ -21,7 +21,7 @@ RSpec.describe ReportDocumentPaginator do
         publishing_app: "specialist-publisher",
       )
 
-      publishing_api_has_content(
+      stub_publishing_api_has_content(
         all_items,
         document_type: "asylum_support_decision",
         fields: content_fields,

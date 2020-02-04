@@ -193,14 +193,14 @@ RSpec.describe Attachment do
     }
 
     it "returns true on successful upload and sets the url" do
-      asset_manager_receives_an_asset(url)
+      stub_asset_manager_receives_an_asset(url)
 
       expect(attachment.upload).to eq(true)
       expect(attachment.url).to eq(url)
     end
 
     it "returns false on failed upload and does not set the url" do
-      asset_manager_upload_failure
+      stub_asset_manager_upload_failure
 
       expect(attachment.upload).to eq(false)
       expect(attachment.url).to be_nil

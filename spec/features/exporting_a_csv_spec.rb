@@ -21,7 +21,7 @@ RSpec.feature "Exporting a list of documents as CSV" do
   before do
     log_in_as user
 
-    publishing_api_has_content(documents, hash_including(document_type: BusinessFinanceSupportScheme.document_type))
+    stub_publishing_api_has_content(documents, hash_including(document_type: BusinessFinanceSupportScheme.document_type))
   end
 
   scenario "I can export a list of documents and they are emailed to me" do

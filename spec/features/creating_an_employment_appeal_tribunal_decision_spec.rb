@@ -17,7 +17,7 @@ RSpec.feature "Creating a Employment appeal tribunal decision", type: :feature d
       stub_any_publishing_api_put_content
       stub_any_publishing_api_patch_links
 
-      publishing_api_has_item(research_output)
+      stub_publishing_api_has_item(research_output)
     end
 
     scenario "with valid data" do
@@ -91,7 +91,7 @@ RSpec.feature "Creating a Employment appeal tribunal decision", type: :feature d
     before do
       allow(Rails.env).to receive(:development?).and_return(false)
       stub_any_publishing_api_call
-      publishing_api_has_item(research_output)
+      stub_publishing_api_has_item(research_output)
     end
 
     context "when logged in as an editor" do

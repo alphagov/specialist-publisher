@@ -5,7 +5,7 @@ RSpec.feature "Unpublishing a CMA Case", type: :feature do
 
   before do
     log_in_as_editor(:cma_editor)
-    publishing_api_has_item(item)
+    stub_publishing_api_has_item(item)
   end
 
   context "a published document" do
@@ -30,7 +30,7 @@ RSpec.feature "Unpublishing a CMA Case", type: :feature do
     scenario "specifying a redirect to an alternative GOV.UK content path" do
       stub_publishing_api_unpublish(content_id, body: { type: "redirect", alternative_path: "/government/organisations/competition-and-markets-authority" })
 
-      publishing_api_has_lookups("/government/organisations/competition-and-markets-authority" => SecureRandom.uuid)
+      stub_publishing_api_has_lookups("/government/organisations/competition-and-markets-authority" => SecureRandom.uuid)
 
       visit document_path(content_id: content_id, document_type_slug: "cma-cases")
       expect(page).to have_content("Example CMA Case")

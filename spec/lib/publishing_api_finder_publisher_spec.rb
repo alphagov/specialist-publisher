@@ -54,7 +54,7 @@ RSpec.describe PublishingApiFinderPublisher do
         ]
       }
 
-      it "uses GdsApi::PublishingApiV2" do
+      it "uses GdsApi::PublishingApi" do
         stub_publishing_api_publish(finders[0][:file]["content_id"], {})
         stub_publishing_api_publish(finders[0][:file]["signup_content_id"], {})
         stub_publishing_api_publish(finders[1][:file]["content_id"], {})

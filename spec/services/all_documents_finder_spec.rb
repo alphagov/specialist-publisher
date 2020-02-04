@@ -28,7 +28,7 @@ RSpec.describe AllDocumentsFinder do
           title: "Scheme #2",
         ),
       ]
-      publishing_api_has_content(documents, hash_including(document_type: BusinessFinanceSupportScheme.document_type, page: "1"))
+      stub_publishing_api_has_content(documents, hash_including(document_type: BusinessFinanceSupportScheme.document_type, page: "1"))
 
       found_docs = []
       subject.find_each(BusinessFinanceSupportScheme) do |doc|
@@ -115,7 +115,7 @@ RSpec.describe AllDocumentsFinder do
     end
   end
 
-  # NOTE: we do this manually because the publishing_api_has_content test helper
+  # NOTE: we do this manually because the stub_publishing_api_has_content test helper
   # is too restrictive and we can't properly control pagination
   def publishing_api_paginates_content(content_items, per_page, document_klass, search_query: nil)
     total_pages = content_items.length / per_page
@@ -136,7 +136,7 @@ RSpec.describe AllDocumentsFinder do
         }
         query_params[:q] = search_query if search_query.present?
 
-        stub_request(:get, GdsApi::TestHelpers::PublishingApiV2::PUBLISHING_API_V2_ENDPOINT + "/content")
+        stub_request(:get, GdsApi::TestHelpers::PublishingApi::PUBLISHING_API_V2_ENDPOINT + "/content")
           .with(query: hash_including(query_params))
           .to_return(status: 200, body: body.to_json, headers: {})
       end
@@ -156,7 +156,7 @@ RSpec.describe AllDocumentsFinder do
     }
     query_params[:query] = search_query if search_query.present?
 
-    stub_request(:get, GdsApi::TestHelpers::PublishingApiV2::PUBLISHING_API_V2_ENDPOINT + "/content")
+    stub_request(:get, GdsApi::TestHelpers::PublishingApi::PUBLISHING_API_V2_ENDPOINT + "/content")
       .with(query: hash_including(query_params))
       .to_return(status: 200, body: body.to_json, headers: {})
   end

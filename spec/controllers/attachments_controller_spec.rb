@@ -43,7 +43,7 @@ RSpec.describe AttachmentsController, type: :controller do
 
   before do
     log_in_as_gds_editor
-    publishing_api_has_item(cma_case)
+    stub_publishing_api_has_item(cma_case)
   end
 
   describe "POST create" do
