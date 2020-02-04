@@ -5,12 +5,14 @@ class AttachmentPresenter
 
   def to_json(*_args)
     {
+      attachment_type: "file",
       url: @attachment.url,
       title: @attachment.title,
       content_type: @attachment.content_type,
       updated_at: updated_at,
       created_at: created_at,
       content_id: @attachment.content_id,
+      id: @attachment.content_id,
     }
   end
 
