@@ -4,11 +4,18 @@ require "csv"
 require "services"
 
 namespace :republish do
-  # Caution: These tasks should be avoided in production environnments  as
-  # they change the date information of draft documents and extra superfluous
-  # history to published documents.
+  ##########
   #
-  # If data is incorrect in Publishing API it should be fixed in Publishing API
+  # WARNING: do not run these tasks in production, unless absolutely necessary,
+  # as they will effectively shuffle the documents in the
+  # specialist-publisher UI.  This is because the updated_at
+  # timestamps in publishing-api will change, and specialist-publisher
+  # uses publishing-api as its backing store.
+  #
+  # If data is incorrect in Publishing API it should be fixed in
+  # Publishing API
+  #
+  ##########
 
   desc "republish all documents"
   task all: :environment do
