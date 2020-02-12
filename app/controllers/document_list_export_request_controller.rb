@@ -1,9 +1,10 @@
 class DocumentListExportRequestController < ApplicationController
   before_action :check_authorisation
   def show
-    begin
-      response = DocumentListExportRequest.find(params[:id])
-    rescue Mongoid::Errors::DocumentNotFound
+    requests = DocumentListExportRequest.where(id: params[:id])
+    if requests.exists?
+      response = requests.first
+    else
       head :not_found
       return
     end
@@ -17,16 +18,15 @@ class DocumentListExportRequestController < ApplicationController
   end
 
   def check_authorisation
-    begin
-      document_type_slug = DocumentListExportRequest.find(params[:id]).document_class
-    rescue Mongoid::Errors::DocumentNotFound
+    requests = DocumentListExportRequest.where(id: params[:id])
+    if requests.exists?
+      document_type_slug = requests.first.document_class
+      document_slugs = FinderSchema.schema_names.map { |schema_name| schema_name.singularize.camelize.constantize }
+      current_format = document_slugs.detect { |model| model.slug == document_type_slug }
+      authorize current_format
+    else
       head :not_found
-      return
     end
-
-    document_slugs = FinderSchema.schema_names.map { |schema_name| schema_name.singularize.camelize.constantize }
-    current_format = document_slugs.detect { |model| model.slug == document_type_slug }
-    authorize current_format
   end
 
   def get_csv_file_from_s3(filename)
