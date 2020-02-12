@@ -58,9 +58,9 @@ RSpec.describe DocumentListExportWorker do
       csv_data = "my,csv\nfile,is\ngreat,really\n"
       allow(subject).to receive(:generate_csv).and_return csv_data
 
-      s3_url = /https:\/\/#{ENV['AWS_S3_BUCKET_NAME']}.s3-#{ENV['AWS_REGION']}.amazonaws.com\/document_list_.*\.csv/
+      request_url = %r{^http://specialist-publisher.dev.gov.uk/export/[0-9a-f]+$}
 
-      expect(NotificationsMailer).to receive(:document_list).with(s3_url, user, BusinessFinanceSupportScheme, nil).and_return(double(ActionMailer::MessageDelivery, deliver_now: true))
+      expect(NotificationsMailer).to receive(:document_list).with(request_url, user, BusinessFinanceSupportScheme, nil).and_return(double(ActionMailer::MessageDelivery, deliver_now: true))
 
       subject.perform(BusinessFinanceSupportScheme.slug, user.id, nil)
     end

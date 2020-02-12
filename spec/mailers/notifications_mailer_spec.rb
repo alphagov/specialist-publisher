@@ -15,7 +15,7 @@ RSpec.describe NotificationsMailer, type: :mailer do
 
     it "renders the body" do
       expect(mail.body.encoded).to match("Hi #{user.name}")
-      expect(mail.body.encoded).to match("CSV of Business Finance Support Schemes you requested from GOV.UK specialist publisher")
+      expect(mail.body.encoded).to match("You requested a CSV of Business Finance Support Schemes from GOV.UK specialist publisher")
     end
 
     it "does not attach a CSV" do
@@ -38,7 +38,7 @@ RSpec.describe NotificationsMailer, type: :mailer do
 
     it "renders the body" do
       expect(mail.body.encoded).to match("Hi #{user.name}")
-      expect(mail.body.encoded).to match('CSV of Business Finance Support Schemes matching the query "startups" you requested from GOV.UK specialist publisher')
+      expect(mail.body.encoded).to match('You requested a CSV of Business Finance Support Schemes matching the query "startups" from GOV.UK specialist publisher')
     end
 
     it "does not attach a CSV" do

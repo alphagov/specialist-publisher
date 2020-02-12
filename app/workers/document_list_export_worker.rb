@@ -10,8 +10,14 @@ class DocumentListExportWorker
     authorize user, format
     csv = generate_csv(format, query)
     filename = "document_list_#{user_id}_#{DateTime.now.xmlschema}.csv"
-    url = upload_csv(filename, csv)
-    send_mail(url, user, format, query)
+
+    request = DocumentListExportRequest.new(filename: filename, document_class: format, query: query)
+    upload_csv(filename, csv)
+    request.save!
+
+    request.touch(:generated_at)
+
+    send_mail(request.public_url, user, format, query)
   end
 
 private
