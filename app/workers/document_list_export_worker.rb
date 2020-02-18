@@ -57,7 +57,6 @@ private
   end
 
   def upload_csv(filename, csv)
-    s3_file = S3FileUploader.save_file_to_s3(filename, csv)
-    s3_file.public_url
+    S3FileUploader.save_file_to_s3(filename, csv)
   end
 end
