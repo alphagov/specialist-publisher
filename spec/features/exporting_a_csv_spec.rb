@@ -22,6 +22,21 @@ RSpec.feature "Exporting a list of documents as CSV" do
     log_in_as user
 
     stub_publishing_api_has_content(documents, hash_including(document_type: BusinessFinanceSupportScheme.document_type))
+
+    Fog.mock!
+    ENV["AWS_REGION"] = "eu-west-1"
+    ENV["AWS_ACCESS_KEY_ID"] = "test"
+    ENV["AWS_SECRET_ACCESS_KEY"] = "test"
+    ENV["AWS_S3_BUCKET_NAME"] = "test-bucket"
+
+    # Create an S3 bucket so the code being tested can find it
+    connection = Fog::Storage.new(
+      provider: "AWS",
+      region: ENV["AWS_REGION"],
+      aws_access_key_id: ENV["AWS_ACCESS_KEY_ID"],
+      aws_secret_access_key: ENV["AWS_SECRET_ACCESS_KEY"],
+    )
+    @directory = connection.directories.get(ENV["AWS_S3_BUCKET_NAME"]) || connection.directories.create(key: ENV["AWS_S3_BUCKET_NAME"])
   end
 
   scenario "I can export a list of documents and they are emailed to me" do
@@ -40,12 +55,7 @@ RSpec.feature "Exporting a list of documents as CSV" do
     expect(last_email.to).to eq [user.email]
     expect(last_email.subject).to have_content "Your exported list of Business Finance Support Schemes from GOV.UK"
 
-    expect(last_email.attachments.length).to eq 1
-    attachment = last_email.attachments[0]
-    expect(attachment.content_type).to start_with("text/csv;")
-    expect(attachment.filename).to eq "document_list.csv"
-
-    csv_body = attachment.body.to_s
-    expect(csv_body).to eq expected_csv.gsub(/\n/, "\r\n")
+    expect(last_email.attachments.length).to eq 0
+    expect(last_email.body).to have_content "http://specialist-publisher.dev.gov.uk/export"
   end
 end

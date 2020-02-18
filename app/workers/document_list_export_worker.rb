@@ -1,4 +1,5 @@
 require "csv"
+require "date"
 
 class DocumentListExportWorker
   include Sidekiq::Worker
@@ -8,7 +9,15 @@ class DocumentListExportWorker
     format = fetch_format(document_type_slug)
     authorize user, format
     csv = generate_csv(format, query)
-    send_mail(csv, user, format, query)
+    filename = "document_list_#{user_id}_#{DateTime.now.xmlschema}.csv"
+
+    request = DocumentListExportRequest.new(filename: filename, document_class: format, query: query)
+    upload_csv(filename, csv)
+    request.save!
+
+    request.touch(:generated_at)
+
+    send_mail(request.public_url, user, format, query)
   end
 
 private
@@ -28,8 +37,8 @@ private
     end
   end
 
-  def send_mail(csv, user, format, query)
-    NotificationsMailer.document_list(csv, user, format, query).deliver_now
+  def send_mail(url, user, format, query)
+    NotificationsMailer.document_list(url, user, format, query).deliver_now
   end
 
   def fetch_exporter(format)
@@ -45,5 +54,10 @@ private
         csv << presenter.row
       end
     end
+  end
+
+  def upload_csv(filename, csv)
+    s3_file = S3FileUploader.save_file_to_s3(filename, csv)
+    s3_file.public_url
   end
 end
