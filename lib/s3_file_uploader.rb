@@ -12,7 +12,6 @@ class S3FileUploader
     directory.files.create(
       key: filename,
       body: csv,
-      public: true,
     )
   end
 end
