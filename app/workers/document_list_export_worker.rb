@@ -9,9 +9,9 @@ class DocumentListExportWorker
     format = fetch_format(document_type_slug)
     authorize user, format
     csv = generate_csv(format, query)
-    filename = "document_list_#{user_id}_#{DateTime.now.xmlschema}.csv"
+    filename = "document_list_#{user.id}_#{DateTime.now.xmlschema}.csv"
 
-    request = DocumentListExportRequest.new(filename: filename, document_class: format, query: query)
+    request = DocumentListExportRequest.new(filename: filename, document_class: document_type_slug, query: query)
     upload_csv(filename, csv)
     request.save!
 
