@@ -13,6 +13,7 @@ gem "kaminari-mongoid"
 gem "mongoid", "< 6.3"
 # MongoDB 2.4 compatibility is required, which was removed in 2.5
 gem "mongo", "< 2.5"
+gem "notifications-ruby-client"
 gem "pundit"
 gem "sass-rails", "~> 6"
 gem "select2-rails", "~> 3"

@@ -245,6 +245,8 @@ GEM
       mini_portile2 (~> 2.4.0)
     nokogumbo (2.0.2)
       nokogiri (~> 1.8, >= 1.8.4)
+    notifications-ruby-client (5.1.2)
+      jwt (>= 1.5, < 3)
     null_logger (0.0.1)
     oauth2 (1.4.2)
       faraday (>= 0.8, < 2.0)
@@ -472,6 +474,7 @@ DEPENDENCIES
   kaminari-mongoid
   mongo (< 2.5)
   mongoid (< 6.3)
+  notifications-ruby-client
   plek (~> 3)
   pry-rails
   puma
