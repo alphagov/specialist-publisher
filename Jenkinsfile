@@ -2,12 +2,11 @@
 
 library("govuk")
 
-node {
+node ('mongodb-2.4') {
   govuk.setEnvar("PUBLISHING_E2E_TESTS_COMMAND", "test-specialist-publisher")
   govuk.buildProject(
-    rubyLintDiff: false,
-    sassLint: false, 
-    publishingE2ETests: true, 
+    sassLint: false,
+    publishingE2ETests: true,
     brakeman: true
   )
 }
