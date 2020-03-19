@@ -4,6 +4,10 @@ class NotificationsMailer < ApplicationMailer
     @user = user
     @document_klass = document_klass
     @query = query
-    mail to: user.email, subject: "Your exported list of #{document_klass.title.pluralize} from GOV.UK"
+    view_mail(
+      template_id,
+      to: user.email,
+      subject: "Your exported list of #{document_klass.title.pluralize} from GOV.UK",
+    )
   end
 end
