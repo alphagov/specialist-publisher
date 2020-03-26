@@ -3,7 +3,7 @@ source "https://rubygems.org"
 gem "rails", "~> 5"
 
 gem "bootstrap-kaminari-views", "~> 0.0.5"
-gem "fog-aws", "~> 3.5"
+gem "fog-aws", "~> 3.6"
 gem "govuk_sidekiq", "~> 3"
 gem "hashdiff"
 gem "jquery-rails", "~> 4"

@@ -86,14 +86,14 @@ GEM
     domain_name (0.5.20190701)
       unf (>= 0.0.5, < 1.0.0)
     erubi (1.9.0)
-    excon (0.72.0)
+    excon (0.73.0)
     execjs (2.7.0)
     factory_bot (5.1.2)
       activesupport (>= 4.2.0)
     faraday (1.0.0)
       multipart-post (>= 1.2, < 3)
     ffi (1.12.2)
-    fog-aws (3.5.2)
+    fog-aws (3.6.2)
       fog-core (~> 2.1)
       fog-json (~> 1.1)
       fog-xml (~> 0.1)
@@ -463,7 +463,7 @@ DEPENDENCIES
   capybara-select-2
   database_cleaner
   factory_bot
-  fog-aws (~> 3.5)
+  fog-aws (~> 3.6)
   gds-api-adapters (~> 63)
   gds-sso (~> 14)
   govspeak (~> 6)
