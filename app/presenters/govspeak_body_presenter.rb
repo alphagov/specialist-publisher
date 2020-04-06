@@ -39,9 +39,7 @@ class GovspeakBodyPresenter
   end
 
   def attachments_by_sanitised_filename
-    @attachments_by_sanitised_filename ||= document.attachments.each_with_object({}) do |attachment, memo|
-      memo[sanitise_filename(attachment.url)] = attachment
-    end
+    @attachments_by_sanitised_filename ||= document.attachments.index_by { |a| sanitise_filename(a.url) }
   end
 
   def sanitise_filename(filepath)
