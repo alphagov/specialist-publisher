@@ -22,19 +22,19 @@ RSpec.describe DocumentListExportRequestController, type: :controller do
 
   describe "GET show" do
     it "responds successfully if there is a valid file" do
-      filename = "test.txt"
-      @directory.files.create(key: filename, body: "hello world")
-      export_request = DocumentListExportRequest.new(filename: filename, document_class: "asylum-support-decisions")
-      export_request.save!
-      export_request.touch(:generated_at)
+      document_type_slug = "asylum-support-decisions"
+      export_id = "1234-5678"
+      filename = "document_list_#{document_type_slug}_#{export_id}.csv"
 
-      get :show, params: { id: export_request.id }
+      @directory.files.create(key: filename, body: "hello world")
+
+      get :show, params: { document_type_slug: document_type_slug, export_id: export_id }
       expect(response.status).to eq(200)
       expect(response.body).to eq("hello world")
     end
 
     it "returns an error if there is no request" do
-      get :show, params: { id: "no-such-id" }
+      get :show, params: { document_type_slug: "asylum-support-decisions", export_id: "aaaa-bbbb" }
       expect(response.status).to eq(404)
     end
   end

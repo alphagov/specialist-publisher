@@ -9,7 +9,7 @@ Rails.application.routes.draw do
 
   mount GovukAdminTemplate::Engine, at: "/style-guide"
 
-  resources :document_list_export_request, path: "/export", only: [:show]
+  resources :document_list_export_request, path: "/export/:document_type_slug", param: :export_id, only: [:show]
 
   resources :documents, path: "/:document_type_slug", param: :content_id, except: :destroy do
     collection do

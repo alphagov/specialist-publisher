@@ -1,5 +1,6 @@
 require "csv"
 require "date"
+require "securerandom"
 
 class DocumentListExportWorker
   include Sidekiq::Worker
@@ -9,15 +10,14 @@ class DocumentListExportWorker
     format = fetch_format(document_type_slug)
     authorize user, format
     csv = generate_csv(format, query)
-    filename = "document_list_#{user.id}_#{DateTime.now.xmlschema}.csv"
 
-    request = DocumentListExportRequest.new(filename: filename, document_class: document_type_slug, query: query)
+    export_id = SecureRandom.uuid
+    filename = "document_list_#{document_type_slug}_#{export_id}.csv"
+    public_url = Plek.find("specialist-publisher", external: true) + "/export/#{document_type_slug}/#{export_id}"
+
     upload_csv(filename, csv)
-    request.save!
 
-    request.touch(:generated_at)
-
-    send_mail(request.public_url, user, format, query)
+    send_mail(public_url, user, format, query)
   end
 
 private
