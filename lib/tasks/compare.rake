@@ -3,6 +3,7 @@ task :compare, [:content_id] => :environment do |_, args|
   DataComparison.compare(args.content_id)
 end
 
+desc "Compare data for all documents before and after saving them"
 task :compare_all, [:document_type] => :environment do |_, args|
   results = Services
     .publishing_api
