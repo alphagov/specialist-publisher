@@ -86,13 +86,13 @@ class ActionsPresenter
   end
 
   def discard_text
-    if state != "draft"
-      text = "There is no draft to discard."
-    elsif !policy.discard?
-      text = "You don't have permission to discard this draft."
-    else
-      text = "This draft will be discarded."
-    end
+    text = if state != "draft"
+             "There is no draft to discard."
+           elsif !policy.discard?
+             "You don't have permission to discard this draft."
+           else
+             "This draft will be discarded."
+           end
 
     text
   end

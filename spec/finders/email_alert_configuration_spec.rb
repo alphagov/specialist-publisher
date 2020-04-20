@@ -33,18 +33,18 @@ RSpec.describe "Email alert configuration" do
       it "doesn't have a name longer than 1000 characters" do
         next unless finder["subscription_list_title_prefix"] && !finder["pre_production"]
 
-        if finder["subscription_list_title_prefix"]["plural"]
+        name = if finder["subscription_list_title_prefix"]["plural"]
           # If the list name has singular and plural forms, test the plural
           # form with every possible topic name appended to make the longest
           # possible name
-          name = (finder["subscription_list_title_prefix"]["plural"] +
-            finder.dig("email_filter_facets", 0, "facet_choices").collect { |topic| topic["topic_name"] }.to_sentence)
-            .humanize
-        else
+                 (finder["subscription_list_title_prefix"]["plural"] +
+                   finder.dig("email_filter_facets", 0, "facet_choices").collect { |topic| topic["topic_name"] }.to_sentence)
+                   .humanize
+               else
           # If the list name only has one form, then topic names are not
           # appended; just check the name itself isn't too long
-          name = finder["subscription_list_title_prefix"]
-        end
+                 finder["subscription_list_title_prefix"]
+               end
 
         expect(name.length).to be <= 1000
       end
