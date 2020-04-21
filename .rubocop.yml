@@ -7,12 +7,6 @@ inherit_mode:
   merge:
     - Exclude
 
-AllCops:
-  TargetRubyVersion: 2.3
-
-Style/ConditionalAssignment:
-  Enabled: false
-
 Metrics/BlockLength:
   Enabled: true
   Exclude:

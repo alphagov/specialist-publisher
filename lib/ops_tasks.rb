@@ -13,11 +13,11 @@ module_function
   end
 
   def set_public_updated_at(content_id, timestamp)
-    if timestamp == "now"
-      timestamp = Time.zone.now
-    else
-      timestamp = DateTime.parse(timestamp)
-    end
+    timestamp = if timestamp == "now"
+                  Time.zone.now
+                else
+                  DateTime.parse(timestamp)
+                end
 
     document = Document.find(content_id)
     document.update_type = "republish"
