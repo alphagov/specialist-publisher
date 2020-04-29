@@ -38,7 +38,6 @@ RSpec.feature "Creating a Employment appeal tribunal decision", type: :feature d
       select "Not landmark", from: "Tribunal decision landmark"
       fill_in "Hidden indexable content", with: "hidden text goes here"
 
-
       expect(page).to have_css("div.govspeak-help")
       expect(page).to have_content("To add an attachment, please save the draft first.")
 

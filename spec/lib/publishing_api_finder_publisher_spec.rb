@@ -74,7 +74,6 @@ RSpec.describe PublishingApiFinderPublisher do
         expect(publishing_api).to receive(:publish)
           .with(finders[0][:file]["signup_content_id"])
 
-
         expect(publishing_api).to receive(:put_content)
           .with(finders[1][:file]["content_id"], be_valid_against_schema("finder"))
         expect(publishing_api).to receive(:patch_links)

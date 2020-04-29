@@ -332,7 +332,6 @@ RSpec.feature "Editing a CMA case", type: :feature do
         expect(page).to have_content("Adding an attachment failed. Please make sure you have uploaded an attachment")
       end
 
-
       scenario "editing an attachment on a #{publication_state} CMA case" do
         stub_request(:put, %r{#{Plek.find('asset-manager')}/assets/.*})
           .to_return(body: asset_manager_response.to_json, status: 201)
