@@ -1,7 +1,7 @@
 class GovspeakPresenter
-  PRODUCTION_HOSTS = %w(www.gov.uk assets.publishing.service.gov.uk).freeze
-  INTEGRATION_HOSTS = %w{www-origin.integration.publishing.service.gov.uk assets.digital.cabinet-office.gov.uk}.freeze
-  DEVELOPMENT_HOSTS = %w{assets-origin.dev.gov.uk}.freeze
+  PRODUCTION_HOSTS = %w[www.gov.uk assets.publishing.service.gov.uk].freeze
+  INTEGRATION_HOSTS = %w[www-origin.integration.publishing.service.gov.uk assets.digital.cabinet-office.gov.uk].freeze
+  DEVELOPMENT_HOSTS = %w[assets-origin.dev.gov.uk].freeze
   attr_accessor :document
 
   def self.present(document)
@@ -47,7 +47,7 @@ class GovspeakPresenter
   end
 
   def sanitise_snippet(snippet)
-    snippet = CGI::unescape(snippet)
+    snippet = CGI.unescape(snippet)
     path = snippet[/\[\s*InlineAttachment\s*:\s*(.*?)\s*\]/, 1]
     return unless path
 

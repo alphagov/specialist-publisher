@@ -31,7 +31,7 @@ class FinderSchema
     type = facet_data_for(facet_key).fetch("type", nil)
     if type == "text" && allowed_values_for(facet_key).empty?
       value
-    elsif %w(hidden text).include?(type)
+    elsif %w[hidden text].include?(type)
       Array(value).map do |v|
         value_label_mapping_for(facet_key, v).fetch("label") { value }
       end

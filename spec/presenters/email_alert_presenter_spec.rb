@@ -33,11 +33,11 @@ RSpec.describe EmailAlertPresenter do
         expect(presented_data[:base_path]).to include(cma_case_payload["base_path"])
         expect(presented_data[:priority]).to eq("normal")
 
-        expect(presented_data.keys).to match_array(%i(
+        expect(presented_data.keys).to match_array(%i[
           title description change_note subject tags document_type
           email_document_supertype government_document_supertype content_id
           public_updated_at publishing_app base_path urgent priority links
-        ))
+        ])
       end
     end
 

@@ -1,13 +1,11 @@
 module PublishingHelper
   def handle_remote_error(document)
-    begin
-      yield
-      true
-    rescue GdsApi::HTTPErrorResponse => e
-      error_response_message(document, :base, e.message)
-      GovukError.notify(e)
-      false
-    end
+    yield
+    true
+  rescue GdsApi::HTTPErrorResponse => e
+    error_response_message(document, :base, e.message)
+    GovukError.notify(e)
+    false
   end
 
   def set_errors_on(document)

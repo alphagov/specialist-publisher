@@ -27,6 +27,6 @@ class DocumentPublisher
 
   def self.previously_unpublished?(document)
     ordered_states = document.state_history.sort.to_h.values
-    ordered_states.last(2) == %w(unpublished draft)
+    ordered_states.last(2) == %w[unpublished draft]
   end
 end

@@ -45,6 +45,6 @@ class GovspeakBodyPresenter
   def sanitise_filename(filepath)
     special_chars = /[^a-z0-9]/
     filename = filepath.split("/").last
-    CGI::unescape(filename).downcase.gsub(special_chars, "_")
+    CGI.unescape(filename).downcase.gsub(special_chars, "_")
   end
 end

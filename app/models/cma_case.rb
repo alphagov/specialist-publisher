@@ -5,14 +5,14 @@ class CmaCase < Document
   validates :case_state, presence: true
   validates :closed_date, allow_blank: true, date: true
 
-  FORMAT_SPECIFIC_FIELDS = %i(
+  FORMAT_SPECIFIC_FIELDS = %i[
     opened_date
     closed_date
     case_type
     case_state
     market_sector
     outcome_type
-  ).freeze
+  ].freeze
 
   attr_accessor(*FORMAT_SPECIFIC_FIELDS)
 

@@ -115,9 +115,7 @@ class Document
     to_s.underscore
   end
 
-  def format
-    finder_schema.format
-  end
+  delegate :format, to: :finder_schema
 
   def phase
     "live"
@@ -210,7 +208,7 @@ class Document
   end
 
   def self.all(page, per_page, query: nil)
-    AllDocumentsFinder.all(page, per_page, query, self.document_type)
+    AllDocumentsFinder.all(page, per_page, query, document_type)
   end
 
   def self.find(content_id)
@@ -218,7 +216,7 @@ class Document
   end
 
   def save(validate: true)
-    return false if validate && !self.valid?
+    return false if validate && !valid?
 
     handle_remote_error(self) do
       DocumentSaver.save(self)

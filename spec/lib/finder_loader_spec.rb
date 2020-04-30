@@ -9,10 +9,10 @@ RSpec.describe FinderLoader do
                       .and_return("yesterday")
   end
   it "returns matching finder data objects" do
-    expect(Dir).to receive(:glob).with("lib/documents/schemas/*.json").and_return(%w{
+    expect(Dir).to receive(:glob).with("lib/documents/schemas/*.json").and_return(%w[
       lib/documents/schemas/format-1.json
       lib/documents/schemas/format-2.json
-    })
+    ])
     expect(File).to receive(:read).with("lib/documents/schemas/format-2.json")
       .and_return('{"name":"format-2"}')
     expect(File).to receive(:mtime).with("lib/documents/schemas/format-2.json")

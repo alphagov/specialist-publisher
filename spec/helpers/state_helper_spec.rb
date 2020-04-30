@@ -10,8 +10,8 @@ RSpec.describe StateHelper, type: :helper do
     it "returns the last pair of states in an Array" do
       simple_state_history = { "1": "published", "2": "draft" }
       longer_state_history = { "9": "published", "10": "unpublished", "11": "draft" }
-      expect(last_two_states(simple_state_history)).to eq(%w(published draft))
-      expect(last_two_states(longer_state_history)).to eq(%w(unpublished draft))
+      expect(last_two_states(simple_state_history)).to eq(%w[published draft])
+      expect(last_two_states(longer_state_history)).to eq(%w[unpublished draft])
     end
   end
 
@@ -47,7 +47,7 @@ RSpec.describe StateHelper, type: :helper do
     context "published with new draft state" do
       let(:state_history) do
         { "1": "published",
-         "2": "draft" }
+          "2": "draft" }
       end
       it "returns the state in string" do
         expect(compose_state(state_history)).to eq("published with new draft")
@@ -57,7 +57,7 @@ RSpec.describe StateHelper, type: :helper do
     context "unpublished with new draft state" do
       let(:state_history) do
         { "1": "unpublished",
-         "2": "draft" }
+          "2": "draft" }
       end
       it "returns the state in string" do
         expect(compose_state(state_history)).to eq("unpublished with new draft")

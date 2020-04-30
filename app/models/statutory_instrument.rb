@@ -8,13 +8,13 @@ class StatutoryInstrument < Document
   validates :withdrawn_date, presence: true, date: true, if: :withdrawn_sifting_status?
   validates :withdrawn_date, absence: { message: "must be blank if not withdrawn" }, unless: :withdrawn_sifting_status?
 
-  FORMAT_SPECIFIC_FIELDS = %i(
+  FORMAT_SPECIFIC_FIELDS = %i[
     laid_date
     sift_end_date
     sifting_status
     subject
     withdrawn_date
-  ).freeze
+  ].freeze
 
   attr_accessor(*FORMAT_SPECIFIC_FIELDS)
   attr_accessor :organisations, :primary_publishing_organisation

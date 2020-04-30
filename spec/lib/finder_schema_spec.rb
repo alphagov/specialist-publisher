@@ -31,7 +31,7 @@ RSpec.describe FinderSchema do
 
         context "looking up multiple values" do
           it "returns an array with the looked-up values" do
-            expect(schema.humanized_facet_value("country", %w(AL AF))).to eql(%w(Albania Afghanistan))
+            expect(schema.humanized_facet_value("country", %w[AL AF])).to eql(%w[Albania Afghanistan])
           end
         end
       end

@@ -6,7 +6,7 @@ class BusinessFinanceSupportScheme < Document
   validates :regions, presence: true
   validates :types_of_support, presence: true
 
-  FORMAT_SPECIFIC_FIELDS = %i(
+  FORMAT_SPECIFIC_FIELDS = %i[
     business_sizes
     business_stages
     continuation_link
@@ -14,7 +14,7 @@ class BusinessFinanceSupportScheme < Document
     regions
     types_of_support
     will_continue_on
-  ).freeze
+  ].freeze
 
   attr_accessor(*FORMAT_SPECIFIC_FIELDS)
 

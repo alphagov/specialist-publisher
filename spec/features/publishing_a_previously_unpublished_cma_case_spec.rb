@@ -11,7 +11,7 @@ RSpec.feature "Publishing a previously unpublished CMA Case", type: :feature do
                       title: "Example CMA Case",
                       publication_state: "draft",
                       state_history: { "1" => "unpublished", "2" => "draft" },
-                      details:  { attachments: existing_attachments })
+                      details: { attachments: existing_attachments })
   end
 
   before do

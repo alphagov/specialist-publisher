@@ -3,11 +3,11 @@ class ExportHealthCertificate < Document
   validates :commodity_type, presence: true
   validates :destination_country, presence: true
 
-  FORMAT_SPECIFIC_FIELDS = %i(
+  FORMAT_SPECIFIC_FIELDS = %i[
     certificate_status
     commodity_type
     destination_country
-  ).freeze
+  ].freeze
 
   attr_accessor(*FORMAT_SPECIFIC_FIELDS)
 

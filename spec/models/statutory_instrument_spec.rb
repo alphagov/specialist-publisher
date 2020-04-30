@@ -20,7 +20,7 @@ RSpec.describe StatutoryInstrument do
     end
 
     it "is valid on a document in an open or closed state" do
-      %w(open closed).each do |state|
+      %w[open closed].each do |state|
         instance.sifting_status = state
         instance.validate
         expect(instance.errors[:sift_end_date]).to be_empty
