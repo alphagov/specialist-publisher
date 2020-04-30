@@ -10,7 +10,13 @@
   <%= f.select :marine_notice_vessel_type,
       f.object.facet_options(:marine_notice_vessel_type),
       { label: "Vessel type", include_blank: 'Select vessel type' },
-      { class: 'form-control' }
+      {
+        class: 'select2 form-control',
+        multiple: true,
+        data: {
+          placeholder: 'Select a vessel type'
+        }
+      }
   %>
 <% end %>
 
@@ -18,7 +24,13 @@
   <%= f.select :marine_notice_topic,
       f.object.facet_options(:marine_notice_topic),
       { label: "Topic", include_blank: 'Select topic' },
-      { class: 'form-control' }
+      {
+        class: 'select2 form-control',
+        multiple: true,
+        data: {
+          placeholder: 'Select a topic'
+        }
+      }
   %>
 <% end %>
 
