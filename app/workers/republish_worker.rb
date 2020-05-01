@@ -26,7 +26,7 @@ class RepublishWorker
 private
 
   def safe_to_republish?(document)
-    %w(draft published).include?(document.publication_state)
+    %w[draft published].include?(document.publication_state)
   end
 
   def print_limitations_of_republishing(document)

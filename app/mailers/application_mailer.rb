@@ -1,5 +1,5 @@
 class ApplicationMailer < Mail::Notify::Mailer
-  default from: Proc.new { no_reply_email_address }
+  default from: proc { no_reply_email_address }
 
   def no_reply_email_address
     name = "GOV.UK publishing"

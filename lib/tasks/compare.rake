@@ -10,7 +10,7 @@ task :compare_all, [:document_type] => :environment do |_, args|
     .get_content_items(
       document_type: args.document_type,
       per_page: 99999,
-      fields: %w(content_id),
+      fields: %w[content_id],
     ).to_hash.fetch("results")
 
   content_ids = results.map { |r| r.fetch("content_id") }

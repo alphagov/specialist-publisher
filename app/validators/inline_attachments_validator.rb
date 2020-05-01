@@ -4,7 +4,7 @@ class InlineAttachmentsValidator < ActiveModel::EachValidator
     unmatched = report.fetch(:unmatched_snippets)
 
     unmatched.uniq.each do |filename|
-      filename = CGI::escapeHTML(filename)
+      filename = CGI.escapeHTML(filename)
       message = "contains an attachment that can't be found: '#{filename}'"
 
       record.errors.add(attribute, message)

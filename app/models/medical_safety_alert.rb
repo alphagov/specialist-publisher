@@ -2,11 +2,11 @@ class MedicalSafetyAlert < Document
   validates :alert_type, presence: true
   validates :issued_date, presence: true, date: true
 
-  FORMAT_SPECIFIC_FIELDS = %i(
+  FORMAT_SPECIFIC_FIELDS = %i[
     alert_type
     issued_date
     medical_specialism
-  ).freeze
+  ].freeze
 
   attr_accessor(*FORMAT_SPECIFIC_FIELDS)
 

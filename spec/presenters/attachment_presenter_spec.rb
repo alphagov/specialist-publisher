@@ -5,9 +5,9 @@ RSpec.describe AttachmentPresenter do
   let(:content_id) { SecureRandom.uuid }
   let(:attachment) {
     Attachment.new(url: "path/to/file/in/asset/manger",
-      content_type: "application/jpeg",
-      title: "test specialist document attachment",
-      content_id: content_id)
+                   content_type: "application/jpeg",
+                   title: "test specialist document attachment",
+                   content_id: content_id)
   }
 
   let(:attachment_presenter) {

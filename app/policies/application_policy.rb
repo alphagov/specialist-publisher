@@ -18,9 +18,7 @@ class ApplicationPolicy
     user_organisation_owns_document_type?
   end
 
-  def gds_editor?
-    user.gds_editor?
-  end
+  delegate :gds_editor?, to: :user
 
   def document_type_editor?
     user.permissions.include?(document_class.name.underscore + "_editor")

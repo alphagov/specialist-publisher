@@ -229,7 +229,7 @@ RSpec.feature "Editing a CMA case", type: :feature do
         .to_return(body: asset_manager_response.to_json, status: 201)
     end
 
-    %i(draft published).each do |publication_state|
+    %i[draft published].each do |publication_state|
       let(:cma_case) {
         FactoryBot.create(
           :cma_case,
@@ -239,7 +239,7 @@ RSpec.feature "Editing a CMA case", type: :feature do
         )
       }
 
-      #TODO this test isn't actually checking that the attachment has been added
+      # TODO: this test isn't actually checking that the attachment has been added
       scenario "adding an attachment to a #{publication_state} CMA case" do
         updated_cma_case = cma_case.deep_merge(
           "update_type" => "minor",
@@ -355,7 +355,7 @@ RSpec.feature "Editing a CMA case", type: :feature do
         find(".attachments").first(:button, "delete").click
         expect(page.status_code).to eq(200)
 
-        #TODO fix tests so that asset manager is updated appropriately
+        # TODO: fix tests so that asset manager is updated appropriately
         # expect(page).not_to have_content('asylum-support-image.jpg')
 
         expect(page).to have_content("Editing Example CMA Case")

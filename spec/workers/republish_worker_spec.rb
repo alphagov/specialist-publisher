@@ -18,7 +18,7 @@ RSpec.describe RepublishWorker do
     stub_publishing_api_has_item(document)
   end
 
-  %i(draft redrafted).each do |publication_state|
+  %i[draft redrafted].each do |publication_state|
     context "when the publication_state is '#{publication_state}'" do
       let(:document) {
         FactoryBot.create(:cma_case, publication_state)

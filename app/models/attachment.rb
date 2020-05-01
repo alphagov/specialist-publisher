@@ -29,7 +29,7 @@ class Attachment < Document
 
   def update_properties(new_params)
     new_params.each do |k, v|
-      self.public_send(:"#{k}=", v)
+      public_send(:"#{k}=", v)
     end
   end
 

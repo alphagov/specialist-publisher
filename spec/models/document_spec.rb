@@ -114,7 +114,7 @@ RSpec.describe Document do
         metadata: {
           field1: "2015-12-01",
           field2: "open",
-          field3: %w(x y z),
+          field3: %w[x y z],
         },
       },
       links: {
@@ -126,8 +126,8 @@ RSpec.describe Document do
   let(:document) { MyDocumentType.from_publishing_api(payload) }
 
   before do
-    allow_any_instance_of(FinderSchema).to receive(:load_schema_for).with("my_document_types").
-      and_return(finder_schema)
+    allow_any_instance_of(FinderSchema).to receive(:load_schema_for).with("my_document_types")
+      .and_return(finder_schema)
   end
 
   describe ".from_publishing_api" do
@@ -212,7 +212,7 @@ RSpec.describe Document do
 
         expect(document.field1).to eq("2015-12-01")
         expect(document.field2).to eq("open")
-        expect(document.field3).to eq(%w(x y z))
+        expect(document.field3).to eq(%w[x y z])
       end
     end
 
@@ -265,7 +265,7 @@ RSpec.describe Document do
           "format" => "my_format",
           "field1" => "2015-12-01",
           "field2" => "open",
-          "field3" => %w(x y z),
+          "field3" => %w[x y z],
         },
         "document_type" => "my_document_type",
       )
@@ -639,7 +639,7 @@ RSpec.describe Document do
     end
   end
 
-  describe "#set_temporary_update_type!"do
+  describe "#set_temporary_update_type!" do
     before { subject.publication_state = "published" }
 
     context "when the document has an update_type" do

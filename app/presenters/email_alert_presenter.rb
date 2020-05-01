@@ -25,9 +25,7 @@ class EmailAlertPresenter
     }.merge(extra_options)
   end
 
-  def content_id
-    document.content_id
-  end
+  delegate :content_id, to: :document
 
 private
 

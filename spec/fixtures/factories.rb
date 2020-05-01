@@ -5,22 +5,22 @@ FactoryBot.define do
     sequence(:email) { |n| "joe#{n}@bloggs.example.com" }
     if defined?(GDS::SSO::Config)
       # Grant permission to signin to the app using the gem
-      permissions { %w(signin) }
+      permissions { %w[signin] }
     end
   end
 
   # Editor factories:
   factory :editor, parent: :user do
-    permissions { %w(signin editor) }
+    permissions { %w[signin editor] }
   end
 
   factory :gds_editor, parent: :user do
     organisation_slug { "government-digital-service" }
-    permissions { %w(signin gds_editor) }
+    permissions { %w[signin gds_editor] }
   end
 
   factory :statutory_instrument_editor, parent: :user do
-    permissions { %w(signin statutory_instrument_editor) }
+    permissions { %w[signin statutory_instrument_editor] }
   end
 
   factory :cma_editor, parent: :editor do
@@ -52,7 +52,7 @@ FactoryBot.define do
   factory :writer, aliases: [:cma_writer], parent: :editor do
     organisation_slug { "competition-and-markets-authority" }
     organisation_content_id { "957eb4ec-089b-4f71-ba2a-dc69ac8919ea" }
-    permissions { %w(signin) }
+    permissions { %w[signin] }
   end
 
   factory :moj_writer, parent: :writer do
@@ -406,7 +406,7 @@ FactoryBot.define do
         {
           "alert_type" => "company-led-drugs",
           "issued_date" => "2016-02-01",
-          "medical_specialism" => %w(anaesthetics cardiology),
+          "medical_specialism" => %w[anaesthetics cardiology],
         }
       }
     end

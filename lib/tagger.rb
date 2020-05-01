@@ -1,6 +1,6 @@
 class Tagger
   def self.add_tags(content_id, do_tag = true)
-    self.new.add_tags(content_id, do_tag, &Proc.new)
+    new.add_tags(content_id, do_tag, &Proc.new)
   end
 
   def add_tags(content_id, do_tag = true)
