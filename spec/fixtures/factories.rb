@@ -189,8 +189,8 @@ FactoryBot.define do
       default_metadata do
         {
           "marine_notice_type" => "marine-guidance-note",
-          "marine_notice_vessel_type" => "pleasure-vessels",
-          "marine_notice_topic" => "crew-and-training",
+          "marine_notice_vessel_type" => %w[pleasure-vessels high-speed-craft],
+          "marine_notice_topic" => %w[crew-and-training navigation],
           "issued_date" => "2015-10-10",
         }
       end
