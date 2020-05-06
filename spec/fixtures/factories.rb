@@ -515,11 +515,11 @@ FactoryBot.define do
     transient do
       default_metadata {
         {
-            "tribunal_decision_categories" => ["Benefits for children"],
-            "tribunal_decision_decision_date" => "2016-01-01",
-            "tribunal_decision_judges" => %w[angus-r],
-            "tribunal_decision_sub_categories" => %w[benefits-for-children-benefit-increases-for-children],
-            "hidden_indexable_content" => "???",
+          "tribunal_decision_categories" => ["Benefits for children"],
+          "tribunal_decision_decision_date" => "2016-01-01",
+          "tribunal_decision_judges" => %w[angus-r],
+          "tribunal_decision_sub_categories" => %w[benefits-for-children-benefit-increases-for-children],
+          "hidden_indexable_content" => "???",
         }
       }
     end

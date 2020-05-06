@@ -121,10 +121,10 @@ RSpec.describe DocumentPresenter do
     it "adds the nested header to the payload" do
       expected_headers_payload = [
         { text: "heading2", level: 2, id: "heading2", headers: [
-            { text: "heading3", level: 3, id: "heading3", headers: [
-                { text: "heading4", level: 4, id: "heading4" },
-              ] },
-] },
+          { text: "heading3", level: 3, id: "heading3", headers: [
+            { text: "heading4", level: 4, id: "heading4" },
+          ] },
+        ] },
         { text: "anotherheading2", level: 2, id: "anotherheading2" },
       ]
 
