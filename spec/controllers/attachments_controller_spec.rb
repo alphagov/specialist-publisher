@@ -36,8 +36,8 @@ RSpec.describe AttachmentsController, type: :controller do
   let(:asset_url) { "http://assets-origin.dev.gov.uk/media/#{asset_id}/#{file_name}" }
   let(:asset_manager_response) {
     {
-         id: "http://asset-manager.dev.gov.uk/assets/another_image_id",
-         file_url: asset_url,
+      id: "http://asset-manager.dev.gov.uk/assets/another_image_id",
+      file_url: asset_url,
     }
   }
 
