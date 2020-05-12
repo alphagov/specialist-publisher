@@ -35,6 +35,6 @@ private
   def zero_pad(value)
     return value unless value =~ /^\d$/
 
-    format("%02d", value)
+    sprintf("%02d", value) # rubocop:disable Style/FormatString
   end
 end
