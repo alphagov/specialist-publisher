@@ -24,7 +24,7 @@ class AttachmentCollection
   end
 
   def has_attachment?(attachment)
-    !!find(attachment.content_id)
+    find(attachment.content_id).present?
   end
 
   def each
