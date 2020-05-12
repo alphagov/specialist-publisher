@@ -9,12 +9,12 @@ RSpec.feature "Creating a Statutory Instrument", type: :feature do
   end
 
   let(:statutory_instrument) { FactoryBot.create(:statutory_instrument) }
-  let(:organisations) {
+  let(:organisations) do
     [
       { "content_id" => "12345", "title" => "Org 1" },
       { "content_id" => "67890", "title" => "Org 2" },
     ]
-  }
+  end
   let(:content_id) { statutory_instrument["content_id"] }
   let(:save_button_disable_with_message) { page.find_button("Save as draft")["data-disable-with"] }
 

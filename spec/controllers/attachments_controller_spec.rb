@@ -1,7 +1,7 @@
 require "spec_helper"
 
 RSpec.describe AttachmentsController, type: :controller do
-  let(:cma_case) {
+  let(:cma_case) do
     FactoryBot.create(:cma_case,
                       details: {
                         "attachments" => [
@@ -23,7 +23,7 @@ RSpec.describe AttachmentsController, type: :controller do
                           },
                         ],
                       })
-  }
+  end
 
   let(:document_type_slug) { "cma-cases" }
   let(:document_content_id) { cma_case["content_id"] }
@@ -34,12 +34,12 @@ RSpec.describe AttachmentsController, type: :controller do
   let(:file_url) { "http://assets-origin.dev.gov.uk/media/#{asset_id}/#{file_name}" }
 
   let(:asset_url) { "http://assets-origin.dev.gov.uk/media/#{asset_id}/#{file_name}" }
-  let(:asset_manager_response) {
+  let(:asset_manager_response) do
     {
       id: "http://asset-manager.dev.gov.uk/assets/another_image_id",
       file_url: asset_url,
     }
-  }
+  end
 
   before do
     log_in_as_gds_editor
@@ -48,19 +48,19 @@ RSpec.describe AttachmentsController, type: :controller do
 
   describe "POST create" do
     let(:file) { Rack::Test::UploadedFile.new("spec/support/images/cma_case_image.jpg", "image/jpg") }
-    let(:attachment) {
+    let(:attachment) do
       {
         file: file,
         title: "test attachment upload",
       }
-    }
+    end
 
-    let(:no_file_attachment) {
+    let(:no_file_attachment) do
       {
         file: nil,
         title: "no file attached",
       }
-    }
+    end
 
     it "redirect to the specialist document edit page" do
       document = CmaCase.find(document_content_id)
@@ -102,12 +102,12 @@ RSpec.describe AttachmentsController, type: :controller do
 
   describe "PUT update" do
     let(:updated_file) { Rack::Test::UploadedFile.new("spec/support/images/updated_cma_case_image.jpg", "mime/type") }
-    let(:updated_attachment) {
+    let(:updated_attachment) do
       {
         file: updated_file,
         title: "updated test attachment upload",
       }
-    }
+    end
     it "redirects to the specalist document edit page" do
       document = CmaCase.find(document_content_id)
       allow_any_instance_of(AttachmentsController).to receive(:fetch_document).and_return(document)

@@ -311,7 +311,7 @@ class Document
   end
 
   def content_item_blocking_publish?
-    warnings && warnings.has_key?("content_item_blocking_publish")
+    warnings && warnings.key?("content_item_blocking_publish")
   end
 
   def self.finder_schema

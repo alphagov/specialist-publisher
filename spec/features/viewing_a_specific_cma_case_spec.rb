@@ -12,7 +12,7 @@ RSpec.feature "Viewing a specific case", type: :feature do
   end
 
   context "from the index" do
-    let(:cma_cases) {
+    let(:cma_cases) do
       [
         FactoryBot.create(:cma_case,
                           title: "Example CMA Case",
@@ -38,7 +38,7 @@ RSpec.feature "Viewing a specific case", type: :feature do
                             },
                           }),
       ]
-    }
+    end
 
     scenario "displays the metadata" do
       visit "/cma-cases"
@@ -68,7 +68,7 @@ RSpec.feature "Viewing a specific case", type: :feature do
   end
 
   context "bulk publishing" do
-    let(:cma_cases) {
+    let(:cma_cases) do
       [
         FactoryBot.create(:cma_case,
                           title: "Bulk published CMA Case",
@@ -78,7 +78,7 @@ RSpec.feature "Viewing a specific case", type: :feature do
                             },
                           }),
       ]
-    }
+    end
 
     scenario "the document has been bulk published" do
       visit "/cma-cases"
@@ -89,7 +89,7 @@ RSpec.feature "Viewing a specific case", type: :feature do
   end
 
   context "attachments" do
-    let(:cma_cases) {
+    let(:cma_cases) do
       [
         FactoryBot.create(:cma_case,
                           title: "CMA Case without attachments",
@@ -109,7 +109,7 @@ RSpec.feature "Viewing a specific case", type: :feature do
                             ],
                           }),
       ]
-    }
+    end
 
     scenario "Viewing a document without attachments" do
       visit "/cma-cases"
@@ -135,7 +135,7 @@ RSpec.feature "Viewing a specific case", type: :feature do
   end
 
   context "Viewing publication states" do
-    let(:cma_cases) {
+    let(:cma_cases) do
       [
         FactoryBot.create(:cma_case,
                           title: "Example Draft",
@@ -179,7 +179,7 @@ RSpec.feature "Viewing a specific case", type: :feature do
                             "2" => "published",
                           }),
       ]
-    }
+    end
 
     scenario "Viewing a document with a draft state" do
       visit "/cma-cases"

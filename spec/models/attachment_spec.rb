@@ -27,9 +27,9 @@ RSpec.describe Attachment do
       end
 
       context "when a content id is not provided" do
-        let(:attachment_payload) {
+        let(:attachment_payload) do
           FactoryBot.create(:attachment_payload, content_id: nil)
-        }
+        end
 
         it "generates a content id" do
           allow(SecureRandom).to receive(:uuid).and_return("some-content-id")
@@ -53,7 +53,7 @@ RSpec.describe Attachment do
   end
 
   describe "#new without title" do
-    let(:attachment) {
+    let(:attachment) do
       Attachment.new(
         title: "",
         file: ActionDispatch::Http::UploadedFile.new(
@@ -63,7 +63,7 @@ RSpec.describe Attachment do
           type: "image/jpeg",
         ),
       )
-    }
+    end
 
     it "should set content_id and file attributes with data from attachments new form" do
       expect(attachment.content_id).to be_truthy
@@ -97,7 +97,7 @@ RSpec.describe Attachment do
   end
 
   describe "#new with title" do
-    let(:attachment) {
+    let(:attachment) do
       Attachment.new(
         title: "new attachment",
         file: ActionDispatch::Http::UploadedFile.new(
@@ -107,7 +107,7 @@ RSpec.describe Attachment do
           type: "image/jpeg",
         ),
       )
-    }
+    end
 
     it "should set content_id and file attributes with data from attachments new form" do
       expect(attachment.content_id).to be_truthy
@@ -152,7 +152,7 @@ RSpec.describe Attachment do
   describe "#update_properties" do
     let(:content_id) { SecureRandom.uuid }
 
-    let(:attachment) {
+    let(:attachment) do
       Attachment.new(
         title: "test attachment",
         content_id: content_id,
@@ -161,15 +161,15 @@ RSpec.describe Attachment do
         created_at: "2015-12-03T16:59:13+00:00",
         updated_at: "2015-12-03T16:59:13+00:00",
       )
-    }
+    end
 
-    let(:http_file_upload) {
+    let(:http_file_upload) do
       ActionDispatch::Http::UploadedFile.new(
         tempfile: "spec/support/images/updated_cma_case_image.jpg",
         filename: File.basename("spec/support/images/updated_cma_case_image.jpg"),
         type: "image/jpeg",
       )
-    }
+    end
 
     it "should update the title, file and has_changed attributes" do
       attachment.update_properties(file: http_file_upload, title: "updated attachment title")
@@ -181,7 +181,7 @@ RSpec.describe Attachment do
 
   describe "#upload" do
     let(:url) { "/uploaded/document.jpg" }
-    let(:attachment) {
+    let(:attachment) do
       Attachment.new(
         title: "test attachment",
         file: ActionDispatch::Http::UploadedFile.new(
@@ -190,7 +190,7 @@ RSpec.describe Attachment do
           type: "image/jpeg",
         ),
       )
-    }
+    end
 
     it "returns true on successful upload and sets the url" do
       stub_asset_manager_receives_an_asset(url)

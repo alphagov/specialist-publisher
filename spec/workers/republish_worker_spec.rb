@@ -4,13 +4,13 @@ RSpec.describe RepublishWorker do
   let(:document) { FactoryBot.create(:cma_case) }
   let(:content_id) { document["content_id"] }
 
-  let(:uses_republish_update_type) {
+  let(:uses_republish_update_type) do
     request_json_includes("update_type" => "republish")
-  }
+  end
 
-  let(:does_not_use_republish_update_type) {
+  let(:does_not_use_republish_update_type) do
     request_json_includes("update_type" => "major")
-  }
+  end
 
   before do
     stub_any_publishing_api_call
@@ -20,9 +20,9 @@ RSpec.describe RepublishWorker do
 
   %i[draft redrafted].each do |publication_state|
     context "when the publication_state is '#{publication_state}'" do
-      let(:document) {
+      let(:document) do
         FactoryBot.create(:cma_case, publication_state)
-      }
+      end
 
       it "sends the document to the publishing api" do
         subject.perform(content_id)
@@ -46,9 +46,9 @@ RSpec.describe RepublishWorker do
   end
 
   context "when the document is published" do
-    let(:document) {
+    let(:document) do
       FactoryBot.create(:cma_case, :published)
-    }
+    end
 
     it "sends the document to the publishing api" do
       subject.perform(content_id)
@@ -71,9 +71,9 @@ RSpec.describe RepublishWorker do
   end
 
   context "when the document is unpublished" do
-    let(:document) {
+    let(:document) do
       FactoryBot.create(:cma_case, :unpublished)
-    }
+    end
 
     it "skips republishing of the document" do
       expect {
@@ -87,9 +87,9 @@ RSpec.describe RepublishWorker do
   end
 
   context "when the document is in any other state" do
-    let(:document) {
+    let(:document) do
       FactoryBot.create(:cma_case, publication_state: "unrecognised")
-    }
+    end
 
     it "skips republishing of the document" do
       expect {

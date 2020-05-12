@@ -387,13 +387,13 @@ FactoryBot.define do
     document_type { "maib_report" }
 
     transient do
-      default_metadata {
+      default_metadata do
         {
           "date_of_occurrence" => "2015-10-10",
           "report_type" => "investigation-report",
           "vessel_type" => %w[merchant-vessel-100-gross-tons-or-over],
         }
-      }
+      end
     end
   end
 
@@ -402,13 +402,13 @@ FactoryBot.define do
     document_type { "medical_safety_alert" }
 
     transient do
-      default_metadata {
+      default_metadata do
         {
           "alert_type" => "company-led-drugs",
           "issued_date" => "2016-02-01",
           "medical_specialism" => %w[anaesthetics cardiology],
         }
-      }
+      end
     end
   end
 
@@ -417,13 +417,13 @@ FactoryBot.define do
     document_type { "raib_report" }
 
     transient do
-      default_metadata {
+      default_metadata do
         {
           "date_of_occurrence" => "2015-10-10",
           "report_type" => "investigation-report",
           "railway_type" => %w[heavy-rail],
         }
-      }
+      end
     end
   end
 
@@ -432,14 +432,14 @@ FactoryBot.define do
     document_type { "residential_property_tribunal_decision" }
 
     transient do
-      default_metadata {
+      default_metadata do
         {
           "tribunal_decision_category" => "leasehold-disputes-management",
           "tribunal_decision_sub_category" => "leasehold-disputes-management---appointment-of-manager",
           "tribunal_decision_decision_date" => "2018-01-17",
           "hidden_indexable_content" => "some hidden content",
         }
-      }
+      end
     end
   end
 
@@ -448,20 +448,20 @@ FactoryBot.define do
     document_type { "statutory_instrument" }
 
     transient do
-      default_metadata {
+      default_metadata do
         {
           "laid_date" => "2018-01-01",
           "sift_end_date" => "2018-01-05",
           "sifting_status" => "open",
           "subject" => %w[business],
         }
-      }
+      end
 
       organisation_content_id { "6de6b795-9d30-4bd8-a257-ab9a6879e1ea" }
       primary_publishing_org_content_id { "d31d9806-2644-4023-be70-5376cae84a06" }
     end
 
-    initialize_with {
+    initialize_with do
       attributes.merge(
         links: {
           finder: [FinderSchema.new(document_type.pluralize).content_id],
@@ -469,7 +469,7 @@ FactoryBot.define do
           primary_publishing_organisation: [primary_publishing_org_content_id],
         },
       )
-    }
+    end
   end
 
   factory :tax_tribunal_decision, parent: :document do
@@ -513,7 +513,7 @@ FactoryBot.define do
     document_type { "utaac_decision" }
 
     transient do
-      default_metadata {
+      default_metadata do
         {
           "tribunal_decision_categories" => ["Benefits for children"],
           "tribunal_decision_decision_date" => "2016-01-01",
@@ -521,7 +521,7 @@ FactoryBot.define do
           "tribunal_decision_sub_categories" => %w[benefits-for-children-benefit-increases-for-children],
           "hidden_indexable_content" => "???",
         }
-      }
+      end
     end
   end
 

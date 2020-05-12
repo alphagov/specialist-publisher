@@ -9,11 +9,11 @@ RSpec.feature "Unpublishing a CMA Case", type: :feature do
   end
 
   context "a published document" do
-    let(:item) {
+    let(:item) do
       FactoryBot.create(:cma_case,
                         title: "Example CMA Case",
                         publication_state: "published")
-    }
+    end
 
     scenario "clicking the unpublish button redirects back to the show page" do
       stub_publishing_api_unpublish(content_id, body: { type: "gone" })
@@ -53,7 +53,7 @@ RSpec.feature "Unpublishing a CMA Case", type: :feature do
     end
 
     context "with attachments" do
-      let(:existing_attachments) {
+      let(:existing_attachments) do
         [
           {
             "content_id" => "77f2d40e-3853-451f-9ca3-a747e8402e34",
@@ -72,16 +72,16 @@ RSpec.feature "Unpublishing a CMA Case", type: :feature do
             "updated_at" => "2015-12-03T16:59:13+00:00",
           },
         ]
-      }
+      end
 
-      let(:item) {
+      let(:item) do
         FactoryBot.create(
           :cma_case,
           :published,
           title: "Example CMA Case",
           details: { "attachments" => existing_attachments },
         )
-      }
+      end
 
       scenario "clicking the unpublish button deletes document attachments" do
         Sidekiq::Testing.inline! do
@@ -104,11 +104,11 @@ RSpec.feature "Unpublishing a CMA Case", type: :feature do
   end
 
   context "publishing-api returns error" do
-    let(:item) {
+    let(:item) do
       FactoryBot.create(:cma_case,
                         title: "Example CMA Case",
                         publication_state: "published")
-    }
+    end
 
     scenario "clicking the unpublish button shows an error message" do
       stub_publishing_api_unpublish(content_id, { body: { type: "gone" } }, status: 409)

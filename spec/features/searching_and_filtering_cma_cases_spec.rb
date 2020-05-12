@@ -2,7 +2,7 @@ require "spec_helper"
 
 RSpec.feature "Searching and filtering", type: :feature do
   let(:test_date) { Date.new(2016, 1, 11) }
-  let(:cma_cases) {
+  let(:cma_cases) do
     ten_example_cases = 10.times.collect do |n|
       FactoryBot.create(:cma_case,
                         "title" => "Example CMA Case #{n}",
@@ -17,7 +17,7 @@ RSpec.feature "Searching and filtering", type: :feature do
     ten_example_cases[2]["publication_state"] = "draft"
     ten_example_cases[2]["state_history"] = { "1" => "published", "2" => "unpublished", "3" => "draft" }
     ten_example_cases
-  }
+  end
 
   before do
     log_in_as_editor(:cma_editor)

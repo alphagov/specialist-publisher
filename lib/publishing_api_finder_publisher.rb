@@ -22,7 +22,7 @@ private
 
   def publish(finder)
     export_finder(finder)
-    export_signup(finder) if finder[:file].has_key?("signup_content_id")
+    export_signup(finder) if finder[:file].key?("signup_content_id")
   end
 
   def should_publish_in_this_environment?(finder)
