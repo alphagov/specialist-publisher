@@ -32,7 +32,7 @@ RSpec.feature "Temporary update types, relating to attachments", type: :feature 
     scenario "setting temporary_update_type to true and using a minor update_type" do
       add_attachment_to_document
 
-      assert_publishing_api_put_content(content_id, ->(request) {
+      assert_publishing_api_put_content(content_id, lambda { |request|
         data = JSON.parse(request.body)
 
         expect(data.fetch("update_type")).to eq("minor")
@@ -42,7 +42,7 @@ RSpec.feature "Temporary update types, relating to attachments", type: :feature 
   end
 
   context "when the update_type was set by a user" do
-    let(:payload) {
+    let(:payload) do
       FactoryBot.create(
         :cma_case,
         :redrafted,
@@ -50,12 +50,12 @@ RSpec.feature "Temporary update types, relating to attachments", type: :feature 
         change_note: "srtj",
         state_history: { "3" => "draft", "2" => "unpublished", "1" => "superseded" },
       )
-    }
+    end
 
     scenario "setting temporary_update_type to false and using the existing update_type" do
       add_attachment_to_document
 
-      assert_publishing_api_put_content(content_id, ->(request) {
+      assert_publishing_api_put_content(content_id, lambda { |request|
         data = JSON.parse(request.body)
 
         expect(data.fetch("update_type")).to eq("major")
@@ -65,7 +65,7 @@ RSpec.feature "Temporary update types, relating to attachments", type: :feature 
   end
 
   context "when temporary_update_type was previously set" do
-    let(:payload) {
+    let(:payload) do
       FactoryBot.create(
         :cma_case,
         :redrafted,
@@ -74,12 +74,12 @@ RSpec.feature "Temporary update types, relating to attachments", type: :feature 
           temporary_update_type: true,
         },
       )
-    }
+    end
 
     scenario "preserving the temporary_update_type" do
       add_attachment_to_document
 
-      assert_publishing_api_put_content(content_id, ->(request) {
+      assert_publishing_api_put_content(content_id, lambda { |request|
         data = JSON.parse(request.body)
 
         expect(data.fetch("update_type")).to eq("minor")
@@ -100,17 +100,17 @@ RSpec.feature "Temporary update types, relating to attachments", type: :feature 
   end
 
   context "when the document is a draft" do
-    let(:payload) {
+    let(:payload) do
       FactoryBot.create(
         :cma_case,
         publication_state: "draft",
       )
-    }
+    end
 
     scenario "reverting to the default behaviour for saving a draft" do
       add_attachment_to_document
 
-      assert_publishing_api_put_content(content_id, ->(request) {
+      assert_publishing_api_put_content(content_id, lambda { |request|
         data = JSON.parse(request.body)
 
         expect(data.fetch("update_type")).to eq("major")

@@ -29,8 +29,9 @@ class Document
   )
 
   def temporary_update_type
-    !!@temporary_update_type
+    @temporary_update_type.present?
   end
+
   alias_method :temporary_update_type?, :temporary_update_type
 
   validates :title, presence: true
@@ -311,7 +312,7 @@ class Document
   end
 
   def content_item_blocking_publish?
-    warnings && warnings.has_key?("content_item_blocking_publish")
+    warnings && warnings.key?("content_item_blocking_publish")
   end
 
   def self.finder_schema

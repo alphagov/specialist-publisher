@@ -54,7 +54,7 @@ private
   def remove_empty_headers(headers)
     headers.each do |header|
       header.delete_if { |k, v| k == :headers && v.empty? }
-      remove_empty_headers(header[:headers]) if header.has_key?(:headers)
+      remove_empty_headers(header[:headers]) if header.key?(:headers)
     end
   end
 

@@ -1,7 +1,7 @@
 require "rails_helper"
 
 RSpec.describe AttachmentRestoreWorker do
-  let(:existing_attachments) {
+  let(:existing_attachments) do
     [
       {
         "content_id" => "77f2d40e-3853-451f-9ca3-a747e8402e34",
@@ -20,7 +20,7 @@ RSpec.describe AttachmentRestoreWorker do
         "updated_at" => "2015-12-03T16:59:13+00:00",
       },
     ]
-  }
+  end
 
   let(:content_id) { SecureRandom.uuid }
 

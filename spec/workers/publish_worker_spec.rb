@@ -4,9 +4,9 @@ RSpec.describe PublishWorker do
   let(:document) { FactoryBot.create(:utaac_decision) }
   let(:content_id) { document["content_id"] }
 
-  let(:uses_publish_update_type) {
+  let(:uses_publish_update_type) do
     request_json_includes("update_type" => "major")
-  }
+  end
 
   before do
     stub_any_publishing_api_call
@@ -15,9 +15,9 @@ RSpec.describe PublishWorker do
   end
 
   context "when the publication_state is 'draft'" do
-    let(:document) {
+    let(:document) do
       FactoryBot.create(:utaac_decision, :draft)
-    }
+    end
 
     it "publishes the document" do
       expect_any_instance_of(Document).to receive(:publish)
@@ -26,9 +26,9 @@ RSpec.describe PublishWorker do
   end
 
   context "when the document is in any other state" do
-    let(:document) {
+    let(:document) do
       FactoryBot.create(:utaac_decision, :published)
-    }
+    end
 
     it "does not publish the document" do
       expect_any_instance_of(Document).not_to receive(:publish)

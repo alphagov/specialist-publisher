@@ -23,7 +23,7 @@ RSpec.feature "Publishing a CMA case", type: :feature do
   end
 
   context "when the document is a new draft" do
-    let(:item) {
+    let(:item) do
       FactoryBot.create(
         :cma_case,
         title: "Example CMA Case",
@@ -31,9 +31,9 @@ RSpec.feature "Publishing a CMA case", type: :feature do
         public_updated_at: "2015-11-16T11:53:30+00:00",
         publication_state: "draft",
       )
-    }
+    end
 
-    let(:published_item) {
+    let(:published_item) do
       FactoryBot.create(
         :cma_case,
         :published,
@@ -42,7 +42,7 @@ RSpec.feature "Publishing a CMA case", type: :feature do
         base_path: "/cma-cases/example-cma-case",
         public_updated_at: "2015-11-16T11:53:30+00:00",
       )
-    }
+    end
 
     scenario "from the index" do
       visit "/cma-cases"
@@ -95,11 +95,11 @@ RSpec.feature "Publishing a CMA case", type: :feature do
   end
 
   context "when the document is already published" do
-    let(:item) {
+    let(:item) do
       FactoryBot.create(:cma_case,
                         :published,
                         title: "Live Item")
-    }
+    end
 
     scenario "publish buttons aren't shown" do
       visit "/cma-cases"
@@ -113,13 +113,13 @@ RSpec.feature "Publishing a CMA case", type: :feature do
   end
 
   context "when there is a redrafted document with a major update" do
-    let(:item) {
+    let(:item) do
       FactoryBot.create(
         :cma_case,
         :redrafted,
         title: "Major Update Case",
       )
-    }
+    end
 
     scenario "publish warning and popup text will indicate that it is a major edit" do
       visit "/cma-cases"
@@ -152,7 +152,7 @@ RSpec.feature "Publishing a CMA case", type: :feature do
 
       click_button "Save as draft"
 
-      assert_publishing_api_put_content(content_id, ->(request) {
+      assert_publishing_api_put_content(content_id, lambda { |request|
         payload = JSON.parse(request.body)
 
         expect(payload["title"]).to eq("Changed title")
@@ -163,14 +163,14 @@ RSpec.feature "Publishing a CMA case", type: :feature do
   end
 
   context "when there is a redrafted document with a minor update" do
-    let(:item) {
+    let(:item) do
       FactoryBot.create(
         :cma_case,
         :redrafted,
         title: "Minor Update Case",
         update_type: "minor",
       )
-    }
+    end
 
     scenario "alerts should not be sent when the item is published" do
       visit "/cma-cases"
@@ -208,14 +208,14 @@ RSpec.feature "Publishing a CMA case", type: :feature do
   end
 
   context "when the document is unpublished" do
-    let(:item) {
+    let(:item) do
       FactoryBot.create(
         :cma_case,
         :published,
         title: "Unpublished Item",
         publication_state: "unpublished",
       )
-    }
+    end
 
     scenario "when content item is unpublished it cannot be published" do
       visit "/cma-cases"

@@ -10,13 +10,13 @@ RSpec.describe DrugSafetyUpdate do
   end
 
   context "#publish" do
-    let(:payload) {
+    let(:payload) do
       FactoryBot.create(
         :drug_safety_update,
         :published,
         update_type: "major",
       )
-    }
+    end
     let(:document) { described_class.from_publishing_api(payload) }
 
     it "doesn't notify the Email Alert API on major updates" do

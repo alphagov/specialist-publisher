@@ -1,6 +1,6 @@
 module DfidResearchOutputsHelper
   ##
-  # Only exists here – rather than in the finder schema – because
+  # Only exists here - rather than in the finder schema - because
   # specialist-frontend won't allow us to suppress any metadata that's
   # present (unlike finder-frontend, which allows us to suppress with
   # +display_as_result_metadata+).

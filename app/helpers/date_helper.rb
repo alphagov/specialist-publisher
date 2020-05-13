@@ -15,7 +15,7 @@ module DateHelper
   def date_param_value(params, key)
     k = clean_key(key.to_s)
     attrs = params.symbolize_keys
-    if attrs.has_key?(:"#{k}(1i)")
+    if attrs.key?(:"#{k}(1i)")
       format_date = [
         attrs.fetch(:"#{k}(1i)"),
         attrs.fetch(:"#{k}(2i)"),
@@ -35,6 +35,6 @@ private
   def zero_pad(value)
     return value unless value =~ /^\d$/
 
-    sprintf("%02d", value)
+    sprintf("%02d", value) # rubocop:disable Style/FormatString
   end
 end

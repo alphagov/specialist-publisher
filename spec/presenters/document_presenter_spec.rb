@@ -14,9 +14,9 @@ RSpec.describe DocumentPresenter do
   end
 
   describe "#to_json without attachments" do
-    let(:payload) {
+    let(:payload) do
       FactoryBot.create(:cma_case).tap { |p| p["details"].delete("attachments") }
-    }
+    end
 
     it "is valid against the content schemas" do
       expect(presented_data[:schema_name]).to eq("specialist_document")
@@ -34,7 +34,7 @@ RSpec.describe DocumentPresenter do
   end
 
   describe "#to_json with attachments" do
-    let(:payload) {
+    let(:payload) do
       FactoryBot.create(:cma_case,
                         details: {
                           attachments: [
@@ -60,7 +60,7 @@ RSpec.describe DocumentPresenter do
                             },
                           ],
                         })
-    }
+    end
 
     it "is valid against the content schemas" do
       expect(presented_data[:schema_name]).to eq("specialist_document")
@@ -78,7 +78,7 @@ RSpec.describe DocumentPresenter do
   end
 
   describe "#to_json with headers" do
-    let(:payload) {
+    let(:payload) do
       FactoryBot.create(:cma_case,
                         details: {
                           body: [
@@ -88,7 +88,7 @@ RSpec.describe DocumentPresenter do
                             },
                           ],
                         })
-    }
+    end
 
     it "is valid against the content schemas" do
       expect(presented_data).to be_valid_against_schema("specialist_document")
@@ -102,7 +102,7 @@ RSpec.describe DocumentPresenter do
   end
 
   describe "#to_json with nested headers" do
-    let(:payload) {
+    let(:payload) do
       FactoryBot.create(:cma_case,
                         details: {
                           body: [
@@ -112,7 +112,7 @@ RSpec.describe DocumentPresenter do
                             },
                           ],
                         })
-    }
+    end
 
     it "is valid against the content schemas" do
       expect(presented_data).to be_valid_against_schema("specialist_document")
@@ -133,9 +133,9 @@ RSpec.describe DocumentPresenter do
   end
 
   describe "#to_json without headers" do
-    let(:payload) {
+    let(:payload) do
       FactoryBot.create(:cma_case).tap { |p| p["details"].delete("headers") }
-    }
+    end
 
     it "is valid against the content schemas" do
       expect(presented_data).to be_valid_against_schema("specialist_document")
@@ -147,7 +147,7 @@ RSpec.describe DocumentPresenter do
   end
 
   describe "#to_json with format_specific_fields" do
-    let(:payload) {
+    let(:payload) do
       FactoryBot.create(:cma_case,
                         details: {
                           metadata: {
@@ -157,7 +157,7 @@ RSpec.describe DocumentPresenter do
                             bulk_published: true,
                           },
                         })
-    }
+    end
 
     let(:metadata) { presented_data[:details][:metadata] }
 

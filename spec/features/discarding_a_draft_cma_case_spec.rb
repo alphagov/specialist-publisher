@@ -10,11 +10,11 @@ RSpec.feature "Discarding a draft CMA Case", type: :feature do
   end
 
   context "a draft document" do
-    let(:item) {
+    let(:item) do
       FactoryBot.create(:cma_case,
                         title: "Example CMA Case",
                         publication_state: "draft")
-    }
+    end
 
     context "as a CMA editor" do
       scenario "clicking the discard button discards the draft" do
@@ -42,11 +42,11 @@ RSpec.feature "Discarding a draft CMA Case", type: :feature do
   end
 
   context "a published document with no draft" do
-    let(:item) {
+    let(:item) do
       FactoryBot.create(:cma_case,
                         title: "Example CMA Case",
                         publication_state: "published")
-    }
+    end
 
     scenario "where no draft exists" do
       log_in_as_editor(:cma_editor)

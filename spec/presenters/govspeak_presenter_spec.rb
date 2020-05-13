@@ -19,9 +19,9 @@ RSpec.describe GovspeakPresenter do
       let(:body)        { "![InlineAttachment:foo.jpg]" }
       let(:title)       { "Picture of a tasty-looking pizza" }
       let(:content_id)  { 123 }
-      let(:attachments) {
+      let(:attachments) do
         [instance_double(Attachment, url: url, content_id: content_id)]
-      }
+      end
 
       context "there is a matching attachment" do
         let(:url) { "http://assets.publishing.service.gov.uk/url/foo.jpg" }
@@ -45,9 +45,9 @@ RSpec.describe GovspeakPresenter do
     context "when the document has inline attachments" do
       let(:body)        { "[InlineAttachment:foo.pdf]" }
       let(:content_id)  { 123 }
-      let(:attachments) {
+      let(:attachments) do
         [instance_double(Attachment, url: url, content_id: content_id)]
-      }
+      end
 
       context "there is a matching attachment" do
         let(:url) { "http://assets.publishing.service.gov.uk/url/foo.pdf" }

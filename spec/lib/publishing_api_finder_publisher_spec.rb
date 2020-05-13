@@ -47,12 +47,12 @@ RSpec.describe PublishingApiFinderPublisher do
     end
 
     describe "publishing finders" do
-      let(:finders) {
+      let(:finders) do
         [
           make_finder("/first-finder", "signup_content_id" => SecureRandom.uuid),
           make_finder("/second-finder"),
         ]
-      }
+      end
 
       it "uses GdsApi::PublishingApi" do
         stub_publishing_api_publish(finders[0][:file]["content_id"], {})
@@ -86,11 +86,11 @@ RSpec.describe PublishingApiFinderPublisher do
     end
 
     context "when the finder has a `phase`" do
-      let(:finders) {
+      let(:finders) do
         [
           make_finder("/finder-with-phase", "phase" => "beta"),
         ]
-      }
+      end
 
       let(:content_id) { finders[0]["content_id"] }
 
@@ -113,11 +113,11 @@ RSpec.describe PublishingApiFinderPublisher do
     end
 
     context "when the finder isn't `pre_production`" do
-      let(:finders) {
+      let(:finders) do
         [
           make_finder("/not-pre-production-finder", "pre_production" => false),
         ]
-      }
+      end
 
       let(:content_id) { finders[0][:file]["content_id"] }
 
@@ -140,11 +140,11 @@ RSpec.describe PublishingApiFinderPublisher do
     end
 
     context "when the finder is `pre_production`" do
-      let(:finders) {
+      let(:finders) do
         [
           make_finder("/pre-production-finder", "pre_production" => true),
         ]
-      }
+      end
 
       let(:content_id) { finders[0][:file]["content_id"] }
 

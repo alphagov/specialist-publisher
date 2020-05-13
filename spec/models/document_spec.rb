@@ -88,7 +88,7 @@ RSpec.describe Document do
     @finder_content_id = SecureRandom.uuid
   end
 
-  let(:finder_schema) {
+  let(:finder_schema) do
     {
       base_path: "/my-document-types",
       filter: {
@@ -96,9 +96,9 @@ RSpec.describe Document do
       },
       content_id: @finder_content_id,
     }.deep_stringify_keys
-  }
+  end
 
-  let(:payload_attributes) {
+  let(:payload_attributes) do
     {
       document_type: "my_document_type",
       title: "Example document",
@@ -121,7 +121,7 @@ RSpec.describe Document do
         finder: [@finder_content_id],
       },
     }
-  }
+  end
   let(:payload) { FactoryBot.create(:document, payload_attributes) }
   let(:document) { MyDocumentType.from_publishing_api(payload) }
 
@@ -272,7 +272,7 @@ RSpec.describe Document do
     end
 
     context "document is redrafted with a minor edit" do
-      let(:minor_change_document) {
+      let(:minor_change_document) do
         MyDocumentType.from_publishing_api(
           FactoryBot.create(:document,
                             payload_attributes.merge(
@@ -281,7 +281,7 @@ RSpec.describe Document do
                               content_id: document.content_id,
                             )),
         )
-      }
+      end
 
       it "doesn't alert the email API for minor updates" do
         expect(minor_change_document.publish).to eq(true)
@@ -291,7 +291,7 @@ RSpec.describe Document do
     end
 
     context "document has never been published" do
-      let(:unpublished_document) {
+      let(:unpublished_document) do
         MyDocumentType.from_publishing_api(
           FactoryBot.create(:document,
                             payload_attributes.merge(
@@ -300,7 +300,7 @@ RSpec.describe Document do
                               content_id: document.content_id,
                             )),
         )
-      }
+      end
 
       it 'saves a "First published." change note before asking the api to publish' do
         Timecop.freeze(Time.zone.parse("2015-12-18 10:12:26 UTC")) do
@@ -330,7 +330,7 @@ RSpec.describe Document do
     end
 
     shared_examples_for "publishing changes to a document that has previously been published" do
-      let(:published_document) {
+      let(:published_document) do
         MyDocumentType.from_publishing_api(
           FactoryBot.create(:document,
                             :redrafted,
@@ -339,7 +339,7 @@ RSpec.describe Document do
                               content_id: document.content_id,
                             )),
         )
-      }
+      end
 
       it 'does not add a "First published" change note before asking the api to publish' do
         published_document.publish
@@ -490,9 +490,9 @@ RSpec.describe Document do
       end
 
       context "when the document is published" do
-        let(:payload) {
+        let(:payload) do
           FactoryBot.create(:document, :published, state_history: { "1" => "published" })
-        }
+        end
 
         it "requires an update_type" do
           subject.update_type = ""
@@ -510,9 +510,9 @@ RSpec.describe Document do
       end
 
       context "when the document is unpublished" do
-        let(:payload) {
+        let(:payload) do
           FactoryBot.create(:document, :unpublished, state_history: { "1" => "published", "2" => "unpublished" })
-        }
+        end
 
         it "requires an update_type" do
           subject.update_type = ""

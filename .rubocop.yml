@@ -6,9 +6,3 @@ inherit_gem:
 inherit_mode:
   merge:
     - Exclude
-
-Metrics/BlockLength:
-  Enabled: true
-  Exclude:
-    - test/**/*
-    - spec/**/*

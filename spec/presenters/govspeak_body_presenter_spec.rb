@@ -11,9 +11,9 @@ RSpec.describe GovspeakBodyPresenter do
       let(:file_path) { "/foo.pdf" }
       let(:url) { "https://assets.publishing.service.gov.uk#{file_path}" }
       let(:attachments) { [instance_double(Attachment, url: url, content_id: content_id)] }
-      let(:fallback_output) { sprintf(output_pattern, input_filename) }
-      let(:successful_output) { sprintf(output_pattern, content_id) }
-      let(:body) { sprintf(input_pattern, input_filename) }
+      let(:fallback_output) { format(output_pattern, input_filename) }
+      let(:successful_output) { format(output_pattern, content_id) }
+      let(:body) { format(input_pattern, input_filename) }
 
       context "when the filenames differ" do
         let(:file_path) { "/foo.pdf" }

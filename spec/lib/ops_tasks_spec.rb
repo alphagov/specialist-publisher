@@ -33,9 +33,9 @@ RSpec.describe OpsTasks do
 
   describe "#set_public_updated_at" do
     describe "when the document is live" do
-      let(:payload) {
+      let(:payload) do
         FactoryBot.create(:cma_case, publication_state: "published")
-      }
+      end
 
       before do
         stub_any_publishing_api_put_content
@@ -72,9 +72,9 @@ RSpec.describe OpsTasks do
     end
 
     describe "when the document is not live" do
-      let(:payload) {
+      let(:payload) do
         FactoryBot.create(:cma_case, publication_state: "draft")
-      }
+      end
 
       it "throws a helpful error" do
         expect {

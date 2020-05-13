@@ -1,9 +1,9 @@
 require "spec_helper"
 
 RSpec.feature "Editing a CMA case", type: :feature do
-  let(:cma_case) {
+  let(:cma_case) do
     FactoryBot.create(:cma_case, title: "Example CMA Case", state_history: { "1" => "draft" })
-  }
+  end
   let(:content_id) { cma_case["content_id"] }
   let(:save_button_disable_with_message) { page.find_button("Save as draft")["data-disable-with"] }
 
@@ -72,7 +72,7 @@ RSpec.feature "Editing a CMA case", type: :feature do
   end
 
   context "a published case" do
-    let(:cma_case) {
+    let(:cma_case) do
       FactoryBot.create(:cma_case,
                         :published,
                         title: "Example CMA Case",
@@ -86,7 +86,7 @@ RSpec.feature "Editing a CMA case", type: :feature do
                             "bulk_published" => true,
                           },
                         }).tap { |payload| payload["details"].delete("headers") }
-    }
+    end
 
     scenario "a major update adds to the change history" do
       fill_in "Title", with: "Changed title"
@@ -145,7 +145,7 @@ RSpec.feature "Editing a CMA case", type: :feature do
 
         click_button "Save as draft"
 
-        assert_publishing_api_put_content(content_id, ->(request) {
+        assert_publishing_api_put_content(content_id, lambda { |request|
           payload = JSON.parse(request.body)
           change_note = payload.fetch("change_note")
           expect(change_note).to eq "New change note"
@@ -193,13 +193,13 @@ RSpec.feature "Editing a CMA case", type: :feature do
   end
 
   context "with attachments" do
-    let(:asset_manager_response) {
+    let(:asset_manager_response) do
       {
         id: "http://asset-manager.dev.gov.uk/assets/another_image_id",
         file_url: "http://assets-origin.dev.gov.uk/media/56c45553759b740609000000/cma_case_image.jpg",
       }
-    }
-    let(:existing_attachments) {
+    end
+    let(:existing_attachments) do
       [
         {
           "attachment_type" => "file",
@@ -222,7 +222,7 @@ RSpec.feature "Editing a CMA case", type: :feature do
           "updated_at" => "2015-12-03T16:59:13+00:00",
         },
       ]
-    }
+    end
 
     before do
       stub_request(:post, "#{Plek.find('asset-manager')}/assets")
@@ -230,14 +230,14 @@ RSpec.feature "Editing a CMA case", type: :feature do
     end
 
     %i[draft published].each do |publication_state|
-      let(:cma_case) {
+      let(:cma_case) do
         FactoryBot.create(
           :cma_case,
           publication_state,
           title: "Example CMA Case",
           details: { "attachments" => existing_attachments },
         )
-      }
+      end
 
       # TODO: this test isn't actually checking that the attachment has been added
       scenario "adding an attachment to a #{publication_state} CMA case" do
@@ -394,7 +394,7 @@ RSpec.feature "Editing a CMA case", type: :feature do
   end
 
   context "an unpublished document" do
-    let(:cma_case) {
+    let(:cma_case) do
       FactoryBot.create(
         :cma_case,
         :unpublished,
@@ -402,7 +402,7 @@ RSpec.feature "Editing a CMA case", type: :feature do
         details: {},
         state_history: { "1" => "published", "2" => "unpublished", "3" => "draft" },
       )
-    }
+    end
 
     scenario "showing the update type radio buttons" do
       within(".edit_document") do
