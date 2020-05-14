@@ -4,17 +4,23 @@ RSpec.describe DocumentsTagger do
   before :each do
     @content_id = SecureRandom.uuid
 
-    stub_const("DocumentTypeOne", Class.new do
-                                    def taxons
-                                      %w[mapped_taxon_id]
-                                    end
-                                  end)
+    stub_const(
+      "DocumentTypeOne",
+      Class.new do
+        def taxons
+          %w[mapped_taxon_id]
+        end
+      end,
+    )
 
-    stub_const("DocumentTypeTwo", Class.new do
-                                    def taxons
-                                      []
-                                    end
-                                  end)
+    stub_const(
+      "DocumentTypeTwo",
+      Class.new do
+        def taxons
+          []
+        end
+      end,
+    )
 
     allow(FinderSchema).to receive(:schema_names).and_return(%w[document_type_one document_type_two])
   end

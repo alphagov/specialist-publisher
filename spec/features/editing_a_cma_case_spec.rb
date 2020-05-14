@@ -73,19 +73,21 @@ RSpec.feature "Editing a CMA case", type: :feature do
 
   context "a published case" do
     let(:cma_case) do
-      FactoryBot.create(:cma_case,
-                        :published,
-                        title: "Example CMA Case",
-                        description: "Summary with a typox",
-                        state_history: { "1" => "draft", "2" => "published" },
-                        details: {
-                          "body" => [
-                            { "content_type" => "text/govspeak", "content" => "A body" },
-                          ],
-                          "metadata" => {
-                            "bulk_published" => true,
-                          },
-                        }).tap { |payload| payload["details"].delete("headers") }
+      FactoryBot.create(
+        :cma_case,
+        :published,
+        title: "Example CMA Case",
+        description: "Summary with a typox",
+        state_history: { "1" => "draft", "2" => "published" },
+        details: {
+          "body" => [
+            { "content_type" => "text/govspeak", "content" => "A body" },
+          ],
+          "metadata" => {
+            "bulk_published" => true,
+          },
+        },
+      ).tap { |payload| payload["details"].delete("headers") }
     end
 
     scenario "a major update adds to the change history" do
@@ -145,11 +147,14 @@ RSpec.feature "Editing a CMA case", type: :feature do
 
         click_button "Save as draft"
 
-        assert_publishing_api_put_content(content_id, lambda { |request|
-          payload = JSON.parse(request.body)
-          change_note = payload.fetch("change_note")
-          expect(change_note).to eq "New change note"
-        })
+        assert_publishing_api_put_content(
+          content_id,
+          lambda { |request|
+            payload = JSON.parse(request.body)
+            change_note = payload.fetch("change_note")
+            expect(change_note).to eq "New change note"
+          },
+        )
       end
     end
 

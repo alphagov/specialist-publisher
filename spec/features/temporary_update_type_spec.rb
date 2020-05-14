@@ -32,12 +32,15 @@ RSpec.feature "Temporary update types, relating to attachments", type: :feature 
     scenario "setting temporary_update_type to true and using a minor update_type" do
       add_attachment_to_document
 
-      assert_publishing_api_put_content(content_id, lambda { |request|
-        data = JSON.parse(request.body)
+      assert_publishing_api_put_content(
+        content_id,
+        lambda { |request|
+          data = JSON.parse(request.body)
 
-        expect(data.fetch("update_type")).to eq("minor")
-        expect(data.fetch("details").fetch("temporary_update_type")).to eq(true)
-      })
+          expect(data.fetch("update_type")).to eq("minor")
+          expect(data.fetch("details").fetch("temporary_update_type")).to eq(true)
+        },
+      )
     end
   end
 
@@ -55,12 +58,15 @@ RSpec.feature "Temporary update types, relating to attachments", type: :feature 
     scenario "setting temporary_update_type to false and using the existing update_type" do
       add_attachment_to_document
 
-      assert_publishing_api_put_content(content_id, lambda { |request|
-        data = JSON.parse(request.body)
+      assert_publishing_api_put_content(
+        content_id,
+        lambda { |request|
+          data = JSON.parse(request.body)
 
-        expect(data.fetch("update_type")).to eq("major")
-        expect(data.fetch("details").fetch("temporary_update_type")).to eq(false)
-      })
+          expect(data.fetch("update_type")).to eq("major")
+          expect(data.fetch("details").fetch("temporary_update_type")).to eq(false)
+        },
+      )
     end
   end
 
@@ -79,12 +85,15 @@ RSpec.feature "Temporary update types, relating to attachments", type: :feature 
     scenario "preserving the temporary_update_type" do
       add_attachment_to_document
 
-      assert_publishing_api_put_content(content_id, lambda { |request|
-        data = JSON.parse(request.body)
+      assert_publishing_api_put_content(
+        content_id,
+        lambda { |request|
+          data = JSON.parse(request.body)
 
-        expect(data.fetch("update_type")).to eq("minor")
-        expect(data.fetch("details").fetch("temporary_update_type")).to eq(true)
-      })
+          expect(data.fetch("update_type")).to eq("minor")
+          expect(data.fetch("details").fetch("temporary_update_type")).to eq(true)
+        },
+      )
     end
 
     scenario "giving the user a choice of update_type when editing the document" do
@@ -110,12 +119,15 @@ RSpec.feature "Temporary update types, relating to attachments", type: :feature 
     scenario "reverting to the default behaviour for saving a draft" do
       add_attachment_to_document
 
-      assert_publishing_api_put_content(content_id, lambda { |request|
-        data = JSON.parse(request.body)
+      assert_publishing_api_put_content(
+        content_id,
+        lambda { |request|
+          data = JSON.parse(request.body)
 
-        expect(data.fetch("update_type")).to eq("major")
-        expect(data.fetch("details").fetch("temporary_update_type")).to eq(false)
-      })
+          expect(data.fetch("update_type")).to eq("major")
+          expect(data.fetch("details").fetch("temporary_update_type")).to eq(false)
+        },
+      )
     end
   end
 end

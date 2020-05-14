@@ -25,10 +25,12 @@ private
   end
 
   def tag(content_id, taxon_ids, version)
-    Services.publishing_api.patch_links(content_id,
-                                        links: { taxons: taxon_ids },
-                                        previous_version: version,
-                                        bulk_publishing: true)
+    Services.publishing_api.patch_links(
+      content_id,
+      links: { taxons: taxon_ids },
+      previous_version: version,
+      bulk_publishing: true,
+    )
   end
 
   def fetch_existing_taxons(content_id)

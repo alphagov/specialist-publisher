@@ -2,7 +2,7 @@ desc "Find CMA Cases with opened dates that are before closed dates"
 task opened_before_closed_dates: :environment do
   cma_cases = Services.publishing_api.get_content_items(
     document_type: "cma_case",
-    per_page: 999999,
+    per_page: 999_999,
   ).results
 
   non_blank_opened_dates = cma_cases.reject { |cma| cma.details.metadata.opened_date.blank? }

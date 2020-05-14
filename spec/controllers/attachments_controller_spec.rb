@@ -2,27 +2,29 @@ require "spec_helper"
 
 RSpec.describe AttachmentsController, type: :controller do
   let(:cma_case) do
-    FactoryBot.create(:cma_case,
-                      details: {
-                        "attachments" => [
-                          {
-                            "content_id" => "77f2d40e-3853-451f-9ca3-a747e8402e34",
-                            "url" => "https://assets.digital.cabinet-office.gov.uk/media/513a0efbed915d425e000002/asylum-support-image.jpg",
-                            "content_type" => "application/jpeg",
-                            "title" => "asylum report image title",
-                            "created_at" => "2015-12-03T16:59:13+00:00",
-                            "updated_at" => "2015-12-03T16:59:13+00:00",
-                          },
-                          {
-                            "content_id" => "ec3f6901-4156-4720-b4e5-f04c0b152141",
-                            "url" => "https://assets.digital.cabinet-office.gov.uk/media/513a0efbed915d425e000002/asylum-support-pdf.pdf",
-                            "content_type" => "application/pdf",
-                            "title" => "asylum report pdf title",
-                            "created_at" => "2015-12-03T16:59:13+00:00",
-                            "updated_at" => "2015-12-03T16:59:13+00:00",
-                          },
-                        ],
-                      })
+    FactoryBot.create(
+      :cma_case,
+      details: {
+        "attachments" => [
+          {
+            "content_id" => "77f2d40e-3853-451f-9ca3-a747e8402e34",
+            "url" => "https://assets.digital.cabinet-office.gov.uk/media/513a0efbed915d425e000002/asylum-support-image.jpg",
+            "content_type" => "application/jpeg",
+            "title" => "asylum report image title",
+            "created_at" => "2015-12-03T16:59:13+00:00",
+            "updated_at" => "2015-12-03T16:59:13+00:00",
+          },
+          {
+            "content_id" => "ec3f6901-4156-4720-b4e5-f04c0b152141",
+            "url" => "https://assets.digital.cabinet-office.gov.uk/media/513a0efbed915d425e000002/asylum-support-pdf.pdf",
+            "content_type" => "application/pdf",
+            "title" => "asylum report pdf title",
+            "created_at" => "2015-12-03T16:59:13+00:00",
+            "updated_at" => "2015-12-03T16:59:13+00:00",
+          },
+        ],
+      },
+    )
   end
 
   let(:document_type_slug) { "cma-cases" }

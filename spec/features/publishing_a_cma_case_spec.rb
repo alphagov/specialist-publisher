@@ -96,9 +96,11 @@ RSpec.feature "Publishing a CMA case", type: :feature do
 
   context "when the document is already published" do
     let(:item) do
-      FactoryBot.create(:cma_case,
-                        :published,
-                        title: "Live Item")
+      FactoryBot.create(
+        :cma_case,
+        :published,
+        title: "Live Item",
+      )
     end
 
     scenario "publish buttons aren't shown" do
@@ -152,13 +154,16 @@ RSpec.feature "Publishing a CMA case", type: :feature do
 
       click_button "Save as draft"
 
-      assert_publishing_api_put_content(content_id, lambda { |request|
-        payload = JSON.parse(request.body)
+      assert_publishing_api_put_content(
+        content_id,
+        lambda { |request|
+          payload = JSON.parse(request.body)
 
-        expect(payload["title"]).to eq("Changed title")
-        expect(payload["update_type"]).to eq("major")
-        expect(payload["change_note"]).to eq("Updated change note")
-      })
+          expect(payload["title"]).to eq("Changed title")
+          expect(payload["update_type"]).to eq("major")
+          expect(payload["change_note"]).to eq("Updated change note")
+        },
+      )
     end
   end
 

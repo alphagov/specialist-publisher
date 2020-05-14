@@ -4,13 +4,15 @@ RSpec.feature "Searching and filtering", type: :feature do
   let(:test_date) { Date.new(2016, 1, 11) }
   let(:cma_cases) do
     ten_example_cases = 10.times.collect do |n|
-      FactoryBot.create(:cma_case,
-                        "title" => "Example CMA Case #{n}",
-                        "description" => "This is the summary of example CMA case #{n}",
-                        "base_path" => "/cma-cases/example-cma-case-#{n}",
-                        "publication_state" => "draft",
-                        "last_edited_at" => (test_date - (n + 1).days).iso8601,
-                        "public_updated_at" => (test_date - (10 - n).days).iso8601)
+      FactoryBot.create(
+        :cma_case,
+        "title" => "Example CMA Case #{n}",
+        "description" => "This is the summary of example CMA case #{n}",
+        "base_path" => "/cma-cases/example-cma-case-#{n}",
+        "publication_state" => "draft",
+        "last_edited_at" => (test_date - (n + 1).days).iso8601,
+        "public_updated_at" => (test_date - (10 - n).days).iso8601,
+      )
     end
     ten_example_cases[1]["publication_state"] = "published"
     ten_example_cases[1]["state_history"] = { "1" => "published" }

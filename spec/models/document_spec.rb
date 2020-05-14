@@ -274,12 +274,14 @@ RSpec.describe Document do
     context "document is redrafted with a minor edit" do
       let(:minor_change_document) do
         MyDocumentType.from_publishing_api(
-          FactoryBot.create(:document,
-                            payload_attributes.merge(
-                              publication_state: "published",
-                              update_type: "minor",
-                              content_id: document.content_id,
-                            )),
+          FactoryBot.create(
+            :document,
+            payload_attributes.merge(
+              publication_state: "published",
+              update_type: "minor",
+              content_id: document.content_id,
+            ),
+          ),
         )
       end
 
@@ -293,12 +295,14 @@ RSpec.describe Document do
     context "document has never been published" do
       let(:unpublished_document) do
         MyDocumentType.from_publishing_api(
-          FactoryBot.create(:document,
-                            payload_attributes.merge(
-                              first_published_at: nil,
-                              publication_state: "draft",
-                              content_id: document.content_id,
-                            )),
+          FactoryBot.create(
+            :document,
+            payload_attributes.merge(
+              first_published_at: nil,
+              publication_state: "draft",
+              content_id: document.content_id,
+            ),
+          ),
         )
       end
 
@@ -332,12 +336,14 @@ RSpec.describe Document do
     shared_examples_for "publishing changes to a document that has previously been published" do
       let(:published_document) do
         MyDocumentType.from_publishing_api(
-          FactoryBot.create(:document,
-                            :redrafted,
-                            payload_attributes.merge(
-                              publication_state: publication_state,
-                              content_id: document.content_id,
-                            )),
+          FactoryBot.create(
+            :document,
+            :redrafted,
+            payload_attributes.merge(
+              publication_state: publication_state,
+              content_id: document.content_id,
+            ),
+          ),
         )
       end
 
@@ -723,9 +729,11 @@ RSpec.describe Document do
     end
 
     subject do
-      MyDocumentType.new(title: "A document",
-                         summary: "An introduction",
-                         body: "Some text")
+      MyDocumentType.new(
+        title: "A document",
+        summary: "An introduction",
+        body: "Some text",
+      )
     end
 
     it "cannot be saved" do

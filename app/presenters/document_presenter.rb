@@ -42,7 +42,7 @@ private
       temporary_update_type: document.temporary_update_type,
     }.tap do |details_hash|
       details_hash[:attachments] = attachments if document.attachments.any?
-      details_hash[:headers] = headers if !headers.empty?
+      details_hash[:headers] = headers unless headers.empty?
     end
   end
 

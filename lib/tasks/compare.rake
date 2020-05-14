@@ -9,7 +9,7 @@ task :compare_all, [:document_type] => :environment do |_, args|
     .publishing_api
     .get_content_items(
       document_type: args.document_type,
-      per_page: 99999,
+      per_page: 99_999,
       fields: %w[content_id],
     ).to_hash.fetch("results")
 
