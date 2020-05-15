@@ -29,7 +29,7 @@ class DocumentListExportRequestController < ApplicationController
 
     file = directory.files.get(filename)
 
-    raise Fog::AWS::Storage::NotFound.new("Object #{filename} does not exist.") if file.nil?
+    raise Fog::AWS::Storage::NotFound, "Object #{filename} does not exist." if file.nil?
 
     file.body
   end

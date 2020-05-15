@@ -6,7 +6,7 @@ RSpec.describe Republisher do
       content_ids.map { |c| { content_id: c } },
       document_type: document_type,
       fields: [:content_id],
-      per_page: 999999,
+      per_page: 999_999,
     )
   end
 

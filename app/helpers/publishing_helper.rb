@@ -10,9 +10,7 @@ module PublishingHelper
 
   def set_errors_on(document)
     unless document.class.include?(ActiveModel::Validations)
-      raise ArgumentError.new(
-        "Can only set errors on an object which includes ActiveModel::Validations",
-      )
+      raise ArgumentError, "Can only set errors on an object which includes ActiveModel::Validations"
     end
   end
 

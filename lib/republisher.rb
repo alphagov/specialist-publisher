@@ -36,7 +36,7 @@ module_function
       Services.publishing_api.get_content_items(
         document_type: document_type,
         fields: [:content_id],
-        per_page: 999999,
+        per_page: 999_999,
       )["results"].map { |r| r["content_id"] }
     end
   end

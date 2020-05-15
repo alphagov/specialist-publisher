@@ -10,9 +10,11 @@ RSpec.feature "Unpublishing a CMA Case", type: :feature do
 
   context "a published document" do
     let(:item) do
-      FactoryBot.create(:cma_case,
-                        title: "Example CMA Case",
-                        publication_state: "published")
+      FactoryBot.create(
+        :cma_case,
+        title: "Example CMA Case",
+        publication_state: "published",
+      )
     end
 
     scenario "clicking the unpublish button redirects back to the show page" do
@@ -105,9 +107,11 @@ RSpec.feature "Unpublishing a CMA Case", type: :feature do
 
   context "publishing-api returns error" do
     let(:item) do
-      FactoryBot.create(:cma_case,
-                        title: "Example CMA Case",
-                        publication_state: "published")
+      FactoryBot.create(
+        :cma_case,
+        title: "Example CMA Case",
+        publication_state: "published",
+      )
     end
 
     scenario "clicking the unpublish button shows an error message" do
