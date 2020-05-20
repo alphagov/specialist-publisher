@@ -38,7 +38,7 @@ private
     message += " no way to safely republish the document that is supported by"
     message += " the platform."
 
-    puts message
+    logger.warn message
   end
 
   def publishing_api_put_content(document)

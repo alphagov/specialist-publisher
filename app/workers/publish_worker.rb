@@ -30,6 +30,6 @@ private
     message = "Skipped publishing document with content_id #{content_id}"
     message += " because it has a state of '#{state}'."
 
-    puts message
+    logger.warn message
   end
 end

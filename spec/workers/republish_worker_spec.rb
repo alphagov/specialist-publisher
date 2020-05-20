@@ -76,10 +76,6 @@ RSpec.describe RepublishWorker do
     end
 
     it "skips republishing of the document" do
-      expect {
-        subject.perform(content_id)
-      }.to output(/Skipped republishing/).to_stdout
-
       expect(WebMock).not_to have_requested(:put, /publishing-api/)
       expect(WebMock).not_to have_requested(:post, /publishing-api/)
       expect(WebMock).not_to have_requested(:post, /notifications/)
@@ -92,10 +88,6 @@ RSpec.describe RepublishWorker do
     end
 
     it "skips republishing of the document" do
-      expect {
-        subject.perform(content_id)
-      }.to output(/Skipped republishing/).to_stdout
-
       expect(WebMock).not_to have_requested(:put, /publishing-api/)
       expect(WebMock).not_to have_requested(:post, /publishing-api/)
       expect(WebMock).not_to have_requested(:post, /notifications/)

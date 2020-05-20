@@ -32,10 +32,6 @@ RSpec.describe PublishWorker do
 
     it "does not publish the document" do
       expect_any_instance_of(Document).not_to receive(:publish)
-
-      expect {
-        subject.perform(content_id)
-      }.to output(/Skipped publishing/).to_stdout
     end
   end
 end
