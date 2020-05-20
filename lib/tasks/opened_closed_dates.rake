@@ -9,10 +9,10 @@ task opened_before_closed_dates: :environment do
   non_blank_closed_dates = cma_cases.reject { |cma| cma.details.metadata.closed_date.blank? }
 
   non_blank_opened_dates.each do |cma|
-    if non_blank_closed_dates.include? cma
-      unless cma.details.metadata.opened_date <= cma.details.metadata.closed_date
-        puts "Opened date is before closed date. Opened: #{cma.details.metadata.opened_date}, Closed: #{cma.details.metadata.closed_date}, content_id: #{cma.content_id}"
-      end
+    next unless non_blank_closed_dates.include? cma
+
+    unless cma.details.metadata.opened_date <= cma.details.metadata.closed_date
+      puts "Opened date is before closed date. Opened: #{cma.details.metadata.opened_date}, Closed: #{cma.details.metadata.closed_date}, content_id: #{cma.content_id}"
     end
   end
 end
