@@ -29,6 +29,7 @@
       "filterable": true,
       "allowed_values": [
         {"label": "Anaesthesia and intensive care", "value": "anaesthesia-intensive-care"},
+        {"label": "Breastfeeding", "value": "breastfeeding"},
         {"label": "Cancer", "value": "cancer"},
         {"label": "Cardiovascular disease and lipidology", "value": "cardiovascular-disease-lipidology"},
         {"label": "Dentistry", "value": "dentistry"},
@@ -46,6 +47,7 @@
         {"label": "Ophthalmology", "value": "ophthalmology"},
         {"label": "Paediatrics and neonatology", "value": "paediatrics-neonatology"},
         {"label": "Pain management and palliation", "value": "pain-management-palliation"},
+        {"label": "Pregnancy", "value": "pregnancy"},
         {"label": "Psychiatry", "value": "psychiatry"},
         {"label": "Radiology and imaging", "value": "radiology-imaging"},
         {"label": "Respiratory disease and allergy", "value": "respiratory-disease-allergy"},
