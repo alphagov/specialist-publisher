@@ -26,13 +26,13 @@ class ActionsPresenter
       "You don't have permission to publish this document."
     elsif update_type == "minor"
       safe_join([
-        content_tag(:span, "You are about to publish a "),
-        content_tag(:strong, "minor edit."),
+        tag.span("You are about to publish a "),
+        tag.strong("minor edit."),
       ])
     elsif update_type == "major" && !document.first_draft?
       safe_join([
-        content_tag(:strong, "You are about to publish a major edit with a public change note. "),
-        content_tag(:span, "Publishing will email subscribers to #{klass_name}."),
+        tag.strong("You are about to publish a major edit with a public change note. "),
+        tag.span("Publishing will email subscribers to #{klass_name}."),
       ])
     else
       "Publishing will email subscribers to #{klass_name}."
