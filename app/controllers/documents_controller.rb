@@ -108,9 +108,9 @@ private
   end
 
   def document_error_messages
-    heading = content_tag(:h4, "Please fix the following errors")
-    errors = content_tag(:ul, class: "list-unstyled remove-bottom-margin") do
-      safe_join(@document.errors.full_messages.map { |message| content_tag(:li, message.html_safe) })
+    heading = tag.h4("Please fix the following errors")
+    errors = tag.ul(class: "list-unstyled remove-bottom-margin") do
+      safe_join(@document.errors.full_messages.map { |message| tag.li(message.html_safe) })
     end
 
     heading + errors
