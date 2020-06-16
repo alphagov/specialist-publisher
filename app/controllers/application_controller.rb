@@ -16,7 +16,7 @@ class ApplicationController < ActionController::Base
 private
 
   def user_not_authorized
-    flash[:danger] = "You aren't permitted to access #{current_format.title.pluralize}. If you feel you've reached this in error, contact your SPOC."
+    flash[:danger] = "You aren't permitted to access #{current_format.title.pluralize}. Please contact your main GDS contact if you need access."
     redirect_to root_path
   end
 

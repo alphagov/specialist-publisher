@@ -5,7 +5,7 @@ class ExportsController < ApplicationController
     if current_format
       authorize current_format
     else
-      flash[:danger] = "That format doesn't exist. If you feel you've reached this in error, contact your SPOC."
+      flash[:danger] = "That format doesn't exist. If you feel you've reached this in error, please contact your main GDS contact."
       redirect_to root_path
     end
   end
