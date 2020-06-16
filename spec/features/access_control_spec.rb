@@ -89,8 +89,8 @@ RSpec.feature "Access control", type: :feature do
       visit "/"
 
       expect(page.status_code).to eq(200)
-      expect(page).to have_content("Permission Denied")
-      expect(page).to have_content("You aren't permitted to access this application. If you feel you've reached this in error, contact your SPOC.")
+      expect(page).to have_content("Sorry, you don't have permission to access this application")
+      expect(page).to have_content("Please contact your main GDS contact if you need access.")
     end
   end
 end
