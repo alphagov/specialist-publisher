@@ -53,6 +53,18 @@ RSpec.describe EmailAlertPresenter do
       end
     end
 
+    it "removes hidden indexable content from tags" do
+      asylum_support_decision_payload = FactoryBot.create(:asylum_support_decision)
+      stub_publishing_api_has_item(asylum_support_decision_payload)
+      asylum_support_decision = AsylumSupportDecision.find(asylum_support_decision_payload["content_id"])
+      expect(asylum_support_decision.format_specific_metadata.keys)
+        .to include(:hidden_indexable_content)
+
+      presented_data = EmailAlertPresenter.new(asylum_support_decision).to_json
+      expect(presented_data[:tags])
+        .not_to include(:hidden_indexable_content)
+    end
+
     context "Medical Safety Alerts documents" do
       let(:mhra_email_address) { "email.support@mhra.gov.uk" }
 

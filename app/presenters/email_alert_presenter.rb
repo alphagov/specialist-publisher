@@ -31,10 +31,12 @@ private
 
   # The tags are sent to email-alert-api and matched against subscriberlists.
   def tags
-    {
-      # This format should be the same as https://github.com/alphagov/finder-frontend/blob/2c1d5f25e7e4212795b485b6e4c290c6764c813c/app/controllers/email_alert_subscriptions_controller.rb#L41
-      format: document.format,
-    }.deep_merge(document.format_specific_metadata.reject { |_k, v| v.blank? })
+    metadata_tags = document.format_specific_metadata.reject do |k, v|
+      # remove the lengthy indexable text content present in many document types
+      k == :hidden_indexable_content || v.blank?
+    end
+
+    { format: document.format }.merge(metadata_tags)
   end
 
   def links
