@@ -160,6 +160,10 @@
           "label": "Bayati, C",
           "value": "bayati-c"
         },
+		{
+		  "label": "Beg, S",
+		  "value": "beg-s"
+		},
         {
           "label": "Briden, R",
           "value": "briden-r"
@@ -172,6 +176,10 @@
           "label": "Cornes, J",
           "value": "cornes-j"
         },
+		{
+		  "label": "Dodgson, C",
+		  "value": "dodgson-c"
+		},
         {
           "label": "Gandhi, P",
           "value": "gandhi-p"
@@ -244,6 +252,10 @@
           "label": "Tootell, A",
           "value": "tootell-a"
         },
+		{
+		  "label": "Wilkin, R",
+		  "value": "wilkin-r"
+		},
         {
           "label": "Wyman, J",
           "value": "wyman-j"
