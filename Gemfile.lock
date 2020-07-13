@@ -397,8 +397,7 @@ GEM
       sprockets (> 3.0)
       sprockets-rails
       tilt
-    select2-rails (3.5.10)
-      thor (~> 0.14)
+    select2-rails (4.0.13)
     selenium-webdriver (3.142.6)
       childprocess (>= 0.5, < 4.0)
       rubyzip (>= 1.2.2)
@@ -426,7 +425,7 @@ GEM
       activesupport (>= 4.0)
       sprockets (>= 3.0.0)
     statsd-ruby (1.4.0)
-    thor (0.20.3)
+    thor (1.0.1)
     thread_safe (0.3.6)
     tilt (2.0.10)
     timecop (0.9.1)
@@ -495,7 +494,7 @@ DEPENDENCIES
   rspec-rails
   rubocop-govuk
   sass-rails (~> 6)
-  select2-rails (~> 3)
+  select2-rails (~> 4)
   simplecov
   timecop
   uglifier (~> 4)

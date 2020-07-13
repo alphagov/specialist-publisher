@@ -14,7 +14,7 @@ gem "mongo", "~> 2.5.0"
 gem "mongoid", "~> 6.3.0"
 gem "pundit"
 gem "sass-rails", "~> 6"
-gem "select2-rails", "~> 3"
+gem "select2-rails", "~> 4"
 gem "uglifier", "~> 4"
 
 # GDS managed dependencies
