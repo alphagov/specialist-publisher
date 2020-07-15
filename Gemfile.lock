@@ -462,40 +462,40 @@ PLATFORMS
 DEPENDENCIES
   better_errors
   binding_of_caller
-  bootstrap-kaminari-views (~> 0.0.5)
+  bootstrap-kaminari-views
   capybara-select-2
   database_cleaner
   factory_bot
-  fog-aws (~> 3.6)
-  gds-api-adapters (~> 67)
-  gds-sso (~> 15)
-  govspeak (~> 6)
+  fog-aws
+  gds-api-adapters
+  gds-sso
+  govspeak
   govuk-content-schema-test-helpers
-  govuk_admin_template (~> 6)
-  govuk_app_config (~> 2)
-  govuk_frontend_toolkit (~> 9)
-  govuk_sidekiq (~> 4)
+  govuk_admin_template
+  govuk_app_config
+  govuk_frontend_toolkit
+  govuk_sidekiq
   govuk_test
   hashdiff
-  jquery-rails (~> 4)
+  jquery-rails
   kaminari
   kaminari-mongoid
   mail-notify
-  mongo (~> 2.13.0)
-  mongoid (~> 7.1.2)
-  plek (~> 4)
+  mongo
+  mongoid
+  plek
   pry-rails
   puma
   pundit
-  rails (~> 5)
+  rails
   rails-controller-testing
   rspec-rails
   rubocop-govuk
-  sass-rails (~> 6)
-  select2-rails (~> 3)
+  sass-rails
+  select2-rails
   simplecov
   timecop
-  uglifier (~> 4)
+  uglifier
   webmock
 
 BUNDLED WITH
