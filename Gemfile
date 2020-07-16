@@ -1,6 +1,6 @@
 source "https://rubygems.org"
 
-gem "rails"
+gem "rails", "6.0.3.2"
 
 gem "bootstrap-kaminari-views"
 gem "fog-aws"
@@ -25,6 +25,10 @@ gem "govuk_admin_template"
 gem "govuk_app_config"
 gem "govuk_frontend_toolkit"
 gem "plek"
+
+group :development do
+  gem "listen"
+end
 
 group :development, :test do
   gem "better_errors"
