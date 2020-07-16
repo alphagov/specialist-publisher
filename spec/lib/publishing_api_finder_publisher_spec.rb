@@ -150,13 +150,13 @@ RSpec.describe PublishingApiFinderPublisher do
 
       context "and the app is configured to publish pre-production finders" do
         before do
-          SpecialistPublisher.publish_pre_production_finders = true
+          Rails.application.config.publish_pre_production_finders = true
 
           stub_publishing_api_publish(content_id, {})
         end
 
         after do
-          SpecialistPublisher.publish_pre_production_finders = false
+          Rails.application.config.publish_pre_production_finders = false
         end
 
         it "publishes finder" do

@@ -28,10 +28,4 @@ module SpecialistPublisher
     # config.time_zone = 'Central Time (US & Canada)'
     config.time_zone = "London"
   end
-
-  mattr_accessor :publish_pre_production_finders
-
-  def self.should_publish_pre_production_finders?
-    publish_pre_production_finders.present?
-  end
 end
