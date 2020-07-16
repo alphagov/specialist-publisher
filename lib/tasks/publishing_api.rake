@@ -1,3 +1,5 @@
+require "services"
+
 namespace :publishing_api do
   desc "Publish all Finders to the Publishing API"
   task publish_finders: :environment do

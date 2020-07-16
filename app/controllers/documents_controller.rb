@@ -1,5 +1,3 @@
-require "gds_api/publishing_api"
-
 class DocumentsController < ApplicationController
   include ActionView::Context
   include ActionView::Helpers::OutputSafetyHelper

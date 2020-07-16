@@ -1,4 +1,5 @@
 require "hashdiff"
+require "services"
 
 module DataComparison
 module_function

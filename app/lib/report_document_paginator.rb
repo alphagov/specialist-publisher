@@ -1,3 +1,5 @@
+require "services"
+
 class ReportDocumentPaginator
   def initialize(document_class, document_fields, param_options = {})
     @document_class = document_class

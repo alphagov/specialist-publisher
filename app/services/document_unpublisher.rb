@@ -1,3 +1,5 @@
+require "services"
+
 # Unpublish a document. Also removes attachments.
 class DocumentUnpublisher
   def self.unpublish(content_id, _base_path, alternative_path = nil)

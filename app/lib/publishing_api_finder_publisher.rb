@@ -1,3 +1,5 @@
+require "services"
+
 class PublishingApiFinderPublisher
   def initialize(finders, logger: Logger.new(STDOUT))
     @finders = finders

@@ -1,3 +1,5 @@
+require "services"
+
 desc "Find CMA Cases with opened dates that are before closed dates"
 task opened_before_closed_dates: :environment do
   cma_cases = Services.publishing_api.get_content_items(

@@ -1,4 +1,4 @@
-require "gds_api/asset_manager"
+require "services"
 
 class Attachment < Document
   attr_accessor :title, :file, :content_type, :url, :content_id, :created_at, :updated_at, :being_updated

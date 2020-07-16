@@ -1,3 +1,5 @@
+require "services"
+
 class Tagger
   def self.add_tags(content_id, do_tag = true)
     new.add_tags(content_id, do_tag, &Proc.new)

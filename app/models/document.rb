@@ -1,3 +1,5 @@
+require "services"
+
 class Document
   include ActiveModel::Model
   include ActiveModel::Validations

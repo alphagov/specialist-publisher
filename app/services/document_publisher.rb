@@ -1,3 +1,5 @@
+require "services"
+
 # Publish a draft document. Also sends out emails.
 class DocumentPublisher
   def self.publish(document)
