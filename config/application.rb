@@ -28,8 +28,6 @@ module SpecialistPublisher
     # config.time_zone = 'Central Time (US & Canada)'
     config.time_zone = "London"
 
-    config.eager_load_paths << Rails.root.join("lib")
-
     config.after_initialize do
       config.action_mailer.notify_settings = { api_key: Rails.application.secrets.notify_api_key }
     end
