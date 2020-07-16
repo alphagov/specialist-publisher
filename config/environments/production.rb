@@ -58,9 +58,13 @@ Rails.application.configure do
   # Ignore bad email addresses and do not raise email delivery errors.
   # Set this to true and configure the email server for immediate delivery to raise delivery errors.
   # config.action_mailer.raise_delivery_errors = false
+
+  # Configure emails to be sent via GOV.UK Notify.
+  # Raises a KeyError when the environment variable isn't set so that
+  # misconfiguration is apparent on deploy and not some time after.
   config.action_mailer.delivery_method = :notify
   config.action_mailer.notify_settings = {
-    api_key: Rails.application.secrets.notify_api_key,
+    api_key: ENV.fetch("GOVUK_NOTIFY_API_KEY"),
   }
 
   # Enable locale fallbacks for I18n (makes lookups for any locale fall back to
