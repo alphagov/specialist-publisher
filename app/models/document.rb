@@ -192,8 +192,8 @@ class Document
   end
 
   def format_specific_metadata
-    format_specific_fields.each_with_object({}) do |f, fields|
-      fields[f] = send(f)
+    format_specific_fields.index_with do |field|
+      send(field)
     end
   end
 
