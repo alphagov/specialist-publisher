@@ -27,10 +27,6 @@ module SpecialistPublisher
     # Run "rake -D time" for a list of tasks for finding time zone names. Default is UTC.
     # config.time_zone = 'Central Time (US & Canada)'
     config.time_zone = "London"
-
-    config.after_initialize do
-      config.action_mailer.notify_settings = { api_key: Rails.application.secrets.notify_api_key }
-    end
   end
 
   mattr_accessor :publish_pre_production_finders
