@@ -14,8 +14,10 @@ gem "mongo"
 gem "mongoid"
 gem "pundit"
 gem "sass-rails"
-gem "select2-rails"
 gem "uglifier"
+
+# v4 changes the generated HTML and breaks the e2e tests
+gem "select2-rails", "< 4"
 
 # GDS managed dependencies
 gem "gds-api-adapters"
