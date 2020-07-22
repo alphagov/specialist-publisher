@@ -28,7 +28,7 @@ require "database_cleaner"
 DatabaseCleaner[:mongoid].strategy = :truncation
 DatabaseCleaner.clean
 
-require "gds_api/test_helpers/publishing_api_v2"
+require "gds_api/test_helpers/publishing_api"
 require "gds_api/test_helpers/email_alert_api"
 
 require "pundit/rspec"

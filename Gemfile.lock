@@ -110,7 +110,7 @@ GEM
       fog-core
       nokogiri (>= 1.5.11, < 2.0.0)
     formatador (0.2.5)
-    gds-api-adapters (63.6.0)
+    gds-api-adapters (67.0.0)
       addressable
       link_header
       null_logger
@@ -470,7 +470,7 @@ DEPENDENCIES
   database_cleaner
   factory_bot
   fog-aws (~> 3.6)
-  gds-api-adapters (~> 63)
+  gds-api-adapters (~> 67)
   gds-sso (~> 15)
   govspeak (~> 6)
   govuk-content-schema-test-helpers
