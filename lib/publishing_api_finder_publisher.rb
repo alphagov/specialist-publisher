@@ -1,5 +1,3 @@
-require "gds_api/publishing_api"
-
 class PublishingApiFinderPublisher
   def initialize(finders, logger: Logger.new(STDOUT))
     @finders = finders
