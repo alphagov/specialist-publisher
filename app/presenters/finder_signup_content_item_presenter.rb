@@ -96,6 +96,6 @@ private
   end
 
   def public_updated_at
-    timestamp.rfc3339
+    timestamp.in_time_zone.rfc3339
   end
 end
