@@ -91,7 +91,7 @@ private
   end
 
   def public_updated_at
-    timestamp
+    timestamp.rfc3339
   end
 
   def phase

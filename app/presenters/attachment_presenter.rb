@@ -20,13 +20,13 @@ private
 
   def updated_at
     if @attachment.updated_at.nil? || @attachment.being_updated == true
-      @attachment.updated_at = Time.zone.now.to_datetime.rfc3339
+      @attachment.updated_at = Time.zone.now.rfc3339
     else
       @attachment.updated_at
     end
   end
 
   def created_at
-    @attachment.created_at || Time.zone.now.to_datetime.rfc3339
+    @attachment.created_at || Time.zone.now.rfc3339
   end
 end
