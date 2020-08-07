@@ -16,7 +16,7 @@ module_function
     timestamp = if timestamp == "now"
                   Time.zone.now
                 else
-                  DateTime.parse(timestamp)
+                  Time.zone.parse(timestamp)
                 end
 
     document = Document.find(content_id)

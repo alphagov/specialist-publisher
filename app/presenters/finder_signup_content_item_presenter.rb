@@ -96,6 +96,6 @@ private
   end
 
   def public_updated_at
-    timestamp.to_datetime.rfc3339
+    timestamp.rfc3339
   end
 end
