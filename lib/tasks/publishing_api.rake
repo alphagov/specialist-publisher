@@ -45,4 +45,20 @@ namespace :publishing_api do
       Services.publishing_api.patch_links(content_id, links: payload, bulk_publishing: true)
     end
   end
+
+  desc "Patch links for all instances of specified document type in Publishing API."
+  task :patch_document_type_links, [:document_type] => :environment do |_, args|
+    klass = args.document_type.camelize.constantize
+    counter = 0
+
+    AllDocumentsFinder.find_each(klass) do |document|
+      document_links_presenter = DocumentLinksPresenter.new(document).to_json
+      payload = document_links_presenter.merge(bulk_publishing: true)
+
+      Services.publishing_api.patch_links(document.content_id, payload)
+      puts "Links patched for \"#{document.title}\"."
+      counter += 1
+    end
+    puts "Links patched for #{counter} #{args.document_type} documents."
+  end
 end
