@@ -49,4 +49,10 @@ namespace :publishing_api do
     end
     puts "Links patched for #{counter} #{args.document_type} documents."
   end
+
+  desc "Publish a Finder to the Publishing API and patch links for all its documents."
+  task :publish_finder_and_patch_documents_links, [:schema] => :environment do |_, args|
+    Rake::Task["publishing_api:publish_finder"].invoke(args.schema)
+    Rake::Task["publishing_api:patch_document_type_links"].invoke(args.schema.singularize)
+  end
 end
