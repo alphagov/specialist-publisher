@@ -64,8 +64,8 @@ private
 
   def metadata
     fields = document.format_specific_fields
-    metadata = fields.each_with_object({}) do |field, hash|
-      hash[field] = document.public_send(field)
+    metadata = fields.index_with do |field|
+      document.public_send(field)
     end
 
     metadata[:bulk_published] = document.bulk_published

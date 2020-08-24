@@ -1,3 +1,5 @@
+require "services"
+
 module Republisher
 module_function
 

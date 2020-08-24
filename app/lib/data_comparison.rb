@@ -1,4 +1,5 @@
 require "hashdiff"
+require "services"
 
 module DataComparison
 module_function
@@ -6,15 +7,15 @@ module_function
   def compare(content_id)
     Services.publishing_api.client.options[:timeout] = 30
 
-    puts "<<<<<"
-    puts "Comparing #{content_id}"
+    debug "<<<<<"
+    debug "Comparing #{content_id}"
 
     before = nil
 
     begin
       before = Services.publishing_api.get_content(content_id).to_hash
     rescue GdsApi::HTTPServerError
-      puts "ERROR: Could not find content_id '#{content_id}'"
+      debug "ERROR: Could not find content_id '#{content_id}'"
       return
     end
 
@@ -26,29 +27,33 @@ module_function
     end
 
     if document.save
-      puts "Saving document"
+      debug "Saving document"
     else
-      puts "ERROR: Failed to save document"
-      puts document.errors.messages.inspect
+      debug "ERROR: Failed to save document"
+      debug document.errors.messages.inspect
       return
     end
 
     if document.published?
-      puts "Publishing document"
+      debug "Publishing document"
       document.publish
     elsif document.unpublished?
-      puts "Publishing document"
+      debug "Publishing document"
       document.publish
-      puts "Unpublishing document"
+      debug "Unpublishing document"
       document.unpublish
     end
 
     after = Services.publishing_api.get_content(content_id).to_hash
 
     diff = Hashdiff.diff(before, after)
-    puts "Differences:"
-    puts diff
+    debug "Differences:"
+    debug diff
 
-    puts "<<<<<"
+    debug "<<<<<"
+  end
+
+  def debug(message)
+    Rails.logger.debug(message)
   end
 end

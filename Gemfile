@@ -1,30 +1,36 @@
 source "https://rubygems.org"
 
-gem "rails", "~> 5"
+gem "rails", "6.0.3.2"
 
-gem "bootstrap-kaminari-views", "~> 0.0.5"
-gem "fog-aws", "~> 3.6"
-gem "govuk_sidekiq", "~> 4"
+gem "bootstrap-kaminari-views"
+gem "fog-aws"
+gem "govuk_sidekiq"
 gem "hashdiff"
-gem "jquery-rails", "~> 4"
+gem "jquery-rails"
 gem "kaminari"
 gem "kaminari-mongoid"
 gem "mail-notify"
-gem "mongo", "~> 2.13.0"
-gem "mongoid", "~> 7.1.2"
+gem "mongo"
+gem "mongoid"
 gem "pundit"
-gem "sass-rails", "~> 6"
-gem "select2-rails", "~> 3"
-gem "uglifier", "~> 4"
+gem "sass-rails"
+gem "uglifier"
+
+# v4 changes the generated HTML and breaks the e2e tests
+gem "select2-rails", "< 4"
 
 # GDS managed dependencies
-gem "gds-api-adapters", "~> 67"
-gem "gds-sso", "~> 15"
-gem "govspeak", "~> 6"
-gem "govuk_admin_template", "~> 6"
-gem "govuk_app_config", "~> 2"
-gem "govuk_frontend_toolkit", "~> 9"
-gem "plek", "~> 4"
+gem "gds-api-adapters"
+gem "gds-sso"
+gem "govspeak"
+gem "govuk_admin_template"
+gem "govuk_app_config"
+gem "govuk_frontend_toolkit"
+gem "plek"
+
+group :development do
+  gem "listen"
+end
 
 group :development, :test do
   gem "better_errors"

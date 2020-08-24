@@ -1,3 +1,5 @@
+require "services"
+
 class PublishingApiFinderPublisher
   def initialize(finders, logger: Logger.new(STDOUT))
     @finders = finders
@@ -24,7 +26,7 @@ private
   end
 
   def should_publish_in_this_environment?(finder)
-    !pre_production?(finder) || SpecialistPublisher.should_publish_pre_production_finders?
+    !pre_production?(finder) || Rails.application.config.publish_pre_production_finders
   end
 
   def pre_production?(finder)

@@ -1,3 +1,5 @@
+require "services"
+
 # Save a document as draft to the publishing-api
 class DocumentSaver
   def self.save(document)

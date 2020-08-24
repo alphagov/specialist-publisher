@@ -1,3 +1,5 @@
+require "services"
+
 class Organisation
   def self.all
     @organisations = fetch_all_organisations(organisation_params)

@@ -1,3 +1,5 @@
+require "services"
+
 # Request all documents for a certain document type, paginated
 class AllDocumentsFinder
   def self.default_find_params(document_type)

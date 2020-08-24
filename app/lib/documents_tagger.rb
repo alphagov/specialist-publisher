@@ -1,3 +1,5 @@
+require "services"
+
 class DocumentsTagger
   def self.tag_all(do_tag = true)
     new(do_tag).tag_all

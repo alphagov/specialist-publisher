@@ -24,6 +24,8 @@ RSpec.describe EmailAlertApiWorker do
   it "doesn't retry 409s" do
     stub_any_email_alert_api_call.and_raise(GdsApi::HTTPConflict.new(409))
 
+    expect(Sidekiq.logger).to receive(:info).with(/email-alert-api returned 409 conflict/)
+
     expect {
       described_class.new.perform(payload: {})
     }.not_to raise_error
