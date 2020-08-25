@@ -14,6 +14,7 @@ RSpec.describe DocumentLinksPresenter do
     DrugSafetyUpdate => "240f72bd-9a4d-4f39-94d9-77235cadde8e",
     MedicalSafetyAlert => "240f72bd-9a4d-4f39-94d9-77235cadde8e",
     RaibReport => "013872d8-8bbb-4e80-9b79-45c7c5cf9177",
+    ResearchForDevelopmentOutput => "db994552-7644-404d-a770-a2fe659c661f",
     CountrysideStewardshipGrant => "e8fae147-6232-4163-a3f1-1c15b755a8a4",
     BusinessFinanceSupportScheme => "2bde479a-97f2-42b5-986a-287a623c2a1c",
     AsylumSupportDecision => "6f757605-ab8f-4b62-84e4-99f79cf085c2",

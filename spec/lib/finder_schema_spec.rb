@@ -8,15 +8,15 @@ RSpec.describe FinderSchema do
     end
   end
 
-  let(:schema) { FinderSchema.new("dfid_research_outputs") }
+  let(:schema) { FinderSchema.new("research_for_development_outputs") }
 
   describe "#humanized_facet_name" do
     it "returns the name defined in the schema for the supplied facet key" do
-      expect(schema.humanized_facet_name("dfid_document_type")).to eq("Document Type")
+      expect(schema.humanized_facet_name("research_document_type")).to eq("Document Type")
     end
 
     it "returns the humanized version of the supplied facet key is not defined in the schema" do
-      expect(schema.humanized_facet_name("dfid_review_status")).to eq("Dfid review status")
+      expect(schema.humanized_facet_name("review_status")).to eq("Review status")
     end
   end
 
@@ -40,7 +40,7 @@ RSpec.describe FinderSchema do
         it "returns the value itself" do
           authors_value = ["Mr. Potato Head", "Mrs. Potato Head"]
           expect(
-            schema.humanized_facet_value("dfid_authors", authors_value),
+            schema.humanized_facet_value("authors", authors_value),
           ).to eql(authors_value)
         end
       end
