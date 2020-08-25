@@ -28,6 +28,9 @@ module SpecialistPublisher
     # config.time_zone = 'Central Time (US & Canada)'
     config.time_zone = "London"
 
+    # Compress JS using a preprocessor.
+    config.assets.js_compressor = :uglifier
+
     # Using a sass css compressor causes a scss file to be processed twice
     # (once to build, once to compress) which breaks the usage of "unquote"
     # to use CSS that has same function names as SCSS such as max.
