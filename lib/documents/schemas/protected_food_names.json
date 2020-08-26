@@ -1,0 +1,612 @@
+{
+  "content_id": "9018138a-0ca5-4a35-8b7c-3a7f39dc56f8",
+  "base_path": "/protected-food-names",
+  "format_name": "Protected food name",
+  "name": "Registers of proteced food names",
+  "description": "Find protected food names in the official registeres published by Defra",
+  "filter": {
+    "format": "protected_food_name"
+  },
+  "signup_content_id": "cff7449e-4181-480f-93e4-91fecfb4c774",
+  "signup_copy": "You'll get an email each time a notice is updated or a new notice is published.",
+  "organisations": [
+    "de4e9dc6-cca4-43af-a594-682023b84d6c"
+  ],
+  "subscription_list_title_prefix": "Protected food names",
+  "summary": "<p>Find protected food names in the official registeres published by Defra</p>",
+  "document_noun": "notice",
+  "facets": [
+    {
+      "key": "register_type",
+      "name": "Register type",
+      "type": "text",
+      "preposition": "of register type",
+      "display_as_result_metadata": true,
+      "filterable": true,
+      "allowed_values": [
+        {
+          "label": "Food PDO and PDI",
+          "value": "food-pdo-and-pdi"
+        },
+        {
+          "label": "Food TSG",
+          "value": "food-tsg"
+        },
+        {
+          "label": "Wines",
+          "value": "wines"
+        },
+        {
+          "label": "Aromatised wines",
+          "value": "aromatised-wines"
+        },
+        {
+          "label": "Spirits",
+          "value": "spirits"
+        },
+        {
+          "label": "Traditional Terms",
+          "value": "traditional-terms"
+        }
+      ]
+    },
+    {
+      "key": "product_type",
+      "name": "Product type",
+      "type": "text",
+      "preposition": "of type",
+      "display_as_result_metadata": true,
+      "filterable": true,
+      "allowed_values": [
+        {
+          "label": "Food",
+          "value": "food"
+        },
+        {
+          "label": "Wines",
+          "value": "wines"
+        },
+        {
+          "label": "Aromatised wines",
+          "value": "aromatised-wines"
+        },
+        {
+          "label": "Spirits",
+          "value": "spirits"
+        }
+      ]
+    },
+    {
+      "key": "product_category",
+      "name": "Product category",
+      "type": "text",
+      "preposition": "of category",
+      "display_as_result_metadata": true,
+      "filterable": true,
+      "allowed_values": [
+        {
+          "label": "Class 1.1 Fresh meat (and offal)",
+          "value": "class-1-1-fresh-meat-and-offal"
+        },
+        {
+          "label": "Class 1.2. Meat products (cooked, salted, smoked, etc.)",
+          "value": "class-1-2-meat-products-cooked-salted-smoked-etc"
+        },
+        {
+          "label": "Class 1.3. Cheeses",
+          "value": "class-1-3-cheeses"
+        },
+        {
+          "label": "Class 1.4. Other products of animal origin (eggs, honey, various dairy products except butter, etc.)",
+          "value": "class-1-4-other-products-of-animal-origin-eggs-honey-various-dairy-products-except-butter-etc"
+        },
+        {
+          "label": "Class 1.5. Oils and fats (butter, margarine, oil, etc.)",
+          "value": "class-1-5-oils-and-fats-butter-margarine-oil-etc"
+        },
+        {
+          "label": "Class 1.6. Fruit, vegetables and cereals fresh or processed",
+          "value": "class-1-6-fruit-vegetables-and-cereals-fresh-or-processed"
+        },
+        {
+          "label": "Class 1.7. Fresh fish, molluscs, and crustaceans and products derived therefrom",
+          "value": "class-1-7-fresh-fish-molluscs-and-crustaceans-and-products-derived-therefrom"
+        },
+        {
+          "label": "Class 1.8. Other products of Annex I of the Treaty (spices etc.)",
+          "value": "class-1-8-other-products-of-annex-i-of-the-treaty-spices-etc"
+        },
+        {
+          "label": "Class 2.1. Beers",
+          "value": "class-2-1-beers"
+        },
+        {
+          "label": "Class 2.10. Essential oils",
+          "value": "class-2-10-essential-oils"
+        },
+        {
+          "label": "Class 2.12. Cochineal (raw product of animal origin)",
+          "value": "class-2-12-cochineal-raw-product-of-animal-origin"
+        },
+        {
+          "label": "Class 2.13. Flowers and ornamental plants",
+          "value": "class-2-13-flowers-and-ornamental-plants"
+        },
+        {
+          "label": "Class 2.15. Wool",
+          "value": "class-2-15-wool"
+        },
+        {
+          "label": "Class 2.2. chocolate and derived products",
+          "value": "class-2-2-chocolate-and-derived-products"
+        },
+        {
+          "label": "Class 2.21. prepared meals",
+          "value": "class-2-21-prepared-meals"
+        },
+        {
+          "label": "Class 2.22. Beers",
+          "value": "class-2-22-beers"
+        },
+        {
+          "label": "Class 2.24. Bread, pastry, cakes, confectionery, biscuits and other baker's wares",
+          "value": "class-2-24-bread-pastry-cakes-confectionery-biscuits-and-other-bakers-wares"
+        },
+        {
+          "label": "Class 2.25. Beverages made from plant extracts",
+          "value": "class-2-25-beverages-made-from-plant-extracts"
+        },
+        {
+          "label": "Class 2.26. Pasta",
+          "value": "class-2-26-pasta"
+        },
+        {
+          "label": "Class 2.27. Salt",
+          "value": "class-2-27-salt"
+        },
+        {
+          "label": "Class 2.3. Bread, pastry, cakes, confectionery, biscuits and other baker's wares",
+          "value": "class-2-3-bread-pastry-cakes-confectionery-biscuits-and-other-bakers-wares"
+        },
+        {
+          "label": "Class 2.4. Beverages made from plant extracts",
+          "value": "class-2-4-beverages-made-from-plant-extracts"
+        },
+        {
+          "label": "Class 2.5. Pasta",
+          "value": "class-2-5-pasta"
+        },
+        {
+          "label": "Class 2.6. Salt",
+          "value": "class-2-6-salt"
+        },
+        {
+          "label": "Class 2.7. Natural gums and resins",
+          "value": "class-2-7-natural-gums-and-resins"
+        },
+        {
+          "label": "Class 2.8. Mustard paste",
+          "value": "class-2-8-mustard-paste"
+        },
+        {
+          "label": "Class 2.9. Hay",
+          "value": "class-2-9-hay"
+        },
+        {
+          "label": "Wine",
+          "value": "wine"
+        },
+        {
+          "label": "1. Aromatised wine",
+          "value": "1-aromatised-wine"
+        },
+        {
+          "label": "1. Rum",
+          "value": "1-rum"
+        },
+        {
+          "label": "2. Aromatised wine-based drink",
+          "value": "2-aromatised-wine-based-drink"
+        },
+        {
+          "label": "2. Whisky or Whiskey",
+          "value": "2-whisky-or-whiskey"
+        },
+        {
+          "label": "3. Grain spirit",
+          "value": "3-grain-spirit"
+        },
+        {
+          "label": "4. Wine spirit",
+          "value": "4-wine-spirit"
+        },
+        {
+          "label": "5. Brandy or Weinbrand",
+          "value": "5-brandy-or-weinbrand"
+        },
+        {
+          "label": "6. Grape marc spirit or grape marc",
+          "value": "6-grape-marc-spirit-or-grape-marc"
+        },
+        {
+          "label": "9. Fruit spirit",
+          "value": "9-fruit-spirit"
+        },
+        {
+          "label": "10. Cider spirit and perry spirit",
+          "value": "10-cider-spirit-and-perry-spirit"
+        },
+        {
+          "label": "15. Vodka",
+          "value": "15-vodka"
+        },
+        {
+          "label": "15. Vodka, 31. Flavoured vodka",
+          "value": "15-vodka-31-flavoured-vodka"
+        },
+        {
+          "label": "17. Geist (with the name of the fruit or the raw material used)",
+          "value": "17-geist-with-the-name-of-the-fruit-or-the-raw-material-used"
+        },
+        {
+          "label": "18. Gentian",
+          "value": "18-gentian"
+        },
+        {
+          "label": "19. Juniper-flavoured spirit drinks",
+          "value": "19-juniper-flavoured-spirit-drinks"
+        },
+        {
+          "label": "23. Caraway-flavoured spirit drinks",
+          "value": "23-caraway-flavoured-spirit-drinks"
+        },
+        {
+          "label": "24. Akvavit or aquavit",
+          "value": "24-akvavit-or-aquavit"
+        },
+        {
+          "label": "25. Aniseed-flavoured spirit drinks",
+          "value": "25-aniseed-flavoured-spirit-drinks"
+        },
+        {
+          "label": "29. Distilled anis",
+          "value": "29-distilled-anis"
+        },
+        {
+          "label": "30. Bitter-tasting spirit drinks or bitter",
+          "value": "30-bitter-tasting-spirit-drinks-or-bitter"
+        },
+        {
+          "label": "31. Flavoured vodka",
+          "value": "31-flavoured-vodka"
+        },
+        {
+          "label": "32. Liqueur",
+          "value": "32-liqueur"
+        },
+        {
+          "label": "34. Crème de cassis",
+          "value": "34-creme-de-cassis"
+        },
+        {
+          "label": "37a. Sloe-aromatised spirit drink or Pacharán",
+          "value": "37a-sloe-aromatised-spirit-drink-or-pacharán"
+        },
+        {
+          "label": "39. Maraschino, Marrasquino or Maraskino",
+          "value": "39-maraschino-marrasquino-or-maraskino"
+        },
+        {
+          "label": "40. Nocino",
+          "value": "40-nocino"
+        },
+        {
+          "label": "47. Other spirit drinks",
+          "value": "47-other-spirit-drinks"
+        }
+      ]
+    },
+    {
+      "key": "file_number",
+      "name": "File number",
+      "type": "text",
+      "preposition": "of file number",
+      "display_as_result_metadata": false,
+      "filterable": false
+    },
+    {
+      "key": "protection_type",
+      "name": "Protection type",
+      "type": "text",
+      "preposition": "of protection type",
+      "display_as_result_metadata": true,
+      "filterable": true,
+      "allowed_values": [
+        {
+          "label": "Geographical indication (GI)",
+          "value": "geographical-indication"
+        },
+        {
+          "label": "Protected Geographical Indication (PGI)",
+          "value": "protected-geographical-indication"
+        },
+        {
+          "label": "Protected Designation of Origin (PDO)",
+          "value": "protected-designation-of-origin"
+        },
+        {
+          "label": "Traditional Specialities Guaranteed (TSG)",
+          "value": "traditional-specialities-guaranteed"
+        }
+      ]
+    },
+    {
+      "key": "country",
+      "name": "Country",
+      "type": "text",
+      "preposition": "of country",
+      "display_as_result_metadata": true,
+      "filterable": true,
+      "allowed_values": [
+        {
+          "label": "United Kingdom",
+          "value": "united-kingdom"
+        },
+        {
+          "label": "Andorra",
+          "value": "andorra"
+        },
+        {
+          "label": "Armenia",
+          "value": "armenia"
+        },
+        {
+          "label": "Austria",
+          "value": "austria"
+        },
+        {
+          "label": "Belgium",
+          "value": "belgium"
+        },
+        {
+          "label": "Brazil",
+          "value": "brazil"
+        },
+        {
+          "label": "Bulgaria",
+          "value": "bulgaria"
+        },
+        {
+          "label": "Cambodia",
+          "value": "cambodia"
+        },
+        {
+          "label": "China",
+          "value": "china"
+        },
+        {
+          "label": "Colombia",
+          "value": "colombia"
+        },
+        {
+          "label": "Croatia",
+          "value": "croatia"
+        },
+        {
+          "label": "Cyprus",
+          "value": "cyprus"
+        },
+        {
+          "label": "Czechia",
+          "value": "czechia"
+        },
+        {
+          "label": "Denmark",
+          "value": "denmark"
+        },
+        {
+          "label": "Dominican Republic",
+          "value": "dominican-republic"
+        },
+        {
+          "label": "Estonia",
+          "value": "estonia"
+        },
+        {
+          "label": "Finland",
+          "value": "finland"
+        },
+        {
+          "label": "France",
+          "value": "france"
+        },
+        {
+          "label": "Germany",
+          "value": "germany"
+        },
+        {
+          "label": "Greece",
+          "value": "greece"
+        },
+        {
+          "label": "Guatemala",
+          "value": "guatemala"
+        },
+        {
+          "label": "Guinea",
+          "value": "guinea"
+        },
+        {
+          "label": "Guyana",
+          "value": "guyana"
+        },
+        {
+          "label": "Hungary",
+          "value": "hungary"
+        },
+        {
+          "label": "India",
+          "value": "india"
+        },
+        {
+          "label": "Indonesia",
+          "value": "indonesia"
+        },
+        {
+          "label": "Ireland",
+          "value": "ireland"
+        },
+        {
+          "label": "Italia",
+          "value": "italia"
+        },
+        {
+          "label": "Latvia",
+          "value": "latvia"
+        },
+        {
+          "label": "Lithuania",
+          "value": "lithuania"
+        },
+        {
+          "label": "Luxembourg",
+          "value": "luxembourg"
+        },
+        {
+          "label": "Malta",
+          "value": "malta"
+        },
+        {
+          "label": "Mexico",
+          "value": "mexico"
+        },
+        {
+          "label": "Mongolia",
+          "value": "mongolia"
+        },
+        {
+          "label": "Morocco",
+          "value": "morocco"
+        },
+        {
+          "label": "Netherlands",
+          "value": "netherlands"
+        },
+        {
+          "label": "Norway",
+          "value": "norway"
+        },
+        {
+          "label": "Peru",
+          "value": "peru"
+        },
+        {
+          "label": "Poland",
+          "value": "poland"
+        },
+        {
+          "label": "Portugal",
+          "value": "portugal"
+        },
+        {
+          "label": "Romania",
+          "value": "romania"
+        },
+        {
+          "label": "Russian Federation",
+          "value": "russian-federation"
+        },
+        {
+          "label": "Serbia",
+          "value": "serbia"
+        },
+        {
+          "label": "Slovakia",
+          "value": "slovakia"
+        },
+        {
+          "label": "Slovenia",
+          "value": "slovenia"
+        },
+        {
+          "label": "South Africa",
+          "value": "south-africa"
+        },
+        {
+          "label": "Spain",
+          "value": "spain"
+        },
+        {
+          "label": "Spain, France",
+          "value": "spain,-france"
+        },
+        {
+          "label": "Sri Lanka",
+          "value": "sri-lanka"
+        },
+        {
+          "label": "Sweden",
+          "value": "sweden"
+        },
+        {
+          "label": "Switzerland",
+          "value": "switzerland"
+        },
+        {
+          "label": "Thailand",
+          "value": "thailand"
+        },
+        {
+          "label": "Trinidad and Tobago",
+          "value": "trinidad-and-tobago"
+        },
+        {
+          "label": "Turkey",
+          "value": "turkey"
+        },
+        {
+          "label": "United States",
+          "value": "united-states"
+        },
+        {
+          "label": "Viet nam",
+          "value": "viet-nam"
+        }
+      ]
+    },
+    {
+      "key": "status",
+      "name": "Status",
+      "type": "text",
+      "preposition": "of status",
+      "display_as_result_metadata": true,
+      "filterable": true,
+      "allowed_values": [
+        {
+          "label": "Applied",
+          "value": "applied"
+        },
+        {
+          "label": "Published",
+          "value": "published"
+        },
+        {
+          "label": "Registered",
+          "value": "registered"
+        },
+        {
+          "label": "Rejected",
+          "value": "rejected"
+        }
+      ]
+    },
+    {
+      "key": "date_registration",
+      "name": "Date of registration",
+      "type": "text",
+      "preposition": "of registration",
+      "display_as_result_metadata": true,
+      "filterable": false
+    }
+  ]
+}

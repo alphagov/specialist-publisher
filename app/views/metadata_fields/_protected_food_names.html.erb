@@ -1,0 +1,54 @@
+<%= render layout: "shared/form_group", locals: { f: f, field: :register_type } do %>
+  <%= f.select :register_type,
+      f.object.facet_options(:register_type),
+      { label: "Register type", include_blank: 'Select register type' },
+      { class: 'form-control' }
+  %>
+<% end %>
+
+<%= render layout: "shared/form_group", locals: { f: f, field: :product_type } do %>
+  <%= f.select :product_type,
+      f.object.facet_options(:product_type),
+      { label: "Product type", include_blank: 'Select product type' },
+      { class: 'form-control' }
+  %>
+<% end %>
+
+<%= render layout: "shared/form_group", locals: { f: f, field: :product_category } do %>
+  <%= f.select :product_category,
+      f.object.facet_options(:product_category),
+      { label: "Product category", include_blank: 'Select product category' },
+      { class: 'form-control' }
+  %>
+<% end %>
+
+<%= render layout: "shared/form_group", locals: { f: f, field: :file_number } do %>
+  <%= f.text_field :file_number, class: 'form-control' %>
+<% end %>
+
+<%= render layout: "shared/form_group", locals: { f: f, field: :protection_type } do %>
+  <%= f.select :protection_type,
+      f.object.facet_options(:protection_type),
+      { label: "Protection type", include_blank: 'Select protection type' },
+      { class: 'form-control' }
+  %>
+<% end %>
+
+<%= render layout: "shared/form_group", locals: { f: f, field: :country } do %>
+  <%= f.select :country,
+      f.object.facet_options(:country),
+      { label: "Country", include_blank: 'Select country' },
+      { class: 'form-control' }
+  %>
+<% end %>
+
+<%= render layout: "shared/form_group", locals: { f: f, field: :status } do %>
+  <%= f.select :status,
+      f.object.facet_options(:status),
+      { label: "Status", include_blank: 'Select status' },
+      { class: 'form-control' }
+  %>
+<% end %>
+
+<%= render layout: "shared/date_fields", locals: { f: f, field: :date_of_registration, format: :protected_food_name } do %>
+<% end %>
