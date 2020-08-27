@@ -6,28 +6,21 @@ class RepublishWorker
   def perform(content_id)
     document = Document.find(content_id)
 
-    unless safe_to_republish?(document)
-      print_limitations_of_republishing(document)
-      return
-    end
-
     if document.publication_state == "published"
       document.update_type = "republish"
 
       publishing_api_put_content(document)
       publishing_api_patch_links(document)
       publishing_api_publish(document)
-    else
+    elsif document.publication_state == "draft"
       publishing_api_put_content(document)
       publishing_api_patch_links(document)
+    else
+      print_limitations_of_republishing(document)
     end
   end
 
 private
-
-  def safe_to_republish?(document)
-    %w[draft published].include?(document.publication_state)
-  end
 
   def print_limitations_of_republishing(document)
     content_id = document.content_id
