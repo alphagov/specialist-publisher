@@ -13,8 +13,22 @@ class RepublishWorker
       publishing_api_patch_links(document)
       publishing_api_publish(document)
     elsif document.publication_state == "draft"
-      publishing_api_put_content(document)
+      published_edition_version_number = document.state_history.key("published")
+
       publishing_api_patch_links(document)
+
+      if published_edition_version_number.present?
+        published_document = Document.find(
+          content_id,
+          version: published_edition_version_number,
+        )
+        published_document.update_type = "republish"
+
+        publishing_api_put_content(published_document)
+        publishing_api_publish(published_document)
+      end
+
+      publishing_api_put_content(document)
     else
       print_limitations_of_republishing(document)
     end
