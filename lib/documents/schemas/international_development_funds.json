@@ -4,7 +4,7 @@
   "format_name": "International development funding",
   "name": "International development funding",
   "description": "Find and apply for funds to run international development projects",
-  "summary": "<p>Grants published before XX September 2020 were published by the Department for International Development (DFID).</p>",
+  "summary": "<p>Grants published before 2 September 2020 were published by the Department for International Development (DFID).</p>",
   "filter": {
     "format": "international_development_fund"
   },
