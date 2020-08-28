@@ -48,6 +48,11 @@ FactoryBot.define do
     organisation_content_id { "db994552-7644-404d-a770-a2fe659c661f" }
   end
 
+  factory :research_for_development_output_editor, parent: :editor do
+    organisation_slug { "department-for-international-development" }
+    organisation_content_id { "db994552-7644-404d-a770-a2fe659c661f" }
+  end
+
   # Writer factories:
   factory :writer, aliases: [:cma_writer], parent: :editor do
     organisation_slug { "competition-and-markets-authority" }
@@ -295,6 +300,24 @@ FactoryBot.define do
           "country" => %w[GB],
           "dfid_authors" => ["Mr. Potato Head", "Mrs. Potato Head"],
           "dfid_theme" => %w[infrastructure],
+          "first_published_at" => "2016-04-28",
+          "bulk_published" => true,
+        }
+      end
+    end
+  end
+
+  factory :research_for_development_output, parent: :document do
+    base_path { "/research-for-development-outputs/example-document" }
+    document_type { "research_for_development_output" }
+
+    transient do
+      default_metadata do
+        {
+          "research_document_type" => "book_chapter",
+          "country" => %w[GB],
+          "authors" => ["Mr. Potato Head", "Mrs. Potato Head"],
+          "theme" => %w[infrastructure],
           "first_published_at" => "2016-04-28",
           "bulk_published" => true,
         }

@@ -52,6 +52,7 @@ RSpec.feature "The root specialist-publisher page", type: :feature do
       expect(page).to have_text("MAIB Reports")
       expect(page).to have_text("Medical Safety Alerts")
       expect(page).to have_text("RAIB Reports")
+      expect(page).to have_text("Research for Development Outputs")
       expect(page).to have_text("Residential Property Tribunal Decisions")
       expect(page).to have_text("Service Standard Reports")
       expect(page).to have_text("Tax Tribunal Decisions")
