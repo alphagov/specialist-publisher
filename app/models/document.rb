@@ -214,8 +214,8 @@ class Document
     AllDocumentsFinder.all(page, per_page, query, document_type)
   end
 
-  def self.find(content_id)
-    DocumentFinder.find(self, content_id)
+  def self.find(content_id, version: nil)
+    DocumentFinder.find(self, content_id, version: version)
   end
 
   def save(validate: true)

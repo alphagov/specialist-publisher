@@ -31,12 +31,6 @@ RSpec.describe RepublishWorker do
         assert_publishing_api_patch_links(content_id)
       end
 
-      it "does not publish the document" do
-        subject.perform(content_id)
-
-        expect(WebMock).not_to have_requested(:post, /publish/)
-      end
-
       it "does not speak to email alert api" do
         subject.perform(content_id)
 
