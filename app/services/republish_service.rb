@@ -1,13 +1,13 @@
 require "services"
 
 class RepublishService
-  def call(content_id)
+  def call(content_id, &put_content_block)
     document = Document.find(content_id)
 
     if document.publication_state == "published"
       document.update_type = "republish"
 
-      publishing_api_put_content(document)
+      publishing_api_put_content(document, &put_content_block)
       publishing_api_patch_links(document)
       publishing_api_publish(document)
     elsif document.publication_state == "draft"
@@ -22,11 +22,11 @@ class RepublishService
         )
         published_document.update_type = "republish"
 
-        publishing_api_put_content(published_document)
+        publishing_api_put_content(published_document, &put_content_block)
         publishing_api_publish(published_document)
       end
 
-      publishing_api_put_content(document)
+      publishing_api_put_content(document, &put_content_block)
     else
       print_limitations_of_republishing(document)
     end
@@ -46,8 +46,9 @@ private
     logger.warn message
   end
 
-  def publishing_api_put_content(document)
+  def publishing_api_put_content(document, &block)
     payload = DocumentPresenter.new(document).to_json
+    payload = payload.tap { |x| block.call(x) } if block
     Services.publishing_api.put_content(document.content_id, payload)
   end
 

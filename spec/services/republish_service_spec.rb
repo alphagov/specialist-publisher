@@ -18,6 +18,18 @@ RSpec.describe RepublishService do
     stub_publishing_api_has_item(document)
   end
 
+  shared_examples "transform put content" do |times|
+    it "allows transforming the put content payload" do
+      subject.call(content_id) do |payload|
+        payload[:title] = "Transformed title"
+      end
+
+      assert_publishing_api_put_content(
+        content_id, request_json_includes("title" => "Transformed title"), times
+      )
+    end
+  end
+
   %i[draft redrafted].each do |publication_state|
     context "when the publication_state is '#{publication_state}'" do
       let(:document) do
@@ -36,6 +48,8 @@ RSpec.describe RepublishService do
 
         expect(WebMock).not_to have_requested(:post, /notifications/)
       end
+
+      include_examples "transform put content", publication_state == :redrafted ? 2 : 1
     end
   end
 
@@ -62,6 +76,8 @@ RSpec.describe RepublishService do
 
       expect(WebMock).not_to have_requested(:post, /notifications/)
     end
+
+    include_examples "transform put content", 1
   end
 
   context "when the document is unpublished" do
