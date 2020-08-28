@@ -4,7 +4,7 @@
   "format_name": "Research for Development Output",
   "name": "Research for Development Outputs",
   "description": "Find outputs from Research for Development projects",
-  "summary": "<p>Research outputs published before XX September 2020 were published by the Department for International Development (DFID)</p>",
+  "summary": "<p>Research outputs published before 2 September 2020 were published by the Department for International Development (DFID)</p>",
   "filter": {
     "format": "research_for_development_output"
   },
