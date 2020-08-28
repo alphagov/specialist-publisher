@@ -22,6 +22,6 @@ class InternationalDevelopmentFund < Document
   end
 
   def primary_publishing_organisation
-    "db994552-7644-404d-a770-a2fe659c661f"
+    "f9fcf3fe-2751-4dca-97ca-becaeceb4b26"
   end
 end
