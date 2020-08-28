@@ -39,6 +39,7 @@ module_function
         document_type: document_type,
         fields: [:content_id],
         per_page: 999_999,
+        order: "updated_at",
       )["results"].map { |r| r["content_id"] }
     end
   end
