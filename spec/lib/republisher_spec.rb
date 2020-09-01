@@ -7,6 +7,7 @@ RSpec.describe Republisher do
       document_type: document_type,
       fields: [:content_id],
       per_page: 999_999,
+      order: "updated_at",
     )
   end
 
