@@ -49,11 +49,13 @@ private
   def publishing_api_put_content(document, &block)
     payload = DocumentPresenter.new(document).to_json
     payload = payload.tap { |x| block.call(x) } if block
+    payload.merge!(bulk_publishing: true)
     Services.publishing_api.put_content(document.content_id, payload)
   end
 
   def publishing_api_patch_links(document)
     payload = DocumentLinksPresenter.new(document).to_json
+    payload.merge!(bulk_publishing: true)
     Services.publishing_api.patch_links(document.content_id, payload)
   end
 
