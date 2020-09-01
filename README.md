@@ -16,19 +16,19 @@ Publishing App for Specialist Documents.
 - [Business Finance Support Schemes](https://www.gov.uk/business-finance-support)
 - [CMA Cases](https://www.gov.uk/cma-cases)
 - [Countryside Stewardship Grants](https://www.gov.uk/countryside-stewardship-grants)
-- [DFID Research Outputs](https://www.gov.uk/dfid-research-outputs)
 - [Drug Safety Update](https://www.gov.uk/drug-safety-update)
 - [ESI Funds](https://www.gov.uk/european-structural-investment-funds)
 - [International Development Funds](https://www.gov.uk/international-development-funding)
 - [Medical Safety Alerts](https://www.gov.uk/drug-device-alerts)
 - [MAIB Reports](https://www.gov.uk/maib-reports)
 - [RAIB Reports](https://www.gov.uk/raib-reports)
+- [Research For Development Outputs](https://www.gov.uk/research-for-development-outputs)
 
 ## Nomenclature
 
 - **Format**: Category of a Document. Format names are listed in the `Live Examples` section above and include `MAIB Reports` and `CMA Cases`.
 - **Finder**:  Sometimes Formats are referred to as Finders. They are called 'Finders' because each one of them creates a finder on GOV.UK, e.g. https://www.gov.uk/raib-reports. The formats are served by [Finder Frontend](https://github.com/alphagov/finder-frontend).
-- **Document**: Specialist Documents are created by Government editors and can be published to gov.uk. Documents differ from each other depending on their format. These differences are largely determined by what is contained in the [schema](https://github.com/alphagov/specialist-publisher-rebuild/blob/add-dfid-review-status/lib/documents/schemas/aaib_reports.json) of a format.
+- **Document**: Specialist Documents are created by Government editors and can be published to gov.uk. Documents differ from each other depending on their format. These differences are largely determined by what is contained in the [schema](https://github.com/alphagov/specialist-publisher/blob/6f8eee9ef0bd3a4a72638f5e8301225e692145a3/lib/documents/schemas/aaib_reports.json) of a format.
 - **Schema**: JSON files defining attributes for each format, including `base_path`, `document_noun` and `document_type`. It also contains the facets and their possible values for each `document_type` which are displayed by `_form.html.erb`.
 
 ## Technical documentation
