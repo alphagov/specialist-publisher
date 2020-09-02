@@ -19,7 +19,7 @@ RSpec.describe DocumentLinksPresenter do
     BusinessFinanceSupportScheme => "2bde479a-97f2-42b5-986a-287a623c2a1c",
     AsylumSupportDecision => "6f757605-ab8f-4b62-84e4-99f79cf085c2",
     ServiceStandardReport => "af07d5a5-df63-4ddc-9383-6a666845ebe9",
-    InternationalDevelopmentFund => "db994552-7644-404d-a770-a2fe659c661f",
+    InternationalDevelopmentFund => "f9fcf3fe-2751-4dca-97ca-becaeceb4b26",
   }
 
   document_types.each do |klass, primary_publishing_organisation_id|
