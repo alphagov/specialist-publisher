@@ -2,7 +2,6 @@ require "spec_helper"
 
 RSpec.describe DocumentLinksPresenter do
   document_types = {
-    DfidResearchOutput => "db994552-7644-404d-a770-a2fe659c661f",
     EmploymentTribunalDecision => "6f757605-ab8f-4b62-84e4-99f79cf085c2",
     AaibReport => "38eb5d8f-2d89-480c-8655-e2e7ac23f8f4",
     CmaCase => "957eb4ec-089b-4f71-ba2a-dc69ac8919ea",

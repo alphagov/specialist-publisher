@@ -11,7 +11,7 @@ class PublishWorker
 
     if document.publication_state == "draft"
       # bulk_published means that specialist-frontend won't render the publish
-      # in this instance (https://github.com/alphagov/specialist-publisher/blob/44b082a2f3a91f1eb4fb5e1a9c65b0d9be1449eb/app/models/dfid_research_output.rb#L23-L26)
+      # in this instance (https://github.com/alphagov/specialist-publisher/blob/5351b28bdf30e2bef28ac2040cc286722c3c1ef5/app/models/research_for_development_output.rb#L27-30)
       document.bulk_published = true
       document.publish
     end

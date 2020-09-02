@@ -41,7 +41,6 @@ RSpec.feature "The root specialist-publisher page", type: :feature do
       expect(page).to have_text("Business Finance Support Schemes")
       expect(page).to have_text("CMA Cases")
       expect(page).to have_text("Countryside Stewardship Grants")
-      expect(page).to have_text("DFID Research Outputs")
       expect(page).to have_text("Drug Safety Updates")
       expect(page).to have_text("EAT Decisions")
       expect(page).to have_text("ESI Funds")

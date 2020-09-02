@@ -20,8 +20,8 @@ next each document in the finder if it has been specified in the
 
 Internally, we use this field for checking whether the content is a
 'first draft', which determines whether we prompt the user for an update_type or
-whether we automatically set it to 'First published.' DFID Research Outputs work
-a [bit differently](https://github.com/alphagov/specialist-publisher-rebuild/blob/39745ac21b8717130cb3d210469b06cfb2ea72ca/app/models/dfid_research_output.rb#L29-L35)
+whether we automatically set it to 'First published.' Research For Development Outputs work
+a [bit differently](https://github.com/alphagov/specialist-publisher/blob/5351b28bdf30e2bef28ac2040cc286722c3c1ef5/app/models/research_for_development_output.rb#L27-30)
 because that field can be explicitly set by a user.
 
 ## last_edited_at
