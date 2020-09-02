@@ -49,8 +49,8 @@ FactoryBot.define do
   end
 
   factory :research_for_development_output_editor, parent: :editor do
-    organisation_slug { "department-for-international-development" }
-    organisation_content_id { "db994552-7644-404d-a770-a2fe659c661f" }
+    organisation_slug { "foreign-commonwealth-development-office" }
+    organisation_content_id { "f9fcf3fe-2751-4dca-97ca-becaeceb4b26" }
   end
 
   # Writer factories:
