@@ -51,6 +51,13 @@
           "topic_name": "drug alert: company-led",
           "body": "recalls of medicines issued by manufacturers.",
           "prechecked": true
+        },
+        {
+          "key": "national-patient-safety",
+          "radio_button_name": "National Patient Safety alert",
+          "topic_name": "National Patient Safety alert",
+          "body": "information published by the MHRA related to patient safety.",
+          "prechecked": true
         }
       ]
     }
