@@ -68,7 +68,8 @@
         {"label": "Drug alert", "value": "drugs"},
         {"label": "Medical device alert", "value": "devices"},
         {"label": "Field safety notice", "value": "field-safety-notices"},
-        {"label": "Drug alert: company-led", "value": "company-led-drugs"}
+        {"label": "Drug alert: company-led", "value": "company-led-drugs"},
+        {"label": "National Patient Safety alert", "value": "national-patient-safety"}
       ]
     },
     {
