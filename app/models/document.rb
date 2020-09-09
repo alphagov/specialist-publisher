@@ -17,6 +17,7 @@ class Document
   )
   attr_accessor(
     :content_id,
+    :locale,
     :title,
     :summary,
     :body,
@@ -43,6 +44,7 @@ class Document
   validates :change_note, presence: true, if: :change_note_required?
 
   COMMON_FIELDS = %i[
+    locale
     base_path
     title
     summary
