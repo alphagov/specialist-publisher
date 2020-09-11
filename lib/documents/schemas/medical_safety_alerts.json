@@ -54,9 +54,16 @@
         },
         {
           "key": "national-patient-safety",
-          "radio_button_name": "National Patient Safety alert",
-          "topic_name": "National Patient Safety alert",
+          "radio_button_name": "National patient safety alert",
+          "topic_name": "national patient safety alert",
           "body": "information published by the MHRA related to patient safety.",
+          "prechecked": true
+        },
+        {
+          "key": "device-safety-information",
+          "radio_button_name": "Device safety information",
+          "topic_name": "device safety information",
+          "body": "information published by the MHRA related to device safety.",
           "prechecked": true
         }
       ]
@@ -76,7 +83,8 @@
         {"label": "Medical device alert", "value": "devices"},
         {"label": "Field safety notice", "value": "field-safety-notices"},
         {"label": "Drug alert: company-led", "value": "company-led-drugs"},
-        {"label": "National Patient Safety alert", "value": "national-patient-safety"}
+        {"label": "National patient safety alert", "value": "national-patient-safety"},
+        {"label": "Device safety information", "value": "device-safety-information"}
       ]
     },
     {
