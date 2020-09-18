@@ -739,12 +739,6 @@
               "prechecked": false
             },
             {
-              "key": "macedonia",
-              "radio_button_name": "Macedonia",
-              "topic_name": "Macedonia",
-              "prechecked": false
-            },
-            {
               "key": "madagascar",
               "radio_button_name": "Madagascar",
               "topic_name": "Madagascar",
@@ -910,6 +904,12 @@
               "key": "north-korea",
               "radio_button_name": "North Korea",
               "topic_name": "North Korea",
+              "prechecked": false
+            },
+            {
+              "key": "north-macedonia",
+              "radio_button_name": "North Macedonia",
+              "topic_name": "North Macedonia",
               "prechecked": false
             },
             {
@@ -1540,7 +1540,6 @@
         {"label": "Lithuania", "value": "lithuania"},
         {"label": "Luxembourg", "value": "luxembourg"},
         {"label": "Macao", "value": "macao"},
-        {"label": "Macedonia", "value": "macedonia"},
         {"label": "Madagascar", "value": "madagascar"},
         {"label": "Malawi", "value": "malawi"},
         {"label": "Malaysia", "value": "malaysia"},
@@ -1569,6 +1568,7 @@
         {"label": "Niger", "value": "niger"},
         {"label": "Nigeria", "value": "nigeria"},
         {"label": "North Korea", "value": "north-korea"},
+        {"label": "North Macedonia", "value": "north-macedonia"},
         {"label": "North Sudan", "value": "north-sudan"},
         {"label": "Northern Cyprus", "value": "northern-cyprus"},
         {"label": "Northern Ireland", "value": "northern-ireland"},
