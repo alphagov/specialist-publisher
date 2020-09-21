@@ -7,7 +7,7 @@
 <% end %>
 
 <%= render layout: "shared/form_group", locals: { f: f, field: :locale } do %>
-  <%= f.text_field :locale, class: 'form-control' %>
+  <%= f.text_field :locale, class: 'form-control', value: @document.locale || "en" %>
 <% end %>
 
 <%= render layout: 'shared/form_group', locals: { f: f, field: :authors, label: 'Authors' } do %>
