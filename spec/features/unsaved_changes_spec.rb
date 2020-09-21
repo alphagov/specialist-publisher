@@ -4,6 +4,7 @@ RSpec.feature "Unsaved changes to a document", type: :feature, js: true do
   let(:message) { "You have unsaved changes that will be lost if you leave this page." }
   let(:cma_case) { FactoryBot.create(:cma_case) }
   let(:content_id) { cma_case["content_id"] }
+  let(:locale) { cma_case["locale"] }
 
   before do
     allow(SecureRandom).to receive(:uuid).and_return(content_id)
@@ -74,7 +75,7 @@ RSpec.feature "Unsaved changes to a document", type: :feature, js: true do
       click_on "Edit document"
       click_link "Add attachment"
 
-      expect(current_path).to eq("/cma-cases/#{content_id}/attachments/new")
+      expect(current_path).to eq("/cma-cases/#{content_id}:#{locale}/attachments/new")
     end
   end
 
@@ -97,7 +98,7 @@ RSpec.feature "Unsaved changes to a document", type: :feature, js: true do
         click_link "Add attachment"
       end
 
-      expect(current_path).to eq("/cma-cases/#{content_id}/edit")
+      expect(current_path).to eq("/cma-cases/#{content_id}:#{locale}/edit")
     end
 
     scenario "when an 'Add attachment' is clicked and the confirmation is accepted" do
@@ -105,7 +106,7 @@ RSpec.feature "Unsaved changes to a document", type: :feature, js: true do
         click_link "Add attachment"
       end
 
-      expect(current_path).to eq("/cma-cases/#{content_id}/attachments/new")
+      expect(current_path).to eq("/cma-cases/#{content_id}:#{locale}/attachments/new")
     end
 
     scenario "when attempting to go back a page and accepting the confirmation" do
@@ -113,7 +114,7 @@ RSpec.feature "Unsaved changes to a document", type: :feature, js: true do
         page.evaluate_script "window.history.back();"
       end
 
-      expect(current_path).to eq("/cma-cases/#{content_id}")
+      expect(current_path).to eq("/cma-cases/#{content_id}:#{locale}")
     end
 
     scenario "when attempting to go back a page and cancelling the confirmation" do
@@ -121,7 +122,7 @@ RSpec.feature "Unsaved changes to a document", type: :feature, js: true do
         page.evaluate_script "window.history.back();"
       end
 
-      expect(current_path).to eq("/cma-cases/#{content_id}/edit")
+      expect(current_path).to eq("/cma-cases/#{content_id}:#{locale}/edit")
     end
 
     scenario "when changes are saved" do
@@ -134,7 +135,7 @@ RSpec.feature "Unsaved changes to a document", type: :feature, js: true do
       click_on "Edit document"
       click_link "Add attachment"
 
-      expect(current_path).to eq("/cma-cases/#{content_id}/attachments/new")
+      expect(current_path).to eq("/cma-cases/#{content_id}:#{locale}/attachments/new")
     end
   end
 end

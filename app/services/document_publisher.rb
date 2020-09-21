@@ -8,8 +8,8 @@ class DocumentPublisher
       document.update_type = "major"
       document.save
     end
-    Services.publishing_api.publish(document.content_id)
-    published_document = document.class.find(document.content_id)
+    Services.publishing_api.publish(document.content_id, nil, locale: document.locale)
+    published_document = document.class.find(document.content_id, document.locale)
 
     if document.send_email_on_publish?
       # We don't have `public_updated_at` until the document is published, so we
@@ -23,7 +23,7 @@ class DocumentPublisher
     end
 
     if previously_unpublished?(document)
-      AttachmentRestoreWorker.perform_async(document.content_id)
+      AttachmentRestoreWorker.perform_async(document.content_id, document.locale)
     end
   end
 

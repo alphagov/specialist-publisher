@@ -61,9 +61,12 @@ RSpec.feature "Viewing a specific case", type: :feature do
 
   scenario "that doesn't exist" do
     content_id = "a-case-that-doesnt-exist"
-    stub_publishing_api_does_not_have_item(content_id)
+    url = GdsApi::TestHelpers::PublishingApi::PUBLISHING_API_V2_ENDPOINT + "/content/" + content_id
+    stub_request(:get, url)
+      .with(query: hash_including(locale: "en"))
+      .to_return(status: 404, body: resource_not_found(content_id, "content item").to_json, headers: {})
 
-    visit "/cma-cases/#{content_id}"
+    visit "/cma-cases/#{content_id}:en"
 
     expect(page.current_path).to eq("/cma-cases")
     expect(page).to have_content("Document not found")

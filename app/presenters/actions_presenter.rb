@@ -10,7 +10,7 @@ class ActionsPresenter
   end
 
   def edit_path
-    edit_document_path(slug, document.content_id)
+    edit_document_path(slug, document.content_id_and_locale)
   end
 
   def publish_button_visible?
@@ -48,7 +48,7 @@ class ActionsPresenter
   end
 
   def publish_path
-    publish_document_path(slug, document.content_id)
+    publish_document_path(slug, document.content_id_and_locale)
   end
 
   def unpublish_button_visible?
@@ -78,7 +78,7 @@ class ActionsPresenter
   end
 
   def unpublish_path
-    unpublish_document_path(slug, document.content_id)
+    unpublish_document_path(slug, document.content_id_and_locale)
   end
 
   def discard_button_visible?
@@ -102,7 +102,7 @@ class ActionsPresenter
   end
 
   def discard_path
-    discard_document_path(slug, document.content_id)
+    discard_document_path(slug, document.content_id_and_locale)
   end
 
 private

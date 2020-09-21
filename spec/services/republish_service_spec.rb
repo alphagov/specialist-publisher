@@ -3,6 +3,7 @@ require "rails_helper"
 RSpec.describe RepublishService do
   let(:document) { FactoryBot.create(:cma_case) }
   let(:content_id) { document["content_id"] }
+  let(:locale) { document["locale"] }
 
   let(:uses_republish_update_type) do
     request_json_includes("update_type" => "republish")
@@ -20,7 +21,7 @@ RSpec.describe RepublishService do
 
   shared_examples "transform put content" do |times|
     it "allows transforming the put content payload" do
-      subject.call(content_id) do |payload|
+      subject.call(content_id, locale) do |payload|
         payload[:title] = "Transformed title"
       end
 
@@ -37,14 +38,14 @@ RSpec.describe RepublishService do
       end
 
       it "sends the document to the publishing api" do
-        subject.call(content_id)
+        subject.call(content_id, locale)
 
         assert_publishing_api_put_content(content_id, does_not_use_republish_update_type)
         assert_publishing_api_patch_links(content_id)
       end
 
       it "does not speak to email alert api" do
-        subject.call(content_id)
+        subject.call(content_id, locale)
 
         expect(WebMock).not_to have_requested(:post, /notifications/)
       end
@@ -59,20 +60,20 @@ RSpec.describe RepublishService do
     end
 
     it "sends the document to the publishing api" do
-      subject.call(content_id)
+      subject.call(content_id, locale)
 
       assert_publishing_api_put_content(content_id, uses_republish_update_type)
       assert_publishing_api_patch_links(content_id)
     end
 
     it "publishes the document" do
-      subject.call(content_id)
+      subject.call(content_id, locale)
 
       assert_publishing_api_publish(content_id, uses_republish_update_type)
     end
 
     it "does not speak to email alert api" do
-      subject.call(content_id)
+      subject.call(content_id, locale)
 
       expect(WebMock).not_to have_requested(:post, /notifications/)
     end

@@ -60,10 +60,10 @@ private
     flag_updated(document, attachment)
     if document.save(validate: false)
       flash[:success] = "Attachment successfully updated"
-      redirect_to edit_document_path(document_type_slug, document.content_id)
+      redirect_to edit_document_path(document_type_slug, document.content_id_and_locale)
     else
       flash[:danger] = "There was an error updating the title, please try again later."
-      redirect_to edit_document_attachment_path(document_type_slug, document.content_id, attachment.content_id)
+      redirect_to edit_document_attachment_path(document_type_slug, document.content_id_and_locale, attachment.content_id)
     end
   end
 
@@ -71,20 +71,20 @@ private
     flag_updated(document, attachment)
     if document.update_attachment(attachment)
       flash[:success] = "Updated #{attachment.title}"
-      redirect_to edit_document_path(document_type_slug, document.content_id)
+      redirect_to edit_document_path(document_type_slug, document.content_id_and_locale)
     else
       flash[:danger] = "There was an error updating the attachment, please try again later."
-      redirect_to edit_document_attachment_path(document_type_slug, document.content_id, attachment.content_id)
+      redirect_to edit_document_attachment_path(document_type_slug, document.content_id_and_locale, attachment.content_id)
     end
   end
 
   def upload_attachment(document, attachment)
     if document.upload_attachment(attachment)
       flash[:success] = "Attached #{attachment.title}"
-      redirect_to edit_document_path(document_type_slug, document.content_id)
+      redirect_to edit_document_path(document_type_slug, document.content_id_and_locale)
     else
       flash[:danger] = "There was an error uploading the attachment, please try again later."
-      redirect_to new_document_attachment_path(document_type_slug, document.content_id)
+      redirect_to new_document_attachment_path(document_type_slug, document.content_id_and_locale)
     end
   end
 
@@ -94,11 +94,12 @@ private
     else
       flash[:danger] = "There was an error removing your attachment, please try again later."
     end
-    redirect_to edit_document_path(document_type_slug, document.content_id)
+    redirect_to edit_document_path(document_type_slug, document.content_id_and_locale)
   end
 
   def fetch_document
-    document = current_format.find(params[:document_content_id])
+    content_id, locale = params[:document_content_id_and_locale].split(":")
+    document = current_format.find(content_id, locale)
     document.set_temporary_update_type!
     document
   rescue DocumentFinder::RecordNotFound => e
@@ -127,6 +128,6 @@ private
 
   def failed_to_attach(document)
     flash[:danger] = "Adding an attachment failed. Please make sure you have uploaded an attachment of a permitted file type."
-    redirect_to new_document_attachment_path(document_type_slug, document.content_id)
+    redirect_to new_document_attachment_path(document_type_slug, document.content_id_and_locale)
   end
 end

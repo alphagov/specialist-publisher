@@ -3,25 +3,25 @@ require "services"
 module OpsTasks
 module_function
 
-  def discard(content_id)
-    Document.find(content_id).discard
+  def discard(content_id, locale)
+    Document.find(content_id, locale).discard
   end
 
-  def email(content_id)
-    document = Document.find(content_id)
+  def email(content_id, locale)
+    document = Document.find(content_id, locale)
     payload = EmailAlertPresenter.new(document).to_json
 
     GdsApi.email_alert_api.create_content_change(payload)
   end
 
-  def set_public_updated_at(content_id, timestamp)
+  def set_public_updated_at(content_id, locale, timestamp)
     timestamp = if timestamp == "now"
                   Time.zone.now
                 else
                   Time.zone.parse(timestamp)
                 end
 
-    document = Document.find(content_id)
+    document = Document.find(content_id, locale)
     document.update_type = "republish"
 
     state = document.publication_state

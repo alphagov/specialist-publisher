@@ -1,8 +1,8 @@
 require "services"
 
 class RepublishService
-  def call(content_id, &put_content_block)
-    document = Document.find(content_id)
+  def call(content_id, locale, &put_content_block)
+    document = Document.find(content_id, locale)
 
     if document.publication_state == "published"
       document.update_type = "republish"
@@ -18,6 +18,7 @@ class RepublishService
       if published_edition_version_number.present?
         published_document = Document.find(
           content_id,
+          locale,
           version: published_edition_version_number,
         )
         published_document.update_type = "republish"

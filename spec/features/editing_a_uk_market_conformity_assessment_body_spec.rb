@@ -3,6 +3,7 @@ require "spec_helper"
 RSpec.feature "Editing a UK market conformity assessment body", type: :feature do
   let(:body_document) { FactoryBot.create(:uk_market_conformity_assessment_body) }
   let(:content_id) { body_document["content_id"] }
+  let(:locale) { body_document["locale"] }
   let(:public_updated_at) { body_document["public_updated_at"] }
 
   before do
@@ -17,7 +18,7 @@ RSpec.feature "Editing a UK market conformity assessment body", type: :feature d
   end
 
   scenario "with valid data" do
-    visit  "/uk-market-conformity-assessment-bodies/#{content_id}/edit"
+    visit  "/uk-market-conformity-assessment-bodies/#{content_id}:#{locale}/edit"
     expect(page).to have_css("div.govspeak-help")
 
     title = "Example Company Ltd"

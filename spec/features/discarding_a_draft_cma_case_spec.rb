@@ -2,6 +2,7 @@ require "spec_helper"
 
 RSpec.feature "Discarding a draft CMA Case", type: :feature do
   let(:content_id) { item["content_id"] }
+  let(:locale) { item["locale"] }
 
   before do
     stub_publishing_api_has_item(item)
@@ -21,7 +22,7 @@ RSpec.feature "Discarding a draft CMA Case", type: :feature do
     context "as a CMA editor" do
       scenario "clicking the discard button discards the draft" do
         log_in_as_editor(:cma_editor)
-        visit document_path(content_id: content_id, document_type_slug: "cma-cases")
+        visit document_path(content_id_and_locale: "#{content_id}:#{locale}", document_type_slug: "cma-cases")
         expect(page).to have_content("Example CMA Case")
         click_button "Discard draft"
         expect(page.status_code).to eq(200)
@@ -35,7 +36,7 @@ RSpec.feature "Discarding a draft CMA Case", type: :feature do
     context "as a writer" do
       scenario "no discard draft button is visible" do
         log_in_as_editor(:cma_writer)
-        visit document_path(content_id: content_id, document_type_slug: "cma-cases")
+        visit document_path(content_id_and_locale: "#{content_id}:#{locale}", document_type_slug: "cma-cases")
 
         expect(page).to have_content("You don't have permission to discard this draft")
         expect(page).to have_no_selector(:button, "Discard draft")
@@ -54,7 +55,7 @@ RSpec.feature "Discarding a draft CMA Case", type: :feature do
 
     scenario "where no draft exists" do
       log_in_as_editor(:cma_editor)
-      visit document_path(content_id: content_id, document_type_slug: "cma-cases")
+      visit document_path(content_id_and_locale: "#{content_id}:#{locale}", document_type_slug: "cma-cases")
 
       expect(page).to have_content("There is no draft to discard")
       expect(page).to have_no_selector(:button, "Discard draft")

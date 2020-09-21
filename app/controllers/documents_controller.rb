@@ -25,7 +25,7 @@ class DocumentsController < ApplicationController
 
     if @document.save
       flash[:success] = "Created #{@document.title}"
-      redirect_to document_path(current_format.slug, @document.content_id)
+      redirect_to document_path(current_format.slug, @document.content_id_and_locale)
     elsif @document.errors.any?
       flash.now[:errors] = document_error_messages
       render :new, status: :unprocessable_entity
@@ -49,7 +49,7 @@ class DocumentsController < ApplicationController
     if @document.valid?
       if @document.save
         flash[:success] = "Updated #{@document.title}"
-        redirect_to document_path(current_format.slug, @document.content_id)
+        redirect_to document_path(current_format.slug, @document.content_id_and_locale)
       else
         flash.now[:danger] = unknown_error_message
         render :edit
@@ -66,7 +66,7 @@ class DocumentsController < ApplicationController
     else
       flash[:danger] = unknown_error_message
     end
-    redirect_to document_path(current_format.slug, params[:content_id])
+    redirect_to document_path(current_format.slug, params[:content_id_and_locale])
   end
 
   def unpublish
@@ -76,7 +76,7 @@ class DocumentsController < ApplicationController
       flash[:danger] = unknown_error_message
     end
 
-    redirect_to document_path(current_format.slug, params[:content_id])
+    redirect_to document_path(current_format.slug, params[:content_id_and_locale])
   end
 
   def discard
@@ -114,8 +114,16 @@ private
     heading + errors
   end
 
+  def content_id_param
+    @content_id_param ||= params[:content_id_and_locale].split(":")[0]
+  end
+
+  def locale_param
+    @locale_param ||= (params[:content_id_and_locale].split(":")[1] || "en")
+  end
+
   def fetch_document
-    @document = current_format.find(params[:content_id])
+    @document = current_format.find(content_id_param, locale_param)
   rescue DocumentFinder::RecordNotFound => e
     flash[:danger] = "Document not found"
     redirect_to documents_path(document_type_slug: document_type_slug)

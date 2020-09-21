@@ -5,6 +5,7 @@ RSpec.describe ActionsPresenter do
 
   let(:payload) { FactoryBot.create(:cma_case) }
   let(:content_id) { payload["content_id"] }
+  let(:locale) { payload["locale"] }
 
   let(:document) { CmaCase.from_publishing_api(payload) }
   let(:user) { FactoryBot.create(:cma_editor) }
@@ -13,7 +14,7 @@ RSpec.describe ActionsPresenter do
   subject { described_class.new(document, policy) }
 
   describe "edit_path" do
-    specify { expect(subject.edit_path).to eq("/cma-cases/#{content_id}/edit") }
+    specify { expect(subject.edit_path).to eq("/cma-cases/#{content_id}:#{locale}/edit") }
   end
 
   describe "publish_button_visible?" do
@@ -87,7 +88,7 @@ RSpec.describe ActionsPresenter do
   end
 
   describe "publish_path" do
-    specify { expect(subject.publish_path).to eq("/cma-cases/#{content_id}/publish") }
+    specify { expect(subject.publish_path).to eq("/cma-cases/#{content_id}:#{locale}/publish") }
   end
 
   describe "unpublish_button_visible?" do
@@ -142,6 +143,6 @@ RSpec.describe ActionsPresenter do
   end
 
   describe "unpublish_path" do
-    specify { expect(subject.unpublish_path).to eq("/cma-cases/#{content_id}/unpublish") }
+    specify { expect(subject.unpublish_path).to eq("/cma-cases/#{content_id}:#{locale}/unpublish") }
   end
 end

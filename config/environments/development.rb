@@ -53,5 +53,6 @@ Rails.application.configure do
   # Allow access to the application using dev.gov.uk hostnames
   config.hosts += %w[
     specialist-publisher.dev.gov.uk
+    specialist-publisher.govuk.dev.cbaines.net
   ]
 end

@@ -3,6 +3,7 @@ require "spec_helper"
 RSpec.feature "Editing a Research for Development Output", type: :feature do
   let(:research_output)   { FactoryBot.create(:research_for_development_output) }
   let(:content_id)        { research_output["content_id"] }
+  let(:locale)            { research_output["locale"] }
   let(:public_updated_at) { research_output["public_updated_at"] }
 
   before do
@@ -17,7 +18,7 @@ RSpec.feature "Editing a Research for Development Output", type: :feature do
   end
 
   scenario "with valid data" do
-    visit  "/research-for-development-outputs/#{content_id}/edit"
+    visit  "/research-for-development-outputs/#{content_id}:#{locale}/edit"
     expect(page).to have_css("div.govspeak-help")
 
     title = "Example Research For Development output"

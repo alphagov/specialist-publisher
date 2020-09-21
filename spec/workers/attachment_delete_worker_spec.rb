@@ -23,6 +23,7 @@ RSpec.describe AttachmentDeleteWorker do
   end
 
   let(:content_id) { SecureRandom.uuid }
+  let(:locale) { "en" }
 
   let!(:document) do
     FactoryBot.create(
@@ -44,7 +45,7 @@ RSpec.describe AttachmentDeleteWorker do
       expect(Services.asset_api).to receive(:delete_asset).once.ordered
         .with("513a0efbed915d425e000004")
 
-      subject.perform(content_id)
+      subject.perform(content_id, locale)
     end
   end
 end

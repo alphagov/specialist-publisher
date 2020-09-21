@@ -12,7 +12,7 @@ Rails.application.routes.draw do
 
   resources :document_list_export_request, path: "/export/:document_type_slug", param: :export_id, only: [:show]
 
-  resources :documents, path: "/:document_type_slug", param: :content_id, except: :destroy do
+  resources :documents, path: "/:document_type_slug", param: :content_id_and_locale, except: :destroy do
     collection do
       resource :export, only: %i[show create], as: :export_documents
     end
