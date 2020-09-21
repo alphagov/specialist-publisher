@@ -4,32 +4,36 @@ module Republisher
 module_function
 
   def republish_all
-    all_content_ids.each do |content_id|
-      RepublishWorker.perform_async(content_id)
+    all_content_ids_and_locales.each do |content_id, locale|
+      RepublishWorker.perform_async(content_id, locale)
     end
   end
 
   def republish_document_type(document_type)
-    content_ids_for_document_type(document_type).each do |content_id|
-      RepublishWorker.perform_async(content_id)
+    content_id_and_locale_pairs_for_document_type(
+      document_type,
+    ).each do |content_id, locale|
+      RepublishWorker.perform_async(content_id, locale)
     end
   end
 
-  def republish_one(content_id)
-    RepublishWorker.new.perform(content_id)
+  def republish_one(content_id, locale)
+    RepublishWorker.new.perform(content_id, locale)
   end
 
-  def republish_many(content_ids)
-    content_ids.each do |content_id|
-      RepublishWorker.perform_async(content_id)
+  def republish_many(content_ids_and_locales)
+    content_ids_and_locales.each do |content_id, locale|
+      RepublishWorker.perform_async(content_id, locale)
     end
   end
 
-  def all_content_ids
-    document_types.flat_map { |t| content_ids_for_document_type(t) }
+  def all_content_ids_and_locales
+    document_types.flat_map do |t|
+      content_id_and_locale_pairs_for_document_type(t)
+    end
   end
 
-  def content_ids_for_document_type(document_type)
+  def content_id_and_locale_pairs_for_document_type(document_type)
     unless document_types.include?(document_type)
       raise ArgumentError, "Unknown document_type: '#{document_type}'"
     end
@@ -37,10 +41,10 @@ module_function
     with_timeout(30) do
       Services.publishing_api.get_content_items(
         document_type: document_type,
-        fields: [:content_id],
+        fields: %i[content_id locale],
         per_page: 999_999,
         order: "updated_at",
-      )["results"].map { |r| r["content_id"] }
+      )["results"].map { |r| [r["content_id"], r["locale"]] }
     end
   end
 

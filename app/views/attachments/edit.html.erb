@@ -6,7 +6,7 @@
     attachment: @attachment,
     url: document_attachment_path(
         params[:document_type_slug],
-        params[:document_content_id],
+        params[:document_content_id_and_locale],
         params[:attachment_content_id]
     ),
     method: 'put'

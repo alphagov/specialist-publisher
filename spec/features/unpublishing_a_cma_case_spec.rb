@@ -2,6 +2,7 @@ require "spec_helper"
 
 RSpec.feature "Unpublishing a CMA Case", type: :feature do
   let(:content_id) { item["content_id"] }
+  let(:locale) { item["locale"] }
 
   before do
     log_in_as_editor(:cma_editor)
@@ -18,9 +19,9 @@ RSpec.feature "Unpublishing a CMA Case", type: :feature do
     end
 
     scenario "clicking the unpublish button redirects back to the show page" do
-      stub_publishing_api_unpublish(content_id, body: { type: "gone" })
+      stub_publishing_api_unpublish(content_id, body: { type: "gone", locale: locale })
 
-      visit document_path(content_id: content_id, document_type_slug: "cma-cases")
+      visit document_path(content_id_and_locale: "#{content_id}:#{locale}", document_type_slug: "cma-cases")
       expect(page).to have_content("Example CMA Case")
       click_button "Unpublish document"
       expect(page.status_code).to eq(200)
@@ -30,11 +31,11 @@ RSpec.feature "Unpublishing a CMA Case", type: :feature do
     end
 
     scenario "specifying a redirect to an alternative GOV.UK content path" do
-      stub_publishing_api_unpublish(content_id, body: { type: "redirect", alternative_path: "/government/organisations/competition-and-markets-authority" })
+      stub_publishing_api_unpublish(content_id, body: { type: "redirect", alternative_path: "/government/organisations/competition-and-markets-authority", locale: locale })
 
       stub_publishing_api_has_lookups("/government/organisations/competition-and-markets-authority" => SecureRandom.uuid)
 
-      visit document_path(content_id: content_id, document_type_slug: "cma-cases")
+      visit document_path(content_id_and_locale: "#{content_id}:#{locale}", document_type_slug: "cma-cases")
       expect(page).to have_content("Example CMA Case")
 
       fill_in "alternative_path", with: "/government/organisations/competition-and-markets-authority"
@@ -43,13 +44,13 @@ RSpec.feature "Unpublishing a CMA Case", type: :feature do
       expect(page.status_code).to eq(200)
       expect(page).to have_content("Unpublished Example CMA Case")
 
-      assert_publishing_api_unpublish(content_id, type: "redirect", alternative_path: "/government/organisations/competition-and-markets-authority")
+      assert_publishing_api_unpublish(content_id, type: "redirect", alternative_path: "/government/organisations/competition-and-markets-authority", locale: locale)
     end
 
     scenario "writers don't see a unpublish document button" do
       log_in_as_editor(:cma_writer)
 
-      visit document_path(content_id: content_id, document_type_slug: "cma-cases")
+      visit document_path(content_id_and_locale: "#{content_id}:#{locale}", document_type_slug: "cma-cases")
 
       expect(page).to have_no_selector(:button, "Unpublish document")
     end
@@ -87,9 +88,9 @@ RSpec.feature "Unpublishing a CMA Case", type: :feature do
 
       scenario "clicking the unpublish button deletes document attachments" do
         Sidekiq::Testing.inline! do
-          stub_publishing_api_unpublish(content_id, body: { type: "gone" })
+          stub_publishing_api_unpublish(content_id, body: { type: "gone", locale: locale })
 
-          visit document_path(content_id: content_id, document_type_slug: "cma-cases")
+          visit document_path(content_id_and_locale: "#{content_id}:#{locale}", document_type_slug: "cma-cases")
 
           expect(Services.asset_api).to receive(:delete_asset).once.ordered
             .with("513a0efbed915d425e000002")
@@ -115,9 +116,9 @@ RSpec.feature "Unpublishing a CMA Case", type: :feature do
     end
 
     scenario "clicking the unpublish button shows an error message" do
-      stub_publishing_api_unpublish(content_id, { body: { type: "gone" } }, status: 409)
+      stub_publishing_api_unpublish(content_id, { body: { type: "gone", locale: locale } }, status: 409)
 
-      visit document_path(content_id: content_id, document_type_slug: "cma-cases")
+      visit document_path(content_id_and_locale: "#{content_id}:#{locale}", document_type_slug: "cma-cases")
       expect(page).to have_content("Example CMA Case")
       click_button "Unpublish document"
       expect(page.status_code).to eq(200)

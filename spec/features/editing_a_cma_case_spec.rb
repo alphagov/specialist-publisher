@@ -5,6 +5,7 @@ RSpec.feature "Editing a CMA case", type: :feature do
     FactoryBot.create(:cma_case, title: "Example CMA Case", state_history: { "1" => "draft" })
   end
   let(:content_id) { cma_case["content_id"] }
+  let(:locale) { cma_case["locale"] }
   let(:save_button_disable_with_message) { page.find_button("Save as draft")["data-disable-with"] }
 
   before do
@@ -17,7 +18,7 @@ RSpec.feature "Editing a CMA case", type: :feature do
     stub_publishing_api_has_content([cma_case], hash_including(document_type: CmaCase.document_type))
     stub_publishing_api_has_item(cma_case)
 
-    visit "/cma-cases/#{content_id}"
+    visit "/cma-cases/#{content_id}:#{locale}"
     click_link "Edit document"
   end
 
@@ -119,7 +120,7 @@ RSpec.feature "Editing a CMA case", type: :feature do
     end
 
     scenario "date values display" do
-      visit "/cma-cases/#{content_id}/edit"
+      visit "/cma-cases/#{content_id}:#{locale}/edit"
 
       expect(page).to have_field("cma_case_opened_date_year", with: "2014")
       expect(page).to have_field("cma_case_opened_date_month", with: "01")

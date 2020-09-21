@@ -4,6 +4,7 @@ class DocumentBuilder
     document = klass.new(
       base_path: payload["base_path"],
       content_id: payload["content_id"],
+      locale: payload["locale"],
       title: payload["title"],
       summary: payload["description"],
       body: extract_body_from_payload(payload),

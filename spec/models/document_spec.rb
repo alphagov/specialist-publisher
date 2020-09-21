@@ -49,6 +49,7 @@ RSpec.describe Document do
           fields: %i[
             base_path
             content_id
+            locale
             last_edited_at
             title
             publication_state
@@ -56,6 +57,7 @@ RSpec.describe Document do
           ],
           page: 1,
           per_page: 20,
+          locale: "all",
           order: "-last_edited_at",
           q: "foo",
         )
@@ -326,7 +328,7 @@ RSpec.describe Document do
 
         it "asynchronously restores attachments" do
           expect(AttachmentRestoreWorker).to receive(:perform_async)
-            .with(document.content_id)
+            .with(document.content_id, document.locale)
 
           document.publish
         end
@@ -390,18 +392,18 @@ RSpec.describe Document do
   describe "#unpublish" do
     before do
       stub_publishing_api_has_item(payload)
-      document = MyDocumentType.find(payload["content_id"])
-      stub_publishing_api_unpublish(document.content_id, body: { type: "gone" })
+      document = MyDocumentType.find(payload["content_id"], payload["locale"])
+      stub_publishing_api_unpublish(document.content_id, body: { locale: document.locale, type: "gone" })
     end
 
     it "sends correct payload to publishing api" do
       expect(document.unpublish).to eq(true)
 
-      assert_publishing_api_unpublish(document.content_id, type: "gone")
+      assert_publishing_api_unpublish(document.content_id, type: "gone", locale: document.locale)
     end
 
     it "deletes document attachments" do
-      expect(AttachmentDeleteWorker).to receive(:perform_async).with(payload["content_id"])
+      expect(AttachmentDeleteWorker).to receive(:perform_async).with(payload["content_id"], payload["locale"])
 
       document.unpublish
     end
@@ -409,18 +411,18 @@ RSpec.describe Document do
     context "with an alternative path" do
       it "sends correct payload to publishing api" do
         stub_publishing_api_has_lookups("/foo" => SecureRandom.uuid)
-        stub_publishing_api_unpublish(document.content_id, body: { type: "redirect", alternative_path: "/foo" })
+        stub_publishing_api_unpublish(document.content_id, body: { type: "redirect", locale: document.locale, alternative_path: "/foo" })
 
         expect(document.unpublish("/foo")).to eq(true)
 
-        assert_publishing_api_unpublish(document.content_id, type: "redirect", alternative_path: "/foo")
+        assert_publishing_api_unpublish(document.content_id, type: "redirect", locale: document.locale, alternative_path: "/foo")
       end
     end
 
     context "unsuccessful #unpublish" do
       it "notifies GovukError and returns false if publishing-api does not return status 200" do
         expect(GovukError).to receive(:notify)
-        stub_publishing_api_unpublish(document.content_id, { body: { type: "gone" } }, status: 409)
+        stub_publishing_api_unpublish(document.content_id, { body: { type: "gone", locale: document.locale } }, status: 409)
         expect(document.unpublish).to eq(false)
       end
     end
@@ -456,7 +458,7 @@ RSpec.describe Document do
       stub_any_publishing_api_put_content
       stub_any_publishing_api_patch_links
 
-      c = MyDocumentType.find(payload["content_id"])
+      c = MyDocumentType.find(payload["content_id"], payload["locale"])
       expect(c.save).to eq(true)
 
       expected_payload = write_payload(payload.deep_stringify_keys)
@@ -563,7 +565,7 @@ RSpec.describe Document do
     end
 
     it "returns a document" do
-      found_document = MyDocumentType.find(document.content_id)
+      found_document = MyDocumentType.find(document.content_id, document.locale)
 
       expect(found_document.base_path).to eq(payload["base_path"])
       expect(found_document.title).to     eq(payload["title"])
@@ -574,7 +576,7 @@ RSpec.describe Document do
 
     describe "when called on the Document superclass" do
       it "returns an instance of the subclass with matching document_type" do
-        found_document = Document.find(document.content_id)
+        found_document = Document.find(document.content_id, document.locale)
         expect(found_document).to be_a(MyDocumentType)
       end
     end
@@ -582,7 +584,7 @@ RSpec.describe Document do
     describe "when called on a class that mismatches the document_type" do
       it "raises a helpful error" do
         expect {
-          CmaCase.find(document.content_id)
+          CmaCase.find(document.content_id, document.locale)
         }.to raise_error(/wrong type/)
       end
     end
@@ -748,6 +750,7 @@ RSpec.describe Document do
 
   context "a draft where a published item has the same base_path" do
     let(:content_id) { SecureRandom.uuid }
+    let(:locale) { "en" }
     let(:published) { FactoryBot.create(:document, document_type: "my_document_type", content_id: content_id) }
 
     before do
@@ -756,7 +759,7 @@ RSpec.describe Document do
                    body: published.merge(warnings: { "content_item_blocking_publish" => "foo" }).to_json)
     end
 
-    subject { described_class.find(content_id) }
+    subject { described_class.find(content_id, locale) }
 
     it "cannot be published" do
       expect(subject.publish).to be false

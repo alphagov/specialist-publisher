@@ -7,6 +7,7 @@ class AllDocumentsFinder
       publishing_app: "specialist-publisher",
       document_type: document_type,
       order: "-last_edited_at",
+      locale: "all",
     }
   end
 
@@ -15,6 +16,7 @@ class AllDocumentsFinder
       fields: %i[
         base_path
         content_id
+        locale
         last_edited_at
         title
         publication_state

@@ -12,8 +12,22 @@ RSpec.describe DocumentsController, type: :controller do
 
   describe "GET show" do
     it "responds successfully" do
-      get :show, params: { document_type_slug: "cma-cases", content_id: payload["content_id"] }
+      get :show, params: { document_type_slug: "cma-cases", content_id_and_locale: "#{payload["content_id"]}:#{payload["locale"]}" }
       expect(response.status).to eq(200)
+    end
+
+    it "redirects if the URL doesn't include the locale" do
+      get :show, params: { document_type_slug: "cma-cases", content_id_and_locale: payload["content_id"] }
+
+      expect(response.status).to eq(301)
+      expect(
+        URI(response.location).path,
+      ).to eq(
+        document_path(
+          document_type_slug: "cma-cases",
+          content_id_and_locale: "#{payload["content_id"]}:#{payload["locale"]}",
+        ),
+      )
     end
   end
 
@@ -23,7 +37,7 @@ RSpec.describe DocumentsController, type: :controller do
     end
 
     it "responds successfully" do
-      post :discard, params: { document_type_slug: "cma-cases", content_id: payload["content_id"] }
+      post :discard, params: { document_type_slug: "cma-cases", content_id_and_locale: "#{payload["content_id"]}:#{payload["locale"]}" }
       expect(subject).to redirect_to(documents_path(document_type_slug: "cma-cases"))
     end
   end

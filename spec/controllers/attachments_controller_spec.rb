@@ -29,6 +29,7 @@ RSpec.describe AttachmentsController, type: :controller do
 
   let(:document_type_slug) { "cma-cases" }
   let(:document_content_id) { cma_case["content_id"] }
+  let(:document_locale) { "en" }
   let(:attachment_content_id) { cma_case["details"]["attachments"][0]["content_id"] }
 
   let(:asset_id) { SecureRandom.uuid }
@@ -65,7 +66,7 @@ RSpec.describe AttachmentsController, type: :controller do
     end
 
     it "redirect to the specialist document edit page" do
-      document = CmaCase.find(document_content_id)
+      document = CmaCase.find(document_content_id, document_locale)
       allow_any_instance_of(AttachmentsController).to receive(:fetch_document).and_return(document)
 
       stub_any_publishing_api_put_content
@@ -74,28 +75,28 @@ RSpec.describe AttachmentsController, type: :controller do
       stub_request(:post, "#{Plek.find('asset-manager')}/assets")
         .to_return(body: JSON.dump(asset_manager_response), status: 201)
 
-      post :create, params: { document_type_slug: document_type_slug, document_content_id: document_content_id, attachment: attachment }
+      post :create, params: { document_type_slug: document_type_slug, document_content_id_and_locale: "#{document_content_id}:#{document_locale}", attachment: attachment }
 
       expect(document.attachments.count).to eq(3)
-      expect(response).to redirect_to(edit_document_path(document_type_slug: document_type_slug, content_id: document_content_id))
+      expect(response).to redirect_to(edit_document_path(document_type_slug: document_type_slug, content_id_and_locale: "#{document_content_id}:#{document_locale}"))
     end
 
     it "shows an error if no attachment is uploaded" do
-      document = CmaCase.find(document_content_id)
+      document = CmaCase.find(document_content_id, document_locale)
       allow_any_instance_of(AttachmentsController).to receive(:fetch_document).and_return(document)
 
-      post :create, params: { document_type_slug: document_type_slug, document_content_id: document_content_id, attachment: no_file_attachment }
+      post :create, params: { document_type_slug: document_type_slug, document_content_id_and_locale: "#{document_content_id}:#{document_locale}", attachment: no_file_attachment }
       expect(response).to redirect_to(new_document_attachment_path(document_type_slug: document_type_slug))
     end
   end
 
   describe "GET edit" do
     it "renders the edit attachment form" do
-      document = CmaCase.find(document_content_id)
+      document = CmaCase.find(document_content_id, document_locale)
       attachment = document.attachments.find(attachment_content_id)
       allow_any_instance_of(AttachmentsController).to receive(:fetch_document).and_return(document)
 
-      get :edit, params: { document_type_slug: document_type_slug, document_content_id: document_content_id, attachment_content_id: attachment_content_id }
+      get :edit, params: { document_type_slug: document_type_slug, document_content_id_and_locale: "#{document_content_id}:#{document_locale}", attachment_content_id: attachment_content_id }
 
       expect(assigns(:attachment)).to eq(attachment)
       expect(response).to render_template :edit
@@ -111,7 +112,7 @@ RSpec.describe AttachmentsController, type: :controller do
       }
     end
     it "redirects to the specalist document edit page" do
-      document = CmaCase.find(document_content_id)
+      document = CmaCase.find(document_content_id, document_locale)
       allow_any_instance_of(AttachmentsController).to receive(:fetch_document).and_return(document)
 
       stub_any_publishing_api_put_content
@@ -119,25 +120,25 @@ RSpec.describe AttachmentsController, type: :controller do
       stub_request(:put, %r{#{Plek.find('asset-manager')}/assets/.*})
         .to_return(body: JSON.dump(asset_manager_response), status: 201)
 
-      post :update, params: { document_type_slug: document_type_slug, document_content_id: document_content_id, attachment_content_id: attachment_content_id, attachment: updated_attachment }
+      post :update, params: { document_type_slug: document_type_slug, document_content_id_and_locale: "#{document_content_id}:#{document_locale}", attachment_content_id: attachment_content_id, attachment: updated_attachment }
 
       expect(document.attachments.count).to eq(2)
-      expect(response).to redirect_to(edit_document_path(document_type_slug: document_type_slug, content_id: document_content_id))
+      expect(response).to redirect_to(edit_document_path(document_type_slug: document_type_slug, content_id_and_locale: "#{document_content_id}:#{document_locale}"))
     end
   end
 
   describe "DELETE destroy" do
     it "redirects to the specialist document edit page" do
-      document = CmaCase.find(document_content_id)
+      document = CmaCase.find(document_content_id, document_locale)
       allow_any_instance_of(AttachmentsController).to receive(:fetch_document).and_return(document)
       stub_any_publishing_api_put_content
       stub_any_publishing_api_patch_links
       stub_request(:delete, %r{#{Plek.find('asset-manager')}/assets/.*})
         .to_return(body: JSON.dump(asset_manager_response), status: 201)
       expect(document.attachments.count).to eq(2)
-      delete :destroy, params: { document_type_slug: document_type_slug, document_content_id: document_content_id, attachment_content_id: attachment_content_id }
+      delete :destroy, params: { document_type_slug: document_type_slug, document_content_id_and_locale: "#{document_content_id}:#{document_locale}", attachment_content_id: attachment_content_id }
       expect(document.attachments.count).to eq(1)
-      expect(response).to redirect_to(edit_document_path(document_type_slug: document_type_slug, content_id: document_content_id))
+      expect(response).to redirect_to(edit_document_path(document_type_slug: document_type_slug, content_id_and_locale: "#{document_content_id}:#{document_locale}"))
     end
   end
 end

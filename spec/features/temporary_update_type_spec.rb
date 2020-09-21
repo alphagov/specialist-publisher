@@ -6,6 +6,7 @@ RSpec.feature "Temporary update types, relating to attachments", type: :feature 
 
   let(:payload) { FactoryBot.create(:cma_case, :published) }
   let(:content_id) { payload.fetch("content_id") }
+  let(:locale) { payload.fetch("locale") }
 
   before do
     stub_asset_manager_receives_an_asset("http://example.com/attachment.jpg")
@@ -17,7 +18,7 @@ RSpec.feature "Temporary update types, relating to attachments", type: :feature 
   end
 
   def add_attachment_to_document
-    visit "/cma-cases/#{content_id}/attachments/new"
+    visit "/cma-cases/#{content_id}:#{locale}/attachments/new"
 
     fill_in "Title", with: "My attachment"
     page.attach_file("attachment_file", "spec/support/images/cma_case_image.jpg")
@@ -97,7 +98,7 @@ RSpec.feature "Temporary update types, relating to attachments", type: :feature 
     end
 
     scenario "giving the user a choice of update_type when editing the document" do
-      visit "/cma-cases/#{content_id}/edit"
+      visit "/cma-cases/#{content_id}:#{locale}/edit"
       expect(page.status_code).to eq(200)
 
       radio_minor = find_field("cma_case_update_type_minor")

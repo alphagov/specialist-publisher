@@ -17,6 +17,7 @@ class Document
   )
   attr_accessor(
     :content_id,
+    :locale,
     :title,
     :summary,
     :body,
@@ -43,6 +44,7 @@ class Document
   validates :change_note, presence: true, if: :change_note_required?
 
   COMMON_FIELDS = %i[
+    locale
     base_path
     title
     summary
@@ -214,8 +216,8 @@ class Document
     AllDocumentsFinder.all(page, per_page, query, document_type)
   end
 
-  def self.find(content_id, version: nil)
-    DocumentFinder.find(self, content_id, version: version)
+  def self.find(content_id, locale, version: nil)
+    DocumentFinder.find(self, content_id, locale, version: version)
   end
 
   def save(validate: true)
@@ -236,7 +238,7 @@ class Document
 
   def unpublish(alternative_path = nil)
     handle_remote_error(self) do
-      DocumentUnpublisher.unpublish(content_id, base_path, alternative_path)
+      DocumentUnpublisher.unpublish(content_id, locale, base_path, alternative_path)
     end
   end
 
@@ -291,6 +293,10 @@ class Document
 
   def self.slug
     title.parameterize.pluralize
+  end
+
+  def content_id_and_locale
+    "#{content_id}:#{locale}"
   end
 
   def send_email_on_publish?

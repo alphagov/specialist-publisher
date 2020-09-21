@@ -2,13 +2,11 @@ require "services"
 
 # Find a document of a certain type by content_id. Returns a `Document` object.
 class DocumentFinder
-  def self.find(klass, content_id, version: nil)
+  def self.find(klass, content_id, locale, version: nil)
     begin
-      if version
-        params = { version: version }
-      else
-        params = {}
-      end
+      params = { locale: locale }
+      params.merge!(version: version) if version
+
       response = Services.publishing_api.get_content(content_id, params)
     rescue GdsApi::HTTPNotFound
       raise RecordNotFound, "Document: #{content_id}"
