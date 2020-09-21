@@ -124,6 +124,16 @@ private
 
   def fetch_document
     @document = current_format.find(content_id_param, locale_param)
+
+    if params[:content_id_and_locale].split(":")[1] != @document.locale
+      redirect_to(
+        document_path(
+          document_type_slug: document_type_slug,
+          content_id_and_locale: @document.content_id_and_locale,
+        ),
+        status: :moved_permanently,
+      )
+    end
   rescue DocumentFinder::RecordNotFound => e
     flash[:danger] = "Document not found"
     redirect_to documents_path(document_type_slug: document_type_slug)
