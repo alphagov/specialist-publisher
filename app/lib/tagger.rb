@@ -1,8 +1,8 @@
 require "services"
 
 class Tagger
-  def self.add_tags(content_id, do_tag = true)
-    new.add_tags(content_id, do_tag, &Proc.new)
+  def self.add_tags(content_id, do_tag = true, &block)
+    new.add_tags(content_id, do_tag, &block)
   end
 
   def add_tags(content_id, do_tag = true)
