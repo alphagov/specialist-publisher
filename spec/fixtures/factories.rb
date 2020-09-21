@@ -47,6 +47,11 @@ FactoryBot.define do
     organisation_slug { "foreign-commonwealth-development-office" }
     organisation_content_id { "f9fcf3fe-2751-4dca-97ca-becaeceb4b26" }
   end
+  
+  factory :protected_food_drink_name_editor, parent: :editor do
+    organisation_slug { "department-for-environment-food-rural-affairs" }
+    organisation_content_id { "de4e9dc6-cca4-43af-a594-682023b84d6c" }
+  end
 
   # Writer factories:
   factory :writer, aliases: [:cma_writer], parent: :editor do
@@ -407,6 +412,27 @@ FactoryBot.define do
           "alert_type" => "company-led-drugs",
           "issued_date" => "2016-02-01",
           "medical_specialism" => %w[anaesthetics cardiology],
+        }
+      end
+    end
+  end
+
+  factory :protected_food_drink_name, parent: :document do
+    base_path { "/protected-food-drink-names/example-document" }
+    document_type { "protected_food_drink_name" }
+
+    transient do
+      default_metadata do
+        {
+          "register" => "foods-designated-origin-and-geographic-origin",
+          "status" => "registered",
+          "class_category" => ["1-1-fresh-meat-and-offal"],
+          "protection_type" => "protected-geographical-indication-pgi",
+          "country" => ["united-kingdom"],
+          "date_registration" => "2020-01-01",
+          "traditional_term_grapevine_product_category" => "new-wine-still-in-fermentation",
+          "traditional_term_type" => "description-of-product-characteristic",
+          "traditional_term_language" => "english",
         }
       end
     end
