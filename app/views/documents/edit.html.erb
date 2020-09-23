@@ -14,7 +14,7 @@
 <div class="row">
   <div class="col-md-8">
     <%= form_for @document, url: document_path(document_type_slug: params[:document_type_slug],
-                                               content_id_and_locale: @document.content_id_and_locale),
+                                               content_id_and_locale: "#{@content_id_param}:#{@locale_param}"),
                                                method: :put,
                                                html: { class: "edit_document" } do |f| %>
         <%= render partial: "shared/form_fields", locals: {f: f} %>
