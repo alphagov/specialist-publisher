@@ -7,7 +7,18 @@
 <% end %>
 
 <%= render layout: "shared/form_group", locals: { f: f, field: :locale } do %>
-  <%= f.text_field :locale, class: 'form-control', value: @document.locale || "en" %>
+  <%= f.select(
+    :locale,
+    locale_options,
+    {
+      selected: @document.locale || "en",
+    },
+    {
+      class: 'select2',
+      multiple: false,
+      data: { placeholder: 'Select locale' }
+    },
+  ) %>
 <% end %>
 
 <%= render layout: 'shared/form_group', locals: { f: f, field: :authors, label: 'Authors' } do %>
