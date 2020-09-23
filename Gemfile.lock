@@ -178,7 +178,7 @@ GEM
       sidekiq (>= 5, < 6)
       sidekiq-logging-json (~> 0.0)
       sidekiq-statsd (>= 2.1)
-    govuk_test (1.0.3)
+    govuk_test (2.0.0)
       brakeman (~> 4.6)
       capybara
       puma
