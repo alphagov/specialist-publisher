@@ -9,3 +9,18 @@
 <%= render layout: "shared/form_group", locals: { f: f, field: :body } do %>
   <%= f.text_area :body, rows: 20, class: 'form-control body-text' %>
 <% end %>
+
+<%= render layout: "shared/form_group", locals: { f: f, field: :locale } do %>
+  <%= f.select(
+    :locale,
+    locale_options,
+    {
+      selected: @document.locale || "en",
+    },
+    {
+      class: 'select2',
+      multiple: false,
+      data: { placeholder: 'Select locale' }
+    },
+  ) %>
+<% end %>
