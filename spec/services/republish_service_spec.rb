@@ -15,11 +15,27 @@ RSpec.describe RepublishService do
 
   before do
     stub_any_publishing_api_call
-
     stub_publishing_api_has_item(document)
   end
 
-  shared_examples "transform put content" do |times|
+  shared_examples "preserve timestamp" do |times: 1|
+    it "preserves the last edit timestamp" do
+      subject.call(content_id, locale)
+
+      assert_publishing_api_put_content(
+        content_id, request_json_includes("last_edited_at" => document["last_edited_at"]), times
+      )
+    end
+  end
+
+  shared_examples "no emails" do
+    it "does not speak to email alert api" do
+      subject.call(content_id, locale)
+      expect(WebMock).not_to have_requested(:post, /notifications/)
+    end
+  end
+
+  shared_examples "transform put content" do |times: 1|
     it "allows transforming the put content payload" do
       subject.call(content_id, locale) do |payload|
         payload[:title] = "Transformed title"
@@ -31,27 +47,44 @@ RSpec.describe RepublishService do
     end
   end
 
-  %i[draft redrafted].each do |publication_state|
-    context "when the publication_state is '#{publication_state}'" do
-      let(:document) do
-        FactoryBot.create(:cma_case, publication_state)
-      end
-
-      it "sends the document to the publishing api" do
-        subject.call(content_id, locale)
-
-        assert_publishing_api_put_content(content_id, does_not_use_republish_update_type)
-        assert_publishing_api_patch_links(content_id)
-      end
-
-      it "does not speak to email alert api" do
-        subject.call(content_id, locale)
-
-        expect(WebMock).not_to have_requested(:post, /notifications/)
-      end
-
-      include_examples "transform put content", publication_state == :redrafted ? 2 : 1
+  context "when the document is a draft" do
+    let(:document) do
+      FactoryBot.create(:cma_case, :draft)
     end
+
+    it "sends the document to the publishing api" do
+      subject.call(content_id, locale)
+
+      assert_publishing_api_put_content(content_id, does_not_use_republish_update_type)
+      assert_publishing_api_patch_links(content_id)
+    end
+
+    include_examples "preserve timestamp"
+    include_examples "no emails"
+    include_examples "transform put content"
+  end
+
+  context "when the document is redrafted" do
+    let(:document) do
+      FactoryBot.create(:cma_case, :redrafted)
+    end
+
+    it "sends the draft and live versions to the publishing api" do
+      subject.call(content_id, locale)
+
+      assert_publishing_api_put_content(content_id, does_not_use_republish_update_type)
+      assert_publishing_api_put_content(content_id, uses_republish_update_type)
+      assert_publishing_api_patch_links(content_id)
+    end
+
+    it "publishes the document" do
+      subject.call(content_id, locale)
+      assert_publishing_api_publish(content_id, uses_republish_update_type)
+    end
+
+    include_examples "preserve timestamp", times: 2
+    include_examples "no emails"
+    include_examples "transform put content", times: 2
   end
 
   context "when the document is published" do
@@ -68,16 +101,11 @@ RSpec.describe RepublishService do
 
     it "publishes the document" do
       subject.call(content_id, locale)
-
       assert_publishing_api_publish(content_id, uses_republish_update_type)
     end
 
-    it "does not speak to email alert api" do
-      subject.call(content_id, locale)
-
-      expect(WebMock).not_to have_requested(:post, /notifications/)
-    end
-
+    include_examples "preserve timestamp"
+    include_examples "no emails"
     include_examples "transform put content", 1
   end
 

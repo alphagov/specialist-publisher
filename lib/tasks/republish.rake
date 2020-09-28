@@ -4,19 +4,6 @@ require "csv"
 require "services"
 
 namespace :republish do
-  ##########
-  #
-  # WARNING: do not run these tasks in production, unless absolutely necessary,
-  # as they will effectively shuffle the documents in the
-  # specialist-publisher UI.  This is because the updated_at
-  # timestamps in publishing-api will change, and specialist-publisher
-  # uses publishing-api as its backing store.
-  #
-  # If data is incorrect in Publishing API it should be fixed in
-  # Publishing API
-  #
-  ##########
-
   desc "republish all documents"
   task all: :environment do
     Republisher.republish_all
@@ -27,13 +14,16 @@ namespace :republish do
     Republisher.republish_document_type(args.document_type)
   end
 
-  desc "republish a single document"
-  task :one, [:content_id] => :environment do |_, args|
-    Republisher.republish_one(args.content_id)
+  desc "republish a single document (locale defaults to 'en')"
+  task :one, [:content_id, :locale] => :environment do |_, args|
+    Republisher.republish_one(args.content_id, args.locale)
   end
 
-  desc "republish many documents (space separated list of content IDs)"
-  task :many, [:content_ids] => :environment do |_, args|
-    Republisher.republish_many(args.content_ids.split(" "))
+  desc "republish many documents (space separated list of content_id:locale strings)"
+  task :many, [:content_ids_and_locales] => :environment do |_, args|
+    Republisher.republish_many(
+      args.content_ids_and_locales.split(" ")
+        .map { |id_and_locale| id_and_locale.split(":") }
+    )
   end
 end

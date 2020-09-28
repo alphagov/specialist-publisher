@@ -51,6 +51,7 @@ private
     payload = DocumentPresenter.new(document).to_json
     payload = payload.tap { |x| block.call(x) } if block
     payload.merge!(bulk_publishing: true)
+    payload.merge!(last_edited_at: document.last_edited_at)
     Services.publishing_api.put_content(document.content_id, payload)
   end
 
