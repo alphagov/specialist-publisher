@@ -22,6 +22,7 @@ class Document
     :summary,
     :body,
     :format_specific_fields,
+    :last_edited_at,
     :public_updated_at,
     :state,
     :publication_state,
@@ -51,6 +52,7 @@ class Document
     body
     publication_state
     state_history
+    last_edited_at
     public_updated_at
     first_published_at
     update_type

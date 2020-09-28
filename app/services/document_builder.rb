@@ -11,6 +11,7 @@ class DocumentBuilder
       publication_state: payload["publication_state"],
       state_history: payload["state_history"],
       public_updated_at: payload["public_updated_at"],
+      last_edited_at: payload["last_edited_at"],
       first_published_at: payload["first_published_at"],
       bulk_published: payload["details"]["metadata"]["bulk_published"],
       previous_version: payload["previous_version"],

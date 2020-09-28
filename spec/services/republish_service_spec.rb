@@ -18,6 +18,16 @@ RSpec.describe RepublishService do
     stub_publishing_api_has_item(document)
   end
 
+  shared_examples "preserve timestamp" do |times: 1|
+    it "preserves the last edit timestamp" do
+      subject.call(content_id, locale)
+
+      assert_publishing_api_put_content(
+        content_id, request_json_includes("last_edited_at" => document["last_edited_at"]), times
+      )
+    end
+  end
+
   shared_examples "no emails" do
     it "does not speak to email alert api" do
       subject.call(content_id, locale)
@@ -49,6 +59,7 @@ RSpec.describe RepublishService do
       assert_publishing_api_patch_links(content_id)
     end
 
+    include_examples "preserve timestamp"
     include_examples "no emails"
     include_examples "transform put content"
   end
@@ -71,6 +82,7 @@ RSpec.describe RepublishService do
       assert_publishing_api_publish(content_id, uses_republish_update_type)
     end
 
+    include_examples "preserve timestamp", times: 2
     include_examples "no emails"
     include_examples "transform put content", times: 2
   end
@@ -92,6 +104,7 @@ RSpec.describe RepublishService do
       assert_publishing_api_publish(content_id, uses_republish_update_type)
     end
 
+    include_examples "preserve timestamp"
     include_examples "no emails"
     include_examples "transform put content", 1
   end
