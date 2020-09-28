@@ -31,27 +31,52 @@ RSpec.describe RepublishService do
     end
   end
 
-  %i[draft redrafted].each do |publication_state|
-    context "when the publication_state is '#{publication_state}'" do
-      let(:document) do
-        FactoryBot.create(:cma_case, publication_state)
-      end
-
-      it "sends the document to the publishing api" do
-        subject.call(content_id, locale)
-
-        assert_publishing_api_put_content(content_id, does_not_use_republish_update_type)
-        assert_publishing_api_patch_links(content_id)
-      end
-
-      it "does not speak to email alert api" do
-        subject.call(content_id, locale)
-
-        expect(WebMock).not_to have_requested(:post, /notifications/)
-      end
-
-      include_examples "transform put content", publication_state == :redrafted ? 2 : 1
+  context "when the document is a draft" do
+    let(:document) do
+      FactoryBot.create(:cma_case, :draft)
     end
+
+    it "sends the document to the publishing api" do
+      subject.call(content_id, locale)
+
+      assert_publishing_api_put_content(content_id, does_not_use_republish_update_type)
+      assert_publishing_api_patch_links(content_id)
+    end
+
+    it "does not speak to email alert api" do
+      subject.call(content_id, locale)
+
+      expect(WebMock).not_to have_requested(:post, /notifications/)
+    end
+
+    include_examples "transform put content", 1
+  end
+
+  context "when the document is redrafted" do
+    let(:document) do
+      FactoryBot.create(:cma_case, :redrafted)
+    end
+
+    it "sends the draft and live versions to the publishing api" do
+      subject.call(content_id, locale)
+
+      assert_publishing_api_put_content(content_id, does_not_use_republish_update_type)
+      assert_publishing_api_put_content(content_id, uses_republish_update_type)
+      assert_publishing_api_patch_links(content_id)
+    end
+
+    it "publishes the document" do
+      subject.call(content_id, locale)
+
+      assert_publishing_api_publish(content_id, uses_republish_update_type)
+    end
+
+    it "does not speak to email alert api" do
+      subject.call(content_id, locale)
+      expect(WebMock).not_to have_requested(:post, /notifications/)
+    end
+
+    include_examples "transform put content", 2
   end
 
   context "when the document is published" do
