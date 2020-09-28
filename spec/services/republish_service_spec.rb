@@ -15,8 +15,14 @@ RSpec.describe RepublishService do
 
   before do
     stub_any_publishing_api_call
-
     stub_publishing_api_has_item(document)
+  end
+
+  shared_examples "no emails" do
+    it "does not speak to email alert api" do
+      subject.call(content_id, locale)
+      expect(WebMock).not_to have_requested(:post, /notifications/)
+    end
   end
 
   shared_examples "transform put content" do |times: 1|
@@ -43,12 +49,7 @@ RSpec.describe RepublishService do
       assert_publishing_api_patch_links(content_id)
     end
 
-    it "does not speak to email alert api" do
-      subject.call(content_id, locale)
-
-      expect(WebMock).not_to have_requested(:post, /notifications/)
-    end
-
+    include_examples "no emails"
     include_examples "transform put content"
   end
 
@@ -67,15 +68,10 @@ RSpec.describe RepublishService do
 
     it "publishes the document" do
       subject.call(content_id, locale)
-
       assert_publishing_api_publish(content_id, uses_republish_update_type)
     end
 
-    it "does not speak to email alert api" do
-      subject.call(content_id, locale)
-      expect(WebMock).not_to have_requested(:post, /notifications/)
-    end
-
+    include_examples "no emails"
     include_examples "transform put content", times: 2
   end
 
@@ -93,16 +89,10 @@ RSpec.describe RepublishService do
 
     it "publishes the document" do
       subject.call(content_id, locale)
-
       assert_publishing_api_publish(content_id, uses_republish_update_type)
     end
 
-    it "does not speak to email alert api" do
-      subject.call(content_id, locale)
-
-      expect(WebMock).not_to have_requested(:post, /notifications/)
-    end
-
+    include_examples "no emails"
     include_examples "transform put content", 1
   end
 
