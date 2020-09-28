@@ -19,7 +19,7 @@ RSpec.describe RepublishService do
     stub_publishing_api_has_item(document)
   end
 
-  shared_examples "transform put content" do |times|
+  shared_examples "transform put content" do |times: 1|
     it "allows transforming the put content payload" do
       subject.call(content_id, locale) do |payload|
         payload[:title] = "Transformed title"
@@ -49,7 +49,7 @@ RSpec.describe RepublishService do
       expect(WebMock).not_to have_requested(:post, /notifications/)
     end
 
-    include_examples "transform put content", 1
+    include_examples "transform put content"
   end
 
   context "when the document is redrafted" do
@@ -76,7 +76,7 @@ RSpec.describe RepublishService do
       expect(WebMock).not_to have_requested(:post, /notifications/)
     end
 
-    include_examples "transform put content", 2
+    include_examples "transform put content", times: 2
   end
 
   context "when the document is published" do
