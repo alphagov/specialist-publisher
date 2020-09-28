@@ -30,4 +30,67 @@
 # available at https://guides.rubyonrails.org/i18n.html.
 
 en:
-  hello: "Hello world"
+  i18n:
+    direction: ltr
+  language_names:
+    ar: Arabic
+    de: German
+    dr: Dari
+    en: English
+    cy: Welsh
+    es: Spanish
+    es-419: Latin American Spanish
+    et: Estonian
+    fa: Persian
+    fr: French
+    it: Italian
+    ja: Japanese
+    pt: Portuguese
+    ru: Russian
+    tr: Turkish
+    ur: Urdu
+    zh: Chinese
+    zh-hk: Cantonese
+    zh-tw: Traditional Chinese
+    bg: Bulgarian
+    cs: Czech
+    he: Hebrew
+    ko: Korean
+    pl: Polish
+    ro: Romanian
+    sr: Serbian
+    th: Thai
+    uk: Ukrainian
+    vi: Vietnamese
+    sq: Albanian
+    hy: Armenian
+    az: Azeri
+    bn: Bangla
+    be: Belarusian
+    ka: Georgian
+    el: Greek
+    hu: Hungarian
+    hi: Hindi
+    lv: Latvian
+    lt: Lithuanian
+    ms: Malay
+    ps: Pashto
+    si: Sinhala
+    sk: Slovak
+    so: Somali
+    sw: Swahili
+    ta: Tamil
+    tk: Turkmen
+    uz: Uzbeki
+    id: Indonesian
+    nl: Dutch
+    "no": Norwegian
+    hr: Croatian
+    mt: Maltese
+    da: Danish
+    fi: Finish
+    is: Icelandic
+    gd: Irish
+    sl: Slovenian
+    sv: Swedish
+    kk: Kazakh
