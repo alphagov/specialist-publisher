@@ -3,70 +3,11 @@ module ApplicationHelper
     form.object.facet_options(facet)
   end
 
-  def locale_options
-    # Copied from the specialist document schema
-    %w[
-      ar
-      az
-      be
-      bg
-      bn
-      cs
-      cy
-      da
-      de
-      dr
-      el
-      en
-      es
-      es-419
-      et
-      fa
-      fi
-      fr
-      gd
-      he
-      hi
-      hr
-      hu
-      hy
-      id
-      is
-      it
-      ja
-      ka
-      kk
-      ko
-      lt
-      lv
-      ms
-      mt
-      nl
-      no
-      pl
-      ps
-      pt
-      ro
-      ru
-      si
-      sk
-      sl
-      so
-      sq
-      sr
-      sv
-      sw
-      ta
-      th
-      tk
-      tr
-      uk
-      ur
-      uz
-      vi
-      zh
-      zh-hk
-      zh-tw
-    ]
+  def locale_codes
+    I18n.t('language_names').keys
+  end
+
+  def map_locale_names
+    locale_codes.index_by { |l| [t("language_names.#{l}", locale: "en")] }
   end
 end
