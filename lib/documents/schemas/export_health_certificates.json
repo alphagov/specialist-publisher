@@ -913,6 +913,12 @@
               "prechecked": false
             },
             {
+              "key": "north-macedonia",
+              "radio_button_name": "North Macedonia",
+              "topic_name": "North Macedonia",
+              "prechecked": false
+            },
+            {
               "key": "north-sudan",
               "radio_button_name": "North Sudan",
               "topic_name": "North Sudan",
@@ -1569,6 +1575,7 @@
         {"label": "Niger", "value": "niger"},
         {"label": "Nigeria", "value": "nigeria"},
         {"label": "North Korea", "value": "north-korea"},
+        {"label": "North Macedonia", "value": "north-macedonia"},
         {"label": "North Sudan", "value": "north-sudan"},
         {"label": "Northern Cyprus", "value": "northern-cyprus"},
         {"label": "Northern Ireland", "value": "northern-ireland"},

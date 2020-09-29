@@ -218,6 +218,10 @@ class Document
     AllDocumentsFinder.all(page, per_page, query, document_type)
   end
 
+  def self.find_each(&block)
+    AllDocumentsFinder.find_each(self, &block)
+  end
+
   def self.find(content_id, locale, version: nil)
     DocumentFinder.find(self, content_id, locale, version: version)
   end
