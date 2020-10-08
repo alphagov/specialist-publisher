@@ -1,12 +1,12 @@
 namespace :rename_country do
   desc "Update and republish all docs that refer to a country"
-  task :all, [:old, :new] => :environment do |_t, args|
+  task :all, %i[old new] => :environment do |_t, args|
     Rake::Task["rename_country:export_health_certificates"].invoke(*args)
     Rake::Task["rename_country:international_development_funds"].invoke(*args)
   end
 
   desc "Update and republish export health certificates that refer to a country"
-  task :export_health_certificates, [:old, :new] => :environment do |_t, args|
+  task :export_health_certificates, %i[old new] => :environment do |_t, args|
     ExportHealthCertificate.find_each do |doc|
       current_value = doc.destination_country
       next unless current_value&.include? args[:old]
@@ -19,7 +19,7 @@ namespace :rename_country do
   end
 
   desc "Update and republish international development funds that refer to a country"
-  task :international_development_funds, [:old, :new] => :environment do |_t, args|
+  task :international_development_funds, %i[old new] => :environment do |_t, args|
     InternationalDevelopmentFund.find_each do |doc|
       current_value = doc.location
       next unless current_value&.include? args[:old]

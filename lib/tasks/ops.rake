@@ -1,11 +1,11 @@
 namespace :ops do
   desc "Discard the draft of document"
-  task :discard, [:content_id, :locale] => :environment do |_, args|
+  task :discard, %i[content_id locale] => :environment do |_, args|
     OpsTasks.discard(args.content_id, args.locale)
   end
 
   desc "Send an email for document"
-  task :email, [:content_id, :locale] => :environment do |_, args|
+  task :email, %i[content_id locale] => :environment do |_, args|
     OpsTasks.email(args.content_id, locale)
   end
 

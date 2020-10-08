@@ -15,7 +15,7 @@ namespace :republish do
   end
 
   desc "republish a single document (locale defaults to 'en')"
-  task :one, [:content_id, :locale] => :environment do |_, args|
+  task :one, %i[content_id locale] => :environment do |_, args|
     Republisher.republish_one(args.content_id, args.locale)
   end
 
@@ -23,7 +23,7 @@ namespace :republish do
   task :many, [:content_ids_and_locales] => :environment do |_, args|
     Republisher.republish_many(
       args.content_ids_and_locales.split(" ")
-        .map { |id_and_locale| id_and_locale.split(":") }
+        .map { |id_and_locale| id_and_locale.split(":") },
     )
   end
 end

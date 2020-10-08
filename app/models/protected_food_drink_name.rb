@@ -11,7 +11,7 @@ class ProtectedFoodDrinkName < Document
   validates :date_registration, presence: true, date: true
   validates :date_registration_eu, presence: true, date: true, allow_blank: true
 
-  FORMAT_SPECIFIC_FIELDS = %i(
+  FORMAT_SPECIFIC_FIELDS = %i[
     register
     status
     class_category
@@ -24,7 +24,7 @@ class ProtectedFoodDrinkName < Document
     date_registration
     date_registration_eu
     internal_notes
-  ).freeze
+  ].freeze
 
   attr_accessor(*FORMAT_SPECIFIC_FIELDS)
 

@@ -2,7 +2,7 @@ require "spec_helper"
 
 RSpec.feature "Creating a Protected Food Drink Name", type: :feature do
   let(:fields)            { %i[base_path content_id public_updated_at title publication_state] }
-  let(:protected_food_drink_name)   { FactoryBot.create(:protected_food_drink_name) }
+  let(:protected_food_drink_name) { FactoryBot.create(:protected_food_drink_name) }
   let(:content_id)        { protected_food_drink_name["content_id"] }
   let(:public_updated_at) { protected_food_drink_name["public_updated_at"] }
 
@@ -17,7 +17,6 @@ RSpec.feature "Creating a Protected Food Drink Name", type: :feature do
 
     stub_publishing_api_has_item(protected_food_drink_name)
   end
-
 
   scenario "with valid data" do
     visit "/protected-food-drink-names/new"
