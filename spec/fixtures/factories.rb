@@ -47,7 +47,7 @@ FactoryBot.define do
     organisation_slug { "foreign-commonwealth-development-office" }
     organisation_content_id { "f9fcf3fe-2751-4dca-97ca-becaeceb4b26" }
   end
-  
+
   factory :protected_food_drink_name_editor, parent: :editor do
     organisation_slug { "department-for-environment-food-rural-affairs" }
     organisation_content_id { "de4e9dc6-cca4-43af-a594-682023b84d6c" }
@@ -428,7 +428,7 @@ FactoryBot.define do
           "status" => "registered",
           "class_category" => ["1-1-fresh-meat-and-offal"],
           "protection_type" => "protected-geographical-indication-pgi",
-          "country" => ["united-kingdom"],
+          "country" => %w[united-kingdom],
           "date_registration" => "2020-01-01",
           "traditional_term_grapevine_product_category" => "new-wine-still-in-fermentation",
           "traditional_term_type" => "description-of-product-characteristic",

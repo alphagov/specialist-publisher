@@ -4,10 +4,10 @@ module ApplicationHelper
   end
 
   def locale_codes
-    I18n.t('language_names').keys
+    I18n.t("language_names").keys
   end
 
   def map_locale_names
-    locale_codes.map { |l| [t("language_names.#{l}", locale: "en"), l] }.to_h
+    locale_codes.index_by { |l| t("language_names.#{l}", locale: "en") }
   end
 end
