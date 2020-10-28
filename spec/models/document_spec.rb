@@ -82,6 +82,26 @@ RSpec.describe Document do
       expect(subject.save).to be true
       assert_publishing_api_put_content(subject.content_id, request_json_includes(update_type: "major"))
     end
+
+    describe "#summary" do
+      before { subject.summary = nil }
+
+      context "when document_type is not 'protected_food_drink_name'" do
+        it "requires a summary" do
+          expect(subject).to_not be_valid
+          expect(subject.errors.messages).to eq(summary: ["can't be blank"])
+        end
+      end
+
+      context "when document_type is 'protected_food_drink_name'" do
+        before { expect(subject).to receive(:document_type).and_return("protected_food_drink_name") }
+
+        it "does not require a summary" do
+          expect(subject).to be_valid
+          expect(subject.errors.messages).to be_blank
+        end
+      end
+    end
   end
 
   before(:all) do

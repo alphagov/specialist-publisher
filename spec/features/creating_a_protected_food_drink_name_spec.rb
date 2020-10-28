@@ -55,7 +55,6 @@ RSpec.feature "Creating a Protected Food Drink Name", type: :feature do
     expect(page.status_code).to eq(422)
 
     expect(page).to have_content("Title can't be blank")
-    expect(page).to have_content("Summary can't be blank")
     expect(page).to have_content("Body can't be blank")
     expect(page).to have_content("Register can't be blank")
     expect(page).to have_content("Status can't be blank")
