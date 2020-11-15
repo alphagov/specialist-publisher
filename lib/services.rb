@@ -17,4 +17,14 @@ module Services
       bearer_token: ENV["ASSET_MANAGER_BEARER_TOKEN"] || "12345678",
     )
   end
+
+  def self.with_timeout(seconds)
+    previous_timeout = publishing_api.client.options[:timeout]
+
+    publishing_api.client.options[:timeout] = seconds
+    result = yield
+    publishing_api.client.options[:timeout] = previous_timeout
+
+    result
+  end
 end

@@ -38,7 +38,7 @@ module_function
       raise ArgumentError, "Unknown document_type: '#{document_type}'"
     end
 
-    with_timeout(30) do
+    Services.with_timeout(30) do
       Services.publishing_api.get_content_items(
         document_type: document_type,
         fields: %i[content_id locale],
@@ -55,15 +55,5 @@ module_function
   def all_document_types
     Rails.application.eager_load!
     Document.subclasses.map(&:document_type)
-  end
-
-  def with_timeout(seconds)
-    previous_timeout = Services.publishing_api.client.options[:timeout]
-
-    Services.publishing_api.client.options[:timeout] = seconds
-    result = yield
-    Services.publishing_api.client.options[:timeout] = previous_timeout
-
-    result
   end
 end
