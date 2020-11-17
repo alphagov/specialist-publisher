@@ -387,6 +387,35 @@ FactoryBot.define do
     end
   end
 
+  factory :flood_and_coastal_erosion_risk_management_research_report, parent: :document do
+    base_path { "/flood-and-coastal-erosion-risk-management-research-reports/example-document" }
+    document_type { "flood_and_coastal_erosion_risk_management_research_report" }
+
+    transient do
+      default_metadata do
+        {
+          "category" => "managing-flood-incidents",
+          "project_code" => "code",
+          "project_status" => "ongoing",
+          "topics" => %w[big-data carbon],
+        }
+      end
+
+      organisation_content_id { "6de6b795-9d30-4bd8-a257-ab9a6879e1ea" }
+      primary_publishing_org_content_id { "d31d9806-2644-4023-be70-5376cae84a06" }
+    end
+
+    initialize_with do
+      attributes.merge(
+        links: {
+          finder: [FinderSchema.new(document_type.pluralize).content_id],
+          organisations: [organisation_content_id, primary_publishing_org_content_id],
+          primary_publishing_organisation: [primary_publishing_org_content_id],
+        },
+      )
+    end
+  end
+
   factory :maib_report, parent: :document do
     base_path { "/maib-reports/example-document" }
     document_type { "maib_report" }
