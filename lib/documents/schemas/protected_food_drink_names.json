@@ -24,8 +24,8 @@
       "display_as_result_metadata": false,
       "filterable": true,
       "allowed_values": [
-        {"label": "Foods: designated origin and geographic origin","value": "foods-designated-origin-and-geographic-origin"},
-        {"label": "Foods: traditional speciality","value": "foods-traditional-speciality"},
+        {"label": "Foods: designated origin and geographical indication","value": "foods-designated-origin-and-geographical-indication"},
+        {"label": "Foods: traditional speciality guaranteed","value": "foods-traditional-speciality-guaranteed"},
         {"label": "Spirit drinks","value": "spirit-drinks"},
         {"label": "Wines","value": "wines"},
         {"label": "Aromatised wines","value": "aromatised-wines"},

@@ -48,7 +48,7 @@ module Importers
           if data["Protection type"] == "Traditional Specialities Guaranteed (TSG)"
             "foods-traditional-speciality"
           else
-            "foods-designated-origin-and-geographic-origin"
+            "foods-designated-origin-and-geographical-indication"
           end
         end
       end
