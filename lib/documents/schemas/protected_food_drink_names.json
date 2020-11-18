@@ -20,7 +20,7 @@
       "name": "Register",
       "type": "text",
       "preposition": "register type",
-      "display_as_result_metadata": true,
+      "display_as_result_metadata": false,
       "filterable": true,
       "allowed_values": [
         {"label": "Foods: designated origin and geographic origin","value": "foods-designated-origin-and-geographic-origin"},
@@ -51,7 +51,7 @@
       "short_name": "Class or category",
       "type": "text",
       "preposition": "class or category",
-      "display_as_result_metadata": true,
+      "display_as_result_metadata": false,
       "filterable": true,
       "allowed_values": [
         {"label": "1.1 Fresh meat (and offal)","value": "1-1-fresh-meat-and-offal"},
@@ -149,7 +149,7 @@
       "name": "Protection type",
       "type": "text",
       "preposition": "protection type",
-      "display_as_result_metadata": true,
+      "display_as_result_metadata": false,
       "filterable": true,
       "allowed_values": [
         {"label": "Protected Geographical Indication (PGI)","value": "protected-geographical-indication-pgi"},
@@ -239,7 +239,7 @@
       "name": "Traditional term grapevine product category",
       "short_name": "Grapevine product category",
       "type": "text",
-      "display_as_result_metadata": true,
+      "display_as_result_metadata": false,
       "filterable": false,
       "allowed_values": [
         {"label": "Wine","value": "wine"},
@@ -265,7 +265,7 @@
       "key": "traditional_term_type",
       "name": "Traditional term type",
       "type": "text",
-      "display_as_result_metadata": true,
+      "display_as_result_metadata": false,
       "filterable": false,
       "allowed_values": [
         {"label": "Description of product characteristic","value": "description-of-product-characteristic"},
@@ -276,7 +276,7 @@
       "key": "traditional_term_language",
       "name": "Traditional term language",
       "type": "text",
-      "display_as_result_metadata": true,
+      "display_as_result_metadata": false,
       "filterable": false,
       "allowed_values": [
         {"label": "Bulgarian","value": "bulgarian"},
@@ -310,7 +310,7 @@
       "key": "date_application",
       "name": "Date of application",
       "type": "text",
-      "display_as_result_metadata": true,
+      "display_as_result_metadata": false,
       "filterable": false
     },
     {
@@ -324,7 +324,7 @@
       "key": "date_registration_eu",
       "name": "Date of original registration with the EU",
       "type": "text",
-      "display_as_result_metadata": true,
+      "display_as_result_metadata": false,
       "filterable": false
     },
     {
