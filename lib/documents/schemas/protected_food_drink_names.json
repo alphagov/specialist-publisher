@@ -163,10 +163,10 @@
       ]
     },
     {
-      "key": "country",
-      "name": "Country",
+      "key": "country_of_origin",
+      "name": "Country of origin",
       "type": "text",
-      "preposition": "country",
+      "preposition": "country of origin",
       "display_as_result_metadata": true,
       "filterable": true,
       "allowed_values": [

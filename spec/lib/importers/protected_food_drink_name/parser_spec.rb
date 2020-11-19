@@ -36,7 +36,7 @@ RSpec.describe Importers::ProtectedFoodDrinkName::Parser do
         status: "registered",
         class_category: %w[32-liqueur],
         protection_type: "geographical-indication-gi",
-        country: %w[ireland],
+        country_of_origin: %w[ireland],
         traditional_term_grapevine_product_category: [],
         traditional_term_type: nil,
         traditional_term_language: nil,

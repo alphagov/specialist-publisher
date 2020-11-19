@@ -38,15 +38,15 @@
 <% end %>
 
 <%# You can select multiple countries so this has multi-select option %>
-<%= render layout: "shared/form_group", locals: { f: f, field: :country } do %>
-  <%= f.select :country,
-      f.object.facet_options(:country),
-      { label: "Country" },
+<%= render layout: "shared/form_group", locals: { f: f, field: :country_of_origin } do %>
+  <%= f.select :country_of_origin,
+      f.object.facet_options(:country_of_origin),
+      { label: "Country of origin" },
       {
         class: 'select2 form-control',
         multiple: true,
         data: {
-          placeholder: 'Select country'
+          placeholder: 'Select country of origin'
         }
       }
   %>

@@ -457,7 +457,7 @@ FactoryBot.define do
           "status" => "registered",
           "class_category" => ["1-1-fresh-meat-and-offal"],
           "protection_type" => "protected-geographical-indication-pgi",
-          "country" => %w[united-kingdom],
+          "country_of_origin" => %w[united-kingdom],
           "date_registration" => "2020-01-01",
           "traditional_term_grapevine_product_category" => %w[new-wine-still-in-fermentation],
           "traditional_term_type" => "description-of-product-characteristic",

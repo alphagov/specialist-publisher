@@ -13,7 +13,7 @@ module Importers
           class_category: class_category,
           protection_type: protection_type,
           # reason_for_protection: reason_for_protection, #TODO
-          country: country,
+          country_of_origin: country,
           traditional_term_grapevine_product_category: traditional_term_grapevine_product_category,
           traditional_term_type: traditional_term_type,
           traditional_term_language: traditional_term_language,
