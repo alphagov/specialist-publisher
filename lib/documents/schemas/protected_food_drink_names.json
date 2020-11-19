@@ -310,6 +310,19 @@
       ]
     },
     {
+      "key": "reason_for_protection",
+      "name": "Reason for protection",
+      "type": "text",
+      "display_as_result_metadata": false,
+      "filterable": false,
+      "allowed_values": [
+        {"label": "UK geographical indication from before 2021","value": "uk-gi-before-2021"},
+        {"label": "EU agreement","value": "eu-agreement"},
+        {"label": "UK trade agreement","value": "uk-trade-agreement"},
+        {"label": "Application to UK scheme from 2021","value": "uk-gi-after-2021"}
+      ]
+    },
+    {
       "key": "date_application",
       "name": "Date of application",
       "type": "text",

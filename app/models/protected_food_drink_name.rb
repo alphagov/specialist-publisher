@@ -7,6 +7,7 @@ class ProtectedFoodDrinkName < Document
   validates :traditional_term_grapevine_product_category, presence: true, allow_blank: true
   validates :traditional_term_type, presence: true, allow_blank: true
   validates :traditional_term_language, presence: true, allow_blank: true
+  validates :reason_for_protection, presence: true, allow_blank: true
   validates :date_application, presence: true, date: true, allow_blank: true
   validates :date_registration, presence: true, date: true
   validates :date_registration_eu, presence: true, date: true, allow_blank: true
@@ -20,6 +21,7 @@ class ProtectedFoodDrinkName < Document
     traditional_term_grapevine_product_category
     traditional_term_type
     traditional_term_language
+    reason_for_protection
     date_application
     date_registration
     date_registration_eu

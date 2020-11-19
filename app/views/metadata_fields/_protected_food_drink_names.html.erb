@@ -83,6 +83,14 @@
   %>
 <% end %>
 
+<%= render layout: "shared/form_group", locals: { f: f, field: :reason_for_protection } do %>
+  <%= f.select :reason_for_protection,
+      f.object.facet_options(:reason_for_protection),
+      { label: "Reason for protection", include_blank: 'Select reason for protection' },
+      { class: 'form-control' }
+  %>
+<% end %>
+
 <%= render layout: "shared/date_fields", locals: { f: f, field: :date_application, format: :protected_food_drink_name } do %>
 <% end %>
 
