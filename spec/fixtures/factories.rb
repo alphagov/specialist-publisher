@@ -459,7 +459,7 @@ FactoryBot.define do
           "protection_type" => "protected-geographical-indication-pgi",
           "country" => %w[united-kingdom],
           "date_registration" => "2020-01-01",
-          "traditional_term_grapevine_product_category" => "new-wine-still-in-fermentation",
+          "traditional_term_grapevine_product_category" => %w[new-wine-still-in-fermentation],
           "traditional_term_type" => "description-of-product-characteristic",
           "traditional_term_language" => "english",
         }

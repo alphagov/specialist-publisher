@@ -52,11 +52,18 @@
   %>
 <% end %>
 
+<%# You can select multiple traditional term grapevine product categories so this has multi-select option %>
 <%= render layout: "shared/form_group", locals: { f: f, field: :traditional_term_grapevine_product_category } do %>
   <%= f.select :traditional_term_grapevine_product_category,
       f.object.facet_options(:traditional_term_grapevine_product_category),
-      { label: "Traditional term grapevine product category", include_blank: 'Select grapevine category' },
-      { class: 'form-control' }
+      { label: "Traditional term grapevine product category" },
+      {
+        class: 'select2 form-control',
+        multiple: true,
+        data: {
+          placeholder: 'Select grapevine category'
+        }
+      }
   %>
 <% end %>
 
