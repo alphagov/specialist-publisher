@@ -325,21 +325,21 @@
     {
       "key": "date_application",
       "name": "Date of application",
-      "type": "text",
+      "type": "date",
       "display_as_result_metadata": false,
       "filterable": false
     },
     {
       "key": "date_registration",
       "name": "Date of UK registration",
-      "type": "text",
+      "type": "date",
       "display_as_result_metadata": true,
       "filterable": false
     },
     {
       "key": "date_registration_eu",
       "name": "Date of original registration with the EU",
-      "type": "text",
+      "type": "date",
       "display_as_result_metadata": false,
       "filterable": false
     },
