@@ -12,7 +12,7 @@ module Importers
           status: status,
           class_category: class_category,
           protection_type: protection_type,
-          # reason_for_protection: reason_for_protection, #TODO
+          reason_for_protection: reason_for_protection,
           country_of_origin: country,
           traditional_term_grapevine_product_category: traditional_term_grapevine_product_category,
           traditional_term_type: traditional_term_type,
