@@ -38,25 +38,32 @@
 <% end %>
 
 <%# You can select multiple countries so this has multi-select option %>
-<%= render layout: "shared/form_group", locals: { f: f, field: :country } do %>
-  <%= f.select :country,
-      f.object.facet_options(:country),
-      { label: "Country" },
+<%= render layout: "shared/form_group", locals: { f: f, field: :country_of_origin } do %>
+  <%= f.select :country_of_origin,
+      f.object.facet_options(:country_of_origin),
+      { label: "Country of origin" },
       {
         class: 'select2 form-control',
         multiple: true,
         data: {
-          placeholder: 'Select country'
+          placeholder: 'Select country of origin'
         }
       }
   %>
 <% end %>
 
+<%# You can select multiple traditional term grapevine product categories so this has multi-select option %>
 <%= render layout: "shared/form_group", locals: { f: f, field: :traditional_term_grapevine_product_category } do %>
   <%= f.select :traditional_term_grapevine_product_category,
       f.object.facet_options(:traditional_term_grapevine_product_category),
-      { label: "Traditional term grapevine product category", include_blank: 'Select grapevine category' },
-      { class: 'form-control' }
+      { label: "Traditional term grapevine product category" },
+      {
+        class: 'select2 form-control',
+        multiple: true,
+        data: {
+          placeholder: 'Select grapevine category'
+        }
+      }
   %>
 <% end %>
 
@@ -72,6 +79,14 @@
   <%= f.select :traditional_term_language,
       f.object.facet_options(:traditional_term_language),
       { label: "Traditional term language", include_blank: 'Select language' },
+      { class: 'form-control' }
+  %>
+<% end %>
+
+<%= render layout: "shared/form_group", locals: { f: f, field: :reason_for_protection } do %>
+  <%= f.select :reason_for_protection,
+      f.object.facet_options(:reason_for_protection),
+      { label: "Reason for protection", include_blank: 'Select reason for protection' },
       { class: 'form-control' }
   %>
 <% end %>

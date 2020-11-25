@@ -8,6 +8,7 @@
   "filter": {
     "format": "protected_food_drink_name"
   },
+  "show_summaries": true,
   "signup_content_id": "cff7449e-4181-480f-93e4-91fecfb4c774",
   "signup_copy": "You'll get an email each time a food or drink name is updated or a new name is published.",
   "organisations": ["de4e9dc6-cca4-43af-a594-682023b84d6c"],
@@ -20,15 +21,16 @@
       "name": "Register",
       "type": "text",
       "preposition": "register type",
-      "display_as_result_metadata": true,
+      "display_as_result_metadata": false,
       "filterable": true,
       "allowed_values": [
-        {"label": "Foods: designated origin and geographic origin","value": "foods-designated-origin-and-geographic-origin"},
-        {"label": "Foods: traditional speciality","value": "foods-traditional-speciality"},
+        {"label": "Foods: designated origin and geographical indication","value": "foods-designated-origin-and-geographical-indication"},
+        {"label": "Foods: traditional speciality guaranteed","value": "foods-traditional-speciality-guaranteed"},
         {"label": "Spirit drinks","value": "spirit-drinks"},
         {"label": "Wines","value": "wines"},
         {"label": "Aromatised wines","value": "aromatised-wines"},
-        {"label": "Traditional terms for wine","value": "traditional-terms-for-wine"}
+        {"label": "Traditional terms for wine","value": "traditional-terms-for-wine"},
+        {"label": "Names protected by international treaty", "value": "names-protected-by-international-treaty"}
       ]
     },
     {
@@ -51,7 +53,7 @@
       "short_name": "Class or category",
       "type": "text",
       "preposition": "class or category",
-      "display_as_result_metadata": true,
+      "display_as_result_metadata": false,
       "filterable": true,
       "allowed_values": [
         {"label": "1.1 Fresh meat (and offal)","value": "1-1-fresh-meat-and-offal"},
@@ -149,21 +151,22 @@
       "name": "Protection type",
       "type": "text",
       "preposition": "protection type",
-      "display_as_result_metadata": true,
+      "display_as_result_metadata": false,
       "filterable": true,
       "allowed_values": [
         {"label": "Protected Geographical Indication (PGI)","value": "protected-geographical-indication-pgi"},
         {"label": "Protected Designation of Origin (PDO)","value": "protected-designation-of-origin-pdo"},
         {"label": "Traditional Speciality Guaranteed (TSG)","value": "traditional-speciality-guaranteed-tsg"},
         {"label": "Traditional Term","value": "traditional-term"},
-        {"label": "Geographical Indication (GI)","value": "geographical-indication-gi"}
+        {"label": "Geographical Indication (GI)","value": "geographical-indication-gi"},
+        {"label": "Names protected by international treaty", "value": "name-protected-by-international-treaty"}
       ]
     },
     {
-      "key": "country",
-      "name": "Country",
+      "key": "country_of_origin",
+      "name": "Country of origin",
       "type": "text",
-      "preposition": "country",
+      "preposition": "country of origin",
       "display_as_result_metadata": true,
       "filterable": true,
       "allowed_values": [
@@ -239,7 +242,7 @@
       "name": "Traditional term grapevine product category",
       "short_name": "Grapevine product category",
       "type": "text",
-      "display_as_result_metadata": true,
+      "display_as_result_metadata": false,
       "filterable": false,
       "allowed_values": [
         {"label": "Wine","value": "wine"},
@@ -265,7 +268,7 @@
       "key": "traditional_term_type",
       "name": "Traditional term type",
       "type": "text",
-      "display_as_result_metadata": true,
+      "display_as_result_metadata": false,
       "filterable": false,
       "allowed_values": [
         {"label": "Description of product characteristic","value": "description-of-product-characteristic"},
@@ -276,7 +279,7 @@
       "key": "traditional_term_language",
       "name": "Traditional term language",
       "type": "text",
-      "display_as_result_metadata": true,
+      "display_as_result_metadata": false,
       "filterable": false,
       "allowed_values": [
         {"label": "Bulgarian","value": "bulgarian"},
@@ -307,24 +310,37 @@
       ]
     },
     {
+      "key": "reason_for_protection",
+      "name": "Reason for protection",
+      "type": "text",
+      "display_as_result_metadata": false,
+      "filterable": false,
+      "allowed_values": [
+        {"label": "UK geographical indication from before 2021","value": "uk-gi-before-2021"},
+        {"label": "EU agreement","value": "eu-agreement"},
+        {"label": "UK trade agreement","value": "uk-trade-agreement"},
+        {"label": "Application to UK scheme from 2021","value": "uk-gi-after-2021"}
+      ]
+    },
+    {
       "key": "date_application",
       "name": "Date of application",
-      "type": "text",
-      "display_as_result_metadata": true,
+      "type": "date",
+      "display_as_result_metadata": false,
       "filterable": false
     },
     {
       "key": "date_registration",
       "name": "Date of UK registration",
-      "type": "text",
+      "type": "date",
       "display_as_result_metadata": true,
       "filterable": false
     },
     {
       "key": "date_registration_eu",
       "name": "Date of original registration with the EU",
-      "type": "text",
-      "display_as_result_metadata": true,
+      "type": "date",
+      "display_as_result_metadata": false,
       "filterable": false
     },
     {

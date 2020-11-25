@@ -3,10 +3,11 @@ class ProtectedFoodDrinkName < Document
   validates :status, presence: true
   validates :class_category, presence: true
   validates :protection_type, presence: true
-  validates :country, presence: true
+  validates :country_of_origin, presence: true
   validates :traditional_term_grapevine_product_category, presence: true, allow_blank: true
   validates :traditional_term_type, presence: true, allow_blank: true
   validates :traditional_term_language, presence: true, allow_blank: true
+  validates :reason_for_protection, presence: true, allow_blank: true
   validates :date_application, presence: true, date: true, allow_blank: true
   validates :date_registration, presence: true, date: true
   validates :date_registration_eu, presence: true, date: true, allow_blank: true
@@ -16,10 +17,11 @@ class ProtectedFoodDrinkName < Document
     status
     class_category
     protection_type
-    country
+    country_of_origin
     traditional_term_grapevine_product_category
     traditional_term_type
     traditional_term_language
+    reason_for_protection
     date_application
     date_registration
     date_registration_eu

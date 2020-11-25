@@ -20,7 +20,7 @@ RSpec.describe "rake import", rake_task: true do
       it "reports any data it could not import and the error preventing it from saving" do
         expected_output = "ERROR - Document index: 1. Registered product name: . Title can't be blank\n" \
           "ERROR - Document index: 2. Registered product name: Irish Poteen/Irish Poitín. Status can't be blank\n" \
-          "ERROR - Document index: 3. Registered product name: Irish Whiskey/Uisce Beatha Eireannach/Irish Whisky. Country can't be blank\n" \
+          "ERROR - Document index: 3. Registered product name: Irish Whiskey/Uisce Beatha Eireannach/Irish Whisky. Country of origin can't be blank\n" \
           "ERROR - Document index: 4. Registered product name: Scotch Whisky. Date registration can't be blank\n" \
           "ERROR - Document index: 6. Registered product name: Tennessee whisky (Also spelled as “Tennessee whiskey”). Register can't be blank\n" \
           "3 out of 8 records imported. 5 errors reported\n"
