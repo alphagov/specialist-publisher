@@ -29,7 +29,7 @@ updates:
         dependency-type: direct
       - dependency-name: rspec-rails
         dependency-type: direct
-      - dependency-name: sass-rails
+      - dependency-name: sassc-rails
         dependency-type: direct
 
   # Ruby needs to be upgraded manually in multiple places, so cannot

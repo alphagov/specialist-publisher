@@ -13,7 +13,7 @@ gem "mail-notify"
 gem "mongo"
 gem "mongoid"
 gem "pundit"
-gem "sass-rails"
+gem "sassc-rails"
 gem "stringex"
 gem "uglifier"
 
