@@ -12,7 +12,7 @@ $elements-red: #b10e1e;
 
   h4 {
     margin-top: 0;
-    color: black;
+    color: $black;
   }
 }
 
@@ -36,7 +36,7 @@ form {
     padding-left: 15px;
 
     label {
-      color: black;
+      color: $black;
     }
 
     .elements-error-message {
@@ -111,7 +111,7 @@ form {
   }
 }
 
-h2.with-actions {
+h2.with-actions { // stylelint-disable-line selector-no-qualifying-type
   width: 50%;
   float: left;
 }
