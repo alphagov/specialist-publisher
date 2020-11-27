@@ -12,8 +12,6 @@
       this.threshold = this.$input.data('countMessageThreshold')
       this.hideMessage()
       this.$input.addClass('length-input')
-    } else {
-
     }
   }
 

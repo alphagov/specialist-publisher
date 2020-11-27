@@ -57,7 +57,7 @@ jQuery(function ($) {
   })
 
   $('.js-length-counter').each(function () {
-    new GOVUK.LengthCounter({ $el: $(this) })
+    new GOVUK.LengthCounter({ $el: $(this) }) // eslint-disable-line no-new
   })
 
   $('#preview-button').click(function () {
