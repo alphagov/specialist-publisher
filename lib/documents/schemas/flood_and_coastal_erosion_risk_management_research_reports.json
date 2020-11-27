@@ -33,7 +33,7 @@
       "name": "Start date",
       "type": "date",
       "display_as_result_metadata": true,
-      "filterable": true
+      "filterable": false
     },
 
     {
@@ -41,7 +41,7 @@
       "name": "Completion date",
       "type": "date",
       "display_as_result_metadata": true,
-      "filterable": true
+      "filterable": false
     },
 
     {
