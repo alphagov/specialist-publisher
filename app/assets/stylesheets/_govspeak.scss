@@ -7,7 +7,7 @@
 @import "measurements";
 @import "css3";
 
- .govspeak {
+.govspeak {
   h2:first-child,
   h3:first-child,
   h4:first-child,
@@ -23,22 +23,27 @@
       margin-top: $gutter*1.5;
     }
   }
+
   h3 {
     @include core-19;
     font-weight: bold;
     margin-top: $gutter + 5px;
+
     &.hosted-externally {
       @include core-27;
       font-weight: bold;
       padding-top: 2px;
+
       a {
         text-decoration: none;
+
         &:hover {
           text-decoration: underline;
         }
       }
     }
   }
+
   h4 {
     @include core-19;
     font-weight: bold;
@@ -58,7 +63,8 @@
   h6 {
     @include core-19;
     font-weight: bold;
-    &+p {
+
+    & + p {
       margin-top: 0;
     }
   }
@@ -70,6 +76,7 @@
   ol.legislative-list {
     list-style: none;
     margin-left: 0;
+
     ol {
       list-style: none;
     }
@@ -83,7 +90,9 @@
     @include media (tablet) {
       margin: $gutter-one-third 0 $gutter-one-third $gutter-two-thirds;
     }
-    ul, ol {
+
+    ul,
+    ol {
       margin: 0 0 0 $gutter-two-thirds;
       padding: 0;
     }
@@ -102,7 +111,9 @@
     @include media (tablet) {
       margin: $gutter-one-third 0 $gutter-one-third $gutter-two-thirds;
     }
-    ul, ol {
+
+    ul,
+    ol {
       margin: 0 0 0 $gutter-two-thirds;
       padding: 0;
     }
@@ -113,7 +124,8 @@
     }
   }
 
-  em, i {
+  em,
+  i {
     font-style: normal;
     font-weight: inherit;
   }
@@ -123,9 +135,14 @@
       margin: 0;
       padding: 0;
     }
-    p+p, p+ul, p+ol,
-    ul+p, ul+ol,
-    ol+p, ol+ul {
+
+    p + p,
+    p + ul,
+    p + ol,
+    ul + p,
+    ul + ol,
+    ol + p,
+    ol + ul {
       margin-top: $gutter-one-third;
     }
   }
@@ -146,12 +163,14 @@
         padding-left: $gutter;
       }
     }
+
     & p:before {
       content: "\201C";
       float: left;
       clear: both;
       margin-left: -$gutter-half;
     }
+
     & p.last-child:after {
       content: "\201D";
     }
@@ -163,7 +182,7 @@
 
   hr {
     margin-top: $gutter - 1px;
-    border-top: 1px solid #ccc;
+    border-top: 1px solid #cccccc;
     margin-bottom: $gutter;
   }
 
@@ -187,8 +206,8 @@
   }
 
   sup {
-    font-size: 0.8em;
-    line-height: 0.7em;
+    font-size: .8em;
+    line-height: .7em;
     vertical-align: top;
   }
 
@@ -198,10 +217,12 @@
     background: $panel-colour none no-repeat 98% $gutter-two-thirds;
     padding: $gutter-one-third ($gutter*2) $gutter-one-third $gutter-half;
     position: relative;
+
     p {
       margin: 0;
       padding: 0;
     }
+
     ol {
       @include media(desktop) {
         list-style-position: outside;
@@ -238,15 +259,15 @@
     @include core-14;
 
     caption {
-      text-align:left;
-      margin-bottom: 0.5em;
+      text-align: left;
+      margin-bottom: .5em;
     }
 
-    th, td {
+    th,
+    td {
       vertical-align: top;
       padding: $gutter-one-third $gutter-one-third $gutter-one-third 0;
-      border-bottom:solid 1px $grey-2;
-
+      border-bottom: solid 1px $grey-2;
     }
 
     th {
@@ -255,8 +276,8 @@
       @include bold-14;
     }
 
-    td small{
-      font-size:1em;
+    td small {
+      font-size: 1em;
     }
   }
 
@@ -265,10 +286,11 @@
     sub {
       @include core-14;
     }
+
     img {
       display: inline-block;
       width: auto;
-      margin: 0 0 -5px 0;
+      margin: 0 0 -5px;
     }
   }
 
@@ -282,14 +304,17 @@
     @extend %contain-floats;
     margin-bottom: $gutter;
     position: relative;
+
     .content {
       float: none;
       width: $full-width;
+
       h3 {
         @include core-19;
         font-weight: bold;
         margin-bottom: 5px;
       }
+
       .adr,
       .email-url-number,
       .comments {
@@ -298,17 +323,21 @@
           float: left;
         }
       }
+
       .email-url-number {
         p {
           margin: 0;
+
           .email {
             word-wrap: break-word;
           }
         }
+
         span {
           display: block;
         }
       }
+
       .comments {
         @include core-16;
       }
@@ -321,7 +350,7 @@
     padding-top: $gutter-one-third;
 
     ol {
-      margin-top: 0px !important;
+      margin-top: 0 !important;
       padding-top: 0;
 
       li p {

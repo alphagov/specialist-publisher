@@ -17,10 +17,12 @@
     border-bottom: 1px solid $grey-2;
     padding: $gutter-one-third 0;
   }
+
   .document-title {
     @include core-19;
     display: block;
   }
+
   .metadata {
     margin: 0;
     padding: 0;
