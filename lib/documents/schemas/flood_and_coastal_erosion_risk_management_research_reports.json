@@ -29,52 +29,6 @@
     },
 
     {
-      "key": "first_published_at",
-      "name": "Published date",
-      "short_name": "Published date",
-      "type": "date",
-      "display_as_result_metadata": false,
-      "filterable": true
-    },
-
-    {
-      "key": "date_of_start",
-      "name": "Start date",
-      "type": "date",
-      "display_as_result_metadata": true,
-      "filterable": false
-    },
-
-    {
-      "key": "date_of_completion",
-      "name": "Completion date",
-      "type": "date",
-      "display_as_result_metadata": true,
-      "filterable": false
-    },
-
-    {
-      "key": "project_code",
-      "name": "Project code",
-      "type": "text",
-      "display_as_result_metadata": true,
-      "filterable": false
-    },
-
-    {
-      "key": "project_status",
-      "name": "Project status",
-      "type": "text",
-      "preposition": "with project status",
-      "display_as_result_metadata": true,
-      "filterable": true,
-      "allowed_values": [
-        {"label": "Completed", "value": "completed"},
-        {"label": "Ongoing", "value": "ongoing"}
-      ]
-    },
-
-    {
       "key": "topics",
       "name": "Topics",
       "type": "text",
@@ -140,6 +94,52 @@
         {"label": "Understanding physical processes", "value": "understanding-physical-processes"},
         {"label": "Whole life costs", "value": "whole-life-costs"}
       ]
+    },
+
+    {
+      "key": "project_status",
+      "name": "Project status",
+      "type": "text",
+      "preposition": "with project status",
+      "display_as_result_metadata": true,
+      "filterable": true,
+      "allowed_values": [
+        {"label": "Completed", "value": "completed"},
+        {"label": "Ongoing", "value": "ongoing"}
+      ]
+    },
+
+    {
+      "key": "project_code",
+      "name": "Project code",
+      "type": "text",
+      "display_as_result_metadata": true,
+      "filterable": false
+    },
+
+    {
+      "key": "first_published_at",
+      "name": "Published date",
+      "short_name": "Published date",
+      "type": "date",
+      "display_as_result_metadata": false,
+      "filterable": true
+    },
+
+    {
+      "key": "date_of_start",
+      "name": "Start date",
+      "type": "date",
+      "display_as_result_metadata": true,
+      "filterable": false
+    },
+
+    {
+      "key": "date_of_completion",
+      "name": "Completion date",
+      "type": "date",
+      "display_as_result_metadata": true,
+      "filterable": false
     }
   ]
 }
