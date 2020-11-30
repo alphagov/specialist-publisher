@@ -29,11 +29,20 @@
     },
 
     {
+      "key": "first_published_at",
+      "name": "Published",
+      "short_name": "Published",
+      "type": "date",
+      "display_as_result_metadata": false,
+      "filterable": true
+    },
+
+    {
       "key": "date_of_start",
       "name": "Start date",
       "type": "date",
       "display_as_result_metadata": true,
-      "filterable": true
+      "filterable": false
     },
 
     {
@@ -41,7 +50,7 @@
       "name": "Completion date",
       "type": "date",
       "display_as_result_metadata": true,
-      "filterable": true
+      "filterable": false
     },
 
     {
