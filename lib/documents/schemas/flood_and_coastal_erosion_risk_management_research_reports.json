@@ -30,8 +30,8 @@
 
     {
       "key": "first_published_at",
-      "name": "Published",
-      "short_name": "Published",
+      "name": "Published date",
+      "short_name": "Published date",
       "type": "date",
       "display_as_result_metadata": false,
       "filterable": true
