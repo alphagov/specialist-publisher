@@ -145,8 +145,7 @@ module Importers
         if data["Product type"] != "Traditional term"
           content += "## Product specification \n\n" \
             "The product specification is not available on this site. " \
-            "Find out how to [get a product specification for a protected food name]" \
-            "(https://www.gov.uk/link-to-follow) on GOV.UK.\n\n"
+            "[Email Defra](protectedfoodnames@defra.gov.uk) for the product specification.\n\n" \
         end
 
         # Decision notice and protection instrument title
