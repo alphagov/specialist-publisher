@@ -56,6 +56,7 @@
       "display_as_result_metadata": false,
       "filterable": true,
       "allowed_values": [
+        {"label": "No class or category","value": "no-class-category"},
         {"label": "1.1 Fresh meat (and offal)","value": "1-1-fresh-meat-and-offal"},
         {"label": "1.2 Meat products (cooked, salted, smoked, etc.)","value": "1-2-meat-products-cooked-salted-smoked-etc"},
         {"label": "1.3 Cheeses","value": "1-3-cheeses"},
@@ -84,6 +85,7 @@
         {"label": "2.18 Leather","value": "2-18-leather"},
         {"label": "2.19 Fur","value": "2-19-fur"},
         {"label": "2.20 Feather","value": "2-20-feather"},
+        {"label": "2.20a Rush","value": "2-20a-rush"},
         {"label": "2.21 Prepared meals","value": "2-21-prepared-meals"},
         {"label": "2.22 Beers","value": "2-22-beers"},
         {"label": "2.23 Chocolate and derived products","value": "2-23-chocolate-and-derived-products"},
@@ -143,7 +145,8 @@
         {"label": "99. Other spirit drink","value": "99-other-spirit-drink"},
         {"label": "Traditional Term","value": "traditional-term"},
         {"label": "1. Aromatised wine","value": "1-aromatised-wine"},
-        {"label": "2. Aromatised wine-based drink","value": "2-aromatised-wine-based-drink"}
+        {"label": "2. Aromatised wine-based drink","value": "2-aromatised-wine-based-drink"},
+        {"label": "Spirit drink","value": "spirit-drink"}
       ]
     },
     {
