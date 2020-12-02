@@ -142,7 +142,7 @@ module Importers
         content = ""
 
         # Product specification
-        if data["Product type"] != "Traditional term"
+        if data["Product type"] != "Traditional term" && data["Reason for protection"] != "UK trade agreement"
           content += "## Product specification \n\n" \
             "The product specification is not available on this site. " \
             "[Email Defra](protectedfoodnames@defra.gov.uk) for the product specification.\n\n" \
