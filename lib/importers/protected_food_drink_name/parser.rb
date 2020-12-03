@@ -35,6 +35,10 @@ module Importers
       end
 
       def register
+        if data["Protection type"] == "American viticultural area" || data["Protection type"] == "US spirit drink"
+          return "american-viticultural-areas"
+        end
+
         if data["Protection type"] == "Name protected by international treaty"
           return "names-protected-by-international-treaty"
         end
@@ -135,6 +139,10 @@ module Importers
           "Traditional term for wine"
         when "Name protected by international treaty"
           "Name protected by international treaty"
+        when "American viticultural area"
+          "American viticultural area"
+        when "US spirit drink"
+          "Protected spirit drink name"
         end
       end
 
@@ -142,11 +150,10 @@ module Importers
         content = ""
 
         # Product specification
-        if data["Product type"] != "Traditional term"
+        if data["Product type"] != "Traditional term" && data["Reason for protection"] != "UK trade agreement"
           content += "## Product specification \n\n" \
             "The product specification is not available on this site. " \
-            "Find out how to [get a product specification for a protected food name]" \
-            "(https://www.gov.uk/link-to-follow) on GOV.UK.\n\n"
+            "[Email Defra](protectedfoodnames@defra.gov.uk) for the product specification.\n\n" \
         end
 
         # Decision notice and protection instrument title
@@ -246,6 +253,7 @@ module Importers
           "Class 2.18. Leather" => "2-18-leather",
           "Class 2.19. Fur" => "2-19-fur",
           "Class 2.20. Feather" => "2-20-feather",
+          "Class 2.20a. Rush" => "2-20a-rush",
           "Class 2.21. Prepared meals" => "2-21-prepared-meals",
           "Class 2.22. Beers" => "2-22-beers",
           "Class 2.23. Chocolate and derived products" => "2-23-chocolate-and-derived-products",
@@ -306,6 +314,8 @@ module Importers
           "1. Aromatised wine" => "1-aromatised-wine",
           "2. Aromatised wine-based drink" => "2-aromatised-wine-based-drink",
           "Traditional term" => "traditional-term",
+          "Spirit drink" => "spirit-drink",
+          "No class or category" => "no-class-or-category",
         }
       end
 
@@ -317,6 +327,8 @@ module Importers
           "Traditional Term" => "traditional-term",
           "Geographical indication (GI)" => "geographical-indication-gi",
           "Name protected by international treaty" => "name-protected-by-international-treaty",
+          "American viticultural area" => "american-viticultural-area",
+          "US spirit drink" => "us-spirit-drink",
         }
       end
 
@@ -345,11 +357,13 @@ module Importers
           "Estonia" => "estonia",
           "Finland" => "finland",
           "France" => "france",
+          "Georgia" => "georgia",
           "Germany" => "germany",
           "Greece" => "greece",
           "Guatemala" => "guatemala",
           "Guinea" => "guinea",
           "Guyana" => "guyana",
+          "Honduras" => "honduras",
           "Hungary" => "hungary",
           "India" => "india",
           "Indonesia" => "indonesia",
@@ -362,6 +376,7 @@ module Importers
           "Luxembourg" => "luxembourg",
           "Malta" => "malta",
           "Mexico" => "mexico",
+          "Moldova" => "moldova",
           "Mongolia" => "mongolia",
           "Morocco" => "morocco",
           "Netherlands" => "netherlands",
@@ -384,6 +399,7 @@ module Importers
           "Thailand" => "thailand",
           "Trinidad and Tobago" => "trinidad-and-tobago",
           "Turkey" => "turkey",
+          "Ukraine" => "ukraine",
           "United States" => "united-states",
           "Vietnam" => "vietnam",
         }

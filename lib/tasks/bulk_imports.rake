@@ -9,7 +9,7 @@ namespace :bulk_imports do
     imported_count = 0
     total_count = 0
 
-    CSV.foreach(args.file_path, headers: true, skip_blanks: true).with_index do |row, index|
+    CSV.foreach(args.file_path, headers: true, skip_blanks: true, converters: ->(f) { f&.strip }).with_index do |row, index|
       next if row.all?(&:blank?)
 
       total_count += 1
