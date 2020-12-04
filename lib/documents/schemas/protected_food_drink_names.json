@@ -17,6 +17,13 @@
   "document_noun": "name",
   "facets": [
     {
+      "key": "registered_name",
+      "name": "Registered name",
+      "type": "text",
+      "display_as_result_metadata": false,
+      "filterable": false
+    },
+    {
       "key": "register",
       "name": "Register",
       "type": "text",

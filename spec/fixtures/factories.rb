@@ -453,6 +453,7 @@ FactoryBot.define do
     transient do
       default_metadata do
         {
+          "registered_name" => "Registered name",
           "register" => "foods-designated-origin-and-geographical-indication",
           "status" => "registered",
           "class_category" => ["1-1-fresh-meat-and-offal"],

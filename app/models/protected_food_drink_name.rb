@@ -1,4 +1,5 @@
 class ProtectedFoodDrinkName < Document
+  validates :registered_name, presence: true
   validates :register, presence: true
   validates :status, presence: true
   validates :class_category, presence: true
@@ -13,6 +14,7 @@ class ProtectedFoodDrinkName < Document
   validates :date_registration_eu, presence: true, date: true, allow_blank: true
 
   FORMAT_SPECIFIC_FIELDS = %i[
+    registered_name
     register
     status
     class_category

@@ -27,6 +27,7 @@ RSpec.feature "Creating a Protected Food Drink Name", type: :feature do
     title = "Example Protected Food Drink Name"
     summary = "This is the summary of an example protected food name"
     fill_in "Title", with: title
+    fill_in "Registered name", with: title
     fill_in "Summary", with: summary
     fill_in "Body", with: ("## Header" + ("\n\nThis is the long body of an example protected food name" * 10))
     select "Foods: designated origin and geographical indication", from: "Register"
