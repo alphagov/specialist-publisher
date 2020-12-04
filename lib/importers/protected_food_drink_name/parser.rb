@@ -315,7 +315,7 @@ module Importers
           "2. Aromatised wine-based drink" => "2-aromatised-wine-based-drink",
           "Traditional term" => "traditional-term",
           "Spirit drink" => "spirit-drink",
-          "No class or category" => "no-class-or-category",
+          "No class or category" => "no-class-category",
         }
       end
 
