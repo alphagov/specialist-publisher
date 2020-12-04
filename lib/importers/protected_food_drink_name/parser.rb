@@ -50,7 +50,7 @@ module Importers
         when "Traditional term" then "traditional-terms-for-wine"
         when "Food"
           if data["Protection type"] == "Traditional Specialities Guaranteed (TSG)"
-            "foods-traditional-speciality"
+            "foods-traditional-speciality-guaranteed"
           else
             "foods-designated-origin-and-geographical-indication"
           end
