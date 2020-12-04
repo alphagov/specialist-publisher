@@ -8,6 +8,7 @@ module Importers
       def get_attributes
         {
           title: title,
+          registered_name: registered_name,
           register: register,
           status: status,
           class_category: class_category,
@@ -31,7 +32,11 @@ module Importers
       attr_reader :data
 
       def title
-        data["Registered product name"]
+        data["Title"]
+      end
+
+      def registered_name
+        data["Registered name"]
       end
 
       def register
@@ -172,7 +177,7 @@ module Importers
 
         # Protection instrument
         if data["Protection instrument"].present?
-          content += "\n[Protection instrument for #{data['Registered product name']}]" \
+          content += "\n[Protection instrument for #{registered_name}]" \
             "(#{data['Protection instrument']})"
 
           content += if data["Date of publication of the instrument"].present?

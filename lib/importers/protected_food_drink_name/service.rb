@@ -30,10 +30,10 @@ module Importers
 
           unless Services.with_timeout(30) { document.save }
             validation_errors = document.errors.full_messages.join(". ")
-            result.error = "Registered product name: #{document.title}. #{validation_errors}"
+            result.error = "Registered name: #{document.title}. #{validation_errors}"
           end
         rescue StandardError => e
-          result.error = "Registered product name: #{document&.title}. #{e.message}\nBacktrace: #{e.backtrace[0..10].join("\n")}"
+          result.error = "Registered name: #{document&.title}. #{e.message}\nBacktrace: #{e.backtrace[0..10].join("\n")}"
         end
 
         # give it time to breathe... why not...
