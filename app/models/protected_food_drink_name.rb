@@ -10,7 +10,7 @@ class ProtectedFoodDrinkName < Document
   validates :traditional_term_language, presence: true, allow_blank: true
   validates :reason_for_protection, presence: true, allow_blank: true
   validates :date_application, presence: true, date: true, allow_blank: true
-  validates :date_registration, presence: true, date: true
+  validates :date_registration, presence: true, date: true, allow_blank: true
   validates :date_registration_eu, presence: true, date: true, allow_blank: true
 
   FORMAT_SPECIFIC_FIELDS = %i[

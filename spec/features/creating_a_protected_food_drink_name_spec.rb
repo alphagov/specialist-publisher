@@ -62,7 +62,6 @@ RSpec.feature "Creating a Protected Food Drink Name", type: :feature do
     expect(page).to have_content("Class category can't be blank")
     expect(page).to have_content("Protection type can't be blank")
     expect(page).to have_content("Country of origin can't be blank")
-    expect(page).to have_content("Date registration can't be blank")
   end
 
   scenario "with invalid data" do

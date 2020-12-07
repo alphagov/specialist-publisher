@@ -21,9 +21,8 @@ RSpec.describe "rake import", rake_task: true do
         expected_output = "ERROR - Document index: 1. Registered name: . Title can't be blank. Registered name can't be blank\n" \
           "ERROR - Document index: 2. Registered name: Irish Poteen/Irish Poitín. Status can't be blank\n" \
           "ERROR - Document index: 3. Registered name: Irish Whiskey/Uisce Beatha Eireannach/Irish Whisky. Country of origin can't be blank\n" \
-          "ERROR - Document index: 4. Registered name: Scotch Whisky. Date registration can't be blank\n" \
           "ERROR - Document index: 6. Registered name: Tennessee whisky (Also spelled as “Tennessee whiskey”). Register can't be blank\n" \
-          "3 out of 8 records imported. 5 errors reported\n"
+          "4 out of 8 records imported. 4 errors reported\n"
 
         expect { Rake::Task["bulk_imports:protected_food_and_drink_names"].invoke(csv_file) }.to \
           output(expected_output).to_stdout
