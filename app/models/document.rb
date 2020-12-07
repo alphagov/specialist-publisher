@@ -107,7 +107,7 @@ class Document
 
   def base_path
     if first_draft?
-      @base_path = "#{finder_schema.base_path}/#{title.parameterize}"
+      @base_path = "#{finder_schema.base_path}/#{title.to_url}"
     else
       @base_path
     end
