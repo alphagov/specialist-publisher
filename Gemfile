@@ -14,6 +14,7 @@ gem "mongo"
 gem "mongoid"
 gem "pundit"
 gem "sass-rails"
+gem "stringex"
 gem "uglifier"
 
 # v4 changes the generated HTML and breaks the e2e tests

@@ -16,4 +16,12 @@ RSpec.describe ProtectedFoodDrinkName do
       expect(document.base_path).to eq("/protected-food-drink-names/sterea-ellada")
     end
   end
+
+  context "with Cyrillic characters" do
+    subject(:document) { ProtectedFoodDrinkName.new(title: "Черноморски район") }
+
+    it "has a valid base_path" do
+      expect(document.base_path).to eq("/protected-food-drink-names/chiernomorski-raion")
+    end
+  end
 end
