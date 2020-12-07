@@ -20,6 +20,7 @@ module Importers
           traditional_term_language: traditional_term_language,
           date_application: date_application,
           date_registration: date_registration,
+          time_registration: time_registration,
           date_registration_eu: date_registration_eu,
           body: body,
           summary: summary,
@@ -112,6 +113,10 @@ module Importers
 
       def date_registration
         parse_date(data["Date of UK registration"])
+      end
+
+      def time_registration
+        "23:00"
       end
 
       def date_registration_eu

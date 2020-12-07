@@ -45,6 +45,7 @@ RSpec.describe Importers::ProtectedFoodDrinkName::Parser do
         traditional_term_language: nil,
         date_application: nil,
         date_registration: "2020-12-31",
+        time_registration: "23:00",
         date_registration_eu: nil,
         body: "## Product specification \n\nThe product specification is not available on this site. [Email Defra](protectedfoodnames@defra.gov.uk) for the product specification.\n\n",
         summary: "Protected spirit drink name",
