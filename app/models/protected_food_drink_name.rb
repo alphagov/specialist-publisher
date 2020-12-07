@@ -11,6 +11,7 @@ class ProtectedFoodDrinkName < Document
   validates :reason_for_protection, presence: true, allow_blank: true
   validates :date_application, presence: true, date: true, allow_blank: true
   validates :date_registration, presence: true, date: true, allow_blank: true
+  validates :time_registration, presence: true, time: true, allow_blank: true
   validates :date_registration_eu, presence: true, date: true, allow_blank: true
 
   FORMAT_SPECIFIC_FIELDS = %i[
@@ -26,6 +27,7 @@ class ProtectedFoodDrinkName < Document
     reason_for_protection
     date_application
     date_registration
+    time_registration
     date_registration_eu
     internal_notes
   ].freeze
