@@ -1,3 +1,7 @@
+<%= render layout: "shared/form_group", locals: { f: f, field: :registered_name } do %>
+  <%= f.text_field :registered_name, class: 'form-control' %>
+<% end %>
+
 <%= render layout: "shared/form_group", locals: { f: f, field: :register } do %>
   <%= f.select :register,
       f.object.facet_options(:register),
@@ -95,6 +99,10 @@
 <% end %>
 
 <%= render layout: "shared/date_fields", locals: { f: f, field: :date_registration, format: :protected_food_drink_name } do %>
+<% end %>
+
+<%= render layout: "shared/form_group", locals: { f: f, field: :time_registration } do %>
+  <%= f.text_field :time_registration, class: 'form-control' %>
 <% end %>
 
 <%= render layout: "shared/date_fields", locals: { f: f, field: :date_registration_eu, format: :protected_food_drink_name } do %>

@@ -8,6 +8,7 @@ module Importers
       def get_attributes
         {
           title: title,
+          registered_name: registered_name,
           register: register,
           status: status,
           class_category: class_category,
@@ -19,6 +20,7 @@ module Importers
           traditional_term_language: traditional_term_language,
           date_application: date_application,
           date_registration: date_registration,
+          time_registration: time_registration,
           date_registration_eu: date_registration_eu,
           body: body,
           summary: summary,
@@ -31,7 +33,11 @@ module Importers
       attr_reader :data
 
       def title
-        data["Registered product name"]
+        data["Title"]
+      end
+
+      def registered_name
+        data["Registered name"]
       end
 
       def register
@@ -109,6 +115,10 @@ module Importers
         parse_date(data["Date of UK registration"])
       end
 
+      def time_registration
+        "23:00"
+      end
+
       def date_registration_eu
         parse_date(data["Date of original registration with the EU"])
       end
@@ -172,7 +182,7 @@ module Importers
 
         # Protection instrument
         if data["Protection instrument"].present?
-          content += "\n[Protection instrument for #{data['Registered product name']}]" \
+          content += "\n[Protection instrument for #{registered_name}]" \
             "(#{data['Protection instrument']})"
 
           content += if data["Date of publication of the instrument"].present?

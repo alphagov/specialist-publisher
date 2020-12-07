@@ -17,6 +17,13 @@
   "document_noun": "name",
   "facets": [
     {
+      "key": "registered_name",
+      "name": "Registered name",
+      "type": "text",
+      "display_as_result_metadata": false,
+      "filterable": false
+    },
+    {
       "key": "register",
       "name": "Register",
       "type": "text",
@@ -343,6 +350,13 @@
       "key": "date_registration",
       "name": "Date of UK registration",
       "type": "date",
+      "display_as_result_metadata": true,
+      "filterable": false
+    },
+    {
+      "key": "time_registration",
+      "name": "Time of UK registration",
+      "type": "text",
       "display_as_result_metadata": true,
       "filterable": false
     },

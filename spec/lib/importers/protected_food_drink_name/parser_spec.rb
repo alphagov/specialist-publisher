@@ -6,7 +6,8 @@ RSpec.describe Importers::ProtectedFoodDrinkName::Parser do
   describe "#get_attributes" do
     let(:row) do
       {
-        "Registered product name" => "Irish Cream",
+        "Title" => "Irish Cream",
+        "Registered name" => "Irish Cream",
         "Status" => "Registered",
         "Class or category of product" => "32. Liqueur",
         "Protection type" => "Geographical indication (GI)",
@@ -32,6 +33,7 @@ RSpec.describe Importers::ProtectedFoodDrinkName::Parser do
     it "parses the content of a Csv::Row into attributes that match ProtectedFoodDrinkName formats" do
       expected_result = {
         title: "Irish Cream",
+        registered_name: "Irish Cream",
         register: "spirit-drinks",
         status: "registered",
         class_category: %w[32-liqueur],
@@ -43,6 +45,7 @@ RSpec.describe Importers::ProtectedFoodDrinkName::Parser do
         traditional_term_language: nil,
         date_application: nil,
         date_registration: "2020-12-31",
+        time_registration: "23:00",
         date_registration_eu: nil,
         body: "## Product specification \n\nThe product specification is not available on this site. [Email Defra](protectedfoodnames@defra.gov.uk) for the product specification.\n\n",
         summary: "Protected spirit drink name",

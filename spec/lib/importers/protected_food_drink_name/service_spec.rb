@@ -5,7 +5,8 @@ RSpec.describe Importers::ProtectedFoodDrinkName::Service do
   describe ".call" do
     let(:row) do
       {
-        "Registered product name" => "Irish Cream",
+        "Title" => "Irish Cream",
+        "Registered name" => "Irish Cream",
         "Status" => "Registered",
         "Class or category of product" => "32. Liqueur",
         "Protection type" => "Geographical indication (GI)",
@@ -43,7 +44,7 @@ RSpec.describe Importers::ProtectedFoodDrinkName::Service do
         response = described_class.call(row)
 
         expect(response).to_not be_successful
-        expect(response.error).to eq("Registered product name: Irish Cream. Status can't be blank")
+        expect(response.error).to eq("Registered name: Irish Cream. Status can't be blank")
       end
     end
   end
