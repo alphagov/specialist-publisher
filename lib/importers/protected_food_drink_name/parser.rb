@@ -162,8 +162,8 @@ module Importers
         # Product specification
         if data["Product type"] != "Traditional term" && data["Reason for protection"] != "UK trade agreement"
           content += "## Product specification \n\n" \
-            "The product specification is not available on this site. " \
-            "[Email Defra](protectedfoodnames@defra.gov.uk) for the product specification.\n\n" \
+            "The product specification is not yet available on this site. " \
+            "For any enquiries please [email Defra](mailto:protectedfoodnames@defra.gov.uk).\n\n" \
         end
 
         # Decision notice and protection instrument title
