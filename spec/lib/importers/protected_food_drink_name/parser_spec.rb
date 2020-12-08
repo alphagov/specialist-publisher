@@ -47,7 +47,7 @@ RSpec.describe Importers::ProtectedFoodDrinkName::Parser do
         date_registration: "2020-12-31",
         time_registration: "23:00",
         date_registration_eu: nil,
-        body: "## Product specification \n\nThe product specification is not available on this site. [Email Defra](protectedfoodnames@defra.gov.uk) for the product specification.\n\n",
+        body: "## Product specification \n\nThe product specification is not yet available on this site. For any enquiries please [email Defra](mailto:protectedfoodnames@defra.gov.uk).\n\n",
         summary: "Protected spirit drink name",
         internal_notes: "The GI covers products from Ireland and Northern Ireland https://www.gov.uk/government/publications/protected-food-name-irish-cream-pgi",
       }
