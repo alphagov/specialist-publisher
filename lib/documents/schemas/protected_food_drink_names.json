@@ -37,8 +37,7 @@
         {"label": "Spirit drinks","value": "spirit-drinks"},
         {"label": "Wines","value": "wines"},
         {"label": "Aromatised wines","value": "aromatised-wines"},
-        {"label": "Traditional terms for wine","value": "traditional-terms-for-wine"},
-        {"label": "Names protected by international treaty", "value": "names-protected-by-international-treaty"}
+        {"label": "Traditional terms for wine","value": "traditional-terms-for-wine"}
       ]
     },
     {
