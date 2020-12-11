@@ -4,6 +4,12 @@ gem "rails", "6.0.3.4"
 
 gem "bootstrap-kaminari-views"
 gem "fog-aws"
+gem "gds-api-adapters"
+gem "gds-sso"
+gem "govspeak"
+gem "govuk_admin_template"
+gem "govuk_app_config"
+gem "govuk_frontend_toolkit"
 gem "govuk_sidekiq"
 gem "hashdiff"
 gem "jquery-rails"
@@ -12,22 +18,12 @@ gem "kaminari-mongoid"
 gem "mail-notify"
 gem "mongo"
 gem "mongoid"
+gem "plek"
 gem "pundit"
-gem "sass-rails"
+gem "sassc-rails"
+gem "select2-rails", "< 4" # v4 changes the generated HTML and breaks the e2e tests
 gem "stringex"
 gem "uglifier"
-
-# v4 changes the generated HTML and breaks the e2e tests
-gem "select2-rails", "< 4"
-
-# GDS managed dependencies
-gem "gds-api-adapters"
-gem "gds-sso"
-gem "govspeak"
-gem "govuk_admin_template"
-gem "govuk_app_config"
-gem "govuk_frontend_toolkit"
-gem "plek"
 
 group :development do
   gem "listen"

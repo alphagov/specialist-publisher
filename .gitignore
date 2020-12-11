@@ -9,3 +9,6 @@
 tmp
 coverage
 /coverage
+node_modules
+yarn-error.log
+public/assets

@@ -12,12 +12,11 @@ $elements-red: #b10e1e;
 
   h4 {
     margin-top: 0;
-    color: black;
+    color: $black;
   }
 }
 
 form {
-
   .select2 {
     width: 100%;
   }
@@ -37,7 +36,7 @@ form {
     padding-left: 15px;
 
     label {
-      color: black;
+      color: $black;
     }
 
     .elements-error-message {
@@ -45,12 +44,12 @@ form {
       font-weight: bold;
     }
 
-    input, textarea {
+    input,
+    textarea {
       border-width: 2px;
       border-radius: 0;
       border-color: $elements-red;
     }
-
   }
 
   .error-list {
@@ -73,6 +72,7 @@ form {
     .error {
       color: $mellow-red;
     }
+
     li {
       padding-top: 3px;
       padding-bottom: 2px;
@@ -86,7 +86,7 @@ form {
   .preview {
     border: 1px solid $border-colour;
     padding: $gutter-half;
-    margin: 20px 0 0 0;
+    margin: 20px 0 0;
 
     .visuallyhidden {
       position: absolute;
@@ -101,15 +101,17 @@ form {
 
 .summary-length-info {
   text-align: right;
+
   &.warning {
-    color: #C09853;
+    color: #c09853;
   }
+
   .count {
     font-weight: bold;
   }
 }
 
-h2.with-actions {
+h2.with-actions { // stylelint-disable-line selector-no-qualifying-type
   width: 50%;
   float: left;
 }
@@ -122,20 +124,20 @@ h2.with-actions {
 
   li {
     display: inline;
-    padding: 0 0em 0 1em;
+    padding: 0 0 0 1em;
     float: right;
   }
 }
 
 .actions {
   border-top: 1px solid #eeeeee;
-  padding-top:$gutter;
+  padding-top: $gutter;
   margin-top: $gutter;
   max-width: 600px;
 
   form {
     display: inline-block;
-    margin-right:$gutter-one-third;
+    margin-right: $gutter-one-third;
   }
 
   .panel {
@@ -143,12 +145,12 @@ h2.with-actions {
   }
 }
 
-.date-layout .row .col-md-2{
+.date-layout .row .col-md-2 {
   font-weight: normal;
 }
 
 .date-layout .form-hint {
-  color: #80858A;
+  color: #80858a;
 }
 // Two digit date form inputs are formatted 03 rather than 3. Using the spin buttons displayed single digit numbers (aka 3 rather than 03) which could be confusing to a user. The code below removes the spin buttons.
 input[type=number]::-webkit-inner-spin-button,
