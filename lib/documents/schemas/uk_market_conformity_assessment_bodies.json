@@ -68,6 +68,10 @@
         {
           "label": "Third country body",
           "value": "third-country-body"
+        },
+        {
+          "label": "Notified body (NI)",
+          "value": "notified-body-ni"
         }
       ]
     },
@@ -981,6 +985,10 @@
         {
           "label": "Measuring instruments",
           "value": "measuring-instruments"
+        },
+        {
+          "label": "Medical devices",
+          "value": "medical-devices"
         },
         {
           "label": "Noise emissions in the environment by equipment for use outdoors",
