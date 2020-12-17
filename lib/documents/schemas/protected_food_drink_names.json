@@ -327,6 +327,34 @@
       ]
     },
     {
+      "key": "date_application",
+      "name": "Date of application",
+      "type": "date",
+      "display_as_result_metadata": false,
+      "filterable": false
+    },
+    {
+      "key": "date_registration",
+      "name": "Date of registration (UK scheme)",
+      "type": "date",
+      "display_as_result_metadata": true,
+      "filterable": false
+    },
+    {
+      "key": "time_registration",
+      "name": "Time of registration (UK scheme)",
+      "type": "text",
+      "display_as_result_metadata": true,
+      "filterable": false
+    },
+    {
+      "key": "date_registration_eu",
+      "name": "Date of original registration with the EU",
+      "type": "date",
+      "display_as_result_metadata": false,
+      "filterable": false
+    },
+    {
       "key": "reason_for_protection",
       "name": "Reason for protection",
       "type": "text",
@@ -338,34 +366,6 @@
         {"label": "UK trade agreement","value": "uk-trade-agreement"},
         {"label": "Application to UK scheme from 2021","value": "uk-gi-after-2021"}
       ]
-    },
-    {
-      "key": "date_application",
-      "name": "Date of application",
-      "type": "date",
-      "display_as_result_metadata": false,
-      "filterable": false
-    },
-    {
-      "key": "date_registration",
-      "name": "Date of UK registration",
-      "type": "date",
-      "display_as_result_metadata": true,
-      "filterable": false
-    },
-    {
-      "key": "time_registration",
-      "name": "Time of UK registration",
-      "type": "text",
-      "display_as_result_metadata": true,
-      "filterable": false
-    },
-    {
-      "key": "date_registration_eu",
-      "name": "Date of original registration with the EU",
-      "type": "date",
-      "display_as_result_metadata": false,
-      "filterable": false
     },
     {
       "key": "internal_notes",
