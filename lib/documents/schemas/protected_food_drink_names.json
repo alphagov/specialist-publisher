@@ -183,6 +183,7 @@
       "filterable": true,
       "allowed_values": [
         {"label": "United Kingdom","value": "united-kingdom"},
+        {"label": "Albania","value": "albania"},
         {"label": "Andorra","value": "andorra"},
         {"label": "Armenia","value": "armenia"},
         {"label": "Australia","value": "australia"},
