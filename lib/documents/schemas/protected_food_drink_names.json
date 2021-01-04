@@ -1,9 +1,9 @@
 {
   "content_id": "9018138a-0ca5-4a35-8b7c-3a7f39dc56f8",
   "base_path": "/protected-food-drink-names",
-  "format_name": "Protected Geographical Food and Drink Name",
-  "name": "Protected Geographical Food and Drink Names",
-  "description": "Find protected food and drink names in the official UK registers published by Defra",
+  "format_name": "Protected geographical food and drink name",
+  "name": "Protected geographical food and drink names",
+  "description": "Find protected food and drink names in the official GB registers published by Defra.",
   "filter": {
     "format": "protected_food_drink_name"
   },
@@ -12,7 +12,7 @@
   "signup_copy": "You'll get an email each time a food or drink name is updated or a new name is published.",
   "organisations": ["de4e9dc6-cca4-43af-a594-682023b84d6c"],
   "subscription_list_title_prefix": "Protected geographical food and drink names",
-  "summary": "<p>Find protected food and drink names in the official UK registers published by Defra</p>",
+  "summary": "<p>Find protected food and drink names in the official GB registers published by Defra. Find out more about the <a href=\"https://www.gov.uk/guidance/protected-geographical-food-and-drink-names-uk-gi-schemes\">UK’s protected food and drinks schemes</a>.</p>",
   "document_noun": "name",
   "facets": [
     {
@@ -30,13 +30,13 @@
       "display_as_result_metadata": false,
       "filterable": true,
       "allowed_values": [
-        {"label": "American viticultural areas and US spirit drink names of origin", "value": "american-viticultural-areas"},
         {"label": "Foods: designated origin and geographical indication","value": "foods-designated-origin-and-geographical-indication"},
         {"label": "Foods: traditional speciality guaranteed","value": "foods-traditional-speciality-guaranteed"},
         {"label": "Spirit drinks","value": "spirit-drinks"},
         {"label": "Wines","value": "wines"},
         {"label": "Aromatised wines","value": "aromatised-wines"},
-        {"label": "Traditional terms for wine","value": "traditional-terms-for-wine"}
+        {"label": "Traditional terms for wine","value": "traditional-terms-for-wine"},
+        {"label": "American viticultural areas and US spirit drink names of origin", "value": "american-viticultural-areas"}
       ]
     },
     {
