@@ -30,13 +30,13 @@
       "display_as_result_metadata": false,
       "filterable": true,
       "allowed_values": [
-        {"label": "American viticultural areas and US spirit drink names of origin", "value": "american-viticultural-areas"},
         {"label": "Foods: designated origin and geographical indication","value": "foods-designated-origin-and-geographical-indication"},
         {"label": "Foods: traditional speciality guaranteed","value": "foods-traditional-speciality-guaranteed"},
         {"label": "Spirit drinks","value": "spirit-drinks"},
         {"label": "Wines","value": "wines"},
         {"label": "Aromatised wines","value": "aromatised-wines"},
-        {"label": "Traditional terms for wine","value": "traditional-terms-for-wine"}
+        {"label": "Traditional terms for wine","value": "traditional-terms-for-wine"},
+        {"label": "American viticultural areas and US spirit drink names of origin", "value": "american-viticultural-areas"}
       ]
     },
     {
