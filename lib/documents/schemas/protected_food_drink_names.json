@@ -163,14 +163,13 @@
       "display_as_result_metadata": false,
       "filterable": true,
       "allowed_values": [
-        {"label": "American viticultural area", "value": "american-viticultural-area"},
         {"label": "Protected Geographical Indication (PGI)","value": "protected-geographical-indication-pgi"},
         {"label": "Protected Designation of Origin (PDO)","value": "protected-designation-of-origin-pdo"},
         {"label": "Traditional Speciality Guaranteed (TSG)","value": "traditional-speciality-guaranteed-tsg"},
         {"label": "Traditional Term","value": "traditional-term"},
         {"label": "Geographical Indication (GI)","value": "geographical-indication-gi"},
-        {"label": "Names protected by international treaty", "value": "name-protected-by-international-treaty"},
-        {"label": "US Spirit Drink", "value": "us-spirit-drink"}
+        {"label": "US Spirit Drink", "value": "us-spirit-drink"},
+        {"label": "American viticultural area", "value": "american-viticultural-area"}
       ]
     },
     {
