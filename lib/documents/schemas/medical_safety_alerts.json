@@ -25,13 +25,6 @@
       "required": true,
       "facet_choices": [
         {
-          "key": "devices",
-          "radio_button_name": "Medical device alerts",
-          "topic_name": "medical device alerts",
-          "body": "information published by the MHRA about defective medical devices.",
-          "prechecked": true
-        },
-        {
           "key": "drugs",
           "radio_button_name": "Drug alerts",
           "topic_name": "drug alerts",
