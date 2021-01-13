@@ -73,7 +73,6 @@
       "filterable": true,
       "allowed_values": [
         {"label": "Drug alert", "value": "drugs"},
-        {"label": "Medical device alert", "value": "devices"},
         {"label": "Field safety notice", "value": "field-safety-notices"},
         {"label": "Drug alert: company-led", "value": "company-led-drugs"},
         {"label": "National patient safety alert", "value": "national-patient-safety"},
