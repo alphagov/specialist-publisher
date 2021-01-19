@@ -40,6 +40,7 @@
       "display_as_result_metadata": false,
       "filterable": true,
       "allowed_values": [
+        {"label": "Air quality", "value": "air-quality"},
         {"label": "Arable land", "value": "arable-land"},
         {"label": "Boundaries", "value": "boundaries"},
         {"label": "Coast", "value": "coast"},
