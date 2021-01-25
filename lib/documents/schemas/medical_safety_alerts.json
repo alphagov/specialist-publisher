@@ -58,6 +58,13 @@
           "topic_name": "device safety information",
           "body": "information published by the MHRA related to device safety.",
           "prechecked": true
+        },
+        {
+          "key": "medicines-recall-notification",
+          "radio_button_name": "Medicines recall/notification",
+          "topic_name": "medicines recall/notification",
+          "body": "information published by the MHRA about defective medicines.",
+          "prechecked": true
         }
       ]
     }
@@ -76,7 +83,8 @@
         {"label": "Field safety notice", "value": "field-safety-notices"},
         {"label": "Drug alert: company-led", "value": "company-led-drugs"},
         {"label": "National patient safety alert", "value": "national-patient-safety"},
-        {"label": "Device safety information", "value": "device-safety-information"}
+        {"label": "Device safety information", "value": "device-safety-information"},
+        {"label": "Medicines recall/notification", "value": "medicines-recall-notification"}
       ]
     },
     {
