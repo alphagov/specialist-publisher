@@ -63,7 +63,7 @@
           "key": "medicines-recall-notification",
           "radio_button_name": "Medicines recall/notification",
           "topic_name": "medicines recall/notification",
-          "body": "information published by the MHRA about defective medicines.",
+          "body": "information published by the MHRA related to medicines.",
           "prechecked": true
         }
       ]
