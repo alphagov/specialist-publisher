@@ -394,7 +394,7 @@ FactoryBot.define do
     transient do
       default_metadata do
         {
-          "category" => "managing-flood-incidents",
+          "flood_and_coastal_erosion_category" => "managing-flood-incidents",
           "project_code" => "code",
           "project_status" => "ongoing",
           "topics" => %w[big-data carbon],
