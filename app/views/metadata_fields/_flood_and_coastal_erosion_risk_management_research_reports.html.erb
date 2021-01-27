@@ -1,6 +1,6 @@
 <%= render layout: "shared/form_group", locals: { f: f, field: :category } do %>
-  <%= f.select :category,
-      f.object.facet_options(:category),
+  <%= f.select :flood_and_coastal_erosion_category,
+      f.object.facet_options(:flood_and_coastal_erosion_category),
       {},
       { class: "form-control" }
   %>

@@ -1,5 +1,5 @@
 class FloodAndCoastalErosionRiskManagementResearchReport < Document
-  validates :category, presence: true
+  validates :flood_and_coastal_erosion_category, presence: true
   validates :date_of_completion, date: true
   validates :date_of_start, date: true
   validates :project_code, presence: true
@@ -8,7 +8,7 @@ class FloodAndCoastalErosionRiskManagementResearchReport < Document
   validates :primary_publishing_organisation, presence: true
 
   FORMAT_SPECIFIC_FIELDS = %i[
-    category
+    flood_and_coastal_erosion_category
     date_of_completion
     date_of_start
     project_code
