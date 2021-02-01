@@ -25,24 +25,10 @@
       "required": true,
       "facet_choices": [
         {
-          "key": "drugs",
-          "radio_button_name": "Drug alerts",
-          "topic_name": "drug alerts",
-          "body": "information published by the MHRA about defective medicines.",
-          "prechecked": true
-        },
-        {
           "key": "field-safety-notices",
           "radio_button_name": "Field safety notice",
           "topic_name": "field safety notice",
           "body": "information from medical device manufacturers.",
-          "prechecked": true
-        },
-        {
-          "key": "company-led-drugs",
-          "radio_button_name": "Drug alert: company-led",
-          "topic_name": "drug alert: company-led",
-          "body": "recalls of medicines issued by manufacturers.",
           "prechecked": true
         },
         {
