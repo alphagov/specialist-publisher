@@ -381,7 +381,7 @@ FactoryBot.define do
           "location" => %w[ghana],
           "development_sector" => %w[climate-change],
           "eligible_entities" => %w[non-governmental-organisations],
-          "value_of_funding" => %w[up-to-100000],
+          "value_of_funding" => %w[up-to-10000],
         }
       end
     end
