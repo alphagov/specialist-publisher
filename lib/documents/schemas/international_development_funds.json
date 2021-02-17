@@ -4,7 +4,7 @@
   "format_name": "International development funding",
   "name": "International development funding",
   "description": "Find and apply for funds to run international development projects",
-  "summary": "<p>Funds published before 2 September 2020 were published by the Department for International Development (DFID).</p>",
+  "summary": "<p>The funding finder tool is to help potential applicants to view, sort and filter UK Official Development Assistance (ODA) funding opportunities, across all UK government departments.</p><p>Each funding call will include a high level overview and information on how to apply.</p>",
   "filter": {
     "format": "international_development_fund"
   },
@@ -870,6 +870,10 @@
           "value": "humanitarian-emergencies-disasters"
         },
         {
+          "label": "Innovation",
+          "value": "innovation"
+        },
+        {
           "label": "Livelihoods",
           "value": "livelihoods"
         },
@@ -880,6 +884,10 @@
         {
           "label": "Private sector/business",
           "value": "private-sector-business"
+        },
+        {
+          "label": "Research",
+          "value": "research"
         },
         {
           "label": "Technology",
@@ -934,6 +942,10 @@
         {
           "label": "Humanitarian relief organisations",
           "value": "humanitarian-relief-organisations"
+        },
+        {
+          "label": "Organisations based in Low to Middle Income Countries (LMIC)",
+          "value": "organisations-lmic"
         }
       ]
     },
