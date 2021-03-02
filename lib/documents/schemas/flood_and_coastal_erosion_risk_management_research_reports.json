@@ -1,9 +1,9 @@
 {
   "content_id": "a37f6a22-af8a-465a-89df-de5a5b40b6d0",
   "base_path": "/flood-and-coastal-erosion-risk-management-research-reports",
-  "format_name": "Flood and Coastal Erosion Risk Management Research Report",
-  "name": "Flood and Coastal Erosion Risk Management Research Reports",
-  "description": "Find Flood and Coastal Erosion Risk Management Research Reports",
+  "format_name": "Flood and Coastal Erosion Risk Management research report",
+  "name": "Flood and Coastal Erosion Risk Management research reports",
+  "description": "Find Flood and Coastal Erosion Risk Management research reports",
   "filter": {
     "format": "flood_and_coastal_erosion_risk_management_research_report"
   },
@@ -11,7 +11,7 @@
   "document_noun": "research report",
   "signup_content_id": "0b3468bb-ccbe-4c97-9d94-870ae02e977d",
   "signup_copy": "You'll get an email each time a report is updated or a new report is published.",
-  "subscription_list_title_prefix": "Flood and Coastal Erosion Risk Management Research Reports",
+  "subscription_list_title_prefix": "Flood and Coastal Erosion Risk Management research reports",
   "email_filter_by": "flood_and_coastal_erosion_category",
   "email_filter_facets": [
     {
