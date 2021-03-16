@@ -4,6 +4,8 @@ Publishing App for Specialist Documents.
 
 This application does not store documents in a database of its own. Instead it uses Publishing API to store and retrieve documents. MongoDB is used for storing local user records.
 
+Formats can be [flagged](https://github.com/alphagov/specialist-publisher/blob/f8e93142dfad6f3971a73c923b01f2e7352bdb54/lib/documents/schemas/tax_tribunal_decisions.json#L64) as `pre-production`. `pre-production` documents are only publishable on development and integration.
+
 ## Screenshots
 
 ![Specialist Documents - CMA Case Format](docs/specialist-publisher-screenshot.png)
@@ -40,10 +42,6 @@ This is a Ruby on Rails app, and should follow [our Rails app conventions](https
 You can use the [GOV.UK Docker environment](https://github.com/alphagov/govuk-docker) to run the application and its tests with all the necessary dependencies. Follow [the usage instructions](https://github.com/alphagov/govuk-docker#usage) to get started.
 
 **Use GOV.UK Docker to run any commands that follow.**
-
-## Pre-production
-
-A number of formats are [flagged](https://github.com/alphagov/specialist-publisher/blob/f8e93142dfad6f3971a73c923b01f2e7352bdb54/lib/documents/schemas/tax_tribunal_decisions.json#L64) as `pre-production`. `pre-production` documents are only publishable on development and integration.
 
 ### Granting permissions
 
