@@ -69,8 +69,4 @@ $ bundle exec rake
 - [Email alerts](/docs/email-alerts.md)
 - [Rake tasks](/docs/tasks.md)
 - [Creating a new specialist document type](/docs/creating-a-new-specialist-document-type.md)
-
-## Phase 2 migration
-
-There is tonnes of information on our learnings from migrating this app to
-"phase 2" [here](./docs/phase-2-migration/README.md).
+- [Historical info about migrating to use the Publishing API](/docs/phase-2-migration/README.md)
