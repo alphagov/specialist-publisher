@@ -35,24 +35,9 @@ This application does not store documents in a database of its own. Instead it u
 
 ## Technical documentation
 
-
 ## Pre-production
 
 A number of formats are [flagged](https://github.com/alphagov/specialist-publisher/blob/f8e93142dfad6f3971a73c923b01f2e7352bdb54/lib/documents/schemas/tax_tribunal_decisions.json#L64) as `pre-production`. `pre-production` documents are only publishable on development and integration.
-
-## Dependencies
-
-- [alphagov/asset-manager](http://github.com/alphagov/asset-manager): provides uploading for static files
-- [alphagov/publishing-api](http://github.com/alphagov/publishing-api): documents are sent here, persisted and then requested.
-- [alphagov/email-alert-api](http://github.com/alphagov/email-alert-api): sends emails to subscribed users when documents are published
-- [These Gems](https://github.com/alphagov/specialist-publisher-rebuild/blob/master/Gemfile)
-
-### Running the application
-
-```
-$ ./startup.sh
-```
-If you are using the GDS development virtual machine then the application will be available on the host at http://specialist-publisher.dev.gov.uk/
 
 ### Granting permissions
 
@@ -68,18 +53,6 @@ You also need to set the `app_name` for the Dummy API User in Publishing API:
 ```ruby
 User.find_by(email: "dummyapiuser@domain.com").update!(app_name: "specialist-publisher")
 ```
-
-### Populate development database
-
-If you're starting from a blank database, you can quickly get your local database into working order with:
-
-```
-$ bundle exec rake db:seed
-```
-
-Currently this:
-* creates a default user record with basic permissions that allows you to log in and create a new document
-
 
 ### Running the test suite
 
