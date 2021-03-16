@@ -2,6 +2,8 @@
 
 Publishing App for Specialist Documents.
 
+This application does not store documents in a database of its own. Instead it uses Publishing API to store and retrieve documents. MongoDB is used for storing local user records.
+
 ## Screenshots
 
 ![Specialist Documents - CMA Case Format](docs/specialist-publisher-screenshot.png)
@@ -33,13 +35,6 @@ Publishing App for Specialist Documents.
 
 ## Technical documentation
 
-Specialist Publisher is a Ruby on Rails application used to create and manage documents. This application does not store documents in a database of its own. Instead it sends JSON data to the publishing-api where it is persisted in a Postgres datastore. This data is then requested from the publishing-api and displayed to the user.
-
-Another result of publishing a document is that a call is made to the Email Alert Api which will notify Gov Delivery to send an email to subscribers. These emails are sent when a document is first published and also when an editor makes a major update. This is true for all formats other than Drug Safety Updates which are instead sent via a monthly email newsletter.
-
-Attachments are sent to and then handled by Asset Manager. When an attachment is uploaded, Asset Manager will scan the attachment for viruses and then return a URL from which the attachment can be viewed. When an attachment is deleted it will be 'soft' deleted from Asset Manager so as to be no longer viewable by a user.
-
-The original Specialist-Publisher codebase contained Manuals and Finders in the same application. Manuals are now being managed by [Manuals Publisher](https://github.com/alphagov/manuals-publisher).
 
 ## Pre-production
 
@@ -50,7 +45,6 @@ A number of formats are [flagged](https://github.com/alphagov/specialist-publish
 - [alphagov/asset-manager](http://github.com/alphagov/asset-manager): provides uploading for static files
 - [alphagov/publishing-api](http://github.com/alphagov/publishing-api): documents are sent here, persisted and then requested.
 - [alphagov/email-alert-api](http://github.com/alphagov/email-alert-api): sends emails to subscribed users when documents are published
-- Mongo: mongodb used for storing local users
 - [These Gems](https://github.com/alphagov/specialist-publisher-rebuild/blob/master/Gemfile)
 
 ### Running the application
