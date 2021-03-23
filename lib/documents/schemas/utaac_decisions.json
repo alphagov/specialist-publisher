@@ -315,6 +315,10 @@
           "value": "benefits-for-children-guardians-allowance"
         },
         {
+          "label": "Benefits for children - tax free childcare",
+          "value": "benefits-for-children-tax-free-childcare"
+        },
+        {
           "label": "Benefits for children - other",
           "value": "benefits-for-children-other"
         },
