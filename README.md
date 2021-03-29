@@ -63,4 +63,5 @@ $ bundle exec rake
 - [Email alerts](/docs/email-alerts.md)
 - [Rake tasks](/docs/tasks.md)
 - [Creating a new specialist document type](/docs/creating-a-new-specialist-document-type.md)
+- [Updating existing organisation data](/docs/updating-existing-organisation-data.md)
 - [Historical info about migrating to use the Publishing API](/docs/phase-2-migration/README.md)
