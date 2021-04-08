@@ -20,6 +20,6 @@ class ServiceStandardReport < Document
   end
 
   def primary_publishing_organisation
-    "af07d5a5-df63-4ddc-9383-6a666845ebe9"
+    "2fb482e7-3c4d-496f-887d-f8a55a15e89a"
   end
 end
