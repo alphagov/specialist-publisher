@@ -15,6 +15,7 @@ module Services
     @asset_api ||= GdsApi::AssetManager.new(
       Plek.current.find("asset-manager"),
       bearer_token: ENV["ASSET_MANAGER_BEARER_TOKEN"] || "12345678",
+      timeout: 30,
     )
   end
 
