@@ -1,11 +1,4 @@
 Rails.application.routes.draw do
-  get "/healthcheck",
-      to: GovukHealthcheck.rack_response(
-        GovukHealthcheck::SidekiqRedis,
-      )
-
-  get "/rebuild-healthcheck", to: proc { [200, {}, %w[OK]] }
-
   get "/healthcheck/live", to: proc { [200, {}, %w[OK]] }
   get "/healthcheck/ready", to: GovukHealthcheck.rack_response(
     GovukHealthcheck::SidekiqRedis,
