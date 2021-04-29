@@ -9,7 +9,7 @@ applications.
 
 ### Create the schema
 
-See [CMA cases](https://github.com/alphagov/specialist-publisher/blob/master/lib/documents/schemas/cma_cases.json).
+See [CMA cases](https://github.com/alphagov/specialist-publisher/blob/main/lib/documents/schemas/cma_cases.json).
 
 You'll need to generate your own UUIDs for it, e.g.:
 ```
@@ -22,11 +22,11 @@ irb(main):002:0> SecureRandom.uuid
 
 ### Create the model
 
-See [CMA cases](https://github.com/alphagov/specialist-publisher/blob/master/app/models/cma_case.rb)
+See [CMA cases](https://github.com/alphagov/specialist-publisher/blob/main/app/models/cma_case.rb)
 
 ### Create the view template
 
-[CMA cases](https://github.com/alphagov/specialist-publisher/blob/master/app/views/metadata_fields/_cma_cases.html.erb)
+[CMA cases](https://github.com/alphagov/specialist-publisher/blob/main/app/views/metadata_fields/_cma_cases.html.erb)
 
 ## Configure rummager
 
@@ -34,14 +34,14 @@ See [CMA cases](https://github.com/alphagov/specialist-publisher/blob/master/app
 
 Rummager needs a copy of a schema very similar to the one in Specialist Publisher.
 
-See [the CMA case schema](https://github.com/alphagov/rummager/blob/master/config/schema/elasticsearch_types/cma_case.json), [the main ES types list](https://github.com/alphagov/rummager/blob/master/config/schema/indexes/govuk.json) and [the field definitions](https://github.com/alphagov/rummager/blob/1700c85e1484d1d9b2c1d46f276326bc06b51a14/config/schema/field_definitions.json).
+See [the CMA case schema](https://github.com/alphagov/rummager/blob/main/config/schema/elasticsearch_types/cma_case.json), [the main ES types list](https://github.com/alphagov/rummager/blob/main/config/schema/indexes/govuk.json) and [the field definitions](https://github.com/alphagov/rummager/blob/1700c85e1484d1d9b2c1d46f276326bc06b51a14/config/schema/field_definitions.json).
 
 ### Tell Rummager about the format
 
-- [migrated_formats.yaml](https://github.com/alphagov/rummager/blob/master/config/govuk_index/migrated_formats.yaml)
-- [mapped_document_types.yaml](https://github.com/alphagov/rummager/blob/master/config/govuk_index/mapped_document_types.yaml)
-- [elasticsearch_presenter.rb](https://github.com/alphagov/rummager/blob/master/lib/govuk_index/presenters/elasticsearch_presenter.rb)
-- [specialist_presenter.rb](https://github.com/alphagov/rummager/blob/master/lib/govuk_index/presenters/specialist_presenter.rb)
+- [migrated_formats.yaml](https://github.com/alphagov/rummager/blob/main/config/govuk_index/migrated_formats.yaml)
+- [mapped_document_types.yaml](https://github.com/alphagov/rummager/blob/main/config/govuk_index/mapped_document_types.yaml)
+- [elasticsearch_presenter.rb](https://github.com/alphagov/rummager/blob/main/lib/govuk_index/presenters/elasticsearch_presenter.rb)
+- [specialist_presenter.rb](https://github.com/alphagov/rummager/blob/main/lib/govuk_index/presenters/specialist_presenter.rb)
 
 ## Add a schema to govuk-content-schemas
 

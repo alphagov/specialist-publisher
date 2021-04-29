@@ -11,7 +11,7 @@ www.gov.uk/raib-reports
 ![RAIB Reports - Email Notification Subscribe Link](email-subscribe-link.png)
 *Email Notification Subscribe Link*
 
-The categories that can be signed up for are specified within the [schema](https://github.com/alphagov/specialist-publisher/blob/master/lib/documents/schemas/raib_reports.json#L20) for the document type.
+The categories that can be signed up for are specified within the [schema](https://github.com/alphagov/specialist-publisher/blob/main/lib/documents/schemas/raib_reports.json#L20) for the document type.
 
 ![Subscription Categories](subscription-categories.png)
 
