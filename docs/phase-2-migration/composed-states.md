@@ -31,4 +31,4 @@ history of that content item, e.g.
 
 All of the information needed to render the state label can be retrieved from
 the highest two keys in this hash. Currently, this is handled in the
-[StateHelper](https://github.com/alphagov/specialist-publisher-rebuild/blob/master/app/helpers/state_helper.rb).
+[StateHelper](https://github.com/alphagov/specialist-publisher-rebuild/blob/main/app/helpers/state_helper.rb).
