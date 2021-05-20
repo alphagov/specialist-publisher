@@ -171,7 +171,7 @@
       "short_name": "Date",
       "type": "date",
       "display_as_result_metadata": false,
-      "filterable": true
+      "filterable": false
     },
 
     {
@@ -184,10 +184,10 @@
 
     {
       "key": "date_of_completion",
-      "name": "Completion date",
+      "name": "Date of completion",
       "type": "date",
       "display_as_result_metadata": true,
-      "filterable": false
+      "filterable": true
     }
   ]
 }
