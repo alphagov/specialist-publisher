@@ -176,7 +176,7 @@
 
     {
       "key": "date_of_start",
-      "name": "Start date",
+      "name": "Date of start",
       "type": "date",
       "display_as_result_metadata": true,
       "filterable": false
