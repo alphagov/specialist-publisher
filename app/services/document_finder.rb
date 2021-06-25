@@ -25,5 +25,6 @@ class DocumentFinder
   end
 
   class RecordNotFound < StandardError; end
+
   class TypeMismatchError < StandardError; end
 end

@@ -10,6 +10,7 @@ class Attachment < Document
   end
 
   def initialize(params = {})
+    super()
     params = params.symbolize_keys
     @file = params[:file]
     @content_type = params[:content_type]

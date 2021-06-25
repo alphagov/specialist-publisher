@@ -1,8 +1,8 @@
 require "rails_helper"
 
 RSpec.describe PublishingHelper, type: :helper do
-  class SomeDocumentType; include ActiveModel::Validations; end
-  let(:document) { SomeDocumentType.new }
+  let(:document_class) { Class.new { include ActiveModel::Validations } }
+  let(:document) { document_class.new }
   let(:http_error) { GdsApi::HTTPErrorResponse.new(422, "boom!") }
 
   describe "#handle_remote_error" do

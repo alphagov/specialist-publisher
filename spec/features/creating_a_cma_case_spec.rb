@@ -40,7 +40,7 @@ RSpec.feature "Creating a CMA case", type: :feature do
 
     fill_in "Title", with: "Example CMA Case"
     fill_in "Summary", with: "This is the summary of an example CMA case"
-    fill_in "Body", with: "## Header" + ("\n\nThis is the long body of an example CMA case" * 2)
+    fill_in "Body", with: "## Header#{"\n\nThis is the long body of an example CMA case" * 2}"
     fill_in "[cma_case]opened_date(1i)", with: "2014"
     fill_in "[cma_case]opened_date(2i)", with: "01"
     fill_in "[cma_case]opened_date(3i)", with: "01"
@@ -288,7 +288,7 @@ RSpec.feature "Creating a CMA case", type: :feature do
 
     fill_in "Title", with: "At veroeos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi"
     fill_in "Summary", with: "This is the summary of an example CMA case"
-    fill_in "Body", with: "## Header" + ("\n\nThis is the long body of an example CMA case" * 2)
+    fill_in "Body", with: "## Header#{"\n\nThis is the long body of an example CMA case" * 2}"
     fill_in "[cma_case]opened_date(1i)", with: "2014"
     fill_in "[cma_case]opened_date(2i)", with: "01"
     fill_in "[cma_case]opened_date(3i)", with: "01"

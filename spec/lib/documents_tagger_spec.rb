@@ -27,20 +27,20 @@ RSpec.describe DocumentsTagger do
 
   it "automatically tags a document" do
     get_content_items_enum_returns(["base_path" => "/base_path", "content_id" => @content_id, "document_type" => "document_type_one"])
-    expect(Tagger).to receive(:add_tags).with(@content_id, true).and_yield(%w[mapped_taxon_id]).and_return(true)
-    expect(DocumentsTagger.tag_all(true).to_a).to eq([{ base_path: "/base_path", content_id: @content_id, taxons: %w[mapped_taxon_id] }])
+    expect(Tagger).to receive(:add_tags).with(@content_id, do_tag: true).and_yield(%w[mapped_taxon_id]).and_return(true)
+    expect(DocumentsTagger.tag_all(do_tag: true).to_a).to eq([{ base_path: "/base_path", content_id: @content_id, taxons: %w[mapped_taxon_id] }])
   end
 
   it "does not tag the documents because the do_tag option is set to false - it does return potentially tagged taxons" do
     get_content_items_enum_returns(["base_path" => "/base_path", "content_id" => @content_id, "document_type" => "document_type_one"])
-    expect(Tagger).to receive(:add_tags).with(@content_id, false).and_yield(%w[mapped_taxon_id]).and_return(true)
-    expect(DocumentsTagger.tag_all(false).to_a).to eq([{ base_path: "/base_path", content_id: @content_id, taxons: %w[mapped_taxon_id] }])
+    expect(Tagger).to receive(:add_tags).with(@content_id, do_tag: false).and_yield(%w[mapped_taxon_id]).and_return(true)
+    expect(DocumentsTagger.tag_all(do_tag: false).to_a).to eq([{ base_path: "/base_path", content_id: @content_id, taxons: %w[mapped_taxon_id] }])
   end
 
   it "does not tag a document because it has already been tagged" do
     get_content_items_enum_returns(["base_path" => "/base_path", "content_id" => @content_id, "document_type" => "document_type_one"])
-    expect(Tagger).to receive(:add_tags).with(@content_id, true).and_yield(%w[mapped_taxon_id]).and_return(false)
-    expect(DocumentsTagger.tag_all(true).to_a).to eq([{ base_path: "/base_path", content_id: @content_id, taxons: [] }])
+    expect(Tagger).to receive(:add_tags).with(@content_id, do_tag: true).and_yield(%w[mapped_taxon_id]).and_return(false)
+    expect(DocumentsTagger.tag_all(do_tag: true).to_a).to eq([{ base_path: "/base_path", content_id: @content_id, taxons: [] }])
   end
 
   it "Does not tag documents - or invoke tagging logic - because the mapping does not specify a taxon to tag" do

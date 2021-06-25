@@ -26,7 +26,7 @@ RSpec.feature "Editing a Research for Development Output", type: :feature do
 
     fill_in "Title", with: title
     fill_in "Summary", with: summary
-    fill_in "Body", with: ("## Header" + ("\n\nThis is the long body of an example research for development output" * 10))
+    fill_in "Body", with: "## Header#{"\n\nThis is the long body of an example research for development output" * 10}"
     fill_in "[research_for_development_output]first_published_at(1i)", with: "2013"
     fill_in "[research_for_development_output]first_published_at(2i)", with: "01"
     fill_in "[research_for_development_output]first_published_at(3i)", with: "01"

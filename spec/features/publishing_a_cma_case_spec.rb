@@ -193,7 +193,7 @@ RSpec.feature "Publishing a CMA case", type: :feature do
 
       assert_publishing_api_publish(content_id)
 
-      assert_not_requested(:post, Plek.current.find("email-alert-api") + "/notifications")
+      assert_not_requested(:post, "#{Plek.current.find('email-alert-api')}/notifications")
     end
 
     scenario "publish warning and popup text will indicate that it is a minor edit" do

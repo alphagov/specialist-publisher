@@ -27,10 +27,8 @@ class AttachmentCollection
     find(attachment.content_id).present?
   end
 
-  def each
-    @attachments.each do |attachment|
-      yield(attachment)
-    end
+  def each(&block)
+    @attachments.each(&block)
   end
 
   def remove(attachment)

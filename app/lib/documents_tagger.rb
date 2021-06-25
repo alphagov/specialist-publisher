@@ -1,11 +1,11 @@
 require "services"
 
 class DocumentsTagger
-  def self.tag_all(do_tag = true)
-    new(do_tag).tag_all
+  def self.tag_all(do_tag: true)
+    new(do_tag: do_tag).tag_all
   end
 
-  def initialize(do_tag = true)
+  def initialize(do_tag: true)
     @do_tag = do_tag
   end
 
@@ -20,7 +20,7 @@ class DocumentsTagger
 private
 
   def tag_to_taxons(content_id, taxon_ids)
-    tagged = Tagger.add_tags(content_id, @do_tag) do |existing_taxon_ids|
+    tagged = Tagger.add_tags(content_id, do_tag: @do_tag) do |existing_taxon_ids|
       existing_taxon_ids + taxon_ids
     end
     tagged ? taxon_ids : []

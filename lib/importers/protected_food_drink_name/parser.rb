@@ -126,21 +126,24 @@ module Importers
       def summary
         case data["Protection type"]
         when "Geographical indication (GI)"
-          if data["Product type"] == "Spirit drink"
+          case data["Product type"]
+          when "Spirit drink"
             "Protected spirit drink name"
-          elsif data["Product type"] == "Aromatised wine"
+          when "Aromatised wine"
             "Protected aromatised wine name"
           end
         when "Protected Geographical Indication (PGI)"
-          if data["Product type"] == "Food"
+          case data["Product type"]
+          when "Food"
             "Protected food name with Protected Geographical Indication (PGI)"
-          elsif data["Product type"] == "Wine"
+          when "Wine"
             "Protected wine name with Protected Geographical Indication (PGI)"
           end
         when "Protected Designation of Origin (PDO)"
-          if data["Product type"] == "Food"
+          case data["Product type"]
+          when "Food"
             "Protected food name with Protected Designation of Origin (PDO)"
-          elsif data["Product type"] == "Wine"
+          when "Wine"
             "Protected wine name with Protected Designation of Origin (PDO)"
           end || ""
         when "Traditional Specialities Guaranteed (TSG)"

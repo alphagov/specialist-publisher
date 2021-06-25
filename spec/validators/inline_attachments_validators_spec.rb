@@ -1,17 +1,19 @@
 require "spec_helper"
 
 RSpec.describe InlineAttachmentsValidator do
-  class FakeErrors < Hash
-    def add(attr, message)
-      self[attr] ||= []
-      self[attr].push(message)
+  let(:fake_errors_class) do
+    Class.new(Hash) do
+      def add(attr, message)
+        self[attr] ||= []
+        self[attr].push(message)
+      end
     end
   end
 
   let(:record) do
     double(
       :record,
-      errors: FakeErrors.new,
+      errors: fake_errors_class.new,
       body: body,
       attachments: [
         double(:attachment, snippet: "[InlineAttachment:foo.pdf]"),

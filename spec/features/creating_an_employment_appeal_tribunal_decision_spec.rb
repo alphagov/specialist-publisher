@@ -29,7 +29,7 @@ RSpec.feature "Creating a Employment appeal tribunal decision", type: :feature d
 
       fill_in "Title", with: title
       fill_in "Summary", with: summary
-      fill_in "Body", with: ("## Header" + ("\n\nThis is the long body of an example Employment appeal tribunal decision" * 10))
+      fill_in "Body", with: "## Header#{"\n\nThis is the long body of an example Employment appeal tribunal decision" * 10}"
       select "Age Discrimination", from: "Tribunal decision categories"
       select "Contract of Employment - Apprenticeship", from: "Tribunal decision sub categories"
       fill_in "[employment_appeal_tribunal_decision]tribunal_decision_decision_date(1i)", with: "2013"

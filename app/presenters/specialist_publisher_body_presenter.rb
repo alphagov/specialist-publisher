@@ -10,10 +10,11 @@ class SpecialistPublisherBodyPresenter
   end
 
   def present
-    if document.body.is_a?(Array)
+    case document.body
+    when Array
       body_content = document.body.find { |h| h[:content_type] == "text/govspeak" }
       govspeak_element[:content] = parse_body(body_content)
-    elsif document.body.is_a?(Hash)
+    when Hash
       body_content = document.body[:content]
       document.body[:content] = parse_body(body_content)
     else

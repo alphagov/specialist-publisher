@@ -136,7 +136,7 @@ RSpec.describe AllDocumentsFinder do
         }
         query_params[:q] = search_query if search_query.present?
 
-        stub_request(:get, GdsApi::TestHelpers::PublishingApi::PUBLISHING_API_V2_ENDPOINT + "/content")
+        stub_request(:get, "#{GdsApi::TestHelpers::PublishingApi::PUBLISHING_API_V2_ENDPOINT}/content")
           .with(query: hash_including(query_params))
           .to_return(status: 200, body: body.to_json, headers: {})
       end
@@ -156,7 +156,7 @@ RSpec.describe AllDocumentsFinder do
     }
     query_params[:query] = search_query if search_query.present?
 
-    stub_request(:get, GdsApi::TestHelpers::PublishingApi::PUBLISHING_API_V2_ENDPOINT + "/content")
+    stub_request(:get, "#{GdsApi::TestHelpers::PublishingApi::PUBLISHING_API_V2_ENDPOINT}/content")
       .with(query: hash_including(query_params))
       .to_return(status: 200, body: body.to_json, headers: {})
   end

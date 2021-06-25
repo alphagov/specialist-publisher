@@ -1,8 +1,6 @@
 require "spec_helper"
 
 RSpec.describe DocumentPolicy do
-  class TestDocument < Document; end
-
   let(:allowed_organisation_id) { "department-of-serious-business" }
   let(:allowed_editing_organisation_id) { "hm-serious-business-countersigners" }
   let(:not_allowed_organisation_id) { "ministry-of-funk" }
@@ -12,6 +10,8 @@ RSpec.describe DocumentPolicy do
   let(:departmental_writer) { User.new(permissions: %w[signin], organisation_content_id: allowed_organisation_id) }
   let(:other_departmental_writer) { User.new(permissions: %w[signin], organisation_content_id: allowed_editing_organisation_id) }
   let(:document_type_editor) { User.new(permissions: %w[test_document_editor]) }
+
+  before { stub_const("TestDocument", Class.new(Document)) }
 
   def allowed_document_type
     allow(TestDocument)
