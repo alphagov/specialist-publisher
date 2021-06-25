@@ -1,11 +1,11 @@
 require "services"
 
 class Tagger
-  def self.add_tags(content_id, do_tag = true, &block)
-    new.add_tags(content_id, do_tag, &block)
+  def self.add_tags(content_id, do_tag: true, &block)
+    new.add_tags(content_id, do_tag: do_tag, &block)
   end
 
-  def add_tags(content_id, do_tag = true)
+  def add_tags(content_id, do_tag: true)
     existing_taxon_ids, version = fetch_existing_taxons(content_id)
     new_taxon_ids = (yield existing_taxon_ids).uniq
     return false if no_change_in_taxons?(existing_taxon_ids, new_taxon_ids)
