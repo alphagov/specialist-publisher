@@ -2,37 +2,35 @@ require "spec_helper"
 
 RSpec.describe DocumentExportPresenter do
   describe ".for" do
-    class ExportableDocumentWithExporter
-      def self.exportable?
-        true
-      end
+    let(:exportable_document) do
+      Class.new do
+        def self.exportable?
+          true
+        end
 
-      def self.document_type
-        name.underscore
-      end
-    end
-
-    class ExportableDocumentWithExporterExportPresenter
-    end
-
-    class NonExportableDocument
-      def self.exportable?
-        false
-      end
-
-      def self.document_type
-        name.underscore
+        def self.document_type
+          name.underscore
+        end
       end
     end
 
-    class ExportableDocumentWithoutExporter
-      def self.exportable?
-        false
-      end
+    let(:non_exportable_document) do
+      Class.new do
+        def self.exportable?
+          false
+        end
 
-      def self.document_type
-        name.underscore
+        def self.document_type
+          name.underscore
+        end
       end
+    end
+
+    before do
+      stub_const("ExportableDocumentWithExporter", exportable_document)
+      stub_const("ExportableDocumentWithExporterExportPresenter", Class.new)
+      stub_const("NonExportableDocument", non_exportable_document)
+      stub_const("ExportableDocumentWithoutExporter", exportable_document.dup)
     end
 
     it "returns the ExportPresenter for the supplied document class if it is exportable" do

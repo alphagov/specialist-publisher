@@ -1,21 +1,25 @@
 require "spec_helper"
 
 RSpec.describe Document do
-  class MyDocumentType < Document
-    def self.title
-      "My Document Type"
-    end
+  let(:document_sub_class) do
+    Class.new(Document) do
+      def self.title
+        "My Document Type"
+      end
 
-    def primary_publishing_organisation
-      "a-primary-org-id"
-    end
+      def primary_publishing_organisation
+        "a-primary-org-id"
+      end
 
-    attr_accessor :field1, :field2, :field3
+      attr_accessor :field1, :field2, :field3
 
-    def initialize(params = {})
-      super(params, %i[field1 field2 field3])
+      def initialize(params = {})
+        super(params, %i[field1 field2 field3])
+      end
     end
   end
+
+  before { stub_const("MyDocumentType", document_sub_class) }
 
   it "has a document_type for building URLs" do
     expect(MyDocumentType.slug).to eq("my-document-types")
