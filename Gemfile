@@ -40,7 +40,7 @@ group :development, :test do
   gem "pry-rails"
   gem "puma"
   gem "rspec-rails"
-  gem "rubocop-govuk"
+  gem "rubocop-govuk", require: false
   gem "simplecov", require: false
   gem "timecop"
 end
