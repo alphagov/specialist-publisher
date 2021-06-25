@@ -1,7 +1,7 @@
 require "services"
 
 class PublishingApiFinderPublisher
-  def initialize(finders, logger: Logger.new(STDOUT))
+  def initialize(finders, logger: Logger.new($stdout))
     @finders = finders
     @logger = logger
   end

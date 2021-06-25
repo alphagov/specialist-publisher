@@ -40,7 +40,7 @@ RSpec.feature "Editing a CMA case", type: :feature do
         "body" => [
           {
             "content_type" => "text/govspeak",
-            "content" => "## Header" + ("\r\n\r\nThis is the long body of an example CMA case" * 2),
+            "content" => "## Header#{"\r\n\r\nThis is the long body of an example CMA case" * 2}",
           },
         ],
         "headers" => [{
@@ -54,7 +54,7 @@ RSpec.feature "Editing a CMA case", type: :feature do
 
     fill_in "Title", with: "Changed title"
     fill_in "Summary", with: "Changed summary"
-    fill_in "Body", with: "## Header" + ("\n\nThis is the long body of an example CMA case" * 2)
+    fill_in "Body", with: "## Header#{"\n\nThis is the long body of an example CMA case" * 2}"
     fill_in "[cma_case]opened_date(1i)", with: "2014"
     fill_in "[cma_case]opened_date(2i)", with: "01"
     fill_in "[cma_case]opened_date(3i)", with: "01"

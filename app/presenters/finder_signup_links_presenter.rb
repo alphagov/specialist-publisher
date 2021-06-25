@@ -9,7 +9,7 @@ FinderSignupLinksPresenter = Struct.new(:file) do
     }
   end
 
-  private
+private
 
   def organisations
     file.fetch("organisations", [])

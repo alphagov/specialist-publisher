@@ -4,13 +4,14 @@ class RepublishService
   def call(content_id, locale, &put_content_block)
     document = Document.find(content_id, locale)
 
-    if document.publication_state == "published"
+    case document.publication_state
+    when "published"
       document.update_type = "republish"
 
       publishing_api_put_content(document, &put_content_block)
       publishing_api_patch_links(document)
       publishing_api_publish(document)
-    elsif document.publication_state == "draft"
+    when "draft"
       published_edition_version_number = document.state_history.key("published")
 
       publishing_api_patch_links(document)

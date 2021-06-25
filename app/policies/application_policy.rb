@@ -1,5 +1,6 @@
 class ApplicationPolicy
   attr_reader :user, :document_class
+
   def initialize(user, document_class)
     @user = user
     @document_class = document_class
@@ -21,6 +22,6 @@ class ApplicationPolicy
   delegate :gds_editor?, to: :user
 
   def document_type_editor?
-    user.permissions.include?(document_class.name.underscore + "_editor")
+    user.permissions.include?("#{document_class.name.underscore}_editor")
   end
 end

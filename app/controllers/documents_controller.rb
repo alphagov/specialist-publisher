@@ -100,7 +100,7 @@ private
   end
 
   def unknown_error_message
-    support_url = Plek.new.external_url_for("support") + "/technical_fault_report/new"
+    support_url = "#{Plek.new.external_url_for('support')}/technical_fault_report/new"
 
     safe_join(["Something has gone wrong. Please try again and see if it works. ", link_to("Let us know", support_url), " if the problem happens again and a developer will look into it."])
   end

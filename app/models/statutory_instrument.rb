@@ -16,8 +16,7 @@ class StatutoryInstrument < Document
     withdrawn_date
   ].freeze
 
-  attr_accessor(*FORMAT_SPECIFIC_FIELDS)
-  attr_accessor :organisations, :primary_publishing_organisation
+  attr_accessor(*FORMAT_SPECIFIC_FIELDS, :organisations, :primary_publishing_organisation)
 
   def initialize(params = {})
     super(params, FORMAT_SPECIFIC_FIELDS)

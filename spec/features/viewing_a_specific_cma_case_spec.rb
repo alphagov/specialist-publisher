@@ -24,7 +24,7 @@ RSpec.feature "Viewing a specific case", type: :feature do
             "body" => [
               {
                 "content_type" => "text/govspeak",
-                "content" => "## Header" + "\r\n\r\nThis is the long body of an example CMA case",
+                "content" => "## Header\r\n\r\nThis is the long body of an example CMA case",
               },
             ],
             "metadata" => {
@@ -61,7 +61,7 @@ RSpec.feature "Viewing a specific case", type: :feature do
 
   scenario "that doesn't exist" do
     content_id = "a-case-that-doesnt-exist"
-    url = GdsApi::TestHelpers::PublishingApi::PUBLISHING_API_V2_ENDPOINT + "/content/" + content_id
+    url = "#{GdsApi::TestHelpers::PublishingApi::PUBLISHING_API_V2_ENDPOINT}/content/#{content_id}"
     stub_request(:get, url)
       .with(query: hash_including(locale: "en"))
       .to_return(status: 404, body: resource_not_found(content_id, "content item").to_json, headers: {})

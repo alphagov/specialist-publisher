@@ -82,7 +82,7 @@ private
   end
 
   def title
-    redrafted? ? document.title + " updated" : document.title
+    redrafted? ? "#{document.title} updated" : document.title
   end
 
   def summary

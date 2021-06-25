@@ -6,7 +6,7 @@ RSpec.describe PublishingApiFinderPublisher do
     def make_file(base_path, overrides = {})
       underscore_name = base_path.sub("/", "")
       name = underscore_name.humanize
-      json = {
+      {
         "base_path" => base_path,
         "name" => name,
         "content_id" => SecureRandom.uuid,
@@ -23,8 +23,6 @@ RSpec.describe PublishingApiFinderPublisher do
         ],
         "document_noun" => "reports",
       }.merge(overrides)
-
-      json
     end
 
     def make_finder(base_path, overrides = {})

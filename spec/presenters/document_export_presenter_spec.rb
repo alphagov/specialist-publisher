@@ -11,6 +11,7 @@ RSpec.describe DocumentExportPresenter do
         name.underscore
       end
     end
+
     class ExportableDocumentWithExporterExportPresenter
     end
 
