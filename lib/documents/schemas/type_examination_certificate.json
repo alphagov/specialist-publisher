@@ -1,0 +1,206 @@
+{
+  "content_id": "c17e93f4-67f0-4b5c-9f96-3c16108e54a5",
+  "base_path": "/type_examination_certificates",
+  "format_name": "Metrology type examination certificate",
+  "name": "Metrology type examination certificates",
+  "description": "Certificates issued from 1 January 2021 under the Measuring Instruments Regulations 2016 and the Non-Automatic Weighing Instruments Regulations 2016.",
+  "filter": {
+    "format": "type_examination_certificate"
+  },
+  "signup_content_id": "e9005d0c-8c13-4110-8eb3-7fdd97f75074",
+  "signup_copy": "You'll get an email each time a certificate is updated or a new certificate is published.",
+  "show_summaries": true,
+  "organisations": ["2bde479a-97f2-42b5-986a-287a623c2a1c"],
+  "subscription_list_title_prefix": "Metrology type examination certificates",
+  "summary": "<p>Find metrology type examination certificates.</p>",
+  "document_noun": "certificate",
+  "facets": [
+    {
+      "key": "certificate",
+      "name": "Certificate",
+      "type": "text",
+      "display_as_result_metadata": true,
+      "filterable": false
+    },
+    {
+      "key": "issuing_body",
+      "name": "Issuing body",
+      "type": "text",
+      "preposition": "by issuing body",
+      "display_as_result_metadata": true,
+      "filterable": true,
+      "allowed_values": [
+        {
+          "label": "TBC Issuing body 1",
+          "value": "body_1"
+        },
+        {
+          "label": "TBC Issuing body 2",
+          "value": "body_2"
+        }
+      ]
+    },
+    {
+      "key": "applicant",
+      "name": "Applicant",
+      "type": "text",
+      "display_as_result_metadata": true,
+      "filterable": false
+    },
+    {
+      "key": "instrument_category",
+      "name": "Instrument category",
+      "type": "text",
+      "preposition": "of instrument category",
+      "display_as_result_metadata": true,
+      "filterable": true,
+      "allowed_values": [
+        {
+          "label": "Automatic weighing",
+          "value": "automatic_weighing"
+        },
+        {
+          "label": "Electricity meters",
+          "value": "electricity_meters"
+        },
+        {
+          "label": "Gas meters",
+          "value": "gas_meters"
+        },
+        {
+          "label": "Length and dimension",
+          "value": "length_and_dimension"
+        },
+        {
+          "label": "Liquids other than water",
+          "value": "liquids_other_than_water"
+        },
+        {
+          "label": "Material measures",
+          "value": "material_measures"
+        },
+        {
+          "label": "Non-automatic weighing",
+          "value": "non_automatic_weightng"
+        },
+        {
+          "label": "Taximeters",
+          "value": "taximeters"
+        },
+        {
+          "label": "Water meters",
+          "value": "water_meters"
+        }
+      ]
+    },
+    {
+      "key": "instrument_designation",
+      "name": "Instrument designation",
+      "type": "text",
+      "display_as_result_metadata": true,
+      "filterable": false
+    },
+    {
+      "key": "current_version",
+      "name": "Current version",
+      "type": "text",
+      "display_as_result_metadata": true,
+      "filterable": false,
+      "allowed_values": [
+        {
+          "label": "Original",
+          "value": "original"
+        },
+        {
+          "label": "v1",
+          "value": "v1"
+        },
+        {
+          "label": "v2",
+          "value": "v2"
+        },
+        {
+          "label": "v3",
+          "value": "v3"
+        },
+        {
+          "label": "v4",
+          "value": "v4"
+        },
+        {
+          "label": "v5",
+          "value": "v5"
+        },
+        {
+          "label": "v6",
+          "value": "v6"
+        },
+        {
+          "label": "v7",
+          "value": "v7"
+        },
+        {
+          "label": "v8",
+          "value": "v8"
+        },
+        {
+          "label": "v9",
+          "value": "v9"
+        },
+        {
+          "label": "v10",
+          "value": "v10"
+        },
+        {
+          "label": "v11",
+          "value": "v11"
+        },
+        {
+          "label": "v12",
+          "value": "v12"
+        },
+        {
+          "label": "v13",
+          "value": "v13"
+        },
+        {
+          "label": "v14",
+          "value": "v14"
+        },
+        {
+          "label": "v15",
+          "value": "v15"
+        },
+        {
+          "label": "v16",
+          "value": "v16"
+        },
+        {
+          "label": "v17",
+          "value": "v17"
+        },
+        {
+          "label": "v18",
+          "value": "v18"
+        },
+        {
+          "label": "v19",
+          "value": "v19"
+        },
+        {
+          "label": "v20",
+          "value": "v20"
+        }
+      ]
+    },
+    {
+      "key": "date_issued",
+      "name": "Date of issue",
+      "short_name": "Issued",
+      "type": "date",
+      "preposition": "issued",
+      "display_as_result_metadata": true,
+      "filterable": true
+    }
+  ]
+}

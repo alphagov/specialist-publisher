@@ -544,6 +544,24 @@ FactoryBot.define do
     end
   end
 
+  factory :type_examination_certificate, parent: :document do
+    base_path { "/type-examination-certificates/example-document" }
+    document_type { "type_examination_certificate" }
+    transient do
+      default_metadata do
+        {
+          "certificate" => "Attached Certificate",
+          "issuing_body" => "body_1",
+          "applicant" => "Applicant 1",
+          "instrument_category" => "automatic_weighting",
+          "instrument_designation" => "Instrument 123",
+          "current_version" => "v1",
+          "date_issued" => "2020-01-01",
+        }
+      end
+    end
+  end
+
   factory :uk_market_conformity_assessment_body, parent: :document do
     base_path { "/uk_market_conformity_assessment_body/example-document" }
     document_type { "uk_market_conformity_assessment_body" }
