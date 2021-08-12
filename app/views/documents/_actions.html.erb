@@ -32,6 +32,12 @@
             <label for="alternative_path">Redirect to alternative GOV.UK content path. For example: /the-replacement-page</label>
             <input type="text" name="alternative_path" class="form-control">
           </div>
+          <% if presenter.internal_notes? %>
+            <div class="form-group">
+              <label for="internal_notes">This field is to identify date and reason for unpublishing only</label>
+              <input type="text" name="internal_notes" class="form-control">
+            </div>
+          <% end %>
 
           <div class="form-group">
             <button name="submit" class="btn btn-warning"

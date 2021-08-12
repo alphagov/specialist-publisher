@@ -17,6 +17,7 @@ class DocumentBuilder
       previous_version: payload["previous_version"],
       temporary_update_type: payload["details"]["temporary_update_type"],
       warnings: payload["warnings"] || {},
+      internal_notes: extract_unpublishing_explanation(payload),
     )
 
     set_update_type(document, payload)
@@ -35,6 +36,11 @@ class DocumentBuilder
 
     document.body = SpecialistPublisherBodyPresenter.present(document)
     document
+  end
+
+  def self.extract_unpublishing_explanation(payload)
+    unpublishing = payload["unpublishing"]
+    unpublishing["explanation"] if unpublishing
   end
 
   def self.extract_body_from_payload(payload)

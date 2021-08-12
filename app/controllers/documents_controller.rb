@@ -70,7 +70,7 @@ class DocumentsController < ApplicationController
   end
 
   def unpublish
-    if @document.unpublish(params[:alternative_path])
+    if @document.unpublish(params[:alternative_path], params[:internal_notes])
       flash[:success] = "Unpublished #{@document.title}"
     else
       flash[:danger] = unknown_error_message
@@ -124,7 +124,6 @@ private
 
   def fetch_document
     @document = current_format.find(content_id_param, locale_param)
-
     if params[:content_id_and_locale].split(":")[1] != @document.locale
       redirect_to(
         document_path(
