@@ -33,6 +33,14 @@
       "filterable": false
     },
     {
+      "key": "uk_market_conformity_assessment_body_notified_body_number",
+      "name": "Notified body number",
+      "short_name": "Notified body number",
+      "type": "text",
+      "display_as_result_metadata": false,
+      "filterable": false
+    },
+    {
       "key": "updated_at",
       "name": "Last updated",
       "short_name": "Last updated",

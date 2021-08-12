@@ -5,6 +5,11 @@
       { class: 'form-control' }
   %>
 <% end %>
+<%= render layout: "shared/form_group", locals: { f: f, field: :uk_market_conformity_assessment_body_notified_body_number, label: "Notified body number (NI)" } do %>
+  <%= f.text_field :uk_market_conformity_assessment_body_notified_body_number,
+      { class: 'form-control' }
+  %>
+<% end %>
 <%= render layout: "shared/form_group", locals: { f: f, field: :uk_market_conformity_assessment_body_type, label: "Body Type" } do %>
   <%= f.select :uk_market_conformity_assessment_body_type,
       f.object.facet_options(:uk_market_conformity_assessment_body_type),

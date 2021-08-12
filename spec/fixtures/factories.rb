@@ -560,6 +560,7 @@ FactoryBot.define do
           "uk_market_conformity_assessment_body_email" => "info@example.com",
           "uk_market_conformity_assessment_body_phone" => "0800 000 000",
           "uk_market_conformity_assessment_body_legislative_area" => "explosives",
+          "uk_market_conformity_assessment_body_notified_body_number" => "AB 1111",
         }
       end
     end
