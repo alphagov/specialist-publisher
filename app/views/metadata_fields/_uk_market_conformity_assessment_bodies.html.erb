@@ -10,7 +10,7 @@
       { class: 'form-control' }
   %>
 <% end %>
-<%= render layout: "shared/form_group", locals: { f: f, field: :uk_market_conformity_assessment_body_type, label: "Body Type" } do %>
+<%= render layout: "shared/form_group", locals: { f: f, field: :uk_market_conformity_assessment_body_type, label: "Body type(s)" } do %>
   <%= f.select :uk_market_conformity_assessment_body_type,
       f.object.facet_options(:uk_market_conformity_assessment_body_type),
       {},
@@ -57,7 +57,7 @@
       { class: 'form-control' }
   %>
 <% end %>
-<%= render layout: "shared/form_group", locals: { f: f, field: :uk_market_conformity_assessment_body_email, label: "Email address" } do %>
+<%= render layout: "shared/form_group", locals: { f: f, field: :uk_market_conformity_assessment_body_email, label: "Email" } do %>
   <%= f.text_field :uk_market_conformity_assessment_body_email,
       { class: 'form-control' }
   %>
