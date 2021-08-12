@@ -20,6 +20,7 @@ class UkMarketConformityAssessmentBody < Document
     uk_market_conformity_assessment_body_phone
     uk_market_conformity_assessment_body_legislative_area
     uk_market_conformity_assessment_body_notified_body_number
+    uk_market_conformity_assessment_body_address
   ].freeze
 
   attr_accessor(*FORMAT_SPECIFIC_FIELDS)

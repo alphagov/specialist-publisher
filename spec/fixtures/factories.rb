@@ -561,6 +561,7 @@ FactoryBot.define do
           "uk_market_conformity_assessment_body_phone" => "0800 000 000",
           "uk_market_conformity_assessment_body_legislative_area" => "explosives",
           "uk_market_conformity_assessment_body_notified_body_number" => "AB 1111",
+          "uk_market_conformity_assessment_body_address" => "123 Fun Street",
         }
       end
     end

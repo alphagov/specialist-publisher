@@ -938,6 +938,14 @@
       ]
     },
     {
+      "key": "uk_market_conformity_assessment_body_address",
+      "name": "Address",
+      "short_name": "Address",
+      "type": "text",
+      "filterable": false,
+      "display_as_result_metadata": false
+    },
+    {
       "key": "uk_market_conformity_assessment_body_website",
       "name": "Website",
       "short_name": "Website",

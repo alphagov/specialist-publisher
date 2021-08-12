@@ -52,6 +52,11 @@
       }
   %>
 <% end %>
+<%= render layout: "shared/form_group", locals: { f: f, field: :uk_market_conformity_assessment_body_address, label: "Address" } do %>
+  <%= f.text_field :uk_market_conformity_assessment_body_address,
+      { class: 'form-control' }
+  %>
+<% end %>
 <%= render layout: "shared/form_group", locals: { f: f, field: :uk_market_conformity_assessment_body_website, label: "Website" } do %>
   <%= f.text_field :uk_market_conformity_assessment_body_website,
       { class: 'form-control' }
