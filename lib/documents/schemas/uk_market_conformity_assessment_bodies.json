@@ -9,11 +9,12 @@
     "format": "uk_market_conformity_assessment_body"
   },
   "show_summaries": true,
+  "default_order": "title",
   "organisations": ["2bde479a-97f2-42b5-986a-287a623c2a1c"],
   "signup_content_id": "c9102d1b-3832-40a8-9851-abe641dfd696",
   "signup_copy": "You'll get an email each time a body changes their details, or a new body is confirmed.",
   "subscription_list_title_prefix": "UK Market Conformity Assessment Bodies",
-  "summary": "",
+  "summary": "<p>The UK Market Conformity Assessment Bodies (UKMCAB) database serves as the UK’s database of Conformity Assessment Bodies (CABs). It is the definitive source and a register of UK Government appointed CABs who can certify goods for both the GB and NI markets.</p><p>The term Approved Body is used generically in the database and should be read to include Appointed Bodies which apply to some CABs appointed by the Department for Transport that perform the same role as Approved Bodies.</p><p>Please send any queries on the information in UKMCAB to <a href='mailto:approvedbodies@beis.gov.uk'>approvedbodies@beis.gov.uk</a></p>",
   "document_noun": "body",
   "facets": [
     {
