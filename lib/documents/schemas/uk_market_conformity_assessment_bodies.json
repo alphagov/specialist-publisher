@@ -72,6 +72,26 @@
         {
           "label": "Notified body (NI)",
           "value": "notified-body-ni"
+        },
+        {
+          "label": "UK body designated under MRA: Australia",
+          "value": "uk-body-mra-australia"
+        },
+        {
+          "label": "UK body designated under MRA: New Zealand",
+          "value": "uk-body-mra-new-zealand"
+        },
+        {
+          "label": "UK body designated under MRA: USA",
+          "value": "uk-body-mra-usa"
+        },
+        {
+          "label": "UK body designated under MRA: Japan",
+          "value": "uk-body-mra-japan"
+        },
+        {
+          "label": "UK body designated under MRA: Canada",
+          "value": "uk-body-mra-canada"
         }
       ]
     },
