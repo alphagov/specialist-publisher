@@ -55,5 +55,5 @@ See [the CMA case schema](https://github.com/alphagov/rummager/blob/main/config/
 Once you're ready to ship your code to an environment,
 
 1. Deploy Specialist Publisher, Rummager, and govuk-content-schemas.
-2. Run the "Search reindex for new schema" Jenkins job.  This takes around 45 minutes.
+2. Run the "Search reindex for new schema" Jenkins job.  This takes around 30-45 minutes on Production, or 3-4 hours on Integration.
 3. Use the "Run rake task" Jenkins job to run `publishing_api:publish_finders` or `publishing_api:publish_finder[your_format_name_based_on_the_schema_file]` against the specialist publisher app on a backend machine.
