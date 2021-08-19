@@ -34,6 +34,7 @@
         {"label": "Cardiovascular disease and lipidology", "value": "cardiovascular-disease-lipidology"},
         {"label": "Dentistry", "value": "dentistry"},
         {"label": "Dermatology", "value": "dermatology"},
+        {"label": "Dispensing GP practices", "value": "dispensing-gp-practices"},
         {"label": "Ear, nose and throat", "value": "ear-nose-throat"},
         {"label": "Endocrinology, diabetology and metabolism", "value": "endocrinology-diabetology-metabolism"},
         {"label": "GI, hepatology and pancreatic disorders", "value": "gi-hepatology-pancreatic-disorders"},
