@@ -75,8 +75,8 @@
           "value": "recognised-third-party-organisation"
         },
         {
-          "label": "Third country body",
-          "value": "third-country-body"
+          "label": "Overseas Body",
+          "value": "overseas-body"
         },
         {
           "label": "NI Notified body",
