@@ -31,6 +31,10 @@
       <dd>
         <%= content_tag(:span, state_for_frontend(@document), class: classes_for_frontend(@document)) %>
       </dd>
+      <dt>Internal notes</dt>
+      <dd>
+        <%= @document.internal_notes %>
+      </dd>
     </dl>
   </div>
 </div>

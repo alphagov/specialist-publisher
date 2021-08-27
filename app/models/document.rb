@@ -30,6 +30,7 @@ class Document
     :first_published_at,
     :previous_version,
     :warnings,
+    :internal_notes,
   )
 
   def temporary_update_type
@@ -59,6 +60,7 @@ class Document
     bulk_published
     temporary_update_type
     warnings
+    internal_notes
   ].freeze
 
   AIR_ACCIDENTS_AND_SERIOUS_INCIDENTS_TAXON_ID = "951ece54-c6df-4fbc-aa18-1bc629815fe2".freeze
@@ -242,9 +244,9 @@ class Document
     end
   end
 
-  def unpublish(alternative_path = nil)
+  def unpublish(alternative_path = nil, internal_notes = nil)
     handle_remote_error(self) do
-      DocumentUnpublisher.unpublish(content_id, locale, base_path, alternative_path)
+      DocumentUnpublisher.unpublish(content_id, locale, base_path, alternative_path, internal_notes)
     end
   end
 

@@ -55,6 +55,10 @@ class ActionsPresenter
     policy.unpublish? && state == "published"
   end
 
+  def internal_notes?
+    unpublish_button_visible? && klass_name == "UK Market Conformity Assessment Bodies"
+  end
+
   def unpublish_text
     if document.first_draft?
       text = "The document has never been published."
