@@ -85,6 +85,7 @@
         {"label": "Cosmetic surgery", "value": "cosmetic-surgery" },
         {"label": "Critical care", "value": "critical-care" },
         {"label": "Dentistry", "value": "dentistry" },
+        {"label": "Dispensing GP practices", "value": "dispensing-gp-practices"},
         {"label": "General practice", "value": "general-practice" },
         {"label": "General surgery", "value": "general-surgery" },
         {"label": "Haematology and oncology", "value": "haematology-oncology" },
