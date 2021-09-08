@@ -5,6 +5,9 @@ application, [govuk-content-schemas][govuk-content-schemas] and
 [search-api][search-api]. You will not have to make any changes to frontend
 applications.
 
+[govuk-content-schemas]: https://github.com/alphagov/govuk-content-schemas
+[search-api]: https://github.com/alphagov/search-api
+
 ## Create a new specialist document format in Specialist Publisher
 
 ### Create the schema
