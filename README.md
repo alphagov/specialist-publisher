@@ -6,14 +6,6 @@ This application does not store documents in a database of its own. Instead it u
 
 Formats can be [flagged](https://github.com/alphagov/specialist-publisher/blob/f8e93142dfad6f3971a73c923b01f2e7352bdb54/lib/documents/schemas/tax_tribunal_decisions.json#L64) as `pre-production`. `pre-production` documents are only publishable on development and integration.
 
-## Screenshots
-
-![Specialist Documents - CMA Case Format](docs/specialist-publisher-screenshot.png)
-*Specialist Documents - CMA Case Format*
-
-![A Specialist Document on gov.uk](docs/screen-shot-specialist-document-cma-case.png)
-*A Specialist Document on gov.uk*
-
 ## Live examples
 
 - [AAIB Reports](https://www.gov.uk/aaib-reports)
