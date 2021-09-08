@@ -1,4 +1,7 @@
-<%= render layout: "shared/form_group", locals: { f: f, field: field } do %>
+<% locals = { f: f, field: field } %>
+<% locals.merge!(label:label) if local_assigns[:label] %>
+
+<%= render layout: "shared/form_group", locals: locals do %>
 <% date = @document.public_send(field) %>
   <div class="date-layout">
     <p class="form-hint">For example, 2013 03 20</p>

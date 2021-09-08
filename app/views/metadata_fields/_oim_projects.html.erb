@@ -1,0 +1,10 @@
+<%= render layout: "shared/date_fields", locals: { f: f, field: :oim_project_opened_date, format: :oim_project, label: "Project opened date" } do %>
+<% end %>
+<%= render layout: "shared/date_fields", locals: { f: f, field: :oim_project_closed_date, format: :oim_project, label: "Project closed date" } do %>
+<% end %>
+<%= render layout: "shared/form_group", locals: { f: f, field: :oim_project_type, label: "Project type" } do %>
+  <%= f.select :oim_project_type, facet_options(f, :oim_project_type), {}, { class: 'form-control' } %>
+<% end %>
+<%= render layout: "shared/form_group", locals: { f: f, field: :oim_project_state, label: "Project state" } do %>
+  <%= f.select :oim_project_state, facet_options(f, :oim_project_state), {}, { class: 'form-control' } %>
+<% end %>

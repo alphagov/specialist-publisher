@@ -12,6 +12,7 @@ RSpec.describe DocumentLinksPresenter do
     UtaacDecision => "6f757605-ab8f-4b62-84e4-99f79cf085c2",
     DrugSafetyUpdate => "240f72bd-9a4d-4f39-94d9-77235cadde8e",
     MedicalSafetyAlert => "240f72bd-9a4d-4f39-94d9-77235cadde8e",
+    OimProject => "b1123ceb-77e4-40fc-9526-83ad0ba7cf01",
     ProtectedFoodDrinkName => "de4e9dc6-cca4-43af-a594-682023b84d6c",
     RaibReport => "013872d8-8bbb-4e80-9b79-45c7c5cf9177",
     ResearchForDevelopmentOutput => "f9fcf3fe-2751-4dca-97ca-becaeceb4b26",
