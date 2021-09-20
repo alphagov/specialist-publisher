@@ -10,6 +10,9 @@
   "signup_content_id": "c0c20b63-039b-4cc4-a341-38c41efb611f",
   "signup_copy": "You'll get an email each time a project is updated or a new project is published.",
   "organisations": ["b1123ceb-77e4-40fc-9526-83ad0ba7cf01"],
+  "editing_organisations": [
+    "957eb4ec-089b-4f71-ba2a-dc69ac8919ea"
+  ],
   "topics": [],
   "subscription_list_title_prefix": {
     "singular": "OIM project with the following project type: ",

@@ -5,7 +5,6 @@ RSpec.feature "Creating an OIM project", type: :feature do
   let(:content_id) { oim_project["content_id"] }
 
   before do
-    log_in_as_editor(:oim_editor)
     stub_publishing_api_has_content([oim_project], hash_including(document_type: OimProject.document_type))
     stub_publishing_api_has_item(oim_project)
     stub_any_publishing_api_put_content
@@ -13,6 +12,15 @@ RSpec.feature "Creating an OIM project", type: :feature do
   end
 
   scenario "visiting the new project page" do
+    log_in_as_editor(:oim_editor)
+    visit "/oim-projects"
+    click_link "Add another OIM Project"
+    expect(page.status_code).to eq(200)
+    expect(page.current_path).to eq("/oim-projects/new")
+  end
+
+  scenario "cma users can access the OIM publishing page" do
+    log_in_as_editor(:cma_editor)
     visit "/oim-projects"
     click_link "Add another OIM Project"
     expect(page.status_code).to eq(200)
@@ -20,6 +28,7 @@ RSpec.feature "Creating an OIM project", type: :feature do
   end
 
   scenario "creating a project with valid data" do
+    log_in_as_editor(:oim_editor)
     allow(SecureRandom).to receive(:uuid).and_return(content_id)
 
     visit "/oim-projects/new"
@@ -84,6 +93,7 @@ RSpec.feature "Creating an OIM project", type: :feature do
   end
 
   scenario "creating a project with with no data" do
+    log_in_as_editor(:oim_editor)
     visit "/oim-projects/new"
     expect(page.status_code).to eq(200)
     click_button "Save as draft"
