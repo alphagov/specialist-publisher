@@ -53,6 +53,11 @@ FactoryBot.define do
     organisation_content_id { "de4e9dc6-cca4-43af-a594-682023b84d6c" }
   end
 
+  factory :oim_editor, parent: :editor do
+    organisation_slug { "office-for-the-internal-market" }
+    organisation_content_id { "b1123ceb-77e4-40fc-9526-83ad0ba7cf01" }
+  end
+
   # Writer factories:
   factory :writer, aliases: [:cma_writer], parent: :editor do
     organisation_slug { "competition-and-markets-authority" }
@@ -268,6 +273,22 @@ FactoryBot.define do
           "case_state" => "closed",
           "market_sector" => %w[energy],
           "outcome_type" => "ca98-no-grounds-for-action-non-infringement",
+        }
+      end
+    end
+  end
+
+  factory :oim_project, parent: :document do
+    base_path { "/oim-projects/example-document" }
+    document_type { "oim_project" }
+
+    transient do
+      default_metadata do
+        {
+          "oim_project_opened_date" => "2014-01-01",
+          "oim_project_closed_date" => "2015-01-01",
+          "oim_project_type" => "annual-report",
+          "oim_project_state" => "closed",
         }
       end
     end

@@ -53,6 +53,10 @@ See [the CMA case schema](https://github.com/alphagov/search-api/blob/main/confi
 3. Add examples [as instructed](https://github.com/alphagov/govuk-content-schemas/blob/master/docs/adding-a-new-schema.md#examples)
 4. Follow the rest of [the workflow](https://github.com/alphagov/govuk-content-schemas/blob/master/docs/suggested-workflows.md)
 
+## Configure the email sign up page
+
+The email sign up page is rendered by finder frontend using the configuration in the new schema added to specialist publisher. However, if the email sign up page has check boxes (eg [cma-cases](https://www.gov.uk/cma-cases/email-signup)), you must add the new tags to [this file](https://github.com/alphagov/email-alert-api/blob/3e0018510ea85f5d561e2865ad149832b94688a1/lib/valid_tags.rb#L2) in email-alert-api.
+
 ## Deploy and publish
 
 Once you're ready to ship your code to an environment,
