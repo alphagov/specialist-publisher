@@ -57,10 +57,16 @@ See [the CMA case schema](https://github.com/alphagov/search-api/blob/main/confi
 
 The email sign up page is rendered by finder frontend using the configuration in the new schema added to specialist publisher. However, if the email sign up page has check boxes (eg [cma-cases](https://www.gov.uk/cma-cases/email-signup)), you must add the new tags to [this file](https://github.com/alphagov/email-alert-api/blob/3e0018510ea85f5d561e2865ad149832b94688a1/lib/valid_tags.rb#L2) in email-alert-api.
 
+## Consider the signon permissions needed to publish this new document
+
+By default, specialist-publisher grants access to the publishing interface for your new document type to the following signon users:
+ - Users that belong to the owner organisation AND have Editor permissions
+ - Users that have the permission your_new_document_type_editor. Eg oim_project_editor
+
 ## Deploy and publish
 
 Once you're ready to ship your code to an environment,
 
 1. Deploy Specialist Publisher, Search API, and govuk-content-schemas.
-2. Run the "Search reindex for new schema" Jenkins job.  This takes around 30-45 minutes on Production, or 3-4 hours on Integration.
+2. Reindex the govuk Elasticsearch index by following the steps [here](https://docs.publishing.service.gov.uk/manual/reindex-elasticsearch.html#how-to-reindex-an-elasticsearch-index). This takes around 30-45 minutes on Production, or 3-4 hours on Integration.
 3. Use the "Run rake task" Jenkins job to run `publishing_api:publish_finders` or `publishing_api:publish_finder[your_format_name_based_on_the_schema_file]` against the specialist publisher app on a backend machine.
