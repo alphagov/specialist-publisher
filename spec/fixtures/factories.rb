@@ -58,6 +58,11 @@ FactoryBot.define do
     organisation_content_id { "b1123ceb-77e4-40fc-9526-83ad0ba7cf01" }
   end
 
+  factory :product_safety_alert_editor, parent: :editor do
+    organisation_slug { "office-for-product-safety-and-standards" }
+    organisation_content_id { "a0ee18e7-9e1e-4ba1-aed5-f3f287dce752" }
+  end
+
   # Writer factories:
   factory :writer, aliases: [:cma_writer], parent: :editor do
     organisation_slug { "competition-and-markets-authority" }
@@ -289,6 +294,23 @@ FactoryBot.define do
           "oim_project_closed_date" => "2015-01-01",
           "oim_project_type" => "annual-report",
           "oim_project_state" => "closed",
+        }
+      end
+    end
+  end
+
+  factory :product_safety_alert, parent: :document do
+    base_path { "/product-safety-alerts/example-document" }
+    document_type { "product_safety_alert" }
+
+    transient do
+      default_metadata do
+        {
+          "product_alert_type" => "safety-alert",
+          "product_risk_level" => "serious",
+          "product_category" => "adaptors-plugs-sockets",
+          "product_measure_type" => %w[ban-marketing-of-product-and-accompanying-measures warning-consumers-of-risks],
+          "product_recall_alert_date" => "2014-01-01",
         }
       end
     end
