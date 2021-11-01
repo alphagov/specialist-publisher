@@ -35,6 +35,8 @@ When the PR is reviewed and its tests passing, it can be merged and deployed at 
 
 See [CMA cases](https://github.com/alphagov/specialist-publisher/blob/main/lib/documents/schemas/cma_cases.json).
 
+New formats are often requested to be deployed in "pre-production mode", which is configured in this step ([example](https://github.com/alphagov/specialist-publisher/blob/f8e93142dfad6f3971a73c923b01f2e7352bdb54/lib/documents/schemas/tax_tribunal_decisions.json#L64)). `pre-production` documents are only publishable on development and integration.
+
 ### Create the model
 
 See [CMA cases](https://github.com/alphagov/specialist-publisher/blob/main/app/models/cma_case.rb)
