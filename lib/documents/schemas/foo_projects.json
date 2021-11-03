@@ -1,26 +1,26 @@
 {
   "content_id": "4e4e33ff-271a-468a-b7a8-92d25f3f8ac0",
-  "base_path": "/oim-projects",
-  "format_name": "Office for the Internal Market project",
-  "name": "Office for the Internal Market projects",
-  "description": "Find reports and updates on current and historical OIM projects",
+  "base_path": "/foo-projects",
+  "format_name": "Office for the FOO project",
+  "name": "Office for the Foo projects",
+  "description": "Find reports and updates on current and historical FOO projects",
   "filter": {
-    "format": "oim_project"
+    "format": "foo_project"
   },
   "signup_content_id": "c0c20b63-039b-4cc4-a341-38c41efb611f",
   "signup_copy": "You'll get an email each time a project is updated or a new project is published.",
   "organisations": ["b1123ceb-77e4-40fc-9526-83ad0ba7cf01"],
   "topics": [],
   "subscription_list_title_prefix": {
-    "singular": "OIM project with the following project type: ",
-    "plural": "OIM projects with the following project types: ",
-    "many": "Office for the Internal Market (OIM) projects: "
+    "singular": "FOO project with the following project type: ",
+    "plural": "FOO projects with the following project types: ",
+    "many": "Office for the Internal Market (FOO) projects: "
   },
-  "email_filter_by": "oim_project_type",
+  "email_filter_by": "foo_project_type",
   "email_filter_facets": [
     {
-      "facet_id": "oim_project_type",
-      "facet_name": "OIM Project type",
+      "facet_id": "foo_project_type",
+      "facet_name": "FOO Project type",
       "required": true,
       "facet_choices": [
         {
@@ -65,8 +65,8 @@
   "document_noun": "project",
   "facets": [
     {
-        "key": "oim_project_type",
-        "name": "OIM Project type",
+        "key": "foo_project_type",
+        "name": "FOO Project type",
         "type": "text",
         "preposition": "of type",
         "display_as_result_metadata": true,
@@ -81,8 +81,8 @@
         ]
     },
     {
-      "key": "oim_project_state",
-      "name": "OIM Project state",
+      "key": "foo_project_state",
+      "name": "FOO Project state",
       "type": "text",
       "preposition": "which are",
       "display_as_result_metadata": true,
@@ -93,16 +93,16 @@
       ]
     },
     {
-      "key": "oim_project_opened_date",
-      "name": "OIM Project opened",
+      "key": "foo_project_opened_date",
+      "name": "FOO Project opened",
       "short_name": "Opened",
       "type": "date",
       "display_as_result_metadata": true,
       "filterable": true
     },
     {
-      "key": "oim_project_closed_date",
-      "name": "OIM Project closed",
+      "key": "foo_project_closed_date",
+      "name": "FOO Project closed",
       "short_name": "Closed",
       "type": "date",
       "preposition": "closed",

@@ -61,7 +61,7 @@ The email sign up page is rendered by finder frontend using the configuration in
 
 By default, specialist-publisher grants access to the publishing interface for your new document type to the following signon users:
  - Users that belong to the owner organisation AND have Editor permissions
- - Users that have the permission your_new_document_type_editor. Eg oim_project_editor
+ - Users that have the permission your_new_document_type_editor. Eg foo_project_editor
 
 ## Deploy and publish
 

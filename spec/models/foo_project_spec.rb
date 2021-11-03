@@ -1,8 +1,8 @@
 require "spec_helper"
 require "models/valid_against_schema"
 
-RSpec.describe OimProject do
-  let(:payload) { FactoryBot.create(:oim_project) }
+RSpec.describe FooProject do
+  let(:payload) { FactoryBot.create(:foo_project) }
   include_examples "it saves payloads that are valid against the 'specialist_document' schema"
 
   it "is not exportable" do
@@ -17,23 +17,23 @@ RSpec.describe OimProject do
     end
 
     it "is invalid if the opened date is after the closed date" do
-      subject.oim_project_opened_date = "2016-01-01"
-      subject.oim_project_closed_date = "2015-12-31"
+      subject.foo_project_opened_date = "2016-01-01"
+      subject.foo_project_closed_date = "2015-12-31"
 
       expect(subject).to be_invalid
-      expect(subject.errors[:oim_project_opened_date]).to eq ["must be before closed date"]
+      expect(subject.errors[:foo_project_opened_date]).to eq ["must be before closed date"]
     end
 
     it "is valid if opened/closed date are nil" do
-      subject.oim_project_opened_date = nil
-      subject.oim_project_closed_date = nil
+      subject.foo_project_opened_date = nil
+      subject.foo_project_closed_date = nil
       expect(subject).to be_valid
 
-      subject.oim_project_opened_date = "2016-01-01"
+      subject.foo_project_opened_date = "2016-01-01"
       expect(subject).to be_valid
 
-      subject.oim_project_opened_date = nil
-      subject.oim_project_closed_date = "2015-12-31"
+      subject.foo_project_opened_date = nil
+      subject.foo_project_closed_date = "2015-12-31"
       expect(subject).to be_valid
     end
   end
