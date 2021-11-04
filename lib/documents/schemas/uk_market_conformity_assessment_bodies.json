@@ -144,6 +144,22 @@
         {
           "label": "United States of America",
           "value": "united-states-of-america"
+        },
+        {
+          "label": "France",
+          "value": "france"
+        },
+        {
+          "label": "Germany",
+          "value": "germany"
+        },
+        {
+          "label": "Hungary",
+          "value": "hungary"
+        },
+        {
+          "label": "Slovakia",
+          "value": "slovakia"
         }
       ]
     },
