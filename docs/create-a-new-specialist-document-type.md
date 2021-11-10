@@ -1,4 +1,4 @@
-# Creating a new specialist document format
+# Create a new specialist document format
 
 To create a new specialist document you will have to make changes to this
 application, [govuk-content-schemas][govuk-content-schemas] and
