@@ -126,26 +126,6 @@
           "value": "canada"
         },
         {
-          "label": "Israel",
-          "value": "israel"
-        },
-        {
-          "label": "Japan",
-          "value": "japan"
-        },
-        {
-          "label": "New Zealand",
-          "value": "new-zealand"
-        },
-        {
-          "label": "Switzerland",
-          "value": "switzerland"
-        },
-        {
-          "label": "United States of America",
-          "value": "united-states-of-america"
-        },
-        {
           "label": "France",
           "value": "france"
         },
@@ -158,8 +138,28 @@
           "value": "hungary"
         },
         {
+          "label": "Israel",
+          "value": "israel"
+        },
+        {
+          "label": "Japan",
+          "value": "japan"
+        },
+        {
+          "label": "New Zealand",
+          "value": "new-zealand"
+        },
+        {
           "label": "Slovakia",
           "value": "slovakia"
+        },
+        {
+          "label": "Switzerland",
+          "value": "switzerland"
+        },
+        {
+          "label": "United States of America",
+          "value": "united-states-of-america"
         }
       ]
     },
