@@ -4,7 +4,7 @@ Publishing App for Specialist Documents.
 
 This application does not store documents in a database of its own. Instead it uses Publishing API to store and retrieve documents. MongoDB is used for storing local user records.
 
-Formats can be [flagged](https://github.com/alphagov/specialist-publisher/blob/f8e93142dfad6f3971a73c923b01f2e7352bdb54/lib/documents/schemas/tax_tribunal_decisions.json#L64) as `pre-production`. `pre-production` documents are only publishable on development and integration.
+Formats can be flagged as `pre-production` (only publishable on development and integration). Read [Create a new specialist document format](./docs/create-a-new-specialist-document-type.md) for details.
 
 ## Live examples
 
