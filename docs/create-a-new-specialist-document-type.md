@@ -74,7 +74,9 @@ If your email sign up page should have checkboxes (e.g. [cma-cases](https://www.
 To deploy:
 
 1. Deploy Specialist Publisher and Search API (and govuk-content-schemas if you haven't already).
-2. [Reindex the govuk Elasticsearch index](https://docs.publishing.service.gov.uk/manual/reindex-elasticsearch.html#how-to-reindex-an-elasticsearch-index). This takes around 30-45 minutes on Production, or 3-4 hours on Integration.
+2. [Reindex the govuk Elasticsearch index](https://docs.publishing.service.gov.uk/manual/reindex-elasticsearch.html#how-to-reindex-an-elasticsearch-index).
+  - This takes around 30-45 minutes on Production, or 3-4 hours on Integration.
+  - NB: reindexing shouldn't really be necessary; Elasticsearch will dynamically create the field mappings the first time a new document of this type is published. In other words, if you publish a new document type, the finder will work and it will return the relevant documents even without a reindex. However, the filters on the finder would not work, as this reindexing job also builds the filters for the finder, so we have to run the job.
 3. Use the "Run rake task" Jenkins job to run `publishing_api:publish_finders` or `publishing_api:publish_finder[your_format_name_based_on_the_schema_file]` against the specialist publisher app on a backend machine.
 
 ## Permissions
