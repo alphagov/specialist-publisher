@@ -81,5 +81,7 @@ To deploy:
 
 Specialist Publisher grants access to the publishing interface for your new document type to the following Signon users:
 
- - Users that belong to the owner organisation AND have `Editor` permissions
- - Users that have the permission `your_new_document_type_editor`, e.g. `oim_project_editor`
+- Users that belong to the owner organisation AND have `Editor` permissions
+- Users that have the permission `your_new_document_type_editor`, e.g. `oim_project_editor`
+
+You'll need to [create the new permission manually](https://docs.publishing.service.gov.uk/apps/signon/usage.html#creating-new-permissions).
