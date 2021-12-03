@@ -1,6 +1,6 @@
-# Create a new specialist document format
+# Creating or editing specialist document types
 
-To create a new specialist document you will have to make changes to this
+To create or edit a new specialist document you will have to make changes to this
 application, [govuk-content-schemas][govuk-content-schemas] and
 [search-api][search-api]. You will not have to make any changes to frontend
 applications.
@@ -8,7 +8,9 @@ applications.
 [govuk-content-schemas]: https://github.com/alphagov/govuk-content-schemas
 [search-api]: https://github.com/alphagov/search-api
 
-## Add a schema to govuk-content-schemas
+# __Creating__ a specialist document type
+
+## 1. Add a schema to govuk-content-schemas
 
 See example [PR for adding `product_safety_alert`](https://github.com/alphagov/govuk-content-schemas/pull/1077).
 
@@ -29,7 +31,7 @@ irb(main):002:0> SecureRandom.uuid
 
 When the PR is reviewed and its tests passing, it can be merged and deployed at this point.
 
-## Create a new specialist document format in Specialist Publisher
+## 2. Create a new specialist document format in Specialist Publisher
 
 ### Create the schema
 
@@ -45,7 +47,7 @@ See [CMA cases](https://github.com/alphagov/specialist-publisher/blob/main/app/m
 
 [CMA cases](https://github.com/alphagov/specialist-publisher/blob/main/app/views/metadata_fields/_cma_cases.html.erb)
 
-## Configure Search API
+## 3. Configure Search API
 
 Search API needs copies of the schema very similar to the one in Specialist Publisher. See:
 
@@ -63,13 +65,13 @@ Finally, you'll need to add your custom fields to:
 - [elasticsearch_presenter.rb](https://github.com/alphagov/search-api/blob/main/lib/govuk_index/presenters/elasticsearch_presenter.rb)
 - [specialist_presenter.rb](https://github.com/alphagov/search-api/blob/main/lib/govuk_index/presenters/specialist_presenter.rb)
 
-## Configure the email sign up page
+## 4. Configure the email sign up page
 
 The email sign up page is rendered by [Finder Frontend](https://github.com/alphagov/finder-frontend) using the configuration in the new schema added to specialist publisher.
 
 If your email sign up page should have checkboxes (e.g. [cma-cases](https://www.gov.uk/cma-cases/email-signup)), you will need to edit email-alert-api by adding the new tags to [valid_tags.rb](https://github.com/alphagov/email-alert-api/blob/3e0018510ea85f5d561e2865ad149832b94688a1/lib/valid_tags.rb#L2).
 
-## Deploy and publish
+## 5. Deploy and publish
 
 To deploy:
 
@@ -79,7 +81,7 @@ To deploy:
   - NB: reindexing shouldn't really be necessary; Elasticsearch will dynamically create the field mappings the first time a new document of this type is published. In other words, if you publish a new document type, the finder will work and it will return the relevant documents even without a reindex. However, the filters on the finder would not work, as this reindexing job also builds the filters for the finder, so we have to run the job.
 3. Use the "Run rake task" Jenkins job to run `publishing_api:publish_finders` or `publishing_api:publish_finder[your_format_name_based_on_the_schema_file]` against the specialist publisher app on a backend machine.
 
-## Permissions
+## 6. Permissions
 
 Specialist Publisher grants access to the publishing interface for your new document type to the following Signon users:
 
@@ -87,3 +89,36 @@ Specialist Publisher grants access to the publishing interface for your new docu
 - Users that have the permission `your_new_document_type_editor`, e.g. `oim_project_editor`
 
 You'll need to [create the new permission manually](https://docs.publishing.service.gov.uk/apps/signon/usage.html#creating-new-permissions).
+
+# __Editing__ a specialist document type
+
+We often receive requests to add new fields to a specialist document. Or to add new values to existing fields.
+
+## Adding a new field to an existing specialist document
+
+1. In govuk-content-schemas, add the new field to [the specialist document schema](https://github.com/alphagov/govuk-content-schemas/blob/main/formats/shared/definitions/_specialist_document.jsonnet). See [this](https://github.com/alphagov/govuk-content-schemas/pull/1066/commits/c2b33fbdbdc3ce7363b87e964b8ff75dc3300573#diff-3c69cee80f0f1b0cb114f9f9f102122b33e2208ecf3a77829506390b9938eb61) commit for an example. Once approved, this change can be merged and deployed.
+
+2. In specialist-publisher, add the new field to the relevant [model](https://github.com/alphagov/specialist-publisher/tree/main/app/models), [form](https://github.com/alphagov/specialist-publisher/tree/main/app/views/metadata_fields), and [schema](https://github.com/alphagov/specialist-publisher/tree/main/lib/documents/schemas) files. See [this](https://github.com/alphagov/specialist-publisher/pull/1899/commits/cc9e8fe482dbca2ef678bb8219252e7bd4f4d154) commit for an example.
+
+3. In search-api, add the new field in the following places (see [this](https://github.com/alphagov/search-api/pull/2320/commits/ca6d0142e29b9755aad2e6bd59a3f576b727bd24) commit for an example):
+  - the relevant schema in the [elasticsearch_types ](https://github.com/alphagov/search-api/tree/main/config/schema/elasticsearch_types)directory.
+  - the [elasticsearch_presenter](https://github.com/alphagov/search-api/blob/main/lib/govuk_index/presenters/elasticsearch_presenter.rb).
+  - the [specialist_presenter](https://github.com/alphagov/search-api/blob/main/lib/govuk_index/presenters/specialist_presenter.rb).
+  - the [field_definitions](https://github.com/alphagov/search-api/blob/main/config/schema/field_definitions.json) file.
+
+
+4. Follow steps in the [Deploy and publish](#Deploy-and-publish) section above, to re-publish the finder and reindex the GOVUK search index.
+
+## Adding or amending values for existing fields on a specialist document
+
+1. In govuk-content-schemas, find the field you are amending in the [specialist_document schema](https://github.com/alphagov/govuk-content-schemas/blob/main/formats/shared/definitions/_specialist_document.jsonnet), and add the new values. See [this](https://github.com/alphagov/govuk-content-schemas/pull/1066/commits/b81ec718f52b1e6603c201c44db07f0357158723) commit for an example. Once approved, this change can be merged and deployed.
+
+2. In specialist-publisher, add the new values to the relevant file in the [schema](https://github.com/alphagov/specialist-publisher/tree/main/lib/documents/schemas) directory. See [this](https://github.com/alphagov/specialist-publisher/pull/1899/commits/97c8d713f8e62b0cb8763fe26e1dcf5a0435c12d) commit for an example.
+
+3. In search-api, amend the value in the relevant schema in the [elasticsearch_types](https://github.com/alphagov/search-api/tree/main/config/schema/elasticsearch_types) directory. See [this](https://github.com/alphagov/search-api/pull/2320/commits/0f29e310581e30707eea7fe8c91063974636dbe2) commit for an example.
+
+4. Republish the finder, see step 3 in the [Deploy and publish](#Deploy-and-publish) section above. You do not need to reindex search :sweat_smile:
+
+# __Editing__ a specialist finder
+
+The [schema](https://github.com/alphagov/specialist-publisher/tree/main/lib/documents/schemas) files that define a specialist document, are also used to configure that document's specialist finder. See [this](https://github.com/alphagov/specialist-publisher/pull/1899/commits/925abc689119138a0e04e17d3610f8ae276773dd) commit for an example.
