@@ -1,6 +1,6 @@
 {
   "content_id": "a22b3f1f-2c91-49a1-a469-ff21d465c543",
-  "base_path": "/product-safety-alerts",
+  "base_path": "/product-safety-alerts-reports-recalls",
   "format_name": "Product safety alerts, unsafe products and recalls",
   "name": "Product safety alerts, unsafe products and recalls",
   "description": "Find product safety alerts, unsafe products and recalls",
@@ -19,9 +19,9 @@
       "required": true,
       "facet_choices": [
         {
-          "key": "safety-alert",
-          "radio_button_name": "Safety alert",
-          "topic_name": "safety alert",
+          "key": "product-safety-alert",
+          "radio_button_name": "Product safety alert",
+          "topic_name": "product safety alert",
           "prechecked": false
         },
         {
@@ -31,9 +31,9 @@
           "prechecked": false
         },
         {
-          "key": "recall",
-          "radio_button_name": "Recall",
-          "topic_name": "recall",
+          "key": "product-recall",
+          "radio_button_name": "Product recall",
+          "topic_name": "product recall",
           "prechecked": false
         }
       ]
@@ -50,9 +50,9 @@
         "display_as_result_metadata": true,
         "filterable": true,
         "allowed_values": [
-          {"label": "Safety alert", "value": "safety-alert"},
+          {"label": "Product safety alert", "value": "product-safety-alert"},
           {"label": "Product safety report", "value": "product-safety-report"},
-          {"label": "Recall", "value": "recall"}
+          {"label": "Product recall", "value": "product-recall"}
         ]
     },
     {
@@ -66,7 +66,8 @@
         {"label": "Serious", "value": "serious"},
         {"label": "High", "value": "high"},
         {"label": "Medium", "value": "medium"},
-        {"label": "Low", "value": "low"}
+        {"label": "Low", "value": "low"},
+        {"label": "Not provided", "value": "not-provided"}
       ]
     },
     {

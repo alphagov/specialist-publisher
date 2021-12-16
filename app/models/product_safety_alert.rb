@@ -20,7 +20,7 @@ class ProductSafetyAlert < Document
   end
 
   def self.title
-    "Product Safety Alert"
+    "Product Safety Alerts, Reports and Recalls"
   end
 
   def primary_publishing_organisation
