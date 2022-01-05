@@ -24,7 +24,7 @@
         {"label": "Commercial - rotorcraft", "value": "commercial-rotorcraft"},
         {"label": "General aviation - fixed wing", "value": "general-aviation-fixed-wing"},
         {"label": "General aviation - rotorcraft", "value": "general-aviation-rotorcraft"},
-        {"label": "Space", "value": "space"},
+        {"label": "Spaceflight", "value": "spaceflight"},
         {"label": "Sport aviation and balloons", "value": "sport-aviation-and-balloons"},
         {"label": "Unmanned Aircraft Systems (UAS)", "value": "unmanned-aircraft-systems"}
       ]
@@ -43,7 +43,7 @@
         {"label": "Bulletin - Pre-1997 uncategorised monthly report", "value": "pre-1997-monthly-report"},
         {"label": "Foreign report", "value": "foreign-report"},
         {"label": "Formal report", "value": "formal-report"},
-        {"label": "Space", "value": "space"},
+        {"label": "Spaceflight", "value": "spaceflight"},
         {"label": "Special bulletin", "value": "special-bulletin"},
         {"label": "Safety study", "value": "safety-study"}
       ]
