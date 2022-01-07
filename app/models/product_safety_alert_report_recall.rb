@@ -1,4 +1,4 @@
-class ProductSafetyAlert < Document
+class ProductSafetyAlertReportRecall < Document
   validates :product_alert_type, presence: true
   validates :product_risk_level, presence: true
   validates :product_category, presence: true

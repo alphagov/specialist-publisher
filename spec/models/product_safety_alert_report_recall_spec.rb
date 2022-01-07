@@ -1,7 +1,7 @@
 require "spec_helper"
 require "models/valid_against_schema"
 
-RSpec.describe ProductSafetyAlert do
+RSpec.describe ProductSafetyAlertReportRecall do
   let(:payload) { FactoryBot.create(:product_safety_alert) }
   include_examples "it saves payloads that are valid against the 'specialist_document' schema"
 
