@@ -299,14 +299,14 @@ FactoryBot.define do
     end
   end
 
-  factory :product_safety_alert, parent: :document do
-    base_path { "/product-safety-alerts/example-document" }
-    document_type { "product_safety_alert" }
+  factory :product_safety_alert_report_recall, parent: :document do
+    base_path { "/product-safety-alerts-reports-recalls/example-document" }
+    document_type { "product_safety_alert_report_recall" }
 
     transient do
       default_metadata do
         {
-          "product_alert_type" => "safety-alert",
+          "product_alert_type" => "product-safety-alert",
           "product_risk_level" => "serious",
           "product_category" => "adaptors-plugs-sockets",
           "product_measure_type" => %w[ban-marketing-of-product-and-accompanying-measures warning-consumers-of-risks],

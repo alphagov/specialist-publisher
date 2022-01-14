@@ -1,4 +1,4 @@
-class ProductSafetyAlert < Document
+class ProductSafetyAlertReportRecall < Document
   validates :product_alert_type, presence: true
   validates :product_risk_level, presence: true
   validates :product_category, presence: true
@@ -20,7 +20,7 @@ class ProductSafetyAlert < Document
   end
 
   def self.title
-    "Product Safety Alert"
+    "Product Safety Alerts, Reports and Recalls"
   end
 
   def primary_publishing_organisation
