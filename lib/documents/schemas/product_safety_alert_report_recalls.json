@@ -1,8 +1,8 @@
 {
   "content_id": "a22b3f1f-2c91-49a1-a469-ff21d465c543",
   "base_path": "/product-safety-alerts-reports-recalls",
-  "format_name": "Product safety alerts, unsafe products and recalls",
-  "name": "Product safety alerts, unsafe products and recalls",
+  "format_name": "Product Safety Alerts, Reports and Recalls",
+  "name": "Product Safety Alerts, Reports and Recalls",
   "description": "Find product safety alerts, unsafe products and recalls",
   "filter": {
     "format": "product_safety_alerts_reports_recalls"
