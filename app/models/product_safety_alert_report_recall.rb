@@ -23,6 +23,10 @@ class ProductSafetyAlertReportRecall < Document
     "Product Safety Alerts, Reports and Recalls"
   end
 
+  def self.slug
+    "product-safety-alerts-reports-recalls"
+  end
+
   def primary_publishing_organisation
     "a0ee18e7-9e1e-4ba1-aed5-f3f287dce752"
   end
