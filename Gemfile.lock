@@ -181,7 +181,7 @@ GEM
       jquery-rails (~> 4.3.1)
       plek (>= 2.1.0)
       rails (>= 3.2.0)
-    govuk_app_config (4.2.0)
+    govuk_app_config (4.3.0)
       logstasher (>= 1.2.2, < 2.2.0)
       puma (~> 5.0)
       sentry-rails (~> 4.5.0)
@@ -220,7 +220,7 @@ GEM
     http-accept (1.7.0)
     http-cookie (1.0.4)
       domain_name (~> 0.5)
-    i18n (1.8.11)
+    i18n (1.9.1)
       concurrent-ruby (~> 1.0)
     ipaddress (0.8.3)
     jquery-rails (4.3.5)
@@ -502,7 +502,7 @@ GEM
     websocket-extensions (0.1.5)
     xpath (3.2.0)
       nokogiri (~> 1.8)
-    zeitwerk (2.5.3)
+    zeitwerk (2.5.4)
 
 PLATFORMS
   ruby
