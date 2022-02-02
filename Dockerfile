@@ -2,9 +2,6 @@ FROM ruby:2.7.5
 
 RUN apt-get update -qq && apt-get upgrade -y && apt-get install -y build-essential nodejs && apt-get clean
 
-# https://github.com/thoughtbot/capybara-webkit/wiki/Installing-Qt-and-compiling-capybara-webkit#debian--ubuntu
-RUN apt-get install -y qt5-default libqt5webkit5-dev gstreamer1.0-plugins-base gstreamer1.0-tools gstreamer1.0-x
-
 RUN gem install foreman
 
 # This is not a valid key but it needs to be in the correct format for the ruby client
