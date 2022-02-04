@@ -14,9 +14,9 @@ applications.
 
 See example [PR for adding `product_safety_alert`](https://github.com/alphagov/govuk-content-schemas/pull/1077).
 
-1. Add the format to [this list](https://github.com/alphagov/govuk-content-schemas/blob/master/formats/specialist_document.jsonnet#L2-L22) and to [this list](https://github.com/alphagov/govuk-content-schemas/blob/main/lib/govuk_content_schemas/allowed_document_types.yml)
-2. Add any new field definitions to [this file](https://github.com/alphagov/govuk-content-schemas/blob/master/formats/shared/definitions/_specialist_document.jsonnet)
-3. Add examples [as instructed](https://github.com/alphagov/govuk-content-schemas/blob/master/docs/adding-a-new-schema.md#examples).
+1. Add the format to [this list](https://github.com/alphagov/govuk-content-schemas/blob/main/formats/specialist_document.jsonnet#L2-L31) and to [this list](https://github.com/alphagov/govuk-content-schemas/blob/main/lib/govuk_content_schemas/allowed_document_types.yml)
+2. Add any new field definitions to [this file](https://github.com/alphagov/govuk-content-schemas/blob/main/formats/shared/definitions/_specialist_document.jsonnet)
+3. Add examples [as instructed](https://github.com/alphagov/govuk-content-schemas/blob/main/docs/adding-a-new-schema.md#examples).
    You can copy and paste from another specialist document format, only changing what is necessary (you can leave the body and headers unchanged).
 
 You'll need to generate your own UUIDs for the `content_id` and `signup_content_id` fields:
