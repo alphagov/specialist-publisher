@@ -9,7 +9,7 @@ Drafts can also be discarded by running a similar task from the Publishing API:
 
 `discard_draft['some-content-id']`
 
-See [Admin Tasks](https://github.com/alphagov/publishing-api/blob/master/doc/admin-tasks.md)
+See [Admin Tasks](https://github.com/alphagov/publishing-api/blob/main/docs/admin-tasks.md)
 
 ## Triggering an email notification
 
