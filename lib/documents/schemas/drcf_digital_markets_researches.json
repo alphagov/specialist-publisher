@@ -1,0 +1,118 @@
+{
+  "content_id": "380def5e-bed2-4501-967e-334767ac270d",
+  "base_path": "/find-digital-market-research",
+  "format_name": "DRCF digital markets research",
+  "name": "DRCF digital markets research",
+  "description": "DRCF digital markets research finder",
+  "filter": {
+    "format": "drcf_digital_markets_research"
+  },
+  "organisations": ["957eb4ec-089b-4f71-ba2a-dc69ac8919ea"],
+  "document_noun": "report",
+  "facets": [
+    {
+      "key": "digital_market_research_category",
+      "name": "Category",
+      "short_name": "Category",
+      "type": "text",
+      "preposition": "",
+      "display_as_result_metadata": true,
+      "filterable": true,
+      "allowed_values": [
+        {"label": "Ad hoc research", "value": "ad-hoc-research"},
+        {"label": "Ongoing research", "value": "ongoing-research"}
+      ]
+    },
+    {
+      "key": "digital_market_research_publisher",
+      "name": "Original publisher",
+      "short_name": "Publisher",
+      "type": "text",
+      "preposition": "",
+      "display_as_result_metadata": true,
+      "filterable": true,
+      "allowed_values": [
+        {"label": "Advertising Standards Authority", "value": "advertising-standards-authority"},
+        {"label": "Bank of England", "value": "bank-of-england"},
+        {"label": "Competition and Markets Authority", "value": "competition-and-markets-authority"},
+        {"label": "Financial Conduct Authority - Insight", "value": "financial-conduct-authority-insight"},
+        {"label": "Financial Conduct Authority", "value": "financial-conduct-authority"},
+        {"label": "Gambling Commission", "value": "gambling-commission"},
+        {"label": "Information Commissioner's Office", "value": "information-commissioner's-office"},
+        {"label": "Intellectual Property Office", "value": "intellectual-property-office"},
+        {"label": "Ofcom", "value": "ofcom"}
+      ]
+    },
+    {
+      "key": "digital_market_research_area",
+      "name": "Research area",
+      "short_name": "Research area",
+      "type": "text",
+      "preposition": "",
+      "display_as_result_metadata": true,
+      "filterable": true,
+      "allowed_values": [
+        {"label": "Advertising and marketing", "value": "advertising-and-marketing"},
+        {"label": "Financial services", "value": "financial-services"},
+        {"label": "Future connectivity and internet", "value": "future-connectivity-and-internet"},
+        {"label": "Media and entertainment", "value": "media-and-entertainment"},
+        {"label": "Retail and digital commerce", "value": "retail-and-digital-commerce"},
+        {"label": "Technology", "value": "technology"}
+      ]
+    },
+    {
+      "key": "digital_market_research_topic",
+      "name": "Research topic",
+      "short_name": "Research topic",
+      "type": "text",
+      "preposition": "",
+      "display_as_result_metadata": true,
+      "filterable": true,
+      "allowed_values": [
+        {"label": "Adtech", "value": "adtech"},
+        {"label": "Advertising spend", "value": "advertising-spend"},
+        {"label": "Application programming interface", "value": "application-programming-interface"},
+        {"label": "Artificial intelligence", "value": "artificial-intelligence"},
+        {"label": "Audio and radio", "value": "audio-and-radio"},
+        {"label": "Blockchain", "value": "blockchain"},
+        {"label": "Cloud computing", "value": "cloud-computing"},
+        {"label": "Data and AI", "value": "data-and-ai"},
+        {"label": "Data privacy, access and control", "value": "data-privacy-access-and-control"},
+        {"label": "Digital currencies", "value": "digital-currencies"},
+        {"label": "Digital economy", "value": "digital-economy"},
+        {"label": "Digital transformation", "value": "digital-transformation"},
+        {"label": "Distributed ledger technology", "value": "distributed-ledger-technology"},
+        {"label": "Edge computing", "value": "edge-computing"},
+        {"label": "Fintech", "value": "fintech"},
+        {"label": "Future connectivity", "value": "future-connectivity"},
+        {"label": "Gambling", "value": "gambling"},
+        {"label": "Gaming", "value": "gaming"},
+        {"label": "General and vertical search", "value": "general-and-vertical-search"},
+        {"label": "Intellectual property", "value": "intellectual-property"},
+        {"label": "Internet of things", "value": "internet-of-things"},
+        {"label": "Internet usage and attitudes", "value": "internet-usage-and-attitudes"},
+        {"label": "Measuring advertising effectiveness", "value": "measuring-advertising-effectiveness"},
+        {"label": "Music streaming", "value": "music-streaming"},
+        {"label": "News and publishing", "value": "news-and-publishing"},
+        {"label": "Online retail", "value": "online-retail"},
+        {"label": "Open banking", "value": "open-banking"},
+        {"label": "Personalisation algorithm", "value": "personalisation-algorithm"},
+        {"label": "Privacy enhancing technology", "value": "privacy-enhancing-technology"},
+        {"label": "Quantum computing", "value": "quantum-computing"},
+        {"label": "Regtech", "value": "regtech"},
+        {"label": "Safety and harms", "value": "safety-and-harms"},
+        {"label": "Social media and instant messaging", "value": "social-media-and-instant-messaging"},
+        {"label": "TV, video and on-demand", "value": "tv-video-and-on-demand"}
+      ]
+    },
+    {
+      "key": "digital_market_research_publish_date",
+      "name": "Research publish date",
+      "short_name": "Research published",
+      "type": "date",
+      "preposition": "research published",
+      "display_as_result_metadata": true,
+      "filterable": true
+    }
+  ]
+}

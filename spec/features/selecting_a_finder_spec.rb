@@ -74,7 +74,7 @@ RSpec.feature "The root specialist-publisher page", type: :feature do
 
       expect(page).to have_text("CMA Cases")
 
-      expect(page).to have_css(".navbar-nav li a", count: 1)
+      expect(page).to have_css(".navbar-nav li a", count: 2)
 
       click_link("CMA Cases")
 

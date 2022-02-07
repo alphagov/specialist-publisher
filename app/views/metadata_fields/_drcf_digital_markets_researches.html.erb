@@ -1,0 +1,62 @@
+<%= render layout: "shared/form_group", locals: { f: f, field: :digital_market_research_category, label: "Category" } do %>
+  <%= f.select :digital_market_research_category,
+      f.object.facet_options(:digital_market_research_category),
+      {},
+      {
+        class: 'form-control',
+        multiple: true,
+        data:
+        {
+          placeholder: 'Select a category'
+        }
+      }
+  %>
+<% end %>
+<%= render layout: "shared/form_group", locals: { f: f, field: :digital_market_research_publisher, label: "Publisher" } do %>
+  <%= f.select :digital_market_research_publisher,
+      f.object.facet_options(:digital_market_research_publisher),
+      {},
+      {
+        class: 'select2 form-control',
+        multiple: true,
+        data:
+        {
+          placeholder: 'Select a publisher'
+        }
+      }
+  %>
+<% end %>
+<%= render layout: "shared/form_group", locals: { f: f, field: :digital_market_research_area, label: "Research area" } do %>
+  <%= f.select :digital_market_research_area,
+      f.object.facet_options(:digital_market_research_area),
+      {},
+      {
+        class: 'select2 form-control',
+        multiple: true,
+        data:
+        {
+          placeholder: 'Select a research area'
+        }
+      }
+  %>
+<% end %>
+<%= render layout: "shared/form_group", locals: { f: f, field: :digital_market_research_topic, label: "Research topic" } do %>
+  <%= f.select :digital_market_research_topic,
+      f.object.facet_options(:digital_market_research_topic),
+      {},
+      {
+        class: 'select2 form-control',
+        multiple: true,
+        data:
+        {
+          placeholder: 'Select a research topic'
+        }
+      }
+  %>
+<% end %>
+<%= render "shared/date_fields",
+  f: f,
+  field: :digital_market_research_publish_date,
+  format: :drcf_digital_markets_research,
+  label: "Research publish date"
+%>
