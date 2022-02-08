@@ -1,3 +1,5 @@
+<%= content_for :page_title, current_format.title.pluralize %>
+
 <% content_for :breadcrumbs do %>
   <li class='active'><%= current_format.title.pluralize %></li>
 <% end %>
