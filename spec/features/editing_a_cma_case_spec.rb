@@ -93,8 +93,7 @@ RSpec.feature "Editing a CMA case", type: :feature do
 
     scenario "a major update adds to the change history" do
       fill_in "Title", with: "Changed title"
-
-      choose "Update type major"
+      choose "Major"
       fill_in "Change note", with: "This is a change note."
       click_button "Save as draft"
 
@@ -109,7 +108,7 @@ RSpec.feature "Editing a CMA case", type: :feature do
     scenario "a minor update doesn't add to the change history" do
       fill_in "Summary", with: "Summary without a typo"
 
-      choose "Update type minor"
+      choose "Minor"
       click_button "Save as draft"
 
       changed_json = {
@@ -164,7 +163,7 @@ RSpec.feature "Editing a CMA case", type: :feature do
         expect(cma_case["details"]["metadata"]["bulk_published"]).to be_truthy
         fill_in "Summary", with: "An updated summary"
 
-        choose "Update type minor"
+        choose "Minor"
         click_button "Save as draft"
 
         changed_json = {
@@ -275,7 +274,7 @@ RSpec.feature "Editing a CMA case", type: :feature do
         expect(page).to have_content("[InlineAttachment:asylum-support-image.jpg]")
 
         fill_in "Body", with: "[InlineAttachment:asylum-support-image.jpg]"
-        choose "Update type minor"
+        choose "Minor"
 
         stub_publishing_api_has_item(updated_cma_case)
 
@@ -414,8 +413,8 @@ RSpec.feature "Editing a CMA case", type: :feature do
       within(".edit_document") do
         expect(page).to have_content("Only use for minor changes like fixes to typos, links, GOV.UK style or metadata.")
         expect(page).to have_content("This will notify subscribers to ")
-        expect(page).to have_content("Update type minor")
-        expect(page).to have_content("Update type major")
+        expect(page).to have_content("Minor")
+        expect(page).to have_content("Major")
       end
     end
 
@@ -430,7 +429,7 @@ RSpec.feature "Editing a CMA case", type: :feature do
 
     scenario "updating the title does not update the base path" do
       fill_in "Title", with: "New title"
-      choose "Update type minor"
+      choose "Minor"
       click_button "Save as draft"
       changed_json = {
         "title" => "New title",
@@ -446,8 +445,8 @@ RSpec.feature "Editing a CMA case", type: :feature do
       within(".edit_document") do
         expect(page).not_to have_content("Only use for minor changes like fixes to typos, links, GOV.UK style or metadata.")
         expect(page).not_to have_content("This will notify subscribers to ")
-        expect(page).not_to have_content("Update type minor")
-        expect(page).not_to have_content("Update type major")
+        expect(page).not_to have_content("Minor")
+        expect(page).not_to have_content("Major")
       end
     end
 

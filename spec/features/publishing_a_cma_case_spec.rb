@@ -149,7 +149,7 @@ RSpec.feature "Publishing a CMA case", type: :feature do
       click_link "Edit document"
 
       fill_in "Title", with: "Changed title"
-      choose "Update type major"
+      choose "Major"
       fill_in "Change note", with: "Updated change note"
 
       click_button "Save as draft"

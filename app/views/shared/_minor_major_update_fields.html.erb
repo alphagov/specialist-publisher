@@ -1,17 +1,31 @@
 <% unless document.first_draft? %>
-  <div class="checkbox add-vertical-margins">
-    <%= f.radio_button :update_type, :minor, class: 'js-update-type-minor' %>
-    <%= f.label :update_type_minor %>
-    <p class="help-block">Only use for minor changes like fixes to typos, links, GOV.UK style or metadata.</p>
-  </div>
-  <div class="checkbox add-vertical-margins">
-    <%= f.radio_button :update_type, :major, class: 'js-update-type-major' %>
-    <%= f.label :update_type_major %>
-    <p class="help-block">This will notify subscribers to <%= current_format.title.pluralize %>.</p>
-  </div>
-  <div class="<%= document.update_type != 'major' ? 'js-hidden' : nil %> js-change-note">
-    <%= f.label :change_note %>
-    <%= f.text_area :change_note, class: 'form-control short-textarea' %>
-    <p class="help-block">This will be publically viewable on GOV.UK</p>
+  <div class="form-group <%= 'elements-error' if field_has_errors(@document, :update_type) %>">
+    <%= f.label :update_type, for: "#{document.document_type}_update_type_minor" do %>
+      Update type
+      <% field_errors(document, :update_type).each do |msg| %>
+        <br>
+        <span class="elements-error-message add-label-margin"><%= msg.html_safe %></span>
+      <% end %>
+    <% end %>
+
+    <div class="checkbox">
+      <%= f.radio_button :update_type, :minor, class: 'js-update-type-minor', aria: { describedby: "hint-id" } %>
+      <%= f.label :update_type_minor do %>
+        Minor
+      <% end %>
+      <p class="help-block">Only use for minor changes like fixes to typos, links, GOV.UK style or metadata.</p>
+    </div>
+    <div class="checkbox">
+      <%= f.radio_button :update_type, :major, class: 'js-update-type-major', aria: { describedby: "hint-id" } %>
+      <%= f.label :update_type_major do %>
+        Major
+      <% end %>
+      <p class="help-block">This will notify subscribers to <%= current_format.title.pluralize %>.</p>
+    </div>
+    <div class="<%= document.update_type != 'major' ? 'js-hidden' : nil %> js-change-note">
+      <%= f.label :change_note %>
+      <%= f.text_area :change_note, class: 'form-control short-textarea' %>
+      <p class="help-block">This will be publicly viewable on GOV.UK</p>
+    </div>
   </div>
 <% end %>
