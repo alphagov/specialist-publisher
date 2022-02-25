@@ -88,7 +88,7 @@ Specialist Publisher grants access to the publishing interface for your new docu
 - Users that belong to the owner organisation AND have `Editor` permissions
 - Users that have the permission `your_new_document_type_editor`, e.g. `oim_project_editor`
 
-You'll need to [create the new permission manually](https://docs.publishing.service.gov.uk/apps/signon/usage.html#creating-new-permissions).
+You'll need to [create the new permission manually](https://docs.publishing.service.gov.uk/repos/signon/usage.html#creating-new-permissions).
 
 # __Editing__ a specialist document type
 
