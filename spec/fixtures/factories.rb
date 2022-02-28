@@ -63,6 +63,11 @@ FactoryBot.define do
     organisation_content_id { "a0ee18e7-9e1e-4ba1-aed5-f3f287dce752" }
   end
 
+  factory :drcf_digital_markets_research_editor, parent: :editor do
+    organisation_slug { "competition-and-markets-authority" }
+    organisation_content_id { "957eb4ec-089b-4f71-ba2a-dc69ac8919ea" }
+  end
+
   # Writer factories:
   factory :writer, aliases: [:cma_writer], parent: :editor do
     organisation_slug { "competition-and-markets-authority" }
@@ -644,5 +649,21 @@ FactoryBot.define do
 
     initialize_with { attributes }
     to_create(&:deep_stringify_keys!)
+  end
+
+  factory :drcf_digital_markets_research, parent: :document do
+    base_path { "/find-digital-market-research/example-document" }
+    document_type { "drcf_digital_markets_research" }
+    transient do
+      default_metadata do
+        {
+          "digital_market_research_category" => "ad-hoc-research",
+          "digital_market_research_publisher" => %w[gambling-commission],
+          "digital_market_research_area" => %w[media-and-entertainment],
+          "digital_market_research_topic" => %w[future-connectivity],
+          "digital_market_research_publish_date" => "2021-02-18T10:12:26+00:00",
+        }
+      end
+    end
   end
 end
