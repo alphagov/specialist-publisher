@@ -28,6 +28,7 @@ irb(main):001:0> require "securerandom"
 irb(main):002:0> SecureRandom.uuid
 => "5087e8b6-ee54-40f9-b592-8c2813c7037d"
 ```
+4. Run `bundle exec rake build` to regenerate schemas.
 
 When the PR is reviewed and its tests passing, it can be merged and deployed at this point.
 
