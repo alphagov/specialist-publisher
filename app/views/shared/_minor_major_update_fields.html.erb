@@ -9,23 +9,23 @@
     <% end %>
 
     <div class="checkbox">
-      <%= f.radio_button :update_type, :minor, class: 'js-update-type-minor', aria: { describedby: "hint-id" } %>
+      <%= f.radio_button :update_type, :minor, class: 'js-update-type-minor', aria: { describedby: "update-type-minor-hint" } %>
       <%= f.label :update_type_minor do %>
         Minor
       <% end %>
-      <p class="help-block">Only use for minor changes like fixes to typos, links, GOV.UK style or metadata.</p>
+      <p id="update-type-minor-hint" class="help-block">Only use for minor changes like fixes to typos, links, GOV.UK style or metadata.</p>
     </div>
     <div class="checkbox">
-      <%= f.radio_button :update_type, :major, class: 'js-update-type-major', aria: { describedby: "hint-id" } %>
+      <%= f.radio_button :update_type, :major, class: 'js-update-type-major', aria: { describedby: "update-type-major-hint" } %>
       <%= f.label :update_type_major do %>
         Major
       <% end %>
-      <p class="help-block">This will notify subscribers to <%= current_format.title.pluralize %>.</p>
+      <p id="update-type-major-hint" class="help-block">This will notify subscribers to <%= current_format.title.pluralize %>.</p>
     </div>
     <div class="<%= document.update_type != 'major' ? 'js-hidden' : nil %> js-change-note">
       <%= f.label :change_note %>
-      <%= f.text_area :change_note, class: 'form-control short-textarea' %>
-      <p class="help-block">This will be publicly viewable on GOV.UK</p>
+      <%= f.text_area :change_note, class: 'form-control short-textarea', aria: { describedby: "change-notes-hint" } %>
+      <p id="change-notes-hint" class="help-block">This will be publicly viewable on GOV.UK</p>
     </div>
   </div>
 <% end %>
