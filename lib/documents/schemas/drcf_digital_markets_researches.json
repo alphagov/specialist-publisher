@@ -1,13 +1,14 @@
 {
   "content_id": "380def5e-bed2-4501-967e-334767ac270d",
   "base_path": "/find-digital-market-research",
-  "format_name": "DRCF digital markets research",
-  "name": "DRCF digital markets research",
+  "format_name": "Digital Regulation Cooperation Forum digital markets research",
+  "name": "Digital Regulation Cooperation Forum digital markets research",
   "description": "DRCF digital markets research finder",
   "filter": {
     "format": "drcf_digital_markets_research"
   },
   "organisations": ["957eb4ec-089b-4f71-ba2a-dc69ac8919ea"],
+  "summary": "<p>Find research about digital markets and regulation carried out by public authorities, curated by the <a href=\"government/collections/the-digital-regulation-cooperation-forum\"> Digital Regulation Cooperation Forum (DRCF)</a></p>",
   "document_noun": "report",
   "facets": [
     {
