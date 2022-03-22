@@ -5,7 +5,24 @@ RSpec.describe EmailAlertPresenter do
   let(:medical_safety_payload) { FactoryBot.create(:medical_safety_alert) }
   let(:cma_case_redrafted_payload) { FactoryBot.create(:cma_case, :redrafted, title: "updated") }
 
+  let(:product_safety_alert_payload) { FactoryBot.create(:product_safety_alert_report_recall) }
+
   describe "#to_json" do
+    context "product_safety_alert_report_recall finder" do
+      before do
+        stub_publishing_api_has_item(product_safety_alert_payload)
+      end
+
+      it "does not send the links hash in the payload for email alert api" do
+        product_safety_alert = ProductSafetyAlertReportRecall.find(product_safety_alert_payload["content_id"], product_safety_alert_payload["locale"])
+        email_alert_presenter = described_class.new(product_safety_alert)
+        presented_data = email_alert_presenter.to_json
+        expect(presented_data[:tags][:format]).to eq(product_safety_alert_payload["document_type"])
+        expect(presented_data[:tags][:case_type]).to eq(product_safety_alert_payload["details"]["metadata"]["case_type"])
+        expect(presented_data[:links]).to eq({})
+      end
+    end
+
     context "any finders document" do
       before do
         stub_publishing_api_has_item(cma_case_payload)
@@ -21,6 +38,8 @@ RSpec.describe EmailAlertPresenter do
         email_alert_presenter_redrafted = EmailAlertPresenter.new(redrafted_cma_case)
         presented_data_redrafted = email_alert_presenter_redrafted.to_json
 
+        cma_links = DocumentLinksPresenter.new(cma_case).to_json[:links]
+
         expect(presented_data[:title]).to include(cma_case_payload["title"])
         expect(presented_data[:description]).to include(cma_case_payload["description"])
         expect(presented_data[:subject]).to include(cma_case_payload["title"])
@@ -29,6 +48,7 @@ RSpec.describe EmailAlertPresenter do
         expect(presented_data[:tags][:format]).to eq(cma_case_payload["document_type"])
         expect(presented_data[:tags][:case_type]).to eq(cma_case_payload["details"]["metadata"]["case_type"])
         expect(presented_data[:document_type]).to eq(cma_case_payload["document_type"])
+        expect(presented_data[:links]).to eq(cma_links)
         expect(presented_data[:public_updated_at]).to include(cma_case_payload["public_updated_at"])
         expect(presented_data[:base_path]).to include(cma_case_payload["base_path"])
         expect(presented_data[:priority]).to eq("normal")
