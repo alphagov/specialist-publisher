@@ -6,6 +6,7 @@ RSpec.describe EmailAlertPresenter do
   let(:cma_case_redrafted_payload) { FactoryBot.create(:cma_case, :redrafted, title: "updated") }
 
   let(:product_safety_alert_payload) { FactoryBot.create(:product_safety_alert_report_recall) }
+  let(:drcf_digital_markets_research_payload) { FactoryBot.create(:drcf_digital_markets_research) }
 
   describe "#to_json" do
     context "product_safety_alert_report_recall finder" do
@@ -17,9 +18,26 @@ RSpec.describe EmailAlertPresenter do
         product_safety_alert = ProductSafetyAlertReportRecall.find(product_safety_alert_payload["content_id"], product_safety_alert_payload["locale"])
         email_alert_presenter = described_class.new(product_safety_alert)
         presented_data = email_alert_presenter.to_json
+
         expect(presented_data[:tags][:format]).to eq(product_safety_alert_payload["document_type"])
         expect(presented_data[:tags][:case_type]).to eq(product_safety_alert_payload["details"]["metadata"]["case_type"])
         expect(presented_data[:links]).to eq({})
+      end
+
+      context "drcf_digital_markets_research finder" do
+        before do
+          stub_publishing_api_has_item(drcf_digital_markets_research_payload)
+        end
+
+        it "does not send the links hash in the payload for email alert api" do
+          drcf_digital_markets_research = DrcfDigitalMarketsResearch.find(drcf_digital_markets_research_payload["content_id"], drcf_digital_markets_research_payload["locale"])
+          email_alert_presenter = described_class.new(drcf_digital_markets_research)
+          presented_data = email_alert_presenter.to_json
+
+          expect(presented_data[:tags][:format]).to eq(drcf_digital_markets_research_payload["document_type"])
+          expect(presented_data[:tags][:digital_market_research_category]).to eq(drcf_digital_markets_research_payload["details"]["metadata"]["digital_market_research_category"])
+          expect(presented_data[:links]).to eq({})
+        end
       end
     end
 
