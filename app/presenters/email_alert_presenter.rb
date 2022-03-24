@@ -1,5 +1,8 @@
 class EmailAlertPresenter
-  DO_NOT_ALERT_ORGANISATION_SUBSCRIBERS = %w[product_safety_alert_report_recall].freeze
+  DO_NOT_ALERT_ORGANISATION_SUBSCRIBERS = %w[
+    product_safety_alert_report_recall
+    drcf_digital_markets_research
+  ].freeze
   attr_reader :document
 
   def initialize(document)
