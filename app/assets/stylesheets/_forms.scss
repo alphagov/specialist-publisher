@@ -157,8 +157,8 @@ h2.with-actions { // stylelint-disable-line selector-no-qualifying-type
   color: #80858a;
 }
 // Two digit date form inputs are formatted 03 rather than 3. Using the spin buttons displayed single digit numbers (aka 3 rather than 03) which could be confusing to a user. The code below removes the spin buttons.
-input[type=number]::-webkit-inner-spin-button,
-input[type=number]::-webkit-outer-spin-button {
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
   -webkit-appearance: none;
   margin: 0;
 }
