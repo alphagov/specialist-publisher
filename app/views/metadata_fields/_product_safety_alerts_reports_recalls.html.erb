@@ -10,5 +10,5 @@
 <%= render layout: "shared/form_group", locals: { f: f, field: :product_measure_type, label: "Measure type" } do %>
   <%= f.select :product_measure_type, facet_options(f, :product_measure_type), {}, { class: "form-control", multiple: true } %>
 <% end %>
-<%= render layout: "shared/date_fields", locals: { f: f, field: :product_recall_alert_date, format: :oim_project, label: "Recall/alert date" } do %>
+<%= render layout: "shared/date_fields", locals: { f: f, field: :product_recall_alert_date, format: :product_safety_alert_report_recall, label: "Recall/alert date" } do %>
 <% end %>
