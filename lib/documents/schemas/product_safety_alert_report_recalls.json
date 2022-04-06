@@ -44,6 +44,7 @@
     {
         "key": "product_alert_type",
         "name": "Alert type",
+        "short_name": "Alert type",
         "type": "text",
         "preposition": "of type",
         "display_as_result_metadata": true,
@@ -57,6 +58,7 @@
     {
       "key": "product_risk_level",
       "name": "Risk level",
+      "short_name": "Risk level",
       "type": "text",
       "preposition": "that are",
       "display_as_result_metadata": true,
@@ -114,6 +116,7 @@
     {
       "key": "product_measure_type",
       "name": "Measure type",
+      "short_name": "Measure type",
       "type": "text",
       "preposition": "of type",
       "display_as_result_metadata": true,
@@ -135,6 +138,7 @@
     {
       "key": "product_recall_alert_date",
       "name": "Recall/alert date",
+      "short_name": "Recall/alert date",
       "type": "date",
       "preposition": "recalled/alerted",
       "display_as_result_metadata": true,
