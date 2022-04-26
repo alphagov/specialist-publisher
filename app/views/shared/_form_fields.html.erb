@@ -3,7 +3,8 @@
 <% end %>
 
 <%= render layout: "shared/form_group", locals: { f: f, field: :summary } do %>
-  <%= f.text_area :summary, class: 'form-control short-textarea' %>
+  <%= f.text_area :summary, class: 'form-control short-textarea js-length-counter', data: { :"count-message-threshold" => 280, :"count-message-selector" => ".summary-length-info" } %>
+  <div class="summary-length-info warning" aria-live="polite">Summary text should be 280 characters or fewer. <span class="count"></span></div>
 <% end %>
 
 <%= render layout: "shared/form_group", locals: { f: f, field: :body } do %>
