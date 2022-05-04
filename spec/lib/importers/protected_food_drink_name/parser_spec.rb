@@ -55,4 +55,95 @@ RSpec.describe Importers::ProtectedFoodDrinkName::Parser do
       expect(subject.get_attributes).to eq(expected_result)
     end
   end
+
+  describe "#register" do
+    let(:data) do
+      [
+        { "Product type" => "Wine", "Protection type" => "American viticultural area" },
+        { "Product type" => "Wine", "Protection type" => "US spirit drink" },
+        { "Product type" => "Wine", "Protection type" => "Name protected by international treaty" },
+        { "Product type" => "Aromatised wine" },
+        { "Product type" => "Spirit drink" },
+        { "Product type" => "Wine" },
+        { "Product type" => "Traditional term" },
+        { "Product type" => "Food", "Protection type" => "Traditional Specialities Guaranteed (TSG)" },
+        { "Product type" => "Food" },
+      ]
+    end
+
+    it "parses product types and protection types correctly" do
+      expected_results = %w[
+        american-viticultural-areas
+        american-viticultural-areas
+        names-protected-by-international-treaty
+        aromatised-wines
+        spirit-drinks
+        wines
+        traditional-terms-for-wine
+        foods-traditional-speciality-guaranteed
+        foods-designated-origin-and-geographical-indication
+      ]
+
+      results = data.map { |datum| described_class.new(datum).get_attributes[:register] }
+
+      expect(results).to eq(expected_results)
+    end
+  end
+
+  describe "#summary" do
+    let(:data) do
+      [
+        {
+          "Protection type" => "Geographical indication (GI)",
+          "Product type" => "Spirit drink",
+        },
+        {
+          "Protection type" => "Geographical indication (GI)",
+          "Product type" => "Aromatised wine",
+        },
+        {
+          "Protection type" => "Protected Geographical Indication (PGI)",
+          "Product type" => "Food",
+        },
+        {
+          "Protection type" => "Protected Geographical Indication (PGI)",
+          "Product type" => "Wine",
+        },
+        {
+          "Protection type" => "Protected Designation of Origin (PDO)",
+          "Product type" => "Food",
+        },
+        {
+          "Protection type" => "Protected Designation of Origin (PDO)",
+          "Product type" => "Wine",
+        },
+        { "Protection type" => "Protected Designation of Origin (PDO)" },
+        { "Protection type" => "Traditional Specialities Guaranteed (TSG)" },
+        { "Protection type" => "Traditional Term" },
+        { "Protection type" => "Name protected by international treaty" },
+        { "Protection type" => "American viticultural area" },
+        { "Protection type" => "US spirit drink" },
+      ]
+    end
+    it "parses product types and protection types correctly" do
+      expected_results = [
+        "Protected spirit drink name",
+        "Protected aromatised wine name",
+        "Protected food name with Protected Geographical Indication (PGI)",
+        "Protected wine name with Protected Geographical Indication (PGI)",
+        "Protected food name with Protected Designation of Origin (PDO)",
+        "Protected wine name with Protected Designation of Origin (PDO)",
+        "",
+        "Protected food name with Traditional Speciality Guaranteed (TSG)",
+        "Traditional term for wine",
+        "Name protected by international treaty",
+        "American viticultural area",
+        "Protected spirit drink name",
+      ]
+
+      results = data.map { |datum| described_class.new(datum).get_attributes[:summary] }
+
+      expect(results).to eq(expected_results)
+    end
+  end
 end
