@@ -1,7 +1,9 @@
-require "spec_helper"
+require "rails_helper"
 
-RSpec.describe "rake import", rake_task: true do
-  context "import:protected_food_and_drink_names" do
+RSpec.describe "rake bulk_imports", type: :task do
+  before { Rake::Task["bulk_imports:protected_food_and_drink_names"].reenable }
+
+  context "bulk_imports:protected_food_and_drink_names" do
     let(:csv_file) { Rails.root.join("spec/support/csvs/spirits_for_import.csv") }
 
     before do
