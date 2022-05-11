@@ -4,6 +4,12 @@
 # or operating system, you probably want to add a global ignore instead:
 #   git config --global core.excludesfile '~/.gitignore_global'
 
+# Ignore JavaScript dependencies
+/node_modules
+
+# Ignore compiled assets
+/public/assets
+
 /log/*
 !/log/.keep
 tmp

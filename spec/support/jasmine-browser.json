@@ -1,0 +1,17 @@
+{
+  "srcDir": "public/assets",
+  "srcFiles": [
+    "govuk-admin-template-*.js",
+    "application-*.js"
+  ],
+  "specDir": "spec/javascripts",
+  "specFiles": [
+    "**/*[sS]pec.?(m)js"
+  ],
+  "helpers": [
+    "helpers/*.js"
+  ],
+  "browser": {
+    "name": "headlessChrome"
+  }
+}
