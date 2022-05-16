@@ -4,6 +4,7 @@ RSpec.describe RepublishService do
   let(:document) { FactoryBot.create(:cma_case) }
   let(:content_id) { document["content_id"] }
   let(:locale) { document["locale"] }
+  let(:publication_state) { document["publication_state"] }
 
   let(:uses_republish_update_type) do
     request_json_includes("update_type" => "republish")
@@ -112,6 +113,14 @@ RSpec.describe RepublishService do
   context "when the document is unpublished" do
     let(:document) do
       FactoryBot.create(:cma_case, :unpublished)
+    end
+
+    it "logs a warning with a message" do
+      allow(Rails.logger).to receive(:warn).and_return true
+
+      subject.call(content_id, locale)
+
+      expect(Rails.logger).to have_received(:warn).with(/#{content_id}|#{publication_state}/)
     end
 
     it "skips republishing of the document" do
