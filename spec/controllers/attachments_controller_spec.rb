@@ -67,7 +67,7 @@ RSpec.describe AttachmentsController, type: :controller do
 
     it "redirect to the specialist document edit page" do
       document = CmaCase.find(document_content_id, document_locale)
-      allow_any_instance_of(AttachmentsController).to receive(:fetch_document).and_return(document)
+      allow(subject).to receive(:fetch_document).and_return(document)
 
       stub_any_publishing_api_put_content
       stub_any_publishing_api_patch_links
@@ -75,17 +75,30 @@ RSpec.describe AttachmentsController, type: :controller do
       stub_request(:post, "#{Plek.find('asset-manager')}/assets")
         .to_return(body: JSON.dump(asset_manager_response), status: 201)
 
-      post :create, params: { document_type_slug: document_type_slug, document_content_id_and_locale: "#{document_content_id}:#{document_locale}", attachment: attachment }
+      post :create, params: {
+        document_type_slug: document_type_slug,
+        document_content_id_and_locale: "#{document_content_id}:#{document_locale}",
+        attachment: attachment,
+      }
 
       expect(document.attachments.count).to eq(3)
-      expect(response).to redirect_to(edit_document_path(document_type_slug: document_type_slug, content_id_and_locale: "#{document_content_id}:#{document_locale}"))
+      expect(response).to redirect_to(edit_document_path(
+                                        document_type_slug: document_type_slug,
+                                        content_id_and_locale: "#{document_content_id}:#{document_locale}",
+                                      ))
     end
 
     it "shows an error if no attachment is uploaded" do
       document = CmaCase.find(document_content_id, document_locale)
-      allow_any_instance_of(AttachmentsController).to receive(:fetch_document).and_return(document)
+      allow(subject).to receive(:fetch_document).and_return(document)
 
-      post :create, params: { document_type_slug: document_type_slug, document_content_id_and_locale: "#{document_content_id}:#{document_locale}", attachment: no_file_attachment }
+      post :create, params: {
+        document_type_slug: document_type_slug,
+        document_content_id_and_locale: "#{document_content_id}:#{document_locale}",
+        attachment: no_file_attachment,
+      }
+
+      expect(flash[:danger]).to be_present
       expect(response).to redirect_to(new_document_attachment_path(document_type_slug: document_type_slug))
     end
   end
@@ -94,9 +107,13 @@ RSpec.describe AttachmentsController, type: :controller do
     it "renders the edit attachment form" do
       document = CmaCase.find(document_content_id, document_locale)
       attachment = document.attachments.find(attachment_content_id)
-      allow_any_instance_of(AttachmentsController).to receive(:fetch_document).and_return(document)
+      allow(subject).to receive(:fetch_document).and_return(document)
 
-      get :edit, params: { document_type_slug: document_type_slug, document_content_id_and_locale: "#{document_content_id}:#{document_locale}", attachment_content_id: attachment_content_id }
+      get :edit, params: {
+        document_type_slug: document_type_slug,
+        document_content_id_and_locale: "#{document_content_id}:#{document_locale}",
+        attachment_content_id: attachment_content_id,
+      }
 
       expect(assigns(:attachment)).to eq(attachment)
       expect(response).to render_template :edit
@@ -104,41 +121,164 @@ RSpec.describe AttachmentsController, type: :controller do
   end
 
   describe "PUT update" do
-    let(:updated_file) { Rack::Test::UploadedFile.new("spec/support/images/updated_cma_case_image.jpg", "mime/type") }
-    let(:updated_attachment) do
-      {
-        file: updated_file,
-        title: "updated test attachment upload",
-      }
-    end
-    it "redirects to the specalist document edit page" do
-      document = CmaCase.find(document_content_id, document_locale)
-      allow_any_instance_of(AttachmentsController).to receive(:fetch_document).and_return(document)
-
+    before do
       stub_any_publishing_api_put_content
       stub_any_publishing_api_patch_links
       stub_request(:put, %r{#{Plek.find('asset-manager')}/assets/.*})
         .to_return(body: JSON.dump(asset_manager_response), status: 201)
+    end
 
-      post :update, params: { document_type_slug: document_type_slug, document_content_id_and_locale: "#{document_content_id}:#{document_locale}", attachment_content_id: attachment_content_id, attachment: updated_attachment }
+    context "an attachment file is updated" do
+      let(:document) { CmaCase.find(document_content_id, document_locale) }
+      let(:updated_file) { Rack::Test::UploadedFile.new("spec/support/images/updated_cma_case_image.jpg", "mime/type") }
+      let(:updated_attachment) do
+        {
+          file: updated_file,
+          title: "updated test attachment upload",
+        }
+      end
 
-      expect(document.attachments.count).to eq(2)
-      expect(response).to redirect_to(edit_document_path(document_type_slug: document_type_slug, content_id_and_locale: "#{document_content_id}:#{document_locale}"))
+      it "redirects to the specalist document edit page" do
+        allow(subject).to receive(:fetch_document).and_return(document)
+
+        patch :update, params: {
+          document_type_slug: document_type_slug,
+          document_content_id_and_locale: "#{document_content_id}:#{document_locale}",
+          attachment_content_id: attachment_content_id,
+          attachment: updated_attachment,
+        }
+
+        expect(document.attachments.count).to eq(2)
+        expect(response).to redirect_to(edit_document_path(
+                                          document_type_slug: document_type_slug,
+                                          content_id_and_locale: "#{document_content_id}:#{document_locale}",
+                                        ))
+      end
+
+      context "update_attachment fails" do
+        it "shows an error message and redirects to edit document attachment page" do
+          allow(subject).to receive(:fetch_document).and_return(document)
+          allow(document).to receive(:update_attachment).and_return(false)
+          error_message = "There was an error updating the attachment, please try again later."
+
+          patch :update, params: {
+            document_type_slug: document_type_slug,
+            document_content_id_and_locale: "#{document_content_id}:#{document_locale}",
+            attachment_content_id: attachment_content_id,
+            attachment: updated_attachment,
+          }
+
+          expect(flash[:danger]).to eq(error_message)
+          expect(response).to redirect_to(
+            edit_document_attachment_path(
+              document_type_slug: document_type_slug,
+              document_content_id_and_locale: "#{document_content_id}:#{document_locale}",
+              attachment_content_id: attachment_content_id,
+            ),
+          )
+        end
+      end
+    end
+
+    context "only the attachment title is updated" do
+      let(:document) { CmaCase.find(document_content_id, document_locale) }
+      let(:updated_file) { Rack::Test::UploadedFile.new("spec/support/images/updated_cma_case_image.jpg", "mime/type") }
+      let(:updated_attachment) do
+        {
+          title: "updated test attachment upload",
+        }
+      end
+
+      it "updates the attachment title" do
+        allow(subject).to receive(:fetch_document).and_return(document)
+        success_message = "Attachment successfully updated"
+
+        patch :update, params: {
+          document_type_slug: document_type_slug,
+          document_content_id_and_locale: "#{document_content_id}:#{document_locale}",
+          attachment_content_id: attachment_content_id,
+          attachment: updated_attachment,
+        }
+
+        expect(flash[:success]).to eq(success_message)
+        expect(response).to redirect_to(edit_document_path(
+                                          document_type_slug: document_type_slug,
+                                          content_id_and_locale: "#{document_content_id}:#{document_locale}",
+                                        ))
+      end
+
+      context "error updating the attachment" do
+        it "shows an error message and redirects to edit attachment page" do
+          allow(document).to receive(:save).and_return(false)
+          allow(subject).to receive(:fetch_document).and_return(document)
+          error_message = "There was an error updating the title, please try again later."
+
+          patch :update, params: {
+            document_type_slug: document_type_slug,
+            document_content_id_and_locale: "#{document_content_id}:#{document_locale}",
+            attachment_content_id: attachment_content_id,
+            attachment: updated_attachment,
+          }
+
+          expect(flash[:danger]).to eq(error_message)
+          expect(response).to redirect_to(edit_document_attachment_path(
+                                            document_type_slug: document_type_slug,
+                                            document_content_id_and_locale: "#{document_content_id}:#{document_locale}",
+                                            attachment_content_id: attachment_content_id,
+                                          ))
+        end
+      end
+    end
+
+    context "the attachment fails to attach" do
+      let(:no_file_attachment) do
+        {
+          file: nil,
+          title: "No file attachment upload",
+        }
+      end
+
+      it "shows an error message and redirects to the new attachment page" do
+        document = CmaCase.find(document_content_id, document_locale)
+        allow(subject).to receive(:fetch_document).and_return(document)
+        allow(subject).to receive(:white_listed?).and_return(false)
+        error_message = "Adding an attachment failed. Please make sure you have uploaded an attachment of a permitted file type."
+
+        patch :update, params: {
+          document_type_slug: document_type_slug,
+          document_content_id_and_locale: "#{document_content_id}:#{document_locale}",
+          attachment_content_id: attachment_content_id,
+          attachment: no_file_attachment,
+        }
+
+        expect(flash[:danger]).to eq(error_message)
+        expect(response).to redirect_to(new_document_attachment_path(document_type_slug: document_type_slug))
+      end
     end
   end
 
   describe "DELETE destroy" do
     it "redirects to the specialist document edit page" do
       document = CmaCase.find(document_content_id, document_locale)
-      allow_any_instance_of(AttachmentsController).to receive(:fetch_document).and_return(document)
+      allow(subject).to receive(:fetch_document).and_return(document)
       stub_any_publishing_api_put_content
       stub_any_publishing_api_patch_links
       stub_request(:delete, %r{#{Plek.find('asset-manager')}/assets/.*})
         .to_return(body: JSON.dump(asset_manager_response), status: 201)
+
       expect(document.attachments.count).to eq(2)
-      delete :destroy, params: { document_type_slug: document_type_slug, document_content_id_and_locale: "#{document_content_id}:#{document_locale}", attachment_content_id: attachment_content_id }
+
+      delete :destroy, params: {
+        document_type_slug: document_type_slug,
+        document_content_id_and_locale: "#{document_content_id}:#{document_locale}",
+        attachment_content_id: attachment_content_id,
+      }
+
       expect(document.attachments.count).to eq(1)
-      expect(response).to redirect_to(edit_document_path(document_type_slug: document_type_slug, content_id_and_locale: "#{document_content_id}:#{document_locale}"))
+      expect(response).to redirect_to(edit_document_path(
+                                        document_type_slug: document_type_slug,
+                                        content_id_and_locale: "#{document_content_id}:#{document_locale}",
+                                      ))
     end
   end
 end
