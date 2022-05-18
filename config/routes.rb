@@ -1,7 +1,11 @@
+require "healthcheck/s3"
+
 Rails.application.routes.draw do
   get "/healthcheck/live", to: proc { [200, {}, %w[OK]] }
   get "/healthcheck/ready", to: GovukHealthcheck.rack_response(
     GovukHealthcheck::SidekiqRedis,
+    GovukHealthcheck::Mongoid,
+    Healthcheck::S3,
   )
 
   post "/preview", to: "govspeak#preview"
