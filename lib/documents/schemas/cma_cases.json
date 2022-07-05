@@ -48,6 +48,12 @@
           "prechecked": false
         },
         {
+          "key": "information-and-advice-to-government",
+          "radio_button_name": "Information and advice to government",
+          "topic_name": "information and advice to government",
+          "prechecked": false
+        },
+        {
           "key": "markets",
           "radio_button_name": "Markets",
           "topic_name": "markets",
@@ -93,6 +99,7 @@
           {"label": "CA98 and civil cartels", "value": "ca98-and-civil-cartels"},
           {"label": "Competition disqualification", "value": "competition-disqualification"},
           {"label": "Criminal cartels", "value": "criminal-cartels"},
+          {"label": "Information and advice to government", "value": "information-and-advice-to-government"},
           {"label": "Markets", "value": "markets"},
           {"label": "Mergers", "value": "mergers"},
           {"label": "Consumer enforcement", "value": "consumer-enforcement"},

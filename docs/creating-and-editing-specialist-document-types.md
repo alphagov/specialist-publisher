@@ -112,7 +112,11 @@ We often receive requests to add new fields to a specialist document. Or to add 
 
 ## Adding or amending values for existing fields on a specialist document
 
-1. In govuk-content-schemas, find the field you are amending in the [specialist_document schema](https://github.com/alphagov/govuk-content-schemas/blob/main/formats/shared/definitions/_specialist_document.jsonnet), and add the new values. See [this](https://github.com/alphagov/govuk-content-schemas/pull/1066/commits/b81ec718f52b1e6603c201c44db07f0357158723) commit for an example. Once approved, this change can be merged and deployed.
+1. In govuk-content-schemas, find the field you are amending in the [specialist_document schema](https://github.com/alphagov/govuk-content-schemas/blob/main/formats/shared/definitions/_specialist_document.jsonnet), and add the new values. See [this](https://github.com/alphagov/govuk-content-schemas/pull/1066/commits/b81ec718f52b1e6603c201c44db07f0357158723) commit for an example. 
+
+NOTE: You will need to run `bundle exec rake build` to regenerate schemas after adding the new value(s) - as is done in [this commit](https://github.com/alphagov/govuk-content-schemas/pull/1066/commits/34dd343fd7de8eb48bb842c2fc7fe3c59ae77168). 
+
+Once approved, this change can be merged and deployed.
 
 2. In specialist-publisher, add the new values to the relevant file in the [schema](https://github.com/alphagov/specialist-publisher/tree/main/lib/documents/schemas) directory. See [this](https://github.com/alphagov/specialist-publisher/pull/1899/commits/97c8d713f8e62b0cb8763fe26e1dcf5a0435c12d) commit for an example.
 
