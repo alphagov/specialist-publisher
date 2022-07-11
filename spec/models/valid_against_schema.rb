@@ -12,7 +12,7 @@ RSpec.shared_examples "it saves payloads that are valid against the 'specialist_
       expected_payload_sent_to_publishing_api = write_payload(payload)
 
       assert_publishing_api_put_content(instance.content_id, expected_payload_sent_to_publishing_api)
-      expect(expected_payload_sent_to_publishing_api.to_json).to be_valid_against_schema("specialist_document")
+      expect(expected_payload_sent_to_publishing_api.to_json).to be_valid_against_publisher_schema("specialist_document")
     end
   end
 end

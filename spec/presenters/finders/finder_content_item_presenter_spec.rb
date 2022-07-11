@@ -14,7 +14,7 @@ RSpec.describe FinderContentItemPresenter do
         presented_data = presenter.to_json
 
         expect(presented_data[:schema_name]).to eq("finder")
-        expect(presented_data).to be_valid_against_schema("finder")
+        expect(presented_data).to be_valid_against_publisher_schema("finder")
       end
     end
   end

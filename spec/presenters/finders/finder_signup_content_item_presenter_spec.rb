@@ -11,7 +11,7 @@ RSpec.describe FinderSignupContentItemPresenter do
           presented_data = finder_signup_content_presenter.to_json
 
           expect(presented_data[:schema_name]).to eq("finder_email_signup")
-          expect(presented_data).to be_valid_against_schema("finder_email_signup")
+          expect(presented_data).to be_valid_against_publisher_schema("finder_email_signup")
         end
       end
     end
