@@ -58,7 +58,7 @@ RSpec.describe PublishingApiFinderPublisher do
         stub_publishing_api_publish(finders[1][:file]["content_id"], {})
 
         expect(publishing_api).to receive(:put_content)
-          .with(finders[0][:file]["content_id"], be_valid_against_schema("finder"))
+          .with(finders[0][:file]["content_id"], be_valid_against_publisher_schema("finder"))
         expect(publishing_api).to receive(:patch_links)
           .with(finders[0][:file]["content_id"], anything)
         expect(publishing_api).to receive(:publish)
@@ -73,7 +73,7 @@ RSpec.describe PublishingApiFinderPublisher do
           .with(finders[0][:file]["signup_content_id"])
 
         expect(publishing_api).to receive(:put_content)
-          .with(finders[1][:file]["content_id"], be_valid_against_schema("finder"))
+          .with(finders[1][:file]["content_id"], be_valid_against_publisher_schema("finder"))
         expect(publishing_api).to receive(:patch_links)
           .with(finders[1][:file]["content_id"], anything)
         expect(publishing_api).to receive(:publish)
@@ -100,7 +100,7 @@ RSpec.describe PublishingApiFinderPublisher do
 
       it "publishes finder" do
         expect(publishing_api).to receive(:put_content)
-          .with(finders[0][:file]["content_id"], be_valid_against_schema("finder"))
+          .with(finders[0][:file]["content_id"], be_valid_against_publisher_schema("finder"))
         expect(publishing_api).to receive(:patch_links)
           .with(finders[0][:file]["content_id"], anything)
         expect(publishing_api).to receive(:publish)
@@ -127,7 +127,7 @@ RSpec.describe PublishingApiFinderPublisher do
 
       it "publishes finder" do
         expect(publishing_api).to receive(:put_content)
-          .with(content_id, be_valid_against_schema("finder"))
+          .with(content_id, be_valid_against_publisher_schema("finder"))
         expect(publishing_api).to receive(:patch_links)
           .with(content_id, anything)
         expect(publishing_api).to receive(:publish)
@@ -154,7 +154,7 @@ RSpec.describe PublishingApiFinderPublisher do
 
         it "publishes finder" do
           expect(publishing_api).to receive(:put_content)
-            .with(content_id, be_valid_against_schema("finder"))
+            .with(content_id, be_valid_against_publisher_schema("finder"))
           expect(publishing_api).to receive(:patch_links)
             .with(content_id, anything)
           expect(publishing_api).to receive(:publish)
@@ -167,7 +167,7 @@ RSpec.describe PublishingApiFinderPublisher do
       context "and is not configured to publish pre-production finders" do
         it "doesn't publish the finder" do
           expect(publishing_api).not_to receive(:put_content)
-            .with(content_id, be_valid_against_schema("finder"))
+            .with(content_id, be_valid_against_publisher_schema("finder"))
           expect(publishing_api).not_to receive(:patch_links)
             .with(content_id, anything)
           expect(publishing_api).not_to receive(:publish)

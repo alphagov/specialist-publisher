@@ -20,7 +20,7 @@ RSpec.describe DocumentPresenter do
 
     it "is valid against the content schemas" do
       expect(presented_data[:schema_name]).to eq("specialist_document")
-      expect(presented_data).to be_valid_against_schema("specialist_document")
+      expect(presented_data).to be_valid_against_publisher_schema("specialist_document")
     end
 
     it "does not contain attachments key" do
@@ -66,7 +66,7 @@ RSpec.describe DocumentPresenter do
 
     it "is valid against the content schemas" do
       expect(presented_data[:schema_name]).to eq("specialist_document")
-      expect(presented_data).to be_valid_against_schema("specialist_document")
+      expect(presented_data).to be_valid_against_publisher_schema("specialist_document")
     end
 
     it "contains the attachments" do
@@ -95,7 +95,7 @@ RSpec.describe DocumentPresenter do
     end
 
     it "is valid against the content schemas" do
-      expect(presented_data).to be_valid_against_schema("specialist_document")
+      expect(presented_data).to be_valid_against_publisher_schema("specialist_document")
     end
 
     it "adds the header to the payload" do
@@ -121,7 +121,7 @@ RSpec.describe DocumentPresenter do
     end
 
     it "is valid against the content schemas" do
-      expect(presented_data).to be_valid_against_schema("specialist_document")
+      expect(presented_data).to be_valid_against_publisher_schema("specialist_document")
     end
 
     it "adds the nested header to the payload" do
@@ -150,7 +150,7 @@ RSpec.describe DocumentPresenter do
     end
 
     it "is valid against the content schemas" do
-      expect(presented_data).to be_valid_against_schema("specialist_document")
+      expect(presented_data).to be_valid_against_publisher_schema("specialist_document")
     end
 
     it "does not add a headers section to the payload" do

@@ -36,7 +36,7 @@ group :development, :test do
   gem "capybara-select-2"
   gem "database_cleaner"
   gem "factory_bot"
-  gem "govuk-content-schema-test-helpers"
+  gem "govuk_schemas"
   gem "govuk_test"
   gem "pry-rails"
   gem "puma"
