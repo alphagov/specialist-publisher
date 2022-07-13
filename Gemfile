@@ -1,6 +1,6 @@
 source "https://rubygems.org"
 
-gem "rails", "6.1.6"
+gem "rails", "6.1.6.1"
 
 gem "bootstrap-kaminari-views"
 gem "fog-aws"
