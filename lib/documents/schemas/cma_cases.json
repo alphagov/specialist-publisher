@@ -7,6 +7,9 @@
   "filter": {
     "format": "cma_case"
   },
+  "related": [
+    "46708567-70a6-4f20-8257-6c222b3d8cb3"
+  ],
   "signup_content_id": "43dd2b13-93ec-4ca6-a7a4-e2eb5f5d485a",
   "signup_copy": "You'll get an email each time a case is updated or a new case is published.",
   "organisations": ["957eb4ec-089b-4f71-ba2a-dc69ac8919ea"],
