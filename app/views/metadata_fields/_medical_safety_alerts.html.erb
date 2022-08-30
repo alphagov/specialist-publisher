@@ -1,4 +1,4 @@
-<%= render layout: "shared/form_group", locals: { f: f, field: :alert_type } do %>
+<%= render layout: "shared/form_group", locals: { f: f, field: :alert_type, label: "Message type" } do %>
   <%= f.select :alert_type,
       f.object.facet_options(:alert_type),
       {

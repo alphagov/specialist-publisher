@@ -55,11 +55,11 @@
       ]
     }
   ],
-  "document_noun": "alert",
+  "document_noun": "message",
   "facets": [
     {
       "key": "alert_type",
-      "name": "Alert type",
+      "name": "Message type",
       "type": "text",
       "preposition": "for",
       "display_as_result_metadata": true,
