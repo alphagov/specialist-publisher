@@ -1,0 +1,195 @@
+{  
+  "content_id": "48ef3920-b877-47af-8356-44f345c22a47",
+  "base_path": "/animal-disease-cases-england",
+  "format_name": "Notifiable animal disease cases and control zone",
+  "name": "Notifiable animal disease cases and control zones",
+  "description": "Find notifiable animal disease cases and control zone declarations for England.",
+  "filter": {
+    "format": "animal_disease_case"
+  },
+  "organisations": [
+    "de4e9dc6-cca4-43af-a594-682023b84d6c",
+    "4ad67f14-6f9c-4fa4-80ab-687b6d81ea6f"
+  ],
+  "related": [
+    "5fe90412-7631-11e4-a3cb-005056011aef"
+  ],
+  "signup_content_id": "e39c8c6e-b4c2-4dec-84fd-7f3d77f96a7d",
+  "signup_copy": "You'll get an email each time a case is updated or a new case is published.",
+  "subscription_list_title_prefix": "Notifiable animal disease cases and control zones",
+  "summary": "<p>Find notifiable exotic animal disease cases and control zone declarations for England.</p><p> There are cases of bird flu (avian influenza) in England. Check if you are in a <a href=\"https://defra.maps.arcgis.com/apps/webappviewer/index.html?id=8cb1883eda5547c6b91b5d5e6aeba90d\">disease control zone on the map</a>.</p><p> Find out more about cases in <a href=\"https://www.gov.scot/publications/avian-influenza-bird-flu\">Scotland</a>, cases in <a href=\"https://gov.wales/avian-influenza-bird-flu-latest-update\">Wales</a> and cases in <a href=\"https://www.daera-ni.gov.uk/ai\">Northern Ireland</a>.</p>",
+  "pre_production": true,
+  "document_noun": "case",
+  "facets": [
+    {
+      "key": "disease_type",
+      "name": "Disease Type",
+      "short_name": "type",
+      "type": "text",
+      "preposition": "of disease type",
+      "display_as_result_metadata": true,
+      "filterable": true,
+      "allowed_values": [
+        {
+          "label": "African horse sickness",
+          "value": "african-horse-sickness"
+        },
+        {
+          "label": "African swine fever",
+          "value": "african-swine-fever"
+        },
+        {
+          "label": "Bird flu (avian influenza)",
+          "value": "bird-flu"
+        },
+        {
+          "label": "Bluetongue",
+          "value": "bluetongue"
+        },
+        {
+          "label": "Classical swine fever",
+          "value": "classical-swine-fever"
+        },
+        {
+          "label": "Foot and mouth disease",
+          "value": "foot-and-mouth-disease"
+        },
+        {
+          "label": "Newcastle disease",
+          "value": "newcastle-disease"
+        },
+        {
+          "label": "Swine vesicular disease",
+          "value": "swine-vesicular-disease"
+        }
+      ]
+    },
+    {
+      "key": "zone_restriction",
+      "name": "Disease control zone restrictions",
+      "short_name": "Control zone restriction",
+      "type": "text",
+      "preposition": "with control zone restriction",
+      "display_as_result_metadata": true,
+      "filterable": true,
+      "allowed_values": [
+        {
+          "label": "In force",
+          "value": "in-force"
+        },
+        {
+          "label": "No longer in force",
+          "value": "no-longer-in-force"
+        }
+      ]
+    },
+    {
+      "key": "zone_type",
+      "name": "Disease control zone type",
+      "short_name": "Control zone type",
+      "type": "text",
+      "preposition": "with control zone type",
+      "display_as_result_metadata": true,
+      "filterable": true,
+      "allowed_values": [
+        {
+          "label": "Protection zone",
+          "value": "protection"
+        },
+        {
+          "label": "Surveillance zone",
+          "value": "surveillance"
+        },
+        {
+          "label": "Restricted zone",
+          "value": "restricted"
+        },
+        {
+          "label": "Temporary control zone",
+          "value": "temporary-control"
+        },
+        {
+          "label": "Captive bird (monitoring) controlled zone",
+          "value": "captive-bird"
+        },
+        {
+          "label": "Wild bird control area",
+          "value": "wild-bird-control"
+        },
+        {
+          "label": "Wild bird monitoring area",
+          "value": "wild-bird-monitoring"
+        }
+      ]
+    },
+    {
+      "key": "virus_strain",
+      "name": "Virus strain",
+      "short_name": "Virus strain",
+      "type": "text",
+      "preposition": "of strain type",
+      "display_as_result_metadata": true,
+      "filterable": false,
+      "allowed_values": [
+        {
+          "label": "H5Nx",
+          "value": "h5nx"
+        },
+        {
+          "label": "H5N1",
+          "value": "h5n1"
+        },
+        {
+          "label": "H5N2",
+          "value": "h5n2"
+        },
+        {
+          "label": "H5N3",
+          "value": "h5n3"
+        },
+        {
+          "label": "H5N5",
+          "value": "h5n5"
+        },
+        {
+          "label": "H5N6",
+          "value": "h5n6"
+        },
+        {
+          "label": "H5N8",
+          "value": "h5n8"
+        },
+        {
+          "label": "H7Nx",
+          "value": "h7nx"
+        },
+        {
+          "label": "H7N7",
+          "value": "h7n7"
+        },
+        {
+          "label": "Undetermined",
+          "value": "undetermined"
+        }
+      ]
+    },
+    {
+      "key": "disease_case_opened_date",
+      "name": "Case opened date",
+      "short_name": "Opened",
+      "type": "date",
+      "preposition": "opened",
+      "display_as_result_metadata": true,
+      "filterable": true
+    },
+    {
+      "key": "disease_case_closed_date",
+      "name": "Case closed date",
+      "short_name": "Closed",
+      "type": "date",
+      "preposition": "closed",
+      "display_as_result_metadata": true,
+      "filterable": true
+    }
+  ]
+}

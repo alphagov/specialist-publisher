@@ -68,6 +68,11 @@ FactoryBot.define do
     organisation_content_id { "957eb4ec-089b-4f71-ba2a-dc69ac8919ea" }
   end
 
+  factory :animal_disease_case_editor, parent: :editor do
+    organisation_slug { "department-for-environment-food-rural-affairs" }
+    organisation_content_id { "de4e9dc6-cca4-43af-a594-682023b84d6c" }
+  end
+
   # Writer factories:
   factory :writer, aliases: [:cma_writer], parent: :editor do
     organisation_slug { "competition-and-markets-authority" }
@@ -662,6 +667,23 @@ FactoryBot.define do
           "digital_market_research_area" => %w[media-and-entertainment],
           "digital_market_research_topic" => %w[future-connectivity],
           "digital_market_research_publish_date" => "2021-02-18T10:12:26+00:00",
+        }
+      end
+    end
+  end
+
+  factory :animal_disease_case, parent: :document do
+    base_path { "/animal-disease-cases-england/example-document" }
+    document_type { "animal_disease_case" }
+    transient do
+      default_metadata do
+        {
+          "disease_type" => %w[bird-flu],
+          "zone_restriction" => "no-longer-in-force",
+          "zone_type" => %w[surveillance],
+          "virus_strain" => "h5nx",
+          "disease_case_opened_date" => "2022-08-18T10:12:26+00:00",
+          "disease_case_closed_date" => "2022-09-18T10:12:26+00:00",
         }
       end
     end
