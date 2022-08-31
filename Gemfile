@@ -21,7 +21,7 @@ gem "mongoid"
 gem "plek"
 gem "pundit"
 gem "sassc-rails"
-gem "select2-rails", "< 4" # v4 changes the generated HTML and breaks the e2e tests
+gem "select2-rails", "< 5" # v4 changes the generated HTML and breaks the e2e tests
 gem "sentry-sidekiq"
 gem "stringex"
 gem "uglifier"
