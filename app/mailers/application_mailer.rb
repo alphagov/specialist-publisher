@@ -1,3 +1,5 @@
+require "notify"
+
 class ApplicationMailer < Mail::Notify::Mailer
   default from: proc { no_reply_email_address }
 
