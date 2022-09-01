@@ -2,7 +2,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
   include GDS::SSO::ControllerMethods
-  include Pundit
+  include Pundit::Authorization
 
   before_action :authenticate_user!
   before_action :set_authenticated_user_header
