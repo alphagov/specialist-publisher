@@ -8,7 +8,7 @@
     "format": "medical_safety_alert"
   },
   "signup_content_id": "a796ca43-021b-4960-9c99-f41bb8ef2266",
-  "signup_title": "Drug alerts and medical device alerts",
+  "signup_title": "Alerts, recalls and safety information: drugs and medical devices",
   "signup_copy": "You'll get an email each time an alert is updated or a new alert is published.",
   "show_summaries": true,
   "organisations": ["240f72bd-9a4d-4f39-94d9-77235cadde8e"],
@@ -21,7 +21,7 @@
   "email_filter_facets": [
     {
       "facet_id": "alert_type",
-      "facet_name": "Alert Type",
+      "facet_name": "Message type",
       "required": true,
       "facet_choices": [
         {
