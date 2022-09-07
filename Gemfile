@@ -34,7 +34,7 @@ group :development, :test do
   gem "better_errors"
   gem "binding_of_caller"
   gem "capybara-select-2"
-  gem "database_cleaner"
+  gem "database_cleaner-mongoid"
   gem "factory_bot"
   gem "govuk_schemas"
   gem "govuk_test"
