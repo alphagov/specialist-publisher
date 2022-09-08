@@ -24,8 +24,8 @@ Dir[Rails.root.join("features/support/**/*_helpers.rb")]
 # Quiet down now Mongo
 Mongo::Logger.logger.level = ::Logger::FATAL
 
-require "database_cleaner"
-DatabaseCleaner[:mongoid].strategy = :truncation
+require "database_cleaner/mongoid"
+DatabaseCleaner.strategy = :deletion
 DatabaseCleaner.clean
 
 require "services"
