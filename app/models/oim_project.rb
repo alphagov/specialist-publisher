@@ -1,8 +1,10 @@
 class OimProject < Document
-  validates :oim_project_opened_date, allow_blank: true, date: true, open_before_closed: true
-  validates :oim_project_closed_date, allow_blank: true, date: true
   validates :oim_project_type, presence: true
   validates :oim_project_state, presence: true
+  validates :oim_project_opened_date, allow_blank: true, date: true
+  validates :oim_project_closed_date, allow_blank: true, date: true
+  validates_with OpenBeforeClosedValidator, opened_date: :oim_project_opened_date, closed_date: :oim_project_closed_date
+
   FORMAT_SPECIFIC_FIELDS = %i[
     oim_project_opened_date
     oim_project_closed_date
