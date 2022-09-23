@@ -1,0 +1,57 @@
+<%= render layout: "shared/date_fields", locals: { f: f, field: :disease_case_opened_date, format: :animal_disease_case, label: "Case opened date" } do %>
+<% end %>
+
+<%= render layout: "shared/date_fields", locals: { f: f, field: :disease_case_closed_date, format: :animal_disease_case, label: "Case closed date" } do %>
+<% end %>
+
+<%= render layout: "shared/form_group", locals: { f: f, field: :disease_type } do %>
+  <%= f.select :disease_type,
+      f.object.facet_options(:disease_type),
+      {},
+      {
+        class: 'select2 form-control',
+        multiple: true,
+        data: {
+          placeholder: 'Select disease type'
+        }
+      }
+  %>
+<% end %>
+
+<%= render layout: "shared/form_group", locals: { f: f, field: :zone_restriction, label: "Disease control zone restriction" } do %>
+  <%= f.select :zone_restriction,
+      f.object.facet_options(:zone_restriction),
+      {
+        include_blank: true
+      },
+      {
+        class: 'form-control',
+      }
+  %>
+<% end %>
+
+<%= render layout: "shared/form_group", locals: { f: f, field: :zone_type } do %>
+  <%= f.select :zone_type,
+      f.object.facet_options(:zone_type),
+      {},
+      {
+        class: 'select2 form-control',
+        multiple: true,
+        data: {
+          placeholder: 'Select disease control zone type'
+        }
+      }
+  %>
+<% end %>
+
+<%= render layout: "shared/form_group", locals: { f: f, field: :virus_strain, label: "Virus strain" } do %>
+  <%= f.select :virus_strain,
+      f.object.facet_options(:virus_strain),
+      {
+        include_blank: true
+      },
+      {
+        class: 'form-control',
+      }
+  %>
+<% end %>
