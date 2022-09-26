@@ -65,9 +65,6 @@ Rails.application.configure do
   # Uncomment if you wish to allow Action Cable access from any origin.
   # config.action_cable.disable_request_forgery_protection = true
 
-  # Allow access to the application using dev.gov.uk hostnames
-  config.hosts += %w[
-    specialist-publisher.dev.gov.uk
-    specialist-publisher.govuk.dev.cbaines.net
-  ]
+  # Allow requests for all domains e.g. <app>.dev.gov.uk
+  config.hosts.clear
 end
