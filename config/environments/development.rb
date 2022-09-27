@@ -14,6 +14,9 @@ Rails.application.configure do
   # Show full error reports.
   config.consider_all_requests_local = true
 
+  # Enable server timing
+  config.server_timing = true
+
   # Enable/disable caching. By default caching is disabled.
   # Run rails dev:cache to toggle caching.
   if Rails.root.join("tmp/caching-dev.txt").exist?
@@ -65,9 +68,6 @@ Rails.application.configure do
   # Uncomment if you wish to allow Action Cable access from any origin.
   # config.action_cable.disable_request_forgery_protection = true
 
-  # Allow access to the application using dev.gov.uk hostnames
-  config.hosts += %w[
-    specialist-publisher.dev.gov.uk
-    specialist-publisher.govuk.dev.cbaines.net
-  ]
+  # Allow requests for all domains e.g. <app>.dev.gov.uk
+  config.hosts.clear
 end

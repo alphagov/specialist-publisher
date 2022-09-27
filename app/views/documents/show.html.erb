@@ -20,7 +20,7 @@
       <% @document.humanized_attributes.each_pair do |label, values| %>
         <dt><%= label %></dt>
         <% if values.is_a?(Time) %>
-          <dd><time><%= values.to_s(:govuk_date) %></time></dd>
+          <dd><time><%= values.to_fs(:govuk_date) %></time></dd>
         <% else %>
           <% Array(values).each do |value| %>
             <dd><%= truncate(value.to_s, length: 140) %></dd>
@@ -79,8 +79,8 @@
           <% end %>
           <tr <% if i > truncate_at_count - 2 %>class="js-toggle-target if-js-hide"<% end %>>
             <td><%= attachment.title %></td>
-            <td><%= attachment.created_at.to_date.to_s(:govuk_date) %></td>
-            <td><%= attachment.updated_at.to_date.to_s(:govuk_date) %></td>
+            <td><%= attachment.created_at.to_date.to_fs(:govuk_date) %></td>
+            <td><%= attachment.updated_at.to_date.to_fs(:govuk_date) %></td>
           </tr>
         <% end %>
       </table>

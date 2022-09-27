@@ -221,7 +221,7 @@ module Importers
         return if date.blank?
 
         begin
-          Date.strptime(date, "%d/%m/%Y").to_s("%Y-%m-%d")
+          Date.strptime(date, "%d/%m/%Y").to_fs("%Y-%m-%d")
         rescue ArgumentError
           nil
         end
