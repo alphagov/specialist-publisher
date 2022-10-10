@@ -48,22 +48,24 @@ RSpec.describe Document do
 
       expect(publishing_api).to receive(:get_content_items)
         .with(
-          publishing_app: "specialist-publisher",
-          document_type: "my_document_type",
-          fields: %i[
-            base_path
-            content_id
-            locale
-            last_edited_at
-            title
-            publication_state
-            state_history
-          ],
-          page: 1,
-          per_page: 20,
-          locale: "all",
-          order: "-last_edited_at",
-          q: "foo",
+          {
+            publishing_app: "specialist-publisher",
+            document_type: "my_document_type",
+            fields: %i[
+              base_path
+              content_id
+              locale
+              last_edited_at
+              title
+              publication_state
+              state_history
+            ],
+            page: 1,
+            per_page: 20,
+            locale: "all",
+            order: "-last_edited_at",
+            q: "foo",
+          },
         )
 
       MyDocumentType.all(1, 20, query: "foo")
