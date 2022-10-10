@@ -282,7 +282,7 @@ RSpec.feature "Viewing a specific case", type: :feature do
 
   context "when a published item exists with the same base path" do
     let(:content_id) { SecureRandom.uuid }
-    let(:draft) { FactoryBot.create(:cma_case, content_id: content_id, title: "Example draft", base_path: "/cma-cases/foo") }
+    let(:draft) { FactoryBot.create(:cma_case, content_id:, title: "Example draft", base_path: "/cma-cases/foo") }
 
     scenario "displays warnings" do
       stub_request(:get, %r{/v2/content/#{content_id}})

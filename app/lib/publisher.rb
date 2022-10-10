@@ -38,7 +38,7 @@ private
 
     Services.with_timeout(30) do
       Services.publishing_api.get_content_items(
-        document_type: document_type,
+        document_type:,
         publication_state: "draft",
         fields: %i[content_id locale],
         per_page: 999_999,

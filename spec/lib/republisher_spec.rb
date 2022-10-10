@@ -4,7 +4,7 @@ RSpec.describe Republisher do
   def stub_index(document_type, content_ids_and_locales:)
     stub_publishing_api_has_content(
       content_ids_and_locales.map { |c, l| { content_id: c, locale: l } },
-      document_type: document_type,
+      document_type:,
       fields: %i[content_id locale],
       per_page: 999_999,
       order: "updated_at",

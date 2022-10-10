@@ -2,7 +2,7 @@ require "services"
 
 class DocumentsTagger
   def self.tag_all(do_tag: true)
-    new(do_tag: do_tag).tag_all
+    new(do_tag:).tag_all
   end
 
   def initialize(do_tag: true)

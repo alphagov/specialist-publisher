@@ -7,21 +7,21 @@ class EmailAlertPresenter
 
   def to_json(*_args)
     {
-      title: title,
+      title:,
       description: summary,
-      change_note: change_note,
-      subject: subject,
-      tags: tags,
-      links: links,
-      urgent: urgent,
+      change_note:,
+      subject:,
+      tags:,
+      links:,
+      urgent:,
       document_type: document.document_type,
       email_document_supertype: "other",
       government_document_supertype: "other",
-      content_id: content_id,
-      public_updated_at: public_updated_at,
+      content_id:,
+      public_updated_at:,
       publishing_app: "specialist-publisher",
-      base_path: base_path,
-      priority: priority,
+      base_path:,
+      priority:,
     }.merge(extra_options)
   end
 
@@ -127,7 +127,7 @@ private
 
   def extra_options
     {
-      footnote: footnote,
+      footnote:,
     }.reject { |_k, v| v.nil? }
   end
 end

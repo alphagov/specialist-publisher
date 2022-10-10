@@ -3,7 +3,7 @@ require "spec_helper"
 RSpec.describe GovspeakPresenter do
   let(:body) { "Hello, world" }
   let(:attachments) { [] }
-  let(:document) { double(:document, body: body, attachments: attachments) }
+  let(:document) { double(:document, body:, attachments:) }
   let(:presented) { described_class.present(document) }
 
   it "presents the body as multi-type content without adding HTML" do
@@ -13,14 +13,14 @@ RSpec.describe GovspeakPresenter do
   end
 
   describe ".presented" do
-    let(:expected) { [{ content_type: "text/govspeak", content: content }] }
+    let(:expected) { [{ content_type: "text/govspeak", content: }] }
 
     context "when the document has images as inline attachments" do
       let(:body)        { "![InlineAttachment:foo.jpg]" }
       let(:title)       { "Picture of a tasty-looking pizza" }
       let(:content_id)  { 123 }
       let(:attachments) do
-        [instance_double(Attachment, url: url, content_id: content_id)]
+        [instance_double(Attachment, url:, content_id:)]
       end
 
       context "there is a matching attachment" do
@@ -46,7 +46,7 @@ RSpec.describe GovspeakPresenter do
       let(:body)        { "[InlineAttachment:foo.pdf]" }
       let(:content_id)  { 123 }
       let(:attachments) do
-        [instance_double(Attachment, url: url, content_id: content_id)]
+        [instance_double(Attachment, url:, content_id:)]
       end
 
       context "there is a matching attachment" do

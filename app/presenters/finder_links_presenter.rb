@@ -3,10 +3,10 @@ FinderLinksPresenter = Struct.new(:file) do
     {
       content_id: file.fetch("content_id"),
       links: {
-        organisations: organisations,
-        related: related,
-        email_alert_signup: email_alert_signup,
-        parent: parent,
+        organisations:,
+        related:,
+        email_alert_signup:,
+        parent:,
       },
     }
   end

@@ -10,6 +10,6 @@ namespace :publish do
 
     raise ArgumentError, "No type given." if types.empty?
 
-    Publisher.publish_all(types: types)
+    Publisher.publish_all(types:)
   end
 end

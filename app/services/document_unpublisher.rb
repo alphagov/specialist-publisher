@@ -7,15 +7,15 @@ class DocumentUnpublisher
       Services.publishing_api.unpublish(
         content_id,
         type: "gone",
-        locale: locale,
+        locale:,
         explanation: internal_notes,
       )
     else
       Services.publishing_api.unpublish(
         content_id,
         type: "redirect",
-        locale: locale,
-        alternative_path: alternative_path,
+        locale:,
+        alternative_path:,
         explanation: internal_notes,
       )
     end

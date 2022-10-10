@@ -8,17 +8,17 @@ class FinderContentItemPresenter
 
   def to_json(*_args)
     {
-      base_path: base_path,
+      base_path:,
       document_type: format,
       schema_name: format,
-      title: title,
-      description: description,
-      public_updated_at: public_updated_at,
-      update_type: update_type,
-      publishing_app: publishing_app,
-      rendering_app: rendering_app,
-      routes: routes,
-      details: details,
+      title:,
+      description:,
+      public_updated_at:,
+      update_type:,
+      publishing_app:,
+      rendering_app:,
+      routes:,
+      details:,
       locale: "en",
     }.merge(phase)
   end
@@ -98,7 +98,7 @@ private
     phase = file["phase"]
     if phase
       {
-        phase: phase,
+        phase:,
       }
     else
       {}

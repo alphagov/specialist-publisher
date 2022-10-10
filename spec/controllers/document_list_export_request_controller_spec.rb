@@ -28,7 +28,7 @@ RSpec.describe DocumentListExportRequestController, type: :controller do
 
       @directory.files.create(key: filename, body: "hello world")
 
-      get :show, params: { document_type_slug: document_type_slug, export_id: export_id }
+      get :show, params: { document_type_slug:, export_id: }
       expect(response.status).to eq(200)
       expect(response.body).to eq("hello world")
     end

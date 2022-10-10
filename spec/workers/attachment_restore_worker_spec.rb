@@ -29,7 +29,7 @@ RSpec.describe AttachmentRestoreWorker do
     FactoryBot.create(
       :cma_case,
       :published,
-      content_id: content_id,
+      content_id:,
     )
   end
 

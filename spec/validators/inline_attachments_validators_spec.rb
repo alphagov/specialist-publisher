@@ -14,7 +14,7 @@ RSpec.describe InlineAttachmentsValidator do
     double(
       :record,
       errors: fake_errors_class.new,
-      body: body,
+      body:,
       attachments: [
         double(:attachment, snippet: "[InlineAttachment:foo.pdf]"),
         double(:attachment, snippet: "[InlineAttachment:bar.pdf]"),

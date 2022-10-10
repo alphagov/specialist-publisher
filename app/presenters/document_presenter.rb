@@ -17,7 +17,7 @@ class DocumentPresenter
       rendering_app: "government-frontend",
       locale: document.locale || "en",
       phase: document.phase,
-      details: details,
+      details:,
       routes: [
         {
           path: document.base_path,
@@ -37,7 +37,7 @@ private
   def details
     {
       body: GovspeakPresenter.present(@document),
-      metadata: metadata,
+      metadata:,
       max_cache_time: 10,
       temporary_update_type: document.temporary_update_type,
     }.tap do |details_hash|

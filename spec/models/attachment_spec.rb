@@ -80,7 +80,7 @@ RSpec.describe Attachment do
       content_id = SecureRandom.uuid
       attachment = Attachment.new(
         title: "",
-        content_id: content_id,
+        content_id:,
         url: "/path/to/file/in/asset/manager/cma_case_image.jpg",
         content_type: "image/jpg",
         created_at: "2015-12-03T16:59:13+00:00",
@@ -124,7 +124,7 @@ RSpec.describe Attachment do
       content_id = SecureRandom.uuid
       attachment = Attachment.new(
         title: "new attachment",
-        content_id: content_id,
+        content_id:,
         url: "/path/to/file/in/asset/manager/cma_case_image.jpg",
         content_type: "image/jpg",
         created_at: "2015-12-03T16:59:13+00:00",
@@ -155,7 +155,7 @@ RSpec.describe Attachment do
     let(:attachment) do
       Attachment.new(
         title: "test attachment",
-        content_id: content_id,
+        content_id:,
         url: "/path/to/file/in/asset/manager",
         content_type: "image/jpg",
         created_at: "2015-12-03T16:59:13+00:00",

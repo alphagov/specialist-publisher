@@ -4,8 +4,8 @@ require "services"
 class DocumentFinder
   def self.find(klass, content_id, locale, version: nil)
     begin
-      params = { locale: locale }
-      params.merge!(version: version) if version
+      params = { locale: }
+      params.merge!(version:) if version
 
       response = Services.publishing_api.get_content(content_id, params)
     rescue GdsApi::HTTPNotFound

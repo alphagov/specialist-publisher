@@ -23,13 +23,13 @@ class ReportDocumentPaginator
 private
 
   def params(page)
-    @params_hash.merge(page: page)
+    @params_hash.merge(page:)
   end
 
   def default_params
     {
       publishing_app: "specialist-publisher",
-      document_type: document_type,
+      document_type:,
       fields: @document_fields,
       per_page: 100,
       order: "-last_edited_at",

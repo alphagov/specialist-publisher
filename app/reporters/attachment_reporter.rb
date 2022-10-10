@@ -47,7 +47,7 @@ private
   def body_snippets
     @body_snippets ||= presenter.snippets_in_body.map do |snippet|
       {
-        snippet: snippet,
+        snippet:,
         sanitised_snippet: sanitise_snippet(snippet),
         filename: filename_from_snippet(snippet),
       }

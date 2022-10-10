@@ -8,7 +8,7 @@ RSpec.describe AttachmentPresenter do
       url: "path/to/file/in/asset/manger",
       content_type: "application/jpeg",
       title: "test specialist document attachment",
-      content_id: content_id,
+      content_id:,
     )
   end
 

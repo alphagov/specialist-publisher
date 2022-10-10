@@ -104,7 +104,7 @@ private
     document
   rescue DocumentFinder::RecordNotFound => e
     flash[:danger] = "Document not found"
-    redirect_to documents_path(document_type_slug: document_type_slug)
+    redirect_to documents_path(document_type_slug:)
 
     GovukError.notify(e)
   end

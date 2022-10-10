@@ -4,7 +4,7 @@ module AuthenticationControllerHelpers
       :auth,
       authenticate!: true,
       authenticated?: true,
-      user: user,
+      user:,
     )
   end
 

@@ -100,7 +100,7 @@ class Document
   end
 
   def to_h
-    super.merge(links: links)
+    super.merge(links:)
   end
 
   def bulk_published
@@ -225,7 +225,7 @@ class Document
   end
 
   def self.find(content_id, locale, version: nil)
-    DocumentFinder.find(self, content_id, locale, version: version)
+    DocumentFinder.find(self, content_id, locale, version:)
   end
 
   def save(validate: true)
@@ -252,7 +252,7 @@ class Document
 
   def discard
     handle_remote_error(self) do
-      Services.publishing_api.discard_draft(content_id, previous_version: previous_version)
+      Services.publishing_api.discard_draft(content_id, previous_version:)
     end
   end
 

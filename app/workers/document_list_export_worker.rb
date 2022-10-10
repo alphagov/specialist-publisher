@@ -49,7 +49,7 @@ private
     exporter = fetch_exporter(format)
     CSV.generate do |csv|
       csv << exporter.header_row
-      AllDocumentsFinder.find_each(format, query: query) do |edition|
+      AllDocumentsFinder.find_each(format, query:) do |edition|
         presenter = exporter.new(edition)
         csv << presenter.row
       end

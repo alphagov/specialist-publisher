@@ -34,7 +34,7 @@ class Organisation
 
     def organisation_params
       {
-        document_type: document_type,
+        document_type:,
         fields: %i[content_id title],
         order: "base_path",
         per_page: "600", # Around ~1070 orgs.

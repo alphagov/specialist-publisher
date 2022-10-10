@@ -10,7 +10,7 @@ class GovspeakController < ApplicationController
 
     document = Document.new(
       { body: params["bodyText"],
-        attachments: attachments },
+        attachments: },
       [:attachments],
     )
     govspeak_presenter = GovspeakPresenter.new(document)

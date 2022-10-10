@@ -19,7 +19,7 @@ RSpec.feature "Unpublishing a UK market conformity assessment body", type: :feat
     end
 
     scenario "entering a reason for unpublishing in the internal note field" do
-      stub_publishing_api_unpublish(content_id, body: { type: "gone", explanation: "foo", locale: locale })
+      stub_publishing_api_unpublish(content_id, body: { type: "gone", explanation: "foo", locale: })
       visit "/uk-market-conformity-assessment-bodies/#{content_id}:#{locale}"
 
       fill_in "internal_notes", with: "foo"
