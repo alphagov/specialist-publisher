@@ -1,4 +1,7 @@
 class EmailAlertPresenter
+  DO_NOT_ALERT_ORGANISATION_SUBSCRIBERS =
+    %w[animal_disease_case].freeze
+
   attr_reader :document
 
   def initialize(document)
@@ -40,6 +43,8 @@ private
   end
 
   def links
+    return {} if DO_NOT_ALERT_ORGANISATION_SUBSCRIBERS.include?(document.format)
+
     DocumentLinksPresenter.new(document).to_json[:links]
   end
 
