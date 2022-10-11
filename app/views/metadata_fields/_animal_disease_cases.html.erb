@@ -44,14 +44,6 @@
   %>
 <% end %>
 
-<%= render layout: "shared/form_group", locals: { f: f, field: :virus_strain, label: "Virus strain" } do %>
-  <%= f.select :virus_strain,
-      f.object.facet_options(:virus_strain),
-      {
-        include_blank: true
-      },
-      {
-        class: 'form-control',
-      }
-  %>
+<%= render layout: "shared/form_group", locals: { f: f, field: :virus_strain } do %>
+  <%= f.text_field :virus_strain, class: 'form-control' %>
 <% end %>
