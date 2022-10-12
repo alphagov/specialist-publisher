@@ -7,6 +7,9 @@
   "filter": {
     "format": "animal_disease_case"
   },
+  "editing_organisations":[
+    "d3ce4ba7-bc75-46b4-89d9-38cb3240376d"
+  ],
   "organisations": [
     "de4e9dc6-cca4-43af-a594-682023b84d6c",
     "4ad67f14-6f9c-4fa4-80ab-687b6d81ea6f"
