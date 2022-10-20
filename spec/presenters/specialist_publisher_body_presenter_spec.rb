@@ -5,8 +5,8 @@ RSpec.describe SpecialistPublisherBodyPresenter do
   let(:document) do
     instance_double(
       Document,
-      body: { content: content },
-      attachments: attachments,
+      body: { content: },
+      attachments:,
     )
   end
   let(:attachment) do

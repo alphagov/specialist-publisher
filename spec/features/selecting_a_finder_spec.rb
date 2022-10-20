@@ -14,7 +14,7 @@ RSpec.feature "The root specialist-publisher page", type: :feature do
       click_link("AAIB Reports", match: :first)
 
       count = Dir["lib/documents/schemas/*.json"].length
-      expect(page).to have_css(".dropdown-menu:nth-of-type(1) li", count: count)
+      expect(page).to have_css(".dropdown-menu:nth-of-type(1) li", count:)
     end
 
     it "selects and navigates to cma case finder" do

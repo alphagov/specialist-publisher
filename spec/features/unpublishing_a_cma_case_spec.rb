@@ -19,7 +19,7 @@ RSpec.feature "Unpublishing a CMA Case", type: :feature do
     end
 
     scenario "clicking the unpublish button redirects back to the show page" do
-      stub_publishing_api_unpublish(content_id, body: { type: "gone", locale: locale })
+      stub_publishing_api_unpublish(content_id, body: { type: "gone", locale: })
 
       visit document_path(content_id_and_locale: "#{content_id}:#{locale}", document_type_slug: "cma-cases")
       expect(page).to have_content("Example CMA Case")
@@ -31,7 +31,7 @@ RSpec.feature "Unpublishing a CMA Case", type: :feature do
     end
 
     scenario "specifying a redirect to an alternative GOV.UK content path" do
-      stub_publishing_api_unpublish(content_id, body: { type: "redirect", alternative_path: "/government/organisations/competition-and-markets-authority", locale: locale })
+      stub_publishing_api_unpublish(content_id, body: { type: "redirect", alternative_path: "/government/organisations/competition-and-markets-authority", locale: })
 
       stub_publishing_api_has_lookups("/government/organisations/competition-and-markets-authority" => SecureRandom.uuid)
 
@@ -44,7 +44,7 @@ RSpec.feature "Unpublishing a CMA Case", type: :feature do
       expect(page.status_code).to eq(200)
       expect(page).to have_content("Unpublished Example CMA Case")
 
-      assert_publishing_api_unpublish(content_id, type: "redirect", alternative_path: "/government/organisations/competition-and-markets-authority", locale: locale)
+      assert_publishing_api_unpublish(content_id, type: "redirect", alternative_path: "/government/organisations/competition-and-markets-authority", locale:)
     end
 
     scenario "writers don't see a unpublish document button" do
@@ -88,7 +88,7 @@ RSpec.feature "Unpublishing a CMA Case", type: :feature do
 
       scenario "clicking the unpublish button deletes document attachments" do
         Sidekiq::Testing.inline! do
-          stub_publishing_api_unpublish(content_id, body: { type: "gone", locale: locale })
+          stub_publishing_api_unpublish(content_id, body: { type: "gone", locale: })
 
           visit document_path(content_id_and_locale: "#{content_id}:#{locale}", document_type_slug: "cma-cases")
 
@@ -116,7 +116,7 @@ RSpec.feature "Unpublishing a CMA Case", type: :feature do
     end
 
     scenario "clicking the unpublish button shows an error message" do
-      stub_publishing_api_unpublish(content_id, { body: { type: "gone", locale: locale } }, status: 409)
+      stub_publishing_api_unpublish(content_id, { body: { type: "gone", locale: } }, status: 409)
 
       visit document_path(content_id_and_locale: "#{content_id}:#{locale}", document_type_slug: "cma-cases")
       expect(page).to have_content("Example CMA Case")

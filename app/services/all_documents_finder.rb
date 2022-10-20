@@ -5,7 +5,7 @@ class AllDocumentsFinder
   def self.default_find_params(document_type)
     {
       publishing_app: "specialist-publisher",
-      document_type: document_type,
+      document_type:,
       order: "-last_edited_at",
       locale: "all",
     }
@@ -22,8 +22,8 @@ class AllDocumentsFinder
         publication_state
         state_history
       ],
-      page: page,
-      per_page: per_page,
+      page:,
+      per_page:,
       order: "-last_edited_at",
     )
     params[:q] = query if query.present?

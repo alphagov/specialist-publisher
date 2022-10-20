@@ -53,7 +53,7 @@ RSpec.describe AttachmentsController, type: :controller do
     let(:file) { Rack::Test::UploadedFile.new("spec/support/images/cma_case_image.jpg", "image/jpg") }
     let(:attachment) do
       {
-        file: file,
+        file:,
         title: "test attachment upload",
       }
     end
@@ -76,14 +76,14 @@ RSpec.describe AttachmentsController, type: :controller do
         .to_return(body: JSON.dump(asset_manager_response), status: 201)
 
       post :create, params: {
-        document_type_slug: document_type_slug,
+        document_type_slug:,
         document_content_id_and_locale: "#{document_content_id}:#{document_locale}",
-        attachment: attachment,
+        attachment:,
       }
 
       expect(document.attachments.count).to eq(3)
       expect(response).to redirect_to(edit_document_path(
-                                        document_type_slug: document_type_slug,
+                                        document_type_slug:,
                                         content_id_and_locale: "#{document_content_id}:#{document_locale}",
                                       ))
     end
@@ -93,13 +93,13 @@ RSpec.describe AttachmentsController, type: :controller do
       allow(subject).to receive(:fetch_document).and_return(document)
 
       post :create, params: {
-        document_type_slug: document_type_slug,
+        document_type_slug:,
         document_content_id_and_locale: "#{document_content_id}:#{document_locale}",
         attachment: no_file_attachment,
       }
 
       expect(flash[:danger]).to be_present
-      expect(response).to redirect_to(new_document_attachment_path(document_type_slug: document_type_slug))
+      expect(response).to redirect_to(new_document_attachment_path(document_type_slug:))
     end
   end
 
@@ -110,9 +110,9 @@ RSpec.describe AttachmentsController, type: :controller do
       allow(subject).to receive(:fetch_document).and_return(document)
 
       get :edit, params: {
-        document_type_slug: document_type_slug,
+        document_type_slug:,
         document_content_id_and_locale: "#{document_content_id}:#{document_locale}",
-        attachment_content_id: attachment_content_id,
+        attachment_content_id:,
       }
 
       expect(assigns(:attachment)).to eq(attachment)
@@ -142,15 +142,15 @@ RSpec.describe AttachmentsController, type: :controller do
         allow(subject).to receive(:fetch_document).and_return(document)
 
         patch :update, params: {
-          document_type_slug: document_type_slug,
+          document_type_slug:,
           document_content_id_and_locale: "#{document_content_id}:#{document_locale}",
-          attachment_content_id: attachment_content_id,
+          attachment_content_id:,
           attachment: updated_attachment,
         }
 
         expect(document.attachments.count).to eq(2)
         expect(response).to redirect_to(edit_document_path(
-                                          document_type_slug: document_type_slug,
+                                          document_type_slug:,
                                           content_id_and_locale: "#{document_content_id}:#{document_locale}",
                                         ))
       end
@@ -162,18 +162,18 @@ RSpec.describe AttachmentsController, type: :controller do
           error_message = "There was an error updating the attachment, please try again later."
 
           patch :update, params: {
-            document_type_slug: document_type_slug,
+            document_type_slug:,
             document_content_id_and_locale: "#{document_content_id}:#{document_locale}",
-            attachment_content_id: attachment_content_id,
+            attachment_content_id:,
             attachment: updated_attachment,
           }
 
           expect(flash[:danger]).to eq(error_message)
           expect(response).to redirect_to(
             edit_document_attachment_path(
-              document_type_slug: document_type_slug,
+              document_type_slug:,
               document_content_id_and_locale: "#{document_content_id}:#{document_locale}",
-              attachment_content_id: attachment_content_id,
+              attachment_content_id:,
             ),
           )
         end
@@ -194,15 +194,15 @@ RSpec.describe AttachmentsController, type: :controller do
         success_message = "Attachment successfully updated"
 
         patch :update, params: {
-          document_type_slug: document_type_slug,
+          document_type_slug:,
           document_content_id_and_locale: "#{document_content_id}:#{document_locale}",
-          attachment_content_id: attachment_content_id,
+          attachment_content_id:,
           attachment: updated_attachment,
         }
 
         expect(flash[:success]).to eq(success_message)
         expect(response).to redirect_to(edit_document_path(
-                                          document_type_slug: document_type_slug,
+                                          document_type_slug:,
                                           content_id_and_locale: "#{document_content_id}:#{document_locale}",
                                         ))
       end
@@ -214,17 +214,17 @@ RSpec.describe AttachmentsController, type: :controller do
           error_message = "There was an error updating the title, please try again later."
 
           patch :update, params: {
-            document_type_slug: document_type_slug,
+            document_type_slug:,
             document_content_id_and_locale: "#{document_content_id}:#{document_locale}",
-            attachment_content_id: attachment_content_id,
+            attachment_content_id:,
             attachment: updated_attachment,
           }
 
           expect(flash[:danger]).to eq(error_message)
           expect(response).to redirect_to(edit_document_attachment_path(
-                                            document_type_slug: document_type_slug,
+                                            document_type_slug:,
                                             document_content_id_and_locale: "#{document_content_id}:#{document_locale}",
-                                            attachment_content_id: attachment_content_id,
+                                            attachment_content_id:,
                                           ))
         end
       end
@@ -245,14 +245,14 @@ RSpec.describe AttachmentsController, type: :controller do
         error_message = "Adding an attachment failed. Please make sure you have uploaded an attachment of a permitted file type."
 
         patch :update, params: {
-          document_type_slug: document_type_slug,
+          document_type_slug:,
           document_content_id_and_locale: "#{document_content_id}:#{document_locale}",
-          attachment_content_id: attachment_content_id,
+          attachment_content_id:,
           attachment: no_file_attachment,
         }
 
         expect(flash[:danger]).to eq(error_message)
-        expect(response).to redirect_to(new_document_attachment_path(document_type_slug: document_type_slug))
+        expect(response).to redirect_to(new_document_attachment_path(document_type_slug:))
       end
     end
   end
@@ -269,14 +269,14 @@ RSpec.describe AttachmentsController, type: :controller do
       expect(document.attachments.count).to eq(2)
 
       delete :destroy, params: {
-        document_type_slug: document_type_slug,
+        document_type_slug:,
         document_content_id_and_locale: "#{document_content_id}:#{document_locale}",
-        attachment_content_id: attachment_content_id,
+        attachment_content_id:,
       }
 
       expect(document.attachments.count).to eq(1)
       expect(response).to redirect_to(edit_document_path(
-                                        document_type_slug: document_type_slug,
+                                        document_type_slug:,
                                         content_id_and_locale: "#{document_content_id}:#{document_locale}",
                                       ))
     end

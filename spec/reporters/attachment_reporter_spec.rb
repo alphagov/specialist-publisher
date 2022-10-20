@@ -1,7 +1,7 @@
 require "spec_helper"
 
 RSpec.describe AttachmentReporter do
-  let(:document) { double(:document, body: <<-HTML, attachments: attachments) }
+  let(:document) { double(:document, body: <<-HTML, attachments:) }
     # Testing #{described_class}
 
     This body uses inline attachmments:

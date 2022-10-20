@@ -25,7 +25,7 @@ class GovspeakPresenter
     attachments = document.attachments.map { |attachment| AttachmentPresenter.new(attachment).to_json }
     govspeak = Govspeak::Document.new(
       govspeak_body,
-      attachments: attachments,
+      attachments:,
       document_domains: internal_hosts,
     )
     govspeak.to_html

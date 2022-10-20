@@ -8,18 +8,18 @@ class FinderSignupContentItemPresenter
 
   def to_json(*_args)
     {
-      base_path: base_path,
-      title: title,
-      schema_name: schema_name,
-      document_type: document_type,
-      description: description,
-      public_updated_at: public_updated_at,
-      update_type: update_type,
-      publishing_app: publishing_app,
-      rendering_app: rendering_app,
-      routes: routes,
-      details: details,
-      locale: locale,
+      base_path:,
+      title:,
+      schema_name:,
+      document_type:,
+      description:,
+      public_updated_at:,
+      update_type:,
+      publishing_app:,
+      rendering_app:,
+      routes:,
+      details:,
+      locale:,
     }
   end
 

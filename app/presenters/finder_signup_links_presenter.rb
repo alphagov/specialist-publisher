@@ -3,8 +3,8 @@ FinderSignupLinksPresenter = Struct.new(:file) do
     {
       content_id: file.fetch("signup_content_id"),
       links: {
-        organisations: organisations,
-        related: related,
+        organisations:,
+        related:,
       },
     }
   end

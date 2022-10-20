@@ -2,7 +2,7 @@ require "spec_helper"
 
 RSpec.describe GovspeakBodyPresenter do
   describe "#present" do
-    let(:document) { double(:document, body: body, attachments: attachments) }
+    let(:document) { double(:document, body:, attachments:) }
     subject { described_class.present(document) }
 
     shared_examples "handles filename quirks" do |input_pattern, output_pattern|
@@ -10,7 +10,7 @@ RSpec.describe GovspeakBodyPresenter do
       let(:input_filename) { "foo.pdf" }
       let(:file_path) { "/foo.pdf" }
       let(:url) { "https://assets.publishing.service.gov.uk#{file_path}" }
-      let(:attachments) { [instance_double(Attachment, url: url, content_id: content_id)] }
+      let(:attachments) { [instance_double(Attachment, url:, content_id:)] }
       let(:fallback_output) { sprintf(output_pattern, input_filename) }
       let(:successful_output) { sprintf(output_pattern, content_id) }
       let(:body) { sprintf(input_pattern, input_filename) }

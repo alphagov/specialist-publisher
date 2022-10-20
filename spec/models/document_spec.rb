@@ -48,22 +48,24 @@ RSpec.describe Document do
 
       expect(publishing_api).to receive(:get_content_items)
         .with(
-          publishing_app: "specialist-publisher",
-          document_type: "my_document_type",
-          fields: %i[
-            base_path
-            content_id
-            locale
-            last_edited_at
-            title
-            publication_state
-            state_history
-          ],
-          page: 1,
-          per_page: 20,
-          locale: "all",
-          order: "-last_edited_at",
-          q: "foo",
+          {
+            publishing_app: "specialist-publisher",
+            document_type: "my_document_type",
+            fields: %i[
+              base_path
+              content_id
+              locale
+              last_edited_at
+              title
+              publication_state
+              state_history
+            ],
+            page: 1,
+            per_page: 20,
+            locale: "all",
+            order: "-last_edited_at",
+            q: "foo",
+          },
         )
 
       MyDocumentType.all(1, 20, query: "foo")
@@ -366,7 +368,7 @@ RSpec.describe Document do
             :document,
             :redrafted,
             payload_attributes.merge(
-              publication_state: publication_state,
+              publication_state:,
               content_id: document.content_id,
             ),
           ),
@@ -775,7 +777,7 @@ RSpec.describe Document do
   context "a draft where a published item has the same base_path" do
     let(:content_id) { SecureRandom.uuid }
     let(:locale) { "en" }
-    let(:published) { FactoryBot.create(:document, document_type: "my_document_type", content_id: content_id) }
+    let(:published) { FactoryBot.create(:document, document_type: "my_document_type", content_id:) }
 
     before do
       stub_request(:get, %r{/v2/content/#{content_id}})

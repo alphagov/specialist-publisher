@@ -37,7 +37,7 @@ RSpec.feature "Publishing a CMA case", type: :feature do
       FactoryBot.create(
         :cma_case,
         :published,
-        content_id: content_id,
+        content_id:,
         title: "Example CMA Case",
         base_path: "/cma-cases/example-cma-case",
         public_updated_at: "2015-11-16T11:53:30+00:00",

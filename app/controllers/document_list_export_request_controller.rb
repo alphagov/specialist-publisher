@@ -5,7 +5,7 @@ class DocumentListExportRequestController < ApplicationController
 
     begin
       file = get_csv_file_from_s3(filename)
-      send_data(file, filename: filename)
+      send_data(file, filename:)
     rescue Fog::AWS::Storage::NotFound
       head :not_found
     end
