@@ -41,6 +41,7 @@
       "allowed_values": [
         {"label": "Air quality", "value": "air-quality"},
         {"label": "Arable land", "value": "arable-land"},
+        {"label": "Biodiversity", "value": "biodiversity"},
         {"label": "Boundaries", "value": "boundaries"},
         {"label": "Coast", "value": "coast"},
         {"label": "Educational access", "value": "educational-access"},
