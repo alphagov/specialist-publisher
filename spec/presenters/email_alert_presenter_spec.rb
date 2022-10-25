@@ -4,8 +4,24 @@ RSpec.describe EmailAlertPresenter do
   let(:cma_case_payload) { FactoryBot.create(:cma_case) }
   let(:medical_safety_payload) { FactoryBot.create(:medical_safety_alert) }
   let(:cma_case_redrafted_payload) { FactoryBot.create(:cma_case, :redrafted, title: "updated") }
+  let(:animal_disease_case_payload) { FactoryBot.create(:animal_disease_case) }
 
   describe "#to_json" do
+    context "animal_disease_case finder" do
+      before do
+        stub_publishing_api_has_item(animal_disease_case_payload)
+      end
+
+      it "does not send the links hash in the payload for email alert api" do
+        animal_disease_case = AnimalDiseaseCase.find(animal_disease_case_payload["content_id"], animal_disease_case_payload["locale"])
+        email_alert_presenter = described_class.new(animal_disease_case)
+        presented_data = email_alert_presenter.to_json
+        expect(presented_data[:tags][:format]).to eq(animal_disease_case_payload["document_type"])
+        expect(presented_data[:tags][:case_type]).to eq(animal_disease_case_payload["details"]["metadata"]["case_type"])
+        expect(presented_data[:links]).to eq({})
+      end
+    end
+
     context "any finders document" do
       before do
         stub_publishing_api_has_item(cma_case_payload)
