@@ -22,7 +22,6 @@
   "signup_copy": "You'll get an email each time a case is updated or a new case is published.",
   "subscription_list_title_prefix": "Notifiable animal disease cases and control zones",
   "summary": "<p>Find notifiable exotic animal disease cases and control zone declarations for England.</p><p> There are cases of bird flu (avian influenza) in England. Check if you are in a <a href=\"https://defra.maps.arcgis.com/apps/webappviewer/index.html?id=8cb1883eda5547c6b91b5d5e6aeba90d\">disease control zone on the map</a>. Find out more about <a href=\"https://www.gov.scot/publications/avian-influenza-outbreaks/\">cases in Scotland</a>, <a href=\"https://gov.wales/avian-influenza-bird-flu-latest-update\">cases in Wales</a> and <a href=\"https://www.daera-ni.gov.uk/ai\">cases in Northern Ireland</a>.</p><p>Find details of <a href=\"https://webarchive.nationalarchives.gov.uk/ukgwa/20221018152851/https://www.gov.uk/guidance/avian-influenza-bird-flu-cases-and-disease-control-zones-in-england#disease-control-zones-no-longer-in-force\">older bird flu (avian influenza) cases in England</a>.</p>",
-  "pre_production": true,
   "document_noun": "case",
   "facets": [
     {
