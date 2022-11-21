@@ -4,7 +4,7 @@
   "format_name": "UK Market Conformity Assessment Body",
   "name": "UK Market Conformity Assessment Bodies",
   "description": "",
-  "phase": "alpha",
+  "phase": "live",
   "filter": {
     "format": "uk_market_conformity_assessment_body"
   },
