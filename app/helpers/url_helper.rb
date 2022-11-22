@@ -8,11 +8,11 @@ module UrlHelper
   end
 
   def public_url_for(document)
-    URI.join(Plek.new.website_root, document.base_path, cachebust_query_string).to_s
+    URI.join(Plek.website_root, document.base_path, cachebust_query_string).to_s
   end
 
   def draft_url_for(document)
-    URI.join(Plek.new.external_url_for("draft-origin"), document.base_path, cachebust_query_string).to_s
+    URI.join(Plek.external_url_for("draft-origin"), document.base_path, cachebust_query_string).to_s
   end
 
   def cachebust_query_string

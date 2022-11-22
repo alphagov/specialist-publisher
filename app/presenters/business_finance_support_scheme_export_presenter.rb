@@ -24,7 +24,7 @@ class BusinessFinanceSupportSchemeExportPresenter
   def row
     [
       document.title,
-      URI.join(Plek.new.website_root, document.base_path).to_s,
+      URI.join(Plek.website_root, document.base_path).to_s,
       document.summary,
       document.body,
       document.continuation_link,

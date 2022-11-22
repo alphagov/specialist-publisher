@@ -34,7 +34,7 @@ RSpec.describe BusinessFinanceSupportSchemeExportPresenter do
 
     it "includes the public url to the document in the correct field" do
       position = described_class.header_row.index("Web URL")
-      expect(subject.row[position]).to eq "#{Plek.new.website_root}#{document.base_path}"
+      expect(subject.row[position]).to eq "#{Plek.website_root}#{document.base_path}"
     end
 
     it "includes the summary in the correct field" do
