@@ -29,7 +29,7 @@ RSpec.describe DrugSafetyUpdate do
       document.publish
 
       assert_publishing_api_publish(payload["content_id"])
-      assert_not_requested(:post, "#{Plek.new.find('email-alert-api')}/notifications")
+      assert_not_requested(:post, "#{Plek.find('email-alert-api')}/notifications")
     end
   end
 end

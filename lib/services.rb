@@ -5,7 +5,7 @@ require "gds_api/email_alert_api"
 module Services
   def self.publishing_api
     @publishing_api ||= GdsApi::PublishingApi.new(
-      Plek.new.find("publishing-api"),
+      Plek.find("publishing-api"),
       bearer_token: ENV["PUBLISHING_API_BEARER_TOKEN"] || "example",
       timeout: 10,
     )
@@ -13,7 +13,7 @@ module Services
 
   def self.asset_api
     @asset_api ||= GdsApi::AssetManager.new(
-      Plek.new.find("asset-manager"),
+      Plek.find("asset-manager"),
       bearer_token: ENV["ASSET_MANAGER_BEARER_TOKEN"] || "12345678",
       timeout: 30,
     )
