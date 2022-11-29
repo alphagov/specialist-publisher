@@ -440,6 +440,23 @@ FactoryBot.define do
     end
   end
 
+  factory :licence_transaction, parent: :document do
+    base_path { "/find-licences/example-document" }
+    document_type { "licence_transaction" }
+
+    transient do
+      default_metadata do
+        {
+          "country" => %w[england],
+          "sector" => %w[catering-and-accomodation],
+          "activity" => %w[hold-an-ad-hoc-event],
+          "continuation_link" => "https://www.gov.uk",
+          "will_continue_on" => "GOV.UK",
+        }
+      end
+    end
+  end
+
   factory :flood_and_coastal_erosion_risk_management_research_report, parent: :document do
     base_path { "/flood-and-coastal-erosion-risk-management-research-reports/example-document" }
     document_type { "flood_and_coastal_erosion_risk_management_research_report" }
