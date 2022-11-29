@@ -19,6 +19,10 @@ FactoryBot.define do
     permissions { %w[signin gds_editor] }
   end
 
+  factory :licence_transaction_editor, parent: :user do
+    permissions { %w[signin licence_transaction_editor] }
+  end
+
   factory :statutory_instrument_editor, parent: :user do
     permissions { %w[signin statutory_instrument_editor] }
   end

@@ -48,6 +48,7 @@ RSpec.feature "The root specialist-publisher page", type: :feature do
       expect(page).to have_text("EU Withdrawal Act 2018 statutory instruments")
       expect(page).to have_text("Export health certificates")
       expect(page).to have_text("International Development Funds")
+      expect(page).to have_text("Licences")
       expect(page).to have_text("MAIB Reports")
       expect(page).to have_text("Medical Safety Alerts")
       expect(page).to have_text("Protected Geographical Food and Drink Name")
