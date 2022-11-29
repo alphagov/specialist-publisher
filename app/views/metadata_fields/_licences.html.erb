@@ -1,0 +1,56 @@
+<%# You can select multiple class or categories so this has multi-select option %>
+<%= render layout: "shared/form_group", locals: { f: f, field: :country } do %>
+  <%= f.select :country,
+      f.object.facet_options(:country),
+      { label: "Country" },
+      {
+        class: 'select2 form-control',
+        multiple: true,
+        data: {
+          placeholder: 'Select countries'
+        }
+      }
+  %>
+<% end %>
+
+<%# You can select multiple class or categories so this has multi-select option %>
+<%= render layout: "shared/form_group", locals: { f: f, field: :sector } do %>
+  <%= f.select :sector,
+      f.object.facet_options(:sector),
+      { label: "Sector" },
+      {
+        class: 'select2 form-control',
+        multiple: true,
+        data: {
+          placeholder: 'Select sectors'
+        }
+      }
+  %>
+<% end %>
+
+<%# You can select multiple class or categories so this has multi-select option %>
+<%= render layout: "shared/form_group", locals: { f: f, field: :activity } do %>
+  <%= f.select :activity,
+      f.object.facet_options(:activity),
+      { label: "Activity" },
+      {
+        class: 'select2 form-control',
+        multiple: true,
+        data: {
+          placeholder: 'Select activities'
+        }
+      }
+  %>
+<% end %>
+
+<%= render layout: "shared/form_group", locals: { f: f, field: :will_continue_on } do %>
+  <%= f.text_field :will_continue_on, class: 'form-control' %>
+<% end %>
+
+<%= render layout: "shared/form_group", locals: { f: f, field: :continuation_link } do %>
+  <%= f.text_field :continuation_link, class: 'form-control' %>
+<% end %>
+
+<%= render layout: "shared/form_group", locals: { f: f, field: :licence_identifier } do %>
+  <%= f.text_field :licence_identifier, class: 'form-control' %>
+<% end %>
