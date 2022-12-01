@@ -13,10 +13,12 @@ applications.
 ## 1. Add a schema to govuk-content-schemas
 
 See example [PR for adding `product_safety_alert`](https://github.com/alphagov/govuk-content-schemas/pull/1077).
+Note: this is a link to a PR in the now-archived content schemas repo. Content schemas have now been moved to publishing api.
+Please update this document when an example for publishing api is available.
 
-1. Add the format to [this list](https://github.com/alphagov/govuk-content-schemas/blob/main/formats/specialist_document.jsonnet#L2-L31) and to [this list](https://github.com/alphagov/govuk-content-schemas/blob/main/lib/govuk_content_schemas/allowed_document_types.yml)
-2. Add any new field definitions to [this file](https://github.com/alphagov/govuk-content-schemas/blob/main/formats/shared/definitions/_specialist_document.jsonnet)
-3. Add examples [as instructed](https://github.com/alphagov/govuk-content-schemas/blob/main/docs/adding-a-new-schema.md#examples).
+1. Add the format to [this list](https://github.com/alphagov/publishing-api/blob/main/content_schemas/formats/specialist_document.jsonnet#L2:L33) and to [this list](https://github.com/alphagov/publishing-api/blob/main/content_schemas/allowed_document_types.yml)
+2. Add any new field definitions to [this file](https://github.com/alphagov/publishing-api/blob/main/content_schemas/formats/shared/definitions/_specialist_document.jsonnet)
+3. Add examples [as instructed](https://github.com/alphagov/publishing-api/blob/main/docs/content_schemas/adding-a-new-schema.md).
    You can copy and paste from another specialist document format, only changing what is necessary (you can leave the body and headers unchanged).
 
 You'll need to generate your own UUIDs for the `content_id` and `signup_content_id` fields:
@@ -28,7 +30,7 @@ irb(main):001:0> require "securerandom"
 irb(main):002:0> SecureRandom.uuid
 => "5087e8b6-ee54-40f9-b592-8c2813c7037d"
 ```
-4. Run `bundle exec rake build` to regenerate schemas.
+4. Run `bundle exec rake build_schemas` to regenerate schemas.
 
 When the PR is reviewed and its tests passing, it can be merged and deployed at this point.
 
