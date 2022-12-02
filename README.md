@@ -56,3 +56,8 @@ $ bundle exec rake
 - [Creating and editing specialist document types](/docs/creating-and-editing-specialist-document-types.md)
 - [Updating existing organisation data](/docs/updating-existing-organisation-data.md)
 - [Historical info about migrating to use the Publishing API](/docs/phase-2-migration/README.md)
+
+## Licence
+
+[MIT License](LICENCE)
+
