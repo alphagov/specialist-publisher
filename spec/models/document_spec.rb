@@ -172,6 +172,7 @@ RSpec.describe Document do
         expect(document.first_published_at).to eq(payload["first_published_at"])
         expect(document.update_type).to eq(nil)
         expect(document.state_history).to eq(payload["state_history"])
+        expect(document.rendering_app).to eq("government-frontend")
       end
 
       context "when bulk published is true" do
