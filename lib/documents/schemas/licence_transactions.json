@@ -32,6 +32,7 @@
       "type": "text",
       "preposition": "of sector",
       "display_as_result_metadata": true,
+      "show_option_select_filter": true,
       "filterable": true,
       "allowed_values": [
         { "label": "Agriculture, forestry and fishing", "value": "agriculture-forestry-fishing" },
@@ -56,6 +57,7 @@
       "type": "text",
       "preposition": "regarding",
       "display_as_result_metadata": true,
+      "show_option_select_filter": true,
       "filterable": true,
       "allowed_values": [
         {  "label": "Operate as a bookmaker", "value": "operate-as-a-bookmaker" },
