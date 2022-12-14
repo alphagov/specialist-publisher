@@ -30,4 +30,8 @@ class LicenceTransaction < Document
   def self.slug
     "licences"
   end
+
+  def rendering_app
+    "frontend"
+  end
 end

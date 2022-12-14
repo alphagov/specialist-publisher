@@ -8,4 +8,8 @@ RSpec.describe LicenceTransaction do
   it "is not exportable" do
     expect(subject.class).not_to be_exportable
   end
+
+  it "should have a rendering app of frontend" do
+    expect(subject.rendering_app).to eq "frontend"
+  end
 end
