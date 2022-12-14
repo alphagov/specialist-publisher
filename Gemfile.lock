@@ -546,6 +546,7 @@ DEPENDENCIES
   kaminari
   kaminari-mongoid
   listen
+  mail (~> 2.7.1)
   mail-notify
   mongo
   mongoid
