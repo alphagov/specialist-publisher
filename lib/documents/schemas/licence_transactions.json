@@ -1,0 +1,94 @@
+{
+  "pre_production": true,
+  "content_id": "b8327c0c-a90d-47b6-992b-ea226b4d3306",
+  "base_path": "/find-licences",
+  "format_name": "Find and apply for licences",
+  "name": "Find and apply for licences",
+  "description": "Find licences for business activities and other activities",
+  "filter": {
+    "format": "licence_transaction"
+  },
+  "show_summaries": true,
+  "organisations": ["af07d5a5-df63-4ddc-9383-6a666845ebe9"],
+  "document_noun": "licence",
+  "facets": [
+    {
+      "key": "country",
+      "name": "Country",
+      "type": "text",
+      "preposition": "in country",
+      "display_as_result_metadata": true,
+      "filterable": true,
+      "allowed_values": [
+        { "label": "England", "value": "england" },
+        { "label": "Wales", "value": "wales" },
+        { "label": "Scotland", "value": "scotland" },
+        { "label": "Northern Ireland", "value": "northern-ireland" }
+      ]
+    },
+    {
+      "key": "sector",
+      "name": "Sector",
+      "type": "text",
+      "preposition": "of sector",
+      "display_as_result_metadata": true,
+      "show_option_select_filter": true,
+      "filterable": true,
+      "allowed_values": [
+        { "label": "Agriculture, forestry and fishing", "value": "agriculture-forestry-fishing" },
+        { "label": "Arts, sports and recreation", "value": "arts-sports-and-recreation" },
+        { "label": "Catering and accommodation", "value": "catering-and-accomodation" },
+        { "label": "Construction", "value": "construction" },
+        { "label": "Education", "value": "education" },
+        { "label": "Health and social care services", "value": "health-and-social-care-services" },
+        { "label": "IT and telecommunications services", "value": "it-and-telecommunications-services" },
+        { "label": "Manufacturing", "value": "manufacturing" },
+        { "label": "Media and creative services", "value": "media-and-creative-services" },
+        { "label": "Mining, energy and utilities", "value": "mining-energy-utilities" },
+        { "label": "Personal services", "value": "personal-services" },
+        { "label": "Professional and business services", "value": "professional-and-business-services" },
+        { "label": "Retail, hire and repair", "value": "retail-hire-and-repair" },
+        { "label": "Wholesale", "value": "wholesale" }
+      ]
+    },
+    {
+      "key": "activity",
+      "name": "Activity",
+      "type": "text",
+      "preposition": "regarding",
+      "display_as_result_metadata": true,
+      "show_option_select_filter": true,
+      "filterable": true,
+      "allowed_values": [
+        {  "label": "Operate as a bookmaker", "value": "operate-as-a-bookmaker" },
+        {  "label": "Play background music in your premises", "value": "play-background-music-in-your-premises" },
+        {  "label": "Use CCTV systems", "value": "use-cctv-systems" },
+        {  "label": "Carry out construction or building work", "value": "carry-out-construction-or-building-work" },
+        {  "label": "Fish in fresh water", "value": "fish-in-fresh-water" },
+        {  "label": "Hold an ad hoc event", "value": "hold-an-ad-hoc-event" },
+        {  "label": "Offer care services", "value": "offer-care-services" }
+      ]
+    },
+    {
+      "key": "will_continue_on",
+      "name": "Will continue on",
+      "type": "text",
+      "display_as_result_metadata": false,
+      "filterable": false
+    },
+    {
+      "key": "continuation_link",
+      "name": "Link to competent authority",
+      "type": "text",
+      "display_as_result_metadata": false,
+      "filterable": false
+    },
+    {
+      "key": "licence_identifier",
+      "name": "Licence identifier",
+      "type": "text",
+      "display_as_result_metadata": false,
+      "filterable": false
+    }
+  ]
+}

@@ -19,6 +19,10 @@ FactoryBot.define do
     permissions { %w[signin gds_editor] }
   end
 
+  factory :licence_transaction_editor, parent: :user do
+    permissions { %w[signin licence_transaction_editor] }
+  end
+
   factory :statutory_instrument_editor, parent: :user do
     permissions { %w[signin statutory_instrument_editor] }
   end
@@ -435,6 +439,23 @@ FactoryBot.define do
           "development_sector" => %w[climate-change],
           "eligible_entities" => %w[non-governmental-organisations],
           "value_of_funding" => %w[up-to-10000],
+        }
+      end
+    end
+  end
+
+  factory :licence_transaction, parent: :document do
+    base_path { "/find-licences/example-document" }
+    document_type { "licence_transaction" }
+
+    transient do
+      default_metadata do
+        {
+          "country" => %w[england],
+          "sector" => %w[catering-and-accomodation],
+          "activity" => %w[hold-an-ad-hoc-event],
+          "continuation_link" => "https://www.gov.uk",
+          "will_continue_on" => "GOV.UK",
         }
       end
     end
