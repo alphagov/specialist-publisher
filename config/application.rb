@@ -34,6 +34,10 @@ module SpecialistPublisher
     # Don't generate system test files.
     config.generators.system_tests = nil
 
+    # Set asset path to be application specific so that we can put all GOV.UK
+    # assets into an S3 bucket and distinguish app by path.
+    config.assets.prefix = "/assets/specialist-publisher"
+
     # Using a sass css compressor causes a scss file to be processed twice
     # (once to build, once to compress) which breaks the usage of "unquote"
     # to use CSS that has same function names as SCSS such as max.
