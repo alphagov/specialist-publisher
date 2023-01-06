@@ -1,56 +1,41 @@
 <%# You can select multiple class or categories so this has multi-select option %>
-<%= render layout: "shared/form_group", locals: { f: f, field: :country } do %>
-  <%= f.select :country,
-      f.object.facet_options(:country),
-      { label: "Country" },
+<%= render layout: "shared/form_group", locals: { f: f, field: :licence_transaction_location, label: "Location" } do %>
+  <%= f.select :licence_transaction_location,
+      f.object.facet_options(:licence_transaction_location),
+      { label: "Location" },
       {
         class: 'select2 form-control',
         multiple: true,
         data: {
-          placeholder: 'Select countries'
+          placeholder: 'Select locations'
         }
       }
   %>
 <% end %>
 
 <%# You can select multiple class or categories so this has multi-select option %>
-<%= render layout: "shared/form_group", locals: { f: f, field: :sector } do %>
-  <%= f.select :sector,
-      f.object.facet_options(:sector),
-      { label: "Sector" },
+<%= render layout: "shared/form_group", locals: { f: f, field: :licence_transaction_industry, label: "Industry" } do %>
+  <%= f.select :licence_transaction_industry,
+      f.object.facet_options(:licence_transaction_industry),
+      { label: "Industry" },
       {
         class: 'select2 form-control',
         multiple: true,
         data: {
-          placeholder: 'Select sectors'
+          placeholder: 'Select industries'
         }
       }
   %>
 <% end %>
 
-<%# You can select multiple class or categories so this has multi-select option %>
-<%= render layout: "shared/form_group", locals: { f: f, field: :activity } do %>
-  <%= f.select :activity,
-      f.object.facet_options(:activity),
-      { label: "Activity" },
-      {
-        class: 'select2 form-control',
-        multiple: true,
-        data: {
-          placeholder: 'Select activities'
-        }
-      }
-  %>
+<%= render layout: "shared/form_group", locals: { f: f, field: :licence_transaction_will_continue_on, label: "Will continue on" } do %>
+  <%= f.text_field :licence_transaction_will_continue_on, class: 'form-control' %>
 <% end %>
 
-<%= render layout: "shared/form_group", locals: { f: f, field: :will_continue_on } do %>
-  <%= f.text_field :will_continue_on, class: 'form-control' %>
+<%= render layout: "shared/form_group", locals: { f: f, field: :licence_transaction_continuation_link, label: "Continuation link" } do %>
+  <%= f.text_field :licence_transaction_continuation_link, class: 'form-control' %>
 <% end %>
 
-<%= render layout: "shared/form_group", locals: { f: f, field: :continuation_link } do %>
-  <%= f.text_field :continuation_link, class: 'form-control' %>
-<% end %>
-
-<%= render layout: "shared/form_group", locals: { f: f, field: :licence_identifier } do %>
-  <%= f.text_field :licence_identifier, class: 'form-control' %>
+<%= render layout: "shared/form_group", locals: { f: f, field: :licence_transaction_licence_identifier, label: "Licence identifier" } do %>
+  <%= f.text_field :licence_transaction_licence_identifier, class: 'form-control' %>
 <% end %>

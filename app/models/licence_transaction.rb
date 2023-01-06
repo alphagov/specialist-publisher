@@ -1,11 +1,10 @@
 class LicenceTransaction < Document
   FORMAT_SPECIFIC_FIELDS = %i[
-    country
-    sector
-    activity
-    will_continue_on
-    continuation_link
-    licence_identifier
+    licence_transaction_continuation_link
+    licence_transaction_industry
+    licence_transaction_licence_identifier
+    licence_transaction_location
+    licence_transaction_will_continue_on
   ].freeze
 
   attr_accessor(*FORMAT_SPECIFIC_FIELDS)
