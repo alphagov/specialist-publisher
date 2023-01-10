@@ -21,6 +21,7 @@
   "subscription_list_title_prefix": "Employment tribunal decisions",
   "summary": "<p>Find decisions on Employment Tribunal cases in England, Wales and Scotland from February 2017 onwards.</p><p>If the decision was made before February 2017 in England or Wales, Bury St Edmunds County Court might have it on record. Only the most requested decisions are currently available. Contact <a href='https://www.find-court-tribunal.service.gov.uk/courts/bury-st-edmunds-county-court-and-family-court'>Bury St Edmunds County Court</a> to check.</p><p>If the decision was made before February 2017 in Scotland, contact <a href='https://www.find-court-tribunal.service.gov.uk/courts/glasgow-tribunals-centre'>Glasgow Tribunals Centre</a>.</p><p>Decisions are not affected by GDPR rules and cannot be removed from GOV.UK.</p>",
   "document_noun": "decision",
+  "no_index": true,
   "email_filter_by": "tribunal_decision_categories",
   "email_filter_facets": [
     {
