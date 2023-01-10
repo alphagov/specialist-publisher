@@ -52,6 +52,7 @@ private
       signup_link: file.fetch("signup_link", nil),
       summary: file.fetch("summary", nil),
       facets: file.fetch("facets", nil),
+      hide_from_external_crawlers: file.fetch("hide_from_external_crawlers"),
       default_order: file.fetch("default_order", nil),
       default_documents_per_page: 50,
     }.reject { |_, value| value.nil? }
