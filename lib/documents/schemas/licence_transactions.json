@@ -3,8 +3,7 @@
   "content_id": "b8327c0c-a90d-47b6-992b-ea226b4d3306",
   "base_path": "/find-licences",
   "format_name": "Find and apply for licences",
-  "name": "Find and apply for licences",
-  "description": "Find licences for business activities and other activities",
+  "name": "Find a licence",
   "filter": {
     "format": "licence_transaction"
   },
@@ -13,11 +12,11 @@
   "document_noun": "licence",
   "facets": [
     {
-      "key": "country",
-      "name": "Country",
+      "key": "licence_transaction_location",
+      "name": "Location",
       "type": "text",
-      "preposition": "in country",
-      "display_as_result_metadata": true,
+      "preposition": "In",
+      "display_as_result_metadata": false,
       "filterable": true,
       "allowed_values": [
         { "label": "England", "value": "england" },
@@ -27,12 +26,12 @@
       ]
     },
     {
-      "key": "sector",
-      "name": "Sector",
+      "key": "licence_transaction_industry",
+      "name": "Industry",
       "type": "text",
-      "preposition": "of sector",
-      "display_as_result_metadata": true,
+      "preposition": "For",
       "show_option_select_filter": true,
+      "display_as_result_metadata": false,
       "filterable": true,
       "allowed_values": [
         { "label": "Agriculture, forestry and fishing", "value": "agriculture-forestry-fishing" },
@@ -52,39 +51,21 @@
       ]
     },
     {
-      "key": "activity",
-      "name": "Activity",
-      "type": "text",
-      "preposition": "regarding",
-      "display_as_result_metadata": true,
-      "show_option_select_filter": true,
-      "filterable": true,
-      "allowed_values": [
-        {  "label": "Operate as a bookmaker", "value": "operate-as-a-bookmaker" },
-        {  "label": "Play background music in your premises", "value": "play-background-music-in-your-premises" },
-        {  "label": "Use CCTV systems", "value": "use-cctv-systems" },
-        {  "label": "Carry out construction or building work", "value": "carry-out-construction-or-building-work" },
-        {  "label": "Fish in fresh water", "value": "fish-in-fresh-water" },
-        {  "label": "Hold an ad hoc event", "value": "hold-an-ad-hoc-event" },
-        {  "label": "Offer care services", "value": "offer-care-services" }
-      ]
-    },
-    {
-      "key": "will_continue_on",
+      "key": "licence_transaction_will_continue_on",
       "name": "Will continue on",
       "type": "text",
       "display_as_result_metadata": false,
       "filterable": false
     },
     {
-      "key": "continuation_link",
+      "key": "licence_transaction_continuation_link",
       "name": "Link to competent authority",
       "type": "text",
       "display_as_result_metadata": false,
       "filterable": false
     },
     {
-      "key": "licence_identifier",
+      "key": "licence_transaction_licence_identifier",
       "name": "Licence identifier",
       "type": "text",
       "display_as_result_metadata": false,

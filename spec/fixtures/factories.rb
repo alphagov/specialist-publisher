@@ -451,11 +451,10 @@ FactoryBot.define do
     transient do
       default_metadata do
         {
-          "country" => %w[england],
-          "sector" => %w[catering-and-accomodation],
-          "activity" => %w[hold-an-ad-hoc-event],
-          "continuation_link" => "https://www.gov.uk",
-          "will_continue_on" => "GOV.UK",
+          "licence_transaction_continuation_link" => "https://www.gov.uk",
+          "licence_transaction_industry" => %w[catering-and-accomodation],
+          "licence_transaction_location" => %w[england],
+          "licence_transaction_will_continue_on" => "GOV.UK",
         }
       end
     end

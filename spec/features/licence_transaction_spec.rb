@@ -42,9 +42,8 @@ RSpec.feature "Creating a Licence", type: :feature do
     fill_in "Title", with: "Example licence"
     fill_in "Summary", with: "This is the summary of a licence"
     fill_in "Body", with: "## Header#{"\n\nThis is the long body of a licence" * 2}"
-    select "England", from: "Country"
-    select "Education", from: "Sector"
-    select "Use CCTV systems", from: "Activity"
+    select "England", from: "Location"
+    select "Education", from: "Industry"
     fill_in "Continuation link", with: "https://www.gov.uk"
     fill_in "Will continue on", with: "on GOV.UK"
 
