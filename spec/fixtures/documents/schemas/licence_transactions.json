@@ -47,7 +47,48 @@
       "show_option_select_filter": true,
       "display_as_result_metadata": false,
       "filterable": true,
-      "allowed_values": []
+      "allowed_values": [
+        {
+          "label": "Accommodation",
+          "value": "accommodation"
+        },
+        {
+          "label": "Adult and other education",
+          "value": "adult-and-other-education"
+        },
+        {
+          "label": "Advertising and marketing services",
+          "value": "advertising-and-marketing-services"
+        },
+        {
+          "label": "Agricultural materials wholesale",
+          "value": "agricultural-materials-wholesale"
+        },
+        {
+          "label": "Agriculture",
+          "value": "agriculture"
+        },
+        {
+          "label": "Architectural and other building services",
+          "value": "architectural-and-other-building-services"
+        },
+        {
+          "label": "Arts and entertainment",
+          "value": "arts-and-entertainment"
+        },
+        {
+          "label": "Arts, antiques and second-hand goods retail",
+          "value": "arts-antiques-and-second-hand-goods-retail"
+        },
+        {
+          "label": "Arts, sports and recreation goods manufacturing",
+          "value": "arts-sports-and-recreation-goods-manufacturing"
+        },
+        {
+          "label": "Arts, sports and recreation goods wholesale",
+          "value": "arts-sports-and-recreation-goods-wholesale"
+        }
+      ]
     },
     {
       "key": "licence_transaction_will_continue_on",
