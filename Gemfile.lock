@@ -77,6 +77,8 @@ GEM
       rack (>= 0.9.0)
     binding_of_caller (1.0.0)
       debug_inspector (>= 0.0.1)
+    bootsnap (1.15.0)
+      msgpack (~> 1.2)
     bootstrap-kaminari-views (0.0.5)
       kaminari (>= 0.13)
       rails (>= 3.1)
@@ -274,6 +276,7 @@ GEM
       activemodel (>= 5.1, < 7.1, != 7.0.0)
       mongo (>= 2.18.0, < 3.0.0)
       ruby2_keywords (~> 0.0.5)
+    msgpack (1.6.0)
     multi_json (1.15.0)
     multi_xml (0.6.0)
     net-imap (0.3.4)
@@ -528,6 +531,7 @@ PLATFORMS
 DEPENDENCIES
   better_errors
   binding_of_caller
+  bootsnap
   bootstrap-kaminari-views
   capybara-select-2
   database_cleaner-mongoid
