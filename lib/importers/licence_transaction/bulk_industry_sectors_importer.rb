@@ -12,6 +12,8 @@ module Importers
         update_industry_sectors_in_schema(imported_json_data)
       end
 
+    private
+
       def imported_json_data
         lines = File.new(data_file_path).readlines(chomp: true)
         formatted = lines.map do |line|
@@ -32,8 +34,6 @@ module Importers
 
         File.write(schema_file_path, JSON.dump(schema))
       end
-
-    private
 
       def file_path
         Rails.root.join("lib/data/licence_transaction/industry_sectors.txt")
