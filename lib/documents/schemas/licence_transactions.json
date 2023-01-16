@@ -4,6 +4,7 @@
   "base_path": "/find-licences",
   "format_name": "Find and apply for licences",
   "name": "Find a licence",
+  "default_order": "title",
   "filter": {
     "format": "licence_transaction"
   },
