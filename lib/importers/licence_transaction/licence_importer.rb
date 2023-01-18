@@ -31,6 +31,11 @@ module Importers
             next
           end
 
+          if new_licence_already_imported?(new_licence.base_path)
+            puts "Skipping as licence: #{new_licence.base_path} is already imported"
+            next
+          end
+
           new_content_id = new_licence.content_id
 
           save_draft(new_licence)
@@ -44,6 +49,22 @@ module Importers
       end
 
     private
+
+      def new_licence_already_imported?(new_licence_base_path)
+        previously_imported_licence_base_paths.include?(new_licence_base_path)
+      end
+
+      def previously_imported_licences
+        Services.publishing_api.get_content_items(
+          document_type: "licence_transaction", page: 1, per_page: 500, states: "published",
+        )["results"]
+      end
+
+      def previously_imported_licence_base_paths
+        @previously_imported_licence_base_paths ||= previously_imported_licences.map do |licence|
+          licence["base_path"]
+        end
+      end
 
       def common_licences_path
         Rails.root.join("lib/data/licence_transaction/common_licence_identifiers.txt")

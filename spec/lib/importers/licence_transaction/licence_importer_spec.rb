@@ -20,6 +20,10 @@ RSpec.describe Importers::LicenceTransaction::LicenceImporter do
       stub_publishing_api_has_links(
         { content_id: "46044b4d-a41b-42c1-882d-8d03e65f24cd", links: publising_api_get_links_response },
       )
+      stub_publishing_api_has_content(
+        [],
+        { document_type: "licence_transaction", page: 1, per_page: 500, states: "published" },
+      )
     end
 
     it "migrates the licence" do
@@ -57,6 +61,24 @@ RSpec.describe Importers::LicenceTransaction::LicenceImporter do
     end
   end
 
+  context "when a licence is already imported" do
+    before do
+      stub_publishing_api_has_content(
+        publishing_api_existing_licences_response,
+        { document_type: "licence_transaction", page: 1, per_page: 500, states: "published" },
+      )
+    end
+
+    it "doesn't migrate the licence" do
+      expect { described_class.new.call }
+        .to output(already_imported_licence_message).to_stdout
+
+      expect(stub_any_publishing_api_put_content).to_not have_been_requested
+      expect(stub_any_publishing_api_patch_links).to_not have_been_requested
+      expect(stub_any_publishing_api_publish).to_not have_been_requested
+    end
+  end
+
   context "when a licence isn't present in the common licences list" do
     let(:publishing_api_response) do
       publishing_api_licences_response.tap do |licences|
@@ -79,6 +101,10 @@ RSpec.describe Importers::LicenceTransaction::LicenceImporter do
 
   def successful_import_message
     "Published: /find-licences/art-therapist-registration\n"
+  end
+
+  def already_imported_licence_message
+    "Skipping as licence: /find-licences/art-therapist-registration is already imported\n"
   end
 
   def expected_put_content_payload
@@ -183,6 +209,64 @@ RSpec.describe Importers::LicenceTransaction::LicenceImporter do
         "updated_at" => "2017-08-31T12:27:39Z",
         "state_history" => { "4" => "superseded", "7" => "superseded", "1" => "superseded", "3" => "superseded", "9" => "published", "5" => "superseded", "2" => "superseded", "8" => "superseded", "6" => "superseded" },
         "links" => {},
+      },
+    ]
+  end
+
+  def publishing_api_existing_licences_response
+    [
+      {
+        "auth_bypass_ids" => [],
+        "base_path" => "/find-licences/art-therapist-registration",
+        "content_store" => "live",
+        "description" => "You need to register with the Health and Care Professions Council (HCPC) to practise as an art therapist in the UK",
+        "details" => {
+          "body" => [
+            {
+              "content" => "$!You must register with the Health and Care Professions Council (HCPC) to practise as an art therapist in the UK.$!\r\n\r\nYou must be registered with HCPC to use any of these job titles:\r\n\r\n* art therapist\r\n* art psychotherapist\r\n* drama therapist\r\n* music therapist\r\n\r\n##Fines and penalties\r\n\r\n%You could be fined up to £5,000 if you call yourself an art therapist, art psychotherapist, drama therapist, or music therapist and you're not registered with the HCPC.%\r\n\r\n*[HCPC]: Health and Care Professions Council",
+              "content_type" => "text/govspeak",
+            },
+          ],
+          "headers" => [
+            {
+              "id" => "fines-and-penalties", "text" => "Fines and penalties", "level" => 2
+            },
+          ],
+          "metadata" => {
+            "licence_transaction_will_continue_on" => "the Health and Care Professions Council (HCPC) website",
+            "licence_transaction_continuation_link" => "http://www.hpc-uk.org/apply",
+            "licence_transaction_licence_identifier" => "9150-7-1",
+          },
+          "max_cache_time" => 10,
+          "temporary_update_type" => false,
+        },
+        "document_type" => "licence_transaction",
+        "first_published_at" => "2023-01-18T17:28:50Z",
+        "last_edited_at" => "2023-01-18T17:42:02Z",
+        "phase" => "live",
+        "public_updated_at" => "2023-01-18T17:28:50Z",
+        "published_at" => "2023-01-18T17:43:46Z",
+        "publishing_app" => "specialist-publisher",
+        "publishing_api_first_published_at" => "2023-01-18T17:28:50Z",
+        "publishing_api_last_edited_at" => "2023-01-18T17:42:02Z",
+        "redirects" => [],
+        "rendering_app" => "frontend",
+        "routes" => [
+          {
+            "path" => "/find-licences/art-therapist-registration", "type" => "prefix"
+          },
+        ],
+        "schema_name" => "specialist_document",
+        "title" => "Art therapist registration",
+        "user_facing_version" => 1,
+        "update_type" => "minor",
+        "publication_state" => "published",
+        "content_id" => "64cbffc0-553a-48cd-8adc-faf2cb080d01",
+        "locale" => "en",
+        "lock_version" => 1,
+        "updated_at" => "2023-01-18T17:43:46Z",
+        "state_history" => { "1" => "published" },
+        "links" => { "finder" => %w[b8327c0c-a90d-47b6-992b-ea226b4d3306] },
       },
     ]
   end
