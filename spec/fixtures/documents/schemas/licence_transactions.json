@@ -1,0 +1,115 @@
+{
+  "pre_production": true,
+  "content_id": "b8327c0c-a90d-47b6-992b-ea226b4d3306",
+  "base_path": "/find-licences",
+  "format_name": "Find and apply for licences",
+  "name": "Find a licence",
+  "filter": {
+    "format": "licence_transaction"
+  },
+  "show_summaries": true,
+  "organisations": [
+    "af07d5a5-df63-4ddc-9383-6a666845ebe9"
+  ],
+  "document_noun": "licence",
+  "facets": [
+    {
+      "key": "licence_transaction_location",
+      "name": "Location",
+      "type": "text",
+      "preposition": "In",
+      "display_as_result_metadata": false,
+      "filterable": true,
+      "allowed_values": [
+        {
+          "label": "England",
+          "value": "england"
+        },
+        {
+          "label": "Wales",
+          "value": "wales"
+        },
+        {
+          "label": "Scotland",
+          "value": "scotland"
+        },
+        {
+          "label": "Northern Ireland",
+          "value": "northern-ireland"
+        }
+      ]
+    },
+    {
+      "key": "licence_transaction_industry",
+      "name": "Industry",
+      "type": "text",
+      "preposition": "For",
+      "show_option_select_filter": true,
+      "display_as_result_metadata": false,
+      "filterable": true,
+      "allowed_values": [
+        {
+          "label": "Accommodation",
+          "value": "accommodation"
+        },
+        {
+          "label": "Adult and other education",
+          "value": "adult-and-other-education"
+        },
+        {
+          "label": "Advertising and marketing services",
+          "value": "advertising-and-marketing-services"
+        },
+        {
+          "label": "Agricultural materials wholesale",
+          "value": "agricultural-materials-wholesale"
+        },
+        {
+          "label": "Agriculture",
+          "value": "agriculture"
+        },
+        {
+          "label": "Architectural and other building services",
+          "value": "architectural-and-other-building-services"
+        },
+        {
+          "label": "Arts and entertainment",
+          "value": "arts-and-entertainment"
+        },
+        {
+          "label": "Arts, antiques and second-hand goods retail",
+          "value": "arts-antiques-and-second-hand-goods-retail"
+        },
+        {
+          "label": "Arts, sports and recreation goods manufacturing",
+          "value": "arts-sports-and-recreation-goods-manufacturing"
+        },
+        {
+          "label": "Arts, sports and recreation goods wholesale",
+          "value": "arts-sports-and-recreation-goods-wholesale"
+        }
+      ]
+    },
+    {
+      "key": "licence_transaction_will_continue_on",
+      "name": "Will continue on",
+      "type": "text",
+      "display_as_result_metadata": false,
+      "filterable": false
+    },
+    {
+      "key": "licence_transaction_continuation_link",
+      "name": "Link to competent authority",
+      "type": "text",
+      "display_as_result_metadata": false,
+      "filterable": false
+    },
+    {
+      "key": "licence_transaction_licence_identifier",
+      "name": "Licence identifier",
+      "type": "text",
+      "display_as_result_metadata": false,
+      "filterable": false
+    }
+  ]
+}

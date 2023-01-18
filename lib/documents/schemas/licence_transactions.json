@@ -9,7 +9,9 @@
     "format": "licence_transaction"
   },
   "show_summaries": true,
-  "organisations": ["af07d5a5-df63-4ddc-9383-6a666845ebe9"],
+  "organisations": [
+    "af07d5a5-df63-4ddc-9383-6a666845ebe9"
+  ],
   "document_noun": "licence",
   "facets": [
     {
@@ -20,10 +22,22 @@
       "display_as_result_metadata": false,
       "filterable": true,
       "allowed_values": [
-        { "label": "England", "value": "england" },
-        { "label": "Wales", "value": "wales" },
-        { "label": "Scotland", "value": "scotland" },
-        { "label": "Northern Ireland", "value": "northern-ireland" }
+        {
+          "label": "England",
+          "value": "england"
+        },
+        {
+          "label": "Wales",
+          "value": "wales"
+        },
+        {
+          "label": "Scotland",
+          "value": "scotland"
+        },
+        {
+          "label": "Northern Ireland",
+          "value": "northern-ireland"
+        }
       ]
     },
     {
@@ -35,20 +49,306 @@
       "display_as_result_metadata": false,
       "filterable": true,
       "allowed_values": [
-        { "label": "Agriculture, forestry and fishing", "value": "agriculture-forestry-fishing" },
-        { "label": "Arts, sports and recreation", "value": "arts-sports-and-recreation" },
-        { "label": "Catering and accommodation", "value": "catering-and-accomodation" },
-        { "label": "Construction", "value": "construction" },
-        { "label": "Education", "value": "education" },
-        { "label": "Health and social care services", "value": "health-and-social-care-services" },
-        { "label": "IT and telecommunications services", "value": "it-and-telecommunications-services" },
-        { "label": "Manufacturing", "value": "manufacturing" },
-        { "label": "Media and creative services", "value": "media-and-creative-services" },
-        { "label": "Mining, energy and utilities", "value": "mining-energy-utilities" },
-        { "label": "Personal services", "value": "personal-services" },
-        { "label": "Professional and business services", "value": "professional-and-business-services" },
-        { "label": "Retail, hire and repair", "value": "retail-hire-and-repair" },
-        { "label": "Wholesale", "value": "wholesale" }
+        {
+          "label": "Accommodation",
+          "value": "accommodation"
+        },
+        {
+          "label": "Adult and other education",
+          "value": "adult-and-other-education"
+        },
+        {
+          "label": "Advertising and marketing services",
+          "value": "advertising-and-marketing-services"
+        },
+        {
+          "label": "Agricultural materials wholesale",
+          "value": "agricultural-materials-wholesale"
+        },
+        {
+          "label": "Agriculture",
+          "value": "agriculture"
+        },
+        {
+          "label": "Architectural and other building services",
+          "value": "architectural-and-other-building-services"
+        },
+        {
+          "label": "Arts and entertainment",
+          "value": "arts-and-entertainment"
+        },
+        {
+          "label": "Arts, antiques and second-hand goods retail",
+          "value": "arts-antiques-and-second-hand-goods-retail"
+        },
+        {
+          "label": "Arts, sports and recreation goods manufacturing",
+          "value": "arts-sports-and-recreation-goods-manufacturing"
+        },
+        {
+          "label": "Arts, sports and recreation goods wholesale",
+          "value": "arts-sports-and-recreation-goods-wholesale"
+        },
+        {
+          "label": "Bars",
+          "value": "bars"
+        },
+        {
+          "label": "Books, stationery and gifts retail",
+          "value": "books-stationery-and-gifts-retail"
+        },
+        {
+          "label": "Books, stationery and gifts wholesale",
+          "value": "books-stationery-and-gifts-wholesale"
+        },
+        {
+          "label": "Building construction",
+          "value": "building-construction"
+        },
+        {
+          "label": "Building materials and hardware wholesale",
+          "value": "building-materials-and-hardware-wholesale"
+        },
+        {
+          "label": "Building materials manufacturing",
+          "value": "building-materials-manufacturing"
+        },
+        {
+          "label": "Building trades",
+          "value": "building-trades"
+        },
+        {
+          "label": "Business support services",
+          "value": "business-support-services"
+        },
+        {
+          "label": "Catering",
+          "value": "catering"
+        },
+        {
+          "label": "Chemical and petroleum products manufacturing",
+          "value": "chemical-and-petroleum-products-manufacturing"
+        },
+        {
+          "label": "Clothing, footwear and accessories manufacturing",
+          "value": "clothing-footwear-and-accessories-manufacturing"
+        },
+        {
+          "label": "Clothing, footwear and accessories retail, hire and repair",
+          "value": "clothing-footwear-and-accessories-retail-hire-and-repair"
+        },
+        {
+          "label": "Clothing, footwear and accessories wholesale",
+          "value": "clothing-footwear-and-accessories-wholesale"
+        },
+        {
+          "label": "Complementary therapy services",
+          "value": "complementary-therapy-services"
+        },
+        {
+          "label": "Computer services",
+          "value": "computer-services"
+        },
+        {
+          "label": "Cosmetics, medicinal and chemical products wholesale",
+          "value": "cosmetics-medicinal-and-chemical-products-wholesale"
+        },
+        {
+          "label": "Design and photographic services",
+          "value": "design-and-photographic-services"
+        },
+        {
+          "label": "Electric and electronic appliance retail, hire and repair",
+          "value": "electric-and-electronic-appliance-retail-hire-and-repair"
+        },
+        {
+          "label": "Electric and electronic equipment wholesale",
+          "value": "electric-and-electronic-equipment-wholesale"
+        },
+        {
+          "label": "Electrical equipment manufacturing",
+          "value": "electrical-equipment-manufacturing"
+        },
+        {
+          "label": "Electronic equipment and computer manufacturing",
+          "value": "electronic-equipment-and-computer-manufacturing"
+        },
+        {
+          "label": "Energy utilities",
+          "value": "energy-utilities"
+        },
+        {
+          "label": "Film production and distribution",
+          "value": "film-production-and-distribution"
+        },
+        {
+          "label": "Financial services",
+          "value": "financial-services"
+        },
+        {
+          "label": "Fishing and hunting",
+          "value": "fishing-and-hunting"
+        },
+        {
+          "label": "Food, drink and tobacco manufacturing",
+          "value": "food-drink-and-tobacco-manufacturing"
+        },
+        {
+          "label": "Food, drink and tobacco retail",
+          "value": "food-drink-and-tobacco-retail"
+        },
+        {
+          "label": "Food, drink and tobacco wholesale",
+          "value": "food-drink-and-tobacco-wholesale"
+        },
+        {
+          "label": "Forestry",
+          "value": "forestry"
+        },
+        {
+          "label": "Formal education",
+          "value": "formal-education"
+        },
+        {
+          "label": "Gambling facilities operation",
+          "value": "gambling-facilities-operation"
+        },
+        {
+          "label": "Health services",
+          "value": "health-services"
+        },
+        {
+          "label": "Home and garden products retail, hire and repair",
+          "value": "home-and-garden-products-retail-hire-and-repair"
+        },
+        {
+          "label": "Internet services",
+          "value": "internet-services"
+        },
+        {
+          "label": "Jewellery, watch and clock manufacturing",
+          "value": "jewellery-watch-and-clock-manufacturing"
+        },
+        {
+          "label": "Jewellery, watch and clock retail and repair",
+          "value": "jewellery-watch-and-clock-retail-and-repair"
+        },
+        {
+          "label": "Jewellery, watches and clocks wholesale",
+          "value": "jewellery-watches-and-clocks-wholesale"
+        },
+        {
+          "label": "Legal services",
+          "value": "legal-services"
+        },
+        {
+          "label": "Machinery manufacturing",
+          "value": "machinery-manufacturing"
+        },
+        {
+          "label": "Machinery wholesale",
+          "value": "machinery-wholesale"
+        },
+        {
+          "label": "Management consultancy",
+          "value": "management-consultancy"
+        },
+        {
+          "label": "Metal and metal ores wholesale",
+          "value": "metal-and-metal-ores-wholesale"
+        },
+        {
+          "label": "Metal and metal products manufacturing",
+          "value": "metal-and-metal-products-manufacturing"
+        },
+        {
+          "label": "Mining and oil and gas extraction",
+          "value": "mining-and-oil-and-gas-extraction"
+        },
+        {
+          "label": "Motor vehicle and fuel retail, hire and repair",
+          "value": "motor-vehicle-and-fuel-retail-hire-and-repair"
+        },
+        {
+          "label": "Motor vehicle and parts wholesale",
+          "value": "motor-vehicle-and-parts-wholesale"
+        },
+        {
+          "label": "Music production and publishing",
+          "value": "music-production-and-publishing"
+        },
+        {
+          "label": "Non store retail",
+          "value": "non-store-retail"
+        },
+        {
+          "label": "Paper products manufacturing",
+          "value": "paper-products-manufacturing"
+        },
+        {
+          "label": "Personal care services",
+          "value": "personal-care-services"
+        },
+        {
+          "label": "Petroleum and fuel products wholesale",
+          "value": "petroleum-and-fuel-products-wholesale"
+        },
+        {
+          "label": "Pharmaceuticals, health and beauty products retail",
+          "value": "pharmaceuticals-health-and-beauty-products-retail"
+        },
+        {
+          "label": "Printing and printing support activities",
+          "value": "printing-and-printing-support-activities"
+        },
+        {
+          "label": "Publishing",
+          "value": "publishing"
+        },
+        {
+          "label": "Real estate services",
+          "value": "real-estate-services"
+        },
+        {
+          "label": "Social care services",
+          "value": "social-care-services"
+        },
+        {
+          "label": "Sports and recreation",
+          "value": "sports-and-recreation"
+        },
+        {
+          "label": "Sports and recreation goods retail, hire and repair",
+          "value": "sports-and-recreation-goods-retail-hire-and-repair"
+        },
+        {
+          "label": "Telecommunications services",
+          "value": "telecommunications-services"
+        },
+        {
+          "label": "Television and radio broadcasting",
+          "value": "television-and-radio-broadcasting"
+        },
+        {
+          "label": "Textiles and furniture manufacturing",
+          "value": "textiles-and-furniture-manufacturing"
+        },
+        {
+          "label": "Textiles, furniture and furnishings wholesale",
+          "value": "textiles-furniture-and-furnishings-wholesale"
+        },
+        {
+          "label": "Timber and timber products wholesale",
+          "value": "timber-and-timber-products-wholesale"
+        },
+        {
+          "label": "Vehicle manufacturing",
+          "value": "vehicle-manufacturing"
+        },
+        {
+          "label": "Waste management and environmental services",
+          "value": "waste-management-and-environmental-services"
+        }
       ]
     },
     {
