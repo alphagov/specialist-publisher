@@ -341,6 +341,10 @@ class Document
     }
   end
 
+  def route_type
+    "exact"
+  end
+
   def self.exportable?
     false
   end

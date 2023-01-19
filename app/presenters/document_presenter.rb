@@ -21,7 +21,7 @@ class DocumentPresenter
       routes: [
         {
           path: document.base_path,
-          type: "exact",
+          type: document.route_type,
         },
       ],
       redirects: [],
