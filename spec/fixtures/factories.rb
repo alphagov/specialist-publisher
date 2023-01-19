@@ -448,6 +448,15 @@ FactoryBot.define do
     base_path { "/find-licences/example-document" }
     document_type { "licence_transaction" }
 
+    routes do
+      [
+        {
+          "path" => base_path,
+          "type" => "prefix",
+        },
+      ]
+    end
+
     transient do
       default_metadata do
         {
