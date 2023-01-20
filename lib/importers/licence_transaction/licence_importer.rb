@@ -1,3 +1,6 @@
+require "uri"
+require "net/http"
+
 module Importers
   module LicenceTransaction
     class LicenceImporter
@@ -25,6 +28,8 @@ module Importers
           )
 
           new_licence.change_note = "Imported from Publisher"
+
+          tag_licence_facets(new_licence)
 
           unless new_licence.valid?
             puts "[ERROR] licence: #{new_licence.base_path} has validation errors: #{new_licence.errors.inspect}"
@@ -98,6 +103,32 @@ module Importers
 
       def publish(new_content_id)
         Services.publishing_api.publish(new_content_id, "republish", locale: "en")
+      end
+
+      def tag_licence_facets(licence)
+        facets = licence_facet_data(licence)
+
+        licence.licence_transaction_location = facets[:locations]
+        licence.licence_transaction_industry = facets[:industry_sectors]
+      end
+
+      def licence_facet_data(licence)
+        licence_finder_api_data.find do |datum|
+          datum[:licence_identifier] == licence.licence_transaction_licence_identifier
+        end
+      end
+
+      def licence_finder_api_data
+        @licence_finder_api_data ||= licence_finder_api_response.map(&:deep_symbolize_keys)
+      end
+
+      def licence_finder_api_response
+        response = Net::HTTP.get_response(licence_finder_api_url).body
+        JSON.parse(response)
+      end
+
+      def licence_finder_api_url
+        URI("#{Plek.website_root}/licence-finder/licences-api")
       end
     end
   end
