@@ -116,6 +116,10 @@ class Document
     truncate(@base_path, length: 250, omission: "")
   end
 
+  def rendering_app
+    "government-frontend"
+  end
+
   def document_type
     self.class.document_type
   end

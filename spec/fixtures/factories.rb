@@ -447,6 +447,7 @@ FactoryBot.define do
   factory :licence_transaction, parent: :document do
     base_path { "/find-licences/example-document" }
     document_type { "licence_transaction" }
+    rendering_app { "frontend" }
 
     routes do
       [
