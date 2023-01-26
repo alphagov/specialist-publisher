@@ -14,32 +14,6 @@
   "document_noun": "licence",
   "facets": [
     {
-      "key": "licence_transaction_location",
-      "name": "Location",
-      "type": "text",
-      "preposition": "In",
-      "display_as_result_metadata": false,
-      "filterable": true,
-      "allowed_values": [
-        {
-          "label": "England",
-          "value": "england"
-        },
-        {
-          "label": "Wales",
-          "value": "wales"
-        },
-        {
-          "label": "Scotland",
-          "value": "scotland"
-        },
-        {
-          "label": "Northern Ireland",
-          "value": "northern-ireland"
-        }
-      ]
-    },
-    {
       "key": "licence_transaction_industry",
       "name": "Industry",
       "type": "text",
@@ -87,6 +61,32 @@
         {
           "label": "Arts, sports and recreation goods wholesale",
           "value": "arts-sports-and-recreation-goods-wholesale"
+        }
+      ]
+    },
+    {
+      "key": "licence_transaction_location",
+      "name": "Location",
+      "type": "text",
+      "preposition": "In",
+      "display_as_result_metadata": false,
+      "filterable": true,
+      "allowed_values": [
+        {
+          "label": "England",
+          "value": "england"
+        },
+        {
+          "label": "Wales",
+          "value": "wales"
+        },
+        {
+          "label": "Scotland",
+          "value": "scotland"
+        },
+        {
+          "label": "Northern Ireland",
+          "value": "northern-ireland"
         }
       ]
     },
