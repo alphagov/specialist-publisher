@@ -19,7 +19,7 @@ class DocumentPublisher
       # normal email-alert-service path for sending email alerts.
       document_with_public_updated_at = document
       document_with_public_updated_at.public_updated_at = published_document.public_updated_at
-      EmailAlertApiWorker.perform_async(EmailAlertPresenter.new(document_with_public_updated_at).to_json)
+      EmailAlertApiWorker.perform_async(EmailAlertPresenter.new(document_with_public_updated_at).to_json.deep_stringify_keys)
     end
 
     if previously_unpublished?(document)

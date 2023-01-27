@@ -12,7 +12,7 @@ RSpec.describe EmailAlertApiWorker do
   end
 
   it "asynchronously sends a notification to email alert api" do
-    described_class.perform_async(some: "payload")
+    described_class.perform_async("some" => "payload")
 
     expect(described_class.jobs.size).to eq(1)
     described_class.drain
