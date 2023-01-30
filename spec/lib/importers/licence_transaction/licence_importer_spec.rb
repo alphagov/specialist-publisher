@@ -16,7 +16,7 @@ RSpec.describe Importers::LicenceTransaction::LicenceImporter do
     )
 
     stub_request(:get, "#{Plek.website_root}/licence-finder/licences-api")
-      .to_return(status: 200, body: licence_finder_api_response.to_json)
+      .to_return(status: 200, body: [].to_json)
   end
 
   context "when a licence is valid" do
@@ -134,8 +134,6 @@ RSpec.describe Importers::LicenceTransaction::LicenceImporter do
           licence_transaction_continuation_link: "http://www.hpc-uk.org/apply",
           licence_transaction_licence_identifier: licence_identifier,
           licence_transaction_will_continue_on: "the Health and Care Professions Council (HCPC) website",
-          licence_transaction_industry: %w[arts-and-entertainment accommodation],
-          licence_transaction_location: %w[england wales scotland northern-ireland],
         },
         max_cache_time: 10,
         temporary_update_type: false,
@@ -273,24 +271,6 @@ RSpec.describe Importers::LicenceTransaction::LicenceImporter do
         "updated_at" => "2023-01-18T17:43:46Z",
         "state_history" => { "1" => "published" },
         "links" => { "finder" => %w[b8327c0c-a90d-47b6-992b-ea226b4d3306] },
-      },
-    ]
-  end
-
-  def licence_finder_api_response
-    [
-      {
-        "licence_identifier": licence_identifier,
-        "locations": %w[
-          england
-          wales
-          scotland
-          northern-ireland
-        ],
-        "industry_sectors": %w[
-          arts-and-entertainment
-          accommodation
-        ],
       },
     ]
   end
