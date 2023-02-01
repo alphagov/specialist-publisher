@@ -56,10 +56,6 @@
           "value": "accommodation"
         },
         {
-          "label": "Tutoring, training and coaching",
-          "value": "adult-and-other-education"
-        },
-        {
           "label": "Advertising and marketing",
           "value": "advertising-and-marketing-services"
         },
@@ -76,12 +72,12 @@
           "value": "architectural-and-other-building-services"
         },
         {
-          "label": "Arts and entertainment",
-          "value": "arts-and-entertainment"
-        },
-        {
           "label": "Art, antique and second-hand retail",
           "value": "arts-antiques-and-second-hand-goods-retail"
+        },
+        {
+          "label": "Arts and entertainment",
+          "value": "arts-and-entertainment"
         },
         {
           "label": "Arts, sports and toy manufacturing",
@@ -92,8 +88,8 @@
           "value": "arts-sports-and-recreation-goods-wholesale"
         },
         {
-          "label": "Pubs, bars and nightclubs",
-          "value": "bars"
+          "label": "Beauty and spa treatments including tattooing and piercing",
+          "value": "personal-care-services"
         },
         {
           "label": "Book, stationery and gift retail",
@@ -102,10 +98,6 @@
         {
           "label": "Book, stationery and gift wholesale",
           "value": "books-stationery-and-gifts-wholesale"
-        },
-        {
-          "label": "Civil engineering and building construction",
-          "value": "building-construction"
         },
         {
           "label": "Building materials and hardware wholesale",
@@ -124,12 +116,16 @@
           "value": "business-support-services"
         },
         {
-          "label": "Restaurants, takeaways, cafes and catering",
-          "value": "catering"
+          "label": "Car and vehicle manufacturing",
+          "value": "vehicle-manufacturing"
         },
         {
           "label": "Chemical and petroleum products manufacturing",
           "value": "chemical-and-petroleum-products-manufacturing"
+        },
+        {
+          "label": "Civil engineering and building construction",
+          "value": "building-construction"
         },
         {
           "label": "Clothing, footwear and accessories manufacturing",
@@ -146,10 +142,6 @@
         {
           "label": "Complementary therapies including acupuncture and osteopathy",
           "value": "complementary-therapy-services"
-        },
-        {
-          "label": "Technology and IT",
-          "value": "computer-services"
         },
         {
           "label": "Cosmetics, medicinal and chemical products wholesale",
@@ -172,12 +164,12 @@
           "value": "electrical-equipment-manufacturing"
         },
         {
-          "label": "Electronic equipment and computer manufacturing",
-          "value": "electronic-equipment-and-computer-manufacturing"
-        },
-        {
           "label": "Electricity, gas or water supply",
           "value": "energy-utilities"
+        },
+        {
+          "label": "Electronic equipment and computer manufacturing",
+          "value": "electronic-equipment-and-computer-manufacturing"
         },
         {
           "label": "Film production and distribution",
@@ -192,10 +184,6 @@
           "value": "fishing-and-hunting"
         },
         {
-          "label": "Food, drink, supplements and tobacco manufacturing",
-          "value": "food-drink-and-tobacco-manufacturing"
-        },
-        {
           "label": "Food, drink and tobacco retail",
           "value": "food-drink-and-tobacco-retail"
         },
@@ -204,12 +192,12 @@
           "value": "food-drink-and-tobacco-wholesale"
         },
         {
-          "label": "Forestry and logging",
-          "value": "forestry"
+          "label": "Food, drink, supplements and tobacco manufacturing",
+          "value": "food-drink-and-tobacco-manufacturing"
         },
         {
-          "label": "Primary and secondary schools",
-          "value": "formal-education"
+          "label": "Forestry and logging",
+          "value": "forestry"
         },
         {
           "label": "Gambling including arcades and bingo",
@@ -240,6 +228,10 @@
           "value": "jewellery-watches-and-clocks-wholesale"
         },
         {
+          "label": "Land and property",
+          "value": "real-estate-services"
+        },
+        {
           "label": "Law",
           "value": "legal-services"
         },
@@ -268,14 +260,6 @@
           "value": "mining-and-oil-and-gas-extraction"
         },
         {
-          "label": "Vehicle and fuel retail, hire and repair",
-          "value": "motor-vehicle-and-fuel-retail-hire-and-repair"
-        },
-        {
-          "label": "Vehicle and parts wholesale",
-          "value": "motor-vehicle-and-parts-wholesale"
-        },
-        {
           "label": "Music production and distribution ",
           "value": "music-production-and-publishing"
         },
@@ -288,16 +272,16 @@
           "value": "paper-products-manufacturing"
         },
         {
-          "label": "Beauty and spa treatments including tattooing and piercing",
-          "value": "personal-care-services"
-        },
-        {
           "label": "Petroleum and fuel products wholesale",
           "value": "petroleum-and-fuel-products-wholesale"
         },
         {
           "label": "Pharmaceuticals, health and beauty products retail",
           "value": "pharmaceuticals-health-and-beauty-products-retail"
+        },
+        {
+          "label": "Primary and secondary schools",
+          "value": "formal-education"
         },
         {
           "label": "Printing",
@@ -308,28 +292,36 @@
           "value": "publishing"
         },
         {
-          "label": "Land and property",
-          "value": "real-estate-services"
+          "label": "Pubs, bars and nightclubs",
+          "value": "bars"
+        },
+        {
+          "label": "Restaurants, takeaways, cafes and catering",
+          "value": "catering"
         },
         {
           "label": "Social care and childcare",
           "value": "social-care-services"
         },
         {
-          "label": "Sports, gyms and leisure",
-          "value": "sports-and-recreation"
-        },
-        {
           "label": "Sports and leisure product retail, hire and repair",
           "value": "sports-and-recreation-goods-retail-hire-and-repair"
         },
         {
-          "label": "Telecommunications",
-          "value": "telecommunications-services"
+          "label": "Sports, gyms and leisure",
+          "value": "sports-and-recreation"
         },
         {
           "label": "TV and radio broadcasting",
           "value": "television-and-radio-broadcasting"
+        },
+        {
+          "label": "Technology and IT",
+          "value": "computer-services"
+        },
+        {
+          "label": "Telecommunications",
+          "value": "telecommunications-services"
         },
         {
           "label": "Textiles and furniture manufacturing",
@@ -344,8 +336,16 @@
           "value": "timber-and-timber-products-wholesale"
         },
         {
-          "label": "Car and vehicle manufacturing",
-          "value": "vehicle-manufacturing"
+          "label": "Tutoring, training and coaching",
+          "value": "adult-and-other-education"
+        },
+        {
+          "label": "Vehicle and fuel retail, hire and repair",
+          "value": "motor-vehicle-and-fuel-retail-hire-and-repair"
+        },
+        {
+          "label": "Vehicle and parts wholesale",
+          "value": "motor-vehicle-and-parts-wholesale"
         },
         {
           "label": "Waste, recycling and environment ",
