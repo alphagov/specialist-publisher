@@ -11,11 +11,9 @@ module ResearchForDevelopmentOutputsHelper
   # as 'unreviewed' means nothing), this is where the backend gets its values.
   #
   def review_status_options
-    # rubocop:disable Style/WordArray
     [
       ["Unreviewed",    "unreviewed"],
       ["Peer reviewed", "peer_reviewed"],
     ]
-    # rubocop:enable Style/WordArray
   end
 end
