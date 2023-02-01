@@ -1,4 +1,19 @@
 <%# You can select multiple class or categories so this has multi-select option %>
+<%= render layout: "shared/form_group", locals: { f: f, field: :licence_transaction_industry, label: "Industry" } do %>
+  <%= f.select :licence_transaction_industry,
+      f.object.facet_options(:licence_transaction_industry),
+      { label: "Industry" },
+      {
+        class: 'select2 form-control',
+        multiple: true,
+        data: {
+          placeholder: 'Select industries'
+        }
+      }
+  %>
+<% end %>
+
+<%# You can select multiple class or categories so this has multi-select option %>
 <%= render layout: "shared/form_group", locals: { f: f, field: :licence_transaction_location, label: "Location" } do %>
   <%= f.select :licence_transaction_location,
       f.object.facet_options(:licence_transaction_location),
@@ -13,20 +28,6 @@
   %>
 <% end %>
 
-<%# You can select multiple class or categories so this has multi-select option %>
-<%= render layout: "shared/form_group", locals: { f: f, field: :licence_transaction_industry, label: "Industry" } do %>
-  <%= f.select :licence_transaction_industry,
-      f.object.facet_options(:licence_transaction_industry),
-      { label: "Industry" },
-      {
-        class: 'select2 form-control',
-        multiple: true,
-        data: {
-          placeholder: 'Select industries'
-        }
-      }
-  %>
-<% end %>
 
 <%= render layout: "shared/form_group", locals: { f: f, field: :licence_transaction_will_continue_on, label: "Will continue on" } do %>
   <%= f.text_field :licence_transaction_will_continue_on, class: 'form-control' %>
