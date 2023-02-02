@@ -5,6 +5,7 @@ require "importers/licence_transaction/licence_importer"
 RSpec.describe Importers::LicenceTransaction::LicenceImporter do
   let(:new_content_id) { "0cc89dd8-1055-4e6b-8f64-9a772dbe28db" }
   let(:publishing_api_response) { publishing_api_licences_response }
+  let(:licence_identifier) { "9150-7-1" }
 
   before do
     allow(SecureRandom).to receive(:uuid).and_return(new_content_id)
@@ -13,6 +14,9 @@ RSpec.describe Importers::LicenceTransaction::LicenceImporter do
       publishing_api_response,
       { document_type: "licence", page: 1, per_page: 500, states: "published" },
     )
+
+    stub_request(:get, "#{Plek.website_root}/licence-finder/licences-api")
+      .to_return(status: 200, body: [].to_json)
   end
 
   context "when a licence is valid" do
@@ -128,7 +132,7 @@ RSpec.describe Importers::LicenceTransaction::LicenceImporter do
         ],
         metadata: {
           licence_transaction_continuation_link: "http://www.hpc-uk.org/apply",
-          licence_transaction_licence_identifier: "9150-7-1",
+          licence_transaction_licence_identifier: licence_identifier,
           licence_transaction_will_continue_on: "the Health and Care Professions Council (HCPC) website",
         },
         max_cache_time: 10,
@@ -183,7 +187,7 @@ RSpec.describe Importers::LicenceTransaction::LicenceImporter do
           }],
           "will_continue_on" => "the Health and Care Professions Council (HCPC) website",
           "continuation_link" => "http://www.hpc-uk.org/apply",
-          "licence_identifier" => "9150-7-1",
+          "licence_identifier" => licence_identifier,
           "external_related_links" => [],
           "licence_short_description" => "Register as an art therapist with the Health and Care Professions Council (HCPC).",
         },
@@ -235,7 +239,7 @@ RSpec.describe Importers::LicenceTransaction::LicenceImporter do
           "metadata" => {
             "licence_transaction_will_continue_on" => "the Health and Care Professions Council (HCPC) website",
             "licence_transaction_continuation_link" => "http://www.hpc-uk.org/apply",
-            "licence_transaction_licence_identifier" => "9150-7-1",
+            "licence_transaction_licence_identifier" => licence_identifier,
           },
           "max_cache_time" => 10,
           "temporary_update_type" => false,

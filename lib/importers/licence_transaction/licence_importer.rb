@@ -1,3 +1,5 @@
+require "importers/licence_transaction/facet_tagger"
+
 module Importers
   module LicenceTransaction
     class LicenceImporter
@@ -25,6 +27,8 @@ module Importers
           )
 
           new_licence.change_note = "Imported from Publisher"
+
+          tag_licence_facets(new_licence)
 
           unless new_licence.valid?
             puts "[ERROR] licence: #{new_licence.base_path} has validation errors: #{new_licence.errors.inspect}"
@@ -98,6 +102,10 @@ module Importers
 
       def publish(new_content_id)
         Services.publishing_api.publish(new_content_id, "republish", locale: "en")
+      end
+
+      def tag_licence_facets(licence)
+        FacetTagger.new(licence).tag
       end
     end
   end

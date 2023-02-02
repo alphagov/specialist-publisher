@@ -718,4 +718,9 @@ FactoryBot.define do
       end
     end
   end
+
+  factory :licence_transaction_model, class: LicenceTransaction do
+    base_path { "/find-licences/example-document" }
+    title { "Example Licence" }
+  end
 end
