@@ -28,8 +28,10 @@ module Importers
       end
 
       def licence_finder_api_response
-        response = Net::HTTP.get_response(licence_finder_api_url).body
-        JSON.parse(response)
+        Rails.cache.fetch(licence_finder_api_url, expires: 1.hour) do
+          response = Net::HTTP.get_response(licence_finder_api_url).body
+          JSON.parse(response)
+        end
       end
 
       def licence_finder_api_url
