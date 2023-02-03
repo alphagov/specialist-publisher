@@ -1,0 +1,76 @@
+ORIGINAL|NEW
+Accommodation|Accommodation including hotels, holiday homes and campsites
+Adult and other education|Tutoring, training and coaching
+Advertising and marketing services|Advertising and marketing
+Agricultural materials wholesale|Agricultural product wholesale
+Agriculture|
+Architectural and other building services|Architecture, building and planning
+Arts and entertainment|
+Arts, antiques and second-hand goods retail|Art, antique and second-hand retail
+Arts, sports and recreation goods manufacturing|Arts, sports and toy manufacturing
+Arts, sports and recreation goods wholesale|Arts, sports and toy wholesale
+Bars|Pubs, bars and nightclubs
+Books, stationery and gifts retail|Book, stationery and gift retail
+Books, stationery and gifts wholesale|Book, stationery and gift wholesale
+Building construction|Civil engineering and building construction
+Building materials and hardware wholesale|
+Building materials manufacturing|
+Building trades|Building trades including brick laying, plastering and plumbing
+Business support services|Business support including cleaning, security, recruitment and events
+Catering|Restaurants, takeaways, cafes and catering
+Chemical and petroleum products manufacturing|
+Clothing, footwear and accessories manufacturing|
+Clothing, footwear and accessories retail, hire and repair|Clothing, shoe and accessory retail, hire and repair
+Clothing, footwear and accessories wholesale|Clothing, shoe and accessory wholesale
+Complementary therapy services|Complementary therapies including acupuncture and osteopathy
+Computer services|Technology and IT
+Cosmetics, medicinal and chemical products wholesale|
+Design and photographic services|Design and photography
+Electric and electronic appliance retail, hire and repair|Electric equipment wholesale
+Electric and electronic equipment wholesale|
+Electrical equipment manufacturing|
+Electronic equipment and computer manufacturing|
+Energy utilities|Electricity, gas or water supply
+Film production and distribution|
+Financial services|Finance
+Fishing and hunting|
+Food, drink and tobacco manufacturing|Food, drink, supplements and tobacco manufacturing
+Food, drink and tobacco retail|
+Food, drink and tobacco wholesale|
+Forestry|Forestry and logging
+Formal education|Primary and secondary schools
+Gambling facilities operation|Gambling including arcades and bingo
+Health services|Healthcare and veterinary care
+Home and garden products retail, hire and repair|
+Internet services|Internet and websites
+Jewellery, watch and clock manufacturing|
+Jewellery, watch and clock retail and repair|
+Jewellery, watches and clocks wholesale|
+Legal services|Law
+Machinery manufacturing|
+Machinery wholesale|
+Management consultancy|
+Metal and metal ores wholesale|
+Metal and metal products manufacturing|
+Mining and oil and gas extraction|Mining, oil or gas extraction
+Motor vehicle and fuel retail, hire and repair|Vehicle and fuel retail, hire and repair
+Motor vehicle and parts wholesale|Vehicle and parts wholesale
+Music production and publishing|Music production and distribution
+Non store retail|Online retail and streeting trading
+Paper products manufacturing|Paper and packaging manufacturing
+Personal care services|Beauty and spa treatments including tattooing and piercing
+Petroleum and fuel products wholesale|
+Pharmaceuticals, health and beauty products retail|
+Printing and printing support activities|Printing
+Publishing|Publishing including books and newspapers
+Real estate services|Land and property
+Social care services|Social care and childcare
+Sports and recreation|Sports, gyms and leisure
+Sports and recreation goods retail, hire and repair|Sports and leisure product retail, hire and repair
+Telecommunications services|Telecommunications
+Television and radio broadcasting|TV and radio broadcasting
+Textiles and furniture manufacturing|
+Textiles, furniture and furnishings wholesale|
+Timber and timber products wholesale|
+Vehicle manufacturing|Car and vehicle manufacturing
+Waste management and environmental services|Waste, recycling and environment
