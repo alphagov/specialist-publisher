@@ -21,4 +21,15 @@ RSpec.describe Importers::LicenceTransaction::IndustryFacetsRenamer do
       expect(industry_names.first).to include(expected_hash)
     end
   end
+
+  describe "#changing_industry_values" do
+    it "returns list of changing industries" do
+      data_file_path = Rails.root.join("spec/fixtures/licence-transaction/renamed_industries.csv")
+      changing_industries = described_class.new(csv_file_path: data_file_path).changing_industry_values
+
+      expect(changing_industries.size).to eq(8)
+      expect(changing_industries).to include("advertising-and-marketing-services")
+      expect(changing_industries).to_not include("arts-and-entertainment")
+    end
+  end
 end

@@ -13,6 +13,17 @@ module Importers
         parse_csv_file
       end
 
+      def changing_industry_values
+        @changing_industry_values ||= begin
+          industry_values = []
+          parse_csv_file.filter_map do |industry|
+            industry_values << industry[:original][:value] if industry[:new][:value].present?
+          end
+
+          industry_values
+        end
+      end
+
     private
 
       def parse_csv_file
