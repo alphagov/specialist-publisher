@@ -16,22 +16,26 @@ module Importers
     private
 
       def parse_csv_file
-        industry_names = []
+        @parse_csv_file ||= begin
+          industry_names = []
 
-        CSV.foreach(csv_path, headers: true, col_sep: "|") do |row|
-          industry_names << {
-            original: {
-              label: row["ORIGINAL"].strip.to_s,
-              value: row["ORIGINAL"].parameterize.to_s,
-            },
-            new: {
-              label: row["NEW"]&.strip.to_s,
-              value: row["NEW"]&.parameterize.to_s,
-            },
-          }
+          CSV.foreach(csv_path, headers: true, col_sep: "|") do |row|
+            industry_names << {
+              original: {
+                label: row["ORIGINAL"].strip.to_s,
+                value: row["ORIGINAL"].parameterize.to_s,
+              },
+              new: {
+                label: row["NEW"]&.strip.to_s,
+                value: row["NEW"]&.parameterize.to_s,
+              },
+            }
+          end
+
+          industry_names
         end
+      end
 
-        industry_names
       end
 
       def csv_path
