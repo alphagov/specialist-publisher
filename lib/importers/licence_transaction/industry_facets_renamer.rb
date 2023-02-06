@@ -19,7 +19,7 @@ module Importers
         @parse_csv_file ||= begin
           industry_names = []
 
-          CSV.foreach(csv_path, headers: true, col_sep: "|") do |row|
+          CSV.foreach(csv_file_path, headers: true, col_sep: "|") do |row|
             industry_names << {
               original: {
                 label: row["ORIGINAL"].strip.to_s,
