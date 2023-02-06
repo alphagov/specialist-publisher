@@ -32,4 +32,18 @@ RSpec.describe Importers::LicenceTransaction::IndustryFacetsRenamer do
       expect(changing_industries).to_not include("arts-and-entertainment")
     end
   end
+
+  describe "#update_schema" do
+    it "writes imported sectors to JSON schema file" do
+      csv_file_path = Rails.root.join("spec/fixtures/licence-transaction/renamed_industries.csv")
+      schema_file_path = Rails.root.join("spec/fixtures/documents/schemas/licence_transactions_with_renamed_industries.json")
+      subject = described_class.new(csv_file_path:, schema_file_path:)
+
+      json_blob = File.new(schema_file_path).read
+      expected_schema = JSON.dump(JSON.parse(json_blob))
+
+      expect(File).to receive(:write).with(schema_file_path, expected_schema)
+      subject.update_schema
+    end
+  end
 end

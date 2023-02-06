@@ -1,0 +1,115 @@
+{
+  "pre_production": true,
+  "content_id": "b8327c0c-a90d-47b6-992b-ea226b4d3306",
+  "base_path": "/find-licences",
+  "format_name": "Find and apply for licences",
+  "name": "Find a licence",
+  "filter": {
+    "format": "licence_transaction"
+  },
+  "show_summaries": true,
+  "organisations": [
+    "af07d5a5-df63-4ddc-9383-6a666845ebe9"
+  ],
+  "document_noun": "licence",
+  "facets": [
+    {
+      "key": "licence_transaction_industry",
+      "name": "Industry",
+      "type": "text",
+      "preposition": "For",
+      "show_option_select_filter": true,
+      "display_as_result_metadata": false,
+      "filterable": true,
+      "allowed_values": [
+        {
+          "label": "Accommodation including hotels, holiday homes and campsites",
+          "value": "accommodation-including-hotels-holiday-homes-and-campsites"
+        },
+        {
+          "label": "Tutoring, training and coaching",
+          "value": "tutoring-training-and-coaching"
+        },
+        {
+          "label": "Advertising and marketing",
+          "value": "advertising-and-marketing"
+        },
+        {
+          "label": "Agricultural product wholesale",
+          "value": "agricultural-product-wholesale"
+        },
+        {
+          "label": "Agriculture",
+          "value": "agriculture"
+        },
+        {
+          "label": "Architecture, building and planning",
+          "value": "architecture-building-and-planning"
+        },
+        {
+          "label": "Arts and entertainment",
+          "value": "arts-and-entertainment"
+        },
+        {
+          "label": "Art, antique and second-hand retail",
+          "value": "art-antique-and-second-hand-retail"
+        },
+        {
+          "label": "Arts, sports and toy manufacturing",
+          "value": "arts-sports-and-toy-manufacturing"
+        },
+        {
+          "label": "Arts, sports and toy wholesale",
+          "value": "arts-sports-and-toy-wholesale"
+        }
+      ]
+    },
+    {
+      "key": "licence_transaction_location",
+      "name": "Location",
+      "type": "text",
+      "preposition": "In",
+      "display_as_result_metadata": false,
+      "filterable": true,
+      "allowed_values": [
+        {
+          "label": "England",
+          "value": "england"
+        },
+        {
+          "label": "Wales",
+          "value": "wales"
+        },
+        {
+          "label": "Scotland",
+          "value": "scotland"
+        },
+        {
+          "label": "Northern Ireland",
+          "value": "northern-ireland"
+        }
+      ]
+    },
+    {
+      "key": "licence_transaction_will_continue_on",
+      "name": "Will continue on",
+      "type": "text",
+      "display_as_result_metadata": false,
+      "filterable": false
+    },
+    {
+      "key": "licence_transaction_continuation_link",
+      "name": "Link to competent authority",
+      "type": "text",
+      "display_as_result_metadata": false,
+      "filterable": false
+    },
+    {
+      "key": "licence_transaction_licence_identifier",
+      "name": "Licence identifier",
+      "type": "text",
+      "display_as_result_metadata": false,
+      "filterable": false
+    }
+  ]
+}
