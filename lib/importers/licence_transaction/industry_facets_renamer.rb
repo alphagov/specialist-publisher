@@ -3,6 +3,12 @@ require "csv"
 module Importers
   module LicenceTransaction
     class IndustryFacetsRenamer
+      attr_accessor :csv_file_path
+
+      def initialize(csv_file_path: nil)
+        @csv_file_path = (csv_file_path.presence || csv_path)
+      end
+
       def call
         parse_csv_file
       end

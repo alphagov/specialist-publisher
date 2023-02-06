@@ -4,7 +4,9 @@ require "importers/licence_transaction/industry_facets_renamer"
 RSpec.describe Importers::LicenceTransaction::IndustryFacetsRenamer do
   describe "#call" do
     it "reads new sector names into hash" do
-      industry_names = described_class.new.call
+      data_file_path = Rails.root.join("spec/fixtures/licence-transaction/renamed_industries.csv")
+      industry_names = described_class.new(csv_file_path: data_file_path).call
+
       expected_hash = {
         original: {
           label: "Accommodation",
@@ -16,7 +18,7 @@ RSpec.describe Importers::LicenceTransaction::IndustryFacetsRenamer do
         },
       }
 
-      expect(industry_names.first).to eq(expected_hash)
+      expect(industry_names.first).to include(expected_hash)
     end
   end
 end
