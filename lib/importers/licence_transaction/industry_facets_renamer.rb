@@ -25,6 +25,24 @@ module Importers
         end
       end
 
+      def update_licence_transactions
+        model_class.find_each do |document|
+          next if (changing_industry_values & document.licence_transaction_industry).blank?
+
+          to_replace = parse_csv_file.select do |industry|
+            industry[:original][:value].in?(document.licence_transaction_industry) && (industry[:new][:value]).present?
+          end
+
+          to_replace.each do |industry|
+            document.licence_transaction_industry << industry[:new][:value]
+            document.licence_transaction_industry.delete(industry[:original][:value])
+          end
+
+          document.licence_transaction_industry
+          document.save
+        end
+      end
+
       def update_schema
         json_blob = File.new(schema_file_path).read
         schema = JSON.parse(json_blob)
@@ -79,6 +97,10 @@ module Importers
 
       def csv_path
         Rails.root.join("lib/data/licence_transaction/industry_sectors_new_values.csv")
+      end
+
+      def model_class
+        "LicenceTransaction".constantize
       end
     end
   end
