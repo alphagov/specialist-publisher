@@ -11,18 +11,19 @@ module Importers
       end
 
       def call
-        parse_csv_file
+        update_schema
+        update_licence_transactions
       end
 
-      def changing_industry_values
-        @changing_industry_values ||= begin
-          industry_values = []
-          parse_csv_file.filter_map do |industry|
-            industry_values << industry[:original][:value] if industry[:new][:value].present?
-          end
+    private
 
-          industry_values
-        end
+      def update_schema
+        json_blob = File.new(schema_file_path).read
+        schema = JSON.parse(json_blob)
+        licence_transaction_industry = schema["facets"].select { |facet| facet["key"] == "licence_transaction_industry" }
+        licence_transaction_industry.first["allowed_values"] = new_industry_sectors_schema
+
+        File.write(schema_file_path, JSON.dump(schema))
       end
 
       def update_licence_transactions
@@ -38,21 +39,20 @@ module Importers
             document.licence_transaction_industry.delete(industry[:original][:value])
           end
 
-          document.licence_transaction_industry
           document.save
         end
       end
 
-      def update_schema
-        json_blob = File.new(schema_file_path).read
-        schema = JSON.parse(json_blob)
-        licence_transaction_industry = schema["facets"].select { |facet| facet["key"] == "licence_transaction_industry" }
-        licence_transaction_industry.first["allowed_values"] = new_industry_sectors_schema
+      def changing_industry_values
+        @changing_industry_values ||= begin
+          industry_values = []
+          parse_csv_file.filter_map do |industry|
+            industry_values << industry[:original][:value] if industry[:new][:value].present?
+          end
 
-        File.write(schema_file_path, JSON.dump(schema))
+          industry_values
+        end
       end
-
-    private
 
       def new_industry_sectors_schema
         parse_csv_file.map do |industry|
