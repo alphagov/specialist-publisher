@@ -55,7 +55,7 @@ module Importers
       end
 
       def new_industry_sectors_schema
-        parse_csv_file.map do |industry|
+        industries = parse_csv_file.map do |industry|
           if industry[:new][:value].present?
             {
               label: industry[:new][:label],
@@ -68,6 +68,8 @@ module Importers
             }
           end
         end
+
+        industries.sort_by { |industry| industry[:label] }
       end
 
       def parse_csv_file

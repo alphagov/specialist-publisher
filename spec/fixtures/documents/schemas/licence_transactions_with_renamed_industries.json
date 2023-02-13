@@ -27,10 +27,6 @@
           "value": "accommodation-including-hotels-holiday-homes-and-campsites"
         },
         {
-          "label": "Tutoring, training and coaching",
-          "value": "tutoring-training-and-coaching"
-        },
-        {
           "label": "Advertising and marketing",
           "value": "advertising-and-marketing"
         },
@@ -47,12 +43,12 @@
           "value": "architecture-building-and-planning"
         },
         {
-          "label": "Arts and entertainment",
-          "value": "arts-and-entertainment"
-        },
-        {
           "label": "Art, antique and second-hand retail",
           "value": "art-antique-and-second-hand-retail"
+        },
+        {
+          "label": "Arts and entertainment",
+          "value": "arts-and-entertainment"
         },
         {
           "label": "Arts, sports and toy manufacturing",
@@ -61,6 +57,10 @@
         {
           "label": "Arts, sports and toy wholesale",
           "value": "arts-sports-and-toy-wholesale"
+        },
+        {
+          "label": "Tutoring, training and coaching",
+          "value": "tutoring-training-and-coaching"
         }
       ]
     },
