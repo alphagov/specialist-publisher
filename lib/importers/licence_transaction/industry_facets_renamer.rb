@@ -58,12 +58,12 @@ module Importers
         parse_csv_file.map do |industry|
           if industry[:new][:value].present?
             {
-              label: industry[:new][:label].strip,
+              label: industry[:new][:label],
               value: industry[:new][:value],
             }
           else
             {
-              label: industry[:original][:label].strip,
+              label: industry[:original][:label],
               value: industry[:original][:value],
             }
           end
