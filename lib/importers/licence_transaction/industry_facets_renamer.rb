@@ -33,6 +33,7 @@ module Importers
           end
 
           document.save
+          document.publish
         end
       end
 

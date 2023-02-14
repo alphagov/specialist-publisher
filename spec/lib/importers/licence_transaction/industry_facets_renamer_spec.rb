@@ -43,9 +43,12 @@ RSpec.describe Importers::LicenceTransaction::IndustryFacetsRenamer do
         [document],
         hash_including(document_type: "licence_transaction", page: "1"),
       )
+      stub_publishing_api_has_item(document)
 
       stub_any_publishing_api_put_content
       stub_any_publishing_api_patch_links
+      stub_any_publishing_api_publish
+      stub_any_email_alert_api_call
 
       described_class.new(csv_file_path:, schema_file_path:).update_licence_transactions
 
@@ -71,7 +74,9 @@ RSpec.describe Importers::LicenceTransaction::IndustryFacetsRenamer do
       assert_publishing_api_put_content(
         document["content_id"],
         request_json_includes(expected_details_hash),
+        2,
       )
+      assert_publishing_api_publish(document["content_id"])
     end
   end
 end
