@@ -13,8 +13,15 @@ namespace :licence_transaction do
     Importers::LicenceTransaction::LicenceImporter.new.call
   end
 
-  desc "Rename industry sectors from file, update licence transaction schema, and retag licence transactions"
-  task :rename_industry_sectors, %i[csv_file_path schema_file_path] => :environment do |_, args|
-    Importers::LicenceTransaction::IndustryFacetsRenamer.new(csv_file_path: args.csv_file_path, schema_file_path: args.schema_file_path).call
+  namespace :rename_industry_sectors do
+    desc "Update licence transaction schema from file"
+    task :update_schema, %i[csv_file_path schema_file_path] => :environment do |_, args|
+      Importers::LicenceTransaction::IndustryFacetsRenamer.new(csv_file_path: args.csv_file_path, schema_file_path: args.schema_file_path).update_schema
+    end
+
+    desc "Re-tag licences"
+    task :retag_licence_transactions, %i[csv_file_path schema_file_path] => :environment do |_, args|
+      Importers::LicenceTransaction::IndustryFacetsRenamer.new(csv_file_path: args.csv_file_path, schema_file_path: args.schema_file_path).update_licence_transactions
+    end
   end
 end
