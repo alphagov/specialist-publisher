@@ -3,11 +3,12 @@ require "importers/licence_transaction/industry_facets_renamer"
 
 RSpec.describe Importers::LicenceTransaction::IndustryFacetsRenamer do
   let(:csv_file_path) { Rails.root.join("spec/fixtures/licence-transaction/renamed_industries.csv") }
-  let(:schema_file_path) { Rails.root.join("spec/fixtures/documents/schemas/licence_transactions_with_renamed_industries.json") }
 
   describe "#update_schema" do
     it "writes imported sectors to JSON schema file" do
-      json_blob = File.new(schema_file_path).read
+      schema_file_path = Rails.root.join("spec/fixtures/documents/schemas/licence_transactions.json")
+      updated_schema = Rails.root.join("spec/fixtures/documents/schemas/licence_transactions_with_renamed_industries.json")
+      json_blob = File.new(updated_schema).read
       expected_schema = JSON.dump(JSON.parse(json_blob))
 
       expect(File).to receive(:write).with(schema_file_path, expected_schema)
@@ -17,6 +18,8 @@ RSpec.describe Importers::LicenceTransaction::IndustryFacetsRenamer do
 
   describe "#update_licence_transactions" do
     it "updates licences with the new industry values" do
+      schema_file_path = Rails.root.join("spec/fixtures/documents/schemas/licence_transactions_with_renamed_industries.json")
+
       document = FactoryBot.create(
         :licence_transaction,
         base_path: "/find-licences/1",
