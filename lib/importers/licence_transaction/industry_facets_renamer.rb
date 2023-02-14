@@ -10,13 +10,6 @@ module Importers
         @schema_file_path = (schema_file_path.presence || schema_path)
       end
 
-      def call
-        update_schema
-        update_licence_transactions
-      end
-
-    private
-
       def update_schema
         json_blob = File.new(schema_file_path).read
         schema = JSON.parse(json_blob)
@@ -42,6 +35,8 @@ module Importers
           document.save
         end
       end
+
+    private
 
       def changing_industry_values
         @changing_industry_values ||= begin

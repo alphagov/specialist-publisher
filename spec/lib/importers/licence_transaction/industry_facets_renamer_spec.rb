@@ -2,56 +2,58 @@ require "spec_helper"
 require "importers/licence_transaction/industry_facets_renamer"
 
 RSpec.describe Importers::LicenceTransaction::IndustryFacetsRenamer do
-  describe "#call" do
-    let(:csv_file_path) { Rails.root.join("spec/fixtures/licence-transaction/renamed_industries.csv") }
-    let(:schema_file_path) { Rails.root.join("spec/fixtures/documents/schemas/licence_transactions_with_renamed_industries.json") }
+  let(:csv_file_path) { Rails.root.join("spec/fixtures/licence-transaction/renamed_industries.csv") }
+  let(:schema_file_path) { Rails.root.join("spec/fixtures/documents/schemas/licence_transactions_with_renamed_industries.json") }
 
-    let(:document) do
-      FactoryBot.create(
-        :licence_transaction,
-        base_path: "/find-licences/1",
-        title: "Licence #1",
-        default_metadata: {
-          "licence_transaction_industry" => %w[
-            accommodation
-            arts-and-entertainment
-          ],
-        },
-      )
-    end
-
-    let(:licence_transaction) do
-      FactoryBot.build(
-        :licence_transaction_model,
-        base_path: "/find-licences/1",
-        title: "Licence #1",
-        licence_transaction_industry: %w[
+  let(:document) do
+    FactoryBot.create(
+      :licence_transaction,
+      base_path: "/find-licences/1",
+      title: "Licence #1",
+      default_metadata: {
+        "licence_transaction_industry" => %w[
           accommodation
           arts-and-entertainment
         ],
-      )
-    end
+      },
+    )
+  end
 
-    before do
-      stub_publishing_api_has_content(
-        [document],
-        hash_including(document_type: "licence_transaction", page: "1"),
-      )
+  let(:licence_transaction) do
+    FactoryBot.build(
+      :licence_transaction_model,
+      base_path: "/find-licences/1",
+      title: "Licence #1",
+      licence_transaction_industry: %w[
+        accommodation
+        arts-and-entertainment
+      ],
+    )
+  end
 
-      stub_any_publishing_api_put_content
-      stub_any_publishing_api_patch_links
-    end
+  before do
+    stub_publishing_api_has_content(
+      [document],
+      hash_including(document_type: "licence_transaction", page: "1"),
+    )
 
+    stub_any_publishing_api_put_content
+    stub_any_publishing_api_patch_links
+  end
+
+  describe "#update_schema" do
     it "writes imported sectors to JSON schema file" do
       json_blob = File.new(schema_file_path).read
       expected_schema = JSON.dump(JSON.parse(json_blob))
 
       expect(File).to receive(:write).with(schema_file_path, expected_schema)
-      described_class.new(csv_file_path:, schema_file_path:).call
+      described_class.new(csv_file_path:, schema_file_path:).update_schema
     end
+  end
 
+  describe "#update_licence_transactions" do
     it "updates licences with the new industry values" do
-      described_class.new(csv_file_path:, schema_file_path:).call
+      described_class.new(csv_file_path:, schema_file_path:).update_licence_transactions
 
       expected_details_hash = {
         details: {
