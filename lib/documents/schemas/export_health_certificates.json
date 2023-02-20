@@ -4,7 +4,7 @@
   "format_name": "Export health certificate",
   "name": "Find an export health certificate",
   "description": "Find export health certificates (EHCs) used for exporting live animals and products of animal origin",
-  "summary": "<p>Find the export health certificate (EHC) and supporting documents you need to export a live animal or animal product like food and germplasm. The latest versions of the certificates are always here.</p> <p>You must nominate an official vet or local authority inspector to sign the certificate. Find out more about <a href=\"https://www.gov.uk/guidance/get-an-export-health-certificate\">getting an export health certificate</a>.</p>",
+  "summary": "<p>Find the export health certificate (EHC) and supporting documents you need to export a live animal or animal product like food and germplasm. The latest versions of the certificates are always here.</p> <p>You must nominate an official vet or local authority inspector to sign the certificate. Find out more about <a href=\"https://www.gov.uk/guidance/get-an-export-health-certificate\">getting an export health certificate</a>.</p><p>If you cannot find the correct export health certificate, <a href=\"https://www.gov.uk/guidance/get-an-export-health-certificate#if-you-need-help\">contact the Animal Plant and Health Agency(APHA)</a></p>",
   "filter": {
     "format": "export_health_certificate"
   },
