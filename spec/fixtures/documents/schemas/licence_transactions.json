@@ -21,6 +21,8 @@
       "show_option_select_filter": true,
       "display_as_result_metadata": false,
       "filterable": true,
+      "large": true,
+      "open_on_load": true,
       "allowed_values": [
         {
           "label": "Accommodation",
