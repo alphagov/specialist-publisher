@@ -1,0 +1,25 @@
+<%= render layout: "shared/form_group", locals: { f: f, field: :category } do %>
+  <%= f.select :category,
+      f.object.facet_options(:category),
+      {},
+      {
+        class: 'select2 form-control',
+        multiple: true,
+        data: {
+          placeholder: 'Select recommendation type'
+        }
+      }
+  %>
+<% end %>
+
+<%= render layout: "shared/form_group", locals: { f: f, field: :year_adopted } do %>
+  <%= f.text_field :year_adopted, class: 'form-control' %>
+<% end %>
+
+<%= render layout: "shared/form_group", locals: { f: f, field: :reference_number } do %>
+  <%= f.text_field :reference_number, class: 'form-control' %>
+<% end %>
+
+<%= render layout: "shared/form_group", locals: { f: f, field: :keyword } do %>
+  <%= f.text_field :keyword, class: 'form-control' %>
+<% end %>
