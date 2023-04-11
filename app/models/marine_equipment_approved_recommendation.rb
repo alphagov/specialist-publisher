@@ -1,8 +1,5 @@
 class MarineEquipmentApprovedRecommendation < Document
-  validates :category, presence: true
-  validates :year_adopted, presence: true, format: /\A[1-9][0-9]{3}\z/
-  validates :reference_number, presence: true
-  validates :keyword, presence: true
+  validates :year_adopted, format: /\A$|[1-9][0-9]{3}\z/
 
   FORMAT_SPECIFIC_FIELDS = %i[
     category

@@ -33,10 +33,6 @@ RSpec.feature "Creating a marine equipment approved recommendation", type: :feat
     expect(page).to have_content("Title can't be blank")
     expect(page).to have_content("Summary can't be blank")
     expect(page).to have_content("Body can't be blank")
-    expect(page).to have_content("Category can't be blank")
-    expect(page).to have_content("Year adopted can't be blank")
-    expect(page).to have_content("Reference number can't be blank")
-    expect(page).to have_content("Keyword can't be blank")
   end
 
   scenario "creating a new marine equipment approved recommendation with valid data" do
