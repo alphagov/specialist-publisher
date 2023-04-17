@@ -4,6 +4,7 @@
   "base_path": "/find-licences",
   "format_name": "Find and apply for licences",
   "name": "Find a licence",
+  "summary": "<p>You may need a licence, permit or certification for:</p><ul><li>some business activities</li><li>other activities, such as street parties</li></ul><p>Use this tool to search for a licence.</p>",
   "default_order": "title",
   "filter": {
     "format": "licence_transaction"
