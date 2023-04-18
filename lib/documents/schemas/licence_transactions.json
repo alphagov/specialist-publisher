@@ -43,7 +43,7 @@
     },
     {
       "key": "licence_transaction_industry",
-      "name": "Industry",
+      "name": "Business or activity",
       "type": "text",
       "preposition": "For",
       "show_option_select_filter": true,
