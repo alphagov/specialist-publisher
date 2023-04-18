@@ -308,6 +308,11 @@ class Document
     title.parameterize.pluralize
   end
 
+  # Singularize and downcase but maintaining initials
+  def self.title_for_new_document
+    title.singularize.split(" ").map { |p| p.upcase == p ? p : p.downcase }.join(" ")
+  end
+
   def content_id_and_locale
     "#{content_id}:#{locale}"
   end

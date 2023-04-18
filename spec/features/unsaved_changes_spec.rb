@@ -19,7 +19,7 @@ RSpec.feature "Unsaved changes to a document", type: :feature, js: true do
 
   context "a new document" do
     before do
-      click_on "Add another CMA Case"
+      click_on "Add another CMA case"
 
       fill_in "Title", with: "Example CMA Case"
       fill_in "Summary", with: "This is the summary of an example CMA case"

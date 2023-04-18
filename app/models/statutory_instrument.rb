@@ -32,6 +32,11 @@ class StatutoryInstrument < Document
     "EU Withdrawal Act 2018 statutory instrument"
   end
 
+  # Keep name of act titleized
+  def self.title_for_new_document
+    title
+  end
+
   def links
     super.merge(
       organisations: organisations | [primary_publishing_organisation],

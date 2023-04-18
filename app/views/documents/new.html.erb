@@ -1,4 +1,4 @@
-<%= content_for :page_title, "New #{current_format.title.singularize}" %>
+<%= content_for :page_title, "New #{current_format.title_for_new_document}" %>
 
 <% content_for :breadcrumbs do %>
   <li><%= link_to "Your documents", documents_path(current_format.slug) %></li>
@@ -9,7 +9,7 @@
   GOVUK.formChangeProtection.init($('.new_document'), 'You have unsaved changes that will be lost if you leave this page.');
 <% end -%>
 
-<h1>New <%= current_format.title.singularize %></h1>
+<h1>New <%= current_format.title_for_new_document %></h1>
 
 <div class="row">
   <div class="col-md-8">

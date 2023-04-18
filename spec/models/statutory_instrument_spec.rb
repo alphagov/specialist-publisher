@@ -9,6 +9,12 @@ RSpec.describe StatutoryInstrument do
     expect(described_class).not_to be_exportable
   end
 
+  describe ".title_for_new_document" do
+    it "retains the capitalisation of the act name" do
+      expect(StatutoryInstrument.title_for_new_document).to eq("EU Withdrawal Act 2018 statutory instrument")
+    end
+  end
+
   describe "sift_end_date" do
     subject(:instance) do
       StatutoryInstrument.new(body: "", sift_end_date: "2016-01-01", sifting_status: "withdrawn")

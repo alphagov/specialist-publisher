@@ -29,7 +29,7 @@ RSpec.feature "Creating a CMA case", type: :feature do
 
   scenario "getting to the new document page" do
     visit "/cma-cases"
-    click_link "Add another CMA Case"
+    click_link "Add another CMA case"
 
     expect(page.status_code).to eq(200)
     expect(page.current_path).to eq("/cma-cases/new")

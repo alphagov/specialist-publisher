@@ -14,7 +14,7 @@ RSpec.feature "Creating an OIM project", type: :feature do
 
   scenario "visiting the new project page" do
     visit "/oim-projects"
-    click_link "Add another OIM Project"
+    click_link "Add another OIM project"
     expect(page.status_code).to eq(200)
     expect(page.current_path).to eq("/oim-projects/new")
   end

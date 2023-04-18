@@ -17,7 +17,7 @@ RSpec.feature "Creating a product safety alert recall", type: :feature do
 
   scenario "visiting the new recall page" do
     visit "/product-safety-alerts-reports-recalls"
-    click_link "Add another Product Safety Alerts, Reports and Recalls"
+    click_link "Add another product safety alerts, reports and recalls"
     expect(page.status_code).to eq(200)
     expect(page.current_path).to eq("/product-safety-alerts-reports-recalls/new")
   end

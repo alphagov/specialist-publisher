@@ -28,7 +28,7 @@ RSpec.feature "The root specialist-publisher page", type: :feature do
 
       click_link("CMA Cases")
 
-      expect(page).to have_text("Add another CMA Case")
+      expect(page).to have_text("Add another CMA case")
     end
 
     it "has expected finders" do
@@ -79,7 +79,7 @@ RSpec.feature "The root specialist-publisher page", type: :feature do
 
       click_link("CMA Cases")
 
-      expect(page).to have_content("Add another CMA Case")
+      expect(page).to have_content("Add another CMA case")
     end
   end
 end

@@ -29,6 +29,28 @@ RSpec.describe Document do
     expect(MyDocumentType.document_type).to eq("my_document_type")
   end
 
+  describe ".title_for_new_document" do
+    it "sets the document title in lowercase and singular for new document" do
+      expect(MyDocumentType.title_for_new_document).to eq("my document type")
+    end
+
+    context "with initials in the title" do
+      let(:document_sub_class_initialis) do
+        Class.new(MyDocumentType) do
+          def self.title
+            "XYZ Reports"
+          end
+        end
+      end
+
+      before { stub_const("MyDocumentTypeInitials", document_sub_class_initialis) }
+
+      it "sets the document title in lowercase and singular for new document but retains the initialism" do
+        expect(MyDocumentTypeInitials.title_for_new_document).to eq("XYZ report")
+      end
+    end
+  end
+
   describe "parsing date params" do
     it "sets a date string from rails date select style params" do
       doc = MyDocumentType.new("field1(1i)": "2016", "field1(2i)": "09", "field1(3i)": "07")

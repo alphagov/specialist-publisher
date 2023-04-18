@@ -18,7 +18,7 @@ RSpec.feature "Creating a Licence", type: :feature do
 
   scenario "adding a new licence" do
     visit "/find-licences"
-    click_link "Add another Licence"
+    click_link "Add another licence"
     expect(page.status_code).to eq(200)
     expect(page.current_path).to eq("/licences/new")
   end

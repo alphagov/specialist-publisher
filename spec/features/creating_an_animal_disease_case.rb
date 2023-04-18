@@ -18,7 +18,7 @@ RSpec.feature "Creating an animal disease case", type: :feature do
   scenario "visiting the new case page" do
     #  ? should this be animal disease cases england?
     visit "/animal-disease-cases"
-    click_link "Add another Animal disease case"
+    click_link "Add another animal disease case"
     expect(page.status_code).to eq(200)
     expect(page.current_path).to eq("/animal-disease-cases/new")
   end
