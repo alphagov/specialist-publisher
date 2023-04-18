@@ -11,7 +11,7 @@
   <%= f.text_area :body, rows: 20, class: 'form-control body-text' %>
 <% end %>
 
-<%= render layout: "shared/form_group", locals: { f: f, field: :locale } do %>
+<%= render layout: "shared/form_group", locals: { f: f, field: :locale, label: "Language" } do %>
   <%= f.select(
     :locale,
     options_for_select(
