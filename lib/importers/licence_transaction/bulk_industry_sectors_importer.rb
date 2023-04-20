@@ -32,7 +32,7 @@ module Importers
         licence_transaction_industry = schema["facets"].select { |facet| facet["key"] == "licence_transaction_industry" }
         licence_transaction_industry.first["allowed_values"] = industry_sectors
 
-        File.write(schema_file_path, JSON.dump(schema))
+        File.write(schema_file_path, JSON.pretty_generate(schema))
       end
 
       def file_path
