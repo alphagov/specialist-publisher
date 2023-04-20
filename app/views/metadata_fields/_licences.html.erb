@@ -29,11 +29,11 @@
 <% end %>
 
 
-<%= render layout: "shared/form_group", locals: { f: f, field: :licence_transaction_will_continue_on, label: "Will continue on" } do %>
+<%= render layout: "shared/form_group", locals: { f: f, field: :licence_transaction_will_continue_on, label: "Name of website where you apply" } do %>
   <%= f.text_field :licence_transaction_will_continue_on, class: 'form-control' %>
 <% end %>
 
-<%= render layout: "shared/form_group", locals: { f: f, field: :licence_transaction_continuation_link, label: "Continuation link" } do %>
+<%= render layout: "shared/form_group", locals: { f: f, field: :licence_transaction_continuation_link, label: "URL for \"Start Now\" button" } do %>
   <%= f.text_field :licence_transaction_continuation_link, class: 'form-control' %>
 <% end %>
 
