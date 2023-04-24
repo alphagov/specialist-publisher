@@ -1,9 +1,18 @@
+require "importers/licence_transaction/tagging_csv_validator"
 require "csv"
 
 module Importers
   module LicenceTransaction
     class LicenceImporter
+      attr_reader :tagging_path
+
+      def initialize(tagging_path = nil)
+        @tagging_path = (tagging_path.presence || licence_tagging_path)
+      end
+
       def call
+        return tagging_csv_validator.errors unless tagging_csv_validator.valid?
+
         licences.each do |licence|
           tagging = tags_for_licence(licence["base_path"])
 
@@ -112,7 +121,7 @@ module Importers
       end
 
       def grouped_licences
-        CSV.foreach(licence_tagging_path, headers: true).group_by do |licence|
+        CSV.foreach(tagging_path, headers: true).group_by do |licence|
           licence["Link"]
         end
       end
@@ -131,6 +140,10 @@ module Importers
 
       def publish(new_content_id)
         Services.publishing_api.publish(new_content_id, "republish", locale: "en")
+      end
+
+      def tagging_csv_validator
+        @tagging_csv_validator ||= TaggingCsvValidator.new(licences_tagging)
       end
     end
   end

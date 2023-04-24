@@ -16,6 +16,18 @@ RSpec.describe Importers::LicenceTransaction::LicenceImporter do
     )
   end
 
+  context "when the csv tagging is invalid" do
+    it "doesn't migrate licences and outputs an error message" do
+      tagging_path = Rails.root.join("spec/support/csvs/invalid_licence_and_tagging.csv")
+      expect { described_class.new(tagging_path).call }
+        .to output(csv_invalid_message).to_stdout
+
+      expect(stub_any_publishing_api_put_content).to_not have_been_requested
+      expect(stub_any_publishing_api_patch_links).to_not have_been_requested
+      expect(stub_any_publishing_api_publish).to_not have_been_requested
+    end
+  end
+
   context "when a licence is valid" do
     before do
       stub_publishing_api_has_links(
@@ -111,6 +123,21 @@ RSpec.describe Importers::LicenceTransaction::LicenceImporter do
 
   def licence_doesnt_exist_in_tagging
     "Not imported licence as missing from tagging file: /non-existant\n"
+  end
+
+  def csv_invalid_message
+    <<~HEREDOC
+      Unrecognised tags for /licence-to-abstract-and-or-impound-water-northern-ireland:
+       locations: ["northern-ireeeeeland"],
+       industries: []
+
+      Unrecognised tags for /notification-to-process-personal-data:
+       locations: [],
+       industries: ["arts-and-things-and-stuff-recreation"]
+
+      Please read the instructions (under heading 'Update tagging') in the following link to resolve the unrecognised
+      tags errors: https://trello.com/c/2SBbuD8N/1969-how-to-correct-unrecognised-tags-when-importing-licences
+    HEREDOC
   end
 
   def expected_put_content_payload
