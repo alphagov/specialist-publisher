@@ -43,7 +43,7 @@ RSpec.feature "Creating a Licence", type: :feature do
     fill_in "Summary", with: "This is the summary of a licence"
     fill_in "Body", with: "## Header#{"\n\nThis is the long body of a licence" * 2}"
     select "England", from: "Location"
-    select "Publishing", from: "Industry"
+    select "Advertising and marketing", from: "Industry"
     fill_in "URL for \"Start Now\" button", with: "https://www.gov.uk"
     fill_in "Name of website where you apply", with: "on GOV.UK"
 
