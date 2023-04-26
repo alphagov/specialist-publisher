@@ -8,6 +8,7 @@
   "filter": {
     "format": "marine_equipment_approved_recommendation"
   },
+  "show_summaries": true,
   "editing_organisations": [
     "23a24aa8-1711-42b6-bf6b-47af0f230295"
   ],
