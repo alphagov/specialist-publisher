@@ -22,7 +22,7 @@ module Importers
             licence_transaction_industry: [],
             licence_transaction_will_continue_on: details["will_continue_on"],
             licence_transaction_continuation_link: details["continuation_link"],
-            licence_transaction_licence_identifier: details["licence_identifier"],
+            licence_transaction_licence_identifier: (details["licence_identifier"] unless details["continuation_link"]),
             imported: true,
           )
 

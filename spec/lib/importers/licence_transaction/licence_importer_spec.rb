@@ -132,7 +132,6 @@ RSpec.describe Importers::LicenceTransaction::LicenceImporter do
         ],
         metadata: {
           licence_transaction_continuation_link: "http://www.hpc-uk.org/apply",
-          licence_transaction_licence_identifier: licence_identifier,
           licence_transaction_will_continue_on: "the Health and Care Professions Council (HCPC) website",
         },
         max_cache_time: 10,
@@ -239,7 +238,6 @@ RSpec.describe Importers::LicenceTransaction::LicenceImporter do
           "metadata" => {
             "licence_transaction_will_continue_on" => "the Health and Care Professions Council (HCPC) website",
             "licence_transaction_continuation_link" => "http://www.hpc-uk.org/apply",
-            "licence_transaction_licence_identifier" => licence_identifier,
           },
           "max_cache_time" => 10,
           "temporary_update_type" => false,
