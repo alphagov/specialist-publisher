@@ -45,6 +45,12 @@ en:
               blank: Select an update type
             change_note:
               blank: Enter a change note
+            licence_transaction_continuation_link:
+              blank: Enter a URL in the format https://www.gov.uk
+            licence_transaction_will_continue_on:
+              blank: Enter the name of the website
+            base:
+              link_and_identifier_exists: Enter either the website where users can apply for the licence or the licence identifier
   i18n:
     direction: ltr
   language_names:
