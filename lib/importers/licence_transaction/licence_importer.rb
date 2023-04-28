@@ -1,10 +1,26 @@
-require "importers/licence_transaction/facet_tagger"
+require "importers/licence_transaction/tagging_csv_validator"
+require "csv"
 
 module Importers
   module LicenceTransaction
     class LicenceImporter
+      attr_reader :tagging_path
+
+      def initialize(tagging_path = nil)
+        @tagging_path = (tagging_path.presence || licence_tagging_path)
+      end
+
       def call
-        filtered_licences.each do |licence|
+        return tagging_csv_validator.errors unless tagging_csv_validator.valid?
+
+        licences.each do |licence|
+          tagging = tags_for_licence(licence["base_path"])
+
+          unless tagging
+            puts "Not imported licence as missing from tagging file: #{licence['base_path']}"
+            next
+          end
+
           details = licence["details"]
           new_licence = ::LicenceTransaction.new(
             locale: "en",
@@ -18,8 +34,8 @@ module Importers
             public_updated_at: licence["public_updated_at"],
             first_published_at: licence["first_published_at"],
             update_type: "major",
-            licence_transaction_location: [],
-            licence_transaction_industry: [],
+            licence_transaction_location: tagging["locations"],
+            licence_transaction_industry: tagging["industries"],
             licence_transaction_will_continue_on: details["will_continue_on"],
             licence_transaction_continuation_link: details["continuation_link"],
             licence_transaction_licence_identifier: details["licence_identifier"],
@@ -27,8 +43,6 @@ module Importers
           )
 
           new_licence.change_note = "Imported from Publisher"
-
-          tag_licence_facets(new_licence)
 
           unless new_licence.valid?
             puts "[ERROR] licence: #{new_licence.base_path} has validation errors: #{new_licence.errors.inspect}"
@@ -70,8 +84,8 @@ module Importers
         end
       end
 
-      def common_licences_path
-        Rails.root.join("lib/data/licence_transaction/common_licence_identifiers.txt")
+      def licence_tagging_path
+        Rails.root.join("lib/data/licence_transaction/licences_and_tagging.csv")
       end
 
       def licences
@@ -80,11 +94,35 @@ module Importers
         )["results"]
       end
 
-      def filtered_licences
-        licence_identifiers = File.new(common_licences_path).readlines(chomp: true)
+      def licences_tagging
+        @licences_tagging ||= grouped_licences.map do |licence_url, rows|
+          {
+            "base_path" => URI.parse(licence_url).path,
+            "locations" => locations(rows).uniq,
+            "industries" => industries(rows).uniq,
+          }
+        end
+      end
 
-        licences.select do |licence|
-          licence_identifiers.include?(licence["details"]["licence_identifier"])
+      def tags_for_licence(base_path)
+        licences_tagging.find { |l| l["base_path"] == base_path }
+      end
+
+      def locations(grouped_licence)
+        grouped_licence.flat_map do |licence|
+          licence["Locations"].split(", ").map(&:parameterize)
+        end
+      end
+
+      def industries(grouped_licence)
+        grouped_licence.flat_map do |licence|
+          licence[2..].compact.map(&:parameterize)
+        end
+      end
+
+      def grouped_licences
+        CSV.foreach(tagging_path, headers: true).group_by do |licence|
+          licence["Link"]
         end
       end
 
@@ -104,8 +142,8 @@ module Importers
         Services.publishing_api.publish(new_content_id, "republish", locale: "en")
       end
 
-      def tag_licence_facets(licence)
-        FacetTagger.new(licence).tag
+      def tagging_csv_validator
+        @tagging_csv_validator ||= TaggingCsvValidator.new(licences_tagging)
       end
     end
   end

@@ -14,9 +14,18 @@ RSpec.describe Importers::LicenceTransaction::LicenceImporter do
       publishing_api_response,
       { document_type: "licence", page: 1, per_page: 500, states: "published" },
     )
+  end
 
-    stub_request(:get, "#{Plek.website_root}/licence-finder/licences-api")
-      .to_return(status: 200, body: [].to_json)
+  context "when the csv tagging is invalid" do
+    it "doesn't migrate licences and outputs an error message" do
+      tagging_path = Rails.root.join("spec/support/csvs/invalid_licence_and_tagging.csv")
+      expect { described_class.new(tagging_path).call }
+        .to output(csv_invalid_message).to_stdout
+
+      expect(stub_any_publishing_api_put_content).to_not have_been_requested
+      expect(stub_any_publishing_api_patch_links).to_not have_been_requested
+      expect(stub_any_publishing_api_publish).to_not have_been_requested
+    end
   end
 
   context "when a licence is valid" do
@@ -83,15 +92,16 @@ RSpec.describe Importers::LicenceTransaction::LicenceImporter do
     end
   end
 
-  context "when a licence isn't present in the common licences list" do
+  context "when a licence isn't present in the tagging file" do
     let(:publishing_api_response) do
       publishing_api_licences_response.tap do |licences|
-        licences.first["details"]["licence_identifier"] = "1111-2-3"
+        licences.first["base_path"] = "/non-existant"
       end
     end
 
     it "doesn't migrate the licence" do
-      described_class.new.call
+      expect { described_class.new.call }
+        .to output(licence_doesnt_exist_in_tagging).to_stdout
 
       expect(stub_any_publishing_api_put_content).to_not have_been_requested
       expect(stub_any_publishing_api_patch_links).to_not have_been_requested
@@ -109,6 +119,25 @@ RSpec.describe Importers::LicenceTransaction::LicenceImporter do
 
   def already_imported_licence_message
     "Skipping as licence: /find-licences/art-therapist-registration is already imported\n"
+  end
+
+  def licence_doesnt_exist_in_tagging
+    "Not imported licence as missing from tagging file: /non-existant\n"
+  end
+
+  def csv_invalid_message
+    <<~HEREDOC
+      Unrecognised tags for /licence-to-abstract-and-or-impound-water-northern-ireland:
+       locations: ["northern-ireeeeeland"],
+       industries: []
+
+      Unrecognised tags for /notification-to-process-personal-data:
+       locations: [],
+       industries: ["arts-and-things-and-stuff-recreation"]
+
+      Please read the instructions (under heading 'Update tagging') in the following link to resolve the unrecognised
+      tags errors: https://trello.com/c/2SBbuD8N/1969-how-to-correct-unrecognised-tags-when-importing-licences
+    HEREDOC
   end
 
   def expected_put_content_payload
@@ -134,6 +163,8 @@ RSpec.describe Importers::LicenceTransaction::LicenceImporter do
           licence_transaction_continuation_link: "http://www.hpc-uk.org/apply",
           licence_transaction_licence_identifier: licence_identifier,
           licence_transaction_will_continue_on: "the Health and Care Professions Council (HCPC) website",
+          licence_transaction_industry: %w[healthcare],
+          licence_transaction_location: %w[england wales scotland northern-ireland],
         },
         max_cache_time: 10,
         temporary_update_type: false,

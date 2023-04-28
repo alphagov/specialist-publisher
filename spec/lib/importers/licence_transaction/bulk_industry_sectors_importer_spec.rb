@@ -9,7 +9,7 @@ RSpec.describe Importers::LicenceTransaction::BulkIndustrySectorsImporter do
       subject = described_class.new(data_file_path:, schema_file_path:)
 
       json_blob = File.new(schema_file_path).read
-      expected_schema = JSON.dump(JSON.parse(json_blob))
+      expected_schema = JSON.pretty_generate(JSON.parse(json_blob))
 
       expect(File).to receive(:write).with(schema_file_path, expected_schema)
       subject.call
