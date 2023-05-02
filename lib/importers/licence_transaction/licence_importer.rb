@@ -36,9 +36,9 @@ module Importers
             update_type: "major",
             licence_transaction_location: tagging["locations"],
             licence_transaction_industry: tagging["industries"],
-            licence_transaction_will_continue_on: details["will_continue_on"],
-            licence_transaction_continuation_link: details["continuation_link"],
-            licence_transaction_licence_identifier: (details["licence_identifier"] unless details["continuation_link"]),
+            licence_transaction_will_continue_on: details["will_continue_on"].presence,
+            licence_transaction_continuation_link: details["continuation_link"].presence,
+            licence_transaction_licence_identifier: licence_identifier(details),
             imported: true,
           )
 
@@ -144,6 +144,10 @@ module Importers
 
       def tagging_csv_validator
         @tagging_csv_validator ||= TaggingCsvValidator.new(licences_tagging)
+      end
+
+      def licence_identifier(details)
+        details["licence_identifier"] if details["continuation_link"].blank?
       end
     end
   end
