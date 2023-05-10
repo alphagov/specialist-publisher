@@ -30,6 +30,21 @@
 # available at https://guides.rubyonrails.org/i18n.html.
 
 en:
+  activemodel:
+    errors:
+      models:
+        licence_transaction:
+          attributes:
+            title:
+              blank: Enter a title
+            summary:
+              blank: Enter a summary
+            body:
+              blank: Enter body text
+            update_type:
+              blank: Select an update type
+            change_note:
+              blank: Enter a change note
   i18n:
     direction: ltr
   language_names:
