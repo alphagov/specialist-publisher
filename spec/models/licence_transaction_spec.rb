@@ -37,5 +37,22 @@ RSpec.describe LicenceTransaction do
 
       expect(subject).to be_valid
     end
+
+    it "is valid when continuation link is a link" do
+      subject.licence_transaction_will_continue_on = "GDS"
+      subject.licence_transaction_continuation_link = "https://www.gov.uk"
+
+      expect(subject).to be_valid
+    end
+
+    it "is invalid when continuation link isn't a link" do
+      subject.licence_transaction_will_continue_on = "GDS"
+      subject.licence_transaction_continuation_link = "not-a-link.abc"
+
+      expect(subject).to be_invalid
+      expect(subject.errors[:licence_transaction_continuation_link]).to eq(
+        [subject.errors.generate_message(:licence_transaction_continuation_link, :invalid)],
+      )
+    end
   end
 end
