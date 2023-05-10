@@ -53,6 +53,12 @@ en:
               link_and_identifier_exists: Enter either the website where users can apply for the licence or the licence identifier
             licence_transaction_licence_identifier:
               taken: This licence identifier is already in use
+            licence_transaction_industry:
+              blank: Select an industry
+            licence_transaction_location:
+              blank: Select a location
+            primary_publishing_organisation:
+              blank: Select a primary publishing organisation
   i18n:
     direction: ltr
   language_names:
