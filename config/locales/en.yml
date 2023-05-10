@@ -51,6 +51,8 @@ en:
               blank: Enter the name of the website
             base:
               link_and_identifier_exists: Enter either the website where users can apply for the licence or the licence identifier
+            licence_transaction_licence_identifier:
+              taken: This licence identifier is already in use
   i18n:
     direction: ltr
   language_names:
