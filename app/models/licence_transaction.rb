@@ -1,4 +1,5 @@
 class LicenceTransaction < Document
+  validates_with LinkOrIdentifierValidator
   validates :primary_publishing_organisation, presence: true
 
   FORMAT_SPECIFIC_FIELDS = %i[
