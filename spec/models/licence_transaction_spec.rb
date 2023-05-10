@@ -31,6 +31,8 @@ RSpec.describe LicenceTransaction do
     end
 
     it "is valid with a unique identifier" do
+      stub_publishing_api_has_content([payload], hash_including(document_type: "licence_transaction"))
+
       subject.licence_transaction_licence_identifier = "7777-7-7"
 
       expect(subject).to be_valid

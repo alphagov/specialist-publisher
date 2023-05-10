@@ -1,6 +1,7 @@
 class LicenceTransaction < Document
   validates_with LinkOrIdentifierValidator
   validates :primary_publishing_organisation, presence: true
+  validates :licence_transaction_licence_identifier, licence_identifier_unique: true
 
   FORMAT_SPECIFIC_FIELDS = %i[
     licence_transaction_continuation_link
