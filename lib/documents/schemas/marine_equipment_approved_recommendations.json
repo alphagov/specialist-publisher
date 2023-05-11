@@ -1,0 +1,166 @@
+{
+  "pre_production": true,
+  "content_id": "49f47764-2b1b-4b0d-9164-4aa6b42a8b63",
+  "base_path": "/marine-equipment-approved-recommendations",
+  "format_name": "UK Approved Recommendations – Marine Equipment",
+  "name": "UK Approved Recommendations – Marine Equipment",
+  "description": "Find recommendations on how to interpret and apply the Merchant Shipping (Marine Equipment) Regulations 2016 as amended.",
+  "filter": {
+    "format": "marine_equipment_approved_recommendation"
+  },
+  "show_summaries": true,
+  "editing_organisations": [
+    "23a24aa8-1711-42b6-bf6b-47af0f230295"
+  ],
+  "organisations": [
+    "23a24aa8-1711-42b6-bf6b-47af0f230295"
+  ],
+  "related": [
+    "e234eed3-8ab9-4c45-af63-1fca0029e165",
+    "03f48130-94ba-47e5-8112-e9af5e018e2d"
+  ],
+  "signup_content_id": "512a14c1-260a-4c4e-8de8-643eadf7905c",
+  "signup_copy": "You’ll get an email each time a new UK Approved Recommendation is published.",
+  "email_filter_by": "all_selected_facets",
+  "email_filter_facets": [
+    {
+      "facet_id": "category",
+      "facet_name": "Category",
+      "facet_choices": [
+        {
+          "key": "life-saving-appliances",
+          "radio_button_name": "Life-saving appliances",
+          "topic_name": "life-saving appliances",
+          "prechecked": false
+        },
+        {
+          "key": "marine-pollution-prevention",
+          "radio_button_name": "Marine pollution prevention",
+          "topic_name": "marine pollution prevention",
+          "prechecked": false
+        },
+        {
+          "key": "fire-protection-equipment",
+          "radio_button_name": "Fire protection equipment",
+          "topic_name": "fire protection equipment",
+          "prechecked": false
+        },
+        {
+          "key": "navigation-equipment",
+          "radio_button_name": "Navigation equipment",
+          "topic_name": "navigation equipment",
+          "prechecked": false
+        },
+        {
+          "key": "radio-communication-equipment",
+          "radio_button_name": "Radio-communication equipment",
+          "topic_name": "radio-communication equipment",
+          "prechecked": false
+        },
+        {
+          "key": "equipment-required-under-colregs",
+          "radio_button_name": "Equipment required under COLREGs",
+          "topic_name": "equipment required under colregs",
+          "prechecked": false
+        },
+        {
+          "key": "other-safety-equipment",
+          "radio_button_name": "Other safety equipment",
+          "topic_name": "other safety equipment",
+          "prechecked": false
+        },
+        {
+          "key": "equipment-under-solas-chapter-ii-1",
+          "radio_button_name": "Equipment under SOLAS Chapter II-1",
+          "topic_name": "equipment under solas chapter ii-1",
+          "prechecked": false
+        },
+        {
+          "key": "general",
+          "radio_button_name": "General",
+          "topic_name": "general",
+          "prechecked": false
+        }
+      ]
+    }
+  ],
+  "subscription_list_title_prefix": "UK Approved Recommendations for marine equipment",
+  "summary": "<p>Find recommendations on how to interpret and apply the Merchant Shipping (Marine Equipment) Regulations 2016 as amended.</p>",
+  "document_noun": "recommendation",
+  "facets": [
+    {
+      "key": "category",
+      "name": "Category",
+      "short_name": "Recommendation type",
+      "type": "text",
+      "preposition": "With recommendation type",
+      "display_as_result_metadata": true,
+      "filterable": true,
+      "allowed_values": [
+        {
+          "label": "Life-saving appliances",
+          "value": "life-saving-appliances"
+        },
+        {
+          "label": "Marine pollution prevention",
+          "value": "marine-pollution-prevention"
+        },
+        {
+          "label": "Fire protection equipment",
+          "value": "fire-protection-equipment"
+        },
+        {
+          "label": "Navigation equipment",
+          "value": "navigation-equipment"
+        },
+        {
+          "label": "Radio-communication equipment",
+          "value": "radio-communication-equipment"
+        },
+        {
+          "label": "Equipment required under COLREGs",
+          "value": "equipment-required-under-colregs"
+        },
+        {
+          "label": "Other safety equipment",
+          "value": "other-safety-equipment"
+        },
+        {
+          "label": "Equipment under SOLAS Chapter II-1",
+          "value": "equipment-under-solas-chapter-ii-1"
+        },
+        {
+          "label": "General",
+          "value": "general"
+        }
+      ]
+    },
+    {
+      "key": "year_adopted",
+      "name": "Year adopted",
+      "short_name": "Year",
+      "type": "text",
+      "preposition": "With year",
+      "display_as_result_metadata": true,
+      "filterable": false
+    },
+    {
+      "key": "reference_number",
+      "name": "Reference number",
+      "short_name": "Reference",
+      "type": "text",
+      "preposition": "With reference",
+      "display_as_result_metadata": true,
+      "filterable": false
+    },
+    {
+      "key": "keyword",
+      "name": "Keyword",
+      "short_name": "Keyword",
+      "type": "text",
+      "preposition": "With keyword",
+      "display_as_result_metadata": true,
+      "filterable": false
+    }
+  ]
+}

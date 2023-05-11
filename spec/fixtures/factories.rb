@@ -32,6 +32,11 @@ FactoryBot.define do
     organisation_content_id { "957eb4ec-089b-4f71-ba2a-dc69ac8919ea" }
   end
 
+  factory :marine_equipment_approved_recommendation_editor, parent: :editor do
+    organisation_slug { "maritime-and-coastguard-agency" }
+    organisation_content_id { "23a24aa8-1711-42b6-bf6b-47af0f230295" }
+  end
+
   factory :moj_editor, parent: :editor do
     organisation_slug { "ministry-of-justice" }
     organisation_content_id { "dcc907d6-433c-42df-9ffb-d9c68be5dc4d" }
@@ -204,6 +209,21 @@ FactoryBot.define do
           "location" => "Near Popham Airfield, Hampshire",
           "aircraft_type" => "Alpi (Cavaciuti) Pioneer 400",
           "registration" => "G-CGVO",
+        }
+      end
+    end
+  end
+
+  factory :marine_equipment_approved_recommendation, parent: :document do
+    base_path { "/marine-equipment-approved-recommendations/example-document" }
+    document_type { "marine_equipment_approved_recommendation" }
+    transient do
+      default_metadata do
+        {
+          "category" => %w[navigation-equipment radio-communication-equipment],
+          "year_adopted" => "2023",
+          "reference_number" => "ABC123",
+          "keyword" => "keyword",
         }
       end
     end
