@@ -28,7 +28,6 @@
   %>
 <% end %>
 
-
 <%= render layout: "shared/form_group", locals: { f: f, field: :licence_transaction_will_continue_on, label: "Name of website where you apply" } do %>
   <%= f.text_field :licence_transaction_will_continue_on, class: 'form-control' %>
 <% end %>
@@ -39,4 +38,31 @@
 
 <%= render layout: "shared/form_group", locals: { f: f, field: :licence_transaction_licence_identifier, label: "Licence identifier" } do %>
   <%= f.text_field :licence_transaction_licence_identifier, class: 'form-control' %>
+<% end %>
+
+<%= render "shared/form_group", f: f, field: :primary_publishing_organisation, label: "Publishing organisation" do %>
+  <%= f.select :primary_publishing_organisation,
+      organisations_options,
+      {},
+      {
+        class: "select2 form-control",
+        multiple: false,
+        data: {
+          placeholder: "Select a primary publishing organisation"
+        }
+      }
+  %>
+<% end %>
+<%= render "shared/form_group", f: f, field: :organisations, label: "Other associated organisations" do %>
+  <%= f.select :organisations,
+      organisations_options,
+      {},
+      {
+        class: "select2 form-control select-all-disabled",
+        multiple: true,
+        data: {
+          placeholder: "Select organisations"
+        }
+      }
+  %>
 <% end %>
