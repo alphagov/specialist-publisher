@@ -23,9 +23,9 @@ class DocumentBuilder
     set_update_type(document, payload)
 
     if document.has_organisations?
-      primary_organisation_ary = payload["links"]["primary_publishing_organisation"]
+      primary_organisation_ary = payload["links"]["primary_publishing_organisation"] || []
       document.primary_publishing_organisation = primary_organisation_ary.first
-      document.organisations = payload["links"]["organisations"] - primary_organisation_ary
+      document.organisations = (payload["links"]["organisations"] || []) - primary_organisation_ary
     end
 
     document.attachments = Attachment.all_from_publishing_api(payload)
