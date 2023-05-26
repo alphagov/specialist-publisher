@@ -13,13 +13,12 @@ RSpec.describe "unpublish rake tasks", type: :task do
     end
 
     it "returns error message if incorrect finder slug is given" do
-      task.invoke("aaib-testing", "https://service.gov.uk")
-      expect(output.string).to include("Could not find any finders with that slug. Please check again.")
+      expect { task.invoke("aaib_testing", "https://service.gov.uk") }.to raise_error("Could not find file: lib/documents/schemas/aaib_testing.json")
     end
 
     it "unpublishes finder with redirect" do
       content_id = MultiJson.load(File.read("lib/documents/schemas/aaib_reports.json"))["content_id"]
-      task.invoke("aaib-reports", "https://service.gov.uk")
+      task.invoke("aaib_reports", "https://service.gov.uk")
       expect(output.string).to include("Publishing API response 200")
       expect(output.string).to include("Finder unpublished")
       assert_publishing_api_unpublish(
@@ -32,7 +31,7 @@ RSpec.describe "unpublish rake tasks", type: :task do
 
     it "returns error message if publishing API errors" do
       stub_any_publishing_api_unpublish.and_raise(GdsApi::HTTPServerError.new(500))
-      task.invoke("aaib-reports", "https://service.gov.uk")
+      task.invoke("aaib_reports", "https://service.gov.uk")
       expect(output.string).to include("Error unpublishing finder: #<GdsApi::HTTPServerError: GdsApi::HTTPServerError>")
     end
   end

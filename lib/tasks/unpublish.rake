@@ -1,20 +1,13 @@
 require "services"
 
 namespace :unpublish do
-  desc "Unpublish a Finder by slug and redirect the finder page to specific URL"
-  task :redirect_finder, %i[finder_slug redirect_url] => :environment do |_, args|
-    schema_file = Dir.glob("lib/documents/schemas/*.json").find do |file|
-      File.foreach(file).grep(/"base_path": "\/#{args.finder_slug}"/).any?
-    end
+  desc "Unpublish a Finder by file name and redirect the finder page to specific URL"
+  task :redirect_finder, %i[finder_file redirect_url] => :environment do |_, args|
+    require "finder_loader"
 
-    if schema_file.nil?
-      puts "Could not find any finders with that slug. Please check again."
-      next
-    end
-
-    schema = MultiJson.load(File.read(schema_file))
+    schema = FinderLoader.new.finder(args.finder_file).first[:file]
     puts "=== Finder found ==="
-    puts "Slug: #{args.finder_slug}"
+    puts "Slug: #{schema['base_path']}"
     puts "Finder name: #{schema['name']}"
     puts "Content ID: #{schema['content_id']}"
     puts "Redirecting to: #{args.redirect_url}"
