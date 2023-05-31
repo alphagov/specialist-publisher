@@ -183,22 +183,26 @@ RSpec.describe Importers::LicenceTransaction::LicenceImporter do
       ],
       redirects: [],
       update_type: "major",
-      links: { finder: %w[b8327c0c-a90d-47b6-992b-ea226b4d3306] },
+      links: {
+        finder: %w[b8327c0c-a90d-47b6-992b-ea226b4d3306],
+        organisations: %w[aa750cdf-7925-429d-a2b3-0d9fa47d2c48],
+        primary_publishing_organisation: %w[aa750cdf-7925-429d-a2b3-0d9fa47d2c48],
+      },
     }
   end
 
   def expected_patch_links_payload
     {
-      organisations: %w[af07d5a5-df63-4ddc-9383-6a666845ebe9],
-      primary_publishing_organisation: %w[af07d5a5-df63-4ddc-9383-6a666845ebe9],
+      organisations: %w[aa750cdf-7925-429d-a2b3-0d9fa47d2c48],
+      primary_publishing_organisation: %w[aa750cdf-7925-429d-a2b3-0d9fa47d2c48],
       taxons: [],
     }
   end
 
   def publising_api_get_links_response
     {
-      "organisations" => %w[af07d5a5-df63-4ddc-9383-6a666845ebe9],
-      "primary_publishing_organisation" => %w[af07d5a5-df63-4ddc-9383-6a666845ebe9],
+      "organisations" => %w[aa750cdf-7925-429d-a2b3-0d9fa47d2c48],
+      "primary_publishing_organisation" => %w[aa750cdf-7925-429d-a2b3-0d9fa47d2c48],
       "taxons" => [],
     }
   end

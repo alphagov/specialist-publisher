@@ -1,4 +1,6 @@
 class LicenceTransaction < Document
+  validates :primary_publishing_organisation, presence: true
+
   FORMAT_SPECIFIC_FIELDS = %i[
     licence_transaction_continuation_link
     licence_transaction_industry
@@ -7,10 +9,12 @@ class LicenceTransaction < Document
     licence_transaction_will_continue_on
   ].freeze
 
-  attr_accessor(*FORMAT_SPECIFIC_FIELDS)
+  attr_accessor(*FORMAT_SPECIFIC_FIELDS, :organisations, :primary_publishing_organisation)
 
   def initialize(params = {})
     super(params, FORMAT_SPECIFIC_FIELDS)
+    @primary_publishing_organisation = params[:primary_publishing_organisation]
+    @organisations = params[:organisations]
   end
 
   def taxons
@@ -21,9 +25,15 @@ class LicenceTransaction < Document
     "Licence"
   end
 
-  def primary_publishing_organisation
-    # Set to GDS for testing
-    "af07d5a5-df63-4ddc-9383-6a666845ebe9"
+  def has_organisations?
+    true
+  end
+
+  def links
+    super.merge(
+      organisations: organisations | [primary_publishing_organisation],
+      primary_publishing_organisation: [primary_publishing_organisation],
+    )
   end
 
   def route_type

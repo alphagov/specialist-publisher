@@ -39,6 +39,8 @@ module Importers
             licence_transaction_will_continue_on: details["will_continue_on"].presence,
             licence_transaction_continuation_link: details["continuation_link"].presence,
             licence_transaction_licence_identifier: licence_identifier(details),
+            primary_publishing_organisation: tagging["primary_publishing_organisation"] || ::LicenceTransaction.schema_organisations.first,
+            organisations: tagging["organisations"]&.split(";") || [],
             imported: true,
           )
 
