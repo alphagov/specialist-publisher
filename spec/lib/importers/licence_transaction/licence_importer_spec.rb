@@ -122,7 +122,7 @@ RSpec.describe Importers::LicenceTransaction::LicenceImporter do
   end
 
   def licence_doesnt_exist_in_tagging
-    "Not imported licence as missing from tagging file: /non-existant\n"
+    "Missing licences from tagging file: [\"/non-existant\"]\n"
   end
 
   def csv_invalid_message

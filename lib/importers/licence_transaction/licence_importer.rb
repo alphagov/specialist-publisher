@@ -13,11 +13,12 @@ module Importers
       def call
         return tagging_csv_validator.errors unless tagging_csv_validator.valid?
 
+        missing_licences = []
         licences.each do |licence|
           tagging = tags_for_licence(licence["base_path"])
 
           unless tagging
-            puts "Not imported licence as missing from tagging file: #{licence['base_path']}"
+            missing_licences << licence["base_path"]
             next
           end
 
@@ -65,6 +66,10 @@ module Importers
           publish(new_content_id)
 
           puts "Published: #{new_licence.base_path}"
+        end
+
+        if missing_licences.present?
+          puts "Missing licences from tagging file: #{missing_licences}"
         end
       end
 
