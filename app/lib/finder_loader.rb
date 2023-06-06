@@ -10,19 +10,6 @@ class FinderLoader
     end
   end
 
-  def finder(name)
-    json_schema = "lib/documents/schemas/#{name}.json"
-
-    if File.exist?(json_schema)
-      [{
-        file: MultiJson.load(File.read(json_schema)),
-        timestamp: File.mtime(json_schema),
-      }]
-    else
-      raise "Could not find file: #{json_schema}"
-    end
-  end
-
   def finder_by_slug(slug)
     schema_file = files.find do |file|
       File.foreach(file).grep(/"base_path": "\/#{slug}"/).any?
