@@ -14,21 +14,42 @@ module Importers
       def errors
         return if valid?
 
-        tagging_validation_errors.each { |e| puts "#{e}\n\n" }
+        tagging_validation_errors.each { |e| puts e.to_s }
         puts unrecognised_tags_instructions
       end
 
     private
 
       def tagging_validation_errors
-        @tagging_validation_errors ||= licences_tagging.filter_map do |tagging|
-          unrecognised_locations = tagging["locations"] - schema_values["licence_transaction_location"]
-          unrecognised_industries = tagging["industries"] - schema_values["licence_transaction_industry"]
+        @tagging_validation_errors ||=
+          licences_tagging.filter_map do |tagging|
+            errors = [
+              industry_errors(tagging),
+              location_errors(tagging),
+            ].compact
 
-          next if unrecognised_locations.empty? && unrecognised_industries.empty?
+            if errors.present?
+              combined_errors = errors.join("\n- ")
 
-          "Unrecognised tags for #{tagging['base_path']}:\n locations: #{unrecognised_locations},\n industries: #{unrecognised_industries}"
-        end
+              "CSV errors for '#{tagging['base_path']}':\n- #{combined_errors}\n\n"
+            end
+          end
+      end
+
+      def industry_errors(tagging)
+        unrecognised_industries = tagging["industries"] - schema_values["licence_transaction_industry"]
+
+        return if unrecognised_industries.empty?
+
+        "unrecognised industries: '#{unrecognised_industries}'"
+      end
+
+      def location_errors(tagging)
+        unrecognised_locations = tagging["locations"] - schema_values["licence_transaction_location"]
+
+        return if unrecognised_locations.empty?
+
+        "unrecognised locations: '#{unrecognised_locations}'"
       end
 
       def schema_values

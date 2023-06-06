@@ -127,13 +127,11 @@ RSpec.describe Importers::LicenceTransaction::LicenceImporter do
 
   def csv_invalid_message
     <<~HEREDOC
-      Unrecognised tags for /licence-to-abstract-and-or-impound-water-northern-ireland:
-       locations: ["northern-ireeeeeland"],
-       industries: []
+      CSV errors for '/licence-to-abstract-and-or-impound-water-northern-ireland':
+      - unrecognised locations: ["northern-ireeeeeland"]
 
-      Unrecognised tags for /notification-to-process-personal-data:
-       locations: [],
-       industries: ["arts-and-things-and-stuff-recreation"]
+      CSV errors for '/notification-to-process-personal-data':
+      - unrecognised industries: ["arts-and-things-and-stuff-recreation"]
 
       Please read the instructions (under heading 'Update tagging') in the following link to resolve the unrecognised
       tags errors: https://trello.com/c/2SBbuD8N/1969-how-to-correct-unrecognised-tags-when-importing-licences
