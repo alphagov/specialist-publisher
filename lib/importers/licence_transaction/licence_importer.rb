@@ -123,7 +123,7 @@ module Importers
 
       def industries(grouped_licence)
         grouped_licence.flat_map do |licence|
-          licence[2..].compact.map(&:parameterize)
+          licence[5..].compact.map(&:parameterize)
         end
       end
 
