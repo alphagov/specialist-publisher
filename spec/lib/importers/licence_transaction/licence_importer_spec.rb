@@ -6,6 +6,8 @@ RSpec.describe Importers::LicenceTransaction::LicenceImporter do
   let(:new_content_id) { "0cc89dd8-1055-4e6b-8f64-9a772dbe28db" }
   let(:publishing_api_response) { publishing_api_licences_response }
   let(:licence_identifier) { "9150-7-1" }
+  let(:tagging_path) { Rails.root.join("spec/support/csvs/valid_licence_and_tagging.csv") }
+  let(:invalid_tagging_path) { Rails.root.join("spec/support/csvs/invalid_licence_and_tagging.csv") }
 
   before do
     allow(SecureRandom).to receive(:uuid).and_return(new_content_id)
@@ -14,13 +16,22 @@ RSpec.describe Importers::LicenceTransaction::LicenceImporter do
       publishing_api_response,
       { document_type: "licence", page: 1, per_page: 500, states: "published" },
     )
+    stub_publishing_api_has_content(
+      [
+        { "title" => "Department for Environment, Food & Rural Affairs", "content_id" => "af07d5a5-df63-4ddc-9383-6a666845ebe1" },
+        { "title" => "Department of Health and Social Care", "content_id" => "af07d5a5-df63-4ddc-9383-6a666845ebe2" },
+        { "title" => "Home Office", "content_id" => "af07d5a5-df63-4ddc-9383-6a666845ebe3" },
+        { "title" => "Scottish Government", "content_id" => "af07d5a5-df63-4ddc-9383-6a666845ebe4" },
+        { "title" => "Centre for Environment, Fisheries and Aquaculture Science", "content_id" => "af07d5a5-df63-4ddc-9383-6a666845ebe5" },
+      ],
+      hash_including(document_type: "organisation"),
+    )
   end
 
   context "when the csv tagging is invalid" do
     it "doesn't migrate licences and outputs an error message" do
-      tagging_path = Rails.root.join("spec/support/csvs/invalid_licence_and_tagging.csv")
-      expect { described_class.new(tagging_path).call }
-        .to output(csv_invalid_message).to_stdout
+      expect { described_class.new(invalid_tagging_path).call }
+        .to output(csv_validation_errors_message).to_stdout
 
       expect(stub_any_publishing_api_put_content).to_not have_been_requested
       expect(stub_any_publishing_api_patch_links).to_not have_been_requested
@@ -50,7 +61,7 @@ RSpec.describe Importers::LicenceTransaction::LicenceImporter do
         new_content_id, { links: expected_patch_links_payload }
       )
 
-      expect { described_class.new.call }
+      expect { described_class.new(tagging_path).call }
         .to output(successful_import_message).to_stdout
 
       expect(put_content_request).to have_been_requested
@@ -65,7 +76,7 @@ RSpec.describe Importers::LicenceTransaction::LicenceImporter do
     end
 
     it "doesn't migrate the licence" do
-      expect { described_class.new.call }
+      expect { described_class.new(tagging_path).call }
         .to output(invalid_licence_error_message).to_stdout
 
       expect(stub_any_publishing_api_put_content).to_not have_been_requested
@@ -83,7 +94,7 @@ RSpec.describe Importers::LicenceTransaction::LicenceImporter do
     end
 
     it "doesn't migrate the licence" do
-      expect { described_class.new.call }
+      expect { described_class.new(tagging_path).call }
         .to output(already_imported_licence_message).to_stdout
 
       expect(stub_any_publishing_api_put_content).to_not have_been_requested
@@ -100,7 +111,7 @@ RSpec.describe Importers::LicenceTransaction::LicenceImporter do
     end
 
     it "doesn't migrate the licence" do
-      expect { described_class.new.call }
+      expect { described_class.new(tagging_path).call }
         .to output(licence_doesnt_exist_in_tagging).to_stdout
 
       expect(stub_any_publishing_api_put_content).to_not have_been_requested
@@ -125,13 +136,19 @@ RSpec.describe Importers::LicenceTransaction::LicenceImporter do
     "Missing licences from tagging file: [\"/non-existant\"]\n"
   end
 
-  def csv_invalid_message
+  def csv_validation_errors_message
     <<~HEREDOC
       CSV errors for '/licence-to-abstract-and-or-impound-water-northern-ireland':
-      - unrecognised locations: ["northern-ireeeeeland"]
+      - unrecognised locations: '["northern-ireeeeeland"]'
+      - primary publishing organisation doesn't exist: '["Random non-org"]'
+
+      CSV errors for '/consent-for-leaflet-distribution-northern-ireland':
+      - primary publishing organisation doesn't exist: '["Government Digital Service"]'
 
       CSV errors for '/notification-to-process-personal-data':
-      - unrecognised industries: ["arts-and-things-and-stuff-recreation"]
+      - unrecognised industries: '["arts-and-things-and-stuff-recreation"]'
+      - primary publishing organisation doesn't exist: '["Government Digital Service"]'
+      - organisations don't exist: '["thing", "bing"]'
 
       Please read the instructions (under heading 'Update tagging') in the following link to resolve the unrecognised
       tags errors: https://trello.com/c/2SBbuD8N/1969-how-to-correct-unrecognised-tags-when-importing-licences
@@ -183,8 +200,11 @@ RSpec.describe Importers::LicenceTransaction::LicenceImporter do
       update_type: "major",
       links: {
         finder: %w[b8327c0c-a90d-47b6-992b-ea226b4d3306],
-        organisations: %w[aa750cdf-7925-429d-a2b3-0d9fa47d2c48],
-        primary_publishing_organisation: %w[aa750cdf-7925-429d-a2b3-0d9fa47d2c48],
+        organisations: %w[
+          af07d5a5-df63-4ddc-9383-6a666845ebe3
+          af07d5a5-df63-4ddc-9383-6a666845ebe2
+        ],
+        primary_publishing_organisation: %w[af07d5a5-df63-4ddc-9383-6a666845ebe2],
       },
     }
   end

@@ -40,8 +40,8 @@ module Importers
             licence_transaction_will_continue_on: details["will_continue_on"].presence,
             licence_transaction_continuation_link: details["continuation_link"].presence,
             licence_transaction_licence_identifier: licence_identifier(details),
-            primary_publishing_organisation: tagging["primary_publishing_organisation"] || ::LicenceTransaction.schema_organisations.first,
-            organisations: tagging["organisations"]&.split(";") || [],
+            primary_publishing_organisation: tagging["primary_publishing_organisation"],
+            organisations: tagging["organisations"],
             imported: true,
           )
 
@@ -101,18 +101,24 @@ module Importers
         )["results"]
       end
 
-      def licences_tagging
-        @licences_tagging ||= grouped_licences.map do |licence_url, rows|
-          {
-            "base_path" => URI.parse(licence_url).path,
-            "locations" => locations(rows).uniq,
-            "industries" => industries(rows).uniq,
-          }
-        end
+      def all_organisations
+        @all_organisations ||= Organisation.all
+      end
+
+      def find_organisation(csv_org_title)
+        all_organisations.find { |organisation| organisation.title == csv_org_title }
+      end
+
+      def primary_publishing_organisation(ppo_titles)
+        find_organisation(ppo_titles.uniq.first).content_id
+      end
+
+      def organisations(organisation_titles)
+        organisation_titles.uniq.compact.flat_map { |title| find_organisation(title).content_id }
       end
 
       def tags_for_licence(base_path)
-        licences_tagging.find { |l| l["base_path"] == base_path }
+        tagging.find { |l| l["base_path"] == base_path }
       end
 
       def locations(grouped_licence)
@@ -128,7 +134,7 @@ module Importers
       end
 
       def grouped_licences
-        CSV.foreach(tagging_path, headers: true).group_by do |licence|
+        @grouped_licences ||= CSV.foreach(tagging_path, headers: true).group_by do |licence|
           licence["Link"]
         end
       end
@@ -149,8 +155,40 @@ module Importers
         Services.publishing_api.publish(new_content_id, "republish", locale: "en")
       end
 
+      def tagging
+        @tagging ||= grouped_licences.map do |licence_url, rows|
+          {
+            "base_path" => URI.parse(licence_url).path,
+            "locations" => locations(rows).uniq,
+            "industries" => industries(rows).uniq,
+            "primary_publishing_organisation" => primary_publishing_organisation(raw_primary_publishing_organisation(rows)),
+            "organisations" => organisations(raw_organisations(rows)),
+          }
+        end
+      end
+
+      def raw_tagging
+        grouped_licences.map do |licence_url, rows|
+          {
+            "base_path" => URI.parse(licence_url).path,
+            "locations" => locations(rows).uniq,
+            "industries" => industries(rows).uniq,
+            "primary_publishing_organisation" => raw_primary_publishing_organisation(rows),
+            "organisations" => raw_organisations(rows),
+          }
+        end
+      end
+
+      def raw_primary_publishing_organisation(rows)
+        rows.filter_map { |l| l["Primary publishing organisation"] }
+      end
+
+      def raw_organisations(rows)
+        rows.flat_map { |l| [l["Organisation 1"], l["Organisation 2"]] }.compact
+      end
+
       def tagging_csv_validator
-        @tagging_csv_validator ||= TaggingCsvValidator.new(licences_tagging)
+        @tagging_csv_validator ||= TaggingCsvValidator.new(raw_tagging, all_organisations)
       end
 
       def licence_identifier(details)
