@@ -1,10 +1,11 @@
 module Importers
   module LicenceTransaction
     class TaggingCsvValidator
-      attr_reader :licences_tagging
+      attr_reader :licences_tagging, :organisations
 
-      def initialize(licences_tagging)
+      def initialize(licences_tagging, organisations)
         @licences_tagging = licences_tagging
+        @organisations = organisations
       end
 
       def valid?
@@ -26,6 +27,8 @@ module Importers
             errors = [
               industry_errors(tagging),
               location_errors(tagging),
+              primary_publishing_organisation_errors(tagging),
+              organisations_errors(tagging),
             ].compact
 
             if errors.present?
@@ -34,6 +37,32 @@ module Importers
               "CSV errors for '#{tagging['base_path']}':\n- #{combined_errors}\n\n"
             end
           end
+      end
+
+      def primary_publishing_organisation_errors(tagging)
+        ppo = tagging["primary_publishing_organisation"].uniq
+
+        if ppo.blank?
+          return "primary publishing organisation blank"
+        end
+
+        if ppo.count > 1
+          return "more than one primary publishing organisation: '#{ppo}'"
+        end
+
+        if validated_organisations(ppo).blank?
+          "primary publishing organisation doesn't exist: '#{ppo}'"
+        end
+      end
+
+      def organisations_errors(tagging)
+        return if tagging["organisations"].blank?
+
+        unrecognised_organisations = tagging["organisations"] - validated_organisations(tagging["organisations"])
+
+        return if unrecognised_organisations.blank?
+
+        "organisations don't exist: '#{unrecognised_organisations}'"
       end
 
       def industry_errors(tagging)
@@ -64,6 +93,14 @@ module Importers
         schema_file_path = Rails.root.join("lib/documents/schemas/licence_transactions.json")
         json_blob = File.new(schema_file_path).read
         JSON.parse(json_blob)
+      end
+
+      def validated_organisations(organisation_titles)
+        organisation_titles.select { |title| all_organisation_titles.include?(title) }
+      end
+
+      def all_organisation_titles
+        @all_organisation_titles ||= organisations.map(&:title)
       end
 
       def unrecognised_tags_instructions
