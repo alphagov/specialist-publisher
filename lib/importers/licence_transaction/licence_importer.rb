@@ -102,7 +102,10 @@ module Importers
       end
 
       def all_organisations
-        @all_organisations ||= Organisation.all
+        # TODO: remove leading / trailing whitespace at the source (Whitehall)
+        @all_organisations ||= Organisation.all.map do |o|
+          Organisation.new("title" => o.title.strip, "content_id" => o.content_id)
+        end
       end
 
       def find_organisation(csv_org_title)
@@ -180,11 +183,11 @@ module Importers
       end
 
       def raw_primary_publishing_organisation(rows)
-        rows.filter_map { |l| l["Primary publishing organisation"] }
+        rows.filter_map { |l| l["Primary publishing organisation"]&.strip }
       end
 
       def raw_organisations(rows)
-        rows.flat_map { |l| [l["Organisation 1"], l["Organisation 2"]] }.compact
+        rows.flat_map { |l| [l["Organisation 1"]&.strip, l["Organisation 2"]&.strip] }.compact
       end
 
       def tagging_csv_validator
