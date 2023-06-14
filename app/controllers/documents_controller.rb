@@ -4,6 +4,7 @@ class DocumentsController < ApplicationController
   include ActionView::Helpers::TagHelper
   include ActionView::Helpers::TextHelper
   include ActionView::Helpers::UrlHelper
+  include OrganisationsHelper
 
   before_action :fetch_document, except: %i[index new create]
   before_action :check_authorisation, if: :document_type_slug
@@ -12,7 +13,10 @@ class DocumentsController < ApplicationController
     page = filtered_page_param(params[:page])
     per_page = filtered_per_page_param(params[:per_page])
     @query = params[:query]
-    @response = current_format.all(page, per_page, query: @query)
+    if current_format.has_organisations?
+      @organisation = selected_organisation_or_current(params[:organisation])
+    end
+    @response = current_format.all(page, per_page, query: @query, organisation: @organisation)
     @paged_documents = PaginationPresenter.new(@response, per_page)
   end
 

@@ -219,8 +219,8 @@ class Document
     DocumentBuilder.build(self, payload)
   end
 
-  def self.all(page, per_page, query: nil)
-    AllDocumentsFinder.all(page, per_page, query, document_type)
+  def self.all(page, per_page, query: nil, organisation: nil)
+    AllDocumentsFinder.all(page, per_page, query, document_type, organisation)
   end
 
   def self.find_each(&block)
