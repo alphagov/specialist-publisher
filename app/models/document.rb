@@ -354,7 +354,7 @@ class Document
     false
   end
 
-  def has_organisations?
+  def self.has_organisations?
     false
   end
 
