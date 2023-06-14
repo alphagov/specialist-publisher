@@ -24,8 +24,8 @@ RSpec.feature "Creating a Licence", type: :feature do
     stub_any_publishing_api_patch_links
   end
 
-  scenario "adding a new licence" do
-    visit "/find-licences"
+  scenario "creating a new licence" do
+    visit "/licences"
     click_link "Add another Licence"
     expect(page.status_code).to eq(200)
     expect(page.current_path).to eq("/licences/new")
