@@ -21,6 +21,7 @@ FactoryBot.define do
 
   factory :licence_transaction_editor, parent: :user do
     permissions { %w[signin licence_transaction_editor] }
+    organisation_content_id { "e338f02d-82a3-4c6c-8a36-df3050869d97" }
   end
 
   factory :statutory_instrument_editor, parent: :user do
