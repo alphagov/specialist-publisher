@@ -56,6 +56,7 @@ RSpec.feature "Access control", type: :feature do
 
   context "as a statutory instrument editor" do
     before do
+      stub_publishing_api_has_content([], hash_including(document_type: Organisation.document_type))
       log_in_as_editor(:statutory_instrument_editor)
     end
 

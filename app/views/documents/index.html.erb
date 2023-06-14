@@ -10,12 +10,20 @@
   <div class="sidebar col-md-3">
     <%= link_to "Add another #{current_format.title}", new_document_path(current_format.slug), class: 'action-link' %>
     <%= form_tag(documents_path(current_format.slug), method: :get, class: "add-vertical-margins well") do %>
+      <% if current_format.has_organisations? %>
+        <%= label_tag "organisation", "Organisation" %>
+        <%= select_tag "organisation",
+              options_for_select(organisations_options_with_all, selected_organisation_or_current(@organisation)),
+              class: "select2 form-control add-bottom-margin" %>
+      <% end %>
+
       <%= label_tag "query", "Search" %>
-      <%= text_field_tag("query", params[:query], class: "form-control add-bottom-margin") %>
+      <%= text_field_tag("query", @query, class: "form-control add-bottom-margin") %>
+
       <%= submit_tag "Search", name: nil, class: "btn btn-default" %>
     <% end %>
     <% if current_format.exportable? %>
-      <%= link_to "Export document list to CSV", export_documents_path(current_format.slug, query: params[:query]) %>
+      <%= link_to "Export document list to CSV", export_documents_path(current_format.slug, query: @query) %>
     <% end %>
   </div>
 
