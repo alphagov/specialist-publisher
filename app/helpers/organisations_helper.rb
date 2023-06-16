@@ -1,6 +1,6 @@
 module OrganisationsHelper
   def organisations_options
-    Organisation.all.map { |o| [o.title, o.content_id] }
+    Organisation.all.map { |o| [o.title, o.content_id] }.sort_by { |title, _id| title.downcase.strip }
   end
 
   def organisations_options_with_all
