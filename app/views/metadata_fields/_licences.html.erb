@@ -28,6 +28,12 @@
   %>
 <% end %>
 
+<div class="additional-field-context-section">
+  <h2>How users apply</h2>
+
+  <p>Enter either the website where users can apply for the licence, or the licence identifier.</p>
+</div>
+
 <%= render layout: "shared/form_group", locals: { f: f, field: :licence_transaction_will_continue_on, label: "Name of website where you apply" } do %>
   <%= f.text_field :licence_transaction_will_continue_on, class: 'form-control' %>
 <% end %>
