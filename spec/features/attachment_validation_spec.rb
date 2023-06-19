@@ -10,7 +10,7 @@ RSpec.feature "Validating inline attachments", type: :feature do
     fill_in "Body", with: "[InlineAttachment:missing.pdf]"
     click_button "Save"
 
-    expect(page).to have_content("Please fix the following errors")
+    expect(page).to have_content("There is a problem")
     expect(page).to have_content(
       "Body contains an attachment that can't be found: 'missing.pdf'",
     )
@@ -21,7 +21,7 @@ RSpec.feature "Validating inline attachments", type: :feature do
     fill_in "Body", with: "[InlineAttachment:<not>safe.pdf]"
     click_button "Save"
 
-    expect(page).to have_content("Please fix the following errors")
+    expect(page).to have_content("There is a problem")
 
     expect(page).to have_content(
       "Body contains an attachment that can't be found: '<not>safe.pdf'",

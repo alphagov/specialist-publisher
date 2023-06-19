@@ -110,7 +110,7 @@ private
   end
 
   def document_error_messages
-    heading = tag.h4("Please fix the following errors")
+    heading = tag.h4("There is a problem")
     errors = tag.ul(class: "list-unstyled remove-bottom-margin") do
       safe_join(@document.errors.full_messages.map { |message| tag.li(message.html_safe) })
     end

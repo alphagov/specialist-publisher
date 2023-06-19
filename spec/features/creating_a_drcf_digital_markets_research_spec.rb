@@ -29,7 +29,7 @@ RSpec.feature "Creating a DRCF digital markets research", type: :feature do
 
     expect(page.status_code).to eq(422)
 
-    expect(page).to have_content("Please fix the following errors")
+    expect(page).to have_content("There is a problem")
     expect(page).to have_content("Title can't be blank")
     expect(page).to have_content("Summary can't be blank")
     expect(page).to have_content("Body can't be blank")
@@ -123,7 +123,7 @@ RSpec.feature "Creating a DRCF digital markets research", type: :feature do
 
     expect(page.status_code).to eq(422)
 
-    expect(page).to have_content("Please fix the following errors")
+    expect(page).to have_content("There is a problem")
     expect(page).to have_content("Digital market research publish date is not a valid date")
   end
 
@@ -138,7 +138,7 @@ RSpec.feature "Creating a DRCF digital markets research", type: :feature do
 
     expect(page.status_code).to eq(422)
 
-    expect(page).to have_content("Please fix the following errors")
+    expect(page).to have_content("There is a problem")
     expect(page).to have_content("Body cannot include invalid Govspeak")
   end
 end

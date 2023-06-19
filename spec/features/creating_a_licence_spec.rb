@@ -38,7 +38,7 @@ RSpec.feature "Creating a Licence", type: :feature do
 
     expect(page.status_code).to eq(422)
 
-    expect(page).to have_content("Please fix the following errors")
+    expect(page).to have_content("There is a problem")
     expect(page).to have_content("Title can't be blank")
     expect(page).to have_content("Summary can't be blank")
     expect(page).to have_content("Body can't be blank")
