@@ -28,7 +28,7 @@ RSpec.describe DocumentLinksPresenter do
     it "set primary publishing organisations for #{klass}" do
       document = klass.new
       document.content_id = "a-content-id"
-      allow(document).to receive(:schema_organisations).and_return("an-organisation-id")
+      allow(document).to receive(:organisations).and_return("an-organisation-id")
 
       presenter = DocumentLinksPresenter.new(document)
       presented_data = presenter.to_json
