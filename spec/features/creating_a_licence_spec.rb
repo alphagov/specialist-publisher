@@ -52,8 +52,8 @@ RSpec.feature "Creating a Licence", type: :feature do
     fill_in "Body", with: "## Header#{"\n\nThis is the long body of a licence" * 2}"
     select "England", from: "Location"
     select "Advertising and marketing", from: "Industry"
-    fill_in "URL for \"Start Now\" button", with: "https://www.gov.uk"
-    fill_in "Name of website where you apply", with: "on GOV.UK"
+    fill_in "Link to where users apply", with: "https://www.gov.uk"
+    fill_in "Name of website where users apply", with: "on GOV.UK"
 
     click_button "Save as draft"
     assert_publishing_api_put_content(content_id)

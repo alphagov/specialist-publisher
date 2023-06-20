@@ -34,11 +34,11 @@
   <p>Enter either the website where users can apply for the licence, or the licence identifier.</p>
 </div>
 
-<%= render layout: "shared/form_group", locals: { f: f, field: :licence_transaction_will_continue_on, label: "Name of website where you apply" } do %>
+<%= render layout: "shared/form_group", locals: { f: f, field: :licence_transaction_will_continue_on, label: "Name of website where users apply" } do %>
   <%= f.text_field :licence_transaction_will_continue_on, class: 'form-control' %>
 <% end %>
 
-<%= render layout: "shared/form_group", locals: { f: f, field: :licence_transaction_continuation_link, label: "URL for \"Start Now\" button" } do %>
+<%= render layout: "shared/form_group", locals: { f: f, field: :licence_transaction_continuation_link, label: "Link to where users apply" } do %>
   <%= f.text_field :licence_transaction_continuation_link, class: 'form-control' %>
 <% end %>
 
