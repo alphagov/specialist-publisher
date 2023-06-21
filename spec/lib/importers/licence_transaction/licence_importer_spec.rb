@@ -211,17 +211,16 @@ RSpec.describe Importers::LicenceTransaction::LicenceImporter do
 
   def expected_patch_links_payload
     {
-      organisations: %w[aa750cdf-7925-429d-a2b3-0d9fa47d2c48],
-      primary_publishing_organisation: %w[aa750cdf-7925-429d-a2b3-0d9fa47d2c48],
+      organisations: %w[af07d5a5-df63-4ddc-9383-6a666845ebe3 af07d5a5-df63-4ddc-9383-6a666845ebe2],
+      primary_publishing_organisation: %w[af07d5a5-df63-4ddc-9383-6a666845ebe2],
       taxons: [],
     }
   end
 
   def publising_api_get_links_response
     {
-      "organisations" => %w[aa750cdf-7925-429d-a2b3-0d9fa47d2c48],
-      "primary_publishing_organisation" => %w[aa750cdf-7925-429d-a2b3-0d9fa47d2c48],
       "taxons" => [],
+      "available_translations" => %w[welsh],
     }
   end
 

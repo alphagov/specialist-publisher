@@ -4,6 +4,8 @@ require "csv"
 module Importers
   module LicenceTransaction
     class LicenceImporter
+      VALID_LINK_TYPES = %w[taxons mainstream_browse_pages].freeze
+
       attr_reader :tagging_path
 
       def initialize(tagging_path = nil)
@@ -61,7 +63,7 @@ module Importers
 
           save_draft(new_licence)
 
-          save_links(licence["content_id"], new_content_id)
+          save_links(licence["content_id"], new_content_id, tagging)
 
           publish(new_content_id)
 
@@ -148,10 +150,17 @@ module Importers
         Services.publishing_api.put_content(new_licence.content_id, presented_licence)
       end
 
-      def save_links(original_content_id, new_content_id)
+      def save_links(original_content_id, new_content_id, tagging)
         original_links = Services.publishing_api.get_links(original_content_id)["links"]
 
-        Services.publishing_api.patch_links(new_content_id, { links: original_links })
+        filtered_links = original_links.select { |k, _| VALID_LINK_TYPES.include?(k) }
+
+        links_with_orgs = {
+          organisations: tagging["organisations"] | [tagging["primary_publishing_organisation"]],
+          primary_publishing_organisation: [tagging["primary_publishing_organisation"]],
+        }.merge(filtered_links)
+
+        Services.publishing_api.patch_links(new_content_id, { links: links_with_orgs })
       end
 
       def publish(new_content_id)
