@@ -39,7 +39,7 @@ class StatutoryInstrument < Document
     )
   end
 
-  def has_organisations?
+  def self.has_organisations?
     true
   end
 

@@ -11,7 +11,7 @@ class AllDocumentsFinder
     }
   end
 
-  def self.all(page, per_page, query, document_type)
+  def self.all(page, per_page, query, document_type, organisation)
     params = default_find_params(document_type).merge(
       fields: %i[
         base_path
@@ -26,7 +26,11 @@ class AllDocumentsFinder
       per_page:,
       order: "-last_edited_at",
     )
-    params[:q] = query if query.present?
+
+    (params[:q] = query) if query.present?
+    if organisation != "all" && organisation
+      params[:link_organisations] = organisation
+    end
 
     Services.publishing_api.get_content_items(params)
   end

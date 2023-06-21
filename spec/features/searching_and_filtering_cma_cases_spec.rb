@@ -79,6 +79,8 @@ RSpec.feature "Searching and filtering", type: :feature do
 
       visit "/cma-cases"
 
+      expect(page).not_to have_select("Organisation")
+
       fill_in "Search", with: "0"
       click_button "Search"
       expect(page).to have_content("Example CMA Case 0")

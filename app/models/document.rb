@@ -186,16 +186,14 @@ class Document
     finder_schema.options_for(facet)
   end
 
-  def schema_organisations
-    finder_schema.organisations
-  end
+  delegate :organisations, to: :finder_schema
 
   def schema_editing_organisations
     finder_schema.editing_organisations
   end
 
   def self.schema_organisations
-    new.schema_organisations
+    finder_schema.organisations
   end
 
   def self.schema_editing_organisations
@@ -221,8 +219,8 @@ class Document
     DocumentBuilder.build(self, payload)
   end
 
-  def self.all(page, per_page, query: nil)
-    AllDocumentsFinder.all(page, per_page, query, document_type)
+  def self.all(page, per_page, query: nil, organisation: nil)
+    AllDocumentsFinder.all(page, per_page, query, document_type, organisation)
   end
 
   def self.find_each(&block)
@@ -354,7 +352,7 @@ class Document
     false
   end
 
-  def has_organisations?
+  def self.has_organisations?
     false
   end
 
