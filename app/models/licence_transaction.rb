@@ -1,4 +1,21 @@
 class LicenceTransaction < Document
+  FORMAT_SPECIFIC_FIELDS = %i[
+    licence_transaction_continuation_link
+    licence_transaction_industry
+    licence_transaction_licence_identifier
+    licence_transaction_location
+    licence_transaction_will_continue_on
+  ].freeze
+
+  CUSTOM_ERROR_MESSAGE_FIELDS = FORMAT_SPECIFIC_FIELDS + %i[
+    primary_publishing_organisation
+    body
+    title
+    summary
+    update_type
+    change_note
+  ]
+
   validates_with LinkOrIdentifierValidator
   validates :primary_publishing_organisation, presence: true
   validates :licence_transaction_licence_identifier, licence_identifier_unique: true
@@ -8,14 +25,6 @@ class LicenceTransaction < Document
     with: URI::DEFAULT_PARSER.make_regexp(%w[http https]),
     allow_blank: true,
   }
-
-  FORMAT_SPECIFIC_FIELDS = %i[
-    licence_transaction_continuation_link
-    licence_transaction_industry
-    licence_transaction_licence_identifier
-    licence_transaction_location
-    licence_transaction_will_continue_on
-  ].freeze
 
   attr_accessor(*FORMAT_SPECIFIC_FIELDS, :organisations, :primary_publishing_organisation)
 
@@ -54,5 +63,9 @@ class LicenceTransaction < Document
 
   def rendering_app
     "frontend"
+  end
+
+  def custom_error_message_fields
+    CUSTOM_ERROR_MESSAGE_FIELDS
   end
 end
