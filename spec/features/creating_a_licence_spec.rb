@@ -44,6 +44,9 @@ RSpec.feature "Creating a Licence", type: :feature do
     expect(page).to have_content(attributes[:summary][:blank])
     expect(page).to have_content(attributes[:body][:blank])
     expect(page).to have_content(attributes[:licence_transaction_industry][:blank])
+    within(".additional-field-context-section p.elements-error-message") do
+      attributes[:base][:link_and_identifier_exists]
+    end
   end
 
   scenario "saving a new licence with valid data" do
