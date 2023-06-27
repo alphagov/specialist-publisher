@@ -75,6 +75,13 @@ RSpec.describe Importers::LicenceTransaction::LicenceImporter do
       publishing_api_licences_response.tap { |licences| licences.first["title"] = nil }
     end
 
+    before do
+      stub_publishing_api_has_content(
+        [],
+        { document_type: "licence_transaction", page: 1, per_page: 500, states: "published" },
+      )
+    end
+
     it "doesn't migrate the licence" do
       expect { described_class.new(tagging_path).call }
         .to output(invalid_licence_error_message).to_stdout
