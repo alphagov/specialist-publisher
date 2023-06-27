@@ -35,6 +35,18 @@ RSpec.describe LicenceIdentifierUniqueValidator do
     end
   end
 
+  context "when the same, existing record is validated" do
+    it "validates successfully" do
+      subject.validate_each(
+        existing_record,
+        :licence_transaction_licence_identifier,
+        existing_record.licence_transaction_licence_identifier,
+      )
+
+      expect(existing_record.errors).to be_blank
+    end
+  end
+
   context "when the records identifier is not unique" do
     let(:record) do
       LicenceTransaction.new(licence_transaction_licence_identifier: existing_identifier)
