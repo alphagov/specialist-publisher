@@ -49,13 +49,13 @@ module Importers
 
           new_licence.change_note = "Imported from Publisher"
 
-          unless new_licence.valid?
-            puts "[ERROR] licence: #{new_licence.base_path} has validation errors: #{new_licence.errors.inspect}"
+          if new_licence_already_imported?(new_licence.base_path)
+            puts "Skipping as licence: #{new_licence.base_path} is already imported"
             next
           end
 
-          if new_licence_already_imported?(new_licence.base_path)
-            puts "Skipping as licence: #{new_licence.base_path} is already imported"
+          unless new_licence.valid?
+            puts "[ERROR] licence: #{new_licence.base_path} has validation errors: #{new_licence.errors.inspect}"
             next
           end
 
