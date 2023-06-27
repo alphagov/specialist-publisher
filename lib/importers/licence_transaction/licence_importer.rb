@@ -39,7 +39,7 @@ module Importers
             update_type: "major",
             licence_transaction_location: tagging["locations"],
             licence_transaction_industry: tagging["industries"],
-            licence_transaction_will_continue_on: details["will_continue_on"].presence,
+            licence_transaction_will_continue_on: will_continue_on(details),
             licence_transaction_continuation_link: details["continuation_link"].presence,
             licence_transaction_licence_identifier: licence_identifier(details),
             primary_publishing_organisation: tagging["primary_publishing_organisation"],
@@ -205,6 +205,10 @@ module Importers
 
       def licence_identifier(details)
         details["licence_identifier"] if details["continuation_link"].blank?
+      end
+
+      def will_continue_on(details)
+        details["will_continue_on"] if details["continuation_link"].present?
       end
     end
   end
