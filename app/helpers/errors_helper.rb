@@ -4,6 +4,10 @@ module ErrorsHelper
   end
 
   def field_errors(document, field)
-    document.errors.full_messages_for(field)
+    if document.custom_error_message_fields.include?(field)
+      document.errors.messages_for(field)
+    else
+      document.errors.full_messages_for(field)
+    end
   end
 end

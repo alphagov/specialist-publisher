@@ -110,9 +110,9 @@ private
   end
 
   def document_error_messages
-    heading = tag.h4("Please fix the following errors")
+    heading = tag.h4("There is a problem")
     errors = tag.ul(class: "list-unstyled remove-bottom-margin") do
-      safe_join(@document.errors.full_messages.map { |message| tag.li(message.html_safe) })
+      safe_join(error_messages.map { |message| tag.li(message.html_safe) })
     end
 
     heading + errors
@@ -165,6 +165,16 @@ private
     values.reduce({}) do |filtered_params, (key, value)|
       filtered_value = value.is_a?(Array) ? value.reject(&:blank?) : value
       filtered_params.merge(key => filtered_value)
+    end
+  end
+
+  def error_messages
+    @document.errors.map do |e|
+      if @document.custom_error_message_fields.include?(e.attribute)
+        e.message
+      else
+        e.full_message
+      end
     end
   end
 end

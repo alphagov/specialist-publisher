@@ -38,10 +38,15 @@ RSpec.feature "Creating a Licence", type: :feature do
 
     expect(page.status_code).to eq(422)
 
-    expect(page).to have_content("Please fix the following errors")
-    expect(page).to have_content("Title can't be blank")
-    expect(page).to have_content("Summary can't be blank")
-    expect(page).to have_content("Body can't be blank")
+    attributes = I18n.t("activemodel.errors.models.licence_transaction.attributes")
+    expect(page).to have_content("There is a problem")
+    expect(page).to have_content(attributes[:title][:blank])
+    expect(page).to have_content(attributes[:summary][:blank])
+    expect(page).to have_content(attributes[:body][:blank])
+    expect(page).to have_content(attributes[:licence_transaction_industry][:blank])
+    within(".additional-field-context-section p.elements-error-message") do
+      attributes[:base][:link_and_identifier_exists]
+    end
   end
 
   scenario "saving a new licence with valid data" do
@@ -52,8 +57,8 @@ RSpec.feature "Creating a Licence", type: :feature do
     fill_in "Body", with: "## Header#{"\n\nThis is the long body of a licence" * 2}"
     select "England", from: "Location"
     select "Advertising and marketing", from: "Industry"
-    fill_in "URL for \"Start Now\" button", with: "https://www.gov.uk"
-    fill_in "Name of website where you apply", with: "on GOV.UK"
+    fill_in "Link to where users apply", with: "https://www.gov.uk"
+    fill_in "Name of website where users apply", with: "on GOV.UK"
 
     click_button "Save as draft"
     assert_publishing_api_put_content(content_id)

@@ -30,6 +30,36 @@
 # available at https://guides.rubyonrails.org/i18n.html.
 
 en:
+  activemodel:
+    errors:
+      models:
+        licence_transaction:
+          attributes:
+            title:
+              blank: Enter a title
+            summary:
+              blank: Enter a summary
+            body:
+              blank: Enter body text
+            update_type:
+              blank: Select an update type
+            change_note:
+              blank: Enter a change note
+            licence_transaction_continuation_link:
+              blank: Enter a URL in the format https://www.gov.uk
+              invalid: Enter a URL in the format https://www.gov.uk
+            licence_transaction_will_continue_on:
+              blank: Enter the name of the website
+            base:
+              link_and_identifier_exists: Enter either the website where users can apply for the licence or the licence identifier
+            licence_transaction_licence_identifier:
+              taken: This licence identifier is already in use
+            licence_transaction_industry:
+              blank: Select an industry
+            licence_transaction_location:
+              blank: Select a location
+            primary_publishing_organisation:
+              blank: Select a primary publishing organisation
   i18n:
     direction: ltr
   language_names:

@@ -356,6 +356,10 @@ class Document
     false
   end
 
+  def custom_error_message_fields
+    []
+  end
+
 private
 
   def finder_schema

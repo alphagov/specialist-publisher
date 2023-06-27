@@ -28,18 +28,6 @@
   %>
 <% end %>
 
-<%= render layout: "shared/form_group", locals: { f: f, field: :licence_transaction_will_continue_on, label: "Name of website where you apply" } do %>
-  <%= f.text_field :licence_transaction_will_continue_on, class: 'form-control' %>
-<% end %>
-
-<%= render layout: "shared/form_group", locals: { f: f, field: :licence_transaction_continuation_link, label: "URL for \"Start Now\" button" } do %>
-  <%= f.text_field :licence_transaction_continuation_link, class: 'form-control' %>
-<% end %>
-
-<%= render layout: "shared/form_group", locals: { f: f, field: :licence_transaction_licence_identifier, label: "Licence identifier" } do %>
-  <%= f.text_field :licence_transaction_licence_identifier, class: 'form-control' %>
-<% end %>
-
 <%= render "shared/form_group", f: f, field: :primary_publishing_organisation, label: "Publishing organisation" do %>
   <%= f.select :primary_publishing_organisation,
       organisations_options,
@@ -65,4 +53,28 @@
         }
       }
   %>
+<% end %>
+
+<div class="additional-field-context-section">
+  <h2>How users apply</h2>
+
+  <% if field_has_errors(@document, :base) %>
+    <div class="elements-error">
+      <p class="elements-error-message"><%= t("activemodel.errors.models.licence_transaction.attributes.base.link_and_identifier_exists") %></p>
+    </div>
+  <% else %>
+    <p>Enter either the website where users can apply for the licence, or the licence identifier.</p>
+  <% end %>
+</div>
+
+<%= render layout: "shared/form_group", locals: { f: f, field: :licence_transaction_will_continue_on, label: "Name of website where users apply" } do %>
+  <%= f.text_field :licence_transaction_will_continue_on, class: 'form-control' %>
+<% end %>
+
+<%= render layout: "shared/form_group", locals: { f: f, field: :licence_transaction_continuation_link, label: "Link to where users apply" } do %>
+  <%= f.text_field :licence_transaction_continuation_link, class: 'form-control' %>
+<% end %>
+
+<%= render layout: "shared/form_group", locals: { f: f, field: :licence_transaction_licence_identifier, label: "Licence identifier" } do %>
+  <%= f.text_field :licence_transaction_licence_identifier, class: 'form-control' %>
 <% end %>

@@ -107,7 +107,7 @@ RSpec.feature "Creating a CMA case", type: :feature do
     expect(page).to have_css(".form-group.elements-error")
     expect(page).to have_css(".elements-error-message")
 
-    expect(page).to have_content("Please fix the following errors")
+    expect(page).to have_content("There is a problem")
     expect(page).to have_content("Title can't be blank")
     expect(page).to have_content("Summary can't be blank")
     expect(page).to have_content("Body can't be blank")
@@ -129,7 +129,7 @@ RSpec.feature "Creating a CMA case", type: :feature do
     expect(page).to have_css(".elements-error-summary")
     expect(page).to have_css(".elements-error-message")
 
-    expect(page).to have_content("Please fix the following errors")
+    expect(page).to have_content("There is a problem")
     expect(page).to have_content("Body cannot include invalid Govspeak")
   end
 
@@ -169,7 +169,7 @@ RSpec.feature "Creating a CMA case", type: :feature do
     expect(page).to have_css(".elements-error-summary")
     expect(page).to have_css(".elements-error-message")
 
-    expect(page).to have_content("Please fix the following errors")
+    expect(page).to have_content("There is a problem")
     expect(page).to have_content("Opened date is not a valid date")
   end
 
@@ -194,7 +194,7 @@ RSpec.feature "Creating a CMA case", type: :feature do
     expect(page).to have_css(".elements-error-summary")
     expect(page).to have_css(".elements-error-message")
 
-    expect(page).to have_content("Please fix the following errors")
+    expect(page).to have_content("There is a problem")
     expect(page).to have_content("Opened date must be before closed date")
   end
 
@@ -216,7 +216,7 @@ RSpec.feature "Creating a CMA case", type: :feature do
     expect(page).to have_css(".elements-error-summary")
     expect(page).to have_css(".elements-error-message")
 
-    expect(page).to have_content("Please fix the following errors")
+    expect(page).to have_content("There is a problem")
     expect(page).to have_content("Opened date is not a valid date")
   end
 

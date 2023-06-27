@@ -192,7 +192,7 @@ RSpec.feature "Editing a CMA case", type: :feature do
 
     expect(page).to have_content("Opened date is not a valid date")
     expect(page).to have_content("Body cannot include invalid Govspeak")
-    expect(page).to have_content("Please fix the following errors")
+    expect(page).to have_content("There is a problem")
 
     expect(page.status_code).to eq(422)
   end
@@ -421,7 +421,7 @@ RSpec.feature "Editing a CMA case", type: :feature do
     scenario "insisting that an update type is chosen" do
       click_button "Save as draft"
 
-      expect(page).to have_content("Please fix the following errors")
+      expect(page).to have_content("There is a problem")
       expect(page).to have_content("Update type can't be blank")
 
       expect(page.status_code).to eq(422)
