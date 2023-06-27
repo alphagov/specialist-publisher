@@ -5,6 +5,8 @@ class LicenceIdentifierUniqueValidator < ActiveModel::EachValidator
     existing_licence_identifiers = []
 
     record.class.find_each do |licence|
+      next if record.content_id == licence.content_id
+
       existing_licence_identifiers << licence.licence_transaction_licence_identifier
     end
 
