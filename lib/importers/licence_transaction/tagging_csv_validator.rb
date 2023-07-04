@@ -15,7 +15,7 @@ module Importers
       def errors
         return if valid?
 
-        tagging_validation_errors.each { |e| puts e.to_s }
+        tagging_validation_errors.each { |e| puts e }
         puts unrecognised_tags_instructions
       end
 
