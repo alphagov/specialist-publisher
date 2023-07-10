@@ -2,8 +2,9 @@
   "content_id": "fef4ac7c-024a-4943-9f19-e85a8369a1f3",
   "base_path": "/cma-cases",
   "format_name": "Competition and Markets Authority case",
-  "name": "Competition and Markets Authority cases",
-  "description": "Find reports and updates on current and historical CMA investigations",
+  "name": "Competition and Markets Authority cases and projects",
+  "description": "This case finder includes cases and projects from the Competition and Markets Authority (CMA), Office for the Internal Market (OIM) and Subsidy Advice Unit (SAU)",
+  "summary": "<p>This case finder includes cases and projects from the Competition and Markets Authority (CMA), Office for the Internal Market (OIM) and Subsidy Advice Unit (SAU).To tell the CMA about something that isn't included here, <a href=\"http://www.dev.gov.uk/guidance/tell-the-cma-about-a-competition-or-market-problem\">Report a competition or market problem</a><p>",
   "filter": {
     "format": "cma_case"
   },
@@ -69,6 +70,12 @@
           "prechecked": false
         },
         {
+          "key": "oim-project",
+          "radio_button_name": "OIM Project",
+          "topic_name": "oim project",
+          "prechecked": false
+        },
+        {
           "key": "consumer-enforcement",
           "radio_button_name": "Consumer enforcement",
           "topic_name": "consumer enforcement",
@@ -84,6 +91,12 @@
           "key": "review-of-orders-and-undertakings",
           "radio_button_name": "Reviews of orders and undertakings",
           "topic_name": "reviews of orders and undertakings",
+          "prechecked": false
+        },
+        {
+          "key": "sau-referral",
+          "radio_button_name": "SAU referral",
+          "topic_name": "sau referral",
           "prechecked": false
         }
       ]
@@ -105,9 +118,11 @@
           {"label": "Information and advice to government", "value": "information-and-advice-to-government"},
           {"label": "Markets", "value": "markets"},
           {"label": "Mergers", "value": "mergers"},
+          {"label": "OIM Project", "value": "oim-project"},
           {"label": "Consumer enforcement", "value": "consumer-enforcement"},
           {"label": "Regulatory references and appeals", "value": "regulatory-references-and-appeals"},
-          {"label": "Reviews of orders and undertakings", "value": "review-of-orders-and-undertakings"}
+          {"label": "Reviews of orders and undertakings", "value": "review-of-orders-and-undertakings"},
+          {"label": "SAU referral", "value": "sau-referral"}
         ]
     },
 
@@ -210,7 +225,7 @@
       "short_name": "Opened",
       "type": "date",
       "display_as_result_metadata": true,
-      "filterable": false
+      "filterable": true
     },
 
     {
