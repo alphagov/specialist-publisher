@@ -4,7 +4,7 @@
   "format_name": "Competition and Markets Authority case",
   "name": "Competition and Markets Authority cases and projects",
   "description": "This case finder includes cases and projects from the Competition and Markets Authority (CMA), Office for the Internal Market (OIM) and Subsidy Advice Unit (SAU)",
-  "summary": "<p>This case finder includes cases and projects from the Competition and Markets Authority (CMA), Office for the Internal Market (OIM) and Subsidy Advice Unit (SAU).To tell the CMA about something that isn't included here, <a href=\"http://www.dev.gov.uk/guidance/tell-the-cma-about-a-competition-or-market-problem\">Report a competition or market problem</a><p>",
+  "summary": "<p>This case finder includes cases and projects from the Competition and Markets Authority (CMA), Office for the Internal Market (OIM) and Subsidy Advice Unit (SAU).<p>",
   "filter": {
     "format": "cma_case"
   },
