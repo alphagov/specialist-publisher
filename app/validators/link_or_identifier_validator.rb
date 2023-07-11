@@ -32,6 +32,11 @@ private
   end
 
   def will_continue_on_blank_and_link_exists?(record)
-    record.licence_transaction_will_continue_on.blank? && record.licence_transaction_continuation_link.present?
+    # TODO: remove after licences have been imported, currently ~40 licences don't have will
+    # continue on text but do have a link. Next time these licences are edited, they will need
+    # the link text to save and publish
+    unless record.imported
+      record.licence_transaction_will_continue_on.blank? && record.licence_transaction_continuation_link.present?
+    end
   end
 end
