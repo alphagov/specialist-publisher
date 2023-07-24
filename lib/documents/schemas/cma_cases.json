@@ -166,6 +166,7 @@
         {"label": "Household goods, furniture and furnishings", "value": "household-goods-furniture-and-furnishings"},
         {"label": "Mineral extraction, mining and quarrying", "value": "mineral-extraction-mining-and-quarrying"},
         {"label": "Motor industry", "value": "motor-industry"},
+        {"label": "Not applicable", "value": "not-applicable"},
         {"label": "Oil and gas refining and petrochemicals", "value": "oil-and-gas-refining-and-petrochemicals"},
         {"label": "Paper printing and packaging", "value": "paper-printing-and-packaging"},
         {"label": "Pharmaceuticals", "value": "pharmaceuticals"},
