@@ -6,10 +6,11 @@ module Importers
     class LicenceImporter
       VALID_LINK_TYPES = %w[taxons mainstream_browse_pages].freeze
 
-      attr_reader :tagging_path
+      attr_reader :tagging_path, :archived_base_paths
 
-      def initialize(tagging_path = nil)
+      def initialize(tagging_path = nil, archived_base_paths = [])
         @tagging_path = (tagging_path.presence || licence_tagging_path)
+        @archived_base_paths = archived_base_paths
       end
 
       def call
@@ -98,9 +99,17 @@ module Importers
       end
 
       def licences
-        Services.publishing_api.get_content_items(
-          document_type: "licence", page: 1, per_page: 500, states: "published",
-        )["results"]
+        if archived_base_paths.present?
+          archived_licences = Services.publishing_api.get_content_items(
+            document_type: "licence", page: 1, per_page: 600, states: "unpublished",
+          )["results"]
+
+          archived_licences.select { |licence| archived_base_paths.include?(licence["base_path"]) }
+        else
+          Services.publishing_api.get_content_items(
+            document_type: "licence", page: 1, per_page: 500, states: "published",
+          )["results"]
+        end
       end
 
       def all_organisations
