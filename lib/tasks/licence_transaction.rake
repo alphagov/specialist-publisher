@@ -11,4 +11,20 @@ namespace :licence_transaction do
   task import_licences: :environment do
     Importers::LicenceTransaction::LicenceImporter.new.call
   end
+
+  desc "Migrate missing archived licences"
+  task migrate_missing_archived_licences: :environment do
+    archived_base_paths = %w[
+      /safety-certificates-for-sports-grounds
+      /hazardous-waste-producer-registration-wales
+      /licence-to-photograph-wildlife-northern-ireland
+      /auctioneer-s-permit-firearms-and-ammunition-northern-ireland
+      /chaperone-licence-northern-ireland
+      /slaughterman-licence-northern-ireland
+      /sqa-qualifications-approval-scotland
+    ]
+
+    missing_tagging_path = Rails.root.join("lib/data/licence_transaction/missing_licences_and_tagging.csv")
+    Importers::LicenceTransaction::LicenceImporter.new(missing_tagging_path, archived_base_paths).call
+  end
 end

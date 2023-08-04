@@ -11,11 +11,6 @@ RSpec.describe Importers::LicenceTransaction::LicenceImporter do
 
   before do
     allow(SecureRandom).to receive(:uuid).and_return(new_content_id)
-
-    stub_publishing_api_has_content(
-      publishing_api_response,
-      { document_type: "licence", page: 1, per_page: 500, states: "published" },
-    )
     stub_publishing_api_has_content(
       [
         { "title" => "Department for Environment, Food & Rural Affairs", "content_id" => "af07d5a5-df63-4ddc-9383-6a666845ebe1" },
@@ -39,8 +34,73 @@ RSpec.describe Importers::LicenceTransaction::LicenceImporter do
     end
   end
 
+  context "when migrating archived licences" do
+    before do
+      unpublished_licences = [
+        publishing_api_licences_response.first.tap { |licence| licence["state"] = "unpublished" },
+        publishing_api_licences_response.first.tap do |licence|
+          licence["state"] = "unpublished"
+          licence["base_path"] = "/archived-licence-not-to-be-restored"
+        end,
+      ]
+
+      stub_publishing_api_has_content(
+        unpublished_licences,
+        { document_type: "licence", page: 1, per_page: 600, states: "unpublished" },
+      )
+      stub_publishing_api_has_links(
+        { content_id: "46044b4d-a41b-42c1-882d-8d03e65f24cd", links: publising_api_get_links_response },
+      )
+      stub_publishing_api_has_content(
+        [],
+        { document_type: "licence_transaction", page: 1, per_page: 500, states: "published" },
+      )
+    end
+
+    it "migrates the licences included in the given base_paths list" do
+      put_content_request = stub_publishing_api_put_content(
+        new_content_id, expected_put_content_payload
+      )
+      publish_request = stub_publishing_api_publish(
+        new_content_id, { update_type: "republish", locale: "en" }
+      )
+      patch_links_request = stub_publishing_api_patch_links(
+        new_content_id, { links: expected_patch_links_payload }
+      )
+
+      expect { described_class.new(tagging_path, ["/art-therapist-registration"]).call }
+        .to output(successful_import_message).to_stdout
+
+      expect(put_content_request).to have_been_requested
+      expect(patch_links_request).to have_been_requested
+      expect(publish_request).to have_been_requested
+    end
+
+    it "doesn't migrates the licences missing from the given base_paths list" do
+      put_content_request = stub_publishing_api_put_content(
+        new_content_id, expected_put_content_payload
+      )
+      publish_request = stub_publishing_api_publish(
+        new_content_id, { update_type: "republish", locale: "en" }
+      )
+      patch_links_request = stub_publishing_api_patch_links(
+        new_content_id, { links: expected_patch_links_payload }
+      )
+
+      described_class.new(tagging_path, ["/archived-licence-not-to-be-restored"]).call
+
+      expect(put_content_request).to_not have_been_requested
+      expect(patch_links_request).to_not have_been_requested
+      expect(publish_request).to_not have_been_requested
+    end
+  end
+
   context "when a licence is valid" do
     before do
+      stub_publishing_api_has_content(
+        publishing_api_response,
+        { document_type: "licence", page: 1, per_page: 500, states: "published" },
+      )
       stub_publishing_api_has_links(
         { content_id: "46044b4d-a41b-42c1-882d-8d03e65f24cd", links: publising_api_get_links_response },
       )
@@ -77,6 +137,10 @@ RSpec.describe Importers::LicenceTransaction::LicenceImporter do
 
     before do
       stub_publishing_api_has_content(
+        publishing_api_response,
+        { document_type: "licence", page: 1, per_page: 500, states: "published" },
+      )
+      stub_publishing_api_has_content(
         [],
         { document_type: "licence_transaction", page: 1, per_page: 500, states: "published" },
       )
@@ -94,6 +158,10 @@ RSpec.describe Importers::LicenceTransaction::LicenceImporter do
 
   context "when a licence is already imported" do
     before do
+      stub_publishing_api_has_content(
+        publishing_api_response,
+        { document_type: "licence", page: 1, per_page: 500, states: "published" },
+      )
       stub_publishing_api_has_content(
         publishing_api_existing_licences_response,
         { document_type: "licence_transaction", page: 1, per_page: 500, states: "published" },
@@ -115,6 +183,13 @@ RSpec.describe Importers::LicenceTransaction::LicenceImporter do
       publishing_api_licences_response.tap do |licences|
         licences.first["base_path"] = "/non-existant"
       end
+    end
+
+    before do
+      stub_publishing_api_has_content(
+        publishing_api_response,
+        { document_type: "licence", page: 1, per_page: 500, states: "published" },
+      )
     end
 
     it "doesn't migrate the licence" do
