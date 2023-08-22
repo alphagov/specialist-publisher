@@ -4,19 +4,16 @@ class LicenceTransaction
   include ActiveModel::API
   attr_accessor :licence_transaction_continuation_link,
                 :licence_transaction_will_continue_on,
-                :licence_transaction_licence_identifier,
-                :imported
+                :licence_transaction_licence_identifier
 end
 
 RSpec.describe LinkOrIdentifierValidator do
-  let(:imported) { false }
   let(:record) do
     LicenceTransaction.new(
       {
         licence_transaction_continuation_link: link,
         licence_transaction_will_continue_on: will_continue_on,
         licence_transaction_licence_identifier: identifier,
-        imported:,
       },
     )
   end
@@ -42,18 +39,6 @@ RSpec.describe LinkOrIdentifierValidator do
     it "validates successfully" do
       subject.validate(record)
       expect(record.errors).to be_blank
-    end
-  end
-
-  context "when a link exists without will continue on text for an imported licence" do
-    let(:link) { "https://www.gov.uk" }
-    let(:will_continue_on) { nil }
-    let(:identifier) { nil }
-    let(:imported) { true }
-
-    it "validates successfully" do
-      subject.validate(record)
-      expect(record.errors[:licence_transaction_continuation_link]).to be_blank
     end
   end
 
