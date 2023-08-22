@@ -7,7 +7,7 @@ class Document
   include DateHelper
   include PublishingHelper
 
-  attr_reader :update_type, :imported
+  attr_reader :update_type
   attr_writer(
     :temporary_update_type,
     :bulk_published,
@@ -86,7 +86,6 @@ class Document
   end
 
   def initialize(params = {}, format_specific_fields = [])
-    @imported = params.delete(:imported)
     @content_id = params.fetch(:content_id, SecureRandom.uuid)
     @format_specific_fields = format_specific_fields
 
@@ -148,7 +147,7 @@ class Document
   end
 
   def first_draft?
-    draft? && state_history_one_or_shorter? && !imported
+    draft? && state_history_one_or_shorter?
   end
 
   def state_history_one_or_shorter?
