@@ -278,6 +278,28 @@
           "value": "bias-audit"
         }
       ]
+    },
+    {
+      "key": "assurance_technique_approach",
+      "name": "Assurance Technique Approach",
+      "type": "text",
+      "preposition": "Assurance Technique Approach",
+      "display_as_result_metadata": true,
+      "filterable": true,
+      "allowed_values": [
+        {
+          "label": "Technical",
+          "value": "technical"
+        },
+        {
+          "label": "Procedural",
+          "value": "procedural"
+        },
+        {
+          "label": "Educational",
+          "value": "educational"
+        }
+      ]
     }
   ]
 }

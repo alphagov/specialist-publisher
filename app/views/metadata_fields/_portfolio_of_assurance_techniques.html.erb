@@ -73,3 +73,18 @@
   %>
 <% end %>
 
+<%= render layout: "shared/form_group", locals: { f: f, field: :assurance_technique_approach } do %>
+  <%= f.select :assurance_technique_approach,
+      facet_options(f, :assurance_technique_approach),
+      {},
+      {
+        class: 'select2 form-control',
+        multiple: true,
+        data:
+        {
+          placeholder: 'Select an assurance technique approach'
+        }
+      }
+  %>
+<% end %>
+
