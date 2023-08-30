@@ -5,6 +5,7 @@ class AiAssurancePortfolioTechnique < Document
     principle
     key_function
     ai_assurance_technique
+    assurance_technique_approach
   ].freeze
 
   attr_accessor(*FORMAT_SPECIFIC_FIELDS)
