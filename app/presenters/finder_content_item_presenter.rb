@@ -47,6 +47,7 @@ private
       document_noun: file.fetch("document_noun"),
       filter: file.fetch("filter", nil),
       format_name: file.fetch("format_name", nil),
+      open_filter_on_load: file.fetch("open_filter_on_load", nil),
       logo_path: file.fetch("logo_path", nil),
       show_summaries: file.fetch("show_summaries", false),
       signup_link: file.fetch("signup_link", nil),
