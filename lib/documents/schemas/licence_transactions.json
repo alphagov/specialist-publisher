@@ -9,6 +9,7 @@
   "filter": {
     "format": "licence_transaction"
   },
+  "open_filter_on_load": true,
   "show_summaries": true,
   "organisations": [
     "aa750cdf-7925-429d-a2b3-0d9fa47d2c48"
