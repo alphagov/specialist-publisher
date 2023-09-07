@@ -27,6 +27,14 @@
           <% end %>
         <% end %>
       <% end %>
+      <% if @document.class.has_organisations? %>
+        <dt>Publishing organisation</dt>
+        <dd><%= organisation_name(@document.primary_publishing_organisation) %></dd>
+        <dt>Other associated Organisations</dt>
+            <% @document.organisations.each do |org| %>
+            <dd><%= organisation_name(org) %></dd>
+          <% end %>
+      <% end %>
       <dt>Bulk published</dt>
       <dd><%= @document.bulk_published %></dd>
       <dt>Publication state</dt>
