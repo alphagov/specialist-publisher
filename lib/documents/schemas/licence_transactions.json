@@ -4,6 +4,7 @@
   "format_name": "Find and apply for licences",
   "name": "Find a licence",
   "summary": "<p>You may need a licence, permit or certification for:</p><ul><li>some business activities</li><li>other activities, such as street parties</li></ul><div class='application-notice info-notice'><p>This may not include all the licences you need. It will be updated with more licences.</p></div>",
+  "description": "Find licences, permits or certifications you may need for yourself or your business.",
   "label_text": "Search keywords <span class=\"govuk-!-display-block govuk-!-font-size-16 govuk-!-margin-bottom-2\">for example 'sell alcohol'</span>",
   "default_order": "title",
   "filter": {
