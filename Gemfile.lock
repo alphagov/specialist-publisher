@@ -749,6 +749,7 @@ DEPENDENCIES
   govuk_admin_template
   govuk_app_config
   govuk_frontend_toolkit
+  govuk_publishing_components
   govuk_schemas
   govuk_sidekiq
   govuk_test
