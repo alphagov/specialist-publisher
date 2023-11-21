@@ -318,22 +318,6 @@ FactoryBot.define do
     end
   end
 
-  factory :oim_project, parent: :document do
-    base_path { "/oim-projects/example-document" }
-    document_type { "oim_project" }
-
-    transient do
-      default_metadata do
-        {
-          "oim_project_opened_date" => "2014-01-01",
-          "oim_project_closed_date" => "2015-01-01",
-          "oim_project_type" => "annual-report",
-          "oim_project_state" => "closed",
-        }
-      end
-    end
-  end
-
   factory :product_safety_alert_report_recall, parent: :document do
     base_path { "/product-safety-alerts-reports-recalls/example-document" }
     document_type { "product_safety_alert_report_recall" }
