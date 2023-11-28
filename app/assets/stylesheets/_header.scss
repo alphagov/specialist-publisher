@@ -17,7 +17,7 @@
     list-style: none;
   }
 
-  .document-slug li + li:before {
+  .document-slug li + li::before {
     content: "– ";
   }
 }
