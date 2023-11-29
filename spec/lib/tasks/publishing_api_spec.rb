@@ -43,21 +43,21 @@ RSpec.describe "publishing_api rake tasks", type: :task do
       stub_any_publishing_api_publish
     end
 
-    context "incorrect file name is given" do
+    context "incorrect slug is given" do
       it "returns an error message" do
-        error_message = %r{#<RuntimeError: Could not find file: lib/documents/schemas/aaib_reportings.json>}
+        error_message = %r{#<RuntimeError: Could not find any schema with slug: aaib-reportings>}
 
-        expect { Rake::Task["publishing_api:publish_finder"].invoke("aaib_reportings") }.to output(error_message).to_stdout
+        expect { Rake::Task["publishing_api:publish_finder"].invoke("aaib-reportings") }.to output(error_message).to_stdout
       end
     end
 
-    context "correct file name given" do
+    context "correct slug given" do
       context "no server error present" do
         it "publishes a single finder to the Publishing API" do
           schema = "lib/documents/schemas/aaib_reports.json"
           content_id = MultiJson.load(File.read(schema))["content_id"]
 
-          expect { Rake::Task["publishing_api:publish_finder"].invoke("aaib_reports") }.to output.to_stdout
+          expect { Rake::Task["publishing_api:publish_finder"].invoke("aaib-reports") }.to output.to_stdout
 
           assert_publishing_api_put_content(content_id)
           assert_publishing_api_patch_links(content_id)
@@ -70,7 +70,7 @@ RSpec.describe "publishing_api rake tasks", type: :task do
           stub_any_publishing_api_put_content.and_raise(GdsApi::HTTPServerError.new(500))
           error_message = %r{Error publishing finder: #<GdsApi::HTTPServerError: GdsApi::HTTPServerError>}
 
-          expect { Rake::Task["publishing_api:publish_finder"].invoke("aaib_reports") }.to output(error_message).to_stdout
+          expect { Rake::Task["publishing_api:publish_finder"].invoke("aaib-reports") }.to output(error_message).to_stdout
         end
       end
     end
