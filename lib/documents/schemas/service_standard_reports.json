@@ -30,7 +30,10 @@
       "filterable": true,
       "allowed_values": [
         {"label": "Met", "value": "met"},
-        {"label": "Not met", "value": "not-met"}
+        {"label": "Not met", "value": "not-met"},
+        {"label": "Red", "value": "red"},
+        {"label": "Amber", "value": "amber"},
+        {"label": "Green","value": "green"}
       ]
     },
     {
