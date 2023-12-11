@@ -30,11 +30,13 @@ RSpec.describe LicenceTransaction do
       expect(subject).to be_valid
     end
 
-    it "is valid with a unique identifier" do
+    it "is valid with a unique and correctly formated identifier" do
       stub_publishing_api_has_content([payload], hash_including(document_type: "licence_transaction"))
 
-      subject.licence_transaction_licence_identifier = "7777-7-7"
+      subject.licence_transaction_licence_identifier = "1234-5-6"
+      expect(subject).to be_valid
 
+      subject.licence_transaction_licence_identifier = "543-2-1"
       expect(subject).to be_valid
     end
 
@@ -53,6 +55,25 @@ RSpec.describe LicenceTransaction do
       expect(subject.errors[:licence_transaction_continuation_link]).to eq(
         [subject.errors.generate_message(:licence_transaction_continuation_link, :invalid)],
       )
+    end
+
+    it "is invalid with an incorrectly formated identifier" do
+      stub_publishing_api_has_content([payload], hash_including(document_type: "licence_transaction"))
+
+      subject.licence_transaction_licence_identifier = "1-2345-6-2"
+      expect(subject).to be_invalid
+
+      subject.licence_transaction_licence_identifier = "1234-8-2"
+      expect(subject).to be_invalid
+
+      subject.licence_transaction_licence_identifier = "12-1-1"
+      expect(subject).to be_invalid
+
+      subject.licence_transaction_licence_identifier = "1234-1-0"
+      expect(subject).to be_invalid
+
+      subject.licence_transaction_licence_identifier = "https://www.gov.uk"
+      expect(subject).to be_invalid
     end
   end
 end
