@@ -85,7 +85,7 @@ GEM
     bootstrap-sass (3.4.1)
       autoprefixer-rails (>= 5.2.1)
       sassc (>= 2.0.0)
-    brakeman (6.0.1)
+    brakeman (6.1.0)
     bson (4.15.0)
     builder (3.2.4)
     capybara (3.39.2)
@@ -209,7 +209,7 @@ GEM
       govuk_app_config (>= 1.1)
       redis-namespace (~> 1.6)
       sidekiq (~> 6.5, >= 6.5.12)
-    govuk_test (4.0.1)
+    govuk_test (4.0.2)
       brakeman (>= 5.0.2)
       capybara (>= 3.36)
       puma
@@ -585,7 +585,7 @@ GEM
     redis (4.8.1)
     redis-namespace (1.11.0)
       redis (>= 4)
-    regexp_parser (2.8.2)
+    regexp_parser (2.8.3)
     request_store (1.5.1)
       rack (>= 1.4)
     rest-client (2.1.0)
@@ -661,7 +661,7 @@ GEM
       sprockets-rails
       tilt
     select2-rails (3.5.11)
-    selenium-webdriver (4.14.0)
+    selenium-webdriver (4.16.0)
       rexml (~> 3.2, >= 3.2.5)
       rubyzip (>= 1.2.2, < 3.0)
       websocket (~> 1.0)
