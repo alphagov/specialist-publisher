@@ -8,7 +8,7 @@ RSpec.describe FinderContentItemPresenter do
         payload = JSON.parse(read_file)
 
         presenter = FinderContentItemPresenter.new(
-          payload, "2016-01-01T00:00:00-00:00".to_time
+          payload, Time.zone.parse("2016-01-01T00:00:00-00:00")
         )
 
         presented_data = presenter.to_json

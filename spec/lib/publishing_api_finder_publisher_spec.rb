@@ -28,7 +28,7 @@ RSpec.describe PublishingApiFinderPublisher do
     def make_finder(base_path, overrides = {})
       {
         file: make_file(base_path, overrides),
-        timestamp: "2015-01-05T10:45:10.000+00:00".to_time,
+        timestamp: Time.zone.parse("2015-01-05T10:45:10.000+00:00"),
       }
     end
 
