@@ -17,7 +17,7 @@ RSpec.describe Tagger do
 
     it "does not tag content to a set of taxons because the content is already tagged" do
       expect(subject.add_tags(@content_id) { |ts| ts }).to be false
-      assert_publishing_api_patch_links(@content_id, (->(_) { true }), 0)
+      assert_publishing_api_patch_links(@content_id, ->(_) { true }, 0)
     end
 
     it "yields existing taxons" do

@@ -123,7 +123,7 @@ private
   end
 
   def locale_param
-    @locale_param ||= (params[:content_id_and_locale].split(":")[1] || "en")
+    @locale_param ||= params[:content_id_and_locale].split(":")[1] || "en"
   end
 
   def fetch_document

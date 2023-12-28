@@ -12,7 +12,7 @@ module OrganisationsHelper
   end
 
   def selected_organisation_or_current(organisation)
-    (organisation.presence || current_user.organisation_content_id)
+    organisation.presence || current_user.organisation_content_id
   end
 
   def organisation_name(content_id)
