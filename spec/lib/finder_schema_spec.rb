@@ -1,5 +1,4 @@
 require "spec_helper"
-require "finder_schema"
 
 RSpec.describe FinderSchema do
   describe ".schema_names" do
