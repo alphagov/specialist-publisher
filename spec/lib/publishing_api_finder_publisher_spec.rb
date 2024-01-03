@@ -1,5 +1,4 @@
 require "spec_helper"
-require "publishing_api_finder_publisher"
 
 RSpec.describe PublishingApiFinderPublisher do
   describe "#call" do

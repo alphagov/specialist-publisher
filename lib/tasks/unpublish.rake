@@ -3,8 +3,6 @@ require "services"
 namespace :unpublish do
   desc "Unpublish a Finder by file name and redirect the finder page to specific URL"
   task :redirect_finder, %i[finder_file redirect_url] => :environment do |_, args|
-    require "finder_loader"
-
     schema = FinderLoader.new.finder(args.finder_file).first[:file]
     puts "=== Finder found ==="
     puts "Slug: #{schema['base_path']}"

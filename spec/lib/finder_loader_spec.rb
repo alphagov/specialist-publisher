@@ -1,5 +1,4 @@
 require "spec_helper"
-require "finder_loader"
 
 RSpec.describe FinderLoader do
   before do
