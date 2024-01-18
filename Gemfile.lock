@@ -110,7 +110,7 @@ GEM
       xpath (~> 3.2)
     capybara-select-2 (0.5.1)
     coderay (1.1.3)
-    concurrent-ruby (1.2.2)
+    concurrent-ruby (1.2.3)
     connection_pool (2.4.1)
     crack (0.4.5)
       rexml
@@ -206,7 +206,7 @@ GEM
     govuk_personalisation (0.15.0)
       plek (>= 1.9.0)
       rails (>= 6, < 8)
-    govuk_publishing_components (37.2.2)
+    govuk_publishing_components (37.2.3)
       govuk_app_config
       govuk_personalisation (>= 0.7.0)
       kramdown
@@ -235,7 +235,7 @@ GEM
       domain_name (~> 0.5)
     i18n (1.14.1)
       concurrent-ruby (~> 1.0)
-    io-console (0.7.1)
+    io-console (0.7.2)
     irb (1.11.1)
       rdoc
       reline (>= 0.4.2)
