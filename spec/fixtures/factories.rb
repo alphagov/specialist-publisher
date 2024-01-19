@@ -741,4 +741,26 @@ FactoryBot.define do
     base_path { "/find-licences/example-document" }
     title { "Example Licence" }
   end
+
+  factory :algorithmic_transparency_record, parent: :document do
+    base_path { "/algorithmic-transparency-records/example-document" }
+    document_type { "algorithmic_transparency_record" }
+
+    transient do
+      default_metadata do
+        {
+          "algorithmic_transparency_record_organisation" => "department-for-science-innovation-and-technology",
+          "algorithmic_transparency_record_organisation_type" => %w[ministerial-department],
+          "algorithmic_transparency_record_function" => %w[general-public-services],
+          "algorithmic_transparency_record_capability" => %w[discovery],
+          "algorithmic_transparency_record_task" => "Task",
+          "algorithmic_transparency_record_phase" => "beta-pilot",
+          "algorithmic_transparency_record_region" => %w[england london],
+          "algorithmic_transparency_record_date_published" => "2015-12-31",
+          "algorithmic_transparency_record_atrs_version" => "v2.1",
+          "algorithmic_transparency_record_other_tags" => "Example tag",
+        }
+      end
+    end
+  end
 end

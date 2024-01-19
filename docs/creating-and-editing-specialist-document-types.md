@@ -1,20 +1,16 @@
 # Creating or editing specialist document types
 
 To create or edit a new specialist document you will have to make changes to this
-application, [govuk-content-schemas][govuk-content-schemas] and
-[search-api][search-api]. You will not have to make any changes to frontend
+application, [publishing-api][publishing-api] and [search-api][search-api]. You will not have to make any changes to frontend
 applications.
 
-[govuk-content-schemas]: https://github.com/alphagov/govuk-content-schemas
+[publishing-api]: https://github.com/alphagov/publishing-api
 [search-api]: https://github.com/alphagov/search-api
 
 # __Creating__ a specialist document type
 
-## 1. Add a schema to govuk-content-schemas
-
-See example [PR for adding `product_safety_alert`](https://github.com/alphagov/govuk-content-schemas/pull/1077).
-Note: this is a link to a PR in the now-archived content schemas repo. Content schemas have now been moved to publishing api.
-Please update this document when an example for publishing api is available.
+## 1. Add a schema to Publishing API
+See [example PR here](https://github.com/alphagov/publishing-api/pull/2589/files)
 
 1. Add the format to [this list](https://github.com/alphagov/publishing-api/blob/main/content_schemas/formats/specialist_document.jsonnet#L2:L33) and to [this list](https://github.com/alphagov/publishing-api/blob/main/content_schemas/allowed_document_types.yml)
 2. Add any new field definitions to [this file](https://github.com/alphagov/publishing-api/blob/main/content_schemas/formats/shared/definitions/_specialist_document.jsonnet)
@@ -70,7 +66,7 @@ Finally, you'll need to add your custom fields to:
 
 ## 4. Configure the email sign up page
 
-The email sign up page is rendered by [Finder Frontend](https://github.com/alphagov/finder-frontend) using the configuration in the new schema added to specialist publisher.
+The email sign up page is rendered by [Finder Frontend](https://github.com/alphagov/finder-frontend) using the configuration in the new schema added to specialist publisher. The schema should specify `email_filter_by` and `email_filter_facets` (e.g. [cma-cases](https://github.com/alphagov/specialist-publisher/blob/ce68fdb008cab05225e0493e19decba5365e1e20/lib/documents/schemas/cma_cases.json#L29)).
 
 If your email sign up page should have checkboxes (e.g. [cma-cases](https://www.gov.uk/cma-cases/email-signup)), you will need to edit email-alert-api by adding the new tags to [valid_tags.rb](https://github.com/alphagov/email-alert-api/blob/3e0018510ea85f5d561e2865ad149832b94688a1/lib/valid_tags.rb#L2).
 
@@ -78,11 +74,14 @@ If your email sign up page should have checkboxes (e.g. [cma-cases](https://www.
 
 To deploy:
 
-1. Deploy Specialist Publisher and Search API (and govuk-content-schemas if you haven't already).
+1. Deploy Publishing API (if you haven't already), Specialist Publisher and Search API. 
+  - Ensure you deploy Publishing API first, to avoid schema validation errors.
+  - Also deploy Email Alert API if you have made changes to it.
 2. [Reindex the govuk Elasticsearch index](https://docs.publishing.service.gov.uk/manual/reindex-elasticsearch.html#how-to-reindex-an-elasticsearch-index).
   - This takes around 30-45 minutes on Production, or 3-4 hours on Integration.
-  - NB: reindexing shouldn't really be necessary; Elasticsearch will dynamically create the field mappings the first time a new document of this type is published. In other words, if you publish a new document type, the finder will work and it will return the relevant documents even without a reindex. However, the filters on the finder would not work, as this reindexing job also builds the filters for the finder, so we have to run the job.
-3. Use the "Run rake task" Jenkins job to run `publishing_api:publish_finders` or `publishing_api:publish_finder[your_format_name_based_on_the_schema_file]` against the specialist publisher app on a backend machine.
+  - Alternatively, run `search:update_schema` for a shorter run. Make sure the this is run before any documents are published, otherwise a full reindex will be required.
+  - NB: reindexing shouldn't really be necessary; Elasticsearch will dynamically create the field mappings the first time a new document of this type is published. In other words, if you publish a new document type, the finder will work and it will return the relevant documents even without a reindex. However, **the filters on the finder would not work**, as this reindexing job also builds the filters for the finder, so we have to run the job.
+3. Publish the finder; run the rake task `publishing_api:publish_finders` or `publishing_api:publish_finder[your_format_name_based_on_the_schema_file]` against the specialist publisher app (rake tasks [here](https://github.com/alphagov/specialist-publisher/blob/ce68fdb008cab05225e0493e19decba5365e1e20/lib/tasks/publishing_api.rake)).
 
 ## 6. Permissions
 
