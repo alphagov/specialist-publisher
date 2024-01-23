@@ -4,6 +4,7 @@ gem "rails", "7.1.3"
 
 gem "bootsnap", require: false
 gem "bootstrap-kaminari-views"
+gem "dartsass-rails"
 gem "fog-aws"
 gem "gds-api-adapters"
 gem "gds-sso"
@@ -22,7 +23,6 @@ gem "mongo"
 gem "mongoid"
 gem "plek"
 gem "pundit"
-gem "sassc-rails"
 gem "select2-rails", "< 4" # v4 changes the generated HTML and breaks the e2e tests
 gem "sentry-sidekiq"
 gem "stringex"
