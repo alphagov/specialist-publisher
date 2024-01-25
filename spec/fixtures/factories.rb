@@ -763,4 +763,22 @@ FactoryBot.define do
       end
     end
   end
+
+  factory :farming_grant_option, parent: :document do
+    base_path { "/farming-grant-options/example-document" }
+    document_type { "farming_grant_option" }
+
+    transient do
+      default_metadata do
+        {
+          "open_or_closed" => %w[open],
+          "areas_of_interest" => %w[air-quality],
+          "land_types" => %w[arable-land],
+          "funding_types" => %w[option],
+          "grant_schemes" => %w[countryside-stewardship],
+          "payment_types" => %w[capital],
+        }
+      end
+    end
+  end
 end
