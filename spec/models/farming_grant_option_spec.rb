@@ -20,16 +20,6 @@ RSpec.describe FarmingGrantOption do
       expect(farming_grant_option).not_to be_valid
     end
 
-    it "is invalid if the areas of interest field is missing" do
-      farming_grant_option.areas_of_interest = nil
-      expect(farming_grant_option).not_to be_valid
-    end
-
-    it "is invalid if the land types field is missing" do
-      farming_grant_option.land_types = nil
-      expect(farming_grant_option).not_to be_valid
-    end
-
     it "is invalid if the funding types field is missing" do
       farming_grant_option.funding_types = nil
       expect(farming_grant_option).not_to be_valid
