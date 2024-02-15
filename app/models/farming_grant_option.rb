@@ -1,7 +1,5 @@
 class FarmingGrantOption < Document
   validates :open_or_closed, presence: true
-  validates :areas_of_interest, presence: true
-  validates :land_types, presence: true
   validates :funding_types, presence: true
   validates :grant_schemes, presence: true
   validates :payment_types, presence: true
