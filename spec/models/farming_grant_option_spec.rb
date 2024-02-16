@@ -15,16 +15,6 @@ RSpec.describe FarmingGrantOption do
       expect(farming_grant_option).to be_valid
     end
 
-    it "is invalid if the open or closed field is missing" do
-      farming_grant_option.open_or_closed = nil
-      expect(farming_grant_option).not_to be_valid
-    end
-
-    it "is invalid if the funding types field is missing" do
-      farming_grant_option.funding_types = nil
-      expect(farming_grant_option).not_to be_valid
-    end
-
     it "is invalid if the grant schemes field is missing" do
       farming_grant_option.grant_schemes = nil
       expect(farming_grant_option).not_to be_valid

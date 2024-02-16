@@ -1,31 +1,3 @@
-<%= render layout: "shared/form_group", locals: { f: f, field: :open_or_closed } do %>
-  <%= f.select :open_or_closed,
-      f.object.facet_options(:open_or_closed),
-      {},
-      {
-        class: 'select2 form-control',
-        multiple: true,
-        data: {
-          placeholder: 'Select open or closed'
-        }
-      }
-  %>
-<% end %>
-
-<%= render layout: "shared/form_group", locals: { f: f, field: :areas_of_interest } do %>
-  <%= f.select :areas_of_interest,
-      f.object.facet_options(:areas_of_interest),
-      {},
-      {
-        class: 'select2 form-control',
-        multiple: true,
-        data: {
-          placeholder: 'Select areas of interest'
-        }
-      }
-  %>
-<% end %>
-
 <%= render layout: "shared/form_group", locals: { f: f, field: :land_types } do %>
   <%= f.select :land_types,
       f.object.facet_options(:land_types),
@@ -40,15 +12,15 @@
   %>
 <% end %>
 
-<%= render layout: "shared/form_group", locals: { f: f, field: :funding_types } do %>
-  <%= f.select :funding_types,
-      f.object.facet_options(:funding_types),
+<%= render layout: "shared/form_group", locals: { f: f, field: :areas_of_interest } do %>
+  <%= f.select :areas_of_interest,
+      f.object.facet_options(:areas_of_interest),
       {},
       {
         class: 'select2 form-control',
         multiple: true,
         data: {
-          placeholder: 'Select funding types'
+          placeholder: 'Select areas of interest'
         }
       }
   %>

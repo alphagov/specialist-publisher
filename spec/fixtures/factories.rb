@@ -771,10 +771,8 @@ FactoryBot.define do
     transient do
       default_metadata do
         {
-          "open_or_closed" => %w[open],
           "areas_of_interest" => %w[air-quality],
           "land_types" => %w[arable-land],
-          "funding_types" => %w[option],
           "grant_schemes" => %w[countryside-stewardship],
           "payment_types" => %w[capital],
         }
