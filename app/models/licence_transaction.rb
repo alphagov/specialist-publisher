@@ -18,9 +18,13 @@ class LicenceTransaction < Document
 
   validates_with LinkOrIdentifierValidator
   validates :primary_publishing_organisation, presence: true
-  validates :licence_transaction_licence_identifier, licence_identifier_unique: true
   validates :licence_transaction_industry, presence: true
   validates :licence_transaction_location, presence: true
+  validates :licence_transaction_licence_identifier, format: {
+    with: /\A[0-9]{3,4}-[1-7]-[1-9]\z/,
+    allow_blank: true,
+  }
+  validates :licence_transaction_licence_identifier, licence_identifier_unique: true
   validates :licence_transaction_continuation_link, format: {
     with: URI::DEFAULT_PARSER.make_regexp(%w[http https]),
     allow_blank: true,
