@@ -1747,16 +1747,156 @@
           "value": "revisions-supersessions-and-reviews-supersession-incapacity"
         },
         {
+          "label": "Safeguarding vulnerable groups - Adequacy",
+          "value": "safeguarding-vulnerable-groups-adequacy"
+        },
+        {
           "label": "Safeguarding vulnerable groups - Adults’ barred list",
           "value": "safeguarding-vulnerable-groups-adults-barred-list"
+        },
+        {
+          "label": "Safeguarding vulnerable groups - Appealable decisions",
+          "value": "safeguarding-vulnerable-groups-appealable-decisions"
+        },
+        {
+          "label": "Safeguarding vulnerable groups - Appropriateness",
+          "value": "safeguarding-vulnerable-groups-appropriateness"
+        },
+        {
+          "label": "Safeguarding vulnerable groups - Child - meaning",
+          "value": "safeguarding-vulnerable-groups-child-meaning"
         },
         {
           "label": "Safeguarding vulnerable groups - Children’s barred list",
           "value": "safeguarding-vulnerable-groups-children-s-barred-list"
         },
         {
+          "label": "Safeguarding vulnerable groups - Convictions/cautions",
+          "value": "safeguarding-vulnerable-groups-convictions/cautions"
+        },
+        {
+          "label": "Safeguarding vulnerable groups - DBS procedure - other",
+          "value": "safeguarding-vulnerable-groups-dbs-procedure-other"
+        },
+        {
+          "label": "Safeguarding vulnerable groups - Disposal",
+          "value": "safeguarding-vulnerable-groups-disposal"
+        },
+        {
+          "label": "Safeguarding vulnerable groups - 'Fairness of DBS decision-making' or something similar",
+          "value": "safeguarding-vulnerable-groups-fairness-of-dbs-decision-making"
+        },
+        {
+          "label": "Safeguarding vulnerable groups - Finding of fact",
+          "value": "safeguarding-vulnerable-groups-finding-of-fact"
+        },
+        {
+          "label": "Safeguarding vulnerable groups - Grounds of appeal",
+          "value": "safeguarding-vulnerable-groups-grounds-of-appeal"
+        },
+        {
+          "label": "Safeguarding vulnerable groups - Harm – meaning",
+          "value": "safeguarding-vulnerable-groups-harm–meaning"
+        },
+        {
+          "label": "Safeguarding vulnerable groups - Investigation by DBS",
+          "value": "safeguarding-vulnerable-groups-investigation-by-dbs"
+        },
+        {
+          "label": "Safeguarding vulnerable groups - Irrationality",
+          "value": "safeguarding-vulnerable-groups-irrationality"
+        },
+        {
+          "label": "Safeguarding vulnerable groups - Knowledge attributable to DBS",
+          "value": "safeguarding-vulnerable-groups-knowledge-attributable-to-dbs"
+        },
+        {
+          "label": "Safeguarding vulnerable groups - Materiality",
+          "value": "safeguarding-vulnerable-groups-materiality"
+        },
+        {
+          "label": "Safeguarding vulnerable groups - Mistake on point of law",
+          "value": "safeguarding-vulnerable-groups-mistake-on-point-of-law"
+        },
+        {
+          "label": "Safeguarding vulnerable groups - New evidence before the UT",
+          "value": "safeguarding-vulnerable-groups-new-evidence-before-the-ut"
+        },
+        {
           "label": "Safeguarding vulnerable groups - other lists",
           "value": "safeguarding-vulnerable-groups-other-lists"
+        },
+        {
+          "label": "Safeguarding vulnerable groups - Paragraph 17",
+          "value": "safeguarding-vulnerable-groups-paragraph-17"
+        },
+        {
+          "label": "Safeguarding vulnerable groups - Paragraph 18",
+          "value": "safeguarding-vulnerable-groups-paragraph-18"
+        },
+        {
+          "label": "Safeguarding vulnerable groups - Paragraph 18A",
+          "value": "safeguarding-vulnerable-groups-paragraph-18-a"
+        },
+        {
+          "label": "Safeguarding vulnerable groups - Perversity",
+          "value": "safeguarding-vulnerable-groups-perversity"
+        },
+        {
+          "label": "Safeguarding vulnerable groups - Previous decision not to bar - relevance",
+          "value": "safeguarding-vulnerable-groups-previous-decision-not-to-bar - relevance"
+        },
+        {
+          "label": "Safeguarding vulnerable groups - Proportionality",
+          "value": "safeguarding-vulnerable-groups-proportionality"
+        },
+        {
+          "label": "Safeguarding vulnerable groups - Reading across between conduct towards child and adult",
+          "value": "safeguarding-vulnerable-groups-reading-across-between-conduct-towards-child-and-adult"
+        },
+        {
+          "label": "Safeguarding vulnerable groups - Reasoning",
+          "value": "safeguarding-vulnerable-groups-reasoning"
+        },
+        {
+          "label": "Safeguarding vulnerable groups - Regulated activity",
+          "value": "safeguarding-vulnerable-groups-regulated-activity"
+        },
+        {
+          "label": "Safeguarding vulnerable groups - Relevance of conduct in personal life",
+          "value": "safeguarding-vulnerable-groups-relevance-of-conduct-in-personal-life"
+        },
+        {
+          "label": "Safeguarding vulnerable groups - Relevance of conduct outside regulated activity",
+          "value": "safeguarding-vulnerable-groups-relevance-of-conduct-outside-regulated-activity"
+        },
+        {
+          "label": "Safeguarding vulnerable groups - Relevance of decision by professional regulator",
+          "value": "safeguarding-vulnerable-groups-relevance-of-decision-by-professional-regulator"
+        },
+        {
+          "label": "Safeguarding vulnerable groups - Removal from list",
+          "value": "safeguarding-vulnerable-groups-removal-from-list"
+        },
+        {
+          "label": "Safeguarding vulnerable groups - Respect for DBS fact-finding",
+          "value": "safeguarding-vulnerable-groups-respect-for-dbs-fact-finding"
+        },
+        {
+          "label": "Safeguarding vulnerable groups - Respect for limits of jurisdiction",
+          "value": "safeguarding-vulnerable-groups-respect-for-limits-of-jurisdiction"
+        },
+        {
+          "label": "Safeguarding vulnerable groups - Reviews",
+          "value": "safeguarding-vulnerable-groups-reviews"
+        },
+        {
+          "label": "Safeguarding vulnerable groups - Whether DBS should have waited for decision by professional regulator",
+          "value": "safeguarding-vulnerable-groups-whether-dbs-should-have-waited-for-decision-by-professional-regulator"
+        },
+        {
+          "label": "Safeguarding vulnerable groups - Whether to stay to await review by DBS",
+          "value": "safeguarding-vulnerable-groups-whether-to-stay-to-await-review-by-dbs"
         },
         {
           "label": "Special educational needs - description of special educational needs",
