@@ -98,7 +98,10 @@ We often receive requests to add new fields to a specialist document. Or to add 
 
 ## Adding a new field to an existing specialist document
 
-1. In govuk-content-schemas, add the new field to [the specialist document schema](https://github.com/alphagov/govuk-content-schemas/blob/main/formats/shared/definitions/_specialist_document.jsonnet). See [this](https://github.com/alphagov/govuk-content-schemas/pull/1066/commits/c2b33fbdbdc3ce7363b87e964b8ff75dc3300573#diff-3c69cee80f0f1b0cb114f9f9f102122b33e2208ecf3a77829506390b9938eb61) commit for an example. Once approved, this change can be merged and deployed.
+1. In `publishing-api`:
+- Add the new field in the [specialist_document schema](https://github.com/alphagov/publishing-api/blob/6d5595470bd0e7f3072e06f0113e3ca5514b6e98/content_schemas/formats/shared/definitions/_specialist_document.jsonnet), and add the new values. See TODO
+- Update the facets in [example json](https://github.com/alphagov/publishing-api/blob/6d5595470bd0e7f3072e06f0113e3ca5514b6e98/content_schemas/examples/specialist_document/frontend/utaac-decision.json) with the additional values, as in [this commit](https://github.com/alphagov/publishing-api/pull/2658/commits/22b90e769eb0c1834d9c28640a9be07e2b0ce795)
+  NOTE: You will need to run `bundle exec rake build_schemas` to regenerate schemas after adding the new value(s).
 
 2. In specialist-publisher, add the new field to the relevant [model](https://github.com/alphagov/specialist-publisher/tree/main/app/models), [form](https://github.com/alphagov/specialist-publisher/tree/main/app/views/metadata_fields), and [schema](https://github.com/alphagov/specialist-publisher/tree/main/lib/documents/schemas) files. See [this](https://github.com/alphagov/specialist-publisher/pull/1899/commits/cc9e8fe482dbca2ef678bb8219252e7bd4f4d154) commit for an example.
 
@@ -108,14 +111,14 @@ We often receive requests to add new fields to a specialist document. Or to add 
   - the [specialist_presenter](https://github.com/alphagov/search-api/blob/main/lib/govuk_index/presenters/specialist_presenter.rb).
   - the [field_definitions](https://github.com/alphagov/search-api/blob/main/config/schema/field_definitions.json) file.
 
-
-4. Follow steps in the [Deploy and publish](#Deploy-and-publish) section above, to re-publish the finder and reindex the GOVUK search index.
+4. Follow steps in the [Deploy and publish](#Deploy-and-publish) section above, to re-publish the finder. You do not need to reindex `search-api`, just run `search:update_schema`.
 
 ## Adding or amending values for existing fields on a specialist document
 
-1. In govuk-content-schemas, find the field you are amending in the [specialist_document schema](https://github.com/alphagov/govuk-content-schemas/blob/main/formats/shared/definitions/_specialist_document.jsonnet), and add the new values. See [this](https://github.com/alphagov/govuk-content-schemas/pull/1066/commits/b81ec718f52b1e6603c201c44db07f0357158723) commit for an example. 
-
-NOTE: You will need to run `bundle exec rake build_schemas` to regenerate schemas after adding the new value(s) - as is done in [this commit](https://github.com/alphagov/govuk-content-schemas/pull/1066/commits/34dd343fd7de8eb48bb842c2fc7fe3c59ae77168). 
+1. In `publishing-api`:
+- Add the new values to the field you are amending, in the [specialist_document schema](https://github.com/alphagov/publishing-api/blob/6d5595470bd0e7f3072e06f0113e3ca5514b6e98/content_schemas/formats/shared/definitions/_specialist_document.jsonnet). See #TODO 
+- Update the facets in [example json](https://github.com/alphagov/publishing-api/blob/6d5595470bd0e7f3072e06f0113e3ca5514b6e98/content_schemas/examples/specialist_document/frontend/utaac-decision.json) with the additional values, as in [this commit](https://github.com/alphagov/publishing-api/pull/2658/commits/22b90e769eb0c1834d9c28640a9be07e2b0ce795)
+NOTE: You will need to run `bundle exec rake build_schemas` to regenerate schemas after adding the new value(s).
 
 Once approved, this change can be merged and deployed.
 
@@ -123,7 +126,7 @@ Once approved, this change can be merged and deployed.
 
 3. In search-api, amend the value in the relevant schema in the [elasticsearch_types](https://github.com/alphagov/search-api/tree/main/config/schema/elasticsearch_types) directory. See [this](https://github.com/alphagov/search-api/pull/2320/commits/0f29e310581e30707eea7fe8c91063974636dbe2) commit for an example.
 
-4. Republish the finder, see step 3 in the [Deploy and publish](#Deploy-and-publish) section above. You do not need to reindex search :sweat_smile:
+4. Republish the finder, see step 3 in the [Deploy and publish](#Deploy-and-publish) section above. You do not need to reindex `search-api`.
 
 # __Editing__ a specialist finder
 
