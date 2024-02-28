@@ -13,11 +13,12 @@
   "organisations": [
     "96ae61d6-c2a1-48cb-8e67-da9d105ae381",
     "2fb482e7-3c4d-496f-887d-f8a55a15e89a",
-    "1405edcb-943d-42d2-8ec8-c51cd58335a5"
+    "c352c234-8083-47ec-8a4b-0edd45c31263"
   ],
   "related": [
     "12b8c1ed-46c8-4943-a2c0-5dadc768fdb0",
-    "4e5f4a62-ec3d-49ec-a73c-ab2429babf12"
+    "4e5f4a62-ec3d-49ec-a73c-ab2429babf12",
+    "9be2896c-2c32-4108-a465-e37ba16f6dd1"
   ],
   "show_summaries": true,
   "signup_content_id": "99f5bacb-d1ef-4b93-87ef-bae129fed396",
@@ -347,6 +348,10 @@
       "display_as_result_metadata": true,
       "filterable": true,
       "allowed_values": [
+        {
+          "label": "UK",
+          "value": "uk"
+        },
         {
           "label": "Northern Ireland",
           "value": "northern-ireland"
