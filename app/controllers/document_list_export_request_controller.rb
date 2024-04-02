@@ -6,7 +6,7 @@ class DocumentListExportRequestController < ApplicationController
     begin
       file = get_csv_file_from_s3(filename)
       send_data(file, filename:)
-    rescue Fog::AWS::Storage::NotFound
+    rescue Aws::S3::Errors::NoSuchKey
       head :not_found
     end
   end
@@ -18,19 +18,13 @@ class DocumentListExportRequestController < ApplicationController
   end
 
   def get_csv_file_from_s3(filename)
-    connection = Fog::Storage.new(
-      provider: "AWS",
-      region: ENV["AWS_REGION"],
-      aws_access_key_id: ENV["AWS_ACCESS_KEY_ID"],
-      aws_secret_access_key: ENV["AWS_SECRET_ACCESS_KEY"],
-    )
+    s3 = Aws::S3::Client.new
 
-    directory = connection.directories.get(ENV["AWS_S3_BUCKET_NAME"])
+    obj = s3.get_object({
+      bucket: ENV["AWS_S3_BUCKET_NAME"],
+      key: filename,
+    })
 
-    file = directory.files.get(filename)
-
-    raise Fog::AWS::Storage::NotFound, "Object #{filename} does not exist." if file.nil?
-
-    file.body
+    obj.body.read
   end
 end

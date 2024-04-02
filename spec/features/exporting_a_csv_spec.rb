@@ -1,6 +1,8 @@
 require "rails_helper"
 
 RSpec.feature "Exporting a list of documents as CSV" do
+  let(:stubbed_client) { Aws::S3::Client.new(stub_responses: true) }
+
   let(:documents) do
     3.times.map do |i|
       FactoryBot.create(
@@ -23,20 +25,10 @@ RSpec.feature "Exporting a list of documents as CSV" do
 
     stub_publishing_api_has_content(documents, hash_including(document_type: BusinessFinanceSupportScheme.document_type))
 
-    Fog.mock!
-    ENV["AWS_REGION"] = "eu-west-1"
-    ENV["AWS_ACCESS_KEY_ID"] = "test"
-    ENV["AWS_SECRET_ACCESS_KEY"] = "test"
-    ENV["AWS_S3_BUCKET_NAME"] = "test-bucket"
+    stubbed_client = Aws::S3::Client.new(stub_responses: true)
+    allow(Aws::S3::Client).to receive(:new).and_return(stubbed_client)
 
-    # Create an S3 bucket so the code being tested can find it
-    connection = Fog::Storage.new(
-      provider: "AWS",
-      region: ENV["AWS_REGION"],
-      aws_access_key_id: ENV["AWS_ACCESS_KEY_ID"],
-      aws_secret_access_key: ENV["AWS_SECRET_ACCESS_KEY"],
-    )
-    @directory = connection.directories.get(ENV["AWS_S3_BUCKET_NAME"]) || connection.directories.create(key: ENV["AWS_S3_BUCKET_NAME"])
+    ENV["AWS_S3_BUCKET_NAME"] = "test-bucket"
   end
 
   scenario "I can export a list of documents and they are emailed to me" do
