@@ -2,10 +2,10 @@ source "https://rubygems.org"
 
 gem "rails", "7.1.3.2"
 
+gem "aws-sdk-s3"
 gem "bootsnap", require: false
 gem "bootstrap-kaminari-views"
 gem "dartsass-rails"
-gem "fog-aws"
 gem "gds-api-adapters"
 gem "gds-sso"
 gem "govspeak"
@@ -40,6 +40,7 @@ group :development, :test do
   gem "factory_bot"
   gem "govuk_schemas"
   gem "govuk_test"
+  gem "multi_json"
   gem "pry-rails"
   gem "puma"
   gem "rspec-rails"
