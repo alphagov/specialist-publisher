@@ -63,6 +63,13 @@ Rails.application.configure do
   # config.active_job.queue_adapter = :resque
   # config.active_job.queue_name_prefix = "specialist_publisher_production"
 
+  # Configure emails to be sent via GOV.UK Notify.
+  # Raises a KeyError when the environment variable isn't set so that
+  # misconfiguration is apparent on deploy and not some time after.
+  config.action_mailer.delivery_method = :notify
+  config.action_mailer.notify_settings = {
+    api_key: ENV.fetch("GOVUK_NOTIFY_API_KEY"),
+  }
   config.action_mailer.perform_caching = false
 
   # Ignore bad email addresses and do not raise email delivery errors.
