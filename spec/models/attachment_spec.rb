@@ -224,4 +224,36 @@ RSpec.describe Attachment do
       end
     end
   end
+
+  describe "#destroy" do
+    let(:asset_id) { "some-asset-id" }
+    let(:url) { "/#{asset_id}/document.pdf" }
+    let(:attachment) do
+      Attachment.new(
+        title: "test attachment",
+        url:,
+      )
+    end
+
+    context "when the request to delete the attachment asset from AssetManager succeeds" do
+      it "returns a truthy value" do
+        stub_asset_manager_delete_asset(asset_id)
+        expect(attachment.destroy).to be_truthy
+      end
+    end
+
+    context "when the attachment does not exist in Asset Manager" do
+      it "returns a truthy value" do
+        stub_asset_manager_delete_asset_missing(asset_id)
+        expect(attachment.destroy).to be_truthy
+      end
+    end
+
+    context "when the request to delete the attachment asset in Asset Manager fails for other reasons" do
+      it "returns false" do
+        stub_asset_manager_delete_asset_failure(asset_id)
+        expect(attachment.destroy).to be false
+      end
+    end
+  end
 end
