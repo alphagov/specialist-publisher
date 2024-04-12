@@ -17,7 +17,6 @@ Formats can be flagged as `pre-production` (only publishable on development and 
 - [MAIB Reports](https://www.gov.uk/maib-reports)
 - [RAIB Reports](https://www.gov.uk/raib-reports)
 - [Research For Development Outputs](https://www.gov.uk/research-for-development-outputs)
-- [UK Market Conformity Assessment Bodies](https://www.gov.uk/uk-market-conformity-assessment-bodies)
 
 ## Nomenclature
 

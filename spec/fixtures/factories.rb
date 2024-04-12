@@ -645,29 +645,6 @@ FactoryBot.define do
     end
   end
 
-  factory :uk_market_conformity_assessment_body, parent: :document do
-    base_path { "/uk_market_conformity_assessment_body/example-document" }
-    document_type { "uk_market_conformity_assessment_body" }
-
-    transient do
-      default_metadata do
-        {
-          "updated_at" => "2019-04-10",
-          "uk_market_conformity_assessment_body_number" => "AB 0000",
-          "uk_market_conformity_assessment_body_type" => "approved-body",
-          "uk_market_conformity_assessment_body_registered_office_location" => "united-kingdom",
-          "uk_market_conformity_assessment_body_testing_locations" => %w[united-kingdom],
-          "uk_market_conformity_assessment_body_website" => "www.example.com",
-          "uk_market_conformity_assessment_body_email" => "info@example.com",
-          "uk_market_conformity_assessment_body_phone" => "0800 000 000",
-          "uk_market_conformity_assessment_body_legislative_area" => "explosives",
-          "uk_market_conformity_assessment_body_notified_body_number" => "AB 1111",
-          "uk_market_conformity_assessment_body_address" => "123 Fun Street",
-        }
-      end
-    end
-  end
-
   factory :utaac_decision, parent: :document do
     base_path { "/administrative-appeals-tribunal-decisions/example-document" }
     document_type { "utaac_decision" }
