@@ -4,7 +4,7 @@ Publishing App for Specialist Documents.
 
 This application does not store documents in a database of its own. Instead it uses Publishing API to store and retrieve documents. MongoDB is used for storing local user records.
 
-Formats can be flagged as `pre-production` (only publishable on development and integration). Read [Creating and editing specialist document types](/docs/creating-and-editing-specialist-document-types.md)for details.
+Formats can be flagged as `pre-production` (only publishable on development and integration). Read [Creating and editing specialist document types](/docs/creating-editing-and-removing-specialist-document-types-and-finders.md)for details.
 
 ## Some live examples
 
@@ -52,7 +52,7 @@ $ bundle exec rake
 
 - [Email alerts](/docs/email-alerts.md)
 - [Rake tasks](/docs/tasks.md)
-- [Creating and editing specialist document types](/docs/creating-and-editing-specialist-document-types.md)
+- [Creating and editing specialist document types](/docs/creating-editing-and-removing-specialist-document-types-and-finders.md)
 - [Updating existing organisation data](/docs/updating-existing-organisation-data.md)
 - [Historical info about migrating to use the Publishing API](/docs/phase-2-migration/README.md)
 
