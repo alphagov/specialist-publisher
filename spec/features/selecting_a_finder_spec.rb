@@ -57,7 +57,6 @@ RSpec.feature "The root specialist-publisher page", type: :feature do
       expect(page).to have_text("Residential Property Tribunal Decisions")
       expect(page).to have_text("Service Standard Reports")
       expect(page).to have_text("Tax Tribunal Decisions")
-      expect(page).to have_text("UK Market Conformity Assessment Bodies")
       expect(page).to have_text("UTAAC Decisions")
     end
   end
