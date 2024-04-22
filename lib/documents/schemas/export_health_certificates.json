@@ -805,12 +805,6 @@
               "prechecked": false
             },
             {
-              "key": "micronesia",
-              "radio_button_name": "Micronesia",
-              "topic_name": "Micronesia",
-              "prechecked": false
-            },
-            {
               "key": "moldova",
               "radio_button_name": "Moldova",
               "topic_name": "Moldova",
@@ -1557,7 +1551,6 @@
         {"label": "Mauritania", "value": "mauritania"},
         {"label": "Mauritius", "value": "mauritius"},
         {"label": "Mexico", "value": "mexico"},
-        {"label": "Micronesia", "value": "micronesia"},
         {"label": "Moldova", "value": "moldova"},
         {"label": "Mongolia", "value": "mongolia"},
         {"label": "Montenegro", "value": "montenegro"},
