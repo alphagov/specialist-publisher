@@ -427,6 +427,12 @@
               "prechecked": false
             },
             {
+              "key": "federated-states-of-micronesia",
+              "radio_button_name": "Federated States of Micronesia",
+              "topic_name": "Federated States of Micronesia",
+              "prechecked": false
+            },
+            {
               "key": "fiji",
               "radio_button_name": "Fiji",
               "topic_name": "Fiji",
