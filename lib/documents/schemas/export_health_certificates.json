@@ -805,12 +805,6 @@
               "prechecked": false
             },
             {
-              "key": "micronesia",
-              "radio_button_name": "Micronesia",
-              "topic_name": "Micronesia",
-              "prechecked": false
-            },
-            {
               "key": "moldova",
               "radio_button_name": "Moldova",
               "topic_name": "Moldova",
@@ -1494,6 +1488,7 @@
         {"label": "Eurasian Economic Union", "value": "eurasian-customs-union"},
         {"label": "Falkland Islands", "value": "falkland-islands"},
         {"label": "Faroe Islands", "value": "faroe-islands"},
+        {"label": "Federated States of Micronesia", "value": "federated-states-of-micronesia"},
         {"label": "Fiji", "value": "fiji"},
         {"label": "Finland", "value": "finland"},
         {"label": "France", "value": "france"},
@@ -1556,7 +1551,6 @@
         {"label": "Mauritania", "value": "mauritania"},
         {"label": "Mauritius", "value": "mauritius"},
         {"label": "Mexico", "value": "mexico"},
-        {"label": "Micronesia", "value": "micronesia"},
         {"label": "Moldova", "value": "moldova"},
         {"label": "Mongolia", "value": "mongolia"},
         {"label": "Montenegro", "value": "montenegro"},
