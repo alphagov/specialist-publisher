@@ -1,10 +1,10 @@
 {
   "pre_production": true,
   "content_id": "23ad50d7-916c-456b-b3de-4b27739d5be1",
-  "base_path": "/farming-grant-options",
-  "format_name": "Farming grant options",
-  "name": "Farming grant finder",
-  "description": "Find out about grant options, items and actions in the Farming and Countryside Programme. This is for land or farms in England.",
+  "base_path": "/find-funding-for-land-or-farms",
+  "format_name": "Find funding for land or farms",
+  "name": "Find funding for land or farms",
+  "description": "Find out about grants and funding for farmers and land managers in England.",
   "filter": {
     "format": "farming_grant_option"
   },
@@ -16,9 +16,9 @@
   "signup_content_id": "2cd12e92-3b68-4cb1-bafe-fde6a7939afb",
   "signup_copy": "You'll get an email each time a grant is updated or a new grant is published.",
   "subscription_list_title_prefix": "Farming grant options",
-  "summary": "<p>Find out about grant options, items and actions in the Farming and Countryside Programme. This is for land or farms in England. We will add more grants when they open.</p><div class='application-notice info-notice'><p>This tool does not confirm your eligibility. To get a grant for an option, item or action, you must meet the criteria of the grant scheme it belongs to.</p></div><p>You can search by keyword or the name of a grant. Use the filters to narrow your search.</p>",
+  "summary": "<p>Find out about grants and funding for farmers and land managers in England. We will add more grants and funding as we develop this tool.</p><div class=\"application-notice info-notice\"><p>You can search for actions you can get paid for as part of the Sustainable Farming Incentive (SFI). The tool does not confirm your eligibility. <a href=\"https://www.gov.uk/government/collections/sustainable-farming-incentive-guidance\">Read the SFI guidance to check if you're eligible and how you can apply.</a></p></div><p>Search by keyword, action name or code if you know it. Use the filters to search by land types or areas of interest.</p>",
 
-  "document_noun": "grant",
+  "document_noun": "result",
   "facets": [
     {
       "key": "land_types",
@@ -29,12 +29,12 @@
       "filterable": true,
       "allowed_values": [
         {
-          "label": "Arable land",
-          "value": "arable-land"
+          "label": "Arable",
+          "value": "arable"
         },
         {
-          "label": "Coast",
-          "value": "coast"
+          "label": "Coastal",
+          "value": "coastal"
         },
         {
           "label": "Grassland",
@@ -49,12 +49,12 @@
           "value": "moorland-and-upland"
         },
         {
-          "label": "Organic land",
-          "value": "organic-land"
-        },
-        {
           "label": "Priority habitats",
           "value": "priority-habitats"
+        },
+        {
+          "label": "Scrub",
+          "value": "scrub"
         },
         {
           "label": "Waterbodies",
@@ -79,16 +79,12 @@
       "filterable": true,
       "allowed_values": [
         {
-          "label": "Access and engagement",
-          "value": "access-and-engagement"
+          "label": "Agroforestry",
+          "value": "agroforestry"
         },
         {
           "label": "Air quality",
           "value": "air-quality"
-        },
-        {
-          "label": "Biodiversity",
-          "value": "biodiversity"
         },
         {
           "label": "Boundaries",
@@ -99,6 +95,10 @@
           "value": "crops"
         },
         {
+          "label": "Equipment and machinery",
+          "value": "equipment-and-machinery"
+        },
+        {
           "label": "Flood risk",
           "value": "flood-risk"
         },
@@ -107,12 +107,33 @@
           "value": "forestry"
         },
         {
+          "label": "Hedgerows",
+          "value": "hedgerows"
+        },
+
+        {
           "label": "Historic environment",
           "value": "historic-environment"
         },
         {
+          "label": "Horticulture",
+          "value": "horticulture"
+        },
+        {
+          "label": "Land features and archaeological features",
+          "value": "land-features-and-archaeological-features"
+        },
+        {
           "label": "Livestock management",
           "value": "livestock-management"
+        },
+        {
+          "label": "Nutrient, manure and slurry management",
+          "value": "nutrient-manure-and-slurry-management"
+        },
+        {
+          "label": "Organic",
+          "value": "organic"
         },
         {
           "label": "Peat",
@@ -127,42 +148,28 @@
           "value": "precision-farming"
         },
         {
-          "label": "Slurry management",
-          "value": "slurry-management"
+          "label": "Public access and education",
+          "value": "public-access-and-education"
         },
         {
           "label": "Soil",
           "value": "soil"
         },
         {
-          "label": "Trees (non-woodland)",
-          "value": "trees-non-woodland"
+          "label": "Trees",
+          "value": "trees"
         },
         {
           "label": "Vegetation control",
           "value": "vegetation-control"
         },
         {
-          "label": "Water",
-          "value": "water"
-        }
-      ]
-    },
-    {
-      "key": "grant_schemes",
-      "name": "Grant schemes",
-      "type": "text",
-      "preposition": "part of",
-      "display_as_result_metadata": true,
-      "filterable": true,
-      "allowed_values": [
-        {
-          "label": "Countryside Stewardship",
-          "value": "countryside-stewardship"
+          "label": "Water availability and storage",
+          "value": "water-availability-and-storage"
         },
         {
-          "label": "Sustainable Farming Incentive",
-          "value": "sustainable-farming-incentive"
+          "label": "Water quality",
+          "value": "water-quality"
         }
       ]
     },
