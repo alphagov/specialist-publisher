@@ -26,20 +26,6 @@
   %>
 <% end %>
 
-<%= render layout: "shared/form_group", locals: { f: f, field: :grant_schemes } do %>
-  <%= f.select :grant_schemes,
-      f.object.facet_options(:grant_schemes),
-      {},
-      {
-        class: 'select2 form-control',
-        multiple: true,
-        data: {
-          placeholder: 'Select grant schemes'
-        }
-      }
-  %>
-<% end %>
-
 <%= render layout: "shared/form_group", locals: { f: f, field: :payment_types } do %>
   <%= f.select :payment_types,
       f.object.facet_options(:payment_types),

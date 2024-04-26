@@ -1,11 +1,9 @@
 class FarmingGrantOption < Document
-  validates :grant_schemes, presence: true
   validates :payment_types, presence: true
 
   FORMAT_SPECIFIC_FIELDS = %i[
     areas_of_interest
     land_types
-    grant_schemes
     payment_types
   ].freeze
 
@@ -20,7 +18,7 @@ class FarmingGrantOption < Document
   end
 
   def self.title
-    "Farming Grant Option"
+    "Farming Grant"
   end
 
   def primary_publishing_organisation
