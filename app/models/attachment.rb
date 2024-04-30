@@ -75,6 +75,9 @@ class Attachment < Document
 
   def destroy
     Services.asset_api.delete_asset(id_from_url)
+  rescue GdsApi::HTTPNotFound
+    logger.warn "The asset that we are attempting to delete does not exist in asset manager"
+    true
   rescue GdsApi::BaseError => e
     GovukError.notify(e)
     false
