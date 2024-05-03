@@ -742,7 +742,7 @@ FactoryBot.define do
   end
 
   factory :farming_grant_option, parent: :document do
-    base_path { "/find-funding-for-land-or-farms/example-document" }
+    base_path { "/farming-grant-options/example-document" }
     document_type { "farming_grant_option" }
 
     transient do
@@ -750,6 +750,7 @@ FactoryBot.define do
         {
           "areas_of_interest" => %w[air-quality],
           "land_types" => %w[arable-land],
+          "grant_schemes" => %w[countryside-stewardship],
           "payment_types" => %w[capital],
         }
       end
