@@ -749,7 +749,7 @@ FactoryBot.define do
       default_metadata do
         {
           "areas_of_interest" => %w[air-quality],
-          "land_types" => %w[arable-land],
+          "land_types" => %w[grassland],
           "payment_types" => %w[capital],
         }
       end
