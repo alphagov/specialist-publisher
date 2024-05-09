@@ -24,6 +24,6 @@ class AiAssurancePortfolioTechnique < Document
   end
 
   def primary_publishing_organisation
-    "1405edcb-943d-42d2-8ec8-c51cd58335a5"
+    "c352c234-8083-47ec-8a4b-0edd45c31263"
   end
 end
