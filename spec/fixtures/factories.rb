@@ -741,9 +741,9 @@ FactoryBot.define do
     end
   end
 
-  factory :farming_grant_option, parent: :document do
+  factory :farming_grant, parent: :document do
     base_path { "/find-funding-for-land-or-farms/example-document" }
-    document_type { "farming_grant_option" }
+    document_type { "farming_grant" }
 
     transient do
       default_metadata do
