@@ -1,4 +1,4 @@
-class FarmingGrantOption < Document
+class FarmingGrant < Document
   validates :payment_types, presence: true
 
   FORMAT_SPECIFIC_FIELDS = %i[
