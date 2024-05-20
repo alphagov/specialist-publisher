@@ -5,6 +5,8 @@
   "format_name": "Find funding for land or farms",
   "name": "Find funding for land or farms",
   "description": "Find out about grants and funding for farmers and land managers in England.",
+  "phase": "beta",
+  "beta_message": "This is a new tool – your <a href=\"https://www.smartsurvey.co.uk/s/gov-uk-banner/?c=/find-funding-for-land-or-farms\">feedback</a> will help us to improve it.",
   "filter": {
     "format": "farming_grant"
   },
