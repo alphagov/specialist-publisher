@@ -9,6 +9,7 @@
   },
   "signup_content_id": "db81c7e8-b1b6-4c29-992a-1289f1b63073",
   "signup_copy": "You'll get an email each time a report is updated or a new report is published.",
+  "show_summaries": true,
   "organisations": ["013872d8-8bbb-4e80-9b79-45c7c5cf9177"],
   "subscription_list_title_prefix": {
     "singular": "Rail Accident Investigation Branch (RAIB) reports with the following railway type: ",
