@@ -54,10 +54,6 @@
           "value": "moorland-and-upland"
         },
         {
-          "label": "Priority habitats",
-          "value": "priority-habitats"
-        },
-        {
           "label": "Scrub",
           "value": "scrub"
         },
@@ -155,6 +151,10 @@
         {
           "label": "Precision farming",
           "value": "precision-farming"
+        },
+        {
+          "label": "Priority habitats",
+          "value": "priority-habitats"
         },
         {
           "label": "Public access and education",
