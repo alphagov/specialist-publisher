@@ -38,6 +38,10 @@
           "value": "coastal"
         },
         {
+          "label": "Farmyard",
+          "value": "farmyard"
+        },
+        {
           "label": "Grassland",
           "value": "grassland"
         },
@@ -48,10 +52,6 @@
         {
           "label": "Moorland and upland",
           "value": "moorland-and-upland"
-        },
-        {
-          "label": "Priority habitats",
-          "value": "priority-habitats"
         },
         {
           "label": "Scrub",
@@ -121,6 +121,10 @@
           "value": "horticulture"
         },
         {
+          "label": "Integrated pest management",
+          "value": "integrated-pest-management"
+        },
+        {
           "label": "Land features and archaeological features",
           "value": "land-features-and-archaeological-features"
         },
@@ -147,6 +151,10 @@
         {
           "label": "Precision farming",
           "value": "precision-farming"
+        },
+        {
+          "label": "Priority habitats",
+          "value": "priority-habitats"
         },
         {
           "label": "Public access and education",
