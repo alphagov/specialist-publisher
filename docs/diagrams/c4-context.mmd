@@ -7,6 +7,7 @@ C4Context
     System_Boundary(b0, "GOV.UK") {
         System_Boundary(b1, "GOV.UK Web") {
             System(finder_frontend, "Finder frontend", "Allows users to search and filter documents.")
+            System(government_frontend, "Government frontend", "Allow user to view documents published by the government.")
         }
         System_Boundary(b2, "GOV.UK Publishing") {
             System(search_api, "Search API", "An API for searching for documents.")
@@ -17,9 +18,11 @@ C4Context
     }
 
     BiRel(user, finder_frontend, "Uses")
+    BiRel(user, government_frontend, "Uses")
     BiRel(publisher, specialist_publisher, "Uses")
     Rel(search_api, finder_frontend, "Fetches search results")
-    Rel(content_store, finder_frontend, "Fetches content")
+    Rel(content_store, government_frontend, "Fetches document content")
+    Rel(content_store, finder_frontend, "Fetches finder content")
     Rel(publishing_api, search_api, "Indexes content")
     Rel(publishing_api, content_store, "Stores content")
     Rel(specialist_publisher, publishing_api, "Publishes content")
