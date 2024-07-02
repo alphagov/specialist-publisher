@@ -10,6 +10,7 @@ C4Context
             System(government_frontend, "Government frontend", "Allow user to view documents published by the government.")
         }
         System_Boundary(b2, "GOV.UK Publishing") {
+            Person(developer, "Developer", "A Whitehall experience team member")
             System(search_api, "Search API", "An API for searching for documents.")
             System(publishing_api, "Publishing API", "An API for publishing documents.")
             System(content_store, "Content Store", "The store for denormalised GOV.UK content.")
@@ -28,6 +29,7 @@ C4Context
     Rel(specialist_publisher, publishing_api, "Publishes content")
     Rel(finder_frontend, notify, "Subscribes users to notifications")
     Rel(publishing_api, notify, "Notifies on update")
+    Rel(developer, specialist_publisher, "Publishes finder")
 
     UpdateLayoutConfig($c4ShapeInRow="3", $c4BoundaryInRow="1")
 
