@@ -29,7 +29,7 @@ C4Context
     Rel(specialist_publisher, publishing_api, "Publishes content")
     Rel(finder_frontend, notify, "Subscribes users to notifications")
     Rel(publishing_api, notify, "Notifies on update")
-    Rel(developer, specialist_publisher, "Publishes finder")
+    Rel(developer, specialist_publisher, "Publishes finder and email signup")
     BiRel(publisher, specialist_publisher, "Uses")
 
     UpdateLayoutConfig($c4ShapeInRow="2", $c4BoundaryInRow="1")
