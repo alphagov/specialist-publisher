@@ -55,6 +55,7 @@ $ bundle exec rake
 - [Creating and editing specialist document types](/docs/creating-editing-and-removing-specialist-document-types-and-finders.md)
 - [Updating existing organisation data](/docs/updating-existing-organisation-data.md)
 - [Historical info about migrating to use the Publishing API](/docs/phase-2-migration/README.md)
+- [C4 context diagram](docs/diagrams/c4-context.mmd)
 
 ## Licence
 
