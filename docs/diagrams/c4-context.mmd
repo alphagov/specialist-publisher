@@ -1,0 +1,31 @@
+C4Context
+    title System Context diagram for Specialist Finders
+
+    System_Ext(notify, "GOV.UK Notify", "Sends notifications to GOV.UK subscribers")
+    Person(user, "User", "A member of the public.")
+    Person(publisher, "Publisher", "A civil servant.")
+    System_Boundary(b0, "GOV.UK") {
+        System_Boundary(b1, "GOV.UK Web") {
+            System(finder_frontend, "Finder frontend", "Allows users to search and filter documents.")
+        }
+        System_Boundary(b2, "GOV.UK Publishing") {
+            System(search_api, "Search API", "An API for searching for documents.")
+            System(publishing_api, "Publishing API", "An API for publishing documents.")
+            System(content_store, "Content Store", "The store for denormalised GOV.UK content.")
+            System(specialist_publisher, "Specialist Publisher", "The tool for publishing specialist documents.")
+        }
+    }
+
+    BiRel(user, finder_frontend, "Uses")
+    BiRel(publisher, specialist_publisher, "Uses")
+    Rel(search_api, finder_frontend, "Fetches search results")
+    Rel(content_store, finder_frontend, "Fetches content")
+    Rel(publishing_api, search_api, "Indexes content")
+    Rel(publishing_api, content_store, "Stores content")
+    Rel(specialist_publisher, publishing_api, "Publishes content")
+    Rel(finder_frontend, notify, "Subscribes users to notifications")
+    Rel(publishing_api, notify, "Notifies on update")
+
+    UpdateLayoutConfig($c4ShapeInRow="3", $c4BoundaryInRow="1")
+
+
