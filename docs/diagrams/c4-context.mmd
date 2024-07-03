@@ -1,0 +1,38 @@
+C4Context
+    title System Context diagram for Specialist Finders
+    Person(user, "User", "A member of the public.")
+    Person(publisher, "Publisher", "A civil servant.")
+    System_Boundary(b0, "GOV.UK") {
+        System_Boundary(b1, "GOV.UK Web") {
+            System(finder_frontend, "Finder frontend", "Allows users to search and filter documents.")
+            System(email_alert_api, "Email alert API", "Manages email subscriptions")
+            System(government_frontend, "Government frontend", "Allow user to view documents published by the government.")
+        }
+        System_Boundary(b2, "GOV.UK Publishing") {
+            System(search_api, "Search API", "An API for searching for documents.")
+            System(content_store, "Content Store", "The store for denormalised GOV.UK content.")
+            System(asset_manager, "Asset Manager", "Stores binary files")
+            System(publishing_api, "Publishing API", "An API for publishing documents.")
+            System(specialist_publisher, "Specialist Publisher", "The tool for publishing specialist documents.")
+            Person(developer, "Developer", "A Whitehall experience team member")
+        }
+
+    }
+
+    BiRel(user, finder_frontend, "Uses")
+    BiRel(user, government_frontend, "Uses")
+    Rel(search_api, finder_frontend, "Fetches search results")
+    Rel(content_store, government_frontend, "Fetches document content")
+    Rel(content_store, finder_frontend, "Fetches finder content")
+    Rel(publishing_api, search_api, "Indexes content")
+    Rel(publishing_api, content_store, "Stores content")
+    Rel(specialist_publisher, publishing_api, "Publishes content")
+    Rel(specialist_publisher, asset_manager, "Uploads attachments")
+    Rel(finder_frontend, email_alert_api, "Subscribes users to notifications")
+    Rel(specialist_publisher, email_alert_api, "Notifies on update")
+    Rel(developer, specialist_publisher, "Publishes finder and email signup")
+    BiRel(publisher, specialist_publisher, "Uses")
+
+    UpdateLayoutConfig($c4ShapeInRow="3", $c4BoundaryInRow="1")
+
+
