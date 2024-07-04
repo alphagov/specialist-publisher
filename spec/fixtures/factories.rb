@@ -215,6 +215,20 @@ FactoryBot.define do
     end
   end
 
+  factory :life_saving_maritime_appliance_service_station, parent: :document do
+    base_path { "/service-life-saving-maritime-appliances/example-document" }
+    document_type { "life_saving_maritime_appliance_service_station" }
+    transient do
+      default_metadata do
+        {
+          "life_saving_maritime_appliance_service_station_regions" => %w[north-east-england west-midlands],
+          "life_saving_maritime_appliance_manufacturer" => %w[beaufort besto-seafit],
+          "life_saving_maritime_appliance_type" => %w[lifejackets liferafts],
+        }
+      end
+    end
+  end
+
   factory :marine_equipment_approved_recommendation, parent: :document do
     base_path { "/marine-equipment-approved-recommendations/example-document" }
     document_type { "marine_equipment_approved_recommendation" }
