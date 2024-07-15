@@ -31,6 +31,11 @@
 
 en:
   activemodel:
+    attributes:
+      life_saving_maritime_appliance_service_station:
+        life_saving_maritime_appliance_service_station_regions: Regions in the UK
+        life_saving_maritime_appliance_manufacturer: Appliance manufacturer
+        life_saving_maritime_appliance_type: Appliance type
     errors:
       models:
         licence_transaction:
