@@ -35,6 +35,37 @@ RSpec.describe "publishing_api rake tasks", type: :task do
     end
   end
 
+  describe "publishing_api:publish_pre_production_finders" do
+    before(:each) do
+      allow(Rails.application.config).to receive(:publish_pre_production_finders).and_return(true)
+      Rake::Task["publishing_api:publish_pre_production_finders"].reenable
+    end
+
+    it "publishes only pre-production finders if the pre_production_only flag is passed" do
+      fake_finder_loader = double("FinderLoader")
+      allow(fake_finder_loader).to receive(:finders).with(pre_production_only: true).and_return(%w[foo])
+      allow(FinderLoader).to receive(:new).and_return(fake_finder_loader)
+
+      stubbed_publisher = double("PublishingApiFinderPublisher", call: true)
+      expect(PublishingApiFinderPublisher).to receive(:new).with(%w[foo]).and_return(stubbed_publisher)
+
+      Rake::Task["publishing_api:publish_pre_production_finders"].invoke
+    end
+
+    it "returns an error if the Rails environment is configured to reject pre-production finder publishes" do
+      allow(Rails.application.config).to receive(:publish_pre_production_finders).and_return(false)
+      error_message = "Not allowed to publish pre-production finders in this environment"
+      expect { Rake::Task["publishing_api:publish_pre_production_finders"].invoke }.to raise_exception(error_message)
+    end
+
+    it "returns an error message if a finder fails to publish downstream" do
+      stub_any_publishing_api_put_content.and_raise(GdsApi::HTTPServerError.new(500))
+      error_message = %r{Error publishing finder: #<GdsApi::HTTPServerError: GdsApi::HTTPServerError>}
+
+      expect { Rake::Task["publishing_api:publish_pre_production_finders"].invoke }.to output(error_message).to_stdout
+    end
+  end
+
   describe "publishing_api:publish_finder" do
     before(:each) do
       Rake::Task["publishing_api:publish_finder"].reenable
