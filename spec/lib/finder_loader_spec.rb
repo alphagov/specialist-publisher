@@ -9,7 +9,7 @@ RSpec.describe FinderLoader do
   end
 
   describe "#finders" do
-    it "returns matching finder data objects" do
+    it "returns data objects for all finders by default" do
       expect(Dir).to receive(:glob).with("lib/documents/schemas/*.json").and_return(%w[
         lib/documents/schemas/format-1.json
         lib/documents/schemas/format-2.json
@@ -28,6 +28,27 @@ RSpec.describe FinderLoader do
         {
 
           file: { "name" => "format-2" },
+          timestamp: "today",
+        },
+      ])
+    end
+
+    it "returns data objects only for 'pre-production' finders when `pre_production_only: true` is passed" do
+      stubbed_format_file = "lib/documents/schemas/format-pre-production.json"
+      expect(File).to receive(:read).with(stubbed_format_file)
+        .and_return('{"name":"other-format", "pre_production": true}')
+      expect(File).to receive(:mtime).with(stubbed_format_file)
+        .and_return("today")
+
+      expect(Dir).to receive(:glob).with("lib/documents/schemas/*.json").and_return([
+        "lib/documents/schemas/format-1.json",
+        stubbed_format_file,
+      ])
+
+      loader = FinderLoader.new
+      expect(loader.finders(pre_production_only: true)).to match_array([
+        {
+          file: { "name" => "other-format", "pre_production" => true },
           timestamp: "today",
         },
       ])
