@@ -8,6 +8,9 @@
   "filter": {
     "format": "countryside_stewardship_grant"
   },
+  "editing_organisations": [
+    "de4e9dc6-cca4-43af-a594-682023b84d6c"
+  ],
   "organisations": [
     "e8fae147-6232-4163-a3f1-1c15b755a8a4",
     "d3ce4ba7-bc75-46b4-89d9-38cb3240376d"
