@@ -1,0 +1,44 @@
+<%= render layout: "shared/form_group", locals: { f: f, field: :life_saving_maritime_appliance_service_station_regions, label: "Regions in the UK" } do %>
+  <%= f.select :life_saving_maritime_appliance_service_station_regions,
+      facet_options(f, :life_saving_maritime_appliance_service_station_regions),
+      {},
+      {
+        class: 'select2 form-control',
+        multiple: true,
+        data:
+          {
+            placeholder: 'Select a region'
+          }
+      }
+  %>
+<% end %>
+
+<%= render layout: "shared/form_group", locals: { f: f, field: :life_saving_maritime_appliance_manufacturer, label: "Appliance manufacturer" } do %>
+  <%= f.select :life_saving_maritime_appliance_manufacturer,
+      facet_options(f, :life_saving_maritime_appliance_manufacturer),
+      {},
+      {
+        class: 'select2 form-control',
+        multiple: true,
+        data:
+          {
+            placeholder: 'Select an appliance manufacturer'
+          }
+      }
+  %>
+<% end %>
+
+<%= render layout: "shared/form_group", locals: { f: f, field: :life_saving_maritime_appliance_type, label: "Appliance type" } do %>
+  <%= f.select :life_saving_maritime_appliance_type,
+      facet_options(f, :life_saving_maritime_appliance_type),
+      {},
+      {
+        class: 'select2 form-control',
+        multiple: true,
+        data:
+        {
+          placeholder: 'Select an appliance type'
+        }
+      }
+  %>
+<% end %>
