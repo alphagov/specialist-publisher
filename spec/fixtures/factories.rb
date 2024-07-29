@@ -229,6 +229,28 @@ FactoryBot.define do
     end
   end
 
+  factory :veterans_support_organisation, parent: :document do
+    base_path { "/support-for-veterans/example-document" }
+    document_type { "veterans_support_organisation" }
+    transient do
+      default_metadata do
+        {
+          "veterans_support_organisation_health_and_social_care" => %w[mental-health social-care],
+          "veterans_support_organisation_finance" => %w[pensions benefits],
+          "veterans_support_organisation_legal_and_justice" => %w[general-legal-advice support-for-those-in-the-justice-system],
+          "veterans_support_organisation_employment_education_and_training" => %w[transition-support apprenticeships],
+          "veterans_support_organisation_housing" => %w[care-homes supported-housing],
+          "veterans_support_organisation_families_and_children" => %w[childcare-and-custody domestic-abuse],
+          "veterans_support_organisation_community_and_social" => %w[leisure-activities volunteering-opportunities],
+          "veterans_support_organisation_region_england" => %w[north-west midlands],
+          "veterans_support_organisation_region_northern_ireland" => %w[south-portadown-area east-holywood-area],
+          "veterans_support_organisation_region_scotland" => %w[the-southern-uplands the-central-lowlands],
+          "veterans_support_organisation_region_wales" => %w[north-wales south-wales-central],
+        }
+      end
+    end
+  end
+
   factory :marine_equipment_approved_recommendation, parent: :document do
     base_path { "/marine-equipment-approved-recommendations/example-document" }
     document_type { "marine_equipment_approved_recommendation" }
