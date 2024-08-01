@@ -5,7 +5,7 @@
   "format_name": "Find support for veterans and their families",
   "name": "Find support for veterans and their families",
   "description": "Find support organisations for veterans of the UK armed forces and their families.",
-  "summary": "<p>This directory lists organisations that provide support to veterans of the UK armed forces and their families.</p><p>You can filter results by location and select as many areas of support as you need. Results will include information about:</p><ul><li>services that are funded or run by the government</li><li>charities and other non-government organisations</li></ul><p><strong>If you are in danger, or at immediate risk, ring 999.</strong></p><h2>Disclaimer</h2><p>This should not be taken as an exhaustive list of all services on offer to veterans and their families in the UK.</p><p>The government is not liable for any services that fail to meet an individual's requirements or standards and nor should the inclusion of these organisations or services be taken as endorsement by the Office for Veterans’ Affairs.</p>",
+  "summary": "<p>This directory lists organisations that provide support to veterans of the UK armed forces and their families.</p><p>You can filter results by location and select as many areas of support as you need.</p><p>This should not be taken as an exhaustive list of all services on offer to veterans and their families in the UK.</p><p>The government is not liable for any services that fail to meet an individual's requirements or standards. The inclusion of these organisations or services should not be taken as endorsement by the Office for Veterans’ Affairs.</p>",
   "filter": {
     "format": "veterans_support_organisation"
   },
