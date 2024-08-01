@@ -1,0 +1,191 @@
+{
+  "pre-production": true,
+  "content_id": "0bf7f581-a547-4dd1-aef0-754e0924281d",
+  "base_path": "/support-for-veterans",
+  "format_name": "Find support for veterans and their families",
+  "name": "Find support for veterans and their families",
+  "description": "Find support organisations for veterans of the UK armed forces and their families.",
+  "summary": "<p>This directory lists organisations that provide support to veterans of the UK armed forces and their families.</p><p>You can filter results by location and select as many areas of support as you need. Results will include information about:</p><ul><li>services that are funded or run by the government</li><li>charities and other non-government organisations</li></ul><p><strong>If you are in danger, or at immediate risk, ring 999.</strong></p><h2>Disclaimer</h2><p>This should not be taken as an exhaustive list of all services on offer to veterans and their families in the UK.</p><p>The government is not liable for any services that fail to meet an individual's requirements or standards and nor should the inclusion of these organisations or services be taken as endorsement by the Office for Veterans’ Affairs.</p>",
+  "filter": {
+    "format": "veterans_support_organisation"
+  },
+  "show_summaries": true,
+  "organisations": ["516357f6-92f3-4292-8449-b958e1c63c5f"],
+  "related": [
+    "df6f3081-b8f0-40a6-9df7-8b415cc4519b",
+    "e822d522-0d12-44b7-95fa-f57c8b716bde",
+    "8d7d88c2-4ea9-4c25-aab2-1988a269177e"
+  ],
+  "document_noun": "result",
+  "facets": [
+    {
+      "key": "veterans_support_organisation_health_and_social_care",
+      "name": "Health and Social Care",
+      "short_name": "Health and Social Care",
+      "type": "text",
+      "preposition": "helps with",
+      "display_as_result_metadata": true,
+      "filterable": true,
+      "allowed_values": [
+        {"label": "Mental Health", "value": "mental-health"},
+        {"label": "Physical Health", "value": "physical-health"},
+        {"label": "Social Care", "value": "social-care"}
+      ]
+    },
+    {
+      "key": "veterans_support_organisation_finance",
+      "name": "Finance",
+      "short_name": "Finance",
+      "type": "text",
+      "preposition": "helps with",
+      "display_as_result_metadata": true,
+      "filterable": true,
+      "allowed_values": [
+        {"label": "Pensions", "value": "pensions"},
+        {"label": "Compensation", "value": "compensation"},
+        {"label": "Benefits", "value": "benefits"},
+        {"label": "Financial help", "value": "financial-help"},
+        {"label": "Debt advice", "value": "debt-advice"},
+        {"label": "Funeral costs", "value": "funeral-costs"}
+      ]
+    },
+    {
+      "key": "veterans_support_organisation_legal_and_justice",
+      "name": "Legal and justice",
+      "short_name": "Legal help",
+      "type": "text",
+      "preposition": "helps with",
+      "display_as_result_metadata": true,
+      "filterable": true,
+      "allowed_values": [
+        {"label": "General legal advice", "value": "general-legal-advice"},
+        {"label": "Support for those in the justice system", "value": "support-for-those-in-the-justice-system"}
+      ]
+    },
+    {
+      "key": "veterans_support_organisation_employment_education_and_training",
+      "name": "Employment, education and training",
+      "short_name": "Employment, education and training",
+      "type": "text",
+      "preposition": "helps with",
+      "display_as_result_metadata": true,
+      "filterable": true,
+      "allowed_values": [
+        {"label": "Transition support", "value": "transition-support"},
+        {"label": "Career advice and support for jobseekers", "value": "career-advice-and-support-for-jobseekers"},
+        {"label": "Starting a business", "value": "starting-a-business"},
+        {"label": "Apprenticeships", "value": "apprenticeships"},
+        {"label": "Education and other training", "value": "education-and-other-training"}
+      ]
+    },
+    {
+      "key": "veterans_support_organisation_housing",
+      "name": "Housing",
+      "short_name": "Housing",
+      "type": "text",
+      "preposition": "helps with",
+      "display_as_result_metadata": true,
+      "filterable": true,
+      "allowed_values": [
+        {"label": "Homelessness, crisis accommodation", "value": "homelessness-crisis-accommodation"},
+        {"label": "Supported housing", "value": "supported-housing"},
+        {"label": "Care homes", "value": "care-homes"},
+        {"label": "Renting a home", "value": "renting-a-home"},
+        {"label": "Buying a home", "value": "buying-a-home"}
+      ]
+    },
+    {
+      "key": "veterans_support_organisation_families_and_children",
+      "name": "Families and children",
+      "short_name": "Families and children",
+      "type": "text",
+      "preposition": "helps with",
+      "display_as_result_metadata": true,
+      "filterable": true,
+      "allowed_values": [
+        {"label": "Support for spouses and families", "value": "support-for-spouses-and-families"},
+        {"label": "Childcare and custody", "value": "childcare-and-custody"},
+        {"label": "Support with relationships", "value": "support-with-relationships"},
+        {"label": "Domestic abuse", "value": "domestic-abuse"}
+      ]
+    },
+    {
+      "key": "veterans_support_organisation_community_and_social",
+      "name": "Community and social",
+      "short_name": "Community and social",
+      "type": "text",
+      "preposition": "helps with",
+      "display_as_result_metadata": true,
+      "filterable": true,
+      "allowed_values": [
+        {"label": "Drop-in centres", "value": "drop-in-centres"},
+        {"label": "Leisure activities", "value": "leisure-activities"},
+        {"label": "Volunteering opportunities", "value": "volunteering-opportunities"}
+      ]
+    },
+    {
+      "key": "veterans_support_organisation_region_england",
+      "name": "England",
+      "short_name": "England",
+      "type": "text",
+      "preposition": "location",
+      "display_as_result_metadata": true,
+      "filterable": true,
+      "allowed_values": [
+        {"label": "North East and Yorkshire", "value": "north-east-and-yorkshire"},
+        {"label": "North West", "value": "north-west"},
+        {"label": "Midlands", "value": "midlands"},
+        {"label": "East of England", "value": "east-of-england"},
+        {"label": "London", "value": "london"},
+        {"label": "South West", "value": "south-west"},
+        {"label": "South East", "value": "south-east"}
+      ]
+    },
+    {
+      "key": "veterans_support_organisation_region_northern_ireland",
+      "name": "Northern Ireland",
+      "short_name": "Northern Ireland",
+      "type": "text",
+      "preposition": "location",
+      "display_as_result_metadata": true,
+      "filterable": true,
+      "allowed_values": [
+        {"label": "North (Coleraine Area)", "value": "north-coleraine-area"},
+        {"label": "South (Portadown Area)", "value": "south-portadown-area"},
+        {"label": "East (Holywood Area)", "value": "east-holywood-area"},
+        {"label": "West (Enniskillen Area)", "value": "west-enniskillen-area"}
+      ]
+    },
+    {
+      "key": "veterans_support_organisation_region_scotland",
+      "name": "Scotland",
+      "short_name": "Scotland",
+      "type": "text",
+      "preposition": "location",
+      "display_as_result_metadata": true,
+      "filterable": true,
+      "allowed_values": [
+        {"label": "The Southern Uplands", "value": "the-southern-uplands"},
+        {"label": "The Central Lowlands", "value": "the-central-lowlands"},
+        {"label": "Grampian Mountains", "value": "grampian-mountains"},
+        {"label": "Northern Highlands, Hebrides and the Northern Isles", "value": "northern-highlands-hebrides-and-the-northern-isles"}
+      ]
+    },
+    {
+      "key": "veterans_support_organisation_region_wales",
+      "name": "Wales",
+      "short_name": "Wales",
+      "type": "text",
+      "preposition": "location",
+      "display_as_result_metadata": true,
+      "filterable": true,
+      "allowed_values": [
+        {"label": "Mid and West Wales", "value": "mid-and-west-wales"},
+        {"label": "North Wales", "value": "north-wales"},
+        {"label": "South Wales Central", "value": "south-wales-central"},
+        {"label": "South Wales East", "value": "south-wales-east"},
+        {"label": "South Wales West", "value": "south-wales-west"}
+      ]
+    }
+  ]
+}

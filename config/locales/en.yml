@@ -36,6 +36,17 @@ en:
         life_saving_maritime_appliance_service_station_regions: Regions in the UK
         life_saving_maritime_appliance_manufacturer: Appliance manufacturer
         life_saving_maritime_appliance_type: Appliance type
+      veterans_support_organisation:
+        veterans_support_organisation_health_and_social_care: Health and social care option
+        veterans_support_organisation_finance: Finance option
+        veterans_support_organisation_legal_and_justice: Legal and justice option
+        veterans_support_organisation_employment_education_and_training: Employment, education and training option
+        veterans_support_organisation_housing: Housing option
+        veterans_support_organisation_families_and_children: Families and children option
+        veterans_support_organisation_community_and_social: Community and social option
+        veterans_support_organisation_region_england: Region in England
+        veterans_support_organisation_region_northern_ireland: Region in Northern Ireland
+        veterans_support_organisation_region_scotland: Region in Scotland
     errors:
       models:
         licence_transaction:
