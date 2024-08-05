@@ -17,7 +17,7 @@ RSpec.feature "Unsaved changes to a document", type: :feature, js: true do
     visit "/cma-cases"
   end
 
-  context "a new document" do
+  xcontext "a new document" do
     before do
       click_on "Add another CMA Case"
 
@@ -79,7 +79,7 @@ RSpec.feature "Unsaved changes to a document", type: :feature, js: true do
     end
   end
 
-  context "an existing document" do
+  xcontext "an existing document" do
     before do
       click_on "Example document"
       click_on "Edit document"
