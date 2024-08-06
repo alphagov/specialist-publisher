@@ -25,6 +25,10 @@ class AaibReport < Document
     [AIR_ACCIDENTS_AND_SERIOUS_INCIDENTS_TAXON_ID]
   end
 
+  def self.content_id_for_finder
+    "b7574bba-969f-4c49-855a-ae1586258ff6"
+  end
+
   def self.title
     "AAIB Report"
   end
