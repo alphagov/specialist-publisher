@@ -154,7 +154,7 @@ RSpec.describe Document do
   let(:document) { MyDocumentType.from_publishing_api(payload) }
 
   before do
-    allow_any_instance_of(FinderSchema).to receive(:load_schema_for).with("my_document_types")
+    allow_any_instance_of(FinderSchema).to receive(:load_local_schema).with("my_document_types")
       .and_return(finder_schema)
   end
 

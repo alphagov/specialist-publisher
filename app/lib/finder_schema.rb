@@ -8,8 +8,8 @@ class FinderSchema
 
   attr_reader :base_path, :organisations, :format, :content_id, :editing_organisations
 
-  def initialize(schema_type)
-    @schema = load_schema_for(schema_type)
+  def initialize(schema_type: nil)
+    @schema = load_local_schema(schema_type)
     @base_path = schema.fetch("base_path")
     @organisations = schema.fetch("organisations", [])
     @editing_organisations = schema.fetch("editing_organisations", [])
@@ -48,7 +48,7 @@ private
 
   attr_reader :schema
 
-  def load_schema_for(type)
+  def load_local_schema(type)
     JSON.parse(File.read(Rails.root.join("lib/documents/schemas/#{type}.json")))
   end
 
