@@ -155,7 +155,7 @@ FactoryBot.define do
       if document_type
         result = result.merge(
           links: {
-            finder: [FinderSchema.new(schema_type: document_type.pluralize).content_id],
+            finder: [FinderSchema.new(content_id: "abc123").content_id],
           },
         )
       end
@@ -516,7 +516,7 @@ FactoryBot.define do
     initialize_with do
       attributes.merge(
         links: {
-          finder: [FinderSchema.new(schema_type: document_type.pluralize).content_id],
+          finder: [FinderSchema.new(content_id: "abc123").content_id],
           organisations: [organisation_content_id, primary_publishing_org_content_id],
           primary_publishing_organisation: [primary_publishing_org_content_id],
         },
@@ -545,7 +545,7 @@ FactoryBot.define do
     initialize_with do
       attributes.merge(
         links: {
-          finder: [FinderSchema.new(schema_type: document_type.pluralize).content_id],
+          finder: [FinderSchema.new(content_id: "abc123").content_id],
           organisations: [organisation_content_id, primary_publishing_org_content_id],
           primary_publishing_organisation: [primary_publishing_org_content_id],
         },
@@ -658,7 +658,7 @@ FactoryBot.define do
     initialize_with do
       attributes.merge(
         links: {
-          finder: [FinderSchema.new(schema_type: document_type.pluralize).content_id],
+          finder: [FinderSchema.new(content_id: "abc123").content_id],
           organisations: [organisation_content_id, primary_publishing_org_content_id],
           primary_publishing_organisation: [primary_publishing_org_content_id],
         },

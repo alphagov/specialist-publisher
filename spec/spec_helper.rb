@@ -39,6 +39,12 @@ require "pundit/rspec"
 require "govuk_sidekiq/testing"
 Sidekiq::Testing.inline!
 
+def stub_finder_payload
+  payload = JSON.parse(File.read(Rails.root.join("spec/fixtures/publishing_api/get_finder_payload.json")))
+  stub_request(:get, "http://publishing-api.dev.gov.uk/v2/content/abc123?locale=en")
+    .to_return(status: 200, body: payload.to_json)
+end
+
 RSpec.configure do |config|
   config.disable_monkey_patching!
 
@@ -48,6 +54,10 @@ RSpec.configure do |config|
 
   config.mock_with :rspec do |mocks|
     mocks.syntax = :expect
+  end
+
+  config.before do
+    stub_finder_payload
   end
 
   config.before(:each) do

@@ -15,8 +15,10 @@ RSpec.describe RepublishService do
   end
 
   before do
+    stub_finder_payload
     stub_any_publishing_api_call
     stub_publishing_api_has_item(document)
+    stub_finder_payload
   end
 
   shared_examples "preserve timestamp" do |times: 1|
