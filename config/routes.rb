@@ -11,8 +11,6 @@ Rails.application.routes.draw do
   post "/preview", to: "govspeak#preview"
   get "/error", to: "passthrough#error"
 
-  mount GovukAdminTemplate::Engine, at: "/style-guide"
-
   resources :document_list_export_request, path: "/export/:document_type_slug", param: :export_id, only: [:show]
 
   resources :documents, path: "/:document_type_slug", param: :content_id_and_locale, except: :destroy do
