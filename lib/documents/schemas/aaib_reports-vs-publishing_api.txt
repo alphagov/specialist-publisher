@@ -1,0 +1,83 @@
+{
+  "content_id": "b7574bba-969f-4c49-855a-ae1586258ff6", # foo.to_h["content_id"]
+  "organisations": ["38eb5d8f-2d89-480c-8655-e2e7ac23f8f4"], # MISSING
+
+  "base_path": "/aaib-reports", # foo.to_h["base_path"]
+  "format_name": "Air Accidents Investigation Branch report", # foo.to_h["details"]["format_name"]
+  "name": "Air Accidents Investigation Branch reports", # foo.to_h["title"]
+  "description": "Find reports of AAIB investigations into air accidents and incidents", # foo.to_h["description"]
+  "phase": "live", # foo.to_h["phase"]
+  "filter": { # foo.to_h["details"]["filter"]
+    "format": "aaib_report"
+  },
+  "show_summaries": true, foo.to_h["details"]["show_summaries"]
+  "document_noun": "report", # foo.to_h["details"]["document_noun"]
+  "facets": [ # foo.to_h["details"]["facets"]
+    {
+      "key": "aircraft_category",
+      "name": "Category",
+      "type": "text",
+      "preposition": "in category",
+      "display_as_result_metadata": true,
+      "filterable": true,
+      "allowed_values": [
+        {"label": "Commercial - fixed wing", "value": "commercial-fixed-wing"},
+        {"label": "Commercial - rotorcraft", "value": "commercial-rotorcraft"},
+        {"label": "General aviation - fixed wing", "value": "general-aviation-fixed-wing"},
+        {"label": "General aviation - rotorcraft", "value": "general-aviation-rotorcraft"},
+        {"label": "Spaceflight", "value": "spaceflight"},
+        {"label": "Sport aviation and balloons", "value": "sport-aviation-and-balloons"},
+        {"label": "Unmanned Aircraft Systems (UAS)", "value": "unmanned-aircraft-systems"}
+      ]
+    },
+    {
+      "key": "report_type",
+      "name": "Report type",
+      "type": "text",
+      "preposition": "of type",
+      "display_as_result_metadata": true,
+      "filterable": true,
+      "allowed_values": [
+        {"label": "Annual safety report", "value": "annual-safety-report"},
+        {"label": "Bulletin - Correspondence investigation", "value": "correspondence-investigation"},
+        {"label": "Bulletin - Field investigation", "value": "field-investigation"},
+        {"label": "Bulletin - Pre-1997 uncategorised monthly report", "value": "pre-1997-monthly-report"},
+        {"label": "Foreign report", "value": "foreign-report"},
+        {"label": "Formal report", "value": "formal-report"},
+        {"label": "Spaceflight", "value": "spaceflight"},
+        {"label": "Special bulletin", "value": "special-bulletin"},
+        {"label": "Safety study", "value": "safety-study"}
+      ]
+    },
+    {
+      "key": "date_of_occurrence",
+      "name": "Date of occurrence",
+      "short_name": "Occurred",
+      "type": "date",
+      "preposition": "occurred",
+      "display_as_result_metadata": true,
+      "filterable": true
+    },
+    {
+      "key": "aircraft_type",
+      "name": "Aircraft type",
+      "type": "text",
+      "display_as_result_metadata": false,
+      "filterable": false
+    },
+    {
+      "key": "location",
+      "name": "Location",
+      "type": "text",
+      "display_as_result_metadata": false,
+      "filterable": false
+    },
+    {
+      "key": "registration",
+      "name": "Registration",
+      "type": "text",
+      "display_as_result_metadata": false,
+      "filterable": false
+    }
+  ]
+}
