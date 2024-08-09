@@ -12,6 +12,7 @@
   "signup_copy": "You'll get an email each time an alert is updated or a new alert is published.",
   "show_summaries": true,
   "organisations": ["240f72bd-9a4d-4f39-94d9-77235cadde8e"],
+  "taxons": ["51bbdf23-292a-4b74-8a66-f7db6b93b163"],
   "related": ["602be505-4cf4-4f8c-8bfc-7bc4b63a7f47"],
   "topics": [
     "medicines-medical-devices-blood/medical-devices-regulation-safety",

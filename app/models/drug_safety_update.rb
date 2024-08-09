@@ -10,10 +10,6 @@ class DrugSafetyUpdate < Document
     super(params, FORMAT_SPECIFIC_FIELDS)
   end
 
-  def taxons
-    [ALERTS_AND_RECALLS_TAXON_ID]
-  end
-
   def self.title
     "Drug Safety Update"
   end

@@ -16,10 +16,6 @@ class ResidentialPropertyTribunalDecision < Document
     super(params, FORMAT_SPECIFIC_FIELDS)
   end
 
-  def taxons
-    [COURTS_SENTENCING_AND_TRIBUNALS_TAXON_ID]
-  end
-
   def self.title
     "Residential Property Tribunal Decision"
   end

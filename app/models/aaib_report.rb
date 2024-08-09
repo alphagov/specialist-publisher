@@ -21,10 +21,6 @@ class AaibReport < Document
     super(params, FORMAT_SPECIFIC_FIELDS)
   end
 
-  def taxons
-    [AIR_ACCIDENTS_AND_SERIOUS_INCIDENTS_TAXON_ID]
-  end
-
   def self.title
     "AAIB Report"
   end

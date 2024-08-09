@@ -803,4 +803,12 @@ RSpec.describe Document do
       expect(subject.save).to be true
     end
   end
+
+  describe "#taxons" do
+    it "delegates to the FinderSchema" do
+      document = MyDocumentType.new
+      allow(document.finder_schema).to receive(:taxons).and_return(%w[foo])
+      expect(document.taxons).to eq(%w[foo])
+    end
+  end
 end

@@ -21,10 +21,6 @@ class AnimalDiseaseCase < Document
     super(params, FORMAT_SPECIFIC_FIELDS)
   end
 
-  def taxons
-    []
-  end
-
   def self.title
     "Animal disease case"
   end

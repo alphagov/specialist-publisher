@@ -44,6 +44,6 @@ RSpec.describe DocumentLinksPresenter do
     links_presenter = DocumentLinksPresenter.new(document)
     presented_data = links_presenter.to_json
 
-    expect(presented_data[:links][:taxons]).to eq([Document::BREXIT_TAXON_ID])
+    expect(presented_data[:links][:taxons]).to eq(%w[d6c2de5d-ef90-45d1-82d4-5f2438369eea])
   end
 end

@@ -13,10 +13,6 @@ class InternationalDevelopmentFund < Document
     super(params, FORMAT_SPECIFIC_FIELDS)
   end
 
-  def taxons
-    [INTERNATIONAL_AID_AND_DEVELOPMENT_TAXON_ID]
-  end
-
   def self.title
     "International Development Fund"
   end

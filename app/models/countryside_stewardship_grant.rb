@@ -12,10 +12,6 @@ class CountrysideStewardshipGrant < Document
     super(params, FORMAT_SPECIFIC_FIELDS)
   end
 
-  def taxons
-    [COUNTRYSIDE_TAXON_ID]
-  end
-
   def self.title
     "Countryside Stewardship Grant"
   end

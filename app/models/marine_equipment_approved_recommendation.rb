@@ -14,10 +14,6 @@ class MarineEquipmentApprovedRecommendation < Document
     super(params, FORMAT_SPECIFIC_FIELDS)
   end
 
-  def taxons
-    []
-  end
-
   def self.title
     "Marine Equipment Approved Recommendation"
   end

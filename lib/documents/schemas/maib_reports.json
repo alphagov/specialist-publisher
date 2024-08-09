@@ -11,6 +11,7 @@
   "signup_copy": "You'll get an email each time a report is updated or a new report is published.",
   "show_summaries": true,
   "organisations": ["9c66b9a3-1e6a-48e8-974d-2a5635f84679"],
+  "taxons": ["7a5e878e-2b0f-4c3f-9079-586590a1a194"],
   "subscription_list_title_prefix": {
     "singular": "Marine Accident Investigation Branch (MAIB) reports with the following vessel type: ",
     "plural": "Marine Accident Investigation Branch (MAIB) reports with the following vessel types: ",
