@@ -13,15 +13,7 @@ class RaibReport < Document
     super(params, FORMAT_SPECIFIC_FIELDS)
   end
 
-  def taxons
-    [RAIL_ACCIDENTS_AND_SERIOUS_INCIDENTS_TAXON_ID]
-  end
-
   def self.title
     "RAIB Report"
-  end
-
-  def primary_publishing_organisation
-    "013872d8-8bbb-4e80-9b79-45c7c5cf9177"
   end
 end

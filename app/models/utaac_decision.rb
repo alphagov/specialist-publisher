@@ -18,15 +18,7 @@ class UtaacDecision < Document
     super(params, FORMAT_SPECIFIC_FIELDS)
   end
 
-  def taxons
-    [COURTS_SENTENCING_AND_TRIBUNALS_TAXON_ID]
-  end
-
   def self.title
     "UTAAC Decision"
-  end
-
-  def primary_publishing_organisation
-    "6f757605-ab8f-4b62-84e4-99f79cf085c2"
   end
 end

@@ -22,8 +22,4 @@ class VeteransSupportOrganisation < Document
   def self.title
     "Veterans Support Organisation"
   end
-
-  def primary_publishing_organisation
-    "516357f6-92f3-4292-8449-b958e1c63c5f"
-  end
 end

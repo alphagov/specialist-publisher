@@ -7,10 +7,6 @@ RSpec.describe Document do
         "My Document Type"
       end
 
-      def primary_publishing_organisation
-        "a-primary-org-id"
-      end
-
       attr_accessor :field1, :field2, :field3
 
       def initialize(params = {})
@@ -154,7 +150,7 @@ RSpec.describe Document do
   let(:document) { MyDocumentType.from_publishing_api(payload) }
 
   before do
-    allow_any_instance_of(FinderSchema).to receive(:load_schema_for).with("my_document_types")
+    allow(FinderSchema).to receive(:load_schema_for).with("my_document_types")
       .and_return(finder_schema)
   end
 
@@ -801,6 +797,22 @@ RSpec.describe Document do
       stub_any_publishing_api_patch_links
       subject.update_type = "minor"
       expect(subject.save).to be true
+    end
+  end
+
+  describe "#taxons" do
+    it "delegates to the FinderSchema" do
+      document = MyDocumentType.new
+      allow(document.finder_schema).to receive(:taxons).and_return(%w[foo])
+      expect(document.taxons).to eq(%w[foo])
+    end
+  end
+
+  describe "#primary_publishing_organisation" do
+    it "returns the first organisation from the FinderSchema" do
+      document = MyDocumentType.new
+      allow(document.finder_schema).to receive(:organisations).and_return(%w[foo bar])
+      expect(document.primary_publishing_organisation).to eq("foo")
     end
   end
 end

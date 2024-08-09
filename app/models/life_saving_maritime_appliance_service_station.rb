@@ -17,8 +17,4 @@ class LifeSavingMaritimeApplianceServiceStation < Document
   def self.title
     "Life Saving Maritime Appliance Service Station"
   end
-
-  def primary_publishing_organisation
-    "23a24aa8-1711-42b6-bf6b-47af0f230295"
-  end
 end

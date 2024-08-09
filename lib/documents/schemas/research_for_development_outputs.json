@@ -13,6 +13,7 @@
   "organisations": [
     "f9fcf3fe-2751-4dca-97ca-becaeceb4b26"
   ],
+  "taxons": ["9fb30a53-70fb-4f1c-878b-0064b202d1ba"],
   "subscription_list_title_prefix": "Research for Development output",
   "document_noun": "output",
   "facets": [

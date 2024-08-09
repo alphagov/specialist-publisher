@@ -13,15 +13,7 @@ class FarmingGrant < Document
     super(params, FORMAT_SPECIFIC_FIELDS)
   end
 
-  def taxons
-    []
-  end
-
   def self.title
     "Farming Grant"
-  end
-
-  def primary_publishing_organisation
-    "de4e9dc6-cca4-43af-a594-682023b84d6c"
   end
 end

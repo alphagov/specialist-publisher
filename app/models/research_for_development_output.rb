@@ -19,10 +19,6 @@ class ResearchForDevelopmentOutput < Document
     self.author_tags = params[:author_tags]
   end
 
-  def taxons
-    [INTERNATIONAL_AID_AND_DEVELOPMENT_TAXON_ID]
-  end
-
   ##
   # Research for Development outputs are always bulk published, because our 'publication'
   # is just a proxy for a research output PDF. Its date is not important to a
@@ -42,9 +38,5 @@ class ResearchForDevelopmentOutput < Document
 
   def author_tags=(tags)
     self.authors = (tags || "").split("::")
-  end
-
-  def primary_publishing_organisation
-    "f9fcf3fe-2751-4dca-97ca-becaeceb4b26"
   end
 end
