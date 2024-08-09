@@ -20,8 +20,4 @@ class MarineNotice < Document
   def self.title
     "Marine Notice"
   end
-
-  def primary_publishing_organisation
-    "23a24aa8-1711-42b6-bf6b-47af0f230295"
-  end
 end

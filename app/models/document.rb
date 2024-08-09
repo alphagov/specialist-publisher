@@ -172,6 +172,10 @@ class Document
 
   delegate :organisations, to: :finder_schema
 
+  def primary_publishing_organisation
+    organisations.first
+  end
+
   def schema_editing_organisations
     finder_schema.editing_organisations
   end

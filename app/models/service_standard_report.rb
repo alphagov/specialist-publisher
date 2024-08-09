@@ -14,8 +14,4 @@ class ServiceStandardReport < Document
   def self.title
     "Service Standard Report"
   end
-
-  def primary_publishing_organisation
-    "2fb482e7-3c4d-496f-887d-f8a55a15e89a"
-  end
 end

@@ -17,8 +17,4 @@ class DrugSafetyUpdate < Document
   def send_email_on_publish?
     false
   end
-
-  def primary_publishing_organisation
-    "240f72bd-9a4d-4f39-94d9-77235cadde8e"
-  end
 end

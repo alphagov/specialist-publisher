@@ -39,8 +39,4 @@ class ResearchForDevelopmentOutput < Document
   def author_tags=(tags)
     self.authors = (tags || "").split("::")
   end
-
-  def primary_publishing_organisation
-    "f9fcf3fe-2751-4dca-97ca-becaeceb4b26"
-  end
 end

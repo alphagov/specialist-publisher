@@ -16,8 +16,4 @@ class MaibReport < Document
   def self.title
     "MAIB Report"
   end
-
-  def primary_publishing_organisation
-    "9c66b9a3-1e6a-48e8-974d-2a5635f84679"
-  end
 end

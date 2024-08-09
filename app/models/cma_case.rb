@@ -24,8 +24,4 @@ class CmaCase < Document
   def self.title
     "CMA Case"
   end
-
-  def primary_publishing_organisation
-    "957eb4ec-089b-4f71-ba2a-dc69ac8919ea"
-  end
 end
