@@ -808,6 +808,14 @@ RSpec.describe Document do
     end
   end
 
+  describe "#format_specific_fields" do
+    it "delegates to the FinderSchema" do
+      document = MyDocumentType.new
+      allow(document.finder_schema).to receive(:facets).and_return(%i[foo])
+      expect(document.format_specific_fields).to eq(%i[foo])
+    end
+  end
+
   describe "#primary_publishing_organisation" do
     it "returns the first organisation from the FinderSchema" do
       document = MyDocumentType.new

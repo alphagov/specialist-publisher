@@ -4,7 +4,7 @@ class EmploymentAppealTribunalDecision < Document
   validates :tribunal_decision_landmark, presence: true
 
   FORMAT_SPECIFIC_FIELDS = %i[
-    hidden_indexable_content
+    hidden_indexable_content # TODO
     tribunal_decision_categories
     tribunal_decision_decision_date
     tribunal_decision_landmark

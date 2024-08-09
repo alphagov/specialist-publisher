@@ -5,20 +5,6 @@ class TrafficCommissionerRegulatoryDecision < Document
   validates :outcome_type, presence: true
   validates :first_published_at, presence: true, date: true
 
-  FORMAT_SPECIFIC_FIELDS = %i[
-    decision_subject
-    regions
-    case_type
-    outcome_type
-    first_published_at
-  ].freeze
-
-  attr_accessor(*FORMAT_SPECIFIC_FIELDS)
-
-  def initialize(params = {})
-    super(params, FORMAT_SPECIFIC_FIELDS)
-  end
-
   def self.title
     "Traffic Commissioner Regulatory Decision"
   end

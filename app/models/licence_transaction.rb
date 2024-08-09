@@ -32,6 +32,7 @@ class LicenceTransaction < Document
 
   attr_accessor(*FORMAT_SPECIFIC_FIELDS, :organisations, :primary_publishing_organisation)
 
+  # TODO: this one looks complicated
   def initialize(params = {})
     super(params, FORMAT_SPECIFIC_FIELDS)
     @primary_publishing_organisation = params[:primary_publishing_organisation]

@@ -4,7 +4,7 @@ class EmploymentTribunalDecision < Document
   validates :tribunal_decision_decision_date, presence: true, date: true
 
   FORMAT_SPECIFIC_FIELDS = %i[
-    hidden_indexable_content
+    hidden_indexable_content # TODO
     tribunal_decision_categories
     tribunal_decision_country
     tribunal_decision_decision_date

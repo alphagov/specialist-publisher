@@ -21,7 +21,6 @@ class Document
     :title,
     :summary,
     :body,
-    :format_specific_fields,
     :last_edited_at,
     :public_updated_at,
     :state,
@@ -65,15 +64,26 @@ class Document
     DocumentPolicy
   end
 
-  def initialize(params = {}, format_specific_fields = [])
+  def initialize(params = {}, _to_be_removed__format_specific_fields = [])
     @content_id = params.fetch(:content_id, SecureRandom.uuid)
-    @format_specific_fields = format_specific_fields
-
+    @cache = {}
+    format_specific_fields.each do |field|
+      define_singleton_method "#{field}=" do |arg|
+        @cache[field] = arg
+      end
+      define_singleton_method field do
+        @cache[field]
+      end
+    end
     set_attributes(params, COMMON_FIELDS + format_specific_fields)
   end
 
   def finder_schema
     self.class.finder_schema
+  end
+
+  def format_specific_fields
+    finder_schema.facets
   end
 
   def set_attributes(attrs, keys = nil)

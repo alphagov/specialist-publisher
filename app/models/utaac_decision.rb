@@ -5,7 +5,7 @@ class UtaacDecision < Document
   validates :tribunal_decision_judges, presence: true
 
   FORMAT_SPECIFIC_FIELDS = %i[
-    hidden_indexable_content
+    hidden_indexable_content # TODO: this looks important
     tribunal_decision_categories
     tribunal_decision_decision_date
     tribunal_decision_judges

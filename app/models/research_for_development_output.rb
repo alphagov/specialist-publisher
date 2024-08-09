@@ -14,6 +14,7 @@ class ResearchForDevelopmentOutput < Document
 
   attr_accessor(*FORMAT_SPECIFIC_FIELDS)
 
+  # TODO: figure out what's happening with the author tags
   def initialize(params = {})
     super(params, FORMAT_SPECIFIC_FIELDS)
     self.author_tags = params[:author_tags]

@@ -7,7 +7,7 @@ class AsylumSupportDecision < Document
   validates :tribunal_decision_sub_categories, presence: true, asylum_support_decision_sub_category: true
 
   FORMAT_SPECIFIC_FIELDS = %i[
-    hidden_indexable_content
+    hidden_indexable_content # TODO
     tribunal_decision_category
     tribunal_decision_categories
     tribunal_decision_decision_date
