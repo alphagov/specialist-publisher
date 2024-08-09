@@ -332,7 +332,7 @@ class Document
   end
 
   def self.finder_schema
-    @finder_schema ||= FinderSchema.new(document_type.pluralize)
+    @finder_schema ||= FinderSchema.new(FinderSchema.load_schema_for(document_type.pluralize))
   end
 
   def links
