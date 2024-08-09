@@ -7,7 +7,15 @@ RSpec.describe FinderSchema do
     end
   end
 
-  let(:schema) { FinderSchema.new("research_for_development_outputs") }
+  describe ".load_schema_for" do
+    it "loads the given schema" do
+      json = JSON.parse(File.read(Rails.root.join("lib/documents/schemas/aaib_reports.json")))
+
+      expect(FinderSchema.load_schema_for("aaib_reports")).to eq(json)
+    end
+  end
+
+  let(:schema) { FinderSchema.new(FinderSchema.load_schema_for("research_for_development_outputs")) }
 
   describe "#humanized_facet_name" do
     it "returns the name defined in the schema for the supplied facet key" do
