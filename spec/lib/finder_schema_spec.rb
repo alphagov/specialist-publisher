@@ -1,6 +1,16 @@
 require "spec_helper"
 
 RSpec.describe FinderSchema do
+  let(:mandatory_properties) do
+    {
+      "base_path" => "stubbed",
+      "content_id" => "stubbed",
+      "filter" => {
+        "format" => "stubbed",
+      },
+    }
+  end
+
   describe ".schema_names" do
     it "returns schema names" do
       expect(FinderSchema.schema_names).to include("aaib_reports")
@@ -15,30 +25,98 @@ RSpec.describe FinderSchema do
     end
   end
 
-  let(:schema) { FinderSchema.new(FinderSchema.load_schema_for("research_for_development_outputs")) }
+  describe "#base_path" do
+    it "returns the base path" do
+      properties = mandatory_properties.merge({ "base_path" => "/research-for-development-outputs" })
+      expect(FinderSchema.new(properties).base_path).to eq("/research-for-development-outputs")
+    end
+  end
+
+  describe "#format" do
+    it "returns the format" do
+      properties = mandatory_properties.merge({ "filter" => { "format" => "research_for_development_output" } })
+      expect(FinderSchema.new(properties).format).to eq("research_for_development_output")
+    end
+  end
+
+  describe "#content_id" do
+    it "returns the content_id" do
+      properties = mandatory_properties.merge({ "content_id" => "853596e7-8ae3-42bd-838b-25ca3076e35f" })
+      expect(FinderSchema.new(properties).content_id).to eq("853596e7-8ae3-42bd-838b-25ca3076e35f")
+    end
+  end
+
+  describe "#organisations" do
+    it "returns empty array if not present" do
+      expect(FinderSchema.new(mandatory_properties).organisations).to eq([])
+    end
+
+    it "returns the organisations if present" do
+      properties = mandatory_properties.merge({ "organisations" => %w[f9fcf3fe-2751-4dca-97ca-becaeceb4b26] })
+      expect(FinderSchema.new(properties).organisations).to eq(%w[f9fcf3fe-2751-4dca-97ca-becaeceb4b26])
+    end
+  end
+
+  describe "#editing_organisations" do
+    it "returns empty array if not present" do
+      expect(FinderSchema.new(mandatory_properties).editing_organisations).to eq([])
+    end
+
+    it "returns the editing_organisations if present" do
+      properties = mandatory_properties.merge({ "editing_organisations" => %w[def456] })
+      expect(FinderSchema.new(properties).editing_organisations).to eq(%w[def456])
+    end
+  end
 
   describe "#humanized_facet_name" do
     it "returns the name defined in the schema for the supplied facet key" do
-      expect(schema.humanized_facet_name("research_document_type")).to eq("Document Type")
+      properties = mandatory_properties.merge({
+        "facets" => [
+          {
+            "key" => "research_document_type",
+            "name" => "Document Type",
+          },
+        ],
+      })
+      expect(FinderSchema.new(properties).humanized_facet_name("research_document_type")).to eq("Document Type")
     end
 
     it "returns the humanized version of the supplied facet key is not defined in the schema" do
-      expect(schema.humanized_facet_name("review_status")).to eq("Review status")
+      expect(FinderSchema.new(mandatory_properties).humanized_facet_name("review_status")).to eq("Review status")
     end
   end
 
   describe "#humanized_facet_value" do
     context "a text facet" do
       context "with allowed_values " do
+        let(:properties) do
+          mandatory_properties.merge({
+            "facets" => [
+              "key" => "country",
+              "type" => "text",
+              "allowed_values" => [
+                {
+                  "value" => "AF",
+                  "label" => "Afghanistan",
+                },
+                {
+                  "value" => "AL",
+                  "label" => "Albania",
+                },
+              ],
+            ],
+          })
+        end
+
         context "looking up a single value" do
           it "returns an array with only the looked-up value" do
-            expect(schema.humanized_facet_value("country", "AL")).to eql(%w[Albania])
+            expect(FinderSchema.new(properties).humanized_facet_value("country", "AL")).to eql(%w[Albania])
           end
         end
 
         context "looking up multiple values" do
           it "returns an array with the looked-up values" do
-            expect(schema.humanized_facet_value("country", %w[AL AF])).to eql(%w[Albania Afghanistan])
+            expect(FinderSchema.new(properties).humanized_facet_value("country", %w[AL AF])).to eql(%w[Albania Afghanistan])
           end
         end
       end
@@ -47,7 +125,7 @@ RSpec.describe FinderSchema do
         it "returns the value itself" do
           authors_value = ["Mr. Potato Head", "Mrs. Potato Head"]
           expect(
-            schema.humanized_facet_value("authors", authors_value),
+            FinderSchema.new(mandatory_properties).humanized_facet_value("authors", authors_value),
           ).to eql(authors_value)
         end
       end
@@ -55,7 +133,9 @@ RSpec.describe FinderSchema do
 
     context "a date facet" do
       it "just returns the value unmodified" do
-        expect(schema.humanized_facet_value("first_published_at", "2012-01-01")).to eql("2012-01-01")
+        expect(
+          FinderSchema.new(mandatory_properties).humanized_facet_value("first_published_at", "2012-01-01"),
+        ).to eql("2012-01-01")
       end
     end
   end
