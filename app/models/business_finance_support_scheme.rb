@@ -31,6 +31,6 @@ class BusinessFinanceSupportScheme < Document
   end
 
   def primary_publishing_organisation
-    "2bde479a-97f2-42b5-986a-287a623c2a1c"
+    "aa750cdf-7925-429d-a2b3-0d9fa47d2c48"
   end
 end
