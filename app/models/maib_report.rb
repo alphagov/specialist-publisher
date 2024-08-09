@@ -13,10 +13,6 @@ class MaibReport < Document
     super(params, FORMAT_SPECIFIC_FIELDS)
   end
 
-  def taxons
-    [MARITIME_ACCIDENTS_AND_SERIOUS_INCIDENTS_TAXON_ID]
-  end
-
   def self.title
     "MAIB Report"
   end

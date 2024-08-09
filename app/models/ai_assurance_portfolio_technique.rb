@@ -15,10 +15,6 @@ class AiAssurancePortfolioTechnique < Document
     super(params, FORMAT_SPECIFIC_FIELDS)
   end
 
-  def taxons
-    []
-  end
-
   def self.title
     "Portfolio of Assurance Techniques"
   end

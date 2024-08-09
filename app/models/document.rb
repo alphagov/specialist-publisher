@@ -61,26 +61,8 @@ class Document
     warnings
   ].freeze
 
-  AIR_ACCIDENTS_AND_SERIOUS_INCIDENTS_TAXON_ID = "951ece54-c6df-4fbc-aa18-1bc629815fe2".freeze
-  ALERTS_AND_RECALLS_TAXON_ID = "51bbdf23-292a-4b74-8a66-f7db6b93b163".freeze
-  ASYLUM_DECISIONS_AND_APPEALS_TAXON_ID = "e1d2032c-6a59-4a1a-919c-dc149847dffb".freeze
-  BREXIT_TAXON_ID = "d6c2de5d-ef90-45d1-82d4-5f2438369eea".freeze
-  BUSINESS_FINANCE_AND_SUPPORT_TAXON_ID = "ccfc50f5-e193-4dac-9d78-50b3a8bb24c5".freeze
-  COMPETITION_TAXON_ID = "8db04387-9076-4287-ab46-6a6695b593d7".freeze
-  COUNTRYSIDE_TAXON_ID = "9129d716-365b-44ba-9856-383423fe1e41".freeze
-  COURTS_SENTENCING_AND_TRIBUNALS_TAXON_ID = "357110bb-cbc5-4708-9711-1b26e6c63e86".freeze
-  DIGITAL_SERVICE_STANDARD_TAXON_ID = "84630bce-4c1c-4406-a38a-e8c41967b8f7".freeze
-  EUROPEAN_FUNDS_TAXON_ID = "2894668d-0c21-491a-9069-a271e67f6025".freeze
-  INTERNATIONAL_AID_AND_DEVELOPMENT_TAXON_ID = "9fb30a53-70fb-4f1c-878b-0064b202d1ba".freeze
-  MARITIME_ACCIDENTS_AND_SERIOUS_INCIDENTS_TAXON_ID = "7a5e878e-2b0f-4c3f-9079-586590a1a194".freeze
-  RAIL_ACCIDENTS_AND_SERIOUS_INCIDENTS_TAXON_ID = "c6a19bb4-1264-4abe-9f1c-6c30f8dea5f7".freeze
-
   def self.policy_class
     DocumentPolicy
-  end
-
-  def taxons
-    []
   end
 
   def initialize(params = {}, format_specific_fields = [])
@@ -88,6 +70,10 @@ class Document
     @format_specific_fields = format_specific_fields
 
     set_attributes(params, COMMON_FIELDS + format_specific_fields)
+  end
+
+  def finder_schema
+    self.class.finder_schema
   end
 
   def set_attributes(attrs, keys = nil)
@@ -127,6 +113,7 @@ class Document
   end
 
   delegate :format, to: :finder_schema
+  delegate :taxons, to: :finder_schema
 
   def phase
     "live"
@@ -358,10 +345,6 @@ class Document
   end
 
 private
-
-  def finder_schema
-    self.class.finder_schema
-  end
 
   def param_value(params, key)
     date_param_value(params, key) || params.fetch(key, nil)

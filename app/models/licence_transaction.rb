@@ -38,10 +38,6 @@ class LicenceTransaction < Document
     @organisations = params[:organisations]
   end
 
-  def taxons
-    []
-  end
-
   def self.title
     "Licence"
   end

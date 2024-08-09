@@ -15,10 +15,6 @@ class ExportHealthCertificate < Document
     super(params, FORMAT_SPECIFIC_FIELDS)
   end
 
-  def taxons
-    []
-  end
-
   def self.title
     "Export health certificate"
   end
