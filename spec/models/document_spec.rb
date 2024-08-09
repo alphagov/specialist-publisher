@@ -7,10 +7,6 @@ RSpec.describe Document do
         "My Document Type"
       end
 
-      def primary_publishing_organisation
-        "a-primary-org-id"
-      end
-
       attr_accessor :field1, :field2, :field3
 
       def initialize(params = {})
@@ -809,6 +805,14 @@ RSpec.describe Document do
       document = MyDocumentType.new
       allow(document.finder_schema).to receive(:taxons).and_return(%w[foo])
       expect(document.taxons).to eq(%w[foo])
+    end
+  end
+
+  describe "#primary_publishing_organisation" do
+    it "returns the first organisation from the FinderSchema" do
+      document = MyDocumentType.new
+      allow(document.finder_schema).to receive(:organisations).and_return(%w[foo bar])
+      expect(document.primary_publishing_organisation).to eq("foo")
     end
   end
 end

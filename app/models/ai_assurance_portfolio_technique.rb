@@ -18,8 +18,4 @@ class AiAssurancePortfolioTechnique < Document
   def self.title
     "Portfolio of Assurance Techniques"
   end
-
-  def primary_publishing_organisation
-    "c352c234-8083-47ec-8a4b-0edd45c31263"
-  end
 end

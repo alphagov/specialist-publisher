@@ -21,8 +21,4 @@ class UtaacDecision < Document
   def self.title
     "UTAAC Decision"
   end
-
-  def primary_publishing_organisation
-    "6f757605-ab8f-4b62-84e4-99f79cf085c2"
-  end
 end

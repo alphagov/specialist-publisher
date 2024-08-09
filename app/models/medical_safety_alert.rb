@@ -25,8 +25,4 @@ class MedicalSafetyAlert < Document
   def email_footnote
     "If you have any questions about the medical content in this email, contact MHRA on info@mhra.gov.uk"
   end
-
-  def primary_publishing_organisation
-    "240f72bd-9a4d-4f39-94d9-77235cadde8e"
-  end
 end
