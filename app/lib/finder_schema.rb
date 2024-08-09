@@ -6,7 +6,7 @@ class FinderSchema
     end
   end
 
-  attr_reader :base_path, :organisations, :format, :content_id, :editing_organisations
+  attr_reader :base_path, :organisations, :editing_organisations, :format, :content_id
 
   def initialize(schema_type)
     @schema = load_schema_for(schema_type)
