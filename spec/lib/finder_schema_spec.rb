@@ -68,6 +68,17 @@ RSpec.describe FinderSchema do
     end
   end
 
+  describe "#taxons" do
+    it "returns empty array if not present" do
+      expect(FinderSchema.new(mandatory_properties).taxons).to eq([])
+    end
+
+    it "returns the taxons if present" do
+      properties = mandatory_properties.merge({ "taxons" => %w[951ece54-c6df-4fbc-aa18-1bc629815fe2] })
+      expect(FinderSchema.new(properties).taxons).to eq(%w[951ece54-c6df-4fbc-aa18-1bc629815fe2])
+    end
+  end
+
   describe "#facets" do
     it "returns the facet keys" do
       properties = mandatory_properties.merge({
