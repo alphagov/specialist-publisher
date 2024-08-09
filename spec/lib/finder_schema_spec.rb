@@ -68,6 +68,24 @@ RSpec.describe FinderSchema do
     end
   end
 
+  describe "#facets" do
+    it "returns the facet keys" do
+      properties = mandatory_properties.merge({
+        "facets" => [
+          {
+            "key" => "research_document_type",
+            "name" => "Document Type",
+          },
+          {
+            "key" => "something_else",
+            "name" => "Foo",
+          },
+        ],
+      })
+      expect(FinderSchema.new(properties).facets).to eq(%i[research_document_type something_else])
+    end
+  end
+
   describe "#humanized_facet_name" do
     it "returns the name defined in the schema for the supplied facet key" do
       properties = mandatory_properties.merge({
