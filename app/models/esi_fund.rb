@@ -14,8 +14,4 @@ class EsiFund < Document
   def initialize(params = {})
     super(params, FORMAT_SPECIFIC_FIELDS)
   end
-
-  def self.title
-    "ESI Fund"
-  end
 end

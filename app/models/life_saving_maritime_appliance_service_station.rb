@@ -13,8 +13,4 @@ class LifeSavingMaritimeApplianceServiceStation < Document
   def initialize(params = {})
     super(params, FORMAT_SPECIFIC_FIELDS)
   end
-
-  def self.title
-    "Life Saving Maritime Appliance Service Station"
-  end
 end

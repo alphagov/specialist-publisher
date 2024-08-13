@@ -18,8 +18,4 @@ class VeteransSupportOrganisation < Document
   def initialize(params = {})
     super(params, FORMAT_SPECIFIC_FIELDS)
   end
-
-  def self.title
-    "Veterans Support Organisation"
-  end
 end

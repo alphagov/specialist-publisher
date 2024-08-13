@@ -20,8 +20,4 @@ class DrcfDigitalMarketsResearch < Document
   def initialize(params = {})
     super(params, FORMAT_SPECIFIC_FIELDS)
   end
-
-  def self.title
-    "DRCF digital markets research"
-  end
 end

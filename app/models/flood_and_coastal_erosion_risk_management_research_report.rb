@@ -24,10 +24,6 @@ class FloodAndCoastalErosionRiskManagementResearchReport < Document
     @organisations = params[:organisations]
   end
 
-  def self.title
-    "Flood and Coastal Erosion Risk Management Research Report"
-  end
-
   def links
     super.merge(
       organisations: organisations | [primary_publishing_organisation],

@@ -10,10 +10,6 @@ class DrugSafetyUpdate < Document
     super(params, FORMAT_SPECIFIC_FIELDS)
   end
 
-  def self.title
-    "Drug Safety Update"
-  end
-
   def send_email_on_publish?
     false
   end

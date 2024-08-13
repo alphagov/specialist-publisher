@@ -38,10 +38,6 @@ class LicenceTransaction < Document
     @organisations = params[:organisations]
   end
 
-  def self.title
-    "Licence"
-  end
-
   def self.has_organisations?
     true
   end
