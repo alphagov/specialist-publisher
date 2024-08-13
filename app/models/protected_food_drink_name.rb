@@ -38,7 +38,7 @@ class ProtectedFoodDrinkName < Document
     super(params, FORMAT_SPECIFIC_FIELDS)
   end
 
-  def self.slug
+  def self.admin_slug
     "protected-food-drink-names"
   end
 end

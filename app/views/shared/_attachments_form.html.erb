@@ -13,6 +13,6 @@
   <div class='actions'>
     <button type="submit" class='btn btn-success'>Save attachment</button>
     or
-    <%= link_to 'cancel', edit_document_path(current_format.slug, @document.content_id)%>
+    <%= link_to 'cancel', edit_document_path(current_format.admin_slug, @document.content_id)%>
   </div>
 <% end %>

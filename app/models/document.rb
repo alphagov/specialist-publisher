@@ -294,7 +294,7 @@ class Document
     finder_schema.document_title
   end
 
-  def self.slug
+  def self.admin_slug
     title.parameterize.pluralize
   end
 

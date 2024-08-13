@@ -3,7 +3,7 @@ class PassthroughController < ApplicationController
 
   def index
     if first_permitted_format
-      redirect_to documents_path(document_type_slug: first_permitted_format.slug)
+      redirect_to documents_path(document_type_slug: first_permitted_format.admin_slug)
     else
       redirect_to error_path
     end

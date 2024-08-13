@@ -17,7 +17,7 @@ class EmploymentAppealTribunalDecision < Document
     super(params, FORMAT_SPECIFIC_FIELDS)
   end
 
-  def self.slug
+  def self.admin_slug
     "employment-appeal-tribunal-decisions"
   end
 end

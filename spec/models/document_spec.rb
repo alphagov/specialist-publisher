@@ -18,7 +18,7 @@ RSpec.describe Document do
   before { stub_const("MyDocumentType", document_sub_class) }
 
   it "has a document_type for building URLs" do
-    expect(MyDocumentType.slug).to eq("my-document-types")
+    expect(MyDocumentType.admin_slug).to eq("my-document-types")
   end
 
   it "has a document_type for fetching params of the format" do
