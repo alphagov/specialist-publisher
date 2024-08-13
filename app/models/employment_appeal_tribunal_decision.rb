@@ -17,10 +17,6 @@ class EmploymentAppealTribunalDecision < Document
     super(params, FORMAT_SPECIFIC_FIELDS)
   end
 
-  def self.title
-    "EAT Decision"
-  end
-
   def self.slug
     "employment-appeal-tribunal-decisions"
   end

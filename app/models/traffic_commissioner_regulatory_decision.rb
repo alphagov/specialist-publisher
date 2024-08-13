@@ -18,8 +18,4 @@ class TrafficCommissionerRegulatoryDecision < Document
   def initialize(params = {})
     super(params, FORMAT_SPECIFIC_FIELDS)
   end
-
-  def self.title
-    "Traffic Commissioner Regulatory Decision"
-  end
 end

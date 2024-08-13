@@ -23,8 +23,4 @@ class AlgorithmicTransparencyRecord < Document
   def initialize(params = {})
     super(params, FORMAT_SPECIFIC_FIELDS)
   end
-
-  def self.title
-    "Algorithmic transparency record"
-  end
 end

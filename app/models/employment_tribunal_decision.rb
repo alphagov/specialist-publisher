@@ -16,10 +16,6 @@ class EmploymentTribunalDecision < Document
     super(params, FORMAT_SPECIFIC_FIELDS)
   end
 
-  def self.title
-    "ET Decision"
-  end
-
   def self.slug
     "employment-tribunal-decisions"
   end

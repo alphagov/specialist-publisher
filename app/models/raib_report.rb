@@ -12,8 +12,4 @@ class RaibReport < Document
   def initialize(params = {})
     super(params, FORMAT_SPECIFIC_FIELDS)
   end
-
-  def self.title
-    "RAIB Report"
-  end
 end

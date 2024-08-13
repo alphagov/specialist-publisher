@@ -13,8 +13,4 @@ class MarineEquipmentApprovedRecommendation < Document
   def initialize(params = {})
     super(params, FORMAT_SPECIFIC_FIELDS)
   end
-
-  def self.title
-    "Marine Equipment Approved Recommendation"
-  end
 end

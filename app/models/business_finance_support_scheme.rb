@@ -25,8 +25,4 @@ class BusinessFinanceSupportScheme < Document
   def self.exportable?
     true
   end
-
-  def self.title
-    "Business Finance Support Scheme"
-  end
 end

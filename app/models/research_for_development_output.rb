@@ -28,10 +28,6 @@ class ResearchForDevelopmentOutput < Document
     true
   end
 
-  def self.title
-    "Research for Development Output"
-  end
-
   def author_tags
     (authors || []).join("::")
   end

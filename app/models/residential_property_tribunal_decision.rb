@@ -15,8 +15,4 @@ class ResidentialPropertyTribunalDecision < Document
   def initialize(params = {})
     super(params, FORMAT_SPECIFIC_FIELDS)
   end
-
-  def self.title
-    "Residential Property Tribunal Decision"
-  end
 end

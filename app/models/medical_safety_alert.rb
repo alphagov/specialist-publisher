@@ -14,10 +14,6 @@ class MedicalSafetyAlert < Document
     super(params, FORMAT_SPECIFIC_FIELDS)
   end
 
-  def self.title
-    "Medical Safety Alert"
-  end
-
   def urgent
     true
   end

@@ -20,8 +20,4 @@ class AnimalDiseaseCase < Document
   def initialize(params = {})
     super(params, FORMAT_SPECIFIC_FIELDS)
   end
-
-  def self.title
-    "Animal disease case"
-  end
 end
