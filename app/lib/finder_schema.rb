@@ -10,7 +10,7 @@ class FinderSchema
     JSON.parse(File.read(Rails.root.join("lib/documents/schemas/#{type}.json")))
   end
 
-  attr_reader :base_path, :organisations, :editing_organisations, :taxons, :format, :content_id
+  attr_reader :base_path, :organisations, :editing_organisations, :taxons, :format, :content_id, :document_title
 
   def initialize(schema)
     @schema = schema
@@ -20,6 +20,7 @@ class FinderSchema
     @taxons = schema.fetch("taxons", [])
     @format = schema.fetch("filter", {}).fetch("format")
     @content_id = schema.fetch("content_id")
+    @document_title = schema.fetch("document_title", nil)
   end
 
   def facets

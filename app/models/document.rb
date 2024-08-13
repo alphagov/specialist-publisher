@@ -290,6 +290,10 @@ class Document
     self.update_type = "minor"
   end
 
+  def self.title
+    finder_schema.document_title
+  end
+
   def self.slug
     title.parameterize.pluralize
   end
