@@ -12,6 +12,12 @@ RSpec.describe FinderSchema do
     }
   end
 
+  describe ".schema" do
+    it "returns the schema hash" do
+      expect(FinderSchema.new(mandatory_properties).schema).to eq(mandatory_properties)
+    end
+  end
+
   describe ".schema_names" do
     it "returns schema names" do
       expect(FinderSchema.schema_names).to include("aaib_reports")
