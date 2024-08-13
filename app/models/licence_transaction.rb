@@ -53,7 +53,7 @@ class LicenceTransaction < Document
     "prefix"
   end
 
-  def self.slug
+  def self.admin_slug
     "licences"
   end
 

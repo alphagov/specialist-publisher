@@ -19,7 +19,7 @@ class ProductSafetyAlertReportRecall < Document
     super(params, FORMAT_SPECIFIC_FIELDS)
   end
 
-  def self.slug
+  def self.admin_slug
     "product-safety-alerts-reports-recalls"
   end
 end

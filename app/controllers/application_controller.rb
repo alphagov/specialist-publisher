@@ -25,7 +25,7 @@ private
   end
 
   def current_format
-    @current_format ||= document_models.detect { |model| model.slug == document_type_slug }
+    @current_format ||= document_models.detect { |model| model.admin_slug == document_type_slug }
   end
 
   def formats_user_can_access

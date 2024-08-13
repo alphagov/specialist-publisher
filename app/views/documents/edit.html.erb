@@ -1,7 +1,7 @@
 <%= content_for :page_title, "Edit #{@document.title}" %>
 
 <% content_for :breadcrumbs do %>
-    <li><%= link_to "Your documents", documents_path(current_format.slug) %></li>
+    <li><%= link_to "Your documents", documents_path(current_format.admin_slug) %></li>
     <li><%= link_to @document.title, document_path(document_type_slug: params[:document_type_slug],
                                                    content_id_and_locale: @document.content_id_and_locale) %></li>
     <li class='active'>Edit document</li>

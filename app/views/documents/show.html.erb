@@ -1,7 +1,7 @@
 <%= content_for :page_title, "Summary" %>
 
 <% content_for :breadcrumbs do %>
-  <li><%= link_to "Your documents", documents_path(current_format.slug) %></li>
+  <li><%= link_to "Your documents", documents_path(current_format.admin_slug) %></li>
   <li class='active'><%= @document.title %></li>
 <% end %>
 

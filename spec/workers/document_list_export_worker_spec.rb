@@ -29,7 +29,7 @@ RSpec.describe DocumentListExportWorker do
     it "raises an error if the user does not have permission to see the document type" do
       user.update(permissions: %w[signin])
       expect {
-        subject.perform(BusinessFinanceSupportScheme.slug, user.id, nil)
+        subject.perform(BusinessFinanceSupportScheme.admin_slug, user.id, nil)
       }.to raise_error Pundit::NotAuthorizedError
     end
 
@@ -41,7 +41,7 @@ RSpec.describe DocumentListExportWorker do
         expect(csv_presenter).to receive(:row).and_return []
       end
       allow(subject).to receive(:send_mail)
-      subject.perform(BusinessFinanceSupportScheme.slug, user.id, nil)
+      subject.perform(BusinessFinanceSupportScheme.admin_slug, user.id, nil)
     end
 
     it "sends mail with CSV to user" do
@@ -49,11 +49,11 @@ RSpec.describe DocumentListExportWorker do
       csv_data = "my,csv\nfile,is\ngreat,really\n"
       allow(subject).to receive(:generate_csv).and_return csv_data
 
-      request_url = %r{^http://specialist-publisher.dev.gov.uk/export/#{BusinessFinanceSupportScheme.slug}/[0-9a-f-]+$}
+      request_url = %r{^http://specialist-publisher.dev.gov.uk/export/#{BusinessFinanceSupportScheme.admin_slug}/[0-9a-f-]+$}
 
       expect(NotificationsMailer).to receive(:document_list).with(request_url, user, BusinessFinanceSupportScheme, nil).and_return(double(ActionMailer::MessageDelivery, deliver_now: true))
 
-      subject.perform(BusinessFinanceSupportScheme.slug, user.id, nil)
+      subject.perform(BusinessFinanceSupportScheme.admin_slug, user.id, nil)
     end
   end
 

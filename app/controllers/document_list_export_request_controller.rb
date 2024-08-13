@@ -13,7 +13,7 @@ class DocumentListExportRequestController < ApplicationController
 
   def check_authorisation
     document_slugs = FinderSchema.schema_names.map { |schema_name| schema_name.singularize.camelize.constantize }
-    current_format = document_slugs.detect { |model| model.slug == document_type_slug }
+    current_format = document_slugs.detect { |model| model.admin_slug == document_type_slug }
     authorize current_format
   end
 

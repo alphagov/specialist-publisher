@@ -24,7 +24,7 @@
   <% end %>
 
   <% formats_user_can_access.sort_by(&:title).each do |format| %>
-    <li><%= link_to format.title.pluralize, documents_path(format.slug) %></li>
+    <li><%= link_to format.title.pluralize, documents_path(format.admin_slug) %></li>
   <% end %>
 
   <% if current_user.gds_editor? %>
