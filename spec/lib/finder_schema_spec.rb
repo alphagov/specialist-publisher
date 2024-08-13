@@ -5,6 +5,7 @@ RSpec.describe FinderSchema do
     {
       "base_path" => "stubbed",
       "content_id" => "stubbed",
+      "document_title" => "stubbed",
       "filter" => {
         "format" => "stubbed",
       },
@@ -43,6 +44,13 @@ RSpec.describe FinderSchema do
     it "returns the content_id" do
       properties = mandatory_properties.merge({ "content_id" => "853596e7-8ae3-42bd-838b-25ca3076e35f" })
       expect(FinderSchema.new(properties).content_id).to eq("853596e7-8ae3-42bd-838b-25ca3076e35f")
+    end
+  end
+
+  describe "#document_title" do
+    it "returns the document title" do
+      properties = mandatory_properties.merge({ "document_title" => "foo" })
+      expect(FinderSchema.new(properties).document_title).to eq("foo")
     end
   end
 
