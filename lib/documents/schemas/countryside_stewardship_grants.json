@@ -21,6 +21,7 @@
   ],
   "summary": "<p>Search for options, supplements and capital items to include in your Countryside Stewardship application. Find out about <a href=\"/guidance/countryside-stewardship-get-funding-to-protect-and-improve-the-land-you-manage\">each Countryside Stewardship scheme and check if you’re eligible before you apply for a grant</a>.</p>",
   "document_noun": "grant",
+  "document_title": "Countryside Stewardship Grant",
   "facets": [
     {
       "key": "grant_type",

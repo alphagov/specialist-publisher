@@ -58,6 +58,7 @@
     }
   ],
   "document_noun": "report",
+  "document_title": "MAIB Report",
   "facets": [
     {
       "key": "vessel_type",

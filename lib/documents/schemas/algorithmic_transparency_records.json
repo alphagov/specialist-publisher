@@ -106,6 +106,7 @@
   ],
   "summary": "<p>Find algorithmic transparency records from UK public sector organisations with information on algorithmic tools used in decision making. These are completed in accordance with the Algorithmic Transparency Recording Standard.</p>",
   "document_noun": "record",
+  "document_title": "Algorithmic transparency record",
   "facets": [
     {
       "key": "algorithmic_transparency_record_organisation",
