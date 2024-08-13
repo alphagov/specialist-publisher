@@ -14,6 +14,7 @@
   "subscription_list_title_prefix": "Marine notices",
   "summary": "<p>Find marine notices issued by the Maritime and Coastguard Agency</p>",
   "document_noun": "notice",
+  "document_title": "Marine Notice",
   "facets": [
     {
       "key": "marine_notice_type",

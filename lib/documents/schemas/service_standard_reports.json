@@ -8,6 +8,7 @@
   "organisations": ["2fb482e7-3c4d-496f-887d-f8a55a15e89a"],
   "taxons": ["84630bce-4c1c-4406-a38a-e8c41967b8f7"],
   "document_noun": "report",
+  "document_title": "Service Standard Report",
   "default_order": "-assessment_date",
   "filter": {
     "format": "service_standard_report"

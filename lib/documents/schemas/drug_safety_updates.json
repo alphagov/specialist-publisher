@@ -20,6 +20,7 @@
   ],
   "subscription_list_title_prefix": "Drug Safety Update",
   "document_noun": "update",
+  "document_title": "Drug Safety Update",
   "facets": [
     {
       "key": "therapeutic_area",

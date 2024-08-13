@@ -57,6 +57,7 @@
     }
   ],
   "document_noun": "message",
+  "document_title": "Medical Safety Alert",
   "facets": [
     {
       "key": "alert_type",

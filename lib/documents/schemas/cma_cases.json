@@ -104,6 +104,7 @@
     }
   ],
   "document_noun": "case",
+  "document_title": "CMA Case",
   "facets": [
     {
         "key": "case_type",

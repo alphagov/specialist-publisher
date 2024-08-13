@@ -22,6 +22,7 @@
   "subscription_list_title_prefix": "First-tier Tribunal (Asylum Support) decisions",
   "summary": "<p>Find decisions on appeals against the Home Office heard by the First-tier Tribunal (Asylum Support).</p>",
   "document_noun": "decision",
+  "document_title": "Asylum Support Decisions",
   "facets": [
     {
       "key": "tribunal_decision_categories",

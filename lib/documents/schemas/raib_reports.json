@@ -52,6 +52,7 @@
     }
   ],
   "document_noun": "report",
+  "document_title": "RAIB Report",
   "facets": [
     {
       "key": "railway_type",

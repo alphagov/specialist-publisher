@@ -85,6 +85,7 @@
   "subscription_list_title_prefix": "UK Approved Recommendations for marine equipment",
   "summary": "<p>Find recommendations on how to interpret and apply the Merchant Shipping (Marine Equipment) Regulations 2016 as amended.</p>",
   "document_noun": "recommendation",
+  "document_title": "Marine Equipment Approved Recommendation",
   "facets": [
     {
       "key": "category",

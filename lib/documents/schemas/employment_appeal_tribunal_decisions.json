@@ -22,6 +22,7 @@
   "subscription_list_title_prefix": "Employment Appeal Tribunal decisions",
   "summary": "<p>Find decisions on appeals against employment tribunals heard by the Employment Appeal Tribunal.</p><p>Includes decisions after December 2015. Find details of <a rel=\"external\" href=\"http://www.employmentappeals.gov.uk/Public/Search.aspx\">older cases.</a></p>",
   "document_noun": "decision",
+  "document_title": "EAT Decision",
   "facets": [
     {
       "key": "tribunal_decision_categories",
