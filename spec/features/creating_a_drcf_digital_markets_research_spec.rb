@@ -9,7 +9,7 @@ RSpec.feature "Creating a DRCF digital markets research", type: :feature do
     log_in_as_editor(:drcf_digital_markets_research_editor)
     allow(SecureRandom).to receive(:uuid).and_return(content_id)
 
-    stub_publishing_api_has_content([drcf_digital_markets_research], hash_including(document_type: DrcfDigitalMarketsResearch.document_type))
+    stub_publishing_api_has_content([drcf_digital_markets_research], hash_including(document_type: SpecialistDocument::DrcfDigitalMarketsResearch.document_type))
     stub_publishing_api_has_item(drcf_digital_markets_research)
     stub_any_publishing_api_put_content
     stub_any_publishing_api_patch_links

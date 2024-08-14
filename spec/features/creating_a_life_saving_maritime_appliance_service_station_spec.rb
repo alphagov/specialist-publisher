@@ -9,7 +9,7 @@ RSpec.feature "Creating a life saving maritime appliance service station", type:
     log_in_as_editor(:marine_equipment_approved_recommendation_editor)
     allow(SecureRandom).to receive(:uuid).and_return(content_id)
 
-    stub_publishing_api_has_content([life_saving_maritime_appliance_service_station], hash_including(document_type: LifeSavingMaritimeApplianceServiceStation.document_type))
+    stub_publishing_api_has_content([life_saving_maritime_appliance_service_station], hash_including(document_type: SpecialistDocument::LifeSavingMaritimeApplianceServiceStation.document_type))
     stub_publishing_api_has_item(life_saving_maritime_appliance_service_station)
     stub_any_publishing_api_put_content
     stub_any_publishing_api_patch_links

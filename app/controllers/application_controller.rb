@@ -26,6 +26,8 @@ private
 
   def current_format
     @current_format ||= document_models.detect { |model| model.admin_slug == document_type_slug }
+    # TODO: do we need to do this instead for some tests?
+    # @current_format ||= document_models.detect { |model| model.admin_slug == "specialist_document/#{document_type_slug}" }
   end
 
   def formats_user_can_access
@@ -34,7 +36,7 @@ private
 
   def document_models
     @document_models ||= FinderSchema.schema_names.map do |schema_name|
-      schema_name.singularize.camelize.constantize
+      "SpecialistDocument::#{schema_name.singularize.camelize}".constantize
     end
   end
 

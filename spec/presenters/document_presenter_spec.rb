@@ -1,7 +1,7 @@
 require "spec_helper"
 
 RSpec.describe DocumentPresenter do
-  let(:specialist_document) { CmaCase.from_publishing_api(payload) }
+  let(:specialist_document) { SpecialistDocument::CmaCase.from_publishing_api(payload) }
   let(:document_presenter) { DocumentPresenter.new(specialist_document) }
   let(:presented_data) { document_presenter.to_json }
 

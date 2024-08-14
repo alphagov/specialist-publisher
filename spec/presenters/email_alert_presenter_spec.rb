@@ -13,11 +13,11 @@ RSpec.describe EmailAlertPresenter do
       end
 
       it "has correct information" do
-        cma_case = CmaCase.find(cma_case_payload["content_id"], cma_case_payload["locale"])
+        cma_case = SpecialistDocument::CmaCase.find(cma_case_payload["content_id"], cma_case_payload["locale"])
         email_alert_presenter = EmailAlertPresenter.new(cma_case)
         presented_data = email_alert_presenter.to_json
 
-        redrafted_cma_case = CmaCase.find(cma_case_redrafted_payload["content_id"], cma_case_redrafted_payload["locale"])
+        redrafted_cma_case = SpecialistDocument::CmaCase.find(cma_case_redrafted_payload["content_id"], cma_case_redrafted_payload["locale"])
         email_alert_presenter_redrafted = EmailAlertPresenter.new(redrafted_cma_case)
         presented_data_redrafted = email_alert_presenter_redrafted.to_json
 
@@ -56,7 +56,7 @@ RSpec.describe EmailAlertPresenter do
     it "removes hidden indexable content from tags" do
       asylum_support_decision_payload = FactoryBot.create(:asylum_support_decision)
       stub_publishing_api_has_item(asylum_support_decision_payload)
-      asylum_support_decision = AsylumSupportDecision.find(asylum_support_decision_payload["content_id"], asylum_support_decision_payload["locale"])
+      asylum_support_decision = SpecialistDocument::AsylumSupportDecision.find(asylum_support_decision_payload["content_id"], asylum_support_decision_payload["locale"])
       expect(asylum_support_decision.format_specific_metadata.keys)
         .to include(:hidden_indexable_content)
 
@@ -73,7 +73,7 @@ RSpec.describe EmailAlertPresenter do
       end
 
       it "should use template that contains the email address of MHRA" do
-        medical_safety_alert = MedicalSafetyAlert.find(medical_safety_payload["content_id"], medical_safety_payload["locale"])
+        medical_safety_alert = SpecialistDocument::MedicalSafetyAlert.find(medical_safety_payload["content_id"], medical_safety_payload["locale"])
         email_alert_presenter = EmailAlertPresenter.new(medical_safety_alert)
         presented_data = email_alert_presenter.to_json
 

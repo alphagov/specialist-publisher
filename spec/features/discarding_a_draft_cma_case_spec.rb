@@ -7,7 +7,7 @@ RSpec.feature "Discarding a draft CMA Case", type: :feature do
   before do
     stub_publishing_api_has_item(item)
     stub_publishing_api_discard_draft(content_id)
-    stub_publishing_api_has_content([item], hash_including(document_type: CmaCase.document_type))
+    stub_publishing_api_has_content([item], hash_including(document_type: SpecialistDocument::CmaCase.document_type))
   end
 
   context "a draft document" do

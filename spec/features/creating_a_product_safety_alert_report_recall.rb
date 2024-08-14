@@ -9,7 +9,7 @@ RSpec.feature "Creating a product safety alert recall", type: :feature do
     log_in_as_editor(:product_safety_alert_editor)
     allow(SecureRandom).to receive(:uuid).and_return(content_id)
 
-    stub_publishing_api_has_content([product_safety_alert_recall], hash_including(document_type: ProductSafetyAlertReportRecall.document_type))
+    stub_publishing_api_has_content([product_safety_alert_recall], hash_including(document_type: SpecialistDocument::ProductSafetyAlertReportRecall.document_type))
     stub_publishing_api_has_item(product_safety_alert_recall)
     stub_any_publishing_api_put_content
     stub_any_publishing_api_patch_links

@@ -9,7 +9,7 @@ RSpec.feature "Publishing a CMA case", type: :feature do
     Timecop.freeze(Time.zone.parse("2015-12-03T16:59:13+00:00"))
     log_in_as_editor(:cma_editor)
 
-    stub_publishing_api_has_content([item], hash_including(document_type: CmaCase.document_type))
+    stub_publishing_api_has_content([item], hash_including(document_type: SpecialistDocument::CmaCase.document_type))
     stub_publishing_api_has_item(item)
 
     stub_any_publishing_api_put_content

@@ -14,7 +14,7 @@ class DocumentFinder
 
     attributes = response.to_hash
     document_type = attributes.fetch("document_type")
-    document_class = document_type.camelize.constantize
+    document_class = "SpecialistDocument::#{document_type.camelize}".constantize
 
     if [document_class, Document].include?(klass)
       document_class.from_publishing_api(response.to_hash)

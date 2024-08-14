@@ -15,7 +15,7 @@ RSpec.feature "Editing a CMA case", type: :feature do
     stub_any_publishing_api_put_content
     stub_any_publishing_api_patch_links
 
-    stub_publishing_api_has_content([cma_case], hash_including(document_type: CmaCase.document_type))
+    stub_publishing_api_has_content([cma_case], hash_including(document_type: SpecialistDocument::CmaCase.document_type))
     stub_publishing_api_has_item(cma_case)
 
     visit "/cma-cases/#{content_id}:#{locale}"

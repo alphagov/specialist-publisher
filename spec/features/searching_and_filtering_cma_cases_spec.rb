@@ -75,7 +75,7 @@ RSpec.feature "Searching and filtering", type: :feature do
     end
 
     scenario "filtering the items with some results returned" do
-      stub_publishing_api_has_content([cma_cases.first], hash_including(document_type: CmaCase.document_type, q: "0"))
+      stub_publishing_api_has_content([cma_cases.first], hash_including(document_type: SpecialistDocument::CmaCase.document_type, q: "0"))
 
       visit "/cma-cases"
 
@@ -88,7 +88,7 @@ RSpec.feature "Searching and filtering", type: :feature do
     end
 
     scenario "filtering the items with no results returned" do
-      stub_publishing_api_has_content([], hash_including(document_type: CmaCase.document_type, q: "abcdef"))
+      stub_publishing_api_has_content([], hash_including(document_type: SpecialistDocument::CmaCase.document_type, q: "abcdef"))
 
       visit "/cma-cases"
       fill_in "Search", with: "abcdef"
@@ -99,7 +99,7 @@ RSpec.feature "Searching and filtering", type: :feature do
 
   context "visiting the index with no results" do
     before do
-      stub_publishing_api_has_content([], hash_including(document_type: CmaCase.document_type))
+      stub_publishing_api_has_content([], hash_including(document_type: SpecialistDocument::CmaCase.document_type))
     end
 
     scenario "viewing the unfiltered items" do
@@ -115,7 +115,7 @@ RSpec.feature "Searching and filtering", type: :feature do
       cma_cases_with_missing_last_edited_at = cma_cases.each { |item| item.merge!("last_edited_at" => nil) }
       expect(cma_cases_with_missing_last_edited_at.sample["last_edited_at"]).to eq(nil)
 
-      stub_publishing_api_has_content(cma_cases_with_missing_last_edited_at, hash_including(document_type: CmaCase.document_type))
+      stub_publishing_api_has_content(cma_cases_with_missing_last_edited_at, hash_including(document_type: SpecialistDocument::CmaCase.document_type))
 
       visit "/cma-cases"
 

@@ -13,7 +13,7 @@ RSpec.feature "Searching and filtering by organisation", type: :feature do
 
     stub_publishing_api_has_content(
       [current_user_org_licence],
-      hash_including(document_type: LicenceTransaction.document_type, link_organisations: current_user_org_content_id),
+      hash_including(document_type: SpecialistDocument::LicenceTransaction.document_type, link_organisations: current_user_org_content_id),
     )
   end
 
@@ -54,7 +54,7 @@ RSpec.feature "Searching and filtering by organisation", type: :feature do
 
       stub_publishing_api_has_content(
         [other_org_licence],
-        hash_including(document_type: LicenceTransaction.document_type, link_organisations: org_content_id_four),
+        hash_including(document_type: SpecialistDocument::LicenceTransaction.document_type, link_organisations: org_content_id_four),
       )
     end
 

@@ -9,7 +9,7 @@ RSpec.feature "Creating a marine equipment approved recommendation", type: :feat
     log_in_as_editor(:marine_equipment_approved_recommendation_editor)
     allow(SecureRandom).to receive(:uuid).and_return(content_id)
 
-    stub_publishing_api_has_content([marine_equipment_approved_recommendation], hash_including(document_type: MarineEquipmentApprovedRecommendation.document_type))
+    stub_publishing_api_has_content([marine_equipment_approved_recommendation], hash_including(document_type: SpecialistDocument::MarineEquipmentApprovedRecommendation.document_type))
     stub_publishing_api_has_item(marine_equipment_approved_recommendation)
     stub_any_publishing_api_put_content
     stub_any_publishing_api_patch_links

@@ -16,7 +16,7 @@ RSpec.feature "Creating a Licence", type: :feature do
     log_in_as_editor(:licence_transaction_editor)
     allow(SecureRandom).to receive(:uuid).and_return(content_id)
 
-    stub_publishing_api_has_content([licence_transaction], hash_including(document_type: LicenceTransaction.document_type))
+    stub_publishing_api_has_content([licence_transaction], hash_including(document_type: SpecialistDocument::LicenceTransaction.document_type))
     stub_publishing_api_has_item(licence_transaction)
     stub_publishing_api_has_content(organisations, hash_including(document_type: Organisation.document_type))
 

@@ -19,7 +19,7 @@ RSpec.feature "Publishing a previously unpublished CMA Case", type: :feature do
   before do
     log_in_as_editor(:cma_editor)
 
-    stub_publishing_api_has_content([item], hash_including(document_type: CmaCase.document_type))
+    stub_publishing_api_has_content([item], hash_including(document_type: SpecialistDocument::CmaCase.document_type))
     stub_publishing_api_has_item(item)
 
     stub_any_publishing_api_put_content

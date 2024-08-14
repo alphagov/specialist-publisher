@@ -16,14 +16,14 @@ RSpec.feature "Exporting a list of documents as CSV" do
   let(:expected_csv) do
     CSV.generate do |csv|
       csv << BusinessFinanceSupportSchemeExportPresenter.header_row
-      documents.each { |doc| csv << BusinessFinanceSupportSchemeExportPresenter.new(BusinessFinanceSupportScheme.from_publishing_api(doc)).row }
+      documents.each { |doc| csv << BusinessFinanceSupportSchemeExportPresenter.new(SpecialistDocument::BusinessFinanceSupportScheme.from_publishing_api(doc)).row }
     end
   end
 
   before do
     log_in_as user
 
-    stub_publishing_api_has_content(documents, hash_including(document_type: BusinessFinanceSupportScheme.document_type))
+    stub_publishing_api_has_content(documents, hash_including(document_type: SpecialistDocument::BusinessFinanceSupportScheme.document_type))
 
     stubbed_client = Aws::S3::Client.new(stub_responses: true)
     allow(Aws::S3::Client).to receive(:new).and_return(stubbed_client)
@@ -32,7 +32,7 @@ RSpec.feature "Exporting a list of documents as CSV" do
   end
 
   scenario "I can export a list of documents and they are emailed to me" do
-    visit "/#{BusinessFinanceSupportScheme.admin_slug}"
+    visit "/#{SpecialistDocument::BusinessFinanceSupportScheme.admin_slug}"
 
     click_on "Export document list to CSV"
 

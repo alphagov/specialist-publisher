@@ -3,8 +3,8 @@ require "spec_helper"
 RSpec.feature "The root specialist-publisher page", type: :feature do
   context "when logged in as a GDS editor" do
     before do
-      stub_publishing_api_has_content([], hash_including(document_type: CmaCase.document_type))
-      stub_publishing_api_has_content([], hash_including(document_type: AaibReport.document_type))
+      stub_publishing_api_has_content([], hash_including(document_type: SpecialistDocument::CmaCase.document_type))
+      stub_publishing_api_has_content([], hash_including(document_type: SpecialistDocument::AaibReport.document_type))
       log_in_as_editor(:gds_editor)
     end
 

@@ -9,7 +9,7 @@ RSpec.feature "Creating a veterans support organisation", type: :feature do
     log_in_as_editor(:gds_editor)
     allow(SecureRandom).to receive(:uuid).and_return(content_id)
 
-    stub_publishing_api_has_content([veterans_support_organisation], hash_including(document_type: VeteransSupportOrganisation.document_type))
+    stub_publishing_api_has_content([veterans_support_organisation], hash_including(document_type: SpecialistDocument::VeteransSupportOrganisation.document_type))
     stub_publishing_api_has_item(veterans_support_organisation)
     stub_any_publishing_api_put_content
     stub_any_publishing_api_patch_links

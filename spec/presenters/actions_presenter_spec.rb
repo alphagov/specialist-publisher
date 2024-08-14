@@ -7,9 +7,9 @@ RSpec.describe ActionsPresenter do
   let(:content_id) { payload["content_id"] }
   let(:locale) { payload["locale"] }
 
-  let(:document) { CmaCase.from_publishing_api(payload) }
+  let(:document) { SpecialistDocument::CmaCase.from_publishing_api(payload) }
   let(:user) { FactoryBot.create(:cma_editor) }
-  let(:policy) { DocumentPolicy.new(user, CmaCase) }
+  let(:policy) { DocumentPolicy.new(user, SpecialistDocument::CmaCase) }
 
   subject { described_class.new(document, policy) }
 

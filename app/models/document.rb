@@ -109,7 +109,7 @@ class Document
   end
 
   def self.document_type
-    to_s.underscore
+    to_s.underscore.sub('specialist_document/', '')
   end
 
   delegate :format, to: :finder_schema

@@ -27,7 +27,7 @@ RSpec.feature "Creating a Statutory Instrument", type: :feature do
     stub_any_publishing_api_put_content
     stub_any_publishing_api_patch_links
 
-    stub_publishing_api_has_content([statutory_instrument], hash_including(document_type: StatutoryInstrument.document_type))
+    stub_publishing_api_has_content([statutory_instrument], hash_including(document_type: SpecialistDocument::StatutoryInstrument.document_type))
     stub_publishing_api_has_item(statutory_instrument)
     stub_publishing_api_has_content(organisations, hash_including(document_type: Organisation.document_type))
   end

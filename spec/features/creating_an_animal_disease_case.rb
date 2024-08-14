@@ -9,7 +9,7 @@ RSpec.feature "Creating an animal disease case", type: :feature do
     log_in_as_editor(:animal_disease_case_editor)
     allow(SecureRandom).to receive(:uuid).and_return(content_id)
 
-    stub_publishing_api_has_content([animal_disease_case], hash_including(document_type: AnimalDiseaseCase.document_type))
+    stub_publishing_api_has_content([animal_disease_case], hash_including(document_type: SpecialistDocument::AnimalDiseaseCase.document_type))
     stub_publishing_api_has_item(animal_disease_case)
     stub_any_publishing_api_put_content
     stub_any_publishing_api_patch_links

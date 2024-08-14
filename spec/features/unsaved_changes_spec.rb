@@ -10,7 +10,7 @@ RSpec.feature "Unsaved changes to a document", type: :feature, js: true do
     allow(SecureRandom).to receive(:uuid).and_return(content_id)
     stub_any_publishing_api_put_content
     stub_any_publishing_api_patch_links
-    stub_publishing_api_has_content([cma_case], hash_including(document_type: CmaCase.document_type))
+    stub_publishing_api_has_content([cma_case], hash_including(document_type: SpecialistDocument::CmaCase.document_type))
     stub_publishing_api_has_item(cma_case)
 
     log_in_as_editor(:cma_editor)

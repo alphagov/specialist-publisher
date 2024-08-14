@@ -1,7 +1,7 @@
 require "rails_helper"
 
 RSpec.describe BusinessFinanceSupportSchemeExportPresenter do
-  let(:document) { BusinessFinanceSupportScheme.from_publishing_api(FactoryBot.create(:business_finance_support_scheme)) }
+  let(:document) { SpecialistDocument::BusinessFinanceSupportScheme.from_publishing_api(FactoryBot.create(:business_finance_support_scheme)) }
   subject { described_class.new(document) }
 
   describe ".header_row" do

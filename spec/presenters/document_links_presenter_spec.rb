@@ -2,7 +2,7 @@ require "spec_helper"
 
 RSpec.describe DocumentLinksPresenter do
   it "presents links for document" do
-    document = StatutoryInstrument.new
+    document = SpecialistDocument::StatutoryInstrument.new
     allow(document).to receive(:primary_publishing_organisation).and_return("an-organisation-id")
 
     presenter = DocumentLinksPresenter.new(document)
@@ -12,7 +12,7 @@ RSpec.describe DocumentLinksPresenter do
   end
 
   it "expects the brexit taxon to be returned if the document type is Statutory Instrument" do
-    document = StatutoryInstrument.new
+    document = SpecialistDocument::StatutoryInstrument.new
 
     links_presenter = DocumentLinksPresenter.new(document)
     presented_data = links_presenter.to_json
