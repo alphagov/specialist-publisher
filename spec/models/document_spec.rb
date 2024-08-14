@@ -827,4 +827,11 @@ RSpec.describe Document do
       expect(AaibReport.title).to eq("AAIB Report")
     end
   end
+
+  describe ".admin_slug" do
+    it "delegates to the FinderSchema" do
+      expect(AaibReport.finder_schema).to receive(:admin_slug).and_call_original
+      expect(AaibReport.title).to eq("AAIB Reportssss")
+    end
+  end
 end

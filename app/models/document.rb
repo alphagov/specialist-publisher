@@ -295,7 +295,7 @@ class Document
   end
 
   def self.admin_slug
-    title.parameterize.pluralize
+    finder_schema.admin_slug
   end
 
   def content_id_and_locale

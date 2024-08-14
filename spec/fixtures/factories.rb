@@ -210,6 +210,7 @@ FactoryBot.define do
           "location" => "Near Popham Airfield, Hampshire",
           "aircraft_type" => "Alpi (Cavaciuti) Pioneer 400",
           "registration" => "G-CGVO",
+          "document_title" => "AAIB Report",
         }
       end
     end
