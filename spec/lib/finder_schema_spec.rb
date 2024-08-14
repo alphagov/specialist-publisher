@@ -60,6 +60,18 @@ RSpec.describe FinderSchema do
     end
   end
 
+  describe "#admin_slug" do
+    it "returns the admin_slug if set" do
+      properties = mandatory_properties.merge({ "admin_slug" => "foo" })
+      expect(FinderSchema.new(properties).admin_slug).to eq("foo")
+    end
+
+    it "derives admin_slug from title otherwise" do
+      properties = mandatory_properties.merge({ "document_title" => "Foo Bar Baz" })
+      expect(FinderSchema.new(properties).admin_slug).to eq("foo-bar-bazs")
+    end
+  end
+
   describe "#organisations" do
     it "returns empty array if not present" do
       expect(FinderSchema.new(mandatory_properties).organisations).to eq([])
