@@ -14,6 +14,7 @@
   "signup_content_id": "43dd2b13-93ec-4ca6-a7a4-e2eb5f5d485a",
   "signup_copy": "You'll get an email each time a case is updated or a new case is published.",
   "organisations": ["957eb4ec-089b-4f71-ba2a-dc69ac8919ea"],
+  "taxons": ["8db04387-9076-4287-ab46-6a6695b593d7"],
   "topics": [
     "competition/competition-act-cartels",
     "competition/consumer-protection",
@@ -103,6 +104,7 @@
     }
   ],
   "document_noun": "case",
+  "document_title": "CMA Case",
   "facets": [
     {
         "key": "case_type",

@@ -38,14 +38,6 @@ class LicenceTransaction < Document
     @organisations = params[:organisations]
   end
 
-  def taxons
-    []
-  end
-
-  def self.title
-    "Licence"
-  end
-
   def self.has_organisations?
     true
   end
@@ -61,7 +53,7 @@ class LicenceTransaction < Document
     "prefix"
   end
 
-  def self.slug
+  def self.admin_slug
     "licences"
   end
 

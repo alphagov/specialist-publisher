@@ -10,6 +10,7 @@
   "show_summaries": true,
   "signup_link": "https://public.govdelivery.com/accounts/UKMHRA/subscriber/new?topic_id=UKMHRA_0044",
   "organisations": ["240f72bd-9a4d-4f39-94d9-77235cadde8e"],
+  "taxons": ["51bbdf23-292a-4b74-8a66-f7db6b93b163"],
   "related": [
     "1e9c0ada-5f7e-43cc-a55f-cc32757edaa3",
     "c953a82b-e9ff-4551-9324-dfdf40ab85e6"
@@ -19,6 +20,7 @@
   ],
   "subscription_list_title_prefix": "Drug Safety Update",
   "document_noun": "update",
+  "document_title": "Drug Safety Update",
   "facets": [
     {
       "key": "therapeutic_area",

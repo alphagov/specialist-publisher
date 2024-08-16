@@ -32,7 +32,7 @@ RSpec.feature "Exporting a list of documents as CSV" do
   end
 
   scenario "I can export a list of documents and they are emailed to me" do
-    visit "/#{BusinessFinanceSupportScheme.slug}"
+    visit "/#{BusinessFinanceSupportScheme.admin_slug}"
 
     click_on "Export document list to CSV"
 

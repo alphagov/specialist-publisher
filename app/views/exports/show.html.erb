@@ -14,9 +14,9 @@
     <li>Matching query: “<%= @query %>”</li>
   <% end %>
 </ul>
-<%= form_tag export_documents_path(current_format.slug), method: 'post' do %>
+<%= form_tag export_documents_path(current_format.admin_slug), method: 'post' do %>
   <%= hidden_field_tag :query, @query %>
   <%= submit_tag "Export as CSV", class: 'btn btn-primary' %>
 
-  <%= link_to "Cancel and return to list", documents_path(current_format.slug, query: params[:query]), class: 'btn btn-default' %>
+  <%= link_to "Cancel and return to list", documents_path(current_format.admin_slug, query: params[:query]), class: 'btn btn-default' %>
 <% end %>

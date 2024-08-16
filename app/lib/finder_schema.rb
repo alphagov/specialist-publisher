@@ -6,15 +6,21 @@ class FinderSchema
     end
   end
 
-  attr_reader :base_path, :organisations, :format, :content_id, :editing_organisations
+  def self.load_schema_for(type)
+    JSON.parse(File.read(Rails.root.join("lib/documents/schemas/#{type}.json")))
+  end
 
-  def initialize(schema_type)
-    @schema = load_schema_for(schema_type)
+  attr_reader :schema, :base_path, :organisations, :editing_organisations, :taxons, :format, :content_id, :document_title
+
+  def initialize(schema)
+    @schema = schema
     @base_path = schema.fetch("base_path")
     @organisations = schema.fetch("organisations", [])
     @editing_organisations = schema.fetch("editing_organisations", [])
+    @taxons = schema.fetch("taxons", [])
     @format = schema.fetch("filter", {}).fetch("format")
     @content_id = schema.fetch("content_id")
+    @document_title = schema.fetch("document_title", nil)
   end
 
   def facets
@@ -45,12 +51,6 @@ class FinderSchema
   end
 
 private
-
-  attr_reader :schema
-
-  def load_schema_for(type)
-    JSON.parse(File.read(Rails.root.join("lib/documents/schemas/#{type}.json")))
-  end
 
   def facet_data_for(facet_name)
     schema.fetch("facets", []).find do |facet_record|

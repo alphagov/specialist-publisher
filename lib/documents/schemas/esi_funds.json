@@ -18,6 +18,7 @@
     "de4e9dc6-cca4-43af-a594-682023b84d6c",
     "e8fae147-6232-4163-a3f1-1c15b755a8a4"
   ],
+  "taxons": ["2894668d-0c21-491a-9069-a271e67f6025"],
   "subscription_list_title_prefix": {
     "singular": "European Structural and Investment Fund with the following location: ",
     "plural": "European Structural and Investment Funds with the following locations: ",
@@ -88,6 +89,7 @@
     }
   ],
   "document_noun": "call",
+  "document_title": "ESI Fund",
   "facets": [
     {
       "key": "fund_state",

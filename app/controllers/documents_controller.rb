@@ -29,7 +29,7 @@ class DocumentsController < ApplicationController
 
     if @document.save
       flash[:success] = "Created #{@document.title}"
-      redirect_to document_path(current_format.slug, @document.content_id_and_locale)
+      redirect_to document_path(current_format.admin_slug, @document.content_id_and_locale)
     elsif @document.errors.any?
       flash.now[:errors] = document_error_messages
       render :new, status: :unprocessable_entity
@@ -53,7 +53,7 @@ class DocumentsController < ApplicationController
     if @document.valid?
       if @document.save
         flash[:success] = "Updated #{@document.title}"
-        redirect_to document_path(current_format.slug, @document.content_id_and_locale)
+        redirect_to document_path(current_format.admin_slug, @document.content_id_and_locale)
       else
         flash.now[:danger] = unknown_error_message
         render :edit
@@ -70,7 +70,7 @@ class DocumentsController < ApplicationController
     else
       flash[:danger] = unknown_error_message
     end
-    redirect_to document_path(current_format.slug, params[:content_id_and_locale])
+    redirect_to document_path(current_format.admin_slug, params[:content_id_and_locale])
   end
 
   def unpublish
@@ -80,7 +80,7 @@ class DocumentsController < ApplicationController
       flash[:danger] = unknown_error_message
     end
 
-    redirect_to document_path(current_format.slug, params[:content_id_and_locale])
+    redirect_to document_path(current_format.admin_slug, params[:content_id_and_locale])
   end
 
   def discard
@@ -89,7 +89,7 @@ class DocumentsController < ApplicationController
     else
       flash[:danger] = unknown_error_message
     end
-    redirect_to documents_path(current_format.slug)
+    redirect_to documents_path(current_format.admin_slug)
   end
 
 private

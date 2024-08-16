@@ -24,14 +24,6 @@ class StatutoryInstrument < Document
     @organisations = params[:organisations]
   end
 
-  def taxons
-    [BREXIT_TAXON_ID]
-  end
-
-  def self.title
-    "EU Withdrawal Act 2018 statutory instrument"
-  end
-
   def links
     super.merge(
       organisations: organisations | [primary_publishing_organisation],

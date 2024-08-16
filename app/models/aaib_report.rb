@@ -20,16 +20,4 @@ class AaibReport < Document
   def initialize(params = {})
     super(params, FORMAT_SPECIFIC_FIELDS)
   end
-
-  def taxons
-    [AIR_ACCIDENTS_AND_SERIOUS_INCIDENTS_TAXON_ID]
-  end
-
-  def self.title
-    "AAIB Report"
-  end
-
-  def primary_publishing_organisation
-    "38eb5d8f-2d89-480c-8655-e2e7ac23f8f4"
-  end
 end

@@ -38,15 +38,7 @@ class ProtectedFoodDrinkName < Document
     super(params, FORMAT_SPECIFIC_FIELDS)
   end
 
-  def self.title
-    "Protected Geographical Food and Drink Name"
-  end
-
-  def self.slug
+  def self.admin_slug
     "protected-food-drink-names"
-  end
-
-  def primary_publishing_organisation
-    "de4e9dc6-cca4-43af-a594-682023b84d6c"
   end
 end

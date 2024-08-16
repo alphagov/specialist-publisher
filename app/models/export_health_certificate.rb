@@ -14,16 +14,4 @@ class ExportHealthCertificate < Document
   def initialize(params = {})
     super(params, FORMAT_SPECIFIC_FIELDS)
   end
-
-  def taxons
-    []
-  end
-
-  def self.title
-    "Export health certificate"
-  end
-
-  def primary_publishing_organisation
-    "4ad67f14-6f9c-4fa4-80ab-687b6d81ea6f"
-  end
 end

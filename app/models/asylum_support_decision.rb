@@ -23,16 +23,4 @@ class AsylumSupportDecision < Document
   def initialize(params = {})
     super(params, FORMAT_SPECIFIC_FIELDS)
   end
-
-  def taxons
-    [ASYLUM_DECISIONS_AND_APPEALS_TAXON_ID]
-  end
-
-  def self.title
-    "Asylum Support Decisions"
-  end
-
-  def primary_publishing_organisation
-    "6f757605-ab8f-4b62-84e4-99f79cf085c2"
-  end
 end

@@ -14,16 +14,4 @@ class EsiFund < Document
   def initialize(params = {})
     super(params, FORMAT_SPECIFIC_FIELDS)
   end
-
-  def taxons
-    [EUROPEAN_FUNDS_TAXON_ID]
-  end
-
-  def self.title
-    "ESI Fund"
-  end
-
-  def primary_publishing_organisation
-    "2e7868a8-38f5-4ff6-b62f-9a15d1c22d28"
-  end
 end

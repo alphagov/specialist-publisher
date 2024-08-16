@@ -22,19 +22,7 @@ class BusinessFinanceSupportScheme < Document
     super(params, FORMAT_SPECIFIC_FIELDS)
   end
 
-  def taxons
-    [BUSINESS_FINANCE_AND_SUPPORT_TAXON_ID]
-  end
-
   def self.exportable?
     true
-  end
-
-  def self.title
-    "Business Finance Support Scheme"
-  end
-
-  def primary_publishing_organisation
-    "2bde479a-97f2-42b5-986a-287a623c2a1c"
   end
 end

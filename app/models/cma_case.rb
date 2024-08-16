@@ -20,16 +20,4 @@ class CmaCase < Document
   def initialize(params = {})
     super(params, FORMAT_SPECIFIC_FIELDS)
   end
-
-  def taxons
-    [COMPETITION_TAXON_ID]
-  end
-
-  def self.title
-    "CMA Case"
-  end
-
-  def primary_publishing_organisation
-    "957eb4ec-089b-4f71-ba2a-dc69ac8919ea"
-  end
 end

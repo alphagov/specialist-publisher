@@ -11,6 +11,7 @@
   "signup_copy": "You'll get an email each time a report is updated or a new report is published.",
   "show_summaries": true,
   "organisations": ["013872d8-8bbb-4e80-9b79-45c7c5cf9177"],
+  "taxons": ["c6a19bb4-1264-4abe-9f1c-6c30f8dea5f7"],
   "subscription_list_title_prefix": {
     "singular": "Rail Accident Investigation Branch (RAIB) reports with the following railway type: ",
     "plural": "Rail Accident Investigation Branch (RAIB) reports with the following railway types: ",
@@ -51,6 +52,7 @@
     }
   ],
   "document_noun": "report",
+  "document_title": "RAIB Report",
   "facets": [
     {
       "key": "railway_type",

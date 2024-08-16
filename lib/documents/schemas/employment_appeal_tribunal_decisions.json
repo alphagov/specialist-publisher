@@ -16,11 +16,13 @@
     "6f757605-ab8f-4b62-84e4-99f79cf085c2",
     "caeb418c-d11c-4352-92e9-47b21289f696"
   ],
+  "taxons": ["357110bb-cbc5-4708-9711-1b26e6c63e86"],
   "signup_content_id": "1f5911f4-417a-4380-a5a0-674ebff332df",
   "signup_copy": "You'll get an email each time a decision is updated or a new decision is published.",
   "subscription_list_title_prefix": "Employment Appeal Tribunal decisions",
   "summary": "<p>Find decisions on appeals against employment tribunals heard by the Employment Appeal Tribunal.</p><p>Includes decisions after December 2015. Find details of <a rel=\"external\" href=\"http://www.employmentappeals.gov.uk/Public/Search.aspx\">older cases.</a></p>",
   "document_noun": "decision",
+  "document_title": "EAT Decision",
   "facets": [
     {
       "key": "tribunal_decision_categories",

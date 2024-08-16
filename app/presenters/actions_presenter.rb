@@ -118,6 +118,6 @@ private
   end
 
   def slug
-    document.class.slug
+    document.class.admin_slug
   end
 end

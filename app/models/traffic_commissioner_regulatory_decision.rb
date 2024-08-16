@@ -18,12 +18,4 @@ class TrafficCommissionerRegulatoryDecision < Document
   def initialize(params = {})
     super(params, FORMAT_SPECIFIC_FIELDS)
   end
-
-  def self.title
-    "Traffic Commissioner Regulatory Decision"
-  end
-
-  def primary_publishing_organisation
-    "78dfc32b-b1ef-44ca-924c-a2cf773e87ca"
-  end
 end

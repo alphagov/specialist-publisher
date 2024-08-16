@@ -28,7 +28,7 @@ private
   end
 
   def fetch_format(document_type_slug)
-    document_models.detect { |model| model.slug == document_type_slug }
+    document_models.detect { |model| model.admin_slug == document_type_slug }
   end
 
   def document_models

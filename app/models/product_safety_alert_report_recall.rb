@@ -19,15 +19,7 @@ class ProductSafetyAlertReportRecall < Document
     super(params, FORMAT_SPECIFIC_FIELDS)
   end
 
-  def self.title
-    "Product Safety Alerts, Reports and Recalls"
-  end
-
-  def self.slug
+  def self.admin_slug
     "product-safety-alerts-reports-recalls"
-  end
-
-  def primary_publishing_organisation
-    "a0ee18e7-9e1e-4ba1-aed5-f3f287dce752"
   end
 end

@@ -20,12 +20,4 @@ class DrcfDigitalMarketsResearch < Document
   def initialize(params = {})
     super(params, FORMAT_SPECIFIC_FIELDS)
   end
-
-  def self.title
-    "DRCF digital markets research"
-  end
-
-  def primary_publishing_organisation
-    "957eb4ec-089b-4f71-ba2a-dc69ac8919ea"
-  end
 end

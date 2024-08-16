@@ -1410,6 +1410,7 @@
   "topics": ["keeping-farmed-animals/animal-welfare"],
   "parent": "03f78404-e87c-4c2a-954b-f6ee9403efb8",
   "document_noun": "export health certificate",
+  "document_title": "Export health certificate",
   "facets": [
     {
       "key": "destination_country",

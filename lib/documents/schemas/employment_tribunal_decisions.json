@@ -16,11 +16,13 @@
     "6f757605-ab8f-4b62-84e4-99f79cf085c2",
     "8bb37087-a5a7-4493-8afe-900b36ebc927"
   ],
+  "taxons": ["357110bb-cbc5-4708-9711-1b26e6c63e86"],
   "signup_content_id": "6d7ace06-f437-4fb3-b948-8534ff34540f",
   "signup_copy": "You'll get an email each time a decision is updated or a new decision is published.",
   "subscription_list_title_prefix": "Employment tribunal decisions",
   "summary": "<p>Find decisions on Employment Tribunal cases in England, Wales and Scotland from February 2017 onwards.</p><p>For enquiries about Employment Tribunal judgments in England and Wales prior to February 2017 contact <a href='https://www.find-court-tribunal.service.gov.uk/courts/bury-st-edmunds-county-court-and-family-court'>Bury St Edmunds County Court</a>. Please note that we are currently experiencing technical difficulties with the system used to search for judgments. Unfortunately, we are unable to confirm when this issue will be resolved and there may be a delay to you receiving the judgment you have requested.</p><p>If the decision was made before February 2017 in Scotland, contact <a href='https://www.find-court-tribunal.service.gov.uk/courts/glasgow-tribunals-centre'>Glasgow Tribunals Centre</a>.</p><p>Decisions are not affected by GDPR rules and cannot be removed from GOV.UK.</p>",
   "document_noun": "decision",
+  "document_title": "ET Decision",
   "email_filter_by": "tribunal_decision_categories",
   "email_filter_facets": [
     {
