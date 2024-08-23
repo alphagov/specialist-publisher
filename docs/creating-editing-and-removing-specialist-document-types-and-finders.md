@@ -119,7 +119,7 @@ We often receive requests to add new fields to a specialist document or to add n
 
 4. Follow steps in the [Deploy and publish](#deploy-and-publish) section above, to re-publish the finder. It should suffice to run `search:update_schema` in `search-api`.
 
-## Adding or amending values for existing fields on a specialist document
+## Adding values for existing fields on a specialist document
 
 1. In `publishing-api`:
    - Add the new values to the field you are amending, in the [specialist_document schema](https://github.com/alphagov/publishing-api/blob/6d5595470bd0e7f3072e06f0113e3ca5514b6e98/content_schemas/formats/shared/definitions/_specialist_document.jsonnet). See [example here](https://github.com/alphagov/publishing-api/pull/2659/files#diff-e427ec772dc2597718b907f2db7772ad580d90452a76ce291114ddd0cfacb289). 
@@ -131,7 +131,7 @@ We often receive requests to add new fields to a specialist document or to add n
 
 3. In `search-api`, amend the value in the relevant schema in the [elasticsearch_types](https://github.com/alphagov/search-api/tree/main/config/schema/elasticsearch_types) directory. See [this](https://github.com/alphagov/search-api/pull/2320/commits/0f29e310581e30707eea7fe8c91063974636dbe2) commit for an example.
 
-4. Republish the finder, see step 3 in the [Deploy and publish](#deploy-and-publish) section above. It should suffice to run `search:update_schema` in `search-api`.
+4. Republish the finder, see step 3 in the [Deploy and publish](#deploy-and-publish) section above to add the new values to the finder and metadata values for documents on the frontend.
 
 # __Editing__ a specialist finder
 
