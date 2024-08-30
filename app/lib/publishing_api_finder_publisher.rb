@@ -56,11 +56,14 @@ private
   end
 
   def update_draft(payload)
+    logger.info("Sending 'put_content' request to publishing api.")
     Services.publishing_api.put_content(payload.content_id, payload.to_json)
   end
 
   def publish(payload, links_payload)
+    logger.info("Sending 'patch_links' request to publishing api.")
     Services.publishing_api.patch_links(payload.content_id, links_payload.to_json)
+    logger.info("Sending 'publish' request to publishing api.")
     Services.publishing_api.publish(payload.content_id)
   end
 end
