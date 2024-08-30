@@ -8,7 +8,7 @@ RSpec.feature "The root specialist-publisher page", type: :feature do
       log_in_as_editor(:gds_editor)
     end
 
-    it "grants access to view all finders including pre-production" do
+    it "grants access to view all finders" do
       visit "/"
 
       click_link("AAIB Reports", match: :first)

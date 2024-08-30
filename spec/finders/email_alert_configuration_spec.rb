@@ -28,10 +28,9 @@ RSpec.describe "Email alert configuration" do
       end
 
       # email-alert-api limits the name of a subscription list to 1000 characters
-      # We test here to make sure we don't try to create lists with names
-      # longer than this for live finders
+      # We test here to make sure we don't try to create lists with names longer than this
       it "doesn't have a name longer than 1000 characters" do
-        next unless finder["subscription_list_title_prefix"] && !finder["pre_production"]
+        next unless finder["subscription_list_title_prefix"]
 
         name = if finder["subscription_list_title_prefix"]["plural"]
                  # If the list name has singular and plural forms, test the plural
