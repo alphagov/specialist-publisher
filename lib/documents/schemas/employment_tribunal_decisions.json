@@ -223,8 +223,8 @@
           "prechecked": false
         },
         {
-          "radio_button_name": "Renumeration",
-          "topic_name": "renumeration",
+          "radio_button_name": "Remuneration",
+          "topic_name": "remuneration",
           "key": "renumeration",
           "prechecked": false
         },
@@ -520,7 +520,7 @@
           "value": "religion-or-belief-discrimination"
         },
         {
-          "label": "Renumeration",
+          "label": "Remuneration",
           "value": "renumeration"
         },
         {
