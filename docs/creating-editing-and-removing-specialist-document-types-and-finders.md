@@ -36,7 +36,7 @@ When the PR is reviewed and its tests passing, it can be merged and deployed at 
 
 See [CMA cases](https://github.com/alphagov/specialist-publisher/blob/main/lib/documents/schemas/cma_cases.json).
 
-New formats are often requested to be deployed in "pre-production mode", which is configured in this step ([example](https://github.com/alphagov/specialist-publisher/blob/f8e93142dfad6f3971a73c923b01f2e7352bdb54/lib/documents/schemas/tax_tribunal_decisions.json#L64)). `pre-production` documents are only publishable on development and integration.
+New formats should be added with `target_stack: "draft"` so that departments can preview the finder before you publish it.
 
 ### Create the model
 
@@ -70,20 +70,30 @@ The email sign up page is rendered by [Finder Frontend](https://github.com/alpha
 
 If your email sign up page should have checkboxes (e.g. [cma-cases](https://www.gov.uk/cma-cases/email-signup)), you will need to edit email-alert-api by adding the new tags to [valid_tags.rb](https://github.com/alphagov/email-alert-api/blob/3e0018510ea85f5d561e2865ad149832b94688a1/lib/valid_tags.rb#L2).
 
-## 5. Deploy and publish <a id="deploy-and-publish"></a>
+## 5. Deploy a finder to the draft stack (for previewing)
 
-To deploy:
-
-   1. Deploy Publishing API (if you haven't already), Specialist Publisher and Search API. 
+To deploy a new finder for previewing:
+   1. Ensure the finder target_stack is set to `draft`
+   1. Merge and deploy Publishing API and Specialist Publisher. 
       - Ensure you deploy Publishing API first, to avoid schema validation errors.
       - Also deploy Email Alert API if you have made changes to it.
-   2. [Reindex the govuk Elasticsearch index](https://docs.publishing.service.gov.uk/manual/reindex-elasticsearch.html#how-to-reindex-an-elasticsearch-index).
-      - This takes around 30-45 minutes on Production, or 3-4 hours on Integration.
-      - Alternatively, run `search:update_schema` for a shorter run. Make sure the this is run before any documents are published, otherwise a full reindex will be required.
-      - NB: reindexing shouldn't really be necessary; Elasticsearch will dynamically create the field mappings the first time a new document of this type is published. In other words, if you publish a new document type, the finder will work and it will return the relevant documents even without a reindex. However, **the filters on the finder would not work**, as this reindexing job also builds the filters for the finder, so we have to run the job.
-   3. Publish the finder; run the rake task `publishing_api:publish_finders` or `publishing_api:publish_finder[your_format_name_based_on_the_schema_file]` against the specialist publisher app (rake tasks [here](https://github.com/alphagov/specialist-publisher/blob/ce68fdb008cab05225e0493e19decba5365e1e20/lib/tasks/publishing_api.rake)).
+   1. Publish the finder to the draft stack by running the rake task `publishing_api:publish_finders` or `publishing_api:publish_finder[your_format_name_based_on_the_schema_file]` against the specialist publisher app (rake tasks [here](https://github.com/alphagov/specialist-publisher/blob/ce68fdb008cab05225e0493e19decba5365e1e20/lib/tasks/publishing_api.rake)).
+   1. Wait for department's feedback and approval and agree on a release date
 
-## 6. Permissions
+## 6. Publish a finder
+
+To release the finder to the live stack:
+   1. Prepare before the agreed release date. Merge PRs and release on agreed date.
+   1. Merge and deploy Search API
+   1. [Reindex the govuk Elasticsearch index](https://docs.publishing.service.gov.uk/manual/reindex-elasticsearch.html#how-to-reindex-an-elasticsearch-index).
+       - This takes around 30-45 minutes on Production, or 3-4 hours on Integration.
+       - Alternatively, run `search:update_schema` for a shorter run. Make sure the this is run before any documents are published, otherwise a full reindex will be required.
+       - NB: reindexing shouldn't really be necessary; Elasticsearch will dynamically create the field mappings the first time a new document of this type is published. In other words, if you publish a new document type, the finder will work and it will return the relevant documents even without a reindex. However, **the filters on the finder would not work**, as this reindexing job also builds the filters for the finder, so we have to run the job.
+   1. Change the target_stack of the finder from `draft` to `live` in specialist-publisher json schema config
+   1. Merge and deploy Specialist Publisher
+   1. Publish the finder by running the rake task `publishing_api:publish_finders` or `publishing_api:publish_finder[your_format_name_based_on_the_schema_file]` against the specialist publisher app (rake tasks [here](https://github.com/alphagov/specialist-publisher/blob/ce68fdb008cab05225e0493e19decba5365e1e20/lib/tasks/publishing_api.rake)).
+ 
+## 7. Permissions
 
 Specialist Publisher grants access to the publishing interface for your new document type to the following Signon users:
 
@@ -109,6 +119,7 @@ We often receive requests to add new fields to a specialist document or to add n
    - Add field to relevant [view](https://github.com/alphagov/specialist-publisher/tree/main/app/views/metadata_fields).
    - Add fields to relevant [schema](https://github.com/alphagov/specialist-publisher/tree/main/lib/documents/schemas) files. 
    
+<!-- TODO: Update these with up-to-date examples -->
    See [this](https://github.com/alphagov/specialist-publisher/pull/1899/commits/cc9e8fe482dbca2ef678bb8219252e7bd4f4d154) commit for an example.
 
 3. In `search-api`, add the new field in the following places (see [this](https://github.com/alphagov/search-api/pull/2320/commits/ca6d0142e29b9755aad2e6bd59a3f576b727bd24) commit for an example):
@@ -117,9 +128,13 @@ We often receive requests to add new fields to a specialist document or to add n
    - the [specialist_presenter](https://github.com/alphagov/search-api/blob/main/lib/govuk_index/presenters/specialist_presenter.rb).
    - the [field_definitions](https://github.com/alphagov/search-api/blob/main/config/schema/field_definitions.json) file.
 
-4. Follow steps in the [Deploy and publish](#deploy-and-publish) section above, to re-publish the finder. It should suffice to run `search:update_schema` in `search-api`.
+To republish the finder:
+1. Deploy Publishing API, Search API.
+1. Run `search:update_schema` on Search API. If this errors, you may have to do a [full reindex](https://docs.publishing.service.gov.uk/manual/reindex-elasticsearch.html#how-to-reindex-an-elasticsearch-index).
+1. Deploy Specialist Publisher, deploy after the Search API schema update / reindex to avoid users publishing new documents with the new field.
+1. Publish the finder by running the rake task `publishing_api:publish_finders` or `publishing_api:publish_finder[your_format_name_based_on_the_schema_file]` against the specialist publisher app (rake tasks [here](https://github.com/alphagov/specialist-publisher/blob/ce68fdb008cab05225e0493e19decba5365e1e20/lib/tasks/publishing_api.rake)).
 
-## Adding or amending values for existing fields on a specialist document
+## Adding values for existing fields on a specialist document
 
 1. In `publishing-api`:
    - Add the new values to the field you are amending, in the [specialist_document schema](https://github.com/alphagov/publishing-api/blob/6d5595470bd0e7f3072e06f0113e3ca5514b6e98/content_schemas/formats/shared/definitions/_specialist_document.jsonnet). See [example here](https://github.com/alphagov/publishing-api/pull/2659/files#diff-e427ec772dc2597718b907f2db7772ad580d90452a76ce291114ddd0cfacb289). 
@@ -131,7 +146,9 @@ We often receive requests to add new fields to a specialist document or to add n
 
 3. In `search-api`, amend the value in the relevant schema in the [elasticsearch_types](https://github.com/alphagov/search-api/tree/main/config/schema/elasticsearch_types) directory. See [this](https://github.com/alphagov/search-api/pull/2320/commits/0f29e310581e30707eea7fe8c91063974636dbe2) commit for an example.
 
-4. Republish the finder, see step 3 in the [Deploy and publish](#deploy-and-publish) section above. It should suffice to run `search:update_schema` in `search-api`.
+To republish the finder:
+1. Deploy Publishing API, Search API, Deploy Specialist Publisher.
+1. Publish the finder by running the rake task `publishing_api:publish_finders` or `publishing_api:publish_finder[your_format_name_based_on_the_schema_file]` against the specialist publisher app (rake tasks [here](https://github.com/alphagov/specialist-publisher/blob/ce68fdb008cab05225e0493e19decba5365e1e20/lib/tasks/publishing_api.rake)).
 
 # __Editing__ a specialist finder
 
