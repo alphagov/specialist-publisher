@@ -48,11 +48,14 @@
       "allowed_values": [
         {"label": "Alpha", "value": "alpha"},
         {"label": "Alpha reassessment", "value": "alpha-reassessment"},
+        {"label": "Alpha amber evidence review", "value": "alpha-amber-evidence-review"},
         {"label": "Beta", "value": "beta"},
         {"label": "Beta reassessment", "value": "beta-reassessment"},
+        {"label": "Beta amber evidence review", "value": "beta-amber-evidence-review"},
         {"label": "Live", "value": "live"},
         {"label": "Live reassessment", "value": "live-reassessment"},
-        {"label": "Live review", "value": "live-review"}
+        {"label": "Live review", "value": "live-review"},
+        {"label": "Live amber evidence review", "value": "live-amber-evidence-review"}
       ]
     }
   ]
