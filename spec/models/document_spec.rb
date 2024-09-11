@@ -25,6 +25,12 @@ RSpec.describe Document do
     expect(MyDocumentType.document_type).to eq("my_document_type")
   end
 
+  it "has a link to the live URL of the finder" do
+    schema = double("some schema", base_path: "/foo")
+    allow(MyDocumentType).to receive(:finder_schema).and_return(schema)
+    expect(MyDocumentType.live_url).to eq("http://www.dev.gov.uk/foo")
+  end
+
   describe "parsing date params" do
     it "sets a date string from rails date select style params" do
       doc = MyDocumentType.new("field1(1i)": "2016", "field1(2i)": "09", "field1(3i)": "07")
