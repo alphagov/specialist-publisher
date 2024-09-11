@@ -7,6 +7,14 @@
 <h1 class="page-header"><%= current_format.title.pluralize %></h1>
 
 <div class="row">
+  <div class="col-md-12 text-right">
+    <p>
+      <%= link_to "View on website (opens in new tab)", current_format.live_url, target: "_blank" %>
+    </p>
+  </div>
+</div>
+
+<div class="row">
   <div class="sidebar col-md-3">
     <%= link_to "Add another #{current_format.title}", new_document_path(current_format.admin_slug), class: 'action-link' %>
     <%= form_tag(documents_path(current_format.admin_slug), method: :get, class: "add-vertical-margins well") do %>
