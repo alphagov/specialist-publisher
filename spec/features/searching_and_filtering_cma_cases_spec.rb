@@ -25,6 +25,14 @@ RSpec.feature "Searching and filtering", type: :feature do
     log_in_as_editor(:cma_editor)
   end
 
+  scenario "visiting the index has a preview link" do
+    stub_publishing_api_has_content([], hash_including(document_type: CmaCase.document_type))
+
+    visit "/cma-cases"
+
+    expect(page).to have_link("View on website (opens in new tab)", href: "http://www.dev.gov.uk/cma-cases")
+  end
+
   context "visiting the index with results" do
     before do
       stub_publishing_api_has_content(cma_cases, hash_including(document_type: CmaCase.document_type))
