@@ -303,20 +303,6 @@
           "value": "educational"
         }
       ]
-    },
-    {
-      "key": "focus_sector",
-      "name": "Focus Sector",
-      "type": "text",
-      "preposition": "Focus Sector",
-      "display_as_result_metadata": true,
-      "filterable": true,
-      "allowed_values": [
-        {
-          "label": "Financial Services",
-          "value": "financial-services"
-        }
-      ]
     }
   ]
 }

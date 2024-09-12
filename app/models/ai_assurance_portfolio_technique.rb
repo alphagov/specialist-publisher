@@ -6,7 +6,6 @@ class AiAssurancePortfolioTechnique < Document
     key_function
     ai_assurance_technique
     assurance_technique_approach
-    focus_sector
   ].freeze
 
   attr_accessor(*FORMAT_SPECIFIC_FIELDS)

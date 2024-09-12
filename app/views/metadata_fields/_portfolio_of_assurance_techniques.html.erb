@@ -87,19 +87,3 @@
       }
   %>
 <% end %>
-
-<%= render layout: "shared/form_group", locals: { f: f, field: :focus_sector } do %>
-  <%= f.select :focus_sector,
-               facet_options(f, :focus_sector),
-               {},
-               {
-                 class: 'select2 form-control',
-                 multiple: true,
-                 data:
-                   {
-                     placeholder: 'Select a focus sector'
-                   }
-               }
-  %>
-<% end %>
-
