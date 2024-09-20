@@ -1,0 +1,105 @@
+<%= content_for :page_title, "Edit #{current_format.title} finder" %>
+
+<% content_for :breadcrumbs do %>
+    <% # TODO: breadcrumbs not working in this layout (this was copied from Whitehall equivalent) %>
+    <li><%= link_to "#{current_format.title} index", documents_path(current_format.admin_slug) %></li>
+    <li class='active'>Edit <%= current_format.title %> finder</li>
+<% end %>
+
+<h1>Editing <%= current_format.title %> finder</h1>
+
+<div class="row">
+  <div class="col-md-8">
+    <p>The intention is for this to start off as "pseudo self serve". Departments would be able to make edits to this form, generate the JSON output, and then send the JSON to a developer to apply (the onus would be on the dev to 'git diff' the changes to make sure they make sense). In time, we may then swap out aspects of this for 'true' self-serve. It could also form the basis of a form be used for 'new' specialist finders, as opposed to just editing existing ones.</p>
+
+    <%= form_tag do %>
+      <h2>Finder metadata</h2>
+      <p>How the finder displays to users</p>
+      <% %w[name description].each do |input| %>
+        <%= render "govuk_publishing_components/components/input", {
+            label: {
+              text: input,
+            },
+            name: input,
+            value: current_format.finder_schema.schema[input],
+          } %>
+      <% end %>
+
+      <% # special case for arrays %>
+      <% %w[organisations editing_organisations related].each do |input| %>
+        <%= render "govuk_publishing_components/components/textarea", {
+            label: {
+              text: "#{input} (content IDs, each on a separate line)",
+            },
+            name: input,
+            rows: 3,
+            value: current_format.finder_schema.schema[input]&.join(","),
+          } %>
+      <% end %>
+
+      <h3>Facets</h3>
+      <% current_format.finder_schema.schema["facets"].each do |facet| %>
+        <h4><%= facet["name"] %></h4>
+        <% %w[name key type preposition display_as_result_metadata filterable].each do |property| %>
+          <%= render "govuk_publishing_components/components/input", {
+              label: {
+                text: property,
+              },
+              name: "facets[#{facet['key']}][#{property}]",
+              value: facet[property],
+            } # could add ` if facet[property]` to hide the empty inputs, but then there'd be no way of adding them
+            %>
+        <% end %>
+        <%= render "govuk_publishing_components/components/textarea", {
+          label: {
+            text: "'allowed_values' (JSON hashes, each on a separate line)",
+          },
+          name: "#{facet['key']}[allowed_values]",
+          rows: facet["allowed_values"] ? 10 : 3, # only show a large textarea if there is an existing value
+          value: facet["allowed_values"]&.join("\n"),
+        } %>
+        <hr />
+      <% end %>
+
+      <h2>Fixed metadata</h2>
+      <p>You cannot edit these... yet.</p>
+      <% %w[base_path content_id].each do |input| %>
+        <%= render "govuk_publishing_components/components/input", {
+            label: {
+              text: input,
+            },
+            name: input,
+            value: current_format.finder_schema.schema[input],
+            readonly: true, # it's not clear from the UI, but yes - these fields are actually disabled.
+          } %>
+      <% end %>
+
+      <% # special case for 'nested' structure `filter.format` %>
+      <%= render "govuk_publishing_components/components/input", {
+          label: {
+            text: "filter.format",
+          },
+          name: "filter.format",
+          value: current_format.finder_schema.schema["filter"]["format"],
+          readonly: true,
+        } %>
+
+      <h2>Publisher configuration</h2>
+      <p>How the finder and its documents are referred to in Specialist Publisher.</p>
+
+      <% %w[format_name document_title document_noun].each do |input| %>
+        <%= render "govuk_publishing_components/components/input", {
+            label: {
+              text: input,
+            },
+            name: input,
+            value: current_format.finder_schema.schema[input],
+          } %>
+      <% end %>
+
+      <%= render "govuk_publishing_components/components/button", {
+        text: "Generate schema"
+      } %>
+    <% end %>
+  </div>
+</div>
