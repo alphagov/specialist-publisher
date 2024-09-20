@@ -1,0 +1,181 @@
+<% content_for :head do %>
+  <% if ENV["SENTRY_DSN"] && ENV["SENTRY_CURRENT_ENV"] %>
+    <meta name="sentry-dsn" content="<%= ENV["SENTRY_DSN"] %>">
+    <meta name="sentry-current-env" content="<%= ENV["SENTRY_CURRENT_ENV"] %>">
+  <% end %>
+
+  <script>
+    var dataLayer = [{
+      'user-organisation': '<%= current_user&.organisation_slug %>',
+      'cp-uid': '<%= current_user&.uid %>',
+      'page-name': '<%= "#{controller_name}-#{action_name}" %>'
+    }];
+    dataLayer.push({ 'gtm.blacklist': ['html', 'customScripts', 'nonGoogleScripts', 'customPixels'] });
+  </script>
+
+  <meta name="app-environment" content="<%= Rails.env %>">
+<% end %>
+<% render "layouts/google_tag_manager" %>
+
+<%= render 'govuk_publishing_components/components/layout_for_admin',
+  environment: GovukPublishingComponents::AppHelpers::Environment.current_acceptance_environment,
+  browser_title: yield(:browser_title).presence || yield(:title) do %>
+
+  <%= render "govuk_publishing_components/components/skip_link" %>
+
+  <%
+    navigation_items = [
+      { text: "Switch app", href: Plek.external_url_for("signon") },
+      { text: "Raise a support request", href: "https://support.publishing.service.gov.uk/technical_fault_report/new", show_only_in_collapsed_menu: true },
+    #   { text: "What’s new", href: publisher_updates_path, show_only_in_collapsed_menu: true },
+    #   { text: "Request training", href: request_training_path, show_only_in_collapsed_menu: true },
+    ]
+
+    if current_user
+      navigation_items += [
+        { text: current_user.name, href: Plek.external_url_for("signon") },
+        { text: "Log out", href: gds_sign_out_path },
+      ]
+    end
+  %>
+  <%= render "govuk_publishing_components/components/layout_header", {
+    environment: GovukPublishingComponents::AppHelpers::Environment.current_acceptance_environment,
+    navigation_items: navigation_items,
+  } %>
+
+  <div class="govuk-width-container">
+    <%# render "govuk_publishing_components/components/phase_banner", {
+      app_name: "Content Publisher",
+      phase: "beta",
+      message: capture do
+        render "layouts/phase_banner_elements"
+      end,
+    } %>
+
+    <%= yield(:back_link) %>
+
+    <main class="govuk-main-wrapper<%= " govuk-main-wrapper--l" if yield(:back_link).blank?%>" id="main-content" role="main">
+      <% if flash["notice"] %>
+        <%= render "govuk_publishing_components/components/success_alert", {
+          message: flash["notice"]
+        } %>
+      <% end %>
+
+      <% if flash["alert_with_description"] %>
+        <% alert = flash["alert_with_description"].stringify_keys %>
+        <%= render "govuk_publishing_components/components/error_alert", {
+          message: alert.fetch("title"),
+          data_attributes: {
+            gtm: "alert-with-description",
+            "gtm-value" => alert.fetch("title"),
+            "gtm-visibility-tracking" => true
+          },
+          description: render_govspeak(alert.fetch("description_govspeak"))
+        } %>
+      <% end %>
+
+      <% if flash["requirements"] %>
+        <% items = flash["requirements"]["message"] ?
+          [{ text: flash["requirements"]["message"] }] :
+          flash["requirements"]["items"].map(&:symbolize_keys) %>
+
+        <%= render "govuk_publishing_components/components/error_summary", {
+          title: t("documents.flashes.requirements"),
+          items: track_requirements(items),
+          data_attributes: {
+            gtm: "alert-requirements",
+            "gtm-visibility-tracking" => true
+          },
+        } %>
+      <% end %>
+
+      <% if yield(:title).present? %>
+      <div class="govuk-grid-row">
+        <div class="govuk-grid-column-two-thirds">
+          <span class="govuk-caption-l"><%= yield(:context) %></span>
+          <h1 class="govuk-heading-l"><%= yield(:title) %></h1>
+        </div>
+        <div class="govuk-grid-column-one-third app-grid-column--align-right">
+          <%= yield(:title_side) %>
+        </div>
+      </div>
+      <% end %>
+      <%= yield %>
+    </main>
+  </div>
+
+  <%= render "govuk_publishing_components/components/layout_footer", {
+    navigation: [
+      {
+        title: t("application.footer.support_and_feedback"),
+        items: [
+          {
+            href: "https://support.publishing.service.gov.uk/technical_fault_report/new",
+            text: "Raise a support request",
+            attributes: { target: "_blank", "data-gtm": "footer-raise-support-request" }
+          },
+          {
+            href: "https://status.publishing.service.gov.uk",
+            text: "GOV.UK status",
+            attributes: { "data-gtm": "footer-view-govuk-status" }
+          },
+          {
+            href: "https://www.gov.uk/government/content-publishing",
+            text: "How to write, publish, and improve content",
+            attributes: { "data-gtm": "footer-content-publishing-guidance" }
+          },
+        #   {
+        #     href: "#{Plek.external_url_for('content-publisher')}#{guidance_path}",
+        #     text: "What to publish on GOV.UK",
+        #     attributes: { "data-gtm": "footer-what-to-publish"}
+        #   }
+        ]
+      },
+      {
+        title: t("application.footer.documentation"),
+        items: [
+        #   {
+        #     href: "#{Plek.external_url_for('content-publisher')}#{how_to_use_publisher_path}",
+        #     text: "How to use Content Publisher",
+        #     attributes: { "data-gtm": "footer-how-to-use-app" }
+        #   },
+        #   {
+        #     href: "#{Plek.external_url_for('content-publisher')}#{publisher_updates_path}",
+        #     text: "What’s new in Content Publisher",
+        #     attributes: { "data-gtm": "footer-view-whats-new" }
+        #   },
+        #   {
+        #     href: "#{Plek.external_url_for('content-publisher')}#{managing_editors_path}",
+        #     text: "What Managing Editors can do",
+        #     attributes: { "data-gtm": "footer-what-managing-editors-can-do"}
+        #   },
+        #   {
+        #     href: "#{Plek.external_url_for('content-publisher')}#{beta_capabilities_path}",
+        #     text: "What the Beta can and cannot do",
+        #     attributes: { "data-gtm": "footer-beta-capabilities" }
+        #   },
+        #   {
+        #     href: "#{Plek.external_url_for('content-publisher')}#{request_training_path}",
+        #     text: "Request Content Publisher training",
+        #     attributes: { "data-gtm": "footer-beta-capabilities" }
+        #   },
+        ]
+      },
+    ]
+  } %>
+
+  <%= render "govuk_publishing_components/components/modal_dialogue", { id: "modal", wide: true } do %>
+    <%# render "components/multi_section_viewer", {
+      sections: [
+        {
+          id: "loading",
+          content: render("components/loading_spinner")
+        },
+        {
+          id: "error",
+          content: render("layouts/modal_error")
+        }
+      ]
+    } %>
+  <% end %>
+<% end %>
