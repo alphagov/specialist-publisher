@@ -30,6 +30,7 @@ class Document
     :first_published_at,
     :previous_version,
     :warnings,
+    :disable_email_alert,
   )
 
   def temporary_update_type
@@ -59,6 +60,7 @@ class Document
     bulk_published
     temporary_update_type
     warnings
+    disable_email_alert
   ].freeze
 
   def self.policy_class
@@ -307,7 +309,11 @@ class Document
   end
 
   def send_email_on_publish?
-    update_type == "major"
+    if disable_email_alert.present? && ![true, false].include?(disable_email_alert)
+      raise "Invalid disable email alert flag. Please use booleans only."
+    end
+
+    update_type == "major" && !disable_email_alert
   end
 
   # This is set to nil for all non-urgent emails.

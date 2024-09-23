@@ -833,4 +833,41 @@ RSpec.describe Document do
       expect(AaibReport.title).to eq("AAIB Report")
     end
   end
+
+  describe "#send_email_on_publish?" do
+    it "should send email if document is major update and no disable_email_alert override exists" do
+      doc = MyDocumentType.new(update_type: "major")
+      expect(doc.send_email_on_publish?).to be true
+    end
+
+    it "should send email if document is major update and disable_email_alert override is false" do
+      doc = MyDocumentType.new(update_type: "major")
+      doc.disable_email_alert = false
+      expect(doc.send_email_on_publish?).to be true
+    end
+
+    it "should raise an error if document is major update and disable_email_alert override is a random string" do
+      doc = MyDocumentType.new(update_type: "major")
+      doc.disable_email_alert = "invalid"
+      expect { doc.send_email_on_publish? }.to raise_error("Invalid disable email alert flag. Please use booleans only.")
+    end
+
+    it "should stop send email if document is major update and disable_email_alert override is true" do
+      doc = MyDocumentType.new(update_type: "major")
+      doc.disable_email_alert = true
+      expect(doc.send_email_on_publish?).to be false
+    end
+
+    it "should stop send email if document is minor update and disable_email_alert override is true" do
+      doc = MyDocumentType.new(update_type: "minor")
+      doc.disable_email_alert = true
+      expect(doc.send_email_on_publish?).to be false
+    end
+
+    it "should stop send email if document is minor update even if disable_email_alert override is false" do
+      doc = MyDocumentType.new(update_type: "minor")
+      doc.disable_email_alert = false
+      expect(doc.send_email_on_publish?).to be false
+    end
+  end
 end
