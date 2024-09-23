@@ -12,19 +12,6 @@ namespace :publishing_api do
     end
   end
 
-  desc "Publish pre-production finders only, to the Publishing API"
-  task publish_pre_production_finders: :environment do
-    raise "Not allowed to publish pre-production finders in this environment" unless Rails.application.config.publish_pre_production_finders
-
-    finder_loader = FinderLoader.new
-
-    begin
-      PublishingApiFinderPublisher.new(finder_loader.finders(pre_production_only: true)).call
-    rescue GdsApi::HTTPServerError => e
-      puts "Error publishing finder: #{e.inspect}"
-    end
-  end
-
   desc "Publish a single Finder to the Publishing API"
   task :publish_finder, [:name] => :environment do |_, args|
     begin

@@ -6,6 +6,7 @@ RSpec.describe PublishingApiFinderPublisher do
       underscore_name = base_path.sub("/", "")
       name = underscore_name.humanize
       {
+        "target_stack" => "live",
         "base_path" => base_path,
         "name" => name,
         "content_id" => SecureRandom.uuid,
@@ -83,11 +84,7 @@ RSpec.describe PublishingApiFinderPublisher do
     end
 
     context "when the finder has a `phase`" do
-      let(:finders) do
-        [
-          make_finder("/finder-with-phase", "phase" => "beta"),
-        ]
-      end
+      let(:finders) { [make_finder("/finder-with-phase", "phase" => "beta")] }
 
       let(:content_id) { finders[0]["content_id"] }
 
@@ -109,12 +106,8 @@ RSpec.describe PublishingApiFinderPublisher do
       end
     end
 
-    context "when the finder isn't `pre_production`" do
-      let(:finders) do
-        [
-          make_finder("/not-pre-production-finder", "pre_production" => false),
-        ]
-      end
+    context "when the finder is set to deploy to live target_stack" do
+      let(:finders) { [make_finder("/live-finder", "target_stack" => "live")] }
 
       let(:content_id) { finders[0][:file]["content_id"] }
 
@@ -136,45 +129,33 @@ RSpec.describe PublishingApiFinderPublisher do
       end
     end
 
-    context "when the finder is `pre_production`" do
-      let(:finders) do
-        [
-          make_finder("/pre-production-finder", "pre_production" => true),
-        ]
-      end
-
+    shared_examples "only updates draft stack" do
       let(:content_id) { finders[0][:file]["content_id"] }
 
-      context "and the app is configured to publish pre-production finders" do
-        before do
-          allow(Rails.application.config).to receive(:publish_pre_production_finders).and_return(true)
-          stub_publishing_api_publish(content_id, {})
-        end
+      before { stub_any_publishing_api_put_content }
 
-        it "publishes finder" do
-          expect(publishing_api).to receive(:put_content)
-            .with(content_id, be_valid_against_publisher_schema("finder"))
-          expect(publishing_api).to receive(:patch_links)
-            .with(content_id, anything)
-          expect(publishing_api).to receive(:publish)
-            .with(content_id)
+      it "updates the finder content but does not publish it" do
+        expect(publishing_api).to receive(:put_content).with(content_id, be_valid_against_publisher_schema("finder"))
+        expect(publishing_api).not_to receive(:patch_links)
+        expect(publishing_api).not_to receive(:publish)
 
-          PublishingApiFinderPublisher.new(finders, logger: test_logger).call
-        end
+        PublishingApiFinderPublisher.new(finders, logger: test_logger).call
       end
+    end
 
-      context "and is not configured to publish pre-production finders" do
-        it "doesn't publish the finder" do
-          expect(publishing_api).not_to receive(:put_content)
-            .with(content_id, be_valid_against_publisher_schema("finder"))
-          expect(publishing_api).not_to receive(:patch_links)
-            .with(content_id, anything)
-          expect(publishing_api).not_to receive(:publish)
-            .with(content_id)
+    context "when the finder is set to deploy to draft target_stack" do
+      let(:finders) { [make_finder("/draft-finder", "target_stack" => "draft")] }
+      include_examples "only updates draft stack"
+    end
 
-          PublishingApiFinderPublisher.new(finders, logger: test_logger).call
-        end
-      end
+    context "when the finder is set to deploy to unknown target_stack" do
+      let(:finders) { [make_finder("/draft-finder", "target_stack" => "unknown")] }
+      include_examples "only updates draft stack"
+    end
+
+    context "when the target_stack is not defined" do
+      let(:finders) { [make_finder("/draft-finder", "target_stack" => nil)] }
+      include_examples "only updates draft stack"
     end
   end
 end
