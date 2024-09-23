@@ -1,4 +1,5 @@
 {
+  "target_stack": "live",
   "content_id": "da025a9f-8293-4fef-869c-12445d364696",
   "base_path": "/service-standard-reports",
   "name": "Service Standard Reports",
