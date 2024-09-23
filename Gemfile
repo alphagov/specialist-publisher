@@ -27,7 +27,7 @@ gem "pundit"
 gem "select2-rails", "< 4" # v4 changes the generated HTML and breaks the e2e tests
 gem "sentry-sidekiq"
 gem "stringex"
-gem "uglifier"
+gem "terser"
 
 group :development do
   gem "listen"
