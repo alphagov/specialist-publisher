@@ -1,4 +1,5 @@
 {
+  "target_stack": "live",
   "content_id": "a485fe3e-6e1e-4d37-a2cc-06177089d1ac",
   "base_path": "/export-health-certificates",
   "format_name": "Export health certificate",

@@ -1,4 +1,5 @@
 {
+  "target_stack": "live",
   "content_id": "23ad50d7-916c-456b-b3de-4b27739d5be1",
   "base_path": "/find-funding-for-land-or-farms",
   "format_name": "Find funding for land or farms",
@@ -18,7 +19,6 @@
   "signup_copy": "You'll get an email each time a grant is updated or a new grant is published.",
   "subscription_list_title_prefix": "Funding for land or farms",
   "summary": "<p>Find out about grants and funding for farmers and land managers in England. We will add more grants and funding as we develop this tool.</p><div class=\"application-notice info-notice\"><p>You can search for actions you can get paid for as part of the Sustainable Farming Incentive (SFI). The tool does not confirm your eligibility. <a href=\"https://www.gov.uk/government/collections/sustainable-farming-incentive-guidance\">Read the SFI guidance to check if you're eligible and how you can apply.</a></p></div><p>Search by keyword, action name or code if you know it. Use the filters to search by land types or areas of interest.</p>",
-
   "document_noun": "result",
   "document_title": "Farming Grant",
   "facets": [

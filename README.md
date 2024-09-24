@@ -4,7 +4,7 @@ Publishing App for Specialist Documents.
 
 This application does not store documents in a database of its own. Instead it uses Publishing API to store and retrieve documents. MongoDB is used for storing local user records.
 
-Formats can be flagged as `pre-production` (only publishable on development and integration). Read [Creating and editing specialist document types](/docs/creating-editing-and-removing-specialist-document-types-and-finders.md)for details.
+For each of the specialist finder schemas, `target_stack` property can be set to `draft` to only put the finder content onto the draft stack, and `live` to publish the finder to the `live` stack
 
 ## Some live examples
 

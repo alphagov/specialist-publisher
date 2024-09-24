@@ -1,5 +1,5 @@
 {
-  "pre_production": true,
+  "target_stack": "draft",
   "content_id": "d7df3371-2f1a-4307-9aad-a2ef8fa8b9c4",
   "base_path": "/marine-notices",
   "format_name": "Maritime and Coastguard Agency Marine Notice",

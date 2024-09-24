@@ -8,11 +8,8 @@ class PublishingApiFinderPublisher
 
   def call
     finders.map do |finder|
-      if should_publish_in_this_environment?(finder)
-        publish(finder)
-      else
-        logger.info("Not publishing #{finder[:file]['name']} because it is pre_production")
-      end
+      export_finder(finder)
+      export_signup(finder) if finder[:file].key?("signup_content_id")
     end
   end
 
@@ -20,17 +17,8 @@ private
 
   attr_reader :finders, :logger
 
-  def publish(finder)
-    export_finder(finder)
-    export_signup(finder) if finder[:file].key?("signup_content_id")
-  end
-
-  def should_publish_in_this_environment?(finder)
-    !pre_production?(finder) || Rails.application.config.publish_pre_production_finders
-  end
-
-  def pre_production?(finder)
-    finder[:file]["pre_production"] == true
+  def should_deploy_to_live?(finder)
+    finder[:file]["target_stack"] == "live"
   end
 
   def export_finder(finder)
@@ -43,12 +31,11 @@ private
       finder[:file],
     )
 
-    noun = (pre_production?(finder) ? "pre-production finder" : "finder")
-    logger.info("Publishing #{noun} '#{finder[:file]['name']}'")
+    target_stack = finder[:file]["target_stack"]
+    logger.info("Publishing '#{finder[:file]['name']}' to #{target_stack} stack")
 
-    Services.publishing_api.put_content(finder_payload.content_id, finder_payload.to_json)
-    Services.publishing_api.patch_links(finder_payload.content_id, links_payload.to_json)
-    Services.publishing_api.publish(finder_payload.content_id)
+    update_draft(finder_payload)
+    publish(finder_payload, links_payload) if should_deploy_to_live?(finder)
   end
 
   def export_signup(finder)
@@ -61,10 +48,22 @@ private
       finder[:file],
     )
 
-    logger.info("Publishing '#{finder[:file]['name']}' finder signup page")
+    target_stack = finder[:file]["target_stack"]
+    logger.info("Publishing '#{finder[:file]['name']}' finder signup page to #{target_stack} stack")
 
-    Services.publishing_api.put_content(signup_payload.content_id, signup_payload.to_json)
-    Services.publishing_api.patch_links(signup_payload.content_id, links_payload.to_json)
-    Services.publishing_api.publish(signup_payload.content_id)
+    update_draft(signup_payload)
+    publish(signup_payload, links_payload) if should_deploy_to_live?(finder)
+  end
+
+  def update_draft(payload)
+    logger.info("Sending 'put_content' request to publishing api.")
+    Services.publishing_api.put_content(payload.content_id, payload.to_json)
+  end
+
+  def publish(payload, links_payload)
+    logger.info("Sending 'patch_links' request to publishing api.")
+    Services.publishing_api.patch_links(payload.content_id, links_payload.to_json)
+    logger.info("Sending 'publish' request to publishing api.")
+    Services.publishing_api.publish(payload.content_id)
   end
 end
