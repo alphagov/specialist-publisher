@@ -12,7 +12,7 @@
       <h2>Facets</h2>
       <% current_format.finder_schema.schema["facets"].each_with_index do |facet, i| %>
         <h4><%= facet["name"] %></h4>
-        <% %w[key name type preposition display_as_result_metadata filterable].each do |property| %>
+        <% %w[key name short_name type preposition display_as_result_metadata filterable].each do |property| %>
           <%= render "govuk_publishing_components/components/input", {
               label: {
                 text: property,

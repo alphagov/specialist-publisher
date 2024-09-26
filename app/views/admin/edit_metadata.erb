@@ -6,8 +6,6 @@
 
 <div class="row">
   <div class="col-md-8">
-    <p>The intention is for this to start off as "pseudo self serve". Departments would be able to make edits to this form, generate the JSON output, and then send the JSON to a developer to apply (the onus would be on the dev to 'git diff' the changes to make sure they make sense). In time, we may then swap out aspects of this for 'true' self-serve. It could also form the basis of a form be used for 'new' specialist finders, as opposed to just editing existing ones.</p>
-
     <%= form_tag do %>
       <h2>Finder metadata</h2>
       <p>How the finder displays to users</p>
@@ -33,19 +31,6 @@
           } %>
       <% end %>
 
-      <h2>Fixed metadata</h2>
-      <p>You cannot edit these... yet.</p>
-      <% %w[base_path content_id].each do |input| %>
-        <%= render "govuk_publishing_components/components/input", {
-            label: {
-              text: input,
-            },
-            name: input,
-            value: current_format.finder_schema.schema[input],
-            readonly: true, # it's not clear from the UI, but yes - these fields are actually disabled.
-          } %>
-      <% end %>
-
       <% # special case for 'nested' structure `filter.format` %>
       <%= render "govuk_publishing_components/components/input", {
           label: {
@@ -59,7 +44,7 @@
       <h2>Publisher configuration</h2>
       <p>How the finder and its documents are referred to in Specialist Publisher.</p>
 
-      <% %w[format_name document_title document_noun].each do |input| %>
+      <% %w[format_name document_noun document_title].each do |input| %>
         <%= render "govuk_publishing_components/components/input", {
             label: {
               text: input,

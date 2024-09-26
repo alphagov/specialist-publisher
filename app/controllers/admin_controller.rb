@@ -10,12 +10,54 @@ class AdminController < ApplicationController
   def edit_facets; end
 
   def save_metadata
-    generate_shema
+    @submitted_params = params.permit(
+      :name,
+      :description,
+      :organisations,
+      :editing_organisations,
+      :related,
+      :base_path,
+      :content_id,
+      "filter.format".to_sym,
+      :format_name,
+      :document_title,
+      :document_noun,
+    ).to_unsafe_h
+    %i[organisations editing_organisations related].each do |str_that_should_be_arr|
+      @submitted_params[str_that_should_be_arr] = @submitted_params[str_that_should_be_arr].split("\r\n")
+      if @submitted_params[str_that_should_be_arr].empty?
+        @submitted_params.delete(str_that_should_be_arr)
+      end
+    end
+    @submitted_params["filter"] = { "format": @submitted_params["filter.format".to_sym]}
+    @submitted_params.delete("filter.format".to_sym)
+
+    @original_schema = current_format.finder_schema.schema
+    @proposed_schema = @original_schema.merge(@submitted_params)
     render :temporary_output
   end
 
   def save_facets
-    generate_shema
+    @submitted_params = params.except(:authenticity_token, :action, :controller, :document_type_slug).to_unsafe_h
+    # hashes come through as e.g. `facets: { "0": { "name": "Category"... }}`,
+    # we need to convert to array e.g. `facets: [ { "name", "Category"... } ]`
+    @submitted_params["facets"] =  @submitted_params["facets"].keys.map(&:to_i).sort.map do |i|
+      @submitted_params["facets"][i.to_s]
+    end
+    @submitted_params["facets"].each_with_index do |hash, i|
+      hash.each do |key, value|
+        # delete empty values
+        if value == ""
+          @submitted_params["facets"][i].delete(key)
+        # cast booleans
+        elsif %w[true false].include?(value)
+          @submitted_params["facets"][i][key] = value == "true"
+        end
+      end
+    end
+
+    @original_schema = current_format.finder_schema.schema
+    @proposed_schema = @original_schema.merge(@submitted_params)
     render :temporary_output
   end
 
@@ -28,24 +70,5 @@ private
       flash[:danger] = "That format doesn't exist. If you feel you've reached this in error, please contact your main GDS contact."
       redirect_to root_path
     end
-  end
-
-  def generate_shema
-    @submitted_params = params.except(:authenticity_token, :action, :controller, :document_type_slug).to_unsafe_h
-    @submitted_params.each do |key, value|
-      # hashes come through as e.g. `facets: { "0": { "name": "Category"... }}`,
-      # we need to convert to array e.g. `facets: [ { "name", "Category"... } ]`
-      if value.is_a?(Hash) && value.keys.include?("0")
-        @submitted_params[key] = value.keys.map(&:to_i).sort.map { |i| @submitted_params[key][i.to_s] }
-      end
-
-      # booleans come through as strings, so need to cast those correctly
-      # TODO: recursively apply throughout hash
-      if %w[true false].include?(value)
-        @submitted_params[key] = value == "true"
-      end
-    end
-    @original_schema = current_format.finder_schema.schema
-    @proposed_schema = @original_schema.merge(@submitted_params)
   end
 end
