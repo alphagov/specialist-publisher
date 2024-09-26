@@ -4,6 +4,8 @@
     <meta name="sentry-current-env" content="<%= ENV["SENTRY_CURRENT_ENV"] %>">
   <% end %>
 
+  <%= stylesheet_link_tag "diff", :media => "all" %>
+
   <script>
     var dataLayer = [{
       'user-organisation': '<%= current_user&.organisation_slug %>',

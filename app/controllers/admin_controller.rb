@@ -38,6 +38,12 @@ private
       if value.is_a?(Hash) && value.keys.include?("0")
         @submitted_params[key] = value.keys.map(&:to_i).sort.map { |i| @submitted_params[key][i.to_s] }
       end
+
+      # booleans come through as strings, so need to cast those correctly
+      # TODO: recursively apply throughout hash
+      if %w[true false].include?(value)
+        @submitted_params[key] = value == "true"
+      end
     end
     @original_schema = current_format.finder_schema.schema
     @proposed_schema = @original_schema.merge(@submitted_params)
