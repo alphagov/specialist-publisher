@@ -13,8 +13,11 @@ Rails.application.routes.draw do
 
   resources :document_list_export_request, path: "/export/:document_type_slug", param: :export_id, only: [:show]
 
-  get "/admin/:document_type_slug", to: "admin#edit"
-  post "/admin/:document_type_slug", to: "admin#show"
+  get "/admin/:document_type_slug", to: "admin#index_of_admin_forms"
+  get "/admin/metadata/:document_type_slug", to: "admin#edit_metadata"
+  post "/admin/metadata/:document_type_slug", to: "admin#save_metadata"
+  get "/admin/facets/:document_type_slug", to: "admin#edit_facets"
+  post "/admin/facets/:document_type_slug", to: "admin#save_facets"
 
   resources :documents, path: "/:document_type_slug", param: :content_id_and_locale, except: :destroy do
     collection do

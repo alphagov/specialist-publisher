@@ -1,0 +1,41 @@
+<%= content_for :page_title, "Edit #{current_format.title} finder" %>
+
+<% content_for :back_link, render_back_link(href: "/admin/#{current_format.admin_slug}") %>
+
+<h1>Editing <%= current_format.title %> finder</h1>
+
+<div class="row">
+  <div class="col-md-8">
+    <p>The intention is for this to start off as "pseudo self serve". Departments would be able to make edits to this form, generate the JSON output, and then send the JSON to a developer to apply (the onus would be on the dev to 'git diff' the changes to make sure they make sense). In time, we may then swap out aspects of this for 'true' self-serve. It could also form the basis of a form be used for 'new' specialist finders, as opposed to just editing existing ones.</p>
+
+    <%= form_tag do %>
+      <h2>Facets</h2>
+      <% current_format.finder_schema.schema["facets"].each_with_index do |facet, i| %>
+        <h4><%= facet["name"] %></h4>
+        <% %w[name key type preposition display_as_result_metadata filterable].each do |property| %>
+          <%= render "govuk_publishing_components/components/input", {
+              label: {
+                text: property,
+              },
+              name: "facets[#{i}][#{property}]",
+              value: facet[property].to_s,
+            } # could add ` if facet[property]` to hide the empty inputs, but then there'd be no way of adding them
+            %>
+        <% end %>
+        <%= render "govuk_publishing_components/components/textarea", {
+          label: {
+            text: "'allowed_values' (JSON hashes, each on a separate line)",
+          },
+          name: "facets[#{i}][allowed_values]",
+          rows: facet["allowed_values"] ? 10 : 3, # only show a large textarea if there is an existing value
+          value: facet["allowed_values"]&.join("\n"),
+        } %>
+        <hr />
+      <% end %>
+
+      <%= render "govuk_publishing_components/components/button", {
+        text: "Generate schema"
+      } %>
+    <% end %>
+  </div>
+</div>

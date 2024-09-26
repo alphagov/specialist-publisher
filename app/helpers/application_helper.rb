@@ -1,4 +1,8 @@
 module ApplicationHelper
+  def render_back_link(options)
+    render("govuk_publishing_components/components/back_link", options)
+  end
+
   def facet_options(form, facet)
     form.object.facet_options(facet)
   end

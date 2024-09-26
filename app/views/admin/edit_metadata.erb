@@ -1,10 +1,6 @@
 <%= content_for :page_title, "Edit #{current_format.title} finder" %>
 
-<% content_for :breadcrumbs do %>
-    <% # TODO: breadcrumbs not working in this layout (this was copied from Whitehall equivalent) %>
-    <li><%= link_to "#{current_format.title} index", documents_path(current_format.admin_slug) %></li>
-    <li class='active'>Edit <%= current_format.title %> finder</li>
-<% end %>
+<% content_for :back_link, render_back_link(href: "/admin/#{current_format.admin_slug}") %>
 
 <h1>Editing <%= current_format.title %> finder</h1>
 
@@ -35,30 +31,6 @@
             rows: 3,
             value: current_format.finder_schema.schema[input]&.join(","),
           } %>
-      <% end %>
-
-      <h3>Facets</h3>
-      <% current_format.finder_schema.schema["facets"].each do |facet| %>
-        <h4><%= facet["name"] %></h4>
-        <% %w[name key type preposition display_as_result_metadata filterable].each do |property| %>
-          <%= render "govuk_publishing_components/components/input", {
-              label: {
-                text: property,
-              },
-              name: "facets[#{facet['key']}][#{property}]",
-              value: facet[property],
-            } # could add ` if facet[property]` to hide the empty inputs, but then there'd be no way of adding them
-            %>
-        <% end %>
-        <%= render "govuk_publishing_components/components/textarea", {
-          label: {
-            text: "'allowed_values' (JSON hashes, each on a separate line)",
-          },
-          name: "#{facet['key']}[allowed_values]",
-          rows: facet["allowed_values"] ? 10 : 3, # only show a large textarea if there is an existing value
-          value: facet["allowed_values"]&.join("\n"),
-        } %>
-        <hr />
       <% end %>
 
       <h2>Fixed metadata</h2>

@@ -1,0 +1,14 @@
+<%= content_for :page_title, "Edit #{current_format.title} finder" %>
+
+<% content_for :back_link, render_back_link(href: documents_path(current_format.admin_slug)) %>
+
+<h1>Editing <%= current_format.title %> finder</h1>
+
+<div class="row">
+  <div class="col-md-8">
+    <ul>
+      <li><%= link_to "Edit metadata", "/admin/metadata/#{current_format.admin_slug}" %></li>
+      <li><%= link_to "Edit facets", "/admin/facets/#{current_format.admin_slug}" %></li>
+    </ul>
+  </div>
+</div>
