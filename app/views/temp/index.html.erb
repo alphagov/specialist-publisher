@@ -1,0 +1,33 @@
+<%= content_for :page_title, "Foo" %>
+
+<% content_for :back_link, render_back_link(href: "/") %>
+
+<h1>Foo</h1>
+
+<div class="row">
+  <div class="col-md-8">
+    <%= render "govuk_publishing_components/components/checkboxes", {
+        name: "contactingme[]",
+        id: "contactingme",
+        heading: "How would you like to be contacted?",
+        hint_text: "Please select all options that are relevant to you.",
+        items: [
+        {
+            label: "Email",
+            value: "email",
+            conditional: sanitize("<div class=\"govuk-form-group\"><label class=\"govuk-label\" for=\"contact-by-email-0\">Email address</label><input class=\"govuk-input govuk-!-width-one-third\" id=\"contact-by-email-0\" name=\"contactingme\" type=\"email\"></div>")
+        },
+        {
+            label: "Phone",
+            value: "phone",
+            conditional: sanitize("<div class=\"govuk-form-group\"><label class=\"govuk-label\" for=\"contact-by-phone-0\">Phone number</label><input class=\"govuk-input govuk-!-width-one-third\" id=\"contact-by-phone-0\" name=\"contactingme\" type=\"tel\"></div>")
+        },
+        {
+            label: "Text message",
+            value: "text",
+            conditional: sanitize("<div class=\"govuk-form-group\"><label class=\"govuk-label\" for=\"contact-by-text-0\">Mobile phone number</label><input class=\"govuk-input govuk-!-width-one-third\" id=\"contact-by-text-0\" name=\"contactingme\" type=\"tel\"></div>")
+        }
+        ]
+    } %>
+  </div>
+</div>

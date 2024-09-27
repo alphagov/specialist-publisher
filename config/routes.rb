@@ -8,6 +8,8 @@ Rails.application.routes.draw do
     Healthcheck::S3,
   )
 
+  get "/design-system-sample", to: "temp#index"
+
   post "/preview", to: "govspeak#preview"
   get "/error", to: "passthrough#error"
 
