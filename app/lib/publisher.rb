@@ -1,13 +1,13 @@
 require "services"
 
 class Publisher
-  def self.publish_all(types: nil)
-    new(types).publish_all
+  def self.publish_all(types: nil, disable_email_alert: false)
+    new(types).publish_all(disable_email_alert)
   end
 
-  def publish_all
+  def publish_all(disable_email_alert)
     types.each do |document_type|
-      publish_document_type(document_type)
+      publish_document_type(document_type, disable_email_alert)
     end
   end
 
@@ -19,11 +19,12 @@ private
     @types = types.presence || document_types
   end
 
-  def publish_document_type(document_type)
+  def publish_document_type(document_type, disable_email_alert)
     content_id_and_locale_pairs_for_document_type(
       document_type,
     ).each do |content_id, locale|
       document = Document.find(content_id, locale)
+      document.disable_email_alert = true if disable_email_alert
 
       unless Services.with_timeout(30) { document.publish }
         Rails.logger.warn "Cannot publish document: #{content_id}:#{locale}"
