@@ -29,7 +29,7 @@ class AdminController < ApplicationController
         @submitted_params.delete(str_that_should_be_arr)
       end
     end
-    @submitted_params["filter"] = { "format": @submitted_params["filter.format".to_sym]}
+    @submitted_params["filter"] = { "format": @submitted_params["filter.format".to_sym] }
     @submitted_params.delete("filter.format".to_sym)
 
     @original_schema = current_format.finder_schema.schema
@@ -41,7 +41,7 @@ class AdminController < ApplicationController
     @submitted_params = params.except(:authenticity_token, :action, :controller, :document_type_slug).to_unsafe_h
     # hashes come through as e.g. `facets: { "0": { "name": "Category"... }}`,
     # we need to convert to array e.g. `facets: [ { "name", "Category"... } ]`
-    @submitted_params["facets"] =  @submitted_params["facets"].keys.map(&:to_i).sort.map do |i|
+    @submitted_params["facets"] = @submitted_params["facets"].keys.map(&:to_i).sort.map do |i|
       @submitted_params["facets"][i.to_s]
     end
     @submitted_params["facets"].each_with_index do |hash, i|
