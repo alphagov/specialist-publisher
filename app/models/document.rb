@@ -308,6 +308,10 @@ class Document
     URI.join(Plek.website_root, finder_schema.base_path).to_s
   end
 
+  def self.draft_url
+    URI.join(Plek.external_url_for("draft-origin"), finder_schema.base_path).to_s
+  end
+
   def content_id_and_locale
     "#{content_id}:#{locale}"
   end
