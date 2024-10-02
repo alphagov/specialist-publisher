@@ -124,6 +124,7 @@ RSpec.describe Document do
   let(:finder_schema) do
     {
       base_path: "/my-document-types",
+      target_stack: "live",
       filter: {
         format: "my_format",
       },
@@ -815,6 +816,13 @@ RSpec.describe Document do
         document = MyDocumentType.new
         allow(document.finder_schema).to receive(:taxons).and_return(%w[foo])
         expect(document.taxons).to eq(%w[foo])
+      end
+    end
+
+    describe "#target_stack" do
+      it "delegates to the FinderSchema" do
+        allow(MyDocumentType.finder_schema).to receive(:target_stack).and_return("draft")
+        expect(MyDocumentType.target_stack).to eq("draft")
       end
     end
 

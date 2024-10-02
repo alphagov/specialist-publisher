@@ -110,6 +110,10 @@ class Document
     self.class.document_type
   end
 
+  def self.target_stack
+    finder_schema.target_stack
+  end
+
   def self.document_type
     to_s.underscore
   end

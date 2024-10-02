@@ -10,11 +10,12 @@ class FinderSchema
     JSON.parse(File.read(Rails.root.join("lib/documents/schemas/#{type}.json")))
   end
 
-  attr_reader :schema, :base_path, :organisations, :editing_organisations, :taxons, :format, :content_id, :document_title
+  attr_reader :schema, :base_path, :target_stack, :organisations, :editing_organisations, :taxons, :format, :content_id, :document_title
 
   def initialize(schema)
     @schema = schema
     @base_path = schema.fetch("base_path")
+    @target_stack = schema.fetch("target_stack")
     @organisations = schema.fetch("organisations", [])
     @editing_organisations = schema.fetch("editing_organisations", [])
     @taxons = schema.fetch("taxons", [])
