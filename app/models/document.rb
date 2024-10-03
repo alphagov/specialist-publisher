@@ -110,6 +110,10 @@ class Document
     self.class.document_type
   end
 
+  def self.target_stack
+    finder_schema.target_stack
+  end
+
   def self.document_type
     to_s.underscore
   end
@@ -302,6 +306,10 @@ class Document
 
   def self.live_url
     URI.join(Plek.website_root, finder_schema.base_path).to_s
+  end
+
+  def self.draft_url
+    URI.join(Plek.external_url_for("draft-origin"), finder_schema.base_path).to_s
   end
 
   def content_id_and_locale

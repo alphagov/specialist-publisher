@@ -9,7 +9,11 @@
 <div class="row">
   <div class="col-md-12 text-right">
     <p>
-      <%= link_to "View on website (opens in new tab)", current_format.live_url, target: "_blank" %>
+      <% if current_format.target_stack == "draft" %>
+        <%= link_to "Preview draft (opens in new tab)", current_format.draft_url, target: "_blank" %>
+      <% elsif current_format.target_stack == "live" %>
+        <%= link_to "View on website (opens in new tab)", current_format.live_url, target: "_blank" %>
+      <% end %>
     </p>
   </div>
 </div>

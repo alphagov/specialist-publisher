@@ -4,6 +4,7 @@ RSpec.describe FinderSchema do
   let(:mandatory_properties) do
     {
       "base_path" => "stubbed",
+      "target_stack" => "live",
       "content_id" => "stubbed",
       "document_title" => "stubbed",
       "filter" => {
@@ -36,6 +37,12 @@ RSpec.describe FinderSchema do
     it "returns the base path" do
       properties = mandatory_properties.merge({ "base_path" => "/research-for-development-outputs" })
       expect(FinderSchema.new(properties).base_path).to eq("/research-for-development-outputs")
+    end
+  end
+
+  describe "#target_stack" do
+    it "returns the stack the finder has been deployed to" do
+      expect(FinderSchema.new(mandatory_properties).target_stack).to eq("live")
     end
   end
 

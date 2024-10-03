@@ -31,6 +31,12 @@ RSpec.describe Document do
     expect(MyDocumentType.live_url).to eq("http://www.dev.gov.uk/foo")
   end
 
+  it "has a link to the draft URL of the finder" do
+    schema = double("some schema", base_path: "/foo")
+    allow(MyDocumentType).to receive(:finder_schema).and_return(schema)
+    expect(MyDocumentType.draft_url).to eq("http://draft-origin.dev.gov.uk/foo")
+  end
+
   describe "parsing date params" do
     it "sets a date string from rails date select style params" do
       doc = MyDocumentType.new("field1(1i)": "2016", "field1(2i)": "09", "field1(3i)": "07")
@@ -124,6 +130,7 @@ RSpec.describe Document do
   let(:finder_schema) do
     {
       base_path: "/my-document-types",
+      target_stack: "live",
       filter: {
         format: "my_format",
       },
@@ -815,6 +822,13 @@ RSpec.describe Document do
         document = MyDocumentType.new
         allow(document.finder_schema).to receive(:taxons).and_return(%w[foo])
         expect(document.taxons).to eq(%w[foo])
+      end
+    end
+
+    describe "#target_stack" do
+      it "delegates to the FinderSchema" do
+        allow(MyDocumentType.finder_schema).to receive(:target_stack).and_return("draft")
+        expect(MyDocumentType.target_stack).to eq("draft")
       end
     end
 
