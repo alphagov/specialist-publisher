@@ -18,7 +18,13 @@
   ],
   "document_noun": "result",
   "document_title": "Veterans Support Organisation",
-  "default_order": "title",
+  "sort": [
+    {
+      "key": "title",
+      "name": "Alphabetical",
+      "default": true
+    }
+  ],
   "facets": [
     {
       "key": "veterans_support_organisation_health_and_social_care",
