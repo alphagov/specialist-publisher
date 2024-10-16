@@ -1,0 +1,29 @@
+<% content_for :back_link do %>
+  <%= render "govuk_publishing_components/components/back_link", {
+    href: root_path,
+  } %>
+<% end %>
+<% content_for :page_title, "Design system" %>
+<% content_for :title, "Design system" %>
+<% content_for :context, "Example page" %>
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+    <%= render "govuk_publishing_components/components/character_count", {
+      textarea: {
+        label: {
+          text: "Field checking ES6 module javascript"
+        },
+        name: "example",
+        hint: "This field uses govuk-frontend v5 javascript, included in “es6-component.js”."
+      },
+      maxlength: 10,
+    } %>
+
+    <%= render "govuk_publishing_components/components/copy_to_clipboard", {
+      label: "Field checking regular javascript",
+      copyable_content: "http://www.example.org",
+      button_text: "Copy link",
+    } %>
+  </div>
+</div>
