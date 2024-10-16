@@ -14,10 +14,11 @@ applications.
 ## 1. Add a schema to Publishing API
 See [example PR here](https://github.com/alphagov/publishing-api/pull/2589/files)
 
-1. Add any new field definitions to [this file](https://github.com/alphagov/publishing-api/blob/main/content_schemas/formats/shared/definitions/_specialist_document.jsonnet).
+1. Add the format to [allowed document types list](https://github.com/alphagov/publishing-api/blob/main/content_schemas/allowed_document_types.yml).
+2. Add any new field definitions to [this file](https://github.com/alphagov/publishing-api/blob/main/content_schemas/formats/shared/definitions/_specialist_document.jsonnet).
 
     **Note**: Do not specify the field values as an enum, as we're moving towards a more relaxed schema definition.
-2. Run `bundle exec rake build_schemas` to regenerate schemas.
+3. Run `bundle exec rake build_schemas` to regenerate schemas.
 
 When the PR is reviewed and its tests passing, it can be merged and deployed at this point.
 
@@ -159,6 +160,7 @@ The following steps are required to remove a finder:
    rake unpublish:redirect_finder["uk_market_conformity_assessment_bodies","https://redirection_link.gov.uk"]
    ```
 2. Remove usages from `publishing-api`:
+   - Remove the format from [allowed document types list](https://github.com/alphagov/publishing-api/blob/main/content_schemas/allowed_document_types.yml).
    - Remove the field definitions from [this file](https://github.com/alphagov/publishing-api/blob/main/content_schemas/formats/shared/definitions/_specialist_document.jsonnet).
    - If present, remove the example from [this directory](https://github.com/alphagov/publishing-api/tree/main/content_schemas/examples/specialist_document/frontend).
    - Run `bundle exec rake build_schemas` to regenerate schemas.
