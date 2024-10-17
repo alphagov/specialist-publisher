@@ -11,6 +11,11 @@ class DocumentPolicy < ApplicationPolicy
   # FIXME: fix this, attachments are using the wrong policy
   alias_method :destroy?, :index?
 
+  def can_request_edits_to_finder?
+    # TODO: figure out who should be allowed to do what RE administrating finders
+    publish?
+  end
+  alias_method :summary?, :can_request_edits_to_finder?
   def publish?
     document_type_editor? || gds_editor? || departmental_editor?
   end
