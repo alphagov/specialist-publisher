@@ -15,6 +15,7 @@ Rails.application.routes.draw do
 
   resources :document_list_export_request, path: "/export/:document_type_slug", param: :export_id, only: [:show]
 
+  get "/admin/:document_type_slug", to: "admin#summary"
   resources :documents, path: "/:document_type_slug", param: :content_id_and_locale, except: :destroy do
     collection do
       resource :export, only: %i[show create], as: :export_documents
