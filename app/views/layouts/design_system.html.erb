@@ -1,0 +1,76 @@
+<% environment = GovukPublishingComponents::AppHelpers::Environment.current_acceptance_environment %>
+
+<% content_for :head do %>
+  <%= javascript_include_tag "es6-components", type: "module" %>
+<% end %>
+
+<%= render "govuk_publishing_components/components/layout_for_admin", {
+  product_title: "Specialist Publisher",
+  environment: environment,
+  browser_title: yield(:page_title)
+} do %>
+
+  <%= render "govuk_publishing_components/components/skip_link" %>
+
+  <%= render "govuk_publishing_components/components/layout_header", {
+    product_name: "Specialist Publisher",
+    environment: environment,
+    navigation_items: [
+      {
+        text: "Dashboard",
+        href: root_path,
+        active: request.path.end_with?(root_path),
+      },
+      {
+        text: "Switch app",
+        href: Plek.external_url_for("signon"),
+      },
+      *(
+        if user_signed_in?
+          [
+            {
+              text: "Logout",
+              href: "/auth/gds/sign_out",
+            }]
+        end),
+    ],
+  } %>
+
+  <div class="govuk-width-container">
+
+    <%= yield(:back_link) %>
+
+    <main class="govuk-main-wrapper<%= " govuk-main-wrapper--l" if yield(:back_link).blank? %>" id="main-content" role="main">
+      <% if yield(:title).present? %>
+        <div class="govuk-grid-row">
+          <div class="govuk-grid-column-full">
+            <%= render "govuk_publishing_components/components/title", {
+              context: yield(:context),
+              title: yield(:title),
+              margin_top: 0,
+            } %>
+          </div>
+        </div>
+      <% end %>
+      <%= yield %>
+    </main>
+  </div>
+
+  <%= render "govuk_publishing_components/components/layout_footer", {
+    navigation: [
+      {
+        title: "Support and feedback",
+        items: [
+          {
+            href: Plek.external_url_for("support"),
+            text: "Raise a support request",
+          },
+          {
+            href: "https://status.publishing.service.gov.uk/",
+            text: "Check if publishing apps are working or if there’s any maintenance planned",
+          },
+        ],
+      },
+    ],
+  } %>
+<% end %>

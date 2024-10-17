@@ -2,7 +2,8 @@
   "srcDir": "public/assets/specialist-publisher",
   "srcFiles": [
     "govuk-admin-template-*.js",
-    "application-*.js"
+    "application-*.js",
+    "legacy-application-*.js"
   ],
   "specDir": "spec/javascripts",
   "specFiles": [
