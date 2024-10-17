@@ -2,7 +2,6 @@ require "healthcheck/s3"
 
 Rails.application.routes.draw do
   mount GovukPublishingComponents::Engine, at: "/component-guide" if Rails.env.development?
-  get "/design-system", to: "temp#index"
 
   get "/healthcheck/live", to: proc { [200, {}, %w[OK]] }
   get "/healthcheck/ready", to: GovukHealthcheck.rack_response(
@@ -16,6 +15,7 @@ Rails.application.routes.draw do
 
   resources :document_list_export_request, path: "/export/:document_type_slug", param: :export_id, only: [:show]
 
+  get "/admin/:document_type_slug", to: "admin#summary"
   resources :documents, path: "/:document_type_slug", param: :content_id_and_locale, except: :destroy do
     collection do
       resource :export, only: %i[show create], as: :export_documents
