@@ -5,6 +5,8 @@ class AdminController < ApplicationController
 
   def summary; end
 
+  def edit_metadata; end
+
 private
 
   def check_authorisation
