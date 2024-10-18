@@ -5,6 +5,7 @@ RSpec.feature "Access control", type: :feature do
     stub_publishing_api_has_content([], hash_including(document_type: CmaCase.document_type))
     stub_publishing_api_has_content([], hash_including(document_type: AaibReport.document_type))
     stub_publishing_api_has_content([], hash_including(document_type: StatutoryInstrument.document_type))
+    stub_publishing_api_has_content([], hash_including(document_type: Organisation.document_type))
   end
 
   context "as a CMA Editor" do
@@ -19,8 +20,22 @@ RSpec.feature "Access control", type: :feature do
       expect(page).to have_content("CMA Cases")
     end
 
+    scenario "visiting admin/cma-cases" do
+      visit "admin/cma-cases"
+
+      expect(page.status_code).to eq(200)
+      expect(page).to have_content("CMA Case finder")
+    end
+
     scenario "visiting /aaib-reports" do
       visit "/aaib-reports"
+
+      expect(page.current_path).to eq("/cma-cases")
+      expect(page).to have_content("You aren't permitted to access AAIB Reports")
+    end
+
+    scenario "visiting admin/aaib-reports" do
+      visit "admin/aaib-reports"
 
       expect(page.current_path).to eq("/cma-cases")
       expect(page).to have_content("You aren't permitted to access AAIB Reports")
@@ -46,8 +61,22 @@ RSpec.feature "Access control", type: :feature do
       expect(page).to have_content("AAIB Reports")
     end
 
+    scenario "visiting admin/aaib-reports" do
+      visit "admin/aaib-reports"
+
+      expect(page.status_code).to eq(200)
+      expect(page).to have_content("AAIB Report finder")
+    end
+
     scenario "visiting /cma-cases" do
       visit "/cma-cases"
+
+      expect(page.current_path).to eq("/aaib-reports")
+      expect(page).to have_content("You aren't permitted to access CMA Cases")
+    end
+
+    scenario "visiting admin/cma-cases" do
+      visit "admin/cma-cases"
 
       expect(page.current_path).to eq("/aaib-reports")
       expect(page).to have_content("You aren't permitted to access CMA Cases")

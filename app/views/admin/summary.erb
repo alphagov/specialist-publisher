@@ -1,0 +1,110 @@
+<% content_for :breadcrumbs do %>
+  <%= render "govuk_publishing_components/components/breadcrumbs", {
+  collapse_on_mobile: true,
+    breadcrumbs: [
+      {
+        title: "All finders",
+        url: root_path
+      },
+      {
+        title: "#{current_format.title} finder",
+        url: "/admin/#{current_format.admin_slug}"
+      }
+    ]
+  } %>
+<% end %>
+<% content_for :page_title, "Edit #{current_format.title} finder" %>
+<% content_for :title, "#{current_format.title} finder" %>
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-full">
+
+    <%= render "govuk_publishing_components/components/inset_text", {
+    } do %>
+      <%= link_to("View on website (opens in new tab)", current_format.live_url, class: "govuk-link", target: "_blank", rel: "noopener") %>
+    <% end %>
+
+    <%= render "govuk_publishing_components/components/secondary_navigation", {
+      aria_label: "Finder navigation",
+      items: [
+        {
+          label: "Finder documents",
+          href: documents_path(params[:document_type_slug]),
+        },
+        {
+          label: "Finder setup",
+          href: "/admin/#{current_format.admin_slug}",
+          current: true,
+        },
+      ]
+    } %>
+
+  </div>
+</div>
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+    <p class="govuk-body">
+      You can request a change to an existing Specialist Finder if you’re an editor in your organisation responsible for this content.
+    </p>
+    <p class="govuk-body govuk-!-margin-bottom-2">
+      Requests are scheduled in 2 week cycles, which means that requests for standard changes should be done within a month and often sooner. Standard changes include:
+    </p>
+    <ul class="govuk-list govuk-list--bullet">
+      <li>Changes to the: title, description, summary, related links</li>
+      <li>Changes and additions to the facets (e.g “Region”) and options (e.g “North East”)</li>
+    </ul>
+    <p class="govuk-body govuk-!-margin-bottom-7">
+      If you expect multiple changes over a period of time, it will be much more efficient to group these in one request.
+    </p>
+
+    <%= render "govuk_publishing_components/components/summary_card", {
+      title: "Finder details",
+      rows: [
+        {
+          key: "Title of the finder",
+          value: current_format.finder_schema.schema["name"]
+        },
+        {
+          key: "Slug or URL",
+          value: current_format.finder_schema.schema["base_path"]
+        },
+        {
+          key: "Organisations the finder should be attached to",
+          value: current_format.finder_schema.schema["organisations"].map { |content_id| organisation_name(content_id)  }.compact.join(",")
+        },
+        {
+          key: "Short description (For search engines)",
+          value: current_format.finder_schema.schema["description"]
+        },
+        {
+          key: "Summary of the finder (Longer description shown below title)",
+          value: sanitize("<div class='govspeak'>#{current_format.finder_schema.schema["summary"]}</div>")
+        },
+        {
+          key: "Any related links on GOV.UK?",
+          value: current_format.finder_schema.schema["related"] ? "Yes" : "No"
+        },
+        {
+          key: "Should summary of each content show under the title in the finder list page?",
+          value: current_format.finder_schema.schema["show_summaries"] ? "Yes" : "No"
+        },
+        {
+          key: "The document noun (How the documents on the finder are referred to)",
+          value: current_format.finder_schema.schema["document_noun"].humanize
+        },
+        {
+          key: "Would you like to set up email alerts for the finder?",
+          value: current_format.finder_schema.schema["signup_content_id"] ? "Yes" : "No"
+        }
+      ],
+      summary_card_actions: [
+        {
+          label: "Request changes",
+          href: "/admin/metadata/#{current_format.admin_slug}"
+        },
+      ],
+      margin_top: 6,
+    } %>
+  </div>
+</div>
