@@ -17,6 +17,7 @@ Rails.application.routes.draw do
 
   get "/admin/:document_type_slug", to: "admin#summary"
   get "/admin/metadata/:document_type_slug", to: "admin#edit_metadata"
+  post "/admin/metadata/:document_type_slug", to: "admin#confirm_metadata"
 
   resources :documents, path: "/:document_type_slug", param: :content_id_and_locale, except: :destroy do
     collection do
