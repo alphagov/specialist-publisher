@@ -1,0 +1,47 @@
+<%
+  summary_card_actions ||= []
+%>
+
+<%= render "govuk_publishing_components/components/summary_card", {
+  title: "Finder details",
+  rows: [
+    {
+      key: "Title of the finder",
+      value: schema["name"]
+    },
+    {
+      key: "Slug or URL",
+      value: schema["base_path"]
+    },
+    {
+      key: "Organisations the finder should be attached to",
+      value: schema["organisations"].map { |content_id| organisation_name(content_id)  }.compact.join(",")
+    },
+    {
+      key: "Short description (For search engines)",
+      value: schema["description"]
+    },
+    {
+      key: "Summary of the finder (Longer description shown below title)",
+      value: sanitize("<div class='govspeak'>#{schema["summary"]}</div>")
+    },
+    {
+      key: "Any related links on GOV.UK?",
+      value: schema["related"] ? "Yes" : "No"
+    },
+    {
+      key: "Should summary of each content show under the title in the finder list page?",
+      value: schema["show_summaries"] ? "Yes" : "No"
+    },
+    {
+      key: "The document noun (How the documents on the finder are referred to)",
+      value: schema["document_noun"].humanize
+    },
+    {
+      key: "Would you like to set up email alerts for the finder?",
+      value: schema["signup_content_id"] ? "Yes" : "No"
+    }
+  ],
+  summary_card_actions:,
+  margin_top: 6,
+} %>

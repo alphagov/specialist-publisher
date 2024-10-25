@@ -58,53 +58,14 @@
       If you expect multiple changes over a period of time, it will be much more efficient to group these in one request.
     </p>
 
-    <%= render "govuk_publishing_components/components/summary_card", {
-      title: "Finder details",
-      rows: [
-        {
-          key: "Title of the finder",
-          value: current_format.finder_schema.schema["name"]
-        },
-        {
-          key: "Slug or URL",
-          value: current_format.finder_schema.schema["base_path"]
-        },
-        {
-          key: "Organisations the finder should be attached to",
-          value: current_format.finder_schema.schema["organisations"].map { |content_id| organisation_name(content_id)  }.compact.join(",")
-        },
-        {
-          key: "Short description (For search engines)",
-          value: current_format.finder_schema.schema["description"]
-        },
-        {
-          key: "Summary of the finder (Longer description shown below title)",
-          value: sanitize("<div class='govspeak'>#{current_format.finder_schema.schema["summary"]}</div>")
-        },
-        {
-          key: "Any related links on GOV.UK?",
-          value: current_format.finder_schema.schema["related"] ? "Yes" : "No"
-        },
-        {
-          key: "Should summary of each content show under the title in the finder list page?",
-          value: current_format.finder_schema.schema["show_summaries"] ? "Yes" : "No"
-        },
-        {
-          key: "The document noun (How the documents on the finder are referred to)",
-          value: current_format.finder_schema.schema["document_noun"].humanize
-        },
-        {
-          key: "Would you like to set up email alerts for the finder?",
-          value: current_format.finder_schema.schema["signup_content_id"] ? "Yes" : "No"
-        }
-      ],
+    <%= render "metadata_summary_card", {
+      schema: current_format.finder_schema.schema,
       summary_card_actions: [
         {
           label: "Request changes",
           href: "/admin/metadata/#{current_format.admin_slug}"
         },
       ],
-      margin_top: 6,
     } %>
   </div>
 </div>
