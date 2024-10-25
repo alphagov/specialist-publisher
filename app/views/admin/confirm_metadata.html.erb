@@ -1,0 +1,49 @@
+<% content_for :breadcrumbs do %>
+  <%= render "govuk_publishing_components/components/breadcrumbs", {
+  collapse_on_mobile: true,
+    breadcrumbs: [
+      {
+        title: "All finders",
+        url: root_path
+      },
+      {
+        title: "#{current_format.title} finder",
+        url: "/admin/#{current_format.admin_slug}"
+      },
+      {
+        title: "Request change",
+        url: "/admin/metadata/#{current_format.admin_slug}"
+      },
+      {
+        title: "Check changes",
+        url: request.original_url
+      }
+    ]
+  } %>
+<% end %>
+<% content_for :page_title, "Edit #{current_format.title} finder" %>
+<% content_for :title, "Check your changes before submitting" %>
+<% content_for :context, "#{current_format.title} finder" %>
+
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds govuk-body govuk-!-margin-top-8">
+    <%= render "metadata_summary_card", {
+      schema: @proposed_schema,
+      previous_schema: @current_format.finder_schema.schema,
+    } %>
+
+    <p class="govuk-body govuk-body govuk-!-margin-top-7">
+      By submitting you are confirming that these changes are required to the specialist finder.
+    </p>
+
+    <div class="govuk-button-group govuk-!-margin-top-7">
+      <%= render "govuk_publishing_components/components/button", {
+        text: "Submit changes",
+        href: "/admin/#{current_format.admin_slug}"
+      } %>
+
+      <%= link_to("Cancel", "/admin/#{current_format.admin_slug}", class: "govuk-link govuk-link--no-visited-state") %>
+    </div>
+  </div>
+</div>
