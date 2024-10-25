@@ -11,4 +11,22 @@ RSpec.describe AdminController, type: :controller do
       expect(response.status).to eq(200)
     end
   end
+
+  describe "GET edit metadata" do
+    it "responds successfully" do
+      log_in_as_gds_editor
+      stub_publishing_api_has_content([], hash_including(document_type: Organisation.document_type))
+      get :edit_metadata, params: { document_type_slug: "asylum-support-decisions" }
+      expect(response.status).to eq(200)
+    end
+  end
+
+  describe "POST edit metadata" do
+    it "responds successfully" do
+      log_in_as_gds_editor
+      stub_publishing_api_has_content([], hash_including(document_type: Organisation.document_type))
+      post :edit_metadata, params: { document_type_slug: "asylum-support-decisions" }
+      expect(response.status).to eq(200)
+    end
+  end
 end
