@@ -33,14 +33,6 @@
       previous_schema: @current_format.finder_schema.schema,
     } %>
 
-    <%= render "govuk_publishing_components/components/details", {
-      title: "Proposed JSON",
-    } do %>
-      <% capture do %>
-        <pre><%= JSON.pretty_generate(@proposed_schema) %></pre>
-      <% end %>
-    <% end %>
-
     <p class="govuk-body govuk-body govuk-!-margin-top-7">
       By submitting you are confirming that these changes are required to the specialist finder.
     </p>
