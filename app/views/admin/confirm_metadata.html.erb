@@ -38,10 +38,12 @@
     </p>
 
     <div class="govuk-button-group govuk-!-margin-top-7">
-      <%= render "govuk_publishing_components/components/button", {
-        text: "Submit changes",
-        href: "/admin/#{current_format.admin_slug}"
-      } %>
+      <%= form_tag "/admin/zendesk/#{current_format.admin_slug}", method: 'post' do %>
+        <%= hidden_field_tag :proposed_schema, JSON.pretty_generate(@proposed_schema) %>
+        <%= render "govuk_publishing_components/components/button", {
+          text: "Submit changes"
+        } %>
+      <% end %>
 
       <%= link_to("Cancel", "/admin/#{current_format.admin_slug}", class: "govuk-link govuk-link--no-visited-state") %>
     </div>

@@ -1,6 +1,9 @@
 require "spec_helper"
+require "gds_api/test_helpers/support_api"
 
 RSpec.feature "Editing the CMA case finder", type: :feature do
+  include GdsApi::TestHelpers::SupportApi
+
   let(:organisations) do
     [
       { "content_id" => "957eb4ec-089b-4f71-ba2a-dc69ac8919ea", "title" => "Competition and Markets Authority" },
@@ -11,6 +14,7 @@ RSpec.feature "Editing the CMA case finder", type: :feature do
     log_in_as_editor(:cma_editor)
     stub_publishing_api_has_content([], hash_including(document_type: CmaCase.document_type))
     stub_publishing_api_has_content(organisations, hash_including(document_type: Organisation.document_type))
+    stub_any_support_api_call
   end
 
   scenario "changing all fields" do
@@ -39,6 +43,10 @@ RSpec.feature "Editing the CMA case finder", type: :feature do
     expect(page).to have_selector("dt", text: "Changed link 2")
     expect(page).to have_selector("dt", text: "Changed link 3")
     expect(page).to have_selector("dt", text: "Changed document noun")
+
+    click_button "Submit changes"
+
+    expect(page).to have_selector(".gem-c-success-alert__message", text: "Your changes have been submitted and Zendesk ticket created.")
   end
 
   scenario "fields are not shown on the confirmation page if not changed" do
