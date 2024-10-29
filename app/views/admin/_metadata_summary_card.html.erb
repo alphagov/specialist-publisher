@@ -1,0 +1,54 @@
+<%
+  summary_card_actions ||= []
+%>
+
+<% related_links_value = capture do %>
+  <% if schema["related"] %>
+    Yes
+    <% schema["related"].each_with_index do |content_id, index| %>
+      <p>Link <%= index + 1 %>: <%= content_id %></p>
+    <% end %>
+  <% else %>
+    No
+  <% end %>
+<% end %>
+
+<%= render "govuk_publishing_components/components/summary_card", {
+  title: "Finder details",
+  rows: [
+    ({
+      key: "Title of the finder",
+      value: schema["name"]
+    } if !(defined? previous_schema) || schema["name"] != previous_schema["name"]),
+    ({
+      key: "Slug or URL",
+      value: schema["base_path"]
+    } if !(defined? previous_schema) || schema["base_path"] != previous_schema["base_path"]),
+    ({
+      key: "Organisations the finder should be attached to",
+      value: schema["organisations"].map { |content_id| organisation_name(content_id)  }.compact.join(",")
+    } if !(defined? previous_schema) || schema["organisations"] != previous_schema["organisations"]),
+    ({
+      key: "Short description (For search engines)",
+      value: schema["description"]
+    } if !(defined? previous_schema) || schema["description"] != previous_schema["description"]),
+    ({
+      key: "Summary of the finder (Longer description shown below title)",
+      value: sanitize("<div class='govspeak'>#{schema["summary"]}</div>")
+    } if !(defined? previous_schema) || schema["summary"] != previous_schema["summary"]),
+    ({
+      key: "Any related links on GOV.UK?",
+      value: related_links_value,
+    } if !(defined? previous_schema) || schema["related"] != previous_schema["related"]),
+    ({
+      key: "Should summary of each content show under the title in the finder list page?",
+      value: schema["show_summaries"] ? "Yes" : "No"
+    } if !(defined? previous_schema) || schema["show_summaries"] != previous_schema["show_summaries"]),
+    ({
+      key: "The document noun (How the documents on the finder are referred to)",
+      value: schema["document_noun"].humanize
+    } if !(defined? previous_schema) || schema["document_noun"] != previous_schema["document_noun"]),
+  ].compact,
+  summary_card_actions:,
+  margin_top: 6,
+} %>

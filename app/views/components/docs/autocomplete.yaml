@@ -1,0 +1,135 @@
+name: Autocomplete
+description: An autocomplete component, built to be accessible
+body: |
+  This component is build using [Accessible Autocomplete Multiselect](https://github.com/alphagov/accessible-autocomplete-multiselect).
+
+  Typically it is used to enhance a select element with autocomplete options.
+part_of_admin_layout: true
+accessibility_criteria: |
+  [Accessibility acceptance criteria](https://github.com/alphagov/accessible-autocomplete-multiselect/blob/master/accessibility-criteria.md)
+examples:
+  default:
+    data:
+      id: autocomplete
+      name: autocomplete
+      label:
+        text: Select your country
+      select:
+        options:
+          -
+            -
+          -
+            - France
+            - fr
+          -
+            - Germany
+            - de
+          -
+            - United Kingdom
+            - uk
+
+  with_selected_value:
+    data:
+      id: autocomplete-selected
+      name: autocomplete-selected
+      label:
+        text: Select your country
+        bold: true
+      hint: Only a few countries are available
+      select:
+        options:
+          -
+            - France
+            - fr
+          -
+            - Germany
+            - de
+          -
+            - United Kingdom
+            - uk
+        selected: de
+
+  with_error:
+    data:
+      name: autocomplete-with-error
+      label:
+        text: Autocomplete with error
+      select:
+        options:
+          -
+            - France
+            - fr
+          -
+            - Germany
+            - de
+          -
+            - United Kingdom
+            - uk
+      error_items:
+        - text: There is a problem with this input
+
+  select_multiple:
+    data:
+      id: autocomplete-multiselect
+      name: autocomplete-multiselect
+      label:
+        text: Select your country
+      select:
+        multiple: true
+        options:
+          -
+            - France
+            - fr
+          -
+            - Germany
+            - de
+          -
+            - United Kingdom
+            - uk
+        selected:
+            - fr
+            - de
+
+  with_data_attributes:
+    data:
+      id: autocomplete
+      name: autocomplete
+      data_attributes:
+        module: not-a-module
+        loose: moose
+      label:
+        text: Select your country
+      select:
+        options:
+          -
+            -
+          -
+            - France
+            - fr
+          -
+            - Germany
+            - de
+          -
+            - United Kingdom
+            - uk
+
+  autocomplete_with_configuration_options:
+    data:
+      id: autocomplete-configuration-options
+      name: autocomplete-configuration-options
+      label:
+        text: Status
+      select:
+        multiple: true
+        options:
+          -
+            - France
+            - fr
+          -
+            - Germany
+            - de
+          -
+            - United Kingdom
+            - uk
+      autocomplete_configuration_options:
+        showAllValues: false

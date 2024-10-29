@@ -21,6 +21,5 @@ RSpec.feature "Viewing the admin summary for CMA cases", type: :feature do
     expect(page.find(".govuk-summary-list__row", text: "Should summary of each content show under the title in the finder list page?")).to have_selector("dt", text: "No")
     expect(page.find(".govuk-summary-list__row", text: "Organisations the finder should be attached to")).to have_selector("dt", text: "Competition and Markets Authority")
     expect(page.find(".govuk-summary-list__row", text: "The document noun (How the documents on the finder are referred to)")).to have_selector("dt", text: "Case")
-    expect(page.find(".govuk-summary-list__row", text: "Would you like to set up email alerts for the finder?")).to have_selector("dt", text: "Yes")
   end
 end
