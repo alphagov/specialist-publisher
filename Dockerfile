@@ -10,6 +10,8 @@ ENV GOVUK_NOTIFY_API_KEY=unused
 WORKDIR $APP_HOME
 COPY Gemfile* .ruby-version ./
 RUN bundle install
+COPY package.json yarn.lock ./
+RUN yarn install --production
 COPY . .
 RUN bootsnap precompile --gemfile .
 RUN rails assets:precompile && rm -fr log
