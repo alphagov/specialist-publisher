@@ -13,6 +13,7 @@ class AdminController < ApplicationController
       :base_path,
       :description,
       :summary,
+      :show_summaries,
       :document_noun,
       organisations: [],
       related: [],
@@ -29,7 +30,7 @@ class AdminController < ApplicationController
       @proposed_schema.delete("related")
     end
 
-    if @proposed_schema["show_summaries"] == "true"
+    if params["show_summaries"] == "true"
       @proposed_schema["show_summaries"] = true
     else
       @proposed_schema.delete("show_summaries")
