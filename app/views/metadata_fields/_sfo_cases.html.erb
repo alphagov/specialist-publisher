@@ -1,0 +1,3 @@
+<%= render layout: "shared/form_group", locals: { f: f, field: :sfo_case_state, label: "Case state" } do %>
+    <%= f.select :sfo_case_state, facet_options(f, :sfo_case_state), {}, { class: 'form-control' } %>
+<% end %>
