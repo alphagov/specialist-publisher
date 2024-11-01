@@ -13,6 +13,7 @@ class AdminController < ApplicationController
       :base_path,
       :description,
       :summary,
+      :show_summaries,
       :document_noun,
       organisations: [],
       related: [],
@@ -29,13 +30,18 @@ class AdminController < ApplicationController
       @proposed_schema.delete("related")
     end
 
-    if @proposed_schema["show_summaries"] == "true"
+    if params["show_summaries"] == "true"
       @proposed_schema["show_summaries"] = true
     else
       @proposed_schema.delete("show_summaries")
     end
 
     render :confirm_metadata
+  end
+
+  def zendesk
+    GdsApi.support_api.raise_support_ticket(support_payload)
+    redirect_to "/admin/#{current_format.admin_slug}", notice: "Your changes have been submitted and Zendesk ticket created."
   end
 
 private
@@ -47,5 +53,18 @@ private
       flash[:danger] = "That format doesn't exist. If you feel you've reached this in error, please contact your main GDS contact."
       redirect_to root_path
     end
+  end
+
+  def support_payload
+    {
+      subject: "Specialist Finder Edit Request: #{current_format.title.pluralize}",
+      tags: %w[specialist_finder_edit_request],
+      priority: "normal",
+      description: "```\r\n#{params[:proposed_schema]}\r\n```",
+      requester: {
+        name: current_user.name,
+        email: current_user.email,
+      },
+    }
   end
 end

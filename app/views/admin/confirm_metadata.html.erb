@@ -33,23 +33,17 @@
       previous_schema: @current_format.finder_schema.schema,
     } %>
 
-    <%= render "govuk_publishing_components/components/details", {
-      title: "Proposed JSON",
-    } do %>
-      <% capture do %>
-        <pre><%= JSON.pretty_generate(@proposed_schema) %></pre>
-      <% end %>
-    <% end %>
-
     <p class="govuk-body govuk-body govuk-!-margin-top-7">
       By submitting you are confirming that these changes are required to the specialist finder.
     </p>
 
     <div class="govuk-button-group govuk-!-margin-top-7">
-      <%= render "govuk_publishing_components/components/button", {
-        text: "Submit changes",
-        href: "/admin/#{current_format.admin_slug}"
-      } %>
+      <%= form_tag "/admin/zendesk/#{current_format.admin_slug}", method: 'post' do %>
+        <%= hidden_field_tag :proposed_schema, JSON.pretty_generate(@proposed_schema) %>
+        <%= render "govuk_publishing_components/components/button", {
+          text: "Submit changes"
+        } %>
+      <% end %>
 
       <%= link_to("Cancel", "/admin/#{current_format.admin_slug}", class: "govuk-link govuk-link--no-visited-state") %>
     </div>
