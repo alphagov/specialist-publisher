@@ -1,0 +1,117 @@
+<%= render "govuk_publishing_components/components/input", {
+  label: {
+    text: "Filter",
+    heading_size: "s",
+  },
+  name: "facet[#{index}][name]",
+  value: facet["name"],
+  hint: "Example: Disease control zone type"
+} %>
+
+<%= render "govuk_publishing_components/components/input", {
+  label: {
+    text: "Filter short name (optional)",
+    heading_size: "s",
+  },
+  name: "facet[#{index}][short_name]",
+  value: facet["short_name"],
+  hint: "Example: Control zone type"
+} %>
+
+<%= render "govuk_publishing_components/components/select", {
+  name: "facet[#{index}][type]",
+  id: "facet[#{index}][type]",
+  label: "Type",
+  heading_size: "s",
+  options: [
+      {
+        text: "Text",
+        value: "text",
+        selected: facet["type"] == "text",
+      },
+      {
+        text: "Date",
+        value: "date",
+        selected: facet["type"] == "date",
+      }
+    ]
+} %>
+
+<%= render "govuk_publishing_components/components/textarea", {
+  label: {
+    text: "Filter options",
+    heading_size: "s",
+  },
+  hint: sanitize("Separate options with commas<br>Example: Option 1, Option 2"),
+  name: "TODO",
+  rows: 5,
+  value: "TODO",
+} %>
+
+<%= render "govuk_publishing_components/components/radio", {
+  heading: "Can users use this filter when searching for content items?",
+  heading_size: "s",
+  name: "facet[#{index}][filterable]",
+  inline: true,
+  items: [
+    {
+      value: "true",
+      text: "Yes",
+      checked: facet["filterable"]
+    },
+    {
+      value: "false",
+      text: "No",
+      checked: !facet["filterable"]
+    }
+  ]
+} %>
+
+<%= render "govuk_publishing_components/components/radio", {
+  heading: "Show as information under content item?",
+  heading_size: "s",
+  hint: "Example: Air Accidents Investigation Branch reports displays ‘Aircraft category: Commercial - fixed wing’ under relevant content items",
+  name: "facet[#{index}][display_as_result_metadata]",
+  inline: true,
+  items: [
+    {
+      value: "true",
+      text: "Yes",
+      checked: facet["display_as_result_metadata"]
+    },
+    {
+      value: "false",
+      text: "No",
+      checked: !facet["display_as_result_metadata"]
+    }
+  ]
+} %>
+
+<%= render "govuk_publishing_components/components/radio", {
+  heading: "Do publishers need to select an option for this filter when they add new content items?",
+  heading_size: "s",
+  name: "facet[#{index}][TODO]",
+  inline: true,
+  items: [
+    {
+      value: "true",
+      text: "Yes",
+      checked: facet["TODO"]
+    },
+    {
+      value: "false",
+      text: "No",
+      checked: !facet["TODO"]
+    }
+  ]
+} %>
+
+<%= render "govuk_publishing_components/components/input", {
+  label: {
+    text: "Preposition (to be displayed when filter option is selected)",
+    heading_size: "s",
+  },
+  name: "facet[#{index}][preposition]",
+  value: facet["preposition"],
+  hint: "Example: In Find funding for land or farms,  selecting an option in the filter ‘Area of interest’ displays the preposition ‘With’ before the selected option"
+} %>
