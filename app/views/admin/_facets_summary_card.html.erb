@@ -1,0 +1,19 @@
+<%
+  summary_card_actions ||= []
+
+  summary_rows = schema.facets.map do |facet|
+    {
+      key: facet["name"],
+      value: facet["allowed_values"] ?
+        facet["allowed_values"].first(3).map { |value| value["label"] }.join(", ") + (facet["allowed_values"].length > 3 ? "…" : "")
+        : facet["type"].humanize,
+    }
+  end
+%>
+<%= render "govuk_publishing_components/components/summary_card", {
+  id: "facets_summary_card",
+  title: "Filters and options",
+  rows: summary_rows,
+  summary_card_actions:,
+  margin_top: 6,
+} %>
