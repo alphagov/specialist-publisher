@@ -16,6 +16,7 @@ Rails.application.routes.draw do
   resources :document_list_export_request, path: "/export/:document_type_slug", param: :export_id, only: [:show]
 
   get "/admin/:document_type_slug", to: "admin#summary"
+  get "/admin/facets/:document_type_slug", to: "admin#edit_facets"
   get "/admin/metadata/:document_type_slug", to: "admin#edit_metadata"
   post "/admin/metadata/:document_type_slug", to: "admin#confirm_metadata"
   post "/admin/zendesk/:document_type_slug", to: "admin#zendesk"
