@@ -17,6 +17,7 @@ Rails.application.routes.draw do
 
   get "/admin/:document_type_slug", to: "admin#summary"
   get "/admin/facets/:document_type_slug", to: "admin#edit_facets"
+  post "/admin/facets/:document_type_slug", to: "admin#confirm_facets"
   get "/admin/metadata/:document_type_slug", to: "admin#edit_metadata"
   post "/admin/metadata/:document_type_slug", to: "admin#confirm_metadata"
   post "/admin/zendesk/:document_type_slug", to: "admin#zendesk"

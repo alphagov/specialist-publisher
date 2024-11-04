@@ -44,6 +44,14 @@ RSpec.describe AdminController, type: :controller do
     end
   end
 
+  describe "POST edit facets" do
+    it "responds successfully" do
+      stub_publishing_api_has_content([], hash_including(document_type: Organisation.document_type))
+      post :edit_facets, params: { document_type_slug: "asylum-support-decisions" }
+      expect(response.status).to eq(200)
+    end
+  end
+
   describe "POST zendesk" do
     it "responds successfully, calling support api" do
       stub_post = stub_support_api_valid_raise_support_ticket(hash_including({
