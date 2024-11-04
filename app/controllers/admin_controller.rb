@@ -30,11 +30,9 @@ class AdminController < ApplicationController
       @proposed_schema.delete("related")
     end
 
-    if params["show_summaries"] == "true"
-      @proposed_schema["show_summaries"] = true
-    else
-      @proposed_schema.delete("show_summaries")
-    end
+    @proposed_schema["show_summaries"] = params[:show_summaries] == "true"
+
+    @proposed_schema.reject! { |_, value| value.blank? }
 
     render :confirm_metadata
   end

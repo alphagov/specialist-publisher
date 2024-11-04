@@ -26,7 +26,7 @@
     } if !(defined? previous_schema) || schema["base_path"] != previous_schema["base_path"]),
     ({
       key: "Organisations the finder should be attached to",
-      value: schema["organisations"].map { |content_id| organisation_name(content_id)  }.compact.join(",")
+      value: (schema["organisations"] || []).map { |content_id| organisation_name(content_id)  }.compact.join(",")
     } if !(defined? previous_schema) || schema["organisations"] != previous_schema["organisations"]),
     ({
       key: "Short description (For search engines)",
@@ -46,7 +46,7 @@
     } if !(defined? previous_schema) || schema["show_summaries"] != previous_schema["show_summaries"]),
     ({
       key: "The document noun (How the documents on the finder are referred to)",
-      value: schema["document_noun"].humanize
+      value: (schema["document_noun"] || "").humanize
     } if !(defined? previous_schema) || schema["document_noun"] != previous_schema["document_noun"]),
   ].compact,
   summary_card_actions:,
