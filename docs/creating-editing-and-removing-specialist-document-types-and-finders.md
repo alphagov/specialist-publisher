@@ -76,11 +76,18 @@ If your email sign up page should have checkboxes (e.g. [cma-cases](https://www.
 
 To deploy a new finder for previewing:
    1. Ensure the finder target_stack is set to `draft`
-   1. Merge and deploy Publishing API and Specialist Publisher. 
+   1. Merge and deploy Publishing API, Specialist Publisher and Search API. 
       - Ensure you deploy Publishing API first, to avoid schema validation errors.
       - Also deploy Email Alert API if you have made changes to it.
-   1. Publish the finder to the draft stack by running the rake task `publishing_api:publish_finders` or `publishing_api:publish_finder[your_format_name_based_on_the_schema_file]` against the specialist publisher app (rake tasks [here](https://github.com/alphagov/specialist-publisher/blob/ce68fdb008cab05225e0493e19decba5365e1e20/lib/tasks/publishing_api.rake)).
+   1. Run `search:update_schema` in Search API.
+   1. Publish the finder to the draft stack by running the rake task `publishing_api:publish_finders` or `publishing_api:publish_finder[pluralised_format_name]` against the specialist publisher app (rake tasks [here](https://github.com/alphagov/specialist-publisher/blob/ce68fdb008cab05225e0493e19decba5365e1e20/lib/tasks/publishing_api.rake)).
    1. Wait for department's feedback and approval and agree on a release date
+
+NB: Depending on the finder requirements, you may choose to allow the users to publish documents in preview mode, which 
+would enable them to test the full finder filtering functionality. Changes to the schema requested after documents have been
+published, could require running a reindex, and there is a risk of loss of data. In order to prevent users from publishing,
+we could give only basic Signon permissions whilst in preview mode. Signon access to the Specialist Publisher app, only 
+gives the user writer access (they may create, edit, and update, but not publish or unpublish).
 
 ## 6. Publish a finder
 
