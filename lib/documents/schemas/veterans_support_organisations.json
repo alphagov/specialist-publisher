@@ -3,14 +3,16 @@
   "content_id": "0bf7f581-a547-4dd1-aef0-754e0924281d",
   "base_path": "/support-for-veterans",
   "format_name": "Find support for veterans and their families",
-  "name": "Find support for veterans and their families",
+  "name": "Find support for veterans and their families TEST",
   "description": "Find support organisations for veterans of the UK armed forces and their families.",
   "summary": "<p>This directory lists organisations that provide support to veterans of the UK armed forces and their families.</p><p>You can filter results by location and select as many areas of support as you need.</p><p>This should not be taken as an exhaustive list of all services on offer to veterans and their families in the UK.</p><p>The government is not liable for any services that fail to meet an individual's requirements or standards. The inclusion of these organisations or services should not be taken as endorsement by the Office for Veterans’ Affairs.</p><div class=\"example\"><h2>Talk to an adviser</h2><p>The Veterans’ Gateway helpline can provide information and referral support by telephone.</p><p>Phone: 0808 802 1212</p></div>",
   "filter": {
     "format": "veterans_support_organisation"
   },
   "show_summaries": true,
-  "organisations": ["516357f6-92f3-4292-8449-b958e1c63c5f"],
+  "organisations": [
+    "516357f6-92f3-4292-8449-b958e1c63c5f"
+  ],
   "related": [
     "df6f3081-b8f0-40a6-9df7-8b415cc4519b",
     "8d7d88c2-4ea9-4c25-aab2-1988a269177e",
@@ -29,9 +31,18 @@
       "display_as_result_metadata": false,
       "filterable": true,
       "allowed_values": [
-        {"label": "Mental Health", "value": "mental-health"},
-        {"label": "Physical Health", "value": "physical-health"},
-        {"label": "Social Care", "value": "social-care"}
+        {
+          "label": "Mental Health",
+          "value": "mental-health"
+        },
+        {
+          "label": "Physical Health",
+          "value": "physical-health"
+        },
+        {
+          "label": "Social Care",
+          "value": "social-care"
+        }
       ]
     },
     {
@@ -43,12 +54,30 @@
       "display_as_result_metadata": false,
       "filterable": true,
       "allowed_values": [
-        {"label": "Pensions", "value": "pensions"},
-        {"label": "Compensation", "value": "compensation"},
-        {"label": "Benefits", "value": "benefits"},
-        {"label": "Financial help", "value": "financial-help"},
-        {"label": "Debt advice", "value": "debt-advice"},
-        {"label": "Funeral costs", "value": "funeral-costs"}
+        {
+          "label": "Pensions",
+          "value": "pensions"
+        },
+        {
+          "label": "Compensation",
+          "value": "compensation"
+        },
+        {
+          "label": "Benefits",
+          "value": "benefits"
+        },
+        {
+          "label": "Financial help",
+          "value": "financial-help"
+        },
+        {
+          "label": "Debt advice",
+          "value": "debt-advice"
+        },
+        {
+          "label": "Funeral costs",
+          "value": "funeral-costs"
+        }
       ]
     },
     {
@@ -60,8 +89,14 @@
       "display_as_result_metadata": false,
       "filterable": true,
       "allowed_values": [
-        {"label": "General legal advice", "value": "general-legal-advice"},
-        {"label": "Support for those in the justice system", "value": "support-for-those-in-the-justice-system"}
+        {
+          "label": "General legal advice",
+          "value": "general-legal-advice"
+        },
+        {
+          "label": "Support for those in the justice system",
+          "value": "support-for-those-in-the-justice-system"
+        }
       ]
     },
     {
@@ -73,11 +108,26 @@
       "display_as_result_metadata": false,
       "filterable": true,
       "allowed_values": [
-        {"label": "Transition support", "value": "transition-support"},
-        {"label": "Career advice and support for jobseekers", "value": "career-advice-and-support-for-jobseekers"},
-        {"label": "Starting a business", "value": "starting-a-business"},
-        {"label": "Apprenticeships", "value": "apprenticeships"},
-        {"label": "Education and other training", "value": "education-and-other-training"}
+        {
+          "label": "Transition support",
+          "value": "transition-support"
+        },
+        {
+          "label": "Career advice and support for jobseekers",
+          "value": "career-advice-and-support-for-jobseekers"
+        },
+        {
+          "label": "Starting a business",
+          "value": "starting-a-business"
+        },
+        {
+          "label": "Apprenticeships",
+          "value": "apprenticeships"
+        },
+        {
+          "label": "Education and other training",
+          "value": "education-and-other-training"
+        }
       ]
     },
     {
@@ -89,11 +139,26 @@
       "display_as_result_metadata": false,
       "filterable": true,
       "allowed_values": [
-        {"label": "Homelessness, crisis accommodation", "value": "homelessness-crisis-accommodation"},
-        {"label": "Supported housing", "value": "supported-housing"},
-        {"label": "Care homes", "value": "care-homes"},
-        {"label": "Renting a home", "value": "renting-a-home"},
-        {"label": "Buying a home", "value": "buying-a-home"}
+        {
+          "label": "Homelessness, crisis accommodation",
+          "value": "homelessness-crisis-accommodation"
+        },
+        {
+          "label": "Supported housing",
+          "value": "supported-housing"
+        },
+        {
+          "label": "Care homes",
+          "value": "care-homes"
+        },
+        {
+          "label": "Renting a home",
+          "value": "renting-a-home"
+        },
+        {
+          "label": "Buying a home",
+          "value": "buying-a-home"
+        }
       ]
     },
     {
@@ -105,10 +170,22 @@
       "display_as_result_metadata": false,
       "filterable": true,
       "allowed_values": [
-        {"label": "Support for spouses and families", "value": "support-for-spouses-and-families"},
-        {"label": "Childcare and custody", "value": "childcare-and-custody"},
-        {"label": "Support with relationships", "value": "support-with-relationships"},
-        {"label": "Domestic abuse", "value": "domestic-abuse"}
+        {
+          "label": "Support for spouses and families",
+          "value": "support-for-spouses-and-families"
+        },
+        {
+          "label": "Childcare and custody",
+          "value": "childcare-and-custody"
+        },
+        {
+          "label": "Support with relationships",
+          "value": "support-with-relationships"
+        },
+        {
+          "label": "Domestic abuse",
+          "value": "domestic-abuse"
+        }
       ]
     },
     {
@@ -120,11 +197,26 @@
       "display_as_result_metadata": false,
       "filterable": true,
       "allowed_values": [
-        {"label": "Drop-in centres", "value": "drop-in-centres"},
-        {"label": "Leisure activities", "value": "leisure-activities"},
-        {"label": "Volunteering opportunities", "value": "volunteering-opportunities"},
-        {"label": "LGBT+ support", "value": "LGBT-support"},
-        {"label": "Women veterans support", "value": "women-veterans-support"}
+        {
+          "label": "Drop-in centres",
+          "value": "drop-in-centres"
+        },
+        {
+          "label": "Leisure activities",
+          "value": "leisure-activities"
+        },
+        {
+          "label": "Volunteering opportunities",
+          "value": "volunteering-opportunities"
+        },
+        {
+          "label": "LGBT+ support",
+          "value": "LGBT-support"
+        },
+        {
+          "label": "Women veterans support",
+          "value": "women-veterans-support"
+        }
       ]
     },
     {
@@ -136,13 +228,34 @@
       "display_as_result_metadata": false,
       "filterable": true,
       "allowed_values": [
-        {"label": "North East and Yorkshire", "value": "north-east-and-yorkshire"},
-        {"label": "North West", "value": "north-west"},
-        {"label": "Midlands", "value": "midlands"},
-        {"label": "East of England", "value": "east-of-england"},
-        {"label": "London", "value": "london"},
-        {"label": "South West", "value": "south-west"},
-        {"label": "South East", "value": "south-east"}
+        {
+          "label": "North East and Yorkshire",
+          "value": "north-east-and-yorkshire"
+        },
+        {
+          "label": "North West",
+          "value": "north-west"
+        },
+        {
+          "label": "Midlands",
+          "value": "midlands"
+        },
+        {
+          "label": "East of England",
+          "value": "east-of-england"
+        },
+        {
+          "label": "London",
+          "value": "london"
+        },
+        {
+          "label": "South West",
+          "value": "south-west"
+        },
+        {
+          "label": "South East",
+          "value": "south-east"
+        }
       ]
     },
     {
@@ -154,10 +267,22 @@
       "display_as_result_metadata": false,
       "filterable": true,
       "allowed_values": [
-        {"label": "North (Coleraine Area)", "value": "north-coleraine-area"},
-        {"label": "South (Portadown Area)", "value": "south-portadown-area"},
-        {"label": "East (Holywood Area)", "value": "east-holywood-area"},
-        {"label": "West (Enniskillen Area)", "value": "west-enniskillen-area"}
+        {
+          "label": "North (Coleraine Area)",
+          "value": "north-coleraine-area"
+        },
+        {
+          "label": "South (Portadown Area)",
+          "value": "south-portadown-area"
+        },
+        {
+          "label": "East (Holywood Area)",
+          "value": "east-holywood-area"
+        },
+        {
+          "label": "West (Enniskillen Area)",
+          "value": "west-enniskillen-area"
+        }
       ]
     },
     {
@@ -169,10 +294,22 @@
       "display_as_result_metadata": false,
       "filterable": true,
       "allowed_values": [
-        {"label": "The Southern Uplands", "value": "the-southern-uplands"},
-        {"label": "The Central Lowlands", "value": "the-central-lowlands"},
-        {"label": "Grampian Mountains", "value": "grampian-mountains"},
-        {"label": "Northern Highlands, Hebrides and the Northern Isles", "value": "northern-highlands-hebrides-and-the-northern-isles"}
+        {
+          "label": "The Southern Uplands",
+          "value": "the-southern-uplands"
+        },
+        {
+          "label": "The Central Lowlands",
+          "value": "the-central-lowlands"
+        },
+        {
+          "label": "Grampian Mountains",
+          "value": "grampian-mountains"
+        },
+        {
+          "label": "Northern Highlands, Hebrides and the Northern Isles",
+          "value": "northern-highlands-hebrides-and-the-northern-isles"
+        }
       ]
     },
     {
@@ -184,12 +321,28 @@
       "display_as_result_metadata": false,
       "filterable": true,
       "allowed_values": [
-        {"label": "Mid and West Wales", "value": "mid-and-west-wales"},
-        {"label": "North Wales", "value": "north-wales"},
-        {"label": "South Wales Central", "value": "south-wales-central"},
-        {"label": "South Wales East", "value": "south-wales-east"},
-        {"label": "South Wales West", "value": "south-wales-west"}
+        {
+          "label": "Mid and West Wales",
+          "value": "mid-and-west-wales"
+        },
+        {
+          "label": "North Wales",
+          "value": "north-wales"
+        },
+        {
+          "label": "South Wales Central",
+          "value": "south-wales-central"
+        },
+        {
+          "label": "South Wales East",
+          "value": "south-wales-east"
+        },
+        {
+          "label": "South Wales West",
+          "value": "south-wales-west"
+        }
       ]
     }
-  ]
+  ],
+  "signup_copy": "You'll get an email each time a result is updated or a new result is published."
 }
