@@ -88,6 +88,11 @@ FactoryBot.define do
     organisation_content_id { "de4e9dc6-cca4-43af-a594-682023b84d6c" }
   end
 
+  factory :farming_grant_editor, parent: :editor do
+    organisation_slug { "department-for-environment-food-rural-affairs" }
+    organisation_content_id { "de4e9dc6-cca4-43af-a594-682023b84d6c" }
+  end
+
   # Writer factories:
   factory :writer, aliases: [:cma_writer], parent: :editor do
     organisation_slug { "competition-and-markets-authority" }

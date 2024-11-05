@@ -49,6 +49,35 @@ RSpec.feature "Editing the CMA case finder", type: :feature do
     expect(page).to have_selector(".gem-c-success-alert__message", text: "Your changes have been submitted and Zendesk ticket created.")
   end
 
+  scenario "deleting all fields" do
+    visit "admin/cma-cases"
+    click_link "Request changes"
+
+    fill_in "name", with: ""
+    fill_in "base_path", with: ""
+    fill_in "description", with: ""
+    fill_in "summary", with: ""
+    fill_in "Link 1", with: ""
+    fill_in "Link 2", with: ""
+    fill_in "Link 3", with: ""
+    fill_in "document_noun", with: ""
+
+    click_button "Submit changes"
+
+    expect(page).to have_selector("dt", text: "")
+    expect(page).to have_selector("dt", text: "")
+    expect(page).to have_selector("dt", text: "")
+    expect(page).to have_selector("dt", text: "")
+    expect(page).to have_selector("dt", text: "")
+    expect(page).to have_selector("dt", text: "")
+    expect(page).to have_selector("dt", text: "")
+    expect(page).to have_selector("dt", text: "")
+
+    click_button "Submit changes"
+
+    expect(page).to have_selector(".gem-c-success-alert__message", text: "Your changes have been submitted and Zendesk ticket created.")
+  end
+
   scenario "fields are not shown on the confirmation page if not changed" do
     visit "admin/metadata/cma-cases"
     click_button "Submit changes"
