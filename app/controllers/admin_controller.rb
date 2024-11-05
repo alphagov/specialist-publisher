@@ -58,7 +58,10 @@ private
       subject: "Specialist Finder Edit Request: #{current_format.title.pluralize}",
       tags: %w[specialist_finder_edit_request],
       priority: "normal",
-      description: "```\r\n#{params[:proposed_schema]}\r\n```",
+      description: "Developer - raise a PR replacing this schema with the schema below: " \
+        "https://github.com/alphagov/specialist-publisher/edit/main/lib/documents/schemas/#{current_format.document_type.pluralize}.json" \
+        "\r\n---\r\n" \
+        "```\r\n#{params[:proposed_schema]}\r\n```",
       requester: {
         name: current_user.name,
         email: current_user.email,
