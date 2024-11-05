@@ -24,6 +24,11 @@ FactoryBot.define do
     organisation_content_id { "e338f02d-82a3-4c6c-8a36-df3050869d97" }
   end
 
+  factory :sfo_case_editor, parent: :user do
+    organisation_slug { "serious-fraud-office" }
+    organisation_content_id { "ebae4517-422f-44dd-9f87-13304c9815cb" }
+  end
+
   factory :statutory_instrument_editor, parent: :user do
     permissions { %w[signin statutory_instrument_editor] }
   end
@@ -633,6 +638,17 @@ FactoryBot.define do
           "tribunal_decision_decision_date" => "2018-01-17",
           "hidden_indexable_content" => "some hidden content",
         }
+      end
+    end
+  end
+
+  factory :sfo_case, parent: :document do
+    base_path { "/sfo-cases/example-document" }
+    document_type { "sfo_case" }
+
+    transient do
+      default_metadata do
+        { "sfo_case_state" => "open" }
       end
     end
   end

@@ -1,0 +1,39 @@
+{
+  "target_stack": "draft",
+  "content_id": "b8b8fb77-c5e9-41d6-b133-44ecd1958e28",
+  "base_path": "/sfo-cases",
+  "format_name": "Find an SFO case",
+  "name": "Find an SFO case",
+  "description": "Find fraud, bribery and corruption cases investigated by the SFO.",
+  "summary": "<p>This case finder includes all ongoing Serious Fraud Office (SFO) prosecutions and investigations that are in the public domain. This does not include intelligence referrals, covert investigations or proceeds of crime cases.</p><p>For updates on the SFO’s proceeds of crime recovery, see <a href=#>this page</a>.</p>",
+  "filter": {
+    "format": "sfo_case"
+  },
+  "related": [],
+  "show_summaries": true,
+  "organisations": [
+    "ebae4517-422f-44dd-9f87-13304c9815cb"
+  ],
+  "document_noun": "case",
+  "document_title": "SFO Case",
+  "facets": [
+    {
+      "key": "sfo_case_state",
+      "name": "Case state",
+      "type": "text",
+      "preposition": "with case state",
+      "display_as_result_metadata": false,
+      "filterable": true,
+      "allowed_values": [
+        {
+          "label": "Open",
+          "value": "open"
+        },
+        {
+          "label": "Closed",
+          "value": "closed"
+        }
+      ]
+    }
+  ]
+}
