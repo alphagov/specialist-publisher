@@ -24,7 +24,9 @@ class AdminController < ApplicationController
 
     @proposed_schema = @current_format.finder_schema.schema.merge(@params.to_unsafe_h)
 
-    @proposed_schema["signup_copy"] = "You'll get an email each time a #{@params[:document_noun]} is updated or a new #{@params[:document_noun]} is published."
+    if @proposed_schema["signup_copy"]
+      @proposed_schema["signup_copy"] = "You'll get an email each time a #{@params[:document_noun]} is updated or a new #{@params[:document_noun]} is published."
+    end
 
     if params[:include_related] != "true"
       @proposed_schema.delete("related")
