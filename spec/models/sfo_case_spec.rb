@@ -15,8 +15,23 @@ RSpec.describe SfoCase do
       expect(sfo_case).to be_valid
     end
 
+    it "is valid if the opened date is a valid date" do
+      sfo_case.sfo_case_opened_date = "2023-01-01"
+      expect(sfo_case).to be_valid
+    end
+
     it "is invalid if the case state is missing" do
       sfo_case.sfo_case_state = nil
+      expect(sfo_case).not_to be_valid
+    end
+
+    it "is invalid if the opened date is missing" do
+      sfo_case.sfo_case_opened_date = nil
+      expect(sfo_case).not_to be_valid
+    end
+
+    it "is invalid if the opened date is not a valid date" do
+      sfo_case.sfo_case_opened_date = "invalid_date"
       expect(sfo_case).not_to be_valid
     end
   end
