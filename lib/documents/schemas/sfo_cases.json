@@ -34,6 +34,15 @@
           "value": "closed"
         }
       ]
+    },
+    {
+      "key": "sfo_case_opened_date",
+      "name": "Opened date",
+      "short_name": "Opened date",
+      "type": "date",
+      "preposition": "opened",
+      "display_as_result_metadata": false,
+      "filterable": true
     }
   ]
 }
