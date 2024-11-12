@@ -12,8 +12,12 @@
   "signup_content_id": "f1a4e5b2-c8b3-40f2-acde-75061a45184d",
   "signup_copy": "You'll get an email each time a fund is updated or a new fund is published.",
   "show_summaries": true,
-  "organisations": ["f9fcf3fe-2751-4dca-97ca-becaeceb4b26"],
-  "taxons": ["9fb30a53-70fb-4f1c-878b-0064b202d1ba"],
+  "organisations": [
+    "f9fcf3fe-2751-4dca-97ca-becaeceb4b26"
+  ],
+  "taxons": [
+    "9fb30a53-70fb-4f1c-878b-0064b202d1ba"
+  ],
   "subscription_list_title_prefix": "International development funds",
   "document_noun": "fund",
   "document_title": "International Development Fund",
@@ -26,8 +30,14 @@
       "display_as_result_metadata": true,
       "filterable": true,
       "allowed_values": [
-        {"label": "Open", "value": "open"},
-        {"label": "Closed", "value": "closed"}
+        {
+          "label": "Open",
+          "value": "open"
+        },
+        {
+          "label": "Closed",
+          "value": "closed"
+        }
       ]
     },
     {
@@ -562,7 +572,7 @@
           "value": "norway",
           "label": "Norway"
         },
-	{
+        {
           "value": "the-occupied-palestinian-territories",
           "label": "Occupied Palestinian Territories, The"
         },
@@ -960,11 +970,26 @@
       "display_as_result_metadata": false,
       "filterable": true,
       "allowed_values": [
-        {"label": "Up to £10,000", "value": "up-to-10000"},
-        {"label": "£10,001 to £100,000", "value": "10001-to-100000"},
-        {"label": "£100,001 to £500,000", "value": "100001-500000"},
-        {"label": "£500,001 to £1,000,000", "value": "500001-to-1000000"},
-        {"label": "More than £1,000,000", "value": "more-than-1000000"}
+        {
+          "label": "Up to £10,000",
+          "value": "up-to-10000"
+        },
+        {
+          "label": "£10,001 to £100,000",
+          "value": "10001-to-100000"
+        },
+        {
+          "label": "£100,001 to £500,000",
+          "value": "100001-500000"
+        },
+        {
+          "label": "£500,001 to £1,000,000",
+          "value": "500001-to-1000000"
+        },
+        {
+          "label": "More than £1,000,000",
+          "value": "more-than-1000000"
+        }
       ]
     }
   ]

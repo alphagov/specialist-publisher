@@ -24,7 +24,6 @@
   "signup_copy": "You'll get an email each time a case is updated or a new case is published.",
   "subscription_list_title_prefix": "Notifiable animal disease cases and control zones",
   "summary": "<p>Find notifiable exotic animal disease cases and control zone declarations for England.</p><p>Read our <a href=\"https://www.gov.uk/government/collections/notifiable-diseases-in-animals\">guidance on notifiable diseases in animals</a>.</p>",
-
   "document_noun": "case",
   "document_title": "Animal disease case",
   "facets": [

@@ -12,9 +12,15 @@
   "signup_title": "Alerts, recalls and safety information: drugs and medical devices",
   "signup_copy": "You'll get an email each time an alert is updated or a new alert is published.",
   "show_summaries": true,
-  "organisations": ["240f72bd-9a4d-4f39-94d9-77235cadde8e"],
-  "taxons": ["51bbdf23-292a-4b74-8a66-f7db6b93b163"],
-  "related": ["602be505-4cf4-4f8c-8bfc-7bc4b63a7f47"],
+  "organisations": [
+    "240f72bd-9a4d-4f39-94d9-77235cadde8e"
+  ],
+  "taxons": [
+    "51bbdf23-292a-4b74-8a66-f7db6b93b163"
+  ],
+  "related": [
+    "602be505-4cf4-4f8c-8bfc-7bc4b63a7f47"
+  ],
   "topics": [
     "medicines-medical-devices-blood/medical-devices-regulation-safety",
     "medicines-medical-devices-blood/vigilance-safety-alerts"
@@ -68,10 +74,22 @@
       "display_as_result_metadata": true,
       "filterable": true,
       "allowed_values": [
-        {"label": "Field safety notice", "value": "field-safety-notices"},
-        {"label": "National patient safety alert", "value": "national-patient-safety"},
-        {"label": "Device safety information", "value": "device-safety-information"},
-        {"label": "Medicines recall/notification", "value": "medicines-recall-notification"}
+        {
+          "label": "Field safety notice",
+          "value": "field-safety-notices"
+        },
+        {
+          "label": "National patient safety alert",
+          "value": "national-patient-safety"
+        },
+        {
+          "label": "Device safety information",
+          "value": "device-safety-information"
+        },
+        {
+          "label": "Medicines recall/notification",
+          "value": "medicines-recall-notification"
+        }
       ]
     },
     {
@@ -82,29 +100,98 @@
       "display_as_result_metadata": true,
       "filterable": true,
       "allowed_values": [
-        {"label": "Anaesthetics", "value": "anaesthetics" },
-        {"label": "Cardiology", "value": "cardiology" },
-        {"label": "Care home staff", "value": "care-home-staff" },
-        {"label": "Cosmetic surgery", "value": "cosmetic-surgery" },
-        {"label": "Critical care", "value": "critical-care" },
-        {"label": "Dentistry", "value": "dentistry" },
-        {"label": "Dispensing GP practices", "value": "dispensing-gp-practices"},
-        {"label": "General practice", "value": "general-practice" },
-        {"label": "General surgery", "value": "general-surgery" },
-        {"label": "Haematology and oncology", "value": "haematology-oncology" },
-        {"label": "Infection prevention", "value": "infection-prevention" },
-        {"label": "Obstetrics and gynaecology", "value": "obstetrics-gynaecology" },
-        {"label": "Ophthalmology", "value": "ophthalmology" },
-        {"label": "Orthopaedics", "value": "orthopaedics" },
-        {"label": "Paediatrics", "value": "paediatrics" },
-        {"label": "Pathology", "value": "pathology" },
-        {"label": "Pharmacy", "value": "pharmacy" },
-        {"label": "Physiotherapy and occupational therapy", "value": "physiotherapy-occupational-therapy" },
-        {"label": "Radiology", "value": "radiology" },
-        {"label": "Renal medicine", "value": "renal-medicine" },
-        {"label": "Theatre practitioners", "value": "theatre-practitioners" },
-        {"label": "Urology", "value": "urology" },
-        {"label": "Vascular and cardiac surgery", "value": "vascular-cardiac-surgery" }
+        {
+          "label": "Anaesthetics",
+          "value": "anaesthetics"
+        },
+        {
+          "label": "Cardiology",
+          "value": "cardiology"
+        },
+        {
+          "label": "Care home staff",
+          "value": "care-home-staff"
+        },
+        {
+          "label": "Cosmetic surgery",
+          "value": "cosmetic-surgery"
+        },
+        {
+          "label": "Critical care",
+          "value": "critical-care"
+        },
+        {
+          "label": "Dentistry",
+          "value": "dentistry"
+        },
+        {
+          "label": "Dispensing GP practices",
+          "value": "dispensing-gp-practices"
+        },
+        {
+          "label": "General practice",
+          "value": "general-practice"
+        },
+        {
+          "label": "General surgery",
+          "value": "general-surgery"
+        },
+        {
+          "label": "Haematology and oncology",
+          "value": "haematology-oncology"
+        },
+        {
+          "label": "Infection prevention",
+          "value": "infection-prevention"
+        },
+        {
+          "label": "Obstetrics and gynaecology",
+          "value": "obstetrics-gynaecology"
+        },
+        {
+          "label": "Ophthalmology",
+          "value": "ophthalmology"
+        },
+        {
+          "label": "Orthopaedics",
+          "value": "orthopaedics"
+        },
+        {
+          "label": "Paediatrics",
+          "value": "paediatrics"
+        },
+        {
+          "label": "Pathology",
+          "value": "pathology"
+        },
+        {
+          "label": "Pharmacy",
+          "value": "pharmacy"
+        },
+        {
+          "label": "Physiotherapy and occupational therapy",
+          "value": "physiotherapy-occupational-therapy"
+        },
+        {
+          "label": "Radiology",
+          "value": "radiology"
+        },
+        {
+          "label": "Renal medicine",
+          "value": "renal-medicine"
+        },
+        {
+          "label": "Theatre practitioners",
+          "value": "theatre-practitioners"
+        },
+        {
+          "label": "Urology",
+          "value": "urology"
+        },
+        {
+          "label": "Vascular and cardiac surgery",
+          "value": "vascular-cardiac-surgery"
+        }
       ]
     },
     {
