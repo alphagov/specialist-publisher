@@ -10,8 +10,12 @@
   },
   "show_summaries": true,
   "signup_link": "https://public.govdelivery.com/accounts/UKMHRA/subscriber/new?topic_id=UKMHRA_0044",
-  "organisations": ["240f72bd-9a4d-4f39-94d9-77235cadde8e"],
-  "taxons": ["51bbdf23-292a-4b74-8a66-f7db6b93b163"],
+  "organisations": [
+    "240f72bd-9a4d-4f39-94d9-77235cadde8e"
+  ],
+  "taxons": [
+    "51bbdf23-292a-4b74-8a66-f7db6b93b163"
+  ],
   "related": [
     "1e9c0ada-5f7e-43cc-a55f-cc32757edaa3",
     "c953a82b-e9ff-4551-9324-dfdf40ab85e6"
@@ -30,32 +34,110 @@
       "display_as_result_metadata": true,
       "filterable": true,
       "allowed_values": [
-        {"label": "Anaesthesia and intensive care", "value": "anaesthesia-intensive-care"},
-        {"label": "Breastfeeding", "value": "breastfeeding"},
-        {"label": "Cancer", "value": "cancer"},
-        {"label": "Cardiovascular disease and lipidology", "value": "cardiovascular-disease-lipidology"},
-        {"label": "Dentistry", "value": "dentistry"},
-        {"label": "Dermatology", "value": "dermatology"},
-        {"label": "Dispensing GP practices", "value": "dispensing-gp-practices"},
-        {"label": "Ear, nose and throat", "value": "ear-nose-throat"},
-        {"label": "Endocrinology, diabetology and metabolism", "value": "endocrinology-diabetology-metabolism"},
-        {"label": "GI, hepatology and pancreatic disorders", "value": "gi-hepatology-pancreatic-disorders"},
-        {"label": "Haematology", "value": "haematology"},
-        {"label": "Immunology and vaccination", "value": "immunology-vaccination"},
-        {"label": "Immunosuppression and transplantation", "value": "immunosuppression-transplantation"},
-        {"label": "Infectious disease", "value": "infectious-disease"},
-        {"label": "Neurology", "value": "neurology"},
-        {"label": "Nutrition and dietetics", "value": "nutrition-dietetics"},
-        {"label": "Obstetrics, gynaecology and fertility", "value": "obstetrics-gynaecology-fertility"},
-        {"label": "Ophthalmology", "value": "ophthalmology"},
-        {"label": "Paediatrics and neonatology", "value": "paediatrics-neonatology"},
-        {"label": "Pain management and palliation", "value": "pain-management-palliation"},
-        {"label": "Pregnancy", "value": "pregnancy"},
-        {"label": "Psychiatry", "value": "psychiatry"},
-        {"label": "Radiology and imaging", "value": "radiology-imaging"},
-        {"label": "Respiratory disease and allergy", "value": "respiratory-disease-allergy"},
-        {"label": "Rheumatology", "value": "rheumatology"},
-        {"label": "Urology and nephrology", "value": "urology-nephrology"}
+        {
+          "label": "Anaesthesia and intensive care",
+          "value": "anaesthesia-intensive-care"
+        },
+        {
+          "label": "Breastfeeding",
+          "value": "breastfeeding"
+        },
+        {
+          "label": "Cancer",
+          "value": "cancer"
+        },
+        {
+          "label": "Cardiovascular disease and lipidology",
+          "value": "cardiovascular-disease-lipidology"
+        },
+        {
+          "label": "Dentistry",
+          "value": "dentistry"
+        },
+        {
+          "label": "Dermatology",
+          "value": "dermatology"
+        },
+        {
+          "label": "Dispensing GP practices",
+          "value": "dispensing-gp-practices"
+        },
+        {
+          "label": "Ear, nose and throat",
+          "value": "ear-nose-throat"
+        },
+        {
+          "label": "Endocrinology, diabetology and metabolism",
+          "value": "endocrinology-diabetology-metabolism"
+        },
+        {
+          "label": "GI, hepatology and pancreatic disorders",
+          "value": "gi-hepatology-pancreatic-disorders"
+        },
+        {
+          "label": "Haematology",
+          "value": "haematology"
+        },
+        {
+          "label": "Immunology and vaccination",
+          "value": "immunology-vaccination"
+        },
+        {
+          "label": "Immunosuppression and transplantation",
+          "value": "immunosuppression-transplantation"
+        },
+        {
+          "label": "Infectious disease",
+          "value": "infectious-disease"
+        },
+        {
+          "label": "Neurology",
+          "value": "neurology"
+        },
+        {
+          "label": "Nutrition and dietetics",
+          "value": "nutrition-dietetics"
+        },
+        {
+          "label": "Obstetrics, gynaecology and fertility",
+          "value": "obstetrics-gynaecology-fertility"
+        },
+        {
+          "label": "Ophthalmology",
+          "value": "ophthalmology"
+        },
+        {
+          "label": "Paediatrics and neonatology",
+          "value": "paediatrics-neonatology"
+        },
+        {
+          "label": "Pain management and palliation",
+          "value": "pain-management-palliation"
+        },
+        {
+          "label": "Pregnancy",
+          "value": "pregnancy"
+        },
+        {
+          "label": "Psychiatry",
+          "value": "psychiatry"
+        },
+        {
+          "label": "Radiology and imaging",
+          "value": "radiology-imaging"
+        },
+        {
+          "label": "Respiratory disease and allergy",
+          "value": "respiratory-disease-allergy"
+        },
+        {
+          "label": "Rheumatology",
+          "value": "rheumatology"
+        },
+        {
+          "label": "Urology and nephrology",
+          "value": "urology-nephrology"
+        }
       ]
     },
     {

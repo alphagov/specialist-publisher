@@ -17,7 +17,9 @@
     "6f757605-ab8f-4b62-84e4-99f79cf085c2",
     "8bb37087-a5a7-4493-8afe-900b36ebc927"
   ],
-  "taxons": ["357110bb-cbc5-4708-9711-1b26e6c63e86"],
+  "taxons": [
+    "357110bb-cbc5-4708-9711-1b26e6c63e86"
+  ],
   "signup_content_id": "6d7ace06-f437-4fb3-b948-8534ff34540f",
   "signup_copy": "You'll get an email each time a decision is updated or a new decision is published.",
   "subscription_list_title_prefix": "Employment tribunal decisions",

@@ -6,8 +6,12 @@
   "format_name": "Service Assessment and Self Certification",
   "description": "A list of service assessments and self certifications",
   "show_summaries": true,
-  "organisations": ["2fb482e7-3c4d-496f-887d-f8a55a15e89a"],
-  "taxons": ["84630bce-4c1c-4406-a38a-e8c41967b8f7"],
+  "organisations": [
+    "2fb482e7-3c4d-496f-887d-f8a55a15e89a"
+  ],
+  "taxons": [
+    "84630bce-4c1c-4406-a38a-e8c41967b8f7"
+  ],
   "document_noun": "report",
   "document_title": "Service Standard Report",
   "default_order": "-assessment_date",
@@ -32,11 +36,26 @@
       "display_as_result_metadata": true,
       "filterable": true,
       "allowed_values": [
-        {"label": "Met", "value": "met"},
-        {"label": "Not met", "value": "not-met"},
-        {"label": "Red", "value": "red"},
-        {"label": "Amber", "value": "amber"},
-        {"label": "Green","value": "green"}
+        {
+          "label": "Met",
+          "value": "met"
+        },
+        {
+          "label": "Not met",
+          "value": "not-met"
+        },
+        {
+          "label": "Red",
+          "value": "red"
+        },
+        {
+          "label": "Amber",
+          "value": "amber"
+        },
+        {
+          "label": "Green",
+          "value": "green"
+        }
       ]
     },
     {
@@ -47,16 +66,46 @@
       "display_as_result_metadata": true,
       "filterable": true,
       "allowed_values": [
-        {"label": "Alpha", "value": "alpha"},
-        {"label": "Alpha reassessment", "value": "alpha-reassessment"},
-        {"label": "Alpha amber evidence review", "value": "alpha-amber-evidence-review"},
-        {"label": "Beta", "value": "beta"},
-        {"label": "Beta reassessment", "value": "beta-reassessment"},
-        {"label": "Beta amber evidence review", "value": "beta-amber-evidence-review"},
-        {"label": "Live", "value": "live"},
-        {"label": "Live reassessment", "value": "live-reassessment"},
-        {"label": "Live review", "value": "live-review"},
-        {"label": "Live amber evidence review", "value": "live-amber-evidence-review"}
+        {
+          "label": "Alpha",
+          "value": "alpha"
+        },
+        {
+          "label": "Alpha reassessment",
+          "value": "alpha-reassessment"
+        },
+        {
+          "label": "Alpha amber evidence review",
+          "value": "alpha-amber-evidence-review"
+        },
+        {
+          "label": "Beta",
+          "value": "beta"
+        },
+        {
+          "label": "Beta reassessment",
+          "value": "beta-reassessment"
+        },
+        {
+          "label": "Beta amber evidence review",
+          "value": "beta-amber-evidence-review"
+        },
+        {
+          "label": "Live",
+          "value": "live"
+        },
+        {
+          "label": "Live reassessment",
+          "value": "live-reassessment"
+        },
+        {
+          "label": "Live review",
+          "value": "live-review"
+        },
+        {
+          "label": "Live amber evidence review",
+          "value": "live-amber-evidence-review"
+        }
       ]
     }
   ]

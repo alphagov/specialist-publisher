@@ -8,7 +8,9 @@
   "filter": {
     "format": "traffic_commissioner_regulatory_decision"
   },
-  "organisations": ["78dfc32b-b1ef-44ca-924c-a2cf773e87ca"],
+  "organisations": [
+    "78dfc32b-b1ef-44ca-924c-a2cf773e87ca"
+  ],
   "document_noun": "decision",
   "document_title": "Traffic Commissioner Regulatory Decision",
   "facets": [
@@ -34,7 +36,6 @@
         }
       ]
     },
-
     {
       "key": "regions",
       "name": "Region",
@@ -43,14 +44,38 @@
       "display_as_result_metadata": false,
       "filterable": true,
       "allowed_values": [
-        {"label": "Eastern", "value": "eastern"},
-        {"label": "London and southeast", "value": "london-and-southeast"},
-        {"label": "North West", "value": "north-west"},
-        {"label": "North East", "value": "north-east"},
-        {"label": "Scotland", "value": "scotland"},
-        {"label": "Wales", "value": "wales"},
-        {"label": "West Midlands", "value": "west-midlands"},
-        {"label": "Western", "value": "western"}
+        {
+          "label": "Eastern",
+          "value": "eastern"
+        },
+        {
+          "label": "London and southeast",
+          "value": "london-and-southeast"
+        },
+        {
+          "label": "North West",
+          "value": "north-west"
+        },
+        {
+          "label": "North East",
+          "value": "north-east"
+        },
+        {
+          "label": "Scotland",
+          "value": "scotland"
+        },
+        {
+          "label": "Wales",
+          "value": "wales"
+        },
+        {
+          "label": "West Midlands",
+          "value": "west-midlands"
+        },
+        {
+          "label": "Western",
+          "value": "western"
+        }
       ]
     },
     {
@@ -79,7 +104,6 @@
         }
       ]
     },
-
     {
       "key": "outcome_type",
       "name": "Regulatory decision",
@@ -110,7 +134,6 @@
         }
       ]
     },
-
     {
       "key": "first_published_at",
       "name": "Published",

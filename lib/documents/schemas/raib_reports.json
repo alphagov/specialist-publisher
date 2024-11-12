@@ -11,8 +11,12 @@
   "signup_content_id": "db81c7e8-b1b6-4c29-992a-1289f1b63073",
   "signup_copy": "You'll get an email each time a report is updated or a new report is published.",
   "show_summaries": true,
-  "organisations": ["013872d8-8bbb-4e80-9b79-45c7c5cf9177"],
-  "taxons": ["c6a19bb4-1264-4abe-9f1c-6c30f8dea5f7"],
+  "organisations": [
+    "013872d8-8bbb-4e80-9b79-45c7c5cf9177"
+  ],
+  "taxons": [
+    "c6a19bb4-1264-4abe-9f1c-6c30f8dea5f7"
+  ],
   "subscription_list_title_prefix": {
     "singular": "Rail Accident Investigation Branch (RAIB) reports with the following railway type: ",
     "plural": "Rail Accident Investigation Branch (RAIB) reports with the following railway types: ",
@@ -63,10 +67,22 @@
       "display_as_result_metadata": true,
       "filterable": true,
       "allowed_values": [
-        {"label": "Heavy rail", "value": "heavy-rail"},
-        {"label": "Light rail", "value": "light-rail"},
-        {"label": "Metros", "value": "metros"},
-        {"label": "Heritage railways", "value": "heritage-railways"}
+        {
+          "label": "Heavy rail",
+          "value": "heavy-rail"
+        },
+        {
+          "label": "Light rail",
+          "value": "light-rail"
+        },
+        {
+          "label": "Metros",
+          "value": "metros"
+        },
+        {
+          "label": "Heritage railways",
+          "value": "heritage-railways"
+        }
       ]
     },
     {
@@ -77,11 +93,26 @@
       "display_as_result_metadata": true,
       "filterable": true,
       "allowed_values": [
-        {"label": "Investigation report", "value": "investigation-report"},
-        {"label": "Bulletin", "value": "bulletin"},
-        {"label": "Interim report", "value": "interim-report"},
-        {"label": "Discontinuation report", "value": "discontinuation-report"},
-        {"label": "Safety digest", "value": "safety-digest"}
+        {
+          "label": "Investigation report",
+          "value": "investigation-report"
+        },
+        {
+          "label": "Bulletin",
+          "value": "bulletin"
+        },
+        {
+          "label": "Interim report",
+          "value": "interim-report"
+        },
+        {
+          "label": "Discontinuation report",
+          "value": "discontinuation-report"
+        },
+        {
+          "label": "Safety digest",
+          "value": "safety-digest"
+        }
       ]
     },
     {

@@ -11,8 +11,12 @@
   "signup_content_id": "56cb57e2-7e7f-4f67-b2f6-39c9a55385dc",
   "signup_copy": "You'll get an email each time a report is updated or a new report is published.",
   "show_summaries": true,
-  "organisations": ["9c66b9a3-1e6a-48e8-974d-2a5635f84679"],
-  "taxons": ["7a5e878e-2b0f-4c3f-9079-586590a1a194"],
+  "organisations": [
+    "9c66b9a3-1e6a-48e8-974d-2a5635f84679"
+  ],
+  "taxons": [
+    "7a5e878e-2b0f-4c3f-9079-586590a1a194"
+  ],
   "subscription_list_title_prefix": {
     "singular": "Marine Accident Investigation Branch (MAIB) reports with the following vessel type: ",
     "plural": "Marine Accident Investigation Branch (MAIB) reports with the following vessel types: ",
@@ -69,28 +73,61 @@
       "display_as_result_metadata": true,
       "filterable": true,
       "allowed_values": [
-        {"label": "Merchant vessel 100 gross tons or over", "value": "merchant-vessel-100-gross-tons-or-over"},
-        {"label": "Merchant vessel under 100 gross tons", "value": "merchant-vessel-under-100-gross-tons"},
-        {"label": "Fishing vessel", "value": "fishing-vessel"},
-        {"label": "Recreational craft - sail", "value": "recreational-craft-sail"},
-        {"label": "Recreational craft - power", "value": "recreational-craft-power"}
+        {
+          "label": "Merchant vessel 100 gross tons or over",
+          "value": "merchant-vessel-100-gross-tons-or-over"
+        },
+        {
+          "label": "Merchant vessel under 100 gross tons",
+          "value": "merchant-vessel-under-100-gross-tons"
+        },
+        {
+          "label": "Fishing vessel",
+          "value": "fishing-vessel"
+        },
+        {
+          "label": "Recreational craft - sail",
+          "value": "recreational-craft-sail"
+        },
+        {
+          "label": "Recreational craft - power",
+          "value": "recreational-craft-power"
+        }
       ]
     },
-   {
-     "key": "report_type",
-     "name": "Report type",
-     "type": "text",
-     "preposition": "of type",
-     "display_as_result_metadata": true,
+    {
+      "key": "report_type",
+      "name": "Report type",
+      "type": "text",
+      "preposition": "of type",
+      "display_as_result_metadata": true,
       "filterable": true,
-     "allowed_values": [
-       {"label": "Investigation report", "value": "investigation-report"},
-       {"label": "Investigation report on behalf of Red Ensign Group", "value": "investigation-report-on-behalf-of-red-ensign-group"},
-       {"label": "Safety bulletin", "value": "safety-bulletin"},
-       {"label": "Completed preliminary assessment", "value": "completed-preliminary-examination"},
-       {"label": "Overseas report", "value": "overseas-report"},
-       {"label": "Discontinued investigation", "value": "discontinued-investigation"}
-     ]
+      "allowed_values": [
+        {
+          "label": "Investigation report",
+          "value": "investigation-report"
+        },
+        {
+          "label": "Investigation report on behalf of Red Ensign Group",
+          "value": "investigation-report-on-behalf-of-red-ensign-group"
+        },
+        {
+          "label": "Safety bulletin",
+          "value": "safety-bulletin"
+        },
+        {
+          "label": "Completed preliminary assessment",
+          "value": "completed-preliminary-examination"
+        },
+        {
+          "label": "Overseas report",
+          "value": "overseas-report"
+        },
+        {
+          "label": "Discontinued investigation",
+          "value": "discontinued-investigation"
+        }
+      ]
     },
     {
       "key": "date_of_occurrence",
