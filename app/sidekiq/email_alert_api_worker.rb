@@ -1,7 +1,7 @@
 require "services"
 
 class EmailAlertApiWorker
-  include Sidekiq::Worker
+  include Sidekiq::Job
 
   def perform(payload)
     GdsApi.email_alert_api.create_content_change(payload)
