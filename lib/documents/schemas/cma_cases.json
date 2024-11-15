@@ -7,7 +7,8 @@
   "description": "This case finder includes cases and projects from the Competition and Markets Authority (CMA), Office for the Internal Market (OIM) and Subsidy Advice Unit (SAU)",
   "summary": "<p>This case finder includes cases and projects from the Competition and Markets Authority (CMA), Office for the Internal Market (OIM) and Subsidy Advice Unit (SAU).<p>",
   "filter": {
-    "format": "cma_case"
+    "format": "cma_case",
+    "index": "specialist-finder"
   },
   "related": [
     "46708567-70a6-4f20-8257-6c222b3d8cb3"
