@@ -1,6 +1,5 @@
 # At present, these tasks will only republish documents that are in a draft,
 # published or republished state.
-require "csv"
 require "services"
 
 namespace :republish do
