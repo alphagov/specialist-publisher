@@ -1,7 +1,7 @@
 require "services"
 
 class AttachmentDeleteWorker
-  include Sidekiq::Worker
+  include Sidekiq::Job
 
   def perform(content_id, locale)
     document = Document.find(content_id, locale)

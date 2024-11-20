@@ -1,5 +1,5 @@
 class RepublishWorker
-  include Sidekiq::Worker
+  include Sidekiq::Job
 
   def perform(content_id, locale)
     RepublishService.new.call(content_id, locale)

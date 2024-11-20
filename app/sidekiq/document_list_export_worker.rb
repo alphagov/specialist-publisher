@@ -3,7 +3,7 @@ require "date"
 require "securerandom"
 
 class DocumentListExportWorker
-  include Sidekiq::Worker
+  include Sidekiq::Job
 
   def perform(document_type_slug, user_id, query)
     user = User.find(user_id)
