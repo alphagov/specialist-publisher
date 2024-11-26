@@ -36,11 +36,11 @@
       ]
     },
     {
-      "key": "sfo_case_opened_date",
-      "name": "Opened date",
-      "short_name": "Opened date",
+      "key": "sfo_case_date_announced",
+      "name": "Date announced",
+      "short_name": "Date announced",
       "type": "date",
-      "preposition": "opened",
+      "preposition": "announced",
       "display_as_result_metadata": false,
       "filterable": true
     }
