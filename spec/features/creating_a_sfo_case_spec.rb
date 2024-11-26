@@ -30,7 +30,7 @@ RSpec.feature "Creating an sfo Case", type: :feature do
     fill_in "Summary", with: "This is the summary of an example sfo case"
     fill_in "Body", with: "## Header#{"\n\nThis is the long body of an example life saving maritime appliance service station" * 2}"
     select "Closed", from: "Case state"
-    fill_in "Opened date", with: "2023-01-01"
+    fill_in "Date announced", with: "2023-01-01"
 
     expect(page).to have_css("div.govspeak-help")
     expect(page).to have_content("To add an attachment, please save the draft first.")
@@ -58,7 +58,7 @@ RSpec.feature "Creating an sfo Case", type: :feature do
           ],
         "metadata" => {
           "sfo_case_state" => "closed",
-          "sfo_case_opened_date" => "2023-01-01",
+          "sfo_case_date_announced" => "2023-01-01",
         },
         "max_cache_time" => 10,
         "headers" => [
@@ -110,7 +110,7 @@ RSpec.feature "Creating an sfo Case", type: :feature do
     fill_in "Title", with: "Example sfo Case"
     fill_in "Summary", with: "This is the summary of an example sfo case"
     fill_in "Body", with: "<script>alert('hello')</script>"
-    fill_in "Opened date", with: "invalid_date"
+    fill_in "Date announced", with: "invalid_date"
 
     click_button "Save as draft"
 
@@ -121,6 +121,6 @@ RSpec.feature "Creating an sfo Case", type: :feature do
 
     expect(page).to have_content("There is a problem")
     expect(page).to have_content("Body cannot include invalid Govspeak")
-    expect(page).to have_content("Sfo case opened date is not a valid date")
+    expect(page).to have_content("Sfo case date announced is not a valid date")
   end
 end
