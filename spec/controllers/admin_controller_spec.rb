@@ -46,7 +46,7 @@ RSpec.describe AdminController, type: :controller do
         description: /^Developer - raise a PR replacing this schema with the schema below: https:\/\/github\.com\/alphagov\/specialist-publisher\/edit\/main\/lib\/documents\/schemas\/cma_cases\.json\r\n---\r\n```\r\n{/,
       }))
 
-      post :zendesk, params: { document_type_slug: "cma-cases", proposed_schema: CmaCase.finder_schema.schema }
+      post :zendesk, params: { document_type_slug: "cma-cases", proposed_schema: CmaCase.finder_schema.to_json }
 
       assert_requested(stub_post)
     end

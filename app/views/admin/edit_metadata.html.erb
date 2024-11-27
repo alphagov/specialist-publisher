@@ -36,7 +36,7 @@
           heading_size: "s",
         },
         name: "name",
-        value: current_format.finder_schema.schema["name"],
+        value: current_format.finder_schema.name,
         hint: "Example: Find animal disease cases and control zones"
       } %>
 
@@ -46,7 +46,7 @@
           heading_size: "s",
         },
         name: "base_path",
-        value: current_format.finder_schema.schema["base_path"],
+        value: current_format.finder_schema.base_path,
         hint: "Example: /animal-disease-cases-england"
       } %>
 
@@ -59,7 +59,7 @@
         name: "organisations[]",
         select: {
           multiple: true,
-          selected: current_format.finder_schema.schema["organisations"],
+          selected: current_format.finder_schema.organisations,
           options: [""] + organisations_options,
         },
       } %>
@@ -72,7 +72,7 @@
         hint: "Example: Find notifiable exotic animal disease cases and control zone declarations for England.",
         name: "description",
         rows: 5,
-        value: current_format.finder_schema.schema["description"],
+        value: current_format.finder_schema.description,
       } %>
 
       <%= render "govuk_publishing_components/components/textarea", {
@@ -83,7 +83,7 @@
         hint: "Example: Find notifiable exotic animal disease cases and control zone declarations for England. There are cases of bird flu (avian influenza) in England. Check if you are in a disease control zone on the map. Find an export health certificate - GOV.UK",
         name: "summary",
         rows: 8,
-        value: current_format.finder_schema.schema["summary"],
+        value: current_format.finder_schema.summary,
       } %>
 
       <%
@@ -94,7 +94,7 @@
             },
             name: "related[]",
             rows: 8,
-            value: (current_format.finder_schema.schema["related"]||[])[index] ,
+            value: (current_format.finder_schema.related||[])[index] ,
           }
         })
       %>
@@ -110,7 +110,7 @@
           {
             label: "Yes",
             value: true,
-            checked: current_format.finder_schema.schema["related"],
+            checked: current_format.finder_schema.related,
             conditional: related_links
           }
         ]
@@ -126,12 +126,12 @@
           {
             value: "true",
             text: "Yes",
-            checked: current_format.finder_schema.schema["show_summaries"]
+            checked: current_format.finder_schema.show_summaries
           },
           {
             value: "false",
             text: "No",
-            checked: !current_format.finder_schema.schema["show_summaries"]
+            checked: !current_format.finder_schema.show_summaries
           }
         ]
       } %>
@@ -142,7 +142,7 @@
           heading_size: "s",
         },
         name: "document_noun",
-        value: current_format.finder_schema.schema["document_noun"],
+        value: current_format.finder_schema.document_noun,
         hint: "For example ‘scheme’. On Finance and support for your business there’s 151 schemes, which updates when you start selecting filter options"
       } %>
 
@@ -160,12 +160,12 @@
             {
               value: "all_content",
               text: "Yes. Allow users to sign up to the entire finder (all content)",
-              checked: current_format.finder_schema.schema["signup_content_id"]
+              checked: current_format.finder_schema.signup_content_id
             },
             {
               value: "no",
               text: "No",
-              checked: !current_format.finder_schema.schema["signup_content_id"]
+              checked: !current_format.finder_schema.signup_content_id
             }
           ]
         } %>
