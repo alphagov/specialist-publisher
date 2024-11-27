@@ -48,6 +48,10 @@
       key: "The document noun (How the documents on the finder are referred to)",
       value: (schema["document_noun"] || "").humanize
     } if !(defined? previous_schema) || schema["document_noun"] != previous_schema["document_noun"]),
+    ({
+      key: "Would you like to set up email alerts for the finder?",
+      value: schema.key?("signup_content_id") ? "Yes" : "No"
+    } if !(defined? previous_schema) || (schema.key?("signup_content_id") != previous_schema.key?("signup_content_id")))
   ].compact,
   summary_card_actions:,
   margin_top: 6,

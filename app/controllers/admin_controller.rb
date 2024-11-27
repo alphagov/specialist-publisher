@@ -15,6 +15,7 @@ class AdminController < ApplicationController
       :summary,
       :show_summaries,
       :document_noun,
+      :email_alerts,
       organisations: [],
       related: [],
     )
@@ -22,7 +23,13 @@ class AdminController < ApplicationController
     @params[:organisations].reject!(&:empty?)
     @params[:related].reject!(&:empty?)
 
-    @proposed_schema = @current_format.finder_schema.schema.merge(@params.to_unsafe_h)
+    @proposed_schema = @current_format.finder_schema.schema.merge(@params.except(:email_alerts).to_unsafe_h)
+
+    if @params[:email_alerts] == "no"
+      @proposed_schema.delete("signup_content_id")
+    else
+      @proposed_schema["signup_content_id"] = @proposed_schema.fetch("signup_content_id", SecureRandom.uuid)
+    end
 
     if @proposed_schema["signup_copy"]
       @proposed_schema["signup_copy"] = "You'll get an email each time a #{@params[:document_noun]} is updated or a new #{@params[:document_noun]} is published."
