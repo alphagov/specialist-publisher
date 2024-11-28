@@ -93,7 +93,7 @@ RSpec.describe Document do
     end
 
     it "sends a correct document" do
-      allow(FinderSchema).to receive(:load_schema_for).with("my_document_types")
+      allow(FinderSchema).to receive(:load_from_schema).with("my_document_types")
         .and_return(finder_schema)
 
       expect(subject.save).to be true
@@ -128,14 +128,16 @@ RSpec.describe Document do
   end
 
   let(:finder_schema) do
-    {
+    schema = FinderSchema.new
+    schema.assign_attributes({
       base_path: "/my-document-types",
       target_stack: "live",
       filter: {
-        format: "my_format",
+        "format" => "my_format",
       },
       content_id: @finder_content_id,
-    }.deep_stringify_keys
+    })
+    schema
   end
 
   let(:payload_attributes) do
@@ -167,7 +169,7 @@ RSpec.describe Document do
 
   context "with stubbed FinderSchema" do
     before do
-      allow(FinderSchema).to receive(:load_schema_for).with("my_document_types")
+      allow(FinderSchema).to receive(:load_from_schema).with("my_document_types")
         .and_return(finder_schema)
     end
 

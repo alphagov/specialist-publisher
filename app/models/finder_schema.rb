@@ -1,4 +1,8 @@
 class FinderSchema
+  include ActiveModel::Model
+  include ActiveModel::Attributes
+  include ActiveModel::Serializers::JSON
+
   # Pluralized names of all document types
   def self.schema_names
     Dir.glob(Rails.root.join("lib/documents/schemas/*.json")).map do |f|
@@ -6,28 +10,60 @@ class FinderSchema
     end
   end
 
-  def self.load_schema_for(type)
-    JSON.parse(File.read(Rails.root.join("lib/documents/schemas/#{type}.json")))
+  def self.load_from_schema(type)
+    new.from_json(File.read(Rails.root.join("lib/documents/schemas/#{type}.json")))
   end
 
-  attr_reader :schema, :base_path, :target_stack, :organisations, :editing_organisations, :taxons, :format, :content_id, :document_title
+  attr_writer :editing_organisations, :facets, :organisations, :show_summaries, :taxons
+  attr_accessor :base_path,
+                :beta,
+                :beta_message,
+                :content_id,
+                :default_order,
+                :description,
+                :document_noun,
+                :document_title,
+                :email_filter_by,
+                :email_filter_facets,
+                :filter,
+                :format_name,
+                :label_text,
+                :name,
+                :open_filter_on_load,
+                :parent,
+                :phase,
+                :related,
+                :signup_content_id,
+                :signup_copy,
+                :signup_link,
+                :signup_title,
+                :subscription_list_title_prefix,
+                :summary,
+                :target_stack,
+                :topics
 
-  def initialize(schema)
-    @schema = schema
-    @base_path = schema.fetch("base_path")
-    @target_stack = schema.fetch("target_stack")
-    @organisations = schema.fetch("organisations", [])
-    @editing_organisations = schema.fetch("editing_organisations", [])
-    @taxons = schema.fetch("taxons", [])
-    @format = schema.fetch("filter", {}).fetch("format")
-    @content_id = schema.fetch("content_id")
-    @document_title = schema.fetch("document_title", nil)
+  def format
+    @filter["format"]
+  end
+
+  def taxons
+    @taxons || []
+  end
+
+  def organisations
+    @organisations || []
+  end
+
+  def editing_organisations
+    @editing_organisations || []
   end
 
   def facets
-    schema.fetch("facets", []).map do |facet|
-      facet.fetch("key").to_sym
-    end
+    @facets.map { |facet| facet["key"].to_sym }
+  end
+
+  def show_summaries
+    @show_summaries || false
   end
 
   def options_for(facet_name)
@@ -54,7 +90,7 @@ class FinderSchema
 private
 
   def facet_data_for(facet_name)
-    schema.fetch("facets", []).find do |facet_record|
+    (@facets || []).find do |facet_record|
       facet_record.fetch("key") == facet_name.to_s
     end || {}
   end

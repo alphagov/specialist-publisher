@@ -32,6 +32,7 @@ RSpec.feature "Editing the CMA case finder", type: :feature do
     fill_in "Link 2", with: "Changed link 2"
     fill_in "Link 3", with: "Changed link 3"
     fill_in "document_noun", with: "Changed document noun"
+    choose "email_alerts", option: "no"
 
     click_button "Submit changes"
 
@@ -43,6 +44,7 @@ RSpec.feature "Editing the CMA case finder", type: :feature do
     expect(page).to have_selector("dt", text: "Changed link 2")
     expect(page).to have_selector("dt", text: "Changed link 3")
     expect(page).to have_selector("dt", text: "Changed document noun")
+    expect(page).to have_selector("dt", text: "No")
 
     click_button "Submit changes"
 

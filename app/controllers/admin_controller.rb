@@ -15,6 +15,7 @@ class AdminController < ApplicationController
       :summary,
       :show_summaries,
       :document_noun,
+      :email_alerts,
       organisations: [],
       related: [],
     )
@@ -22,19 +23,24 @@ class AdminController < ApplicationController
     @params[:organisations].reject!(&:empty?)
     @params[:related].reject!(&:empty?)
 
-    @proposed_schema = @current_format.finder_schema.schema.merge(@params.to_unsafe_h)
+    @proposed_schema = FinderSchema.new
+    @proposed_schema.assign_attributes(@current_format.finder_schema.attributes.merge(@params.except(:email_alerts).to_unsafe_h))
 
-    if @proposed_schema["signup_copy"]
-      @proposed_schema["signup_copy"] = "You'll get an email each time a #{@params[:document_noun]} is updated or a new #{@params[:document_noun]} is published."
+    @proposed_schema.signup_content_id = if @params[:email_alerts] == "no"
+                                           nil
+                                         else
+                                           @proposed_schema.signup_content_id || SecureRandom.uuid
+                                         end
+
+    if @proposed_schema.signup_copy.present?
+      @proposed_schema.signup_copy = "You'll get an email each time a #{@params[:document_noun]} is updated or a new #{@params[:document_noun]} is published."
     end
 
     if params[:include_related] != "true"
-      @proposed_schema.delete("related")
+      @proposed_schema.related = nil
     end
 
-    @proposed_schema["show_summaries"] = params[:show_summaries] == "true"
-
-    @proposed_schema.reject! { |_, value| value.blank? }
+    @proposed_schema.show_summaries = params[:show_summaries] == "true"
 
     render :confirm_metadata
   end

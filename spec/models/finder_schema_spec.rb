@@ -13,23 +13,15 @@ RSpec.describe FinderSchema do
     }
   end
 
-  describe ".schema" do
-    it "returns the schema hash" do
-      expect(FinderSchema.new(mandatory_properties).schema).to eq(mandatory_properties)
-    end
-  end
-
   describe ".schema_names" do
     it "returns schema names" do
       expect(FinderSchema.schema_names).to include("aaib_reports")
     end
   end
 
-  describe ".load_schema_for" do
+  describe ".load_from_schema" do
     it "loads the given schema" do
-      json = JSON.parse(File.read(Rails.root.join("lib/documents/schemas/aaib_reports.json")))
-
-      expect(FinderSchema.load_schema_for("aaib_reports")).to eq(json)
+      expect(FinderSchema.load_from_schema("aaib_reports")).to be_a(FinderSchema)
     end
   end
 

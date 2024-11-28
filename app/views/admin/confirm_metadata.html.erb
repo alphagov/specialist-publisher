@@ -30,7 +30,7 @@
   <div class="govuk-grid-column-two-thirds govuk-body govuk-!-margin-top-8">
     <%= render "metadata_summary_card", {
       schema: @proposed_schema,
-      previous_schema: @current_format.finder_schema.schema,
+      previous_schema: @current_format.finder_schema,
     } %>
 
     <p class="govuk-body govuk-body govuk-!-margin-top-7">
