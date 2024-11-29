@@ -59,6 +59,31 @@ RSpec.describe FinderSchema do
     end
   end
 
+  describe "#document_noun=" do
+    it "updates the signup copy based on the new document noun" do
+      noun = "specialist document"
+      expected_copy = "You'll get an email each time a #{noun} is updated or a new #{noun} is published."
+      schema = FinderSchema.new
+      schema.signup_copy = "existing copy"
+      schema.document_noun = noun
+      expect(schema.signup_copy).to eq(expected_copy)
+    end
+
+    it "does not update the signup copy if the copy is not already set" do
+      schema = FinderSchema.new
+      schema.document_noun = "specialist document"
+      expect(schema.signup_copy).to be_nil
+    end
+  end
+
+  describe "#show_summaries=" do
+    it "casts 'true' to true" do
+      schema = FinderSchema.new
+      schema.show_summaries = "true"
+      expect(schema.show_summaries).to eq(true)
+    end
+  end
+
   describe "#organisations" do
     it "returns empty array if not present" do
       expect(FinderSchema.new(mandatory_properties).organisations).to eq([])
@@ -70,6 +95,15 @@ RSpec.describe FinderSchema do
     end
   end
 
+  describe "#organisations=" do
+    it "ignores empty organisations" do
+      schema = FinderSchema.new
+      schema.organisations = %w[abc123 def456]
+      schema.organisations = ["", "def456"]
+      expect(schema.organisations).to eq(%w[def456])
+    end
+  end
+
   describe "#editing_organisations" do
     it "returns empty array if not present" do
       expect(FinderSchema.new(mandatory_properties).editing_organisations).to eq([])
@@ -78,6 +112,15 @@ RSpec.describe FinderSchema do
     it "returns the editing_organisations if present" do
       properties = mandatory_properties.merge({ "editing_organisations" => %w[def456] })
       expect(FinderSchema.new(properties).editing_organisations).to eq(%w[def456])
+    end
+  end
+
+  describe "#related=" do
+    it "ignores empty related link items" do
+      schema = FinderSchema.new
+      schema.related = %w[abc123 def456]
+      schema.related = ["", "def456"]
+      expect(schema.related).to eq(%w[def456])
     end
   end
 
@@ -107,6 +150,28 @@ RSpec.describe FinderSchema do
         ],
       })
       expect(FinderSchema.new(properties).facets).to eq(%i[research_document_type something_else])
+    end
+  end
+
+  describe "#email_alerts=" do
+    it "sets the signup_content_id to nil if email_alerts is 'no'" do
+      schema = FinderSchema.new
+      schema.email_alerts = "no"
+      expect(schema.signup_content_id).to be_nil
+    end
+
+    it "sets the signup_content_id to a the existing ID if email_alerts is not 'no' and there is an existing signup content ID" do
+      schema = FinderSchema.new
+      schema.signup_content_id = "existing-id"
+      schema.email_alerts = "yes"
+      expect(schema.signup_content_id).to eq("existing-id")
+    end
+
+    it "sets the signup_content_id to a new UUID if email_alerts is not 'no' and there is not an existing signup content ID" do
+      schema = FinderSchema.new
+      allow(SecureRandom).to receive(:uuid).and_return("new-id")
+      schema.email_alerts = "yes"
+      expect(schema.signup_content_id).to eq("new-id")
     end
   end
 

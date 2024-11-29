@@ -14,14 +14,15 @@ class FinderSchema
     new.from_json(File.read(Rails.root.join("lib/documents/schemas/#{type}.json")))
   end
 
-  attr_writer :editing_organisations, :facets, :organisations, :show_summaries, :taxons
+  attribute :show_summaries, :boolean, default: false
+  attr_writer :editing_organisations, :facets, :taxons
+  attr_reader :document_noun, :related
   attr_accessor :base_path,
                 :beta,
                 :beta_message,
                 :content_id,
                 :default_order,
                 :description,
-                :document_noun,
                 :document_title,
                 :email_filter_by,
                 :email_filter_facets,
@@ -32,7 +33,6 @@ class FinderSchema
                 :open_filter_on_load,
                 :parent,
                 :phase,
-                :related,
                 :signup_content_id,
                 :signup_copy,
                 :signup_link,
@@ -41,6 +41,13 @@ class FinderSchema
                 :summary,
                 :target_stack,
                 :topics
+
+  def document_noun=(noun)
+    @document_noun = noun
+    if @signup_copy.present?
+      @signup_copy = "You'll get an email each time a #{noun} is updated or a new #{noun} is published."
+    end
+  end
 
   def format
     @filter["format"]
@@ -54,16 +61,28 @@ class FinderSchema
     @organisations || []
   end
 
+  def organisations=(value)
+    @organisations = value.reject(&:empty?)
+  end
+
   def editing_organisations
     @editing_organisations || []
+  end
+
+  def related=(value)
+    @related = value.nil? ? nil : value.reject(&:empty?)
   end
 
   def facets
     @facets.map { |facet| facet["key"].to_sym }
   end
 
-  def show_summaries
-    @show_summaries || false
+  def email_alerts=(value)
+    @signup_content_id = if value == "no"
+                           nil
+                         else
+                           @signup_content_id || SecureRandom.uuid
+                         end
   end
 
   def options_for(facet_name)
