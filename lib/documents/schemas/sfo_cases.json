@@ -5,11 +5,13 @@
   "format_name": "Find an SFO case",
   "name": "Find an SFO case",
   "description": "Find fraud, bribery and corruption cases investigated by the SFO.",
-  "summary": "<p>This case finder includes all ongoing Serious Fraud Office (SFO) prosecutions and investigations that are in the public domain. This does not include intelligence referrals, covert investigations or proceeds of crime cases.</p><p>For updates on the SFO’s proceeds of crime recovery, see <a href=#>this page</a>.</p>",
+  "summary": "<p>This case finder includes all ongoing Serious Fraud Office (SFO) prosecutions and investigations that are in the public domain. This does not include intelligence referrals, covert investigations or proceeds of crime cases.</p><p>For updates on the SFO’s proceeds of crime recovery, see <a href=\"https://www.gov.uk/government/publications/proceeds-of-crime\">this page</a>.</p>",
   "filter": {
     "format": "sfo_case"
   },
-  "related": [],
+  "related": [
+    "01007fd9-8351-4068-b90c-a9af8edaeb19"
+  ],
   "show_summaries": true,
   "organisations": [
     "ebae4517-422f-44dd-9f87-13304c9815cb"
