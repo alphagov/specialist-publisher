@@ -33,6 +33,7 @@ gem "select2-rails", "< 4" # v4 changes the generated HTML and breaks the e2e te
 gem "sentry-sidekiq"
 gem "stringex"
 gem "terser"
+gem "view_component"
 
 group :development do
   gem "listen"
