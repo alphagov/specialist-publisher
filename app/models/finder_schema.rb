@@ -36,7 +36,6 @@ class FinderSchema
                 :signup_content_id,
                 :signup_copy,
                 :signup_link,
-                :signup_title,
                 :subscription_list_title_prefix,
                 :summary,
                 :target_stack,
