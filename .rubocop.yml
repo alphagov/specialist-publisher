@@ -20,3 +20,7 @@ inherit_mode:
 # This app does not have a DB
 Rails/SaveBang:
   Enabled: false
+
+Lint/MissingSuper:
+  Exclude:
+    - 'app/components/**/*.rb'
