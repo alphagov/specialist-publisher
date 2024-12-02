@@ -34,7 +34,7 @@ private
   end
 
   def title
-    schema.fetch("signup_title", schema.fetch("name"))
+    schema.fetch("name")
   end
 
   def base_path
