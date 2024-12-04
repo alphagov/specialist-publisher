@@ -41,7 +41,7 @@ RSpec.feature "Creating a veterans support organisation", type: :feature do
     fill_in "Title", with: "Example veterans support organisation"
     fill_in "Summary", with: "This is the summary of an example veterans support organisation"
     fill_in "Body", with: "## Header#{"\n\nThis is the long body of an example veterans support organisation" * 2}"
-    select "Mental Health", from: "Health and Social Care"
+    select "Mental health", from: "Health and Social Care"
     select "Benefits", from: "Finance"
     select "Care homes", from: "Housing"
 

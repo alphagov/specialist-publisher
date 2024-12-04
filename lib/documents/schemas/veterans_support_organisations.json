@@ -32,15 +32,15 @@
       "filterable": true,
       "allowed_values": [
         {
-          "label": "Mental Health",
+          "label": "Mental health",
           "value": "mental-health"
         },
         {
-          "label": "Physical Health",
+          "label": "Physical health",
           "value": "physical-health"
         },
         {
-          "label": "Social Care",
+          "label": "Social care",
           "value": "social-care"
         }
       ]
