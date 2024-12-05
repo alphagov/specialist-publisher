@@ -2,6 +2,12 @@ class FinderSchema
   include ActiveModel::Model
   include ActiveModel::Attributes
   include ActiveModel::Serializers::JSON
+  extend ActiveModel::Callbacks
+
+  define_model_callbacks :update
+
+  before_update :reset_email_alerts
+  after_update :override_signup_copy
 
   # Pluralized names of all document types
   def self.schema_names
@@ -16,13 +22,14 @@ class FinderSchema
 
   attribute :show_summaries, :boolean, default: false
   attr_writer :editing_organisations, :facets, :taxons
-  attr_reader :document_noun, :related
+  attr_reader :related
   attr_accessor :base_path,
                 :beta,
                 :beta_message,
                 :content_id,
                 :default_order,
                 :description,
+                :document_noun,
                 :document_title,
                 :email_filter_by,
                 :email_filter_facets,
@@ -41,10 +48,9 @@ class FinderSchema
                 :target_stack,
                 :topics
 
-  def document_noun=(noun)
-    @document_noun = noun
-    if @signup_copy.present?
-      @signup_copy = "You'll get an email each time a #{noun} is updated or a new #{noun} is published."
+  def update(attributes)
+    run_callbacks :update do
+      assign_attributes(attributes)
     end
   end
 
@@ -76,12 +82,18 @@ class FinderSchema
     @facets.map { |facet| facet["key"].to_sym }
   end
 
-  def email_alerts=(value)
-    @signup_content_id = if value == "no"
-                           nil
-                         else
-                           @signup_content_id || SecureRandom.uuid
-                         end
+  def reset_email_alerts
+    @signup_content_id = nil
+    @subscription_list_title_prefix = nil
+    @signup_link = nil
+    @email_filter_by = nil
+    @email_filter_facets = nil
+  end
+
+  def override_signup_copy
+    if @signup_copy.present?
+      @signup_copy = "You'll get an email each time a #{document_noun} is updated or a new #{document_noun} is published."
+    end
   end
 
   def options_for(facet_name)
