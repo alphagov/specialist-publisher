@@ -1,0 +1,212 @@
+{
+  "target_stack": "draft",
+  "content_id": "2437862c-56d6-49f9-a5a5-f2a9460cc3ee",
+  "base_path": "/data-ethics-guidance-hub",
+  "format_name": "Data Ethics Guidance Hub",
+  "name": "Data Ethics Guidance Hub",
+  "description": "This hub collates existing guidance for the responsible use and development of data and data-driven technologies, including artificial intelligence (AI), developed by and for government and public sector bodies.",
+  "summary": "<p>This hub collates existing guidance for the responsible use and development of data and data-driven technologies, including artificial intelligence (AI), developed by and for government and public sector bodies. It aims to provide a helpful starting point for civil servants and public sector organisations using data and data-driven technologies.</p><p>This page was developed by the Central Digital & Data Office, and will be updated over time with new resources. If you are aware of other guidance that should be included, please contact us on <a href=\"mailto:data.ethics@digital.cabinet-office.gov.uk\">data.ethics@digital.cabinet-office.gov.uk</a>.</p>",
+  "filter": {
+    "format": "data_ethics_guidance_document"
+  },
+  "related": [
+    "01007fd9-8351-4068-b90c-a9af8edaeb19 # TODO - need dept to create guidance page first"
+  ],
+  "show_summaries": true,
+  "organisations": [
+    "2fb482e7-3c4d-496f-887d-f8a55a15e89a"
+  ],
+  "document_noun": "foobar guidance document",
+  "document_title": "Data ethics guidance document",
+  "facets": [
+    {
+      "key": "key_reference",
+      "name": "Key Reference",
+      "type": "text",
+      "preposition": "Key Reference",
+      "display_as_result_metadata": false,
+      "filterable": true,
+      "allowed_values": [
+      {
+        "label": "Yes",
+        "value": "yes"
+      },
+      {
+        "label": "No",
+        "value": "no"
+      }
+      ]
+    },
+    {
+      "key": "ethical_theme",
+      "name": "Ethical theme",
+      "type": "text",
+      "preposition": "Ethics theme",
+      "display_as_result_metadata": true,
+      "filterable": true,
+      "allowed_values": [
+      {
+        "label": "Safety, Security and Robustness",
+        "value": "safety-security-and-robustness"
+      },
+      {
+        "label": "Appropriate Transparency and Explainability",
+        "value": "appropriate-transparency-and-explainability"
+      },
+      {
+        "label": "Fairness",
+        "value": "fairness"
+      },
+      {
+        "label": "Accountability and Governance",
+        "value": "accountability-and-governance"
+      },
+      {
+        "label": "Contestability and Redress",
+        "value": "contestability-and-redress"
+      },
+      {
+        "label": "Privacy",
+        "value": "privacy"
+      },
+      {
+        "label": "Societal Wellbeing",
+        "value": "societal-wellbeing"
+      }
+      ]
+    },
+    {
+      "key": "organisation",
+      "name": "Organisation",
+      "type": "text",
+      "display_as_result_metadata": false,
+      "filterable": false
+    },
+    {
+      "key": "document_function",
+      "name": "Function",
+      "type": "text",
+      "preposition": "Function",
+      "display_as_result_metadata": true,
+      "filterable": false,
+      "allowed_values": [
+      {
+        "label": "General public services",
+        "value": "general-public-services"
+      },
+      {
+        "label": "Defence",
+        "value": "defence"
+      },
+      {
+        "label": "Public order and safety",
+        "value": "public-order-and-safety"
+      },
+      {
+        "label": "Economic affairs",
+        "value": "economic-affairs"
+      },
+      {
+        "label": "Environmental protection",
+        "value": "environmental-protection"
+      },
+      {
+        "label": "Housing and community amenities",
+        "value": "housing-and-community-amenities"
+      },
+      {
+        "label": "Health",
+        "value": "health"
+      },
+      {
+        "label": "Recreation, culture and religion",
+        "value": "recreation-culture-and-religion"
+      },
+      {
+        "label": "Education",
+        "value": "education"
+      },
+      {
+        "label": "Social protection",
+        "value": "social-protection"
+      },
+      {
+        "label": "Regulation",
+        "value": "regulation"
+      }
+      ]
+    },
+    {
+      "key": "project_phase",
+      "name": "Project Phase",
+      "type": "text",
+      "preposition": "Project Phase",
+      "display_as_result_metadata": true,
+      "filterable": true,
+      "allowed_values": [
+        {
+          "label": "Across Lifecycle",
+          "value": "across-lifecycle"
+        },
+        {
+          "label": "Planning",
+          "value": "planning"
+        },
+        {
+          "label": "Initiation",
+          "value": "initiation"
+        },
+        {
+          "label": "Procurement",
+          "value": "procurement"
+        },
+        {
+          "label": "Implementation",
+          "value": "implementation"
+        },
+        {
+          "label": "Monitoring/Review",
+          "value": "monitoring-review"
+        }
+      ]
+    },
+    {
+      "key": "technology_area",
+      "name": "Technology Area",
+      "type": "text",
+      "preposition": "Technology Area",
+      "display_as_result_metadata": true,
+      "filterable": true,
+      "allowed_values": [
+      {
+        "label": "AI",
+        "value": "ai"
+      },
+      {
+        "label": "Generative AI",
+        "value": "generative-ai"
+      },
+      {
+        "label": "Analytical Models",
+        "value": "analytical-models"
+      },
+      {
+        "label": "Research and Statistics",
+        "value": "research-and-statistics"
+      },
+      {
+        "label": "Data",
+        "value": "data"
+      },
+      {
+        "label": "Responsible Innovation",
+        "value": "responsible-innovation"
+      },
+      {
+        "label": "Automated Decision Making",
+        "value": "automated-decision-making"
+      }
+      ]
+    }
+  ]
+}

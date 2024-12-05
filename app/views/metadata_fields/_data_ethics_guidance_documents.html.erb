@@ -1,0 +1,46 @@
+<%= render layout: "shared/form_group", locals: { f: f, field: :key_reference } do %>
+  <%= f.select :key_reference, facet_options(f, :key_reference), {}, { class: 'form-control' } %>
+<% end %>
+<%= render layout: "shared/form_group", locals: { f: f, field: :ethical_theme } do %>
+  <%= f.select :ethical_theme,
+      facet_options(f, :ethical_theme),
+      {},
+      {
+        class: 'select2 form-control',
+        multiple: true,
+      }
+  %>
+<% end %>
+<%= render layout: "shared/form_group", locals: { f: f, field: :organisation } do %>
+  <%= f.text_field :organisation, class: 'form-control' %>
+<% end %>
+<%= render layout: "shared/form_group", locals: { f: f, field: :document_function } do %>
+  <%= f.select :document_function,
+      facet_options(f, :document_function),
+      {},
+      {
+        class: 'select2 form-control',
+        multiple: true,
+      }
+  %>
+<% end %>
+<%= render layout: "shared/form_group", locals: { f: f, field: :project_phase } do %>
+  <%= f.select :project_phase,
+      facet_options(f, :project_phase),
+      {},
+      {
+        class: 'select2 form-control',
+        multiple: true,
+      }
+  %>
+<% end %>
+<%= render layout: "shared/form_group", locals: { f: f, field: :technology_area } do %>
+  <%= f.select :technology_area,
+      facet_options(f, :technology_area),
+      {},
+      {
+        class: 'select2 form-control',
+        multiple: true,
+      }
+  %>
+<% end %>
