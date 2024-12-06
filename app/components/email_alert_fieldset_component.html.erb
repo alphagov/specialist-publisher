@@ -11,8 +11,21 @@
     items: [
       {
         value: "all_content",
-        text: "Yes. Allow users to sign up to the entire finder (all content)",
-        checked: @schema.signup_content_id
+        text: "Yes. Allow users to sign up to email alerts for everything published on the finder.",
+        checked: @schema.signup_content_id,
+        conditional: render_all_content_condition_inputs
+      },
+      {
+        value: "filtered_content",
+        text: "Yes. Allow users to sign up by specific filter criteria",
+        checked: @schema.email_filter_by,
+        conditional: render_filtered_content_condition_inputs
+      },
+      {
+        value: "external",
+        text: "Yes. Allow users to sign up for updates using a signup link.",
+        checked: @schema.signup_link,
+        conditional: render_external_condition_inputs
       },
       {
         value: "no",
