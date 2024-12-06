@@ -15,13 +15,13 @@ class AdminController < ApplicationController
       :summary,
       :show_summaries,
       :document_noun,
-      :email_alerts,
+      *email_alert_params,
       organisations: [],
       related: [],
     )
 
-    @proposed_schema = FinderSchema.new
-    @proposed_schema.assign_attributes(@current_format.finder_schema.attributes.merge(@params.to_unsafe_h))
+    @proposed_schema = FinderSchema.new(@current_format.finder_schema.attributes)
+    @proposed_schema.update(@params.to_unsafe_h)
 
     if params[:include_related] != "true"
       @proposed_schema.related = nil
@@ -60,5 +60,15 @@ private
         email: current_user.email,
       },
     }
+  end
+
+  def email_alert_params
+    permitted_email_alert_params = {
+      "all_content" => %i[signup_content_id subscription_list_title_prefix],
+      "filtered_content" => %i[signup_content_id email_filter_by],
+      "external" => %i[signup_link],
+      "no" => [],
+    }
+    permitted_email_alert_params[params[:email_alerts]]
   end
 end
