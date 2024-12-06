@@ -1,7 +1,7 @@
 <%= render layout: "shared/form_group", locals: { f: f, field: :tribunal_decision_categories } do %>
   <%= f.select :tribunal_decision_categories,
       f.object.facet_options(:tribunal_decision_categories),
-      { label: "Category" },
+      {},
       {
         class: 'select2',
         multiple: true,
@@ -15,7 +15,7 @@
 <%= render layout: "shared/form_group", locals: { f: f, field: :tribunal_decision_sub_categories } do %>
   <%= f.select :tribunal_decision_sub_categories,
       f.object.facet_options(:tribunal_decision_sub_categories),
-      { label: "Sub-category" },
+      {},
       {
         class: 'select2 form-control',
         multiple: true,
@@ -29,7 +29,7 @@
 <%= render layout: "shared/form_group", locals: { f: f, field: :tribunal_decision_landmark } do %>
   <%= f.select :tribunal_decision_landmark,
       f.object.facet_options(:tribunal_decision_landmark),
-      { label: "Landmark" },
+      {},
       { class: 'form-control' }
   %>
 <% end %>

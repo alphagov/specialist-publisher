@@ -5,7 +5,7 @@
 <%= render layout: "shared/form_group", locals: { f: f, field: :register } do %>
   <%= f.select :register,
       f.object.facet_options(:register),
-      { label: "Register", include_blank: 'Select register' },
+      { include_blank: 'Select register' },
       { class: 'form-control' }
   %>
 <% end %>
@@ -13,16 +13,16 @@
 <%= render layout: "shared/form_group", locals: { f: f, field: :status } do %>
   <%= f.select :status,
       f.object.facet_options(:status),
-      { label: "Status", include_blank: 'Select status' },
+      { include_blank: 'Select status' },
       { class: 'form-control' }
   %>
 <% end %>
 
 <%# You can select multiple class or categories so this has multi-select option %>
-<%= render layout: "shared/form_group", locals: { f: f, field: :class_category } do %>
+<%= render layout: "shared/form_group", locals: { f: f, field: :class_category, label: "Class category" } do %>
   <%= f.select :class_category,
       f.object.facet_options(:class_category),
-      { label: "Class or category of product" },
+      {},
       {
         class: 'select2 form-control',
         multiple: true,
@@ -36,7 +36,7 @@
 <%= render layout: "shared/form_group", locals: { f: f, field: :protection_type } do %>
   <%= f.select :protection_type,
       f.object.facet_options(:protection_type),
-      { label: "Protection type", include_blank: 'Select protection type' },
+      { include_blank: 'Select protection type' },
       { class: 'form-control' }
   %>
 <% end %>
@@ -45,7 +45,7 @@
 <%= render layout: "shared/form_group", locals: { f: f, field: :country_of_origin } do %>
   <%= f.select :country_of_origin,
       f.object.facet_options(:country_of_origin),
-      { label: "Country of origin" },
+      {},
       {
         class: 'select2 form-control',
         multiple: true,
@@ -60,7 +60,7 @@
 <%= render layout: "shared/form_group", locals: { f: f, field: :traditional_term_grapevine_product_category } do %>
   <%= f.select :traditional_term_grapevine_product_category,
       f.object.facet_options(:traditional_term_grapevine_product_category),
-      { label: "Traditional term grapevine product category" },
+      {},
       {
         class: 'select2 form-control',
         multiple: true,
@@ -74,7 +74,7 @@
 <%= render layout: "shared/form_group", locals: { f: f, field: :traditional_term_type } do %>
   <%= f.select :traditional_term_type,
       f.object.facet_options(:traditional_term_type),
-      { label: "Traditional term type", include_blank: 'Select term type' },
+      { include_blank: 'Select term type' },
       { class: 'form-control' }
   %>
 <% end %>
@@ -82,7 +82,7 @@
 <%= render layout: "shared/form_group", locals: { f: f, field: :traditional_term_language } do %>
   <%= f.select :traditional_term_language,
       f.object.facet_options(:traditional_term_language),
-      { label: "Traditional term language", include_blank: 'Select language' },
+      { include_blank: 'Select language' },
       { class: 'form-control' }
   %>
 <% end %>
@@ -90,7 +90,7 @@
 <%= render layout: "shared/form_group", locals: { f: f, field: :reason_for_protection } do %>
   <%= f.select :reason_for_protection,
       f.object.facet_options(:reason_for_protection),
-      { label: "Reason for protection", include_blank: 'Select reason for protection' },
+      { include_blank: 'Select reason for protection' },
       { class: 'form-control' }
   %>
 <% end %>

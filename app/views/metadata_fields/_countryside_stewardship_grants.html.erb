@@ -28,9 +28,7 @@
 <%= render layout: "shared/form_group", locals: { f: f, field: :funding_amount } do %>
 <%= f.select :funding_amount,
     f.object.facet_options(:funding_amount),
-    {
-      label: 'Funding (per unit per year)'
-    },
+    {},
     {
       class: 'select2 form-control',
       multiple: true,
