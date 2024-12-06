@@ -1,14 +1,14 @@
 <%= render layout: "shared/form_group", locals: { f: f, field: :tribunal_decision_country } do %>
   <%= f.select :tribunal_decision_country,
       f.object.facet_options(:tribunal_decision_country),
-      { label: "Country" },
+      {},
       { class: 'form-control' }
   %>
 <% end %>
 <%= render layout: "shared/form_group", locals: { f: f, field: :tribunal_decision_categories } do %>
   <%= f.select :tribunal_decision_categories,
       f.object.facet_options(:tribunal_decision_categories),
-      { label: "Jurisdiction code" },
+      { label: "Category" },
       {
         class: 'select2 form-control',
         multiple: true,

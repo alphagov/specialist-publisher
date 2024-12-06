@@ -33,7 +33,7 @@ RSpec.feature "Creating a Research for Development Output", type: :feature do
     fill_in "[research_for_development_output]first_published_at(1i)", with: "2013"
     fill_in "[research_for_development_output]first_published_at(2i)", with: "01"
     fill_in "[research_for_development_output]first_published_at(3i)", with: "01"
-    select "Book Chapter", from: "Document type"
+    select "Book Chapter", from: "Document Type"
     select "Infrastructure", from: "Themes"
     select "Peer reviewed", from: "Review status"
 

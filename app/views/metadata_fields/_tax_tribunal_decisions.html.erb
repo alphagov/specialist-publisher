@@ -1,7 +1,7 @@
 <%= render layout: "shared/form_group", locals: { f: f, field: :tribunal_decision_category } do %>
   <%= f.select :tribunal_decision_category,
       f.object.facet_options(:tribunal_decision_category),
-      { label: "Category" },
+      {},
       { class: 'form-control' }
   %>
 <% end %>

@@ -1,4 +1,4 @@
-<%= render layout: 'shared/form_group', locals: { f: f, field: :research_document_type, label: 'Document type' } do %>
+<%= render layout: 'shared/form_group', locals: { f: f, field: :research_document_type } do %>
   <%=
     f.select :research_document_type, facet_options(f, :research_document_type),
       { include_blank: true },
@@ -6,11 +6,11 @@
   %>
 <% end %>
 
-<%= render layout: 'shared/form_group', locals: { f: f, field: :authors, label: 'Authors' } do %>
+<%= render layout: 'shared/form_group', locals: { f: f, field: :authors } do %>
   <%= f.text_field :author_tags, class: 'form-control free-form-list', data: { placeholder: 'Add authors' } %>
 <% end %>
 
-<%= render layout: 'shared/form_group', locals: { f: f, field: :country, label: 'Countries' } do %>
+<%= render layout: 'shared/form_group', locals: { f: f, field: :country, label: "Countries" } do %>
   <%=
     f.select :country, facet_options(f, :country),
       { include_blank: true },
@@ -18,7 +18,7 @@
   %>
 <% end %>
 
-<%= render layout: 'shared/form_group', locals: { f: f, field: :theme, label: 'Themes' } do %>
+<%= render layout: 'shared/form_group', locals: { f: f, field: :theme } do %>
   <%=
     f.select :theme, facet_options(f, :theme),
              { include_blank: false },
@@ -27,7 +27,7 @@
 <% end %>
 <%= render layout: "shared/date_fields", locals: { f: f, field: :first_published_at, format: :research_for_development_output } do %>
 <% end %>
-<%= render layout: 'shared/form_group', locals: { f: f, field: :review_status, label: 'Review status' } do %>
+<%= render layout: 'shared/form_group', locals: { f: f, field: :review_status } do %>
   <%= f.select :review_status, review_status_options,
     {},
     { class: 'form-control' } %>

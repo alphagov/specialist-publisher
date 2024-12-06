@@ -50,7 +50,7 @@ RSpec.feature "Creating a DRCF digital markets research", type: :feature do
     fill_in "[drcf_digital_markets_research]digital_market_research_publish_date(2i)", with: "02"
     fill_in "[drcf_digital_markets_research]digital_market_research_publish_date(3i)", with: "02"
     select "Ad hoc research", from: "Category"
-    select "Gambling Commission", from: "Publisher"
+    select "Gambling Commission", from: "Original publisher"
     select "Media and entertainment", from: "Research area"
     select "Future connectivity", from: "Research topic"
 
@@ -115,7 +115,7 @@ RSpec.feature "Creating a DRCF digital markets research", type: :feature do
     fill_in "[drcf_digital_markets_research]digital_market_research_publish_date(2i)", with: "02"
     fill_in "[drcf_digital_markets_research]digital_market_research_publish_date(3i)", with: "31"
     select "Ad hoc research", from: "Category"
-    select "Gambling Commission", from: "Publisher"
+    select "Gambling Commission", from: "Original publisher"
     select "Media and entertainment", from: "Research area"
     select "Future connectivity", from: "Research topic"
 

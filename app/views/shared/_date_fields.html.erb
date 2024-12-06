@@ -1,4 +1,4 @@
-<% label ||= field.to_s.humanize %>
+<% label ||= f.object.finder_schema.humanized_facet_name(field) %>
 
 <div class="form-group <%= 'elements-error' if field_has_errors(@document, field) %>">
   <%= f.label field, for: "#{format}_#{field}_year" do %>

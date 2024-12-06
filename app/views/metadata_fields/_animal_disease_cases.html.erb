@@ -1,7 +1,7 @@
-<%= render layout: "shared/date_fields", locals: { f: f, field: :disease_case_opened_date, format: :animal_disease_case, label: "Case opened date" } do %>
+<%= render layout: "shared/date_fields", locals: { f: f, field: :disease_case_opened_date, format: :animal_disease_case } do %>
 <% end %>
 
-<%= render layout: "shared/date_fields", locals: { f: f, field: :disease_case_closed_date, format: :animal_disease_case, label: "Case closed date" } do %>
+<%= render layout: "shared/date_fields", locals: { f: f, field: :disease_case_closed_date, format: :animal_disease_case } do %>
 <% end %>
 
 <%= render layout: "shared/form_group", locals: { f: f, field: :disease_type } do %>
@@ -18,7 +18,7 @@
   %>
 <% end %>
 
-<%= render layout: "shared/form_group", locals: { f: f, field: :zone_restriction, label: "Disease control zone restriction" } do %>
+<%= render layout: "shared/form_group", locals: { f: f, field: :zone_restriction } do %>
   <%= f.select :zone_restriction,
       f.object.facet_options(:zone_restriction),
       {

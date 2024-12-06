@@ -1,14 +1,14 @@
-<%= render layout: "shared/form_group", locals: { f: f, field: :product_alert_type, label: "Alert type" } do %>
+<%= render layout: "shared/form_group", locals: { f: f, field: :product_alert_type do %>
   <%= f.select :product_alert_type, facet_options(f, :product_alert_type), {}, { class: "form-control" } %>
 <% end %>
-<%= render layout: "shared/form_group", locals: { f: f, field: :product_risk_level, label: "Risk level" } do %>
+<%= render layout: "shared/form_group", locals: { f: f, field: :product_risk_level } do %>
   <%= f.select :product_risk_level, facet_options(f, :product_risk_level), {}, { class: "form-control" } %>
 <% end %>
-<%= render layout: "shared/form_group", locals: { f: f, field: :product_category, label: "Product category" } do %>
+<%= render layout: "shared/form_group", locals: { f: f, field: :product_category } do %>
   <%= f.select :product_category, facet_options(f, :product_category), {}, { class: "form-control" } %>
 <% end %>
-<%= render layout: "shared/form_group", locals: { f: f, field: :product_measure_type, label: "Measure type" } do %>
+<%= render layout: "shared/form_group", locals: { f: f, field: :product_measure_type } do %>
   <%= f.select :product_measure_type, facet_options(f, :product_measure_type), {}, { class: "form-control", multiple: true } %>
 <% end %>
-<%= render layout: "shared/date_fields", locals: { f: f, field: :product_recall_alert_date, format: :product_safety_alert_report_recall, label: "Recall/alert date" } do %>
+<%= render layout: "shared/date_fields", locals: { f: f, field: :product_recall_alert_date, format: :product_safety_alert_report_recall } do %>
 <% end %>

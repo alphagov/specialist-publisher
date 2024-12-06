@@ -1,4 +1,4 @@
-<%= render layout: "shared/form_group", locals: { f: f, field: :digital_market_research_category, label: "Category" } do %>
+<%= render layout: "shared/form_group", locals: { f: f, field: :digital_market_research_category } do %>
   <%= f.select :digital_market_research_category,
       f.object.facet_options(:digital_market_research_category),
       {
@@ -13,7 +13,7 @@
       }
   %>
 <% end %>
-<%= render layout: "shared/form_group", locals: { f: f, field: :digital_market_research_publisher, label: "Publisher" } do %>
+<%= render layout: "shared/form_group", locals: { f: f, field: :digital_market_research_publisher } do %>
   <%= f.select :digital_market_research_publisher,
       f.object.facet_options(:digital_market_research_publisher),
       {},
@@ -27,7 +27,7 @@
       }
   %>
 <% end %>
-<%= render layout: "shared/form_group", locals: { f: f, field: :digital_market_research_area, label: "Research area" } do %>
+<%= render layout: "shared/form_group", locals: { f: f, field: :digital_market_research_area } do %>
   <%= f.select :digital_market_research_area,
       f.object.facet_options(:digital_market_research_area),
       {},
@@ -41,7 +41,7 @@
       }
   %>
 <% end %>
-<%= render layout: "shared/form_group", locals: { f: f, field: :digital_market_research_topic, label: "Research topic" } do %>
+<%= render layout: "shared/form_group", locals: { f: f, field: :digital_market_research_topic } do %>
   <%= f.select :digital_market_research_topic,
       f.object.facet_options(:digital_market_research_topic),
       {},
@@ -58,6 +58,5 @@
 <%= render "shared/date_fields",
   f: f,
   field: :digital_market_research_publish_date,
-  format: :drcf_digital_markets_research,
-  label: "Research publish date"
+  format: :drcf_digital_markets_research
 %>
