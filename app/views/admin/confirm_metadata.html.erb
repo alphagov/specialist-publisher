@@ -39,7 +39,7 @@
 
     <div class="govuk-button-group govuk-!-margin-top-7">
       <%= form_tag "/admin/zendesk/#{current_format.admin_slug}", method: 'post' do %>
-        <%= hidden_field_tag :proposed_schema, JSON.pretty_generate(@proposed_schema) %>
+        <%= hidden_field_tag :proposed_schema, @proposed_schema.to_json %>
         <%= render "govuk_publishing_components/components/button", {
           text: "Submit changes"
         } %>
