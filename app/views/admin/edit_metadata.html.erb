@@ -146,7 +146,7 @@
         hint: "For example ‘scheme’. On Finance and support for your business there’s 151 schemes, which updates when you start selecting filter options"
       } %>
 
-      <%= render EmailAlertFieldsetComponent.new(schema: current_format.finder_schema) %>
+      <%= render EmailAlertFieldsetComponent.new(email_alert: EmailAlert.from_finder_schema(current_format.finder_schema)) %>
 
       <div class="govuk-button-group govuk-!-margin-top-8">
         <%= render "govuk_publishing_components/components/button", {

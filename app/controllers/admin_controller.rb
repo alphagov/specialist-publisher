@@ -15,10 +15,12 @@ class AdminController < ApplicationController
       :summary,
       :show_summaries,
       :document_noun,
-      *email_alert_params,
       organisations: [],
       related: [],
     )
+
+    email_alert = EmailAlert.from_finder_admin_form_params(email_alert_params)
+    @params.merge!(email_alert.to_finder_schema_attributes)
 
     @proposed_schema = FinderSchema.new(@current_format.finder_schema.attributes)
     @proposed_schema.update(@params.to_unsafe_h)
@@ -63,12 +65,14 @@ private
   end
 
   def email_alert_params
-    permitted_email_alert_params = {
-      "all_content" => %i[signup_content_id subscription_list_title_prefix],
-      "filtered_content" => %i[signup_content_id email_filter_by],
-      "external" => %i[signup_link],
-      "no" => [],
-    }
-    permitted_email_alert_params[params[:email_alerts]]
+    params.permit(
+      :email_alert_type,
+      :all_content_signup_id,
+      :all_content_list_title_prefix,
+      :filtered_content_signup_id,
+      :filtered_content_list_title_prefix,
+      :email_filter_by,
+      :signup_link,
+    )
   end
 end

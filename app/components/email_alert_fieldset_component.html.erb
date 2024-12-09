@@ -7,30 +7,30 @@
     heading: "Would you like to set up email alerts for the finder?",
     heading_size: "s",
     hint: "Email alerts should only be added if you've tested a user need for these",
-    name: "email_alerts",
+    name: "email_alert_type",
     items: [
       {
         value: "all_content",
         text: "Yes. Allow users to sign up to email alerts for everything published on the finder.",
-        checked: @schema.signup_content_id,
+        checked: @email_alert.type == :all_content,
         conditional: render_all_content_condition_inputs
       },
       {
         value: "filtered_content",
         text: "Yes. Allow users to sign up by specific filter criteria",
-        checked: @schema.email_filter_by,
+        checked: @email_alert.type == :filtered_content,
         conditional: render_filtered_content_condition_inputs
       },
       {
         value: "external",
         text: "Yes. Allow users to sign up for updates using a signup link.",
-        checked: @schema.signup_link,
+        checked: @email_alert.type == :external,
         conditional: render_external_condition_inputs
       },
       {
         value: "no",
         text: "No",
-        checked: !@schema.signup_content_id
+        checked: @email_alert.type == :no
       }
     ]
   } %>
