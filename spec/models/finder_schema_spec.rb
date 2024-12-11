@@ -64,25 +64,6 @@ RSpec.describe FinderSchema do
     end
   end
 
-  describe "#reset_email_alerts" do
-    it "resets email alert fields when update is called" do
-      schema = FinderSchema.new
-      schema.assign_attributes(
-        signup_content_id: "123",
-        subscription_list_title_prefix: "456",
-        signup_link: "789",
-        email_filter_by: "foo",
-        email_filter_facets: "bar",
-      )
-      schema.update({})
-      expect(schema.signup_content_id).to be_nil
-      expect(schema.subscription_list_title_prefix).to be_nil
-      expect(schema.signup_link).to be_nil
-      expect(schema.email_filter_by).to be_nil
-      expect(schema.email_filter_facets).to be_nil
-    end
-  end
-
   describe "#override_signup_copy" do
     it "overrides the signup copy based on the document noun on update if the schema has signup copy" do
       schema = FinderSchema.new

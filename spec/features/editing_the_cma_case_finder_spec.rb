@@ -32,7 +32,7 @@ RSpec.feature "Editing the CMA case finder", type: :feature do
     fill_in "Link 2", with: "Changed link 2"
     fill_in "Link 3", with: "Changed link 3"
     fill_in "document_noun", with: "Changed document noun"
-    choose "email_alerts", option: "no"
+    choose "email_alert_type", option: "no"
 
     click_button "Submit changes"
 

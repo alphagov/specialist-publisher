@@ -1,27 +1,27 @@
 class EmailAlertFieldsetComponent < ViewComponent::Base
-  def initialize(schema:)
-    @schema = schema
+  def initialize(email_alert:)
+    @email_alert = email_alert
   end
 
   def render_all_content_condition_inputs
     signup_content_id_input = render("govuk_publishing_components/components/input", {
       type: "hidden",
-      name: "signup_content_id",
-      value: @schema.signup_content_id || SecureRandom.uuid,
+      name: "all_content_signup_id",
+      value: @email_alert.content_id || SecureRandom.uuid,
     })
 
     # Do not render the title prefix input if the value is a hash because we don't want to override the existing the existing
     # values in such cases. We are going to revisit this later, but for now we only allow users to override this setting
     # for finders with a single string value. Trello card for future work: https://trello.com/c/Qe8wOpaw
-    if @schema.subscription_list_title_prefix.is_a?(Hash)
+    if @email_alert.list_title_prefix.is_a?(Hash)
       signup_content_id_input
     else
       render("govuk_publishing_components/components/input", {
         label: {
           text: "Email subscription topic",
         },
-        name: "subscription_list_title_prefix",
-        value: @schema.subscription_list_title_prefix,
+        name: "all_content_list_title_prefix",
+        value: @email_alert.list_title_prefix,
       }) + signup_content_id_input
     end
   end
@@ -30,12 +30,12 @@ class EmailAlertFieldsetComponent < ViewComponent::Base
   def render_filtered_content_condition_inputs
     render("govuk_publishing_components/components/input", {
       type: "hidden",
-      name: "signup_content_id",
-      value: @schema.signup_content_id || SecureRandom.uuid,
+      name: "filtered_content_signup_id",
+      value: @email_alert.content_id || SecureRandom.uuid,
     }) +
       render("govuk_publishing_components/components/checkboxes", {
         name: "email_filter_by",
-        heading: "Selected filter: #{@schema.email_filter_by&.humanize}",
+        heading: "Selected filter: #{@email_alert.filter&.humanize}",
         items: [
           {
             label: "Make changes to this filter criteria (The development team will reach out to you to discuss the requirements to allow users to sign up by specific filter criteria)",
@@ -52,7 +52,7 @@ class EmailAlertFieldsetComponent < ViewComponent::Base
       },
       hint: "A link to an email signup page",
       name: "signup_link",
-      value: @schema.signup_link,
+      value: @email_alert.link,
     })
   end
 end

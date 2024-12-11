@@ -6,7 +6,6 @@ class FinderSchema
 
   define_model_callbacks :update
 
-  before_update :reset_email_alerts
   after_update :override_signup_copy, :remove_empty_related_links, :remove_empty_organisations
 
   # Pluralized names of all document types
@@ -63,16 +62,6 @@ class FinderSchema
 
   def format
     filter["format"]
-  end
-
-  def reset_email_alerts
-    assign_attributes(
-      signup_content_id: nil,
-      subscription_list_title_prefix: nil,
-      signup_link: nil,
-      email_filter_by: nil,
-      email_filter_facets: nil,
-    )
   end
 
   def override_signup_copy
