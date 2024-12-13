@@ -18,6 +18,7 @@ class EmailAlertFieldsetComponent < ViewComponent::Base
       render("govuk_publishing_components/components/checkboxes", {
         name: "email_filter_by",
         heading: "Selected filter: #{@email_alert.filter&.humanize}",
+        no_hint_text: true,
         items: [
           {
             label: "Make changes to this filter criteria (The development team will reach out to you to discuss the requirements to allow users to sign up by specific filter criteria)",
@@ -53,6 +54,7 @@ private
       },
       name: input_name,
       value: @email_alert.list_title_prefix,
+      hint: "This reminds subscribers of the topic of the finder when they are sent emails or they are managing their subscriptions. Example: 'Funding for land or farms'",
     })
   end
 
