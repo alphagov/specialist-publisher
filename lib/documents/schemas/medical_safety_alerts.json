@@ -3,7 +3,7 @@
   "content_id": "1e9c0ada-5f7e-43cc-a55f-cc32757edaa3",
   "base_path": "/drug-device-alerts",
   "format_name": "Medical safety alert",
-  "name": "Alerts, recalls and safety information: drugs and medical devices",
+  "name": "Alerts, recalls and safety information: medicines and medical devices",
   "description": "Find alerts and recalls issued by MHRA",
   "filter": {
     "format": "medical_safety_alert"
