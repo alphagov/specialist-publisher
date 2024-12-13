@@ -4,19 +4,17 @@ class EmailAlertFieldsetComponent < ViewComponent::Base
   end
 
   def render_all_content_condition_inputs
-    hidden_signup_content_id_input = hidden_signup_content_id_input("all_content_signup_id")
-
-    # Do not render the title prefix input if the value is a hash because we don't want to override the existing the existing
-    # values in such cases. We are going to revisit this later, but for now we only allow users to override this setting
-    # for finders with a single string value. Trello card for future work: https://trello.com/c/Qe8wOpaw
-    return hidden_signup_content_id_input if @email_alert.list_title_prefix.is_a?(Hash)
-
-    email_topic_list_title_prefix("all_content_list_title_prefix") + hidden_signup_content_id_input
+    [
+      render_hidden_signup_content_id_input("all_content_signup_id"),
+      render_email_topic_list_title_prefix("all_content_list_title_prefix"),
+    ].compact.join.html_safe
   end
 
   # We are handling changes to email facet filters offline at present.
   def render_filtered_content_condition_inputs
-    hidden_signup_content_id_input("filtered_content_signup_id") +
+    [
+      render_hidden_signup_content_id_input("filtered_content_signup_id"),
+      render_email_topic_list_title_prefix("filtered_content_list_title_prefix"),
       render("govuk_publishing_components/components/checkboxes", {
         name: "email_filter_by",
         heading: "Selected filter: #{@email_alert.filter&.humanize}",
@@ -26,7 +24,8 @@ class EmailAlertFieldsetComponent < ViewComponent::Base
             value: "CHANGE_REQUESTED",
           },
         ],
-      })
+      }),
+    ].compact.join.html_safe
   end
 
   def render_external_condition_inputs
@@ -42,7 +41,12 @@ class EmailAlertFieldsetComponent < ViewComponent::Base
 
 private
 
-  def email_topic_list_title_prefix(input_name)
+  def render_email_topic_list_title_prefix(input_name)
+    # Do not render the title prefix input if the value is a hash because we don't want to override the existing the existing
+    # values in such cases. We are going to revisit this later, but for now we only allow users to override this setting
+    # for finders with a single string value. Trello card for future work: https://trello.com/c/Qe8wOpaw
+    return if @email_alert.list_title_prefix.is_a?(Hash)
+
     render("govuk_publishing_components/components/input", {
       label: {
         text: "Email subscription topic",
@@ -52,7 +56,7 @@ private
     })
   end
 
-  def hidden_signup_content_id_input(input_name)
+  def render_hidden_signup_content_id_input(input_name)
     render("govuk_publishing_components/components/input", {
       type: "hidden",
       name: input_name,
