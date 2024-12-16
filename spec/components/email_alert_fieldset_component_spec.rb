@@ -91,4 +91,26 @@ RSpec.describe EmailAlertFieldsetComponent, type: :component do
     expect(page).to have_checked_field("email_alert_type", with: "filtered_content")
     expect(page).to have_field("filtered_content_signup_id", with: "new-id", type: "hidden")
   end
+
+  it "renders the email subscription topic if the filtered_content value is checked" do
+    email_alert = EmailAlert.new
+    email_alert.type = :filtered_content
+    email_alert.list_title_prefix = "Finder email subscription"
+    render_inline(described_class.new(email_alert:))
+
+    expect(page).to have_text("Email subscription topic")
+    expect(page).to have_field("filtered_content_list_title_prefix", with: email_alert.list_title_prefix)
+  end
+
+  # We do not render the title prefix input if the value is a hash because we don't want to override the existing the existing
+  # values in such cases. We are going to revisit this later. Trello card for future work: https://trello.com/c/Qe8wOpaw
+  it "does not render the email subscription topic if the filtered_content value is checked but the current topic value is a hash" do
+    email_alert = EmailAlert.new
+    email_alert.type = :filtered_content
+    email_alert.list_title_prefix = {}
+    render_inline(described_class.new(email_alert:))
+
+    expect(page).not_to have_text("Email subscription topic")
+    expect(page).not_to have_field("filtered_content_list_title_prefix", with: email_alert.list_title_prefix)
+  end
 end
