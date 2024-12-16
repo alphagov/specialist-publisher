@@ -1,0 +1,58 @@
+<%= render layout: "shared/form_group", locals: { f: f, field: :data_ethics_guidance_document_key_reference, label: "Key reference" } do %>
+  <%= f.select :data_ethics_guidance_document_key_reference,
+               facet_options(f, :data_ethics_guidance_document_key_reference),
+               {},
+               {
+                 class: 'form-control',
+                 multiple: false,
+                 data: {
+                   placeholder: 'Select key reference'
+                 }
+               }
+  %>
+<% end %>
+<%= render layout: "shared/form_group", locals: { f: f, field: :data_ethics_guidance_document_ethical_theme, label: "Ethical theme" } do %>
+  <%= f.select :data_ethics_guidance_document_ethical_theme,
+               facet_options(f, :data_ethics_guidance_document_ethical_theme),
+               {},
+               {
+                 class: 'select2 form-control',
+                 multiple: true,
+                 data: {
+                   placeholder: 'Select theme'
+                 }
+               }
+  %>
+<% end %>
+<%= render layout: "shared/form_group", locals: { f: f, field: :data_ethics_guidance_document_organisation, label: "Organisation" } do %>
+  <%= f.text_field :data_ethics_guidance_document_organisation,
+                   class: 'form-control',
+                   placeholder: 'Add organisation'
+  %>
+<% end %>
+<%= render layout: "shared/form_group", locals: { f: f, field: :data_ethics_guidance_document_project_phase, label: "Project phase" } do %>
+  <%= f.select :data_ethics_guidance_document_project_phase,
+               facet_options(f, :data_ethics_guidance_document_project_phase),
+               {},
+               {
+                 class: 'select2 form-control',
+                 multiple: true,
+                 data: {
+                   placeholder: 'Select project phase'
+                 }
+               }
+  %>
+<% end %>
+<%= render layout: "shared/form_group", locals: { f: f, field: :data_ethics_guidance_document_technology_area, label: "Technology area" } do %>
+  <%= f.select :data_ethics_guidance_document_technology_area,
+               facet_options(f, :data_ethics_guidance_document_technology_area),
+               {},
+               {
+                 class: 'select2 form-control',
+                 multiple: true,
+                 data: {
+                   placeholder: 'Select technology area'
+                 }
+               }
+  %>
+<% end %>

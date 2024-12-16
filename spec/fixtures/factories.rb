@@ -659,6 +659,18 @@ FactoryBot.define do
     end
   end
 
+  factory :data_ethics_guidance_document, parent: :document do
+    base_path { "/data-ethics-guidance-hub/example-document" }
+    document_type { "data_ethics_guidance_document" }
+
+    transient do
+      default_metadata do
+        { "data_ethics_guidance_document_ethical_theme" => %w[appropriate-transparency-and-explainability],
+          "data_ethics_guidance_document_technology_area" => %w[analytical-models] }
+      end
+    end
+  end
+
   factory :statutory_instrument, parent: :document do
     base_path { "/eu-withdrawal-act-2018-statutory-instruments/example-document" }
     document_type { "statutory_instrument" }

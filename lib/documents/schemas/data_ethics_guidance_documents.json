@@ -1,0 +1,161 @@
+{
+  "target_stack": "draft",
+  "content_id": "2437862c-56d6-49f9-a5a5-f2a9460cc3ee",
+  "base_path": "/data-ethics-guidance-hub",
+  "format_name": "Data Ethics Guidance Hub",
+  "name": "Data Ethics Guidance Hub",
+  "description": "This hub collates existing guidance for the responsible use and development of data and data-driven technologies, including artificial intelligence (AI), developed by and for government and public sector bodies.",
+  "summary": "<p>This hub collates existing guidance for the responsible use and development of data and data-driven technologies, including artificial intelligence (AI), developed by and for government and public sector bodies. It aims to provide a helpful starting point for civil servants and public sector organisations using data and data-driven technologies.</p><p>This page was developed by the Central Digital & Data Office, and will be updated over time with new resources. If you are aware of other guidance that should be included, please contact us on <a href=\"mailto:data.ethics@digital.cabinet-office.gov.uk\">data.ethics@digital.cabinet-office.gov.uk</a>.</p>",
+  "filter": {
+    "format": "data_ethics_guidance_document"
+  },
+  "related": [],
+  "show_summaries": true,
+  "organisations": [
+    "2fb482e7-3c4d-496f-887d-f8a55a15e89a"
+  ],
+  "document_noun": "guidance document",
+  "document_title": "Data ethics guidance document",
+  "facets": [
+    {
+      "key": "data_ethics_guidance_document_key_reference",
+      "name": "Key reference",
+      "short_name": "Key reference",
+      "type": "text",
+      "preposition": "Key reference",
+      "display_as_result_metadata": false,
+      "filterable": true,
+      "allowed_values": [
+        {
+          "label": "No",
+          "value": "no"
+        },
+        {
+          "label": "Yes",
+          "value": "yes"
+        }
+      ]
+    },
+    {
+      "key": "data_ethics_guidance_document_ethical_theme",
+      "name": "Ethical theme",
+      "type": "text",
+      "preposition": "Ethical theme",
+      "short_name": "Ethical theme",
+      "display_as_result_metadata": true,
+      "filterable": true,
+      "allowed_values": [
+        {
+          "label": "Safety, Security and Robustness",
+          "value": "safety-security-and-robustness"
+        },
+        {
+          "label": "Appropriate Transparency and Explainability",
+          "value": "appropriate-transparency-and-explainability"
+        },
+        {
+          "label": "Fairness",
+          "value": "fairness"
+        },
+        {
+          "label": "Accountability and Governance",
+          "value": "accountability-and-governance"
+        },
+        {
+          "label": "Contestability and Redress",
+          "value": "contestability-and-redress"
+        },
+        {
+          "label": "Privacy",
+          "value": "privacy"
+        },
+        {
+          "label": "Societal Wellbeing",
+          "value": "societal-wellbeing"
+        }
+      ]
+    },
+    {
+      "key": "data_ethics_guidance_document_organisation",
+      "name": "Organisation",
+      "short_name": "Organisation",
+      "type": "text",
+      "display_as_result_metadata": true,
+      "filterable": false
+    },
+    {
+      "key": "data_ethics_guidance_document_project_phase",
+      "name": "Project phase",
+      "short_name": "Project phase",
+      "type": "text",
+      "preposition": "Project phase",
+      "display_as_result_metadata": false,
+      "filterable": true,
+      "allowed_values": [
+        {
+          "label": "Across Lifecycle",
+          "value": "across-lifecycle"
+        },
+        {
+          "label": "Planning",
+          "value": "planning"
+        },
+        {
+          "label": "Initiation",
+          "value": "initiation"
+        },
+        {
+          "label": "Procurement",
+          "value": "procurement"
+        },
+        {
+          "label": "Implementation",
+          "value": "implementation"
+        },
+        {
+          "label": "Monitoring/Review",
+          "value": "monitoring-review"
+        }
+      ]
+    },
+    {
+      "key": "data_ethics_guidance_document_technology_area",
+      "name": "Technology area",
+      "short_name": "Technology area",
+      "type": "text",
+      "preposition": "Technology area",
+      "display_as_result_metadata": true,
+      "filterable": true,
+      "allowed_values": [
+        {
+          "label": "AI",
+          "value": "ai"
+        },
+        {
+          "label": "Generative AI",
+          "value": "generative-ai"
+        },
+        {
+          "label": "Analytical Models",
+          "value": "analytical-models"
+        },
+        {
+          "label": "Research and Statistics",
+          "value": "research-and-statistics"
+        },
+        {
+          "label": "Data",
+          "value": "data"
+        },
+        {
+          "label": "Responsible Innovation",
+          "value": "responsible-innovation"
+        },
+        {
+          "label": "Automated Decision Making",
+          "value": "automated-decision-making"
+        }
+      ]
+    }
+  ]
+}
