@@ -1,4 +1,4 @@
-<%= render layout: "shared/form_group", locals: { f: f, field: :algorithmic_transparency_record_organisation, label: "Organisation" } do %>
+<%= render layout: "shared/form_group", locals: { f: f, field: :algorithmic_transparency_record_organisation } do %>
   <%= f.select :algorithmic_transparency_record_organisation,
                f.object.facet_options(:algorithmic_transparency_record_organisation),
                {
@@ -14,7 +14,7 @@
   %>
 <% end %>
 
-<%= render layout: "shared/form_group", locals: { f: f, field: :algorithmic_transparency_record_organisation_type, label: "Organisation type" } do %>
+<%= render layout: "shared/form_group", locals: { f: f, field: :algorithmic_transparency_record_organisation_type } do %>
   <%= f.select :algorithmic_transparency_record_organisation_type,
                f.object.facet_options(:algorithmic_transparency_record_organisation_type),
                {},
@@ -28,7 +28,7 @@
   %>
 <% end %>
 
-<%= render layout: "shared/form_group", locals: { f: f, field: :algorithmic_transparency_record_function, label: "Function" } do %>
+<%= render layout: "shared/form_group", locals: { f: f, field: :algorithmic_transparency_record_function } do %>
   <%= f.select :algorithmic_transparency_record_function,
                f.object.facet_options(:algorithmic_transparency_record_function),
                {},
@@ -42,7 +42,7 @@
   %>
 <% end %>
 
-<%= render layout: "shared/form_group", locals: { f: f, field: :algorithmic_transparency_record_capability, label: "Capability" } do %>
+<%= render layout: "shared/form_group", locals: { f: f, field: :algorithmic_transparency_record_capability } do %>
   <%= f.select :algorithmic_transparency_record_capability,
                f.object.facet_options(:algorithmic_transparency_record_capability),
                {},
@@ -56,11 +56,11 @@
   %>
 <% end %>
 
-<%= render layout: "shared/form_group", locals: { f: f, field: :algorithmic_transparency_record_task, label: "Task" } do %>
+<%= render layout: "shared/form_group", locals: { f: f, field: :algorithmic_transparency_record_task } do %>
   <%= f.text_field :algorithmic_transparency_record_task, class: 'form-control' %>
 <% end %>
 
-<%= render layout: "shared/form_group", locals: { f: f, field: :algorithmic_transparency_record_phase, label: "Phase" } do %>
+<%= render layout: "shared/form_group", locals: { f: f, field: :algorithmic_transparency_record_phase } do %>
   <%= f.select :algorithmic_transparency_record_phase,
                f.object.facet_options(:algorithmic_transparency_record_phase),
                {
@@ -76,7 +76,7 @@
   %>
 <% end %>
 
-<%= render layout: "shared/form_group", locals: { f: f, field: :algorithmic_transparency_record_region, label: "Region" } do %>
+<%= render layout: "shared/form_group", locals: { f: f, field: :algorithmic_transparency_record_region } do %>
   <%= f.select :algorithmic_transparency_record_region,
                f.object.facet_options(:algorithmic_transparency_record_region),
                {},
@@ -90,13 +90,13 @@
   %>
 <% end %>
 
-<%= render layout: "shared/date_fields", locals: { f: f, field: :algorithmic_transparency_record_date_published, format: :algorithmic_transparency_record, label: "Date published" } do %>
+<%= render layout: "shared/date_fields", locals: { f: f, field: :algorithmic_transparency_record_date_published, format: :algorithmic_transparency_record } do %>
 <% end %>
 
-<%= render layout: "shared/form_group", locals: { f: f, field: :algorithmic_transparency_record_atrs_version, label: "ATRS version" } do %>
+<%= render layout: "shared/form_group", locals: { f: f, field: :algorithmic_transparency_record_atrs_version } do %>
   <%= f.text_field :algorithmic_transparency_record_atrs_version, class: 'form-control' %>
 <% end %>
 
-<%= render layout: "shared/form_group", locals: { f: f, field: :algorithmic_transparency_record_other_tags, label: "Other tags" } do %>
+<%= render layout: "shared/form_group", locals: { f: f, field: :algorithmic_transparency_record_other_tags } do %>
   <%= f.text_field :algorithmic_transparency_record_other_tags, class: 'form-control' %>
 <% end %>

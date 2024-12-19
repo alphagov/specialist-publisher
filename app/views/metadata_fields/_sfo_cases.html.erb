@@ -1,5 +1,5 @@
-<%= render layout: "shared/date_fields", locals: { f: f, field: :sfo_case_date_announced, format: :sfo_case,  label: "Date announced" } do %>
+<%= render layout: "shared/date_fields", locals: { f: f, field: :sfo_case_date_announced, format: :sfo_case } do %>
 <% end %>
-<%= render layout: "shared/form_group", locals: { f: f, field: :sfo_case_state, label: "Case state" } do %>
+<%= render layout: "shared/form_group", locals: { f: f, field: :sfo_case_state } do %>
     <%= f.select :sfo_case_state, facet_options(f, :sfo_case_state), {}, { class: 'form-control' } %>
 <% end %>
