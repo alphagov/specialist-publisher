@@ -1,0 +1,133 @@
+<% content_for :breadcrumbs do %>
+  <%= render "govuk_publishing_components/components/breadcrumbs", {
+  collapse_on_mobile: true,
+    breadcrumbs: [
+      {
+        title: "All finders",
+        url: root_path
+      },
+      {
+        title: "#{current_format.title} finder",
+        url: "/admin/#{current_format.admin_slug}"
+      },
+      {
+        title: "Request change",
+        url: request.original_url
+      }
+    ]
+  } %>
+<% end %>
+<% content_for :page_title, "Edit #{current_format.title} finder" %>
+<% content_for :title, "Request change: Filters and options" %>
+<% content_for :context, "#{current_format.title} finder" %>
+
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+    <%= form_tag do %>
+      <p class="govuk-body govuk-body govuk-!-margin-top-7">
+        Filters and its options are to help users find desired content on a specialist finder. These are selected by you for each specialist content created in the Specialist Publisher and are shown in the blue box on the documents and elsewhere - this should include the type (for example, free text, multiple choice, one option, a date).
+      </p>
+
+      <p class="govuk-body govuk-body">
+        For example, a filter could be ‘Region’ and options could be ‘North East, North West, South West…’ and you can only select one region when creating the specialist document in Specialist Publisher.
+      </p>
+
+      <%= current_format.finder_schema.schema["facets"].each_with_index do |facet, index| %>
+        <div class="js-duplicate-fields-set govuk-!-margin-bottom-6">
+          <%= render "govuk_publishing_components/components/input", {
+            label: {
+              text: "Filter",
+              heading_size: "s",
+            },
+            name: "facet[#{index}][name]",
+            value: facet["name"],
+            hint: "Example: Disease control zone type"
+          } %>
+          <%= render "govuk_publishing_components/components/input", {
+            label: {
+              text: "Filter short name (optional)",
+              heading_size: "s",
+            },
+            name: "facet[#{index}][short_name]",
+            value: facet["short_name"],
+            hint: "Example: Control zone type. This is displayed in the search results"
+          } %>
+          <%= render "govuk_publishing_components/components/select", {
+            name: "facet[#{index}][type]",
+            id: "facet[#{index}][type]",
+            label: "Type",
+            heading_size: "s",
+            options: [
+                {
+                  text: "Text",
+                  value: "text",
+                  selected: facet["type"] == "text",
+                },
+                {
+                  text: "Date",
+                  value: "date",
+                  selected: facet["type"] == "date",
+                }
+              ]
+          } %>
+          <%= render "govuk_publishing_components/components/radio", {
+            heading: "Filterable by users on finder list page?",
+            heading_size: "s",
+            name: "facet[#{index}][filterable]",
+            inline: true,
+            items: [
+              {
+                value: "true",
+                text: "Yes",
+                checked: facet["filterable"]
+              },
+              {
+                value: "false",
+                text: "No",
+                checked: !facet["filterable"]
+              }
+            ]
+          } %>
+          <%= render "govuk_publishing_components/components/radio", {
+            heading: "Show as information under content item in finder list page?",
+            heading_size: "s",
+            hint: "For example: “Region: North East” on the finder list page page where all the documents show",
+            name: "facet[#{index}][display_as_result_metadata]",
+            inline: true,
+            items: [
+              {
+                value: "true",
+                text: "Yes",
+                checked: facet["display_as_result_metadata"]
+              },
+              {
+                value: "false",
+                text: "No",
+                checked: !facet["display_as_result_metadata"]
+              }
+            ]
+          } %>
+          <%= render "govuk_publishing_components/components/input", {
+            label: {
+              text: "Preposition (to be displayed when filter option is selected in finder list page)",
+              heading_size: "s",
+            },
+            name: "facet[#{index}][preposition]",
+            value: facet["preposition"],
+            hint: "Example: with disease control type"
+          } %>
+        </div>
+        <hr>
+      <% end %>
+
+      <div class="govuk-button-group govuk-!-margin-top-8">
+        <%= render "govuk_publishing_components/components/button", {
+          text: "Submit changes",
+        } %>
+
+        <%= link_to("Cancel", "/admin/#{current_format.admin_slug}", class: "govuk-link govuk-link--no-visited-state") %>
+      </div>
+    <% end %>
+  </div>
+</div>
