@@ -30,10 +30,18 @@ class AdminController < ApplicationController
         @params["facets"].delete(facet)
       end
 
+      if facet["display_as_result_metadata"]
+        facet["display_as_result_metadata"] = facet["display_as_result_metadata"] == "true"
+      end
+      if facet["filterable"]
+        facet["filterable"] = facet["filterable"] == "true"
+      end
+
       if facet["allowed_values"]
-        # TODO
-        # facet["allowed_values"] = [ { key: "foo", name: "Foo" } ]
-        facet["allowed_values"] = facet["allowed_values"].split(",").map { |str| { key: str, name: str } }
+        facet["allowed_values"] = facet["allowed_values"].gsub('\\"', '"').split('",').map do |str|
+          human_readable_label = str.strip.gsub('"', '')
+          { label: human_readable_label, value: human_readable_label }
+        end
       end
     end
 
