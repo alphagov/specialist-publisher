@@ -2,21 +2,29 @@
   summary_card_actions ||= []
   
   if (defined? previous_schema)
-    new_facets = schema.facets.map { |facet| facet["name"] } - previous_schema.facets.map { |facet| facet["name"] }
+    proposed_schema_facet_names = schema.facets.map { |facet| facet["name"] }
+    previous_schema_facet_names = previous_schema.facets.map { |facet| facet["name"] }
+    new_facets = proposed_schema_facet_names - previous_schema_facet_names
     removed_facets = previous_schema.facets.map { |facet| facet["name"] } - schema.facets.map { |facet| facet["name"] }
     facets_with_updated_config = schema.facets.select do |facet|
       old_facet_config = previous_schema.facets.find { |f| f["name"] == facet["name"] }
       new_facet_config = schema.facets.find { |f| f["name"] == facet["name"] }
       !facet["name"].in?(removed_facets) && old_facet_config != new_facet_config
-    end
+    end.map { |facet| facet["name"] }
 %>
-  New facets:
+  <h2>proposed_schema_facet_names</h2>
+  <%= proposed_schema_facet_names %>
+
+  <h2>previous_schema_facet_names:</h2>
+  <%= previous_schema_facet_names %>
+
+  <h2>New facets:</h2>
   <%= new_facets %>
 
-  Removed facets:
+  <h2>Removed facets:</h2>
   <%= removed_facets %>
 
-  Updated facet configs:
+  <h2>Updated facet configs:</h2>
   <%= facets_with_updated_config %>
 
   <h2>Proposed facets:</h2>

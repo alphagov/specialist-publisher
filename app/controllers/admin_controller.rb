@@ -21,10 +21,15 @@ class AdminController < ApplicationController
         :display_as_result_metadata,
         :TODO, #
         :preposition,
+        :_destroy,
      ]
     )
     @params["facets"] = @params["facets"].values
     @params["facets"].each do |facet|
+      if facet["_destroy"] == "1"
+        @params["facets"].delete(facet)
+      end
+
       if facet["allowed_values"]
         # TODO
         # facet["allowed_values"] = [ { key: "foo", name: "Foo" } ]
