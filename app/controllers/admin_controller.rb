@@ -7,10 +7,6 @@ class AdminController < ApplicationController
 
   def edit_facets; end
 
-  def confirm_metadata
-    render :confirm_facets
-  end
-
   def edit_metadata; end
 
   def confirm_metadata
