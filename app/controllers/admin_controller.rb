@@ -9,6 +9,35 @@ class AdminController < ApplicationController
 
   def edit_metadata; end
 
+  def confirm_facets
+    # TODO should 'require' :facets
+    @params = params.permit(
+      :facets => [
+        :name,
+        :short_name,
+        :type,
+        :allowed_values,
+        :filterable,
+        :display_as_result_metadata,
+        :TODO, #
+        :preposition,
+     ]
+    )
+    @params["facets"] = @params["facets"].values
+    @params["facets"].each do |facet|
+      if facet["allowed_values"]
+        # TODO
+        # facet["allowed_values"] = [ { key: "foo", name: "Foo" } ]
+        facet["allowed_values"] = facet["allowed_values"].split(",").map { |str| { key: str, name: str } }
+      end
+    end
+
+    @proposed_schema = FinderSchema.new(@current_format.finder_schema.attributes)
+    @proposed_schema.update(@params)
+
+    render :confirm_facets
+  end
+
   def confirm_metadata
     @params = params.permit(
       :name,

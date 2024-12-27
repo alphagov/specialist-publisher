@@ -35,7 +35,7 @@
         items: current_format.finder_schema.facets.each_with_index.map do  |facet, index|
           {
             fields: render(partial: "facet_fields", locals: { facet:, index: }),
-            destroy_checkbox: render("govuk_publishing_components/components/checkboxes", { name: "facet[#{index}][_destroy]", items: [{label: "Delete", value: "1" }]})
+            destroy_checkbox: render("govuk_publishing_components/components/checkboxes", { name: "facets[#{index}][_destroy]", items: [{label: "Delete", value: "1" }]})
           }
         end,
         empty: "",

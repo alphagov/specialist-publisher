@@ -69,7 +69,7 @@
     } %>
 
     <%= render "facets_summary_card", {
-      facets: current_format.finder_schema.facets,
+      schema: current_format.finder_schema,
       summary_card_actions: [
         {
           label: "Request changes",

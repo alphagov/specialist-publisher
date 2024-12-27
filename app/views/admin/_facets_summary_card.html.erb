@@ -1,10 +1,41 @@
 <%
   summary_card_actions ||= []
+  
+  if (defined? previous_schema)
+    new_facets = schema.facets.map { |facet| facet["name"] } - previous_schema.facets.map { |facet| facet["name"] }
+    removed_facets = previous_schema.facets.map { |facet| facet["name"] } - schema.facets.map { |facet| facet["name"] }
+    facets_with_updated_config = schema.facets.select do |facet|
+      old_facet_config = previous_schema.facets.find { |f| f["name"] == facet["name"] }
+      new_facet_config = schema.facets.find { |f| f["name"] == facet["name"] }
+      !facet["name"].in?(removed_facets) && old_facet_config != new_facet_config
+    end
 %>
+  New facets:
+  <%= new_facets %>
+
+  Removed facets:
+  <%= removed_facets %>
+
+  Updated facet configs:
+  <%= facets_with_updated_config %>
+
+  <h2>Proposed facets:</h2>
+  <%= schema.facets.inspect %>
+
+  <h2>Previous facets:</h2>
+  <%= previous_schema.facets.inspect %>
+<% end %>
 
 <%= render "govuk_publishing_components/components/summary_card", {
   title: "Filters and options",
-  rows: facets.map { |facet| { key: facet["name"] , value: facet["allowed_values"] ? facet["allowed_values"].first(3).map{ |value| value["label"] }.join(", ") + (facet["allowed_values"].length > 3 ? "…" : "") : facet["type"].humanize }},
+  rows: schema.facets.map do |facet|
+    {
+      key: facet["name"],
+      value: facet["allowed_values"] ?
+        facet["allowed_values"].first(3).map { |value| value["label"] }.join(", ") + (facet["allowed_values"].length > 3 ? "…" : "")
+        : facet["type"].humanize,
+    }
+  end,
   summary_card_actions:,
   margin_top: 6,
 } %>

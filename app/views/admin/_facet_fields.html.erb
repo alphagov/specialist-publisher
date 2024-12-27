@@ -3,7 +3,7 @@
     text: "Filter",
     heading_size: "s",
   },
-  name: "facet[#{index}][name]",
+  name: "facets[#{index}][name]",
   value: facet["name"],
   hint: "Example: Disease control zone type"
 } %>
@@ -13,13 +13,13 @@
     text: "Filter short name (optional)",
     heading_size: "s",
   },
-  name: "facet[#{index}][short_name]",
+  name: "facets[#{index}][short_name]",
   value: facet["short_name"],
   hint: "Example: Control zone type"
 } %>
 
 <%= render "govuk_publishing_components/components/select", {
-  name: "facet[#{index}][type]",
+  name: "facets[#{index}][type]",
   id: "facet[#{index}][type]",
   label: "Type",
   heading_size: "s",
@@ -42,16 +42,17 @@
     text: "Filter options",
     heading_size: "s",
   },
-  hint: sanitize("Separate options with commas<br>Example: Option 1, Option 2"),
-  name: "TODO",
+  hint: sanitize("Enclose options in quotes and separate with commas<br>Example: \"Option 1\", \"Option 2\""),
+  name: "facets[#{index}][allowed_values]",
   rows: 5,
-  value: "TODO",
+  # TODO corresponding facet value will be derived from label and subject to manual care by developer
+  value: facet["allowed_values"]&.map { |opt| "\"#{opt["label"]}\"" }&.join(", "), 
 } %>
 
 <%= render "govuk_publishing_components/components/radio", {
   heading: "Can users use this filter when searching for content items?",
   heading_size: "s",
-  name: "facet[#{index}][filterable]",
+  name: "facets[#{index}][filterable]",
   inline: true,
   items: [
     {
@@ -71,7 +72,7 @@
   heading: "Show as information under content item?",
   heading_size: "s",
   hint: "Example: Air Accidents Investigation Branch reports displays ‘Aircraft category: Commercial - fixed wing’ under relevant content items",
-  name: "facet[#{index}][display_as_result_metadata]",
+  name: "facets[#{index}][display_as_result_metadata]",
   inline: true,
   items: [
     {
@@ -90,7 +91,7 @@
 <%= render "govuk_publishing_components/components/radio", {
   heading: "Do publishers need to select an option for this filter when they add new content items?",
   heading_size: "s",
-  name: "facet[#{index}][TODO]",
+  name: "facets[#{index}][TODO]",
   inline: true,
   items: [
     {
@@ -111,7 +112,7 @@
     text: "Preposition (to be displayed when filter option is selected)",
     heading_size: "s",
   },
-  name: "facet[#{index}][preposition]",
+  name: "facets[#{index}][preposition]",
   value: facet["preposition"],
   hint: "Example: In Find funding for land or farms,  selecting an option in the filter ‘Area of interest’ displays the preposition ‘With’ before the selected option"
 } %>
