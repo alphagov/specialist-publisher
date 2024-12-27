@@ -30,11 +30,21 @@ class AdminController < ApplicationController
         @params["facets"].delete(facet)
       end
 
+      if facet["type"] == "enum_text"
+        facet.delete("allowed_values")
+        facet["type"] = "text"
+      end
       if facet["display_as_result_metadata"]
         facet["display_as_result_metadata"] = facet["display_as_result_metadata"] == "true"
       end
       if facet["filterable"]
         facet["filterable"] = facet["filterable"] == "true"
+      end
+      if facet["preposition"] == ""
+        facet.delete("preposition")
+      end
+      if facet["short_name"] == ""
+        facet.delete("short_name")
       end
 
       if facet["allowed_values"]

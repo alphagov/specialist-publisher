@@ -25,9 +25,14 @@
   heading_size: "s",
   options: [
       {
+        text: "Radio button",
+        value: "enum_text", # 'enum_text' only used to hide the 'filter options' field (TODO).
+        selected: facet["type"] == "text",
+      },
+      {
         text: "Text",
         value: "text",
-        selected: facet["type"] == "text",
+        selected: facet["type"] == "text" && facet["allowed_values"].nil?,
       },
       {
         text: "Date",
