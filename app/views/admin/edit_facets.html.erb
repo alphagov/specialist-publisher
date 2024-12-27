@@ -32,7 +32,7 @@
       <%= render "govuk_publishing_components/components/add_another", {
         fieldset_legend: "Filter",
         add_button_text: "Add another filter",
-        items: current_format.finder_schema.schema["facets"].each_with_index.map do  |facet, index|
+        items: current_format.finder_schema.facets.each_with_index.map do  |facet, index|
           {
             fields: render(partial: "facet_fields", locals: { facet:, index: }),
             destroy_checkbox: render("govuk_publishing_components/components/checkboxes", { name: "facet[#{index}][_destroy]", items: [{label: "Delete", value: "1" }]})
