@@ -6,6 +6,7 @@ gem "aws-sdk-s3"
 gem "bootsnap", require: false
 gem "bootstrap-kaminari-views"
 gem "dartsass-rails"
+gem "diffy"
 gem "gds-api-adapters"
 gem "gds-sso"
 gem "govspeak"
