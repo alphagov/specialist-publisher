@@ -1,7 +1,26 @@
 <%
   summary_card_actions ||= []
   
-  if (defined? previous_schema)
+  if !(defined? previous_schema)
+    # we're on the summary page, so only want to summarise the current facets
+%>
+  <%= render "govuk_publishing_components/components/summary_card", {
+    title: "Filters and options",
+    rows: schema.facets.map do |facet|
+      {
+        key: facet["name"],
+        value: facet["allowed_values"] ?
+          facet["allowed_values"].first(3).map { |value| value["label"] }.join(", ") + (facet["allowed_values"].length > 3 ? "…" : "")
+          : facet["type"].humanize,
+      }
+    end,
+    summary_card_actions:,
+    margin_top: 6,
+  } %>
+<% 
+  else
+    # we're on the edit page, so want to summarise the changes
+
     proposed_schema_facet_names = schema.facets.map { |facet| facet["name"] }
     previous_schema_facet_names = previous_schema.facets.map { |facet| facet["name"] }
     new_facets = proposed_schema_facet_names - previous_schema_facet_names
@@ -11,39 +30,38 @@
       new_facet_config = schema.facets.find { |f| f["name"] == facet["name"] }
       !facet["name"].in?(removed_facets) && old_facet_config != new_facet_config
     end.map { |facet| facet["name"] }
+
+    summary_rows = []
+    summary_rows += new_facets.map do |facet_name|
+      {
+        key: facet_name,
+        value: raw("<span style='color: green'>NEW (fields should be outputted here: TBC)</span>"),
+      }
+    end
+    summary_rows += removed_facets.map do |facet_name|
+      {
+        key: facet_name,
+        value: raw("<span style='color: red'>DELETED</span>"),
+      }
+    end
+    facets_with_updated_config.each do |facet_name|
+      old_facet_config = previous_schema.facets.find { |f| f["name"] == facet_name }
+      new_facet_config = schema.facets.find { |f| f["name"] == facet_name }
+      summary_rows << {
+        key: facet_name,
+        # value: raw("<span style='color: orange'>UPDATED (fields should be outputted here: TBC)</span>"),
+        value: Diffy::Diff.new(
+          JSON.pretty_generate(previous_schema.facets.find { |facet| facet["name"] == facet_name }).to_s,
+          JSON.pretty_generate(schema.facets.find { |facet| facet["name"] == facet_name }).to_s,
+          allow_empty_diff: false,
+        ).to_s(:html).html_safe,
+      }
+    end
 %>
-  <h2>proposed_schema_facet_names</h2>
-  <%= proposed_schema_facet_names %>
-
-  <h2>previous_schema_facet_names:</h2>
-  <%= previous_schema_facet_names %>
-
-  <h2>New facets:</h2>
-  <%= new_facets %>
-
-  <h2>Removed facets:</h2>
-  <%= removed_facets %>
-
-  <h2>Updated facet configs:</h2>
-  <%= facets_with_updated_config %>
-
-  <h2>Proposed facets:</h2>
-  <%= schema.facets.inspect %>
-
-  <h2>Previous facets:</h2>
-  <%= previous_schema.facets.inspect %>
+  <%= render "govuk_publishing_components/components/summary_card", {
+    title: "Filters and options",
+    rows: summary_rows,
+    summary_card_actions:,
+    margin_top: 6,
+  } %>
 <% end %>
-
-<%= render "govuk_publishing_components/components/summary_card", {
-  title: "Filters and options",
-  rows: schema.facets.map do |facet|
-    {
-      key: facet["name"],
-      value: facet["allowed_values"] ?
-        facet["allowed_values"].first(3).map { |value| value["label"] }.join(", ") + (facet["allowed_values"].length > 3 ? "…" : "")
-        : facet["type"].humanize,
-    }
-  end,
-  summary_card_actions:,
-  margin_top: 6,
-} %>
