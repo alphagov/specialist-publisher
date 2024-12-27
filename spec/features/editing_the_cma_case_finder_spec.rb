@@ -19,7 +19,7 @@ RSpec.feature "Editing the CMA case finder", type: :feature do
 
   scenario "changing all fields" do
     visit "admin/cma-cases"
-    click_link "Request changes"
+    click_link "Request changes", match: :first
 
     expect(page).to have_selector("span", text: "CMA Case finder")
     expect(page).to have_selector("h1", text: "Request change: Finder details")
@@ -53,7 +53,7 @@ RSpec.feature "Editing the CMA case finder", type: :feature do
 
   scenario "deleting all fields" do
     visit "admin/cma-cases"
-    click_link "Request changes"
+    click_link "Request changes", match: :first
 
     fill_in "name", with: ""
     fill_in "base_path", with: ""
