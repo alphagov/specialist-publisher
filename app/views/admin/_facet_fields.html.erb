@@ -18,40 +18,32 @@
   hint: "Example: Control zone type"
 } %>
 
-<%= render "govuk_publishing_components/components/select", {
+<%= render "govuk_publishing_components/components/radio", {
   name: "facets[#{index}][type]",
-  id: "facet[#{index}][type]",
-  label: "Type",
+  heading: "Type",
   heading_size: "s",
-  options: [
+  items: [
       {
         text: "Radio button",
         value: "enum_text", # 'enum_text' only used to hide the 'filter options' field (TODO).
-        selected: facet["type"] == "text",
+        checked: facet["type"] == "text",
+        conditional: render(partial: "facet_fields_options",
+          locals: {
+            facet:, index:
+          }
+        ),
       },
       {
         text: "Text",
         value: "text",
-        selected: facet["type"] == "text" && facet["allowed_values"].nil?,
+        checked: facet["type"] == "text" && facet["allowed_values"].nil?,
       },
       {
         text: "Date",
         value: "date",
-        selected: facet["type"] == "date",
+        checked: facet["type"] == "date",
       }
     ]
-} %>
-
-<%= render "govuk_publishing_components/components/textarea", {
-  label: {
-    text: "Filter options",
-    heading_size: "s",
-  },
-  hint: sanitize("Enclose options in quotes and separate with commas<br>Example: \"Option 1\", \"Option 2\""),
-  name: "facets[#{index}][allowed_values]",
-  rows: 5,
-  # TODO corresponding facet value will be derived from label and subject to manual care by developer
-  value: facet["allowed_values"]&.map { |opt| "\"#{opt["label"]}\"" }&.join(", "), 
 } %>
 
 <%= render "govuk_publishing_components/components/radio", {

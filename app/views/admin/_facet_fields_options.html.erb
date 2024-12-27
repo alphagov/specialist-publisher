@@ -1,0 +1,11 @@
+<%= render "govuk_publishing_components/components/textarea", {
+  label: {
+    text: "Filter options",
+    heading_size: "s",
+  },
+  hint: sanitize("Enclose options in quotes and separate with commas<br>Example: \"Option 1\", \"Option 2\""),
+  name: "facets[#{index}][allowed_values]",
+  rows: 5,
+  # TODO corresponding facet value will be derived from label and subject to manual care by developer
+  value: facet["allowed_values"]&.map { |opt| "\"#{opt["label"]}\"" }&.join(", "), 
+} %>

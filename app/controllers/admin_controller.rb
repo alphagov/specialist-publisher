@@ -31,9 +31,11 @@ class AdminController < ApplicationController
       end
 
       if facet["type"] == "enum_text"
-        facet.delete("allowed_values")
         facet["type"] = "text"
+      else
+        facet.delete("allowed_values")
       end
+
       if facet["display_as_result_metadata"]
         facet["display_as_result_metadata"] = facet["display_as_result_metadata"] == "true"
       end
