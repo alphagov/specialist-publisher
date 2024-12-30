@@ -183,6 +183,8 @@ RSpec.feature "Editing a CMA case", type: :feature do
     fill_in "[cma_case]opened_date(1i)", with: "not"
     fill_in "[cma_case]opened_date(2i)", with: "a"
     fill_in "[cma_case]opened_date(3i)", with: "date"
+    select "CA98 and civil cartels", from: "Case type"
+    select "Open", from: "Case state"
     select "Energy", from: "Market sector"
 
     click_button "Save as draft"
