@@ -268,13 +268,6 @@
       ]
     },
     {
-      "key": "tribunal_decision_judges_name",
-      "name": "Judges name",
-      "type": "text",
-      "display_as_result_metadata": true,
-      "filterable": false
-    },
-    {
       "key": "tribunal_decision_landmark",
       "name": "Landmark",
       "type": "text",
