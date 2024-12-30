@@ -47,7 +47,10 @@
           "label": "Section 95 (support for asylum seekers)",
           "value": "section-95-support-for-asylum-seekers"
         }
-      ]
+      ],
+      "specialist_publisher_properties": {
+        "select": "multiple"
+      }
     },
     {
       "key": "tribunal_decision_category_name",
@@ -140,7 +143,10 @@
           "label": "Section 95 - other",
           "value": "section-95-other"
         }
-      ]
+      ],
+      "specialist_publisher_properties": {
+        "select": "multiple"
+      }
     },
     {
       "key": "tribunal_decision_sub_category_name",
@@ -265,7 +271,10 @@
           "label": "Wyman, J",
           "value": "wyman-j"
         }
-      ]
+      ],
+      "specialist_publisher_properties": {
+        "select": "multiple"
+      }
     },
     {
       "key": "tribunal_decision_judges_name",
@@ -289,7 +298,10 @@
           "label": "Not landmark",
           "value": "not-landmark"
         }
-      ]
+      ],
+      "specialist_publisher_properties": {
+        "select": "one"
+      }
     },
     {
       "key": "tribunal_decision_landmark_name",

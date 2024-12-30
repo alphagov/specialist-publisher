@@ -65,7 +65,10 @@
           "label": "Robotics and autonomous vehicles/systems",
           "value": "robotics-and-autonomous-vehicles-systems"
         }
-      ]
+      ],
+      "specialist_publisher_properties": {
+        "select": "multiple"
+      }
     },
     {
       "key": "sector",
@@ -147,7 +150,10 @@
           "label": "Other Services (SIC Code Section S)",
           "value": "other-services"
         }
-      ]
+      ],
+      "specialist_publisher_properties": {
+        "select": "multiple"
+      }
     },
     {
       "key": "principle",
@@ -177,7 +183,10 @@
           "label": "Contestability and redress",
           "value": "contestability-and-redress"
         }
-      ]
+      ],
+      "specialist_publisher_properties": {
+        "select": "multiple"
+      }
     },
     {
       "key": "key_function",
@@ -227,7 +236,10 @@
           "label": "Strategy and corporate finance",
           "value": "strategy-and-corporate-finance"
         }
-      ]
+      ],
+      "specialist_publisher_properties": {
+        "select": "multiple"
+      }
     },
     {
       "key": "ai_assurance_technique",
@@ -281,7 +293,10 @@
           "label": "Assurance Warranty",
           "value": "assurance-warranty"
         }
-      ]
+      ],
+      "specialist_publisher_properties": {
+        "select": "multiple"
+      }
     },
     {
       "key": "assurance_technique_approach",
@@ -303,7 +318,10 @@
           "label": "Educational",
           "value": "educational"
         }
-      ]
+      ],
+      "specialist_publisher_properties": {
+        "select": "multiple"
+      }
     }
   ]
 }

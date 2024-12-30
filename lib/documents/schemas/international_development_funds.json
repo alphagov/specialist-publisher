@@ -38,7 +38,10 @@
           "label": "Closed",
           "value": "closed"
         }
-      ]
+      ],
+      "specialist_publisher_properties": {
+        "select": "one"
+      }
     },
     {
       "key": "location",
@@ -836,7 +839,10 @@
           "value": "zimbabwe",
           "label": "Zimbabwe"
         }
-      ]
+      ],
+      "specialist_publisher_properties": {
+        "select": "multiple"
+      }
     },
     {
       "key": "development_sector",
@@ -914,7 +920,10 @@
           "label": "Water and sanitation",
           "value": "water-and-sanitation"
         }
-      ]
+      ],
+      "specialist_publisher_properties": {
+        "select": "multiple"
+      }
     },
     {
       "key": "eligible_entities",
@@ -960,7 +969,10 @@
           "label": "Organisations based in Low to Middle Income Countries (LMIC)",
           "value": "organisations-lmic"
         }
-      ]
+      ],
+      "specialist_publisher_properties": {
+        "select": "multiple"
+      }
     },
     {
       "key": "value_of_funding",
@@ -990,7 +1002,10 @@
           "label": "More than £1,000,000",
           "value": "more-than-1000000"
         }
-      ]
+      ],
+      "specialist_publisher_properties": {
+        "select": "multiple"
+      }
     }
   ]
 }

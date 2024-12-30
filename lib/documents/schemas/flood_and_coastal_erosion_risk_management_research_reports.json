@@ -95,7 +95,10 @@
           "label": "Whole life asset management",
           "value": "whole-life-asset-management"
         }
-      ]
+      ],
+      "specialist_publisher_properties": {
+        "select": "one"
+      }
     },
     {
       "key": "topics",
@@ -333,7 +336,10 @@
           "label": "Whole life costs",
           "value": "whole-life-costs"
         }
-      ]
+      ],
+      "specialist_publisher_properties": {
+        "select": "multiple"
+      }
     },
     {
       "key": "project_status",
@@ -351,7 +357,10 @@
           "label": "Ongoing",
           "value": "ongoing"
         }
-      ]
+      ],
+      "specialist_publisher_properties": {
+        "select": "one"
+      }
     },
     {
       "key": "project_code",

@@ -93,7 +93,10 @@
           "label": "Recreational craft - power",
           "value": "recreational-craft-power"
         }
-      ]
+      ],
+      "specialist_publisher_properties": {
+        "select": "multiple"
+      }
     },
     {
       "key": "report_type",
@@ -127,7 +130,10 @@
           "label": "Discontinued investigation",
           "value": "discontinued-investigation"
         }
-      ]
+      ],
+      "specialist_publisher_properties": {
+        "select": "one"
+      }
     },
     {
       "key": "date_of_occurrence",

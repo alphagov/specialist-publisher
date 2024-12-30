@@ -58,7 +58,10 @@
           "label": "Other",
           "value": "other"
         }
-      ]
+      ],
+      "specialist_publisher_properties": {
+        "select": "one"
+      }
     },
     {
       "key": "marine_notice_vessel_type",
@@ -104,7 +107,10 @@
           "label": "Passenger vessels",
           "value": "passenger-vessels"
         }
-      ]
+      ],
+      "specialist_publisher_properties": {
+        "select": "multiple"
+      }
     },
     {
       "key": "marine_notice_topic",
@@ -150,7 +156,10 @@
           "label": "Survey and inspection",
           "value": "survey-and-inspection"
         }
-      ]
+      ],
+      "specialist_publisher_properties": {
+        "select": "multiple"
+      }
     },
     {
       "key": "issued_date",

@@ -72,7 +72,10 @@
           "label": "Swine vesicular disease",
           "value": "swine-vesicular-disease"
         }
-      ]
+      ],
+      "specialist_publisher_properties": {
+        "select": "multiple"
+      }
     },
     {
       "key": "zone_restriction",
@@ -91,7 +94,10 @@
           "label": "No longer in force",
           "value": "no-longer-in-force"
         }
-      ]
+      ],
+      "specialist_publisher_properties": {
+        "select": "one"
+      }
     },
     {
       "key": "zone_type",
@@ -158,7 +164,10 @@
           "label": "None",
           "value": "none"
         }
-      ]
+      ],
+      "specialist_publisher_properties": {
+        "select": "multiple"
+      }
     },
     {
       "key": "virus_strain",

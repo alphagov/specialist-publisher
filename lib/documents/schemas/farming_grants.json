@@ -70,7 +70,10 @@
           "label": "Woodland",
           "value": "woodland"
         }
-      ]
+      ],
+      "specialist_publisher_properties": {
+        "select": "multiple"
+      }
     },
     {
       "key": "areas_of_interest",
@@ -180,7 +183,10 @@
           "label": "Water quality",
           "value": "water-quality"
         }
-      ]
+      ],
+      "specialist_publisher_properties": {
+        "select": "multiple"
+      }
     },
     {
       "key": "payment_types",
@@ -198,7 +204,10 @@
           "label": "Revenue",
           "value": "revenue"
         }
-      ]
+      ],
+      "specialist_publisher_properties": {
+        "select": "multiple"
+      }
     }
   ]
 }

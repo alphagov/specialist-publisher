@@ -111,7 +111,10 @@
           "label": "Tax",
           "value": "tax"
         }
-      ]
+      ],
+      "specialist_publisher_properties": {
+        "select": "one"
+      }
     },
     {
       "key": "tribunal_decision_category_name",

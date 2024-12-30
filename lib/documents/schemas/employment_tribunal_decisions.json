@@ -227,7 +227,7 @@
         },
         {
           "radio_button_name": "Remuneration",
-          "topic_name": "remuneration",
+          "topic_name": "renumeration",
           "key": "renumeration",
           "prechecked": false
         },
@@ -377,7 +377,10 @@
           "label": "Scotland",
           "value": "scotland"
         }
-      ]
+      ],
+      "specialist_publisher_properties": {
+        "select": "one"
+      }
     },
     {
       "key": "tribunal_decision_country_name",
@@ -610,7 +613,10 @@
           "label": "Written Statements",
           "value": "written-statements"
         }
-      ]
+      ],
+      "specialist_publisher_properties": {
+        "select": "multiple"
+      }
     },
     {
       "key": "tribunal_decision_categories_name",

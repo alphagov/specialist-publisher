@@ -286,7 +286,10 @@
           "label": "Transport - Quality Contract Schemes",
           "value": "transport-quality-contract-schemes"
         }
-      ]
+      ],
+      "specialist_publisher_properties": {
+        "select": "multiple"
+      }
     },
     {
       "key": "tribunal_decision_categories_name",
@@ -2247,7 +2250,10 @@
           "label": "War pensions and armed forces compensation - war pensions – specified decisions",
           "value": "war-pensions-and-armed-forces-compensation-war-pensions-specified-decisions"
         }
-      ]
+      ],
+      "specialist_publisher_properties": {
+        "select": "multiple"
+      }
     },
     {
       "key": "tribunal_decision_sub_categories_name",
@@ -2720,7 +2726,10 @@
           "label": "Wright, S",
           "value": "wright-s"
         }
-      ]
+      ],
+      "specialist_publisher_properties": {
+        "select": "multiple"
+      }
     },
     {
       "key": "tribunal_decision_judges_name",
