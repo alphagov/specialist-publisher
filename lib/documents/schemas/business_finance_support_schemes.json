@@ -59,7 +59,10 @@
           "label": "Recognition awards",
           "value": "recognition-award"
         }
-      ]
+      ],
+      "specialist_publisher_properties": {
+        "select": "multiple"
+      }
     },
     {
       "key": "business_stages",
@@ -81,7 +84,10 @@
           "label": "Established",
           "value": "established"
         }
-      ]
+      ],
+      "specialist_publisher_properties": {
+        "select": "multiple"
+      }
     },
     {
       "key": "industries",
@@ -159,7 +165,10 @@
           "label": "Wholesale and retail",
           "value": "wholesale-and-retail"
         }
-      ]
+      ],
+      "specialist_publisher_properties": {
+        "select": "multiple"
+      }
     },
     {
       "key": "business_sizes",
@@ -185,7 +194,10 @@
           "label": "More than 500 employees",
           "value": "over-500"
         }
-      ]
+      ],
+      "specialist_publisher_properties": {
+        "select": "multiple"
+      }
     },
     {
       "key": "regions",
@@ -243,7 +255,10 @@
           "label": "Yorkshire and the Humber",
           "value": "yorkshire-and-the-humber"
         }
-      ]
+      ],
+      "specialist_publisher_properties": {
+        "select": "multiple"
+      }
     }
   ]
 }

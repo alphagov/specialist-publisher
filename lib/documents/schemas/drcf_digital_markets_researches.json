@@ -32,7 +32,10 @@
           "label": "Ongoing research",
           "value": "ongoing-research"
         }
-      ]
+      ],
+      "specialist_publisher_properties": {
+        "select": "one"
+      }
     },
     {
       "key": "digital_market_research_publisher",
@@ -87,7 +90,10 @@
           "label": "Ofcom",
           "value": "ofcom"
         }
-      ]
+      ],
+      "specialist_publisher_properties": {
+        "select": "multiple"
+      }
     },
     {
       "key": "digital_market_research_area",
@@ -122,7 +128,10 @@
           "label": "Technology",
           "value": "technology"
         }
-      ]
+      ],
+      "specialist_publisher_properties": {
+        "select": "multiple"
+      }
     },
     {
       "key": "digital_market_research_topic",
@@ -277,7 +286,10 @@
           "label": "TV, video and on-demand",
           "value": "tv-video-and-on-demand"
         }
-      ]
+      ],
+      "specialist_publisher_properties": {
+        "select": "multiple"
+      }
     },
     {
       "key": "digital_market_research_publish_date",

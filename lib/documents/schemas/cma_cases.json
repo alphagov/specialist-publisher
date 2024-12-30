@@ -173,7 +173,10 @@
           "label": "SAU referral",
           "value": "sau-referral"
         }
-      ]
+      ],
+      "specialist_publisher_properties": {
+        "select": "one"
+      }
     },
     {
       "key": "case_state",
@@ -191,7 +194,10 @@
           "label": "Closed",
           "value": "closed"
         }
-      ]
+      ],
+      "specialist_publisher_properties": {
+        "select": "one"
+      }
     },
     {
       "key": "market_sector",
@@ -321,7 +327,10 @@
           "label": "Utilities",
           "value": "utilities"
         }
-      ]
+      ],
+      "specialist_publisher_properties": {
+        "select": "multiple"
+      }
     },
     {
       "key": "outcome_type",
@@ -447,7 +456,10 @@
           "label": "Regulatory references and appeals - final determination",
           "value": "regulatory-references-and-appeals-final-determination"
         }
-      ]
+      ],
+      "specialist_publisher_properties": {
+        "select": "one"
+      }
     },
     {
       "key": "opened_date",

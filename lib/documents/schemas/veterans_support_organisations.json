@@ -47,7 +47,10 @@
           "label": "Addiction support",
           "value": "addiction-support"
         }
-      ]
+      ],
+      "specialist_publisher_properties": {
+        "select": "multiple"
+      }
     },
     {
       "key": "veterans_support_organisation_finance",
@@ -82,7 +85,10 @@
           "label": "Funeral costs",
           "value": "funeral-costs"
         }
-      ]
+      ],
+      "specialist_publisher_properties": {
+        "select": "multiple"
+      }
     },
     {
       "key": "veterans_support_organisation_legal_and_justice",
@@ -101,7 +107,10 @@
           "label": "Support for those in the justice system",
           "value": "support-for-those-in-the-justice-system"
         }
-      ]
+      ],
+      "specialist_publisher_properties": {
+        "select": "multiple"
+      }
     },
     {
       "key": "veterans_support_organisation_employment_education_and_training",
@@ -132,7 +141,10 @@
           "label": "Education and other training",
           "value": "education-and-other-training"
         }
-      ]
+      ],
+      "specialist_publisher_properties": {
+        "select": "multiple"
+      }
     },
     {
       "key": "veterans_support_organisation_housing",
@@ -163,7 +175,10 @@
           "label": "Buying a home",
           "value": "buying-a-home"
         }
-      ]
+      ],
+      "specialist_publisher_properties": {
+        "select": "multiple"
+      }
     },
     {
       "key": "veterans_support_organisation_families_and_children",
@@ -190,7 +205,10 @@
           "label": "Domestic abuse",
           "value": "domestic-abuse"
         }
-      ]
+      ],
+      "specialist_publisher_properties": {
+        "select": "multiple"
+      }
     },
     {
       "key": "veterans_support_organisation_community_and_social",
@@ -221,7 +239,10 @@
           "label": "Women veterans support",
           "value": "women-veterans-support"
         }
-      ]
+      ],
+      "specialist_publisher_properties": {
+        "select": "multiple"
+      }
     },
     {
       "key": "veterans_support_organisation_region_england",
@@ -260,7 +281,10 @@
           "label": "South East",
           "value": "south-east"
         }
-      ]
+      ],
+      "specialist_publisher_properties": {
+        "select": "multiple"
+      }
     },
     {
       "key": "veterans_support_organisation_region_northern_ireland",
@@ -287,7 +311,10 @@
           "label": "West (Enniskillen Area)",
           "value": "west-enniskillen-area"
         }
-      ]
+      ],
+      "specialist_publisher_properties": {
+        "select": "multiple"
+      }
     },
     {
       "key": "veterans_support_organisation_region_scotland",
@@ -314,7 +341,10 @@
           "label": "Northern Highlands, Hebrides and the Northern Isles",
           "value": "northern-highlands-hebrides-and-the-northern-isles"
         }
-      ]
+      ],
+      "specialist_publisher_properties": {
+        "select": "multiple"
+      }
     },
     {
       "key": "veterans_support_organisation_region_wales",
@@ -345,7 +375,10 @@
           "label": "South Wales West",
           "value": "south-wales-west"
         }
-      ]
+      ],
+      "specialist_publisher_properties": {
+        "select": "multiple"
+      }
     }
   ]
 }

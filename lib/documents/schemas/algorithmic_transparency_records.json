@@ -244,7 +244,10 @@
           "label": "West Midlands Police",
           "value": "west-midlands-police"
         }
-      ]
+      ],
+      "specialist_publisher_properties": {
+        "select": "one"
+      }
     },
     {
       "key": "algorithmic_transparency_record_organisation_type",
@@ -283,7 +286,10 @@
           "label": "Public corporation",
           "value": "public-corporation"
         }
-      ]
+      ],
+      "specialist_publisher_properties": {
+        "select": "multiple"
+      }
     },
     {
       "key": "algorithmic_transparency_record_function",
@@ -338,7 +344,10 @@
           "label": "Regulation",
           "value": "regulation"
         }
-      ]
+      ],
+      "specialist_publisher_properties": {
+        "select": "multiple"
+      }
     },
     {
       "key": "algorithmic_transparency_record_capability",
@@ -393,7 +402,10 @@
           "label": "Other",
           "value": "other"
         }
-      ]
+      ],
+      "specialist_publisher_properties": {
+        "select": "multiple"
+      }
     },
     {
       "key": "algorithmic_transparency_record_task",
@@ -429,7 +441,10 @@
           "label": "Retired",
           "value": "retired"
         }
-      ]
+      ],
+      "specialist_publisher_properties": {
+        "select": "one"
+      }
     },
     {
       "key": "algorithmic_transparency_record_region",
@@ -496,7 +511,10 @@
           "label": "South West",
           "value": "south-west"
         }
-      ]
+      ],
+      "specialist_publisher_properties": {
+        "select": "multiple"
+      }
     },
     {
       "key": "algorithmic_transparency_record_date_published",

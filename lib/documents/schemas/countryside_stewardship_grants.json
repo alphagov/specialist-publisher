@@ -46,7 +46,10 @@
           "label": "Supplement",
           "value": "supplement"
         }
-      ]
+      ],
+      "specialist_publisher_properties": {
+        "select": "one"
+      }
     },
     {
       "key": "land_use",
@@ -128,7 +131,10 @@
           "label": "Woodland",
           "value": "woodland"
         }
-      ]
+      ],
+      "specialist_publisher_properties": {
+        "select": "multiple"
+      }
     },
     {
       "key": "tiers_or_standalone_items",
@@ -166,7 +172,10 @@
           "label": "Standalone capital items",
           "value": "standalone-capital-items"
         }
-      ]
+      ],
+      "specialist_publisher_properties": {
+        "select": "multiple"
+      }
     },
     {
       "key": "funding_amount",
@@ -208,7 +217,10 @@
           "label": "More than 50% actual costs",
           "value": "more-than-50-actual-costs"
         }
-      ]
+      ],
+      "specialist_publisher_properties": {
+        "select": "multiple"
+      }
     }
   ]
 }

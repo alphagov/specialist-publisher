@@ -136,7 +136,10 @@
           "label": "Tenant Fees Act",
           "value": "tenant-fees-act"
         }
-      ]
+      ],
+      "specialist_publisher_properties": {
+        "select": "one"
+      }
     },
     {
       "key": "tribunal_decision_sub_category",
@@ -398,7 +401,10 @@
           "label": "Tenant Fees Act - Recovery of a prohibited payment",
           "value": "tenant-fees-act---recovery-of-a-prohibited-payment"
         }
-      ]
+      ],
+      "specialist_publisher_properties": {
+        "select": "one"
+      }
     },
     {
       "key": "tribunal_decision_decision_date",

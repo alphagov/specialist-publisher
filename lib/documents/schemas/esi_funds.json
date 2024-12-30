@@ -110,7 +110,10 @@
           "label": "Closed",
           "value": "closed"
         }
-      ]
+      ],
+      "specialist_publisher_properties": {
+        "select": "one"
+      }
     },
     {
       "key": "fund_type",
@@ -172,7 +175,10 @@
           "label": "Tourism",
           "value": "tourism"
         }
-      ]
+      ],
+      "specialist_publisher_properties": {
+        "select": "multiple"
+      }
     },
     {
       "key": "location",
@@ -218,7 +224,10 @@
           "label": "London",
           "value": "london"
         }
-      ]
+      ],
+      "specialist_publisher_properties": {
+        "select": "multiple"
+      }
     },
     {
       "key": "funding_source",
@@ -240,7 +249,10 @@
           "label": "European Agricultural Fund for Rural Development",
           "value": "european-agricoltural-fund-for-rural"
         }
-      ]
+      ],
+      "specialist_publisher_properties": {
+        "select": "multiple"
+      }
     },
     {
       "key": "closing_date",

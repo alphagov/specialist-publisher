@@ -35,7 +35,10 @@
           "label": "Closed",
           "value": "closed"
         }
-      ]
+      ],
+      "specialist_publisher_properties": {
+        "select": "one"
+      }
     },
     {
       "key": "sfo_case_date_announced",

@@ -43,7 +43,10 @@
           "label": "Northern Ireland",
           "value": "northern-ireland"
         }
-      ]
+      ],
+      "specialist_publisher_properties": {
+        "select": "multiple"
+      }
     },
     {
       "key": "licence_transaction_industry",
@@ -248,7 +251,10 @@
           "label": "Veterinary",
           "value": "veterinary"
         }
-      ]
+      ],
+      "specialist_publisher_properties": {
+        "select": "multiple"
+      }
     },
     {
       "key": "licence_transaction_will_continue_on",

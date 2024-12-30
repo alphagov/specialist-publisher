@@ -215,7 +215,10 @@
           "label": "Working Time Regulations",
           "value": "working-time-regulations"
         }
-      ]
+      ],
+      "specialist_publisher_properties": {
+        "select": "multiple"
+      }
     },
     {
       "key": "tribunal_decision_sub_categories",
@@ -1013,7 +1016,10 @@
           "label": "Working Time Regulations - Worker",
           "value": "working-time-regulations-worker"
         }
-      ]
+      ],
+      "specialist_publisher_properties": {
+        "select": "multiple"
+      }
     },
     {
       "key": "tribunal_decision_landmark",
@@ -1030,7 +1036,10 @@
           "label": "Not landmark",
           "value": "not-landmark"
         }
-      ]
+      ],
+      "specialist_publisher_properties": {
+        "select": "one"
+      }
     },
     {
       "key": "tribunal_decision_decision_date",

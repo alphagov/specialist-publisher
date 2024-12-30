@@ -2318,7 +2318,10 @@
           "label": "Zimbabwe",
           "value": "zimbabwe"
         }
-      ]
+      ],
+      "specialist_publisher_properties": {
+        "select": "multiple"
+      }
     },
     {
       "key": "commodity_type",
@@ -2357,7 +2360,10 @@
           "label": "Pets",
           "value": "pets"
         }
-      ]
+      ],
+      "specialist_publisher_properties": {
+        "select": "one"
+      }
     },
     {
       "key": "certificate_status",
@@ -2375,7 +2381,10 @@
           "label": "On hold",
           "value": "on-hold"
         }
-      ]
+      ],
+      "specialist_publisher_properties": {
+        "select": "one"
+      }
     }
   ]
 }

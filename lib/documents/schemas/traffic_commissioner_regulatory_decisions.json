@@ -34,7 +34,10 @@
           "label": "Transport manager",
           "value": "transport-manager"
         }
-      ]
+      ],
+      "specialist_publisher_properties": {
+        "select": "one"
+      }
     },
     {
       "key": "regions",
@@ -76,7 +79,10 @@
           "label": "Western",
           "value": "western"
         }
-      ]
+      ],
+      "specialist_publisher_properties": {
+        "select": "multiple"
+      }
     },
     {
       "key": "case_type",
@@ -102,7 +108,10 @@
           "label": "Environmental",
           "value": "environmental"
         }
-      ]
+      ],
+      "specialist_publisher_properties": {
+        "select": "one"
+      }
     },
     {
       "key": "outcome_type",
@@ -132,7 +141,10 @@
           "label": "Revocation",
           "value": "revocation"
         }
-      ]
+      ],
+      "specialist_publisher_properties": {
+        "select": "one"
+      }
     },
     {
       "key": "first_published_at",
