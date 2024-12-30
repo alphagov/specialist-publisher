@@ -55,7 +55,10 @@
           "label": "Unmanned Aircraft Systems (UAS)",
           "value": "unmanned-aircraft-systems"
         }
-      ]
+      ],
+      "specialist_publisher_properties": {
+        "select": "multiple"
+      }
     },
     {
       "key": "report_type",
@@ -101,7 +104,10 @@
           "label": "Safety study",
           "value": "safety-study"
         }
-      ]
+      ],
+      "specialist_publisher_properties": {
+        "select": "one"
+      }
     },
     {
       "key": "date_of_occurrence",
