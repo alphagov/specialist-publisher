@@ -1,14 +1,2 @@
-<%= render layout: "shared/form_group", locals: { f: f, field: :therapeutic_area } do %>
-  <%= f.select :therapeutic_area,
-      f.object.facet_options(:therapeutic_area),
-      {},
-      {
-        class: 'select2 form-control',
-        multiple: true,
-        data:
-        {
-          placeholder: 'Select a Therapeutic area'
-        }
-      }
-  %>
+<%= render layout: "shared/specialist_document_form", locals: { f: f } do %>
 <% end %>

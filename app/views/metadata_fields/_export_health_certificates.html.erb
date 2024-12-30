@@ -1,22 +1,2 @@
-<%= render "shared/form_group", f: f, field: :destination_country do %>
-  <%= f.select :destination_country,
-      facet_options(f, :destination_country),
-      {},
-      {
-        class: "select2 form-control select-all-disabled",
-        multiple: true,
-        data:
-        {
-          placeholder: "Select destination country"
-        }
-      }
-  %>
-<% end %>
-
-<%= render "shared/form_group", f: f, field: :commodity_type do %>
-  <%= f.select :commodity_type, facet_options(f, :commodity_type), {}, { class: "form-control" } %>
-<% end %>
-
-<%= render "shared/form_group", f: f, field: :certificate_status do %>
-  <%= f.select :certificate_status, facet_options(f, :certificate_status), {}, { class: "form-control" } %>
+<%= render layout: "shared/specialist_document_form", locals: { f: f } do %>
 <% end %>
