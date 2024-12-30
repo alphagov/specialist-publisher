@@ -27,6 +27,13 @@ class FinderContentItemPresenter
     file.fetch("content_id")
   end
 
+  def self.facets_without_specialist_publisher_properties(facets)
+    facets.map do |facet|
+      facet.delete("specialist_publisher_properties")
+      facet
+    end
+  end
+
 private
 
   def title
@@ -53,7 +60,7 @@ private
       signup_link: file.fetch("signup_link", nil),
       summary: file.fetch("summary", nil),
       label_text: file.fetch("label_text", nil),
-      facets: file.fetch("facets", nil),
+      facets: FinderContentItemPresenter.facets_without_specialist_publisher_properties(file.fetch("facets", nil)),
       default_order: file.fetch("default_order", nil),
       default_documents_per_page: 50,
     }.reject { |_, value| value.nil? }

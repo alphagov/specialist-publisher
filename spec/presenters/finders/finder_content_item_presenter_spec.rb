@@ -18,4 +18,23 @@ RSpec.describe FinderContentItemPresenter do
       end
     end
   end
+
+  describe ".facets_without_specialist_publisher_properties" do
+    it "strips specialist_publisher_properties hash if present" do
+      facets = [
+        {
+          "foo" => "bar",
+          "specialist_publisher_properties" => {
+            "select" => "one",
+          },
+        },
+      ]
+      facets_without_specialist_publisher_properties = [
+        { "foo" => "bar" },
+      ]
+
+      expect(FinderContentItemPresenter.facets_without_specialist_publisher_properties(facets))
+        .to eq(facets_without_specialist_publisher_properties)
+    end
+  end
 end
