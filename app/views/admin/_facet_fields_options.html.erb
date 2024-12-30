@@ -7,5 +7,17 @@
   name: "facets[#{index}][allowed_values]",
   rows: 5,
   # TODO corresponding facet value will be derived from label and subject to manual care by developer
-  value: facet["allowed_values"]&.map { |opt| "\"#{opt["label"]}\"" }&.join(", "), 
+  value: facet["allowed_values"]&.map { |opt| "\"#{opt["label"]}: #{opt["value"]}\"" }&.join(", "), 
+} %>
+
+<%= render "govuk_publishing_components/components/add_another", {
+  fieldset_legend: "Filter options",
+  add_button_text: "Add another filter option",
+  items: facet["allowed_values"]&.each_with_index&.map do  |facet, option_index|
+    {
+      fields: render(partial: "facet_fields_options_inputs", locals: { facet:, facet_index: index, option_index: }),
+      destroy_checkbox: render("govuk_publishing_components/components/checkboxes", { name: "facets[#{index}]options[#{option_index}][_destroy]", items: [{label: "Delete", value: "1" }]})
+    }
+  end,
+  empty: "TODO. NB, this won't work without JS - but that's probably ok",
 } %>

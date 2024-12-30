@@ -1,0 +1,19 @@
+<%= render "govuk_publishing_components/components/input", {
+  label: {
+    text: "Filter label",
+    heading_size: "s",
+  },
+  name: "facets[#{facet_index}]options[#{option_index}][label]",
+  value: facet["label"],
+  hint: "Example: Control zone type"
+} %>
+
+<%= render "govuk_publishing_components/components/input", {
+  label: {
+    text: "Filter value",
+    heading_size: "s",
+  },
+  name: "facets[#{facet_index}]options[#{option_index}][value]",
+  value: facet["value"],
+  hint: "Example: control-zone-type"
+} %>
