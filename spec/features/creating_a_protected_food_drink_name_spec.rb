@@ -32,7 +32,7 @@ RSpec.feature "Creating a Protected Food Drink Name", type: :feature do
     fill_in "Body", with: "## Header#{"\n\nThis is the long body of an example protected food name" * 10}"
     select "Foods: designated origin and geographical indication", from: "Register"
     select "Registered", from: "Status"
-    select "1.1 Fresh meat (and offal)", from: "Class category"
+    select "1.1 Fresh meat (and offal)", from: "Class or category of product"
     select "Protected Geographical Indication (PGI)", from: "Protection type"
     select "United Kingdom", from: "Country"
     select "Wine", from: "Traditional term grapevine product category"
