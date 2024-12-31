@@ -1,43 +1,7 @@
-<%= render layout: "shared/form_group", locals: { f: f, field: :category } do %>
-  <%= f.select :flood_and_coastal_erosion_category,
-      f.object.facet_options(:flood_and_coastal_erosion_category),
-      {},
-      { class: "form-control" }
-  %>
+<%= render layout: "shared/specialist_document_form", locals: { f: f } do %>
 <% end %>
 
-<%= render layout: "shared/date_fields", locals: { f: f, field: :date_of_start, format: :flood_and_coastal_erosion_risk_management_research_report } do %>
-<% end %>
-
-<%= render layout: "shared/date_fields", locals: { f: f, field: :date_of_completion, format: :flood_and_coastal_erosion_risk_management_research_report } do %>
-<% end %>
-
-<%= render layout: "shared/form_group", locals: { f: f, field: :project_code } do %>
-  <%= f.text_field :project_code, class: "form-control" %>
-<% end %>
-
-<%= render layout: "shared/form_group", locals: { f: f, field: :project_status } do %>
-  <%= f.select :project_status,
-      f.object.facet_options(:project_status),
-      {},
-      { class: "form-control" }
-  %>
-<% end %>
-
-<%= render layout: "shared/form_group", locals: { f: f, field: :topics } do %>
-  <%= f.select :topics,
-      f.object.facet_options(:topics),
-      {},
-      {
-        class: "select2 form-control",
-        multiple: true,
-        data: {
-          placeholder: "Select topics"
-        }
-      }
-  %>
-<% end %>
-
+<% # TODO: find a way of making organisation management schema-driven %>
 <%= render "shared/form_group", f: f, field: :primary_publishing_organisation, label: "Publishing organisation" do %>
   <%= f.select :primary_publishing_organisation,
       organisations_options,
@@ -51,7 +15,6 @@
       }
   %>
 <% end %>
-
 <%= render "shared/form_group", f: f, field: :organisations, label: "Other associated organisations" do %>
   <%= f.select :organisations,
       organisations_options,

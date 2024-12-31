@@ -3,6 +3,7 @@
 <%= render "shared/form_group", f: f, field: :sifting_status do %>
   <%= f.select :sifting_status, facet_options(f, :sifting_status), {}, { class: "form-control" } %>
 <% end %>
+<% # TODO: this bit of logic prevents us moving to the shared view %>
 <% withdrawn_date_display = f.object.withdrawn_sifting_status? ? "block" : "none" %>
 <div class="withdrawn-date-wrapper" style="display:<%= withdrawn_date_display %>">
   <%= render "shared/date_fields", f: f, field: :withdrawn_date, format: :statutory_instrument %>
@@ -21,6 +22,8 @@
       }
   %>
 <% end %>
+
+<% # TODO: find a way of making organisation management schema-driven %>
 <%= render "shared/form_group", f: f, field: :primary_publishing_organisation, label: "Publishing organisation" do %>
   <%= f.select :primary_publishing_organisation,
       organisations_options,
@@ -47,6 +50,8 @@
       }
   %>
 <% end %>
+
+<% # TODO: this bit of JS prevents us moving to the shared view %>
 <% content_for :document_ready do %>
   var $withdrawnDateEl = $(".withdrawn-date-wrapper");
   var $withdrawnDateFields = $("input[id^='statutory_instrument_withdrawn_date']");
