@@ -1090,6 +1090,12 @@
           "prechecked": false
         },
         {
+          "key": "sint-maarten",
+          "radio_button_name": "Sint Maarten",
+          "topic_name": "Sint Maarten",
+          "prechecked": false
+        },
+        {
           "key": "slovakia",
           "radio_button_name": "Slovakia",
           "topic_name": "Slovakia",
@@ -2137,6 +2143,10 @@
         {
           "label": "Singapore",
           "value": "singapore"
+        },
+        {
+          "label": "Sint Maarten",
+          "value": "sint-maarten"
         },
         {
           "label": "Slovakia",
