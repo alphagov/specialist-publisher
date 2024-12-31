@@ -218,13 +218,6 @@
       ]
     },
     {
-      "key": "tribunal_decision_categories_name",
-      "name": "Category name",
-      "type": "text",
-      "display_as_result_metadata": true,
-      "filterable": false
-    },
-    {
       "key": "tribunal_decision_sub_categories",
       "name": "Sub-category",
       "type": "text",
@@ -1023,13 +1016,6 @@
       ]
     },
     {
-      "key": "tribunal_decision_sub_categories_name",
-      "name": "Sub-category name",
-      "type": "text",
-      "display_as_result_metadata": true,
-      "filterable": false
-    },
-    {
       "key": "tribunal_decision_landmark",
       "name": "Landmark",
       "type": "text",
@@ -1045,13 +1031,6 @@
           "value": "not-landmark"
         }
       ]
-    },
-    {
-      "key": "tribunal_decision_landmark_name",
-      "name": "Landmark name",
-      "type": "text",
-      "display_as_result_metadata": true,
-      "filterable": false
     },
     {
       "key": "tribunal_decision_decision_date",

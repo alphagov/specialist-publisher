@@ -289,13 +289,6 @@
       ]
     },
     {
-      "key": "tribunal_decision_categories_name",
-      "name": "Categories name",
-      "type": "text",
-      "display_as_result_metadata": true,
-      "filterable": false
-    },
-    {
       "key": "tribunal_decision_sub_categories",
       "name": "Sub-categories",
       "type": "text",
@@ -2250,13 +2243,6 @@
       ]
     },
     {
-      "key": "tribunal_decision_sub_categories_name",
-      "name": "Sub-categories name",
-      "type": "text",
-      "display_as_result_metadata": true,
-      "filterable": false
-    },
-    {
       "key": "tribunal_decision_judges",
       "name": "Judges",
       "type": "text",
@@ -2721,13 +2707,6 @@
           "value": "wright-s"
         }
       ]
-    },
-    {
-      "key": "tribunal_decision_judges_name",
-      "name": "Judges name",
-      "type": "text",
-      "display_as_result_metadata": true,
-      "filterable": false
     },
     {
       "key": "tribunal_decision_decision_date",
