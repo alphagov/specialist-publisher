@@ -2,6 +2,7 @@
   <%= f.url_field :continuation_link, class: 'form-control' %>
 <% end %>
 <%= render layout: "shared/form_group", locals: { f: f, field: :will_continue_on, label: 'Will continue' } do %>
+  <% # TODO: this field is the reason why we can't use the shared form yet %>
   <%= f.text_field :will_continue_on, class: 'form-control' %>
 <% end %>
 <%= render layout: "shared/form_group", locals: { f: f, field: :types_of_support, label: 'Types of support offered' } do %>
