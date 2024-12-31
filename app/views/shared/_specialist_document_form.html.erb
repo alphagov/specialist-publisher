@@ -9,7 +9,7 @@
     <% end %>
   <% elsif !field_config["allowed_values"] %>
     <%= render layout: "shared/form_group", locals: { f: f, field: field, label: field_config["name"] } do %>
-      <%= f.text_field field, class: 'form-control' %>
+      <%= f.text_area field, class: 'form-control' %>
     <% end %>
   <% elsif field_config["specialist_publisher_properties"]["select"] == "one" %>
     <%= render layout: "shared/form_group", locals: { f: f, field: field, label: field_config["name"] } do %>
