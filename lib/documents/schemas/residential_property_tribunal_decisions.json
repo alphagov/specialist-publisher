@@ -413,6 +413,16 @@
       "type": "date",
       "display_as_result_metadata": true,
       "filterable": true
+    },
+    {
+      "key": "hidden_indexable_content",
+      "name": "Hidden indexable content",
+      "type": "text",
+      "display_as_result_metadata": false,
+      "filterable": false,
+      "specialist_publisher_properties": {
+        "omit_from_finder_content_item": true
+      }
     }
   ]
 }

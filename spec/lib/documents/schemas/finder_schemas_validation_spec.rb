@@ -19,6 +19,7 @@ RSpec.describe "Sense-checks for every finder schema" do
         valid_values = [
           { "select" => "one" },
           { "select" => "multiple" },
+          { "omit_from_finder_content_item" => true },
         ]
         expect(valid_values).to include(facet["specialist_publisher_properties"]), "In the '#{finder_schema['filter']['format']}' finder, facet '#{facet['key']}' has an invalid 'specialist_publisher_properties' value"
       end
