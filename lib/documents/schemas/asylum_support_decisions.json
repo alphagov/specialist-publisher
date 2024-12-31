@@ -50,13 +50,6 @@
       ]
     },
     {
-      "key": "tribunal_decision_category_name",
-      "name": "Category name",
-      "type": "text",
-      "display_as_result_metadata": true,
-      "filterable": false
-    },
-    {
       "key": "tribunal_decision_sub_categories",
       "name": "Sub-category",
       "type": "text",
@@ -141,13 +134,6 @@
           "value": "section-95-other"
         }
       ]
-    },
-    {
-      "key": "tribunal_decision_sub_category_name",
-      "name": "Sub-category name",
-      "type": "text",
-      "display_as_result_metadata": true,
-      "filterable": false
     },
     {
       "key": "tribunal_decision_judges",
@@ -268,13 +254,6 @@
       ]
     },
     {
-      "key": "tribunal_decision_judges_name",
-      "name": "Judges name",
-      "type": "text",
-      "display_as_result_metadata": true,
-      "filterable": false
-    },
-    {
       "key": "tribunal_decision_landmark",
       "name": "Landmark",
       "type": "text",
@@ -290,13 +269,6 @@
           "value": "not-landmark"
         }
       ]
-    },
-    {
-      "key": "tribunal_decision_landmark_name",
-      "name": "Landmark name",
-      "type": "text",
-      "display_as_result_metadata": true,
-      "filterable": false
     },
     {
       "key": "tribunal_decision_reference_number",
