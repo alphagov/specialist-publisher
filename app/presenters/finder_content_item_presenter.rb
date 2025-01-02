@@ -28,7 +28,8 @@ class FinderContentItemPresenter
   end
 
   def self.facets_without_specialist_publisher_properties(facets)
-    facets.map do |facet|
+    facets.reject { |facet| facet["specialist_publisher_properties"]&.fetch("omit_from_finder_content_item", false) }
+          .map do |facet|
       facet.delete("specialist_publisher_properties")
       facet
     end

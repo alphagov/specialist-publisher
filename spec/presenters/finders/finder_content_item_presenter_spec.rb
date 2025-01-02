@@ -20,6 +20,24 @@ RSpec.describe FinderContentItemPresenter do
   end
 
   describe ".facets_without_specialist_publisher_properties" do
+    it "removes facets that should not be included in the finder content item" do
+      facets = [
+        { "bar" => "baz" },
+        {
+          "foo" => "bar",
+          "specialist_publisher_properties" => {
+            "omit_from_finder_content_item" => true,
+          },
+        },
+      ]
+      facets_without_specialist_publisher_properties = [
+        { "bar" => "baz" },
+      ]
+
+      expect(FinderContentItemPresenter.facets_without_specialist_publisher_properties(facets))
+        .to eq(facets_without_specialist_publisher_properties)
+    end
+
     it "strips specialist_publisher_properties hash if present" do
       facets = [
         {
