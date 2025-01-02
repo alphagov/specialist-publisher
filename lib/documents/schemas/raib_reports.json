@@ -83,7 +83,10 @@
           "label": "Heritage railways",
           "value": "heritage-railways"
         }
-      ]
+      ],
+      "specialist_publisher_properties": {
+        "select": "multiple"
+      }
     },
     {
       "key": "report_type",
@@ -113,7 +116,10 @@
           "label": "Safety digest",
           "value": "safety-digest"
         }
-      ]
+      ],
+      "specialist_publisher_properties": {
+        "select": "one"
+      }
     },
     {
       "key": "date_of_occurrence",

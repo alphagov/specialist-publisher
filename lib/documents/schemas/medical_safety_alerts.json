@@ -89,7 +89,10 @@
           "label": "Medicines recall/notification",
           "value": "medicines-recall-notification"
         }
-      ]
+      ],
+      "specialist_publisher_properties": {
+        "select": "one"
+      }
     },
     {
       "key": "medical_specialism",
@@ -191,7 +194,10 @@
           "label": "Vascular and cardiac surgery",
           "value": "vascular-cardiac-surgery"
         }
-      ]
+      ],
+      "specialist_publisher_properties": {
+        "select": "multiple"
+      }
     },
     {
       "key": "issued_date",

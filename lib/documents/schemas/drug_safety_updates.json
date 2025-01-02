@@ -138,7 +138,10 @@
           "label": "Urology and nephrology",
           "value": "urology-nephrology"
         }
-      ]
+      ],
+      "specialist_publisher_properties": {
+        "select": "multiple"
+      }
     },
     {
       "key": "first_published_at",

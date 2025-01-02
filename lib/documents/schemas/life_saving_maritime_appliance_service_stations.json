@@ -69,7 +69,10 @@
           "label": "Northern Ireland",
           "value": "northern-ireland"
         }
-      ]
+      ],
+      "specialist_publisher_properties": {
+        "select": "multiple"
+      }
     },
     {
       "key": "life_saving_maritime_appliance_type",
@@ -95,7 +98,10 @@
           "label": "Inflated rescue boats",
           "value": "inflated-rescue-boats"
         }
-      ]
+      ],
+      "specialist_publisher_properties": {
+        "select": "multiple"
+      }
     },
     {
       "key": "life_saving_maritime_appliance_manufacturer",
@@ -377,7 +383,10 @@
           "label": "Zodiac",
           "value": "zodiac"
         }
-      ]
+      ],
+      "specialist_publisher_properties": {
+        "select": "multiple"
+      }
     }
   ]
 }

@@ -62,7 +62,10 @@
           "label": "American viticultural areas and US spirit drink names of origin",
           "value": "american-viticultural-areas"
         }
-      ]
+      ],
+      "specialist_publisher_properties": {
+        "select": "one"
+      }
     },
     {
       "key": "status",
@@ -92,7 +95,10 @@
           "label": "Cancelled",
           "value": "cancelled"
         }
-      ]
+      ],
+      "specialist_publisher_properties": {
+        "select": "one"
+      }
     },
     {
       "key": "class_category",
@@ -467,7 +473,10 @@
           "label": "Spirit drink",
           "value": "spirit-drink"
         }
-      ]
+      ],
+      "specialist_publisher_properties": {
+        "select": "multiple"
+      }
     },
     {
       "key": "protection_type",
@@ -505,7 +514,10 @@
           "label": "American viticultural area",
           "value": "american-viticultural-area"
         }
-      ]
+      ],
+      "specialist_publisher_properties": {
+        "select": "one"
+      }
     },
     {
       "key": "country_of_origin",
@@ -803,7 +815,10 @@
           "label": "Vietnam",
           "value": "vietnam"
         }
-      ]
+      ],
+      "specialist_publisher_properties": {
+        "select": "multiple"
+      }
     },
     {
       "key": "traditional_term_grapevine_product_category",
@@ -881,7 +896,10 @@
           "label": "Wine vinegar",
           "value": "wine-vinegar"
         }
-      ]
+      ],
+      "specialist_publisher_properties": {
+        "select": "multiple"
+      }
     },
     {
       "key": "traditional_term_type",
@@ -898,7 +916,10 @@
           "label": "In place of PDO/PGI",
           "value": "in-place-of-pdo-pgi"
         }
-      ]
+      ],
+      "specialist_publisher_properties": {
+        "select": "one"
+      }
     },
     {
       "key": "traditional_term_language",
@@ -1007,7 +1028,10 @@
           "label": "Swedish",
           "value": "swedish"
         }
-      ]
+      ],
+      "specialist_publisher_properties": {
+        "select": "one"
+      }
     },
     {
       "key": "date_application",
@@ -1060,7 +1084,10 @@
           "label": "Application to UK scheme from 2021",
           "value": "uk-gi-after-2021"
         }
-      ]
+      ],
+      "specialist_publisher_properties": {
+        "select": "one"
+      }
     },
     {
       "key": "internal_notes",

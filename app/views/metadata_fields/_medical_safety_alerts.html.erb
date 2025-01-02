@@ -1,27 +1,2 @@
-<%= render layout: "shared/form_group", locals: { f: f, field: :alert_type, label: "Message type" } do %>
-  <%= f.select :alert_type,
-      f.object.facet_options(:alert_type),
-      {
-        include_blank: true
-      },
-      {
-        class: 'form-control'
-      }
-  %>
-<% end %>
-<%= render layout: "shared/form_group", locals: { f: f, field: :medical_specialism } do %>
-  <%= f.select :medical_specialism,
-      f.object.facet_options(:medical_specialism),
-      {},
-      {
-        class: 'select2',
-        multiple: true,
-        data:
-        {
-          placeholder: 'Select a Medical specialism'
-        }
-      }
-  %>
-<% end %>
-<%= render layout: "shared/date_fields", locals: { f: f, field: :issued_date, format: :medical_safety_alert } do %>
+<%= render layout: "shared/specialist_document_form", locals: { f: f } do %>
 <% end %>

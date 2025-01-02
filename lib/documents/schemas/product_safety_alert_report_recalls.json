@@ -66,7 +66,10 @@
           "label": "Product recall",
           "value": "product-recall"
         }
-      ]
+      ],
+      "specialist_publisher_properties": {
+        "select": "one"
+      }
     },
     {
       "key": "product_risk_level",
@@ -97,7 +100,10 @@
           "label": "Not provided",
           "value": "not-provided"
         }
-      ]
+      ],
+      "specialist_publisher_properties": {
+        "select": "one"
+      }
     },
     {
       "key": "product_category",
@@ -235,7 +241,10 @@
           "label": "Toys",
           "value": "toys"
         }
-      ]
+      ],
+      "specialist_publisher_properties": {
+        "select": "one"
+      }
     },
     {
       "key": "product_measure_type",
@@ -294,7 +303,10 @@
           "label": "Other",
           "value": "other"
         }
-      ]
+      ],
+      "specialist_publisher_properties": {
+        "select": "multiple"
+      }
     },
     {
       "key": "product_recall_alert_date",

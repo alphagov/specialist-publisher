@@ -28,6 +28,7 @@
   %>
 <% end %>
 
+<% # TODO: find a way of making organisation management schema-driven %>
 <%= render "shared/form_group", f: f, field: :primary_publishing_organisation, label: "Publishing organisation" do %>
   <%= f.select :primary_publishing_organisation,
       organisations_options,
@@ -55,6 +56,8 @@
   %>
 <% end %>
 
+<% # TODO: rendering a subset of the facet fields above (and a subset below) the proprietary code in this file %>
+<% # makes it difficult to use the shared view %>
 <div class="additional-field-context-section">
   <h2>How users apply</h2>
 

@@ -53,7 +53,10 @@
           "label": "Withdrawn",
           "value": "withdrawn"
         }
-      ]
+      ],
+      "specialist_publisher_properties": {
+        "select": "one"
+      }
     },
     {
       "key": "subject",
@@ -139,7 +142,10 @@
           "label": "Work",
           "value": "work"
         }
-      ]
+      ],
+      "specialist_publisher_properties": {
+        "select": "multiple"
+      }
     }
   ]
 }

@@ -34,7 +34,10 @@
           "label": "Yes",
           "value": "yes"
         }
-      ]
+      ],
+      "specialist_publisher_properties": {
+        "select": "one"
+      }
     },
     {
       "key": "data_ethics_guidance_document_ethical_theme",
@@ -73,7 +76,10 @@
           "label": "Societal Wellbeing",
           "value": "societal-wellbeing"
         }
-      ]
+      ],
+      "specialist_publisher_properties": {
+        "select": "multiple"
+      }
     },
     {
       "key": "data_ethics_guidance_document_organisation",
@@ -116,7 +122,10 @@
           "label": "Monitoring/Review",
           "value": "monitoring-review"
         }
-      ]
+      ],
+      "specialist_publisher_properties": {
+        "select": "multiple"
+      }
     },
     {
       "key": "data_ethics_guidance_document_technology_area",
@@ -155,7 +164,10 @@
           "label": "Automated Decision Making",
           "value": "automated-decision-making"
         }
-      ]
+      ],
+      "specialist_publisher_properties": {
+        "select": "multiple"
+      }
     }
   ]
 }

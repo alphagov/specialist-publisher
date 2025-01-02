@@ -56,7 +56,10 @@
           "label": "Green",
           "value": "green"
         }
-      ]
+      ],
+      "specialist_publisher_properties": {
+        "select": "one"
+      }
     },
     {
       "key": "stage",
@@ -106,7 +109,10 @@
           "label": "Live amber evidence review",
           "value": "live-amber-evidence-review"
         }
-      ]
+      ],
+      "specialist_publisher_properties": {
+        "select": "one"
+      }
     }
   ]
 }

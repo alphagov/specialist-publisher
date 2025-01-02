@@ -813,7 +813,10 @@
           "value": "ZW",
           "label": "Zimbabwe"
         }
-      ]
+      ],
+      "specialist_publisher_properties": {
+        "select": "multiple"
+      }
     },
     {
       "key": "research_document_type",
@@ -912,7 +915,10 @@
           "value": "working_paper",
           "label": "Working Paper"
         }
-      ]
+      ],
+      "specialist_publisher_properties": {
+        "select": "one"
+      }
     },
     {
       "key": "theme",
@@ -971,7 +977,10 @@
           "value": "water_and_sanitation",
           "label": "Water and Sanitation"
         }
-      ]
+      ],
+      "specialist_publisher_properties": {
+        "select": "multiple"
+      }
     },
     {
       "key": "first_published_at",

@@ -1,26 +1,2 @@
-<%= render layout: "shared/form_group", locals: { f: f, field: :tribunal_decision_country } do %>
-  <%= f.select :tribunal_decision_country,
-      f.object.facet_options(:tribunal_decision_country),
-      { label: "Country" },
-      { class: 'form-control' }
-  %>
-<% end %>
-<%= render layout: "shared/form_group", locals: { f: f, field: :tribunal_decision_categories } do %>
-  <%= f.select :tribunal_decision_categories,
-      f.object.facet_options(:tribunal_decision_categories),
-      { label: "Jurisdiction code" },
-      {
-        class: 'select2 form-control',
-        multiple: true,
-        data:
-        {
-          placeholder: ''
-        }
-      }
-  %>
-<% end %>
-<%= render layout: "shared/date_fields", locals: { f: f, field: :tribunal_decision_decision_date, format: :employment_tribunal_decision } do %>
-<% end %>
-<%= render layout: "shared/form_group", locals: { f: f, field: :hidden_indexable_content } do %>
-  <%= f.text_area :hidden_indexable_content, class: 'form-control' %>
+<%= render layout: "shared/specialist_document_form", locals: { f: f } do %>
 <% end %>

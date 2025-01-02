@@ -133,7 +133,10 @@
           "label": "General",
           "value": "general"
         }
-      ]
+      ],
+      "specialist_publisher_properties": {
+        "select": "multiple"
+      }
     },
     {
       "key": "year_adopted",

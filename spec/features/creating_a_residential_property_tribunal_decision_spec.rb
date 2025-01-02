@@ -27,8 +27,8 @@ RSpec.feature "Creating a residential property tribunal decision", type: :featur
     fill_in "Title", with: title
     fill_in "Summary", with: summary
     fill_in "Body", with: "## Header#{"\n\nThis is the long body of an example Residential property tribunal decision" * 10}"
-    select "Park homes", from: "Tribunal decision category"
-    select "Park homes - Site licence - payment of annual fee", from: "Tribunal decision sub category"
+    select "Park homes", from: "Category"
+    select "Park homes - Site licence - payment of annual fee", from: "Sub-category"
     fill_in "[residential_property_tribunal_decision]tribunal_decision_decision_date(1i)", with: "2018"
     fill_in "[residential_property_tribunal_decision]tribunal_decision_decision_date(2i)", with: "01"
     fill_in "[residential_property_tribunal_decision]tribunal_decision_decision_date(3i)", with: "01"
@@ -73,8 +73,8 @@ RSpec.feature "Creating a residential property tribunal decision", type: :featur
     fill_in "Title", with: "Example Residential property tribunal decision"
     fill_in "Summary", with: "This is the summary of an example Residential property tribunal decision"
     fill_in "Body", with: "<script>alert('hello')</script>"
-    select "Rents", from: "Tribunal decision category"
-    select "Park homes - Site licence - payment of annual fee", from: "Tribunal decision sub category"
+    select "Rents", from: "Category"
+    select "Park homes - Site licence - payment of annual fee", from: "Sub-category"
 
     click_button "Save as draft"
 

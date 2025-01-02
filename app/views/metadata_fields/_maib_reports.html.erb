@@ -1,22 +1,2 @@
-<%= render layout: "shared/date_fields", locals: { f: f, field: :date_of_occurrence, format: :maib_report } do %>
-<% end %>
-<%= render layout: "shared/form_group", locals: { f: f, field: :vessel_type } do %>
-  <%= f.select :vessel_type,
-      f.object.facet_options(:vessel_type),
-      {},
-      {
-        class: 'select2',
-        multiple: true,
-        data: {placeholder: 'Select a Vessel type'}
-      }
-  %>
-<% end %>
-<%= render layout: "shared/form_group", locals: { f: f, field: :report_type } do %>
-  <%= f.select :report_type,
-      f.object.facet_options(:report_type),
-      {},
-      {
-        class: 'form-control'
-      }
-  %>
+<%= render layout: "shared/specialist_document_form", locals: { f: f } do %>
 <% end %>
