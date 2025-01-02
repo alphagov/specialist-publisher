@@ -380,13 +380,6 @@
       ]
     },
     {
-      "key": "tribunal_decision_country_name",
-      "name": "Country name",
-      "type": "text",
-      "display_as_result_metadata": true,
-      "filterable": false
-    },
-    {
       "key": "tribunal_decision_categories",
       "name": "Jurisdiction code",
       "type": "text",
@@ -611,13 +604,6 @@
           "value": "written-statements"
         }
       ]
-    },
-    {
-      "key": "tribunal_decision_categories_name",
-      "name": "Jurisdiction code name",
-      "type": "text",
-      "display_as_result_metadata": true,
-      "filterable": false
     },
     {
       "key": "tribunal_decision_decision_date",

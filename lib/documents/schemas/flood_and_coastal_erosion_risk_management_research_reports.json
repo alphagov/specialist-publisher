@@ -361,14 +361,6 @@
       "filterable": false
     },
     {
-      "key": "first_published_at",
-      "name": "Date",
-      "short_name": "Date",
-      "type": "date",
-      "display_as_result_metadata": false,
-      "filterable": false
-    },
-    {
       "key": "date_of_start",
       "name": "Date of start",
       "type": "date",
