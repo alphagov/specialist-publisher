@@ -1,0 +1,110 @@
+<% facet ||= {} %>
+<input type="hidden" name="facets[<%= index %>][key]" value="<%=facet["key"]%>">
+
+<%= render "govuk_publishing_components/components/input", {
+  label: {
+    text: "Filter",
+    heading_size: "s",
+  },
+  name: "facets[#{index}][name]",
+  value: facet["name"],
+  hint: "Example: Disease control zone type"
+} %>
+
+<%= render "govuk_publishing_components/components/input", {
+  label: {
+    text: "Filter short name (optional)",
+    heading_size: "s",
+  },
+  name: "facets[#{index}][short_name]",
+  value: facet["short_name"],
+  hint: "Example: Control zone type"
+} %>
+
+<%= render "govuk_publishing_components/components/select", {
+  id: "facets-#{index}-type",
+  name: "facets[#{index}][type]",
+  label: "Type",
+  options: [
+      {
+        text: "Multiple select",
+        value: "enum_text_multiple", # Temporary value for the form only. It ends up as "text" in the schema, and "allowed_values" is retained
+        selected: facet.dig("specialist_publisher_properties", "select") == "multiple",
+      },
+      {
+        text: "One option",
+        value: "enum_text_single", # Temporary value for the form only. It ends up as "text" in the schema, and "allowed_values" is retained
+        selected: facet.dig("specialist_publisher_properties", "select") == "one",
+      },
+      {
+        text: "Free text",
+        value: "text", # Ends up as "text" in the schema, and deletes any submitted "allowed_values" value
+        selected: facet["type"] == "text" && facet["allowed_values"].nil?,
+      },
+      {
+        text: "Date",
+        value: "date",
+        selected: facet["type"] == "date",
+      }
+    ]
+} %>
+
+<%= render "govuk_publishing_components/components/textarea", {
+  label: {
+    text: "Filter options ('Multiple select' or 'One option' only)",
+    heading_size: "s",
+  },
+  hint: sanitize("Put each option on a new line. The underlying name for existing (live) options will appear in curly braces: please don't edit these, and don't add them for new options (they'll be created automatically later on in the process). Example:<br><strong>Pre-existing value {pre-existing-value}</strong><br><strong>New value</strong>"),
+  name: "facets[#{index}][allowed_values]",
+  rows: 5,
+  value: facet["allowed_values"]&.map { |opt| "#{opt["label"]} {#{opt["value"]}}" }&.join("\n"),
+} %>
+
+<%= render "govuk_publishing_components/components/radio", {
+  heading: "Can users use this filter when searching for content items?",
+  heading_size: "s",
+  name: "facets[#{index}][filterable]",
+  inline: true,
+  items: [
+    {
+      value: "true",
+      text: "Yes",
+      checked: facet["filterable"]
+    },
+    {
+      value: "false",
+      text: "No",
+      checked: !facet["filterable"]
+    }
+  ]
+} %>
+
+<%= render "govuk_publishing_components/components/radio", {
+  heading: "Show as information under content item?",
+  heading_size: "s",
+  hint: "Example: Air Accidents Investigation Branch reports displays ‘Aircraft category: Commercial - fixed wing’ under relevant content items",
+  name: "facets[#{index}][display_as_result_metadata]",
+  inline: true,
+  items: [
+    {
+      value: "true",
+      text: "Yes",
+      checked: facet["display_as_result_metadata"]
+    },
+    {
+      value: "false",
+      text: "No",
+      checked: !facet["display_as_result_metadata"]
+    }
+  ]
+} %>
+
+<%= render "govuk_publishing_components/components/input", {
+  label: {
+    text: "Preposition (to be displayed when filter option is selected)",
+    heading_size: "s",
+  },
+  name: "facets[#{index}][preposition]",
+  value: facet["preposition"],
+  hint: "Example: In Find funding for land or farms,  selecting an option in the filter ‘Area of interest’ displays the preposition ‘With’ before the selected option"
+} %>

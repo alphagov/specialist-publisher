@@ -67,5 +67,15 @@
         },
       ],
     } %>
+
+    <%= render "facets_summary_card", {
+      schema: current_format.finder_schema,
+      summary_card_actions: [
+        {
+          label: "Request changes",
+          href: "/admin/facets/#{current_format.admin_slug}"
+        },
+      ],
+    } %>
   </div>
 </div>
