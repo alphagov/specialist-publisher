@@ -1,6 +1,7 @@
 class Facet
   include ActiveModel::Model
   include ActiveModel::Attributes
+  include ActiveModel::Validations
 
   attribute :key
   attribute :name
@@ -11,6 +12,8 @@ class Facet
   attribute :filterable, :boolean
   attribute :allowed_values
   attribute :specialist_publisher_properties
+
+  validates :name, format: { with: URI::MailTo::EMAIL_REGEXP }
 
   def to_finder_schema_attributes
     {

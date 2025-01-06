@@ -15,13 +15,19 @@ class AdminController < ApplicationController
       next if facet_params["_destroy"] == "1"
 
       Facet.from_finder_admin_form_params(facet_params)
-           .to_finder_schema_attributes
     }.compact
 
-    @proposed_schema = FinderSchema.new(@current_format.finder_schema.attributes)
-    @proposed_schema.update(@params)
+    if @params["facets"].all? { |facet| facet.valid? }
+      @params["facets"] = @params["facets"].map(&:to_finder_schema_attributes)
+      @proposed_schema = FinderSchema.new(@current_format.finder_schema.attributes)
+      @proposed_schema.update(@params)
 
-    render :confirm_facets
+      render :confirm_facets
+    else
+      errors = @params["facets"].map { |facet| facet.errors.count.positive? ? facet.errors.full_messages : nil }.compact
+      flash[:danger] = "Validation issues: #{errors.join(', ')}"
+      redirect_to edit_facets_path
+    end
   end
 
   def confirm_metadata

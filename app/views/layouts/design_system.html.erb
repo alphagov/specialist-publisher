@@ -37,6 +37,11 @@
   } %>
 
   <div class="govuk-width-container">
+    <% if flash[:danger].present? %>
+      <div class="elements-error-summary add-bottom-margin">
+        <%= flash[:danger] %>
+      </div>
+    <% end %>
 
     <%= yield(:back_link) %>
     <%= yield(:breadcrumbs) %>
