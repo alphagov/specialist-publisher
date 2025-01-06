@@ -1,17 +1,16 @@
 class Facet
   include ActiveModel::Model
+  include ActiveModel::Attributes
 
-  attr_accessor(
-    :key,
-    :name,
-    :short_name,
-    :type,
-    :preposition,
-    :display_as_result_metadata,
-    :filterable,
-    :allowed_values,
-    :specialist_publisher_properties,
-  )
+  attribute :key
+  attribute :name
+  attribute :short_name
+  attribute :type
+  attribute :preposition
+  attribute :display_as_result_metadata, :boolean
+  attribute :filterable, :boolean
+  attribute :allowed_values
+  attribute :specialist_publisher_properties
 
   def to_finder_schema_attributes
     {
@@ -35,8 +34,8 @@ class Facet
       facet.short_name = nil_if_blank(params["short_name"])
       facet.type = facet_type(params["type"])
       facet.preposition = nil_if_blank(params["preposition"])
-      facet.display_as_result_metadata = str_to_bool(params["display_as_result_metadata"])
-      facet.filterable = str_to_bool(params["filterable"])
+      facet.display_as_result_metadata = params["display_as_result_metadata"]
+      facet.filterable = params["filterable"]
       facet.allowed_values = facet_allowed_values(params["allowed_values"], params["type"])
       facet.specialist_publisher_properties = facet_specialist_publisher_properties(params["type"])
       facet
@@ -50,14 +49,6 @@ class Facet
 
     def nil_if_blank(str)
       str.presence
-    end
-
-    def str_to_bool(str)
-      if str == "true"
-        true
-      elsif str == "false"
-        false
-      end
     end
 
     def facet_type(type)
