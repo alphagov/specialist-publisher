@@ -23,8 +23,7 @@
   ],
   "subscription_list_title_prefix": {
     "singular": "European Structural and Investment Fund with the following location: ",
-    "plural": "European Structural and Investment Funds with the following locations: ",
-    "many": "European Structural and Investment Funds: "
+    "plural": "European Structural and Investment Funds with the following locations: "
   },
   "email_filter_by": "location",
   "email_filter_facets": [

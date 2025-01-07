@@ -23,8 +23,7 @@
   "signup_content_id": "99f5bacb-d1ef-4b93-87ef-bae129fed396",
   "subscription_list_title_prefix": {
     "singular": "Algorithmic transparency records with the following function: ",
-    "plural": "Algorithmic transparency records with the following functions: ",
-    "many": "Algorithmic transparency records: "
+    "plural": "Algorithmic transparency records with the following functions: "
   },
   "email_filter_by": "algorithmic_transparency_record_function",
   "email_filter_facets": [
