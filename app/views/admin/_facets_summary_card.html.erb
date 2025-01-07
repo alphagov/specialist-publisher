@@ -1,0 +1,51 @@
+<%
+  summary_card_actions ||= []
+
+  # Value for the summary page, where we only want to summarise the current facets
+  summary_rows = schema.facets.map do |facet|
+    {
+      key: facet["name"],
+      value: facet["allowed_values"] ?
+        facet["allowed_values"].first(3).map { |value| value["label"] }.join(", ") + (facet["allowed_values"].length > 3 ? "…" : "")
+        : facet["type"].humanize,
+    }
+  end
+
+  if (defined? previous_schema)
+    # We're on the edit page, so want to summarise the changes. So overriding `summary_rows`.
+    removed_facets = previous_schema.facets.map { |facet| facet["name"] } - schema.facets.map { |facet| facet["name"] }
+    previous_schema_facet_names = previous_schema.facets.map { |facet| facet["name"] }
+    proposed_schema_facet_names = schema.facets.map { |facet| facet["name"] }
+
+    summary_rows = proposed_schema_facet_names.map do |facet_name|
+      if (previous_schema_facet_names.include?(facet_name))
+        old_facet_config = previous_schema.facets.find { |f| f["name"] == facet_name }
+        new_facet_config = schema.facets.find { |f| f["name"] == facet_name }
+        updated = !facet_name.in?(removed_facets) && !old_facet_config.nil? && old_facet_config != new_facet_config
+
+        {
+          key: facet_name,
+          value: raw("Updated (click on 'View diff' for details)"),
+        } if updated
+      else
+        {
+          key: facet_name,
+          value: raw("Added (click on 'View diff' for details)"),
+        }
+      end
+    end
+    summary_rows = summary_rows.compact.concat(removed_facets.map do |facet_name|
+      {
+        key: facet_name,
+        value: raw("Deleted"),
+      }
+    end)
+  end
+%>
+<%= render "govuk_publishing_components/components/summary_card", {
+  id: "facets_summary_card",
+  title: "Filters and options",
+  rows: summary_rows,
+  summary_card_actions:,
+  margin_top: 6,
+} %>

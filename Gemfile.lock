@@ -144,6 +144,7 @@ GEM
     date (3.4.1)
     debug_inspector (1.2.0)
     diff-lcs (1.5.1)
+    diffy (3.4.3)
     docile (1.4.0)
     domain_name (0.6.20240107)
     drb (2.2.1)
@@ -812,6 +813,7 @@ DEPENDENCIES
   capybara-select-2
   dartsass-rails
   database_cleaner-mongoid
+  diffy
   factory_bot
   gds-api-adapters
   gds-sso

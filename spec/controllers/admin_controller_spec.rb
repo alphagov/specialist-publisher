@@ -28,10 +28,26 @@ RSpec.describe AdminController, type: :controller do
     end
   end
 
+  describe "GET edit facets" do
+    it "responds successfully" do
+      stub_publishing_api_has_content([], hash_including(document_type: Organisation.document_type))
+      get :edit_facets, params: { document_type_slug: "asylum-support-decisions" }
+      expect(response.status).to eq(200)
+    end
+  end
+
   describe "POST edit metadata" do
     it "responds successfully" do
       stub_publishing_api_has_content([], hash_including(document_type: Organisation.document_type))
       post :edit_metadata, params: { document_type_slug: "asylum-support-decisions" }
+      expect(response.status).to eq(200)
+    end
+  end
+
+  describe "POST edit facets" do
+    it "responds successfully" do
+      stub_publishing_api_has_content([], hash_including(document_type: Organisation.document_type))
+      post :edit_facets, params: { document_type_slug: "asylum-support-decisions" }
       expect(response.status).to eq(200)
     end
   end

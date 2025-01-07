@@ -5,7 +5,24 @@ class AdminController < ApplicationController
 
   def summary; end
 
+  def edit_facets; end
+
   def edit_metadata; end
+
+  def confirm_facets
+    @params = facets_params
+    @params["facets"] = @params["facets"].values.map { |facet_params|
+      next if facet_params["_destroy"] == "1"
+
+      Facet.from_finder_admin_form_params(facet_params)
+           .to_finder_schema_attributes
+    }.compact
+
+    @proposed_schema = FinderSchema.new(@current_format.finder_schema.attributes)
+    @proposed_schema.update(@params)
+
+    render :confirm_facets
+  end
 
   def confirm_metadata
     @params = params.permit(
@@ -73,6 +90,23 @@ private
       :filtered_content_list_title_prefix,
       :email_filter_by,
       :signup_link,
+    )
+  end
+
+  def facets_params
+    allowed_facet_params = %i[
+      key
+      name
+      short_name
+      type
+      preposition
+      display_as_result_metadata
+      filterable
+      allowed_values
+      _destroy
+    ]
+    params.permit(
+      facets: allowed_facet_params,
     )
   end
 end
