@@ -64,21 +64,6 @@ RSpec.describe FinderSchema do
     end
   end
 
-  describe "#override_signup_copy" do
-    it "overrides the signup copy based on the document noun on update if the schema has signup copy" do
-      schema = FinderSchema.new
-      schema.signup_copy = "You'll get an email each time a document is updated or a new document is published."
-      schema.update({ document_noun: "publication" })
-      expect(schema.signup_copy).to eq("You'll get an email each time a publication is updated or a new publication is published.")
-    end
-
-    it "does not override the signup copy if the schema does not have signup copy already" do
-      schema = FinderSchema.new
-      schema.update({ document_noun: "publication" })
-      expect(schema.signup_copy).to be_nil
-    end
-  end
-
   describe "#humanized_facet_name" do
     it "returns the name defined in the schema for the supplied facet key" do
       properties = mandatory_properties.merge({

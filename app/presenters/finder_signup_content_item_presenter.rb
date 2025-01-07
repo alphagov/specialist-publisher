@@ -12,7 +12,6 @@ class FinderSignupContentItemPresenter
       title:,
       schema_name:,
       document_type:,
-      description:,
       public_updated_at:,
       update_type:,
       publishing_app:,
@@ -39,10 +38,6 @@ private
 
   def base_path
     "#{schema.fetch('base_path')}/email-signup"
-  end
-
-  def description
-    schema.fetch("signup_copy", nil)
   end
 
   def document_type
