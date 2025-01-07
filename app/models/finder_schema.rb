@@ -6,7 +6,7 @@ class FinderSchema
 
   define_model_callbacks :update
 
-  after_update :override_signup_copy, :remove_empty_related_links, :remove_empty_organisations
+  after_update :remove_empty_related_links, :remove_empty_organisations
 
   # Pluralized names of all document types
   def self.schema_names
@@ -42,7 +42,6 @@ class FinderSchema
   attribute :related
   attribute :show_summaries, :boolean, default: false
   attribute :signup_content_id
-  attribute :signup_copy
   attribute :signup_link
   attribute :subscription_list_title_prefix
   attribute :summary, default: ""
@@ -62,12 +61,6 @@ class FinderSchema
 
   def format
     filter["format"]
-  end
-
-  def override_signup_copy
-    if signup_copy.present?
-      _assign_attribute(:signup_copy, "You'll get an email each time a #{document_noun} is updated or a new #{document_noun} is published.")
-    end
   end
 
   def remove_empty_organisations
