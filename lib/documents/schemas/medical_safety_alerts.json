@@ -34,28 +34,24 @@
           "key": "field-safety-notices",
           "radio_button_name": "Field safety notice",
           "topic_name": "field safety notice",
-          "body": "information from medical device manufacturers.",
           "prechecked": true
         },
         {
           "key": "national-patient-safety",
           "radio_button_name": "National patient safety alert",
           "topic_name": "national patient safety alert",
-          "body": "information published by the MHRA related to patient safety.",
           "prechecked": true
         },
         {
           "key": "device-safety-information",
           "radio_button_name": "Device safety information",
           "topic_name": "device safety information",
-          "body": "information published by the MHRA related to device safety.",
           "prechecked": true
         },
         {
           "key": "medicines-recall-notification",
           "radio_button_name": "Medicines recall/notification",
           "topic_name": "medicines recall/notification",
-          "body": "information published by the MHRA related to medicines.",
           "prechecked": true
         }
       ]
