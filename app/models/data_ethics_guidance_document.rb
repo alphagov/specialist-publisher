@@ -1,8 +1,7 @@
 class DataEthicsGuidanceDocument < Document
   FORMAT_SPECIFIC_FIELDS = %i[
-    data_ethics_guidance_document_key_reference
     data_ethics_guidance_document_ethical_theme
-    data_ethics_guidance_document_organisation
+    data_ethics_guidance_document_organisation_alias
     data_ethics_guidance_document_project_phase
     data_ethics_guidance_document_technology_area
   ].freeze
