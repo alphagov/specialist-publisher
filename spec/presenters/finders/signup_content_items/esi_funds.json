@@ -18,7 +18,7 @@
     "email_filter_facets": [
       {
         "facet_id": "location",
-        "facet_name": "Locations",
+        "facet_name": "Location",
         "required": true,
         "facet_choices": [
           {
