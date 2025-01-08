@@ -30,6 +30,7 @@ class FinderSchema
   attribute :editing_organisations, default: []
   attribute :email_filter_by
   attribute :email_filter_facets, default: []
+  attribute :email_filter_options
   attribute :facets, default: []
   attribute :filter
   attribute :format_name

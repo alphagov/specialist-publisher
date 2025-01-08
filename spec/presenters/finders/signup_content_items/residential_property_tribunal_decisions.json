@@ -18,8 +18,20 @@
     "email_filter_facets": [
       {
         "facet_id": "tribunal_decision_category",
-        "facet_name": "tribunal decision categories",
+        "facet_name": "Category",
         "facet_choices": [
+          {
+            "key": "building-safety-act",
+            "radio_button_name": "Building Safety Act",
+            "topic_name": "Building Safety Act",
+            "prechecked": false
+          },
+          {
+            "key": "electronic-communications-code",
+            "radio_button_name": "Electronic Communications Code",
+            "topic_name": "Electronic Communications Code",
+            "prechecked": false
+          },
           {
             "key": "housing-act-2004-and-housing-and-planning-act-2016",
             "radio_button_name": "Housing Act 2004 and Housing and Planning Act 2016",
@@ -36,6 +48,12 @@
             "key": "leasehold-enfranchisement-and-extension",
             "radio_button_name": "Leasehold enfranchisement and extension",
             "topic_name": "Leasehold enfranchisement and extension",
+            "prechecked": false
+          },
+          {
+            "key": "leasehold-reform-ground-rent-act-2022",
+            "radio_button_name": "Leasehold Reform (Ground rent) Act 2022",
+            "topic_name": "Leasehold Reform (Ground rent) Act 2022",
             "prechecked": false
           },
           {
@@ -64,7 +82,7 @@
           },
           {
             "key": "tenant-fees-act",
-            "radio_button_name": "Tenant Fees act",
+            "radio_button_name": "Tenant Fees Act",
             "topic_name": "Tenant Fees Act",
             "prechecked": false
           }

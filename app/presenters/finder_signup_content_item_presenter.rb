@@ -1,7 +1,7 @@
 class FinderSignupContentItemPresenter
   attr_reader :schema, :timestamp
 
-  def initialize(schema, timestamp)
+  def initialize(schema, timestamp = Time.zone.now)
     @schema = schema
     @timestamp = timestamp
   end
@@ -26,7 +26,63 @@ class FinderSignupContentItemPresenter
     schema.fetch("signup_content_id")
   end
 
+  def email_filter_facets
+    return [] if email_filter_by.nil?
+
+    map_facets_to_email_facets(select_relevant_facets)
+  end
+
 private
+
+  def email_filter_by
+    email_filter_options.fetch("email_filter_by", nil)
+  end
+
+  def email_filter_options
+    schema.fetch("email_filter_options", {})
+  end
+
+  def select_relevant_facets
+    facets = schema.fetch("facets", [])
+    if email_filter_by == "all_selected_facets"
+      facets.select do |facet|
+        facet["filterable"] &&
+          facet["allowed_values"] &&
+          !(email_filter_options["all_selected_facets_except_for"] || []).include?(facet["key"])
+      end
+    else
+      facets.select { |facet| facet.fetch("key") == email_filter_by }
+    end
+  end
+
+  def map_facets_to_email_facets(facets)
+    facets.map do |facet|
+      overridden_topic_names = email_filter_options["email_alert_topic_name_overrides"]&.fetch(facet["key"], nil) || []
+
+      {
+        facet_id: facet["key"],
+        facet_name: facet["name"],
+        required: email_filter_by == "all_selected_facets" ? nil : true,
+        facet_choices: facet["allowed_values"].map do |allowed_value|
+          overridden_topic_name = overridden_topic_names.find { |override| override["facet_option_key"] == allowed_value["value"] }&.fetch("topic_name_override")
+          topic_name = if overridden_topic_name
+                         overridden_topic_name
+                       elsif email_filter_options["downcase_email_alert_topic_names"]
+                         allowed_value["label"].downcase
+                       else
+                         allowed_value["label"]
+                       end
+
+          {
+            key: allowed_value["value"],
+            radio_button_name: allowed_value["label"],
+            topic_name:,
+            prechecked: (email_filter_options["pre_checked_email_alert_checkboxes"] || []).include?(allowed_value["value"]),
+          }
+        end,
+      }.compact
+    end
+  end
 
   def locale
     "en"
@@ -66,9 +122,8 @@ private
   def details
     {
       "beta" => schema.fetch("signup_beta", false),
-      "email_filter_facets" => schema.fetch("email_filter_facets", []),
-      # TODO: Remove email_filter_by once finder-frontend doesn't use it.
-      "email_filter_by" => schema.fetch("email_filter_by", nil),
+      "email_filter_facets" => email_filter_facets,
+      "email_filter_by" => email_filter_by,
       "filter" => schema.fetch("filter", nil),
       "subscription_list_title_prefix" => schema.fetch("subscription_list_title_prefix", {}),
     }
