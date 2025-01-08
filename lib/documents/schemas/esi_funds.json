@@ -25,70 +25,10 @@
     "singular": "European Structural and Investment Fund with the following location: ",
     "plural": "European Structural and Investment Funds with the following locations: "
   },
-  "email_filter_by": "location",
-  "email_filter_facets": [
-    {
-      "facet_id": "location",
-      "facet_name": "Locations",
-      "required": true,
-      "facet_choices": [
-        {
-          "key": "north-east",
-          "radio_button_name": "North East",
-          "topic_name": "north east",
-          "prechecked": false
-        },
-        {
-          "key": "north-west",
-          "radio_button_name": "North West",
-          "topic_name": "north west",
-          "prechecked": false
-        },
-        {
-          "key": "yorkshire-and-humber",
-          "radio_button_name": "Yorkshire and Humber",
-          "topic_name": "yorkshire and humber",
-          "prechecked": false
-        },
-        {
-          "key": "east-midlands",
-          "radio_button_name": "East Midlands",
-          "topic_name": "east midlands",
-          "prechecked": false
-        },
-        {
-          "key": "west-midlands",
-          "radio_button_name": "West Midlands",
-          "topic_name": "west midlands",
-          "prechecked": false
-        },
-        {
-          "key": "east-of-england",
-          "radio_button_name": "East of England",
-          "topic_name": "east of england",
-          "prechecked": false
-        },
-        {
-          "key": "south-east",
-          "radio_button_name": "South East",
-          "topic_name": "south east",
-          "prechecked": false
-        },
-        {
-          "key": "south-west",
-          "radio_button_name": "South West",
-          "topic_name": "south west",
-          "prechecked": false
-        },
-        {
-          "key": "london",
-          "radio_button_name": "London",
-          "topic_name": "london",
-          "prechecked": false
-        }
-      ]
-    }
-  ],
+  "email_filter_options": {
+    "email_filter_by": "location",
+    "downcase_email_alert_topic_names": true
+  },
   "document_noun": "call",
   "document_title": "ESI Fund",
   "facets": [

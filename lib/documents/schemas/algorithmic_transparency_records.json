@@ -25,82 +25,9 @@
     "singular": "Algorithmic transparency records with the following function: ",
     "plural": "Algorithmic transparency records with the following functions: "
   },
-  "email_filter_by": "algorithmic_transparency_record_function",
-  "email_filter_facets": [
-    {
-      "facet_id": "algorithmic_transparency_record_function",
-      "facet_name": "Function",
-      "required": true,
-      "facet_choices": [
-        {
-          "key": "general-public-services",
-          "radio_button_name": "General public services",
-          "topic_name": "General public services",
-          "prechecked": false
-        },
-        {
-          "key": "defence",
-          "radio_button_name": "Defence",
-          "topic_name": "Defence",
-          "prechecked": false
-        },
-        {
-          "key": "public-order-and-safety",
-          "radio_button_name": "Public order and safety",
-          "topic_name": "Public order and safety",
-          "prechecked": false
-        },
-        {
-          "key": "economic-affairs",
-          "radio_button_name": "Economic affairs",
-          "topic_name": "Economic affairs",
-          "prechecked": false
-        },
-        {
-          "key": "environmental-protection",
-          "radio_button_name": "Environmental protection",
-          "topic_name": "Environmental protection",
-          "prechecked": false
-        },
-        {
-          "key": "housing-and-community-amenities",
-          "radio_button_name": "Housing and community amenities",
-          "topic_name": "Housing and community amenities",
-          "prechecked": false
-        },
-        {
-          "key": "health",
-          "radio_button_name": "Health",
-          "topic_name": "Health",
-          "prechecked": false
-        },
-        {
-          "key": "recreation-culture-and-religion",
-          "radio_button_name": "Recreation culture and religion",
-          "topic_name": "Recreation culture and religion",
-          "prechecked": false
-        },
-        {
-          "key": "education",
-          "radio_button_name": "Education",
-          "topic_name": "Education",
-          "prechecked": false
-        },
-        {
-          "key": "social-protection",
-          "radio_button_name": "Social protection",
-          "topic_name": "Social protection",
-          "prechecked": false
-        },
-        {
-          "key": "regulation",
-          "radio_button_name": "Regulation",
-          "topic_name": "Regulation",
-          "prechecked": false
-        }
-      ]
-    }
-  ],
+  "email_filter_options": {
+    "email_filter_by": "algorithmic_transparency_record_function"
+  },
   "summary": "<p>Find algorithmic transparency records from UK public sector organisations with information on algorithmic tools used in decision making. These are completed in accordance with the Algorithmic Transparency Recording Standard.</p><p>Let us know what you think of this service: [<a href=\"https://forms.office.com/e/XNn3GBqzhY\">feedback form</a>]</p>",
   "document_noun": "record",
   "document_title": "Algorithmic transparency record",

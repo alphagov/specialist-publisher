@@ -13,34 +13,10 @@
     "a0ee18e7-9e1e-4ba1-aed5-f3f287dce752"
   ],
   "topics": [],
-  "email_filter_by": "product_alert_type",
-  "email_filter_facets": [
-    {
-      "facet_id": "product_alert_type",
-      "facet_name": "Alert type",
-      "required": true,
-      "facet_choices": [
-        {
-          "key": "product-safety-alert",
-          "radio_button_name": "Product safety alert",
-          "topic_name": "product safety alert",
-          "prechecked": false
-        },
-        {
-          "key": "product-safety-report",
-          "radio_button_name": "Product safety report",
-          "topic_name": "product safety report",
-          "prechecked": false
-        },
-        {
-          "key": "product-recall",
-          "radio_button_name": "Product recall",
-          "topic_name": "product recall",
-          "prechecked": false
-        }
-      ]
-    }
-  ],
+  "email_filter_options": {
+    "email_filter_by": "product_alert_type",
+    "downcase_email_alert_topic_names": true
+  },
   "document_noun": "report",
   "document_title": "Product Safety Alerts, Reports and Recalls",
   "facets": [

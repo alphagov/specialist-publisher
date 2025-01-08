@@ -20,46 +20,10 @@
     "singular": "Marine Accident Investigation Branch (MAIB) reports with the following vessel type: ",
     "plural": "Marine Accident Investigation Branch (MAIB) reports with the following vessel types: "
   },
-  "email_filter_by": "vessel_type",
-  "email_filter_facets": [
-    {
-      "facet_id": "vessel_type",
-      "facet_name": "Vessel types",
-      "required": true,
-      "facet_choices": [
-        {
-          "key": "merchant-vessel-100-gross-tons-or-over",
-          "radio_button_name": "Merchant vessel 100 gross tons or over",
-          "topic_name": "merchant vessel 100 gross tons or over",
-          "prechecked": false
-        },
-        {
-          "key": "merchant-vessel-under-100-gross-tons",
-          "radio_button_name": "Merchant vessel under 100 gross tons",
-          "topic_name": "merchant vessel under 100 gross tons",
-          "prechecked": false
-        },
-        {
-          "key": "fishing-vessel",
-          "radio_button_name": "Fishing vessel",
-          "topic_name": "fishing vessel",
-          "prechecked": false
-        },
-        {
-          "key": "recreational-craft-sail",
-          "radio_button_name": "Recreational craft - sail",
-          "topic_name": "recreational craft - sail",
-          "prechecked": false
-        },
-        {
-          "key": "recreational-craft-power",
-          "radio_button_name": "Recreational craft - power",
-          "topic_name": "recreational craft - power",
-          "prechecked": false
-        }
-      ]
-    }
-  ],
+  "email_filter_options": {
+    "email_filter_by": "vessel_type",
+    "downcase_email_alert_topic_names": true
+  },
   "document_noun": "report",
   "document_title": "MAIB Report",
   "facets": [

@@ -19,69 +19,10 @@
     "9ac82e6a-0fb6-431f-85d8-560361e21d0b"
   ],
   "signup_content_id": "512a14c1-260a-4c4e-8de8-643eadf7905c",
-  "email_filter_by": "all_selected_facets",
-  "email_filter_facets": [
-    {
-      "facet_id": "category",
-      "facet_name": "Category",
-      "facet_choices": [
-        {
-          "key": "life-saving-appliances",
-          "radio_button_name": "Life-saving appliances",
-          "topic_name": "life-saving appliances",
-          "prechecked": false
-        },
-        {
-          "key": "marine-pollution-prevention",
-          "radio_button_name": "Marine pollution prevention",
-          "topic_name": "marine pollution prevention",
-          "prechecked": false
-        },
-        {
-          "key": "fire-protection-equipment",
-          "radio_button_name": "Fire protection equipment",
-          "topic_name": "fire protection equipment",
-          "prechecked": false
-        },
-        {
-          "key": "navigation-equipment",
-          "radio_button_name": "Navigation equipment",
-          "topic_name": "navigation equipment",
-          "prechecked": false
-        },
-        {
-          "key": "radio-communication-equipment",
-          "radio_button_name": "Radio-communication equipment",
-          "topic_name": "radio-communication equipment",
-          "prechecked": false
-        },
-        {
-          "key": "equipment-required-under-colregs",
-          "radio_button_name": "Equipment required under COLREGs",
-          "topic_name": "equipment required under colregs",
-          "prechecked": false
-        },
-        {
-          "key": "other-safety-equipment",
-          "radio_button_name": "Other safety equipment",
-          "topic_name": "other safety equipment",
-          "prechecked": false
-        },
-        {
-          "key": "equipment-under-solas-chapter-ii-1",
-          "radio_button_name": "Equipment under SOLAS Chapter II-1",
-          "topic_name": "equipment under solas chapter ii-1",
-          "prechecked": false
-        },
-        {
-          "key": "general",
-          "radio_button_name": "General",
-          "topic_name": "general",
-          "prechecked": false
-        }
-      ]
-    }
-  ],
+  "email_filter_options": {
+    "email_filter_by": "all_selected_facets",
+    "downcase_email_alert_topic_names": true
+  },
   "subscription_list_title_prefix": "UK Approved Recommendations for marine equipment",
   "summary": "<p>Find recommendations on how to interpret and apply the Merchant Shipping (Marine Equipment) Regulations 2016 as amended.</p>",
   "document_noun": "recommendation",

@@ -22,63 +22,9 @@
   ],
   "signup_content_id": "8a6239e1-76cf-41a0-9295-0ae1182080d2",
   "subscription_list_title_prefix": "Residential property tribunal decisions",
-  "email_filter_by": "all_selected_facets",
-  "email_filter_facets": [
-    {
-      "facet_id": "tribunal_decision_category",
-      "facet_name": "tribunal decision categories",
-      "facet_choices": [
-        {
-          "key": "housing-act-2004-and-housing-and-planning-act-2016",
-          "radio_button_name": "Housing Act 2004 and Housing and Planning Act 2016",
-          "topic_name": "Housing Act 2004 and Housing and Planning Act 2016",
-          "prechecked": false
-        },
-        {
-          "key": "leasehold-disputes-management",
-          "radio_button_name": "Leasehold disputes (management)",
-          "topic_name": "Leasehold disputes (management)",
-          "prechecked": false
-        },
-        {
-          "key": "leasehold-enfranchisement-and-extension",
-          "radio_button_name": "Leasehold enfranchisement and extension",
-          "topic_name": "Leasehold enfranchisement and extension",
-          "prechecked": false
-        },
-        {
-          "key": "park-homes",
-          "radio_button_name": "Park homes",
-          "topic_name": "Park homes",
-          "prechecked": false
-        },
-        {
-          "key": "rents",
-          "radio_button_name": "Rents",
-          "topic_name": "Rents",
-          "prechecked": false
-        },
-        {
-          "key": "right-to-buy",
-          "radio_button_name": "Right to Buy",
-          "topic_name": "Right to Buy",
-          "prechecked": false
-        },
-        {
-          "key": "tenant-associations",
-          "radio_button_name": "Tenant associations",
-          "topic_name": "Tenant associations",
-          "prechecked": false
-        },
-        {
-          "key": "tenant-fees-act",
-          "radio_button_name": "Tenant Fees act",
-          "topic_name": "Tenant Fees Act",
-          "prechecked": false
-        }
-      ]
-    }
-  ],
+  "email_filter_options": {
+    "email_filter_by": "all_selected_facets"
+  },
   "summary": "<p>Find decisions on Residential Property Tribunal cases in England from December 2018 onwards.</p><p>If the decision was about leasehold and was made before December 2018, visit <a href=\"https://decisions.lease-advice.org/\" rel=\"external\">Lease Advice</a>. Other decisions made before December 2018 can be found on <a href=\"https://www.bailii.org/recent-decisions.html\" rel=\"external\">BAILII</a></p>",
   "document_noun": "decision",
   "document_title": "Residential Property Tribunal Decision",

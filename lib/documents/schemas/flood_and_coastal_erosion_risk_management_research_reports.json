@@ -15,52 +15,10 @@
   "document_title": "Flood and Coastal Erosion Risk Management Research Report",
   "signup_content_id": "0b3468bb-ccbe-4c97-9d94-870ae02e977d",
   "subscription_list_title_prefix": "Flood and Coastal Erosion Risk Management research reports",
-  "email_filter_by": "flood_and_coastal_erosion_category",
-  "email_filter_facets": [
-    {
-      "facet_id": "flood_and_coastal_erosion_category",
-      "facet_name": "Categories",
-      "required": true,
-      "facet_choices": [
-        {
-          "key": "environmental-management-and-sustainability",
-          "radio_button_name": "Environmental management and sustainability",
-          "topic_name": "environmental management and sustainability",
-          "prechecked": false
-        },
-        {
-          "key": "increasing-resilience-to-flooding",
-          "radio_button_name": "Increasing resilience to flooding",
-          "topic_name": "increasing resilience to flooding",
-          "prechecked": false
-        },
-        {
-          "key": "managing-flood-incidents",
-          "radio_button_name": "Managing flood incidents",
-          "topic_name": "managing flood incidents",
-          "prechecked": false
-        },
-        {
-          "key": "policy-governance-and-funding",
-          "radio_button_name": "Policy, governance and funding",
-          "topic_name": "policy, governance and funding",
-          "prechecked": false
-        },
-        {
-          "key": "understanding-risks-from-all-sources-of-flooding",
-          "radio_button_name": "Understanding risks from all sources of flooding",
-          "topic_name": "understanding risks from all sources of flooding",
-          "prechecked": false
-        },
-        {
-          "key": "whole-life-asset-management",
-          "radio_button_name": "Whole life asset management",
-          "topic_name": "whole life asset management",
-          "prechecked": false
-        }
-      ]
-    }
-  ],
+  "email_filter_options": {
+    "email_filter_by": "flood_and_coastal_erosion_category",
+    "downcase_email_alert_topic_names": true
+  },
   "facets": [
     {
       "key": "flood_and_coastal_erosion_category",
