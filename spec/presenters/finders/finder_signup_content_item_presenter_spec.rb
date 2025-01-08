@@ -19,14 +19,23 @@ RSpec.describe FinderSignupContentItemPresenter do
 
   describe "temporary tests to aid in refactoring schema" do
     Dir["lib/documents/schemas/*.json"].each do |file|
-      it "generates temporary output files we can compare against" do
+      it "generates a content item that is identical to the temporary output file generated earlier" do
         read_file = File.read(file)
         payload = JSON.parse(read_file)
+
         if payload.key?("signup_content_id")
           finder_signup_content_presenter = FinderSignupContentItemPresenter.new(payload, File.mtime(file))
           presented_data = finder_signup_content_presenter.to_json
 
-          File.write("spec/presenters/finders/signup_content_items/#{file.split('/').last}", JSON.pretty_generate(presented_data))
+          previous_content_item = File.read("spec/presenters/finders/signup_content_items/#{file.split('/').last}")
+
+          previous_json = JSON.parse(previous_content_item)
+          new_json = JSON.parse(presented_data.to_json)
+          # ignore this property as it's generated at compile time - we don't care if it's different
+          previous_json.delete("public_updated_at")
+          new_json.delete("public_updated_at")
+
+          expect(previous_json).to eq(new_json)
         end
       end
     end
