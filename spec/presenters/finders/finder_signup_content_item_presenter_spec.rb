@@ -3,9 +3,10 @@ require "spec_helper"
 RSpec.describe FinderSignupContentItemPresenter do
   describe "#to_json" do
     Dir["lib/documents/schemas/*.json"].each do |file|
+      let(:read_file) { File.read(file) }
+      let(:payload) { JSON.parse(read_file) }
+
       it "is valid against the #{file} content schemas" do
-        read_file = File.read(file)
-        payload = JSON.parse(read_file)
         if payload.key?("email_filter_options")
           finder_signup_content_presenter = FinderSignupContentItemPresenter.new(payload, File.mtime(file))
           presented_data = finder_signup_content_presenter.to_json
@@ -13,6 +14,29 @@ RSpec.describe FinderSignupContentItemPresenter do
           expect(presented_data[:schema_name]).to eq("finder_email_signup")
           expect(presented_data).to be_valid_against_publisher_schema("finder_email_signup")
         end
+      end
+
+      # email-alert-api limits the name of a subscription list to 1000 characters
+      # We test here to make sure we don't try to create lists with names longer than this
+      it "doesn't have a name longer than 1000 characters" do
+        finder_signup_content_presenter = FinderSignupContentItemPresenter.new(payload, File.mtime(file))
+        presented_data = finder_signup_content_presenter.to_json
+        next unless presented_data[:details][:subscription_list_title_prefix]
+
+        name = if presented_data[:details][:subscription_list_title_prefix][:plural]
+                 # If the list name has singular and plural forms, test the plural
+                 # form with every possible topic name appended to make the longest
+                 # possible name
+                 (presented_data[:details][:subscription_list_title_prefix][:plural] +
+                   presented_data[:details][:email_filter_facets][0][:facet_choices].collect { |topic| topic[:topic_name] }.to_sentence)
+                   .humanize
+               else
+                 # If the list name only has one form, then topic names are not
+                 # appended; just check the name itself isn't too long
+                 presented_data[:details][:subscription_list_title_prefix]
+               end
+
+        expect(name.length).to be <= 1000
       end
     end
   end
