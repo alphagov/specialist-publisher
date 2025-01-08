@@ -8,39 +8,15 @@
   "filter": {
     "format": "product_safety_alert_report_recall"
   },
-  "signup_content_id": "bb6047de-3854-4774-a5d5-fc66fed4f792",
   "organisations": [
     "a0ee18e7-9e1e-4ba1-aed5-f3f287dce752"
   ],
   "topics": [],
-  "email_filter_by": "product_alert_type",
-  "email_filter_facets": [
-    {
-      "facet_id": "product_alert_type",
-      "facet_name": "Alert type",
-      "required": true,
-      "facet_choices": [
-        {
-          "key": "product-safety-alert",
-          "radio_button_name": "Product safety alert",
-          "topic_name": "product safety alert",
-          "prechecked": false
-        },
-        {
-          "key": "product-safety-report",
-          "radio_button_name": "Product safety report",
-          "topic_name": "product safety report",
-          "prechecked": false
-        },
-        {
-          "key": "product-recall",
-          "radio_button_name": "Product recall",
-          "topic_name": "product recall",
-          "prechecked": false
-        }
-      ]
-    }
-  ],
+  "email_filter_options": {
+    "signup_content_id": "bb6047de-3854-4774-a5d5-fc66fed4f792",
+    "email_filter_by": "product_alert_type",
+    "downcase_email_alert_topic_names": true
+  },
   "document_noun": "report",
   "document_title": "Product Safety Alerts, Reports and Recalls",
   "facets": [

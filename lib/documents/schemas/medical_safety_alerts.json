@@ -8,7 +8,6 @@
   "filter": {
     "format": "medical_safety_alert"
   },
-  "signup_content_id": "a796ca43-021b-4960-9c99-f41bb8ef2266",
   "show_summaries": true,
   "organisations": [
     "240f72bd-9a4d-4f39-94d9-77235cadde8e"
@@ -23,40 +22,17 @@
     "medicines-medical-devices-blood/medical-devices-regulation-safety",
     "medicines-medical-devices-blood/vigilance-safety-alerts"
   ],
-  "email_filter_by": "alert_type",
-  "email_filter_facets": [
-    {
-      "facet_id": "alert_type",
-      "facet_name": "Message type",
-      "required": true,
-      "facet_choices": [
-        {
-          "key": "field-safety-notices",
-          "radio_button_name": "Field safety notice",
-          "topic_name": "field safety notice",
-          "prechecked": true
-        },
-        {
-          "key": "national-patient-safety",
-          "radio_button_name": "National patient safety alert",
-          "topic_name": "national patient safety alert",
-          "prechecked": true
-        },
-        {
-          "key": "device-safety-information",
-          "radio_button_name": "Device safety information",
-          "topic_name": "device safety information",
-          "prechecked": true
-        },
-        {
-          "key": "medicines-recall-notification",
-          "radio_button_name": "Medicines recall/notification",
-          "topic_name": "medicines recall/notification",
-          "prechecked": true
-        }
-      ]
-    }
-  ],
+  "email_filter_options": {
+    "signup_content_id": "a796ca43-021b-4960-9c99-f41bb8ef2266",
+    "email_filter_by": "alert_type",
+    "downcase_email_alert_topic_names": true,
+    "pre_checked_email_alert_checkboxes": [
+      "field-safety-notices",
+      "national-patient-safety",
+      "device-safety-information",
+      "medicines-recall-notification"
+    ]
+  },
   "document_noun": "message",
   "document_title": "Medical Safety Alert",
   "facets": [

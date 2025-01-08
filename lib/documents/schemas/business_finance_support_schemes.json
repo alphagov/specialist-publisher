@@ -9,7 +9,10 @@
     "format": "business_finance_support_scheme"
   },
   "show_summaries": true,
-  "signup_content_id": "32e87f32-8e37-4186-bc0c-fbed4c0f0239",
+  "email_filter_options": {
+    "signup_content_id": "32e87f32-8e37-4186-bc0c-fbed4c0f0239",
+    "subscription_list_title_prefix": "Business finance support schemes"
+  },
   "organisations": [
     "aa750cdf-7925-429d-a2b3-0d9fa47d2c48"
   ],
@@ -21,7 +24,6 @@
     "89edffd2-3046-40bd-810c-cc1a13c05b6a"
   ],
   "topics": [],
-  "subscription_list_title_prefix": "Business finance support schemes",
   "document_noun": "scheme",
   "document_title": "Business Finance Support Scheme",
   "default_order": "title",

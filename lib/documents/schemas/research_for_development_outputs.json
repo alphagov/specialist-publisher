@@ -9,14 +9,16 @@
   "filter": {
     "format": "research_for_development_output"
   },
-  "signup_content_id": "fdcbada2-1ad4-4194-98dc-5f04a448316e",
+  "email_filter_options": {
+    "signup_content_id": "fdcbada2-1ad4-4194-98dc-5f04a448316e",
+    "subscription_list_title_prefix": "Research for Development output"
+  },
   "organisations": [
     "f9fcf3fe-2751-4dca-97ca-becaeceb4b26"
   ],
   "taxons": [
     "9fb30a53-70fb-4f1c-878b-0064b202d1ba"
   ],
-  "subscription_list_title_prefix": "Research for Development output",
   "document_noun": "output",
   "document_title": "Research for Development Output",
   "facets": [

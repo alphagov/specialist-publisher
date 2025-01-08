@@ -9,7 +9,9 @@
     "format": "drug_safety_update"
   },
   "show_summaries": true,
-  "signup_link": "https://public.govdelivery.com/accounts/UKMHRA/subscriber/new?topic_id=UKMHRA_0044",
+  "email_filter_options": {
+    "signup_link": "https://public.govdelivery.com/accounts/UKMHRA/subscriber/new?topic_id=UKMHRA_0044"
+  },
   "organisations": [
     "240f72bd-9a4d-4f39-94d9-77235cadde8e"
   ],

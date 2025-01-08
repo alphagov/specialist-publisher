@@ -11,7 +11,6 @@
     "format": "european_structural_investment_fund"
   },
   "default_order": "-closing_date",
-  "signup_content_id": "a4815714-e5d5-4e1b-8543-3ce10139988f",
   "organisations": [
     "2e7868a8-38f5-4ff6-b62f-9a15d1c22d28",
     "b548a09f-8b35-4104-89f4-f1a40bf3136d",
@@ -21,74 +20,15 @@
   "taxons": [
     "2894668d-0c21-491a-9069-a271e67f6025"
   ],
-  "subscription_list_title_prefix": {
-    "singular": "European Structural and Investment Fund with the following location: ",
-    "plural": "European Structural and Investment Funds with the following locations: "
+  "email_filter_options": {
+    "signup_content_id": "a4815714-e5d5-4e1b-8543-3ce10139988f",
+    "subscription_list_title_prefix": {
+      "singular": "European Structural and Investment Fund with the following location: ",
+      "plural": "European Structural and Investment Funds with the following locations: "
+    },
+    "email_filter_by": "location",
+    "downcase_email_alert_topic_names": true
   },
-  "email_filter_by": "location",
-  "email_filter_facets": [
-    {
-      "facet_id": "location",
-      "facet_name": "Locations",
-      "required": true,
-      "facet_choices": [
-        {
-          "key": "north-east",
-          "radio_button_name": "North East",
-          "topic_name": "north east",
-          "prechecked": false
-        },
-        {
-          "key": "north-west",
-          "radio_button_name": "North West",
-          "topic_name": "north west",
-          "prechecked": false
-        },
-        {
-          "key": "yorkshire-and-humber",
-          "radio_button_name": "Yorkshire and Humber",
-          "topic_name": "yorkshire and humber",
-          "prechecked": false
-        },
-        {
-          "key": "east-midlands",
-          "radio_button_name": "East Midlands",
-          "topic_name": "east midlands",
-          "prechecked": false
-        },
-        {
-          "key": "west-midlands",
-          "radio_button_name": "West Midlands",
-          "topic_name": "west midlands",
-          "prechecked": false
-        },
-        {
-          "key": "east-of-england",
-          "radio_button_name": "East of England",
-          "topic_name": "east of england",
-          "prechecked": false
-        },
-        {
-          "key": "south-east",
-          "radio_button_name": "South East",
-          "topic_name": "south east",
-          "prechecked": false
-        },
-        {
-          "key": "south-west",
-          "radio_button_name": "South West",
-          "topic_name": "south west",
-          "prechecked": false
-        },
-        {
-          "key": "london",
-          "radio_button_name": "London",
-          "topic_name": "london",
-          "prechecked": false
-        }
-      ]
-    }
-  ],
   "document_noun": "call",
   "document_title": "ESI Fund",
   "facets": [
