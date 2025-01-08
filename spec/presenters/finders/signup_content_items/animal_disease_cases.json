@@ -1,0 +1,26 @@
+{
+  "base_path": "/animal-disease-cases-england/email-signup",
+  "title": "Notifiable animal disease cases and control zones",
+  "schema_name": "finder_email_signup",
+  "document_type": "finder_email_signup",
+  "public_updated_at": "2025-01-07T16:41:39+00:00",
+  "update_type": "minor",
+  "publishing_app": "specialist-publisher",
+  "rendering_app": "finder-frontend",
+  "routes": [
+    {
+      "path": "/animal-disease-cases-england/email-signup",
+      "type": "exact"
+    }
+  ],
+  "details": {
+    "beta": false,
+    "email_filter_facets": [],
+    "email_filter_by": null,
+    "filter": {
+      "format": "animal_disease_case"
+    },
+    "subscription_list_title_prefix": "Notifiable animal disease cases and control zones"
+  },
+  "locale": "en"
+}

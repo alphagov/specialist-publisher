@@ -1,0 +1,26 @@
+{
+  "base_path": "/business-finance-support/email-signup",
+  "title": "Finance and support for your business",
+  "schema_name": "finder_email_signup",
+  "document_type": "finder_email_signup",
+  "public_updated_at": "2025-01-07T16:41:44+00:00",
+  "update_type": "minor",
+  "publishing_app": "specialist-publisher",
+  "rendering_app": "finder-frontend",
+  "routes": [
+    {
+      "path": "/business-finance-support/email-signup",
+      "type": "exact"
+    }
+  ],
+  "details": {
+    "beta": false,
+    "email_filter_facets": [],
+    "email_filter_by": null,
+    "filter": {
+      "format": "business_finance_support_scheme"
+    },
+    "subscription_list_title_prefix": "Business finance support schemes"
+  },
+  "locale": "en"
+}

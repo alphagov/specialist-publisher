@@ -1,0 +1,109 @@
+{
+  "base_path": "/cma-cases/email-signup",
+  "title": "Competition and Markets Authority cases and projects",
+  "schema_name": "finder_email_signup",
+  "document_type": "finder_email_signup",
+  "public_updated_at": "2025-01-08T13:26:06+00:00",
+  "update_type": "minor",
+  "publishing_app": "specialist-publisher",
+  "rendering_app": "finder-frontend",
+  "routes": [
+    {
+      "path": "/cma-cases/email-signup",
+      "type": "exact"
+    }
+  ],
+  "details": {
+    "beta": false,
+    "email_filter_facets": [
+      {
+        "facet_id": "case_type",
+        "facet_name": "Case type",
+        "required": true,
+        "facet_choices": [
+          {
+            "key": "ca98-and-civil-cartels",
+            "radio_button_name": "CA98 and civil cartels",
+            "topic_name": "CA98 and civil cartels",
+            "prechecked": false
+          },
+          {
+            "key": "competition-disqualification",
+            "radio_button_name": "Competition disqualification",
+            "topic_name": "competition disqualification",
+            "prechecked": false
+          },
+          {
+            "key": "criminal-cartels",
+            "radio_button_name": "Criminal cartels",
+            "topic_name": "criminal cartels",
+            "prechecked": false
+          },
+          {
+            "key": "digital-markets-unit",
+            "radio_button_name": "Digital Markets Unit",
+            "topic_name": "digital markets unit",
+            "prechecked": false
+          },
+          {
+            "key": "information-and-advice-to-government",
+            "radio_button_name": "Information and advice to government",
+            "topic_name": "information and advice to government",
+            "prechecked": false
+          },
+          {
+            "key": "markets",
+            "radio_button_name": "Markets",
+            "topic_name": "markets",
+            "prechecked": false
+          },
+          {
+            "key": "mergers",
+            "radio_button_name": "Mergers",
+            "topic_name": "mergers",
+            "prechecked": false
+          },
+          {
+            "key": "oim-project",
+            "radio_button_name": "OIM Project",
+            "topic_name": "oim project",
+            "prechecked": false
+          },
+          {
+            "key": "consumer-enforcement",
+            "radio_button_name": "Consumer enforcement",
+            "topic_name": "consumer enforcement",
+            "prechecked": false
+          },
+          {
+            "key": "regulatory-references-and-appeals",
+            "radio_button_name": "Regulatory references and appeals",
+            "topic_name": "regulatory references and appeals",
+            "prechecked": false
+          },
+          {
+            "key": "review-of-orders-and-undertakings",
+            "radio_button_name": "Reviews of orders and undertakings",
+            "topic_name": "reviews of orders and undertakings",
+            "prechecked": false
+          },
+          {
+            "key": "sau-referral",
+            "radio_button_name": "SAU referral",
+            "topic_name": "sau referral",
+            "prechecked": false
+          }
+        ]
+      }
+    ],
+    "email_filter_by": "case_type",
+    "filter": {
+      "format": "cma_case"
+    },
+    "subscription_list_title_prefix": {
+      "singular": "CMA cases with the following case type: ",
+      "plural": "CMA cases with the following case types: "
+    }
+  },
+  "locale": "en"
+}

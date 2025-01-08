@@ -1,0 +1,26 @@
+{
+  "base_path": "/protected-food-drink-names/email-signup",
+  "title": "Protected geographical food and drink names",
+  "schema_name": "finder_email_signup",
+  "document_type": "finder_email_signup",
+  "public_updated_at": "2025-01-07T16:41:22+00:00",
+  "update_type": "minor",
+  "publishing_app": "specialist-publisher",
+  "rendering_app": "finder-frontend",
+  "routes": [
+    {
+      "path": "/protected-food-drink-names/email-signup",
+      "type": "exact"
+    }
+  ],
+  "details": {
+    "beta": false,
+    "email_filter_facets": [],
+    "email_filter_by": null,
+    "filter": {
+      "format": "protected_food_drink_name"
+    },
+    "subscription_list_title_prefix": "Protected geographical food and drink names"
+  },
+  "locale": "en"
+}

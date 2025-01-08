@@ -1,0 +1,81 @@
+{
+  "base_path": "/residential-property-tribunal-decisions/email-signup",
+  "title": "Residential property tribunal decisions",
+  "schema_name": "finder_email_signup",
+  "document_type": "finder_email_signup",
+  "public_updated_at": "2025-01-08T13:26:06+00:00",
+  "update_type": "minor",
+  "publishing_app": "specialist-publisher",
+  "rendering_app": "finder-frontend",
+  "routes": [
+    {
+      "path": "/residential-property-tribunal-decisions/email-signup",
+      "type": "exact"
+    }
+  ],
+  "details": {
+    "beta": false,
+    "email_filter_facets": [
+      {
+        "facet_id": "tribunal_decision_category",
+        "facet_name": "tribunal decision categories",
+        "facet_choices": [
+          {
+            "key": "housing-act-2004-and-housing-and-planning-act-2016",
+            "radio_button_name": "Housing Act 2004 and Housing and Planning Act 2016",
+            "topic_name": "Housing Act 2004 and Housing and Planning Act 2016",
+            "prechecked": false
+          },
+          {
+            "key": "leasehold-disputes-management",
+            "radio_button_name": "Leasehold disputes (management)",
+            "topic_name": "Leasehold disputes (management)",
+            "prechecked": false
+          },
+          {
+            "key": "leasehold-enfranchisement-and-extension",
+            "radio_button_name": "Leasehold enfranchisement and extension",
+            "topic_name": "Leasehold enfranchisement and extension",
+            "prechecked": false
+          },
+          {
+            "key": "park-homes",
+            "radio_button_name": "Park homes",
+            "topic_name": "Park homes",
+            "prechecked": false
+          },
+          {
+            "key": "rents",
+            "radio_button_name": "Rents",
+            "topic_name": "Rents",
+            "prechecked": false
+          },
+          {
+            "key": "right-to-buy",
+            "radio_button_name": "Right to Buy",
+            "topic_name": "Right to Buy",
+            "prechecked": false
+          },
+          {
+            "key": "tenant-associations",
+            "radio_button_name": "Tenant associations",
+            "topic_name": "Tenant associations",
+            "prechecked": false
+          },
+          {
+            "key": "tenant-fees-act",
+            "radio_button_name": "Tenant Fees act",
+            "topic_name": "Tenant Fees Act",
+            "prechecked": false
+          }
+        ]
+      }
+    ],
+    "email_filter_by": "all_selected_facets",
+    "filter": {
+      "format": "residential_property_tribunal_decision"
+    },
+    "subscription_list_title_prefix": "Residential property tribunal decisions"
+  },
+  "locale": "en"
+}
