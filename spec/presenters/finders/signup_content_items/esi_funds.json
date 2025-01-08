@@ -1,0 +1,91 @@
+{
+  "base_path": "/european-structural-investment-funds/email-signup",
+  "title": "European Structural and Investment Funds (ESIF)",
+  "schema_name": "finder_email_signup",
+  "document_type": "finder_email_signup",
+  "public_updated_at": "2025-01-08T13:26:06+00:00",
+  "update_type": "minor",
+  "publishing_app": "specialist-publisher",
+  "rendering_app": "finder-frontend",
+  "routes": [
+    {
+      "path": "/european-structural-investment-funds/email-signup",
+      "type": "exact"
+    }
+  ],
+  "details": {
+    "beta": false,
+    "email_filter_facets": [
+      {
+        "facet_id": "location",
+        "facet_name": "Locations",
+        "required": true,
+        "facet_choices": [
+          {
+            "key": "north-east",
+            "radio_button_name": "North East",
+            "topic_name": "north east",
+            "prechecked": false
+          },
+          {
+            "key": "north-west",
+            "radio_button_name": "North West",
+            "topic_name": "north west",
+            "prechecked": false
+          },
+          {
+            "key": "yorkshire-and-humber",
+            "radio_button_name": "Yorkshire and Humber",
+            "topic_name": "yorkshire and humber",
+            "prechecked": false
+          },
+          {
+            "key": "east-midlands",
+            "radio_button_name": "East Midlands",
+            "topic_name": "east midlands",
+            "prechecked": false
+          },
+          {
+            "key": "west-midlands",
+            "radio_button_name": "West Midlands",
+            "topic_name": "west midlands",
+            "prechecked": false
+          },
+          {
+            "key": "east-of-england",
+            "radio_button_name": "East of England",
+            "topic_name": "east of england",
+            "prechecked": false
+          },
+          {
+            "key": "south-east",
+            "radio_button_name": "South East",
+            "topic_name": "south east",
+            "prechecked": false
+          },
+          {
+            "key": "south-west",
+            "radio_button_name": "South West",
+            "topic_name": "south west",
+            "prechecked": false
+          },
+          {
+            "key": "london",
+            "radio_button_name": "London",
+            "topic_name": "london",
+            "prechecked": false
+          }
+        ]
+      }
+    ],
+    "email_filter_by": "location",
+    "filter": {
+      "format": "european_structural_investment_fund"
+    },
+    "subscription_list_title_prefix": {
+      "singular": "European Structural and Investment Fund with the following location: ",
+      "plural": "European Structural and Investment Funds with the following locations: "
+    }
+  },
+  "locale": "en"
+}
