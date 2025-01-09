@@ -6,7 +6,7 @@ RSpec.describe FinderSignupContentItemPresenter do
       it "is valid against the #{file} content schemas" do
         read_file = File.read(file)
         payload = JSON.parse(read_file)
-        if payload.key?("signup_content_id")
+        if payload.key?("email_filter_options")
           finder_signup_content_presenter = FinderSignupContentItemPresenter.new(payload, File.mtime(file))
           presented_data = finder_signup_content_presenter.to_json
 
@@ -14,6 +14,30 @@ RSpec.describe FinderSignupContentItemPresenter do
           expect(presented_data).to be_valid_against_publisher_schema("finder_email_signup")
         end
       end
+    end
+  end
+
+  describe ".content_id" do
+    it "returns the signup_content_id" do
+      schema = { "email_filter_options" => { "signup_content_id" => "abc123" } }
+      expect(FinderSignupContentItemPresenter.new(schema).content_id).to eq("abc123")
+    end
+  end
+
+  describe ".subscription_list_title_prefix" do
+    it "returns an empty hash if not specified" do
+      expect(FinderSignupContentItemPresenter.new({}).subscription_list_title_prefix).to eq({})
+    end
+
+    it "returns a string if specified" do
+      schema = { "email_filter_options" => { "subscription_list_title_prefix" => "foo" } }
+      expect(FinderSignupContentItemPresenter.new(schema).subscription_list_title_prefix).to eq("foo")
+    end
+
+    it "returns a hash if specified" do
+      hash = { "singular" => "foo", "plural" => "bar" }
+      schema = { "email_filter_options" => { "subscription_list_title_prefix" => hash } }
+      expect(FinderSignupContentItemPresenter.new(schema).subscription_list_title_prefix).to eq(hash)
     end
   end
 

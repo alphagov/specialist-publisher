@@ -47,14 +47,14 @@ RSpec.describe PublishingApiFinderPublisher do
     describe "publishing finders" do
       let(:finders) do
         [
-          make_finder("/first-finder", "signup_content_id" => SecureRandom.uuid),
+          make_finder("/first-finder", "email_filter_options" => { "signup_content_id" => SecureRandom.uuid }),
           make_finder("/second-finder"),
         ]
       end
 
       it "uses GdsApi::PublishingApi" do
         stub_publishing_api_publish(finders[0][:file]["content_id"], {})
-        stub_publishing_api_publish(finders[0][:file]["signup_content_id"], {})
+        stub_publishing_api_publish(finders[0][:file]["email_filter_options"], {})
         stub_publishing_api_publish(finders[1][:file]["content_id"], {})
 
         expect(publishing_api).to receive(:put_content)
@@ -66,11 +66,11 @@ RSpec.describe PublishingApiFinderPublisher do
 
         # This should be validated against an email-signup schema if one gets created
         expect(publishing_api).to receive(:put_content)
-          .with(finders[0][:file]["signup_content_id"], anything)
+          .with(finders[0][:file]["email_filter_options"], anything)
         expect(publishing_api).to receive(:patch_links)
-          .with(finders[0][:file]["signup_content_id"], anything)
+          .with(finders[0][:file]["email_filter_options"], anything)
         expect(publishing_api).to receive(:publish)
-          .with(finders[0][:file]["signup_content_id"])
+          .with(finders[0][:file]["email_filter_options"])
 
         expect(publishing_api).to receive(:put_content)
           .with(finders[1][:file]["content_id"], be_valid_against_publisher_schema("finder"))

@@ -1,7 +1,7 @@
 class FinderContentItemPresenter
   attr_reader :file, :timestamp
 
-  def initialize(file, timestamp)
+  def initialize(file, timestamp = Time.zone.now)
     @file = file
     @timestamp = timestamp
   end
@@ -35,6 +35,10 @@ class FinderContentItemPresenter
     end
   end
 
+  def signup_link
+    file.fetch("email_filter_options", {}).fetch("signup_link", nil)
+  end
+
 private
 
   def title
@@ -58,7 +62,7 @@ private
       open_filter_on_load: file.fetch("open_filter_on_load", nil),
       logo_path: file.fetch("logo_path", nil),
       show_summaries: file.fetch("show_summaries", false),
-      signup_link: file.fetch("signup_link", nil),
+      signup_link: signup_link,
       summary: file.fetch("summary", nil),
       label_text: file.fetch("label_text", nil),
       facets: FinderContentItemPresenter.facets_without_specialist_publisher_properties(file.fetch("facets", nil)),

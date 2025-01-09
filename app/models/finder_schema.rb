@@ -28,8 +28,6 @@ class FinderSchema
   attribute :document_noun
   attribute :document_title
   attribute :editing_organisations, default: []
-  attribute :email_filter_by
-  attribute :email_filter_facets, default: []
   attribute :email_filter_options
   attribute :facets, default: []
   attribute :filter
@@ -42,8 +40,6 @@ class FinderSchema
   attribute :phase
   attribute :related
   attribute :show_summaries, :boolean, default: false
-  attribute :signup_content_id
-  attribute :signup_link
   attribute :subscription_list_title_prefix
   attribute :summary, default: ""
   attribute :target_stack

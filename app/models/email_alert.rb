@@ -16,10 +16,10 @@ class EmailAlert
     def from_finder_schema(schema)
       email_alert = new
       email_alert.type = email_alert_type(schema)
-      email_alert.content_id = schema.signup_content_id
+      email_alert.content_id = "TODO" # schema.signup_content_id
       email_alert.list_title_prefix = schema.subscription_list_title_prefix
-      email_alert.filter = schema.email_filter_by
-      email_alert.link = schema.signup_link
+      email_alert.filter = "TODO" # schema.email_filter_by
+      email_alert.link = "TODO" # schema.signup_link
       email_alert
     end
 
@@ -33,9 +33,9 @@ class EmailAlert
   private
 
     def email_alert_type(schema)
-      return :filtered_content if schema.signup_content_id.present? && schema.email_filter_by.present?
-      return :external if schema.signup_link.present?
-      return :all_content if schema.signup_content_id.present?
+      # return :filtered_content if schema.signup_content_id.present? && schema.email_filter_by.present?
+      # return :external if schema.signup_link.present?
+      # return :all_content if schema.signup_content_id.present?
 
       :no
     end

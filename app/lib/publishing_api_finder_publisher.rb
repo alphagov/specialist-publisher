@@ -9,7 +9,7 @@ class PublishingApiFinderPublisher
   def call
     finders.map do |finder|
       export_finder(finder)
-      export_signup(finder) if finder[:file].key?("signup_content_id")
+      export_signup(finder) if finder[:file].key?("email_filter_options")
     end
   end
 

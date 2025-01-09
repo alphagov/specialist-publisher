@@ -55,4 +55,15 @@ RSpec.describe FinderContentItemPresenter do
         .to eq(facets_without_specialist_publisher_properties)
     end
   end
+
+  describe ".signup_link" do
+    it "returns nil if not specified" do
+      expect(FinderContentItemPresenter.new({}).signup_link).to eq(nil)
+    end
+
+    it "returns the link if specified" do
+      schema = { "email_filter_options" => { "signup_link" => "https://foo" } }
+      expect(FinderContentItemPresenter.new(schema).signup_link).to eq("https://foo")
+    end
+  end
 end

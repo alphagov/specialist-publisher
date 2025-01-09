@@ -49,10 +49,10 @@
       key: "The document noun (How the documents on the finder are referred to)",
       value: (schema.document_noun || "").humanize
     } if !(defined? previous_schema) || schema.document_noun != previous_schema.document_noun),
-    ({
-      key: "Would you like to set up email alerts for the finder?",
-      value: schema.signup_content_id.present? ? "Yes" : "No"
-    } if !(defined? previous_schema) || (schema.signup_content_id.present? != previous_schema.signup_content_id.present?))
+    # ({
+    #   key: "Would you like to set up email alerts for the finder?",
+    #   value: schema.signup_content_id.present? ? "Yes" : "No"
+    # } if !(defined? previous_schema) || (schema.signup_content_id.present? != previous_schema.signup_content_id.present?))
   ].compact,
   summary_card_actions:,
   margin_top: 6,

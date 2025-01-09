@@ -28,8 +28,8 @@ RSpec.describe FinderSchema do
   describe "#as_json" do
     it "excludes nil values" do
       schema = FinderSchema.new(mandatory_properties)
-      schema.signup_link = nil
-      expect(schema.as_json.key?(:signup_link)).to be_falsey
+      schema.summary = nil
+      expect(schema.as_json.key?(:summary)).to be_falsey
     end
 
     it "excludes blank values" do
