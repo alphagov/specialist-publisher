@@ -660,7 +660,7 @@ FactoryBot.define do
   end
 
   factory :data_ethics_guidance_document, parent: :document do
-    base_path { "/data-ethics-guidance-hub/example-document" }
+    base_path { "/data-ethics-guidance/example-document" }
     document_type { "data_ethics_guidance_document" }
 
     transient do

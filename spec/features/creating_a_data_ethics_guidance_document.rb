@@ -38,7 +38,7 @@ RSpec.feature "Creating a Data Ethics Guidance", type: :feature do
     click_button "Save as draft"
 
     expected_sent_payload = {
-      "base_path" => "/data-ethics-guidance-hub/example-guidance-document",
+      "base_path" => "/data-ethics-guidance/example-guidance-document",
       "title" => "Example Guidance Document",
       "description" => "This is the summary of an example ethics guidance document",
       "document_type" => "data_ethics_guidance_document",
@@ -66,7 +66,7 @@ RSpec.feature "Creating a Data Ethics Guidance", type: :feature do
       },
       "routes" => [
         {
-          "path" => "/data-ethics-guidance-hub/example-guidance-document",
+          "path" => "/data-ethics-guidance/example-guidance-document",
           "type" => "exact",
         },
       ],
