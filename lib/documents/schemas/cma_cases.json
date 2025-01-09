@@ -13,7 +13,6 @@
     "46708567-70a6-4f20-8257-6c222b3d8cb3"
   ],
   "signup_content_id": "43dd2b13-93ec-4ca6-a7a4-e2eb5f5d485a",
-  "signup_copy": "You'll get an email each time a case is updated or a new case is published.",
   "organisations": [
     "957eb4ec-089b-4f71-ba2a-dc69ac8919ea"
   ],
@@ -29,91 +28,20 @@
   ],
   "subscription_list_title_prefix": {
     "singular": "CMA cases with the following case type: ",
-    "plural": "CMA cases with the following case types: ",
-    "many": "Competition and Markets Authority (CMA) cases: "
+    "plural": "CMA cases with the following case types: "
   },
-  "email_filter_by": "case_type",
-  "email_filter_facets": [
-    {
-      "facet_id": "case_type",
-      "facet_name": "Case type",
-      "required": true,
-      "facet_choices": [
+  "email_filter_options": {
+    "email_filter_by": "case_type",
+    "downcase_email_alert_topic_names": true,
+    "email_alert_topic_name_overrides": {
+      "case_type": [
         {
-          "key": "ca98-and-civil-cartels",
-          "radio_button_name": "CA98 and civil cartels",
-          "topic_name": "CA98 and civil cartels",
-          "prechecked": false
-        },
-        {
-          "key": "competition-disqualification",
-          "radio_button_name": "Competition disqualification",
-          "topic_name": "competition disqualification",
-          "prechecked": false
-        },
-        {
-          "key": "criminal-cartels",
-          "radio_button_name": "Criminal cartels",
-          "topic_name": "criminal cartels",
-          "prechecked": false
-        },
-        {
-          "key": "digital-markets-unit",
-          "radio_button_name": "Digital Markets Unit",
-          "topic_name": "digital markets unit",
-          "prechecked": false
-        },
-        {
-          "key": "information-and-advice-to-government",
-          "radio_button_name": "Information and advice to government",
-          "topic_name": "information and advice to government",
-          "prechecked": false
-        },
-        {
-          "key": "markets",
-          "radio_button_name": "Markets",
-          "topic_name": "markets",
-          "prechecked": false
-        },
-        {
-          "key": "mergers",
-          "radio_button_name": "Mergers",
-          "topic_name": "mergers",
-          "prechecked": false
-        },
-        {
-          "key": "oim-project",
-          "radio_button_name": "OIM Project",
-          "topic_name": "oim project",
-          "prechecked": false
-        },
-        {
-          "key": "consumer-enforcement",
-          "radio_button_name": "Consumer enforcement",
-          "topic_name": "consumer enforcement",
-          "prechecked": false
-        },
-        {
-          "key": "regulatory-references-and-appeals",
-          "radio_button_name": "Regulatory references and appeals",
-          "topic_name": "regulatory references and appeals",
-          "prechecked": false
-        },
-        {
-          "key": "review-of-orders-and-undertakings",
-          "radio_button_name": "Reviews of orders and undertakings",
-          "topic_name": "reviews of orders and undertakings",
-          "prechecked": false
-        },
-        {
-          "key": "sau-referral",
-          "radio_button_name": "SAU referral",
-          "topic_name": "sau referral",
-          "prechecked": false
+          "facet_option_key": "ca98-and-civil-cartels",
+          "topic_name_override": "CA98 and civil cartels"
         }
       ]
     }
-  ],
+  },
   "document_noun": "case",
   "document_title": "CMA Case",
   "facets": [
