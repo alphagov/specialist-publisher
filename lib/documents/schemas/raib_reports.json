@@ -16,10 +16,7 @@
   "taxons": [
     "c6a19bb4-1264-4abe-9f1c-6c30f8dea5f7"
   ],
-  "subscription_list_title_prefix": {
-    "singular": "Rail Accident Investigation Branch (RAIB) reports with the following railway type: ",
-    "plural": "Rail Accident Investigation Branch (RAIB) reports with the following railway types: "
-  },
+  "subscription_list_title_prefix": "Rail Accident Investigation Branch (RAIB) reports with the following railway type(s): ",
   "email_filter_options": {
     "email_filter_by": "railway_type",
     "downcase_email_alert_topic_names": true

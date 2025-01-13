@@ -26,10 +26,7 @@
     "competition/mergers",
     "competition/regulatory-appeals-references"
   ],
-  "subscription_list_title_prefix": {
-    "singular": "CMA cases with the following case type: ",
-    "plural": "CMA cases with the following case types: "
-  },
+  "subscription_list_title_prefix": "CMA cases with the following case type(s): ",
   "email_filter_options": {
     "email_filter_by": "case_type",
     "downcase_email_alert_topic_names": true,
