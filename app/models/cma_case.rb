@@ -6,14 +6,7 @@ class CmaCase < Document
   validates :closed_date, allow_blank: true, date: true
   validates_with OpenBeforeClosedValidator, opened_date: :opened_date, closed_date: :closed_date
 
-  FORMAT_SPECIFIC_FIELDS = %i[
-    opened_date
-    closed_date
-    case_type
-    case_state
-    market_sector
-    outcome_type
-  ].freeze
+  FORMAT_SPECIFIC_FIELDS = finder_schema.facets.map { |facet| facet['key'].to_sym }.freeze
 
   attr_accessor(*FORMAT_SPECIFIC_FIELDS)
 
