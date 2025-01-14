@@ -43,11 +43,6 @@ class EmailAlertFieldsetComponent < ViewComponent::Base
 private
 
   def render_email_topic_list_title_prefix(input_name)
-    # Do not render the title prefix input if the value is a hash because we don't want to override the existing the existing
-    # values in such cases. We are going to revisit this later, but for now we only allow users to override this setting
-    # for finders with a single string value. Trello card for future work: https://trello.com/c/Qe8wOpaw
-    return if @email_alert.list_title_prefix.is_a?(Hash)
-
     render("govuk_publishing_components/components/input", {
       label: {
         text: "Email subscription topic",
