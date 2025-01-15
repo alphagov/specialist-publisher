@@ -11,23 +11,12 @@ class EmailAlertFieldsetComponent < ViewComponent::Base
     ].compact.join.html_safe
   end
 
-  # We are handling changes to email facet filters offline at present.
   def render_filtered_content_condition_inputs
     [
       render_hidden_signup_content_id_input("filtered_content_signup_id"),
       render_email_topic_list_title_prefix("filtered_content_list_title_prefix"),
       render_hidden_email_filter_options("filtered_content_email_filter_options"),
-      render("govuk_publishing_components/components/checkboxes", {
-        name: "email_filter_by",
-        heading: "Selected filter: #{@email_alert.filter&.humanize}",
-        no_hint_text: true,
-        items: [
-          {
-            label: "Make changes to this filter criteria (The development team will reach out to you to discuss the requirements to allow users to sign up by specific filter criteria)",
-            value: "CHANGE_REQUESTED",
-          },
-        ],
-      }),
+      render_email_filter_by_select("email_filter_by"),
     ].compact.join.html_safe
   end
 
@@ -68,6 +57,22 @@ private
       type: "hidden",
       name: input_name,
       value: @email_alert.email_filter_options.to_json,
+    })
+  end
+
+  def render_email_filter_by_select(input_name)
+    render("govuk_publishing_components/components/select", {
+      id: input_name,
+      name: input_name,
+      label: "Email filter",
+      hint: "'all_selected_facets' subscribes users to whatever facets they chose on the search page (there is no option to edit their choices on the email signup page). For any other option, users can edit their choices on the email signup page, and any facets chosen on the search page are prefilled.",
+      options: (@email_alert.email_filter_by_candidates || []).map do |facet|
+        {
+          text: facet,
+          value: facet,
+          selected: @email_alert.filter == facet,
+        }
+      end,
     })
   end
 end

@@ -37,6 +37,20 @@ RSpec.describe "EmailAlert" do
       email_alert = EmailAlert.from_finder_schema(schema)
       expect(email_alert.type).to eq(:no)
     end
+
+    it "builds a list of possible values for email_filter_by" do
+      schema = FinderSchema.new
+      schema.facets = [
+        { "key" => "foo" },
+        { "key" => "bar" },
+      ]
+      email_alert = EmailAlert.from_finder_schema(schema)
+      expect(email_alert.email_filter_by_candidates).to eq(%w[
+        all_selected_facets
+        foo
+        bar
+      ])
+    end
   end
 
   describe "#from_finder_admin_form_params" do

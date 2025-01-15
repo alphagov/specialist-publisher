@@ -1,7 +1,7 @@
 class EmailAlert
   include ActiveModel::Model
 
-  attr_accessor :type, :list_title_prefix, :link, :content_id, :email_filter_options
+  attr_accessor :type, :list_title_prefix, :link, :content_id, :email_filter_options, :email_filter_by_candidates
 
   def to_finder_schema_attributes
     {
@@ -24,6 +24,7 @@ class EmailAlert
       email_alert.list_title_prefix = schema.subscription_list_title_prefix
       email_alert.email_filter_options = schema.email_filter_options
       email_alert.link = schema.signup_link
+      email_alert.email_filter_by_candidates = %w[all_selected_facets] + schema.facets.map { |facet| facet["key"] }
       email_alert
     end
 
