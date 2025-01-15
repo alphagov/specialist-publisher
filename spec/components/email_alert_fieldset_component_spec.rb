@@ -60,7 +60,7 @@ RSpec.describe EmailAlertFieldsetComponent, type: :component do
     email_alert = EmailAlert.new
     email_alert.type = :filtered_content
     email_alert.content_id = "123"
-    email_alert.filter = "some_facet"
+    email_alert.email_filter_options = { "email_filter_by" => "some_facet" }
     render_inline(described_class.new(email_alert:))
 
     expect(page).to have_checked_field("email_alert_type", with: "filtered_content")
@@ -72,7 +72,7 @@ RSpec.describe EmailAlertFieldsetComponent, type: :component do
   it "sets the value of the radio button to 'filtered_content' and renders a hidden input with a generated content id if the alert is missing a signup content id" do
     email_alert = EmailAlert.new
     email_alert.type = :filtered_content
-    email_alert.filter = "some_facet"
+    email_alert.email_filter_options = { "email_filter_by" => "some_facet" }
     allow(SecureRandom).to receive(:uuid).and_return("new-id")
     render_inline(described_class.new(email_alert:))
 

@@ -90,13 +90,13 @@ RSpec.describe "EmailAlert" do
       email_alert = EmailAlert.new
       email_alert.content_id = "123"
       email_alert.list_title_prefix = "Finder email subscription"
-      email_alert.filter = "some_facet"
+      email_alert.email_filter_options = { "email_filter_by" => "some_facet" }
       email_alert.link = "https://example.com"
       expect(email_alert.to_finder_schema_attributes).to eq({
         signup_content_id: "123",
         subscription_list_title_prefix: "Finder email subscription",
         email_filter_options: {
-          email_filter_by: "some_facet",
+          "email_filter_by" => "some_facet",
         },
         signup_link: "https://example.com",
       })
