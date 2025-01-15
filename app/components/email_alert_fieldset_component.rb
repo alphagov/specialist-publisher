@@ -7,6 +7,7 @@ class EmailAlertFieldsetComponent < ViewComponent::Base
     [
       render_hidden_signup_content_id_input("all_content_signup_id"),
       render_email_topic_list_title_prefix("all_content_list_title_prefix"),
+      render_hidden_email_filter_options("all_content_email_filter_options"),
     ].compact.join.html_safe
   end
 
@@ -15,6 +16,7 @@ class EmailAlertFieldsetComponent < ViewComponent::Base
     [
       render_hidden_signup_content_id_input("filtered_content_signup_id"),
       render_email_topic_list_title_prefix("filtered_content_list_title_prefix"),
+      render_hidden_email_filter_options("filtered_content_email_filter_options"),
       render("govuk_publishing_components/components/checkboxes", {
         name: "email_filter_by",
         heading: "Selected filter: #{@email_alert.filter&.humanize}",
@@ -58,6 +60,14 @@ private
       type: "hidden",
       name: input_name,
       value: @email_alert.content_id || SecureRandom.uuid,
+    })
+  end
+
+  def render_hidden_email_filter_options(input_name)
+    render("govuk_publishing_components/components/input", {
+      type: "hidden",
+      name: input_name,
+      value: @email_alert.email_filter_options.to_json,
     })
   end
 end

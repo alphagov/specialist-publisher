@@ -86,8 +86,10 @@ private
       :email_alert_type,
       :all_content_signup_id,
       :all_content_list_title_prefix,
+      :all_content_email_filter_options,
       :filtered_content_signup_id,
       :filtered_content_list_title_prefix,
+      :filtered_content_email_filter_options,
       :email_filter_by,
       :signup_link,
     )

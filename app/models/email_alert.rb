@@ -53,17 +53,33 @@ class EmailAlert
     end
 
     def all_content_params(params)
-      { content_id: params["all_content_signup_id"], list_title_prefix: params["all_content_list_title_prefix"] }
+      {
+        content_id: params["all_content_signup_id"],
+        list_title_prefix: params["all_content_list_title_prefix"],
+        email_filter_options: email_filter_options_for_all_content(params),
+      }
     end
 
     def filtered_content_params(params)
       {
         content_id: params["filtered_content_signup_id"],
         list_title_prefix: params["filtered_content_list_title_prefix"],
-        email_filter_options: {
-          "email_filter_by" => params["email_filter_by"],
-        },
+        email_filter_options: email_filter_options_for_filtered_content(params),
       }
+    end
+
+    def email_filter_options_for_all_content(params)
+      return if params["all_content_email_filter_options"].nil?
+
+      email_filter_options = JSON.parse(params["all_content_email_filter_options"])
+      email_filter_options.delete("email_filter_by")
+      email_filter_options.delete("pre_checked_email_alert_checkboxes")
+      email_filter_options
+    end
+
+    def email_filter_options_for_filtered_content(params)
+      email_filter_options = JSON.parse(params["filtered_content_email_filter_options"] || "{}")
+      email_filter_options.merge("email_filter_by" => params["email_filter_by"])
     end
 
     def external_params(params)
