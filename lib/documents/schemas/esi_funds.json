@@ -21,10 +21,7 @@
   "taxons": [
     "2894668d-0c21-491a-9069-a271e67f6025"
   ],
-  "subscription_list_title_prefix": {
-    "singular": "European Structural and Investment Fund with the following location: ",
-    "plural": "European Structural and Investment Funds with the following locations: "
-  },
+  "subscription_list_title_prefix": "European Structural and Investment Fund",
   "email_filter_options": {
     "email_filter_by": "location",
     "downcase_email_alert_topic_names": true

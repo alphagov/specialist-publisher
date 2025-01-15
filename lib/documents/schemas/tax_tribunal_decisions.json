@@ -22,10 +22,7 @@
     "357110bb-cbc5-4708-9711-1b26e6c63e86"
   ],
   "signup_content_id": "ae5afec1-30d6-4997-bdf8-7de94d2dd910",
-  "subscription_list_title_prefix": {
-    "singular": "Upper Tribunal (Tax and Chancery Chamber) decisions with the following category: ",
-    "plural": "Upper Tribunal (Tax and Chancery Chamber) decisions with the following categories: "
-  },
+  "subscription_list_title_prefix": "Upper Tribunal (Tax and Chancery Chamber) decisions",
   "email_filter_options": {
     "email_filter_by": "tribunal_decision_category",
     "downcase_email_alert_topic_names": true

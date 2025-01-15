@@ -23,18 +23,7 @@ RSpec.describe FinderSignupContentItemPresenter do
         presented_data = finder_signup_content_presenter.to_json
         next unless presented_data[:details][:subscription_list_title_prefix]
 
-        name = if presented_data[:details][:subscription_list_title_prefix][:plural]
-                 # If the list name has singular and plural forms, test the plural
-                 # form with every possible topic name appended to make the longest
-                 # possible name
-                 (presented_data[:details][:subscription_list_title_prefix][:plural] +
-                   presented_data[:details][:email_filter_facets][0][:facet_choices].collect { |topic| topic[:topic_name] }.to_sentence)
-                   .humanize
-               else
-                 # If the list name only has one form, then topic names are not
-                 # appended; just check the name itself isn't too long
-                 presented_data[:details][:subscription_list_title_prefix]
-               end
+        name = presented_data[:details][:subscription_list_title_prefix]
 
         expect(name.length).to be <= 1000
       end

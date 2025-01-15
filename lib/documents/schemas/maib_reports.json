@@ -16,10 +16,7 @@
   "taxons": [
     "7a5e878e-2b0f-4c3f-9079-586590a1a194"
   ],
-  "subscription_list_title_prefix": {
-    "singular": "Marine Accident Investigation Branch (MAIB) reports with the following vessel type: ",
-    "plural": "Marine Accident Investigation Branch (MAIB) reports with the following vessel types: "
-  },
+  "subscription_list_title_prefix": "Marine Accident Investigation Branch (MAIB) reports",
   "email_filter_options": {
     "email_filter_by": "vessel_type",
     "downcase_email_alert_topic_names": true
