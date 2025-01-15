@@ -99,5 +99,13 @@ RSpec.describe "EmailAlert" do
         signup_link: "https://example.com",
       })
     end
+
+    it "converts falsey values to nil" do
+      email_alert = EmailAlert.new
+      email_alert.content_id = ""
+      email_alert.link = ""
+      expect(email_alert.to_finder_schema_attributes[:signup_content_id]).to eq(nil)
+      expect(email_alert.to_finder_schema_attributes[:signup_link]).to eq(nil)
+    end
   end
 end

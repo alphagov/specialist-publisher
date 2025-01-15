@@ -5,10 +5,10 @@ class EmailAlert
 
   def to_finder_schema_attributes
     {
-      signup_content_id: content_id,
+      signup_content_id: content_id.presence,
       subscription_list_title_prefix: list_title_prefix,
       email_filter_by: filter,
-      signup_link: link,
+      signup_link: link.presence,
     }
   end
 

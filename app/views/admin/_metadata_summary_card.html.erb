@@ -12,6 +12,21 @@
     No
   <% end %>
 <% end %>
+<%
+  email_alerts_value = capture do
+    email_alerts_are_configured = schema.signup_content_id || schema.signup_link
+    email_alerts_were_configured = defined?(previous_schema) && (previous_schema.signup_content_id || previous_schema.signup_link)
+%>
+  <% if email_alerts_are_configured && !email_alerts_were_configured %>
+    Yes
+  <% elsif !email_alerts_are_configured && email_alerts_were_configured %>
+    No
+  <% elsif email_alerts_are_configured %>
+    <% if (schema.signup_link != previous_schema.signup_link) || (schema.email_filter_options != previous_schema.email_filter_options) %>
+      Updated configuration
+    <% end %>
+  <% end %>
+<% end %>
 
 <%= render "govuk_publishing_components/components/summary_card", {
   id: "metadata_summary_card",
@@ -51,8 +66,8 @@
     } if !(defined? previous_schema) || schema.document_noun != previous_schema.document_noun),
     ({
       key: "Would you like to set up email alerts for the finder?",
-      value: schema.signup_content_id.present? ? "Yes" : "No"
-    } if !(defined? previous_schema) || (schema.signup_content_id.present? != previous_schema.signup_content_id.present?))
+      value: email_alerts_value,
+    } if email_alerts_value.present?)
   ].compact,
   summary_card_actions:,
   margin_top: 6,
