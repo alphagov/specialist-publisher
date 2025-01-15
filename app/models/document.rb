@@ -370,6 +370,10 @@ class Document
     []
   end
 
+  def self.format_specific_fields
+    finder_schema.facets.map { |facet| facet['key'].to_sym }.freeze
+  end
+
 private
 
   def param_value(params, key)

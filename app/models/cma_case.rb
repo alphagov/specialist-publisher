@@ -6,7 +6,7 @@ class CmaCase < Document
   validates :closed_date, allow_blank: true, date: true
   validates_with OpenBeforeClosedValidator, opened_date: :opened_date, closed_date: :closed_date
 
-  FORMAT_SPECIFIC_FIELDS = finder_schema.facets.map { |facet| facet['key'].to_sym }.freeze
+  FORMAT_SPECIFIC_FIELDS = format_specific_fields
 
   attr_accessor(*FORMAT_SPECIFIC_FIELDS)
 
