@@ -56,7 +56,7 @@ private
     render("govuk_publishing_components/components/input", {
       type: "hidden",
       name: input_name,
-      value: @email_alert.email_filter_options.to_json,
+      value: (@email_alert.email_filter_options.nil? ? "" : @email_alert.email_filter_options.to_json),
     })
   end
 
