@@ -21,6 +21,9 @@
 <div class="row">
   <div class="sidebar col-md-3">
     <%= link_to "Add another #{current_format.title}", new_document_path(current_format.admin_slug), class: 'action-link' %>
+    <hr>
+    <%= link_to "Finder setup", new_document_path(current_format.admin_slug), class: 'action-link' %>
+
     <%= form_tag(documents_path(current_format.admin_slug), method: :get, class: "add-vertical-margins well") do %>
       <% if current_format.has_organisations? %>
         <%= label_tag "organisation", "Organisation" %>
