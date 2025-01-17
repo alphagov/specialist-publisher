@@ -103,7 +103,10 @@
         }
       ],
       "specialist_publisher_properties": {
-        "select": "one"
+        "select": "one",
+        "validations": {
+          "presence": true
+        }
       }
     },
     {
@@ -124,7 +127,10 @@
         }
       ],
       "specialist_publisher_properties": {
-        "select": "one"
+        "select": "one",
+        "validations": {
+          "presence": true
+        }
       }
     },
     {
@@ -257,7 +263,10 @@
         }
       ],
       "specialist_publisher_properties": {
-        "select": "multiple"
+        "select": "multiple",
+        "validations": {
+          "presence": true
+        }
       }
     },
     {

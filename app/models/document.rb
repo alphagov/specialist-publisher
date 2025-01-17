@@ -371,7 +371,25 @@ class Document
   end
 
   def self.format_specific_fields
-    finder_schema.facets.map { |facet| facet['key'].to_sym }.freeze
+    finder_schema.facets.map { |facet| facet["key"].to_sym }.freeze
+  end
+
+  def self.facet_validations
+    finder_schema.facets.each_with_object({}) { |facet, validations|
+      key = facet["key"].to_sym
+      validations[key] = facet.dig("specialist_publisher_properties", "validations") || {}
+    }.freeze
+  end
+
+  def self.apply_validations
+    facet_validations.each do |key, validation_rules|
+      validation_rules.each do |validation, options|
+        validates key, validation => options
+      end
+    end
+    if facet_validations.key?("opened_date") && facet_validations.key?("closed_date")
+      validates_with OpenBeforeClosedValidator, opened_date: :opened_date, closed_date: :closed_date
+    end
   end
 
 private
