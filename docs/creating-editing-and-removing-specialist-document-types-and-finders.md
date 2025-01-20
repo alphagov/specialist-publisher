@@ -4,8 +4,13 @@ To create or edit a new specialist document you will have to make changes to thi
 application, [publishing-api][publishing-api] and [search-api][search-api]. You will not have to make any changes to frontend
 applications.
 
+**IMPORTANT**
+
+Recent changes to Specialist Publisher now allow users to self-serve. These requests will be coming through Zendesk, as a code diff for the [specialist-publisher][specialist-publisher] repo. Follow the steps below to validate the thoroughness of the changes and open the remaining PRs against [publishing-api][publishing-api] and [search-api][search-api], if needed.
+
 [publishing-api]: https://github.com/alphagov/publishing-api
 [search-api]: https://github.com/alphagov/search-api
+[specialist-publisher]: https://github.com/alphagov/specialist-publisher
 
 # __Creating__ a specialist document type
 
