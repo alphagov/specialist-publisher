@@ -1,39 +1,14 @@
 {
-  "target_stack": "live",
-  "content_id": "48ef3920-b877-47af-8356-44f345c22a47",
   "base_path": "/animal-disease-cases-england",
-  "format_name": "Notifiable animal disease cases and control zone",
-  "name": "Notifiable animal disease cases and control zones",
+  "content_id": "48ef3920-b877-47af-8356-44f345c22a47",
   "description": "Find notifiable exotic animal disease cases and control zone declarations for England.",
-  "filter": {
-    "format": "animal_disease_case"
-  },
+  "document_noun": "case",
+  "document_title": "Animal disease case",
   "editing_organisations": [
     "d3ce4ba7-bc75-46b4-89d9-38cb3240376d"
   ],
-  "organisations": [
-    "de4e9dc6-cca4-43af-a594-682023b84d6c",
-    "4ad67f14-6f9c-4fa4-80ab-687b6d81ea6f"
-  ],
-  "related": [
-    "5f664bc2-7631-11e4-a3cb-005056011aef",
-    "af8eee5a-632a-4b8e-bb59-8fc5204892bc",
-    "5fa8f693-7631-11e4-a3cb-005056011aef"
-  ],
-  "signup_content_id": "e39c8c6e-b4c2-4dec-84fd-7f3d77f96a7d",
-  "subscription_list_title_prefix": "Notifiable animal disease cases and control zones",
-  "summary": "<p>Find notifiable exotic animal disease cases and control zone declarations for England.</p><p>Read our <a href=\"https://www.gov.uk/government/collections/notifiable-diseases-in-animals\">guidance on notifiable diseases in animals</a>.</p>",
-  "document_noun": "case",
-  "document_title": "Animal disease case",
   "facets": [
     {
-      "key": "disease_type",
-      "name": "Disease Type",
-      "short_name": "type",
-      "type": "text",
-      "preposition": "of disease type",
-      "display_as_result_metadata": true,
-      "filterable": true,
       "allowed_values": [
         {
           "label": "African horse sickness",
@@ -72,18 +47,18 @@
           "value": "swine-vesicular-disease"
         }
       ],
-      "specialist_publisher_properties": {
-        "select": "multiple"
-      }
-    },
-    {
-      "key": "zone_restriction",
-      "name": "Disease control zone restrictions",
-      "short_name": "Control zone restriction",
-      "type": "text",
-      "preposition": "with control zone restriction",
       "display_as_result_metadata": true,
       "filterable": true,
+      "key": "disease_type",
+      "name": "Disease Type",
+      "preposition": "of disease type",
+      "short_name": "type",
+      "specialist_publisher_properties": {
+        "select": "multiple"
+      },
+      "type": "text"
+    },
+    {
       "allowed_values": [
         {
           "label": "In force",
@@ -94,18 +69,18 @@
           "value": "no-longer-in-force"
         }
       ],
-      "specialist_publisher_properties": {
-        "select": "one"
-      }
-    },
-    {
-      "key": "zone_type",
-      "name": "Disease control zone type",
-      "short_name": "Control zone type",
-      "type": "text",
-      "preposition": "with control zone type",
       "display_as_result_metadata": true,
       "filterable": true,
+      "key": "zone_restriction",
+      "name": "Disease control zone restrictions",
+      "preposition": "with control zone restriction",
+      "short_name": "Control zone restriction",
+      "specialist_publisher_properties": {
+        "select": "one"
+      },
+      "type": "text"
+    },
+    {
       "allowed_values": [
         {
           "label": "Protection zone",
@@ -164,36 +139,61 @@
           "value": "none"
         }
       ],
+      "display_as_result_metadata": true,
+      "filterable": true,
+      "key": "zone_type",
+      "name": "Disease control zone type",
+      "preposition": "with control zone type",
+      "short_name": "Control zone type",
       "specialist_publisher_properties": {
         "select": "multiple"
-      }
+      },
+      "type": "text"
     },
     {
+      "display_as_result_metadata": true,
+      "filterable": false,
       "key": "virus_strain",
       "name": "Virus strain",
-      "short_name": "Virus strain",
-      "type": "text",
       "preposition": "of strain type",
-      "display_as_result_metadata": true,
-      "filterable": false
+      "short_name": "Virus strain",
+      "type": "text"
     },
     {
+      "display_as_result_metadata": true,
+      "filterable": true,
       "key": "disease_case_opened_date",
       "name": "Case opened date",
-      "short_name": "Opened",
-      "type": "date",
       "preposition": "opened",
-      "display_as_result_metadata": true,
-      "filterable": true
+      "short_name": "Opened",
+      "type": "date"
     },
     {
+      "display_as_result_metadata": true,
+      "filterable": true,
       "key": "disease_case_closed_date",
       "name": "Case closed date",
-      "short_name": "Closed",
-      "type": "date",
       "preposition": "closed",
-      "display_as_result_metadata": true,
-      "filterable": true
+      "short_name": "Closed",
+      "type": "date"
     }
-  ]
+  ],
+  "filter": {
+    "format": "animal_disease_case"
+  },
+  "format_name": "Notifiable animal disease cases and control zone",
+  "name": "Notifiable animal disease cases and control zones",
+  "organisations": [
+    "de4e9dc6-cca4-43af-a594-682023b84d6c",
+    "4ad67f14-6f9c-4fa4-80ab-687b6d81ea6f"
+  ],
+  "related": [
+    "5f664bc2-7631-11e4-a3cb-005056011aef",
+    "af8eee5a-632a-4b8e-bb59-8fc5204892bc",
+    "5fa8f693-7631-11e4-a3cb-005056011aef"
+  ],
+  "signup_content_id": "e39c8c6e-b4c2-4dec-84fd-7f3d77f96a7d",
+  "subscription_list_title_prefix": "Notifiable animal disease cases and control zones",
+  "summary": "<p>Find notifiable exotic animal disease cases and control zone declarations for England.</p><p>Read our <a href=\"https://www.gov.uk/government/collections/notifiable-diseases-in-animals\">guidance on notifiable diseases in animals</a>.</p>",
+  "target_stack": "live"
 }

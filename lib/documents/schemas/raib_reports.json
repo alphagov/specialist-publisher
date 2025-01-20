@@ -1,36 +1,15 @@
 {
-  "target_stack": "live",
-  "content_id": "e3ff7fc5-6788-45de-83f0-cbf34e9fe8bd",
   "base_path": "/raib-reports",
-  "format_name": "Rail Accident Investigation Branch report",
-  "name": "Rail Accident Investigation Branch reports",
+  "content_id": "e3ff7fc5-6788-45de-83f0-cbf34e9fe8bd",
   "description": "Find reports of RAIB investigations into rail accidents and incidents",
-  "filter": {
-    "format": "raib_report"
-  },
-  "signup_content_id": "db81c7e8-b1b6-4c29-992a-1289f1b63073",
-  "show_summaries": true,
-  "organisations": [
-    "013872d8-8bbb-4e80-9b79-45c7c5cf9177"
-  ],
-  "taxons": [
-    "c6a19bb4-1264-4abe-9f1c-6c30f8dea5f7"
-  ],
-  "subscription_list_title_prefix": "Rail Accident Investigation Branch (RAIB) reports",
-  "email_filter_options": {
-    "email_filter_by": "railway_type",
-    "downcase_email_alert_topic_names": true
-  },
   "document_noun": "report",
   "document_title": "RAIB Report",
+  "email_filter_options": {
+    "downcase_email_alert_topic_names": true,
+    "email_filter_by": "railway_type"
+  },
   "facets": [
     {
-      "key": "railway_type",
-      "name": "Railway type",
-      "type": "text",
-      "preposition": "of type",
-      "display_as_result_metadata": true,
-      "filterable": true,
       "allowed_values": [
         {
           "label": "Heavy rail",
@@ -49,17 +28,17 @@
           "value": "heritage-railways"
         }
       ],
-      "specialist_publisher_properties": {
-        "select": "multiple"
-      }
-    },
-    {
-      "key": "report_type",
-      "name": "Report type",
-      "type": "text",
-      "preposition": "of type",
       "display_as_result_metadata": true,
       "filterable": true,
+      "key": "railway_type",
+      "name": "Railway type",
+      "preposition": "of type",
+      "specialist_publisher_properties": {
+        "select": "multiple"
+      },
+      "type": "text"
+    },
+    {
       "allowed_values": [
         {
           "label": "Investigation report",
@@ -82,18 +61,39 @@
           "value": "safety-digest"
         }
       ],
+      "display_as_result_metadata": true,
+      "filterable": true,
+      "key": "report_type",
+      "name": "Report type",
+      "preposition": "of type",
       "specialist_publisher_properties": {
         "select": "one"
-      }
+      },
+      "type": "text"
     },
     {
+      "display_as_result_metadata": true,
+      "filterable": true,
       "key": "date_of_occurrence",
       "name": "Date of occurrence",
-      "short_name": "Occurred",
-      "type": "date",
       "preposition": "occurred",
-      "display_as_result_metadata": true,
-      "filterable": true
+      "short_name": "Occurred",
+      "type": "date"
     }
+  ],
+  "filter": {
+    "format": "raib_report"
+  },
+  "format_name": "Rail Accident Investigation Branch report",
+  "name": "Rail Accident Investigation Branch reports",
+  "organisations": [
+    "013872d8-8bbb-4e80-9b79-45c7c5cf9177"
+  ],
+  "show_summaries": true,
+  "signup_content_id": "db81c7e8-b1b6-4c29-992a-1289f1b63073",
+  "subscription_list_title_prefix": "Rail Accident Investigation Branch (RAIB) reports",
+  "target_stack": "live",
+  "taxons": [
+    "c6a19bb4-1264-4abe-9f1c-6c30f8dea5f7"
   ]
 }

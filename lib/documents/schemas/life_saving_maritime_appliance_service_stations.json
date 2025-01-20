@@ -1,29 +1,11 @@
 {
-  "target_stack": "live",
-  "content_id": "cfc808eb-1c34-49d1-bfbd-e14dcb2c6bbe",
   "base_path": "/service-life-saving-maritime-appliances",
-  "format_name": "Find a service station for your inflatable life-saving appliances (format)",
-  "name": "Find a service station for your inflatable life-saving appliances",
+  "content_id": "cfc808eb-1c34-49d1-bfbd-e14dcb2c6bbe",
   "description": "Find Maritime and Coastguard Agency-approved service stations for your inflatable life-saving equipment.",
-  "summary": "<p>UK approved service stations for International Convention for the Safety of Life at Sea (SOLAS)-standard inflatable life-saving appliances (LSAs).</p><p>Vessel owners need to ensure that their LSA is serviced at an approved service station that:</p><ul><li>is authorised to service the particular product make or type</li><li>is accepted by the Maritime and Coastguard Agency (MCA) and complies with International Maritime Organization (IMO) Resolution A.761(18) to maintain proper servicing facilities</li><li>uses only properly trained personnel and has evidence of personnel authorisation certification</li></ul><p>See <a href=\"https://www.gov.uk/government/publications/mgn-548-mf-inflatable-solas-certificated-liferafts-lifejackets-marine-evacuation-systems-and-repair-of-inflated-rescue-boats\">MGN 548 (M+F) Inflatable SOLAS certificated liferafts, lifejackets, marine evacuation systems and repair of inflated rescue boats</a> for more information.</p>",
-  "filter": {
-    "format": "life_saving_maritime_appliance_service_station"
-  },
-  "show_summaries": false,
-  "organisations": [
-    "23a24aa8-1711-42b6-bf6b-47af0f230295"
-  ],
   "document_noun": "station",
   "document_title": "Life Saving Maritime Appliance Service Station",
   "facets": [
     {
-      "key": "life_saving_maritime_appliance_service_station_regions",
-      "name": "Regions in the UK",
-      "short_name": "region",
-      "type": "text",
-      "preposition": "in region",
-      "display_as_result_metadata": true,
-      "filterable": true,
       "allowed_values": [
         {
           "label": "East Anglia",
@@ -70,17 +52,18 @@
           "value": "northern-ireland"
         }
       ],
-      "specialist_publisher_properties": {
-        "select": "multiple"
-      }
-    },
-    {
-      "key": "life_saving_maritime_appliance_type",
-      "name": "Appliance type",
-      "type": "text",
-      "preposition": "appliance",
       "display_as_result_metadata": true,
       "filterable": true,
+      "key": "life_saving_maritime_appliance_service_station_regions",
+      "name": "Regions in the UK",
+      "preposition": "in region",
+      "short_name": "region",
+      "specialist_publisher_properties": {
+        "select": "multiple"
+      },
+      "type": "text"
+    },
+    {
       "allowed_values": [
         {
           "label": "Lifejackets",
@@ -99,17 +82,17 @@
           "value": "inflated-rescue-boats"
         }
       ],
-      "specialist_publisher_properties": {
-        "select": "multiple"
-      }
-    },
-    {
-      "key": "life_saving_maritime_appliance_manufacturer",
-      "name": "Appliance manufacturer",
-      "type": "text",
-      "preposition": "manufactured by",
       "display_as_result_metadata": true,
       "filterable": true,
+      "key": "life_saving_maritime_appliance_type",
+      "name": "Appliance type",
+      "preposition": "appliance",
+      "specialist_publisher_properties": {
+        "select": "multiple"
+      },
+      "type": "text"
+    },
+    {
       "allowed_values": [
         {
           "label": "Autoflug",
@@ -384,9 +367,26 @@
           "value": "zodiac"
         }
       ],
+      "display_as_result_metadata": true,
+      "filterable": true,
+      "key": "life_saving_maritime_appliance_manufacturer",
+      "name": "Appliance manufacturer",
+      "preposition": "manufactured by",
       "specialist_publisher_properties": {
         "select": "multiple"
-      }
+      },
+      "type": "text"
     }
-  ]
+  ],
+  "filter": {
+    "format": "life_saving_maritime_appliance_service_station"
+  },
+  "format_name": "Find a service station for your inflatable life-saving appliances (format)",
+  "name": "Find a service station for your inflatable life-saving appliances",
+  "organisations": [
+    "23a24aa8-1711-42b6-bf6b-47af0f230295"
+  ],
+  "show_summaries": false,
+  "summary": "<p>UK approved service stations for International Convention for the Safety of Life at Sea (SOLAS)-standard inflatable life-saving appliances (LSAs).</p><p>Vessel owners need to ensure that their LSA is serviced at an approved service station that:</p><ul><li>is authorised to service the particular product make or type</li><li>is accepted by the Maritime and Coastguard Agency (MCA) and complies with International Maritime Organization (IMO) Resolution A.761(18) to maintain proper servicing facilities</li><li>uses only properly trained personnel and has evidence of personnel authorisation certification</li></ul><p>See <a href=\"https://www.gov.uk/government/publications/mgn-548-mf-inflatable-solas-certificated-liferafts-lifejackets-marine-evacuation-systems-and-repair-of-inflated-rescue-boats\">MGN 548 (M+F) Inflatable SOLAS certificated liferafts, lifejackets, marine evacuation systems and repair of inflated rescue boats</a> for more information.</p>",
+  "target_stack": "live"
 }

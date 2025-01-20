@@ -1,41 +1,18 @@
 {
-  "target_stack": "live",
-  "content_id": "49f47764-2b1b-4b0d-9164-4aa6b42a8b63",
   "base_path": "/marine-equipment-approved-recommendations",
-  "format_name": "UK Approved Recommendations – Marine Equipment",
-  "name": "UK Approved Recommendations – Marine Equipment",
+  "content_id": "49f47764-2b1b-4b0d-9164-4aa6b42a8b63",
   "description": "Find recommendations on how to interpret and apply the Merchant Shipping (Marine Equipment) Regulations 2016 as amended.",
-  "filter": {
-    "format": "marine_equipment_approved_recommendation"
-  },
-  "show_summaries": true,
+  "document_noun": "recommendation",
+  "document_title": "Marine Equipment Approved Recommendation",
   "editing_organisations": [
     "23a24aa8-1711-42b6-bf6b-47af0f230295"
   ],
-  "organisations": [
-    "23a24aa8-1711-42b6-bf6b-47af0f230295"
-  ],
-  "related": [
-    "9ac82e6a-0fb6-431f-85d8-560361e21d0b"
-  ],
-  "signup_content_id": "512a14c1-260a-4c4e-8de8-643eadf7905c",
   "email_filter_options": {
-    "email_filter_by": "all_selected_facets",
-    "downcase_email_alert_topic_names": true
+    "downcase_email_alert_topic_names": true,
+    "email_filter_by": "all_selected_facets"
   },
-  "subscription_list_title_prefix": "UK Approved Recommendations for marine equipment",
-  "summary": "<p>Find recommendations on how to interpret and apply the Merchant Shipping (Marine Equipment) Regulations 2016 as amended.</p>",
-  "document_noun": "recommendation",
-  "document_title": "Marine Equipment Approved Recommendation",
   "facets": [
     {
-      "key": "category",
-      "name": "Category",
-      "short_name": "Recommendation type",
-      "type": "text",
-      "preposition": "With recommendation type",
-      "display_as_result_metadata": true,
-      "filterable": true,
       "allowed_values": [
         {
           "label": "Life-saving appliances",
@@ -74,36 +51,59 @@
           "value": "general"
         }
       ],
+      "display_as_result_metadata": true,
+      "filterable": true,
+      "key": "category",
+      "name": "Category",
+      "preposition": "With recommendation type",
+      "short_name": "Recommendation type",
       "specialist_publisher_properties": {
         "select": "multiple"
-      }
+      },
+      "type": "text"
     },
     {
+      "display_as_result_metadata": true,
+      "filterable": false,
       "key": "year_adopted",
       "name": "Year adopted",
-      "short_name": "Year",
-      "type": "text",
       "preposition": "With year",
-      "display_as_result_metadata": true,
-      "filterable": false
+      "short_name": "Year",
+      "type": "text"
     },
     {
+      "display_as_result_metadata": true,
+      "filterable": false,
       "key": "reference_number",
       "name": "Reference number",
-      "short_name": "Reference",
-      "type": "text",
       "preposition": "With reference",
-      "display_as_result_metadata": true,
-      "filterable": false
+      "short_name": "Reference",
+      "type": "text"
     },
     {
+      "display_as_result_metadata": true,
+      "filterable": false,
       "key": "keyword",
       "name": "Keyword",
-      "short_name": "Keyword",
-      "type": "text",
       "preposition": "With keyword",
-      "display_as_result_metadata": true,
-      "filterable": false
+      "short_name": "Keyword",
+      "type": "text"
     }
-  ]
+  ],
+  "filter": {
+    "format": "marine_equipment_approved_recommendation"
+  },
+  "format_name": "UK Approved Recommendations – Marine Equipment",
+  "name": "UK Approved Recommendations – Marine Equipment",
+  "organisations": [
+    "23a24aa8-1711-42b6-bf6b-47af0f230295"
+  ],
+  "related": [
+    "9ac82e6a-0fb6-431f-85d8-560361e21d0b"
+  ],
+  "show_summaries": true,
+  "signup_content_id": "512a14c1-260a-4c4e-8de8-643eadf7905c",
+  "subscription_list_title_prefix": "UK Approved Recommendations for marine equipment",
+  "summary": "<p>Find recommendations on how to interpret and apply the Merchant Shipping (Marine Equipment) Regulations 2016 as amended.</p>",
+  "target_stack": "live"
 }

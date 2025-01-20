@@ -1,31 +1,12 @@
 {
-  "target_stack": "live",
-  "content_id": "b8327c0c-a90d-47b6-992b-ea226b4d3306",
   "base_path": "/find-licences",
-  "format_name": "Find and apply for licences",
-  "name": "Find a licence",
-  "summary": "<p>You may need a licence, permit or certification for:</p><ul><li>some business activities</li><li>other activities, such as street parties</li></ul><div class='application-notice info-notice'><p>This may not include all the licences you need. It will be updated with more licences.</p></div>",
-  "description": "Find licences, permits or certifications you may need for yourself or your business.",
-  "label_text": "Search keywords <span class=\"govuk-!-display-block govuk-!-font-size-16 govuk-!-margin-bottom-2\">for example 'sell alcohol'</span>",
+  "content_id": "b8327c0c-a90d-47b6-992b-ea226b4d3306",
   "default_order": "title",
-  "filter": {
-    "format": "licence_transaction"
-  },
-  "open_filter_on_load": true,
-  "show_summaries": true,
-  "organisations": [
-    "aa750cdf-7925-429d-a2b3-0d9fa47d2c48"
-  ],
+  "description": "Find licences, permits or certifications you may need for yourself or your business.",
   "document_noun": "licence",
   "document_title": "Licence",
   "facets": [
     {
-      "key": "licence_transaction_location",
-      "name": "Location",
-      "type": "text",
-      "preposition": "In",
-      "display_as_result_metadata": false,
-      "filterable": true,
       "allowed_values": [
         {
           "label": "England",
@@ -44,20 +25,17 @@
           "value": "northern-ireland"
         }
       ],
-      "specialist_publisher_properties": {
-        "select": "multiple"
-      }
-    },
-    {
-      "key": "licence_transaction_industry",
-      "name": "Business or activity",
-      "type": "text",
-      "preposition": "For",
-      "show_option_select_filter": true,
       "display_as_result_metadata": false,
       "filterable": true,
-      "large": true,
-      "open_on_load": true,
+      "key": "licence_transaction_location",
+      "name": "Location",
+      "preposition": "In",
+      "specialist_publisher_properties": {
+        "select": "multiple"
+      },
+      "type": "text"
+    },
+    {
       "allowed_values": [
         {
           "label": "Advertising and marketing",
@@ -252,30 +230,52 @@
           "value": "veterinary"
         }
       ],
+      "display_as_result_metadata": false,
+      "filterable": true,
+      "key": "licence_transaction_industry",
+      "large": true,
+      "name": "Business or activity",
+      "open_on_load": true,
+      "preposition": "For",
+      "show_option_select_filter": true,
       "specialist_publisher_properties": {
         "select": "multiple"
-      }
+      },
+      "type": "text"
     },
     {
+      "display_as_result_metadata": false,
+      "filterable": false,
       "key": "licence_transaction_will_continue_on",
       "name": "Will continue on",
-      "type": "text",
-      "display_as_result_metadata": false,
-      "filterable": false
+      "type": "text"
     },
     {
+      "display_as_result_metadata": false,
+      "filterable": false,
       "key": "licence_transaction_continuation_link",
       "name": "Link to competent authority",
-      "type": "text",
-      "display_as_result_metadata": false,
-      "filterable": false
+      "type": "text"
     },
     {
+      "display_as_result_metadata": false,
+      "filterable": false,
       "key": "licence_transaction_licence_identifier",
       "name": "Licence identifier",
-      "type": "text",
-      "display_as_result_metadata": false,
-      "filterable": false
+      "type": "text"
     }
-  ]
+  ],
+  "filter": {
+    "format": "licence_transaction"
+  },
+  "format_name": "Find and apply for licences",
+  "label_text": "Search keywords <span class=\"govuk-!-display-block govuk-!-font-size-16 govuk-!-margin-bottom-2\">for example 'sell alcohol'</span>",
+  "name": "Find a licence",
+  "open_filter_on_load": true,
+  "organisations": [
+    "aa750cdf-7925-429d-a2b3-0d9fa47d2c48"
+  ],
+  "show_summaries": true,
+  "summary": "<p>You may need a licence, permit or certification for:</p><ul><li>some business activities</li><li>other activities, such as street parties</li></ul><div class='application-notice info-notice'><p>This may not include all the licences you need. It will be updated with more licences.</p></div>",
+  "target_stack": "live"
 }

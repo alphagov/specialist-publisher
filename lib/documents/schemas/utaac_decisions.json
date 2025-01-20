@@ -1,37 +1,14 @@
 {
-  "target_stack": "live",
-  "content_id": "e9e7fcff-bb0d-4723-af25-9f78d730f6f8",
   "base_path": "/administrative-appeals-tribunal-decisions",
-  "format_name": "Administrative appeals tribunal decision",
-  "name": "Administrative appeals tribunal decisions",
+  "content_id": "e9e7fcff-bb0d-4723-af25-9f78d730f6f8",
   "description": "Find decisions on appeals to the Upper Tribunal (Administrative Appeals Chamber), including social security and child support appeals.",
-  "filter": {
-    "format": "utaac_decision"
-  },
-  "signup_content_id": "13e59efa-6c0d-48e8-a0b9-092b62cdc912",
-  "show_summaries": true,
+  "document_noun": "decision",
+  "document_title": "UTAAC Decision",
   "editing_organisations": [
     "dcc907d6-433c-42df-9ffb-d9c68be5dc4d"
   ],
-  "organisations": [
-    "6f757605-ab8f-4b62-84e4-99f79cf085c2",
-    "4c2e325a-2d95-442b-856a-e7fb9f9e3cf8"
-  ],
-  "taxons": [
-    "357110bb-cbc5-4708-9711-1b26e6c63e86"
-  ],
-  "subscription_list_title_prefix": "Upper Tribunal Administrative Appeals Chamber decisions",
-  "summary": "<p>Find decisions on appeals to the Upper Tribunal (Administrative Appeals Chamber), including social security and child support appeals.</p><p>This includes decisions made from January 2016 onwards. You can also search our database of <a rel=\"external\" href=\"https://administrativeappeals.decisions.tribunals.gov.uk\">decisions made in 2015 or earlier</a>.</p>",
-  "document_noun": "decision",
-  "document_title": "UTAAC Decision",
   "facets": [
     {
-      "key": "tribunal_decision_categories",
-      "name": "Categories",
-      "type": "text",
-      "preposition": "categorised as",
-      "display_as_result_metadata": false,
-      "filterable": true,
       "allowed_values": [
         {
           "label": "Benefits for children",
@@ -286,17 +263,17 @@
           "value": "transport-quality-contract-schemes"
         }
       ],
-      "specialist_publisher_properties": {
-        "select": "multiple"
-      }
-    },
-    {
-      "key": "tribunal_decision_sub_categories",
-      "name": "Sub-categories",
-      "type": "text",
-      "preposition": "sub-categorised as",
       "display_as_result_metadata": false,
       "filterable": true,
+      "key": "tribunal_decision_categories",
+      "name": "Categories",
+      "preposition": "categorised as",
+      "specialist_publisher_properties": {
+        "select": "multiple"
+      },
+      "type": "text"
+    },
+    {
       "allowed_values": [
         {
           "label": "Benefits for children - benefit increases for children",
@@ -2243,17 +2220,17 @@
           "value": "war-pensions-and-armed-forces-compensation-war-pensions-specified-decisions"
         }
       ],
-      "specialist_publisher_properties": {
-        "select": "multiple"
-      }
-    },
-    {
-      "key": "tribunal_decision_judges",
-      "name": "Judges",
-      "type": "text",
-      "preposition": "by judge",
       "display_as_result_metadata": false,
       "filterable": true,
+      "key": "tribunal_decision_sub_categories",
+      "name": "Sub-categories",
+      "preposition": "sub-categorised as",
+      "specialist_publisher_properties": {
+        "select": "multiple"
+      },
+      "type": "text"
+    },
+    {
       "allowed_values": [
         {
           "label": "Agnew, C",
@@ -2712,27 +2689,50 @@
           "value": "wright-s"
         }
       ],
+      "display_as_result_metadata": false,
+      "filterable": true,
+      "key": "tribunal_decision_judges",
+      "name": "Judges",
+      "preposition": "by judge",
       "specialist_publisher_properties": {
         "select": "multiple"
-      }
+      },
+      "type": "text"
     },
     {
+      "display_as_result_metadata": true,
+      "filterable": true,
       "key": "tribunal_decision_decision_date",
       "name": "Decision date",
       "short_name": "Decided",
-      "type": "date",
-      "display_as_result_metadata": true,
-      "filterable": true
+      "type": "date"
     },
     {
-      "key": "hidden_indexable_content",
-      "name": "Hidden indexable content",
-      "type": "text",
       "display_as_result_metadata": false,
       "filterable": false,
+      "key": "hidden_indexable_content",
+      "name": "Hidden indexable content",
       "specialist_publisher_properties": {
         "omit_from_finder_content_item": true
-      }
+      },
+      "type": "text"
     }
+  ],
+  "filter": {
+    "format": "utaac_decision"
+  },
+  "format_name": "Administrative appeals tribunal decision",
+  "name": "Administrative appeals tribunal decisions",
+  "organisations": [
+    "6f757605-ab8f-4b62-84e4-99f79cf085c2",
+    "4c2e325a-2d95-442b-856a-e7fb9f9e3cf8"
+  ],
+  "show_summaries": true,
+  "signup_content_id": "13e59efa-6c0d-48e8-a0b9-092b62cdc912",
+  "subscription_list_title_prefix": "Upper Tribunal Administrative Appeals Chamber decisions",
+  "summary": "<p>Find decisions on appeals to the Upper Tribunal (Administrative Appeals Chamber), including social security and child support appeals.</p><p>This includes decisions made from January 2016 onwards. You can also search our database of <a rel=\"external\" href=\"https://administrativeappeals.decisions.tribunals.gov.uk\">decisions made in 2015 or earlier</a>.</p>",
+  "target_stack": "live",
+  "taxons": [
+    "357110bb-cbc5-4708-9711-1b26e6c63e86"
   ]
 }

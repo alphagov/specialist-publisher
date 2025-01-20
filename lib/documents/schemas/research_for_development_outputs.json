@@ -1,1001 +1,1001 @@
 {
-  "target_stack": "live",
-  "content_id": "853596e7-8ae3-42bd-838b-25ca3076e35f",
   "base_path": "/research-for-development-outputs",
-  "format_name": "Research for Development Output",
-  "name": "Research for Development Outputs",
+  "content_id": "853596e7-8ae3-42bd-838b-25ca3076e35f",
   "description": "Find outputs from Research for Development projects",
-  "summary": "<p>Research outputs published before 2 September 2020 were published by the Department for International Development (DFID)</p>",
-  "filter": {
-    "format": "research_for_development_output"
-  },
-  "signup_content_id": "fdcbada2-1ad4-4194-98dc-5f04a448316e",
-  "organisations": [
-    "f9fcf3fe-2751-4dca-97ca-becaeceb4b26"
-  ],
-  "taxons": [
-    "9fb30a53-70fb-4f1c-878b-0064b202d1ba"
-  ],
-  "subscription_list_title_prefix": "Research for Development output",
   "document_noun": "output",
   "document_title": "Research for Development Output",
   "facets": [
     {
+      "allowed_values": [
+        {
+          "label": "Afghanistan",
+          "value": "AF"
+        },
+        {
+          "label": "Albania",
+          "value": "AL"
+        },
+        {
+          "label": "Algeria",
+          "value": "DZ"
+        },
+        {
+          "label": "Andorra",
+          "value": "AD"
+        },
+        {
+          "label": "Angola",
+          "value": "AO"
+        },
+        {
+          "label": "Antigua and Barbuda",
+          "value": "AG"
+        },
+        {
+          "label": "Argentina",
+          "value": "AR"
+        },
+        {
+          "label": "Armenia",
+          "value": "AM"
+        },
+        {
+          "label": "Australia",
+          "value": "AU"
+        },
+        {
+          "label": "Austria",
+          "value": "AT"
+        },
+        {
+          "label": "Azerbaijan",
+          "value": "AZ"
+        },
+        {
+          "label": "Bahamas, The",
+          "value": "BS"
+        },
+        {
+          "label": "Bahrain",
+          "value": "BH"
+        },
+        {
+          "label": "Bangladesh",
+          "value": "BD"
+        },
+        {
+          "label": "Barbados",
+          "value": "BB"
+        },
+        {
+          "label": "Belarus",
+          "value": "BY"
+        },
+        {
+          "label": "Belgium",
+          "value": "BE"
+        },
+        {
+          "label": "Belize",
+          "value": "BZ"
+        },
+        {
+          "label": "Benin",
+          "value": "BJ"
+        },
+        {
+          "label": "Bhutan",
+          "value": "BT"
+        },
+        {
+          "label": "Bolivia",
+          "value": "BO"
+        },
+        {
+          "label": "Bosnia and Herzegovina",
+          "value": "BA"
+        },
+        {
+          "label": "Botswana",
+          "value": "BW"
+        },
+        {
+          "label": "Brazil",
+          "value": "BR"
+        },
+        {
+          "label": "Brunei",
+          "value": "BN"
+        },
+        {
+          "label": "Bulgaria",
+          "value": "BG"
+        },
+        {
+          "label": "Burkina Faso",
+          "value": "BF"
+        },
+        {
+          "label": "Burma",
+          "value": "MM"
+        },
+        {
+          "label": "Burundi",
+          "value": "BI"
+        },
+        {
+          "label": "Cambodia",
+          "value": "KH"
+        },
+        {
+          "label": "Cameroon",
+          "value": "CM"
+        },
+        {
+          "label": "Canada",
+          "value": "CA"
+        },
+        {
+          "label": "Cape Verde",
+          "value": "CV"
+        },
+        {
+          "label": "Central African Republic",
+          "value": "CF"
+        },
+        {
+          "label": "Chad",
+          "value": "TD"
+        },
+        {
+          "label": "Chile",
+          "value": "CL"
+        },
+        {
+          "label": "China",
+          "value": "CN"
+        },
+        {
+          "label": "Colombia",
+          "value": "CO"
+        },
+        {
+          "label": "Comoros",
+          "value": "KM"
+        },
+        {
+          "label": "Congo",
+          "value": "CG"
+        },
+        {
+          "label": "Congo (Democratic Republic)",
+          "value": "CD"
+        },
+        {
+          "label": "Cook Islands",
+          "value": "CK"
+        },
+        {
+          "label": "Costa Rica",
+          "value": "CR"
+        },
+        {
+          "label": "Croatia",
+          "value": "HR"
+        },
+        {
+          "label": "Cuba",
+          "value": "CU"
+        },
+        {
+          "label": "Cyprus",
+          "value": "CY"
+        },
+        {
+          "label": "Czech Republic",
+          "value": "CZ"
+        },
+        {
+          "label": "Denmark",
+          "value": "DK"
+        },
+        {
+          "label": "Djibouti",
+          "value": "DJ"
+        },
+        {
+          "label": "Dominica",
+          "value": "DM"
+        },
+        {
+          "label": "Dominican Republic",
+          "value": "DO"
+        },
+        {
+          "label": "East Timor",
+          "value": "TL"
+        },
+        {
+          "label": "Ecuador",
+          "value": "EC"
+        },
+        {
+          "label": "Egypt",
+          "value": "EG"
+        },
+        {
+          "label": "El Salvador",
+          "value": "SV"
+        },
+        {
+          "label": "Equatorial Guinea",
+          "value": "GQ"
+        },
+        {
+          "label": "Eritrea",
+          "value": "ER"
+        },
+        {
+          "label": "Estonia",
+          "value": "EE"
+        },
+        {
+          "label": "Ethiopia",
+          "value": "ET"
+        },
+        {
+          "label": "Federated States of Micronesia",
+          "value": "FS"
+        },
+        {
+          "label": "Fiji",
+          "value": "FJ"
+        },
+        {
+          "label": "Finland",
+          "value": "FI"
+        },
+        {
+          "label": "France",
+          "value": "FR"
+        },
+        {
+          "label": "Gabon",
+          "value": "GA"
+        },
+        {
+          "label": "Gambia, The",
+          "value": "GM"
+        },
+        {
+          "label": "Georgia",
+          "value": "GE"
+        },
+        {
+          "label": "Germany",
+          "value": "DE"
+        },
+        {
+          "label": "Ghana",
+          "value": "GH"
+        },
+        {
+          "label": "Greece",
+          "value": "GR"
+        },
+        {
+          "label": "Grenada",
+          "value": "GD"
+        },
+        {
+          "label": "Guatemala",
+          "value": "GT"
+        },
+        {
+          "label": "Guinea",
+          "value": "GN"
+        },
+        {
+          "label": "Guinea-Bissau",
+          "value": "GW"
+        },
+        {
+          "label": "Guyana",
+          "value": "GY"
+        },
+        {
+          "label": "Haiti",
+          "value": "HT"
+        },
+        {
+          "label": "Honduras",
+          "value": "HN"
+        },
+        {
+          "label": "Hungary",
+          "value": "HU"
+        },
+        {
+          "label": "Iceland",
+          "value": "IS"
+        },
+        {
+          "label": "India",
+          "value": "IN"
+        },
+        {
+          "label": "Indonesia",
+          "value": "ID"
+        },
+        {
+          "label": "Iran",
+          "value": "IR"
+        },
+        {
+          "label": "Iraq",
+          "value": "IQ"
+        },
+        {
+          "label": "Ireland",
+          "value": "IE"
+        },
+        {
+          "label": "Israel",
+          "value": "IL"
+        },
+        {
+          "label": "Italy",
+          "value": "IT"
+        },
+        {
+          "label": "Ivory Coast",
+          "value": "CI"
+        },
+        {
+          "label": "Jamaica",
+          "value": "JM"
+        },
+        {
+          "label": "Japan",
+          "value": "JP"
+        },
+        {
+          "label": "Jordan",
+          "value": "JO"
+        },
+        {
+          "label": "Kazakhstan",
+          "value": "KZ"
+        },
+        {
+          "label": "Kenya",
+          "value": "KE"
+        },
+        {
+          "label": "Kiribati",
+          "value": "KI"
+        },
+        {
+          "label": "Kosovo",
+          "value": "XK"
+        },
+        {
+          "label": "Kuwait",
+          "value": "KW"
+        },
+        {
+          "label": "Kyrgyzstan",
+          "value": "KG"
+        },
+        {
+          "label": "Laos",
+          "value": "LA"
+        },
+        {
+          "label": "Latvia",
+          "value": "LV"
+        },
+        {
+          "label": "Lebanon",
+          "value": "LB"
+        },
+        {
+          "label": "Lesotho",
+          "value": "LS"
+        },
+        {
+          "label": "Liberia",
+          "value": "LR"
+        },
+        {
+          "label": "Libya",
+          "value": "LY"
+        },
+        {
+          "label": "Liechtenstein",
+          "value": "LI"
+        },
+        {
+          "label": "Lithuania",
+          "value": "LT"
+        },
+        {
+          "label": "Luxembourg",
+          "value": "LU"
+        },
+        {
+          "label": "North Macedonia",
+          "value": "MK"
+        },
+        {
+          "label": "Madagascar",
+          "value": "MG"
+        },
+        {
+          "label": "Malawi",
+          "value": "MW"
+        },
+        {
+          "label": "Malaysia",
+          "value": "MY"
+        },
+        {
+          "label": "Maldives",
+          "value": "MV"
+        },
+        {
+          "label": "Mali",
+          "value": "ML"
+        },
+        {
+          "label": "Malta",
+          "value": "MT"
+        },
+        {
+          "label": "Marshall Islands",
+          "value": "MH"
+        },
+        {
+          "label": "Mauritania",
+          "value": "MR"
+        },
+        {
+          "label": "Mauritius",
+          "value": "MU"
+        },
+        {
+          "label": "Mexico",
+          "value": "MX"
+        },
+        {
+          "label": "Moldova",
+          "value": "MD"
+        },
+        {
+          "label": "Monaco",
+          "value": "MC"
+        },
+        {
+          "label": "Mongolia",
+          "value": "MN"
+        },
+        {
+          "label": "Montenegro",
+          "value": "ME"
+        },
+        {
+          "label": "Morocco",
+          "value": "MA"
+        },
+        {
+          "label": "Mozambique",
+          "value": "MZ"
+        },
+        {
+          "label": "Namibia",
+          "value": "NA"
+        },
+        {
+          "label": "Nauru",
+          "value": "NR"
+        },
+        {
+          "label": "Nepal",
+          "value": "NP"
+        },
+        {
+          "label": "Netherlands",
+          "value": "NL"
+        },
+        {
+          "label": "New Zealand",
+          "value": "NZ"
+        },
+        {
+          "label": "Nicaragua",
+          "value": "NI"
+        },
+        {
+          "label": "Niger",
+          "value": "NE"
+        },
+        {
+          "label": "Nigeria",
+          "value": "NG"
+        },
+        {
+          "label": "North Korea",
+          "value": "KP"
+        },
+        {
+          "label": "Norway",
+          "value": "NO"
+        },
+        {
+          "label": "Oman",
+          "value": "OM"
+        },
+        {
+          "label": "Pakistan",
+          "value": "PK"
+        },
+        {
+          "label": "Palau",
+          "value": "PW"
+        },
+        {
+          "label": "Panama",
+          "value": "PA"
+        },
+        {
+          "label": "Papua New Guinea",
+          "value": "PG"
+        },
+        {
+          "label": "Paraguay",
+          "value": "PY"
+        },
+        {
+          "label": "Peru",
+          "value": "PE"
+        },
+        {
+          "label": "Philippines",
+          "value": "PH"
+        },
+        {
+          "label": "Poland",
+          "value": "PL"
+        },
+        {
+          "label": "Portugal",
+          "value": "PT"
+        },
+        {
+          "label": "Qatar",
+          "value": "QA"
+        },
+        {
+          "label": "Romania",
+          "value": "RO"
+        },
+        {
+          "label": "Russia",
+          "value": "RU"
+        },
+        {
+          "label": "Rwanda",
+          "value": "RW"
+        },
+        {
+          "label": "Samoa",
+          "value": "WS"
+        },
+        {
+          "label": "San Marino",
+          "value": "SM"
+        },
+        {
+          "label": "Sao Tome and Principe",
+          "value": "ST"
+        },
+        {
+          "label": "Saudi Arabia",
+          "value": "SA"
+        },
+        {
+          "label": "Senegal",
+          "value": "SN"
+        },
+        {
+          "label": "Serbia",
+          "value": "RS"
+        },
+        {
+          "label": "Seychelles",
+          "value": "SC"
+        },
+        {
+          "label": "Sierra Leone",
+          "value": "SL"
+        },
+        {
+          "label": "Singapore",
+          "value": "SG"
+        },
+        {
+          "label": "Slovakia",
+          "value": "SK"
+        },
+        {
+          "label": "Slovenia",
+          "value": "SI"
+        },
+        {
+          "label": "Solomon Islands",
+          "value": "SB"
+        },
+        {
+          "label": "Somalia",
+          "value": "SO"
+        },
+        {
+          "label": "South Africa",
+          "value": "ZA"
+        },
+        {
+          "label": "South Korea",
+          "value": "KR"
+        },
+        {
+          "label": "South Sudan",
+          "value": "SS"
+        },
+        {
+          "label": "Spain",
+          "value": "ES"
+        },
+        {
+          "label": "Sri Lanka",
+          "value": "LK"
+        },
+        {
+          "label": "St Kitts and Nevis",
+          "value": "KN"
+        },
+        {
+          "label": "St Lucia",
+          "value": "LC"
+        },
+        {
+          "label": "St Vincent",
+          "value": "VC"
+        },
+        {
+          "label": "Sudan",
+          "value": "SD"
+        },
+        {
+          "label": "Suriname",
+          "value": "SR"
+        },
+        {
+          "label": "Swaziland",
+          "value": "SZ"
+        },
+        {
+          "label": "Sweden",
+          "value": "SE"
+        },
+        {
+          "label": "Switzerland",
+          "value": "CH"
+        },
+        {
+          "label": "Syria",
+          "value": "SY"
+        },
+        {
+          "label": "Tajikistan",
+          "value": "TJ"
+        },
+        {
+          "label": "Tanzania",
+          "value": "TZ"
+        },
+        {
+          "label": "Thailand",
+          "value": "TH"
+        },
+        {
+          "label": "Togo",
+          "value": "TG"
+        },
+        {
+          "label": "Tonga",
+          "value": "TO"
+        },
+        {
+          "label": "Trinidad and Tobago",
+          "value": "TT"
+        },
+        {
+          "label": "Tunisia",
+          "value": "TN"
+        },
+        {
+          "label": "Turkey",
+          "value": "TR"
+        },
+        {
+          "label": "Turkmenistan",
+          "value": "TM"
+        },
+        {
+          "label": "Tuvalu",
+          "value": "TV"
+        },
+        {
+          "label": "Uganda",
+          "value": "UG"
+        },
+        {
+          "label": "Ukraine",
+          "value": "UA"
+        },
+        {
+          "label": "United Arab Emirates",
+          "value": "AE"
+        },
+        {
+          "label": "United Kingdom",
+          "value": "GB"
+        },
+        {
+          "label": "United States",
+          "value": "US"
+        },
+        {
+          "label": "Uruguay",
+          "value": "UY"
+        },
+        {
+          "label": "Uzbekistan",
+          "value": "UZ"
+        },
+        {
+          "label": "Vanuatu",
+          "value": "VU"
+        },
+        {
+          "label": "Vatican City",
+          "value": "VA"
+        },
+        {
+          "label": "Venezuela",
+          "value": "VE"
+        },
+        {
+          "label": "Vietnam",
+          "value": "VN"
+        },
+        {
+          "label": "Yemen",
+          "value": "YE"
+        },
+        {
+          "label": "Zambia",
+          "value": "ZM"
+        },
+        {
+          "label": "Zimbabwe",
+          "value": "ZW"
+        }
+      ],
+      "display_as_result_metadata": true,
+      "filterable": true,
       "key": "country",
       "name": "Country",
-      "type": "text",
       "preposition": "covering",
-      "display_as_result_metadata": true,
-      "filterable": true,
-      "allowed_values": [
-        {
-          "value": "AF",
-          "label": "Afghanistan"
-        },
-        {
-          "value": "AL",
-          "label": "Albania"
-        },
-        {
-          "value": "DZ",
-          "label": "Algeria"
-        },
-        {
-          "value": "AD",
-          "label": "Andorra"
-        },
-        {
-          "value": "AO",
-          "label": "Angola"
-        },
-        {
-          "value": "AG",
-          "label": "Antigua and Barbuda"
-        },
-        {
-          "value": "AR",
-          "label": "Argentina"
-        },
-        {
-          "value": "AM",
-          "label": "Armenia"
-        },
-        {
-          "value": "AU",
-          "label": "Australia"
-        },
-        {
-          "value": "AT",
-          "label": "Austria"
-        },
-        {
-          "value": "AZ",
-          "label": "Azerbaijan"
-        },
-        {
-          "value": "BS",
-          "label": "Bahamas, The"
-        },
-        {
-          "value": "BH",
-          "label": "Bahrain"
-        },
-        {
-          "value": "BD",
-          "label": "Bangladesh"
-        },
-        {
-          "value": "BB",
-          "label": "Barbados"
-        },
-        {
-          "value": "BY",
-          "label": "Belarus"
-        },
-        {
-          "value": "BE",
-          "label": "Belgium"
-        },
-        {
-          "value": "BZ",
-          "label": "Belize"
-        },
-        {
-          "value": "BJ",
-          "label": "Benin"
-        },
-        {
-          "value": "BT",
-          "label": "Bhutan"
-        },
-        {
-          "value": "BO",
-          "label": "Bolivia"
-        },
-        {
-          "value": "BA",
-          "label": "Bosnia and Herzegovina"
-        },
-        {
-          "value": "BW",
-          "label": "Botswana"
-        },
-        {
-          "value": "BR",
-          "label": "Brazil"
-        },
-        {
-          "value": "BN",
-          "label": "Brunei"
-        },
-        {
-          "value": "BG",
-          "label": "Bulgaria"
-        },
-        {
-          "value": "BF",
-          "label": "Burkina Faso"
-        },
-        {
-          "value": "MM",
-          "label": "Burma"
-        },
-        {
-          "value": "BI",
-          "label": "Burundi"
-        },
-        {
-          "value": "KH",
-          "label": "Cambodia"
-        },
-        {
-          "value": "CM",
-          "label": "Cameroon"
-        },
-        {
-          "value": "CA",
-          "label": "Canada"
-        },
-        {
-          "value": "CV",
-          "label": "Cape Verde"
-        },
-        {
-          "value": "CF",
-          "label": "Central African Republic"
-        },
-        {
-          "value": "TD",
-          "label": "Chad"
-        },
-        {
-          "value": "CL",
-          "label": "Chile"
-        },
-        {
-          "value": "CN",
-          "label": "China"
-        },
-        {
-          "value": "CO",
-          "label": "Colombia"
-        },
-        {
-          "value": "KM",
-          "label": "Comoros"
-        },
-        {
-          "value": "CG",
-          "label": "Congo"
-        },
-        {
-          "value": "CD",
-          "label": "Congo (Democratic Republic)"
-        },
-        {
-          "value": "CK",
-          "label": "Cook Islands"
-        },
-        {
-          "value": "CR",
-          "label": "Costa Rica"
-        },
-        {
-          "value": "HR",
-          "label": "Croatia"
-        },
-        {
-          "value": "CU",
-          "label": "Cuba"
-        },
-        {
-          "value": "CY",
-          "label": "Cyprus"
-        },
-        {
-          "value": "CZ",
-          "label": "Czech Republic"
-        },
-        {
-          "value": "DK",
-          "label": "Denmark"
-        },
-        {
-          "value": "DJ",
-          "label": "Djibouti"
-        },
-        {
-          "value": "DM",
-          "label": "Dominica"
-        },
-        {
-          "value": "DO",
-          "label": "Dominican Republic"
-        },
-        {
-          "value": "TL",
-          "label": "East Timor"
-        },
-        {
-          "value": "EC",
-          "label": "Ecuador"
-        },
-        {
-          "value": "EG",
-          "label": "Egypt"
-        },
-        {
-          "value": "SV",
-          "label": "El Salvador"
-        },
-        {
-          "value": "GQ",
-          "label": "Equatorial Guinea"
-        },
-        {
-          "value": "ER",
-          "label": "Eritrea"
-        },
-        {
-          "value": "EE",
-          "label": "Estonia"
-        },
-        {
-          "value": "ET",
-          "label": "Ethiopia"
-        },
-        {
-          "value": "FS",
-          "label": "Federated States of Micronesia"
-        },
-        {
-          "value": "FJ",
-          "label": "Fiji"
-        },
-        {
-          "value": "FI",
-          "label": "Finland"
-        },
-        {
-          "value": "FR",
-          "label": "France"
-        },
-        {
-          "value": "GA",
-          "label": "Gabon"
-        },
-        {
-          "value": "GM",
-          "label": "Gambia, The"
-        },
-        {
-          "value": "GE",
-          "label": "Georgia"
-        },
-        {
-          "value": "DE",
-          "label": "Germany"
-        },
-        {
-          "value": "GH",
-          "label": "Ghana"
-        },
-        {
-          "value": "GR",
-          "label": "Greece"
-        },
-        {
-          "value": "GD",
-          "label": "Grenada"
-        },
-        {
-          "value": "GT",
-          "label": "Guatemala"
-        },
-        {
-          "value": "GN",
-          "label": "Guinea"
-        },
-        {
-          "value": "GW",
-          "label": "Guinea-Bissau"
-        },
-        {
-          "value": "GY",
-          "label": "Guyana"
-        },
-        {
-          "value": "HT",
-          "label": "Haiti"
-        },
-        {
-          "value": "HN",
-          "label": "Honduras"
-        },
-        {
-          "value": "HU",
-          "label": "Hungary"
-        },
-        {
-          "value": "IS",
-          "label": "Iceland"
-        },
-        {
-          "value": "IN",
-          "label": "India"
-        },
-        {
-          "value": "ID",
-          "label": "Indonesia"
-        },
-        {
-          "value": "IR",
-          "label": "Iran"
-        },
-        {
-          "value": "IQ",
-          "label": "Iraq"
-        },
-        {
-          "value": "IE",
-          "label": "Ireland"
-        },
-        {
-          "value": "IL",
-          "label": "Israel"
-        },
-        {
-          "value": "IT",
-          "label": "Italy"
-        },
-        {
-          "value": "CI",
-          "label": "Ivory Coast"
-        },
-        {
-          "value": "JM",
-          "label": "Jamaica"
-        },
-        {
-          "value": "JP",
-          "label": "Japan"
-        },
-        {
-          "value": "JO",
-          "label": "Jordan"
-        },
-        {
-          "value": "KZ",
-          "label": "Kazakhstan"
-        },
-        {
-          "value": "KE",
-          "label": "Kenya"
-        },
-        {
-          "value": "KI",
-          "label": "Kiribati"
-        },
-        {
-          "value": "XK",
-          "label": "Kosovo"
-        },
-        {
-          "value": "KW",
-          "label": "Kuwait"
-        },
-        {
-          "value": "KG",
-          "label": "Kyrgyzstan"
-        },
-        {
-          "value": "LA",
-          "label": "Laos"
-        },
-        {
-          "value": "LV",
-          "label": "Latvia"
-        },
-        {
-          "value": "LB",
-          "label": "Lebanon"
-        },
-        {
-          "value": "LS",
-          "label": "Lesotho"
-        },
-        {
-          "value": "LR",
-          "label": "Liberia"
-        },
-        {
-          "value": "LY",
-          "label": "Libya"
-        },
-        {
-          "value": "LI",
-          "label": "Liechtenstein"
-        },
-        {
-          "value": "LT",
-          "label": "Lithuania"
-        },
-        {
-          "value": "LU",
-          "label": "Luxembourg"
-        },
-        {
-          "value": "MK",
-          "label": "North Macedonia"
-        },
-        {
-          "value": "MG",
-          "label": "Madagascar"
-        },
-        {
-          "value": "MW",
-          "label": "Malawi"
-        },
-        {
-          "value": "MY",
-          "label": "Malaysia"
-        },
-        {
-          "value": "MV",
-          "label": "Maldives"
-        },
-        {
-          "value": "ML",
-          "label": "Mali"
-        },
-        {
-          "value": "MT",
-          "label": "Malta"
-        },
-        {
-          "value": "MH",
-          "label": "Marshall Islands"
-        },
-        {
-          "value": "MR",
-          "label": "Mauritania"
-        },
-        {
-          "value": "MU",
-          "label": "Mauritius"
-        },
-        {
-          "value": "MX",
-          "label": "Mexico"
-        },
-        {
-          "value": "MD",
-          "label": "Moldova"
-        },
-        {
-          "value": "MC",
-          "label": "Monaco"
-        },
-        {
-          "value": "MN",
-          "label": "Mongolia"
-        },
-        {
-          "value": "ME",
-          "label": "Montenegro"
-        },
-        {
-          "value": "MA",
-          "label": "Morocco"
-        },
-        {
-          "value": "MZ",
-          "label": "Mozambique"
-        },
-        {
-          "value": "NA",
-          "label": "Namibia"
-        },
-        {
-          "value": "NR",
-          "label": "Nauru"
-        },
-        {
-          "value": "NP",
-          "label": "Nepal"
-        },
-        {
-          "value": "NL",
-          "label": "Netherlands"
-        },
-        {
-          "value": "NZ",
-          "label": "New Zealand"
-        },
-        {
-          "value": "NI",
-          "label": "Nicaragua"
-        },
-        {
-          "value": "NE",
-          "label": "Niger"
-        },
-        {
-          "value": "NG",
-          "label": "Nigeria"
-        },
-        {
-          "value": "KP",
-          "label": "North Korea"
-        },
-        {
-          "value": "NO",
-          "label": "Norway"
-        },
-        {
-          "value": "OM",
-          "label": "Oman"
-        },
-        {
-          "value": "PK",
-          "label": "Pakistan"
-        },
-        {
-          "value": "PW",
-          "label": "Palau"
-        },
-        {
-          "value": "PA",
-          "label": "Panama"
-        },
-        {
-          "value": "PG",
-          "label": "Papua New Guinea"
-        },
-        {
-          "value": "PY",
-          "label": "Paraguay"
-        },
-        {
-          "value": "PE",
-          "label": "Peru"
-        },
-        {
-          "value": "PH",
-          "label": "Philippines"
-        },
-        {
-          "value": "PL",
-          "label": "Poland"
-        },
-        {
-          "value": "PT",
-          "label": "Portugal"
-        },
-        {
-          "value": "QA",
-          "label": "Qatar"
-        },
-        {
-          "value": "RO",
-          "label": "Romania"
-        },
-        {
-          "value": "RU",
-          "label": "Russia"
-        },
-        {
-          "value": "RW",
-          "label": "Rwanda"
-        },
-        {
-          "value": "WS",
-          "label": "Samoa"
-        },
-        {
-          "value": "SM",
-          "label": "San Marino"
-        },
-        {
-          "value": "ST",
-          "label": "Sao Tome and Principe"
-        },
-        {
-          "value": "SA",
-          "label": "Saudi Arabia"
-        },
-        {
-          "value": "SN",
-          "label": "Senegal"
-        },
-        {
-          "value": "RS",
-          "label": "Serbia"
-        },
-        {
-          "value": "SC",
-          "label": "Seychelles"
-        },
-        {
-          "value": "SL",
-          "label": "Sierra Leone"
-        },
-        {
-          "value": "SG",
-          "label": "Singapore"
-        },
-        {
-          "value": "SK",
-          "label": "Slovakia"
-        },
-        {
-          "value": "SI",
-          "label": "Slovenia"
-        },
-        {
-          "value": "SB",
-          "label": "Solomon Islands"
-        },
-        {
-          "value": "SO",
-          "label": "Somalia"
-        },
-        {
-          "value": "ZA",
-          "label": "South Africa"
-        },
-        {
-          "value": "KR",
-          "label": "South Korea"
-        },
-        {
-          "value": "SS",
-          "label": "South Sudan"
-        },
-        {
-          "value": "ES",
-          "label": "Spain"
-        },
-        {
-          "value": "LK",
-          "label": "Sri Lanka"
-        },
-        {
-          "value": "KN",
-          "label": "St Kitts and Nevis"
-        },
-        {
-          "value": "LC",
-          "label": "St Lucia"
-        },
-        {
-          "value": "VC",
-          "label": "St Vincent"
-        },
-        {
-          "value": "SD",
-          "label": "Sudan"
-        },
-        {
-          "value": "SR",
-          "label": "Suriname"
-        },
-        {
-          "value": "SZ",
-          "label": "Swaziland"
-        },
-        {
-          "value": "SE",
-          "label": "Sweden"
-        },
-        {
-          "value": "CH",
-          "label": "Switzerland"
-        },
-        {
-          "value": "SY",
-          "label": "Syria"
-        },
-        {
-          "value": "TJ",
-          "label": "Tajikistan"
-        },
-        {
-          "value": "TZ",
-          "label": "Tanzania"
-        },
-        {
-          "value": "TH",
-          "label": "Thailand"
-        },
-        {
-          "value": "TG",
-          "label": "Togo"
-        },
-        {
-          "value": "TO",
-          "label": "Tonga"
-        },
-        {
-          "value": "TT",
-          "label": "Trinidad and Tobago"
-        },
-        {
-          "value": "TN",
-          "label": "Tunisia"
-        },
-        {
-          "value": "TR",
-          "label": "Turkey"
-        },
-        {
-          "value": "TM",
-          "label": "Turkmenistan"
-        },
-        {
-          "value": "TV",
-          "label": "Tuvalu"
-        },
-        {
-          "value": "UG",
-          "label": "Uganda"
-        },
-        {
-          "value": "UA",
-          "label": "Ukraine"
-        },
-        {
-          "value": "AE",
-          "label": "United Arab Emirates"
-        },
-        {
-          "value": "GB",
-          "label": "United Kingdom"
-        },
-        {
-          "value": "US",
-          "label": "United States"
-        },
-        {
-          "value": "UY",
-          "label": "Uruguay"
-        },
-        {
-          "value": "UZ",
-          "label": "Uzbekistan"
-        },
-        {
-          "value": "VU",
-          "label": "Vanuatu"
-        },
-        {
-          "value": "VA",
-          "label": "Vatican City"
-        },
-        {
-          "value": "VE",
-          "label": "Venezuela"
-        },
-        {
-          "value": "VN",
-          "label": "Vietnam"
-        },
-        {
-          "value": "YE",
-          "label": "Yemen"
-        },
-        {
-          "value": "ZM",
-          "label": "Zambia"
-        },
-        {
-          "value": "ZW",
-          "label": "Zimbabwe"
-        }
-      ],
       "specialist_publisher_properties": {
         "select": "multiple"
-      }
+      },
+      "type": "text"
     },
     {
+      "allowed_values": [
+        {
+          "label": "Book",
+          "value": "book"
+        },
+        {
+          "label": "Book Chapter",
+          "value": "book_chapter"
+        },
+        {
+          "label": "Briefing",
+          "value": "briefing"
+        },
+        {
+          "label": "Case Study",
+          "value": "case_study"
+        },
+        {
+          "label": "Conference Paper",
+          "value": "conference_paper"
+        },
+        {
+          "label": "Country Report",
+          "value": "country_report"
+        },
+        {
+          "label": "Dataset",
+          "value": "dataset"
+        },
+        {
+          "label": "Discussion Paper",
+          "value": "discussion_paper"
+        },
+        {
+          "label": "Evaluation Report",
+          "value": "evaluation_report"
+        },
+        {
+          "label": "Journal Article",
+          "value": "journal_article"
+        },
+        {
+          "label": "Journal Issue",
+          "value": "journal_issue"
+        },
+        {
+          "label": "Lessons Learned",
+          "value": "lessons_learned"
+        },
+        {
+          "label": "Literature Review",
+          "value": "literature_review"
+        },
+        {
+          "label": "Manual",
+          "value": "manual"
+        },
+        {
+          "label": "Protocol",
+          "value": "protocol"
+        },
+        {
+          "label": "Research Paper",
+          "value": "research_paper"
+        },
+        {
+          "label": "Systematic Review",
+          "value": "systematic_review"
+        },
+        {
+          "label": "Technical Report",
+          "value": "technical_report"
+        },
+        {
+          "label": "Thematic Summary",
+          "value": "thematic_summary"
+        },
+        {
+          "label": "Tool kit",
+          "value": "tool_kit"
+        },
+        {
+          "label": "Training Materials",
+          "value": "training_materials"
+        },
+        {
+          "label": "Working Paper",
+          "value": "working_paper"
+        }
+      ],
+      "display_as_result_metadata": true,
+      "filterable": true,
       "key": "research_document_type",
       "name": "Document Type",
-      "short_name": "Document Type",
-      "type": "text",
       "preposition": "of type",
-      "display_as_result_metadata": true,
-      "filterable": true,
-      "allowed_values": [
-        {
-          "value": "book",
-          "label": "Book"
-        },
-        {
-          "value": "book_chapter",
-          "label": "Book Chapter"
-        },
-        {
-          "value": "briefing",
-          "label": "Briefing"
-        },
-        {
-          "value": "case_study",
-          "label": "Case Study"
-        },
-        {
-          "value": "conference_paper",
-          "label": "Conference Paper"
-        },
-        {
-          "value": "country_report",
-          "label": "Country Report"
-        },
-        {
-          "value": "dataset",
-          "label": "Dataset"
-        },
-        {
-          "value": "discussion_paper",
-          "label": "Discussion Paper"
-        },
-        {
-          "value": "evaluation_report",
-          "label": "Evaluation Report"
-        },
-        {
-          "value": "journal_article",
-          "label": "Journal Article"
-        },
-        {
-          "value": "journal_issue",
-          "label": "Journal Issue"
-        },
-        {
-          "value": "lessons_learned",
-          "label": "Lessons Learned"
-        },
-        {
-          "value": "literature_review",
-          "label": "Literature Review"
-        },
-        {
-          "value": "manual",
-          "label": "Manual"
-        },
-        {
-          "value": "protocol",
-          "label": "Protocol"
-        },
-        {
-          "value": "research_paper",
-          "label": "Research Paper"
-        },
-        {
-          "value": "systematic_review",
-          "label": "Systematic Review"
-        },
-        {
-          "value": "technical_report",
-          "label": "Technical Report"
-        },
-        {
-          "value": "thematic_summary",
-          "label": "Thematic Summary"
-        },
-        {
-          "value": "tool_kit",
-          "label": "Tool kit"
-        },
-        {
-          "value": "training_materials",
-          "label": "Training Materials"
-        },
-        {
-          "value": "working_paper",
-          "label": "Working Paper"
-        }
-      ],
+      "short_name": "Document Type",
       "specialist_publisher_properties": {
         "select": "one"
-      }
+      },
+      "type": "text"
     },
     {
-      "key": "theme",
-      "name": "Theme",
-      "short_name": "Theme",
-      "type": "text",
-      "preposition": "about",
-      "display_as_result_metadata": true,
-      "filterable": true,
       "allowed_values": [
         {
-          "value": "agriculture",
-          "label": "Agriculture"
+          "label": "Agriculture",
+          "value": "agriculture"
         },
         {
-          "value": "climate_and_environment",
-          "label": "Climate and Environment"
+          "label": "Climate and Environment",
+          "value": "climate_and_environment"
         },
         {
-          "value": "economic_growth",
-          "label": "Economic Growth"
+          "label": "Economic Growth",
+          "value": "economic_growth"
         },
         {
-          "value": "education",
-          "label": "Education"
+          "label": "Education",
+          "value": "education"
         },
         {
-          "value": "food_and_nutrition",
-          "label": "Food and Nutrition"
+          "label": "Food and Nutrition",
+          "value": "food_and_nutrition"
         },
         {
-          "value": "governance_and_conflict",
-          "label": "Governance and Conflict"
+          "label": "Governance and Conflict",
+          "value": "governance_and_conflict"
         },
         {
-          "value": "health",
-          "label": "Health"
+          "label": "Health",
+          "value": "health"
         },
         {
-          "value": "humanitarian_disasters_and_emergencies",
-          "label": "Humanitarian Disasters and Emergencies"
+          "label": "Humanitarian Disasters and Emergencies",
+          "value": "humanitarian_disasters_and_emergencies"
         },
         {
-          "value": "infrastructure",
-          "label": "Infrastructure"
+          "label": "Infrastructure",
+          "value": "infrastructure"
         },
         {
-          "value": "research_communication_and_uptake",
-          "label": "Research Communication and Uptake"
+          "label": "Research Communication and Uptake",
+          "value": "research_communication_and_uptake"
         },
         {
-          "value": "social_change",
-          "label": "Social Change"
+          "label": "Social Change",
+          "value": "social_change"
         },
         {
-          "value": "water_and_sanitation",
-          "label": "Water and Sanitation"
+          "label": "Water and Sanitation",
+          "value": "water_and_sanitation"
         }
       ],
+      "display_as_result_metadata": true,
+      "filterable": true,
+      "key": "theme",
+      "name": "Theme",
+      "preposition": "about",
+      "short_name": "Theme",
       "specialist_publisher_properties": {
         "select": "multiple"
-      }
+      },
+      "type": "text"
     },
     {
+      "display_as_result_metadata": true,
+      "filterable": true,
       "key": "first_published_at",
       "name": "First published",
       "short_name": "First published",
-      "type": "date",
-      "display_as_result_metadata": true,
-      "filterable": true
+      "type": "date"
     },
     {
+      "display_as_result_metadata": true,
+      "filterable": false,
       "key": "authors",
       "name": "Authors",
       "short_name": "Authors",
-      "type": "text",
-      "display_as_result_metadata": true,
-      "filterable": false
+      "type": "text"
     }
+  ],
+  "filter": {
+    "format": "research_for_development_output"
+  },
+  "format_name": "Research for Development Output",
+  "name": "Research for Development Outputs",
+  "organisations": [
+    "f9fcf3fe-2751-4dca-97ca-becaeceb4b26"
+  ],
+  "signup_content_id": "fdcbada2-1ad4-4194-98dc-5f04a448316e",
+  "subscription_list_title_prefix": "Research for Development output",
+  "summary": "<p>Research outputs published before 2 September 2020 were published by the Department for International Development (DFID)</p>",
+  "target_stack": "live",
+  "taxons": [
+    "9fb30a53-70fb-4f1c-878b-0064b202d1ba"
   ]
 }

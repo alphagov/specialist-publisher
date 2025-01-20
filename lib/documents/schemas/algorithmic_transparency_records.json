@@ -1,42 +1,17 @@
 {
-  "target_stack": "live",
-  "content_id": "dc6dc59b-af0b-4849-a3f1-aa7b96635fac",
   "base_path": "/algorithmic-transparency-records",
-  "format_name": "Find out how algorithmic tools are used in public organisations",
-  "name": "Find out how algorithmic tools are used in public organisations",
+  "content_id": "dc6dc59b-af0b-4849-a3f1-aa7b96635fac",
   "description": "Find out how and why public sector organisations use AI and algorithmic tools for decision making.",
-  "filter": {
-    "format": "algorithmic_transparency_record"
-  },
+  "document_noun": "record",
+  "document_title": "Algorithmic transparency record",
   "editing_organisations": [
     "c352c234-8083-47ec-8a4b-0edd45c31263"
   ],
-  "organisations": [
-    "c352c234-8083-47ec-8a4b-0edd45c31263",
-    "96ae61d6-c2a1-48cb-8e67-da9d105ae381",
-    "2fb482e7-3c4d-496f-887d-f8a55a15e89a"
-  ],
-  "related": [
-    "9be2896c-2c32-4108-a465-e37ba16f6dd1"
-  ],
-  "show_summaries": true,
-  "signup_content_id": "99f5bacb-d1ef-4b93-87ef-bae129fed396",
-  "subscription_list_title_prefix": "Algorithmic transparency records",
   "email_filter_options": {
     "email_filter_by": "algorithmic_transparency_record_function"
   },
-  "summary": "<p>Find algorithmic transparency records from UK public sector organisations with information on algorithmic tools used in decision making. These are completed in accordance with the Algorithmic Transparency Recording Standard.</p><p>Let us know what you think of this service: [<a href=\"https://forms.office.com/e/XNn3GBqzhY\">feedback form</a>]</p>",
-  "document_noun": "record",
-  "document_title": "Algorithmic transparency record",
   "facets": [
     {
-      "key": "algorithmic_transparency_record_organisation",
-      "name": "Organisation",
-      "short_name": "Organisation",
-      "type": "text",
-      "preposition": "Organisation",
-      "display_as_result_metadata": true,
-      "filterable": true,
       "allowed_values": [
         {
           "label": "Bristol City Council",
@@ -167,18 +142,18 @@
           "value": "west-midlands-police"
         }
       ],
-      "specialist_publisher_properties": {
-        "select": "one"
-      }
-    },
-    {
-      "key": "algorithmic_transparency_record_organisation_type",
-      "name": "Organisation type",
-      "short_name": "Organisation type",
-      "type": "text",
-      "preposition": "Organisation type",
       "display_as_result_metadata": true,
       "filterable": true,
+      "key": "algorithmic_transparency_record_organisation",
+      "name": "Organisation",
+      "preposition": "Organisation",
+      "short_name": "Organisation",
+      "specialist_publisher_properties": {
+        "select": "one"
+      },
+      "type": "text"
+    },
+    {
       "allowed_values": [
         {
           "label": "Ministerial department",
@@ -209,18 +184,18 @@
           "value": "public-corporation"
         }
       ],
-      "specialist_publisher_properties": {
-        "select": "multiple"
-      }
-    },
-    {
-      "key": "algorithmic_transparency_record_function",
-      "name": "Function",
-      "short_name": "Function",
-      "type": "text",
-      "preposition": "Function",
       "display_as_result_metadata": true,
       "filterable": true,
+      "key": "algorithmic_transparency_record_organisation_type",
+      "name": "Organisation type",
+      "preposition": "Organisation type",
+      "short_name": "Organisation type",
+      "specialist_publisher_properties": {
+        "select": "multiple"
+      },
+      "type": "text"
+    },
+    {
       "allowed_values": [
         {
           "label": "General public services",
@@ -267,18 +242,18 @@
           "value": "regulation"
         }
       ],
+      "display_as_result_metadata": true,
+      "filterable": true,
+      "key": "algorithmic_transparency_record_function",
+      "name": "Function",
+      "preposition": "Function",
+      "short_name": "Function",
       "specialist_publisher_properties": {
         "select": "multiple"
-      }
+      },
+      "type": "text"
     },
     {
-      "key": "algorithmic_transparency_record_capability",
-      "name": "Capability",
-      "short_name": "Capability",
-      "type": "text",
-      "preposition": "Capability",
-      "display_as_result_metadata": false,
-      "filterable": true,
       "allowed_values": [
         {
           "label": "Computer vision",
@@ -325,27 +300,27 @@
           "value": "other"
         }
       ],
+      "display_as_result_metadata": false,
+      "filterable": true,
+      "key": "algorithmic_transparency_record_capability",
+      "name": "Capability",
+      "preposition": "Capability",
+      "short_name": "Capability",
       "specialist_publisher_properties": {
         "select": "multiple"
-      }
+      },
+      "type": "text"
     },
     {
+      "display_as_result_metadata": false,
+      "filterable": false,
       "key": "algorithmic_transparency_record_task",
       "name": "Task",
-      "short_name": "Task",
-      "type": "text",
       "preposition": "Task",
-      "display_as_result_metadata": false,
-      "filterable": false
+      "short_name": "Task",
+      "type": "text"
     },
     {
-      "key": "algorithmic_transparency_record_phase",
-      "name": "Phase",
-      "short_name": "Phase",
-      "type": "text",
-      "preposition": "Phase",
-      "display_as_result_metadata": true,
-      "filterable": true,
       "allowed_values": [
         {
           "label": "Pre-deployment",
@@ -364,18 +339,18 @@
           "value": "retired"
         }
       ],
-      "specialist_publisher_properties": {
-        "select": "one"
-      }
-    },
-    {
-      "key": "algorithmic_transparency_record_region",
-      "name": "Region",
-      "short_name": "Region",
-      "type": "text",
-      "preposition": "Region",
       "display_as_result_metadata": true,
       "filterable": true,
+      "key": "algorithmic_transparency_record_phase",
+      "name": "Phase",
+      "preposition": "Phase",
+      "short_name": "Phase",
+      "specialist_publisher_properties": {
+        "select": "one"
+      },
+      "type": "text"
+    },
+    {
       "allowed_values": [
         {
           "label": "UK",
@@ -434,36 +409,61 @@
           "value": "south-west"
         }
       ],
+      "display_as_result_metadata": true,
+      "filterable": true,
+      "key": "algorithmic_transparency_record_region",
+      "name": "Region",
+      "preposition": "Region",
+      "short_name": "Region",
       "specialist_publisher_properties": {
         "select": "multiple"
-      }
+      },
+      "type": "text"
     },
     {
+      "display_as_result_metadata": true,
+      "filterable": true,
       "key": "algorithmic_transparency_record_date_published",
       "name": "Date published",
-      "short_name": "Date published",
-      "type": "date",
       "preposition": "Date published",
-      "display_as_result_metadata": true,
-      "filterable": true
+      "short_name": "Date published",
+      "type": "date"
     },
     {
+      "display_as_result_metadata": true,
+      "filterable": false,
       "key": "algorithmic_transparency_record_atrs_version",
       "name": "ATRS version",
-      "short_name": "ATRS version",
-      "type": "text",
       "preposition": "ATRS version",
-      "display_as_result_metadata": true,
-      "filterable": false
+      "short_name": "ATRS version",
+      "type": "text"
     },
     {
+      "display_as_result_metadata": false,
+      "filterable": false,
       "key": "algorithmic_transparency_record_other_tags",
       "name": "Other tags",
-      "short_name": "Other tags",
-      "type": "text",
       "preposition": "Other tags",
-      "display_as_result_metadata": false,
-      "filterable": false
+      "short_name": "Other tags",
+      "type": "text"
     }
-  ]
+  ],
+  "filter": {
+    "format": "algorithmic_transparency_record"
+  },
+  "format_name": "Find out how algorithmic tools are used in public organisations",
+  "name": "Find out how algorithmic tools are used in public organisations",
+  "organisations": [
+    "c352c234-8083-47ec-8a4b-0edd45c31263",
+    "96ae61d6-c2a1-48cb-8e67-da9d105ae381",
+    "2fb482e7-3c4d-496f-887d-f8a55a15e89a"
+  ],
+  "related": [
+    "9be2896c-2c32-4108-a465-e37ba16f6dd1"
+  ],
+  "show_summaries": true,
+  "signup_content_id": "99f5bacb-d1ef-4b93-87ef-bae129fed396",
+  "subscription_list_title_prefix": "Algorithmic transparency records",
+  "summary": "<p>Find algorithmic transparency records from UK public sector organisations with information on algorithmic tools used in decision making. These are completed in accordance with the Algorithmic Transparency Recording Standard.</p><p>Let us know what you think of this service: [<a href=\"https://forms.office.com/e/XNn3GBqzhY\">feedback form</a>]</p>",
+  "target_stack": "live"
 }

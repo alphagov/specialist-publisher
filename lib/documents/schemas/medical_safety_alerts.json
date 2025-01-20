@@ -1,31 +1,12 @@
 {
-  "target_stack": "live",
-  "content_id": "1e9c0ada-5f7e-43cc-a55f-cc32757edaa3",
   "base_path": "/drug-device-alerts",
-  "format_name": "Medical safety alert",
-  "name": "Alerts, recalls and safety information: medicines and medical devices",
+  "content_id": "1e9c0ada-5f7e-43cc-a55f-cc32757edaa3",
   "description": "Find alerts and recalls issued by MHRA",
-  "filter": {
-    "format": "medical_safety_alert"
-  },
-  "signup_content_id": "a796ca43-021b-4960-9c99-f41bb8ef2266",
-  "show_summaries": true,
-  "organisations": [
-    "240f72bd-9a4d-4f39-94d9-77235cadde8e"
-  ],
-  "taxons": [
-    "51bbdf23-292a-4b74-8a66-f7db6b93b163"
-  ],
-  "related": [
-    "602be505-4cf4-4f8c-8bfc-7bc4b63a7f47"
-  ],
-  "topics": [
-    "medicines-medical-devices-blood/medical-devices-regulation-safety",
-    "medicines-medical-devices-blood/vigilance-safety-alerts"
-  ],
+  "document_noun": "message",
+  "document_title": "Medical Safety Alert",
   "email_filter_options": {
-    "email_filter_by": "alert_type",
     "downcase_email_alert_topic_names": true,
+    "email_filter_by": "alert_type",
     "pre_checked_email_alert_checkboxes": [
       "field-safety-notices",
       "national-patient-safety",
@@ -33,16 +14,8 @@
       "medicines-recall-notification"
     ]
   },
-  "document_noun": "message",
-  "document_title": "Medical Safety Alert",
   "facets": [
     {
-      "key": "alert_type",
-      "name": "Message type",
-      "type": "text",
-      "preposition": "for",
-      "display_as_result_metadata": true,
-      "filterable": true,
       "allowed_values": [
         {
           "label": "Field safety notice",
@@ -61,17 +34,17 @@
           "value": "medicines-recall-notification"
         }
       ],
-      "specialist_publisher_properties": {
-        "select": "one"
-      }
-    },
-    {
-      "key": "medical_specialism",
-      "name": "Medical specialty",
-      "type": "text",
-      "preposition": "about",
       "display_as_result_metadata": true,
       "filterable": true,
+      "key": "alert_type",
+      "name": "Message type",
+      "preposition": "for",
+      "specialist_publisher_properties": {
+        "select": "one"
+      },
+      "type": "text"
+    },
+    {
       "allowed_values": [
         {
           "label": "Anaesthetics",
@@ -166,18 +139,45 @@
           "value": "vascular-cardiac-surgery"
         }
       ],
+      "display_as_result_metadata": true,
+      "filterable": true,
+      "key": "medical_specialism",
+      "name": "Medical specialty",
+      "preposition": "about",
       "specialist_publisher_properties": {
         "select": "multiple"
-      }
+      },
+      "type": "text"
     },
     {
+      "display_as_result_metadata": true,
+      "filterable": true,
       "key": "issued_date",
       "name": "Issued",
-      "short_name": "Issued",
-      "type": "date",
       "preposition": "issued",
-      "display_as_result_metadata": true,
-      "filterable": true
+      "short_name": "Issued",
+      "type": "date"
     }
+  ],
+  "filter": {
+    "format": "medical_safety_alert"
+  },
+  "format_name": "Medical safety alert",
+  "name": "Alerts, recalls and safety information: medicines and medical devices",
+  "organisations": [
+    "240f72bd-9a4d-4f39-94d9-77235cadde8e"
+  ],
+  "related": [
+    "602be505-4cf4-4f8c-8bfc-7bc4b63a7f47"
+  ],
+  "show_summaries": true,
+  "signup_content_id": "a796ca43-021b-4960-9c99-f41bb8ef2266",
+  "target_stack": "live",
+  "taxons": [
+    "51bbdf23-292a-4b74-8a66-f7db6b93b163"
+  ],
+  "topics": [
+    "medicines-medical-devices-blood/medical-devices-regulation-safety",
+    "medicines-medical-devices-blood/vigilance-safety-alerts"
   ]
 }

@@ -1,30 +1,11 @@
 {
-  "target_stack": "draft",
-  "content_id": "2437862c-56d6-49f9-a5a5-f2a9460cc3ee",
   "base_path": "/data-ethics-guidance",
-  "format_name": "Find data ethics guidance, standards and frameworks",
-  "name": "Find data ethics guidance, standards and frameworks",
+  "content_id": "2437862c-56d6-49f9-a5a5-f2a9460cc3ee",
   "description": "This hub collates existing guidance for the responsible use and development of data and data-driven technologies, including artificial intelligence (AI), developed by and for government and public sector bodies.",
-  "summary": "<p>Find guidance for the responsible use and development of data and data technologies, including artificial intelligence (AI), developed by and for government and public sector bodies.</p><p>If you have suggestions for guidance, email <a href=\"mailto:data.ethics@digital.cabinet-office.gov.uk\">data.ethics@digital.cabinet-office.gov.uk</a>.</p>",
-  "filter": {
-    "format": "data_ethics_guidance_document"
-  },
-  "related": [],
-  "show_summaries": true,
-  "organisations": [
-    "2fb482e7-3c4d-496f-887d-f8a55a15e89a"
-  ],
   "document_noun": "guidance document",
   "document_title": "Data ethics guidance document",
   "facets": [
     {
-      "key": "data_ethics_guidance_document_ethical_theme",
-      "name": "Ethical theme",
-      "type": "text",
-      "preposition": "Ethical theme",
-      "short_name": "Ethical theme",
-      "display_as_result_metadata": true,
-      "filterable": true,
       "allowed_values": [
         {
           "label": "Safety, Security and Robustness",
@@ -55,18 +36,18 @@
           "value": "societal-wellbeing"
         }
       ],
-      "specialist_publisher_properties": {
-        "select": "multiple"
-      }
-    },
-    {
-      "key": "data_ethics_guidance_document_organisation_alias",
-      "name": "Organisation",
-      "short_name": "Organisation",
-      "type": "text",
-      "preposition": "Organisation",
       "display_as_result_metadata": true,
       "filterable": true,
+      "key": "data_ethics_guidance_document_ethical_theme",
+      "name": "Ethical theme",
+      "preposition": "Ethical theme",
+      "short_name": "Ethical theme",
+      "specialist_publisher_properties": {
+        "select": "multiple"
+      },
+      "type": "text"
+    },
+    {
       "allowed_values": [
         {
           "label": "AI Safety Institute",
@@ -189,18 +170,18 @@
           "value": "uk-statistics-authority"
         }
       ],
-      "specialist_publisher_properties": {
-        "select": "multiple"
-      }
-    },
-    {
-      "key": "data_ethics_guidance_document_project_phase",
-      "name": "Project phase",
-      "short_name": "Project phase",
-      "type": "text",
-      "preposition": "Project phase",
       "display_as_result_metadata": true,
       "filterable": true,
+      "key": "data_ethics_guidance_document_organisation_alias",
+      "name": "Organisation",
+      "preposition": "Organisation",
+      "short_name": "Organisation",
+      "specialist_publisher_properties": {
+        "select": "multiple"
+      },
+      "type": "text"
+    },
+    {
       "allowed_values": [
         {
           "label": "Across Lifecycle",
@@ -227,18 +208,18 @@
           "value": "monitoring-review"
         }
       ],
-      "specialist_publisher_properties": {
-        "select": "multiple"
-      }
-    },
-    {
-      "key": "data_ethics_guidance_document_technology_area",
-      "name": "Technology area",
-      "short_name": "Technology area",
-      "type": "text",
-      "preposition": "Technology area",
       "display_as_result_metadata": true,
       "filterable": true,
+      "key": "data_ethics_guidance_document_project_phase",
+      "name": "Project phase",
+      "preposition": "Project phase",
+      "short_name": "Project phase",
+      "specialist_publisher_properties": {
+        "select": "multiple"
+      },
+      "type": "text"
+    },
+    {
       "allowed_values": [
         {
           "label": "AI",
@@ -269,9 +250,28 @@
           "value": "automated-decision-making"
         }
       ],
+      "display_as_result_metadata": true,
+      "filterable": true,
+      "key": "data_ethics_guidance_document_technology_area",
+      "name": "Technology area",
+      "preposition": "Technology area",
+      "short_name": "Technology area",
       "specialist_publisher_properties": {
         "select": "multiple"
-      }
+      },
+      "type": "text"
     }
-  ]
+  ],
+  "filter": {
+    "format": "data_ethics_guidance_document"
+  },
+  "format_name": "Find data ethics guidance, standards and frameworks",
+  "name": "Find data ethics guidance, standards and frameworks",
+  "organisations": [
+    "2fb482e7-3c4d-496f-887d-f8a55a15e89a"
+  ],
+  "related": [],
+  "show_summaries": true,
+  "summary": "<p>Find guidance for the responsible use and development of data and data technologies, including artificial intelligence (AI), developed by and for government and public sector bodies.</p><p>If you have suggestions for guidance, email <a href=\"mailto:data.ethics@digital.cabinet-office.gov.uk\">data.ethics@digital.cabinet-office.gov.uk</a>.</p>",
+  "target_stack": "draft"
 }

@@ -1,38 +1,11 @@
 {
-  "target_stack": "live",
-  "content_id": "602be505-4cf4-4f8c-8bfc-7bc4b63a7f47",
   "base_path": "/drug-safety-update",
-  "format_name": "Drug Safety Update",
-  "name": "Drug Safety Update",
+  "content_id": "602be505-4cf4-4f8c-8bfc-7bc4b63a7f47",
   "description": "Find drug safety updates issued by MHRA",
-  "filter": {
-    "format": "drug_safety_update"
-  },
-  "show_summaries": true,
-  "signup_link": "https://public.govdelivery.com/accounts/UKMHRA/subscriber/new?topic_id=UKMHRA_0044",
-  "organisations": [
-    "240f72bd-9a4d-4f39-94d9-77235cadde8e"
-  ],
-  "taxons": [
-    "51bbdf23-292a-4b74-8a66-f7db6b93b163"
-  ],
-  "related": [
-    "1e9c0ada-5f7e-43cc-a55f-cc32757edaa3",
-    "c953a82b-e9ff-4551-9324-dfdf40ab85e6"
-  ],
-  "topics": [
-    "medicines-medical-devices-blood/vigilance-safety-alerts"
-  ],
   "document_noun": "update",
   "document_title": "Drug Safety Update",
   "facets": [
     {
-      "key": "therapeutic_area",
-      "name": "Therapeutic area",
-      "type": "text",
-      "preposition": "about",
-      "display_as_result_metadata": true,
-      "filterable": true,
       "allowed_values": [
         {
           "label": "Anaesthesia and intensive care",
@@ -139,18 +112,45 @@
           "value": "urology-nephrology"
         }
       ],
+      "display_as_result_metadata": true,
+      "filterable": true,
+      "key": "therapeutic_area",
+      "name": "Therapeutic area",
+      "preposition": "about",
       "specialist_publisher_properties": {
         "select": "multiple"
-      }
+      },
+      "type": "text"
     },
     {
+      "display_as_result_metadata": true,
+      "filterable": true,
       "key": "first_published_at",
       "name": "Published",
-      "short_name": "Published",
-      "type": "date",
       "preposition": "published",
-      "display_as_result_metadata": true,
-      "filterable": true
+      "short_name": "Published",
+      "type": "date"
     }
+  ],
+  "filter": {
+    "format": "drug_safety_update"
+  },
+  "format_name": "Drug Safety Update",
+  "name": "Drug Safety Update",
+  "organisations": [
+    "240f72bd-9a4d-4f39-94d9-77235cadde8e"
+  ],
+  "related": [
+    "1e9c0ada-5f7e-43cc-a55f-cc32757edaa3",
+    "c953a82b-e9ff-4551-9324-dfdf40ab85e6"
+  ],
+  "show_summaries": true,
+  "signup_link": "https://public.govdelivery.com/accounts/UKMHRA/subscriber/new?topic_id=UKMHRA_0044",
+  "target_stack": "live",
+  "taxons": [
+    "51bbdf23-292a-4b74-8a66-f7db6b93b163"
+  ],
+  "topics": [
+    "medicines-medical-devices-blood/vigilance-safety-alerts"
   ]
 }

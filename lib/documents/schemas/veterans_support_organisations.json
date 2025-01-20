@@ -1,35 +1,12 @@
 {
-  "target_stack": "live",
-  "content_id": "0bf7f581-a547-4dd1-aef0-754e0924281d",
   "base_path": "/support-for-veterans",
-  "format_name": "Find support for veterans and their families",
-  "name": "Find support for veterans and their families",
+  "content_id": "0bf7f581-a547-4dd1-aef0-754e0924281d",
+  "default_order": "title",
   "description": "Find support organisations for veterans of the UK armed forces and their families.",
-  "summary": "<p>This directory lists organisations that provide support to veterans of the UK armed forces and their families.</p><p>You can filter results by location and select as many areas of support as you need.</p><p>This should not be taken as an exhaustive list of all services on offer to veterans and their families in the UK.</p><p>The government is not liable for any services that fail to meet an individual's requirements or standards. The inclusion of these organisations or services should not be taken as endorsement by the Office for Veterans’ Affairs.</p><div class=\"example\"><h2>Talk to an adviser</h2><p>The Veterans’ Gateway helpline can provide information and referral support by telephone.</p><p>Phone: 0808 802 1212<br>Monday to Sunday, 8am to 8pm</p></div>",
-  "filter": {
-    "format": "veterans_support_organisation"
-  },
-  "show_summaries": true,
-  "organisations": [
-    "516357f6-92f3-4292-8449-b958e1c63c5f"
-  ],
-  "related": [
-    "df6f3081-b8f0-40a6-9df7-8b415cc4519b",
-    "8d7d88c2-4ea9-4c25-aab2-1988a269177e",
-    "141d388e-d4a0-4774-9767-5a8ba7aedb4e"
-  ],
   "document_noun": "result",
   "document_title": "Veterans Support Organisation",
-  "default_order": "title",
   "facets": [
     {
-      "key": "veterans_support_organisation_health_and_social_care",
-      "name": "Health and Social Care",
-      "short_name": "Health and Social Care",
-      "type": "text",
-      "preposition": "helps with",
-      "display_as_result_metadata": false,
-      "filterable": true,
       "allowed_values": [
         {
           "label": "Mental health",
@@ -48,18 +25,18 @@
           "value": "addiction-support"
         }
       ],
-      "specialist_publisher_properties": {
-        "select": "multiple"
-      }
-    },
-    {
-      "key": "veterans_support_organisation_finance",
-      "name": "Finance",
-      "short_name": "Finance",
-      "type": "text",
-      "preposition": "helps with",
       "display_as_result_metadata": false,
       "filterable": true,
+      "key": "veterans_support_organisation_health_and_social_care",
+      "name": "Health and Social Care",
+      "preposition": "helps with",
+      "short_name": "Health and Social Care",
+      "specialist_publisher_properties": {
+        "select": "multiple"
+      },
+      "type": "text"
+    },
+    {
       "allowed_values": [
         {
           "label": "Pensions",
@@ -86,18 +63,18 @@
           "value": "funeral-costs"
         }
       ],
-      "specialist_publisher_properties": {
-        "select": "multiple"
-      }
-    },
-    {
-      "key": "veterans_support_organisation_legal_and_justice",
-      "name": "Legal and justice",
-      "short_name": "Legal help",
-      "type": "text",
-      "preposition": "helps with",
       "display_as_result_metadata": false,
       "filterable": true,
+      "key": "veterans_support_organisation_finance",
+      "name": "Finance",
+      "preposition": "helps with",
+      "short_name": "Finance",
+      "specialist_publisher_properties": {
+        "select": "multiple"
+      },
+      "type": "text"
+    },
+    {
       "allowed_values": [
         {
           "label": "General legal advice",
@@ -108,18 +85,18 @@
           "value": "support-for-those-in-the-justice-system"
         }
       ],
-      "specialist_publisher_properties": {
-        "select": "multiple"
-      }
-    },
-    {
-      "key": "veterans_support_organisation_employment_education_and_training",
-      "name": "Employment, education and training",
-      "short_name": "Employment, education and training",
-      "type": "text",
-      "preposition": "helps with",
       "display_as_result_metadata": false,
       "filterable": true,
+      "key": "veterans_support_organisation_legal_and_justice",
+      "name": "Legal and justice",
+      "preposition": "helps with",
+      "short_name": "Legal help",
+      "specialist_publisher_properties": {
+        "select": "multiple"
+      },
+      "type": "text"
+    },
+    {
       "allowed_values": [
         {
           "label": "Transition support",
@@ -142,18 +119,18 @@
           "value": "education-and-other-training"
         }
       ],
-      "specialist_publisher_properties": {
-        "select": "multiple"
-      }
-    },
-    {
-      "key": "veterans_support_organisation_housing",
-      "name": "Housing",
-      "short_name": "Housing",
-      "type": "text",
-      "preposition": "helps with",
       "display_as_result_metadata": false,
       "filterable": true,
+      "key": "veterans_support_organisation_employment_education_and_training",
+      "name": "Employment, education and training",
+      "preposition": "helps with",
+      "short_name": "Employment, education and training",
+      "specialist_publisher_properties": {
+        "select": "multiple"
+      },
+      "type": "text"
+    },
+    {
       "allowed_values": [
         {
           "label": "Homelessness, crisis accommodation",
@@ -176,18 +153,18 @@
           "value": "buying-a-home"
         }
       ],
-      "specialist_publisher_properties": {
-        "select": "multiple"
-      }
-    },
-    {
-      "key": "veterans_support_organisation_families_and_children",
-      "name": "Families and children",
-      "short_name": "Families and children",
-      "type": "text",
-      "preposition": "helps with",
       "display_as_result_metadata": false,
       "filterable": true,
+      "key": "veterans_support_organisation_housing",
+      "name": "Housing",
+      "preposition": "helps with",
+      "short_name": "Housing",
+      "specialist_publisher_properties": {
+        "select": "multiple"
+      },
+      "type": "text"
+    },
+    {
       "allowed_values": [
         {
           "label": "Support for spouses and families",
@@ -206,18 +183,18 @@
           "value": "domestic-abuse"
         }
       ],
-      "specialist_publisher_properties": {
-        "select": "multiple"
-      }
-    },
-    {
-      "key": "veterans_support_organisation_community_and_social",
-      "name": "Community and social",
-      "short_name": "Community and social",
-      "type": "text",
-      "preposition": "helps with",
       "display_as_result_metadata": false,
       "filterable": true,
+      "key": "veterans_support_organisation_families_and_children",
+      "name": "Families and children",
+      "preposition": "helps with",
+      "short_name": "Families and children",
+      "specialist_publisher_properties": {
+        "select": "multiple"
+      },
+      "type": "text"
+    },
+    {
       "allowed_values": [
         {
           "label": "Drop-in centres",
@@ -240,18 +217,18 @@
           "value": "women-veterans-support"
         }
       ],
-      "specialist_publisher_properties": {
-        "select": "multiple"
-      }
-    },
-    {
-      "key": "veterans_support_organisation_region_england",
-      "name": "England",
-      "short_name": "England",
-      "type": "text",
-      "preposition": "location",
       "display_as_result_metadata": false,
       "filterable": true,
+      "key": "veterans_support_organisation_community_and_social",
+      "name": "Community and social",
+      "preposition": "helps with",
+      "short_name": "Community and social",
+      "specialist_publisher_properties": {
+        "select": "multiple"
+      },
+      "type": "text"
+    },
+    {
       "allowed_values": [
         {
           "label": "North East and Yorkshire",
@@ -282,18 +259,18 @@
           "value": "south-east"
         }
       ],
-      "specialist_publisher_properties": {
-        "select": "multiple"
-      }
-    },
-    {
-      "key": "veterans_support_organisation_region_northern_ireland",
-      "name": "Northern Ireland",
-      "short_name": "Northern Ireland",
-      "type": "text",
-      "preposition": "location",
       "display_as_result_metadata": false,
       "filterable": true,
+      "key": "veterans_support_organisation_region_england",
+      "name": "England",
+      "preposition": "location",
+      "short_name": "England",
+      "specialist_publisher_properties": {
+        "select": "multiple"
+      },
+      "type": "text"
+    },
+    {
       "allowed_values": [
         {
           "label": "North (Coleraine Area)",
@@ -312,18 +289,18 @@
           "value": "west-enniskillen-area"
         }
       ],
-      "specialist_publisher_properties": {
-        "select": "multiple"
-      }
-    },
-    {
-      "key": "veterans_support_organisation_region_scotland",
-      "name": "Scotland",
-      "short_name": "Scotland",
-      "type": "text",
-      "preposition": "location",
       "display_as_result_metadata": false,
       "filterable": true,
+      "key": "veterans_support_organisation_region_northern_ireland",
+      "name": "Northern Ireland",
+      "preposition": "location",
+      "short_name": "Northern Ireland",
+      "specialist_publisher_properties": {
+        "select": "multiple"
+      },
+      "type": "text"
+    },
+    {
       "allowed_values": [
         {
           "label": "The Southern Uplands",
@@ -342,18 +319,18 @@
           "value": "northern-highlands-hebrides-and-the-northern-isles"
         }
       ],
-      "specialist_publisher_properties": {
-        "select": "multiple"
-      }
-    },
-    {
-      "key": "veterans_support_organisation_region_wales",
-      "name": "Wales",
-      "short_name": "Wales",
-      "type": "text",
-      "preposition": "location",
       "display_as_result_metadata": false,
       "filterable": true,
+      "key": "veterans_support_organisation_region_scotland",
+      "name": "Scotland",
+      "preposition": "location",
+      "short_name": "Scotland",
+      "specialist_publisher_properties": {
+        "select": "multiple"
+      },
+      "type": "text"
+    },
+    {
       "allowed_values": [
         {
           "label": "Mid and West Wales",
@@ -376,9 +353,32 @@
           "value": "south-wales-west"
         }
       ],
+      "display_as_result_metadata": false,
+      "filterable": true,
+      "key": "veterans_support_organisation_region_wales",
+      "name": "Wales",
+      "preposition": "location",
+      "short_name": "Wales",
       "specialist_publisher_properties": {
         "select": "multiple"
-      }
+      },
+      "type": "text"
     }
-  ]
+  ],
+  "filter": {
+    "format": "veterans_support_organisation"
+  },
+  "format_name": "Find support for veterans and their families",
+  "name": "Find support for veterans and their families",
+  "organisations": [
+    "516357f6-92f3-4292-8449-b958e1c63c5f"
+  ],
+  "related": [
+    "df6f3081-b8f0-40a6-9df7-8b415cc4519b",
+    "8d7d88c2-4ea9-4c25-aab2-1988a269177e",
+    "141d388e-d4a0-4774-9767-5a8ba7aedb4e"
+  ],
+  "show_summaries": true,
+  "summary": "<p>This directory lists organisations that provide support to veterans of the UK armed forces and their families.</p><p>You can filter results by location and select as many areas of support as you need.</p><p>This should not be taken as an exhaustive list of all services on offer to veterans and their families in the UK.</p><p>The government is not liable for any services that fail to meet an individual's requirements or standards. The inclusion of these organisations or services should not be taken as endorsement by the Office for Veterans’ Affairs.</p><div class=\"example\"><h2>Talk to an adviser</h2><p>The Veterans’ Gateway helpline can provide information and referral support by telephone.</p><p>Phone: 0808 802 1212<br>Monday to Sunday, 8am to 8pm</p></div>",
+  "target_stack": "live"
 }

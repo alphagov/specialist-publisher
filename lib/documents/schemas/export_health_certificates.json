@@ -1,21 +1,10 @@
 {
-  "target_stack": "live",
-  "content_id": "a485fe3e-6e1e-4d37-a2cc-06177089d1ac",
   "base_path": "/export-health-certificates",
-  "format_name": "Export health certificate",
-  "name": "Find an export health certificate",
+  "content_id": "a485fe3e-6e1e-4d37-a2cc-06177089d1ac",
   "description": "Find export health certificates (EHCs) used for exporting live animals and products of animal origin",
-  "summary": "<p>Find the export health certificate (EHC) and supporting documents you need to export a live animal or animal product like food and germplasm. The latest versions of the certificates are always here.</p> <p>You must nominate an official vet or local authority inspector to sign the certificate. Find out more about <a href=\"https://www.gov.uk/guidance/get-an-export-health-certificate\">getting an export health certificate</a>.</p><p>If you cannot find the correct export health certificate, <a href=\"https://www.gov.uk/guidance/get-an-export-health-certificate#if-you-need-help\">contact the Animal and Plant Health Agency (APHA)</a>.</p>",
-  "filter": {
-    "format": "export_health_certificate"
-  },
-  "organisations": [
-    "4ad67f14-6f9c-4fa4-80ab-687b6d81ea6f"
-  ],
-  "signup_content_id": "9a5260d2-07e7-45dc-a24a-791b02e4a9da",
-  "subscription_list_title_prefix": "Export health certificates",
+  "document_noun": "export health certificate",
+  "document_title": "Export health certificate",
   "email_filter_options": {
-    "email_filter_by": "all_selected_facets",
     "all_selected_facets_except_for": [
       "certificate_status"
     ],
@@ -26,23 +15,11 @@
           "topic_name_override": "Eurasian Customs Union"
         }
       ]
-    }
+    },
+    "email_filter_by": "all_selected_facets"
   },
-  "topics": [
-    "keeping-farmed-animals/animal-welfare"
-  ],
-  "parent": "03f78404-e87c-4c2a-954b-f6ee9403efb8",
-  "document_noun": "export health certificate",
-  "document_title": "Export health certificate",
   "facets": [
     {
-      "key": "destination_country",
-      "name": "Destination country",
-      "short_name": "Destination",
-      "type": "text",
-      "preposition": "to",
-      "display_as_result_metadata": true,
-      "filterable": true,
       "allowed_values": [
         {
           "label": "Afghanistan",
@@ -941,18 +918,18 @@
           "value": "zimbabwe"
         }
       ],
-      "specialist_publisher_properties": {
-        "select": "multiple"
-      }
-    },
-    {
-      "key": "commodity_type",
-      "name": "Commodity type",
-      "short_name": "Commodity",
-      "type": "text",
-      "preposition": "of type",
       "display_as_result_metadata": true,
       "filterable": true,
+      "key": "destination_country",
+      "name": "Destination country",
+      "preposition": "to",
+      "short_name": "Destination",
+      "specialist_publisher_properties": {
+        "select": "multiple"
+      },
+      "type": "text"
+    },
+    {
       "allowed_values": [
         {
           "label": "Animal products including food",
@@ -983,17 +960,18 @@
           "value": "pets"
         }
       ],
-      "specialist_publisher_properties": {
-        "select": "one"
-      }
-    },
-    {
-      "key": "certificate_status",
-      "name": "Certificate status",
-      "type": "text",
-      "preposition": "with status",
       "display_as_result_metadata": true,
       "filterable": true,
+      "key": "commodity_type",
+      "name": "Commodity type",
+      "preposition": "of type",
+      "short_name": "Commodity",
+      "specialist_publisher_properties": {
+        "select": "one"
+      },
+      "type": "text"
+    },
+    {
       "allowed_values": [
         {
           "label": "Active",
@@ -1004,9 +982,31 @@
           "value": "on-hold"
         }
       ],
+      "display_as_result_metadata": true,
+      "filterable": true,
+      "key": "certificate_status",
+      "name": "Certificate status",
+      "preposition": "with status",
       "specialist_publisher_properties": {
         "select": "one"
-      }
+      },
+      "type": "text"
     }
+  ],
+  "filter": {
+    "format": "export_health_certificate"
+  },
+  "format_name": "Export health certificate",
+  "name": "Find an export health certificate",
+  "organisations": [
+    "4ad67f14-6f9c-4fa4-80ab-687b6d81ea6f"
+  ],
+  "parent": "03f78404-e87c-4c2a-954b-f6ee9403efb8",
+  "signup_content_id": "9a5260d2-07e7-45dc-a24a-791b02e4a9da",
+  "subscription_list_title_prefix": "Export health certificates",
+  "summary": "<p>Find the export health certificate (EHC) and supporting documents you need to export a live animal or animal product like food and germplasm. The latest versions of the certificates are always here.</p> <p>You must nominate an official vet or local authority inspector to sign the certificate. Find out more about <a href=\"https://www.gov.uk/guidance/get-an-export-health-certificate\">getting an export health certificate</a>.</p><p>If you cannot find the correct export health certificate, <a href=\"https://www.gov.uk/guidance/get-an-export-health-certificate#if-you-need-help\">contact the Animal and Plant Health Agency (APHA)</a>.</p>",
+  "target_stack": "live",
+  "topics": [
+    "keeping-farmed-animals/animal-welfare"
   ]
 }
