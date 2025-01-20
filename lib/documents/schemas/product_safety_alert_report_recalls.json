@@ -12,7 +12,6 @@
   "organisations": [
     "a0ee18e7-9e1e-4ba1-aed5-f3f287dce752"
   ],
-  "topics": [],
   "email_filter_options": {
     "email_filter_by": "product_alert_type",
     "downcase_email_alert_topic_names": true
