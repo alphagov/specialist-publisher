@@ -94,6 +94,13 @@ RSpec.feature "Editing the CMA case finder", type: :feature do
     expect(page).not_to have_selector("dt")
   end
 
+  scenario "the generated schema is outputted to a hidden input ready for form submission" do
+    visit "admin/metadata/cma-cases"
+    click_button "Submit changes"
+    hidden_input = find("[name=proposed_schema]", visible: false)
+    expect(hidden_input.value).to eq(JSON.pretty_generate(JSON.parse(CmaCase.finder_schema.to_json)))
+  end
+
   scenario "unchecking 'Any related links on GOV.UK?' removes related links" do
     visit "admin/metadata/cma-cases"
 

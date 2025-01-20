@@ -52,6 +52,9 @@ class AdminController < ApplicationController
   def zendesk
     GdsApi.support_api.raise_support_ticket(support_payload)
     redirect_to "/admin/#{current_format.admin_slug}", notice: "Your changes have been submitted and Zendesk ticket created."
+  rescue GdsApi::HTTPErrorResponse
+    flash[:danger] = "There was an error submitting your request. Please try again."
+    redirect_back(fallback_location: root_path)
   end
 
 private

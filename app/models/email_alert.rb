@@ -70,7 +70,7 @@ class EmailAlert
     end
 
     def email_filter_options_for_all_content(params)
-      return if params["all_content_email_filter_options"].nil?
+      return if params["all_content_email_filter_options"].nil? || params["all_content_email_filter_options"].blank?
 
       email_filter_options = JSON.parse(params["all_content_email_filter_options"])
       email_filter_options.delete("email_filter_by")
@@ -79,7 +79,8 @@ class EmailAlert
     end
 
     def email_filter_options_for_filtered_content(params)
-      email_filter_options = JSON.parse(params["filtered_content_email_filter_options"] || "{}")
+      options = params["filtered_content_email_filter_options"].presence || "{}"
+      email_filter_options = JSON.parse(options)
       email_filter_options.merge("email_filter_by" => params["email_filter_by"])
     end
 

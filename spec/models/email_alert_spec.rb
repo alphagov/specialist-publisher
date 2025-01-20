@@ -89,6 +89,15 @@ RSpec.describe "EmailAlert" do
         expect(email_alert.email_filter_options).to eq({})
       end
 
+      it "converts a blank `email_filter_options` parameter into nil" do
+        params = {
+          "email_alert_type" => email_alert_type,
+          "all_content_email_filter_options" => "",
+        }
+        email_alert = EmailAlert.from_finder_admin_form_params(params)
+        expect(email_alert.email_filter_options).to eq(nil)
+      end
+
       it "deletes any existing `email_filter_options.pre_checked_email_alert_checkboxes` option" do
         params = {
           "email_alert_type" => email_alert_type,
@@ -198,6 +207,29 @@ RSpec.describe "EmailAlert" do
         expect(email_alert.email_filter_options).to eq({
           "email_filter_by" => "some_facet",
           "pre_checked_email_alert_checkboxes" => %w[foo bar baz],
+        })
+      end
+
+      it "copes with a blank `filtered_content_email_filter_options` value" do
+        params = {
+          "email_alert_type" => email_alert_type,
+          "email_filter_by" => "some_facet",
+          "filtered_content_email_filter_options" => "",
+        }
+        email_alert = EmailAlert.from_finder_admin_form_params(params)
+        expect(email_alert.email_filter_options).to eq({
+          "email_filter_by" => "some_facet",
+        })
+      end
+
+      it "copes with no `filtered_content_email_filter_options` value" do
+        params = {
+          "email_alert_type" => email_alert_type,
+          "email_filter_by" => "some_facet",
+        }
+        email_alert = EmailAlert.from_finder_admin_form_params(params)
+        expect(email_alert.email_filter_options).to eq({
+          "email_filter_by" => "some_facet",
         })
       end
 
