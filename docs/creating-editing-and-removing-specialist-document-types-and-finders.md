@@ -9,15 +9,11 @@ applications.
 
 # __Creating__ a specialist document type
 
-<!-- TODO: Update example links in the documentation, to reflect latest documentation. Some of the steps are now no longer needed, but example PRs are outdated since no new requests for changes have been made. Also, remove the notes about not adding enums, once all examples are updated. -->
-
 ## 1. Add a schema to Publishing API
-See [example PR here](https://github.com/alphagov/publishing-api/pull/2589/files)
+See [example PR here](https://github.com/alphagov/publishing-api/pull/3026/files).
 
 1. Add the format to [allowed document types list](https://github.com/alphagov/publishing-api/blob/main/content_schemas/allowed_document_types.yml).
 2. Add any new field definitions to [this file](https://github.com/alphagov/publishing-api/blob/main/content_schemas/formats/shared/definitions/_specialist_document.jsonnet).
-
-    **Note**: Do not specify the field values as an enum, as we're moving towards a more relaxed schema definition.
 3. Run `bundle exec rake build_schemas` to regenerate schemas.
 
 When the PR is reviewed and its tests passing, it can be merged and deployed at this point.
@@ -42,18 +38,24 @@ You'll need to generate your own UUIDs for the `content_id` (of the finder), and
 
 ### Create the model
 
-See [CMA cases](https://github.com/alphagov/specialist-publisher/blob/main/app/models/cma_case.rb)
+Include any required validations, tests and factories.
+
+See [CMA cases](https://github.com/alphagov/specialist-publisher/blob/main/app/models/cma_case.rb).
 
 ### Create the view template
 
-See [CMA cases](https://github.com/alphagov/specialist-publisher/blob/main/app/views/metadata_fields/_cma_cases.html.erb)
+Create a view file in the [views folder](https://github.com/alphagov/specialist-publisher/tree/main/app/views/metadata_fields). See [CMA cases example](https://github.com/alphagov/specialist-publisher/blob/main/app/views/metadata_fields/_cma_cases.html.erb).
+
+Whilst a handful of legacy finders still use a custom view, all new finders should be referencing the [shared template](https://github.com/alphagov/specialist-publisher/blob/main/app/views/shared/_specialist_document_form.html.erb), which determines which form fields to display based on the finder schema.
+
+NB: The select type of an input (one/multiple) is now configured under the `specialist_publisher_properties` [in the schema](https://github.com/alphagov/specialist-publisher/blob/36170eb7841fc4acaad77603f3e55e0a80122a74/lib/documents/schemas/algorithmic_transparency_records.json#L151).
 
 ## 3. Configure Search API
 
 Search API needs copies of the schema very similar to the one in Specialist Publisher. See:
 
 - [CMA case schema](https://github.com/alphagov/search-api/blob/main/config/schema/elasticsearch_types/cma_case.json) (example)
-- [field definitions](https://github.com/alphagov/search-api/blob/1700c85e1484d1d9b2c1d46f276326bc06b51a14/config/schema/field_definitions.json)
+- [field definitions](https://github.com/alphagov/search-api/blob/main/config/schema/field_definitions.json)
 
 You'll also need to add your document format to:
 
@@ -119,19 +121,18 @@ We often receive requests to add new fields to a specialist document or to add n
 ## Adding a new field to an existing specialist document
 
 1. In `publishing-api`:
-   - Add the new field in the [specialist_document schema](https://github.com/alphagov/publishing-api/blob/6d5595470bd0e7f3072e06f0113e3ca5514b6e98/content_schemas/formats/shared/definitions/_specialist_document.jsonnet). See [example commit](https://github.com/alphagov/publishing-api/pull/2479/files#diff-e427ec772dc2597718b907f2db7772ad580d90452a76ce291114ddd0cfacb289).
-
-  **NOTE**: You will need to run `bundle exec rake build_schemas` to regenerate schemas after adding the new value(s). Do **not** specify the field values as an enum, as we're moving towards a more relaxed schema definition.
+   - Add the new field in the [specialist_document schema](https://github.com/alphagov/publishing-api/blob/6d5595470bd0e7f3072e06f0113e3ca5514b6e98/content_schemas/formats/shared/definitions/_specialist_document.jsonnet). See [example commit](https://github.com/alphagov/publishing-api/pull/2968/commits/b7d9cd1f6bb5d8d08fda7b6e219b2467134406c4).
+   - Run `bundle exec rake build_schemas` to regenerate schemas after adding the new value(s).
 
 2. In `specialist publisher`:
-   - Add the new field to the relevant [model](https://github.com/alphagov/specialist-publisher/tree/main/app/models).
-   - Add field to relevant [view](https://github.com/alphagov/specialist-publisher/tree/main/app/views/metadata_fields).
-   - Add fields to relevant [schema](https://github.com/alphagov/specialist-publisher/tree/main/lib/documents/schemas) files. 
-   
-<!-- TODO: Update these with up-to-date examples -->
-   See [this](https://github.com/alphagov/specialist-publisher/pull/1899/commits/cc9e8fe482dbca2ef678bb8219252e7bd4f4d154) commit for an example.
+   - Add the new field to the relevant [model](https://github.com/alphagov/specialist-publisher/tree/main/app/models), including any required validations, tests and factories.
+   - Add fields to relevant [schema](https://github.com/alphagov/specialist-publisher/tree/main/lib/documents/schemas) files.
+   - For legacy finders that don't use the shared view, you may need to update the [view](https://github.com/alphagov/specialist-publisher/tree/main/app/views/metadata_fields).
 
-3. In `search-api`, add the new field in the following places (see [this](https://github.com/alphagov/search-api/pull/2320/commits/ca6d0142e29b9755aad2e6bd59a3f576b727bd24) commit for an example):
+<!-- TODO: Update these with up-to-date examples that don't include any view or 'expanded field' changes-->
+   See [this](https://github.com/alphagov/specialist-publisher/pull/2847/commits/37fee332a721222c392f541a7f3b747d5d7a8c27) commit for an example.
+
+3. In `search-api`, add the new field in the following places (see [this](https://github.com/alphagov/search-api/pull/3043/commits/12eee8d6bab4e7606b4014684907f60574e713ba) commit for an example):
    - the relevant schema in the [elasticsearch_types ](https://github.com/alphagov/search-api/tree/main/config/schema/elasticsearch_types)directory.
    - the [elasticsearch_presenter](https://github.com/alphagov/search-api/blob/main/lib/govuk_index/presenters/elasticsearch_presenter.rb).
    - the [specialist_presenter](https://github.com/alphagov/search-api/blob/main/lib/govuk_index/presenters/specialist_presenter.rb).
@@ -144,13 +145,10 @@ To republish the finder:
 1. Publish the finder by running the rake task `publishing_api:publish_finders` or `publishing_api:publish_finder[your_format_name_based_on_the_schema_file]` against the specialist publisher app (rake tasks [here](https://github.com/alphagov/specialist-publisher/blob/ce68fdb008cab05225e0493e19decba5365e1e20/lib/tasks/publishing_api.rake)).
 
 ## Adding values for existing fields on a specialist document
-1. In `specialist publisher`, add the new values to the relevant file in the [schema](https://github.com/alphagov/specialist-publisher/tree/main/lib/documents/schemas) directory. See [this](https://github.com/alphagov/specialist-publisher/pull/1899/commits/97c8d713f8e62b0cb8763fe26e1dcf5a0435c12d) commit for an example.
-
-2. In `search-api`, amend the value in the relevant schema in the [elasticsearch_types](https://github.com/alphagov/search-api/tree/main/config/schema/elasticsearch_types) directory. See [this](https://github.com/alphagov/search-api/pull/2320/commits/0f29e310581e30707eea7fe8c91063974636dbe2) commit for an example.
-
-To republish the finder:
-1. Deploy Publishing API, Search API, Deploy Specialist Publisher.
-1. Publish the finder by running the rake task `publishing_api:publish_finders` or `publishing_api:publish_finder[your_format_name_based_on_the_schema_file]` against the specialist publisher app (rake tasks [here](https://github.com/alphagov/specialist-publisher/blob/ce68fdb008cab05225e0493e19decba5365e1e20/lib/tasks/publishing_api.rake)).
+Specific values for fields of type array are now defined only in the `specialist_publisher` app. To add a value:
+1. In `specialist publisher`, add the new values to the relevant file in the [schema](https://github.com/alphagov/specialist-publisher/tree/main/lib/documents/schemas) directory. See [this](https://github.com/alphagov/specialist-publisher/pull/2958/commits/930b4c82928a616cc848d1e759cf31b521771b15) commit for an example.
+2. Deploy Specialist Publisher.
+3. Publish the finder by running the rake task `publishing_api:publish_finders` or `publishing_api:publish_finder[your_format_name_based_on_the_schema_file]` against the specialist publisher app (rake tasks [here](https://github.com/alphagov/specialist-publisher/blob/ce68fdb008cab05225e0493e19decba5365e1e20/lib/tasks/publishing_api.rake)).
 
 # __Editing__ a specialist finder
 
