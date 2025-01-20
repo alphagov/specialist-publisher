@@ -125,7 +125,7 @@ private
       "email_filter_facets" => email_filter_facets,
       "email_filter_by" => email_filter_by,
       "filter" => schema.fetch("filter", nil),
-      "subscription_list_title_prefix" => schema.fetch("subscription_list_title_prefix", {}),
+      "subscription_list_title_prefix" => schema.fetch("subscription_list_title_prefix", ""),
     }
   end
 
