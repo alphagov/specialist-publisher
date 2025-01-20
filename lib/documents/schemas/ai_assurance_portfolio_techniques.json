@@ -1,33 +1,14 @@
 {
-  "target_stack": "live",
-  "content_id": "5e5890a0-329a-42d2-9637-9d8433fe97ae",
   "base_path": "/ai-assurance-techniques",
-  "format_name": "Find out about artificial intelligence (AI) assurance techniques",
-  "name": "Find out about artificial intelligence (AI) assurance techniques",
+  "content_id": "5e5890a0-329a-42d2-9637-9d8433fe97ae",
   "description": "Find out what AI assurance is and what AI assurance techniques you can use in your organisation.",
-  "summary": "Find out what AI assurance is and what effective AI assurance techniques you can use in your organisation. You can also read examples of AI assurance in practice across a variety of sectors.",
-  "filter": {
-    "format": "ai_assurance_portfolio_technique"
-  },
-  "organisations": [
-    "c352c234-8083-47ec-8a4b-0edd45c31263"
-  ],
+  "document_noun": "case study",
+  "document_title": "Portfolio of Assurance Techniques",
   "editing_organisations": [
     "c352c234-8083-47ec-8a4b-0edd45c31263"
   ],
-  "related": [
-    "4519b26b-6312-4855-bc45-828123bd8a2f"
-  ],
-  "document_noun": "case study",
-  "document_title": "Portfolio of Assurance Techniques",
   "facets": [
     {
-      "key": "use_case",
-      "name": "Use case",
-      "type": "text",
-      "preposition": "Use case",
-      "display_as_result_metadata": true,
-      "filterable": true,
       "allowed_values": [
         {
           "label": "Big data analytics",
@@ -66,17 +47,17 @@
           "value": "robotics-and-autonomous-vehicles-systems"
         }
       ],
-      "specialist_publisher_properties": {
-        "select": "multiple"
-      }
-    },
-    {
-      "key": "sector",
-      "name": "Sector",
-      "type": "text",
-      "preposition": "sector",
       "display_as_result_metadata": true,
       "filterable": true,
+      "key": "use_case",
+      "name": "Use case",
+      "preposition": "Use case",
+      "specialist_publisher_properties": {
+        "select": "multiple"
+      },
+      "type": "text"
+    },
+    {
       "allowed_values": [
         {
           "label": "Agriculture, Forestry and Fishing (SIC Code Section A)",
@@ -151,17 +132,17 @@
           "value": "other-services"
         }
       ],
-      "specialist_publisher_properties": {
-        "select": "multiple"
-      }
-    },
-    {
-      "key": "principle",
-      "name": "Principle",
-      "type": "text",
-      "preposition": "Principle",
       "display_as_result_metadata": true,
       "filterable": true,
+      "key": "sector",
+      "name": "Sector",
+      "preposition": "sector",
+      "specialist_publisher_properties": {
+        "select": "multiple"
+      },
+      "type": "text"
+    },
+    {
       "allowed_values": [
         {
           "label": "Safety, security and robustness",
@@ -184,17 +165,17 @@
           "value": "contestability-and-redress"
         }
       ],
-      "specialist_publisher_properties": {
-        "select": "multiple"
-      }
-    },
-    {
-      "key": "key_function",
-      "name": "Key function",
-      "type": "text",
-      "preposition": "function",
       "display_as_result_metadata": true,
       "filterable": true,
+      "key": "principle",
+      "name": "Principle",
+      "preposition": "Principle",
+      "specialist_publisher_properties": {
+        "select": "multiple"
+      },
+      "type": "text"
+    },
+    {
       "allowed_values": [
         {
           "label": "R&D",
@@ -237,17 +218,17 @@
           "value": "strategy-and-corporate-finance"
         }
       ],
-      "specialist_publisher_properties": {
-        "select": "multiple"
-      }
-    },
-    {
-      "key": "ai_assurance_technique",
-      "name": "AI Assurance Technique",
-      "type": "text",
-      "preposition": "AI Assurance Technique",
       "display_as_result_metadata": true,
       "filterable": true,
+      "key": "key_function",
+      "name": "Key function",
+      "preposition": "function",
+      "specialist_publisher_properties": {
+        "select": "multiple"
+      },
+      "type": "text"
+    },
+    {
       "allowed_values": [
         {
           "label": "Data assurance",
@@ -294,17 +275,17 @@
           "value": "assurance-warranty"
         }
       ],
-      "specialist_publisher_properties": {
-        "select": "multiple"
-      }
-    },
-    {
-      "key": "assurance_technique_approach",
-      "name": "Assurance Technique Approach",
-      "type": "text",
-      "preposition": "Assurance Technique Approach",
       "display_as_result_metadata": true,
       "filterable": true,
+      "key": "ai_assurance_technique",
+      "name": "AI Assurance Technique",
+      "preposition": "AI Assurance Technique",
+      "specialist_publisher_properties": {
+        "select": "multiple"
+      },
+      "type": "text"
+    },
+    {
       "allowed_values": [
         {
           "label": "Technical",
@@ -319,9 +300,28 @@
           "value": "educational"
         }
       ],
+      "display_as_result_metadata": true,
+      "filterable": true,
+      "key": "assurance_technique_approach",
+      "name": "Assurance Technique Approach",
+      "preposition": "Assurance Technique Approach",
       "specialist_publisher_properties": {
         "select": "multiple"
-      }
+      },
+      "type": "text"
     }
-  ]
+  ],
+  "filter": {
+    "format": "ai_assurance_portfolio_technique"
+  },
+  "format_name": "Find out about artificial intelligence (AI) assurance techniques",
+  "name": "Find out about artificial intelligence (AI) assurance techniques",
+  "organisations": [
+    "c352c234-8083-47ec-8a4b-0edd45c31263"
+  ],
+  "related": [
+    "4519b26b-6312-4855-bc45-828123bd8a2f"
+  ],
+  "summary": "Find out what AI assurance is and what effective AI assurance techniques you can use in your organisation. You can also read examples of AI assurance in practice across a variety of sectors.",
+  "target_stack": "live"
 }

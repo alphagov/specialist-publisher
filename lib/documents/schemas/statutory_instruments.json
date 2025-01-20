@@ -1,44 +1,27 @@
 {
-  "target_stack": "live",
-  "content_id": "f722816d-7e12-4055-8e7e-68b2d144e2b6",
   "base_path": "/eu-withdrawal-act-2018-statutory-instruments",
-  "format_name": "EU Withdrawal Act 2018 statutory instrument",
-  "name": "EU Withdrawal Act 2018 statutory instruments",
+  "content_id": "f722816d-7e12-4055-8e7e-68b2d144e2b6",
   "description": "Find EU Withdrawal Act statutory instruments",
-  "summary": "<p>Find proposed negative statutory instruments (SIs) under the EU (Withdrawal) Act 2018.</p><p>Before the SIs are formally 'laid' in Parliament, they have to go through a sifting process. A new committee in the House of Commons and the Secondary Legislation Scrutiny Committee in the House of Lords will consider the suitability of the '<a href=\"https://www.parliament.uk/about/how/laws/secondary-legislation/\">negative procedure</a>'.</p>",
-  "filter": {
-    "format": "statutory_instrument"
-  },
-  "organisations": [],
-  "taxons": [
-    "d6c2de5d-ef90-45d1-82d4-5f2438369eea"
-  ],
   "document_noun": "statutory instrument",
   "document_title": "EU Withdrawal Act 2018 statutory instrument",
   "facets": [
     {
+      "display_as_result_metadata": true,
+      "filterable": true,
       "key": "laid_date",
       "name": "Laid on",
       "short_name": "Laid on",
-      "type": "date",
-      "display_as_result_metadata": true,
-      "filterable": true
+      "type": "date"
     },
     {
+      "display_as_result_metadata": false,
+      "filterable": false,
       "key": "sift_end_date",
       "name": "Sift end date",
       "short_name": "Sift end date",
-      "type": "date",
-      "display_as_result_metadata": false,
-      "filterable": false
+      "type": "date"
     },
     {
-      "key": "sifting_status",
-      "name": "Sifting status",
-      "type": "text",
-      "preposition": "with status",
-      "display_as_result_metadata": true,
-      "filterable": true,
       "allowed_values": [
         {
           "label": "Open",
@@ -53,17 +36,17 @@
           "value": "withdrawn"
         }
       ],
-      "specialist_publisher_properties": {
-        "select": "one"
-      }
-    },
-    {
-      "key": "subject",
-      "name": "Subject",
-      "type": "text",
-      "preposition": "relating to",
       "display_as_result_metadata": true,
       "filterable": true,
+      "key": "sifting_status",
+      "name": "Sifting status",
+      "preposition": "with status",
+      "specialist_publisher_properties": {
+        "select": "one"
+      },
+      "type": "text"
+    },
+    {
       "allowed_values": [
         {
           "label": "Business",
@@ -142,9 +125,26 @@
           "value": "work"
         }
       ],
+      "display_as_result_metadata": true,
+      "filterable": true,
+      "key": "subject",
+      "name": "Subject",
+      "preposition": "relating to",
       "specialist_publisher_properties": {
         "select": "multiple"
-      }
+      },
+      "type": "text"
     }
+  ],
+  "filter": {
+    "format": "statutory_instrument"
+  },
+  "format_name": "EU Withdrawal Act 2018 statutory instrument",
+  "name": "EU Withdrawal Act 2018 statutory instruments",
+  "organisations": [],
+  "summary": "<p>Find proposed negative statutory instruments (SIs) under the EU (Withdrawal) Act 2018.</p><p>Before the SIs are formally 'laid' in Parliament, they have to go through a sifting process. A new committee in the House of Commons and the Secondary Legislation Scrutiny Committee in the House of Lords will consider the suitability of the '<a href=\"https://www.parliament.uk/about/how/laws/secondary-legislation/\">negative procedure</a>'.</p>",
+  "target_stack": "live",
+  "taxons": [
+    "d6c2de5d-ef90-45d1-82d4-5f2438369eea"
   ]
 }

@@ -1,40 +1,21 @@
 {
-  "target_stack": "live",
-  "content_id": "da025a9f-8293-4fef-869c-12445d364696",
   "base_path": "/service-standard-reports",
-  "name": "Service Standard Reports",
-  "format_name": "Service Assessment and Self Certification",
+  "content_id": "da025a9f-8293-4fef-869c-12445d364696",
+  "default_order": "-assessment_date",
   "description": "A list of service assessments and self certifications",
-  "show_summaries": true,
-  "organisations": [
-    "2fb482e7-3c4d-496f-887d-f8a55a15e89a"
-  ],
-  "taxons": [
-    "84630bce-4c1c-4406-a38a-e8c41967b8f7"
-  ],
   "document_noun": "report",
   "document_title": "Service Standard Report",
-  "default_order": "-assessment_date",
-  "filter": {
-    "format": "service_standard_report"
-  },
   "facets": [
     {
-      "key": "assessment_date",
-      "name": "Assessment date",
-      "short_name": "Assessed",
-      "type": "date",
-      "preposition": "assessed",
-      "display_as_result_metadata": true,
-      "filterable": true
-    },
-    {
-      "key": "result",
-      "name": "Result",
-      "short_name": "Result",
-      "type": "text",
       "display_as_result_metadata": true,
       "filterable": true,
+      "key": "assessment_date",
+      "name": "Assessment date",
+      "preposition": "assessed",
+      "short_name": "Assessed",
+      "type": "date"
+    },
+    {
       "allowed_values": [
         {
           "label": "Met",
@@ -57,17 +38,17 @@
           "value": "green"
         }
       ],
-      "specialist_publisher_properties": {
-        "select": "one"
-      }
-    },
-    {
-      "key": "stage",
-      "name": "Stage",
-      "short_name": "Stage",
-      "type": "text",
       "display_as_result_metadata": true,
       "filterable": true,
+      "key": "result",
+      "name": "Result",
+      "short_name": "Result",
+      "specialist_publisher_properties": {
+        "select": "one"
+      },
+      "type": "text"
+    },
+    {
       "allowed_values": [
         {
           "label": "Alpha",
@@ -110,9 +91,28 @@
           "value": "live-amber-evidence-review"
         }
       ],
+      "display_as_result_metadata": true,
+      "filterable": true,
+      "key": "stage",
+      "name": "Stage",
+      "short_name": "Stage",
       "specialist_publisher_properties": {
         "select": "one"
-      }
+      },
+      "type": "text"
     }
+  ],
+  "filter": {
+    "format": "service_standard_report"
+  },
+  "format_name": "Service Assessment and Self Certification",
+  "name": "Service Standard Reports",
+  "organisations": [
+    "2fb482e7-3c4d-496f-887d-f8a55a15e89a"
+  ],
+  "show_summaries": true,
+  "target_stack": "live",
+  "taxons": [
+    "84630bce-4c1c-4406-a38a-e8c41967b8f7"
   ]
 }

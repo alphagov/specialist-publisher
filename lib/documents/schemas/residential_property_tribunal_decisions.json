@@ -1,41 +1,17 @@
 {
-  "target_stack": "live",
-  "content_id": "ce2c1353-2fcb-4c85-ac35-a1c8c3e990cf",
   "base_path": "/residential-property-tribunal-decisions",
-  "format_name": "Residential property tribunal decision",
-  "name": "Residential property tribunal decisions",
+  "content_id": "ce2c1353-2fcb-4c85-ac35-a1c8c3e990cf",
   "description": "Find decisions on Residential Property Tribunal cases in England, Wales and Scotland.",
-  "phase": "beta",
-  "filter": {
-    "format": "residential_property_tribunal_decision"
-  },
-  "show_summaries": true,
+  "document_noun": "decision",
+  "document_title": "Residential Property Tribunal Decision",
   "editing_organisations": [
     "dcc907d6-433c-42df-9ffb-d9c68be5dc4d"
   ],
-  "organisations": [
-    "6f757605-ab8f-4b62-84e4-99f79cf085c2",
-    "bb2b028f-efaa-44fd-b3f8-971b25cb51a2"
-  ],
-  "taxons": [
-    "357110bb-cbc5-4708-9711-1b26e6c63e86"
-  ],
-  "signup_content_id": "8a6239e1-76cf-41a0-9295-0ae1182080d2",
-  "subscription_list_title_prefix": "Residential property tribunal decisions",
   "email_filter_options": {
     "email_filter_by": "all_selected_facets"
   },
-  "summary": "<p>Find decisions on Residential Property Tribunal cases in England from December 2018 onwards.</p><p>If the decision was about leasehold and was made before December 2018, visit <a href=\"https://decisions.lease-advice.org/\" rel=\"external\">Lease Advice</a>. Other decisions made before December 2018 can be found on <a href=\"https://www.bailii.org/recent-decisions.html\" rel=\"external\">BAILII</a></p>",
-  "document_noun": "decision",
-  "document_title": "Residential Property Tribunal Decision",
   "facets": [
     {
-      "key": "tribunal_decision_category",
-      "name": "Category",
-      "type": "text",
-      "preposition": "categorised as",
-      "display_as_result_metadata": false,
-      "filterable": true,
       "allowed_values": [
         {
           "label": "Building Safety Act",
@@ -82,17 +58,17 @@
           "value": "tenant-fees-act"
         }
       ],
+      "display_as_result_metadata": false,
+      "filterable": true,
+      "key": "tribunal_decision_category",
+      "name": "Category",
+      "preposition": "categorised as",
       "specialist_publisher_properties": {
         "select": "one"
-      }
+      },
+      "type": "text"
     },
     {
-      "key": "tribunal_decision_sub_category",
-      "name": "Sub-category",
-      "type": "text",
-      "preposition": "sub-categorised as",
-      "display_as_result_metadata": true,
-      "filterable": false,
       "allowed_values": [
         {
           "label": "Building Safety Act - Accountable Person",
@@ -347,27 +323,51 @@
           "value": "tenant-fees-act---recovery-of-a-prohibited-payment"
         }
       ],
+      "display_as_result_metadata": true,
+      "filterable": false,
+      "key": "tribunal_decision_sub_category",
+      "name": "Sub-category",
+      "preposition": "sub-categorised as",
       "specialist_publisher_properties": {
         "select": "one"
-      }
+      },
+      "type": "text"
     },
     {
+      "display_as_result_metadata": true,
+      "filterable": true,
       "key": "tribunal_decision_decision_date",
       "name": "Decision date",
       "short_name": "Decided",
-      "type": "date",
-      "display_as_result_metadata": true,
-      "filterable": true
+      "type": "date"
     },
     {
-      "key": "hidden_indexable_content",
-      "name": "Hidden indexable content",
-      "type": "text",
       "display_as_result_metadata": false,
       "filterable": false,
+      "key": "hidden_indexable_content",
+      "name": "Hidden indexable content",
       "specialist_publisher_properties": {
         "omit_from_finder_content_item": true
-      }
+      },
+      "type": "text"
     }
+  ],
+  "filter": {
+    "format": "residential_property_tribunal_decision"
+  },
+  "format_name": "Residential property tribunal decision",
+  "name": "Residential property tribunal decisions",
+  "organisations": [
+    "6f757605-ab8f-4b62-84e4-99f79cf085c2",
+    "bb2b028f-efaa-44fd-b3f8-971b25cb51a2"
+  ],
+  "phase": "beta",
+  "show_summaries": true,
+  "signup_content_id": "8a6239e1-76cf-41a0-9295-0ae1182080d2",
+  "subscription_list_title_prefix": "Residential property tribunal decisions",
+  "summary": "<p>Find decisions on Residential Property Tribunal cases in England from December 2018 onwards.</p><p>If the decision was about leasehold and was made before December 2018, visit <a href=\"https://decisions.lease-advice.org/\" rel=\"external\">Lease Advice</a>. Other decisions made before December 2018 can be found on <a href=\"https://www.bailii.org/recent-decisions.html\" rel=\"external\">BAILII</a></p>",
+  "target_stack": "live",
+  "taxons": [
+    "357110bb-cbc5-4708-9711-1b26e6c63e86"
   ]
 }

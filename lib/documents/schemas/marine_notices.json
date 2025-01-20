@@ -1,29 +1,11 @@
 {
-  "target_stack": "draft",
-  "content_id": "d7df3371-2f1a-4307-9aad-a2ef8fa8b9c4",
   "base_path": "/marine-notices",
-  "format_name": "Maritime and Coastguard Agency Marine Notice",
-  "name": "Maritime and Coastguard Agency Marine Notices",
+  "content_id": "d7df3371-2f1a-4307-9aad-a2ef8fa8b9c4",
   "description": "Find marine notices issued by the Marine and Coastguard Agency",
-  "filter": {
-    "format": "marine_notice"
-  },
-  "signup_content_id": "21985d9f-8c84-4fa1-915c-2807eaa37dff",
-  "organisations": [
-    "23a24aa8-1711-42b6-bf6b-47af0f230295"
-  ],
-  "subscription_list_title_prefix": "Marine notices",
-  "summary": "<p>Find marine notices issued by the Maritime and Coastguard Agency</p>",
   "document_noun": "notice",
   "document_title": "Marine Notice",
   "facets": [
     {
-      "key": "marine_notice_type",
-      "name": "Marine notice type",
-      "type": "text",
-      "preposition": "of type",
-      "display_as_result_metadata": true,
-      "filterable": true,
       "allowed_values": [
         {
           "label": "Marine Guidance Note (MGN)",
@@ -58,17 +40,17 @@
           "value": "other"
         }
       ],
-      "specialist_publisher_properties": {
-        "select": "one"
-      }
-    },
-    {
-      "key": "marine_notice_vessel_type",
-      "name": "Vessel type",
-      "type": "text",
-      "preposition": "with vessel of type",
       "display_as_result_metadata": true,
       "filterable": true,
+      "key": "marine_notice_type",
+      "name": "Marine notice type",
+      "preposition": "of type",
+      "specialist_publisher_properties": {
+        "select": "one"
+      },
+      "type": "text"
+    },
+    {
       "allowed_values": [
         {
           "label": "Pleasure vessels",
@@ -107,17 +89,17 @@
           "value": "passenger-vessels"
         }
       ],
-      "specialist_publisher_properties": {
-        "select": "multiple"
-      }
-    },
-    {
-      "key": "marine_notice_topic",
-      "name": "Topic",
-      "type": "text",
-      "preposition": "with topic of",
       "display_as_result_metadata": true,
       "filterable": true,
+      "key": "marine_notice_vessel_type",
+      "name": "Vessel type",
+      "preposition": "with vessel of type",
+      "specialist_publisher_properties": {
+        "select": "multiple"
+      },
+      "type": "text"
+    },
+    {
       "allowed_values": [
         {
           "label": "Construction and equipment",
@@ -156,18 +138,36 @@
           "value": "survey-and-inspection"
         }
       ],
+      "display_as_result_metadata": true,
+      "filterable": true,
+      "key": "marine_notice_topic",
+      "name": "Topic",
+      "preposition": "with topic of",
       "specialist_publisher_properties": {
         "select": "multiple"
-      }
+      },
+      "type": "text"
     },
     {
+      "display_as_result_metadata": true,
+      "filterable": true,
       "key": "issued_date",
       "name": "Issued",
-      "short_name": "Issued",
-      "type": "date",
       "preposition": "issued",
-      "display_as_result_metadata": true,
-      "filterable": true
+      "short_name": "Issued",
+      "type": "date"
     }
-  ]
+  ],
+  "filter": {
+    "format": "marine_notice"
+  },
+  "format_name": "Maritime and Coastguard Agency Marine Notice",
+  "name": "Maritime and Coastguard Agency Marine Notices",
+  "organisations": [
+    "23a24aa8-1711-42b6-bf6b-47af0f230295"
+  ],
+  "signup_content_id": "21985d9f-8c84-4fa1-915c-2807eaa37dff",
+  "subscription_list_title_prefix": "Marine notices",
+  "summary": "<p>Find marine notices issued by the Maritime and Coastguard Agency</p>",
+  "target_stack": "draft"
 }

@@ -1,31 +1,11 @@
 {
-  "target_stack": "live",
-  "content_id": "b8b8fb77-c5e9-41d6-b133-44ecd1958e28",
   "base_path": "/sfo-cases",
-  "format_name": "Find an SFO case",
-  "name": "Find an SFO case",
+  "content_id": "b8b8fb77-c5e9-41d6-b133-44ecd1958e28",
   "description": "Find fraud, bribery and corruption cases investigated by the SFO.",
-  "summary": "<p>This case finder includes all ongoing Serious Fraud Office (SFO) prosecutions and investigations that are in the public domain. This does not include intelligence referrals, covert investigations or proceeds of crime cases.</p><p>For updates on the SFO’s proceeds of crime recovery, see <a href=\"https://www.gov.uk/government/publications/proceeds-of-crime\">this page</a>.</p>",
-  "filter": {
-    "format": "sfo_case"
-  },
-  "related": [
-    "01007fd9-8351-4068-b90c-a9af8edaeb19"
-  ],
-  "show_summaries": true,
-  "organisations": [
-    "ebae4517-422f-44dd-9f87-13304c9815cb"
-  ],
   "document_noun": "case",
   "document_title": "SFO Case",
   "facets": [
     {
-      "key": "sfo_case_state",
-      "name": "Case state",
-      "type": "text",
-      "preposition": "with case state",
-      "display_as_result_metadata": false,
-      "filterable": true,
       "allowed_values": [
         {
           "label": "Open",
@@ -36,18 +16,38 @@
           "value": "closed"
         }
       ],
+      "display_as_result_metadata": false,
+      "filterable": true,
+      "key": "sfo_case_state",
+      "name": "Case state",
+      "preposition": "with case state",
       "specialist_publisher_properties": {
         "select": "one"
-      }
+      },
+      "type": "text"
     },
     {
+      "display_as_result_metadata": false,
+      "filterable": true,
       "key": "sfo_case_date_announced",
       "name": "Date announced",
-      "short_name": "Date announced",
-      "type": "date",
       "preposition": "announced",
-      "display_as_result_metadata": false,
-      "filterable": true
+      "short_name": "Date announced",
+      "type": "date"
     }
-  ]
+  ],
+  "filter": {
+    "format": "sfo_case"
+  },
+  "format_name": "Find an SFO case",
+  "name": "Find an SFO case",
+  "organisations": [
+    "ebae4517-422f-44dd-9f87-13304c9815cb"
+  ],
+  "related": [
+    "01007fd9-8351-4068-b90c-a9af8edaeb19"
+  ],
+  "show_summaries": true,
+  "summary": "<p>This case finder includes all ongoing Serious Fraud Office (SFO) prosecutions and investigations that are in the public domain. This does not include intelligence referrals, covert investigations or proceeds of crime cases.</p><p>For updates on the SFO’s proceeds of crime recovery, see <a href=\"https://www.gov.uk/government/publications/proceeds-of-crime\">this page</a>.</p>",
+  "target_stack": "live"
 }

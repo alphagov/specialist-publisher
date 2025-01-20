@@ -1,32 +1,15 @@
 {
-  "target_stack": "live",
-  "content_id": "a22b3f1f-2c91-49a1-a469-ff21d465c543",
   "base_path": "/product-safety-alerts-reports-recalls",
-  "format_name": "Product Safety Alerts, Reports and Recalls",
-  "name": "Product Safety Alerts, Reports and Recalls",
+  "content_id": "a22b3f1f-2c91-49a1-a469-ff21d465c543",
   "description": "Find product safety alerts, unsafe products and recalls",
-  "filter": {
-    "format": "product_safety_alert_report_recall"
-  },
-  "signup_content_id": "bb6047de-3854-4774-a5d5-fc66fed4f792",
-  "organisations": [
-    "a0ee18e7-9e1e-4ba1-aed5-f3f287dce752"
-  ],
-  "email_filter_options": {
-    "email_filter_by": "product_alert_type",
-    "downcase_email_alert_topic_names": true
-  },
   "document_noun": "report",
   "document_title": "Product Safety Alerts, Reports and Recalls",
+  "email_filter_options": {
+    "downcase_email_alert_topic_names": true,
+    "email_filter_by": "product_alert_type"
+  },
   "facets": [
     {
-      "key": "product_alert_type",
-      "name": "Alert type",
-      "short_name": "Alert type",
-      "type": "text",
-      "preposition": "of type",
-      "display_as_result_metadata": true,
-      "filterable": true,
       "allowed_values": [
         {
           "label": "Product safety alert",
@@ -41,18 +24,18 @@
           "value": "product-recall"
         }
       ],
-      "specialist_publisher_properties": {
-        "select": "one"
-      }
-    },
-    {
-      "key": "product_risk_level",
-      "name": "Risk level",
-      "short_name": "Risk level",
-      "type": "text",
-      "preposition": "that are",
       "display_as_result_metadata": true,
       "filterable": true,
+      "key": "product_alert_type",
+      "name": "Alert type",
+      "preposition": "of type",
+      "short_name": "Alert type",
+      "specialist_publisher_properties": {
+        "select": "one"
+      },
+      "type": "text"
+    },
+    {
       "allowed_values": [
         {
           "label": "Serious",
@@ -75,17 +58,18 @@
           "value": "not-provided"
         }
       ],
-      "specialist_publisher_properties": {
-        "select": "one"
-      }
-    },
-    {
-      "key": "product_category",
-      "name": "Product category",
-      "type": "text",
-      "preposition": "of type",
       "display_as_result_metadata": true,
       "filterable": true,
+      "key": "product_risk_level",
+      "name": "Risk level",
+      "preposition": "that are",
+      "short_name": "Risk level",
+      "specialist_publisher_properties": {
+        "select": "one"
+      },
+      "type": "text"
+    },
+    {
       "allowed_values": [
         {
           "label": "Adaptors, Plugs and Sockets",
@@ -216,18 +200,17 @@
           "value": "toys"
         }
       ],
-      "specialist_publisher_properties": {
-        "select": "one"
-      }
-    },
-    {
-      "key": "product_measure_type",
-      "name": "Measure type",
-      "short_name": "Measure type",
-      "type": "text",
-      "preposition": "of type",
       "display_as_result_metadata": true,
       "filterable": true,
+      "key": "product_category",
+      "name": "Product category",
+      "preposition": "of type",
+      "specialist_publisher_properties": {
+        "select": "one"
+      },
+      "type": "text"
+    },
+    {
       "allowed_values": [
         {
           "label": "Ban on the marketing of the product and any accompanying measures",
@@ -278,18 +261,35 @@
           "value": "other"
         }
       ],
+      "display_as_result_metadata": true,
+      "filterable": true,
+      "key": "product_measure_type",
+      "name": "Measure type",
+      "preposition": "of type",
+      "short_name": "Measure type",
       "specialist_publisher_properties": {
         "select": "multiple"
-      }
+      },
+      "type": "text"
     },
     {
+      "display_as_result_metadata": true,
+      "filterable": true,
       "key": "product_recall_alert_date",
       "name": "Recall/alert date",
-      "short_name": "Recall/alert date",
-      "type": "date",
       "preposition": "recalled/alerted",
-      "display_as_result_metadata": true,
-      "filterable": true
+      "short_name": "Recall/alert date",
+      "type": "date"
     }
-  ]
+  ],
+  "filter": {
+    "format": "product_safety_alert_report_recall"
+  },
+  "format_name": "Product Safety Alerts, Reports and Recalls",
+  "name": "Product Safety Alerts, Reports and Recalls",
+  "organisations": [
+    "a0ee18e7-9e1e-4ba1-aed5-f3f287dce752"
+  ],
+  "signup_content_id": "bb6047de-3854-4774-a5d5-fc66fed4f792",
+  "target_stack": "live"
 }

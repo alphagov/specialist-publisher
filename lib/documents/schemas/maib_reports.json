@@ -1,36 +1,15 @@
 {
-  "target_stack": "live",
-  "content_id": "33eb214a-9291-49d3-8789-445c1e97b586",
   "base_path": "/maib-reports",
-  "format_name": "Marine Accident Investigation Branch report",
-  "name": "Marine Accident Investigation Branch reports",
+  "content_id": "33eb214a-9291-49d3-8789-445c1e97b586",
   "description": "Find reports of MAIB investigations into marine accidents and incidents",
-  "filter": {
-    "format": "maib_report"
-  },
-  "signup_content_id": "56cb57e2-7e7f-4f67-b2f6-39c9a55385dc",
-  "show_summaries": true,
-  "organisations": [
-    "9c66b9a3-1e6a-48e8-974d-2a5635f84679"
-  ],
-  "taxons": [
-    "7a5e878e-2b0f-4c3f-9079-586590a1a194"
-  ],
-  "subscription_list_title_prefix": "Marine Accident Investigation Branch (MAIB) reports",
-  "email_filter_options": {
-    "email_filter_by": "vessel_type",
-    "downcase_email_alert_topic_names": true
-  },
   "document_noun": "report",
   "document_title": "MAIB Report",
+  "email_filter_options": {
+    "downcase_email_alert_topic_names": true,
+    "email_filter_by": "vessel_type"
+  },
   "facets": [
     {
-      "key": "vessel_type",
-      "name": "Vessel type",
-      "type": "text",
-      "preposition": "of type",
-      "display_as_result_metadata": true,
-      "filterable": true,
       "allowed_values": [
         {
           "label": "Merchant vessel 100 gross tons or over",
@@ -53,17 +32,17 @@
           "value": "recreational-craft-power"
         }
       ],
-      "specialist_publisher_properties": {
-        "select": "multiple"
-      }
-    },
-    {
-      "key": "report_type",
-      "name": "Report type",
-      "type": "text",
-      "preposition": "of type",
       "display_as_result_metadata": true,
       "filterable": true,
+      "key": "vessel_type",
+      "name": "Vessel type",
+      "preposition": "of type",
+      "specialist_publisher_properties": {
+        "select": "multiple"
+      },
+      "type": "text"
+    },
+    {
       "allowed_values": [
         {
           "label": "Investigation report",
@@ -90,18 +69,39 @@
           "value": "discontinued-investigation"
         }
       ],
+      "display_as_result_metadata": true,
+      "filterable": true,
+      "key": "report_type",
+      "name": "Report type",
+      "preposition": "of type",
       "specialist_publisher_properties": {
         "select": "one"
-      }
+      },
+      "type": "text"
     },
     {
+      "display_as_result_metadata": true,
+      "filterable": true,
       "key": "date_of_occurrence",
       "name": "Date of occurrence",
-      "short_name": "Occurred",
-      "type": "date",
       "preposition": "occurred",
-      "display_as_result_metadata": true,
-      "filterable": true
+      "short_name": "Occurred",
+      "type": "date"
     }
+  ],
+  "filter": {
+    "format": "maib_report"
+  },
+  "format_name": "Marine Accident Investigation Branch report",
+  "name": "Marine Accident Investigation Branch reports",
+  "organisations": [
+    "9c66b9a3-1e6a-48e8-974d-2a5635f84679"
+  ],
+  "show_summaries": true,
+  "signup_content_id": "56cb57e2-7e7f-4f67-b2f6-39c9a55385dc",
+  "subscription_list_title_prefix": "Marine Accident Investigation Branch (MAIB) reports",
+  "target_stack": "live",
+  "taxons": [
+    "7a5e878e-2b0f-4c3f-9079-586590a1a194"
   ]
 }

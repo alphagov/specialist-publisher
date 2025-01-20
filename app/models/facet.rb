@@ -14,15 +14,15 @@ class Facet
 
   def to_finder_schema_attributes
     {
-      key:,
-      name:,
-      short_name:,
-      type:,
-      preposition:,
+      allowed_values:,
       display_as_result_metadata:,
       filterable:,
-      allowed_values:,
+      key:,
+      name:,
+      preposition:,
       specialist_publisher_properties:,
+      short_name:,
+      type:,
     }.compact
   end
 

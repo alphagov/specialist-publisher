@@ -1,38 +1,14 @@
 {
-  "target_stack": "live",
-  "content_id": "975cf540-6e64-40e3-b62a-df655a8c99ef",
   "base_path": "/employment-appeal-tribunal-decisions",
-  "format_name": "Employment appeal tribunal decision",
-  "name": "Employment appeal tribunal decisions",
+  "content_id": "975cf540-6e64-40e3-b62a-df655a8c99ef",
   "description": "Find decisions on appeals against employment tribunals heard by the Employment Appeal Tribunal.",
-  "phase": "beta",
-  "filter": {
-    "format": "employment_appeal_tribunal_decision"
-  },
-  "show_summaries": true,
+  "document_noun": "decision",
+  "document_title": "EAT Decision",
   "editing_organisations": [
     "dcc907d6-433c-42df-9ffb-d9c68be5dc4d"
   ],
-  "organisations": [
-    "6f757605-ab8f-4b62-84e4-99f79cf085c2",
-    "caeb418c-d11c-4352-92e9-47b21289f696"
-  ],
-  "taxons": [
-    "357110bb-cbc5-4708-9711-1b26e6c63e86"
-  ],
-  "signup_content_id": "1f5911f4-417a-4380-a5a0-674ebff332df",
-  "subscription_list_title_prefix": "Employment Appeal Tribunal decisions",
-  "summary": "<p>Find decisions on appeals against employment tribunals heard by the Employment Appeal Tribunal.</p><p>Includes decisions after December 2015. Find details of <a rel=\"external\" href=\"http://www.employmentappeals.gov.uk/Public/Search.aspx\">older cases.</a></p>",
-  "document_noun": "decision",
-  "document_title": "EAT Decision",
   "facets": [
     {
-      "key": "tribunal_decision_categories",
-      "name": "Category",
-      "type": "text",
-      "preposition": "categorised as",
-      "display_as_result_metadata": false,
-      "filterable": true,
       "allowed_values": [
         {
           "label": "Age Discrimination",
@@ -215,17 +191,17 @@
           "value": "working-time-regulations"
         }
       ],
-      "specialist_publisher_properties": {
-        "select": "multiple"
-      }
-    },
-    {
-      "key": "tribunal_decision_sub_categories",
-      "name": "Sub-category",
-      "type": "text",
-      "preposition": "sub-categorised as",
       "display_as_result_metadata": false,
       "filterable": true,
+      "key": "tribunal_decision_categories",
+      "name": "Category",
+      "preposition": "categorised as",
+      "specialist_publisher_properties": {
+        "select": "multiple"
+      },
+      "type": "text"
+    },
+    {
       "allowed_values": [
         {
           "label": "Contract of Employment - Apprenticeship",
@@ -1016,16 +992,17 @@
           "value": "working-time-regulations-worker"
         }
       ],
+      "display_as_result_metadata": false,
+      "filterable": true,
+      "key": "tribunal_decision_sub_categories",
+      "name": "Sub-category",
+      "preposition": "sub-categorised as",
       "specialist_publisher_properties": {
         "select": "multiple"
-      }
+      },
+      "type": "text"
     },
     {
-      "key": "tribunal_decision_landmark",
-      "name": "Landmark",
-      "type": "text",
-      "display_as_result_metadata": false,
-      "filterable": false,
       "allowed_values": [
         {
           "label": "Landmark",
@@ -1036,27 +1013,50 @@
           "value": "not-landmark"
         }
       ],
+      "display_as_result_metadata": false,
+      "filterable": false,
+      "key": "tribunal_decision_landmark",
+      "name": "Landmark",
       "specialist_publisher_properties": {
         "select": "one"
-      }
+      },
+      "type": "text"
     },
     {
+      "display_as_result_metadata": true,
+      "filterable": true,
       "key": "tribunal_decision_decision_date",
       "name": "Decision date",
       "short_name": "Decided",
-      "type": "date",
-      "display_as_result_metadata": true,
-      "filterable": true
+      "type": "date"
     },
     {
-      "key": "hidden_indexable_content",
-      "name": "Hidden indexable content",
-      "type": "text",
       "display_as_result_metadata": false,
       "filterable": false,
+      "key": "hidden_indexable_content",
+      "name": "Hidden indexable content",
       "specialist_publisher_properties": {
         "omit_from_finder_content_item": true
-      }
+      },
+      "type": "text"
     }
+  ],
+  "filter": {
+    "format": "employment_appeal_tribunal_decision"
+  },
+  "format_name": "Employment appeal tribunal decision",
+  "name": "Employment appeal tribunal decisions",
+  "organisations": [
+    "6f757605-ab8f-4b62-84e4-99f79cf085c2",
+    "caeb418c-d11c-4352-92e9-47b21289f696"
+  ],
+  "phase": "beta",
+  "show_summaries": true,
+  "signup_content_id": "1f5911f4-417a-4380-a5a0-674ebff332df",
+  "subscription_list_title_prefix": "Employment Appeal Tribunal decisions",
+  "summary": "<p>Find decisions on appeals against employment tribunals heard by the Employment Appeal Tribunal.</p><p>Includes decisions after December 2015. Find details of <a rel=\"external\" href=\"http://www.employmentappeals.gov.uk/Public/Search.aspx\">older cases.</a></p>",
+  "target_stack": "live",
+  "taxons": [
+    "357110bb-cbc5-4708-9711-1b26e6c63e86"
   ]
 }

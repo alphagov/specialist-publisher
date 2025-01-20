@@ -1,34 +1,10 @@
 {
-  "target_stack": "live",
-  "content_id": "fef4ac7c-024a-4943-9f19-e85a8369a1f3",
   "base_path": "/cma-cases",
-  "format_name": "Competition and Markets Authority case",
-  "name": "Competition and Markets Authority cases and projects",
+  "content_id": "fef4ac7c-024a-4943-9f19-e85a8369a1f3",
   "description": "This case finder includes cases and projects from the Competition and Markets Authority (CMA), Office for the Internal Market (OIM) and Subsidy Advice Unit (SAU)",
-  "summary": "<p>This case finder includes cases and projects from the Competition and Markets Authority (CMA), Office for the Internal Market (OIM) and Subsidy Advice Unit (SAU).<p>",
-  "filter": {
-    "format": "cma_case"
-  },
-  "related": [
-    "46708567-70a6-4f20-8257-6c222b3d8cb3"
-  ],
-  "signup_content_id": "43dd2b13-93ec-4ca6-a7a4-e2eb5f5d485a",
-  "organisations": [
-    "957eb4ec-089b-4f71-ba2a-dc69ac8919ea"
-  ],
-  "taxons": [
-    "8db04387-9076-4287-ab46-6a6695b593d7"
-  ],
-  "topics": [
-    "competition/competition-act-cartels",
-    "competition/consumer-protection",
-    "competition/markets",
-    "competition/mergers",
-    "competition/regulatory-appeals-references"
-  ],
-  "subscription_list_title_prefix": "CMA cases",
+  "document_noun": "case",
+  "document_title": "CMA Case",
   "email_filter_options": {
-    "email_filter_by": "case_type",
     "downcase_email_alert_topic_names": true,
     "email_alert_topic_name_overrides": {
       "case_type": [
@@ -37,18 +13,11 @@
           "topic_name_override": "CA98 and civil cartels"
         }
       ]
-    }
+    },
+    "email_filter_by": "case_type"
   },
-  "document_noun": "case",
-  "document_title": "CMA Case",
   "facets": [
     {
-      "key": "case_type",
-      "name": "Case type",
-      "type": "text",
-      "preposition": "of type",
-      "display_as_result_metadata": true,
-      "filterable": true,
       "allowed_values": [
         {
           "label": "CA98 and civil cartels",
@@ -99,17 +68,17 @@
           "value": "sau-referral"
         }
       ],
-      "specialist_publisher_properties": {
-        "select": "one"
-      }
-    },
-    {
-      "key": "case_state",
-      "name": "Case state",
-      "type": "text",
-      "preposition": "which are",
       "display_as_result_metadata": true,
       "filterable": true,
+      "key": "case_type",
+      "name": "Case type",
+      "preposition": "of type",
+      "specialist_publisher_properties": {
+        "select": "one"
+      },
+      "type": "text"
+    },
+    {
       "allowed_values": [
         {
           "label": "Open",
@@ -120,17 +89,17 @@
           "value": "closed"
         }
       ],
-      "specialist_publisher_properties": {
-        "select": "one"
-      }
-    },
-    {
-      "key": "market_sector",
-      "name": "Market sector",
-      "type": "text",
-      "preposition": "about",
       "display_as_result_metadata": true,
       "filterable": true,
+      "key": "case_state",
+      "name": "Case state",
+      "preposition": "which are",
+      "specialist_publisher_properties": {
+        "select": "one"
+      },
+      "type": "text"
+    },
+    {
       "allowed_values": [
         {
           "label": "Aerospace",
@@ -257,17 +226,17 @@
           "value": "utilities"
         }
       ],
-      "specialist_publisher_properties": {
-        "select": "multiple"
-      }
-    },
-    {
-      "key": "outcome_type",
-      "name": "Outcome",
-      "type": "text",
-      "preposition": "with outcome",
       "display_as_result_metadata": true,
       "filterable": true,
+      "key": "market_sector",
+      "name": "Market sector",
+      "preposition": "about",
+      "specialist_publisher_properties": {
+        "select": "multiple"
+      },
+      "type": "text"
+    },
+    {
       "allowed_values": [
         {
           "label": "CA98 - no grounds for action",
@@ -394,26 +363,57 @@
           "value": "regulatory-references-and-appeals-final-determination"
         }
       ],
+      "display_as_result_metadata": true,
+      "filterable": true,
+      "key": "outcome_type",
+      "name": "Outcome",
+      "preposition": "with outcome",
       "specialist_publisher_properties": {
         "select": "one"
-      }
+      },
+      "type": "text"
     },
     {
+      "display_as_result_metadata": true,
+      "filterable": true,
       "key": "opened_date",
       "name": "Opened",
       "short_name": "Opened",
-      "type": "date",
-      "display_as_result_metadata": true,
-      "filterable": true
+      "type": "date"
     },
     {
+      "display_as_result_metadata": true,
+      "filterable": true,
       "key": "closed_date",
       "name": "Closed",
-      "short_name": "Closed",
-      "type": "date",
       "preposition": "closed",
-      "display_as_result_metadata": true,
-      "filterable": true
+      "short_name": "Closed",
+      "type": "date"
     }
+  ],
+  "filter": {
+    "format": "cma_case"
+  },
+  "format_name": "Competition and Markets Authority case",
+  "name": "Competition and Markets Authority cases and projects",
+  "organisations": [
+    "957eb4ec-089b-4f71-ba2a-dc69ac8919ea"
+  ],
+  "related": [
+    "46708567-70a6-4f20-8257-6c222b3d8cb3"
+  ],
+  "signup_content_id": "43dd2b13-93ec-4ca6-a7a4-e2eb5f5d485a",
+  "subscription_list_title_prefix": "CMA cases",
+  "summary": "<p>This case finder includes cases and projects from the Competition and Markets Authority (CMA), Office for the Internal Market (OIM) and Subsidy Advice Unit (SAU).<p>",
+  "target_stack": "live",
+  "taxons": [
+    "8db04387-9076-4287-ab46-6a6695b593d7"
+  ],
+  "topics": [
+    "competition/competition-act-cartels",
+    "competition/consumer-protection",
+    "competition/markets",
+    "competition/mergers",
+    "competition/regulatory-appeals-references"
   ]
 }

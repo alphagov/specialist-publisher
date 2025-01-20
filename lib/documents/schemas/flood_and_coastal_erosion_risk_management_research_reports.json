@@ -1,32 +1,15 @@
 {
-  "target_stack": "live",
-  "content_id": "a37f6a22-af8a-465a-89df-de5a5b40b6d0",
   "base_path": "/flood-and-coastal-erosion-risk-management-research-reports",
-  "format_name": "Flood and Coastal Erosion Risk Management (FCERM) research report",
-  "name": "Flood and Coastal Erosion Risk Management (FCERM) research reports",
+  "content_id": "a37f6a22-af8a-465a-89df-de5a5b40b6d0",
   "description": "Find Flood and Coastal Erosion Risk Management (FCERM) research reports",
-  "filter": {
-    "format": "flood_and_coastal_erosion_risk_management_research_report"
-  },
-  "organisations": [
-    "6fc7e0f4-1322-4469-af66-abec10c26883"
-  ],
   "document_noun": "research report",
   "document_title": "Flood and Coastal Erosion Risk Management Research Report",
-  "signup_content_id": "0b3468bb-ccbe-4c97-9d94-870ae02e977d",
-  "subscription_list_title_prefix": "Flood and Coastal Erosion Risk Management research reports",
   "email_filter_options": {
-    "email_filter_by": "flood_and_coastal_erosion_category",
-    "downcase_email_alert_topic_names": true
+    "downcase_email_alert_topic_names": true,
+    "email_filter_by": "flood_and_coastal_erosion_category"
   },
   "facets": [
     {
-      "key": "flood_and_coastal_erosion_category",
-      "name": "Category",
-      "type": "text",
-      "preposition": "with category",
-      "display_as_result_metadata": true,
-      "filterable": true,
       "allowed_values": [
         {
           "label": "Environmental management and sustainability",
@@ -53,17 +36,17 @@
           "value": "whole-life-asset-management"
         }
       ],
-      "specialist_publisher_properties": {
-        "select": "one"
-      }
-    },
-    {
-      "key": "topics",
-      "name": "Topics",
-      "type": "text",
-      "preposition": "with topics",
       "display_as_result_metadata": true,
       "filterable": true,
+      "key": "flood_and_coastal_erosion_category",
+      "name": "Category",
+      "preposition": "with category",
+      "specialist_publisher_properties": {
+        "select": "one"
+      },
+      "type": "text"
+    },
+    {
       "allowed_values": [
         {
           "label": "Adaptation",
@@ -294,17 +277,17 @@
           "value": "whole-life-costs"
         }
       ],
-      "specialist_publisher_properties": {
-        "select": "multiple"
-      }
-    },
-    {
-      "key": "project_status",
-      "name": "Project status",
-      "type": "text",
-      "preposition": "with project status",
       "display_as_result_metadata": true,
       "filterable": true,
+      "key": "topics",
+      "name": "Topics",
+      "preposition": "with topics",
+      "specialist_publisher_properties": {
+        "select": "multiple"
+      },
+      "type": "text"
+    },
+    {
       "allowed_values": [
         {
           "label": "Completed",
@@ -315,30 +298,47 @@
           "value": "ongoing"
         }
       ],
+      "display_as_result_metadata": true,
+      "filterable": true,
+      "key": "project_status",
+      "name": "Project status",
+      "preposition": "with project status",
       "specialist_publisher_properties": {
         "select": "one"
-      }
+      },
+      "type": "text"
     },
     {
+      "display_as_result_metadata": true,
+      "filterable": false,
       "key": "project_code",
       "name": "Project code",
-      "type": "text",
-      "display_as_result_metadata": true,
-      "filterable": false
+      "type": "text"
     },
     {
+      "display_as_result_metadata": true,
+      "filterable": false,
       "key": "date_of_start",
       "name": "Date of start",
-      "type": "date",
-      "display_as_result_metadata": true,
-      "filterable": false
+      "type": "date"
     },
     {
+      "display_as_result_metadata": true,
+      "filterable": true,
       "key": "date_of_completion",
       "name": "Date of completion",
-      "type": "date",
-      "display_as_result_metadata": true,
-      "filterable": true
+      "type": "date"
     }
-  ]
+  ],
+  "filter": {
+    "format": "flood_and_coastal_erosion_risk_management_research_report"
+  },
+  "format_name": "Flood and Coastal Erosion Risk Management (FCERM) research report",
+  "name": "Flood and Coastal Erosion Risk Management (FCERM) research reports",
+  "organisations": [
+    "6fc7e0f4-1322-4469-af66-abec10c26883"
+  ],
+  "signup_content_id": "0b3468bb-ccbe-4c97-9d94-870ae02e977d",
+  "subscription_list_title_prefix": "Flood and Coastal Erosion Risk Management research reports",
+  "target_stack": "live"
 }

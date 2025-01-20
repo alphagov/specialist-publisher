@@ -1,28 +1,11 @@
 {
-  "target_stack": "live",
-  "content_id": "380def5e-bed2-4501-967e-334767ac270d",
   "base_path": "/find-digital-market-research",
-  "format_name": "Digital Regulation Cooperation Forum digital markets research",
-  "name": "Digital Regulation Cooperation Forum digital markets research",
+  "content_id": "380def5e-bed2-4501-967e-334767ac270d",
   "description": "DRCF digital markets research finder",
-  "filter": {
-    "format": "drcf_digital_markets_research"
-  },
-  "organisations": [
-    "957eb4ec-089b-4f71-ba2a-dc69ac8919ea"
-  ],
-  "summary": "<p>Find research about digital markets and regulation carried out by public authorities, curated by the <a href=\"government/collections/the-digital-regulation-cooperation-forum\"> Digital Regulation Cooperation Forum (DRCF)</a></p>",
   "document_noun": "report",
   "document_title": "DRCF digital markets research",
   "facets": [
     {
-      "key": "digital_market_research_category",
-      "name": "Category",
-      "short_name": "Category",
-      "type": "text",
-      "preposition": "",
-      "display_as_result_metadata": true,
-      "filterable": true,
       "allowed_values": [
         {
           "label": "Ad hoc research",
@@ -33,18 +16,18 @@
           "value": "ongoing-research"
         }
       ],
-      "specialist_publisher_properties": {
-        "select": "one"
-      }
-    },
-    {
-      "key": "digital_market_research_publisher",
-      "name": "Original publisher",
-      "short_name": "Publisher",
-      "type": "text",
-      "preposition": "",
       "display_as_result_metadata": true,
       "filterable": true,
+      "key": "digital_market_research_category",
+      "name": "Category",
+      "preposition": "",
+      "short_name": "Category",
+      "specialist_publisher_properties": {
+        "select": "one"
+      },
+      "type": "text"
+    },
+    {
       "allowed_values": [
         {
           "label": "Advertising Standards Authority",
@@ -91,18 +74,18 @@
           "value": "ofcom"
         }
       ],
-      "specialist_publisher_properties": {
-        "select": "multiple"
-      }
-    },
-    {
-      "key": "digital_market_research_area",
-      "name": "Research area",
-      "short_name": "Research area",
-      "type": "text",
-      "preposition": "",
       "display_as_result_metadata": true,
       "filterable": true,
+      "key": "digital_market_research_publisher",
+      "name": "Original publisher",
+      "preposition": "",
+      "short_name": "Publisher",
+      "specialist_publisher_properties": {
+        "select": "multiple"
+      },
+      "type": "text"
+    },
+    {
       "allowed_values": [
         {
           "label": "Advertising and marketing",
@@ -129,18 +112,18 @@
           "value": "technology"
         }
       ],
-      "specialist_publisher_properties": {
-        "select": "multiple"
-      }
-    },
-    {
-      "key": "digital_market_research_topic",
-      "name": "Research topic",
-      "short_name": "Research topic",
-      "type": "text",
-      "preposition": "",
       "display_as_result_metadata": true,
       "filterable": true,
+      "key": "digital_market_research_area",
+      "name": "Research area",
+      "preposition": "",
+      "short_name": "Research area",
+      "specialist_publisher_properties": {
+        "select": "multiple"
+      },
+      "type": "text"
+    },
+    {
       "allowed_values": [
         {
           "label": "Adtech",
@@ -287,18 +270,35 @@
           "value": "tv-video-and-on-demand"
         }
       ],
+      "display_as_result_metadata": true,
+      "filterable": true,
+      "key": "digital_market_research_topic",
+      "name": "Research topic",
+      "preposition": "",
+      "short_name": "Research topic",
       "specialist_publisher_properties": {
         "select": "multiple"
-      }
+      },
+      "type": "text"
     },
     {
+      "display_as_result_metadata": true,
+      "filterable": true,
       "key": "digital_market_research_publish_date",
       "name": "Research publish date",
-      "short_name": "Research published",
-      "type": "date",
       "preposition": "research published",
-      "display_as_result_metadata": true,
-      "filterable": true
+      "short_name": "Research published",
+      "type": "date"
     }
-  ]
+  ],
+  "filter": {
+    "format": "drcf_digital_markets_research"
+  },
+  "format_name": "Digital Regulation Cooperation Forum digital markets research",
+  "name": "Digital Regulation Cooperation Forum digital markets research",
+  "organisations": [
+    "957eb4ec-089b-4f71-ba2a-dc69ac8919ea"
+  ],
+  "summary": "<p>Find research about digital markets and regulation carried out by public authorities, curated by the <a href=\"government/collections/the-digital-regulation-cooperation-forum\"> Digital Regulation Cooperation Forum (DRCF)</a></p>",
+  "target_stack": "live"
 }

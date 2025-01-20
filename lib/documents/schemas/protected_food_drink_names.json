@@ -1,37 +1,18 @@
 {
-  "target_stack": "live",
-  "content_id": "9018138a-0ca5-4a35-8b7c-3a7f39dc56f8",
   "base_path": "/protected-food-drink-names",
-  "format_name": "Protected geographical food and drink name",
-  "name": "Protected geographical food and drink names",
+  "content_id": "9018138a-0ca5-4a35-8b7c-3a7f39dc56f8",
   "description": "Find protected food and drink names in the official GB registers published by Defra.",
-  "filter": {
-    "format": "protected_food_drink_name"
-  },
-  "show_summaries": true,
-  "signup_content_id": "cff7449e-4181-480f-93e4-91fecfb4c774",
-  "organisations": [
-    "de4e9dc6-cca4-43af-a594-682023b84d6c"
-  ],
-  "subscription_list_title_prefix": "Protected geographical food and drink names",
-  "summary": "<p>Find protected food and drink names in the official GB registers published by Defra. Find out more about the <a href=\"https://www.gov.uk/guidance/protected-geographical-food-and-drink-names-uk-gi-schemes\">UK’s protected food and drinks schemes</a>.</p>",
   "document_noun": "name",
   "document_title": "Protected Geographical Food and Drink Name",
   "facets": [
     {
+      "display_as_result_metadata": true,
+      "filterable": false,
       "key": "registered_name",
       "name": "Registered name",
-      "type": "text",
-      "display_as_result_metadata": true,
-      "filterable": false
+      "type": "text"
     },
     {
-      "key": "register",
-      "name": "Register",
-      "type": "text",
-      "preposition": "register type",
-      "display_as_result_metadata": false,
-      "filterable": true,
       "allowed_values": [
         {
           "label": "Foods: designated origin and geographical indication",
@@ -62,17 +43,17 @@
           "value": "american-viticultural-areas"
         }
       ],
+      "display_as_result_metadata": false,
+      "filterable": true,
+      "key": "register",
+      "name": "Register",
+      "preposition": "register type",
       "specialist_publisher_properties": {
         "select": "one"
-      }
+      },
+      "type": "text"
     },
     {
-      "key": "status",
-      "name": "Status",
-      "type": "text",
-      "preposition": "status",
-      "display_as_result_metadata": true,
-      "filterable": true,
       "allowed_values": [
         {
           "label": "Registered",
@@ -95,18 +76,17 @@
           "value": "cancelled"
         }
       ],
+      "display_as_result_metadata": true,
+      "filterable": true,
+      "key": "status",
+      "name": "Status",
+      "preposition": "status",
       "specialist_publisher_properties": {
         "select": "one"
-      }
+      },
+      "type": "text"
     },
     {
-      "key": "class_category",
-      "name": "Class or category of product",
-      "short_name": "Class or category",
-      "type": "text",
-      "preposition": "class or category",
-      "display_as_result_metadata": false,
-      "filterable": true,
       "allowed_values": [
         {
           "label": "No class or category",
@@ -473,17 +453,18 @@
           "value": "spirit-drink"
         }
       ],
-      "specialist_publisher_properties": {
-        "select": "multiple"
-      }
-    },
-    {
-      "key": "protection_type",
-      "name": "Protection type",
-      "type": "text",
-      "preposition": "protection type",
       "display_as_result_metadata": false,
       "filterable": true,
+      "key": "class_category",
+      "name": "Class or category of product",
+      "preposition": "class or category",
+      "short_name": "Class or category",
+      "specialist_publisher_properties": {
+        "select": "multiple"
+      },
+      "type": "text"
+    },
+    {
       "allowed_values": [
         {
           "label": "Protected Geographical Indication (PGI)",
@@ -514,17 +495,17 @@
           "value": "american-viticultural-area"
         }
       ],
+      "display_as_result_metadata": false,
+      "filterable": true,
+      "key": "protection_type",
+      "name": "Protection type",
+      "preposition": "protection type",
       "specialist_publisher_properties": {
         "select": "one"
-      }
+      },
+      "type": "text"
     },
     {
-      "key": "country_of_origin",
-      "name": "Country of origin",
-      "type": "text",
-      "preposition": "country of origin",
-      "display_as_result_metadata": true,
-      "filterable": true,
       "allowed_values": [
         {
           "label": "United Kingdom",
@@ -815,17 +796,17 @@
           "value": "vietnam"
         }
       ],
+      "display_as_result_metadata": true,
+      "filterable": true,
+      "key": "country_of_origin",
+      "name": "Country of origin",
+      "preposition": "country of origin",
       "specialist_publisher_properties": {
         "select": "multiple"
-      }
+      },
+      "type": "text"
     },
     {
-      "key": "traditional_term_grapevine_product_category",
-      "name": "Traditional term grapevine product category",
-      "short_name": "Grapevine product category",
-      "type": "text",
-      "display_as_result_metadata": false,
-      "filterable": false,
       "allowed_values": [
         {
           "label": "Wine",
@@ -896,16 +877,17 @@
           "value": "wine-vinegar"
         }
       ],
-      "specialist_publisher_properties": {
-        "select": "multiple"
-      }
-    },
-    {
-      "key": "traditional_term_type",
-      "name": "Traditional term type",
-      "type": "text",
       "display_as_result_metadata": false,
       "filterable": false,
+      "key": "traditional_term_grapevine_product_category",
+      "name": "Traditional term grapevine product category",
+      "short_name": "Grapevine product category",
+      "specialist_publisher_properties": {
+        "select": "multiple"
+      },
+      "type": "text"
+    },
+    {
       "allowed_values": [
         {
           "label": "Description of product characteristic",
@@ -916,16 +898,16 @@
           "value": "in-place-of-pdo-pgi"
         }
       ],
-      "specialist_publisher_properties": {
-        "select": "one"
-      }
-    },
-    {
-      "key": "traditional_term_language",
-      "name": "Traditional term language",
-      "type": "text",
       "display_as_result_metadata": false,
       "filterable": false,
+      "key": "traditional_term_type",
+      "name": "Traditional term type",
+      "specialist_publisher_properties": {
+        "select": "one"
+      },
+      "type": "text"
+    },
+    {
       "allowed_values": [
         {
           "label": "Bulgarian",
@@ -1028,44 +1010,44 @@
           "value": "swedish"
         }
       ],
-      "specialist_publisher_properties": {
-        "select": "one"
-      }
-    },
-    {
-      "key": "date_application",
-      "name": "Date of application",
-      "type": "date",
-      "display_as_result_metadata": false,
-      "filterable": false
-    },
-    {
-      "key": "date_registration",
-      "name": "Date of registration (UK scheme)",
-      "type": "date",
-      "display_as_result_metadata": true,
-      "filterable": false
-    },
-    {
-      "key": "time_registration",
-      "name": "Time of registration (UK scheme)",
-      "type": "text",
-      "display_as_result_metadata": true,
-      "filterable": false
-    },
-    {
-      "key": "date_registration_eu",
-      "name": "Date of original registration with the EU",
-      "type": "date",
-      "display_as_result_metadata": false,
-      "filterable": false
-    },
-    {
-      "key": "reason_for_protection",
-      "name": "Reason for protection",
-      "type": "text",
       "display_as_result_metadata": false,
       "filterable": false,
+      "key": "traditional_term_language",
+      "name": "Traditional term language",
+      "specialist_publisher_properties": {
+        "select": "one"
+      },
+      "type": "text"
+    },
+    {
+      "display_as_result_metadata": false,
+      "filterable": false,
+      "key": "date_application",
+      "name": "Date of application",
+      "type": "date"
+    },
+    {
+      "display_as_result_metadata": true,
+      "filterable": false,
+      "key": "date_registration",
+      "name": "Date of registration (UK scheme)",
+      "type": "date"
+    },
+    {
+      "display_as_result_metadata": true,
+      "filterable": false,
+      "key": "time_registration",
+      "name": "Time of registration (UK scheme)",
+      "type": "text"
+    },
+    {
+      "display_as_result_metadata": false,
+      "filterable": false,
+      "key": "date_registration_eu",
+      "name": "Date of original registration with the EU",
+      "type": "date"
+    },
+    {
       "allowed_values": [
         {
           "label": "UK geographical indication from before 2021",
@@ -1084,16 +1066,34 @@
           "value": "uk-gi-after-2021"
         }
       ],
+      "display_as_result_metadata": false,
+      "filterable": false,
+      "key": "reason_for_protection",
+      "name": "Reason for protection",
       "specialist_publisher_properties": {
         "select": "one"
-      }
+      },
+      "type": "text"
     },
     {
+      "display_as_result_metadata": false,
+      "filterable": false,
       "key": "internal_notes",
       "name": "Internal notes",
-      "type": "text",
-      "display_as_result_metadata": false,
-      "filterable": false
+      "type": "text"
     }
-  ]
+  ],
+  "filter": {
+    "format": "protected_food_drink_name"
+  },
+  "format_name": "Protected geographical food and drink name",
+  "name": "Protected geographical food and drink names",
+  "organisations": [
+    "de4e9dc6-cca4-43af-a594-682023b84d6c"
+  ],
+  "show_summaries": true,
+  "signup_content_id": "cff7449e-4181-480f-93e4-91fecfb4c774",
+  "subscription_list_title_prefix": "Protected geographical food and drink names",
+  "summary": "<p>Find protected food and drink names in the official GB registers published by Defra. Find out more about the <a href=\"https://www.gov.uk/guidance/protected-geographical-food-and-drink-names-uk-gi-schemes\">UK’s protected food and drinks schemes</a>.</p>",
+  "target_stack": "live"
 }

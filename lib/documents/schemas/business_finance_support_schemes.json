@@ -1,37 +1,12 @@
 {
-  "target_stack": "live",
-  "content_id": "12fecc5b-c02a-405e-b96e-7aa32ceaf504",
   "base_path": "/business-finance-support",
-  "format_name": "Business finance support scheme",
-  "name": "Finance and support for your business",
+  "content_id": "12fecc5b-c02a-405e-b96e-7aa32ceaf504",
+  "default_order": "title",
   "description": "Find government-backed support and finance for business",
-  "filter": {
-    "format": "business_finance_support_scheme"
-  },
-  "show_summaries": true,
-  "signup_content_id": "32e87f32-8e37-4186-bc0c-fbed4c0f0239",
-  "organisations": [
-    "aa750cdf-7925-429d-a2b3-0d9fa47d2c48"
-  ],
-  "taxons": [
-    "ccfc50f5-e193-4dac-9d78-50b3a8bb24c5"
-  ],
-  "related": [
-    "3d582854-ffc7-4d41-9266-ee87b9e6d230",
-    "89edffd2-3046-40bd-810c-cc1a13c05b6a"
-  ],
-  "subscription_list_title_prefix": "Business finance support schemes",
   "document_noun": "scheme",
   "document_title": "Business Finance Support Scheme",
-  "default_order": "title",
   "facets": [
     {
-      "key": "types_of_support",
-      "name": "Type of support",
-      "type": "text",
-      "preposition": "of type",
-      "display_as_result_metadata": false,
-      "filterable": true,
       "allowed_values": [
         {
           "label": "Finance",
@@ -58,17 +33,17 @@
           "value": "recognition-award"
         }
       ],
-      "specialist_publisher_properties": {
-        "select": "multiple"
-      }
-    },
-    {
-      "key": "business_stages",
-      "name": "Business stage",
-      "type": "text",
-      "preposition": "for businesses which are",
       "display_as_result_metadata": false,
       "filterable": true,
+      "key": "types_of_support",
+      "name": "Type of support",
+      "preposition": "of type",
+      "specialist_publisher_properties": {
+        "select": "multiple"
+      },
+      "type": "text"
+    },
+    {
       "allowed_values": [
         {
           "label": "Not yet trading",
@@ -83,17 +58,17 @@
           "value": "established"
         }
       ],
-      "specialist_publisher_properties": {
-        "select": "multiple"
-      }
-    },
-    {
-      "key": "industries",
-      "name": "Industry",
-      "type": "text",
-      "preposition": "for businesses in",
       "display_as_result_metadata": false,
       "filterable": true,
+      "key": "business_stages",
+      "name": "Business stage",
+      "preposition": "for businesses which are",
+      "specialist_publisher_properties": {
+        "select": "multiple"
+      },
+      "type": "text"
+    },
+    {
       "allowed_values": [
         {
           "label": "Agriculture and food",
@@ -164,17 +139,17 @@
           "value": "wholesale-and-retail"
         }
       ],
-      "specialist_publisher_properties": {
-        "select": "multiple"
-      }
-    },
-    {
-      "key": "business_sizes",
-      "name": "Number of employees",
-      "type": "text",
-      "preposition": "for businesses with",
       "display_as_result_metadata": false,
       "filterable": true,
+      "key": "industries",
+      "name": "Industry",
+      "preposition": "for businesses in",
+      "specialist_publisher_properties": {
+        "select": "multiple"
+      },
+      "type": "text"
+    },
+    {
       "allowed_values": [
         {
           "label": "0 to 9 employees",
@@ -193,17 +168,17 @@
           "value": "over-500"
         }
       ],
-      "specialist_publisher_properties": {
-        "select": "multiple"
-      }
-    },
-    {
-      "key": "regions",
-      "name": "Region",
-      "type": "text",
-      "preposition": "for businesses in",
       "display_as_result_metadata": false,
       "filterable": true,
+      "key": "business_sizes",
+      "name": "Number of employees",
+      "preposition": "for businesses with",
+      "specialist_publisher_properties": {
+        "select": "multiple"
+      },
+      "type": "text"
+    },
+    {
       "allowed_values": [
         {
           "label": "East Midlands",
@@ -254,9 +229,34 @@
           "value": "yorkshire-and-the-humber"
         }
       ],
+      "display_as_result_metadata": false,
+      "filterable": true,
+      "key": "regions",
+      "name": "Region",
+      "preposition": "for businesses in",
       "specialist_publisher_properties": {
         "select": "multiple"
-      }
+      },
+      "type": "text"
     }
+  ],
+  "filter": {
+    "format": "business_finance_support_scheme"
+  },
+  "format_name": "Business finance support scheme",
+  "name": "Finance and support for your business",
+  "organisations": [
+    "aa750cdf-7925-429d-a2b3-0d9fa47d2c48"
+  ],
+  "related": [
+    "3d582854-ffc7-4d41-9266-ee87b9e6d230",
+    "89edffd2-3046-40bd-810c-cc1a13c05b6a"
+  ],
+  "show_summaries": true,
+  "signup_content_id": "32e87f32-8e37-4186-bc0c-fbed4c0f0239",
+  "subscription_list_title_prefix": "Business finance support schemes",
+  "target_stack": "live",
+  "taxons": [
+    "ccfc50f5-e193-4dac-9d78-50b3a8bb24c5"
   ]
 }

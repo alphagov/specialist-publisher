@@ -1,32 +1,13 @@
 {
-  "target_stack": "live",
-  "content_id": "1b5e08c8-ddde-4637-9375-f79e085ba6d5",
   "base_path": "/employment-tribunal-decisions",
-  "format_name": "Employment tribunal decision",
-  "name": "Employment tribunal decisions",
+  "content_id": "1b5e08c8-ddde-4637-9375-f79e085ba6d5",
   "description": "Find decisions on Employment Tribunal cases in England, Wales and Scotland.",
-  "phase": "beta",
-  "filter": {
-    "format": "employment_tribunal_decision"
-  },
-  "show_summaries": true,
+  "document_noun": "decision",
+  "document_title": "ET Decision",
   "editing_organisations": [
     "dcc907d6-433c-42df-9ffb-d9c68be5dc4d"
   ],
-  "organisations": [
-    "6f757605-ab8f-4b62-84e4-99f79cf085c2",
-    "8bb37087-a5a7-4493-8afe-900b36ebc927"
-  ],
-  "taxons": [
-    "357110bb-cbc5-4708-9711-1b26e6c63e86"
-  ],
-  "signup_content_id": "6d7ace06-f437-4fb3-b948-8534ff34540f",
-  "subscription_list_title_prefix": "Employment tribunal decisions",
-  "summary": "<p>Find decisions on Employment Tribunal cases in England, Wales and Scotland from February 2017 onwards.</p><p>For enquiries about Employment Tribunal judgments in England and Wales prior to February 2017 contact <a href='https://www.find-court-tribunal.service.gov.uk/courts/bury-st-edmunds-county-court-and-family-court'>Bury St Edmunds County Court</a>. Please note that we are currently experiencing technical difficulties with the system used to search for judgments. Unfortunately, we are unable to confirm when this issue will be resolved and there may be a delay to you receiving the judgment you have requested.</p><p>If the decision was made before February 2017 in Scotland, contact <a href='https://www.find-court-tribunal.service.gov.uk/courts/glasgow-tribunals-centre'>Glasgow Tribunals Centre</a>.</p><p>Decisions are not affected by GDPR rules and cannot be removed from GOV.UK.</p>",
-  "document_noun": "decision",
-  "document_title": "ET Decision",
   "email_filter_options": {
-    "email_filter_by": "tribunal_decision_categories",
     "downcase_email_alert_topic_names": true,
     "email_alert_topic_name_overrides": {
       "tribunal_decision_categories": [
@@ -39,16 +20,11 @@
           "topic_name_override": "renumeration"
         }
       ]
-    }
+    },
+    "email_filter_by": "tribunal_decision_categories"
   },
   "facets": [
     {
-      "key": "tribunal_decision_country",
-      "name": "Country",
-      "type": "text",
-      "preposition": "by country",
-      "display_as_result_metadata": false,
-      "filterable": true,
       "allowed_values": [
         {
           "label": "England and Wales",
@@ -59,17 +35,17 @@
           "value": "scotland"
         }
       ],
-      "specialist_publisher_properties": {
-        "select": "one"
-      }
-    },
-    {
-      "key": "tribunal_decision_categories",
-      "name": "Jurisdiction code",
-      "type": "text",
-      "preposition": "by jurisdiction",
       "display_as_result_metadata": false,
       "filterable": true,
+      "key": "tribunal_decision_country",
+      "name": "Country",
+      "preposition": "by country",
+      "specialist_publisher_properties": {
+        "select": "one"
+      },
+      "type": "text"
+    },
+    {
       "allowed_values": [
         {
           "label": "Age Discrimination",
@@ -288,27 +264,51 @@
           "value": "written-statements"
         }
       ],
+      "display_as_result_metadata": false,
+      "filterable": true,
+      "key": "tribunal_decision_categories",
+      "name": "Jurisdiction code",
+      "preposition": "by jurisdiction",
       "specialist_publisher_properties": {
         "select": "multiple"
-      }
+      },
+      "type": "text"
     },
     {
+      "display_as_result_metadata": true,
+      "filterable": true,
       "key": "tribunal_decision_decision_date",
       "name": "Decision date",
       "short_name": "Decided",
-      "type": "date",
-      "display_as_result_metadata": true,
-      "filterable": true
+      "type": "date"
     },
     {
-      "key": "hidden_indexable_content",
-      "name": "Hidden indexable content",
-      "type": "text",
       "display_as_result_metadata": false,
       "filterable": false,
+      "key": "hidden_indexable_content",
+      "name": "Hidden indexable content",
       "specialist_publisher_properties": {
         "omit_from_finder_content_item": true
-      }
+      },
+      "type": "text"
     }
+  ],
+  "filter": {
+    "format": "employment_tribunal_decision"
+  },
+  "format_name": "Employment tribunal decision",
+  "name": "Employment tribunal decisions",
+  "organisations": [
+    "6f757605-ab8f-4b62-84e4-99f79cf085c2",
+    "8bb37087-a5a7-4493-8afe-900b36ebc927"
+  ],
+  "phase": "beta",
+  "show_summaries": true,
+  "signup_content_id": "6d7ace06-f437-4fb3-b948-8534ff34540f",
+  "subscription_list_title_prefix": "Employment tribunal decisions",
+  "summary": "<p>Find decisions on Employment Tribunal cases in England, Wales and Scotland from February 2017 onwards.</p><p>For enquiries about Employment Tribunal judgments in England and Wales prior to February 2017 contact <a href='https://www.find-court-tribunal.service.gov.uk/courts/bury-st-edmunds-county-court-and-family-court'>Bury St Edmunds County Court</a>. Please note that we are currently experiencing technical difficulties with the system used to search for judgments. Unfortunately, we are unable to confirm when this issue will be resolved and there may be a delay to you receiving the judgment you have requested.</p><p>If the decision was made before February 2017 in Scotland, contact <a href='https://www.find-court-tribunal.service.gov.uk/courts/glasgow-tribunals-centre'>Glasgow Tribunals Centre</a>.</p><p>Decisions are not affected by GDPR rules and cannot be removed from GOV.UK.</p>",
+  "target_stack": "live",
+  "taxons": [
+    "357110bb-cbc5-4708-9711-1b26e6c63e86"
   ]
 }

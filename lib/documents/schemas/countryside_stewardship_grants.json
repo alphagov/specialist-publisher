@@ -1,38 +1,15 @@
 {
-  "target_stack": "live",
-  "content_id": "0eb7b150-879a-4c44-becc-718e23a77e2c",
   "base_path": "/countryside-stewardship-grants",
-  "name": "Countryside Stewardship grant finder",
-  "format_name": "Countryside Stewardship grant",
-  "description": "Find information about Countryside Stewardship options, capital items and supplements",
   "beta": true,
-  "filter": {
-    "format": "countryside_stewardship_grant"
-  },
+  "content_id": "0eb7b150-879a-4c44-becc-718e23a77e2c",
+  "description": "Find information about Countryside Stewardship options, capital items and supplements",
+  "document_noun": "grant",
+  "document_title": "Countryside Stewardship Grant",
   "editing_organisations": [
     "de4e9dc6-cca4-43af-a594-682023b84d6c"
   ],
-  "organisations": [
-    "e8fae147-6232-4163-a3f1-1c15b755a8a4",
-    "d3ce4ba7-bc75-46b4-89d9-38cb3240376d"
-  ],
-  "taxons": [
-    "9129d716-365b-44ba-9856-383423fe1e41"
-  ],
-  "related": [
-    "5e91c0bf-187d-4fa0-a6ef-992736d5644c"
-  ],
-  "summary": "<p>Search for options, supplements and capital items to include in your Countryside Stewardship application. Find out about <a href=\"/guidance/countryside-stewardship-get-funding-to-protect-and-improve-the-land-you-manage\">each Countryside Stewardship scheme and check if you’re eligible before you apply for a grant</a>.</p>",
-  "document_noun": "grant",
-  "document_title": "Countryside Stewardship Grant",
   "facets": [
     {
-      "key": "grant_type",
-      "name": "Grant type",
-      "type": "text",
-      "preposition": "of type",
-      "display_as_result_metadata": false,
-      "filterable": true,
       "allowed_values": [
         {
           "label": "Option",
@@ -47,17 +24,17 @@
           "value": "supplement"
         }
       ],
-      "specialist_publisher_properties": {
-        "select": "one"
-      }
-    },
-    {
-      "key": "land_use",
-      "name": "Land use",
-      "type": "text",
-      "preposition": "for",
       "display_as_result_metadata": false,
       "filterable": true,
+      "key": "grant_type",
+      "name": "Grant type",
+      "preposition": "of type",
+      "specialist_publisher_properties": {
+        "select": "one"
+      },
+      "type": "text"
+    },
+    {
       "allowed_values": [
         {
           "label": "Air quality",
@@ -132,17 +109,17 @@
           "value": "woodland"
         }
       ],
-      "specialist_publisher_properties": {
-        "select": "multiple"
-      }
-    },
-    {
-      "key": "tiers_or_standalone_items",
-      "name": "Tiers or standalone items",
-      "type": "text",
-      "preposition": "for",
       "display_as_result_metadata": false,
       "filterable": true,
+      "key": "land_use",
+      "name": "Land use",
+      "preposition": "for",
+      "specialist_publisher_properties": {
+        "select": "multiple"
+      },
+      "type": "text"
+    },
+    {
       "allowed_values": [
         {
           "label": "Higher Tier",
@@ -173,17 +150,17 @@
           "value": "standalone-capital-items"
         }
       ],
-      "specialist_publisher_properties": {
-        "select": "multiple"
-      }
-    },
-    {
-      "key": "funding_amount",
-      "name": "Funding (per unit per year)",
-      "type": "text",
-      "preposition": "of",
       "display_as_result_metadata": false,
       "filterable": true,
+      "key": "tiers_or_standalone_items",
+      "name": "Tiers or standalone items",
+      "preposition": "for",
+      "specialist_publisher_properties": {
+        "select": "multiple"
+      },
+      "type": "text"
+    },
+    {
       "allowed_values": [
         {
           "label": "Up to £100",
@@ -218,9 +195,32 @@
           "value": "more-than-50-actual-costs"
         }
       ],
+      "display_as_result_metadata": false,
+      "filterable": true,
+      "key": "funding_amount",
+      "name": "Funding (per unit per year)",
+      "preposition": "of",
       "specialist_publisher_properties": {
         "select": "multiple"
-      }
+      },
+      "type": "text"
     }
+  ],
+  "filter": {
+    "format": "countryside_stewardship_grant"
+  },
+  "format_name": "Countryside Stewardship grant",
+  "name": "Countryside Stewardship grant finder",
+  "organisations": [
+    "e8fae147-6232-4163-a3f1-1c15b755a8a4",
+    "d3ce4ba7-bc75-46b4-89d9-38cb3240376d"
+  ],
+  "related": [
+    "5e91c0bf-187d-4fa0-a6ef-992736d5644c"
+  ],
+  "summary": "<p>Search for options, supplements and capital items to include in your Countryside Stewardship application. Find out about <a href=\"/guidance/countryside-stewardship-get-funding-to-protect-and-improve-the-land-you-manage\">each Countryside Stewardship scheme and check if you’re eligible before you apply for a grant</a>.</p>",
+  "target_stack": "live",
+  "taxons": [
+    "9129d716-365b-44ba-9856-383423fe1e41"
   ]
 }

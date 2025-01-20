@@ -1,31 +1,11 @@
 {
-  "target_stack": "live",
-  "content_id": "b7574bba-969f-4c49-855a-ae1586258ff6",
   "base_path": "/aaib-reports",
-  "format_name": "Air Accidents Investigation Branch report",
-  "name": "Air Accidents Investigation Branch reports",
+  "content_id": "b7574bba-969f-4c49-855a-ae1586258ff6",
   "description": "Find reports of AAIB investigations into air accidents and incidents",
-  "phase": "live",
-  "filter": {
-    "format": "aaib_report"
-  },
-  "show_summaries": true,
-  "organisations": [
-    "38eb5d8f-2d89-480c-8655-e2e7ac23f8f4"
-  ],
-  "taxons": [
-    "951ece54-c6df-4fbc-aa18-1bc629815fe2"
-  ],
   "document_noun": "report",
   "document_title": "AAIB Report",
   "facets": [
     {
-      "key": "aircraft_category",
-      "name": "Category",
-      "type": "text",
-      "preposition": "in category",
-      "display_as_result_metadata": true,
-      "filterable": true,
       "allowed_values": [
         {
           "label": "Commercial - fixed wing",
@@ -56,17 +36,17 @@
           "value": "unmanned-aircraft-systems"
         }
       ],
-      "specialist_publisher_properties": {
-        "select": "multiple"
-      }
-    },
-    {
-      "key": "report_type",
-      "name": "Report type",
-      "type": "text",
-      "preposition": "of type",
       "display_as_result_metadata": true,
       "filterable": true,
+      "key": "aircraft_category",
+      "name": "Category",
+      "preposition": "in category",
+      "specialist_publisher_properties": {
+        "select": "multiple"
+      },
+      "type": "text"
+    },
+    {
       "allowed_values": [
         {
           "label": "Annual safety report",
@@ -105,39 +85,59 @@
           "value": "safety-study"
         }
       ],
+      "display_as_result_metadata": true,
+      "filterable": true,
+      "key": "report_type",
+      "name": "Report type",
+      "preposition": "of type",
       "specialist_publisher_properties": {
         "select": "one"
-      }
+      },
+      "type": "text"
     },
     {
+      "display_as_result_metadata": true,
+      "filterable": true,
       "key": "date_of_occurrence",
       "name": "Date of occurrence",
-      "short_name": "Occurred",
-      "type": "date",
       "preposition": "occurred",
-      "display_as_result_metadata": true,
-      "filterable": true
+      "short_name": "Occurred",
+      "type": "date"
     },
     {
+      "display_as_result_metadata": false,
+      "filterable": false,
       "key": "aircraft_type",
       "name": "Aircraft type",
-      "type": "text",
-      "display_as_result_metadata": false,
-      "filterable": false
+      "type": "text"
     },
     {
+      "display_as_result_metadata": false,
+      "filterable": false,
       "key": "location",
       "name": "Location",
-      "type": "text",
-      "display_as_result_metadata": false,
-      "filterable": false
+      "type": "text"
     },
     {
+      "display_as_result_metadata": false,
+      "filterable": false,
       "key": "registration",
       "name": "Registration",
-      "type": "text",
-      "display_as_result_metadata": false,
-      "filterable": false
+      "type": "text"
     }
+  ],
+  "filter": {
+    "format": "aaib_report"
+  },
+  "format_name": "Air Accidents Investigation Branch report",
+  "name": "Air Accidents Investigation Branch reports",
+  "organisations": [
+    "38eb5d8f-2d89-480c-8655-e2e7ac23f8f4"
+  ],
+  "phase": "live",
+  "show_summaries": true,
+  "target_stack": "live",
+  "taxons": [
+    "951ece54-c6df-4fbc-aa18-1bc629815fe2"
   ]
 }

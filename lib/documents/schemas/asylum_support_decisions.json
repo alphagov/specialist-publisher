@@ -1,38 +1,14 @@
 {
-  "target_stack": "live",
-  "content_id": "581b4bba-e58f-4d07-8e0a-03c8c00165cc",
   "base_path": "/asylum-support-tribunal-decisions",
-  "format_name": "Asylum support tribunal decision",
-  "name": "Asylum support tribunal decisions",
+  "content_id": "581b4bba-e58f-4d07-8e0a-03c8c00165cc",
   "description": "Find decisions on appeals against the Home Office heard by the First-tier Tribunal (Asylum Support).",
-  "phase": "beta",
-  "filter": {
-    "format": "asylum_support_decision"
-  },
-  "show_summaries": true,
+  "document_noun": "decision",
+  "document_title": "Asylum Support Decisions",
   "editing_organisations": [
     "dcc907d6-433c-42df-9ffb-d9c68be5dc4d"
   ],
-  "organisations": [
-    "6f757605-ab8f-4b62-84e4-99f79cf085c2",
-    "7141e343-e7bb-483b-920a-c6a5cf8f758c"
-  ],
-  "taxons": [
-    "e1d2032c-6a59-4a1a-919c-dc149847dffb"
-  ],
-  "signup_content_id": "307ea825-594c-4d88-85c9-0809fdc9c79e",
-  "subscription_list_title_prefix": "First-tier Tribunal (Asylum Support) decisions",
-  "summary": "<p>Find decisions on appeals against the Home Office heard by the First-tier Tribunal (Asylum Support).</p>",
-  "document_noun": "decision",
-  "document_title": "Asylum Support Decisions",
   "facets": [
     {
-      "key": "tribunal_decision_categories",
-      "name": "Category",
-      "type": "text",
-      "preposition": "categorised as",
-      "display_as_result_metadata": false,
-      "filterable": true,
       "allowed_values": [
         {
           "label": "Section 4(1) (support for persons who are neither an asylum seeker nor a failed asylum seeker)",
@@ -47,17 +23,17 @@
           "value": "section-95-support-for-asylum-seekers"
         }
       ],
-      "specialist_publisher_properties": {
-        "select": "multiple"
-      }
-    },
-    {
-      "key": "tribunal_decision_sub_categories",
-      "name": "Sub-category",
-      "type": "text",
-      "preposition": "sub-categorised as",
       "display_as_result_metadata": false,
       "filterable": true,
+      "key": "tribunal_decision_categories",
+      "name": "Category",
+      "preposition": "categorised as",
+      "specialist_publisher_properties": {
+        "select": "multiple"
+      },
+      "type": "text"
+    },
+    {
       "allowed_values": [
         {
           "label": "Section 4(1) - bail",
@@ -136,17 +112,17 @@
           "value": "section-95-other"
         }
       ],
-      "specialist_publisher_properties": {
-        "select": "multiple"
-      }
-    },
-    {
-      "key": "tribunal_decision_judges",
-      "name": "Judges",
-      "type": "text",
-      "preposition": "by judge",
       "display_as_result_metadata": false,
       "filterable": true,
+      "key": "tribunal_decision_sub_categories",
+      "name": "Sub-category",
+      "preposition": "sub-categorised as",
+      "specialist_publisher_properties": {
+        "select": "multiple"
+      },
+      "type": "text"
+    },
+    {
       "allowed_values": [
         {
           "label": "Bashir, S",
@@ -257,16 +233,17 @@
           "value": "wyman-j"
         }
       ],
-      "specialist_publisher_properties": {
-        "select": "multiple"
-      }
-    },
-    {
-      "key": "tribunal_decision_landmark",
-      "name": "Landmark",
-      "type": "text",
       "display_as_result_metadata": false,
       "filterable": true,
+      "key": "tribunal_decision_judges",
+      "name": "Judges",
+      "preposition": "by judge",
+      "specialist_publisher_properties": {
+        "select": "multiple"
+      },
+      "type": "text"
+    },
+    {
       "allowed_values": [
         {
           "label": "Landmark",
@@ -277,35 +254,58 @@
           "value": "not-landmark"
         }
       ],
+      "display_as_result_metadata": false,
+      "filterable": true,
+      "key": "tribunal_decision_landmark",
+      "name": "Landmark",
       "specialist_publisher_properties": {
         "select": "one"
-      }
+      },
+      "type": "text"
     },
     {
+      "display_as_result_metadata": true,
+      "filterable": false,
       "key": "tribunal_decision_reference_number",
       "name": "Reference number",
-      "type": "text",
-      "display_as_result_metadata": true,
-      "filterable": false
+      "type": "text"
     },
     {
+      "display_as_result_metadata": true,
+      "filterable": true,
       "key": "tribunal_decision_decision_date",
       "name": "Decision date",
-      "short_name": "Decided",
-      "type": "date",
       "preposition": "decided",
-      "display_as_result_metadata": true,
-      "filterable": true
+      "short_name": "Decided",
+      "type": "date"
     },
     {
-      "key": "hidden_indexable_content",
-      "name": "Hidden indexable content",
-      "type": "text",
       "display_as_result_metadata": false,
       "filterable": false,
+      "key": "hidden_indexable_content",
+      "name": "Hidden indexable content",
       "specialist_publisher_properties": {
         "omit_from_finder_content_item": true
-      }
+      },
+      "type": "text"
     }
+  ],
+  "filter": {
+    "format": "asylum_support_decision"
+  },
+  "format_name": "Asylum support tribunal decision",
+  "name": "Asylum support tribunal decisions",
+  "organisations": [
+    "6f757605-ab8f-4b62-84e4-99f79cf085c2",
+    "7141e343-e7bb-483b-920a-c6a5cf8f758c"
+  ],
+  "phase": "beta",
+  "show_summaries": true,
+  "signup_content_id": "307ea825-594c-4d88-85c9-0809fdc9c79e",
+  "subscription_list_title_prefix": "First-tier Tribunal (Asylum Support) decisions",
+  "summary": "<p>Find decisions on appeals against the Home Office heard by the First-tier Tribunal (Asylum Support).</p>",
+  "target_stack": "live",
+  "taxons": [
+    "e1d2032c-6a59-4a1a-919c-dc149847dffb"
   ]
 }

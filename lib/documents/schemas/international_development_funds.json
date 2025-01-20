@@ -1,33 +1,11 @@
 {
-  "target_stack": "live",
-  "content_id": "5583057c-7c57-4cfe-b70d-dad6f4762831",
   "base_path": "/international-development-funding",
-  "format_name": "International development funding",
-  "name": "International development funding",
+  "content_id": "5583057c-7c57-4cfe-b70d-dad6f4762831",
   "description": "Find and apply for funds to run international development projects",
-  "summary": "<p>The funding finder tool is to help potential applicants to view, sort and filter UK Official Development Assistance (ODA) funding opportunities, across all UK government departments.</p><p>Each funding call will include a high level overview and information on how to apply.</p>",
-  "filter": {
-    "format": "international_development_fund"
-  },
-  "signup_content_id": "f1a4e5b2-c8b3-40f2-acde-75061a45184d",
-  "show_summaries": true,
-  "organisations": [
-    "f9fcf3fe-2751-4dca-97ca-becaeceb4b26"
-  ],
-  "taxons": [
-    "9fb30a53-70fb-4f1c-878b-0064b202d1ba"
-  ],
-  "subscription_list_title_prefix": "International development funds",
   "document_noun": "fund",
   "document_title": "International Development Fund",
   "facets": [
     {
-      "key": "fund_state",
-      "name": "Funds",
-      "type": "text",
-      "preposition": "which are",
-      "display_as_result_metadata": true,
-      "filterable": true,
       "allowed_values": [
         {
           "label": "Open",
@@ -38,818 +16,818 @@
           "value": "closed"
         }
       ],
-      "specialist_publisher_properties": {
-        "select": "one"
-      }
-    },
-    {
-      "key": "location",
-      "name": "Countries",
-      "type": "text",
-      "preposition": "for",
       "display_as_result_metadata": true,
       "filterable": true,
-      "allowed_values": [
-        {
-          "value": "afghanistan",
-          "label": "Afghanistan"
-        },
-        {
-          "value": "albania",
-          "label": "Albania"
-        },
-        {
-          "value": "algeria",
-          "label": "Algeria"
-        },
-        {
-          "value": "andorra",
-          "label": "Andorra"
-        },
-        {
-          "value": "angola",
-          "label": "Angola"
-        },
-        {
-          "value": "antigua-and-barbuda",
-          "label": "Antigua and Barbuda"
-        },
-        {
-          "value": "argentina",
-          "label": "Argentina"
-        },
-        {
-          "value": "armenia",
-          "label": "Armenia"
-        },
-        {
-          "value": "australia",
-          "label": "Australia"
-        },
-        {
-          "value": "austria",
-          "label": "Austria"
-        },
-        {
-          "value": "azerbaijan",
-          "label": "Azerbaijan"
-        },
-        {
-          "value": "bahamas",
-          "label": "Bahamas, The"
-        },
-        {
-          "value": "bahrain",
-          "label": "Bahrain"
-        },
-        {
-          "value": "bangladesh",
-          "label": "Bangladesh"
-        },
-        {
-          "value": "barbados",
-          "label": "Barbados"
-        },
-        {
-          "value": "belarus",
-          "label": "Belarus"
-        },
-        {
-          "value": "belgium",
-          "label": "Belgium"
-        },
-        {
-          "value": "belize",
-          "label": "Belize"
-        },
-        {
-          "value": "benin",
-          "label": "Benin"
-        },
-        {
-          "value": "bhutan",
-          "label": "Bhutan"
-        },
-        {
-          "value": "bolivia",
-          "label": "Bolivia"
-        },
-        {
-          "value": "bosnia-and-herzegovina",
-          "label": "Bosnia and Herzegovina"
-        },
-        {
-          "value": "botswana",
-          "label": "Botswana"
-        },
-        {
-          "value": "brazil",
-          "label": "Brazil"
-        },
-        {
-          "value": "brunei",
-          "label": "Brunei"
-        },
-        {
-          "value": "bulgaria",
-          "label": "Bulgaria"
-        },
-        {
-          "value": "burkina-faso",
-          "label": "Burkina Faso"
-        },
-        {
-          "value": "burundi",
-          "label": "Burundi"
-        },
-        {
-          "value": "cambodia",
-          "label": "Cambodia"
-        },
-        {
-          "value": "cameroon",
-          "label": "Cameroon"
-        },
-        {
-          "value": "canada",
-          "label": "Canada"
-        },
-        {
-          "value": "cape-verde",
-          "label": "Cape Verde"
-        },
-        {
-          "value": "central-african-republic",
-          "label": "Central African Republic"
-        },
-        {
-          "value": "chad",
-          "label": "Chad"
-        },
-        {
-          "value": "chile",
-          "label": "Chile"
-        },
-        {
-          "value": "china",
-          "label": "China"
-        },
-        {
-          "value": "colombia",
-          "label": "Colombia"
-        },
-        {
-          "value": "comoros",
-          "label": "Comoros"
-        },
-        {
-          "value": "congo",
-          "label": "Congo"
-        },
-        {
-          "value": "democratic-republic-of-congo",
-          "label": "Congo (Democratic Republic)"
-        },
-        {
-          "value": "cook-islands",
-          "label": "Cook Islands"
-        },
-        {
-          "value": "costa-rica",
-          "label": "Costa Rica"
-        },
-        {
-          "value": "croatia",
-          "label": "Croatia"
-        },
-        {
-          "value": "cuba",
-          "label": "Cuba"
-        },
-        {
-          "value": "cyprus",
-          "label": "Cyprus"
-        },
-        {
-          "value": "czech-republic",
-          "label": "Czech Republic"
-        },
-        {
-          "value": "denmark",
-          "label": "Denmark"
-        },
-        {
-          "value": "djibouti",
-          "label": "Djibouti"
-        },
-        {
-          "value": "dominica",
-          "label": "Dominica"
-        },
-        {
-          "value": "dominican-republic",
-          "label": "Dominican Republic"
-        },
-        {
-          "value": "east-timor",
-          "label": "East Timor"
-        },
-        {
-          "value": "ecuador",
-          "label": "Ecuador"
-        },
-        {
-          "value": "egypt",
-          "label": "Egypt"
-        },
-        {
-          "value": "el-salvador",
-          "label": "El Salvador"
-        },
-        {
-          "value": "equatorial-guinea",
-          "label": "Equatorial Guinea"
-        },
-        {
-          "value": "eritrea",
-          "label": "Eritrea"
-        },
-        {
-          "value": "estonia",
-          "label": "Estonia"
-        },
-        {
-          "value": "ethiopia",
-          "label": "Ethiopia"
-        },
-        {
-          "value": "federated-states-of-micronesia",
-          "label": "Federated States of Micronesia"
-        },
-        {
-          "value": "fiji",
-          "label": "Fiji"
-        },
-        {
-          "value": "finland",
-          "label": "Finland"
-        },
-        {
-          "value": "france",
-          "label": "France"
-        },
-        {
-          "value": "gabon",
-          "label": "Gabon"
-        },
-        {
-          "value": "gambia",
-          "label": "Gambia, The"
-        },
-        {
-          "value": "georgia",
-          "label": "Georgia"
-        },
-        {
-          "value": "germany",
-          "label": "Germany"
-        },
-        {
-          "value": "ghana",
-          "label": "Ghana"
-        },
-        {
-          "value": "greece",
-          "label": "Greece"
-        },
-        {
-          "value": "grenada",
-          "label": "Grenada"
-        },
-        {
-          "value": "guatemala",
-          "label": "Guatemala"
-        },
-        {
-          "value": "guinea",
-          "label": "Guinea"
-        },
-        {
-          "value": "guinea-bissau",
-          "label": "Guinea-Bissau"
-        },
-        {
-          "value": "guyana",
-          "label": "Guyana"
-        },
-        {
-          "value": "haiti",
-          "label": "Haiti"
-        },
-        {
-          "value": "honduras",
-          "label": "Honduras"
-        },
-        {
-          "value": "hungary",
-          "label": "Hungary"
-        },
-        {
-          "value": "iceland",
-          "label": "Iceland"
-        },
-        {
-          "value": "india",
-          "label": "India"
-        },
-        {
-          "value": "indonesia",
-          "label": "Indonesia"
-        },
-        {
-          "value": "iran",
-          "label": "Iran"
-        },
-        {
-          "value": "iraq",
-          "label": "Iraq"
-        },
-        {
-          "value": "ireland",
-          "label": "Ireland"
-        },
-        {
-          "value": "israel",
-          "label": "Israel"
-        },
-        {
-          "value": "italy",
-          "label": "Italy"
-        },
-        {
-          "value": "cote-d-ivoire",
-          "label": "Ivory Coast"
-        },
-        {
-          "value": "jamaica",
-          "label": "Jamaica"
-        },
-        {
-          "value": "japan",
-          "label": "Japan"
-        },
-        {
-          "value": "jordan",
-          "label": "Jordan"
-        },
-        {
-          "value": "kazakhstan",
-          "label": "Kazakhstan"
-        },
-        {
-          "value": "kenya",
-          "label": "Kenya"
-        },
-        {
-          "value": "kiribati",
-          "label": "Kiribati"
-        },
-        {
-          "value": "kosovo",
-          "label": "Kosovo"
-        },
-        {
-          "value": "kuwait",
-          "label": "Kuwait"
-        },
-        {
-          "value": "kyrgyzstan",
-          "label": "Kyrgyzstan"
-        },
-        {
-          "value": "laos",
-          "label": "Laos"
-        },
-        {
-          "value": "latvia",
-          "label": "Latvia"
-        },
-        {
-          "value": "lebanon",
-          "label": "Lebanon"
-        },
-        {
-          "value": "lesotho",
-          "label": "Lesotho"
-        },
-        {
-          "value": "liberia",
-          "label": "Liberia"
-        },
-        {
-          "value": "libya",
-          "label": "Libya"
-        },
-        {
-          "value": "liechtenstein",
-          "label": "Liechtenstein"
-        },
-        {
-          "value": "lithuania",
-          "label": "Lithuania"
-        },
-        {
-          "value": "luxembourg",
-          "label": "Luxembourg"
-        },
-        {
-          "value": "madagascar",
-          "label": "Madagascar"
-        },
-        {
-          "value": "malawi",
-          "label": "Malawi"
-        },
-        {
-          "value": "malaysia",
-          "label": "Malaysia"
-        },
-        {
-          "value": "maldives",
-          "label": "Maldives"
-        },
-        {
-          "value": "mali",
-          "label": "Mali"
-        },
-        {
-          "value": "malta",
-          "label": "Malta"
-        },
-        {
-          "value": "marshall-islands",
-          "label": "Marshall Islands"
-        },
-        {
-          "value": "mauritania",
-          "label": "Mauritania"
-        },
-        {
-          "value": "mauritius",
-          "label": "Mauritius"
-        },
-        {
-          "value": "mexico",
-          "label": "Mexico"
-        },
-        {
-          "value": "moldova",
-          "label": "Moldova"
-        },
-        {
-          "value": "monaco",
-          "label": "Monaco"
-        },
-        {
-          "value": "mongolia",
-          "label": "Mongolia"
-        },
-        {
-          "value": "montenegro",
-          "label": "Montenegro"
-        },
-        {
-          "value": "morocco",
-          "label": "Morocco"
-        },
-        {
-          "value": "north-macedonia",
-          "label": "North Macedonia"
-        },
-        {
-          "value": "mozambique",
-          "label": "Mozambique"
-        },
-        {
-          "value": "myanmar",
-          "label": "Myanmar"
-        },
-        {
-          "value": "namibia",
-          "label": "Namibia"
-        },
-        {
-          "value": "nauru",
-          "label": "Nauru"
-        },
-        {
-          "value": "nepal",
-          "label": "Nepal"
-        },
-        {
-          "value": "netherlands",
-          "label": "Netherlands"
-        },
-        {
-          "value": "new-zealand",
-          "label": "New Zealand"
-        },
-        {
-          "value": "nicaragua",
-          "label": "Nicaragua"
-        },
-        {
-          "value": "niger",
-          "label": "Niger"
-        },
-        {
-          "value": "nigeria",
-          "label": "Nigeria"
-        },
-        {
-          "value": "north-korea",
-          "label": "North Korea"
-        },
-        {
-          "value": "norway",
-          "label": "Norway"
-        },
-        {
-          "value": "the-occupied-palestinian-territories",
-          "label": "Occupied Palestinian Territories, The"
-        },
-        {
-          "value": "oman",
-          "label": "Oman"
-        },
-        {
-          "value": "pakistan",
-          "label": "Pakistan"
-        },
-        {
-          "value": "palau",
-          "label": "Palau"
-        },
-        {
-          "value": "panama",
-          "label": "Panama"
-        },
-        {
-          "value": "papua-new-guinea",
-          "label": "Papua New Guinea"
-        },
-        {
-          "value": "paraguay",
-          "label": "Paraguay"
-        },
-        {
-          "value": "peru",
-          "label": "Peru"
-        },
-        {
-          "value": "philippines",
-          "label": "Philippines"
-        },
-        {
-          "value": "poland",
-          "label": "Poland"
-        },
-        {
-          "value": "portugal",
-          "label": "Portugal"
-        },
-        {
-          "value": "qatar",
-          "label": "Qatar"
-        },
-        {
-          "value": "romania",
-          "label": "Romania"
-        },
-        {
-          "value": "russia",
-          "label": "Russia"
-        },
-        {
-          "value": "rwanda",
-          "label": "Rwanda"
-        },
-        {
-          "value": "samoa",
-          "label": "Samoa"
-        },
-        {
-          "value": "san-marino",
-          "label": "San Marino"
-        },
-        {
-          "value": "sao-tome-and-principe",
-          "label": "Sao Tome and Principe"
-        },
-        {
-          "value": "saudi-arabia",
-          "label": "Saudi Arabia"
-        },
-        {
-          "value": "senegal",
-          "label": "Senegal"
-        },
-        {
-          "value": "serbia",
-          "label": "Serbia"
-        },
-        {
-          "value": "seychelles",
-          "label": "Seychelles"
-        },
-        {
-          "value": "sierra-leone",
-          "label": "Sierra Leone"
-        },
-        {
-          "value": "singapore",
-          "label": "Singapore"
-        },
-        {
-          "value": "slovakia",
-          "label": "Slovakia"
-        },
-        {
-          "value": "slovenia",
-          "label": "Slovenia"
-        },
-        {
-          "value": "solomon-islands",
-          "label": "Solomon Islands"
-        },
-        {
-          "value": "somalia",
-          "label": "Somalia"
-        },
-        {
-          "value": "south-africa",
-          "label": "South Africa"
-        },
-        {
-          "value": "south-korea",
-          "label": "South Korea"
-        },
-        {
-          "value": "south-sudan",
-          "label": "South Sudan"
-        },
-        {
-          "value": "spain",
-          "label": "Spain"
-        },
-        {
-          "value": "sri-lanka",
-          "label": "Sri Lanka"
-        },
-        {
-          "value": "st-kitts-and-nevis",
-          "label": "St Kitts and Nevis"
-        },
-        {
-          "value": "st-lucia",
-          "label": "St Lucia"
-        },
-        {
-          "value": "st-vincent",
-          "label": "St Vincent"
-        },
-        {
-          "value": "sudan",
-          "label": "Sudan"
-        },
-        {
-          "value": "suriname",
-          "label": "Suriname"
-        },
-        {
-          "value": "swaziland",
-          "label": "Swaziland"
-        },
-        {
-          "value": "sweden",
-          "label": "Sweden"
-        },
-        {
-          "value": "switzerland",
-          "label": "Switzerland"
-        },
-        {
-          "value": "syria",
-          "label": "Syria"
-        },
-        {
-          "value": "tajikistan",
-          "label": "Tajikistan"
-        },
-        {
-          "value": "tanzania",
-          "label": "Tanzania"
-        },
-        {
-          "value": "thailand",
-          "label": "Thailand"
-        },
-        {
-          "value": "togo",
-          "label": "Togo"
-        },
-        {
-          "value": "tonga",
-          "label": "Tonga"
-        },
-        {
-          "value": "trinidad-and-tobago",
-          "label": "Trinidad and Tobago"
-        },
-        {
-          "value": "tunisia",
-          "label": "Tunisia"
-        },
-        {
-          "value": "turkey",
-          "label": "Turkey"
-        },
-        {
-          "value": "turkmenistan",
-          "label": "Turkmenistan"
-        },
-        {
-          "value": "tuvalu",
-          "label": "Tuvalu"
-        },
-        {
-          "value": "uganda",
-          "label": "Uganda"
-        },
-        {
-          "value": "ukraine",
-          "label": "Ukraine"
-        },
-        {
-          "value": "united-arab-emirates",
-          "label": "United Arab Emirates"
-        },
-        {
-          "value": "united-kingdom",
-          "label": "United Kingdom"
-        },
-        {
-          "value": "united-states",
-          "label": "United States"
-        },
-        {
-          "value": "uruguay",
-          "label": "Uruguay"
-        },
-        {
-          "value": "uzbekistan",
-          "label": "Uzbekistan"
-        },
-        {
-          "value": "vanuatu",
-          "label": "Vanuatu"
-        },
-        {
-          "value": "vatican-city",
-          "label": "Vatican City"
-        },
-        {
-          "value": "venezuela",
-          "label": "Venezuela"
-        },
-        {
-          "value": "vietnam",
-          "label": "Vietnam"
-        },
-        {
-          "value": "yemen",
-          "label": "Yemen"
-        },
-        {
-          "value": "zambia",
-          "label": "Zambia"
-        },
-        {
-          "value": "zimbabwe",
-          "label": "Zimbabwe"
-        }
-      ],
+      "key": "fund_state",
+      "name": "Funds",
+      "preposition": "which are",
       "specialist_publisher_properties": {
-        "select": "multiple"
-      }
+        "select": "one"
+      },
+      "type": "text"
     },
     {
-      "key": "development_sector",
-      "name": "Sector",
-      "type": "text",
-      "preposition": "for",
-      "display_as_result_metadata": false,
+      "allowed_values": [
+        {
+          "label": "Afghanistan",
+          "value": "afghanistan"
+        },
+        {
+          "label": "Albania",
+          "value": "albania"
+        },
+        {
+          "label": "Algeria",
+          "value": "algeria"
+        },
+        {
+          "label": "Andorra",
+          "value": "andorra"
+        },
+        {
+          "label": "Angola",
+          "value": "angola"
+        },
+        {
+          "label": "Antigua and Barbuda",
+          "value": "antigua-and-barbuda"
+        },
+        {
+          "label": "Argentina",
+          "value": "argentina"
+        },
+        {
+          "label": "Armenia",
+          "value": "armenia"
+        },
+        {
+          "label": "Australia",
+          "value": "australia"
+        },
+        {
+          "label": "Austria",
+          "value": "austria"
+        },
+        {
+          "label": "Azerbaijan",
+          "value": "azerbaijan"
+        },
+        {
+          "label": "Bahamas, The",
+          "value": "bahamas"
+        },
+        {
+          "label": "Bahrain",
+          "value": "bahrain"
+        },
+        {
+          "label": "Bangladesh",
+          "value": "bangladesh"
+        },
+        {
+          "label": "Barbados",
+          "value": "barbados"
+        },
+        {
+          "label": "Belarus",
+          "value": "belarus"
+        },
+        {
+          "label": "Belgium",
+          "value": "belgium"
+        },
+        {
+          "label": "Belize",
+          "value": "belize"
+        },
+        {
+          "label": "Benin",
+          "value": "benin"
+        },
+        {
+          "label": "Bhutan",
+          "value": "bhutan"
+        },
+        {
+          "label": "Bolivia",
+          "value": "bolivia"
+        },
+        {
+          "label": "Bosnia and Herzegovina",
+          "value": "bosnia-and-herzegovina"
+        },
+        {
+          "label": "Botswana",
+          "value": "botswana"
+        },
+        {
+          "label": "Brazil",
+          "value": "brazil"
+        },
+        {
+          "label": "Brunei",
+          "value": "brunei"
+        },
+        {
+          "label": "Bulgaria",
+          "value": "bulgaria"
+        },
+        {
+          "label": "Burkina Faso",
+          "value": "burkina-faso"
+        },
+        {
+          "label": "Burundi",
+          "value": "burundi"
+        },
+        {
+          "label": "Cambodia",
+          "value": "cambodia"
+        },
+        {
+          "label": "Cameroon",
+          "value": "cameroon"
+        },
+        {
+          "label": "Canada",
+          "value": "canada"
+        },
+        {
+          "label": "Cape Verde",
+          "value": "cape-verde"
+        },
+        {
+          "label": "Central African Republic",
+          "value": "central-african-republic"
+        },
+        {
+          "label": "Chad",
+          "value": "chad"
+        },
+        {
+          "label": "Chile",
+          "value": "chile"
+        },
+        {
+          "label": "China",
+          "value": "china"
+        },
+        {
+          "label": "Colombia",
+          "value": "colombia"
+        },
+        {
+          "label": "Comoros",
+          "value": "comoros"
+        },
+        {
+          "label": "Congo",
+          "value": "congo"
+        },
+        {
+          "label": "Congo (Democratic Republic)",
+          "value": "democratic-republic-of-congo"
+        },
+        {
+          "label": "Cook Islands",
+          "value": "cook-islands"
+        },
+        {
+          "label": "Costa Rica",
+          "value": "costa-rica"
+        },
+        {
+          "label": "Croatia",
+          "value": "croatia"
+        },
+        {
+          "label": "Cuba",
+          "value": "cuba"
+        },
+        {
+          "label": "Cyprus",
+          "value": "cyprus"
+        },
+        {
+          "label": "Czech Republic",
+          "value": "czech-republic"
+        },
+        {
+          "label": "Denmark",
+          "value": "denmark"
+        },
+        {
+          "label": "Djibouti",
+          "value": "djibouti"
+        },
+        {
+          "label": "Dominica",
+          "value": "dominica"
+        },
+        {
+          "label": "Dominican Republic",
+          "value": "dominican-republic"
+        },
+        {
+          "label": "East Timor",
+          "value": "east-timor"
+        },
+        {
+          "label": "Ecuador",
+          "value": "ecuador"
+        },
+        {
+          "label": "Egypt",
+          "value": "egypt"
+        },
+        {
+          "label": "El Salvador",
+          "value": "el-salvador"
+        },
+        {
+          "label": "Equatorial Guinea",
+          "value": "equatorial-guinea"
+        },
+        {
+          "label": "Eritrea",
+          "value": "eritrea"
+        },
+        {
+          "label": "Estonia",
+          "value": "estonia"
+        },
+        {
+          "label": "Ethiopia",
+          "value": "ethiopia"
+        },
+        {
+          "label": "Federated States of Micronesia",
+          "value": "federated-states-of-micronesia"
+        },
+        {
+          "label": "Fiji",
+          "value": "fiji"
+        },
+        {
+          "label": "Finland",
+          "value": "finland"
+        },
+        {
+          "label": "France",
+          "value": "france"
+        },
+        {
+          "label": "Gabon",
+          "value": "gabon"
+        },
+        {
+          "label": "Gambia, The",
+          "value": "gambia"
+        },
+        {
+          "label": "Georgia",
+          "value": "georgia"
+        },
+        {
+          "label": "Germany",
+          "value": "germany"
+        },
+        {
+          "label": "Ghana",
+          "value": "ghana"
+        },
+        {
+          "label": "Greece",
+          "value": "greece"
+        },
+        {
+          "label": "Grenada",
+          "value": "grenada"
+        },
+        {
+          "label": "Guatemala",
+          "value": "guatemala"
+        },
+        {
+          "label": "Guinea",
+          "value": "guinea"
+        },
+        {
+          "label": "Guinea-Bissau",
+          "value": "guinea-bissau"
+        },
+        {
+          "label": "Guyana",
+          "value": "guyana"
+        },
+        {
+          "label": "Haiti",
+          "value": "haiti"
+        },
+        {
+          "label": "Honduras",
+          "value": "honduras"
+        },
+        {
+          "label": "Hungary",
+          "value": "hungary"
+        },
+        {
+          "label": "Iceland",
+          "value": "iceland"
+        },
+        {
+          "label": "India",
+          "value": "india"
+        },
+        {
+          "label": "Indonesia",
+          "value": "indonesia"
+        },
+        {
+          "label": "Iran",
+          "value": "iran"
+        },
+        {
+          "label": "Iraq",
+          "value": "iraq"
+        },
+        {
+          "label": "Ireland",
+          "value": "ireland"
+        },
+        {
+          "label": "Israel",
+          "value": "israel"
+        },
+        {
+          "label": "Italy",
+          "value": "italy"
+        },
+        {
+          "label": "Ivory Coast",
+          "value": "cote-d-ivoire"
+        },
+        {
+          "label": "Jamaica",
+          "value": "jamaica"
+        },
+        {
+          "label": "Japan",
+          "value": "japan"
+        },
+        {
+          "label": "Jordan",
+          "value": "jordan"
+        },
+        {
+          "label": "Kazakhstan",
+          "value": "kazakhstan"
+        },
+        {
+          "label": "Kenya",
+          "value": "kenya"
+        },
+        {
+          "label": "Kiribati",
+          "value": "kiribati"
+        },
+        {
+          "label": "Kosovo",
+          "value": "kosovo"
+        },
+        {
+          "label": "Kuwait",
+          "value": "kuwait"
+        },
+        {
+          "label": "Kyrgyzstan",
+          "value": "kyrgyzstan"
+        },
+        {
+          "label": "Laos",
+          "value": "laos"
+        },
+        {
+          "label": "Latvia",
+          "value": "latvia"
+        },
+        {
+          "label": "Lebanon",
+          "value": "lebanon"
+        },
+        {
+          "label": "Lesotho",
+          "value": "lesotho"
+        },
+        {
+          "label": "Liberia",
+          "value": "liberia"
+        },
+        {
+          "label": "Libya",
+          "value": "libya"
+        },
+        {
+          "label": "Liechtenstein",
+          "value": "liechtenstein"
+        },
+        {
+          "label": "Lithuania",
+          "value": "lithuania"
+        },
+        {
+          "label": "Luxembourg",
+          "value": "luxembourg"
+        },
+        {
+          "label": "Madagascar",
+          "value": "madagascar"
+        },
+        {
+          "label": "Malawi",
+          "value": "malawi"
+        },
+        {
+          "label": "Malaysia",
+          "value": "malaysia"
+        },
+        {
+          "label": "Maldives",
+          "value": "maldives"
+        },
+        {
+          "label": "Mali",
+          "value": "mali"
+        },
+        {
+          "label": "Malta",
+          "value": "malta"
+        },
+        {
+          "label": "Marshall Islands",
+          "value": "marshall-islands"
+        },
+        {
+          "label": "Mauritania",
+          "value": "mauritania"
+        },
+        {
+          "label": "Mauritius",
+          "value": "mauritius"
+        },
+        {
+          "label": "Mexico",
+          "value": "mexico"
+        },
+        {
+          "label": "Moldova",
+          "value": "moldova"
+        },
+        {
+          "label": "Monaco",
+          "value": "monaco"
+        },
+        {
+          "label": "Mongolia",
+          "value": "mongolia"
+        },
+        {
+          "label": "Montenegro",
+          "value": "montenegro"
+        },
+        {
+          "label": "Morocco",
+          "value": "morocco"
+        },
+        {
+          "label": "North Macedonia",
+          "value": "north-macedonia"
+        },
+        {
+          "label": "Mozambique",
+          "value": "mozambique"
+        },
+        {
+          "label": "Myanmar",
+          "value": "myanmar"
+        },
+        {
+          "label": "Namibia",
+          "value": "namibia"
+        },
+        {
+          "label": "Nauru",
+          "value": "nauru"
+        },
+        {
+          "label": "Nepal",
+          "value": "nepal"
+        },
+        {
+          "label": "Netherlands",
+          "value": "netherlands"
+        },
+        {
+          "label": "New Zealand",
+          "value": "new-zealand"
+        },
+        {
+          "label": "Nicaragua",
+          "value": "nicaragua"
+        },
+        {
+          "label": "Niger",
+          "value": "niger"
+        },
+        {
+          "label": "Nigeria",
+          "value": "nigeria"
+        },
+        {
+          "label": "North Korea",
+          "value": "north-korea"
+        },
+        {
+          "label": "Norway",
+          "value": "norway"
+        },
+        {
+          "label": "Occupied Palestinian Territories, The",
+          "value": "the-occupied-palestinian-territories"
+        },
+        {
+          "label": "Oman",
+          "value": "oman"
+        },
+        {
+          "label": "Pakistan",
+          "value": "pakistan"
+        },
+        {
+          "label": "Palau",
+          "value": "palau"
+        },
+        {
+          "label": "Panama",
+          "value": "panama"
+        },
+        {
+          "label": "Papua New Guinea",
+          "value": "papua-new-guinea"
+        },
+        {
+          "label": "Paraguay",
+          "value": "paraguay"
+        },
+        {
+          "label": "Peru",
+          "value": "peru"
+        },
+        {
+          "label": "Philippines",
+          "value": "philippines"
+        },
+        {
+          "label": "Poland",
+          "value": "poland"
+        },
+        {
+          "label": "Portugal",
+          "value": "portugal"
+        },
+        {
+          "label": "Qatar",
+          "value": "qatar"
+        },
+        {
+          "label": "Romania",
+          "value": "romania"
+        },
+        {
+          "label": "Russia",
+          "value": "russia"
+        },
+        {
+          "label": "Rwanda",
+          "value": "rwanda"
+        },
+        {
+          "label": "Samoa",
+          "value": "samoa"
+        },
+        {
+          "label": "San Marino",
+          "value": "san-marino"
+        },
+        {
+          "label": "Sao Tome and Principe",
+          "value": "sao-tome-and-principe"
+        },
+        {
+          "label": "Saudi Arabia",
+          "value": "saudi-arabia"
+        },
+        {
+          "label": "Senegal",
+          "value": "senegal"
+        },
+        {
+          "label": "Serbia",
+          "value": "serbia"
+        },
+        {
+          "label": "Seychelles",
+          "value": "seychelles"
+        },
+        {
+          "label": "Sierra Leone",
+          "value": "sierra-leone"
+        },
+        {
+          "label": "Singapore",
+          "value": "singapore"
+        },
+        {
+          "label": "Slovakia",
+          "value": "slovakia"
+        },
+        {
+          "label": "Slovenia",
+          "value": "slovenia"
+        },
+        {
+          "label": "Solomon Islands",
+          "value": "solomon-islands"
+        },
+        {
+          "label": "Somalia",
+          "value": "somalia"
+        },
+        {
+          "label": "South Africa",
+          "value": "south-africa"
+        },
+        {
+          "label": "South Korea",
+          "value": "south-korea"
+        },
+        {
+          "label": "South Sudan",
+          "value": "south-sudan"
+        },
+        {
+          "label": "Spain",
+          "value": "spain"
+        },
+        {
+          "label": "Sri Lanka",
+          "value": "sri-lanka"
+        },
+        {
+          "label": "St Kitts and Nevis",
+          "value": "st-kitts-and-nevis"
+        },
+        {
+          "label": "St Lucia",
+          "value": "st-lucia"
+        },
+        {
+          "label": "St Vincent",
+          "value": "st-vincent"
+        },
+        {
+          "label": "Sudan",
+          "value": "sudan"
+        },
+        {
+          "label": "Suriname",
+          "value": "suriname"
+        },
+        {
+          "label": "Swaziland",
+          "value": "swaziland"
+        },
+        {
+          "label": "Sweden",
+          "value": "sweden"
+        },
+        {
+          "label": "Switzerland",
+          "value": "switzerland"
+        },
+        {
+          "label": "Syria",
+          "value": "syria"
+        },
+        {
+          "label": "Tajikistan",
+          "value": "tajikistan"
+        },
+        {
+          "label": "Tanzania",
+          "value": "tanzania"
+        },
+        {
+          "label": "Thailand",
+          "value": "thailand"
+        },
+        {
+          "label": "Togo",
+          "value": "togo"
+        },
+        {
+          "label": "Tonga",
+          "value": "tonga"
+        },
+        {
+          "label": "Trinidad and Tobago",
+          "value": "trinidad-and-tobago"
+        },
+        {
+          "label": "Tunisia",
+          "value": "tunisia"
+        },
+        {
+          "label": "Turkey",
+          "value": "turkey"
+        },
+        {
+          "label": "Turkmenistan",
+          "value": "turkmenistan"
+        },
+        {
+          "label": "Tuvalu",
+          "value": "tuvalu"
+        },
+        {
+          "label": "Uganda",
+          "value": "uganda"
+        },
+        {
+          "label": "Ukraine",
+          "value": "ukraine"
+        },
+        {
+          "label": "United Arab Emirates",
+          "value": "united-arab-emirates"
+        },
+        {
+          "label": "United Kingdom",
+          "value": "united-kingdom"
+        },
+        {
+          "label": "United States",
+          "value": "united-states"
+        },
+        {
+          "label": "Uruguay",
+          "value": "uruguay"
+        },
+        {
+          "label": "Uzbekistan",
+          "value": "uzbekistan"
+        },
+        {
+          "label": "Vanuatu",
+          "value": "vanuatu"
+        },
+        {
+          "label": "Vatican City",
+          "value": "vatican-city"
+        },
+        {
+          "label": "Venezuela",
+          "value": "venezuela"
+        },
+        {
+          "label": "Vietnam",
+          "value": "vietnam"
+        },
+        {
+          "label": "Yemen",
+          "value": "yemen"
+        },
+        {
+          "label": "Zambia",
+          "value": "zambia"
+        },
+        {
+          "label": "Zimbabwe",
+          "value": "zimbabwe"
+        }
+      ],
+      "display_as_result_metadata": true,
       "filterable": true,
+      "key": "location",
+      "name": "Countries",
+      "preposition": "for",
+      "specialist_publisher_properties": {
+        "select": "multiple"
+      },
+      "type": "text"
+    },
+    {
       "allowed_values": [
         {
           "label": "Agriculture",
@@ -920,17 +898,17 @@
           "value": "water-and-sanitation"
         }
       ],
+      "display_as_result_metadata": false,
+      "filterable": true,
+      "key": "development_sector",
+      "name": "Sector",
+      "preposition": "for",
       "specialist_publisher_properties": {
         "select": "multiple"
-      }
+      },
+      "type": "text"
     },
     {
-      "key": "eligible_entities",
-      "name": "Eligible organisations",
-      "type": "text",
-      "preposition": "open to",
-      "filterable": true,
-      "display_as_result_metadata": false,
       "allowed_values": [
         {
           "label": "Non-governmental organisations (NGOs)",
@@ -969,17 +947,17 @@
           "value": "organisations-lmic"
         }
       ],
-      "specialist_publisher_properties": {
-        "select": "multiple"
-      }
-    },
-    {
-      "key": "value_of_funding",
-      "name": "Value of funding",
-      "type": "text",
-      "preposition": "with value",
       "display_as_result_metadata": false,
       "filterable": true,
+      "key": "eligible_entities",
+      "name": "Eligible organisations",
+      "preposition": "open to",
+      "specialist_publisher_properties": {
+        "select": "multiple"
+      },
+      "type": "text"
+    },
+    {
       "allowed_values": [
         {
           "label": "Up to £10,000",
@@ -1002,9 +980,31 @@
           "value": "more-than-1000000"
         }
       ],
+      "display_as_result_metadata": false,
+      "filterable": true,
+      "key": "value_of_funding",
+      "name": "Value of funding",
+      "preposition": "with value",
       "specialist_publisher_properties": {
         "select": "multiple"
-      }
+      },
+      "type": "text"
     }
+  ],
+  "filter": {
+    "format": "international_development_fund"
+  },
+  "format_name": "International development funding",
+  "name": "International development funding",
+  "organisations": [
+    "f9fcf3fe-2751-4dca-97ca-becaeceb4b26"
+  ],
+  "show_summaries": true,
+  "signup_content_id": "f1a4e5b2-c8b3-40f2-acde-75061a45184d",
+  "subscription_list_title_prefix": "International development funds",
+  "summary": "<p>The funding finder tool is to help potential applicants to view, sort and filter UK Official Development Assistance (ODA) funding opportunities, across all UK government departments.</p><p>Each funding call will include a high level overview and information on how to apply.</p>",
+  "target_stack": "live",
+  "taxons": [
+    "9fb30a53-70fb-4f1c-878b-0064b202d1ba"
   ]
 }

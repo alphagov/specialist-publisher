@@ -1,26 +1,11 @@
 {
-  "target_stack": "live",
-  "content_id": "be0e45cf-6da6-49c6-9f09-ddca614dbc55",
   "base_path": "/traffic-commissioner-regulatory-decisions",
-  "format_name": "Traffic Commissioner regulatory decision",
-  "name": "Traffic Commissioner regulatory decisions",
+  "content_id": "be0e45cf-6da6-49c6-9f09-ddca614dbc55",
   "description": "Find reports and updates on current and historical Traffic Commissioner regulatory decisions",
-  "filter": {
-    "format": "traffic_commissioner_regulatory_decision"
-  },
-  "organisations": [
-    "78dfc32b-b1ef-44ca-924c-a2cf773e87ca"
-  ],
   "document_noun": "decision",
   "document_title": "Traffic Commissioner Regulatory Decision",
   "facets": [
     {
-      "key": "decision_subject",
-      "name": "Subject",
-      "type": "text",
-      "preposition": "with subject",
-      "display_as_result_metadata": false,
-      "filterable": true,
       "allowed_values": [
         {
           "label": "HGV operator",
@@ -35,17 +20,17 @@
           "value": "transport-manager"
         }
       ],
-      "specialist_publisher_properties": {
-        "select": "one"
-      }
-    },
-    {
-      "key": "regions",
-      "name": "Region",
-      "type": "text",
-      "preposition": "for decisions in",
       "display_as_result_metadata": false,
       "filterable": true,
+      "key": "decision_subject",
+      "name": "Subject",
+      "preposition": "with subject",
+      "specialist_publisher_properties": {
+        "select": "one"
+      },
+      "type": "text"
+    },
+    {
       "allowed_values": [
         {
           "label": "Eastern",
@@ -80,17 +65,17 @@
           "value": "western"
         }
       ],
-      "specialist_publisher_properties": {
-        "select": "multiple"
-      }
-    },
-    {
-      "key": "case_type",
-      "name": "Case type",
-      "type": "text",
-      "preposition": "of type",
       "display_as_result_metadata": false,
       "filterable": true,
+      "key": "regions",
+      "name": "Region",
+      "preposition": "for decisions in",
+      "specialist_publisher_properties": {
+        "select": "multiple"
+      },
+      "type": "text"
+    },
+    {
       "allowed_values": [
         {
           "label": "Application",
@@ -109,17 +94,17 @@
           "value": "environmental"
         }
       ],
-      "specialist_publisher_properties": {
-        "select": "one"
-      }
-    },
-    {
-      "key": "outcome_type",
-      "name": "Regulatory decision",
-      "type": "text",
-      "preposition": "with outcome",
       "display_as_result_metadata": false,
       "filterable": true,
+      "key": "case_type",
+      "name": "Case type",
+      "preposition": "of type",
+      "specialist_publisher_properties": {
+        "select": "one"
+      },
+      "type": "text"
+    },
+    {
       "allowed_values": [
         {
           "label": "No action",
@@ -142,17 +127,32 @@
           "value": "revocation"
         }
       ],
+      "display_as_result_metadata": false,
+      "filterable": true,
+      "key": "outcome_type",
+      "name": "Regulatory decision",
+      "preposition": "with outcome",
       "specialist_publisher_properties": {
         "select": "one"
-      }
+      },
+      "type": "text"
     },
     {
+      "display_as_result_metadata": false,
+      "filterable": true,
       "key": "first_published_at",
       "name": "Published",
       "short_name": "Published",
-      "type": "date",
-      "display_as_result_metadata": false,
-      "filterable": true
+      "type": "date"
     }
-  ]
+  ],
+  "filter": {
+    "format": "traffic_commissioner_regulatory_decision"
+  },
+  "format_name": "Traffic Commissioner regulatory decision",
+  "name": "Traffic Commissioner regulatory decisions",
+  "organisations": [
+    "78dfc32b-b1ef-44ca-924c-a2cf773e87ca"
+  ],
+  "target_stack": "live"
 }
