@@ -53,18 +53,33 @@ RSpec.describe AdminController, type: :controller do
   end
 
   describe "POST zendesk" do
-    it "responds successfully, calling support api" do
-      stub_post = stub_support_api_valid_raise_support_ticket(hash_including({
+    it "sends the expected JSON payload to the Support API" do
+      stub_post = stub_support_api_valid_raise_support_ticket(anything)
+      captured_body = nil
+      WebMock.after_request do |request_signature, _response|
+        if request_signature.uri.to_s.include? "/support-tickets"
+          captured_body = request_signature.body
+        end
+      end
+
+      post :zendesk, params: { document_type_slug: "cma-cases", proposed_schema: "{ \"foo\": \"bar\" }" }
+
+      expected_payload = {
         subject: "Specialist Finder Edit Request: CMA Cases",
         tags: %w[specialist_finder_edit_request],
         priority: "normal",
-        requester: { name: user.name, email: user.email },
-        description: /^Developer - raise a PR replacing this schema with the schema below: https:\/\/github\.com\/alphagov\/specialist-publisher\/edit\/main\/lib\/documents\/schemas\/cma_cases\.json\r\n---\r\n```\r\n{/,
-      }))
-
-      post :zendesk, params: { document_type_slug: "cma-cases", proposed_schema: CmaCase.finder_schema.as_json }
+        description: "Developer - raise a PR replacing this schema with the schema below: " \
+          "https://github.com/alphagov/specialist-publisher/edit/main/lib/documents/schemas/cma_cases.json" \
+          "\r\n---\r\n" \
+          "```\r\n{ \"foo\": \"bar\" }\r\n```",
+        requester: {
+          name: user.name,
+          email: user.email,
+        },
+      }.to_json
 
       assert_requested(stub_post)
+      expect(captured_body).to eq(expected_payload)
     end
   end
 end
