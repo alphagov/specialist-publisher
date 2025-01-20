@@ -216,15 +216,15 @@ RSpec.describe "Facet" do
       facet.specialist_publisher_properties = { select: "one" }
 
       expect(facet.to_finder_schema_attributes.keys).to eq(%i[
-        key
-        name
-        short_name
-        type
-        preposition
+        allowed_values
         display_as_result_metadata
         filterable
-        allowed_values
+        key
+        name
+        preposition
         specialist_publisher_properties
+        short_name
+        type
       ])
     end
   end
