@@ -46,6 +46,9 @@
       <%= render "govuk_publishing_components/components/success_alert", {
         message: flash[:notice]
       } if flash[:notice] %>
+      <%= render "govuk_publishing_components/components/error_alert", {
+        message: flash[:danger]
+      } if flash[:danger] %>
 
       <% if yield(:title).present? %>
         <div class="govuk-grid-row">

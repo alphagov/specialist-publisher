@@ -81,5 +81,15 @@ RSpec.describe AdminController, type: :controller do
       assert_requested(stub_post)
       expect(captured_body).to eq(expected_payload)
     end
+
+    it "informs user if there was a failure creating the Zendesk ticket" do
+      stub_post = stub_support_api_invalid_raise_support_ticket(anything)
+
+      post :zendesk, params: { document_type_slug: "cma-cases", proposed_schema: CmaCase.finder_schema.to_json }
+
+      assert_requested(stub_post)
+      expect(response.status).to eq(302)
+      expect(flash[:danger]).to eq("There was an error submitting your request. Please try again.")
+    end
   end
 end
