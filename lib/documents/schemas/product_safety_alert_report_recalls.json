@@ -92,10 +92,6 @@
           "value": "communication-media-equipment"
         },
         {
-          "label": "Computers and computer accessories",
-          "value": "computers-and-accessories"
-        },
-        {
           "label": "Construction products",
           "value": "construction-products"
         },
@@ -140,7 +136,7 @@
           "value": "hand-tools"
         },
         {
-          "label": "Household decorative articles",
+          "label": "Decorative articles",
           "value": "household-decorative-articles"
         },
         {
@@ -160,7 +156,7 @@
           "value": "lifts"
         },
         {
-          "label": "Lighting Products",
+          "label": "Lighting equipment",
           "value": "lighting-products"
         },
         {
