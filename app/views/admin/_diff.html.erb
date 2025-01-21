@@ -1,15 +1,17 @@
-<details>
-  <summary>View diff</summary>
+<%= render "govuk_publishing_components/components/details", {
+  title: "View diff"
+} do %>
   <%=
-    Diffy::Diff.new(
-      JSON.pretty_generate(old_schema.as_json).to_s,
-      JSON.pretty_generate(new_schema.as_json).to_s,
-      allow_empty_diff: false,
-    ).to_s(:html).html_safe
+  Diffy::Diff.new(
+    JSON.pretty_generate(old_schema.as_json).to_s,
+    JSON.pretty_generate(new_schema.as_json).to_s,
+    allow_empty_diff: false,
+  ).to_s(:html).html_safe
   %>
-</details>
+<% end %>
 
-<details>
-  <summary>View generated schema</summary>
+<%= render "govuk_publishing_components/components/details", {
+  title: "View generated schema"
+} do %>
   <pre><code><%= JSON.pretty_generate(new_schema.as_json) %></code></pre>
-</details>
+<% end %>
