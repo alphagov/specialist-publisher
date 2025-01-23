@@ -138,12 +138,13 @@ To release the finder to the live stack:
  
 ## 7. Permissions
 
-Specialist Publisher grants access to the publishing interface for your new document type to the following Signon users:
+Specialist Publisher grants access to the publishing interface for a document type to the following Signon users:
 
-- Users that belong to the owner organisation AND have `Editor` permissions
-- Users that have the permission `your_new_document_type_editor`, e.g. `oim_project_editor`
+1. Users that belong to the owner organisation - have default "write" permissions, allowing them to view and draft new documents. 
+2. Users that belong to the owner organisation AND have `editor` permission in Signon - are considered "departmental editors" and can publish, unpublish and discard documents.
+3. Users that have the permission `<your_new_document_type>_editor` in Signon are granted "departmental editor" access regardless of their organisation. This is sometimes required for cross-departmental documents. These special permissions need to be [created manually](https://docs.publishing.service.gov.uk/repos/signon/usage.html#creating-editing-and-deleting-permissions) in Signon. You do not need to create this permission unless cross-departmental access has been explicitly requested.
 
-You'll need to [create the new permission manually](https://docs.publishing.service.gov.uk/repos/signon/usage.html#creating-new-permissions).
+You'll need to manually grant users access to the Specialist Publisher app in Signon, and the `editor` permission (or custom cross-organisation permissions from step 3 above) if appropriate.
 
 # __Editing__ a specialist document type
 
