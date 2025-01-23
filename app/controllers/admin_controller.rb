@@ -81,6 +81,7 @@ private
         name: current_user.name,
         email: current_user.email,
       },
+      editorial_remark: params[:editorial_remark],
     }
   end
 
