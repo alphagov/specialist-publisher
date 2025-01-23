@@ -17,6 +17,9 @@ RSpec.describe AdminController, type: :controller do
       stub_publishing_api_has_content([], hash_including(document_type: Organisation.document_type))
       get :summary, params: { document_type_slug: "asylum-support-decisions" }
       expect(response.status).to eq(200)
+      within "form" do
+        assert_select "textarea[name=\"editorial_remark\"]"
+      end
     end
   end
 
@@ -62,7 +65,13 @@ RSpec.describe AdminController, type: :controller do
         end
       end
 
-      post :zendesk, params: { document_type_slug: "cma-cases", proposed_schema: "{ \"foo\": \"bar\" }" }
+      editorial_remark = "This is a high priority request."
+
+      post :zendesk, params: {
+        document_type_slug: "cma-cases",
+        proposed_schema: "{ \"foo\": \"bar\" }",
+        editorial_remark:,
+      }
 
       expected_payload = {
         subject: "Specialist Finder Edit Request: CMA Cases",
@@ -76,6 +85,7 @@ RSpec.describe AdminController, type: :controller do
           name: user.name,
           email: user.email,
         },
+        editorial_remark:,
       }.to_json
 
       assert_requested(stub_post)

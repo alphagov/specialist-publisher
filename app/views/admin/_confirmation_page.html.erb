@@ -12,19 +12,28 @@
 
     <%= render(partial: "diff", locals: { old_schema: @current_format.finder_schema, new_schema: @proposed_schema }) %>
 
-    <p class="govuk-body govuk-body govuk-!-margin-top-7">
-      By submitting you are confirming that these changes are required to the specialist finder.
-    </p>
+    <%= form_tag "/admin/zendesk/#{current_format.admin_slug}", method: 'post' do %>
+      <%= render "govuk_publishing_components/components/textarea", {
+        name: "editorial_remark",
+        id: "editorial_remark",
+        label: {
+          text: "Tell us about your changes (optional)",
+        },
+        hint: "Please add any further information you think may be helpful related to these changes, including specific dates or deadlines, if you have them."
+      } %>
 
-    <div class="govuk-button-group govuk-!-margin-top-7">
-      <%= form_tag "/admin/zendesk/#{current_format.admin_slug}", method: 'post' do %>
+      <p class="govuk-body govuk-body govuk-!-margin-top-7">
+        By submitting you are confirming that these changes are required to the specialist finder.
+      </p>
+
+      <div class="govuk-button-group govuk-!-margin-top-7">
         <%= hidden_field_tag :proposed_schema, JSON.pretty_generate(JSON.parse(@proposed_schema.to_json)) %>
         <%= render "govuk_publishing_components/components/button", {
           text: "Submit changes"
         } %>
-      <% end %>
 
-      <%= link_to("Cancel", "/admin/#{current_format.admin_slug}", class: "govuk-link govuk-link--no-visited-state") %>
-    </div>
+        <%= link_to("Cancel", "/admin/#{current_format.admin_slug}", class: "govuk-link govuk-link--no-visited-state") %>
+      </div>
+    <% end %>
   </div>
 </div>
