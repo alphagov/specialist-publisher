@@ -40,6 +40,7 @@ You'll need to generate your own UUIDs for the `content_id` (of the finder), and
    irb(main):002:0> SecureRandom.uuid
    => "5087e8b6-ee54-40f9-b592-8c2813c7037d"
    ```
+For a breakdown of email subscription options see [Configure the email sign up page](#4-configure-the-email-sign-up-page).
 
 ### Create the model
 
@@ -75,9 +76,34 @@ Finally, you'll need to add your custom fields to:
 
 ## 4. Configure the email sign up page
 
-The email sign up page is rendered by [Finder Frontend](https://github.com/alphagov/finder-frontend) using the configuration in the new schema added to specialist publisher. The schema should specify `email_filter_by` and `email_filter_facets` (e.g. [cma-cases](https://github.com/alphagov/specialist-publisher/blob/ce68fdb008cab05225e0493e19decba5365e1e20/lib/documents/schemas/cma_cases.json#L29)).
+The email sign up page is rendered by [Finder Frontend](https://github.com/alphagov/finder-frontend) using the schema configuration in specialist publisher.
 
-If your email sign up page should have checkboxes (e.g. [cma-cases](https://www.gov.uk/cma-cases/email-signup)), you will need to edit email-alert-api by adding the new tags to [valid_tags.rb](https://github.com/alphagov/email-alert-api/blob/3e0018510ea85f5d561e2865ad149832b94688a1/lib/valid_tags.rb#L2).
+The finder default is to have no email subscription. Email subscriptions can be set as:
+
+### 1. Subscribe to all fields
+
+- Configure `signup_content_id` - a new `UUID` for the email signup page. Whilst this is enough to configure email subscription, it does not offer the user any filtering options.
+- You can allow the user to preserve their facet selection when navigating to the email subscription page. In the `email_filter_options` hash, set `email_filter_by` to `all_selected_facets`. This will pick up all the facets that have `allowed_values` and `filterable: true`. See [example](https://github.com/alphagov/specialist-publisher/blob/91ee849549c5e5478126d06842513a516cacceb2/lib/documents/schemas/marine_equipment_approved_recommendations.json#L12).
+- You may exclude some of the facets by additionally setting `all_selected_facets_except_for` - see [example](https://github.com/alphagov/specialist-publisher/blob/91ee849549c5e5478126d06842513a516cacceb2/lib/documents/schemas/export_health_certificates.json#L8).
+- Set `subscription_list_title_prefix` (optional).
+
+### 2. Subscribe to specific fields(set)
+
+- Configure the `signup_content_id` and, optionally, the `subscription_list_title_prefix`, as in the previous step.
+- Set `email_filter_by` to a specific facet - see [example](https://github.com/alphagov/specialist-publisher/blob/91ee849549c5e5478126d06842513a516cacceb2/lib/documents/schemas/tax_tribunal_decisions.json#L13).
+- Edit [email-alert-api](https://github.com/alphagov/email-alert-api/tree/main/lib) by adding the new filters to [valid_tags.rb](https://github.com/alphagov/email-alert-api/blob/main/lib/valid_tags.rb).
+
+#### Breakdown of the email options:
+- `subscription_list_title_prefix` - typically set in most finders. It defines the beginning of the email title. For example, CMA cases have this value set to `CMA cases`, meaning an email title would read as "_CMA cases_ with digital markets unit". When omitted, the email title will only reference subscribed facets.
+- `email_alert_topic_name_overrides` - changes the display label of individual facets options in the email title the user receives upon subscribing.
+- `downcase_email_alert_topic_names` - downcases the display label of individual facet options in the email title the user receives upon subscribing.
+- `pre_checked_email_alert_checkboxes` - takes an array of facets, which will appear pre-checked on the email signup page.
+
+
+### 3. Signup link
+
+If the subscription is managed by an external service, it should be set via a `signup_link`. See [example](https://github.com/alphagov/specialist-publisher/blob/91ee849549c5e5478126d06842513a516cacceb2/lib/documents/schemas/drug_safety_updates.json#L148).
+
 
 ## 5. Deploy a finder to the draft stack (for previewing)
 
