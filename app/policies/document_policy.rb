@@ -8,8 +8,7 @@ class DocumentPolicy < ApplicationPolicy
   alias_method :edit?, :index?
   alias_method :update?, :index?
   alias_method :show?, :index?
-  # FIXME: fix this, attachments are using the wrong policy
-  alias_method :destroy?, :index?
+  alias_method :destroy?, :index? # used only by AttachmentsController
 
   def can_request_edits_to_finder?
     publish?
