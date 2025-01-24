@@ -5,6 +5,17 @@ class AdminController < ApplicationController
 
   def new
     authorize current_user, :can_request_new_finder?, policy_class: FinderAdministrationPolicy
+
+    @proposed_schema = FinderSchema.new
+    @proposed_schema.facets = []
+
+    if request.method == "POST"
+      @proposed_schema.content_id = SecureRandom.uuid
+      overwrite_with_facets_params(@proposed_schema)
+      overwrite_with_metadata_params(@proposed_schema)
+
+      render :new
+    end
   end
 
   def summary; end
@@ -119,7 +130,8 @@ private
 
   def overwrite_with_facets_params(proposed_schema)
     params_to_overwrite = facets_params
-    params_to_overwrite["facets"] = params_to_overwrite["facets"].values.map { |facet_params|
+    submitted_facets = params_to_overwrite["facets"]&.values || [] # `nil` if "new finder" form is submitted without any facets
+    params_to_overwrite["facets"] = submitted_facets.map { |facet_params|
       next if facet_params["_destroy"] == "1"
 
       Facet.from_finder_admin_form_params(facet_params)
