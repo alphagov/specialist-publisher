@@ -3,6 +3,10 @@ class AdminController < ApplicationController
 
   before_action :check_authorisation, if: :document_type_slug
 
+  def new
+    authorize current_user, :can_request_new_finder?, policy_class: FinderAdministrationPolicy
+  end
+
   def summary; end
 
   def edit_facets; end

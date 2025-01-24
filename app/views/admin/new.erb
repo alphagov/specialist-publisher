@@ -1,0 +1,25 @@
+<% content_for :breadcrumbs do %>
+  <%= render "govuk_publishing_components/components/breadcrumbs", {
+  collapse_on_mobile: true,
+    breadcrumbs: [
+      {
+        title: "All finders",
+        url: root_path
+      },
+      {
+        title: "Request for a new finder",
+        url: "/admin/new"
+      }
+    ]
+  } %>
+<% end %>
+<% content_for :page_title, "Request for a new finder" %>
+<% content_for :title, "Request for a new finder" %>
+
+<div class="govuk-grid-row govuk-!-margin-top-6">
+  <div class="govuk-grid-column-two-thirds">
+    <p class="govuk-body">
+      This form is for internal (developer) use only and is not intended to be used by publishers.
+    </p>
+  </div>
+</div>

@@ -15,6 +15,7 @@ Rails.application.routes.draw do
 
   resources :document_list_export_request, path: "/export/:document_type_slug", param: :export_id, only: [:show]
 
+  get "/admin/new", to: "admin#new", as: :new_finder
   get "/admin/:document_type_slug", to: "admin#summary", as: :administrate_finder
   get "/admin/facets/:document_type_slug", to: "admin#edit_facets"
   post "/admin/facets/:document_type_slug", to: "admin#confirm_facets"
