@@ -1,5 +1,5 @@
 class TaxTribunalDecision < Document
-  validates :tribunal_decision_category, presence: true
+  apply_validations
   validates :tribunal_decision_decision_date, allow_blank: true, date: true
 
   FORMAT_SPECIFIC_FIELDS = %i[
