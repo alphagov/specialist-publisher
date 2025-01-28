@@ -1,13 +1,7 @@
 class TrafficCommissionerRegulatoryDecision < Document
   apply_validations
 
-  FORMAT_SPECIFIC_FIELDS = %i[
-    decision_subject
-    regions
-    case_type
-    outcome_type
-    first_published_at
-  ].freeze
+  FORMAT_SPECIFIC_FIELDS = format_specific_fields
 
   attr_accessor(*FORMAT_SPECIFIC_FIELDS)
 

@@ -1,11 +1,7 @@
 class MaibReport < Document
   apply_validations
 
-  FORMAT_SPECIFIC_FIELDS = %i[
-    date_of_occurrence
-    report_type
-    vessel_type
-  ].freeze
+  FORMAT_SPECIFIC_FIELDS = format_specific_fields
 
   attr_accessor(*FORMAT_SPECIFIC_FIELDS)
 

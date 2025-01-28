@@ -1,11 +1,7 @@
 class MedicalSafetyAlert < Document
   apply_validations
 
-  FORMAT_SPECIFIC_FIELDS = %i[
-    alert_type
-    issued_date
-    medical_specialism
-  ].freeze
+  FORMAT_SPECIFIC_FIELDS = format_specific_fields
 
   attr_accessor(*FORMAT_SPECIFIC_FIELDS)
 
