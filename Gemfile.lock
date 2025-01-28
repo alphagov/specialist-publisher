@@ -839,7 +839,6 @@ DEPENDENCIES
   pry-rails
   puma
   pundit
-  rackup (= 1.0.0)
   rails (= 7.2)
   rails-controller-testing
   rspec-rails
