@@ -1,21 +1,21 @@
 class AdminController < ApplicationController
   layout "design_system"
 
-  before_action :check_authorisation, if: :document_type_slug
+  before_action :check_authorisation
 
   def new
-    authorize current_user, :can_request_new_finder?, policy_class: FinderAdministrationPolicy
-
     @proposed_schema = FinderSchema.new
     @proposed_schema.facets = []
+  end
 
-    if request.method == "POST"
-      @proposed_schema.content_id = SecureRandom.uuid
-      overwrite_with_facets_params(@proposed_schema)
-      overwrite_with_metadata_params(@proposed_schema)
+  def create
+    @proposed_schema = FinderSchema.new
+    @proposed_schema.facets = []
+    @proposed_schema.content_id = SecureRandom.uuid
+    overwrite_with_facets_params(@proposed_schema)
+    overwrite_with_metadata_params(@proposed_schema)
 
-      render :new
-    end
+    render :new
   end
 
   def summary; end
@@ -49,7 +49,9 @@ class AdminController < ApplicationController
 private
 
   def check_authorisation
-    if current_format
+    if !document_type_slug
+      authorize current_user, :can_request_new_finder?, policy_class: FinderAdministrationPolicy
+    elsif current_format
       authorize current_format
     else
       flash[:danger] = "That format doesn't exist. If you feel you've reached this in error, please contact your main GDS contact."
