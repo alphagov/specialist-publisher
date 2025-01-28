@@ -36,9 +36,9 @@ RSpec.feature "Creating a Protected Food Drink Name", type: :feature do
     select "Protected Geographical Indication (PGI)", from: "Protection type"
     select "United Kingdom", from: "Country"
     select "Wine", from: "Traditional term grapevine product category"
-    fill_in "[protected_food_drink_name]date_registration(1i)", with: "2014"
-    fill_in "[protected_food_drink_name]date_registration(2i)", with: "01"
-    fill_in "[protected_food_drink_name]date_registration(3i)", with: "01"
+    fill_in "protected_food_drink_name[date_registration(1i)]", with: "2014"
+    fill_in "protected_food_drink_name[date_registration(2i)]", with: "01"
+    fill_in "protected_food_drink_name[date_registration(3i)]", with: "01"
 
     click_button "Save as draft"
     assert_publishing_api_put_content(content_id)

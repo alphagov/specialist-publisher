@@ -19,13 +19,13 @@
     </div>
     <div class="form-group row">
       <div class="col-md-2">
-        <%= f.text_field field, name: "[#{format}]#{field}(1i)", id: "#{format}_#{field}_year", class: 'form-control', value: date_value("year", date), type: "number", min: '1000', max: '9999' %>
+        <%= f.text_field field, name: "#{format}[#{field}(1i)]", id: "#{format}_#{field}_year", class: 'form-control', value: date_value("year", date), type: "number", min: '1000', max: '9999' %>
       </div>
       <div class="col-md-2">
-        <%= f.text_field field, name: "[#{format}]#{field}(2i)", id: "#{format}_#{field}_month", class: 'form-control', value: date_value("month", date), type: "number", min: '1', max: '12' %>
+        <%= f.text_field field, name: "#{format}[#{field}(2i)]", id: "#{format}_#{field}_month", class: 'form-control', value: date_value("month", date), type: "number", min: '1', max: '12' %>
       </div>
       <div class="col-md-2">
-        <%= f.text_field field, name: "[#{format}]#{field}(3i)", id: "#{format}_#{field}_day", class: "form-control", value: date_value("day", date), type: "number", min: '1', max: '31' %>
+        <%= f.text_field field, name: "#{format}[#{field}(3i)]", id: "#{format}_#{field}_day", class: "form-control", value: date_value("day", date), type: "number", min: '1', max: '31' %>
       </div>
     </div>
   </div>
