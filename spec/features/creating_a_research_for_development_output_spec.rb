@@ -30,9 +30,9 @@ RSpec.feature "Creating a Research for Development Output", type: :feature do
     fill_in "Title", with: title
     fill_in "Summary", with: summary
     fill_in "Body", with: "## Header#{"\n\nThis is the long body of an example Research for Development output" * 10}"
-    fill_in "[research_for_development_output]first_published_at(1i)", with: "2013"
-    fill_in "[research_for_development_output]first_published_at(2i)", with: "01"
-    fill_in "[research_for_development_output]first_published_at(3i)", with: "01"
+    fill_in "research_for_development_output[first_published_at(1i)]", with: "2013"
+    fill_in "research_for_development_output[first_published_at(2i)]", with: "01"
+    fill_in "research_for_development_output[first_published_at(3i)]", with: "01"
     select "Book Chapter", from: "Document type"
     select "Infrastructure", from: "Themes"
     select "Peer reviewed", from: "Review status"
