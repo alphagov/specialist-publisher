@@ -1,7 +1,7 @@
 {
   "base_path": "/traffic-commissioner-regulatory-decisions",
   "content_id": "be0e45cf-6da6-49c6-9f09-ddca614dbc55",
-  "description": "Find reports and updates on current and historical Traffic Commissioner regulatory decisions",
+  "description": "For Traffic Commissioner regulatory decisions about truck, bus and coach operator licences and safety standards. ",
   "document_noun": "decision",
   "document_title": "Traffic Commissioner Regulatory Decision",
   "facets": [
@@ -210,5 +210,8 @@
   "organisations": [
     "78dfc32b-b1ef-44ca-924c-a2cf773e87ca"
   ],
+  "signup_content_id": "b65c9331-5c34-4201-9c30-1ea64f03f49a",
+  "subscription_list_title_prefix": "Traffic Commissioner regulatory decisions",
+  "summary": "<p>The regulatory decisions include whether to:</p><ul><li>agree or deny grant of operator licences</li><li>take action against licence holders</li></ul><p>This page will also include details of when a decision is appealed, this will include:</p><p>UNDER APPEAL - The operator/transport manager has lodged an appeal with the Upper Tribunal.<br>STAY GRANTED PENDING APPEAL - An order has been made to stay the Commissioner’s decision until the outcome of the appeal.<br>APPEAL DETERMINED – SUCCESSFUL or APPEAL DETERMINED - DISMISSED - The decision was the subject of an appeal and a record of the Upper Tribunal’s decision can be found on its GOV.UK decisions page.</p><p>You can view the Upper Tribunal’s Decisions page <a href=\"https://www.gov.uk/administrative-appeals-tribunal-decisions?tribunal_decision_categories%5B%5D=transport-traffic-commissioner-and-doe-ni-appeals\">here</a>.</p><p>Decisions about the conduct of professional drivers can be found <a href=\"https://www.gov.uk/government/publications/regulatory-decisions-made-about-the-conduct-of-professional-drivers\">here</a>.</p><p>For regulatory decisions about truck, bus and coach operator licences and safety standards before 2025 please check <a href=\"https://www.gov.uk/government/collections/regulatory-decisions-for-truck-bus-and-coach-operators-licience-and-safety-standards\">here</a>.</p>",
   "target_stack": "live"
 }
