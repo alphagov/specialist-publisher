@@ -129,9 +129,8 @@ To release the finder to the live stack:
 1. Merge and deploy Publishing API, Specialist Publisher and Search API, if changed.
    - Ensure you deploy Publishing API first, to avoid schema validation errors.
 2. Also deploy Email Alert API if you have made changes to it.
-3. Run `rake SEARCH_INDEX=govuk 'search:update_schema'` on Search API if you have made changes.
-   - This command will likely succeed for a newly created finder with no published documents, or when adding new fields and values.
-   - When making structural changes to finders, such as changing a field's type, this command might error and you will have to do a [full reindex](https://docs.publishing.service.gov.uk/manual/reindex-elasticsearch.html#how-to-reindex-an-elasticsearch-index). A full reindex takes around 30-45 minutes on Production, or 3-4 hours on Integration.
+3. Depending on the changes you've made, you might need to update mappings in Search API.
+   - You will likely need to run `rake SEARCH_INDEX=govuk 'search:update_schema'`. For further details, see this [section on reindexing](#reindexing-breakdown).
 4. Publish the finder by running the rake task `publishing_api:publish_finders` or `publishing_api:publish_finder[your_format_name_based_on_the_schema_file]` against the specialist publisher app (rake tasks [here](https://github.com/alphagov/specialist-publisher/blob/ce68fdb008cab05225e0493e19decba5365e1e20/lib/tasks/publishing_api.rake)).
 
 ## 8. Permissions
@@ -240,3 +239,44 @@ The following steps are required to remove a finder:
 4. Remove usages from `search-api`. See [example commit](https://github.com/alphagov/search-api/pull/2881/files).
 5. Remove any usages from `finder-frontend`, if applicable.
 6. Deploy all changes.
+
+# Reindexing breakdown
+
+Regardless on the changes you're trying to make, you can implement them in such a way that a full reindex is not necessary. 
+
+<!-- TODO Old mappings will be cleaned up by a monthly cronjob. -->
+
+Here's a breakdown of the different scenarios:
+
+1. Add new, change or delete facet options
+
+No mapping update or reindex necessary, because Elasticsearch does not have an allowlist of options. Any value works, as long as it is the correct type.
+
+2. Add new facet
+
+Mapping update (via `update_schema` rake task) necessary, but full reindex not required. Once the mapping has been updated, you can start adding data to both existing and new documents for the new field.
+
+Run: `rake SEARCH_INDEX=govuk 'search:update_schema'` in a Search API console, to update the mapping.
+
+3. Change name of facet
+
+Just change the facet label in Specialist Publisher. 
+
+There's no actual need to change the field key. If you nonetheless want to change the key as well:
+- declare a new field by following steps similar to [adding a new field](#adding-a-new-field-to-an-existing-specialist-document)
+- remove the old field config from Specialist Publisher
+- run `update_schema` as in 2) above
+- republish the finder
+- retag and republish all the content from Specialist Publisher with the new field.
+
+The Elasticsearch mapping for the old field would still exist, but it wouldn't be doing any harm.
+
+4. Change type of facet
+
+To avoid a reindex, you can follow the same steps as for a field key change at 3) above.
+
+5. Delete facet
+
+Remove config from Specialist Publisher and republish all content. The Elasticsearch mapping for the field would still exist, but it wouldn't be doing any harm.
+
+If you still want to reindex, follow the instructions [here](https://docs.publishing.service.gov.uk/manual/reindex-elasticsearch.html#how-to-reindex-an-elasticsearch-index). A full reindex takes around 30-45 minutes on Production, or 3-4 hours on Integration.
