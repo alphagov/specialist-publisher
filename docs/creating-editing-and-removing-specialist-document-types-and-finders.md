@@ -82,8 +82,10 @@ The finder default is to have no email subscription. Email subscriptions can be 
 
 ### 1. Subscribe to all fields
 
-- Configure `signup_content_id` - a new `UUID` for the email signup page. Whilst this is enough to configure email subscription, it does not offer the user any filtering options.
-- You can allow the user to preserve their facet selection when navigating to the email subscription page. In the `email_filter_options` hash, set `email_filter_by` to `all_selected_facets`. This will pick up all the facets that have `allowed_values` and `filterable: true`. See [example](https://github.com/alphagov/specialist-publisher/blob/91ee849549c5e5478126d06842513a516cacceb2/lib/documents/schemas/marine_equipment_approved_recommendations.json#L12).
+- Configure `signup_content_id` - a new `UUID` for the email signup page. 
+- Whilst the above step is enough to configure email subscription, it does not offer the user any filtering options. You can additionally allow the user to preserve their facet selection when navigating to the email subscription page: 
+  - In the `email_filter_options` hash, set `email_filter_by` to `all_selected_facets`. This will pick up all the facets that have `allowed_values` and `filterable: true`. See [example](https://github.com/alphagov/specialist-publisher/blob/91ee849549c5e5478126d06842513a516cacceb2/lib/documents/schemas/marine_equipment_approved_recommendations.json#L12).
+  - Edit [email-alert-api](https://github.com/alphagov/email-alert-api/tree/main/lib) by adding all filterable facets to [valid_tags.rb](https://github.com/alphagov/email-alert-api/blob/main/lib/valid_tags.rb).
 - You may exclude some of the facets by additionally setting `all_selected_facets_except_for` - see [example](https://github.com/alphagov/specialist-publisher/blob/91ee849549c5e5478126d06842513a516cacceb2/lib/documents/schemas/export_health_certificates.json#L8).
 - Set `subscription_list_title_prefix` (optional).
 
