@@ -1,6 +1,5 @@
 class AsylumSupportDecision < Document
   apply_validations
-  validates :tribunal_decision_decision_date, date: true
   validates :tribunal_decision_sub_categories, asylum_support_decision_sub_category: true
 
   FORMAT_SPECIFIC_FIELDS = %i[

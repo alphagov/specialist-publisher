@@ -1,6 +1,5 @@
 class DrcfDigitalMarketsResearch < Document
   apply_validations
-  validates :digital_market_research_publish_date, date: true
 
   FORMAT_SPECIFIC_FIELDS = %i[
     digital_market_research_category

@@ -1,9 +1,6 @@
 class ProtectedFoodDrinkName < Document
   apply_validations
-  validates :date_application, date: true
-  validates :date_registration, date: true
   validates :time_registration, time: true
-  validates :date_registration_eu, date: true
 
   FORMAT_SPECIFIC_FIELDS = %i[
     registered_name

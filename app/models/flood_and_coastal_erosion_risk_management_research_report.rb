@@ -1,7 +1,5 @@
 class FloodAndCoastalErosionRiskManagementResearchReport < Document
   apply_validations
-  validates :date_of_completion, date: true
-  validates :date_of_start, date: true
   validates :primary_publishing_organisation, presence: true
 
   FORMAT_SPECIFIC_FIELDS = %i[

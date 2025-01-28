@@ -1,6 +1,5 @@
 class EmploymentTribunalDecision < Document
   apply_validations
-  validates :tribunal_decision_decision_date, date: true
 
   FORMAT_SPECIFIC_FIELDS = %i[
     hidden_indexable_content
