@@ -53,11 +53,12 @@
       <% if yield(:title).present? %>
         <div class="govuk-grid-row">
           <div class="govuk-grid-column-full">
-            <%= render "govuk_publishing_components/components/title", {
+            <%= render "govuk_publishing_components/components/heading", {
               context: yield(:context),
-              title: yield(:title),
-              margin_top: 0,
+              text: yield(:title),
               margin_bottom: 0,
+              font_size: "xl",
+              heading_level: 1,
             } %>
           </div>
         </div>
