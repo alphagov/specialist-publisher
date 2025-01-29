@@ -1,12 +1,7 @@
 class MarineNotice < Document
   apply_validations
 
-  FORMAT_SPECIFIC_FIELDS = %i[
-    marine_notice_type
-    marine_notice_vessel_type
-    marine_notice_topic
-    issued_date
-  ].freeze
+  FORMAT_SPECIFIC_FIELDS = format_specific_fields
 
   attr_accessor(*FORMAT_SPECIFIC_FIELDS)
 
