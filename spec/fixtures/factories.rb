@@ -825,4 +825,21 @@ FactoryBot.define do
       end
     end
   end
+
+  factory :authorised_fuel, parent: :document do
+    base_path { "/authorised-fuels/example-document" }
+    document_type { "authorised_fuel" }
+
+    transient do
+      default_metadata do
+        {
+          "authorised_fuel_name" => "Rocket fuel",
+          "authorised_fuel_manufacturer_name" => "Fuel manufacturer name",
+          "authorised_fuel_type" => %w[biomass liquid],
+          "authorised_fuel_country" => %w[England],
+          "authorised_fuel_address" => "123 Rocket Street",
+        }
+      end
+    end
+  end
 end
