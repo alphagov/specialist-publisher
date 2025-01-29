@@ -1,6 +1,5 @@
 class MarineNotice < Document
   apply_validations
-  validates :issued_date, date: true
 
   FORMAT_SPECIFIC_FIELDS = %i[
     marine_notice_type

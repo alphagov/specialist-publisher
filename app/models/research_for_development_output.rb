@@ -1,6 +1,5 @@
 class ResearchForDevelopmentOutput < Document
   apply_validations
-  validates :first_published_at, date: true
 
   FORMAT_SPECIFIC_FIELDS = %i[
     research_document_type

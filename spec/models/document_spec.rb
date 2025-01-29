@@ -955,5 +955,69 @@ RSpec.describe Document do
         expect(document.errors[:field2]).to eq(["can't be empty - custom"])
       end
     end
+
+    context "date" do
+      let(:finder_schema) do
+        schema = FinderSchema.new
+        schema.assign_attributes({
+          base_path: "/my-document-types",
+          target_stack: "live",
+          filter: {
+            "format" => "my_format",
+          },
+          content_id: @finder_content_id,
+          facets: [
+            {
+              "key" => "field1",
+              "name" => "field1 name",
+              "type" => "date",
+            },
+            {
+              "key" => "field2",
+              "name" => "field2 name",
+              "type" => "date",
+            },
+            {
+              "key" => "field3",
+              "name" => "field3 name",
+              "type" => "date",
+            },
+          ],
+        })
+        schema
+      end
+
+      let(:payload_attributes) do
+        {
+          document_type: "my_document_type",
+          title: "Example document",
+          description: "This is a summary",
+          base_path: "/my-document-types/example-document",
+          details: {
+            body: [
+              {
+                content_type: "text/govspeak",
+                content: "This is the body of an example document",
+              },
+            ],
+            metadata: {
+              field1: nil,
+              field2: "",
+              field3: "not a valid date",
+            },
+          },
+          links: {
+            finder: [@finder_content_id],
+          },
+        }
+      end
+
+      it "validates date, but allows blank" do
+        expect(document).to be_invalid
+        expect(document.errors[:field1]).to eq([])
+        expect(document.errors[:field2]).to eq([])
+        expect(document.errors[:field3]).to eq(["is not a valid date"])
+      end
+    end
   end
 end

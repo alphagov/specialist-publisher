@@ -1,7 +1,5 @@
 class CmaCase < Document
   apply_validations
-  validates :opened_date, allow_blank: true, date: true
-  validates :closed_date, allow_blank: true, date: true
   validates_with OpenBeforeClosedValidator, opened_date: :opened_date, closed_date: :closed_date
 
   FORMAT_SPECIFIC_FIELDS = %i[

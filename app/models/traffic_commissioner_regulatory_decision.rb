@@ -1,6 +1,5 @@
 class TrafficCommissionerRegulatoryDecision < Document
   apply_validations
-  validates :first_published_at, date: true
 
   FORMAT_SPECIFIC_FIELDS = %i[
     decision_subject

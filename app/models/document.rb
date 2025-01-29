@@ -376,6 +376,7 @@ class Document
       validations = facet.dig("specialist_publisher_properties", "validations") || {}
 
       validates key.to_sym, presence: validations.fetch("required").deep_symbolize_keys if validations.key?("required")
+      validates key.to_sym, date: true if facet["type"] == "date"
     end
   end
 

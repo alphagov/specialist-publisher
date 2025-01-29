@@ -1,6 +1,5 @@
 class ProductSafetyAlertReportRecall < Document
   apply_validations
-  validates :product_recall_alert_date, allow_blank: true, date: true
 
   FORMAT_SPECIFIC_FIELDS = %i[
     product_alert_type
