@@ -96,12 +96,14 @@ RSpec.describe AdminController, type: :controller do
         description: "Developer - raise a PR replacing this schema with the schema below: " \
           "https://github.com/alphagov/specialist-publisher/edit/main/lib/documents/schemas/cma_cases.json" \
           "\r\n---\r\n" \
-          "```\r\n{ \"foo\": \"bar\" }\r\n```",
+          "```\r\n{ \"foo\": \"bar\" }\r\n```" \
+          "\r\n---\r\n" \
+          "Editorial remarks:" \
+          "\r\n#{editorial_remark}",
         requester: {
           name: user.name,
           email: user.email,
         },
-        editorial_remark:,
       }.to_json
 
       assert_requested(stub_post)
