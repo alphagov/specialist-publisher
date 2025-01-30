@@ -85,6 +85,7 @@ private
       :description,
       :summary,
       :show_summaries,
+      :document_title,
       :document_noun,
       organisations: [],
       related: [],
@@ -126,6 +127,10 @@ private
     email_alert = EmailAlert.from_finder_admin_form_params(email_alert_params)
     params_to_overwrite = metadata_params.merge!(email_alert.to_finder_schema_attributes)
     proposed_schema.update(params_to_overwrite.to_unsafe_h)
+
+    if params[:document_title] && proposed_schema.filter.blank?
+      proposed_schema.filter = { "format" => params[:document_title].parameterize(separator: "_") }
+    end
 
     if params[:include_related] != "true"
       proposed_schema.related = nil

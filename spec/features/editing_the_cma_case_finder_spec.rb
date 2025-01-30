@@ -36,6 +36,7 @@ RSpec.feature "Editing the CMA case finder", type: :feature do
     fill_in "Link 1", with: "Changed link 1"
     fill_in "Link 2", with: "Changed link 2"
     fill_in "Link 3", with: "Changed link 3"
+    fill_in "document_title", with: "Changed document title"
     fill_in "document_noun", with: "Changed document noun"
     choose "email_alert_type", option: "no"
 
@@ -47,7 +48,8 @@ RSpec.feature "Editing the CMA case finder", type: :feature do
     expect(page.find(".govuk-summary-list__row", text: "Short description (For search engines)")).to have_selector("dt", text: "Changed description")
     expect(page.find(".govuk-summary-list__row", text: "Summary of the finder (Longer description shown below title)")).to have_selector("dt", text: "Changed summary")
     expect(page.find(".govuk-summary-list__row", text: "Any related links on GOV.UK?")).to have_selector("dt", text: "Yes\nLink 1: Changed link 1\nLink 2: Changed link 2\nLink 3: Changed link 3")
-    expect(page.find(".govuk-summary-list__row", text: "The document noun (How the documents on the finder are referred to)")).to have_selector("dt", text: "Changed document noun")
+    expect(page.find(".govuk-summary-list__row", text: "Full document noun (Appears in various places in the Specialist Publisher user interface)")).to have_selector("dt", text: "Changed document title")
+    expect(page.find(".govuk-summary-list__row", text: "Shortened document noun (How the documents on the finder are referred to)")).to have_selector("dt", text: "Changed document noun")
     expect(page.find(".govuk-summary-list__row", text: "Would you like to set up email alerts for the finder?")).to have_selector("dt", text: "No")
 
     click_button "Submit changes"
@@ -71,6 +73,7 @@ RSpec.feature "Editing the CMA case finder", type: :feature do
     fill_in "Link 1", with: ""
     fill_in "Link 2", with: ""
     fill_in "Link 3", with: ""
+    fill_in "document_title", with: ""
     fill_in "document_noun", with: ""
 
     click_button "Submit changes"
@@ -81,7 +84,8 @@ RSpec.feature "Editing the CMA case finder", type: :feature do
     expect(page.find(".govuk-summary-list__row", text: "Short description (For search engines)")).to have_selector("dt", text: /^$/)
     expect(page.find(".govuk-summary-list__row", text: "Summary of the finder (Longer description shown below title)")).to have_selector("dt", text: /^$/)
     expect(page.find(".govuk-summary-list__row", text: "Any related links on GOV.UK?")).to have_selector("dt", text: "Yes")
-    expect(page.find(".govuk-summary-list__row", text: "The document noun (How the documents on the finder are referred to)")).to have_selector("dt", text: /^$/)
+    expect(page.find(".govuk-summary-list__row", text: "Full document noun (Appears in various places in the Specialist Publisher user interface)")).to have_selector("dt", text: /^$/)
+    expect(page.find(".govuk-summary-list__row", text: "Shortened document noun (How the documents on the finder are referred to)")).to have_selector("dt", text: /^$/)
 
     click_button "Submit changes"
 
