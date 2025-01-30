@@ -67,12 +67,14 @@ private
       description: "Developer - raise a PR replacing this schema with the schema below: " \
         "https://github.com/alphagov/specialist-publisher/edit/main/lib/documents/schemas/#{current_format.document_type.pluralize}.json" \
         "\r\n---\r\n" \
-        "```\r\n#{params[:proposed_schema]}\r\n```",
+        "```\r\n#{params[:proposed_schema]}\r\n```" \
+        "\r\n---\r\n" \
+        "Editorial remarks:" \
+        "\r\n#{params[:editorial_remark]}",
       requester: {
         name: current_user.name,
         email: current_user.email,
       },
-      editorial_remark: params[:editorial_remark],
     }
   end
 
