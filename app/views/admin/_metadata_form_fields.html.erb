@@ -110,12 +110,22 @@
 
 <%= render "govuk_publishing_components/components/input", {
   label: {
-    text: "The document noun (How the documents on the finder are referred to)",
+    text: "Full document noun (Appears in various places in the Specialist Publisher user interface)",
+    heading_size: "s",
+  },
+  name: "document_title",
+  value: schema.document_title,
+  hint: "For example ‘Business Finance Support Scheme’. On Finance and support for your business there’s 151 schemes, which updates when you start selecting filter options"
+} %>
+
+<%= render "govuk_publishing_components/components/input", {
+  label: {
+    text: "Shortened document noun (How the documents on the finder are referred to)",
     heading_size: "s",
   },
   name: "document_noun",
   value: schema.document_noun,
-  hint: "For example ‘scheme’. On Finance and support for your business there’s 151 schemes, which updates when you start selecting filter options"
+  hint: "For example ‘scheme’. See 'Full document noun' above"
 } %>
 
 <%= render EmailAlertFieldsetComponent.new(email_alert: EmailAlert.from_finder_schema(schema)) %>

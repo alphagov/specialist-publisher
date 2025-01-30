@@ -61,7 +61,11 @@
       value: schema.show_summaries ? "Yes" : "No"
     } if !(defined? previous_schema) || schema.show_summaries != previous_schema.show_summaries),
     ({
-      key: "The document noun (How the documents on the finder are referred to)",
+      key: "Full document noun (Appears in various places in the Specialist Publisher user interface)",
+      value: (schema.document_title || "").humanize
+    } if !(defined? previous_schema) || schema.document_title != previous_schema.document_title),
+    ({
+      key: "Shortened document noun (How the documents on the finder are referred to)",
       value: (schema.document_noun || "").humanize
     } if !(defined? previous_schema) || schema.document_noun != previous_schema.document_noun),
     ({

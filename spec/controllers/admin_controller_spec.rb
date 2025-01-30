@@ -63,6 +63,25 @@ RSpec.describe AdminController, type: :controller do
     end
   end
 
+  describe "POST confirm metadata" do
+    it "keeps any existing filter format property even if document title is changed" do
+      stub_publishing_api_has_content([], hash_including(document_type: Organisation.document_type))
+      post :confirm_metadata, params: { document_type_slug: "asylum-support-decisions", email_alert_type: "no", document_title: "Foo Bar" }
+      proposed_schema = controller.instance_variable_get(:@proposed_schema)
+      expect(proposed_schema.format).to eq("asylum_support_decision")
+    end
+
+    it "derives filter format from document title, if no filter format yet defined" do
+      stub_publishing_api_has_content([], hash_including(document_type: Organisation.document_type))
+      allow(Document).to receive(:finder_schema).and_return(FinderSchema.new)
+      allow(Document).to receive(:admin_slug).and_return("some-finder")
+
+      post :confirm_metadata, params: { document_type_slug: "some-finder", email_alert_type: "no", document_title: "Foo Bar" }
+      proposed_schema = controller.instance_variable_get(:@proposed_schema)
+      expect(proposed_schema.format).to eq("foo_bar")
+    end
+  end
+
   describe "POST edit facets" do
     it "responds successfully" do
       stub_publishing_api_has_content([], hash_including(document_type: Organisation.document_type))
