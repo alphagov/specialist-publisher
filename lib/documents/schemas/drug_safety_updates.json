@@ -135,7 +135,6 @@
   "filter": {
     "format": "drug_safety_update"
   },
-  "format_name": "Drug Safety Update",
   "name": "Drug Safety Update",
   "organisations": [
     "240f72bd-9a4d-4f39-94d9-77235cadde8e"

@@ -200,7 +200,6 @@
   "filter": {
     "format": "farming_grant"
   },
-  "format_name": "Find funding for land or farms",
   "name": "Find funding for land or farms",
   "organisations": [
     "de4e9dc6-cca4-43af-a594-682023b84d6c",

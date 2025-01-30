@@ -387,7 +387,6 @@
   "filter": {
     "format": "life_saving_maritime_appliance_service_station"
   },
-  "format_name": "Find a service station for your inflatable life-saving appliances (format)",
   "name": "Find a service station for your inflatable life-saving appliances",
   "organisations": [
     "23a24aa8-1711-42b6-bf6b-47af0f230295"

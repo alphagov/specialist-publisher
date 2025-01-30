@@ -170,7 +170,6 @@
   "filter": {
     "format": "medical_safety_alert"
   },
-  "format_name": "Medical safety alert",
   "name": "Alerts, recalls and safety information: medicines and medical devices",
   "organisations": [
     "240f72bd-9a4d-4f39-94d9-77235cadde8e"

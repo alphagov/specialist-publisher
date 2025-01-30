@@ -1106,7 +1106,6 @@
   "filter": {
     "format": "protected_food_drink_name"
   },
-  "format_name": "Protected geographical food and drink name",
   "name": "Protected geographical food and drink names",
   "organisations": [
     "de4e9dc6-cca4-43af-a594-682023b84d6c"

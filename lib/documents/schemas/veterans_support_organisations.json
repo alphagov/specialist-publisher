@@ -368,7 +368,6 @@
   "filter": {
     "format": "veterans_support_organisation"
   },
-  "format_name": "Find support for veterans and their families",
   "name": "Find support for veterans and their families",
   "organisations": [
     "516357f6-92f3-4292-8449-b958e1c63c5f"

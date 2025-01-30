@@ -403,7 +403,6 @@
   "filter": {
     "format": "cma_case"
   },
-  "format_name": "Competition and Markets Authority case",
   "name": "Competition and Markets Authority cases and projects",
   "organisations": [
     "957eb4ec-089b-4f71-ba2a-dc69ac8919ea"

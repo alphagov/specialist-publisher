@@ -307,7 +307,6 @@
   "filter": {
     "format": "employment_tribunal_decision"
   },
-  "format_name": "Employment tribunal decision",
   "name": "Employment tribunal decisions",
   "organisations": [
     "6f757605-ab8f-4b62-84e4-99f79cf085c2",

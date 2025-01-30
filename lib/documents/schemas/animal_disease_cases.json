@@ -195,7 +195,6 @@
   "filter": {
     "format": "animal_disease_case"
   },
-  "format_name": "Notifiable animal disease cases and control zone",
   "name": "Notifiable animal disease cases and control zones",
   "organisations": [
     "de4e9dc6-cca4-43af-a594-682023b84d6c",

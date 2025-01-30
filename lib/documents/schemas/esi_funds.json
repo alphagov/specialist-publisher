@@ -182,7 +182,6 @@
   "filter": {
     "format": "european_structural_investment_fund"
   },
-  "format_name": "ESIF call for proposals",
   "name": "European Structural and Investment Funds (ESIF)",
   "organisations": [
     "2e7868a8-38f5-4ff6-b62f-9a15d1c22d28",

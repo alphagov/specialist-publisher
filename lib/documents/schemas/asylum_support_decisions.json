@@ -315,7 +315,6 @@
   "filter": {
     "format": "asylum_support_decision"
   },
-  "format_name": "Asylum support tribunal decision",
   "name": "Asylum support tribunal decisions",
   "organisations": [
     "6f757605-ab8f-4b62-84e4-99f79cf085c2",
