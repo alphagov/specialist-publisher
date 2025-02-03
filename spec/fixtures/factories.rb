@@ -825,4 +825,21 @@ FactoryBot.define do
       end
     end
   end
+
+  factory :defra_approved_appliance, parent: :document do
+    base_path { "/defra-approved-appliances" }
+    document_type { "defra_approved_appliance" }
+
+    transient do
+      default_metadata do
+        {
+          "defra_approved_appliance_name" => "test appliance",
+          "defra_approved_appliance_type" => %w[pizza-oven],
+          "defra_approved_appliance_fuel_type" => %w[biomass],
+          "defra_approved_appliance_manufacturer" => "Funasonic",
+          "defra_approved_appliance_country" => %w[england],
+        }
+      end
+    end
+  end
 end
