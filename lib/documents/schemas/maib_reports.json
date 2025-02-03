@@ -97,7 +97,6 @@
   "filter": {
     "format": "maib_report"
   },
-  "format_name": "Marine Accident Investigation Branch report",
   "name": "Marine Accident Investigation Branch reports",
   "organisations": [
     "9c66b9a3-1e6a-48e8-974d-2a5635f84679"

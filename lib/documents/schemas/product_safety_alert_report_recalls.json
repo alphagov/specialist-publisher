@@ -293,7 +293,6 @@
   "filter": {
     "format": "product_safety_alert_report_recall"
   },
-  "format_name": "Product Safety Alerts, Reports and Recalls",
   "name": "Product Safety Alerts, Reports and Recalls",
   "organisations": [
     "a0ee18e7-9e1e-4ba1-aed5-f3f287dce752"

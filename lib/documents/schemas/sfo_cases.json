@@ -47,7 +47,6 @@
   "filter": {
     "format": "sfo_case"
   },
-  "format_name": "Find an SFO case",
   "name": "Find an SFO case",
   "organisations": [
     "ebae4517-422f-44dd-9f87-13304c9815cb"

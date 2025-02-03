@@ -2732,7 +2732,6 @@
   "filter": {
     "format": "utaac_decision"
   },
-  "format_name": "Administrative appeals tribunal decision",
   "name": "Administrative appeals tribunal decisions",
   "organisations": [
     "6f757605-ab8f-4b62-84e4-99f79cf085c2",

@@ -89,7 +89,6 @@
   "filter": {
     "format": "raib_report"
   },
-  "format_name": "Rail Accident Investigation Branch report",
   "name": "Rail Accident Investigation Branch reports",
   "organisations": [
     "013872d8-8bbb-4e80-9b79-45c7c5cf9177"

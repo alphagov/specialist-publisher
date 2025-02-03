@@ -105,7 +105,6 @@
   "filter": {
     "format": "service_standard_report"
   },
-  "format_name": "Service Assessment and Self Certification",
   "name": "Service Standard Reports",
   "organisations": [
     "af07d5a5-df63-4ddc-9383-6a666845ebe9"

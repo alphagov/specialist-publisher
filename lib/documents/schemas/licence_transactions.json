@@ -274,7 +274,6 @@
   "filter": {
     "format": "licence_transaction"
   },
-  "format_name": "Find and apply for licences",
   "label_text": "Search keywords <span class=\"govuk-!-display-block govuk-!-font-size-16 govuk-!-margin-bottom-2\">for example 'sell alcohol'</span>",
   "name": "Find a licence",
   "open_filter_on_load": true,

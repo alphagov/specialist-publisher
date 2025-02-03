@@ -209,7 +209,6 @@
   "filter": {
     "format": "countryside_stewardship_grant"
   },
-  "format_name": "Countryside Stewardship grant",
   "name": "Countryside Stewardship grant finder",
   "organisations": [
     "e8fae147-6232-4163-a3f1-1c15b755a8a4",

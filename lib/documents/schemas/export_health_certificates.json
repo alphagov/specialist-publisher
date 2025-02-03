@@ -1005,7 +1005,6 @@
   "filter": {
     "format": "export_health_certificate"
   },
-  "format_name": "Export health certificate",
   "name": "Find an export health certificate",
   "organisations": [
     "4ad67f14-6f9c-4fa4-80ab-687b6d81ea6f"

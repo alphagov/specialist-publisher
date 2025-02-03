@@ -76,7 +76,6 @@
   "filter": {
     "format": "tax_tribunal_decision"
   },
-  "format_name": "Tax and Chancery tribunal decision",
   "name": "Tax and Chancery tribunal decisions",
   "organisations": [
     "6f757605-ab8f-4b62-84e4-99f79cf085c2",

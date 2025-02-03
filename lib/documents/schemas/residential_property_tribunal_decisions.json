@@ -366,7 +366,6 @@
   "filter": {
     "format": "residential_property_tribunal_decision"
   },
-  "format_name": "Residential property tribunal decision",
   "name": "Residential property tribunal decisions",
   "organisations": [
     "6f757605-ab8f-4b62-84e4-99f79cf085c2",

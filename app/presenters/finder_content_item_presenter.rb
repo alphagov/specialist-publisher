@@ -54,7 +54,6 @@ private
       beta_message: file.fetch("beta_message", nil),
       document_noun: file.fetch("document_noun"),
       filter: file.fetch("filter", nil),
-      format_name: file.fetch("format_name", nil),
       open_filter_on_load: file.fetch("open_filter_on_load", nil),
       logo_path: file.fetch("logo_path", nil),
       show_summaries: file.fetch("show_summaries", false),
