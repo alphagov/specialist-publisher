@@ -1,0 +1,73 @@
+<%= render layout: "shared/form_group", locals: { f: f, field: :ipo_british_library_number, label: "British Library Number" } do %>
+  <%= f.text_field :ipo_british_library_number, class: "form-control" %>
+<% end %>
+
+<%= render layout: "shared/form_group", locals: { f: f, field: :ipo_type_of_hearing, label: "Type of Hearing" } do %>
+  <%= f.select :ipo_type_of_hearing,
+      facet_options(f, :ipo_type_of_hearing),
+      {},
+      {
+        class: 'select2 form-control',
+        multiple: false,
+        data:
+          {
+            placeholder: 'Select type of hearing'
+          }
+      }
+  %>
+<% end %>
+
+<%= render layout: "shared/form_group", locals: { f: f, field: :ipo_mark, label: "Mark" } do %>
+  <%= f.text_field :ipo_mark, class: "form-control" %>
+<% end %>
+
+<%= render layout: "shared/form_group", locals: { f: f, field: :ipo_class, label: "Class" } do %>
+  <%= f.select :ipo_class,
+      facet_options(f, :ipo_class),
+      {},
+      {
+        class: 'select2 form-control',
+        multiple: false,
+        data:
+          {
+            placeholder: 'Select class'
+          }
+      }
+  %>
+<% end %>
+
+<%= render "shared/date_fields", f: f, field: :ipo_decision_date, format: :trademark_decision %>
+
+<%= render layout: "shared/form_group", locals: { f: f, field: :ipo_appointed_person_hearing_officer, label: "Appointed Person/Hearing Officer" } do %>
+  <%= f.select :ipo_appointed_person_hearing_officer,
+               facet_options(f, :ipo_appointed_person_hearing_officer),
+               {},
+               {
+                 class: 'select2 form-control',
+                 multiple: false,
+                 data:
+                   {
+                     placeholder: 'Select class'
+                   }
+               }
+  %>
+<% end %>
+
+<%= render layout: "shared/form_group", locals: { f: f, field: :ipo_person_or_company_involved, label: "Person or Company Involved" } do %>
+  <%= f.text_field :ipo_person_or_company_involved, class: "form-control"%>
+<% end %>
+
+<%= render layout: "shared/form_group", locals: { f: f, field: :ipo_grounds_section, label: "Grounds Section" } do %>
+  <%= f.select :ipo_grounds_section,
+      facet_options(f, :ipo_grounds_section),
+      {},
+      {
+        class: 'select2 form-control',
+        multiple: true,
+        data:
+          {
+            placeholder: 'Select grounds section'
+          }
+      }
+  %>
+<% end %>
