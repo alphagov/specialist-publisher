@@ -825,4 +825,20 @@ FactoryBot.define do
       end
     end
   end
+
+  factory :trademark_decision, parent: :document do
+    base_path { "/trademark-decisions/example-document" }
+    document_type { "trademark_decision" }
+
+    transient do
+      default_metadata do
+        {
+          "trademark_decision_class" => "42",
+          "trademark_decision_date" => "2015-11-16",
+          "trademark_decision_appointed_person_hearing_officer" => "mr-n-abraham",
+          "trademark_decision_grounds_section" => %w[section-5-1-5-2-and-5-3-issues-to-do-with-goods-services],
+        }
+      end
+    end
+  end
 end
