@@ -923,7 +923,21 @@
       "allowed_values": [
         {
           "label": "Section 3(1) Graphical Representation",
-          "value": "section-3-1-graphical-representation"
+          "value": "section-3-1-graphical-representation",
+          "sub_facets": [{
+            "label": "Is it a sign?",
+            "value": "section-3-1-graphical-representation-is-it-a-sign"
+          },
+          {
+            "label": "Is it graphically represented?",
+            "value": "section-3-1-graphical-representation-is-it-graphically-represented"
+          },{
+            "label": "Is it capable of distinguishing?",
+            "value": "section-3-1-graphical-representation-is-it-capable-of-distinguishing"
+          },{
+            "label": "Not Applicable",
+            "value": "section-3-1-graphical-representation-not-applicable"
+          }]
         },
         {
           "label": "Section 3(1) Descriptiveness/Distinctiveness",
@@ -990,6 +1004,38 @@
       "filterable": true,
       "key": "ipo_grounds_section",
       "name": "Grounds Section",
+      "preposition": "with",
+      "specialist_publisher_properties": {
+        "select": "multiple",
+        "validations": {
+          "required": {}
+        }
+      },
+      "type": "text"
+    },
+    {
+      "allowed_values": [
+        {
+          "label": "Section 3(1) Graphical Representation - Is it a sign?",
+          "value": "section-3-1-graphical-representation-is-it-a-sign"
+        },
+        {
+          "label": "Section 3(1) Graphical Representation - Is it graphically represented?",
+          "value": "section-3-1-graphical-representation-is-it-graphically-represented"
+        },
+        {
+          "label": "Section 3(1) Graphical Representation - Is it capable of distinguishing?",
+          "value": "section-3-1-graphical-representation-is-it-capable-of-distinguishing"
+        },
+        {
+          "label": "Section 3(1) Graphical Representation - Not Applicable",
+          "value": "section-3-1-graphical-representation-not-applicable"
+        }
+      ],
+      "display_as_result_metadata": true,
+      "filterable": true,
+      "key": "ipo_grounds_sub_section",
+      "name": "Grounds Subsection",
       "preposition": "with",
       "specialist_publisher_properties": {
         "select": "multiple",

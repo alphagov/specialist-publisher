@@ -4,7 +4,7 @@
 
 <%= render layout: "shared/form_group", locals: { f: f, field: :ipo_type_of_hearing, label: "Type of Hearing" } do %>
   <%= f.select :ipo_type_of_hearing,
-      facet_options(f, :ipo_type_of_hearing),
+      options_for(f, :ipo_type_of_hearing),
       {},
       {
         class: 'select2 form-control',
@@ -23,7 +23,7 @@
 
 <%= render layout: "shared/form_group", locals: { f: f, field: :ipo_class, label: "Class" } do %>
   <%= f.select :ipo_class,
-      facet_options(f, :ipo_class),
+      options_for(f, :ipo_class),
       {},
       {
         class: 'select2 form-control',
@@ -40,7 +40,7 @@
 
 <%= render layout: "shared/form_group", locals: { f: f, field: :ipo_appointed_person_hearing_officer, label: "Appointed Person/Hearing Officer" } do %>
   <%= f.select :ipo_appointed_person_hearing_officer,
-               facet_options(f, :ipo_appointed_person_hearing_officer),
+               options_for(f, :ipo_appointed_person_hearing_officer),
                {},
                {
                  class: 'select2 form-control',
@@ -59,15 +59,30 @@
 
 <%= render layout: "shared/form_group", locals: { f: f, field: :ipo_grounds_section, label: "Grounds Section" } do %>
   <%= f.select :ipo_grounds_section,
-      facet_options(f, :ipo_grounds_section),
-      {},
-      {
-        class: 'select2 form-control',
-        multiple: true,
-        data:
-          {
-            placeholder: 'Select grounds section'
-          }
-      }
+               options_for(f, :ipo_grounds_section),
+               {},
+               {
+                 class: 'select2 form-control',
+                 multiple: true,
+                 data:
+                   {
+                     placeholder: 'Select grounds section'
+                   }
+               }
+  %>
+<% end %>
+
+<%= render layout: "shared/form_group", locals: { f: f, field: :ipo_grounds_sub_section, label: "Grounds Subsection" } do %>
+  <%= f.select :ipo_grounds_sub_section,
+               options_for(f, :ipo_grounds_sub_section),
+               {},
+               {
+                 class: 'select2 form-control',
+                 multiple: true,
+                 data:
+                   {
+                     placeholder: 'Select grounds subsection'
+                   }
+               }
   %>
 <% end %>

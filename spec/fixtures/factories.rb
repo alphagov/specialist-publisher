@@ -837,6 +837,7 @@ FactoryBot.define do
           "ipo_decision_date" => "2015-11-16",
           "ipo_appointed_person_hearing_officer" => "mr-n-abraham",
           "ipo_grounds_section" => %w[section-5-1-5-2-and-5-3-issues-to-do-with-goods-services],
+          "ipo_grounds_sub_section" => %w[section-3-1-graphical-representation-not-applicable],
         }
       end
     end

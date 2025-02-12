@@ -16,7 +16,8 @@ RSpec.describe "Sense-checks for every finder schema" do
       finder_schema["facets"].each do |facet|
         next unless facet["specialist_publisher_properties"]
 
-        valid_keys = %w[select omit_from_finder_content_item validations]
+        # We'd need some flag on the child facet, to not render it on FFE - child_nested_facet
+        valid_keys = %w[select omit_from_finder_content_item validations nested_facet]
         facet["specialist_publisher_properties"].each_key do |key|
           expect(valid_keys).to include(key), "In the '#{finder_schema['filter']['format']}' finder, facet '#{facet['key']}' has an invalid 'specialist_publisher_properties' key: '#{key}'"
         end
