@@ -1,7 +1,7 @@
 <%= render "shared/date_fields", f: f, field: :sift_end_date, format: :statutory_instrument %>
 <%= render "shared/date_fields", f: f, field: :laid_date, format: :statutory_instrument %>
 <%= render "shared/form_group", f: f, field: :sifting_status do %>
-  <%= f.select :sifting_status, facet_options(f, :sifting_status), {}, { class: "form-control" } %>
+  <%= f.select :sifting_status, options_for(f, :sifting_status), {}, { class: "form-control" } %>
 <% end %>
 <% # TODO: this bit of logic prevents us moving to the shared view %>
 <% withdrawn_date_display = f.object.withdrawn_sifting_status? ? "block" : "none" %>
@@ -10,7 +10,7 @@
 </div>
 <%= render "shared/form_group", f: f, field: :subject do %>
   <%= f.select :subject,
-      facet_options(f, :subject),
+      options_for(f, :subject),
       {},
       {
         class: "select2 form-control select-all-disabled",

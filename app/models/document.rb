@@ -172,8 +172,8 @@ class Document
     content_item.users || []
   end
 
-  def facet_options(facet)
-    finder_schema.options_for(facet)
+  def allowed_values(facet_name)
+    finder_schema.allowed_values_for(facet_name)
   end
 
   delegate :organisations, to: :finder_schema

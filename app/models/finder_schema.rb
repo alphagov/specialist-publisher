@@ -69,10 +69,6 @@ class FinderSchema
     related&.reject!(&:blank?)
   end
 
-  def options_for(facet_name)
-    allowed_values_as_option_tuples(allowed_values_for(facet_name))
-  end
-
   def humanized_facet_value(facet_key, value)
     type = facet_data_for(facet_key).fetch("type", nil)
     if type == "text" && allowed_values_for(facet_key).empty?
@@ -90,25 +86,16 @@ class FinderSchema
     facet_data_for(key).fetch("name") { key.to_s.humanize }
   end
 
+  def allowed_values_for(facet_name)
+    facet_data_for(facet_name).fetch("allowed_values", [])
+  end
+
 private
 
   def facet_data_for(facet_name)
     facets.find do |facet_record|
       facet_record.fetch("key") == facet_name.to_s
     end || {}
-  end
-
-  def allowed_values_for(facet_name)
-    facet_data_for(facet_name).fetch("allowed_values", [])
-  end
-
-  def allowed_values_as_option_tuples(allowed_values)
-    allowed_values.map do |value|
-      [
-        value.fetch("label", ""),
-        value.fetch("value", ""),
-      ]
-    end
   end
 
   def value_label_mapping_for(facet_key, value)

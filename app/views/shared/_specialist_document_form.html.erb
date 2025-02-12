@@ -14,7 +14,7 @@
   <% elsif field_config["specialist_publisher_properties"]["select"] == "one" %>
     <%= render layout: "shared/form_group", locals: { f: f, field: field, label: field_config["name"] } do %>
       <%= f.select field,
-              f.object.facet_options(field),
+              options_for(f,field),
               {
                 include_blank: true
               },
@@ -30,7 +30,7 @@
   <% elsif field_config["specialist_publisher_properties"]["select"] == "multiple" %>
     <%= render layout: "shared/form_group", locals: { f: f, field: field, label: field_config["name"] } do %>
       <%= f.select field,
-          f.object.facet_options(field),
+          options_for(f,field),
           {},
           {
             class: 'select2 form-control',
