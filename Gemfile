@@ -43,6 +43,7 @@ group :development, :test do
   gem "factory_bot"
   gem "govuk_schemas"
   gem "govuk_test"
+  gem "pry-byebug"
   gem "pry-rails"
   gem "puma"
   gem "rspec-rails"
