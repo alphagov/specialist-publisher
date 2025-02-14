@@ -80,6 +80,41 @@ RSpec.describe FinderSchema do
     it "returns the humanized version of the supplied facet key is not defined in the schema" do
       expect(FinderSchema.new(mandatory_properties).humanized_facet_name("review_status")).to eq("Review status")
     end
+
+    context "the key is a nested facet" do
+      it "returns the name defined in the schema for the supplied facet key" do
+        properties = mandatory_properties.merge(
+          {
+            "facets" => [
+              {
+                "key" => "parent_facet_key",
+                "name" => "Parent facet name",
+                "sub_facet_key" => "sub_facet_key",
+                "sub_facet_name" => "Sub Facet Name",
+                "allowed_values" => [
+                  {
+                    "label" => "Facet label",
+                    "value" => "parent-facet-value",
+                    "sub_facets" => [
+                      {
+                        "label" => "Sub Facet label 1",
+                        "value" => "sub-facet-value-1",
+                      },
+                    ],
+                  },
+                ],
+              },
+            ],
+          },
+        )
+
+        expect(FinderSchema.new(properties).humanized_facet_name("sub_facet_key")).to eq("Sub Facet Name")
+      end
+
+      it "returns the humanized version of the supplied nested facet key if not defined in the schema" do
+        expect(FinderSchema.new(mandatory_properties).humanized_facet_name("no_key_in_schema")).to eq("No key in schema")
+      end
+    end
   end
 
   describe "#humanized_facet_value" do
@@ -132,6 +167,136 @@ RSpec.describe FinderSchema do
         expect(
           FinderSchema.new(mandatory_properties).humanized_facet_value("first_published_at", "2012-01-01"),
         ).to eql("2012-01-01")
+      end
+    end
+
+    context "the key is a nested facet" do
+      it "appends the parent label to the facet label defined in the schema for the supplied value" do
+        properties = mandatory_properties.merge(
+          {
+            "facets" => [
+              {
+                "key" => "parent_facet_key",
+                "name" => "Parent facet name",
+                "sub_facet_key" => "sub_facet_key",
+                "sub_facet_name" => "Sub Facet Name",
+                "allowed_values" => [
+                  {
+                    "label" => "Facet label",
+                    "value" => "parent-facet-value",
+                    "sub_facets" => [
+                      {
+                        "label" => "Sub Facet label 1",
+                        "value" => "sub-facet-value-1",
+                      },
+                      {
+                        "label" => "Sub Facet label 2",
+                        "value" => "sub-facet-value-2",
+                      },
+                    ],
+                  },
+                ],
+              },
+            ],
+          },
+        )
+
+        expect(FinderSchema.new(properties).humanized_facet_value("sub_facet_key", "sub-facet-value-1")).to eq("Facet label - Sub Facet label 1")
+        expect(FinderSchema.new(properties).humanized_facet_value("sub_facet_key", "sub-facet-value-2")).to eq("Facet label - Sub Facet label 2")
+      end
+
+      it "returns received value if subfacets are not defined" do
+        properties = mandatory_properties.merge(
+          {
+            "facets" => [
+              {
+                "key" => "parent_facet_key",
+                "name" => "Parent facet name",
+                "sub_facet_key" => "sub_facet_key",
+                "sub_facet_name" => "Sub Facet Name",
+                "allowed_values" => [
+                  {
+                    "label" => "Facet label",
+                    "value" => "parent-facet-value",
+                  },
+                ],
+              },
+            ],
+          },
+        )
+
+        expect(FinderSchema.new(properties).humanized_facet_value("sub_facet_key", "sub-facet-value-1")).to eq("sub-facet-value-1")
+      end
+    end
+  end
+
+  describe "#allowed_values_for" do
+    context "the key is a nested facet" do
+      it "returns array of all nested label and values for all parent facet options" do
+        properties = mandatory_properties.merge(
+          {
+            "facets" => [
+              {
+                "key" => "parent_facet_key",
+                "name" => "Parent facet name",
+                "sub_facet_key" => "sub_facet_key",
+                "sub_facet_name" => "Sub Facet Name",
+                "allowed_values" => [
+                  {
+                    "label" => "Facet label",
+                    "value" => "parent-facet-value",
+                    "sub_facets" => [
+                      {
+                        "label" => "Sub Facet label 1",
+                        "value" => "sub-facet-value-1",
+                      },
+                      {
+                        "label" => "Sub Facet label 2",
+                        "value" => "sub-facet-value-2",
+                      },
+                    ],
+                  },
+                ],
+              },
+            ],
+          },
+        )
+
+        expected = [
+          {
+            "label" => "Facet label - Sub Facet label 1",
+            "value" => "sub-facet-value-1",
+          },
+          {
+            "label" => "Facet label - Sub Facet label 2",
+            "value" => "sub-facet-value-2",
+          },
+        ]
+
+        expect(FinderSchema.new(properties).allowed_values_for("sub_facet_key")).to eq(expected)
+      end
+
+      it "returns empty array if no nested facet values are defined" do
+        properties = mandatory_properties.merge(
+          {
+            "facets" => [
+              {
+                "key" => "parent_facet_key",
+                "name" => "Parent facet name",
+                "sub_facet_key" => "sub_facet_key",
+                "sub_facet_name" => "Sub Facet Name",
+                "allowed_values" => [
+                  {
+                    "label" => "Facet label",
+                    "value" => "parent-facet-value",
+                  },
+                ],
+              },
+            ],
+          },
+        )
+
+        expect(FinderSchema.new(properties).allowed_values_for("sub_facet_key")).to eq([])
       end
     end
   end

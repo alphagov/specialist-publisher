@@ -97,9 +97,37 @@ class FinderSchema
 private
 
   def facet_data_for(facet_name)
-    facets.find do |facet_record|
+    parent_facet = facets.find do |facet_record|
       facet_record.fetch("key") == facet_name.to_s
     end || {}
+
+    return parent_facet if parent_facet.any?
+
+    facet_data_for_nested(facet_name)
+  end
+
+  def facet_data_for_nested(facet_key)
+    parent_facet = facets.select { |f| f["sub_facet_key"] == facet_key.to_s }.first
+
+    return {} unless parent_facet
+
+    allowed_values = []
+    parent_facet["allowed_values"].map do |allowed_value|
+      parent_label = allowed_value["label"]
+      allowed_value["sub_facets"]&.map do |sub_facet|
+        allowed_values << {
+          "label" => "#{parent_label} - #{sub_facet['label']}",
+          "value" => sub_facet["value"],
+        }
+      end
+    end
+
+    {
+      "key" => facet_key.to_s,
+      "allowed_values" => allowed_values.flatten.compact,
+      "name" => parent_facet["sub_facet_name"],
+      "type" => parent_facet["type"],
+    }
   end
 
   def value_label_mapping_for(facet_key, value)

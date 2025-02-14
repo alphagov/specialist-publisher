@@ -1,7 +1,15 @@
 require "spec_helper"
 
 RSpec.feature "Creating a Trademark Decision", type: :feature do
-  let(:trademark_decision) { FactoryBot.create(:trademark_decision) }
+  let(:trademark_decision) do
+    FactoryBot.create(
+      :trademark_decision,
+      default_metadata: {
+        trademark_decision_grounds_section: ["section-3-1-graphical-representation"],
+        trademark_decision_grounds_sub_section: ["section-3-1-graphical-representation-is-it-a-sign"],
+      },
+    )
+  end
   let(:content_id) { trademark_decision["content_id"] }
   let(:save_button_disable_with_message) { page.find_button("Save as draft")["data-disable-with"] }
 
@@ -106,6 +114,8 @@ RSpec.feature "Creating a Trademark Decision", type: :feature do
 
     expect(page.status_code).to eq(200)
     expect(page).to have_content("Created Example document")
+    expect(page).to have_content("Grounds Section Section 3(1) Graphical Representation")
+    expect(page).to have_content("Grounds Sub Section Section 3(1) Graphical Representation - Is it a sign?")
     expect(page).to have_content("Bulk published false")
   end
 end
