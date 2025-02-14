@@ -3,6 +3,23 @@ require "gds_api/test_helpers/asset_manager"
 RSpec.describe Attachment do
   include GdsApi::TestHelpers::AssetManager
 
+  let(:finder_schema) do
+    schema = FinderSchema.new
+    schema.assign_attributes({
+      base_path: "/my-document-types",
+      target_stack: "live",
+      filter: {
+        "format" => "my_format",
+      },
+      content_id: @finder_content_id,
+    })
+    schema
+  end
+
+  before do
+    allow(FinderSchema).to receive(:load_from_schema).and_return(finder_schema)
+  end
+
   describe ".all_from_publishing_api" do
     context "when the payload has attachments in details" do
       let(:attachment_payload) { FactoryBot.create(:attachment_payload) }

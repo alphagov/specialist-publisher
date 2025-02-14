@@ -90,6 +90,10 @@ class FinderSchema
     facet_data_for(facet_name).fetch("allowed_values", [])
   end
 
+  def nested_facets
+    facets.select { |facet| facet["nested_facet"] }
+  end
+
 private
 
   def facet_data_for(facet_name)

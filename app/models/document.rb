@@ -81,8 +81,10 @@ class Document
   def set_attributes(attrs, keys = nil)
     keys ||= attrs.keys
     keys.each do |key|
-      public_send(:"#{clean_key(key.to_s)}=", param_value(attrs, key))
+      assign_attributes(clean_key(key) => param_value(attrs, key))
     end
+
+    set_nested_facet_attributes(attrs)
   end
 
   def to_h
@@ -371,7 +373,14 @@ class Document
   end
 
   def self.format_specific_fields
-    finder_schema.facets.map { |facet| facet["key"].to_sym }.freeze
+    fields = []
+
+    finder_schema.facets.each do |facet|
+      fields << facet["key"].to_sym
+      fields << facet["sub_facet_key"].to_sym if facet["sub_facet_key"]
+    end
+
+    fields
   end
 
   def self.apply_validations
@@ -385,6 +394,35 @@ class Document
   end
 
 private
+
+  def set_nested_facet_attributes(attrs)
+    return if %w[attachment document].include?(document_type)
+
+    finder_schema.nested_facets.each do |nested_facet_from_schema|
+      nested_facet_value_from_params = param_value(attrs, nested_facet_from_schema["key"])
+
+      next unless nested_facet_value_from_params
+
+      parent_facet_value = []
+      nested_facet_value = []
+
+      nested_facet_value_from_params.each do |value|
+        parent_facet = nested_facet_from_schema["allowed_values"]&.detect do |allowed_value|
+          allowed_value["sub_facets"]&.pluck("value")&.include?(value)
+        end
+
+        if parent_facet
+          parent_facet_value << parent_facet["value"]
+          nested_facet_value << value
+        else
+          parent_facet_value << value
+        end
+      end
+
+      assign_attributes(clean_key(nested_facet_from_schema["key"]) => parent_facet_value.uniq) if parent_facet_value.any?
+      assign_attributes(clean_key(nested_facet_from_schema["sub_facet_key"]) => nested_facet_value.uniq) if nested_facet_value.any?
+    end
+  end
 
   def param_value(params, key)
     date_param_value(params, key) || params.fetch(key, nil)

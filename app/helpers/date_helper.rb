@@ -13,7 +13,7 @@ module DateHelper
   # the format YYYY-MM-dd. Expects the Rails convention
   # for multiple parameter date fragments.
   def date_param_value(params, key)
-    k = clean_key(key.to_s)
+    k = clean_key(key)
     attrs = params.symbolize_keys
     if attrs.key?(:"#{k}(1i)")
       format_date = [
@@ -27,7 +27,7 @@ module DateHelper
   end
 
   def clean_key(key)
-    key.gsub(/\(\di\)$/, "")
+    key.to_s.gsub(/\(\di\)$/, "")
   end
 
 private
