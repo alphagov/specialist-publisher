@@ -29,23 +29,27 @@
         },
         {
           "label": "Registrar – Ex parte hearings",
-          "value": "registrar--ex-parte-hearings"
+          "value": "registrar-ex-parte-hearings"
         },
         {
           "label": "Registrar – Inter partes interlocutory hearings",
-          "value": "registrar--inter-partes-interlocutory-hearings"
+          "value": "registrar-inter-partes-interlocutory-hearings"
         },
         {
           "label": "Registrar – Inter partes main hearings",
-          "value": "registrar--inter-partes-main-hearings"
+          "value": "registrar-inter-partes-main-hearings"
         },
         {
           "label": "Appointed person – Ex parte hearings",
-          "value": "appointed-person--ex-parte-hearings"
+          "value": "appointed-person-ex-parte-hearings"
         },
         {
           "label": "Appointed person – Inter partes interlocutory hearings",
-          "value": "appointed-person--inter-partes-interlocutory-hearings"
+          "value": "appointed-person-inter-partes-interlocutory-hearings"
+        },
+        {
+          "label": "Appointed Person - Inter partes main hearings",
+          "value": "appointed-person-inter-partes-main-hearings"
         }
       ],
       "display_as_result_metadata": true,
@@ -349,10 +353,6 @@
           "value": "ms-rosie-le-breton"
         },
         {
-          "label": "Ms Rosie Le Breton",
-          "value": "ms-rosie-le-breton"
-        },
-        {
           "label": "Mr M Bryant",
           "value": "mr-m-bryant"
         },
@@ -539,10 +539,6 @@
         {
           "label": "Mr M Howe",
           "value": "mr-m-howe"
-        },
-        {
-          "label": "Ms C Ireland",
-          "value": "ms-c-ireland"
         },
         {
           "label": "Ms C Ireland",
@@ -927,73 +923,690 @@
       "allowed_values": [
         {
           "label": "Section 3(1) Graphical Representation",
-          "value": "section-3-1-graphical-representation"
+          "value": "section-3-1-graphical-representation",
+          "sub_facets": [
+            {
+              "label": "Is it a sign?",
+              "value": "section-3-1-graphical-representation-is-it-a-sign"
+            },
+            {
+              "label": "Is it graphically represented?",
+              "value": "section-3-1-graphical-representation-is-it-graphically-represented"
+            },
+            {
+              "label": "Is it capable of distinguishing?",
+              "value": "section-3-1-graphical-representation-is-it-capable-of-distinguishing"
+            },
+            {
+              "label": "Not Applicable",
+              "value": "section-3-1-graphical-representation-not-applicable"
+            }
+          ]
         },
         {
           "label": "Section 3(1) Descriptiveness/Distinctiveness",
-          "value": "section-3-1-descriptiveness-distinctiveness"
+          "value": "section-3-1-descriptiveness-distinctiveness",
+          "sub_facets": [
+            {
+              "label": "Devoid of character - slogans",
+              "value": "section-3-1-descriptiveness-distinctiveness-devoid-of-character-slogans"
+            },
+            {
+              "label": "Devoid of character - shapes / packaging",
+              "value": "section-3-1-descriptiveness-distinctiveness-devoid-of-character-shapes-packaging"
+            },
+            {
+              "label": "Devoid of character - other unusual mark type",
+              "value": "section-3-1-descriptiveness-distinctiveness-devoid-of-character-other-unusual-mark-type"
+            },
+            {
+              "label": "Devoid of character - colours / colour combinations",
+              "value": "section-3-1-descriptiveness-distinctiveness-devoid-of-character-colours-colour-combinations"
+            },
+            {
+              "label": "Devoid of character - letters / numerals",
+              "value": "section-3-1-descriptiveness-distinctiveness-devoid-of-character-letters-numerals"
+            },
+            {
+              "label": "Devoid of character - word marks",
+              "value": "section-3-1-descriptiveness-distinctiveness-devoid-of-character-word-marks"
+            },
+            {
+              "label": "Devoid of character - other",
+              "value": "section-3-1-descriptiveness-distinctiveness-devoid-of-character-other"
+            },
+            {
+              "label": "Descriptiveness - geographical signs",
+              "value": "section-3-1-descriptiveness-distinctiveness-descriptiveness-geographical-signs"
+            },
+            {
+              "label": "Descriptiveness - famous names / images",
+              "value": "section-3-1-descriptiveness-distinctiveness-descriptiveness-famous-names-images"
+            },
+            {
+              "label": "Descriptiveness - other characteristic of goods or services",
+              "value": "section-3-1-descriptiveness-distinctiveness-descriptiveness-other-characteristic-of-goods-or-services"
+            },
+            {
+              "label": "Descriptiveness - forseeability",
+              "value": "section-3-1-descriptiveness-distinctiveness-descriptiveness-forseeability"
+            },
+            {
+              "label": "Customary in the language etc. - customary in the language",
+              "value": "section-3-1-descriptiveness-distinctiveness-customary-in-the-language-etc-customary-in-the-language"
+            },
+            {
+              "label": "Customary in the language etc. - trade name for goods or services",
+              "value": "section-3-1-descriptiveness-distinctiveness-customary-in-the-language-etc-trade-name-for-goods-or-services"
+            },
+            {
+              "label": "Customary in the language etc. - acquired distinctiveness",
+              "value": "section-3-1-descriptiveness-distinctiveness-customary-in-the-language-etc-acquired-distinctiveness"
+            },
+            {
+              "label": "Not Applicable",
+              "value": "section-3-1-descriptiveness-distinctiveness-not-applicable"
+            }
+          ]
         },
         {
           "label": "Section 3(2) Shapes",
-          "value": "section-3-2-shapes"
+          "value": "section-3-2-shapes",
+          "sub_facets": [
+            {
+              "label": "Shape resulting from the nature of the goods",
+              "value": "section-3-2-shapes-shape-resulting-from-the-nature-of-the-goods"
+            },
+            {
+              "label": "Shape necessary to obtain a technical result",
+              "value": "section-3-2-shapes-shape-necessary-to-obtain-a-technical-result"
+            },
+            {
+              "label": "Shape giving substantial value to the goods",
+              "value": "section-3-2-shapes-shape-giving-substantial-value-to-the-goods"
+            },
+            {
+              "label": "Not Applicable",
+              "value": "section-3-2-shapes-not-applicable"
+            }
+          ]
         },
         {
           "label": "Section 3(3) Immoral and Deceptive Marks",
-          "value": "section-3-3-immoral-and-deceptive-marks"
+          "value": "section-3-3-immoral-and-deceptive-marks",
+          "sub_facets": [
+            {
+              "label": "Contrary to public policy / accepted principles of morality",
+              "value": "section-3-3-immoral-and-deceptive-marks-contrary-to-public-policy-accepted-principles-of-morality"
+            },
+            {
+              "label": "Deceptive as to nature, quality etc.",
+              "value": "section-3-3-immoral-and-deceptive-marks-deceptive-as-to-nature-quality-etc"
+            },
+            {
+              "label": "Not Applicable",
+              "value": "section-3-3-immoral-and-deceptive-marks-not-applicable"
+            }
+          ]
         },
         {
           "label": "Section 3(4) and Section 3(5) Other Issues",
-          "value": "section-3-4-and-section-3-5-other-issues"
+          "value": "section-3-4-and-section-3-5-other-issues",
+          "sub_facets": [
+            {
+              "label": "'Other' law issues",
+              "value": "section-3-4-and-section-3-5-other-issues-other-law-issues"
+            },
+            {
+              "label": "Protected emblems etc.",
+              "value": "section-3-4-and-section-3-5-other-issues-protected-emblems-etc"
+            },
+            {
+              "label": "Not Applicable",
+              "value": "section-3-4-and-section-3-5-other-issues-not-applicable"
+            }
+          ]
         },
         {
           "label": "Section 3(6) Bad Faith",
-          "value": "section-3-6-bad-faith"
+          "value": "section-3-6-bad-faith",
+          "sub_facets": [
+            {
+              "label": "No intention to use",
+              "value": "section-3-6-bad-faith-no-intention-to-use"
+            },
+            {
+              "label": "Knowledge of opponent's use in the UK",
+              "value": "section-3-6-bad-faith-knowledge-of-opponents-use-in-the-uk"
+            },
+            {
+              "label": "Knowledge of opponent's mark outside the UK",
+              "value": "section-3-6-bad-faith-knowledge-of-opponents-mark-outside-the-uk"
+            },
+            {
+              "label": "Breach of agreement between the parties",
+              "value": "section-3-6-bad-faith-breach-of-agreement-between-the-parties"
+            },
+            {
+              "label": "Breach of fiduciary duty",
+              "value": "section-3-6-bad-faith-breach-of-fiduciary-duty"
+            },
+            {
+              "label": "Application by local agent / UK distributor problems",
+              "value": "section-3-6-bad-faith-application-by-local-agent-uk-distributor-problems"
+            },
+            {
+              "label": "Breakdown of former business relationship",
+              "value": "section-3-6-bad-faith-breakdown-of-former-business-relationship"
+            },
+            {
+              "label": "Partnership issues",
+              "value": "section-3-6-bad-faith-partnership-issues"
+            },
+            {
+              "label": "Music groups",
+              "value": "section-3-6-bad-faith-music-groups"
+            },
+            {
+              "label": "Not Applicable",
+              "value": "section-3-6-bad-faith-not-applicable"
+            }
+          ]
         },
         {
           "label": "Section 5(1), 5(2) and 5(3) Earlier Trade Marks",
-          "value": "section-5-1-5-2-and-5-3-earlier-trade-marks"
+          "value": "section-5-1-5-2-and-5-3-earlier-trade-marks",
+          "sub_facets": [
+            {
+              "label": "Identical marks",
+              "value": "section-5-1-5-2-and-5-3-earlier-trade-marks-identical-marks"
+            },
+            {
+              "label": "Distinctive and dominant components",
+              "value": "section-5-1-5-2-and-5-3-earlier-trade-marks-distinctive-and-dominant-components"
+            },
+            {
+              "label": "Composite word marks",
+              "value": "section-5-1-5-2-and-5-3-earlier-trade-marks-composite-word-marks"
+            },
+            {
+              "label": "Composite word and device marks",
+              "value": "section-5-1-5-2-and-5-3-earlier-trade-marks-composite-word-and-device-marks"
+            },
+            {
+              "label": "Treatment of descriptive / allusive elements",
+              "value": "section-5-1-5-2-and-5-3-earlier-trade-marks-treatment-of-descriptive-allusive-elements"
+            },
+            {
+              "label": "Particular visual / aural / conceptual considerations",
+              "value": "section-5-1-5-2-and-5-3-earlier-trade-marks-particular-visual-aural-conceptual-considerations"
+            },
+            {
+              "label": "Importance of first element",
+              "value": "section-5-1-5-2-and-5-3-earlier-trade-marks-importance-of-first-element"
+            },
+            {
+              "label": "Conceptual distinctions",
+              "value": "section-5-1-5-2-and-5-3-earlier-trade-marks-conceptual-distinctions"
+            },
+            {
+              "label": "Imperfect recollection",
+              "value": "section-5-1-5-2-and-5-3-earlier-trade-marks-imperfect-recollection"
+            },
+            {
+              "label": "Family of marks",
+              "value": "section-5-1-5-2-and-5-3-earlier-trade-marks-family-of-marks"
+            },
+            {
+              "label": "Well known mark claims",
+              "value": "section-5-1-5-2-and-5-3-earlier-trade-marks-well-known-mark-claims"
+            },
+            {
+              "label": "Not Applicable",
+              "value": "section-5-1-5-2-and-5-3-earlier-trade-marks-not-applicable"
+            }
+          ]
         },
         {
           "label": "Section 5(1), 5(2) and 5(3) Issues To Do With Goods/Services",
-          "value": "section-5-1-5-2-and-5-3-issues-to-do-with-goods-services"
+          "value": "section-5-1-5-2-and-5-3-issues-to-do-with-goods-services",
+          "sub_facets": [
+            {
+              "label": "Goods v retail services",
+              "value": "section-5-1-5-2-and-5-3-issues-to-do-with-goods-services-goods-v-retail-services"
+            },
+            {
+              "label": "Section 1(1) and Rule 8(2)",
+              "value": "section-5-1-5-2-and-5-3-issues-to-do-with-goods-services-section-1-1-and-rule-8-2"
+            },
+            {
+              "label": "Not Applicable",
+              "value": "section-5-1-5-2-and-5-3-issues-to-do-with-goods-services-not-applicable"
+            }
+          ]
         },
         {
           "label": "Section 5(1), 5(2) and 5(3) Average Customer",
-          "value": "section-5-1-5-2-and-5-3-average-customer"
+          "value": "section-5-1-5-2-and-5-3-average-customer",
+          "sub_facets": [
+            {
+              "label": "Identification of",
+              "value": "section-5-1-5-2-and-5-3-average-customer-identification-of"
+            },
+            {
+              "label": "Different consumer groups",
+              "value": "section-5-1-5-2-and-5-3-average-customer-different-consumer-groups"
+            },
+            {
+              "label": "Importance of end user / consumer",
+              "value": "section-5-1-5-2-and-5-3-average-customer-importance-of-end-user-consumer"
+            },
+            {
+              "label": "Consumer attention levels",
+              "value": "section-5-1-5-2-and-5-3-average-customer-consumer-attention-levels"
+            },
+            {
+              "label": "Purchasing process",
+              "value": "section-5-1-5-2-and-5-3-average-customer-purchasing-process"
+            },
+            {
+              "label": "Not Applicable",
+              "value": "section-5-1-5-2-and-5-3-average-customer-not-applicable"
+            }
+          ]
         },
         {
           "label": "Section 5(1), 5(2) and 5(3) Distinctive Character of Earlier Trade Mark",
-          "value": "section-5-1-5-2-and-5-3-distinctive-character-of-earlier-trade-mark"
+          "value": "section-5-1-5-2-and-5-3-distinctive-character-of-earlier-trade-mark",
+          "sub_facets": [
+            {
+              "label": "Any unusual issues",
+              "value": "section-5-1-5-2-and-5-3-distinctive-character-of-earlier-trade-mark-any-unusual-issues"
+            },
+            {
+              "label": "Not Applicable",
+              "value": "section-5-1-5-2-and-5-3-distinctive-character-of-earlier-trade-mark-not-applicable"
+            }
+          ]
         },
         {
           "label": "Section 5(1), 5(2) and 5(3) Likelihood of Confusion",
-          "value": "section-5-1-5-2-and-5-3-likeihood-of-confusion"
+          "value": "section-5-1-5-2-and-5-3-likelihood-of-confusion",
+          "sub_facets": [
+            {
+              "label": "Effect of concurrent use",
+              "value": "section-5-1-5-2-and-5-3-likelihood-of-confusion-effect-of-concurrent-use"
+            },
+            {
+              "label": "Decisions in other jurisdictions",
+              "value": "section-5-1-5-2-and-5-3-likelihood-of-confusion-decisions-in-other-jurisdictions"
+            },
+            {
+              "label": "State of the register",
+              "value": "section-5-1-5-2-and-5-3-likelihood-of-confusion-state-of-the-register"
+            },
+            {
+              "label": "Marketing concepts / considerations",
+              "value": "section-5-1-5-2-and-5-3-likelihood-of-confusion-marketing-concepts-considerations"
+            },
+            {
+              "label": "Not Applicable",
+              "value": "section-5-1-5-2-and-5-3-likelihood-of-confusion-not-applicable"
+            }
+          ]
         },
         {
           "label": "Section 5(1), 5(2) and 5(3) Dilution Cases",
-          "value": "section-5-1-5-2-and-5-3-dilution-cases"
+          "value": "section-5-1-5-2-and-5-3-dilution-cases",
+          "sub_facets": [
+            {
+              "label": "Reputation",
+              "value": "section-5-1-5-2-and-5-3-dilution-cases-reputation"
+            },
+            {
+              "label": "Link",
+              "value": "section-5-1-5-2-and-5-3-dilution-cases-link"
+            },
+            {
+              "label": "Unfair disadvantage of distinctive character",
+              "value": "section-5-1-5-2-and-5-3-dilution-cases-unfair-disadvantage-of-distinctive-character"
+            },
+            {
+              "label": "Unfair advantage of repute",
+              "value": "section-5-1-5-2-and-5-3-dilution-cases-unfair-advantage-of-repute"
+            },
+            {
+              "label": "Detriment to distinctive character",
+              "value": "section-5-1-5-2-and-5-3-dilution-cases-detriment-to-distinctive-character"
+            },
+            {
+              "label": "Detriment to repute",
+              "value": "section-5-1-5-2-and-5-3-dilution-cases-detriment-to-repute"
+            },
+            {
+              "label": "Without due cause",
+              "value": "section-5-1-5-2-and-5-3-dilution-cases-without-due-cause"
+            },
+            {
+              "label": "Not Applicable",
+              "value": "section-5-1-5-2-and-5-3-dilution-cases-not-applicable"
+            }
+          ]
         },
         {
           "label": "Section 5(4) Earlier Rights",
-          "value": "section-5-4-earlier-rights"
+          "value": "section-5-4-earlier-rights",
+          "sub_facets": [
+            {
+              "label": "Passing off (Issues arising from Registry proceedings)",
+              "value": "section-5-4-earlier-rights-passing-off-issues-arising-from-registry-proceedings"
+            },
+            {
+              "label": "Relevant date",
+              "value": "section-5-4-earlier-rights-relevant-date"
+            },
+            {
+              "label": "Standard of proof (evidential issues)",
+              "value": "section-5-4-earlier-rights-standard-of-proof-evidential-issues"
+            },
+            {
+              "label": "Trivial v minimal goodwill",
+              "value": "section-5-4-earlier-rights-trivial-v-minimal-goodwill"
+            },
+            {
+              "label": "Added value (circumstances where S.5(4)(a) offers an advantageous position in comparison to S.5(2)",
+              "value": "section-5-4-earlier-rights-added-value-circumstances-where-s-54a-offers-an-advantageous-position-in-comparison-to-s-52"
+            },
+            {
+              "label": "Copyright",
+              "value": "section-5-4-earlier-rights-copyright"
+            },
+            {
+              "label": "Design",
+              "value": "section-5-4-earlier-rights-design"
+            },
+            {
+              "label": "Other",
+              "value": "section-5-4-earlier-rights-other"
+            },
+            {
+              "label": "Not Applicable",
+              "value": "section-5-4-earlier-rights-not-applicable"
+            }
+          ]
         },
         {
           "label": "Other Issues",
-          "value": "other-issues"
+          "value": "other-issues",
+          "sub_facets": [
+            {
+              "label": "Colour issues",
+              "value": "other-issues-colour-issues"
+            },
+            {
+              "label": "Priority dates",
+              "value": "other-issues-priority-dates"
+            },
+            {
+              "label": "Treatment of foreign language words",
+              "value": "other-issues-treatment-of-foreign-language-words"
+            },
+            {
+              "label": "Survey evidence",
+              "value": "other-issues-survey-evidence"
+            },
+            {
+              "label": "Expert evidence",
+              "value": "other-issues-expert-evidence"
+            },
+            {
+              "label": "Internet usage issues",
+              "value": "other-issues-internet-usage-issues"
+            },
+            {
+              "label": "Acquiescence",
+              "value": "other-issues-acquiescence"
+            },
+            {
+              "label": "Declaimers",
+              "value": "other-issues-declaimers"
+            },
+            {
+              "label": "Estoppel",
+              "value": "other-issues-estoppel"
+            },
+            {
+              "label": "Construction of agreements / contracts",
+              "value": "other-issues-construction-of-agreements-contracts"
+            },
+            {
+              "label": "Domain name / company name",
+              "value": "other-issues-domain-name-company-name"
+            },
+            {
+              "label": "Partnership law",
+              "value": "other-issues-partnership-law"
+            },
+            {
+              "label": "Company names",
+              "value": "other-issues-company-names"
+            },
+            {
+              "label": "Not Applicable",
+              "value": "other-issues-not-applicable"
+            }
+          ]
         },
         {
           "label": "Revocation/Proof of Use",
-          "value": "revocation-proof-of-use"
+          "value": "revocation-proof-of-use",
+          "sub_facets": [
+            {
+              "label": "Dates - calculation of dates",
+              "value": "revocation-proof-of-use-dates-calculation-of-dates"
+            },
+            {
+              "label": "Dates - genuine use",
+              "value": "revocation-proof-of-use-dates-genuine-use"
+            },
+            {
+              "label": "Dates - use solely to preserve the registration (sham use)",
+              "value": "revocation-proof-of-use-dates-use-solely-to-preserve-the-registration-sham-use"
+            },
+            {
+              "label": "Dates - use as a trade mark",
+              "value": "revocation-proof-of-use-dates-use-as-a-trade-mark"
+            },
+            {
+              "label": "Dates - internal use",
+              "value": "revocation-proof-of-use-dates-internal-use"
+            },
+            {
+              "label": "Dates - sales to trade intermediaries",
+              "value": "revocation-proof-of-use-dates-sales-to-trade-intermediaries"
+            },
+            {
+              "label": "Dates - use on related goods / services (the Ansul spares and servicing issue and ingredients)",
+              "value": "revocation-proof-of-use-dates-use-on-related-goods-services-the-ansul-spares-and-servicing-issue-and-ingredients"
+            },
+            {
+              "label": "Dates - use for export / goods in transit",
+              "value": "revocation-proof-of-use-dates-use-for-export-goods-in-transit"
+            },
+            {
+              "label": "Dates - use outside the relevant periods",
+              "value": "revocation-proof-of-use-dates-use-outside-the-relevant-periods"
+            },
+            {
+              "label": "Variant forms of marks - use with another mark",
+              "value": "revocation-proof-of-use-variant-forms-of-marks-use-with-another-mark"
+            },
+            {
+              "label": "Variant forms of marks - use with matter added or subtracted",
+              "value": "revocation-proof-of-use-variant-forms-of-marks-use-with-matter-added-or-subtracted"
+            },
+            {
+              "label": "Variant forms of marks - stylistic / presentation differences",
+              "value": "revocation-proof-of-use-variant-forms-of-marks-stylistic-presentation-differences"
+            },
+            {
+              "label": "Use with Registered Proprietor’s (RP) consent - use by licensee",
+              "value": "revocation-proof-of-use-use-with-registered-proprietors-consent-use-by-licensee"
+            },
+            {
+              "label": "Use with Registered Proprietor’s (RP) consent - use by others",
+              "value": "revocation-proof-of-use-use-with-registered-proprietors-consent-use-by-others"
+            },
+            {
+              "label": "Use with Registered Proprietor’s (RP) consent - use by another company in a group",
+              "value": "revocation-proof-of-use-use-with-registered-proprietors-consent-use-by-another-company-in-a-group"
+            },
+            {
+              "label": "Proper reasons for non-use - circumstances internal to the RP",
+              "value": "revocation-proof-of-use-proper-reasons-for-non-use-circumstances-internal-to-the-rp"
+            },
+            {
+              "label": "Proper reasons for non-use - circumstances external to the RP",
+              "value": "revocation-proof-of-use-proper-reasons-for-non-use-circumstances-external-to-the-rp"
+            },
+            {
+              "label": "Partial revocation - arriving at a fair description of goods / services",
+              "value": "revocation-proof-of-use-partial-revocation-arriving-at-a-fair-description-of-goods-services"
+            },
+            {
+              "label": "Partial revocation - simple deletions",
+              "value": "revocation-proof-of-use-partial-revocation-simple-deletions"
+            },
+            {
+              "label": "Partial revocation - redrafting specifications",
+              "value": "revocation-proof-of-use-partial-revocation-redrafting-specifications"
+            },
+            {
+              "label": "Not Applicable",
+              "value": "revocation-proof-of-use-not-applicable"
+            }
+          ]
         },
         {
           "label": "Procedural Issues",
-          "value": "procedural-issues"
+          "value": "procedural-issues",
+          "sub_facets": [
+            {
+              "label": "Surrender – date and effect of",
+              "value": "procedural-issues-surrender-date-and-effect-of"
+            },
+            {
+              "label": "Calculation of time periods",
+              "value": "procedural-issues-calculation-of-time-periods"
+            },
+            {
+              "label": "Interpretation of ‘sent’, non-receipt of official letters",
+              "value": "procedural-issues-interpretation-of-sent-non-receipt-of-official-letters"
+            },
+            {
+              "label": "Cross-examination",
+              "value": "procedural-issues-cross-examination"
+            },
+            {
+              "label": "Costs – litigants in person, actual, security for",
+              "value": "procedural-issues-costs-litigants-in-person-actual-security-for"
+            },
+            {
+              "label": "Confidentiality",
+              "value": "procedural-issues-confidentiality"
+            },
+            {
+              "label": "Consolidation",
+              "value": "procedural-issues-consolidation"
+            },
+            {
+              "label": "Translations",
+              "value": "procedural-issues-translations"
+            },
+            {
+              "label": "Further evidence",
+              "value": "procedural-issues-further-evidence"
+            },
+            {
+              "label": "Evidence in reply",
+              "value": "procedural-issues-evidence-in-reply"
+            },
+            {
+              "label": "Late filed defence",
+              "value": "procedural-issues-late-filed-defence"
+            },
+            {
+              "label": "Incomplete filing of defence",
+              "value": "procedural-issues-incomplete-filing-of-defence"
+            },
+            {
+              "label": "Fees with forms",
+              "value": "procedural-issues-fees-with-forms"
+            },
+            {
+              "label": "EOTs",
+              "value": "procedural-issues-eots"
+            },
+            {
+              "label": "EOTs to file an appeal",
+              "value": "procedural-issues-eots-to-file-an-appeal"
+            },
+            {
+              "label": "Stays / Suspensions & Cross-proceedings",
+              "value": "procedural-issues-stays-suspensions-and-cross-proceedings"
+            },
+            {
+              "label": "Decisions in other jurisdictions",
+              "value": "procedural-issues-decisions-in-other-jurisdictions"
+            },
+            {
+              "label": "Pleadings, Strike out, Estoppel",
+              "value": "procedural-issues-pleadings-strike-out-estoppel"
+            },
+            {
+              "label": "Disclosure",
+              "value": "procedural-issues-disclosure"
+            },
+            {
+              "label": "Intervention",
+              "value": "procedural-issues-intervention"
+            },
+            {
+              "label": "'Wrong'' party's name on statutory form",
+              "value": "procedural-issues-wrong-partys-name-on-statutory-form"
+            },
+            {
+              "label": "Substitution",
+              "value": "procedural-issues-substitution"
+            },
+            {
+              "label": "Address for service issues",
+              "value": "procedural-issues-address-for-service-issues"
+            },
+            {
+              "label": "Assignment problems – ownership / authority to act, late defence",
+              "value": "procedural-issues-assignment-problems-ownership-authority-to-act-late-defence"
+            },
+            {
+              "label": "Privilege",
+              "value": "procedural-issues-privilege"
+            },
+            {
+              "label": "Inherent jurisdiction",
+              "value": "procedural-issues-inherent-jurisdiction"
+            },
+            {
+              "label": "Not Applicable",
+              "value": "procedural-issues-not-applicable"
+            }
+          ]
         }
       ],
       "display_as_result_metadata": true,
       "filterable": true,
       "key": "trademark_decision_grounds_section",
       "name": "Grounds Section",
+      "nested_facet": true,
       "preposition": "with",
       "short_name": "Grounds section",
       "specialist_publisher_properties": {
@@ -1002,6 +1615,8 @@
           "required": {}
         }
       },
+      "sub_facet_key": "trademark_decision_grounds_sub_section",
+      "sub_facet_name": "Grounds Sub Section",
       "type": "text"
     }
   ],

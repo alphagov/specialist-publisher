@@ -1,13 +1,4 @@
 module ApplicationHelper
-  def options_for(form, facet_name)
-    form.object.allowed_values(facet_name).map do |value|
-      [
-        value.fetch("label", ""),
-        value.fetch("value", ""),
-      ]
-    end
-  end
-
   def locale_codes
     I18n.t("language_names").keys
   end

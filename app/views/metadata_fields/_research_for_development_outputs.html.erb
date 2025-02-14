@@ -1,6 +1,6 @@
 <%= render layout: 'shared/form_group', locals: { f: f, field: :research_document_type, label: 'Document type' } do %>
   <%=
-    f.select :research_document_type, options_for(f, :research_document_type),
+    f.select :research_document_type, select_options_for_facet(f.object.allowed_values(:research_document_type)),
       { include_blank: true },
       { class: 'select2', multiple: false, data: { placeholder: 'Select document type' } }
   %>
@@ -12,7 +12,7 @@
 
 <%= render layout: 'shared/form_group', locals: { f: f, field: :country, label: 'Countries' } do %>
   <%=
-    f.select :country, options_for(f, :country),
+    f.select :country, select_options_for_facet(f.object.allowed_values(:country)),
       { include_blank: true },
       { class: 'select2', multiple: true, data: { placeholder: 'Select countries' } }
   %>
@@ -20,7 +20,7 @@
 
 <%= render layout: 'shared/form_group', locals: { f: f, field: :theme, label: 'Themes' } do %>
   <%=
-    f.select :theme, options_for(f, :theme),
+    f.select :theme, select_options_for_facet(f.object.allowed_values(:theme)),
              { include_blank: false },
              { class: 'select2', multiple: true, data: { placeholder: 'Select themes' } }
   %>
