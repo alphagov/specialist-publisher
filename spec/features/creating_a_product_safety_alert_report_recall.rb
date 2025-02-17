@@ -63,7 +63,7 @@ RSpec.feature "Creating a product safety alert recall", type: :feature do
       "document_type" => "product_safety_alert_report_recall",
       "schema_name" => "specialist_document",
       "publishing_app" => "specialist-publisher",
-      "rendering_app" => "government-frontend",
+      "rendering_app" => "frontend",
       "locale" => "en",
       "phase" => "live",
       "details" => {
