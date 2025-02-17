@@ -59,7 +59,7 @@ RSpec.feature "Creating a marine equipment approved recommendation", type: :feat
       "document_type" => "marine_equipment_approved_recommendation",
       "schema_name" => "specialist_document",
       "publishing_app" => "specialist-publisher",
-      "rendering_app" => "government-frontend",
+      "rendering_app" => "frontend",
       "locale" => "en",
       "phase" => "live",
       "details" => {

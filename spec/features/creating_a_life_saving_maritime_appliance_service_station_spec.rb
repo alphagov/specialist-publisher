@@ -57,7 +57,7 @@ RSpec.feature "Creating a life saving maritime appliance service station", type:
       "document_type" => "life_saving_maritime_appliance_service_station",
       "schema_name" => "specialist_document",
       "publishing_app" => "specialist-publisher",
-      "rendering_app" => "government-frontend",
+      "rendering_app" => "frontend",
       "locale" => "en",
       "phase" => "live",
       "details" => {

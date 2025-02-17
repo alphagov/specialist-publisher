@@ -45,7 +45,7 @@ RSpec.feature "Creating an sfo Case", type: :feature do
       "document_type" => "sfo_case",
       "schema_name" => "specialist_document",
       "publishing_app" => "specialist-publisher",
-      "rendering_app" => "government-frontend",
+      "rendering_app" => "frontend",
       "locale" => "en",
       "phase": "live",
       "details" => {
