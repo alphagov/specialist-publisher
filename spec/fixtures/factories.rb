@@ -836,7 +836,8 @@ FactoryBot.define do
           "trademark_decision_class" => "42",
           "trademark_decision_date" => "2015-11-16",
           "trademark_decision_appointed_person_hearing_officer" => "mr-n-abraham",
-          "trademark_decision_grounds_section" => %w[section-5-1-5-2-and-5-3-issues-to-do-with-goods-services],
+          "trademark_decision_grounds_section" => %w[section-3-3-immoral-and-deceptive-marks],
+          "trademark_decision_grounds_sub_section" => %w[section-3-3-immoral-and-deceptive-marks-contrary-to-public-policy-accepted-principles-of-morality],
         }
       end
     end
