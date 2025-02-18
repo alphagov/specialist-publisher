@@ -58,7 +58,10 @@ private
       logo_path: file.fetch("logo_path", nil),
       show_summaries: file.fetch("show_summaries", false),
       signup_link: file.fetch("signup_link", nil),
-      summary: file.fetch("summary", nil),
+      summary: {
+        content_type: "text/govspeak",
+        content: file.fetch("summary", ""),
+      },
       label_text: file.fetch("label_text", nil),
       facets: FinderContentItemPresenter.facets_without_specialist_publisher_properties(file.fetch("facets", nil)),
       default_order: file.fetch("default_order", nil),
