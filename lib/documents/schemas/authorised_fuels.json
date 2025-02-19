@@ -1,0 +1,149 @@
+{
+  "base_path": "/authorised-fuels",
+  "content_id": "d3a313e3-6a05-4286-b9c4-5d5cc807f600",
+  "description": "Find authorised fuels you can burn in smoke control areas in England, Scotland, Wales and Northern Ireland.",
+  "document_noun": "fuel",
+  "document_title": "Authorised fuel",
+  "facets": [
+    {
+      "display_as_result_metadata": true,
+      "filterable": true,
+      "key": "authorised_fuel_name",
+      "name": "Fuel name",
+      "preposition": "fuel",
+      "specialist_publisher_properties": {
+        "validations": {
+          "required": {}
+        }
+      },
+      "short_name": "Fuel",
+      "type": "text"
+    },
+    {
+      "display_as_result_metadata": true,
+      "filterable": true,
+      "key": "authorised_fuel_manufacturer_name",
+      "name": "Manufacturer name",
+      "preposition": "manufacturer",
+      "specialist_publisher_properties": {
+        "validations": {
+          "required": {}
+        }
+      },
+      "short_name": "Manufacturer",
+      "type": "text"
+    },
+    {
+      "allowed_values": [
+        {
+          "label": "Biomass",
+          "value": "biomass"
+        },
+        {
+          "label": "Liquid",
+          "value": "liquid"
+        },
+        {
+          "label": "Mineral",
+          "value": "mineral"
+        },
+        {
+          "label": "Multifuel",
+          "value": "multifuel"
+        },
+        {
+          "label": "Wood-based",
+          "value": "woodbased"
+        },
+        {
+          "label": "Wood",
+          "value": "wood"
+        },
+        {
+          "label": "Other",
+          "value": "other"
+        }
+      ],
+      "display_as_result_metadata": true,
+      "filterable": true,
+      "key": "authorised_fuel_type",
+      "name": "Fuel type",
+      "preposition": "fuel type",
+      "specialist_publisher_properties": {
+        "select": "multiple",
+        "validations": {
+          "required": {}
+        }
+      },
+      "type": "text"
+    },
+    {
+      "allowed_values": [
+        {
+          "label": "England,",
+          "value": "england"
+        },
+        {
+          "label": "Scotland",
+          "value": "scotland"
+        },
+        {
+          "label": "Wales",
+          "value": "wales"
+        },
+        {
+          "label": "Northern Ireland",
+          "value": "northern-ireland"
+        }
+      ],
+      "display_as_result_metadata": true,
+      "filterable": true,
+      "key": "authorised_fuel_country",
+      "name": "Country",
+      "preposition": "country",
+      "specialist_publisher_properties": {
+        "select": "multiple",
+        "validations": {
+          "required": {}
+        }
+      },
+      "type": "text"
+    },
+    {
+      "display_as_result_metadata": true,
+      "filterable": true,
+      "key": "authorised_fuel_date_the_fuel_was_authorised",
+      "name": "Date the fuel was authorised",
+      "preposition": "date authorised",
+      "short_name": "Date authorised",
+      "type": "date"
+    },
+    {
+      "display_as_result_metadata": true,
+      "filterable": false,
+      "key": "authorised_fuel_address",
+      "name": "Address",
+      "preposition": "address",
+      "specialist_publisher_properties": {
+        "validations": {
+          "required": {}
+        }
+      },
+      "type": "text"
+    }
+  ],
+  "filter": {
+    "format": "authorised_fuel"
+  },
+  "name": "Find authorised fuels for smoke control areas",
+  "organisations": [
+    "de4e9dc6-cca4-43af-a594-682023b84d6c"
+  ],
+  "related": [
+    "d826ea5a-aa78-439c-873a-1360293e4b01",
+    "0b60a7d2-8a7d-478c-b5b3-e3e9ec9c896f"
+  ],
+  "show_summaries": true,
+  "summary": "<p>Find authorised fuels you can burn in smoke control areas in England, Scotland, Wales and Northern Ireland.</p>\r\n<p>In smoke control areas, you:</p>\r\n<p><ul><li>- cannot release smoke from a chimney</li>\r\n<li>- can only burn authorised fuel, unless you use an appliance approved by Defra (also known as an ‘exempt appliance’ or ‘Defra approved appliance’)</li>\r\n</ul></p>\r\n<p><a href=\"https://www.gov.uk/smoke-control-area-rules\">Check the rules for smoke control areas</a>.</p>\r\n<p>Link to new <a href=\"https://www.gov.uk/defra-approved-appliances\">specialist finder for approved appliances</a>.</p>",
+  "target_stack": "draft"
+}
