@@ -7,7 +7,7 @@
 <% end %>
 <%= render layout: "shared/form_group", locals: { f: f, field: :types_of_support, label: 'Types of support offered' } do %>
   <%= f.select :types_of_support,
-      facet_options(f, :types_of_support),
+      select_options_for_facet(f.object.allowed_values(:types_of_support)),
       {},
       {
         class: 'select2 form-control',
@@ -21,7 +21,7 @@
 <% end %>
 <%= render layout: "shared/form_group", locals: { f: f, field: :business_sizes } do %>
   <%= f.select :business_sizes,
-      facet_options(f, :business_sizes),
+      select_options_for_facet(f.object.allowed_values(:business_sizes)),
       {},
       {
         class: 'select2 form-control',
@@ -35,7 +35,7 @@
 <% end %>
 <%= render layout: "shared/form_group", locals: { f: f, field: :industries } do %>
   <%= f.select :industries,
-      facet_options(f, :industries),
+      select_options_for_facet(f.object.allowed_values(:industries)),
       {},
       {
         class: 'select2 form-control',
@@ -49,7 +49,7 @@
 <% end %>
 <%= render "shared/form_group", f: f, field: :regions do %>
   <%= f.select :regions,
-      facet_options(f, :regions),
+      select_options_for_facet(f.object.allowed_values(:regions)),
       {},
       {
         class: 'select2 form-control',
@@ -63,7 +63,7 @@
 <% end %>
 <%= render layout: "shared/form_group", locals: { f: f, field: :business_stages } do %>
   <%= f.select :business_stages,
-      facet_options(f, :business_stages),
+      select_options_for_facet(f.object.allowed_values(:business_stages)),
       {},
       {
         class: 'select2 form-control',

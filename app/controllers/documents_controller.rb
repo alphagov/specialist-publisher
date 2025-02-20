@@ -7,6 +7,7 @@ class DocumentsController < ApplicationController
   include OrganisationsHelper
 
   before_action :fetch_document, except: %i[index new create]
+  before_action :merge_nested_facet_fields, only: %i[edit new]
   before_action :check_authorisation, if: :document_type_slug
 
   def index
@@ -31,11 +32,9 @@ class DocumentsController < ApplicationController
       flash[:success] = "Created #{@document.title}"
       redirect_to document_path(current_format.admin_slug, @document.content_id_and_locale)
     elsif @document.errors.any?
-      flash.now[:errors] = document_error_messages
-      render :new, status: :unprocessable_entity
+      re_render :new, flash_key: :errors, flash_message: document_error_messages, status: :unprocessable_entity
     else
-      flash.now[:danger] = unknown_error_message
-      render :new
+      re_render :new, flash_key: :danger, flash_message: unknown_error_message
     end
   end
 
@@ -55,12 +54,10 @@ class DocumentsController < ApplicationController
         flash[:success] = "Updated #{@document.title}"
         redirect_to document_path(current_format.admin_slug, @document.content_id_and_locale)
       else
-        flash.now[:danger] = unknown_error_message
-        render :edit
+        re_render :edit, flash_key: :danger, flash_message: unknown_error_message
       end
     else
-      flash.now[:errors] = document_error_messages
-      render :edit, status: :unprocessable_entity
+      re_render :edit, flash_key: :errors, flash_message: document_error_messages, status: :unprocessable_entity
     end
   end
 
@@ -93,6 +90,22 @@ class DocumentsController < ApplicationController
   end
 
 private
+
+  def merge_nested_facet_fields
+    return unless @document
+
+    @document.finder_schema.nested_facets.pluck("key", "sub_facet_key").each do |facet_key, sub_facet_key|
+      next unless @document.send(sub_facet_key)
+
+      @document.assign_attributes(facet_key => (@document.send(facet_key) + @document.send(sub_facet_key)))
+    end
+  end
+
+  def re_render(view, flash_key:, flash_message:, status: nil)
+    merge_nested_facet_fields
+    flash.now[flash_key] = flash_message
+    render view, status:
+  end
 
   def check_authorisation
     if current_format

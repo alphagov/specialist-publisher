@@ -13,37 +13,8 @@
     <p class="lead"><%= @document.summary %></p>
   </div>
 </div>
-<div class="row add-bottom-margin">
-  <div class=" col-md-8">
-    <h2>Metadata</h2>
-    <dl class="metadata-list">
-      <% @document.humanized_attributes.each_pair do |label, values| %>
-        <dt><%= label %></dt>
-        <% if values.is_a?(Time) %>
-          <dd><time><%= values.to_fs(:govuk_date) %></time></dd>
-        <% else %>
-          <% Array(values).each do |value| %>
-            <dd><%= truncate(value.to_s, length: 140) %></dd>
-          <% end %>
-        <% end %>
-      <% end %>
-      <% if @document.class.has_organisations? %>
-        <dt>Publishing organisation</dt>
-        <dd><%= organisation_name(@document.primary_publishing_organisation) %></dd>
-        <dt>Other associated Organisations</dt>
-            <% @document.organisations.each do |org| %>
-            <dd><%= organisation_name(org) %></dd>
-          <% end %>
-      <% end %>
-      <dt>Bulk published</dt>
-      <dd><%= @document.bulk_published %></dd>
-      <dt>Publication state</dt>
-      <dd>
-        <%= content_tag(:span, state_for_frontend(@document), class: classes_for_frontend(@document)) %>
-      </dd>
-    </dl>
-  </div>
-</div>
+
+<%= render DocumentMetadataComponent.new(document: @document) %>
 
 <% if @document.body.present? %>
   <div class="row">

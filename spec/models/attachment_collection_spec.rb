@@ -5,6 +5,22 @@ RSpec.describe AttachmentCollection do
   let(:attachment_gif) { Attachment.new(title: "great gif") }
   let(:missing_attachment) { Attachment.new(title: "cool csv") }
   let(:attachments) { described_class.new([attachment_jpeg, attachment_gif]) }
+  let(:finder_schema) do
+    schema = FinderSchema.new
+    schema.assign_attributes({
+      base_path: "/my-document-types",
+      target_stack: "live",
+      filter: {
+        "format" => "my_format",
+      },
+      content_id: @finder_content_id,
+    })
+    schema
+  end
+
+  before do
+    allow(FinderSchema).to receive(:load_from_schema).and_return(finder_schema)
+  end
 
   describe "#find" do
     it "returns the correct attachment" do

@@ -1,7 +1,7 @@
 <%# You can select multiple class or categories so this has multi-select option %>
 <%= render layout: "shared/form_group", locals: { f: f, field: :licence_transaction_industry, label: "Industry" } do %>
   <%= f.select :licence_transaction_industry,
-      f.object.facet_options(:licence_transaction_industry),
+      select_options_for_facet(f.object.allowed_values(:licence_transaction_industry)),
       { label: "Industry" },
       {
         class: 'select2 form-control',
@@ -16,7 +16,7 @@
 <%# You can select multiple class or categories so this has multi-select option %>
 <%= render layout: "shared/form_group", locals: { f: f, field: :licence_transaction_location, label: "Location" } do %>
   <%= f.select :licence_transaction_location,
-      f.object.facet_options(:licence_transaction_location),
+      select_options_for_facet(f.object.allowed_values(:licence_transaction_location)),
       { label: "Location" },
       {
         class: 'select2 form-control',

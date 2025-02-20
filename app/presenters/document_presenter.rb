@@ -63,10 +63,7 @@ private
   end
 
   def metadata
-    fields = document.format_specific_fields
-    metadata = fields.index_with do |field|
-      document.public_send(field)
-    end
+    metadata = document.format_specific_metadata
 
     metadata[:bulk_published] = document.bulk_published
 

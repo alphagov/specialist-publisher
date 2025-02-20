@@ -526,6 +526,10 @@ RSpec.describe Document do
     describe "validations" do
       subject { Document.from_publishing_api(payload) }
 
+      before do
+        allow(FinderSchema).to receive(:load_from_schema).and_return(finder_schema)
+      end
+
       context "when the document is a draft" do
         let(:payload) { FactoryBot.create(:document) }
 
@@ -626,6 +630,8 @@ RSpec.describe Document do
 
     describe "when called on a class that mismatches the document_type" do
       it "raises a helpful error" do
+        allow(FinderSchema).to receive(:load_from_schema).and_return(finder_schema)
+
         expect {
           CmaCase.find(document.content_id, document.locale)
         }.to raise_error(/wrong type/)
@@ -635,6 +641,10 @@ RSpec.describe Document do
 
   describe "attachment methods" do
     let(:attachment) { Attachment.new }
+
+    before do
+      allow(FinderSchema).to receive(:load_from_schema).and_return(finder_schema)
+    end
 
     describe "#attachments=" do
       it "creates an AttachmentCollection with the given attachments" do
@@ -691,7 +701,10 @@ RSpec.describe Document do
   end
 
   describe "#set_temporary_update_type!" do
-    before { subject.publication_state = "published" }
+    before do
+      allow(FinderSchema).to receive(:load_from_schema).and_return(finder_schema)
+      subject.publication_state = "published"
+    end
 
     context "when the document has an update_type" do
       before do

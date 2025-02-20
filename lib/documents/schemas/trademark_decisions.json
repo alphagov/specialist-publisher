@@ -1,0 +1,1639 @@
+{
+  "base_path": "/trademark-decisions",
+  "content_id": "9f8388a8-9559-4a75-96f3-4a0a1027b5e8",
+  "description": "Find Intellectual Property (Trade Mark,) related decisions for the U.K.",
+  "document_noun": "Decision",
+  "document_title": "Trademark Decision",
+  "facets": [
+    {
+      "display_as_result_metadata": true,
+      "filterable": false,
+      "key": "trademark_decision_british_library_number",
+      "name": "British Library number",
+      "short_name": "BL number",
+      "type": "text"
+    },
+    {
+      "allowed_values": [
+        {
+          "label": "Ex parte",
+          "value": "ex-parte"
+        },
+        {
+          "label": "Inter partes",
+          "value": "inter-partes"
+        },
+        {
+          "label": "Appointed person",
+          "value": "appointed-person"
+        },
+        {
+          "label": "Registrar – Ex parte hearings",
+          "value": "registrar-ex-parte-hearings"
+        },
+        {
+          "label": "Registrar – Inter partes interlocutory hearings",
+          "value": "registrar-inter-partes-interlocutory-hearings"
+        },
+        {
+          "label": "Registrar – Inter partes main hearings",
+          "value": "registrar-inter-partes-main-hearings"
+        },
+        {
+          "label": "Appointed person – Ex parte hearings",
+          "value": "appointed-person-ex-parte-hearings"
+        },
+        {
+          "label": "Appointed person – Inter partes interlocutory hearings",
+          "value": "appointed-person-inter-partes-interlocutory-hearings"
+        },
+        {
+          "label": "Appointed Person - Inter partes main hearings",
+          "value": "appointed-person-inter-partes-main-hearings"
+        }
+      ],
+      "display_as_result_metadata": true,
+      "filterable": true,
+      "key": "trademark_decision_type_of_hearing",
+      "name": "Type of hearing",
+      "preposition": "with",
+      "short_name": "Type of hearing",
+      "specialist_publisher_properties": {
+        "select": "one"
+      },
+      "type": "text"
+    },
+    {
+      "display_as_result_metadata": true,
+      "filterable": false,
+      "key": "trademark_decision_mark",
+      "name": "Mark",
+      "short_name": "Mark",
+      "type": "text"
+    },
+    {
+      "allowed_values": [
+        {
+          "label": "1",
+          "value": "1"
+        },
+        {
+          "label": "2",
+          "value": "2"
+        },
+        {
+          "label": "3",
+          "value": "3"
+        },
+        {
+          "label": "4",
+          "value": "4"
+        },
+        {
+          "label": "5",
+          "value": "5"
+        },
+        {
+          "label": "6",
+          "value": "6"
+        },
+        {
+          "label": "7",
+          "value": "7"
+        },
+        {
+          "label": "8",
+          "value": "8"
+        },
+        {
+          "label": "9",
+          "value": "9"
+        },
+        {
+          "label": "10",
+          "value": "10"
+        },
+        {
+          "label": "11",
+          "value": "11"
+        },
+        {
+          "label": "12",
+          "value": "12"
+        },
+        {
+          "label": "13",
+          "value": "13"
+        },
+        {
+          "label": "14",
+          "value": "14"
+        },
+        {
+          "label": "15",
+          "value": "15"
+        },
+        {
+          "label": "16",
+          "value": "16"
+        },
+        {
+          "label": "17",
+          "value": "17"
+        },
+        {
+          "label": "18",
+          "value": "18"
+        },
+        {
+          "label": "19",
+          "value": "19"
+        },
+        {
+          "label": "20",
+          "value": "20"
+        },
+        {
+          "label": "21",
+          "value": "21"
+        },
+        {
+          "label": "22",
+          "value": "22"
+        },
+        {
+          "label": "23",
+          "value": "23"
+        },
+        {
+          "label": "24",
+          "value": "24"
+        },
+        {
+          "label": "25",
+          "value": "25"
+        },
+        {
+          "label": "26",
+          "value": "26"
+        },
+        {
+          "label": "27",
+          "value": "27"
+        },
+        {
+          "label": "28",
+          "value": "28"
+        },
+        {
+          "label": "29",
+          "value": "29"
+        },
+        {
+          "label": "30",
+          "value": "30"
+        },
+        {
+          "label": "31",
+          "value": "31"
+        },
+        {
+          "label": "32",
+          "value": "32"
+        },
+        {
+          "label": "33",
+          "value": "33"
+        },
+        {
+          "label": "34",
+          "value": "34"
+        },
+        {
+          "label": "35",
+          "value": "35"
+        },
+        {
+          "label": "36",
+          "value": "36"
+        },
+        {
+          "label": "37",
+          "value": "37"
+        },
+        {
+          "label": "38",
+          "value": "38"
+        },
+        {
+          "label": "39",
+          "value": "39"
+        },
+        {
+          "label": "40",
+          "value": "40"
+        },
+        {
+          "label": "41",
+          "value": "41"
+        },
+        {
+          "label": "42",
+          "value": "42"
+        },
+        {
+          "label": "43",
+          "value": "43"
+        },
+        {
+          "label": "44",
+          "value": "44"
+        },
+        {
+          "label": "45",
+          "value": "45"
+        }
+      ],
+      "display_as_result_metadata": true,
+      "filterable": true,
+      "key": "trademark_decision_class",
+      "name": "Class",
+      "preposition": "with",
+      "short_name": "Class",
+      "specialist_publisher_properties": {
+        "select": "one",
+        "validations": {
+          "required": {}
+        }
+      },
+      "type": "text"
+    },
+    {
+      "display_as_result_metadata": true,
+      "filterable": true,
+      "key": "trademark_decision_date",
+      "name": "Decision date",
+      "preposition": "with",
+      "specialist_publisher_properties": {
+        "validations": {
+          "required": {}
+        }
+      },
+      "short_name": "Date",
+      "type": "date"
+    },
+    {
+      "allowed_values": [
+        {
+          "label": "Mr N Abraham",
+          "value": "mr-n-abraham"
+        },
+        {
+          "label": "Ms L Adams",
+          "value": "ms-l-adams"
+        },
+        {
+          "label": "Dr Stylianos Alexandridis",
+          "value": "dr-stylianos-alexandridis"
+        },
+        {
+          "label": "Mr J Allen",
+          "value": "mr-j-allen"
+        },
+        {
+          "label": "Professor Ruth Annand",
+          "value": "professor-ruth-annand"
+        },
+        {
+          "label": "Mr D Anthony",
+          "value": "mr-d-anthony"
+        },
+        {
+          "label": "Mr Richard Arnold QC",
+          "value": "mr-richard-arnold-qc"
+        },
+        {
+          "label": "Mrs G Ashworth",
+          "value": "mrs-g-ashworth"
+        },
+        {
+          "label": "Mr G Attfield",
+          "value": "mr-g-attfield"
+        },
+        {
+          "label": "Mr K Bader",
+          "value": "mr-k-bader"
+        },
+        {
+          "label": "N Barratt",
+          "value": "n-barratt"
+        },
+        {
+          "label": "Ms M Bell",
+          "value": "ms-m-bell"
+        },
+        {
+          "label": "Mrs C Bennett",
+          "value": "mrs-c-bennett"
+        },
+        {
+          "label": "Ms C Boucher",
+          "value": "ms-c-boucher"
+        },
+        {
+          "label": "Mr C Bowen",
+          "value": "mr-c-bowen"
+        },
+        {
+          "label": "Mr M Boyle",
+          "value": "mr-m-boyle"
+        },
+        {
+          "label": "Ms Rosie Le Breton",
+          "value": "ms-rosie-le-breton"
+        },
+        {
+          "label": "Mr M Bryant",
+          "value": "mr-m-bryant"
+        },
+        {
+          "label": "Mr Joseph Byrne",
+          "value": "mr-joseph-byrne"
+        },
+        {
+          "label": "Ms Anna Carboni",
+          "value": "ms-anna-carboni"
+        },
+        {
+          "label": "Charlotte Champion",
+          "value": "charlotte-champion"
+        },
+        {
+          "label": "Mrs A Cheeseman",
+          "value": "mrs-a-cheeseman"
+        },
+        {
+          "label": "Simon Clark",
+          "value": "simon-clark"
+        },
+        {
+          "label": "Mr M G Clarke QC",
+          "value": "mr-m-g-clarke-qc"
+        },
+        {
+          "label": "Mr D Collins",
+          "value": "mr-d-collins"
+        },
+        {
+          "label": "Mr R Colombo",
+          "value": "mr-r-colombo"
+        },
+        {
+          "label": "Mrs Sam Congreve",
+          "value": "mrs-sam-congreve"
+        },
+        {
+          "label": "Mr Arran Cooper",
+          "value": "mr-arran-cooper"
+        },
+        {
+          "label": "Mrs A Corbett",
+          "value": "mrs-a-corbett"
+        },
+        {
+          "label": "Dr L Cullen",
+          "value": "dr-l-cullen"
+        },
+        {
+          "label": "Mrs A Davies",
+          "value": "mrs-a-davies"
+        },
+        {
+          "label": "Mr Matthew Davies",
+          "value": "mr-matthew-davies"
+        },
+        {
+          "label": "Ms Helen Davies",
+          "value": "ms-helen-davies"
+        },
+        {
+          "label": "Mrs Helen Davies",
+          "value": "mrs-helen-davies"
+        },
+        {
+          "label": "Ms A Davies",
+          "value": "ms-a-davies"
+        },
+        {
+          "label": "Ms Leisa Davies",
+          "value": "ms-leisa-davies"
+        },
+        {
+          "label": "Miss V Douglas",
+          "value": "miss-v-douglas"
+        },
+        {
+          "label": "Mr Jonathan Edwards",
+          "value": "mr-jonathan-edwards"
+        },
+        {
+          "label": "Mr R Evans",
+          "value": "mr-r-evans"
+        },
+        {
+          "label": "Mr P Evans",
+          "value": "mr-p-evans"
+        },
+        {
+          "label": "Mr D Evans",
+          "value": "mr-d-evans"
+        },
+        {
+          "label": "Ms L Fayter",
+          "value": "ms-l-fayter"
+        },
+        {
+          "label": "Mr A Feldon",
+          "value": "mr-a-feldon"
+        },
+        {
+          "label": "Mrs D Ferrari",
+          "value": "mrs-d-ferrari"
+        },
+        {
+          "label": "Mrs E Fisher",
+          "value": "mrs-e-fisher"
+        },
+        {
+          "label": "Mr M Foley",
+          "value": "mr-m-foley"
+        },
+        {
+          "label": "Miss J Folwell",
+          "value": "miss-j-folwell"
+        },
+        {
+          "label": "Mr R Fowler",
+          "value": "mr-r-fowler"
+        },
+        {
+          "label": "Ms Sarah Grant",
+          "value": "ms-sarah-grant"
+        },
+        {
+          "label": "Miss A Hall",
+          "value": "miss-a-hall"
+        },
+        {
+          "label": "Ms J Hallas",
+          "value": "ms-j-hallas"
+        },
+        {
+          "label": "Mr C Hamilton",
+          "value": "mr-c-hamilton"
+        },
+        {
+          "label": "Mr J Hamilton-Jones",
+          "value": "mr-j-hamiltonjones"
+        },
+        {
+          "label": "Ms K Harbach",
+          "value": "ms-k-harbach"
+        },
+        {
+          "label": "Ms R Harfield",
+          "value": "ms-r-harfield"
+        },
+        {
+          "label": "Mr N Harkness",
+          "value": "mr-n-harkness"
+        },
+        {
+          "label": "Mr Phillip Harris",
+          "value": "mr-phillip-harris"
+        },
+        {
+          "label": "Ms H Harrison",
+          "value": "ms-h-harrison"
+        },
+        {
+          "label": "Jonathan Hayward",
+          "value": "jonathan-hayward"
+        },
+        {
+          "label": "Mrs B Hedley",
+          "value": "mrs-b-hedley"
+        },
+        {
+          "label": "Mr G Hicks",
+          "value": "mr-g-hicks"
+        },
+        {
+          "label": "Mrs Suzanne Hitchings",
+          "value": "mrs-suzanne-hitchings"
+        },
+        {
+          "label": "Mr James Hopkins",
+          "value": "mr-james-hopkins"
+        },
+        {
+          "label": "Mr M Howe",
+          "value": "mr-m-howe"
+        },
+        {
+          "label": "Ms C Ireland",
+          "value": "ms-c-ireland"
+        },
+        {
+          "label": "Mr A James",
+          "value": "mr-a-james"
+        },
+        {
+          "label": "Nicola Janoo",
+          "value": "nicola-janoo"
+        },
+        {
+          "label": "Mr Martyn Jefferiss",
+          "value": "mr-martyn-jefferiss"
+        },
+        {
+          "label": "Mr M Jefferiss",
+          "value": "mr-m-jefferiss"
+        },
+        {
+          "label": "Mr Denzil Johnson",
+          "value": "mr-denzil-johnson"
+        },
+        {
+          "label": "Mr Phillip Johnson",
+          "value": "mr-phillip-johnson"
+        },
+        {
+          "label": "Ms Lucie Jones",
+          "value": "ms-lucie-jones"
+        },
+        {
+          "label": "Mr R A Jones",
+          "value": "mr-r-a-jones"
+        },
+        {
+          "label": "Mr Geoffrey Hobbs KC",
+          "value": "mr-geoffrey-hobbs-kc"
+        },
+        {
+          "label": "Mr Iain Purvis KC",
+          "value": "mr-iain-purvis-kc"
+        },
+        {
+          "label": "Mr Thomas Mitcheson KC",
+          "value": "mr-thomas-mitcheson-kc"
+        },
+        {
+          "label": "Mr Daniel Alexander KC",
+          "value": "mr-daniel-alexander-kc"
+        },
+        {
+          "label": "Miss E. Himsworth KC",
+          "value": "miss-e-himsworth-kc"
+        },
+        {
+          "label": "Mr M King",
+          "value": "mr-m-king"
+        },
+        {
+          "label": "Mr David Kitchin QC",
+          "value": "mr-david-kitchin-qc"
+        },
+        {
+          "label": "Miss A Klass",
+          "value": "miss-a-klass"
+        },
+        {
+          "label": "Mr M Knight",
+          "value": "mr-m-knight"
+        },
+        {
+          "label": "Mr D Landau",
+          "value": "mr-d-landau"
+        },
+        {
+          "label": "Mr P Lawrence",
+          "value": "mr-p-lawrence"
+        },
+        {
+          "label": "Mr M Layton",
+          "value": "mr-m-layton"
+        },
+        {
+          "label": "Mr A Lingard",
+          "value": "mr-a-lingard"
+        },
+        {
+          "label": "Mrs S Long",
+          "value": "mrs-s-long"
+        },
+        {
+          "label": "Mr J MacGillivray",
+          "value": "mr-j-macgillivray"
+        },
+        {
+          "label": "Mrs Janeve Manca",
+          "value": "mrs-janeve-manca"
+        },
+        {
+          "label": "Miss J McNeill",
+          "value": "miss-j-mcneill"
+        },
+        {
+          "label": "Mr James Mellor QC",
+          "value": "mr-james-mellor-qc"
+        },
+        {
+          "label": "Ms A Michaels",
+          "value": "ms-a-michaels"
+        },
+        {
+          "label": "Mr G Miller",
+          "value": "mr-g-miller"
+        },
+        {
+          "label": "Mr D Morgan",
+          "value": "mr-d-morgan"
+        },
+        {
+          "label": "Mrs N Morgan",
+          "value": "mrs-n-morgan"
+        },
+        {
+          "label": "Mr O Morris",
+          "value": "mr-o-morris"
+        },
+        {
+          "label": "Ms Rhea Morris",
+          "value": "ms-rhea-morris"
+        },
+        {
+          "label": "Mr Jonathan Moss",
+          "value": "mr-jonathan-moss"
+        },
+        {
+          "label": "Ms L Nicholas",
+          "value": "ms-l-nicholas"
+        },
+        {
+          "label": "Melanie Oliver",
+          "value": "melanie-oliver"
+        },
+        {
+          "label": "Mr J Parker",
+          "value": "mr-j-parker"
+        },
+        {
+          "label": "Mr I Peggie",
+          "value": "mr-i-peggie"
+        },
+        {
+          "label": "Mrs T Perks",
+          "value": "mrs-t-perks"
+        },
+        {
+          "label": "Mrs J Pike",
+          "value": "mrs-j-pike"
+        },
+        {
+          "label": "Mr A Pike",
+          "value": "mr-a-pike"
+        },
+        {
+          "label": "Mrs A Pritchard",
+          "value": "mrs-a-pritchard"
+        },
+        {
+          "label": "Mr Geoffrey Pritchard",
+          "value": "mr-geoffrey-pritchard"
+        },
+        {
+          "label": "Mr S J Probert",
+          "value": "mr-s-j-probert"
+        },
+        {
+          "label": "Mr. Iain Purvis",
+          "value": "mr-iain-purvis"
+        },
+        {
+          "label": "Ms J Ralph",
+          "value": "ms-j-ralph"
+        },
+        {
+          "label": "Mr C Redmore",
+          "value": "mr-c-redmore"
+        },
+        {
+          "label": "Mr A Rees",
+          "value": "mr-a-rees"
+        },
+        {
+          "label": "Ms Bridget Rees",
+          "value": "ms-bridget-rees"
+        },
+        {
+          "label": "Mr M Rees",
+          "value": "mr-m-rees"
+        },
+        {
+          "label": "Mrs E Rees",
+          "value": "mrs-e-rees"
+        },
+        {
+          "label": "Mr M Reynolds",
+          "value": "mr-m-reynolds"
+        },
+        {
+          "label": "Joanne Roberts",
+          "value": "joanne-roberts"
+        },
+        {
+          "label": "Mr Jacob Robinson",
+          "value": "mr-jacob-robinson"
+        },
+        {
+          "label": "Mr G Rose'Meyer",
+          "value": "mr-g-rosemeyer"
+        },
+        {
+          "label": "Mr Oliver Rose'Meyer",
+          "value": "mr-oliver-rosemeyer"
+        },
+        {
+          "label": "Mr Andrea Rossi",
+          "value": "mr-andrea-rossi"
+        },
+        {
+          "label": "Mr S P Rowan",
+          "value": "mr-s-p-rowan"
+        },
+        {
+          "label": "Mr G Salthouse",
+          "value": "mr-g-salthouse"
+        },
+        {
+          "label": "Mr R Sanders",
+          "value": "mr-r-sanders"
+        },
+        {
+          "label": "Mr L Scott",
+          "value": "mr-l-scott"
+        },
+        {
+          "label": "Lee Scott",
+          "value": "lee-scott"
+        },
+        {
+          "label": "K Serravalle",
+          "value": "k-serravalle"
+        },
+        {
+          "label": "Ms Amy Simms",
+          "value": "ms-amy-simms"
+        },
+        {
+          "label": "Ms A Skilton",
+          "value": "ms-a-skilton"
+        },
+        {
+          "label": "Mrs Linda Smith",
+          "value": "mrs-linda-smith"
+        },
+        {
+          "label": "Mr E S Smith",
+          "value": "mr-e-s-smith"
+        },
+        {
+          "label": "Mrs J Smith",
+          "value": "mrs-j-smith"
+        },
+        {
+          "label": "Mr D Smith",
+          "value": "mr-d-smith"
+        },
+        {
+          "label": "Ms Deborah Steele",
+          "value": "ms-deborah-steele"
+        },
+        {
+          "label": "Mrs L Stephens",
+          "value": "mrs-l-stephens"
+        },
+        {
+          "label": "Mrs K Stephens",
+          "value": "mrs-k-stephens"
+        },
+        {
+          "label": "Mr M Studley",
+          "value": "mr-m-studley"
+        },
+        {
+          "label": "Ms Rebecca Thomas",
+          "value": "ms-rebecca-thomas"
+        },
+        {
+          "label": "Mrs Karol Thomas",
+          "value": "mrs-karol-thomas"
+        },
+        {
+          "label": "Mr S Thorley QC",
+          "value": "mr-s-thorley-qc"
+        },
+        {
+          "label": "Dr W J Trott",
+          "value": "dr-w-j-trott"
+        },
+        {
+          "label": "Mr M Tuck",
+          "value": "mr-m-tuck"
+        },
+        {
+          "label": "Ms E Venables",
+          "value": "ms-e-venables"
+        },
+        {
+          "label": "Mr A Wall",
+          "value": "mr-a-wall"
+        },
+        {
+          "label": "Ms S Wallace",
+          "value": "ms-s-wallace"
+        },
+        {
+          "label": "Sarah Wallace",
+          "value": "sarah-wallace"
+        },
+        {
+          "label": "Ms Bethany Wheeler-Fowler",
+          "value": "ms-bethany-wheelerfowler"
+        },
+        {
+          "label": "Mrs L White",
+          "value": "mrs-l-white"
+        },
+        {
+          "label": "Dr. Brian Whitehead",
+          "value": "dr-brian-whitehead"
+        },
+        {
+          "label": "Mr John Williams",
+          "value": "mr-john-williams"
+        },
+        {
+          "label": "Ms Catrin Williams",
+          "value": "ms-catrin-williams"
+        },
+        {
+          "label": "Mr M Williams",
+          "value": "mr-m-williams"
+        },
+        {
+          "label": "Ms S Wilson",
+          "value": "ms-s-wilson"
+        }
+      ],
+      "display_as_result_metadata": true,
+      "filterable": true,
+      "key": "trademark_decision_appointed_person_hearing_officer",
+      "name": "Appointed person/hearing officer",
+      "preposition": "with",
+      "show_option_select_filter": true,
+      "specialist_publisher_properties": {
+        "select": "one",
+        "validations": {
+          "required": {}
+        }
+      },
+      "short_name": "Hearing officer",
+      "type": "text"
+    },
+    {
+      "display_as_result_metadata": true,
+      "filterable": false,
+      "key": "trademark_decision_person_or_company_involved",
+      "name": "Person or company involved",
+      "short_name": "Person or company",
+      "type": "text"
+    },
+    {
+      "allowed_values": [
+        {
+          "label": "Section 3(1) Graphical Representation",
+          "value": "section-3-1-graphical-representation",
+          "sub_facets": [
+            {
+              "label": "Is it a sign?",
+              "value": "section-3-1-graphical-representation-is-it-a-sign"
+            },
+            {
+              "label": "Is it graphically represented?",
+              "value": "section-3-1-graphical-representation-is-it-graphically-represented"
+            },
+            {
+              "label": "Is it capable of distinguishing?",
+              "value": "section-3-1-graphical-representation-is-it-capable-of-distinguishing"
+            },
+            {
+              "label": "Not Applicable",
+              "value": "section-3-1-graphical-representation-not-applicable"
+            }
+          ]
+        },
+        {
+          "label": "Section 3(1) Descriptiveness/Distinctiveness",
+          "value": "section-3-1-descriptiveness-distinctiveness",
+          "sub_facets": [
+            {
+              "label": "Devoid of character - slogans",
+              "value": "section-3-1-descriptiveness-distinctiveness-devoid-of-character-slogans"
+            },
+            {
+              "label": "Devoid of character - shapes / packaging",
+              "value": "section-3-1-descriptiveness-distinctiveness-devoid-of-character-shapes-packaging"
+            },
+            {
+              "label": "Devoid of character - other unusual mark type",
+              "value": "section-3-1-descriptiveness-distinctiveness-devoid-of-character-other-unusual-mark-type"
+            },
+            {
+              "label": "Devoid of character - colours / colour combinations",
+              "value": "section-3-1-descriptiveness-distinctiveness-devoid-of-character-colours-colour-combinations"
+            },
+            {
+              "label": "Devoid of character - letters / numerals",
+              "value": "section-3-1-descriptiveness-distinctiveness-devoid-of-character-letters-numerals"
+            },
+            {
+              "label": "Devoid of character - word marks",
+              "value": "section-3-1-descriptiveness-distinctiveness-devoid-of-character-word-marks"
+            },
+            {
+              "label": "Devoid of character - other",
+              "value": "section-3-1-descriptiveness-distinctiveness-devoid-of-character-other"
+            },
+            {
+              "label": "Descriptiveness - geographical signs",
+              "value": "section-3-1-descriptiveness-distinctiveness-descriptiveness-geographical-signs"
+            },
+            {
+              "label": "Descriptiveness - famous names / images",
+              "value": "section-3-1-descriptiveness-distinctiveness-descriptiveness-famous-names-images"
+            },
+            {
+              "label": "Descriptiveness - other characteristic of goods or services",
+              "value": "section-3-1-descriptiveness-distinctiveness-descriptiveness-other-characteristic-of-goods-or-services"
+            },
+            {
+              "label": "Descriptiveness - forseeability",
+              "value": "section-3-1-descriptiveness-distinctiveness-descriptiveness-forseeability"
+            },
+            {
+              "label": "Customary in the language etc. - customary in the language",
+              "value": "section-3-1-descriptiveness-distinctiveness-customary-in-the-language-etc-customary-in-the-language"
+            },
+            {
+              "label": "Customary in the language etc. - trade name for goods or services",
+              "value": "section-3-1-descriptiveness-distinctiveness-customary-in-the-language-etc-trade-name-for-goods-or-services"
+            },
+            {
+              "label": "Customary in the language etc. - acquired distinctiveness",
+              "value": "section-3-1-descriptiveness-distinctiveness-customary-in-the-language-etc-acquired-distinctiveness"
+            },
+            {
+              "label": "Not Applicable",
+              "value": "section-3-1-descriptiveness-distinctiveness-not-applicable"
+            }
+          ]
+        },
+        {
+          "label": "Section 3(2) Shapes",
+          "value": "section-3-2-shapes",
+          "sub_facets": [
+            {
+              "label": "Shape resulting from the nature of the goods",
+              "value": "section-3-2-shapes-shape-resulting-from-the-nature-of-the-goods"
+            },
+            {
+              "label": "Shape necessary to obtain a technical result",
+              "value": "section-3-2-shapes-shape-necessary-to-obtain-a-technical-result"
+            },
+            {
+              "label": "Shape giving substantial value to the goods",
+              "value": "section-3-2-shapes-shape-giving-substantial-value-to-the-goods"
+            },
+            {
+              "label": "Not Applicable",
+              "value": "section-3-2-shapes-not-applicable"
+            }
+          ]
+        },
+        {
+          "label": "Section 3(3) Immoral and Deceptive Marks",
+          "value": "section-3-3-immoral-and-deceptive-marks",
+          "sub_facets": [
+            {
+              "label": "Contrary to public policy / accepted principles of morality",
+              "value": "section-3-3-immoral-and-deceptive-marks-contrary-to-public-policy-accepted-principles-of-morality"
+            },
+            {
+              "label": "Deceptive as to nature, quality etc.",
+              "value": "section-3-3-immoral-and-deceptive-marks-deceptive-as-to-nature-quality-etc"
+            },
+            {
+              "label": "Not Applicable",
+              "value": "section-3-3-immoral-and-deceptive-marks-not-applicable"
+            }
+          ]
+        },
+        {
+          "label": "Section 3(4) and Section 3(5) Other Issues",
+          "value": "section-3-4-and-section-3-5-other-issues",
+          "sub_facets": [
+            {
+              "label": "'Other' law issues",
+              "value": "section-3-4-and-section-3-5-other-issues-other-law-issues"
+            },
+            {
+              "label": "Protected emblems etc.",
+              "value": "section-3-4-and-section-3-5-other-issues-protected-emblems-etc"
+            },
+            {
+              "label": "Not Applicable",
+              "value": "section-3-4-and-section-3-5-other-issues-not-applicable"
+            }
+          ]
+        },
+        {
+          "label": "Section 3(6) Bad Faith",
+          "value": "section-3-6-bad-faith",
+          "sub_facets": [
+            {
+              "label": "No intention to use",
+              "value": "section-3-6-bad-faith-no-intention-to-use"
+            },
+            {
+              "label": "Knowledge of opponent's use in the UK",
+              "value": "section-3-6-bad-faith-knowledge-of-opponents-use-in-the-uk"
+            },
+            {
+              "label": "Knowledge of opponent's mark outside the UK",
+              "value": "section-3-6-bad-faith-knowledge-of-opponents-mark-outside-the-uk"
+            },
+            {
+              "label": "Breach of agreement between the parties",
+              "value": "section-3-6-bad-faith-breach-of-agreement-between-the-parties"
+            },
+            {
+              "label": "Breach of fiduciary duty",
+              "value": "section-3-6-bad-faith-breach-of-fiduciary-duty"
+            },
+            {
+              "label": "Application by local agent / UK distributor problems",
+              "value": "section-3-6-bad-faith-application-by-local-agent-uk-distributor-problems"
+            },
+            {
+              "label": "Breakdown of former business relationship",
+              "value": "section-3-6-bad-faith-breakdown-of-former-business-relationship"
+            },
+            {
+              "label": "Partnership issues",
+              "value": "section-3-6-bad-faith-partnership-issues"
+            },
+            {
+              "label": "Music groups",
+              "value": "section-3-6-bad-faith-music-groups"
+            },
+            {
+              "label": "Not Applicable",
+              "value": "section-3-6-bad-faith-not-applicable"
+            }
+          ]
+        },
+        {
+          "label": "Section 5(1), 5(2) and 5(3) Earlier Trade Marks",
+          "value": "section-5-1-5-2-and-5-3-earlier-trade-marks",
+          "sub_facets": [
+            {
+              "label": "Identical marks",
+              "value": "section-5-1-5-2-and-5-3-earlier-trade-marks-identical-marks"
+            },
+            {
+              "label": "Distinctive and dominant components",
+              "value": "section-5-1-5-2-and-5-3-earlier-trade-marks-distinctive-and-dominant-components"
+            },
+            {
+              "label": "Composite word marks",
+              "value": "section-5-1-5-2-and-5-3-earlier-trade-marks-composite-word-marks"
+            },
+            {
+              "label": "Composite word and device marks",
+              "value": "section-5-1-5-2-and-5-3-earlier-trade-marks-composite-word-and-device-marks"
+            },
+            {
+              "label": "Treatment of descriptive / allusive elements",
+              "value": "section-5-1-5-2-and-5-3-earlier-trade-marks-treatment-of-descriptive-allusive-elements"
+            },
+            {
+              "label": "Particular visual / aural / conceptual considerations",
+              "value": "section-5-1-5-2-and-5-3-earlier-trade-marks-particular-visual-aural-conceptual-considerations"
+            },
+            {
+              "label": "Importance of first element",
+              "value": "section-5-1-5-2-and-5-3-earlier-trade-marks-importance-of-first-element"
+            },
+            {
+              "label": "Conceptual distinctions",
+              "value": "section-5-1-5-2-and-5-3-earlier-trade-marks-conceptual-distinctions"
+            },
+            {
+              "label": "Imperfect recollection",
+              "value": "section-5-1-5-2-and-5-3-earlier-trade-marks-imperfect-recollection"
+            },
+            {
+              "label": "Family of marks",
+              "value": "section-5-1-5-2-and-5-3-earlier-trade-marks-family-of-marks"
+            },
+            {
+              "label": "Well known mark claims",
+              "value": "section-5-1-5-2-and-5-3-earlier-trade-marks-well-known-mark-claims"
+            },
+            {
+              "label": "Not Applicable",
+              "value": "section-5-1-5-2-and-5-3-earlier-trade-marks-not-applicable"
+            }
+          ]
+        },
+        {
+          "label": "Section 5(1), 5(2) and 5(3) Issues To Do With Goods/Services",
+          "value": "section-5-1-5-2-and-5-3-issues-to-do-with-goods-services",
+          "sub_facets": [
+            {
+              "label": "Goods v retail services",
+              "value": "section-5-1-5-2-and-5-3-issues-to-do-with-goods-services-goods-v-retail-services"
+            },
+            {
+              "label": "Section 1(1) and Rule 8(2)",
+              "value": "section-5-1-5-2-and-5-3-issues-to-do-with-goods-services-section-1-1-and-rule-8-2"
+            },
+            {
+              "label": "Not Applicable",
+              "value": "section-5-1-5-2-and-5-3-issues-to-do-with-goods-services-not-applicable"
+            }
+          ]
+        },
+        {
+          "label": "Section 5(1), 5(2) and 5(3) Average Customer",
+          "value": "section-5-1-5-2-and-5-3-average-customer",
+          "sub_facets": [
+            {
+              "label": "Identification of",
+              "value": "section-5-1-5-2-and-5-3-average-customer-identification-of"
+            },
+            {
+              "label": "Different consumer groups",
+              "value": "section-5-1-5-2-and-5-3-average-customer-different-consumer-groups"
+            },
+            {
+              "label": "Importance of end user / consumer",
+              "value": "section-5-1-5-2-and-5-3-average-customer-importance-of-end-user-consumer"
+            },
+            {
+              "label": "Consumer attention levels",
+              "value": "section-5-1-5-2-and-5-3-average-customer-consumer-attention-levels"
+            },
+            {
+              "label": "Purchasing process",
+              "value": "section-5-1-5-2-and-5-3-average-customer-purchasing-process"
+            },
+            {
+              "label": "Not Applicable",
+              "value": "section-5-1-5-2-and-5-3-average-customer-not-applicable"
+            }
+          ]
+        },
+        {
+          "label": "Section 5(1), 5(2) and 5(3) Distinctive Character of Earlier Trade Mark",
+          "value": "section-5-1-5-2-and-5-3-distinctive-character-of-earlier-trade-mark",
+          "sub_facets": [
+            {
+              "label": "Any unusual issues",
+              "value": "section-5-1-5-2-and-5-3-distinctive-character-of-earlier-trade-mark-any-unusual-issues"
+            },
+            {
+              "label": "Not Applicable",
+              "value": "section-5-1-5-2-and-5-3-distinctive-character-of-earlier-trade-mark-not-applicable"
+            }
+          ]
+        },
+        {
+          "label": "Section 5(1), 5(2) and 5(3) Likelihood of Confusion",
+          "value": "section-5-1-5-2-and-5-3-likelihood-of-confusion",
+          "sub_facets": [
+            {
+              "label": "Effect of concurrent use",
+              "value": "section-5-1-5-2-and-5-3-likelihood-of-confusion-effect-of-concurrent-use"
+            },
+            {
+              "label": "Decisions in other jurisdictions",
+              "value": "section-5-1-5-2-and-5-3-likelihood-of-confusion-decisions-in-other-jurisdictions"
+            },
+            {
+              "label": "State of the register",
+              "value": "section-5-1-5-2-and-5-3-likelihood-of-confusion-state-of-the-register"
+            },
+            {
+              "label": "Marketing concepts / considerations",
+              "value": "section-5-1-5-2-and-5-3-likelihood-of-confusion-marketing-concepts-considerations"
+            },
+            {
+              "label": "Not Applicable",
+              "value": "section-5-1-5-2-and-5-3-likelihood-of-confusion-not-applicable"
+            }
+          ]
+        },
+        {
+          "label": "Section 5(1), 5(2) and 5(3) Dilution Cases",
+          "value": "section-5-1-5-2-and-5-3-dilution-cases",
+          "sub_facets": [
+            {
+              "label": "Reputation",
+              "value": "section-5-1-5-2-and-5-3-dilution-cases-reputation"
+            },
+            {
+              "label": "Link",
+              "value": "section-5-1-5-2-and-5-3-dilution-cases-link"
+            },
+            {
+              "label": "Unfair disadvantage of distinctive character",
+              "value": "section-5-1-5-2-and-5-3-dilution-cases-unfair-disadvantage-of-distinctive-character"
+            },
+            {
+              "label": "Unfair advantage of repute",
+              "value": "section-5-1-5-2-and-5-3-dilution-cases-unfair-advantage-of-repute"
+            },
+            {
+              "label": "Detriment to distinctive character",
+              "value": "section-5-1-5-2-and-5-3-dilution-cases-detriment-to-distinctive-character"
+            },
+            {
+              "label": "Detriment to repute",
+              "value": "section-5-1-5-2-and-5-3-dilution-cases-detriment-to-repute"
+            },
+            {
+              "label": "Without due cause",
+              "value": "section-5-1-5-2-and-5-3-dilution-cases-without-due-cause"
+            },
+            {
+              "label": "Not Applicable",
+              "value": "section-5-1-5-2-and-5-3-dilution-cases-not-applicable"
+            }
+          ]
+        },
+        {
+          "label": "Section 5(4) Earlier Rights",
+          "value": "section-5-4-earlier-rights",
+          "sub_facets": [
+            {
+              "label": "Passing off (Issues arising from Registry proceedings)",
+              "value": "section-5-4-earlier-rights-passing-off-issues-arising-from-registry-proceedings"
+            },
+            {
+              "label": "Relevant date",
+              "value": "section-5-4-earlier-rights-relevant-date"
+            },
+            {
+              "label": "Standard of proof (evidential issues)",
+              "value": "section-5-4-earlier-rights-standard-of-proof-evidential-issues"
+            },
+            {
+              "label": "Trivial v minimal goodwill",
+              "value": "section-5-4-earlier-rights-trivial-v-minimal-goodwill"
+            },
+            {
+              "label": "Added value (circumstances where S.5(4)(a) offers an advantageous position in comparison to S.5(2)",
+              "value": "section-5-4-earlier-rights-added-value-circumstances-where-s-54a-offers-an-advantageous-position-in-comparison-to-s-52"
+            },
+            {
+              "label": "Copyright",
+              "value": "section-5-4-earlier-rights-copyright"
+            },
+            {
+              "label": "Design",
+              "value": "section-5-4-earlier-rights-design"
+            },
+            {
+              "label": "Other",
+              "value": "section-5-4-earlier-rights-other"
+            },
+            {
+              "label": "Not Applicable",
+              "value": "section-5-4-earlier-rights-not-applicable"
+            }
+          ]
+        },
+        {
+          "label": "Other Issues",
+          "value": "other-issues",
+          "sub_facets": [
+            {
+              "label": "Colour issues",
+              "value": "other-issues-colour-issues"
+            },
+            {
+              "label": "Priority dates",
+              "value": "other-issues-priority-dates"
+            },
+            {
+              "label": "Treatment of foreign language words",
+              "value": "other-issues-treatment-of-foreign-language-words"
+            },
+            {
+              "label": "Survey evidence",
+              "value": "other-issues-survey-evidence"
+            },
+            {
+              "label": "Expert evidence",
+              "value": "other-issues-expert-evidence"
+            },
+            {
+              "label": "Internet usage issues",
+              "value": "other-issues-internet-usage-issues"
+            },
+            {
+              "label": "Acquiescence",
+              "value": "other-issues-acquiescence"
+            },
+            {
+              "label": "Declaimers",
+              "value": "other-issues-declaimers"
+            },
+            {
+              "label": "Estoppel",
+              "value": "other-issues-estoppel"
+            },
+            {
+              "label": "Construction of agreements / contracts",
+              "value": "other-issues-construction-of-agreements-contracts"
+            },
+            {
+              "label": "Domain name / company name",
+              "value": "other-issues-domain-name-company-name"
+            },
+            {
+              "label": "Partnership law",
+              "value": "other-issues-partnership-law"
+            },
+            {
+              "label": "Company names",
+              "value": "other-issues-company-names"
+            },
+            {
+              "label": "Not Applicable",
+              "value": "other-issues-not-applicable"
+            }
+          ]
+        },
+        {
+          "label": "Revocation/Proof of Use",
+          "value": "revocation-proof-of-use",
+          "sub_facets": [
+            {
+              "label": "Dates - calculation of dates",
+              "value": "revocation-proof-of-use-dates-calculation-of-dates"
+            },
+            {
+              "label": "Dates - genuine use",
+              "value": "revocation-proof-of-use-dates-genuine-use"
+            },
+            {
+              "label": "Dates - use solely to preserve the registration (sham use)",
+              "value": "revocation-proof-of-use-dates-use-solely-to-preserve-the-registration-sham-use"
+            },
+            {
+              "label": "Dates - use as a trade mark",
+              "value": "revocation-proof-of-use-dates-use-as-a-trade-mark"
+            },
+            {
+              "label": "Dates - internal use",
+              "value": "revocation-proof-of-use-dates-internal-use"
+            },
+            {
+              "label": "Dates - sales to trade intermediaries",
+              "value": "revocation-proof-of-use-dates-sales-to-trade-intermediaries"
+            },
+            {
+              "label": "Dates - use on related goods / services (the Ansul spares and servicing issue and ingredients)",
+              "value": "revocation-proof-of-use-dates-use-on-related-goods-services-the-ansul-spares-and-servicing-issue-and-ingredients"
+            },
+            {
+              "label": "Dates - use for export / goods in transit",
+              "value": "revocation-proof-of-use-dates-use-for-export-goods-in-transit"
+            },
+            {
+              "label": "Dates - use outside the relevant periods",
+              "value": "revocation-proof-of-use-dates-use-outside-the-relevant-periods"
+            },
+            {
+              "label": "Variant forms of marks - use with another mark",
+              "value": "revocation-proof-of-use-variant-forms-of-marks-use-with-another-mark"
+            },
+            {
+              "label": "Variant forms of marks - use with matter added or subtracted",
+              "value": "revocation-proof-of-use-variant-forms-of-marks-use-with-matter-added-or-subtracted"
+            },
+            {
+              "label": "Variant forms of marks - stylistic / presentation differences",
+              "value": "revocation-proof-of-use-variant-forms-of-marks-stylistic-presentation-differences"
+            },
+            {
+              "label": "Use with Registered Proprietor’s (RP) consent - use by licensee",
+              "value": "revocation-proof-of-use-use-with-registered-proprietors-consent-use-by-licensee"
+            },
+            {
+              "label": "Use with Registered Proprietor’s (RP) consent - use by others",
+              "value": "revocation-proof-of-use-use-with-registered-proprietors-consent-use-by-others"
+            },
+            {
+              "label": "Use with Registered Proprietor’s (RP) consent - use by another company in a group",
+              "value": "revocation-proof-of-use-use-with-registered-proprietors-consent-use-by-another-company-in-a-group"
+            },
+            {
+              "label": "Proper reasons for non-use - circumstances internal to the RP",
+              "value": "revocation-proof-of-use-proper-reasons-for-non-use-circumstances-internal-to-the-rp"
+            },
+            {
+              "label": "Proper reasons for non-use - circumstances external to the RP",
+              "value": "revocation-proof-of-use-proper-reasons-for-non-use-circumstances-external-to-the-rp"
+            },
+            {
+              "label": "Partial revocation - arriving at a fair description of goods / services",
+              "value": "revocation-proof-of-use-partial-revocation-arriving-at-a-fair-description-of-goods-services"
+            },
+            {
+              "label": "Partial revocation - simple deletions",
+              "value": "revocation-proof-of-use-partial-revocation-simple-deletions"
+            },
+            {
+              "label": "Partial revocation - redrafting specifications",
+              "value": "revocation-proof-of-use-partial-revocation-redrafting-specifications"
+            },
+            {
+              "label": "Not Applicable",
+              "value": "revocation-proof-of-use-not-applicable"
+            }
+          ]
+        },
+        {
+          "label": "Procedural Issues",
+          "value": "procedural-issues",
+          "sub_facets": [
+            {
+              "label": "Surrender – date and effect of",
+              "value": "procedural-issues-surrender-date-and-effect-of"
+            },
+            {
+              "label": "Calculation of time periods",
+              "value": "procedural-issues-calculation-of-time-periods"
+            },
+            {
+              "label": "Interpretation of ‘sent’, non-receipt of official letters",
+              "value": "procedural-issues-interpretation-of-sent-non-receipt-of-official-letters"
+            },
+            {
+              "label": "Cross-examination",
+              "value": "procedural-issues-cross-examination"
+            },
+            {
+              "label": "Costs – litigants in person, actual, security for",
+              "value": "procedural-issues-costs-litigants-in-person-actual-security-for"
+            },
+            {
+              "label": "Confidentiality",
+              "value": "procedural-issues-confidentiality"
+            },
+            {
+              "label": "Consolidation",
+              "value": "procedural-issues-consolidation"
+            },
+            {
+              "label": "Translations",
+              "value": "procedural-issues-translations"
+            },
+            {
+              "label": "Further evidence",
+              "value": "procedural-issues-further-evidence"
+            },
+            {
+              "label": "Evidence in reply",
+              "value": "procedural-issues-evidence-in-reply"
+            },
+            {
+              "label": "Late filed defence",
+              "value": "procedural-issues-late-filed-defence"
+            },
+            {
+              "label": "Incomplete filing of defence",
+              "value": "procedural-issues-incomplete-filing-of-defence"
+            },
+            {
+              "label": "Fees with forms",
+              "value": "procedural-issues-fees-with-forms"
+            },
+            {
+              "label": "EOTs",
+              "value": "procedural-issues-eots"
+            },
+            {
+              "label": "EOTs to file an appeal",
+              "value": "procedural-issues-eots-to-file-an-appeal"
+            },
+            {
+              "label": "Stays / Suspensions & Cross-proceedings",
+              "value": "procedural-issues-stays-suspensions-and-cross-proceedings"
+            },
+            {
+              "label": "Decisions in other jurisdictions",
+              "value": "procedural-issues-decisions-in-other-jurisdictions"
+            },
+            {
+              "label": "Pleadings, Strike out, Estoppel",
+              "value": "procedural-issues-pleadings-strike-out-estoppel"
+            },
+            {
+              "label": "Disclosure",
+              "value": "procedural-issues-disclosure"
+            },
+            {
+              "label": "Intervention",
+              "value": "procedural-issues-intervention"
+            },
+            {
+              "label": "'Wrong'' party's name on statutory form",
+              "value": "procedural-issues-wrong-partys-name-on-statutory-form"
+            },
+            {
+              "label": "Substitution",
+              "value": "procedural-issues-substitution"
+            },
+            {
+              "label": "Address for service issues",
+              "value": "procedural-issues-address-for-service-issues"
+            },
+            {
+              "label": "Assignment problems – ownership / authority to act, late defence",
+              "value": "procedural-issues-assignment-problems-ownership-authority-to-act-late-defence"
+            },
+            {
+              "label": "Privilege",
+              "value": "procedural-issues-privilege"
+            },
+            {
+              "label": "Inherent jurisdiction",
+              "value": "procedural-issues-inherent-jurisdiction"
+            },
+            {
+              "label": "Not Applicable",
+              "value": "procedural-issues-not-applicable"
+            }
+          ]
+        }
+      ],
+      "display_as_result_metadata": true,
+      "filterable": true,
+      "key": "trademark_decision_grounds_section",
+      "name": "Grounds Section",
+      "nested_facet": true,
+      "preposition": "with",
+      "short_name": "Grounds section",
+      "specialist_publisher_properties": {
+        "select": "multiple",
+        "validations": {
+          "required": {}
+        }
+      },
+      "sub_facet_key": "trademark_decision_grounds_sub_section",
+      "sub_facet_name": "Grounds Sub Section",
+      "type": "text"
+    }
+  ],
+  "filter": {
+    "format": "trademark_decision"
+  },
+  "name": "Find Intellectual Property related legal decisions",
+  "organisations": [
+    "5d6f9583-991f-413d-ae83-be7274e5eae4"
+  ],
+  "related": [
+    "425f29d1-47e5-4831-a8a7-93068d0effbc",
+    "9f37f0c4-5f25-4961-b24b-486b52756431",
+    "5f5961ca-7631-11e4-a3cb-005056011aef"
+  ],
+  "show_summaries": true,
+  "summary": "Find Intellectual Property (Trade Mark,) related decisions for the U.K.",
+  "target_stack": "draft"
+}
