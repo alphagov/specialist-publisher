@@ -56,7 +56,7 @@
       "filterable": true,
       "key": "trademark_decision_type_of_hearing",
       "name": "Type of hearing",
-      "preposition": "with",
+      "preposition": "Type of hearing",
       "short_name": "Type of hearing",
       "specialist_publisher_properties": {
         "select": "one"
@@ -258,7 +258,7 @@
       "filterable": true,
       "key": "trademark_decision_class",
       "name": "Class",
-      "preposition": "with",
+      "preposition": "Class",
       "short_name": "Class",
       "specialist_publisher_properties": {
         "select": "one",
@@ -273,7 +273,7 @@
       "filterable": true,
       "key": "trademark_decision_date",
       "name": "Decision date",
-      "preposition": "with",
+      "preposition": "Decision date",
       "specialist_publisher_properties": {
         "validations": {
           "required": {}
@@ -901,7 +901,7 @@
       "filterable": true,
       "key": "trademark_decision_appointed_person_hearing_officer",
       "name": "Appointed person/hearing officer",
-      "preposition": "with",
+      "preposition": "Appointed person/hearing officer",
       "show_option_select_filter": true,
       "specialist_publisher_properties": {
         "select": "one",
@@ -1608,7 +1608,7 @@
       "key": "trademark_decision_grounds_section",
       "name": "Grounds Section",
       "nested_facet": true,
-      "preposition": "with",
+      "preposition": "Grounds section",
       "short_name": "Grounds section",
       "specialist_publisher_properties": {
         "select": "multiple",
