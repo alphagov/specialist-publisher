@@ -842,4 +842,14 @@ FactoryBot.define do
       end
     end
   end
+
+  factory :export_health_certificate, parent: :document do
+    base_path { "/export-health-certificates/example-document" }
+    document_type { "export_health_certificate" }
+  end
+
+  factory :traffic_commissioner_regulatory_decision, parent: :document do
+    base_path { "/traffic_commissioner_regulatory_decisions/example-document" }
+    document_type { "traffic_commissioner_regulatory_decision" }
+  end
 end
