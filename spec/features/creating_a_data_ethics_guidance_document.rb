@@ -44,7 +44,7 @@ RSpec.feature "Creating a Data Ethics Guidance", type: :feature do
       "document_type" => "data_ethics_guidance_document",
       "schema_name" => "specialist_document",
       "publishing_app" => "specialist-publisher",
-      "rendering_app" => "government-frontend",
+      "rendering_app" => "frontend",
       "locale" => "en",
       "phase": "live",
       "details" => {
