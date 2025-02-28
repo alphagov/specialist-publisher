@@ -761,7 +761,7 @@ FactoryBot.define do
           "digital_market_research_publisher" => %w[gambling-commission],
           "digital_market_research_area" => %w[media-and-entertainment],
           "digital_market_research_topic" => %w[future-connectivity],
-          "digital_market_research_publish_date" => "2021-02-18T10:12:26+00:00",
+          "digital_market_research_publish_date" => "2021-02-18",
         }
       end
     end
@@ -777,8 +777,8 @@ FactoryBot.define do
           "zone_restriction" => "no-longer-in-force",
           "zone_type" => %w[surveillance],
           "virus_strain" => "h5nx",
-          "disease_case_opened_date" => "2022-08-18T10:12:26+00:00",
-          "disease_case_closed_date" => "2022-09-18T10:12:26+00:00",
+          "disease_case_opened_date" => "2022-08-18",
+          "disease_case_closed_date" => "2022-09-18",
         }
       end
     end
@@ -838,6 +838,38 @@ FactoryBot.define do
           "trademark_decision_appointed_person_hearing_officer" => "mr-n-abraham",
           "trademark_decision_grounds_section" => %w[section-3-3-immoral-and-deceptive-marks],
           "trademark_decision_grounds_sub_section" => %w[section-3-3-immoral-and-deceptive-marks-contrary-to-public-policy-accepted-principles-of-morality],
+        }
+      end
+    end
+  end
+
+  factory :export_health_certificate, parent: :document do
+    base_path { "/export-health-certificates/example-document" }
+    document_type { "export_health_certificate" }
+
+    transient do
+      default_metadata do
+        {
+          "destination_country" => %w[afghanistan],
+          "commodity_type" => "animal-products-including-food",
+          "certificate_status" => "active",
+        }
+      end
+    end
+  end
+
+  factory :traffic_commissioner_regulatory_decision, parent: :document do
+    base_path { "/traffic-commissioner-regulatory-decisions/example-document" }
+    document_type { "traffic_commissioner_regulatory_decision" }
+
+    transient do
+      default_metadata do
+        {
+          "decision_subject" => %w[driver-conduct],
+          "regions" => %w[eastern],
+          "case_type" => %w[application],
+          "outcome_type" => %w[application-granted-as-applied-for],
+          "first_published_at" => "2022-08-18",
         }
       end
     end

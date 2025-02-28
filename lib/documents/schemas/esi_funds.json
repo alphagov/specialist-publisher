@@ -180,7 +180,7 @@
     }
   ],
   "filter": {
-    "format": "european_structural_investment_fund"
+    "format": "esi_fund"
   },
   "name": "European Structural and Investment Funds (ESIF)",
   "organisations": [
