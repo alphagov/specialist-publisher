@@ -1,4 +1,5 @@
 class AaibReport < Document
+  apply_validations
   validates :date_of_occurrence,
             presence: true,
             unless: lambda { |report|
