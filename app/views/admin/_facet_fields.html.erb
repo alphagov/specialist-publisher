@@ -1,5 +1,5 @@
 <% facet ||= {} %>
-<input type="hidden" name="facets[<%= index %>][key]" value="<%=facet["key"]%>">
+<input type="hidden" name="facets[<%= index %>][key]" value="<%= facet["key"] %>">
 
 <%= render "govuk_publishing_components/components/input", {
   label: {
@@ -26,27 +26,27 @@
   name: "facets[#{index}][type]",
   label: "Type",
   options: [
-      {
-        text: "Multiple select",
-        value: "enum_text_multiple", # Temporary value for the form only. It ends up as "text" in the schema, and "allowed_values" is retained
-        selected: facet.dig("specialist_publisher_properties", "select") == "multiple",
-      },
-      {
-        text: "One option",
-        value: "enum_text_single", # Temporary value for the form only. It ends up as "text" in the schema, and "allowed_values" is retained
-        selected: facet.dig("specialist_publisher_properties", "select") == "one",
-      },
-      {
-        text: "Free text",
-        value: "text", # Ends up as "text" in the schema, and deletes any submitted "allowed_values" value
-        selected: facet["type"] == "text" && facet["allowed_values"].nil?,
-      },
-      {
-        text: "Date",
-        value: "date",
-        selected: facet["type"] == "date",
-      }
-    ]
+    {
+      text: "Multiple select",
+      value: "enum_text_multiple", # Temporary value for the form only. It ends up as "text" in the schema, and "allowed_values" is retained
+      selected: facet.dig("specialist_publisher_properties", "select") == "multiple",
+    },
+    {
+      text: "One option",
+      value: "enum_text_single", # Temporary value for the form only. It ends up as "text" in the schema, and "allowed_values" is retained
+      selected: facet.dig("specialist_publisher_properties", "select") == "one",
+    },
+    {
+      text: "Free text",
+      value: "text", # Ends up as "text" in the schema, and deletes any submitted "allowed_values" value
+      selected: facet["type"] == "text" && facet["allowed_values"].nil?,
+    },
+    {
+      text: "Date",
+      value: "date",
+      selected: facet["type"] == "date",
+    }
+  ]
 } %>
 
 <%= render "govuk_publishing_components/components/checkboxes", {
@@ -62,6 +62,16 @@
       checked: facet.dig("specialist_publisher_properties", "validations")&.key?("required"),
     }
   ]
+} %>
+
+<%= render "govuk_publishing_components/components/input", {
+  label: {
+    text: "Sub-facet (Optional)",
+    heading_size: "s",
+  },
+  name: "facets[#{index}][sub_facet]",
+  value: facet["nested_facet"] ? "#{facet["sub_facet_name"]} {#{facet["sub_facet_key"]}}" : "",
+  hint: "The name of the sub-facet (only relevant for nested facets). Once saved, a key will be generated alongside it in the format 'Name {auto-generated-key-name}'. Do not edit the key."
 } %>
 
 <%= render "govuk_publishing_components/components/textarea", {

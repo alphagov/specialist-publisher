@@ -12,6 +12,9 @@ class Facet
   attribute :allowed_values
   attribute :specialist_publisher_properties
   attribute :show_option_select_filter, :boolean
+  attribute :nested_facet, :boolean
+  attribute :sub_facet_name
+  attribute :sub_facet_key
 
   def to_finder_schema_attributes
     {
@@ -20,10 +23,13 @@ class Facet
       filterable:,
       key:,
       name:,
+      nested_facet:,
       preposition:,
       short_name:,
       show_option_select_filter:,
       specialist_publisher_properties:,
+      sub_facet_key:,
+      sub_facet_name:,
       type:,
     }.compact
   end
@@ -41,6 +47,9 @@ class Facet
       facet.allowed_values = facet_allowed_values(params["allowed_values"], params["type"])
       facet.specialist_publisher_properties = facet_specialist_publisher_properties(params["type"], params["validations"])
       facet.show_option_select_filter = nil_if_false(params["show_option_select_filter"])
+      facet.nested_facet = nil_if_blank(params["sub_facet"])
+      facet.sub_facet_name = extract_label_and_value(params["sub_facet"], "_").first if params["sub_facet"].present?
+      facet.sub_facet_key = facet_key(extract_label_and_value(params["sub_facet"], "_").last, facet.sub_facet_name) if params["sub_facet"].present?
       facet
     end
 
@@ -65,13 +74,37 @@ class Facet
     def facet_allowed_values(values, type)
       return nil if values.nil? || facet_types_that_allow_enum_values.exclude?(type)
 
-      values.split("\n").map do |str|
-        label = str.match(/^(.+){/)
-        label = label.nil? ? str.strip : label[1].strip
-        value = str.match(/{(.+)}/)
-        value = value.nil? ? str.strip.downcase.gsub(/[^\w\d\s]/, "").gsub(/\s/u, "-") : value[1].strip
-        { label:, value: }
+      extract_allowed_values(values)
+    end
+
+    def extract_allowed_values(values_string)
+      result = []
+      current_main = nil
+
+      values_string.each_line do |line|
+        line.strip!
+        next if line.blank?
+
+        if line.start_with?("- ")
+          label, value = extract_label_and_value(line[2..], "-")
+          current_main[:sub_facets] << { label:, value: } if current_main
+        else
+          label, value = extract_label_and_value(line, "-")
+          current_main = { label:, value:, sub_facets: [] }
+          result << current_main
+        end
       end
+
+      result.each { |value| value.delete(:sub_facets) if value[:sub_facets].blank? }
+    end
+
+    def extract_label_and_value(str, gsub_character)
+      label = str.match(/^(.+){/)
+      label = label.nil? ? str.strip : label[1].strip
+      value = str.match(/{(.+)}/)
+      value = value.nil? ? str.strip.downcase.gsub(/[^\w\d\s]/, "").gsub(/\s/u, gsub_character) : value[1].strip
+
+      [label, value]
     end
 
     def facet_specialist_publisher_properties(type, validations)
