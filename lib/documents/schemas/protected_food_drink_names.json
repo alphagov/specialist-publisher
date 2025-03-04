@@ -1113,6 +1113,6 @@
   "show_summaries": true,
   "signup_content_id": "cff7449e-4181-480f-93e4-91fecfb4c774",
   "subscription_list_title_prefix": "Protected geographical food and drink names",
-  "summary": "<p>Find protected food and drink names in the official GB registers published by Defra. Find out more about the <a href=\"https://www.gov.uk/guidance/protected-geographical-food-and-drink-names-uk-gi-schemes\">UK’s protected food and drinks schemes</a>.</p>",
+  "summary": "Find protected food and drink names in the official GB registers published by Defra. Find out more about the [UK’s protected food and drinks schemes](https://www.gov.uk/guidance/protected-geographical-food-and-drink-names-uk-gi-schemes).",
   "target_stack": "live"
 }
