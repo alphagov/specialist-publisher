@@ -123,3 +123,23 @@
   value: facet["preposition"],
   hint: "Example: In Find funding for land or farms,  selecting an option in the filter ‘Area of interest’ displays the preposition ‘With’ before the selected option"
 } %>
+
+<%= render "govuk_publishing_components/components/radio", {
+  heading: "Should filter values be searchable?",
+  heading_size: "s",
+  hint: "This option provides a search box for users to filter the list of options.",
+  name: "facets[#{index}][show_option_select_filter]",
+  inline: true,
+  items: [
+    {
+      value: "true",
+      text: "Yes",
+      checked: facet["show_option_select_filter"]
+    },
+    {
+      value: "false",
+      text: "No",
+      checked: !facet["show_option_select_filter"]
+    }
+  ]
+} %>
