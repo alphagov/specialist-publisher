@@ -902,8 +902,8 @@
       "key": "trademark_decision_appointed_person_hearing_officer",
       "name": "Appointed person/hearing officer",
       "preposition": "Appointed person/hearing officer",
-      "show_option_select_filter": true,
       "short_name": "Hearing officer",
+      "show_option_select_filter": true,
       "specialist_publisher_properties": {
         "select": "one",
         "validations": {
