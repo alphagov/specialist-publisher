@@ -144,6 +144,12 @@ RSpec.describe "Facet" do
         facet = Facet.from_finder_admin_form_params(params)
         expect(facet.allowed_values).to eq(nil)
       end
+
+      it "truncates a value string if it's longer than 250 characters" do
+        params = { "type" => "enum_text_multiple", "allowed_values" => "LL {#{'V' * 500}}" }
+        facet = Facet.from_finder_admin_form_params(params)
+        expect(facet.allowed_values).to eq([{ label: "LL", value: "V" * 495 }])
+      end
     end
 
     describe "converting the facet 'type' and setting the corresponding specialist_publisher_properties" do

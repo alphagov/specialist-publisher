@@ -101,7 +101,7 @@ class Facet
     def extract_label_and_value(str, gsub_character)
       label = str.match(/^(.+){/)
       label = label.nil? ? str.strip : label[1].strip
-      value = str.match(/{(.+)}/)
+      value = str.truncate(500, omission: "}").match(/{(.+)}/)
       value = value.nil? ? str.strip.downcase.gsub(/[^\w\d\s]/, "").gsub(/\s/u, gsub_character) : value[1].strip
 
       [label, value]
