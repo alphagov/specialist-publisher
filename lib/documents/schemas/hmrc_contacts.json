@@ -1,0 +1,138 @@
+{
+  "base_path": "/find-hmrc-contacts",
+  "content_id": "4f5d1173-1634-4c3c-b341-28679d149cae",
+  "description": "TBC",
+  "document_noun": "contact",
+  "document_title": "HMRC Contact",
+  "facets": [
+    {
+      "allowed_values": [
+        {
+          "label": "Agents",
+          "value": "agents"
+        },
+        {
+          "label": "Bereavement",
+          "value": "bereavement"
+        },
+        {
+          "label": "Campaigns",
+          "value": "campaigns"
+        },
+        {
+          "label": "Capital Gains Tax",
+          "value": "capital-gains-tax"
+        },
+        {
+          "label": "Change personal details",
+          "value": "change-personal-details"
+        },
+        {
+          "label": "Charities and clubs",
+          "value": "charities-and-clubs"
+        },
+        {
+          "label": "Child Benefit and other benefits",
+          "value": "child-benefit-and-other-benefits"
+        },
+        {
+          "label": "Complaints",
+          "value": "complaints"
+        },
+        {
+          "label": "Construction Industry Scheme",
+          "value": "construction-industry-scheme"
+        },
+        {
+          "label": "Corporation Tax",
+          "value": "corporation-tax"
+        },
+        {
+          "label": "Customs and Excise",
+          "value": "customs-and-excise"
+        },
+        {
+          "label": "Cymraeg / Welsh",
+          "value": "cymraeg--welsh"
+        },
+        {
+          "label": "Employers",
+          "value": "employers"
+        },
+        {
+          "label": "Fraud and tax evasion",
+          "value": "fraud-and-tax-evasion"
+        },
+        {
+          "label": "Income Tax",
+          "value": "income-tax"
+        },
+        {
+          "label": "National Insurance",
+          "value": "national-insurance"
+        },
+        {
+          "label": "Non-UK Residents",
+          "value": "nonuk-residents"
+        },
+        {
+          "label": "Online Services",
+          "value": "online-services"
+        },
+        {
+          "label": "Paying",
+          "value": "paying"
+        },
+        {
+          "label": "Pension Schemes",
+          "value": "pension-schemes"
+        },
+        {
+          "label": "Self Assessment",
+          "value": "self-assessment"
+        },
+        {
+          "label": "Self-employed",
+          "value": "selfemployed"
+        },
+        {
+          "label": "Stamp Taxes",
+          "value": "stamp-taxes"
+        },
+        {
+          "label": "Tax credits",
+          "value": "tax-credits"
+        },
+        {
+          "label": "Tax on savings and investments",
+          "value": "tax-on-savings-and-investments"
+        },
+        {
+          "label": "Textphone",
+          "value": "textphone"
+        },
+        {
+          "label": "VAT",
+          "value": "vat"
+        }
+      ],
+      "display_as_result_metadata": false,
+      "filterable": true,
+      "key": "topics",
+      "name": "Topics",
+      "specialist_publisher_properties": {
+        "select": "multiple"
+      },
+      "type": "text"
+    }
+  ],
+  "filter": {
+    "format": "hmrc_contact"
+  },
+  "name": "Contact HM Revenue & Customs",
+  "organisations": [
+    "6667cce2-e809-4e21-ae09-cb0bdc1ddda3"
+  ],
+  "summary": "TBC",
+  "target_stack": "draft"
+}

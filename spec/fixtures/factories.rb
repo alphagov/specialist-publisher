@@ -225,6 +225,19 @@ FactoryBot.define do
     end
   end
 
+  factory :hmrc_contact, parent: :document do
+    base_path { "/find-hmrc-contacts/example-document" }
+    document_type { "hmrc_contact" }
+
+    transient do
+      default_metadata do
+        {
+          "topics" => %w[agents],
+        }
+      end
+    end
+  end
+
   factory :life_saving_maritime_appliance_service_station, parent: :document do
     base_path { "/service-life-saving-maritime-appliances/example-document" }
     document_type { "life_saving_maritime_appliance_service_station" }
