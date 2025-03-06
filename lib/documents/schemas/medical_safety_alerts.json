@@ -32,6 +32,10 @@
         {
           "label": "Medicines recall/notification",
           "value": "medicines-recall-notification"
+        },
+        {
+          "label": "MHRA Safety Round-Up",
+          "value": "mhra-safety-round-up"
         }
       ],
       "display_as_result_metadata": true,
