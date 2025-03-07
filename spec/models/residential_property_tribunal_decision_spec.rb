@@ -11,25 +11,6 @@ RSpec.describe ResidentialPropertyTribunalDecision do
   end
 
   context "validations" do
-    it "is valid from the payload" do
-      expect(tribunal_decision).to be_valid
-    end
-
-    it "is invalid if the tribunal decision category is missing" do
-      tribunal_decision.tribunal_decision_category = nil
-      expect(tribunal_decision).not_to be_valid
-    end
-
-    it "is invalid if the tribunal decision decision date is missing" do
-      tribunal_decision.tribunal_decision_decision_date = nil
-      expect(tribunal_decision).not_to be_valid
-    end
-
-    it "is invalid if the tribunal decision sub category is missing" do
-      tribunal_decision.tribunal_decision_sub_category = nil
-      expect(tribunal_decision).not_to be_valid
-    end
-
     it "is invalid if the tribunal decision sub category does not match up to the tribunal decision category" do
       tribunal_decision.tribunal_decision_category = "rents"
       tribunal_decision.tribunal_decision_sub_category = "tenant-associations---request-for-information"

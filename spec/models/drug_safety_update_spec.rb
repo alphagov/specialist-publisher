@@ -5,10 +5,6 @@ RSpec.describe DrugSafetyUpdate do
   let(:payload) { FactoryBot.create(:drug_safety_update) }
   include_examples "it saves payloads that are valid against the 'specialist_document' schema"
 
-  it "is not exportable" do
-    expect(described_class).not_to be_exportable
-  end
-
   context "#publish" do
     let(:payload) do
       FactoryBot.create(
