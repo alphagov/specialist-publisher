@@ -112,6 +112,7 @@ private
         :key,
         :name,
         :short_name,
+        :show_option_select_filter,
         :type,
         :preposition,
         :display_as_result_metadata,

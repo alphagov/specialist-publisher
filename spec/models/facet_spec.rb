@@ -11,6 +11,7 @@ RSpec.describe "Facet" do
         "preposition" => "sector",
         "display_as_result_metadata" => "false",
         "filterable" => "true",
+        "show_option_select_filter" => "true",
         "allowed_values" => "existing value {existing-value}\nnew value",
       }
       facet = Facet.from_finder_admin_form_params(params)
@@ -21,6 +22,7 @@ RSpec.describe "Facet" do
       expect(facet.preposition).to eq("sector")
       expect(facet.display_as_result_metadata).to eq(false)
       expect(facet.filterable).to eq(true)
+      expect(facet.show_option_select_filter).to eq(true)
     end
 
     it "derives the key from the name if no key provided" do
@@ -39,7 +41,7 @@ RSpec.describe "Facet" do
       expect(facet.preposition).to eq(nil)
     end
 
-    describe "inferring the boolean value, or absence of a value, for 'display_as_result_metadata' and 'filterable'" do
+    describe "inferring the boolean value, or absence of a value, for 'display_as_result_metadata', 'filterable' and 'show_option_select_filter'" do
       it "converts 'true' to true for 'display_as_result_metadata'" do
         facet = Facet.from_finder_admin_form_params({ "display_as_result_metadata" => "true" })
         expect(facet.display_as_result_metadata).to eq(true)
@@ -68,6 +70,16 @@ RSpec.describe "Facet" do
       it "sets 'filterable' to 'nil' for any other values" do
         facet = Facet.from_finder_admin_form_params({ "filterable" => "" })
         expect(facet.filterable).to eq(nil)
+      end
+
+      it "converts 'true' to true for 'show_option_select_filter'" do
+        facet = Facet.from_finder_admin_form_params({ "show_option_select_filter" => "true" })
+        expect(facet.show_option_select_filter).to eq(true)
+      end
+
+      it "sets 'show_option_select_filter' to 'nil' if 'false' is passed" do
+        facet = Facet.from_finder_admin_form_params({ "show_option_select_filter" => "false" })
+        expect(facet.show_option_select_filter).to eq(nil)
       end
     end
 
@@ -183,6 +195,7 @@ RSpec.describe "Facet" do
         { label: "existing value", value: "existing-value" },
         { label: "new value", value: "new-value" },
       ]
+      facet.show_option_select_filter = true
       facet.specialist_publisher_properties = { select: "one" }
 
       expect(facet.to_finder_schema_attributes).to eq({
@@ -197,6 +210,7 @@ RSpec.describe "Facet" do
           { label: "existing value", value: "existing-value" },
           { label: "new value", value: "new-value" },
         ],
+        show_option_select_filter: true,
         specialist_publisher_properties: { select: "one" },
       })
     end

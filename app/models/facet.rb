@@ -11,6 +11,7 @@ class Facet
   attribute :filterable, :boolean
   attribute :allowed_values
   attribute :specialist_publisher_properties
+  attribute :show_option_select_filter, :boolean
 
   def to_finder_schema_attributes
     {
@@ -21,6 +22,7 @@ class Facet
       name:,
       preposition:,
       short_name:,
+      show_option_select_filter:,
       specialist_publisher_properties:,
       type:,
     }.compact
@@ -38,6 +40,7 @@ class Facet
       facet.filterable = params["filterable"]
       facet.allowed_values = facet_allowed_values(params["allowed_values"], params["type"])
       facet.specialist_publisher_properties = facet_specialist_publisher_properties(params["type"], params["validations"])
+      facet.show_option_select_filter = nil_if_false(params["show_option_select_filter"])
       facet
     end
 
@@ -49,6 +52,10 @@ class Facet
 
     def nil_if_blank(str)
       str.presence
+    end
+
+    def nil_if_false(str)
+      str == "true" ? true : nil
     end
 
     def facet_type(type)
