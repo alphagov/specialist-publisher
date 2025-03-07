@@ -274,12 +274,12 @@
       "key": "trademark_decision_date",
       "name": "Decision date",
       "preposition": "Decision date",
+      "short_name": "Date",
       "specialist_publisher_properties": {
         "validations": {
           "required": {}
         }
       },
-      "short_name": "Date",
       "type": "date"
     },
     {
@@ -903,13 +903,13 @@
       "name": "Appointed person/hearing officer",
       "preposition": "Appointed person/hearing officer",
       "show_option_select_filter": true,
+      "short_name": "Hearing officer",
       "specialist_publisher_properties": {
         "select": "one",
         "validations": {
           "required": {}
         }
       },
-      "short_name": "Hearing officer",
       "type": "text"
     },
     {
