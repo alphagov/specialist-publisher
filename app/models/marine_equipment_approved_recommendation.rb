@@ -1,4 +1,5 @@
 class MarineEquipmentApprovedRecommendation < Document
+  apply_validations
   validates :year_adopted, format: /\A$|[1-9][0-9]{3}\z/
 
   FORMAT_SPECIFIC_FIELDS = format_specific_fields
