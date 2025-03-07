@@ -41,7 +41,5 @@ class BusinessFinanceSupportSchemeExportPresenter
     BusinessFinanceSupportScheme.finder_schema
   end
 
-  def finder_schema
-    self.class.finder_schema
-  end
+  delegate :finder_schema, to: :class
 end

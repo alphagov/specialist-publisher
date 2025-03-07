@@ -74,9 +74,7 @@ class Document
     set_attributes(params, COMMON_FIELDS + format_specific_fields)
   end
 
-  def finder_schema
-    self.class.finder_schema
-  end
+  delegate :finder_schema, to: :class
 
   def set_attributes(attrs, keys = nil)
     keys ||= attrs.keys
@@ -108,9 +106,7 @@ class Document
     "government-frontend"
   end
 
-  def document_type
-    self.class.document_type
-  end
+  delegate :document_type, to: :class
 
   def self.target_stack
     finder_schema.target_stack
