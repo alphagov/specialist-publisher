@@ -20,8 +20,8 @@ class Facet
       key:,
       name:,
       preposition:,
-      specialist_publisher_properties:,
       short_name:,
+      specialist_publisher_properties:,
       type:,
     }.compact
   end
