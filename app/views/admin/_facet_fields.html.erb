@@ -1,5 +1,5 @@
 <% facet ||= {} %>
-<input type="hidden" name="facets[<%= index %>][key]" value="<%=facet["key"]%>">
+<input type="hidden" name="facets[<%= index %>][key]" value="<%= facet["key"] %>">
 
 <%= render "govuk_publishing_components/components/input", {
   label: {
@@ -26,27 +26,27 @@
   name: "facets[#{index}][type]",
   label: "Type",
   options: [
-      {
-        text: "Multiple select",
-        value: "enum_text_multiple", # Temporary value for the form only. It ends up as "text" in the schema, and "allowed_values" is retained
-        selected: facet.dig("specialist_publisher_properties", "select") == "multiple",
-      },
-      {
-        text: "One option",
-        value: "enum_text_single", # Temporary value for the form only. It ends up as "text" in the schema, and "allowed_values" is retained
-        selected: facet.dig("specialist_publisher_properties", "select") == "one",
-      },
-      {
-        text: "Free text",
-        value: "text", # Ends up as "text" in the schema, and deletes any submitted "allowed_values" value
-        selected: facet["type"] == "text" && facet["allowed_values"].nil?,
-      },
-      {
-        text: "Date",
-        value: "date",
-        selected: facet["type"] == "date",
-      }
-    ]
+    {
+      text: "Multiple select",
+      value: "enum_text_multiple", # Temporary value for the form only. It ends up as "text" in the schema, and "allowed_values" is retained
+      selected: facet.dig("specialist_publisher_properties", "select") == "multiple",
+    },
+    {
+      text: "One option",
+      value: "enum_text_single", # Temporary value for the form only. It ends up as "text" in the schema, and "allowed_values" is retained
+      selected: facet.dig("specialist_publisher_properties", "select") == "one",
+    },
+    {
+      text: "Free text",
+      value: "text", # Ends up as "text" in the schema, and deletes any submitted "allowed_values" value
+      selected: facet["type"] == "text" && facet["allowed_values"].nil?,
+    },
+    {
+      text: "Date",
+      value: "date",
+      selected: facet["type"] == "date",
+    }
+  ]
 } %>
 
 <%= render "govuk_publishing_components/components/checkboxes", {
@@ -64,15 +64,25 @@
   ]
 } %>
 
+<%= render "govuk_publishing_components/components/input", {
+  label: {
+    text: "Sub-facet (Optional)",
+    heading_size: "s",
+  },
+  name: "facets[#{index}][sub_facet]",
+  value: facet["nested_facet"] ? "#{facet["sub_facet_name"]} {#{facet["sub_facet_key"]}}" : "",
+  hint: "The name of the sub-facet (only relevant for nested facets). Once saved, a key will be generated alongside it in the format 'Name {auto-generated-key-name}'. Do not edit the key."
+} %>
+
 <%= render "govuk_publishing_components/components/textarea", {
   label: {
     text: "Filter options ('Multiple select' or 'One option' only)",
     heading_size: "s",
   },
-  hint: sanitize("Put each option on a new line. The underlying name for existing (live) options will appear in curly braces: please don't edit these, and don't add them for new options (they'll be created automatically later on in the process). Example:<br><strong>Pre-existing value {pre-existing-value}</strong><br><strong>New value</strong>"),
+  hint: sanitize("Put each option on a new line. The underlying name for existing (live) options will appear in curly braces: please don't edit these, and don't add them for new options (they'll be created automatically later on in the process). Example:<br><strong>Pre-existing value {pre-existing-value}</strong><br><strong>New value</strong><br>If this is a nested facet, add nested options on subsequent lines, prefixed with a '-':<br><strong>Main Facet Value</strong><br><strong>- Sub Facet Value</strong><br><em>optional blank line</em><br><strong>Another Main Facet Value</strong>"),
   name: "facets[#{index}][allowed_values]",
   rows: 5,
-  value: facet["allowed_values"]&.map { |opt| "#{opt["label"]} {#{opt["value"]}}" }&.join("\n"),
+  value: admin_facet_value_from_allowed_values(facet["allowed_values"], nested_facet: facet["nested_facet"]),
 } %>
 
 <%= render "govuk_publishing_components/components/radio", {

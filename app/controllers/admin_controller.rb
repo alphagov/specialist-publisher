@@ -111,6 +111,7 @@ private
       facets: [
         :key,
         :name,
+        :sub_facet,
         :short_name,
         :show_option_select_filter,
         :type,
