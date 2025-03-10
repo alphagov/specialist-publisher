@@ -33,6 +33,7 @@ private
       "name" => facet_hash["sub_facet_name"],
       "sub_facet_key" => nil,
       "sub_facet_name" => nil,
+      "main_facet_key" => facet_hash["key"],
       "short_name" => facet_hash["sub_facet_name"],
       "preposition" => facet_hash["sub_facet_name"],
     ).compact
