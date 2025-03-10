@@ -41,7 +41,7 @@ RSpec.describe "Facet" do
       expect(facet.preposition).to eq(nil)
     end
 
-    describe "inferring the boolean value, or absence of a value, for 'display_as_result_metadata', 'filterable' and 'show_option_select_filter'" do
+    describe "inferring the boolean value, or absence of a value, for 'display_as_result_metadata', 'filterable', 'show_option_select_filter', and 'nested_facet'" do
       it "converts 'true' to true for 'display_as_result_metadata'" do
         facet = Facet.from_finder_admin_form_params({ "display_as_result_metadata" => "true" })
         expect(facet.display_as_result_metadata).to eq(true)
@@ -80,6 +80,16 @@ RSpec.describe "Facet" do
       it "sets 'show_option_select_filter' to 'nil' if 'false' is passed" do
         facet = Facet.from_finder_admin_form_params({ "show_option_select_filter" => "false" })
         expect(facet.show_option_select_filter).to eq(nil)
+      end
+
+      it "sets 'nested_facet' to 'true' is 'sub_facet' is present" do
+        facet = Facet.from_finder_admin_form_params({ "sub_facet" => "some string" })
+        expect(facet.nested_facet).to eq(true)
+      end
+
+      it "sets 'nested_facet' to 'nil' if 'sub_facet' is blank" do
+        facet = Facet.from_finder_admin_form_params({ "sub_facet" => "" })
+        expect(facet.nested_facet).to eq(nil)
       end
     end
 
@@ -134,6 +144,12 @@ RSpec.describe "Facet" do
         facet = Facet.from_finder_admin_form_params(params)
         expect(facet.allowed_values).to eq(nil)
       end
+
+      it "truncates a value string if it's longer than 250 characters" do
+        params = { "type" => "enum_text_multiple", "allowed_values" => "LL {#{'V' * 500}}" }
+        facet = Facet.from_finder_admin_form_params(params)
+        expect(facet.allowed_values).to eq([{ label: "LL", value: "V" * 495 }])
+      end
     end
 
     describe "converting the facet 'type' and setting the corresponding specialist_publisher_properties" do
@@ -179,6 +195,153 @@ RSpec.describe "Facet" do
         expect(facet.specialist_publisher_properties).to eq({ validations: { required: {} } })
       end
     end
+
+    context "when the facet is nested" do
+      it "builds a facet containing its sub-facet's data" do
+        params = {
+          "type" => "enum_text_multiple",
+          "sub_facet" => "Some sub facet name {some_sub_facet_key}",
+          "allowed_values" => "existing value {existing-value}\n- new sub facet value",
+        }
+        facet = Facet.from_finder_admin_form_params(params)
+        expect(facet.nested_facet).to eq(true)
+        expect(facet.sub_facet_key).to eq("some_sub_facet_key")
+        expect(facet.sub_facet_name).to eq("Some sub facet name")
+        expect(facet.allowed_values).to eq([{
+          label: "existing value",
+          value: "existing-value",
+          sub_facets: [
+            {
+              label: "new sub facet value",
+              value: "new-sub-facet-value",
+            },
+          ],
+        }])
+      end
+
+      it "strips allowed values string, and respects dashes in labels" do
+        params = {
+          "type" => "enum_text_multiple",
+          "sub_facet" => "Some sub facet name {some_sub_facet_key}",
+          "allowed_values" => "existing value - with some - dashes in it {existing-value-with-some-dashes-in-it} \n\n - new sub facet value \n another main value\n\n - another sub facet value",
+        }
+        facet = Facet.from_finder_admin_form_params(params)
+        expect(facet.allowed_values).to eq([
+          {
+            label: "existing value - with some - dashes in it",
+            value: "existing-value-with-some-dashes-in-it",
+            sub_facets: [
+              {
+                label: "new sub facet value",
+                value: "new-sub-facet-value",
+              },
+            ],
+          },
+          {
+            label: "another main value",
+            value: "another-main-value",
+            sub_facets: [
+              {
+                label: "another sub facet value",
+                value: "another-sub-facet-value",
+              },
+            ],
+          },
+        ])
+      end
+
+      it "derives the keys for main and sub facets, in kebab-case, from the label if no key provided" do
+        params = {
+          "type" => "enum_text_multiple",
+          "sub_facet" => "Some sub facet name {some_sub_facet_key}",
+          "allowed_values" => "Main Facet 1\n- Sub Facet 11\n- Sub Facet 12\nMain Facet 2\n- Sub Facet 21\n- Sub Facet 22\nMain Facet 3",
+        }
+        facet = Facet.from_finder_admin_form_params(params)
+        expect(facet.nested_facet).to eq(true)
+        expect(facet.sub_facet_key).to eq("some_sub_facet_key")
+        expect(facet.sub_facet_name).to eq("Some sub facet name")
+        expect(facet.allowed_values).to eq([
+          {
+            label: "Main Facet 1",
+            value: "main-facet-1",
+            sub_facets: [
+              {
+                label: "Sub Facet 11",
+                value: "sub-facet-11",
+              },
+              {
+                label: "Sub Facet 12",
+                value: "sub-facet-12",
+              },
+            ],
+          },
+          {
+            label: "Main Facet 2",
+            value: "main-facet-2",
+            sub_facets: [
+              {
+                label: "Sub Facet 21",
+                value: "sub-facet-21",
+              },
+              {
+                label: "Sub Facet 22",
+                value: "sub-facet-22",
+              },
+            ],
+          },
+          {
+            label: "Main Facet 3",
+            value: "main-facet-3",
+          },
+        ])
+      end
+
+      it "uses any pre-supplied keys in curly brackets, if provided" do
+        params = {
+          "type" => "enum_text_multiple",
+          "sub_facet" => "Some sub facet name {some_sub_facet_key}",
+          "allowed_values" => "Main Facet 1{main-facet-1}\n- Sub Facet 11{sub-facet-11}\n- Sub Facet 12 NEW\nMain Facet 2{main-facet-2}\n- Sub Facet 21{sub-facet-21}\n- Sub Facet 22{sub-facet-22}\nMain Facet 3{main-facet-3}",
+        }
+        facet = Facet.from_finder_admin_form_params(params)
+        expect(facet.nested_facet).to eq(true)
+        expect(facet.sub_facet_key).to eq("some_sub_facet_key")
+        expect(facet.sub_facet_name).to eq("Some sub facet name")
+        expect(facet.allowed_values).to eq([
+          {
+            label: "Main Facet 1",
+            value: "main-facet-1",
+            sub_facets: [
+              {
+                label: "Sub Facet 11",
+                value: "sub-facet-11",
+              },
+              {
+                label: "Sub Facet 12 NEW",
+                value: "sub-facet-12-new",
+              },
+            ],
+          },
+          {
+            label: "Main Facet 2",
+            value: "main-facet-2",
+            sub_facets: [
+              {
+                label: "Sub Facet 21",
+                value: "sub-facet-21",
+              },
+              {
+                label: "Sub Facet 22",
+                value: "sub-facet-22",
+              },
+            ],
+          },
+          {
+            label: "Main Facet 3",
+            value: "main-facet-3",
+          },
+        ])
+      end
+    end
   end
 
   describe "#to_finder_schema_attributes" do
@@ -188,6 +351,7 @@ RSpec.describe "Facet" do
       facet.name = "Foo"
       facet.short_name = "f"
       facet.type = "text"
+      facet.nested_facet = true
       facet.preposition = "sector"
       facet.display_as_result_metadata = false
       facet.filterable = true
@@ -203,6 +367,7 @@ RSpec.describe "Facet" do
         name: "Foo",
         short_name: "f",
         type: "text",
+        nested_facet: true,
         preposition: "sector",
         display_as_result_metadata: false,
         filterable: true,
