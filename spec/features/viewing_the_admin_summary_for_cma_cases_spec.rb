@@ -17,7 +17,7 @@ RSpec.feature "Viewing the admin summary for CMA cases", type: :feature do
     visit "admin/cma-cases"
     expect(page).to have_selector("h1", text: "CMA Case finder")
     expect(page).to have_selector("dt", text: "This case finder includes cases and projects from the Competition and Markets Authority (CMA), Office for the Internal Market (OIM) and Subsidy Advice Unit (SAU)")
-    expect(page).to have_selector("p", text: "This case finder includes cases and projects from the Competition and Markets Authority (CMA), Office for the Internal Market (OIM) and Subsidy Advice Unit (SAU)")
+    expect(page).to have_selector(".govspeak", text: "This case finder includes cases and projects from the Competition and Markets Authority (CMA), Office for the Internal Market (OIM) and Subsidy Advice Unit (SAU)")
     expect(page.find(".govuk-summary-list__row", text: "Should summary of each content show under the title in the finder list page?")).to have_selector("dt", text: "No")
     expect(page.find(".govuk-summary-list__row", text: "Organisations the finder should be attached to")).to have_selector("dt", text: "Competition and Markets Authority")
     expect(page.find(".govuk-summary-list__row", text: "Shortened document noun (How the documents on the finder are referred to)")).to have_selector("dt", text: "Case")
