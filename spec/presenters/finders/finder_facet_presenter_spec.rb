@@ -129,6 +129,7 @@ RSpec.describe FinderFacetPresenter do
         "filterable" => true,
         "key" => "sub_facet_key",
         "name" => "Sub Facet Name",
+        "main_facet_key" => "facet_key",
         "nested_facet" => true,
         "preposition" => "Sub Facet Name",
         "short_name" => "Sub Facet Name",
