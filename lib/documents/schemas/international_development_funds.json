@@ -1001,7 +1001,7 @@
   "show_summaries": true,
   "signup_content_id": "f1a4e5b2-c8b3-40f2-acde-75061a45184d",
   "subscription_list_title_prefix": "International development funds",
-  "summary": "<p>The funding finder tool is to help potential applicants to view, sort and filter UK Official Development Assistance (ODA) funding opportunities, across all UK government departments.</p><p>Each funding call will include a high level overview and information on how to apply.</p>",
+  "summary": "The funding finder tool is to help potential applicants to view, sort and filter UK Official Development Assistance (ODA) funding opportunities, across all UK government departments.\r\n\r\nEach funding call will include a high level overview and information on how to apply.",
   "target_stack": "live",
   "taxons": [
     "9fb30a53-70fb-4f1c-878b-0064b202d1ba"

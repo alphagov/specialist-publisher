@@ -412,7 +412,7 @@
   ],
   "signup_content_id": "43dd2b13-93ec-4ca6-a7a4-e2eb5f5d485a",
   "subscription_list_title_prefix": "CMA cases",
-  "summary": "<p>This case finder includes cases and projects from the Competition and Markets Authority (CMA), Office for the Internal Market (OIM) and Subsidy Advice Unit (SAU).<p>",
+  "summary": "This case finder includes cases and projects from the Competition and Markets Authority (CMA), Office for the Internal Market (OIM) and Subsidy Advice Unit (SAU).",
   "target_stack": "live",
   "taxons": [
     "8db04387-9076-4287-ab46-6a6695b593d7"
