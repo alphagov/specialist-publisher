@@ -281,6 +281,6 @@
     "aa750cdf-7925-429d-a2b3-0d9fa47d2c48"
   ],
   "show_summaries": true,
-  "summary": "<p>You may need a licence, permit or certification for:</p><ul><li>some business activities</li><li>other activities, such as street parties</li></ul><div class='application-notice info-notice'><p>This may not include all the licences you need. It will be updated with more licences.</p></div>",
+  "summary": "You may need a licence, permit or certification for:\r\n\r\n* some business activities\r\n\r\n* other activities, such as street parties\r\n\r\n^This may not include all the licences you need. It will be updated with more licences.^",
   "target_stack": "live"
 }

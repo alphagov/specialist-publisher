@@ -19,5 +19,33 @@ RSpec.describe FinderContentItemPresenter do
         expect(presented_data).to be_valid_against_publisher_schema("finder")
       end
     end
+
+    it "should have a summary with content" do
+      read_file = File.read("lib/documents/schemas/esi_funds.json")
+      payload = JSON.parse(read_file)
+      payload["summary"] = "anything"
+
+      presenter = FinderContentItemPresenter.new(
+        payload, Time.zone.parse("2016-01-01T00:00:00-00:00")
+      )
+
+      presented_data = presenter.to_json
+
+      expect(presented_data[:details][:summary].first[:content]).to eq("anything")
+    end
+
+    it "should return summary nil with nil content" do
+      read_file = File.read("lib/documents/schemas/esi_funds.json")
+      payload = JSON.parse(read_file)
+      payload["summary"] = nil
+
+      presenter = FinderContentItemPresenter.new(
+        payload, Time.zone.parse("2016-01-01T00:00:00-00:00")
+      )
+
+      presented_data = presenter.to_json
+
+      expect(presented_data[:details][:summary]).to eq(nil)
+    end
   end
 end

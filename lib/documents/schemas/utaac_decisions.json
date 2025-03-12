@@ -2740,7 +2740,7 @@
   "show_summaries": true,
   "signup_content_id": "13e59efa-6c0d-48e8-a0b9-092b62cdc912",
   "subscription_list_title_prefix": "Upper Tribunal Administrative Appeals Chamber decisions",
-  "summary": "<p>Find decisions on appeals to the Upper Tribunal (Administrative Appeals Chamber), including social security and child support appeals.</p><p>This includes decisions made from January 2016 onwards. You can also search our database of <a rel=\"external\" href=\"https://administrativeappeals.decisions.tribunals.gov.uk\">decisions made in 2015 or earlier</a>.</p>",
+  "summary": "Find decisions on appeals to the Upper Tribunal (Administrative Appeals Chamber), including social security and child support appeals.\r\n\r\nThis includes decisions made from January 2016 onwards. You can also search our database of [decisions made in 2015 or earlier](https://administrativeappeals.decisions.tribunals.gov.uk).",
   "target_stack": "live",
   "taxons": [
     "357110bb-cbc5-4708-9711-1b26e6c63e86"

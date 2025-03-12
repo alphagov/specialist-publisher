@@ -1012,7 +1012,7 @@
   "parent": "03f78404-e87c-4c2a-954b-f6ee9403efb8",
   "signup_content_id": "9a5260d2-07e7-45dc-a24a-791b02e4a9da",
   "subscription_list_title_prefix": "Export health certificates",
-  "summary": "<p>Find the export health certificate (EHC) and supporting documents you need to export a live animal or animal product like food and germplasm. The latest versions of the certificates are always here.</p> <p>You must nominate an official vet or local authority inspector to sign the certificate. Find out more about <a href=\"https://www.gov.uk/guidance/get-an-export-health-certificate\">getting an export health certificate</a>.</p><p>If you cannot find the correct export health certificate, <a href=\"https://www.gov.uk/guidance/get-an-export-health-certificate#if-you-need-help\">contact the Animal and Plant Health Agency (APHA)</a>.</p>",
+  "summary": "Find the export health certificate (EHC) and supporting documents you need to export a live animal or animal product like food and germplasm. The latest versions of the certificates are always here.\r\n\r\nYou must nominate an official vet or local authority inspector to sign the certificate. Find out more about [getting an export health certificate](https://www.gov.uk/guidance/get-an-export-health-certificate).\r\n\r\nIf you cannot find the correct export health certificate, [contact the Animal and Plant Health Agency (APHA)](https://www.gov.uk/guidance/get-an-export-health-certificate#if-you-need-help).",
   "target_stack": "live",
   "topics": [
     "keeping-farmed-animals/animal-welfare"
