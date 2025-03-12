@@ -71,12 +71,11 @@ RSpec.describe FinderFacetPresenter do
         "filterable" => true,
         "key" => "facet_key",
         "name" => "Facet Name",
-        "nested_facet" => true,
         "preposition" => "Facet Name",
         "short_name" => "Short Name",
         "sub_facet_key" => "sub_facet_key",
         "sub_facet_name" => "Sub Facet Name",
-        "type" => "text",
+        "type" => "nested",
       }]
       main_facet_hash = {
         "allowed_values" => [
@@ -97,12 +96,11 @@ RSpec.describe FinderFacetPresenter do
         "filterable" => true,
         "key" => "facet_key",
         "name" => "Facet Name",
-        "nested_facet" => true,
         "preposition" => "Facet Name",
         "short_name" => "Short Name",
         "sub_facet_name" => "Sub Facet Name",
         "sub_facet_key" => "sub_facet_key",
-        "type" => "text",
+        "type" => "nested",
       }
       sub_facet_hash = {
         "allowed_values" => [
@@ -130,10 +128,9 @@ RSpec.describe FinderFacetPresenter do
         "key" => "sub_facet_key",
         "name" => "Sub Facet Name",
         "main_facet_key" => "facet_key",
-        "nested_facet" => true,
         "preposition" => "Sub Facet Name",
         "short_name" => "Sub Facet Name",
-        "type" => "text",
+        "type" => "nested",
       }
 
       presented_data = FinderFacetPresenter.new(facets_from_schema).to_json

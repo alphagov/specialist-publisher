@@ -12,7 +12,6 @@ class Facet
   attribute :allowed_values
   attribute :specialist_publisher_properties
   attribute :show_option_select_filter, :boolean
-  attribute :nested_facet, :boolean
   attribute :sub_facet_name
   attribute :sub_facet_key
 
@@ -23,7 +22,6 @@ class Facet
       filterable:,
       key:,
       name:,
-      nested_facet:,
       preposition:,
       short_name:,
       show_option_select_filter:,
@@ -47,7 +45,6 @@ class Facet
       facet.allowed_values = facet_allowed_values(params["allowed_values"], params["type"])
       facet.specialist_publisher_properties = facet_specialist_publisher_properties(params["type"], params["validations"])
       facet.show_option_select_filter = nil_if_false(params["show_option_select_filter"])
-      facet.nested_facet = nil_if_blank(params["sub_facet"])
       facet.sub_facet_name = extract_label_and_value(params["sub_facet"], "_").first if params["sub_facet"].present?
       facet.sub_facet_key = facet_key(extract_label_and_value(params["sub_facet"], "_").last, facet.sub_facet_name) if params["sub_facet"].present?
       facet
@@ -68,7 +65,7 @@ class Facet
     end
 
     def facet_type(type)
-      facet_types_that_allow_enum_values.include?(type) ? "text" : type
+      facet_text_types.include?(type) ? "text" : type
     end
 
     def facet_allowed_values(values, type)
@@ -115,7 +112,7 @@ class Facet
 
     def facet_specialist_publisher_properties_select(type)
       case type
-      when "enum_text_multiple"
+      when "enum_text_multiple", "nested"
         { select: "multiple" }
       when "enum_text_single"
         { select: "one" }
@@ -136,6 +133,10 @@ class Facet
     end
 
     def facet_types_that_allow_enum_values
+      facet_text_types + %w[nested]
+    end
+
+    def facet_text_types
       %w[enum_text_multiple enum_text_single]
     end
   end

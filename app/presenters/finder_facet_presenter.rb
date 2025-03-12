@@ -5,7 +5,7 @@ class FinderFacetPresenter
 
   def to_json(*_args)
     facets_without_specialist_publisher_properties(@facets).map { |facet|
-      facet["nested_facet"] ? [main_facet_hash_without_sub_facets(facet), sub_facet_hash(facet)] : facet
+      facet["type"] == "nested" ? [main_facet_hash_without_sub_facets(facet), sub_facet_hash(facet)] : facet
     }.flatten
   end
 
