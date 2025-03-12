@@ -177,6 +177,7 @@ RSpec.describe FinderSchema do
             "facets" => [
               {
                 "key" => "parent_facet_key",
+                "type" => "nested",
                 "name" => "Parent facet name",
                 "sub_facet_key" => "sub_facet_key",
                 "sub_facet_name" => "Sub Facet Name",
@@ -201,8 +202,8 @@ RSpec.describe FinderSchema do
           },
         )
 
-        expect(FinderSchema.new(properties).humanized_facet_value("sub_facet_key", "sub-facet-value-1")).to eq("Facet label - Sub Facet label 1")
-        expect(FinderSchema.new(properties).humanized_facet_value("sub_facet_key", "sub-facet-value-2")).to eq("Facet label - Sub Facet label 2")
+        expect(FinderSchema.new(properties).humanized_facet_value("sub_facet_key", "sub-facet-value-1")).to eq(["Facet label - Sub Facet label 1"])
+        expect(FinderSchema.new(properties).humanized_facet_value("sub_facet_key", "sub-facet-value-2")).to eq(["Facet label - Sub Facet label 2"])
       end
 
       it "returns received value if subfacets are not defined" do
