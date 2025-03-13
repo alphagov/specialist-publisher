@@ -18,6 +18,7 @@ Recent changes to Specialist Publisher now allow users to self-serve. These requ
 See [example PR here](https://github.com/alphagov/publishing-api/pull/3026/files).
 
 1. Add the format to [allowed document types list](https://github.com/alphagov/publishing-api/blob/main/content_schemas/allowed_document_types.yml).
+Ideally, the schema name should align with the format name for consistency. While this isn’t always possible, a mismatch may lead to failures in specialist publisher's automated tests. In such cases, you may need to mark your finder as an [exception](https://github.com/alphagov/specialist-publisher/blob/main/spec/models/document_type_spec.rb#L6) to general testing. 
 2. Add any new field definitions to [this file](https://github.com/alphagov/publishing-api/blob/main/content_schemas/formats/shared/definitions/_specialist_document.jsonnet).
 3. Run `bundle exec rake build_schemas` to regenerate schemas.
 
@@ -44,9 +45,13 @@ For a breakdown of email subscription options see [Configure the email sign up p
 
 ### Create the model
 
-Include any required validations, tests and factories.
-
 See [CMA cases](https://github.com/alphagov/specialist-publisher/blob/main/app/models/cma_case.rb).
+
+Make sure to include all necessary validations, noting that validation for ['required'](https://github.com/alphagov/specialist-publisher/blob/main/spec/features/creating_a_new_document_spec.rb#L72) fields and [date](https://github.com/alphagov/specialist-publisher/blob/main/spec/features/creating_a_new_document_spec.rb#L104) is now schema-driven, with automatic checks for validity. 
+
+Only [bespoke validations](https://github.com/alphagov/specialist-publisher/blob/main/app/models/marine_equipment_approved_recommendation.rb#L3) should be added to the model; otherwise, you can apply validations as shown [here](https://github.com/alphagov/specialist-publisher/blob/main/app/models/ai_assurance_portfolio_technique.rb#L2).
+
+Keep in mind that adding custom validation may make the finder incompatible with general testing, requiring you to add it to the [exception list](https://github.com/alphagov/specialist-publisher/blob/main/spec/features/creating_a_new_document_spec.rb#L10).
 
 ### Create the view template
 
@@ -55,6 +60,29 @@ Create a view file in the [views folder](https://github.com/alphagov/specialist-
 Whilst a handful of legacy finders still use a custom view, all new finders should be referencing the [shared template](https://github.com/alphagov/specialist-publisher/blob/main/app/views/shared/_specialist_document_form.html.erb), which determines which form fields to display based on the finder schema.
 
 NB: The select type of an input (one/multiple) is now configured under the `specialist_publisher_properties` [in the schema](https://github.com/alphagov/specialist-publisher/blob/36170eb7841fc4acaad77603f3e55e0a80122a74/lib/documents/schemas/algorithmic_transparency_records.json#L151).
+
+### Testing your document type
+
+#### 1. General approach
+
+If no custom validation was required, the only testing task is to [create a factory](https://github.com/alphagov/specialist-publisher/blob/main/spec/fixtures/factories.rb#L874) that conforms to the schema, ensuring it includes all required metadata. This factory will be used in feature tests and a model test to confirm it generates a [valid payload](https://github.com/alphagov/specialist-publisher/blob/main/spec/models/document_type_spec.rb#L17).
+
+Since automation can somewhat obfuscate testing, you can verify that your finder is being tested by running:
+
+For feature tests:
+
+   ```
+govuk-docker-run bundle exec rspec ./spec/features/creating_a_new_document_spec.rb --format doc | grep -i "your_format_name"
+   ```
+For model tests:
+   ```
+govuk-docker-run bundle exec rspec ./spec/models/document_type_spec.rb --format doc | grep -i "your_format_name"
+   ```
+Replace "your_format_name" with the format you want to check. A partial match should work; for example, searching for 'health' should return results for 'Export health certificate'.
+
+#### 2. Bespoke approach
+
+It’s important to emphasize that this approach should be avoided if possible. However, if you need to add your format to an exception list, be sure to document the reason for doing so in your PRs or commits. To ensure proper coverage, you will also need to create both a [feature test](https://github.com/alphagov/specialist-publisher/blob/main/spec/features/creating_a_trademark_decision_spec.rb) and a [model test](https://github.com/alphagov/specialist-publisher/blob/main/spec/models/protected_food_drink_name_spec.rb) for your finder.
 
 ## 3. Configure Search API
 
