@@ -34,7 +34,7 @@
           "value": "medicines-recall-notification"
         },
         {
-          "label": "MHRA Safety Round-Up",
+          "label": "MHRA Safety Roundup",
           "value": "mhra-safety-round-up"
         }
       ],
@@ -54,11 +54,19 @@
     {
       "allowed_values": [
         {
-          "label": "Anaesthetics",
+          "label": "Anaesthetics and intensive care",
           "value": "anaesthetics"
         },
         {
-          "label": "Cardiology",
+          "label": "Breastfeeding",
+          "value": "breastfeeding"
+        },
+        {
+          "label": "Cancer",
+          "value": "cancer"
+        },
+        {
+          "label": "Cardiology disease and lipidology",
           "value": "cardiology"
         },
         {
@@ -78,8 +86,24 @@
           "value": "dentistry"
         },
         {
+          "label": "Dermatology",
+          "value": "dermatology"
+        },
+        {
           "label": "Dispensing GP practices",
           "value": "dispensing-gp-practices"
+        },
+        {
+          "label": "Ear, nose and throat",
+          "value": "ear-nose-throat"
+        },
+        {
+          "label": "Emergency medicine",
+          "value": "emergency-medicine"
+        },
+        {
+          "label": "Endocrinology, diabetology and metabolism",
+          "value": "endocrinology-diabetology-metabolism"
         },
         {
           "label": "General practice",
@@ -90,15 +114,39 @@
           "value": "general-surgery"
         },
         {
+          "label": "GI, hepatology and pancreatic disorders",
+          "value": "gi-hepatology-pancreatic-disorders"
+        },
+        {
           "label": "Haematology and oncology",
           "value": "haematology-oncology"
+        },
+        {
+          "label": "Immunology and vaccination",
+          "value": "immunology-vaccination"
+        },
+        {
+          "label": "Immunosuppression and transplantation",
+          "value": "immunosuppression-transplantation"
         },
         {
           "label": "Infection prevention",
           "value": "infection-prevention"
         },
         {
-          "label": "Obstetrics and gynaecology",
+          "label": "Infectious disease",
+          "value": "infectious-disease"
+        },
+        {
+          "label": "Neurology",
+          "value": "neurology"
+        },
+        {
+          "label": "Nutrition and dietetics",
+          "value": "nutrition-dietetics"
+        },
+        {
+          "label": "Obstetrics & gynaecology and fertility",
           "value": "obstetrics-gynaecology"
         },
         {
@@ -110,8 +158,12 @@
           "value": "orthopaedics"
         },
         {
-          "label": "Paediatrics",
+          "label": "Paediatrics and neonatology",
           "value": "paediatrics"
+        },
+        {
+          "label": "Pain management and palliation",
+          "value": "pain-management-palliation"
         },
         {
           "label": "Pathology",
@@ -126,7 +178,15 @@
           "value": "physiotherapy-occupational-therapy"
         },
         {
-          "label": "Radiology",
+          "label": "Pregnancy",
+          "value": "pregnancy"
+        },
+        {
+          "label": "Psychiatry",
+          "value": "psychiatry"
+        },
+        {
+          "label": "Radiology and imaging",
           "value": "radiology"
         },
         {
@@ -134,11 +194,19 @@
           "value": "renal-medicine"
         },
         {
+          "label": "Respiratory disease and allergy",
+          "value": "respiratory-disease-allergy"
+        },
+        {
+          "label": "Rheumatology",
+          "value": "rheumatology"
+        },
+        {
           "label": "Theatre practitioners",
           "value": "theatre-practitioners"
         },
         {
-          "label": "Urology",
+          "label": "Urology and nephrology",
           "value": "urology"
         },
         {

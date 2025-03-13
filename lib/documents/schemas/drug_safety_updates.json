@@ -24,6 +24,18 @@
           "value": "cardiovascular-disease-lipidology"
         },
         {
+          "label": "Care home staff",
+          "value": "care-home-staff"
+        },
+        {
+          "label": "Cosmetic surgery",
+          "value": "cosmetic-surgery"
+        },
+        {
+          "label": "Critical care",
+          "value": "critical-care"
+        },
+        {
           "label": "Dentistry",
           "value": "dentistry"
         },
@@ -40,15 +52,27 @@
           "value": "ear-nose-throat"
         },
         {
+          "label": "Emergency medicine",
+          "value": "emergency-medicine"
+        },
+        {
           "label": "Endocrinology, diabetology and metabolism",
           "value": "endocrinology-diabetology-metabolism"
+        },
+        {
+          "label": "General practice",
+          "value": "general-practice"
+        },
+        {
+          "label": "General surgery",
+          "value": "general-surgery"
         },
         {
           "label": "GI, hepatology and pancreatic disorders",
           "value": "gi-hepatology-pancreatic-disorders"
         },
         {
-          "label": "Haematology",
+          "label": "Haematology and oncology",
           "value": "haematology"
         },
         {
@@ -58,6 +82,10 @@
         {
           "label": "Immunosuppression and transplantation",
           "value": "immunosuppression-transplantation"
+        },
+        {
+          "label": "Infection prevention",
+          "value": "infection-prevention"
         },
         {
           "label": "Infectious disease",
@@ -80,12 +108,28 @@
           "value": "ophthalmology"
         },
         {
+          "label": "Orthopaedics",
+          "value": "orthopaedics"
+        },
+        {
           "label": "Paediatrics and neonatology",
           "value": "paediatrics-neonatology"
         },
         {
           "label": "Pain management and palliation",
           "value": "pain-management-palliation"
+        },
+        {
+          "label": "Pathology",
+          "value": "pathology"
+        },
+        {
+          "label": "Pharmacy",
+          "value": "pharmacy"
+        },
+        {
+          "label": "Physiotherapy and occupational therapy",
+          "value": "physiotherapy-occupational-therapy"
         },
         {
           "label": "Pregnancy",
@@ -100,6 +144,10 @@
           "value": "radiology-imaging"
         },
         {
+          "label": "Renal medicine",
+          "value": "renal-medicine"
+        },
+        {
           "label": "Respiratory disease and allergy",
           "value": "respiratory-disease-allergy"
         },
@@ -108,8 +156,16 @@
           "value": "rheumatology"
         },
         {
+          "label": "Theatre practitioners",
+          "value": "theatre-practitioners"
+        },
+        {
           "label": "Urology and nephrology",
           "value": "urology-nephrology"
+        },
+        {
+          "label": "Vascular and cardiac surgery",
+          "value": "vascular-cardiac-surgery"
         }
       ],
       "display_as_result_metadata": true,
