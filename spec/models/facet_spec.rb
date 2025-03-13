@@ -102,8 +102,17 @@ RSpec.describe "Facet" do
         ])
       end
 
-      it "also works for the 'nested type" do
-        params = { "type" => "nested", "allowed_values" => "Foo {food}\nBart {bar}" }
+      it "also works for the 'nested_enum_text_single' type" do
+        params = { "type" => "nested_enum_text_single", "allowed_values" => "Foo {food}\nBart {bar}" }
+        facet = Facet.from_finder_admin_form_params(params)
+        expect(facet.allowed_values).to eq([
+          { label: "Foo", value: "food" },
+          { label: "Bart", value: "bar" },
+        ])
+      end
+
+      it "also works for the 'nested_enum_text_multiple' type" do
+        params = { "type" => "nested_enum_text_multiple", "allowed_values" => "Foo {food}\nBart {bar}" }
         facet = Facet.from_finder_admin_form_params(params)
         expect(facet.allowed_values).to eq([
           { label: "Foo", value: "food" },
@@ -198,7 +207,7 @@ RSpec.describe "Facet" do
     context "when the facet is nested" do
       it "builds a facet containing its sub-facet's data" do
         params = {
-          "type" => "nested",
+          "type" => "nested_enum_text_multiple",
           "sub_facet" => "Some sub facet name {some_sub_facet_key}",
           "allowed_values" => "existing value {existing-value}\n- new sub facet value",
         }
@@ -251,7 +260,7 @@ RSpec.describe "Facet" do
 
       it "derives the keys for main and sub facets, in kebab-case, from the label if no key provided" do
         params = {
-          "type" => "nested",
+          "type" => "nested_enum_text_multiple",
           "sub_facet" => "Some sub facet name {some_sub_facet_key}",
           "allowed_values" => "Main Facet 1\n- Sub Facet 11\n- Sub Facet 12\nMain Facet 2\n- Sub Facet 21\n- Sub Facet 22\nMain Facet 3",
         }
@@ -297,7 +306,7 @@ RSpec.describe "Facet" do
 
       it "uses any pre-supplied keys in curly brackets, if provided" do
         params = {
-          "type" => "nested",
+          "type" => "nested_enum_text_single",
           "sub_facet" => "Some sub facet name {some_sub_facet_key}",
           "allowed_values" => "Main Facet 1{main-facet-1}\n- Sub Facet 11{sub-facet-11}\n- Sub Facet 12 NEW\nMain Facet 2{main-facet-2}\n- Sub Facet 21{sub-facet-21}\n- Sub Facet 22{sub-facet-22}\nMain Facet 3{main-facet-3}",
         }
