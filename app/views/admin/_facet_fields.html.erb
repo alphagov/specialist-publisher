@@ -47,9 +47,14 @@
       selected: facet["type"] == "date",
     },
     {
-      text: "Nested",
-      value: "nested",
-      selected: facet["type"] == "nested",
+      text: "Nested - One option",
+      value: "nested_enum_text_single",
+      selected: facet["type"] == "nested" && facet.dig("specialist_publisher_properties", "select") == "one",
+    },
+    {
+      text: "Nested - Multiple select",
+      value: "nested_enum_text_multiple",
+      selected: facet["type"] == "nested" && facet.dig("specialist_publisher_properties", "select") == "multiple",
     }
   ]
 } %>

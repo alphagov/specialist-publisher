@@ -35,7 +35,7 @@ RSpec.feature "Editing the Trademark Decisions finder filters and options", type
       inserted_facet = "facets[8]"
       fill_in "#{inserted_facet}[name]", with: "New filter"
       fill_in "#{inserted_facet}[short_name]", with: "short name"
-      select "Nested", from: "#{inserted_facet}[type]"
+      select "Nested - Multiple select", from: "#{inserted_facet}[type]"
       check "Required", visible: false
       fill_in "#{inserted_facet}[sub_facet]", with: "Sub Facet Name"
       fill_in "#{inserted_facet}[allowed_values]", with: "Main Facet 1{main-facet-1}\nSub Facet 11{sub-facet-11}\nSub Facet 12 NEW\r\n\r\nMain Facet 2{main-facet-2}\nSub Facet 21{sub-facet-21}\nSub Facet 22{sub-facet-22}\r\n\r\nMain Facet 3{main-facet-3}"
