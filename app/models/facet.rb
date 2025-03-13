@@ -65,7 +65,13 @@ class Facet
     end
 
     def facet_type(type)
-      facet_text_types.include?(type) ? "text" : type
+      if facet_text_types.include?(type)
+        "text"
+      elsif facet_nested_types.include?(type)
+        "nested"
+      else
+        type
+      end
     end
 
     def facet_allowed_values(values, type)
@@ -112,9 +118,9 @@ class Facet
 
     def facet_specialist_publisher_properties_select(type)
       case type
-      when "enum_text_multiple", "nested"
+      when "enum_text_multiple", "nested_enum_text_multiple"
         { select: "multiple" }
-      when "enum_text_single"
+      when "enum_text_single", "nested_enum_text_single"
         { select: "one" }
       else
         {}
@@ -133,11 +139,15 @@ class Facet
     end
 
     def facet_types_that_allow_enum_values
-      facet_text_types + %w[nested]
+      facet_text_types + facet_nested_types
     end
 
     def facet_text_types
       %w[enum_text_multiple enum_text_single]
+    end
+
+    def facet_nested_types
+      %w[nested_enum_text_multiple nested_enum_text_single]
     end
   end
 end
