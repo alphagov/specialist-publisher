@@ -41,7 +41,7 @@ RSpec.describe "Facet" do
       expect(facet.preposition).to eq(nil)
     end
 
-    describe "inferring the boolean value, or absence of a value, for 'display_as_result_metadata', 'filterable', 'show_option_select_filter', and 'nested_facet'" do
+    describe "inferring the boolean value, or absence of a value, for 'display_as_result_metadata', 'filterable', 'show_option_select_filter'" do
       it "converts 'true' to true for 'display_as_result_metadata'" do
         facet = Facet.from_finder_admin_form_params({ "display_as_result_metadata" => "true" })
         expect(facet.display_as_result_metadata).to eq(true)
@@ -81,16 +81,6 @@ RSpec.describe "Facet" do
         facet = Facet.from_finder_admin_form_params({ "show_option_select_filter" => "false" })
         expect(facet.show_option_select_filter).to eq(nil)
       end
-
-      it "sets 'nested_facet' to 'true' is 'sub_facet' is present" do
-        facet = Facet.from_finder_admin_form_params({ "sub_facet" => "some string" })
-        expect(facet.nested_facet).to eq(true)
-      end
-
-      it "sets 'nested_facet' to 'nil' if 'sub_facet' is blank" do
-        facet = Facet.from_finder_admin_form_params({ "sub_facet" => "" })
-        expect(facet.nested_facet).to eq(nil)
-      end
     end
 
     describe "constructing the allowed_values" do
@@ -105,6 +95,24 @@ RSpec.describe "Facet" do
 
       it "also works for the enum_text_single 'type'" do
         params = { "type" => "enum_text_single", "allowed_values" => "Foo {food}\nBart {bar}" }
+        facet = Facet.from_finder_admin_form_params(params)
+        expect(facet.allowed_values).to eq([
+          { label: "Foo", value: "food" },
+          { label: "Bart", value: "bar" },
+        ])
+      end
+
+      it "also works for the 'nested_enum_text_single' type" do
+        params = { "type" => "nested_enum_text_single", "allowed_values" => "Foo {food}\nBart {bar}" }
+        facet = Facet.from_finder_admin_form_params(params)
+        expect(facet.allowed_values).to eq([
+          { label: "Foo", value: "food" },
+          { label: "Bart", value: "bar" },
+        ])
+      end
+
+      it "also works for the 'nested_enum_text_multiple' type" do
+        params = { "type" => "nested_enum_text_multiple", "allowed_values" => "Foo {food}\nBart {bar}" }
         facet = Facet.from_finder_admin_form_params(params)
         expect(facet.allowed_values).to eq([
           { label: "Foo", value: "food" },
@@ -199,12 +207,12 @@ RSpec.describe "Facet" do
     context "when the facet is nested" do
       it "builds a facet containing its sub-facet's data" do
         params = {
-          "type" => "enum_text_multiple",
+          "type" => "nested_enum_text_multiple",
           "sub_facet" => "Some sub facet name {some_sub_facet_key}",
           "allowed_values" => "existing value {existing-value}\n- new sub facet value",
         }
         facet = Facet.from_finder_admin_form_params(params)
-        expect(facet.nested_facet).to eq(true)
+        expect(facet.type).to eq("nested")
         expect(facet.sub_facet_key).to eq("some_sub_facet_key")
         expect(facet.sub_facet_name).to eq("Some sub facet name")
         expect(facet.allowed_values).to eq([{
@@ -252,12 +260,12 @@ RSpec.describe "Facet" do
 
       it "derives the keys for main and sub facets, in kebab-case, from the label if no key provided" do
         params = {
-          "type" => "enum_text_multiple",
+          "type" => "nested_enum_text_multiple",
           "sub_facet" => "Some sub facet name {some_sub_facet_key}",
           "allowed_values" => "Main Facet 1\n- Sub Facet 11\n- Sub Facet 12\nMain Facet 2\n- Sub Facet 21\n- Sub Facet 22\nMain Facet 3",
         }
         facet = Facet.from_finder_admin_form_params(params)
-        expect(facet.nested_facet).to eq(true)
+        expect(facet.type).to eq("nested")
         expect(facet.sub_facet_key).to eq("some_sub_facet_key")
         expect(facet.sub_facet_name).to eq("Some sub facet name")
         expect(facet.allowed_values).to eq([
@@ -298,12 +306,12 @@ RSpec.describe "Facet" do
 
       it "uses any pre-supplied keys in curly brackets, if provided" do
         params = {
-          "type" => "enum_text_multiple",
+          "type" => "nested_enum_text_single",
           "sub_facet" => "Some sub facet name {some_sub_facet_key}",
           "allowed_values" => "Main Facet 1{main-facet-1}\n- Sub Facet 11{sub-facet-11}\n- Sub Facet 12 NEW\nMain Facet 2{main-facet-2}\n- Sub Facet 21{sub-facet-21}\n- Sub Facet 22{sub-facet-22}\nMain Facet 3{main-facet-3}",
         }
         facet = Facet.from_finder_admin_form_params(params)
-        expect(facet.nested_facet).to eq(true)
+        expect(facet.type).to eq("nested")
         expect(facet.sub_facet_key).to eq("some_sub_facet_key")
         expect(facet.sub_facet_name).to eq("Some sub facet name")
         expect(facet.allowed_values).to eq([
@@ -350,8 +358,7 @@ RSpec.describe "Facet" do
       facet.key = "foo"
       facet.name = "Foo"
       facet.short_name = "f"
-      facet.type = "text"
-      facet.nested_facet = true
+      facet.type = "nested"
       facet.preposition = "sector"
       facet.display_as_result_metadata = false
       facet.filterable = true
@@ -366,8 +373,7 @@ RSpec.describe "Facet" do
         key: "foo",
         name: "Foo",
         short_name: "f",
-        type: "text",
-        nested_facet: true,
+        type: "nested",
         preposition: "sector",
         display_as_result_metadata: false,
         filterable: true,

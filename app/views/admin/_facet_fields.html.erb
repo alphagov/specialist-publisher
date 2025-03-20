@@ -45,6 +45,16 @@
       text: "Date",
       value: "date",
       selected: facet["type"] == "date",
+    },
+    {
+      text: "Nested - One option",
+      value: "nested_enum_text_single",
+      selected: facet["type"] == "nested" && facet.dig("specialist_publisher_properties", "select") == "one",
+    },
+    {
+      text: "Nested - Multiple select",
+      value: "nested_enum_text_multiple",
+      selected: facet["type"] == "nested" && facet.dig("specialist_publisher_properties", "select") == "multiple",
     }
   ]
 } %>
@@ -70,7 +80,7 @@
     heading_size: "s",
   },
   name: "facets[#{index}][sub_facet]",
-  value: facet["nested_facet"] ? "#{facet["sub_facet_name"]} {#{facet["sub_facet_key"]}}" : "",
+  value: facet["type"] == "nested" ? "#{facet["sub_facet_name"]} {#{facet["sub_facet_key"]}}" : "",
   hint: "The name of the sub-facet (only relevant for nested facets). Once saved, a key will be generated alongside it in the format 'Name {auto-generated-key-name}'. Do not edit the key."
 } %>
 
@@ -82,7 +92,7 @@
   hint: sanitize("Put each option on a new line. The underlying name for existing (live) options will appear in curly braces: please don't edit these, and don't add them for new options (they'll be created automatically later on in the process). Example:<br><strong>Pre-existing value {pre-existing-value}</strong><br><strong>New value</strong><br>If this is a nested facet, add nested options on subsequent lines, prefixed with a '-':<br><strong>Main Facet Value</strong><br><strong>- Sub Facet Value</strong><br><em>optional blank line</em><br><strong>Another Main Facet Value</strong>"),
   name: "facets[#{index}][allowed_values]",
   rows: 5,
-  value: admin_facet_value_from_allowed_values(facet["allowed_values"], nested_facet: facet["nested_facet"]),
+  value: admin_facet_value_from_allowed_values(facet["allowed_values"], nested_facet: facet["type"] == "nested"),
 } %>
 
 <%= render "govuk_publishing_components/components/radio", {
