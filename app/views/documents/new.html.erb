@@ -1,8 +1,18 @@
 <%= content_for :page_title, "New #{current_format.title.singularize}" %>
 
 <% content_for :breadcrumbs do %>
-  <li><%= link_to "Your documents", documents_path(current_format.admin_slug) %></li>
-  <li class='active'>New document</li>
+  <%= render "govuk_publishing_components/components/breadcrumbs", {
+    collapse_on_mobile: true,
+    breadcrumbs: [
+      {
+        title: "Your documents",
+        url: documents_path(current_format.admin_slug)
+      },
+      {
+        title: "New document"
+      }
+    ]
+  } %>
 <% end %>
 
 <% content_for :document_ready do -%>
