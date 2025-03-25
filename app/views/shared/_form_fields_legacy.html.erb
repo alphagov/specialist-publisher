@@ -1,11 +1,6 @@
-<% format_name = f.object.class.finder_schema.filter["format"].to_sym %>
-<%= render "govuk_publishing_components/components/input", {
-  label: {
-    text: "Title (required)",
-    heading_size: "m",
-  },
-  name: "#{format_name}[title]",
-} %>
+<%= render layout: "shared/form_group", locals: { f: f, field: :title } do %>
+  <%= f.text_field :title, class: 'form-control' %>
+<% end %>
 
 <%= render layout: "shared/form_group", locals: { f: f, field: :summary } do %>
   <%= f.text_area :summary, class: 'form-control short-textarea js-length-counter', data: { :"count-message-threshold" => 280, :"count-message-selector" => ".summary-length-info" } %>
@@ -18,15 +13,15 @@
 
 <%= render layout: "shared/form_group", locals: { f: f, field: :locale, label: "Language" } do %>
   <%= f.select(
-    :locale,
-    options_for_select(
-      map_locale_names,
-      @document.locale || "en"
-    ),
-    {
-      class: 'select2',
-      multiple: false,
-      data: { placeholder: 'Select locale' }
-    },
-  ) %>
+        :locale,
+        options_for_select(
+          map_locale_names,
+          @document.locale || "en"
+        ),
+        {
+          class: 'select2',
+          multiple: false,
+          data: { placeholder: 'Select locale' }
+        },
+        ) %>
 <% end %>
