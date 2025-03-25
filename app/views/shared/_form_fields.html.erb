@@ -7,10 +7,18 @@
   name: "#{format_name}[title]",
 } %>
 
-<%= render layout: "shared/form_group", locals: { f: f, field: :summary } do %>
-  <%= f.text_area :summary, class: 'form-control short-textarea js-length-counter', data: { :"count-message-threshold" => 280, :"count-message-selector" => ".summary-length-info" } %>
-  <div class="summary-length-info warning" aria-live="polite">Summary text should be 280 characters or fewer. <span class="count"></span></div>
-<% end %>
+<%= render "govuk_publishing_components/components/character_count", {
+  textarea: {
+    label: {
+      text: "Summary (required)",
+      heading_size: "m",
+    },
+    name: "#{format_name}[summary]",
+    margin_bottom: 8,
+  },
+  id: "#{format_name}_summary",
+  maxlength: 280,
+} %>
 
 <%= render layout: "shared/form_group", locals: { f: f, field: :body } do %>
   <%= f.text_area :body, rows: 20, class: 'form-control body-text' %>
