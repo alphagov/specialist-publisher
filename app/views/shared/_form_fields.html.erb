@@ -29,17 +29,17 @@
   rows: 20,
 } %>
 
-<%= render layout: "shared/form_group", locals: { f: f, field: :locale, label: "Language" } do %>
-  <%= f.select(
-    :locale,
-    options_for_select(
-      map_locale_names,
-      @document.locale || "en"
-    ),
+<% locale = @document.locale || "en" %>
+<%= render "govuk_publishing_components/components/select", {
+  id: "#{format_name}[locale]",
+  label: "Language",
+  heading_size: "m",
+  full_width: true,
+  options: locale_codes.map do |key|
     {
-      class: 'select2',
-      multiple: false,
-      data: { placeholder: 'Select locale' }
-    },
-  ) %>
-<% end %>
+      text: locale_names[key],
+      value: key.to_s,
+      selected: key.to_s == locale,
+    }
+  end,
+} %>
