@@ -22,6 +22,14 @@
 <div class="govuk-hint" aria-live="polite">Summary text should be <%= count_message_threshold %> characters or fewer. <span class="count"></span></div>
 <% end %>
 
+<%= render "govuk_publishing_components/components/textarea", {
+  label: {
+    text: "Body (required)"
+  },
+  name: "#{format_name}[body]",
+  rows: 20,
+} %>
+
 <%= render layout: "shared/form_group", locals: { f: f, field: :locale, label: "Language" } do %>
   <%= f.select(
     :locale,
