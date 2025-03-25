@@ -6,13 +6,20 @@
   name: "#{format_name}[title]",
 } %>
 
-<%= render layout: "shared/form_group", locals: { f: f, field: :summary } do %>
-  <%= f.text_area :summary, class: 'form-control short-textarea js-length-counter', data: { :"count-message-threshold" => 280, :"count-message-selector" => ".summary-length-info" } %>
-  <div class="summary-length-info warning" aria-live="polite">Summary text should be 280 characters or fewer. <span class="count"></span></div>
-<% end %>
-
-<%= render layout: "shared/form_group", locals: { f: f, field: :body } do %>
-  <%= f.text_area :body, rows: 20, class: 'form-control body-text' %>
+<% count_message_threshold = 280 %>
+<% count_message_selector = ".summary-length-info" %>
+<%= render "govuk_publishing_components/components/textarea", {
+  label: {
+    text: "Summary (required)"
+  },
+  name: "#{format_name}[summary]",
+  class: "js-length-counter",
+  data: {
+    count_message_threshold:,
+    count_message_selector:,
+  },
+} do %>
+<div class="govuk-hint" aria-live="polite">Summary text should be <%= count_message_threshold %> characters or fewer. <span class="count"></span></div>
 <% end %>
 
 <%= render layout: "shared/form_group", locals: { f: f, field: :locale, label: "Language" } do %>
