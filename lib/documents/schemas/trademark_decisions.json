@@ -1607,7 +1607,6 @@
       "filterable": true,
       "key": "trademark_decision_grounds_section",
       "name": "Grounds Section",
-      "nested_facet": true,
       "preposition": "Grounds section",
       "short_name": "Grounds section",
       "specialist_publisher_properties": {
@@ -1618,7 +1617,7 @@
       },
       "sub_facet_key": "trademark_decision_grounds_sub_section",
       "sub_facet_name": "Grounds Sub Section",
-      "type": "text"
+      "type": "nested"
     }
   ],
   "filter": {

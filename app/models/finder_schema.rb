@@ -71,9 +71,9 @@ class FinderSchema
 
   def humanized_facet_value(facet_key, value)
     type = facet_data_for(facet_key).fetch("type", nil)
-    if type == "text" && allowed_values_for(facet_key).empty?
+    if %w[text nested].include?(type) && allowed_values_for(facet_key).empty?
       value
-    elsif %w[hidden text].include?(type)
+    elsif %w[hidden text nested].include?(type)
       Array(value).map do |v|
         value_label_mapping_for(facet_key, v).fetch("label") { value }
       end
@@ -91,7 +91,7 @@ class FinderSchema
   end
 
   def nested_facets
-    facets.select { |facet| facet["nested_facet"] }
+    facets.select { |facet| facet["type"] == "nested" }
   end
 
 private
