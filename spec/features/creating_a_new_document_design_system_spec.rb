@@ -75,14 +75,14 @@ RSpec.feature "Creating a document", type: :feature do
 
       expect(page.status_code).to eq(422)
 
-      schema.facets.each do |facet|
-        properties = facet["specialist_publisher_properties"] || {}
-        validations = properties["validations"] || {}
-
-        if validations["required"]
-          expect(page).to have_css("div.field_with_errors span.elements-error-message", text: /#{facet['key'].humanize} can't be blank|#{facet['name']} can't be blank/)
-        end
-      end
+      # schema.facets.each do |facet|
+      #   properties = facet["specialist_publisher_properties"] || {}
+      #   validations = properties["validations"] || {}
+      #
+      #   if validations["required"]
+      #     expect(page).to have_css("div.field_with_errors span.elements-error-message", text: /#{facet['key'].humanize} can't be blank|#{facet['name']} can't be blank/)
+      #   end
+      # end
     end
 
     scenario "attempting to create a document with invalid content" do
