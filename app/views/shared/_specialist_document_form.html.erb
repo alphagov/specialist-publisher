@@ -1,10 +1,10 @@
 <% f.object.class.finder_schema.facets.each do |field_config| %>
+  <% format_name = f.object.class.finder_schema.filter["format"].to_sym %>
   <% field = field_config["key"].to_sym %>
   <% if field_config.nil? %>
     <%= render layout: "shared/specialist_document_form_error", locals: { field: field } do %>
     <% end %>
   <% elsif field_config["type"] == "date" %>
-    <% format_name = f.object.class.finder_schema.filter["format"].to_sym %>
     <%= render layout: "shared/date_fields", locals: { f: f, field: field, format: format_name, label: field_config["name"] } do %>
     <% end %>
   <% elsif !field_config["allowed_values"] %>
