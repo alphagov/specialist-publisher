@@ -6,6 +6,8 @@ class DocumentsController < ApplicationController
   include ActionView::Helpers::UrlHelper
   include OrganisationsHelper
 
+  layout "design_system"
+
   before_action :fetch_document, except: %i[index new create]
   before_action :merge_nested_facet_fields, only: %i[edit new]
   before_action :check_authorisation, if: :document_type_slug
