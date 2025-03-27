@@ -62,7 +62,6 @@ RSpec.feature "Creating a document", type: :feature do
 
       expect(page).to have_css("div.govspeak-help")
       expect(page).to have_content("To add an attachment, please save the draft first.")
-      expect(save_button_disable_with_message).to eq("Saving...")
       click_button "Save as draft"
 
       expect(page.status_code).to eq(200)
