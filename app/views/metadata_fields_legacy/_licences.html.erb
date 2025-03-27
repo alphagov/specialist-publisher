@@ -1,0 +1,83 @@
+<%# You can select multiple class or categories so this has multi-select option %>
+<%= render layout: "shared/form_group", locals: { f: f, field: :licence_transaction_industry, label: "Industry" } do %>
+  <%= f.select :licence_transaction_industry,
+      select_options_for_facet(f.object.allowed_values(:licence_transaction_industry)),
+      { label: "Industry" },
+      {
+        class: 'select2 form-control',
+        multiple: true,
+        data: {
+          placeholder: 'Select industries'
+        }
+      }
+  %>
+<% end %>
+
+<%# You can select multiple class or categories so this has multi-select option %>
+<%= render layout: "shared/form_group", locals: { f: f, field: :licence_transaction_location, label: "Location" } do %>
+  <%= f.select :licence_transaction_location,
+      select_options_for_facet(f.object.allowed_values(:licence_transaction_location)),
+      { label: "Location" },
+      {
+        class: 'select2 form-control',
+        multiple: true,
+        data: {
+          placeholder: 'Select locations'
+        }
+      }
+  %>
+<% end %>
+
+<% # TODO: find a way of making organisation management schema-driven %>
+<%= render "shared/form_group", f: f, field: :primary_publishing_organisation, label: "Publishing organisation" do %>
+  <%= f.select :primary_publishing_organisation,
+      organisations_options,
+      { selected: selected_organisation_or_current(@document.primary_publishing_organisation) },
+      {
+        class: "select2 form-control",
+        multiple: false,
+        data: {
+          placeholder: "Select a primary publishing organisation"
+        }
+      }
+  %>
+<% end %>
+<%= render "shared/form_group", f: f, field: :organisations, label: "Other associated organisations" do %>
+  <%= f.select :organisations,
+      organisations_options,
+      {},
+      {
+        class: "select2 form-control select-all-disabled",
+        multiple: true,
+        data: {
+          placeholder: "Select organisations"
+        }
+      }
+  %>
+<% end %>
+
+<% # TODO: rendering a subset of the facet fields above (and a subset below) the proprietary code in this file %>
+<% # makes it difficult to use the shared view %>
+<div class="additional-field-context-section">
+  <h2>How users apply</h2>
+
+  <% if field_has_errors(@document, :base) %>
+    <div class="elements-error">
+      <p class="elements-error-message"><%= t("activemodel.errors.models.licence_transaction.attributes.base.link_and_identifier_exists") %></p>
+    </div>
+  <% else %>
+    <p>Enter either the website where users can apply for the licence, or the licence identifier.</p>
+  <% end %>
+</div>
+
+<%= render layout: "shared/form_group", locals: { f: f, field: :licence_transaction_will_continue_on, label: "Name of website where users apply" } do %>
+  <%= f.text_field :licence_transaction_will_continue_on, class: 'form-control' %>
+<% end %>
+
+<%= render layout: "shared/form_group", locals: { f: f, field: :licence_transaction_continuation_link, label: "Link to where users apply" } do %>
+  <%= f.text_field :licence_transaction_continuation_link, class: 'form-control' %>
+<% end %>
+
+<%= render layout: "shared/form_group", locals: { f: f, field: :licence_transaction_licence_identifier, label: "Licence identifier" } do %>
+  <%= f.text_field :licence_transaction_licence_identifier, class: 'form-control' %>
+<% end %>

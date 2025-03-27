@@ -23,7 +23,7 @@
 
         <%= render partial: "shared/preview_govspeak", locals: {attachments: @document.attachments} %>
 
-        <%= render partial: "metadata_fields/#{params[:document_type_slug].underscore}", locals: {f: f} %>
+        <%= render partial: "metadata_fields_legacy/#{params[:document_type_slug].underscore}", locals: {f: f} %>
 
         <%= render partial: "shared/minor_major_update_fields", locals: {f: f, document: @document} %>
 
