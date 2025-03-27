@@ -5,8 +5,34 @@
     <%= render layout: "shared/specialist_document_form_error", locals: { field: field } do %>
     <% end %>
   <% elsif field_config["type"] == "date" %>
-    <%= render layout: "shared/date_fields", locals: { f: f, field: field, format: format_name, label: field_config["name"] } do %>
-    <% end %>
+    <% prefix = format_name %>
+    <%= render "shared/datetime_fields", {
+      prefix: prefix,
+      field_name: "#{format_name}[#{field}]",
+      date_only: true,
+      # error_items: errors_for(consultation_response.errors, :published_on),
+      year: {
+        value: params.dig("#{prefix}", "#{field}(1i)"),
+        id: "#{prefix}_#{field}_year",
+        name: "#{prefix}[#{field}(1i)]",
+        label: "Year",
+        width: 4,
+      },
+      month: {
+        value: params.dig("#{prefix}", "#{field}(2i)"),
+        id: "#{prefix}_#{field}_month",
+        name: "#{prefix}[#{field}(2i)]",
+        label: "Month",
+        width: 2,
+      },
+      day: {
+        value: params.dig("#{prefix}", "#{field}(3i)"),
+        id: "#{prefix}_#{field}_day",
+        name: "#{prefix}[#{field}(3i)]",
+        label: "Day",
+        width: 2,
+      },
+    } %>
   <% elsif !field_config["allowed_values"] %>
     <%= render "govuk_publishing_components/components/textarea", {
       label: {
