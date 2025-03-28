@@ -85,6 +85,7 @@ private
       :description,
       :summary,
       :show_summaries,
+      :show_metadata_block,
       :document_title,
       :document_noun,
       organisations: [],
@@ -146,7 +147,7 @@ private
       next if facet_params["_destroy"] == "1"
 
       Facet.from_finder_admin_form_params(facet_params)
-           .to_finder_schema_attributes
+          .to_finder_schema_attributes
     }.compact
     proposed_schema.update(params_to_overwrite)
   end

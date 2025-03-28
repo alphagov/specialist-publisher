@@ -108,6 +108,26 @@
   ]
 } %>
 
+<%= render "govuk_publishing_components/components/radio", {
+  heading: "Should a metadata block be displayed at the top of each document page?",
+  heading_size: "s",
+  hint: "Example: Metadata blocks can show additional information such as organisations and tags for a document.",
+  name: "show_metadata_block",
+  inline: true,
+  items: [
+    {
+      value: "true",
+      text: "Yes",
+      checked: schema.show_metadata_block
+    },
+    {
+      value: "false",
+      text: "No",
+      checked: !schema.show_metadata_block
+    }
+  ]
+} %>
+
 <%= render "govuk_publishing_components/components/input", {
   label: {
     text: "Full document noun (Appears in various places in the Specialist Publisher user interface)",
