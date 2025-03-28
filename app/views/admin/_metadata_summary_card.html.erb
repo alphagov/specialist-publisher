@@ -61,6 +61,10 @@
       value: schema.show_summaries ? "Yes" : "No"
     } if !(defined? previous_schema) || schema.show_summaries != previous_schema.show_summaries),
     ({
+      key: "Should a metadata block be displayed at the top of each document page?",
+      value: schema.show_metadata_block ? "Yes" : "No"
+    } if !(defined? previous_schema) || schema.show_metadata_block != previous_schema.show_metadata_block),
+    ({
       key: "Full document noun (Appears in various places in the Specialist Publisher user interface)",
       value: (schema.document_title || "").humanize
     } if !(defined? previous_schema) || schema.document_title != previous_schema.document_title),

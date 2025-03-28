@@ -270,6 +270,7 @@
     "af07d5a5-df63-4ddc-9383-6a666845ebe9"
   ],
   "related": [],
+  "show_metadata_block": true,
   "show_summaries": true,
   "summary": "Find guidance for the responsible use and development of data and data technologies, including artificial intelligence (AI), developed by and for government and public sector bodies.\r\n\r\nIf you have suggestions for guidance, email [data.ethics@digital.cabinet-office.gov.uk](mailto:data.ethics@digital.cabinet-office.gov.uk).",
   "target_stack": "live"

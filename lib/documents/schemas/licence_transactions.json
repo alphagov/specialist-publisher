@@ -280,6 +280,7 @@
   "organisations": [
     "aa750cdf-7925-429d-a2b3-0d9fa47d2c48"
   ],
+  "show_metadata_block": true,
   "show_summaries": true,
   "summary": "You may need a licence, permit or certification for:\r\n\r\n* some business activities\r\n\r\n* other activities, such as street parties\r\n\r\n^This may not include all the licences you need. It will be updated with more licences.^",
   "target_stack": "live"

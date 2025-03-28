@@ -321,6 +321,7 @@
     "7141e343-e7bb-483b-920a-c6a5cf8f758c"
   ],
   "phase": "beta",
+  "show_metadata_block": true,
   "show_summaries": true,
   "signup_content_id": "307ea825-594c-4d88-85c9-0809fdc9c79e",
   "subscription_list_title_prefix": "First-tier Tribunal (Asylum Support) decisions",

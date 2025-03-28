@@ -372,6 +372,7 @@
     "bb2b028f-efaa-44fd-b3f8-971b25cb51a2"
   ],
   "phase": "beta",
+  "show_metadata_block": true,
   "show_summaries": true,
   "signup_content_id": "8a6239e1-76cf-41a0-9295-0ae1182080d2",
   "subscription_list_title_prefix": "Residential property tribunal decisions",

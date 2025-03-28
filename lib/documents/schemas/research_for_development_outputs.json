@@ -1001,6 +1001,7 @@
   "organisations": [
     "f9fcf3fe-2751-4dca-97ca-becaeceb4b26"
   ],
+  "show_metadata_block": true,
   "signup_content_id": "fdcbada2-1ad4-4194-98dc-5f04a448316e",
   "subscription_list_title_prefix": "Research for Development output",
   "summary": "Research outputs published before 2 September 2020 were published by the Department for International Development (DFID)",

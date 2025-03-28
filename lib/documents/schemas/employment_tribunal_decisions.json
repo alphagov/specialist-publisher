@@ -313,6 +313,7 @@
     "8bb37087-a5a7-4493-8afe-900b36ebc927"
   ],
   "phase": "beta",
+  "show_metadata_block": true,
   "show_summaries": true,
   "signup_content_id": "6d7ace06-f437-4fb3-b948-8534ff34540f",
   "subscription_list_title_prefix": "Employment tribunal decisions",

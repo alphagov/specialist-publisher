@@ -479,6 +479,7 @@
   "related": [
     "9be2896c-2c32-4108-a465-e37ba16f6dd1"
   ],
+  "show_metadata_block": true,
   "show_summaries": true,
   "signup_content_id": "99f5bacb-d1ef-4b93-87ef-bae129fed396",
   "subscription_list_title_prefix": "Algorithmic transparency records",

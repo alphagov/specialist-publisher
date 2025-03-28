@@ -1061,6 +1061,7 @@
     "caeb418c-d11c-4352-92e9-47b21289f696"
   ],
   "phase": "beta",
+  "show_metadata_block": true,
   "show_summaries": true,
   "signup_content_id": "1f5911f4-417a-4380-a5a0-674ebff332df",
   "subscription_list_title_prefix": "Employment Appeal Tribunal decisions",
