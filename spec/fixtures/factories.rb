@@ -117,7 +117,7 @@ FactoryBot.define do
     schema_name { "specialist_document" }
     document_type { nil }
     publishing_app { "specialist-publisher" }
-    rendering_app { "government-frontend" }
+    rendering_app { "frontend" }
     locale { "en" }
     phase { "live" }
     redirects { [] }
