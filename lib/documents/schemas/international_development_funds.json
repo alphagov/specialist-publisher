@@ -998,6 +998,7 @@
   "organisations": [
     "f9fcf3fe-2751-4dca-97ca-becaeceb4b26"
   ],
+  "show_metadata_block": true,
   "show_summaries": true,
   "signup_content_id": "f1a4e5b2-c8b3-40f2-acde-75061a45184d",
   "subscription_list_title_prefix": "International development funds",

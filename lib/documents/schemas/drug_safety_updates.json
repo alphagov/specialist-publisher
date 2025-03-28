@@ -199,6 +199,7 @@
     "1e9c0ada-5f7e-43cc-a55f-cc32757edaa3",
     "c953a82b-e9ff-4551-9324-dfdf40ab85e6"
   ],
+  "show_metadata_block": true,
   "show_summaries": true,
   "signup_link": "https://public.govdelivery.com/accounts/UKMHRA/subscriber/new?topic_id=UKMHRA_0044",
   "target_stack": "live",

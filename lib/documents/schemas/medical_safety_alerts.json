@@ -249,6 +249,7 @@
   "related": [
     "602be505-4cf4-4f8c-8bfc-7bc4b63a7f47"
   ],
+  "show_metadata_block": true,
   "show_summaries": true,
   "signup_content_id": "a796ca43-021b-4960-9c99-f41bb8ef2266",
   "target_stack": "live",

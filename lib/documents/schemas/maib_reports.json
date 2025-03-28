@@ -101,6 +101,7 @@
   "organisations": [
     "9c66b9a3-1e6a-48e8-974d-2a5635f84679"
   ],
+  "show_metadata_block": true,
   "show_summaries": true,
   "signup_content_id": "56cb57e2-7e7f-4f67-b2f6-39c9a55385dc",
   "subscription_list_title_prefix": "Marine Accident Investigation Branch (MAIB) reports",

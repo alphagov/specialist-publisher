@@ -205,6 +205,7 @@
     "af8eee5a-632a-4b8e-bb59-8fc5204892bc",
     "5fa8f693-7631-11e4-a3cb-005056011aef"
   ],
+  "show_metadata_block": true,
   "signup_content_id": "e39c8c6e-b4c2-4dec-84fd-7f3d77f96a7d",
   "subscription_list_title_prefix": "Notifiable animal disease cases and control zones",
   "summary": "Find notifiable exotic animal disease cases and control zone declarations for England.\r\n\r\nRead our [guidance on notifiable diseases in animals](https://www.gov.uk/government/collections/notifiable-diseases-in-animals).",
