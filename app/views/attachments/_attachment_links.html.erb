@@ -1,4 +1,4 @@
-<%= render partial: "govuk_admin_template/govspeak_help" %>
+<%= render partial: "shared/govspeak_help" %>
 
 <%= render "govuk_publishing_components/components/heading", {
   text: "Attachments",
@@ -8,7 +8,7 @@
 <% if @document.publication_state %>
     <%= link_to "Add attachment", new_document_attachment_path(params[:document_type_slug], @document.content_id_and_locale) %>
 <% else %>
-    <p>To add an attachment, please save the draft first.</p>
+  <p class='govuk-body'>To add an attachment, please save the draft first.</p>
 <% end %>
 <% if @document.attachments %>
     <ul class="attachments">

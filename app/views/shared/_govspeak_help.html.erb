@@ -1,0 +1,151 @@
+<div class="govspeak-help">
+  <%= render "govuk_publishing_components/components/heading", {
+  text: "Writing style",
+  heading_level: 2,
+  font_size: "l"
+} %>
+  <p class="govuk-body">For style, see the <%= link_to("style guide", "https://www.gov.uk/topic/government-digital-guidance/content-publishing", class: "govuk-link") %></p>
+
+  <%= render "govuk_publishing_components/components/heading", {
+  text: "Formatting help",
+  heading_level: 2,
+  font_size: "l"
+} %>
+  <%= yield :format_specific_help %>
+
+  <%= render "govuk_publishing_components/components/details", {
+    title: "Headings",
+  } do %>
+    <pre class="govspeak-help__pre">## Top level heading – H2<br>### Second level heading – H3<br>#### Third level heading – H4<br><br>Don’t use a single # – this is H1 and is for the title only</pre>
+  <% end %>
+
+  <%= render "govuk_publishing_components/components/details", {
+    title: "Links",
+  } do %>
+    <p class='govuk-body'>All documents created in the publisher – publications, news, speeches, detailed guides etc – should be linked to using absolute admin paths or full public URLs:</p>
+    <pre class='govspeak-help__pre'>[an admin path](/government/admin/policies/12345)<br>[a public URL](https://www.gov.uk/government/policies/example-policy)</pre>
+    <p class='govuk-body'>All content created under an organisation tab – collection pages, topics, organisations, people, roles etc – should be linked to using the full, public URLs:</p>
+    <pre class='govspeak-help__pre'>[link text](https://www.gov.uk/government/topics/climate-change)</pre>
+    <p class='govuk-body'>For external websites, use the full URL including http://:</p>
+    <pre class='govspeak-help__pre'>[link text](http://www.example.com)</pre>
+    <h4 class='govuk-heading-m'>Linking to paragraphs</h4>
+    <p class='govuk-body'>If you want to link to specific paragraphs within a document, you need to mark the paragraph as linkable by placing an anchor tag <strong>below</strong> the paragraph:
+    </p>
+    <pre class='govspeak-help__pre'>Stocks of some fish species are very low. For example, stocks of European Eel have declined by about 95% over the last 30 years.<br>{:#eel-decline}</pre>
+    <p class='govuk-body'>The paragraph can then be linked to from the same document:</p>
+    <pre class='govspeak-help__pre'>[Sample link text](#eel-decline)</pre>
+    <p class='govuk-body'>or from another document:</p>
+    <pre class='govspeak-help__pre'>[Sample link text](https://www.gov.uk/government/policies/managing-freshwater-fisheries#eel-decline)</pre>
+  <% end %>
+
+  <%= render "govuk_publishing_components/components/details", {
+    title: "Bullets",
+  } do %>
+    <pre class='govspeak-help__pre'>* item 1
+* item 2
+    * sub-item
+    * another sub-item
+  (to indent, add 2 spaces)</pre>
+  <% end %>
+
+  <%= render "govuk_publishing_components/components/details", {
+    title: "Numbered lists",
+  } do %>
+    <pre class='govspeak-help__pre'>1. item 1
+  2. item 2
+  3. item 3
+    * sub-item
+    * another sub-item
+  (to indent, add 2 spaces)</pre>
+  <% end %>
+
+  <%= render "govuk_publishing_components/components/details", {
+    title: "Legislative list",
+  } do %>
+   <p class='govuk-body'>For lists where you want to specify the numbering and have multiple indent levels.</p>
+   <pre class='govspeak-help__pre'>$LegislativeList
+  * 1. Item 1
+  * 2. Item 2
+    * a) Item 2a
+    * b) Item 2b
+      * i. Item 2 b i
+      * ii. Item 2 b ii
+  * 3. Item 3
+  $EndLegislativeList
+  (to indent, add 2 spaces)</pre>
+  <% end %>
+
+  <%= render "govuk_publishing_components/components/details", {
+    title: "Tables",
+  } do %>
+    <p class='govuk-body'>Tables can be inserted by splitting your content into cells:</p>
+    <pre class='govspeak-help__pre'>
+| name | colour |
+|--------|-------|
+| apple | green |
+| banana | yellow |</pre>
+
+  <p class='govuk-body'>You can also use a shorthand version of the markdown, which will produce exactly the same output:</p>
+    <pre class='govspeak-help__pre'>name | colour
+-|-
+apple | green
+banana | yellow</pre>
+  <% end %>
+
+  <%= render "govuk_publishing_components/components/details", {
+    title: "Call to action",
+  } do %>
+    <pre class='govspeak-help__pre'>$CTA
+[Use the trade tariff tool to find commodity codes.](https://www.gov.uk/trade-tariff)
+$CTA</pre>
+  <% end %>
+
+  <%= render "govuk_publishing_components/components/details", {
+    title: "Abbreviations and acronyms",
+  } do %>
+    <pre class='govspeak-help__pre'>*[DWP]: Department for Work and Pensions</pre>
+    <p class='govuk-body'>Text found in content which matches what’s in the brackets <code>[ ]</code> (eg DWP), will have the full text (Department for Work and Pensions) available to screenreaders and when hovering: <abbr title="Department for Work and Pensions">DWP</abbr>. The markdown code will not be displayed.</p>
+    <p class='govuk-body'>List abbreviation markdown at the end.</p>
+  <% end %>
+
+  <%= render "govuk_publishing_components/components/details", {
+    title: "Blockquotes",
+  } do %>
+    <pre class='govspeak-help__pre'>As the Prime Minister said:
+&gt; Rule, Britannia, rule the waves.
+&gt;
+&gt; Britons never shall be slaves.</pre>
+    <p class='govuk-body'>The &gt; in the line space is important. If you leave it out you will get 2 separate quotes, not 1 running quote.</p>
+  <% end %>
+
+  <%= render "govuk_publishing_components/components/details", {
+    title: "Addresses",
+  } do %>
+    <pre class='govspeak-help__pre'>
+$A
+Address
+Only
+Here
+$A
+    </pre>
+  <% end %>
+
+  <%= render "govuk_publishing_components/components/details", {
+    title: "Footnotes",
+  } do %>
+    <pre class='govspeak-help__pre'>Footnotes can be added[^1].
+
+  [^1]: And then later defined.</pre>
+    <p class='govuk-body'>
+      You can add a footnote marker to a document using [^<em>i</em>] where <em>i</em> is the footnote number or label. Each of these tags should have corresponding footnote content, defined with [^<em>i</em>]: <em>The footnote content</em>. The footnote content will always appear at the end of the document regardless of where they are in the markdown.
+    </p>
+    <p class='govuk-body'>
+      Footnote content can hold more than one paragraph by indenting the content 4 spaces:
+    </p>
+
+    <pre class='govspeak-help__pre'>[^1]:
+    This is some footnote content and is indented 4 spaces.
+
+    This paragraph is also indented, so will be considered part of the footnote content.</pre>
+  <% end %>
+</div>
