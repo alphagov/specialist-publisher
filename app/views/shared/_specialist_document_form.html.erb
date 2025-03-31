@@ -58,19 +58,34 @@
       end,
    } %>
   <% elsif field_config["specialist_publisher_properties"]["select"] == "multiple" %>
-    <%= render layout: "shared/form_group", locals: { f: f, field: field, label: field_config["name"] } do %>
-      <%= f.select field,
-                   select_options_for_facet(f.object.allowed_values(field)),
-                   {},
-                   {
-                     class: 'select2 form-control',
-                     multiple: true,
-                     data: {
-                       placeholder: "Select #{field_config["name"].downcase}"
-                     }
-                   }
-      %>
-    <% end %>
+    <% name_lowercase = field_config["name"].downcase %>
+    <% values = f.object.allowed_values(field) %>
+    <%= render "govuk_publishing_components/components/heading", {
+      text: field_config['name'],
+      heading_level: 3,
+      font_size: "m",
+      margin_bottom: 4,
+    } %>
+    <%= render "govuk_publishing_components/components/add_another", {
+      fieldset_legend: field_config['name'],
+      name: name_lowercase,
+      add_button_text: "Add another #{name_lowercase}",
+      margin_bottom: 6,
+      items: nil,
+      empty: render("govuk_publishing_components/components/select", {
+                  id: "#{field}_0",
+                  name: "#{format_name}[#{field}][]",
+                  label: "Select a #{name_lowercase}",
+                  heading_size: "s",
+                  full_width: true,
+                  options: values.map do |item|
+                    {
+                      text: item["label"],
+                      value: item["value"]
+                    }
+                  end
+      }),
+    } %>
   <% else %>
     <%= render layout: "shared/specialist_document_form_error", locals: { field: field } do %>
     <% end %>

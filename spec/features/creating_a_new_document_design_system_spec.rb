@@ -53,8 +53,10 @@ RSpec.feature "Creating a document", type: :feature do
           fill_in "#{document_type}[#{key}(1i)]", with: "2014"
           fill_in "#{document_type}[#{key}(2i)]", with: "01"
           fill_in "#{document_type}[#{key}(3i)]", with: "01"
-        elsif properties.key?("select")
+        elsif properties["select"] == "one"
           select facet["allowed_values"].first["label"], from: facet["name"], match: :first
+        elsif properties["select"] == "multiple"
+          select facet["allowed_values"].first["label"], from: "#{facet['key']}_0"
         else
           fill_in facet["name"], with: "Example #{facet['name']}"
         end
