@@ -36,4 +36,16 @@ RSpec.feature "Generating a new finder", type: :feature do
     expect(page).to have_field("Title of the finder", with: "Some title")
     expect(page).to have_field("Signup link", with: "https://example.com/signup")
   end
+
+  scenario "setting show_metadata_block value and generating a schema" do
+    visit "admin/new"
+
+    fill_in("Title of the finder", with: "Finder with metadata block")
+    choose("Yes", name: "show_metadata_block")
+    click_button("Generate schema")
+
+    expect(page).to have_selector(".govuk-details")
+    expect(page).to have_field("Title of the finder", with: "Finder with metadata block")
+    expect(page).to have_checked_field("show_metadata_block", with: "true")
+  end
 end

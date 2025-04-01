@@ -206,6 +206,7 @@
     "e8fae147-6232-4163-a3f1-1c15b755a8a4"
   ],
   "phase": "beta",
+  "show_metadata_block": true,
   "show_summaries": true,
   "signup_content_id": "2cd12e92-3b68-4cb1-bafe-fde6a7939afb",
   "subscription_list_title_prefix": "Funding for land or farms",
