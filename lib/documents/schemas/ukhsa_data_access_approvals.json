@@ -1,0 +1,465 @@
+{
+  "base_path": "/data-access-approvals-register",
+  "content_id": "e030315e-ac4d-4be7-9046-afd132f65695",
+  "description": "Find data access requests approved by UKHSA for third party access to protected data.",
+  "document_noun": "approval",
+  "document_title": "UKHSA Data Access Approval",
+  "facets": [
+    {
+      "allowed_values": [
+        {
+          "label": "Active",
+          "value": "active"
+        },
+        {
+          "label": "Expired",
+          "value": "expired"
+        },
+        {
+          "label": "Terminated",
+          "value": "terminated"
+        }
+      ],
+      "display_as_result_metadata": true,
+      "filterable": true,
+      "key": "ukhsa_approval_status",
+      "name": "Approval Status",
+      "preposition": "Approval Status",
+      "short_name": "Status",
+      "specialist_publisher_properties": {
+        "select": "one",
+        "validations": {
+          "required": {}
+        }
+      },
+      "type": "text"
+    },
+    {
+      "allowed_values": [
+        {
+          "label": "File transfer to organisation",
+          "value": "file-transfer-to-organisation"
+        },
+        {
+          "label": "Remote access",
+          "value": "remote-access"
+        },
+        {
+          "label": "On site access",
+          "value": "on-site-access"
+        }
+      ],
+      "display_as_result_metadata": false,
+      "filterable": true,
+      "key": "ukhsa_access_type",
+      "name": "Access Type",
+      "preposition": "Access Type",
+      "short_name": "Type",
+      "specialist_publisher_properties": {
+        "select": "one",
+        "validations": {
+          "required": {}
+        }
+      },
+      "type": "text"
+    },
+    {
+      "display_as_result_metadata": true,
+      "filterable": false,
+      "key": "ukhsa_applicant_organisation_name",
+      "name": "Applicant organisation name",
+      "preposition": "Organisation",
+      "short_name": "Organisation name",
+      "specialist_publisher_properties": {
+        "validations": {
+          "required": {}
+        }
+      },
+      "type": "text"
+    },
+    {
+      "allowed_values": [
+        {
+          "label": "Charity",
+          "value": "charity"
+        },
+        {
+          "label": "Commercial / Industry",
+          "value": "commercial-industry"
+        },
+        {
+          "label": "Local authority",
+          "value": "local-authority"
+        },
+        {
+          "label": "CQC Registered Health or/and Adult Social Care Provider",
+          "value": "cqc-registered-health-or-and-adult-social-care-provider"
+        },
+        {
+          "label": "Government Agency",
+          "value": "government-agency"
+        },
+        {
+          "label": "Public health agency",
+          "value": "public-health-agency"
+        },
+        {
+          "label": "Academia (University)",
+          "value": "academia-university"
+        },
+        {
+          "label": "Other",
+          "value": "other"
+        }
+      ],
+      "display_as_result_metadata": false,
+      "filterable": true,
+      "key": "ukhsa_applicant_organisation_type",
+      "name": "Applicant organisation type",
+      "preposition": "Organisation Type",
+      "short_name": "Organisation Type",
+      "specialist_publisher_properties": {
+        "select": "multiple",
+        "validations": {
+          "required": {}
+        }
+      },
+      "type": "text"
+    },
+    {
+      "allowed_values": [
+        {
+          "label": "Personally identifiable",
+          "value": "personally-identifiable"
+        },
+        {
+          "label": "De-personalised",
+          "value": "depersonalised"
+        }
+      ],
+      "display_as_result_metadata": true,
+      "filterable": true,
+      "key": "ukhsa_classification_identification_risk",
+      "name": "Classification (Identification risk)",
+      "preposition": "Identifiability",
+      "short_name": "Identifiability",
+      "specialist_publisher_properties": {
+        "select": "one",
+        "validations": {
+          "required": {}
+        }
+      },
+      "type": "text"
+    },
+    {
+      "allowed_values": [
+        {
+          "label": "Child Health Immunisation Dataset",
+          "value": "child-health-immunisation-dataset"
+        },
+        {
+          "label": "Children's HIV and Aids Reporting System (CHARS)",
+          "value": "childrens-hiv-and-aids-reporting-system-chars"
+        },
+        {
+          "label": "Contract Tracing and Advice System (CTAS) / COVID-19 Contract Tracing Analysis and Surveillance Dataset",
+          "value": "contract-tracing-and-advice-system-ctas-covid19-contract-tracing-analysis-and-surveillance-dataset"
+        },
+        {
+          "label": "COVID-19 Data Store",
+          "value": "covid19-data-store"
+        },
+        {
+          "label": "COVID-19 Hospitalisation in England Surveillance System (CHESS)",
+          "value": "covid19-hospitalisation-in-england-surveillance-system-chess"
+        },
+        {
+          "label": "COVID-19 International Epidemiology Dataset",
+          "value": "covid19-international-epidemiology-dataset"
+        },
+        {
+          "label": "CTAD Chlamydia Surveillance System",
+          "value": "ctad-chlamydia-surveillance-system"
+        },
+        {
+          "label": "Enhanced CJD Surveillance",
+          "value": "enhanced-cjd-surveillance"
+        },
+        {
+          "label": "Enhanced Hepatitis E database",
+          "value": "enhanced-hepatitis-e-database"
+        },
+        {
+          "label": "Enhanced Legionnaires' disease surveillance",
+          "value": "enhanced-legionnaires-disease-surveillance"
+        },
+        {
+          "label": "Enhanced molecular surveillance of acute hepatitis A",
+          "value": "enhanced-molecular-surveillance-of-acute-hepatitis-a"
+        },
+        {
+          "label": "Enhanced molecular surveillance of acute hepatitis B",
+          "value": "enhanced-molecular-surveillance-of-acute-hepatitis-b"
+        },
+        {
+          "label": "Enhanced surveillance of Antenatal Hepatitis B (ESAHB)",
+          "value": "enhanced-surveillance-of-antenatal-hepatitis-b-esahb"
+        },
+        {
+          "label": "Enhanced surveillance of E.coli bloodstream infections",
+          "value": "enhanced-surveillance-of-ecoli-bloodstream-infections"
+        },
+        {
+          "label": "Enhanced surveillance of vaccine preventable disease",
+          "value": "enhanced-surveillance-of-vaccine-preventable-disease"
+        },
+        {
+          "label": "Enhanced Syphilis",
+          "value": "enhanced-syphilis"
+        },
+        {
+          "label": "Enteric fever enhanced surveillance database",
+          "value": "enteric-fever-enhanced-surveillance-database"
+        },
+        {
+          "label": "Gonococcal Resistance to Antimicrobials Surveillance Programme (GRASP)",
+          "value": "gonococcal-resistance-to-antimicrobials-surveillance-programme-grasp"
+        },
+        {
+          "label": "Greater Manchester HPT Local Surveillance Database",
+          "value": "greater-manchester-hpt-local-surveillance-database"
+        },
+        {
+          "label": "Group B Streptococcus (GBS) Enhanced Surveillance Database",
+          "value": "group-b-streptococcus-gbs-enhanced-surveillance-database"
+        },
+        {
+          "label": "GUMCAD STI Surveillance System",
+          "value": "gumcad-sti-surveillance-system"
+        },
+        {
+          "label": "HARS (HIV and AIDS)",
+          "value": "hars-hiv-and-aids"
+        },
+        {
+          "label": "Health Care Acquired Infections (HCAI) Data System",
+          "value": "health-care-acquired-infections-hcai-data-system"
+        },
+        {
+          "label": "Health Protection Case and Incident Management System (HPZone)",
+          "value": "health-protection-case-and-incident-management-system-hpzone"
+        },
+        {
+          "label": "Hepatitis C (HCV) National Register",
+          "value": "hepatitis-c-hcv-national-register"
+        },
+        {
+          "label": "Hospital Episode Statistics",
+          "value": "hospital-episode-statistics"
+        },
+        {
+          "label": "HTLV National Register",
+          "value": "htlv-national-register"
+        },
+        {
+          "label": "HTLV Surveillance System",
+          "value": "htlv-surveillance-system"
+        },
+        {
+          "label": "Infectious Diseases in Pregnancy",
+          "value": "infectious-diseases-in-pregnancy"
+        },
+        {
+          "label": "Influenza and Other Respiratory Viruses Surveillance",
+          "value": "influenza-and-other-respiratory-viruses-surveillance"
+        },
+        {
+          "label": "Latent Tuberculosis Infection Testing and Treatment Programme (LTBI)",
+          "value": "latent-tuberculosis-infection-testing-and-treatment-programme-ltbi"
+        },
+        {
+          "label": "Leprosy Surveillance",
+          "value": "leprosy-surveillance"
+        },
+        {
+          "label": "Leptospirosis surveillance system",
+          "value": "leptospirosis-surveillance-system"
+        },
+        {
+          "label": "Linked Hospital Episode Statistics A&E",
+          "value": "linked-hospital-episode-statistics-ae"
+        },
+        {
+          "label": "Linked Hospital Episode Statistics Admitted Care (IP)",
+          "value": "linked-hospital-episode-statistics-admitted-care-ip"
+        },
+        {
+          "label": "linked Hospital Episode Statistics (OP)",
+          "value": "linked-hospital-episode-statistics-op"
+        },
+        {
+          "label": "Listeria Surveillance Database",
+          "value": "listeria-surveillance-database"
+        },
+        {
+          "label": "Malaria database",
+          "value": "malaria-database"
+        },
+        {
+          "label": "National Antenatal Infections Screening Monitoring Excel spreadsheets",
+          "value": "national-antenatal-infections-screening-monitoring-excel-spreadsheets"
+        },
+        {
+          "label": "National Enhanced Surveillance of Meningococcal Disease",
+          "value": "national-enhanced-surveillance-of-meningococcal-disease"
+        },
+        {
+          "label": "National enhanced surveillance system for laboratory-confirmed Lyme disease",
+          "value": "national-enhanced-surveillance-system-for-laboratory-confirmed-lyme-disease"
+        },
+        {
+          "label": "National Enhanced Surveillance System for Verotoxigenic Escherichia coli (VTEC)",
+          "value": "national-enhanced-surveillance-system-for-verotoxigenic-escherichia-coli-vtec"
+        },
+        {
+          "label": "National Flooding Cohort",
+          "value": "national-flooding-cohort"
+        },
+        {
+          "label": "National Immunisation Management System",
+          "value": "national-immunisation-management-system"
+        },
+        {
+          "label": "National Registry for Radiation Workers (NRRW) epidemiological database (REDMS system) and data",
+          "value": "national-registry-for-radiation-workers-nrrw-epidemiological-database-redms-system-and-data"
+        },
+        {
+          "label": "National study on flooding and health",
+          "value": "national-study-on-flooding-and-health"
+        },
+        {
+          "label": "Nuclear Weapons Test Participants Study (NWTPS)",
+          "value": "nuclear-weapons-test-participants-study-nwtps"
+        },
+        {
+          "label": "ONS Civil Registration Mortality Data",
+          "value": "ons-civil-registration-mortality-data"
+        },
+        {
+          "label": "Pandemic Flu",
+          "value": "pandemic-flu"
+        },
+        {
+          "label": "Q fever surveillance system",
+          "value": "q-fever-surveillance-system"
+        },
+        {
+          "label": "Rabies Database",
+          "value": "rabies-database"
+        },
+        {
+          "label": "Seasonal Respiratory Disease Surveillance Database",
+          "value": "seasonal-respiratory-disease-surveillance-database"
+        },
+        {
+          "label": "Second Generation Surveillance System (SGSS)",
+          "value": "second-generation-surveillance-system-sgss"
+        },
+        {
+          "label": "Sierra Leone Ebola Laboratory Data Mart",
+          "value": "sierra-leone-ebola-laboratory-data-mart"
+        },
+        {
+          "label": "Significant Occupational Exposures surveillance system (Sig Occ)",
+          "value": "significant-occupational-exposures-surveillance-system-sig-occ"
+        },
+        {
+          "label": "Surveillance of acute hepatitis / Acute hepatitis B enhanced surveillance",
+          "value": "surveillance-of-acute-hepatitis-acute-hepatitis-b-enhanced-surveillance"
+        },
+        {
+          "label": "Surveillance of acute hepatitis / HAV (IgG) Sero-Prevalence MSM",
+          "value": "surveillance-of-acute-hepatitis-hav-igg-sero-prevalence-msm"
+        },
+        {
+          "label": "Surveillance of chronic hepatitis B and C",
+          "value": "surveillance-of-chronic-hepatitis-b-and-c"
+        },
+        {
+          "label": "Surveillance of Lead (raised blood levels) in Children (SLIC)",
+          "value": "surveillance-of-lead-raised-blood-levels-in-children-slic"
+        },
+        {
+          "label": "Surveillance of SARS-CoV-2 in education settings",
+          "value": "surveillance-of-sars-cov2-in-education-settings"
+        },
+        {
+          "label": "TB Clinical Database",
+          "value": "tb-clinical-database"
+        },
+        {
+          "label": "Toxoplasma surveillance system",
+          "value": "toxoplasma-surveillance-system"
+        },
+        {
+          "label": "Transfusion Transmitted Infection Surveillance",
+          "value": "transfusion-transmitted-infection-surveillance"
+        },
+        {
+          "label": "Travel-associated infections surveillance system",
+          "value": "travel-associated-infections-surveillance-system"
+        },
+        {
+          "label": "UK Zika Congenital Abnormalities Surveillance System (UZCASS)",
+          "value": "uk-zika-congenital-abnormalities-surveillance-system-uzcass"
+        },
+        {
+          "label": "First Few X cases and contacts (FFX)",
+          "value": "first-few-x-cases-and-contacts-ffx"
+        }
+      ],
+      "display_as_result_metadata": false,
+      "filterable": true,
+      "key": "ukhsa_dataset",
+      "name": "Data set",
+      "preposition": "Data Set",
+      "short_name": "Data set",
+      "show_option_select_filter": true,
+      "specialist_publisher_properties": {
+        "select": "multiple",
+        "validations": {
+          "required": {}
+        }
+      },
+      "type": "text"
+    },
+    {
+      "display_as_result_metadata": true,
+      "filterable": true,
+      "key": "ukhsa_approval_date",
+      "name": "Approval Date",
+      "preposition": "Approval Date",
+      "short_name": "Approved",
+      "specialist_publisher_properties": {
+        "validations": {
+          "required": {}
+        }
+      },
+      "type": "date"
+    }
+  ],
+  "filter": {
+    "format": "ukhsa_data_access_approval"
+  },
+  "name": "UKHSA Data Access Approvals Register",
+  "organisations": [
+    "80091cd8-7a8f-41ef-8faf-8af91fce4fdb"
+  ],
+  "related": [
+    "3c2e9c25-ce31-479d-89f0-9bb1e49c1228"
+  ],
+  "show_summaries": true,
+  "show_metadata_block": true,
+  "summary": "The Data Access Approvals Register sets out the organisations that the UK Health Security Agency (UKHSA) which have been approved to access protected data for specific secondary purposes, such as research, service evaluation, clinical audit, or surveillance. Access to UKHSA protected data is granted in line with the conditions and safeguards defined in the UKHSA's Data Access Approval Standards, ensuring data is used responsibly and securely. The register helps maintain transparency and accountability by providing a clear record of who has been granted permission to use UKHSA data.",
+  "target_stack": "draft"
+}
