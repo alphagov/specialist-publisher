@@ -48,4 +48,16 @@ RSpec.feature "Generating a new finder", type: :feature do
     expect(page).to have_field("Title of the finder", with: "Finder with metadata block")
     expect(page).to have_checked_field("show_metadata_block", with: "true")
   end
+
+  scenario "setting hide_contents_list value and generating a schema" do
+    visit "admin/new"
+
+    fill_in("Title of the finder", with: "Finder with contents list")
+    choose("Yes", name: "hide_contents_list") # Select the "Yes" option for hiding the contents list
+    click_button("Generate schema")
+
+    expect(page).to have_selector(".govuk-details")
+    expect(page).to have_field("Title of the finder", with: "Finder with contents list")
+    expect(page).to have_checked_field("hide_contents_list", with: "true")
+  end
 end
