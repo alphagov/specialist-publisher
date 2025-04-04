@@ -48,4 +48,16 @@ RSpec.feature "Generating a new finder", type: :feature do
     expect(page).to have_field("Title of the finder", with: "Finder with metadata block")
     expect(page).to have_checked_field("show_metadata_block", with: "true")
   end
+
+  scenario "setting show_table_of_contents value and generating a schema" do
+    visit "admin/new"
+
+    fill_in("Title of the finder", with: "Finder with contents list")
+    choose("Yes", name: "show_table_of_contents")
+    click_button("Generate schema")
+
+    expect(page).to have_selector(".govuk-details")
+    expect(page).to have_field("Title of the finder", with: "Finder with contents list")
+    expect(page).to have_checked_field("show_table_of_contents", with: "true")
+  end
 end

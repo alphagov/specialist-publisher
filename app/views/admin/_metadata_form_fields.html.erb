@@ -128,6 +128,27 @@
   ]
 } %>
 
+<%= render "govuk_publishing_components/components/radio", {
+  heading: "Should a table of contents be displayed on each document page?",
+  heading_size: "s",
+  hint: "Example: Commonly used to list the contents of a page with links pointing to headings within the document, but can also be used for a list of links to other pages.",
+  name: "show_table_of_contents",
+  inline: true,
+  items: [
+    {
+      value: "true",
+      text: "Yes",
+      checked: schema.show_table_of_contents
+    },
+    {
+      value: "false",
+      text: "No",
+      checked: !schema.show_table_of_contents
+    }
+  ]
+} %>
+
+
 <%= render "govuk_publishing_components/components/input", {
   label: {
     text: "Full document noun (Appears in various places in the Specialist Publisher user interface)",
