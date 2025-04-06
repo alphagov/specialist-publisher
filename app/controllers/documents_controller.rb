@@ -6,6 +6,8 @@ class DocumentsController < ApplicationController
   include ActionView::Helpers::UrlHelper
   include OrganisationsHelper
 
+  layout :get_layout
+
   before_action :fetch_document, except: %i[index new create]
   before_action :merge_nested_facet_fields, only: %i[edit new]
   before_action :check_authorisation, if: :document_type_slug
@@ -23,6 +25,7 @@ class DocumentsController < ApplicationController
 
   def new
     @document = current_format.new
+    render design_system_view(:new_design_system, :new)
   end
 
   def create
@@ -32,9 +35,9 @@ class DocumentsController < ApplicationController
       flash[:success] = "Created #{@document.title}"
       redirect_to document_path(current_format.admin_slug, @document.content_id_and_locale)
     elsif @document.errors.any?
-      re_render :new, flash_key: :errors, flash_message: document_error_messages, status: :unprocessable_entity
+      re_render design_system_view(:new_design_system, :new), flash_key: :errors, flash_message: document_error_messages, status: :unprocessable_entity
     else
-      re_render :new, flash_key: :danger, flash_message: unknown_error_message
+      re_render design_system_view(:new_design_system, :new), flash_key: :danger, flash_message: unknown_error_message
     end
   end
 
@@ -90,6 +93,18 @@ class DocumentsController < ApplicationController
   end
 
 private
+
+  def get_layout
+    if %w[new create].include?(action_name) && current_user.preview_design_system?
+      "design_system"
+    else
+      "legacy_application"
+    end
+  end
+
+  def design_system_view(design_system_view, legacy_view)
+    get_layout == "design_system" ? design_system_view : legacy_view
+  end
 
   def merge_nested_facet_fields
     return unless @document
