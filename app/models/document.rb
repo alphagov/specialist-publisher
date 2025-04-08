@@ -103,7 +103,7 @@ class Document
   end
 
   def rendering_app
-    "government-frontend"
+    "frontend"
   end
 
   delegate :document_type, to: :class

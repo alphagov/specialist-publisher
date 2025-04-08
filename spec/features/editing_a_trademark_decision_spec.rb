@@ -41,7 +41,7 @@ RSpec.feature "Creating a Trademark Decision", type: :feature do
       "document_type": "trademark_decision",
       "schema_name": "specialist_document",
       "publishing_app": "specialist-publisher",
-      "rendering_app": "government-frontend",
+      "rendering_app": "frontend",
       "locale": "en",
       "phase": "live",
       "details": {

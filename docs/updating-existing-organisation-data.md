@@ -2,7 +2,7 @@
 
 Departments will sometimes ask for functional data for particular specialist publisher organisation to be updated. Examples of this include adding or updating a new sub-category or specifying the content id of the organisation so that it will be applied to the associated finder page.
 
-This data can be found in `lib/documents/schemas`. These schemas follow the same format and are fairly self explanatory in relation to what needs to be updated. Check the apps which render the content for specialist publisher ([finder-frontend](https://github.com/alphagov/finder-frontend) and [government-frontend](https://github.com/alphagov/government-frontend)) and the specialist publisher code itself for more details about how a particular piece of data is used or presented.
+This data can be found in `lib/documents/schemas`. These schemas follow the same format and are fairly self explanatory in relation to what needs to be updated. Check the apps which render the content for specialist publisher ([finder-frontend](https://github.com/alphagov/finder-frontend) and [frontend](https://github.com/alphagov/frontend)) and the specialist publisher code itself for more details about how a particular piece of data is used or presented.
 
 ## Updating an organisation's finder page
 
