@@ -9,12 +9,10 @@
   GOVUK.formChangeProtection.init($('.new_document'), 'You have unsaved changes that will be lost if you leave this page.');
 <% end -%>
 
-<% content_for :title do %>
-  New <%= current_format.title.singularize %>
-<% end %>
+<h1>New <%= current_format.title.singularize %></h1>
 
-<div class="govuk-grid-row">
-  <div class="govuk-grid-column-two-thirds">
+<div class="row">
+  <div class="col-md-8">
     <%= form_for @document, url: documents_path(params[:document_type_slug]),
                  html: { class: "new_document" } do |f| %>
       <%= render partial: "shared/form_fields", locals: { f: f } %>
@@ -28,7 +26,6 @@
       </div>
     <% end %>
   </div>
-  <div class="govuk-grid-column-one-third">
-    <%= render partial: 'attachments/attachment_links_design_system' %>
-  </div>
+
+  <%= render partial: 'attachments/attachment_links_legacy' %>
 </div>
