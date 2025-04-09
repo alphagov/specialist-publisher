@@ -132,12 +132,16 @@ private
   end
 
   def unknown_error_message
+    return if get_layout == "design_system"
+
     support_url = "#{Plek.external_url_for('support')}/technical_fault_report/new"
 
     safe_join(["Something has gone wrong. Please try again and see if it works. ", link_to("Let us know", support_url), " if the problem happens again and a developer will look into it."])
   end
 
   def document_error_messages
+    return if get_layout == "design_system"
+
     heading = tag.h4("There is a problem")
     errors = tag.ul(class: "list-unstyled remove-bottom-margin") do
       safe_join(error_messages.map { |message| tag.li(message.html_safe) })
