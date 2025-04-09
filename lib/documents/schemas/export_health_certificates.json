@@ -1010,6 +1010,7 @@
     "4ad67f14-6f9c-4fa4-80ab-687b6d81ea6f"
   ],
   "parent": "03f78404-e87c-4c2a-954b-f6ee9403efb8",
+  "show_table_of_contents": true,
   "show_metadata_block": true,
   "signup_content_id": "9a5260d2-07e7-45dc-a24a-791b02e4a9da",
   "subscription_list_title_prefix": "Export health certificates",

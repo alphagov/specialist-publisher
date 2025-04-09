@@ -133,6 +133,7 @@
   "organisations": [
     "6667cce2-e809-4e21-ae09-cb0bdc1ddda3"
   ],
+  "show_table_of_contents": true,
   "show_metadata_block": true,
   "summary": "TBC",
   "target_stack": "draft"

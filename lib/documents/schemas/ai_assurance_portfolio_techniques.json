@@ -321,6 +321,7 @@
   "related": [
     "4519b26b-6312-4855-bc45-828123bd8a2f"
   ],
+  "show_table_of_contents": true,
   "show_metadata_block": true,
   "summary": "Find out what AI assurance is and what effective AI assurance techniques you can use in your organisation. You can also read examples of AI assurance in practice across a variety of sectors.",
   "target_stack": "live"
