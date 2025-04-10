@@ -18,6 +18,16 @@ jobs:
     name: Run RSpec
     runs-on: ubuntu-latest
     steps:
+      - name: Remove image-bundled Chrome
+        run: sudo apt-get purge google-chrome-stable
+
+      - name: Setup Chrome
+        uses: browser-actions/setup-chrome@v1
+        with:
+          chrome-version: 128
+          install-chromedriver: true
+          install-dependencies: true
+
       - name: Setup MongoDB
         uses: alphagov/govuk-infrastructure/.github/actions/setup-mongodb@main
         with:
