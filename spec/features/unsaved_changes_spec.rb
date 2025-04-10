@@ -7,6 +7,7 @@ RSpec.feature "Unsaved changes to a document", type: :feature, js: true do
   let(:locale) { cma_case["locale"] }
 
   before do
+    Capybara.current_driver = Capybara.javascript_driver
     allow(SecureRandom).to receive(:uuid).and_return(content_id)
     stub_any_publishing_api_put_content
     stub_any_publishing_api_patch_links
@@ -17,7 +18,7 @@ RSpec.feature "Unsaved changes to a document", type: :feature, js: true do
     visit "/cma-cases"
   end
 
-  xcontext "a new document" do
+  context "a new document" do
     before do
       click_on "Add another CMA Case"
 
@@ -79,7 +80,7 @@ RSpec.feature "Unsaved changes to a document", type: :feature, js: true do
     end
   end
 
-  xcontext "an existing document" do
+  context "an existing document" do
     before do
       click_on "Example document"
       click_on "Edit document"
