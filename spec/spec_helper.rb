@@ -71,11 +71,11 @@ RSpec.configure do |config|
 end
 
 Capybara.register_driver :nearly_headless_chrome do |app|
-  # chrome_options = GovukTest.headless_chrome_selenium_options
-  chrome_options = Selenium::WebDriver::Chrome::Options.new
+  chrome_options = GovukTest.headless_chrome_selenium_options
+  # chrome_options = Selenium::WebDriver::Chrome::Options.new
   chrome_options.add_argument("--no-sandbox")
   chrome_options.add_argument('--disable-gpu')
-  chrome_options.add_argument('--window-size=1400,1400')
+  # chrome_options.add_argument('--window-size=1400,1400')
 
   Capybara::Selenium::Driver.new(
     app,
