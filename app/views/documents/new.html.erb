@@ -25,8 +25,6 @@
                  html: { class: "new_document" } do |f| %>
       <%= render partial: "shared/form_fields", locals: { f: f } %>
 
-      <%= render partial: "shared/preview_govspeak", locals: {attachments: @document.attachments} %>
-
       <%= render partial: "metadata_fields/#{params[:document_type_slug].underscore}", locals: { f: f } %>
 
       <div class="actions">
