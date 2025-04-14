@@ -24,18 +24,22 @@
 <div class="govuk-hint" aria-live="polite">Summary text should be <%= count_message_threshold %> characters or fewer. <span class="count"></span></div>
 <% end %>
 
-<%= render "govuk_publishing_components/components/textarea", {
+<%= render "shared/govspeak_editor", {
   label: {
     text: "Body (required)",
     heading_size: "m",
   },
+  id: "#{format_name}_body",
   name: "#{format_name}[body]",
   rows: 20,
+  # value: historical_account.body,
+  # error_items: errors_for(historical_account.errors, :body),
 } %>
 
 <% locale = @document.locale || "en" %>
 <%= render "govuk_publishing_components/components/select", {
-  id: "#{format_name}[locale]",
+  id: "#{format_name}_locale",
+  name: "#{format_name}[locale]",
   label: "Language",
   heading_size: "m",
   full_width: true,
