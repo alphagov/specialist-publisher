@@ -4,3 +4,5 @@
 //= require govuk_publishing_components/components/copy-to-clipboard
 
 //= require components/autocomplete
+//= require components/govspeak-editor
+//= require components/paste-html-to-govspeak
