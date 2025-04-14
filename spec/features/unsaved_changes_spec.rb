@@ -31,6 +31,8 @@ RSpec.feature "Unsaved changes to a document", type: :feature, js: true do
       fill_in "cma_case[closed_date(1i)]", with: "2015"
       fill_in "cma_case[closed_date(2i)]", with: "01"
       fill_in "cma_case[closed_date(3i)]", with: "01"
+      select2 "Mergers", from: "Case type"
+      select2 "Closed", from: "Case state"
       select2 "Energy", from: "Market sector"
     end
 
@@ -68,6 +70,8 @@ RSpec.feature "Unsaved changes to a document", type: :feature, js: true do
 
     scenario "when changes are saved" do
       click_button "Save as draft"
+
+      expect(current_path).to eq("/cma-cases/#{content_id}:#{locale}")
 
       within(".alert-success") do
         expect(page).to have_content("Created Example CMA Case")
