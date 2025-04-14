@@ -32,7 +32,8 @@
     "extends": "stylelint-config-gds/scss"
   },
   "dependencies": {
-    "accessible-autocomplete-multiselect": "alphagov/accessible-autocomplete-multiselect"
+    "accessible-autocomplete-multiselect": "alphagov/accessible-autocomplete-multiselect",
+    "paste-html-to-govspeak": "^0.5.0"
   },
   "devDependencies": {
     "jasmine-browser-runner": "^2.5.0",
