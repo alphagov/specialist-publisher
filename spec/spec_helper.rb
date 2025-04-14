@@ -83,4 +83,4 @@ Capybara.register_driver :nearly_headless_chrome do |app|
 end
 Capybara.javascript_driver = :nearly_headless_chrome
 
-Capybara.default_max_wait_time = 10
+Capybara.default_max_wait_time = 5
