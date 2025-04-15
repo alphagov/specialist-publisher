@@ -1,12 +1,15 @@
 require "spec_helper"
 
-RSpec.feature "Unsaved changes to a document", type: :feature, js: true do
+RSpec.feature "Unsaved changes to a document", type: :feature do
   let(:message) { "You have unsaved changes that will be lost if you leave this page." }
   let(:cma_case) { FactoryBot.create(:cma_case) }
   let(:content_id) { cma_case["content_id"] }
   let(:locale) { cma_case["locale"] }
 
   before do
+    # Switch to BiDi driver for interacting with browser dialogs
+    Capybara.current_driver = :bidi_headless_chrome_driver
+
     allow(SecureRandom).to receive(:uuid).and_return(content_id)
     stub_any_publishing_api_put_content
     stub_any_publishing_api_patch_links
@@ -17,7 +20,11 @@ RSpec.feature "Unsaved changes to a document", type: :feature, js: true do
     visit "/cma-cases"
   end
 
-  xcontext "a new document" do
+  after do
+    Capybara.current_driver = Capybara.default_driver
+  end
+
+  context "a new document" do
     before do
       click_on "Add another CMA Case"
 
@@ -30,6 +37,8 @@ RSpec.feature "Unsaved changes to a document", type: :feature, js: true do
       fill_in "cma_case[closed_date(1i)]", with: "2015"
       fill_in "cma_case[closed_date(2i)]", with: "01"
       fill_in "cma_case[closed_date(3i)]", with: "01"
+      select2 "Mergers", from: "Case type"
+      select2 "Closed", from: "Case state"
       select2 "Energy", from: "Market sector"
     end
 
@@ -39,6 +48,8 @@ RSpec.feature "Unsaved changes to a document", type: :feature, js: true do
       end
 
       expect(current_path).to eq("/cma-cases/new")
+
+      click_button "Save as draft"
     end
 
     scenario "when an 'Your documents' is clicked and the confirmation is accepted" do
@@ -63,6 +74,8 @@ RSpec.feature "Unsaved changes to a document", type: :feature, js: true do
       end
 
       expect(current_path).to eq("/cma-cases/new")
+
+      click_button "Save as draft"
     end
 
     scenario "when changes are saved" do
@@ -79,7 +92,7 @@ RSpec.feature "Unsaved changes to a document", type: :feature, js: true do
     end
   end
 
-  xcontext "an existing document" do
+  context "an existing document" do
     before do
       click_on "Example document"
       click_on "Edit document"
@@ -99,6 +112,8 @@ RSpec.feature "Unsaved changes to a document", type: :feature, js: true do
       end
 
       expect(current_path).to eq("/cma-cases/#{content_id}:#{locale}/edit")
+
+      click_button "Save as draft"
     end
 
     scenario "when an 'Add attachment' is clicked and the confirmation is accepted" do
@@ -123,6 +138,8 @@ RSpec.feature "Unsaved changes to a document", type: :feature, js: true do
       end
 
       expect(current_path).to eq("/cma-cases/#{content_id}:#{locale}/edit")
+
+      click_button "Save as draft"
     end
 
     scenario "when changes are saved" do
