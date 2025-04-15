@@ -95,6 +95,7 @@ Capybara.register_driver :bidi_headless_chrome_driver do |app|
   # Switch to using the WebDriver BiDi (Bi-Directional) protocol for this driver, see https://w3c.github.io/webdriver-bidi/ for more info
   # The BiDi protocol can interact with browser dialogs effectively
   chrome_options.add_option(:web_socket_url, true)
+  chrome_options.add_option(:page_load_strategy, 'none')
 
   Capybara::Selenium::Driver.new(
     app,
