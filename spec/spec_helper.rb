@@ -70,7 +70,7 @@ RSpec.configure do |config|
   config.order = "random"
 end
 
-Capybara.register_driver :nearly_headless_chrome do |app|
+Capybara.register_driver :headless_chrome do |app|
   chrome_options = GovukTest.headless_chrome_selenium_options
   chrome_options.add_argument("--no-sandbox")
   chrome_options.add_argument("--disable-gpu")
@@ -81,6 +81,26 @@ Capybara.register_driver :nearly_headless_chrome do |app|
     options: chrome_options,
   )
 end
-Capybara.javascript_driver = :nearly_headless_chrome
+Capybara.javascript_driver = :headless_chrome
+
+# This driver should only be used for tests that interact with browser dialogs, as the BiDi protocol it uses is slower
+# and not as full-featured as the main webdriver protocol. This will hopefully improve as Selenium's BiDi implementation matures.
+# See https://www.selenium.dev/documentation/webdriver/bidi/ for further information
+Capybara.register_driver :bidi_headless_chrome_driver do |app|
+  chrome_options = GovukTest.headless_chrome_selenium_options
+  chrome_options.add_argument("--no-sandbox")
+  chrome_options.add_argument("--disable-gpu")
+  # Tell Chrome to ignore unhandled dialogs (i.e. leave them for user to interact with instead of silently dismissing them, as per WebDriver standard)
+  chrome_options.add_option(:unhandled_prompt_behavior, "ignore")
+  # Switch to using the WebDriver BiDi (Bi-Directional) protocol for this driver, see https://w3c.github.io/webdriver-bidi/ for more info
+  # The BiDi protocol can interact with browser dialogs effectively
+  chrome_options.add_option(:web_socket_url, true)
+
+  Capybara::Selenium::Driver.new(
+    app,
+    browser: :chrome,
+    options: chrome_options,
+  )
+end
 
 Capybara.default_max_wait_time = 5
