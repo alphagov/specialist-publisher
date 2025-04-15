@@ -17,7 +17,7 @@ RSpec.feature "Unsaved changes to a document", type: :feature, js: true do
     visit "/cma-cases"
   end
 
-  xcontext "a new document" do
+  context "a new document" do
     before do
       click_on "Add another CMA Case"
 
@@ -31,6 +31,8 @@ RSpec.feature "Unsaved changes to a document", type: :feature, js: true do
       fill_in "cma_case[closed_date(2i)]", with: "01"
       fill_in "cma_case[closed_date(3i)]", with: "01"
       select2 "Energy", from: "Market sector"
+      select2 "Markets", from: "Case type", match: :first
+      select2 "Open", from: "Case state", match: :first
     end
 
     scenario "when an 'Your documents' is clicked and the confirmation is cancelled" do
@@ -79,7 +81,7 @@ RSpec.feature "Unsaved changes to a document", type: :feature, js: true do
     end
   end
 
-  xcontext "an existing document" do
+  context "an existing document" do
     before do
       click_on "Example document"
       click_on "Edit document"
