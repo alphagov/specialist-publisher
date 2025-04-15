@@ -29,15 +29,15 @@
       var current = formChangeProtection.serialisedFormValues()
 
       if (current !== formChangeProtection.initialState) {
-        return formChangeProtection.message
+        confirm(formChangeProtection.message)
       }
     },
 
     preventLossOfUnsavedChanges: function () {
-      $(window).bind('beforeunload', this.alertIfUnsavedChanges)
+      $(window).bind('pagehide', this.alertIfUnsavedChanges)
       // unbind when the form is submitted to stop the alert
       this.$form.bind('submit', function () {
-        $(window).unbind('beforeunload')
+        $(window).unbind('pagehide')
       })
     }
   }
