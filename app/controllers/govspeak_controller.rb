@@ -2,7 +2,7 @@ class GovspeakController < ApplicationController
   def preview
     skip_authorization
 
-    json_attachments = JSON.parse(params["attachments"])
+    json_attachments = params["attachments"] ? JSON.parse(params["attachments"]) : []
 
     attachments = json_attachments.map do |attachment|
       Attachment.new(attachment)
