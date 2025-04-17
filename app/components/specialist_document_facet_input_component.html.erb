@@ -1,0 +1,81 @@
+<% if @facet_type == :date %>
+  <%= render "shared/datetime_fields", {
+    prefix: @document_type,
+    field_name: "#{@document_type}[#{@facet_key}]",
+    date_only: true,
+    year: {
+      value: params.dig("#{@document_type}", "#{@facet_key}(1i)"),
+      id: "#{@document_type}_#{@facet_key}_year",
+      name: "#{@document_type}[#{@facet_key}(1i)]",
+      label: "Year",
+      width: 4,
+    },
+    month: {
+      value: params.dig("#{@document_type}", "#{@facet_key}(2i)"),
+      id: "#{@document_type}_#{@facet_key}_month",
+      name: "#{@document_type}[#{@facet_key}(2i)]",
+      label: "Month",
+      width: 2,
+    },
+    day: {
+      value: params.dig("#{@document_type}", "#{@facet_key}(3i)"),
+      id: "#{@document_type}_#{@facet_key}_day",
+      name: "#{@document_type}[#{@facet_key}(3i)]",
+      label: "Day",
+      width: 2,
+    },
+  } %>
+<% elsif !@allowed_values %>
+  <%= render "govuk_publishing_components/components/textarea", {
+    label: {
+      text: @facet_name,
+      heading_size: "m",
+    },
+    name: "#{@document_type}[#{@facet_key}]",
+    textarea_id: "#{@document_type}_#{@facet_key}",
+    rows: 3,
+  } %>
+<% elsif @facet_select_type == :one %>
+  <%= render "govuk_publishing_components/components/select", {
+    id: "#{@document_type}_#{@facet_key}",
+    name: "#{@document_type}[#{@facet_key}]",
+    label: @facet_name,
+    heading_size: "m",
+    full_width: true,
+    options: @allowed_values.map do |item|
+      {
+        text: item["label"],
+        value: item["value"]
+      }
+    end,
+  } %>
+<% elsif @facet_select_type == :multiple %>
+  <%= render "govuk_publishing_components/components/heading", {
+    text: @facet_name,
+    heading_level: 3,
+    font_size: "m",
+    margin_bottom: 4,
+  } %>
+  <%= render "govuk_publishing_components/components/add_another", {
+    fieldset_legend: @facet_name,
+    name: @facet_name.downcase,
+    add_button_text: "Add another #{@facet_name.downcase}",
+    margin_bottom: 6,
+    items: nil,
+    empty: render("govuk_publishing_components/components/select", {
+      id: "#{@facet_key}_0",
+      name: "#{@document_type}[#{@facet_key}][]",
+      label: "Select a #{@facet_name.downcase}",
+      heading_size: "s",
+      full_width: true,
+      options: @allowed_values.map do |item|
+        {
+          text: item["label"],
+          value: item["value"]
+        }
+      end
+    }),
+  } %>
+<% else %>
+  <%= render layout: "shared/specialist_document_form_error", locals: { field: @facet_key } %>
+<% end %>
