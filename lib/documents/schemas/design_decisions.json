@@ -1,0 +1,106 @@
+{
+  "base_path": "/designs-decisions",
+  "content_id": "d35b914f-a875-4ee0-b307-991269dc26df",
+  "description": "Find Intellectual Property (Registered Design) related decisions for the U.K.",
+  "document_noun": "decision",
+  "document_title": "Design Decision",
+  "facets": [
+    {
+      "display_as_result_metadata": true,
+      "filterable": false,
+      "key": "design_decision_british_library_number",
+      "name": "British Library number",
+      "short_name": "BL number",
+      "specialist_publisher_properties": {
+        "validations": {
+          "required": {}
+        }
+      },
+      "type": "text"
+    },
+    {
+      "allowed_values": [
+        {
+          "label": "Leisa Davies",
+          "value": "leisa-davies"
+        },
+        {
+          "label": "James Hopkins",
+          "value": "james-hopkins"
+        },
+        {
+          "label": "Rosie Le Breton",
+          "value": "rosie-le"
+        },
+        {
+          "label": "Arran Cooper",
+          "value": "arran-cooper"
+        },
+        {
+          "label": "Allan James",
+          "value": "allan-james"
+        },
+        {
+          "label": "Clare Boucher",
+          "value": "clare-boucher"
+        },
+        {
+          "label": "Al Skilton",
+          "value": "al-skilton"
+        }
+      ],
+      "display_as_result_metadata": true,
+      "filterable": true,
+      "key": "design_decision_hearing_officer",
+      "name": "Hearing officer",
+      "preposition": "Hearing officer",
+      "short_name": "Hearing officer",
+      "show_option_select_filter": true,
+      "specialist_publisher_properties": {
+        "select": "one",
+        "validations": {
+          "required": {}
+        }
+      },
+      "type": "text"
+    },
+    {
+      "display_as_result_metadata": true,
+      "filterable": true,
+      "key": "design_decision_date",
+      "name": "Decision date",
+      "preposition": "Decision date",
+      "short_name": "Date",
+      "specialist_publisher_properties": {
+        "validations": {
+          "required": {}
+        }
+      },
+      "type": "date"
+    },
+    {
+      "display_as_result_metadata": true,
+      "filterable": false,
+      "key": "design_decision_litigants",
+      "name": "Litigants",
+      "short_name": "Litigants",
+      "specialist_publisher_properties": {
+        "validations": {
+          "required": {}
+        }
+      },
+      "type": "text"
+    }
+  ],
+  "filter": {
+    "format": "design_decision"
+  },
+  "name": "Find Intellectual Property related legal decisions",
+  "organisations": [
+    "5d6f9583-991f-413d-ae83-be7274e5eae4"
+  ],
+  "show_summaries": true,
+  "show_metadata_block": true,
+  "summary": "To find Intellectual Property (Registered Designs) related decisions for the U.K.\r\n\r\n##Note\r\n\r\nEvery effort is made to ensure design hearing decisions have been accurately recorded, but some errors may have been introduced during conversion for the web.\r\n\r\nCopies of any documents annexed to a decision are available from:\r\n\r\n$C\r\nTribunal Section,<br>Intellectual Property Office,<br>Concept House,<br>Cardiff Road,<br>Newport,<br>South Wales<br>NP10 8QQ\r\n$C",
+  "target_stack": "draft"
+}

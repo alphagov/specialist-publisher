@@ -856,6 +856,22 @@ FactoryBot.define do
     end
   end
 
+  factory :design_decision, parent: :document do
+    base_path { "/designs-decisions/example-document" }
+    document_type { "design_decision" }
+
+    transient do
+      default_metadata do
+        {
+          "design_decision_british_library_number" => "BL123456",
+          "design_decision_date" => "2015-11-16",
+          "design_decision_hearing_officer" => "leisa-davies",
+          "design_decision_litigants" => "A vs B",
+        }
+      end
+    end
+  end
+
   factory :export_health_certificate, parent: :document do
     base_path { "/export-health-certificates/example-document" }
     document_type { "export_health_certificate" }
