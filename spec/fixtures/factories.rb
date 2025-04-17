@@ -917,7 +917,7 @@ FactoryBot.define do
         {
           "ukhsa_approval_status" => "active",
           "ukhsa_access_type" => "file-transfer-to-organisation",
-          "ukhsa_applicant_organisation_name" => "Some organisation",
+          "ukhsa_organisation_name" => "placeholder-organisation",
           "ukhsa_applicant_organisation_type" => %w[public-health-agency],
           "ukhsa_classification_identification_risk" => "personally-identifiable",
           "ukhsa_dataset" => %w[childrens-hiv-and-aids-reporting-system-chars covid19-hospitalisation-in-england-surveillance-system-chess],
