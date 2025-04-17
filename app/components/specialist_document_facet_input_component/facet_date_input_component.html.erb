@@ -1,0 +1,28 @@
+<%= render "shared/datetime_fields", {
+  prefix: @document_type,
+  date_heading: @facet_name,
+  heading_size: "m",
+  field_name: "#{@document_type}[#{@facet_key}]",
+  date_only: true,
+  year: {
+    value: params.dig("#{@document_type}", "#{@facet_key}(1i)"),
+    id: "#{@document_type}_#{@facet_key}_year",
+    name: "#{@document_type}[#{@facet_key}(1i)]",
+    label: "Year",
+    width: 4,
+  },
+  month: {
+    value: params.dig("#{@document_type}", "#{@facet_key}(2i)"),
+    id: "#{@document_type}_#{@facet_key}_month",
+    name: "#{@document_type}[#{@facet_key}(2i)]",
+    label: "Month",
+    width: 2,
+  },
+  day: {
+    value: params.dig("#{@document_type}", "#{@facet_key}(3i)"),
+    id: "#{@document_type}_#{@facet_key}_day",
+    name: "#{@document_type}[#{@facet_key}(3i)]",
+    label: "Day",
+    width: 2,
+  },
+} %>

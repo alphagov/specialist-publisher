@@ -9,4 +9,18 @@ class SpecialistDocumentFacetInputComponent < ViewComponent::Base
     input_properties = facet_config["specialist_publisher_properties"]
     @facet_select_type = input_properties["select"]&.to_sym if input_properties
   end
+
+  def call
+    if @facet_type == :date
+      render FacetDateInputComponent.new(@document, @document_type, @facet_key, @facet_name)
+    elsif !@allowed_values
+      render FacetTextAreaInputComponent.new(@document, @document_type, @facet_key, @facet_name)
+    elsif @facet_select_type == :one
+      render FacetSingleSelectInputComponent.new(@document, @document_type, @facet_key, @facet_name, @allowed_values)
+    elsif @facet_select_type == :multiple
+      render FacetMultiSelectInputComponent.new(@document, @document_type, @facet_key, @facet_name, @allowed_values)
+    else
+      render layout: "shared/specialist_document_form_error", locals: { field: @facet_key }
+    end
+  end
 end
