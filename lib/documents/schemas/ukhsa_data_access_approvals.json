@@ -64,13 +64,20 @@
       "type": "text"
     },
     {
+      "allowed_values": [
+        {
+          "label": "Placeholder organisation",
+          "value": "placeholder-organisation"
+        }
+      ],
       "display_as_result_metadata": true,
-      "filterable": false,
-      "key": "ukhsa_applicant_organisation_name",
+      "filterable": true,
+      "key": "ukhsa_organisation_name",
       "name": "Applicant organisation name",
       "preposition": "Organisation",
       "short_name": "Organisation name",
       "specialist_publisher_properties": {
+        "select": "one",
         "validations": {
           "required": {}
         }
@@ -80,16 +87,16 @@
     {
       "allowed_values": [
         {
+        "label": "Academia (University)",
+        "value": "academia-university"
+        },
+        {
           "label": "Charity",
           "value": "charity"
         },
         {
           "label": "Commercial / Industry",
           "value": "commercial-industry"
-        },
-        {
-          "label": "Local authority",
-          "value": "local-authority"
         },
         {
           "label": "CQC Registered Health or/and Adult Social Care Provider",
@@ -100,12 +107,12 @@
           "value": "government-agency"
         },
         {
-          "label": "Public health agency",
-          "value": "public-health-agency"
+          "label": "Local authority",
+          "value": "local-authority"
         },
         {
-          "label": "Academia (University)",
-          "value": "academia-university"
+          "label": "Public health agency",
+          "value": "public-health-agency"
         },
         {
           "label": "Other",
@@ -133,8 +140,12 @@
           "value": "personally-identifiable"
         },
         {
-          "label": "De-personalised",
+          "label": "Depersonalised",
           "value": "depersonalised"
+        },
+        {
+          "label": "Anonymous",
+          "value": "anonymous"
         }
       ],
       "display_as_result_metadata": true,
@@ -451,7 +462,7 @@
   "filter": {
     "format": "ukhsa_data_access_approval"
   },
-  "name": "UKHSA Data Access Approvals Register",
+  "name": "Find out who is approved to access UKHSA data for research and other secondary uses",
   "organisations": [
     "80091cd8-7a8f-41ef-8faf-8af91fce4fdb"
   ],
@@ -460,6 +471,6 @@
   ],
   "show_summaries": true,
   "show_metadata_block": true,
-  "summary": "The Data Access Approvals Register sets out the organisations that the UK Health Security Agency (UKHSA) which have been approved to access protected data for specific secondary purposes, such as research, service evaluation, clinical audit, or surveillance. Access to UKHSA protected data is granted in line with the conditions and safeguards defined in the UKHSA's Data Access Approval Standards, ensuring data is used responsibly and securely. The register helps maintain transparency and accountability by providing a clear record of who has been granted permission to use UKHSA data.",
+  "summary": "The Data Access Approvals Register sets out the organisations that the UK Health Security Agency (UKHSA) which have been approved to access data for specific secondary purposes, such as research, service evaluation, clinical audit, or surveillance. Access to UKHSA protected data is granted in line with the conditions and safeguards defined in the UKHSA's Data Access Approval Standards, ensuring data is used responsibly and securely. The register helps maintain transparency and accountability by providing a clear record of who has been granted permission to use UKHSA data.",
   "target_stack": "draft"
 }
