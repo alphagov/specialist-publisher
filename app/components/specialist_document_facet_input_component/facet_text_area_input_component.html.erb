@@ -6,4 +6,5 @@
   name: "#{@document_type}[#{@facet_key}]",
   textarea_id: "#{@document_type}_#{@facet_key}",
   rows: 3,
+  value: @document.send(@facet_key),
 } %>
