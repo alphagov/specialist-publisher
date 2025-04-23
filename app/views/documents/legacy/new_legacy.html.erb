@@ -15,7 +15,7 @@
   <div class="col-md-8">
     <%= form_for @document, url: documents_path(params[:document_type_slug]),
                  html: { class: "new_document" } do |f| %>
-      <%= render partial: "shared/form_fields_legacy", locals: { f: f } %>
+      <%= render partial: "shared/legacy/form_fields_legacy", locals: { f: f } %>
 
       <%= render partial: "shared/preview_govspeak", locals: {attachments: @document.attachments} %>
 
@@ -27,5 +27,5 @@
     <% end %>
   </div>
 
-  <%= render partial: 'attachments/attachment_links_legacy' %>
+  <%= render partial: 'attachments/legacy/attachment_links_legacy' %>
 </div>
