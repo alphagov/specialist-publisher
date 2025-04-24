@@ -15,10 +15,6 @@
   } %>
 <% end %>
 
-<% content_for :document_ready do -%>
-  GOVUK.formChangeProtection.init($('.new_document'), 'You have unsaved changes that will be lost if you leave this page.');
-<% end -%>
-
 <% content_for :title do %>
   New <%= current_format.title.singularize %>
 <% end %>
