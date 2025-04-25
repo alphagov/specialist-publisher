@@ -1,14 +1,17 @@
 <% environment = GovukPublishingComponents::AppHelpers::Environment.current_acceptance_environment %>
 
-<% content_for :head do %>
-  <%= javascript_include_tag "es6-components", type: "module" %>
+<% if user_signed_in? %>
+  <% content_for :head do %>
+    <meta name="govuk:components_gem_version" content="<%= GovukPublishingComponents::VERSION %>">
+    <%= javascript_include_tag "govuk_publishing_components/load-analytics" %>
+    <%= javascript_include_tag "es6-components", type: "module" %>
+  <% end %>
 <% end %>
 
-<%= render "govuk_publishing_components/components/layout_for_admin", {
-  product_title: "Specialist Publisher",
-  environment: environment,
-  browser_title: yield(:page_title)
-} do %>
+<%= render "govuk_publishing_components/components/layout_for_admin",
+    product_name: "Specialist Publisher",
+    environment: environment,
+    browser_title: yield(:page_title) do %>
 
   <%= render "govuk_publishing_components/components/skip_link" %>
 
@@ -56,7 +59,7 @@
             <%= render "govuk_publishing_components/components/heading", {
               context: yield(:context),
               text: yield(:title),
-              margin_bottom: 0,
+              margin_bottom: 6,
               font_size: "xl",
               heading_level: 1,
             } %>

@@ -14,12 +14,12 @@
 <div class="row">
   <div class="col-md-8">
     <%= form_for @document, url: documents_path(params[:document_type_slug]),
-                            html: { class: "new_document" } do |f| %>
-      <%= render partial: "shared/form_fields", locals: { f: f } %>
+                 html: { class: "new_document" } do |f| %>
+      <%= render partial: "shared/legacy/form_fields_legacy", locals: { f: f } %>
 
       <%= render partial: "shared/preview_govspeak", locals: {attachments: @document.attachments} %>
 
-      <%= render partial: "metadata_fields/#{params[:document_type_slug].underscore}", locals: { f: f } %>
+      <%= render partial: "metadata_fields_legacy/#{params[:document_type_slug].underscore}", locals: { f: f } %>
 
       <div class="actions">
         <button name="save" class="btn btn-success" data-disable-with="Saving...">Save as draft</button>
@@ -27,5 +27,5 @@
     <% end %>
   </div>
 
-  <%= render partial: 'attachments/attachment_links' %>
+  <%= render partial: 'attachments/legacy/attachment_links_legacy' %>
 </div>

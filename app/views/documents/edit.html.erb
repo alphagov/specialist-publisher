@@ -19,11 +19,11 @@
                                                content_id_and_locale: "#{@content_id_param}:#{@locale_param}"),
                                                method: :put,
                                                html: { class: "edit_document" } do |f| %>
-        <%= render partial: "shared/form_fields", locals: {f: f} %>
+        <%= render partial: "shared/legacy/form_fields_legacy", locals: {f: f} %>
 
         <%= render partial: "shared/preview_govspeak", locals: {attachments: @document.attachments} %>
 
-        <%= render partial: "metadata_fields/#{params[:document_type_slug].underscore}", locals: {f: f} %>
+        <%= render partial: "metadata_fields_legacy/#{params[:document_type_slug].underscore}", locals: {f: f} %>
 
         <%= render partial: "shared/minor_major_update_fields", locals: {f: f, document: @document} %>
 

@@ -1,20 +1,28 @@
-<%= content_for :page_title, "New #{current_format.title.singularize}" %>
+<% content_for :page_title, "New #{current_format.title.singularize}" %>
 
 <% content_for :breadcrumbs do %>
-  <li><%= link_to "Your documents", documents_path(current_format.admin_slug) %></li>
-  <li class='active'>New document</li>
+  <%= render "govuk_publishing_components/components/breadcrumbs", {
+    collapse_on_mobile: true,
+    breadcrumbs: [
+      {
+        title: "Your documents",
+        url: documents_path(current_format.admin_slug)
+      },
+      {
+        title: "New document"
+      }
+    ]
+  } %>
 <% end %>
 
-<% content_for :document_ready do -%>
-  GOVUK.formChangeProtection.init($('.new_document'), 'You have unsaved changes that will be lost if you leave this page.');
-<% end -%>
+<% content_for :title do %>
+  New <%= current_format.title.singularize %>
+<% end %>
 
-<h1>New <%= current_format.title.singularize %></h1>
-
-<div class="row">
-  <div class="col-md-8">
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
     <%= form_for @document, url: documents_path(params[:document_type_slug]),
-                            html: { class: "new_document" } do |f| %>
+                 html: { class: "new_document" } do |f| %>
       <%= render partial: "shared/form_fields", locals: { f: f } %>
 
       <%= render partial: "shared/preview_govspeak", locals: {attachments: @document.attachments} %>
@@ -22,10 +30,15 @@
       <%= render partial: "metadata_fields/#{params[:document_type_slug].underscore}", locals: { f: f } %>
 
       <div class="actions">
-        <button name="save" class="btn btn-success" data-disable-with="Saving...">Save as draft</button>
+        <%= render "govuk_publishing_components/components/button", {
+          text: "Save as draft",
+          name: "save",
+          value: "save",
+        } %>
       </div>
     <% end %>
   </div>
-
-  <%= render partial: 'attachments/attachment_links' %>
+  <div class="govuk-grid-column-one-third">
+    <%= render partial: 'attachments/attachment_links' %>
+  </div>
 </div>

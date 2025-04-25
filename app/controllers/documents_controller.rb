@@ -25,7 +25,7 @@ class DocumentsController < ApplicationController
 
   def new
     @document = current_format.new
-    render design_system_view(:new_design_system, :new)
+    render design_system_view(:new, "documents/legacy/new_legacy")
   end
 
   def create
@@ -35,9 +35,9 @@ class DocumentsController < ApplicationController
       flash[:success] = "Created #{@document.title}"
       redirect_to document_path(current_format.admin_slug, @document.content_id_and_locale)
     elsif @document.errors.any?
-      re_render design_system_view(:new_design_system, :new), flash_key: :errors, flash_message: document_error_messages, status: :unprocessable_entity
+      re_render design_system_view(:new, "documents/legacy/new_legacy"), flash_key: :errors, flash_message: document_error_messages, status: :unprocessable_entity
     else
-      re_render design_system_view(:new_design_system, :new), flash_key: :danger, flash_message: unknown_error_message
+      re_render design_system_view(:new, "documents/legacy/new_legacy"), flash_key: :danger, flash_message: unknown_error_message
     end
   end
 
