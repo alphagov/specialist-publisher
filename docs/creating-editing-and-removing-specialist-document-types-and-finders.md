@@ -20,7 +20,9 @@ NB: For additional guidance, consider reading through [Finder requirements and c
 See [example PR here](https://github.com/alphagov/publishing-api/pull/3026/files).
 
 1. Add the format to [allowed document types list](https://github.com/alphagov/publishing-api/blob/main/content_schemas/allowed_document_types.yml).
-Ideally, the schema name should align with the format name for consistency. While this isn’t always possible, a mismatch may lead to failures in specialist publisher's automated tests. In such cases, you may need to mark your finder as an [exception](https://github.com/alphagov/specialist-publisher/blob/main/spec/models/document_type_spec.rb#L6) to general testing. 
+
+NB: The schema name should align with the format name, for consistency. A mismatch will lead to failures in specialist publisher's automated tests. See how to fix it [here](#2-bespoke-approach). 
+
 2. Add any new field definitions to [this file](https://github.com/alphagov/publishing-api/blob/main/content_schemas/formats/shared/definitions/_specialist_document.jsonnet).
 3. Run `bundle exec rake build_schemas` to regenerate schemas.
 
@@ -84,7 +86,11 @@ Replace "your_format_name" with the format you want to check. A partial match sh
 
 #### 2. Bespoke approach
 
-It’s important to emphasize that this approach should be avoided if possible. However, if you need to add your format to an exception list, be sure to document the reason for doing so in your PRs or commits. To ensure proper coverage, you will also need to create both a [feature test](https://github.com/alphagov/specialist-publisher/blob/main/spec/features/creating_a_trademark_decision_spec.rb) and a [model test](https://github.com/alphagov/specialist-publisher/blob/main/spec/models/protected_food_drink_name_spec.rb) for your finder.
+While you should ideally always use the test automation, you might need custom testing if:
+- the `filter.format` does not match naming conventions (it should be the schema json filename, singularized)
+- the documents need additional validations. 
+
+In such cases, add your format to the [exception list](https://github.com/alphagov/specialist-publisher/blob/3a0d89a821c6aeea87a20dae7c8f6e3fb1cf9ec0/spec/models/document_type_spec.rb#L4), and document the reason for doing so in your commit. To ensure proper coverage, you will need to create both a [feature test](https://github.com/alphagov/specialist-publisher/blob/main/spec/features/creating_a_trademark_decision_spec.rb) and a [model test](https://github.com/alphagov/specialist-publisher/blob/main/spec/models/protected_food_drink_name_spec.rb) for your finder.
 
 ## 3. Configure Search API
 
