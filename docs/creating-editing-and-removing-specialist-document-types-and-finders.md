@@ -14,6 +14,8 @@ Recent changes to Specialist Publisher now allow users to self-serve. These requ
 
 # __Creating__ a specialist document type
 
+NB: For additional guidance, consider reading through [Finder requirements and content support](#9-Finder-requirements-and-content-support).
+
 ## 1. Add a schema to Publishing API
 See [example PR here](https://github.com/alphagov/publishing-api/pull/3026/files).
 
@@ -170,6 +172,23 @@ Specialist Publisher grants access to the publishing interface for a document ty
 3. Users that have the permission `<your_new_document_type>_editor` in Signon are granted "departmental editor" access regardless of their organisation. This is sometimes required for cross-departmental documents. These special permissions need to be [created manually](https://docs.publishing.service.gov.uk/repos/signon/usage.html#creating-editing-and-deleting-permissions) in Signon. You do not need to create this permission unless cross-departmental access has been explicitly requested.
 
 You'll need to manually grant users access to the Specialist Publisher app in Signon, and the `editor` permission (or custom cross-organisation permissions from step 3 above) if appropriate.
+
+If the users do not yet have Signon access, direct them to the [Request a new account guidance](https://www.gov.uk/guidance/contact-the-government-digital-service/request-a-thing#:~:text=Show%20all%20sections-,Whitehall,-publisher%20accounts). Signon requests must go through this approval process.
+
+## 9. Finder requirements and content support
+
+Whilst the finders go through content approval before becoming actionable tickets in the owning team's backlog, specific concerns only become apparent once the finder requirements form is filled out. It is recommended that the requirements should be validated by someone with technical expertise, and that necessary conversations with the department should be initiated early on.
+
+For specific content guidance, loop in the content team on the Zendesk ticket, who will be able to provide you with the necessary support.
+
+Here's a few content concerns to keep an eye on:
+- Finder titles should usually be in the format "Find [brief description of finder content]". For example, "Find data ethics guidance, standards and frameworks".
+- Sanity check that the facet selection is meaningful in the context of the finder and documents. 
+- The facet selection (one/multiple) should be appropriate for the content. Whilst the one/multiple option dictates how we tag the documents publisher-side, the filters on finder-frontend are always multiple. This can be confusing to users.
+- You might need to translate certain fields (especially from pre-existing digital content) to match the GOV.UK frontend components style. For example, the date search (before/after) can easily encompass two distinct date fields.
+- Make free text fields (which are not filterable in the way facets are) into facets if the list is known and unlikely to change. This will help users filter the content more easily. The now available admin area should make this a small maintenance task, if the list needs to change in the future. 
+- Long facet option lists should be alphabetical to aid search, unless the departments can justify a different order.
+- For very long facet option lists, consider using the `show_option_select_filter` in the schema, which will add a search bar to the facet. See example [here](https://github.com/alphagov/specialist-publisher/blob/3a0d89a821c6aeea87a20dae7c8f6e3fb1cf9ec0/lib/documents/schemas/licence_transactions.json#L243).
 
 # __Editing__ a specialist document type
 
