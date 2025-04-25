@@ -1,4 +1,4 @@
-class SpecialistDocumentFacetInputComponent::FacetDateInputComponent < ViewComponent::Base
+class FacetInputComponent::TextAreaComponent < ViewComponent::Base
   def initialize(document, document_type, facet_key, facet_name)
     @document = document
     @document_type = document_type

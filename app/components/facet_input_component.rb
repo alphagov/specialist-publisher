@@ -1,4 +1,4 @@
-class SpecialistDocumentFacetInputComponent < ViewComponent::Base
+class FacetInputComponent < ViewComponent::Base
   def initialize(document, finder_schema, facet_config)
     @document = document
     @document_type = finder_schema.filter["format"].to_sym
@@ -12,13 +12,13 @@ class SpecialistDocumentFacetInputComponent < ViewComponent::Base
 
   def call
     if @facet_type == :date
-      render FacetDateInputComponent.new(@document, @document_type, @facet_key, @facet_name)
+      render DateComponent.new(@document, @document_type, @facet_key, @facet_name)
     elsif !@allowed_values
-      render FacetTextAreaInputComponent.new(@document, @document_type, @facet_key, @facet_name)
+      render TextAreaComponent.new(@document, @document_type, @facet_key, @facet_name)
     elsif @facet_select_type == :one
-      render FacetSingleSelectInputComponent.new(@document, @document_type, @facet_key, @facet_name, @allowed_values)
+      render SingleSelectComponent.new(@document, @document_type, @facet_key, @facet_name, @allowed_values)
     elsif @facet_select_type == :multiple
-      render FacetMultiSelectInputComponent.new(@document, @document_type, @facet_key, @facet_name, @allowed_values)
+      render MultiSelectComponent.new(@document, @document_type, @facet_key, @facet_name, @allowed_values)
     else
       render layout: "shared/specialist_document_form_error", locals: { field: @facet_key }
     end

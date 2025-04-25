@@ -1,3 +1,3 @@
 <% f.object.class.finder_schema.facets.each do |field_config| %>
-  <%= render SpecialistDocumentFacetInputComponent.new(@document,f.object.class.finder_schema,field_config) %>
+  <%= render FacetInputComponent.new(@document,f.object.class.finder_schema,field_config) %>
 <% end %>

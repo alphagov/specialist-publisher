@@ -1,4 +1,4 @@
-class SpecialistDocumentFacetInputComponent::FacetMultiSelectInputComponent < ViewComponent::Base
+class FacetInputComponent::MultiSelectComponent < ViewComponent::Base
   def initialize(document, document_type, facet_key, facet_name, allowed_values)
     @document = document
     @document_type = document_type
