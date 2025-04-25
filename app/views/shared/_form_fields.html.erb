@@ -5,6 +5,7 @@
     heading_size: "m",
   },
   name: "#{format_name}[title]",
+  value: @document.title,
 } %>
 
 <%= render "govuk_publishing_components/components/character_count", {
@@ -14,6 +15,7 @@
       heading_size: "m",
     },
     name: "#{format_name}[summary]",
+    value: @document.summary,
     margin_bottom: 8,
   },
   id: "#{format_name}_summary",
@@ -28,7 +30,7 @@
   id: "#{format_name}_body",
   name: "#{format_name}[body]",
   rows: 20,
-  # value: historical_account.body,
+  value: @document.body,
   # error_items: errors_for(historical_account.errors, :body),
 } %>
 
@@ -46,4 +48,5 @@
       selected: key.to_s == locale,
     }
   end,
+  value: @document.locale,
 } %>

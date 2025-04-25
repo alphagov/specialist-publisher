@@ -102,6 +102,56 @@ RSpec.feature "Creating a document", type: :feature do
       # expect(page).to have_content("Body cannot include invalid Govspeak")
     end
 
+    scenario "retaining data when creating a document with some invalid content" do
+      visit new_document_path
+
+      fill_in "Title", with: "Example #{document_type.to_s.humanize}"
+      fill_in "Summary", with: "Example Summary"
+      fill_in "Body", with: "<script>alert('hello')</script>"
+
+      schema.facets.each do |facet|
+        key = facet["key"]
+        properties = facet["specialist_publisher_properties"] || {}
+
+        if facet["type"] == "date"
+          fill_in "#{document_type}[#{key}(1i)]", with: "2014"
+          fill_in "#{document_type}[#{key}(2i)]", with: "01"
+          fill_in "#{document_type}[#{key}(3i)]", with: "01"
+        elsif properties["select"] == "one"
+          select facet["allowed_values"].first["label"], from: facet["name"], match: :first
+        elsif properties["select"] == "multiple"
+          select facet["allowed_values"].first["label"], from: "#{facet['key']}_0"
+        else
+          fill_in facet["name"], with: "Example #{facet['name']}"
+        end
+      end
+
+      click_button "Save as draft"
+
+      expect(page.status_code).to eq(422)
+      expect(page).to have_field("#{document_type}[title]", with: "Example #{document_type.to_s.humanize}")
+      expect(page).to have_field("#{document_type}[summary]", with: "Example Summary")
+      expect(page).to have_field("#{document_type}[body]", with: "<script>alert('hello')</script>")
+      expect(page).to have_field("#{document_type}[locale]", with: "en")
+
+      schema.facets.each do |facet|
+        key = facet["key"]
+        properties = facet["specialist_publisher_properties"] || {}
+
+        if facet["type"] == "date"
+          expect(page).to have_field("#{document_type}[#{key}(1i)]", with: "2014")
+          expect(page).to have_field("#{document_type}[#{key}(2i)]", with: "01")
+          expect(page).to have_field("#{document_type}[#{key}(3i)]", with: "01")
+        elsif properties["select"] == "one"
+          expect(page).to have_select("#{document_type}[#{key}]", with_selected: facet["allowed_values"].first["label"])
+        elsif properties["select"] == "multiple"
+          expect(page).to have_select("#{facet['key']}_0", with_selected: facet["allowed_values"].first["label"])
+        else
+          expect(page).to have_field("#{document_type}[#{key}]", with: "Example #{facet['name']}")
+        end
+      end
+    end
+
     scenario "attempting to create a document with an invalid date" do
       visit new_document_path
 

@@ -1,0 +1,14 @@
+<%= render "govuk_publishing_components/components/select", {
+  id: "#{@document_type}_#{@facet_key}",
+  name: "#{@document_type}[#{@facet_key}]",
+  label: @facet_name,
+  heading_size: "m",
+  full_width: true,
+  options: @allowed_values.map do |item|
+    {
+      text: item["label"],
+      value: item["value"],
+      selected: item["value"] == @document.send(@facet_key),
+    }
+  end,
+} %>
