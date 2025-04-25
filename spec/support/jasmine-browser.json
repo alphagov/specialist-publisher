@@ -10,7 +10,8 @@
     "**/*[sS]pec.?(m)js"
   ],
   "helpers": [
-    "helpers/*.js"
+    "helpers/*.js",
+    "https://unpkg.com/jasmine-ajax@4.0.0/lib/mock-ajax.js"
   ],
   "browser": {
     "name": "headlessChrome"
