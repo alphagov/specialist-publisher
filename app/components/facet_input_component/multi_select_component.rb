@@ -24,8 +24,8 @@ class FacetInputComponent::MultiSelectComponent < ViewComponent::Base
       label: "Select a #{@facet_name.downcase}",
       heading_size: "s",
       full_width: true,
-      options: @allowed_values.map do |item|
-        {
+      options: @allowed_values.inject([{}]) do |options, item|
+        options << {
           text: item["label"],
           value: item["value"],
           selected: item["value"] == value,
