@@ -1110,6 +1110,7 @@
   "organisations": [
     "de4e9dc6-cca4-43af-a594-682023b84d6c"
   ],
+  "show_table_of_contents": true,
   "show_metadata_block": true,
   "show_summaries": true,
   "signup_content_id": "cff7449e-4181-480f-93e4-91fecfb4c774",

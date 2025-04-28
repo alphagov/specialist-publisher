@@ -147,6 +147,7 @@
   },
   "name": "EU Withdrawal Act 2018 statutory instruments",
   "organisations": [],
+  "show_table_of_contents": true,
   "show_metadata_block": true,
   "summary": "Find proposed negative statutory instruments (SIs) under the EU (Withdrawal) Act 2018.\r\n\r\nBefore the SIs are formally 'laid' in Parliament, they have to go through a sifting process. A new committee in the House of Commons and the Secondary Legislation Scrutiny Committee in the House of Lords will consider the suitability of the [negative procedure](https://www.parliament.uk/about/how/laws/secondary-legislation/).",
   "target_stack": "live",

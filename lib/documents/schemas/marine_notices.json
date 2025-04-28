@@ -179,6 +179,7 @@
   "organisations": [
     "23a24aa8-1711-42b6-bf6b-47af0f230295"
   ],
+  "show_table_of_contents": true,
   "show_metadata_block": true,
   "signup_content_id": "21985d9f-8c84-4fa1-915c-2807eaa37dff",
   "subscription_list_title_prefix": "Marine notices",

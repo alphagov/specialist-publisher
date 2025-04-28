@@ -226,6 +226,7 @@
   "organisations": [
     "78dfc32b-b1ef-44ca-924c-a2cf773e87ca"
   ],
+  "show_table_of_contents": true,
   "show_metadata_block": true,
   "signup_content_id": "b65c9331-5c34-4201-9c30-1ea64f03f49a",
   "subscription_list_title_prefix": "Traffic Commissioner regulatory decisions",

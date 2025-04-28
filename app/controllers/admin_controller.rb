@@ -86,6 +86,7 @@ private
       :summary,
       :show_summaries,
       :show_metadata_block,
+      :show_table_of_contents,
       :document_title,
       :document_noun,
       organisations: [],

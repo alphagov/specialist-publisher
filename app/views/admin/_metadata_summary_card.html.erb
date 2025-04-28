@@ -65,6 +65,10 @@
       value: schema.show_metadata_block ? "Yes" : "No"
     } if !(defined? previous_schema) || schema.show_metadata_block != previous_schema.show_metadata_block),
     ({
+      key: "Should a table of contents be displayed on each document page?",
+      value: schema.show_table_of_contents ? "Yes" : "No"
+    } if !(defined? previous_schema) || schema.show_table_of_contents != previous_schema.show_table_of_contents),
+    ({
       key: "Full document noun (Appears in various places in the Specialist Publisher user interface)",
       value: (schema.document_title || "").humanize
     } if !(defined? previous_schema) || schema.document_title != previous_schema.document_title),

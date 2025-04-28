@@ -31,6 +31,7 @@ class FinderSchema
   attribute :email_filter_options
   attribute :facets, default: []
   attribute :filter
+  attribute :show_table_of_contents, :boolean, default: false
   attribute :label_text
   attribute :name
   attribute :organisations, default: []
