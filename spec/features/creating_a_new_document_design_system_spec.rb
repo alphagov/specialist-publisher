@@ -75,7 +75,7 @@ RSpec.feature "Creating a document", type: :feature do
       click_button "Save as draft"
 
       expect(page.status_code).to eq(422)
-
+      
       # schema.facets.each do |facet|
       #   properties = facet["specialist_publisher_properties"] || {}
       #   validations = properties["validations"] || {}
@@ -167,8 +167,8 @@ RSpec.feature "Creating a document", type: :feature do
 
         expect(page.status_code).to eq(422)
         # expect(page).to have_css(".elements-error-summary")
-        # expect(page).to have_css(".elements-error-message")
-        # expect(page).to have_content("not a valid date")
+        expect(page).to have_css(".govuk-error-message")
+        expect(page).to have_content("not a valid date")
       end
     end
   end

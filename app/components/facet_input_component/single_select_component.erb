@@ -4,6 +4,7 @@
   label: @facet_name,
   heading_size: "m",
   full_width: true,
+  error_message: @error_message,
   options: @allowed_values.inject([{}]) do |options, item|
     options << {
       text: item["label"],

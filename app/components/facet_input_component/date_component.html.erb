@@ -3,6 +3,7 @@
   date_heading: @facet_name,
   heading_size: "m",
   field_name: "#{@document_type}[#{@facet_key}]",
+  error_items: @error_items,
   date_only: true,
   year: {
     value: params.dig("#{@document_type}", "#{@facet_key}(1i)"),
