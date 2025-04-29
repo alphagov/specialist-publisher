@@ -75,7 +75,10 @@ RSpec.feature "Creating a document", type: :feature do
       click_button "Save as draft"
 
       expect(page.status_code).to eq(422)
-      
+      expect(page).to have_css(".govuk-error-message", text: "Title can't be blank")
+      expect(page).to have_css(".govuk-error-message", text: "Summary can't be blank")
+      expect(page).to have_css(".govuk-error-message", text: "Body can't be blank")
+
       # schema.facets.each do |facet|
       #   properties = facet["specialist_publisher_properties"] || {}
       #   validations = properties["validations"] || {}
@@ -97,9 +100,8 @@ RSpec.feature "Creating a document", type: :feature do
 
       expect(page.status_code).to eq(422)
       # expect(page).to have_css(".elements-error-summary")
-      # expect(page).to have_css(".elements-error-message")
 
-      # expect(page).to have_content("Body cannot include invalid Govspeak")
+      expect(page).to have_css(".govuk-error-message", text: "Body cannot include invalid Govspeak")
     end
 
     scenario "retaining data when creating a document with some invalid content" do

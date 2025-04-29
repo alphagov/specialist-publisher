@@ -6,6 +6,7 @@
   },
   name: "#{format_name}[title]",
   value: @document.title,
+  error_items: errors_for(@document.errors, :title)
 } %>
 
 <%= render "govuk_publishing_components/components/character_count", {
@@ -17,6 +18,7 @@
     name: "#{format_name}[summary]",
     value: @document.summary,
     margin_bottom: 8,
+    error_items: errors_for(@document.errors, :summary),
   },
   id: "#{format_name}_summary",
   maxlength: 280,
@@ -31,7 +33,7 @@
   name: "#{format_name}[body]",
   rows: 20,
   value: @document.body,
-  # error_items: errors_for(historical_account.errors, :body),
+  error_items: errors_for(@document.errors, :body),
 } %>
 
 <% locale = @document.locale || "en" %>
