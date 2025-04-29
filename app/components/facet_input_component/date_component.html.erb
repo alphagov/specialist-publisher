@@ -5,6 +5,7 @@
   field_name: "#{@document_type}[#{@facet_key}]",
   error_items: @error_items,
   date_only: true,
+  id: "#{@document_type}_#{@facet_key}",
   year: {
     value: params.dig("#{@document_type}", "#{@facet_key}(1i)"),
     id: "#{@document_type}_#{@facet_key}_year",

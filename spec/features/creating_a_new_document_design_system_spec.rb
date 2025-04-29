@@ -75,6 +75,11 @@ RSpec.feature "Creating a document", type: :feature do
       click_button "Save as draft"
 
       expect(page.status_code).to eq(422)
+      expect(page).to have_css(".govuk-error-summary")
+      expect(page).to have_css(".gem-c-error-summary__list-item", text: "Title can't be blank")
+      expect(page).to have_css(".gem-c-error-summary__list-item", text: "Summary can't be blank")
+      expect(page).to have_css(".gem-c-error-summary__list-item", text: "Body can't be blank")
+
       expect(page).to have_css(".govuk-error-message", text: "Title can't be blank")
       expect(page).to have_css(".govuk-error-message", text: "Summary can't be blank")
       expect(page).to have_css(".govuk-error-message", text: "Body can't be blank")
@@ -99,7 +104,7 @@ RSpec.feature "Creating a document", type: :feature do
       click_button "Save as draft"
 
       expect(page.status_code).to eq(422)
-      # expect(page).to have_css(".elements-error-summary")
+      expect(page).to have_css(".govuk-error-summary")
 
       expect(page).to have_css(".govuk-error-message", text: "Body cannot include invalid Govspeak")
     end
@@ -168,7 +173,7 @@ RSpec.feature "Creating a document", type: :feature do
         click_button "Save as draft"
 
         expect(page.status_code).to eq(422)
-        # expect(page).to have_css(".elements-error-summary")
+        expect(page).to have_css(".govuk-error-summary")
         expect(page).to have_css(".govuk-error-message")
         expect(page).to have_content("not a valid date")
       end
