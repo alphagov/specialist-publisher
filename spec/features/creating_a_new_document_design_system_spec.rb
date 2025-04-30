@@ -84,14 +84,16 @@ RSpec.feature "Creating a document", type: :feature do
       expect(page).to have_css(".govuk-error-message", text: "Summary can't be blank")
       expect(page).to have_css(".govuk-error-message", text: "Body can't be blank")
 
-      # schema.facets.each do |facet|
-      #   properties = facet["specialist_publisher_properties"] || {}
-      #   validations = properties["validations"] || {}
-      #
-      #   if validations["required"]
-      #     expect(page).to have_css("div.field_with_errors span.elements-error-message", text: /#{facet['key'].humanize} can't be blank|#{facet['name']} can't be blank/)
-      #   end
-      # end
+      schema.facets.each do |facet|
+        properties = facet["specialist_publisher_properties"] || {}
+        validations = properties["validations"] || {}
+
+        next unless validations["required"]
+
+        error_regex = /#{facet['key'].humanize} can't be blank|#{facet['name']} can't be blank/
+        expect(page).to have_css(".gem-c-error-summary__list-item", text: error_regex)
+        expect(page).to have_css(".govuk-error-message", text: error_regex)
+      end
     end
 
     scenario "attempting to create a document with invalid content" do

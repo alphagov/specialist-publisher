@@ -1,4 +1,6 @@
 class FacetInputComponent::MultiSelectComponent < ViewComponent::Base
+  include ErrorsHelper
+
   def initialize(document, document_type, facet_key, facet_name, allowed_values)
     @document = document
     @document_type = document_type
@@ -8,8 +10,10 @@ class FacetInputComponent::MultiSelectComponent < ViewComponent::Base
   end
 
   def pre_selected_items
+    return [{ fields: template_add_another }] if @document.send(@facet_key).blank?
+
     items = []
-    @document.send(@facet_key)&.each_with_index do |facet_value, index|
+    @document.send(@facet_key).each_with_index do |facet_value, index|
       items << {
         fields: template_add_another(index, facet_value),
       }
@@ -24,6 +28,7 @@ class FacetInputComponent::MultiSelectComponent < ViewComponent::Base
       label: "Select a #{@facet_name.downcase}",
       heading_size: "s",
       full_width: true,
+      error_message: errors_for_input(@document.errors, @facet_key),
       options: @allowed_values.inject([{}]) do |options, item|
         options << {
           text: item["label"],
