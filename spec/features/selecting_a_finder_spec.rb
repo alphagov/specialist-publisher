@@ -61,6 +61,39 @@ RSpec.feature "The root specialist-publisher page", type: :feature do
     end
   end
 
+  context "when logged in as a design system editor" do
+    before do
+      log_in_as_design_system_editor(:gds_editor)
+    end
+
+    it "has expected finders" do
+      visit "/"
+
+      expect(page).to have_text("AAIB Reports")
+      expect(page).to have_text("Asylum Support Decisions")
+      expect(page).to have_text("Business Finance Support Schemes")
+      expect(page).to have_text("CMA Cases")
+      expect(page).to have_text("Countryside Stewardship Grants")
+      expect(page).to have_text("Drug Safety Updates")
+      expect(page).to have_text("EAT Decisions")
+      expect(page).to have_text("ESI Funds")
+      expect(page).to have_text("ET Decisions")
+      expect(page).to have_text("EU Withdrawal Act 2018 statutory instruments")
+      expect(page).to have_text("Export health certificates")
+      expect(page).to have_text("International Development Funds")
+      expect(page).to have_text("Licences")
+      expect(page).to have_text("MAIB Reports")
+      expect(page).to have_text("Medical Safety Alerts")
+      expect(page).to have_text("Protected Geographical Food and Drink Name")
+      expect(page).to have_text("RAIB Reports")
+      expect(page).to have_text("Research for Development Outputs")
+      expect(page).to have_text("Residential Property Tribunal Decisions")
+      expect(page).to have_text("Service Standard Reports")
+      expect(page).to have_text("Tax Tribunal Decisions")
+      expect(page).to have_text("UTAAC Decisions")
+    end
+  end
+
   context "when logged in as a CMA editor" do
     before do
       stub_publishing_api_has_content([], hash_including(document_type: CmaCase.document_type))

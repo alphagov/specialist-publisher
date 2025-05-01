@@ -10,6 +10,10 @@ class FinderAdministrationPolicy
 
   delegate :gds_editor?, to: :user
 
+  def index?
+    gds_editor?
+  end
+
   def can_request_new_finder?
     gds_editor?
   end
