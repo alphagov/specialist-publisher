@@ -1,12 +1,12 @@
-<%= render "shared/date_fields_legacy", f: f, field: :sift_end_date, format: :statutory_instrument %>
-<%= render "shared/date_fields_legacy", f: f, field: :laid_date, format: :statutory_instrument %>
+<%= render "shared/legacy/date_fields_legacy", f: f, field: :sift_end_date, format: :statutory_instrument %>
+<%= render "shared/legacy/date_fields_legacy", f: f, field: :laid_date, format: :statutory_instrument %>
 <%= render "shared/form_group", f: f, field: :sifting_status do %>
   <%= f.select :sifting_status, select_options_for_facet(f.object.allowed_values(:sifting_status)), {}, { class: "form-control" } %>
 <% end %>
 <% # TODO: this bit of logic prevents us moving to the shared view %>
 <% withdrawn_date_display = f.object.withdrawn_sifting_status? ? "block" : "none" %>
 <div class="withdrawn-date-wrapper" style="display:<%= withdrawn_date_display %>">
-  <%= render "shared/date_fields_legacy", f: f, field: :withdrawn_date, format: :statutory_instrument %>
+  <%= render "shared/legacy/date_fields_legacy", f: f, field: :withdrawn_date, format: :statutory_instrument %>
 </div>
 <%= render "shared/form_group", f: f, field: :subject do %>
   <%= f.select :subject,
