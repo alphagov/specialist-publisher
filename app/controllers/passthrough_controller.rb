@@ -1,15 +1,21 @@
 class PassthroughController < ApplicationController
-  after_action :skip_authorization
-
+  layout "design_system"
   def index
-    if first_permitted_format
-      redirect_to documents_path(document_type_slug: first_permitted_format.admin_slug)
+    if current_user.preview_design_system?
+      authorize current_user, :index?, policy_class: FinderAdministrationPolicy
     else
-      redirect_to error_path
+      skip_authorization
+      if first_permitted_format
+        redirect_to documents_path(document_type_slug: first_permitted_format.admin_slug)
+      else
+        redirect_to error_path
+      end
     end
   end
 
-  def error; end
+  def error
+    skip_authorization
+  end
 
 private
 
