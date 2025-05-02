@@ -1,19 +1,17 @@
 class FindersController < ApplicationController
   layout "design_system"
   def index
-    if current_user.preview_design_system?
-      authorize current_user, :index?, policy_class: FinderAdministrationPolicy
-    end
+    authorize FinderSchema, :index?
   end
 
   def new
-    authorize current_user, :can_request_new_finder?, policy_class: FinderAdministrationPolicy
+    authorize FinderSchema, :can_request_new_finder?
     @proposed_schema = FinderSchema.new
     @proposed_schema.facets = []
   end
 
   def create
-    authorize current_user, :can_request_new_finder?, policy_class: FinderAdministrationPolicy
+    authorize FinderSchema, :can_request_new_finder?
     @proposed_schema = FinderSchema.new
     @proposed_schema.facets = []
     @proposed_schema.content_id = SecureRandom.uuid

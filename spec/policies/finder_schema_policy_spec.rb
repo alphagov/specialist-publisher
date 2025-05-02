@@ -1,6 +1,6 @@
 require "spec_helper"
 
-RSpec.describe FinderAdministrationPolicy do
+RSpec.describe FinderSchemaPolicy do
   let(:gds_editor) { User.new(permissions: %w[signin gds_editor]) }
   let(:departmental_editor) { User.new(permissions: %w[signin editor], organisation_content_id: "some-org-id") }
 

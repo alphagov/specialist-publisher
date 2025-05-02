@@ -32,9 +32,7 @@ class AdminController < ApplicationController
 private
 
   def check_authorisation
-    if !document_type_slug
-      authorize current_user, :can_request_new_finder?, policy_class: FinderAdministrationPolicy
-    elsif current_format
+    if current_format
       authorize current_format
     else
       flash[:danger] = "That format doesn't exist. If you feel you've reached this in error, please contact your main GDS contact."
