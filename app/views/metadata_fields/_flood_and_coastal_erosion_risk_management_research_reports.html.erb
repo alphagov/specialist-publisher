@@ -1,3 +1,5 @@
+<% format_name = f.object.class.finder_schema.filter["format"].to_sym %>
+<% schema = f.object.class.finder_schema %>
 <%= render layout: "shared/specialist_document_form", locals: { f: f } do %>
 <% end %>
 
@@ -28,3 +30,13 @@
       }
   %>
 <% end %>
+
+<% field_config = schema.get_facet(:primary_publishing_organisation) %>
+<% field_values = organisations_options %>
+<% field_label  = "Publishing organisation" %>
+<%= render FacetInputComponent::SingleSelectComponent.new(@document, format_name, field_config, field_label, field_values) %>
+
+<%# field_config = schema.get_facet(:organisations) %>
+<%# field_values = organisations_options %>
+<%# field_label  = "Other associated organisations" %>
+<%#= render MultiSelectComponent.new(@document, format_name, field_config, field_label, field_values) %>
