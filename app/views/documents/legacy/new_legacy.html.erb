@@ -17,7 +17,7 @@
                  html: { class: "new_document" } do |f| %>
       <%= render partial: "shared/legacy/form_fields_legacy", locals: { f: f } %>
 
-      <%= render partial: "shared/preview_govspeak", locals: {attachments: @document.attachments} %>
+      <%= render partial: "shared/legacy/preview_govspeak_legacy", locals: {attachments: @document.attachments} %>
 
       <%= render partial: "metadata_fields_legacy/#{params[:document_type_slug].underscore}", locals: { f: f } %>
 

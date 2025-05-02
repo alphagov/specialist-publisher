@@ -7,4 +7,5 @@
   textarea_id: "#{@document_type}_#{@facet_key}",
   rows: 3,
   value: @document.send(@facet_key),
+  error_items: @error_items,
 } %>

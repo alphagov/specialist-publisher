@@ -53,6 +53,12 @@
         message: flash[:danger]
       } if flash[:danger] %>
 
+      <div class="govuk-grid-row">
+        <div class="govuk-grid-column-full">
+          <%= yield(:error_summary) %>
+        </div>
+      </div>
+
       <% if yield(:title).present? %>
         <div class="govuk-grid-row">
           <div class="govuk-grid-column-full">

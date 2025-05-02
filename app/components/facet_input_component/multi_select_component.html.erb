@@ -10,5 +10,5 @@
   add_button_text: "Add another #{@facet_name.downcase}",
   margin_bottom: 6,
   items: pre_selected_items,
-  empty: template_add_another,
+  empty: template_add_another(pre_selected_items.count),
 } %>
