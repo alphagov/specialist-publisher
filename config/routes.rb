@@ -24,6 +24,8 @@ Rails.application.routes.draw do
   post "/admin/metadata/:document_type_slug", to: "admin#confirm_metadata"
   post "/admin/zendesk/:document_type_slug", to: "admin#zendesk"
 
+  resources :finders
+
   resources :documents, path: "/:document_type_slug", param: :content_id_and_locale, except: :destroy do
     collection do
       resource :export, only: %i[show create], as: :export_documents
