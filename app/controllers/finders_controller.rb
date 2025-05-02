@@ -81,6 +81,7 @@ private
       :base_path,
       :description,
       :summary,
+      :body_template,
       :show_summaries,
       :show_metadata_block,
       :show_table_of_contents,

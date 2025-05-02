@@ -28,6 +28,7 @@ class FinderSchema
   attribute :base_path
   attribute :beta
   attribute :beta_message
+  attribute :body_template
   attribute :content_id
   attribute :default_order
   attribute :description

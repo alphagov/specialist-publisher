@@ -169,4 +169,16 @@
   hint: "For example ‘scheme’. See 'Full document noun' above"
 } %>
 
+<%= render "govuk_publishing_components/components/textarea", {
+  label: {
+    text: "Body template (optional)",
+    heading_size: "s",
+  },
+  hint: "A template to help users fill out the body of the document. This will prepopulate the body textarea.",
+  name: "body_template",
+  rows: 10,
+  value: schema.body_template,
+} %>
+
+
 <%= render EmailAlertFieldsetComponent.new(email_alert: EmailAlert.from_finder_schema(schema)) %>
