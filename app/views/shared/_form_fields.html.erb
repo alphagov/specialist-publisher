@@ -32,7 +32,7 @@
   id: "#{format_name}_body",
   name: "#{format_name}[body]",
   rows: 20,
-  value: @document.body,
+  value: @document.body || @document.finder_schema.body_template,
   error_items: errors_for(@document.errors, :body),
 } %>
 
