@@ -19,7 +19,7 @@ RSpec.feature "Editing the Trademark Decisions finder filters and options", type
   end
 
   scenario "editing, deleting and adding new filters" do
-    visit "admin/trademark-decisions"
+    visit "finders/trademark-decisions"
     within "#facets_summary_card" do
       click_link "Request changes"
     end

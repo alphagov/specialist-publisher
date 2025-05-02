@@ -4,11 +4,11 @@
     breadcrumbs: [
       {
         title: "All finders",
-        url: root_path
+        url: finders_path
       },
       {
         title: "#{current_format.title} finder",
-        url: "/admin/#{current_format.admin_slug}"
+        url: finder_path(current_format.admin_slug)
       }
     ]
   } %>
@@ -33,7 +33,7 @@
         },
         {
           label: "Finder setup",
-          href: "/admin/#{current_format.admin_slug}",
+          href: finder_path(current_format.admin_slug),
           current: true,
         },
       ]
@@ -58,7 +58,7 @@
       If you expect multiple changes over a period of time, it will be much more efficient to group these in one request.
     </p>
 
-    <%= render "metadata_summary_card", {
+    <%= render "admin/metadata_summary_card", {
       schema: current_format.finder_schema,
       summary_card_actions: [
         {
@@ -68,7 +68,7 @@
       ],
     } %>
 
-    <%= render "facets_summary_card", {
+    <%= render "admin/facets_summary_card", {
       schema: current_format.finder_schema,
       summary_card_actions: [
         {

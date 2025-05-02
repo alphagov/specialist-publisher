@@ -32,7 +32,7 @@
           text: "Submit changes"
         } %>
 
-        <%= link_to("Cancel", "/admin/#{current_format.admin_slug}", class: "govuk-link govuk-link--no-visited-state") %>
+        <%= link_to("Cancel", finder_path(current_format.admin_slug), class: "govuk-link govuk-link--no-visited-state") %>
       </div>
     <% end %>
   </div>

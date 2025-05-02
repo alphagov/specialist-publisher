@@ -31,5 +31,25 @@ RSpec.describe FindersController, type: :controller do
         expect(response.status).to eq(200)
       end
     end
+
+    describe "GET show" do
+      it "responds successfully" do
+        log_in_as_design_system_gds_editor
+        stub_publishing_api_has_content([], hash_including(document_type: Organisation.document_type))
+        get :show, params: { document_type_slug: "asylum-support-decisions" }
+        assert_response :ok
+        within "form" do
+          assert_select "textarea[name=\"editorial_remark\"]"
+        end
+      end
+
+      it "denies access for a user without permission to access the finder" do
+        log_in_as FactoryBot.create(:cma_editor)
+        stub_publishing_api_has_content([], hash_including(document_type: Organisation.document_type))
+        get :show, params: { document_type_slug: "asylum-support-decisions" }
+        assert_redirected_to root_path
+        assert flash[:danger].present?
+      end
+    end
   end
 end

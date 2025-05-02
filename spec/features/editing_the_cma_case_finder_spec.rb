@@ -19,7 +19,7 @@ RSpec.feature "Editing the CMA case finder", type: :feature do
   end
 
   scenario "changing all fields" do
-    visit "admin/cma-cases"
+    visit "finders/cma-cases"
     within "#metadata_summary_card" do
       click_link "Request changes"
     end
@@ -58,7 +58,7 @@ RSpec.feature "Editing the CMA case finder", type: :feature do
   end
 
   scenario "deleting all fields" do
-    visit "admin/cma-cases"
+    visit "finders/cma-cases"
     within "#metadata_summary_card" do
       click_link "Request changes"
     end

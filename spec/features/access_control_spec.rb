@@ -29,22 +29,8 @@ RSpec.feature "Access control", type: :feature do
       expect(page).to have_content("CMA Cases")
     end
 
-    scenario "visiting admin/cma-cases is allowed" do
-      visit "admin/cma-cases"
-
-      expect(page.status_code).to eq(200)
-      expect(page).to have_content("CMA Case finder")
-    end
-
     scenario "visiting /aaib-reports is rejected" do
       visit "/aaib-reports"
-
-      expect(page.current_path).to eq("/cma-cases")
-      expect(page).to have_content("You aren't permitted to access AAIB Reports")
-    end
-
-    scenario "visiting admin/aaib-reports is rejected" do
-      visit "admin/aaib-reports"
 
       expect(page.current_path).to eq("/cma-cases")
       expect(page).to have_content("You aren't permitted to access AAIB Reports")

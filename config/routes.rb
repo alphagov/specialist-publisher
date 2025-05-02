@@ -15,14 +15,13 @@ Rails.application.routes.draw do
 
   resources :document_list_export_request, path: "/export/:document_type_slug", param: :export_id, only: [:show]
 
-  get "/admin/:document_type_slug", to: "admin#summary", as: :administrate_finder
   get "/admin/facets/:document_type_slug", to: "admin#edit_facets"
   post "/admin/facets/:document_type_slug", to: "admin#confirm_facets"
   get "/admin/metadata/:document_type_slug", to: "admin#edit_metadata"
   post "/admin/metadata/:document_type_slug", to: "admin#confirm_metadata"
   post "/admin/zendesk/:document_type_slug", to: "admin#zendesk"
 
-  resources :finders
+  resources :finders, param: :document_type_slug
 
   resources :documents, path: "/:document_type_slug", param: :content_id_and_locale, except: :destroy do
     collection do

@@ -13,8 +13,8 @@ RSpec.feature "Viewing the admin summary for CMA cases", type: :feature do
     stub_publishing_api_has_content(organisations, hash_including(document_type: Organisation.document_type))
   end
 
-  scenario "viewing admin/cma-cases should display details of the CMA Case finder" do
-    visit "admin/cma-cases"
+  scenario "viewing finders/cma-cases should display details of the CMA Case finder" do
+    visit "finders/cma-cases"
     expect(page).to have_selector("h1", text: "CMA Case finder")
     expect(page).to have_selector("dt", text: "This case finder includes cases and projects from the Competition and Markets Authority (CMA), Office for the Internal Market (OIM) and Subsidy Advice Unit (SAU)")
     expect(page).to have_selector(".govspeak", text: "This case finder includes cases and projects from the Competition and Markets Authority (CMA), Office for the Internal Market (OIM) and Subsidy Advice Unit (SAU)")

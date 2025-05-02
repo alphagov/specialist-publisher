@@ -23,6 +23,10 @@ class FindersController < ApplicationController
     render :new
   end
 
+  def show
+    authorize current_format
+  end
+
   def metadata_params
     params.permit(
       :name,

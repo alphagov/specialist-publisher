@@ -19,7 +19,7 @@ RSpec.feature "Editing the CMA case finder filters and options", type: :feature 
   end
 
   scenario "editing, deleting and adding new filters" do
-    visit "admin/cma-cases"
+    visit "finders/cma-cases"
     within "#facets_summary_card" do
       click_link "Request changes"
     end

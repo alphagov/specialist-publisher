@@ -12,17 +12,6 @@ RSpec.describe AdminController, type: :controller do
     log_in_as user
   end
 
-  describe "GET summary" do
-    it "responds successfully" do
-      stub_publishing_api_has_content([], hash_including(document_type: Organisation.document_type))
-      get :summary, params: { document_type_slug: "asylum-support-decisions" }
-      expect(response.status).to eq(200)
-      within "form" do
-        assert_select "textarea[name=\"editorial_remark\"]"
-      end
-    end
-  end
-
   describe "GET edit metadata" do
     it "responds successfully" do
       stub_publishing_api_has_content([], hash_including(document_type: Organisation.document_type))
