@@ -7,9 +7,9 @@
   add_button_text: "Add another filter",
   items: schema.facets.each_with_index.map do  |facet, index|
     {
-      fields: render(partial: "facet_fields", locals: { facet:, index: }),
+      fields: render(partial: "admin/facet_fields", locals: { facet:, index: }),
       destroy_checkbox: render("govuk_publishing_components/components/checkboxes", { name: "facets[#{index}][_destroy]", items: [{label: "Delete", value: "1" }]})
     }
   end,
-  empty: render(partial: "facet_fields", locals: { index: schema.facets.length }),
+  empty: render(partial: "admin/facet_fields", locals: { index: schema.facets.length }),
 } %>

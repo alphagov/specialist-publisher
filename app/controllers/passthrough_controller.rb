@@ -4,12 +4,10 @@ class PassthroughController < ApplicationController
   def index
     if current_user.preview_design_system?
       redirect_to finders_path
+    elsif first_permitted_format
+      redirect_to documents_path(document_type_slug: first_permitted_format.admin_slug)
     else
-      if first_permitted_format
-        redirect_to documents_path(document_type_slug: first_permitted_format.admin_slug)
-      else
-        redirect_to error_path
-      end
+      redirect_to error_path
     end
   end
 

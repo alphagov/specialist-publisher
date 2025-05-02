@@ -3,21 +3,6 @@ class AdminController < ApplicationController
 
   before_action :check_authorisation
 
-  def new
-    @proposed_schema = FinderSchema.new
-    @proposed_schema.facets = []
-  end
-
-  def create
-    @proposed_schema = FinderSchema.new
-    @proposed_schema.facets = []
-    @proposed_schema.content_id = SecureRandom.uuid
-    overwrite_with_facets_params(@proposed_schema)
-    overwrite_with_metadata_params(@proposed_schema)
-
-    render :new
-  end
-
   def summary; end
 
   def edit_facets; end

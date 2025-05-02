@@ -17,15 +17,15 @@ RSpec.feature "Generating a new finder", type: :feature do
   end
 
   scenario "visiting the empty form" do
-    visit "admin/new"
+    visit new_finder_path
 
     expect(page).to_not have_selector(".govuk-details")
-    expect(page).to have_selector("form[action='/admin/new'][method='post']")
+    expect(page).to have_selector("form[action='#{finders_path}'][method='post']")
     expect(page).to have_button("Generate schema")
   end
 
   scenario "submitting the filled in form and seeing a generated schema and retained inputs" do
-    visit "admin/new"
+    visit new_finder_path
 
     fill_in("Title of the finder", with: "Some title")
     choose "Yes. Allow users to sign up for updates using a signup link."
@@ -38,7 +38,7 @@ RSpec.feature "Generating a new finder", type: :feature do
   end
 
   scenario "setting show_metadata_block value and generating a schema" do
-    visit "admin/new"
+    visit new_finder_path
 
     fill_in("Title of the finder", with: "Finder with metadata block")
     choose("Yes", name: "show_metadata_block")
@@ -50,7 +50,7 @@ RSpec.feature "Generating a new finder", type: :feature do
   end
 
   scenario "setting show_table_of_contents value and generating a schema" do
-    visit "admin/new"
+    visit new_finder_path
 
     fill_in("Title of the finder", with: "Finder with contents list")
     choose("Yes", name: "show_table_of_contents")
