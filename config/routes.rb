@@ -15,14 +15,13 @@ Rails.application.routes.draw do
 
   resources :document_list_export_request, path: "/export/:document_type_slug", param: :export_id, only: [:show]
 
-  post "/admin/zendesk/:document_type_slug", to: "admin#zendesk"
-
   resources :finders, param: :document_type_slug do
     member do
       get :metadata, action: :edit_metadata
       post :metadata, action: :update_metadata
       get :facets, action: :edit_facets
       post :facets, action: :update_facets
+      post :zendesk, action: :zendesk
     end
   end
 

@@ -12,7 +12,7 @@
 
     <%= render(partial: "admin/diff", locals: { old_schema: @current_format.finder_schema, new_schema: @proposed_schema }) %>
 
-    <%= form_tag "/admin/zendesk/#{current_format.admin_slug}", method: 'post' do %>
+    <%= form_tag(zendesk_finder_path(current_format.admin_slug)) do %>
       <%= render "govuk_publishing_components/components/textarea", {
         name: "editorial_remark",
         id: "editorial_remark",
