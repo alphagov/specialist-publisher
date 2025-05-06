@@ -7,6 +7,16 @@ module OrganisationsHelper
     organisation.presence || current_user.organisation_content_id
   end
 
+  def organisations_select_options(selected_organisation_content_id = nil)
+    all_organisations.map { |organisation|
+      {
+        text: organisation.title,
+        value: organisation.content_id,
+        selected: organisation.content_id == selected_organisation_content_id
+      }
+    }.sort_by { |option| option[:text].downcase.strip }
+  end
+
 private
 
   def all_organisations
