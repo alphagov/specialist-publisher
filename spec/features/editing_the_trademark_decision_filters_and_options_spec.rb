@@ -19,7 +19,7 @@ RSpec.feature "Editing the Trademark Decisions finder filters and options", type
   end
 
   scenario "editing, deleting and adding new filters" do
-    visit "admin/trademark-decisions"
+    visit "finders/trademark-decisions"
     within "#facets_summary_card" do
       click_link "Request changes"
     end
@@ -63,7 +63,7 @@ RSpec.feature "Editing the Trademark Decisions finder filters and options", type
   end
 
   scenario "the generated schema is outputted to a hidden input ready for form submission" do
-    visit "admin/facets/trademark-decisions"
+    visit "finders/trademark-decisions/facets"
     click_button "Submit changes"
     hidden_input = find("[name=proposed_schema]", visible: false)
     expect(hidden_input.value).to eq(JSON.pretty_generate(JSON.parse(TrademarkDecision.finder_schema.to_json)))

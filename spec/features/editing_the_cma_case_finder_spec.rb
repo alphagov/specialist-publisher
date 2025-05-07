@@ -19,7 +19,7 @@ RSpec.feature "Editing the CMA case finder", type: :feature do
   end
 
   scenario "changing all fields" do
-    visit "admin/cma-cases"
+    visit "finders/cma-cases"
     within "#metadata_summary_card" do
       click_link "Request changes"
     end
@@ -58,7 +58,7 @@ RSpec.feature "Editing the CMA case finder", type: :feature do
   end
 
   scenario "deleting all fields" do
-    visit "admin/cma-cases"
+    visit "finders/cma-cases"
     within "#metadata_summary_card" do
       click_link "Request changes"
     end
@@ -93,20 +93,20 @@ RSpec.feature "Editing the CMA case finder", type: :feature do
   end
 
   scenario "fields are not shown on the confirmation page if not changed" do
-    visit "admin/metadata/cma-cases"
+    visit "finders/cma-cases/metadata"
     click_button "Submit changes"
     expect(page).not_to have_selector("dt")
   end
 
   scenario "the generated schema is outputted to a hidden input ready for form submission" do
-    visit "admin/metadata/cma-cases"
+    visit "finders/cma-cases/metadata"
     click_button "Submit changes"
     hidden_input = find("[name=proposed_schema]", visible: false)
     expect(hidden_input.value).to eq(JSON.pretty_generate(JSON.parse(CmaCase.finder_schema.to_json)))
   end
 
   scenario "unchecking 'Any related links on GOV.UK?' removes related links" do
-    visit "admin/metadata/cma-cases"
+    visit "finders/cma-cases/metadata"
 
     uncheck "include_related"
 

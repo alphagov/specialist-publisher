@@ -6,6 +6,7 @@ module AuthenticationControllerHelpers
       authenticated?: true,
       user:,
     )
+    user
   end
 
   def log_in_as_gds_editor

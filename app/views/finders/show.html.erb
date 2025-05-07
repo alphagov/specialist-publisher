@@ -4,11 +4,11 @@
     breadcrumbs: [
       {
         title: "All finders",
-        url: root_path
+        url: finders_path
       },
       {
         title: "#{current_format.title} finder",
-        url: "/admin/#{current_format.admin_slug}"
+        url: finder_path(current_format.admin_slug)
       }
     ]
   } %>
@@ -33,7 +33,7 @@
         },
         {
           label: "Finder setup",
-          href: "/admin/#{current_format.admin_slug}",
+          href: finder_path(current_format.admin_slug),
           current: true,
         },
       ]
@@ -63,7 +63,7 @@
       summary_card_actions: [
         {
           label: "Request changes",
-          href: "/admin/metadata/#{current_format.admin_slug}"
+          href: metadata_finder_path(current_format.admin_slug)
         },
       ],
     } %>
@@ -73,7 +73,7 @@
       summary_card_actions: [
         {
           label: "Request changes",
-          href: "/admin/facets/#{current_format.admin_slug}"
+          href: facets_finder_path(current_format.admin_slug)
         },
       ],
     } %>

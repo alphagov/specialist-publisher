@@ -1,14 +1,17 @@
-class AdminController < ApplicationController
+class FindersController < ApplicationController
   layout "design_system"
-
-  before_action :check_authorisation
+  def index
+    authorize FinderSchema, :index?
+  end
 
   def new
+    authorize FinderSchema, :can_request_new_finder?
     @proposed_schema = FinderSchema.new
     @proposed_schema.facets = []
   end
 
   def create
+    authorize FinderSchema, :can_request_new_finder?
     @proposed_schema = FinderSchema.new
     @proposed_schema.facets = []
     @proposed_schema.content_id = SecureRandom.uuid
@@ -18,46 +21,40 @@ class AdminController < ApplicationController
     render :new
   end
 
-  def summary; end
-
-  def edit_facets; end
-
-  def edit_metadata; end
-
-  def confirm_facets
-    @proposed_schema = FinderSchema.new(@current_format.finder_schema.attributes)
-    overwrite_with_facets_params(@proposed_schema)
-
-    render :confirm_facets
+  def show
+    authorize current_format
   end
 
-  def confirm_metadata
-    @proposed_schema = FinderSchema.new(@current_format.finder_schema.attributes)
-    overwrite_with_metadata_params(@proposed_schema)
+  def edit_metadata
+    authorize current_format
+  end
 
-    render :confirm_metadata
+  def update_metadata
+    authorize current_format
+    @proposed_schema = FinderSchema.new(current_format.finder_schema.attributes)
+    overwrite_with_metadata_params(@proposed_schema)
+  end
+
+  def edit_facets
+    authorize current_format
+  end
+
+  def update_facets
+    authorize current_format
+    @proposed_schema = FinderSchema.new(current_format.finder_schema.attributes)
+    overwrite_with_facets_params(@proposed_schema)
   end
 
   def zendesk
+    authorize current_format
     GdsApi.support_api.raise_support_ticket(support_payload)
-    redirect_to "/admin/#{current_format.admin_slug}", notice: "Your changes have been submitted and Zendesk ticket created."
+    redirect_to finder_path(current_format.admin_slug), notice: "Your changes have been submitted and Zendesk ticket created."
   rescue GdsApi::HTTPErrorResponse
     flash[:danger] = "There was an error submitting your request. Please try again."
     redirect_back(fallback_location: root_path)
   end
 
 private
-
-  def check_authorisation
-    if !document_type_slug
-      authorize current_user, :can_request_new_finder?, policy_class: FinderAdministrationPolicy
-    elsif current_format
-      authorize current_format
-    else
-      flash[:danger] = "That format doesn't exist. If you feel you've reached this in error, please contact your main GDS contact."
-      redirect_to root_path
-    end
-  end
 
   def support_payload
     {
@@ -148,7 +145,7 @@ private
       next if facet_params["_destroy"] == "1"
 
       Facet.from_finder_admin_form_params(facet_params)
-          .to_finder_schema_attributes
+           .to_finder_schema_attributes
     }.compact
     proposed_schema.update(params_to_overwrite)
   end

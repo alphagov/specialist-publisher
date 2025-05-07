@@ -8,11 +8,11 @@
       },
       {
         title: "#{current_format.title} finder",
-        url: "/admin/#{current_format.admin_slug}"
+        url: finder_path(current_format.admin_slug)
       },
       {
         title: "Request change",
-        url: "/admin/metadata/#{current_format.admin_slug}"
+        url: metadata_finder_path(current_format.admin_slug)
       },
       {
         title: "Check changes",
