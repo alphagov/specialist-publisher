@@ -58,7 +58,7 @@
       If you expect multiple changes over a period of time, it will be much more efficient to group these in one request.
     </p>
 
-    <%= render "admin/metadata_summary_card", {
+    <%= render "metadata_summary_card", {
       schema: current_format.finder_schema,
       summary_card_actions: [
         {
@@ -68,7 +68,7 @@
       ],
     } %>
 
-    <%= render "admin/facets_summary_card", {
+    <%= render "facets_summary_card", {
       schema: current_format.finder_schema,
       summary_card_actions: [
         {

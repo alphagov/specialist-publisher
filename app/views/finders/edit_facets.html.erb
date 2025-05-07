@@ -25,7 +25,7 @@
 <div class="govuk-grid-row govuk-!-margin-top-6">
   <div class="govuk-grid-column-two-thirds">
     <%= form_tag(facets_finder_path(current_format.admin_slug)) do %>
-      <%= render "admin/facets_form_fields", { schema: current_format.finder_schema } %>
+      <%= render "facets_form_fields", { schema: current_format.finder_schema } %>
 
       <div class="govuk-button-group govuk-!-margin-top-8">
         <%= render "govuk_publishing_components/components/button", {
