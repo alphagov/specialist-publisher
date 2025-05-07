@@ -66,8 +66,140 @@
     {
       "allowed_values": [
         {
-          "label": "Placeholder organisation",
-          "value": "placeholder-organisation"
+          "label": "Animal and Plant Health Agency (APHA)",
+          "value": "animal-and-plant-health-agency-apha"
+        },
+        {
+          "label": "Department of Health and Social Care",
+          "value": "department-of-health-and-social-care"
+        },
+        {
+          "label": "Durham University",
+          "value": "durham-university"
+        },
+        {
+          "label": "European Centre for Disease Prevention and Control (ECDC)",
+          "value": "european-centre-for-disease-prevention-and-control-ecdc"
+        },
+        {
+          "label": "Genomics England Limited",
+          "value": "genomics-england-limited"
+        },
+        {
+          "label": "Healthcare Quality Improvement Partnership (HQIP)",
+          "value": "healthcare-quality-improvement-partnership-hqip"
+        },
+        {
+          "label": "Imperial College of Science, Technology and Medicine",
+          "value": "imperial-college-of-science-technology-and-medicine"
+        },
+        {
+          "label": "King’s College London",
+          "value": "kings-college-london"
+        },
+        {
+          "label": "Lancaster University",
+          "value": "lancaster-university"
+        },
+        {
+          "label": "London School of Hygiene and Tropical Medicine",
+          "value": "london-school-of-hygiene-and-tropical-medicine"
+        },
+        {
+          "label": "Medicines and Healthcare products Regulatory Agency (“MHRA”)",
+          "value": "medicines-and-healthcare-products-regulatory-agency-mhra"
+        },
+        {
+          "label": "Newcastle University",
+          "value": "newcastle-university"
+        },
+        {
+          "label": "NHS Blood and Transplant (NHSBT)",
+          "value": "nhs-blood-and-transplant-nhsbt"
+        },
+        {
+          "label": "NHS England",
+          "value": "nhs-england"
+        },
+        {
+          "label": "Office for National Statistics",
+          "value": "office-for-national-statistics"
+        },
+        {
+          "label": "Public Health Wales",
+          "value": "public-health-wales"
+        },
+        {
+          "label": "Regional Agency for Public Health & Social Well-being, Public Health Agency (PHA)",
+          "value": "regional-agency-for-public-health--social-wellbeing-public-health-agency-pha"
+        },
+        {
+          "label": "South London and Maudsley NHS Foundation Trust",
+          "value": "south-london-and-maudsley-nhs-foundation-trust"
+        },
+        {
+          "label": "The Renal Association",
+          "value": "the-renal-association"
+        },
+        {
+          "label": "University College London",
+          "value": "university-college-london"
+        },
+        {
+          "label": "University of Birmingham",
+          "value": "university-of-birmingham"
+        },
+        {
+          "label": "University of Bristol",
+          "value": "university-of-bristol"
+        },
+        {
+          "label": "University of Cambridge",
+          "value": "university-of-cambridge"
+        },
+        {
+          "label": "University of Cardiff",
+          "value": "university-of-cardiff"
+        },
+        {
+          "label": "University of East Anglia",
+          "value": "university-of-east-anglia"
+        },
+        {
+          "label": "University of Edinburgh",
+          "value": "university-of-edinburgh"
+        },
+        {
+          "label": "University of Exeter",
+          "value": "university-of-exeter"
+        },
+        {
+          "label": "University of Leicester",
+          "value": "university-of-leicester"
+        },
+        {
+          "label": "University of Liverpool",
+          "value": "university-of-liverpool"
+        },
+        {
+          "label": "University of Manchester",
+          "value": "university-of-manchester"
+        },
+        {
+          "label": "University of Nottingham",
+          "value": "university-of-nottingham"
+        },
+        {
+          "label": "University of Oxford",
+          "value": "university-of-oxford"
+        },
+        {
+          "label": "University of Southampton",
+          "value": "university-of-southampton"
+        },
+        {
+          "label": "University of Warwick",
+          "value": "university-of-warwick"
         }
       ],
       "display_as_result_metadata": true,
@@ -87,8 +219,8 @@
     {
       "allowed_values": [
         {
-        "label": "Academia (University)",
-        "value": "academia-university"
+          "label": "Academia (University)",
+          "value": "academia-university"
         },
         {
           "label": "Charity",
