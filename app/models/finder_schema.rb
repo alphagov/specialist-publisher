@@ -32,6 +32,7 @@ class FinderSchema
   attribute :facets, default: []
   attribute :filter
   attribute :show_table_of_contents, :boolean, default: false
+  attribute :body_template
   attribute :label_text
   attribute :name
   attribute :organisations, default: []
