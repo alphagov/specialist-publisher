@@ -8,7 +8,7 @@
       },
       {
         title: "#{current_format.title} finder",
-        url: "/admin/#{current_format.admin_slug}"
+        url: finder_path(current_format.admin_slug)
       },
       {
         title: "Request change",
@@ -18,21 +18,21 @@
   } %>
 <% end %>
 <% content_for :page_title, "Edit #{current_format.title} finder" %>
-<% content_for :title, "Request change: Filters and options" %>
+<% content_for :title, "Request change: Finder details" %>
 <% content_for :context, "#{current_format.title} finder" %>
 
 
-<div class="govuk-grid-row govuk-!-margin-top-6">
+<div class="govuk-grid-row govuk-!-margin-top-7">
   <div class="govuk-grid-column-two-thirds">
-    <%= form_tag do %>
-      <%= render "facets_form_fields", { schema: current_format.finder_schema } %>
+    <%= form_tag(metadata_finder_path(current_format.admin_slug)) do %>
+      <%= render "admin/metadata_form_fields", { schema: current_format.finder_schema } %>
 
       <div class="govuk-button-group govuk-!-margin-top-8">
         <%= render "govuk_publishing_components/components/button", {
           text: "Submit changes",
         } %>
 
-        <%= link_to("Cancel", "/admin/#{current_format.admin_slug}", class: "govuk-link govuk-link--no-visited-state") %>
+        <%= link_to("Cancel", finder_path(current_format.admin_slug), class: "govuk-link govuk-link--no-visited-state") %>
       </div>
     <% end %>
   </div>

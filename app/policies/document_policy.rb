@@ -17,8 +17,10 @@ class DocumentPolicy < ApplicationPolicy
   alias_method :summary?, :can_request_edits_to_finder?
   alias_method :edit_facets?, :can_request_edits_to_finder?
   alias_method :confirm_facets?, :can_request_edits_to_finder?
+  alias_method :update_facets?, :can_request_edits_to_finder?
   alias_method :edit_metadata?, :can_request_edits_to_finder?
   alias_method :confirm_metadata?, :can_request_edits_to_finder?
+  alias_method :update_metadata?, :can_request_edits_to_finder?
   alias_method :zendesk?, :can_request_edits_to_finder?
 
   def publish?

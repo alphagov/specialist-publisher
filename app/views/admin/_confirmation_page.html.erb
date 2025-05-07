@@ -10,7 +10,7 @@
       previous_schema: @current_format.finder_schema,
     } %>
 
-    <%= render(partial: "diff", locals: { old_schema: @current_format.finder_schema, new_schema: @proposed_schema }) %>
+    <%= render(partial: "admin/diff", locals: { old_schema: @current_format.finder_schema, new_schema: @proposed_schema }) %>
 
     <%= form_tag "/admin/zendesk/#{current_format.admin_slug}", method: 'post' do %>
       <%= render "govuk_publishing_components/components/textarea", {

@@ -25,6 +25,26 @@ class FindersController < ApplicationController
     authorize current_format
   end
 
+  def edit_metadata
+    authorize current_format
+  end
+
+  def update_metadata
+    authorize current_format
+    @proposed_schema = FinderSchema.new(current_format.finder_schema.attributes)
+    overwrite_with_metadata_params(@proposed_schema)
+  end
+
+  def edit_facets
+    authorize current_format
+  end
+
+  def update_facets
+    authorize current_format
+    @proposed_schema = FinderSchema.new(current_format.finder_schema.attributes)
+    overwrite_with_facets_params(@proposed_schema)
+  end
+
   def metadata_params
     params.permit(
       :name,

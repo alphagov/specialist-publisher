@@ -8,11 +8,11 @@
       },
       {
         title: "#{current_format.title} finder",
-        url: "/admin/#{current_format.admin_slug}"
+        url: finder_path(current_format.admin_slug)
       },
       {
         title: "Request change",
-        url: "/admin/facets/#{current_format.admin_slug}"
+        url: facets_finder_path(current_format.admin_slug)
       },
       {
         title: "Check changes",
@@ -22,6 +22,6 @@
   } %>
 <% end %>
 
-<%= render "confirmation_page", {
-  summary_card_template: "facets_summary_card",
+<%= render "admin/confirmation_page", {
+  summary_card_template: "admin/facets_summary_card",
 } %>
