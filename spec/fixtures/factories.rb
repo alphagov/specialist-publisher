@@ -109,6 +109,17 @@ FactoryBot.define do
     SecureRandom.uuid
   end
 
+  factory :finder_schema do
+    content_id
+    name { "Example Finder Schema" }
+    document_title { "Example Document" }
+    target_stack { "live" }
+
+    trait :draft do
+      target_stack { "draft" }
+    end
+  end
+
   factory :document, class: Hash do
     content_id
     base_path { "/example-document" }

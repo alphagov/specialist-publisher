@@ -19,6 +19,10 @@ class FinderSchema
     new.from_json(File.read(Rails.root.join("lib/documents/schemas/#{type}.json")))
   end
 
+  def self.all
+    schema_names.map { |schema_name| load_from_schema(schema_name) }
+  end
+
   attribute :base_path
   attribute :beta
   attribute :beta_message
@@ -57,6 +61,10 @@ class FinderSchema
 
   def as_json(options = nil)
     super.compact.reject { |_k, v| v.blank? }
+  end
+
+  def admin_slug
+    document_title.parameterize.pluralize
   end
 
   def format

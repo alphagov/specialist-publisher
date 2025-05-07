@@ -30,7 +30,9 @@ private
   end
 
   def formats_user_can_access
-    document_models.select { |model| policy(model).index? }
+    FinderSchema.all.filter do |schema|
+      policy(schema).index?
+    end
   end
 
   def document_models

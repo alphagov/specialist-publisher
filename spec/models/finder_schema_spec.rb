@@ -25,6 +25,16 @@ RSpec.describe FinderSchema do
     end
   end
 
+  describe ".all" do
+    it "loads all of the schemas" do
+      schemas = FinderSchema.all
+      expect(schemas.size).to be >= 0
+      schemas.each do |schema|
+        expect(schema).to be_a(FinderSchema)
+      end
+    end
+  end
+
   describe "#as_json" do
     it "excludes nil values" do
       schema = FinderSchema.new(mandatory_properties)
@@ -36,6 +46,13 @@ RSpec.describe FinderSchema do
       schema = FinderSchema.new(mandatory_properties)
       schema.summary = ""
       expect(schema.as_json.key?(:summary)).to be_falsey
+    end
+  end
+
+  describe "#admin_slug" do
+    it "returns the admin slug derived from the document title" do
+      schema = FinderSchema.new(mandatory_properties.merge({ "document_title" => "Some Long Title" }))
+      expect(schema.admin_slug).to eq("some-long-titles")
     end
   end
 

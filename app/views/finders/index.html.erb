@@ -12,14 +12,4 @@
 <% content_for :page_title, "All finders" %>
 <% content_for :title, "All finders" %>
 
-<section id="finders-table-section">
-  <%= render "govuk_publishing_components/components/table", {
-    first_cell_is_header: true,
-    head: [
-      {
-        text: "Title"
-      },
-    ],
-    rows: formats_user_can_access.sort_by(&:title).map { |format| [{ text: format.title.pluralize }] }
-  } %>
-</section>
+<%= render(FindersListComponent.new(formats_user_can_access))  %>

@@ -29,4 +29,11 @@ class DocumentPolicy < ApplicationPolicy
 
   alias_method :unpublish?, :publish?
   alias_method :discard?, :publish?
+
+private
+
+  def user_organisation_owns_document_type?
+    subject.schema_organisations.include?(user.organisation_content_id) ||
+      subject.schema_editing_organisations.include?(user.organisation_content_id)
+  end
 end

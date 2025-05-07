@@ -8,6 +8,7 @@ $govuk-page-width: 1140px;
 @import 'govuk_publishing_components/components/checkboxes';
 @import 'govuk_publishing_components/components/date-input';
 @import 'govuk_publishing_components/components/details';
+@import 'govuk_publishing_components/components/document-list';
 @import 'govuk_publishing_components/components/error-alert';
 @import 'govuk_publishing_components/components/error-message';
 @import 'govuk_publishing_components/components/error-summary';
@@ -27,7 +28,6 @@ $govuk-page-width: 1140px;
 @import 'govuk_publishing_components/components/skip-link';
 @import 'govuk_publishing_components/components/success-alert';
 @import 'govuk_publishing_components/components/summary-card';
-@import 'govuk_publishing_components/components/table';
 @import 'govuk_publishing_components/components/textarea';
 
 @import "./components/govspeak-editor";

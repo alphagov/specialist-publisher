@@ -6,11 +6,11 @@ RSpec.describe FindersController, type: :controller do
   render_views
 
   describe "GET finder index page" do
-    it "renders the finders index table" do
+    it "renders the finders index list" do
       log_in_as_gds_editor
       get :index
       expect(response.status).to eq(200)
-      assert_select "#finders-table-section"
+      assert_select "#finders-list-section"
     end
   end
 

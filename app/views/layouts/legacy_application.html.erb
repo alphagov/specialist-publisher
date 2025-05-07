@@ -23,8 +23,8 @@
       <ul class="dropdown-menu" role="menu">
   <% end %>
 
-  <% formats_user_can_access.sort_by(&:title).each do |format| %>
-    <li><%= link_to format.title.pluralize, documents_path(format.admin_slug) %></li>
+  <% formats_user_can_access.sort_by(&:document_title).each do |format| %>
+    <li><%= link_to format.document_title.pluralize, documents_path(format.admin_slug) %></li>
   <% end %>
 
   <% if current_user.gds_editor? %>

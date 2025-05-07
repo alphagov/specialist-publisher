@@ -1,14 +1,9 @@
 class ApplicationPolicy
-  attr_reader :user, :document_class
+  attr_reader :user, :subject
 
-  def initialize(user, document_class)
+  def initialize(user, subject)
     @user = user
-    @document_class = document_class
-  end
-
-  def user_organisation_owns_document_type?
-    document_class.schema_organisations.include?(user.organisation_content_id) ||
-      document_class.schema_editing_organisations.include?(user.organisation_content_id)
+    @subject = subject
   end
 
   def departmental_editor?
@@ -22,6 +17,6 @@ class ApplicationPolicy
   delegate :gds_editor?, to: :user
 
   def document_type_editor?
-    user.permissions.include?("#{document_class.name.underscore}_editor")
+    user.permissions.include?("#{subject.name.underscore}_editor")
   end
 end
