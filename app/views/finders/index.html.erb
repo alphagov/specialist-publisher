@@ -12,14 +12,16 @@
 <% content_for :page_title, "All finders" %>
 <% content_for :title, "All finders" %>
 
-<section id="finders-table-section">
-  <%= render "govuk_publishing_components/components/table", {
-    first_cell_is_header: true,
-    head: [
+<section id="finders-list-section">
+  <%= render "govuk_publishing_components/components/document_list", {
+    items: formats_user_can_access.sort_by(&:title).map do |format|
       {
-        text: "Title"
-      },
-    ],
-    rows: formats_user_can_access.sort_by(&:title).map { |format| [{ text: format.title.pluralize }] }
+        link: {
+          text: format.title.pluralize,
+          path: finder_path(format.admin_slug),
+          description: format.description,
+        }
+      }
+    end
   } %>
 </section>

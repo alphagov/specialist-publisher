@@ -19,6 +19,12 @@ class FinderSchema
     new.from_json(File.read(Rails.root.join("lib/documents/schemas/#{type}.json")))
   end
 
+  def self.document_models
+    schema_names.map do |schema_name|
+      schema_name.singularize.camelize.constantize
+    end
+  end
+
   attribute :base_path
   attribute :beta
   attribute :beta_message

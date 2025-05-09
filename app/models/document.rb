@@ -298,6 +298,10 @@ class Document
     finder_schema.document_title
   end
 
+  def self.description
+    finder_schema.description
+  end
+
   def self.admin_slug
     title.parameterize.pluralize
   end
