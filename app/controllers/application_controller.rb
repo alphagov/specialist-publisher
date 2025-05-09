@@ -34,9 +34,7 @@ private
   end
 
   def document_models
-    @document_models ||= FinderSchema.schema_names.map do |schema_name|
-      schema_name.singularize.camelize.constantize
-    end
+    @document_models ||= FinderSchema.document_models
   end
 
   def set_authenticated_user_header

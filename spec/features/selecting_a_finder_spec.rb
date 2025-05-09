@@ -69,10 +69,7 @@ RSpec.feature "The root specialist-publisher page", type: :feature do
     it "has expected finders" do
       visit "/"
 
-      document_models = FinderSchema.schema_names.map do |schema_name|
-        schema_name.singularize.camelize.constantize
-      end
-      document_models.each do |document_model|
+      FinderSchema.document_models.each do |document_model|
         expect(page).to have_link(document_model.title.pluralize, href: finder_path(document_model.admin_slug))
       end
     end
