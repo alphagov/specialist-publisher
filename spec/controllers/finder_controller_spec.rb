@@ -7,7 +7,7 @@ RSpec.describe FindersController, type: :controller do
 
   describe "GET finder index page" do
     it "renders the finders index table" do
-      log_in_as_gds_editor
+      log_in_as FactoryBot.create(:writer)
       get :index
       expect(response.status).to eq(200)
       assert_select "#finders-list-section"
