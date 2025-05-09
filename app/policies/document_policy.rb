@@ -29,4 +29,23 @@ class DocumentPolicy < ApplicationPolicy
 
   alias_method :unpublish?, :publish?
   alias_method :discard?, :publish?
+
+private
+
+  def user_organisation_owns_document_type?
+    record.schema_organisations.include?(user.organisation_content_id) ||
+      record.schema_editing_organisations.include?(user.organisation_content_id)
+  end
+
+  def departmental_editor?
+    user_organisation_owns_document_type? && user.permissions.include?("editor")
+  end
+
+  def writer?
+    user_organisation_owns_document_type?
+  end
+
+  def document_type_editor?
+    user.permissions.include?("#{record.name.underscore}_editor")
+  end
 end

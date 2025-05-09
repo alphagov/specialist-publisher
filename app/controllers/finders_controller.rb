@@ -1,7 +1,7 @@
 class FindersController < ApplicationController
   layout "design_system"
   def index
-    authorize FinderSchema, :index?
+    skip_authorization
   end
 
   def new
