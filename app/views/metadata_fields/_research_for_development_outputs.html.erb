@@ -1,35 +1,36 @@
-<%= render layout: 'shared/form_group', locals: { f: f, field: :research_document_type, label: 'Document type' } do %>
-  <%=
-    f.select :research_document_type, select_options_for_facet(f.object.allowed_values(:research_document_type)),
-      { include_blank: true },
-      { class: 'select2', multiple: false, data: { placeholder: 'Select document type' } }
-  %>
-<% end %>
+<% format_name = f.object.class.finder_schema.filter["format"].to_sym %>
+<% schema = f.object.class.finder_schema %>
 
-<%= render layout: 'shared/form_group', locals: { f: f, field: :authors, label: 'Authors' } do %>
-  <%= f.text_field :author_tags, class: 'form-control free-form-list', data: { placeholder: 'Add authors' } %>
-<% end %>
+<% facet_key = :research_document_type %>
+<%= render FacetInputComponent.new(@document, schema, schema.get_facet(facet_key)) %>
 
-<%= render layout: 'shared/form_group', locals: { f: f, field: :country, label: 'Countries' } do %>
-  <%=
-    f.select :country, select_options_for_facet(f.object.allowed_values(:country)),
-      { include_blank: true },
-      { class: 'select2', multiple: true, data: { placeholder: 'Select countries' } }
-  %>
-<% end %>
+<% # TODO: Investigate what options we have for text input with selection %>
+<%= render "govuk_publishing_components/components/input", {
+  label: {
+    text: "Authors",
+    heading_size: "m",
+  },
+  name: "#{format_name}[authors]",
+  id: "#{format_name}_authors",
+  value: @document.authors,
+} %>
 
-<%= render layout: 'shared/form_group', locals: { f: f, field: :theme, label: 'Themes' } do %>
-  <%=
-    f.select :theme, select_options_for_facet(f.object.allowed_values(:theme)),
-             { include_blank: false },
-             { class: 'select2', multiple: true, data: { placeholder: 'Select themes' } }
-  %>
-<% end %>
-<%= render layout: "shared/legacy/date_fields_legacy", locals: { f: f, field: :first_published_at, format: :research_for_development_output } do %>
-<% end %>
-<% # TODO: this field prevents us moving to the shared view. It uses this weird 'ResearchForDevelopmentOutputsHelper' helper %>
-<%= render layout: 'shared/form_group', locals: { f: f, field: :review_status, label: 'Review status' } do %>
-  <%= f.select :review_status, review_status_options,
-    {},
-    { class: 'form-control' } %>
-<% end %>
+<% facet_key = :country %>
+<%= render FacetInputComponent.new(@document, schema, schema.get_facet(facet_key)) %>
+
+<% facet_key = :theme %>
+<%= render FacetInputComponent.new(@document, schema, schema.get_facet(facet_key)) %>
+
+<% # TODO: Investigate if this date format is correct %>
+<% facet_key = :first_published_at %>
+<%= render FacetInputComponent.new(@document, schema, schema.get_facet(facet_key)) %>
+
+<%= render "govuk_publishing_components/components/select", {
+  id: "#{@document_type}_review_status",
+  name: "#{@document_type}[review_status]",
+  label: "Review status",
+  heading_size: "m",
+  full_width: true,
+  error_message: errors_for_input(@document.errors, :review_status),
+  options: review_status_options,
+} %>

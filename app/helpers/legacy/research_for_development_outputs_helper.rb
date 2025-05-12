@@ -1,4 +1,4 @@
-module ResearchForDevelopmentOutputsHelper
+module Legacy::ResearchForDevelopmentOutputsHelper
   ##
   # Only exists here - rather than in the finder schema - because
   # specialist-frontend won't allow us to suppress any metadata that's
@@ -12,14 +12,8 @@ module ResearchForDevelopmentOutputsHelper
   #
   def review_status_options
     [
-      {
-        text: "Unreviewed",
-        value: "unreviewed",
-      },
-      {
-        text: "Peer reviewed",
-        value: "peer_reviewed",
-      },
+      ["Unreviewed",    "unreviewed"],
+      ["Peer reviewed", "peer_reviewed"],
     ]
   end
 end
