@@ -21,6 +21,7 @@ class DocumentsController < ApplicationController
     end
     @response = current_format.all(page, per_page, query: @query, organisation: @organisation)
     @paged_documents = PaginationPresenter.new(@response, per_page)
+    render design_system_view(:index, "documents/legacy/index_legacy")
   end
 
   def new
@@ -95,7 +96,7 @@ class DocumentsController < ApplicationController
 private
 
   def get_layout
-    if %w[new create].include?(action_name) && current_user.preview_design_system?
+    if %w[new create index].include?(action_name) && current_user.preview_design_system?
       "design_system"
     else
       "legacy_application"
