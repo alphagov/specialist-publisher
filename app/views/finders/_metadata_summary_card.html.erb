@@ -77,6 +77,10 @@
       value: (schema.document_noun || "").humanize
     } if !(defined? previous_schema) || schema.document_noun != previous_schema.document_noun),
     ({
+      key: "Body template (optional)",
+      value: sanitize("<div class='govspeak'>#{schema.body_template}</div>")
+    } if !(defined? previous_schema) || (!schema.body_template.blank? && (schema.body_template != previous_schema.body_template))),
+    ({
       key: "Would you like to set up email alerts for the finder?",
       value: email_alerts_value,
     } if email_alerts_value.present?)
