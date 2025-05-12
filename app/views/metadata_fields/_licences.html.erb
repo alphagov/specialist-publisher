@@ -1,60 +1,31 @@
-<%# You can select multiple class or categories so this has multi-select option %>
-<%= render layout: "shared/form_group", locals: { f: f, field: :licence_transaction_industry, label: "Industry" } do %>
-  <%= f.select :licence_transaction_industry,
-      select_options_for_facet(f.object.allowed_values(:licence_transaction_industry)),
-      { label: "Industry" },
-      {
-        class: 'select2 form-control',
-        multiple: true,
-        data: {
-          placeholder: 'Select industries'
-        }
-      }
-  %>
-<% end %>
+<% format_name = f.object.class.finder_schema.filter["format"].to_sym %>
+<% schema = f.object.class.finder_schema %>
 
-<%# You can select multiple class or categories so this has multi-select option %>
-<%= render layout: "shared/form_group", locals: { f: f, field: :licence_transaction_location, label: "Location" } do %>
-  <%= f.select :licence_transaction_location,
-      select_options_for_facet(f.object.allowed_values(:licence_transaction_location)),
-      { label: "Location" },
-      {
-        class: 'select2 form-control',
-        multiple: true,
-        data: {
-          placeholder: 'Select locations'
-        }
-      }
-  %>
-<% end %>
+<% facet_key = :licence_transaction_industry %>
+<%= render FacetInputComponent.new(@document, schema, schema.get_facet(facet_key)) %>
 
-<% # TODO: find a way of making organisation management schema-driven %>
-<%= render "shared/form_group", f: f, field: :primary_publishing_organisation, label: "Publishing organisation" do %>
-  <%= f.select :primary_publishing_organisation,
-               organisations_options_legacy,
-      { selected: selected_organisation_or_current(@document.primary_publishing_organisation) },
-      {
-        class: "select2 form-control",
-        multiple: false,
-        data: {
-          placeholder: "Select a primary publishing organisation"
-        }
-      }
-  %>
-<% end %>
-<%= render "shared/form_group", f: f, field: :organisations, label: "Other associated organisations" do %>
-  <%= f.select :organisations,
-               organisations_options_legacy,
-      {},
-      {
-        class: "select2 form-control select-all-disabled",
-        multiple: true,
-        data: {
-          placeholder: "Select organisations"
-        }
-      }
-  %>
-<% end %>
+<% facet_key = :licence_transaction_location %>
+<%= render FacetInputComponent.new(@document, schema, schema.get_facet(facet_key)) %>
+
+<%= render "govuk_publishing_components/components/select", {
+  id: "#{@document_type}_primary_publishing_organisation",
+  name: "#{@document_type}[primary_publishing_organisation]",
+  label: "Select a primary publishing organisation",
+  heading_size: "m",
+  full_width: true,
+  error_message: errors_for_input(@document.errors, :primary_publishing_organisation),
+  options: organisations_select_options,
+} %>
+
+<%= render "govuk_publishing_components/components/select", {
+  id: "#{@document_type}_organisations",
+  name: "#{@document_type}[organisations]",
+  label: "Select organisations",
+  heading_size: "m",
+  full_width: true,
+  error_message: errors_for_input(@document.errors, :organisations),
+  options: organisations_select_options,
+} %>
 
 <% # TODO: rendering a subset of the facet fields above (and a subset below) the proprietary code in this file %>
 <% # makes it difficult to use the shared view %>
@@ -66,18 +37,38 @@
       <p class="elements-error-message"><%= t("activemodel.errors.models.licence_transaction.attributes.base.link_and_identifier_exists") %></p>
     </div>
   <% else %>
-    <p>Enter either the website where users can apply for the licence, or the licence identifier.</p>
+    <p class="govuk-body">Enter either the website where users can apply for the licence, or the licence identifier.</p>
   <% end %>
 </div>
 
-<%= render layout: "shared/form_group", locals: { f: f, field: :licence_transaction_will_continue_on, label: "Name of website where users apply" } do %>
-  <%= f.text_field :licence_transaction_will_continue_on, class: 'form-control' %>
-<% end %>
+<%= render "govuk_publishing_components/components/input", {
+  label: {
+    text: "Name of website where users apply",
+    heading_size: "m",
+  },
+  name: "#{format_name}[licence_transaction_will_continue_on]",
+  id: "#{format_name}_licence_transaction_will_continue_on",
+  value: @document.licence_transaction_will_continue_on,
+  type: "url",
+} %>
 
-<%= render layout: "shared/form_group", locals: { f: f, field: :licence_transaction_continuation_link, label: "Link to where users apply" } do %>
-  <%= f.text_field :licence_transaction_continuation_link, class: 'form-control' %>
-<% end %>
+<%= render "govuk_publishing_components/components/input", {
+  label: {
+    text: "Link to where users apply",
+    heading_size: "m",
+  },
+  name: "#{format_name}[licence_transaction_continuation_link]",
+  id: "#{format_name}_licence_transaction_continuation_link",
+  value: @document.licence_transaction_continuation_link,
+  type: "url",
+} %>
 
-<%= render layout: "shared/form_group", locals: { f: f, field: :licence_transaction_licence_identifier, label: "Licence identifier" } do %>
-  <%= f.text_field :licence_transaction_licence_identifier, class: 'form-control' %>
-<% end %>
+<%= render "govuk_publishing_components/components/input", {
+  label: {
+    text: "Licence identifier",
+    heading_size: "m",
+  },
+  name: "#{format_name}[licence_transaction_licence_identifier]",
+  id: "#{format_name}_licence_transaction_licence_identifier",
+  value: @document.licence_transaction_licence_identifier,
+} %>
