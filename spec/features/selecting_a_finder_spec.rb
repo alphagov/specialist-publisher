@@ -70,7 +70,7 @@ RSpec.feature "The root specialist-publisher page", type: :feature do
       visit "/"
 
       FinderSchema.document_models.each do |document_model|
-        expect(page).to have_link(document_model.title.pluralize, href: finder_path(document_model.admin_slug))
+        expect(page).to have_link(document_model.title.pluralize, href: documents_path(document_model.admin_slug))
       end
     end
   end
