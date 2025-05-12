@@ -1,55 +1,46 @@
-<%= render "shared/legacy/date_fields_legacy", f: f, field: :sift_end_date, format: :statutory_instrument %>
-<%= render "shared/legacy/date_fields_legacy", f: f, field: :laid_date, format: :statutory_instrument %>
-<%= render "shared/form_group", f: f, field: :sifting_status do %>
-  <%= f.select :sifting_status, select_options_for_facet(f.object.allowed_values(:sifting_status)), {}, { class: "form-control" } %>
-<% end %>
+<% format_name = f.object.class.finder_schema.filter["format"].to_sym %>
+<% schema = f.object.class.finder_schema %>
+
+<% facet_key = :sift_end_date %>
+<%= render FacetInputComponent.new(@document, schema, schema.get_facet(facet_key)) %>
+
+<% facet_key = :laid_date %>
+<%= render FacetInputComponent.new(@document, schema, schema.get_facet(facet_key)) %>
+
+<% facet_key = :sifting_status %>
+<%= render FacetInputComponent.new(@document, schema, schema.get_facet(facet_key)) %>
+
+
+
 <% # TODO: this bit of logic prevents us moving to the shared view %>
+
 <% withdrawn_date_display = f.object.withdrawn_sifting_status? ? "block" : "none" %>
 <div class="withdrawn-date-wrapper" style="display:<%= withdrawn_date_display %>">
   <%= render "shared/legacy/date_fields_legacy", f: f, field: :withdrawn_date, format: :statutory_instrument %>
 </div>
-<%= render "shared/form_group", f: f, field: :subject do %>
-  <%= f.select :subject,
-      select_options_for_facet(f.object.allowed_values(:subject)),
-      {},
-      {
-        class: "select2 form-control select-all-disabled",
-        multiple: true,
-        data:
-        {
-          placeholder: "Select subjects"
-        }
-      }
-  %>
-<% end %>
 
-<% # TODO: find a way of making organisation management schema-driven %>
-<%= render "shared/form_group", f: f, field: :primary_publishing_organisation, label: "Publishing organisation" do %>
-  <%= f.select :primary_publishing_organisation,
-               organisations_options_legacy,
-      { selected: selected_organisation_or_current(@document.primary_publishing_organisation) },
-      {
-        class: "select2 form-control",
-        multiple: false,
-        data: {
-          placeholder: "Select a primary publishing organisation"
-        }
-      }
-  %>
-<% end %>
-<%= render "shared/form_group", f: f, field: :organisations, label: "Other associated organisations" do %>
-  <%= f.select :organisations,
-               organisations_options_legacy,
-      {},
-      {
-        class: "select2 form-control select-all-disabled",
-        multiple: true,
-        data: {
-          placeholder: "Select organisations"
-        }
-      }
-  %>
-<% end %>
+<% facet_key = :subject %>
+<%= render FacetInputComponent.new(@document, schema, schema.get_facet(facet_key)) %>
+
+<%= render "govuk_publishing_components/components/select", {
+  id: "#{@document_type}_primary_publishing_organisation",
+  name: "#{@document_type}[primary_publishing_organisation]",
+  label: "Select a primary publishing organisation",
+  heading_size: "m",
+  full_width: true,
+  error_message: errors_for_input(@document.errors, :primary_publishing_organisation),
+  options: organisations_select_options,
+} %>
+
+<%= render "govuk_publishing_components/components/select", {
+  id: "#{@document_type}_organisations",
+  name: "#{@document_type}[organisations]",
+  label: "Select organisations",
+  heading_size: "m",
+  full_width: true,
+  error_message: errors_for_input(@document.errors, :organisations),
+  options: organisations_select_options,
+} %>
 
 <% # TODO: this bit of JS prevents us moving to the shared view %>
 <% content_for :document_ready do %>
