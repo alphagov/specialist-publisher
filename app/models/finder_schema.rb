@@ -38,7 +38,6 @@ class FinderSchema
   attribute :email_filter_options
   attribute :facets, default: []
   attribute :filter
-  attribute :show_table_of_contents, :boolean, default: false
   attribute :label_text
   attribute :name
   attribute :organisations, default: []
@@ -48,6 +47,7 @@ class FinderSchema
   attribute :related
   attribute :show_summaries, :boolean, default: false
   attribute :show_metadata_block, :boolean, default: false
+  attribute :show_table_of_contents, :boolean, default: false
   attribute :signup_content_id
   attribute :signup_link
   attribute :subscription_list_title_prefix
