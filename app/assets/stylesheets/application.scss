@@ -35,3 +35,7 @@ $govuk-page-width: 1140px;
 @import "./components/diff";
 
 @import "./govspeak-help";
+
+.bg-light-grey {
+  background-color: govuk-colour("light-grey");
+}

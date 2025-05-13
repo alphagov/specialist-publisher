@@ -1,57 +1,148 @@
-<%= content_for :page_title, current_format.title.pluralize %>
+<% content_for :page_title, "#{current_format.title} finder" %>
 
 <% content_for :breadcrumbs do %>
-  <li class='active'><%= current_format.title.pluralize %></li>
+  <%= render "govuk_publishing_components/components/breadcrumbs", {
+    collapse_on_mobile: true,
+    breadcrumbs: [
+      {
+        title: "All finders",
+        url: finders_path
+      },
+      {
+        title: "#{current_format.title} finder",
+        url: documents_path(current_format.admin_slug)
+      },
+    ]
+  } %>
 <% end %>
 
-<h1 class="page-header"><%= current_format.title.pluralize %></h1>
+<% content_for :title do %>
+  <%= "#{current_format.title} finder" %>
+<% end %>
 
-<div class="row">
-  <div class="col-md-12 text-right">
-    <p>
-      <% if current_format.target_stack == "draft" %>
-        <%= link_to "Preview draft (opens in new tab)", current_format.draft_url, target: "_blank" %>
-      <% elsif current_format.target_stack == "live" %>
-        <%= link_to "View on website (opens in new tab)", current_format.live_url, target: "_blank" %>
-      <% end %>
-    </p>
-  </div>
-</div>
+<%= render "govuk_publishing_components/components/inset_text", {} do %>
+  <% if current_format.target_stack == "draft" %>
+    <%= link_to "Preview draft (opens in new tab)", current_format.draft_url, class: "govuk-link", target: "_blank", rel: "noopener" %>
+  <% elsif current_format.target_stack == "live" %>
+    <%= link_to "View on website (opens in new tab)", current_format.live_url, class: "govuk-link", target: "_blank", rel: "noopener" %>
+  <% end %>
+<% end %>
 
-<div class="row">
-  <div class="sidebar col-md-3">
-    <%= link_to "Add another #{current_format.title}", new_document_path(current_format.admin_slug), class: 'action-link' %>
-    <hr>
-    <%= link_to "Finder setup", finder_path(current_format.admin_slug), class: 'action-link' %>
+<%= render "govuk_publishing_components/components/secondary_navigation", {
+  aria_label: "Finder navigation",
+  items: [
+    {
+      label: "Finder documents",
+      href: documents_path(params[:document_type_slug]),
+      current: true,
+    },
+    {
+      label: "Finder setup",
+      href: finder_path(current_format.admin_slug),
+    },
+  ]
+} %>
 
-    <%= form_tag(documents_path(current_format.admin_slug), method: :get, class: "add-vertical-margins well") do %>
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-one-third">
+    <%= form_tag(documents_path(current_format.admin_slug), method: :get, class: "govuk-!-padding-3 bg-light-grey") do %>
+      <%= render "govuk_publishing_components/components/heading", {
+        text: "Filter by",
+        margin_bottom: 6,
+      } %>
+
       <% if current_format.has_organisations? %>
-        <%= label_tag "organisation", "Organisation" %>
-        <%= select_tag "organisation",
-              options_for_select(organisations_options_with_all, selected_organisation_or_current(@organisation)),
-              class: "select2 form-control add-bottom-margin" %>
+        <%= render "govuk_publishing_components/components/select", {
+          id: "filter-organisations",
+          label: "Organisations",
+          options: organisation_options_for_design_system(selected_organisation_or_current(@organisation))
+        } %>
       <% end %>
 
-      <%= label_tag "query", "Search" %>
-      <%= text_field_tag("query", @query, class: "form-control add-bottom-margin") %>
+      <%= render "govuk_publishing_components/components/input", {
+        type: "search",
+        label: {
+          text: "Title",
+        },
+        name: "query",
+        value: @query,
+        heading_level: 3,
+        heading_size: "s",
+      } %>
 
-      <%= submit_tag "Search", name: nil, class: "btn btn-default" %>
+      <%= render "govuk_publishing_components/components/button", {
+        text: "Filter",
+        type: "submit",
+      } %>
+
+      <p class="govuk-!-margin-top-6">
+        <%= link_to "Clear all filters", documents_path(current_format.admin_slug), class: "govuk-link govuk-link--no-visited-state" %>
+      </p>
     <% end %>
     <% if current_format.exportable? %>
-      <%= link_to "Export document list to CSV", export_documents_path(current_format.admin_slug, query: @query) %>
+      <%= link_to "Export document list to CSV", export_documents_path(current_format.admin_slug, query: @query), class: "govuk-link govuk-link--no-visited-state" %>
     <% end %>
   </div>
 
-  <div class="col-md-9">
+  <section class="govuk-grid-column-two-thirds" id="document-index-section">
+    <p class="govuk-body govuk-!-text-align-right govuk-!-margin-bottom-6">
+      <%= link_to "Add another #{current_format.title}", new_document_path(current_format.admin_slug), class: 'govuk-link' %>
+    </p>
     <% if !@paged_documents.empty? %>
-      <ul class="document-list">
-        <%= render partial: 'document', collection: @paged_documents %>
-      </ul>
-      <%= paginate @paged_documents, :theme => 'twitter-bootstrap-3' %>
+      <%= render "govuk_publishing_components/components/table", {
+        first_cell_is_header: true,
+        head: [
+          {
+            text: "Title"
+          },
+          {
+            text: "Updated",
+          },
+          {
+            text: "Status",
+          },
+          {
+            text: tag.span("Link", class: "govuk-visually-hidden")
+          },
+        ],
+        rows: @paged_documents.map do |document|
+          [
+            {
+              text: document.title,
+            },
+            {
+              text: "Updated #{time_ago_in_words(document.last_edited_at)} ago",
+            },
+            {
+              text: tag.span(state_for_frontend(document).titleize, class: design_system_classes_for_frontend(document)),
+            },
+            {
+              text: link_to(
+                sanitize("View #{tag.span(document.title, class: "govuk-visually-hidden")}"),
+                document_path(current_format.admin_slug, content_id_and_locale: "#{document.content_id}:#{document.locale}"),
+                class: "govuk-link",
+                ),
+            },
+          ]
+        end
+      } %>
+
+      <%= render "govuk_publishing_components/components/previous_and_next_navigation", {
+        previous_page: ({
+          url: documents_path(current_format.admin_slug, query: @query, page: @paged_documents.current_page - 1),
+          title: "Previous page",
+          label: "1 of #{@paged_documents.total_pages}",
+        } if @paged_documents.current_page > 1),
+        next_page: ({
+          url: documents_path(current_format.admin_slug, query: @query, page: @paged_documents.current_page + 1),
+          title: "Next page",
+          label: "#{@paged_documents.current_page + 1} of #{@paged_documents.total_pages}",
+        } if @paged_documents.current_page < @paged_documents.total_pages)
+      }.compact %>
     <% elsif @query %>
-      <p class="no-content no-content-bordered">Your search – <%= @query %> – did not match any documents.</p>
+      <p class="govuk-body">Your filter – <%= @query %> – did not match any documents.</p>
     <% else %>
-      <p class="no-content no-content-bordered">No <%= current_format.title.pluralize %> available.</p>
+      <p class="govuk-body">No <%= current_format.title.pluralize %> available.</p>
     <% end %>
-  </div>
+  </section>
 </div>
