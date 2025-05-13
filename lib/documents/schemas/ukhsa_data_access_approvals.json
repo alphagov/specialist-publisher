@@ -66,6 +66,47 @@
     {
       "allowed_values": [
         {
+          "label": "Research",
+          "value": "research"
+        },
+        {
+          "label": "Clinical audit",
+          "value": "clinical-audit"
+        },
+        {
+          "label": "Service evaluation",
+          "value": "service-evaluation"
+        },
+        {
+          "label": "Surveillance and public health action",
+          "value": "surveillance-and-public-health-action"
+        },
+        {
+          "label": "Direct care",
+          "value": "direct-care"
+        },
+        {
+          "label": "Other",
+          "value": "other"
+        }
+      ],
+      "display_as_result_metadata": false,
+      "filterable": true,
+      "key": "ukhsa_request_type",
+      "name": "Request Type",
+      "preposition": "Request Type",
+      "short_name": "Type",
+      "specialist_publisher_properties": {
+        "select": "one",
+        "validations": {
+          "required": {}
+        }
+      },
+      "type": "text"
+    },
+    {
+      "allowed_values": [
+        {
           "label": "Animal and Plant Health Agency (APHA)",
           "value": "animal-and-plant-health-agency-apha"
         },
