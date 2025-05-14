@@ -72,6 +72,7 @@ RSpec.feature "Creating a document", type: :feature do
 
     scenario "attempting to create a document with no data" do
       visit new_document_path
+      fill_in "Body", with: ""
       click_button "Save as draft"
 
       expect(page.status_code).to eq(422)

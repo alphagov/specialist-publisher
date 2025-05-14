@@ -50,7 +50,7 @@
     } if !(defined? previous_schema) || schema.description != previous_schema.description),
     ({
       key: "Summary of the finder (Longer description shown below title)",
-      value: sanitize("<div class='govspeak'>#{schema.summary}</div>")
+      value: sanitize("<div class='govspeak'>#{govspeak_to_html(schema.summary)}</div>")
     } if !(defined? previous_schema) || schema.summary != previous_schema.summary),
     ({
       key: "Any related links on GOV.UK?",
@@ -76,6 +76,10 @@
       key: "Shortened document noun (How the documents on the finder are referred to)",
       value: (schema.document_noun || "").humanize
     } if !(defined? previous_schema) || schema.document_noun != previous_schema.document_noun),
+    ({
+      key: "Body template (optional)",
+      value: schema.body_template.blank? ? nil : sanitize("<div class='govspeak'>#{govspeak_to_html(schema.body_template)}</div>")
+    } if !(defined? previous_schema) || (!schema.body_template.blank? && (schema.body_template != previous_schema.body_template))),
     ({
       key: "Would you like to set up email alerts for the finder?",
       value: email_alerts_value,

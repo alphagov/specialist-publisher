@@ -60,4 +60,16 @@ RSpec.feature "Generating a new finder", type: :feature do
     expect(page).to have_field("Title of the finder", with: "Finder with contents list")
     expect(page).to have_checked_field("show_table_of_contents", with: "true")
   end
+
+  scenario "setting a body template value and generating schema" do
+    visit new_finder_path
+
+    fill_in("Title of the finder", with: "Finder with contents list")
+    fill_in("Body template", with: "Generic template")
+    click_button("Generate schema")
+
+    expect(page).to have_selector(".govuk-details")
+    expect(page).to have_field("Title of the finder", with: "Finder with contents list")
+    expect(page).to have_field("body_template", with: "Generic template")
+  end
 end
