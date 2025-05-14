@@ -12,7 +12,13 @@ module OrganisationsHelper
   end
 
   def organisation_options_for_design_system(selected_organisation_content_id)
-    all_organisations.sort_by { |org| org.title.downcase.strip }.map do |organisation|
+    [
+      {
+        text: "All organisations",
+        value: "all",
+        selected: false,
+      },
+    ] + all_organisations.sort_by { |org| org.title.downcase.strip }.map do |organisation|
       {
         text: organisation.title,
         value: organisation.content_id,

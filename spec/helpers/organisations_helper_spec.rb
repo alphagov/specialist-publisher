@@ -2,7 +2,7 @@ require "rails_helper"
 
 RSpec.describe OrganisationsHelper, type: :helper do
   describe "#organisation_options_for_design_system" do
-    it "returns a sorted list of organisation hashes with the correct selected organisation" do
+    it "returns a sorted list of organisation hashes with the correct selected organisation and an 'all' option" do
       organisations = []
       5.times do |n|
         organisations.push(Organisation.new("title" => "Organisation #{n}", "content_id" => SecureRandom.uuid))
@@ -11,7 +11,13 @@ RSpec.describe OrganisationsHelper, type: :helper do
       selected_organisation = organisations.first
 
       result = organisation_options_for_design_system(selected_organisation.content_id)
-      expected_result = organisations.map do |organisation|
+      expected_result = [
+        {
+          text: "All organisations",
+          value: "all",
+          selected: false,
+        },
+      ] + organisations.map do |organisation|
         {
           text: organisation.title,
           value: organisation.content_id,
