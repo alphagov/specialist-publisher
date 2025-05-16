@@ -1,30 +1,24 @@
+<% format_name = f.object.class.finder_schema.filter["format"].to_sym %>
+<% schema = f.object.class.finder_schema %>
 <%= render layout: "shared/specialist_document_form", locals: { f: f } do %>
 <% end %>
 
-<% # TODO: find a way of making organisation management schema-driven %>
-<%= render "shared/form_group", f: f, field: :primary_publishing_organisation, label: "Publishing organisation" do %>
-  <%= f.select :primary_publishing_organisation,
-      organisations_options,
-      { selected: selected_organisation_or_current(@document.primary_publishing_organisation) },
-      {
-        class: "select2 form-control",
-        multiple: false,
-        data: {
-          placeholder: "Select a primary publishing organisation"
-        }
-      }
-  %>
-<% end %>
-<%= render "shared/form_group", f: f, field: :organisations, label: "Other associated organisations" do %>
-  <%= f.select :organisations,
-      organisations_options,
-      {},
-      {
-        class: "select2 form-control select-all-disabled",
-        multiple: true,
-        data: {
-          placeholder: "Select organisations"
-        }
-      }
-  %>
-<% end %>
+<%= render "govuk_publishing_components/components/select", {
+  id: "#{@document_type}_primary_publishing_organisation",
+  name: "#{@document_type}[primary_publishing_organisation]",
+  label: "Select a primary publishing organisation",
+  heading_size: "m",
+  full_width: true,
+  error_message: errors_for_input(@document.errors, :primary_publishing_organisation),
+  options: organisations_select_options,
+} %>
+
+<%= render "govuk_publishing_components/components/select", {
+  id: "#{@document_type}_organisations",
+  name: "#{@document_type}[organisations]",
+  label: "Select organisations",
+  heading_size: "m",
+  full_width: true,
+  error_message: errors_for_input(@document.errors, :organisations),
+  options: organisations_select_options,
+} %>

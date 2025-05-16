@@ -103,6 +103,10 @@ class FinderSchema
     facets.select { |facet| facet["type"] == "nested" }
   end
 
+  def get_facet(key)
+    facets.detect { |facet| facet["key"] == key.to_s }
+  end
+
 private
 
   def facet_data_for(facet_name)
