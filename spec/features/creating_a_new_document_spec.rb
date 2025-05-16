@@ -9,6 +9,7 @@ EXCEPTIONS_TO_GENERAL_TESTING = %w[
   statutory_instrument
   marine_equipment_approved_recommendation
   protected_food_drink_name
+  countryside_stewardship_grant
 ].freeze
 
 RSpec.feature "Creating a document", type: :feature do
