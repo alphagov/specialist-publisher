@@ -24,13 +24,13 @@ module OrganisationsHelper
   end
 
   def organisations_select_options(selected_organisation_content_id = nil)
-    all_organisations.map { |organisation|
-      {
+    all_organisations.inject([{}]) { |options, organisation|
+      options << {
         text: organisation.title,
         value: organisation.content_id,
         selected: organisation.content_id == selected_organisation_content_id,
       }
-    }.sort_by { |option| option[:text].downcase.strip }
+    }.sort_by { |option| option[:text].downcase.strip if option[:text].present? }
   end
 
 private
