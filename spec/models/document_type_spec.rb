@@ -4,6 +4,7 @@ require "models/valid_against_schema"
 EXCEPTIONS_TO_GENERAL_TESTING = %w[
   ai_assurance_portfolio_technique
   european_structural_investment_fund
+  countryside_stewardship_grant
 ].freeze
 
 Dir["lib/documents/schemas/*.json"].each do |file|
