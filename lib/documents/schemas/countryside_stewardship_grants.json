@@ -1,10 +1,10 @@
 {
-  "base_path": "/countryside-stewardship-grants",
+  "base_path": "/capital-grant-finder",
   "beta": true,
   "content_id": "0eb7b150-879a-4c44-becc-718e23a77e2c",
-  "description": "Find information about Countryside Stewardship options, capital items and supplements",
+  "description": "Find information about capital items and supplements",
   "document_noun": "grant",
-  "document_title": "Countryside Stewardship Grant",
+  "document_title": "Capital Grant",
   "editing_organisations": [
     "de4e9dc6-cca4-43af-a594-682023b84d6c"
   ],
@@ -119,7 +119,7 @@
   "filter": {
     "format": "countryside_stewardship_grant"
   },
-  "name": "Countryside Stewardship grant finder",
+  "name": "Capital grant finder",
   "organisations": [
     "e8fae147-6232-4163-a3f1-1c15b755a8a4",
     "d3ce4ba7-bc75-46b4-89d9-38cb3240376d"
@@ -129,7 +129,7 @@
   ],
   "show_metadata_block": true,
   "show_table_of_contents": true,
-  "summary": "Search for options, supplements and capital items to include in your Countryside Stewardship application. Find out about each [Countryside Stewardship scheme and check if you’re eligible before you apply for a grant](/guidance/countryside-stewardship-get-funding-to-protect-and-improve-the-land-you-manage).",
+  "summary": "Search for capital items and their supplements to include in your capital grant application. Read the [relevant capital grants scheme guidance](https://www.gov.uk/government/collections/capital-items-guidance-for-applicants-and-agreement-holders) to check if you're eligible and how to apply.",
   "target_stack": "live",
   "taxons": [
     "9129d716-365b-44ba-9856-383423fe1e41"

@@ -395,7 +395,7 @@ FactoryBot.define do
   end
 
   factory :countryside_stewardship_grant, parent: :document do
-    base_path { "/countryside-stewardship-grants/example-document" }
+    base_path { "/capital-grant-finder/example-document" }
     document_type { "countryside_stewardship_grant" }
 
     transient do
