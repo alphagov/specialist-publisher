@@ -2,7 +2,7 @@
   "base_path": "/find-hmrc-contacts",
   "content_id": "4f5d1173-1634-4c3c-b341-28679d149cae",
   "default_order": "title",
-  "description": "Find contact details for HM Revenue & Customs",
+  "description": "Find contact details for HM Revenue & Customs.",
   "document_noun": "contact",
   "document_title": "HMRC Contact",
   "facets": [
@@ -136,6 +136,6 @@
   ],
   "show_table_of_contents": false,
   "show_metadata_block": false,
-  "summary": "Find contact details for HM Revenue & Customs",
+  "summary": "Find contact details for HM Revenue & Customs.",
   "target_stack": "live"
 }
