@@ -7,8 +7,6 @@ EXCEPTIONS_TO_GENERAL_TESTING = %w[
   licence_transaction
   research_for_development_output
   statutory_instrument
-  marine_equipment_approved_recommendation
-  protected_food_drink_name
 ].freeze
 
 RSpec.feature "Creating a document", type: :feature do
@@ -55,6 +53,10 @@ RSpec.feature "Creating a document", type: :feature do
           fill_in "#{document_type}[#{key}(3i)]", with: "01"
         elsif properties.key?("select")
           select facet["allowed_values"].first["label"], from: facet["name"], match: :first
+        elsif facet["name"].downcase.include?("year")
+          fill_in facet["name"], with: "2014"
+        elsif facet["name"].downcase.include?("time")
+          fill_in facet["name"], with: "10:00"
         else
           fill_in facet["name"], with: "Example #{facet['name']}"
         end
@@ -128,14 +130,7 @@ RSpec.feature "Creating a document", type: :feature do
     next if EXCEPTIONS_TO_GENERAL_TESTING.include?(format)
 
     describe "Creating a #{format.humanize}" do
-      base_path = case format
-                  when "product_safety_alert_report_recall"
-                    "/product-safety-alerts-reports-recalls"
-                  when "ai_assurance_portfolio_technique"
-                    "/portfolio-of-assurance-techniques"
-                  else
-                    "/#{format.pluralize.dasherize}"
-                  end
+      base_path = "/#{format.camelize.constantize.admin_slug}"
       include_context "common setup", :gds_editor, format.to_sym, base_path, "#{base_path}/new"
     end
   end

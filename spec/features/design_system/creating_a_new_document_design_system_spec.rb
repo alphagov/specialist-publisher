@@ -7,7 +7,6 @@ EXCEPTIONS_TO_GENERAL_TESTING = %w[
   licence_transaction
   research_for_development_output
   statutory_instrument
-  marine_equipment_approved_recommendation
   protected_food_drink_name
 ].freeze
 
@@ -189,14 +188,7 @@ RSpec.feature "Creating a document", type: :feature do
     next if EXCEPTIONS_TO_GENERAL_TESTING.include?(format)
 
     describe "Creating a #{format.humanize}" do
-      base_path = case format
-                  when "product_safety_alert_report_recall"
-                    "/product-safety-alerts-reports-recalls"
-                  when "ai_assurance_portfolio_technique"
-                    "/portfolio-of-assurance-techniques"
-                  else
-                    "/#{format.pluralize.dasherize}"
-                  end
+      base_path = "/#{format.camelize.constantize.admin_slug}"
       include_context "common setup", :gds_editor, format.to_sym, base_path, "#{base_path}/new"
     end
   end

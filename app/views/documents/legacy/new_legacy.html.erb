@@ -19,7 +19,7 @@
 
       <%= render partial: "shared/legacy/preview_govspeak_legacy", locals: {attachments: @document.attachments} %>
 
-      <%= render partial: "metadata_fields_legacy/#{params[:document_type_slug].underscore}", locals: { f: f } %>
+      <%= render partial: "metadata_fields_legacy/#{@document.document_type.pluralize}", locals: { f: f } %>
 
       <div class="actions">
         <button name="save" class="btn btn-success" data-disable-with="Saving...">Save as draft</button>
