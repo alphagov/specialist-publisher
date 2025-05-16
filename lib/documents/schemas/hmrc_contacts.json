@@ -136,6 +136,6 @@
   ],
   "show_table_of_contents": false,
   "show_metadata_block": false,
-  "summary": "Find contact details for HM Revenue & Customs.\r\n\r\nYou can also:\r\n\r\n- Check and update your tax records by using [HMRC online services](https://www.gov.uk/log-in-register-hmrc-online-services) to access your personal or business tax account.\r\n- Get information about your tax, National Insurance and benefits by [downloading the HMRC app](https://www.gov.uk/guidance/download-the-hmrc-app) on a mobile device.\r\n- Get information from HMRC by [watching videos and webinars](https://www.gov.uk/government/collections/hmrc-webinars-email-alerts-and-videos).",
+  "summary": "Find contact details for HM Revenue & Customs.\r\n\r\nYou can also:\r\n\r\n- check and update your tax records by using [HMRC online services](https://www.gov.uk/log-in-register-hmrc-online-services) to access your personal or business tax account\r\n- get information about your tax, National Insurance and benefits by [downloading the HMRC app](https://www.gov.uk/guidance/download-the-hmrc-app) on a mobile device\r\n- get information from HMRC by [watching videos and webinars](https://www.gov.uk/government/collections/hmrc-webinars-email-alerts-and-videos)",
   "target_stack": "live"
 }
