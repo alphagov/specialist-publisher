@@ -7,7 +7,6 @@ EXCEPTIONS_TO_GENERAL_TESTING = %w[
   licence_transaction
   research_for_development_output
   statutory_instrument
-  marine_equipment_approved_recommendation
   protected_food_drink_name
 ].freeze
 
