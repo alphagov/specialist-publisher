@@ -13,7 +13,7 @@ class DocumentFinder
     end
 
     attributes = response.to_hash
-    document_type = attributes.fetch("document_type")
+    document_type = DocumentTypeMapper.get_document_type(attributes.fetch("document_type"))
     document_class = document_type.camelize.constantize
 
     if [document_class, Document].include?(klass)

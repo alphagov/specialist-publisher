@@ -21,7 +21,7 @@ RSpec.describe FinderContentItemPresenter do
     end
 
     it "should have a summary with content" do
-      read_file = File.read("lib/documents/schemas/esi_funds.json")
+      read_file = File.read("lib/documents/schemas/european_structural_investment_funds.json")
       payload = JSON.parse(read_file)
       payload["summary"] = "anything"
 
@@ -35,7 +35,7 @@ RSpec.describe FinderContentItemPresenter do
     end
 
     it "should return summary nil with nil content" do
-      read_file = File.read("lib/documents/schemas/esi_funds.json")
+      read_file = File.read("lib/documents/schemas/european_structural_investment_funds.json")
       payload = JSON.parse(read_file)
       payload["summary"] = nil
 
