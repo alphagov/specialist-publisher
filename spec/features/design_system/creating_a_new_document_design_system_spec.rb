@@ -6,7 +6,6 @@ EXCEPTIONS_TO_GENERAL_TESTING = %w[
   licence_transaction
   research_for_development_output
   statutory_instrument
-  marine_equipment_approved_recommendation
   protected_food_drink_name
 ].freeze
 
@@ -53,6 +52,8 @@ RSpec.feature "Creating a document", type: :feature do
           fill_in "#{document_type}[#{key}(1i)]", with: "2014"
           fill_in "#{document_type}[#{key}(2i)]", with: "01"
           fill_in "#{document_type}[#{key}(3i)]", with: "01"
+        elsif facet["name"].include?("Year")
+          fill_in facet["name"], with: "2014"
         elsif properties["select"] == "one"
           select facet["allowed_values"].first["label"], from: facet["name"], match: :first
         elsif properties["select"] == "multiple"
