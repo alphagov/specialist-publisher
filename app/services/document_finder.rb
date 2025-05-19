@@ -2,6 +2,8 @@ require "services"
 
 # Find a document of a certain type by content_id. Returns a `Document` object.
 class DocumentFinder
+  include DocumentTypeMapper
+
   def self.find(klass, content_id, locale, version: nil)
     begin
       params = { locale: }
@@ -13,7 +15,7 @@ class DocumentFinder
     end
 
     attributes = response.to_hash
-    document_type = attributes.fetch("document_type")
+    document_type = DocumentTypeMapper.get_document_type(attributes.fetch("document_type"))
     document_class = document_type.camelize.constantize
 
     if [document_class, Document].include?(klass)

@@ -1,6 +1,9 @@
 module PublishingApiHelpers
+  include DocumentTypeMapper
+
   def write_payload(document)
-    copy = FactoryBot.create(document["document_type"], document)
+    document_type = get_document_type(document["document_type"]).to_sym
+    copy = FactoryBot.create(document_type, document)
     copy.delete("content_id")
     copy.delete("last_edited_at")
     copy.delete("publication_state")
