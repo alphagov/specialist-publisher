@@ -49,11 +49,6 @@ module_function
   end
 
   def document_types
-    @document_types ||= all_document_types
-  end
-
-  def all_document_types
-    Rails.application.eager_load!
-    Document.subclasses.map(&:document_type)
+    @document_types ||= DocumentTypeMapper.all_document_types
   end
 end

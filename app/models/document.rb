@@ -217,7 +217,7 @@ class Document
   end
 
   def self.all(page, per_page, query: nil, organisation: nil)
-    AllDocumentsFinder.all(page, per_page, query, document_type, organisation)
+    AllDocumentsFinder.all(page, per_page, query, downstream_document_type, organisation)
   end
 
   def self.find_each(&block)

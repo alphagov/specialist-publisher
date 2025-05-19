@@ -7,4 +7,9 @@ module DocumentTypeMapper
       document_type
     end
   end
+
+  def self.all_document_types
+    Rails.application.eager_load!
+    Document.subclasses.tap { |a| a.delete(Attachment) }.map(&:downstream_document_type)
+  end
 end

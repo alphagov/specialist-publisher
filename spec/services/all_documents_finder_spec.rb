@@ -57,6 +57,40 @@ RSpec.describe AllDocumentsFinder do
       expect(response["results"].length).to eq(1)
       expect(response["results"][0]["title"]).to eq "Scheme #1"
     end
+
+    context "when `downstream_document_type` is provided in the schema" do
+      let(:documents) do
+        [
+          FactoryBot.create(
+            :european_structural_investment_fund,
+            base_path: "/bfss/1",
+            title: "Fund #1",
+          ),
+        ]
+      end
+
+      let(:request_params) do
+        {
+          publishing_app: "specialist-publisher",
+          document_type: "esi_fund",
+          order: "-last_edited_at",
+          locale: "all",
+          fields: %i[base_path content_id locale last_edited_at title publication_state state_history],
+          page: 1,
+          per_page: 1,
+        }
+      end
+
+      it "returns all documents only when called with `downstream_document_type`" do
+        request = stub_publishing_api_has_content(documents, request_params)
+        type = EuropeanStructuralInvestmentFund.finder_schema.downstream_document_type
+        response = subject.all(1, 1, nil, type, nil)
+
+        expect(request).to have_been_requested
+        expect(response["results"].length).to eq(1)
+        expect(response["results"][0]["title"]).to eq "Fund #1"
+      end
+    end
   end
 
   describe ".find_each" do
