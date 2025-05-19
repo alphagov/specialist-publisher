@@ -14,7 +14,9 @@ Recent changes to Specialist Publisher now allow users to self-serve. These requ
 
 # __Creating__ a specialist document type
 
-NB: For additional guidance, consider reading through [Finder requirements and content support](#9-Finder-requirements-and-content-support).
+The files you will be creating in this step follow [these conventions](./naming-conventions.md).
+
+For additional guidance, consider reading through [Finder requirements and content support](#9-Finder-requirements-and-content-support).
 
 ## 1. Add a schema to Publishing API
 See [example PR here](https://github.com/alphagov/publishing-api/pull/3026/files).
