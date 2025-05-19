@@ -1,4 +1,4 @@
-<% format_name = f.object.class.finder_schema.filter["format"].to_sym %>
+<% format_name = f.object.class.document_type.to_sym %>
 <%= render "govuk_publishing_components/components/input", {
   label: {
     text: "Title (required)",
