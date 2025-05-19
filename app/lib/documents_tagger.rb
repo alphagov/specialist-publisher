@@ -26,10 +26,6 @@ private
     tagged ? taxon_ids : []
   end
 
-  def all_document_types
-    FinderSchema.schema_names.map(&:singularize)
-  end
-
   def mapped_taxons(document_type)
     document_type.camelize.constantize.new.taxons
   end
@@ -49,7 +45,7 @@ private
   def all_documents
     editions_enum(
       publishing_app: "specialist-publisher",
-      document_types: all_document_types,
+      document_types: DocumentTypeMapper.all_document_types,
       fields: %i[content_id document_type base_path],
     ).lazy
   end

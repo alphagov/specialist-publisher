@@ -11,8 +11,8 @@ class AllDocumentsFinder
     }
   end
 
-  def self.all(page, per_page, query, document_type, organisation)
-    params = default_find_params(document_type).merge(
+  def self.all(page, per_page, query, downstream_document_type, organisation)
+    params = default_find_params(downstream_document_type).merge(
       fields: %i[
         base_path
         content_id

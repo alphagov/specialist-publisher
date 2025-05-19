@@ -22,7 +22,7 @@ RSpec.describe DocumentsTagger do
       end,
     )
 
-    allow(FinderSchema).to receive(:schema_names).and_return(%w[document_type_one document_type_two])
+    allow(DocumentTypeMapper).to receive(:all_document_types).and_return(%w[document_type_one document_type_two])
   end
 
   it "automatically tags a document" do
