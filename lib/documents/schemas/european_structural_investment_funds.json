@@ -6,6 +6,7 @@
   "description": "Find and apply to run projects backed by ESIF",
   "document_noun": "call",
   "document_title": "ESI Fund",
+  "downstream_document_type": "esi_fund",
   "email_filter_options": {
     "downcase_email_alert_topic_names": true,
     "email_filter_by": "location"
