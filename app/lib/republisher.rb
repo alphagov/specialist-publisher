@@ -54,6 +54,6 @@ module_function
 
   def all_document_types
     Rails.application.eager_load!
-    Document.subclasses.map(&:document_type)
+    DocumentTypeMapper.all_document_types
   end
 end
