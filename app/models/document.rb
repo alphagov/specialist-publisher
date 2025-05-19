@@ -6,7 +6,6 @@ class Document
   include ActionView::Helpers::TextHelper
   include DateHelper
   include PublishingHelper
-
   attr_reader :update_type
   attr_writer(
     :temporary_update_type,
@@ -107,6 +106,7 @@ class Document
   end
 
   delegate :document_type, to: :class
+  delegate :downstream_document_type, to: :class
 
   def self.target_stack
     finder_schema.target_stack
@@ -114,6 +114,10 @@ class Document
 
   def self.document_type
     to_s.underscore
+  end
+
+  def self.downstream_document_type
+    finder_schema.downstream_document_type || document_type
   end
 
   delegate :format, to: :finder_schema
