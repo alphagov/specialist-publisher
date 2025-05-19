@@ -3,12 +3,10 @@ require "models/valid_against_schema"
 
 EXCEPTIONS_TO_GENERAL_TESTING = %w[
   ai_assurance_portfolio_technique
-  european_structural_investment_fund
 ].freeze
 
 Dir["lib/documents/schemas/*.json"].each do |file|
-  schema = JSON.parse(File.read(file))
-  format = schema["filter"]["format"]
+  format = File.basename(file, ".json").singularize
 
   next if EXCEPTIONS_TO_GENERAL_TESTING.include?(format)
 

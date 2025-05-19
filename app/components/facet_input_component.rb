@@ -1,7 +1,7 @@
 class FacetInputComponent < ViewComponent::Base
-  def initialize(document, finder_schema, facet_config)
+  def initialize(document, facet_config)
     @document = document
-    @document_type = finder_schema.filter["format"].to_sym
+    @document_type = document.document_type.to_sym
     @facet_type = facet_config["type"].to_sym
     @facet_key = facet_config["key"].to_sym
     @facet_name = facet_config["name"]

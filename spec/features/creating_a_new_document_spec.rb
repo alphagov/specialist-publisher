@@ -2,7 +2,6 @@ require "spec_helper"
 
 EXCEPTIONS_TO_GENERAL_TESTING = %w[
   business_finance_support_scheme
-  esi_fund
   flood_and_coastal_erosion_risk_management_research_report
   licence_transaction
   research_for_development_output
