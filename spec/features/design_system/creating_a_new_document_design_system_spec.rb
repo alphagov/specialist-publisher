@@ -16,6 +16,7 @@ RSpec.feature "Creating a document", type: :feature do
     let(:content_id) { document["content_id"] }
     let(:save_button_disable_with_message) { page.find_button("Save as draft")["data-disable-with"] }
     let(:schema) { document_type.to_s.camelize.constantize.finder_schema }
+    let(:downstream_document_type) { document_type.to_s.camelize.constantize.downstream_document_type }
 
     before do
       log_in_as_design_system_editor(editor)
@@ -26,7 +27,7 @@ RSpec.feature "Creating a document", type: :feature do
       stub_any_publishing_api_put_content
       stub_any_publishing_api_patch_links
 
-      stub_publishing_api_has_content([document], hash_including(document_type: document_type.to_s))
+      stub_publishing_api_has_content([document], hash_including(document_type: downstream_document_type))
       stub_publishing_api_has_item(document)
     end
 
