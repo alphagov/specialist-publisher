@@ -6,7 +6,6 @@ class Document
   include ActionView::Helpers::TextHelper
   include DateHelper
   include PublishingHelper
-
   attr_reader :update_type
   attr_writer(
     :temporary_update_type,
