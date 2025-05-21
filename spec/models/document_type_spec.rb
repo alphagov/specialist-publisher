@@ -15,7 +15,9 @@ Dir["lib/documents/schemas/*.json"].each do |file|
     include_examples "it saves payloads that are valid against the 'specialist_document' schema"
 
     it "is not exportable" do
-      unless subject.instance_of?(BusinessFinanceSupportScheme)
+      if subject.instance_of?(BusinessFinanceSupportScheme)
+        expect(subject.class).to be_exportable
+      else
         expect(subject.class).not_to be_exportable
       end
     end
