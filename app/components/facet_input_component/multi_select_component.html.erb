@@ -7,6 +7,7 @@
 <%= render "govuk_publishing_components/components/add_another", {
   fieldset_legend: @facet_name,
   name: @facet_name.downcase,
+  id: "#{@document_type}_#{@facet_key}",
   add_button_text: "Add another #{@facet_name.downcase}",
   margin_bottom: 6,
   items: pre_selected_items,
