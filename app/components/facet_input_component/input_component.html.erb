@@ -1,0 +1,11 @@
+<%= render "govuk_publishing_components/components/input", {
+  label: {
+    text: @facet_name,
+  },
+  heading_size: "m",
+  name: "#{@document_type}[#{@facet_key}]",
+  id: "#{@document_type}_#{@facet_key}",
+  value: @document.send(@facet_key),
+  error_items: @error_items,
+  type: @type,
+} %>
