@@ -4,7 +4,7 @@
 <% # TODO: find a way of making organisation management schema-driven %>
 <%= render "shared/form_group", f: f, field: :primary_publishing_organisation, label: "Publishing organisation" do %>
   <%= f.select :primary_publishing_organisation,
-      organisations_options,
+      organisations_options_legacy,
       { selected: selected_organisation_or_current(@document.primary_publishing_organisation) },
       {
         class: "select2 form-control",
@@ -17,7 +17,7 @@
 <% end %>
 <%= render "shared/form_group", f: f, field: :organisations, label: "Other associated organisations" do %>
   <%= f.select :organisations,
-      organisations_options,
+      organisations_options_legacy,
       {},
       {
         class: "select2 form-control select-all-disabled",
