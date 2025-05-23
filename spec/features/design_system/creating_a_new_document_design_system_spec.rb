@@ -2,7 +2,6 @@ require "spec_helper"
 
 EXCEPTIONS_TO_GENERAL_TESTING = %w[
   business_finance_support_scheme
-  esi_fund
   flood_and_coastal_erosion_risk_management_research_report
   licence_transaction
   research_for_development_output
@@ -17,6 +16,7 @@ RSpec.feature "Creating a document", type: :feature do
     let(:content_id) { document["content_id"] }
     let(:save_button_disable_with_message) { page.find_button("Save as draft")["data-disable-with"] }
     let(:schema) { document_type.to_s.camelize.constantize.finder_schema }
+    let(:downstream_document_type) { document_type.to_s.camelize.constantize.downstream_document_type }
 
     before do
       log_in_as_design_system_editor(editor)
@@ -27,7 +27,7 @@ RSpec.feature "Creating a document", type: :feature do
       stub_any_publishing_api_put_content
       stub_any_publishing_api_patch_links
 
-      stub_publishing_api_has_content([document], hash_including(document_type: document_type.to_s))
+      stub_publishing_api_has_content([document], hash_including(document_type: downstream_document_type))
       stub_publishing_api_has_item(document)
     end
 
@@ -189,14 +189,7 @@ RSpec.feature "Creating a document", type: :feature do
     next if EXCEPTIONS_TO_GENERAL_TESTING.include?(format)
 
     describe "Creating a #{format.humanize}" do
-      base_path = case format
-                  when "product_safety_alert_report_recall"
-                    "/product-safety-alerts-reports-recalls"
-                  when "ai_assurance_portfolio_technique"
-                    "/portfolio-of-assurance-techniques"
-                  else
-                    "/#{format.pluralize.dasherize}"
-                  end
+      base_path = "/#{format.camelize.constantize.admin_slug}"
       include_context "common setup", :gds_editor, format.to_sym, base_path, "#{base_path}/new"
     end
   end

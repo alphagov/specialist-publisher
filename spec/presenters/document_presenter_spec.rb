@@ -200,4 +200,28 @@ RSpec.describe DocumentPresenter do
       )
     end
   end
+
+  describe "#to_json with custom downstream_document_type defined in schema" do
+    let(:payload) { FactoryBot.create(:cma_case) }
+
+    context "when the document schema specifies a `downstream_document_type`" do
+      before do
+        allow_any_instance_of(FinderSchema).to receive(:downstream_document_type).and_return("custom_document_type")
+      end
+
+      it "returns the schema document type rather than than the model name based document type" do
+        expect(presented_data[:document_type]).to eq("custom_document_type")
+      end
+    end
+
+    context "when the document schema does not specify a `downstream_document_type`" do
+      before do
+        allow_any_instance_of(FinderSchema).to receive(:downstream_document_type).and_return(nil)
+      end
+
+      it "returns the model name based document type" do
+        expect(presented_data[:document_type]).to eq(specialist_document.document_type)
+      end
+    end
+  end
 end

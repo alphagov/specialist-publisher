@@ -34,6 +34,7 @@ class FinderSchema
   attribute :description
   attribute :document_noun
   attribute :document_title
+  attribute :downstream_document_type
   attribute :editing_organisations, default: []
   attribute :email_filter_options
   attribute :facets, default: []

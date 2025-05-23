@@ -1,3 +1,5 @@
+require "factory_helper"
+
 FactoryBot.define do
   factory :user do
     sequence(:uid) { |n| "uid-#{n}" }
@@ -163,9 +165,10 @@ FactoryBot.define do
       merged_details = default_details.deep_stringify_keys.deep_merge(details.deep_stringify_keys)
       result = attributes.merge(details: merged_details)
       if document_type
+        specialist_publisher_document_type = FactoryHelper.get_document_type(document_type)
         result = result.merge(
           links: {
-            finder: [FinderSchema.load_from_schema(document_type.pluralize).content_id],
+            finder: [FinderSchema.load_from_schema(specialist_publisher_document_type.pluralize).content_id],
           },
         )
       end
@@ -474,7 +477,7 @@ FactoryBot.define do
     end
   end
 
-  factory :esi_fund, parent: :document do
+  factory :european_structural_investment_fund, parent: :document do
     base_path { "/european-structural-investment-funds/example-document" }
     document_type { "esi_fund" }
 

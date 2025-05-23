@@ -10,7 +10,7 @@ class DocumentPresenter
       base_path: document.base_path,
       title: document.title,
       description: document.summary,
-      document_type: document.document_type,
+      document_type: document.downstream_document_type,
       change_note: document.change_note,
       schema_name: "specialist_document",
       publishing_app: "specialist-publisher",
