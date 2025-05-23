@@ -6,19 +6,19 @@
   "document_title": "EU Withdrawal Act 2018 statutory instrument",
   "facets": [
     {
-      "display_as_result_metadata": true,
-      "filterable": true,
-      "key": "laid_date",
-      "name": "Laid on",
-      "short_name": "Laid on",
-      "type": "date"
-    },
-    {
       "display_as_result_metadata": false,
       "filterable": false,
       "key": "sift_end_date",
       "name": "Sift end date",
       "short_name": "Sift end date",
+      "type": "date"
+    },
+    {
+      "display_as_result_metadata": true,
+      "filterable": true,
+      "key": "laid_date",
+      "name": "Laid on",
+      "short_name": "Laid on",
       "type": "date"
     },
     {
