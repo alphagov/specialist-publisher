@@ -63,15 +63,15 @@ RSpec.feature "Searching and filtering", type: :feature do
       visit "/cma-cases"
 
       within("#document-index-section table tbody tr:nth-child(1)") do
-        expect(page).to have_content("DRAFT")
+        expect(page).to have_content("Draft")
       end
 
       within("#document-index-section table tbody tr:nth-child(2)") do
-        expect(page).to have_content("PUBLISHED")
+        expect(page).to have_content("Published")
       end
 
       within("#document-index-section table tbody tr:nth-child(3)") do
-        expect(page).to have_content("UNPUBLISHED WITH NEW DRAFT")
+        expect(page).to have_content("Unpublished with new draft")
       end
     end
 
