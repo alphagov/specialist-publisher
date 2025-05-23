@@ -116,7 +116,7 @@ RSpec.describe AttachmentsController, type: :controller do
       }
 
       expect(assigns(:attachment)).to eq(attachment)
-      expect(response).to render_template :edit_legacy
+      expect(response).to render_template :edit
     end
   end
 

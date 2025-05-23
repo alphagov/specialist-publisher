@@ -15,7 +15,12 @@
 
   <% attachment_exists = @document.attachments.has_attachment?(@attachment) %>
   <% if attachment_exists %>
-    <p><strong>Previous file: </strong><%= link_to @attachment.filename, @attachment.url %></p>
+    <p class="govuk-body">
+      Previous file:
+      <span>
+        <%= link_to @attachment.filename, @attachment.url, class: "govuk-link" %>
+      </span>
+    </p>
   <% end %>
 
   <%= render "govuk_publishing_components/components/file_upload", {
