@@ -45,7 +45,7 @@
   <div class="col-md-9">
     <% if !@paged_documents.empty? %>
       <ul class="document-list">
-        <%= render partial: 'document', collection: @paged_documents %>
+        <%= render partial: 'documents/legacy/document_legacy', collection: @paged_documents, as: :document %>
       </ul>
       <%= paginate @paged_documents, :theme => 'twitter-bootstrap-3' %>
     <% elsif @query %>
