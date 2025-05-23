@@ -1,6 +1,10 @@
 class AttachmentsController < ApplicationController
   before_action :check_authorisation, if: :document_type_slug
 
+  layout :get_layout
+  DESIGN_SYSTEM_MIGRATED_ACTIONS = %w[].freeze
+  include DesignSystemHelper
+
   def check_authorisation
     authorize current_format
   end
