@@ -44,5 +44,12 @@ RSpec.describe StatutoryInstrument do
       instance.validate
       expect(instance.errors[:withdrawn_date]).to be_empty
     end
+
+    it "requires a withdrawn date if sifting status withdrawn" do
+      instance.sifting_status = "withdrawn"
+      instance.withdrawn_date = nil
+      instance.validate
+      expect(instance.errors[:withdrawn_date].first).to eq("can't be blank")
+    end
   end
 end
