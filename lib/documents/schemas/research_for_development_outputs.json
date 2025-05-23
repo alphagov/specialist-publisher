@@ -8,6 +8,119 @@
     {
       "allowed_values": [
         {
+          "label": "Book",
+          "value": "book"
+        },
+        {
+          "label": "Book Chapter",
+          "value": "book_chapter"
+        },
+        {
+          "label": "Briefing",
+          "value": "briefing"
+        },
+        {
+          "label": "Case Study",
+          "value": "case_study"
+        },
+        {
+          "label": "Conference Paper",
+          "value": "conference_paper"
+        },
+        {
+          "label": "Country Report",
+          "value": "country_report"
+        },
+        {
+          "label": "Dataset",
+          "value": "dataset"
+        },
+        {
+          "label": "Discussion Paper",
+          "value": "discussion_paper"
+        },
+        {
+          "label": "Evaluation Report",
+          "value": "evaluation_report"
+        },
+        {
+          "label": "Journal Article",
+          "value": "journal_article"
+        },
+        {
+          "label": "Journal Issue",
+          "value": "journal_issue"
+        },
+        {
+          "label": "Lessons Learned",
+          "value": "lessons_learned"
+        },
+        {
+          "label": "Literature Review",
+          "value": "literature_review"
+        },
+        {
+          "label": "Manual",
+          "value": "manual"
+        },
+        {
+          "label": "Protocol",
+          "value": "protocol"
+        },
+        {
+          "label": "Research Paper",
+          "value": "research_paper"
+        },
+        {
+          "label": "Systematic Review",
+          "value": "systematic_review"
+        },
+        {
+          "label": "Technical Report",
+          "value": "technical_report"
+        },
+        {
+          "label": "Thematic Summary",
+          "value": "thematic_summary"
+        },
+        {
+          "label": "Tool kit",
+          "value": "tool_kit"
+        },
+        {
+          "label": "Training Materials",
+          "value": "training_materials"
+        },
+        {
+          "label": "Working Paper",
+          "value": "working_paper"
+        }
+      ],
+      "display_as_result_metadata": true,
+      "filterable": true,
+      "key": "research_document_type",
+      "name": "Document Type",
+      "preposition": "of type",
+      "short_name": "Document Type",
+      "specialist_publisher_properties": {
+        "select": "one",
+        "validations": {
+          "required": {}
+        }
+      },
+      "type": "text"
+    },
+    {
+      "display_as_result_metadata": true,
+      "filterable": false,
+      "key": "authors",
+      "name": "Authors",
+      "short_name": "Authors",
+      "type": "text"
+    },
+    {
+      "allowed_values": [
+        {
           "label": "Afghanistan",
           "value": "AF"
         },
@@ -805,111 +918,6 @@
     {
       "allowed_values": [
         {
-          "label": "Book",
-          "value": "book"
-        },
-        {
-          "label": "Book Chapter",
-          "value": "book_chapter"
-        },
-        {
-          "label": "Briefing",
-          "value": "briefing"
-        },
-        {
-          "label": "Case Study",
-          "value": "case_study"
-        },
-        {
-          "label": "Conference Paper",
-          "value": "conference_paper"
-        },
-        {
-          "label": "Country Report",
-          "value": "country_report"
-        },
-        {
-          "label": "Dataset",
-          "value": "dataset"
-        },
-        {
-          "label": "Discussion Paper",
-          "value": "discussion_paper"
-        },
-        {
-          "label": "Evaluation Report",
-          "value": "evaluation_report"
-        },
-        {
-          "label": "Journal Article",
-          "value": "journal_article"
-        },
-        {
-          "label": "Journal Issue",
-          "value": "journal_issue"
-        },
-        {
-          "label": "Lessons Learned",
-          "value": "lessons_learned"
-        },
-        {
-          "label": "Literature Review",
-          "value": "literature_review"
-        },
-        {
-          "label": "Manual",
-          "value": "manual"
-        },
-        {
-          "label": "Protocol",
-          "value": "protocol"
-        },
-        {
-          "label": "Research Paper",
-          "value": "research_paper"
-        },
-        {
-          "label": "Systematic Review",
-          "value": "systematic_review"
-        },
-        {
-          "label": "Technical Report",
-          "value": "technical_report"
-        },
-        {
-          "label": "Thematic Summary",
-          "value": "thematic_summary"
-        },
-        {
-          "label": "Tool kit",
-          "value": "tool_kit"
-        },
-        {
-          "label": "Training Materials",
-          "value": "training_materials"
-        },
-        {
-          "label": "Working Paper",
-          "value": "working_paper"
-        }
-      ],
-      "display_as_result_metadata": true,
-      "filterable": true,
-      "key": "research_document_type",
-      "name": "Document Type",
-      "preposition": "of type",
-      "short_name": "Document Type",
-      "specialist_publisher_properties": {
-        "select": "one",
-        "validations": {
-          "required": {}
-        }
-      },
-      "type": "text"
-    },
-    {
-      "allowed_values": [
-        {
           "label": "Agriculture",
           "value": "agriculture"
         },
@@ -984,14 +992,6 @@
         }
       },
       "type": "date"
-    },
-    {
-      "display_as_result_metadata": true,
-      "filterable": false,
-      "key": "authors",
-      "name": "Authors",
-      "short_name": "Authors",
-      "type": "text"
     }
   ],
   "filter": {

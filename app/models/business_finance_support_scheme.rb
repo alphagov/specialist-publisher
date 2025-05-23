@@ -1,6 +1,6 @@
 class BusinessFinanceSupportScheme < Document
-  apply_validations
   validates :continuation_link, presence: true
+  apply_validations
 
   FORMAT_SPECIFIC_FIELDS = format_specific_fields + %i[continuation_link will_continue_on]
 

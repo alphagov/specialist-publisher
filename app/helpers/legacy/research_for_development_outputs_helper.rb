@@ -1,4 +1,4 @@
-module ResearchForDevelopmentOutputsHelper
+module Legacy::ResearchForDevelopmentOutputsHelper
   ##
   # Only exists here - rather than in the finder schema - because
   # specialist-frontend won't allow us to suppress any metadata that's
