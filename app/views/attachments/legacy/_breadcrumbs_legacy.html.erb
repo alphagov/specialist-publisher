@@ -1,0 +1,6 @@
+<% content_for :breadcrumbs do %>
+  <li><%= link_to "Your documents", documents_path(params[:document_type_slug]) %></li>
+  <li><%= link_to @document.title, edit_document_path(params[:document_type_slug], @document.content_id) %></li>
+	<li class='active'>Edit attachment</li>
+<% end %>
+

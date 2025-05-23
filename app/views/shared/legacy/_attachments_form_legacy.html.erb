@@ -1,0 +1,18 @@
+<%= form_for(@attachment, url: url, method: method) do |f| %>
+  <p>
+    <%= f.label :title %>
+    <%= f.text_field :title, class: 'form-control input-md-8' %>
+  </p>
+  <% if @document.attachments.has_attachment?(@attachment) %>
+    <p><strong>Previous file: </strong><%= link_to @attachment.filename, @attachment.url %></p>
+  <% end %>
+  <p>
+    <%= f.label :file %>
+    <%= f.file_field :file %>
+  </p>
+  <div class='actions'>
+    <button type="submit" class='btn btn-success'>Save attachment</button>
+    or
+    <%= link_to 'cancel', edit_document_path(current_format.admin_slug, @document.content_id)%>
+  </div>
+<% end %>
