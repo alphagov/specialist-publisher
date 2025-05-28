@@ -116,6 +116,15 @@ class DocumentsController < ApplicationController
     end
   end
 
+  helper_method :computed_partial_legacy
+  def computed_partial_legacy
+    if lookup_context.exists?(@document.document_type.pluralize.to_s, %w[metadata_fields_legacy], true)
+      "metadata_fields_legacy/#{@document.document_type.pluralize}"
+    else
+      "shared/legacy/specialist_document_form_legacy"
+    end
+  end
+
 private
 
   def merge_nested_facet_fields
