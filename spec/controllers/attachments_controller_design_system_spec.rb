@@ -65,7 +65,7 @@ RSpec.describe AttachmentsController, type: :controller do
       }
     end
 
-    it "redirect to the specialist document edit page" do
+    it "redirects to the specialist document edit page" do
       document = CmaCase.find(document_content_id, document_locale)
       allow(subject).to receive(:fetch_document).and_return(document)
 
@@ -138,7 +138,7 @@ RSpec.describe AttachmentsController, type: :controller do
         }
       end
 
-      it "redirects to the specalist document edit page" do
+      it "redirects to the specialist document edit page" do
         allow(subject).to receive(:fetch_document).and_return(document)
 
         patch :update, params: {
