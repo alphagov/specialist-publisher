@@ -1,6 +1,10 @@
 class AttachmentsController < ApplicationController
   before_action :check_authorisation, if: :document_type_slug
 
+  layout :get_layout
+  DESIGN_SYSTEM_MIGRATED_ACTIONS = %w[new edit].freeze
+  include DesignSystemHelper
+
   def check_authorisation
     authorize current_format
   end
@@ -8,6 +12,7 @@ class AttachmentsController < ApplicationController
   def new
     @document = fetch_document
     @attachment = Attachment.new
+    render design_system_view(:new, "attachments/legacy/new_legacy")
   end
 
   def create
@@ -26,6 +31,7 @@ class AttachmentsController < ApplicationController
   def edit
     @document = fetch_document
     @attachment = @document.attachments.find(attachment_content_id)
+    render design_system_view(:edit, "attachments/legacy/edit_legacy")
   end
 
   def update

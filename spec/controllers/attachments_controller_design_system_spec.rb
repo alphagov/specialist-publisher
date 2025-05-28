@@ -45,7 +45,7 @@ RSpec.describe AttachmentsController, type: :controller do
   end
 
   before do
-    log_in_as_gds_editor
+    log_in_as_design_system_gds_editor
     stub_publishing_api_has_item(cma_case)
   end
 
@@ -116,7 +116,7 @@ RSpec.describe AttachmentsController, type: :controller do
       }
 
       expect(assigns(:attachment)).to eq(attachment)
-      expect(response).to render_template :edit_legacy
+      expect(response).to render_template :edit
     end
   end
 

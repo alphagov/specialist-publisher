@@ -1,15 +1,38 @@
-<%= content_for :page_title, "Edit attachment" %>
+<% page_title = "Edit attachment" %>
+<%= content_for :page_title, page_title %>
+<% content_for :title, page_title %>
+<% content_for :context, @document.title %>
+<% content_for :error_summary, render(ErrorSummaryComponent.new(object: @document)) %>
 
-<%= render partial: "attachments/breadcrumbs"%>
+<% content_for :breadcrumbs do %>
+  <%= render "govuk_publishing_components/components/breadcrumbs", {
+    collapse_on_mobile: true,
+    breadcrumbs: [
+      {
+        title: "Your documents",
+        url: documents_path(current_format.admin_slug)
+      },
+      {
+        title: @document.title,
+        url: edit_document_path(params[:document_type_slug], @document.content_id)
+      },
+      {
+        title: page_title
+      }
+    ]
+  } %>
+<% end %>
 
-<h1 class="page-header">Edit attachment</h1>
-
-<%= render(partial: "shared/attachments_form", locals: {
-    attachment: @attachment,
-    url: document_attachment_path(
-        params[:document_type_slug],
-        params[:document_content_id_and_locale],
-        params[:attachment_content_id]
-    ),
-    method: 'put'
-}) %>
+<div class="govuk-grid-row">
+  <section class="govuk-grid-column-two-thirds">
+    <%= render(partial: "shared/attachments_form", locals: {
+        attachment: @attachment,
+        url: document_attachment_path(
+            params[:document_type_slug],
+            params[:document_content_id_and_locale],
+            params[:attachment_content_id]
+        ),
+        method: 'put'
+    }) %>
+  </section>
+</div>

@@ -1,0 +1,11 @@
+<%= content_for :page_title, "Add attachment" %>
+
+<%= render partial: "attachments/legacy/breadcrumbs_legacy" %>
+
+<h1 class="page-header">Add attachment</h1>
+
+<%= render(partial: "shared/legacy/attachments_form_legacy", locals: {
+    attachment: @attachment,
+    url: document_attachments_path(params[:document_type_slug], params[:document_content_id_and_locale]),
+    method: 'post'
+}) %>

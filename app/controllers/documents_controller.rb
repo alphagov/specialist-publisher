@@ -7,6 +7,8 @@ class DocumentsController < ApplicationController
   include OrganisationsHelper
 
   layout :get_layout
+  DESIGN_SYSTEM_MIGRATED_ACTIONS = %w[new create index].freeze
+  include DesignSystemHelper
 
   before_action :fetch_document, except: %i[index new create]
   before_action :merge_nested_facet_fields, only: %i[edit new]
@@ -94,18 +96,6 @@ class DocumentsController < ApplicationController
   end
 
 private
-
-  def get_layout
-    if %w[new create index].include?(action_name) && current_user.preview_design_system?
-      "design_system"
-    else
-      "legacy_application"
-    end
-  end
-
-  def design_system_view(design_system_view, legacy_view)
-    get_layout == "design_system" ? design_system_view : legacy_view
-  end
 
   def merge_nested_facet_fields
     return unless @document
