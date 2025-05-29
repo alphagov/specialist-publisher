@@ -30,9 +30,10 @@ module AuthenticationFeatureHelpers
     log_in_as FactoryBot.create(user_type)
   end
 
-  def log_in_as_design_system_editor(user_type)
+  def log_in_as_design_system_editor(user_type, organisation_content_id = nil)
     user = FactoryBot.create(user_type)
     user.permissions << "preview_design_system"
+    user.organisation_content_id = organisation_content_id if organisation_content_id
     log_in_as user
   end
 end

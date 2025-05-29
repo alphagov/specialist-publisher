@@ -28,7 +28,7 @@
       <% if current_format.has_organisations? %>
         <%= label_tag "organisation", "Organisation" %>
         <%= select_tag "organisation",
-              options_for_select(organisations_options_with_all, selected_organisation_or_current(@organisation)),
+              options_for_select(organisations_options_with_all_legacy, selected_organisation_or_current(@organisation)),
               class: "select2 form-control add-bottom-margin" %>
       <% end %>
 
