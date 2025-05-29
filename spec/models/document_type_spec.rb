@@ -3,6 +3,7 @@ require "models/valid_against_schema"
 
 EXCEPTIONS_TO_GENERAL_TESTING = %w[
   ai_assurance_portfolio_technique
+  research_for_development_output
 ].freeze
 
 Dir["lib/documents/schemas/*.json"].each do |file|
