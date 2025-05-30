@@ -414,6 +414,7 @@ FactoryBot.define do
           "theme" => %w[infrastructure],
           "first_published_at" => "2016-04-28",
           "bulk_published" => true,
+          "review_status" => "unreviewed",
         }
       end
     end

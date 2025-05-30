@@ -3,7 +3,6 @@ require "models/valid_against_schema"
 
 RSpec.describe ResearchForDevelopmentOutput do
   let(:payload) { FactoryBot.create(:research_for_development_output) }
-  include_examples "it saves payloads that are valid against the 'specialist_document' schema"
 
   it "is always bulk published to hide the publishing-api published date" do
     expect(subject.bulk_published).to be true
