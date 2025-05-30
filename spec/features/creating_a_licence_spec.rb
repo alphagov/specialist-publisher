@@ -1,7 +1,6 @@
 require "spec_helper"
 
 RSpec.feature "Creating a Licence", type: :feature do
-  let(:fields)              { %i[base_path content_id public_updated_at title publication_state] }
   let(:licence_transaction) { FactoryBot.create(:licence_transaction) }
   let(:content_id)          { licence_transaction["content_id"] }
   let(:public_updated_at)   { licence_transaction["public_updated_at"] }
