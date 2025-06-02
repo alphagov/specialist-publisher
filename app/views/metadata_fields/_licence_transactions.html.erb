@@ -14,7 +14,7 @@
   heading_level: 2,
   heading_size: "l",
   id: "#{format_name}_link_and_identifier_exists",
-  error_message: errors_for_input(@document.errors, :base),
+  error_message: errors_for_input(@document.errors, :base)&.include?(t("activemodel.errors.models.licence_transaction.attributes.base.link_and_identifier_exists")) ? errors_for_input(@document.errors, :base) : nil,
 } do %>
   <% unless field_has_errors(@document, :base) %>
     <p class="govuk-body govuk-!-margin-bottom-6">Enter either the website where users can apply for the licence, or the licence identifier.</p>
