@@ -35,16 +35,18 @@ RSpec.feature "Creating a Licence", type: :feature do
     expect(page.current_path).to eq(new_document_path)
   end
 
-  scenario "saving a new document with no data", skip: "Skip while fixing the errors" do
+  scenario "saving a new document with no data" do
     visit new_document_path
     fill_in "Body", with: ""
     click_button "Save as draft"
 
     expect(page.status_code).to eq(422)
 
-    expect(page).to have_css(".govuk-error-message", text: "Title can't be blank")
-    expect(page).to have_css(".govuk-error-message", text: "Summary can't be blank")
-    expect(page).to have_css(".govuk-error-message", text: "Body can't be blank")
+    attributes = I18n.t("activemodel.errors.models.licence_transaction.attributes")
+
+    %i[title body summary].each do |key|
+      expect(page).to have_css(".gem-c-error-summary__list-item", text: attributes[key][:blank])
+    end
 
     schema.facets.each do |facet|
       next if %w[licence_transaction_will_continue_on licence_transaction_continuation_link licence_transaction_licence_identifier].include? facet["key"]
@@ -54,16 +56,11 @@ RSpec.feature "Creating a Licence", type: :feature do
 
       next unless validations["required"]
 
-      error_regex = /#{facet['key'].humanize} can't be blank|#{facet['name']} can't be blank/
-      expect(page).to have_css(".gem-c-error-summary__list-item", text: error_regex)
-      expect(page).to have_css(".govuk-error-message", text: error_regex)
+      expect(page).to have_css(".gem-c-error-summary__list-item", text: attributes[facet["key"].to_sym][:blank])
+      expect(page).to have_css(".govuk-error-message", text: attributes[facet["key"].to_sym][:blank])
     end
 
-    # Custom validation if all continuation link related fields are blank
-    attributes = I18n.t("activemodel.errors.models.licence_transaction.attributes")
-    within(".additional-field-context-section p.elements-error-message") do
-      expect(page).to have_content attributes[:base][:link_and_identifier_exists]
-    end
+    expect(page).to have_content attributes[:base][:link_and_identifier_exists]
   end
 
   scenario "saving a new document with valid data" do
