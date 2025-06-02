@@ -1,35 +1,24 @@
-<%= render layout: 'shared/form_group', locals: { f: f, field: :research_document_type, label: 'Document type' } do %>
-  <%=
-    f.select :research_document_type, select_options_for_facet(f.object.allowed_values(:research_document_type)),
-      { include_blank: true },
-      { class: 'select2', multiple: false, data: { placeholder: 'Select document type' } }
-  %>
-<% end %>
+<% finder_schema = f.object.class.finder_schema %>
+<%= render FacetInputComponent.new(@document, finder_schema.get_facet(:research_document_type)) %>
 
 <%= render layout: 'shared/form_group', locals: { f: f, field: :authors, label: 'Authors' } do %>
   <%= f.text_field :author_tags, class: 'form-control free-form-list', data: { placeholder: 'Add authors' } %>
 <% end %>
 
-<%= render layout: 'shared/form_group', locals: { f: f, field: :country, label: 'Countries' } do %>
-  <%=
-    f.select :country, select_options_for_facet(f.object.allowed_values(:country)),
-      { include_blank: true },
-      { class: 'select2', multiple: true, data: { placeholder: 'Select countries' } }
-  %>
-<% end %>
+<%= render FacetInputComponent.new(@document, finder_schema.get_facet(:country)) %>
+<%= render FacetInputComponent.new(@document, finder_schema.get_facet(:theme)) %>
+<%= render FacetInputComponent.new(@document, finder_schema.get_facet(:first_published_at)) %>
 
-<%= render layout: 'shared/form_group', locals: { f: f, field: :theme, label: 'Themes' } do %>
-  <%=
-    f.select :theme, select_options_for_facet(f.object.allowed_values(:theme)),
-             { include_blank: false },
-             { class: 'select2', multiple: true, data: { placeholder: 'Select themes' } }
-  %>
-<% end %>
-<%= render layout: "shared/legacy/date_fields_legacy", locals: { f: f, field: :first_published_at, format: :research_for_development_output } do %>
-<% end %>
-<% # TODO: this field prevents us moving to the shared view. It uses this weird 'ResearchForDevelopmentOutputsHelper' helper %>
-<%= render layout: 'shared/form_group', locals: { f: f, field: :review_status, label: 'Review status' } do %>
-  <%= f.select :review_status, review_status_options,
-    {},
-    { class: 'form-control' } %>
-<% end %>
+<% # TODO: this field prevents us moving to the shared view. It is not a schema listed facet %>
+<% review_status_options = [
+  {
+    "label" => "Unreviewed",
+    "value" => "unreviewed",
+  },
+  {
+    "label" => "Peer reviewed",
+    "value" => "peer-reviewed",
+  },
+] %>
+<%= render FacetInputComponent::SingleSelectComponent.new(@document, @document_type, :review_status, "Review status", review_status_options, allow_blank_option: false) %>
+

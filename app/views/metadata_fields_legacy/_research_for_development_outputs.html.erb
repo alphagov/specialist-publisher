@@ -27,7 +27,7 @@
 <% end %>
 <%= render layout: "shared/legacy/date_fields_legacy", locals: { f: f, field: :first_published_at, format: :research_for_development_output } do %>
 <% end %>
-<% # TODO: this field prevents us moving to the shared view. It uses this weird 'ResearchForDevelopmentOutputsHelper' helper %>
+<% # TODO: this field prevents us moving to the shared view. It is not a schema listed facet %>
 <%= render layout: 'shared/form_group', locals: { f: f, field: :review_status, label: 'Review status' } do %>
   <%= f.select :review_status, review_status_options,
     {},
