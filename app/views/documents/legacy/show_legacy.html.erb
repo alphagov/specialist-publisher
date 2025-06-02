@@ -1,22 +1,11 @@
-<% title = @document.title %>
-<% content_for :title, title %>
-<% content_for :page_title, title %>
-<% content_for :error_summary, render(ErrorSummaryComponent.new(object: @document)) %>
+<%= content_for :page_title, "Summary" %>
 
 <% content_for :breadcrumbs do %>
-  <%= render "govuk_publishing_components/components/breadcrumbs", {
-    collapse_on_mobile: true,
-    breadcrumbs: [
-      {
-        title: "Your documents",
-        url: documents_path(current_format.admin_slug)
-      },
-      {
-        title: @document.title
-      }
-    ]
-  } %>
+  <li><%= link_to "Your documents", documents_path(current_format.admin_slug) %></li>
+  <li class='active'><%= @document.title %></li>
 <% end %>
+
+<%= render partial: "shared/legacy/title_legacy", locals: { document: @document } %>
 
 <div class="row">
   <div class="col-md-8">
@@ -24,19 +13,6 @@
     <p class="lead"><%= @document.summary %></p>
   </div>
 </div>
-
-<div class="row">
-  <div class="col-md-8">
-    <h2>Preview</h2>
-    <% if show_view_on_website_link?(@document.state_history) %>
-      <li><%= view_on_website_link_for(@document) %></li>
-    <% end %>
-    <% if show_preview_draft_link?(@document.state_history) %>
-      <li><%= preview_draft_link_for(@document) %></li>
-    <% end %>
-  </div>
-</div>
-
 
 <%= render DocumentMetadataComponent.new(document: @document) %>
 
