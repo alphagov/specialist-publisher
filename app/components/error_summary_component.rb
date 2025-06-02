@@ -25,7 +25,7 @@ private
   def error_items
     errors.map do |error|
       error_item = {
-        text: error.full_message,
+        text: get_text(error),
         data_attributes: {
           module: "ga4-auto-tracker",
           "ga4-auto": {
@@ -53,6 +53,10 @@ private
                 else
                   object.errors
                 end
+  end
+
+  def get_text(error)
+    @object.try(:custom_error_message_fields) && @object.custom_error_message_fields.include?(error.attribute) ? error.message : error.full_message
   end
 
   def ga4_title
