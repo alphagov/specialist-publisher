@@ -37,12 +37,16 @@
 <%= render DocumentMetadataComponent.new(document: @document) %>
 
 <% if @document.body.present? %>
-  <div class="row">
-    <div class="col-md-8">
-      <h2>Body</h2>
-      <pre class="body-pre add-bottom-margin"><%= @document.body %></pre>
-    </div>
-  </div>
+  <section class="app-view-summary__section">
+    <%= render "govuk_publishing_components/components/heading", {
+      text: "Body",
+      heading_level: 2,
+      font_size: "l",
+      margin_bottom: 3,
+    } %>
+
+    <pre class="govspeak-help__pre"><%= @document.body %></pre>
+  </section>
 <% end %>
 
 <div class="row">
