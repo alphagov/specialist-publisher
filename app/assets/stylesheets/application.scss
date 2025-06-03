@@ -34,6 +34,7 @@ $govuk-page-width: 1140px;
 @import "./components/govspeak-editor";
 @import "./components/autocomplete";
 @import "./components/diff";
+@import "select_with_search_component/application";
 
 @import "./govspeak-help";
 @import "./summary";

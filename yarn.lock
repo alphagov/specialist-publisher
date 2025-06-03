@@ -475,6 +475,15 @@ accessible-autocomplete-multiselect@alphagov/accessible-autocomplete-multiselect
   languageName: node
   linkType: hard
 
+"choices.js@npm:^11.1.0":
+  version: 11.1.0
+  resolution: "choices.js@npm:11.1.0"
+  dependencies:
+    fuse.js: ^7.0.0
+  checksum: 8e6438568ef6b5a280a10952650a76c0bdf587ac3b0ec1c036fcaef4431a295922fa2da4deabad61020616e1101ec533b055a5ecb200c5c86c64d8bfeb9a79ae
+  languageName: node
+  linkType: hard
+
 "color-convert@npm:^1.9.0":
   version: 1.9.3
   resolution: "color-convert@npm:1.9.3"
@@ -1418,6 +1427,13 @@ accessible-autocomplete-multiselect@alphagov/accessible-autocomplete-multiselect
   version: 1.0.1
   resolution: "functional-red-black-tree@npm:1.0.1"
   checksum: ca6c170f37640e2d94297da8bb4bf27a1d12bea3e00e6a3e007fd7aa32e37e000f5772acf941b4e4f3cf1c95c3752033d0c509af157ad8f526e7f00723b9eb9f
+  languageName: node
+  linkType: hard
+
+"fuse.js@npm:^7.0.0":
+  version: 7.1.0
+  resolution: "fuse.js@npm:7.1.0"
+  checksum: e0c7d6833d336f9facd9359a888170b90c418b2f46c6cb389fd7dbc708712a2d1c5f30b5fea13b634a090a21f69d746eb0ceaff545b11ca088d3e5058c2a8e15
   languageName: node
   linkType: hard
 
@@ -3294,6 +3310,7 @@ accessible-autocomplete-multiselect@alphagov/accessible-autocomplete-multiselect
   resolution: "specialist-publisher@workspace:."
   dependencies:
     accessible-autocomplete-multiselect: alphagov/accessible-autocomplete-multiselect
+    choices.js: ^11.1.0
     jasmine-browser-runner: ^3.0.0
     jasmine-core: ^5.4.0
     paste-html-to-govspeak: ^0.5.0

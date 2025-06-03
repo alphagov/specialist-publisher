@@ -1,4 +1,5 @@
 source "https://rubygems.org"
+git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 gem "rails", "~> 8.0.2"
 
@@ -26,6 +27,7 @@ gem "multi_json"
 gem "plek"
 gem "pundit"
 gem "select2-rails", "< 4" # v4 changes the generated HTML and breaks the e2e tests
+gem "select_with_search_component", github: "alphagov/select-with-search-component"
 gem "sentry-sidekiq"
 gem "stringex"
 gem "terser"
