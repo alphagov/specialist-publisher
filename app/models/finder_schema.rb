@@ -86,6 +86,8 @@ class FinderSchema
       Array(value).map do |v|
         value_label_mapping_for(facet_key, v).fetch("label") { value }
       end
+    elsif type == "date"
+      Time.zone.parse(value).to_date if value.present?
     else
       value_label_mapping_for(facet_key, value).fetch("label") { value }
     end

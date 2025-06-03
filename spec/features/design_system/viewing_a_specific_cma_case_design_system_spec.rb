@@ -51,8 +51,8 @@ RSpec.feature "Viewing a specific case", type: :feature do
       expect(page).to have_content("draft")
       expect(page).to have_content("This is the summary of example CMA case")
       expect(page).to have_content("This is the long body of an example CMA case")
-      expect(page).to have_content("Opened 2014-01-01")
-      expect(page).to have_content("Closed 2015-01-01")
+      expect(page).to have_content("Opened 1 January 2014")
+      expect(page).to have_content("Closed 1 January 2015")
       expect(page).to have_content("Outcome CA98 - no grounds for action")
       expect(page).to have_content("Market sector Energy")
       expect(page).to have_content("Bulk published false")
@@ -216,8 +216,8 @@ RSpec.feature "Viewing a specific case", type: :feature do
 
       expect(page).not_to have_content("Preview on website (opens in new tab)")
       expect(page).to have_content("Preview draft (opens in new tab)")
-      within(".metadata-list") do
-        expect(page).to have_content("Publication state draft")
+      within(".app-view-summary__metadata-list") do
+        expect(page).to have_content("Publication state Draft")
       end
     end
 
@@ -227,15 +227,15 @@ RSpec.feature "Viewing a specific case", type: :feature do
 
       expect(page).to have_content("Preview on website (opens in new tab)")
       expect(page).not_to have_content("Preview draft (opens in new tab)")
-      within(".metadata-list") do
-        expect(page).to have_content("Publication state published")
+      within(".app-view-summary__metadata-list") do
+        expect(page).to have_content("Publication state Published")
       end
 
       visit "/cma-cases"
       click_link "More states Published"
 
-      within(".metadata-list") do
-        expect(page).to have_content("Publication state published")
+      within(".app-view-summary__metadata-list") do
+        expect(page).to have_content("Publication state Published")
       end
     end
 
@@ -245,8 +245,8 @@ RSpec.feature "Viewing a specific case", type: :feature do
 
       expect(page).not_to have_content("Preview on website (opens in new tab)")
       expect(page).not_to have_content("Preview draft (opens in new tab)")
-      within(".metadata-list") do
-        expect(page).to have_content("Publication state unpublished")
+      within(".app-view-summary__metadata-list") do
+        expect(page).to have_content("Publication state Unpublished")
       end
     end
 
@@ -256,15 +256,15 @@ RSpec.feature "Viewing a specific case", type: :feature do
 
       expect(page).to have_content("Preview on website (opens in new tab)")
       expect(page).to have_content("Preview draft (opens in new tab)")
-      within(".metadata-list") do
-        expect(page).to have_content("Publication state published with new draft")
+      within(".app-view-summary__metadata-list") do
+        expect(page).to have_content("Publication state Published with new draft")
       end
 
       visit "/cma-cases"
       first(:link, "More states").click
 
-      within(".metadata-list") do
-        expect(page).to have_content("Publication state published with new draft")
+      within(".app-view-summary__metadata-list") do
+        expect(page).to have_content("Publication state Published with new draft")
       end
     end
 
@@ -274,8 +274,8 @@ RSpec.feature "Viewing a specific case", type: :feature do
 
       expect(page).not_to have_content("Preview on website (opens in new tab)")
       expect(page).to have_content("Preview draft (opens in new tab)")
-      within(".metadata-list") do
-        expect(page).to have_content("Publication state unpublished with new draft")
+      within(".app-view-summary__metadata-list") do
+        expect(page).to have_content("Publication state Unpublished with new draft")
       end
     end
   end
