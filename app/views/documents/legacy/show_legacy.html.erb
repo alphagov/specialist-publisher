@@ -14,7 +14,7 @@
   </div>
 </div>
 
-<%= render DocumentMetadataComponent.new(document: @document) %>
+<%= render Legacy::DocumentMetadataComponent.new(document: @document) %>
 
 <% if @document.body.present? %>
   <div class="row">

@@ -1,4 +1,4 @@
-class DocumentMetadataComponent < ViewComponent::Base
+class Legacy::DocumentMetadataComponent < ViewComponent::Base
   def initialize(document:)
     @document = document
   end
