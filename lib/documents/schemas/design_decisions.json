@@ -1,7 +1,7 @@
 {
   "base_path": "/designs-decisions",
   "content_id": "d35b914f-a875-4ee0-b307-991269dc26df",
-  "description": "Find Intellectual Property (Registered Design) related decisions for the U.K.",
+  "description": "Find UK Intellectual Property (Registered Designs) related legal decisions.",
   "document_noun": "decision",
   "document_title": "Design Decision",
   "facets": [
@@ -30,7 +30,7 @@
         },
         {
           "label": "Rosie Le Breton",
-          "value": "rosie-le"
+          "value": "rosie-le-breton"
         },
         {
           "label": "Arran Cooper",
@@ -47,6 +47,10 @@
         {
           "label": "Al Skilton",
           "value": "al-skilton"
+        },
+        {
+          "label": "Martin Howe",
+          "value": "martin-howe"
         }
       ],
       "display_as_result_metadata": true,
@@ -95,12 +99,12 @@
   "filter": {
     "format": "design_decision"
   },
-  "name": "Find Intellectual Property related legal decisions",
+  "name": "Find UK Intellectual Property (Registered Designs) related legal decisions.",
   "organisations": [
     "5d6f9583-991f-413d-ae83-be7274e5eae4"
   ],
   "show_summaries": true,
   "show_metadata_block": true,
-  "summary": "To find Intellectual Property (Registered Designs) related decisions for the U.K.\r\n\r\n##Note\r\n\r\nEvery effort is made to ensure design hearing decisions have been accurately recorded, but some errors may have been introduced during conversion for the web.\r\n\r\nCopies of any documents annexed to a decision are available from:\r\n\r\n$C\r\nTribunal Section,<br>Intellectual Property Office,<br>Concept House,<br>Cardiff Road,<br>Newport,<br>South Wales<br>NP10 8QQ\r\n$C",
+  "summary": "Results of past design and design right hearing decisions issued since 2013. Decisions published between 1998 - 2012 are available on the <a href=\"https://webarchive.nationalarchives.gov.uk/ukgwa/20140603095013/http://www.ipo.gov.uk/pro-types/pro-design/d-decisions.htm\">National Archives</a>. Please note, no decisions were issued during 2003.\r\n\r\nYou can use the free search box below to search by decision number.",
   "target_stack": "draft"
 }
