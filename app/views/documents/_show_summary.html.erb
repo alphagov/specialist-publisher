@@ -5,7 +5,7 @@
     </div>
   </section>
 
-  <section class="app-view-summary__section govuk-!-margin-top-8">
+  <section class="app-view-summary__section">
     <%= render "govuk_publishing_components/components/heading", {
       text: "Preview",
       heading_level: 2,
@@ -37,7 +37,7 @@
 <%= render DocumentMetadataComponent.new(document: @document) %>
 
 <% if @document.body.present? %>
-  <section class="app-view-summary__section govuk-!-margin-top-8">
+  <section class="app-view-summary__section">
     <%= render "govuk_publishing_components/components/heading", {
       text: "Body",
       heading_level: 2,
@@ -49,7 +49,7 @@
   </section>
 <% end %>
 
-<section class="app-view-summary__section govuk-!-margin-top-8">
+<section class="app-view-summary__section app-view-summary__section--attachments">
   <%= render "govuk_publishing_components/components/heading", {
     text: "Attachments",
     heading_level: 2,
@@ -78,5 +78,3 @@
     <p class='govuk-body'>This document doesn’t have any attachments</p>
   <% end %>
 </section>
-
-<%= render partial: "documents/legacy/actions_legacy" %>
