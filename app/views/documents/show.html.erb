@@ -27,6 +27,6 @@
     <%= render partial: "show_summary" %>
   </div>
   <div class="govuk-grid-column-one-third">
-    <%= render partial: "show_sidebar" %>
+    <%= render(SidebarActionsComponent.new(@document, current_user)) %>
   </div>
 </div>
