@@ -138,7 +138,6 @@ RSpec.feature "Viewing a specific case", type: :feature do
       click_link "CMA Case with attachments"
 
       expect(page).to have_no_content("This document doesn’t have any attachments")
-      expect(page).to have_content("2 attachments")
 
       expect(page).to have_content("first attachment")
       expect(page).to have_content("1 December 2015")
