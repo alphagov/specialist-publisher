@@ -76,7 +76,7 @@ RSpec.feature "Creating a Flood and Coastal Erosion Risk Management Research Rep
       elsif properties["select"] == "one"
         select facet["allowed_values"].first["label"], from: facet["name"], match: :first
       elsif properties["select"] == "multiple"
-        select facet["allowed_values"].first["label"], from: "#{key}_0"
+        select facet["allowed_values"].first["label"], from: "#{document_type}[#{facet['key']}][]"
       else
         fill_in facet["name"], with: "Example #{facet['name']}"
       end
