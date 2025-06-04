@@ -1,7 +1,7 @@
 {
   "base_path": "/designs-decisions",
   "content_id": "d35b914f-a875-4ee0-b307-991269dc26df",
-  "description": "Find UK Intellectual Property (Registered Designs) related legal decisions.",
+  "description": "Find UK Intellectual Property (Registered Designs) related legal decisions",
   "document_noun": "decision",
   "document_title": "Design Decision",
   "facets": [
@@ -99,7 +99,7 @@
   "filter": {
     "format": "design_decision"
   },
-  "name": "Find UK Intellectual Property (Registered Designs) related legal decisions.",
+  "name": "Find UK Intellectual Property (Registered Designs) related legal decisions",
   "organisations": [
     "5d6f9583-991f-413d-ae83-be7274e5eae4"
   ],
