@@ -1,15 +1,12 @@
-<%= render "govuk_publishing_components/components/heading", {
-  text: @facet_name,
-  heading_level: 3,
-  font_size: "m",
-  margin_bottom: 4,
-} %>
-<%= render "govuk_publishing_components/components/add_another", {
-  fieldset_legend: @facet_name,
-  name: @facet_name.downcase,
+<%= render "components/select_with_search", {
+  label: @facet_name,
+  heading_size: "m",
   id: "#{@document_type}_#{@facet_key}",
-  add_button_text: "Add another #{@facet_name.downcase}",
-  margin_bottom: 6,
-  items: pre_selected_items,
-  empty: template_add_another(pre_selected_items.count),
+  name: "#{@document_type}[#{@facet_key}][]",
+  select: {
+    multiple: true
+  },
+  options: @options,
+  error_items: @error_items,
+  include_blank: true,
 } %>
