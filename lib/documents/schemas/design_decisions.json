@@ -51,6 +51,14 @@
         {
           "label": "Martin Howe",
           "value": "martin-howe"
+        },
+        {
+          "label": "O Morris",
+          "value": "o-morris"
+        },
+        {
+          "label": "J Pike",
+          "value": "j-pike"
         }
       ],
       "display_as_result_metadata": true,
