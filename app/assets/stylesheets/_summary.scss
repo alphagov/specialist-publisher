@@ -30,3 +30,18 @@
 .app-view-summary__sidebar-actions .govuk-list--spaced li:last-child {
   margin-bottom: 0;
 }
+
+.app-view-summary__sidebar-notices {
+  .govuk-inset-text {
+    border-left: $govuk-border-width-narrow solid govuk-colour("dark-grey");
+    background-color: govuk-colour("light-grey");
+
+    @include govuk-media-query($from: tablet) {
+      border-left: $govuk-border-width solid govuk-colour("dark-grey");
+    }
+
+    &:focus {
+      outline: $govuk-focus-width solid $govuk-focus-colour;
+    }
+  }
+}
