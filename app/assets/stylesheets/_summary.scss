@@ -1,0 +1,47 @@
+.app-view-summary__section {
+  padding: govuk-spacing(3) 0;
+}
+
+.app-view-summary__table-link {
+  margin-right: govuk-spacing(2);
+}
+
+.app-view-summary__section:first-child {
+  padding-top: 0;
+}
+
+.app-view-summary__section--attachments .govuk-table__cell {
+  overflow-wrap: break-word;
+  word-break: break-word;
+}
+
+// Sidebar styles
+
+.app-view-summary__sidebar-actions {
+  padding: govuk-spacing(3);
+  background-color: govuk-colour("light-grey");
+}
+
+.app-view-summary__sidebar-actions .gem-c-button {
+  width: 100%;
+}
+
+.app-view-summary__sidebar-actions .govuk-list--spaced,
+.app-view-summary__sidebar-actions .govuk-list--spaced li:last-child {
+  margin-bottom: 0;
+}
+
+.app-view-summary__sidebar-notices {
+  .govuk-inset-text {
+    border-left: $govuk-border-width-narrow solid govuk-colour("dark-grey");
+    background-color: govuk-colour("light-grey");
+
+    @include govuk-media-query($from: tablet) {
+      border-left: $govuk-border-width solid govuk-colour("dark-grey");
+    }
+
+    &:focus {
+      outline: $govuk-focus-width solid $govuk-focus-colour;
+    }
+  }
+}

@@ -47,8 +47,8 @@
     <main class="govuk-main-wrapper<%= " govuk-main-wrapper--l" if yield(:back_link).blank? && yield(:breadcrumbs).blank? %>" id="main-content" role="main">
 
       <%= render "govuk_publishing_components/components/success_alert", {
-        message: flash[:notice]
-      } if flash[:notice] %>
+        message: flash[:notice] || flash[:success]
+      } if flash[:notice] || flash[:success] %>
       <%= render "govuk_publishing_components/components/error_alert", {
         message: flash[:danger]
       } if flash[:danger] %>

@@ -4,10 +4,10 @@
       <%= document.base_path %>
     </li>
     <% if show_view_on_website_link?(document.state_history) %>
-      <li><%= view_on_website_link_for(document) %></li>
+      <li><%= view_on_website_link_for_legacy(document) %></li>
     <% end %>
     <% if show_preview_draft_link?(document.state_history) %>
-      <li><%= preview_draft_link_for(document) %></li>
+      <li><%= preview_draft_link_for_legacy(document) %></li>
     <% end %>
   </ul>
 </h1>

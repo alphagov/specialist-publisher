@@ -1,18 +1,10 @@
-<div class="row add-bottom-margin">
-  <div class=" col-md-8">
-    <h2>Metadata</h2>
-    <dl class="metadata-list">
-      <%= list_facets %>
-      <% if @document.class.has_organisations? %>
-        <dt>Publishing organisation</dt>
-        <dd><%= helpers.organisation_name(@document.primary_publishing_organisation) %></dd>
-        <dt>Other associated Organisations</dt>
-        <%= list_associated_organisations %>
-      <% end %>
-      <dt>Bulk published</dt>
-      <dd><%= @document.bulk_published %></dd>
-      <dt>Publication state</dt>
-      <dd><%= publication_state %></dd>
-    </dl>
-  </div>
-</div>
+<section class="app-view-summary__section app-view-summary__metadata-list">
+  <%= render "govuk_publishing_components/components/heading", {
+    text: "Metadata",
+    heading_level: 2,
+    font_size: "l",
+    margin_bottom: 3,
+  } %>
+
+  <%= render "govuk_publishing_components/components/summary_list", items: metadata_items %>
+</section>

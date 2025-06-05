@@ -6,7 +6,11 @@
     collapse_on_mobile: true,
     breadcrumbs: [
       {
-        title: "Your documents",
+        title: "All finders",
+        url: finders_path
+      },
+      {
+        title: current_format.title.pluralize,
         url: documents_path(current_format.admin_slug)
       },
       {

@@ -7,7 +7,7 @@ class DocumentsController < ApplicationController
   include OrganisationsHelper
 
   layout :get_layout
-  DESIGN_SYSTEM_MIGRATED_ACTIONS = %w[new create index].freeze
+  DESIGN_SYSTEM_MIGRATED_ACTIONS = %w[new create index show].freeze
   include DesignSystemHelper
 
   before_action :fetch_document, except: %i[index new create]
@@ -48,6 +48,7 @@ class DocumentsController < ApplicationController
     if @document.content_item_blocking_publish?
       flash[:danger] = "Warning: This document's URL is already used on GOV.UK. You can't publish it until you change the title."
     end
+    render design_system_view(:show, "documents/legacy/show_legacy")
   end
 
   def edit; end

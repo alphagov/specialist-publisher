@@ -1,0 +1,68 @@
+<%= content_for :page_title, "Summary" %>
+
+<% content_for :breadcrumbs do %>
+  <li><%= link_to "Your documents", documents_path(current_format.admin_slug) %></li>
+  <li class='active'><%= @document.title %></li>
+<% end %>
+
+<%= render partial: "shared/legacy/title_legacy", locals: { document: @document } %>
+
+<div class="row">
+  <div class="col-md-8">
+    <h2>Summary</h2>
+    <p class="lead"><%= @document.summary %></p>
+  </div>
+</div>
+
+<%= render Legacy::DocumentMetadataComponent.new(document: @document) %>
+
+<% if @document.body.present? %>
+  <div class="row">
+    <div class="col-md-8">
+      <h2>Body</h2>
+      <pre class="body-pre add-bottom-margin"><%= @document.body %></pre>
+    </div>
+  </div>
+<% end %>
+
+<div class="row">
+  <div class="col-md-8">
+    <%
+      truncate_at_count = 5
+      attachments = @document.attachments || []
+    %>
+    <h2 class="add-bottom-margin">
+      <%= number_with_delimiter(attachments.count) %> <%= 'attachment'.pluralize(attachments.count) %>
+    </h2>
+    <% if attachments.any? %>
+      <table class="table table-bordered table-striped add-bottom-margin" data-module="toggle">
+        <thead>
+          <tr class="table-header">
+            <th>Title</th>
+            <th>Created</th>
+            <th>Last&nbsp;updated</th>
+          </tr>
+        </thead>
+        <% attachments.each_with_index do | attachment, i | %>
+          <% if i == truncate_at_count - 1 %>
+            <tr class="table-header">
+              <td colspan="3" class="js-toggle-target text-center">
+                <strong><a href="#expand-table" class="js-toggle">…and
+                          <%= attachments.count - (truncate_at_count - 1) %> more</a></strong>
+              </td>
+            </tr>
+          <% end %>
+          <tr <% if i > truncate_at_count - 2 %>class="js-toggle-target if-js-hide"<% end %>>
+            <td><%= attachment.title %></td>
+            <td><%= attachment.created_at.to_date.to_fs(:govuk_date) %></td>
+            <td><%= attachment.updated_at.to_date.to_fs(:govuk_date) %></td>
+          </tr>
+        <% end %>
+      </table>
+    <% else %>
+      <p class='no-content-message'>This document doesn’t have any attachments</p>
+    <% end %>
+  </div>
+</div>
+
+<%= render partial: "documents/legacy/actions_legacy" %>

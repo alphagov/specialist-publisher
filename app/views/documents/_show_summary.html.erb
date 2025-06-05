@@ -1,0 +1,80 @@
+<div class="app-view-summary__main">
+  <section class="app-view-summary__section page-header">
+    <div class="app-view-summary__document-summary">
+      <p class="govuk-body-lead"><%= @document.summary %></p>
+    </div>
+  </section>
+
+  <section class="app-view-summary__section">
+    <%= render "govuk_publishing_components/components/heading", {
+      text: "Preview",
+      heading_level: 2,
+      font_size: "l",
+      margin_bottom: 3,
+    } %>
+
+    <% if show_view_on_website_link?(@document.state_history) %>
+      <p class="govuk-body">
+        <%= link_to "Preview on website (opens in new tab)",
+                    public_url_for(@document),
+                    class: 'govuk-link',
+                    target: "_blank",
+                    rel: "noopener" %>
+      </p>
+    <% end %>
+    <% if show_preview_draft_link?(@document.state_history) %>
+      <p class="govuk-body">
+        <%= link_to "Preview draft (opens in new tab)",
+                    draft_url_for(@document),
+                    class: 'govuk-link',
+                    target: "_blank",
+                    rel: "noopener" %>
+      </p>
+    <% end %>
+  </section>
+</div>
+
+<%= render DocumentMetadataComponent.new(document: @document) %>
+
+<% if @document.body.present? %>
+  <section class="app-view-summary__section">
+    <%= render "govuk_publishing_components/components/heading", {
+      text: "Body",
+      heading_level: 2,
+      font_size: "l",
+      margin_bottom: 3,
+    } %>
+
+    <pre class="govspeak-help__pre"><%= @document.body %></pre>
+  </section>
+<% end %>
+
+<section class="app-view-summary__section app-view-summary__section--attachments">
+  <%= render "govuk_publishing_components/components/heading", {
+    text: "Attachments",
+    heading_level: 2,
+    font_size: "l",
+    margin_bottom: 3,
+  } %>
+
+  <% attachments = @document.attachments || [] %>
+  <% if attachments.any? %>
+    <%= render "govuk_publishing_components/components/table", {
+      head: [
+        { text: "Title" },
+        { text: "Created" },
+        { text: "Last updated" }
+      ],
+      rows: attachments.map { |attachment|
+        [{ text: attachment.title },
+         {
+           text: attachment.created_at.to_date.to_fs(:govuk_date)
+         }, {
+           text: attachment.updated_at.to_date.to_fs(:govuk_date)
+         }]
+        }
+    } %>
+  <% else %>
+    <p class='govuk-body'>This document doesn’t have any attachments</p>
+  <% end %>
+</section>

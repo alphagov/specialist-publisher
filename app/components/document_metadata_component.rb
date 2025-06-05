@@ -1,31 +1,63 @@
 class DocumentMetadataComponent < ViewComponent::Base
+  include OrganisationsHelper
+  include StateHelper
+
   def initialize(document:)
     @document = document
   end
 
-  def list_facets
-    @document.humanized_attributes.inject([]) { |facet_list, (label, values)|
-      facet_list << [tag.dt(label).html_safe, "\n", facet_value(values).html_safe]
-    }.join.html_safe
-  end
+  def metadata_items
+    metadata_items = []
 
-  def list_associated_organisations
-    @document.organisations.map { |org|
-      tag.dd(helpers.organisation_name(org))
-    }.join.html_safe
-  end
+    metadata_items.concat(facet_metadata)
+    metadata_items.concat(organisations_metadata) if @document.class.has_organisations?
+    metadata_items.concat(publication_state)
 
-  def publication_state
-    content_tag(:span, helpers.state_for_frontend(@document), class: helpers.classes_for_frontend(@document))
+    metadata_items
   end
 
 private
 
-  def facet_value(values)
-    return tag.dd(tag.time(values.to_fs(:govuk_date))) if values.is_a?(Time)
+  def facet_metadata
+    @document.humanized_attributes.map do |label, values|
+      {
+        field: label,
+        value: facet_value(values),
+      }
+    end
+  end
 
-    Array(values).map { |value|
-      tag.dd(truncate(value.to_s, length: 140))
-    }.join
+  def organisations_metadata
+    [{
+      field: "Publishing organisation",
+      value: organisation_name(@document.primary_publishing_organisation),
+    },
+     {
+       field: "Other associated organisations",
+       value: associated_organisations,
+     }]
+  end
+
+  def publication_state
+    [{
+      field: "Bulk published",
+      value: @document.bulk_published,
+    },
+     {
+       field: "Publication state",
+       value: tag.span(state_for_frontend(@document).humanize, class: design_system_classes_for_frontend(@document)),
+     }]
+  end
+
+  def facet_value(values)
+    return values.to_fs(:govuk_date) if values.is_a?(Date)
+
+    Array(values).map { |value| truncate(value.to_s, length: 140) }.join("<br>").html_safe
+  end
+
+  def associated_organisations
+    @document.organisations.map { |org|
+      organisation_name(org)
+    }.join("<br>").html_safe
   end
 end
