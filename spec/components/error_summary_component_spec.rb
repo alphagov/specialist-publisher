@@ -122,6 +122,20 @@ RSpec.describe ErrorSummaryComponent, type: :component do
     expect(third_link.text).to eq "Date is invalid"
     expect(third_link[:href]).to eq "#error_summary_test_object_date"
   end
+
+  it "renders messages, rather than full messages, for objects with custom error message fields" do
+    licence_transaction = LicenceTransaction.new(body: "body")
+    licence_transaction.errors.add(:title, "Custom error message for title")
+
+    render_inline(ErrorSummaryComponent.new(object: licence_transaction))
+
+    first_link = page.all(".gem-c-error-summary__list-item")[0].find("a")
+
+    expect(page.all(".gem-c-error-summary__list-item").count).to eq 1
+    expect(page.all(".gem-c-error-summary__list-item a").count).to eq 1
+    expect(first_link.text).to eq "Custom error message for title"
+    expect(first_link[:href]).to eq "#licence_transaction_title"
+  end
 end
 
 class ErrorSummaryTestObject

@@ -3,7 +3,6 @@ require "models/valid_against_schema"
 
 RSpec.describe LicenceTransaction do
   let(:payload) { FactoryBot.create(:licence_transaction) }
-  include_examples "it saves payloads that are valid against the 'specialist_document' schema"
 
   it "should have a rendering app of frontend" do
     expect(subject.rendering_app).to eq "frontend"

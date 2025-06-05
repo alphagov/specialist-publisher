@@ -50,10 +50,6 @@ class LicenceTransaction < Document
     "licences"
   end
 
-  def rendering_app
-    "frontend"
-  end
-
   def custom_error_message_fields
     CUSTOM_ERROR_MESSAGE_FIELDS
   end
