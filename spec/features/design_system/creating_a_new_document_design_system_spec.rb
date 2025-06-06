@@ -57,7 +57,7 @@ RSpec.feature "Creating a document", type: :feature do
         elsif properties["select"] == "one"
           select facet["allowed_values"].first["label"], from: facet["name"], match: :first
         elsif properties["select"] == "multiple"
-          select facet["allowed_values"].first["label"], from: "#{facet['key']}_0"
+          select facet["allowed_values"].first["label"], from: "#{document_type}[#{facet['key']}][]"
         else
           fill_in facet["name"], with: "Example #{facet['name']}"
         end
@@ -131,7 +131,7 @@ RSpec.feature "Creating a document", type: :feature do
         elsif properties["select"] == "one"
           select facet["allowed_values"].first["label"], from: facet["name"], match: :first
         elsif properties["select"] == "multiple"
-          select facet["allowed_values"].first["label"], from: "#{facet['key']}_0"
+          select facet["allowed_values"].first["label"], from: "#{document_type}[#{facet['key']}][]"
         else
           fill_in facet["name"], with: "Example #{facet['name']}"
         end
@@ -156,7 +156,7 @@ RSpec.feature "Creating a document", type: :feature do
         elsif properties["select"] == "one"
           expect(page).to have_select("#{document_type}[#{key}]", with_selected: facet["allowed_values"].first["label"])
         elsif properties["select"] == "multiple"
-          expect(page).to have_select("#{facet['key']}_0", with_selected: facet["allowed_values"].first["label"])
+          expect(page).to have_select("#{document_type}[#{facet['key']}][]", with_selected: facet["allowed_values"].first["label"])
         else
           expect(page).to have_field("#{document_type}[#{key}]", with: "Example #{facet['name']}")
         end

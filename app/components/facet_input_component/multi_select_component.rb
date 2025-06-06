@@ -7,35 +7,19 @@ class FacetInputComponent::MultiSelectComponent < ViewComponent::Base
     @facet_key = facet_key
     @facet_name = facet_name
     @allowed_values = allowed_values
+    @error_items = errors_for(@document.errors, @facet_key)
+    @options = select_options
   end
 
-  def pre_selected_items
-    return [{ fields: template_add_another }] if @document.send(@facet_key).blank?
+  def select_options
+    selected_values = @document.send(@facet_key)
 
-    items = []
-    @document.send(@facet_key).each_with_index do |facet_value, index|
-      items << {
-        fields: template_add_another(index, facet_value),
+    @allowed_values.map do |item|
+      {
+        text: item["label"],
+        value: item["value"],
+        selected: selected_values&.include?(item["value"]),
       }
     end
-    items
-  end
-
-  def template_add_another(index = 0, value = nil)
-    render("govuk_publishing_components/components/select", {
-      id: "#{@facet_key}_#{index}",
-      name: "#{@document_type}[#{@facet_key}][]",
-      label: "Select a #{@facet_name.downcase}",
-      heading_size: "s",
-      full_width: true,
-      error_message: errors_for_input(@document.errors, @facet_key),
-      options: @allowed_values.inject([{}]) do |options, item|
-        options << {
-          text: item["label"],
-          value: item["value"],
-          selected: item["value"] == value,
-        }
-      end,
-    })
   end
 end

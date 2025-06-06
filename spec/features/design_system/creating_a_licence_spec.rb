@@ -84,7 +84,7 @@ RSpec.feature "Creating a Licence", type: :feature do
       elsif properties["select"] == "one"
         select facet["allowed_values"].first["label"], from: facet["name"], match: :first
       elsif properties["select"] == "multiple"
-        select facet["allowed_values"].first["label"], from: "#{key}_0"
+        select facet["allowed_values"].first["label"], from: "#{document_type}[#{facet['key']}][]"
       else
         fill_in facet["name"], with: "Example #{facet['name']}"
       end
@@ -99,8 +99,8 @@ RSpec.feature "Creating a Licence", type: :feature do
 
     # Expect page to have preselected organisation if it's registered on the model
     expect(page).to have_content(organisation_name_for_authorized_user) if document["links"]["primary_publishing_organisation"]
-
-    # TODO: add the multiselect for :organisations field
+    # Select value for custom 'organisations' field
+    select organisation_name_for_authorized_user, from: "#{document_type}[organisations][]"
 
     click_button "Save as draft"
 
