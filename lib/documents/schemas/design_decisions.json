@@ -21,32 +21,32 @@
     {
       "allowed_values": [
         {
-          "label": "Leisa Davies",
-          "value": "leisa-davies"
-        },
-        {
-          "label": "James Hopkins",
-          "value": "james-hopkins"
-        },
-        {
-          "label": "Rosie Le Breton",
-          "value": "rosie-le-breton"
-        },
-        {
-          "label": "Arran Cooper",
-          "value": "arran-cooper"
+          "label": "Al Skilton",
+          "value": "al-skilton"
         },
         {
           "label": "Allan James",
           "value": "allan-james"
         },
         {
+          "label": "Arran Cooper",
+          "value": "arran-cooper"
+        },
+        {
           "label": "Clare Boucher",
           "value": "clare-boucher"
         },
         {
-          "label": "Al Skilton",
-          "value": "al-skilton"
+          "label": "J Pike",
+          "value": "j-pike"
+        },
+        {
+          "label": "James Hopkins",
+          "value": "james-hopkins"
+        },
+        {
+          "label": "Leisa Davies",
+          "value": "leisa-davies"
         },
         {
           "label": "Martin Howe",
@@ -57,8 +57,8 @@
           "value": "o-morris"
         },
         {
-          "label": "J Pike",
-          "value": "j-pike"
+          "label": "Rosie Le Breton",
+          "value": "rosie-le-breton"
         }
       ],
       "display_as_result_metadata": true,
@@ -113,6 +113,6 @@
   ],
   "show_summaries": true,
   "show_metadata_block": true,
-  "summary": "Results of past design and design right hearing decisions issued since 2013. Decisions published between 1998 - 2012 are available on the <a href=\"https://webarchive.nationalarchives.gov.uk/ukgwa/20140603095013/http://www.ipo.gov.uk/pro-types/pro-design/d-decisions.htm\">National Archives</a>. Please note, no decisions were issued during 2003.\r\n\r\nYou can use the free search box below to search by decision number.",
+  "summary": "Results of past design and design right hearing decisions issued since 2013. Decisions published between 1998 - 2020 are available on the <a href=\"https://webarchive.nationalarchives.gov.uk/ukgwa/20140603095013/http://www.ipo.gov.uk/pro-types/pro-design/d-decisions.htm\">National Archives</a>. Please note, no decisions were issued during 2003.\r\n\r\nYou can use the free search box below to search by decision number or British Library number.",
   "target_stack": "draft"
 }
