@@ -5,6 +5,10 @@
   "description": "Find contact details for HM Revenue & Customs.",
   "document_noun": "contact",
   "document_title": "HMRC Contact",
+  "email_filter_options": {
+    "downcase_email_alert_topic_names": true,
+    "email_filter_by": "topics"
+  },
   "facets": [
     {
       "allowed_values": [
@@ -136,6 +140,8 @@
   ],
   "show_table_of_contents": false,
   "show_metadata_block": false,
+  "signup_content_id": "d90047a3-a46a-4a8c-a7f3-b31f68ff075e",
+  "subscription_list_title_prefix": "HMRC contacts",
   "summary": "Find contact details for HM Revenue & Customs.\r\n\r\nYou can also:\r\n\r\n- check and update your tax records by using [HMRC online services](https://www.gov.uk/log-in-register-hmrc-online-services) to access your personal or business tax account\r\n- get information about your tax, National Insurance and benefits by [downloading the HMRC app](https://www.gov.uk/guidance/download-the-hmrc-app) on a mobile device\r\n- get information from HMRC by [watching videos and webinars](https://www.gov.uk/government/collections/hmrc-webinars-email-alerts-and-videos)",
   "target_stack": "live"
 }
