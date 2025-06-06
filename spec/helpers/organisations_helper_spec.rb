@@ -37,7 +37,7 @@ RSpec.describe OrganisationsHelper, type: :helper do
       expect(Organisation).to receive(:all).and_return(organisations.shuffle)
       selected_organisation = organisations.first
 
-      result = organisation_select_options(selected_organisation: selected_organisation.content_id)
+      result = organisation_select_options(selected_organisation.content_id)
       expected_result = organisations.map do |organisation|
         {
           text: organisation.title,
