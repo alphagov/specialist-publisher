@@ -99,8 +99,8 @@ RSpec.feature "Creating a Licence", type: :feature do
 
     # Expect page to have preselected organisation if it's registered on the model
     expect(page).to have_content(organisation_name_for_authorized_user) if document["links"]["primary_publishing_organisation"]
-
-    # TODO: add the multiselect for :organisations field
+    # Select value for custom 'organisations' field
+    select organisation_name_for_authorized_user, from: "#{document_type}[organisations][]"
 
     click_button "Save as draft"
 
