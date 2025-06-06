@@ -1,17 +1,17 @@
 module OrganisationsHelper
   def organisation_select_options_with_all(selected_organisation: nil)
-    organisation_select_options(selected_organisation:)
+    organisation_select_options(selected_organisation)
       .prepend({ text: "All organisations", value: "all", selected: false })
   end
 
-  def organisation_select_options(selected_organisation: nil)
+  def organisation_select_options(selected_organisation_content_id)
     all_organisations
       .sort_by { |org| org.title.downcase.strip }
       .map do |organisation|
         {
           text: organisation.title,
           value: organisation.content_id,
-          selected: organisation.content_id == selected_organisation,
+          selected: organisation.content_id == selected_organisation_content_id,
         }
       end
   end
