@@ -1,8 +1,8 @@
 <%= render "components/select_with_search", {
-  label: @facet_name,
+  label: @label,
   heading_size: "m",
-  id: "#{@document_type}_#{@facet_key}",
-  name: "#{@document_type}[#{@facet_key}][]",
+  id: @id,
+  name: @name,
   select: {
     multiple: true
   },
