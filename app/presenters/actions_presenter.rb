@@ -18,6 +18,25 @@ class ActionsPresenter
   end
 
   def publish_text
+    if update_type == "minor"
+      safe_join([
+        tag.p("You are about to publish a minor edit."),
+        tag.p("Are you sure you want to publish this document?"),
+      ])
+    elsif update_type == "major" && !document.first_draft?
+      safe_join([
+        tag.p("You are about to publish a major edit with a public change note. Publishing will email subscribers to #{klass_name}."),
+        tag.p("Are you sure you want to publish this document?"),
+      ])
+    else
+      safe_join([
+        tag.p("Publishing will email subscribers to #{klass_name}."),
+        tag.p("Are you sure you want to publish this document?"),
+      ])
+    end
+  end
+
+  def publish_text_legacy
     if state == "published"
       "There are no changes to publish."
     elsif state == "unpublished"
@@ -45,6 +64,10 @@ class ActionsPresenter
     else
       "Publishing will email subscribers to #{document.class.title.pluralize}. Continue?"
     end
+  end
+
+  def confirm_publish_path
+    confirm_publish_document_path(slug, document.content_id_and_locale)
   end
 
   def publish_path

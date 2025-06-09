@@ -42,39 +42,56 @@ RSpec.describe ActionsPresenter do
   end
 
   describe "publish_text" do
-    specify { expect(subject.publish_text).to include("will email subscribers") }
-    specify { expect(subject.publish_text).not_to include("major edit") }
+    context "when the document is a new draft" do
+      let(:payload) { FactoryBot.create(:cma_case, :draft) }
+      specify { expect(subject.publish_text).to eq("<p>Publishing will email subscribers to CMA Cases.</p><p>Are you sure you want to publish this document?</p>") }
+    end
+
+    context "when the document is redrafted" do
+      let(:payload) { FactoryBot.create(:cma_case, :redrafted) }
+      specify { expect(subject.publish_text).to eq("<p>You are about to publish a major edit with a public change note. Publishing will email subscribers to CMA Cases.</p><p>Are you sure you want to publish this document?</p>") }
+    end
+
+    context "when the document is redrafted and the update_type is minor" do
+      let(:payload) { FactoryBot.create(:cma_case, :redrafted, update_type: "minor") }
+      specify { expect(subject.publish_text).to eq("<p>You are about to publish a minor edit.</p><p>Are you sure you want to publish this document?</p>") }
+    end
+  end
+
+  describe "publish_text_legacy" do
+    specify { expect(subject.publish_text_legacy).to include("will email subscribers") }
+    specify { expect(subject.publish_text_legacy).not_to include("major edit") }
 
     context "when the user does not have editor permissions" do
       let(:user) { FactoryBot.create(:cma_writer) }
-      specify { expect(subject.publish_text).to include("don't have permission to publish") }
+      specify { expect(subject.publish_text_legacy).to include("don't have permission to publish") }
     end
 
     context "when the document is already published" do
       let(:payload) { FactoryBot.create(:cma_case, :published) }
-      specify { expect(subject.publish_text).to include("no changes") }
+      specify { expect(subject.publish_text_legacy).to include("no changes") }
 
       context "and the update_type is republish" do
         let(:payload) { FactoryBot.create(:cma_case, :published, update_type: "republish") }
-        specify { expect(subject.publish_text).to include("no changes") }
+        specify { expect(subject.publish_text_legacy).to include("no changes") }
       end
     end
 
     context "when the document is unpublished" do
       let(:payload) { FactoryBot.create(:cma_case, :unpublished) }
-      specify { expect(subject.publish_text).to include("create a new draft") }
+      specify { expect(subject.publish_text_legacy).to include("create a new draft") }
     end
 
     context "when the document is redrafted" do
       let(:payload) { FactoryBot.create(:cma_case, :redrafted) }
-      specify { expect(subject.publish_text).to include("major edit") }
-      specify { expect(subject.publish_text).to include("will email subscribers") }
+      specify { expect(subject.publish_text_legacy).to include("major edit") }
+      specify { expect(subject.publish_text_legacy).to include("will email subscribers") }
     end
 
     context "when the document is redrafted and the update_type is minor" do
       let(:payload) { FactoryBot.create(:cma_case, :redrafted, update_type: "minor") }
-      specify { expect(subject.publish_text).to include("minor edit") }
-      specify { expect(subject.publish_text).not_to include("will email subscribers") }
+      specify { expect(subject.publish_text_legacy).to include("minor edit") }
+      specify { expect(subject.publish_text_legacy).not_to include("will email subscribers") }
     end
   end
 

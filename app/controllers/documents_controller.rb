@@ -7,7 +7,7 @@ class DocumentsController < ApplicationController
   include OrganisationsHelper
 
   layout :get_layout
-  DESIGN_SYSTEM_MIGRATED_ACTIONS = %w[new create index show].freeze
+  DESIGN_SYSTEM_MIGRATED_ACTIONS = %w[new create index show confirm_publish].freeze
   include DesignSystemHelper
 
   before_action :fetch_document, except: %i[index new create]
@@ -67,6 +67,8 @@ class DocumentsController < ApplicationController
       re_render :edit, flash_key: :errors, flash_message: document_error_messages, status: :unprocessable_entity
     end
   end
+
+  def confirm_publish; end
 
   def publish
     if @document.publish

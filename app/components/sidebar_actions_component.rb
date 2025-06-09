@@ -19,16 +19,8 @@ class SidebarActionsComponent < ViewComponent::Base
   end
 
   def notices
-    notices = []
-
-    notices << notice("Publishing", @presenter.publish_text) if @presenter.publish_button_visible?
-
-    notices << notice("Unpublishing", @presenter.unpublish_text)
-
-    return unless notices
-
     render("govuk_publishing_components/components/inset_text", {
-      text: notices.join("<br>").html_safe,
+      text: notice("Unpublishing", @presenter.unpublish_text).html_safe,
     })
   end
 
@@ -52,7 +44,7 @@ private
     render("govuk_publishing_components/components/button", {
       text: "Publish document",
       title: "Publish #{@document.title}",
-      href: "#",
+      href: @presenter.confirm_publish_path,
     })
   end
 

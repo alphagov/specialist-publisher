@@ -11,7 +11,7 @@
     <%= form_tag(presenter.publish_path, method: :post, class: 'panel panel-default') do %>
       <div class="panel-heading"><h3 class="panel-title">Publish document</h3></div>
       <div class="panel-body">
-        <%= content_tag(:p, presenter.publish_text) %>
+        <%= content_tag(:p, presenter.publish_text_legacy) %>
 
         <% if presenter.publish_button_visible? %>
           <button name="submit" class="btn btn-danger"

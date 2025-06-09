@@ -32,7 +32,10 @@ Rails.application.routes.draw do
     resources :attachments, param: :attachment_content_id, except: %i[index show]
 
     post :unpublish, on: :member
+
+    get :confirm_publish, on: :member
     post :publish, on: :member
+
     post :discard, on: :member
   end
 
