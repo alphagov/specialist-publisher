@@ -3,5 +3,4 @@
 
 <% format_name = f.object.class.document_type.to_sym %>
 <%= render FacetInputComponent::OrganisationSingleSelectComponent.new(@document, format_name, :primary_publishing_organisation, "Publishing organisation", selected_organisation_or_current(@document.primary_publishing_organisation)) %>
-<!-- TODO to be migrated over -->
-<%= render FacetInputComponent::MultiSelectComponent.new(@document, format_name, :organisations, "Other associated organisations", organisation_select_options) %>
+<%= render FacetInputComponent::OrganisationMultiSelectComponent.new(@document, format_name, :organisations, "Other associated organisations") %>

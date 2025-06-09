@@ -6,3 +6,4 @@
 //= require components/autocomplete
 //= require components/govspeak-editor
 //= require components/paste-html-to-govspeak
+//= require select_with_search_component/application
