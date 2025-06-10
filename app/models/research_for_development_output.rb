@@ -1,6 +1,5 @@
 class ResearchForDevelopmentOutput < Document
   apply_validations
-  validates :review_status, presence: true
 
   FORMAT_SPECIFIC_FIELDS = format_specific_fields + [:review_status]
 
