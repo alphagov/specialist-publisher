@@ -157,15 +157,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-accessible-autocomplete-multiselect@alphagov/accessible-autocomplete-multiselect:
-  version: 2.0.4
-  resolution: "accessible-autocomplete-multiselect@https://github.com/alphagov/accessible-autocomplete-multiselect.git#commit=066bbfcc03362d4ebb4927bc8ac6f9082cf99e32"
-  dependencies:
-    preact: ^8.3.1
-  checksum: 5b657adc60e81a0130e076488e099a0f424027a6d354baed41eb82b03f3d25505c661127d8f30c737bf5da64104b76ec66dfd1e228115f9528aa2b44c9cbebf7
-  languageName: node
-  linkType: hard
-
 "acorn-jsx@npm:^5.2.0":
   version: 5.3.1
   resolution: "acorn-jsx@npm:5.3.1"
@@ -2807,13 +2798,6 @@ accessible-autocomplete-multiselect@alphagov/accessible-autocomplete-multiselect
   languageName: node
   linkType: hard
 
-"preact@npm:^8.3.1":
-  version: 8.5.3
-  resolution: "preact@npm:8.5.3"
-  checksum: 1a2d90816abdc62673842190b819b7ce2f552b4b412cc0d2118395d8167e79f4e988229993079700277a0cae6b7fd895b3bfe5a43091bbc1f4df43903b04d1e7
-  languageName: node
-  linkType: hard
-
 "prelude-ls@npm:^1.2.1":
   version: 1.2.1
   resolution: "prelude-ls@npm:1.2.1"
@@ -3309,7 +3293,6 @@ accessible-autocomplete-multiselect@alphagov/accessible-autocomplete-multiselect
   version: 0.0.0-use.local
   resolution: "specialist-publisher@workspace:."
   dependencies:
-    accessible-autocomplete-multiselect: alphagov/accessible-autocomplete-multiselect
     choices.js: ^11.1.0
     jasmine-browser-runner: ^3.0.0
     jasmine-core: ^5.4.0

@@ -6,7 +6,9 @@ class FacetInputComponent::OrganisationMultiSelectComponent < ViewComponent::Bas
     @document = document
     @document_type = document_type
     @facet_key = facet_key
-    @facet_name = facet_name
+    @label = facet_name
+    @id = document_type ? "#{@document_type}_#{@facet_key}" : @facet_key.to_s
+    @name = document_type ? "#{@document_type}[#{@facet_key}][]" : "#{@facet_key}[]"
     @error_items = errors_for(@document.errors, @facet_key)
     @options = select_options
   end

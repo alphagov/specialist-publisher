@@ -22,19 +22,8 @@
   hint: "Example: /animal-disease-cases-england"
 } %>
 
-<%= render "components/autocomplete", {
-  id: "organisations",
-  label: {
-    text: "Organisations the finder should be attached to",
-    heading_size: "s",
-  },
-  name: "organisations[]",
-  select: {
-    multiple: true,
-    selected: schema.organisations,
-    options: [""] + organisations_options_legacy,
-  },
-} %>
+<%= render FacetInputComponent::OrganisationMultiSelectComponent.new(schema, nil, :organisations, "Organisations the finder should be attached to") %>
+
 
 <%= render "govuk_publishing_components/components/textarea", {
   label: {
