@@ -9,11 +9,12 @@ RSpec.feature "Creating a Flood and Coastal Erosion Risk Management Research Rep
   let(:new_document_path) { "#{base_path}/new" }
   let(:schema) { document_model.finder_schema }
   let(:organisation_content_id_for_authorized_user) { "ad8e70ad-eb0c-45fd-9a8b-3a52409fae85" }
+  let(:example_organisation_name) { "Not the Department for Science, Innovation and Technology" }
   let(:organisation_name_for_authorized_user) { "Department for Science, Innovation and Technology" }
   let(:organisations) do
     [
       { "content_id" => organisation_content_id_for_authorized_user, "title" => organisation_name_for_authorized_user },
-      { "content_id" => "aaaaaaaa-eb0c-45fd-9a8b-3a52409fae85", "title" => "Not the Department for Science, Innovation and Technology" },
+      { "content_id" => "aaaaaaaa-eb0c-45fd-9a8b-3a52409fae85", "title" => example_organisation_name },
     ]
   end
 
@@ -86,6 +87,8 @@ RSpec.feature "Creating a Flood and Coastal Erosion Risk Management Research Rep
 
     # Expect page to have preselected organisation if it's registered on the model
     expect(page).to have_content(organisation_name_for_authorized_user) if document["links"]["primary_publishing_organisation"]
+    # Select value for custom 'publishing organisation' field
+    select example_organisation_name, from: "Publishing organisation", match: :first
     # Select value for custom 'organisations' field
     select organisation_name_for_authorized_user, from: "#{document_type}[organisations][]"
 

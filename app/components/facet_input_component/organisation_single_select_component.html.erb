@@ -1,9 +1,9 @@
-<%= render "govuk_publishing_components/components/select", {
-  id: "#{@document_type}_#{@facet_key}",
-  name: "#{@document_type}[#{@facet_key}]",
+<%= render "components/select_with_search", {
   label: @facet_name,
   heading_size: "m",
-  full_width: true,
-  error_message: @error_message,
+  id: "#{@document_type}_#{@facet_key}",
+  name: "#{@document_type}[#{@facet_key}]",
   options: @options,
+  error_items: @error_items,
+  full_width: true,
 } %>
