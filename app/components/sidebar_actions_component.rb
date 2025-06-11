@@ -53,7 +53,7 @@ private
 
     render("govuk_publishing_components/components/button", {
       text: "Unpublish document",
-      href: "#",
+      href: @presenter.confirm_unpublish_path,
       destructive: true,
     })
   end
