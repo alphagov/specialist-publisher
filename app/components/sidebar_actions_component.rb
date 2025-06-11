@@ -19,9 +19,13 @@ class SidebarActionsComponent < ViewComponent::Base
   end
 
   def notices
-    render("govuk_publishing_components/components/inset_text", {
-      text: notice("Unpublishing", @presenter.unpublish_text).html_safe,
-    })
+    return if @presenter.unpublish_text.blank?
+
+    tag.div(
+      render("govuk_publishing_components/components/inset_text", {
+        text: notice("Unpublishing", @presenter.unpublish_text).html_safe,
+      }), class: "app-view-summary__sidebar-notices"
+    )
   end
 
 private
