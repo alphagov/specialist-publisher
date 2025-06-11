@@ -41,3 +41,7 @@ $govuk-page-width: 1140px;
 .bg-light-grey {
   background-color: govuk-colour("light-grey");
 }
+
+.govuk-select[multiple] {
+  height: auto;
+}
