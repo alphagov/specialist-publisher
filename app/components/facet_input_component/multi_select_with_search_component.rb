@@ -1,4 +1,4 @@
-class FacetInputComponent::MultiSelectComponent < ViewComponent::Base
+class FacetInputComponent::MultiSelectWithSearchComponent < ViewComponent::Base
   include ErrorsHelper
 
   def initialize(document, document_type, facet_key, facet_name, allowed_values)
