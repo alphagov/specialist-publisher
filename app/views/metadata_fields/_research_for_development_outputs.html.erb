@@ -20,5 +20,5 @@
     "value" => "peer-reviewed",
   },
 ] %>
-<%= render FacetInputComponent::SingleSelectWithSearchComponent.new(@document, @document_type, :review_status, "Review status", review_status_options, allow_blank_option: false) %>
+<%= render FacetInputComponent::SingleSelectComponent.new(@document, @document_type, :review_status, "Review status", review_status_options) %>
 

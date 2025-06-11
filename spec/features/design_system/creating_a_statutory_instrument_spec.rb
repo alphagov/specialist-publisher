@@ -46,6 +46,9 @@ RSpec.feature "Creating a Statutory Instrument", type: :feature do
     expect(page).to have_css(".govuk-error-message", text: "Body can't be blank")
 
     schema.facets.each do |facet|
+      # Sifting status is a preselected single select field
+      next if facet["key"] == "sifting_status"
+
       properties = facet["specialist_publisher_properties"] || {}
       validations = properties["validations"] || {}
 
