@@ -13,8 +13,8 @@
 
 <%= render FacetInputComponent.new(@document, finder_schema.get_facet(:subject)) %>
 
-<%= render FacetInputComponent::OrganisationSingleSelectComponent.new(@document, format_name, :primary_publishing_organisation, "Publishing organisation", selected_organisation_or_current(@document.primary_publishing_organisation)) %>
-<%= render FacetInputComponent::OrganisationMultiSelectComponent.new(@document, format_name, :organisations, "Other associated organisations") %>
+<%= render FacetInputComponent::OrganisationSingleSelectWithSearchComponent.new(@document, format_name, :primary_publishing_organisation, "Publishing organisation", selected_organisation_or_current(@document.primary_publishing_organisation)) %>
+<%= render FacetInputComponent::OrganisationMultiSelectWithSearchComponent.new(@document, format_name, :organisations, "Other associated organisations") %>
 
 <% # TODO: this bit of JS prevents us moving to the shared view %>
 <% content_for :document_ready do %>

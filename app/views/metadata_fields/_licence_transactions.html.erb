@@ -5,8 +5,8 @@
 
 <% # TODO: find a way of making organisation management schema-driven %>
 <% format_name = f.object.class.finder_schema.filter["format"].to_sym %>
-<%= render FacetInputComponent::OrganisationSingleSelectComponent.new(@document, format_name, :primary_publishing_organisation, "Publishing organisation", selected_organisation_or_current(@document.primary_publishing_organisation)) %>
-<%= render FacetInputComponent::OrganisationMultiSelectComponent.new(@document, format_name, :organisations, "Other associated organisations") %>
+<%= render FacetInputComponent::OrganisationSingleSelectWithSearchComponent.new(@document, format_name, :primary_publishing_organisation, "Publishing organisation", selected_organisation_or_current(@document.primary_publishing_organisation)) %>
+<%= render FacetInputComponent::OrganisationMultiSelectWithSearchComponent.new(@document, format_name, :organisations, "Other associated organisations") %>
 
 <%= render "govuk_publishing_components/components/fieldset", {
   legend_text: "How users apply",

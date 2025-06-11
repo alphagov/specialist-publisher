@@ -1,4 +1,4 @@
-class FacetInputComponent::OrganisationSingleSelectComponent < ViewComponent::Base
+class FacetInputComponent::OrganisationSingleSelectWithSearchComponent < ViewComponent::Base
   include ErrorsHelper
   include OrganisationsHelper
 
