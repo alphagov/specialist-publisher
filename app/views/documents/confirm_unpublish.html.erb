@@ -1,0 +1,68 @@
+<% page_title = "Unpublish #{current_format.title}" %>
+<% presenter = ActionsPresenter.new(@document, policy(@document.class)) %>
+
+<% content_for :page_title, page_title %>
+<% content_for :title, page_title %>
+<% content_for :context, @document.title %>
+
+<% content_for :breadcrumbs do %>
+  <%= render "govuk_publishing_components/components/breadcrumbs", {
+    collapse_on_mobile: true,
+    breadcrumbs: [
+      {
+        title: "All finders",
+        url: finders_path
+      },
+      {
+        title: current_format.title.pluralize,
+        url: documents_path(current_format.admin_slug)
+      },
+      {
+        title: @document.title,
+        url: document_path(current_format.admin_slug, @document.content_id_and_locale)
+      },
+      {
+        title: "Unpublish"
+      }
+    ]
+  } %>
+<% end %>
+
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+
+    <div class="govuk-body govuk-!-margin-bottom-8">
+      The document will be removed from the site. It will still be possible to edit and publish a new version.
+    </div>
+
+    <%= form_tag(presenter.unpublish_path,
+                 method: :post,
+                 data: { gtm: "confirm-unpublish" }) do %>
+      <%= render("govuk_publishing_components/components/input", {
+        label: {
+          text: "Redirect to alternative GOV.UK content path (optional)",
+        },
+        heading_level: 3,
+        heading_size: "m",
+        name: "alternative_path",
+        hint: "For example: /the-replacement-page",
+      }) %>
+
+      <div class="govuk-body govuk-!-margin-top-8">
+        Are you sure you want to unpublish this document?
+      </div>
+
+      <div class="govuk-button-group govuk-!-margin-bottom-6">
+        <%= render "govuk_publishing_components/components/button", {
+          text: "Unpublish",
+          destructive: true,
+        } %>
+        <%= link_to "Cancel",
+                    document_path(current_format.admin_slug, @document.content_id_and_locale),
+                    class: "govuk-link govuk-link--no-visited-state app-link--inline",
+                    data: { gtm: "cancel-unpublish" } %>
+      </div>
+    <% end %>
+  </div>
+</div>
