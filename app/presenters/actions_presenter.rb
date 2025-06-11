@@ -83,6 +83,16 @@ class ActionsPresenter
   end
 
   def unpublish_text
+    return if document.first_draft?
+
+    if state == "draft"
+      "The document cannot be unpublished because it has a draft. You need to publish the draft first."
+    elsif !policy.unpublish?
+      "You don't have permission to unpublish this document."
+    end
+  end
+
+  def unpublish_text_legacy
     if document.first_draft?
       text = "The document has never been published."
     elsif state == "draft"

@@ -94,7 +94,7 @@ RSpec.describe SidebarActionsComponent, type: :component do
       render_inline(described_class.new(document, user))
 
       expect(page).to_not have_link("Unpublish document")
-      expect(page).to have_text("The document has never been published.")
+      expect(page).to_not have_selector(".app-view-summary__sidebar-notices")
     end
 
     it "should show on published document" do
@@ -104,7 +104,7 @@ RSpec.describe SidebarActionsComponent, type: :component do
       render_inline(described_class.new(document, user))
 
       expect(page).to have_link("Unpublish document")
-      expect(page).to have_text("The document will be removed from the site. It will still be possible to edit and publish a new version.")
+      expect(page).to_not have_selector(".app-view-summary__sidebar-notices")
     end
 
     it "should not show on published with draft document" do
@@ -124,7 +124,7 @@ RSpec.describe SidebarActionsComponent, type: :component do
       render_inline(described_class.new(document, user))
 
       expect(page).to_not have_link("Unpublish document")
-      expect(page).to have_text("The document is already unpublished.")
+      expect(page).to_not have_selector(".app-view-summary__sidebar-notices")
     end
 
     it "should not show when user not allowed to unpublish" do
