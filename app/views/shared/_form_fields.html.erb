@@ -38,18 +38,19 @@
 } %>
 
 <% locale = @document.locale || "en" %>
-<%= render "govuk_publishing_components/components/select", {
-  id: "#{format_name}_locale",
-  name: "#{format_name}[locale]",
+<%= render "components/select_with_search", {
   label: "Language",
   heading_size: "m",
-  full_width: true,
-  options: locale_codes.map do |key|
+  id: "#{format_name}_locale",
+  name: "#{format_name}[locale]",
+  options: map_locale_names.map do |locale_name, locale_key|
     {
-      text: locale_names[key],
-      value: key.to_s,
-      selected: key.to_s == locale,
+      text: locale_name,
+      value: locale_key.to_s,
+      selected: locale_key.to_s == locale,
     }
   end,
-  value: @document.locale,
+  error_items: [],
+  include_blank: true,
+  full_width: true,
 } %>
