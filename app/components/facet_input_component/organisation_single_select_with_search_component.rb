@@ -1,4 +1,4 @@
-class FacetInputComponent::OrganisationSingleSelectComponent < ViewComponent::Base
+class FacetInputComponent::OrganisationSingleSelectWithSearchComponent < ViewComponent::Base
   include ErrorsHelper
   include OrganisationsHelper
 
@@ -7,7 +7,7 @@ class FacetInputComponent::OrganisationSingleSelectComponent < ViewComponent::Ba
     @document_type = document_type
     @facet_key = facet_key
     @facet_name = facet_name
-    @error_message = errors_for_input(document.errors, facet_key)
+    @error_items = errors_for(document.errors, facet_key)
     @options = organisation_select_options(selected_organisation_content_id)
   end
 end

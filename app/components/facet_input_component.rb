@@ -16,9 +16,9 @@ class FacetInputComponent < ViewComponent::Base
     elsif !@allowed_values
       render TextAreaComponent.new(@document, @document_type, @facet_key, @facet_name)
     elsif @facet_select_type == :one
-      render SingleSelectComponent.new(@document, @document_type, @facet_key, @facet_name, @allowed_values)
+      render SingleSelectWithSearchComponent.new(@document, @document_type, @facet_key, @facet_name, @allowed_values)
     elsif @facet_select_type == :multiple
-      render MultiSelectComponent.new(@document, @document_type, @facet_key, @facet_name, @allowed_values)
+      render MultiSelectWithSearchComponent.new(@document, @document_type, @facet_key, @facet_name, @allowed_values)
     else
       render layout: "shared/specialist_document_form_error", locals: { field: @facet_key }
     end

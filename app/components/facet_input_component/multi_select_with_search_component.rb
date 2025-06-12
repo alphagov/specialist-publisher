@@ -1,4 +1,4 @@
-class FacetInputComponent::SingleSelectComponent < ViewComponent::Base
+class FacetInputComponent::MultiSelectWithSearchComponent < ViewComponent::Base
   include ErrorsHelper
 
   def initialize(document, document_type, facet_key, facet_name, allowed_values)
@@ -7,18 +7,18 @@ class FacetInputComponent::SingleSelectComponent < ViewComponent::Base
     @facet_key = facet_key
     @facet_name = facet_name
     @allowed_values = allowed_values
+    @error_items = errors_for(@document.errors, @facet_key)
     @options = select_options
-    @error_message = errors_for_input(document.errors, facet_key)
   end
 
   def select_options
-    selected_value = @document.send(@facet_key)
+    selected_values = @document.send(@facet_key)
 
     @allowed_values.map do |item|
       {
         text: item["label"],
         value: item["value"],
-        selected: item["value"] == selected_value,
+        selected: selected_values&.include?(item["value"]),
       }
     end
   end

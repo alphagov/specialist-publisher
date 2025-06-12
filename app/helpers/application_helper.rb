@@ -8,6 +8,6 @@ module ApplicationHelper
   end
 
   def map_locale_names
-    locale_codes.index_by { |l| t("language_names.#{l}", locale: "en") }
+    locale_codes.index_by { |l| t("language_names.#{l}", locale: "en") }.sort_by { |name, _code| name.downcase }
   end
 end

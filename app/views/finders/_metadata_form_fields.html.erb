@@ -22,7 +22,7 @@
   hint: "Example: /animal-disease-cases-england"
 } %>
 
-<%= render FacetInputComponent::OrganisationMultiSelectComponent.new(schema, nil, :organisations, "Organisations the finder should be attached to") %>
+<%= render FacetInputComponent::OrganisationMultiSelectWithSearchComponent.new(schema, nil, :organisations, "Organisations the finder should be attached to") %>
 
 
 <%= render "govuk_publishing_components/components/textarea", {
