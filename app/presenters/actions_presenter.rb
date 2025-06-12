@@ -19,20 +19,11 @@ class ActionsPresenter
 
   def publish_text
     if update_type == "minor"
-      safe_join([
-        tag.p("You are about to publish a minor edit."),
-        tag.p("Are you sure you want to publish this document?"),
-      ])
+      "You are about to publish a minor edit."
     elsif update_type == "major" && !document.first_draft?
-      safe_join([
-        tag.p("You are about to publish a major edit with a public change note. Publishing will email subscribers to #{klass_name}."),
-        tag.p("Are you sure you want to publish this document?"),
-      ])
+      "You are about to publish a major edit with a public change note. Publishing will email subscribers to #{klass_name}."
     else
-      safe_join([
-        tag.p("Publishing will email subscribers to #{klass_name}."),
-        tag.p("Are you sure you want to publish this document?"),
-      ])
+      "Publishing will email subscribers to #{klass_name}."
     end
   end
 
