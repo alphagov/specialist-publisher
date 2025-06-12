@@ -44,17 +44,17 @@ RSpec.describe ActionsPresenter do
   describe "publish_text" do
     context "when the document is a new draft" do
       let(:payload) { FactoryBot.create(:cma_case, :draft) }
-      specify { expect(subject.publish_text).to eq("<p>Publishing will email subscribers to CMA Cases.</p><p>Are you sure you want to publish this document?</p>") }
+      specify { expect(subject.publish_text).to eq("Publishing will email subscribers to CMA Cases.") }
     end
 
     context "when the document is redrafted" do
       let(:payload) { FactoryBot.create(:cma_case, :redrafted) }
-      specify { expect(subject.publish_text).to eq("<p>You are about to publish a major edit with a public change note. Publishing will email subscribers to CMA Cases.</p><p>Are you sure you want to publish this document?</p>") }
+      specify { expect(subject.publish_text).to eq("You are about to publish a major edit with a public change note. Publishing will email subscribers to CMA Cases.") }
     end
 
     context "when the document is redrafted and the update_type is minor" do
       let(:payload) { FactoryBot.create(:cma_case, :redrafted, update_type: "minor") }
-      specify { expect(subject.publish_text).to eq("<p>You are about to publish a minor edit.</p><p>Are you sure you want to publish this document?</p>") }
+      specify { expect(subject.publish_text).to eq("You are about to publish a minor edit.") }
     end
   end
 
