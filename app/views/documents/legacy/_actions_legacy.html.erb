@@ -16,7 +16,7 @@
         <% if presenter.publish_button_visible? %>
           <button name="submit" class="btn btn-danger"
                   data-module="confirm"
-                  data-message="<%= presenter.publish_alert %>"
+                  data-message="<%= presenter.publish_alert_legacy %>"
                   data-disable-with="Publishing..." >Publish</button>
         <% end %>
       </div>
@@ -36,7 +36,7 @@
           <div class="form-group">
             <button name="submit" class="btn btn-warning"
                     data-module="confirm"
-                    data-message="<%= presenter.unpublish_alert %>"
+                    data-message="<%= presenter.unpublish_alert_legacy %>"
                     data-disable-with="Unpublishing..." >Unpublish document</button>
           </div>
         <% end %>
@@ -46,12 +46,12 @@
     <%= form_tag(presenter.discard_path, method: :post, class: 'panel panel-default') do %>
       <div class="panel-heading"><h3 class="panel-title">Discard draft</h3></div>
       <div class="panel-body">
-        <%= content_tag(:p, presenter.discard_text) %>
+        <%= content_tag(:p, presenter.discard_text_legacy) %>
 
         <% if presenter.discard_button_visible? %>
           <button name="submit" class="btn btn-warning"
                   data-module="confirm"
-                  data-message="<%= presenter.discard_alert %>"
+                  data-message="<%= presenter.discard_alert_legacy %>"
                   data-disable-with="Discarding draft..." >Discard draft</button>
         <% end %>
       </div>

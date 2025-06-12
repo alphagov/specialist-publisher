@@ -2,7 +2,6 @@ require "spec_helper"
 
 RSpec.feature "Publishing a CMA case", type: :feature do
   let(:content_id) { item["content_id"] }
-  let(:publish_alert_message) { page.find_button("Publish")["data-message"] }
   let(:publish_disable_with_message) { page.find_button("Publish")["data-disable-with"] }
 
   before do
