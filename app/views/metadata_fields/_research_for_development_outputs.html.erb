@@ -1,7 +1,7 @@
 <% finder_schema = f.object.class.finder_schema %>
 <%= render FacetInputComponent.new(@document, finder_schema.get_facet(:research_document_type)) %>
 
-<%= render layout: 'shared/form_group', locals: { f: f, field: :authors, label: 'Authors' } do %>
+<%= render layout: 'shared/legacy/form_group_legacy', locals: { f: f, field: :authors, label: 'Authors' } do %>
   <%= f.text_field :author_tags, class: 'form-control free-form-list', data: { placeholder: 'Add authors' } %>
 <% end %>
 

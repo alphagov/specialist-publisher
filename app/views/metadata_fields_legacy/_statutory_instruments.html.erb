@@ -1,6 +1,6 @@
 <%= render "shared/legacy/date_fields_legacy", f: f, field: :sift_end_date, format: :statutory_instrument %>
 <%= render "shared/legacy/date_fields_legacy", f: f, field: :laid_date, format: :statutory_instrument %>
-<%= render "shared/form_group", f: f, field: :sifting_status do %>
+<%= render "shared/legacy/form_group_legacy", f: f, field: :sifting_status do %>
   <%= f.select :sifting_status, select_options_for_facet(f.object.allowed_values(:sifting_status)), {}, { class: "form-control" } %>
 <% end %>
 <% # TODO: this bit of logic prevents us moving to the shared view %>
@@ -8,7 +8,7 @@
 <div class="withdrawn-date-wrapper" style="display:<%= withdrawn_date_display %>">
   <%= render "shared/legacy/date_fields_legacy", f: f, field: :withdrawn_date, format: :statutory_instrument %>
 </div>
-<%= render "shared/form_group", f: f, field: :subject do %>
+<%= render "shared/legacy/form_group_legacy", f: f, field: :subject do %>
   <%= f.select :subject,
       select_options_for_facet(f.object.allowed_values(:subject)),
       {},
@@ -24,7 +24,7 @@
 <% end %>
 
 <% # TODO: find a way of making organisation management schema-driven %>
-<%= render "shared/form_group", f: f, field: :primary_publishing_organisation, label: "Publishing organisation" do %>
+<%= render "shared/legacy/form_group_legacy", f: f, field: :primary_publishing_organisation, label: "Publishing organisation" do %>
   <%= f.select :primary_publishing_organisation,
       organisations_options_legacy,
       { selected: selected_organisation_or_current(@document.primary_publishing_organisation) },
@@ -37,7 +37,7 @@
       }
   %>
 <% end %>
-<%= render "shared/form_group", f: f, field: :organisations, label: "Other associated organisations" do %>
+<%= render "shared/legacy/form_group_legacy", f: f, field: :organisations, label: "Other associated organisations" do %>
   <%= f.select :organisations,
       organisations_options_legacy,
       {},

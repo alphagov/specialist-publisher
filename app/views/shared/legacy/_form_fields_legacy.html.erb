@@ -1,17 +1,17 @@
-<%= render layout: "shared/form_group", locals: { f: f, field: :title } do %>
+<%= render layout: "shared/legacy/form_group_legacy", locals: { f: f, field: :title } do %>
   <%= f.text_field :title, class: 'form-control' %>
 <% end %>
 
-<%= render layout: "shared/form_group", locals: { f: f, field: :summary } do %>
+<%= render layout: "shared/legacy/form_group_legacy", locals: { f: f, field: :summary } do %>
   <%= f.text_area :summary, class: 'form-control short-textarea js-length-counter', data: { :"count-message-threshold" => 280, :"count-message-selector" => ".summary-length-info" } %>
   <div class="summary-length-info warning" aria-live="polite">Summary text should be 280 characters or fewer. <span class="count"></span></div>
 <% end %>
 
-<%= render layout: "shared/form_group", locals: { f: f, field: :body } do %>
+<%= render layout: "shared/legacy/form_group_legacy", locals: { f: f, field: :body } do %>
   <%= f.text_area :body, rows: 20, class: 'form-control body-text', value: @document.body || @document.finder_schema.body_template %>
 <% end %>
 
-<%= render layout: "shared/form_group", locals: { f: f, field: :locale, label: "Language" } do %>
+<%= render layout: "shared/legacy/form_group_legacy", locals: { f: f, field: :locale, label: "Language" } do %>
   <%= f.select(
         :locale,
         options_for_select(

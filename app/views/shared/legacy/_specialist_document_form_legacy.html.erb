@@ -8,11 +8,11 @@
     <%= render layout: "shared/legacy/date_fields_legacy", locals: { f: f, field: field, format: format_name, label: field_config["name"] } do %>
     <% end %>
   <% elsif !field_config["allowed_values"] %>
-    <%= render layout: "shared/form_group", locals: { f: f, field: field, label: field_config["name"] } do %>
+    <%= render layout: "shared/legacy/form_group_legacy", locals: { f: f, field: field, label: field_config["name"] } do %>
       <%= f.text_area field, class: 'form-control' %>
     <% end %>
   <% elsif field_config["specialist_publisher_properties"]["select"] == "one" %>
-    <%= render layout: "shared/form_group", locals: { f: f, field: field, label: field_config["name"] } do %>
+    <%= render layout: "shared/legacy/form_group_legacy", locals: { f: f, field: field, label: field_config["name"] } do %>
       <%= f.select field,
                    select_options_for_facet(f.object.allowed_values(field)),
                    {
@@ -28,7 +28,7 @@
       %>
     <% end %>
   <% elsif field_config["specialist_publisher_properties"]["select"] == "multiple" %>
-    <%= render layout: "shared/form_group", locals: { f: f, field: field, label: field_config["name"] } do %>
+    <%= render layout: "shared/legacy/form_group_legacy", locals: { f: f, field: field, label: field_config["name"] } do %>
       <%= f.select field,
                    select_options_for_facet(f.object.allowed_values(field)),
                    {},
