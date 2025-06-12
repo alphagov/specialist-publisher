@@ -7,7 +7,7 @@ class DocumentsController < ApplicationController
   include OrganisationsHelper
 
   layout :get_layout
-  DESIGN_SYSTEM_MIGRATED_ACTIONS = %w[new create index show confirm_publish confirm_unpublish].freeze
+  DESIGN_SYSTEM_MIGRATED_ACTIONS = %w[new create index show confirm_publish confirm_unpublish confirm_discard discard].freeze
   include DesignSystemHelper
 
   before_action :fetch_document, except: %i[index new create]
@@ -91,9 +91,16 @@ class DocumentsController < ApplicationController
     redirect_to document_path(current_format.admin_slug, params[:content_id_and_locale])
   end
 
+  def confirm_discard; end
+
   def discard
     if @document.discard
-      flash[:success] = "Discarded draft of #{@document.title}"
+      message = if get_layout == "design_system"
+                  "The draft of '#{@document.title}' has been deleted"
+                else
+                  "Discarded draft of #{@document.title}"
+                end
+      flash[:success] = message
     else
       flash[:danger] = unknown_error_message
     end

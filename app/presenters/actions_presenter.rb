@@ -74,6 +74,10 @@ class ActionsPresenter
     confirm_unpublish_document_path(slug, document.content_id_and_locale)
   end
 
+  def confirm_discard_path
+    confirm_discard_document_path(slug, document.content_id_and_locale)
+  end
+
   def publish_path
     publish_document_path(slug, document.content_id_and_locale)
   end

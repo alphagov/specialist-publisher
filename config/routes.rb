@@ -37,6 +37,7 @@ Rails.application.routes.draw do
     get :confirm_publish, on: :member
     post :publish, on: :member
 
+    get :confirm_discard, on: :member
     post :discard, on: :member
   end
 
