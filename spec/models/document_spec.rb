@@ -477,7 +477,7 @@ RSpec.describe Document do
     it "sends a discard draft request to the publishing api" do
       stub_publishing_api_discard_draft(content_id)
       document.discard
-      assert_publishing_api_discard_draft(content_id)
+      assert_publishing_api_discard_draft(content_id, locale: "en")
     end
 
     it "returns true if the draft was discarded successfully" do
