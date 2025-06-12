@@ -50,7 +50,7 @@
         message: flash[:notice] || flash[:success]
       } if flash[:notice] || flash[:success] %>
       <%= render "govuk_publishing_components/components/error_alert", {
-        message: flash[:danger]
+        message: flash[:danger].html_safe
       } if flash[:danger] %>
 
       <div class="govuk-grid-row">
