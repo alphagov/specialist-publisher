@@ -95,12 +95,12 @@ RSpec.describe ActionsPresenter do
     end
   end
 
-  describe "publish_alert" do
-    specify { expect(subject.publish_alert).to include("will email subscribers to CMA Cases") }
+  describe "publish_alert_legacy" do
+    specify { expect(subject.publish_alert_legacy).to include("will email subscribers to CMA Cases") }
 
     context "when the update_type is minor" do
       let(:payload) { FactoryBot.create(:cma_case, :redrafted, update_type: "minor") }
-      specify { expect(subject.publish_alert).to include("minor edit") }
+      specify { expect(subject.publish_alert_legacy).to include("minor edit") }
     end
   end
 
@@ -155,8 +155,8 @@ RSpec.describe ActionsPresenter do
     end
   end
 
-  describe "unpublish_alert" do
-    specify { expect(subject.unpublish_alert).to include("Are you sure") }
+  describe "unpublish_alert_legacy" do
+    specify { expect(subject.unpublish_alert_legacy).to include("Are you sure") }
   end
 
   describe "unpublish_path" do

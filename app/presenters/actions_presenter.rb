@@ -58,7 +58,7 @@ class ActionsPresenter
     end
   end
 
-  def publish_alert
+  def publish_alert_legacy
     if update_type == "minor"
       "You are about to publish a minor edit. Continue?"
     else
@@ -114,7 +114,7 @@ class ActionsPresenter
     text
   end
 
-  def unpublish_alert
+  def unpublish_alert_legacy
     "Are you sure you want to unpublish this document?"
   end
 
@@ -126,7 +126,7 @@ class ActionsPresenter
     policy.discard? && document.draft?
   end
 
-  def discard_text
+  def discard_text_legacy
     if state != "draft"
       "There is no draft to discard."
     elsif !policy.discard?
@@ -136,7 +136,7 @@ class ActionsPresenter
     end
   end
 
-  def discard_alert
+  def discard_alert_legacy
     "Are you sure you want to discard this draft?"
   end
 
