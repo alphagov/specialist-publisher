@@ -7,7 +7,7 @@ class DocumentsController < ApplicationController
   include OrganisationsHelper
 
   layout :get_layout
-  DESIGN_SYSTEM_MIGRATED_ACTIONS = %w[new create index show confirm_publish].freeze
+  DESIGN_SYSTEM_MIGRATED_ACTIONS = %w[new create index show confirm_publish confirm_unpublish].freeze
   include DesignSystemHelper
 
   before_action :fetch_document, except: %i[index new create]
@@ -78,6 +78,8 @@ class DocumentsController < ApplicationController
     end
     redirect_to document_path(current_format.admin_slug, params[:content_id_and_locale])
   end
+
+  def confirm_unpublish; end
 
   def unpublish
     if @document.unpublish(params[:alternative_path])

@@ -129,29 +129,29 @@ RSpec.describe ActionsPresenter do
     end
   end
 
-  describe "unpublish_text" do
+  describe "unpublish_text_legacy" do
     let(:payload) { FactoryBot.create(:cma_case, :published) }
 
-    specify { expect(subject.unpublish_text).to include("removed from the site") }
+    specify { expect(subject.unpublish_text_legacy).to include("removed from the site") }
 
     context "when the document is a draft" do
       let(:payload) { FactoryBot.create(:cma_case) }
-      specify { expect(subject.unpublish_text).to include("never been published") }
+      specify { expect(subject.unpublish_text_legacy).to include("never been published") }
     end
 
     context "when the document is redrafted" do
       let(:payload) { FactoryBot.create(:cma_case, :redrafted) }
-      specify { expect(subject.unpublish_text).to include("publish the draft first") }
+      specify { expect(subject.unpublish_text_legacy).to include("publish the draft first") }
     end
 
     context "when the document is already unpublished" do
       let(:payload) { FactoryBot.create(:cma_case, publication_state: "unpublished") }
-      specify { expect(subject.unpublish_text).to include("already unpublished") }
+      specify { expect(subject.unpublish_text_legacy).to include("already unpublished") }
     end
 
     context "when the user does not have editor permissions" do
       let(:user) { FactoryBot.create(:cma_writer) }
-      specify { expect(subject.unpublish_text).to include("don't have permission to unpublish") }
+      specify { expect(subject.unpublish_text_legacy).to include("don't have permission to unpublish") }
     end
   end
 

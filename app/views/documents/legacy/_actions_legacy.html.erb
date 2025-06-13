@@ -25,7 +25,7 @@
     <%= form_tag(presenter.unpublish_path, method: :post, class: 'panel panel-default') do %>
       <div class="panel-heading"><h3 class="panel-title">Unpublish document</h3></div>
       <div class="panel-body">
-        <%= content_tag(:p, presenter.unpublish_text) %>
+        <%= content_tag(:p, presenter.unpublish_text_legacy) %>
 
         <% if presenter.unpublish_button_visible? %>
           <div class="form-group">
