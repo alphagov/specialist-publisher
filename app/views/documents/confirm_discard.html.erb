@@ -1,7 +1,7 @@
-<% page_title = "Publish #{current_format.title}" %>
+<% page_title = "Delete draft" %>
 <% presenter = ActionsPresenter.new(@document, policy(@document.class)) %>
 
-<%= content_for :page_title, page_title %>
+<% content_for :page_title, page_title %>
 <% content_for :title, page_title %>
 <% content_for :context, @document.title %>
 
@@ -22,34 +22,31 @@
         url: document_path(current_format.admin_slug, @document.content_id_and_locale)
       },
       {
-        title: "Publish"
+        title: "Delete draft"
       }
     ]
   } %>
 <% end %>
 
-
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-two-thirds">
-
-    <p class="govuk-body"><%= presenter.publish_text %></p>
-
-    <%= form_tag(presenter.publish_path,
+    <%= form_tag(presenter.discard_path,
                  method: :post,
-                 data: { gtm: "confirm-publish" }) do %>
+                 data: { gtm: "confirm-discard" }) do %>
 
       <div class="govuk-body govuk-!-margin-bottom-8">
-        Are you sure you want to publish this document?
+        Are you sure you want to delete this draft?
       </div>
 
       <div class="govuk-button-group govuk-!-margin-bottom-6">
         <%= render "govuk_publishing_components/components/button", {
-          text: "Publish"
+          text: "Delete",
+          destructive: true,
         } %>
         <%= link_to "Cancel",
                     document_path(current_format.admin_slug, @document.content_id_and_locale),
                     class: "govuk-link govuk-link--no-visited-state app-link--inline",
-                    data: { gtm: "cancel-publish" } %>
+                    data: { gtm: "cancel-unpublish" } %>
       </div>
     <% end %>
   </div>

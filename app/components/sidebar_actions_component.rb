@@ -67,7 +67,7 @@ private
 
     link_to(
       "Delete draft",
-      "#",
+      @presenter.confirm_discard_path,
       class: "govuk-link gem-link--destructive",
     )
   end

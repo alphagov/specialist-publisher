@@ -44,17 +44,17 @@ RSpec.describe ActionsPresenter do
   describe "publish_text" do
     context "when the document is a new draft" do
       let(:payload) { FactoryBot.create(:cma_case, :draft) }
-      specify { expect(subject.publish_text).to eq("<p>Publishing will email subscribers to CMA Cases.</p><p>Are you sure you want to publish this document?</p>") }
+      specify { expect(subject.publish_text).to eq("Publishing will email subscribers to CMA Cases.") }
     end
 
     context "when the document is redrafted" do
       let(:payload) { FactoryBot.create(:cma_case, :redrafted) }
-      specify { expect(subject.publish_text).to eq("<p>You are about to publish a major edit with a public change note. Publishing will email subscribers to CMA Cases.</p><p>Are you sure you want to publish this document?</p>") }
+      specify { expect(subject.publish_text).to eq("You are about to publish a major edit with a public change note. Publishing will email subscribers to CMA Cases.") }
     end
 
     context "when the document is redrafted and the update_type is minor" do
       let(:payload) { FactoryBot.create(:cma_case, :redrafted, update_type: "minor") }
-      specify { expect(subject.publish_text).to eq("<p>You are about to publish a minor edit.</p><p>Are you sure you want to publish this document?</p>") }
+      specify { expect(subject.publish_text).to eq("You are about to publish a minor edit.") }
     end
   end
 
@@ -95,12 +95,12 @@ RSpec.describe ActionsPresenter do
     end
   end
 
-  describe "publish_alert" do
-    specify { expect(subject.publish_alert).to include("will email subscribers to CMA Cases") }
+  describe "publish_alert_legacy" do
+    specify { expect(subject.publish_alert_legacy).to include("will email subscribers to CMA Cases") }
 
     context "when the update_type is minor" do
       let(:payload) { FactoryBot.create(:cma_case, :redrafted, update_type: "minor") }
-      specify { expect(subject.publish_alert).to include("minor edit") }
+      specify { expect(subject.publish_alert_legacy).to include("minor edit") }
     end
   end
 
@@ -155,8 +155,8 @@ RSpec.describe ActionsPresenter do
     end
   end
 
-  describe "unpublish_alert" do
-    specify { expect(subject.unpublish_alert).to include("Are you sure") }
+  describe "unpublish_alert_legacy" do
+    specify { expect(subject.unpublish_alert_legacy).to include("Are you sure") }
   end
 
   describe "unpublish_path" do

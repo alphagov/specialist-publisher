@@ -247,7 +247,7 @@ class Document
 
   def discard
     handle_remote_error(self) do
-      Services.publishing_api.discard_draft(content_id, previous_version:)
+      Services.publishing_api.discard_draft(content_id, previous_version:, locale:)
     end
   end
 

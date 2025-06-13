@@ -19,20 +19,11 @@ class ActionsPresenter
 
   def publish_text
     if update_type == "minor"
-      safe_join([
-        tag.p("You are about to publish a minor edit."),
-        tag.p("Are you sure you want to publish this document?"),
-      ])
+      "You are about to publish a minor edit."
     elsif update_type == "major" && !document.first_draft?
-      safe_join([
-        tag.p("You are about to publish a major edit with a public change note. Publishing will email subscribers to #{klass_name}."),
-        tag.p("Are you sure you want to publish this document?"),
-      ])
+      "You are about to publish a major edit with a public change note. Publishing will email subscribers to #{klass_name}."
     else
-      safe_join([
-        tag.p("Publishing will email subscribers to #{klass_name}."),
-        tag.p("Are you sure you want to publish this document?"),
-      ])
+      "Publishing will email subscribers to #{klass_name}."
     end
   end
 
@@ -58,7 +49,7 @@ class ActionsPresenter
     end
   end
 
-  def publish_alert
+  def publish_alert_legacy
     if update_type == "minor"
       "You are about to publish a minor edit. Continue?"
     else
@@ -72,6 +63,10 @@ class ActionsPresenter
 
   def confirm_unpublish_path
     confirm_unpublish_document_path(slug, document.content_id_and_locale)
+  end
+
+  def confirm_discard_path
+    confirm_discard_document_path(slug, document.content_id_and_locale)
   end
 
   def publish_path
@@ -110,7 +105,7 @@ class ActionsPresenter
     text
   end
 
-  def unpublish_alert
+  def unpublish_alert_legacy
     "Are you sure you want to unpublish this document?"
   end
 
@@ -122,7 +117,7 @@ class ActionsPresenter
     policy.discard? && document.draft?
   end
 
-  def discard_text
+  def discard_text_legacy
     if state != "draft"
       "There is no draft to discard."
     elsif !policy.discard?
@@ -132,7 +127,7 @@ class ActionsPresenter
     end
   end
 
-  def discard_alert
+  def discard_alert_legacy
     "Are you sure you want to discard this draft?"
   end
 
