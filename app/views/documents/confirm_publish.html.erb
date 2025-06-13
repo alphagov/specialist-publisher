@@ -1,0 +1,54 @@
+<% page_title = "Publish #{current_format.title}" %>
+<% presenter = ActionsPresenter.new(@document, policy(@document.class)) %>
+
+<%= content_for :page_title, page_title %>
+<% content_for :title, page_title %>
+<% content_for :context, @document.title %>
+
+<% content_for :breadcrumbs do %>
+  <%= render "govuk_publishing_components/components/breadcrumbs", {
+    collapse_on_mobile: true,
+    breadcrumbs: [
+      {
+        title: "All finders",
+        url: finders_path
+      },
+      {
+        title: current_format.title.pluralize,
+        url: documents_path(current_format.admin_slug)
+      },
+      {
+        title: @document.title,
+        url: document_path(current_format.admin_slug, @document.content_id_and_locale)
+      },
+      {
+        title: "Publish"
+      }
+    ]
+  } %>
+<% end %>
+
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+
+    <div class="govuk-body govuk-!-margin-bottom-8">
+      <%= presenter.publish_text %>
+    </div>
+
+    <%= form_tag(presenter.publish_path,
+                 method: :post,
+                 data: { gtm: "confirm-publish" }) do %>
+
+      <div class="govuk-button-group govuk-!-margin-bottom-6">
+        <%= render "govuk_publishing_components/components/button", {
+          text: "Publish"
+        } %>
+        <%= link_to "Cancel",
+                    document_path(current_format.admin_slug, @document.content_id_and_locale),
+                    class: "govuk-link govuk-link--no-visited-state app-link--inline",
+                    data: { gtm: "cancel-publish" } %>
+      </div>
+    <% end %>
+  </div>
+</div>

@@ -26,6 +26,7 @@ class DocumentPolicy < ApplicationPolicy
   end
 
   alias_method :unpublish?, :publish?
+  alias_method :confirm_publish?, :publish?
   alias_method :discard?, :publish?
 
 private
