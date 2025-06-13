@@ -23,7 +23,7 @@
 
         <%= render partial: "shared/legacy/preview_govspeak_legacy", locals: {attachments: @document.attachments} %>
 
-        <%= render partial: "metadata_fields_legacy/#{@document.document_type.pluralize}", locals: {f: f} %>
+        <%= render partial: computed_partial_legacy, locals: { f: f } %>
 
         <%= render partial: "shared/minor_major_update_fields", locals: {f: f, document: @document} %>
 

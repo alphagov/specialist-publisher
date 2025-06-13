@@ -30,7 +30,7 @@
                  html: { class: "new_document" } do |f| %>
       <%= render partial: "shared/form_fields", locals: { f: f } %>
 
-      <%= render partial: "metadata_fields/#{@document.document_type.pluralize}", locals: { f: f } %>
+      <%= render partial: computed_partial, locals: { f: f } %>
 
       <div class="actions">
         <%= render "govuk_publishing_components/components/button", {

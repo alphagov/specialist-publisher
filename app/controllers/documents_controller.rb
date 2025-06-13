@@ -107,6 +107,24 @@ class DocumentsController < ApplicationController
     redirect_to documents_path(current_format.admin_slug)
   end
 
+  helper_method :computed_partial
+  def computed_partial
+    if lookup_context.exists?(@document.document_type.pluralize.to_s, %w[metadata_fields], true)
+      "metadata_fields/#{@document.document_type.pluralize}"
+    else
+      "shared/specialist_document_form"
+    end
+  end
+
+  helper_method :computed_partial_legacy
+  def computed_partial_legacy
+    if lookup_context.exists?(@document.document_type.pluralize.to_s, %w[metadata_fields_legacy], true)
+      "metadata_fields_legacy/#{@document.document_type.pluralize}"
+    else
+      "shared/legacy/specialist_document_form_legacy"
+    end
+  end
+
 private
 
   def merge_nested_facet_fields
