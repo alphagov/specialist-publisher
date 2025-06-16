@@ -19,11 +19,17 @@ class SidebarActionsComponent < ViewComponent::Base
   end
 
   def notices
-    return if @presenter.unpublish_text.blank?
+    notices = []
+
+    notices << notice("Publishing", @presenter.publish_notice) if @presenter.publish_notice.present?
+    notices << notice("Unpublishing", @presenter.unpublish_notice) if @presenter.unpublish_notice.present?
+    notices << notice("Delete draft", @presenter.discard_draft_notice) if @presenter.discard_draft_notice.present?
+
+    return if notices.empty?
 
     tag.div(
       render("govuk_publishing_components/components/inset_text", {
-        text: notice("Unpublishing", @presenter.unpublish_text).html_safe,
+        text: notices.join("<br>").html_safe,
       }), class: "app-view-summary__sidebar-notices"
     )
   end
