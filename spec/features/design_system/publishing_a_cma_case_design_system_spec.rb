@@ -92,7 +92,7 @@ RSpec.feature "Publishing a CMA case", type: :feature do
       choose "Major"
       fill_in "Change note", with: "Updated change note"
 
-      click_button "Save as draft"
+      click_button "Save"
 
       assert_publishing_api_put_content(
         content_id,

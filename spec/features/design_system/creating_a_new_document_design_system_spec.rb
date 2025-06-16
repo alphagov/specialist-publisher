@@ -13,7 +13,7 @@ RSpec.feature "Creating a document", type: :feature do
   shared_context "common setup" do |editor, document_type, document_path, new_document_path|
     let(:document) { FactoryBot.create(document_type) }
     let(:content_id) { document["content_id"] }
-    let(:save_button_disable_with_message) { page.find_button("Save as draft")["data-disable-with"] }
+    let(:save_button_disable_with_message) { page.find_button("Save")["data-disable-with"] }
     let(:schema) { document_type.to_s.camelize.constantize.finder_schema }
 
     before do
@@ -65,7 +65,7 @@ RSpec.feature "Creating a document", type: :feature do
 
       expect(page).to have_css("div.govspeak-help")
       expect(page).to have_content("To add an attachment, please save the draft first.")
-      click_button "Save as draft"
+      click_button "Save"
 
       expect(page.status_code).to eq(200)
       expect(page).to have_content("Created Example #{document_type.to_s.humanize}")
@@ -74,7 +74,7 @@ RSpec.feature "Creating a document", type: :feature do
     scenario "attempting to create a document with no data" do
       visit new_document_path
       fill_in "Body", with: ""
-      click_button "Save as draft"
+      click_button "Save"
 
       expect(page.status_code).to eq(422)
       expect(page).to have_css(".govuk-error-summary")
@@ -105,7 +105,7 @@ RSpec.feature "Creating a document", type: :feature do
       fill_in "Summary", with: "Example Summary"
       fill_in "Body", with: "<script>alert('hello')</script>"
 
-      click_button "Save as draft"
+      click_button "Save"
 
       expect(page.status_code).to eq(422)
       expect(page).to have_css(".govuk-error-summary")
@@ -137,7 +137,7 @@ RSpec.feature "Creating a document", type: :feature do
         end
       end
 
-      click_button "Save as draft"
+      click_button "Save"
 
       expect(page.status_code).to eq(422)
       expect(page).to have_field("#{document_type}[title]", with: "Example #{document_type.to_s.humanize}")
@@ -174,7 +174,7 @@ RSpec.feature "Creating a document", type: :feature do
         fill_in "#{document_type}[#{key}(2i)]", with: ""
         fill_in "#{document_type}[#{key}(3i)]", with: ""
 
-        click_button "Save as draft"
+        click_button "Save"
 
         expect(page.status_code).to eq(422)
         expect(page).to have_css(".govuk-error-summary")
