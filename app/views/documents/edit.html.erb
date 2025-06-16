@@ -39,12 +39,16 @@
 
       <%= render partial: "shared/minor_major_update_fields", locals: { f: f, document: @document } %>
 
-      <div class="actions">
+      <div class="govuk-button-group">
         <%= render "govuk_publishing_components/components/button", {
           text: "Save",
           name: "save",
           value: "save",
         } %>
+        <%= link_to "Cancel",
+                    document_path(current_format.admin_slug, @document.content_id_and_locale),
+                    class: "govuk-link govuk-link--no-visited-state app-link--inline",
+                    data: { gtm: "cancel-publish" } %>
       </div>
     <% end %>
   </div>

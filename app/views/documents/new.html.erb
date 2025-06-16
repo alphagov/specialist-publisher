@@ -30,12 +30,16 @@
 
       <%= render partial: computed_partial, locals: { f: f } %>
 
-      <div class="actions">
+      <div class="govuk-button-group">
         <%= render "govuk_publishing_components/components/button", {
           text: "Save",
           name: "save",
           value: "save",
         } %>
+        <%= link_to "Cancel",
+                    document_path(current_format.admin_slug, @document.content_id_and_locale),
+                    class: "govuk-link govuk-link--no-visited-state app-link--inline",
+                    data: { gtm: "cancel-publish" } %>
       </div>
     <% end %>
   </div>
