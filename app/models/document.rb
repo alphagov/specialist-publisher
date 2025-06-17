@@ -7,7 +7,6 @@ class Document
   include DateHelper
   include PublishingHelper
 
-  attr_reader :update_type
   attr_writer(
     :temporary_update_type,
     :bulk_published,
@@ -31,6 +30,7 @@ class Document
     :previous_version,
     :warnings,
     :disable_email_alert,
+    :update_type,
   )
 
   def temporary_update_type
@@ -144,26 +144,15 @@ class Document
   end
 
   def change_note_required?
-    return unless update_type == "major"
-
-    !first_draft?
+    update_type == "major" && !first_draft?
   end
 
   def change_note
-    return unless update_type == "major"
-
-    @change_note
+    @change_note if update_type == "major"
   end
 
   def change_note=(note)
-    return unless update_type == "major"
-
-    @change_note = note
-  end
-
-  def update_type=(update_type)
-    @previous_update_type = @update_type
-    @update_type = update_type
+    @change_note = note if update_type == "major"
   end
 
   def users
