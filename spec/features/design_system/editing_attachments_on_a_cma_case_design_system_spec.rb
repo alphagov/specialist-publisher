@@ -113,8 +113,8 @@ RSpec.feature "Editing attachments on a CMA case", type: :feature do
         .with(body: %r{.*})
         .to_return(body: asset_manager_response.to_json, status: 500)
 
-      expect(page).to have_button("delete")
-      find(".attachments").first(:link, "edit").click
+      expect(page).to have_link("Delete attachment")
+      find(".attachments").first(:link, "Edit attachment").click
       expect(page.status_code).to eq(200)
       expect(find("#attachment_title").value).to eq("asylum report image title")
 
@@ -160,7 +160,7 @@ RSpec.feature "Editing attachments on a CMA case", type: :feature do
     scenario "editing an attachment on a #{publication_state} CMA case" do
       stub_request(:put, %r{#{Plek.find('asset-manager')}/assets/.*})
         .to_return(body: asset_manager_response.to_json, status: 201)
-      find(".attachments").first(:link, "edit").click
+      find(".attachments").first(:link, "Edit attachment").click
       expect(page.status_code).to eq(200)
       expect(find("#attachment_title").value).to eq("asylum report image title")
 
@@ -177,7 +177,7 @@ RSpec.feature "Editing attachments on a CMA case", type: :feature do
     scenario "deleting an attachment on a CMA case" do
       stub_request(:delete, %r{#{Plek.find('asset-manager')}/assets/.*})
         .to_return(body: asset_manager_response.to_json, status: 200)
-      find(".attachments").first(:button, "delete").click
+      find(".attachments").first(:link, "Delete attachment").click
       expect(page.status_code).to eq(200)
 
       # TODO: fix tests so that asset manager is updated appropriately
