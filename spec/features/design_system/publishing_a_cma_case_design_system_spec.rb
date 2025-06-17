@@ -90,7 +90,7 @@ RSpec.feature "Publishing a CMA case", type: :feature do
 
       fill_in "Title", with: "Changed title"
       choose "Major"
-      fill_in "Change note", with: "Updated change note"
+      fill_in "Change note (required)", with: "Updated change note"
 
       click_button "Save"
 
