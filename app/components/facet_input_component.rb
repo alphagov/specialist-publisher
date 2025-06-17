@@ -1,5 +1,5 @@
 class FacetInputComponent < ViewComponent::Base
-  def initialize(document, facet_config, label_override = nil)
+  def initialize(document, facet_config, params, label_override = nil)
     @document = document
     @document_type = document.document_type.to_sym
     @facet_type = facet_config["type"].to_sym
@@ -8,11 +8,12 @@ class FacetInputComponent < ViewComponent::Base
     @allowed_values = facet_config["allowed_values"]
     input_properties = facet_config["specialist_publisher_properties"]
     @facet_select_type = input_properties["select"]&.to_sym if input_properties
+    @params = params
   end
 
   def call
     if @facet_type == :date
-      render DateComponent.new(@document, @document_type, @facet_key, @facet_name)
+      render DateComponent.new(@document, @document_type, @facet_key, @facet_name, @params)
     elsif !@allowed_values
       render TextAreaComponent.new(@document, @document_type, @facet_key, @facet_name)
     elsif @facet_select_type == :one

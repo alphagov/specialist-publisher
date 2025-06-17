@@ -1,17 +1,17 @@
 <% finder_schema = f.object.class.finder_schema %>
 <% format_name = f.object.class.document_type.to_sym %>
 <!-- TODO: to be standardized - added manually to maintain custom labels -->
-<%= render FacetInputComponent.new(@document, finder_schema.get_facet(:sift_end_date)) %>
-<%= render FacetInputComponent.new(@document, finder_schema.get_facet(:laid_date), "Laid date") %>
+<%= render FacetInputComponent.new(@document, finder_schema.get_facet(:sift_end_date), params) %>
+<%= render FacetInputComponent.new(@document, finder_schema.get_facet(:laid_date), params, "Laid date") %>
 <%= render FacetInputComponent::SingleSelectComponent.new(@document, format_name, :sifting_status, "Sifting status", finder_schema.get_facet(:sifting_status)["allowed_values"]) %>
 
 <% # TODO: this bit of logic prevents us moving to the shared view; this field also renders between other schema fields %>
 <% withdrawn_date_display = f.object.withdrawn_sifting_status? ? "block" : "none" %>
 <div class="withdrawn-date-wrapper" style="display:<%= withdrawn_date_display %>">
-  <%= render FacetInputComponent::DateComponent.new(@document, format_name, :withdrawn_date, "Withdrawn date") %>
+  <%= render FacetInputComponent::DateComponent.new(@document, format_name, :withdrawn_date, "Withdrawn date", params) %>
 </div>
 
-<%= render FacetInputComponent.new(@document, finder_schema.get_facet(:subject)) %>
+<%= render FacetInputComponent.new(@document, finder_schema.get_facet(:subject), params) %>
 
 <%= render FacetInputComponent::OrganisationSingleSelectWithSearchComponent.new(@document, format_name, :primary_publishing_organisation, "Publishing organisation", selected_organisation_or_current(@document.primary_publishing_organisation)) %>
 <%= render FacetInputComponent::OrganisationMultiSelectWithSearchComponent.new(@document, format_name, :organisations, "Other associated organisations") %>
