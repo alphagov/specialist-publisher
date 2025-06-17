@@ -7,6 +7,7 @@ EXCEPTIONS_TO_GENERAL_TESTING = %w[
   research_for_development_output
   statutory_instrument
   protected_food_drink_name
+  trademark_decision
 ].freeze
 
 RSpec.feature "Creating a document", type: :feature do

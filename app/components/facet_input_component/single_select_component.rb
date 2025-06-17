@@ -1,5 +1,6 @@
 class FacetInputComponent::SingleSelectComponent < ViewComponent::Base
   include ErrorsHelper
+  include FacetSelectHelper
 
   def initialize(document, document_type, facet_key, facet_name, allowed_values)
     @document = document
@@ -14,11 +15,12 @@ class FacetInputComponent::SingleSelectComponent < ViewComponent::Base
   def select_options
     selected_value = @document.send(@facet_key)
 
-    @allowed_values.map do |item|
+    select_options = select_options_for_facet(@allowed_values)
+    select_options.map do |label, value|
       {
-        text: item["label"],
-        value: item["value"],
-        selected: item["value"] == selected_value,
+        text: label,
+        value: value,
+        selected: value == selected_value,
       }
     end
   end
