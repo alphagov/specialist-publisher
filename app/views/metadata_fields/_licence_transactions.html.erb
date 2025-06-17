@@ -1,7 +1,7 @@
 <% schema = f.object.class.finder_schema %>
 
-<%= render FacetInputComponent.new(@document, schema.get_facet(:licence_transaction_industry)) %>
-<%= render FacetInputComponent.new(@document, schema.get_facet(:licence_transaction_location)) %>
+<%= render FacetInputComponent.new(@document, schema.get_facet(:licence_transaction_industry), params) %>
+<%= render FacetInputComponent.new(@document, schema.get_facet(:licence_transaction_location), params) %>
 
 <% # TODO: find a way of making organisation management schema-driven %>
 <% format_name = f.object.class.finder_schema.filter["format"].to_sym %>

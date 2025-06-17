@@ -1,13 +1,13 @@
 <% finder_schema = f.object.class.finder_schema %>
-<%= render FacetInputComponent.new(@document, finder_schema.get_facet(:research_document_type)) %>
+<%= render FacetInputComponent.new(@document, finder_schema.get_facet(:research_document_type), params) %>
 
 <%= render layout: 'shared/legacy/form_group_legacy', locals: { f: f, field: :authors, label: 'Authors' } do %>
   <%= f.text_field :author_tags, class: 'form-control free-form-list', data: { placeholder: 'Add authors' } %>
 <% end %>
 
-<%= render FacetInputComponent.new(@document, finder_schema.get_facet(:country)) %>
-<%= render FacetInputComponent.new(@document, finder_schema.get_facet(:theme)) %>
-<%= render FacetInputComponent.new(@document, finder_schema.get_facet(:first_published_at)) %>
+<%= render FacetInputComponent.new(@document, finder_schema.get_facet(:country), params) %>
+<%= render FacetInputComponent.new(@document, finder_schema.get_facet(:theme), params) %>
+<%= render FacetInputComponent.new(@document, finder_schema.get_facet(:first_published_at), params) %>
 
 <% # TODO: this field prevents us moving to the shared view. It is not a schema listed facet %>
 <% review_status_options = [
