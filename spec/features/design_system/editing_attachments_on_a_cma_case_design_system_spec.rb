@@ -179,6 +179,8 @@ RSpec.feature "Editing attachments on a CMA case", type: :feature do
         .to_return(body: asset_manager_response.to_json, status: 200)
       find(".attachments").first(:link, "Delete attachment").click
       expect(page.status_code).to eq(200)
+      click_button "Delete"
+      expect(page.status_code).to eq(200)
 
       # TODO: fix tests so that asset manager is updated appropriately
       # expect(page).not_to have_content('asylum-support-image.jpg')
