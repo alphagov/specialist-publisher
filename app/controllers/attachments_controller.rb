@@ -2,7 +2,7 @@ class AttachmentsController < ApplicationController
   before_action :check_authorisation, if: :document_type_slug
 
   layout :get_layout
-  DESIGN_SYSTEM_MIGRATED_ACTIONS = %w[new edit].freeze
+  DESIGN_SYSTEM_MIGRATED_ACTIONS = %w[new edit confirm_delete].freeze
   include DesignSystemHelper
 
   def check_authorisation
@@ -46,6 +46,11 @@ class AttachmentsController < ApplicationController
     else
       failed_to_attach(document)
     end
+  end
+
+  def confirm_delete
+    @document = fetch_document
+    @attachment = @document.attachments.find(attachment_content_id)
   end
 
   def destroy

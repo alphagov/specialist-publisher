@@ -9,6 +9,7 @@ class DocumentPolicy < ApplicationPolicy
   alias_method :update?, :index?
   alias_method :show?, :index?
   alias_method :destroy?, :index? # used only by AttachmentsController
+  alias_method :confirm_delete?, :index? # used only by AttachmentsController
 
   # TODO: move these into the FinderSchemaPolicy and add associated tests
   def can_request_edits_to_finder?
