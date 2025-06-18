@@ -29,12 +29,17 @@
             </p>
 
             <div class="govuk-button-group">
-              <%= link_to "Edit attachment", edit_document_attachment_path(params[:document_type_slug],
-                                                                @document.content_id_and_locale,
-                                                                attachment.content_id),
+              <%= link_to "Edit attachment",
+                          edit_document_attachment_path(params[:document_type_slug],
+                                                        @document.content_id_and_locale,
+                                                        attachment.content_id),
                           class: "govuk-link govuk-link--no-visited-state"
               %>
-              <%= link_to "Delete attachment", "#", class: "govuk-link gem-link--destructive" %>
+              <%= link_to "Delete attachment",
+                          confirm_delete_document_attachment_path(params[:document_type_slug],
+                                                                    @document.content_id_and_locale,
+                                                                    attachment.content_id),
+                          class: "govuk-link gem-link--destructive" %>
             </div>
             <hr>
           </div>

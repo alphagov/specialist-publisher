@@ -29,7 +29,10 @@ Rails.application.routes.draw do
     collection do
       resource :export, only: %i[show create], as: :export_documents
     end
-    resources :attachments, param: :attachment_content_id, except: %i[index show]
+
+    resources :attachments, param: :attachment_content_id, except: %i[index show] do
+      get :confirm_delete, on: :member
+    end
 
     get :confirm_unpublish, on: :member
     post :unpublish, on: :member
