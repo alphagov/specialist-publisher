@@ -7,7 +7,7 @@ class DocumentsController < ApplicationController
   include OrganisationsHelper
 
   layout :get_layout
-  DESIGN_SYSTEM_MIGRATED_ACTIONS = %w[new create index show confirm_publish confirm_unpublish confirm_discard discard].freeze
+  DESIGN_SYSTEM_MIGRATED_ACTIONS = %w[new create index show confirm_publish confirm_unpublish confirm_discard discard edit update].freeze
   include DesignSystemHelper
 
   before_action :fetch_document, except: %i[index new create]
@@ -51,7 +51,9 @@ class DocumentsController < ApplicationController
     render design_system_view(:show, "documents/legacy/show_legacy")
   end
 
-  def edit; end
+  def edit
+    render design_system_view(:edit, "documents/legacy/edit_legacy")
+  end
 
   def update
     @document.set_attributes(filtered_params)
@@ -61,10 +63,10 @@ class DocumentsController < ApplicationController
         flash[:success] = "Updated #{@document.title}"
         redirect_to document_path(current_format.admin_slug, @document.content_id_and_locale)
       else
-        re_render :edit, flash_key: :danger, flash_message: unknown_error_message
+        re_render design_system_view(:edit, "documents/legacy/edit_legacy"), flash_key: :danger, flash_message: unknown_error_message
       end
     else
-      re_render :edit, flash_key: :errors, flash_message: document_error_messages, status: :unprocessable_entity
+      re_render design_system_view(:edit, "documents/legacy/edit_legacy"), flash_key: :errors, flash_message: document_error_messages, status: :unprocessable_entity
     end
   end
 

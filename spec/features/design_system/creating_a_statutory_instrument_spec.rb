@@ -37,7 +37,7 @@ RSpec.feature "Creating a Statutory Instrument", type: :feature do
   scenario "saving a new document with no data" do
     visit new_document_path
     fill_in "Body", with: ""
-    click_button "Save as draft"
+    click_button "Save"
 
     expect(page.status_code).to eq(422)
 
@@ -93,7 +93,7 @@ RSpec.feature "Creating a Statutory Instrument", type: :feature do
     # Select value for custom 'organisations' field
     select organisation_name_for_authorized_user, from: "#{document_type}[organisations][]"
 
-    click_button "Save as draft"
+    click_button "Save"
 
     expect(page.status_code).to eq(200)
     expect(page).to have_content("Created Example #{document_type.to_s.humanize}")

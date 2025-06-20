@@ -5,6 +5,15 @@ module FacetSelectHelper
     }.reduce([], :concat)
   end
 
+  def admin_facet_value_from_allowed_values(allowed_values, nested_facet:)
+    values = allowed_values&.map do |value|
+      value_output = "#{value['label']} {#{value['value']}}"
+      nested_facet ? "#{value_output}\n#{value['sub_facets'].map { |sub_facet| "- #{sub_facet['label']} {#{sub_facet['value']}}" }&.join("\n")}" : value_output
+    end
+
+    nested_facet ? values&.join("\n\n") : values&.join("\n")
+  end
+
 private
 
   def nested_facet_options(facet_value)
@@ -16,14 +25,5 @@ private
 
   def facet_option(facet_value)
     [[facet_value["label"], facet_value["value"]]]
-  end
-
-  def admin_facet_value_from_allowed_values(allowed_values, nested_facet:)
-    values = allowed_values&.map do |value|
-      value_output = "#{value['label']} {#{value['value']}}"
-      nested_facet ? "#{value_output}\n#{value['sub_facets'].map { |sub_facet| "- #{sub_facet['label']} {#{sub_facet['value']}}" }&.join("\n")}" : value_output
-    end
-
-    nested_facet ? values&.join("\n\n") : values&.join("\n")
   end
 end
