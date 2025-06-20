@@ -77,12 +77,24 @@ class ActionsPresenter
     policy.unpublish? && state == "published"
   end
 
-  def unpublish_text
+  def publish_notice
+    if !policy.publish? && document.draft?
+      "You don't have permission to publish this document."
+    end
+  end
+
+  def discard_draft_notice
+    if !policy.discard? && document.draft?
+      "You don't have permission to delete this draft."
+    end
+  end
+
+  def unpublish_notice
     return if document.first_draft?
 
     if state == "draft"
       "The document cannot be unpublished because it has a draft. You need to publish the draft first."
-    elsif !policy.unpublish?
+    elsif !policy.unpublish? && state == "published"
       "You don't have permission to unpublish this document."
     end
   end
