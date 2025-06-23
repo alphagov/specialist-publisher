@@ -49,14 +49,12 @@ RSpec.feature "Creating a Research for Development Output ", type: :feature do
     end
   end
 
-  scenario "saving a new document with valid data", skip: "Skipped pending migration of the multiple select to the design system" do
+  scenario "saving a new document with valid data" do
     visit new_document_path
 
     fill_in "Title", with: "Example #{document_type.to_s.humanize}"
     fill_in "Summary", with: "Example Summary"
     fill_in "Body", with: "Example Body"
-
-    # TODO: fill in author - odd multiple select type, because it does not have allowed values; we do not currently have a component for this
 
     # Custom fields
     select "Unreviewed", from: "Review status"
@@ -72,7 +70,10 @@ RSpec.feature "Creating a Research for Development Output ", type: :feature do
       elsif properties["select"] == "one"
         select facet["allowed_values"].first["label"], from: facet["name"], match: :first
       elsif properties["select"] == "multiple"
-        select facet["allowed_values"].first["label"], from: "#{key}_0"
+        select facet["allowed_values"].first["label"], from: "#{document_type}[#{facet['key']}][]"
+      elsif facet["key"] == "authors"
+        # TODO: fill in author - odd multiple select type, because it does not have allowed values; we do not currently have a component for this
+        fill_in "research_for_development_output[author_tags]", with: "A. Author"
       else
         fill_in facet["name"], with: "Example #{facet['name']}"
       end
