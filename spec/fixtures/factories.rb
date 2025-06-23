@@ -386,16 +386,14 @@ FactoryBot.define do
   end
 
   factory :countryside_stewardship_grant, parent: :document do
-    base_path { "/countryside-stewardship-grants/example-document" }
+    base_path { "/capital-grant-finder/example-document" }
     document_type { "countryside_stewardship_grant" }
 
     transient do
       default_metadata do
         {
-          "grant_type" => "option",
+          "grant_type" => "capital-item",
           "land_use" => %w[priority-habitats trees-non-woodland uplands],
-          "tiers_or_standalone_items" => %w[higher-tier],
-          "funding_amount" => %w[201-to-300],
         }
       end
     end

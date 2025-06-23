@@ -1,20 +1,16 @@
 {
-  "base_path": "/countryside-stewardship-grants",
+  "base_path": "/capital-grant-finder",
   "beta": true,
   "content_id": "0eb7b150-879a-4c44-becc-718e23a77e2c",
-  "description": "Find information about Countryside Stewardship options, capital items and supplements",
+  "description": "Find information about capital items and supplements",
   "document_noun": "grant",
-  "document_title": "Countryside Stewardship Grant",
+  "document_title": "Capital Grant",
   "editing_organisations": [
     "de4e9dc6-cca4-43af-a594-682023b84d6c"
   ],
   "facets": [
     {
       "allowed_values": [
-        {
-          "label": "Option",
-          "value": "option"
-        },
         {
           "label": "Capital item",
           "value": "capital-item"
@@ -118,98 +114,12 @@
         "select": "multiple"
       },
       "type": "text"
-    },
-    {
-      "allowed_values": [
-        {
-          "label": "Higher Tier",
-          "value": "higher-tier"
-        },
-        {
-          "label": "Mid Tier",
-          "value": "mid-tier"
-        },
-        {
-          "label": "Offer: Arable",
-          "value": "offer-arable"
-        },
-        {
-          "label": "Offer: Lowland Grazing",
-          "value": "offer-lowland-grazing"
-        },
-        {
-          "label": "Offer: Mixed Farming",
-          "value": "offer-mixed-farming"
-        },
-        {
-          "label": "Offer: Upland",
-          "value": "offer-upland"
-        },
-        {
-          "label": "Standalone capital items",
-          "value": "standalone-capital-items"
-        }
-      ],
-      "display_as_result_metadata": false,
-      "filterable": true,
-      "key": "tiers_or_standalone_items",
-      "name": "Tiers or standalone items",
-      "preposition": "for",
-      "specialist_publisher_properties": {
-        "select": "multiple"
-      },
-      "type": "text"
-    },
-    {
-      "allowed_values": [
-        {
-          "label": "Up to £100",
-          "value": "up-to-100"
-        },
-        {
-          "label": "£101 to £200",
-          "value": "101-to-200"
-        },
-        {
-          "label": "£201 to £300",
-          "value": "201-to-300"
-        },
-        {
-          "label": "£301 to £400",
-          "value": "301-to-400"
-        },
-        {
-          "label": "£401 to £500",
-          "value": "401-to-500"
-        },
-        {
-          "label": "More than £500",
-          "value": "more-than-500"
-        },
-        {
-          "label": "Up to 50% actual costs",
-          "value": "up-to-50-actual-costs"
-        },
-        {
-          "label": "More than 50% actual costs",
-          "value": "more-than-50-actual-costs"
-        }
-      ],
-      "display_as_result_metadata": false,
-      "filterable": true,
-      "key": "funding_amount",
-      "name": "Funding (per unit per year)",
-      "preposition": "of",
-      "specialist_publisher_properties": {
-        "select": "multiple"
-      },
-      "type": "text"
     }
   ],
   "filter": {
     "format": "countryside_stewardship_grant"
   },
-  "name": "Countryside Stewardship grant finder",
+  "name": "Capital grant finder",
   "organisations": [
     "e8fae147-6232-4163-a3f1-1c15b755a8a4",
     "d3ce4ba7-bc75-46b4-89d9-38cb3240376d"
@@ -217,9 +127,9 @@
   "related": [
     "5e91c0bf-187d-4fa0-a6ef-992736d5644c"
   ],
-  "show_table_of_contents": true,
   "show_metadata_block": true,
-  "summary": "Search for options, supplements and capital items to include in your Countryside Stewardship application. Find out about each [Countryside Stewardship scheme and check if you’re eligible before you apply for a grant](/guidance/countryside-stewardship-get-funding-to-protect-and-improve-the-land-you-manage).",
+  "show_table_of_contents": true,
+  "summary": "Search for capital items and their supplements to include in your capital grant application. Read the [relevant capital grants scheme guidance](https://www.gov.uk/government/collections/capital-items-guidance-for-applicants-and-agreement-holders) to check if you're eligible and how to apply.",
   "target_stack": "live",
   "taxons": [
     "9129d716-365b-44ba-9856-383423fe1e41"
