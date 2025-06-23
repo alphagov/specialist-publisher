@@ -35,6 +35,7 @@
   rows: 20,
   value: @document.body || @document.finder_schema.body_template,
   error_items: errors_for(@document.errors, :body),
+  attachments: @document.attachments
 } %>
 
 <% locale = @document.locale || "en" %>
