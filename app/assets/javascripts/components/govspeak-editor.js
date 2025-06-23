@@ -36,7 +36,7 @@ window.GOVUK.Modules = window.GOVUK.Modules || {}
     const data = this.generateFormData(body)
 
     const request = new XMLHttpRequest()
-    request.open('POST', '/preview', false)
+    request.open('POST', '/preview', true)
     request.setRequestHeader('X-CSRF-Token', this.getCsrfToken())
     request.onreadystatechange = callback
     request.send(data)
@@ -57,6 +57,7 @@ window.GOVUK.Modules = window.GOVUK.Modules || {}
       'app-c-govspeak-editor__preview-button--show'
     )
 
+    this.preview.innerHTML = '<p class="govuk-body">Generating preview, please wait...</p>'
     this.preview.classList.add('app-c-govspeak-editor__preview--show')
     this.textareaWrapper.classList.add(
       'app-c-govspeak-editor__textarea--hidden'
