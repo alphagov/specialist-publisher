@@ -59,6 +59,10 @@
         {
           "label": "Rosie Le Breton",
           "value": "rosie-le-breton"
+        },
+        {
+          "label": "Stephanie Wilson",
+          "value": "stephanie-wilson"
         }
       ],
       "display_as_result_metadata": true,
