@@ -919,4 +919,18 @@ FactoryBot.define do
       end
     end
   end
+
+  factory :ukhsa_chemical_hazard, parent: :document do
+    base_path { "/ukhsa_chemical_hazards/example-document" }
+    document_type { "ukhsa_chemical_hazard" }
+
+    transient do
+      default_metadata do
+        {
+          "chemical_name" => %w[chemicals-a-to-c],
+          "product_category" => %w[baby-and-child],
+        }
+      end
+    end
+  end
 end
