@@ -1,17 +1,33 @@
-<div class="govspeak-help">
+<div class="govspeak-help govuk-!-margin-bottom-6">
   <%= render "govuk_publishing_components/components/heading", {
-  text: "Writing style",
-  heading_level: 2,
-  font_size: "l"
-} %>
-  <p class="govuk-body">For style, see the <%= link_to("style guide", "https://www.gov.uk/topic/government-digital-guidance/content-publishing", class: "govuk-link") %></p>
+    text: "Formatting",
+    heading_level: 2,
+    font_size: "l",
+    margin_bottom: 6
+  } %>
 
-  <%= render "govuk_publishing_components/components/heading", {
-  text: "Formatting help",
-  heading_level: 2,
-  font_size: "l"
-} %>
+  <p class="govuk-body">
+    For details, read
+    the <%= link_to("guide to using Markdown", "https://www.gov.uk/guidance/how-to-publish-on-gov-uk/markdown", class: "govuk-link") %>
+  </p>
+
   <%= yield :format_specific_help %>
+
+  <%= render "govuk_publishing_components/components/details", {
+    title: "Paste and convert to Markdown",
+  } do %>
+    <p class='govuk-body'>You can paste formatted text into the body field and Whitehall publisher will try to convert it into GOV.UK’s version of Markdown, Govspeak.</p>
+    <p class='govuk-body'>This works best when copy and pasting from text editing software like Word or Google Docs. It is less likely to recognise formatting from PDFs.</p>
+    <p class='govuk-body'>It will convert:</p>
+    <ul class='gem-c-list govuk-list govuk-list--bullet'>
+      <li>headings</li>
+      <li>bullets</li>
+      <li>numbered lists</li>
+      <li>links</li>
+      <li>email links</li>
+    </ul>
+    <p class='govuk-body'>Other formatting, such as tables, will be removed and only plain text pasted. You’ll need to write the Markdown for these separately.</p>
+  <% end %>
 
   <%= render "govuk_publishing_components/components/details", {
     title: "Headings",
@@ -148,4 +164,74 @@ $A
 
     This paragraph is also indented, so will be considered part of the footnote content.</pre>
   <% end %>
+</div>
+
+<div class="govuk-!-margin-bottom-6">
+  <%= render "govuk_publishing_components/components/heading", {
+    text: "Use plain English",
+    heading_level: 3,
+    font_size: "m",
+    margin_bottom: 4,
+  } %>
+
+  <p class="govuk-body">For details, see the <%= link_to "guideline on using plain English", "https://www.gov.uk/guidance/content-design/writing-for-gov-uk#plain-english", class: "govuk-link" %>
+
+    <%= render "govuk_publishing_components/components/details", {
+      title: "List of words to avoid",
+    } do %>
+    <ul class='gem-c-list govuk-list govuk-list--bullet'>
+      <li>agenda (unless it’s for a meeting)</li>
+      <li>advancing</li>
+      <li>collaborate (use ‘working with’)</li>
+      <li>combating</li>
+      <li>commit/pledge (we need to be more specific – we’re either doing something or we’re not)</li>
+      <li>countering</li>
+      <li>deliver (pizzas, post and services are delivered – not abstract concepts like ‘improvements’ or ‘priorities’)</li>
+      <li>deploy (unless it’s military or software)</li>
+      <li>dialogue (we speak to people)</li>
+      <li>disincentivise (and incentivise)</li>
+      <li>empower</li>
+      <li>facilitate (instead, say something specific about how you are helping)</li>
+      <li>focusing</li>
+      <li>foster (unless it’s children)</li>
+      <li>impact (as a verb)</li>
+      <li>initiate</li>
+      <li>key (unless it unlocks something. A subject/thing isn’t ‘key’ – it’s probably ‘important’)</li>
+      <li>land (as a verb. Only use if you are talking about aircraft)</li>
+      <li>leverage (unless in the financial sense)</li>
+      <li>liaise</li>
+      <li>overarching</li>
+      <li>progress (as a verb – what are you actually doing?)</li>
+      <li>promote (unless you are talking about an ad campaign or some other marketing promotion)</li>
+      <li>robust</li>
+      <li>slimming down (processes don’t diet – we are probably removing x amount of paperwork, etc)</li>
+      <li>streamline</li>
+      <li>strengthening (unless it’s strengthening bridges or other structures)</li>
+      <li>tackling (unless it’s rugby, football or some other sport)</li>
+      <li>transforming (what are you actually doing to change it?)</li>
+      <li>utilise</li>
+    </ul>
+
+    <p class="govuk-body">Always avoid metaphors. For example:</p>
+
+    <ul class='gem-c-list govuk-list govuk-list--bullet'>
+      <li>drive (you can only drive vehicles; not schemes or people)</li>
+      <li>drive out (unless it’s cattle)</li>
+      <li>going forward (unlikely we are giving travel directions)</li>
+      <li>in order to (superfluous – don’t use it)</li>
+      <li>one-stop shop (we are government, not a retail outlet)</li>
+      <li>ring fencing</li>
+    </ul>
+  <% end %>
+</div>
+
+<div class="govuk-!-margin-bottom-6">
+  <%= render "govuk_publishing_components/components/heading", {
+    text: "Style",
+    heading_level: 3,
+    font_size: "m",
+    margin_bottom: 4,
+  } %>
+
+  <p class="govuk-body">For style, see the <%= link_to "style guide", "https://www.gov.uk/guidance/style-guide", class: "govuk-link" %>
 </div>

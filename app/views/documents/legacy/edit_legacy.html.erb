@@ -1,0 +1,37 @@
+<%= content_for :page_title, "Edit #{@document.title}" %>
+
+<% content_for :breadcrumbs do %>
+    <li><%= link_to "Your documents", documents_path(current_format.admin_slug) %></li>
+    <li><%= link_to @document.title, document_path(document_type_slug: params[:document_type_slug],
+                                                   content_id_and_locale: @document.content_id_and_locale) %></li>
+    <li class='active'>Edit document</li>
+<% end %>
+
+<% content_for :document_ready do -%>
+  GOVUK.formChangeProtection.init($('.edit_document'), 'You have unsaved changes that will be lost if you leave this page.');
+<% end -%>
+
+<h1>Editing <%= @document.title %></h1>
+
+<div class="row">
+  <div class="col-md-8">
+    <%= form_for @document, url: document_path(document_type_slug: params[:document_type_slug],
+                                               content_id_and_locale: "#{@content_id_param}:#{@locale_param}"),
+                                               method: :put,
+                                               html: { class: "edit_document" } do |f| %>
+        <%= render partial: "shared/legacy/form_fields_legacy", locals: {f: f} %>
+
+        <%= render partial: "shared/legacy/preview_govspeak_legacy", locals: {attachments: @document.attachments} %>
+
+        <%= render partial: computed_partial_legacy, locals: { f: f } %>
+
+        <%= render partial: "shared/legacy/minor_major_update_fields_legacy", locals: {f: f, document: @document} %>
+
+        <div class="actions">
+          <button name="save" class="btn btn-success" data-disable-with="Saving...">Save as draft</button>
+        </div>
+    <% end %>
+  </div>
+
+  <%= render partial: 'attachments/legacy/attachment_links_legacy' %>
+</div>
