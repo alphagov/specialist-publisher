@@ -44,7 +44,7 @@
 
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-one-third">
-    <%= form_tag(documents_path(current_format.admin_slug), method: :get, class: "govuk-!-padding-3 bg-light-grey") do %>
+    <%= form_tag(documents_path(current_format.admin_slug), method: :get, class: "govuk-!-padding-3 bg-light-grey govuk-!-margin-bottom-4") do %>
       <%= render "govuk_publishing_components/components/heading", {
         text: "Filter by",
         margin_bottom: 6,
@@ -78,6 +78,7 @@
         <%= link_to "Clear all filters", documents_path(current_format.admin_slug), class: "govuk-link govuk-link--no-visited-state" %>
       </p>
     <% end %>
+
     <% if current_format.exportable? %>
       <%= link_to "Export document list to CSV", export_documents_path(current_format.admin_slug, query: @query), class: "govuk-link govuk-link--no-visited-state" %>
     <% end %>
