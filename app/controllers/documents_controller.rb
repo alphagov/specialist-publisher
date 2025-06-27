@@ -167,7 +167,9 @@ private
 
     heading = tag.h4("There is a problem")
     errors = tag.ul(class: "list-unstyled remove-bottom-margin") do
-      safe_join(error_messages.map { |message| tag.li(message.html_safe) })
+      safe_join(error_messages.map do |message|
+        tag.li(CGI.escapeHTML(message).html_safe)
+      end)
     end
 
     heading + errors

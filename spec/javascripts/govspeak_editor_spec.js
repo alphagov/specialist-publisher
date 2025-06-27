@@ -4,6 +4,10 @@ describe('GOVUK.Modules.GovspeakEditor', function () {
   beforeEach(function () {
     component = document.createElement('div')
 
+    // Preview Button wrapper
+    const previewButtonWrapper = document.createElement('div')
+    previewButtonWrapper.classList.add('app-c-govspeak-editor__preview-button-wrapper')
+
     // Preview Button
     const previewButton = document.createElement('button')
     previewButton.classList.add('js-app-c-govspeak-editor__preview-button')
@@ -15,6 +19,11 @@ describe('GOVUK.Modules.GovspeakEditor', function () {
     backButton.setAttribute('data-content-target', '#textarea_id')
     backButton.innerText = 'Back to edit'
 
+    // Attachments
+    const attachments = document.createElement('div')
+    attachments.id = 'attachment_data';
+    attachments.setAttribute('data','[]')
+    
     // Textarea
     const textareaSection = document.createElement('div')
     textareaSection.classList.add('app-c-govspeak-editor__textarea')
@@ -32,9 +41,12 @@ describe('GOVUK.Modules.GovspeakEditor', function () {
     const errorSection = document.createElement('div')
     errorSection.classList.add('app-c-govspeak-editor__error')
 
+    previewButtonWrapper.appendChild(attachments)
+    previewButtonWrapper.appendChild(previewButton)
+    previewButtonWrapper.appendChild(backButton)
+
     // Append to component
-    component.appendChild(previewButton)
-    component.appendChild(backButton)
+    component.appendChild(previewButtonWrapper)
     component.appendChild(textareaSection)
     component.appendChild(previewSection)
     component.appendChild(errorSection)
@@ -307,10 +319,11 @@ describe('GOVUK.Modules.GovspeakEditor', function () {
   })
 
   it('generates form data correctly', function () {
-    const formData = module.generateFormData('some text')
+    const formData = module.generateFormData('some text', '[]')
 
     expect(Array.from(formData.entries())).toEqual([
       ['bodyText', 'some text'],
+      ['attachments', '[]'],
       ['authenticity_token', 'a-csrf-token']
     ])
   })

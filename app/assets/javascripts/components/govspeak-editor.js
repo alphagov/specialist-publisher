@@ -23,6 +23,7 @@ window.GOVUK.Modules = window.GOVUK.Modules || {}
     this.previewButton.classList.add(
       'app-c-govspeak-editor__preview-button--show'
     )
+    this.attachmentsData = this.module.querySelector('.app-c-govspeak-editor__preview-button-wrapper > #attachment_data').getAttribute('data')
 
     this.previewButton.addEventListener('click', this.showPreview.bind(this))
     this.backButton.addEventListener('click', this.hidePreview.bind(this))
@@ -32,19 +33,20 @@ window.GOVUK.Modules = window.GOVUK.Modules || {}
     return document.querySelector('meta[name="csrf-token"]').content
   }
 
-  GovspeakEditor.prototype.getRenderedGovspeak = function (body, callback) {
-    const data = this.generateFormData(body)
+  GovspeakEditor.prototype.getRenderedGovspeak = function (body, attachments, callback) {
+    const data = this.generateFormData(body, attachments)
 
     const request = new XMLHttpRequest()
-    request.open('POST', '/preview', false)
+    request.open('POST', '/preview', true)
     request.setRequestHeader('X-CSRF-Token', this.getCsrfToken())
     request.onreadystatechange = callback
     request.send(data)
   }
 
-  GovspeakEditor.prototype.generateFormData = function (body) {
+  GovspeakEditor.prototype.generateFormData = function (body, attachments) {
     const data = new FormData()
     data.append('bodyText', body)
+    data.append('attachments', attachments)
     data.append('authenticity_token', this.getCsrfToken())
     return data
   }
@@ -57,6 +59,7 @@ window.GOVUK.Modules = window.GOVUK.Modules || {}
       'app-c-govspeak-editor__preview-button--show'
     )
 
+    this.preview.innerHTML = '<p class="govuk-body">Generating preview, please wait...</p>'
     this.preview.classList.add('app-c-govspeak-editor__preview--show')
     this.textareaWrapper.classList.add(
       'app-c-govspeak-editor__textarea--hidden'
@@ -64,7 +67,7 @@ window.GOVUK.Modules = window.GOVUK.Modules || {}
 
     this.backButton.focus()
 
-    this.getRenderedGovspeak(this.textarea.value, (event) => {
+    this.getRenderedGovspeak(this.textarea.value, this.attachmentsData, (event) => {
       const response = event.currentTarget
 
       if (response.readyState !== 4) {
