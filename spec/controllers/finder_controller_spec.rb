@@ -93,6 +93,7 @@ RSpec.describe FindersController, type: :controller do
       stub_publishing_api_has_content([], hash_including(document_type: Organisation.document_type))
       allow(Document).to receive(:finder_schema).and_return(FinderSchema.new)
       allow(Document).to receive(:admin_slug).and_return("some-finder")
+      allow(Document).to receive(:title).and_return("Some finder")
 
       post :update_metadata, params: { document_type_slug: "some-finder", email_alert_type: "no", document_title: "Foo Bar" }
       assert_response :ok
