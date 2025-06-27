@@ -1,22 +1,51 @@
-<%= content_for :page_title, "Export as CSV" %>
+<% page_title = "Export as CSV" %>
+
+<% content_for :page_title, page_title %>
+<% content_for :title, page_title %>
 
 <% content_for :breadcrumbs do %>
-  <li><%= current_format.title.pluralize %></li>
-  <li class="active">Export as CSV</li>
+  <%= render "govuk_publishing_components/components/breadcrumbs", {
+    collapse_on_mobile: true,
+    breadcrumbs: [
+      {
+        title: "All finders",
+        url: finders_path
+      },
+      {
+        title: current_format.title.pluralize,
+        url: documents_path(current_format.admin_slug)
+      },
+      {
+        title: page_title
+      }
+    ]
+  } %>
 <% end %>
 
-<h1 class="page-header">Export as CSV</h1>
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+    <%= form_tag(export_documents_path(current_format.admin_slug),
+                 method: :post,
+                 data: { gtm: "export-csv" }) do %>
 
-<p>Please confirm you want to export the documents list. The following will be emailed to <strong><%= current_user.email %></strong>:</p>
-<ul>
-  <li>All <%= current_format.title.pluralize %></li>
-  <% if @query.present? %>
-    <li>Matching query: “<%= @query %>”</li>
-  <% end %>
-</ul>
-<%= form_tag export_documents_path(current_format.admin_slug), method: 'post' do %>
-  <%= hidden_field_tag :query, @query %>
-  <%= submit_tag "Export as CSV", class: 'btn btn-primary' %>
+      <p class="govuk-body">Please confirm you want to export the documents list. The following will be emailed to <%= current_user.email %>:</p>
 
-  <%= link_to "Cancel and return to list", documents_path(current_format.admin_slug, query: params[:query]), class: 'btn btn-default' %>
-<% end %>
+      <% items = [ sanitize("All #{current_format.title.pluralize}") ] %>
+      <% items << sanitize("Matching query: \"#{@query}\"") if @query.present? %>
+      <%= render "govuk_publishing_components/components/list", {
+        visible_counters: true,
+        items:
+      } %>
+
+      <%= hidden_field_tag :query, @query %>
+
+      <div class="govuk-button-group govuk-!-margin-bottom-6">
+        <%= render "govuk_publishing_components/components/button", text: "Export as CSV" %>
+        <%= link_to "Cancel",
+                    documents_path(current_format.admin_slug, query: params[:query]),
+                    class: "govuk-link govuk-link--no-visited-state app-link--inline",
+                    data: { gtm: "cancel-export-csv" } %>
+      </div>
+    <% end %>
+  </div>
+</div>
