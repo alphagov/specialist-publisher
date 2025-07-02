@@ -9,14 +9,14 @@
         url: finders_path
       },
       {
-        title: "#{current_format.title.pluralize} finder"
+        title: current_format.title.pluralize
       },
     ]
   } %>
 <% end %>
 
 <% content_for :title do %>
-  <%= "#{current_format.title} finder" %>
+  <%= current_format.title.pluralize %>
 <% end %>
 
 <%= render "govuk_publishing_components/components/inset_text", {} do %>
