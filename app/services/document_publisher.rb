@@ -6,22 +6,15 @@ class DocumentPublisher
     if document.first_draft?
       document.change_note = "First published."
       document.update_type = "major"
-      document.save
     end
+    document.public_updated_at = Time.zone.now.strftime("%Y-%m-%dT%H:%M:%S%:z")
+    document.save
+
     Services.publishing_api.publish(document.content_id, nil, locale: document.locale)
-    published_document = document.class.find(document.content_id, document.locale)
 
     if document.send_email_on_publish?
-      # We don't have `public_updated_at` until the document is published, so we
-      # get it from the publishing-api and manually set it on the orignal document
-      # to preserve fields like `urgent` that are lost on publish.
-      # This special case will go away once specialist-publisher starts using the
-      # normal email-alert-service path for sending email alerts.
-      document_with_public_updated_at = document
-      document_with_public_updated_at.public_updated_at = published_document.public_updated_at
-
       # Sanitize the arguments to ensure they are native JSON types
-      email_alert_arguments = EmailAlertPresenter.new(document_with_public_updated_at).to_json.deep_stringify_keys
+      email_alert_arguments = EmailAlertPresenter.new(document).to_json.deep_stringify_keys
       json_safe_arguments = JSON.parse(JSON.dump(email_alert_arguments))
 
       EmailAlertApiWorker.perform_async(json_safe_arguments)
