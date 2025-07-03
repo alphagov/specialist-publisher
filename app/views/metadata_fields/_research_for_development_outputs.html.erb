@@ -1,9 +1,10 @@
 <% finder_schema = f.object.class.finder_schema %>
+<% format_name = f.object.class.document_type.to_sym %>
+
 <%= render FacetInputComponent.new(@document, finder_schema.get_facet(:research_document_type), params) %>
 
-<%= render layout: 'shared/legacy/form_group_legacy', locals: { f: f, field: :authors, label: 'Authors' } do %>
-  <%= f.text_field :author_tags, class: 'form-control free-form-list', data: { placeholder: 'Add authors' } %>
-<% end %>
+<%= f.hidden_field :is_using_design_system_view, value: true%>
+<%= render FacetInputComponent::TextAreaComponent.new(@document, format_name, :author_tags, "Authors") %>
 
 <%= render FacetInputComponent.new(@document, finder_schema.get_facet(:country), params) %>
 <%= render FacetInputComponent.new(@document, finder_schema.get_facet(:theme), params) %>
