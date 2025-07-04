@@ -2,6 +2,7 @@ class PassthroughController < ApplicationController
   layout "design_system"
   before_action :skip_authorization
   def index
+    # TODO - The no permission error page does not show when the preview ds is enabled
     if current_user.preview_design_system?
       redirect_to finders_path
     elsif first_permitted_format
