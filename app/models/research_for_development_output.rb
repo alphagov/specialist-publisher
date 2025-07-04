@@ -3,10 +3,11 @@ class ResearchForDevelopmentOutput < Document
 
   FORMAT_SPECIFIC_FIELDS = format_specific_fields + [:review_status]
 
-  attr_accessor(*FORMAT_SPECIFIC_FIELDS)
+  attr_accessor(*FORMAT_SPECIFIC_FIELDS, :is_using_design_system_view)
 
   def initialize(params = {})
     super(params, FORMAT_SPECIFIC_FIELDS)
+    self.is_using_design_system_view = params[:is_using_design_system_view] || false
     self.author_tags = params[:author_tags]
   end
 
@@ -19,11 +20,15 @@ class ResearchForDevelopmentOutput < Document
     true
   end
 
+  def split_string
+    is_using_design_system_view ? "\r\n" : "::"
+  end
+
   def author_tags
-    (authors || []).join("::")
+    (authors || []).join(split_string)
   end
 
   def author_tags=(tags)
-    self.authors = (tags || "").split("::")
+    self.authors = (tags || "").split(split_string).reject(&:blank?)
   end
 end

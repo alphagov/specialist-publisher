@@ -72,8 +72,7 @@ RSpec.feature "Creating a Research for Development Output ", type: :feature do
       elsif properties["select"] == "multiple"
         select facet["allowed_values"].first["label"], from: "#{document_type}[#{facet['key']}][]"
       elsif facet["key"] == "authors"
-        # TODO: fill in author - odd multiple select type, because it does not have allowed values; we do not currently have a component for this
-        fill_in "research_for_development_output[author_tags]", with: "A. Author"
+        fill_in "research_for_development_output[author_tags]", with: "Mr. Potato Head\r\nMrs. Potato Head"
       else
         fill_in facet["name"], with: "Example #{facet['name']}"
       end
@@ -85,5 +84,6 @@ RSpec.feature "Creating a Research for Development Output ", type: :feature do
 
     expect(page.status_code).to eq(200)
     expect(page).to have_content("Created Example #{document_type.to_s.humanize}")
+    expect(page.body).to include("Mr. Potato Head<br>Mrs. Potato Head")
   end
 end
