@@ -1,11 +1,9 @@
-<%= render "components/select_with_search", {
+<%= render "govuk_publishing_components/components/select_with_search", {
   label: @label,
   heading_size: "m",
   id: @id,
   name: @name,
-  select: {
-    multiple: true
-  },
+  multiple: true,
   options: @options,
   error_items: @error_items,
   include_blank: true,

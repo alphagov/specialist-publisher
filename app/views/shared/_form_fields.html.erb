@@ -39,7 +39,7 @@
 } %>
 
 <% locale = @document.locale || "en" %>
-<%= render "components/select_with_search", {
+<%= render "govuk_publishing_components/components/select_with_search", {
   label: "Language",
   heading_size: "m",
   id: "#{format_name}_locale",
@@ -51,7 +51,6 @@
       selected: locale_key.to_s == locale,
     }
   end,
-  error_items: [],
   include_blank: true,
   full_width: true,
 } %>
