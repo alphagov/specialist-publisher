@@ -1,7 +1,9 @@
 class FindersController < ApplicationController
   layout "design_system"
+
   def index
     skip_authorization
+    redirect_to error_path unless first_permitted_format
   end
 
   def new
@@ -149,5 +151,11 @@ private
            .to_finder_schema_attributes
     }.compact
     proposed_schema.update(params_to_overwrite)
+  end
+
+  def first_permitted_format
+    @first_permitted_format ||= document_models.sort_by(&:name).find do |document_class|
+      DocumentPolicy.new(current_user, document_class).index?
+    end
   end
 end

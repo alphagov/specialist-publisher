@@ -6,6 +6,13 @@ RSpec.feature "Viewing the finders index page", type: :feature do
       log_in_as_design_system_editor(:gds_editor)
     end
 
+    it "root redirects to /finders" do
+      visit "/"
+
+      expect(page.current_path).to eq("/finders")
+      expect(page).to have_content("All finders")
+    end
+
     it "grants access to view all finders" do
       visit "/"
 
