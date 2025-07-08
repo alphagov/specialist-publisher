@@ -26,6 +26,11 @@ module AuthenticationFeatureHelpers
     GDS::SSO.test_user = user
   end
 
+  def log_in_as_design_system(user)
+    user.permissions << "preview_design_system"
+    GDS::SSO.test_user = user
+  end
+
   def log_in_as_editor(user_type)
     log_in_as FactoryBot.create(user_type)
   end
