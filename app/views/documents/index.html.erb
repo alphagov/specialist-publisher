@@ -107,7 +107,7 @@
               text: document.title,
             },
             {
-              text: "Updated #{time_ago_in_words(document.last_edited_at)} ago",
+              text: document.last_edited_at ? "Updated #{time_ago_in_words(document.last_edited_at)} ago" : "",
             },
             {
               text: tag.span(state_for_frontend(document).humanize, class: design_system_classes_for_frontend(document)),
