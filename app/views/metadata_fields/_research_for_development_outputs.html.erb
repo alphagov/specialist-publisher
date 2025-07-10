@@ -4,11 +4,11 @@
 <%= render FacetInputComponent.new(@document, finder_schema.get_facet(:research_document_type), params) %>
 
 <%= f.hidden_field :is_using_design_system_view, value: true%>
-<%= render FacetInputComponent::TextAreaComponent.new(@document, format_name, :author_tags, "Authors") %>
+<%= render FacetInputComponent::TextAreaComponent.new(@document, format_name, :author_tags, "Authors", hint: "Enter each author on a new line.") %>
 
-<%= render FacetInputComponent.new(@document, finder_schema.get_facet(:country), params) %>
-<%= render FacetInputComponent.new(@document, finder_schema.get_facet(:theme), params) %>
-<%= render FacetInputComponent.new(@document, finder_schema.get_facet(:first_published_at), params) %>
+<%= render FacetInputComponent.new(@document, finder_schema.get_facet(:country), params, "Countries") %>
+<%= render FacetInputComponent.new(@document, finder_schema.get_facet(:theme), params, "Themes") %>
+<%= render FacetInputComponent.new(@document, finder_schema.get_facet(:first_published_at), params, "First published at") %>
 
 <% # TODO: this field prevents us moving to the shared view. It is not a schema listed facet %>
 <% review_status_options = [

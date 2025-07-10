@@ -4,7 +4,8 @@ class FacetInputComponent < ViewComponent::Base
     @document_type = document.document_type.to_sym
     @facet_type = facet_config["type"].to_sym
     @facet_key = facet_config["key"].to_sym
-    @facet_name = label_override || facet_config["name"]
+    @required = facet_config.dig("specialist_publisher_properties", "validations")&.key?("required")
+    @facet_name = (label_override || facet_config["name"]) + (@required ? " (required)" : "")
     @allowed_values = facet_config["allowed_values"]
     input_properties = facet_config["specialist_publisher_properties"]
     @facet_select_type = input_properties["select"]&.to_sym if input_properties
