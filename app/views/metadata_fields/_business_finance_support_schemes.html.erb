@@ -1,6 +1,6 @@
 <% finder_schema = f.object.class.finder_schema %>
 <% format_name = f.object.class.document_type.to_sym %>
-<%= render FacetInputComponent::InputComponent.new(@document, format_name, :continuation_link, "Continuation link", "url") %>
+<%= render FacetInputComponent::InputComponent.new(@document, format_name, :continuation_link, "Continuation link (required)", "url") %>
 <%= render FacetInputComponent::InputComponent.new(@document, format_name, :will_continue_on, "Will continue") %>
 
 <!-- TODO: to be standardized - added manually to maintain custom labels -->

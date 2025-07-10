@@ -8,7 +8,7 @@
 <% # TODO: this bit of logic prevents us moving to the shared view; this field also renders between other schema fields %>
 <% withdrawn_date_display = f.object.withdrawn_sifting_status? ? "block" : "none" %>
 <div class="withdrawn-date-wrapper" style="display:<%= withdrawn_date_display %>">
-  <%= render FacetInputComponent::DateComponent.new(@document, format_name, :withdrawn_date, "Withdrawn date", params) %>
+  <%= render FacetInputComponent::DateComponent.new(@document, format_name, :withdrawn_date, "Withdrawn date (required)", params) %>
 </div>
 
 <%= render FacetInputComponent.new(@document, finder_schema.get_facet(:subject), params) %>
