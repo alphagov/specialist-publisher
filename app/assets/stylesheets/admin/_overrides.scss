@@ -1,0 +1,7 @@
+.govuk-tag--s {
+  @include govuk-font(16, $weight: bold, $line-height: 1);
+}
+
+.govuk-summary-list__value .govuk-tag {
+  max-width: none;
+}
