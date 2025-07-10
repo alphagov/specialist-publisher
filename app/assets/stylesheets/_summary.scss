@@ -1,5 +1,11 @@
 .app-view-summary__section {
   padding: govuk-spacing(3) 0;
+
+  .govspeak-help__pre {
+    padding: govuk-spacing(4);
+    @include govuk-font($size: 19);
+  }
+
 }
 
 .app-view-summary__table-link {
