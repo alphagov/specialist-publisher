@@ -9,7 +9,7 @@ class FacetInputComponent::SingleSelectWithSearchComponent < ViewComponent::Base
     @facet_name = facet_name
     @allowed_values = allowed_values
     @options = select_options
-    @error_items = errors_for(document.errors, facet_key)
+    @error_items = errors_for(document_type, document.errors, facet_key)
   end
 
   def select_options
