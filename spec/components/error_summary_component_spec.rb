@@ -89,40 +89,6 @@ RSpec.describe ErrorSummaryComponent, type: :component do
     expect(page).to have_css(".gem-c-error-summary__list-item span", text: "This is a top level error that is agnostic of model level validations. It has probably been added by an updater service or a controller and does not link to an input.")
   end
 
-  it "renders errors when 'ActiveModel::Errors' are passed in" do
-    render_inline(ErrorSummaryComponent.new(object: @object_with_errors.errors, parent_class: "error_summary_test_object"))
-
-    first_link = page.all(".gem-c-error-summary__list-item")[0].find("a")
-    second_link = page.all(".gem-c-error-summary__list-item")[1].find("a")
-    third_link = page.all(".gem-c-error-summary__list-item")[2].find("a")
-
-    expect(page.all(".gem-c-error-summary__list-item").count).to eq 3
-    expect(page.all(".gem-c-error-summary__list-item a").count).to eq 3
-    expect(first_link.text).to eq "Title can't be blank"
-    expect(first_link[:href]).to eq "#error_summary_test_object_title"
-    expect(second_link.text).to eq "Date can't be blank"
-    expect(second_link[:href]).to eq "#error_summary_test_object_date"
-    expect(third_link.text).to eq "Date is invalid"
-    expect(third_link[:href]).to eq "#error_summary_test_object_date"
-  end
-
-  it "renders errors when an array of 'ActiveModel::Error' objects are passed in" do
-    render_inline(ErrorSummaryComponent.new(object: @object_with_errors.errors.errors, parent_class: "error_summary_test_object"))
-
-    first_link = page.all(".gem-c-error-summary__list-item")[0].find("a")
-    second_link = page.all(".gem-c-error-summary__list-item")[1].find("a")
-    third_link = page.all(".gem-c-error-summary__list-item")[2].find("a")
-
-    expect(page.all(".gem-c-error-summary__list-item").count).to eq 3
-    expect(page.all(".gem-c-error-summary__list-item a").count).to eq 3
-    expect(first_link.text).to eq "Title can't be blank"
-    expect(first_link[:href]).to eq "#error_summary_test_object_title"
-    expect(second_link.text).to eq "Date can't be blank"
-    expect(second_link[:href]).to eq "#error_summary_test_object_date"
-    expect(third_link.text).to eq "Date is invalid"
-    expect(third_link[:href]).to eq "#error_summary_test_object_date"
-  end
-
   it "renders messages, rather than full messages, for objects with custom error message fields" do
     licence_transaction = LicenceTransaction.new(body: "body")
     licence_transaction.errors.add(:title, "Custom error message for title")

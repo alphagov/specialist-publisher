@@ -1,11 +1,12 @@
 # frozen_string_literal: true
 
 class ErrorSummaryComponent < ViewComponent::Base
-  attr_reader :object
+  attr_reader :object, :errors
 
   def initialize(object:, parent_class: nil)
     @object = object
     @parent_class = parent_class
+    @errors = object.errors
   end
 
   def render?
@@ -47,21 +48,11 @@ private
     @parent_class ||= object.class.to_s.underscore
   end
 
-  def errors
-    @errors ||= if [ActiveModel::Errors, Array].include?(object.class)
-                  object
-                else
-                  object.errors
-                end
-  end
-
   def get_text(error)
-    @object.try(:custom_error_message_fields) && @object.custom_error_message_fields.include?(error.attribute) ? error.message : error.full_message
+    object.try(:custom_error_message_fields) && object.custom_error_message_fields.include?(error.attribute) ? error.message : error.full_message
   end
 
   def ga4_title
-    return object.class.name.humanize if [ActiveModel::Errors, Array].include?(object.class)
-
     "#{object.try(:new_record?) ? 'New' : 'Editing'} #{object.model_name.human.downcase.titleize}"
   end
 end
