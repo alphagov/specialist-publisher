@@ -51,13 +51,7 @@
       } %>
 
       <% if current_format.has_organisations? %>
-        <%= render "govuk_publishing_components/components/select", {
-          id: "organisation",
-          name: "organisation",
-          label: "Organisations",
-          full_width: true,
-          options: organisation_select_options_with_all(selected_organisation: selected_organisation_or_current(@organisation))
-        } %>
+        <%= render FacetInputComponent::OrganisationSingleSelectWithSearchComponent.new(nil, nil, :organisation, "Organisation", selected_organisation_or_current(@organisation), has_all_option: true, heading_size: "s") %>
       <% end %>
 
       <%= render "govuk_publishing_components/components/input", {
