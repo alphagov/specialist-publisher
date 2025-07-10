@@ -5,8 +5,8 @@
 
 <!-- TODO: to be standardized - added manually to maintain custom labels -->
 <%= render FacetInputComponent.new(@document, finder_schema.get_facet(:types_of_support), params, "Type of support offered") %>
-<%= render FacetInputComponent.new(@document, finder_schema.get_facet(:business_sizes), params, "Business sizes") %>
-<%= render FacetInputComponent.new(@document, finder_schema.get_facet(:industries), params, "Industries") %>
-<%= render FacetInputComponent.new(@document, finder_schema.get_facet(:regions), params, "Regions") %>
 <%= render FacetInputComponent.new(@document, finder_schema.get_facet(:business_stages), params, "Business stages") %>
+<%= render FacetInputComponent.new(@document, finder_schema.get_facet(:industries), params, "Industries") %>
+<%= render FacetInputComponent.new(@document, finder_schema.get_facet(:business_sizes), params, "Business sizes") %>
+<%= render FacetInputComponent.new(@document, finder_schema.get_facet(:regions), params, "Regions") %>
 
