@@ -1,5 +1,4 @@
 <% page_title = "Export as CSV" %>
-
 <% content_for :page_title, page_title %>
 <% content_for :title, page_title %>
 
@@ -14,9 +13,6 @@
       {
         title: current_format.title.pluralize,
         url: documents_path(current_format.admin_slug)
-      },
-      {
-        title: page_title
       }
     ]
   } %>
