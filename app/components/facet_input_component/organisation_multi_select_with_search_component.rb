@@ -7,9 +7,9 @@ class FacetInputComponent::OrganisationMultiSelectWithSearchComponent < ViewComp
     @document_type = document_type
     @facet_key = facet_key
     @label = facet_name
-    @id = document_type ? "#{@document_type}_#{@facet_key}" : @facet_key.to_s
-    @name = document_type ? "#{@document_type}[#{@facet_key}][]" : "#{@facet_key}[]"
-    @error_items = errors_for(@document.errors, @facet_key)
+    @id = document_type ? "#{document_type}_#{facet_key}" : facet_key.to_s
+    @name = document_type ? "#{document_type}[#{facet_key}][]" : "#{facet_key}[]"
+    @error_items = errors_for(document_type, document.errors, facet_key)
     @options = select_options
   end
 

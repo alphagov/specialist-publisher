@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class ErrorSummaryComponent < ViewComponent::Base
+  include ErrorsHelper
+
   attr_reader :object, :errors
 
   def initialize(object:, parent_class: nil)
@@ -26,7 +28,7 @@ private
   def error_items
     errors.map do |error|
       error_item = {
-        text: get_text(error),
+        text: get_text(object_type, error),
         data_attributes: {
           module: "ga4-auto-tracker",
           "ga4-auto": {
@@ -48,8 +50,8 @@ private
     @parent_class ||= object.class.to_s.underscore
   end
 
-  def get_text(error)
-    object.try(:custom_error_message_fields) && object.custom_error_message_fields.include?(error.attribute) ? error.message : error.full_message
+  def object_type
+    object.class.try(:document_type)
   end
 
   def ga4_title
