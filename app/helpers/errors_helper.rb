@@ -31,16 +31,4 @@ module ErrorsHelper
     custom_error = I18n.exists?("activemodel.errors.models.#{object_type}.attributes.#{error.attribute}", :en)
     custom_error ? error.message : error.full_message
   end
-
-  def field_has_errors(document, field)
-    field_errors(document, field).any?
-  end
-
-  def field_errors(document, field)
-    if document.custom_error_message_fields.include?(field)
-      document.errors.messages_for(field)
-    else
-      document.errors.full_messages_for(field)
-    end
-  end
 end
