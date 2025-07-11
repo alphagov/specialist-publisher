@@ -6,9 +6,9 @@ module StateHelper
   end
 
   def design_system_classes_for_frontend(document)
-    return "govuk-tag govuk-tag--blue" if state_for_frontend(document) =~ /draft/
+    return "govuk-tag govuk-tag--s govuk-tag--blue" if state_for_frontend(document) =~ /draft/
 
-    "govuk-tag govuk-tag--green"
+    "govuk-tag govuk-tag--s govuk-tag--green"
   end
 
   def state_for_frontend(document)
