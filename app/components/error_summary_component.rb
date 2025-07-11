@@ -1,11 +1,14 @@
 # frozen_string_literal: true
 
 class ErrorSummaryComponent < ViewComponent::Base
-  attr_reader :object
+  include ErrorsHelper
+
+  attr_reader :object, :errors
 
   def initialize(object:, parent_class: nil)
     @object = object
     @parent_class = parent_class
+    @errors = object.errors
   end
 
   def render?
@@ -25,7 +28,7 @@ private
   def error_items
     errors.map do |error|
       error_item = {
-        text: get_text(error),
+        text: get_text(object_type, error),
         data_attributes: {
           module: "ga4-auto-tracker",
           "ga4-auto": {
@@ -47,21 +50,11 @@ private
     @parent_class ||= object.class.to_s.underscore
   end
 
-  def errors
-    @errors ||= if [ActiveModel::Errors, Array].include?(object.class)
-                  object
-                else
-                  object.errors
-                end
-  end
-
-  def get_text(error)
-    @object.try(:custom_error_message_fields) && @object.custom_error_message_fields.include?(error.attribute) ? error.message : error.full_message
+  def object_type
+    object.class.try(:document_type)
   end
 
   def ga4_title
-    return object.class.name.humanize if [ActiveModel::Errors, Array].include?(object.class)
-
     "#{object.try(:new_record?) ? 'New' : 'Editing'} #{object.model_name.human.downcase.titleize}"
   end
 end

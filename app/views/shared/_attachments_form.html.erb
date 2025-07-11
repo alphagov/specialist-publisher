@@ -9,7 +9,7 @@
       heading_level: 2,
       heading_size: "l",
       value: f.object.title,
-      error_items: errors_for(@attachment.errors, :title)
+      error_items: errors_for(@attachment.document_type, @attachment.errors, :title)
     } %>
   </div>
 
@@ -31,7 +31,7 @@
     heading_size: "l",
     name: "attachment[file]",
     id: "attachment_file",
-    error_items: errors_for(@attachment.errors, :file)
+    error_items: errors_for(@attachment.document_type, @attachment.errors, :file)
   } %>
 
   <div class="govuk-button-group">
