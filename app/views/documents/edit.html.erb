@@ -1,4 +1,4 @@
-<% title = "Editing #{current_format.title}" %>
+<% title = "Editing #{@document.title}" %>
 <% content_for :page_title, title %>
 <% content_for :title, title %>
 <% content_for :error_summary, render(ErrorSummaryComponent.new(object: @document)) %>
@@ -19,9 +19,6 @@
       {
         title: @document.title,
         url: document_path(current_format.admin_slug, @document.content_id_and_locale)
-      },
-      {
-        title: "Edit document"
       }
     ]
   } %>
