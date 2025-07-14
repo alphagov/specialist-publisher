@@ -917,4 +917,18 @@ FactoryBot.define do
       end
     end
   end
+
+  factory :ukhsa_chemical_hazard, parent: :document do
+    base_path { "/chemical-risks-and-human-health/example-document" }
+    document_type { "ukhsa_chemical_hazard" }
+
+    transient do
+      default_metadata do
+        {
+          "ukhsa_chemical_name" => %w[chemicals-a-to-c],
+          "ukhsa_product_category" => %w[baby-and-child],
+        }
+      end
+    end
+  end
 end
