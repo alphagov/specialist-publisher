@@ -2,7 +2,7 @@ class PassthroughController < ApplicationController
   layout "design_system"
   before_action :skip_authorization
   def index
-    if current_user.preview_design_system?
+    if Flipflop.enabled?(:show_design_system)
       redirect_to finders_path
     elsif first_permitted_format
       redirect_to documents_path(document_type_slug: first_permitted_format.admin_slug)

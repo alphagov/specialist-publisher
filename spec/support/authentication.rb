@@ -12,12 +12,6 @@ module AuthenticationControllerHelpers
   def log_in_as_gds_editor
     log_in_as FactoryBot.create(:gds_editor)
   end
-
-  def log_in_as_design_system_gds_editor
-    user = FactoryBot.create(:gds_editor)
-    user.permissions << "preview_design_system"
-    log_in_as user
-  end
 end
 RSpec.configuration.include AuthenticationControllerHelpers, type: :controller
 
@@ -26,18 +20,8 @@ module AuthenticationFeatureHelpers
     GDS::SSO.test_user = user
   end
 
-  def log_in_as_design_system(user)
-    user.permissions << "preview_design_system"
-    GDS::SSO.test_user = user
-  end
-
-  def log_in_as_editor(user_type)
-    log_in_as FactoryBot.create(user_type)
-  end
-
-  def log_in_as_design_system_editor(user_type, organisation_content_id = nil)
+  def log_in_as_editor(user_type, organisation_content_id = nil)
     user = FactoryBot.create(user_type)
-    user.permissions << "preview_design_system"
     user.organisation_content_id = organisation_content_id if organisation_content_id
     log_in_as user
   end

@@ -238,7 +238,7 @@ private
 
   def set_design_system_flag
     if @document && current_format.document_type == "research_for_development_output"
-      @document.is_using_design_system_view = current_user.permissions.include?("preview_design_system")
+      @document.is_using_design_system_view = Flipflop.enabled?(:show_design_system)
     end
   end
 end
