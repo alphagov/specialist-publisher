@@ -17,6 +17,16 @@ RSpec.feature "Testing the open before closed date validation", type: :feature d
     stub_publishing_api_has_item(cma_case)
   end
 
+  before(:each) do
+    @test_strategy ||= Flipflop::FeatureSet.current.test!
+    @test_strategy.switch!(:show_design_system, false)
+  end
+
+  after(:each) do
+    @test_strategy ||= Flipflop::FeatureSet.current.test!
+    @test_strategy.switch!(:show_design_system, true)
+  end
+
   def fill_in_cma_case_form(opened_date:, closed_date:)
     visit "/cma-cases/new"
 

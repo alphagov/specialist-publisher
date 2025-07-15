@@ -39,6 +39,16 @@ RSpec.feature "Editing attachments on a CMA case", type: :feature do
     ]
   end
 
+  before(:each) do
+    @test_strategy ||= Flipflop::FeatureSet.current.test!
+    @test_strategy.switch!(:show_design_system, false)
+  end
+
+  after(:each) do
+    @test_strategy ||= Flipflop::FeatureSet.current.test!
+    @test_strategy.switch!(:show_design_system, true)
+  end
+
   before do
     Timecop.freeze(Time.zone.parse("2015-12-03T16:59:13+00:00"))
     log_in_as_editor(:cma_editor)

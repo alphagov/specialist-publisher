@@ -31,6 +31,16 @@ RSpec.feature "Exporting a list of documents as CSV" do
     ENV["AWS_S3_BUCKET_NAME"] = "test-bucket"
   end
 
+  before(:each) do
+    @test_strategy ||= Flipflop::FeatureSet.current.test!
+    @test_strategy.switch!(:show_design_system, false)
+  end
+
+  after(:each) do
+    @test_strategy ||= Flipflop::FeatureSet.current.test!
+    @test_strategy.switch!(:show_design_system, true)
+  end
+
   scenario "I can export a list of documents and they are emailed to me" do
     visit "/#{BusinessFinanceSupportScheme.admin_slug}"
 

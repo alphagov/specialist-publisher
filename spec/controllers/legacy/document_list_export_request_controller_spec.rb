@@ -10,6 +10,16 @@ RSpec.describe DocumentListExportRequestController, type: :controller do
     ENV["AWS_S3_BUCKET_NAME"] = "test-bucket"
   end
 
+  before(:each) do
+    @test_strategy ||= Flipflop::FeatureSet.current.test!
+    @test_strategy.switch!(:show_design_system, false)
+  end
+
+  after(:each) do
+    @test_strategy ||= Flipflop::FeatureSet.current.test!
+    @test_strategy.switch!(:show_design_system, true)
+  end
+
   describe "GET show" do
     it "responds successfully if there is a valid file" do
       document_type_slug = "asylum-support-decisions"

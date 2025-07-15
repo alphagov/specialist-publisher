@@ -1,6 +1,16 @@
 require "spec_helper"
 
 RSpec.feature "The root specialist-publisher page", type: :feature do
+  before(:each) do
+    @test_strategy ||= Flipflop::FeatureSet.current.test!
+    @test_strategy.switch!(:show_design_system, false)
+  end
+
+  after(:each) do
+    @test_strategy ||= Flipflop::FeatureSet.current.test!
+    @test_strategy.switch!(:show_design_system, true)
+  end
+
   context "when logged in as a GDS editor" do
     before do
       stub_publishing_api_has_content([], hash_including(document_type: CmaCase.document_type))
@@ -58,20 +68,6 @@ RSpec.feature "The root specialist-publisher page", type: :feature do
       expect(page).to have_text("Service Standard Reports")
       expect(page).to have_text("Tax Tribunal Decisions")
       expect(page).to have_text("UTAAC Decisions")
-    end
-  end
-
-  context "when logged in as a design system editor" do
-    before do
-      log_in_as_editor(:gds_editor)
-    end
-
-    it "has expected finders" do
-      visit "/"
-
-      FinderSchema.document_models.each do |document_model|
-        expect(page).to have_link(document_model.title.pluralize, href: documents_path(document_model.admin_slug))
-      end
     end
   end
 

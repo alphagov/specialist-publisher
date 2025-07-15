@@ -5,6 +5,16 @@ RSpec.feature "Validating inline attachments", type: :feature do
     log_in_as_editor(:cma_editor)
   end
 
+  before(:each) do
+    @test_strategy ||= Flipflop::FeatureSet.current.test!
+    @test_strategy.switch!(:show_design_system, false)
+  end
+
+  after(:each) do
+    @test_strategy ||= Flipflop::FeatureSet.current.test!
+    @test_strategy.switch!(:show_design_system, true)
+  end
+
   scenario "creating a document that references attachments that don't exist" do
     visit "/cma-cases/new"
     fill_in "Body", with: "[InlineAttachment:missing.pdf]"

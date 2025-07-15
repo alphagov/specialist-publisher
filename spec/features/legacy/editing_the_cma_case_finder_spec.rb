@@ -18,6 +18,16 @@ RSpec.feature "Editing the CMA case finder", type: :feature do
     stub_any_support_api_call
   end
 
+  before(:each) do
+    @test_strategy ||= Flipflop::FeatureSet.current.test!
+    @test_strategy.switch!(:show_design_system, false)
+  end
+
+  after(:each) do
+    @test_strategy ||= Flipflop::FeatureSet.current.test!
+    @test_strategy.switch!(:show_design_system, true)
+  end
+
   scenario "changing all fields" do
     visit "finders/cma-cases"
     within "#metadata_summary_card" do

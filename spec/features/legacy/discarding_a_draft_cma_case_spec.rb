@@ -10,6 +10,16 @@ RSpec.feature "Discarding a draft CMA Case", type: :feature do
     stub_publishing_api_has_content([item], hash_including(document_type: CmaCase.document_type))
   end
 
+  before(:each) do
+    @test_strategy ||= Flipflop::FeatureSet.current.test!
+    @test_strategy.switch!(:show_design_system, false)
+  end
+
+  after(:each) do
+    @test_strategy ||= Flipflop::FeatureSet.current.test!
+    @test_strategy.switch!(:show_design_system, true)
+  end
+
   context "a draft document" do
     let(:item) do
       FactoryBot.create(

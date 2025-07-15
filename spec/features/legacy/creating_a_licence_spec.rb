@@ -23,6 +23,16 @@ RSpec.feature "Creating a Licence", type: :feature do
     stub_any_publishing_api_patch_links
   end
 
+  before(:each) do
+    @test_strategy ||= Flipflop::FeatureSet.current.test!
+    @test_strategy.switch!(:show_design_system, false)
+  end
+
+  after(:each) do
+    @test_strategy ||= Flipflop::FeatureSet.current.test!
+    @test_strategy.switch!(:show_design_system, true)
+  end
+
   scenario "creating a new licence" do
     visit "/licences"
     click_link "Add another Licence"

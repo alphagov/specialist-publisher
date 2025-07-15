@@ -49,6 +49,16 @@ RSpec.describe AttachmentsController, type: :controller do
     stub_publishing_api_has_item(cma_case)
   end
 
+  before(:each) do
+    @test_strategy ||= Flipflop::FeatureSet.current.test!
+    @test_strategy.switch!(:show_design_system, false)
+  end
+
+  after(:each) do
+    @test_strategy ||= Flipflop::FeatureSet.current.test!
+    @test_strategy.switch!(:show_design_system, true)
+  end
+
   describe "POST create" do
     let(:file) { Rack::Test::UploadedFile.new("spec/support/images/cma_case_image.jpg", "image/jpg") }
     let(:attachment) do

@@ -1,6 +1,16 @@
 require "spec_helper"
 
 RSpec.feature "Access control", type: :feature do
+  before(:each) do
+    @test_strategy ||= Flipflop::FeatureSet.current.test!
+    @test_strategy.switch!(:show_design_system, false)
+  end
+
+  after(:each) do
+    @test_strategy ||= Flipflop::FeatureSet.current.test!
+    @test_strategy.switch!(:show_design_system, true)
+  end
+
   context "as an editor of an organisation that doesn't have access to the application" do
     before do
       log_in_as_editor(:incorrect_id_editor)

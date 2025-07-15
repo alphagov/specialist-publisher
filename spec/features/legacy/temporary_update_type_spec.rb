@@ -17,6 +17,16 @@ RSpec.feature "Temporary update types, relating to attachments", type: :feature 
     log_in_as_editor(:cma_editor)
   end
 
+  before(:each) do
+    @test_strategy ||= Flipflop::FeatureSet.current.test!
+    @test_strategy.switch!(:show_design_system, false)
+  end
+
+  after(:each) do
+    @test_strategy ||= Flipflop::FeatureSet.current.test!
+    @test_strategy.switch!(:show_design_system, true)
+  end
+
   def add_attachment_to_document
     visit "/cma-cases/#{content_id}:#{locale}/attachments/new"
 

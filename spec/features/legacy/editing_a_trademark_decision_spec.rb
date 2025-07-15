@@ -18,6 +18,16 @@ RSpec.feature "Creating a Trademark Decision", type: :feature do
     stub_publishing_api_has_item(trademark_decision)
   end
 
+  before(:each) do
+    @test_strategy ||= Flipflop::FeatureSet.current.test!
+    @test_strategy.switch!(:show_design_system, false)
+  end
+
+  after(:each) do
+    @test_strategy ||= Flipflop::FeatureSet.current.test!
+    @test_strategy.switch!(:show_design_system, true)
+  end
+
   scenario "renders and persists nested facets" do
     trademark_decision["trademark_decision_sub_section"] = "section-3-1-graphical-representation-is-it-graphically-represented"
 
