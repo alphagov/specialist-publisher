@@ -6,3 +6,4 @@
 
 //= require components/govspeak-editor
 //= require components/paste-html-to-govspeak
+//= require components/sifting-status
