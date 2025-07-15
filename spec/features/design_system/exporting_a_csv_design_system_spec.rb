@@ -21,7 +21,7 @@ RSpec.feature "Exporting a list of documents as CSV" do
   end
 
   before do
-    log_in_as_design_system user
+    log_in_as user
 
     stub_publishing_api_has_content(documents, hash_including(document_type: BusinessFinanceSupportScheme.document_type))
 

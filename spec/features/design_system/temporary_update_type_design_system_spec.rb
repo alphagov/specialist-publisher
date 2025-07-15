@@ -14,7 +14,7 @@ RSpec.feature "Temporary update types, relating to attachments", type: :feature 
     stub_any_publishing_api_call
     stub_publishing_api_has_item(payload)
 
-    log_in_as_design_system_editor(:cma_editor)
+    log_in_as_editor(:cma_editor)
   end
 
   def add_attachment_to_document

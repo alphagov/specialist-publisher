@@ -10,7 +10,7 @@ RSpec.feature "Editing a CMA case", type: :feature do
 
   before do
     Timecop.freeze(Time.zone.parse("2015-12-03T16:59:13+00:00"))
-    log_in_as_design_system_editor(:cma_editor)
+    log_in_as_editor(:cma_editor)
 
     stub_any_publishing_api_put_content
     stub_any_publishing_api_patch_links

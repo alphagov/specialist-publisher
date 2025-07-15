@@ -3,7 +3,7 @@ require "spec_helper"
 RSpec.feature "Viewing the finders index page", type: :feature do
   context "when logged in as a GDS editor" do
     before do
-      log_in_as_design_system_editor(:gds_editor)
+      log_in_as_editor(:gds_editor)
     end
 
     it "root redirects to /finders" do
@@ -40,7 +40,7 @@ RSpec.feature "Viewing the finders index page", type: :feature do
 
   context "when logged in as CMA editor" do
     it "displays all finders under the CMA organisation" do
-      log_in_as_design_system_editor(:cma_editor)
+      log_in_as_editor(:cma_editor)
 
       visit "/"
 

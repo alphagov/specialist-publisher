@@ -49,7 +49,7 @@ RSpec.feature "Attachments on a CMA case", type: :feature do
 
   before do
     WebMock.reset!
-    log_in_as_design_system_editor(:cma_editor)
+    log_in_as_editor(:cma_editor)
 
     stub_any_publishing_api_put_content
     stub_any_publishing_api_patch_links

@@ -3,7 +3,7 @@ require "rails_helper"
 RSpec.describe DocumentListExportRequestController, type: :controller do
   let(:stubbed_client) { Aws::S3::Client.new(stub_responses: true) }
   before do
-    log_in_as_design_system_gds_editor
+    log_in_as_gds_editor
 
     allow(Aws::S3::Client).to receive(:new).and_return(stubbed_client)
 

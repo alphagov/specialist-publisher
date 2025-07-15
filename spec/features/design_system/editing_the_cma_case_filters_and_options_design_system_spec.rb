@@ -12,7 +12,7 @@ RSpec.feature "Editing the CMA case finder filters and options", type: :feature 
 
   before do
     Capybara.current_driver = Capybara.javascript_driver
-    log_in_as_design_system_editor(:cma_editor)
+    log_in_as_editor(:cma_editor)
     stub_publishing_api_has_content([], hash_including(document_type: CmaCase.document_type))
     stub_publishing_api_has_content(organisations, hash_including(document_type: Organisation.document_type))
     stub_any_support_api_call

@@ -12,7 +12,7 @@ RSpec.feature "Editing the Trademark Decisions finder filters and options", type
 
   before do
     Capybara.current_driver = Capybara.javascript_driver
-    log_in_as_design_system_editor(:gds_editor)
+    log_in_as_editor(:gds_editor)
     stub_publishing_api_has_content([], hash_including(document_type: TrademarkDecision.document_type))
     stub_publishing_api_has_content(organisations, hash_including(document_type: Organisation.document_type))
     stub_any_support_api_call

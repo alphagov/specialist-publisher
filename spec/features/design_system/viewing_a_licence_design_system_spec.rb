@@ -11,7 +11,7 @@ RSpec.feature "Viewing a Licence", type: :feature do
   end
 
   before do
-    log_in_as_design_system_editor(:licence_transaction_editor)
+    log_in_as_editor(:licence_transaction_editor)
     allow(SecureRandom).to receive(:uuid).and_return(content_id)
 
     stub_publishing_api_has_content([licence_transaction], hash_including(document_type: LicenceTransaction.document_type))

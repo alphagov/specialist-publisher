@@ -19,7 +19,7 @@ RSpec.feature "Creating a Licence", type: :feature do
   end
 
   before do
-    log_in_as_design_system_editor(:licence_transaction_editor, organisation_content_id_for_authorized_user)
+    log_in_as_editor(:licence_transaction_editor, organisation_content_id_for_authorized_user)
     allow(SecureRandom).to receive(:uuid).and_return(content_id)
 
     stub_any_publishing_api_put_content

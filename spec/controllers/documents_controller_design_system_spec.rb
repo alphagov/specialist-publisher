@@ -6,7 +6,7 @@ RSpec.describe DocumentsController, type: :controller do
   let(:payload) { FactoryBot.create(:cma_case) }
 
   before do
-    log_in_as_design_system_gds_editor
+    log_in_as_gds_editor
     stub_publishing_api_has_item(payload)
   end
 

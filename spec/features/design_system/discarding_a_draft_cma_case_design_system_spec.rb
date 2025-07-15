@@ -21,7 +21,7 @@ RSpec.feature "Discarding a draft CMA Case", type: :feature do
 
     context "as a CMA editor" do
       scenario "clicking the discard button discards the draft" do
-        log_in_as_design_system_editor(:cma_editor)
+        log_in_as_editor(:cma_editor)
         visit document_path(content_id_and_locale: "#{content_id}:#{locale}", document_type_slug: "cma-cases")
         expect(page).to have_content("Example CMA Case")
 

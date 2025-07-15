@@ -63,7 +63,7 @@ RSpec.feature "The root specialist-publisher page", type: :feature do
 
   context "when logged in as a design system editor" do
     before do
-      log_in_as_design_system_editor(:gds_editor)
+      log_in_as_editor(:gds_editor)
     end
 
     it "has expected finders" do

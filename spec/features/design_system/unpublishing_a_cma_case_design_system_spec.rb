@@ -5,7 +5,7 @@ RSpec.feature "Unpublishing a CMA Case", type: :feature do
   let(:locale) { item["locale"] }
 
   before do
-    log_in_as_design_system_editor(:cma_editor)
+    log_in_as_editor(:cma_editor)
     stub_publishing_api_has_item(item)
   end
 

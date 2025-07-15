@@ -2,7 +2,7 @@ require "spec_helper"
 
 RSpec.feature "Viewing the document index page", type: :feature do
   before do
-    log_in_as_design_system_editor(:cma_editor)
+    log_in_as_editor(:cma_editor)
   end
 
   scenario "visiting the index of a live finder has a link to 'view on website'" do
