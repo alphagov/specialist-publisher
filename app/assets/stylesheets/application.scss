@@ -38,6 +38,8 @@ $govuk-page-width: 1140px;
 @import "./govspeak-help";
 @import "./summary";
 
+@import "./admin/overrides";
+
 .bg-light-grey {
   background-color: govuk-colour("light-grey");
 }
