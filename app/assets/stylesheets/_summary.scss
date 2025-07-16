@@ -3,7 +3,7 @@
 
   .govspeak-help__pre {
     padding: govuk-spacing(4);
-    @include govuk-font($size: 19);
+    @include govuk-font-size($size: 19);
   }
 
 }
