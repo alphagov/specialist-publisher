@@ -85,7 +85,7 @@ RSpec.feature "Attachments on a CMA case", type: :feature do
     page.attach_file("attachment_file", "spec/support/images/cma_case_image.jpg")
     click_button "Save attachment"
 
-    expect(page).to have_content("Editing Example CMA Case")
+    expect(page).to have_content("Editing CMA Case")
     expect(page).to have_content("Attached New cma case image")
 
     assert_requested(stub_request)
@@ -115,7 +115,7 @@ RSpec.feature "Attachments on a CMA case", type: :feature do
     page.attach_file("attachment_file", "spec/support/images/cma_case_image.jpg")
     click_button "Save attachment"
 
-    expect(page).to have_content("Editing Example CMA Case")
+    expect(page).to have_content("Editing CMA Case")
     expect(page).to have_content("Updated New cma case image")
 
     assert_requested(stub_request)
@@ -130,7 +130,7 @@ RSpec.feature "Attachments on a CMA case", type: :feature do
     click_link "Delete attachment", match: :first
     click_button "Delete"
 
-    expect(page).to have_content("Editing Example CMA Case")
+    expect(page).to have_content("Editing CMA Case")
     expect(page).to have_content("Attachment successfully removed")
 
     assert_requested(stub_request)
@@ -156,7 +156,7 @@ RSpec.feature "Attachments on a CMA case", type: :feature do
       page.attach_file("attachment_file", "spec/support/images/cma_case_image.jpg")
       click_button "Save attachment"
 
-      expect(page).to have_content("Editing Example CMA Case")
+      expect(page).to have_content("Editing CMA Case")
       expect(page).to have_content("Attached New cma case image")
       expect(page.find_field("Body")).to have_content("")
 
@@ -165,7 +165,7 @@ RSpec.feature "Attachments on a CMA case", type: :feature do
       page.attach_file("attachment_file", "spec/support/images/cma_case_image.jpg")
       click_button "Save attachment"
 
-      expect(page).to have_content("Editing Example CMA Case")
+      expect(page).to have_content("Editing CMA Case")
       expect(page).to have_content("Updated New cma case image 2")
       expect(page.find_field("Body")).to have_content("")
     end

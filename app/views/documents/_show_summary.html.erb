@@ -62,16 +62,25 @@
     <%= render "govuk_publishing_components/components/table", {
       head: [
         { text: "Title" },
+        { text: "Filename" },
         { text: "Created" },
         { text: "Last updated" }
       ],
       rows: attachments.map { |attachment|
-        [{ text: attachment.title },
+        [
+          {
+            text: attachment.title,
+          },
+          {
+            text: link_to(attachment.filename, attachment.url, class: "govuk-link"),
+          },
          {
            text: attachment.created_at.to_date.to_fs(:govuk_date)
-         }, {
+         },
+          {
            text: attachment.updated_at.to_date.to_fs(:govuk_date)
-         }]
+         }
+        ]
         }
     } %>
   <% else %>
