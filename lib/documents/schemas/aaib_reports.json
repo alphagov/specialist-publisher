@@ -131,12 +131,12 @@
   },
   "name": "Air Accidents Investigation Branch reports",
   "organisations": [
-    "38eb5d8f-2d89-480c-8655-e2e7ac23f8f4"
+    "4019c5c7-fba6-4b57-bf3e-3f6b01af1ae8"
   ],
   "phase": "live",
-  "show_table_of_contents": true,
-  "show_metadata_block": true,
   "show_summaries": true,
+  "show_metadata_block": true,
+  "show_table_of_contents": true,
   "target_stack": "live",
   "taxons": [
     "951ece54-c6df-4fbc-aa18-1bc629815fe2"
