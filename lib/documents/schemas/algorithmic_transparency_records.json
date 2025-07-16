@@ -14,6 +14,10 @@
     {
       "allowed_values": [
         {
+          "label": "Attorney General's Office",
+          "value": "attorney-generals-office"
+        },
+        {
           "label": "Bristol City Council",
           "value": "bristol-city-council"
         },
