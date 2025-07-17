@@ -25,6 +25,16 @@ RSpec.feature "Searching and filtering", type: :feature do
     log_in_as_editor(:cma_editor)
   end
 
+  before(:each) do
+    @test_strategy ||= Flipflop::FeatureSet.current.test!
+    @test_strategy.switch!(:show_design_system, false)
+  end
+
+  after(:each) do
+    @test_strategy ||= Flipflop::FeatureSet.current.test!
+    @test_strategy.switch!(:show_design_system, true)
+  end
+
   scenario "visiting the index of a live finder has a link to 'view on website'" do
     stub_publishing_api_has_content([], hash_including(document_type: CmaCase.document_type))
 

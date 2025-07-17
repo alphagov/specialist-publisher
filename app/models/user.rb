@@ -17,8 +17,4 @@ class User
   def gds_editor?
     permissions.include?("gds_editor")
   end
-
-  def preview_design_system?
-    permissions.include?("preview_design_system")
-  end
 end

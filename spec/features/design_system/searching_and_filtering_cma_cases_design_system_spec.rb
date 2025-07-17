@@ -22,7 +22,7 @@ RSpec.feature "Searching and filtering", type: :feature do
   end
 
   before do
-    log_in_as_design_system_editor(:cma_editor)
+    log_in_as_editor(:cma_editor)
   end
 
   context "visiting the index with results" do

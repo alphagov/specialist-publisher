@@ -8,6 +8,16 @@ RSpec.feature "Editing a CMA case", type: :feature do
   let(:locale) { cma_case["locale"] }
   let(:save_button_disable_with_message) { page.find_button("Save as draft")["data-disable-with"] }
 
+  before(:each) do
+    @test_strategy ||= Flipflop::FeatureSet.current.test!
+    @test_strategy.switch!(:show_design_system, false)
+  end
+
+  after(:each) do
+    @test_strategy ||= Flipflop::FeatureSet.current.test!
+    @test_strategy.switch!(:show_design_system, true)
+  end
+
   before do
     Timecop.freeze(Time.zone.parse("2015-12-03T16:59:13+00:00"))
     log_in_as_editor(:cma_editor)

@@ -18,6 +18,16 @@ RSpec.feature "Editing the Trademark Decisions finder filters and options", type
     stub_any_support_api_call
   end
 
+  before(:each) do
+    @test_strategy ||= Flipflop::FeatureSet.current.test!
+    @test_strategy.switch!(:show_design_system, false)
+  end
+
+  after(:each) do
+    @test_strategy ||= Flipflop::FeatureSet.current.test!
+    @test_strategy.switch!(:show_design_system, true)
+  end
+
   scenario "editing, deleting and adding new filters" do
     visit "finders/trademark-decisions"
     within "#facets_summary_card" do

@@ -3,7 +3,7 @@ require "spec_helper"
 RSpec.feature "Access control", type: :feature do
   context "as an editor of an organisation that doesn't have access to the application" do
     before do
-      log_in_as_design_system_editor(:incorrect_id_editor)
+      log_in_as_editor(:incorrect_id_editor)
     end
 
     scenario "visiting homepage shows a permissions error" do
@@ -27,7 +27,7 @@ RSpec.feature "Access control", type: :feature do
     before do
       stub_publishing_api_has_content([], hash_including(document_type: CmaCase.document_type))
       stub_publishing_api_has_content([], hash_including(document_type: Organisation.document_type))
-      log_in_as_design_system_editor(:cma_editor)
+      log_in_as_editor(:cma_editor)
     end
 
     scenario "visiting /cma-cases is allowed" do

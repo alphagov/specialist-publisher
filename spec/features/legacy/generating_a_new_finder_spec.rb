@@ -16,6 +16,16 @@ RSpec.feature "Generating a new finder", type: :feature do
     stub_any_support_api_call
   end
 
+  before(:each) do
+    @test_strategy ||= Flipflop::FeatureSet.current.test!
+    @test_strategy.switch!(:show_design_system, false)
+  end
+
+  after(:each) do
+    @test_strategy ||= Flipflop::FeatureSet.current.test!
+    @test_strategy.switch!(:show_design_system, true)
+  end
+
   scenario "visiting the empty form" do
     visit new_finder_path
 

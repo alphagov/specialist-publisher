@@ -2,7 +2,7 @@ require "spec_helper"
 
 RSpec.feature "GovSpeak", type: :feature do
   before do
-    log_in_as_design_system_editor(:cma_editor)
+    log_in_as_editor(:cma_editor)
   end
 
   scenario "creating a document that references attachments that don't exist" do

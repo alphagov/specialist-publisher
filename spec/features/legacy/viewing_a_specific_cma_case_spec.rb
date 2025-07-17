@@ -11,6 +11,16 @@ RSpec.feature "Viewing a specific case", type: :feature do
     end
   end
 
+  before(:each) do
+    @test_strategy ||= Flipflop::FeatureSet.current.test!
+    @test_strategy.switch!(:show_design_system, false)
+  end
+
+  after(:each) do
+    @test_strategy ||= Flipflop::FeatureSet.current.test!
+    @test_strategy.switch!(:show_design_system, true)
+  end
+
   context "from the index" do
     let(:cma_cases) do
       [

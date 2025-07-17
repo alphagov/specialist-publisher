@@ -24,6 +24,16 @@ RSpec.feature "Creating a Trademark Decision", type: :feature do
     stub_publishing_api_has_item(trademark_decision)
   end
 
+  before(:each) do
+    @test_strategy ||= Flipflop::FeatureSet.current.test!
+    @test_strategy.switch!(:show_design_system, false)
+  end
+
+  after(:each) do
+    @test_strategy ||= Flipflop::FeatureSet.current.test!
+    @test_strategy.switch!(:show_design_system, true)
+  end
+
   scenario "getting to the new document page" do
     visit "/trademark-decisions"
     click_link "Add another Trademark Decision"

@@ -29,6 +29,16 @@ RSpec.feature "Searching and filtering by organisation", type: :feature do
     log_in_as_editor(:licence_transaction_editor)
   end
 
+  before(:each) do
+    @test_strategy ||= Flipflop::FeatureSet.current.test!
+    @test_strategy.switch!(:show_design_system, false)
+  end
+
+  after(:each) do
+    @test_strategy ||= Flipflop::FeatureSet.current.test!
+    @test_strategy.switch!(:show_design_system, true)
+  end
+
   context "visiting the licence index page without selecting an organisation" do
     scenario "viewing licences from current users organisation" do
       visit "/licences"

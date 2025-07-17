@@ -18,7 +18,7 @@ RSpec.feature "Creating a document", type: :feature do
     let(:schema) { document_type.to_s.camelize.constantize.finder_schema }
 
     before do
-      log_in_as_design_system_editor(editor)
+      log_in_as_editor(editor)
 
       allow(SecureRandom).to receive(:uuid).and_return(content_id)
       Timecop.freeze(Time.zone.parse(document["public_updated_at"] || "2015-12-03 16:59:13 UTC"))

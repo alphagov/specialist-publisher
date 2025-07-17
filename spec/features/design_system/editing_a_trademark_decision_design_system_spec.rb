@@ -8,7 +8,7 @@ RSpec.feature "Creating a Trademark Decision", type: :feature do
   let(:locale) { trademark_decision["locale"] }
 
   before do
-    log_in_as_design_system_editor(:gds_editor)
+    log_in_as_editor(:gds_editor)
     allow(SecureRandom).to receive(:uuid).and_return(content_id)
 
     stub_any_publishing_api_put_content

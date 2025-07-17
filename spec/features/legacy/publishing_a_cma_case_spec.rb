@@ -18,6 +18,16 @@ RSpec.feature "Publishing a CMA case", type: :feature do
     stub_email_alert_api_accepts_content_change
   end
 
+  before(:each) do
+    @test_strategy ||= Flipflop::FeatureSet.current.test!
+    @test_strategy.switch!(:show_design_system, false)
+  end
+
+  after(:each) do
+    @test_strategy ||= Flipflop::FeatureSet.current.test!
+    @test_strategy.switch!(:show_design_system, true)
+  end
+
   after do
     Timecop.return
   end

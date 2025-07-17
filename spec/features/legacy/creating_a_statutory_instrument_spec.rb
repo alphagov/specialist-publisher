@@ -32,6 +32,16 @@ RSpec.feature "Creating a Statutory Instrument", type: :feature do
     stub_publishing_api_has_content(organisations, hash_including(document_type: Organisation.document_type))
   end
 
+  before(:each) do
+    @test_strategy ||= Flipflop::FeatureSet.current.test!
+    @test_strategy.switch!(:show_design_system, false)
+  end
+
+  after(:each) do
+    @test_strategy ||= Flipflop::FeatureSet.current.test!
+    @test_strategy.switch!(:show_design_system, true)
+  end
+
   scenario "getting to the new document page" do
     visit "/eu-withdrawal-act-2018-statutory-instruments"
 

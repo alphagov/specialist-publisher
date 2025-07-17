@@ -3,7 +3,7 @@ require "spec_helper"
 RSpec.feature "Viewing a specific case", type: :feature do
   let(:cma_cases) { [] }
   before do
-    log_in_as_design_system_editor(:cma_editor)
+    log_in_as_editor(:cma_editor)
 
     stub_publishing_api_has_content(cma_cases, hash_including(document_type: CmaCase.document_type))
     cma_cases.each do |cma_case|

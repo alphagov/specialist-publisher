@@ -9,6 +9,16 @@ RSpec.feature "Unpublishing a CMA Case", type: :feature do
     stub_publishing_api_has_item(item)
   end
 
+  before(:each) do
+    @test_strategy ||= Flipflop::FeatureSet.current.test!
+    @test_strategy.switch!(:show_design_system, false)
+  end
+
+  after(:each) do
+    @test_strategy ||= Flipflop::FeatureSet.current.test!
+    @test_strategy.switch!(:show_design_system, true)
+  end
+
   context "a published document" do
     let(:item) do
       FactoryBot.create(

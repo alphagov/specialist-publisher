@@ -2,7 +2,7 @@ require "spec_helper"
 
 RSpec.feature "Creating a UKHSA Data Access Approval", type: :feature do
   before do
-    log_in_as_design_system_editor(:gds_editor)
+    log_in_as_editor(:gds_editor)
   end
 
   scenario "it populates the body textarea with the 'body_template' value" do

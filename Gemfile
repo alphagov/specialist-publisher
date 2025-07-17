@@ -8,6 +8,7 @@ gem "bootsnap", require: false
 gem "bootstrap-kaminari-views"
 gem "dartsass-rails"
 gem "diffy"
+gem "flipflop"
 gem "gds-api-adapters"
 gem "gds-sso"
 gem "govspeak"

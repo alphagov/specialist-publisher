@@ -10,6 +10,16 @@ RSpec.describe DocumentsController, type: :controller do
     stub_publishing_api_has_item(payload)
   end
 
+  before(:each) do
+    @test_strategy ||= Flipflop::FeatureSet.current.test!
+    @test_strategy.switch!(:show_design_system, false)
+  end
+
+  after(:each) do
+    @test_strategy ||= Flipflop::FeatureSet.current.test!
+    @test_strategy.switch!(:show_design_system, true)
+  end
+
   describe "GET show" do
     it "responds successfully" do
       get :show, params: { document_type_slug: "cma-cases", content_id_and_locale: "#{payload['content_id']}:#{payload['locale']}" }

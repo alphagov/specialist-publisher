@@ -26,7 +26,7 @@ RSpec.feature "Searching and filtering by organisation", type: :feature do
 
   before do
     stub_publishing_api_has_content(all_organisations, hash_including(document_type: Organisation.document_type))
-    log_in_as_design_system_editor(:licence_transaction_editor)
+    log_in_as_editor(:licence_transaction_editor)
   end
 
   context "visiting the licence index page without selecting an organisation" do

@@ -13,6 +13,16 @@ RSpec.feature "Viewing the admin summary for CMA cases", type: :feature do
     stub_publishing_api_has_content(organisations, hash_including(document_type: Organisation.document_type))
   end
 
+  before(:each) do
+    @test_strategy ||= Flipflop::FeatureSet.current.test!
+    @test_strategy.switch!(:show_design_system, false)
+  end
+
+  after(:each) do
+    @test_strategy ||= Flipflop::FeatureSet.current.test!
+    @test_strategy.switch!(:show_design_system, true)
+  end
+
   scenario "viewing finders/cma-cases should display details of the CMA Case finder" do
     visit "finders/cma-cases"
     expect(page).to have_selector("h1", text: "CMA Cases finder")

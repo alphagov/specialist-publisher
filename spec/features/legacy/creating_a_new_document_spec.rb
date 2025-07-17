@@ -29,6 +29,16 @@ RSpec.feature "Creating a document", type: :feature do
       stub_publishing_api_has_item(document)
     end
 
+    before(:each) do
+      @test_strategy ||= Flipflop::FeatureSet.current.test!
+      @test_strategy.switch!(:show_design_system, false)
+    end
+
+    after(:each) do
+      @test_strategy ||= Flipflop::FeatureSet.current.test!
+      @test_strategy.switch!(:show_design_system, true)
+    end
+
     scenario "navigating to the new document page" do
       visit document_path
       click_link "Add another #{schema.document_title}"

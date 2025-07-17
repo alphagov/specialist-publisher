@@ -5,7 +5,7 @@ RSpec.feature "Testing the open before closed date validation", type: :feature d
   let(:content_id) { cma_case["content_id"] }
 
   before do
-    log_in_as_design_system_editor(:cma_editor)
+    log_in_as_editor(:cma_editor)
 
     allow(SecureRandom).to receive(:uuid).and_return(content_id)
     Timecop.freeze(Time.zone.parse("2015-12-03 16:59:13 UTC"))
