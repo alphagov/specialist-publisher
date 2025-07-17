@@ -1,0 +1,135 @@
+{
+  "base_path": "/chemical-risks-and-human-health",
+  "content_id": "326a05d8-0bce-40a4-b3fc-7aab7ad204b7",
+  "description": "Find guidance on chemicals, chemical products and their health risks.",
+  "document_noun": "item",
+  "document_title": "UKHSA Chemical Hazard",
+  "email_filter_options": {
+    "downcase_email_alert_topic_names": true,
+    "email_filter_by": "all_selected_facets"
+  },
+  "facets": [
+    {
+      "allowed_values": [
+        {
+          "label": "Chemicals A to C",
+          "value": "chemicals-a-to-c"
+        },
+        {
+          "label": "Chemicals D to F",
+          "value": "chemicals-d-to-f"
+        },
+        {
+          "label": "Chemicals G to I",
+          "value": "chemicals-g-to-i"
+        },
+        {
+          "label": "Chemicals J to L",
+          "value": "chemicals-j-to-l"
+        },
+        {
+          "label": "Chemicals M to O",
+          "value": "chemicals-m-to-o"
+        },
+        {
+          "label": "Chemicals P to R",
+          "value": "chemicals-p-to-r"
+        },
+        {
+          "label": "Chemicals S to V",
+          "value": "chemicals-s-to-v"
+        },
+        {
+          "label": "Chemicals W to Z",
+          "value": "chemicals-w-to-z"
+        }
+      ],
+      "display_as_result_metadata": true,
+      "filterable": true,
+      "key": "ukhsa_chemical_name",
+      "name": "Chemical name",
+      "preposition": "with chemical name",
+      "specialist_publisher_properties": {
+        "select": "multiple",
+        "validations": {
+          "required": {}
+        }
+      },
+      "type": "text"
+    },
+    {
+      "allowed_values": [
+        {
+          "label": "Baby and child",
+          "value": "baby-and-child"
+        },
+        {
+          "label": "Batteries",
+          "value": "batteries"
+        },
+        {
+          "label": "Car and vehicle maintenance",
+          "value": "car-and-vehicle-maintenance"
+        },
+        {
+          "label": "Cleaning and household",
+          "value": "cleaning-and-household"
+        },
+        {
+          "label": "Garden",
+          "value": "garden"
+        },
+        {
+          "label": "Hair and beauty",
+          "value": "hair-and-beauty"
+        },
+        {
+          "label": "Insect repellents",
+          "value": "insect-repellents"
+        },
+        {
+          "label": "Plastics",
+          "value": "plastics"
+        },
+        {
+          "label": "Painting, decorating and craft",
+          "value": "painting-decorating-and-craft"
+        },
+        {
+          "label": "Tobacco, nicotine and vapes",
+          "value": "tobacco-nicotine-and-vapes"
+        },
+        {
+          "label": "Sports and leisure",
+          "value": "sports-and-leisure"
+        }
+      ],
+      "display_as_result_metadata": true,
+      "filterable": true,
+      "key": "ukhsa_product_category",
+      "name": "Product category",
+      "preposition": "with product category",
+      "specialist_publisher_properties": {
+        "select": "multiple",
+        "validations": {
+          "required": {}
+        }
+      },
+      "type": "text"
+    }
+  ], 
+  "filter": {
+    "format": "ukhsa_chemical_hazard"
+  },
+  "name": "Chemical risks and human health",
+  "organisations": [
+    "80091cd8-7a8f-41ef-8faf-8af91fce4fdb"
+  ],
+  "related": [],
+  "show_table_of_contents": true,
+  "show_metadata_block": true,
+  "signup_content_id": "1f4b54fb-cbc4-43c4-9255-1dd0ab2ff421",
+  "subscription_list_title_prefix": "UKHSA Chemical Hazards",
+  "summary": "Find guidance on chemicals, chemical products and their health risks. Learn what to do when you or someone else comes into contact with chemicals that can cause harm.",
+  "target_stack": "draft"
+}
