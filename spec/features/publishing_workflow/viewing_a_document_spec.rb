@@ -1,6 +1,6 @@
 require "spec_helper"
 
-RSpec.feature "Viewing a specific case", type: :feature do
+RSpec.feature "Viewing a document", type: :feature do
   let(:cma_cases) { [] }
   before do
     log_in_as_editor(:cma_editor)

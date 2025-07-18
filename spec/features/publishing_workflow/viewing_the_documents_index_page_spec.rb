@@ -1,6 +1,6 @@
 require "spec_helper"
 
-RSpec.feature "Viewing the document index page", type: :feature do
+RSpec.feature "Viewing the documents index page", type: :feature do
   before do
     log_in_as_editor(:cma_editor)
   end

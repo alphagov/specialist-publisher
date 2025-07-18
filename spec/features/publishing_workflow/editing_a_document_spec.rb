@@ -1,6 +1,6 @@
 require "spec_helper"
 
-RSpec.feature "Editing a CMA case", type: :feature do
+RSpec.feature "Editing a document", type: :feature do
   let(:cma_case) do
     FactoryBot.create(:cma_case, title: "Example CMA Case", state_history: { "1" => "draft" })
   end
