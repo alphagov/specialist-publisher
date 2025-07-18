@@ -144,4 +144,28 @@ RSpec.feature "Searching and filtering by organisation", type: :feature do
       expect(page).to have_selector("tr", text: licence_with_selected_org_as_primary["title"], count: 0)
     end
   end
+
+  context "pagination" do
+    before do
+      documents = 3.times.map do |index|
+        FactoryBot.create(:licence_transaction,
+                          title: "Example licence string match #{index}",
+                          primary_publishing_org_content_id: current_user_org["content_id"],
+                          organisation_content_id: additional_org["content_id"])
+      end
+      publishing_api_paginates_content(documents, 2, LicenceTransaction, search_query: "string match")
+    end
+
+    scenario "navigating to the next page preserves both organisation and title query values" do
+      visit "/licences"
+
+      select "All organisations", from: "Organisation"
+      fill_in "Title", with: "string match"
+      click_button "Filter"
+
+      expect(page.status_code).to eq(200)
+      expect(page).to have_selector("tr", count: 3) # Header row + 2 licence rows
+      expect(page).to have_selector('[href="/licences?organisation=all&page=2&query=string+match"]')
+    end
+  end
 end

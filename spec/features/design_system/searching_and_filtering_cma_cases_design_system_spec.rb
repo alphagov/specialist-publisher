@@ -106,4 +106,26 @@ RSpec.feature "Searching and filtering", type: :feature do
       expect(page).to have_content("No CMA Cases available.")
     end
   end
+
+  context "pagination" do
+    before do
+      documents = 3.times.map do |index|
+        FactoryBot.create(:cma_case,
+                          title: "Example cma case match string #{index}")
+      end
+      stub_publishing_api_has_content(cma_cases, hash_including(document_type: CmaCase.document_type))
+      publishing_api_paginates_content(documents, 2, CmaCase, search_query: "match string")
+    end
+
+    scenario "navigating to the next page preserves the title query value" do
+      visit "/cma-cases"
+
+      fill_in "Title", with: "match string"
+      click_button "Filter"
+
+      expect(page.status_code).to eq(200)
+      expect(page).to have_selector("tr", count: 3) # Header row + 2 licence rows
+      expect(page).to have_selector('[href="/cma-cases?page=2&query=match+string"]')
+    end
+  end
 end
