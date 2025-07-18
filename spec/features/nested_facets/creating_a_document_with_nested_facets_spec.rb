@@ -1,6 +1,6 @@
 require "spec_helper"
 
-RSpec.feature "Creating a Trademark Decision", type: :feature do
+RSpec.feature "Creating a document with nested facets (Trademark Decision)", type: :feature do
   let(:trademark_decision) do
     FactoryBot.create(
       :trademark_decision,

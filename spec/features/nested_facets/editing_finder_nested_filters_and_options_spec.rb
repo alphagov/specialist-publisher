@@ -1,7 +1,7 @@
 require "spec_helper"
 require "gds_api/test_helpers/support_api"
 
-RSpec.feature "Editing the Trademark Decisions finder filters and options", type: :feature do
+RSpec.feature "Editing finder nested filters and options (Trademark Decision)", type: :feature do
   include GdsApi::TestHelpers::SupportApi
 
   let(:organisations) do
