@@ -1,6 +1,6 @@
 require "spec_helper"
 
-RSpec.feature "Creating a Trademark Decision", type: :feature do
+RSpec.feature "Editing a document with nested facets (Trademark Decision)", type: :feature do
   let(:trademark_decision) { FactoryBot.create(:trademark_decision, title: "Example document", state_history: { "1" => "draft" }) }
   let(:content_id) { trademark_decision["content_id"] }
   let(:save_button_disable_with_message) { page.find_button("Save")["data-disable-with"] }
