@@ -122,12 +122,12 @@
 
       <%= render "govuk_publishing_components/components/previous_and_next_navigation", {
         previous_page: ({
-          url: documents_path(current_format.admin_slug, query: @query, page: @paged_documents.current_page - 1),
+          url: documents_path(current_format.admin_slug, organisation: @organisation, query: @query, page: @paged_documents.current_page - 1),
           title: "Previous page",
           label: "#{@paged_documents.current_page - 1}  of #{@paged_documents.total_pages}",
         } if @paged_documents.current_page > 1),
         next_page: ({
-          url: documents_path(current_format.admin_slug, query: @query, page: @paged_documents.current_page + 1),
+          url: documents_path(current_format.admin_slug, organisation: @organisation, query: @query, page: @paged_documents.current_page + 1),
           title: "Next page",
           label: "#{@paged_documents.current_page + 1} of #{@paged_documents.total_pages}",
         } if @paged_documents.current_page < @paged_documents.total_pages)
