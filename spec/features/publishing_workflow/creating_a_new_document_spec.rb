@@ -10,7 +10,7 @@ EXCEPTIONS_TO_GENERAL_TESTING = %w[
   trademark_decision
 ].freeze
 
-RSpec.feature "Creating a document", type: :feature do
+RSpec.feature "Creating a new document", type: :feature do
   shared_context "common setup" do |editor, document_type, document_path, new_document_path|
     let(:document) { FactoryBot.create(document_type) }
     let(:content_id) { document["content_id"] }

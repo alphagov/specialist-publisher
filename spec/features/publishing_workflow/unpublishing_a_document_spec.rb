@@ -1,6 +1,6 @@
 require "spec_helper"
 
-RSpec.feature "Unpublishing a CMA Case", type: :feature do
+RSpec.feature "Unpublishing a document", type: :feature do
   let(:content_id) { item["content_id"] }
   let(:locale) { item["locale"] }
 

@@ -1,6 +1,6 @@
 require "spec_helper"
 
-RSpec.feature "Discarding a draft CMA Case", type: :feature do
+RSpec.feature "Discarding a draft document", type: :feature do
   let(:content_id) { item["content_id"] }
   let(:locale) { item["locale"] }
 
