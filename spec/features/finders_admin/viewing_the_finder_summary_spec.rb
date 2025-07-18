@@ -1,6 +1,6 @@
 require "spec_helper"
 
-RSpec.feature "Viewing the admin summary for CMA cases", type: :feature do
+RSpec.feature "Viewing the finder summary", type: :feature do
   let(:organisations) do
     [
       { "content_id" => "957eb4ec-089b-4f71-ba2a-dc69ac8919ea", "title" => "Competition and Markets Authority" },

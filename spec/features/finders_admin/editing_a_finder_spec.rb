@@ -1,7 +1,7 @@
 require "spec_helper"
 require "gds_api/test_helpers/support_api"
 
-RSpec.feature "Editing the CMA case finder", type: :feature do
+RSpec.feature "Editing a finder", type: :feature do
   include GdsApi::TestHelpers::SupportApi
 
   let(:organisations) do
