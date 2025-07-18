@@ -1,6 +1,6 @@
 require "spec_helper"
 
-RSpec.feature "Creating a UKHSA Data Access Approval", type: :feature do
+RSpec.feature "Creating a UKHSA Data Access Approval with body_template option", type: :feature do
   before do
     log_in_as_editor(:gds_editor)
   end
