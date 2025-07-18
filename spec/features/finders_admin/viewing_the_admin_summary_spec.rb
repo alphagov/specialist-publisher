@@ -1,6 +1,6 @@
 require "spec_helper"
 
-RSpec.feature "Viewing the admin summary for CMA cases", type: :feature do
+RSpec.feature "Viewing the admin summary", type: :feature do
   let(:organisations) do
     [
       { "content_id" => "957eb4ec-089b-4f71-ba2a-dc69ac8919ea", "title" => "Competition and Markets Authority" },
@@ -11,16 +11,6 @@ RSpec.feature "Viewing the admin summary for CMA cases", type: :feature do
     log_in_as_editor(:cma_editor)
     stub_publishing_api_has_content([], hash_including(document_type: CmaCase.document_type))
     stub_publishing_api_has_content(organisations, hash_including(document_type: Organisation.document_type))
-  end
-
-  before(:each) do
-    @test_strategy ||= Flipflop::FeatureSet.current.test!
-    @test_strategy.switch!(:show_design_system, false)
-  end
-
-  after(:each) do
-    @test_strategy ||= Flipflop::FeatureSet.current.test!
-    @test_strategy.switch!(:show_design_system, true)
   end
 
   scenario "viewing finders/cma-cases should display details of the CMA Case finder" do

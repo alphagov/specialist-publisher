@@ -1,7 +1,7 @@
 require "spec_helper"
 require "gds_api/test_helpers/support_api"
 
-RSpec.feature "Editing the CMA case finder", type: :feature do
+RSpec.feature "Editing a finder", type: :feature do
   include GdsApi::TestHelpers::SupportApi
 
   let(:organisations) do
@@ -16,16 +16,6 @@ RSpec.feature "Editing the CMA case finder", type: :feature do
     stub_publishing_api_has_content([], hash_including(document_type: CmaCase.document_type))
     stub_publishing_api_has_content(organisations, hash_including(document_type: Organisation.document_type))
     stub_any_support_api_call
-  end
-
-  before(:each) do
-    @test_strategy ||= Flipflop::FeatureSet.current.test!
-    @test_strategy.switch!(:show_design_system, false)
-  end
-
-  after(:each) do
-    @test_strategy ||= Flipflop::FeatureSet.current.test!
-    @test_strategy.switch!(:show_design_system, true)
   end
 
   scenario "changing all fields" do

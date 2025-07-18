@@ -3,7 +3,7 @@ require "gds_api/test_helpers/support_api"
 require "gds_api/test_helpers/publishing_api"
 require "gds_api/test_helpers/asset_manager"
 
-RSpec.feature "Attachments on a CMA case", type: :feature do
+RSpec.feature "Attachments", type: :feature do
   include WebMock::API
   include GdsApi::TestHelpers::SupportApi
   include GdsApi::TestHelpers::PublishingApi

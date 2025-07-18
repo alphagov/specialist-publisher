@@ -1,18 +1,8 @@
 require "spec_helper"
 
-RSpec.feature "Creating a UKHSA Data Access Approval", type: :feature do
+RSpec.feature "Creating a UKHSA Data Access Approval with body_template option", type: :feature do
   before do
     log_in_as_editor(:gds_editor)
-  end
-
-  before(:each) do
-    @test_strategy ||= Flipflop::FeatureSet.current.test!
-    @test_strategy.switch!(:show_design_system, false)
-  end
-
-  after(:each) do
-    @test_strategy ||= Flipflop::FeatureSet.current.test!
-    @test_strategy.switch!(:show_design_system, true)
   end
 
   scenario "it populates the body textarea with the 'body_template' value" do

@@ -1,9 +1,9 @@
 require "spec_helper"
 
-RSpec.feature "Creating a Trademark Decision", type: :feature do
+RSpec.feature "Editing a document with nested facets (Trademark Decision)", type: :feature do
   let(:trademark_decision) { FactoryBot.create(:trademark_decision, title: "Example document", state_history: { "1" => "draft" }) }
   let(:content_id) { trademark_decision["content_id"] }
-  let(:save_button_disable_with_message) { page.find_button("Save as draft")["data-disable-with"] }
+  let(:save_button_disable_with_message) { page.find_button("Save")["data-disable-with"] }
   let(:content_id) { trademark_decision["content_id"] }
   let(:locale) { trademark_decision["locale"] }
 
@@ -18,16 +18,6 @@ RSpec.feature "Creating a Trademark Decision", type: :feature do
     stub_publishing_api_has_item(trademark_decision)
   end
 
-  before(:each) do
-    @test_strategy ||= Flipflop::FeatureSet.current.test!
-    @test_strategy.switch!(:show_design_system, false)
-  end
-
-  after(:each) do
-    @test_strategy ||= Flipflop::FeatureSet.current.test!
-    @test_strategy.switch!(:show_design_system, true)
-  end
-
   scenario "renders and persists nested facets" do
     trademark_decision["trademark_decision_sub_section"] = "section-3-1-graphical-representation-is-it-graphically-represented"
 
@@ -37,7 +27,7 @@ RSpec.feature "Creating a Trademark Decision", type: :feature do
     expect(page).to have_content("Section 3(1) Graphical Representation - Is it graphically represented?")
 
     fill_in "Title", with: ""
-    click_button "Save as draft"
+    click_button "Save"
 
     expect(page).to have_content("Title can't be blank")
     expect(page).to have_content("Section 3(1) Graphical Representation - Is it graphically represented?")
@@ -76,13 +66,12 @@ RSpec.feature "Creating a Trademark Decision", type: :feature do
     click_link "Edit document"
 
     select "5", from: "Class"
-    select "Section 3(1) Graphical Representation - Is it a sign?", from: "Grounds Section"
+    select "Section 3(1) Graphical Representation - Is it a sign?", from: "trademark_decision[trademark_decision_grounds_section][]"
 
     expect(page).to have_css("div.govspeak-help")
-    expect(page).to have_content("Add attachment")
-    expect(save_button_disable_with_message).to eq("Saving...")
+    expect(page).to have_content("Add attachments")
 
-    click_button "Save as draft"
+    click_button "Save"
 
     assert_publishing_api_put_content(content_id, updated_trademark_decision)
 

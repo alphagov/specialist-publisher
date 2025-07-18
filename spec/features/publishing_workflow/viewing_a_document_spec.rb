@@ -1,6 +1,6 @@
 require "spec_helper"
 
-RSpec.feature "Viewing a specific case", type: :feature do
+RSpec.feature "Viewing a document", type: :feature do
   let(:cma_cases) { [] }
   before do
     log_in_as_editor(:cma_editor)
@@ -9,16 +9,6 @@ RSpec.feature "Viewing a specific case", type: :feature do
     cma_cases.each do |cma_case|
       stub_publishing_api_has_item(cma_case)
     end
-  end
-
-  before(:each) do
-    @test_strategy ||= Flipflop::FeatureSet.current.test!
-    @test_strategy.switch!(:show_design_system, false)
-  end
-
-  after(:each) do
-    @test_strategy ||= Flipflop::FeatureSet.current.test!
-    @test_strategy.switch!(:show_design_system, true)
   end
 
   context "from the index" do
@@ -61,8 +51,8 @@ RSpec.feature "Viewing a specific case", type: :feature do
       expect(page).to have_content("draft")
       expect(page).to have_content("This is the summary of example CMA case")
       expect(page).to have_content("This is the long body of an example CMA case")
-      expect(page).to have_content("Opened 2014-01-01")
-      expect(page).to have_content("Closed 2015-01-01")
+      expect(page).to have_content("Opened 1 January 2014")
+      expect(page).to have_content("Closed 1 January 2015")
       expect(page).to have_content("Outcome CA98 - no grounds for action")
       expect(page).to have_content("Market sector Energy")
       expect(page).to have_content("Bulk published false")
@@ -148,7 +138,6 @@ RSpec.feature "Viewing a specific case", type: :feature do
       click_link "CMA Case with attachments"
 
       expect(page).to have_no_content("This document doesn’t have any attachments")
-      expect(page).to have_content("2 attachments")
 
       expect(page).to have_content("first attachment")
       expect(page).to have_content("1 December 2015")
@@ -224,39 +213,39 @@ RSpec.feature "Viewing a specific case", type: :feature do
       visit "/cma-cases"
       click_link "Example Draft"
 
-      expect(page).not_to have_content("View on website")
-      expect(page).to have_content("Preview draft")
-      within(".metadata-list") do
-        expect(page).to have_content("Publication state draft")
+      expect(page).not_to have_content("Preview on website (opens in new tab)")
+      expect(page).to have_content("Preview draft (opens in new tab)")
+      within(".app-view-summary__metadata-list") do
+        expect(page).to have_content("Publication state Draft")
       end
     end
 
     scenario "Viewing a document with a published state" do
       visit "/cma-cases"
-      click_link "Example Published"
+      first(:link, "Example Published").click
 
-      expect(page).to have_content("View on website")
-      expect(page).not_to have_content("Preview draft")
-      within(".metadata-list") do
-        expect(page).to have_content("Publication state published")
+      expect(page).to have_content("Preview on website (opens in new tab)")
+      expect(page).not_to have_content("Preview draft (opens in new tab)")
+      within(".app-view-summary__metadata-list") do
+        expect(page).to have_content("Publication state Published")
       end
 
       visit "/cma-cases"
       click_link "More states Published"
 
-      within(".metadata-list") do
-        expect(page).to have_content("Publication state published")
+      within(".app-view-summary__metadata-list") do
+        expect(page).to have_content("Publication state Published")
       end
     end
 
     scenario "Viewing a document with an unpublished state" do
       visit "/cma-cases"
-      click_link "Example Unpublished"
+      first(:link, "Example Unpublished").click
 
-      expect(page).not_to have_content("View on website")
-      expect(page).not_to have_content("Preview draft")
-      within(".metadata-list") do
-        expect(page).to have_content("Publication state unpublished")
+      expect(page).not_to have_content("Preview on website (opens in new tab)")
+      expect(page).not_to have_content("Preview draft (opens in new tab)")
+      within(".app-view-summary__metadata-list") do
+        expect(page).to have_content("Publication state Unpublished")
       end
     end
 
@@ -264,17 +253,17 @@ RSpec.feature "Viewing a specific case", type: :feature do
       visit "/cma-cases"
       click_link "Example Published with new draft"
 
-      expect(page).to have_content("View on website")
-      expect(page).to have_content("Preview draft")
-      within(".metadata-list") do
-        expect(page).to have_content("Publication state published with new draft")
+      expect(page).to have_content("Preview on website (opens in new tab)")
+      expect(page).to have_content("Preview draft (opens in new tab)")
+      within(".app-view-summary__metadata-list") do
+        expect(page).to have_content("Publication state Published with new draft")
       end
 
       visit "/cma-cases"
-      click_link "More states"
+      first(:link, "More states").click
 
-      within(".metadata-list") do
-        expect(page).to have_content("Publication state published with new draft")
+      within(".app-view-summary__metadata-list") do
+        expect(page).to have_content("Publication state Published with new draft")
       end
     end
 
@@ -282,10 +271,10 @@ RSpec.feature "Viewing a specific case", type: :feature do
       visit "/cma-cases"
       click_link "Example Unpublished with new draft"
 
-      expect(page).not_to have_content("View on website")
-      expect(page).to have_content("Preview draft")
-      within(".metadata-list") do
-        expect(page).to have_content("Publication state unpublished with new draft")
+      expect(page).not_to have_content("Preview on website (opens in new tab)")
+      expect(page).to have_content("Preview draft (opens in new tab)")
+      within(".app-view-summary__metadata-list") do
+        expect(page).to have_content("Publication state Unpublished with new draft")
       end
     end
   end

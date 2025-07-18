@@ -1,8 +1,7 @@
 require "spec_helper"
 
-RSpec.feature "Publishing a CMA case", type: :feature do
+RSpec.feature "Publishing a document", type: :feature do
   let(:content_id) { item["content_id"] }
-  let(:publish_alert_message) { page.find_button("Publish")["data-message"] }
   let(:publish_disable_with_message) { page.find_button("Publish")["data-disable-with"] }
 
   before do
@@ -16,16 +15,6 @@ RSpec.feature "Publishing a CMA case", type: :feature do
     stub_any_publishing_api_patch_links
     stub_publishing_api_publish(content_id, {})
     stub_email_alert_api_accepts_content_change
-  end
-
-  before(:each) do
-    @test_strategy ||= Flipflop::FeatureSet.current.test!
-    @test_strategy.switch!(:show_design_system, false)
-  end
-
-  after(:each) do
-    @test_strategy ||= Flipflop::FeatureSet.current.test!
-    @test_strategy.switch!(:show_design_system, true)
   end
 
   after do
@@ -66,8 +55,9 @@ RSpec.feature "Publishing a CMA case", type: :feature do
 
       expect(AttachmentRestoreWorker).not_to receive(:perform_async)
 
-      click_button "Publish"
+      click_link "Publish document"
       expect(page.status_code).to eq(200)
+      click_button "Publish"
       expect(page).to have_content("Published Example CMA Case")
 
       changed_json = { "change_note" => "First published." }
@@ -76,51 +66,6 @@ RSpec.feature "Publishing a CMA case", type: :feature do
 
       assert_publishing_api_publish(content_id)
       assert_email_alert_api_content_change_created
-    end
-
-    scenario "publish warning and popup text will indicate that an email will be sent" do
-      visit "/cma-cases"
-
-      expect(page.status_code).to eq(200)
-
-      click_link "Example CMA Case"
-
-      expect(page.status_code).to eq(200)
-      expect(page).to have_content("Example CMA Case")
-      expect(page).to have_content("Publishing will email subscribers to CMA Cases.")
-
-      expect(publish_alert_message).to eq("Publishing will email subscribers to CMA Cases. Continue?")
-      expect(publish_disable_with_message).to eq("Publishing...")
-    end
-
-    scenario "writers don't see a publish button" do
-      log_in_as_editor(:cma_writer)
-
-      visit "/cma-cases"
-      click_link "Example CMA Case"
-
-      expect(page).to have_no_selector(:button, "Publish")
-      expect(page).to have_content("You don't have permission to publish this document.")
-    end
-  end
-
-  context "when the document is already published" do
-    let(:item) do
-      FactoryBot.create(
-        :cma_case,
-        :published,
-        title: "Live Item",
-      )
-    end
-
-    scenario "publish buttons aren't shown" do
-      visit "/cma-cases"
-      expect(page.status_code).to eq(200)
-
-      click_link "Live Item"
-
-      expect(page).to have_no_selector(:button, "Publish")
-      expect(page).to have_content("There are no changes to publish.")
     end
   end
 
@@ -131,21 +76,6 @@ RSpec.feature "Publishing a CMA case", type: :feature do
         :redrafted,
         title: "Major Update Case",
       )
-    end
-
-    scenario "publish warning and popup text will indicate that it is a major edit" do
-      visit "/cma-cases"
-
-      expect(page.status_code).to eq(200)
-
-      click_link "Major Update Case"
-
-      expect(page.status_code).to eq(200)
-      expect(page).to have_content("Major Update Case")
-      expect(page).to have_content("You are about to publish a major edit with a public change note.")
-      expect(page).to have_content("Publishing will email subscribers to CMA Cases.")
-
-      expect(publish_alert_message).to eq("Publishing will email subscribers to CMA Cases. Continue?")
     end
 
     scenario "adds a change note" do
@@ -160,9 +90,9 @@ RSpec.feature "Publishing a CMA case", type: :feature do
 
       fill_in "Title", with: "Changed title"
       choose "Major"
-      fill_in "Change note", with: "Updated change note"
+      fill_in "Change note (required)", with: "Updated change note"
 
-      click_button "Save as draft"
+      click_button "Save"
 
       assert_publishing_api_put_content(
         content_id,
@@ -197,6 +127,8 @@ RSpec.feature "Publishing a CMA case", type: :feature do
       expect(page.status_code).to eq(200)
       expect(page).to have_content("Minor Update Case")
 
+      click_link "Publish document"
+      expect(page.status_code).to eq(200)
       click_button "Publish"
       expect(page.status_code).to eq(200)
       expect(page).to have_content("Published Minor Update Case")
@@ -205,41 +137,86 @@ RSpec.feature "Publishing a CMA case", type: :feature do
 
       assert_not_requested(:post, "#{Plek.find('email-alert-api')}/notifications")
     end
-
-    scenario "publish warning and popup text will indicate that it is a minor edit" do
-      visit "/cma-cases"
-
-      expect(page.status_code).to eq(200)
-
-      click_link "Minor Update Case"
-
-      expect(page.status_code).to eq(200)
-      expect(page).to have_content("Minor Update Case")
-      expect(page).to have_content("You are about to publish a minor edit.")
-      expect(page).to have_no_content("Publishing will email subscribers to CMA Cases.")
-
-      expect(publish_alert_message).to eq("You are about to publish a minor edit. Continue?")
-    end
   end
 
-  context "when the document is unpublished" do
+  context "when the document is unpublished with new draft" do
+    let(:content_id) { item["content_id"] }
+
+    let(:existing_attachments) { [] }
+
     let(:item) do
       FactoryBot.create(
         :cma_case,
-        :published,
-        title: "Unpublished Item",
-        publication_state: "unpublished",
+        :unpublished,
+        title: "Example CMA Case",
+        publication_state: "draft",
+        state_history: { "1" => "unpublished", "2" => "draft" },
+        details: { attachments: existing_attachments },
       )
     end
 
-    scenario "when content item is unpublished it cannot be published" do
-      visit "/cma-cases"
-      expect(page.status_code).to eq(200)
+    before do
+      log_in_as_editor(:cma_editor)
 
-      click_link "Unpublished Item"
+      stub_publishing_api_has_content([item], hash_including(document_type: CmaCase.document_type))
+      stub_publishing_api_has_item(item)
 
-      expect(page).to have_no_selector(:button, "Publish")
-      expect(page).to have_content("The document is unpublished. You need to create a new draft before it can be published.")
+      stub_any_publishing_api_put_content
+      stub_any_publishing_api_patch_links
+      stub_publishing_api_publish(content_id, {})
+      stub_email_alert_api_accepts_content_change
+
+      visit "/cma-cases/#{content_id}"
+    end
+
+    context "a new draft of a previously unpublished document with attachments" do
+      let(:existing_attachments) do
+        [
+          {
+            "content_id" => "77f2d40e-3853-451f-9ca3-a747e8402e34",
+            "url" => "https://assets.digital.cabinet-office.gov.uk/media/513a0efbed915d425e000002/asylum-support-image.jpg",
+            "content_type" => "application/jpeg",
+            "title" => "asylum report image title",
+            "created_at" => "2015-12-03T16:59:13+00:00",
+            "updated_at" => "2015-12-03T16:59:13+00:00",
+          },
+          {
+            "content_id" => "ec3f6901-4156-4720-b4e5-f04c0b152141",
+            "url" => "https://assets.digital.cabinet-office.gov.uk/media/513a0efbed915d425e000004/asylum-support-pdf.pdf",
+            "content_type" => "application/pdf",
+            "title" => "asylum report pdf title",
+            "created_at" => "2015-12-03T16:59:13+00:00",
+            "updated_at" => "2015-12-03T16:59:13+00:00",
+          },
+        ]
+      end
+
+      describe "#publish" do
+        it "restores the assets via the asset api" do
+          expect(Services.asset_api).to receive(:restore_asset).once.ordered
+                                                               .with("513a0efbed915d425e000002")
+          expect(Services.asset_api).to receive(:restore_asset).once.ordered
+                                                               .with("513a0efbed915d425e000004")
+
+          Sidekiq::Testing.inline! do
+            click_on "Publish document"
+            click_on "Publish"
+          end
+        end
+      end
+    end
+
+    context "a new draft of a previously unpublished document without attachments" do
+      describe "#publish" do
+        it "doesn't call the asset api" do
+          expect(Services.asset_api).not_to receive(:restore_asset)
+
+          Sidekiq::Testing.inline! do
+            click_on "Publish document"
+            click_on "Publish"
+          end
+        end
+      end
     end
   end
 end

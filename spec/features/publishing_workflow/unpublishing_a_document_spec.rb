@@ -1,22 +1,12 @@
 require "spec_helper"
 
-RSpec.feature "Unpublishing a CMA Case", type: :feature do
+RSpec.feature "Unpublishing a document", type: :feature do
   let(:content_id) { item["content_id"] }
   let(:locale) { item["locale"] }
 
   before do
     log_in_as_editor(:cma_editor)
     stub_publishing_api_has_item(item)
-  end
-
-  before(:each) do
-    @test_strategy ||= Flipflop::FeatureSet.current.test!
-    @test_strategy.switch!(:show_design_system, false)
-  end
-
-  after(:each) do
-    @test_strategy ||= Flipflop::FeatureSet.current.test!
-    @test_strategy.switch!(:show_design_system, true)
   end
 
   context "a published document" do
@@ -33,7 +23,9 @@ RSpec.feature "Unpublishing a CMA Case", type: :feature do
 
       visit document_path(content_id_and_locale: "#{content_id}:#{locale}", document_type_slug: "cma-cases")
       expect(page).to have_content("Example CMA Case")
-      click_button "Unpublish document"
+      click_link "Unpublish document"
+      expect(page.status_code).to eq(200)
+      click_button "Unpublish"
       expect(page.status_code).to eq(200)
       expect(page).to have_content("Unpublished Example CMA Case")
 
@@ -48,21 +40,15 @@ RSpec.feature "Unpublishing a CMA Case", type: :feature do
       visit document_path(content_id_and_locale: "#{content_id}:#{locale}", document_type_slug: "cma-cases")
       expect(page).to have_content("Example CMA Case")
 
+      click_link "Unpublish document"
+      expect(page.status_code).to eq(200)
       fill_in "alternative_path", with: "/government/organisations/competition-and-markets-authority"
-      click_button "Unpublish document"
+      click_button "Unpublish"
 
       expect(page.status_code).to eq(200)
       expect(page).to have_content("Unpublished Example CMA Case")
 
       assert_publishing_api_unpublish(content_id, type: "redirect", alternative_path: "/government/organisations/competition-and-markets-authority", locale:)
-    end
-
-    scenario "writers don't see a unpublish document button" do
-      log_in_as_editor(:cma_writer)
-
-      visit document_path(content_id_and_locale: "#{content_id}:#{locale}", document_type_slug: "cma-cases")
-
-      expect(page).to have_no_selector(:button, "Unpublish document")
     end
 
     context "with attachments" do
@@ -107,7 +93,9 @@ RSpec.feature "Unpublishing a CMA Case", type: :feature do
           expect(Services.asset_api).to receive(:delete_asset).once.ordered
             .with("513a0efbed915d425e000004")
 
-          click_button "Unpublish document"
+          click_link "Unpublish document"
+          expect(page.status_code).to eq(200)
+          click_button "Unpublish"
 
           expect(page.status_code).to eq(200)
           expect(page).to have_content("Unpublished Example CMA Case")
@@ -130,7 +118,9 @@ RSpec.feature "Unpublishing a CMA Case", type: :feature do
 
       visit document_path(content_id_and_locale: "#{content_id}:#{locale}", document_type_slug: "cma-cases")
       expect(page).to have_content("Example CMA Case")
-      click_button "Unpublish document"
+      click_link "Unpublish document"
+      expect(page.status_code).to eq(200)
+      click_button "Unpublish"
       expect(page.status_code).to eq(200)
       expect(page).to have_content("Something has gone wrong. Please try again and see if it works.")
     end
