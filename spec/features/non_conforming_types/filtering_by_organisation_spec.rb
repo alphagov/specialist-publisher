@@ -1,6 +1,6 @@
 require "spec_helper"
 
-RSpec.feature "Searching and filtering by organisation", type: :feature do
+RSpec.feature "Filtering documents by organisation", type: :feature do
   let(:current_user_org) do
     { "title" => "Current users org", "content_id" => "e338f02d-82a3-4c6c-8a36-df3050869d97" }
   end
