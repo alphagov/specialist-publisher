@@ -6,9 +6,7 @@ class DocumentsController < ApplicationController
   include ActionView::Helpers::UrlHelper
   include OrganisationsHelper
 
-  layout :get_layout
-  DESIGN_SYSTEM_MIGRATED_ACTIONS = %w[new create index show confirm_publish confirm_unpublish confirm_discard discard edit update].freeze
-  include DesignSystemHelper
+  layout "design_system"
 
   before_action :fetch_document, except: %i[index new create]
   before_action :merge_nested_facet_fields, only: %i[edit new]
@@ -23,12 +21,11 @@ class DocumentsController < ApplicationController
     end
     @response = current_format.all(page, per_page, query: @query, organisation: @organisation)
     @paged_documents = PaginationPresenter.new(@response, per_page)
-    render design_system_view(:index, "documents/legacy/index_legacy")
+    render :index
   end
 
   def new
     @document = current_format.new
-    render design_system_view(:new, "documents/legacy/new_legacy")
   end
 
   def create
@@ -38,9 +35,9 @@ class DocumentsController < ApplicationController
       flash[:success] = "Created #{@document.title}"
       redirect_to document_path(current_format.admin_slug, @document.content_id_and_locale)
     elsif @document.errors.any?
-      re_render design_system_view(:new, "documents/legacy/new_legacy"), flash_key: :errors, flash_message: document_error_messages, status: :unprocessable_entity
+      re_render :new, status: :unprocessable_entity
     else
-      re_render design_system_view(:new, "documents/legacy/new_legacy"), flash_key: :danger, flash_message: unknown_error_message
+      re_render :new, flash_key: :danger, flash_message: unknown_error_message
     end
   end
 
@@ -48,12 +45,9 @@ class DocumentsController < ApplicationController
     if @document.content_item_blocking_publish?
       flash[:danger] = "Warning: This document's URL is already used on GOV.UK. You can't publish it until you change the title."
     end
-    render design_system_view(:show, "documents/legacy/show_legacy")
   end
 
-  def edit
-    render design_system_view(:edit, "documents/legacy/edit_legacy")
-  end
+  def edit; end
 
   def update
     @document.set_attributes(filtered_params)
@@ -63,10 +57,10 @@ class DocumentsController < ApplicationController
         flash[:success] = "Updated #{@document.title}"
         redirect_to document_path(current_format.admin_slug, @document.content_id_and_locale)
       else
-        re_render design_system_view(:edit, "documents/legacy/edit_legacy"), flash_key: :danger, flash_message: unknown_error_message
+        re_render :edit, flash_key: :danger, flash_message: unknown_error_message
       end
     else
-      re_render design_system_view(:edit, "documents/legacy/edit_legacy"), flash_key: :errors, flash_message: document_error_messages, status: :unprocessable_entity
+      re_render :edit, status: :unprocessable_entity
     end
   end
 
@@ -97,12 +91,7 @@ class DocumentsController < ApplicationController
 
   def discard
     if @document.discard
-      message = if get_layout == "design_system"
-                  "The draft of '#{@document.title}' has been deleted"
-                else
-                  "Discarded draft of #{@document.title}"
-                end
-      flash[:success] = message
+      flash[:success] = "The draft of '#{@document.title}' has been deleted"
     else
       flash[:danger] = unknown_error_message
     end
@@ -118,15 +107,6 @@ class DocumentsController < ApplicationController
     end
   end
 
-  helper_method :computed_partial_legacy
-  def computed_partial_legacy
-    if lookup_context.exists?(@document.document_type.pluralize.to_s, %w[metadata_fields_legacy], true)
-      "metadata_fields_legacy/#{@document.document_type.pluralize}"
-    else
-      "shared/legacy/specialist_document_form_legacy"
-    end
-  end
-
 private
 
   def merge_nested_facet_fields
@@ -139,7 +119,7 @@ private
     end
   end
 
-  def re_render(view, flash_key:, flash_message:, status: nil)
+  def re_render(view, flash_key: nil, flash_message: nil, status: nil)
     merge_nested_facet_fields
     flash.now[flash_key] = flash_message
     render view, status:
@@ -155,24 +135,9 @@ private
   end
 
   def unknown_error_message
-    return if get_layout == "design_system"
-
     support_url = "#{Plek.external_url_for('support')}/technical_fault_report/new"
 
     safe_join(["Something has gone wrong. Please try again and see if it works. ", link_to("Let us know", support_url), " if the problem happens again and a developer will look into it."])
-  end
-
-  def document_error_messages
-    return if get_layout == "design_system"
-
-    heading = tag.h4("There is a problem")
-    errors = tag.ul(class: "list-unstyled remove-bottom-margin") do
-      safe_join(error_messages.map do |message|
-        tag.li(CGI.escapeHTML(message).html_safe)
-      end)
-    end
-
-    heading + errors
   end
 
   def content_id_param
@@ -223,16 +188,6 @@ private
     values.reduce({}) do |filtered_params, (key, value)|
       filtered_value = value.is_a?(Array) ? value.reject(&:blank?) : value
       filtered_params.merge(key => filtered_value)
-    end
-  end
-
-  def error_messages
-    @document.errors.map do |e|
-      if @document.custom_error_message_fields.include?(e.attribute)
-        e.message
-      else
-        e.full_message
-      end
     end
   end
 

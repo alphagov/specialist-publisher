@@ -48,7 +48,7 @@ RSpec.feature "Access control", type: :feature do
       visit "/a-format-which-doesnt-exist"
 
       expect(page.current_path).to eq("/finders")
-      expect(page).to have_content("That format doesn't exist.")
+      expect(page).to have_content("That format doesn't exist. If you feel you've reached this in error, please contact your main GDS contact.")
     end
   end
 end

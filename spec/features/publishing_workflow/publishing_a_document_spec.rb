@@ -2,7 +2,7 @@ require "spec_helper"
 
 RSpec.feature "Publishing a document", type: :feature do
   let(:content_id) { item["content_id"] }
-  let(:publish_disable_with_message) { page.find_button("Publish")["data-disable-with"] }
+  let(:locale) { item["locale"] }
 
   before do
     Timecop.freeze(Time.zone.parse("2015-12-03T16:59:13+00:00"))
@@ -217,6 +217,28 @@ RSpec.feature "Publishing a document", type: :feature do
           end
         end
       end
+    end
+  end
+
+  context "publishing-api returns error" do
+    let(:item) do
+      FactoryBot.create(
+        :cma_case,
+        title: "Example CMA Case",
+        publication_state: "draft",
+      )
+    end
+
+    scenario "clicking the publish button shows an error message" do
+      stub_publishing_api_publish(content_id, { locale: locale, update_type: nil }, { status: 500 })
+
+      visit document_path(content_id_and_locale: "#{content_id}:#{locale}", document_type_slug: "cma-cases")
+      expect(page).to have_content("Example CMA Case")
+      click_link "Publish document"
+      expect(page.status_code).to eq(200)
+      click_button "Publish"
+      expect(page.status_code).to eq(200)
+      expect(page).to have_content("Something has gone wrong. Please try again and see if it works.")
     end
   end
 end
