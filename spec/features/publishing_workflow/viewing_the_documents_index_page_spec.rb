@@ -52,7 +52,7 @@ RSpec.feature "Viewing the documents index page", type: :feature do
       visit "/cma-cases"
 
       expect(page.status_code).to eq(200)
-      expect(page).to have_selector("#document-index-section table tbody tr", count: 3)
+      expect(page).to have_selector("table tbody tr", count: 3)
       expect(page).to have_content("Example CMA Case 0")
       expect(page).to have_link("View Example CMA Case 0", href: document_path("cma-cases", content_id_and_locale: "#{cma_cases.first['content_id']}:en"))
       expect(page).to have_content("Example CMA Case 1")
@@ -62,15 +62,15 @@ RSpec.feature "Viewing the documents index page", type: :feature do
     scenario "viewing the publication state on the index page" do
       visit "/cma-cases"
 
-      within("#document-index-section table tbody tr:nth-child(1)") do
+      within("table tbody tr:nth-child(1)") do
         expect(page).to have_content("Draft")
       end
 
-      within("#document-index-section table tbody tr:nth-child(2)") do
+      within("table tbody tr:nth-child(2)") do
         expect(page).to have_content("Published")
       end
 
-      within("#document-index-section table tbody tr:nth-child(3)") do
+      within("table tbody tr:nth-child(3)") do
         expect(page).to have_content("Unpublished with new draft")
       end
     end
@@ -79,11 +79,11 @@ RSpec.feature "Viewing the documents index page", type: :feature do
       Timecop.freeze(test_date) do
         visit "/cma-cases"
 
-        within("#document-index-section table tbody tr:nth-child(1)") do
+        within("table tbody tr:nth-child(1)") do
           expect(page).to have_content("Updated 1 day ago")
         end
 
-        within("#document-index-section table tbody tr:nth-child(3)") do
+        within("table tbody tr:nth-child(3)") do
           expect(page).to have_content("Updated 3 days ago")
         end
       end

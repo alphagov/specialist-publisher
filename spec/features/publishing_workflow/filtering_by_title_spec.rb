@@ -19,7 +19,7 @@ RSpec.feature "Filtering documents by title", type: :feature do
       fill_in "Title", with: "0"
       click_button "Filter"
       expect(page).to have_content("Example CMA Case 0")
-      expect(page).to have_selector("#document-index-section table tbody tr", count: 1)
+      expect(page).to have_selector("table tbody tr", count: 1)
     end
 
     scenario "filtering the items with no results returned" do
@@ -50,7 +50,7 @@ RSpec.feature "Filtering documents by title", type: :feature do
       click_button "Filter"
 
       expect(page.status_code).to eq(200)
-      expect(page).to have_selector("#document-index-section table tbody tr", count: per_page)
+      expect(page).to have_selector("table tbody tr", count: per_page)
       expect(page).to have_selector('[href="/cma-cases?page=2&query=match+string"]')
     end
   end

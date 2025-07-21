@@ -40,7 +40,7 @@ RSpec.feature "Filtering documents by organisation", type: :feature do
         selected: current_user_org["title"],
         options: all_organisations.map { |org| org["title"] }.prepend("All organisations"),
       )
-      expect(page).to have_selector("tr", count: 2) # Header row + one licence row
+      expect(page).to have_selector("table tbody tr", count: 1)
       expect(page).to have_selector("tr", text: current_user_org_licence["title"], count: 1)
     end
   end
@@ -68,7 +68,7 @@ RSpec.feature "Filtering documents by organisation", type: :feature do
       expect(page.status_code).to eq(200)
       expect(filter_request).to have_been_requested.at_least_once
       expect(page).to have_select("Organisation", selected: [])
-      expect(page).to have_selector("tr", count: 3) # Header row + two licence rows
+      expect(page).to have_selector("table tbody tr", count: 2)
       expect(page).to have_selector("tr", text: current_user_org_licence["title"], count: 1)
       expect(page).to have_selector("tr", text: additional_org_licence["title"], count: 1)
     end
@@ -103,7 +103,7 @@ RSpec.feature "Filtering documents by organisation", type: :feature do
       expect(page.status_code).to eq(200)
       expect(filter_request).to have_been_requested
       expect(page).to have_select("Organisation", selected: selected_org["title"])
-      expect(page).to have_selector("tr", count: 3) # Header row + one licence row
+      expect(page).to have_selector("table tbody tr", count: 2)
       expect(page).to have_selector("tr", text: licence_with_selected_org_as_primary["title"], count: 1)
       expect(page).to have_selector("tr", text: licence_with_selected_org_as_other["title"], count: 1)
     end
@@ -139,7 +139,7 @@ RSpec.feature "Filtering documents by organisation", type: :feature do
       expect(page.status_code).to eq(200)
       expect(filter_request).to have_been_requested
       expect(page).to have_select("Organisation", selected: selected_org["title"])
-      expect(page).to have_selector("tr", count: 2) # Header row + one licence row
+      expect(page).to have_selector("table tbody tr", count: 1)
       expect(page).to have_selector("tr", text: licence_with_selected_org_as_other["title"], count: 1)
       expect(page).to have_selector("tr", text: licence_with_selected_org_as_primary["title"], count: 0)
     end
@@ -164,7 +164,7 @@ RSpec.feature "Filtering documents by organisation", type: :feature do
       click_button "Filter"
 
       expect(page.status_code).to eq(200)
-      expect(page).to have_selector("tr", count: 3) # Header row + 2 licence rows
+      expect(page).to have_selector("table tbody tr", count: 2)
       expect(page).to have_selector('[href="/licences?organisation=all&page=2&query=string+match"]')
     end
   end
