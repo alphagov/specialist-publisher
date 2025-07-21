@@ -36,10 +36,8 @@ $govuk-page-width: 1140px;
 
 @import "./components/govspeak-editor";
 @import "./components/diff";
-
-@import "./govspeak-help";
+@import "components/govspeak-help";
 @import "./summary";
-
 @import "./admin/overrides";
 
 .bg-light-grey {
