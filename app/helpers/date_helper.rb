@@ -1,14 +1,4 @@
 module DateHelper
-  # Presents a fragment of a date string
-  # Used for the rendering of a date field value.
-  def date_value(measure, field)
-    return if field.blank?
-    return unless field =~ /^\d{4}-\d{2}-\d{2}$/
-
-    year, month, day = field.split("-")
-    { "year" => year, "month" => month, "day" => day }[measure]
-  end
-
   # Constructs a date string, attempting to produce
   # the format YYYY-MM-dd. Expects the Rails convention
   # for multiple parameter date fragments.

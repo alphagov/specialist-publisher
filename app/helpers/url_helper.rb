@@ -7,6 +7,8 @@ module UrlHelper
     URI.join(Plek.external_url_for("draft-origin"), document.base_path, cachebust_query_string).to_s
   end
 
+private
+
   def cachebust_query_string
     "?cachebust=#{Time.zone.now.getutc.to_i}"
   end
