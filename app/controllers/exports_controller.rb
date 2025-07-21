@@ -1,9 +1,7 @@
 class ExportsController < ApplicationController
   before_action :check_authorisation, if: :document_type_slug
 
-  layout :get_layout
-  DESIGN_SYSTEM_MIGRATED_ACTIONS = %w[show].freeze
-  include DesignSystemHelper
+  layout "design_system"
 
   def check_authorisation
     if current_format
@@ -16,7 +14,6 @@ class ExportsController < ApplicationController
 
   def show
     @query = params[:query]
-    render design_system_view(:show, "exports/legacy/show_legacy")
   end
 
   def create
