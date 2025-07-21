@@ -150,7 +150,7 @@ private
 
   def fetch_document
     @document = current_format.find(content_id_param, locale_param)
-    set_design_system_flag
+
     if params[:content_id_and_locale].split(":")[1] != @document.locale
       redirect_to(
         document_path(
@@ -188,12 +188,6 @@ private
     values.reduce({}) do |filtered_params, (key, value)|
       filtered_value = value.is_a?(Array) ? value.reject(&:blank?) : value
       filtered_params.merge(key => filtered_value)
-    end
-  end
-
-  def set_design_system_flag
-    if @document && current_format.document_type == "research_for_development_output"
-      @document.is_using_design_system_view = Flipflop.enabled?(:show_design_system)
     end
   end
 end
