@@ -1,8 +1,6 @@
 class AttachmentsController < ApplicationController
   before_action :check_authorisation, if: :document_type_slug
 
-  layout "design_system"
-
   def check_authorisation
     authorize current_format
   end

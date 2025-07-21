@@ -1,6 +1,4 @@
 class FindersController < ApplicationController
-  layout "design_system"
-
   def index
     skip_authorization
     redirect_to error_path unless first_permitted_format
