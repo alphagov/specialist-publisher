@@ -1,10 +1,4 @@
 module StateHelper
-  def classes_for_frontend(document)
-    return "label label-primary" if state_for_frontend(document) =~ /draft/
-
-    "label label-default"
-  end
-
   def design_system_classes_for_frontend(document)
     return "govuk-tag govuk-tag--s govuk-tag--blue" if state_for_frontend(document) =~ /draft/
 
@@ -24,11 +18,6 @@ module StateHelper
     end
   end
 
-  def ordered_history(state_history)
-    ordered_history = state_history.sort_by { |k, _v| Integer(k.to_s) }
-    ordered_history.map!(&:second)
-  end
-
   def last_two_states(state_history)
     history = ordered_history(state_history)
     [history[-2], history[-1]]
@@ -40,5 +29,12 @@ module StateHelper
 
   def show_preview_draft_link?(state_history)
     ordered_history(state_history).last == "draft"
+  end
+
+private
+
+  def ordered_history(state_history)
+    ordered_history = state_history.sort_by { |k, _v| Integer(k.to_s) }
+    ordered_history.map!(&:second)
   end
 end

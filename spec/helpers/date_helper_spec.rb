@@ -1,19 +1,6 @@
 require "rails_helper"
 
 RSpec.describe DateHelper, type: :helper do
-  describe "date_value" do
-    it "returns a fragment of a date string" do
-      date_string = "2015-02-01"
-      expect(date_value("year", date_string)).to eq("2015")
-      expect(date_value("month", date_string)).to eq("02")
-      expect(date_value("day", date_string)).to eq("01")
-    end
-
-    it "returns nil for an empty date_string" do
-      expect(date_value("year", "")).to be nil
-    end
-  end
-
   describe "date_param_value" do
     it "creates a hyphen delimited date string from params" do
       params = { "my_date(1i)" => "2016", "my_date(2i)" => "02", "my_date(3i)" => "01" }
