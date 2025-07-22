@@ -20,7 +20,4 @@ Flipflop.configure do
   # feature :world_domination,
   #   default: true,
   #   description: "Take over the world."
-  feature :show_design_system,
-          description: "Enable design system functionality",
-          default: true
 end

@@ -1,6 +1,6 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
-  layout "legacy_application"
+  layout "design_system"
 
   include GDS::SSO::ControllerMethods
   include Pundit::Authorization

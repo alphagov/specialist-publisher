@@ -1,15 +1,6 @@
 class LicenceTransaction < Document
   FORMAT_SPECIFIC_FIELDS = format_specific_fields
 
-  CUSTOM_ERROR_MESSAGE_FIELDS = FORMAT_SPECIFIC_FIELDS + %i[
-    primary_publishing_organisation
-    body
-    title
-    summary
-    update_type
-    change_note
-  ]
-
   apply_validations
   validates_with LinkOrIdentifierValidator
   validates :primary_publishing_organisation, presence: true
@@ -48,9 +39,5 @@ class LicenceTransaction < Document
 
   def self.admin_slug
     "licences"
-  end
-
-  def custom_error_message_fields
-    CUSTOM_ERROR_MESSAGE_FIELDS
   end
 end

@@ -357,10 +357,6 @@ class Document
     false
   end
 
-  def custom_error_message_fields
-    []
-  end
-
   def self.format_specific_fields
     fields = []
 
