@@ -349,10 +349,6 @@ class Document
     "exact"
   end
 
-  def self.exportable?
-    false
-  end
-
   def self.has_organisations?
     false
   end
