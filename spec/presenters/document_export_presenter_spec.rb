@@ -4,10 +4,6 @@ RSpec.describe DocumentExportPresenter do
   describe ".for" do
     let(:exportable_document) do
       Class.new do
-        def self.exportable?
-          true
-        end
-
         def self.document_type
           name.underscore
         end
@@ -16,10 +12,6 @@ RSpec.describe DocumentExportPresenter do
 
     let(:non_exportable_document) do
       Class.new do
-        def self.exportable?
-          false
-        end
-
         def self.document_type
           name.underscore
         end
