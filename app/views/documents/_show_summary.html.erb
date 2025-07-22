@@ -75,10 +75,10 @@
             text: link_to(attachment.filename, attachment.url, class: "govuk-link"),
           },
          {
-           text: attachment.created_at.to_date.to_fs(:govuk_date)
+           text: attachment.created_at.to_date.strftime("%-d %B %Y")
          },
           {
-           text: attachment.updated_at.to_date.to_fs(:govuk_date)
+           text: attachment.updated_at.to_date.strftime("%-d %B %Y")
          }
         ]
         }

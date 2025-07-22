@@ -50,7 +50,7 @@ private
   end
 
   def facet_value(values)
-    return values.to_fs(:govuk_date) if values.is_a?(Date)
+    return values.strftime("%-d %B %Y") if values.is_a?(Date)
 
     Array(values).map { |value| truncate(value.to_s, length: 140) }.join("<br>").html_safe
   end

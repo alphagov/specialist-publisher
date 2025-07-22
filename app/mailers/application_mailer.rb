@@ -3,8 +3,9 @@ class ApplicationMailer < Mail::Notify::Mailer
 
   def no_reply_email_address
     name = "GOV.UK publishing"
-    if GovukAdminTemplate.environment_label !~ /production/i
-      name.prepend("[GOV.UK #{GovukAdminTemplate.environment_label}] ")
+    environment = GovukPublishingComponents::AppHelpers::Environment.current_acceptance_environment
+    if environment !~ /production/i
+      name.prepend("[GOV.UK #{environment}] ")
     end
 
     address = Mail::Address.new("inside-government@digital.cabinet-office.gov.uk")
