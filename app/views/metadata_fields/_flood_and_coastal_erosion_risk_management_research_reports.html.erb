@@ -1,5 +1,4 @@
-<%= render layout: "shared/specialist_document_form", locals: { f: f } do %>
-<% end %>
+<%= render partial: "shared/specialist_document_form", locals: { f: f } %>
 
 <% format_name = f.object.class.document_type.to_sym %>
 <%= render FacetInputComponent::OrganisationSingleSelectWithSearchComponent.new(@document, format_name, :primary_publishing_organisation, "Publishing organisation", selected_organisation_or_current(@document.primary_publishing_organisation)) %>
