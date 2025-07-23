@@ -61,11 +61,12 @@ Keep in mind that adding custom validation may make the finder incompatible with
 
 ### Create the view template
 
-Create a view file in the [views folder](https://github.com/alphagov/specialist-publisher/tree/main/app/views/metadata_fields). See [CMA cases example](https://github.com/alphagov/specialist-publisher/blob/main/app/views/metadata_fields/_cma_cases.html.erb).
+It is no longer required to create a view. All the views will be auto-generated from the schema-defined fields, using the [shared template](https://github.com/alphagov/specialist-publisher/blob/main/app/views/shared/_specialist_document_form.html.erb).
 
-Whilst a handful of legacy finders still use a custom view, all new finders should be referencing the [shared template](https://github.com/alphagov/specialist-publisher/blob/main/app/views/shared/_specialist_document_form.html.erb), which determines which form fields to display based on the finder schema.
+Note that the `select type` of an input (one/multiple) is now configured under the `specialist_publisher_properties` [in the schema](https://github.com/alphagov/specialist-publisher/blob/84b89e9f737f59a615b5a9df1a5b8d3e7d74f75d/lib/documents/schemas/algorithmic_transparency_records.json#L164).
 
-NB: The select type of an input (one/multiple) is now configured under the `specialist_publisher_properties` [in the schema](https://github.com/alphagov/specialist-publisher/blob/36170eb7841fc4acaad77603f3e55e0a80122a74/lib/documents/schemas/algorithmic_transparency_records.json#L151).
+If you require custom behaviours, create a view file in the [views folder](https://github.com/alphagov/specialist-publisher/tree/main/app/views/metadata_fields). Other "non-conforming" views can be found there. Make use of the available `FacetInputComponent` subclasses to render the custom view's facets. 
+
 
 ### Testing your document type
 
