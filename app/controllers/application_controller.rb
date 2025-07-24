@@ -8,7 +8,6 @@ class ApplicationController < ActionController::Base
   before_action :authenticate_user!
   before_action :set_authenticated_user_header
   after_action :verify_authorized
-  skip_after_action :verify_authorized, if: -> { self.class.name.include?("Flipflop") }
 
   helper_method :current_format
   helper_method :formats_user_can_access
