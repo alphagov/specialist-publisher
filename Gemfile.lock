@@ -161,9 +161,6 @@ GEM
     ffi (1.17.0-aarch64-linux-gnu)
     ffi (1.17.0-arm64-darwin)
     ffi (1.17.0-x86_64-linux-gnu)
-    flipflop (2.8.0)
-      activesupport (>= 4.0)
-      terminal-table (>= 1.8)
     gds-api-adapters (99.2.0)
       addressable
       link_header
@@ -785,8 +782,6 @@ GEM
     statsd-ruby (1.5.0)
     stringex (2.8.6)
     stringio (3.1.7)
-    terminal-table (4.0.0)
-      unicode-display_width (>= 1.1.1, < 4)
     terser (1.2.6)
       execjs (>= 0.3.0, < 3)
     thor (1.4.0)
@@ -837,7 +832,6 @@ DEPENDENCIES
   database_cleaner-mongoid
   diffy
   factory_bot
-  flipflop
   gds-api-adapters
   gds-sso
   govspeak

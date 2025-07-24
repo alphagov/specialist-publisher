@@ -7,7 +7,6 @@ gem "aws-sdk-s3"
 gem "bootsnap", require: false
 gem "dartsass-rails"
 gem "diffy"
-gem "flipflop"
 gem "gds-api-adapters"
 gem "gds-sso"
 gem "govspeak"
