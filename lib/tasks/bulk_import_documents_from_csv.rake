@@ -26,6 +26,17 @@ task :bulk_import_documents_from_csv, %i[csv_file_path] => :environment do |_, a
                        design_decision_british_library_number: design_decision_british_library_number,
                        design_decision_date: design_decision_date,
                        body: note_body)
+
+    if row["attachment_title"].present? && row["attachment_filename"].present? && row["attachment_url"].present?
+      design_decision.attachments.build(
+        title: row["attachment_title"],
+        filename: row["attachment_filename"],
+        url: row["attachment_url"],
+        created_at: row["attachment_created_at"].present? ? Time.zone.parse(row["attachment_created_at"]) : nil,
+        updated_at: row["attachment_updated_at"].present? ? Time.zone.parse(row["attachment_updated_at"]) : nil
+      )
+    end
+
     design_decision.save
   end
 end

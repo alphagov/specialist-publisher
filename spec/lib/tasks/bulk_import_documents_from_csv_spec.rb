@@ -35,10 +35,25 @@ Newport,
 South Wales
 NP10 8QQ
 $A"',
-        'Attachment 1', 'file1.pdf', 'http://example.com/file1.pdf',
-        '2024-01-01', '2024-01-02'
+        'Design Decision O/0567/25', 'o056725.pdf', 'http://asset-manager.dev.gov.uk/media/685d5038f85b4b993fd752dd/o056725.pdf',
+        '2025-06-26 14:50:48 +0100', '2025-06-26 14:50:48 +0100'
       ]
     end
+    attachments_double = double("attachments")
+    design_decision_double = instance_double(
+      DesignDecision,
+      attachments: attachments_double,
+      save: true
+    )
+
+    expect(attachments_double).to receive(:build).with(
+      title: 'Design Decision O/0567/25',
+      filename: 'o056725.pdf',
+      url: 'http://asset-manager.dev.gov.uk/media/685d5038f85b4b993fd752dd/o056725.pdf',
+      created_at: Time.zone.parse('2025-06-26 14:50:48 +0100'),
+      updated_at: Time.zone.parse('2025-06-26 14:50:48 +0100')
+    )
+
     expect(DesignDecision).to receive(:new).with(
       :title => 'Design hearing decision: O/0567/25',
       :summary => 'Outcome of request to invalidate, hearing held on 24 June 2025.',
@@ -58,7 +73,7 @@ Cardiff Road,
 Newport,
 South Wales
 NP10 8QQ
-$A').and_return(double(save: true))
+$A').and_return(design_decision_double)
     task.execute(csv_file_path: csv_path.to_s)
   end
   # test for mapping Appointed Person to design_decision_hearing_officer
