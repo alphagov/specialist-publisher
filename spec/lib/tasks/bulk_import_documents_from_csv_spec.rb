@@ -42,6 +42,8 @@ $A"',
     expect(DesignDecision).to receive(:new).with(
       :title => 'Design hearing decision: O/0567/25',
       :summary => 'Outcome of request to invalidate, hearing held on 24 June 2025.',
+      :design_decision_litigants => 'Caesar Commerce Ltd v Huizhou New Road Cosmetics Company Limited',
+      :design_decision_hearing_officer => 'Arran Cooper',
       :body => '| **Litigants** | Caesar Commerce Ltd v Huizhou New Road Cosmetics Company Limited |
 | **Hearing Officer** | Arran Cooper |
 
@@ -62,13 +64,4 @@ NP10 8QQ
 $A')
     task.execute(csv_file_path: csv_path.to_s)
   end
-
-  # it "it exits if csv file not found" do
-  #   expect { Rake.application.invoke_task "bulk_import_documents_from_csv[non_existent_csv.csv]" }.to output("CSV file not found").to_stdout
-  # end
-  #
-  # it "handles an empty CSV file gracefully" do
-  #   CSV.open(csv_path, 'w') {} # Create an empty CSV file
-  #   expect { Rake.application.invoke_task "bulk_import_documents_from_csv[#{csv_path.to_s}]" }.to output("No data to import\n").to_stdout
-  # end
 end
