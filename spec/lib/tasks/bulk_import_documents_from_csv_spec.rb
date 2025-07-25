@@ -45,6 +45,7 @@ $A"',
       :design_decision_litigants => 'Caesar Commerce Ltd v Huizhou New Road Cosmetics Company Limited',
       :design_decision_hearing_officer => 'Arran Cooper',
       :design_decision_british_library_number => 'O/0567/25',
+      :design_decision_date => '2025-06-24',
       :body => 'Every effort is made to ensure design hearing decisions have been accurately recorded, but some errors may have been introduced during conversion for the web.
 
 Copies of any documents annexed to a decision are available from:
@@ -57,9 +58,10 @@ Cardiff Road,
 Newport,
 South Wales
 NP10 8QQ
-$A')
+$A').and_return(double(save: true))
     task.execute(csv_file_path: csv_path.to_s)
   end
   # test for mapping Appointed Person to design_decision_hearing_officer
-  # test for managing different permutations of note
+  # test if any properties are nil then do not import, record the number not imported
+  # test for no attachments
 end
