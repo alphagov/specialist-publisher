@@ -38,8 +38,15 @@ OPTIONAL_ATTACHMENT_FIELDS = {
 RSpec.describe "bulk_import_documents_from_csv", type: :task do
   let(:task) { Rake::Task["bulk_import_documents_from_csv"] }
   let(:csv_path) { Rails.root.join("publications_export.csv") }
+  let(:original_stdout) { $stdout }
+  let(:stdout_stub) { StringIO.new }
+
+  before(:each) do
+    $stdout = stdout_stub
+  end
 
   after(:each) do
+    $stdout = original_stdout
     task.reenable
     File.delete(csv_path) if File.exist?(csv_path)
   end
