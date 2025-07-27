@@ -1,5 +1,47 @@
 require "rails_helper"
 
+REQUIRED_FIELDS = {
+  "title" => "Design hearing decision: O/9999/25",
+  "summary" => "Outcome of hearing held on 15 July 2025.",
+  "body_with_all" => <<~BODY,
+    | **Litigants** | Some Company Ltd v Other Company Ltd |
+    | **Hearing Officer** | Martin Howe |
+
+    ## Note
+
+    Every effort is made to ensure design hearing decisions are correct.
+  BODY
+  "body_missing_litigants" => <<~BODY,
+    | **Hearing Officer** | Martin Howe |
+
+    ## Note
+
+    Every effort is made to ensure design hearing decisions are correct.
+  BODY
+  "body_missing_hearing_officer" => <<~BODY,
+    | **Litigants** | Some Company Ltd v Other Company Ltd |
+
+    ## Note
+
+    Every effort is made to ensure design hearing decisions are correct.
+  BODY
+  "body_invalid_hearing_officer" => <<~BODY,
+    | **Hearing Officer** | Invalid Officer |
+
+    ## Note
+
+    Every effort is made to ensure design hearing decisions are correct.
+  BODY
+}.freeze
+
+OPTIONAL_ATTACHMENT_FIELDS = {
+  "attachment_title" => "Design Decision O/9999/25",
+  "attachment_filename" => "o999925.pdf",
+  "attachment_url" => "http://example.com/o999925.pdf",
+  "attachment_created_at" => "2025-07-16 10:00:00",
+  "attachment_updated_at" => "2025-07-16 10:00:00",
+}.freeze
+
 RSpec.describe "bulk_import_documents_from_csv", type: :task do
   let(:task) { Rake::Task["bulk_import_documents_from_csv"] }
   let(:csv_path) { "dummy_path.csv" }
@@ -42,7 +84,7 @@ $A"',
       "attachment_created_at" => "2025-06-26 14:50:48 +0100",
       "attachment_updated_at" => "2025-06-26 14:50:48 +0100",
     }]
-    allow(CSV).to receive(:foreach).with(csv_path, headers: true).and_yield(csv_data.first)
+    allow(CSV).to receive(:foreach).with(csv_path, headers: true).and_return(csv_data.each)
     attachments_double = double("attachments")
     design_decision_double = instance_double(
       DesignDecision,
@@ -97,7 +139,7 @@ Every effort is made to ensure...',
         "attachment_updated_at" => nil,
       },
     ]
-    allow(CSV).to receive(:foreach).with(csv_path, headers: true).and_yield(csv_data.first)
+    allow(CSV).to receive(:foreach).with(csv_path, headers: true).and_return(csv_data.each)
     attachments_double = double("attachments")
     allow(attachments_double).to receive(:build)
     design_decision_double = double("DesignDecision", attachments: attachments_double, save: true)
@@ -126,7 +168,7 @@ Every effort is made to ensure design hearing decisions have been accurately rec
         "attachment_updated_at" => nil,
       },
     ]
-    allow(CSV).to receive(:foreach).with(csv_path, headers: true).and_yield(csv_data.first)
+    allow(CSV).to receive(:foreach).with(csv_path, headers: true).and_return(csv_data.each)
     design_decision_double = instance_double("DesignDecision", attachments: [], save: true)
     expect(DesignDecision).to receive(:new).with(
       hash_including(
@@ -141,5 +183,32 @@ Every effort is made to ensure design hearing decisions have been accurately rec
     expect(design_decision_double).to receive(:save)
 
     task.execute(csv_file_path: csv_path.to_s)
+  end
+
+  {
+    "title is missing" => nil,
+    "summary is missing" => nil,
+    "body (completely missing)" => nil,
+    "body (missing litigants)" => REQUIRED_FIELDS["body_missing_litigants"],
+    "body (missing hearing officer)" => REQUIRED_FIELDS["body_missing_hearing_officer"],
+    "body (hearing officer does not map to schema)" => REQUIRED_FIELDS["body_invalid_hearing_officer"],
+  }.each do |case_description, body_value|
+    it "throws an error when #{case_description}" do
+      row = {
+        "title" => REQUIRED_FIELDS["title"],
+        "summary" => REQUIRED_FIELDS["summary"],
+        "body" => REQUIRED_FIELDS["body_with_all"],
+      }.merge(OPTIONAL_ATTACHMENT_FIELDS)
+      # Override the field being tested
+      row["title"] = nil if case_description.include?("title")
+      row["summary"] = nil if case_description.include?("summary")
+      row["body"] = body_value
+      allow(CSV).to receive(:foreach).with(csv_path, headers: true).and_return([row].each)
+      expect(DesignDecision).not_to receive(:new)
+
+      expect {
+        task.execute(csv_file_path: csv_path.to_s)
+      }.to raise_error(StandardError, "CSV import failed: 1 row(s) have missing required fields.")
+    end
   end
 end

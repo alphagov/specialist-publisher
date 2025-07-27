@@ -9,8 +9,12 @@ task :bulk_import_documents_from_csv, %i[csv_file_path] => :environment do |_, a
   end
 
   hearing_officer_allowed_values = get_hearing_officer_allowed_values
+  imported_count = 0
+  invalid_rows = []
 
-  CSV.foreach(csv_file_path, headers: true) do |row|
+  documents_to_import = []
+
+  CSV.foreach(csv_file_path, headers: true).with_index(2) do |row, line_number|
     title = row["title"]
     summary = row["summary"]&.delete('"')
     body = row["body"]&.delete('"')
@@ -20,27 +24,50 @@ task :bulk_import_documents_from_csv, %i[csv_file_path] => :environment do |_, a
     design_decision_date = get_design_decision_date(summary)
     note_body = get_note_body(body)
 
-    design_decision = DesignDecision.new(title: title,
-                                         summary: summary,
-                                         design_decision_litigants: design_decision_litigants,
-                                         design_decision_hearing_officer: design_decision_hearing_officer,
-                                         design_decision_british_library_number: design_decision_british_library_number,
-                                         design_decision_date: design_decision_date,
-                                         body: note_body)
+    required_fields = {
+      "title" => title,
+      "summary" => summary,
+      "body" => note_body,
+      "design_decision_litigants" => design_decision_litigants,
+      "design_decision_hearing_officer" => design_decision_hearing_officer,
+      "design_decision_british_library_number" => design_decision_british_library_number,
+      "design_decision_date" => design_decision_date,
+    }
 
-    if design_decision_has_attachment?(row)
+    if required_fields.values.any?(&:blank?)
+      invalid_rows << {
+        line: line_number,
+        missing_fields: required_fields.select { |_, v| v.blank? }.keys,
+        title: title,
+      }
+    else
+      documents_to_import << { row: row, attributes: required_fields }
+    end
+  end
+
+  if invalid_rows.any?
+    raise StandardError, "CSV import failed: #{invalid_rows.count} row(s) have missing required fields."
+  end
+
+  documents_to_import.each do |document_data|
+    design_decision = DesignDecision.new(**document_data[:attributes].deep_symbolize_keys)
+
+    if design_decision_has_attachment?(document_data[:row])
       design_decision.attachments.build(
-        title: row["attachment_title"],
-        filename: row["attachment_filename"],
-        url: row["attachment_url"],
+        title: document_data[:row]["attachment_title"],
+        filename: document_data[:row]["attachment_filename"],
+        url: document_data[:row]["attachment_url"],
         content_type: "application/pdf",
-        created_at: row["attachment_created_at"].present? ? Time.zone.parse(row["attachment_created_at"]) : nil,
-        updated_at: row["attachment_updated_at"].present? ? Time.zone.parse(row["attachment_updated_at"]) : nil,
+        created_at: document_data[:row]["attachment_created_at"].present? ? Time.zone.parse(document_data[:row]["attachment_created_at"]) : nil,
+        updated_at: document_data[:row]["attachment_updated_at"].present? ? Time.zone.parse(document_data[:row]["attachment_updated_at"]) : nil,
       )
     end
 
     design_decision.save
+    imported_count += 1
   end
+
+  report_import_result(imported_count, invalid_rows)
 end
 
 def get_hearing_officer_allowed_values
@@ -86,4 +113,16 @@ end
 def get_design_decision_date(summary)
   raw_date = summary[/\b\d{1,2} \w+ \d{4}\b/] if summary
   raw_date ? Date.parse(raw_date).strftime("%Y-%m-%d") : nil
+end
+
+def report_import_result(imported_count, skipped_rows)
+  puts "Imported: #{imported_count} document(s)"
+  puts "Skipped: #{skipped_rows.count} row(s)"
+
+  if skipped_rows.any?
+    puts "\nSkipped row details:"
+    skipped_rows.each do |row|
+      puts "- Line #{row[:line]}: Missing #{row[:missing_fields].join(', ')} (Title: #{row[:title] || 'N/A'})"
+    end
+  end
 end
