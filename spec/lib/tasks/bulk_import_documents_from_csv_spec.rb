@@ -182,10 +182,10 @@ Every effort is made to ensure...',
 ## Note
 
 Every effort is made to ensure design hearing decisions have been accurately recorded.',
-        nil,    # no attachment_title
-        nil,    # no attachment_filename
-        nil,    # no attachment_url
-        nil,    # no attachment_created_at
+        nil, # no attachment_title
+        nil, # no attachment_filename
+        nil, # no attachment_url
+        nil, # no attachment_created_at
         nil, # no attachment_updated_at
       ]
     end
@@ -235,5 +235,54 @@ Every effort is made to ensure design hearing decisions have been accurately rec
       expect(DesignDecision).not_to receive(:new)
       task.execute(csv_file_path: csv_path.to_s)
     end
+  end
+
+  it "logs the details for skipped rows" do
+    CSV.open(csv_path, "w") do |csv|
+      csv << %w[title summary body attachment_title attachment_filename attachment_url attachment_created_at attachment_updated_at]
+
+      # Valid row
+      csv << [
+        "Design hearing decision: O/1111/25",
+        "Outcome of request, hearing held on 20 June 2025.",
+        "| **Litigants** | Alpha Ltd v Beta Ltd |\n| **Hearing Officer** | John Smith |\n\n## Note\nEvery effort is made...",
+        "",
+        "",
+        "",
+        "",
+        "",
+      ]
+
+      # Invalid row (missing hearing officer)
+      csv << [
+        "Design hearing decision: O/2222/25",
+        "Outcome of request, hearing held on 21 June 2025.",
+        "| **Litigants** | Gamma Ltd v Delta Ltd |\n\n## Note\nEvery effort is made...",
+        "",
+        "",
+        "",
+        "",
+        "",
+      ]
+
+      # Invalid row (missing title)
+      csv << [
+        nil,
+        "Outcome of request, hearing held on 22 June 2025.",
+        "| **Litigants** | Epsilon Ltd v Zeta Ltd |\n| **Hearing Officer** | Jane Doe |\n\n## Note\nEvery effort is made...",
+        "",
+        "",
+        "",
+        "",
+        "",
+      ]
+    end
+
+    design_decision_double = double(save: true)
+    expect(DesignDecision).to receive(:new).once.and_return(design_decision_double)
+
+    expect {
+      task.execute(csv_file_path: csv_path.to_s)
+    }.to output(/Imported: 1 document\(s\).*Skipped: 2 row\(s\).*Line 3: Missing design_decision_hearing_officer.*Line 4: Missing title, design_decision_british_library_number/m).to_stdout
   end
 end

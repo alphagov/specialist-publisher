@@ -8,7 +8,10 @@ task :bulk_import_documents_from_csv, %i[csv_file_path] => :environment do |_, a
     exit
   end
 
-  CSV.foreach(csv_file_path, headers: true) do |row|
+  imported_count = 0
+  skipped_rows = []
+
+  CSV.foreach(csv_file_path, headers: true).with_index(2) do |row, line_number|
     title = row["title"]
     summary = row["summary"]&.delete('"')
     body = row["body"]&.delete('"')
@@ -18,9 +21,11 @@ task :bulk_import_documents_from_csv, %i[csv_file_path] => :environment do |_, a
     design_decision_date = raw_date ? Date.parse(raw_date).strftime("%Y-%m-%d") : nil
 
     design_decision_litigants = body[/\|\s*.*?litigants.*?\s*\|\s*(.+?)\s*\|/i, 1] if body
-    design_decision_hearing_officer =
-      body[/\|\s*.*?hearing\s*officer.*?\s*\|\s*(.+?)\s*\|/i, 1] ||
-      body[/\|\s*.*?appointed\s*person.*?\s*\|\s*(.+?)\s*\|/i, 1] if body
+    if body
+      design_decision_hearing_officer =
+        body[/\|\s*.*?hearing\s*officer.*?\s*\|\s*(.+?)\s*\|/i, 1] ||
+        body[/\|\s*.*?appointed\s*person.*?\s*\|\s*(.+?)\s*\|/i, 1]
+    end
 
     start_index = body&.lines&.find_index { |line| line.match?(/^.*Every effort.*$/i) }
     note_body = start_index ? body.lines[start_index..].join.strip : nil
@@ -36,6 +41,11 @@ task :bulk_import_documents_from_csv, %i[csv_file_path] => :environment do |_, a
     }
 
     if required_fields.values.any?(&:blank?)
+      skipped_rows << {
+        line: line_number,
+        missing_fields: required_fields.select { |_, v| v.blank? }.keys,
+        title: title,
+      }
       next
     end
 
@@ -58,5 +68,16 @@ task :bulk_import_documents_from_csv, %i[csv_file_path] => :environment do |_, a
     end
 
     design_decision.save
+    imported_count += 1
+  end
+
+  puts "Imported: #{imported_count} document(s)"
+  puts "Skipped: #{skipped_rows.count} row(s)"
+
+  if skipped_rows.any?
+    puts "\nSkipped row details:"
+    skipped_rows.each do |row|
+      puts "- Line #{row[:line]}: Missing #{row[:missing_fields].join(', ')} (Title: #{row[:title] || 'N/A'})"
+    end
   end
 end
