@@ -10,11 +10,6 @@ task :bulk_import_documents_from_csv, %i[csv_file_path] => :environment do |_, a
     exit
   end
 
-  schema_path = Rails.root.join("lib/documents/schemas/design_decisions.json")
-  schema = JSON.parse(File.read(schema_path))
-  officer_facet = schema["facets"].find { |f| f["key"] == "design_decision_hearing_officer" }
-  officer_label_to_value = officer_facet["allowed_values"].to_h { |val| [val["label"], val["value"]] }
-
   imported_count = 0
   skipped_rows = []
 
@@ -23,18 +18,12 @@ task :bulk_import_documents_from_csv, %i[csv_file_path] => :environment do |_, a
     summary = row["summary"]&.delete('"')
     body = row["body"]&.delete('"')
 
-    design_decision_british_library_number = title[/Design hearing decision:\s*(\S+)/i, 1] if title
-    raw_date = summary[/\b\d{1,2} \w+ \d{4}\b/] if summary
-    design_decision_date = raw_date ? Date.parse(raw_date).strftime("%Y-%m-%d") : nil
+    design_decision_british_library_number = get_design_decision_british_library_number(title)
+    design_decision_date = get_design_decision_date(summary)
 
-    design_decision_litigants = body[/\|\s*.*?litigants.*?\s*\|\s*(.+?)\s*\|/i, 1] if body
-    officer_label =
-      body[/\|\s*.*?hearing\s*officer.*?\s*\|\s*(.+?)\s*\|/i, 1] ||
-      body[/\|\s*.*?appointed\s*person.*?\s*\|\s*(.+?)\s*\|/i, 1] if body
-    design_decision_hearing_officer = officer_label_to_value[officer_label]
-
-    start_index = body&.lines&.find_index { |line| line.match?(/^.*Every effort.*$/i) }
-    note_body = start_index ? body.lines[start_index..].join.strip : nil
+    design_decision_litigants = get_design_decision_litigants(body)
+    design_decision_hearing_officer = get_design_decision_hearing_officer(body)
+    note_body = get_note_body(body)
 
     required_fields = {
       "title" => title,
@@ -86,4 +75,38 @@ task :bulk_import_documents_from_csv, %i[csv_file_path] => :environment do |_, a
       puts "- Line #{row[:line]}: Missing #{row[:missing_fields].join(', ')} (Title: #{row[:title] || 'N/A'})"
     end
   end
+end
+
+def get_hearing_officer_mapping
+  schema_path = Rails.root.join("lib/documents/schemas/design_decisions.json")
+  schema = JSON.parse(File.read(schema_path))
+  officer_facet = schema["facets"].find { |f| f["key"] == "design_decision_hearing_officer" }
+  officer_facet["allowed_values"].to_h { |val| [val["label"], val["value"]] }
+end
+
+def get_design_decision_british_library_number(title)
+  title[/Design hearing decision:\s*(\S+)/i, 1] if title
+end
+
+def get_design_decision_date(summary)
+  raw_date = summary[/\b\d{1,2} \w+ \d{4}\b/] if summary
+  raw_date ? Date.parse(raw_date).strftime("%Y-%m-%d") : nil
+end
+
+def get_design_decision_litigants(body)
+  body[/\|\s*.*?litigants.*?\s*\|\s*(.+?)\s*\|/i, 1] if body
+end
+
+def get_design_decision_hearing_officer(body)
+  if body
+    officer_label =
+      body[/\|\s*.*?hearing\s*officer.*?\s*\|\s*(.+?)\s*\|/i, 1] ||
+      body[/\|\s*.*?appointed\s*person.*?\s*\|\s*(.+?)\s*\|/i, 1]
+  end
+  get_hearing_officer_mapping[officer_label]
+end
+
+def get_note_body(body)
+  start_index = body&.lines&.find_index { |line| line.match?(/^.*Every effort.*$/i) }
+  start_index ? body.lines[start_index..].join.strip : nil
 end

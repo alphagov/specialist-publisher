@@ -294,12 +294,12 @@ Every effort is made to ensure design hearing decisions have been accurately rec
   end
 
   it "maps hearing officer to schema value and skips invalid officers" do
-    CSV.open(csv_path, 'w') do |csv|
+    CSV.open(csv_path, "w") do |csv|
       csv << %w[title summary body attachment_title attachment_filename attachment_url attachment_created_at attachment_updated_at]
 
       # Valid officer
       csv << [
-        'Design hearing decision: O/1111/25',
+        "Design hearing decision: O/1111/25",
         '"Outcome of hearing held on 10 June 2025."',
         '"| **Litigants** | Test Ltd v Foo Ltd |
       | **Hearing Officer** | Arran Cooper |
@@ -307,12 +307,16 @@ Every effort is made to ensure design hearing decisions have been accurately rec
       ## Note
 
       Every effort is made to ensure..."',
-        "", "", "", "", ""
+        "",
+        "",
+        "",
+        "",
+        "",
       ]
 
       # Invalid officer
       csv << [
-        'Design hearing decision: O/2222/25',
+        "Design hearing decision: O/2222/25",
         '"Outcome of hearing held on 11 June 2025."',
         '"| **Litigants** | Test Ltd v Foo Ltd |
       | **Hearing Officer** | Invalid Officer |
@@ -320,12 +324,16 @@ Every effort is made to ensure design hearing decisions have been accurately rec
       ## Note
 
       Every effort is made to ensure..."',
-        "", "", "", "", ""
+        "",
+        "",
+        "",
+        "",
+        "",
       ]
     end
 
     expect(DesignDecision).to receive(:new).with(hash_including(
-                                                   design_decision_hearing_officer: "arran-cooper"
+                                                   design_decision_hearing_officer: "arran-cooper",
                                                  )).and_return(double(save: true))
 
     expect {
