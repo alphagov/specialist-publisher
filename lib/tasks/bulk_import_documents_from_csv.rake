@@ -1,12 +1,19 @@
 desc "Import design decisions from a CSV file and save them with optional attachments"
 
 task :bulk_import_documents_from_csv, %i[csv_file_path] => :environment do |_, args|
+  require "json"
+
   csv_file_path = args[:csv_file_path]
 
   unless File.exist?(csv_file_path)
     puts "CSV file not found"
     exit
   end
+
+  schema_path = Rails.root.join("lib/documents/schemas/design_decisions.json")
+  schema = JSON.parse(File.read(schema_path))
+  officer_facet = schema["facets"].find { |f| f["key"] == "design_decision_hearing_officer" }
+  officer_label_to_value = officer_facet["allowed_values"].to_h { |val| [val["label"], val["value"]] }
 
   imported_count = 0
   skipped_rows = []
@@ -21,11 +28,10 @@ task :bulk_import_documents_from_csv, %i[csv_file_path] => :environment do |_, a
     design_decision_date = raw_date ? Date.parse(raw_date).strftime("%Y-%m-%d") : nil
 
     design_decision_litigants = body[/\|\s*.*?litigants.*?\s*\|\s*(.+?)\s*\|/i, 1] if body
-    if body
-      design_decision_hearing_officer =
-        body[/\|\s*.*?hearing\s*officer.*?\s*\|\s*(.+?)\s*\|/i, 1] ||
-        body[/\|\s*.*?appointed\s*person.*?\s*\|\s*(.+?)\s*\|/i, 1]
-    end
+    officer_label =
+      body[/\|\s*.*?hearing\s*officer.*?\s*\|\s*(.+?)\s*\|/i, 1] ||
+      body[/\|\s*.*?appointed\s*person.*?\s*\|\s*(.+?)\s*\|/i, 1] if body
+    design_decision_hearing_officer = officer_label_to_value[officer_label]
 
     start_index = body&.lines&.find_index { |line| line.match?(/^.*Every effort.*$/i) }
     note_body = start_index ? body.lines[start_index..].join.strip : nil

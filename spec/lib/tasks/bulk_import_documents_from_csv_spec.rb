@@ -5,14 +5,14 @@ REQUIRED_FIELDS = {
   "summary" => "Outcome of hearing held on 15 July 2025.",
   "body_with_all" => <<~BODY,
     | **Litigants** | Some Company Ltd v Other Company Ltd |
-    | **Hearing Officer** | Jane Doe |
+    | **Hearing Officer** | Martin Howe |
 
     ## Note
 
     Every effort is made to ensure design hearing decisions are correct.
   BODY
   "body_missing_litigants" => <<~BODY,
-    | **Hearing Officer** | Jane Doe |
+    | **Hearing Officer** | Martin Howe |
 
     ## Note
 
@@ -103,7 +103,7 @@ $A"',
       title: "Design hearing decision: O/0567/25",
       summary: "Outcome of request to invalidate, hearing held on 24 June 2025.",
       design_decision_litigants: "Caesar Commerce Ltd v Huizhou New Road Cosmetics Company Limited",
-      design_decision_hearing_officer: "Arran Cooper",
+      design_decision_hearing_officer: "arran-cooper",
       design_decision_british_library_number: "O/0567/25",
       design_decision_date: "2025-06-24",
       body: 'Every effort is made to ensure design hearing decisions have been accurately recorded, but some errors may have been introduced during conversion for the web.
@@ -139,7 +139,7 @@ $A',
         "Design hearing decision: O/1234/56",
         "Outcome of hearing held on 15 July 2025.",
         '| **Litigants** | Some Company Ltd v Other Company Ltd |
-| **Appointed Person** | Jane Doe |
+| **Appointed Person** | Martin Howe |
 Every effort is made to ensure...',
         nil,
         nil,
@@ -155,7 +155,7 @@ Every effort is made to ensure...',
     design_decision_double = double("DesignDecision", attachments: attachments_double, save: true)
 
     expect(DesignDecision).to receive(:new).with(
-      a_hash_including(design_decision_hearing_officer: "Jane Doe"),
+      a_hash_including(design_decision_hearing_officer: "martin-howe"),
     ).and_return(design_decision_double)
 
     task.execute(csv_file_path: csv_path.to_s)
@@ -177,7 +177,7 @@ Every effort is made to ensure...',
         "Design hearing decision: O/9999/88",
         "Outcome of hearing held on 10 August 2025.",
         '| **Litigants** | Example Ltd v Sample Ltd |
-| **Hearing Officer** | John Smith |
+| **Hearing Officer** | Martin Howe |
 
 ## Note
 
@@ -195,7 +195,7 @@ Every effort is made to ensure design hearing decisions have been accurately rec
       hash_including(
         title: "Design hearing decision: O/9999/88",
         design_decision_litigants: "Example Ltd v Sample Ltd",
-        design_decision_hearing_officer: "John Smith",
+        design_decision_hearing_officer: "martin-howe",
         design_decision_british_library_number: "O/9999/88",
         design_decision_date: "2025-08-10",
       ),
@@ -245,7 +245,7 @@ Every effort is made to ensure design hearing decisions have been accurately rec
       csv << [
         "Design hearing decision: O/1111/25",
         "Outcome of request, hearing held on 20 June 2025.",
-        "| **Litigants** | Alpha Ltd v Beta Ltd |\n| **Hearing Officer** | John Smith |\n\n## Note\nEvery effort is made...",
+        "| **Litigants** | Alpha Ltd v Beta Ltd |\n| **Hearing Officer** | Martin Howe |\n\n## Note\nEvery effort is made...",
         "",
         "",
         "",
@@ -269,7 +269,7 @@ Every effort is made to ensure design hearing decisions have been accurately rec
       csv << [
         nil,
         "Outcome of request, hearing held on 22 June 2025.",
-        "| **Litigants** | Epsilon Ltd v Zeta Ltd |\n| **Hearing Officer** | Jane Doe |\n\n## Note\nEvery effort is made...",
+        "| **Litigants** | Epsilon Ltd v Zeta Ltd |\n| **Hearing Officer** | Martin Howe |\n\n## Note\nEvery effort is made...",
         "",
         "",
         "",
@@ -284,5 +284,45 @@ Every effort is made to ensure design hearing decisions have been accurately rec
     expect {
       task.execute(csv_file_path: csv_path.to_s)
     }.to output(/Imported: 1 document\(s\).*Skipped: 2 row\(s\).*Line 3: Missing design_decision_hearing_officer.*Line 4: Missing title, design_decision_british_library_number/m).to_stdout
+  end
+
+  it "maps hearing officer to schema value and skips invalid officers" do
+    CSV.open(csv_path, 'w') do |csv|
+      csv << %w[title summary body attachment_title attachment_filename attachment_url attachment_created_at attachment_updated_at]
+
+      # Valid officer
+      csv << [
+        'Design hearing decision: O/1111/25',
+        '"Outcome of hearing held on 10 June 2025."',
+        '"| **Litigants** | Test Ltd v Foo Ltd |
+      | **Hearing Officer** | Arran Cooper |
+
+      ## Note
+
+      Every effort is made to ensure..."',
+        "", "", "", "", ""
+      ]
+
+      # Invalid officer
+      csv << [
+        'Design hearing decision: O/2222/25',
+        '"Outcome of hearing held on 11 June 2025."',
+        '"| **Litigants** | Test Ltd v Foo Ltd |
+      | **Hearing Officer** | Invalid Officer |
+
+      ## Note
+
+      Every effort is made to ensure..."',
+        "", "", "", "", ""
+      ]
+    end
+
+    expect(DesignDecision).to receive(:new).with(hash_including(
+                                                   design_decision_hearing_officer: "arran-cooper"
+                                                 )).and_return(double(save: true))
+
+    expect {
+      task.execute(csv_file_path: csv_path.to_s)
+    }.to output(/Imported: 1 document\(s\)\nSkipped: 1 row\(s\)\n\nSkipped row details:\n- Line 3: Missing design_decision_hearing_officer \(Title: Design hearing decision: O\/2222\/25\)/).to_stdout
   end
 end
