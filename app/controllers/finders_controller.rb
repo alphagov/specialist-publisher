@@ -87,7 +87,7 @@ private
       :show_table_of_contents,
       :document_title,
       :document_noun,
-      organisations: [],
+      organisations: %i[id _destroy],
       related: [],
     )
   end
@@ -128,6 +128,14 @@ private
   def overwrite_with_metadata_params(proposed_schema)
     email_alert = EmailAlert.from_finder_admin_form_params(email_alert_params)
     params_to_overwrite = metadata_params.merge!(email_alert.to_finder_schema_attributes)
+
+    if metadata_params[:organisations]
+      params_to_overwrite[:organisations] = metadata_params[:organisations]
+        .reject { |index| metadata_params[:organisations][index.to_s][:_destroy] == "1" }
+        .transform_values { |organisation_params| organisation_params[:id] }
+        .values
+    end
+
     proposed_schema.update(params_to_overwrite.to_unsafe_h)
 
     if params[:document_title] && proposed_schema.filter.blank?

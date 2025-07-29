@@ -71,7 +71,7 @@ class FinderSchema
   end
 
   def remove_empty_organisations
-    organisations.reject!(&:blank?)
+    organisations&.reject!(&:blank?)
   end
 
   def remove_empty_related_links
