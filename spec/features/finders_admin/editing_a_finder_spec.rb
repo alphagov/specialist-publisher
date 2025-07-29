@@ -29,7 +29,7 @@ RSpec.feature "Editing a finder", type: :feature do
 
     fill_in "name", with: "Changed title"
     fill_in "base_path", with: "Changed slug"
-    select = page.find("select#organisations")
+    select = page.find("select#organisations_1")
     select.select "Some other org"
     fill_in "description", with: "Changed description"
     fill_in "summary", with: "Changed summary"
@@ -44,7 +44,7 @@ RSpec.feature "Editing a finder", type: :feature do
 
     expect(page.find(".govuk-summary-list__row", text: "Title of the finder")).to have_selector("dt", text: "Changed title")
     expect(page.find(".govuk-summary-list__row", text: "Slug or URL")).to have_selector("dt", text: "Changed slug")
-    expect(page.find(".govuk-summary-list__row", text: "Organisations the finder should be attached to")).to have_selector("dt", text: "Competition and Markets Authority,Some other org")
+    expect(page.find(".govuk-summary-list__row", text: "Organisations the finder should be attached to")).to have_selector("dt", text: "Some other org")
     expect(page.find(".govuk-summary-list__row", text: "Short description (For search engines)")).to have_selector("dt", text: "Changed description")
     expect(page.find(".govuk-summary-list__row", text: "Summary of the finder (Longer description shown below title)")).to have_selector("dt", text: "Changed summary")
     expect(page.find(".govuk-summary-list__row", text: "Any related links on GOV.UK?")).to have_selector("dt", text: "Yes\nLink 1: Changed link 1\nLink 2: Changed link 2\nLink 3: Changed link 3")
@@ -65,9 +65,9 @@ RSpec.feature "Editing a finder", type: :feature do
 
     fill_in "name", with: ""
     fill_in "base_path", with: ""
-    select = page.find("select#organisations")
-    select.unselect "Competition and Markets Authority"
-    select.unselect "Some other org"
+    within "div[data-fieldset-legend=\"Organisation\"]" do
+      first(".js-add-another__destroy-checkbox").check
+    end
     fill_in "description", with: ""
     fill_in "summary", with: ""
     fill_in "Link 1", with: ""
@@ -103,6 +103,34 @@ RSpec.feature "Editing a finder", type: :feature do
     click_button "Submit changes"
     hidden_input = find("[name=proposed_schema]", visible: false)
     expect(hidden_input.value).to eq(JSON.pretty_generate(JSON.parse(CmaCase.finder_schema.to_json)))
+  end
+
+  scenario "the generated schema values for the organisations attribute is sorted by the order in which the user selected them" do
+    visit "finders/cma-cases/metadata"
+
+    within "div[data-fieldset-legend=\"Organisation\"]" do
+      find("select#organisations_1").select "Some other org"
+      find("select#organisations_2").select "Competition and Markets Authority"
+    end
+
+    click_button "Submit changes"
+    schema_input = find("[name=proposed_schema]", visible: false)
+    schema_organisations = JSON.parse(schema_input.value)["organisations"]
+    expect(schema_organisations).to eq([organisations[1]["content_id"], organisations[0]["content_id"]])
+  end
+
+  scenario "the organisations can be deleted" do
+    visit "finders/cma-cases/metadata"
+
+    within "div[data-fieldset-legend=\"Organisation\"]" do
+      find("select#organisations_2").select "Some other org"
+      first(".js-add-another__destroy-checkbox").check
+    end
+
+    click_button "Submit changes"
+    schema_input = find("[name=proposed_schema]", visible: false)
+    schema_organisations = JSON.parse(schema_input.value)["organisations"]
+    expect(schema_organisations).to eq([organisations[1]["content_id"]])
   end
 
   scenario "unchecking 'Any related links on GOV.UK?' removes related links" do
