@@ -74,37 +74,4 @@ RSpec.describe "publishing_api rake tasks", type: :task do
       end
     end
   end
-
-  describe "publishing_api:patch_document_type_links" do
-    let(:cma_cases) { FactoryBot.create_list(:cma_case, 10) }
-
-    before(:each) do
-      Rake::Task["publishing_api:patch_document_type_links"].reenable
-      stub_any_publishing_api_patch_links
-      stub_publishing_api_has_content(cma_cases, hash_including(document_type: CmaCase.document_type))
-    end
-
-    it "patches links for all CMA cases" do
-      message = %r{Links patched for #{cma_cases.count} cma_case documents}
-
-      expect {
-        Rake::Task["publishing_api:patch_document_type_links"].invoke("cma_case")
-      }.to output(message).to_stdout
-
-      cma_cases.each do |cma_case|
-        assert_publishing_api_patch_links(cma_case["content_id"])
-      end
-    end
-  end
-
-  describe "publishing_api:publish_finder_and_patch_documents_links" do
-    let(:cma_cases) { [FactoryBot.create(:cma_case)] }
-
-    it "publishes a finder and patches document type links by delegating to tasks" do
-      expect(Rake::Task["publishing_api:publish_finder"]).to receive(:invoke).with("cma_cases")
-      expect(Rake::Task["publishing_api:patch_document_type_links"]).to receive(:invoke).with("cma_case")
-
-      Rake::Task["publishing_api:publish_finder_and_patch_documents_links"].invoke("cma_cases")
-    end
-  end
 end
