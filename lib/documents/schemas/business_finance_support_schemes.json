@@ -266,11 +266,12 @@
     "3d582854-ffc7-4d41-9266-ee87b9e6d230",
     "89edffd2-3046-40bd-810c-cc1a13c05b6a"
   ],
-  "show_table_of_contents": true,
-  "show_metadata_block": true,
   "show_summaries": true,
+  "show_metadata_block": true,
+  "show_table_of_contents": true,
   "signup_content_id": "32e87f32-8e37-4186-bc0c-fbed4c0f0239",
   "subscription_list_title_prefix": "Business finance support schemes",
+  "summary": "[Find free, local support on Business.gov.uk](https://www.business.gov.uk)",
   "target_stack": "live",
   "taxons": [
     "ccfc50f5-e193-4dac-9d78-50b3a8bb24c5"
