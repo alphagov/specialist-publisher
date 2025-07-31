@@ -9,6 +9,27 @@
     {
       "allowed_values": [
         {
+          "label": "Countryside Stewardship Higher Tier",
+          "value": "countryside-stewardship-higher-tier"
+        },
+        {
+          "label": "Sustainable Farming Incentive",
+          "value": "sustainable-farming-incentive"
+        }
+      ],
+      "display_as_result_metadata": true,
+      "filterable": true,
+      "key": "farming_grant_type",
+      "name": "Grant type",
+      "preposition": "of type",
+      "specialist_publisher_properties": {
+        "select": "one"
+      },
+      "type": "text"
+    },
+    {
+      "allowed_values": [
+        {
           "label": "Arable",
           "value": "arable"
         },
@@ -45,14 +66,18 @@
           "value": "wetland"
         },
         {
-          "label": "Woodland",
+          "label": "Woodland and forest",
           "value": "woodland"
+        },
+        {
+          "label": "Wood pasture",
+          "value": "wood-pasture"
         }
       ],
       "display_as_result_metadata": true,
       "filterable": true,
       "key": "land_types",
-      "name": "Land types",
+      "name": "Land type",
       "preposition": "for",
       "specialist_publisher_properties": {
         "select": "multiple"
@@ -62,40 +87,32 @@
     {
       "allowed_values": [
         {
+          "label": "Access",
+          "value": "access"
+        },
+        {
           "label": "Agroforestry",
           "value": "agroforestry"
         },
         {
-          "label": "Air quality",
-          "value": "air-quality"
+          "label": "Biodiversity",
+          "value": "biodiversity"
         },
         {
-          "label": "Boundaries",
+          "label": "Buffer strips",
+          "value": "buffer-strips"
+        },
+        {
+          "label": "Field boundaries",
           "value": "boundaries"
         },
         {
-          "label": "Crops",
-          "value": "crops"
-        },
-        {
-          "label": "Equipment and machinery",
-          "value": "equipment-and-machinery"
-        },
-        {
-          "label": "Flood risk",
+          "label": "Flood prevention",
           "value": "flood-risk"
         },
         {
-          "label": "Forestry",
-          "value": "forestry"
-        },
-        {
-          "label": "Hedgerows",
-          "value": "hedgerows"
-        },
-        {
-          "label": "Historic environment",
-          "value": "historic-environment"
+          "label": "Historic and archaeological features",
+          "value": "historic-and-archaeological-features"
         },
         {
           "label": "Horticulture",
@@ -106,16 +123,12 @@
           "value": "integrated-pest-management"
         },
         {
-          "label": "Land features and archaeological features",
-          "value": "land-features-and-archaeological-features"
-        },
-        {
           "label": "Livestock management",
           "value": "livestock-management"
         },
         {
-          "label": "Nutrient, manure and slurry management",
-          "value": "nutrient-manure-and-slurry-management"
+          "label": "Orchards",
+          "value": "orchards"
         },
         {
           "label": "Organic",
@@ -126,24 +139,20 @@
           "value": "peat"
         },
         {
-          "label": "Pollinators and wildlife",
+          "label": "Pollinators",
           "value": "pollinators-and-wildlife"
         },
         {
-          "label": "Precision farming",
+          "label": "Precision farming, equipment and machinery",
           "value": "precision-farming"
         },
         {
-          "label": "Priority habitats",
-          "value": "priority-habitats"
-        },
-        {
-          "label": "Public access and education",
-          "value": "public-access-and-education"
-        },
-        {
-          "label": "Soil",
+          "label": "Soil health",
           "value": "soil"
+        },
+        {
+          "label": "Species recovery and management",
+          "value": "species-recovery-and-management"
         },
         {
           "label": "Trees",
@@ -160,6 +169,10 @@
         {
           "label": "Water quality",
           "value": "water-quality"
+        },
+        {
+          "label": "Wildlife",
+          "value": "wildlife"
         }
       ],
       "display_as_result_metadata": true,
@@ -169,30 +182,6 @@
       "preposition": "with",
       "specialist_publisher_properties": {
         "select": "multiple"
-      },
-      "type": "text"
-    },
-    {
-      "allowed_values": [
-        {
-          "label": "Capital",
-          "value": "capital"
-        },
-        {
-          "label": "Revenue",
-          "value": "revenue"
-        }
-      ],
-      "display_as_result_metadata": true,
-      "filterable": true,
-      "key": "payment_types",
-      "name": "Payment types",
-      "preposition": "payment type",
-      "specialist_publisher_properties": {
-        "select": "multiple",
-        "validations": {
-          "required": {}
-        }
       },
       "type": "text"
     }
@@ -206,9 +195,9 @@
     "e8fae147-6232-4163-a3f1-1c15b755a8a4"
   ],
   "phase": "beta",
-  "show_table_of_contents": true,
-  "show_metadata_block": true,
   "show_summaries": true,
+  "show_metadata_block": true,
+  "show_table_of_contents": true,
   "signup_content_id": "2cd12e92-3b68-4cb1-bafe-fde6a7939afb",
   "subscription_list_title_prefix": "Funding for land or farms",
   "summary": "Find out about grants and funding for farmers and land managers in England. <br>We will add more grants and funding as we develop this tool.\r\n\r\nSearch by keyword, action name or code if you know it. Use the filters to search by land types or areas of interest.",
