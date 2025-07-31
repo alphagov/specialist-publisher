@@ -108,8 +108,8 @@
       "display_as_result_metadata": false,
       "filterable": true,
       "key": "land_use",
-      "name": "Land use",
-      "preposition": "for",
+      "name": "Areas of interest",
+      "preposition": "with",
       "specialist_publisher_properties": {
         "select": "multiple"
       },
@@ -129,7 +129,7 @@
   ],
   "show_metadata_block": true,
   "show_table_of_contents": true,
-  "summary": "Search for capital items and their supplements to include in your capital grant application. Read the [relevant capital grants scheme guidance](https://www.gov.uk/government/collections/capital-items-guidance-for-applicants-and-agreement-holders) to check if you're eligible and how to apply.",
+  "summary": "Use this tool to search for funded capital items and their supplements.\r\n\r\nUse the [Find funding for land or farms](https://www.gov.uk/find-funding-for-land-or-farms) tool to search for funded actions and their supplements.",
   "target_stack": "live",
   "taxons": [
     "9129d716-365b-44ba-9856-383423fe1e41"
