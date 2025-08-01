@@ -4,11 +4,6 @@ namespace :ops do
     OpsTasks.discard(args.content_id, args.locale)
   end
 
-  desc "Send an email for document"
-  task :email, %i[content_id locale] => :environment do |_, args|
-    OpsTasks.email(args.content_id, locale)
-  end
-
   desc "Set the public_updated_at for a published document"
   task :set_public_updated_at, %i[content_id locale timestamp] => :environment do |_, args|
     OpsTasks.set_public_updated_at(args.content_id, args.locale, args.timestamp)
