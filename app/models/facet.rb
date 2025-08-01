@@ -53,7 +53,11 @@ class Facet
   private
 
     def facet_key(key, name)
-      key.presence || name&.gsub(" ", "")&.underscore
+      key.presence || name&.gsub(" ", "_")
+        &.gsub("&", "and")
+        &.gsub(/[^a-zA-Z0-9_]/, "") # remove special chars
+        &.sub(/^_+/, '')&.sub(/_+$/, "") # remove leading or trailing underscores
+        &.downcase
     end
 
     def nil_if_blank(str)

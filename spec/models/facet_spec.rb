@@ -26,9 +26,15 @@ RSpec.describe "Facet" do
     end
 
     it "derives the key from the name if no key provided" do
-      params = { "name" => "Foo Bar Baz" }
+      params = { "name" => "Foo bar & baz" }
       facet = Facet.from_finder_admin_form_params(params)
-      expect(facet.key).to eq("foo_bar_baz")
+      expect(facet.key).to eq("foo_bar_and_baz")
+    end
+
+    it "strips out any special characters" do
+      params = { "name" => "O'Shaunnessey, Filley & Partners ©" }
+      facet = Facet.from_finder_admin_form_params(params)
+      expect(facet.key).to eq("oshaunnessey_filley_and_partners")
     end
 
     it "returns nil for 'short_name' if not provided/blank" do
