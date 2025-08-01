@@ -35,7 +35,7 @@ class Facet
   class << self
     def from_finder_admin_form_params(params)
       facet = new
-      facet.key = facet_key(params["key"], params["name"])
+      facet.key = params["key"] || str_to_key(params["name"], separator: "_")
       facet.name = params["name"]
       facet.short_name = nil_if_blank(params["short_name"])
       facet.type = facet_type(params["type"])
@@ -45,18 +45,22 @@ class Facet
       facet.allowed_values = facet_allowed_values(params["allowed_values"], params["type"])
       facet.specialist_publisher_properties = facet_specialist_publisher_properties(params["type"], params["validations"])
       facet.show_option_select_filter = nil_if_false(params["show_option_select_filter"])
-      facet.sub_facet_name = extract_label_and_value(params["sub_facet"], "_").first if params["sub_facet"].present?
-      facet.sub_facet_key = facet_key(extract_label_and_value(params["sub_facet"], "_").last, facet.sub_facet_name) if params["sub_facet"].present?
+      facet.sub_facet_name = extract_label(params["sub_facet"]) if params["sub_facet"].present?
+      facet.sub_facet_key = extract_value(params["sub_facet"]) || str_to_key(facet.sub_facet_name, separator: "-") if params["sub_facet"].present?
       facet
     end
 
   private
 
-    def facet_key(key, name)
-      key.presence || name&.gsub(" ", "_")
-        &.gsub("&", "and")
-        &.gsub(/[^a-zA-Z0-9_]/, "") # remove special chars
-        &.sub(/^_+/, '')&.sub(/_+$/, "") # remove leading or trailing underscores
+    def str_to_key(str, separator:)
+      return nil unless str
+
+      str.strip
+        .gsub(" ", separator)
+        .gsub("&", "and")
+        .gsub(/[^a-zA-Z0-9_-]/, "") # remove special chars
+        .delete_prefix("_")
+        .delete_suffix("_")
         &.downcase
     end
 
@@ -93,10 +97,12 @@ class Facet
         next if line.blank?
 
         if line.start_with?("- ")
-          label, value = extract_label_and_value(line[2..], "-")
+          label = extract_label(line[2..])
+          value = extract_value(line[2..])
           current_main[:sub_facets] << { label:, value: } if current_main
         else
-          label, value = extract_label_and_value(line, "-")
+          label = extract_label(line)
+          value = extract_value(line)
           current_main = { label:, value:, sub_facets: [] }
           result << current_main
         end
@@ -105,13 +111,16 @@ class Facet
       result.each { |value| value.delete(:sub_facets) if value[:sub_facets].blank? }
     end
 
-    def extract_label_and_value(str, gsub_character)
+    def extract_label(str)
       label = str.match(/^(.+){/)
-      label = label.nil? ? str.strip : label[1].strip
-      value = str.truncate(500, omission: "}").match(/{(.+)}/)
-      value = value.nil? ? str.strip.downcase.gsub(/[^\w\d\s]/, "").gsub(/\s/u, gsub_character) : value[1].strip
+      label.nil? ? str.strip : label[1].strip
+    end
 
-      [label, value]
+    def extract_value(str)
+      str = str.to_s[0, 500] # hard truncate
+      str << "}" unless str.end_with?("}")
+      value = str.match(/{([^{}]*)}/)
+      value.nil? ? str_to_key(str, separator: "-") : value[1].strip
     end
 
     def facet_specialist_publisher_properties(type, validations)
