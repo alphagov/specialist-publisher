@@ -35,10 +35,10 @@ RSpec.describe DocumentListExportWorker do
 
     it "fetches every document of the supplied type and turns them into csv" do
       stub_finding_documents(documents)
+      stubbed_presenter = double(DocumentExportPresenter, header_row: [], parse_document: {})
+      allow(DocumentExportPresenter).to receive(:new).and_return(stubbed_presenter)
       documents.each do |document|
-        csv_presenter = double(BusinessFinanceSupportSchemeExportPresenter)
-        expect(BusinessFinanceSupportSchemeExportPresenter).to receive(:new).with(document).and_return(csv_presenter)
-        expect(csv_presenter).to receive(:row).and_return []
+        expect(stubbed_presenter).to receive(:parse_document).with(document).and_return []
       end
       allow(subject).to receive(:send_mail)
       subject.perform(BusinessFinanceSupportScheme.admin_slug, user.id, nil)

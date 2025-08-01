@@ -5,10 +5,6 @@ RSpec.describe StatutoryInstrument do
   let(:payload) { FactoryBot.create(:statutory_instrument) }
   include_examples "it saves payloads that are valid against the 'specialist_document' schema"
 
-  it "is not exportable" do
-    expect(described_class).not_to be_exportable
-  end
-
   describe "sift_end_date" do
     subject(:instance) do
       StatutoryInstrument.new(body: "", sift_end_date: "2016-01-01", sifting_status: "withdrawn")

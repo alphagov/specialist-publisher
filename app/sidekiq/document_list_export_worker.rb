@@ -41,17 +41,12 @@ private
     NotificationsMailer.document_list(url, user, format, query).deliver_now
   end
 
-  def fetch_exporter(format)
-    DocumentExportPresenter.for(format)
-  end
-
   def generate_csv(format, query)
-    exporter = fetch_exporter(format)
+    exporter = DocumentExportPresenter.new(format)
     CSV.generate do |csv|
       csv << exporter.header_row
       AllDocumentsFinder.find_each(format, query:) do |edition|
-        presenter = exporter.new(edition)
-        csv << presenter.row
+        csv << exporter.parse_document(edition)
       end
     end
   end
