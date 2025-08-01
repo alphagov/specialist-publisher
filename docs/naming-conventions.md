@@ -11,7 +11,9 @@ The files typically required to create a finder follow these conventions. Except
 - The model name dictates the `document_type` that gets sent to Publishing API. It must not be changed once set.
 
 ## View
-- Pluralised name of the document type, e.g. `_cma_cases.html.erb`.
+No custom view for new finders - we use the shared view instead.
+
+Some legacy finders have their own view.
 
 ## Downstream
 
