@@ -49,6 +49,20 @@ en:
         veterans_support_organisation_region_scotland: Region in Scotland
     errors:
       models:
+        armed_forces_covenant_business:
+          attributes:
+            armed_forces_covenant_business_pledged:
+              blank: Pledged can't be blank
+            armed_forces_covenant_business_region:
+              blank: Region can't be blank
+            armed_forces_covenant_business_company_size:
+              blank: Company size can't be blank
+            armed_forces_covenant_business_industry:
+              blank: Industry can't be blank
+            armed_forces_covenant_business_ownership:
+              blank: Ownership can't be blank
+            armed_forces_covenant_business_date_signed:
+              blank: Date signed can't be blank
         licence_transaction:
           attributes:
             title:
