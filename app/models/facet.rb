@@ -117,7 +117,9 @@ class Facet
     end
 
     def extract_value(str)
-      value = str.truncate(500, omission: "}").match(/{(.*?)}/)
+      str = str.to_s[0, 500] # hard truncate
+      str << "}" unless str.end_with?("}")
+      value = str.match(/{([^{}]*)}/)
       value.nil? ? str_to_key(str, separator: "-") : value[1].strip
     end
 
