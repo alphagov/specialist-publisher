@@ -216,6 +216,22 @@ FactoryBot.define do
     end
   end
 
+  factory :armed_forces_covenant_business, parent: :document do
+    base_path { "/armed-forces-corporate-covenant-signed-pledges/example-business" }
+    document_type { "armed_forces_covenant_business" }
+
+    transient do
+      default_metadata do
+        {
+          "region" => "yorkshire-and-the-humber",
+          "company_size" => "medium",
+          "industry" => "consulting",
+          "date_signed" => "2025-08-01",
+        }
+      end
+    end
+  end
+
   factory :hmrc_contact, parent: :document do
     base_path { "/find-hmrc-contacts/example-document" }
     document_type { "hmrc_contact" }
