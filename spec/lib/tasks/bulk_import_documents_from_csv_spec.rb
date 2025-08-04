@@ -286,4 +286,46 @@ Every effort is made to ensure design hearing decisions have been accurately rec
       task.execute(csv_file_path: csv_path.to_s, dry_run: true)
     }.to output(/\[DRY RUN\] Imported: 1 document\(s\).*Skipped: 2 row\(s\).*Line 3: Missing design_decision_hearing_officer.*Line 4: Missing title, design_decision_british_library_number/m).to_stdout
   end
+
+  it "uses an optional mapping CSV for hearing officers" do
+    mapping_csv_path = "mapping_file.csv"
+    allow(File).to receive(:exist?).with(mapping_csv_path).and_return(true)
+    mapping_data = [
+      { "label" => "Mr Martin Howe KC", "value" => "martin-howe" },
+      { "label" => "A Cooper", "value" => "arran-cooper" },
+    ]
+    allow(CSV).to receive(:foreach).with(mapping_csv_path, headers: true) do |&block|
+      mapping_data.each { |row| block.call(row) }
+    end
+    csv_data = [
+      {
+        "title" => "Design hearing decision: O/0567/25",
+        "summary" => '"Outcome of request to invalidate, hearing held on 24 June 2025."',
+        "body" => '"| **Litigants** | Caesar Commerce Ltd v Huizhou New Road Cosmetics Company Limited |
+| **Hearing Officer** | A Cooper |
+
+## Note
+
+Every effort is made to ensure design hearing decisions have been accurately recorded"',
+        "attachment_title" => "Design Decision O/0567/25",
+        "attachment_filename" => "o056725.pdf",
+        "attachment_url" => "http://asset-manager.dev.gov.uk/media/685d5038f85b4b993fd752dd/o056725.pdf",
+        "attachment_created_at" => "2025-06-26 14:50:48 +0100",
+        "attachment_updated_at" => "2025-06-26 14:50:48 +0100",
+      },
+    ]
+    allow(CSV).to receive(:foreach).with(csv_path, headers: true).and_return(csv_data.each)
+    attachments_double = double("attachments")
+    design_decision_double = instance_double(
+      DesignDecision,
+      attachments: attachments_double,
+      save: true,
+    )
+    allow(attachments_double).to receive(:build)
+    expect(DesignDecision).to receive(:new).with(
+      hash_including(design_decision_hearing_officer: "arran-cooper"),
+    ).and_return(design_decision_double)
+
+    task.execute(csv_file_path: csv_path.to_s, mapping_file_path: mapping_csv_path)
+  end
 end

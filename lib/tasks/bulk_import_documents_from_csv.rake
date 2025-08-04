@@ -1,7 +1,8 @@
 desc "Import design decisions from a CSV file and save them with optional attachments"
 
-task :bulk_import_documents_from_csv, %i[csv_file_path dry_run] => :environment do |_, args|
+task :bulk_import_documents_from_csv, %i[csv_file_path mapping_file_path dry_run] => :environment do |_, args|
   csv_file_path = args[:csv_file_path]
+  mapping_file_path = args[:mapping_file_path]
   dry_run = args[:dry_run].to_s.downcase == "true"
 
   unless File.exist?(csv_file_path)
@@ -9,7 +10,7 @@ task :bulk_import_documents_from_csv, %i[csv_file_path dry_run] => :environment 
     exit
   end
 
-  hearing_officer_allowed_values = get_hearing_officer_allowed_values
+  hearing_officers = get_hearing_officers_from_schema.merge(get_hearing_officers_from_csv(mapping_file_path))
   imported_count = 0
   invalid_rows = []
 
@@ -20,7 +21,7 @@ task :bulk_import_documents_from_csv, %i[csv_file_path dry_run] => :environment 
     summary = row["summary"]&.delete('"')
     body = row["body"]&.delete('"')
     design_decision_litigants = get_design_decision_litigants(body)
-    design_decision_hearing_officer = get_design_decision_hearing_officer(body, hearing_officer_allowed_values)
+    design_decision_hearing_officer = get_design_decision_hearing_officer(body, hearing_officers)
     design_decision_british_library_number = get_design_decision_british_library_number(title)
     design_decision_date = get_design_decision_date(summary)
     note_body = get_note_body(body)
@@ -71,27 +72,29 @@ task :bulk_import_documents_from_csv, %i[csv_file_path dry_run] => :environment 
   report_import_result(imported_count, invalid_rows, dry_run)
 end
 
-def get_hearing_officer_allowed_values
+def get_hearing_officers_from_schema
   FinderSchema.load_from_schema("design_decisions")
               .allowed_values_for("design_decision_hearing_officer")
               .to_h { |val| [val.fetch("label"), val.fetch("value")] }
 end
 
-def get_humanised_hearing_officer(body)
-  if body
-    hearing_officer_line = body.lines.find { |line| line.match?(/Hearing Officer|Appointed Person/i) }
-
-    if hearing_officer_line
-      cleaned_line = hearing_officer_line.gsub(/<[^>]+>|\*\*/, "")
-      match = cleaned_line.match(/\|?\s*(?:Hearing Officer|Appointed Person)\s*\|\s*(.+?)(?:\||$)/i)
-      match[1].strip if match
+def get_hearing_officers_from_csv(mapping_file_path)
+  custom_officer_mapping = {}
+  if mapping_file_path.present? && File.exist?(mapping_file_path)
+    CSV.foreach(mapping_file_path, headers: true) do |row|
+      custom_officer_mapping[row["label"]] = row["value"]
     end
   end
+  custom_officer_mapping
 end
 
 def get_design_decision_hearing_officer(body, hearing_officers)
-  humanised_hearing_officer = get_humanised_hearing_officer(body)&.strip
-  hearing_officers.fetch(humanised_hearing_officer, nil)
+  if body
+    officer_label =
+      body[/\|\s*.*?hearing\s*officer.*?\s*\|\s*(.+?)\s*\|/im, 1] ||
+      body[/\|\s*.*?appointed\s*person.*?\s*\|\s*(.+?)\s*\|/im, 1]
+  end
+  hearing_officers.fetch(officer_label, nil)
 end
 
 def design_decision_has_attachment?(row)
