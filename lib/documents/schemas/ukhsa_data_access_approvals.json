@@ -646,5 +646,5 @@
   "show_summaries": true,
   "show_metadata_block": true,
   "summary": "The Data Access Approvals Register sets out the organisations that the UK Health Security Agency (UKHSA) which have been approved to access data for specific secondary purposes, such as research, service evaluation, clinical audit, or surveillance. Access to UKHSA protected data is granted in line with the conditions and safeguards defined in the UKHSA's Data Access Approval Standards, ensuring data is used responsibly and securely. The register helps maintain transparency and accountability by providing a clear record of who has been granted permission to use UKHSA data.",
-  "target_stack": "draft"
+  "target_stack": "live"
 }
