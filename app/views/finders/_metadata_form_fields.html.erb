@@ -22,8 +22,37 @@
   hint: "Example: /animal-disease-cases-england"
 } %>
 
-<%= render FacetInputComponent::OrganisationMultiSelectWithSearchComponent.new(schema, nil, :organisations, "Organisations the finder should be attached to") %>
-
+<%= render "govuk_publishing_components/components/fieldset", {
+  legend_text: "Organisations the finder should be attached to",
+  heading_level: 2,
+  heading_size: "m",
+  margin_bottom: 6,
+} do %>
+  <%= render "govuk_publishing_components/components/add_another", {
+    fieldset_legend: "Organisation",
+    add_button_text: "Add another organisation",
+    items: schema.organisations.each_with_index.map do |organisation_content_id, index|
+      {
+        fields: render("govuk_publishing_components/components/select_with_search", {
+          label: "Select an organisation",
+          heading_size: "m",
+          id: "organisations_#{index + 1}",
+          name: "organisations[#{index}][id]",
+          options: organisation_single_select_options(organisation_content_id),
+        }),
+        destroy_checkbox: render("govuk_publishing_components/components/checkboxes", { name: "organisations[#{index}][_destroy]", items: [{label: "Delete", value: "1" }]})
+      }
+    end,
+    empty: render("govuk_publishing_components/components/select_with_search", {
+      label: "Select an organisation",
+      heading_size: "m",
+      id: "organisations_#{schema.organisations.length + 1}",
+      name: "organisations[#{schema.organisations.length}][id]",
+      options: organisation_single_select_options(nil),
+      include_blank: true,
+    }),
+  } %>
+<% end %>
 
 <%= render "govuk_publishing_components/components/textarea", {
   label: {
