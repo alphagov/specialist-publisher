@@ -211,4 +211,79 @@ Every effort is made to ensure design hearing decisions have been accurately rec
       }.to raise_error(StandardError, "CSV import failed: 1 row(s) have missing required fields.")
     end
   end
+
+  it "does not save documents in dry run mode" do
+    csv_data = [
+      {
+        "title" => "Design hearing decision: O/0567/25",
+        "summary" => '"Outcome of request to invalidate, hearing held on 24 June 2025."',
+        "body" => '"| **Litigants** | Caesar Commerce Ltd v Huizhou New Road Cosmetics Company Limited |
+| **Hearing Officer** | Arran Cooper |
+
+## Note
+
+Every effort is made to ensure design hearing decisions have been accurately recorded"',
+        "attachment_title" => "Design Decision O/0567/25",
+        "attachment_filename" => "o056725.pdf",
+        "attachment_url" => "http://asset-manager.dev.gov.uk/media/685d5038f85b4b993fd752dd/o056725.pdf",
+        "attachment_created_at" => "2025-06-26 14:50:48 +0100",
+        "attachment_updated_at" => "2025-06-26 14:50:48 +0100",
+      },
+    ]
+    allow(CSV).to receive(:foreach).with(csv_path, headers: true).and_return(csv_data.each)
+    attachments_double = double("attachments")
+    design_decision_double = instance_double(
+      DesignDecision,
+      attachments: attachments_double,
+    )
+    allow(attachments_double).to receive(:build)
+    allow(DesignDecision).to receive(:new).and_return(design_decision_double)
+    expect(design_decision_double).not_to receive(:save)
+
+    expect {
+      task.execute(csv_file_path: csv_path.to_s, dry_run: true)
+    }.to output(/\[DRY RUN\] Imported: 1 document\(s\)/).to_stdout
+  end
+
+  it "logs the details for invalid rows in dry run mode" do
+    csv_data = [
+      {
+        "title" => "Design hearing decision: O/1111/25",
+        "summary" => "Outcome of request, hearing held on 20 June 2025.",
+        "body" => "| **Litigants** | Alpha Ltd v Beta Ltd |\n| **Hearing Officer** | Martin Howe |\n\n## Note\nEvery effort is made...",
+        "attachment_title" => "",
+        "attachment_filename" => "",
+        "attachment_url" => "",
+        "attachment_created_at" => "",
+        "attachment_updated_at" => "",
+      },
+      {
+        "title" => "Design hearing decision: O/2222/25",
+        "summary" => "Outcome of request, hearing held on 21 June 2025.",
+        "body" => "| **Litigants** | Gamma Ltd v Delta Ltd |\n\n## Note\nEvery effort is made...",
+        "attachment_title" => "",
+        "attachment_filename" => "",
+        "attachment_url" => "",
+        "attachment_created_at" => "",
+        "attachment_updated_at" => "",
+      },
+      {
+        "title" => nil,
+        "summary" => "Outcome of request, hearing held on 22 June 2025.",
+        "body" => "| **Litigants** | Epsilon Ltd v Zeta Ltd |\n| **Hearing Officer** | Martin Howe |\n\n## Note\nEvery effort is made...",
+        "attachment_title" => "",
+        "attachment_filename" => "",
+        "attachment_url" => "",
+        "attachment_created_at" => "",
+        "attachment_updated_at" => "",
+      },
+    ]
+    allow(CSV).to receive(:foreach).with(csv_path, headers: true).and_return(csv_data.each)
+    design_decision_double = double(save: true)
+    expect(DesignDecision).to receive(:new).once.and_return(design_decision_double)
+
+    expect {
+      task.execute(csv_file_path: csv_path.to_s, dry_run: true)
+    }.to output(/\[DRY RUN\] Imported: 1 document\(s\).*Skipped: 2 row\(s\).*Line 3: Missing design_decision_hearing_officer.*Line 4: Missing title, design_decision_british_library_number/m).to_stdout
+  end
 end

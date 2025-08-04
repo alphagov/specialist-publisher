@@ -1,7 +1,8 @@
 desc "Import design decisions from a CSV file and save them with optional attachments"
 
-task :bulk_import_documents_from_csv, %i[csv_file_path] => :environment do |_, args|
+task :bulk_import_documents_from_csv, %i[csv_file_path dry_run] => :environment do |_, args|
   csv_file_path = args[:csv_file_path]
+  dry_run = args[:dry_run].to_s.downcase == "true"
 
   unless File.exist?(csv_file_path)
     puts "CSV file not found"
@@ -45,7 +46,7 @@ task :bulk_import_documents_from_csv, %i[csv_file_path] => :environment do |_, a
     end
   end
 
-  if invalid_rows.any?
+  if invalid_rows.any? && !dry_run
     raise StandardError, "CSV import failed: #{invalid_rows.count} row(s) have missing required fields."
   end
 
@@ -63,11 +64,11 @@ task :bulk_import_documents_from_csv, %i[csv_file_path] => :environment do |_, a
       )
     end
 
-    design_decision.save
+    design_decision.save unless dry_run
     imported_count += 1
   end
 
-  report_import_result(imported_count, invalid_rows)
+  report_import_result(imported_count, invalid_rows, dry_run)
 end
 
 def get_hearing_officer_allowed_values
@@ -115,8 +116,9 @@ def get_design_decision_date(summary)
   raw_date ? Date.parse(raw_date).strftime("%Y-%m-%d") : nil
 end
 
-def report_import_result(imported_count, skipped_rows)
-  puts "Imported: #{imported_count} document(s)"
+def report_import_result(imported_count, skipped_rows, dry_run)
+  dry_run_prefix = dry_run ? "[DRY RUN] " : ""
+  puts "#{dry_run_prefix}Imported: #{imported_count} document(s)"
   puts "Skipped: #{skipped_rows.count} row(s)"
 
   if skipped_rows.any?
