@@ -33,15 +33,6 @@ You can use the [GOV.UK Docker environment](https://github.com/alphagov/govuk-do
 
 **Use GOV.UK Docker to run any commands that follow.**
 
-### Before running the app
-
-You may find that you can't see any documents after replicating data. To fix
-this, you need to grant user permissions in this application:
-
-```bash
-bundle exec rake permissions:grant['Joanne Bloggs'] # Or whichever user you're logged in as.
-```
-
 ### Running the test suite
 
 ```
