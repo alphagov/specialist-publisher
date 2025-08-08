@@ -185,6 +185,39 @@ Every effort is made to ensure design hearing decisions have been accurately rec
     task.execute(csv_file_path: csv_path.to_s)
   end
 
+  it "reports on missing attachments and notes" do
+    csv_data = [
+      {
+        "title" => "Design hearing decision: O/9999/88",
+        "summary" => "Outcome of hearing held on 10 August 2025.",
+        "body" => '| **Litigants** | Example Ltd v Sample Ltd |
+| **Hearing Officer** | Martin Howe |',
+        "attachment_title" => nil,
+        "attachment_filename" => nil,
+        "attachment_url" => nil,
+        "attachment_created_at" => nil,
+        "attachment_updated_at" => nil,
+      },
+    ]
+    allow(CSV).to receive(:foreach).with(csv_path, headers: true).and_return(csv_data.each)
+    design_decision_double = instance_double("DesignDecision", attachments: [], save: true)
+    expect(DesignDecision).to receive(:new).with(
+      hash_including(
+        title: "Design hearing decision: O/9999/88",
+        design_decision_litigants: "Example Ltd v Sample Ltd",
+        design_decision_hearing_officer: "martin-howe",
+        design_decision_british_library_number: "O/9999/88",
+        design_decision_date: "2025-08-10",
+      ),
+    ).and_return(design_decision_double)
+    expect(design_decision_double.attachments).not_to receive(:build)
+    expect(design_decision_double).to receive(:save)
+
+    expect {
+      task.execute(csv_file_path: csv_path.to_s)
+    }.to output(/Imported: 1 document\(s\).*Skipped: 0 row\(s\).*Fix up: 1 row\(s\).*Fix up row details:.*Line 2: Fix up attachment, note/m).to_stdout
+  end
+
   {
     "title is missing" => nil,
     "summary is missing" => nil,

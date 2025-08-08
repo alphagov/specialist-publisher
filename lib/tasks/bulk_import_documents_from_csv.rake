@@ -13,6 +13,7 @@ task :bulk_import_documents_from_csv, %i[csv_file_path mapping_file_path dry_run
   hearing_officers = get_hearing_officers_from_schema.merge(get_hearing_officers_from_csv(mapping_file_path))
   imported_count = 0
   invalid_rows = []
+  fix_up_rows = []
 
   documents_to_import = []
 
@@ -29,7 +30,7 @@ task :bulk_import_documents_from_csv, %i[csv_file_path mapping_file_path dry_run
     required_fields = {
       "title" => title,
       "summary" => summary,
-      "body" => note_body,
+      "body" => note_body || "Missing note body",
       "design_decision_litigants" => design_decision_litigants,
       "design_decision_hearing_officer" => design_decision_hearing_officer,
       "design_decision_british_library_number" => design_decision_british_library_number,
@@ -43,6 +44,23 @@ task :bulk_import_documents_from_csv, %i[csv_file_path mapping_file_path dry_run
         title: title,
       }
     else
+      fixup_fields = []
+      unless design_decision_has_attachment?(row)
+        fixup_fields << "attachment"
+      end
+
+      unless note_body
+        fixup_fields << "note"
+      end
+
+      if fixup_fields.any?
+        fix_up_rows << {
+          line: line_number,
+          fixup_fields: fixup_fields,
+          title: title,
+        }
+      end
+
       documents_to_import << { row: row, attributes: required_fields }
     end
   end
@@ -69,7 +87,7 @@ task :bulk_import_documents_from_csv, %i[csv_file_path mapping_file_path dry_run
     imported_count += 1
   end
 
-  report_import_result(imported_count, invalid_rows, dry_run)
+  report_import_result(imported_count, invalid_rows, fix_up_rows, dry_run)
 end
 
 def get_hearing_officers_from_schema
@@ -119,15 +137,23 @@ def get_design_decision_date(summary)
   raw_date ? Date.parse(raw_date).strftime("%Y-%m-%d") : nil
 end
 
-def report_import_result(imported_count, skipped_rows, dry_run)
+def report_import_result(imported_count, skipped_rows, fix_up_rows, dry_run)
   dry_run_prefix = dry_run ? "[DRY RUN] " : ""
   puts "#{dry_run_prefix}Imported: #{imported_count} document(s)"
   puts "Skipped: #{skipped_rows.count} row(s)"
+  puts "Fix up: #{fix_up_rows.count} row(s)"
 
   if skipped_rows.any?
     puts "\nSkipped row details:"
     skipped_rows.each do |row|
       puts "- Line #{row[:line]}: Missing #{row[:missing_fields].join(', ')} (Title: #{row[:title] || 'N/A'})"
+    end
+  end
+
+  if fix_up_rows.any?
+    puts "\nFix up row details:"
+    fix_up_rows.each do |row|
+      puts "- Line #{row[:line]}: Fix up #{row[:fixup_fields].join(', ')} (Title: #{row[:title] || 'N/A'})"
     end
   end
 end
