@@ -37,6 +37,10 @@
           "value": "clare-boucher"
         },
         {
+          "label": "Heather Harrison",
+          "value": "heather-harrison"
+        },
+        {
           "label": "J Pike",
           "value": "j-pike"
         },
@@ -49,8 +53,16 @@
           "value": "leisa-davies"
         },
         {
+          "label": "Mark King",
+          "value": "mark-king"
+        },
+        {
           "label": "Martin Howe",
           "value": "martin-howe"
+        },
+        {
+          "label": "Matthew Williams",
+          "value": "matthew-williams"
         },
         {
           "label": "O Morris",
@@ -117,6 +129,6 @@
   ],
   "show_summaries": true,
   "show_metadata_block": true,
-  "summary": "Results of past design and design right hearing decisions issued since 2013. Decisions published between 1998 - 2020 are available on the <a href=\"https://webarchive.nationalarchives.gov.uk/ukgwa/20140603095013/http://www.ipo.gov.uk/pro-types/pro-design/d-decisions.htm\">National Archives</a>. Please note, no decisions were issued during 2003.\r\n\r\nYou can use the free search box below to search by decision number or British Library number.",
+  "summary": "Results of past design and design right hearing decisions issued since 2020. Decisions published between 1998 - 2020 are available on the <a href=\"https://webarchive.nationalarchives.gov.uk/ukgwa/20140603095013/http://www.ipo.gov.uk/pro-types/pro-design/d-decisions.htm\">National Archives</a>. Please note, no decisions were issued during 2003.\r\n\r\nYou can use the free search box below to search by decision number or British Library number.",
   "target_stack": "draft"
 }
