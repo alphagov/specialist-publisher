@@ -38,11 +38,13 @@ task :bulk_import_documents_from_csv, %i[csv_file_path mapping_file_path dry_run
     }
 
     if required_fields.values.any?(&:blank?)
-      invalid_rows << {
+      invalid_row = {
         line: line_number,
         missing_fields: required_fields.select { |_, v| v.blank? }.keys,
         title: title,
       }
+      invalid_row[:officer] = get_unchecked_officer_value(body) unless design_decision_hearing_officer
+      invalid_rows << invalid_row
     else
       fixup_fields = []
       unless design_decision_has_attachment?(row)
@@ -114,6 +116,10 @@ def get_design_decision_hearing_officer(body, hearing_officers)
   hearing_officers.fetch(officer_label, nil)
 end
 
+def get_unchecked_officer_value(body)
+  body[/\|\s*.*?hearing\s*officer.*?\s*\|\s*(.+?)\s*\|/im, 1] || body[/\|\s*.*?appointed\s*person.*?\s*\|\s*(.+?)\s*\|/im, 1]
+end
+
 def design_decision_has_attachment?(row)
   row["attachment_title"].present? && row["attachment_filename"].present? && row["attachment_url"].present?
 end
@@ -145,7 +151,7 @@ def report_import_result(imported_count, skipped_rows, fix_up_rows, dry_run)
   if skipped_rows.any?
     puts "\nSkipped row details:"
     skipped_rows.each do |row|
-      puts "- Line #{row[:line]}: Missing #{row[:missing_fields].join(', ')} (Title: #{row[:title] || 'N/A'})"
+      puts "- Line #{row[:line]}: Missing #{row[:missing_fields].join(', ')}#{row.key?(:officer) ? ", Officer: #{row[:officer]}" : "" }, (Title: #{row[:title] || 'N/A'})"
     end
   end
 
