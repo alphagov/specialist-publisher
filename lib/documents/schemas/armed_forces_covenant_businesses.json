@@ -1,0 +1,340 @@
+{
+  "base_path": "/armed-forces-corporate-covenant-signed-pledges",
+  "body_template": "# The Armed Forces Covenant\r\n\r\nAn Enduring Covenant Between The People of the United Kingdom Her Majesty's Government\r\n\r\nand\r\n\r\nAll those who serve or have served in the Armed Forces of the Crown And their Families\r\n\r\nThe first duty of Government is the defence of the realm. Our Armed Forces fulfil that responsibility on behalf of the Government, sacrificing some civilian freedoms, facing danger and, sometimes, suffering serious injury or death as a result of their duty. Families also play a vital role in supporting the operational effectiveness of our Armed Forces. In return, the whole nation has a moral obligation to the members of\r\nthe Naval Service, the Army and the Royal Air Force, together with their families. They deserve our respect and support, and fair treatment.\r\n\r\nThose who serve in the Armed Forces, whether Regular or Reserve, those who have served in the past, and their families, should face no disadvantage compared to other citizens in the provision of public and commercial services. Special consideration is appropriate in some cases, especially for those who have given most such as the injured and the bereaved.\r\n\r\nThis obligation involves the whole of society: it includes voluntary and charitable bodies, private organisations, and the actions of individuals in supporting the Armed Forces. Recognising those who have performed military duty unites the country and demonstrates the value of their contribution. This has no greater expression than in upholding this Covenant.\r\n\r\n## Section 1: Principles Of The Armed Forces Corporate Covenant\r\n\r\n### 1.1\r\n\r\nWe will endeavour in our business dealings to uphold the key principles of the Armed Forces Covenant, which are:\r\n\r\n- no member of the Armed Forces Community should face disadvantage in the provision of public and commercial services compared to any other citizen;\r\n- and in some circumstances that special treatment may be appropriate especially for the injured or bereaved.\r\n\r\n## Section 2: Demonstrating our Commitment\r\n\r\n### 2.1\r\n\r\nWe recognise the value serving personnel, reservists, veterans and military families bring to our business. We will seek to uphold the principles of the Armed Forces Covenant, by:\r\n\r\n- promoting the fact that we are an armed forces-friendly organisation; \r\n- seeking to support the employment of veterans young and old;\r\n- striving to support the employment of Service spouses and partners;\r\n- endeavouring to offer a degree of flexibility in granting leave for Service spouses and partners before, during and after a partner's deployment;\r\n- seeking to support our employees who choose to be members of the Reserve forces, including by accommodating their training and deployment where possible;\r\n- offering support to our local cadet units, either in our local community or in local schools, where possible;\r\n- aiming to actively participate in Armed Forces Day;\r\n- offering a discount to members of the Armed Forces Community;\r\n- information point for service leavers;\r\n- seminars to help service leavers make informed choices as the move from military to civilian life and raise awareness of facilities in Catterick and the surrounding areas\r\n\r\n### 2.2\r\n\r\nWe will publicise these commitments through our literature and/or on our website, setting out how we will seek to honour them and inviting feedback from the Service community and our customers on how we are doing.",
+  "content_id": "9dfab367-b676-485f-8594-66efaf449d0e",
+  "description": "Find businesses that have signed the Armed Forces Covenant",
+  "document_noun": "business",
+  "document_title": "Armed Forces Covenant business",
+  "email_filter_options": {
+    "email_filter_by": "all_selected_facets"
+  },
+  "facets": [
+    {
+      "allowed_values": [
+        {
+          "label": "East Anglia",
+          "value": "east-anglia"
+        },
+        {
+          "label": "East Midlands",
+          "value": "east-midlands"
+        },
+        {
+          "label": "Greater London",
+          "value": "greater-london"
+        },
+        {
+          "label": "Highland",
+          "value": "highland"
+        },
+        {
+          "label": "Lowland",
+          "value": "lowland"
+        },
+        {
+          "label": "North Of England",
+          "value": "north-of-england"
+        },
+        {
+          "label": "North West & IOM",
+          "value": "north-west-and-iom"
+        },
+        {
+          "label": "Northern Ireland",
+          "value": "northern-ireland"
+        },
+        {
+          "label": "South East",
+          "value": "south-east"
+        },
+        {
+          "label": "Wales",
+          "value": "wales"
+        },
+        {
+          "label": "Wessex",
+          "value": "wessex"
+        },
+        {
+          "label": "West Midlands",
+          "value": "west-midlands"
+        },
+        {
+          "label": "Yorkshire & The Humber",
+          "value": "yorkshire-and-the-humber"
+        }
+      ],
+      "display_as_result_metadata": false,
+      "filterable": true,
+      "key": "region",
+      "name": "Region",
+      "specialist_publisher_properties": {
+        "select": "one",
+        "validations": {
+          "required": {}
+        }
+      },
+      "type": "text"
+    },
+    {
+      "allowed_values": [
+        {
+          "label": "0-9 Micro",
+          "value": "micro"
+        },
+        {
+          "label": "10-49 Small",
+          "value": "small"
+        },
+        {
+          "label": "50-249 Medium",
+          "value": "medium"
+        },
+        {
+          "label": "250-500 Large",
+          "value": "large"
+        },
+        {
+          "label": "500+",
+          "value": "largest"
+        }
+      ],
+      "display_as_result_metadata": false,
+      "filterable": true,
+      "key": "company_size",
+      "name": "Company size",
+      "specialist_publisher_properties": {
+        "select": "one",
+        "validations": {
+          "required": {}
+        }
+      },
+      "type": "text"
+    },
+    {
+      "allowed_values": [
+        {
+          "label": "Aerospace & Defense",
+          "value": "aerospace-and-defense"
+        },
+        {
+          "label": "Agriculture",
+          "value": "agriculture"
+        },
+        {
+          "label": "Automotive",
+          "value": "automotive"
+        },
+        {
+          "label": "Aviation",
+          "value": "aviation"
+        },
+        {
+          "label": "Banking",
+          "value": "banking"
+        },
+        {
+          "label": "Biotechnology",
+          "value": "biotechnology"
+        },
+        {
+          "label": "Chemicals",
+          "value": "chemicals"
+        },
+        {
+          "label": "Construction",
+          "value": "construction"
+        },
+        {
+          "label": "Consulting",
+          "value": "consulting"
+        },
+        {
+          "label": "Cyber",
+          "value": "cyber"
+        },
+        {
+          "label": "Cyber Security",
+          "value": "cyber-security"
+        },
+        {
+          "label": "Defence",
+          "value": "defence"
+        },
+        {
+          "label": "Digital",
+          "value": "digital"
+        },
+        {
+          "label": "Education",
+          "value": "education"
+        },
+        {
+          "label": "Electronics",
+          "value": "electronics"
+        },
+        {
+          "label": "Energy",
+          "value": "energy"
+        },
+        {
+          "label": "Engineering",
+          "value": "engineering"
+        },
+        {
+          "label": "Entertainment",
+          "value": "entertainment"
+        },
+        {
+          "label": "Environmental",
+          "value": "environmental"
+        },
+        {
+          "label": "Facilities Management",
+          "value": "facilities-management"
+        },
+        {
+          "label": "Finance",
+          "value": "finance"
+        },
+        {
+          "label": "Food & Beverage",
+          "value": "food-and-beverage"
+        },
+        {
+          "label": "Government Organisations",
+          "value": "government-organisations"
+        },
+        {
+          "label": "Healthcare",
+          "value": "healthcare"
+        },
+        {
+          "label": "Hospitality",
+          "value": "hospitality"
+        },
+        {
+          "label": "Infrastructure",
+          "value": "infrastructure"
+        },
+        {
+          "label": "Insurance",
+          "value": "insurance"
+        },
+        {
+          "label": "Law",
+          "value": "law"
+        },
+        {
+          "label": "Logistics",
+          "value": "logistics"
+        },
+        {
+          "label": "Machinery",
+          "value": "machinery"
+        },
+        {
+          "label": "Manufacturing",
+          "value": "manufacturing"
+        },
+        {
+          "label": "Media and Communications",
+          "value": "media-and-communications"
+        },
+        {
+          "label": "Not For Profit",
+          "value": "not-for-profit"
+        },
+        {
+          "label": "Other",
+          "value": "other"
+        },
+        {
+          "label": "Pharmaceuticals",
+          "value": "pharmaceuticals"
+        },
+        {
+          "label": "Property and Support Services",
+          "value": "property-and-support-services"
+        },
+        {
+          "label": "Recreation and Leisure",
+          "value": "recreation-and-leisure"
+        },
+        {
+          "label": "Recruitment",
+          "value": "recruitment"
+        },
+        {
+          "label": "Retail",
+          "value": "retail"
+        },
+        {
+          "label": "Security",
+          "value": "security"
+        },
+        {
+          "label": "Service Industry",
+          "value": "service-industry"
+        },
+        {
+          "label": "Space",
+          "value": "space"
+        },
+        {
+          "label": "Technology",
+          "value": "technology"
+        },
+        {
+          "label": "Telecommunications",
+          "value": "telecommunications"
+        },
+        {
+          "label": "Trade Body",
+          "value": "trade-body"
+        },
+        {
+          "label": "Transportation",
+          "value": "transportation"
+        },
+        {
+          "label": "Utilities",
+          "value": "utilities"
+        }
+      ],
+      "display_as_result_metadata": false,
+      "filterable": true,
+      "key": "industry",
+      "name": "Industry",
+      "specialist_publisher_properties": {
+        "select": "one",
+        "validations": {
+          "required": {}
+        }
+      },
+      "type": "text"
+    },
+    {
+      "display_as_result_metadata": false,
+      "filterable": true,
+      "key": "date_signed",
+      "name": "Date signed",
+      "specialist_publisher_properties": {
+        "validations": {
+          "required": {}
+        }
+      },
+      "type": "date"
+    }
+  ],
+  "filter": {
+    "format": "business_that_has_signed_the_armed_forces_covenant"
+  },
+  "name": "Businesses who have signed the Armed Forces Covenant",
+  "organisations": [
+    "d994e55c-48c9-4795-b872-58d8ec98af12"
+  ],
+  "signup_content_id": "7a1666dc-fa37-47e5-bc34-2c25b163567b",
+  "subscription_list_title_prefix": "Businesses who have signed the Armed Forces Covenant",
+  "summary": "Find out which businesses have signed the Armed Forces Covenant and what they are pledging to do to support you and your family."
+}

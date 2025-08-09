@@ -26,9 +26,15 @@ RSpec.describe "Facet" do
     end
 
     it "derives the key from the name if no key provided" do
-      params = { "name" => "Foo Bar Baz" }
+      params = { "name" => "Foo bar & baz" }
       facet = Facet.from_finder_admin_form_params(params)
-      expect(facet.key).to eq("foo_bar_baz")
+      expect(facet.key).to eq("foo_bar_and_baz")
+    end
+
+    it "strips out any special characters" do
+      params = { "name" => "O'Shaunnessey, Filley & Partners ©" }
+      facet = Facet.from_finder_admin_form_params(params)
+      expect(facet.key).to eq("oshaunnessey_filley_and_partners")
     end
 
     it "returns nil for 'short_name' if not provided/blank" do
@@ -153,10 +159,10 @@ RSpec.describe "Facet" do
         expect(facet.allowed_values).to eq(nil)
       end
 
-      it "truncates a value string if it's longer than 250 characters" do
+      it "truncates a value string if it's longer than 500 characters" do
         params = { "type" => "enum_text_multiple", "allowed_values" => "LL {#{'V' * 500}}" }
         facet = Facet.from_finder_admin_form_params(params)
-        expect(facet.allowed_values).to eq([{ label: "LL", value: "V" * 495 }])
+        expect(facet.allowed_values).to eq([{ label: "LL", value: "V" * 496 }])
       end
     end
 
