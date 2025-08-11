@@ -37,6 +37,10 @@
           "value": "clare-boucher"
         },
         {
+          "label": "Heather Harrison",
+          "value": "heather-harrison"
+        },
+        {
           "label": "J Pike",
           "value": "j-pike"
         },
@@ -49,12 +53,24 @@
           "value": "leisa-davies"
         },
         {
+          "label": "Mark King",
+          "value": "mark-king"
+        },
+        {
           "label": "Martin Howe",
           "value": "martin-howe"
         },
         {
+          "label": "Matthew Williams",
+          "value": "matthew-williams"
+        },
+        {
           "label": "O Morris",
           "value": "o-morris"
+        },
+        {
+          "label": "Phil Thorpe",
+          "value": "phil-thorpe"
         },
         {
           "label": "Rosie Le Breton",
@@ -63,6 +79,10 @@
         {
           "label": "Stephanie Wilson",
           "value": "stephanie-wilson"
+        },
+        {
+          "label": "Steve Probert",
+          "value": "steve-probert"
         }
       ],
       "display_as_result_metadata": true,
