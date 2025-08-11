@@ -50,6 +50,7 @@ RSpec.describe "bulk_import_documents_from_csv", type: :task do
     # stub stdout to reduce noise
     allow($stdout).to receive(:write)
     allow(File).to receive(:exist?).with(csv_path).and_return(true)
+    allow(Kernel).to receive(:sleep)
   end
 
   after(:each) do

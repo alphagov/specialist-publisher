@@ -83,7 +83,12 @@ task :bulk_import_documents_from_csv, %i[csv_file_path mapping_file_path dry_run
       )
     end
 
-    design_decision.save unless dry_run
+    unless dry_run
+      design_decision.save
+      # We want the documents to be saved in order, but there are small delays on the publishing-api side, which result in some records being out of sequence.
+      Kernel.sleep 1
+    end
+
     imported_count += 1
   end
 
