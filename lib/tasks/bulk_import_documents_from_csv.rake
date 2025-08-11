@@ -69,7 +69,7 @@ task :bulk_import_documents_from_csv, %i[csv_file_path mapping_file_path dry_run
     raise StandardError, "CSV import failed: #{invalid_rows.count} row(s) have missing required fields."
   end
 
-  documents_to_import.each do |document_data|
+  documents_to_import.reverse.each do |document_data|
     design_decision = DesignDecision.new(**document_data[:attributes].deep_symbolize_keys)
 
     if design_decision_has_attachment?(document_data[:row])

@@ -124,6 +124,49 @@ $A',
     task.execute(csv_file_path: csv_path.to_s)
   end
 
+  it "imports documents in reverse order" do
+    csv_data = [
+      {
+        "title" => "Design hearing decision: O/0567/25",
+        "summary" => '"Outcome of request to invalidate, hearing held on 24 June 2025."',
+        "body" => '"| **Litigants** | Caesar Commerce Ltd v Huizhou New Road Cosmetics Company Limited |
+| **Hearing Officer** | Arran Cooper |',
+      },
+      {
+        "title" => "Design hearing decision: O/0567/26",
+        "summary" => '"Outcome of request to invalidate, hearing held on 24 June 2025."',
+        "body" => '"| **Litigants** | Caesar Commerce Ltd v Huizhou New Road Cosmetics Company Limited |
+| **Hearing Officer** | Arran Cooper |',
+      },
+    ]
+    allow(CSV).to receive(:foreach).with(csv_path, headers: true).and_return(csv_data.each)
+    attachments_double = double("attachments")
+    design_decision_double = instance_double(
+      DesignDecision,
+      attachments: attachments_double,
+      save: true,
+    )
+    expect(DesignDecision).to receive(:new).with(
+      title: "Design hearing decision: O/0567/26",
+      summary: "Outcome of request to invalidate, hearing held on 24 June 2025.",
+      design_decision_litigants: "Caesar Commerce Ltd v Huizhou New Road Cosmetics Company Limited",
+      design_decision_hearing_officer: "arran-cooper",
+      design_decision_british_library_number: "O/0567/26",
+      design_decision_date: "2025-06-24",
+      body: "Missing note body",
+    ).and_return(design_decision_double).ordered
+    expect(DesignDecision).to receive(:new).with(
+      title: "Design hearing decision: O/0567/25",
+      summary: "Outcome of request to invalidate, hearing held on 24 June 2025.",
+      design_decision_litigants: "Caesar Commerce Ltd v Huizhou New Road Cosmetics Company Limited",
+      design_decision_hearing_officer: "arran-cooper",
+      design_decision_british_library_number: "O/0567/25",
+      design_decision_date: "2025-06-24",
+      body: "Missing note body",
+    ).and_return(design_decision_double).ordered
+    task.execute(csv_file_path: csv_path.to_s)
+  end
+
   it "extracts design_decision_hearing_officer from Appointed Person when Hearing Officer is absent" do
     csv_data = [
       {
