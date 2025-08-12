@@ -39,6 +39,10 @@ You can use the [GOV.UK Docker environment](https://github.com/alphagov/govuk-do
 $ bundle exec rake
 ```
 
+### Running the app alongside finder-frontend
+
+To test the document lifecycle end-to-end, from creating a document to viewing it in the finder, follow the steps in the [GOV.UK Docker README](https://docs.publishing.service.gov.uk/repos/govuk-docker/how-tos/finder-setup.html#content).
+
 ### Further documentation
 
 - [Email alerts](/docs/email-alerts.md)

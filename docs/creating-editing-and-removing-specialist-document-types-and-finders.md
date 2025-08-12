@@ -21,10 +21,7 @@ For additional guidance, consider reading through [Finder requirements and conte
 ## 1. Add a schema to Publishing API
 See [example PR here](https://github.com/alphagov/publishing-api/pull/3026/files).
 
-1. Add the format to [allowed document types list](https://github.com/alphagov/publishing-api/blob/main/content_schemas/allowed_document_types.yml).
-
-NB: The schema name should align with the format name, for consistency. A mismatch will lead to failures in specialist publisher's automated tests. See how to fix it [here](#2-bespoke-approach). 
-
+1. Add the [document type](./naming-conventions.md#publishing-api) to [allowed document types list](https://github.com/alphagov/publishing-api/blob/main/content_schemas/allowed_document_types.yml).
 2. Add any new field definitions to [this file](https://github.com/alphagov/publishing-api/blob/main/content_schemas/formats/shared/definitions/_specialist_document.jsonnet).
 3. Run `bundle exec rake build_schemas` to regenerate schemas.
 
@@ -72,28 +69,17 @@ If you require custom behaviours, create a view file in the [views folder](https
 
 #### 1. General approach
 
-If no custom validation was required, the only testing task is to [create a factory](https://github.com/alphagov/specialist-publisher/blob/main/spec/fixtures/factories.rb#L874) that conforms to the schema, ensuring it includes all required metadata. This factory will be used in feature tests and a model test to confirm it generates a [valid payload](https://github.com/alphagov/specialist-publisher/blob/main/spec/models/document_type_spec.rb#L17).
+If no custom validation is required, the only testing task is to [create a factory](https://github.com/alphagov/specialist-publisher/blob/main/spec/fixtures/factories.rb#L874) that conforms to the schema, ensuring it includes all required metadata. This factory will be used in the [generic feature test](https://github.com/alphagov/specialist-publisher/blob/main/spec/features/publishing_workflow/creating_a_new_document_spec.rb) and [generic model test](https://github.com/alphagov/specialist-publisher/blob/main/spec/models/document_type_spec.rb).
 
-Since automation can somewhat obfuscate testing, you can verify that your finder is being tested by running:
-
-For feature tests:
-
-   ```
-govuk-docker-run bundle exec rspec ./spec/features/creating_a_new_document_spec.rb --format doc | grep -i "your_format_name"
-   ```
-For model tests:
-   ```
-govuk-docker-run bundle exec rspec ./spec/models/document_type_spec.rb --format doc | grep -i "your_format_name"
-   ```
-Replace "your_format_name" with the format you want to check. A partial match should work; for example, searching for 'health' should return results for 'Export health certificate'.
+Tip: Since automation can somewhat obfuscate testing, run the `rspec` test command with the `--format doc` flag to get verbose output.
 
 #### 2. Bespoke approach
 
 While you should ideally always use the test automation, you might need custom testing if:
-- the `filter.format` does not match naming conventions (it should be the schema json filename, singularized)
-- the documents need additional validations. 
+- the document has a custom view
+- the document needs additional validations
 
-In such cases, add your format to the [exception list](https://github.com/alphagov/specialist-publisher/blob/3a0d89a821c6aeea87a20dae7c8f6e3fb1cf9ec0/spec/models/document_type_spec.rb#L4), and document the reason for doing so in your commit. To ensure proper coverage, you will need to create both a [feature test](https://github.com/alphagov/specialist-publisher/blob/main/spec/features/creating_a_trademark_decision_spec.rb) and a [model test](https://github.com/alphagov/specialist-publisher/blob/main/spec/models/protected_food_drink_name_spec.rb) for your finder.
+In such cases, add your format to the [generic model test exception list](https://github.com/alphagov/specialist-publisher/blob/3a0d89a821c6aeea87a20dae7c8f6e3fb1cf9ec0/spec/models/document_type_spec.rb#L4) and [generic feature test exception list](https://github.com/alphagov/specialist-publisher/blob/6849759b0206eb933f61710c1c6dddfab1792697/spec/features/publishing_workflow/creating_a_new_document_spec.rb#L3), and document the reason for doing so in your commit. To ensure proper coverage, you will need to create both a [feature test](https://github.com/alphagov/specialist-publisher/tree/main/spec/features/non_conforming_types) and a [model test](https://github.com/alphagov/specialist-publisher/tree/main/spec/models) for your document type.
 
 ## 3. Configure Search API
 
