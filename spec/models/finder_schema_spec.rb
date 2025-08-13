@@ -149,6 +149,10 @@ RSpec.describe FinderSchema do
           it "returns an array with the looked-up values" do
             expect(FinderSchema.new(properties).humanized_facet_value("country", %w[AL AF])).to eql(%w[Albania Afghanistan])
           end
+
+          it "omits values that are not allowed in the schema" do
+            expect(FinderSchema.new(properties).humanized_facet_value("country", %w[NA AF])).to eql(%w[Afghanistan])
+          end
         end
       end
 

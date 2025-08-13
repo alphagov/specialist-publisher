@@ -83,9 +83,10 @@ class FinderSchema
     if %w[text nested].include?(type) && allowed_values_for(facet_key).empty?
       value
     elsif %w[hidden text nested].include?(type)
-      Array(value).map do |v|
-        value_label_mapping_for(facet_key, v).fetch("label") { value }
+      labels = Array(value).map do |v|
+        value_label_mapping_for(facet_key, v).fetch("label", nil)
       end
+      labels.compact
     elsif type == "date"
       Time.zone.parse(value).to_date if value.present?
     else
