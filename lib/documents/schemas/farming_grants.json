@@ -2,8 +2,8 @@
   "base_path": "/find-funding-for-land-or-farms",
   "beta_message": "This is a new tool – your <a href=\"https://www.smartsurvey.co.uk/s/gov-uk-banner/?c=/find-funding-for-land-or-farms\">feedback</a> will help us to improve it.",
   "content_id": "23ad50d7-916c-456b-b3de-4b27739d5be1",
-  "description": "Find out about grants and funding for farmers and land managers in England.",
-  "document_noun": "result",
+  "description": "Find out about grants and funding for farmers, foresters and land managers in England.",
+  "document_noun": "action",
   "document_title": "Farming Grant",
   "facets": [
     {
@@ -195,11 +195,8 @@
     "e8fae147-6232-4163-a3f1-1c15b755a8a4"
   ],
   "phase": "beta",
-  "show_summaries": true,
   "show_metadata_block": true,
   "show_table_of_contents": true,
-  "signup_content_id": "2cd12e92-3b68-4cb1-bafe-fde6a7939afb",
-  "subscription_list_title_prefix": "Funding for land or farms",
-  "summary": "Find out about grants and funding for farmers and land managers in England. <br>We will add more grants and funding as we develop this tool.\r\n\r\nSearch by keyword, action name or code if you know it. Use the filters to search by land types or areas of interest.",
+  "summary": "Use this tool to search for funded actions and their supplements for eligible farmers, foresters and land managers in England.\r\n\r\nUse the [Capital grants finder](https://www.gov.uk/capital-grant-finder) to search for capital items and their supplements.",
   "target_stack": "live"
 }
