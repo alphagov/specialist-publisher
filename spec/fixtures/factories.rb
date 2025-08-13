@@ -823,7 +823,7 @@ FactoryBot.define do
         {
           "areas_of_interest" => %w[air-quality],
           "land_types" => %w[grassland],
-          "payment_types" => %w[capital],
+          "farming_grant_type" => "sustainable-farming-incentive",
         }
       end
     end
