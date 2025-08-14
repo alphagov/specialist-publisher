@@ -3,10 +3,10 @@
   "content_id": "326a05d8-0bce-40a4-b3fc-7aab7ad204b7",
   "description": "Find guidance on chemicals, chemical products and their health risks.",
   "document_noun": "item",
-  "document_title": "UKHSA Chemical Hazard",
+  "document_title": "UKHSA Chemical Risk",
   "email_filter_options": {
     "downcase_email_alert_topic_names": true,
-    "email_filter_by": "all_selected_facets"
+    "email_filter_by": "ukhsa_product_category"
   },
   "facets": [
     {
@@ -72,16 +72,20 @@
           "value": "car-and-vehicle-maintenance"
         },
         {
-          "label": "Cleaning and household",
-          "value": "cleaning-and-household"
-        },
-        {
           "label": "Garden",
           "value": "garden"
         },
         {
           "label": "Hair and beauty",
           "value": "hair-and-beauty"
+        },
+        {
+          "label": "Household - cleaning",
+          "value": "household-cleaning"
+        },
+        {
+          "label": "Household - other",
+          "value": "household-other"
         },
         {
           "label": "Insect repellents",
@@ -110,18 +114,22 @@
       "name": "Product category",
       "preposition": "with product category",
       "specialist_publisher_properties": {
-        "select": "multiple",
-        "validations": {
-          "required": {}
-        }
+        "select": "multiple"
       },
       "type": "text"
+    },
+    {
+      "display_as_result_metadata": false,
+      "filterable": false,
+      "key": "ukhsa_review_date",
+      "name": "Review date",
+      "type": "date"
     }
   ], 
   "filter": {
     "format": "ukhsa_chemical_hazard"
   },
-  "name": "Chemical risks and human health",
+  "name": "Chemical risks to human health",
   "organisations": [
     "80091cd8-7a8f-41ef-8faf-8af91fce4fdb"
   ],
@@ -130,6 +138,6 @@
   "show_metadata_block": true,
   "signup_content_id": "1f4b54fb-cbc4-43c4-9255-1dd0ab2ff421",
   "subscription_list_title_prefix": "UKHSA Chemical Hazards",
-  "summary": "Find guidance on chemicals, chemical products and their health risks. Learn what to do when you or someone else comes into contact with chemicals that can cause harm.",
-  "target_stack": "draft"
+  "summary": "Find information on chemicals and chemical products - where they’re found, how they may affect your health and what steps to take if you are exposed.",
+  "target_stack": "live"
 }
