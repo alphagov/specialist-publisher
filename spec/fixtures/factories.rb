@@ -216,6 +216,24 @@ FactoryBot.define do
     end
   end
 
+  factory :armed_forces_covenant_business, parent: :document do
+    base_path { "/armed-forces-covenant-businesses/example-document" }
+    document_type { "armed_forces_covenant_business" }
+
+    transient do
+      default_metadata do
+        {
+          "armed_forces_covenant_business_pledged" => %w[armed-forces-charities],
+          "armed_forces_covenant_business_region" => "yorkshire-and-the-humber",
+          "armed_forces_covenant_business_company_size" => "medium",
+          "armed_forces_covenant_business_industry" => "consulting",
+          "armed_forces_covenant_business_ownership" => "non-profit",
+          "armed_forces_covenant_business_date_signed" => "2025-08-01",
+        }
+      end
+    end
+  end
+
   factory :hmrc_contact, parent: :document do
     base_path { "/find-hmrc-contacts/example-document" }
     document_type { "hmrc_contact" }
