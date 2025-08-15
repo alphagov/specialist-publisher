@@ -3,7 +3,7 @@ desc "Import armed forces covenant businesses from a CSV file and save them"
 task :mod_afc_import_from_csv, %i[csv_file_path dry_run] => :environment do |_, args|
   csv_file_path = args[:csv_file_path]
   dry_run = args[:dry_run]&.to_s&.downcase == "true"
-  schema = "armed_forces_covenant_businesses"
+  schema = FinderSchema.load_from_schema("armed_forces_covenant_businesses")
 
   imported_count = 0
   invalid_rows = []
@@ -16,7 +16,7 @@ task :mod_afc_import_from_csv, %i[csv_file_path dry_run] => :environment do |_, 
     company_size_value = get_facet_value_from_schema_based_on_label(schema, "armed_forces_covenant_business_company_size", row["Company Size"])
     industry_value = get_facet_value_from_schema_based_on_label(schema, "armed_forces_covenant_business_industry", row["Industry"])
     ownership_value = get_facet_value_from_schema_based_on_label(schema, "armed_forces_covenant_business_ownership", row["Ownership"])
-    pledge_value = get_pledge_values(row)
+    pledge_value = get_pledge_values(schema, row)
     summary = generate_summary
     body = generate_body(business_name, row)
 
@@ -61,19 +61,16 @@ task :mod_afc_import_from_csv, %i[csv_file_path dry_run] => :environment do |_, 
 end
 
 def get_facet_value_from_schema_based_on_label(schema, facet_key, label)
-  item = FinderSchema.load_from_schema(schema)
-                     .allowed_values_for(facet_key)
+  item = schema.allowed_values_for(facet_key)
                      .to_h { |val| [val.fetch("label"), val.fetch("value")] }
                      .find { |l, _v| l == label }
   item ? item[1] : nil
 end
 
-def get_pledge_values(row)
+def get_pledge_values(schema, row)
   pledged_values = []
 
-  FinderSchema
-    .load_from_schema("armed_forces_covenant_businesses")
-    .allowed_values_for("armed_forces_covenant_business_pledged")
+  schema.allowed_values_for("armed_forces_covenant_business_pledged")
     .to_h { |val| [val.fetch("label"), val.fetch("value")] }
     .each do |pledge_label, pledge_value|
     pledged_values << pledge_value if row[pledge_label] == "Pledged" || (pledge_label == "Bespoke Pledges" && row[pledge_label].present?)
