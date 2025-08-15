@@ -8,6 +8,7 @@ task :mod_afc_import_from_csv, %i[csv_file_path dry_run] => :environment do |_, 
   imported_count = 0
   invalid_rows = []
   documents_to_import = []
+  errors_on_save = 0
 
   CSV.foreach(csv_file_path, headers: true).with_index(2) do |row, line_number|
     business_name = row["Account Name"]
@@ -50,14 +51,22 @@ task :mod_afc_import_from_csv, %i[csv_file_path dry_run] => :environment do |_, 
   documents_to_import.reverse.each do |document_data|
     afc_business = ArmedForcesCovenantBusiness.new(**document_data[:attributes].deep_symbolize_keys)
 
-    unless dry_run
+    if dry_run
+      afc_business.valid?
+    else
       afc_business.save
     end
 
-    imported_count += 1
+    if afc_business.errors.blank?
+      puts "Saved document: '#{afc_business.title}'"
+      imported_count += 1
+    else
+      puts "Error when saving document: '#{afc_business.title}'"
+      errors_on_save += 1
+    end
   end
 
-  report_mod_import_result(imported_count, invalid_rows, dry_run)
+  report_mod_import_result(imported_count, invalid_rows, errors_on_save, dry_run)
 end
 
 def get_facet_value_from_schema_based_on_label(schema, facet_key, label)
@@ -93,9 +102,11 @@ def get_pledge_labels(row)
   pledge_labels
 end
 
-def report_mod_import_result(imported_count, skipped_rows, dry_run)
+def report_mod_import_result(imported_count, skipped_rows, errors_on_save, dry_run)
+  puts "\n----------------------REPORT----------------------\n\n"
   dry_run_prefix = dry_run ? "[DRY RUN] " : ""
   puts "#{dry_run_prefix}Imported: #{imported_count} document(s)"
+  puts "Errors on save: #{errors_on_save} document(s)"
   puts "Skipped: #{skipped_rows.count} row(s)"
 
   if skipped_rows.any?
