@@ -146,6 +146,41 @@ RSpec.describe PublishingApiFinderPublisher do
     context "when the finder is set to deploy to draft target_stack" do
       let(:finders) { [make_finder("/draft-finder", "target_stack" => "draft")] }
       include_examples "only updates draft stack"
+
+      %w[integration staging].each do |env|
+        context "but the live_target_stack_override toggle is enabled in #{env}" do
+          before do
+            stub_any_publishing_api_put_content
+            stub_any_publishing_api_patch_links
+            stub_publishing_api_publish(content_id, {})
+            allow(GovukPublishingComponents::AppHelpers::Environment).to receive(:current_acceptance_environment).and_return(env)
+          end
+
+          before(:each) do
+            @test_strategy ||= Flipflop::FeatureSet.current.test!
+            @test_strategy.switch!(:live_target_stack_override, true)
+          end
+
+          after(:each) do
+            @test_strategy ||= Flipflop::FeatureSet.current.test!
+            @test_strategy.switch!(:show_design_system, false)
+          end
+
+          let(:finders) { [make_finder("/draft-finder", "target_stack" => "draft")] }
+          let(:content_id) { finders[0][:file]["content_id"] }
+
+          it "publishes finder" do
+            expect(publishing_api).to receive(:put_content)
+                                        .with(content_id, be_valid_against_publisher_schema("finder"))
+            expect(publishing_api).to receive(:patch_links)
+                                        .with(content_id, anything)
+            expect(publishing_api).to receive(:publish)
+                                        .with(content_id)
+
+            PublishingApiFinderPublisher.new(finders, logger: test_logger).call
+          end
+        end
+      end
     end
 
     context "when the finder is set to deploy to unknown target_stack" do
