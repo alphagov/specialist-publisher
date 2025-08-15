@@ -937,7 +937,7 @@ FactoryBot.define do
   end
 
   factory :ukhsa_chemical_hazard, parent: :document do
-    base_path { "/chemical-risks-and-human-health/example-document" }
+    base_path { "/chemical-risks-to-human-health/example-document" }
     document_type { "ukhsa_chemical_hazard" }
 
     transient do
