@@ -7,3 +7,7 @@
 //= require components/govspeak-editor
 //= require components/paste-html-to-govspeak
 //= require components/sifting-status
+
+'use strict'
+window.GOVUK.approveAllCookieTypes()
+window.GOVUK.cookie('cookies_preferences_set', 'true', { days: 365 })

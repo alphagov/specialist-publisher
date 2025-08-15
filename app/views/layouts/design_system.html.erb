@@ -3,6 +3,16 @@
 <% if user_signed_in? %>
   <% content_for :head do %>
     <meta name="govuk:components_gem_version" content="<%= GovukPublishingComponents::VERSION %>">
+    <% unless Rails.env.test? %>
+      <meta name="govuk:user-created-at" content="<%= current_user&._id&.generation_time&.to_date %>">
+      <meta name="govuk:user-organisation-name" content="<%= organisation_name(current_user&.organisation_content_id) %>">
+    <% end %>
+    <% if get_content_id %>
+      <meta name="govuk:content-id" content="<%= get_content_id %>">
+    <% end %>    
+    <meta name="govuk:format" content="<%= "#{action_name}-#{controller_name}" %>">
+    <meta name="govuk:user-id" content="">
+    <%= javascript_include_tag "domain-config" %>
     <%= javascript_include_tag "govuk_publishing_components/load-analytics" %>
     <%= javascript_include_tag "es6-components", type: "module" %>
   <% end %>
