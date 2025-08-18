@@ -139,5 +139,5 @@
   "signup_content_id": "1f4b54fb-cbc4-43c4-9255-1dd0ab2ff421",
   "subscription_list_title_prefix": "UKHSA Chemical Hazards",
   "summary": "Find information on chemicals and chemical products - where they’re found, how they may affect your health and what steps to take if you are exposed.",
-  "target_stack": "draft"
+  "target_stack": "live"
 }
