@@ -1,46 +1,15 @@
 {
   "ignored_warnings": [
     {
-      "warning_type": "Dynamic Render Path",
-      "warning_code": 15,
-      "fingerprint": "1710d332aa168aed33f01c22c64698cfec18b7dfa3be0c5ac696530205a5ce57",
-      "check_name": "Render",
-      "message": "Render path contains parameter value",
-      "file": "app/views/documents/edit.html.erb",
-      "line": 24,
-      "link": "https://brakemanscanner.org/docs/warning_types/dynamic_render_path/",
-      "code": "render(partial => \"metadata_fields/#{params[:document_type_slug].underscore}\", { :locals => ({ :f => FormBuilder.new }) })",
-      "render_path": [
-        {
-          "type": "controller",
-          "class": "DocumentsController",
-          "method": "edit",
-          "line": 45,
-          "file": "app/controllers/documents_controller.rb",
-          "rendered": {
-            "name": "documents/edit",
-            "file": "app/views/documents/edit.html.erb"
-          }
-        }
-      ],
-      "location": {
-        "type": "template",
-        "template": "documents/edit"
-      },
-      "user_input": "params[:document_type_slug].underscore",
-      "confidence": "Medium",
-      "note": "The document_type_slug is checked by the check_authorisation method which checks that the current_format is set. If it doesn't exist, then the template won't be rendered."
-    },
-    {
       "warning_type": "Cross-Site Scripting",
       "warning_code": 4,
-      "fingerprint": "4febd038b878af391d4ed2ba73417e43de948a9cda2ab88f5534e49e652a02e7",
+      "fingerprint": "14f2eba20bae46be201e1881a9f7546b0bca7e6001cf67eb8f38c17db315ad89",
       "check_name": "LinkToHref",
       "message": "Potentially unsafe model attribute in `link_to` href",
       "file": "app/views/shared/_attachments_form.html.erb",
-      "line": 7,
+      "line": 21,
       "link": "https://brakemanscanner.org/docs/warning_types/link_to_href",
-      "code": "link_to(Attachment.new.filename, Attachment.new.url)",
+      "code": "link_to(Attachment.new.filename, Attachment.new.url, :class => \"govuk-link\")",
       "render_path": [
         {
           "type": "controller",
@@ -56,7 +25,7 @@
         {
           "type": "template",
           "name": "attachments/new",
-          "line": 5,
+          "line": 29,
           "file": "app/views/attachments/new.html.erb",
           "rendered": {
             "name": "shared/_attachments_form",
@@ -70,16 +39,19 @@
       },
       "user_input": "Attachment.new.url",
       "confidence": "Weak",
-      "note": "It's not unsafe as it's from a new Attachment. There is no user input involved."
+      "cwe_id": [
+        79
+      ],
+      "note": "URL comes from Asset Manager, so should always be safe."
     },
     {
       "warning_type": "Mass Assignment",
       "warning_code": 70,
       "fingerprint": "79a8953064431979892bbf285e301dc8c06c8d9080beea44507c660d7a4841f5",
       "check_name": "MassAssignment",
-      "message": "Parameters should be whitelisted for mass assignment",
+      "message": "Specify exact keys allowed for mass assignment instead of using `permit!` which allows any keys",
       "file": "app/controllers/documents_controller.rb",
-      "line": 147,
+      "line": 177,
       "link": "https://brakemanscanner.org/docs/warning_types/mass_assignment/",
       "code": "params[current_format.document_type].permit!",
       "render_path": null,
@@ -90,56 +62,11 @@
       },
       "user_input": null,
       "confidence": "Medium",
-      "note": "Although we pass everything into the model, only allowed fields are set. We use set_attribute and pass in the valid fields fro that particular document type."
-    },
-    {
-      "warning_type": "Remote Code Execution",
-      "warning_code": 110,
-      "fingerprint": "9ae68e59cfee3e5256c0540dadfeb74e6b72c91997fdb60411063a6e8518144a",
-      "check_name": "CookieSerialization",
-      "message": "Use of unsafe cookie serialization strategy `:hybrid` might lead to remote code execution",
-      "file": "config/initializers/cookies_serializer.rb",
-      "line": 5,
-      "link": "https://brakemanscanner.org/docs/warning_types/unsafe_deserialization",
-      "code": "Rails.application.config.action_dispatch.cookies_serializer = :hybrid",
-      "render_path": null,
-      "location": null,
-      "user_input": null,
-      "confidence": "Medium",
-      "note": "We can't switch straigt to :json serialisation as this breaks existing cookies.  Change this after some time has passed."
-    },
-    {
-      "warning_type": "Dynamic Render Path",
-      "warning_code": 15,
-      "fingerprint": "d34a7635364873f3063b096bc40cdb17b804fef975b7fe9b84a8d1b1973477c5",
-      "check_name": "Render",
-      "message": "Render path contains parameter value",
-      "file": "app/views/documents/new.html.erb",
-      "line": 20,
-      "link": "https://brakemanscanner.org/docs/warning_types/dynamic_render_path/",
-      "code": "render(partial => \"metadata_fields/#{params[:document_type_slug].underscore}\", { :locals => ({ :f => FormBuilder.new }) })",
-      "render_path": [
-        {
-          "type": "controller",
-          "class": "DocumentsController",
-          "method": "create",
-          "line": 31,
-          "file": "app/controllers/documents_controller.rb",
-          "rendered": {
-            "name": "documents/new",
-            "file": "app/views/documents/new.html.erb"
-          }
-        }
+      "cwe_id": [
+        915
       ],
-      "location": {
-        "type": "template",
-        "template": "documents/new"
-      },
-      "user_input": "params[:document_type_slug].underscore",
-      "confidence": "Medium",
-      "note": "The document_type_slug is checked by the check_authorisation method which checks that the current_format is set. If it doesn't exist, then the template won't be rendered."
+      "note": "Although we pass everything into the model, only allowed fields are set. We use set_attribute and pass in the valid fields fro that particular document type."
     }
   ],
-  "updated": "2019-07-25 10:22:11 +0100",
-  "brakeman_version": "4.6.1"
+  "brakeman_version": "7.0.2"
 }
