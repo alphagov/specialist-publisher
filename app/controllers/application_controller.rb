@@ -14,6 +14,18 @@ class ApplicationController < ActionController::Base
 
   rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
 
+  def get_content_id
+    content = case controller_name
+              when "attachments"
+                @attachment
+              when "documents"
+                @document
+              end
+
+    content && content.content_id
+  end
+  helper_method :get_content_id
+
 private
 
   def user_not_authorized
