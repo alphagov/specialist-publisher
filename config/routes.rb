@@ -2,6 +2,7 @@ require "healthcheck/s3"
 
 Rails.application.routes.draw do
   mount GovukPublishingComponents::Engine, at: "/component-guide"
+  mount Flipflop::Engine => "/flipflop"
 
   get "/healthcheck/live", to: proc { [200, {}, %w[OK]] }
   get "/healthcheck/ready", to: GovukHealthcheck.rack_response(
