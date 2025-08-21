@@ -107,7 +107,9 @@ $A"',
       design_decision_hearing_officer: "arran-cooper",
       design_decision_british_library_number: "O/0567/25",
       design_decision_date: "2025-06-24",
-      body: 'Every effort is made to ensure design hearing decisions have been accurately recorded, but some errors may have been introduced during conversion for the web.
+      body: '[InlineAttachment:o056725.pdf]
+
+Every effort is made to ensure design hearing decisions have been accurately recorded, but some errors may have been introduced during conversion for the web.
 
 Copies of any documents annexed to a decision are available from:
 

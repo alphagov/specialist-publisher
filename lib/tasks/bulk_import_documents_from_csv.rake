@@ -25,12 +25,14 @@ task :bulk_import_documents_from_csv, %i[csv_file_path mapping_file_path dry_run
     design_decision_hearing_officer = get_design_decision_hearing_officer(body, hearing_officers)
     design_decision_british_library_number = get_design_decision_british_library_number(title)
     design_decision_date = get_design_decision_date(summary)
-    note_body = get_note_body(body)
+    note_body = get_note_body(body) || "Missing note body"
+
+    design_decision_has_attachment?(row) ? note_body.prepend("[InlineAttachment:#{row['attachment_filename']}]\n\n") : note_body
 
     required_fields = {
       "title" => title,
       "summary" => summary,
-      "body" => note_body || "Missing note body",
+      "body" => note_body,
       "design_decision_litigants" => design_decision_litigants,
       "design_decision_hearing_officer" => design_decision_hearing_officer,
       "design_decision_british_library_number" => design_decision_british_library_number,
@@ -49,7 +51,7 @@ task :bulk_import_documents_from_csv, %i[csv_file_path mapping_file_path dry_run
         fixup_fields << "attachment"
       end
 
-      unless note_body
+      unless get_note_body(body)
         fixup_fields << "note"
       end
 
