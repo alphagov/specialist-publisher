@@ -33,7 +33,7 @@ class DocumentsController < ApplicationController
       flash[:success] = "Created #{@document.title}"
       redirect_to document_path(current_format.admin_slug, @document.content_id_and_locale)
     elsif @document.errors.any?
-      re_render :new, status: :unprocessable_entity
+      re_render :new, status: :unprocessable_content
     else
       re_render :new, flash_key: :danger, flash_message: unknown_error_message
     end
@@ -58,7 +58,7 @@ class DocumentsController < ApplicationController
         re_render :edit, flash_key: :danger, flash_message: unknown_error_message
       end
     else
-      re_render :edit, status: :unprocessable_entity
+      re_render :edit, status: :unprocessable_content
     end
   end
 
