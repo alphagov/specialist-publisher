@@ -18,7 +18,11 @@ private
   attr_reader :finders, :logger
 
   def should_deploy_to_live?(finder)
-    finder[:file]["target_stack"] == "live"
+    finder[:file]["target_stack"] == "live" || has_a_target_stack_override_for_testing?
+  end
+
+  def has_a_target_stack_override_for_testing?
+    %w[integration staging].include?(GovukPublishingComponents::AppHelpers::Environment.current_acceptance_environment) && Flipflop.enabled?(:live_target_stack_override)
   end
 
   def export_finder(finder)
