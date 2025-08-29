@@ -197,6 +197,6 @@
   "phase": "beta",
   "show_metadata_block": true,
   "show_table_of_contents": true,
-  "summary": "Use this tool to search for funded actions and their supplements for eligible farmers, foresters and land managers in England.\r\n\r\nUse the [Capital grants finder](https://www.gov.uk/capital-grant-finder) to search for capital items and their supplements.",
+  "summary": "Use this tool to search for funded actions and their supplements for eligible farmers, foresters and land managers in England.\r\n\r\nUse the [Capital grant finder](https://www.gov.uk/capital-grant-finder) to search for capital items and their supplements.",
   "target_stack": "live"
 }
