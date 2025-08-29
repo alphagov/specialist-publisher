@@ -127,6 +127,10 @@
           "value": "livestock-management"
         },
         {
+          "label": "Nutrient management",
+          "value": "nutrient-management"
+        },
+        {
           "label": "Orchards",
           "value": "orchards"
         },
