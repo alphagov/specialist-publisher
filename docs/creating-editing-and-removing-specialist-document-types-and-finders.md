@@ -158,7 +158,7 @@ To release the finder to the live stack:
    - You will likely need to run `rake SEARCH_INDEX=govuk 'search:update_schema'`. For further details, see this [section on reindexing](#reindexing-breakdown).
 4. Publish the finder by running the rake task `publishing_api:publish_finders` or `publishing_api:publish_finder[your_format_name_based_on_the_schema_file]` against the specialist publisher app (rake tasks [here](https://github.com/alphagov/specialist-publisher/blob/ce68fdb008cab05225e0493e19decba5365e1e20/lib/tasks/publishing_api.rake)).
 
-> Note that finder-frontend [caches the finder content item for five minutes](https://github.com/alphagov/finder-frontend/blob/0938cde0d65bc8e0a051c951558858e5a0680ab2/app/controllers/finders_controller.rb#L7), so you may not be able to see your changes immediately (even with a cachebust string).
+> Note that finder-frontend [caches the finder content item for five minutes](https://github.com/alphagov/finder-frontend/blob/4c27a8483f502969bc02e1de082a35b2efd0278e/app/lib/services.rb#L11), so you may not be able to see your changes immediately (even with a cachebust string).
 
 ## 8. Permissions
 
