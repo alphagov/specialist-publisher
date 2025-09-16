@@ -125,7 +125,7 @@
       "name": "Review date",
       "type": "date"
     }
-  ], 
+  ],
   "filter": {
     "format": "ukhsa_chemical_hazard"
   },
@@ -134,10 +134,10 @@
     "80091cd8-7a8f-41ef-8faf-8af91fce4fdb"
   ],
   "related": [],
-  "show_table_of_contents": true,
   "show_metadata_block": true,
+  "show_table_of_contents": true,
   "signup_content_id": "1f4b54fb-cbc4-43c4-9255-1dd0ab2ff421",
   "subscription_list_title_prefix": "UKHSA Chemical Hazards",
-  "summary": "Find information on chemicals and chemical products - where they’re found, how they may affect your health and what steps to take if you are exposed.",
+  "summary": "Find information on chemicals and chemical products - where they’re found, how they may affect your health and what steps to take if you are exposed.\r\n\r\n^If you need urgent medical advice, you should call NHS 111 or visit [111.nhs.uk](https://111.nhs.uk/).<br><br>For life-threatening emergencies, call 999.^",
   "target_stack": "draft"
 }
