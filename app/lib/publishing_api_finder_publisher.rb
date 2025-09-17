@@ -18,7 +18,13 @@ private
   attr_reader :finders, :logger
 
   def should_deploy_to_live?(finder)
-    finder[:file]["target_stack"] == "live"
+    target_stack = finder[:file]["target_stack"]
+
+    if %w[development integration].include?(GovukEnvironment.current) && (integration_target_stack = finder[:file]["integration_target_stack"])
+      target_stack = integration_target_stack
+    end
+
+    target_stack == "live"
   end
 
   def export_finder(finder)
@@ -31,8 +37,7 @@ private
       finder[:file],
     )
 
-    target_stack = finder[:file]["target_stack"]
-    logger.info("Publishing '#{finder[:file]['name']}' to #{target_stack} stack")
+    logger.info("Publishing '#{finder[:file]['name']}' to #{target_stack_name(finder)} stack")
 
     update_draft(finder_payload)
     publish(finder_payload, links_payload) if should_deploy_to_live?(finder)
@@ -48,11 +53,14 @@ private
       finder[:file],
     )
 
-    target_stack = finder[:file]["target_stack"]
-    logger.info("Publishing '#{finder[:file]['name']}' finder signup page to #{target_stack} stack")
+    logger.info("Publishing '#{finder[:file]['name']}' finder signup page to #{target_stack_name(finder)} stack")
 
     update_draft(signup_payload)
     publish(signup_payload, links_payload) if should_deploy_to_live?(finder)
+  end
+
+  def target_stack_name(finder)
+    should_deploy_to_live?(finder) ? "live" : "draft"
   end
 
   def update_draft(payload)
