@@ -129,6 +129,7 @@
   "filter": {
     "format": "ukhsa_chemical_hazard"
   },
+  "integration_target_stack": "live",
   "name": "Chemical risks to human health",
   "organisations": [
     "80091cd8-7a8f-41ef-8faf-8af91fce4fdb"

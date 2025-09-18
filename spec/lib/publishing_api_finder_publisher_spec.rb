@@ -108,7 +108,6 @@ RSpec.describe PublishingApiFinderPublisher do
 
     context "when the finder is set to deploy to live target_stack" do
       let(:finders) { [make_finder("/live-finder", "target_stack" => "live")] }
-
       let(:content_id) { finders[0][:file]["content_id"] }
 
       before do
@@ -126,6 +125,24 @@ RSpec.describe PublishingApiFinderPublisher do
           .with(content_id)
 
         PublishingApiFinderPublisher.new(finders, logger: test_logger).call
+      end
+
+      context "and has an integration_target_stack set to draft" do
+        let(:signup_content_id) { SecureRandom.uuid }
+        let(:finders) { [make_finder("/live-finder", "target_stack" => "live", "integration_target_stack" => "draft", "signup_content_id" => signup_content_id)] }
+
+        %w[development integration].each do |env|
+          it "only updates the draft stack if the environment is '#{env}'" do
+            allow(GovukEnvironment).to receive(:current).and_return(env)
+
+            expect(publishing_api).to receive(:put_content).with(content_id, be_valid_against_publisher_schema("finder"))
+            expect(publishing_api).to receive(:put_content).with(signup_content_id, anything)
+            expect(publishing_api).not_to receive(:patch_links)
+            expect(publishing_api).not_to receive(:publish)
+
+            PublishingApiFinderPublisher.new(finders, logger: test_logger).call
+          end
+        end
       end
     end
 
@@ -146,6 +163,27 @@ RSpec.describe PublishingApiFinderPublisher do
     context "when the finder is set to deploy to draft target_stack" do
       let(:finders) { [make_finder("/draft-finder", "target_stack" => "draft")] }
       include_examples "only updates draft stack"
+
+      context "and has an integration_target_stack set to live" do
+        let(:signup_content_id) { SecureRandom.uuid }
+        let(:finders) { [make_finder("/draft-finder", "target_stack" => "live", "integration_target_stack" => "live", "signup_content_id" => signup_content_id)] }
+        let(:content_id) { finders[0][:file]["content_id"] }
+
+        %w[development integration].each do |env|
+          it "publishes finder if the environment is '#{env}'" do
+            allow(GovukEnvironment).to receive(:current).and_return(env)
+
+            expect(publishing_api).to receive(:put_content).with(content_id, be_valid_against_publisher_schema("finder"))
+            expect(publishing_api).to receive(:put_content).with(signup_content_id, anything)
+            expect(publishing_api).to receive(:patch_links).with(content_id, anything)
+            expect(publishing_api).to receive(:patch_links).with(signup_content_id, anything)
+            expect(publishing_api).to receive(:publish).with(content_id)
+            expect(publishing_api).to receive(:publish).with(signup_content_id)
+
+            PublishingApiFinderPublisher.new(finders, logger: test_logger).call
+          end
+        end
+      end
     end
 
     context "when the finder is set to deploy to unknown target_stack" do
