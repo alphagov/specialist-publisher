@@ -38,7 +38,7 @@ class FinderSchema
   attribute :email_filter_options
   attribute :facets, default: []
   attribute :filter
-  attribute :integration_target_stack, :boolean
+  attribute :integration_target_stack
   attribute :label_text
   attribute :name
   attribute :organisations, default: []

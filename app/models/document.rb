@@ -109,7 +109,13 @@ class Document
   delegate :document_type, to: :class
 
   def self.target_stack
-    finder_schema.target_stack
+    target_stack = finder_schema.target_stack
+
+    if %w[development integration].include?(GovukEnvironment.current) && (integration_target_stack = finder_schema.integration_target_stack)
+      target_stack = integration_target_stack
+    end
+
+    target_stack
   end
 
   def self.document_type
