@@ -6,6 +6,7 @@
     <% unless Rails.env.test? %>
       <meta name="govuk:user-created-at" content="<%= current_user&._id&.generation_time&.to_date %>">
       <meta name="govuk:user-organisation-name" content="<%= organisation_name(current_user&.organisation_content_id) %>">
+      <meta name="govuk:user-id" content="<%= current_user&.anonymous_user_id %>">
     <% end %>
     <% if get_content_id %>
       <meta name="govuk:content-id" content="<%= get_content_id %>">
