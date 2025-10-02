@@ -433,6 +433,7 @@
   "filter": {
     "format": "armed_forces_covenant_business"
   },
+  "integration_target_stack": "live",
   "name": "Find businesses who have signed the Armed Forces Covenant",
   "organisations": [
     "d994e55c-48c9-4795-b872-58d8ec98af12"
