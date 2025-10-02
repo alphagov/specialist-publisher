@@ -28,7 +28,7 @@ RSpec.describe "mod_afc_import_from_csv", type: :task do
         "Reserve Forces Day" => "0",
         "Discounts	Armed Forces Charities" => "0",
         "UK Wounded, Injured And Sick" => "0",
-        "Bespoke Pledges" => "-Custom Pledge text",
+        "Bespoke Pledges" => "-Custom Pledge text-With multiple lines",
       },
     ]
     allow(CSV).to receive(:foreach).with(csv_path, headers: true).and_return(csv_data.each)
@@ -40,7 +40,7 @@ RSpec.describe "mod_afc_import_from_csv", type: :task do
     )
 
     generated_body = generate_body("ABC Company", csv_data.first)
-    expect(generated_body).to include("- Custom Pledge text") # will drop any leading "-", when generating the list
+    expect(generated_body).to include("\n\n-Custom Pledge text-With multiple lines") # copies the bespoke pledge as is
 
     expect(ArmedForcesCovenantBusiness).to receive(:new).with(
       "title": "ABC Company",

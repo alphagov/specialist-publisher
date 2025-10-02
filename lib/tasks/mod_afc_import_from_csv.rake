@@ -123,12 +123,12 @@ end
 
 def generate_body(business_name, row)
   pledge_list = get_pledge_labels(row).reject { |l| l == "Bespoke Pledges" }.map { |label| "- #{label}" }.join("\n")
-  optional_bespoke_pledge = row["Bespoke Pledges"].present? ? "\nWe also pledge the following:\n\n- #{row['Bespoke Pledges'].sub(/^-/, '')}" : ""
+  optional_bespoke_pledge = row["Bespoke Pledges"].present? ? "\nWe also pledge the following:\n\n#{row['Bespoke Pledges']}" : ""
 
   <<~GOVSPEAK
     ## The Armed Forces Covenant
 
-    > An Enduring Covenant Between The People of the United Kingdom Her Majesty's Government and all those who serve or have served in the Armed Forces of the Crown And their Families
+    > An enduring covenant between the people of the United Kingdom, Her Majesty's Government and all those who serve or have served in the Armed Forces of the Crown and their families
 
     The first duty of Government is the defence of the realm. Our Armed Forces fulfil that responsibility on behalf of the Government, sacrificing some civilian freedoms, facing danger and, sometimes, suffering serious injury or death as a result of their duty. Families also play a vital role in supporting the operational effectiveness of our Armed Forces. In return, the whole nation has a moral obligation to the members of the Naval Service, the Army and the Royal Air Force, together with their families. They deserve our respect and support, and fair treatment.
 
@@ -136,14 +136,14 @@ def generate_body(business_name, row)
 
     This obligation involves the whole of society: it includes voluntary and charitable bodies, private organisations, and the actions of individuals in supporting the Armed Forces. Recognising those who have performed military duty unites the country and demonstrates the value of their contribution. This has no greater expression than in upholding this Covenant.
 
-    ### Section 1: Principles Of The Armed Forces Corporate Covenant
+    ### Section 1: Principles of the Armed Forces Corporate Covenant
 
     1.1 We #{business_name} will endeavour in our business dealings to uphold the key principles of the Armed Forces Covenant, which are:
 
     - no member of the Armed Forces Community should face disadvantage in the provision of public and commercial services compared to any other citizen;
     - and in some circumstances that special treatment may be appropriate especially for the injured or bereaved.
 
-    ### Section 2: Demonstrating our Commitment
+    ### Section 2: Demonstrating our commitment
 
     2.1 #{business_name} recognises the value serving personnel, reservists, veterans and military families bring to our business. We will seek to uphold the principles of the Armed Forces Covenant, by pledging to the following:
 
