@@ -1,6 +1,6 @@
 {
   "base_path": "/armed-forces-covenant-businesses",
-  "body_template": "## The Armed Forces Covenant\r\n\r\n> An Enduring Covenant Between The People of the United Kingdom Her Majesty's Government and all those who serve or have served in the Armed Forces of the Crown And their Families\r\n\r\nThe first duty of Government is the defence of the realm. Our Armed Forces fulfil that responsibility on behalf of the Government, sacrificing some civilian freedoms, facing danger and, sometimes, suffering serious injury or death as a result of their duty. Families also play a vital role in supporting the operational effectiveness of our Armed Forces. In return, the whole nation has a moral obligation to the members of the Naval Service, the Army and the Royal Air Force, together with their families. They deserve our respect and support, and fair treatment.\r\n\r\nThose who serve in the Armed Forces, whether Regular or Reserve, those who have served in the past, and their families, should face no disadvantage compared to other citizens in the provision of public and commercial services. Special consideration is appropriate in some cases, especially for those who have given most such as the injured and the bereaved.\r\n\r\nThis obligation involves the whole of society: it includes voluntary and charitable bodies, private organisations, and the actions of individuals in supporting the Armed Forces. Recognising those who have performed military duty unites the country and demonstrates the value of their contribution. This has no greater expression than in upholding this Covenant.\r\n\r\n### Section 1: Principles Of The Armed Forces Corporate Covenant\r\n\r\n1.1 We **[BUSINESS NAME]** will endeavour in our business dealings to uphold the key principles of the Armed Forces Covenant, which are:\r\n\r\n- no member of the Armed Forces Community should face disadvantage in the provision of public and commercial services compared to any other citizen;\r\n- and in some circumstances that special treatment may be appropriate especially for the injured or bereaved.\r\n\r\n### Section 2: Demonstrating our Commitment\r\n\r\n2.1 **[BUSINESS NAME]** recognises the value serving personnel, reservists, veterans and military families bring to our business. We will seek to uphold the principles of the Armed Forces Covenant, by pledging to the following:\r\n\r\n- Armed Forces Friendly\r\n- UK Service Veterans And Leavers\r\n- UK Service Spouses And Partners\r\n- Flexible Leave For Spouses\r\n- UK Reservists\r\n- UK Cadets\r\n- Armed Forces Day\r\n- Reserve Forces Day\r\n- Discounts\r\n- Armed Forces Charities\r\n- UK Wounded, Injured And Sick\r\n\r\nWe also pledge the following:\r\n\r\n- **[Custom content for bespoke pledge]**\r\n\r\n2.2 We will publicise these commitments through our literature and/or on our website, setting out how we will seek to honour them and inviting feedback from the Service community and our customers on how we are doing.\r\n\n",
+  "body_template": "## The Armed Forces Covenant\r\n\r\n> An enduring covenant between the people of the United Kingdom, Her Majesty's Government and all those who serve or have served in the Armed Forces of the Crown and their families\r\n\r\nThe first duty of Government is the defence of the realm. Our Armed Forces fulfil that responsibility on behalf of the Government, sacrificing some civilian freedoms, facing danger and, sometimes, suffering serious injury or death as a result of their duty. Families also play a vital role in supporting the operational effectiveness of our Armed Forces. In return, the whole nation has a moral obligation to the members of the Naval Service, the Army and the Royal Air Force, together with their families. They deserve our respect and support, and fair treatment.\r\n\r\nThose who serve in the Armed Forces, whether Regular or Reserve, those who have served in the past, and their families, should face no disadvantage compared to other citizens in the provision of public and commercial services. Special consideration is appropriate in some cases, especially for those who have given most such as the injured and the bereaved.\r\n\r\nThis obligation involves the whole of society: it includes voluntary and charitable bodies, private organisations, and the actions of individuals in supporting the Armed Forces. Recognising those who have performed military duty unites the country and demonstrates the value of their contribution. This has no greater expression than in upholding this Covenant.\r\n\r\n### Section 1: Principles of the Armed Forces Corporate Covenant\r\n\r\n1.1 We **[BUSINESS NAME]** will endeavour in our business dealings to uphold the key principles of the Armed Forces Covenant, which are:\r\n\r\n- no member of the Armed Forces Community should face disadvantage in the provision of public and commercial services compared to any other citizen;\r\n- and in some circumstances that special treatment may be appropriate especially for the injured or bereaved.\r\n\r\n### Section 2: Demonstrating our commitment\r\n\r\n2.1 **[BUSINESS NAME]** recognises the value serving personnel, reservists, veterans and military families bring to our business. We will seek to uphold the principles of the Armed Forces Covenant, by pledging to the following:\r\n\r\n- Armed Forces Friendly\r\n- UK Service Veterans And Leavers\r\n- UK Service Spouses And Partners\r\n- Flexible Leave For Spouses\r\n- UK Reservists\r\n- UK Cadets\r\n- Armed Forces Day\r\n- Reserve Forces Day\r\n- Discounts\r\n- Armed Forces Charities\r\n- UK Wounded, Injured And Sick\r\n\r\nWe also pledge the following:\r\n\r\n- **[Custom content for bespoke pledge]**\r\n\r\n2.2 We will publicise these commitments through our literature and/or on our website, setting out how we will seek to honour them and inviting feedback from the Service community and our customers on how we are doing.\r\n\r\n",
   "content_id": "9dfab367-b676-485f-8594-66efaf449d0e",
   "default_order": "title",
   "description": "Find businesses that have signed the Armed Forces Covenant",
@@ -315,10 +315,6 @@
           "value": "not-for-profit"
         },
         {
-          "label": "Other",
-          "value": "other"
-        },
-        {
           "label": "Pharmaceuticals",
           "value": "pharmaceuticals"
         },
@@ -369,6 +365,10 @@
         {
           "label": "Utilities",
           "value": "utilities"
+        },
+        {
+          "label": "Other",
+          "value": "other"
         }
       ],
       "display_as_result_metadata": true,
@@ -420,7 +420,7 @@
       "filterable": true,
       "key": "armed_forces_covenant_business_date_signed",
       "name": "Date signed",
-      "preposition": "Date signed",
+      "preposition": "Signed",
       "short_name": "Date signed",
       "specialist_publisher_properties": {
         "validations": {
@@ -433,6 +433,7 @@
   "filter": {
     "format": "armed_forces_covenant_business"
   },
+  "integration_target_stack": "live",
   "name": "Find businesses who have signed the Armed Forces Covenant",
   "organisations": [
     "d994e55c-48c9-4795-b872-58d8ec98af12"
@@ -441,6 +442,6 @@
   "show_table_of_contents": true,
   "signup_content_id": "7a1666dc-fa37-47e5-bc34-2c25b163567b",
   "subscription_list_title_prefix": "Businesses who have signed the Armed Forces Covenant",
-  "summary": "Find out which businesses have signed the Armed Forces Covenant and what they are pledging to do to support you and your family.",
+  "summary": "Find out which businesses have signed the Armed Forces Covenant and what they are pledging to do to support you and your family.\r\n\r\nNot all Armed Forces Covenant signatories are shown here. Some organisations have chosen not to be included in this directory. For more information about Armed Forces Covenant signatories, contact [Defence Relationship Management](https://submit.forms.service.gov.uk/form/8302/defence-relationship-management-contact-form/30778).",
   "target_stack": "draft"
 }
