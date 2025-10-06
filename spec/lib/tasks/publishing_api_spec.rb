@@ -1,4 +1,5 @@
 require "rails_helper"
+require "thor"
 
 RSpec.describe "publishing_api rake tasks", type: :task do
   describe "publishing_api:publish_finders" do
@@ -7,6 +8,7 @@ RSpec.describe "publishing_api rake tasks", type: :task do
       stub_any_publishing_api_put_content
       stub_any_publishing_api_patch_links
       stub_any_publishing_api_publish
+      allow_any_instance_of(Thor::Shell::Basic).to receive(:yes?).and_return(true)
     end
 
     it "publishes all finders to the Publishing API" do
@@ -40,6 +42,7 @@ RSpec.describe "publishing_api rake tasks", type: :task do
       stub_any_publishing_api_put_content
       stub_any_publishing_api_patch_links
       stub_any_publishing_api_publish
+      allow_any_instance_of(Thor::Shell::Basic).to receive(:yes?).and_return(true)
     end
 
     context "incorrect file name is given" do
