@@ -28,6 +28,10 @@
           "value": "competition-disqualification"
         },
         {
+          "label": "Consumer enforcement",
+          "value": "consumer-enforcement"
+        },
+        {
           "label": "Criminal cartels",
           "value": "criminal-cartels"
         },
@@ -50,10 +54,6 @@
         {
           "label": "OIM Project",
           "value": "oim-project"
-        },
-        {
-          "label": "Consumer enforcement",
-          "value": "consumer-enforcement"
         },
         {
           "label": "Regulatory references and appeals",
@@ -248,8 +248,12 @@
     {
       "allowed_values": [
         {
-          "label": "CA98 - no grounds for action",
-          "value": "ca98-no-grounds-for-action-non-infringement"
+          "label": "CA98 - administrative priorities",
+          "value": "ca98-administrative-priorities"
+        },
+        {
+          "label": "CA98 - commitments",
+          "value": "ca98-commitment"
         },
         {
           "label": "CA98 - infringement Chapter I",
@@ -260,12 +264,12 @@
           "value": "ca98-infringement-chapter-ii"
         },
         {
-          "label": "CA98 - administrative priorities",
-          "value": "ca98-administrative-priorities"
+          "label": "CA98 - no grounds for action",
+          "value": "ca98-no-grounds-for-action-non-infringement"
         },
         {
-          "label": "CA98 - commitments",
-          "value": "ca98-commitment"
+          "label": "Competition disqualification - no order granted or undertaking given",
+          "value": "competition-disqualification-no-order-granted-or-undertaking-given"
         },
         {
           "label": "Competition disqualification - order granted",
@@ -276,8 +280,20 @@
           "value": "competition-disqualification-undertaking-given"
         },
         {
-          "label": "Competition disqualification - no order granted or undertaking given",
-          "value": "competition-disqualification-no-order-granted-or-undertaking-given"
+          "label": "Consumer enforcement - changes to business practices agreed",
+          "value": "consumer-enforcement-changes-to-business-practices-agreed"
+        },
+        {
+          "label": "Consumer enforcement - court order",
+          "value": "consumer-enforcement-court-order"
+        },
+        {
+          "label": "Consumer enforcement - no formal action",
+          "value": "consumer-enforcement-no-action"
+        },
+        {
+          "label": "Consumer enforcement - undertakings",
+          "value": "consumer-enforcement-undertakings"
         },
         {
           "label": "Criminal cartels - verdict",
@@ -288,20 +304,28 @@
           "value": "firm-not-designated"
         },
         {
-          "label": "SMS designation",
-          "value": "sms-designation"
-        },
-        {
           "label": "Markets - phase 1 no enforcement action",
           "value": "markets-phase-1-no-enforcement-action"
+        },
+        {
+          "label": "Markets - phase 1 referral",
+          "value": "markets-phase-1-referral"
         },
         {
           "label": "Markets - phase 1 undertakings in lieu of reference",
           "value": "markets-phase-1-undertakings-in-lieu-of-reference"
         },
         {
-          "label": "Markets - phase 1 referral",
-          "value": "markets-phase-1-referral"
+          "label": "Markets - phase 2 adverse effect on competition leading to remedies",
+          "value": "markets-phase-2-adverse-effect-on-competition-leading-to-remedies"
+        },
+        {
+          "label": "Markets - phase 2 clearance - no adverse effect on competition",
+          "value": "markets-phase-2-clearance-no-adverse-effect-on-competition"
+        },
+        {
+          "label": "Markets - phase 2 decision to dispense with procedural obligations",
+          "value": "markets-phase-2-decision-to-dispense-with-procedural-obligations"
         },
         {
           "label": "Mergers - phase 1 clearance",
@@ -312,8 +336,8 @@
           "value": "mergers-phase-1-clearance-with-undertakings-in-lieu"
         },
         {
-          "label": "Mergers - phase 1 referral",
-          "value": "mergers-phase-1-referral"
+          "label": "Mergers - phase 1 exception to duty to refer",
+          "value": "mergers-phase-1-exception-to-duty-to-refer"
         },
         {
           "label": "Mergers - phase 1 found not to qualify",
@@ -324,16 +348,12 @@
           "value": "mergers-phase-1-public-interest-interventions"
         },
         {
-          "label": "Markets - phase 2 clearance - no adverse effect on competition",
-          "value": "markets-phase-2-clearance-no-adverse-effect-on-competition"
+          "label": "Mergers - phase 1 referral",
+          "value": "mergers-phase-1-referral"
         },
         {
-          "label": "Markets - phase 2 adverse effect on competition leading to remedies",
-          "value": "markets-phase-2-adverse-effect-on-competition-leading-to-remedies"
-        },
-        {
-          "label": "Markets - phase 2 decision to dispense with procedural obligations",
-          "value": "markets-phase-2-decision-to-dispense-with-procedural-obligations"
+          "label": "Mergers - phase 2 cancellation",
+          "value": "mergers-phase-2-cancellation"
         },
         {
           "label": "Mergers - phase 2 clearance",
@@ -348,28 +368,12 @@
           "value": "mergers-phase-2-prohibition"
         },
         {
-          "label": "Mergers - phase 2 cancellation",
-          "value": "mergers-phase-2-cancellation"
-        },
-        {
-          "label": "Consumer enforcement - no formal action",
-          "value": "consumer-enforcement-no-action"
-        },
-        {
-          "label": "Consumer enforcement - court order",
-          "value": "consumer-enforcement-court-order"
-        },
-        {
-          "label": "Consumer enforcement - undertakings",
-          "value": "consumer-enforcement-undertakings"
-        },
-        {
-          "label": "Consumer enforcement - changes to business practices agreed",
-          "value": "consumer-enforcement-changes-to-business-practices-agreed"
-        },
-        {
           "label": "Regulatory references and appeals - final determination",
           "value": "regulatory-references-and-appeals-final-determination"
+        },
+        {
+          "label": "SMS designation",
+          "value": "sms-designation"
         }
       ],
       "display_as_result_metadata": true,
@@ -410,8 +414,8 @@
   "related": [
     "46708567-70a6-4f20-8257-6c222b3d8cb3"
   ],
-  "show_table_of_contents": true,
   "show_metadata_block": true,
+  "show_table_of_contents": true,
   "signup_content_id": "43dd2b13-93ec-4ca6-a7a4-e2eb5f5d485a",
   "subscription_list_title_prefix": "CMA cases",
   "summary": "This case finder includes cases and projects from the Competition and Markets Authority (CMA), Office for the Internal Market (OIM) and Subsidy Advice Unit (SAU).",
