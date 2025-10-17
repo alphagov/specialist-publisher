@@ -268,10 +268,6 @@
           "value": "ca98-no-grounds-for-action-non-infringement"
         },
         {
-          "label": "Competition disqualification - no order granted or undertaking given",
-          "value": "competition-disqualification-no-order-granted-or-undertaking-given"
-        },
-        {
           "label": "Competition disqualification - order granted",
           "value": "competition-disqualification-order-granted"
         },
@@ -304,10 +300,6 @@
           "value": "firm-not-designated"
         },
         {
-          "label": "Markets - phase 1 no enforcement action",
-          "value": "markets-phase-1-no-enforcement-action"
-        },
-        {
           "label": "Markets - phase 1 referral",
           "value": "markets-phase-1-referral"
         },
@@ -322,10 +314,6 @@
         {
           "label": "Markets - phase 2 clearance - no adverse effect on competition",
           "value": "markets-phase-2-clearance-no-adverse-effect-on-competition"
-        },
-        {
-          "label": "Markets - phase 2 decision to dispense with procedural obligations",
-          "value": "markets-phase-2-decision-to-dispense-with-procedural-obligations"
         },
         {
           "label": "Mergers - phase 1 clearance",
