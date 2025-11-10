@@ -9,27 +9,11 @@
       "allowed_values": [
         {
           "label": "Apple",
-          "value": "apple",
-          "sub_facets": [
-            {
-              "label": "Mobile",
-              "value": "apple-mobile"
-            }
-          ]
+          "value": "apple"
         },
         {
           "label": "Google",
-          "value": "google",
-          "sub_facets": [
-            {
-              "label": "Mobile",
-              "value": "google-mobile"
-            },
-            {
-              "label": "Search",
-              "value": "google-search"
-            }
-          ]
+          "value": "google"
         }
       ],
       "display_as_result_metadata": true,
@@ -39,14 +23,41 @@
       "preposition": "Company",
       "short_name": "Company",
       "specialist_publisher_properties": {
-        "select": "multiple",
+        "select": "one",
         "validations": {
           "required": {}
         }
       },
-      "sub_facet_key": "digital_markets_regime_requirements_sms_designation",
-      "sub_facet_name": "SMS designation",
-      "type": "nested"
+      "type": "text"
+    },
+    {
+      "allowed_values": [
+        {
+          "label": "Apple: Mobile",
+          "value": "apple-mobile"
+        },
+        {
+          "label": "Google: Mobile",
+          "value": "google-mobile"
+        },
+        {
+          "label": "Google: Search",
+          "value": "google-search"
+        }
+      ],
+      "display_as_result_metadata": true,
+      "filterable": true,
+      "key": "digital_markets_regime_requirements_sms_designation",
+      "name": "SMS Designation",
+      "preposition": "Designation",
+      "short_name": "Designation",
+      "specialist_publisher_properties": {
+        "select": "one",
+        "validations": {
+          "required": {}
+        }
+      },
+      "type": "text"
     },
     {
       "allowed_values": [
@@ -64,6 +75,7 @@
       "key": "digital_markets_regime_requirements_status",
       "name": "Status",
       "preposition": "Status",
+      "short_name": "Status",
       "specialist_publisher_properties": {
         "select": "one",
         "validations": {
@@ -90,6 +102,7 @@
   "filter": {
     "format": "digital_markets_regime_requirement"
   },
+  "integration_target_stack": "live",
   "name": "Digital markets regime requirements",
   "organisations": [
     "957eb4ec-089b-4f71-ba2a-dc69ac8919ea"

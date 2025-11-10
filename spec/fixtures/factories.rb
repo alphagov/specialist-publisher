@@ -952,14 +952,14 @@ FactoryBot.define do
 
   factory :digital_markets_regime_requirement, parent: :document do
     base_path { "/digital-markets-regime-requirements/example-document" }
-    document_type { "digital_market_regime_requirement" }
+    document_type { "digital_markets_regime_requirement" }
     transient do
       default_metadata do
         {
           "digital_markets_regime_requirements_date" => "2015-11-16",
           "digital_markets_regime_requirements_status" => "Active",
-          "digital_markets_regime_requirements_sms_firm_company" => %w[google],
-          "digital_markets_regime_requirements_sms_designation" => %w[google-mobile google-search],
+          "digital_markets_regime_requirements_sms_firm_company" => "google",
+          "digital_markets_regime_requirements_sms_designation" => "google-mobile",
         }
       end
     end
