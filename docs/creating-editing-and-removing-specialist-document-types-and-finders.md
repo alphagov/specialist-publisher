@@ -6,7 +6,7 @@ applications.
 
 **IMPORTANT**
 
-Recent changes to Specialist Publisher now allow users to self-serve. These requests will be coming through Zendesk, as a code diff for the [specialist-publisher][specialist-publisher] repo. Follow the steps below to validate the thoroughness of the changes and open the remaining PRs against [publishing-api][publishing-api] and [search-api][search-api], if needed.
+Recent changes to Specialist Publisher now allow users to self-serve. Using the UI, publishers can request a change to finder metadata, or facet configuration (i.e. filters). The “Submit changes” button creates a Zendesk ticket in the publishing queue, complete with the updated JSON schema. Developers can then copy and paste the JSON into a pull request. Follow the steps below to validate the thoroughness of the changes and open the remaining PRs against [publishing-api][publishing-api] and [search-api][search-api], if needed.
 
 [publishing-api]: https://github.com/alphagov/publishing-api
 [search-api]: https://github.com/alphagov/search-api
@@ -50,7 +50,7 @@ For a breakdown of email subscription options see [Configure the email sign up p
 
 See [CMA cases](https://github.com/alphagov/specialist-publisher/blob/main/app/models/cma_case.rb).
 
-Make sure to include all necessary validations, noting that validation for ['required'](https://github.com/alphagov/specialist-publisher/blob/main/spec/features/creating_a_new_document_spec.rb#L72) fields and [date](https://github.com/alphagov/specialist-publisher/blob/main/spec/features/creating_a_new_document_spec.rb#L104) is now schema-driven, with automatic checks for validity. 
+Make sure to include all necessary validations, noting that validation for ['required'](https://github.com/alphagov/specialist-publisher/blob/main/spec/features/creating_a_new_document_spec.rb#L72) fields and [date](https://github.com/alphagov/specialist-publisher/blob/main/spec/features/creating_a_new_document_spec.rb#L104) is now schema-driven, with automatic checks for validity.
 
 Only [bespoke validations](https://github.com/alphagov/specialist-publisher/blob/main/app/models/marine_equipment_approved_recommendation.rb#L3) should be added to the model; otherwise, you can apply validations as shown [here](https://github.com/alphagov/specialist-publisher/blob/main/app/models/ai_assurance_portfolio_technique.rb#L2).
 
@@ -62,7 +62,7 @@ It is no longer required to create a view. All the views will be auto-generated 
 
 Note that the `select type` of an input (one/multiple) is now configured under the `specialist_publisher_properties` [in the schema](https://github.com/alphagov/specialist-publisher/blob/84b89e9f737f59a615b5a9df1a5b8d3e7d74f75d/lib/documents/schemas/algorithmic_transparency_records.json#L164).
 
-If you require custom behaviours, create a view file in the [views folder](https://github.com/alphagov/specialist-publisher/tree/main/app/views/metadata_fields). Other "non-conforming" views can be found there. Make use of the available `FacetInputComponent` subclasses to render the custom view's facets. 
+If you require custom behaviours, create a view file in the [views folder](https://github.com/alphagov/specialist-publisher/tree/main/app/views/metadata_fields). Other "non-conforming" views can be found there. Make use of the available `FacetInputComponent` subclasses to render the custom view's facets.
 
 
 ### Testing your document type
@@ -107,8 +107,8 @@ The finder default is to have no email subscription. Email subscriptions can be 
 
 ### 1. Subscribe to all fields
 
-- Configure `signup_content_id` - a new `UUID` for the email signup page. 
-- Whilst the above step is enough to configure email subscription, it does not offer the user any filtering options. You can additionally allow the user to preserve their facet selection when navigating to the email subscription page: 
+- Configure `signup_content_id` - a new `UUID` for the email signup page.
+- Whilst the above step is enough to configure email subscription, it does not offer the user any filtering options. You can additionally allow the user to preserve their facet selection when navigating to the email subscription page:
   - In the `email_filter_options` hash, set `email_filter_by` to `all_selected_facets`. This will pick up all the facets that have `allowed_values` and `filterable: true`. See [example](https://github.com/alphagov/specialist-publisher/blob/91ee849549c5e5478126d06842513a516cacceb2/lib/documents/schemas/marine_equipment_approved_recommendations.json#L12).
   - Edit [email-alert-api](https://github.com/alphagov/email-alert-api/tree/main/lib) by adding all filterable facets to [valid_tags.rb](https://github.com/alphagov/email-alert-api/blob/main/lib/valid_tags.rb).
 - You may exclude some of the facets by additionally setting `all_selected_facets_except_for` - see [example](https://github.com/alphagov/specialist-publisher/blob/91ee849549c5e5478126d06842513a516cacceb2/lib/documents/schemas/export_health_certificates.json#L8).
@@ -137,10 +137,10 @@ To deploy a new finder for previewing:
    2. [Deploy the finder](#7-deploy-a-finder) to draft stack
    3. Wait for department's feedback and approval and agree on a release date
 
-NB: Depending on the finder requirements, you may choose to allow the users to publish documents in preview mode, which 
+NB: Depending on the finder requirements, you may choose to allow the users to publish documents in preview mode, which
 would enable them to test the full finder filtering functionality. Changes to the schema requested after documents have been
 published, could require running a reindex, and there is a risk of loss of data. In order to prevent users from publishing,
-we could give only basic Signon permissions whilst in preview mode. Signon access to the Specialist Publisher app, only 
+we could give only basic Signon permissions whilst in preview mode. Signon access to the Specialist Publisher app, only
 gives the user writer access (they may create, edit, and update, but not publish or unpublish).
 
 ## 6. Publish a finder to the live stack
@@ -164,7 +164,7 @@ To release the finder to the live stack:
 
 Specialist Publisher grants access to the publishing interface for a document type to the following Signon users:
 
-1. Users that belong to the owner organisation - have default "write" permissions, allowing them to view and draft new documents. 
+1. Users that belong to the owner organisation - have default "write" permissions, allowing them to view and draft new documents.
 2. Users that belong to the owner organisation AND have `editor` permission in Signon - are considered "departmental editors" and can publish, unpublish and discard documents.
 3. Users that have the permission `<your_new_document_type>_editor` in Signon are granted "departmental editor" access regardless of their organisation. This is sometimes required for cross-departmental documents. These special permissions need to be [created manually](https://docs.publishing.service.gov.uk/repos/signon/usage.html#creating-editing-and-deleting-permissions) in Signon. You do not need to create this permission unless cross-departmental access has been explicitly requested.
 
@@ -180,10 +180,10 @@ For specific content guidance, loop in the content team on the Zendesk ticket, w
 
 Here's a few content concerns to keep an eye on:
 - Finder titles should usually be in the format "Find [brief description of finder content]". For example, "Find data ethics guidance, standards and frameworks".
-- Sanity check that the facet selection is meaningful in the context of the finder and documents. 
+- Sanity check that the facet selection is meaningful in the context of the finder and documents.
 - The facet selection (one/multiple) should be appropriate for the content. Whilst the one/multiple option dictates how we tag the documents publisher-side, the filters on finder-frontend are always multiple. This can be confusing to users.
 - You might need to translate certain fields (especially from pre-existing digital content) to match the GOV.UK frontend components style. For example, the date search (before/after) can easily encompass two distinct date fields.
-- Make free text fields (which are not filterable in the way facets are) into facets if the list is known and unlikely to change. This will help users filter the content more easily. The now available admin area should make this a small maintenance task, if the list needs to change in the future. 
+- Make free text fields (which are not filterable in the way facets are) into facets if the list is known and unlikely to change. This will help users filter the content more easily. The now available admin area should make this a small maintenance task, if the list needs to change in the future.
 - Long facet option lists should be alphabetical to aid search, unless the departments can justify a different order.
 - For very long facet option lists, consider using the `show_option_select_filter` in the schema, which will add a search bar to the facet. See example [here](https://github.com/alphagov/specialist-publisher/blob/3a0d89a821c6aeea87a20dae7c8f6e3fb1cf9ec0/lib/documents/schemas/licence_transactions.json#L243).
 
@@ -218,9 +218,9 @@ We often receive requests to add new fields to a specialist document or to add n
 NB: In order to remove a field, ensure no document are tagged with that field, or that the finder's owners are aware of the data loss implications.
 
 1. In `publishing-api`:
-    - Remove the field from the [specialist_document schema](https://github.com/alphagov/publishing-api/blob/6d5595470bd0e7f3072e06f0113e3ca5514b6e98/content_schemas/formats/shared/definitions/_specialist_document.jsonnet). 
+    - Remove the field from the [specialist_document schema](https://github.com/alphagov/publishing-api/blob/6d5595470bd0e7f3072e06f0113e3ca5514b6e98/content_schemas/formats/shared/definitions/_specialist_document.jsonnet).
     - Run `bundle exec rake build_schemas` to regenerate schemas after removing the new value(s).
-   
+
    See removal of `key_reference` in [example commit](https://github.com/alphagov/publishing-api/pull/3075/commits/03197cc43f11b762314a17ecbc37ec9601c0ede9).
 
 2. In `specialist publisher`:
@@ -228,7 +228,7 @@ NB: In order to remove a field, ensure no document are tagged with that field, o
     - Remove field usage from [view](https://github.com/alphagov/specialist-publisher/tree/main/app/views/metadata_fields) (if this is a legacy finder that isn't referring to the shared view).
     - Remove field from [schema](https://github.com/alphagov/specialist-publisher/tree/main/lib/documents/schemas) files.
     - Remove any other usages, such as from tests and factories.
-   
+
    See removal of `key_reference` in [example commit](https://github.com/alphagov/specialist-publisher/pull/2942/commits/6b215cb8d02fdcee6d6e05d108f7e2cffca091c4).
 
 3. In `search-api`, remove the field from:
@@ -236,7 +236,7 @@ NB: In order to remove a field, ensure no document are tagged with that field, o
     - The [elasticsearch_presenter](https://github.com/alphagov/search-api/blob/main/lib/govuk_index/presenters/elasticsearch_presenter.rb).
     - The [specialist_presenter](https://github.com/alphagov/search-api/blob/main/lib/govuk_index/presenters/specialist_presenter.rb).
     - The [field_definitions](https://github.com/alphagov/search-api/blob/main/config/schema/field_definitions.json) file.
-   
+
    See removal of `key_reference` in [example commit](https://github.com/alphagov/search-api/pull/3120/commits/b18f25ce86f496e46294ebce6e37e42bf035c105).
 
 4. [Republish the finder](#7-deploy-a-finder)
@@ -276,7 +276,7 @@ The following steps are required to remove a finder:
    - Remove the field definitions from [this file](https://github.com/alphagov/publishing-api/blob/main/content_schemas/formats/shared/definitions/_specialist_document.jsonnet).
    - If present, remove the example from [this directory](https://github.com/alphagov/publishing-api/tree/main/content_schemas/examples/specialist_document/frontend).
    - Run `bundle exec rake build_schemas` to regenerate schemas.
-   
+
    See [example commit](https://github.com/alphagov/publishing-api/pull/2706).
 
 3. Remove usages from `specialist publisher`. See [example commit](https://github.com/alphagov/specialist-publisher/pull/2588/files).
@@ -286,7 +286,7 @@ The following steps are required to remove a finder:
 
 # Reindexing breakdown
 
-Regardless on the changes you're trying to make, you can implement them in such a way that a full reindex is not necessary. 
+Regardless on the changes you're trying to make, you can implement them in such a way that a full reindex is not necessary.
 
 <!-- TODO Old mappings will be cleaned up by a monthly cronjob. -->
 
@@ -304,7 +304,7 @@ Run: `rake SEARCH_INDEX=govuk 'search:update_schema'` in a Search API console, t
 
 3. Change name of facet
 
-Just change the facet label in Specialist Publisher. 
+Just change the facet label in Specialist Publisher.
 
 There's no actual need to change the field key. If you nonetheless want to change the key as well:
 - declare a new field by following steps similar to [adding a new field](#adding-a-new-field-to-an-existing-specialist-document)
