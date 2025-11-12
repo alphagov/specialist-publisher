@@ -144,6 +144,10 @@
           "value": "distribution-and-service-industries"
         },
         {
+          "label": "Education and training",
+          "value": "education-and-training"
+        },
+        {
           "label": "Electronics",
           "value": "electronics-industry"
         },
