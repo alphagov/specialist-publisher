@@ -438,6 +438,11 @@
   "organisations": [
     "d994e55c-48c9-4795-b872-58d8ec98af12"
   ],
+  "related": [
+    "5e373a22-7631-11e4-a3cb-005056011aef",
+    "5e373a71-7631-11e4-a3cb-005056011aef",
+    "5ec46dcc-7631-11e4-a3cb-005056011aef"
+  ],
   "show_metadata_block": true,
   "show_table_of_contents": true,
   "signup_content_id": "7a1666dc-fa37-47e5-bc34-2c25b163567b",
