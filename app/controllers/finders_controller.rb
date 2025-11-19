@@ -63,6 +63,8 @@ private
       priority: "normal",
       description: "Developer - raise a PR replacing this schema with the schema below: " \
         "https://github.com/alphagov/specialist-publisher/edit/main/lib/documents/schemas/#{current_format.document_type.pluralize}.json" \
+        "\r\nBear in mind that schema changes require the finder to be republished, by running the rake task `publishing_api:publish_finder[your_format_name_based_on_the_schema_file]`.\r\n" \
+        "\r\nDepending on your changes, you might have to complete extra steps. Please refer to the developer documentation: https://docs.publishing.service.gov.uk/repos/specialist-publisher/creating-editing-and-removing-specialist-document-types-and-finders.html.\r\n" \
         "\r\n---\r\n" \
         "```\r\n#{params[:proposed_schema]}\r\n```" \
         "\r\n---\r\n" \
