@@ -436,7 +436,8 @@
   "integration_target_stack": "live",
   "name": "Find businesses who have signed the Armed Forces Covenant",
   "organisations": [
-    "d994e55c-48c9-4795-b872-58d8ec98af12"
+    "d994e55c-48c9-4795-b872-58d8ec98af12",
+    "88df8ced-89b1-4d95-9b6a-72d1d4f324a8"
   ],
   "related": [
     "5e373a22-7631-11e4-a3cb-005056011aef",
