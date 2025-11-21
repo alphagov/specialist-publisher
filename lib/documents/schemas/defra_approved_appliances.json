@@ -1,0 +1,134 @@
+{
+  "target_stack": "draft",
+  "content_id": "ce2a3675-df37-4a17-bc72-48e7303d5d94",
+  "name": "Find Defra approved fuel-burning appliances",
+  "document_title": "Find Defra approved fuel-burning appliances",
+  "description": "Find Defra approved appliances for burning fuel in smoke control areas in England, Scotland, Wales and Northern Ireland.",
+  "base_path": "/defra-approved-appliances",
+  "organisations": [
+    "de4e9dc6-cca4-43af-a594-682023b84d6c"
+  ],
+  "summary": "<p>Find Defra approved fuel-burning appliances. Defra have approved these appliances for burning fuel in smoke control areas in England, Scotland, Wales and Northern Ireland.</p> <p><a href=\"https://www.gov.uk/smoke-control-area-rules\">Check the rules for smoke control areas.</a></p> <p><a href=\"https://www.gov.uk/authorised-fuels\">Find fuels you can burn in smoke control areas.</a></p>",
+  "related": [
+    "d826ea5a-aa78-439c-873a-1360293e4b01",
+    "d3a313e3-6a05-4286-b9c4-5d5cc807f600"
+  ],
+  "show_summaries": true,
+  "document_noun": "appliance",
+  "default_order": "title",
+  "facets": [
+    {
+      "key": "defra_approved_appliance_name",
+      "name": "Appliance name",
+      "short_name": "Name",
+      "type": "text",
+      "specialist_publisher_properties": {
+        "validations": {
+          "required": {}
+        }
+      },
+      "filterable": true,
+      "display_as_result_metadata": true,
+      "preposition": "Name"
+    },
+    {
+      "key": "defra_approved_appliance_type",
+      "name": "Appliance type",
+      "short_name": "Appliance type",
+      "type": "text",
+      "specialist_publisher_properties": {
+        "validations": {
+          "required": {}
+        },
+        "select": "multiple"
+      },
+      "allowed_values": [
+        { "label": "Air heater", "value": "air-heater" },
+        { "label": "Boiler", "value": "boiler" },
+        { "label": "Cooker with boiler", "value": "cooker-with-boiler" },
+        { "label": "Gasifier", "value": "gasifier" },
+        { "label": "Generic exemption", "value": "generic-exemption" },
+        { "label": "Incinerator", "value": "incinerator" },
+        { "label": "Inset appliance", "value": "inset-appliance" },
+        { "label": "Oven", "value": "oven" },
+        { "label": "Pellet stove", "value": "pellet-stove" },
+        { "label": "Pizza oven", "value": "pizza-oven" },
+        { "label": "Room heater", "value": "room-heater" },
+        { "label": "Stove", "value": "stove" }
+      ],
+      "filterable": true,
+      "display_as_result_metadata": true,
+      "preposition": "Appliance type"
+    },
+    {
+      "key": "defra_approved_appliance_fuel_type",
+      "name": "Fuel type",
+      "short_name": "Fuel type",
+      "type": "text",
+      "specialist_publisher_properties": {
+        "validations": {
+          "required": {}
+        },
+        "select": "multiple"
+      },
+      "allowed_values": [
+        { "label": "Biomass", "value": "biomass" },
+        { "label": "Liquid", "value": "liquid" },
+        { "label": "Mineral", "value": "mineral" },
+        { "label": "Multifuel", "value": "multifuel" },
+        { "label": "Wood-based", "value": "wood-based" },
+        { "label": "Other", "value": "other" }
+      ],
+      "filterable": true,
+      "display_as_result_metadata": true,
+      "preposition": "Fuel type"
+    },
+    {
+      "key": "defra_approved_appliance_manufacturer",
+      "name": "Manufacturer",
+      "short_name": "Manufacturer",
+      "type": "text",
+      "specialist_publisher_properties": {
+        "validations": {
+          "required": {}
+        }
+      },
+      "filterable": true,
+      "display_as_result_metadata": true,
+      "preposition": "Manufacturer"
+    },
+    {
+      "key": "defra_approved_appliance_country",
+      "name": "Country",
+      "short_name": "Country",
+      "type": "text",
+      "specialist_publisher_properties": {
+        "validations": {
+          "required": {}
+        },
+        "select": "multiple"
+      },
+      "allowed_values": [
+        { "label": "England", "value": "england" },
+        { "label": "Scotland", "value": "scotland" },
+        { "label": "Wales", "value": "wales" },
+        { "label": "Northern Ireland", "value": "northern-ireland" }
+      ],
+      "filterable": true,
+      "display_as_result_metadata": true,
+      "preposition": "Country"
+    },
+    {
+      "key": "defra_approved_appliance_fuel_authorised_date",
+      "name": "Date the fuel was authorised",
+      "short_name": "Date authorised",
+      "type": "date",
+      "display_as_result_metadata": true,
+      "filterable": true,
+      "preposition": "Date authorised"
+    }
+  ],
+  "filter": {
+    "format": "defra_approved_appliance"
+  }
+}
