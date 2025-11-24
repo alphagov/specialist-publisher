@@ -407,6 +407,14 @@
           "value": "enteric-fever-enhanced-surveillance-database"
         },
         {
+          "label": "ePACT2 Prescription Data",
+          "value": "epact2-prescription-data"
+        },
+        {
+          "label": "First Few X cases and contacts (FFX)",
+          "value": "first-few-x-cases-and-contacts-ffx"
+        },
+        {
           "label": "Gonococcal Resistance to Antimicrobials Surveillance Programme (GRASP)",
           "value": "gonococcal-resistance-to-antimicrobials-surveillance-programme-grasp"
         },
@@ -523,6 +531,10 @@
           "value": "national-study-on-flooding-and-health"
         },
         {
+          "label": "National Tuberculosis Surveillance System (NTBS)",
+          "value": "tb-clinical-database"
+        },
+        {
           "label": "Nuclear Weapons Test Participants Study (NWTPS)",
           "value": "nuclear-weapons-test-participants-study-nwtps"
         },
@@ -579,10 +591,6 @@
           "value": "surveillance-of-sars-cov2-in-education-settings"
         },
         {
-          "label": "TB Clinical Database",
-          "value": "tb-clinical-database"
-        },
-        {
           "label": "Toxoplasma surveillance system",
           "value": "toxoplasma-surveillance-system"
         },
@@ -597,10 +605,6 @@
         {
           "label": "UK Zika Congenital Abnormalities Surveillance System (UZCASS)",
           "value": "uk-zika-congenital-abnormalities-surveillance-system-uzcass"
-        },
-        {
-          "label": "First Few X cases and contacts (FFX)",
-          "value": "first-few-x-cases-and-contacts-ffx"
         }
       ],
       "display_as_result_metadata": false,
