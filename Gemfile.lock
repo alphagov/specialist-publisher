@@ -107,7 +107,7 @@ GEM
       msgpack (~> 1.2)
     brakeman (7.0.2)
       racc
-    bson (5.1.1)
+    bson (5.2.0)
     builder (3.3.0)
     byebug (12.0.0)
     capybara (3.40.0)
@@ -292,7 +292,7 @@ GEM
     mini_mime (1.1.5)
     mini_portile2 (2.8.9)
     minitest (5.26.2)
-    mongo (2.21.3)
+    mongo (2.22.0)
       base64
       bson (>= 4.14.1, < 6.0.0)
     mongoid (9.0.8)
