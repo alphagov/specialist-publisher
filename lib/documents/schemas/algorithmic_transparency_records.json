@@ -102,6 +102,10 @@
           "value": "home-office"
         },
         {
+          "label": "Housing Ombudsman Service",
+          "value": "housing-ombudsman-service"
+        },
+        {
           "label": "Information Commissioner’s Office",
           "value": "information-commissioners-office"
         },
