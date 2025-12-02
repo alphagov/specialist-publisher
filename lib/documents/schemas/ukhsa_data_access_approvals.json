@@ -459,6 +459,10 @@
           "value": "htlv-surveillance-system"
         },
         {
+          "label": "Human Growth Hormone Recipients at Risk of iCJD",
+          "value": "human-growth-hormone-recipients-at-risk-of-icjd"
+        },
+        {
           "label": "Infectious Diseases in Pregnancy",
           "value": "infectious-diseases-in-pregnancy"
         },
