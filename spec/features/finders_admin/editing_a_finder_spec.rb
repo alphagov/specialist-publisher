@@ -54,7 +54,7 @@ RSpec.feature "Editing a finder", type: :feature do
 
     click_button "Submit changes"
 
-    expect(page).to have_selector(".gem-c-success-alert__message", text: "Your changes have been submitted and Zendesk ticket created.")
+    expect(page).to have_selector(".gem-c-success-alert", text: "Your changes have been submitted and Zendesk ticket created.")
   end
 
   scenario "deleting all fields" do
@@ -89,7 +89,7 @@ RSpec.feature "Editing a finder", type: :feature do
 
     click_button "Submit changes"
 
-    expect(page).to have_selector(".gem-c-success-alert__message", text: "Your changes have been submitted and Zendesk ticket created.")
+    expect(page).to have_selector(".gem-c-success-alert", text: "Your changes have been submitted and Zendesk ticket created.")
   end
 
   scenario "fields are not shown on the confirmation page if not changed" do
