@@ -59,7 +59,7 @@ RSpec.feature "Editing finder nested filters and options (Trademark Decision)", 
     expect(page).to have_selector("details summary", text: "View generated schema")
 
     click_button "Submit changes"
-    expect(page).to have_selector(".gem-c-success-alert__message", text: "Your changes have been submitted and Zendesk ticket created.")
+    expect(page).to have_selector(".gem-c-success-alert", text: "Your changes have been submitted and Zendesk ticket created.")
   end
 
   scenario "the generated schema is outputted to a hidden input ready for form submission" do
