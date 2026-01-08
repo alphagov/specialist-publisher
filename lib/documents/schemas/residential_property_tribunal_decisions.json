@@ -42,6 +42,10 @@
           "value": "park-homes"
         },
         {
+          "label": "Regulatory",
+          "value": "regulatory"
+        },
+        {
           "label": "Rents",
           "value": "rents"
         },
@@ -76,6 +80,10 @@
         {
           "label": "Building Safety Act - Accountable Person",
           "value": "building-safety-act---accountable-person"
+        },
+        {
+          "label": "Building Safety Act - Building Act 1984 and BSA Regs",
+          "value": "building-safety-act---building-act-1984-and-bsa-regs"
         },
         {
           "label": "Building Safety Act - Failure to provide documents or information",
@@ -242,6 +250,10 @@
           "value": "park-homes---entitlement-to-terminate-an-agreement-for-occupation"
         },
         {
+          "label": "Park Homes - Fit and Proper Persons",
+          "value": "park-homes---fit-and-proper-persons"
+        },
+        {
           "label": "Park homes - Local authority compliance notice",
           "value": "park-homes---local-authority-compliance-notice"
         },
@@ -296,6 +308,14 @@
         {
           "label": "Park homes - Temporary re-siting/return of resited park home",
           "value": "park-homes---temporary-re-siting-return-of-resited-park-home"
+        },
+        {
+          "label": "Regulatory - Energy Efficiency",
+          "value": "regulatory---energy-efficiency"
+        },
+        {
+          "label": "Regulatory - Penalty Appeals",
+          "value": "regulatory---penalty-appeals"
         },
         {
           "label": "Rents - Fair rent",
