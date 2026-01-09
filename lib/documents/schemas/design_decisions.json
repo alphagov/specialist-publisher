@@ -2,6 +2,7 @@
   "base_path": "/designs-decisions",
   "body_template": "**[Inline attachment]**\r\n\r\nEvery effort is made to ensure design hearing decisions have been accurately recorded, but some errors may have been introduced during conversion for the web.\r\n\r\nCopies of any documents annexed to a decision are available from:\r\n\r\n$A\r\nTribunal Section,\r\nIntellectual Property Office,\r\nConcept House,\r\nCardiff Road,\r\nNewport,\r\nSouth Wales\r\nNP10 8QQ\r\n$A",
   "content_id": "d35b914f-a875-4ee0-b307-991269dc26df",
+  "default_order": "-design_decision_date",
   "description": "Find UK Intellectual Property (Registered Designs) related legal decisions",
   "document_noun": "decision",
   "document_title": "Design Decision",
