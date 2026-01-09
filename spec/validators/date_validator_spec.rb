@@ -14,7 +14,7 @@ RSpec.describe DateValidator do
     end
 
     it "adds an error to the record if the date value is unparseable" do
-      subject.validate_each(record, :dob, "31-02-2013")
+      subject.validate_each(record, :dob, "2013-02-31")
       expect(record.errors[:dob]).to eq(["is not a valid date"])
     end
 
@@ -23,8 +23,18 @@ RSpec.describe DateValidator do
       expect(record.errors[:dob]).to eq(["is not a valid date"])
     end
 
+    it "adds an error to the record if the date value is before 1000" do
+      subject.validate_each(record, :dob, "999-12-31")
+      expect(record.errors[:dob]).to eq(["must be between year 1000 and 9999"])
+    end
+
+    it "adds an error to the record if the date value is after 9999" do
+      subject.validate_each(record, :dob, "10000-01-01")
+      expect(record.errors[:dob]).to eq(["must be between year 1000 and 9999"])
+    end
+
     it "doesn't add an error if the date value can be parsed" do
-      subject.validate_each(record, :dob, "25-02-2013")
+      subject.validate_each(record, :dob, "2013-02-25")
       expect(record.errors).to be_empty
     end
   end
