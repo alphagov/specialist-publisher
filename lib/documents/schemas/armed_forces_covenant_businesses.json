@@ -9,6 +9,9 @@
   "email_filter_options": {
     "email_filter_by": "all_selected_facets"
   },
+  "editing_organisations": [
+    "d994e55c-48c9-4795-b872-58d8ec98af12"
+  ],
   "facets": [
     {
       "allowed_values": [
