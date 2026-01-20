@@ -166,9 +166,9 @@ To release the finder to the live stack:
 
 Specialist Publisher grants access to the publishing interface for a document type to the following Signon users:
 
-1. Users that belong to the owner organisation - have default "write" permissions, allowing them to view and draft new documents.
-2. Users that belong to the owner organisation AND have `editor` permission in Signon - are considered "departmental editors" and can publish, unpublish and discard documents.
-3. Users that have the permission `<your_new_document_type>_editor` in Signon are granted "departmental editor" access regardless of their organisation. This is sometimes required for cross-departmental documents. These special permissions need to be [created manually](https://docs.publishing.service.gov.uk/repos/signon/usage.html#creating-editing-and-deleting-permissions) in Signon. You do not need to create this permission unless cross-departmental access has been explicitly requested.
+1. Users that belong to the owner organisation or an editing organisation - have default "write" permissions, allowing them to view and draft new documents.
+2. Users that belong to the owner organisation or an editing organisation, AND have `editor` permission in Signon - are considered "departmental editors" and can publish, unpublish and discard documents.
+3. Users that have the permission `<your_new_document_type>_editor` in Signon are granted "document_type_editor" access regardless of their organisation. This is sometimes required for cross-departmental documents. These special permissions need to be [created manually](https://docs.publishing.service.gov.uk/repos/signon/usage.html#creating-editing-and-deleting-permissions) in Signon. You do not need to create this permission unless cross-departmental access has been explicitly requested for individual users outside the owning organisation. If you need access for an entire non-owning organisation, add it to `editing_organisations` in the schema file instead.
 
 You'll need to manually grant users access to the Specialist Publisher app in Signon, and the `editor` permission (or custom cross-organisation permissions from step 3 above) if appropriate.
 
