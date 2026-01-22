@@ -100,7 +100,7 @@ GEM
       erubi (>= 1.0.0)
       rack (>= 0.9.0)
       rouge (>= 1.0.0)
-    bigdecimal (3.3.1)
+    bigdecimal (4.0.1)
     binding_of_caller (1.0.1)
       debug_inspector (>= 1.2.0)
     bootsnap (1.21.1)
@@ -224,8 +224,8 @@ GEM
       rouge
       sprockets (>= 3)
       sprockets-rails
-    govuk_schemas (6.2.0)
-      json-schema (>= 2.8, < 6.1)
+    govuk_schemas (6.2.1)
+      json-schema (>= 2.8, < 6.2)
     govuk_sidekiq (10.0.0)
       gds-api-adapters (>= 19.1.0)
       govuk_app_config (>= 1.1)
@@ -251,9 +251,9 @@ GEM
       reline (>= 0.4.2)
     jmespath (1.6.2)
     json (2.13.2)
-    json-schema (6.0.0)
+    json-schema (6.1.0)
       addressable (~> 2.8)
-      bigdecimal (~> 3.1)
+      bigdecimal (>= 3.1, < 5)
     jwt (2.10.2)
       base64
     kramdown (2.5.1)
@@ -305,8 +305,8 @@ GEM
       mongo (>= 2.18.0, < 3.0.0)
     msgpack (1.8.0)
     multi_json (1.19.1)
-    multi_xml (0.7.2)
-      bigdecimal (~> 3.1)
+    multi_xml (0.8.1)
+      bigdecimal (>= 3.1, < 5)
     net-http (0.6.0)
       uri
     net-imap (0.6.2)
