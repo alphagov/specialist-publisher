@@ -20,7 +20,6 @@ class RepublishService
         published_document = Document.find(
           content_id,
           locale,
-          version: published_edition_version_number,
         )
         published_document.update_type = "republish"
 
