@@ -124,5 +124,20 @@ RSpec.feature "Unpublishing a document", type: :feature do
       expect(page.status_code).to eq(200)
       expect(page).to have_content("Something has gone wrong. Please try again and see if it works.")
     end
+
+    scenario "clicking the unpublish button shows an error message if invalid URL specified" do
+      alternative_path = "https://www.invalid.com"
+
+      stub_publishing_api_unpublish(content_id, { body: { type: "redirect", locale:, alternative_path: } }, status: 409)
+
+      visit document_path(content_id_and_locale: "#{content_id}:#{locale}", document_type_slug: "cma-cases")
+      expect(page).to have_content("Example CMA Case")
+      click_link "Unpublish document"
+      expect(page.status_code).to eq(200)
+      fill_in "alternative_path", with: alternative_path
+      click_button "Unpublish"
+      expect(page.status_code).to eq(200)
+      expect(page).to have_content("Failed to unpublish. The provided URL \"https://www.invalid.com\" is not in a valid format. Please try again with a URL in the correct format.")
+    end
   end
 end
