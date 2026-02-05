@@ -78,6 +78,8 @@ class DocumentsController < ApplicationController
   def unpublish
     if @document.unpublish(params[:alternative_path])
       flash[:success] = "Unpublished #{@document.title}"
+    elsif params[:alternative_path].present? && params[:alternative_path].match(/^\/[\/.a-zA-Z0-9-]+$/).blank?
+      flash[:danger] = "Failed to unpublish. The provided URL \"#{params[:alternative_path]}\" is not in a valid format. Please try again with a URL in the correct format."
     else
       flash[:danger] = unknown_error_message
     end
