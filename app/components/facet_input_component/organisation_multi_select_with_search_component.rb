@@ -19,11 +19,11 @@ class FacetInputComponent::OrganisationMultiSelectWithSearchComponent < ViewComp
     all_organisations
       .sort_by { |org| org.title.downcase.strip }
       .map do |organisation|
-      {
-        text: organisation.title,
-        value: organisation.content_id,
-        selected: selected_values&.include?(organisation.content_id),
-      }
+        {
+          text: organisation.title,
+          value: organisation.content_id,
+          selected: selected_values&.include?(organisation.content_id),
+        }
     end
   end
 end
