@@ -3,11 +3,11 @@ module OrganisationsHelper
     organisations = all_organisations
       .sort_by { |org| org.title.downcase.strip }
       .map do |organisation|
-      {
-        text: organisation.title,
-        value: organisation.content_id,
-        selected: organisation.content_id == selected_organisation_content_id,
-      }
+        {
+          text: organisation.title,
+          value: organisation.content_id,
+          selected: organisation.content_id == selected_organisation_content_id,
+        }
     end
 
     has_all_option ? organisations.prepend({ text: "All organisations", value: "all", selected: false }) : organisations

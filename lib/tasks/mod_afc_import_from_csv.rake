@@ -82,7 +82,7 @@ def get_pledge_values(schema, row)
   schema.allowed_values_for("armed_forces_covenant_business_pledged")
     .to_h { |val| [val.fetch("label"), val.fetch("value")] }
     .each do |pledge_label, pledge_value|
-    pledged_values << pledge_value if row[pledge_label] == "Pledged" || (pledge_label == "Bespoke Pledges" && row[pledge_label].present?)
+      pledged_values << pledge_value if row[pledge_label] == "Pledged" || (pledge_label == "Bespoke Pledges" && row[pledge_label].present?)
   end
 
   pledged_values
@@ -96,7 +96,7 @@ def get_pledge_labels(row)
     .allowed_values_for("armed_forces_covenant_business_pledged")
     .to_h { |val| [val.fetch("label"), val.fetch("value")] }
     .each_key do |pledge_label|
-    pledge_labels << pledge_label if row[pledge_label] == "Pledged"
+      pledge_labels << pledge_label if row[pledge_label] == "Pledged"
   end
 
   pledge_labels

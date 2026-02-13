@@ -142,27 +142,27 @@ RSpec.describe "mod_afc_import_from_csv", type: :task do
 
   ["Account Name", "Date AFC Signed", "Account Region", "Company Size", "Industry", "Ownership"]
     .each do |row_column|
-    it "throws an error when required field is missing" do
-      csv_data = [
-        {
-          "Account Name" => "ABC Company",
-          "Date AFC Signed" => "2025/06/01",
-          "Account Region" => "Wessex",
-          "Company Size" => "250-500 Large",
-          "Industry" => "Healthcare",
-          "Ownership" => "Private",
-          "Armed Forces Friendly" => "Pledged",
-          "UK Service Veterans And Leavers" => "0",
-        },
-      ]
-      csv_data[0][row_column] = nil
-      allow(CSV).to receive(:foreach).with(csv_path, headers: true).and_return(csv_data.each)
+      it "throws an error when required field is missing" do
+        csv_data = [
+          {
+            "Account Name" => "ABC Company",
+            "Date AFC Signed" => "2025/06/01",
+            "Account Region" => "Wessex",
+            "Company Size" => "250-500 Large",
+            "Industry" => "Healthcare",
+            "Ownership" => "Private",
+            "Armed Forces Friendly" => "Pledged",
+            "UK Service Veterans And Leavers" => "0",
+          },
+        ]
+        csv_data[0][row_column] = nil
+        allow(CSV).to receive(:foreach).with(csv_path, headers: true).and_return(csv_data.each)
 
-      expect(ArmedForcesCovenantBusiness).not_to receive(:new)
-      expect {
-        task.execute(csv_file_path: csv_path)
-      }.to raise_error(StandardError, "CSV import failed: 1 row(s) have missing required fields.")
-    end
+        expect(ArmedForcesCovenantBusiness).not_to receive(:new)
+        expect {
+          task.execute(csv_file_path: csv_path)
+        }.to raise_error(StandardError, "CSV import failed: 1 row(s) have missing required fields.")
+      end
   end
 
   it "does not save documents in dry run mode" do
