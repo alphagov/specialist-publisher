@@ -231,24 +231,24 @@ RSpec.describe AttachmentsController, type: :controller do
     end
 
     context "the attachment fails to attach" do
-      let(:no_file_attachment) do
+      let(:invalid_file) { Rack::Test::UploadedFile.new("spec/support/images/cma_case_image.exe", "application/octet-stream") }
+      let(:invalid_file_attachment) do
         {
-          file: nil,
-          title: "No file attachment upload",
+          file: invalid_file,
+          title: "Invalid file attachment upload",
         }
       end
 
       it "shows an error message and redirects to the new attachment page" do
         document = CmaCase.find(document_content_id, document_locale)
         allow(subject).to receive(:fetch_document).and_return(document)
-        allow(subject).to receive(:white_listed?).and_return(false)
         error_message = "Adding an attachment failed. Please make sure you have uploaded an attachment of a permitted file type."
 
         patch :update, params: {
           document_type_slug:,
           document_content_id_and_locale: "#{document_content_id}:#{document_locale}",
           attachment_content_id:,
-          attachment: no_file_attachment,
+          attachment: invalid_file_attachment,
         }
 
         expect(flash[:danger]).to eq(error_message)
