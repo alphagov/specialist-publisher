@@ -950,16 +950,18 @@ FactoryBot.define do
     end
   end
 
-  factory :digital_markets_regime_requirement, parent: :document do
-    base_path { "/digital-markets-regime-requirements/example-document" }
-    document_type { "digital_markets_regime_requirement" }
+  factory :digital_markets_intervention, parent: :document do
+    base_path { "/digital-markets-interventions/example-document" }
+    document_type { "digital_markets_intervention" }
     transient do
       default_metadata do
         {
-          "digital_markets_regime_requirements_date" => "2015-11-16",
-          "digital_markets_regime_requirements_status" => "Active",
-          "digital_markets_regime_requirements_sms_firm_company" => "google",
-          "digital_markets_regime_requirements_sms_designation" => "google-mobile",
+          "digital_markets_interventions_firm" => %w[google],
+          "digital_markets_interventions_activity" => %w[mobile],
+          "digital_markets_interventions_type" => "commitment",
+          "digital_markets_interventions_state" => "open",
+          "digital_markets_interventions_opened" => "2015-11-14",
+          "digital_markets_interventions_closed" => "2015-11-16",
         }
       end
     end
