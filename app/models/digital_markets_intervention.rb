@@ -1,4 +1,4 @@
-class DigitalMarketsRegimeRequirement < Document
+class DigitalMarketsIntervention < Document
   apply_validations
 
   FORMAT_SPECIFIC_FIELDS = format_specific_fields
