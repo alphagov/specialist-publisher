@@ -127,7 +127,6 @@
   "filter": {
     "format": "digital_markets_intervention"
   },
-  "integration_target_stack": "live",
   "name": "Find conduct requirements and commitments",
   "organisations": [
     "957eb4ec-089b-4f71-ba2a-dc69ac8919ea"
