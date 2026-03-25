@@ -38,6 +38,7 @@ class FinderSchema
   attribute :email_filter_options
   attribute :facets, default: []
   attribute :filter
+  attribute :index_documents_in_search_engines, :boolean, default: true
   attribute :integration_target_stack
   attribute :label_text
   attribute :name

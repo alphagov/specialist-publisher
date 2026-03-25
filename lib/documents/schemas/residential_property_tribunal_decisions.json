@@ -399,6 +399,7 @@
   "subscription_list_title_prefix": "Residential property tribunal decisions",
   "summary": "Find decisions on Residential Property Tribunal cases in England from December 2018 onwards.\r\n\r\nIf the decision was about leasehold and was made before December 2018, visit [Lease Advice](https://decisions.lease-advice.org/). Other decisions made before December 2018 can be found on [BAILII](https://www.bailii.org/recent-decisions.html).",
   "target_stack": "live",
+  "index_documents_in_search_engines": false,
   "taxons": [
     "357110bb-cbc5-4708-9711-1b26e6c63e86"
   ]

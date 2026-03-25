@@ -39,6 +39,7 @@ RSpec.feature "Editing a finder", type: :feature do
     fill_in "document_title", with: "Changed document title"
     fill_in "document_noun", with: "Changed document noun"
     choose "email_alert_type", option: "no"
+    choose "index_documents_in_search_engines", option: "yes"
 
     click_button "Submit changes"
 
@@ -51,7 +52,7 @@ RSpec.feature "Editing a finder", type: :feature do
     expect(page.find(".govuk-summary-list__row", text: "Full document noun (Appears in various places in the Specialist Publisher user interface)")).to have_selector("dt", text: "Changed document title")
     expect(page.find(".govuk-summary-list__row", text: "Shortened document noun (How the documents on the finder are referred to)")).to have_selector("dt", text: "Changed document noun")
     expect(page.find(".govuk-summary-list__row", text: "Would you like to set up email alerts for the finder?")).to have_selector("dt", text: "No")
-
+    expect(page.find(".govuk-summary-list__row", text: "Should the documents be indexed by search engines?")).to have_selector("dt", text: "Yes")
     click_button "Submit changes"
 
     expect(page).to have_selector(".gem-c-success-alert", text: "Your changes have been submitted and Zendesk ticket created.")
