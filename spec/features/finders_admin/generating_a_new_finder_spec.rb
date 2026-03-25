@@ -61,6 +61,18 @@ RSpec.feature "Generating a new finder", type: :feature do
     expect(page).to have_checked_field("show_table_of_contents", with: "true")
   end
 
+  scenario "setting index_documents_in_search_engines value and generating a schema" do
+    visit new_finder_path
+
+    fill_in("Title of the finder", with: "Finder with contents list")
+    choose("Yes", name: "index_documents_in_search_engines")
+    click_button("Generate schema")
+
+    expect(page).to have_selector(".govuk-details")
+    expect(page).to have_field("Title of the finder", with: "Finder with contents list")
+    expect(page).to have_checked_field("index_documents_in_search_engines", with: "true")
+  end
+
   scenario "setting a body template value and generating schema" do
     visit new_finder_path
 

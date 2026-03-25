@@ -147,6 +147,26 @@
 } %>
 
 <%= render "govuk_publishing_components/components/radio", {
+  heading: "Should the documents be indexed by search engines?",
+  heading_size: "s",
+  hint: "Allow this finder's documents to be indexed by search engines such as Google. Usually set to true. Disabled for documents such as 'Residential Property Tribunal Decision' that could contain personally identifiable information.",
+  name: "index_documents_in_search_engines",
+  inline: true,
+  items: [
+    {
+      value: "true",
+      text: "Yes",
+      checked: schema.index_documents_in_search_engines
+    },
+    {
+      value: "false",
+      text: "No",
+      checked: !schema.index_documents_in_search_engines
+    }
+  ]
+} %>
+
+<%= render "govuk_publishing_components/components/radio", {
   heading: "Should a table of contents be displayed on each document page?",
   heading_size: "s",
   hint: "Example: Commonly used to list the contents of a page with links pointing to headings within the document, but can also be used for a list of links to other pages.",

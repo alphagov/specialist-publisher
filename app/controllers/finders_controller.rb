@@ -89,6 +89,7 @@ private
       :show_table_of_contents,
       :document_title,
       :document_noun,
+      :index_documents_in_search_engines,
       organisations: %i[id _destroy],
       related: [],
     )

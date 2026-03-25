@@ -69,6 +69,10 @@
       value: schema.show_table_of_contents ? "Yes" : "No"
     } if !(defined? previous_schema) || schema.show_table_of_contents != previous_schema.show_table_of_contents),
     ({
+      key: "Should the documents be indexed by search engines?",
+      value: schema.index_documents_in_search_engines ? "Yes" : "No"
+    } if !(defined? previous_schema) || schema.index_documents_in_search_engines != previous_schema.index_documents_in_search_engines),
+    ({
       key: "Full document noun (Appears in various places in the Specialist Publisher user interface)",
       value: (schema.document_title || "").humanize
     } if !(defined? previous_schema) || schema.document_title != previous_schema.document_title),
