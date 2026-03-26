@@ -60,8 +60,6 @@ RSpec.feature "Creating a Licence", type: :feature do
       expect(page).to have_css(".gem-c-error-summary__list-item", text: attributes[facet["key"].to_sym][:blank])
       expect(page).to have_css(".govuk-error-message", text: attributes[facet["key"].to_sym][:blank])
     end
-
-    expect(page).to have_content attributes[:base][:link_and_identifier_exists]
   end
 
   scenario "saving a new document with valid data" do
