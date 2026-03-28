@@ -51,6 +51,7 @@ private
       show_summaries: file.fetch("show_summaries", false),
       show_metadata_block: file.fetch("show_metadata_block", false),
       show_table_of_contents: file.fetch("show_table_of_contents", false),
+      index_documents_in_search_engines: file.fetch("index_documents_in_search_engines", true),
       signup_link: file.fetch("signup_link", nil),
       summary:,
       label_text: file.fetch("label_text", nil),
