@@ -102,6 +102,7 @@
   ],
   "show_table_of_contents": true,
   "show_metadata_block": true,
+  "index_documents_in_search_engines": true,
   "show_summaries": true,
   "signup_content_id": "512a14c1-260a-4c4e-8de8-643eadf7905c",
   "subscription_list_title_prefix": "UK Approved Recommendations for marine equipment",

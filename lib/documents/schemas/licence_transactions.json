@@ -282,6 +282,7 @@
   ],
   "show_table_of_contents": true,
   "show_metadata_block": true,
+  "index_documents_in_search_engines": true,
   "show_summaries": true,
   "summary": "You may need a licence, permit or certification for:\r\n\r\n* some business activities\r\n\r\n* other activities, such as street parties\r\n\r\n^This may not include all the licences you need. It will be updated with more licences.^",
   "target_stack": "live"

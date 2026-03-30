@@ -1112,6 +1112,7 @@
   ],
   "show_table_of_contents": true,
   "show_metadata_block": true,
+  "index_documents_in_search_engines": true,
   "show_summaries": true,
   "signup_content_id": "cff7449e-4181-480f-93e4-91fecfb4c774",
   "subscription_list_title_prefix": "Protected geographical food and drink names",

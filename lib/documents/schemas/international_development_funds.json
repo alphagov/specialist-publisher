@@ -1000,6 +1000,7 @@
   ],
   "show_table_of_contents": true,
   "show_metadata_block": true,
+  "index_documents_in_search_engines": true,
   "show_summaries": true,
   "signup_content_id": "f1a4e5b2-c8b3-40f2-acde-75061a45184d",
   "subscription_list_title_prefix": "International development funds",

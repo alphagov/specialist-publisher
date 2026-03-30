@@ -526,6 +526,7 @@
   "show_summaries": true,
   "show_metadata_block": true,
   "show_table_of_contents": true,
+  "index_documents_in_search_engines": true,
   "signup_content_id": "99f5bacb-d1ef-4b93-87ef-bae129fed396",
   "subscription_list_title_prefix": "Algorithmic transparency records",
   "summary": "Find algorithmic transparency records from UK public sector organisations with information on algorithmic tools used in decision making. These are completed in accordance with the Algorithmic Transparency Recording Standard.\r\n\r\nLet us know what you think of this service: [feedback form](https://forms.office.com/e/XNn3GBqzhY)",

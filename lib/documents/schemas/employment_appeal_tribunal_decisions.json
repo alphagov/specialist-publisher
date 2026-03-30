@@ -1063,6 +1063,7 @@
   "phase": "beta",
   "show_table_of_contents": true,
   "show_metadata_block": true,
+  "index_documents_in_search_engines": true,
   "show_summaries": true,
   "signup_content_id": "1f5911f4-417a-4380-a5a0-674ebff332df",
   "subscription_list_title_prefix": "Employment Appeal Tribunal decisions",
