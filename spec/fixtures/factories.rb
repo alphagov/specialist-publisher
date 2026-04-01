@@ -951,7 +951,7 @@ FactoryBot.define do
   end
 
   factory :digital_markets_intervention, parent: :document do
-    base_path { "/digital-markets-interventions/example-document" }
+    base_path { "/find-digital-markets-measures/example-document" }
     document_type { "digital_markets_intervention" }
     transient do
       default_metadata do
