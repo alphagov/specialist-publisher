@@ -158,7 +158,7 @@ To release the finder to the live stack:
 2. Also deploy Email Alert API if you have made changes to it.
 3. Depending on the changes you've made, you might need to update mappings in Search API.
    - You will likely need to run `rake SEARCH_INDEX=govuk 'search:update_schema'`. For further details, see this [section on reindexing](#reindexing-breakdown).
-4. Publish the finder by running the rake task `publishing_api:publish_finders` or `publishing_api:publish_finder[your_format_name_based_on_the_schema_file]` against the specialist publisher app (rake tasks [here](https://github.com/alphagov/specialist-publisher/blob/ce68fdb008cab05225e0493e19decba5365e1e20/lib/tasks/publishing_api.rake)).
+4. Publish the finder by running the rake task `publishing_api:publish_finder[your_format_name_based_on_the_schema_file]` against the specialist publisher app (rake tasks [here](https://github.com/alphagov/specialist-publisher/blob/ce68fdb008cab05225e0493e19decba5365e1e20/lib/tasks/publishing_api.rake)).
 
 > Note that finder-frontend [caches the finder content item for five minutes](https://github.com/alphagov/finder-frontend/blob/4c27a8483f502969bc02e1de082a35b2efd0278e/app/lib/services.rb#L11), so you may not be able to see your changes immediately (even with a cachebust string).
 
@@ -247,7 +247,7 @@ NB: In order to remove a field, ensure no document are tagged with that field, o
 Specific values for fields of type array are now defined only in the `specialist_publisher` app. To add a value:
 1. In `specialist publisher`, add the new values to the relevant file in the [schema](https://github.com/alphagov/specialist-publisher/tree/main/lib/documents/schemas) directory. See [this](https://github.com/alphagov/specialist-publisher/pull/2958/commits/930b4c82928a616cc848d1e759cf31b521771b15) commit for an example.
 2. Deploy Specialist Publisher.
-3. Publish the finder by running the rake task `publishing_api:publish_finders` or `publishing_api:publish_finder[your_format_name_based_on_the_schema_file]` against the specialist publisher app (rake tasks [here](https://github.com/alphagov/specialist-publisher/blob/ce68fdb008cab05225e0493e19decba5365e1e20/lib/tasks/publishing_api.rake)).
+3. Publish the finder by running the rake task `publishing_api:publish_finder[your_format_name_based_on_the_schema_file]` against the specialist publisher app (rake tasks [here](https://github.com/alphagov/specialist-publisher/blob/ce68fdb008cab05225e0493e19decba5365e1e20/lib/tasks/publishing_api.rake)).
 
 ## Removing values for existing fields on a specialist document
 
@@ -256,7 +256,7 @@ NB: In order to remove a field value, ensure no document are tagged with that va
 Specific values for fields of type array are now defined only in the `specialist_publisher` app. To remove a value:
 1. In `specialist publisher`, remove the value entry from the `allowed_values` array of the relevant field, from the corresponding json file in the [schema](https://github.com/alphagov/specialist-publisher/tree/main/lib/documents/schemas) directory.
 2. Deploy Specialist Publisher.
-3. Publish the finder by running the rake task `publishing_api:publish_finders` or `publishing_api:publish_finder[your_format_name_based_on_the_schema_file]` against the specialist publisher app (rake tasks [here](https://github.com/alphagov/specialist-publisher/blob/ce68fdb008cab05225e0493e19decba5365e1e20/lib/tasks/publishing_api.rake)).
+3. Publish the finder by running the rake task `publishing_api:publish_finder[your_format_name_based_on_the_schema_file]` against the specialist publisher app (rake tasks [here](https://github.com/alphagov/specialist-publisher/blob/ce68fdb008cab05225e0493e19decba5365e1e20/lib/tasks/publishing_api.rake)).
 
 
 # __Editing__ a specialist finder

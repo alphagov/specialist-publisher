@@ -7,6 +7,7 @@ end
 
 namespace :publishing_api do
   desc "Publish all Finders to the Publishing API"
+  # Do not use this unless you're sure the target_stack settings on your finders are correct. This will publish all finders with target_stack set to live.
   task publish_finders: :environment do
     finder_loader = FinderLoader.new
 
