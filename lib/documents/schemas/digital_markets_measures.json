@@ -3,7 +3,7 @@
   "content_id": "10c9af21-e300-4e3f-8397-5881541b6c8d",
   "description": "Find measures by the Competition and Markets Authority under the digital markets competition regime.",
   "document_noun": "item",
-  "document_title": "Digital markets intervention",
+  "document_title": "Digital markets measure",
   "facets": [
     {
       "allowed_values": [
@@ -18,7 +18,7 @@
       ],
       "display_as_result_metadata": true,
       "filterable": true,
-      "key": "digital_markets_interventions_firm",
+      "key": "digital_markets_measure_firm",
       "name": "Firm",
       "preposition": "Firm",
       "short_name": "Firm",
@@ -43,7 +43,7 @@
       ],
       "display_as_result_metadata": true,
       "filterable": true,
-      "key": "digital_markets_interventions_activity",
+      "key": "digital_markets_measure_activity",
       "name": "Activity",
       "preposition": "Activity",
       "short_name": "Activity",
@@ -68,7 +68,7 @@
       ],
       "display_as_result_metadata": true,
       "filterable": true,
-      "key": "digital_markets_interventions_type",
+      "key": "digital_markets_measure_type",
       "name": "Type",
       "preposition": "Type",
       "short_name": "Type",
@@ -93,7 +93,7 @@
       ],
       "display_as_result_metadata": true,
       "filterable": true,
-      "key": "digital_markets_interventions_state",
+      "key": "digital_markets_measure_state",
       "name": "State",
       "preposition": "State",
       "short_name": "State",
@@ -108,7 +108,7 @@
     {
       "display_as_result_metadata": true,
       "filterable": true,
-      "key": "digital_markets_interventions_opened",
+      "key": "digital_markets_measure_opened",
       "name": "Opened",
       "preposition": "Opened",
       "short_name": "Opened",
@@ -117,7 +117,7 @@
     {
       "display_as_result_metadata": true,
       "filterable": true,
-      "key": "digital_markets_interventions_closed",
+      "key": "digital_markets_measure_closed",
       "name": "Closed",
       "preposition": "Closed",
       "short_name": "Closed",
@@ -125,7 +125,7 @@
     }
   ],
   "filter": {
-    "format": "digital_markets_intervention"
+    "format": "digital_markets_measure"
   },
   "integration_target_stack": "live",
   "name": "Find digital markets measures",
@@ -138,7 +138,7 @@
   "show_metadata_block": true,
   "show_table_of_contents": true,
   "signup_content_id": "ba8de13f-8dc7-4238-a71e-849b00eb4bdd",
-  "subscription_list_title_prefix": "Digital markets interventions",
+  "subscription_list_title_prefix": "Digital markets measures",
   "summary": "Find measures by the Competition and Markets Authority under the digital markets competition regime.",
   "target_stack": "draft"
 }
