@@ -127,7 +127,6 @@
   "filter": {
     "format": "digital_markets_measure"
   },
-  "integration_target_stack": "live",
   "name": "Find digital markets measures",
   "organisations": [
     "957eb4ec-089b-4f71-ba2a-dc69ac8919ea"
@@ -140,5 +139,5 @@
   "signup_content_id": "ba8de13f-8dc7-4238-a71e-849b00eb4bdd",
   "subscription_list_title_prefix": "Digital markets measures",
   "summary": "Find measures by the Competition and Markets Authority under the digital markets competition regime.",
-  "target_stack": "draft"
+  "target_stack": "live"
 }
