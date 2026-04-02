@@ -950,18 +950,18 @@ FactoryBot.define do
     end
   end
 
-  factory :digital_markets_intervention, parent: :document do
+  factory :digital_markets_measure, parent: :document do
     base_path { "/find-digital-markets-measures/example-document" }
-    document_type { "digital_markets_intervention" }
+    document_type { "digital_markets_measure" }
     transient do
       default_metadata do
         {
-          "digital_markets_interventions_firm" => %w[google],
-          "digital_markets_interventions_activity" => %w[mobile],
-          "digital_markets_interventions_type" => "commitment",
-          "digital_markets_interventions_state" => "open",
-          "digital_markets_interventions_opened" => "2015-11-14",
-          "digital_markets_interventions_closed" => "2015-11-16",
+          "digital_markets_measure_firm" => %w[google],
+          "digital_markets_measure_activity" => %w[mobile],
+          "digital_markets_measure_type" => "commitment",
+          "digital_markets_measure_state" => "open",
+          "digital_markets_measure_opened" => "2015-11-14",
+          "digital_markets_measure_closed" => "2015-11-16",
         }
       end
     end

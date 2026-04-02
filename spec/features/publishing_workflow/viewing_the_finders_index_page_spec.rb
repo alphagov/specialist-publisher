@@ -46,7 +46,7 @@ RSpec.feature "Viewing the finders index page", type: :feature do
 
       expect(page).to have_text("CMA Cases")
       expect(page).to have_text("DRCF digital markets research")
-      expect(page).to have_text("Digital markets interventions")
+      expect(page).to have_text("Digital markets measures")
 
       expect(page).to have_css(".gem-c-document-list li", count: 3)
     end
