@@ -27,6 +27,8 @@ See [example PR here](https://github.com/alphagov/publishing-api/pull/3026/files
 
 When the PR is reviewed and its tests passing, it can be merged and deployed at this point.
 
+**Note:** If you need to surface finder level settings to individual documents, you can do so by [updating the expansion rules](#updating-expansion-rules-for-new-finder-level-fields).
+
 ## 2. Create a new specialist document format in Specialist Publisher
 
 ### Create the schema
@@ -326,3 +328,11 @@ To avoid a reindex, you can follow the same steps as for a field key change at 3
 Remove config from Specialist Publisher and republish all content. The Elasticsearch mapping for the field would still exist, but it wouldn't be doing any harm.
 
 If you still want to reindex, follow the instructions [here](https://docs.publishing.service.gov.uk/manual/reindex-elasticsearch.html#how-to-reindex-an-elasticsearch-index). A full reindex takes around 30-45 minutes on Production, or 3-4 hours on Integration.
+
+# Updating expansion rules for new finder-level fields
+
+The [frontend](https://github.com/alphagov/frontend) application rendering a specialist document also needs to render finder-level information, for example in the metadata section. We typically provide this via the expanded finder link in the document content item. To instruct Publishing API to expand a field, update the [expansion rules](https://github.com/alphagov/publishing-api/blob/main/lib/expansion_rules.rb). Specifically, you'll need to add the new field to the `FINDER_FIELDS` constant, which controls which fields are included when the finder is expanded as a linked item.
+
+This is a common pattern for the `facets` themselves, as well as additional fields such as `show_metadata_block`, `show_table_of_contents` and `index_documents_in_search_engines`. See [example PR](https://github.com/alphagov/publishing-api/pull/3987).
+
+In the current implementation, the schema jsons in the specialist publisher repo define behaviours for both the finders and their documents, but the specialist document schemas in Publishing API only allow an additional `metadata` field based on the `facets`. Making use of the link expansion feature to surface finder data in the document content item, keeps the individual document schemas minimal in Publishing API, while ensuring all documents "inherit" the behaviour.
