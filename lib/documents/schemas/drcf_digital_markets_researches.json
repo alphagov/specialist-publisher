@@ -317,6 +317,7 @@
   ],
   "show_table_of_contents": true,
   "show_metadata_block": true,
+  "index_documents_in_search_engines": true,
   "summary": "Find research about digital markets and regulation carried out by public authorities, curated by the [Digital Regulation Cooperation Forum (DRCF)](government/collections/the-digital-regulation-cooperation-forum)",
   "target_stack": "live"
 }

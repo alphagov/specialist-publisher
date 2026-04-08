@@ -84,6 +84,7 @@
   "phase": "beta",
   "show_table_of_contents": true,
   "show_metadata_block": true,
+  "index_documents_in_search_engines": true,
   "show_summaries": true,
   "signup_content_id": "ae5afec1-30d6-4997-bdf8-7de94d2dd910",
   "subscription_list_title_prefix": "Upper Tribunal (Tax and Chancery Chamber) decisions",

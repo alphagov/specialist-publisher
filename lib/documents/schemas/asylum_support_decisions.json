@@ -324,6 +324,7 @@
   "show_table_of_contents": true,
   "show_metadata_block": true,
   "show_summaries": true,
+  "index_documents_in_search_engines": true,
   "signup_content_id": "307ea825-594c-4d88-85c9-0809fdc9c79e",
   "subscription_list_title_prefix": "First-tier Tribunal (Asylum Support) decisions",
   "summary": "Find decisions on appeals against the Home Office heard by the First-tier Tribunal (Asylum Support).",

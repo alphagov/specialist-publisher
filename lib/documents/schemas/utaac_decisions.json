@@ -2739,6 +2739,7 @@
   ],
   "show_summaries": true,
   "show_metadata_block": true,
+  "index_documents_in_search_engines": true,
   "show_table_of_contents": true,
   "signup_content_id": "13e59efa-6c0d-48e8-a0b9-092b62cdc912",
   "subscription_list_title_prefix": "Upper Tribunal Administrative Appeals Chamber decisions",

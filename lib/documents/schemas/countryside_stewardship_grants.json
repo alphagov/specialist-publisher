@@ -129,6 +129,7 @@
   ],
   "show_metadata_block": true,
   "show_table_of_contents": true,
+  "index_documents_in_search_engines": true,
   "summary": "Use this tool to search for funded capital items and their supplements.\r\n\r\nUse the [Find funding for land or farms](https://www.gov.uk/find-funding-for-land-or-farms) tool to search for funded actions and their supplements.",
   "target_stack": "live",
   "taxons": [

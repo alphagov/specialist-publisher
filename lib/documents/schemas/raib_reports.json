@@ -95,6 +95,7 @@
   ],
   "show_table_of_contents": true,
   "show_metadata_block": true,
+  "index_documents_in_search_engines": true,
   "show_summaries": true,
   "signup_content_id": "db81c7e8-b1b6-4c29-992a-1289f1b63073",
   "subscription_list_title_prefix": "Rail Accident Investigation Branch (RAIB) reports",
