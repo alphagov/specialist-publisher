@@ -43,44 +43,6 @@ private
     DocumentLinksPresenter.new(document).to_json[:links]
   end
 
-  def org_title
-    {
-      "aaib_report" => "Air Accidents Investigation Branch reports",
-      "asylum_support_decision" => "Asylum Support Decision",
-      "business_finance_support_scheme" => "Business finance support scheme",
-      "cma_case" => "Competition and Markets Authority cases",
-      "countryside_stewardship_grant" => "Countryside Stewardship Grants",
-      "employment_appeal_tribunal_decision" => "Employment appeal tribunal decisions",
-      "employment_tribunal_decision" => "Employment tribunal decisions",
-      "esi_fund" => "European Structural and Investment Funds",
-      "international_development_fund" => "International Development Funds",
-      "maib_report" => "Marine Accident Investigation Branch reports",
-      "medical_safety_alert" => "Alerts and recalls for drugs and medical devices",
-      "raib_report" => "Rail Accident Investigation Branch reports",
-      "tax_tribunal_decision" => "Upper Tribunal (Tax and Chancery Chamber)",
-      "utaac_decision" => "Upper Tribunal (Administrative Appeals Chamber)",
-    }
-  end
-
-  def document_noun
-    {
-      "aaib_report" => "report",
-      "asylum_support_decision" => "decision",
-      "business_finance_support_scheme" => "scheme",
-      "cma_case" => "case",
-      "countryside_stewardship_grant" => "grant",
-      "employment_appeal_tribunal_decision" => "decision",
-      "employment_tribunal_decision" => "decision",
-      "esi_fund" => "fund",
-      "international_development_fund" => "fund",
-      "maib_report" => "report",
-      "medical_safety_alert" => "alert",
-      "raib_report" => "report",
-      "tax_tribunal_decision" => "decision",
-      "utaac_decision" => "decision",
-    }
-  end
-
   def title
     redrafted? ? "#{document.title} updated" : document.title
   end

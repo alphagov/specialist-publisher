@@ -105,6 +105,8 @@ Finally, you'll need to add your custom fields to:
 
 The email sign up page is rendered by [Finder Frontend](https://github.com/alphagov/finder-frontend) using the schema configuration in specialist publisher.
 
+For a breakdown of current subscription behaviours for the finder and its documents see [this section of the documentation](./email_alerts.md).
+
 You can test the email subscription when your finder is deployed to the draft stack, using a test email. For more information see [Receive emails from Email Alert API in Integration and Staging](https://docs.publishing.service.gov.uk/repos/email-alert-api/receiving-emails-from-email-alert-api-in-integration-and-staging.html).
 
 The finder default is to have no email subscription. Email subscriptions can be set as:
