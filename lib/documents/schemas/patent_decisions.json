@@ -1,0 +1,278 @@
+{
+  "base_path": "/patent-decisions",
+  "content_id": "c99df60b-941f-4ff1-8910-9055aa575112",
+  "description": "Find results of past UK Intellectual Property Patent hearing decisions",
+  "document_noun": "decision",
+  "document_title": "Patent decision",
+  "facets": [
+    {
+      "allowed_values": [
+        {
+          "label": "Inter partes only",
+          "value": "inter-partes-only"
+        },
+        {
+          "label": "Ex parte only",
+          "value": "ex-parte-only"
+        }
+      ],
+      "display_as_result_metadata": false,
+      "filterable": false,
+      "key": "patent_decision_type_of_hearing",
+      "name": "Type of hearing",
+      "short_name": "Type of hearing",
+      "specialist_publisher_properties": {
+        "select": "one",
+        "validations": {
+          "required": {}
+        }
+      },
+      "type": "text"
+    },
+    {
+      "allowed_values": [
+        {
+          "label": "Mr P Back",
+          "value": "mr-p-back"
+        },
+        {
+          "label": "Mr D J Barford",
+          "value": "mr-d-j-barford"
+        },
+        {
+          "label": "Mr A Bartlett",
+          "value": "mr-a-bartlett"
+        },
+        {
+          "label": "Mr S W Bender",
+          "value": "mr-s-w-bender"
+        },
+        {
+          "label": "Mr L Blunt",
+          "value": "mr-l-blunt"
+        },
+        {
+          "label": "Mr C Bridgeman",
+          "value": "mr-c-bridgeman"
+        },
+        {
+          "label": "Mr G M Bridges",
+          "value": "mr-g-m-bridges"
+        },
+        {
+          "label": "Mr S Brown",
+          "value": "mr-s-brown"
+        },
+        {
+          "label": "Mr Brunt",
+          "value": "mr-brunt"
+        },
+        {
+          "label": "Mr B Buchanan",
+          "value": "mr-b-buchanan"
+        },
+        {
+          "label": "Mr A R Bushell",
+          "value": "mr-a-r-bushell"
+        },
+        {
+          "label": "Mr S E Chalmers",
+          "value": "mr-s-e-chalmers"
+        },
+        {
+          "label": "Mr B Cleary",
+          "value": "mr-b-cleary"
+        },
+        {
+          "label": "Dr D H L Craven",
+          "value": "dr-d-h-l-craven"
+        },
+        {
+          "label": "Dr D Cullen",
+          "value": "dr-d-cullen"
+        },
+        {
+          "label": "Mrs C L Davies",
+          "value": "mrs-c-l-davies"
+        },
+        {
+          "label": "Mr S N Dennehey",
+          "value": "mr-s-n-dennehey"
+        },
+        {
+          "label": "Dr R Dinham",
+          "value": "dr-r-dinham"
+        },
+        {
+          "label": "Mr N Dowell",
+          "value": "mr-n-dowell"
+        },
+        {
+          "label": "Mrs S Eaves",
+          "value": "mrs-s-eaves"
+        },
+        {
+          "label": "Dr H Edwards",
+          "value": "dr-h-edwards"
+        },
+        {
+          "label": "Mr H J Edwards",
+          "value": "mr-h-j-edwards"
+        },
+        {
+          "label": "Mr J Elbro",
+          "value": "mr-j-elbro"
+        },
+        {
+          "label": "Mr S Evans",
+          "value": "mr-s-evans"
+        },
+        {
+          "label": "Mrs P Everett",
+          "value": "mrs-p-everett"
+        },
+        {
+          "label": "Mrs C A Farrington",
+          "value": "mrs-c-a-farrington"
+        },
+        {
+          "label": "Mr G Griffiths",
+          "value": "mr-g-griffiths"
+        },
+        {
+          "label": "Mr N Hanley",
+          "value": "mr-n-hanley"
+        },
+        {
+          "label": "Mr D Haselden",
+          "value": "mr-d-haselden"
+        },
+        {
+          "label": "Mr P Hayward",
+          "value": "mr-p-hayward"
+        },
+        {
+          "label": "Mr J Houlihan",
+          "value": "mr-j-houlihan"
+        },
+        {
+          "label": "Mr A C Howard",
+          "value": "mr-a-c-howard"
+        },
+        {
+          "label": "Mr C Jarman",
+          "value": "mr-c-jarman"
+        },
+        {
+          "label": "Mr D Jerreat",
+          "value": "mr-d-jerreat"
+        },
+        {
+          "label": "Mr H Jones",
+          "value": "mr-h-jones"
+        },
+        {
+          "label": "Mr R C Kennell",
+          "value": "mr-r-c-kennell"
+        },
+        {
+          "label": "Mr R J Marchant",
+          "value": "mr-r-j-marchant"
+        },
+        {
+          "label": "Mr P Marchant",
+          "value": "mr-p-marchant"
+        },
+        {
+          "label": "Mr P Mason",
+          "value": "mr-p-mason"
+        },
+        {
+          "label": "Mr D McMunn",
+          "value": "mr-d-mcmunn"
+        },
+        {
+          "label": "Mr B Micklewright",
+          "value": "mr-b-micklewright"
+        },
+        {
+          "label": "Mr E Plummer",
+          "value": "mr-e-plummer"
+        },
+        {
+          "label": "Mrs E Porter",
+          "value": "mrs-e-porter"
+        },
+        {
+          "label": "Mr J E Porter",
+          "value": "mr-j-e-porter"
+        },
+        {
+          "label": "Mr S Probert",
+          "value": "mr-s-probert"
+        },
+        {
+          "label": "Miss J Pullen",
+          "value": "miss-j-pullen"
+        },
+        {
+          "label": "Patrick Purcell",
+          "value": "patrick-purcell"
+        },
+        {
+          "label": "Mr P E Redding",
+          "value": "mr-p-e-redding"
+        },
+        {
+          "label": "Mrs J Roberts",
+          "value": "mrs-j-roberts"
+        },
+        {
+          "label": "Mr G M Rogers",
+          "value": "mr-g-m-rogers"
+        },
+        {
+          "label": "Dr A Rose",
+          "value": "dr-a-rose"
+        }
+      ],
+      "display_as_result_metadata": true,
+      "filterable": true,
+      "key": "patent_decision_hearing_officer",
+      "name": "Hearing officer",
+      "short_name": "Hearing officer",
+      "show_option_select_filter": true,
+      "specialist_publisher_properties": {
+        "select": "one",
+        "validations": {
+          "required": {}
+        }
+      },
+      "type": "text"
+    },
+    {
+      "display_as_result_metadata": true,
+      "filterable": false,
+      "key": "patent_decision_british_library_number",
+      "name": "British Library number",
+      "short_name": "BL Number",
+      "specialist_publisher_properties": {
+        "validations": {
+          "required": {}
+        }
+      },
+      "type": "text"
+    }
+  ],
+  "filter": {
+    "format": "patent_decision"
+  },
+  "name": "Find UK Intellectual Property (Patents) related legal decisions",
+  "organisations": [
+    "5d6f9583-991f-413d-ae83-be7274e5eae4"
+  ],
+  "show_summaries": true,
+  "show_metadata_block": true,
+  "summary": "This page shows patent decisions issued since 2000.\r\n\r\nOur old website holds decisions issued between 1998 - 2000 [https://www.ipo.gov.uk/p-challenge-decision-results.htm]\r\n\r\nThis page shows a selection of pre 1998 decisions [https://www.gov.uk/government/collections/results-of-past-patent-decisions-issued-before-1998]\r\n",
+  "target_stack": "draft"
+}

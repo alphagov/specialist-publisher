@@ -966,4 +966,19 @@ FactoryBot.define do
       end
     end
   end
+
+  factory :patent_decision, parent: :document do
+    base_path { "/patent-decisions/example-document" }
+    document_type { "patent_decision" }
+
+    transient do
+      default_metadata do
+        {
+          "patent_decision_british_library_number" => "BL123456",
+          "patent_decision_type_of_hearing" => "inter-partes-only",
+          "patent_decision_hearing_officer" => "mr-p-back",
+        }
+      end
+    end
+  end
 end
