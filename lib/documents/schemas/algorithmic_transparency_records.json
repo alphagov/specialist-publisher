@@ -106,10 +106,6 @@
           "value": "housing-ombudsman-service"
         },
         {
-          "label": "Information Commissioner’s Office",
-          "value": "information-commissioners-office"
-        },
-        {
           "label": "Leeds City Council",
           "value": "leeds-city-council"
         },
@@ -514,6 +510,7 @@
   "filter": {
     "format": "algorithmic_transparency_record"
   },
+  "index_documents_in_search_engines": true,
   "name": "Find out how algorithmic tools are used in public organisations",
   "organisations": [
     "96ae61d6-c2a1-48cb-8e67-da9d105ae381",
@@ -526,7 +523,6 @@
   "show_summaries": true,
   "show_metadata_block": true,
   "show_table_of_contents": true,
-  "index_documents_in_search_engines": true,
   "signup_content_id": "99f5bacb-d1ef-4b93-87ef-bae129fed396",
   "subscription_list_title_prefix": "Algorithmic transparency records",
   "summary": "Find algorithmic transparency records from UK public sector organisations with information on algorithmic tools used in decision making. These are completed in accordance with the Algorithmic Transparency Recording Standard.\r\n\r\nLet us know what you think of this service: [feedback form](https://forms.office.com/e/XNn3GBqzhY)",
