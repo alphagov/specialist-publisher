@@ -131,9 +131,7 @@
   "organisations": [
     "957eb4ec-089b-4f71-ba2a-dc69ac8919ea"
   ],
-  "related": [
-    "9770b8a8-92bd-4958-a2e3-5e77390b2022"
-  ],
+  "related": [],
   "show_metadata_block": true,
   "show_table_of_contents": true,
   "index_documents_in_search_engines": true,
