@@ -34,6 +34,26 @@ module_function
     Services.publishing_api.publish(content_id, "republish")
   end
 
+  def override_first_published_at(content_id, locale, timestamp)
+    timestamp = if timestamp == "now"
+                  Time.zone.now
+                else
+                  Time.zone.parse(timestamp)
+                end
+
+    document = Document.find(content_id, locale)
+    document.update_type = "republish"
+
+    state = document.publication_state
+    raise_helpful_error(state) unless state == "published"
+
+    payload = DocumentPresenter.new(document).to_json
+    payload["first_published_at"] = timestamp
+
+    Services.publishing_api.put_content(content_id, payload)
+    Services.publishing_api.publish(content_id, "republish")
+  end
+
   def raise_helpful_error(state)
     message = "That document has a '#{state}' state"
     message += " and cannot be updated. You can either:"
