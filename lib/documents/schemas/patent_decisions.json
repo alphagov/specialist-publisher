@@ -17,7 +17,7 @@
         }
       ],
       "display_as_result_metadata": false,
-      "filterable": false,
+      "filterable": true,
       "key": "patent_decision_type_of_hearing",
       "name": "Type of hearing",
       "short_name": "Type of hearing",
