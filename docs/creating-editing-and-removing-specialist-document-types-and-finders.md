@@ -218,6 +218,8 @@ We often receive requests to add new fields to a specialist document or to add n
    - the [specialist_presenter](https://github.com/alphagov/search-api/blob/main/lib/govuk_index/presenters/specialist_presenter.rb).
    - the [field_definitions](https://github.com/alphagov/search-api/blob/main/config/schema/field_definitions.json) file.
 
+Optional: if the new field is relevant for email subscriptions, follow the guidance in [Configure the email sign up page](#4-configure-the-email-sign-up-page).
+
 4. [Republish the finder](#7-deploy-a-finder)
 
 ## Removing a field from an existing specialist document
@@ -244,7 +246,9 @@ NB: In order to remove a field, ensure no document are tagged with that field, o
     - The [specialist_presenter](https://github.com/alphagov/search-api/blob/main/lib/govuk_index/presenters/specialist_presenter.rb).
     - The [field_definitions](https://github.com/alphagov/search-api/blob/main/config/schema/field_definitions.json) file.
 
-   See removal of `key_reference` in [example commit](https://github.com/alphagov/search-api/pull/3120/commits/b18f25ce86f496e46294ebce6e37e42bf035c105).
+See removal of `key_reference` in [example commit](https://github.com/alphagov/search-api/pull/3120/commits/b18f25ce86f496e46294ebce6e37e42bf035c105).
+
+Optional: if the field was used for email subscriptions, remove it from `email-alert-api` - see guidance in [Configure the email sign up page](#4-configure-the-email-sign-up-page).
 
 4. [Republish the finder](#7-deploy-a-finder)
 
