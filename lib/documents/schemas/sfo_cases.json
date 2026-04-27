@@ -42,11 +42,26 @@
         }
       },
       "type": "date"
+    },
+    {
+      "display_as_result_metadata": false,
+      "filterable": true,
+      "key": "sfo_case_date_closed",
+      "name": "Date closed",
+      "preposition": "closed",
+      "short_name": "Date closed",
+      "specialist_publisher_properties": {
+        "validations": {
+          "required": {}
+        }
+      },
+      "type": "date"
     }
   ],
   "filter": {
     "format": "sfo_case"
   },
+  "index_documents_in_search_engines": true,
   "name": "Find an SFO case",
   "organisations": [
     "ebae4517-422f-44dd-9f87-13304c9815cb"
@@ -54,10 +69,9 @@
   "related": [
     "01007fd9-8351-4068-b90c-a9af8edaeb19"
   ],
-  "show_table_of_contents": true,
-  "show_metadata_block": true,
-  "index_documents_in_search_engines": true,
   "show_summaries": true,
+  "show_metadata_block": true,
+  "show_table_of_contents": true,
   "summary": "This case finder includes all ongoing Serious Fraud Office (SFO) prosecutions and investigations that are in the public domain. This does not include intelligence referrals, covert investigations or proceeds of crime cases.\r\n\r\nFor updates on the SFO’s proceeds of crime recovery, see [this page](https://www.gov.uk/government/publications/proceeds-of-crime).",
   "target_stack": "live"
 }
