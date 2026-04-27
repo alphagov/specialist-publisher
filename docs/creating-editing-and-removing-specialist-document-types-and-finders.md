@@ -192,6 +192,7 @@ Here's a few content concerns to keep an eye on:
 - Make free text fields (which are not filterable in the way facets are) into facets if the list is known and unlikely to change. This will help users filter the content more easily. The now available admin area should make this a small maintenance task, if the list needs to change in the future.
 - Long facet option lists should be alphabetical to aid search, unless the departments can justify a different order.
 - For very long facet option lists, consider using the `show_option_select_filter` in the schema, which will add a search bar to the facet. See example [here](https://github.com/alphagov/specialist-publisher/blob/3a0d89a821c6aeea87a20dae7c8f6e3fb1cf9ec0/lib/documents/schemas/licence_transactions.json#L243).
+- You may need to stop a finder's documents from showing up in external search engine results e.g Google search. Set `index_documents_in_search_engines` to `false` in the schema. This will add a `noindex` meta tag to the finder's documents' page, which is a signal for search engine crawlers to not index the page. See example [here](https://github.com/alphagov/specialist-publisher/pull/3589/changes/ba96d1f5df4c6b714b2f9814cba8e07f1b2f0016).
 
 # __Editing__ a specialist document type
 
