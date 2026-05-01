@@ -675,7 +675,8 @@ FactoryBot.define do
     transient do
       default_metadata do
         { "sfo_case_state" => "open",
-          "sfo_case_date_announced" => "2015-10-10" }
+          "sfo_case_date_announced" => "2015-10-10",
+          "sfo_case_date_closed" => "2015-10-12" }
       end
     end
   end
