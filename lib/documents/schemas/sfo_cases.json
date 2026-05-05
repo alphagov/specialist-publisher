@@ -50,11 +50,6 @@
       "name": "Date closed",
       "preposition": "closed",
       "short_name": "Date closed",
-      "specialist_publisher_properties": {
-        "validations": {
-          "required": {}
-        }
-      },
       "type": "date"
     }
   ],
