@@ -202,6 +202,6 @@
   "show_metadata_block": true,
   "show_table_of_contents": true,
   "index_documents_in_search_engines": true,
-  "summary": "Use this tool to search for funded actions and their supplements for eligible farmers, foresters and land managers in England.\r\n\r\nUse the [Capital grant finder](https://www.gov.uk/capital-grant-finder) to search for capital items and their supplements.",
+  "summary": "Use this tool to search for funded actions and their supplements for eligible farmers, foresters and land managers in England.\r\n\r\nUse the [Capital grant finder](https://www.gov.uk/capital-grant-finder) to search for capital items and their supplements.\r\n\r\nFor SFI24 actions, read the [SFI24 agreement holder's information](https://www.gov.uk/guidance/agreement-holders-information-for-sfi24-and-re-opened-sfi24).",
   "target_stack": "live"
 }
