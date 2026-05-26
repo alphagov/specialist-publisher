@@ -171,6 +171,10 @@
           "value": "hussain-r"
         },
         {
+          "label": "King, V",
+          "value": "king-v"
+        },
+        {
           "label": "Khan, NU",
           "value": "khan-nu"
         },
@@ -217,6 +221,10 @@
         {
           "label": "Smith, SV",
           "value": "smith-sv"
+        },
+        {
+          "label": "Sproson, E",
+          "value": "sproson-e"
         },
         {
           "label": "Storey, S",
@@ -315,16 +323,16 @@
   "filter": {
     "format": "asylum_support_decision"
   },
+  "index_documents_in_search_engines": true,
   "name": "Asylum support tribunal decisions",
   "organisations": [
     "6f757605-ab8f-4b62-84e4-99f79cf085c2",
     "7141e343-e7bb-483b-920a-c6a5cf8f758c"
   ],
   "phase": "beta",
-  "show_table_of_contents": true,
-  "show_metadata_block": true,
   "show_summaries": true,
-  "index_documents_in_search_engines": true,
+  "show_metadata_block": true,
+  "show_table_of_contents": true,
   "signup_content_id": "307ea825-594c-4d88-85c9-0809fdc9c79e",
   "subscription_list_title_prefix": "First-tier Tribunal (Asylum Support) decisions",
   "summary": "Find decisions on appeals against the Home Office heard by the First-tier Tribunal (Asylum Support).",
