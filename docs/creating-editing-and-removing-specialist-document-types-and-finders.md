@@ -176,7 +176,7 @@ Specialist Publisher grants access to the publishing interface for a document ty
 
 You'll need to manually grant users access to the Specialist Publisher app in Signon, and the `editor` permission (or custom cross-organisation permissions from step 3 above) if appropriate.
 
-If the users do not yet have Signon access, direct them to the [Request a new account guidance](https://www.gov.uk/guidance/contact-the-government-digital-service/request-a-thing#:~:text=Show%20all%20sections-,Whitehall,-publisher%20accounts). Signon requests must go through this approval process.
+If the users do not yet have Signon access, direct them to the [Publishing accounts and permissions](https://guidance.publishing.service.gov.uk/accounts-support/manage-accounts-training/publishing-accounts-permissions/). Signon requests must go through this approval process.
 
 ## 9. Finder requirements and content support
 
