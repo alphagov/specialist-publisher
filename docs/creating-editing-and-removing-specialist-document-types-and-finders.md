@@ -93,7 +93,7 @@ Search API needs copies of the schema very similar to the one in Specialist Publ
 You'll also need to add your document format to:
 
 - the main ES types list [govuk.json](https://github.com/alphagov/search-api/blob/main/config/schema/indexes/govuk.json)
-- [migrated_formats.yaml](https://github.com/alphagov/search-api/blob/main/config/govuk_index/migrated_formats.yaml)
+- [allowed_formats.yaml](https://github.com/alphagov/search-api/blob/main/config/govuk_index/allowed_formats.yaml)
 - [mapped_document_types.yaml](https://github.com/alphagov/search-api/blob/main/config/govuk_index/mapped_document_types.yaml)
 
 Finally, you'll need to add your custom fields to:
