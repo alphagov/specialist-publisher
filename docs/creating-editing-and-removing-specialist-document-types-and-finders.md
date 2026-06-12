@@ -66,7 +66,6 @@ Note that the `select type` of an input (one/multiple) is now configured under t
 
 If you require custom behaviours, create a view file in the [views folder](https://github.com/alphagov/specialist-publisher/tree/main/app/views/metadata_fields). Other "non-conforming" views can be found there. Make use of the available `FacetInputComponent` subclasses to render the custom view's facets.
 
-
 ### Testing your document type
 
 #### 1. General approach
@@ -193,6 +192,12 @@ Here's a few content concerns to keep an eye on:
 - Long facet option lists should be alphabetical to aid search, unless the departments can justify a different order.
 - For very long facet option lists, consider using the `show_option_select_filter` in the schema, which will add a search bar to the facet. See example [here](https://github.com/alphagov/specialist-publisher/blob/3a0d89a821c6aeea87a20dae7c8f6e3fb1cf9ec0/lib/documents/schemas/licence_transactions.json#L243).
 - You may need to stop a finder's documents from showing up in external search engine results e.g Google search. Set `index_documents_in_search_engines` to `false` in the schema. This will add a `noindex` meta tag to the finder's documents' page, which is a signal for search engine crawlers to not index the page. See example [here](https://github.com/alphagov/specialist-publisher/pull/3589/changes/ba96d1f5df4c6b714b2f9814cba8e07f1b2f0016).
+
+## 10. Consider whether to provide a custom translation
+
+Specialist documents can be included in document collections. A document collection surfaces a link to each document, and shows its title, last updated date, and document type.
+
+If the document type doesn't read very clearly when 'humanized' via Rails, you may want to consider a [custom translation in Frontend](https://github.com/alphagov/frontend/blob/76913bfff4f54da936a789b99e69c3b36f9b1b9b/config/locales/en.yml#L163). For example, we've provided a translation for "aaib_report" => "Air Accidents Investigation Branch report".
 
 # __Editing__ a specialist document type
 
