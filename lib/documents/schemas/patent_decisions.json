@@ -267,13 +267,15 @@
   "filter": {
     "format": "patent_decision"
   },
+  "index_documents_in_search_engines": true,
   "name": "Find UK Intellectual Property (Patents) related legal decisions",
   "organisations": [
     "5d6f9583-991f-413d-ae83-be7274e5eae4"
   ],
   "show_summaries": true,
   "show_metadata_block": true,
-  "index_documents_in_search_engines": true,
-  "summary": "This page shows results of past Patent hearing decisions issued since June 2026.\r\n\r\nPatent decisions published between 1998 and June 2026 can be found here - [Intellectual Property Office - Results of past patent decisions](https://www.ipo.gov.uk/p-challenge-decision-results.htm)\r\n\r\n[This page shows results of patent decisions issued before 1998.](https://www.gov.uk/government/collections/results-of-past-patent-decisions-issued-before-1998)\r\n\r\nYou can use the free search box to search by decision number or British Library number.\r\n",
+  "signup_content_id": "36486b82-071f-4119-a403-8283289aa095",
+  "subscription_list_title_prefix": "Patent Decisions",
+  "summary": "This page shows results of past Patent hearing decisions issued since August 2026.\r\n\r\nResults of patent decisions published before this can be found using the [past patent decisions search tool](https://www.ipo.gov.uk/p-challenge-decision-results.htm).\r\n\r\nYou can use the free search box to search by decision number or British Library number.\r\n",
   "target_stack": "draft"
 }
