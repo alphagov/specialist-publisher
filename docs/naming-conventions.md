@@ -24,7 +24,7 @@ Some legacy finders have their own view.
 
 ### Search API
 - The [`mapped_document_types.yaml`][mapped_document_types] stores the associations between Publishing API document types and Search API formats (i.e. the `filter.format`).
-- [`govuk.json`][govuk.json], [`migrated_formats.yaml`][migrated_formats.yaml] must register the `filter.format`.
+- [`govuk.json`][govuk.json], [`allowed_formats.yaml`][allowed_formats.yaml] must register the `filter.format`.
 - The json file in the [`elasticsearch_types`][elasticsearch_types] directory must use the `filter.format` as file name, e.g. `cma_case.json`.
 
 
@@ -34,7 +34,7 @@ Some legacy finders have their own view.
 
 [mapped_document_types]: https://github.com/alphagov/search-api/blob/fea45f195b48a31cf48f09ddf2bced9ccc390752/config/govuk_index/mapped_document_types.yaml
 [govuk.json]: https://github.com/alphagov/search-api/blob/main/config/schema/indexes/govuk.json
-[migrated_formats.yaml]: https://github.com/alphagov/search-api/blob/main/config/govuk_index/migrated_formats.yaml
+[allowed_formats.yaml]: https://github.com/alphagov/search-api/blob/main/config/govuk_index/allowed_formats.yaml
 [elasticsearch_types]: https://github.com/alphagov/search-api/tree/main/config/schema/elasticsearch_types
 [allowed_document_types.yml]: https://github.com/alphagov/publishing-api/blob/main/content_schemas/allowed_document_types.yml
 [_specialist_document.jsonnet]: https://github.com/alphagov/publishing-api/blob/main/content_schemas/formats/shared/definitions/_specialist_document.jsonnet
