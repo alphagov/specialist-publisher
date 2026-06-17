@@ -1,7 +1,7 @@
 {
   "base_path": "/marine-equipment-approved-recommendations",
   "content_id": "49f47764-2b1b-4b0d-9164-4aa6b42a8b63",
-  "description": "Find recommendations on how to interpret and apply the Merchant Shipping (Marine Equipment) Regulations 2016 as amended.",
+  "description": "Find recommendations on how to interpret and apply the Merchant Shipping (Marine Equipment) Regulations 2025 as amended.",
   "document_noun": "recommendation",
   "document_title": "Marine Equipment Approved Recommendation",
   "editing_organisations": [
@@ -106,6 +106,6 @@
   "show_summaries": true,
   "signup_content_id": "512a14c1-260a-4c4e-8de8-643eadf7905c",
   "subscription_list_title_prefix": "UK Approved Recommendations for marine equipment",
-  "summary": "Find recommendations on how to interpret and apply the Merchant Shipping (Marine Equipment) Regulations 2016 as amended.",
+  "summary": "Find recommendations on how to interpret and apply the Merchant Shipping (Marine Equipment) Regulations 2025 as amended.",
   "target_stack": "live"
 }
