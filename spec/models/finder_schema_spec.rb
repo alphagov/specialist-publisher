@@ -123,18 +123,20 @@ RSpec.describe FinderSchema do
         let(:properties) do
           mandatory_properties.merge({
             "facets" => [
-              "key" => "country",
-              "type" => "text",
-              "allowed_values" => [
-                {
-                  "value" => "AF",
-                  "label" => "Afghanistan",
-                },
-                {
-                  "value" => "AL",
-                  "label" => "Albania",
-                },
-              ],
+              {
+                "key" => "country",
+                "type" => "text",
+                "allowed_values" => [
+                  {
+                    "value" => "AF",
+                    "label" => "Afghanistan",
+                  },
+                  {
+                    "value" => "AL",
+                    "label" => "Albania",
+                  },
+                ],
+              },
             ],
           })
         end
