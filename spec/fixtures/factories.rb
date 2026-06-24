@@ -262,7 +262,7 @@ FactoryBot.define do
   end
 
   factory :veterans_support_organisation, parent: :document do
-    base_path { "/support-for-veterans/example-document" }
+    base_path { "/veteran-support-organisations/example-document" }
     document_type { "veterans_support_organisation" }
     transient do
       default_metadata do

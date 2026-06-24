@@ -1,5 +1,5 @@
 {
-  "base_path": "/support-for-veterans",
+  "base_path": "/veteran-support-organisations",
   "content_id": "0bf7f581-a547-4dd1-aef0-754e0924281d",
   "default_order": "title",
   "description": "Find support organisations for veterans of the UK armed forces and their families.",
@@ -369,7 +369,7 @@
     "format": "veterans_support_organisation"
   },
   "index_documents_in_search_engines": true,
-  "name": "Find support for veterans and their families",
+  "name": "Find organisations that support veterans and their families",
   "organisations": [
     "516357f6-92f3-4292-8449-b958e1c63c5f"
   ],
