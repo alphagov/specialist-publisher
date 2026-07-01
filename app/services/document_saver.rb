@@ -4,6 +4,7 @@ require "services"
 class DocumentSaver
   def self.save(document)
     document.update_type = "major" if document.first_draft?
+    document.realign_base_path_to_finder if document.unpublished?
 
     presented_document = DocumentPresenter.new(document)
     presented_links = DocumentLinksPresenter.new(document)

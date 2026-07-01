@@ -102,6 +102,15 @@ class Document
     truncate(@base_path, length: 250, omission: "")
   end
 
+  # A redraft of an unpublished document must land under the finder's current
+  # base_path, which may have moved since the document was unpublished. The
+  # existing slug is preserved so the document keeps its URL identity.
+  def realign_base_path_to_finder
+    return unless @base_path
+
+    self.base_path = "#{finder_schema.base_path}/#{File.basename(@base_path)}"
+  end
+
   def rendering_app
     "frontend"
   end
