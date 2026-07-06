@@ -780,6 +780,108 @@ RSpec.describe Document do
     end
   end
 
+  describe "#base_path" do
+    context "when the document is a first draft" do
+      it "derives the base_path from the finder base_path and the title" do
+        first_draft = MyDocumentType.new(title: "A brand new document")
+        expect(first_draft.base_path).to eq("/my-document-types/a-brand-new-document")
+      end
+    end
+
+    context "when the document is unpublished" do
+      subject(:unpublished_document) do
+        MyDocumentType.from_publishing_api(
+          FactoryBot.create(:document, :unpublished, payload_attributes.merge(base_path: "/old-finder/example-document")),
+        )
+      end
+
+      it "reports the stored base_path, even if the finder has since moved" do
+        expect(unpublished_document.base_path).to eq("/old-finder/example-document")
+      end
+    end
+
+    context "when the document is published" do
+      subject(:published_document) do
+        MyDocumentType.from_publishing_api(
+          FactoryBot.create(:document, :published, payload_attributes.merge(base_path: "/old-finder/example-document")),
+        )
+      end
+
+      it "returns the stored base_path" do
+        expect(published_document.base_path).to eq("/old-finder/example-document")
+      end
+    end
+
+    context "when the base_path is not set" do
+      it "returns nil rather than raising" do
+        document = MyDocumentType.new(publication_state: "unpublished")
+        expect(document.base_path).to be_nil
+      end
+    end
+
+    context "when the derived base_path exceeds 250 characters" do
+      it "truncates it to 250 characters" do
+        first_draft = MyDocumentType.new(title: "a" * 300)
+        expect(first_draft.base_path.length).to eq(250)
+      end
+    end
+  end
+
+  describe "#realign_base_path_to_finder" do
+    it "moves the base_path under the finder's live base_path, keeping the slug" do
+      document = MyDocumentType.from_publishing_api(
+        FactoryBot.create(:document, :unpublished, payload_attributes.merge(base_path: "/old-finder/example-document")),
+      )
+      document.realign_base_path_to_finder
+      expect(document.base_path).to eq("/my-document-types/example-document")
+    end
+
+    it "keeps the existing slug rather than deriving one from the title" do
+      document = MyDocumentType.from_publishing_api(
+        FactoryBot.create(:document, :unpublished, payload_attributes.merge(base_path: "/old-finder/example-document")),
+      )
+      document.title = "A completely different title"
+      document.realign_base_path_to_finder
+      expect(document.base_path).to eq("/my-document-types/example-document")
+    end
+
+    it "leaves a base_path that already sits under the finder unchanged" do
+      document = MyDocumentType.from_publishing_api(
+        FactoryBot.create(:document, :unpublished, payload_attributes),
+      )
+      document.realign_base_path_to_finder
+      expect(document.base_path).to eq("/my-document-types/example-document")
+    end
+
+    it "does nothing when the base_path is not set" do
+      document = MyDocumentType.new(publication_state: "unpublished")
+      document.realign_base_path_to_finder
+      expect(document.base_path).to be_nil
+    end
+  end
+
+  context "saving a new draft from an unpublished document" do
+    subject(:unpublished_document) do
+      MyDocumentType.from_publishing_api(
+        FactoryBot.create(:document, :unpublished, payload_attributes.merge(base_path: "/old-finder/example-document")),
+      )
+    end
+
+    before do
+      stub_any_publishing_api_put_content
+      stub_any_publishing_api_patch_links
+    end
+
+    it "realigns the draft to the finder's live base_path" do
+      unpublished_document.update_type = "minor"
+      expect(unpublished_document.save).to be true
+      assert_publishing_api_put_content(
+        unpublished_document.content_id,
+        request_json_includes(base_path: "/my-document-types/example-document"),
+      )
+    end
+  end
+
   context "saving a draft where another draft has the same base_path" do
     before do
       stub_any_publishing_api_put_content
