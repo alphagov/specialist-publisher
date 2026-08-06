@@ -48,7 +48,7 @@
     }
 
     &:focus {
-      outline: $govuk-focus-width solid $govuk-focus-colour;
+      outline: $govuk-focus-width solid govuk-functional-colour(focus);
     }
   }
 }
