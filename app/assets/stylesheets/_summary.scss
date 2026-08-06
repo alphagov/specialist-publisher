@@ -26,7 +26,7 @@
 
 .app-view-summary__sidebar-actions {
   padding: govuk-spacing(3);
-  background-color: govuk-colour("light-grey");
+  background-color: govuk-colour("black", $variant: "tint-95");
 }
 
 .app-view-summary__sidebar-actions .gem-c-button {
@@ -40,11 +40,11 @@
 
 .app-view-summary__sidebar-notices {
   .govuk-inset-text {
-    border-left: $govuk-border-width-narrow solid govuk-colour("dark-grey");
-    background-color: govuk-colour("light-grey");
+    border-left: $govuk-border-width-narrow solid govuk-colour("black", $variant: "tint-25");
+    background-color: govuk-colour("black", $variant: "tint-95");
 
     @include govuk-media-query($from: tablet) {
-      border-left: $govuk-border-width solid govuk-colour("dark-grey");
+      border-left: $govuk-border-width solid govuk-colour("black", $variant: "tint-25");
     }
 
     &:focus {
