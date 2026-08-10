@@ -60,6 +60,10 @@
           "value": "uk-wounded-injured-and-sick"
         },
         {
+          "label": "Additional Leave For Reservists",
+          "value": "additional-leave-for-reservists"
+        },
+        {
           "label": "Bespoke Pledges",
           "value": "bespoke-pledges"
         }
