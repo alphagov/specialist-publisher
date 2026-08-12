@@ -17,6 +17,31 @@ RSpec.describe DateHelper, type: :helper do
       expect(date_param_value(params, "my_date")).to eq("2016-02-01")
     end
 
+    it "strips leading whitespace from date values" do
+      params = { "my_date(1i)" => "2016", "my_date(2i)" => "02", "my_date(3i)" => " 1" }
+      expect(date_param_value(params, "my_date")).to eq("2016-02-01")
+    end
+
+    it "strips trailing whitespace from date values" do
+      params = { "my_date(1i)" => "2016", "my_date(2i)" => "02", "my_date(3i)" => "01\t" }
+      expect(date_param_value(params, "my_date")).to eq("2016-02-01")
+    end
+
+    it "strips non-breaking spaces from date values" do
+      params = { "my_date(1i)" => "2016", "my_date(2i)" => "\u00A02", "my_date(3i)" => "01\u00A0" }
+      expect(date_param_value(params, "my_date")).to eq("2016-02-01")
+    end
+
+    it "strips whitespace within date values" do
+      params = { "my_date(1i)" => "2016", "my_date(2i)" => "02", "my_date(3i)" => "0 1" }
+      expect(date_param_value(params, "my_date")).to eq("2016-02-01")
+    end
+
+    it "treats a whitespace only value as empty" do
+      params = { "my_date(1i)" => "2016", "my_date(2i)" => "02", "my_date(3i)" => " " }
+      expect(date_param_value(params, "my_date")).to eq("2016-02")
+    end
+
     it "doesn't alter non-numerical values" do
       params = { "my_date(1i)" => "some", "my_date(2i)" => "bad", "my_date(3i)" => "data" }
       expect(date_param_value(params, "my_date")).to eq("some-bad-data")
