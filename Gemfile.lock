@@ -304,7 +304,7 @@ GEM
     minitest (6.0.6)
       drb (~> 2.0)
       prism (~> 1.5)
-    mongo (2.23.0)
+    mongo (2.23.1)
       base64
       bson (>= 4.14.1, < 6.0.0)
     mongoid (9.1.0)
@@ -805,7 +805,7 @@ DEPENDENCIES
   hashdiff
   listen
   mail-notify
-  mongo
+  mongo (~> 2.23.0)
   mongoid
   multi_json
   plek
