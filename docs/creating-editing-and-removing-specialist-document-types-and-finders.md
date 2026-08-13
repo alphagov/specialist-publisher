@@ -209,12 +209,12 @@ We often receive requests to add new fields to a specialist document or to add n
    - Add the new field in the [specialist_document schema](https://github.com/alphagov/publishing-api/blob/6d5595470bd0e7f3072e06f0113e3ca5514b6e98/content_schemas/formats/shared/definitions/_specialist_document.jsonnet). See [example commit](https://github.com/alphagov/publishing-api/pull/2968/commits/b7d9cd1f6bb5d8d08fda7b6e219b2467134406c4).
    - Run `bundle exec rake build_schemas` to regenerate schemas after adding the new value(s).
 
+
 2. In `specialist publisher`:
    - Add the new field to the relevant [model](https://github.com/alphagov/specialist-publisher/tree/main/app/models), including any required validations, tests and factories.
    - Add fields to relevant [schema](https://github.com/alphagov/specialist-publisher/tree/main/lib/documents/schemas) files.
    - For legacy finders that don't use the shared view, you may need to update the [view](https://github.com/alphagov/specialist-publisher/tree/main/app/views/metadata_fields).
-
-<!-- TODO: Update these with up-to-date examples that don't include any view or 'expanded field' changes-->
+   <!-- TODO: Update these with up-to-date examples that don't include any view or 'expanded field' changes-->
    See [this](https://github.com/alphagov/specialist-publisher/pull/2847/commits/37fee332a721222c392f541a7f3b747d5d7a8c27) commit for an example.
 
 3. In `search-api`, add the new field in the following places (see [this](https://github.com/alphagov/search-api/pull/3043/commits/12eee8d6bab4e7606b4014684907f60574e713ba) commit for an example):
@@ -223,9 +223,17 @@ We often receive requests to add new fields to a specialist document or to add n
    - the [specialist_presenter](https://github.com/alphagov/search-api/blob/main/lib/govuk_index/presenters/specialist_presenter.rb).
    - the [field_definitions](https://github.com/alphagov/search-api/blob/main/config/schema/field_definitions.json) file.
 
-Optional: if the new field is relevant for email subscriptions, follow the guidance in [Configure the email sign up page](#4-configure-the-email-sign-up-page).
+   Optional: if the new field is relevant for email subscriptions, follow the guidance in [Configure the email sign up page](#4-configure-the-email-sign-up-page).
 
 4. [Republish the finder](#7-deploy-a-finder)
+
+5. Make sure you update the search api index and/or mapping before you create any documents using the new field.  See [Reindexing breakdown](#reindexing-breakdown)
+
+
+   If you have created documents using the new field before you update the search index mappings, the search index will contain
+data with a default field type, which may not match the type you specify in your `search-api` changes in step (3) above.
+
+   To fix this, you will need to perform a re-index of the relevant search index.
 
 ### Removing a field from an existing specialist document
 
@@ -256,6 +264,7 @@ See removal of `key_reference` in [example commit](https://github.com/alphagov/s
 Optional: if the field was used for email subscriptions, remove it from `email-alert-api` - see guidance in [Configure the email sign up page](#4-configure-the-email-sign-up-page).
 
 4. [Republish the finder](#7-deploy-a-finder)
+
 
 ### Adding values for existing fields on a specialist document
 Specific values for fields of type array are now defined only in the `specialist_publisher` app. To add a value:
