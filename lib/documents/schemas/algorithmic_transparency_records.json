@@ -130,6 +130,10 @@
           "value": "ministry-of-justice"
         },
         {
+          "label": "Newcastle City Council",
+          "value": "newcastle-city-council"
+        },
+        {
           "label": "NHS England",
           "value": "nhs-england"
         },
