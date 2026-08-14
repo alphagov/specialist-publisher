@@ -160,6 +160,10 @@
         {
           "label": "West Midlands Police",
           "value": "west-midlands-police"
+        },
+        {
+          "label": "Newcastle City Council",
+          "value": "newcastle-city-council"
         }
       ],
       "display_as_result_metadata": true,
