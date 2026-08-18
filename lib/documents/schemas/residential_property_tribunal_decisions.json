@@ -210,6 +210,10 @@
           "value": "leasehold-disputes-management---service-charges"
         },
         {
+          "label": "Leasehold disputes (management) - 20ZA",
+          "value": "leasehold-disputes-management---dispensation"
+        },
+        {
           "label": "Leasehold disputes (management) - Variation of leases",
           "value": "leasehold-disputes-management---variation-of-leases"
         },
