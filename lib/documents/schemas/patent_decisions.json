@@ -262,6 +262,46 @@
         }
       },
       "type": "text"
+    },
+    {
+      "display_as_result_metadata": true,
+      "filterable": true,
+      "key": "patent_decision_application_patent_number",
+      "name": "Application/Patent Number",
+      "show_option_select_filter": true,
+      "type": "text"
+    },
+    {
+      "display_as_result_metadata": true,
+      "filterable": true,
+      "key": "patent_decision_date_of_issue",
+      "name": "Date of issue",
+      "show_option_select_filter": true,
+      "type": "date"
+    },
+    {
+      "display_as_result_metadata": true,
+      "filterable": true,
+      "key": "patent_decision_persons_or_companies_involved",
+      "name": "Person(s) or company(s) involved",
+      "show_option_select_filter": true,
+      "type": "text"
+    },
+    {
+      "display_as_result_metadata": true,
+      "filterable": true,
+      "key": "patent_decision_provisions_discussed",
+      "name": "Provisions discussed",
+      "show_option_select_filter": true,
+      "type": "text"
+    },
+    {
+      "display_as_result_metadata": true,
+      "filterable": true,
+      "key": "patent_decision_keyword_or_phrase",
+      "name": "Keyword or phrase",
+      "show_option_select_filter": true,
+      "type": "text"
     }
   ],
   "filter": {
