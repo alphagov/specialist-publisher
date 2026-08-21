@@ -252,7 +252,7 @@
     },
     {
       "display_as_result_metadata": true,
-      "filterable": false,
+      "filterable": true,
       "key": "patent_decision_british_library_number",
       "name": "British Library number",
       "short_name": "BL Number",
