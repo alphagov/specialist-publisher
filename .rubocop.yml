@@ -17,7 +17,8 @@ inherit_mode:
 # See https://github.com/alphagov/rubocop-govuk/blob/main/CONTRIBUTING.md
 # **************************************************************
 
-# This app does not have a DB
+# Documents are not ActiveRecord-backed (they're persisted via Publishing API),
+# so `save`/`create` on a Document do not behave like their ActiveRecord bang counterparts.
 Rails/SaveBang:
   Enabled: false
 

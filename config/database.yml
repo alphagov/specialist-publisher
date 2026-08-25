@@ -1,0 +1,18 @@
+default: &default
+  adapter: mysql2
+  encoding: utf8mb4
+  pool: 5
+
+development:
+  <<: *default
+  database: specialist_publisher_development
+  url: <%= ENV["DATABASE_URL"] %>
+
+test:
+  <<: *default
+  database: specialist_publisher_test
+  url: <%= ENV["TEST_DATABASE_URL"] %>
+
+production:
+  <<: *default
+  url: <%= ENV["DATABASE_URL"] %>
