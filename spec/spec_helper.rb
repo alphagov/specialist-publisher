@@ -23,13 +23,6 @@ Dir[Rails.root.join("features/support/**/*_helpers.rb")]
   .sort
   .each { |f| require f }
 
-# Quiet down now Mongo
-Mongo::Logger.logger.level = ::Logger::FATAL
-
-require "database_cleaner/mongoid"
-DatabaseCleaner.strategy = :deletion
-DatabaseCleaner.clean
-
 require "services"
 require "gds_api/test_helpers/publishing_api"
 require "gds_api/test_helpers/email_alert_api"
@@ -48,10 +41,6 @@ RSpec.configure do |config|
 
   config.mock_with :rspec do |mocks|
     mocks.syntax = :expect
-  end
-
-  config.before(:each) do
-    User.destroy_all
   end
 
   config.after(:each) do

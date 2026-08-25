@@ -18,11 +18,6 @@ jobs:
     name: Run RSpec
     runs-on: ubuntu-latest
     steps:
-      - name: Setup MongoDB
-        uses: alphagov/govuk-infrastructure/.github/actions/setup-mongodb@main
-        with:
-          version: 3.6
-
       - name: Setup Redis
         uses: alphagov/govuk-infrastructure/.github/actions/setup-redis@main
 
@@ -49,11 +44,6 @@ jobs:
 
       - name: Precompile assets
         uses: alphagov/govuk-infrastructure/.github/actions/precompile-rails-assets@main
-
-      - name: Initialize database
-        env:
-          RAILS_ENV: test
-        run: bundle exec rails db:setup
 
       - name: Run RSpec
         env:
