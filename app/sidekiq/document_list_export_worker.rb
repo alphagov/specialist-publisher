@@ -5,8 +5,12 @@ require "securerandom"
 class DocumentListExportWorker
   include Sidekiq::Job
 
-  def perform(document_type_slug, user_id, query)
-    user = User.find(user_id)
+  def perform(document_type_slug, user_attributes, query)
+    # There's no database to look a user up in (see app/models/user.rb),
+    # so the caller (ExportsController#create) hands us a full snapshot of
+    # the requesting user - built the same way as the one we stash in the
+    # session cookie - rather than an id to look up.
+    user = User.new(user_attributes)
     format = fetch_format(document_type_slug)
     authorize user, format
     csv = generate_csv(format, query)

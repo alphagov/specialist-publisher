@@ -4,7 +4,10 @@
   <% content_for :head do %>
     <meta name="govuk:components_gem_version" content="<%= GovukPublishingComponents::VERSION %>">
     <% unless Rails.env.test? %>
-      <meta name="govuk:user-created-at" content="<%= current_user&._id&.generation_time&.to_date %>">
+      <%# There's no local Users table any more (see app/models/user.rb), %>
+      <%# so we don't have an account-creation date to report here - Signon %>
+      <%# doesn't hand us one via OmniAuth, and it isn't worth a live API %>
+      <%# call just for this debug tag. %>
       <meta name="govuk:user-organisation-name" content="<%= organisation_name(current_user&.organisation_content_id) %>">
       <meta name="govuk:user-id" content="<%= current_user&.anonymous_user_id %>">
     <% end %>

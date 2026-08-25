@@ -16,7 +16,7 @@ class ExportsController < ApplicationController
 
   def create
     @query = params[:query]
-    DocumentListExportWorker.perform_async(current_format.admin_slug, current_user.id.to_s, @query)
+    DocumentListExportWorker.perform_async(current_format.admin_slug, current_user.attributes, @query)
     flash[:success] = "The document list is being exported"
     redirect_to documents_path(current_format.admin_slug, query: @query)
   end
