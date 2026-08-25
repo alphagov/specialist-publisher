@@ -2,7 +2,7 @@
 
 Publishing App for Specialist Documents.
 
-This application does not store documents in a database of its own. Instead it uses Publishing API to store and retrieve documents. MongoDB is used for storing local user records.
+This application has no database of its own. It uses Publishing API to store and retrieve documents, and Signon (via the gds-sso gem) as the source of truth for user accounts and permissions - see `app/models/user.rb` for how sign-in works without a local Users table.
 
 For each of the specialist finder schemas, `target_stack` property can be set to `draft` to only put the finder content onto the draft stack, and `live` to publish the finder to the `live` stack
 
