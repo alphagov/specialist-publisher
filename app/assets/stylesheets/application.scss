@@ -42,5 +42,5 @@ $govuk-page-width: 1140px;
 @import "./admin/overrides";
 
 .bg-light-grey {
-  background-color: govuk-colour("light-grey");
+  background-color: govuk-colour("black", $variant: "tint-95");
 }
