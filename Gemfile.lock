@@ -135,6 +135,11 @@ GEM
     dartsass-rails (0.5.1)
       railties (>= 6.0.0)
       sass-embedded (~> 1.63)
+    database_cleaner (2.1.0)
+      database_cleaner-active_record (>= 2, < 3)
+    database_cleaner-active_record (2.2.2)
+      activerecord (>= 5.a)
+      database_cleaner-core (~> 2.0)
     database_cleaner-core (2.0.1)
     database_cleaner-mongoid (2.0.1)
       database_cleaner-core (~> 2.0.0)
@@ -316,6 +321,8 @@ GEM
     multi_json (1.21.1)
     multi_xml (0.9.1)
       bigdecimal (>= 3.1, < 5)
+    mysql2 (0.5.7)
+      bigdecimal
     net-http (0.9.1)
       uri (>= 0.11.1)
     net-imap (0.6.6)
@@ -791,6 +798,7 @@ DEPENDENCIES
   binding_of_caller
   bootsnap
   dartsass-rails
+  database_cleaner
   database_cleaner-mongoid
   diffy
   factory_bot
@@ -808,6 +816,7 @@ DEPENDENCIES
   mongo (~> 2.23.0)
   mongoid
   multi_json
+  mysql2
   plek
   pry-byebug
   pry-rails
