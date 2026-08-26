@@ -18,10 +18,9 @@ jobs:
     name: Run RSpec
     runs-on: ubuntu-latest
     steps:
-      - name: Setup MongoDB
-        uses: alphagov/govuk-infrastructure/.github/actions/setup-mongodb@main
-        with:
-          version: 3.6
+      - name: Setup MySQL
+        id: setup-mysql
+        uses: alphagov/govuk-infrastructure/.github/actions/setup-mysql@main
 
       - name: Setup Redis
         uses: alphagov/govuk-infrastructure/.github/actions/setup-redis@main
@@ -53,10 +52,12 @@ jobs:
       - name: Initialize database
         env:
           RAILS_ENV: test
+          TEST_DATABASE_URL: ${{ steps.setup-mysql.outputs.db-url }}
         run: bundle exec rails db:setup
 
       - name: Run RSpec
         env:
           RAILS_ENV: test
+          TEST_DATABASE_URL: ${{ steps.setup-mysql.outputs.db-url }}
           GOVUK_CONTENT_SCHEMAS_PATH: vendor/publishing-api/content_schemas
         run: bundle exec rake spec
