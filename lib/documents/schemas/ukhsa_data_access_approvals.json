@@ -503,7 +503,11 @@
           "value": "linked-hospital-episode-statistics-admitted-care-ip"
         },
         {
-          "label": "linked Hospital Episode Statistics (OP)",
+          "label": "Linked Hospital Episode Statistics Critical Care (CC)",
+          "value": "linked-hospital-episode-statistics-critical-care-cc"
+        },
+        {
+          "label": "Linked Hospital Episode Statistics (OP)",
           "value": "linked-hospital-episode-statistics-op"
         },
         {
