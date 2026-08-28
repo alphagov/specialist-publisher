@@ -111,7 +111,6 @@ GEM
       msgpack (~> 1.5)
     brakeman (8.0.4)
       racc
-    bson (5.2.0)
     builder (3.3.0)
     byebug (13.0.0)
       reline (>= 0.6.0)
@@ -135,10 +134,12 @@ GEM
     dartsass-rails (0.5.1)
       railties (>= 6.0.0)
       sass-embedded (~> 1.63)
+    database_cleaner (2.1.0)
+      database_cleaner-active_record (>= 2, < 3)
+    database_cleaner-active_record (2.2.2)
+      activerecord (>= 5.a)
+      database_cleaner-core (~> 2.0)
     database_cleaner-core (2.0.1)
-    database_cleaner-mongoid (2.0.1)
-      database_cleaner-core (~> 2.0.0)
-      mongoid
     date (3.5.1)
     debug_inspector (1.2.0)
     diff-lcs (1.6.2)
@@ -304,18 +305,12 @@ GEM
     minitest (6.0.6)
       drb (~> 2.0)
       prism (~> 1.5)
-    mongo (2.23.1)
-      base64
-      bson (>= 4.14.1, < 6.0.0)
-    mongoid (9.1.0)
-      activemodel (>= 5.1, < 8.2, != 7.0.0)
-      concurrent-ruby (>= 1.0.5, < 2.0)
-      mongo (>= 2.18.0, < 3.0.0)
-      ostruct
     msgpack (1.8.4)
     multi_json (1.21.1)
     multi_xml (0.9.1)
       bigdecimal (>= 3.1, < 5)
+    mysql2 (0.5.7)
+      bigdecimal
     net-http (0.9.1)
       uri (>= 0.11.1)
     net-imap (0.6.6)
@@ -791,7 +786,7 @@ DEPENDENCIES
   binding_of_caller
   bootsnap
   dartsass-rails
-  database_cleaner-mongoid
+  database_cleaner
   diffy
   factory_bot
   gds-api-adapters
@@ -805,9 +800,8 @@ DEPENDENCIES
   hashdiff
   listen
   mail-notify
-  mongo (~> 2.23.0)
-  mongoid
   multi_json
+  mysql2
   plek
   pry-byebug
   pry-rails

@@ -4,7 +4,7 @@
   <% content_for :head do %>
     <meta name="govuk:components_gem_version" content="<%= GovukPublishingComponents::VERSION %>">
     <% unless Rails.env.test? %>
-      <meta name="govuk:user-created-at" content="<%= current_user&._id&.generation_time&.to_date %>">
+      <meta name="govuk:user-created-at" content="<%= current_user&.created_at&.to_date %>">
       <meta name="govuk:user-organisation-name" content="<%= organisation_name(current_user&.organisation_content_id) %>">
       <meta name="govuk:user-id" content="<%= current_user&.anonymous_user_id %>">
     <% end %>

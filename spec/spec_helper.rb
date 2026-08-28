@@ -23,12 +23,9 @@ Dir[Rails.root.join("features/support/**/*_helpers.rb")]
   .sort
   .each { |f| require f }
 
-# Quiet down now Mongo
-Mongo::Logger.logger.level = ::Logger::FATAL
-
-require "database_cleaner/mongoid"
-DatabaseCleaner.strategy = :deletion
-DatabaseCleaner.clean
+require "database_cleaner/active_record"
+DatabaseCleaner.url_allowlist = [ENV["DATABASE_URL"]]
+DatabaseCleaner.clean_with(:truncation)
 
 require "services"
 require "gds_api/test_helpers/publishing_api"
@@ -50,9 +47,7 @@ RSpec.configure do |config|
     mocks.syntax = :expect
   end
 
-  config.before(:each) do
-    User.destroy_all
-  end
+  config.use_transactional_fixtures = true
 
   config.after(:each) do
     Timecop.return
