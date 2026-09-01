@@ -3,13 +3,13 @@
   "srcFiles": [
     "application-*.js"
   ],
-  "specDir": "spec/javascripts",
+  "specDir": ".",
   "specFiles": [
-    "**/*[sS]pec.?(m)js"
+    "spec/javascripts/**/*[sS]pec.?(m)js"
   ],
   "helpers": [
     "helpers/*.js",
-    "https://unpkg.com/jasmine-ajax@4.0.0/lib/mock-ajax.js"
+    "node_modules/jasmine-ajax/lib/mock-ajax.js"
   ],
   "browser": {
     "name": "headlessChrome"
