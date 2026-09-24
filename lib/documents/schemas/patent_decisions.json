@@ -268,6 +268,7 @@
       "filterable": false,
       "key": "patent_decision_application_patent_number",
       "name": "Application/Patent Number",
+      "short_name": "Application/Patent number",
       "type": "text"
     },
     {
@@ -275,6 +276,7 @@
       "filterable": true,
       "key": "patent_decision_date_of_issue",
       "name": "Date of issue",
+      "short_name": "Date of issue",
       "show_option_select_filter": true,
       "type": "date"
     },
@@ -283,6 +285,7 @@
       "filterable": false,
       "key": "patent_decision_persons_or_companies_involved",
       "name": "Person(s) or company(s) involved",
+      "short_name": "Person(s) or company(s) involved",
       "type": "text"
     },
     {
@@ -290,6 +293,7 @@
       "filterable": false,
       "key": "patent_decision_provisions_discussed",
       "name": "Provisions discussed",
+      "short_name": "Provisions discussed",
       "type": "text"
     },
     {
@@ -297,6 +301,7 @@
       "filterable": false,
       "key": "patent_decision_keyword_or_phrase",
       "name": "Keyword or phrase",
+      "short_name": "Keyword or phrase",
       "type": "text"
     }
   ],
