@@ -312,6 +312,6 @@
   "show_metadata_block": true,
   "signup_content_id": "36486b82-071f-4119-a403-8283289aa095",
   "subscription_list_title_prefix": "Patent Decisions",
-  "summary": "This page shows results of past Patent hearing decisions issued since August 2026.\r\n\r\nResults of patent decisions published before this can be found using the [past patent decisions search tool](https://www.ipo.gov.uk/p-challenge-decision-results.htm).\r\n\r\nYou can use the free search box to search by decision number or British Library number.\r\n",
+  "summary": "This page shows results of past Patent hearing decisions issued since August 2026.\r\n\r\nResults of patent decisions published before this can be found using the [past patent decisions search tool](https://www.ipo.gov.uk/p-challenge-decision-results.htm).\r\n\r\nYou can use the free search box to search by decision number or British Library number.\r\n\r\nYou must enter the exact patent number to find the document including any numbers, letters and points eg. GB2012345.1\r\n",
   "target_stack": "draft"
 }
