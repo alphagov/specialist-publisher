@@ -4,6 +4,9 @@
   "description": "Find reports of AAIB investigations into air accidents and incidents",
   "document_noun": "report",
   "document_title": "AAIB Report",
+  "editing_organisations": [
+    "4c717efc-f47b-478e-a76d-ce1ae0af1946"
+  ],
   "facets": [
     {
       "allowed_values": [
