@@ -252,7 +252,7 @@
     },
     {
       "display_as_result_metadata": true,
-      "filterable": true,
+      "filterable": false,
       "key": "patent_decision_british_library_number",
       "name": "British Library number",
       "short_name": "BL Number",
@@ -265,10 +265,10 @@
     },
     {
       "display_as_result_metadata": true,
-      "filterable": true,
+      "filterable": false,
       "key": "patent_decision_application_patent_number",
       "name": "Application/Patent Number",
-      "show_option_select_filter": true,
+      "short_name": "Application/Patent number",
       "type": "text"
     },
     {
@@ -276,31 +276,32 @@
       "filterable": true,
       "key": "patent_decision_date_of_issue",
       "name": "Date of issue",
+      "short_name": "Date of issue",
       "show_option_select_filter": true,
       "type": "date"
     },
     {
       "display_as_result_metadata": true,
-      "filterable": true,
+      "filterable": false,
       "key": "patent_decision_persons_or_companies_involved",
       "name": "Person(s) or company(s) involved",
-      "show_option_select_filter": true,
+      "short_name": "Person(s) or company(s) involved",
       "type": "text"
     },
     {
       "display_as_result_metadata": true,
-      "filterable": true,
+      "filterable": false,
       "key": "patent_decision_provisions_discussed",
       "name": "Provisions discussed",
-      "show_option_select_filter": true,
+      "short_name": "Provisions discussed",
       "type": "text"
     },
     {
       "display_as_result_metadata": true,
-      "filterable": true,
+      "filterable": false,
       "key": "patent_decision_keyword_or_phrase",
       "name": "Keyword or phrase",
-      "show_option_select_filter": true,
+      "short_name": "Keyword or phrase",
       "type": "text"
     }
   ],
@@ -316,6 +317,6 @@
   "show_metadata_block": true,
   "signup_content_id": "36486b82-071f-4119-a403-8283289aa095",
   "subscription_list_title_prefix": "Patent Decisions",
-  "summary": "This page shows results of past Patent hearing decisions issued since August 2026.\r\n\r\nResults of patent decisions published before this can be found using the [past patent decisions search tool](https://www.ipo.gov.uk/p-challenge-decision-results.htm).\r\n\r\nYou can use the free search box to search by decision number or British Library number.\r\n",
+  "summary": "This page shows results of past Patent hearing decisions issued since August 2026.\r\n\r\nResults of patent decisions published before this can be found using the [past patent decisions search tool](https://www.ipo.gov.uk/p-challenge-decision-results.htm).\r\n\r\nYou can use the free search box to search by decision number or British Library number.\r\n\r\nYou must enter the exact patent number to find the document including any numbers, letters and points eg. GB2012345.1\r\n",
   "target_stack": "draft"
 }
