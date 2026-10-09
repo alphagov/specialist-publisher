@@ -4,6 +4,9 @@
   "description": "Find reports of MAIB investigations into marine accidents and incidents",
   "document_noun": "report",
   "document_title": "MAIB Report",
+  "editing_organisations": [
+    "4c717efc-f47b-478e-a76d-ce1ae0af1946"
+  ],
   "email_filter_options": {
     "downcase_email_alert_topic_names": true,
     "email_filter_by": "vessel_type"
