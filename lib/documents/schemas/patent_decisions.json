@@ -297,11 +297,268 @@
       "type": "text"
     },
     {
+      "allowed_values": [
+        {
+          "label": "Abuse of process",
+          "value": "abuse-of-process"
+        },
+        {
+          "label": "Added subject matter",
+          "value": "added-subject-matter"
+        },
+        {
+          "label": "Alternative dispute resolution",
+          "value": "alternative-dispute-resolution"
+        },
+        {
+          "label": "Amendment",
+          "value": "amendment"
+        },
+        {
+          "label": "Appeal",
+          "value": "appeal"
+        },
+        {
+          "label": "Assignment",
+          "value": "assignment"
+        },
+        {
+          "label": "Burden of proof",
+          "value": "burden-of-proof"
+        },
+        {
+          "label": "Certificate of contested validity",
+          "value": "certificate-of-contested-validity"
+        },
+        {
+          "label": "Claim construction",
+          "value": "claim-construction"
+        },
+        {
+          "label": "Clarity",
+          "value": "clarity"
+        },
+        {
+          "label": "Confidentiality",
+          "value": "confidentiality"
+        },
+        {
+          "label": "Contract",
+          "value": "contract"
+        },
+        {
+          "label": "Costs",
+          "value": "costs"
+        },
+        {
+          "label": "Cross examination",
+          "value": "cross-examination"
+        },
+        {
+          "label": "Crown use",
+          "value": "crown-use"
+        },
+        {
+          "label": "Decline to deal",
+          "value": "decline-to-deal"
+        },
+        {
+          "label": "Delay",
+          "value": "delay"
+        },
+        {
+          "label": "Design right",
+          "value": "design-right"
+        },
+        {
+          "label": "Disclosure",
+          "value": "disclosure"
+        },
+        {
+          "label": "Divisional application",
+          "value": "divisional-application"
+        },
+        {
+          "label": "Employees",
+          "value": "employees"
+        },
+        {
+          "label": "Employment",
+          "value": "employment"
+        },
+        {
+          "label": "Entitlement",
+          "value": "entitlement"
+        },
+        {
+          "label": "Estoppel",
+          "value": "estoppel"
+        },
+        {
+          "label": "Evidence",
+          "value": "evidence"
+        },
+        {
+          "label": "Excluded fields (allowed)",
+          "value": "excluded-fields-allowed"
+        },
+        {
+          "label": "Excluded fields (refused)",
+          "value": "excluded-fields-refused"
+        },
+        {
+          "label": "Extension for paediatric testing",
+          "value": "extension-for-paediatric-testing"
+        },
+        {
+          "label": "Extensions of time",
+          "value": "extensions-of-time"
+        },
+        {
+          "label": "Filing date",
+          "value": "filing-date"
+        },
+        {
+          "label": "Human rights",
+          "value": "human-rights"
+        },
+        {
+          "label": "Industrial application",
+          "value": "industrial-application"
+        },
+        {
+          "label": "Infringement",
+          "value": "infringement"
+        },
+        {
+          "label": "Inventive step",
+          "value": "inventive-step"
+        },
+        {
+          "label": "Inventorship",
+          "value": "inventorship"
+        },
+        {
+          "label": "Jurisdiction",
+          "value": "jurisdiction"
+        },
+        {
+          "label": "Licences",
+          "value": "licences"
+        },
+        {
+          "label": "Novelty",
+          "value": "novelty"
+        },
+        {
+          "label": "Opinions and reviews",
+          "value": "opinions-and-reviews"
+        },
+        {
+          "label": "Oppositions",
+          "value": "oppositions"
+        },
+        {
+          "label": "Orders",
+          "value": "orders"
+        },
+        {
+          "label": "PCT application",
+          "value": "pct-application"
+        },
+        {
+          "label": "Pleadings",
+          "value": "pleadings"
+        },
+        {
+          "label": "Plurality of invention",
+          "value": "plurality-of-invention"
+        },
+        {
+          "label": "Priority date",
+          "value": "priority-date"
+        },
+        {
+          "label": "Privilege",
+          "value": "privilege"
+        },
+        {
+          "label": "Rectification of irregularities",
+          "value": "rectification-of-irregularities"
+        },
+        {
+          "label": "Rectification of register",
+          "value": "rectification-of-register"
+        },
+        {
+          "label": "Reinstatement",
+          "value": "reinstatement"
+        },
+        {
+          "label": "Renewal",
+          "value": "renewal"
+        },
+        {
+          "label": "Restoration",
+          "value": "restoration"
+        },
+        {
+          "label": "Revocation",
+          "value": "revocation"
+        },
+        {
+          "label": "Section 20 period",
+          "value": "section-20-period"
+        },
+        {
+          "label": "Stay of proceedings",
+          "value": "stay-of-proceedings"
+        },
+        {
+          "label": "Striking out",
+          "value": "striking-out"
+        },
+        {
+          "label": "Sufficiency",
+          "value": "sufficiency"
+        },
+        {
+          "label": "Summary judgement",
+          "value": "summary-judgement"
+        },
+        {
+          "label": "Supplementary protection certificates",
+          "value": "supplementary-protection-certificates"
+        },
+        {
+          "label": "Support",
+          "value": "support"
+        },
+        {
+          "label": "Surrender",
+          "value": "surrender"
+        },
+        {
+          "label": "Third party observations",
+          "value": "third-party-observations"
+        },
+        {
+          "label": "Third party terms",
+          "value": "third-party-terms"
+        },
+        {
+          "label": "Withdrawal",
+          "value": "withdrawal"
+        }
+      ],
       "display_as_result_metadata": true,
-      "filterable": false,
+      "filterable": true,
       "key": "patent_decision_keyword_or_phrase",
       "name": "Keyword or phrase",
       "short_name": "Keyword or phrase",
+      "specialist_publisher_properties": {
+        "select": "multiple"
+      },
       "type": "text"
     }
   ],
