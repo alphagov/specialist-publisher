@@ -273,6 +273,21 @@
     },
     {
       "display_as_result_metadata": true,
+      "filterable": false,
+      "key": "patent_decision_application_number",
+      "name": "Application number",
+      "short_name": "Application number",
+      "type": "text"
+    },
+    {
+      "display_as_result_metadata": true,
+      "filterable": false,
+      "key": "patent_decision_publication_number",
+      "name": "Publication number",
+      "type": "text"
+    },
+    {
+      "display_as_result_metadata": true,
       "filterable": true,
       "key": "patent_decision_date_of_issue",
       "name": "Date of issue",
