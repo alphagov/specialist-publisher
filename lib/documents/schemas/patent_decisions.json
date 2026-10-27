@@ -266,14 +266,6 @@
     {
       "display_as_result_metadata": true,
       "filterable": false,
-      "key": "patent_decision_application_patent_number",
-      "name": "Application/Patent Number",
-      "short_name": "Application/Patent number",
-      "type": "text"
-    },
-    {
-      "display_as_result_metadata": true,
-      "filterable": false,
       "key": "patent_decision_application_number",
       "name": "Application number",
       "short_name": "Application number",
