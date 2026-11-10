@@ -1,7 +1,9 @@
 require "healthcheck/s3"
 
 Rails.application.routes.draw do
-  mount GovukPublishingComponents::Engine, at: "/component-guide"
+  constraints(GDS::SSO::AuthorisedUserConstraint.new(User::Permissions::SIGNIN)) do
+    mount GovukPublishingComponents::Engine, at: "/component-guide"
+  end
 
   get "/healthcheck/live", to: proc { [200, {}, %w[OK]] }
   get "/healthcheck/ready", to: GovukHealthcheck.rack_response(
