@@ -85,11 +85,11 @@ RSpec.describe "base_path rake tasks", type: :task do
 
   describe "base_path:edit_all" do
     let(:output) { StringIO.new }
+    let(:errors) { StringIO.new }
     let(:task) { Rake::Task["base_path:edit_all"] }
     let(:document_type) { "veterans_support_organisation" }
     let(:schema_base_path) { "/veteran-support-organisations" }
     let(:finder_content_id) { "finder-content-id" }
-    let(:shell) { instance_double(Thor::Shell::Basic, yes?: true, say_error: nil) }
     let(:publishing_api) { double("publishing_api") }
     let(:report) do
       DocumentReslugger::Report.new(["/veteran-support-organisations/foo"], [], [], [])
@@ -98,17 +98,20 @@ RSpec.describe "base_path rake tasks", type: :task do
 
     before do
       $stdout = output
+      $stderr = errors
       task.reenable
-      allow(Thor::Shell::Basic).to receive(:new).and_return(shell)
       allow(DocumentReslugger).to receive(:new).with(document_type, schema_base_path).and_return(reslugger)
       allow(FinderSchema).to receive(:load_from_schema)
-        .with("veterans_support_organisations")
-        .and_return(double(base_path: schema_base_path, content_id: finder_content_id))
+                               .with("veterans_support_organisations")
+                               .and_return(double(base_path: schema_base_path, content_id: finder_content_id))
       allow(Services).to receive(:publishing_api).and_return(publishing_api)
       stub_finder(publication_state: "published", base_path: schema_base_path)
     end
 
-    after { $stdout = STDOUT }
+    after do
+      $stdout = STDOUT
+      $stderr = STDERR
+    end
 
     def stub_finder(publication_state:, base_path:)
       allow(publishing_api).to receive(:get_content).with(finder_content_id).and_return(
@@ -116,7 +119,7 @@ RSpec.describe "base_path rake tasks", type: :task do
       )
     end
 
-    it "reslugs every document of the type after confirmation" do
+    it "reslugs every document of the type" do
       task.invoke(document_type)
 
       expect(DocumentReslugger).to have_received(:new).with(document_type, schema_base_path)
@@ -130,24 +133,14 @@ RSpec.describe "base_path rake tasks", type: :task do
       expect(output.string).to include("/veteran-support-organisations/foo")
     end
 
-    it "does not reslug when the user does not confirm" do
-      allow(shell).to receive(:yes?).and_return(false)
-
-      task.invoke(document_type)
-
-      expect(reslugger).not_to have_received(:reslug_all)
-      expect(shell).to have_received(:say_error).with("Aborted")
-    end
-
     it "does not reslug when the finder does not exist" do
       allow(publishing_api).to receive(:get_content).with(finder_content_id)
-        .and_raise(GdsApi::HTTPNotFound.new(404))
+                                                    .and_raise(GdsApi::HTTPNotFound.new(404))
 
       task.invoke(document_type)
 
-      expect(shell).not_to have_received(:yes?)
       expect(reslugger).not_to have_received(:reslug_all)
-      expect(shell).to have_received(:say_error).with(/does not exist/)
+      expect(errors.string).to match(/does not exist/)
     end
 
     it "does not reslug when the finder is only on the draft stack" do
@@ -155,9 +148,8 @@ RSpec.describe "base_path rake tasks", type: :task do
 
       task.invoke(document_type)
 
-      expect(shell).not_to have_received(:yes?)
       expect(reslugger).not_to have_received(:reslug_all)
-      expect(shell).to have_received(:say_error).with(/not published to the live stack/)
+      expect(errors.string).to match(/not published to the live stack/)
     end
 
     it "does not reslug when the published finder does not match the schema" do
@@ -165,9 +157,8 @@ RSpec.describe "base_path rake tasks", type: :task do
 
       task.invoke(document_type)
 
-      expect(shell).not_to have_received(:yes?)
       expect(reslugger).not_to have_received(:reslug_all)
-      expect(shell).to have_received(:say_error).with(/must be published at/)
+      expect(errors.string).to match(/must be published at/)
     end
   end
 end
