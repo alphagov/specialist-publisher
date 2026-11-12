@@ -245,7 +245,7 @@ GEM
       capybara (>= 3.36)
       puma
       selenium-webdriver (>= 4.0)
-    hashdiff (1.2.1)
+    hashdiff (1.2.2)
     hashie (5.2.0)
       logger
     htmlentities (4.4.2)
