@@ -12,13 +12,13 @@ Recent changes to Specialist Publisher now allow users to self-serve. Using the 
 [search-api]: https://github.com/alphagov/search-api
 [specialist-publisher]: https://github.com/alphagov/specialist-publisher
 
-# __Creating__ a specialist document type
+## __Creating__ a specialist document type
 
 The files you will be creating in this step follow [these conventions](./naming-conventions.md).
 
 For additional guidance, consider reading through [Finder requirements and content support](#9-Finder-requirements-and-content-support).
 
-## 1. Add a schema to Publishing API
+### 1. Add a schema to Publishing API
 See [example PR here](https://github.com/alphagov/publishing-api/pull/3026/files).
 
 1. Add the [document type](./naming-conventions.md#publishing-api) to [allowed document types list](https://github.com/alphagov/publishing-api/blob/main/content_schemas/allowed_document_types.yml).
@@ -29,9 +29,9 @@ When the PR is reviewed and its tests passing, it can be merged and deployed at 
 
 **Note:** If you need to surface finder level settings to individual documents, you can do so by [updating the expansion rules](#updating-expansion-rules-for-new-finder-level-fields).
 
-## 2. Create a new specialist document format in Specialist Publisher
+### 2. Create a new specialist document format in Specialist Publisher
 
-### Create the schema
+#### Create the schema
 
 See [CMA cases](https://github.com/alphagov/specialist-publisher/blob/main/lib/documents/schemas/cma_cases.json).
 
@@ -48,7 +48,7 @@ You'll need to generate your own UUIDs for the `content_id` (of the finder), and
    ```
 For a breakdown of email subscription options see [Configure the email sign up page](#4-configure-the-email-sign-up-page).
 
-### Create the model
+#### Create the model
 
 See [CMA cases](https://github.com/alphagov/specialist-publisher/blob/main/app/models/cma_case.rb).
 
@@ -58,7 +58,7 @@ Only [bespoke validations](https://github.com/alphagov/specialist-publisher/blob
 
 Keep in mind that adding custom validation may make the finder incompatible with general testing, requiring you to add it to the [exception list](https://github.com/alphagov/specialist-publisher/blob/main/spec/features/creating_a_new_document_spec.rb#L10).
 
-### Create the view template
+#### Create the view template
 
 It is no longer required to create a view. All the views will be auto-generated from the schema-defined fields, using the [shared template](https://github.com/alphagov/specialist-publisher/blob/main/app/views/shared/_specialist_document_form.html.erb).
 
@@ -66,15 +66,15 @@ Note that the `select type` of an input (one/multiple) is now configured under t
 
 If you require custom behaviours, create a view file in the [views folder](https://github.com/alphagov/specialist-publisher/tree/main/app/views/metadata_fields). Other "non-conforming" views can be found there. Make use of the available `FacetInputComponent` subclasses to render the custom view's facets.
 
-### Testing your document type
+#### Testing your document type
 
-#### 1. General approach
+##### 1. General approach
 
 If no custom validation is required, the only testing task is to [create a factory](https://github.com/alphagov/specialist-publisher/blob/main/spec/fixtures/factories.rb#L874) that conforms to the schema, ensuring it includes all required metadata. This factory will be used in the [generic feature test](https://github.com/alphagov/specialist-publisher/blob/main/spec/features/publishing_workflow/creating_a_new_document_spec.rb) and [generic model test](https://github.com/alphagov/specialist-publisher/blob/main/spec/models/document_type_spec.rb).
 
 Tip: Since automation can somewhat obfuscate testing, run the `rspec` test command with the `--format doc` flag to get verbose output.
 
-#### 2. Bespoke approach
+##### 2. Bespoke approach
 
 While you should ideally always use the test automation, you might need custom testing if:
 - the document has a custom view
@@ -82,7 +82,7 @@ While you should ideally always use the test automation, you might need custom t
 
 In such cases, add your format to the [generic model test exception list](https://github.com/alphagov/specialist-publisher/blob/3a0d89a821c6aeea87a20dae7c8f6e3fb1cf9ec0/spec/models/document_type_spec.rb#L4) and [generic feature test exception list](https://github.com/alphagov/specialist-publisher/blob/6849759b0206eb933f61710c1c6dddfab1792697/spec/features/publishing_workflow/creating_a_new_document_spec.rb#L3), and document the reason for doing so in your commit. To ensure proper coverage, you will need to create both a [feature test](https://github.com/alphagov/specialist-publisher/tree/main/spec/features/non_conforming_types) and a [model test](https://github.com/alphagov/specialist-publisher/tree/main/spec/models) for your document type.
 
-## 3. Configure Search API
+### 3. Configure Search API
 
 Search API needs copies of the schema very similar to the one in Specialist Publisher. See:
 
@@ -100,7 +100,7 @@ Finally, you'll need to add your custom fields to:
 - [elasticsearch_presenter.rb](https://github.com/alphagov/search-api/blob/main/lib/govuk_index/presenters/elasticsearch_presenter.rb)
 - [specialist_presenter.rb](https://github.com/alphagov/search-api/blob/main/lib/govuk_index/presenters/specialist_presenter.rb)
 
-## 4. Configure the email sign up page
+### 4. Configure the email sign up page
 
 The email sign up page is rendered by [Finder Frontend](https://github.com/alphagov/finder-frontend) using the schema configuration in specialist publisher.
 
@@ -110,7 +110,7 @@ You can test the email subscription when your finder is deployed to the draft st
 
 The finder default is to have no email subscription. Email subscriptions can be set as:
 
-### 1. Subscribe to all fields
+#### 1. Subscribe to all fields
 
 - The user gets updates for everything and cannot select any specific facet option to get updates on. You must set up a `signup_content_id` - a new `UUID` for the email signup page. No changes required to `email-alert-api`.
 - The user may select any facet options to get updates on, before navigating to the email subscription page:
@@ -119,23 +119,23 @@ The finder default is to have no email subscription. Email subscriptions can be 
 - Following on from the step above, you may exclude some of the facets by additionally setting `all_selected_facets_except_for` - see [example](https://github.com/alphagov/specialist-publisher/blob/91ee849549c5e5478126d06842513a516cacceb2/lib/documents/schemas/export_health_certificates.json#L8). You must still define the facets in `email-alert-api`.
 - Set `subscription_list_title_prefix` (optional).
 
-### 2. Subscribe to specific fields(set)
+#### 2. Subscribe to specific fields(set)
 
 - Configure the `signup_content_id` and, optionally, the `subscription_list_title_prefix`, as in the previous step.
 - Set `email_filter_by` to a specific facet - see [example](https://github.com/alphagov/specialist-publisher/blob/91ee849549c5e5478126d06842513a516cacceb2/lib/documents/schemas/tax_tribunal_decisions.json#L13).
 - Edit [email-alert-api](https://github.com/alphagov/email-alert-api/tree/main/lib) by adding the new filters to [valid_tags.rb](https://github.com/alphagov/email-alert-api/blob/main/lib/valid_tags.rb).
 
-#### Breakdown of the email options:
+##### Breakdown of the email options:
 - `subscription_list_title_prefix` - typically set in most finders. It defines the beginning of the email title. For example, CMA cases have this value set to `CMA cases`, meaning an email title would read as "_CMA cases_ with digital markets unit". When omitted, the email title will only reference subscribed facets.
 - `email_alert_topic_name_overrides` - changes the display label of individual facets options in the email title the user receives upon subscribing.
 - `downcase_email_alert_topic_names` - downcases the display label of individual facet options in the email title the user receives upon subscribing.
 - `pre_checked_email_alert_checkboxes` - takes an array of facets, which will appear pre-checked on the email signup page.
 
-### 3. Signup link
+#### 3. Signup link
 
 If the subscription is managed by an external service, it should be set via a `signup_link`. See [example](https://github.com/alphagov/specialist-publisher/blob/91ee849549c5e5478126d06842513a516cacceb2/lib/documents/schemas/drug_safety_updates.json#L148).
 
-## 5. Deploy a finder to the draft stack (for previewing)
+### 5. Deploy a finder to the draft stack (for previewing)
 
 To deploy a new finder for previewing:
    1. Ensure the finder `target_stack` is set to `draft`
@@ -148,13 +148,13 @@ published, could require running a reindex, and there is a risk of loss of data.
 we could give only basic Signon permissions whilst in preview mode. Signon access to the Specialist Publisher app, only
 gives the user writer access (they may create, edit, and update, but not publish or unpublish).
 
-## 6. Publish a finder to the live stack
+### 6. Publish a finder to the live stack
 
 To release the finder to the live stack:
    1. Open a new PR changing the `target_stack` of the finder from `draft` to `live` in Specialist Publisher json schema config
    2. [Deploy the finder](#7-deploy-a-finder) to the live stack
 
-## 7. Deploy a finder
+### 7. Deploy a finder
 
 1. Merge and deploy Publishing API, Specialist Publisher and Search API, if changed.
    - Ensure you deploy Publishing API first, to avoid schema validation errors.
@@ -165,7 +165,7 @@ To release the finder to the live stack:
 
 > Note that finder-frontend [caches the finder content item for five minutes](https://github.com/alphagov/finder-frontend/blob/4c27a8483f502969bc02e1de082a35b2efd0278e/app/lib/services.rb#L11), so you may not be able to see your changes immediately (even with a cachebust string).
 
-## 8. Permissions
+### 8. Permissions
 
 Specialist Publisher grants access to the publishing interface for a document type to the following Signon users:
 
@@ -177,7 +177,7 @@ You'll need to manually grant users access to the Specialist Publisher app in Si
 
 If the users do not yet have Signon access, direct them to the [Publishing accounts and permissions](https://guidance.publishing.service.gov.uk/accounts-support/manage-accounts-training/publishing-accounts-permissions/). Signon requests must go through this approval process.
 
-## 9. Finder requirements and content support
+### 9. Finder requirements and content support
 
 Whilst the finders go through content approval before becoming actionable tickets in the owning team's backlog, specific concerns only become apparent once the finder requirements form is filled out. It is recommended that the requirements should be validated by someone with technical expertise, and that necessary conversations with the department should be initiated early on.
 
@@ -193,28 +193,28 @@ Here's a few content concerns to keep an eye on:
 - For very long facet option lists, consider using the `show_option_select_filter` in the schema, which will add a search bar to the facet. See example [here](https://github.com/alphagov/specialist-publisher/blob/3a0d89a821c6aeea87a20dae7c8f6e3fb1cf9ec0/lib/documents/schemas/licence_transactions.json#L243).
 - You may need to stop a finder's documents from showing up in external search engine results e.g Google search. Set `index_documents_in_search_engines` to `false` in the schema. This will add a `noindex` meta tag to the finder's documents' page, which is a signal for search engine crawlers to not index the page. See example [here](https://github.com/alphagov/specialist-publisher/pull/3589/changes/ba96d1f5df4c6b714b2f9814cba8e07f1b2f0016).
 
-## 10. Consider whether to provide a custom translation
+### 10. Consider whether to provide a custom translation
 
 Specialist documents can be included in document collections. A document collection surfaces a link to each document, and shows its title, last updated date, and document type.
 
 If the document type doesn't read very clearly when 'humanized' via Rails, you may want to consider a [custom translation in Frontend](https://github.com/alphagov/frontend/blob/76913bfff4f54da936a789b99e69c3b36f9b1b9b/config/locales/en.yml#L163). For example, we've provided a translation for "aaib_report" => "Air Accidents Investigation Branch report".
 
-# __Editing__ a specialist document type
+## __Editing__ a specialist document type
 
 We often receive requests to add new fields to a specialist document or to add new values to existing fields.
 
-## Adding a new field to an existing specialist document
+### Adding a new field to an existing specialist document
 
 1. In `publishing-api`:
    - Add the new field in the [specialist_document schema](https://github.com/alphagov/publishing-api/blob/6d5595470bd0e7f3072e06f0113e3ca5514b6e98/content_schemas/formats/shared/definitions/_specialist_document.jsonnet). See [example commit](https://github.com/alphagov/publishing-api/pull/2968/commits/b7d9cd1f6bb5d8d08fda7b6e219b2467134406c4).
    - Run `bundle exec rake build_schemas` to regenerate schemas after adding the new value(s).
 
+
 2. In `specialist publisher`:
    - Add the new field to the relevant [model](https://github.com/alphagov/specialist-publisher/tree/main/app/models), including any required validations, tests and factories.
    - Add fields to relevant [schema](https://github.com/alphagov/specialist-publisher/tree/main/lib/documents/schemas) files.
    - For legacy finders that don't use the shared view, you may need to update the [view](https://github.com/alphagov/specialist-publisher/tree/main/app/views/metadata_fields).
-
-<!-- TODO: Update these with up-to-date examples that don't include any view or 'expanded field' changes-->
+   <!-- TODO: Update these with up-to-date examples that don't include any view or 'expanded field' changes-->
    See [this](https://github.com/alphagov/specialist-publisher/pull/2847/commits/37fee332a721222c392f541a7f3b747d5d7a8c27) commit for an example.
 
 3. In `search-api`, add the new field in the following places (see [this](https://github.com/alphagov/search-api/pull/3043/commits/12eee8d6bab4e7606b4014684907f60574e713ba) commit for an example):
@@ -223,11 +223,19 @@ We often receive requests to add new fields to a specialist document or to add n
    - the [specialist_presenter](https://github.com/alphagov/search-api/blob/main/lib/govuk_index/presenters/specialist_presenter.rb).
    - the [field_definitions](https://github.com/alphagov/search-api/blob/main/config/schema/field_definitions.json) file.
 
-Optional: if the new field is relevant for email subscriptions, follow the guidance in [Configure the email sign up page](#4-configure-the-email-sign-up-page).
+   Optional: if the new field is relevant for email subscriptions, follow the guidance in [Configure the email sign up page](#4-configure-the-email-sign-up-page).
 
 4. [Republish the finder](#7-deploy-a-finder)
 
-## Removing a field from an existing specialist document
+5. Make sure you update the search api index and/or mapping before you create any documents using the new field.  See [Reindexing breakdown](#reindexing-breakdown)
+
+
+   If you have created documents using the new field before you update the search index mappings, the search index will contain
+data with a default field type, which may not match the type you specify in your `search-api` changes in step (3) above.
+
+   To fix this, you will need to perform a re-index of the relevant search index.
+
+### Removing a field from an existing specialist document
 
 NB: In order to remove a field, ensure no document are tagged with that field, or that the finder's owners are aware of the data loss implications.
 
@@ -257,13 +265,14 @@ Optional: if the field was used for email subscriptions, remove it from `email-a
 
 4. [Republish the finder](#7-deploy-a-finder)
 
-## Adding values for existing fields on a specialist document
+
+### Adding values for existing fields on a specialist document
 Specific values for fields of type array are now defined only in the `specialist_publisher` app. To add a value:
 1. In `specialist publisher`, add the new values to the relevant file in the [schema](https://github.com/alphagov/specialist-publisher/tree/main/lib/documents/schemas) directory. See [this](https://github.com/alphagov/specialist-publisher/pull/2958/commits/930b4c82928a616cc848d1e759cf31b521771b15) commit for an example.
 2. Deploy Specialist Publisher.
 3. Publish the finder by running the rake task `publishing_api:publish_finder[your_format_name_based_on_the_schema_file]` against the specialist publisher app (rake tasks [here](https://github.com/alphagov/specialist-publisher/blob/ce68fdb008cab05225e0493e19decba5365e1e20/lib/tasks/publishing_api.rake)).
 
-## Removing values for existing fields on a specialist document
+### Removing values for existing fields on a specialist document
 
 NB: In order to remove a field value, ensure no document are tagged with that value, or that the finder's owners are aware of the data loss implications.
 
@@ -273,11 +282,11 @@ Specific values for fields of type array are now defined only in the `specialist
 3. Publish the finder by running the rake task `publishing_api:publish_finder[your_format_name_based_on_the_schema_file]` against the specialist publisher app (rake tasks [here](https://github.com/alphagov/specialist-publisher/blob/ce68fdb008cab05225e0493e19decba5365e1e20/lib/tasks/publishing_api.rake)).
 
 
-# __Editing__ a specialist finder
+## __Editing__ a specialist finder
 
 The [schema](https://github.com/alphagov/specialist-publisher/tree/main/lib/documents/schemas) files that define a specialist document, are also used to configure that document's specialist finder. See [this](https://github.com/alphagov/specialist-publisher/pull/1899/commits/925abc689119138a0e04e17d3610f8ae276773dd) commit for an example.
 
-# __Unpublishing__ a specialist finder
+## __Unpublishing__ a specialist finder
 
 **Important**: In order to remove a finder, you should ensure there is a clear business requirement in doing so, and that all associated documents have been correctly dealt with - unpublished, redirected, migrated or removed.
 If the code is not removed from all relevant repositories, there is a chance the finder will be inadvertently republished, for example by republishing all finders. You must therefore make sure the code is removed in order to keep the finder unpublished.
@@ -300,7 +309,7 @@ The following steps are required to remove a finder:
 5. Remove any usages from `finder-frontend`, if applicable.
 6. Deploy all changes.
 
-# Reindexing breakdown
+## Reindexing breakdown
 
 Regardless on the changes you're trying to make, you can implement them in such a way that a full reindex is not necessary.
 
