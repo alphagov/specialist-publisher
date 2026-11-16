@@ -32,38 +32,26 @@ namespace :base_path do
   desc "Reslugs a type's documents under its finder's live base_path (published redirect, drafts stay draft)"
   task :edit_all, %i[document_type] => %i[environment] do |_t, args|
     document_type = args[:document_type]
-    shell = Thor::Shell::Basic.new
     finder_schema = FinderSchema.load_from_schema(document_type.pluralize)
     schema_base_path = finder_schema.base_path
 
     begin
       finder = Services.publishing_api.get_content(finder_schema.content_id).to_h
     rescue GdsApi::HTTPNotFound
-      shell.say_error "The #{document_type} finder does not exist."
+      warn "The #{document_type} finder does not exist."
       next
     end
 
     unless finder["publication_state"] == "published"
-      shell.say_error "The #{document_type} finder is not published to the live stack " \
-                      "(currently #{finder['publication_state']}); this task only reslugs " \
-                      "documents for finders on the live stack."
+      warn "The #{document_type} finder is not published to the live stack " \
+             "(currently #{finder['publication_state']}); this task only reslugs " \
+             "documents for finders on the live stack."
       next
     end
 
     unless finder["base_path"] == schema_base_path
-      shell.say_error "The #{document_type} finder must be published at #{schema_base_path} " \
-                      "before reslugging its documents (currently published at #{finder['base_path']})."
-      next
-    end
-
-    message = <<~CONFIRMATION
-      This will reslug every #{document_type} document to sit under #{schema_base_path}.
-      Published documents are moved and re-published (redirecting the old path);
-      documents with a draft are moved but kept in draft.
-    CONFIRMATION
-
-    unless shell.yes?("#{message}Proceed? (yes/no)")
-      shell.say_error "Aborted"
+      warn "The #{document_type} finder must be published at #{schema_base_path} " \
+             "before reslugging its documents (currently published at #{finder['base_path']})."
       next
     end
 
