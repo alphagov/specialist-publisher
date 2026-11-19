@@ -134,6 +134,7 @@ GEM
       bigdecimal
       rexml
     crass (1.0.8)
+    csv (3.3.7)
     dartsass-rails (0.5.1)
       railties (>= 6.0.0)
       sass-embedded (~> 1.63)
@@ -160,7 +161,6 @@ GEM
       logger
     faraday-net_http (3.5.0)
       net-http (~> 0.5)
-    ffi (1.17.4)
     ffi (1.17.4-aarch64-linux-gnu)
     ffi (1.17.4-arm64-darwin)
     ffi (1.17.4-x86_64-linux-gnu)
@@ -182,9 +182,6 @@ GEM
       warden-oauth2 (~> 0.0.1)
     globalid (1.4.0)
       activesupport (>= 6.1)
-    google-protobuf (4.36.2)
-      bigdecimal
-      rake (~> 13.3)
     google-protobuf (4.36.2-aarch64-linux-gnu)
       bigdecimal
       rake (~> 13.3)
@@ -304,7 +301,6 @@ GEM
       mime-types-data (~> 3.2025, >= 3.2025.0507)
     mime-types-data (3.2026.0921)
     mini_mime (1.1.5)
-    mini_portile2 (2.8.9)
     minitest (6.1.0)
       drb (~> 2.0)
       prism (>= 1.5, < 3)
@@ -328,9 +324,6 @@ GEM
       net-protocol
     netrc (0.11.0)
     nio4r (2.7.5)
-    nokogiri (1.19.7)
-      mini_portile2 (~> 2.8.2)
-      racc (~> 1.4)
     nokogiri (1.19.7-aarch64-linux-gnu)
       racc (~> 1.4)
     nokogiri (1.19.7-arm64-darwin)
@@ -702,9 +695,6 @@ GEM
     sanitize (7.0.2)
       crass (~> 1.0.8)
       nokogiri (>= 1.19.7)
-    sass-embedded (1.103.1)
-      google-protobuf (~> 4.31)
-      rake (>= 13)
     sass-embedded (1.103.1-aarch64-linux-gnu)
       google-protobuf (~> 4.31)
     sass-embedded (1.103.1-arm64-darwin)
@@ -788,7 +778,6 @@ GEM
 PLATFORMS
   aarch64-linux
   arm64-darwin
-  ruby
   x86_64-linux
 
 DEPENDENCIES
@@ -796,6 +785,7 @@ DEPENDENCIES
   better_errors
   binding_of_caller
   bootsnap
+  csv
   dartsass-rails
   database_cleaner
   diffy
@@ -831,4 +821,4 @@ DEPENDENCIES
   webmock
 
 BUNDLED WITH
-   2.3.22
+  4.0.20
