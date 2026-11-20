@@ -92,6 +92,10 @@
           "value": "BO"
         },
         {
+          "label": "Bonaire, Sint Eustatius and Saba",
+          "value": "BQ"
+        },
+        {
           "label": "Bosnia and Herzegovina",
           "value": "BA"
         },
@@ -626,6 +630,10 @@
         {
           "label": "Singapore",
           "value": "SG"
+        },
+        {
+          "label": "Sint Maarten",
+          "value": "SX"
         },
         {
           "label": "Slovakia",

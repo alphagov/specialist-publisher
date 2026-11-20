@@ -113,6 +113,10 @@
           "value": "bolivia"
         },
         {
+          "label": "Bonaire, Sint Eustatius and Saba",
+          "value": "bonaire-sint-eustatius-and-saba"
+        },
+        {
           "label": "Bosnia and Herzegovina",
           "value": "bosnia-and-herzegovina"
         },
@@ -651,6 +655,10 @@
         {
           "label": "Singapore",
           "value": "singapore"
+        },
+        {
+          "label": "Sint Maarten",
+          "value": "sint-maarten"
         },
         {
           "label": "Slovakia",
