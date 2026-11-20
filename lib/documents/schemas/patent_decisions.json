@@ -234,6 +234,10 @@
         {
           "label": "Dr A Rose",
           "value": "dr-a-rose"
+        },
+        {
+          "label": "George Talbot",
+          "value": "george-talbot"
         }
       ],
       "display_as_result_metadata": true,
