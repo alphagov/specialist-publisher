@@ -1,3 +1,5 @@
+@use "govuk_publishing_components/base" as *;
+
 .govuk-tag--s {
   @include govuk-font(16, $weight: bold, $line-height: 1);
 }
