@@ -1,0 +1,3 @@
+title,content_id,base_path,locale,alternative_path
+"Test document, number 1",1234,/test-doc-1,en,/alt-path-1
+"Test document missing a content id",,/test-doc-2,en,

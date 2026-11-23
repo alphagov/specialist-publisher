@@ -41,3 +41,10 @@ You can republish all specialist documents with this task:
 `republish:all`
 
 These last two tasks place a large number of items on Specialist Publisher’s sidekiq queue. These tasks could take a very long time to complete. You can’t currently republish published documents if a publisher has created a new draft for the document.
+
+## Bulk unpublishing
+
+Sometimes a publisher wants to unpublish a large number of documents in one go.  You can achieve this with a CSV file and the bulk unpublishing task.  You can look in `spec/fixtures` to see example CSV formats.  The rake task is:
+`bulk_unpublish_documents[<csv file path>,<dry_run>]`.
+
+When `dry_run` is `true`, the task will just display console output of what would be unpublished and redirected.
