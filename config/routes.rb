@@ -17,6 +17,10 @@ Rails.application.routes.draw do
 
   resources :document_list_export_request, path: "/export/:document_type_slug", param: :export_id, only: [:show]
 
+  get "/bulk-unpublish" => "bulk_unpublish#index", as: :bulk_unpublish
+  post "/bulk-unpublish/preview" => "bulk_unpublish#preview", as: :bulk_unpublish_preview
+  post "/bulk-unpublish" => "bulk_unpublish#unpublish"
+
   resources :finders, param: :document_type_slug do
     member do
       get :metadata, action: :edit_metadata

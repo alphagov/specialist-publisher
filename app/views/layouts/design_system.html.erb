@@ -35,6 +35,15 @@
         href: root_path,
         active: request.path.end_with?(root_path),
       },
+      *(
+        if user_signed_in? && current_user.gds_editor?
+          [
+            {
+              text: "Bulk unpublish",
+              href: bulk_unpublish_path,
+              active: request.path == bulk_unpublish_path,
+            }]
+        end),
       {
         text: "Switch app",
         href: Plek.external_url_for("signon"),
