@@ -47,6 +47,7 @@ To test the document lifecycle end-to-end, from creating a document to viewing i
 
 - [Email alerts](/docs/email-alerts.md)
 - [Rake tasks](/docs/tasks.md)
+- [Bulk unpublishing](/docs/bulk-unpublishing.md)
 - [Creating and editing specialist document types](/docs/creating-editing-and-removing-specialist-document-types-and-finders.md)
 - [Updating existing organisation data](/docs/updating-existing-organisation-data.md)
 - [Historical info about migrating to use the Publishing API](/docs/phase-2-migration/README.md)

@@ -1,0 +1,74 @@
+<% content_for :page_title, "Bulk unpublish documents" %>
+<% content_for :title, "Bulk unpublish documents" %>
+<% content_for :title_margin_bottom, 6 %>
+
+<div class="govuk-grid-row">
+  <section class="govuk-grid-column-two-thirds">
+    <% if @errors.present? %>
+      <%= render "govuk_publishing_components/components/error_summary", {
+        title: "There is a problem with the CSV",
+        items: @errors.map { |error| { text: error } },
+      } %>
+    <% end %>
+
+    <%= render "govuk_publishing_components/components/warning_text", {
+      text: "Unpublishing cannot be undone from this screen. Preview the changes and check them before you confirm.",
+    } %>
+
+    <%= form_with(url: bulk_unpublish_preview_path, method: :post) do %>
+      <%= render "govuk_publishing_components/components/select", {
+        id: "document_type_slug",
+        label: "Document type",
+        full_width: true,
+        options: [{ text: "Choose a document type", value: "" }] +
+          formats_user_can_access.sort_by(&:title).map do |format|
+            {
+              text: "#{format.title.pluralize} (#{format.finder_schema.base_path})",
+              value: format.admin_slug,
+              selected: format.admin_slug == params[:document_type_slug],
+            }
+          end,
+      } %>
+
+      <%= render "govuk_publishing_components/components/textarea", {
+        label: {
+          text: "Paste the CSV contents, as per the guidance below.",
+        },
+        name: "csv_input",
+        rows: 10,
+        value: params[:csv_input],
+      } %>
+
+      <p class="govuk-body">
+        <%= render "govuk_publishing_components/components/button", {
+          text: "Preview changes",
+        } %>
+      </p>
+    <% end %>
+  </section>
+</div>
+
+<div class="govuk-grid-row">
+  <section class="govuk-grid-column-two-thirds">
+    <h2 class="govuk-heading-m">Guidance</h2>
+
+    <p class="govuk-body">
+      The CSV needs a header row with exactly these two columns. Every document
+      must belong to the document type you chose above, and only English
+      documents can be unpublished here.
+    </p>
+
+    <%= render "govuk_publishing_components/components/table", {
+      head: [
+        { text: "base_path" },
+        { text: "alternative_path" },
+      ],
+      rows: [
+        [
+          { text: "The path of the document to unpublish, starting with the document type's finder path. Example: /cma-cases/some-case" },
+          { text: "Optional. The path to redirect the document to. Leave it empty to mark the document as gone instead. Example: /government/organisations/competition-and-markets-authority" },
+        ],
+      ],
+    } %>
+  </section>
+</div>

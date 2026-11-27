@@ -1,0 +1,39 @@
+<% content_for :page_title, "Bulk unpublish documents - preview changes" %>
+<% content_for :title, "Bulk unpublish documents - preview changes" %>
+<% content_for :title_margin_bottom, 6 %>
+
+<div class="govuk-grid-row">
+  <section class="govuk-grid-column-full">
+    <%= render "govuk_publishing_components/components/warning_text", {
+      text: "#{pluralize(@changes.count, 'document')} will be unpublished from #{current_format.title.pluralize}. This cannot be undone.",
+    } %>
+
+    <%= render "govuk_publishing_components/components/table", {
+      head: [
+        { text: "Base path" },
+        { text: "Change" },
+      ],
+      rows: @changes.map do |change|
+        [
+          { text: change[:base_path] },
+          { text: change[:action] },
+        ]
+      end,
+    } %>
+
+    <%= form_with(url: bulk_unpublish_path, method: :post) do %>
+      <%= hidden_field_tag :document_type_slug, params[:document_type_slug] %>
+      <%= hidden_field_tag :csv_input, params[:csv_input] %>
+
+      <p class="govuk-body">
+        <%= render "govuk_publishing_components/components/button", {
+          text: "Unpublish these documents",
+        } %>
+      </p>
+    <% end %>
+
+    <p class="govuk-body">
+      <%= link_to "Start again", bulk_unpublish_path, class: "govuk-link" %>
+    </p>
+  </section>
+</div>
