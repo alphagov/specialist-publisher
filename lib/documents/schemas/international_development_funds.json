@@ -74,7 +74,7 @@
         },
         {
           "label": "Bahamas, The",
-          "value": "bahamas"
+          "value": "the-bahamas"
         },
         {
           "label": "Bahrain",
@@ -111,6 +111,10 @@
         {
           "label": "Bolivia",
           "value": "bolivia"
+        },
+        {
+          "label": "Bonaire, Sint Eustatius and Saba",
+          "value": "bonaire-sint-eustatius-and-saba"
         },
         {
           "label": "Bosnia and Herzegovina",
@@ -521,6 +525,10 @@
           "value": "nauru"
         },
         {
+          "label": "Naoero",
+          "value": "naoero"
+        },
+        {
           "label": "Nepal",
           "value": "nepal"
         },
@@ -647,6 +655,10 @@
         {
           "label": "Singapore",
           "value": "singapore"
+        },
+        {
+          "label": "Sint Maarten",
+          "value": "sint-maarten"
         },
         {
           "label": "Slovakia",
