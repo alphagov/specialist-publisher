@@ -1,7 +1,6 @@
 # Bulk unpublishing
 
-Documents can be unpublished in bulk from `/bulk-unpublish`, as an alternative
-to the `bulk_unpublish_documents` rake task described in [Rake tasks](./tasks.md).
+Documents can be unpublished in bulk from `/bulk-unpublish`.
 
 ## Access
 
@@ -25,7 +24,6 @@ is marked as gone. This matches unpublishing a single document through the UI.
 
 - Each run covers one document type, because every base path is checked against
   that document type's finder path.
-- Only English documents can be unpublished. Use the rake task for any other
-  locale.
+- Only English documents can be unpublished.
 - There is no report when the run finishes. Progress and any failed rows are
   written to the application logs, and failures are sent to Sentry.
